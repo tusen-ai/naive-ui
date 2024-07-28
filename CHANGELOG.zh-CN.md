@@ -15,6 +15,7 @@
 - 修复 `n-tabs` 在垂直模式下使用 `prefix` slot、`suffix` slot 和 `addable` 属性的时候可能出现样式问题，关闭 [#6059](https://github.com/tusen-ai/naive-ui/issues/6059)，[#6060](https://github.com/tusen-ai/naive-ui/pull/6060)
 - 修复 `n-upload` 在某些老浏览器下目录上传最多只能上传 100 个文件，关闭 [#6027](https://github.com/tusen-ai/naive-ui/issues/6027)
 - 修复 `n-menu` 在 `responsive` 被设定的情况下，HTML 属性无法正确的应用到组件上
+- 修复 `n-float-button` 和 `popover` 一起使用会报错, 关闭 [#5933](https://github.com/tusen-ai/naive-ui/issues/5933)
 
 ### Features
 

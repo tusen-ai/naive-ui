@@ -15,6 +15,7 @@
 - Fix `n-tabs` has style issue when using `prefix` slot, `suffix` slot or `addable` prop with vertical placement, closes [#6059](https://github.com/tusen-ai/naive-ui/issues/6059), [#6060](https://github.com/tusen-ai/naive-ui/pull/6060).
 - Fix `n-upload` can only upload a maximum of 100 files in certain old browsers when uploading directories, closes [#6027](https://github.com/tusen-ai/naive-ui/issues/6027).
 - Fix `n-menu` can't apply HTML attributes correctly on the component when `responsive` is set.
+- Fix `n-float-button` error when used with `popover` component, closes [#5933](https://github.com/tusen-ai/naive-ui/issues/5933).
 
 ### Features
 

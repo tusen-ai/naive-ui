@@ -1,17 +1,17 @@
 import {
   type CSSProperties,
-  type DirectiveArguments,
   type PropType,
   computed,
   defineComponent,
   h,
   inject,
+  onBeforeUnmount,
+  onMounted,
   ref,
-  toRef,
-  withDirectives
+  toRef
 } from 'vue'
 import { useMergedState } from 'vooks'
-import { mousemoveoutside } from 'vdirs'
+import { off, on } from 'evtd'
 import { floatButtonGroupInjectionKey } from '../../float-button-group/src/FloatButtonGroup'
 import {
   type ExtractPublicPropTypes,
@@ -70,6 +70,8 @@ export default defineComponent({
   props: floatButtonProps,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+
+    const selfElRef = ref<HTMLDivElement | null>(null)
 
     const themeRef = useTheme(
       'FloatButton',
@@ -182,8 +184,23 @@ export default defineComponent({
       )
       : undefined
 
+    onMounted(() => {
+      const selfEl = selfElRef.value
+      if (selfEl) {
+        on('mousemoveoutside', selfEl, handleMouseleave)
+      }
+    })
+
+    onBeforeUnmount(() => {
+      const selfEl = selfElRef.value
+      if (selfEl) {
+        off('mousemoveoutside', selfEl, handleMouseleave)
+      }
+    })
+
     return {
       inlineStyle,
+      selfElRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedShape: mergedShapeRef,
@@ -209,10 +226,10 @@ export default defineComponent({
       inlineStyle,
       onRender
     } = this
-    const dirs: DirectiveArguments = [[mousemoveoutside, this.handleMouseleave]]
     onRender?.()
-    return withDirectives(
+    return (
       <div
+        ref="selfElRef"
         class={[
           `${mergedClsPrefix}-float-button`,
           `${mergedClsPrefix}-float-button--${mergedShape}-shape`,
@@ -258,8 +275,7 @@ export default defineComponent({
             {resolveSlot($slots.menu, () => [])}
           </div>
         ) : null}
-      </div>,
-      dirs
+      </div>
     )
   }
 })
