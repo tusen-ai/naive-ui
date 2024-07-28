@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
-import { NAvatar } from '../index'
 import { h, nextTick } from 'vue'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
+import { NAvatar } from '../index'
 import { NIcon } from '../../icon'
 
 // Please note that resize observer doesn't work in JSDOM, so text transfrom
@@ -19,7 +19,7 @@ describe('n-avatar', () => {
 
   beforeAll(() => {
     Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {
-      get () {
+      get() {
         if (this.className === 'n-avatar__text') {
           return 80
         }
@@ -27,7 +27,7 @@ describe('n-avatar', () => {
       }
     })
     Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
-      get () {
+      get() {
         if (this.className === 'n-avatar__text') {
           return 80
         }
@@ -115,12 +115,12 @@ describe('n-avatar', () => {
 
   it('avatar adjust text', async () => {
     const AdjustAvatar = {
-      data () {
+      data() {
         return {
           text: ''
         }
       },
-      render () {
+      render() {
         const { text } = this as any
         return <NAvatar size="medium">{{ default: () => text }}</NAvatar>
       }

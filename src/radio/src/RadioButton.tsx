@@ -1,6 +1,6 @@
-import { h, defineComponent } from 'vue'
+import { defineComponent, h } from 'vue'
 import { type ExtractPublicPropTypes, resolveWrappedSlot } from '../../_utils'
-import { setup, radioBaseProps } from './use-radio'
+import { radioBaseProps, setup } from './use-radio'
 
 export const radioButtonProps = radioBaseProps
 export type RadioButtonProps = ExtractPublicPropTypes<typeof radioBaseProps>
@@ -9,7 +9,7 @@ export default defineComponent({
   name: 'RadioButton',
   props: radioBaseProps,
   setup,
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     return (
       <label
@@ -34,7 +34,8 @@ export default defineComponent({
         />
         <div class={`${mergedClsPrefix}-radio-button__state-border`} />
         {resolveWrappedSlot(this.$slots.default, (children) => {
-          if (!children && !this.label) return null
+          if (!children && !this.label)
+            return null
           return (
             <div ref="labelRef" class={`${mergedClsPrefix}-radio__label`}>
               {children || this.label}

@@ -1,5 +1,5 @@
-import { type Ref, type CSSProperties, type VNodeChild } from 'vue'
-import { type ImageGroupProps } from '../../image'
+import type { CSSProperties, Ref, VNodeChild } from 'vue'
+import type { ImageGroupProps } from '../../image'
 import type { MergedTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
 import type { UploadTheme } from '../styles'
@@ -72,6 +72,7 @@ export interface UploadInjection {
   doChange: DoChange
   onRender: undefined | (() => void)
   submit: (fileId?: string) => void
+  onRetryRef: Ref<undefined | OnRetry>
   shouldUseThumbnailUrlRef: Ref<ShouldUseThumbnailUrl>
   getFileThumbnailUrlResolver: (
     file: UploadSettledFileInfo
@@ -81,8 +82,8 @@ export interface UploadInjection {
   openOpenFileDialog: () => void
 }
 
-export const uploadInjectionKey =
-  createInjectionKey<UploadInjection>('n-upload')
+export const uploadInjectionKey
+  = createInjectionKey<UploadInjection>('n-upload')
 
 export interface XhrHandlers {
   handleXHRLoad: (e: ProgressEvent) => void
@@ -94,12 +95,16 @@ export interface XhrHandlers {
 export type OnBeforeUpload = (data: {
   file: UploadSettledFileInfo
   fileList: UploadSettledFileInfo[]
-  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
 }) => Promise<boolean | void> | boolean | void
 
 export type ListType = 'text' | 'image' | 'image-card'
 
-export type OnPreview = (file: UploadSettledFileInfo) => void
+export type OnPreview = (
+  file: UploadSettledFileInfo,
+  detail: {
+    event: MouseEvent
+  }
+) => void
 
 export type CreateThumbnailUrl = (
   file: File | null,
@@ -114,8 +119,13 @@ export type OnError = ({
 }: {
   file: UploadSettledFileInfo
   event?: ProgressEvent
-  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
 }) => UploadFileInfo | undefined | void
+
+export type OnRetry = ({
+  file
+}: {
+  file: UploadSettledFileInfo
+}) => Promise<boolean | void> | boolean | void
 
 export interface FileAndEntry {
   file: File

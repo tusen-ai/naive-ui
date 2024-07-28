@@ -45,6 +45,7 @@ custom-icon.vue
 | parse | `(input: string) => number \| null` | `undefined` | Method to parse input string. If it's set, `update-value-on-input` will be disabled. | 2.30.0 |
 | placeholder | `string` | `'Please Input'` | Placeholder. |  |
 | precision | `number` | `undefined` | Precision of input value. If it's set, `update-value-on-input` will be disabled. | 2.30.0 |
+| round | `boolean` | `undefined` | Use a rounded input style. | 2.39.0 |
 | readonly | `boolean` | `false` | Whether it's readonly. |  |
 | show-button | `boolean` | `true` | Whether to show increase/decrease buttons. |  |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | The size of input box. |  |

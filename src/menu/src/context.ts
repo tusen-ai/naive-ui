@@ -11,5 +11,5 @@ export const submenuInjectionKey = createInjectionKey<SubmenuInjection | null>(
   'n-submenu'
 )
 
-export const menuItemGroupInjectionKey =
-  createInjectionKey<MenuOptionGroupInjection | null>('n-menu-item-group')
+export const menuItemGroupInjectionKey
+  = createInjectionKey<MenuOptionGroupInjection | null>('n-menu-item-group')

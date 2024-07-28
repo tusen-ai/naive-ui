@@ -1,10 +1,10 @@
-import { h, defineComponent, computed, type CSSProperties } from 'vue'
+import { type CSSProperties, computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { typographyLight } from '../styles'
 import type { TypographyTheme } from '../styles'
-import style from './styles/a.cssr'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import style from './styles/a.cssr'
 
 export const aProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme>)
@@ -15,7 +15,7 @@ export type AProps = ExtractPublicPropTypes<typeof aProps>
 export default defineComponent({
   name: 'A',
   props: aProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Typography',
@@ -45,7 +45,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     this.onRender?.()
     return (
       <a

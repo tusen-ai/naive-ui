@@ -1,20 +1,20 @@
 import {
-  type HSVA,
+  type HSL,
   type HSLA,
-  type RGBA,
-  toHsvaString,
-  toRgbaString,
-  toHslaString,
-  toHexaString,
-  toHexString,
-  toHsvString,
-  toRgbString,
-  toHslString,
   type HSV,
+  type HSVA,
   type RGB,
-  type HSL
+  type RGBA,
+  toHexString,
+  toHexaString,
+  toHslString,
+  toHslaString,
+  toHsvString,
+  toHsvaString,
+  toRgbString,
+  toRgbaString
 } from 'seemly'
-import { h, defineComponent, type PropType } from 'vue'
+import { type PropType, defineComponent, h } from 'vue'
 import { NInputGroup } from '../../input'
 import ColorInputUnit from './ColorInputUnit'
 import type { ColorPickerMode } from './utils'
@@ -56,9 +56,9 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
+  setup(props) {
     return {
-      handleUnitUpdateValue (index: number, value: number | string) {
+      handleUnitUpdateValue(index: number, value: number | string) {
         const { showAlpha } = props
         if (props.mode === 'hex') {
           props.onUpdateValue(
@@ -69,7 +69,8 @@ export default defineComponent({
         let nextValueArr: any
         if (props.valueArr === null) {
           nextValueArr = [0, 0, 0, 0]
-        } else {
+        }
+        else {
           nextValueArr = Array.from(props.valueArr) as typeof props.valueArr
         }
         switch (props.mode) {
@@ -101,7 +102,7 @@ export default defineComponent({
       }
     }
   },
-  render () {
+  render() {
     const { clsPrefix, modes } = this
     return (
       <div class={`${clsPrefix}-color-picker-input`}>
@@ -122,16 +123,17 @@ export default defineComponent({
                 // hex and rgba shares the same value arr
                 let hexValue: string | null = null
                 try {
-                  hexValue =
-                    valueArr === null
+                  hexValue
+                    = valueArr === null
                       ? null
                       : (showAlpha ? toHexaString : toHexString)(
                           valueArr as RGBA
                         )
-                } catch {}
+                }
+                catch {}
                 return (
                   <ColorInputUnit
-                    label={'HEX'}
+                    label="HEX"
                     showAlpha={showAlpha}
                     value={hexValue}
                     onUpdateValue={(unitValue) => {

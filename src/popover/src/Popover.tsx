@@ -1,38 +1,38 @@
 import {
-  h,
-  ref,
-  computed,
-  defineComponent,
-  type PropType,
-  type VNode,
-  provide,
   type CSSProperties,
   type ComputedRef,
+  type PropType,
   type Ref,
-  toRef,
+  Text,
+  type VNode,
   cloneVNode,
+  computed,
+  defineComponent,
+  h,
+  provide,
+  ref,
+  toRef,
   watchEffect,
-  withDirectives,
-  Text
+  withDirectives
 } from 'vue'
 import {
-  VBinder,
-  VTarget,
+  type BinderInst,
   type FollowerPlacement,
-  type BinderInst
+  VBinder,
+  VTarget
 } from 'vueuc'
-import { useMergedState, useCompitable, useIsMounted, useMemo } from 'vooks'
+import { useCompitable, useIsMounted, useMemo, useMergedState } from 'vooks'
 import { zindexable } from 'vdirs'
 import {
   call,
-  keep,
   getFirstSlotVNode,
-  warnOnce,
-  useAdjustedTo
+  keep,
+  useAdjustedTo,
+  warnOnce
 } from '../../_utils'
 import type {
-  ExtractPublicPropTypes,
   ExtractInternalPropTypes,
+  ExtractPublicPropTypes,
   MaybeArray
 } from '../../_utils'
 import { useTheme } from '../../_mixins'
@@ -40,13 +40,13 @@ import type { ThemeProps } from '../../_mixins'
 import type { PopoverTheme } from '../styles'
 import NPopoverBody, { popoverBodyProps } from './PopoverBody'
 import type {
-  PopoverTrigger,
+  InternalPopoverInst,
   InternalRenderBody,
-  InternalPopoverInst
+  PopoverTrigger
 } from './interface'
 
 const bodyPropKeys = Object.keys(popoverBodyProps) as Array<
-keyof typeof popoverBodyProps
+  keyof typeof popoverBodyProps
 >
 
 const triggerEventMap = {
@@ -65,23 +65,26 @@ export interface TriggerEventHandlers {
   onBlur: (e: FocusEvent) => void
 }
 
-function appendEvents (
+function appendEvents(
   vNode: VNode,
   trigger: PopoverTrigger | 'nested',
   events: TriggerEventHandlers
 ): void {
   triggerEventMap[trigger].forEach((eventName) => {
-    if (!vNode.props) vNode.props = {}
+    if (!vNode.props) {
+      vNode.props = {}
+    }
     else {
       vNode.props = Object.assign({}, vNode.props)
     }
     const originalHandler = vNode.props[eventName]
     const handler = events[eventName]
-    if (!originalHandler) vNode.props[eventName] = handler
+    if (!originalHandler) {
+      vNode.props[eventName] = handler
+    }
     else {
       vNode.props[eventName] = (...args: unknown[]) => {
         originalHandler(...args)
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ;(handler as any)(...args)
       }
     }
@@ -177,10 +180,10 @@ export const popoverBaseProps = {
   // events
   onClickoutside: Function as PropType<(e: MouseEvent) => void>,
   'onUpdate:show': [Function, Array] as PropType<
-  MaybeArray<(value: boolean) => void>
+    MaybeArray<(value: boolean) => void>
   >,
   onUpdateShow: [Function, Array] as PropType<
-  MaybeArray<(value: boolean) => void>
+    MaybeArray<(value: boolean) => void>
   >,
   // internal
   internalDeactivateImmediately: Boolean,
@@ -196,10 +199,10 @@ export const popoverBaseProps = {
   },
   // deprecated
   onShow: [Function, Array] as PropType<
-  MaybeArray<(value: boolean) => void> | undefined
+    MaybeArray<(value: boolean) => void> | undefined
   >,
   onHide: [Function, Array] as PropType<
-  MaybeArray<(value: boolean) => void> | undefined
+    MaybeArray<(value: boolean) => void> | undefined
   >,
   arrow: {
     type: Boolean as PropType<boolean | undefined>,
@@ -224,7 +227,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: popoverProps,
   __popover__: true,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.maxWidth !== undefined) {
@@ -269,23 +272,28 @@ export default defineComponent({
       uncontrolledShowRef
     )
     const mergedShowConsideringDisabledPropRef = useMemo(() => {
-      if (props.disabled) return false
+      if (props.disabled)
+        return false
       return mergedShowWithoutDisabledRef.value
     })
     const getMergedDisabled = (): boolean => {
-      if (props.disabled) return true
+      if (props.disabled)
+        return true
       const { getDisabled } = props
-      if (getDisabled?.()) return true
+      if (getDisabled?.())
+        return true
       return false
     }
     const getMergedShow = (): boolean => {
-      if (getMergedDisabled()) return false
+      if (getMergedDisabled())
+        return false
       return mergedShowWithoutDisabledRef.value
     }
     // setup show-arrow
     const compatibleShowArrowRef = useCompitable(props, ['arrow', 'showArrow'])
     const mergedShowArrowRef = computed(() => {
-      if (props.overlap) return false
+      if (props.overlap)
+        return false
       return compatibleShowArrowRef.value
     })
     // bodyInstance
@@ -296,7 +304,7 @@ export default defineComponent({
       return props.x !== undefined && props.y !== undefined
     })
     // methods
-    function doUpdateShow (value: boolean): void {
+    function doUpdateShow(value: boolean): void {
       const {
         'onUpdate:show': _onUpdateShow,
         onUpdateShow,
@@ -317,45 +325,49 @@ export default defineComponent({
         call(onHide, false)
       }
     }
-    function syncPosition (): void {
+    function syncPosition(): void {
       if (bodyInstance) {
         bodyInstance.syncPosition()
       }
     }
-    function clearShowTimer (): void {
+    function clearShowTimer(): void {
       const { value: showTimerId } = showTimerIdRef
       if (showTimerId) {
         window.clearTimeout(showTimerId)
         showTimerIdRef.value = null
       }
     }
-    function clearHideTimer (): void {
+    function clearHideTimer(): void {
       const { value: hideTimerId } = hideTimerIdRef
       if (hideTimerId) {
         window.clearTimeout(hideTimerId)
         hideTimerIdRef.value = null
       }
     }
-    function handleFocus (): void {
+    function handleFocus(): void {
       const mergedDisabled = getMergedDisabled()
       if (props.trigger === 'focus' && !mergedDisabled) {
-        if (getMergedShow()) return
+        if (getMergedShow())
+          return
         doUpdateShow(true)
       }
     }
-    function handleBlur (): void {
+    function handleBlur(): void {
       const mergedDisabled = getMergedDisabled()
       if (props.trigger === 'focus' && !mergedDisabled) {
-        if (!getMergedShow()) return
+        if (!getMergedShow())
+          return
         doUpdateShow(false)
       }
     }
-    function handleMouseEnter (): void {
+    function handleMouseEnter(): void {
       const mergedDisabled = getMergedDisabled()
       if (props.trigger === 'hover' && !mergedDisabled) {
         clearHideTimer()
-        if (showTimerIdRef.value !== null) return
-        if (getMergedShow()) return
+        if (showTimerIdRef.value !== null)
+          return
+        if (getMergedShow())
+          return
         const delayCallback = (): void => {
           doUpdateShow(true)
           showTimerIdRef.value = null
@@ -363,17 +375,20 @@ export default defineComponent({
         const { delay } = props
         if (delay === 0) {
           delayCallback()
-        } else {
+        }
+        else {
           showTimerIdRef.value = window.setTimeout(delayCallback, delay)
         }
       }
     }
-    function handleMouseLeave (): void {
+    function handleMouseLeave(): void {
       const mergedDisabled = getMergedDisabled()
       if (props.trigger === 'hover' && !mergedDisabled) {
         clearShowTimer()
-        if (hideTimerIdRef.value !== null) return
-        if (!getMergedShow()) return
+        if (hideTimerIdRef.value !== null)
+          return
+        if (!getMergedShow())
+          return
         const delayedCallback = (): void => {
           doUpdateShow(false)
           hideTimerIdRef.value = null
@@ -381,18 +396,20 @@ export default defineComponent({
         const { duration } = props
         if (duration === 0) {
           delayedCallback()
-        } else {
+        }
+        else {
           hideTimerIdRef.value = window.setTimeout(delayedCallback, duration)
         }
       }
     }
     // will be called in popover-content
-    function handleMouseMoveOutside (): void {
+    function handleMouseMoveOutside(): void {
       handleMouseLeave()
     }
     // will be called in popover-content
-    function handleClickOutside (e: MouseEvent): void {
-      if (!getMergedShow()) return
+    function handleClickOutside(e: MouseEvent): void {
+      if (!getMergedShow())
+        return
       if (props.trigger === 'click') {
         clearShowTimer()
         clearHideTimer()
@@ -400,7 +417,7 @@ export default defineComponent({
       }
       props.onClickoutside?.(e)
     }
-    function handleClick (): void {
+    function handleClick(): void {
       if (props.trigger === 'click' && !getMergedDisabled()) {
         clearShowTimer()
         clearHideTimer()
@@ -408,22 +425,22 @@ export default defineComponent({
         doUpdateShow(nextShow)
       }
     }
-    function handleKeydown (e: KeyboardEvent): void {
-      if (!props.internalTrapFocus) return
+    function handleKeydown(e: KeyboardEvent): void {
+      if (!props.internalTrapFocus)
+        return
       if (e.key === 'Escape') {
         clearShowTimer()
         clearHideTimer()
         doUpdateShow(false)
       }
     }
-    function setShow (value: boolean): void {
+    function setShow(value: boolean): void {
       uncontrolledShowRef.value = value
     }
-    function getTriggerElement (): HTMLElement {
-      // eslint-disable-next-line @typescript-eslint/non-nullable-type-assertion-style
+    function getTriggerElement(): HTMLElement {
       return binderInstRef.value?.targetRef as HTMLElement
     }
-    function setBodyInstance (value: BodyInstance | null): void {
+    function setBodyInstance(value: BodyInstance | null): void {
       bodyInstance = value
     }
     provide<PopoverInjection>('NPopover', {
@@ -463,20 +480,21 @@ export default defineComponent({
     }
     return returned satisfies InternalPopoverInst
   },
-  render () {
+  render() {
     const { positionManually, $slots: slots } = this
     let triggerVNode: VNode | null
     let popoverInside = false
     if (!positionManually) {
       if (slots.activator) {
         triggerVNode = getFirstSlotVNode(slots, 'activator')
-      } else {
+      }
+      else {
         triggerVNode = getFirstSlotVNode(slots, 'trigger')
       }
       if (triggerVNode) {
         triggerVNode = cloneVNode(triggerVNode)
-        triggerVNode =
-          triggerVNode.type === Text ? h('span', [triggerVNode]) : triggerVNode
+        triggerVNode
+          = triggerVNode.type === Text ? h('span', [triggerVNode]) : triggerVNode
         const handlers = {
           onClick: this.handleClick,
           onMouseenter: this.handleMouseEnter,
@@ -496,13 +514,15 @@ export default defineComponent({
           triggerVNode.props.internalSyncTargetWithParent = true
           if (!triggerVNode.props.internalInheritedEventHandlers) {
             triggerVNode.props.internalInheritedEventHandlers = [handlers]
-          } else {
+          }
+          else {
             triggerVNode.props.internalInheritedEventHandlers = [
               handlers,
               ...triggerVNode.props.internalInheritedEventHandlers
             ]
           }
-        } else {
+        }
+        else {
           const { internalInheritedEventHandlers } = this
           const ascendantAndCurrentHandlers: TriggerEventHandlers[] = [
             handlers,
@@ -563,16 +583,16 @@ export default defineComponent({
             return [
               this.internalTrapFocus && mergedShow
                 ? withDirectives(
-                    <div style={{ position: 'fixed', inset: 0 }} />,
+                  <div style={{ position: 'fixed', inset: 0 }} />,
+                  [
                     [
-                      [
-                        zindexable,
-                        {
-                          enabled: mergedShow,
-                          zIndex: this.zIndex
-                        }
-                      ]
+                      zindexable,
+                      {
+                        enabled: mergedShow,
+                        zIndex: this.zIndex
+                      }
                     ]
+                  ]
                 )
                 : null,
               positionManually

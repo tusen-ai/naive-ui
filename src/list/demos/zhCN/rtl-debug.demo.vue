@@ -2,6 +2,21 @@
 # Rtl Debug
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { unstableListRtl } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    return {
+      value: ref(null),
+      rtlEnabled: ref(false),
+      rtlStyles: [unstableListRtl]
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-space><n-switch v-model:value="rtlEnabled" />Rtl</n-space>
@@ -37,18 +52,3 @@
     </n-config-provider>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { unstableListRtl } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    return {
-      value: ref(null),
-      rtlEnabled: ref(false),
-      rtlStyles: [unstableListRtl]
-    }
-  }
-})
-</script>

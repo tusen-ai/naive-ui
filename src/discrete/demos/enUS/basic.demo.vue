@@ -4,6 +4,58 @@
 Use `createDiscreteApi` to create series of API.
 </markdown>
 
+<script lang="ts">
+import { computed, defineComponent, ref } from 'vue'
+import type { ConfigProviderProps } from 'naive-ui'
+import { createDiscreteApi, darkTheme, lightTheme } from 'naive-ui'
+
+const themeRef = ref<'light' | 'dark'>('light')
+const configProviderPropsRef = computed<ConfigProviderProps>(() => ({
+  theme: themeRef.value === 'light' ? lightTheme : darkTheme
+}))
+
+const { message, notification, dialog, loadingBar, modal } = createDiscreteApi(
+  ['message', 'dialog', 'notification', 'loadingBar', 'modal'],
+  {
+    configProviderProps: configProviderPropsRef
+  }
+)
+
+export default defineComponent({
+  setup() {
+    return {
+      theme: themeRef,
+      handleThemeChangeClick() {
+        if (themeRef.value === 'light')
+          themeRef.value = 'dark'
+        else themeRef.value = 'light'
+      },
+      handleMessageTriggerClick() {
+        message.info('Message')
+      },
+      handleNotificationTriggerClick() {
+        notification.create({ title: 'Notification' })
+      },
+      handleDialogTriggerClick() {
+        dialog.info({ title: 'Dialog' })
+      },
+      handleModalTriggerClick() {
+        modal.create({
+          preset: 'card',
+          title: 'Modal'
+        })
+      },
+      handleLoadingBarTriggerClick() {
+        loadingBar.start()
+        setTimeout(() => {
+          loadingBar.finish()
+        }, 1000)
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-space>
     <n-button @click="handleThemeChangeClick">
@@ -26,58 +78,3 @@ Use `createDiscreteApi` to create series of API.
     </n-button>
   </n-space>
 </template>
-
-<script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
-import {
-  createDiscreteApi,
-  ConfigProviderProps,
-  darkTheme,
-  lightTheme
-} from 'naive-ui'
-
-const themeRef = ref<'light' | 'dark'>('light')
-const configProviderPropsRef = computed<ConfigProviderProps>(() => ({
-  theme: themeRef.value === 'light' ? lightTheme : darkTheme
-}))
-
-const { message, notification, dialog, loadingBar, modal } = createDiscreteApi(
-  ['message', 'dialog', 'notification', 'loadingBar', 'modal'],
-  {
-    configProviderProps: configProviderPropsRef
-  }
-)
-
-export default defineComponent({
-  setup () {
-    return {
-      theme: themeRef,
-      handleThemeChangeClick () {
-        if (themeRef.value === 'light') themeRef.value = 'dark'
-        else themeRef.value = 'light'
-      },
-      handleMessageTriggerClick () {
-        message.info('Message')
-      },
-      handleNotificationTriggerClick () {
-        notification.create({ title: 'Notification' })
-      },
-      handleDialogTriggerClick () {
-        dialog.info({ title: 'Dialog' })
-      },
-      handleModalTriggerClick () {
-        modal.create({
-          preset: 'card',
-          title: 'Modal'
-        })
-      },
-      handleLoadingBarTriggerClick () {
-        loadingBar.start()
-        setTimeout(() => {
-          loadingBar.finish()
-        }, 1000)
-      }
-    }
-  }
-})
-</script>

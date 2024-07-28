@@ -2,9 +2,9 @@
 
 import { h } from 'vue'
 import { RouterLink } from 'vue-router'
-import { NTag, NSpace } from 'naive-ui'
+import { NSpace, NTag } from 'naive-ui'
 
-export const renderMenuLabel = (option) => {
+export function renderMenuLabel(option) {
   if (!('path' in option) || option.label === '--Debug') {
     return option.label
   }
@@ -17,14 +17,15 @@ export const renderMenuLabel = (option) => {
   )
 }
 
-const renderNewTag = (isZh) =>
-  h(
+function renderNewTag(isZh) {
+  return h(
     NTag,
     { type: 'success', size: 'small', round: true, bordered: false },
     { default: isZh ? () => '新' : () => 'New' }
   )
+}
 
-const renderItemExtra = (rawItem, isZh) => {
+function renderItemExtra(rawItem, isZh) {
   if (!rawItem.enSuffix || !isZh) {
     return rawItem.isNew ? renderNewTag : undefined
   }
@@ -36,15 +37,16 @@ const renderItemExtra = (rawItem, isZh) => {
     )
   return rawItem.isNew ? renderEn : rawItem.en
 }
-const getItemExtraString = (rawItem, isZh) => {
+function getItemExtraString(rawItem, isZh) {
   if (!rawItem.enSuffix || !isZh) {
     return ''
-  } else {
+  }
+  else {
     return rawItem.en
   }
 }
 
-const appendCounts = (item) => {
+function appendCounts(item) {
   if (!item.children) {
     item.count = 1
     return item
@@ -60,7 +62,7 @@ const appendCounts = (item) => {
   }
 }
 
-function createItems (lang, theme, prefix, items) {
+function createItems(lang, theme, prefix, items) {
   const isZh = lang === 'zh-CN'
   const langKey = isZh ? 'zh' : 'en'
   return items.map((rawItem) => {
@@ -71,7 +73,7 @@ function createItems (lang, theme, prefix, items) {
       extra: renderItemExtra(rawItem, isZh),
       extraString: getItemExtraString(rawItem, isZh),
       path: rawItem.path
-        ? `/${lang}/${theme}` + prefix + rawItem.path
+        ? `/${lang}/${theme}${prefix}${rawItem.path}`
         : undefined
     }
     if (rawItem.children) {
@@ -81,7 +83,7 @@ function createItems (lang, theme, prefix, items) {
   })
 }
 
-export function createDocumentationMenuOptions ({ lang, theme, mode }) {
+export function createDocumentationMenuOptions({ lang, theme }) {
   return createItems(lang, theme, '/docs', [
     {
       en: 'Introduction',
@@ -158,6 +160,21 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
           path: '/ssr'
         },
         {
+          en: 'Nuxt.js',
+          zh: 'Nuxt.js',
+          path: '/nuxtjs'
+        },
+        {
+          en: 'Vitepress',
+          zh: 'Vitepress',
+          path: '/vitepress'
+        },
+        {
+          en: 'Vite SSG/SSE',
+          zh: 'Vite SSG/SSE',
+          path: '/vite-ssge'
+        },
+        {
           en: 'Customizing Theme',
           zh: '调整主题',
           path: '/customize-theme'
@@ -199,7 +216,7 @@ export function createDocumentationMenuOptions ({ lang, theme, mode }) {
   ])
 }
 
-export function createComponentMenuOptions ({ lang, theme, mode }) {
+export function createComponentMenuOptions({ lang, theme }) {
   return createItems(lang, theme, '/components', [
     appendCounts({
       zh: '通用组件',
@@ -545,6 +562,13 @@ export function createComponentMenuOptions ({ lang, theme, mode }) {
           zh: '无限滚动',
           enSuffix: true,
           path: '/infinite-scroll',
+          isNew: true
+        },
+        {
+          en: 'Highlight',
+          zh: '高亮文本',
+          enSuffix: true,
+          path: '/highlight',
           isNew: true
         }
       ]

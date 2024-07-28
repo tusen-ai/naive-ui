@@ -4,6 +4,22 @@
 使用 `checked-value` 和 `unchecked-value` 制定选中的值。
 </markdown>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const message = useMessage()
+    return {
+      handleUpdateValue(value: string) {
+        message.info(value)
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-switch
     checked-value="周末加班"
@@ -11,19 +27,3 @@
     @update:value="handleUpdateValue"
   />
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { useMessage } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const message = useMessage()
-    return {
-      handleUpdateValue (value: string) {
-        message.info(value)
-      }
-    }
-  }
-})
-</script>

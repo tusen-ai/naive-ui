@@ -33,13 +33,13 @@ function createDiscreteApi(
   }
 ): {
   // only API specified in `includes` will be created
-  message: MessageApi
-  dialog: DialogApi
-  notification: NotificationApi
-  loadingBar: LoadingBarApi
-  modal: ModalApi
-  // Vue app
-  app: App
-  unmount: () => void
-} {}
+    message: MessageApi
+    dialog: DialogApi
+    notification: NotificationApi
+    loadingBar: LoadingBarApi
+    modal: ModalApi
+    // Vue app
+    app: App
+    unmount: () => void
+  } {}
 ```

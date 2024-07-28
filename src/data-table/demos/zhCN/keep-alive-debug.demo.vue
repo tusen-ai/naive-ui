@@ -2,26 +2,12 @@
 # Keep alive debug
 </markdown>
 
-<template>
-  <n-button @click="showTable = !showTable">
-    showTable: {{ showTable }}
-  </n-button>
-  <!-- 不虚拟
-  <keep-alive>
-    <component :is="showTable ? 'component-a' : 'n-empty'" />
-  </keep-alive> -->
-  虚拟
-  <keep-alive>
-    <component :is="showTable ? 'component-b' : 'n-empty'" />
-  </keep-alive>
-</template>
-
 <script lang="ts">
-import { h, defineComponent, ref } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 import type { DataTableColumns } from 'naive-ui'
 import { NDataTable } from 'naive-ui'
 
-type RowData = {
+interface RowData {
   key: number
   name: string
   age: number
@@ -48,21 +34,21 @@ const columns: DataTableColumns<RowData> = [
   {
     title: 'Row',
     key: 'row',
-    render (row, index) {
+    render(row, index) {
       return h('span', ['row ', index])
     }
   },
   {
     title: 'Row1',
     key: 'row1',
-    render (row, index) {
+    render(row, index) {
       return h('span', ['row ', index])
     }
   },
   {
     title: 'Row2',
     key: 'row2',
-    render (row, index) {
+    render(row, index) {
       return h('span', ['row ', index])
     },
     width: 100,
@@ -84,7 +70,7 @@ const data: RowData[] = Array.from({ length: 50 }).map((_, index) => ({
 }))
 
 const ComponentA = defineComponent({
-  render () {
+  render() {
     return h(NDataTable, {
       columns,
       data,
@@ -95,7 +81,7 @@ const ComponentA = defineComponent({
 })
 
 const ComponentB = defineComponent({
-  render () {
+  render() {
     return h(NDataTable, {
       columns,
       data,
@@ -111,10 +97,24 @@ export default defineComponent({
     ComponentA,
     ComponentB
   },
-  setup () {
+  setup() {
     return {
       showTable: ref(false)
     }
   }
 })
 </script>
+
+<template>
+  <n-button @click="showTable = !showTable">
+    showTable: {{ showTable }}
+  </n-button>
+  <!-- 不虚拟
+  <keep-alive>
+    <component :is="showTable ? 'component-a' : 'n-empty'" />
+  </keep-alive> -->
+  虚拟
+  <keep-alive>
+    <component :is="showTable ? 'component-b' : 'n-empty'" />
+  </keep-alive>
+</template>

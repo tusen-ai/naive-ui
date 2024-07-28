@@ -1,21 +1,21 @@
 import {
+  type CSSProperties,
+  Fragment,
+  type PropType,
   computed,
   defineComponent,
   h,
   ref,
-  type PropType,
-  type CSSProperties,
-  Fragment,
   toRef
 } from 'vue'
 import {
-  format,
-  getYear,
   addMonths,
+  format,
+  getMonth,
+  getYear,
   startOfDay,
-  startOfMonth,
-  getMonth
-} from 'date-fns/esm'
+  startOfMonth
+} from 'date-fns'
 import { useMergedState } from 'vooks'
 import { dateArray } from '../../date-picker/src/utils'
 import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
@@ -28,7 +28,7 @@ import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { calendarLight } from '../styles'
 import type { CalendarTheme } from '../styles'
-import type { OnUpdateValue, DateItem, OnPanelChange } from './interface'
+import type { DateItem, OnPanelChange, OnUpdateValue } from './interface'
 import style from './styles/index.cssr'
 
 export const calendarProps = {
@@ -49,7 +49,7 @@ export type CalendarProps = ExtractPublicPropTypes<typeof calendarProps>
 export default defineComponent({
   name: 'Calendar',
   props: calendarProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Calendar',
@@ -69,7 +69,7 @@ export default defineComponent({
       uncontrolledValueRef
     )
 
-    function doUpdateValue (value: number, time: DateItem): void {
+    function doUpdateValue(value: number, time: DateItem): void {
       const { onUpdateValue, 'onUpdate:value': _onUpdateValue } = props
       if (onUpdateValue) {
         call(onUpdateValue, value, time)
@@ -80,7 +80,7 @@ export default defineComponent({
       uncontrolledValueRef.value = value
     }
 
-    function handlePrevClick (): void {
+    function handlePrevClick(): void {
       const monthTs = addMonths(monthTsRef.value, -1).valueOf()
       monthTsRef.value = monthTs
       props.onPanelChange?.({
@@ -88,7 +88,7 @@ export default defineComponent({
         month: getMonth(monthTs) + 1
       })
     }
-    function handleNextClick (): void {
+    function handleNextClick(): void {
       const monthTs = addMonths(monthTsRef.value, 1).valueOf()
       monthTsRef.value = monthTs
       props.onPanelChange?.({
@@ -96,7 +96,7 @@ export default defineComponent({
         month: getMonth(monthTs) + 1
       })
     }
-    function handleTodayClick (): void {
+    function handleTodayClick(): void {
       const { value: monthTs } = monthTsRef
       const oldYear = getYear(monthTs)
       const oldMonth = getMonth(monthTs)
@@ -190,7 +190,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const {
       isDateDisabled,
       mergedClsPrefix,
@@ -298,15 +298,16 @@ export default defineComponent({
                   class={[
                     `${mergedClsPrefix}-calendar-cell`,
                     disabled && `${mergedClsPrefix}-calendar-cell--disabled`,
-                    notInCurrentMonth &&
-                      `${mergedClsPrefix}-calendar-cell--other-month`,
+                    notInCurrentMonth
+                    && `${mergedClsPrefix}-calendar-cell--other-month`,
                     disabled && `${mergedClsPrefix}-calendar-cell--not-allowed`,
-                    isCurrentDate &&
-                      `${mergedClsPrefix}-calendar-cell--current`,
+                    isCurrentDate
+                    && `${mergedClsPrefix}-calendar-cell--current`,
                     selected && `${mergedClsPrefix}-calendar-cell--selected`
                   ]}
                   onClick={() => {
-                    if (disabled) return
+                    if (disabled)
+                      return
                     const monthTs = startOfMonth(ts).valueOf()
                     this.monthTs = monthTs
                     if (notInCurrentMonth) {

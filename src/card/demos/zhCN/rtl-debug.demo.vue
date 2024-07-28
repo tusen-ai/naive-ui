@@ -1,7 +1,20 @@
 <markdown>
 # Rtl Debug
-
 </markdown>
+
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { unstableCardRtl } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    return {
+      rtlEnabled: ref(false),
+      rtlStyles: [unstableCardRtl]
+    }
+  }
+})
+</script>
 
 <template>
   <n-space vertical>
@@ -25,17 +38,3 @@
     </n-config-provider>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { unstableCardRtl } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    return {
-      rtlEnabled: ref(false),
-      rtlStyles: [unstableCardRtl]
-    }
-  }
-})
-</script>

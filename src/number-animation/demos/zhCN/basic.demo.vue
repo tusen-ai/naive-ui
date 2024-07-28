@@ -2,6 +2,23 @@
 # 基础用法
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import type { NumberAnimationInst } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const numberAnimationInstRef = ref<NumberAnimationInst | null>(null)
+    return {
+      numberAnimationInstRef,
+      handleClick() {
+        numberAnimationInstRef.value?.play()
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-statistic label="你一共处理了" tabular-nums>
     <n-number-animation ref="numberAnimationInstRef" :from="0" :to="12039" />
@@ -16,20 +33,3 @@
     </n-button>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { NumberAnimationInst } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const numberAnimationInstRef = ref<NumberAnimationInst | null>(null)
-    return {
-      numberAnimationInstRef,
-      handleClick () {
-        numberAnimationInstRef.value?.play()
-      }
-    }
-  }
-})
-</script>

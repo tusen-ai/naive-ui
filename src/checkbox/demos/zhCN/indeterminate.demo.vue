@@ -2,6 +2,19 @@
 # 部分选中
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      value: ref(false),
+      indeterminate: ref(false)
+    }
+  }
+})
+</script>
+
 <template>
   <n-space item-style="display: flex;" align="center">
     <n-checkbox v-model:checked="value" :indeterminate="indeterminate">
@@ -31,16 +44,3 @@
     </n-switch>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      value: ref(false),
-      indeterminate: ref(false)
-    }
-  }
-})
-</script>

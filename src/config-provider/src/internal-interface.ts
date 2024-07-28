@@ -1,4 +1,4 @@
-import type { VNodeChild, Ref } from 'vue'
+import type { Ref, VNodeChild } from 'vue'
 import type { CNode } from 'css-render'
 import type { AlertTheme } from '../../alert/styles'
 import type { AnchorTheme } from '../../anchor/styles'
@@ -93,15 +93,15 @@ import type {
   DataTableRenderSorter
 } from '../../data-table'
 import type { IconPlacement } from '../../dialog/src/interface'
-import type { GlobalTheme, GlobalThemeOverrides } from './interface'
 import type { EmptyProps } from '../../empty'
 import type { CollapseTransitionTheme } from '../../collapse-transition/styles'
 import type { ButtonGroupTheme } from '../../button-group/styles/light'
 import type { RowTheme } from '../../legacy-grid/styles'
-import type { Katex } from './katex'
 import type { SplitTheme } from '../../split/styles'
 import type { FlexTheme } from '../../flex/styles'
 import type { FloatButtonGroupTheme } from '../../float-button-group/styles'
+import type { Katex } from './katex'
+import type { GlobalTheme, GlobalThemeOverrides } from './interface'
 
 export interface GlobalThemeWithoutCommon {
   Alert?: AlertTheme
@@ -245,7 +245,7 @@ export interface RtlItem {
 export type RtlProp = RtlItem[]
 
 export type RtlEnabledState = Partial<
-Record<keyof GlobalThemeWithoutCommon, RtlItem>
+  Record<keyof GlobalThemeWithoutCommon, RtlItem>
 >
 
 export type Breakpoints = Record<string, number> | undefined
@@ -268,4 +268,5 @@ export interface ConfigProviderInjection {
   // non-reactive
   inlineThemeDisabled: boolean
   preflightStyleDisabled: boolean
+  styleMountParent?: ParentNode
 }

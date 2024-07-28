@@ -1,8 +1,8 @@
 import type { CheckStrategy, TreeNode } from 'treemate'
+import type { CSSProperties, Ref, Slots, VNode, VNodeChild } from 'vue'
 import type { MergedTheme } from '../../_mixins'
 import type { NLocale } from '../../locales'
 import type { CascaderTheme } from '../styles'
-import type { CSSProperties, Ref, Slots, VNode, VNodeChild } from 'vue'
 import { createInjectionKey } from '../../_utils'
 
 export type ValueAtom = string | number
@@ -80,23 +80,23 @@ export interface CascaderInjection {
   labelFieldRef: Ref<string>
   showCheckboxRef: Ref<boolean>
   getColumnStyleRef: Ref<
-  ((detail: { level: number }) => string | CSSProperties) | undefined
+    ((detail: { level: number }) => string | CSSProperties) | undefined
   >
   renderPrefixRef: Ref<
-  | ((info: {
-    option: CascaderOption
-    checked: boolean
-    node: VNode | null
-  }) => VNodeChild)
-  | undefined
+    | ((info: {
+      option: CascaderOption
+      checked: boolean
+      node: VNode | null
+    }) => VNodeChild)
+    | undefined
   >
   renderSuffixRef: Ref<
-  | ((info: {
-    option: CascaderOption
-    checked: boolean
-    node: VNode | null
-  }) => VNodeChild)
-  | undefined
+    | ((info: {
+      option: CascaderOption
+      checked: boolean
+      node: VNode | null
+    }) => VNodeChild)
+    | undefined
   >
   syncCascaderMenuPosition: () => void
   syncSelectMenuPosition: () => void
@@ -110,7 +110,7 @@ export interface CascaderInjection {
   handleSelectMenuClickOutside: (e: MouseEvent) => void
   handleCascaderMenuClickOutside: (e: MouseEvent) => void
   renderLabelRef: Ref<
-  ((option: CascaderOption, checked: boolean) => VNodeChild) | undefined
+    ((option: CascaderOption, checked: boolean) => VNodeChild) | undefined
   >
   clearPattern: () => void
 }
@@ -134,8 +134,8 @@ export interface SelectMenuInstance {
   enter: () => boolean
 }
 
-export const cascaderInjectionKey =
-  createInjectionKey<CascaderInjection>('n-cascader')
+export const cascaderInjectionKey
+  = createInjectionKey<CascaderInjection>('n-cascader')
 
 export interface CascaderInst {
   focus: () => void

@@ -1,7 +1,19 @@
 <markdown>
 # Style Inherit Debug
-
 </markdown>
+
+<script lang="ts">
+import { NTabPane, NTabs } from 'naive-ui'
+
+export default {
+  name: 'App',
+  components: {
+    NTabs,
+    NTabPane
+  }
+}
+</script>
+
 <template>
   <div id="app">
     <h2>one tab</h2>
@@ -32,14 +44,3 @@
     </NTabs>
   </div>
 </template>
-<script lang="ts">
-import { NTabs, NTabPane } from 'naive-ui'
-
-export default {
-  name: 'App',
-  components: {
-    NTabs,
-    NTabPane
-  }
-}
-</script>

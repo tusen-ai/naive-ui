@@ -2,21 +2,11 @@
 # Expand debug
 </markdown>
 
-<template>
-  <n-tree
-    v-model:expanded-keys="expandedKeys"
-    block-line
-    :data="data"
-    selectable
-    @update:selected-keys="onSelect"
-  />
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const expandedKeys = ref<string[]>([])
 
     return {
@@ -31,10 +21,20 @@ export default defineComponent({
         }
       ],
       expandedKeys,
-      onSelect (keys: string[]) {
+      onSelect(keys: string[]) {
         expandedKeys.value.push(keys[0])
       }
     }
   }
 })
 </script>
+
+<template>
+  <n-tree
+    v-model:expanded-keys="expandedKeys"
+    block-line
+    :data="data"
+    selectable
+    @update:selected-keys="onSelect"
+  />
+</template>

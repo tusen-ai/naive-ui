@@ -10,8 +10,7 @@ export default c([
     100% {
       -webkit-transform: rotate(360deg);
       transform: rotate(360deg);
-    }`
-  ),
+    }`),
   cB('base-loading', `
     position: relative;
     line-height: 0;

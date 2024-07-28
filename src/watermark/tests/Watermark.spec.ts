@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { NWatermark } from '../index'
 
-describe('NWatermark', () => {
+describe('nWatermark', () => {
   it('should work with import on demand', () => {
     mount(NWatermark)
   })

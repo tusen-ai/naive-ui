@@ -2,15 +2,17 @@ import { defineComponent, h } from 'vue'
 import { mount } from '@vue/test-utils'
 import { NGi, NGrid, NGridItem } from '../index'
 
-const renderNGi = new Array(6).fill(1).map((v, i) => {
-  return h(NGi, null, { default: () => i })
-})
+const renderNGi = Array.from({ length: 6 })
+  .fill(1)
+  .map((v, i) => {
+    return h(NGi, null, { default: () => i })
+  })
 
 describe('n-grid', () => {
   it('should work with import on demand', () => {
     mount(
       defineComponent({
-        render () {
+        render() {
           return (
             <NGrid>
               {{
@@ -23,10 +25,10 @@ describe('n-grid', () => {
     )
   })
 
-  it('should work with import on demand', () => {
+  it('should work with import on demand 2', () => {
     mount(
       defineComponent({
-        render () {
+        render() {
           return (
             <NGrid>
               {{
@@ -181,7 +183,7 @@ describe('n-grid', () => {
     const instance = wrapper.getCurrentComponent().proxy
     ;(instance as any).handleResize({ contentRect: { width: 500 } })
 
-    await new Promise((resolve) => requestAnimationFrame(resolve))
+    await new Promise(resolve => requestAnimationFrame(resolve))
 
     expect(wrapper.find('.n-gi-1').element.getAttribute('style')).toContain(
       'grid-column: span 2 / span 2;'

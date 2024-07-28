@@ -1,10 +1,10 @@
 import {
-  h,
-  defineComponent,
-  computed,
-  inject,
-  type PropType,
   type CSSProperties,
+  type PropType,
+  computed,
+  defineComponent,
+  h,
+  inject,
   toRef
 } from 'vue'
 import { NButton } from '../../button'
@@ -36,14 +36,13 @@ export const panelPropKeys = keysOf(panelProps)
 export default defineComponent({
   name: 'NPopconfirmPanel',
   props: panelProps,
-  setup (props) {
+  setup(props) {
     const { localeRef } = useLocale('Popconfirm')
     const { inlineThemeDisabled } = useConfig()
     const {
       mergedClsPrefixRef,
       mergedThemeRef,
       props: popconfirmProps
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(popconfirmInjectionKey)!
     const cssVarsRef = computed(() => {
       const {
@@ -77,17 +76,17 @@ export default defineComponent({
       }),
       positiveButtonProps: toRef(popconfirmProps, 'positiveButtonProps'),
       negativeButtonProps: toRef(popconfirmProps, 'negativeButtonProps'),
-      handlePositiveClick (e: MouseEvent) {
+      handlePositiveClick(e: MouseEvent) {
         props.onPositiveClick(e)
       },
-      handleNegativeClick (e: MouseEvent) {
+      handleNegativeClick(e: MouseEvent) {
         props.onNegativeClick(e)
       },
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, showIcon, $slots } = this
     const actionContentNode = resolveSlot($slots.action, () =>
       this.negativeText === null && this.positiveText === null
@@ -112,15 +111,14 @@ export default defineComponent({
                 {{ default: () => this.localizedPositiveText }}
               </NButton>
             )
-          ]
-    )
+          ])
     this.onRender?.()
     return (
       <div
         class={[`${mergedClsPrefix}-popconfirm__panel`, this.themeClass]}
         style={this.cssVars as CSSProperties}
       >
-        {resolveWrappedSlot($slots.default, (children) =>
+        {resolveWrappedSlot($slots.default, children =>
           showIcon || children ? (
             <div class={`${mergedClsPrefix}-popconfirm__body`}>
               {showIcon ? (
@@ -134,8 +132,7 @@ export default defineComponent({
               ) : null}
               {children}
             </div>
-          ) : null
-        )}
+          ) : null)}
         {actionContentNode ? (
           <div class={[`${mergedClsPrefix}-popconfirm__action`]}>
             {actionContentNode}

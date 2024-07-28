@@ -4,23 +4,20 @@
 你通常可以在这个地方配合 vue-router 完成路由。当然，你也可以通过将 `label` 渲染为 `<router-link />` 或 `<a />` 来改变路由。
 </markdown>
 
-<template>
-  <n-menu :options="menuOptions" @update:value="handleUpdateValue" />
-</template>
-
 <script lang="ts">
-import { defineComponent, h, Component } from 'vue'
+import type { Component } from 'vue'
+import { defineComponent, h } from 'vue'
 import { NIcon, useMessage } from 'naive-ui'
 import type { MenuOption } from 'naive-ui'
 import { RouterLink } from 'vue-router'
 import {
   BookOutline as BookIcon,
+  HomeOutline as HomeIcon,
   PersonOutline as PersonIcon,
-  WineOutline as WineIcon,
-  HomeOutline as HomeIcon
+  WineOutline as WineIcon
 } from '@vicons/ionicons5'
 
-function renderIcon (icon: Component) {
+function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -135,15 +132,19 @@ const menuOptions: MenuOption[] = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     return {
       menuOptions,
-      handleUpdateValue (key: string, item: MenuOption) {
-        message.info('[onUpdate:value]: ' + JSON.stringify(key))
-        message.info('[onUpdate:value]: ' + JSON.stringify(item))
+      handleUpdateValue(key: string, item: MenuOption) {
+        message.info(`[onUpdate:value]: ${JSON.stringify(key)}`)
+        message.info(`[onUpdate:value]: ${JSON.stringify(item)}`)
       }
     }
   }
 })
 </script>
+
+<template>
+  <n-menu :options="menuOptions" @update:value="handleUpdateValue" />
+</template>

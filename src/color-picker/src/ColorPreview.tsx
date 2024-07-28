@@ -1,4 +1,4 @@
-import { defineComponent, h, type PropType } from 'vue'
+import { type PropType, defineComponent, h } from 'vue'
 import { type ColorPickerMode, convertColor, getModeFromValue } from './utils'
 
 export default defineComponent({
@@ -25,8 +25,8 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
-    function handleChange (e: Event): void {
+  setup(props) {
+    function handleChange(e: Event): void {
       // hex
       const value = (e.target as HTMLInputElement).value
       props.onUpdateColor?.(
@@ -39,7 +39,7 @@ export default defineComponent({
       handleChange
     }
   },
-  render () {
+  render() {
     const { clsPrefix } = this
     return (
       <div class={`${clsPrefix}-color-picker-preview__preview`}>

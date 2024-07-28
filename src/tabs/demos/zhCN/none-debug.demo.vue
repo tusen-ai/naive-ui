@@ -2,27 +2,17 @@
 # None debug
 </markdown>
 
-<template>
-  <n-button @click="switchTabs">
-    Switch tabs
-  </n-button>
-  <n-tabs v-model:value="value">
-    <n-tab v-for="tab in tabs" :key="tab" :name="tab">
-      I'm {{ tab }}
-    </n-tab>
-  </n-tabs>
-</template>
-
 <script lang="ts">
-import { ref, defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const valueRef = ref('a')
     const switchTabs = () => {
       if (valueRef.value === 'a') {
         valueRef.value = 'c'
-      } else {
+      }
+      else {
         valueRef.value = 'a'
       }
     }
@@ -34,3 +24,14 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-button @click="switchTabs">
+    Switch tabs
+  </n-button>
+  <n-tabs v-model:value="value">
+    <n-tab v-for="tab in tabs" :key="tab" :name="tab">
+      I'm {{ tab }}
+    </n-tab>
+  </n-tabs>
+</template>

@@ -1,12 +1,13 @@
-const path = require('path')
+const path = require('node:path')
 const fse = require('fs-extra')
 const { marked } = require('marked')
 const camelCase = require('lodash/camelCase')
 const createRenderer = require('./md-renderer')
 const projectPath = require('./project-path')
+
 const mdRenderer = createRenderer()
 
-async function resolveDemoTitle (fileName, demoEntryPath) {
+async function resolveDemoTitle(fileName, demoEntryPath) {
   const demoStr = await fse.readFile(
     path.resolve(projectPath, demoEntryPath, '..', fileName),
     'utf-8'
@@ -14,11 +15,11 @@ async function resolveDemoTitle (fileName, demoEntryPath) {
   return demoStr.match(/# ([^\n]+)/)[1]
 }
 
-async function resolveDemoInfos (literal, url, env) {
+async function resolveDemoInfos(literal, url, env) {
   const ids = literal
     .split('\n')
-    .map((line) => line.trim())
-    .filter((id) => id.length)
+    .map(line => line.trim())
+    .filter(id => id.length)
   const infos = []
   for (const id of ids) {
     const debug = id.includes('debug') || id.includes('Debug')
@@ -27,8 +28,9 @@ async function resolveDemoInfos (literal, url, env) {
     }
     let fileName
     if (id.includes('.vue')) {
-      fileName = id.slice(0, -4) + '.demo.vue'
-    } else {
+      fileName = `${id.slice(0, -4)}.demo.vue`
+    }
+    else {
       fileName = `${id}.demo.md`
     }
     const variable = `${camelCase(id)}Demo`
@@ -44,13 +46,13 @@ async function resolveDemoInfos (literal, url, env) {
   return infos
 }
 
-function genDemosTemplate (demoInfos, colSpan) {
+function genDemosTemplate(demoInfos, colSpan) {
   return `<component-demos :span="${colSpan}">${demoInfos
     .map(({ tag }) => tag)
     .join('\n')}</component-demos>`
 }
 
-function genAnchorTemplate (
+function genAnchorTemplate(
   children,
   options = {
     ignoreGap: false
@@ -70,7 +72,7 @@ function genAnchorTemplate (
   `
 }
 
-function genDemosApiAnchorTemplate (tokens) {
+function genDemosApiAnchorTemplate(tokens) {
   const api = [
     {
       id: 'API',
@@ -80,8 +82,8 @@ function genDemosApiAnchorTemplate (tokens) {
   ]
   return api.concat(
     tokens
-      .filter((token) => token.type === 'heading' && token.depth === 3)
-      .map((token) => ({
+      .filter(token => token.type === 'heading' && token.depth === 3)
+      .map(token => ({
         id: token.text.replace(/ /g, '-'),
         title: token.text,
         debug: false
@@ -89,7 +91,7 @@ function genDemosApiAnchorTemplate (tokens) {
   )
 }
 
-function genDemosAnchorTemplate (demoInfos, hasApi, tokens) {
+function genDemosAnchorTemplate(demoInfos, hasApi, tokens) {
   const links = (
     hasApi ? demoInfos.concat(genDemosApiAnchorTemplate(tokens)) : demoInfos
   ).map(
@@ -104,10 +106,10 @@ function genDemosAnchorTemplate (demoInfos, hasApi, tokens) {
   })
 }
 
-function genPageAnchorTemplate (tokens) {
+function genPageAnchorTemplate(tokens) {
   const titles = tokens
-    .filter((token) => token.type === 'heading' && token.depth === 2)
-    .map((token) => token.text)
+    .filter(token => token.type === 'heading' && token.depth === 2)
+    .map(token => token.text)
   const links = titles.map((title) => {
     const href = title.replace(/ /g, '-')
     return `<n-anchor-link title="${title}" href="#${href}"/>`
@@ -115,7 +117,7 @@ function genPageAnchorTemplate (tokens) {
   return genAnchorTemplate(links.join('\n'), { ignoreGap: true })
 }
 
-function genScript (demoInfos, components = [], url, forceShowAnchor) {
+function genScript(demoInfos, components = [], url, forceShowAnchor) {
   const showAnchor = !!(demoInfos.length || forceShowAnchor)
   const importStmts = demoInfos
     .map(({ variable, fileName }) => `import ${variable} from './${fileName}'`)
@@ -164,7 +166,7 @@ export default {
   return script
 }
 
-async function convertMd2ComponentDocumentation (
+async function convertMd2ComponentDocumentation(
   text,
   url,
   env = 'development'
@@ -175,7 +177,7 @@ async function convertMd2ComponentDocumentation (
   const tokens = marked.lexer(text)
   // resolve external components
   const componentsIndex = tokens.findIndex(
-    (token) => token.type === 'code' && token.lang === 'component'
+    token => token.type === 'code' && token.lang === 'component'
   )
   let components = []
   if (~componentsIndex) {
@@ -184,10 +186,12 @@ async function convertMd2ComponentDocumentation (
       .split('\n')
       .map((component) => {
         const [ids, importStmt] = component.split(':')
-        if (!ids.trim()) throw new Error('No component id')
-        if (!importStmt.trim()) throw new Error('No component source url')
+        if (!ids.trim())
+          throw new Error('No component id')
+        if (!importStmt.trim())
+          throw new Error('No component source url')
         return {
-          ids: ids.split(',').map((id) => id.trim()),
+          ids: ids.split(',').map(id => id.trim()),
           importStmt: importStmt.trim()
         }
       })
@@ -196,7 +200,7 @@ async function convertMd2ComponentDocumentation (
   }
   // add edit on github button on title
   const titleIndex = tokens.findIndex(
-    (token) => token.type === 'heading' && token.depth === 1
+    token => token.type === 'heading' && token.depth === 1
   )
   if (titleIndex > -1) {
     const titleText = JSON.stringify(tokens[titleIndex].text)
@@ -209,7 +213,7 @@ async function convertMd2ComponentDocumentation (
   }
   // resolve demos, debug demos are removed from production build
   const demosIndex = tokens.findIndex(
-    (token) => token.type === 'code' && token.lang === 'demo'
+    token => token.type === 'code' && token.lang === 'demo'
   )
   let demoInfos = []
   if (~demosIndex) {

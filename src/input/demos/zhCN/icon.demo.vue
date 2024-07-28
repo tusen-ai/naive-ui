@@ -4,6 +4,19 @@
 在前缀后缀添加内容。
 </markdown>
 
+<script lang="ts">
+import { FlashOutline } from '@vicons/ionicons5'
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      FlashOutline
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-input placeholder="搜索">
@@ -23,16 +36,3 @@
     </n-input>
   </n-space>
 </template>
-
-<script lang="ts">
-import { FlashOutline } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      FlashOutline
-    }
-  }
-})
-</script>

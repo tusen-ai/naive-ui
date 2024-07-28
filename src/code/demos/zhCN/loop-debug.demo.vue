@@ -2,19 +2,15 @@
 # Loop debug
 </markdown>
 
-<template>
-  <n-code :code="code" />
-</template>
-
 <script lang="ts">
-import { defineComponent, ref, onBeforeUnmount } from 'vue'
+import { defineComponent, onBeforeUnmount, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const code = ref('')
 
     const id = setInterval(() => {
-      code.value = 'Current: ' + String(new Date())
+      code.value = `Current: ${String(new Date())}`
     }, 1000)
 
     onBeforeUnmount(() => {
@@ -25,3 +21,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-code :code="code" />
+</template>

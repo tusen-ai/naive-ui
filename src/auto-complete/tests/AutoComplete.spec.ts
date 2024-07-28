@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { NAutoComplete, type AutoCompleteProps } from '../index'
+import { type AutoCompleteProps, NAutoComplete } from '../index'
 
 describe('n-auto-complete', () => {
   it('should work with import on demand', () => {

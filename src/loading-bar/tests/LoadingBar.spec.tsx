@@ -4,7 +4,7 @@ import { sleep } from 'seemly'
 import { NLoadingBarProvider, useLoadingBar } from '../index'
 
 const Provider = defineComponent({
-  render () {
+  render() {
     return <NLoadingBarProvider>{this.$slots}</NLoadingBarProvider>
   }
 })
@@ -16,11 +16,11 @@ describe('n-loading-bar', () => {
 
   it('should have start type', async () => {
     const Test = defineComponent({
-      setup () {
+      setup() {
         const loadingBar = useLoadingBar()
         loadingBar.start()
       },
-      render () {
+      render() {
         return null
       }
     })
@@ -34,14 +34,14 @@ describe('n-loading-bar', () => {
 
   it('should have finish type', async () => {
     const Test = defineComponent({
-      setup () {
+      setup() {
         const loadingBar = useLoadingBar()
         loadingBar.start()
         setTimeout(() => {
           loadingBar.finish()
         }, 0)
       },
-      render () {
+      render() {
         return null
       }
     })
@@ -57,11 +57,11 @@ describe('n-loading-bar', () => {
 
   it('should have error type', () => {
     const Test = defineComponent({
-      setup () {
+      setup() {
         const loadingBar = useLoadingBar()
         loadingBar.error()
       },
-      render () {
+      render() {
         return null
       }
     })
@@ -76,11 +76,11 @@ describe('n-loading-bar', () => {
 
   it('should have loadingBarStyle prop', async () => {
     const Test = defineComponent({
-      setup () {
+      setup() {
         const loadingBar = useLoadingBar()
         loadingBar.error()
       },
-      render () {
+      render() {
         return null
       }
     })

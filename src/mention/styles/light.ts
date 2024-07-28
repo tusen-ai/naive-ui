@@ -4,7 +4,7 @@ import { createTheme } from '../../_mixins'
 import { internalSelectMenuLight } from '../../_internal/select-menu/styles'
 import { inputLight } from '../../input/styles'
 
-const self = (vars: ThemeCommonVars) => {
+function self(vars: ThemeCommonVars) {
   const { boxShadow2 } = vars
   return {
     menuBoxShadow: boxShadow2

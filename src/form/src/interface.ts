@@ -1,9 +1,9 @@
 import type { Ref, VNodeChild } from 'vue'
 import type {
-  ValidateError,
   RuleItem,
-  ValidateOption,
-  ValidateMessages
+  ValidateError,
+  ValidateMessages,
+  ValidateOption
 } from 'async-validator'
 import type { FormSetupProps } from './Form'
 
@@ -16,7 +16,7 @@ type SetRule<T, R> = T extends (rule: any, ...args: infer K) => infer P
   : never
 
 export type FormItemRuleValidatorParams = Parameters<
-SetRule<NonNullable<RuleItem['validator']>, FormItemRule>
+  SetRule<NonNullable<RuleItem['validator']>, FormItemRule>
 >
 
 export type FormItemRuleValidator = (

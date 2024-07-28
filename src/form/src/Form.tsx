@@ -1,9 +1,9 @@
 import {
-  h,
-  defineComponent,
-  type PropType,
-  provide,
   type ExtractPropTypes,
+  type PropType,
+  defineComponent,
+  h,
+  provide,
   ref
 } from 'vue'
 import type { ValidateError } from 'async-validator'
@@ -11,20 +11,20 @@ import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { formLight } from '../styles'
 import type { FormTheme } from '../styles'
+import { type ExtractPublicPropTypes, keysOf } from '../../_utils'
 import style from './styles/form.cssr'
 import type {
-  ShouldRuleBeApplied,
+  FormInst,
   FormItemInst,
+  FormItemInternalValidateResult,
   FormRules,
   FormValidateCallback,
+  FormValidateMessages,
   LabelAlign,
   LabelPlacement,
-  FormInst,
-  Size,
-  FormValidateMessages,
-  FormItemInternalValidateResult
+  ShouldRuleBeApplied,
+  Size
 } from './interface'
-import { type ExtractPublicPropTypes, keysOf } from '../../_utils'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
 
 export const formProps = {
@@ -71,7 +71,7 @@ export type FormProps = ExtractPublicPropTypes<typeof formProps>
 export default defineComponent({
   name: 'Form',
   props: formProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     useTheme('Form', '-form', style, formLight, props, mergedClsPrefixRef)
     // from path to form-item
@@ -81,20 +81,20 @@ export default defineComponent({
     const deriveMaxChildLabelWidth = (currentWidth: number): void => {
       const currentMaxChildLabelWidth = maxChildLabelWidthRef.value
       if (
-        currentMaxChildLabelWidth === undefined ||
-        currentWidth >= currentMaxChildLabelWidth
+        currentMaxChildLabelWidth === undefined
+        || currentWidth >= currentMaxChildLabelWidth
       ) {
         maxChildLabelWidthRef.value = currentWidth
       }
     }
-    async function validate (
+    async function validate(
       validateCallback?: FormValidateCallback,
       shouldRuleBeApplied: ShouldRuleBeApplied = () => true
     ): Promise<{ warnings: ValidateError[][] | undefined }> {
       return await new Promise<{ warnings: ValidateError[][] | undefined }>(
         (resolve, reject) => {
           const formItemValidationPromises: Array<
-          Promise<FormItemInternalValidateResult>
+            Promise<FormItemInternalValidateResult>
           > = []
           for (const key of keysOf(formItems)) {
             const formItemInstances = formItems[key]
@@ -107,7 +107,7 @@ export default defineComponent({
             }
           }
           void Promise.all(formItemValidationPromises).then((results) => {
-            const formInvalid = results.some((result) => !result.valid)
+            const formInvalid = results.some(result => !result.valid)
             const errors: ValidateError[][] = []
             const warnings: ValidateError[][] = []
             results.forEach((result) => {
@@ -124,9 +124,9 @@ export default defineComponent({
               })
             }
             if (formInvalid) {
-              // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
               reject(errors.length ? errors : undefined)
-            } else {
+            }
+            else {
               resolve({
                 warnings: warnings.length ? warnings : undefined
               })
@@ -135,7 +135,7 @@ export default defineComponent({
         }
       )
     }
-    function restoreValidation (): void {
+    function restoreValidation(): void {
       for (const key of keysOf(formItems)) {
         const formItemInstances = formItems[key]
         for (const formItemInstance of formItemInstances) {
@@ -157,7 +157,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef
     })
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     return (
       <form
