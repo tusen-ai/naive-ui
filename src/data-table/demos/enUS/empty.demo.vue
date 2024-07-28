@@ -2,14 +2,10 @@
 # Empty
 </markdown>
 
-<template>
-  <n-data-table :columns="columns" :data="data" />
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
-const createColumns = () => {
+function createColumns() {
   return [
     {
       title: 'Name',
@@ -35,7 +31,7 @@ const createColumns = () => {
 }
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       data: ref([]),
       columns: createColumns()
@@ -43,3 +39,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-data-table :columns="columns" :data="data" />
+</template>

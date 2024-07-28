@@ -5,8 +5,8 @@ import type {
   MessageProviderSetupProps
 } from './MessageProvider'
 
-export const messageApiInjectionKey =
-  createInjectionKey<MessageApiInjection>('n-message-api')
+export const messageApiInjectionKey
+  = createInjectionKey<MessageApiInjection>('n-message-api')
 
 export const messageProviderInjectionKey = createInjectionKey<{
   props: MessageProviderSetupProps

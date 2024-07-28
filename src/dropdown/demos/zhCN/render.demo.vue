@@ -4,17 +4,11 @@
 你可以单纯的只是想渲染一些内容，和选项数据无关。此时你可以加入 `type='render'` 的选项。
 </markdown>
 
-<template>
-  <n-dropdown trigger="hover" :options="options" @select="handleSelect">
-    <n-button>2021年 第36周</n-button>
-  </n-dropdown>
-</template>
-
 <script lang="ts">
 import { defineComponent, h } from 'vue'
-import { useMessage, NAvatar, NText } from 'naive-ui'
+import { NAvatar, NText, useMessage } from 'naive-ui'
 
-function renderCustomHeader () {
+function renderCustomHeader() {
   return h(
     'div',
     {
@@ -41,7 +35,7 @@ function renderCustomHeader () {
 }
 
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     return {
       options: [
@@ -67,10 +61,16 @@ export default defineComponent({
           key: 'stmt3'
         }
       ],
-      handleSelect (key: string | number) {
+      handleSelect(key: string | number) {
         message.info(String(key))
       }
     }
   }
 })
 </script>
+
+<template>
+  <n-dropdown trigger="hover" :options="options" @select="handleSelect">
+    <n-button>2021年 第36周</n-button>
+  </n-dropdown>
+</template>

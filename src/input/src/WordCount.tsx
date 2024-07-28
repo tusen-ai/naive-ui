@@ -1,22 +1,21 @@
-import { defineComponent, inject, h, computed } from 'vue'
+import { computed, defineComponent, h, inject } from 'vue'
 import { resolveSlotWithProps } from '../../_utils'
 import { inputInjectionKey } from './interface'
 import { len } from './utils'
 
 export default defineComponent({
   name: 'InputWordCount',
-  setup (_, { slots }) {
+  setup(_, { slots }) {
     const {
       mergedValueRef,
       maxlengthRef,
       mergedClsPrefixRef,
       countGraphemesRef
-    } =
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      inject(inputInjectionKey)!
+    } = inject(inputInjectionKey)!
     const wordCountRef = computed(() => {
       const { value: mergedValue } = mergedValueRef
-      if (mergedValue === null || Array.isArray(mergedValue)) return 0
+      if (mergedValue === null || Array.isArray(mergedValue))
+        return 0
       return (countGraphemesRef.value || len)(mergedValue)
     })
     return () => {

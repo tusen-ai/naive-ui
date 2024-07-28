@@ -4,28 +4,11 @@
 在选中选项后清除内容或者选择后 Blur。
 </markdown>
 
-<template>
-  <n-space vertical>
-    <n-auto-complete
-      v-model:value="value"
-      :options="options"
-      clear-after-select
-      placeholder="选择后清空"
-    />
-    <n-auto-complete
-      v-model:value="value"
-      :options="options"
-      blur-after-select
-      placeholder="选择后 Blur"
-    />
-  </n-space>
-</template>
-
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const valueRef = ref('')
     return {
       value: valueRef,
@@ -43,3 +26,20 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space vertical>
+    <n-auto-complete
+      v-model:value="value"
+      :options="options"
+      clear-after-select
+      placeholder="选择后清空"
+    />
+    <n-auto-complete
+      v-model:value="value"
+      :options="options"
+      blur-after-select
+      placeholder="选择后 Blur"
+    />
+  </n-space>
+</template>

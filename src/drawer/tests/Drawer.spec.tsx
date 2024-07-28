@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/non-nullable-type-assertion-style */
 import { mount } from '@vue/test-utils'
 import { defineComponent, h, nextTick, ref } from 'vue'
 import { NButton } from '../../button'
@@ -12,16 +11,16 @@ import {
 // It seems due to special handling of transition in naive-ui, the drawer's DOM
 // won't disappear even if its `show` prop is false. No time to find out the
 // exact reason, so I create a util here.
-function expectDrawerExists (): void {
+function expectDrawerExists(): void {
   const drawer = document.querySelector('.n-drawer')
-  if (drawer !== null) return
+  if (drawer !== null)
+    return
   expect(
     (document.querySelector('.n-drawer') as HTMLElement).style.display
   ).toEqual('none')
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function mountDrawer ({
+function mountDrawer({
   drawerProps,
   drawerContentProps,
   hasOnUpdateShow,
@@ -34,12 +33,12 @@ function mountDrawer ({
 }) {
   return mount(
     defineComponent({
-      setup () {
+      setup() {
         return {
           show: ref(!!show)
         }
       },
-      render () {
+      render() {
         return [
           <NButton
             onClick={() => {
@@ -374,13 +373,11 @@ describe('n-drawer', () => {
     Object.defineProperty(
       HTMLElement.prototype,
       'offsetHeight',
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       originalOffsetHeight!
     )
     Object.defineProperty(
       HTMLElement.prototype,
       'offsetWidth',
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       originalOffsetWidth!
     )
   })

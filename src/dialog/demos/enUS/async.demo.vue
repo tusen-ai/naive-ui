@@ -4,24 +4,18 @@
 Dialog can be async.
 </markdown>
 
-<template>
-  <n-button @click="handleClick">
-    Success
-  </n-button>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useDialog } from 'naive-ui'
 
-const sleep = () => new Promise((resolve) => setTimeout(resolve, 1000))
+const sleep = () => new Promise(resolve => setTimeout(resolve, 1000))
 const countDown = (second: number) => `Count down ${second} second`
 
 export default defineComponent({
-  setup () {
+  setup() {
     const dialog = useDialog()
     return {
-      handleClick () {
+      handleClick() {
         const d = dialog.success({
           title: 'Async',
           content: 'Click and count down 3 second',
@@ -50,3 +44,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-button @click="handleClick">
+    Success
+  </n-button>
+</template>

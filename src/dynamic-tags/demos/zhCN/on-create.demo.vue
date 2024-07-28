@@ -4,15 +4,11 @@
 使用 `on-create` 属性控制创建标签的逻辑。
 </markdown>
 
-<template>
-  <n-dynamic-tags @create="handleCreate" />
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       handleCreate: (label: string) => {
         return (
@@ -27,3 +23,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-dynamic-tags @create="handleCreate" />
+</template>

@@ -16,7 +16,7 @@
 ```
 
 ```js
-import { defineComponent, ref, reactive, onMounted } from 'vue'
+import { defineComponent, onMounted, reactive, ref } from 'vue'
 
 const column1 = {
   title: 'column1',
@@ -51,20 +51,22 @@ const columns = [
   }
 ]
 
-const data = Array.apply(null, { length: 987 }).map((_, index) => {
-  return {
-    column1: index,
-    column2: (index % 2) + 1,
-    column3: 'a' + index
-  }
-})
+const data = Array(987)
+  .fill(null)
+  .map((_, index) => {
+    return {
+      column1: index,
+      column2: (index % 2) + 1,
+      column3: `a${index}`
+    }
+  })
 
-function query (page, pageSize = 10, order = 'ascend', filterValues = []) {
+function query(page, pageSize = 10, order = 'ascend', filterValues = []) {
   return new Promise((resolve) => {
-    const copiedData = data.map((v) => v)
+    const copiedData = data.map(v => v)
     const orderedData = order === 'descend' ? copiedData.reverse() : copiedData
     const filteredData = filterValues.length
-      ? orderedData.filter((row) => filterValues.includes(row.column2))
+      ? orderedData.filter(row => filterValues.includes(row.column2))
       : orderedData
     const pagedData = filteredData.slice((page - 1) * pageSize, page * pageSize)
     const total = filteredData.length
@@ -82,7 +84,7 @@ function query (page, pageSize = 10, order = 'ascend', filterValues = []) {
 }
 
 export default defineComponent({
-  setup () {
+  setup() {
     const dataRef = ref([])
     const loadingRef = ref(true)
     const columnsRef = ref(columns)
@@ -92,7 +94,7 @@ export default defineComponent({
       page: 1,
       pageCount: 1,
       pageSize: 10,
-      prefix ({ itemCount }) {
+      prefix({ itemCount }) {
         return `Total is ${itemCount}.`
       }
     })
@@ -118,10 +120,10 @@ export default defineComponent({
       column2: column2Reactive,
       pagination: paginationReactive,
       loading: loadingRef,
-      rowKey (rowData) {
+      rowKey(rowData) {
         return rowData.column1
       },
-      handleSorterChange (sorter) {
+      handleSorterChange(sorter) {
         if (!sorter || sorter.columnKey === 'column1') {
           if (!loadingRef.value) {
             loadingRef.value = true
@@ -140,7 +142,7 @@ export default defineComponent({
           }
         }
       },
-      handleFiltersChange (filters) {
+      handleFiltersChange(filters) {
         if (!loadingRef.value) {
           loadingRef.value = true
           const filterValues = filters.column2 || []
@@ -158,7 +160,7 @@ export default defineComponent({
           })
         }
       },
-      handlePageChange (currentPage) {
+      handlePageChange(currentPage) {
         if (!loadingRef.value) {
           loadingRef.value = true
           query(

@@ -2,6 +2,21 @@
 # 操作
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      ts1: ref(null),
+      ts2: ref(1183135260000),
+      range1: ref(null),
+      range2: ref(null)
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-date-picker v-model:value="ts1" type="date" :actions="['now']" />
@@ -20,18 +35,3 @@
     />
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      ts1: ref(null),
-      ts2: ref(1183135260000),
-      range1: ref(null),
-      range2: ref(null)
-    }
-  }
-})
-</script>

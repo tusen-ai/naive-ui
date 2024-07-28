@@ -4,7 +4,7 @@ import { createTheme } from '../../_mixins'
 const watermarkLight = createTheme({
   name: 'Watermark',
   common: commonLight,
-  self (vars) {
+  self(vars) {
     const { fontFamily } = vars
     return {
       fontFamily

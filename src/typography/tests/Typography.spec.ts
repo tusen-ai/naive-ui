@@ -2,18 +2,18 @@ import { h } from 'vue'
 import { mount } from '@vue/test-utils'
 import {
   NA,
-  NP,
-  NText,
+  NBlockquote,
   NH1,
   NH2,
-  NH6,
-  NH5,
-  NH4,
   NH3,
-  NUl,
-  NOl,
+  NH4,
+  NH5,
+  NH6,
   NLi,
-  NBlockquote
+  NOl,
+  NP,
+  NText,
+  NUl
 } from '../index'
 
 describe('n-a', () => {

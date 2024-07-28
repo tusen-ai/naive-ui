@@ -4,6 +4,18 @@
 在 `n-drawer-content` 设定 `closable`。
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      show: ref(false)
+    }
+  }
+})
+</script>
+
 <template>
   <n-button @click="show = true">
     打开
@@ -14,15 +26,3 @@
     </n-drawer-content>
   </n-drawer>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      show: ref(false)
-    }
-  }
-})
-</script>

@@ -14,7 +14,7 @@ const paginationDark: PaginationTheme = {
     Input: inputDark,
     Popselect: popselectDark
   },
-  self (vars) {
+  self(vars) {
     const { primaryColor, opacity3 } = vars
     const borderColorActive = changeColor(primaryColor, {
       alpha: Number(opacity3)

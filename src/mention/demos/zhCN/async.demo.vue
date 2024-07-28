@@ -4,29 +4,21 @@
 异步加载选项。
 </markdown>
 
-<template>
-  <n-mention
-    :options="options"
-    default-value="@"
-    :loading="loading"
-    @search="handleSearch"
-  />
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { MentionOption } from 'naive-ui'
+import type { MentionOption } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const optionsRef = ref<MentionOption[]>([])
     const loadingRef = ref(false)
     let searchTimerId: number | null = null
     return {
       options: optionsRef,
       loading: loadingRef,
-      handleSearch (pattern: string, prefix: string) {
-        if (searchTimerId !== null) clearTimeout(searchTimerId)
+      handleSearch(pattern: string, prefix: string) {
+        if (searchTimerId !== null)
+          clearTimeout(searchTimerId)
         console.log(pattern, prefix)
         loadingRef.value = true
         searchTimerId = window.setTimeout(() => {
@@ -35,7 +27,7 @@ export default defineComponent({
             '也烧不了你的口',
             '喝醉吧',
             '不要回头'
-          ].map((v) => ({
+          ].map(v => ({
             label: pattern + v,
             value: pattern + v
           }))
@@ -46,3 +38,12 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-mention
+    :options="options"
+    default-value="@"
+    :loading="loading"
+    @search="handleSearch"
+  />
+</template>

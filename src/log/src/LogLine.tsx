@@ -1,12 +1,12 @@
 import {
-  h,
+  computed,
   defineComponent,
+  h,
   inject,
-  ref,
   onMounted,
-  watch,
+  ref,
   toRef,
-  computed
+  watch
 } from 'vue'
 import { logInjectionKey } from './context'
 
@@ -17,15 +17,14 @@ export default defineComponent({
       default: ''
     }
   },
-  setup (props) {
-    const { trimRef, highlightRef, languageRef, mergedHljsRef } =
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      inject(logInjectionKey)!
+  setup(props) {
+    const { trimRef, highlightRef, languageRef, mergedHljsRef }
+      = inject(logInjectionKey)!
     const selfRef = ref<HTMLElement | null>(null)
     const maybeTrimmedLinesRef = computed(() => {
       return trimRef.value ? props.line.trim() : props.line
     })
-    function setInnerHTML (): void {
+    function setInnerHTML(): void {
       if (selfRef.value) {
         selfRef.value.innerHTML = generateCodeHTML(
           languageRef.value,
@@ -33,7 +32,7 @@ export default defineComponent({
         )
       }
     }
-    function generateCodeHTML (
+    function generateCodeHTML(
       language: string | undefined,
       code: string
     ): string {
@@ -61,7 +60,7 @@ export default defineComponent({
       maybeTrimmedLines: maybeTrimmedLinesRef
     }
   },
-  render () {
+  render() {
     const { highlight, maybeTrimmedLines } = this
     return <pre ref="selfRef">{highlight ? null : maybeTrimmedLines}</pre>
   }

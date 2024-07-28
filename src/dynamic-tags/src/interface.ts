@@ -7,11 +7,11 @@ export type OnUpdateValueImpl = (
 ) => void
 
 export type OnCreate = (label: string) =>
-| {
-  label: string
-  value: string
-}
-| string
+  | {
+    label: string
+    value: string
+  }
+  | string
 
 export interface DynamicTagsOption {
   label: string

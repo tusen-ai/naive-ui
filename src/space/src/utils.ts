@@ -2,8 +2,9 @@ import { isBrowser } from '../../_utils'
 
 let supportFlexGap: boolean | undefined
 
-export const ensureSupportFlexGap = (): boolean => {
-  if (!isBrowser) return true
+export function ensureSupportFlexGap(): boolean {
+  if (!isBrowser)
+    return true
   if (supportFlexGap === undefined) {
     // create flex container with row-gap set
     const flex = document.createElement('div')

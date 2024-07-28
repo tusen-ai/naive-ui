@@ -2,15 +2,11 @@
 # Autosize
 </markdown>
 
-<template>
-  <n-mention type="textarea" :options="options" autosize />
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       options: [
         {
@@ -34,3 +30,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-mention type="textarea" :options="options" autosize />
+</template>

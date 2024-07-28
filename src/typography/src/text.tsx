@@ -1,14 +1,14 @@
 import {
-  h,
-  defineComponent,
-  computed,
+  type CSSProperties,
   type PropType,
-  type CSSProperties
+  computed,
+  defineComponent,
+  h
 } from 'vue'
 import { useCompitable } from 'vooks'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { warn, createKey } from '../../_utils'
+import { createKey, warn } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { typographyLight } from '../styles'
 import type { TypographyTheme } from '../styles'
@@ -45,7 +45,7 @@ export type TextProps = ExtractPublicPropTypes<typeof textProps>
 export default defineComponent({
   name: 'Text',
   props: textProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Typography',
@@ -57,8 +57,8 @@ export default defineComponent({
     )
     const cssVarsRef = computed(() => {
       const { depth, type } = props
-      const textColorKey =
-        type === 'default'
+      const textColorKey
+        = type === 'default'
           ? depth === undefined
             ? 'textColor'
             : `textColor${depth}Depth`
@@ -100,7 +100,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     this.onRender?.()
     const textClass = [

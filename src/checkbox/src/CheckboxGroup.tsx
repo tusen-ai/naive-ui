@@ -1,23 +1,23 @@
 import {
-  h,
-  defineComponent,
-  provide,
-  type PropType,
-  computed,
-  toRef,
-  ref,
-  type Ref,
   type ComputedRef,
+  type PropType,
+  type Ref,
+  computed,
+  defineComponent,
+  h,
+  provide,
+  ref,
+  toRef,
   watchEffect
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { useConfig, useFormItem } from '../../_mixins'
 import {
-  call,
+  type ExtractPublicPropTypes,
   type MaybeArray,
+  call,
   createInjectionKey,
-  warnOnce,
-  type ExtractPublicPropTypes
+  warnOnce
 } from '../../_utils'
 
 export interface CheckboxGroupInjection {
@@ -30,8 +30,8 @@ export interface CheckboxGroupInjection {
   toggleCheckbox: (checked: boolean, checkboxValue: string | number) => void
 }
 
-export const checkboxGroupInjectionKey =
-  createInjectionKey<CheckboxGroupInjection>('n-checkbox-group')
+export const checkboxGroupInjectionKey
+  = createInjectionKey<CheckboxGroupInjection>('n-checkbox-group')
 
 export const checkboxGroupProps = {
   min: Number,
@@ -47,30 +47,30 @@ export const checkboxGroupProps = {
     default: undefined
   },
   'onUpdate:value': [Function, Array] as PropType<
-  MaybeArray<
-  (
-    value: Array<string | number>,
-    meta: {
-      actionType: 'check' | 'uncheck'
-      value: string | number
-    }
-  ) => void
-  >
+    MaybeArray<
+      (
+        value: Array<string | number>,
+        meta: {
+          actionType: 'check' | 'uncheck'
+          value: string | number
+        }
+      ) => void
+    >
   >,
   onUpdateValue: [Function, Array] as PropType<
-  MaybeArray<
-  (
-    value: Array<string | number>,
-    meta: {
-      actionType: 'check' | 'uncheck'
-      value: string | number
-    }
-  ) => void
-  >
+    MaybeArray<
+      (
+        value: Array<string | number>,
+        meta: {
+          actionType: 'check' | 'uncheck'
+          value: string | number
+        }
+      ) => void
+    >
   >,
   // deprecated
   onChange: [Function, Array] as PropType<
-  MaybeArray<(value: Array<string | number>) => void> | undefined
+    MaybeArray<(value: Array<string | number>) => void> | undefined
   >
 } as const
 
@@ -81,7 +81,7 @@ export type CheckboxGroupProps = ExtractPublicPropTypes<
 export default defineComponent({
   name: 'CheckboxGroup',
   props: checkboxGroupProps,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.onChange !== undefined) {
@@ -111,7 +111,7 @@ export default defineComponent({
       }
       return new Set()
     })
-    function toggleCheckbox (
+    function toggleCheckbox(
       checked: boolean,
       checkboxValue: string | number
     ): void {
@@ -124,7 +124,7 @@ export default defineComponent({
 
       if (Array.isArray(mergedValueRef.value)) {
         const groupValue = Array.from(mergedValueRef.value)
-        const index = groupValue.findIndex((value) => value === checkboxValue)
+        const index = groupValue.findIndex(value => value === checkboxValue)
         if (checked) {
           if (!~index) {
             groupValue.push(checkboxValue)
@@ -144,9 +144,11 @@ export default defineComponent({
             nTriggerFormChange()
             uncontrolledValueRef.value = groupValue
             // deprecated
-            if (onChange) call(onChange, groupValue)
+            if (onChange)
+              call(onChange, groupValue)
           }
-        } else {
+        }
+        else {
           if (~index) {
             groupValue.splice(index, 1)
             if (onUpdateValue) {
@@ -161,13 +163,15 @@ export default defineComponent({
                 value: checkboxValue
               })
             }
-            if (onChange) call(onChange, groupValue) // deprecated
+            if (onChange)
+              call(onChange, groupValue) // deprecated
             uncontrolledValueRef.value = groupValue
             nTriggerFormInput()
             nTriggerFormChange()
           }
         }
-      } else {
+      }
+      else {
         if (checked) {
           if (onUpdateValue) {
             call(onUpdateValue, [checkboxValue], {
@@ -181,11 +185,13 @@ export default defineComponent({
               value: checkboxValue
             })
           }
-          if (onChange) call(onChange, [checkboxValue]) // deprecated
+          if (onChange)
+            call(onChange, [checkboxValue]) // deprecated
           uncontrolledValueRef.value = [checkboxValue]
           nTriggerFormInput()
           nTriggerFormChange()
-        } else {
+        }
+        else {
           if (onUpdateValue) {
             call(onUpdateValue, [], {
               actionType: 'uncheck',
@@ -198,7 +204,8 @@ export default defineComponent({
               value: checkboxValue
             })
           }
-          if (onChange) call(onChange, []) // deprecated
+          if (onChange)
+            call(onChange, []) // deprecated
           uncontrolledValueRef.value = []
           nTriggerFormInput()
           nTriggerFormChange()
@@ -218,7 +225,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef
     }
   },
-  render () {
+  render() {
     return (
       <div class={`${this.mergedClsPrefix}-checkbox-group`} role="group">
         {this.$slots}

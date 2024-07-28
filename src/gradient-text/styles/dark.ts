@@ -4,7 +4,7 @@ import type { GradientTextTheme } from './light'
 const gradientTextDark: GradientTextTheme = {
   name: 'GradientText',
   common: commonDark,
-  self (vars) {
+  self(vars) {
     const {
       primaryColor,
       successColor,

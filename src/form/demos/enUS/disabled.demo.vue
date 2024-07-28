@@ -2,6 +2,102 @@
 # Disabled form
 </markdown>
 
+<script lang="ts">
+import { computed, defineComponent, ref } from 'vue'
+
+function genOptions(depth = 2, iterator = 1, prefix = ''): any {
+  const length = 12
+  const options = []
+  for (let i = 1; i <= length; ++i) {
+    if (iterator === 1) {
+      options.push({
+        value: `${i}`,
+        label: `${i}`,
+        disabled: i % 5 === 0,
+        children: genOptions(depth, iterator + 1, `${i}`)
+      })
+    }
+    else if (iterator === depth) {
+      options.push({
+        value: `${prefix}-${i}`,
+        label: `${prefix}-${i}`,
+        disabled: i % 5 === 0
+      })
+    }
+    else {
+      options.push({
+        value: `${prefix}-${i}`,
+        label: `${prefix}-${i}`,
+        disabled: i % 5 === 0,
+        children: genOptions(depth, iterator + 1, `${prefix}-${i}`)
+      })
+    }
+  }
+  return options
+}
+export default defineComponent({
+  setup() {
+    const formRef = ref(null)
+    const model = ref({
+      inputValue: null,
+      selectValue: null,
+      autoCompleteValue: '',
+      dynamicTagsValue: ['teacher', 'frontend'],
+      cascaderValue: null,
+      datetimeValue: null,
+      switchValue: false,
+      checkboxValue: false,
+      checkboxGroupValue: null,
+      radioValue: 'Definitely Maybe',
+      radioGroupValue: null,
+      radioButtonGroupValue: null,
+      inputNumberValue: null,
+      timePickerValue: null,
+      colorValue: null,
+      sliderValue: 0,
+      transferValue: null
+    })
+    return {
+      updateDisabled: ref(false),
+      formRef,
+      model,
+      generalOptions: ['groode', 'veli good', 'emazing', 'lidiculous'].map(
+        v => ({
+          label: v,
+          value: v
+        })
+      ),
+      options: genOptions(),
+      treeSelectOptions: [
+        {
+          label: 'Rubber Soul',
+          key: 'Rubber Soul',
+          children: [
+            {
+              label: 'Drive My Car',
+              key: 'Drive My Car'
+            },
+            {
+              label: 'Michelle',
+              key: 'Michelle'
+            }
+          ]
+        }
+      ],
+      autoCompleteOptions: computed(() => {
+        return ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {
+          const prefix = model.value.autoCompleteValue.split('@')[0]
+          return {
+            label: prefix + suffix,
+            value: prefix + suffix
+          }
+        })
+      })
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-switch v-model:value="updateDisabled" />
@@ -12,7 +108,7 @@
       :label-width="160"
       :disabled="updateDisabled"
       :style="{
-        maxWidth: '640px'
+        maxWidth: '640px',
       }"
     >
       <n-form-item label="Input" path="inputValue">
@@ -137,98 +233,3 @@
     </n-form>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, computed, ref } from 'vue'
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function genOptions (depth = 2, iterator = 1, prefix = ''): any {
-  const length = 12
-  const options = []
-  for (let i = 1; i <= length; ++i) {
-    if (iterator === 1) {
-      options.push({
-        value: `${i}`,
-        label: `${i}`,
-        disabled: i % 5 === 0,
-        children: genOptions(depth, iterator + 1, '' + i)
-      })
-    } else if (iterator === depth) {
-      options.push({
-        value: `${prefix}-${i}`,
-        label: `${prefix}-${i}`,
-        disabled: i % 5 === 0
-      })
-    } else {
-      options.push({
-        value: `${prefix}-${i}`,
-        label: `${prefix}-${i}`,
-        disabled: i % 5 === 0,
-        children: genOptions(depth, iterator + 1, `${prefix}-${i}`)
-      })
-    }
-  }
-  return options
-}
-export default defineComponent({
-  setup () {
-    const formRef = ref(null)
-    const model = ref({
-      inputValue: null,
-      selectValue: null,
-      autoCompleteValue: '',
-      dynamicTagsValue: ['teacher', 'frontend'],
-      cascaderValue: null,
-      datetimeValue: null,
-      switchValue: false,
-      checkboxValue: false,
-      checkboxGroupValue: null,
-      radioValue: 'Definitely Maybe',
-      radioGroupValue: null,
-      radioButtonGroupValue: null,
-      inputNumberValue: null,
-      timePickerValue: null,
-      colorValue: null,
-      sliderValue: 0,
-      transferValue: null
-    })
-    return {
-      updateDisabled: ref(false),
-      formRef,
-      model,
-      generalOptions: ['groode', 'veli good', 'emazing', 'lidiculous'].map(
-        (v) => ({
-          label: v,
-          value: v
-        })
-      ),
-      options: genOptions(),
-      treeSelectOptions: [
-        {
-          label: 'Rubber Soul',
-          key: 'Rubber Soul',
-          children: [
-            {
-              label: 'Drive My Car',
-              key: 'Drive My Car'
-            },
-            {
-              label: 'Michelle',
-              key: 'Michelle'
-            }
-          ]
-        }
-      ],
-      autoCompleteOptions: computed(() => {
-        return ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {
-          const prefix = model.value.autoCompleteValue.split('@')[0]
-          return {
-            label: prefix + suffix,
-            value: prefix + suffix
-          }
-        })
-      })
-    }
-  }
-})
-</script>

@@ -2,6 +2,18 @@
 # 范围
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      value: ref([50, 70])
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-slider v-model:value="value" range :step="1" />
@@ -11,15 +23,3 @@
     </n-space>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      value: ref([50, 70])
-    }
-  }
-})
-</script>

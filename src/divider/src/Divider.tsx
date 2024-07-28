@@ -1,10 +1,10 @@
 import {
-  h,
+  type CSSProperties,
+  Fragment,
+  type PropType,
   computed,
   defineComponent,
-  type CSSProperties,
-  type PropType,
-  Fragment
+  h
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -28,7 +28,7 @@ export type DividerProps = ExtractPublicPropTypes<typeof dividerProps>
 export default defineComponent({
   name: 'Divider',
   props: dividerProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Divider',
@@ -60,7 +60,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const {
       $slots,
       titlePlacement,

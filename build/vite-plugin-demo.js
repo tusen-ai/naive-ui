@@ -9,15 +9,15 @@ const vuePlugin = createVuePlugin({
   include: [/\.vue$/, /\.md$/]
 })
 
-const createDemoPlugin = () => {
+function createDemoPlugin() {
   const naiveDemoVitePlugin = {
     name: 'demo-vite',
-    transform (_, id) {
+    transform(_, id) {
       if (fileRegex.test(id)) {
         return getTransformedVueSrc(id)
       }
     },
-    async handleHotUpdate (ctx) {
+    async handleHotUpdate(ctx) {
       const { file } = ctx
       if (fileRegex.test(file)) {
         const code = await getTransformedVueSrc(file)

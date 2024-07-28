@@ -2,17 +2,11 @@
 # Spin Debug
 </markdown>
 
-<template>
-  <n-spin :show="false">
-    <n-select v-model:value="selectedValue" :options="options" clearable />
-  </n-spin>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       selectedValue: ref('song1'),
       options: [
@@ -25,7 +19,7 @@ export default defineComponent({
           value: 'song2'
         },
         {
-          label: "You Won't See",
+          label: 'You Won\'t See',
           value: 'song3'
         },
         {
@@ -53,7 +47,7 @@ export default defineComponent({
           value: 'song9'
         },
         {
-          label: "I'm looking through you",
+          label: 'I\'m looking through you',
           value: 'song10'
         },
         {
@@ -69,3 +63,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-spin :show="false">
+    <n-select v-model:value="selectedValue" :options="options" clearable />
+  </n-spin>
+</template>

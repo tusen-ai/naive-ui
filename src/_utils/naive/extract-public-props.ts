@@ -1,5 +1,5 @@
-import { type ExtractPropTypes } from 'vue'
-import { type useTheme } from '../../_mixins'
+import type { ExtractPropTypes } from 'vue'
+import type { useTheme } from '../../_mixins'
 
 type themePropKeys = keyof typeof useTheme.props
 
@@ -8,9 +8,9 @@ type RemoveReadonly<T> = {
 }
 
 export type ExtractPublicPropTypes<T> = Omit<
-Partial<RemoveReadonly<ExtractPropTypes<T>>>,
-| Exclude<themePropKeys, 'themeOverrides'>
-| Extract<keyof T, `internal${string}`>
+  Partial<RemoveReadonly<ExtractPropTypes<T>>>,
+  | Exclude<themePropKeys, 'themeOverrides'>
+  | Extract<keyof T, `internal${string}`>
 >
 
 export type ExtractInternalPropTypes<T> = Partial<ExtractPropTypes<T>>
