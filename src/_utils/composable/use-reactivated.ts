@@ -1,6 +1,6 @@
 import { onActivated, onDeactivated } from 'vue'
 
-export function useReactivated (callback: () => void): {
+export function useReactivated(callback: () => void): {
   isDeactivated: boolean
 } {
   const isDeactivatedRef = { isDeactivated: false }

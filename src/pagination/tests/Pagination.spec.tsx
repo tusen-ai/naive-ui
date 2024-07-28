@@ -2,8 +2,8 @@ import { h } from 'vue'
 import { mount } from '@vue/test-utils'
 import {
   NPagination,
-  type PaginationRenderLabel,
-  type PaginationInfo
+  type PaginationInfo,
+  type PaginationRenderLabel
 } from '../index'
 
 describe('n-pagination', () => {
@@ -80,15 +80,17 @@ describe('n-pagination', () => {
     wrapper.unmount()
   })
   it('page-sizes should has correct type', () => {
-    ;<NPagination
-      pageSizes={[
-        10,
-        {
-          label: '20',
-          value: 20
-        }
-      ]}
-    />
+    ;(() => (
+      <NPagination
+        pageSizes={[
+          10,
+          {
+            label: '20',
+            value: 20
+          }
+        ]}
+      />
+    ))()
   })
   it('has currect default page size', () => {
     const wrapper = mount(() => (
@@ -102,7 +104,8 @@ describe('n-pagination', () => {
 })
 it('should work with label slot', async () => {
   const labelSlot: PaginationRenderLabel = (props) => {
-    if (props.type === 'page') return `(${props.node})`
+    if (props.type === 'page')
+      return `(${props.node})`
     return props.node
   }
   const wrapper = mount(NPagination, {

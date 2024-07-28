@@ -1,7 +1,7 @@
-import { type CNode } from 'css-render'
+import type { CNode } from 'css-render'
 import { map } from 'lodash-es'
-import { type FollowerPlacement } from 'vueuc'
-import { c, cB, cM, cNotM, cE, cCB } from '../../../_utils/cssr'
+import type { FollowerPlacement } from 'vueuc'
+import { c, cB, cCB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 const oppositePlacement = {
   top: 'bottom',
@@ -177,7 +177,7 @@ export default c([
     (placements, direction): CNode[] => {
       const isVertical = ['right', 'left'].includes(direction)
       const sizeType = isVertical ? 'width' : 'height'
-      return placements.map(placement => {
+      return placements.map((placement) => {
         const isReverse = placement.split('-')[1] === 'end'
         const targetSize = `var(--v-target-${sizeType}, 0px)`
         const centerOffset = `calc((${targetSize} - ${arrowSize}) / 2)`
@@ -199,13 +199,13 @@ export default c([
   )
 ])
 
-function getArrowOffset (placement: FollowerPlacement): string {
+function getArrowOffset(placement: FollowerPlacement): string {
   return ['top', 'bottom'].includes(placement.split('-')[0])
     ? 'var(--n-arrow-offset)'
     : 'var(--n-arrow-offset-vertical)'
 }
 
-function placementStyle (
+function placementStyle(
   placement: FollowerPlacement,
   arrowStyleLiteral: string
 ): CNode {

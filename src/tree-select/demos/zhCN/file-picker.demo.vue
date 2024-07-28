@@ -4,20 +4,12 @@
 利用 `override-default-node-click-behavior` 属性模拟仅允许选中文件、而不允许选中文件夹的行为。
 </markdown>
 
-<template>
-  <n-tree-select
-    block-line
-    :options="options"
-    :override-default-node-click-behavior="override"
-  />
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { TreeSelectOverrideNodeClickBehavior } from 'naive-ui'
+import type { TreeSelectOverrideNodeClickBehavior } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const override: TreeSelectOverrideNodeClickBehavior = ({ option }) => {
       if (option.children) {
         return 'toggleExpand'
@@ -70,3 +62,11 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-tree-select
+    block-line
+    :options="options"
+    :override-default-node-click-behavior="override"
+  />
+</template>

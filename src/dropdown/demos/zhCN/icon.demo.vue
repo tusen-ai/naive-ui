@@ -2,23 +2,17 @@
 # 图标
 </markdown>
 
-<template>
-  <n-dropdown :options="options">
-    <n-button>用户资料</n-button>
-  </n-dropdown>
-</template>
-
 <script lang="ts">
-import { h, defineComponent } from 'vue'
+import { defineComponent, h } from 'vue'
 import type { Component } from 'vue'
 import { NIcon } from 'naive-ui'
 import {
-  PersonCircleOutline as UserIcon,
   Pencil as EditIcon,
-  LogOutOutline as LogoutIcon
+  LogOutOutline as LogoutIcon,
+  PersonCircleOutline as UserIcon
 } from '@vicons/ionicons5'
 
-const renderIcon = (icon: Component) => {
+function renderIcon(icon: Component) {
   return () => {
     return h(NIcon, null, {
       default: () => h(icon)
@@ -27,7 +21,7 @@ const renderIcon = (icon: Component) => {
 }
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       options: [
         {
@@ -50,3 +44,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-dropdown :options="options">
+    <n-button>用户资料</n-button>
+  </n-dropdown>
+</template>

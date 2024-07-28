@@ -4,21 +4,18 @@
 Usually you can use vue-router here to accomplish routing. You can render `label` as `<router-link />` to set route.
 </markdown>
 
-<template>
-  <n-menu :options="menuOptions" />
-</template>
-
 <script lang="ts">
-import { defineComponent, h, Component } from 'vue'
+import type { Component } from 'vue'
+import { defineComponent, h } from 'vue'
 import { NIcon } from 'naive-ui'
 import type { MenuOption } from 'naive-ui'
 import { RouterLink } from 'vue-router'
 import {
-  LaptopOutline as WorkIcon,
-  LogOutOutline as HomeIcon
+  LogOutOutline as HomeIcon,
+  LaptopOutline as WorkIcon
 } from '@vicons/ionicons5'
 
-function renderIcon (icon: Component) {
+function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -57,10 +54,14 @@ const menuOptions: MenuOption[] = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       menuOptions
     }
   }
 })
 </script>
+
+<template>
+  <n-menu :options="menuOptions" />
+</template>

@@ -4,21 +4,15 @@
 Auto close.
 </markdown>
 
-<template>
-  <n-button @click="handleClick">
-    Duration: 10000
-  </n-button>
-</template>
-
 <script lang="ts">
 import { useNotification } from 'naive-ui'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const notification = useNotification()
     return {
-      handleClick () {
+      handleClick() {
         let count = 10
         const n = notification.create({
           title: 'What is Pingshan Road + rain ?',
@@ -48,3 +42,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-button @click="handleClick">
+    Duration: 10000
+  </n-button>
+</template>

@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/consistent-type-assertions */
 import {
-  inject,
-  computed,
-  onBeforeMount,
   type ComputedRef,
+  type PropType,
   type Ref,
-  type PropType
+  computed,
+  inject,
+  onBeforeMount
 } from 'vue'
 import { merge } from 'lodash-es'
 import type { CNode } from 'css-render'
@@ -60,9 +59,9 @@ export type ExtractMergedPeerOverrides<T> =
     : T
 
 export type ExtractThemeOverrides<T> = Partial<ExtractThemeVars<T>> &
-ExtractPeerOverrides<T> & { common?: Partial<ThemeCommonVars> }
+  ExtractPeerOverrides<T> & { common?: Partial<ThemeCommonVars> }
 
-export function createTheme<N extends string, T, R> (
+export function createTheme<N extends string, T, R>(
   theme: Theme<N, T, R>
 ): Theme<N, T, R> {
   return theme
@@ -84,7 +83,7 @@ export type MergedTheme<T> =
       }
     : T
 
-function useTheme<N, T, R> (
+function useTheme<N, T, R>(
   resolveId: Exclude<keyof GlobalTheme, 'common' | 'name'>,
   mountId: string,
   style: CNode | undefined,
@@ -104,20 +103,23 @@ function useTheme<N, T, R> (
           bPrefix: clsPrefix ? `.${clsPrefix}-` : undefined
         },
         anchorMetaName: cssrAnchorMetaName,
-        ssr: ssrAdapter
+        ssr: ssrAdapter,
+        parent: NConfigProvider?.styleMountTarget
       })
       if (!NConfigProvider?.preflightStyleDisabled) {
         globalStyle.mount({
           id: 'n-global',
           head: true,
           anchorMetaName: cssrAnchorMetaName,
-          ssr: ssrAdapter
+          ssr: ssrAdapter,
+          parent: NConfigProvider?.styleMountTarget
         })
       }
     }
     if (ssrAdapter) {
       mountStyle()
-    } else {
+    }
+    else {
       onBeforeMount(mountStyle)
     }
   }
@@ -126,10 +128,10 @@ function useTheme<N, T, R> (
     const {
       theme: { common: selfCommon, self, peers = {} } = {},
       themeOverrides: selfOverrides = {} as ExtractThemeOverrides<
-      Theme<N, T, R>
+        Theme<N, T, R>
       >,
       builtinThemeOverrides: builtinOverrides = {} as ExtractThemeOverrides<
-      Theme<N, T, R>
+        Theme<N, T, R>
       >
     } = props
     const { common: selfCommonOverrides, peers: peersOverrides } = selfOverrides

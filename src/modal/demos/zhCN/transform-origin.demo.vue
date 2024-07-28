@@ -4,6 +4,18 @@
 虽然从鼠标位置出现的动画看起来很酷，但是我们有时也想要一些朴实无华的从屏幕中间弹出来的动画。这时你可以将 `transform-origin` 设为 `'center'`。
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      showModal: ref(false)
+    }
+  }
+})
+</script>
+
 <template>
   <n-button @click="showModal = true">
     没什么的
@@ -27,15 +39,3 @@
     </n-card>
   </n-modal>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      showModal: ref(false)
-    }
-  }
-})
-</script>

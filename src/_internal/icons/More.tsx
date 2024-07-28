@@ -1,8 +1,8 @@
-import { h, defineComponent } from 'vue'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   name: 'More',
-  render () {
+  render() {
     return (
       <svg viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

@@ -4,20 +4,11 @@
 你可以根据输入的值来决定是否显示菜单
 </markdown>
 
-<template>
-  <n-auto-complete
-    v-model:value="value"
-    :options="options"
-    placeholder="输入 a 显示菜单"
-    :get-show="getShow"
-  />
-</template>
-
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const valueRef = ref('')
     return {
       value: valueRef,
@@ -40,3 +31,12 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-auto-complete
+    v-model:value="value"
+    :options="options"
+    placeholder="输入 a 显示菜单"
+    :get-show="getShow"
+  />
+</template>

@@ -4,13 +4,27 @@
 You can specify target to listen scroll event of.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const scrollContainerRef = ref<HTMLElement | undefined>(undefined)
+    return {
+      scrollContainer: scrollContainerRef,
+      target: () => scrollContainerRef.value
+    }
+  }
+})
+</script>
+
 <template>
   <n-back-top
     :listen-to="target"
     :bottom="220"
     :visibility-height="10"
     :style="{
-      transition: 'all .3s cubic-bezier(.4, 0, .2, 1)'
+      transition: 'all .3s cubic-bezier(.4, 0, .2, 1)',
     }"
   >
     <div
@@ -38,17 +52,3 @@ You can specify target to listen scroll event of.
     A funny joke is need to be wrote here.<br>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const scrollContainerRef = ref<HTMLElement | undefined>(undefined)
-    return {
-      scrollContainer: scrollContainerRef,
-      target: () => scrollContainerRef.value
-    }
-  }
-})
-</script>

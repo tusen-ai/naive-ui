@@ -7,8 +7,8 @@ import type {
   NotificationApi,
   NotificationProviderProps
 } from '../../notification'
-import { type ModalProviderProps } from '../../modal/src/ModalProvider'
-import { type ModalApi } from '../../modal'
+import type { ModalProviderProps } from '../../modal/src/ModalProvider'
+import type { ModalApi } from '../../modal'
 
 export type MaybeRef<T> = Ref<T> | T
 
@@ -35,8 +35,8 @@ export type DiscreteApi<T extends DiscreteApiType = DiscreteApiType> = {
 ('notification' extends T
   ? { notification: NotificationApi }
   : Record<string, unknown>) &
-('dialog' extends T ? { dialog: DialogApi } : Record<string, unknown>) &
-('loadingBar' extends T
-  ? { loadingBar: LoadingBarApi }
-  : Record<string, unknown>) &
-('modal' extends T ? { modal: ModalApi } : Record<string, unknown>)
+  ('dialog' extends T ? { dialog: DialogApi } : Record<string, unknown>) &
+  ('loadingBar' extends T
+    ? { loadingBar: LoadingBarApi }
+    : Record<string, unknown>) &
+    ('modal' extends T ? { modal: ModalApi } : Record<string, unknown>)

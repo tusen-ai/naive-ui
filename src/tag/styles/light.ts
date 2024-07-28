@@ -1,10 +1,10 @@
-import commonVariables from './_common'
 import { changeColor } from 'seemly'
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import type { Theme } from '../../_mixins'
+import commonVariables from './_common'
 
-const self = (vars: ThemeCommonVars) => {
+function self(vars: ThemeCommonVars) {
   const {
     textColor2,
     primaryColorHover,

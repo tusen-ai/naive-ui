@@ -13,7 +13,7 @@ interface FadeDownTransitionOptions {
   leaveCubicBezier?: string
 }
 
-export function fadeDownTransition ({
+export function fadeDownTransition({
   name = 'fade-down',
   fromOffset = '-4px',
   enterDuration = '.3s',

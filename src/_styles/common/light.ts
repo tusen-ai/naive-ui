@@ -1,4 +1,4 @@
-import { rgba, composite, scaleColor } from 'seemly'
+import { composite, rgba, scaleColor } from 'seemly'
 import commonVariables from './_common'
 
 const base = {
@@ -70,12 +70,11 @@ const base = {
 
 const baseBackgroundRgb = rgba(base.neutralBase)
 const baseInvertBackgroundRgb = rgba(base.neutralInvertBase)
-const overlayPrefix =
-  'rgba(' + baseInvertBackgroundRgb.slice(0, 3).join(', ') + ', '
-function overlay (alpha: string | number) {
-  return overlayPrefix + String(alpha) + ')'
+const overlayPrefix = `rgba(${baseInvertBackgroundRgb.slice(0, 3).join(', ')}, `
+function overlay(alpha: string | number) {
+  return `${overlayPrefix + String(alpha)})`
 }
-function neutral (alpha: string | number) {
+function neutral(alpha: string | number) {
   const overlayRgba = Array.from(baseInvertBackgroundRgb)
   overlayRgba[3] = Number(alpha)
   return composite(

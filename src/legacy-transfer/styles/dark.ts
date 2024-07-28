@@ -1,10 +1,10 @@
-import commonVariables from './_common'
 import { checkboxDark } from '../../checkbox/styles'
 import { scrollbarDark } from '../../_internal/scrollbar/styles'
 import { inputDark } from '../../input/styles'
 import { commonDark } from '../../_styles/common'
 import { emptyDark } from '../../empty/styles'
 import { buttonDark } from '../../button/styles'
+import commonVariables from './_common'
 import type { TransferTheme } from './light'
 
 const transferDark: TransferTheme = {
@@ -17,7 +17,7 @@ const transferDark: TransferTheme = {
     Empty: emptyDark,
     Button: buttonDark
   },
-  self (vars) {
+  self(vars) {
     const {
       iconColorDisabled,
       iconColor,

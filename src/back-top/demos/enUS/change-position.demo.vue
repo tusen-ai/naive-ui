@@ -9,7 +9,7 @@ For example: right 40px & bottom 160px.
     :right="40"
     :bottom="160"
     :style="{
-      transition: 'all .3s cubic-bezier(.4, 0, .2, 1)'
+      transition: 'all .3s cubic-bezier(.4, 0, .2, 1)',
     }"
   >
     <div

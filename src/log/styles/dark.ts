@@ -10,7 +10,7 @@ const logDark: LogTheme = {
     Scrollbar: scrollbarDark,
     Code: codeDark
   },
-  self (vars) {
+  self(vars) {
     const { textColor2, inputColor, fontSize, primaryColor } = vars
     return {
       loaderFontSize: fontSize,

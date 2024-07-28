@@ -1,18 +1,18 @@
 import {
-  h,
-  computed,
-  inject,
-  defineComponent,
   type PropType,
   Transition,
-  type VNode
+  type VNode,
+  computed,
+  defineComponent,
+  h,
+  inject
 } from 'vue'
 import { useMemo } from 'vooks'
-import { NCheckbox } from '../../checkbox'
-import { NBaseLoading, NBaseIcon } from '../../_internal'
-import { ChevronRightIcon, CheckmarkIcon } from '../../_internal/icons'
-import { cascaderInjectionKey, type TmNode } from './interface'
 import { happensIn } from 'seemly'
+import { NCheckbox } from '../../checkbox'
+import { NBaseIcon, NBaseLoading } from '../../_internal'
+import { CheckmarkIcon, ChevronRightIcon } from '../../_internal/icons'
+import { type TmNode, cascaderInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'NCascaderOption',
@@ -22,7 +22,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
+  setup(props) {
     const {
       expandTriggerRef,
       remoteRef,
@@ -50,7 +50,6 @@ export default defineComponent({
       doCheck,
       doUncheck,
       renderLabelRef
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(cascaderInjectionKey)!
     const valueRef = computed(() => props.tmNode.key)
     const useHoverTriggerRef = computed(() => {
@@ -72,11 +71,13 @@ export default defineComponent({
     })
     const checkedRef = useMemo(() => {
       const { value: multiple } = multipleRef
-      if (!multiple) return mergedValueRef.value === valueRef.value
+      if (!multiple)
+        return mergedValueRef.value === valueRef.value
       return checkedKeysRef.value.includes(valueRef.value)
     })
     const indeterminateRef = useMemo(() => {
-      if (!multipleRef.value) return false
+      if (!multipleRef.value)
+        return false
       return indeterminateKeysRef.value.includes(valueRef.value)
     })
     const hoverPendingRef = useMemo(() => {
@@ -84,7 +85,8 @@ export default defineComponent({
     })
     const keyboardPendingRef = useMemo(() => {
       const { value: keyboardKey } = keyboardKeyRef
-      if (keyboardKey === null) return false
+      if (keyboardKey === null)
+        return false
       return keyboardKey === valueRef.value
     })
     const isLoadingRef = useMemo(() => {
@@ -101,8 +103,9 @@ export default defineComponent({
     const isShallowLoadedRef = computed(() => {
       return props.tmNode.shallowLoaded
     })
-    function handleClick (e: MouseEvent): void {
-      if (disabledRef.value) return
+    function handleClick(e: MouseEvent): void {
+      if (disabledRef.value)
+        return
       const { value: remote } = remoteRef
       const { value: loadingKeySet } = loadingKeySetRef
       const { value: onLoad } = onLoadRef
@@ -127,30 +130,35 @@ export default defineComponent({
         toggleCheckbox()
       }
     }
-    function handleMouseEnter (): void {
-      if (!useHoverTriggerRef.value || disabledRef.value) return
+    function handleMouseEnter(): void {
+      if (!useHoverTriggerRef.value || disabledRef.value)
+        return
       const { value } = valueRef
       updateHoverKey(value)
       updateKeyboardKey(value)
     }
-    function handleMouseMove (): void {
-      if (!useHoverTriggerRef.value) return
+    function handleMouseMove(): void {
+      if (!useHoverTriggerRef.value)
+        return
       handleMouseEnter()
     }
-    function handleCheckboxUpdateValue (): void {
+    function handleCheckboxUpdateValue(): void {
       const { value: isLeaf } = isLeafRef
-      if (!isLeaf) toggleCheckbox()
+      if (!isLeaf)
+        toggleCheckbox()
     }
-    function toggleCheckbox (): void {
+    function toggleCheckbox(): void {
       const { value: multiple } = multipleRef
       const { value } = valueRef
       if (multiple) {
         if (indeterminateRef.value || checkedRef.value) {
           doUncheck(value)
-        } else {
+        }
+        else {
           doCheck(value)
         }
-      } else {
+      }
+      else {
         doCheck(value)
         closeMenu(true)
       }
@@ -179,7 +187,7 @@ export default defineComponent({
       renderSuffix: renderSuffixRef
     }
   },
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       showCheckbox,
@@ -239,21 +247,21 @@ export default defineComponent({
               )
             }}
           </NBaseLoading>
-        ) : this.checkStrategy === 'child' &&
-          !(this.multiple && this.cascade) ? (
-          <Transition name="fade-in-scale-up-transition">
-            {{
-              default: () =>
-                this.checked ? (
-                  <NBaseIcon
-                    clsPrefix={mergedClsPrefix}
-                    class={`${mergedClsPrefix}-cascader-option-icon ${mergedClsPrefix}-cascader-option-icon--checkmark`}
-                  >
-                    {{ default: () => <CheckmarkIcon /> }}
-                  </NBaseIcon>
-                ) : null
-            }}
-          </Transition>
+        ) : this.checkStrategy === 'child'
+        && !(this.multiple && this.cascade) ? (
+              <Transition name="fade-in-scale-up-transition">
+                {{
+                  default: () =>
+                    this.checked ? (
+                      <NBaseIcon
+                        clsPrefix={mergedClsPrefix}
+                        class={`${mergedClsPrefix}-cascader-option-icon ${mergedClsPrefix}-cascader-option-icon--checkmark`}
+                      >
+                        {{ default: () => <CheckmarkIcon /> }}
+                      </NBaseIcon>
+                    ) : null
+                }}
+              </Transition>
             ) : null}
       </div>
     )
@@ -272,9 +280,9 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-cascader-option`,
-          this.keyboardPending ||
-            (this.hoverPending &&
-              `${mergedClsPrefix}-cascader-option--pending`),
+          this.keyboardPending
+          || (this.hoverPending
+          && `${mergedClsPrefix}-cascader-option--pending`),
           this.disabled && `${mergedClsPrefix}-cascader-option--disabled`,
           this.showCheckbox && `${mergedClsPrefix}-cascader-option--show-prefix`
         ]}

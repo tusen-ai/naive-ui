@@ -1,4 +1,4 @@
-import { c, cM, cB, cE, cNotM } from '../../../_utils/cssr'
+import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
@@ -435,7 +435,6 @@ export default cB('tabs', `
     cM('card-type', [
       cE('prefix, suffix', `
         transition: border-color .3s var(--n-bezier);
-        border-bottom: 1px solid var(--n-tab-border-color);
       `),
       cB('tabs-pad', `
         flex-grow: 1;
@@ -460,6 +459,7 @@ export default cB('tabs', `
           padding-left: 8px;
           padding-right: 8px;
           font-size: 16px;
+          justify-content: center;
         `, [
           cE('height-placeholder', `
             width: 0;
@@ -479,24 +479,31 @@ export default cB('tabs', `
         `),
         cM('disabled', 'color: var(--n-tab-text-color-disabled);')
       ]),
-      cB('tabs-scroll-padding', 'border-bottom: 1px solid var(--n-tab-border-color);')
     ]),
-    cM('left, right', [
+    cM('left, right', `
+      flex-direction: column;  
+    `, [
+      cE('prefix, suffix', `
+        padding: var(--n-tab-padding-vertical);
+      `),
       cB('tabs-wrapper', `
         flex-direction: column;
+      `),
+      cB('tabs-tab-wrapper', `
+        flex-direction: column;
       `, [
-        cB('tabs-tab-wrapper', `
-          flex-direction: column;
-        `, [
-          cB('tabs-tab-pad', `
-            height: var(--n-tab-gap-vertical);
-            width: 100%;
-          `)
-        ])
+        cB('tabs-tab-pad', `
+          height: var(--n-tab-gap-vertical);
+          width: 100%;
+        `)
       ])
     ]),
     cM('top', [
       cM('card-type', [
+        cB('tabs-scroll-padding', 'border-bottom: 1px solid var(--n-tab-border-color);'),
+        cE('prefix, suffix', `
+          border-bottom: 1px solid var(--n-tab-border-color);
+        `),
         cB('tabs-tab', `
           border-top-left-radius: var(--n-tab-border-radius);
           border-top-right-radius: var(--n-tab-border-radius);
@@ -515,6 +522,10 @@ export default cB('tabs', `
     ]),
     cM('left', [
       cM('card-type', [
+        cB('tabs-scroll-padding', 'border-right: 1px solid var(--n-tab-border-color);'),
+        cE('prefix, suffix', `
+          border-right: 1px solid var(--n-tab-border-color);
+        `),
         cB('tabs-tab', `
           border-top-left-radius: var(--n-tab-border-radius);
           border-bottom-left-radius: var(--n-tab-border-radius);
@@ -533,6 +544,10 @@ export default cB('tabs', `
     ]),
     cM('right', [
       cM('card-type', [
+        cB('tabs-scroll-padding', 'border-left: 1px solid var(--n-tab-border-color);'),
+        cE('prefix, suffix', `
+          border-left: 1px solid var(--n-tab-border-color);
+        `),
         cB('tabs-tab', `
           border-top-right-radius: var(--n-tab-border-radius);
           border-bottom-right-radius: var(--n-tab-border-radius);
@@ -551,6 +566,10 @@ export default cB('tabs', `
     ]),
     cM('bottom', [
       cM('card-type', [
+        cB('tabs-scroll-padding', 'border-top: 1px solid var(--n-tab-border-color);'),
+        cE('prefix, suffix', `
+          border-top: 1px solid var(--n-tab-border-color);
+        `),
         cB('tabs-tab', `
           border-bottom-left-radius: var(--n-tab-border-radius);
           border-bottom-right-radius: var(--n-tab-border-radius);

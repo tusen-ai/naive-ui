@@ -1,4 +1,4 @@
-import { h, defineComponent, inject, type PropType } from 'vue'
+import { type PropType, defineComponent, h, inject } from 'vue'
 import { NCheckbox } from '../../checkbox'
 import { treeInjectionKey } from './interface'
 
@@ -20,16 +20,15 @@ export default defineComponent({
     indeterminate: Boolean,
     onCheck: Function as PropType<(value: boolean) => void>
   },
-  setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  setup(props) {
     const NTree = inject(treeInjectionKey)!
-    function doCheck (value: boolean): void {
+    function doCheck(value: boolean): void {
       const { onCheck } = props
       if (onCheck) {
         onCheck(value)
       }
     }
-    function handleUpdateValue (value: boolean): void {
+    function handleUpdateValue(value: boolean): void {
       doCheck(value)
     }
     return {
@@ -37,7 +36,7 @@ export default defineComponent({
       mergedTheme: NTree.mergedThemeRef
     }
   },
-  render () {
+  render() {
     const {
       clsPrefix,
       mergedTheme,

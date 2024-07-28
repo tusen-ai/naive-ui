@@ -1,8 +1,8 @@
 import { computed, defineComponent, h, provide, toRef } from 'vue'
-import type { PropType, CSSProperties, Ref } from 'vue'
-import { useConfig, useTheme, useThemeClass, useRtl } from '../../_mixins'
+import type { CSSProperties, PropType, Ref } from 'vue'
+import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createInjectionKey, type ExtractPublicPropTypes } from '../../_utils'
+import { type ExtractPublicPropTypes, createInjectionKey } from '../../_utils'
 import { listLight } from '../styles'
 import type { ListTheme } from '../styles'
 import style from './styles/index.cssr'
@@ -34,9 +34,9 @@ export const listInjectionKey = createInjectionKey<ListInjection>('n-list')
 export default defineComponent({
   name: 'List',
   props: listProps,
-  setup (props) {
-    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
-      useConfig(props)
+  setup(props) {
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
+      = useConfig(props)
     const rtlEnabledRef = useRtl('List', mergedRtlRef, mergedClsPrefixRef)
     const themeRef = useTheme(
       'List',
@@ -96,7 +96,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { $slots, mergedClsPrefix, onRender } = this
     onRender?.()
     return (

@@ -1,12 +1,10 @@
 import {
-  h,
-  defineComponent,
-  computed,
   type PropType,
-  inject,
-  type VNodeChild
+  type VNodeChild,
+  computed,
+  defineComponent,
+  h
 } from 'vue'
-import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { NBaseIcon } from '../../_internal/icon'
 import { EmptyIcon } from '../../_internal/icons'
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
@@ -29,7 +27,7 @@ export const emptyProps = {
     default: true
   },
   size: {
-    type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
+    type: String as PropType<'tiny' | 'small' | 'medium' | 'large' | 'huge'>,
     default: 'medium'
   },
   renderIcon: Function as PropType<() => VNodeChild>
@@ -40,8 +38,9 @@ export type EmptyProps = ExtractPublicPropTypes<typeof emptyProps>
 export default defineComponent({
   name: 'Empty',
   props: emptyProps,
-  setup (props) {
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+  setup(props) {
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedComponentPropsRef }
+      = useConfig(props)
     const themeRef = useTheme(
       'Empty',
       '-empty',
@@ -51,17 +50,15 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const { localeRef } = useLocale('Empty')
-    const NConfigProvider = inject(configProviderInjectionKey, null)
     const mergedDescriptionRef = computed(() => {
       return (
-        props.description ??
-        NConfigProvider?.mergedComponentPropsRef.value?.Empty?.description
+        props.description ?? mergedComponentPropsRef?.value?.Empty?.description
       )
     })
     const mergedRenderIconRef = computed(
       () =>
-        NConfigProvider?.mergedComponentPropsRef.value?.Empty?.renderIcon ||
-        (() => <EmptyIcon />)
+        mergedComponentPropsRef?.value?.Empty?.renderIcon
+        || (() => <EmptyIcon />)
     )
     const cssVarsRef = computed(() => {
       const { size } = props
@@ -108,7 +105,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { $slots, mergedClsPrefix, onRender } = this
     onRender?.()
     return (

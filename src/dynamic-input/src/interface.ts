@@ -10,7 +10,7 @@ export interface DynamicInputInjection {
   placeholderRef: Ref<string | undefined>
 }
 
-export const dynamicInputInjectionKey =
-  createInjectionKey<DynamicInputInjection>('n-dynamic-input')
+export const dynamicInputInjectionKey
+  = createInjectionKey<DynamicInputInjection>('n-dynamic-input')
 
 export type OnUpdateValue = <T>(value: T[]) => void

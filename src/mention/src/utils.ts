@@ -54,7 +54,7 @@ export interface Options {
  * Returns the Absolute (relative to the inner window size) position of the caret in the given element.
  * @param element Input (has to be type='text') or Text Area.
  */
-export function getAbsolutePosition (
+export function getAbsolutePosition(
   element: HTMLInputElement | HTMLTextAreaElement
 ): Position {
   const caretRelPost = getRelativePosition(element)
@@ -71,7 +71,7 @@ export function getAbsolutePosition (
  * Returns the relative position of the caret in the given element.
  * @param element Input (has to be type='text') or Text Area.
  */
-export function getRelativePosition (
+export function getRelativePosition(
   element: HTMLInputElement | HTMLTextAreaElement,
   options: Options = {
     debug: false,
@@ -79,8 +79,8 @@ export function getRelativePosition (
     checkWidthOverflow: true
   }
 ): Position {
-  const selectionStart =
-    element.selectionStart !== null ? element.selectionStart : 0
+  const selectionStart
+    = element.selectionStart !== null ? element.selectionStart : 0
   const selectionEnd = element.selectionEnd !== null ? element.selectionEnd : 0
   const position = options.useSelectionEnd ? selectionEnd : selectionStart
   // We'll copy the properties below into the mirror div.
@@ -134,7 +134,8 @@ export function getRelativePosition (
     const el = document.querySelector(
       '#input-textarea-caret-position-mirror-div'
     )
-    if (el?.parentNode) el.parentNode.removeChild(el)
+    if (el?.parentNode)
+      el.parentNode.removeChild(el)
   }
 
   // The mirror div will replicate the textareas style
@@ -151,46 +152,53 @@ export function getRelativePosition (
 
   // Default textarea styles
   style.whiteSpace = isInput ? 'nowrap' : 'pre-wrap'
-  if (!isInput) style.wordWrap = 'break-word' // only for textarea-s
+  if (!isInput)
+    style.wordWrap = 'break-word' // only for textarea-s
 
   // Position off-screen
   style.position = 'absolute' // required to return coordinates properly
-  if (!debug) style.visibility = 'hidden' // not 'display: none' because we want rendering
+  if (!debug)
+    style.visibility = 'hidden' // not 'display: none' because we want rendering
 
   // Transfer the element's properties to the div
   properties.forEach((prop) => {
     if (isInput && prop === 'lineHeight') {
       // Special case for <input>s because text is rendered centered and line height may be != height
       if (computed.boxSizing === 'border-box') {
-        const height = parseInt(computed.height as string)
-        const outerHeight =
-          parseInt(computed.paddingTop as string) +
-          parseInt(computed.paddingBottom as string) +
-          parseInt(computed.borderTopWidth as string) +
-          parseInt(computed.borderBottomWidth as string)
-        const targetHeight =
-          outerHeight + parseInt(computed.lineHeight as string)
+        const height = Number.parseInt(computed.height as string)
+        const outerHeight
+          = Number.parseInt(computed.paddingTop as string)
+          + Number.parseInt(computed.paddingBottom as string)
+          + Number.parseInt(computed.borderTopWidth as string)
+          + Number.parseInt(computed.borderBottomWidth as string)
+        const targetHeight
+          = outerHeight + Number.parseInt(computed.lineHeight as string)
         if (height > targetHeight) {
           style.lineHeight = `${height - outerHeight}px`
-        } else if (height === targetHeight) {
+        }
+        else if (height === targetHeight) {
           style.lineHeight = computed.lineHeight
-        } else {
+        }
+        else {
           style.lineHeight = '0'
         }
-      } else {
+      }
+      else {
         style.lineHeight = computed.height
       }
-    } else {
+    }
+    else {
       style[prop as any] = computed[prop]
     }
   })
 
   if (isFirefox) {
     // Firefox lies about the overflow property for textareas: https://bugzilla.mozilla.org/show_bug.cgi?id=984275
-    if (element.scrollHeight > parseInt(computed.height as string)) {
+    if (element.scrollHeight > Number.parseInt(computed.height as string)) {
       style.overflowY = 'scroll'
     }
-  } else {
+  }
+  else {
     style.overflow = 'hidden' // for Chrome to not render a scrollbar; IE keeps overflowY = 'scroll'
   }
 
@@ -198,7 +206,7 @@ export function getRelativePosition (
   // The second special handling for input type="text" vs textarea:
   // spaces need to be replaced with non-breaking spaces - http://stackoverflow.com/a/13402035/1269037
   if (isInput && div.textContent) {
-    div.textContent = div.textContent.replace(/\s/g, '\u00a0')
+    div.textContent = div.textContent.replace(/\s/g, '\u00A0')
   }
 
   const span = document.createElement('span')
@@ -214,23 +222,24 @@ export function getRelativePosition (
   div.appendChild(span)
 
   const relativePosition = {
-    top: span.offsetTop + parseInt(computed.borderTopWidth as string),
-    left: span.offsetLeft + parseInt(computed.borderLeftWidth as string),
+    top: span.offsetTop + Number.parseInt(computed.borderTopWidth as string),
+    left: span.offsetLeft + Number.parseInt(computed.borderLeftWidth as string),
     absolute: false,
     // We don't use line-height since it may be too large for position. Eg. 34px
     // for input
-    height: parseInt(computed.fontSize as string) * 1.5
+    height: Number.parseInt(computed.fontSize as string) * 1.5
   }
 
   if (debug) {
     span.style.backgroundColor = '#aaa'
-  } else {
+  }
+  else {
     document.body.removeChild(div)
   }
 
   if (
-    relativePosition.left >= element.clientWidth &&
-    options.checkWidthOverflow
+    relativePosition.left >= element.clientWidth
+    && options.checkWidthOverflow
   ) {
     relativePosition.left = element.clientWidth
   }
@@ -242,7 +251,7 @@ export function getRelativePosition (
  * @param detectBoundary offsets the position if the position would be outside the window.
  * @param returnOnly if true the element position wont be set.
  */
-export function setElementPositionBasedOnCaret (
+export function setElementPositionBasedOnCaret(
   element: HTMLElement,
   caretElement: HTMLInputElement | HTMLTextAreaElement,
   offset: Point = { top: 0, left: 0 },
@@ -252,18 +261,19 @@ export function setElementPositionBasedOnCaret (
 ): Point {
   const pos = getAbsolutePosition(caretElement)
   if (detectBoundary) {
-    pos.left =
-      pos.left + (element.clientWidth + margin) + offset.left >
-      window.scrollX + window.innerWidth
-        ? (pos.left =
-            window.scrollX + window.innerWidth - (element.clientWidth + margin))
+    pos.left
+      = pos.left + (element.clientWidth + margin) + offset.left
+      > window.scrollX + window.innerWidth
+        ? (pos.left
+            = window.scrollX + window.innerWidth - (element.clientWidth + margin))
         : (pos.left += offset.left)
-    pos.top =
-      pos.top + (element.clientWidth + margin) + offset.top >
-      window.scrollY + window.innerHeight
+    pos.top
+      = pos.top + (element.clientWidth + margin) + offset.top
+      > window.scrollY + window.innerHeight
         ? (pos.top -= element.clientWidth + margin)
         : (pos.top += offset.top)
-  } else {
+  }
+  else {
     pos.top += offset.top
     pos.left += offset.left
   }

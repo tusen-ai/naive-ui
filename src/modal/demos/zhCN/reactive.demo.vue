@@ -6,23 +6,12 @@
 你可以使用 `useModal.create` 来打开一个模态框。（请确保使用此 API 的组件被 `n-modal-provider` 包含。）
 </markdown>
 
-<template>
-  <n-flex>
-    <n-button @click="showDialogPreset">
-      来吧 Dialog
-    </n-button>
-    <n-button @click="showCardPreset">
-      来吧 Card
-    </n-button>
-  </n-flex>
-</template>
-
 <script lang="ts">
 import { defineComponent, h } from 'vue'
-import { useModal, useMessage, NButton } from 'naive-ui'
+import { NButton, useMessage, useModal } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const modal = useModal()
     const message = useMessage()
 
@@ -60,3 +49,14 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-flex>
+    <n-button @click="showDialogPreset">
+      来吧 Dialog
+    </n-button>
+    <n-button @click="showCardPreset">
+      来吧 Card
+    </n-button>
+  </n-flex>
+</template>

@@ -4,7 +4,7 @@ import type { BadgeTheme } from './light'
 const badgeDark: BadgeTheme = {
   name: 'Badge',
   common: commonDark,
-  self (vars) {
+  self(vars) {
     const {
       errorColorSuppl,
       infoColorSuppl,

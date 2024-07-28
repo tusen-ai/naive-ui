@@ -12,7 +12,7 @@ const uploadDark: UploadTheme = {
     Button: buttonDark,
     Progress: progressDark
   },
-  self (vars) {
+  self(vars) {
     const { errorColor } = vars
     const commonSelf = self(vars)
     commonSelf.itemColorHoverError = changeColor(errorColor, {

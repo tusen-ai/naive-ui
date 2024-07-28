@@ -2,6 +2,14 @@
 # 标签页的位置
 </markdown>
 
+<script setup lang="ts">
+import { ref } from 'vue'
+import type { TabsProps } from 'naive-ui'
+
+const placement = ref<NonNullable<TabsProps['placement']>>('left')
+const type = ref<TabsProps['type']>('card')
+</script>
+
 <template>
   <n-space vertical>
     <n-radio-group v-model:value="placement">
@@ -17,6 +25,7 @@
     </n-radio-group>
     <n-tabs
       :key="type + placement"
+      addable
       :type="type"
       animated
       :placement="placement"
@@ -26,6 +35,12 @@
           : undefined
       "
     >
+      <template #prefix>
+        Prefix
+      </template>
+      <template #suffix>
+        Suffix
+      </template>
       <n-tab-pane name="oasis" tab="Oasis">
         Wonderwall
       </n-tab-pane>
@@ -83,11 +98,3 @@
     </n-tabs>
   </n-space>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import type { TabsProps } from 'naive-ui'
-
-const placement = ref<NonNullable<TabsProps['placement']>>('left')
-const type = ref<TabsProps['type']>('card')
-</script>

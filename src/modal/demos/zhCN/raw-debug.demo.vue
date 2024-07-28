@@ -2,6 +2,18 @@
 # Raw Debug
 </markdown>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  data() {
+    return {
+      showModal: false
+    }
+  }
+})
+</script>
+
 <template>
   <n-button @click="showModal = true">
     来吧
@@ -15,14 +27,3 @@
     </div>
   </n-modal>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  data () {
-    return {
-      showModal: false
-    }
-  }
-})
-</script>

@@ -4,6 +4,20 @@
 你可以设定监听哪个元素来触发 Back Top。
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const scrollContainerRef = ref<HTMLElement | undefined>(undefined)
+    return {
+      scrollContainer: scrollContainerRef,
+      target: () => scrollContainerRef.value
+    }
+  }
+})
+</script>
+
 <template>
   <n-back-top :listen-to="target" :bottom="220" :visibility-height="10">
     <div
@@ -31,17 +45,3 @@
     这块应该写一个有意思的笑话。<br>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const scrollContainerRef = ref<HTMLElement | undefined>(undefined)
-    return {
-      scrollContainer: scrollContainerRef,
-      target: () => scrollContainerRef.value
-    }
-  }
-})
-</script>

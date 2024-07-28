@@ -1,42 +1,42 @@
 import {
-  h,
-  ref,
-  toRef,
-  isProxy,
-  toRaw,
+  type CSSProperties,
+  type PropType,
   computed,
   defineComponent,
-  type PropType,
+  h,
   inject,
-  type CSSProperties,
+  isProxy,
   provide,
+  ref,
+  toRaw,
+  toRef,
   watchEffect
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { createId } from 'seemly'
 import {
-  RemoveIcon,
   AddIcon,
   ArrowDownIcon,
-  ArrowUpIcon
+  ArrowUpIcon,
+  RemoveIcon
 } from '../../_internal/icons'
 import { formItemInjectionKey } from '../../_mixins/use-form-item'
 import { NBaseIcon } from '../../_internal'
 import { NButton } from '../../button'
 import { NButtonGroup } from '../../button-group'
 import type { ButtonProps } from '../../button'
-import { useTheme, useLocale, useConfig, useThemeClass } from '../../_mixins'
+import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, warnOnce, resolveSlotWithProps, resolveSlot } from '../../_utils'
-import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
+import { call, resolveSlot, resolveSlotWithProps, warnOnce } from '../../_utils'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { dynamicInputLight } from '../styles'
 import type { DynamicInputTheme } from '../styles'
+import { useRtl } from '../../_mixins/use-rtl'
 import NDynamicInputInputPreset from './InputPreset'
 import NDynamicInputPairPreset from './PairPreset'
 import { dynamicInputInjectionKey } from './interface'
 import type { OnUpdateValue } from './interface'
 import style from './styles/index.cssr'
-import { useRtl } from '../../_mixins/use-rtl'
 
 const globalDataKeyMap = new WeakMap()
 
@@ -91,7 +91,7 @@ export type DynamicInputProps = ExtractPublicPropTypes<typeof dynamicInputProps>
 export default defineComponent({
   name: 'DynamicInput',
   props: dynamicInputProps,
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.onClear !== undefined) {
@@ -139,22 +139,28 @@ export default defineComponent({
     })
     const removeDisabledRef = computed(() => {
       const { value: mergedValue } = mergedValueRef
-      if (Array.isArray(mergedValue)) return mergedValue.length <= props.min
+      if (Array.isArray(mergedValue))
+        return mergedValue.length <= props.min
       return true
     })
     const buttonSizeRef = computed(() => {
       return mergedComponentPropsRef?.value?.DynamicInput?.buttonSize
     })
-    function doUpdateValue (value: any[]): void {
+    function doUpdateValue(value: any[]): void {
       const { onInput, 'onUpdate:value': _onUpdateValue, onUpdateValue } = props
-      if (onInput) call(onInput, value)
-      if (_onUpdateValue) call(_onUpdateValue, value)
-      if (onUpdateValue) call(onUpdateValue, value)
+      if (onInput)
+        call(onInput, value)
+      if (_onUpdateValue)
+        call(_onUpdateValue, value)
+      if (onUpdateValue)
+        call(onUpdateValue, value)
       uncontrolledValueRef.value = value
     }
-    function ensureKey (value: any, index: number): string | number {
-      if (value === undefined || value === null) return index
-      if (typeof value !== 'object') return index
+    function ensureKey(value: any, index: number): string | number {
+      if (value === undefined || value === null)
+        return index
+      if (typeof value !== 'object')
+        return index
       const rawValue = isProxy(value) ? toRaw(value) : value
       let key = globalDataKeyMap.get(rawValue as WeakKey)
       if (key === undefined) {
@@ -162,17 +168,17 @@ export default defineComponent({
       }
       return key
     }
-    function handleValueChange (index: number, value: any): void {
+    function handleValueChange(index: number, value: any): void {
       const { value: mergedValue } = mergedValueRef
       const newValue = Array.from(mergedValue ?? [])
       const originalItem = newValue[index]
       newValue[index] = value
       // update dataKeyMap
       if (
-        originalItem &&
-        value &&
-        typeof originalItem === 'object' &&
-        typeof value === 'object'
+        originalItem
+        && value
+        && typeof originalItem === 'object'
+        && typeof value === 'object'
       ) {
         const rawOriginal = isProxy(originalItem)
           ? toRaw(originalItem)
@@ -186,20 +192,22 @@ export default defineComponent({
       }
       doUpdateValue(newValue)
     }
-    function handleCreateClick (): void {
+    function handleCreateClick(): void {
       createItem(-1)
     }
-    function createItem (index: number): void {
+    function createItem(index: number): void {
       const { value: mergedValue } = mergedValueRef
       const { onCreate } = props
       const newValue = Array.from(mergedValue ?? [])
       if (onCreate) {
         newValue.splice(index + 1, 0, onCreate(index + 1))
         doUpdateValue(newValue)
-      } else if (slots.default) {
+      }
+      else if (slots.default) {
         newValue.splice(index + 1, 0, null)
         doUpdateValue(newValue)
-      } else {
+      }
+      else {
         switch (props.preset) {
           case 'input':
             newValue.splice(index + 1, 0, '')
@@ -212,11 +220,13 @@ export default defineComponent({
         }
       }
     }
-    function remove (index: number): void {
+    function remove(index: number): void {
       const { value: mergedValue } = mergedValueRef
-      if (!Array.isArray(mergedValue)) return
+      if (!Array.isArray(mergedValue))
+        return
       const { min } = props
-      if (mergedValue.length <= min) return
+      if (mergedValue.length <= min)
+        return
       const { onRemove } = props
       if (onRemove) {
         onRemove(index)
@@ -225,27 +235,29 @@ export default defineComponent({
       newValue.splice(index, 1)
       doUpdateValue(newValue)
     }
-    function swap (
+    function swap(
       array: any[],
       currentIndex: number,
       targetIndex: number
     ): void {
       if (
-        currentIndex < 0 ||
-        targetIndex < 0 ||
-        currentIndex >= array.length ||
-        targetIndex >= array.length
+        currentIndex < 0
+        || targetIndex < 0
+        || currentIndex >= array.length
+        || targetIndex >= array.length
       ) {
         return
       }
-      if (currentIndex === targetIndex) return
+      if (currentIndex === targetIndex)
+        return
       const currentItem = array[currentIndex]
       array[currentIndex] = array[targetIndex]
       array[targetIndex] = currentItem
     }
-    function move (type: 'up' | 'down', index: number): void {
+    function move(type: 'up' | 'down', index: number): void {
       const { value: mergedValue } = mergedValueRef
-      if (!Array.isArray(mergedValue)) return
+      if (!Array.isArray(mergedValue))
+        return
       const newValue = Array.from(mergedValue)
       if (type === 'up') {
         swap(newValue, index, index - 1)
@@ -301,7 +313,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const {
       $slots,
       itemClass,

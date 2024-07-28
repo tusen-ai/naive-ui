@@ -4,17 +4,60 @@
 可以定制 `'finish'` 和 `'error'` 状态下的图标和每一步的图标。
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import {
+  MdArrowRoundBack,
+  MdArrowRoundForward,
+  MdCafe,
+  MdHappy,
+  MdSad
+} from '@vicons/ionicons4'
+import type { StepsProps } from 'naive-ui'
+
+export default defineComponent({
+  components: {
+    MdArrowRoundBack,
+    MdArrowRoundForward,
+    MdHappy,
+    MdSad,
+    MdCafe
+  },
+  setup() {
+    const currentRef = ref<number | null>(1)
+    return {
+      currentStatus: ref<StepsProps['status']>('finish'),
+      current: currentRef,
+      next() {
+        if (currentRef.value === null)
+          currentRef.value = 1
+        else if (currentRef.value >= 4)
+          currentRef.value = null
+        else currentRef.value++
+      },
+      prev() {
+        if (currentRef.value === 0)
+          currentRef.value = null
+        else if (currentRef.value === null)
+          currentRef.value = 4
+        else currentRef.value--
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
-    <n-steps :current="(current as number)" :status="currentStatus">
+    <n-steps :current="current as number" :status="currentStatus">
       <template #finish-icon>
         <n-icon>
-          <md-happy />
+          <MdHappy />
         </n-icon>
       </template>
       <template #error-icon>
         <n-icon>
-          <md-sad />
+          <MdSad />
         </n-icon>
       </template>
       <n-step
@@ -35,7 +78,7 @@
       >
         <template #icon>
           <n-icon>
-            <md-cafe />
+            <MdCafe />
           </n-icon>
         </template>
       </n-step>
@@ -45,14 +88,14 @@
         <n-button @click="prev">
           <template #icon>
             <n-icon>
-              <md-arrow-round-back />
+              <MdArrowRoundBack />
             </n-icon>
           </template>
         </n-button>
         <n-button @click="next">
           <template #icon>
             <n-icon>
-              <md-arrow-round-forward />
+              <MdArrowRoundForward />
             </n-icon>
           </template>
         </n-button>
@@ -74,42 +117,3 @@
     </n-space>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import {
-  MdArrowRoundBack,
-  MdArrowRoundForward,
-  MdCafe,
-  MdHappy,
-  MdSad
-} from '@vicons/ionicons4'
-import { StepsProps } from 'naive-ui'
-
-export default defineComponent({
-  components: {
-    MdArrowRoundBack,
-    MdArrowRoundForward,
-    MdHappy,
-    MdSad,
-    MdCafe
-  },
-  setup () {
-    const currentRef = ref<number | null>(1)
-    return {
-      currentStatus: ref<StepsProps['status']>('finish'),
-      current: currentRef,
-      next () {
-        if (currentRef.value === null) currentRef.value = 1
-        else if (currentRef.value >= 4) currentRef.value = null
-        else currentRef.value++
-      },
-      prev () {
-        if (currentRef.value === 0) currentRef.value = null
-        else if (currentRef.value === null) currentRef.value = 4
-        else currentRef.value--
-      }
-    }
-  }
-})
-</script>
