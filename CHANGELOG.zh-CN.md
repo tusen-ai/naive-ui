@@ -4,6 +4,10 @@
 
 `xxxx-xx-xx`
 
+### Breaking Changes
+
+- 修复 `n-config-provider` 默认继承父级的类前缀 `cls-prefix`, 关闭 [#5970](https://github.com/tusen-ai/naive-ui/issues/5970)
+
 ### Fixes
 
 - 修复 `n-infinite-scroll` 组件触底判断错误，关闭 [#6133](https://github.com/tusen-ai/naive-ui/issues/6133)

@@ -35,7 +35,7 @@ export const configProviderProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  clsPrefix: { type: String, default: defaultClsPrefix },
+  clsPrefix: String,
   locale: Object as PropType<NLocale | null>,
   dateLocale: Object as PropType<NDateLocale | null>,
   namespace: String,

@@ -4,6 +4,10 @@
 
 `xxxx-xx-xx`
 
+### Breaking Changes
+
+- Fix `n-config-provider` inherit the class prefix from it's parent by default, closes [#5970](https://github.com/tusen-ai/naive-ui/issues/5970).
+
 ### Fixes
 
 - Fix `n-infinite-scroll` bottoming out judgment error, closes [#6133](https://github.com/tusen-ai/naive-ui/issues/6133).
