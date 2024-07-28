@@ -29,7 +29,7 @@ export const emptyProps = {
     default: true
   },
   size: {
-    type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
+    type: String as PropType<'tiny' | 'small' | 'medium' | 'large' | 'huge'>,
     default: 'medium'
   },
   renderIcon: Function as PropType<() => VNodeChild>

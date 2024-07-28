@@ -589,6 +589,7 @@ export default defineComponent({
               <NEmpty
                 theme={mergedTheme.peers.Empty}
                 themeOverrides={mergedTheme.peerOverrides.Empty}
+                size={this.size}
               />
             ])}
           </div>
