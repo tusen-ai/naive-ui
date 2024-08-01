@@ -27,6 +27,7 @@
 - `n-transfer` `source-title` `target-title` 支持渲染函数，关闭 [#6004](https://github.com/tusen-ai/naive-ui/issues/6004)
 - `n-empty` `size` 支持 `tiny` 尺寸
 - `n-config-provider` 新增 `style-mount-target` 属性，用于控制样式的挂载位置
+- `n-cascader` 过滤算法忽略大小写
 
 ## 2.39.0
 
