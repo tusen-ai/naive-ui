@@ -31,7 +31,7 @@ const enGB: NLocale = {
     dateFormat: 'yyyy/MM/dd',
     dateTimeFormat: 'yyyy/MM/dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
-    weekFormat: 'RRRR-w',
+    weekFormat: 'RRRR-I',
     clear: 'Clear',
     now: 'Now',
     confirm: 'Confirm',

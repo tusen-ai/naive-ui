@@ -31,7 +31,7 @@ const faIR: NLocale = {
     dateFormat: 'yyyy/MM/dd',
     dateTimeFormat: 'yyyy/MM/dd HH:mm:ss',
     quarterFormat: 'سه ماهه yyyy',
-    weekFormat: 'RRRR-w',
+    weekFormat: 'RRRR-I',
     clear: 'پاک کردن',
     now: 'اکنون',
     confirm: 'تأیید',
