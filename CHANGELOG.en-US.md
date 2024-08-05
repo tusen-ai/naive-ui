@@ -27,6 +27,7 @@
 - `n-transfer` `source-title` `target-title` prop to support render function, closes [#6004](https://github.com/tusen-ai/naive-ui/issues/6004)
 - `n-empty` `size` prop to support `tiny` size.
 - `n-config-provider` adds `style-mount-target` prop to control where to mount components' style.
+- `n-cascader` filter ignore case sensitive
 
 ## 2.39.0
 
