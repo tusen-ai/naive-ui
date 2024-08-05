@@ -151,6 +151,18 @@ describe('n-date-picker', () => {
       inputReadonly: true
     })
     expect(wrapper.find('input').attributes('readonly')).toBe('')
+    await wrapper.setProps({
+      type: 'datetime',
+      panel: true,
+      inputReadonly: true
+    })
+    expect(wrapper.find('input').attributes('readonly')).toBe('')
+    await wrapper.setProps({
+      type: 'datetimerange',
+      panel: true,
+      inputReadonly: true
+    })
+    expect(wrapper.find('input').attributes('readonly')).toBe('')
     wrapper.unmount()
   })
 
