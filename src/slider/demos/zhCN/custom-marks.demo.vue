@@ -2,24 +2,16 @@
 # 自定义标记
 
 可以使用 `marks` 插槽自定义刻度。
-
 </markdown>
 
-<template>
-  <n-space style="height: 300px; justify-content: space-evenly">
-    <n-slider v-model:value="value" :marks="marks" vertical range />
-    <n-slider v-model:value="value" :marks="customMarks" vertical range />
-  </n-space>
-</template>
-
 <script lang="ts">
-import { defineComponent, ref, h } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 import Temperature16Regular from '@vicons/fluent/Temperature16Regular'
 import { NIcon } from '../../../icon'
 import { NFlex } from '../../../flex'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const renderMark = (value: number, color: string) => {
       return h(
         NFlex,
@@ -51,3 +43,10 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space style="height: 300px; justify-content: space-evenly">
+    <n-slider v-model:value="value" :marks="marks" vertical range />
+    <n-slider v-model:value="value" :marks="customMarks" vertical range />
+  </n-space>
+</template>

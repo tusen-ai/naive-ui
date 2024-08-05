@@ -90,7 +90,10 @@ export default defineComponent({
       return (pattern: string, _: CascaderOption, path: CascaderOption[]) =>
         path.some(
           option =>
-            option[labelField] && ~(option[labelField] as any).indexOf(pattern)
+            option[labelField]
+            && ~(option[labelField] as any)
+              .toLowerCase()
+              .indexOf(pattern.toLowerCase())
         )
     })
     const filteredSelectOptionsRef = computed(() => {

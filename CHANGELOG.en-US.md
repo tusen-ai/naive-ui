@@ -4,6 +4,10 @@
 
 `xxxx-xx-xx`
 
+### Breaking Changes
+
+- Fix `n-config-provider` inherit the class prefix from it's parent by default, closes [#5970](https://github.com/tusen-ai/naive-ui/issues/5970).
+
 ### Fixes
 
 - Fix `n-infinite-scroll` bottoming out judgment error, closes [#6133](https://github.com/tusen-ai/naive-ui/issues/6133).
@@ -11,6 +15,9 @@
 - Fix `n-tabs` has style issue when using `prefix` slot, `suffix` slot or `addable` prop with vertical placement, closes [#6059](https://github.com/tusen-ai/naive-ui/issues/6059), [#6060](https://github.com/tusen-ai/naive-ui/pull/6060).
 - Fix `n-upload` can only upload a maximum of 100 files in certain old browsers when uploading directories, closes [#6027](https://github.com/tusen-ai/naive-ui/issues/6027).
 - Fix `n-date-picker`'s `input-readonly` prop not work in the panel's input for `'datetime'` or `'datetimerange'`.
+- Fix `n-menu` can't apply HTML attributes correctly on the component when `responsive` is set.
+- Fix `n-float-button` error when used with `popover` component, closes [#5933](https://github.com/tusen-ai/naive-ui/issues/5933).
+- Fix `n-badge` unable to mask focus element border, closes [#5929](https://github.com/tusen-ai/naive-ui/issues/5929)
 
 ### Features
 
@@ -20,6 +27,9 @@
 - Adds `n-highlight` component.
 - `n-slider` `marks` prop to support render function, closes [#5967](https://github.com/tusen-ai/naive-ui/issues/5967)
 - `n-transfer` `source-title` `target-title` prop to support render function, closes [#6004](https://github.com/tusen-ai/naive-ui/issues/6004)
+- `n-empty` `size` prop to support `tiny` size.
+- `n-config-provider` adds `style-mount-target` prop to control where to mount components' style.
+- `n-cascader` filter ignore case sensitive
 
 ## 2.39.0
 

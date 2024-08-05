@@ -35,7 +35,7 @@ export const configProviderProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  clsPrefix: { type: String, default: defaultClsPrefix },
+  clsPrefix: String,
   locale: Object as PropType<NLocale | null>,
   dateLocale: Object as PropType<NDateLocale | null>,
   namespace: String,
@@ -52,6 +52,7 @@ export const configProviderProps = {
   icons: Object as PropType<GlobalIconConfig>,
   breakpoints: Object as PropType<Breakpoints>,
   preflightStyleDisabled: Boolean,
+  styleMountTarget: Object as PropType<ParentNode | null>,
   inlineThemeDisabled: {
     type: Boolean,
     default: undefined
@@ -165,6 +166,8 @@ export default defineComponent({
       = props.inlineThemeDisabled || NConfigProvider?.inlineThemeDisabled
     const preflightStyleDisabled
       = props.preflightStyleDisabled || NConfigProvider?.preflightStyleDisabled
+    const styleMountTarget
+      = props.styleMountTarget || NConfigProvider?.styleMountTarget
     const mergedThemeHashRef = computed(() => {
       const { value: theme } = mergedThemeRef
       const { value: mergedThemeOverrides } = mergedThemeOverridesRef
@@ -224,7 +227,8 @@ export default defineComponent({
       mergedThemeRef,
       mergedThemeOverridesRef,
       inlineThemeDisabled: inlineThemeDisabled || false,
-      preflightStyleDisabled: preflightStyleDisabled || false
+      preflightStyleDisabled: preflightStyleDisabled || false,
+      styleMountTarget
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,

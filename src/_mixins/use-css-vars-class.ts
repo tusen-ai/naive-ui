@@ -17,10 +17,10 @@ export function useThemeClass(
   if (!cssVarsRef)
     throwError('useThemeClass', 'cssVarsRef is not passed')
 
-  const mergedThemeHashRef = inject(
-    configProviderInjectionKey,
-    null
-  )?.mergedThemeHashRef
+  const NConfigProvider = inject(configProviderInjectionKey, null)
+
+  const mergedThemeHashRef = NConfigProvider?.mergedThemeHashRef
+  const styleMountTarget = NConfigProvider?.styleMountTarget
 
   const themeClassRef = ref('')
 
@@ -53,7 +53,8 @@ export function useThemeClass(
       }
       c(`.${finalThemeHash}`, style).mount({
         id: finalThemeHash,
-        ssr: ssrAdapter
+        ssr: ssrAdapter,
+        parent: styleMountTarget
       })
       renderCallback = undefined
     }
