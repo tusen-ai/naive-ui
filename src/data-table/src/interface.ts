@@ -312,9 +312,11 @@ export type RenderExpand<T = InternalRowData> = (
   index: number
 ) => VNodeChild
 export type RenderExpandIcon = ({
-  expanded
+  expanded,
+  rowData
 }: {
   expanded: boolean
+  rowData: RowData
 }) => VNodeChild
 
 // TODO: we should deprecate `index` since it would change after row is expanded
