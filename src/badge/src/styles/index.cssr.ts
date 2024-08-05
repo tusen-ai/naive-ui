@@ -69,8 +69,7 @@ export default c([
       z-index: 2;
       display: flex;
       align-items: center;
-    `,
-    [
+    `, [
       fadeInScaleUpTransition({
         transformOrigin: 'left bottom',
         originalTransform: 'translateX(-50%)'

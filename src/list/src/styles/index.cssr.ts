@@ -1,4 +1,4 @@
-import { cB, c, cE, cM, insideModal, insidePopover } from '../../../_utils/cssr'
+import { c, cB, cE, cM, insideModal, insidePopover } from '../../../_utils/cssr'
 
 // vars:
 // --n-font-size

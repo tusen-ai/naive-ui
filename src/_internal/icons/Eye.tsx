@@ -1,8 +1,8 @@
-import { h, defineComponent } from 'vue'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   name: 'Eye',
-  render () {
+  render() {
     return (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
         <path

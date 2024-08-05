@@ -1,4 +1,4 @@
-import { cB, cM, c } from '../../../_utils/cssr'
+import { c, cB, cM } from '../../../_utils/cssr'
 
 export default c([
   cB('data-table', [

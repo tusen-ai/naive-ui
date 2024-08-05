@@ -1,8 +1,8 @@
-import { type Theme } from '../../_mixins'
-import { type ThemeCommonVars } from '../../config-provider'
+import type { Theme } from '../../_mixins'
+import type { ThemeCommonVars } from '../../config-provider'
 import { commonLight } from '../../styles'
 
-const self = (vars: ThemeCommonVars) => {
+function self(vars: ThemeCommonVars) {
   const { popoverColor, dividerColor, borderRadius } = vars
   return {
     color: popoverColor,

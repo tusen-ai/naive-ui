@@ -4,26 +4,12 @@
 Set `options` on a selection type column to create selection dropdown near header checkbox.
 </markdown>
 
-<template>
-  <n-p>
-    You have selected {{ checkedRowKeys.length }} row{{
-      checkedRowKeys.length < 2 ? '' : 's'
-    }}.
-  </n-p>
-  <n-data-table
-    v-model:checked-row-keys="checkedRowKeys"
-    :columns="columns"
-    :data="data"
-    :pagination="pagination"
-  />
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { repeat } from 'seemly'
-import { DataTableColumns } from 'naive-ui'
+import type { DataTableColumns } from 'naive-ui'
 
-type RowData = {
+interface RowData {
   name: string
   age: number
   address: string
@@ -38,7 +24,7 @@ const data = repeat(46, undefined).map<RowData>((_, index) => ({
 }))
 
 export default defineComponent({
-  setup () {
+  setup() {
     const checkedRowKeysRef = ref<Array<string | number>>([])
     const columns: DataTableColumns<RowData> = [
       {
@@ -51,12 +37,12 @@ export default defineComponent({
             key: 'f2',
             onSelect: (pageData) => {
               checkedRowKeysRef.value = pageData
-                .map((row) => row.key)
+                .map(row => row.key)
                 .slice(0, 2)
             }
           }
         ],
-        disabled (row) {
+        disabled(row) {
           return row.name === 'Edward King 3'
         }
       },
@@ -84,3 +70,17 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-p>
+    You have selected {{ checkedRowKeys.length }} row{{
+      checkedRowKeys.length < 2 ? '' : 's'
+    }}.
+  </n-p>
+  <n-data-table
+    v-model:checked-row-keys="checkedRowKeys"
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+  />
+</template>

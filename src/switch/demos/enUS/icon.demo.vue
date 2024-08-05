@@ -2,6 +2,21 @@
 # Customizing Icon
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { ArrowBackOutline, ArrowForwardOutline } from '@vicons/ionicons5'
+
+export default defineComponent({
+  setup() {
+    return {
+      active: ref(false),
+      ArrowBackOutline,
+      ArrowForwardOutline
+    }
+  }
+})
+</script>
+
 <template>
   <n-space>
     <n-switch v-model:value="active" size="medium">
@@ -19,18 +34,3 @@
     </n-switch>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { ArrowBackOutline, ArrowForwardOutline } from '@vicons/ionicons5'
-
-export default defineComponent({
-  setup () {
-    return {
-      active: ref(false),
-      ArrowBackOutline,
-      ArrowForwardOutline
-    }
-  }
-})
-</script>

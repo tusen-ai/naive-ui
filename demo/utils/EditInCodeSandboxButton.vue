@@ -1,3 +1,21 @@
+<script lang="ts">
+import { computed, defineComponent } from 'vue'
+import { getCodeSandboxParams } from './codesandbox'
+
+export default defineComponent({
+  name: 'EditInCodeSandboxButton',
+  props: {
+    code: String,
+    size: String
+  },
+  setup(props) {
+    return {
+      parameters: computed(() => getCodeSandboxParams(props.code))
+    }
+  }
+})
+</script>
+
 <template>
   <form
     action="https://codesandbox.io/api/v1/sandboxes/define"
@@ -35,21 +53,3 @@
     </n-button>
   </form>
 </template>
-
-<script lang="ts">
-import { defineComponent, computed } from 'vue'
-import { getCodeSandboxParams } from './codesandbox'
-
-export default defineComponent({
-  name: 'EditInCodeSandboxButton',
-  props: {
-    code: String,
-    size: String
-  },
-  setup (props) {
-    return {
-      parameters: computed(() => getCodeSandboxParams(props.code))
-    }
-  }
-})
-</script>

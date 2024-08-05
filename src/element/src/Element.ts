@@ -1,4 +1,4 @@
-import { computed, h, defineComponent } from 'vue'
+import { computed, defineComponent, h } from 'vue'
 import { kebabCase } from 'lodash-es'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
@@ -20,7 +20,7 @@ export default defineComponent({
   name: 'Element',
   alias: ['El'],
   props: elementProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Element',
@@ -49,7 +49,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { tag, mergedClsPrefix, cssVars, themeClass, onRender, $slots } = this
     onRender?.()
     return h(

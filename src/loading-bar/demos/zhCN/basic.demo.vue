@@ -2,6 +2,33 @@
 # 基础用法
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { useLoadingBar } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const loadingBar = useLoadingBar()
+    const disabledRef = ref(true)
+    return {
+      disabled: disabledRef,
+      handleStart() {
+        loadingBar.start()
+        disabledRef.value = false
+      },
+      handleFinish() {
+        loadingBar.finish()
+        disabledRef.value = true
+      },
+      handleError() {
+        disabledRef.value = true
+        loadingBar.error()
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-space>
     <n-button @click="handleStart">
@@ -15,30 +42,3 @@
     </n-button>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { useLoadingBar } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const loadingBar = useLoadingBar()
-    const disabledRef = ref(true)
-    return {
-      disabled: disabledRef,
-      handleStart () {
-        loadingBar.start()
-        disabledRef.value = false
-      },
-      handleFinish () {
-        loadingBar.finish()
-        disabledRef.value = true
-      },
-      handleError () {
-        disabledRef.value = true
-        loadingBar.error()
-      }
-    }
-  }
-})
-</script>

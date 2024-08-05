@@ -2,6 +2,18 @@
 # Zindex debug
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      showPopover: ref(false)
+    }
+  }
+})
+</script>
+
 <template>
   <n-space>
     <n-popover trigger="click" :z-index="3000">
@@ -18,15 +30,3 @@
     </n-popover>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      showPopover: ref(false)
-    }
-  }
-})
-</script>

@@ -4,13 +4,13 @@ import { useLocaleName } from '../store'
 
 export const loadingBarApiRef = {}
 
-export default function createDemoRouter (app, routes) {
+export default function createDemoRouter(app, routes) {
   const router = createRouter({
     history: createWebHistory(),
     routes
   })
 
-  router.beforeEach(function (to, from, next) {
+  router.beforeEach((to, from, next) => {
     if (!from || to.path !== from.path) {
       if (loadingBarApiRef.value) {
         loadingBarApiRef.value.start()
@@ -19,7 +19,7 @@ export default function createDemoRouter (app, routes) {
     next()
   })
 
-  router.afterEach(function (to, from) {
+  router.afterEach((to, from) => {
     if (!from || to.path !== from.path) {
       if (loadingBarApiRef.value) {
         loadingBarApiRef.value.finish()
@@ -27,14 +27,16 @@ export default function createDemoRouter (app, routes) {
       if (to.hash && to.hash !== from.hash) {
         nextTick(() => {
           const el = document.querySelector(to.hash)
-          if (el) el.scrollIntoView()
+          if (el)
+            el.scrollIntoView()
         })
       }
       nextTick(() => {
         const h1s = document.getElementsByTagName('h1')
         if (to.name !== 'home' && h1s.length !== 0) {
-          document.title = h1s[0].textContent + ' - Naive UI'
-        } else {
+          document.title = `${h1s[0].textContent} - Naive UI`
+        }
+        else {
           // defined in index.html
           window.deriveTitleFromLocale(useLocaleName().value)
         }

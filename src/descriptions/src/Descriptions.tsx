@@ -1,27 +1,27 @@
 import {
-  computed,
-  h,
-  defineComponent,
+  type CSSProperties,
   type PropType,
   type VNode,
-  type CSSProperties
+  computed,
+  defineComponent,
+  h
 } from 'vue'
 import { useCompitable } from 'vooks'
+import { repeat } from 'seemly'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
-  warn,
+  createKey,
+  flatten,
   getSlot,
   getVNodeChildren,
-  createKey,
-  flatten
+  warn
 } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { descriptionsLight } from '../styles'
 import type { DescriptionsTheme } from '../styles'
 import { isDescriptionsItem } from './utils'
 import style from './styles/index.cssr'
-import { repeat } from 'seemly'
 
 export const descriptionsProps = {
   ...(useTheme.props as ThemeProps<DescriptionsTheme>),
@@ -61,7 +61,7 @@ export type DescriptionProps = DescriptionsProps
 export default defineComponent({
   name: 'Descriptions',
   props: descriptionsProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Descriptions',
@@ -126,7 +126,8 @@ export default defineComponent({
         computed(() => {
           let hash = ''
           const { size, bordered } = props
-          if (bordered) hash += 'a'
+          if (bordered)
+            hash += 'a'
           hash += size[0]
           return hash
         }),
@@ -143,7 +144,7 @@ export default defineComponent({
       inlineThemeDisabled
     }
   },
-  render () {
+  render() {
     const defaultSlots = this.$slots.default
     const children = defaultSlots ? flatten(defaultSlots()) : []
     const memorizedLength = children.length
@@ -162,7 +163,7 @@ export default defineComponent({
       onRender
     } = this
     onRender?.()
-    const filteredChildren: VNode[] = children.filter((child) =>
+    const filteredChildren: VNode[] = children.filter(child =>
       isDescriptionsItem(child)
     )
     if (__DEV__ && memorizedLength !== filteredChildren.length) {
@@ -192,10 +193,10 @@ export default defineComponent({
       const itemSpan = (props.span as number) || 1
       const memorizedSpan = state.span
       state.span += itemSpan
-      const labelStyle =
-        props.labelStyle || props['label-style'] || this.labelStyle
-      const contentStyle =
-        props.contentStyle || props['content-style'] || this.contentStyle
+      const labelStyle
+        = props.labelStyle || props['label-style'] || this.labelStyle
+      const contentStyle
+        = props.contentStyle || props['content-style'] || this.contentStyle
       if (labelPlacement === 'left') {
         if (bordered) {
           state.row.push(
@@ -224,7 +225,8 @@ export default defineComponent({
               {itemChildren}
             </td>
           )
-        } else {
+        }
+        else {
           state.row.push(
             <td
               class={`${mergedClsPrefix}-descriptions-table-content`}
@@ -262,7 +264,8 @@ export default defineComponent({
             </td>
           )
         }
-      } else {
+      }
+      else {
         const colspan = isLastIteration
           ? (compitableColumn - memorizedSpan) * 2
           : itemSpan * 2
@@ -303,7 +306,7 @@ export default defineComponent({
       }
       return state
     }, defaultState)
-    const rows = itemState.rows.map((row) => (
+    const rows = itemState.rows.map(row => (
       <tr class={`${mergedClsPrefix}-descriptions-table-row`}>{row}</tr>
     ))
     return (

@@ -4,23 +4,10 @@
 你可以自定义过滤图标、过滤菜单、排序图标、展开图标的样式。
 </markdown>
 
-<template>
-  <n-data-table
-    :columns="cols"
-    :data="data"
-    :render-expand-icon="renderExpandIcon"
-  />
-</template>
-
 <script lang="ts">
 import { defineComponent, h, reactive } from 'vue'
-import {
-  NButton,
-  NSpace,
-  NIcon,
-  DataTableColumns,
-  DataTableBaseColumn
-} from 'naive-ui'
+import type { DataTableBaseColumn, DataTableColumns } from 'naive-ui'
+import { NButton, NIcon, NSpace } from 'naive-ui'
 import { PawOutline, SearchOutline } from '@vicons/ionicons5'
 
 const data = [
@@ -35,7 +22,7 @@ const data = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     const renderExpandIcon = () => {
       return h(NIcon, null, { default: () => h(PawOutline) })
     }
@@ -99,9 +86,12 @@ export default defineComponent({
         sorter: 'default',
         renderSorterIcon: ({ order }) => {
           const style = 'transform: translateY(-3px);'
-          if (order === false) return h('div', { style }, ['🤔'])
-          if (order === 'ascend') return h('div', { style }, ['👇'])
-          if (order === 'descend') return h('div', { style }, ['👆'])
+          if (order === false)
+            return h('div', { style }, ['🤔'])
+          if (order === 'ascend')
+            return h('div', { style }, ['👇'])
+          if (order === 'descend')
+            return h('div', { style }, ['👆'])
         }
       },
       filterColumn
@@ -115,3 +105,11 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-data-table
+    :columns="cols"
+    :data="data"
+    :render-expand-icon="renderExpandIcon"
+  />
+</template>

@@ -4,6 +4,154 @@
 使用 `n-grid` 和 `n-form-item-gi`（grid item）轻松写表单。
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import type { FormInst, FormItemRule } from 'naive-ui'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const formRef = ref<FormInst | null>(null)
+    const message = useMessage()
+    return {
+      formRef,
+      size: ref('medium'),
+      model: ref({
+        inputValue: null,
+        textareaValue: null,
+        selectValue: null,
+        multipleSelectValue: null,
+        datetimeValue: null,
+        nestedValue: {
+          path1: null,
+          path2: null
+        },
+        switchValue: false,
+        checkboxGroupValue: null,
+        radioGroupValue: null,
+        radioButtonGroupValue: null,
+        inputNumberValue: null,
+        timePickerValue: null,
+        sliderValue: 0,
+        transferValue: null
+      }),
+      generalOptions: ['groode', 'veli good', 'emazing', 'lidiculous'].map(
+        v => ({
+          label: v,
+          value: v
+        })
+      ),
+      cascaderOptions: [
+        {
+          label: 'groode',
+          value: 'groode',
+          children: [
+            {
+              label: 'veli good',
+              value: 'veli good'
+            }
+          ]
+        }
+      ],
+      rules: {
+        inputValue: {
+          required: true,
+          trigger: ['blur', 'input'],
+          message: '请输入 inputValue'
+        },
+        textareaValue: {
+          required: true,
+          trigger: ['blur', 'input'],
+          message: '请输入 textareaValue'
+        },
+        selectValue: {
+          required: true,
+          trigger: ['blur', 'change'],
+          message: '请选择 selectValue'
+        },
+        multipleSelectValue: {
+          type: 'array',
+          required: true,
+          trigger: ['blur', 'change'],
+          message: '请选择 multipleSelectValue'
+        },
+        datetimeValue: {
+          type: 'number',
+          required: true,
+          trigger: ['blur', 'change'],
+          message: '请输入 datetimeValue'
+        },
+        nestedValue: {
+          path1: {
+            required: true,
+            trigger: ['blur', 'input'],
+            message: '请输入 nestedValue.path1'
+          },
+          path2: {
+            required: true,
+            trigger: ['blur', 'change'],
+            message: '请输入 nestedValue.path2'
+          }
+        },
+        checkboxGroupValue: {
+          type: 'array',
+          required: true,
+          trigger: 'change',
+          message: '请选择 checkboxGroupValue'
+        },
+        radioGroupValue: {
+          required: true,
+          trigger: 'change',
+          message: '请选择 radioGroupValue'
+        },
+        radioButtonGroupValue: {
+          required: true,
+          trigger: 'change',
+          message: '请选择 radioButtonGroupValue'
+        },
+        inputNumberValue: {
+          type: 'number',
+          required: true,
+          trigger: ['blur', 'change'],
+          message: '请输入 inputNumberValue'
+        },
+        timePickerValue: {
+          type: 'number',
+          required: true,
+          trigger: ['blur', 'change'],
+          message: '请输入 timePickerValue'
+        },
+        sliderValue: {
+          validator(rule: FormItemRule, value: number) {
+            return value > 50
+          },
+          trigger: ['blur', 'change'],
+          message: 'sliderValue 需要大于 50'
+        },
+        transferValue: {
+          type: 'array',
+          required: true,
+          trigger: 'change',
+          message: '请输入 transferValue'
+        }
+      },
+      handleValidateButtonClick(e: MouseEvent) {
+        e.preventDefault()
+        formRef.value?.validate((errors) => {
+          if (!errors) {
+            message.success('验证成功')
+          }
+          else {
+            console.log(errors)
+            message.error('验证失败')
+          }
+        })
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-radio-group
     v-model:value="size"
@@ -38,7 +186,7 @@
           type="textarea"
           :autosize="{
             minRows: 3,
-            maxRows: 5
+            maxRows: 5,
           }"
         />
       </n-form-item-gi>
@@ -161,149 +309,3 @@
   <pre>{{ JSON.stringify(model, null, 2) }}
 </pre>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { FormInst, FormItemRule, useMessage } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const formRef = ref<FormInst | null>(null)
-    const message = useMessage()
-    return {
-      formRef,
-      size: ref('medium'),
-      model: ref({
-        inputValue: null,
-        textareaValue: null,
-        selectValue: null,
-        multipleSelectValue: null,
-        datetimeValue: null,
-        nestedValue: {
-          path1: null,
-          path2: null
-        },
-        switchValue: false,
-        checkboxGroupValue: null,
-        radioGroupValue: null,
-        radioButtonGroupValue: null,
-        inputNumberValue: null,
-        timePickerValue: null,
-        sliderValue: 0,
-        transferValue: null
-      }),
-      generalOptions: ['groode', 'veli good', 'emazing', 'lidiculous'].map(
-        (v) => ({
-          label: v,
-          value: v
-        })
-      ),
-      cascaderOptions: [
-        {
-          label: 'groode',
-          value: 'groode',
-          children: [
-            {
-              label: 'veli good',
-              value: 'veli good'
-            }
-          ]
-        }
-      ],
-      rules: {
-        inputValue: {
-          required: true,
-          trigger: ['blur', 'input'],
-          message: '请输入 inputValue'
-        },
-        textareaValue: {
-          required: true,
-          trigger: ['blur', 'input'],
-          message: '请输入 textareaValue'
-        },
-        selectValue: {
-          required: true,
-          trigger: ['blur', 'change'],
-          message: '请选择 selectValue'
-        },
-        multipleSelectValue: {
-          type: 'array',
-          required: true,
-          trigger: ['blur', 'change'],
-          message: '请选择 multipleSelectValue'
-        },
-        datetimeValue: {
-          type: 'number',
-          required: true,
-          trigger: ['blur', 'change'],
-          message: '请输入 datetimeValue'
-        },
-        nestedValue: {
-          path1: {
-            required: true,
-            trigger: ['blur', 'input'],
-            message: '请输入 nestedValue.path1'
-          },
-          path2: {
-            required: true,
-            trigger: ['blur', 'change'],
-            message: '请输入 nestedValue.path2'
-          }
-        },
-        checkboxGroupValue: {
-          type: 'array',
-          required: true,
-          trigger: 'change',
-          message: '请选择 checkboxGroupValue'
-        },
-        radioGroupValue: {
-          required: true,
-          trigger: 'change',
-          message: '请选择 radioGroupValue'
-        },
-        radioButtonGroupValue: {
-          required: true,
-          trigger: 'change',
-          message: '请选择 radioButtonGroupValue'
-        },
-        inputNumberValue: {
-          type: 'number',
-          required: true,
-          trigger: ['blur', 'change'],
-          message: '请输入 inputNumberValue'
-        },
-        timePickerValue: {
-          type: 'number',
-          required: true,
-          trigger: ['blur', 'change'],
-          message: '请输入 timePickerValue'
-        },
-        sliderValue: {
-          validator (rule: FormItemRule, value: number) {
-            return value > 50
-          },
-          trigger: ['blur', 'change'],
-          message: 'sliderValue 需要大于 50'
-        },
-        transferValue: {
-          type: 'array',
-          required: true,
-          trigger: 'change',
-          message: '请输入 transferValue'
-        }
-      },
-      handleValidateButtonClick (e: MouseEvent) {
-        e.preventDefault()
-        formRef.value?.validate((errors) => {
-          if (!errors) {
-            message.success('验证成功')
-          } else {
-            console.log(errors)
-            message.error('验证失败')
-          }
-        })
-      }
-    }
-  }
-})
-</script>

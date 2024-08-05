@@ -2,6 +2,27 @@
 # 基础用法
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import type { DrawerPlacement } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const active = ref(false)
+    const placement = ref<DrawerPlacement>('right')
+    const activate = (place: DrawerPlacement) => {
+      active.value = true
+      placement.value = place
+    }
+    return {
+      active,
+      placement,
+      activate
+    }
+  }
+})
+</script>
+
 <template>
   <n-button-group>
     <n-button @click="activate('top')">
@@ -23,24 +44,3 @@
     </n-drawer-content>
   </n-drawer>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import type { DrawerPlacement } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const active = ref(false)
-    const placement = ref<DrawerPlacement>('right')
-    const activate = (place: DrawerPlacement) => {
-      active.value = true
-      placement.value = place
-    }
-    return {
-      active,
-      placement,
-      activate
-    }
-  }
-})
-</script>

@@ -4,6 +4,18 @@
 Use `formatted-value` to control formatted value.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      formattedValue: ref('4~1~8')
+    }
+  }
+})
+</script>
+
 <template>
   <pre>{{ formattedValue }}</pre>
   <n-time-picker
@@ -11,15 +23,3 @@ Use `formatted-value` to control formatted value.
     value-format="H~m~s"
   />
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      formattedValue: ref('4~1~8')
-    }
-  }
-})
-</script>

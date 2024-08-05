@@ -2,23 +2,11 @@
 # 基础用法
 </markdown>
 
-<template>
-  <n-auto-complete
-    v-model:value="value"
-    :input-props="{
-      autocomplete: 'disabled'
-    }"
-    :options="options"
-    placeholder="邮箱"
-    clearable
-  />
-</template>
-
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const valueRef = ref('')
     return {
       value: valueRef,
@@ -35,3 +23,15 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-auto-complete
+    v-model:value="value"
+    :input-props="{
+      autocomplete: 'disabled',
+    }"
+    :options="options"
+    placeholder="邮箱"
+    clearable
+  />
+</template>

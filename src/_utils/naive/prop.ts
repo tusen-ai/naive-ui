@@ -1,4 +1,4 @@
-export function largerSize (
+export function largerSize(
   size: 'tiny' | 'small' | 'medium' | 'large'
 ): 'small' | 'medium' | 'large' | 'huge' {
   switch (size) {
@@ -23,7 +23,7 @@ interface SmallerSizeMap {
 
 type SmallerSize<T extends keyof SmallerSizeMap> = SmallerSizeMap[T]
 
-export function smallerSize<T extends keyof SmallerSizeMap> (
+export function smallerSize<T extends keyof SmallerSizeMap>(
   size: T
 ): SmallerSize<T> {
   switch (size) {
@@ -38,5 +38,5 @@ export function smallerSize<T extends keyof SmallerSizeMap> (
     case 'huge':
       return 'large' as any
   }
-  throw Error(`${size} has no smaller size.`)
+  throw new Error(`${size} has no smaller size.`)
 }

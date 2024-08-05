@@ -2,12 +2,46 @@
 # Rtl Debug
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import type { StepsProps } from 'naive-ui'
+import { unstableStepsRtl } from 'naive-ui'
+import { MdArrowRoundBack, MdArrowRoundForward } from '@vicons/ionicons4'
+
+export default defineComponent({
+  components: { MdArrowRoundBack, MdArrowRoundForward },
+  setup() {
+    const currentRef = ref<number | null>(1)
+    return {
+      rtlEnabled: ref(false),
+      rtlStyles: [unstableStepsRtl],
+      currentStatus: ref<StepsProps['status']>('process'),
+      current: currentRef,
+      next() {
+        if (currentRef.value === null)
+          currentRef.value = 1
+        else if (currentRef.value >= 4)
+          currentRef.value = null
+        else currentRef.value++
+      },
+      prev() {
+        if (currentRef.value === 0)
+          currentRef.value = null
+        else if (currentRef.value === null)
+          currentRef.value = 4
+        else currentRef.value--
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-space><n-switch v-model:value="rtlEnabled" />Rtl</n-space>
     <n-config-provider :rtl="rtlEnabled ? rtlStyles : undefined">
       <n-space vertical>
-        <n-steps :current="(current as number)" :status="currentStatus">
+        <n-steps :current="current as number" :status="currentStatus">
           <n-step
             title="I Me Mine"
             description="All through the day, I me mine I me mine, I me mine"
@@ -30,14 +64,14 @@
             <n-button @click="prev">
               <template #icon>
                 <n-icon>
-                  <md-arrow-round-back />
+                  <MdArrowRoundBack />
                 </n-icon>
               </template>
             </n-button>
             <n-button @click="next">
               <template #icon>
                 <n-icon>
-                  <md-arrow-round-forward />
+                  <MdArrowRoundForward />
                 </n-icon>
               </template>
             </n-button>
@@ -65,32 +99,3 @@
     </n-config-provider>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { unstableStepsRtl, StepsProps } from 'naive-ui'
-import { MdArrowRoundBack, MdArrowRoundForward } from '@vicons/ionicons4'
-
-export default defineComponent({
-  components: { MdArrowRoundBack, MdArrowRoundForward },
-  setup () {
-    const currentRef = ref<number | null>(1)
-    return {
-      rtlEnabled: ref(false),
-      rtlStyles: [unstableStepsRtl],
-      currentStatus: ref<StepsProps['status']>('process'),
-      current: currentRef,
-      next () {
-        if (currentRef.value === null) currentRef.value = 1
-        else if (currentRef.value >= 4) currentRef.value = null
-        else currentRef.value++
-      },
-      prev () {
-        if (currentRef.value === 0) currentRef.value = null
-        else if (currentRef.value === null) currentRef.value = 4
-        else currentRef.value--
-      }
-    }
-  }
-})
-</script>

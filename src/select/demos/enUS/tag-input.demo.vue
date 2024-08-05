@@ -4,6 +4,19 @@
 Use `tag` and `:show="false"` to use select as a tag input box.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      multipleSelectValue: ref(null),
+      selectValue: ref(null)
+    }
+  }
+})
+</script>
+
 <template>
   <n-select
     v-model:value="multipleSelectValue"
@@ -15,16 +28,3 @@ Use `tag` and `:show="false"` to use select as a tag input box.
     :show="false"
   />
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      multipleSelectValue: ref(null),
-      selectValue: ref(null)
-    }
-  }
-})
-</script>

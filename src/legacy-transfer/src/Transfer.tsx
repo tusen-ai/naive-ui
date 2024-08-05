@@ -1,10 +1,10 @@
 import {
+  type CSSProperties,
+  type PropType,
   computed,
   defineComponent,
   h,
   provide,
-  type PropType,
-  type CSSProperties,
   watchEffect
 } from 'vue'
 import { useIsMounted } from 'vooks'
@@ -12,14 +12,14 @@ import { depx } from 'seemly'
 import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
 import { NButton } from '../../button'
-import { useLocale, useFormItem, useTheme, useConfig } from '../../_mixins'
+import { useConfig, useFormItem, useLocale, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils/cssr'
 import {
-  call,
   type ExtractPublicPropTypes,
-  warnOnce,
-  type MaybeArray
+  type MaybeArray,
+  call,
+  warnOnce
 } from '../../_utils'
 import { legacyTransferLight } from '../styles'
 import type { LegacyTransferTheme } from '../styles'
@@ -29,10 +29,10 @@ import NTransferFilter from './TransferFilter'
 import { useTransferData } from './use-transfer-data'
 import style from './styles/index.cssr'
 import {
-  type OptionValue,
-  type Option,
   type Filter,
   type OnUpdateValue,
+  type Option,
+  type OptionValue,
   transferInjectionKey
 } from './interface'
 
@@ -60,10 +60,11 @@ export const transferProps = {
   filter: {
     type: Function as PropType<Filter>,
     default: (pattern: string, option: Option) => {
-      if (!pattern) return true
-      return ~('' + option.label)
+      if (!pattern)
+        return true
+      return ~`${option.label}`
         .toLowerCase()
-        .indexOf(('' + pattern).toLowerCase())
+        .indexOf(`${pattern}`.toLowerCase())
     }
   },
   size: String as PropType<'small' | 'medium' | 'large'>,
@@ -77,7 +78,7 @@ export type TransferProps = ExtractPublicPropTypes<typeof transferProps>
 export default defineComponent({
   name: 'LegacyTransfer',
   props: transferProps,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.onChange !== undefined) {
@@ -129,80 +130,87 @@ export default defineComponent({
       handleTgtFilterUpdateValue,
       handleSrcFilterUpdateValue
     } = useTransferData(props, mergedDisabledRef)
-    function doUpdateValue (value: OptionValue[]): void {
+    function doUpdateValue(value: OptionValue[]): void {
       const {
         onUpdateValue,
         'onUpdate:value': _onUpdateValue,
         onChange
       } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (onUpdateValue) call(onUpdateValue, value)
-      if (_onUpdateValue) call(_onUpdateValue, value)
-      if (onChange) call(onChange, value)
+      if (onUpdateValue)
+        call(onUpdateValue, value)
+      if (_onUpdateValue)
+        call(_onUpdateValue, value)
+      if (onChange)
+        call(onChange, value)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()
     }
-    function handleSrcHeaderCheck (value: boolean): void {
+    function handleSrcHeaderCheck(): void {
       const {
         value: { checked, indeterminate }
       } = srcCheckedStatusRef
       if (indeterminate || checked) {
         srcCheckedValuesRef.value = []
-      } else {
+      }
+      else {
         srcCheckedValuesRef.value = Array.from(avlSrcValueSetRef.value)
       }
     }
-    function handleTgtHeaderCheck (): void {
+    function handleTgtHeaderCheck(): void {
       const {
         value: { checked, indeterminate }
       } = tgtCheckedStatusRef
       if (indeterminate || checked) {
         tgtCheckedValuesRef.value = []
-      } else {
+      }
+      else {
         tgtCheckedValuesRef.value = Array.from(avlTgtValueSetRef.value)
       }
     }
-    function handleTgtCheckboxClick (
+    function handleTgtCheckboxClick(
       checked: boolean,
       optionValue: OptionValue
     ): void {
       if (checked) {
         tgtCheckedValuesRef.value.push(optionValue)
-      } else {
+      }
+      else {
         const index = tgtCheckedValuesRef.value.findIndex(
-          (v) => v === optionValue
+          v => v === optionValue
         )
         if (~index) {
           tgtCheckedValuesRef.value.splice(index, 1)
         }
       }
     }
-    function handleSrcCheckboxClick (
+    function handleSrcCheckboxClick(
       checked: boolean,
       optionValue: OptionValue
     ): void {
       if (checked) {
         srcCheckedValuesRef.value.push(optionValue)
-      } else {
+      }
+      else {
         const index = srcCheckedValuesRef.value.findIndex(
-          (v) => v === optionValue
+          v => v === optionValue
         )
         if (~index) {
           srcCheckedValuesRef.value.splice(index, 1)
         }
       }
     }
-    function handleToTgtClick (): void {
+    function handleToTgtClick(): void {
       doUpdateValue(
         srcCheckedValuesRef.value.concat(mergedValueRef.value || [])
       )
       srcCheckedValuesRef.value = []
     }
-    function handleToSrcClick (): void {
+    function handleToSrcClick(): void {
       const tgtCheckedValueSet = new Set(tgtCheckedValuesRef.value)
       doUpdateValue(
-        (mergedValueRef.value || []).filter((v) => !tgtCheckedValueSet.has(v))
+        (mergedValueRef.value || []).filter(v => !tgtCheckedValueSet.has(v))
       )
       tgtCheckedValuesRef.value = []
     }
@@ -298,7 +306,7 @@ export default defineComponent({
       })
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     return (
       <div

@@ -4,7 +4,7 @@ import type { FloatButtonGroupTheme } from './light'
 const floatButtonGroupDark: FloatButtonGroupTheme = {
   name: 'FloatButtonGroup',
   common: commonDark,
-  self (vars) {
+  self(vars) {
     const { popoverColor, dividerColor, borderRadius } = vars
     return {
       color: popoverColor,

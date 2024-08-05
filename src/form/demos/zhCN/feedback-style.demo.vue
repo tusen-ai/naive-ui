@@ -4,6 +4,18 @@
 使用 `feedback-style` 和 `feedback-class` 可以自定义反馈信息的样式。
 </markdown>
 
+<script lang="ts" setup>
+import { reactive } from 'vue'
+
+interface FormValue {
+  input: string | null
+}
+
+const formValue: FormValue = reactive({
+  input: null
+})
+</script>
+
 <template>
   <n-form :model="formValue">
     <n-form-item
@@ -11,7 +23,7 @@
         required: true,
         message: '居中的 feedback',
         type: 'string',
-        trigger: ['input', 'blur']
+        trigger: ['input', 'blur'],
       }"
       label="Feedback 居中"
       path="input"
@@ -21,15 +33,3 @@
     </n-form-item>
   </n-form>
 </template>
-
-<script lang="ts" setup>
-import { reactive } from 'vue'
-
-type FormValue = {
-  input: string | null
-}
-
-const formValue: FormValue = reactive({
-  input: null
-})
-</script>

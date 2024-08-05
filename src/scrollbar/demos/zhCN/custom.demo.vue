@@ -10,8 +10,8 @@
       Scrollbar: {
         width: '8px',
         railInsetHorizontal: '4px 4px 4px auto',
-        borderRadius: 0
-      }
+        borderRadius: 0,
+      },
     }"
   >
     <n-scrollbar style="max-height: 120px">

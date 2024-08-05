@@ -4,16 +4,14 @@
 如果选项的 `label` 不是字符串，默认情况下会使用 `value` 进行匹配。
 </markdown>
 
-<template>
-  <n-mention :options="options" :render-label="renderLabel" />
-</template>
-
 <script lang="ts">
-import { defineComponent, h, VNodeChild } from 'vue'
-import { NAvatar, MentionOption } from 'naive-ui'
+import type { VNodeChild } from 'vue'
+import { defineComponent, h } from 'vue'
+import type { MentionOption } from 'naive-ui'
+import { NAvatar } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       options: [
         {
@@ -43,3 +41,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-mention :options="options" :render-label="renderLabel" />
+</template>

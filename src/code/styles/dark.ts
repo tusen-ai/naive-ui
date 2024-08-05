@@ -4,7 +4,7 @@ import type { CodeTheme } from './light'
 const codeDark: CodeTheme = {
   name: 'Code',
   common: commonDark,
-  self (vars) {
+  self(vars) {
     const { textColor2, fontSize, fontWeightStrong, textColor3 } = vars
     return {
       textColor: textColor2,

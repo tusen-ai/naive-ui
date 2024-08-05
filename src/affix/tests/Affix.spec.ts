@@ -1,13 +1,13 @@
 import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NAffix } from '../index'
 import { sleep } from 'seemly'
+import { NAffix } from '../index'
 
-const makeScroll = async (
+async function makeScroll(
   dom: Element,
   name: 'scrollTop',
   offset: number
-): Promise<any> => {
+): Promise<any> {
   const eventTarget = dom === document.documentElement ? window : dom
   dom[name] = offset
   eventTarget.dispatchEvent(

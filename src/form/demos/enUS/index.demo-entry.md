@@ -5,7 +5,7 @@
 The element to collect and validate data.
 
 <n-alert type="warning" title="Caveat" :bordered="false">
-  If you want to apply required rule for a form item with number typed value, you need to set <n-text code>`type: number`</n-text> in the rule object.
+  If you want to apply required rule for a form item with number typed value, you need to set <n-text code>`type: 'number'`</n-text> in the rule object.
 </n-alert>
 
 ## Demos
@@ -54,14 +54,16 @@ feedback-style.vue
   The follow table doesn't demostrate all props of rules. If you want to know all the usages, please see <n-a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</n-a>.
 </n-alert>
 
-| Property | Type | Description | Version |
-| --- | --- | --- | --- |
-| asyncValidator | `(rule: FormItemRule, value: any, callback: (error?: Error) => void) => void` | Asynchronous validation in the form of a callback. |  |
-| message | `string` | Text to show when validation fails. |  |
-| renderMessage | `() => VNodeChild` | Render function or message. | 2.29.1 |
-| required | `boolean` | Is it required. |  |
-| trigger | `string \| Array<string>` | Trigger type. |  |
-| validator | `(rule: FormItemRule, value: any) => boolean \| Error` | Validation rule. |  |
+| Property | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| asyncValidator | `(rule: FormItemRule, value: any, callback: (error?: Error) => void) => void` | `undefined` | Asynchronous validation in the form of a callback. |  |
+| key | `string` | `undefined` | Unique key of this rule, which can be used to apply partial rules. See [Apply partial rules](form#partially-apply-rules.vue) example. |  |
+| level | `'error'` \| `'warning'` | `undefined` | Validation level. If there are already errors, `'warning'` level validation would be skipped. |  |
+| message | `string` | `undefined` | Text to show when validation fails. |  |
+| renderMessage | `() => VNodeChild` | `undefined` | Render function or message. | 2.29.1 |
+| required | `boolean` | `undefined` | Is it required. |  |
+| trigger | `string \| Array<string>` | `undefined` | Trigger type. |  |
+| validator | `(rule: FormItemRule, value: any) => boolean \| Error` | `undefined` | Validation rule. |  |
 
 #### FormValidateMessages Type
 

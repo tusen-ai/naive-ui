@@ -1,4 +1,4 @@
-import { h, defineComponent, toRef } from 'vue'
+import { defineComponent, h, toRef } from 'vue'
 import { useStyle } from '../../../_mixins'
 import type { ExtractPublicPropTypes } from '../../../_utils'
 import NIconSwitchTransition from '../../icon-switch-transition'
@@ -42,10 +42,10 @@ export default defineComponent({
     },
     ...exposedLoadingProps
   },
-  setup (props) {
+  setup(props) {
     useStyle('-base-loading', style, toRef(props, 'clsPrefix'))
   },
-  render () {
+  render() {
     const { clsPrefix, radius, strokeWidth, stroke, scale } = this
     const scaledRadius = radius / scale
     return (

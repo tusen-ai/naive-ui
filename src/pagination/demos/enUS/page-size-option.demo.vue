@@ -2,21 +2,11 @@
 # Custom page size options
 </markdown>
 
-<template>
-  <n-pagination
-    v-model:page="page"
-    v-model:page-size="pageSize"
-    :page-count="100"
-    show-size-picker
-    :page-sizes="pageSizes"
-  />
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const pageSizes = [
       {
         label: '10 per page',
@@ -43,3 +33,13 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-pagination
+    v-model:page="page"
+    v-model:page-size="pageSize"
+    :page-count="100"
+    show-size-picker
+    :page-sizes="pageSizes"
+  />
+</template>

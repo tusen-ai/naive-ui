@@ -1,20 +1,13 @@
 <markdown>
 # Max
-
 </markdown>
 
-<template>
-  <n-notification-provider :max="3">
-    <notification-button />
-  </n-notification-provider>
-</template>
-
 <script lang="ts">
-import { defineComponent, ref, h } from 'vue'
-import { useNotification, NButton } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
+import { NButton, useNotification } from 'naive-ui'
 
 const NotificationButton = defineComponent({
-  setup () {
+  setup() {
     const notification = useNotification()
     const index = ref(0)
     return {
@@ -22,7 +15,7 @@ const NotificationButton = defineComponent({
       index
     }
   },
-  render () {
+  render() {
     return h(
       NButton,
       {
@@ -45,3 +38,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-notification-provider :max="3">
+    <NotificationButton />
+  </n-notification-provider>
+</template>

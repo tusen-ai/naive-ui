@@ -31,7 +31,7 @@ const columns = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       data: [],
       columns,

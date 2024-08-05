@@ -2,10 +2,10 @@ import { emptyLight } from '../../../empty/styles'
 import { scrollbarLight } from '../../scrollbar/styles'
 import { commonLight } from '../../../_styles/common'
 import type { ThemeCommonVars } from '../../../_styles/common'
-import commonVariables from './_common'
 import { createTheme } from '../../../_mixins'
+import commonVariables from './_common'
 
-export const self = (vars: ThemeCommonVars) => {
+export function self(vars: ThemeCommonVars) {
   const {
     borderRadius,
     popoverColor,
@@ -17,10 +17,12 @@ export const self = (vars: ThemeCommonVars) => {
     primaryColor,
     opacityDisabled,
     hoverColor,
+    fontSizeTiny,
     fontSizeSmall,
     fontSizeMedium,
     fontSizeLarge,
     fontSizeHuge,
+    heightTiny,
     heightSmall,
     heightMedium,
     heightLarge,
@@ -28,10 +30,12 @@ export const self = (vars: ThemeCommonVars) => {
   } = vars
   return {
     ...commonVariables,
+    optionFontSizeTiny: fontSizeTiny,
     optionFontSizeSmall: fontSizeSmall,
     optionFontSizeMedium: fontSizeMedium,
     optionFontSizeLarge: fontSizeLarge,
     optionFontSizeHuge: fontSizeHuge,
+    optionHeightTiny: heightTiny,
     optionHeightSmall: heightSmall,
     optionHeightMedium: heightMedium,
     optionHeightLarge: heightLarge,

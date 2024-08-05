@@ -2,34 +2,11 @@
   # 保持状态
 </markdown>
 
-<template>
-  <n-space vertical>
-    <n-button @click="showVirtualList = !showVirtualList">
-      切换可见性
-    </n-button>
-    <keep-alive>
-      <n-virtual-list
-        v-if="showVirtualList"
-        style="max-height: 240px"
-        :item-size="42"
-        :items="items"
-      >
-        <template #default="{ item, index }">
-          <div :key="item.key" class="item" style="height: 42px">
-            <img class="avatar" :src="item.avatar" alt="">
-            <span> {{ index }}</span>
-          </div>
-        </template>
-      </n-virtual-list>
-    </keep-alive>
-  </n-space>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const showVirtualList = ref(true)
 
     const avatars = [
@@ -53,6 +30,30 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space vertical>
+    <n-button @click="showVirtualList = !showVirtualList">
+      切换可见性
+    </n-button>
+    <keep-alive>
+      <n-virtual-list
+        v-if="showVirtualList"
+        style="max-height: 240px"
+        :item-size="42"
+        :items="items"
+      >
+        <template #default="{ item, index }">
+          <div :key="item.key" class="item" style="height: 42px">
+            <img class="avatar" :src="item.avatar" alt="">
+            <span> {{ index }}</span>
+          </div>
+        </template>
+      </n-virtual-list>
+    </keep-alive>
+  </n-space>
+</template>
+
 <style>
 .item {
   display: flex;

@@ -1,7 +1,17 @@
 <markdown>
 # 次次要按钮
-
 </markdown>
+
+<script lang="ts">
+import { CashOutline as CashIcon } from '@vicons/ionicons5'
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  components: {
+    CashIcon
+  }
+})
+</script>
 
 <template>
   <n-space>
@@ -43,42 +53,31 @@
     </n-button>
     <n-button tertiary circle>
       <template #icon>
-        <n-icon><cash-icon /></n-icon>
+        <n-icon><CashIcon /></n-icon>
       </template>
     </n-button>
     <n-button tertiary circle type="primary">
       <template #icon>
-        <n-icon><cash-icon /></n-icon>
+        <n-icon><CashIcon /></n-icon>
       </template>
     </n-button>
     <n-button tertiary circle type="info">
       <template #icon>
-        <n-icon><cash-icon /></n-icon>
+        <n-icon><CashIcon /></n-icon>
       </template>
     </n-button>
     <n-button tertiary circle type="success">
-      <n-icon><cash-icon /></n-icon>
+      <n-icon><CashIcon /></n-icon>
     </n-button>
     <n-button tertiary circle type="warning">
       <template #icon>
-        <n-icon><cash-icon /></n-icon>
+        <n-icon><CashIcon /></n-icon>
       </template>
     </n-button>
     <n-button tertiary circle type="error">
       <template #icon>
-        <n-icon><cash-icon /></n-icon>
+        <n-icon><CashIcon /></n-icon>
       </template>
     </n-button>
   </n-space>
 </template>
-
-<script lang="ts">
-import { CashOutline as CashIcon } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    CashIcon
-  }
-})
-</script>

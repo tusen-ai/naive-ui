@@ -15,7 +15,7 @@
 ```js
 import { defineComponent, ref } from 'vue'
 
-function createCols () {
+function createCols() {
   return [
     {
       title: 'Name',
@@ -101,21 +101,23 @@ function createCols () {
   ]
 }
 
-function createData () {
-  return Array.apply(null, { length: 50 }).map((_, i) => {
-    return {
-      key: i,
-      name: `name_${i}`,
-      physicsAttack: `physicsAttack_${i}`,
-      magicAttack: `magicAttack_${i}`,
-      defend: `defend_${i}`,
-      speed: `speed_${i}`
-    }
-  })
+function createData() {
+  return Array(50)
+    .fill(null)
+    .map((_, i) => {
+      return {
+        key: i,
+        name: `name_${i}`,
+        physicsAttack: `physicsAttack_${i}`,
+        magicAttack: `magicAttack_${i}`,
+        defend: `defend_${i}`,
+        speed: `speed_${i}`
+      }
+    })
 }
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       data: ref(createData()),
       columns: ref(createCols()),

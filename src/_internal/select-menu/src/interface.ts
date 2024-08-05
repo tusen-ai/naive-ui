@@ -1,4 +1,4 @@
-import type { VNodeChild, Ref, UnwrapRef, VNode, HTMLAttributes } from 'vue'
+import type { HTMLAttributes, Ref, UnwrapRef, VNode, VNodeChild } from 'vue'
 import type { TreeNode } from 'treemate'
 import type {
   SelectBaseOption,
@@ -7,7 +7,7 @@ import type {
 } from '../../../select/src/interface'
 import { createInjectionKey } from '../../../_utils/vue/create-injection-key'
 
-export type Size = 'small' | 'medium' | 'large' | 'huge'
+export type Size = 'tiny' | 'small' | 'medium' | 'large' | 'huge'
 
 export type RenderLabel = (
   option: SelectBaseOption & SelectGroupOption & SelectIgnoredOption,
@@ -60,11 +60,11 @@ export interface InternalExposedProps {
   next: () => void
 }
 
-export const internalSelectionMenuInjectionKey =
-  createInjectionKey<InternalSelectMenuInjection>('n-internal-select-menu')
+export const internalSelectionMenuInjectionKey
+  = createInjectionKey<InternalSelectMenuInjection>('n-internal-select-menu')
 
 export const internalSelectionMenuBodyInjectionKey = createInjectionKey<
-Ref<HTMLElement | null>
+  Ref<HTMLElement | null>
 >('n-internal-select-menu-body')
 
 export type InternalSelectMenuRef = UnwrapRef<InternalExposedProps>

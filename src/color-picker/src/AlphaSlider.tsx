@@ -1,4 +1,4 @@
-import { computed, defineComponent, h, type PropType, ref } from 'vue'
+import { type PropType, computed, defineComponent, h, ref } from 'vue'
 import { off, on } from 'evtd'
 import { type RGBA, toRgbaString } from 'seemly'
 import { normalizeAlpha } from './utils'
@@ -28,22 +28,24 @@ export default defineComponent({
     },
     onComplete: Function as PropType<() => void>
   },
-  setup (props) {
+  setup(props) {
     const railRef = ref<HTMLElement | null>(null)
-    function handleMouseDown (e: MouseEvent): void {
-      if (!railRef.value || !props.rgba) return
+    function handleMouseDown(e: MouseEvent): void {
+      if (!railRef.value || !props.rgba)
+        return
       on('mousemove', document, handleMouseMove)
       on('mouseup', document, handleMouseUp)
       handleMouseMove(e)
     }
-    function handleMouseMove (e: MouseEvent): void {
+    function handleMouseMove(e: MouseEvent): void {
       const { value: railEl } = railRef
-      if (!railEl) return
+      if (!railEl)
+        return
       const { width, left } = railEl.getBoundingClientRect()
       const newAlpha = (e.clientX - left) / (width - HANDLE_SIZE_NUM)
       props.onUpdateAlpha(normalizeAlpha(newAlpha))
     }
-    function handleMouseUp (): void {
+    function handleMouseUp(): void {
       off('mousemove', document, handleMouseMove)
       off('mouseup', document, handleMouseUp)
       props.onComplete?.()
@@ -52,13 +54,14 @@ export default defineComponent({
       railRef,
       railBackgroundImage: computed(() => {
         const { rgba } = props
-        if (!rgba) return ''
+        if (!rgba)
+          return ''
         return `linear-gradient(to right, rgba(${rgba[0]}, ${rgba[1]}, ${rgba[2]}, 0) 0%, rgba(${rgba[0]}, ${rgba[1]}, ${rgba[2]}, 1) 100%)`
       }),
       handleMouseDown
     }
   },
-  render () {
+  render() {
     const { clsPrefix } = this
     return (
       <div

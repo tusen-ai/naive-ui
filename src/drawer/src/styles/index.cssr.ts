@@ -43,8 +43,7 @@ export default c([
     background-color: var(--n-color);
     color: var(--n-text-color);
     box-sizing: border-box;
-  `,
-  [
+  `, [
     slideInFromRightTransition(),
     slideInFromLeftTransition(),
     slideInFromTopTransition(),
@@ -103,6 +102,9 @@ export default c([
         justify-content: space-between;
         align-items: center;
       `, [
+        cE('main', `
+          flex: 1;
+        `),
         cE('close', `
           margin-left: 6px;
           transition:

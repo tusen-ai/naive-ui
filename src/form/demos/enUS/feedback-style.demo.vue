@@ -4,6 +4,18 @@
 Using `feedback-style` and `feedback-class` to custom feedback.
 </markdown>
 
+<script lang="ts" setup>
+import { reactive } from 'vue'
+
+interface FormValue {
+  input: string | null
+}
+
+const formValue: FormValue = reactive({
+  input: null
+})
+</script>
+
 <template>
   <n-form :model="formValue">
     <n-form-item
@@ -11,7 +23,7 @@ Using `feedback-style` and `feedback-class` to custom feedback.
         required: true,
         message: 'Centered feedback',
         type: 'string',
-        trigger: ['input', 'blur']
+        trigger: ['input', 'blur'],
       }"
       label="Centered feedback"
       path="input"
@@ -21,15 +33,3 @@ Using `feedback-style` and `feedback-class` to custom feedback.
     </n-form-item>
   </n-form>
 </template>
-
-<script lang="ts" setup>
-import { reactive } from 'vue'
-
-type FormValue = {
-  input: string | null
-}
-
-const formValue: FormValue = reactive({
-  input: null
-})
-</script>

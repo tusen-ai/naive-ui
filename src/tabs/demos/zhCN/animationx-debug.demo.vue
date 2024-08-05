@@ -1,6 +1,7 @@
 <markdown>
 # Animationx debug
 </markdown>
+
 <template>
   <n-card title="歌曲" style="margin-bottom: 16px">
     <n-tabs type="line" animated>
