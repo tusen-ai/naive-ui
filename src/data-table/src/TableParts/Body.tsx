@@ -31,6 +31,7 @@ import {
 } from '../interface'
 import { createRowClassName, getColKey, isColumnSorting } from '../utils'
 import type { ColItem } from '../use-group-header'
+import { configProviderInjectionKey } from '../../../config-provider/src/context'
 import Cell from './Cell'
 import ExpandTrigger from './ExpandTrigger'
 import RenderSafeCheckbox from './BodyCheckbox'
@@ -192,6 +193,7 @@ export default defineComponent({
       doUncheck,
       renderCell
     } = inject(dataTableInjectionKey)!
+    const NConfigProvider = inject(configProviderInjectionKey)
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const virtualListRef = ref<VirtualListInst | null>(null)
     const emptyElRef = ref<HTMLElement | null>(null)
@@ -428,13 +430,15 @@ export default defineComponent({
         id: `n-${componentId}`,
         force: true,
         props: cProps,
-        anchorMetaName: cssrAnchorMetaName
+        anchorMetaName: cssrAnchorMetaName,
+        parent: NConfigProvider?.styleMountTarget
       })
       fixedStyleMounted = true
     })
     onUnmounted(() => {
       style.unmount({
-        id: `n-${componentId}`
+        id: `n-${componentId}`,
+        parent: NConfigProvider?.styleMountTarget
       })
     })
     return {

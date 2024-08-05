@@ -61,6 +61,7 @@ export default defineComponent({
             themeOverrides={mergedTheme.peerOverrides.Input}
             stateful={false}
             size={this.timePickerSize}
+            readonly={this.inputReadonly}
             class={`${mergedClsPrefix}-date-panel-date-input`}
             textDecoration={this.isDateInvalid ? 'line-through' : ''}
             placeholder={this.locale.selectDate}

@@ -32,6 +32,7 @@ const usePanelCommonProps = {
   },
   shortcuts: Object as PropType<Shortcuts>,
   defaultTime: [Number, String, Array] as PropType<DefaultTime>,
+  inputReadonly: Boolean,
   onClear: Function,
   onConfirm: Function as PropType<(value: Value | null) => void>,
   onClose: Function as PropType<OnClose>,

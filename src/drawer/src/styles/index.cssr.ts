@@ -102,6 +102,9 @@ export default c([
         justify-content: space-between;
         align-items: center;
       `, [
+        cE('main', `
+          flex: 1;
+        `),
         cE('close', `
           margin-left: 6px;
           transition:

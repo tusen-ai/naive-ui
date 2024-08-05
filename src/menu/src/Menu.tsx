@@ -7,6 +7,7 @@ import {
   defineComponent,
   h,
   inject,
+  mergeProps,
   provide,
   ref,
   toRef,
@@ -151,6 +152,7 @@ export type MenuProps = Partial<MenuSetupProps>
 
 export default defineComponent({
   name: 'Menu',
+  inheritAttrs: false,
   props: menuProps,
   setup(props) {
     if (__DEV__) {
@@ -626,19 +628,21 @@ export default defineComponent({
       this.tmNodes.map(tmNode => itemRenderer(tmNode, this.$props))
     const horizontal = mode === 'horizontal'
     const finalResponsive = horizontal && this.responsive
-    const renderMainNode = (): VNode => (
-      <div
-        role={mode === 'horizontal' ? 'menubar' : 'menu'}
-        class={[
-          `${mergedClsPrefix}-menu`,
-          themeClass,
-          `${mergedClsPrefix}-menu--${mode}`,
-          finalResponsive && `${mergedClsPrefix}-menu--responsive`,
-          this.mergedCollapsed && `${mergedClsPrefix}-menu--collapsed`
-        ]}
-        style={this.cssVars}
-      >
-        {finalResponsive ? (
+    const renderMainNode = (): VNode =>
+      h(
+        'div',
+        mergeProps(this.$attrs, {
+          role: mode === 'horizontal' ? 'menubar' : 'menu',
+          class: [
+            `${mergedClsPrefix}-menu`,
+            themeClass,
+            `${mergedClsPrefix}-menu--${mode}`,
+            finalResponsive && `${mergedClsPrefix}-menu--responsive`,
+            this.mergedCollapsed && `${mergedClsPrefix}-menu--collapsed`
+          ],
+          style: this.cssVars
+        }),
+        finalResponsive ? (
           <VOverflow
             ref="overflowRef"
             onUpdateOverflow={this.onUpdateOverflow}
@@ -658,9 +662,8 @@ export default defineComponent({
           </VOverflow>
         ) : (
           renderMenuItemNodes()
-        )}
-      </div>
-    )
+        )
+      )
     return finalResponsive ? (
       <VResizeObserver onResize={this.onResize}>
         {{ default: renderMainNode }}
