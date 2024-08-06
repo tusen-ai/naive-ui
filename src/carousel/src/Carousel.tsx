@@ -60,8 +60,8 @@ const transitionProperties = [
 ] as const
 
 type TransitionStyle = Partial<
-  Pick<CSSProperties, (typeof transitionProperties)[number]>
->
+    Pick<CSSProperties, (typeof transitionProperties)[number]>
+    >
 
 export const carouselProps = {
   ...(useTheme.props as ThemeProps<CarouselTheme>),
@@ -130,11 +130,11 @@ export const carouselProps = {
   mousewheel: Boolean,
   keyboard: Boolean,
   'onUpdate:currentIndex': Function as PropType<
-    (currentIndex: number, lastIndex: number) => void
-  >,
+      (currentIndex: number, lastIndex: number) => void
+      >,
   onUpdateCurrentIndex: Function as PropType<
-    (currentIndex: number, lastIndex: number) => void
-  >
+      (currentIndex: number, lastIndex: number) => void
+      >
 }
 
 export type CarouselProps = ExtractPublicPropTypes<typeof carouselProps>
@@ -157,30 +157,30 @@ export default defineComponent({
     const verticalRef = computed(() => props.direction === 'vertical')
     const sizeAxisRef = computed(() => (verticalRef.value ? 'height' : 'width'))
     const spaceAxisRef = computed(() =>
-      verticalRef.value ? 'bottom' : 'right'
+        verticalRef.value ? 'bottom' : 'right'
     )
     const sequenceLayoutRef = computed(() => props.effect === 'slide')
     const duplicatedableRef = computed(
-      // duplicate the copy operation in `slide` mode,
-      // because only its DOM is sequence layout
-      () => props.loop && props.slidesPerView === 1 && sequenceLayoutRef.value
+        // duplicate the copy operation in `slide` mode,
+        // because only its DOM is sequence layout
+        () => props.loop && props.slidesPerView === 1 && sequenceLayoutRef.value
     )
     // user wants to control the transition animation
     const userWantsControlRef = computed(() => props.effect === 'custom')
 
     // used to calculate total views
     const displaySlidesPerViewRef = computed(() =>
-      !sequenceLayoutRef.value || props.centeredSlides ? 1 : props.slidesPerView
+        !sequenceLayoutRef.value || props.centeredSlides ? 1 : props.slidesPerView
     )
     // used to calculate the size of each slide
     const realSlidesPerViewRef = computed(() =>
-      userWantsControlRef.value ? 1 : props.slidesPerView
+        userWantsControlRef.value ? 1 : props.slidesPerView
     )
     // we automatically calculate total view for special slides per view
     const autoSlideSizeRef = computed(
-      () =>
-        displaySlidesPerViewRef.value === 'auto'
-        || (props.slidesPerView === 'auto' && props.centeredSlides)
+        () =>
+            displaySlidesPerViewRef.value === 'auto'
+            || (props.slidesPerView === 'auto' && props.centeredSlides)
     )
 
     // Carousel size
@@ -231,20 +231,20 @@ export default defineComponent({
     const transitionStyleRef = computed(() => {
       const { transitionStyle } = props
       return transitionStyle
-        ? keep(transitionStyle, transitionProperties as any)
-        : {}
+          ? keep(transitionStyle, transitionProperties as any)
+          : {}
     })
     const speedRef = computed(() =>
-      userWantsControlRef.value
-        ? 0
-        : resolveSpeed(transitionStyleRef.value.transitionDuration)
+        userWantsControlRef.value
+            ? 0
+            : resolveSpeed(transitionStyleRef.value.transitionDuration)
     )
     const slideStylesRef = computed(() => {
       const { value: slidesEls } = slideElsRef
       if (!slidesEls.length)
         return []
       const useComputedSize = !(
-        autoSlideSizeRef.value || realSlidesPerViewRef.value === 1
+          autoSlideSizeRef.value || realSlidesPerViewRef.value === 1
       )
       const getSlideSize = (index: number): Partial<Size> | undefined => {
         if (useComputedSize) {
@@ -299,36 +299,36 @@ export default defineComponent({
       }
     })
     const displayTotalViewRef = computed(() =>
-      getDisplayTotalView(totalViewRef.value, duplicatedableRef.value)
+        getDisplayTotalView(totalViewRef.value, duplicatedableRef.value)
     )
 
     // Index
     const defaultRealIndex = getRealIndex(
-      props.defaultIndex,
-      duplicatedableRef.value
+        props.defaultIndex,
+        duplicatedableRef.value
     )
     const uncontrolledDisplayIndexRef = ref(
-      getDisplayIndex(
-        defaultRealIndex,
-        totalViewRef.value,
-        duplicatedableRef.value
-      )
+        getDisplayIndex(
+            defaultRealIndex,
+            totalViewRef.value,
+            duplicatedableRef.value
+        )
     )
     const mergedDisplayIndexRef = useMergedState(
-      toRef(props, 'currentIndex'),
-      uncontrolledDisplayIndexRef
+        toRef(props, 'currentIndex'),
+        uncontrolledDisplayIndexRef
     )
     const realIndexRef = computed(() =>
-      getRealIndex(mergedDisplayIndexRef.value, duplicatedableRef.value)
+        getRealIndex(mergedDisplayIndexRef.value, duplicatedableRef.value)
     )
 
     // Reality methods
     function toRealIndex(index: number): void {
       index = clampValue(index, 0, totalViewRef.value - 1)
       const displayIndex = getDisplayIndex(
-        index,
-        totalViewRef.value,
-        duplicatedableRef.value
+          index,
+          totalViewRef.value,
+          duplicatedableRef.value
       )
       const { value: lastDisplayIndex } = mergedDisplayIndexRef
       if (displayIndex !== mergedDisplayIndexRef.value) {
@@ -338,12 +338,12 @@ export default defineComponent({
       }
     }
     function getRealPrevIndex(
-      index: number = realIndexRef.value
+        index: number = realIndexRef.value
     ): number | null {
       return getPrevIndex(index, totalViewRef.value, props.loop)
     }
     function getRealNextIndex(
-      index: number = realIndexRef.value
+        index: number = realIndexRef.value
     ): number | null {
       return getNextIndex(index, totalViewRef.value, props.loop)
     }
@@ -374,13 +374,13 @@ export default defineComponent({
     // To
     function to(index: number): void {
       const realIndex = clampValue(
-        getRealIndex(index, duplicatedableRef.value),
-        0,
-        totalViewRef.value
+          getRealIndex(index, duplicatedableRef.value),
+          0,
+          totalViewRef.value
       )
       if (
-        index !== mergedDisplayIndexRef.value
-        || realIndex !== realIndexRef.value
+          index !== mergedDisplayIndexRef.value
+          || realIndex !== realIndexRef.value
       ) {
         toRealIndex(realIndex)
       }
@@ -413,8 +413,8 @@ export default defineComponent({
     function updateTranslate(translate: number, speed = 0): void {
       translateStyleRef.value = Object.assign({}, transitionStyleRef.value, {
         transform: verticalRef.value
-          ? `translateY(${-translate}px)`
-          : `translateX(${-translate}px)`,
+            ? `translateY(${-translate}px)`
+            : `translateX(${-translate}px)`,
         transitionDuration: `${speed}ms`
       })
     }
@@ -506,13 +506,13 @@ export default defineComponent({
     }
     function getSlideIndex(slideOrIndex?: HTMLElement | number): number {
       return typeof slideOrIndex === 'number'
-        ? slideOrIndex
-        : slideOrIndex
-          ? slideElsRef.value.indexOf(slideOrIndex)
-          : -1
+          ? slideOrIndex
+          : slideOrIndex
+              ? slideElsRef.value.indexOf(slideOrIndex)
+              : -1
     }
     function getSlideStyle(
-      slide: HTMLElement | number
+        slide: HTMLElement | number
     ): string | Record<string, string | number> | undefined {
       const index = getSlideIndex(slide)
       if (index !== -1) {
@@ -547,19 +547,53 @@ export default defineComponent({
       }
     }
 
+    // 自定义setInterval。浏览器自带setInterval当轮播得内容占用内存高得时候，并不会按照指定事件触发
+    const setIntervalRAF: {autoplayTimer: number | null, setInterval: (callback: any, interval: number)=> number, clearInterval: () => void} = {
+      autoplayTimer: null,
+      setInterval: function (callback, interval) {
+        // 起始时间
+        let startTime = Date.now();
+        // 结束时间
+        let endTime = Date.now();
+        // 循环函数
+        const loop = ():void => {
+          // 该方法调用必须在 callback 之前，确保打印的 'self.timer'  'clearInterval' 的值一样
+          this.autoplayTimer = requestAnimationFrame(loop);
+          endTime = Date.now();
+          // 判断时间超过 interval 就执行函数，并重置时间
+          if(endTime - startTime >= interval) {
+            // 让起始时间、结束时间相同
+            endTime = startTime = Date.now();
+            // 执行回调
+            callback && callback();
+          }
+        }
+        // 执行 requestAnimationFrame
+        this.autoplayTimer = requestAnimationFrame(loop);
+        // 返回 timer
+        return this.autoplayTimer;
+      },
+      clearInterval: function () {
+        cancelAnimationFrame(this.autoplayTimer as number);
+        this.autoplayTimer = null
+      }
+    };
     // Autoplay
-    let autoplayTimer: number | null = null
-    function stopAutoplay(): void {
-      if (autoplayTimer) {
-        clearInterval(autoplayTimer)
-        autoplayTimer = null
+    let isMouse: boolean = false;
+    function stopAutoplay() {
+      if (setIntervalRAF.autoplayTimer) {
+        // clearInterval(autoplayTimer);
+        setIntervalRAF.clearInterval();
+        // setIntervalRAF.autoplayTimer = null;
       }
     }
-    function resetAutoplay(): void {
-      stopAutoplay()
-      const disabled = !props.autoplay || displayTotalViewRef.value < 2
-      if (!disabled) {
-        autoplayTimer = window.setInterval(next, props.interval)
+    function resetAutoplay():void {
+      const disabled = !props.autoplay || displayTotalViewRef.value < 2;
+      // 自动播放关闭清除定时器
+      disabled && stopAutoplay();
+      if (!disabled && !setIntervalRAF.autoplayTimer && !isMouse) {
+        // autoplayTimer = window.setInterval(next, props.interval);
+        setIntervalRAF.setInterval(next, props.interval);
       }
     }
 
@@ -567,9 +601,9 @@ export default defineComponent({
       if (globalDragging)
         return
       if (
-        !slidesElRef.value?.contains(
-          getPreciseEventTarget(event) as Node | null
-        )
+          !slidesElRef.value?.contains(
+              getPreciseEventTarget(event) as Node | null
+          )
       ) {
         return
       }
@@ -579,8 +613,8 @@ export default defineComponent({
       dragStartTime = Date.now()
       stopAutoplay()
       if (
-        event.type !== 'touchstart'
-        && !(event.target as HTMLElement).isContentEditable
+          event.type !== 'touchstart'
+          && !(event.target as HTMLElement).isContentEditable
       ) {
         event.preventDefault()
       }
@@ -606,8 +640,8 @@ export default defineComponent({
       const { value: axis } = sizeAxisRef
       const touchEvent = isTouchEvent(event) ? event.touches[0] : event
       const offset = vertical
-        ? touchEvent.clientY - dragStartY
-        : touchEvent.clientX - dragStartX
+          ? touchEvent.clientY - dragStartY
+          : touchEvent.clientX - dragStartX
       const perViewSize = perViewSizeRef.value[axis]
       dragOffset = clampValue(offset, -perViewSize, perViewSize)
       if (event.cancelable) {
@@ -645,8 +679,8 @@ export default defineComponent({
           currentIndex = getRealPrevIndex(realIndex)
         }
         else if (
-          dragOffset < -perViewSize / 2
-          || dragOffset / timeElapsed < -0.4
+            dragOffset < -perViewSize / 2
+            || dragOffset / timeElapsed < -0.4
         ) {
           currentIndex = getRealNextIndex(realIndex)
         }
@@ -656,8 +690,8 @@ export default defineComponent({
         toRealIndex(currentIndex)
         void nextTick(() => {
           if (
-            !duplicatedableRef.value
-            || uncontrolledDisplayIndexRef.value !== mergedDisplayIndexRef.value
+              !duplicatedableRef.value
+              || uncontrolledDisplayIndexRef.value !== mergedDisplayIndexRef.value
           ) {
             fixTranslate(speedRef.value)
           }
@@ -739,11 +773,13 @@ export default defineComponent({
     }
     function handleMouseenter(): void {
       if (props.autoplay) {
+        isMouse = true;
         stopAutoplay()
       }
     }
     function handleMouseleave(): void {
       if (props.autoplay) {
+        isMouse = false;
         resetAutoplay()
       }
     }
@@ -761,7 +797,7 @@ export default defineComponent({
       const { value: slideVNodes } = slideVNodesRef
       const indexMap = new Map<HTMLElement, number>()
       const getDisplayIndex = (el: HTMLElement): number =>
-        indexMap.has(el) ? indexMap.get(el)! : -1
+          indexMap.has(el) ? indexMap.get(el)! : -1
       let isChanged = false
       for (let i = 0; i < slidesEls.length; i++) {
         const index = slideVNodes.findIndex(v => v.el === slidesEls[i])
@@ -775,50 +811,50 @@ export default defineComponent({
       }
     })
     watch(
-      realIndexRef,
-      (realIndex, lastRealIndex) => {
-        if (realIndex === lastRealIndex)
-          return
-        resetAutoplay()
-        if (sequenceLayoutRef.value) {
-          if (duplicatedableRef.value) {
-            const { value: length } = totalViewRef
-            if (
-              displayTotalViewRef.value > 2
-              && realIndex === length - 2
-              && lastRealIndex === 1
-            ) {
-              realIndex = 0
+        realIndexRef,
+        (realIndex, lastRealIndex) => {
+          if (realIndex === lastRealIndex)
+            return
+          resetAutoplay()
+          if (sequenceLayoutRef.value) {
+            if (duplicatedableRef.value) {
+              const { value: length } = totalViewRef
+              if (
+                  displayTotalViewRef.value > 2
+                  && realIndex === length - 2
+                  && lastRealIndex === 1
+              ) {
+                realIndex = 0
+              }
+              else if (realIndex === 1 && lastRealIndex === length - 2) {
+                realIndex = length - 1
+              }
             }
-            else if (realIndex === 1 && lastRealIndex === length - 2) {
-              realIndex = length - 1
-            }
+            translateTo(realIndex, speedRef.value)
           }
-          translateTo(realIndex, speedRef.value)
-        }
-        else {
-          fixTranslate()
-        }
-      },
-      { immediate: true }
+          else {
+            fixTranslate()
+          }
+        },
+        { immediate: true }
     )
     watch(
-      [duplicatedableRef, displaySlidesPerViewRef],
-      () =>
-        void nextTick(() => {
-          toRealIndex(realIndexRef.value)
-        })
+        [duplicatedableRef, displaySlidesPerViewRef],
+        () =>
+            void nextTick(() => {
+              toRealIndex(realIndexRef.value)
+            })
     )
     watch(
-      slideTranlatesRef,
-      () => {
-        if (sequenceLayoutRef.value) {
-          fixTranslate()
+        slideTranlatesRef,
+        () => {
+          if (sequenceLayoutRef.value) {
+            fixTranslate()
+          }
+        },
+        {
+          deep: true
         }
-      },
-      {
-        deep: true
-      }
     )
     watch(sequenceLayoutRef, (value) => {
       if (!value) {
@@ -860,12 +896,12 @@ export default defineComponent({
       next
     }
     const themeRef = useTheme(
-      'Carousel',
-      '-carousel',
-      style,
-      carouselLight,
-      props,
-      mergedClsPrefixRef
+        'Carousel',
+        '-carousel',
+        style,
+        carouselLight,
+        props,
+        mergedClsPrefixRef
     )
     const cssVarsRef = computed(() => {
       const {
@@ -892,8 +928,8 @@ export default defineComponent({
       }
     })
     const themeClassHandle = inlineThemeDisabled
-      ? useThemeClass('carousel', undefined, cssVarsRef, props)
-      : undefined
+        ? useThemeClass('carousel', undefined, cssVarsRef, props)
+        : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       selfElRef,
@@ -938,11 +974,11 @@ export default defineComponent({
     let slides = filterCarouselItem(children)
     if (!slides.length) {
       slides = children.map(ch => (
-        <NCarouselItem>
-          {{
-            default: () => cloneVNode(ch)
-          }}
-        </NCarouselItem>
+          <NCarouselItem>
+            {{
+              default: () => cloneVNode(ch)
+            }}
+          </NCarouselItem>
       ))
     }
     if (this.duplicatedable) {
@@ -953,78 +989,78 @@ export default defineComponent({
     // we listen to them to fix the current translate
     if (this.autoSlideSize) {
       slides = slides.map(slide => (
-        <VResizeObserver onResize={this.handleSlideResize}>
-          {{
-            default: () => slide
-          }}
-        </VResizeObserver>
+          <VResizeObserver onResize={this.handleSlideResize}>
+            {{
+              default: () => slide
+            }}
+          </VResizeObserver>
       ))
     }
     this.onRender?.()
     return (
-      <div
-        ref="selfElRef"
-        class={[
-          this.themeClass,
-          `${mergedClsPrefix}-carousel`,
-          this.direction === 'vertical'
-          && `${mergedClsPrefix}-carousel--vertical`,
-          this.showArrow && `${mergedClsPrefix}-carousel--show-arrow`,
-          `${mergedClsPrefix}-carousel--${dotPlacement}`,
-          `${mergedClsPrefix}-carousel--${this.direction}`,
-          `${mergedClsPrefix}-carousel--${this.effect}`,
-          userWantsControl && `${mergedClsPrefix}-carousel--usercontrol`
-        ]}
-        style={this.cssVars as CSSProperties}
-        {...slidesControlListeners}
-        onMouseenter={this.handleMouseenter}
-        onMouseleave={this.handleMouseleave}
-      >
-        <VResizeObserver onResize={this.handleResize}>
-          {{
-            default: () => (
-              <div
-                ref="slidesElRef"
-                class={`${mergedClsPrefix}-carousel__slides`}
-                role="listbox"
-                style={this.translateStyle}
-                onTransitionend={this.handleTransitionEnd}
-              >
-                {userWantsControl
-                  ? slides.map((slide, i) => (
-                    <div style={slideStyles[i]} key={i}>
-                      {withDirectives(
-                        <Transition {...transitionProps}>
-                          {{
-                            default: () => slide
-                          }}
-                        </Transition>,
-                        [[vShow, this.isActive(i)]]
-                      )}
-                    </div>
-                  ))
-                  : slides}
-              </div>
-            )
-          }}
-        </VResizeObserver>
-        {this.showDots
-        && dotSlotProps.total > 1
-        && resolveSlotWithProps(dotsSlot, dotSlotProps, () => [
-          <NCarouselDots
-            key={dotType + dotPlacement}
-            total={dotSlotProps.total}
-            currentIndex={dotSlotProps.currentIndex}
-            dotType={dotType}
-            trigger={this.trigger}
-            keyboard={this.keyboard}
-          />
-        ])}
-        {showArrow
-        && resolveSlotWithProps(arrowSlot, arrowSlotProps, () => [
-          <NCarouselArrow />
-        ])}
-      </div>
+        <div
+            ref="selfElRef"
+            class={[
+              this.themeClass,
+              `${mergedClsPrefix}-carousel`,
+              this.direction === 'vertical'
+              && `${mergedClsPrefix}-carousel--vertical`,
+              this.showArrow && `${mergedClsPrefix}-carousel--show-arrow`,
+              `${mergedClsPrefix}-carousel--${dotPlacement}`,
+              `${mergedClsPrefix}-carousel--${this.direction}`,
+              `${mergedClsPrefix}-carousel--${this.effect}`,
+              userWantsControl && `${mergedClsPrefix}-carousel--usercontrol`
+            ]}
+            style={this.cssVars as CSSProperties}
+            {...slidesControlListeners}
+            onMouseenter={this.handleMouseenter}
+            onMouseleave={this.handleMouseleave}
+        >
+          <VResizeObserver onResize={this.handleResize}>
+            {{
+              default: () => (
+                  <div
+                      ref="slidesElRef"
+                      class={`${mergedClsPrefix}-carousel__slides`}
+                      role="listbox"
+                      style={this.translateStyle}
+                      onTransitionend={this.handleTransitionEnd}
+                  >
+                    {userWantsControl
+                        ? slides.map((slide, i) => (
+                            <div style={slideStyles[i]} key={i}>
+                              {withDirectives(
+                                  <Transition {...transitionProps}>
+                                    {{
+                                      default: () => slide
+                                    }}
+                                  </Transition>,
+                                  [[vShow, this.isActive(i)]]
+                              )}
+                            </div>
+                        ))
+                        : slides}
+                  </div>
+              )
+            }}
+          </VResizeObserver>
+          {this.showDots
+              && dotSlotProps.total > 1
+              && resolveSlotWithProps(dotsSlot, dotSlotProps, () => [
+                <NCarouselDots
+                    key={dotType + dotPlacement}
+                    total={dotSlotProps.total}
+                    currentIndex={dotSlotProps.currentIndex}
+                    dotType={dotType}
+                    trigger={this.trigger}
+                    keyboard={this.keyboard}
+                />
+              ])}
+          {showArrow
+              && resolveSlotWithProps(arrowSlot, arrowSlotProps, () => [
+                <NCarouselArrow />
+              ])}
+        </div>
     )
   }
 })
