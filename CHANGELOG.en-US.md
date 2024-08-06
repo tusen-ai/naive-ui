@@ -31,6 +31,7 @@
 - `n-empty` `size` prop to support `tiny` size.
 - `n-config-provider` adds `style-mount-target` prop to control where to mount components' style.
 - `n-cascader` filter ignore case sensitive
+- `n-time` add `formatOptions` prop to support custom date-fns format options
 
 ## 2.39.0
 

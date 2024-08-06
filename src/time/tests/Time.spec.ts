@@ -67,4 +67,26 @@ describe('n-time', () => {
     const wrapper = mount(NTime, { props: { time: date, text: true } })
     expect(wrapper.find('time').exists()).toEqual(false)
   })
+
+  it('should work with `formatOptions` prop', async () => {
+    const wrapper = mount(NTime, {
+      props: {
+        time: date,
+        format: 'yyyy/MM/dd',
+        formatOptions: {
+          useAdditionalWeekYearTokens: false,
+          useAdditionalDayOfYearTokens: false
+        }
+      }
+    })
+    expect(wrapper.find('time').text()).toContain('1970/01/01')
+    await wrapper.setProps({
+      format: 'YYYY/MM/DD',
+      formatOptions: {
+        useAdditionalWeekYearTokens: true,
+        useAdditionalDayOfYearTokens: true
+      }
+    })
+    expect(wrapper.find('time').text()).toContain('1970/01/01')
+  })
 })

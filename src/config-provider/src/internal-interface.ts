@@ -100,6 +100,7 @@ import type { RowTheme } from '../../legacy-grid/styles'
 import type { SplitTheme } from '../../split/styles'
 import type { FlexTheme } from '../../flex/styles'
 import type { FloatButtonGroupTheme } from '../../float-button-group/styles'
+import type { FormatOptions } from '../../time/src/interface'
 import type { Katex } from './katex'
 import type { GlobalTheme, GlobalThemeOverrides } from './interface'
 
@@ -214,6 +215,9 @@ export interface GlobalComponentConfig {
     buttonSize?: ButtonSize
   }
   Empty?: Pick<EmptyProps, 'description' | 'renderIcon'>
+  Time?: {
+    formatOptions?: FormatOptions
+  }
 }
 
 export interface GlobalIconConfig {
