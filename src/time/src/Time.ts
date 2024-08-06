@@ -8,8 +8,9 @@ import {
 import { format, formatDistanceStrict, fromUnixTime } from 'date-fns'
 import type { Locale } from 'date-fns'
 import { formatInTimeZone } from 'date-fns-tz'
-import { useLocale } from '../../_mixins'
+import { useConfig, useLocale } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type { FormatOptions } from './interface'
 
 export const timeProps = {
   time: {
@@ -27,7 +28,11 @@ export const timeProps = {
   unix: Boolean,
   format: String,
   text: Boolean,
-  timeZone: String
+  timeZone: String,
+  formatOptions: {
+    type: Object as PropType<FormatOptions>,
+    default: undefined
+  }
 } as const
 
 export type TimeProps = ExtractPublicPropTypes<typeof timeProps>
@@ -38,13 +43,14 @@ export default defineComponent({
   setup(props) {
     const now = Date.now()
     const { localeRef, dateLocaleRef } = useLocale('Time')
+    const { mergedComponentPropsRef } = useConfig()
     const mergedFormatRef = computed(() => {
       const { timeZone } = props
       if (timeZone) {
         return (
           time: number | Date,
           _format: string,
-          options: { locale: Locale }
+          options: { locale: Locale } & FormatOptions
         ) => {
           return formatInTimeZone(time, timeZone, _format, options)
         }
@@ -54,6 +60,17 @@ export default defineComponent({
     const dateFnsOptionsRef = computed(() => {
       return {
         locale: dateLocaleRef.value.locale
+      }
+    })
+    const formatOptionsRef = computed(() => {
+      const { formatOptions } = props
+      const options
+        = formatOptions
+        ?? mergedComponentPropsRef?.value?.Time?.formatOptions
+        ?? {}
+      return {
+        ...options,
+        ...dateFnsOptionsRef.value
       }
     })
     const mergedTimeRef = computed(() => {
@@ -79,7 +96,7 @@ export default defineComponent({
         return mergedFormatRef.value(
           mergedTimeRef.value,
           props.format,
-          dateFnsOptionsRef.value
+          formatOptionsRef.value
         )
       }
       else if (props.type === 'date') {
