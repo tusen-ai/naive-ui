@@ -4,17 +4,13 @@
 将 `label` 设为渲染函数，结合 `n-ellipsis`。
 </markdown>
 
-<template>
-  <n-menu :options="options" style="width: 180px" default-value="1" />
-</template>
-
 <script lang="ts">
 import { defineComponent, h } from 'vue'
 import type { MenuOption } from 'naive-ui'
 import { NEllipsis } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const options: MenuOption[] = [
       {
         label: () =>
@@ -33,3 +29,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-menu :options="options" style="width: 180px" default-value="1" />
+</template>

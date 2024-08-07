@@ -4,6 +4,18 @@
 Tabs may have different sizes.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      size: ref<'small' | 'medium' | 'large'>('medium')
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-radio-group v-model:value="size">
@@ -54,15 +66,3 @@ Tabs may have different sizes.
     </n-tabs>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      size: ref<'small' | 'medium' | 'large'>('medium')
-    }
-  }
-})
-</script>

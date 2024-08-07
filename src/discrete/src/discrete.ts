@@ -3,15 +3,15 @@ import { NMessageProvider } from '../../message'
 import { NDialogProvider } from '../../dialog'
 import { NNotificationProvider } from '../../notification'
 import { NLoadingBarProvider } from '../../loading-bar'
+import { NModalProvider } from '../../modal/src/ModalProvider'
 import { createDiscreteApp } from './discreteApp'
 import type {
   DiscreteApi,
   DiscreteApiOptions,
   DiscreteApiType
 } from './interface'
-import { NModalProvider } from '../../modal/src/ModalProvider'
 
-export function createDiscreteApi<T extends DiscreteApiType> (
+export function createDiscreteApi<T extends DiscreteApiType>(
   includes: T[],
   {
     configProviderProps,

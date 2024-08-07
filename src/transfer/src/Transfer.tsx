@@ -1,24 +1,25 @@
 import {
+  type CSSProperties,
+  type PropType,
+  type VNodeChild,
   computed,
   defineComponent,
   h,
   provide,
-  type PropType,
-  type CSSProperties,
-  watchEffect,
-  toRef
+  toRef,
+  watchEffect
 } from 'vue'
 import { useIsMounted } from 'vooks'
 import { depx } from 'seemly'
 import { NScrollbar } from '../../_internal'
-import { useFormItem, useTheme, useConfig } from '../../_mixins'
+import { useConfig, useFormItem, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils/cssr'
 import {
-  call,
   type ExtractPublicPropTypes,
-  warnOnce,
-  type MaybeArray
+  type MaybeArray,
+  call,
+  warnOnce
 } from '../../_utils'
 import { transferLight } from '../styles'
 import type { TransferTheme } from '../styles'
@@ -27,14 +28,14 @@ import NTransferList from './TransferList'
 import NTransferFilter from './TransferFilter'
 import { useTransferData } from './use-transfer-data'
 import {
-  type OptionValue,
-  type Option,
   type Filter,
   type OnUpdateValue,
-  transferInjectionKey,
-  type TransferRenderTargetLabel,
+  type Option,
+  type OptionValue,
+  type TransferRenderSourceLabel,
   type TransferRenderSourceList,
-  type TransferRenderSourceLabel
+  type TransferRenderTargetLabel,
+  transferInjectionKey
 } from './interface'
 import style from './styles/index.cssr'
 
@@ -54,10 +55,10 @@ export const transferProps = {
     default: undefined
   },
   virtualScroll: Boolean,
-  sourceTitle: String,
+  sourceTitle: [String, Function] as PropType<string | (() => VNodeChild)>,
   selectAllText: String,
   clearText: String,
-  targetTitle: String,
+  targetTitle: [String, Function] as PropType<string | (() => VNodeChild)>,
   filterable: {
     type: Boolean,
     default: undefined
@@ -73,10 +74,11 @@ export const transferProps = {
   filter: {
     type: Function as PropType<Filter>,
     default: (pattern: string, option: Option) => {
-      if (!pattern) return true
-      return ~('' + option.label)
+      if (!pattern)
+        return true
+      return ~`${option.label}`
         .toLowerCase()
-        .indexOf(('' + pattern).toLowerCase())
+        .indexOf(`${pattern}`.toLowerCase())
     }
   },
   size: String as PropType<'small' | 'medium' | 'large'>,
@@ -94,7 +96,7 @@ export type TransferProps = ExtractPublicPropTypes<typeof transferProps>
 export default defineComponent({
   name: 'Transfer',
   props: transferProps,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.onChange !== undefined) {
@@ -148,44 +150,48 @@ export default defineComponent({
       handleSrcFilterUpdateValue,
       handleTgtFilterUpdateValue
     } = useTransferData(props)
-    function doUpdateValue (value: OptionValue[]): void {
+    function doUpdateValue(value: OptionValue[]): void {
       const {
         onUpdateValue,
         'onUpdate:value': _onUpdateValue,
         onChange
       } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (onUpdateValue) call(onUpdateValue, value)
-      if (_onUpdateValue) call(_onUpdateValue, value)
-      if (onChange) call(onChange, value)
+      if (onUpdateValue)
+        call(onUpdateValue, value)
+      if (_onUpdateValue)
+        call(_onUpdateValue, value)
+      if (onChange)
+        call(onChange, value)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()
     }
 
-    function handleSourceCheckAll (): void {
+    function handleSourceCheckAll(): void {
       doUpdateValue([...valueSetForCheckAllRef.value])
     }
 
-    function handleSourceUncheckAll (): void {
+    function handleSourceUncheckAll(): void {
       doUpdateValue([...valueSetForUncheckAllRef.value])
     }
 
-    function handleTargetClearAll (): void {
+    function handleTargetClearAll(): void {
       doUpdateValue([...valueSetForClearRef.value])
     }
 
-    function handleItemCheck (checked: boolean, optionValue: OptionValue): void {
+    function handleItemCheck(checked: boolean, optionValue: OptionValue): void {
       if (checked) {
         doUpdateValue((mergedValueRef.value || []).concat(optionValue))
-      } else {
+      }
+      else {
         doUpdateValue(
-          (mergedValueRef.value || []).filter((v) => v !== optionValue)
+          (mergedValueRef.value || []).filter(v => v !== optionValue)
         )
       }
     }
 
-    function handleChecked (optionValueList: OptionValue[]): void {
+    function handleChecked(optionValueList: OptionValue[]): void {
       doUpdateValue(optionValueList)
     }
 
@@ -284,7 +290,7 @@ export default defineComponent({
       })
     }
   },
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       renderSourceList,

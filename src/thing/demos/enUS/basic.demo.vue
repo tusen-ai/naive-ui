@@ -4,6 +4,27 @@
 Thing provides many slots to custom.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { CashOutline as CashIcon } from '@vicons/ionicons5'
+
+export default defineComponent({
+  components: {
+    CashIcon
+  },
+  setup() {
+    return {
+      avatar: ref(true),
+      header: ref(true),
+      headerExtra: ref(true),
+      description: ref(true),
+      footer: ref(true),
+      action: ref(true)
+    }
+  }
+})
+</script>
+
 <template>
   <n-row>
     <n-col :span="12">
@@ -46,7 +67,7 @@ Thing provides many slots to custom.
     <template v-if="avatar" #avatar>
       <n-avatar>
         <n-icon>
-          <cash-icon />
+          <CashIcon />
         </n-icon>
       </n-avatar>
     </template>
@@ -56,7 +77,7 @@ Thing provides many slots to custom.
     <template v-if="headerExtra" #header-extra>
       <n-button circle size="small">
         <template #icon>
-          <cash-icon />
+          <CashIcon />
         </template>
       </n-button>
     </template>
@@ -74,7 +95,7 @@ Thing provides many slots to custom.
         <n-button size="small">
           <template #icon>
             <n-icon>
-              <cash-icon />
+              <CashIcon />
             </n-icon>
           </template>
           1$
@@ -82,7 +103,7 @@ Thing provides many slots to custom.
         <n-button size="small">
           <template #icon>
             <n-icon>
-              <cash-icon />
+              <CashIcon />
             </n-icon>
           </template>
           10$
@@ -90,7 +111,7 @@ Thing provides many slots to custom.
         <n-button size="small">
           <template #icon>
             <n-icon>
-              <cash-icon />
+              <CashIcon />
             </n-icon>
           </template>
           100$
@@ -99,24 +120,3 @@ Thing provides many slots to custom.
     </template>
   </n-thing>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { CashOutline as CashIcon } from '@vicons/ionicons5'
-
-export default defineComponent({
-  components: {
-    CashIcon
-  },
-  setup () {
-    return {
-      avatar: ref(true),
-      header: ref(true),
-      headerExtra: ref(true),
-      description: ref(true),
-      footer: ref(true),
-      action: ref(true)
-    }
-  }
-})
-</script>

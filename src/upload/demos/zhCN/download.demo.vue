@@ -4,25 +4,13 @@
 通过设置 `show-download-button` 来显示下载按钮，通过 `on-download` 来设置下载按钮被点击的事件处理函数。
 </markdown>
 
-<template>
-  <n-upload
-    action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
-    :default-file-list="fileList"
-    list-type="image"
-    show-download-button
-    @download="handleDownload"
-  >
-    <n-button>上传文件</n-button>
-  </n-upload>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { useMessage } from 'naive-ui'
 import type { UploadFileInfo } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     const fileListRef = ref<UploadFileInfo[]>([
       {
@@ -53,3 +41,15 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-upload
+    action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+    :default-file-list="fileList"
+    list-type="image"
+    show-download-button
+    @download="handleDownload"
+  >
+    <n-button>上传文件</n-button>
+  </n-upload>
+</template>

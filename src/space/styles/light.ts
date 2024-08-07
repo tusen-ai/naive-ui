@@ -1,7 +1,7 @@
 import type { Theme } from '../../_mixins'
 import commonVars from './_common'
 
-const self = () => {
+function self() {
   return commonVars
 }
 

@@ -53,9 +53,9 @@ panel.vue
 | show | `boolean` | `undefined` | Whether to show panel. | 2.28.3 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validation status. | 2.27.0 |
-| time-format | `string \| undefined` | `undefined` | Format of the binding value. See [format](https://date-fns.org/v2.23.0/docs/format). | NEXT_VERSION |
+| time-picker-format | `string \| undefined` | `undefined` | Format of the binding value in time picker inside date picker of type `'datetime'` and `'datetimerange'`. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.38.2 |
 | to | `string \| HTMLElement \| false` | `body` | Container node of the panel. `false` will keep it not detached. |  |
-| type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'monthrange' \| 'year' \| 'quarter' \| 'week'` | `'date'` | Date picker type. | `'quarter'` v2.22.0, `'monthrange'` 2.28.3 |
+| type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'monthrange' \| 'year' \| 'yearrange' \| 'quarter' \| 'quarterrange' \| 'week'` | `'date'` | Date picker type. | `'quarter'` v2.22.0, `'monthrange'` 2.28.3 |
 | value | `number \| [number, number] \| null` | `undefined` | Value of the date picker when being manually set. |  |
 | value-format | `string` | Follow `format` prop | Format of the binding value. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.24.0 |
 | year-format | `string` | `'y'` | Format of year item in the panel. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.37.0 |
@@ -194,6 +194,28 @@ panel.vue
 | prev-month | `()`       | Prev icon of the date panel.      | 2.33.4  |
 | prev-year  | `()`       | Fast prev icon of the date panel. | 2.33.4  |
 | separator  | `()`       | Separator of range picker.        | 2.29.0  |
+
+### Date Year QuarterRange Week Slots
+
+| 名称 | 参数 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| clear | `(props: { onClear: () => void })` | Clear button of the panel. | NEXT_VERSION |
+| now | `(props: { onNow: () => void })` | Now button of the panel. | NEXT_VERSION |
+
+### DateRange DateTimeRange MonthRange YearRange Slots
+
+| 名称 | 参数 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| clear | `(props: { onClear: () => void })` | Clear button of the panel. | NEXT_VERSION |
+| confirm | `(props: { onConfirm: () => void, disabled: boolean })` | Confirm button of the panel. | NEXT_VERSION |
+
+### DateTime Month Quarter Slots
+
+| 名称 | 参数 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| now | `(props: { onNow: () => void })` | Now button of the panel. | NEXT_VERSION |
+| clear | `(props: { onClear: () => void })` | Clear button of the panel. | NEXT_VERSION |
+| confirm | `(props: { onConfirm: () => void, disabled: boolean })` | Confirm button of the panel. | NEXT_VERSION |
 
 ### DatePicker Methods
 

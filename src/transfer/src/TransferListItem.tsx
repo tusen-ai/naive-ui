@@ -1,9 +1,9 @@
-import { h, inject, defineComponent, type PropType } from 'vue'
+import { type PropType, defineComponent, h, inject } from 'vue'
 import { useMemo } from 'vooks'
 import { NCheckbox } from '../../checkbox'
 import { getTitleAttribute } from '../../_utils'
 import { NBaseClose } from '../../_internal'
-import { transferInjectionKey, type Option } from './interface'
+import { type Option, transferInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'NTransferListItem',
@@ -23,7 +23,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
+  setup(props) {
     const {
       targetValueSetRef,
       mergedClsPrefixRef,
@@ -32,10 +32,9 @@ export default defineComponent({
       renderSourceLabelRef,
       renderTargetLabelRef,
       showSelectedRef
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(transferInjectionKey)!
     const checkedRef = useMemo(() => targetValueSetRef.value.has(props.value))
-    function handleClick (): void {
+    function handleClick(): void {
       if (!props.disabled) {
         handleItemCheck(!checkedRef.value, props.value)
       }
@@ -50,7 +49,7 @@ export default defineComponent({
       handleClick
     }
   },
-  render () {
+  render() {
     const {
       disabled,
       mergedTheme,

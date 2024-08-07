@@ -39,6 +39,7 @@ status.vue
 | filterable | `boolean` | `false` | Note: If `remote` is set, this won't have any effect. |  |
 | filter | `(pattern: string, option: CascaderOption, path: CascaderOption[]) => boolean` | A string based filter algorithm. | Filter function of the cascader. |  |
 | filter-menu-props | `HTMLAttributes` | `undefined` | The filter menu's dom props. | 2.27.0 |
+| get-column-style | `(detail: { level: number }) => string \| object` | `undefined` | Function that resolves column style. `level` starts from `0`. | 2.38.2 |
 | value-field | `string` | `'value'` | The value field in `CascaderOption`. |  |
 | label-field | `string` | `'label'` | The label field in `CascaderOption`. |  |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count in multiple select mode. `responsive` will keep all the tags in single line. |  |
@@ -48,7 +49,9 @@ status.vue
 | placeholder | `string` | `'Please Select'` | Placeholder text. |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Cascader placement. | 2.25.0 |
 | remote | `boolean` | `false` | Whether to obtain data remotely. |  |
+| render-prefix | `(info: { option: CascaderOption, node: VNode \| null, checked: boolean }) => VNodeChild` | `undefined` | Render function of all the options' prefix. | 2.38.2 |
 | render-label | `(option: CascaderOption, checked: boolean) => VNodeChild` | `undefined` | Render function for cascader menu option label. | 2.24.0 |
+| render-suffix | `(info: { option: CascaderOption, node: VNode \| null, checked: boolean }) => VNodeChild` | `undefined` | Render function of all the options' suffix. | 2.38.2 |
 | separator | `string` | `' / '` | Selected option path value separator (used with `show-path`). |  |
 | show | `boolean` | `undefined` | Whether to show the menu. |  |
 | show-path | `boolean` | `true` | Whether to show the selected options as a path. |  |

@@ -2,6 +2,34 @@
 # Events
 </markdown>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const message = useMessage()
+    return {
+      handleFocus() {
+        message.info('[Event focus]')
+      },
+      handleBlur() {
+        message.info('[Event blur]')
+      },
+      handleChange(v: string) {
+        message.info(`[Event change]: ${v}`)
+      },
+      handleKeyUp() {
+        message.info('[Event keyup]')
+      },
+      handleInput(v: string) {
+        message.info(`[Event input]: ${v}`)
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-input
@@ -23,31 +51,3 @@
     />
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { useMessage } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const message = useMessage()
-    return {
-      handleFocus () {
-        message.info('[Event focus]')
-      },
-      handleBlur () {
-        message.info('[Event blur]')
-      },
-      handleChange (v: string) {
-        message.info('[Event change]: ' + v)
-      },
-      handleKeyUp () {
-        message.info('[Event keyup]')
-      },
-      handleInput (v: string) {
-        message.info('[Event input]: ' + v)
-      }
-    }
-  }
-})
-</script>

@@ -4,30 +4,11 @@
 和下拉菜单一起使用。
 </markdown>
 
-<template>
-  <n-breadcrumb>
-    <n-breadcrumb-item>
-      <n-dropdown :options="options1">
-        <div class="trigger">
-          I'm ok
-        </div>
-      </n-dropdown>
-    </n-breadcrumb-item>
-    <n-breadcrumb-item>
-      <n-dropdown :options="options2">
-        <div class="trigger">
-          I'm ok
-        </div>
-      </n-dropdown>
-    </n-breadcrumb-item>
-  </n-breadcrumb>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       options1: [
         {
@@ -53,6 +34,25 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-breadcrumb>
+    <n-breadcrumb-item>
+      <n-dropdown :options="options1">
+        <div class="trigger">
+          I'm ok
+        </div>
+      </n-dropdown>
+    </n-breadcrumb-item>
+    <n-breadcrumb-item>
+      <n-dropdown :options="options2">
+        <div class="trigger">
+          I'm ok
+        </div>
+      </n-dropdown>
+    </n-breadcrumb-item>
+  </n-breadcrumb>
+</template>
 
 <style>
 .trigger {

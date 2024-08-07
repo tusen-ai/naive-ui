@@ -4,6 +4,19 @@
 Affix can be `absolute` or `fixed` positioned. You may need some css tricks to make it works as following. By default position is set to `fixed`, because in most cases scrolled element is `document`.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const containerRef = ref<HTMLElement | undefined>(undefined)
+    return {
+      containerRef
+    }
+  }
+})
+</script>
+
 <template>
   <div class="absolute-anchor-container">
     <div ref="containerRef" class="container">
@@ -31,19 +44,6 @@ Affix can be `absolute` or `fixed` positioned. You may need some css tricks to m
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const containerRef = ref<HTMLElement | undefined>(undefined)
-    return {
-      containerRef
-    }
-  }
-})
-</script>
 
 <style>
 .absolute-anchor-container {

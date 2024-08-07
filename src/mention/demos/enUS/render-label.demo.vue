@@ -4,16 +4,14 @@
 If the `option.label` property is not a string, the `option.value` property will be used for matching by default.
 </markdown>
 
-<template>
-  <n-mention :options="options" :render-label="renderLabel" />
-</template>
-
 <script lang="ts">
-import { defineComponent, h, VNodeChild } from 'vue'
-import { NAvatar, MentionOption } from 'naive-ui'
+import type { VNodeChild } from 'vue'
+import { defineComponent, h } from 'vue'
+import type { MentionOption } from 'naive-ui'
+import { NAvatar } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       options: [
         {
@@ -43,3 +41,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-mention :options="options" :render-label="renderLabel" />
+</template>

@@ -1,17 +1,20 @@
 import type { PaginationProps } from './Pagination'
 
-export const getDefaultPageSize = (
+export function getDefaultPageSize(
   paginationProps: PaginationProps | false
-): number => {
-  if (!paginationProps) return 10
+): number {
+  if (!paginationProps)
+    return 10
   const { defaultPageSize } = paginationProps
-  if (defaultPageSize !== undefined) return defaultPageSize
+  if (defaultPageSize !== undefined)
+    return defaultPageSize
   const pageSizeOption = paginationProps.pageSizes?.[0]
-  if (typeof pageSizeOption === 'number') return pageSizeOption
+  if (typeof pageSizeOption === 'number')
+    return pageSizeOption
   return pageSizeOption?.value || 10
 }
 
-function createPageItemsInfo (
+function createPageItemsInfo(
   currentPage: number,
   pageCount: number,
   pageSlot: number,
@@ -85,8 +88,10 @@ function createPageItemsInfo (
   )
   let leftSplit = false
   let rightSplit = false
-  if (middleStart > firstPage + 2) leftSplit = true
-  if (middleEnd < lastPage - 2) rightSplit = true
+  if (middleStart > firstPage + 2)
+    leftSplit = true
+  if (middleEnd < lastPage - 2)
+    rightSplit = true
   const items: PageItem[] = []
   items.push({
     type: 'page',
@@ -106,7 +111,8 @@ function createPageItemsInfo (
         ? createRange(firstPage + 1, middleStart - 1)
         : null
     })
-  } else if (lastPage >= firstPage + 1) {
+  }
+  else if (lastPage >= firstPage + 1) {
     items.push({
       type: 'page',
       label: firstPage + 1,
@@ -135,9 +141,10 @@ function createPageItemsInfo (
         ? createRange(middleEnd + 1, lastPage - 1)
         : null
     })
-  } else if (
-    middleEnd === lastPage - 2 &&
-    items[items.length - 1].label !== lastPage - 1
+  }
+  else if (
+    middleEnd === lastPage - 2
+    && items[items.length - 1].label !== lastPage - 1
   ) {
     items.push({
       type: 'page',
@@ -180,7 +187,7 @@ export type PageItem =
     mayBeFastBackward: boolean
   }
 
-function createRange (
+function createRange(
   from: number,
   to: number
 ): Array<{ label: string, value: number }> {

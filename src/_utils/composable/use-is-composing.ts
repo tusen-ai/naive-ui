@@ -1,16 +1,16 @@
-import { ref, type Ref, onBeforeMount, onBeforeUnmount } from 'vue'
+import { type Ref, onBeforeMount, onBeforeUnmount, ref } from 'vue'
 import { isBrowser } from '../env/is-browser'
 
 const isComposingRef = ref(false)
-const compositionStartHandler = (): void => {
+function compositionStartHandler(): void {
   isComposingRef.value = true
 }
-const compositionEndHandler = (): void => {
+function compositionEndHandler(): void {
   isComposingRef.value = false
 }
 let mountedCount = 0
 
-export const useIsComposing = (): Ref<boolean> => {
+export function useIsComposing(): Ref<boolean> {
   if (isBrowser) {
     onBeforeMount(() => {
       if (!mountedCount) {
@@ -24,7 +24,8 @@ export const useIsComposing = (): Ref<boolean> => {
         window.removeEventListener('compositionstart', compositionStartHandler)
         window.removeEventListener('compositionend', compositionEndHandler)
         mountedCount = 0
-      } else {
+      }
+      else {
         mountedCount--
       }
     })

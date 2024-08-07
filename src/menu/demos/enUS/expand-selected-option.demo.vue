@@ -4,40 +4,12 @@
 In some scenes, menu's value is passed from outside. The component is hard to understand what behavior is expected. You can use `showOption` method to make specified option displayed.
 </markdown>
 
-<template>
-  <n-space vertical>
-    <n-switch v-model:value="accordion">
-      <template #checked>
-        Accrodion
-      </template>
-      <template #unchecked>
-        Normal
-      </template>
-    </n-switch>
-    <n-button @click="selectAndExpand('1')">
-      Select 1st child
-    </n-button>
-    <n-button @click="selectAndExpand('2')">
-      Select 2nd child
-    </n-button>
-    <n-button @click="selectAndExpand('3')">
-      Select 3rd child
-    </n-button>
-    <n-menu
-      ref="menuInstRef"
-      v-model:value="selectedKey"
-      :options="options"
-      :accordion="accordion"
-    />
-  </n-space>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { MenuInst } from 'naive-ui'
+import type { MenuInst } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const accordionRef = ref(false)
     const selectedKeyRef = ref('1')
     const menuInstRef = ref<MenuInst | null>(null)
@@ -86,3 +58,31 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space vertical>
+    <n-switch v-model:value="accordion">
+      <template #checked>
+        Accrodion
+      </template>
+      <template #unchecked>
+        Normal
+      </template>
+    </n-switch>
+    <n-button @click="selectAndExpand('1')">
+      Select 1st child
+    </n-button>
+    <n-button @click="selectAndExpand('2')">
+      Select 2nd child
+    </n-button>
+    <n-button @click="selectAndExpand('3')">
+      Select 3rd child
+    </n-button>
+    <n-menu
+      ref="menuInstRef"
+      v-model:value="selectedKey"
+      :options="options"
+      :accordion="accordion"
+    />
+  </n-space>
+</template>

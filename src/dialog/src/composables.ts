@@ -1,12 +1,12 @@
-import { inject, type Ref } from 'vue'
+import { type Ref, inject } from 'vue'
+import { throwError } from '../../_utils'
 import {
   dialogApiInjectionKey,
   dialogReactiveListInjectionKey
 } from './context'
 import type { DialogApiInjection, DialogReactive } from './DialogProvider'
-import { throwError } from '../../_utils'
 
-export function useDialog (): DialogApiInjection {
+export function useDialog(): DialogApiInjection {
   const dialog = inject(dialogApiInjectionKey, null)
   if (dialog === null) {
     throwError('use-dialog', 'No outer <n-dialog-provider /> founded.')
@@ -14,7 +14,7 @@ export function useDialog (): DialogApiInjection {
   return dialog
 }
 
-export function useDialogReactiveList (): Ref<readonly DialogReactive[]> {
+export function useDialogReactiveList(): Ref<readonly DialogReactive[]> {
   const dialogReactiveList = inject(dialogReactiveListInjectionKey, null)
   if (dialogReactiveList === null) {
     throwError(

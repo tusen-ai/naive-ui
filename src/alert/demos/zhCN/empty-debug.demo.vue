@@ -2,12 +2,23 @@
 # Empty debug
 </markdown>
 
+<script lang="ts">
+import { IosAirplane } from '@vicons/ionicons4'
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  components: {
+    IosAirplane
+  }
+})
+</script>
+
 <template>
   <n-space vertical :size="12">
     <n-alert type="default">
       <template #icon>
         <n-icon>
-          <ios-airplane />
+          <IosAirplane />
         </n-icon>
       </template>
     </n-alert>
@@ -25,14 +36,3 @@
     </n-alert>
   </n-space>
 </template>
-
-<script lang="ts">
-import { IosAirplane } from '@vicons/ionicons4'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    IosAirplane
-  }
-})
-</script>

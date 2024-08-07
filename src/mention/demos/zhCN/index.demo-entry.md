@@ -31,7 +31,7 @@ Mention 在 `v2.2.0` 及以后可用。
 | bordered | `boolean` | `true` | 是否显示输入框边框 |  |
 | disabled | `boolean` | `false` | 是否设置输入框为禁用状态 |  |
 | default-value | `string` | `''` | 输入框的默认值 |  |
-| filter | `(pattern: string, option: MentionOption) => boolean` | 内置的过滤函数 | 根据 `pattern` 决定显示那些选项的过滤函数 | NEXT_VERSION |
+| filter | `(pattern: string, option: MentionOption) => boolean` | 内置的过滤函数 | 根据 `pattern` 决定显示那些选项的过滤函数 | 2.38.2 |
 | loading | `boolean` | `false` | 选择面板是否显示加载状态 |  |
 | prefix | `string \| string[]` | `'@'` | 触发提及的前缀，长度必须为 1 |  |
 | placeholder | `string` | `''` | 输入框的占位符 |  |

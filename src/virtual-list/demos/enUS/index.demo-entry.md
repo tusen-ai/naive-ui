@@ -31,7 +31,7 @@ keep-alive.vue
 | key-field | `string` | `'key'` | Field name of option key. | 2.36.0 |
 | padding-top | `string \| number` | `undefined` | Distance from the top. | 2.36.0 |
 | padding-bottom | `string \| number` | `undefined` | Distance from the bottom. | 2.36.0 |
-| scrollbar-props | `object` | `undefined` | Attribute reference [Scrollbar props](scrollbar#Scrollbar-Props). | 2.36.0 |
+| scrollbar-props | `ScrollbarProps` | `undefined` | Attribute reference [Scrollbar props](scrollbar#Scrollbar-Props). | 2.36.0 |
 | visible-items-tag | `string` | `'div'` | Items container tag. | 2.36.0 |
 | visible-items-props | `object` | `undefined` | Items container prop. | 2.36.0 |
 | on-scroll | `(event: Event) => void` | `undefined` | Scrolling callback function. | 2.36.0 |

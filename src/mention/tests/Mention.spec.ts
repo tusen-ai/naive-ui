@@ -120,7 +120,7 @@ describe('n-mention', () => {
     wrapper.unmount()
   })
 
-  it('should work with `loading` prop', async () => {
+  it('should work with `loading` prop 2', async () => {
     const wrapper = mount(NMention, {
       attachTo: document.body,
       props: { options, loading: true }

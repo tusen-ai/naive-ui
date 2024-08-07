@@ -1,15 +1,15 @@
-import { inject, ref, type Ref } from 'vue'
-import { type TreeNode } from 'treemate'
-import {
-  type TreeOverrideNodeClickBehavior,
-  type Key,
-  type TmNode,
-  type TreeOption,
-  type TreeOverrideNodeClickBehaviorReturn
-} from './interface'
+import { type Ref, inject, ref } from 'vue'
+import type { TreeNode } from 'treemate'
 import { treeSelectInjectionKey } from '../../tree-select/src/interface'
+import type {
+  Key,
+  TmNode,
+  TreeOption,
+  TreeOverrideNodeClickBehavior,
+  TreeOverrideNodeClickBehaviorReturn
+} from './interface'
 
-export function useKeyboard ({
+export function useKeyboard({
   props,
   fNodesRef,
   mergedExpandedKeysRef,
@@ -47,10 +47,11 @@ export function useKeyboard ({
         ? mergedSelectedKeys[mergedSelectedKeys.length - 1]
         : null
     )
-  function handleKeydown (e: KeyboardEvent): {
+  function handleKeydown(e: KeyboardEvent): {
     enterBehavior: TreeOverrideNodeClickBehaviorReturn | null
   } {
-    if (!props.keyboard) return { enterBehavior: null }
+    if (!props.keyboard)
+      return { enterBehavior: null }
     const { value: pendingNodeKey } = pendingNodeKeyRef
     let enterBehavior: TreeOverrideNodeClickBehaviorReturn | null = null
     if (pendingNodeKey === null) {
@@ -70,14 +71,16 @@ export function useKeyboard ({
           }
         }
       }
-    } else {
+    }
+    else {
       const { value: fNodes } = fNodesRef
-      let fIndex = fNodes.findIndex((tmNode) => tmNode.key === pendingNodeKey)
-      if (!~fIndex) return { enterBehavior: null }
+      let fIndex = fNodes.findIndex(tmNode => tmNode.key === pendingNodeKey)
+      if (!~fIndex)
+        return { enterBehavior: null }
       if (e.key === 'Enter') {
         const tmNode = fNodes[fIndex]
-        enterBehavior =
-          props.overrideDefaultNodeClickBehavior?.({
+        enterBehavior
+          = props.overrideDefaultNodeClickBehavior?.({
             option: tmNode.rawNode
           }) || null
         switch (enterBehavior) {
@@ -100,7 +103,8 @@ export function useKeyboard ({
             enterBehavior = 'default'
             handleSelect(tmNode)
         }
-      } else if (e.key === 'ArrowDown') {
+      }
+      else if (e.key === 'ArrowDown') {
         e.preventDefault()
         fIndex += 1
         while (fIndex < fNodes.length) {
@@ -110,7 +114,8 @@ export function useKeyboard ({
           }
           fIndex += 1
         }
-      } else if (e.key === 'ArrowUp') {
+      }
+      else if (e.key === 'ArrowUp') {
         e.preventDefault()
         fIndex -= 1
         while (fIndex >= 0) {
@@ -120,25 +125,30 @@ export function useKeyboard ({
           }
           fIndex -= 1
         }
-      } else if (e.key === 'ArrowLeft') {
+      }
+      else if (e.key === 'ArrowLeft') {
         const pendingNode = fNodes[fIndex]
         if (
-          pendingNode.isLeaf ||
-          !mergedExpandedKeysRef.value.includes(pendingNodeKey)
+          pendingNode.isLeaf
+          || !mergedExpandedKeysRef.value.includes(pendingNodeKey)
         ) {
           const parentTmNode = pendingNode.getParent()
           if (parentTmNode) {
             pendingNodeKeyRef.value = parentTmNode.key
           }
-        } else {
+        }
+        else {
           handleSwitcherClick(pendingNode)
         }
-      } else if (e.key === 'ArrowRight') {
+      }
+      else if (e.key === 'ArrowRight') {
         const pendingNode = fNodes[fIndex]
-        if (pendingNode.isLeaf) return { enterBehavior: null }
+        if (pendingNode.isLeaf)
+          return { enterBehavior: null }
         if (!mergedExpandedKeysRef.value.includes(pendingNodeKey)) {
           handleSwitcherClick(pendingNode)
-        } else {
+        }
+        else {
           // Tha same as ArrowDown
           fIndex += 1
           while (fIndex < fNodes.length) {

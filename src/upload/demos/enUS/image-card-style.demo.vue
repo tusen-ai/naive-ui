@@ -4,40 +4,15 @@
 By default, this will use Naive UI's internal preview component. You can also use `on-preview` to customize what to do when previewing a file.
 </markdown>
 
-<template>
-  <n-upload
-    action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
-    :default-file-list="fileList"
-    list-type="image-card"
-  >
-    Click to Upload
-  </n-upload>
-  <n-divider />
-  <n-upload
-    action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
-    :default-file-list="previewFileList"
-    list-type="image-card"
-    @preview="handlePreview"
-  />
-  <n-modal
-    v-model:show="showModal"
-    preset="card"
-    style="width: 600px"
-    title="A Cool Picture"
-  >
-    <img :src="previewImageUrl" style="width: 100%">
-  </n-modal>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import type { UploadFileInfo } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const showModalRef = ref(false)
     const previewImageUrlRef = ref('')
-    function handlePreview (file: UploadFileInfo) {
+    function handlePreview(file: UploadFileInfo) {
       const { url } = file
       previewImageUrlRef.value = url as string
       showModalRef.value = true
@@ -89,3 +64,28 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-upload
+    action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+    :default-file-list="fileList"
+    list-type="image-card"
+  >
+    Click to Upload
+  </n-upload>
+  <n-divider />
+  <n-upload
+    action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+    :default-file-list="previewFileList"
+    list-type="image-card"
+    @preview="handlePreview"
+  />
+  <n-modal
+    v-model:show="showModal"
+    preset="card"
+    style="width: 600px"
+    title="A Cool Picture"
+  >
+    <img :src="previewImageUrl" style="width: 100%">
+  </n-modal>
+</template>

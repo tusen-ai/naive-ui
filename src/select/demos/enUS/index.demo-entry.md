@@ -48,7 +48,7 @@ custom-field.vue
 | filterable | `boolean` | `false` | Whether options can be filtered. |  |
 | filter | `(pattern: string, option: Object) => boolean` | String search method. | Filter function. |  |
 | ignore-composition | `boolean` | `true` | Ingore IME's composition status. By default `filter` won't be triggered by input event under compositions. | 2.33.4 |
-| input-props | `HTMLInputAttributes` | `undefined` | The attributes of input element in the trigger. It only works when the select is filterable. |  |
+| input-props | `InputHTMLAttributes` | `undefined` | The attributes of input element in the trigger. It only works when the select is filterable. |  |
 | keyboard | `boolean` | `true` | Whether to allow keyboard control. | 2.34.4 |
 | label-field | `string` | `'label'` | Field name of option label. | 2.29.1 |
 | loading | `boolean` | `false` | Whether to show a loading state. |  |

@@ -1,17 +1,17 @@
 import {
-  defineComponent,
-  h,
-  renderSlot,
-  watchEffect,
   type PropType,
   type VNode,
-  onMounted
+  defineComponent,
+  h,
+  onMounted,
+  renderSlot,
+  watchEffect
 } from 'vue'
 import { VirtualList } from 'vueuc'
 import { useLocale } from '../../../_mixins'
 import { NxButton } from '../../../button'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
-import { warnOnce } from '../../../_utils'
+import { resolveSlotWithProps, warnOnce } from '../../../_utils'
 import {
   type MonthItem,
   type QuarterItem,
@@ -21,6 +21,10 @@ import {
   getYearString
 } from '../utils'
 import { MONTH_ITEM_HEIGHT } from '../config'
+import type {
+  DatePickerClearSlotProps,
+  DatePickerConfirmSlotProps
+} from '../public-types'
 import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
 
 export default defineComponent({
@@ -32,15 +36,15 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.actions?.includes('now')) {
           warnOnce(
             'date-picker',
-            'The `now` action is not supported for n-date-picker of ' +
-              `${props.type}` +
-              'type'
+            'The `now` action is not supported for n-date-picker of '
+            + `${props.type}`
+            + 'type'
           )
         }
       })
@@ -62,12 +66,12 @@ export default defineComponent({
           key={i}
           class={[
             `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item`,
-            item.isCurrent &&
-              `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`,
-            item.selected &&
-              `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`,
-            disabled &&
-              `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`
+            item.isCurrent
+            && `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`,
+            item.selected
+            && `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`,
+            disabled
+            && `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`
           ]}
           onClick={
             disabled
@@ -102,7 +106,7 @@ export default defineComponent({
     })
     return { ...useCalendarRef, renderItem }
   },
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       mergedTheme,
@@ -274,51 +278,68 @@ export default defineComponent({
         {this.actions?.length || shortcuts ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
-              {shortcuts &&
-                Object.keys(shortcuts).map((key) => {
-                  const shortcut = shortcuts[key]
-                  return Array.isArray(shortcut) ||
-                    typeof shortcut === 'function' ? (
-                    <NxButton
-                      size="tiny"
-                      onMouseenter={() => {
-                        this.handleRangeShortcutMouseenter(shortcut)
-                      }}
-                      onClick={() => {
-                        this.handleRangeShortcutClick(shortcut)
-                      }}
-                      onMouseleave={() => {
-                        this.handleShortcutMouseleave()
-                      }}
-                    >
-                      {{ default: () => key }}
-                    </NxButton>
-                      ) : null
-                })}
+              {shortcuts
+              && Object.keys(shortcuts).map((key) => {
+                const shortcut = shortcuts[key]
+                return Array.isArray(shortcut)
+                  || typeof shortcut === 'function' ? (
+                      <NxButton
+                        size="tiny"
+                        onMouseenter={() => {
+                          this.handleRangeShortcutMouseenter(shortcut)
+                        }}
+                        onClick={() => {
+                          this.handleRangeShortcutClick(shortcut)
+                        }}
+                        onMouseleave={() => {
+                          this.handleShortcutMouseleave()
+                        }}
+                      >
+                        {{ default: () => key }}
+                      </NxButton>
+                    ) : null
+              })}
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
-              {this.actions?.includes('clear') ? (
-                <NxButton
-                  theme={mergedTheme.peers.Button}
-                  themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  onClick={this.handleClearClick}
-                >
-                  {{ default: () => this.locale.clear }}
-                </NxButton>
-              ) : null}
-              {this.actions?.includes('confirm') ? (
-                <NxButton
-                  theme={mergedTheme.peers.Button}
-                  themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  type="primary"
-                  disabled={this.isRangeInvalid}
-                  onClick={this.handleConfirmClick}
-                >
-                  {{ default: () => this.locale.confirm }}
-                </NxButton>
-              ) : null}
+              {this.actions?.includes('clear')
+                ? resolveSlotWithProps(
+                  this.$slots.clear,
+                    {
+                      onClear: this.handleClearClick
+                    } satisfies DatePickerClearSlotProps,
+                    () => [
+                      <NxButton
+                        theme={mergedTheme.peers.Button}
+                        themeOverrides={mergedTheme.peerOverrides.Button}
+                        size="tiny"
+                        onClick={this.handleClearClick}
+                      >
+                        {{ default: () => this.locale.clear }}
+                      </NxButton>
+                    ]
+                )
+                : null}
+              {this.actions?.includes('confirm')
+                ? resolveSlotWithProps(
+                  this.$slots.confirm,
+                    {
+                      disabled: this.isRangeInvalid,
+                      onConfirm: this.handleConfirmClick
+                    } satisfies DatePickerConfirmSlotProps,
+                    () => [
+                      <NxButton
+                        theme={mergedTheme.peers.Button}
+                        themeOverrides={mergedTheme.peerOverrides.Button}
+                        size="tiny"
+                        type="primary"
+                        disabled={this.isRangeInvalid}
+                        onClick={this.handleConfirmClick}
+                      >
+                        {{ default: () => this.locale.confirm }}
+                      </NxButton>
+                    ]
+                )
+                : null}
             </div>
           </div>
         ) : null}

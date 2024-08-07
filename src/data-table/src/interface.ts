@@ -1,34 +1,35 @@
 import type { TreeMate, TreeNode } from 'treemate'
 import type {
   CSSProperties,
-  Ref,
-  HTMLAttributes,
-  Slots,
-  PropType,
   ExtractPropTypes,
+  HTMLAttributes,
+  PropType,
+  Ref,
+  Slots,
   VNodeChild
 } from 'vue'
-import type { ScrollbarProps, ScrollTo } from '../../scrollbar/src/Scrollbar'
+import type { ScrollTo, ScrollbarProps } from '../../scrollbar/src/Scrollbar'
 import type { EllipsisProps } from '../../ellipsis/src/Ellipsis'
-import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { NLocale } from '../../locales'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
 import { useTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
 import type { PaginationProps } from '../../pagination'
 import type { DataTableTheme } from '../styles'
-import type { RowItem, ColItem } from './use-group-header'
 import type { BaseLoadingExposedProps } from '../../_internal'
+import type { PopoverProps } from '../../popover'
+import type { ColItem, RowItem } from './use-group-header'
 
 export const dataTableProps = {
   ...(useTheme.props as ThemeProps<DataTableTheme>),
   onUnstableColumnResize: Function as PropType<
-  (
-    resizedWidth: number,
-    limitedWidth: number,
-    column: TableBaseColumn,
-    getColumnWidth: (key: ColumnKey) => number | undefined
-  ) => void
+    (
+      resizedWidth: number,
+      limitedWidth: number,
+      column: TableBaseColumn,
+      getColumnWidth: (key: ColumnKey) => number | undefined
+    ) => void
   >,
   pagination: {
     type: [Object, Boolean] as PropType<false | PaginationProps>,
@@ -46,7 +47,7 @@ export const dataTableProps = {
     default: () => []
   },
   rowClassName: [String, Function] as PropType<
-  string | CreateRowClassName<any>
+    string | CreateRowClassName<any>
   >,
   rowProps: Function as PropType<CreateRowProps<any>>,
   rowKey: Function as PropType<CreateRowKey<any>>,
@@ -115,55 +116,56 @@ export const dataTableProps = {
     type: String as PropType<'first' | 'current'>,
     default: 'current'
   },
+  filterIconPopoverProps: Object as PropType<PopoverProps>,
   scrollbarProps: Object as PropType<ScrollbarProps>,
   renderCell: Function as PropType<
-  (value: any, rowData: object, column: TableBaseColumn) => VNodeChild
+    (value: any, rowData: object, column: TableBaseColumn) => VNodeChild
   >,
   renderExpandIcon: Function as PropType<RenderExpandIcon>,
   spinProps: { type: Object as PropType<BaseLoadingExposedProps>, default: {} },
   onLoad: Function as PropType<DataTableOnLoad>,
   'onUpdate:page': [Function, Array] as PropType<
-  PaginationProps['onUpdate:page']
+    PaginationProps['onUpdate:page']
   >,
   onUpdatePage: [Function, Array] as PropType<PaginationProps['onUpdate:page']>,
   'onUpdate:pageSize': [Function, Array] as PropType<
-  PaginationProps['onUpdate:pageSize']
+    PaginationProps['onUpdate:pageSize']
   >,
   onUpdatePageSize: [Function, Array] as PropType<
-  PaginationProps['onUpdate:pageSize']
+    PaginationProps['onUpdate:pageSize']
   >,
   'onUpdate:sorter': [Function, Array] as PropType<MaybeArray<OnUpdateSorter>>,
   onUpdateSorter: [Function, Array] as PropType<MaybeArray<OnUpdateSorter>>,
   'onUpdate:filters': [Function, Array] as PropType<
-  MaybeArray<OnUpdateFilters>
+    MaybeArray<OnUpdateFilters>
   >,
   onUpdateFilters: [Function, Array] as PropType<MaybeArray<OnUpdateFilters>>,
   'onUpdate:checkedRowKeys': [Function, Array] as PropType<
-  MaybeArray<OnUpdateCheckedRowKeys>
+    MaybeArray<OnUpdateCheckedRowKeys>
   >,
   onUpdateCheckedRowKeys: [Function, Array] as PropType<
-  MaybeArray<OnUpdateCheckedRowKeys>
+    MaybeArray<OnUpdateCheckedRowKeys>
   >,
   'onUpdate:expandedRowKeys': [Function, Array] as PropType<
-  MaybeArray<OnUpdateExpandedRowKeys>
+    MaybeArray<OnUpdateExpandedRowKeys>
   >,
   onUpdateExpandedRowKeys: [Function, Array] as PropType<
-  MaybeArray<OnUpdateExpandedRowKeys>
+    MaybeArray<OnUpdateExpandedRowKeys>
   >,
   onScroll: Function as PropType<(e: Event) => void>,
   // deprecated
   onPageChange: [Function, Array] as PropType<PaginationProps['onUpdate:page']>,
   onPageSizeChange: [Function, Array] as PropType<
-  PaginationProps['onUpdate:pageSize']
+    PaginationProps['onUpdate:pageSize']
   >,
   onSorterChange: [Function, Array] as PropType<
-  MaybeArray<OnUpdateSorter> | undefined
+    MaybeArray<OnUpdateSorter> | undefined
   >,
   onFiltersChange: [Function, Array] as PropType<
-  MaybeArray<OnUpdateFilters> | undefined
+    MaybeArray<OnUpdateFilters> | undefined
   >,
   onCheckedRowKeysChange: [Function, Array] as PropType<
-  MaybeArray<OnUpdateCheckedRowKeys> | undefined
+    MaybeArray<OnUpdateCheckedRowKeys> | undefined
   >
 } as const
 
@@ -310,9 +312,11 @@ export type RenderExpand<T = InternalRowData> = (
   index: number
 ) => VNodeChild
 export type RenderExpandIcon = ({
-  expanded
+  expanded,
+  rowData
 }: {
   expanded: boolean
+  rowData: RowData
 }) => VNodeChild
 
 // TODO: we should deprecate `index` since it would change after row is expanded
@@ -333,8 +337,8 @@ export type TableColumn<T = InternalRowData> =
 export type TableColumns<T = InternalRowData> = Array<TableColumn<T>>
 
 export type DataTableSelectionOptions<T = InternalRowData> = Array<
-| DataTableSelectionOption
-| { label: string, key: string | number, onSelect: (pageData: T[]) => void }
+  | DataTableSelectionOption
+  | { label: string, key: string | number, onSelect: (pageData: T[]) => void }
 >
 export interface DataTableInjection {
   props: DataTableSetupProps
@@ -357,10 +361,10 @@ export interface DataTableInjection {
   rightActiveFixedColKeyRef: Ref<ColumnKey | null>
   rightActiveFixedChildrenColKeysRef: Ref<ColumnKey[]>
   fixedColumnLeftMapRef: Ref<
-  Record<ColumnKey, { start: number, end: number } | undefined>
+    Record<ColumnKey, { start: number, end: number } | undefined>
   >
   fixedColumnRightMapRef: Ref<
-  Record<ColumnKey, { start: number, end: number } | undefined>
+    Record<ColumnKey, { start: number, end: number } | undefined>
   >
   mergedCurrentPageRef: Ref<number>
   someRowsCheckedRef: Ref<boolean>
@@ -394,6 +398,7 @@ export interface DataTableInjection {
   stickyExpandedRowsRef: Ref<boolean>
   renderExpandIconRef: Ref<undefined | RenderExpandIcon>
   summaryPlacementRef: Ref<'top' | 'bottom'>
+  filterIconPopoverPropsRef: Ref<PopoverProps | undefined>
   treeMateRef: Ref<TreeMate<InternalRowData, InternalRowData, InternalRowData>>
   scrollbarPropsRef: Ref<ScrollbarProps | undefined>
   doUpdatePage: (page: number) => void
@@ -422,13 +427,13 @@ export interface DataTableInjection {
   syncScrollState: (deltaX?: number, deltaY?: number) => void
   setHeaderScrollLeft: (scrollLeft: number) => void
   renderCell: Ref<
-  | undefined
-  | ((value: any, rowData: object, column: TableBaseColumn) => VNodeChild)
+    | undefined
+    | ((value: any, rowData: object, column: TableBaseColumn) => VNodeChild)
   >
 }
 
-export const dataTableInjectionKey =
-  createInjectionKey<DataTableInjection>('n-data-table')
+export const dataTableInjectionKey
+  = createInjectionKey<DataTableInjection>('n-data-table')
 
 export interface MainTableInjection {
   leftActiveFixedColKey: ColumnKey | null
@@ -479,8 +484,8 @@ export interface SortState {
 }
 
 export type FilterState = Record<
-string,
-FilterOptionValue[] | FilterOptionValue | null | undefined
+  string,
+  FilterOptionValue[] | FilterOptionValue | null | undefined
 >
 
 export interface MainTableRef {

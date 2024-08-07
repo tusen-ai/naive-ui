@@ -1,19 +1,15 @@
-import { h, defineComponent, type PropType, ref } from 'vue'
+import { type PropType, defineComponent, h, ref } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { type ScrollbarProps } from '../../scrollbar/src/Scrollbar'
+import { resolveSlot } from '../../_utils'
+import type { ScrollbarProps } from '../../scrollbar/src/Scrollbar'
 import { NxScrollbar, type ScrollbarInst } from '../../_internal'
-import { debounce } from 'lodash-es'
 
 export const infiniteScrollProps = {
   distance: {
     type: Number,
     default: 0
   },
-  delay: {
-    type: Number,
-    default: undefined
-  },
-  onLoad: Function as PropType<() => Promise<void>>,
+  onLoad: Function as PropType<() => Promise<void> | void>,
   scrollbarProps: Object as PropType<ScrollbarProps>
 } as const
 
@@ -24,58 +20,68 @@ export type InfiniteScrollProps = ExtractPublicPropTypes<
 export default defineComponent({
   name: 'InfiniteScroll',
   props: infiniteScrollProps,
-  setup (props) {
+  setup(props) {
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
+
+    let loading = false
 
     const handleCheckBottom = async (): Promise<void> => {
       const { value: scrollbarInst } = scrollbarInstRef
       if (scrollbarInst) {
-        const { containerRef, containerScrollTop } = scrollbarInst
+        const { containerRef } = scrollbarInst
         const scrollHeight = containerRef?.scrollHeight
         const clientHeight = containerRef?.clientHeight
+        const scrollTop = containerRef?.scrollTop
+
         if (
-          containerRef &&
-          scrollHeight !== undefined &&
-          clientHeight !== undefined
+          containerRef
+          && scrollHeight !== undefined
+          && clientHeight !== undefined
+          && scrollTop !== undefined
         ) {
-          if (
-            containerScrollTop + clientHeight >=
-            scrollHeight - props.distance
-          ) {
-            await props.onLoad?.()
+          if (scrollTop + clientHeight >= scrollHeight - props.distance) {
+            loading = true
+            try {
+              await props.onLoad?.()
+            }
+            catch {}
+            loading = false
           }
         }
       }
     }
 
     const handleScroll = (): void => {
-      if (props.delay) {
-        const debounceFn = debounce(handleCheckBottom, props.delay)
-        debounceFn() as any
-      } else {
-        handleCheckBottom() as any
-      }
+      if (loading)
+        return
+      void handleCheckBottom()
+    }
+
+    const handleWheel = (e: WheelEvent): void => {
+      if (e.deltaY <= 0)
+        return
+      if (loading)
+        return
+      void handleCheckBottom()
     }
 
     return {
       scrollbarInstRef,
-      handleScroll
+      handleScroll,
+      handleWheel
     }
   },
-  render () {
+  render() {
     return (
       <NxScrollbar
         {...this.scrollbarProps}
         ref="scrollbarInstRef"
+        onWheel={this.handleWheel}
         onScroll={this.handleScroll}
       >
         {{
           default: () => {
-            return (
-              <div style={{ height: '100%', overflow: 'auto' }}>
-                {this.$slots.default?.()}
-              </div>
-            )
+            return resolveSlot(this.$slots.default, () => [])
           }
         }}
       </NxScrollbar>

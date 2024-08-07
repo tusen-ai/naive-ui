@@ -1,23 +1,23 @@
 import {
-  h,
-  defineComponent,
-  computed,
-  toRef,
-  type PropType,
   type CSSProperties,
   type ExtractPropTypes,
-  ref,
-  provide,
-  type Slot,
-  inject,
-  watch,
-  Transition,
-  onMounted,
   type LabelHTMLAttributes,
-  type VNodeChild
+  type PropType,
+  type Slot,
+  Transition,
+  type VNodeChild,
+  computed,
+  defineComponent,
+  h,
+  inject,
+  onMounted,
+  provide,
+  ref,
+  toRef,
+  watch
 } from 'vue'
 import Schema from 'async-validator'
-import type { ValidateError, RuleItem, ValidateOption } from 'async-validator'
+import type { RuleItem, ValidateError, ValidateOption } from 'async-validator'
 import { get } from 'lodash-es'
 import { createId } from 'seemly'
 import { formItemInjectionKey } from '../../_mixins/use-form-item'
@@ -28,30 +28,28 @@ import {
   useThemeClass
 } from '../../_mixins'
 import {
-  warn,
   createKey,
-  useInjectionInstanceCollection,
   keysOf,
-  resolveWrappedSlot
+  resolveWrappedSlot,
+  useInjectionInstanceCollection,
+  warn
 } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { formLight, type FormTheme } from '../styles'
-import { formItemMisc, formItemSize, formItemRule } from './utils'
+import { type FormTheme, formLight } from '../styles'
+import { formItemMisc, formItemRule, formItemSize } from './utils'
 import type {
-  ShouldRuleBeApplied,
-  FormItemRule,
-  LabelAlign,
-  LabelPlacement,
-  ValidateCallback,
-  ValidationTrigger,
-  FormItemRuleValidatorParams,
-  FormItemRuleValidator,
-  FormItemValidateOptions,
   FormItemInst,
   FormItemInternalValidate,
   FormItemInternalValidateResult,
-  FeedBackPositonCrosswise,
-  FeedBackPositonVertical
+  FormItemRule,
+  FormItemRuleValidator,
+  FormItemRuleValidatorParams,
+  FormItemValidateOptions,
+  LabelAlign,
+  LabelPlacement,
+  ShouldRuleBeApplied,
+  ValidateCallback,
+  ValidationTrigger
 } from './interface'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
 import style from './styles/form-item.cssr'
@@ -81,14 +79,8 @@ export const formItemProps = {
   ignorePathChange: Boolean,
   validationStatus: String as PropType<'error' | 'warning' | 'success'>,
   feedback: String,
-  feedbackCrosswise: {
-    type: String as PropType<FeedBackPositonCrosswise>,
-    default: 'left'
-  },
-  feedbackVertical: {
-    type: String as PropType<FeedBackPositonVertical>,
-    default: 'bottom'
-  },
+  feedbackClass: String,
+  feedbackStyle: [String, Object] as PropType<string | CSSProperties>,
   showLabel: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -109,7 +101,7 @@ type WrappedValidator = (
 ) => boolean | Error | Error[] | Promise<void> | undefined
 
 // wrap sync validator
-function wrapValidator (
+function wrapValidator(
   validator: FormItemRuleValidator,
   async: boolean
 ): WrappedValidator {
@@ -117,31 +109,34 @@ function wrapValidator (
     try {
       const validateResult = validator(...args)
       if (
-        (!async &&
-          (typeof validateResult === 'boolean' ||
-            validateResult instanceof Error ||
-            Array.isArray(validateResult))) || // Error[]
-        (validateResult as any)?.then
+        (!async
+        && (typeof validateResult === 'boolean'
+        || validateResult instanceof Error
+        || Array.isArray(validateResult))) // Error[]
+        || (validateResult as any)?.then
       ) {
         return validateResult as any
-      } else if (validateResult === undefined) {
+      }
+      else if (validateResult === undefined) {
         return true
-      } else {
+      }
+      else {
         warn(
           'form-item/validate',
-          `You return a ${typeof validateResult} ` +
-            'typed value in the validator method, which is not recommended. Please use ' +
-            (async ? '`Promise`' : '`boolean`, `Error` or `Promise`') +
-            ' typed value instead.'
+          `You return a ${typeof validateResult} `
+          + `typed value in the validator method, which is not recommended. Please use ${
+              async ? '`Promise`' : '`boolean`, `Error` or `Promise`'
+            } typed value instead.`
         )
         return true
       }
-    } catch (err) {
+    }
+    catch (err) {
       warn(
         'form-item/validate',
-        'An error is catched in the validation, ' +
-          "so the validation won't be done. Your callback in `validate` method of " +
-          "`n-form` or `n-form-item` won't be called in this validation."
+        'An error is catched in the validation, '
+        + 'so the validation won\'t be done. Your callback in `validate` method of '
+        + '`n-form` or `n-form-item` won\'t be called in this validation.'
       )
       console.error(err)
       // If returns undefined, async-validator won't trigger callback
@@ -154,7 +149,7 @@ function wrapValidator (
 export default defineComponent({
   name: 'FormItem',
   props: formItemProps,
-  setup (props) {
+  setup(props) {
     useInjectionInstanceCollection(
       formItemInstsInjectionKey,
       'formItems',
@@ -168,8 +163,8 @@ export default defineComponent({
       validationErrored: validationErroredRef,
       validationWarned: validationWarnedRef
     } = formItemMiscRefs
-    const { mergedRequired: mergedRequiredRef, mergedRules: mergedRulesRef } =
-      formItemRule(props)
+    const { mergedRequired: mergedRequiredRef, mergedRules: mergedRulesRef }
+      = formItemRule(props)
     const { mergedSize: mergedSizeRef } = formItemSizeRefs
     const {
       mergedLabelPlacement: labelPlacementRef,
@@ -177,10 +172,10 @@ export default defineComponent({
       mergedRequireMarkPlacement: mergedRequireMarkPlacementRef
     } = formItemMiscRefs
     const renderExplainsRef = ref<
-    Array<{
-      key: string
-      render: () => VNodeChild
-    }>
+      Array<{
+        key: string
+        render: () => VNodeChild
+      }>
     >([])
     const feedbackIdRef = ref(createId())
     const mergedDisabledRef = NForm
@@ -195,10 +190,11 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     watch(toRef(props, 'path'), () => {
-      if (props.ignorePathChange) return
+      if (props.ignorePathChange)
+        return
       restoreValidation()
     })
-    function restoreValidation (): void {
+    function restoreValidation(): void {
       renderExplainsRef.value = []
       validationErroredRef.value = false
       validationWarnedRef.value = false
@@ -206,73 +202,6 @@ export default defineComponent({
         feedbackIdRef.value = createId()
       }
     }
-    function handleContentBlur (): void {
-      void internalValidate('blur')
-    }
-    function handleContentChange (): void {
-      void internalValidate('change')
-    }
-    function handleContentFocus (): void {
-      void internalValidate('focus')
-    }
-    function handleContentInput (): void {
-      void internalValidate('input')
-    }
-    // Resolve : ()
-    // Reject  : (errors: AsyncValidator.ValidateError[])
-    async function validate (options: FormItemValidateOptions): Promise<{
-      warnings: ValidateError[] | undefined
-    }>
-    async function validate (
-      trigger?: string | null,
-      callback?: ValidateCallback
-    ): Promise<{
-      warnings: ValidateError[] | undefined
-    }>
-    async function validate (
-      options?: string | null | FormItemValidateOptions,
-      callback?: ValidateCallback
-    ): Promise<{
-        warnings: ValidateError[] | undefined
-      }> {
-      /** the following code is for compatibility */
-      let trigger: ValidationTrigger | string | undefined
-      let validateCallback: ValidateCallback | undefined
-      let shouldRuleBeApplied: ShouldRuleBeApplied | undefined
-      let asyncValidatorOptions: Record<string, any> | undefined
-      if (typeof options === 'string') {
-        trigger = options
-        validateCallback = callback
-      } else if (options !== null && typeof options === 'object') {
-        trigger = options.trigger
-        validateCallback = options.callback
-        shouldRuleBeApplied = options.shouldRuleBeApplied
-        asyncValidatorOptions = options.options
-      }
-      return await new Promise<{
-        warnings: ValidateError[] | undefined
-      }>((resolve, reject) => {
-        void internalValidate(
-          trigger,
-          shouldRuleBeApplied,
-          asyncValidatorOptions
-        ).then(({ valid, errors, warnings }) => {
-          if (valid) {
-            if (validateCallback) {
-              validateCallback(undefined, { warnings })
-            }
-            resolve({ warnings })
-          } else {
-            if (validateCallback) {
-              validateCallback(errors, { warnings })
-            }
-            // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
-            reject(errors)
-          }
-        })
-      })
-    }
-
     const internalValidate: FormItemInternalValidate = async (
       trigger: ValidationTrigger | string | null = null,
       shouldRuleBeApplied: ShouldRuleBeApplied = () => true,
@@ -283,8 +212,10 @@ export default defineComponent({
       const { path } = props
       if (!options) {
         options = {}
-      } else {
-        if (!options.first) options.first = props.first
+      }
+      else {
+        if (!options.first)
+          options.first = props.first
       }
       const { value: rules } = mergedRulesRef
       const value = NForm ? get(NForm.props.model, path || '') : undefined
@@ -296,7 +227,8 @@ export default defineComponent({
           : rules.filter((rule) => {
             if (Array.isArray(rule.trigger)) {
               return rule.trigger.includes(trigger)
-            } else {
+            }
+            else {
               return rule.trigger === trigger
             }
           })
@@ -318,17 +250,25 @@ export default defineComponent({
           }
           if (shallowClonedRule.renderMessage) {
             const rendererKey = `__renderMessage__${i}`
-            originalMessageRendersMessage[rendererKey] =
-              shallowClonedRule.message
+            originalMessageRendersMessage[rendererKey]
+              = shallowClonedRule.message
             shallowClonedRule.message = rendererKey
             messageRenderers[rendererKey] = shallowClonedRule.renderMessage
           }
           return shallowClonedRule
         })
-      const activeErrorRules = activeRules.filter((r) => r.level !== 'warning')
+      const activeErrorRules = activeRules.filter(r => r.level !== 'warning')
       const activeWarningRules = activeRules.filter(
-        (r) => r.level === 'warning'
+        r => r.level === 'warning'
       )
+
+      const validationResult: FormItemInternalValidateResult = {
+        valid: true,
+        errors: undefined,
+        warnings: undefined
+      }
+      if (!activeRules.length)
+        return validationResult
 
       const mergedPath = path ?? '__n_no_path__'
       const validator = new Schema({
@@ -363,17 +303,11 @@ export default defineComponent({
         })
       }
 
-      const validationResult: FormItemInternalValidateResult = {
-        valid: true,
-        errors: undefined,
-        warnings: undefined
-      }
       if (activeErrorRules.length) {
         const errors = await new Promise<ValidateError[] | null>((resolve) => {
           void validator.validate({ [mergedPath]: value }, options, resolve)
         })
         if (errors?.length) {
-          validationErroredRef.value = true
           validationResult.valid = false
           validationResult.errors = errors
           renderMessages(errors)
@@ -393,21 +327,88 @@ export default defineComponent({
         )
         if (warnings?.length) {
           renderMessages(warnings)
-          validationWarnedRef.value = true
           validationResult.warnings = warnings
         }
       }
 
-      if (
-        activeErrorRules.length + activeWarningRules.length > 0 &&
-        !validationResult.errors &&
-        !validationResult.warnings
-      ) {
+      if (!validationResult.errors && !validationResult.warnings) {
         restoreValidation()
+      }
+      else {
+        validationErroredRef.value = !!validationResult.errors
+        validationWarnedRef.value = !!validationResult.warnings
       }
 
       return validationResult
     }
+    function handleContentBlur(): void {
+      void internalValidate('blur')
+    }
+    function handleContentChange(): void {
+      void internalValidate('change')
+    }
+    function handleContentFocus(): void {
+      void internalValidate('focus')
+    }
+    function handleContentInput(): void {
+      void internalValidate('input')
+    }
+    // Resolve : ()
+    // Reject  : (errors: AsyncValidator.ValidateError[])
+    async function validate(options: FormItemValidateOptions): Promise<{
+      warnings: ValidateError[] | undefined
+    }>
+    async function validate(
+      trigger?: string | null,
+      callback?: ValidateCallback
+    ): Promise<{
+      warnings: ValidateError[] | undefined
+    }>
+    async function validate(
+      options?: string | null | FormItemValidateOptions,
+      callback?: ValidateCallback
+    ): Promise<{
+        warnings: ValidateError[] | undefined
+      }> {
+      /** the following code is for compatibility */
+      let trigger: ValidationTrigger | string | undefined
+      let validateCallback: ValidateCallback | undefined
+      let shouldRuleBeApplied: ShouldRuleBeApplied | undefined
+      let asyncValidatorOptions: Record<string, any> | undefined
+      if (typeof options === 'string') {
+        trigger = options
+        validateCallback = callback
+      }
+      else if (options !== null && typeof options === 'object') {
+        trigger = options.trigger
+        validateCallback = options.callback
+        shouldRuleBeApplied = options.shouldRuleBeApplied
+        asyncValidatorOptions = options.options
+      }
+      return await new Promise<{
+        warnings: ValidateError[] | undefined
+      }>((resolve, reject) => {
+        void internalValidate(
+          trigger,
+          shouldRuleBeApplied,
+          asyncValidatorOptions
+        ).then(({ valid, errors, warnings }) => {
+          if (valid) {
+            if (validateCallback) {
+              validateCallback(undefined, { warnings })
+            }
+            resolve({ warnings })
+          }
+          else {
+            if (validateCallback) {
+              validateCallback(errors, { warnings })
+            }
+            reject(errors)
+          }
+        })
+      })
+    }
+
     provide(formItemInjectionKey, {
       path: toRef(props, 'path'),
       disabled: mergedDisabledRef,
@@ -426,7 +427,8 @@ export default defineComponent({
     }
     const labelElementRef = ref<null | HTMLLabelElement>(null)
     onMounted((): void => {
-      if (!formItemMiscRefs.isAutoLabelWidth.value) return
+      if (!formItemMiscRefs.isAutoLabelWidth.value)
+        return
       const labelElement = labelElementRef.value
       if (labelElement !== null) {
         const memoizedWhitespace = labelElement.style.whiteSpace
@@ -441,8 +443,8 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const { value: size } = mergedSizeRef
       const { value: labelPlacement } = labelPlacementRef
-      const direction: 'vertical' | 'horizontal' =
-        labelPlacement === 'top' ? 'vertical' : 'horizontal'
+      const direction: 'vertical' | 'horizontal'
+        = labelPlacement === 'top' ? 'vertical' : 'horizontal'
       const {
         common: { cubicBezierEaseInOut },
         self: {
@@ -467,8 +469,8 @@ export default defineComponent({
 
       let mergedLabelTextAlign = labelTextAlignRef.value ?? labelTextAlign
       if (labelPlacement === 'top') {
-        mergedLabelTextAlign =
-          mergedLabelTextAlign === 'right' ? 'flex-end' : 'flex-start'
+        mergedLabelTextAlign
+          = mergedLabelTextAlign === 'right' ? 'flex-end' : 'flex-start'
       }
 
       const cssVars = {
@@ -513,9 +515,9 @@ export default defineComponent({
       // right-hanging          | left        | text mark (okay)
       // right-hanging          | right       | text mark (okay)
       return (
-        labelPlacementRef.value === 'left' &&
-        mergedRequireMarkPlacementRef.value === 'left' &&
-        labelTextAlignRef.value === 'left'
+        labelPlacementRef.value === 'left'
+        && mergedRequireMarkPlacementRef.value === 'left'
+        && labelTextAlignRef.value === 'left'
       )
     })
     return {
@@ -533,7 +535,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const {
       $slots,
       mergedClsPrefix,
@@ -542,15 +544,16 @@ export default defineComponent({
       mergedRequireMarkPlacement,
       onRender
     } = this
-    const renderedShowRequireMark =
-      mergedShowRequireMark !== undefined
+    const renderedShowRequireMark
+      = mergedShowRequireMark !== undefined
         ? mergedShowRequireMark
         : this.mergedRequired
     onRender?.()
 
     const renderLabel = (): JSX.Element | null => {
       const labelText = this.$slots.label ? this.$slots.label() : this.label
-      if (!labelText) return null
+      if (!labelText)
+        return null
       const textNode = (
         <span class={`${mergedClsPrefix}-form-item-label__text`}>
           {labelText}
@@ -577,8 +580,8 @@ export default defineComponent({
             labelProps?.class,
             `${mergedClsPrefix}-form-item-label`,
             `${mergedClsPrefix}-form-item-label--${mergedRequireMarkPlacement}-mark`,
-            this.reverseColSpace &&
-              `${mergedClsPrefix}-form-item-label--reverse-columns-space`
+            this.reverseColSpace
+            && `${mergedClsPrefix}-form-item-label--reverse-columns-space`
           ]}
           style={this.mergedLabelStyle as any}
           ref="labelElementRef"
@@ -597,9 +600,8 @@ export default defineComponent({
           this.themeClass,
           `${mergedClsPrefix}-form-item--${this.mergedSize}-size`,
           `${mergedClsPrefix}-form-item--${this.mergedLabelPlacement}-labelled`,
-          `${mergedClsPrefix}-form-item--labelled-vertical-${this.feedbackVertical}`,
-          this.isAutoLabelWidth &&
-            `${mergedClsPrefix}-form-item--auto-label-width`,
+          this.isAutoLabelWidth
+          && `${mergedClsPrefix}-form-item--auto-label-width`,
           !mergedShowLabel && `${mergedClsPrefix}-form-item--no-label`
         ]}
         style={this.cssVars as CSSProperties}
@@ -608,8 +610,8 @@ export default defineComponent({
         <div
           class={[
             `${mergedClsPrefix}-form-item-blank`,
-            this.mergedValidationStatus &&
-              `${mergedClsPrefix}-form-item-blank--${this.mergedValidationStatus}`
+            this.mergedValidationStatus
+            && `${mergedClsPrefix}-form-item-blank--${this.mergedValidationStatus}`
           ]}
         >
           {$slots}
@@ -617,10 +619,11 @@ export default defineComponent({
         {this.mergedShowFeedback ? (
           <div
             key={this.feedbackId}
-            style={{
-              textAlign: this.feedbackCrosswise
-            }}
-            class={`${mergedClsPrefix}-form-item-feedback-wrapper`}
+            style={this.feedbackStyle}
+            class={[
+              `${mergedClsPrefix}-form-item-feedback-wrapper`,
+              this.feedbackClass
+            ]}
           >
             <Transition name="fade-down-transition" mode="out-in">
               {{
@@ -630,8 +633,8 @@ export default defineComponent({
                     $slots.feedback as Slot | undefined,
                     (children) => {
                       const { feedback } = this
-                      const feedbackNodes =
-                        children || feedback ? (
+                      const feedbackNodes
+                        = children || feedback ? (
                           <div
                             key="__feedback__"
                             class={`${mergedClsPrefix}-form-item-feedback__line`}

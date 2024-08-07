@@ -1,4 +1,4 @@
-import { h, computed, defineComponent, type PropType } from 'vue'
+import { type PropType, computed, defineComponent, h } from 'vue'
 import { useMemo } from 'vooks'
 import { render } from '../../_utils'
 import { NTooltip } from '../../tooltip'
@@ -21,7 +21,7 @@ export const menuItemProps = {
 export const NMenuOption = defineComponent({
   name: 'MenuOption',
   props: menuItemProps,
-  setup (props) {
+  setup(props) {
     const MenuChild = useMenuChild(props)
     const { NSubmenu, NMenu } = MenuChild
     const { props: menuProps, mergedClsPrefixRef, mergedCollapsedRef } = NMenu
@@ -31,11 +31,12 @@ export const NMenuOption = defineComponent({
     const mergedDisabledRef = computed(() => {
       return submenuDisabledRef.value || props.disabled
     })
-    function doClick (e: MouseEvent): void {
+    function doClick(e: MouseEvent): void {
       const { onClick } = props
-      if (onClick) onClick(e)
+      if (onClick)
+        onClick(e)
     }
-    function handleClick (e: MouseEvent): void {
+    function handleClick(e: MouseEvent): void {
       if (!mergedDisabledRef.value) {
         NMenu.doSelect(props.internalKey, props.tmNode.rawNode)
         doClick(e)
@@ -52,21 +53,22 @@ export const NMenuOption = defineComponent({
       menuProps,
       dropdownEnabled: useMemo(() => {
         return (
-          props.root &&
-          mergedCollapsedRef.value &&
-          menuProps.mode !== 'horizontal' &&
-          !mergedDisabledRef.value
+          props.root
+          && mergedCollapsedRef.value
+          && menuProps.mode !== 'horizontal'
+          && !mergedDisabledRef.value
         )
       }),
       selected: useMemo(() => {
-        if (NMenu.mergedValueRef.value === props.internalKey) return true
+        if (NMenu.mergedValueRef.value === props.internalKey)
+          return true
         return false
       }),
       mergedDisabled: mergedDisabledRef,
       handleClick
     }
   },
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       mergedTheme,

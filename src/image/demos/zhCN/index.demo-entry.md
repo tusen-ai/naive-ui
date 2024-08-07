@@ -9,6 +9,7 @@ basic.vue
 group.vue
 error.vue
 preview-disabled.vue
+custom-toolbar.vue
 custom.vue
 tooltip.vue
 full-debug.vue
@@ -25,13 +26,14 @@ previewed-img-props.vue
 | alt | `string` | `undefined` | 图片说明 |  |
 | fallback-src | `string` | `undefined` | 图片加载失败时显示的地址 |  |
 | height | `string \| number` | `undefined` | 图片高度 |  |
-| img-props | `object` | `undefined` | 组件中 img 元素的属性 |  |
+| img-props | `ImgHTMLAttributes` | `undefined` | 组件中 img 元素的属性 |  |
 | lazy | `boolean` | `false` | 是否让图片进入视口再加载，单独使用将设置为[HTMLImageElement.loading](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading) 的属性值；也可配合 `intersection-observer-options` 配置实现懒加载 | 2.30.5 |
 | intersection-observer-options | `{ root?: Element \| Document \| string \| null, rootMargin?: string, threshold?: number \| number[]; }` | `undefined` | `lazy=true` 时 intersection observer 观测的配置 | 2.30.5 |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `'fill'` | 图片在容器内的的适应类型 |  |
 | preview-src | `string` | `undefined` | 预览图片的图片地址 |  |
 | preview-disabled | `boolean` | `false` | 是否禁用单击图像预览 |  |
-| previewed-img-props | `object` | `undefined` | 预览图片时 img 元素的属性 | 2.34.0 |
+| previewed-img-props | `HTMLAttributes` | `undefined` | 预览图片时 img 元素的属性 | 2.34.0 |
+| render-toolbar | `(props: { nodes: { prev: VNode, next: VNode, rotateCounterclockwise: VNode, rotateClockwise: VNode, resizeToOriginalSize: VNode, zoomOut: VNode, zoomIn: VNode, download: VNode, close: VNode } }) => VNodeChild` | `undefined` | 工具栏的渲染函数 | `2.38.2` |
 | show-toolbar | `boolean` | `true` | 图片放大后是否展示底部工具栏 |  |
 | show-toolbar-tooltip | `boolean` | `false` | 是否展示工具栏的提示 | 2.24.0 |
 | src | `string` | `undefined` | 图片来源 |  |
@@ -43,10 +45,11 @@ previewed-img-props.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| on-preview-prev | `() => void` | `undefined` | 点击上一张的回调 |  |
-| on-preview-next | `() => void` | `undefined` | 点击下一张的回调 |  |
+| render-toolbar | `(props: { nodes: { prev: VNode, next: VNode, rotateCounterclockwise: VNode, rotateClockwise: VNode, resizeToOriginalSize: VNode, zoomOut: VNode, zoomIn: VNode, download: VNode, close: VNode } }) => VNodeChild` | `undefined` | 工具栏的渲染函数 | `2.38.2` |
 | show-toolbar | `boolean` | `true` | 图片放大后是否展示底部工具栏 |  |
 | show-toolbar-tooltip | `boolean` | `false` | 是否展示工具栏的提示 | 2.24.0 |
+| on-preview-prev | `() => void` | `undefined` | 点击上一张的回调 |  |
+| on-preview-next | `() => void` | `undefined` | 点击下一张的回调 |  |
 
 ### Image Slots
 

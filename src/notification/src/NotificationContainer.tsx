@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
-  h,
-  defineComponent,
-  inject,
   type PropType,
+  defineComponent,
+  h,
+  inject,
   ref,
   watchEffect
 } from 'vue'
@@ -23,14 +22,15 @@ export const NotificationContainer = defineComponent({
       required: true
     }
   },
-  setup () {
-    const { mergedThemeRef, mergedClsPrefixRef, wipTransitionCountRef } =
-      inject(notificationProviderInjectionKey)!
+  setup() {
+    const { mergedThemeRef, mergedClsPrefixRef, wipTransitionCountRef }
+      = inject(notificationProviderInjectionKey)!
     const selfRef = ref<HTMLElement | null>(null)
     watchEffect(() => {
       if (wipTransitionCountRef.value > 0) {
         selfRef?.value?.classList.add('transitioning')
-      } else {
+      }
+      else {
         selfRef?.value?.classList.remove('transitioning')
       }
     })
@@ -41,7 +41,7 @@ export const NotificationContainer = defineComponent({
       transitioning: wipTransitionCountRef
     }
   },
-  render () {
+  render() {
     const { $slots, scrollable, mergedClsPrefix, mergedTheme, placement } = this
     return (
       <div

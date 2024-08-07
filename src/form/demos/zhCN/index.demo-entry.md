@@ -5,7 +5,7 @@
 收集、验证信息。
 
 <n-alert type="warning" title="注意" :bordered="false">
-  如果你需要为一个值为 number 类型的表项设定 required，你需要在 rule 对象中设定 <n-text code>`type: number`</n-text>。
+  如果你需要为一个值为 number 类型的表项设定 required，你需要在 rule 对象中设定 <n-text code>`type: 'number'`</n-text>。
 </n-alert>
 
 ## 演示
@@ -25,7 +25,7 @@ show-label.vue
 partially-apply-rules.vue
 custom-messages.vue
 dynamic.vue
-feedback-position.vue
+feedback-style.vue
 ```
 
 ## API
@@ -54,20 +54,24 @@ feedback-position.vue
   以下并不是规则的全部用法，如果你想了解更多的用法，请参考 <n-a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</n-a>。
 </n-alert>
 
-| 属性 | 类型 | 说明 | 版本 |
-| --- | --- | --- | --- |
-| asyncValidator | `(rule: FormItemRule, value: any, callback: (error?: Error) => void) => void` | 异步校验，支持定义回调函数 |  |
-| message | `string` | 校验失败时展示的信息 |  |
-| renderMessage | `() => VNodeChild` | 信息的渲染函数 | 2.29.1 |
-| required | `boolean` | 是否必填 |  |
-| trigger | `string \| Array<string>` | 触发方式 |  |
-| validator | `(rule: FormItemRule, value: any) => boolean \| Error` | 校验规则 |  |
+| 属性 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| asyncValidator | `(rule: FormItemRule, value: any, callback: (error?: Error) => void) => void` | `undefined` | 异步校验，支持定义回调函数 |  |
+| key | `string` | `undefined` | 规则的唯一 key，可用于只执行部分规则验证。参考示例 [只执行部分规则](form#partially-apply-rules.vue) |  |
+| level | `'error'` \| `'warning'` | `undefined` | 验证级别。如果存在 `error` 级别错误，则会跳过 `warning` 级别验证 |  |
+| message | `string` | `undefined` | 校验失败时展示的信息 |  |
+| renderMessage | `() => VNodeChild` | `undefined` | 信息的渲染函数 | 2.29.1 |
+| required | `boolean` | `undefined` | 是否必填 |  |
+| trigger | `string \| Array<string>` | `undefined` | 触发方式 |  |
+| validator | `(rule: FormItemRule, value: any) => boolean \| Error` | `undefined` | 校验规则 |  |
 
 ### FormItem Props
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | feedback | `string` | `undefined` | 表项的反馈信息。不设为 `undefined` 时，会覆盖规则验证的结果 |  |
+| feedback-class | `string` | `undefined` | 反馈校验竖向展示定位 | 2.38.2 |
+| feedback-style | `string \| object` | `undefined` | 反馈校验横向展示定位 | 2.38.2 |
 | first | `boolean` | `false` | 是否只展示首个出错信息 |  |
 | ignore-path-change | `boolean` | `false` | 通常 `path` 的改变会导致数据来源的变化，所以 naive-ui 会清空验证信息。如果不期望这个行为，可以将其置为 `true` |  |
 | label | `string` | `undefined` | 标签信息 |  |
@@ -80,8 +84,6 @@ feedback-position.vue
 | rule | `FormItemRule \| Array<FormItemRule>` | `undefined` | 验证表项的规则，它会被通过 `rule-path` 从外层表单获取的规则合并来作为表项的验证规则。推荐还是在外层表单设置所有规则 |  |
 | rule-path | `string` | `undefined` | 从外层表单的 `rules` 对象获取规则的路径。如果没有设定，使用表项的 `path` 代替 |  |
 | show-feedback | `boolean` | `true` | 是否展示校验反馈 |  |
-| feedBack-vertical | `'top' \| 'bottom'` | `bottom` | 反馈校验竖向展示定位 | NEXT_VERSION |
-| feedBack-crosswise | `'left' \| 'center' \| 'right'` | `left` | 反馈校验横向展示定位 | NEXT_VERSION |
 | show-label | `boolean` | `true` | 是否展示标签。如果没有被设定，使用外层 `n-form` 的 `show-label` |  |
 | show-require-mark | `boolean` | `-` | 是否展示必填的星号。如果没有被设定，使用外层 `n-form` 的 `show-require-mark` |  |
 | require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | 必填的星号的位置。如果没有被设定，使用外层 `n-form` 的 `require-mark-placement` | `'right-hanging'` 2.24.0 |
