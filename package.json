@@ -131,7 +131,7 @@
     "rimraf": "^6.0.1",
     "rollup": "^4.3.0",
     "rollup-plugin-esbuild": "^6.1.0",
-    "superagent": "^9.0.2",
+    "superagent": "^10.0.0",
     "ts-jest": "^29.1.1",
     "typescript": "5.5.4",
     "vfonts": "^0.0.3",
