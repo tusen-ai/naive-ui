@@ -31,7 +31,7 @@ const azAZ: NLocale = {
     dateFormat: 'dd MMMM yyyy',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
-    weekFormat: 'yyyy-w',
+    weekFormat: 'YYYY-w',
     clear: 'Təmizlə',
     now: 'İndi',
     confirm: 'Təsdiqlə',

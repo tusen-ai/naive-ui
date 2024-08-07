@@ -99,7 +99,8 @@ export default defineComponent({
     const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
     const dateFnsOptionsRef = computed(() => {
       return {
-        locale: dateLocaleRef.value.locale
+        locale: dateLocaleRef.value.locale,
+        useAdditionalWeekYearTokens: true
       }
     })
 
