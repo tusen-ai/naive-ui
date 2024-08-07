@@ -92,6 +92,12 @@ export interface XhrHandlers {
   handleXHRError: (e: ProgressEvent) => void
 }
 
+export interface UploadInst {
+  openOpenFileDialog: () => void
+  submit: (fileId?: string) => void
+  clear: () => void
+}
+
 export type OnBeforeUpload = (data: {
   file: UploadSettledFileInfo
   fileList: UploadSettledFileInfo[]
