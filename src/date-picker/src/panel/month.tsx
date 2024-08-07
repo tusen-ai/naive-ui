@@ -36,7 +36,8 @@ export default defineComponent({
       required: true
     },
     // panelHeader prop
-    useAsQuickJump: Boolean
+    useAsQuickJump: Boolean,
+    onUpdateMonthItem: Function
   },
   setup(props) {
     const useCalendarRef = useCalendar(props, props.type)
@@ -111,6 +112,9 @@ export default defineComponent({
             if (useAsQuickJump) {
               handleQuickMonthClick(item, (value) => {
                 ;(props.onUpdateValue as OnPanelUpdateValueImpl)(value, false)
+                if (item.type === 'month') {
+                  props.onUpdateMonthItem?.()
+                }
               })
             }
             else {

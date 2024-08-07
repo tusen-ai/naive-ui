@@ -31,6 +31,7 @@
 - `n-empty` `size` prop to support `tiny` size.
 - `n-config-provider` adds `style-mount-target` prop to control where to mount components' style.
 - `n-cascader` filter ignore case sensitive
+- `n-date-picker` hide month panel after click month item
 
 ## 2.39.0
 

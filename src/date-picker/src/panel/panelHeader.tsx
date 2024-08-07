@@ -50,12 +50,16 @@ export default defineComponent({
     function handleHeaderClick(): void {
       showRef.value = !showRef.value
     }
+    function handleUpdateMonthItem() {
+      showRef.value = false
+    }
     return {
       show: showRef,
       triggerRef,
       monthPanelRef,
       handleHeaderClick,
-      handleClickOutside
+      handleClickOutside,
+      handleUpdateMonthItem
     }
   },
   render() {
@@ -103,6 +107,7 @@ export default defineComponent({
                                 key="month"
                                 useAsQuickJump
                                 value={this.value}
+                                onUpdateMonthItem={this.handleUpdateMonthItem}
                               />,
                               [
                                 [
