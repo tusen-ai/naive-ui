@@ -1,5 +1,5 @@
-import type {
-  ComponentPublicInstance,
+import {
+  type ComponentPublicInstance,
   type ExtractPropTypes,
   type PropType,
   defineComponent,
