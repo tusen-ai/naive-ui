@@ -28,7 +28,10 @@ export function useThemeClass(
 
   let renderCallback: (() => void) | undefined
 
-  const hashClassPrefix = `__${componentName}`
+  const nsPrefix = NConfigProvider?.styleIsolate
+    ? NConfigProvider.mergedNamespaceRef.value
+    : undefined
+  const hashClassPrefix = `__${nsPrefix ? `${nsPrefix}-` : ''}${componentName}`
   const mountStyle = (): void => {
     let finalThemeHash = hashClassPrefix
     const hashValue = hashRef ? hashRef.value : undefined

@@ -4,6 +4,7 @@ import { useSsrAdapter } from '@css-render/vue3-ssr'
 import { configProviderInjectionKey } from '../config-provider/src/context'
 import globalStyle from '../_styles/global/index.cssr'
 import { throwError } from '../_utils'
+import { c } from '../_utils/cssr'
 import { cssrAnchorMetaName } from './common'
 
 export default function useStyle(
@@ -20,8 +21,14 @@ export default function useStyle(
   const NConfigProvider = inject(configProviderInjectionKey, null)
   const mountStyle = (): void => {
     const clsPrefix = clsPrefixRef.value
+    const nsPrefix = NConfigProvider?.styleIsolate
+      ? NConfigProvider.mergedNamespaceRef.value
+      : undefined
+    if (nsPrefix) {
+      style = c(`.${nsPrefix}`, [style])
+    }
     style.mount({
-      id: clsPrefix === undefined ? mountId : clsPrefix + mountId,
+      id: `${nsPrefix ? `${nsPrefix}-` : ''}${clsPrefix === undefined ? mountId : clsPrefix + mountId}`,
       head: true,
       anchorMetaName: cssrAnchorMetaName,
       props: {
