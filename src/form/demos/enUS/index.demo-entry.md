@@ -47,6 +47,7 @@ feedback-style.vue
 | require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | Require mark placement | `'right-hanging'` 2.24.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |  |
 | validate-messages | `FormValidateMessages` | `undefined` | Validation messages of `async-validator`. | 2.27.0 |
+| scroll-to-first-error | `boolean \|` [options](https://github.com/scroll-into-view/scroll-into-view-if-needed#options) | `-` | Auto scroll to first failed field when submit | 2.39.1 |
 
 #### FormItemRule Type
 
