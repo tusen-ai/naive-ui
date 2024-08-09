@@ -32,6 +32,14 @@
 - `n-config-provider` adds `style-mount-target` prop to control where to mount components' style.
 - `n-cascader` filter ignore case sensitive
 
+## 2.39.1
+
+`2024-08-09`
+
+### Features
+
+- `n-form` 新增 `scroll-to-first-error` 属性
+
 ## 2.39.0
 
 `2024-07-15`
