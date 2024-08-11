@@ -120,6 +120,7 @@ export-csv.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | align | `'left' \| 'right' \| 'center'` | `'left'` | Text align in column. |  |
+| allowExport | `boolean` | `true` | Can the column exported | NEXT_VERSION |
 | titleAlign | `'left' \| 'right' \| 'center'` | `null` | alignment of the table header. If omitted, the value of the above align attribute will be applied | 2.34.4 |
 | cellProps | `(rowData: object, rowIndex: number) => object` | `undefined` | HTML attributes of the column's cell. | 2.27.0 |
 | children | `DataTableColumn[]` | `undefined` | Child nodes of a grouped column. |  |
@@ -131,7 +132,6 @@ export-csv.vue
 | disabled | `(rowData: object, rowIndex: number) => boolean` | `() => false` | Whether the row is checkable. |  |
 | ellipsis | `boolean \| EllipsisProps` | `false` | Ellipsis options when content overflows. |  |
 | ellipsis-component | `'ellipsis' \| 'performant-ellipsis'` | `'ellipsis'` | Component for rendering text ellipsis. It works when `ellipsis` is `EllipsisProps`. If it's `'ellipsis'`, table will use regular `n-ellipsis` component to render text ellipsis. If it's `'performant-ellipsis'`, table will use `n-performant-ellipsis` to render text ellipsis. In the later situation, rendering speed will be much faster but component inside table cell would be unmounted & remounted. | 2.35.0 |
-| allowExport | `boolean` | `true` | Can the column exported | NEXT_VERSION |
 | expandable | `(rowData: object) => boolean` | `undefined` | Whethe the row is expandable. Only works when `type` is `'expand'`. |  |
 | filter | `boolean \| (optionValue: string \| number, rowData: object) => boolean \| 'default'` | `false` | The filter of the column. If set to `true`, it will only display filter button on the column, which can be used in async status. |  |
 | filterMode | `'and' \| 'or'` | `'or'` | The filter mode. |  |
