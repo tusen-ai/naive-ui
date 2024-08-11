@@ -1,4 +1,4 @@
-import { h, defineComponent, type PropType } from 'vue'
+import { type PropType, defineComponent, h } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import { ChevronRightIcon } from '../../_internal/icons'
 
@@ -11,7 +11,7 @@ export default defineComponent({
     },
     onClick: Function as PropType<(e: MouseEvent) => void>
   },
-  render () {
+  render() {
     const { clsPrefix } = this
     return (
       <div class={`${clsPrefix}-layout-toggle-button`} onClick={this.onClick}>

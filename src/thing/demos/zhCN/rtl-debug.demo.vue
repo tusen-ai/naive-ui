@@ -2,6 +2,30 @@
 # Rtl Debug
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { CashOutline as CashIcon } from '@vicons/ionicons5'
+import { unstableRowRtl, unstableThingRtl } from 'naive-ui'
+
+export default defineComponent({
+  components: {
+    CashIcon
+  },
+  setup() {
+    return {
+      rtlEnabled: ref(false),
+      rtlStyles: [unstableThingRtl, unstableRowRtl],
+      avatar: ref(true),
+      header: ref(true),
+      headerExtra: ref(true),
+      description: ref(true),
+      footer: ref(true),
+      action: ref(true)
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-space><n-switch v-model:value="rtlEnabled" />Rtl</n-space>
@@ -47,7 +71,7 @@
         <template v-if="avatar" #avatar>
           <n-avatar>
             <n-icon>
-              <cash-icon />
+              <CashIcon />
             </n-icon>
           </n-avatar>
         </template>
@@ -57,7 +81,7 @@
         <template v-if="headerExtra" #header-extra>
           <n-button circle size="small">
             <template #icon>
-              <cash-icon />
+              <CashIcon />
             </template>
           </n-button>
         </template>
@@ -73,7 +97,7 @@
             <n-button size="small">
               <template #icon>
                 <n-icon>
-                  <cash-icon />
+                  <CashIcon />
                 </n-icon>
               </template>
               1 块钱
@@ -81,7 +105,7 @@
             <n-button size="small">
               <template #icon>
                 <n-icon>
-                  <cash-icon />
+                  <CashIcon />
                 </n-icon>
               </template>
               10 块钱
@@ -89,7 +113,7 @@
             <n-button size="small">
               <template #icon>
                 <n-icon>
-                  <cash-icon />
+                  <CashIcon />
                 </n-icon>
               </template>
               100 块钱
@@ -100,27 +124,3 @@
     </n-config-provider>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { CashOutline as CashIcon } from '@vicons/ionicons5'
-import { unstableThingRtl, unstableRowRtl } from 'naive-ui'
-
-export default defineComponent({
-  components: {
-    CashIcon
-  },
-  setup () {
-    return {
-      rtlEnabled: ref(false),
-      rtlStyles: [unstableThingRtl, unstableRowRtl],
-      avatar: ref(true),
-      header: ref(true),
-      headerExtra: ref(true),
-      description: ref(true),
-      footer: ref(true),
-      action: ref(true)
-    }
-  }
-})
-</script>

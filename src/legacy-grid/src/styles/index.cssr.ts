@@ -1,5 +1,5 @@
 import { repeat } from 'seemly'
-import { c, cB, cM, cE } from '../../../_utils/cssr'
+import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 const positionStyles = repeat(24, null)
   .map((_, index) => {

@@ -2,6 +2,18 @@
 # 调试
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      name: ref('oasis')
+    }
+  }
+})
+</script>
+
 <template>
   <n-button @click="name = 'the beatles'">
     将名称设置为披头士乐队
@@ -34,18 +46,6 @@
     </n-tabs>
   </n-card>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      name: ref('oasis')
-    }
-  }
-})
-</script>
 
 <style>
 .n-button {

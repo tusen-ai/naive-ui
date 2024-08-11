@@ -1,4 +1,4 @@
-import { computed, defineComponent, h, type PropType } from 'vue'
+import { type PropType, computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils'
@@ -27,9 +27,9 @@ export type InputGroupLabelProps = ExtractPublicPropTypes<
 export default defineComponent({
   name: 'InputGroupLabel',
   props: inputGroupLabelProps,
-  setup (props) {
-    const { mergedBorderedRef, mergedClsPrefixRef, inlineThemeDisabled } =
-      useConfig(props)
+  setup(props) {
+    const { mergedBorderedRef, mergedClsPrefixRef, inlineThemeDisabled }
+      = useConfig(props)
     const themeRef = useTheme(
       'Input',
       '-input-group-label',
@@ -79,7 +79,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     this.onRender?.()
     return (

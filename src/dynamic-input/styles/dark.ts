@@ -11,7 +11,7 @@ const dynamicInputDark: DynamicInputTheme = {
     Input: inputDark,
     Button: buttonDark
   },
-  self () {
+  self() {
     return commonVariables
   }
 }

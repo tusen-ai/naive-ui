@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/consistent-type-imports */
 // Auto generated component declarations
 declare module 'vue' {
   export interface GlobalComponents {
@@ -50,6 +49,8 @@ declare module 'vue' {
     NEmpty: (typeof import('naive-ui'))['NEmpty']
     NEquation: (typeof import('naive-ui'))['NEquation']
     NFlex: (typeof import('naive-ui'))['NFlex']
+    NFloatButton: (typeof import('naive-ui'))['NFloatButton']
+    NFloatButtonGroup: (typeof import('naive-ui'))['NFloatButtonGroup']
     NForm: (typeof import('naive-ui'))['NForm']
     NFormItem: (typeof import('naive-ui'))['NFormItem']
     NFormItemCol: (typeof import('naive-ui'))['NFormItemCol']
@@ -72,6 +73,7 @@ declare module 'vue' {
     NIconWrapper: (typeof import('naive-ui'))['NIconWrapper']
     NImage: (typeof import('naive-ui'))['NImage']
     NImageGroup: (typeof import('naive-ui'))['NImageGroup']
+    NInfiniteScroll: (typeof import('naive-ui'))['NInfiniteScroll']
     NInput: (typeof import('naive-ui'))['NInput']
     NInputGroup: (typeof import('naive-ui'))['NInputGroup']
     NInputGroupLabel: (typeof import('naive-ui'))['NInputGroupLabel']
@@ -91,6 +93,7 @@ declare module 'vue' {
     NMenu: (typeof import('naive-ui'))['NMenu']
     NMessageProvider: (typeof import('naive-ui'))['NMessageProvider']
     NModal: (typeof import('naive-ui'))['NModal']
+    NModalProvider: (typeof import('naive-ui'))['NModalProvider']
     NNotificationProvider: (typeof import('naive-ui'))['NNotificationProvider']
     NNumberAnimation: (typeof import('naive-ui'))['NNumberAnimation']
     NOl: (typeof import('naive-ui'))['NOl']
@@ -147,10 +150,7 @@ declare module 'vue' {
     NUploadTrigger: (typeof import('naive-ui'))['NUploadTrigger']
     NVirtualList: (typeof import('naive-ui'))['NVirtualList']
     NWatermark: (typeof import('naive-ui'))['NWatermark']
-    NModalProvider: (typeof import('naive-ui'))['NModalProvider']
-    NFloatButton: (typeof import('naive-ui'))['NFloatButton']
-    NFloatButtonGroup: (typeof import('naive-ui'))['NFloatButtonGroup']
-    NInfiniteScroll: (typeof import('naive-ui'))['NInfiniteScroll']
+    NHighlight: (typeof import('naive-ui'))['NHighlight']
   }
 }
 export {}

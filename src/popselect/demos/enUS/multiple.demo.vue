@@ -4,19 +4,11 @@
 Select multiple value in popselect.
 </markdown>
 
-<template>
-  <n-popselect v-model:value="value" multiple :options="options">
-    <n-button>
-      {{ Array.isArray(value) && value.length ? value : 'Nothing' }}
-    </n-button>
-  </n-popselect>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       value: ref<string[] | null>(null),
       options: [
@@ -42,3 +34,11 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-popselect v-model:value="value" multiple :options="options">
+    <n-button>
+      {{ Array.isArray(value) && value.length ? value : 'Nothing' }}
+    </n-button>
+  </n-popselect>
+</template>

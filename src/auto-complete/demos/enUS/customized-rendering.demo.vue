@@ -4,21 +4,14 @@
 Use `render-label` to customize label rendering.
 </markdown>
 
-<template>
-  <n-auto-complete
-    v-model:value="value"
-    :options="options"
-    placeholder="Email"
-    :render-label="renderLabel"
-  />
-</template>
-
 <script lang="ts">
-import { defineComponent, ref, computed, h, VNodeChild } from 'vue'
-import { SelectOption, NTag } from 'naive-ui'
+import type { VNodeChild } from 'vue'
+import { computed, defineComponent, h, ref } from 'vue'
+import type { SelectOption } from 'naive-ui'
+import { NTag } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const valueRef = ref('')
     return {
       renderLabel: (option: SelectOption): VNodeChild => [
@@ -40,3 +33,12 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-auto-complete
+    v-model:value="value"
+    :options="options"
+    placeholder="Email"
+    :render-label="renderLabel"
+  />
+</template>

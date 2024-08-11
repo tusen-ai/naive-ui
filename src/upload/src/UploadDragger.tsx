@@ -1,4 +1,4 @@
-import { h, defineComponent, inject } from 'vue'
+import { defineComponent, h, inject } from 'vue'
 import { throwError } from '../../_utils'
 import { uploadInjectionKey } from './interface'
 
@@ -7,7 +7,7 @@ export const uploadDraggerKey = '__UPLOAD_DRAGGER__'
 export default defineComponent({
   name: 'UploadDragger',
   [uploadDraggerKey]: true,
-  setup (_, { slots }) {
+  setup(_, { slots }) {
     const NUpload = inject(uploadInjectionKey, null)
     if (!NUpload) {
       throwError(
@@ -25,7 +25,8 @@ export default defineComponent({
         <div
           class={[
             `${mergedClsPrefix}-upload-dragger`,
-            (mergedDisabled || maxReached) && `${mergedClsPrefix}-upload-dragger--disabled`
+            (mergedDisabled || maxReached)
+            && `${mergedClsPrefix}-upload-dragger--disabled`
           ]}
         >
           {slots}

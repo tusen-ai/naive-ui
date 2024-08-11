@@ -1,13 +1,14 @@
-import { h, defineComponent, type PropType, type CSSProperties, ref } from 'vue'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import { type ScrollbarProps } from '../../scrollbar/src/Scrollbar'
-import { NxScrollbar, type ScrollbarInst } from '../../_internal'
+import { type CSSProperties, type PropType, defineComponent, h, ref } from 'vue'
 import {
   VVirtualList,
   type VirtualListInst,
   type VirtualListItemData,
   type VirtualListScrollToOptions
 } from 'vueuc'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { ScrollbarProps } from '../../scrollbar/src/Scrollbar'
+import { NxScrollbar, type ScrollbarInst } from '../../_internal'
+
 export { type VirtualListInst } from 'vueuc'
 
 export const virtualListProps = {
@@ -52,45 +53,47 @@ export type VirtualListProps = ExtractPublicPropTypes<typeof virtualListProps>
 export default defineComponent({
   name: 'VirtualList',
   props: virtualListProps,
-  setup (props) {
+  setup(props) {
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const virtualListInstRef = ref<VirtualListInst | null>(null)
 
-    function syncScrollbar (): void {
+    function syncScrollbar(): void {
       const { value: scrollbarInst } = scrollbarInstRef
-      if (scrollbarInst) scrollbarInst.sync()
+      if (scrollbarInst)
+        scrollbarInst.sync()
     }
 
-    function handleScroll (e: Event): void {
+    function handleScroll(e: Event): void {
       syncScrollbar()
       props.onScroll?.(e)
     }
 
-    function handleResize (e: ResizeObserverEntry): void {
+    function handleResize(e: ResizeObserverEntry): void {
       syncScrollbar()
       props.onResize?.(e)
     }
 
-    function handleWheel (e: WheelEvent): void {
+    function handleWheel(e: WheelEvent): void {
       props.onWheel?.(e)
     }
 
-    function scrollTo (
+    function scrollTo(
       options: VirtualListScrollToOptions | number,
       y?: number
     ): void {
       if (typeof options === 'number') {
         virtualListInstRef.value?.scrollTo(options, y ?? 0)
-      } else {
+      }
+      else {
         virtualListInstRef.value?.scrollTo(options)
       }
     }
 
-    function getScrollContainer (): HTMLElement | null | undefined {
+    function getScrollContainer(): HTMLElement | null | undefined {
       return virtualListInstRef.value?.listElRef
     }
 
-    function getScrollContent (): HTMLElement | null | undefined {
+    function getScrollContent(): HTMLElement | null | undefined {
       return virtualListInstRef.value?.itemsElRef
     }
 
@@ -105,7 +108,7 @@ export default defineComponent({
       handleWheel
     }
   },
-  render () {
+  render() {
     return (
       <NxScrollbar
         {...this.scrollbarProps}

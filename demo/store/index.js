@@ -3,31 +3,39 @@ import { useMemo } from 'vooks'
 import {
   NConfigProvider,
   darkTheme,
-  enUS,
-  zhCN,
   dateEnUS,
   dateZhCN,
-  useOsTheme
+  enUS,
+  useOsTheme,
+  zhCN
 } from 'naive-ui'
 import { TsConfigProvider } from '../../themes/tusimple/src'
 import { i18n, useIsMobile } from '../utils/composables'
 import {
-  createDocumentationMenuOptions,
-  createComponentMenuOptions
+  createComponentMenuOptions,
+  createDocumentationMenuOptions
 } from './menu-options'
 import hljs from './hljs'
 
 let route = null
 let router = null
+// locale
+let localeNameRef = null
+// useMemo
+let dateLocaleRef = null
+// theme
+const osThemeRef = useOsTheme()
+let themeNameRef = null
+let rawThemeNameRef = null // could be `os-theme`
 
-export function initRouter (_router, _route) {
+export function initRouter(_router, _route) {
   route = _route
   router = _router
   localeNameRef = useMemo({
-    get () {
+    get() {
       return route.path.startsWith('/zh-CN') ? 'zh-CN' : 'en-US'
     },
-    set (locale) {
+    set(locale) {
       router.push(changeLangInPath(route.fullPath, locale))
     }
   })
@@ -36,7 +44,7 @@ export function initRouter (_router, _route) {
   })
   rawThemeNameRef = useMemo(() => route.params.theme)
   themeNameRef = useMemo({
-    get () {
+    get() {
       switch (route.params.theme) {
         case 'os-theme':
           return osThemeRef.value
@@ -46,7 +54,7 @@ export function initRouter (_router, _route) {
           return 'light'
       }
     },
-    set (theme) {
+    set(theme) {
       router.push(changeThemeInPath(route.fullPath, theme))
     }
   })
@@ -55,35 +63,28 @@ export function initRouter (_router, _route) {
 // display mode
 const _displayModeRef = ref(window.localStorage.getItem('mode') ?? 'debug')
 const displayModeRef = computed({
-  get () {
+  get() {
     return _displayModeRef.value
   },
-  set (value) {
+  set(value) {
     _displayModeRef.value = value
     window.localStorage.setItem('mode', value)
   }
 })
 
-// locale
-let localeNameRef = null
 const localeRef = computed(() => {
   return localeNameRef.value === 'zh-CN' ? zhCN : enUS
 })
 
-// useMemo
-let dateLocaleRef = null
-
-// theme
-const osThemeRef = useOsTheme()
-let themeNameRef = null
-let rawThemeNameRef = null // could be `os-theme`
 const themeRef = computed(() => {
   const { value } = themeNameRef
   return value === 'dark' ? darkTheme : null
 })
 
 // config provider
+// eslint-disable-next-line node/prefer-global/process
 const configProviderNameRef = ref(process.env.TUSIMPLE ? 'tusimple' : 'default')
+
 const configProviderRef = computed(() => {
   return configProviderNameRef.value === 'tusimple'
     ? TsConfigProvider
@@ -108,9 +109,11 @@ const componentOptionsRef = computed(() =>
 const flattenedDocOptionsRef = computed(() => {
   const flattenedItems = []
   const traverse = (items) => {
-    if (!items) return
+    if (!items)
+      return
     items.forEach((item) => {
-      if (item.children) traverse(item.children)
+      if (item.children)
+        traverse(item.children)
       else flattenedItems.push(item)
     })
   }
@@ -119,7 +122,7 @@ const flattenedDocOptionsRef = computed(() => {
   return flattenedItems
 })
 
-export function siteSetup () {
+export function siteSetup() {
   i18n.provide(computed(() => localeNameRef.value))
   const isMobileRef = useIsMobile()
   return {
@@ -135,47 +138,47 @@ export function siteSetup () {
   }
 }
 
-function changeLangInPath (path, lang) {
+function changeLangInPath(path, lang) {
   const langReg = /^\/(zh-CN|en-US)\//
   return path.replace(langReg, `/${lang}/`)
 }
 
-function changeThemeInPath (path, theme) {
+function changeThemeInPath(path, theme) {
   const themeReg = /(^\/[^/]+\/)([^/]+)/
-  return path.replace(themeReg, '$1' + theme)
+  return path.replace(themeReg, `$1${theme}`)
 }
 
-export function push (partialPath) {
+export function push(partialPath) {
   const { fullPath } = route
   router.push(
-    fullPath.replace(/(^\/[^/]+\/[^/]+)((\/.*)|$)/, '$1' + partialPath)
+    fullPath.replace(/(^\/[^/]+\/[^/]+)((\/.*)|$)/, `$1${partialPath}`)
   )
 }
 
-export function useDisplayMode () {
+export function useDisplayMode() {
   return displayModeRef
 }
 
-export function useLocaleName () {
+export function useLocaleName() {
   return localeNameRef
 }
 
-export function useThemeName () {
+export function useThemeName() {
   return themeNameRef
 }
 
-export function useDocOptions () {
+export function useDocOptions() {
   return docOptionsRef
 }
 
-export function useComponentOptions () {
+export function useComponentOptions() {
   return componentOptionsRef
 }
 
-export function useFlattenedDocOptions () {
+export function useFlattenedDocOptions() {
   return flattenedDocOptionsRef
 }
 
-export function useConfigProviderName () {
+export function useConfigProviderName() {
   return configProviderNameRef
 }

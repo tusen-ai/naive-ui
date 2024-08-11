@@ -1,4 +1,4 @@
-import { cB, c } from '../../../_utils/cssr'
+import { c, cB } from '../../../_utils/cssr'
 
 export default c([
   cB('input-number-suffix', `

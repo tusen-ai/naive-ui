@@ -4,15 +4,11 @@
 将 `type` 设为 `'textarea'`。
 </markdown>
 
-<template>
-  <n-mention type="textarea" :options="options" />
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       options: [
         {
@@ -36,3 +32,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-mention type="textarea" :options="options" />
+</template>

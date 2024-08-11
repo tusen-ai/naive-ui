@@ -2,13 +2,35 @@
   # Event
 </markdown>
 
+<script lang="ts">
+import { useMessage } from 'naive-ui'
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const message = useMessage()
+    return {
+      handleOnDragStart: () => {
+        message.info('Move Start')
+      },
+      handleOnDragMove: () => {
+        message.info('Moving')
+      },
+      handleOnDragEnd: () => {
+        message.info('Move end')
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-split
     direction="horizontal"
     style="height: 200px"
-    @move-start="handleOnMoveStart"
-    @moving="handleOnMoving"
-    @move-end="handleOnMoveEnd"
+    @drag-start="handleOnDragStart"
+    @drag-move="handleOnDragMove"
+    @drag-end="handleOnDragEnd"
   >
     <template #1>
       Pane 1
@@ -18,25 +40,3 @@
     </template>
   </n-split>
 </template>
-
-<script lang="ts">
-import { useMessage } from 'naive-ui'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const message = useMessage()
-    return {
-      handleOnMoveStart: () => {
-        message.info('Move Start')
-      },
-      handleOnMoving: () => {
-        message.info('Moving')
-      },
-      handleOnMoveEnd: () => {
-        message.info('Move end')
-      }
-    }
-  }
-})
-</script>

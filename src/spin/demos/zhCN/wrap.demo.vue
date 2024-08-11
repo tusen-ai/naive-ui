@@ -4,6 +4,18 @@
 你可以把其他内容包裹在 Spin 中。
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      show: ref(false)
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-spin :show="show">
@@ -16,15 +28,3 @@
     </n-button>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      show: ref(false)
-    }
-  }
-})
-</script>

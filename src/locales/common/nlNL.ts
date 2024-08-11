@@ -31,7 +31,7 @@ const nlNL: NLocale = {
     dateFormat: 'dd/MM/yyyy',
     dateTimeFormat: 'dd/MM/yyyy HH:mm:ss',
     quarterFormat: 'qqq yyyy',
-    weekFormat: 'yyyy-w',
+    weekFormat: 'YYYY-w',
     clear: 'Wis',
     now: 'Nu',
     confirm: 'Bevestig',

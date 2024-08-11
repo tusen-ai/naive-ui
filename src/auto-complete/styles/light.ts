@@ -4,7 +4,7 @@ import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
 
-export function self (vars: ThemeCommonVars) {
+export function self(vars: ThemeCommonVars) {
   const { boxShadow2 } = vars
   return {
     menuBoxShadow: boxShadow2
@@ -23,5 +23,4 @@ const autoCompleteLight = createTheme({
 
 export default autoCompleteLight
 export type AutoCompleteTheme = typeof autoCompleteLight
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export type AutoCompleteThemeVars = ReturnType<typeof self>

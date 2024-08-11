@@ -1,4 +1,4 @@
-import { cB, cE, cM, c } from '../../../_utils/cssr'
+import { c, cB, cE, cM } from '../../../_utils/cssr'
 import { fadeDownTransition } from '../../../_styles/transitions/fade-down.cssr'
 
 // vars:
@@ -100,19 +100,11 @@ export default cB('form-item', `
       `)
     ])
   ]),
-  cM('labelled-vertical-top', `
-      grid-template-areas:
-        "label"
-        "feedback"
-        "blank";
-    `),
-  cM('labelled-vertical-bottom', `
-      grid-template-areas:
-        "label"
-        "blank"
-        "feedback";
-    `),
   cM('top-labelled', `
+    grid-template-areas:
+      "label"
+      "blank"
+      "feedback";
     grid-template-rows: minmax(var(--n-label-height), auto) 1fr;
     grid-template-columns: minmax(0, 100%);
   `, [

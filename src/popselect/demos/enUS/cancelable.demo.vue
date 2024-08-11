@@ -4,22 +4,16 @@
 Make single value popselect cancelable.
 </markdown>
 
-<template>
-  <n-popselect v-model:value="value" cancelable :options="options">
-    <n-button>{{ value || 'Popselect' }}</n-button>
-  </n-popselect>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       value: ref('song1'),
       options: [
         {
-          label: "Everybody's Got Something to Hide Except Me and My Monkey",
+          label: 'Everybody\'s Got Something to Hide Except Me and My Monkey',
           value: 'song0',
           disabled: true
         },
@@ -32,7 +26,7 @@ export default defineComponent({
           value: 'song2'
         },
         {
-          label: "You Won't See",
+          label: 'You Won\'t See',
           value: 'song3',
           disabled: true
         },
@@ -62,7 +56,7 @@ export default defineComponent({
           value: 'song9'
         },
         {
-          label: "I'm looking through you",
+          label: 'I\'m looking through you',
           value: 'song10'
         },
         {
@@ -78,3 +72,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-popselect v-model:value="value" cancelable :options="options">
+    <n-button>{{ value || 'Popselect' }}</n-button>
+  </n-popselect>
+</template>

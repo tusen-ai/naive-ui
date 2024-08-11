@@ -1,17 +1,17 @@
 import {
-  h,
-  ref,
-  onMounted,
+  type CSSProperties,
+  type PropType,
+  type WatchStopHandle,
   computed,
   defineComponent,
-  type PropType,
-  toRef,
-  provide,
+  h,
   nextTick,
-  type WatchStopHandle,
-  type CSSProperties,
-  watch,
-  onBeforeUnmount
+  onBeforeUnmount,
+  onMounted,
+  provide,
+  ref,
+  toRef,
+  watch
 } from 'vue'
 import { type TreeNode, createIndexGetter } from 'treemate'
 import { VirtualList, type VirtualListInst } from 'vueuc'
@@ -20,34 +20,34 @@ import { NEmpty } from '../../../empty'
 import { NScrollbar } from '../../scrollbar'
 import type { ScrollbarInst } from '../../scrollbar'
 import type {
-  SelectOption,
   SelectGroupOption,
   SelectIgnoredOption,
-  Value,
-  SelectTreeMate
+  SelectOption,
+  SelectTreeMate,
+  Value
 } from '../../../select/src/interface'
 import { resolveSlot, resolveWrappedSlot, useOnResize } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
-import { useThemeClass, useTheme, useRtl, useConfig } from '../../../_mixins'
+import { useConfig, useRtl, useTheme, useThemeClass } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import NInternalLoading from '../../loading'
 import NFocusDetector from '../../focus-detector'
 import {
-  internalSelectMenuLight,
-  type InternalSelectMenuTheme
+  type InternalSelectMenuTheme,
+  internalSelectMenuLight
 } from '../styles'
 import NSelectOption from './SelectOption'
 import NSelectGroupHeader from './SelectGroupHeader'
 import type {
-  RenderLabel,
-  Size,
   InternalExposedProps,
+  NodeProps,
+  RenderLabel,
   RenderOption,
-  NodeProps
+  Size
 } from './interface'
 import {
-  internalSelectionMenuInjectionKey,
-  internalSelectionMenuBodyInjectionKey
+  internalSelectionMenuBodyInjectionKey,
+  internalSelectionMenuInjectionKey
 } from './interface'
 import style from './styles/index.cssr'
 
@@ -118,7 +118,7 @@ export default defineComponent({
     // deprecated
     onToggle: Function as PropType<(tmNode: TreeNode<SelectOption>) => void>
   },
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
     const rtlEnabledRef = useRtl(
       'InternalSelectMenu',
@@ -141,20 +141,22 @@ export default defineComponent({
       createIndexGetter(flattenedNodesRef.value)
     )
     const pendingNodeRef = ref<TreeNode<SelectOption> | null>(null)
-    function initPendingNode (): void {
+    function initPendingNode(): void {
       const { treeMate } = props
       let defaultPendingNode: TreeNode<SelectOption> | null = null
       const { value } = props
       if (value === null) {
         defaultPendingNode = treeMate.getFirstAvailableNode()
-      } else {
+      }
+      else {
         if (props.multiple) {
           defaultPendingNode = treeMate.getNode(
             ((value as Array<string | number> | null) || [])[
               ((value as Array<string | number> | null) || []).length - 1
             ]
           )
-        } else {
+        }
+        else {
           defaultPendingNode = treeMate.getNode(value as string | number)
         }
         if (!defaultPendingNode || defaultPendingNode.disabled) {
@@ -163,11 +165,12 @@ export default defineComponent({
       }
       if (defaultPendingNode) {
         setPendingTmNode(defaultPendingNode)
-      } else {
+      }
+      else {
         setPendingTmNode(null)
       }
     }
-    function clearPendingNodeIfInvalid (): void {
+    function clearPendingNodeIfInvalid(): void {
       const { value: pendingNode } = pendingNodeRef
       if (pendingNode && !props.treeMate.getNode(pendingNode.key)) {
         pendingNodeRef.value = null
@@ -185,11 +188,13 @@ export default defineComponent({
               if (props.resetMenuOnOptionsChange) {
                 if (props.autoPending) {
                   initPendingNode()
-                } else {
+                }
+                else {
                   clearPendingNodeIfInvalid()
                 }
                 void nextTick(scrollToPendingNode)
-              } else {
+              }
+              else {
                 clearPendingNodeIfInvalid()
               }
             },
@@ -197,7 +202,8 @@ export default defineComponent({
               immediate: true
             }
           )
-        } else {
+        }
+        else {
           initPendingNodeWatchStopHandle?.()
         }
       },
@@ -225,94 +231,106 @@ export default defineComponent({
       const tmNodes = flattenedNodesRef.value
       return tmNodes && tmNodes.length === 0
     })
-    function doToggle (tmNode: TreeNode<SelectOption>): void {
+    function doToggle(tmNode: TreeNode<SelectOption>): void {
       const { onToggle } = props
-      if (onToggle) onToggle(tmNode)
+      if (onToggle)
+        onToggle(tmNode)
     }
-    function doScroll (e: Event): void {
+    function doScroll(e: Event): void {
       const { onScroll } = props
-      if (onScroll) onScroll(e)
+      if (onScroll)
+        onScroll(e)
     }
     // required, scroller sync need to be triggered manually
-    function handleVirtualListScroll (e: Event): void {
+    function handleVirtualListScroll(e: Event): void {
       scrollbarRef.value?.sync()
       doScroll(e)
     }
-    function handleVirtualListResize (): void {
+    function handleVirtualListResize(): void {
       scrollbarRef.value?.sync()
     }
-    function getPendingTmNode (): TreeNode<SelectOption> | null {
+    function getPendingTmNode(): TreeNode<SelectOption> | null {
       const { value: pendingTmNode } = pendingNodeRef
-      if (pendingTmNode) return pendingTmNode
+      if (pendingTmNode)
+        return pendingTmNode
       return null
     }
-    function handleOptionMouseEnter (
+    function handleOptionMouseEnter(
       e: MouseEvent,
       tmNode: TreeNode<SelectOption>
     ): void {
-      if (tmNode.disabled) return
+      if (tmNode.disabled)
+        return
       setPendingTmNode(tmNode, false)
     }
-    function handleOptionClick (
+    function handleOptionClick(
       e: MouseEvent,
       tmNode: TreeNode<SelectOption>
     ): void {
-      if (tmNode.disabled) return
+      if (tmNode.disabled)
+        return
       doToggle(tmNode)
     }
     // keyboard related methods
-    function handleKeyUp (e: KeyboardEvent): void {
-      if (happensIn(e, 'action')) return
+    function handleKeyUp(e: KeyboardEvent): void {
+      if (happensIn(e, 'action'))
+        return
       props.onKeyup?.(e)
     }
-    function handleKeyDown (e: KeyboardEvent): void {
-      if (happensIn(e, 'action')) return
+    function handleKeyDown(e: KeyboardEvent): void {
+      if (happensIn(e, 'action'))
+        return
       props.onKeydown?.(e)
     }
-    function handleMouseDown (e: MouseEvent): void {
+    function handleMouseDown(e: MouseEvent): void {
       props.onMousedown?.(e)
-      if (props.focusable) return
+      if (props.focusable)
+        return
       e.preventDefault()
     }
-    function next (): void {
+    function next(): void {
       const { value: pendingTmNode } = pendingNodeRef
       if (pendingTmNode) {
         setPendingTmNode(pendingTmNode.getNext({ loop: true }), true)
       }
     }
-    function prev (): void {
+    function prev(): void {
       const { value: pendingTmNode } = pendingNodeRef
       if (pendingTmNode) {
         setPendingTmNode(pendingTmNode.getPrev({ loop: true }), true)
       }
     }
-    function setPendingTmNode (
+    function setPendingTmNode(
       tmNode: TreeNode<SelectOption> | null,
       doScroll = false
     ): void {
       pendingNodeRef.value = tmNode
-      if (doScroll) scrollToPendingNode()
+      if (doScroll)
+        scrollToPendingNode()
     }
-    function scrollToPendingNode (): void {
+    function scrollToPendingNode(): void {
       const tmNode = pendingNodeRef.value
-      if (!tmNode) return
+      if (!tmNode)
+        return
       const fIndex = fIndexGetterRef.value(tmNode.key)
-      if (fIndex === null) return
+      if (fIndex === null)
+        return
       if (props.virtualScroll) {
         virtualListRef.value?.scrollTo({ index: fIndex })
-      } else {
+      }
+      else {
         scrollbarRef.value?.scrollTo({
           index: fIndex,
           elSize: itemSizeRef.value
         })
       }
     }
-    function handleFocusin (e: FocusEvent): void {
+    function handleFocusin(e: FocusEvent): void {
       if (selfRef.value?.contains(e.target as Node | null)) {
         props.onFocus?.(e)
       }
     }
-    function handleFocusout (e: FocusEvent): void {
+    function handleFocusout(e: FocusEvent): void {
       if (!selfRef.value?.contains(e.relatedTarget as Node | null)) {
         props.onBlur?.(e)
       }
@@ -334,7 +352,8 @@ export default defineComponent({
     provide(internalSelectionMenuBodyInjectionKey, selfRef)
     onMounted(() => {
       const { value } = scrollbarRef
-      if (value) value.sync()
+      if (value)
+        value.sync()
     })
     const cssVarsRef = computed(() => {
       const { size } = props
@@ -415,11 +434,11 @@ export default defineComponent({
       padding: paddingRef,
       flattenedNodes: flattenedNodesRef,
       empty: emptyRef,
-      virtualListContainer () {
+      virtualListContainer() {
         const { value } = virtualListRef
         return value?.listElRef
       },
-      virtualListContent () {
+      virtualListContent() {
         const { value } = virtualListRef
         return value?.itemsElRef
       },
@@ -437,7 +456,7 @@ export default defineComponent({
       ...exposedProps
     }
   },
-  render () {
+  render() {
     const {
       $slots,
       virtualScroll,
@@ -468,7 +487,7 @@ export default defineComponent({
       >
         {resolveWrappedSlot(
           $slots.header,
-          (children) =>
+          children =>
             children && (
               <div
                 class={`${clsPrefix}-base-select-menu__header`}
@@ -513,7 +532,7 @@ export default defineComponent({
                         item: tmNode
                       }: {
                         item: TreeNode<
-                        SelectGroupOption | SelectOption | SelectIgnoredOption
+                          SelectGroupOption | SelectOption | SelectIgnoredOption
                         >
                       }) => {
                         return tmNode.isGroup ? (
@@ -542,7 +561,7 @@ export default defineComponent({
                       paddingBottom: this.padding.bottom
                     }}
                   >
-                    {this.flattenedNodes.map((tmNode) =>
+                    {this.flattenedNodes.map(tmNode =>
                       tmNode.isGroup ? (
                         <NSelectGroupHeader
                           key={tmNode.key}
@@ -565,21 +584,19 @@ export default defineComponent({
             }}
           </NScrollbar>
         ) : (
-          <div
-            class={`${clsPrefix}-base-select-menu__empty`}
-            data-empty
-          >
+          <div class={`${clsPrefix}-base-select-menu__empty`} data-empty>
             {resolveSlot($slots.empty, () => [
               <NEmpty
                 theme={mergedTheme.peers.Empty}
                 themeOverrides={mergedTheme.peerOverrides.Empty}
+                size={this.size}
               />
             ])}
           </div>
         )}
         {resolveWrappedSlot(
           $slots.action,
-          (children) =>
+          children =>
             children && [
               <div
                 class={`${clsPrefix}-base-select-menu__action`}

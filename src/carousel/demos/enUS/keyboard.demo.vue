@@ -4,6 +4,20 @@
 Whether to switch the carousel by pressing the key, it is only valid when the focus is on Dots.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const directionRef = ref<'horizontal' | 'vertical'>('horizontal')
+    return {
+      direction: directionRef,
+      directions: ['horizontal', 'vertical']
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-radio-group v-model:value="direction">
@@ -40,20 +54,6 @@ Whether to switch the carousel by pressing the key, it is only valid when the fo
     </n-carousel>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const directionRef = ref<'horizontal' | 'vertical'>('horizontal')
-    return {
-      direction: directionRef,
-      directions: ['horizontal', 'vertical']
-    }
-  }
-})
-</script>
 
 <style>
 .carousel-img {

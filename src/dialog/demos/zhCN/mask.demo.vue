@@ -4,23 +4,17 @@
 我觉得用户应该聪明到点遮罩没用的时候就去点确认了。
 </markdown>
 
-<template>
-  <n-button @click="handleButtonClick">
-    点击遮罩的事件
-  </n-button>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useMessage, useDialog } from 'naive-ui'
+import { useDialog, useMessage } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     const dialog = useDialog()
 
     return {
-      handleButtonClick () {
+      handleButtonClick() {
         dialog.success({
           title: '关闭',
           content: '你确定？',
@@ -39,3 +33,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-button @click="handleButtonClick">
+    点击遮罩的事件
+  </n-button>
+</template>

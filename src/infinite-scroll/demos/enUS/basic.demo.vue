@@ -1,19 +1,12 @@
 <markdown>
-  # Basic
+# Basic
 </markdown>
-
-<template>
-  <n-infinite-scroll style="height: 240px" :distance="10" @load="handleLoad">
-    <div v-for="i in count" :key="i" class="item">
-      {{ i }}
-    </div>
-  </n-infinite-scroll>
-</template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+
 export default defineComponent({
-  setup () {
+  setup() {
     const count = ref(6)
     const handleLoad = () => {
       count.value += 1
@@ -25,6 +18,15 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-infinite-scroll style="height: 240px" :distance="10" @load="handleLoad">
+    <div v-for="i in count" :key="i" class="item">
+      {{ i }}
+    </div>
+  </n-infinite-scroll>
+</template>
+
 <style>
 .item {
   display: flex;
@@ -32,6 +34,10 @@ export default defineComponent({
   height: 46px;
   justify-content: center;
   margin-bottom: 10px;
-  background-color: #e7f5ee;
+  background-color: rgba(0, 128, 0, 0.16);
+}
+
+.item:last-child {
+  margin-bottom: 0;
 }
 </style>

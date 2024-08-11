@@ -6,6 +6,18 @@ Put image here.
 Please note about cross origin setting of the image URL. It will influence whether the image can be displayed.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      show: ref(false)
+    }
+  }
+})
+</script>
+
 <template>
   <n-watermark
     v-if="show"
@@ -23,15 +35,3 @@ Please note about cross origin setting of the image URL. It will influence wheth
   />
   <n-switch v-model:value="show" />
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      show: ref(false)
-    }
-  }
-})
-</script>

@@ -4,17 +4,15 @@
 After much deliberation, I decided to drop the slot API for rendering options; however, using `render-label`, `style`, and/or `class` properties you can do almost anything.
 </markdown>
 
-<template>
-  <n-select :options="options" :render-label="renderLabel" />
-</template>
-
 <script lang="ts">
-import { defineComponent, h, VNodeChild } from 'vue'
-import { NIcon, SelectOption, SelectGroupOption } from 'naive-ui'
+import type { VNodeChild } from 'vue'
+import { defineComponent, h } from 'vue'
+import type { SelectGroupOption, SelectOption } from 'naive-ui'
+import { NIcon } from 'naive-ui'
 import { MdMusicalNote as MusicIcon } from '@vicons/ionicons4'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const options: Array<SelectOption | SelectGroupOption> = [
       {
         type: 'group',
@@ -22,7 +20,7 @@ export default defineComponent({
         key: 'Rubber Soul Album',
         children: [
           {
-            label: "Everybody's Got Something to Hide Except Me and My Monkey",
+            label: 'Everybody\'s Got Something to Hide Except Me and My Monkey',
             value: 'song0',
             disabled: true
           },
@@ -38,7 +36,7 @@ export default defineComponent({
             value: 'song2'
           },
           {
-            label: "You Won't See",
+            label: 'You Won\'t See',
             value: 'song3',
             disabled: true
           },
@@ -68,7 +66,7 @@ export default defineComponent({
             value: 'song9'
           },
           {
-            label: "I'm looking through you",
+            label: 'I\'m looking through you',
             value: 'song10'
           },
           {
@@ -115,8 +113,8 @@ export default defineComponent({
             value: 'Maggie Mae'
           },
           {
-            label: "I've Got A Feeling",
-            value: "I've Got A Feeling"
+            label: 'I\'ve Got A Feeling',
+            value: 'I\'ve Got A Feeling'
           },
           {
             label: 'One After 909',
@@ -139,7 +137,8 @@ export default defineComponent({
     ]
     return {
       renderLabel: (option: SelectOption): VNodeChild => {
-        if (option.type === 'group') return option.label + '(Cool!)'
+        if (option.type === 'group')
+          return `${option.label}(Cool!)`
         return [
           h(
             NIcon,
@@ -161,3 +160,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-select :options="options" :render-label="renderLabel" />
+</template>

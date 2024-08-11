@@ -2,32 +2,12 @@
 # Export CSV
 </markdown>
 
-<template>
-  <n-space vertical :size="12">
-    <n-space>
-      <n-button @click="downloadCsv">
-        Export CSV (original data)
-      </n-button>
-      <n-button @click="exportSorterAndFilterCsv">
-        Export CSV (displayed data)
-      </n-button>
-    </n-space>
-    <n-data-table
-      ref="tableRef"
-      :columns="columns"
-      :data="data"
-      :pagination="pagination"
-      :bordered="false"
-    />
-  </n-space>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { DataTableColumns, DataTableInst } from 'naive-ui'
-import { RowData } from '../../src/interface'
+import type { DataTableColumns, DataTableInst } from 'naive-ui'
+import type { RowData } from '../../src/interface'
 
-type Song = {
+interface Song {
   key: number
   name: string
   age: number
@@ -93,7 +73,7 @@ const data: Song[] = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     const tableRef = ref<DataTableInst>()
 
     const downloadCsv = () =>
@@ -116,3 +96,23 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space vertical :size="12">
+    <n-space>
+      <n-button @click="downloadCsv">
+        Export CSV (original data)
+      </n-button>
+      <n-button @click="exportSorterAndFilterCsv">
+        Export CSV (displayed data)
+      </n-button>
+    </n-space>
+    <n-data-table
+      ref="tableRef"
+      :columns="columns"
+      :data="data"
+      :pagination="pagination"
+      :bordered="false"
+    />
+  </n-space>
+</template>

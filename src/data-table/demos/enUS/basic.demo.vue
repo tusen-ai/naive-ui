@@ -2,30 +2,22 @@
 # Basic usage
 </markdown>
 
-<template>
-  <n-data-table
-    :columns="columns"
-    :data="data"
-    :pagination="pagination"
-    :bordered="false"
-  />
-</template>
-
 <script lang="ts">
-import { h, defineComponent } from 'vue'
-import { NButton, useMessage, DataTableColumns } from 'naive-ui'
+import { defineComponent, h } from 'vue'
+import type { DataTableColumns } from 'naive-ui'
+import { NButton, useMessage } from 'naive-ui'
 
-type Song = {
+interface Song {
   no: number
   title: string
   length: string
 }
 
-const createColumns = ({
+function createColumns({
   play
 }: {
   play: (row: Song) => void
-}): DataTableColumns<Song> => {
+}): DataTableColumns<Song> {
   return [
     {
       title: 'No',
@@ -42,7 +34,7 @@ const createColumns = ({
     {
       title: 'Action',
       key: 'actions',
-      render (row) {
+      render(row) {
         return h(
           NButton,
           {
@@ -60,17 +52,17 @@ const createColumns = ({
 
 const data: Song[] = [
   { no: 3, title: 'Wonderwall', length: '4:18' },
-  { no: 4, title: "Don't Look Back in Anger", length: '4:48' },
+  { no: 4, title: 'Don\'t Look Back in Anger', length: '4:48' },
   { no: 12, title: 'Champagne Supernova', length: '7:27' }
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     return {
       data,
       columns: createColumns({
-        play (row: Song) {
+        play(row: Song) {
           message.info(`Play ${row.title}`)
         }
       }),
@@ -79,3 +71,12 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-data-table
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+    :bordered="false"
+  />
+</template>

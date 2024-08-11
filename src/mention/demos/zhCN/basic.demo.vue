@@ -4,17 +4,15 @@
 如果 `label` 是回调函数，输入匹配则会根据 `value` 进行匹配
 </markdown>
 
-<template>
-  <n-mention :options="options" default-value="@" />
-</template>
-
 <script lang="ts">
-import { defineComponent, h, VNodeChild } from 'vue'
-import { NIcon, MentionOption } from 'naive-ui'
+import type { VNodeChild } from 'vue'
+import { defineComponent, h } from 'vue'
+import type { MentionOption } from 'naive-ui'
+import { NIcon } from 'naive-ui'
 import { TelescopeOutline } from '@vicons/ionicons5'
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       options: [
         {
@@ -46,3 +44,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-mention :options="options" default-value="@" />
+</template>

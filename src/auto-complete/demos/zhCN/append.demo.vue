@@ -4,29 +4,11 @@
 在选中选项后追加到输入框中，而不是直接覆盖，配合 get-show 使用。
 </markdown>
 
-<template>
-  <n-space vertical>
-    <n-auto-complete
-      v-model:value="value"
-      :options="options"
-      :append="false"
-      placeholder="选择后覆盖"
-    />
-    <n-auto-complete
-      v-model:value="appendValue"
-      :options="appendOptions"
-      :append="true"
-      :get-show="getShow"
-      placeholder="配合 get-show 选择后追加"
-    />
-  </n-space>
-</template>
-
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const valueRef = ref('')
     const appendValueRef = ref('')
     return {
@@ -60,3 +42,21 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space vertical>
+    <n-auto-complete
+      v-model:value="value"
+      :options="options"
+      :append="false"
+      placeholder="选择后覆盖"
+    />
+    <n-auto-complete
+      v-model:value="appendValue"
+      :options="appendOptions"
+      :append="true"
+      :get-show="getShow"
+      placeholder="配合 get-show 选择后追加"
+    />
+  </n-space>
+</template>

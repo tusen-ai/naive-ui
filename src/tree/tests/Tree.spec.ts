@@ -128,7 +128,7 @@ describe('n-tree', () => {
     const expandNode = async (nodeText: string): Promise<void> => {
       const node = wrapper
         .findAll('.n-tree-node')
-        .find((el) => el.text() === nodeText)
+        .find(el => el.text() === nodeText)
       if (node) {
         const switcher = node.find('.n-base-icon')
         if (switcher) {
@@ -139,10 +139,10 @@ describe('n-tree', () => {
     }
     const test1Child = wrapper
       .findAll('.n-tree-node')
-      .find((el) => el.text() === 'test1-1')
+      .find(el => el.text() === 'test1-1')
     let test2Child = wrapper
       .findAll('.n-tree-node')
-      .find((el) => el.text() === 'test2-1')
+      .find(el => el.text() === 'test2-1')
 
     expect(test1Child).toBeDefined()
     expect(test2Child).not.toBeDefined()
@@ -150,7 +150,7 @@ describe('n-tree', () => {
     await expandNode('test2')
     test2Child = wrapper
       .findAll('.n-tree-node')
-      .find((el) => el.text() === 'test2-1')
+      .find(el => el.text() === 'test2-1')
     expect(test2Child).toBeDefined()
   })
 
@@ -186,10 +186,10 @@ describe('n-tree', () => {
     })
     const test1Child = wrapper
       .findAll('.n-tree-node')
-      .find((el) => el.text() === 'test1-1')
+      .find(el => el.text() === 'test1-1')
     const test2Child = wrapper
       .findAll('.n-tree-node')
-      .find((el) => el.text() === 'test2-1')
+      .find(el => el.text() === 'test2-1')
 
     expect(test1Child).toBeDefined()
     expect(test2Child).toBeDefined()
@@ -492,7 +492,7 @@ describe('n-tree', () => {
   })
 
   it('should work with `click line to checked when checkOnClick is function`', async () => {
-    function checkOnClick (node: TreeOption): boolean {
+    function checkOnClick(node: TreeOption): boolean {
       return node.label === '1-1'
     }
 

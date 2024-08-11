@@ -1,74 +1,58 @@
 import {
-  h,
-  defineComponent,
-  ref,
-  Transition,
-  computed,
-  provide,
-  type PropType,
-  watch,
-  withDirectives,
-  type ExtractPropTypes,
   type CSSProperties,
-  toRef,
+  type ExtractPropTypes,
   type Ref,
+  Transition,
+  type VNode,
+  computed,
+  defineComponent,
+  h,
+  provide,
+  ref,
+  toRef,
+  watch,
   watchEffect,
-  type VNode
+  withDirectives
 } from 'vue'
-import { VBinder, VTarget, VFollower, type FollowerPlacement } from 'vueuc'
+import { VBinder, VFollower, VTarget } from 'vueuc'
 import { clickoutside } from 'vdirs'
-import { format, getTime, isValid } from 'date-fns/esm'
+import { format, getTime, isValid } from 'date-fns'
 import { useIsMounted, useMergedState } from 'vooks'
 import { getPreciseEventTarget, happensIn } from 'seemly'
 import type { Size as TimePickerSize } from '../../time-picker/src/interface'
-import type { TimePickerProps } from '../../time-picker/src/TimePicker'
-import type { FormValidationStatus } from '../../form/src/interface'
 import { DateIcon, ToIcon } from '../../_internal/icons'
 import type { InputInst, InputProps } from '../../input'
 import { NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
 import {
-  useFormItem,
-  useTheme,
   useConfig,
+  useFormItem,
   useLocale,
+  useTheme,
   useThemeClass
 } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import {
-  warn,
   call,
-  useAdjustedTo,
   createKey,
-  warnOnce,
+  markEventEffectPerformed,
   resolveSlot,
-  markEventEffectPerformed
+  useAdjustedTo,
+  warn,
+  warnOnce
 } from '../../_utils'
-import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
-import type { DatePickerTheme } from '../styles/light'
 import { datePickerLight } from '../styles'
 import { strictParse } from './utils'
 import {
-  uniCalendarValidation,
-  dualCalendarValidation
+  dualCalendarValidation,
+  uniCalendarValidation
 } from './validation-utils'
-import { type DatePickerType } from './config'
 import type {
-  OnUpdateValue,
-  OnUpdateValueImpl,
-  Value,
-  PanelRef,
-  IsDateDisabled,
-  IsTimeDisabled,
-  Shortcuts,
-  FirstDayOfWeek,
-  DefaultTime,
   FormattedValue,
-  OnUpdateFormattedValue,
-  OnUpdateFormattedValueImpl,
-  DatePickerInst,
   OnConfirmImpl,
-  OnConfirm
+  OnUpdateFormattedValueImpl,
+  OnUpdateValueImpl,
+  PanelRef,
+  Value
 } from './interface'
 import { datePickerInjectionKey } from './interface'
 import DatetimePanel from './panel/datetime'
@@ -78,98 +62,15 @@ import DaterangePanel from './panel/daterange'
 import MonthPanel from './panel/month'
 import MonthRangePanel from './panel/monthrange'
 import style from './styles/index.cssr'
-
-export const datePickerProps = {
-  ...(useTheme.props as ThemeProps<DatePickerTheme>),
-  to: useAdjustedTo.propTo,
-  bordered: {
-    type: Boolean as PropType<boolean | undefined>,
-    default: undefined
-  },
-  clearable: Boolean,
-  updateValueOnClose: Boolean,
-  defaultValue: [Number, Array] as PropType<Value | null>,
-  defaultFormattedValue: [String, Array] as PropType<FormattedValue | null>,
-  defaultTime: [Number, String, Array] as PropType<DefaultTime>,
-  disabled: {
-    type: Boolean as PropType<boolean | undefined>,
-    default: undefined
-  },
-  placement: {
-    type: String as PropType<FollowerPlacement>,
-    default: 'bottom-start'
-  },
-  value: [Number, Array] as PropType<Value | null>,
-  formattedValue: [String, Array] as PropType<FormattedValue | null>,
-  size: String as PropType<'small' | 'medium' | 'large'>,
-  type: {
-    type: String as PropType<DatePickerType>,
-    default: 'date'
-  },
-  valueFormat: String,
-  separator: String,
-  placeholder: String,
-  startPlaceholder: String,
-  endPlaceholder: String,
-  format: String,
-  dateFormat: String,
-  timeFormat: String,
-  actions: Array as PropType<Array<'clear' | 'confirm' | 'now'> | null>,
-  shortcuts: Object as PropType<Shortcuts>,
-  isDateDisabled: Function as PropType<IsDateDisabled>,
-  isTimeDisabled: Function as PropType<IsTimeDisabled>,
-  show: {
-    type: Boolean as PropType<boolean | undefined>,
-    default: undefined
-  },
-  panel: Boolean,
-  ranges: Object as PropType<Record<string, [number, number]>>,
-  firstDayOfWeek: Number as PropType<FirstDayOfWeek>,
-  inputReadonly: Boolean,
-  closeOnSelect: Boolean,
-  status: String as PropType<FormValidationStatus>,
-  timePickerProps: [Object, Array] as PropType<
-  TimePickerProps | [TimePickerProps, TimePickerProps]
-  >,
-  onClear: Function as PropType<() => void>,
-  onConfirm: Function as PropType<OnConfirm>,
-  defaultCalendarStartTime: Number,
-  defaultCalendarEndTime: Number,
-  bindCalendarMonths: Boolean,
-  monthFormat: { type: String, default: 'M' },
-  yearFormat: { type: String, default: 'y' },
-  quarterFormat: { type: String, default: "'Q'Q" },
-  'onUpdate:show': [Function, Array] as PropType<
-  MaybeArray<(show: boolean) => void>
-  >,
-  onUpdateShow: [Function, Array] as PropType<
-  MaybeArray<(show: boolean) => void>
-  >,
-  'onUpdate:formattedValue': [Function, Array] as PropType<
-  MaybeArray<OnUpdateFormattedValue>
-  >,
-  onUpdateFormattedValue: [Function, Array] as PropType<
-  MaybeArray<OnUpdateFormattedValue>
-  >,
-  'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-  onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-  onFocus: [Function, Array] as PropType<(e: FocusEvent) => void>,
-  onBlur: [Function, Array] as PropType<(e: FocusEvent) => void>,
-  onNextMonth: Function as PropType<() => void>,
-  onPrevMonth: Function as PropType<() => void>,
-  onNextYear: Function as PropType<() => void>,
-  onPrevYear: Function as PropType<() => void>,
-  // deprecated
-  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
-} as const
+import type { DatePickerInst } from './public-types'
+import { datePickerProps } from './props'
 
 export type DatePickerSetupProps = ExtractPropTypes<typeof datePickerProps>
-export type DatePickerProps = ExtractPublicPropTypes<typeof datePickerProps>
 
 export default defineComponent({
   name: 'DatePicker',
   props: datePickerProps,
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.onChange !== undefined) {
@@ -198,13 +99,15 @@ export default defineComponent({
     const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
     const dateFnsOptionsRef = computed(() => {
       return {
-        locale: dateLocaleRef.value.locale
+        locale: dateLocaleRef.value.locale,
+        useAdditionalWeekYearTokens: true
       }
     })
 
     const mergedFormatRef = computed(() => {
       const { format } = props
-      if (format) return format
+      if (format)
+        return format
       switch (props.type) {
         case 'date':
         case 'daterange':
@@ -229,8 +132,9 @@ export default defineComponent({
       return props.valueFormat ?? mergedFormatRef.value
     })
 
-    function getTimestampValue (value: FormattedValue | null): Value | null {
-      if (value === null) return null
+    function getTimestampValue(value: FormattedValue | null): Value | null {
+      if (value === null)
+        return null
       const { value: mergedValueFormat } = mergedValueFormatRef
       const { value: dateFnsOptions } = dateFnsOptionsRef
       if (Array.isArray(value)) {
@@ -326,7 +230,8 @@ export default defineComponent({
           default:
             return ''
         }
-      } else {
+      }
+      else {
         return placeholder
       }
     })
@@ -334,13 +239,16 @@ export default defineComponent({
       if (props.startPlaceholder === undefined) {
         if (props.type === 'daterange') {
           return localeRef.value.startDatePlaceholder
-        } else if (props.type === 'datetimerange') {
+        }
+        else if (props.type === 'datetimerange') {
           return localeRef.value.startDatetimePlaceholder
-        } else if (props.type === 'monthrange') {
+        }
+        else if (props.type === 'monthrange') {
           return localeRef.value.startMonthPlaceholder
         }
         return ''
-      } else {
+      }
+      else {
         return props.startPlaceholder
       }
     })
@@ -348,20 +256,25 @@ export default defineComponent({
       if (props.endPlaceholder === undefined) {
         if (props.type === 'daterange') {
           return localeRef.value.endDatePlaceholder
-        } else if (props.type === 'datetimerange') {
+        }
+        else if (props.type === 'datetimerange') {
           return localeRef.value.endDatetimePlaceholder
-        } else if (props.type === 'monthrange') {
+        }
+        else if (props.type === 'monthrange') {
           return localeRef.value.endMonthPlaceholder
         }
         return ''
-      } else {
+      }
+      else {
         return props.endPlaceholder
       }
     })
     const mergedActionsRef = computed(() => {
       const { actions, type, clearable } = props
-      if (actions === null) return []
-      if (actions !== undefined) return actions
+      if (actions === null)
+        return []
+      if (actions !== undefined)
+        return actions
       const result = clearable ? ['clear'] : []
       switch (type) {
         case 'date':
@@ -402,14 +315,15 @@ export default defineComponent({
         default: {
           warn(
             'date-picker',
-            "The type is wrong, n-date-picker's type only supports `date`, `datetime`, `daterange` and `datetimerange`."
+            'The type is wrong, n-date-picker\'s type only supports `date`, `datetime`, `daterange` and `datetimerange`.'
           )
           break
         }
       }
     })
-    function getFormattedValue (value: Value | null): FormattedValue | null {
-      if (value === null) return null
+    function getFormattedValue(value: Value | null): FormattedValue | null {
+      if (value === null)
+        return null
       if (Array.isArray(value)) {
         const { value: mergedValueFormat } = mergedValueFormatRef
         const { value: dateFnsOptions } = dateFnsOptionsRef
@@ -417,7 +331,8 @@ export default defineComponent({
           format(value[0], mergedValueFormat, dateFnsOptions),
           format(value[1], mergedValueFormat, dateFnsOptionsRef.value)
         ]
-      } else {
+      }
+      else {
         return format(
           value,
           mergedValueFormatRef.value,
@@ -425,10 +340,10 @@ export default defineComponent({
         )
       }
     }
-    function doUpdatePendingValue (value: Value | null): void {
+    function doUpdatePendingValue(value: Value | null): void {
       pendingValueRef.value = value
     }
-    function doUpdateFormattedValue (
+    function doUpdateFormattedValue(
       value: FormattedValue | null,
       timestampValue: Value | null
     ): void {
@@ -451,7 +366,7 @@ export default defineComponent({
         )
       }
     }
-    function doUpdateValue (
+    function doUpdateValue(
       value: Value | null,
       options: {
         doConfirm: boolean
@@ -473,7 +388,8 @@ export default defineComponent({
       if (_onUpdateValue) {
         call(_onUpdateValue as OnUpdateValueImpl, value, formattedValue)
       }
-      if (onChange) call(onChange as OnUpdateValueImpl, value, formattedValue)
+      if (onChange)
+        call(onChange as OnUpdateValueImpl, value, formattedValue)
       uncontrolledValueRef.value = value
 
       doUpdateFormattedValue(formattedValue, value)
@@ -481,36 +397,41 @@ export default defineComponent({
       nTriggerFormChange()
       nTriggerFormInput()
     }
-    function doClear (): void {
+    function doClear(): void {
       const { onClear } = props
       onClear?.()
     }
-    function doConfirm (
+    function doConfirm(
       value: Value | null,
       formattedValue: FormattedValue | null
     ): void {
       const { onConfirm } = props
-      if (onConfirm) (onConfirm as OnConfirmImpl)(value, formattedValue)
+      if (onConfirm)
+        (onConfirm as OnConfirmImpl)(value, formattedValue)
     }
-    function doFocus (e: FocusEvent): void {
+    function doFocus(e: FocusEvent): void {
       const { onFocus } = props
       const { nTriggerFormFocus } = formItem
-      if (onFocus) call(onFocus, e)
+      if (onFocus)
+        call(onFocus, e)
       nTriggerFormFocus()
     }
-    function doBlur (e: FocusEvent): void {
+    function doBlur(e: FocusEvent): void {
       const { onBlur } = props
       const { nTriggerFormBlur } = formItem
-      if (onBlur) call(onBlur, e)
+      if (onBlur)
+        call(onBlur, e)
       nTriggerFormBlur()
     }
-    function doUpdateShow (show: boolean): void {
+    function doUpdateShow(show: boolean): void {
       const { 'onUpdate:show': _onUpdateShow, onUpdateShow } = props
-      if (_onUpdateShow) call(_onUpdateShow, show)
-      if (onUpdateShow) call(onUpdateShow, show)
+      if (_onUpdateShow)
+        call(_onUpdateShow, show)
+      if (onUpdateShow)
+        call(onUpdateShow, show)
       uncontrolledShowRef.value = show
     }
-    function handleKeydown (e: KeyboardEvent): void {
+    function handleKeydown(e: KeyboardEvent): void {
       if (e.key === 'Escape') {
         if (mergedShowRef.value) {
           markEventEffectPerformed(e)
@@ -526,38 +447,38 @@ export default defineComponent({
       //   doUpdateValue(nextValue)
       // }
     }
-    function handleInputKeydown (e: KeyboardEvent): void {
+    function handleInputKeydown(e: KeyboardEvent): void {
       if (e.key === 'Escape' && mergedShowRef.value) {
         markEventEffectPerformed(e)
         // closeCalendar will be called in handleDeactivated
       }
     }
-    function handleClear (): void {
+    function handleClear(): void {
       doUpdateShow(false)
       inputInstRef.value?.deactivate()
       doClear()
     }
-    function handlePanelClear (): void {
+    function handlePanelClear(): void {
       // close will be called inside panel
       inputInstRef.value?.deactivate()
       doClear()
     }
-    function handlePanelTabOut (): void {
+    function handlePanelTabOut(): void {
       closeCalendar({
         returnFocus: true
       })
     }
-    function handleClickOutside (e: MouseEvent): void {
+    function handleClickOutside(e: MouseEvent): void {
       if (
-        mergedShowRef.value &&
-        !triggerElRef.value?.contains(getPreciseEventTarget(e) as Node | null)
+        mergedShowRef.value
+        && !triggerElRef.value?.contains(getPreciseEventTarget(e) as Node | null)
       ) {
         closeCalendar({
           returnFocus: false
         })
       }
     }
-    function handlePanelClose (disableUpdateOnClose: boolean): void {
+    function handlePanelClose(disableUpdateOnClose: boolean): void {
       closeCalendar({
         returnFocus: true,
         disableUpdateOnClose
@@ -565,17 +486,18 @@ export default defineComponent({
     }
 
     // --- Panel update value
-    function handlePanelUpdateValue (
+    function handlePanelUpdateValue(
       value: Value | null,
       doUpdate: boolean
     ): void {
       if (doUpdate) {
         doUpdateValue(value, { doConfirm: false })
-      } else {
+      }
+      else {
         doUpdatePendingValue(value)
       }
     }
-    function handlePanelConfirm (): void {
+    function handlePanelConfirm(): void {
       const pendingValue = pendingValueRef.value
       doUpdateValue(
         Array.isArray(pendingValue)
@@ -585,22 +507,24 @@ export default defineComponent({
       )
     }
     // --- Refresh
-    function deriveInputState (): void {
+    function deriveInputState(): void {
       const { value } = pendingValueRef
       if (isRangeRef.value) {
         if (Array.isArray(value) || value === null) {
           deriveRangeInputState(value)
         }
-      } else {
+      }
+      else {
         if (!Array.isArray(value)) {
           deriveSingleInputState(value)
         }
       }
     }
-    function deriveSingleInputState (value: number | null): void {
+    function deriveSingleInputState(value: number | null): void {
       if (value === null) {
         singleInputValueRef.value = ''
-      } else {
+      }
+      else {
         singleInputValueRef.value = format(
           value,
           mergedFormatRef.value,
@@ -608,11 +532,12 @@ export default defineComponent({
         )
       }
     }
-    function deriveRangeInputState (values: [number, number] | null): void {
+    function deriveRangeInputState(values: [number, number] | null): void {
       if (values === null) {
         rangeStartInputValueRef.value = ''
         rangeEndInputValueRef.value = ''
-      } else {
+      }
+      else {
         const dateFnsOptions = dateFnsOptionsRef.value
         rangeStartInputValueRef.value = format(
           values[0],
@@ -627,12 +552,12 @@ export default defineComponent({
       }
     }
     // --- Input deactivate & blur
-    function handleInputActivate (): void {
+    function handleInputActivate(): void {
       if (!mergedShowRef.value) {
         openCalendar()
       }
     }
-    function handleInputBlur (e: FocusEvent): void {
+    function handleInputBlur(e: FocusEvent): void {
       if (!panelInstRef.value?.$el.contains(e.relatedTarget as Node)) {
         doBlur(e)
         deriveInputState()
@@ -641,15 +566,16 @@ export default defineComponent({
         })
       }
     }
-    function handleInputDeactivate (): void {
-      if (mergedDisabledRef.value) return
+    function handleInputDeactivate(): void {
+      if (mergedDisabledRef.value)
+        return
       deriveInputState()
       closeCalendar({
         returnFocus: false
       })
     }
     // --- Input
-    function handleSingleUpdateValue (v: string): void {
+    function handleSingleUpdateValue(v: string): void {
       // TODO, fix conflict with clear
       if (v === '') {
         doUpdateValue(null, { doConfirm: false })
@@ -666,11 +592,12 @@ export default defineComponent({
       if (isValid(newSelectedDateTime)) {
         doUpdateValue(getTime(newSelectedDateTime), { doConfirm: false })
         deriveInputState()
-      } else {
+      }
+      else {
         singleInputValueRef.value = v
       }
     }
-    function handleRangeUpdateValue (
+    function handleRangeUpdateValue(
       v: [string, string],
       { source }: { source: 0 | 1 | 'clear' }
     ): void {
@@ -701,7 +628,8 @@ export default defineComponent({
         if (newEndTime < newStartTime) {
           if (source === 0) {
             newEndTs = newStartTs
-          } else {
+          }
+          else {
             newStartTs = newEndTs
           }
         }
@@ -709,29 +637,34 @@ export default defineComponent({
           doConfirm: false
         })
         deriveInputState()
-      } else {
+      }
+      else {
         ;[rangeStartInputValueRef.value, rangeEndInputValueRef.value] = v
       }
     }
     // --- Click
-    function handleTriggerClick (e: MouseEvent): void {
-      if (mergedDisabledRef.value) return
-      if (happensIn(e, 'clear')) return
+    function handleTriggerClick(e: MouseEvent): void {
+      if (mergedDisabledRef.value)
+        return
+      if (happensIn(e, 'clear'))
+        return
       if (!mergedShowRef.value) {
         openCalendar()
       }
     }
     // --- Focus
-    function handleInputFocus (e: FocusEvent): void {
-      if (mergedDisabledRef.value) return
+    function handleInputFocus(e: FocusEvent): void {
+      if (mergedDisabledRef.value)
+        return
       doFocus(e)
     }
     // --- Calendar
-    function openCalendar (): void {
-      if (mergedDisabledRef.value || mergedShowRef.value) return
+    function openCalendar(): void {
+      if (mergedDisabledRef.value || mergedShowRef.value)
+        return
       doUpdateShow(true)
     }
-    function closeCalendar ({
+    function closeCalendar({
       returnFocus,
       disableUpdateOnClose
     }: {
@@ -741,9 +674,9 @@ export default defineComponent({
       if (mergedShowRef.value) {
         doUpdateShow(false)
         if (
-          props.type !== 'date' &&
-          props.updateValueOnClose &&
-          !disableUpdateOnClose
+          props.type !== 'date'
+          && props.updateValueOnClose
+          && !disableUpdateOnClose
         ) {
           handlePanelConfirm()
         }
@@ -788,6 +721,7 @@ export default defineComponent({
       monthFormatRef: toRef(props, 'monthFormat'),
       yearFormatRef: toRef(props, 'yearFormat'),
       quarterFormatRef: toRef(props, 'quarterFormat'),
+      yearRangeRef: toRef(props, 'yearRange'),
       ...uniVaidation,
       ...dualValidation,
       datePickerSlots: slots
@@ -1000,7 +934,7 @@ export default defineComponent({
       onPrevYear: props.onPrevYear
     }
   },
-  render () {
+  render() {
     const { clearable, triggerOnRender, mergedClsPrefix, $slots } = this
     const commonPanelProps = {
       onUpdateValue: this.handlePanelUpdateValue,
@@ -1018,12 +952,13 @@ export default defineComponent({
       defaultTime: this.defaultTime,
       themeClass: this.themeClass,
       panel: this.panel,
+      inputReadonly: this.inputReadonly || this.mergedDisabled,
       onRender: this.onRender,
       onNextMonth: this.onNextMonth,
       onPrevMonth: this.onPrevMonth,
       onNextYear: this.onNextYear,
       onPrevYear: this.onPrevYear,
-      timeFormat: this.timeFormat
+      timerPickerFormat: this.timerPickerFormat
     }
     const renderPanel = (): VNode => {
       const { type } = this
@@ -1054,18 +989,18 @@ export default defineComponent({
         </DatetimerangePanel>
       ) : type === 'month' || type === 'year' || type === 'quarter' ? (
         <MonthPanel {...commonPanelProps} type={type} key={type} />
-      ) : type === 'monthrange' ||
-        type === 'yearrange' ||
-        type === 'quarterrange' ? (
-        <MonthRangePanel {...commonPanelProps} type={type} />
+      ) : type === 'monthrange'
+      || type === 'yearrange'
+      || type === 'quarterrange' ? (
+            <MonthRangePanel {...commonPanelProps} type={type} />
           ) : (
-        <DatePanel
-          {...commonPanelProps}
-          type={type}
-          defaultCalendarStartTime={this.defaultCalendarStartTime}
-        >
-          {$slots}
-        </DatePanel>
+            <DatePanel
+              {...commonPanelProps}
+              type={type}
+              defaultCalendarStartTime={this.defaultCalendarStartTime}
+            >
+              {$slots}
+            </DatePanel>
           )
     }
     if (this.panel) {
@@ -1130,14 +1065,14 @@ export default defineComponent({
                           separator: () =>
                             this.separator === undefined
                               ? resolveSlot($slots.separator, () => [
-                                  <NBaseIcon
-                                    clsPrefix={mergedClsPrefix}
-                                    class={`${mergedClsPrefix}-date-picker-icon`}
-                                  >
-                                    {{
-                                      default: () => <ToIcon />
-                                    }}
-                                  </NBaseIcon>
+                                <NBaseIcon
+                                  clsPrefix={mergedClsPrefix}
+                                  class={`${mergedClsPrefix}-date-picker-icon`}
+                                >
+                                  {{
+                                    default: () => <ToIcon />
+                                  }}
+                                </NBaseIcon>
                               ])
                               : this.separator,
                           [clearable ? 'clear-icon-placeholder' : 'suffix']:
@@ -1207,7 +1142,8 @@ export default defineComponent({
                     >
                       {{
                         default: () => {
-                          if (!this.mergedShow) return null
+                          if (!this.mergedShow)
+                            return null
                           return withDirectives(renderPanel(), [
                             [
                               clickoutside,

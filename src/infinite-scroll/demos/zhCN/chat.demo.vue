@@ -1,33 +1,13 @@
 <markdown>
-  # 示例
+# 稍微复杂的例子
 </markdown>
-
-<template>
-  <n-infinite-scroll style="height: 240px" :distance="10" @load="handleLoad">
-    <div
-      v-for="(item, index) in items"
-      :key="item.key"
-      class="item"
-      :class="{ reverse: index % 5 === 0 }"
-    >
-      <img class="avatar" :src="item.avatar" alt="">
-      <span> {{ item.message }} {{ index % 5 === 0 ? '?' : '' }}</span>
-    </div>
-    <div v-if="loading" class="text">
-      加载中...
-    </div>
-    <div v-if="noMore" class="text">
-      没有更多了 🤪
-    </div>
-  </n-infinite-scroll>
-</template>
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
+
 export default defineComponent({
-  setup () {
+  setup() {
     const loading = ref(false)
-    const noMore = computed(() => items.value.length > 16)
 
     const avatars = [
       'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
@@ -47,11 +27,13 @@ export default defineComponent({
     })
 
     const items = ref(Array.from({ length: 10 }, (_, i) => mock(i)))
+    const noMore = computed(() => items.value.length > 16)
 
     const handleLoad = async () => {
-      if (loading.value || noMore.value) return
+      if (loading.value || noMore.value)
+        return
       loading.value = true
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      await new Promise(resolve => setTimeout(resolve, 1000))
       items.value.push(
         ...[mock(items.value.length), mock(items.value.length + 1)]
       )
@@ -67,22 +49,51 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-infinite-scroll style="height: 240px" :distance="10" @load="handleLoad">
+    <div
+      v-for="(item, index) in items"
+      :key="item.key"
+      class="message"
+      :class="{ reverse: index % 5 === 0 }"
+    >
+      <img class="avatar" :src="item.avatar" alt="">
+      <span> {{ item.message }} {{ index % 5 === 0 ? '?' : '' }}</span>
+    </div>
+    <div v-if="loading" class="text">
+      加载中...
+    </div>
+    <div v-if="noMore" class="text">
+      没有更多了 🤪
+    </div>
+  </n-infinite-scroll>
+</template>
+
 <style>
-.item {
+.message {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
   padding: 10px;
 }
+
+.message:last-child {
+  margin-bottom: 0;
+}
+
 .reverse {
   flex-direction: row-reverse;
 }
+
 .text {
   text-align: center;
 }
+
 .reverse .avatar {
   margin-left: 10px;
 }
+
 .avatar {
   width: 28px;
   height: 28px;

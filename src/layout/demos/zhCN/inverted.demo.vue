@@ -4,42 +4,9 @@
 使用 `inverted` 增加对比度，可以使用在 header、footer 和 sider 上，可以和 menu 搭配使用。
 </markdown>
 
-<template>
-  <n-space vertical>
-    <n-space> <n-switch v-model:value="inverted" /> inverted </n-space>
-    <n-layout>
-      <n-layout-header :inverted="inverted" bordered>
-        Header Header Header
-        <n-menu mode="horizontal" :inverted="inverted" :options="menuOptions" />
-      </n-layout-header>
-      <n-layout has-sider>
-        <n-layout-sider
-          bordered
-          show-trigger
-          collapse-mode="width"
-          :collapsed-width="64"
-          :width="240"
-          :native-scrollbar="false"
-          :inverted="inverted"
-          style="max-height: 320px"
-        >
-          <n-menu
-            :inverted="inverted"
-            :collapsed-width="64"
-            :collapsed-icon-size="22"
-            :options="menuOptions"
-          />
-        </n-layout-sider>
-        <n-layout style="max-height: 320px" />
-      </n-layout>
-      <n-layout-footer :inverted="inverted" bordered>
-        Footer Footer Footer
-      </n-layout-footer>
-    </n-layout>
-  </n-space>
-</template>
 <script lang="ts">
-import { h, defineComponent, ref, Component } from 'vue'
+import type { Component } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 import { NIcon } from 'naive-ui'
 import {
   BookOutline as BookIcon,
@@ -47,7 +14,7 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
 
-function renderIcon (icon: Component) {
+function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -127,7 +94,7 @@ const menuOptions = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       inverted: ref(false),
       menuOptions
@@ -135,3 +102,38 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space vertical>
+    <n-space> <n-switch v-model:value="inverted" /> inverted </n-space>
+    <n-layout>
+      <n-layout-header :inverted="inverted" bordered>
+        Header Header Header
+        <n-menu mode="horizontal" :inverted="inverted" :options="menuOptions" />
+      </n-layout-header>
+      <n-layout has-sider>
+        <n-layout-sider
+          bordered
+          show-trigger
+          collapse-mode="width"
+          :collapsed-width="64"
+          :width="240"
+          :native-scrollbar="false"
+          :inverted="inverted"
+          style="max-height: 320px"
+        >
+          <n-menu
+            :inverted="inverted"
+            :collapsed-width="64"
+            :collapsed-icon-size="22"
+            :options="menuOptions"
+          />
+        </n-layout-sider>
+        <n-layout style="max-height: 320px" />
+      </n-layout>
+      <n-layout-footer :inverted="inverted" bordered>
+        Footer Footer Footer
+      </n-layout-footer>
+    </n-layout>
+  </n-space>
+</template>
