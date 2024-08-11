@@ -92,6 +92,9 @@ export default defineComponent({
     default-value="Drive My Car"
     @update:value="handleUpdateValue"
   >
+    <template #header>
+      Don't know what to put
+    </template>
     <template #action>
       You can customize some operations here.
     </template>
