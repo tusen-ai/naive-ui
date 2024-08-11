@@ -125,17 +125,15 @@ export default defineComponent({
             }
           }
           void Promise.all(formItemValidationPromises).then((results) => {
-            let firstFormItemInst: FormItemInst | null = null
+            const formItemInsts: FormItemInst[] = []
             const formInvalid = results.some(result => !result.valid)
 
             const errors: ValidateError[][] = []
             const warnings: ValidateError[][] = []
-            results.forEach((result, index) => {
+            results.forEach((result) => {
               if (result.errors?.length) {
                 errors.push(result.errors)
-                if (index === 0) {
-                  firstFormItemInst = result.formItemInstance
-                }
+                formItemInsts.push(result.formItemInstance)
               }
               if (result.warnings?.length) {
                 warnings.push(result.warnings)
@@ -150,14 +148,23 @@ export default defineComponent({
               reject(errors.length ? errors : undefined)
               const { scrollToFirstError } = props
 
-              if (scrollToFirstError && firstFormItemInst) {
+              if (scrollToFirstError && formItemInsts.length > 0) {
+                const sortedFormItemEls = formItemInsts
+                  .map(
+                    inst =>
+                      (inst as ComponentPublicInstance<FormItemInst>)
+                        .$el as HTMLElement
+                  )
+                  .sort((a, b) => {
+                    const position = a.compareDocumentPosition(b)
+                    return position & Node.DOCUMENT_POSITION_PRECEDING ? 1 : -1
+                  })
+
+                const firstNode = sortedFormItemEls[0]
                 let scrollViewOptions: StandardBehaviorOptions = {}
                 if (typeof scrollToFirstError === 'object') {
                   scrollViewOptions = scrollToFirstError
                 }
-                const firstNode = (
-                  firstFormItemInst as ComponentPublicInstance<FormItemInst>
-                ).$el
                 scrollIntoView(firstNode, {
                   scrollMode: 'if-needed',
                   block: 'nearest',
