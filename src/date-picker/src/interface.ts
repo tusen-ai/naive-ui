@@ -136,6 +136,7 @@ export type DatePickerInjection = {
   yearFormatRef: Ref<string>
   quarterFormatRef: Ref<string>
   datePickerSlots: Slots
+  yearRangeRef: Ref<[number, number]>
 } & ReturnType<typeof uniCalendarValidation> &
 ReturnType<typeof dualCalendarValidation>
 

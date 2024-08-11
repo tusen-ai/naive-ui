@@ -721,6 +721,7 @@ export default defineComponent({
       monthFormatRef: toRef(props, 'monthFormat'),
       yearFormatRef: toRef(props, 'yearFormat'),
       quarterFormatRef: toRef(props, 'quarterFormat'),
+      yearRangeRef: toRef(props, 'yearRange'),
       ...uniVaidation,
       ...dualValidation,
       datePickerSlots: slots
