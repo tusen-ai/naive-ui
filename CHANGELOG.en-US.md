@@ -36,6 +36,7 @@
 - `n-empty` `size` prop to support `tiny` size.
 - `n-config-provider` adds `style-mount-target` prop to control where to mount components' style.
 - `n-cascader` filter ignore case sensitive
+- `n-data-table` add allowExport prop for column
 
 ## 2.39.0
 
@@ -72,7 +73,7 @@
 
 - Fix `n-menu` Submenu's wai-aria role is not correct, closes [#5729](https://github.com/tusen-ai/naive-ui/issues/5729).
 - Fix `n-tabs` style bug with type is `segment`，closes [#5728](https://github.com/tusen-ai/naive-ui/issues/5728).
-- Fix the get\*String() methods for UTC/locale mismatch, closes [#5702](closes https://github.com/tusen-ai/naive-ui/issues/5702).
+- Fix the get\*String() methods for UTC/locale mismatch, closes [#5702](https://github.com/tusen-ai/naive-ui/issues/5702).
 - Fix `n-dialog` / `n-modal` calling `destroy` method may throw error.
 - Fix `useModal` setting `card` preset without corresponding props in `n-card` slots, closes [#5746](https://github.com/tusen-ai/naive-ui/issues/5746).
 - Fix `Submenu` component's wai-aria role setting error of `n-menu`，closes [#5729](https://github.com/tusen-ai/naive-ui/issues/5729).
