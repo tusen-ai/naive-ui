@@ -40,6 +40,14 @@
 - `n-date-picker` adds `year-range` prop.
 - `n-tree-select` adds `header` slot, closes [#5915](https://github.com/tusen-ai/naive-ui/issues/5915).
 
+## 2.39.1
+
+`2024-08-09`
+
+### Features
+
+- `n-form` 新增 `scroll-to-first-error` 属性
+
 ## 2.39.0
 
 `2024-07-15`

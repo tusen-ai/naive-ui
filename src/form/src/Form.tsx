@@ -1,4 +1,5 @@
 import {
+  type ComponentPublicInstance,
   type ExtractPropTypes,
   type PropType,
   defineComponent,
@@ -7,6 +8,8 @@ import {
   ref
 } from 'vue'
 import type { ValidateError } from 'async-validator'
+import type { StandardBehaviorOptions } from 'scroll-into-view-if-needed'
+import scrollIntoView from 'scroll-into-view-if-needed'
 import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { formLight } from '../styles'
@@ -62,7 +65,11 @@ export const formProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  validateMessages: Object as PropType<Partial<FormValidateMessages>>
+  validateMessages: Object as PropType<Partial<FormValidateMessages>>,
+  scrollToFirstError: {
+    type: [Boolean, Object] as PropType<boolean | StandardBehaviorOptions>,
+    default: undefined
+  }
 } as const
 
 export type FormSetupProps = ExtractPropTypes<typeof formProps>
@@ -94,25 +101,39 @@ export default defineComponent({
       return await new Promise<{ warnings: ValidateError[][] | undefined }>(
         (resolve, reject) => {
           const formItemValidationPromises: Array<
-            Promise<FormItemInternalValidateResult>
+            Promise<
+              FormItemInternalValidateResult & {
+                formItemInstance: FormItemInst
+              }
+            >
           > = []
           for (const key of keysOf(formItems)) {
             const formItemInstances = formItems[key]
             for (const formItemInstance of formItemInstances) {
               if (formItemInstance.path) {
                 formItemValidationPromises.push(
-                  formItemInstance.internalValidate(null, shouldRuleBeApplied)
+                  formItemInstance
+                    .internalValidate(null, shouldRuleBeApplied)
+                    .then((results) => {
+                      return {
+                        ...results,
+                        formItemInstance
+                      }
+                    })
                 )
               }
             }
           }
           void Promise.all(formItemValidationPromises).then((results) => {
+            const formItemInsts: FormItemInst[] = []
             const formInvalid = results.some(result => !result.valid)
+
             const errors: ValidateError[][] = []
             const warnings: ValidateError[][] = []
             results.forEach((result) => {
               if (result.errors?.length) {
                 errors.push(result.errors)
+                formItemInsts.push(result.formItemInstance)
               }
               if (result.warnings?.length) {
                 warnings.push(result.warnings)
@@ -125,6 +146,31 @@ export default defineComponent({
             }
             if (formInvalid) {
               reject(errors.length ? errors : undefined)
+              const { scrollToFirstError } = props
+
+              if (scrollToFirstError && formItemInsts.length > 0) {
+                const sortedFormItemEls = formItemInsts
+                  .map(
+                    inst =>
+                      (inst as ComponentPublicInstance<FormItemInst>)
+                        .$el as HTMLElement
+                  )
+                  .sort((a, b) => {
+                    const position = a.compareDocumentPosition(b)
+                    return position & Node.DOCUMENT_POSITION_PRECEDING ? 1 : -1
+                  })
+
+                const firstNode = sortedFormItemEls[0]
+                let scrollViewOptions: StandardBehaviorOptions = {}
+                if (typeof scrollToFirstError === 'object') {
+                  scrollViewOptions = scrollToFirstError
+                }
+                scrollIntoView(firstNode, {
+                  scrollMode: 'if-needed',
+                  block: 'nearest',
+                  ...scrollViewOptions
+                })
+              }
             }
             else {
               resolve({
