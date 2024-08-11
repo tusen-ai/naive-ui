@@ -21,6 +21,7 @@
 - Fix `n-button` font-weight CSS variable name error, closes [#5922](https://github.com/tusen-ai/naive-ui/issues/5922)
 - Fix `n-icon`'s `component` prop not accepting FunctionalComponent.
 - Fix `n-mention`'s panel is misplaced if `placement` is set to `'top'` or padding is set to component's style, closes [#6241](https://github.com/tusen-ai/naive-ui/issues/6241).
+- Fix `n-carousel` transition not working as expected, closes [#5993](https://github.com/tusen-ai/naive-ui/issues/5993).
 
 ### Features
 
