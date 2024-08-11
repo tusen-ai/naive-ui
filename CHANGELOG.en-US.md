@@ -7,6 +7,7 @@
 ### Breaking Changes
 
 - Fix `n-config-provider` inherit the class prefix from it's parent by default, closes [#5970](https://github.com/tusen-ai/naive-ui/issues/5970).
+- Fix `n-date-picker` default `weekFormat` that year and week standards are different and use local week and local year
 
 ### Fixes
 
