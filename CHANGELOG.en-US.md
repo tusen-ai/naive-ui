@@ -35,8 +35,9 @@
 - `n-data-table` add `rowData` return for `render-expand-icon`, closes [#6108](https://github.com/tusen-ai/naive-ui/issues/6108)
 - `n-empty` `size` prop to support `tiny` size.
 - `n-config-provider` adds `style-mount-target` prop to control where to mount components' style.
-- `n-cascader` filter ignore case sensitive
-- `n-data-table` add allowExport prop for column
+- `n-cascader` filter ignore case sensitive.
+- `n-data-table` adds `allowExport` prop for column.
+- `n-date-picker` adds `year-range` prop.
 
 ## 2.39.0
 
