@@ -693,7 +693,7 @@ export default defineComponent({
     function handleMenuMousedown(e: MouseEvent): void {
       // If there's an action slot later, we need to check if mousedown happens
       // in action panel
-      if (!happensIn(e, 'action'))
+      if (!happensIn(e, 'action') && !happensIn(e, 'header'))
         e.preventDefault()
     }
     const selectionRenderTagRef = computed(() => {
@@ -795,7 +795,10 @@ export default defineComponent({
           menuHeight,
           actionPadding,
           actionDividerColor,
-          actionTextColor
+          actionTextColor,
+          headerDividerColor,
+          headerPadding,
+          headerTextColor
         }
       } = themeRef.value
       return {
@@ -806,7 +809,10 @@ export default defineComponent({
         '--n-bezier': cubicBezierEaseInOut,
         '--n-action-padding': actionPadding,
         '--n-action-text-color': actionTextColor,
-        '--n-action-divider-color': actionDividerColor
+        '--n-action-divider-color': actionDividerColor,
+        '--n-header-padding': headerPadding,
+        '--n-header-text-color': headerTextColor,
+        '--n-header-divider-color': headerDividerColor
       }
     })
     const themeClassHandle = inlineThemeDisabled
@@ -973,7 +979,7 @@ export default defineComponent({
                                 return children ? (
                                   <div
                                     class={`${mergedClsPrefix}-tree-select-menu__header`}
-                                    data-action
+                                    data-header
                                   >
                                     {children}
                                   </div>

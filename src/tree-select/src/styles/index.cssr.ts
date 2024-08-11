@@ -7,6 +7,9 @@ import { c, cB, cE } from '../../../_utils/cssr'
 // --n-menu-border-radius
 // --n-menu-box-shadow
 // --n-menu-color
+// --n-header-padding
+// --n-header-text-color
+// --n-header-divider-color
 // --n-action-padding
 // --n-action-text-color
 // --n-action-divider-color
@@ -35,12 +38,12 @@ export default c([
       justify-content: center;
     `),
     cE('header', `
-      padding: var(--n-action-padding);
+      padding: var(--n-header-padding);
       transition: 
         color .3s var(--n-bezier);
         border-color .3s var(--n-bezier);
-      border-bottom: 1px solid var(--n-action-divider-color);
-      color: var(--n-action-text-color);
+      border-bottom: 1px solid var(--n-header-divider-color);
+      color: var(--n-header-text-color);
     `),
     cE('action', `
       padding: var(--n-action-padding);
