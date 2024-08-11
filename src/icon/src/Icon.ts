@@ -25,7 +25,7 @@ export const iconProps = {
   depth: [String, Number] as PropType<Depth>,
   size: [Number, String] as PropType<number | string>,
   color: String,
-  component: Object as PropType<Component>
+  component: [Object, Function] as PropType<Component>
 } as const
 
 export type IconProps = ExtractPublicPropTypes<typeof iconProps>
