@@ -17,11 +17,12 @@ import {
   isSameYear,
   isValid,
   parse,
+  setYear,
   startOfMonth,
   startOfYear
 } from 'date-fns'
+import type { Ref } from 'vue'
 import type { NDateLocale } from '../../locales'
-import { START_YEAR } from './config'
 import type { FirstDayOfWeek, Value } from './interface'
 
 function getDerivedTimeFromKeyboardEvent(
@@ -451,16 +452,15 @@ function yearArray(
   currentTs: number,
   format: {
     yearFormat: string
-  }
+  },
+  rangeRef: Ref<[number, number]>
 ): YearItem[] {
+  const range = rangeRef.value
   const calendarYears: YearItem[] = []
-  const time1900 = new Date(START_YEAR, 0, 1)
-  // 1900 is not a round time, so we use 1911 as start...
-  // new Date(1900, 0, 1)
-  // 1899-12-31T15:54:17.000Z
-  for (let i = 0; i < 200; i++) {
+  const startTime = startOfYear(setYear(new Date(), range[0]))
+  for (let i = 0; i < range[1] - range[0]; i++) {
     calendarYears.push(
-      yearItem(getTime(addYears(time1900, i)), valueTs, currentTs, format)
+      yearItem(getTime(addYears(startTime, i)), valueTs, currentTs, format)
     )
   }
   return calendarYears

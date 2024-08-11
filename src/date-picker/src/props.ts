@@ -81,6 +81,10 @@ export const datePickerProps = {
   monthFormat: { type: String, default: 'M' },
   yearFormat: { type: String, default: 'y' },
   quarterFormat: { type: String, default: '\'Q\'Q' },
+  yearRange: {
+    type: Array as unknown as PropType<[number, number]>,
+    default: (): [number, number] => [1901, 2100]
+  },
   'onUpdate:show': [Function, Array] as PropType<
     MaybeArray<(show: boolean) => void>
   >,

@@ -34,7 +34,7 @@ import {
   datePickerInjectionKey
 } from '../interface'
 import type { ScrollbarInst } from '../../../_internal'
-import { MONTH_ITEM_HEIGHT, START_YEAR } from '../config'
+import { MONTH_ITEM_HEIGHT } from '../config'
 import { usePanelCommon, usePanelCommonProps } from './use-panel-common'
 
 const useDualCalendarProps = {
@@ -80,7 +80,8 @@ function useDualCalendar(
     datePickerSlots,
     monthFormatRef,
     yearFormatRef,
-    quarterFormatRef
+    quarterFormatRef,
+    yearRangeRef
   } = inject(datePickerInjectionKey)!
   const validation = {
     isDateDisabled: isDateDisabledRef,
@@ -225,14 +226,24 @@ function useDualCalendar(
     return shortcuts || rangesRef.value
   })
   const startYearArrayRef = computed(() => {
-    return yearArray(pluckValueFromRange(props.value, 'start'), nowRef.value, {
-      yearFormat: yearFormatRef.value
-    })
+    return yearArray(
+      pluckValueFromRange(props.value, 'start'),
+      nowRef.value,
+      {
+        yearFormat: yearFormatRef.value
+      },
+      yearRangeRef
+    )
   })
   const endYearArrayRef = computed(() => {
-    return yearArray(pluckValueFromRange(props.value, 'end'), nowRef.value, {
-      yearFormat: yearFormatRef.value
-    })
+    return yearArray(
+      pluckValueFromRange(props.value, 'end'),
+      nowRef.value,
+      {
+        yearFormat: yearFormatRef.value
+      },
+      yearRangeRef
+    )
   })
   const startQuarterArrayRef = computed(() => {
     const startValue = pluckValueFromRange(props.value, 'start')
@@ -739,7 +750,7 @@ function useDualCalendar(
         const yearIndex
           = (!Array.isArray(mergedValue)
             ? getYear(Date.now())
-            : getYear(mergedValue[0])) - START_YEAR
+            : getYear(mergedValue[0])) - yearRangeRef.value[0]
         startYearVlRef.value.scrollTo({ index: yearIndex, debounce: false })
       }
     }
@@ -758,7 +769,7 @@ function useDualCalendar(
         const yearIndex
           = (!Array.isArray(mergedValue)
             ? getYear(Date.now())
-            : getYear(mergedValue[1])) - START_YEAR
+            : getYear(mergedValue[1])) - yearRangeRef.value[0]
         endYearVlRef.value.scrollTo({ index: yearIndex, debounce: false })
       }
     }
