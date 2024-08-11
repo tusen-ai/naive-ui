@@ -29,10 +29,7 @@ export const timeProps = {
   format: String,
   text: Boolean,
   timeZone: String,
-  formatOptions: {
-    type: Object as PropType<FormatOptions>,
-    default: undefined
-  }
+  formatOptions: Object as PropType<FormatOptions>
 } as const
 
 export type TimeProps = ExtractPublicPropTypes<typeof timeProps>
