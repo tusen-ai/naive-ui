@@ -131,6 +131,7 @@ rtl-debug.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | align | `'left' \| 'right' \| 'center'` | `'left'` | 列内的文本排列 |  |
+| allowExport | `boolean` | `true` | 这一列是否可以导出 | NEXT_VERSION |
 | titleAlign | `'left' \| 'right' \| 'center'` | `'null'` | 表头列对齐方式，若不设置该项，则使用列内的文本排列 | 2.34.4 |
 | cellProps | `(rowData: object, rowIndex: number) => object` | `undefined` | 该列单元格的 HTML 属性 | 2.27.0 |
 | children | `DataTableColumn[]` | `undefined` | 成组列头的子节点 |  |
@@ -142,7 +143,6 @@ rtl-debug.vue
 | disabled | `(rowData: object, rowIndex: number) => boolean` | `undefined` | 是否禁用 |  |
 | ellipsis | `boolean \| EllipsisProps` | `false` | 文本溢出的设置 |  |
 | ellipsis-component | `'ellipsis' \| 'performant-ellipsis'` | `'ellipsis'` | 渲染文本溢出时使用的组件，在 `ellipsis` 属性为 `EllipsisProps` 时生效。若为 `'ellipsis'` 则使用常规的 `n-ellipsis` 组件渲染，若为 `'performant-ellipsis'` 则使用 `n-performant-ellipsis` 渲染，这种情况下会有更高的渲染性能，但是每个折叠的单元格中的组件有可能被重新卸载和挂载 | 2.35.0 |
-| allowExport | `boolean` | `true` | 这一列是否可以导出 | NEXT_VERSION |
 | expandable | `(rowData: object) => boolean` | `undefined` | 行是否可展开，仅在 `type` 为 `'expand'` 时生效 |  |
 | filter | `boolean \| (optionValue: string \| number, rowData: object) => boolean \| 'default'` | `undefined` | 这一列的过滤方法。如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。 |  |
 | filterMode | `'and' \| 'or'` | `'or'` | 同一列筛选方式为与还是或 |  |
