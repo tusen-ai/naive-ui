@@ -22,7 +22,10 @@ export function self(vars: ThemeCommonVars) {
     menuHeight: `calc(${heightMedium} * 7.6)`,
     actionDividerColor: dividerColor,
     actionTextColor: textColor2,
-    actionPadding: '8px 12px'
+    actionPadding: '8px 12px',
+    headerDividerColor: dividerColor,
+    headerTextColor: textColor2,
+    headerPadding: '8px 12px'
   }
 }
 
