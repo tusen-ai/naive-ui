@@ -7,6 +7,7 @@
 ### Breaking Changes
 
 - 修复 `n-config-provider` 默认继承父级的类前缀 `cls-prefix`, 关闭 [#5970](https://github.com/tusen-ai/naive-ui/issues/5970)
+- 修复 `n-date-picker` 默认 `weekFormat` 中 year 和 week 标准不同，使用 local year 和 local week
 
 ### Fixes
 

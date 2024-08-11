@@ -178,7 +178,7 @@ panel.vue
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now'> \| null` | `['clear', 'now']` | Operations supported for the `week` type date picker. | 2.37.0 |
 | default-calendar-start-time | `number` | `undefined` | Default panel calendar start month timestamp. | 2.38.1 |
-| format | `string` | `'yyyy-w'` for en-US, Locale specific. | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). | 2.37.0 |
+| format | `string` | `'YYYY-w'` for en-US, Locale specific. | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). | 2.37.0 |
 | placeholder | `string` | `'Select Week'` for en-US, Locale specific. | Placeholder. | 2.37.0 |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | Formatted value changed callback. | 2.37.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Value changed callback. | 2.37.0 |
