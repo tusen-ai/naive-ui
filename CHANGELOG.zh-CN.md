@@ -19,6 +19,7 @@
 - 修复 `n-float-button` 和 `popover` 一起使用会报错, 关闭 [#5933](https://github.com/tusen-ai/naive-ui/issues/5933)
 - 修复 `n-badge` 中无法遮盖聚焦元素边框问题，关闭 [#5929](https://github.com/tusen-ai/naive-ui/issues/5929)
 - 修复 `n-button` font-weight CSS 变量名错误的问题，关闭 [#5922](https://github.com/tusen-ai/naive-ui/issues/5922)
+- 修复 `n-icon` 的 `component` 属性不接受 FunctionalComponent 问题
 
 ### Features
 
