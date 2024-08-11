@@ -2,21 +2,11 @@
 # Ellipsis debug
 </markdown>
 
-<template>
-  <n-data-table
-    :columns="columns"
-    :data="data"
-    :pagination="pagination"
-    :max-height="250"
-    :scroll-x="1800"
-  />
-</template>
-
 <script lang="ts">
-import { h, defineComponent } from 'vue'
-import { DataTableColumns } from 'naive-ui'
+import { defineComponent, h } from 'vue'
+import type { DataTableColumns } from 'naive-ui'
 
-type RowData = {
+interface RowData {
   key: number
   name: string
   age: number
@@ -24,57 +14,59 @@ type RowData = {
   tags: string[]
 }
 
-const createColumns = (): DataTableColumns<RowData> => [
-  {
-    type: 'selection',
-    fixed: 'left'
-  },
-  {
-    title: 'Age',
-    key: 'age',
-    width: 100,
-    fixed: 'left'
-  },
-  {
-    title: 'Name',
-    key: 'name',
-    width: 200,
-    ellipsis: true,
-    fixed: 'left'
-  },
-  {
-    title: 'Row',
-    key: 'row',
-    render (row, index) {
-      return h('span', ['row ', index])
-    }
-  },
-  {
-    title: 'Row1',
-    key: 'row1',
-    render (row, index) {
-      return h('span', ['row ', index])
-    }
-  },
-  {
-    title: 'Row2',
-    key: 'row2',
-    render (row, index) {
-      return h('span', ['row ', index])
+function createColumns(): DataTableColumns<RowData> {
+  return [
+    {
+      type: 'selection',
+      fixed: 'left'
     },
-    width: 100,
-    fixed: 'right'
-  },
-  {
-    title: 'Address',
-    key: 'address',
-    width: 200,
-    fixed: 'right'
-  }
-]
+    {
+      title: 'Age',
+      key: 'age',
+      width: 100,
+      fixed: 'left'
+    },
+    {
+      title: 'Name',
+      key: 'name',
+      width: 200,
+      ellipsis: true,
+      fixed: 'left'
+    },
+    {
+      title: 'Row',
+      key: 'row',
+      render(row, index) {
+        return h('span', ['row ', index])
+      }
+    },
+    {
+      title: 'Row1',
+      key: 'row1',
+      render(row, index) {
+        return h('span', ['row ', index])
+      }
+    },
+    {
+      title: 'Row2',
+      key: 'row2',
+      render(row, index) {
+        return h('span', ['row ', index])
+      },
+      width: 100,
+      fixed: 'right'
+    },
+    {
+      title: 'Address',
+      key: 'address',
+      width: 200,
+      fixed: 'right'
+    }
+  ]
+}
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       data: Array.from({ length: 46 }).map((_, index) => ({
         key: index,
@@ -88,3 +80,13 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-data-table
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+    :max-height="250"
+    :scroll-x="1800"
+  />
+</template>

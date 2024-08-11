@@ -2,24 +2,15 @@
 # Focus & blur manually
 </markdown>
 
-<template>
-  <n-space item-style="display: flex; align-item: center;">
-    <n-button @click="handleClick">
-      Focus then blur in 1 second
-    </n-button>
-    <n-time-picker ref="timePickerInstRef" />
-  </n-space>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { TimePickerInst } from 'naive-ui'
+import type { TimePickerInst } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const timePickerInstRef = ref<TimePickerInst | null>(null)
     return {
-      handleClick () {
+      handleClick() {
         timePickerInstRef.value?.focus()
         setTimeout(() => {
           timePickerInstRef.value?.blur()
@@ -30,3 +21,12 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space item-style="display: flex; align-item: center;">
+    <n-button @click="handleClick">
+      Focus then blur in 1 second
+    </n-button>
+    <n-time-picker ref="timePickerInstRef" />
+  </n-space>
+</template>

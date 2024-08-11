@@ -9,7 +9,7 @@
     title="卡片分段示例"
     :segmented="{
       content: true,
-      footer: 'soft'
+      footer: 'soft',
     }"
   >
     <template #header-extra>

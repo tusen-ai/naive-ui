@@ -14,7 +14,7 @@
 ```
 
 ```js
-import { defineComponent, ref, computed } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 
 const data = [
   {
@@ -52,7 +52,7 @@ const data = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     const sortStatesRef = ref([])
     const sortKeyMapOrderRef = computed(() =>
       sortStatesRef.value.reduce((result, { columnKey, order }) => {
@@ -71,7 +71,7 @@ export default defineComponent({
         title: 'Age',
         key: 'age',
         sortOrder: sortKeyMapOrderRef.value.age || false,
-        sorter (rowA, rowB) {
+        sorter(rowA, rowB) {
           return rowA.age - rowB.age
         }
       },
@@ -104,7 +104,7 @@ export default defineComponent({
       }
     ])
 
-    function handleUpdateSorter (sorters) {
+    function handleUpdateSorter(sorters) {
       console.log(sorters)
       sortStatesRef.value = [].concat(sorters)
     }

@@ -1,44 +1,44 @@
 import {
-  h,
-  defineComponent,
+  type CSSProperties,
+  type HTMLAttributes,
   type PropType,
+  Transition,
+  type VNodeChild,
+  computed,
+  defineComponent,
+  h,
+  provide,
   ref,
   toRef,
-  Transition,
-  withDirectives,
-  computed,
-  type CSSProperties,
-  provide,
   watchEffect,
-  type HTMLAttributes,
-  type VNodeChild
+  withDirectives
 } from 'vue'
 import {
+  type FollowerInst,
   type FollowerPlacement,
   VBinder,
   VFollower,
-  VTarget,
-  type FollowerInst
+  VTarget
 } from 'vueuc'
 import { useIsMounted, useMergedState } from 'vooks'
 import { clickoutside } from 'vdirs'
-import { createTreeMate, type CheckStrategy } from 'treemate'
+import { type CheckStrategy, createTreeMate } from 'treemate'
 import { getPreciseEventTarget, happensIn } from 'seemly'
 import type { FormValidationStatus } from '../../form/src/interface'
-import {
-  type Key,
-  type InternalTreeInst,
-  type TreeOption,
-  type TreeOverrideNodeClickBehaviorReturn,
-  type GetChildren
+import type {
+  GetChildren,
+  InternalTreeInst,
+  Key,
+  TreeOption,
+  TreeOverrideNodeClickBehaviorReturn
 } from '../../tree/src/interface'
 import type { SelectBaseOption, SelectOption } from '../../select/src/interface'
 import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
 import type { OnUpdateExpandedKeysImpl } from '../../tree/src/Tree'
 import {
-  NInternalSelection,
   type InternalSelectionInst,
-  NBaseFocusDetector
+  NBaseFocusDetector,
+  NInternalSelection
 } from '../../_internal'
 import { NTree } from '../../tree'
 import { NEmpty } from '../../empty'
@@ -51,17 +51,19 @@ import {
 } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
-  call,
   type ExtractPublicPropTypes,
-  markEventEffectPerformed,
   type MaybeArray,
+  call,
+  markEventEffectPerformed,
   resolveSlot,
   resolveWrappedSlot,
   useAdjustedTo,
   useOnResize,
   warnOnce
 } from '../../_utils'
-import { treeSelectLight, type TreeSelectTheme } from '../styles'
+import { type TreeSelectTheme, treeSelectLight } from '../styles'
+import { useMergedCheckStrategy } from '../../tree/src/utils'
+import type { PopoverProps } from '../../popover'
 import type {
   OnUpdateIndeterminateKeysImpl,
   OnUpdateValue,
@@ -81,8 +83,6 @@ import {
   treeOption2SelectOptionWithPath
 } from './utils'
 import style from './styles/index.cssr'
-import { useMergedCheckStrategy } from '../../tree/src/utils'
-import { type PopoverProps } from '../../popover'
 
 type OnLoad = (node: TreeSelectOption) => Promise<void>
 
@@ -106,7 +106,7 @@ export const treeSelectProps = {
   defaultShow: Boolean,
   defaultValue: {
     type: [String, Number, Array] as PropType<
-    string | number | Array<string | number> | null
+      string | number | Array<string | number> | null
     >,
     default: null
   },
@@ -142,7 +142,7 @@ export const treeSelectProps = {
   },
   size: String as PropType<'small' | 'medium' | 'large'>,
   value: [String, Number, Array] as PropType<
-  string | number | Array<string | number> | null
+    string | number | Array<string | number> | null
   >,
   to: useAdjustedTo.propTo,
   menuProps: Object as PropType<HTMLAttributes>,
@@ -159,19 +159,19 @@ export const treeSelectProps = {
   renderSuffix: Function as PropType<TreeSelectRenderSuffix>,
   nodeProps: Function as PropType<TreeSelectNodeProps>,
   watchProps: Array as PropType<
-  Array<'defaultCheckedKeys' | 'defaultSelectedKeys' | 'defaultExpandedKeys'>
+    Array<'defaultCheckedKeys' | 'defaultSelectedKeys' | 'defaultExpandedKeys'>
   >,
   getChildren: Function as PropType<GetChildren>,
   onBlur: Function as PropType<(e: FocusEvent) => void>,
   onFocus: Function as PropType<(e: FocusEvent) => void>,
   onLoad: Function as PropType<OnLoad>,
   onUpdateShow: [Function, Array] as PropType<
-  MaybeArray<(show: boolean) => void>
+    MaybeArray<(show: boolean) => void>
   >,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   'onUpdate:show': [Function, Array] as PropType<
-  MaybeArray<(show: boolean) => void>
+    MaybeArray<(show: boolean) => void>
   >,
   /**
    * @deprecated
@@ -184,7 +184,7 @@ export type TreeSelectProps = ExtractPublicPropTypes<typeof treeSelectProps>
 export default defineComponent({
   name: 'TreeSelect',
   props: treeSelectProps,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.leafOnly) {
@@ -199,8 +199,8 @@ export default defineComponent({
     const triggerInstRef = ref<InternalSelectionInst | null>(null)
     const treeInstRef = ref<InternalTreeInst | null>(null)
     const menuElRef = ref<HTMLDivElement | null>(null)
-    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled } =
-      useConfig(props)
+    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled }
+      = useConfig(props)
     const { localeRef } = useLocale('Select')
     const {
       mergedSizeRef,
@@ -223,10 +223,12 @@ export default defineComponent({
     const patternRef = ref('')
     const mergedFilterRef = computed(() => {
       const { filter } = props
-      if (filter) return filter
+      if (filter)
+        return filter
       const { labelField } = props
       return (pattern: string, node: TreeSelectOption): boolean => {
-        if (!pattern.length) return true
+        if (!pattern.length)
+          return true
         return (node[labelField] as string)
           .toLowerCase()
           .includes(pattern.toLowerCase())
@@ -270,26 +272,32 @@ export default defineComponent({
     const focusedRef = ref(false)
     const mergedPlaceholderRef = computed(() => {
       const { placeholder } = props
-      if (placeholder !== undefined) return placeholder
+      if (placeholder !== undefined)
+        return placeholder
       return localeRef.value.placeholder
-    })
-    const treeSelectedKeysRef = computed<Key[]>(() => {
-      if (props.checkable) return []
-      return treeCheckedKeysRef.value
     })
     const treeCheckedKeysRef = computed<Key[]>(() => {
       const { value: mergedValue } = mergedValueRef
       if (props.multiple) {
-        if (Array.isArray(mergedValue)) return mergedValue
+        if (Array.isArray(mergedValue))
+          return mergedValue
         else return []
-      } else {
-        if (mergedValue === null || Array.isArray(mergedValue)) return []
+      }
+      else {
+        if (mergedValue === null || Array.isArray(mergedValue))
+          return []
         else return [mergedValue]
       }
     })
+    const treeSelectedKeysRef = computed<Key[]>(() => {
+      if (props.checkable)
+        return []
+      return treeCheckedKeysRef.value
+    })
     const selectedOptionRef = computed(() => {
       const { multiple, showPath, separator, labelField } = props
-      if (multiple) return null
+      if (multiple)
+        return null
       const { value: mergedValue } = mergedValueRef
       if (!Array.isArray(mergedValue) && mergedValue !== null) {
         const { value: treeMate } = dataTreeMateRef
@@ -309,7 +317,8 @@ export default defineComponent({
     })
     const selectedOptionsRef = computed(() => {
       const { multiple, showPath, separator } = props
-      if (!multiple) return null
+      if (!multiple)
+        return null
       const { value: mergedValue } = mergedValueRef
       if (Array.isArray(mergedValue)) {
         const res: SelectBaseOption[] = []
@@ -339,40 +348,36 @@ export default defineComponent({
       }
       return []
     })
-    const menuPaddingRef = computed(() => {
-      const {
-        self: { menuPadding }
-      } = themeRef.value
-      return menuPadding
-    })
-    function focusSelection (): void {
+    function focusSelection(): void {
       triggerInstRef.value?.focus()
     }
-    function focusSelectionInput (): void {
+    function focusSelectionInput(): void {
       triggerInstRef.value?.focusInput()
     }
-    function doUpdateShow (value: boolean): void {
+    function doUpdateShow(value: boolean): void {
       const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
-      if (onUpdateShow) call(onUpdateShow, value)
-      if (_onUpdateShow) call(_onUpdateShow, value)
+      if (onUpdateShow)
+        call(onUpdateShow, value)
+      if (_onUpdateShow)
+        call(_onUpdateShow, value)
       uncontrolledShowRef.value = value
     }
-    function doUpdateValue (
+    function doUpdateValue(
       value: string | number | Array<string | number> | null,
       option: TreeSelectOption | null | Array<TreeSelectOption | null>,
       meta:
-      | {
-        node: TreeSelectOption
-        action: 'select' | 'unselect'
-      }
-      | {
-        node: TreeSelectOption | null
-        action: 'delete'
-      }
-      | {
-        node: null
-        action: 'clear'
-      }
+        | {
+          node: TreeSelectOption
+          action: 'select' | 'unselect'
+        }
+        | {
+          node: TreeSelectOption | null
+          action: 'delete'
+        }
+        | {
+          node: null
+          action: 'clear'
+        }
     ): void {
       const { onUpdateValue, 'onUpdate:value': _onUpdateValue } = props
       if (onUpdateValue) {
@@ -385,7 +390,7 @@ export default defineComponent({
       nTriggerFormInput()
       nTriggerFormChange()
     }
-    function doUpdateIndeterminateKeys (
+    function doUpdateIndeterminateKeys(
       value: string | number | Array<string | number> | null,
       option: TreeSelectOption | null | Array<TreeSelectOption | null>
     ): void {
@@ -408,18 +413,18 @@ export default defineComponent({
         )
       }
     }
-    function doUpdateExpandedKeys (
+    function doUpdateExpandedKeys(
       keys: Key[],
       option: Array<TreeSelectOption | null>,
       meta:
-      | {
-        node: TreeSelectOption
-        action: 'expand' | 'collapse'
-      }
-      | {
-        node: null
-        action: 'filter'
-      }
+        | {
+          node: TreeSelectOption
+          action: 'expand' | 'collapse'
+        }
+        | {
+          node: null
+          action: 'filter'
+        }
     ): void {
       const {
         onUpdateExpandedKeys,
@@ -443,21 +448,23 @@ export default defineComponent({
       }
       uncontrolledExpandedKeysRef.value = keys
     }
-    function doFocus (e: FocusEvent): void {
+    function doFocus(e: FocusEvent): void {
       const { onFocus } = props
-      if (onFocus) onFocus(e)
+      if (onFocus)
+        onFocus(e)
       nTriggerFormFocus()
     }
-    function doBlur (e: FocusEvent): void {
+    function doBlur(e: FocusEvent): void {
       closeMenu()
       const { onBlur } = props
-      if (onBlur) onBlur(e)
+      if (onBlur)
+        onBlur(e)
       nTriggerFormBlur()
     }
-    function closeMenu (): void {
+    function closeMenu(): void {
       doUpdateShow(false)
     }
-    function openMenu (): void {
+    function openMenu(): void {
       if (!mergedDisabledRef.value) {
         patternRef.value = ''
         doUpdateShow(true)
@@ -466,10 +473,10 @@ export default defineComponent({
         }
       }
     }
-    function handleMenuLeave (): void {
+    function handleMenuLeave(): void {
       patternRef.value = ''
     }
-    function handleMenuClickoutside (e: MouseEvent): void {
+    function handleMenuClickoutside(e: MouseEvent): void {
       if (mergedShowRef.value) {
         if (
           !triggerInstRef.value?.$el.contains(
@@ -481,24 +488,26 @@ export default defineComponent({
         }
       }
     }
-    function handleTriggerClick (): void {
-      if (mergedDisabledRef.value) return
+    function handleTriggerClick(): void {
+      if (mergedDisabledRef.value)
+        return
       if (!mergedShowRef.value) {
         openMenu()
-      } else {
+      }
+      else {
         if (!props.filterable) {
           // already focused, don't need to return focus
           closeMenu()
         }
       }
     }
-    function getOptionsByKeys (keys: Key[]): Array<TreeSelectOption | null> {
+    function getOptionsByKeys(keys: Key[]): Array<TreeSelectOption | null> {
       const {
         value: { getNode }
       } = dataTreeMateRef
-      return keys.map((key) => getNode(key)?.rawNode || null)
+      return keys.map(key => getNode(key)?.rawNode || null)
     }
-    function handleUpdateCheckedKeys (
+    function handleUpdateCheckedKeys(
       keys: Key[],
       _: unknown,
       meta: { node: TreeOption | null, action: 'check' | 'uncheck' }
@@ -510,57 +519,64 @@ export default defineComponent({
         doUpdateValue(keys, options, { node, action })
         if (props.filterable) {
           focusSelectionInput()
-          if (props.clearFilterAfterSelect) patternRef.value = ''
+          if (props.clearFilterAfterSelect)
+            patternRef.value = ''
         }
-      } else {
-        keys.length
-          ? doUpdateValue(keys[0], options[0] || null, {
+      }
+      else {
+        if (keys.length) {
+          doUpdateValue(keys[0], options[0] || null, {
             node,
             action
           })
-          : doUpdateValue(null, null, { node, action })
+        }
+        else {
+          doUpdateValue(null, null, { node, action })
+        }
         closeMenu()
         // Currently it is not necessary. However if there is an action slot,
         // it will be useful. So just leave it here.
         focusSelection()
       }
     }
-    function handleUpdateIndeterminateKeys (keys: Key[]): void {
+    function handleUpdateIndeterminateKeys(keys: Key[]): void {
       if (props.checkable) {
         doUpdateIndeterminateKeys(keys, getOptionsByKeys(keys))
       }
     }
-    function handleTriggerFocus (e: FocusEvent): void {
-      if (menuElRef.value?.contains(e.relatedTarget as Element)) return
+    function handleTriggerFocus(e: FocusEvent): void {
+      if (menuElRef.value?.contains(e.relatedTarget as Element))
+        return
       focusedRef.value = true
       doFocus(e)
     }
-    function handleTriggerBlur (e: FocusEvent): void {
-      if (menuElRef.value?.contains(e.relatedTarget as Element)) return
+    function handleTriggerBlur(e: FocusEvent): void {
+      if (menuElRef.value?.contains(e.relatedTarget as Element))
+        return
       focusedRef.value = false
       doBlur(e)
     }
-    function handleMenuFocusin (e: FocusEvent): void {
+    function handleMenuFocusin(e: FocusEvent): void {
       if (
-        menuElRef.value?.contains(e.relatedTarget as Element) ||
-        triggerInstRef.value?.$el?.contains(e.relatedTarget as Element)
+        menuElRef.value?.contains(e.relatedTarget as Element)
+        || triggerInstRef.value?.$el?.contains(e.relatedTarget as Element)
       ) {
         return
       }
       focusedRef.value = true
       doFocus(e)
     }
-    function handleMenuFocusout (e: FocusEvent): void {
+    function handleMenuFocusout(e: FocusEvent): void {
       if (
-        menuElRef.value?.contains(e.relatedTarget as Element) ||
-        triggerInstRef.value?.$el?.contains(e.relatedTarget as Element)
+        menuElRef.value?.contains(e.relatedTarget as Element)
+        || triggerInstRef.value?.$el?.contains(e.relatedTarget as Element)
       ) {
         return
       }
       focusedRef.value = false
       doBlur(e)
     }
-    function handleClear (e: MouseEvent): void {
+    function handleClear(e: MouseEvent): void {
       e.stopPropagation()
       const { multiple } = props
       if (!multiple && props.filterable) {
@@ -568,11 +584,12 @@ export default defineComponent({
       }
       if (multiple) {
         doUpdateValue([], [], { node: null, action: 'clear' })
-      } else {
+      }
+      else {
         doUpdateValue(null, null, { node: null, action: 'clear' })
       }
     }
-    function handleDeleteOption (option: SelectBaseOption): void {
+    function handleDeleteOption(option: SelectBaseOption): void {
       // only work for multiple mode
       const { value: mergedValue } = mergedValueRef
       if (Array.isArray(mergedValue)) {
@@ -585,7 +602,7 @@ export default defineComponent({
             allowNotLoaded: props.allowCheckingNotLoaded
           }
         )
-        const index = checkedKeysValue.findIndex((key) => key === option.value)
+        const index = checkedKeysValue.findIndex(key => key === option.value)
         if (~index) {
           const checkedKeyToBeRemoved = checkedKeysValue[index]
           const checkOptionToBeRemoved = getOptionsByKeys([
@@ -605,7 +622,8 @@ export default defineComponent({
               node: checkOptionToBeRemoved,
               action: 'delete'
             })
-          } else {
+          }
+          else {
             const nextValue = Array.from(checkedKeysValue)
             nextValue.splice(index, 1)
             doUpdateValue(nextValue, getOptionsByKeys(nextValue), {
@@ -616,11 +634,11 @@ export default defineComponent({
         }
       }
     }
-    function handlePatternInput (e: InputEvent): void {
+    function handlePatternInput(e: InputEvent): void {
       const { value } = e.target as unknown as HTMLInputElement
       patternRef.value = value
     }
-    function treeHandleKeydown (e: KeyboardEvent): {
+    function treeHandleKeydown(e: KeyboardEvent): {
       enterBehavior: TreeOverrideNodeClickBehaviorReturn | null
     } {
       const { value: treeInst } = treeInstRef
@@ -631,7 +649,7 @@ export default defineComponent({
         enterBehavior: null
       }
     }
-    function handleKeydown (e: KeyboardEvent): void {
+    function handleKeydown(e: KeyboardEvent): void {
       if (e.key === 'Enter') {
         if (mergedShowRef.value) {
           const { enterBehavior } = treeHandleKeydown(e)
@@ -646,37 +664,43 @@ export default defineComponent({
                 break
             }
           }
-        } else {
+        }
+        else {
           openMenu()
         }
         e.preventDefault()
-      } else if (e.key === 'Escape') {
+      }
+      else if (e.key === 'Escape') {
         if (mergedShowRef.value) {
           markEventEffectPerformed(e)
           closeMenu()
           focusSelection()
         }
-      } else {
+      }
+      else {
         if (mergedShowRef.value) {
           treeHandleKeydown(e)
-        } else if (e.key === 'ArrowDown') {
+        }
+        else if (e.key === 'ArrowDown') {
           openMenu()
         }
       }
     }
-    function handleTabOut (): void {
+    function handleTabOut(): void {
       closeMenu()
       focusSelection()
     }
-    function handleMenuMousedown (e: MouseEvent): void {
+    function handleMenuMousedown(e: MouseEvent): void {
       // If there's an action slot later, we need to check if mousedown happens
       // in action panel
-      if (!happensIn(e, 'action')) e.preventDefault()
+      if (!happensIn(e, 'action'))
+        e.preventDefault()
     }
     const selectionRenderTagRef = computed(() => {
       const { renderTag } = props
-      if (!renderTag) return undefined
-      return function selectionRenderTag ({
+      if (!renderTag)
+        return undefined
+      return function selectionRenderTag({
         option,
         handleClose
       }: {
@@ -699,8 +723,9 @@ export default defineComponent({
       dataTreeMate: dataTreeMateRef
     })
 
-    function handleTriggerOrMenuResize (): void {
-      if (!mergedShowRef.value) return
+    function handleTriggerOrMenuResize(): void {
+      if (!mergedShowRef.value)
+        return
       followerInstRef.value?.syncPosition()
     }
 
@@ -716,7 +741,8 @@ export default defineComponent({
             checkStrategy: mergedCheckStrategyRef.value,
             allowNotLoaded: props.allowCheckingNotLoaded
           })
-        } else {
+        }
+        else {
           return {
             checkedKeys:
               Array.isArray(mergedValue) || mergedValue === null
@@ -787,6 +813,12 @@ export default defineComponent({
       ? useThemeClass('tree-select', undefined, cssVarsRef, props)
       : undefined
 
+    const menuPaddingRef = computed(() => {
+      const {
+        self: { menuPadding }
+      } = themeRef.value
+      return menuPadding
+    })
     return {
       ...exposedMethods,
       menuElRef,
@@ -838,7 +870,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedTheme, mergedClsPrefix, $slots } = this
     return (
       <div class={`${mergedClsPrefix}-tree-select`}>
@@ -908,7 +940,8 @@ export default defineComponent({
                     >
                       {{
                         default: () => {
-                          if (!this.mergedShow) return null
+                          if (!this.mergedShow)
+                            return null
                           const {
                             mergedClsPrefix,
                             checkable,

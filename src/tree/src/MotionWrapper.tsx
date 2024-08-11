@@ -1,7 +1,7 @@
-import { h, defineComponent, type PropType } from 'vue'
+import { type PropType, defineComponent, h } from 'vue'
 import { pxfy } from 'seemly'
 import FadeInExpandTransition from '../../_internal/fade-in-expand-transition'
-import { type TmNode } from './interface'
+import type { TmNode } from './interface'
 import TreeNode from './TreeNode'
 
 export default defineComponent({
@@ -25,7 +25,7 @@ export default defineComponent({
       required: true
     }
   },
-  render () {
+  render() {
     const { clsPrefix } = this
     return (
       <FadeInExpandTransition
@@ -44,7 +44,7 @@ export default defineComponent({
                 height: pxfy(this.height)
               }}
             >
-              {this.nodes.map((node) => (
+              {this.nodes.map(node => (
                 <TreeNode clsPrefix={clsPrefix} tmNode={node} />
               ))}
             </div>

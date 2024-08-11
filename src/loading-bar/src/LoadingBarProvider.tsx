@@ -1,14 +1,14 @@
 import {
+  type CSSProperties,
+  type ExtractPropTypes,
   Fragment,
-  h,
-  ref,
+  type PropType,
   Teleport,
   defineComponent,
-  provide,
+  h,
   nextTick,
-  type PropType,
-  type ExtractPropTypes,
-  type CSSProperties
+  provide,
+  ref
 } from 'vue'
 import { useIsMounted } from 'vooks'
 import { useConfig, useTheme } from '../../_mixins'
@@ -57,32 +57,35 @@ export type LoadingBarProviderSetupProps = ExtractPropTypes<
 export default defineComponent({
   name: 'LoadingBarProvider',
   props: loadingBarProviderProps,
-  setup (props) {
+  setup(props) {
     const isMountedRef = useIsMounted()
     const loadingBarRef = ref<LoadingBarInst | null>(null)
     const methods: LoadingBarProviderInst = {
-      start () {
+      start() {
         if (isMountedRef.value) {
           loadingBarRef.value?.start()
-        } else {
+        }
+        else {
           void nextTick(() => {
             loadingBarRef.value?.start()
           })
         }
       },
-      error () {
+      error() {
         if (isMountedRef.value) {
           loadingBarRef.value?.error()
-        } else {
+        }
+        else {
           void nextTick(() => {
             loadingBarRef.value?.error()
           })
         }
       },
-      finish () {
+      finish() {
         if (isMountedRef.value) {
           loadingBarRef.value?.finish()
-        } else {
+        }
+        else {
           void nextTick(() => {
             loadingBarRef.value?.finish()
           })
@@ -99,7 +102,7 @@ export default defineComponent({
       loadingBarRef
     })
   },
-  render () {
+  render() {
     return (
       <>
         <Teleport disabled={this.to === false} to={this.to || 'body'}>

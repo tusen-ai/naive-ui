@@ -1,10 +1,10 @@
 import {
-  h,
-  defineComponent,
-  ref,
+  type HTMLAttributes,
   type PropType,
+  defineComponent,
+  h,
   inject,
-  type HTMLAttributes
+  ref
 } from 'vue'
 import { render } from '../../_utils'
 import { type TmNode, treeInjectionKey } from './interface'
@@ -27,16 +27,16 @@ export default defineComponent({
     },
     nodeProps: Object as PropType<HTMLAttributes>
   },
-  setup (props) {
-    const { renderLabelRef, renderPrefixRef, renderSuffixRef, labelFieldRef } =
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      inject(treeInjectionKey)!
+  setup(props) {
+    const { renderLabelRef, renderPrefixRef, renderSuffixRef, labelFieldRef }
+      = inject(treeInjectionKey)!
     const selfRef = ref<HTMLElement | null>(null)
-    function doClick (e: MouseEvent): void {
+    function doClick(e: MouseEvent): void {
       const { onClick } = props
-      if (onClick) onClick(e)
+      if (onClick)
+        onClick(e)
     }
-    function handleClick (e: MouseEvent): void {
+    function handleClick(e: MouseEvent): void {
       doClick(e)
     }
     return {
@@ -48,7 +48,7 @@ export default defineComponent({
       handleClick
     }
   },
-  render () {
+  render() {
     const {
       clsPrefix,
       labelField,

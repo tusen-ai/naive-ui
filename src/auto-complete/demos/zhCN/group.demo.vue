@@ -2,19 +2,11 @@
 # 成组
 </markdown>
 
-<template>
-  <n-auto-complete
-    v-model:value="value"
-    :options="options"
-    placeholder="邮箱"
-  />
-</template>
-
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const valueRef = ref('')
     return {
       value: valueRef,
@@ -36,3 +28,11 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-auto-complete
+    v-model:value="value"
+    :options="options"
+    placeholder="邮箱"
+  />
+</template>

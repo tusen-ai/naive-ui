@@ -31,7 +31,7 @@ const csCZ: NLocale = {
     dateFormat: 'd-M-yyyy',
     dateTimeFormat: 'd-M-yyyy HH:mm:ss',
     quarterFormat: 'qqq-yyyy',
-    weekFormat: 'yyyy-w',
+    weekFormat: 'YYYY-w',
     clear: 'Vyčistit',
     now: 'Teď',
     confirm: 'Potvrdit',

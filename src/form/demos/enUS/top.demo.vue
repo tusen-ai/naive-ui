@@ -4,6 +4,154 @@
 Use `n-grid` and `n-form-item-gi` (grid item) to style the form more exactly.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import type { FormInst, FormItemRule } from 'naive-ui'
+import { useMessage } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const formRef = ref<FormInst | null>(null)
+    const message = useMessage()
+    return {
+      formRef,
+      size: ref('medium'),
+      model: ref({
+        inputValue: null,
+        textareaValue: null,
+        selectValue: null,
+        multipleSelectValue: null,
+        datetimeValue: null,
+        nestedValue: {
+          path1: null,
+          path2: null
+        },
+        switchValue: false,
+        checkboxGroupValue: null,
+        radioGroupValue: null,
+        radioButtonGroupValue: null,
+        inputNumberValue: null,
+        timePickerValue: null,
+        sliderValue: 0,
+        transferValue: null
+      }),
+      generalOptions: ['groode', 'veli good', 'emazing', 'lidiculous'].map(
+        v => ({
+          label: v,
+          value: v
+        })
+      ),
+      cascaderOptions: [
+        {
+          label: 'groode',
+          value: 'groode',
+          children: [
+            {
+              label: 'veli good',
+              value: 'veli good'
+            }
+          ]
+        }
+      ],
+      rules: {
+        inputValue: {
+          required: true,
+          trigger: ['blur', 'input'],
+          message: 'Please input inputValue'
+        },
+        textareaValue: {
+          required: true,
+          trigger: ['blur', 'input'],
+          message: 'Please input textareaValue'
+        },
+        selectValue: {
+          required: true,
+          trigger: ['blur', 'change'],
+          message: 'Please select selectValue'
+        },
+        multipleSelectValue: {
+          type: 'array',
+          required: true,
+          trigger: ['blur', 'change'],
+          message: 'Please select multipleSelectValue'
+        },
+        datetimeValue: {
+          type: 'number',
+          required: true,
+          trigger: ['blur', 'change'],
+          message: 'Please input datetimeValue'
+        },
+        nestedValue: {
+          path1: {
+            required: true,
+            trigger: ['blur', 'input'],
+            message: 'Please input nestedValue.path1'
+          },
+          path2: {
+            required: true,
+            trigger: ['blur', 'change'],
+            message: 'Please input nestedValue.path2'
+          }
+        },
+        checkboxGroupValue: {
+          type: 'array',
+          required: true,
+          trigger: 'change',
+          message: 'Please select checkboxGroupValue'
+        },
+        radioGroupValue: {
+          required: true,
+          trigger: 'change',
+          message: 'Please select radioGroupValue'
+        },
+        radioButtonGroupValue: {
+          required: true,
+          trigger: 'change',
+          message: 'Please select radioButtonGroupValue'
+        },
+        inputNumberValue: {
+          type: 'number',
+          required: true,
+          trigger: ['blur', 'change'],
+          message: 'Please input inputNumberValue'
+        },
+        timePickerValue: {
+          type: 'number',
+          required: true,
+          trigger: ['blur', 'change'],
+          message: 'Please input timePickerValue'
+        },
+        sliderValue: {
+          validator(rule: FormItemRule, value: number) {
+            return value > 50
+          },
+          trigger: ['blur', 'change'],
+          message: 'sliderValue should be larger than 50'
+        },
+        transferValue: {
+          type: 'array',
+          required: true,
+          trigger: 'change',
+          message: 'Please input transferValue'
+        }
+      },
+      handleValidateButtonClick(e: MouseEvent) {
+        e.preventDefault()
+        formRef.value?.validate((errors) => {
+          if (!errors) {
+            message.success('Valid')
+          }
+          else {
+            console.log(errors)
+            message.error('Invalid')
+          }
+        })
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-radio-group
     v-model:value="size"
@@ -38,7 +186,7 @@ Use `n-grid` and `n-form-item-gi` (grid item) to style the form more exactly.
           type="textarea"
           :autosize="{
             minRows: 3,
-            maxRows: 5
+            maxRows: 5,
           }"
         />
       </n-form-item-gi>
@@ -161,149 +309,3 @@ Use `n-grid` and `n-form-item-gi` (grid item) to style the form more exactly.
   <pre>{{ JSON.stringify(model, null, 2) }}
 </pre>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { FormInst, FormItemRule, useMessage } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const formRef = ref<FormInst | null>(null)
-    const message = useMessage()
-    return {
-      formRef,
-      size: ref('medium'),
-      model: ref({
-        inputValue: null,
-        textareaValue: null,
-        selectValue: null,
-        multipleSelectValue: null,
-        datetimeValue: null,
-        nestedValue: {
-          path1: null,
-          path2: null
-        },
-        switchValue: false,
-        checkboxGroupValue: null,
-        radioGroupValue: null,
-        radioButtonGroupValue: null,
-        inputNumberValue: null,
-        timePickerValue: null,
-        sliderValue: 0,
-        transferValue: null
-      }),
-      generalOptions: ['groode', 'veli good', 'emazing', 'lidiculous'].map(
-        (v) => ({
-          label: v,
-          value: v
-        })
-      ),
-      cascaderOptions: [
-        {
-          label: 'groode',
-          value: 'groode',
-          children: [
-            {
-              label: 'veli good',
-              value: 'veli good'
-            }
-          ]
-        }
-      ],
-      rules: {
-        inputValue: {
-          required: true,
-          trigger: ['blur', 'input'],
-          message: 'Please input inputValue'
-        },
-        textareaValue: {
-          required: true,
-          trigger: ['blur', 'input'],
-          message: 'Please input textareaValue'
-        },
-        selectValue: {
-          required: true,
-          trigger: ['blur', 'change'],
-          message: 'Please select selectValue'
-        },
-        multipleSelectValue: {
-          type: 'array',
-          required: true,
-          trigger: ['blur', 'change'],
-          message: 'Please select multipleSelectValue'
-        },
-        datetimeValue: {
-          type: 'number',
-          required: true,
-          trigger: ['blur', 'change'],
-          message: 'Please input datetimeValue'
-        },
-        nestedValue: {
-          path1: {
-            required: true,
-            trigger: ['blur', 'input'],
-            message: 'Please input nestedValue.path1'
-          },
-          path2: {
-            required: true,
-            trigger: ['blur', 'change'],
-            message: 'Please input nestedValue.path2'
-          }
-        },
-        checkboxGroupValue: {
-          type: 'array',
-          required: true,
-          trigger: 'change',
-          message: 'Please select checkboxGroupValue'
-        },
-        radioGroupValue: {
-          required: true,
-          trigger: 'change',
-          message: 'Please select radioGroupValue'
-        },
-        radioButtonGroupValue: {
-          required: true,
-          trigger: 'change',
-          message: 'Please select radioButtonGroupValue'
-        },
-        inputNumberValue: {
-          type: 'number',
-          required: true,
-          trigger: ['blur', 'change'],
-          message: 'Please input inputNumberValue'
-        },
-        timePickerValue: {
-          type: 'number',
-          required: true,
-          trigger: ['blur', 'change'],
-          message: 'Please input timePickerValue'
-        },
-        sliderValue: {
-          validator (rule: FormItemRule, value: number) {
-            return value > 50
-          },
-          trigger: ['blur', 'change'],
-          message: 'sliderValue should be larger than 50'
-        },
-        transferValue: {
-          type: 'array',
-          required: true,
-          trigger: 'change',
-          message: 'Please input transferValue'
-        }
-      },
-      handleValidateButtonClick (e: MouseEvent) {
-        e.preventDefault()
-        formRef.value?.validate((errors) => {
-          if (!errors) {
-            message.success('Valid')
-          } else {
-            console.log(errors)
-            message.error('Invalid')
-          }
-        })
-      }
-    }
-  }
-})
-</script>

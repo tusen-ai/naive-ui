@@ -1,5 +1,5 @@
-import ru from 'date-fns/esm/locale/ru'
-import { type NDateLocale } from './enUS'
+import { ru } from 'date-fns/locale'
+import type { NDateLocale } from './enUS'
 
 const dateRuRU: NDateLocale = {
   name: 'ru-RU',

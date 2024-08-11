@@ -4,21 +4,9 @@
 一个水平菜单，可以自动折叠。
 </markdown>
 
-<template>
-  <n-split :default-size="0.8">
-    <template #1>
-      <n-menu
-        v-model:value="activeKey"
-        mode="horizontal"
-        :options="menuOptions"
-        responsive
-      />
-    </template>
-  </n-split>
-</template>
-
 <script lang="ts">
-import { defineComponent, h, ref, Component } from 'vue'
+import type { Component } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 import { NIcon } from 'naive-ui'
 import type { MenuOption } from 'naive-ui'
 import {
@@ -27,7 +15,7 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
 
-function renderIcon (icon: Component) {
+function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -116,7 +104,7 @@ const menuOptions: MenuOption[] = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       activeKey: ref<string | null>(null),
       menuOptions
@@ -124,3 +112,16 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-split :default-size="0.8">
+    <template #1>
+      <n-menu
+        v-model:value="activeKey"
+        mode="horizontal"
+        :options="menuOptions"
+        responsive
+      />
+    </template>
+  </n-split>
+</template>

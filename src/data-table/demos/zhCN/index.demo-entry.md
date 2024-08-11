@@ -91,16 +91,17 @@ rtl-debug.vue
 | default-expand-all | `boolean` | `false` | 是否默认展开全部可展开的行，不可在异步展开行时使用 | 2.30.4 |
 | expanded-row-keys | `Array<string \| number>` | `undefined` | 展开行的 key 值 |  |
 | indent | `number` | `16` | 使用树形数据时行内容的缩进 |  |
-| pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | 过滤操作后页面的状态，`'first'` 为回到首页，`'current'` 为停留在当前页 | 2.28.3 |
+| filter-icon-popover-props | `PopoverProps` | `{ trigger: click, placement: bottom }` | 过滤按钮的 Popover 属性，属性参考 [Popover props](popover#Popover-Props) | 2.39.0 |
 | flex-height | `boolean` | `false` | 是否让表格主体的高度自动适应整个表格区域的高度，打开这个选项会让 `table-layout` 始终为 `'fixed'` |  |
 | loading | `boolean` | `false` | 是否显示 loading 状态 |  |
 | max-height | `number \| string` | `undefined` | 表格内容的最大高度，可以是 CSS 属性值 |  |
 | min-height | `number \| string` | `undefined` | 表格内容的最低高度，可以是 CSS 属性值 |  |
 | paginate-single-page | `boolean` | `true` | 当表格数据只有一页时是否显示分页面 | 2.28.0 |
 | pagination | `false \| object` | `false` | 属性参考 [Pagination props](pagination#Pagination-Props) |  |
+| pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | 过滤操作后页面的状态，`'first'` 为回到首页，`'current'` 为停留在当前页 | 2.28.3 |
 | remote | `boolean` | `false` | 表格是否自动分页数据，在异步的状况下你可能需要把它设为 `true` |  |
 | render-cell | `(value: any, rowData: object, column: DataTableBaseColumn) => VNodeChild` | `undefined` | 自定义单元格渲染，优先级低于列的 `render` | 2.30.5 |
-| render-expand-icon | `({ expanded }: { expanded: boolean }) => VNodeChild` | `undefined` | 自定义渲染展开图标 | 2.32.2, `expanded`: 2.34.4 |
+| render-expand-icon | `({ expanded, rowData }: { expanded: boolean, rowData: object }) => VNodeChild` | `undefined` | 自定义渲染展开图标 | 2.32.2, `expanded`: 2.34.4, `rowData`: `NEXT_VERSION` |
 | row-class-name | `string \| (rowData: object, index : number) => string` | `undefined` | 每一行上的类名 |  |
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | 通过行数据创建行的 key（如果你不想给每一行加上 key） |  |
 | row-props | `(rowData: object, rowIndex : number) => HTMLAttributes` | `undefined` | 自定义行属性 |  |
@@ -168,7 +169,7 @@ rtl-debug.vue
 | sorter | `boolean \| function \| 'default'` | `undefined` | 这一列的排序方法。如果设为 `'default'` 表格将会使用一个内置的排序函数；如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。其他情况下它工作的方式类似 `Array.sort` 的对比函数 |  |
 | tree | `boolean` | `false` | 是否在这一列展示树形数据的展开按钮 | 2.28.3 |
 | title | `string \| (() => VNodeChild)` | `undefined` | 列的 title 信息，可以是渲染函数 |  |
-| titleRowSpan | `number` | `undefined` | title 行所占的单元格的个数 |  |
+| titleColSpan | `number` | `undefined` | title 列占据的列数 |  |
 | type | `'selection' \| 'expand'` | `undefined` | 列的类型 |  |
 | width | `number \| string` | `undefined` | 列的宽度（在列固定时是**必需**的，并且需要为 `number` 类型） | 2.24.0（`string` 类型） |
 
@@ -177,7 +178,7 @@ rtl-debug.vue
 #### DataTableSortState Type
 
 ```ts
-type DataTableSortState = {
+interface DataTableSortState {
   columnKey: string | number
   sorter: 'default' | function | boolean
   order: 'ascend' | 'descend' | false
@@ -187,7 +188,7 @@ type DataTableSortState = {
 #### DataTableFilterState Type
 
 ```ts
-type DataTableFilterState = {
+interface DataTableFilterState {
   [key: string]: Array<string | number> | string | number | null | undefined
 }
 ```
@@ -196,20 +197,20 @@ type DataTableFilterState = {
 
 ```ts
 type DataTableCreateSummary = (pageData: RowData[]) =>
-  | Array<{
-      [columnKey: string]: {
-        value?: VNodeChild
-        colSpan?: number
-        rowSpan?: number
-      }
-    }>
-  | {
-      [columnKey: string]: {
-        value?: VNodeChild
-        colSpan?: number
-        rowSpan?: number
-      }
-    }
+| Array<{
+  [columnKey: string]: {
+    value?: VNodeChild
+    colSpan?: number
+    rowSpan?: number
+  }
+}>
+| {
+  [columnKey: string]: {
+    value?: VNodeChild
+    colSpan?: number
+    rowSpan?: number
+  }
+}
 ```
 
 ### DataTable Methods

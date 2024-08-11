@@ -1,5 +1,5 @@
-import { h, defineComponent, type PropType } from 'vue'
-import { type Item } from './interface'
+import { type PropType, defineComponent, h } from 'vue'
+import type { Item } from './interface'
 
 export default defineComponent({
   name: 'TimePickerPanelCol',
@@ -19,7 +19,7 @@ export default defineComponent({
     // It should be required but vue's type seems to have bugs
     onItemClick: Function as PropType<(value: number | 'am' | 'pm') => void>
   },
-  render () {
+  render() {
     const { activeValue, onItemClick, clsPrefix } = this
     return this.data.map((item) => {
       const { label, disabled, value } = item

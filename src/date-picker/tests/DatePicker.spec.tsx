@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/non-nullable-type-assertion-style */
 import { ref } from 'vue'
 import { mount } from '@vue/test-utils'
-import { format } from 'date-fns/esm'
+import { format } from 'date-fns'
 import { NDatePicker } from '../index'
 import type { Value } from '../src/interface'
 import { dateEnUS } from '../../locales'
@@ -149,6 +148,18 @@ describe('n-date-picker', () => {
     const wrapper = mount(NDatePicker)
     expect(wrapper.find('input').attributes('readonly')).not.toBe('')
     await wrapper.setProps({
+      inputReadonly: true
+    })
+    expect(wrapper.find('input').attributes('readonly')).toBe('')
+    await wrapper.setProps({
+      type: 'datetime',
+      panel: true,
+      inputReadonly: true
+    })
+    expect(wrapper.find('input').attributes('readonly')).toBe('')
+    await wrapper.setProps({
+      type: 'datetimerange',
+      panel: true,
       inputReadonly: true
     })
     expect(wrapper.find('input').attributes('readonly')).toBe('')

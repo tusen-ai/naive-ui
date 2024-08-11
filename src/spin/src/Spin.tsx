@@ -1,10 +1,10 @@
 import {
+  type CSSProperties,
+  type PropType,
+  Transition,
   computed,
   defineComponent,
   h,
-  Transition,
-  type PropType,
-  type CSSProperties,
   ref,
   watchEffect
 } from 'vue'
@@ -13,7 +13,7 @@ import { pxfy } from 'seemly'
 import { NBaseLoading } from '../../_internal'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey, type ExtractPublicPropTypes, warnOnce } from '../../_utils'
+import { type ExtractPublicPropTypes, createKey, warnOnce } from '../../_utils'
 import { spinLight } from '../styles'
 import type { SpinTheme } from '../styles'
 import style from './styles/index.cssr'
@@ -58,7 +58,7 @@ export type SpinProps = ExtractPublicPropTypes<typeof spinProps>
 export default defineComponent({
   name: 'Spin',
   props: spinProps,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.spinning !== undefined) {
@@ -85,8 +85,8 @@ export default defineComponent({
         self
       } = themeRef.value
       const { opacitySpinning, color, textColor } = self
-      const size =
-        typeof spinSize === 'number'
+      const size
+        = typeof spinSize === 'number'
           ? pxfy(spinSize)
           : self[createKey('size', spinSize)]
       return {
@@ -134,7 +134,8 @@ export default defineComponent({
       active: activeRef,
       mergedStrokeWidth: computed(() => {
         const { strokeWidth } = props
-        if (strokeWidth !== undefined) return strokeWidth
+        if (strokeWidth !== undefined)
+          return strokeWidth
         const { size } = props
         return STROKE_WIDTH[typeof size === 'number' ? 'medium' : size]
       }),
@@ -143,7 +144,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { $slots, mergedClsPrefix, description } = this
     const rotate = $slots.icon && this.rotate
     const descriptionNode = (description || $slots.description) && (

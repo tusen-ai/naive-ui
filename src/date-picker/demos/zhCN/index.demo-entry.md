@@ -178,7 +178,7 @@ form-debug.vue
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now'> \| null` | `['clear', 'now']` | Week 类型的 Date Picker 中支持的操作 | 2.37.0 |
 | default-calendar-start-time | `number` | `undefined` | 面板日历默认开始的月份时间戳 | 2.38.1 |
-| format | `string` | 中文为 `'yyyy-w'`，随语言变化 | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | 2.37.0 |
+| format | `string` | 中文为 `'YYYY-w'`，随语言变化 | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | 2.37.0 |
 | placeholder | `string` | 中文为 `'选择周'`，随语言变化 | 没有值时的占位信息 | 2.37.0 |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | 受控数据更新时触发的回调函数 | 2.37.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | 受控数据更新时触发的回调函数 | 2.37.0 |
@@ -194,6 +194,28 @@ form-debug.vue
 | prev-month | `()` | 日期面板的 `上一个` 图标     | 2.33.4 |
 | prev-year  | `()` | 日期面板的 `快速上一个` 图标 | 2.33.4 |
 | separator  | `()` | 日期范围分隔符号             | 2.29.0 |
+
+### Date Year QuarterRange Week Slots
+
+| 名称  | 参数                               | 说明           | 版本         |
+| ----- | ---------------------------------- | -------------- | ------------ |
+| clear | `(props: { onClear: () => void })` | 面板的清除按钮 | NEXT_VERSION |
+| now   | `(props: { onNow: () => void })`   | 面板的此刻按钮 | NEXT_VERSION |
+
+### DateRange DateTimeRange MonthRange YearRange Slots
+
+| 名称 | 参数 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| clear | `(props: { onClear: () => void })` | 面板的清除按钮 | NEXT_VERSION |
+| confirm | `(props: { onConfirm: () => void, disabled: boolean })` | 面板的确认按钮 | NEXT_VERSION |
+
+### DateTime Month Quarter Slots
+
+| 名称 | 参数 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| now | `(props: { onNow: () => void })` | 面板的此刻按钮 | NEXT_VERSION |
+| clear | `(props: { onClear: () => void })` | 面板的清除按钮 | NEXT_VERSION |
+| confirm | `(props: { onConfirm: () => void, disabled: boolean })` | 面板的确认按钮 | NEXT_VERSION |
 
 ### DatePicker Methods
 

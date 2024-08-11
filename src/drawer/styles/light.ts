@@ -3,7 +3,7 @@ import type { ThemeCommonVars } from '../../_styles/common'
 import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import { createTheme } from '../../_mixins'
 
-export const self = (vars: ThemeCommonVars) => {
+export function self(vars: ThemeCommonVars) {
   const {
     modalColor,
     textColor1,

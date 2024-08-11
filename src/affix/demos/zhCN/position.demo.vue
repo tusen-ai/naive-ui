@@ -4,6 +4,19 @@
 Affix 可以 `absolute` 或者 `fixed` 定位。你可能还需要写一些额外的 CSS 才能让达到例子的效果。 默认情况下位置是 `fixed`，因为大多数情况下，滚动的元素是 `document`。
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const containerRef = ref<HTMLElement | undefined>(undefined)
+    return {
+      containerRef
+    }
+  }
+})
+</script>
+
 <template>
   <div class="absolute-anchor-container">
     <div ref="containerRef" class="container">
@@ -31,19 +44,6 @@ Affix 可以 `absolute` 或者 `fixed` 定位。你可能还需要写一些额�
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const containerRef = ref<HTMLElement | undefined>(undefined)
-    return {
-      containerRef
-    }
-  }
-})
-</script>
 
 <style>
 .absolute-anchor-container {

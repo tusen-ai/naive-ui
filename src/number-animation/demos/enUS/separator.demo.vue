@@ -4,6 +4,23 @@
 The number is too large to count the digits.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import type { NumberAnimationInst } from 'naive-ui'
+
+export default defineComponent({
+  setup() {
+    const numberAnimationInstRef = ref<NumberAnimationInst | null>(null)
+    return {
+      numberAnimationInstRef,
+      handleClick() {
+        numberAnimationInstRef.value?.play()
+      }
+    }
+  }
+})
+</script>
+
 <template>
   <n-statistic label="A little goal" tabular-nums>
     <n-number-animation
@@ -18,20 +35,3 @@ The number is too large to count the digits.
     Play
   </n-button>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { NumberAnimationInst } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const numberAnimationInstRef = ref<NumberAnimationInst | null>(null)
-    return {
-      numberAnimationInstRef,
-      handleClick () {
-        numberAnimationInstRef.value?.play()
-      }
-    }
-  }
-})
-</script>

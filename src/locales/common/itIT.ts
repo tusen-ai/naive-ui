@@ -31,7 +31,7 @@ const itIT: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
-    weekFormat: 'yyyy-w',
+    weekFormat: 'YYYY-w',
     clear: 'Cancella',
     now: 'Adesso',
     confirm: 'Conferma',
@@ -68,11 +68,13 @@ const itIT: NLocale = {
     unselectAll: 'Deseleziona tutto',
     clearAll: 'Pulisci',
     total: (num: number): string => {
-      if (num !== 1) return `${num} elementi in totale`
+      if (num !== 1)
+        return `${num} elementi in totale`
       return '1 elemento in totale'
     },
     selected: (num: number): string => {
-      if (num !== 1) return `${num} elementi selezionati`
+      if (num !== 1)
+        return `${num} elementi selezionati`
       return '1 elemento selezionato'
     }
   },

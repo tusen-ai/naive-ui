@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { NTable, NTbody, NThead, NTd, NTh, NTr } from '../index'
+import { NTable, NTbody, NTd, NTh, NThead, NTr } from '../index'
 
 describe('n-table', () => {
   it('should work with import on demand', () => {

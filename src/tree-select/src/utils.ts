@@ -1,7 +1,7 @@
-import { type SelectBaseOption } from '../../select/src/interface'
-import { type TreeSelectTmNode } from './interface'
+import type { SelectBaseOption } from '../../select/src/interface'
+import type { TreeSelectTmNode } from './interface'
 
-export function treeOption2SelectOption (
+export function treeOption2SelectOption(
   tmNode: TreeSelectTmNode,
   labelField: string
 ): SelectBaseOption {
@@ -13,7 +13,7 @@ export function treeOption2SelectOption (
   }
 }
 
-export function treeOption2SelectOptionWithPath (
+export function treeOption2SelectOptionWithPath(
   tmNode: TreeSelectTmNode,
   path: TreeSelectTmNode[],
   separator: string,
@@ -23,6 +23,6 @@ export function treeOption2SelectOptionWithPath (
   return {
     ...rawNode,
     value: tmNode.key,
-    label: path.map((v) => (v.rawNode as any)[labelField]).join(separator)
+    label: path.map(v => (v.rawNode as any)[labelField]).join(separator)
   }
 }

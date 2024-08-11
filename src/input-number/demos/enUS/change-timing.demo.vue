@@ -4,6 +4,18 @@
 Set `update-value-on-input` to `false`, the value won't be changed on input.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      value: ref(35)
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-input-number
@@ -17,15 +29,3 @@ Set `update-value-on-input` to `false`, the value won't be changed on input.
     {{ value }}
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      value: ref(35)
-    }
-  }
-})
-</script>

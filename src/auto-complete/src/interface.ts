@@ -1,6 +1,6 @@
 import type {
-  SelectGroupOption,
-  SelectBaseOption
+  SelectBaseOption,
+  SelectGroupOption
 } from '../../select/src/interface'
 
 export type AutoCompleteOption = SelectBaseOption<string, string>
@@ -10,7 +10,7 @@ export interface AutoCompleteGroupOption
 }
 
 export type AutoCompleteOptions = Array<
-AutoCompleteOption | AutoCompleteGroupOption | string
+  AutoCompleteOption | AutoCompleteGroupOption | string
 >
 
 export type OnUpdateValue = (value: string & (string | null)) => void

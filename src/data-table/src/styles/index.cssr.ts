@@ -17,16 +17,22 @@ const fixedColumnStyle = createFixedColumnStyle()
 // --n-border-color-popover
 // --n-th-color
 // --n-th-color-hover
+// --n-th-color-sorting
 // --n-th-color-modal
 // --n-th-color-hover-modal
+// --n-th-color-sorting-modal
 // --n-th-color-popover
 // --n-th-color-hover-popover
+// --n-th-color-sorting-popover
 // --n-td-color
 // --n-td-color-hover
+// --n-td-color-sorting
 // --n-td-color-modal
 // --n-td-color-hover-modal
+// --n-td-color-sorting-modal
 // --n-td-color-popover
 // --n-td-color-hover-popover
+// --n-td-color-sorting-popover
 // --n-th-text-color
 // --n-td-text-color
 // --n-th-font-weight
@@ -60,8 +66,9 @@ export default c([
     --n-merged-th-color: var(--n-th-color);
     --n-merged-td-color: var(--n-td-color);
     --n-merged-border-color: var(--n-border-color);
-    --n-merged-th-color-hover: var(--n-th-color-hover);
+    --n-merged-th-color-sorting: var(--n-th-color-sorting);
     --n-merged-td-color-hover: var(--n-td-color-hover);
+    --n-merged-td-color-sorting: var(--n-td-color-sorting);
     --n-merged-td-color-striped: var(--n-td-color-striped);
   `, [
     cB('data-table-wrapper', `
@@ -251,6 +258,9 @@ export default c([
       cM('hover', `
         background-color: var(--n-merged-th-color-hover);
       `),
+      cM('sorting', `
+        background-color: var(--n-merged-th-color-sorting);
+      `),
       cM('sortable', `
         cursor: pointer;
       `, [
@@ -384,6 +394,9 @@ export default c([
       `),
       cM('hover', `
         background-color: var(--n-merged-td-color-hover);
+      `),
+      cM('sorting', `
+        background-color: var(--n-merged-td-color-sorting);
       `),
       cE('ellipsis', `
         display: inline-block;
@@ -559,6 +572,8 @@ export default c([
     --n-merged-border-color: var(--n-border-color-modal);
     --n-merged-th-color-hover: var(--n-th-color-hover-modal);
     --n-merged-td-color-hover: var(--n-td-color-hover-modal);
+    --n-merged-th-color-sorting: var(--n-th-color-hover-modal);
+    --n-merged-td-color-sorting: var(--n-td-color-hover-modal);
     --n-merged-td-color-striped: var(--n-td-color-striped-modal);
   `)),
   insidePopover(cB('data-table', `
@@ -567,11 +582,13 @@ export default c([
     --n-merged-border-color: var(--n-border-color-popover);
     --n-merged-th-color-hover: var(--n-th-color-hover-popover);
     --n-merged-td-color-hover: var(--n-td-color-hover-popover);
+    --n-merged-th-color-sorting: var(--n-th-color-hover-popover);
+    --n-merged-td-color-sorting: var(--n-td-color-hover-popover);
     --n-merged-td-color-striped: var(--n-td-color-striped-popover);
   `))
 ])
 
-function createFixedColumnStyle (): CNode[] {
+function createFixedColumnStyle(): CNode[] {
   return [
     cM('fixed-left', `
       left: 0;

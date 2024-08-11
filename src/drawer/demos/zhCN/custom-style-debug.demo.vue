@@ -2,6 +2,26 @@
 # Style Debug
 </markdown>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+import type { DrawerPlacement } from 'naive-ui'
+
+export default defineComponent({
+  data() {
+    return {
+      active: false,
+      placement: 'right' as DrawerPlacement
+    }
+  },
+  methods: {
+    activate(placement: DrawerPlacement) {
+      this.active = true
+      this.placement = placement
+    }
+  }
+})
+</script>
+
 <template>
   <n-button-group>
     <n-button @click="activate('top')">
@@ -28,23 +48,3 @@
     </n-drawer-content>
   </n-drawer>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import type { DrawerPlacement } from 'naive-ui'
-
-export default defineComponent({
-  data () {
-    return {
-      active: false,
-      placement: 'right' as DrawerPlacement
-    }
-  },
-  methods: {
-    activate (placement: DrawerPlacement) {
-      this.active = true
-      this.placement = placement
-    }
-  }
-})
-</script>

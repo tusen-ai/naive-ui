@@ -4,23 +4,11 @@
 Start typing to see how this works.
 </markdown>
 
-<template>
-  <n-auto-complete
-    v-model:value="value"
-    :input-props="{
-      autocomplete: 'disabled'
-    }"
-    :options="options"
-    placeholder="Email"
-    clearable
-  />
-</template>
-
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const valueRef = ref('')
     return {
       value: valueRef,
@@ -37,3 +25,15 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-auto-complete
+    v-model:value="value"
+    :input-props="{
+      autocomplete: 'disabled',
+    }"
+    :options="options"
+    placeholder="Email"
+    clearable
+  />
+</template>

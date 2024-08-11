@@ -1,5 +1,5 @@
-import zhCN from 'date-fns/esm/locale/zh-CN'
-import { type NDateLocale } from './enUS'
+import { zhCN } from 'date-fns/locale'
+import type { NDateLocale } from './enUS'
 
 const dateZhCN: NDateLocale = {
   name: 'zh-CN',

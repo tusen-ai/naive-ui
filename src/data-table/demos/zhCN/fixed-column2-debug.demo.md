@@ -12,7 +12,7 @@
 ```js
 import { defineComponent } from 'vue'
 
-const createColumns = () => {
+function createColumns() {
   return [
     {
       title: '1',
@@ -118,24 +118,26 @@ const createColumns = () => {
   ]
 }
 
-const createData = () => [
-  {
-    4: 4,
-    5: 5,
-    6: 6,
-    7: 7,
-    test1: 'test1',
-    test2: 'test2',
-    test3: 'test3',
-    a1: 'a1',
-    a2: 'a2',
-    b1: 'b1',
-    b2: 'b2'
-  }
-]
+function createData() {
+  return [
+    {
+      4: 4,
+      5: 5,
+      6: 6,
+      7: 7,
+      test1: 'test1',
+      test2: 'test2',
+      test3: 'test3',
+      a1: 'a1',
+      a2: 'a2',
+      b1: 'b1',
+      b2: 'b2'
+    }
+  ]
+}
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       data: createData(),
       columns: createColumns(),
