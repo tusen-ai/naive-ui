@@ -1,5 +1,5 @@
 import { merge } from 'lodash-es'
-import { type NLocale } from '../common/enUS'
+import type { NLocale } from '../common/enUS'
 
 export type NPartialLocale = {
   [key in keyof NLocale]+?: {
@@ -7,12 +7,12 @@ export type NPartialLocale = {
   }
 }
 
-export function createLocale (locale: NLocale): NLocale
-export function createLocale (
+export function createLocale(locale: NLocale): NLocale
+export function createLocale(
   locale: NPartialLocale,
   fallbackLocale: NLocale
 ): NLocale
-export function createLocale (
+export function createLocale(
   locale: NPartialLocale,
   fallbackLocale?: NLocale
 ): NLocale {

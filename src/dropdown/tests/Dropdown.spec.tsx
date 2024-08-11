@@ -1,13 +1,13 @@
 import type { VueWrapper } from '@vue/test-utils/dist/vueWrapper'
 import { mount } from '@vue/test-utils'
-import { type ComponentPublicInstance, h, nextTick, type VNodeChild } from 'vue'
+import { type ComponentPublicInstance, type VNodeChild, h, nextTick } from 'vue'
+import { CashOutline as CashIcon } from '@vicons/ionicons5'
 import { NIcon } from '../../icon'
 import type { DropdownMixedOption } from '../src/interface'
-import { CashOutline as CashIcon } from '@vicons/ionicons5'
-import { NDropdown, type DropdownProps } from '../index'
+import { type DropdownProps, NDropdown } from '../index'
 
-const pendingOptionClassName =
-  'n-dropdown-option-body n-dropdown-option-body--pending'
+const pendingOptionClassName
+  = 'n-dropdown-option-body n-dropdown-option-body--pending'
 const optionBodySelector = '.n-dropdown-option-body'
 const options = [
   {
@@ -25,7 +25,7 @@ const options = [
       },
       {
         label: '黛西·布坎南',
-        icon () {
+        icon() {
           return h(NIcon, null, {
             default: () => h(CashIcon)
           })
@@ -51,7 +51,7 @@ const options = [
   }
 ]
 
-const mountDropdown = ({
+function mountDropdown({
   onSelect,
   inverted = false,
   onClickoutside = undefined,
@@ -59,7 +59,7 @@ const mountDropdown = ({
   show = undefined,
   renderLabel = undefined,
   renderIcon = undefined
-}: DropdownProps = {}): VueWrapper<ComponentPublicInstance> => {
+}: DropdownProps = {}): VueWrapper<ComponentPublicInstance> {
   return mount(NDropdown, {
     attachTo: document.body,
     props: {
@@ -222,7 +222,6 @@ describe('n-dropdown', () => {
     expect(triggerNodeWrapper.exists()).toBe(true)
     await triggerNodeWrapper.trigger('click')
 
-    // eslint-disable-next-line @typescript-eslint/non-nullable-type-assertion-style
     const disabledMenu = document.querySelector(
       '.n-dropdown-option-body--disabled'
     ) as HTMLDivElement
@@ -279,7 +278,7 @@ describe('n-dropdown', () => {
   })
 
   it('should work with `render-icon` props', async () => {
-    const renderDropdownIcon = (option: DropdownMixedOption): VNodeChild => {
+    const renderDropdownIcon = (): VNodeChild => {
       return h(NIcon, null, {
         default: () => h(CashIcon)
       })

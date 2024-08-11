@@ -2,21 +2,6 @@
 # Field search debug
 </markdown>
 
-<template>
-  <div>
-    有问题
-    <n-tree-select
-      :options="options1"
-      label-field="name"
-      key-field="id"
-      children-field="subs"
-      filterable
-    />
-    没问题
-    <n-tree-select :options="options2" filterable />
-  </div>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { NTreeSelect } from 'naive-ui'
@@ -26,7 +11,7 @@ export default defineComponent({
   components: {
     NTreeSelect
   },
-  setup () {
+  setup() {
     return {
       options1: [
         {
@@ -46,3 +31,18 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <div>
+    有问题
+    <NTreeSelect
+      :options="options1"
+      label-field="name"
+      key-field="id"
+      children-field="subs"
+      filterable
+    />
+    没问题
+    <NTreeSelect :options="options2" filterable />
+  </div>
+</template>

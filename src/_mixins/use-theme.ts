@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/consistent-type-assertions */
 import {
-  inject,
-  computed,
-  onBeforeMount,
   type ComputedRef,
+  type PropType,
   type Ref,
-  type PropType
+  computed,
+  inject,
+  onBeforeMount
 } from 'vue'
 import { merge } from 'lodash-es'
 import type { CNode } from 'css-render'
@@ -35,35 +34,34 @@ export interface ThemePropsReactive<T> {
   builtinThemeOverrides?: ExtractThemeOverrides<T>
 }
 
-export type ExtractThemeVars<T> = T extends Theme<unknown, infer U, unknown>
-  ? unknown extends U // self is undefined, ThemeVars is unknown
-    ? Record<string, unknown>
-    : U
-  : Record<string, unknown>
+export type ExtractThemeVars<T> =
+  T extends Theme<unknown, infer U, unknown>
+    ? unknown extends U // self is undefined, ThemeVars is unknown
+      ? Record<string, unknown>
+      : U
+    : Record<string, unknown>
 
-export type ExtractPeerOverrides<T> = T extends Theme<unknown, unknown, infer V>
-  ? {
-      peers?: {
-        [k in keyof V]?: ExtractThemeOverrides<V[k]>
+export type ExtractPeerOverrides<T> =
+  T extends Theme<unknown, unknown, infer V>
+    ? {
+        peers?: {
+          [k in keyof V]?: ExtractThemeOverrides<V[k]>
+        }
       }
-    }
-  : T
+    : T
 
 // V is peers theme
-export type ExtractMergedPeerOverrides<T> = T extends Theme<
-unknown,
-unknown,
-infer V
->
-  ? {
-      [k in keyof V]?: ExtractPeerOverrides<V[k]>
-    }
-  : T
+export type ExtractMergedPeerOverrides<T> =
+  T extends Theme<unknown, unknown, infer V>
+    ? {
+        [k in keyof V]?: ExtractPeerOverrides<V[k]>
+      }
+    : T
 
 export type ExtractThemeOverrides<T> = Partial<ExtractThemeVars<T>> &
-ExtractPeerOverrides<T> & { common?: ThemeCommonVars }
+  ExtractPeerOverrides<T> & { common?: Partial<ThemeCommonVars> }
 
-export function createTheme<N extends string, T, R> (
+export function createTheme<N extends string, T, R>(
   theme: Theme<N, T, R>
 ): Theme<N, T, R> {
   return theme
@@ -75,16 +73,17 @@ type UseThemeProps<T> = Readonly<{
   builtinThemeOverrides?: ExtractThemeOverrides<T>
 }>
 
-export type MergedTheme<T> = T extends Theme<unknown, infer V, infer W>
-  ? {
-      common: ThemeCommonVars
-      self: V
-      peers: W
-      peerOverrides: ExtractMergedPeerOverrides<T>
-    }
-  : T
+export type MergedTheme<T> =
+  T extends Theme<unknown, infer V, infer W>
+    ? {
+        common: ThemeCommonVars
+        self: V
+        peers: W
+        peerOverrides: ExtractMergedPeerOverrides<T>
+      }
+    : T
 
-function useTheme<N, T, R> (
+function useTheme<N, T, R>(
   resolveId: Exclude<keyof GlobalTheme, 'common' | 'name'>,
   mountId: string,
   style: CNode | undefined,
@@ -117,7 +116,8 @@ function useTheme<N, T, R> (
     }
     if (ssrAdapter) {
       mountStyle()
-    } else {
+    }
+    else {
       onBeforeMount(mountStyle)
     }
   }
@@ -126,10 +126,10 @@ function useTheme<N, T, R> (
     const {
       theme: { common: selfCommon, self, peers = {} } = {},
       themeOverrides: selfOverrides = {} as ExtractThemeOverrides<
-      Theme<N, T, R>
+        Theme<N, T, R>
       >,
       builtinThemeOverrides: builtinOverrides = {} as ExtractThemeOverrides<
-      Theme<N, T, R>
+        Theme<N, T, R>
       >
     } = props
     const { common: selfCommonOverrides, peers: peersOverrides } = selfOverrides

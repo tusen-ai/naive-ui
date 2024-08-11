@@ -1,28 +1,31 @@
 import {
+  type CSSProperties,
+  type PropType,
+  type Ref,
   computed,
   defineComponent,
   h,
   inject,
-  type PropType,
   provide,
-  type Ref,
-  type CSSProperties,
   ref
 } from 'vue'
 import type { TreeNode } from 'treemate'
 import { renderArrow } from '../../popover/src/PopoverBody'
 import { NxScrollbar } from '../../_internal/scrollbar'
+import { modalBodyInjectionKey } from '../../modal/src/interface'
+import { drawerBodyInjectionKey } from '../../drawer/src/interface'
+import { popoverBodyInjectionKey } from '../../popover/src/interface'
 import NDropdownDivider from './DropdownDivider'
-// eslint-disable-next-line import/no-cycle
+
 import NDropdownGroup from './DropdownGroup'
-// eslint-disable-next-line import/no-cycle
+
 import NDropdownOption from './DropdownOption'
 import NDropdownRenderOption from './DropdownRenderOption'
 import {
-  isSubmenuNode,
-  isGroupNode,
   isDividerNode,
-  isRenderNode
+  isGroupNode,
+  isRenderNode,
+  isSubmenuNode
 } from './utils'
 import { dropdownInjectionKey, dropdownMenuInjectionKey } from './context'
 import type {
@@ -31,9 +34,6 @@ import type {
   DropdownOption,
   DropdownRenderOption
 } from './interface'
-import { modalBodyInjectionKey } from '../../modal/src/interface'
-import { drawerBodyInjectionKey } from '../../drawer/src/interface'
-import { popoverBodyInjectionKey } from '../../popover/src/interface'
 
 export interface NDropdownMenuInjection {
   showIconRef: Ref<boolean>
@@ -52,9 +52,9 @@ export default defineComponent({
     },
     tmNodes: {
       type: Array as PropType<
-      Array<
-      TreeNode<DropdownOption, DropdownGroupOption, DropdownIgnoredOption>
-      >
+        Array<
+          TreeNode<DropdownOption, DropdownGroupOption, DropdownIgnoredOption>
+        >
       >,
       default: () => []
     },
@@ -63,8 +63,7 @@ export default defineComponent({
       default: null
     }
   },
-  setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  setup(props) {
     const { renderIconRef, childrenFieldRef } = inject(dropdownInjectionKey)!
     provide(dropdownMenuInjectionKey, {
       showIconRef: computed(() => {
@@ -100,11 +99,12 @@ export default defineComponent({
       bodyRef
     }
   },
-  render () {
+  render() {
     const { parentKey, clsPrefix, scrollable } = this
     const menuOptionsNode = this.tmNodes.map((tmNode) => {
       const { rawNode } = tmNode
-      if (rawNode.show === false) return null
+      if (rawNode.show === false)
+        return null
       if (isRenderNode(rawNode)) {
         return (
           <NDropdownRenderOption

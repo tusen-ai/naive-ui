@@ -40,6 +40,7 @@ default-value-debug.vue
 | filterable | `boolean` | `false` | `remote` 被设定时不生效 |  |
 | filter | `(pattern: string, option: CascaderOption, path: CascaderOption[]) => boolean` | 一个基于字符串的过滤算法 | 过滤选项的函数 |  |
 | filter-menu-props | `HTMLAttributes` | `undefined` | 可过滤菜单的 DOM 属性 | 2.27.0 |
+| get-column-style | `(detail: { level: number }) => string \| object` | `undefined` | 获取列样式的函数，`level` 从 `0` 开始 | 2.38.2 |
 | value-field | `string` | `'value'` | 替代 `CascaderOption` 中的 value 字段名 |  |
 | label-field | `string` | `'label'` | 替代 `CascaderOption` 中的 label 字段名 |  |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |  |
@@ -49,7 +50,9 @@ default-value-debug.vue
 | placeholder | `string` | `'请选择'` | 提示信息 |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 弹出位置 | 2.25.0 |
 | remote | `boolean` | `false` | 是否远程获取数据 |  |
+| render-prefix | `(info: { option: CascaderOption, node: VNode \| null, checked: boolean }) => VNodeChild` | `undefined` | 节点前缀的渲染函数 | 2.38.2 |
 | render-label | `(option: CascaderOption, checked: boolean) => VNodeChild` | `undefined` | Cascader 菜单选项标签渲染函数 | 2.24.0 |
+| render-suffix | `(info: { option: CascaderOption, checked: boolean }) => VNodeChild` | `undefined` | 节点后缀的渲染函数 | 2.38.2 |
 | separator | `string` | `' / '` | 数据分隔符 |  |
 | show | `boolean` | `undefined` | 是否打开菜单 |  |
 | show-path | `boolean` | `true` | 是否在选择器中显示选项路径 |  |

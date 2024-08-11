@@ -1,21 +1,21 @@
-import { computed, type ComputedRef } from 'vue'
-import { type CheckStrategy } from 'treemate'
-import { isBrowser } from '../../_utils'
-import { type Key, type TmNode, type TreeOption } from './interface'
+import { type ComputedRef, computed } from 'vue'
+import type { CheckStrategy } from 'treemate'
 import { happensIn } from 'seemly'
+import { isBrowser } from '../../_utils'
+import type { Key, TmNode, TreeOption } from './interface'
 
-export function useMergedCheckStrategy (props: {
+export function useMergedCheckStrategy(props: {
   leafOnly: boolean
   checkStrategy: CheckStrategy
 }): ComputedRef<CheckStrategy> {
   return computed(() => (props.leafOnly ? 'child' : props.checkStrategy))
 }
 
-export function isNodeDisabled (node: TmNode, disabledField: string): boolean {
+export function isNodeDisabled(node: TmNode, disabledField: string): boolean {
   return !!node.rawNode[disabledField]
 }
 
-function traverse (
+function traverse(
   nodes: TreeOption[] | undefined,
   childrenField: string,
   callback: (node: TreeOption) => void,
@@ -33,7 +33,7 @@ function traverse (
   })
 }
 
-export function keysWithFilter (
+export function keysWithFilter(
   nodes: TreeOption[],
   pattern: string,
   keyField: string,
@@ -56,7 +56,8 @@ export function keysWithFilter (
         for (let i = path.length - 2; i >= 0; --i) {
           if (!keys.has((path[i] as any)[keyField] as Key)) {
             keys.add((path[i] as any)[keyField] as Key)
-          } else {
+          }
+          else {
             return
           }
         }
@@ -75,13 +76,13 @@ export function keysWithFilter (
 const emptyImage: HTMLImageElement | null = null
 if (isBrowser && Image) {
   const emptyImage = new Image()
-  emptyImage.src =
-    'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
+  emptyImage.src
+    = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
 }
 
 export { emptyImage }
 
-export function filterTree (
+export function filterTree(
   tree: TreeOption[],
   filter: (pattern: string, v: TreeOption) => boolean,
   pattern: string,
@@ -98,7 +99,7 @@ export function filterTree (
   const expandedKeys: Key[] = []
   const filteredTree: TreeOption[] = []
   const path: TreeOption[] = []
-  function visit (t: TreeOption[]): void {
+  function visit(t: TreeOption[]): void {
     t.forEach((n) => {
       path.push(n)
       if (filter(pattern, n)) {
@@ -111,7 +112,8 @@ export function filterTree (
             if (visitedTailKeys.has(key)) {
               visitedTailKeys.delete(key)
             }
-          } else {
+          }
+          else {
             break
           }
         }
@@ -124,25 +126,28 @@ export function filterTree (
     })
   }
   visit(tree)
-  function build (t: TreeOption[], sibs: TreeOption[]): void {
+  function build(t: TreeOption[], sibs: TreeOption[]): void {
     t.forEach((n) => {
       const key = (n as any)[keyField] as Key
       const isVisitedTail = visitedTailKeys.has(key)
       const isVisitedNonTail = visitedNonTailKeys.has(key)
-      if (!isVisitedTail && !isVisitedNonTail) return
+      if (!isVisitedTail && !isVisitedNonTail)
+        return
       const children = n[childrenField] as TreeOption[] | undefined
       if (children) {
         if (isVisitedTail) {
           // If it is visited path tail, use origin node
           sibs.push(n)
-        } else {
+        }
+        else {
           // It it is not visited path tail, use cloned node
           expandedKeys.push(key)
           const clonedNode = { ...n, [childrenField]: [] }
           sibs.push(clonedNode)
           build(children, clonedNode[childrenField] as TreeOption[])
         }
-      } else {
+      }
+      else {
         sibs.push(n)
       }
     })
@@ -155,14 +160,16 @@ export function filterTree (
   }
 }
 
-export function treeGetClickTarget (
+export function treeGetClickTarget(
   e: MouseEvent
 ): 'checkbox' | 'switcher' | 'node' {
   if (happensIn(e, 'checkbox')) {
     return 'checkbox'
-  } else if (happensIn(e, 'switcher')) {
+  }
+  else if (happensIn(e, 'switcher')) {
     return 'switcher'
-  } else {
+  }
+  else {
     return 'node'
   }
 }

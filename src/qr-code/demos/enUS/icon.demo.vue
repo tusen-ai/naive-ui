@@ -4,6 +4,16 @@
   You can put some representative icons.
 </markdown>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {}
+  }
+})
+</script>
+
 <template>
   <n-space>
     <n-qr-code
@@ -25,13 +35,3 @@
     />
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {}
-  }
-})
-</script>

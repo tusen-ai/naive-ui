@@ -6,20 +6,12 @@ You can use `override-default-node-click-behavior` prop to override default node
 For example, you can change non-leaf key's default behavior to `'toggleExpand'` to simulate a file selector.
 </markdown>
 
-<template>
-  <n-tree
-    block-line
-    :data="options"
-    :override-default-node-click-behavior="override"
-  />
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { TreeOverrideNodeClickBehavior } from 'naive-ui'
+import type { TreeOverrideNodeClickBehavior } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const override: TreeOverrideNodeClickBehavior = ({ option }) => {
       if (option.children) {
         return 'toggleExpand'
@@ -72,3 +64,11 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-tree
+    block-line
+    :data="options"
+    :override-default-node-click-behavior="override"
+  />
+</template>

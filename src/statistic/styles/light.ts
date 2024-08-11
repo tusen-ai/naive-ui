@@ -1,8 +1,8 @@
 import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
-import { type Theme } from '../../_mixins'
+import type { Theme } from '../../_mixins'
 
-export const self = (vars: ThemeCommonVars) => {
+export function self(vars: ThemeCommonVars) {
   const { textColor2, textColor3, fontSize, fontWeight } = vars
   return {
     labelFontSize: fontSize,

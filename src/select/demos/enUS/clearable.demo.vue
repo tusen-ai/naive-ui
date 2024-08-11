@@ -4,36 +4,11 @@
 Make the select clearable. Remember you can only clear a select that has a value.
 </markdown>
 
-<template>
-  <n-space vertical>
-    <n-select v-model:value="selectedValue" :options="options" clearable />
-    <n-select
-      v-model:value="selectedArray"
-      multiple
-      :options="options"
-      clearable
-    />
-    <n-select
-      v-model:value="selectedValue"
-      :options="options"
-      filterable
-      clearable
-    />
-    <n-select
-      v-model:value="selectedArray"
-      multiple
-      :options="options"
-      filterable
-      clearable
-    />
-  </n-space>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       selectedValue: ref(null),
       selectedArray: ref([]),
@@ -47,7 +22,7 @@ export default defineComponent({
           value: 'song2'
         },
         {
-          label: "You Won't See",
+          label: 'You Won\'t See',
           value: 'song3'
         },
         {
@@ -75,7 +50,7 @@ export default defineComponent({
           value: 'song9'
         },
         {
-          label: "I'm looking through you",
+          label: 'I\'m looking through you',
           value: 'song10'
         },
         {
@@ -91,3 +66,28 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space vertical>
+    <n-select v-model:value="selectedValue" :options="options" clearable />
+    <n-select
+      v-model:value="selectedArray"
+      multiple
+      :options="options"
+      clearable
+    />
+    <n-select
+      v-model:value="selectedValue"
+      :options="options"
+      filterable
+      clearable
+    />
+    <n-select
+      v-model:value="selectedArray"
+      multiple
+      :options="options"
+      filterable
+      clearable
+    />
+  </n-space>
+</template>

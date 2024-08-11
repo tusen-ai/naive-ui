@@ -1,9 +1,10 @@
 import {
-  h,
-  defineComponent,
-  computed,
+  type CSSProperties,
   type PropType,
-  type CSSProperties
+  type VNodeChild,
+  computed,
+  defineComponent,
+  h
 } from 'vue'
 import { getPadding } from 'seemly'
 import { useRtl } from '../../_mixins/use-rtl'
@@ -14,6 +15,7 @@ import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { NBaseClose } from '../../_internal'
 import { cardLight } from '../styles'
 import type { CardTheme } from '../styles'
+import { ensureValidVNode } from '../../_utils/vue/resolve-slot'
 import style from './styles/index.cssr'
 
 export interface CardSegmented {
@@ -23,7 +25,7 @@ export interface CardSegmented {
 }
 
 export const cardBaseProps = {
-  title: String,
+  title: [String, Function] as PropType<string | (() => VNodeChild)>,
   contentClass: String,
   contentStyle: [Object, String] as PropType<CSSProperties | string>,
   headerClass: String,
@@ -52,7 +54,12 @@ export const cardBaseProps = {
   tag: {
     type: String as PropType<keyof HTMLElementTagNameMap>,
     default: 'div'
-  }
+  },
+  cover: Function as PropType<() => VNodeChild>,
+  content: [String, Function] as PropType<string | (() => VNodeChild)>,
+  footer: Function as PropType<() => VNodeChild>,
+  action: Function as PropType<() => VNodeChild>,
+  headerExtra: Function as PropType<() => VNodeChild>
 } as const
 
 export const cardBasePropKeys = keysOf(cardBaseProps)
@@ -67,13 +74,14 @@ export type CardProps = ExtractPublicPropTypes<typeof cardProps>
 export default defineComponent({
   name: 'Card',
   props: cardProps,
-  setup (props) {
+  setup(props) {
     const handleCloseClick = (): void => {
       const { onClose } = props
-      if (onClose) call(onClose)
+      if (onClose)
+        call(onClose)
     }
-    const { inlineThemeDisabled, mergedClsPrefixRef, mergedRtlRef } =
-      useConfig(props)
+    const { inlineThemeDisabled, mergedClsPrefixRef, mergedRtlRef }
+      = useConfig(props)
     const themeRef = useTheme(
       'Card',
       '-card',
@@ -174,7 +182,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const {
       segmented,
       bordered,
@@ -216,31 +224,43 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
         role={this.role}
       >
-        {resolveWrappedSlot(
-          $slots.cover,
-          (children) =>
-            children && (
+        {resolveWrappedSlot($slots.cover, (children) => {
+          const mergedChildren = this.cover
+            ? ensureValidVNode([this.cover()])
+            : children
+          return (
+            mergedChildren && (
               <div class={`${mergedClsPrefix}-card-cover`} role="none">
-                {children}
+                {mergedChildren}
               </div>
             )
-        )}
+          )
+        })}
         {resolveWrappedSlot($slots.header, (children) => {
-          return children || this.title || this.closable ? (
+          const { title } = this
+          const mergedChildren = title
+            ? ensureValidVNode(
+              typeof title === 'function' ? [title()] : [title]
+            )
+            : children
+          return mergedChildren || this.closable ? (
             <div
               class={[`${mergedClsPrefix}-card-header`, this.headerClass]}
               style={this.headerStyle}
+              role="heading"
             >
               <div
                 class={`${mergedClsPrefix}-card-header__main`}
                 role="heading"
               >
-                {children || this.title}
+                {mergedChildren}
               </div>
-              {resolveWrappedSlot(
-                $slots['header-extra'],
-                (children) =>
-                  children && (
+              {resolveWrappedSlot($slots['header-extra'], (children) => {
+                const mergedChildren = this.headerExtra
+                  ? ensureValidVNode([this.headerExtra()])
+                  : children
+                return (
+                  mergedChildren && (
                     <div
                       class={[
                         `${mergedClsPrefix}-card-header__extra`,
@@ -248,56 +268,69 @@ export default defineComponent({
                       ]}
                       style={this.headerExtraStyle}
                     >
-                      {children}
+                      {mergedChildren}
                     </div>
                   )
-              )}
-              {this.closable ? (
+                )
+              })}
+              {this.closable && (
                 <NBaseClose
                   clsPrefix={mergedClsPrefix}
                   class={`${mergedClsPrefix}-card-header__close`}
                   onClick={this.handleCloseClick}
                   absolute
                 />
-              ) : null}
+              )}
             </div>
           ) : null
         })}
-        {resolveWrappedSlot(
-          $slots.default,
-          (children) =>
-            children && (
+        {resolveWrappedSlot($slots.default, (children) => {
+          const { content } = this
+          const mergedChildren = content
+            ? ensureValidVNode(
+              typeof content === 'function' ? [content()] : [content]
+            )
+            : children
+          return (
+            mergedChildren && (
               <div
                 class={[`${mergedClsPrefix}-card__content`, this.contentClass]}
                 style={this.contentStyle}
                 role="none"
               >
-                {children}
+                {mergedChildren}
               </div>
             )
-        )}
-        {resolveWrappedSlot(
-          $slots.footer,
-          (children) =>
-            children && [
+          )
+        })}
+        {resolveWrappedSlot($slots.footer, (children) => {
+          const mergedChildren = this.footer
+            ? ensureValidVNode([this.footer()])
+            : children
+          return (
+            mergedChildren && (
               <div
                 class={[`${mergedClsPrefix}-card__footer`, this.footerClass]}
                 style={this.footerStyle}
                 role="none"
               >
-                {children}
-              </div>
-            ]
-        )}
-        {resolveWrappedSlot(
-          $slots.action,
-          (children) =>
-            children && (
-              <div class={`${mergedClsPrefix}-card__action`} role="none">
-                {children}
+                {mergedChildren}
               </div>
             )
-        )}
+          )
+        })}
+        {resolveWrappedSlot($slots.action, (children) => {
+          const mergedChildren = this.action
+            ? ensureValidVNode([this.action()])
+            : children
+          return (
+            mergedChildren && (
+              <div class={`${mergedClsPrefix}-card__action`} role="none">
+                {mergedChildren}
+              </div>
+            )
+          )
+        })}
       </Component>
     )
   }

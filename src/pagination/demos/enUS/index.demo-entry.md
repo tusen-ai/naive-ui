@@ -58,15 +58,15 @@ page-size-option.vue
 type PaginationRenderLabel = (
   info:
     | {
-        type: 'fast-backward' | 'fast-forward'
-        node: VNode
-        active: boolean
-      }
+      type: 'fast-backward' | 'fast-forward'
+      node: VNode
+      active: boolean
+    }
     | {
-        type: 'page'
-        node: number
-        active: boolean
-      }
+      type: 'page'
+      node: number
+      active: boolean
+    }
 ) => VNodeChild
 ```
 

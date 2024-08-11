@@ -53,6 +53,18 @@ export const enDocRoutes = [
     component: () => import('../pages/docs/ssr/enUS/index.md')
   },
   {
+    path: 'nuxtjs',
+    component: () => import('../pages/docs/nuxtjs/enUS/index.md')
+  },
+  {
+    path: 'vitepress',
+    component: () => import('../pages/docs/vitepress/enUS/index.md')
+  },
+  {
+    path: 'vite-ssge',
+    component: () => import('../pages/docs/vite-ssge/enUS/index.md')
+  },
+  {
     path: 'common-issues',
     component: () => import('../pages/docs/common-issues/enUS/index.md')
   },
@@ -132,6 +144,18 @@ export const zhDocRoutes = [
   {
     path: 'ssr',
     component: () => import('../pages/docs/ssr/zhCN/index.md')
+  },
+  {
+    path: 'nuxtjs',
+    component: () => import('../pages/docs/nuxtjs/zhCN/index.md')
+  },
+  {
+    path: 'vitepress',
+    component: () => import('../pages/docs/vitepress/zhCN/index.md')
+  },
+  {
+    path: 'vite-ssge',
+    component: () => import('../pages/docs/vite-ssge/zhCN/index.md')
   },
   {
     path: 'common-issues',
@@ -553,6 +577,11 @@ export const enComponentRoutes = [
     component: () => import('../../src/split/demos/enUS/index.demo-entry.md')
   },
   {
+    path: 'infinite-scroll',
+    component: () =>
+      import('../../src/infinite-scroll/demos/enUS/index.demo-entry.md')
+  },
+  {
     path: 'float-button',
     component: () =>
       import('../../src/float-button/demos/enUS/index.demo-entry.md')
@@ -950,6 +979,11 @@ export const zhComponentRoutes = [
   {
     path: 'split',
     component: () => import('../../src/split/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'infinite-scroll',
+    component: () =>
+      import('../../src/infinite-scroll/demos/zhCN/index.demo-entry.md')
   },
   {
     path: 'float-button',

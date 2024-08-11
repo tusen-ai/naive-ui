@@ -3,6 +3,7 @@ import type { ThemeProps } from '../../_mixins'
 import { useTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
 import type { ImageTheme } from '../styles'
+import type { ImageRenderToolbar } from './public-types'
 
 export interface MoveStrategy {
   moveVerticalDirection: 'verticalTop' | 'verticalBottom'
@@ -16,7 +17,8 @@ export const imagePreviewSharedProps = {
   onPreviewPrev: Function as PropType<() => void>,
   onPreviewNext: Function as PropType<() => void>,
   showToolbar: { type: Boolean, default: true },
-  showToolbarTooltip: Boolean
+  showToolbarTooltip: Boolean,
+  renderToolbar: Function as PropType<ImageRenderToolbar>
 }
 
 export interface ImageContext {

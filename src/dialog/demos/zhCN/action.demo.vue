@@ -4,23 +4,15 @@
 有的时候你想自定义 `action` 和 `content`。
 </markdown>
 
-<template>
-  <n-space>
-    <n-button @click="handleButtonClick">
-      使用渲染函数
-    </n-button>
-  </n-space>
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useDialog } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const dialog = useDialog()
     return {
-      handleButtonClick () {
+      handleButtonClick() {
         dialog.warning({
           title: '使用渲染函数',
           content: () => 'Content',
@@ -31,3 +23,11 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space>
+    <n-button @click="handleButtonClick">
+      使用渲染函数
+    </n-button>
+  </n-space>
+</template>

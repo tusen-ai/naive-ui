@@ -1,11 +1,11 @@
 import {
-  h,
-  defineComponent,
   TransitionGroup,
   computed,
+  defineComponent,
+  h,
   ref,
-  watch,
-  toRef
+  toRef,
+  watch
 } from 'vue'
 import NFadeInExpandTransition from '../../fade-in-expand-transition'
 import { useStyle } from '../../../_mixins'
@@ -32,13 +32,15 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
+  setup(props) {
     useStyle('-base-slot-machine', style, toRef(props, 'clsPrefix'))
     const oldValueRef = ref<number>()
     const newValueRef = ref<number>()
     const numbersRef = computed(() => {
-      if (typeof props.value === 'string') return []
-      if (props.value < 1) return [0]
+      if (typeof props.value === 'string')
+        return []
+      if (props.value < 1)
+        return [0]
       const numbers: number[] = []
       let value = props.value
       if (props.max !== undefined) {
@@ -56,11 +58,13 @@ export default defineComponent({
       if (typeof value === 'string') {
         newValueRef.value = undefined
         oldValueRef.value = undefined
-      } else {
+      }
+      else {
         if (typeof oldValue === 'string') {
           newValueRef.value = value
           oldValueRef.value = undefined
-        } else {
+        }
+        else {
           newValueRef.value = value
           oldValueRef.value = oldValue
         }

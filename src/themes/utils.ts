@@ -1,14 +1,14 @@
-import { type GlobalTheme } from '../config-provider'
+import type { GlobalTheme } from '../config-provider'
 
 type ComponentKey = Exclude<keyof GlobalTheme, 'name'>
 type ComponentThemes = Array<Exclude<GlobalTheme[ComponentKey], undefined>>
 
-export function createTheme (
+export function createTheme(
   name: string,
   componentThemes: ComponentThemes
 ): GlobalTheme
-export function createTheme (componentThemes: ComponentThemes): GlobalTheme
-export function createTheme (
+export function createTheme(componentThemes: ComponentThemes): GlobalTheme
+export function createTheme(
   name: string | ComponentThemes,
   componentThemes?: ComponentThemes
 ): GlobalTheme {
@@ -22,7 +22,8 @@ export function createTheme (
         theme[cTheme.name] = cTheme as any
       }
     }
-  } else {
+  }
+  else {
     for (const cTheme of name) {
       theme[cTheme.name] = cTheme as any
     }

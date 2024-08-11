@@ -1,4 +1,4 @@
-import type { PropType, VNodeChild } from 'vue'
+import type { CSSProperties, PropType, VNodeChild } from 'vue'
 import type { ButtonProps } from '../../button'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { keysOf } from '../../_utils'
@@ -30,6 +30,12 @@ const dialogProps = {
   loading: Boolean,
   bordered: Boolean,
   iconPlacement: String as PropType<IconPlacement>,
+  titleClass: [String, Array] as PropType<string | Array<string | undefined>>,
+  titleStyle: [String, Object] as PropType<string | CSSProperties>,
+  contentClass: [String, Array] as PropType<string | Array<string | undefined>>,
+  contentStyle: [String, Object] as PropType<string | CSSProperties>,
+  actionClass: [String, Array] as PropType<string | Array<string | undefined>>,
+  actionStyle: [String, Object] as PropType<string | CSSProperties>,
   onPositiveClick: Function as PropType<(e: MouseEvent) => void>,
   onNegativeClick: Function as PropType<(e: MouseEvent) => void>,
   onClose: Function as PropType<() => void>

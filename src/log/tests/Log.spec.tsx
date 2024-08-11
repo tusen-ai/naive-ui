@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { h, defineComponent, ref, watch } from 'vue'
+import { defineComponent, h, ref, watch } from 'vue'
 import { NLog } from '../index'
 
 describe('n-log', () => {
@@ -92,7 +92,7 @@ describe('n-log', () => {
     const onReachBottom = jest.fn()
     const wrapper = mount(
       defineComponent({
-        setup () {
+        setup() {
           const logInstRef = ref<any>(null)
           watch(logInstRef, (value) => {
             if (value) {

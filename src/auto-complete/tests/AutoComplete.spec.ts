@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { NAutoComplete, type AutoCompleteProps } from '../index'
+import { type AutoCompleteProps, NAutoComplete } from '../index'
 
 describe('n-auto-complete', () => {
   it('should work with import on demand', () => {
@@ -114,10 +114,7 @@ describe('n-auto-complete', () => {
     const wrapper = mount(NAutoComplete)
     await wrapper.setProps({
       getShow: (value: string | null) => {
-        if (value && value.endsWith('@')) {
-          return true
-        }
-        return false
+        return !!value?.endsWith('@')
       },
       options
     })

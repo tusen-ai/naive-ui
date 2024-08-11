@@ -4,22 +4,12 @@
 在 `onLoad` 回调中更改数据。
 </markdown>
 
-<template>
-  <n-data-table
-    :columns="columns"
-    :data="data"
-    :cascade="false"
-    allow-checking-not-loaded
-    @load="onLoad"
-  />
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { DataTableColumns } from 'naive-ui'
+import type { DataTableColumns } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const columns: DataTableColumns = [
       { type: 'selection' },
       { key: 'example', title: 'Example' }
@@ -32,10 +22,10 @@ export default defineComponent({
     return {
       columns,
       data: dataRef,
-      onLoad (row: Record<string, unknown>) {
+      onLoad(row: Record<string, unknown>) {
         return new Promise<void>((resolve) => {
           setTimeout(() => {
-            row.children = [{ key: row.key + '-1', example: row.key + '-1' }]
+            row.children = [{ key: `${row.key}-1`, example: `${row.key}-1` }]
             resolve()
           }, 1000)
         })
@@ -44,3 +34,13 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-data-table
+    :columns="columns"
+    :data="data"
+    :cascade="false"
+    allow-checking-not-loaded
+    @load="onLoad"
+  />
+</template>

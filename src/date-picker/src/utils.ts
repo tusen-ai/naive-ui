@@ -1,35 +1,36 @@
 import {
-  isValid,
-  isSameDay,
-  getDate,
-  getMonth,
-  getYear,
-  isSameMonth,
-  isSameYear,
-  getTime,
-  startOfMonth,
   addDays,
   addMonths,
-  addYears,
   addQuarters,
-  getDay,
-  parse,
+  addYears,
   format,
-  startOfYear,
+  getDate,
+  getDay,
+  getMonth,
   getQuarter,
+  getTime,
+  getYear,
+  isSameDay,
+  isSameMonth,
   isSameQuarter,
-  isSameWeek
+  isSameWeek,
+  isSameYear,
+  isValid,
+  parse,
+  startOfMonth,
+  startOfYear
 } from 'date-fns/esm'
 import type { NDateLocale } from '../../locales'
 import { START_YEAR } from './config'
 import type { FirstDayOfWeek, Value } from './interface'
 
-function getDerivedTimeFromKeyboardEvent (
+function getDerivedTimeFromKeyboardEvent(
   prevValue: number | null,
   event: KeyboardEvent
 ): number {
   const now = getTime(Date.now())
-  if (typeof prevValue !== 'number') return now
+  if (typeof prevValue !== 'number')
+    return now
   switch (event.key) {
     case 'ArrowUp':
       return getTime(addDays(prevValue, -7))
@@ -50,7 +51,7 @@ const matcherMap = {
   quarter: isSameQuarter
 } as const
 
-function makeWeekMatcher (firstDayOfWeek: FirstDayOfWeek) {
+function makeWeekMatcher(firstDayOfWeek: FirstDayOfWeek) {
   return (sourceTime: number, patternTime: number | Date) => {
     // date-fns: 0 - Sunday
     // naive-ui: 0 - Monday
@@ -59,25 +60,25 @@ function makeWeekMatcher (firstDayOfWeek: FirstDayOfWeek) {
   }
 }
 
-function matchDate (
+function matchDate(
   sourceTime: number,
   patternTime: number | Date,
   type: 'date' | 'month' | 'year' | 'quarter'
 ): boolean
-function matchDate (
+function matchDate(
   sourceTime: number,
   patternTime: number | Date,
   type: 'week',
   firstDayOfWeek: FirstDayOfWeek
 ): boolean
-function matchDate (
+function matchDate(
   sourceTime: number,
   patternTime: number | Date,
   type: 'date' | 'month' | 'year' | 'quarter' | 'week',
   firstDayOfWeek: FirstDayOfWeek = 0
 ): boolean {
-  const matcher =
-    type === 'week' ? makeWeekMatcher(firstDayOfWeek) : matcherMap[type]
+  const matcher
+    = type === 'week' ? makeWeekMatcher(firstDayOfWeek) : matcherMap[type]
   return matcher(sourceTime, patternTime)
 }
 
@@ -133,7 +134,7 @@ export interface QuarterItem {
   ts: number
 }
 
-function dateOrWeekItem (
+function dateOrWeekItem(
   time: number,
   monthTs: number,
   valueTs: number | [number, number] | null,
@@ -143,14 +144,15 @@ function dateOrWeekItem (
 ): DateItem {
   if (mode === 'date') {
     return dateItem(time, monthTs, valueTs, currentTs)
-  } else {
+  }
+  else {
     return weekItem(time, monthTs, valueTs, currentTs, firstDayOfWeek)
   }
 }
 
 // date item's valueTs can be a tuple since two date may show in one panel, so
 // any matched value would make it shown as selected
-function dateItem (
+function dateItem(
   time: number,
   monthTs: number,
   valueTs: number | [number, number] | null,
@@ -163,14 +165,16 @@ function dateItem (
     if (valueTs[0] < time && time < valueTs[1]) {
       inSpan = true
     }
-    if (matchDate(valueTs[0], time, 'date')) startOfSpan = true
-    if (matchDate(valueTs[1], time, 'date')) endOfSpan = true
+    if (matchDate(valueTs[0], time, 'date'))
+      startOfSpan = true
+    if (matchDate(valueTs[1], time, 'date'))
+      endOfSpan = true
   }
-  const selected =
-    valueTs !== null &&
-    (Array.isArray(valueTs)
-      ? matchDate(valueTs[0], time, 'date') ||
-        matchDate(valueTs[1], time, 'date')
+  const selected
+    = valueTs !== null
+    && (Array.isArray(valueTs)
+      ? matchDate(valueTs[0], time, 'date')
+      || matchDate(valueTs[1], time, 'date')
       : matchDate(valueTs, time, 'date'))
   return {
     type: 'date',
@@ -190,34 +194,34 @@ function dateItem (
   }
 }
 
-function getMonthString (
+function getMonthString(
   month: number,
   monthFormat: string,
   locale: NDateLocale['locale']
 ): string {
-  const date = Date.UTC(2000, month, 1)
+  const date = new Date(2000, month, 1).getTime()
   return format(date, monthFormat, { locale })
 }
 
-function getYearString (
+function getYearString(
   year: number,
   yearFormat: string,
   locale: NDateLocale['locale']
 ): string {
-  const date = Date.UTC(year, 1, 1)
+  const date = new Date(year, 1, 1).getTime()
   return format(date, yearFormat, { locale })
 }
 
-function getQuarterString (
+function getQuarterString(
   quarter: number,
   quarterFormat: string,
   locale: NDateLocale['locale']
 ): string {
-  const date = Date.UTC(2000, quarter * 3 - 2, 1)
+  const date = new Date(2000, quarter * 3 - 2, 1).getTime()
   return format(date, quarterFormat, { locale })
 }
 
-function weekItem (
+function weekItem(
   time: number,
   monthTs: number,
   valueTs: number | [number, number] | null,
@@ -231,14 +235,16 @@ function weekItem (
     if (valueTs[0] < time && time < valueTs[1]) {
       inSpan = true
     }
-    if (matchDate(valueTs[0], time, 'week', firstDayOfWeek)) startOfSpan = true
-    if (matchDate(valueTs[1], time, 'week', firstDayOfWeek)) endOfSpan = true
+    if (matchDate(valueTs[0], time, 'week', firstDayOfWeek))
+      startOfSpan = true
+    if (matchDate(valueTs[1], time, 'week', firstDayOfWeek))
+      endOfSpan = true
   }
-  const inSelectedWeek =
-    valueTs !== null &&
-    (Array.isArray(valueTs)
-      ? matchDate(valueTs[0], time, 'week', firstDayOfWeek) ||
-        matchDate(valueTs[1], time, 'week', firstDayOfWeek)
+  const inSelectedWeek
+    = valueTs !== null
+    && (Array.isArray(valueTs)
+      ? matchDate(valueTs[0], time, 'week', firstDayOfWeek)
+      || matchDate(valueTs[1], time, 'week', firstDayOfWeek)
       : matchDate(valueTs, time, 'week', firstDayOfWeek))
   return {
     type: 'date',
@@ -258,7 +264,7 @@ function weekItem (
   }
 }
 
-function monthItem (
+function monthItem(
   monthTs: number,
   valueTs: number | null,
   currentTs: number,
@@ -281,7 +287,7 @@ function monthItem (
   }
 }
 
-function yearItem (
+function yearItem(
   yearTs: number,
   valueTs: number | null,
   currentTs: number,
@@ -303,7 +309,7 @@ function yearItem (
   }
 }
 
-function quarterItem (
+function quarterItem(
   quarterTs: number,
   valueTs: number | null,
   currentTs: number,
@@ -330,7 +336,7 @@ function quarterItem (
  * Given time to display calendar, given the selected time, given current time,
  * return the date array of display time's month.
  */
-function dateArray (
+function dateArray(
   monthTs: number,
   valueTs: number | [number, number] | null,
   currentTs: number,
@@ -347,8 +353,8 @@ function dateArray (
   const calendarDays: DateItem[] = []
   let protectLastMonthDateIsShownFlag = !strip
   while (
-    getDay(lastMonthIterator) !== startDay ||
-    protectLastMonthDateIsShownFlag
+    getDay(lastMonthIterator) !== startDay
+    || protectLastMonthDateIsShownFlag
   ) {
     calendarDays.unshift(
       dateOrWeekItem(
@@ -399,7 +405,7 @@ function dateArray (
   return calendarDays
 }
 
-function monthArray (
+function monthArray(
   yearAnchorTs: number,
   valueTs: number | null,
   currentTs: number,
@@ -417,7 +423,7 @@ function monthArray (
   return calendarMonths
 }
 
-function quarterArray (
+function quarterArray(
   yearAnchorTs: number,
   valueTs: number | null,
   currentTs: number,
@@ -440,7 +446,7 @@ function quarterArray (
   return calendarQuarters
 }
 
-function yearArray (
+function yearArray(
   valueTs: number | null,
   currentTs: number,
   format: {
@@ -460,7 +466,7 @@ function yearArray (
   return calendarYears
 }
 
-function strictParse (
+function strictParse(
   string: string,
   pattern: string,
   backup: Date,
@@ -469,18 +475,20 @@ function strictParse (
   }
 ): Date {
   const result = parse(string, pattern, backup, option)
-  if (!isValid(result)) return result
-  else if (format(result, pattern, option) === string) return result
-  else return new Date(NaN)
+  if (!isValid(result))
+    return result
+  else if (format(result, pattern, option) === string)
+    return result
+  else return new Date(Number.NaN)
 }
 
-function getDefaultTime (timeValue: string | undefined):
-| {
-  hours: number
-  minutes: number
-  seconds: number
-}
-| undefined {
+function getDefaultTime(timeValue: string | undefined):
+  | {
+    hours: number
+    minutes: number
+    seconds: number
+  }
+  | undefined {
   if (timeValue === undefined) {
     return undefined
   }
@@ -495,7 +503,7 @@ function getDefaultTime (timeValue: string | undefined):
   }
 }
 
-function pluckValueFromRange (
+function pluckValueFromRange(
   value: Value | null,
   type: 'start' | 'end'
 ): number | null {

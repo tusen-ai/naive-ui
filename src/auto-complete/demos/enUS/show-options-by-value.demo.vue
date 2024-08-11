@@ -4,20 +4,11 @@
 Your can determine is whether to show menu based on value when it is focused.
 </markdown>
 
-<template>
-  <n-auto-complete
-    v-model:value="value"
-    :options="options"
-    placeholder="Input 'a' to show menu"
-    :get-show="getShow"
-  />
-</template>
-
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const valueRef = ref('')
     return {
       value: valueRef,
@@ -40,3 +31,12 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-auto-complete
+    v-model:value="value"
+    :options="options"
+    placeholder="Input 'a' to show menu"
+    :get-show="getShow"
+  />
+</template>

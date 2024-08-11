@@ -1,4 +1,4 @@
-import { type TreeMateOptions } from 'treemate'
+import type { TreeMateOptions } from 'treemate'
 import type {
   SelectBaseOption,
   SelectGroupOption,
@@ -7,65 +7,67 @@ import type {
   SelectOption
 } from './interface'
 
-export function getIsGroup (option: SelectMixedOption): boolean {
+export function getIsGroup(option: SelectMixedOption): boolean {
   return option.type === 'group'
 }
 
-export function getIgnored (option: SelectMixedOption): boolean {
+export function getIgnored(option: SelectMixedOption): boolean {
   return option.type === 'ignored'
 }
 
-export function patternMatched (pattern: string, value: string): boolean {
+export function patternMatched(pattern: string, value: string): boolean {
   try {
     return !!(
       1 + value.toString().toLowerCase().indexOf(pattern.trim().toLowerCase())
     )
-  } catch (err) {
+  }
+  catch {
     return false
   }
 }
 
-export function createTmOptions (
+export function createTmOptions(
   valueField: string,
   childrenField: string
 ): TreeMateOptions<SelectBaseOption, SelectGroupOption, SelectIgnoredOption> {
   const options: TreeMateOptions<
-  SelectBaseOption,
-  SelectGroupOption,
-  SelectIgnoredOption
+    SelectBaseOption,
+    SelectGroupOption,
+    SelectIgnoredOption
   > = {
     getIsGroup,
     getIgnored,
-    getKey (option: SelectMixedOption): string | number {
+    getKey(option: SelectMixedOption): string | number {
       if (getIsGroup(option)) {
         return (
-          ((option as SelectGroupOption).name as any) ||
-          (option as SelectGroupOption).key ||
-          'key-required'
+          ((option as SelectGroupOption).name as any)
+          || (option as SelectGroupOption).key
+          || 'key-required'
         )
       }
       // Required for non-custom label & value field
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       return (option as SelectBaseOption | SelectIgnoredOption)[
         valueField
       ] as NonNullable<SelectOption['value']>
     },
-    getChildren (option) {
+    getChildren(option) {
       return option[childrenField] as SelectBaseOption[]
     }
   }
   return options
 }
 
-export function filterOptions (
+export function filterOptions(
   originalOpts: SelectMixedOption[],
   filter: (pattern: string, option: SelectBaseOption) => boolean,
   pattern: string,
   childrenField: string
 ): SelectMixedOption[] {
-  if (!filter) return originalOpts
-  function traverse (options: SelectMixedOption[]): SelectMixedOption[] {
-    if (!Array.isArray(options)) return []
+  if (!filter)
+    return originalOpts
+  function traverse(options: SelectMixedOption[]): SelectMixedOption[] {
+    if (!Array.isArray(options))
+      return []
     const filteredOptions: SelectMixedOption[] = []
     for (const option of options) {
       if (getIsGroup(option)) {
@@ -77,9 +79,11 @@ export function filterOptions (
             })
           )
         }
-      } else if (getIgnored(option)) {
+      }
+      else if (getIgnored(option)) {
         continue
-      } else if (filter(pattern, option as SelectBaseOption)) {
+      }
+      else if (filter(pattern, option as SelectBaseOption)) {
         filteredOptions.push(option)
       }
     }
@@ -88,7 +92,7 @@ export function filterOptions (
   return traverse(originalOpts)
 }
 
-export function createValOptMap (
+export function createValOptMap(
   options: SelectMixedOption[],
   valueField: string,
   childrenField: string
@@ -100,13 +104,14 @@ export function createValOptMap (
         (selectGroupOption: SelectBaseOption) => {
           valOptMap.set(
             selectGroupOption[valueField] as NonNullable<
-            SelectBaseOption['value']
+              SelectBaseOption['value']
             >,
             selectGroupOption
           )
         }
       )
-    } else {
+    }
+    else {
       valOptMap.set(
         option[valueField] as NonNullable<SelectBaseOption['value']>,
         option as SelectBaseOption

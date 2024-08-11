@@ -50,8 +50,8 @@ export default c([
         color .3s var(--n-bezier),
         background-color .3s var(--n-bezier);
     `)
-  ]), ({ props }) => {
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+  ]),
+  ({ props }) => {
     const codeClass = `${props.bPrefix}code`
     return [
       `${codeClass} .hljs-comment,

@@ -122,10 +122,10 @@ override-click-behavior.vue
 ```ts
 interface ScrollTo {
   (x: number, y: number): void
-  (options: { left?: number; top?: number; debounce?: boolean }): void
-  (options: { index: number; debounce?: boolean }): void
-  (options: { key: string | number; debounce?: boolean }): void
-  (options: { position: 'top' | 'bottom'; debounce?: boolean }): void
+  (options: { left?: number, top?: number, debounce?: boolean }): void
+  (options: { index: number, debounce?: boolean }): void
+  (options: { key: string | number, debounce?: boolean }): void
+  (options: { position: 'top' | 'bottom', debounce?: boolean }): void
 }
 ```
 

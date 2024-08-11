@@ -4,10 +4,6 @@
 通过设定 `column.ellipsis` 省略单元格内容。
 </markdown>
 
-<template>
-  <n-data-table :columns="columns" :data="data" :pagination="pagination" />
-</template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
 
@@ -59,7 +55,7 @@ const data = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       data,
       columns,
@@ -68,3 +64,7 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-data-table :columns="columns" :data="data" :pagination="pagination" />
+</template>

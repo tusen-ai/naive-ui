@@ -5,7 +5,7 @@
 The element to collect and validate data.
 
 <n-alert type="warning" title="Caveat" :bordered="false">
-  If you want to apply required rule for a form item with number typed value, you need to set <n-text code>`type: number`</n-text> in the rule object.
+  If you want to apply required rule for a form item with number typed value, you need to set <n-text code>`type: 'number'`</n-text> in the rule object.
 </n-alert>
 
 ## Demos
@@ -25,6 +25,7 @@ show-label.vue
 partially-apply-rules.vue
 custom-messages.vue
 dynamic.vue
+feedback-style.vue
 ```
 
 ## API
@@ -53,14 +54,16 @@ dynamic.vue
   The follow table doesn't demostrate all props of rules. If you want to know all the usages, please see <n-a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</n-a>.
 </n-alert>
 
-| Property | Type | Description | Version |
-| --- | --- | --- | --- |
-| asyncValidator | `(rule: FormItemRule, value: any, callback: (error?: Error) => void) => void` | Asynchronous validation in the form of a callback. |  |
-| message | `string` | Text to show when validation fails. |  |
-| renderMessage | `() => VNodeChild` | Render function or message. | 2.29.1 |
-| required | `boolean` | Is it required. |  |
-| trigger | `string \| Array<string>` | Trigger type. |  |
-| validator | `(rule: FormItemRule, value: any) => boolean \| Error` | Validation rule. |  |
+| Property | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| asyncValidator | `(rule: FormItemRule, value: any, callback: (error?: Error) => void) => void` | `undefined` | Asynchronous validation in the form of a callback. |  |
+| key | `string` | `undefined` | Unique key of this rule, which can be used to apply partial rules. See [Apply partial rules](form#partially-apply-rules.vue) example. |  |
+| level | `'error'` \| `'warning'` | `undefined` | Validation level. If there are already errors, `'warning'` level validation would be skipped. |  |
+| message | `string` | `undefined` | Text to show when validation fails. |  |
+| renderMessage | `() => VNodeChild` | `undefined` | Render function or message. | 2.29.1 |
+| required | `boolean` | `undefined` | Is it required. |  |
+| trigger | `string \| Array<string>` | `undefined` | Trigger type. |  |
+| validator | `(rule: FormItemRule, value: any) => boolean \| Error` | `undefined` | Validation rule. |  |
 
 #### FormValidateMessages Type
 
@@ -73,6 +76,8 @@ dynamic.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | feedback | `string` | `undefined` | The feedback message of the form item. If set, it will replace any result of rule-based validation. |  |
+| feedback-class | `string` | `undefined` | Feedback check vertical display positioning | 2.38.2 |
+| feedback-style | `string \| object` | `undefined` | Feedback check horizontal display positioning | 2.38.2 |
 | first | `boolean` | `false` | Whether to only show the first validation error message. |  |
 | ignore-path-change | `boolean` | `false` | Usually, changing `path` will cause a re-render and naive-ui will clear the validation result. Setting `ignore-path-change` to `true` will disable that behavior. |  |
 | label | `string` | `undefined` | Label. |  |

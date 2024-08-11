@@ -24,10 +24,10 @@ import { useNotification } from 'naive-ui'
 
 // content
 export default defineComponent({
-  setup () {
+  setup() {
     const notification = useNotification()
     return {
-      warning () {
+      warning() {
         notification.warning({
           content: '...'
         })

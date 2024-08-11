@@ -1,33 +1,33 @@
 import {
-  h,
-  defineComponent,
-  computed,
-  type PropType,
   type CSSProperties,
-  ref,
+  type PropType,
   type Ref,
+  computed,
+  defineComponent,
+  h,
   provide,
+  ref,
   toRef,
   watchEffect
 } from 'vue'
+import { getMargin } from 'seemly'
 import { useRtl } from '../../_mixins/use-rtl'
 import { NBaseClose } from '../../_internal/close'
-import { useConfig, useThemeClass, useTheme } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
-  createKey,
   call,
-  createInjectionKey,
   color2Class,
+  createInjectionKey,
+  createKey,
   resolveWrappedSlot,
   warnOnce
 } from '../../_utils'
-import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { tagLight } from '../styles'
 import type { TagTheme } from '../styles'
 import commonProps from './common-props'
 import style from './styles/index.cssr'
-import { getMargin } from 'seemly'
 
 export interface TagPublicMethods {
   setTextContent: (textContent: string) => void
@@ -76,7 +76,7 @@ export type TagProps = ExtractPublicPropTypes<typeof tagProps>
 export default defineComponent({
   name: 'Tag',
   props: tagProps,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.onCheckedChange !== undefined) {
@@ -105,7 +105,7 @@ export default defineComponent({
     provide(tagInjectionKey, {
       roundRef: toRef(props, 'round')
     })
-    function handleClick (e: MouseEvent): void {
+    function handleClick(): void {
       if (!props.disabled) {
         if (props.checkable) {
           const {
@@ -114,26 +114,31 @@ export default defineComponent({
             onUpdateChecked,
             'onUpdate:checked': _onUpdateChecked
           } = props
-          if (onUpdateChecked) onUpdateChecked(!checked)
-          if (_onUpdateChecked) _onUpdateChecked(!checked)
+          if (onUpdateChecked)
+            onUpdateChecked(!checked)
+          if (_onUpdateChecked)
+            _onUpdateChecked(!checked)
           // deprecated
-          if (onCheckedChange) onCheckedChange(!checked)
+          if (onCheckedChange)
+            onCheckedChange(!checked)
         }
       }
     }
-    function handleCloseClick (e: MouseEvent): void {
+    function handleCloseClick(e: MouseEvent): void {
       if (!props.triggerClickOnClose) {
         e.stopPropagation()
       }
       if (!props.disabled) {
         const { onClose } = props
-        if (onClose) call(onClose, e)
+        if (onClose)
+          call(onClose, e)
       }
     }
     const tagPublicMethods: TagPublicMethods = {
-      setTextContent (textContent: string) {
+      setTextContent(textContent: string) {
         const { value } = contentRef
-        if (value) value.textContent = textContent
+        if (value)
+          value.textContent = textContent
       }
     }
     const rtlEnabledRef = useRtl('Tag', mergedRtlRef, mergedClsPrefixRef)
@@ -248,7 +253,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       rtlEnabled,
@@ -261,14 +266,14 @@ export default defineComponent({
     onRender?.()
     const avatarNode = resolveWrappedSlot(
       $slots.avatar,
-      (children) =>
+      children =>
         children && (
           <div class={`${mergedClsPrefix}-tag__avatar`}>{children}</div>
         )
     )
     const iconNode = resolveWrappedSlot(
       $slots.icon,
-      (children) =>
+      children =>
         children && <div class={`${mergedClsPrefix}-tag__icon`}>{children}</div>
     )
     return (

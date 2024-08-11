@@ -64,8 +64,7 @@ export default cB('alert', `
     cE('content', {
       color: 'var(--n-content-text-color)'
     })
-  ]
-  ),
+  ]),
   fadeInHeightExpandTransition({
     originalTransition: 'transform .3s var(--n-bezier)',
     enterToProps: {

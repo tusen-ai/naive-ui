@@ -4,35 +4,16 @@
 Maximum selected options to display. This can be a fixed number or the string `responsive` to set a responsive max count.
 </markdown>
 
-<template>
-  <n-space vertical>
-    <n-select
-      v-model:value="value"
-      placeholder="maxTagCount = responsive"
-      multiple
-      :options="options"
-      max-tag-count="responsive"
-    />
-    <n-select
-      v-model:value="value"
-      placeholder="maxTagCount = 3"
-      multiple
-      :options="options"
-      :max-tag-count="3"
-    />
-  </n-space>
-</template>
-
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
-  setup () {
+  setup() {
     return {
       value: ref(null),
       options: [
         {
-          label: "Everybody's Got Something to Hide Except Me and My Monkey",
+          label: 'Everybody\'s Got Something to Hide Except Me and My Monkey',
           value: 'song0',
           disabled: true
         },
@@ -45,7 +26,7 @@ export default defineComponent({
           value: 'song2'
         },
         {
-          label: "You Won't See",
+          label: 'You Won\'t See',
           value: 'song3',
           disabled: true
         },
@@ -75,7 +56,7 @@ export default defineComponent({
           value: 'song9'
         },
         {
-          label: "I'm looking through you",
+          label: 'I\'m looking through you',
           value: 'song10'
         },
         {
@@ -91,3 +72,22 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space vertical>
+    <n-select
+      v-model:value="value"
+      placeholder="maxTagCount = responsive"
+      multiple
+      :options="options"
+      max-tag-count="responsive"
+    />
+    <n-select
+      v-model:value="value"
+      placeholder="maxTagCount = 3"
+      multiple
+      :options="options"
+      :max-tag-count="3"
+    />
+  </n-space>
+</template>

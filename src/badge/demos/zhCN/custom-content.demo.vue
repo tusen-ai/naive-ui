@@ -4,6 +4,19 @@
 在里面插入一些自定义内容。
 </markdown>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { LockClosedOutline } from '@vicons/ionicons5'
+
+export default defineComponent({
+  setup() {
+    return {
+      LockClosedOutline
+    }
+  }
+})
+</script>
+
 <template>
   <n-space :size="24" align="center">
     <n-badge value="新">
@@ -20,16 +33,3 @@
     </n-badge>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { LockClosedOutline } from '@vicons/ionicons5'
-
-export default defineComponent({
-  setup () {
-    return {
-      LockClosedOutline
-    }
-  }
-})
-</script>

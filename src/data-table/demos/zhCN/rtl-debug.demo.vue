@@ -2,39 +2,16 @@
 # Rtl Debug
 </markdown>
 
-<template>
-  <n-space vertical :size="12">
-    <n-config-provider :rtl="rtlEnabled ? rtlStyles : undefined">
-      <div :dir="rtlEnabled ? 'rtl' : 'ltr'">
-        <n-button @click="filterAddress">
-          Filter Address(Use Value 'London')
-        </n-button>
-        <n-button @click="unfilterAddress">
-          Clear Address Filters
-        </n-button>
-      </div>
-      <n-space><n-switch v-model:value="rtlEnabled" />Rtl</n-space>
-      {{ rtlEnabled }}
-      <n-data-table
-        :columns="columns"
-        :data="data"
-        :pagination="pagination"
-        @update:filters="handleUpdateFilter"
-      />
-    </n-config-provider>
-  </n-space>
-</template>
-
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
-import {
-  DataTableColumns,
+import type {
   DataTableBaseColumn,
-  DataTableFilterState,
-  unstableDataTableRtl
+  DataTableColumns,
+  DataTableFilterState
 } from 'naive-ui'
+import { unstableDataTableRtl } from 'naive-ui'
 
-type Row = {
+interface Row {
   key: number
   name: string
   age: number
@@ -111,7 +88,7 @@ const data = [
 ]
 
 export default defineComponent({
-  setup () {
+  setup() {
     const addressColumn = reactive<DataTableBaseColumn<Row>>({
       title: 'Address',
       key: 'address',
@@ -128,7 +105,7 @@ export default defineComponent({
           value: 'New York'
         }
       ],
-      filter (value, row) {
+      filter(value, row) {
         return !!~row.address.indexOf(value.toString())
       }
     })
@@ -137,14 +114,14 @@ export default defineComponent({
       {
         title: 'Name',
         key: 'name',
-        sorter (rowA, rowB) {
+        sorter(rowA, rowB) {
           return rowA.name.length - rowB.name.length
         }
       },
       {
         title: 'Age',
         key: 'age',
-        sorter (rowA, rowB) {
+        sorter(rowA, rowB) {
           return rowA.age - rowB.age
         }
       },
@@ -170,13 +147,13 @@ export default defineComponent({
       data,
       columns,
       pagination: paginationReactive,
-      filterAddress () {
+      filterAddress() {
         addressColumn.filterOptionValue = 'London'
       },
-      unfilterAddress () {
+      unfilterAddress() {
         addressColumn.filterOptionValue = null
       },
-      handleUpdateFilter (
+      handleUpdateFilter(
         filters: DataTableFilterState,
         sourceColumn: DataTableBaseColumn
       ) {
@@ -186,3 +163,26 @@ export default defineComponent({
   }
 })
 </script>
+
+<template>
+  <n-space vertical :size="12">
+    <n-config-provider :rtl="rtlEnabled ? rtlStyles : undefined">
+      <div :dir="rtlEnabled ? 'rtl' : 'ltr'">
+        <n-button @click="filterAddress">
+          Filter Address(Use Value 'London')
+        </n-button>
+        <n-button @click="unfilterAddress">
+          Clear Address Filters
+        </n-button>
+      </div>
+      <n-space><n-switch v-model:value="rtlEnabled" />Rtl</n-space>
+      {{ rtlEnabled }}
+      <n-data-table
+        :columns="columns"
+        :data="data"
+        :pagination="pagination"
+        @update:filters="handleUpdateFilter"
+      />
+    </n-config-provider>
+  </n-space>
+</template>

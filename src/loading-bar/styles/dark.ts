@@ -4,7 +4,7 @@ import type { LoadingBarTheme } from './light'
 const loadingBarDark: LoadingBarTheme = {
   name: 'LoadingBar',
   common: commonDark,
-  self (vars) {
+  self(vars) {
     const { primaryColor } = vars
     return {
       colorError: 'red',

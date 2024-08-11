@@ -6,36 +6,57 @@ Provided since `2.38.0`.
 You can use `useModal.create` to create a modal. (Please make sure this API is called inside `n-modal-provider`.)
 </markdown>
 
-<template>
-  <n-button @click="handleClick">
-    Start me up
-  </n-button>
-</template>
-
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { useModal, useMessage } from 'naive-ui'
+import { defineComponent, h } from 'vue'
+import { NButton, useMessage, useModal } from 'naive-ui'
 
 export default defineComponent({
-  setup () {
+  setup() {
     const modal = useModal()
     const message = useMessage()
 
-    const handleClick = () => {
-      const modalInst = modal.create({
-        title: 'Modal',
-        content: 'Content',
-        preset: 'dialog'
+    const showDialogPreset = () => {
+      const m = modal.create({
+        title: 'Dialog perset',
+        preset: 'dialog',
+        content: 'Content'
       })
       message.info('Shut down in three seconds')
       setTimeout(() => {
-        modalInst.destroy()
+        m.destroy()
       }, 3000)
     }
-
+    const showCardPreset = () => {
+      const m = modal.create({
+        title: 'Card preset',
+        preset: 'card',
+        style: {
+          width: '400px'
+        },
+        content: 'Content',
+        footer: () =>
+          h(
+            NButton,
+            { type: 'primary', onClick: () => m.destroy() },
+            () => 'Close'
+          )
+      })
+    }
     return {
-      handleClick
+      showDialogPreset,
+      showCardPreset
     }
   }
 })
 </script>
+
+<template>
+  <n-flex>
+    <n-button @click="showDialogPreset">
+      Start me up Dialog
+    </n-button>
+    <n-button @click="showCardPreset">
+      Start me up Card
+    </n-button>
+  </n-flex>
+</template>

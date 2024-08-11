@@ -1,4 +1,4 @@
-import { c, cM, cB, cE, cNotM } from '../../../_utils/cssr'
+import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
@@ -96,6 +96,7 @@ export default cB('tabs', `
     `)
   ]),
   cB('tabs-rail', `
+    position: relative;
     padding: 3px;
     border-radius: var(--n-tab-border-radius);
     width: 100%;

@@ -1,25 +1,25 @@
-import { h, defineComponent, computed, type CSSProperties } from 'vue'
+import { type CSSProperties, computed, defineComponent, h } from 'vue'
+import { getMargin } from 'seemly'
 import {
+  ErrorIcon,
   InfoIcon,
   SuccessIcon,
-  WarningIcon,
-  ErrorIcon
+  WarningIcon
 } from '../../_internal/icons'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import {
-  render,
   createKey,
-  resolveWrappedSlot,
-  resolveSlot
+  render,
+  resolveSlot,
+  resolveWrappedSlot
 } from '../../_utils'
-import { NBaseIcon, NBaseClose } from '../../_internal'
+import { NBaseClose, NBaseIcon } from '../../_internal'
 import { NButton } from '../../button'
 import { dialogLight } from '../styles'
 import type { DialogTheme } from '../styles'
 import { dialogProps } from './dialogProps'
 import style from './styles/index.cssr'
-import { getMargin } from 'seemly'
 
 const iconRenderMap = {
   default: () => <InfoIcon />,
@@ -39,7 +39,7 @@ export const NDialog = defineComponent({
     ...(useTheme.props as ThemeProps<DialogTheme>),
     ...dialogProps
   },
-  setup (props) {
+  setup(props) {
     const {
       mergedComponentPropsRef,
       mergedClsPrefixRef,
@@ -50,22 +50,25 @@ export const NDialog = defineComponent({
     const mergedIconPlacementRef = computed(() => {
       const { iconPlacement } = props
       return (
-        iconPlacement ||
-        mergedComponentPropsRef?.value?.Dialog?.iconPlacement ||
-        'left'
+        iconPlacement
+        || mergedComponentPropsRef?.value?.Dialog?.iconPlacement
+        || 'left'
       )
     })
-    function handlePositiveClick (e: MouseEvent): void {
+    function handlePositiveClick(e: MouseEvent): void {
       const { onPositiveClick } = props
-      if (onPositiveClick) onPositiveClick(e)
+      if (onPositiveClick)
+        onPositiveClick(e)
     }
-    function handleNegativeClick (e: MouseEvent): void {
+    function handleNegativeClick(e: MouseEvent): void {
       const { onNegativeClick } = props
-      if (onNegativeClick) onNegativeClick(e)
+      if (onNegativeClick)
+        onNegativeClick(e)
     }
-    function handleCloseClick (): void {
+    function handleCloseClick(): void {
       const { onClose } = props
-      if (onClose) onClose()
+      if (onClose)
+        onClose()
     }
     const themeRef = useTheme(
       'Dialog',
@@ -162,7 +165,7 @@ export const NDialog = defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const {
       bordered,
       mergedIconPlacement,
@@ -195,55 +198,57 @@ export const NDialog = defineComponent({
           default: () =>
             resolveWrappedSlot(
               this.$slots.icon,
-              (children) =>
-                children ||
-                (this.icon ? render(this.icon) : iconRenderMap[this.type]())
+              children =>
+                children
+                || (this.icon ? render(this.icon) : iconRenderMap[this.type]())
             )
         }}
       </NBaseIcon>
     ) : null
 
-    const actionNode = resolveWrappedSlot(this.$slots.action, (children) =>
+    const actionNode = resolveWrappedSlot(this.$slots.action, children =>
       children || positiveText || negativeText || action ? (
-        <div class={`${mergedClsPrefix}-dialog__action`}>
-          {children ||
-            (action
-              ? [render(action)]
-              : [
-                  this.negativeText && (
-                    <NButton
-                      theme={mergedTheme.peers.Button}
-                      themeOverrides={mergedTheme.peerOverrides.Button}
-                      ghost
-                      size="small"
-                      onClick={handleNegativeClick}
-                      {...negativeButtonProps}
-                    >
-                      {{
-                        default: () => render(this.negativeText)
-                      }}
-                    </NButton>
-                  ),
-                  this.positiveText && (
-                    <NButton
-                      theme={mergedTheme.peers.Button}
-                      themeOverrides={mergedTheme.peerOverrides.Button}
-                      size="small"
-                      type={type === 'default' ? 'primary' : type}
-                      disabled={loading}
-                      loading={loading}
-                      onClick={handlePositiveClick}
-                      {...positiveButtonProps}
-                    >
-                      {{
-                        default: () => render(this.positiveText)
-                      }}
-                    </NButton>
-                  )
-                ])}
+        <div
+          class={[`${mergedClsPrefix}-dialog__action`, this.actionClass]}
+          style={this.actionStyle}
+        >
+          {children
+          || (action
+            ? [render(action)]
+            : [
+                this.negativeText && (
+                  <NButton
+                    theme={mergedTheme.peers.Button}
+                    themeOverrides={mergedTheme.peerOverrides.Button}
+                    ghost
+                    size="small"
+                    onClick={handleNegativeClick}
+                    {...negativeButtonProps}
+                  >
+                    {{
+                      default: () => render(this.negativeText)
+                    }}
+                  </NButton>
+                ),
+                this.positiveText && (
+                  <NButton
+                    theme={mergedTheme.peers.Button}
+                    themeOverrides={mergedTheme.peerOverrides.Button}
+                    size="small"
+                    type={type === 'default' ? 'primary' : type}
+                    disabled={loading}
+                    loading={loading}
+                    onClick={handlePositiveClick}
+                    {...positiveButtonProps}
+                  >
+                    {{
+                      default: () => render(this.positiveText)
+                    }}
+                  </NButton>
+                )
+              ])}
         </div>
-      ) : null
-    )
+      ) : null)
 
     return (
       <div
@@ -265,28 +270,33 @@ export const NDialog = defineComponent({
                 this.rtlEnabled && `${mergedClsPrefix}-dialog--rtl`
             ]
             return node ? (
-                <div class={classNames}>{node}</div>
+              <div class={classNames}>{node}</div>
             ) : (
-                <NBaseClose
-                  clsPrefix={mergedClsPrefix}
-                  class={classNames}
-                  onClick={this.handleCloseClick}
-                />
+              <NBaseClose
+                clsPrefix={mergedClsPrefix}
+                class={classNames}
+                onClick={this.handleCloseClick}
+              />
             )
           })
           : null}
         {showIcon && mergedIconPlacement === 'top' ? (
           <div class={`${mergedClsPrefix}-dialog-icon-container`}>{icon}</div>
         ) : null}
-        <div class={`${mergedClsPrefix}-dialog__title`}>
+        <div
+          class={[`${mergedClsPrefix}-dialog__title`, this.titleClass]}
+          style={this.titleStyle}
+        >
           {showIcon && mergedIconPlacement === 'left' ? icon : null}
           {resolveSlot(this.$slots.header, () => [render(title)])}
         </div>
         <div
           class={[
             `${mergedClsPrefix}-dialog__content`,
-            actionNode ? '' : `${mergedClsPrefix}-dialog__content--last`
+            actionNode ? '' : `${mergedClsPrefix}-dialog__content--last`,
+            this.contentClass
           ]}
+          style={this.contentStyle}
         >
           {resolveSlot(this.$slots.default, () => [render(content)])}
         </div>

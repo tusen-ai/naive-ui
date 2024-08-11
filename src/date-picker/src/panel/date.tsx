@@ -1,9 +1,9 @@
-import { h, defineComponent, watchEffect, type PropType } from 'vue'
+import { type PropType, defineComponent, h, watchEffect } from 'vue'
 import {
   BackwardIcon,
   FastBackwardIcon,
-  ForwardIcon,
-  FastForwardIcon
+  FastForwardIcon,
+  ForwardIcon
 } from '../../../_internal/icons'
 import { NButton, NxButton } from '../../../button'
 import { NBaseFocusDetector } from '../../../_internal'
@@ -26,7 +26,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.actions?.includes('confirm')) {
@@ -39,9 +39,9 @@ export default defineComponent({
     }
     return useCalendar(props, props.type)
   },
-  render () {
-    const { mergedClsPrefix, mergedTheme, shortcuts, onRender, $slots, type } =
-      this
+  render() {
+    const { mergedClsPrefix, mergedTheme, shortcuts, onRender, $slots, type }
+      = this
     onRender?.()
     return (
       <div
@@ -92,7 +92,7 @@ export default defineComponent({
             </div>
           </div>
           <div class={`${mergedClsPrefix}-date-panel-weekdays`}>
-            {this.weekdays.map((weekday) => (
+            {this.weekdays.map(weekday => (
               <div
                 key={weekday}
                 class={`${mergedClsPrefix}-date-panel-weekdays__day`}
@@ -152,26 +152,26 @@ export default defineComponent({
         {this.actions?.length || shortcuts ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
-              {shortcuts &&
-                Object.keys(shortcuts).map((key) => {
-                  const shortcut = shortcuts[key]
-                  return Array.isArray(shortcut) ? null : (
-                    <NxButton
-                      size="tiny"
-                      onMouseenter={() => {
-                        this.handleSingleShortcutMouseenter(shortcut)
-                      }}
-                      onClick={() => {
-                        this.handleSingleShortcutClick(shortcut)
-                      }}
-                      onMouseleave={() => {
-                        this.handleShortcutMouseleave()
-                      }}
-                    >
-                      {{ default: () => key }}
-                    </NxButton>
-                  )
-                })}
+              {shortcuts
+              && Object.keys(shortcuts).map((key) => {
+                const shortcut = shortcuts[key]
+                return Array.isArray(shortcut) ? null : (
+                  <NxButton
+                    size="tiny"
+                    onMouseenter={() => {
+                      this.handleSingleShortcutMouseenter(shortcut)
+                    }}
+                    onClick={() => {
+                      this.handleSingleShortcutClick(shortcut)
+                    }}
+                    onMouseleave={() => {
+                      this.handleShortcutMouseleave()
+                    }}
+                  >
+                    {{ default: () => key }}
+                  </NxButton>
+                )
+              })}
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
               {this.actions?.includes('clear') ? (

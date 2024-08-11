@@ -4,6 +4,18 @@
 You can set minimum and maximum values too.
 </markdown>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    return {
+      value: ref(null)
+    }
+  }
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-input-number
@@ -20,15 +32,3 @@ You can set minimum and maximum values too.
     />
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      value: ref(null)
-    }
-  }
-})
-</script>

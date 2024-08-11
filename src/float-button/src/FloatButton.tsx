@@ -1,32 +1,32 @@
 import {
-  h,
-  defineComponent,
+  type CSSProperties,
+  type DirectiveArguments,
   type PropType,
   computed,
-  type CSSProperties,
+  defineComponent,
+  h,
   inject,
   ref,
   toRef,
-  withDirectives,
-  type DirectiveArguments
+  withDirectives
 } from 'vue'
 import { useMergedState } from 'vooks'
 import { mousemoveoutside } from 'vdirs'
 import { floatButtonGroupInjectionKey } from '../../float-button-group/src/FloatButtonGroup'
 import {
-  formatLength,
   type ExtractPublicPropTypes,
-  resolveWrappedSlot,
-  resolveSlot,
   type MaybeArray,
-  call
+  call,
+  formatLength,
+  resolveSlot,
+  resolveWrappedSlot
 } from '../../_utils'
 import useConfig from '../../_mixins/use-config'
 import { type ThemeProps, useTheme, useThemeClass } from '../../_mixins'
 import { type FloatButtonTheme, floatButtonLight } from '../styles'
-import style from './styles/index.cssr'
 import { NBaseIcon } from '../../_internal'
 import { CloseIcon } from '../../_internal/icons'
+import style from './styles/index.cssr'
 
 export const floatButtonProps = {
   ...(useTheme.props as ThemeProps<FloatButtonTheme>),
@@ -68,7 +68,7 @@ export type FloatButtonProps = ExtractPublicPropTypes<typeof floatButtonProps>
 export default defineComponent({
   name: 'FloatButton',
   props: floatButtonProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
 
     const themeRef = useTheme(
@@ -89,7 +89,7 @@ export default defineComponent({
       uncontrolledShowMenuRef
     )
 
-    function doUpdateShowMenu (value: boolean): void {
+    function doUpdateShowMenu(value: boolean): void {
       const { onUpdateShowMenu, 'onUpdate:showMenu': _onUpdateShowMenu } = props
       uncontrolledShowMenuRef.value = value
       if (onUpdateShowMenu) {
@@ -167,7 +167,7 @@ export default defineComponent({
       }
     }
 
-    const handleClick = (e: MouseEvent): void => {
+    const handleClick = (): void => {
       if (props.menuTrigger === 'click') {
         doUpdateShowMenu(!mergedShowMenuRef.value)
       }
@@ -196,7 +196,7 @@ export default defineComponent({
     }
   },
 
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       cssVars,
