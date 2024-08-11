@@ -7,6 +7,7 @@
 ### Breaking Changes
 
 - 修复 `n-config-provider` 默认继承父级的类前缀 `cls-prefix`, 关闭 [#5970](https://github.com/tusen-ai/naive-ui/issues/5970)
+- 修复 `n-date-picker` 默认 `weekFormat` 中 year 和 week 标准不同，使用 local year 和 local week
 
 ### Fixes
 
@@ -18,7 +19,10 @@
 - 修复 `n-menu` 在 `responsive` 被设定的情况下，HTML 属性无法正确的应用到组件上
 - 修复 `n-float-button` 和 `popover` 一起使用会报错, 关闭 [#5933](https://github.com/tusen-ai/naive-ui/issues/5933)
 - 修复 `n-badge` 中无法遮盖聚焦元素边框问题，关闭 [#5929](https://github.com/tusen-ai/naive-ui/issues/5929)
-- 修复 `n-date-picker` 默认 `weekFormat` 中 year 和 week 标准不同，使用 local year 和 local week
+- 修复 `n-button` font-weight CSS 变量名错误的问题，关闭 [#5922](https://github.com/tusen-ai/naive-ui/issues/5922)
+- 修复 `n-icon` 的 `component` 属性不接受 FunctionalComponent 问题
+- 修复 `n-mention` 的面板在 `placement` 设为 `'top'` 或者组件设定的 padding 的时候位置有问题，关闭 [#6241](https://github.com/tusen-ai/naive-ui/issues/6241)
+- 修复 `n-carousel` 中轮播图的过渡行为不符合预期问题，关闭 [#5993](https://github.com/tusen-ai/naive-ui/issues/5993)
 
 ### Features
 

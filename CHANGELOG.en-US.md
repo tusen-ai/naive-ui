@@ -7,6 +7,7 @@
 ### Breaking Changes
 
 - Fix `n-config-provider` inherit the class prefix from it's parent by default, closes [#5970](https://github.com/tusen-ai/naive-ui/issues/5970).
+- Fix `n-date-picker` default `weekFormat` that year and week standards are different and use local week and local year
 
 ### Fixes
 
@@ -18,7 +19,10 @@
 - Fix `n-menu` can't apply HTML attributes correctly on the component when `responsive` is set.
 - Fix `n-float-button` error when used with `popover` component, closes [#5933](https://github.com/tusen-ai/naive-ui/issues/5933).
 - Fix `n-badge` unable to mask focus element border, closes [#5929](https://github.com/tusen-ai/naive-ui/issues/5929)
-- Fix `n-date-picker` default `weekFormat` that year and week standards are different and use local week and local year
+- Fix `n-button` font-weight CSS variable name error, closes [#5922](https://github.com/tusen-ai/naive-ui/issues/5922)
+- Fix `n-icon`'s `component` prop not accepting FunctionalComponent.
+- Fix `n-mention`'s panel is misplaced if `placement` is set to `'top'` or padding is set to component's style, closes [#6241](https://github.com/tusen-ai/naive-ui/issues/6241).
+- Fix `n-carousel` transition not working as expected, closes [#5993](https://github.com/tusen-ai/naive-ui/issues/5993).
 
 ### Features
 

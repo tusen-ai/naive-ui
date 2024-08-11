@@ -1,7 +1,7 @@
 import {
   type CSSProperties,
   type PropType,
- type VNodeChild,
+  type VNodeChild,
   computed,
   defineComponent,
   h,
