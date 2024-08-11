@@ -153,6 +153,7 @@ export default defineComponent({
     const inputInstRef = ref<InputInst | null>(null)
     const cursorRef = ref<HTMLElement | null>(null)
     const followerRef = ref<FollowerInst | null>(null)
+    const wrapperElRef = ref<HTMLElement | null>(null)
     const partialPatternRef = ref<string>('')
     let cachedPrefix: string | null = null
     // cached pattern end is for partial pattern
@@ -277,9 +278,11 @@ export default defineComponent({
         top: number
         height: number
       } = getRelativePosition(inputEl)
-      cursorPos.left += inputEl.parentElement!.offsetLeft
-      cursorAnchor.style.left = `${cursorPos.left}px`
-      cursorAnchor.style.top = `${cursorPos.top + cursorPos.height}px`
+      const inputRect = inputEl.getBoundingClientRect()
+      const wrapperRect = wrapperElRef.value!.getBoundingClientRect()
+      cursorAnchor.style.left = `${cursorPos.left + inputRect.left - wrapperRect.left}px`
+      cursorAnchor.style.top = `${cursorPos.top + inputRect.top - wrapperRect.top}px`
+      cursorAnchor.style.height = `${cursorPos.height}px`
     }
     function syncPosition(): void {
       if (!showMenuRef.value)
@@ -419,6 +422,7 @@ export default defineComponent({
       inputInstRef,
       cursorRef,
       followerRef,
+      wrapperElRef,
       showMenu: showMenuRef,
       adjustedTo: useAdjustedTo(props),
       isMounted: useIsMounted(),
@@ -439,7 +443,7 @@ export default defineComponent({
   render() {
     const { mergedTheme, mergedClsPrefix, $slots } = this
     return (
-      <div class={`${mergedClsPrefix}-mention`}>
+      <div class={`${mergedClsPrefix}-mention`} ref="wrapperElRef">
         <NInput
           status={this.mergedStatus}
           themeOverrides={mergedTheme.peerOverrides.Input}
@@ -466,12 +470,10 @@ export default defineComponent({
                   default: () => {
                     const style: CSSProperties = {
                       position: 'absolute',
-                      width: 0,
-                      height: 0
+                      width: 0
                     }
                     if (__DEV__ && this.internalDebug) {
                       style.width = '1px'
-                      style.height = '1px'
                       style.background = 'red'
                     }
                     return <div style={style} ref="cursorRef" />
