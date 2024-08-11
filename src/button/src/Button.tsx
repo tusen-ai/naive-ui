@@ -234,7 +234,7 @@ const Button = defineComponent({
       } = props
       // font
       const fontProps = {
-        'font-weight': strong ? fontWeightStrong : fontWeight
+        '--n-font-weight': strong ? fontWeightStrong : fontWeight
       }
       // color
       let colorProps = {
