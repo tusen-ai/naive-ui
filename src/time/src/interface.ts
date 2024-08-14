@@ -1,3 +1,3 @@
-import type { FormatOptions as DateFnsFormatOptions } from 'date-fns'
+import type { FormatOptionsWithTZ } from 'date-fns-tz'
 
-export type FormatOptions = Omit<DateFnsFormatOptions, 'locale'>
+export type FormatOptions = Omit<FormatOptionsWithTZ, 'locale'>

@@ -6,11 +6,10 @@ import {
   h
 } from 'vue'
 import { format, formatDistanceStrict, fromUnixTime } from 'date-fns'
-import type { Locale } from 'date-fns'
+import type { FormatOptionsWithTZ } from 'date-fns-tz'
 import { formatInTimeZone } from 'date-fns-tz'
 import { useConfig, useLocale } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { FormatOptions } from './interface'
 
 export const timeProps = {
   time: {
@@ -29,7 +28,10 @@ export const timeProps = {
   format: String,
   text: Boolean,
   timeZone: String,
-  formatOptions: Object as PropType<FormatOptions>
+  formatOptions: {
+    type: Object as PropType<FormatOptionsWithTZ>, // allow to override locale
+    default: undefined
+  }
 } as const
 
 export type TimeProps = ExtractPublicPropTypes<typeof timeProps>
@@ -41,33 +43,29 @@ export default defineComponent({
     const now = Date.now()
     const { localeRef, dateLocaleRef } = useLocale('Time')
     const { mergedComponentPropsRef } = useConfig()
-    const mergedFormatRef = computed(() => {
-      const { timeZone } = props
-      if (timeZone) {
-        return (
+    const mergedFormatRef = computed(
+      () =>
+        (
           time: number | Date,
           _format: string,
-          options: { locale: Locale } & FormatOptions
+          options: FormatOptionsWithTZ
         ) => {
-          return formatInTimeZone(time, timeZone, _format, options)
+          const timeZone = props.timeZone || options.timeZone
+          if (timeZone) {
+            return formatInTimeZone(time, timeZone, _format, options)
+          }
+          return format(time, _format, options)
         }
-      }
-      return format
-    })
+    )
     const dateFnsOptionsRef = computed(() => {
-      return {
-        locale: dateLocaleRef.value.locale
-      }
-    })
-    const formatOptionsRef = computed(() => {
       const { formatOptions } = props
       const options
         = formatOptions
         ?? mergedComponentPropsRef?.value?.Time?.formatOptions
         ?? {}
       return {
-        ...options,
-        ...dateFnsOptionsRef.value
+        locale: dateLocaleRef.value.locale,
+        ...options
       }
     })
     const mergedTimeRef = computed(() => {
@@ -93,7 +91,7 @@ export default defineComponent({
         return mergedFormatRef.value(
           mergedTimeRef.value,
           props.format,
-          formatOptionsRef.value
+          dateFnsOptionsRef.value
         )
       }
       else if (props.type === 'date') {

@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils'
+import { zhCN } from 'date-fns/locale/zh-CN'
 import { NTime } from '../index'
 
 describe('n-time', () => {
@@ -88,5 +89,24 @@ describe('n-time', () => {
       }
     })
     expect(wrapper.find('time').text()).toContain('1970/01/01')
+
+    await wrapper.setProps({
+      format: 'yyyy年 MMMM do HH:mm:ss',
+      formatOptions: {
+        locale: zhCN
+      }
+    })
+    expect(wrapper.find('time').text()).toContain('1970年 一月 1日 00:00:00')
+
+    await wrapper.setProps({
+      format: 'yyyy/MM/dd HH:mm:ss zzzz',
+      timeZone: 'Asia/Shanghai',
+      formatOptions: {
+        locale: zhCN
+      }
+    })
+    expect(wrapper.find('time').text()).toContain(
+      '1970/01/01 08:00:00 中国标准时间'
+    )
   })
 })
