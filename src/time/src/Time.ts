@@ -6,9 +6,9 @@ import {
   h
 } from 'vue'
 import { format, formatDistanceStrict, fromUnixTime } from 'date-fns'
-import type { Locale } from 'date-fns'
+import type { FormatOptionsWithTZ } from 'date-fns-tz'
 import { formatInTimeZone } from 'date-fns-tz'
-import { useLocale } from '../../_mixins'
+import { useConfig, useLocale } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 
 export const timeProps = {
@@ -27,7 +27,11 @@ export const timeProps = {
   unix: Boolean,
   format: String,
   text: Boolean,
-  timeZone: String
+  timeZone: String,
+  formatOptions: {
+    type: Object as PropType<FormatOptionsWithTZ>, // allow to override locale
+    default: undefined
+  }
 } as const
 
 export type TimeProps = ExtractPublicPropTypes<typeof timeProps>
@@ -38,22 +42,30 @@ export default defineComponent({
   setup(props) {
     const now = Date.now()
     const { localeRef, dateLocaleRef } = useLocale('Time')
-    const mergedFormatRef = computed(() => {
-      const { timeZone } = props
-      if (timeZone) {
-        return (
+    const { mergedComponentPropsRef } = useConfig()
+    const mergedFormatRef = computed(
+      () =>
+        (
           time: number | Date,
           _format: string,
-          options: { locale: Locale }
+          options: FormatOptionsWithTZ
         ) => {
-          return formatInTimeZone(time, timeZone, _format, options)
+          const timeZone = props.timeZone || options.timeZone
+          if (timeZone) {
+            return formatInTimeZone(time, timeZone, _format, options)
+          }
+          return format(time, _format, options)
         }
-      }
-      return format
-    })
+    )
     const dateFnsOptionsRef = computed(() => {
+      const { formatOptions } = props
+      const options
+        = formatOptions
+        ?? mergedComponentPropsRef?.value?.Time?.formatOptions
+        ?? {}
       return {
-        locale: dateLocaleRef.value.locale
+        locale: dateLocaleRef.value.locale,
+        ...options
       }
     })
     const mergedTimeRef = computed(() => {

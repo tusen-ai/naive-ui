@@ -39,6 +39,7 @@
 - `n-data-table` 在列的配置中新增 `allowExport` 属性
 - `n-date-picker` 新增 `year-range` 属性
 - `n-tree-select` 新增 `header` 插槽，关闭 [#5915](https://github.com/tusen-ai/naive-ui/issues/5915)
+- `n-time` 新增 `formatOptions` 属性，以支持设置 date-fns 格式化选项
 
 ## 2.39.0
 

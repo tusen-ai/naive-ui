@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils'
+import { zhCN } from 'date-fns/locale/zh-CN'
 import { NTime } from '../index'
 
 describe('n-time', () => {
@@ -66,5 +67,46 @@ describe('n-time', () => {
   it('should work with `text` prop', () => {
     const wrapper = mount(NTime, { props: { time: date, text: true } })
     expect(wrapper.find('time').exists()).toEqual(false)
+  })
+
+  it('should work with `formatOptions` prop', async () => {
+    const wrapper = mount(NTime, {
+      props: {
+        time: date,
+        format: 'yyyy/MM/dd',
+        formatOptions: {
+          useAdditionalWeekYearTokens: false,
+          useAdditionalDayOfYearTokens: false
+        }
+      }
+    })
+    expect(wrapper.find('time').text()).toContain('1970/01/01')
+    await wrapper.setProps({
+      format: 'YYYY/MM/DD',
+      formatOptions: {
+        useAdditionalWeekYearTokens: true,
+        useAdditionalDayOfYearTokens: true
+      }
+    })
+    expect(wrapper.find('time').text()).toContain('1970/01/01')
+
+    await wrapper.setProps({
+      format: 'yyyy年 MMMM do HH:mm:ss',
+      formatOptions: {
+        locale: zhCN
+      }
+    })
+    expect(wrapper.find('time').text()).toContain('1970年 一月 1日 00:00:00')
+
+    await wrapper.setProps({
+      format: 'yyyy/MM/dd HH:mm:ss zzzz',
+      timeZone: 'Asia/Shanghai',
+      formatOptions: {
+        locale: zhCN
+      }
+    })
+    expect(wrapper.find('time').text()).toContain(
+      '1970/01/01 08:00:00 中国标准时间'
+    )
   })
 })
