@@ -147,6 +147,7 @@ export default defineComponent({
               mergedClsPrefix={mergedClsPrefix}
               calendarMonth={this.startCalendarMonth}
               calendarYear={this.startCalendarYear}
+              closeMonthPanelOnSelect={this.closeMonthPanelOnSelect}
             />
             <div
               class={`${mergedClsPrefix}-date-panel-month__next`}
@@ -247,6 +248,7 @@ export default defineComponent({
               mergedClsPrefix={mergedClsPrefix}
               calendarMonth={this.endCalendarMonth}
               calendarYear={this.endCalendarYear}
+              closeMonthPanelOnSelect={this.closeMonthPanelOnSelect}
             />
             <div
               class={`${mergedClsPrefix}-date-panel-month__next`}

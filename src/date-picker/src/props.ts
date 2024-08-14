@@ -69,6 +69,7 @@ export const datePickerProps = {
   firstDayOfWeek: Number as PropType<FirstDayOfWeek>,
   inputReadonly: Boolean,
   closeOnSelect: Boolean,
+  closeMonthPanelOnSelect: Boolean,
   status: String as PropType<FormValidationStatus>,
   timePickerProps: [Object, Array] as PropType<
     TimePickerProps | [TimePickerProps, TimePickerProps]

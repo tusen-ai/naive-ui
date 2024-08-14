@@ -80,6 +80,7 @@ form-debug.vue
 | is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `undefined` | 日期禁用的校验函数 | `detail` 2.37.1 |
 | placeholder | `string` | `'选择日期'` | 没有值时的占位信息 |  |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | 受控数据更新时触发的回调函数 | 2.24.0 |
+| close-month-panel-on-select | `boolean` | `false` | 用户选择月份后是否自动关闭月份面板 | NEXT_VERSION |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | 受控数据更新时触发的回调函数 | `formattedValue` 2.24.0 |
 
 ### DateTime 类型的 Props
@@ -95,6 +96,7 @@ form-debug.vue
 | placeholder | `string` | `'选择日期时间'` | 提示信息 |  |
 | time-picker-props | `TimePickerProps` | `undefined` | 面板中时间选择器的属性 | 2.27.0 |
 | update-value-on-close | `boolean` | `false` | 关闭面板时更新值 |  |
+| close-month-panel-on-select | `boolean` | `false` | 用户选择月份后是否自动关闭月份面板 | NEXT_VERSION |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | 数据更新时触发的回调函数 | 2.24.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | 数据更新时触发的回调函数 | `formattedValue` 2.24.0 |
 
@@ -113,6 +115,7 @@ form-debug.vue
 | separator | `string` | 内置图标 | start 选框与 end 选框之间的分隔符 |  |
 | start-placeholder | `string` | `'开始日期'` | DateRange 中 start 选框的提示信息 |  |
 | update-value-on-close | `boolean` | `false` | 关闭面板时是否更新值 |  |
+| close-month-panel-on-select | `boolean` | `false` | 用户选择月份后是否自动关闭月份面板 | NEXT_VERSION |
 | on-update:formatted-value | `(value: [string, string] \| null, timestampValue: [number, number] \| null) => void` | `undefined` | 数据更新时触发的回调函数 | 2.24.0 |
 | on-update:value | `(value: [number, number] \| null, formattedValue: [string, string] \| null) => void` | `undefined` | 数据更新时触发的回调函数 | `formattedValue` 2.24.0 |
 
@@ -133,6 +136,7 @@ form-debug.vue
 | start-placeholder | `string` | `'开始日期时间'` | DateTimeRange 中 start 选框的提示信息 |  |
 | time-picker-props | `TimePickerProps \| [TimePickerProps, TimePickerProps]` | `undefined` | 面板中时间选择器的属性 | 2.27.0 |
 | update-value-on-close | `boolean` | `false` | 关闭面板时是否更新值 |  |
+| close-month-panel-on-select | `boolean` | `false` | 用户选择月份后是否自动关闭月份面板 | NEXT_VERSION |
 | on-update:formatted-value | `(value: [string, string] \| null, timestampValue: [number, number] \| null) => void` | `undefined` | 数据更新时触发的回调函数 | 2.24.0 |
 | on-update:value | `(value: [number, number] \| null, formattedValue: [string, string] \| null) => void` | `undefined` | 数据更新时触发的回调函数 | `formattedValue` 2.24.0 |
 

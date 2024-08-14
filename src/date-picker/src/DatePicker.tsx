@@ -716,6 +716,7 @@ export default defineComponent({
       rangesRef: toRef(props, 'ranges'),
       timePickerPropsRef: toRef(props, 'timePickerProps'),
       closeOnSelectRef: toRef(props, 'closeOnSelect'),
+      closeMonthPanelOnSelectRef: toRef(props, 'closeMonthPanelOnSelect'),
       updateValueOnCloseRef: toRef(props, 'updateValueOnClose'),
       monthFormatRef: toRef(props, 'monthFormat'),
       yearFormatRef: toRef(props, 'yearFormat'),

@@ -130,6 +130,7 @@ export type DatePickerInjection = {
   isDateDisabledRef: Ref<IsDateDisabled | undefined>
   rangesRef: Ref<Record<string, [number, number]> | undefined>
   closeOnSelectRef: Ref<boolean>
+  closeMonthPanelOnSelectRef: Ref<boolean>
   updateValueOnCloseRef: Ref<boolean>
   firstDayOfWeekRef: Ref<FirstDayOfWeek | undefined>
   monthFormatRef: Ref<string>

@@ -59,7 +59,8 @@ function usePanelCommon(props: UsePanelCommonProps) {
     timePickerPropsRef,
     localeRef,
     mergedClsPrefixRef,
-    mergedThemeRef
+    mergedThemeRef,
+    closeMonthPanelOnSelectRef
   } = inject(datePickerInjectionKey)!
   const dateFnsOptionsRef = computed(() => {
     return {
@@ -167,6 +168,7 @@ function usePanelCommon(props: UsePanelCommonProps) {
     dateFnsOptions: dateFnsOptionsRef,
     timePickerSize: timePickerSizeRef,
     timePickerProps: timePickerPropsRef,
+    closeMonthPanelOnSelect: closeMonthPanelOnSelectRef,
     selfRef,
     locale: localeRef,
     doConfirm,
