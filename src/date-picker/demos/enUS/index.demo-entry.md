@@ -59,6 +59,7 @@ panel.vue
 | value | `number \| [number, number] \| null` | `undefined` | Value of the date picker when being manually set. |  |
 | value-format | `string` | Follow `format` prop | Format of the binding value. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.24.0 |
 | year-format | `string` | `'y'` | Format of year item in the panel. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.37.0 |
+| year-range | `[number, number]` | `[1901, 2100]` | Year range in month picker in panel. | NEXT_VERSION |
 | on-clear | `() => void` | `undefined` | On clear callback. | 2.28.3 |
 | on-confirm | `(value: number \| [number, number] \| null, formattedValue: string \| [string, string] \| null) => void` | `undefined` | On confirm callback. | 2.28.3 |
 | on-blur | `() => void` | `undefined` | On blur callback. |  |
@@ -178,7 +179,7 @@ panel.vue
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now'> \| null` | `['clear', 'now']` | Operations supported for the `week` type date picker. | 2.37.0 |
 | default-calendar-start-time | `number` | `undefined` | Default panel calendar start month timestamp. | 2.38.1 |
-| format | `string` | `'yyyy-w'` for en-US, Locale specific. | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). | 2.37.0 |
+| format | `string` | `'YYYY-w'` for en-US, Locale specific. | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). | 2.37.0 |
 | placeholder | `string` | `'Select Week'` for en-US, Locale specific. | Placeholder. | 2.37.0 |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | Formatted value changed callback. | 2.37.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Value changed callback. | 2.37.0 |

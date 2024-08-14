@@ -46,7 +46,7 @@ import type {
 } from '../interface'
 import { datePickerInjectionKey } from '../interface'
 import type { DateItem, MonthItem, QuarterItem, YearItem } from '../utils'
-import { MONTH_ITEM_HEIGHT, START_YEAR } from '../config'
+import { MONTH_ITEM_HEIGHT } from '../config'
 import { usePanelCommon, usePanelCommonProps } from './use-panel-common'
 
 const useCalendarProps = {
@@ -77,7 +77,8 @@ function useCalendar(
     datePickerSlots,
     yearFormatRef,
     monthFormatRef,
-    quarterFormatRef
+    quarterFormatRef,
+    yearRangeRef
   } = inject(datePickerInjectionKey)!
   const validation = {
     isValueInvalid: isValueInvalidRef,
@@ -129,9 +130,14 @@ function useCalendar(
   })
   const yearArrayRef = computed(() => {
     const { value } = props
-    return yearArray(Array.isArray(value) ? null : value, nowRef.value, {
-      yearFormat: yearFormatRef.value
-    })
+    return yearArray(
+      Array.isArray(value) ? null : value,
+      nowRef.value,
+      {
+        yearFormat: yearFormatRef.value
+      },
+      yearRangeRef
+    )
   })
   const quarterArrayRef = computed(() => {
     const { value } = props
@@ -517,7 +523,7 @@ function useCalendar(
           ? mergedValue === null
             ? getYear(Date.now())
             : getYear(mergedValue as number)
-          : getYear(value)) - START_YEAR
+          : getYear(value)) - yearRangeRef.value[0]
       yearVlRef.value.scrollTo({ top: yearIndex * MONTH_ITEM_HEIGHT })
     }
   }

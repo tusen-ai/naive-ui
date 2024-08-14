@@ -99,7 +99,8 @@ export default defineComponent({
     const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
     const dateFnsOptionsRef = computed(() => {
       return {
-        locale: dateLocaleRef.value.locale
+        locale: dateLocaleRef.value.locale,
+        useAdditionalWeekYearTokens: true
       }
     })
 
@@ -720,6 +721,7 @@ export default defineComponent({
       monthFormatRef: toRef(props, 'monthFormat'),
       yearFormatRef: toRef(props, 'yearFormat'),
       quarterFormatRef: toRef(props, 'quarterFormat'),
+      yearRangeRef: toRef(props, 'yearRange'),
       ...uniVaidation,
       ...dualValidation,
       datePickerSlots: slots

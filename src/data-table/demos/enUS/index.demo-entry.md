@@ -120,6 +120,7 @@ export-csv.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | align | `'left' \| 'right' \| 'center'` | `'left'` | Text align in column. |  |
+| allowExport | `boolean` | `true` | Can the column exported | NEXT_VERSION |
 | titleAlign | `'left' \| 'right' \| 'center'` | `null` | alignment of the table header. If omitted, the value of the above align attribute will be applied | 2.34.4 |
 | cellProps | `(rowData: object, rowIndex: number) => object` | `undefined` | HTML attributes of the column's cell. | 2.27.0 |
 | children | `DataTableColumn[]` | `undefined` | Child nodes of a grouped column. |  |

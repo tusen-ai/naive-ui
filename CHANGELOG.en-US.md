@@ -7,6 +7,7 @@
 ### Breaking Changes
 
 - Fix `n-config-provider` inherit the class prefix from it's parent by default, closes [#5970](https://github.com/tusen-ai/naive-ui/issues/5970).
+- Fix `n-date-picker` default `weekFormat` that year and week standards are different and use local week and local year
 
 ### Fixes
 
@@ -18,6 +19,10 @@
 - Fix `n-menu` can't apply HTML attributes correctly on the component when `responsive` is set.
 - Fix `n-float-button` error when used with `popover` component, closes [#5933](https://github.com/tusen-ai/naive-ui/issues/5933).
 - Fix `n-badge` unable to mask focus element border, closes [#5929](https://github.com/tusen-ai/naive-ui/issues/5929)
+- Fix `n-button` font-weight CSS variable name error, closes [#5922](https://github.com/tusen-ai/naive-ui/issues/5922)
+- Fix `n-icon`'s `component` prop not accepting FunctionalComponent.
+- Fix `n-mention`'s panel is misplaced if `placement` is set to `'top'` or padding is set to component's style, closes [#6241](https://github.com/tusen-ai/naive-ui/issues/6241).
+- Fix `n-carousel` transition not working as expected, closes [#5993](https://github.com/tusen-ai/naive-ui/issues/5993).
 
 ### Features
 
@@ -30,7 +35,10 @@
 - `n-data-table` add `rowData` return for `render-expand-icon`, closes [#6108](https://github.com/tusen-ai/naive-ui/issues/6108)
 - `n-empty` `size` prop to support `tiny` size.
 - `n-config-provider` adds `style-mount-target` prop to control where to mount components' style.
-- `n-cascader` filter ignore case sensitive
+- `n-cascader` filter ignore case sensitive.
+- `n-data-table` adds `allowExport` prop for column.
+- `n-date-picker` adds `year-range` prop.
+- `n-tree-select` adds `header` slot, closes [#5915](https://github.com/tusen-ai/naive-ui/issues/5915).
 - `n-time` add `formatOptions` prop to support custom date-fns format options
 
 ## 2.39.0
@@ -68,7 +76,7 @@
 
 - Fix `n-menu` Submenu's wai-aria role is not correct, closes [#5729](https://github.com/tusen-ai/naive-ui/issues/5729).
 - Fix `n-tabs` style bug with type is `segment`，closes [#5728](https://github.com/tusen-ai/naive-ui/issues/5728).
-- Fix the get\*String() methods for UTC/locale mismatch, closes [#5702](closes https://github.com/tusen-ai/naive-ui/issues/5702).
+- Fix the get\*String() methods for UTC/locale mismatch, closes [#5702](https://github.com/tusen-ai/naive-ui/issues/5702).
 - Fix `n-dialog` / `n-modal` calling `destroy` method may throw error.
 - Fix `useModal` setting `card` preset without corresponding props in `n-card` slots, closes [#5746](https://github.com/tusen-ai/naive-ui/issues/5746).
 - Fix `Submenu` component's wai-aria role setting error of `n-menu`，closes [#5729](https://github.com/tusen-ai/naive-ui/issues/5729).

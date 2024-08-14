@@ -207,7 +207,10 @@ function formatCsvCell(value: unknown): string {
 
 export function generateCsv(columns: TableColumn[], data: RowData[]): string {
   const exportableColumns = columns.filter(
-    column => column.type !== 'expand' && column.type !== 'selection'
+    (column) =>
+      column.type !== 'expand' &&
+      column.type !== 'selection' &&
+      column.allowExport !== false
   )
   const header = exportableColumns.map((col: any) => col.title).join(',')
   const rows = data.map((row) => {
