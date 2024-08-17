@@ -82,6 +82,7 @@ function setup(props: ExtractPropTypes<typeof radioBaseProps>): UseRadio {
     })
   }
   const NRadioGroup = inject(radioGroupInjectionKey, null)
+  const { mergedClsPrefixRef, globalSize } = useConfig(props)
   const formItem = useFormItem(props, {
     mergedSize(NFormItem) {
       const { size } = props
@@ -98,6 +99,8 @@ function setup(props: ExtractPropTypes<typeof radioBaseProps>): UseRadio {
       if (NFormItem) {
         return NFormItem.mergedSize.value
       }
+      if (globalSize.value)
+        return globalSize.value
       return 'medium'
     },
     mergedDisabled(NFormItem) {
@@ -175,7 +178,7 @@ function setup(props: ExtractPropTypes<typeof radioBaseProps>): UseRadio {
   return {
     mergedClsPrefix: NRadioGroup
       ? NRadioGroup.mergedClsPrefixRef
-      : useConfig(props).mergedClsPrefixRef,
+      : mergedClsPrefixRef,
     inputRef,
     labelRef,
     mergedName: mergedNameRef,

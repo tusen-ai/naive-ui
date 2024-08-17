@@ -79,10 +79,7 @@ export const paginationProps = {
     }
   },
   showQuickJumper: Boolean,
-  size: {
-    type: String as PropType<Size>,
-    default: 'medium'
-  },
+  size: String as PropType<Size>,
   disabled: Boolean,
   pageSlot: {
     type: Number,
@@ -153,7 +150,8 @@ export default defineComponent({
       mergedComponentPropsRef,
       mergedClsPrefixRef,
       inlineThemeDisabled,
-      mergedRtlRef
+      mergedRtlRef,
+      globalSize
     } = useConfig(props)
     const themeRef = useTheme(
       'Pagination',
@@ -258,13 +256,13 @@ export default defineComponent({
     const inputSizeRef = computed<InputSize>(() => {
       return (
         mergedComponentPropsRef?.value?.Pagination?.inputSize
-        || smallerSize(props.size)
+        || smallerSize(globalSize.value)
       )
     })
     const selectSizeRef = computed<SelectSize>(() => {
       return (
         mergedComponentPropsRef?.value?.Pagination?.selectSize
-        || smallerSize(props.size)
+        || smallerSize(globalSize.value)
       )
     })
     const startIndexRef = computed(() => {
@@ -405,7 +403,6 @@ export default defineComponent({
       disableTransitionOneTick()
     })
     const cssVarsRef = computed(() => {
-      const { size } = props
       const {
         self: {
           buttonBorder,
@@ -436,20 +433,22 @@ export default defineComponent({
           buttonColor,
           buttonColorHover,
           buttonColorPressed,
-          [createKey('itemPadding', size)]: itemPadding,
-          [createKey('itemMargin', size)]: itemMargin,
-          [createKey('inputWidth', size)]: inputWidth,
-          [createKey('selectWidth', size)]: selectWidth,
-          [createKey('inputMargin', size)]: inputMargin,
-          [createKey('selectMargin', size)]: selectMargin,
-          [createKey('jumperFontSize', size)]: jumperFontSize,
-          [createKey('prefixMargin', size)]: prefixMargin,
-          [createKey('suffixMargin', size)]: suffixMargin,
-          [createKey('itemSize', size)]: itemSize,
-          [createKey('buttonIconSize', size)]: buttonIconSize,
-          [createKey('itemFontSize', size)]: itemFontSize,
-          [`${createKey('itemMargin', size)}Rtl` as const]: itemMarginRtl,
-          [`${createKey('inputMargin', size)}Rtl` as const]: inputMarginRtl
+          [createKey('itemPadding', globalSize.value)]: itemPadding,
+          [createKey('itemMargin', globalSize.value)]: itemMargin,
+          [createKey('inputWidth', globalSize.value)]: inputWidth,
+          [createKey('selectWidth', globalSize.value)]: selectWidth,
+          [createKey('inputMargin', globalSize.value)]: inputMargin,
+          [createKey('selectMargin', globalSize.value)]: selectMargin,
+          [createKey('jumperFontSize', globalSize.value)]: jumperFontSize,
+          [createKey('prefixMargin', globalSize.value)]: prefixMargin,
+          [createKey('suffixMargin', globalSize.value)]: suffixMargin,
+          [createKey('itemSize', globalSize.value)]: itemSize,
+          [createKey('buttonIconSize', globalSize.value)]: buttonIconSize,
+          [createKey('itemFontSize', globalSize.value)]: itemFontSize,
+          [`${createKey('itemMargin', globalSize.value)}Rtl` as const]:
+            itemMarginRtl,
+          [`${createKey('inputMargin', globalSize.value)}Rtl` as const]:
+            inputMarginRtl
         },
         common: { cubicBezierEaseInOut }
       } = themeRef.value
@@ -504,8 +503,7 @@ export default defineComponent({
         'pagination',
         computed(() => {
           let hash = ''
-          const { size } = props
-          hash += size[0]
+          hash += globalSize.value[0]
           return hash
         }),
         cssVarsRef,

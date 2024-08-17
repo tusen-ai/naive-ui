@@ -1,4 +1,5 @@
 import { type ComputedRef, type Ref, computed, inject, shallowRef } from 'vue'
+import type { GlobalSize } from 'naive-ui'
 import type {
   Breakpoints,
   GlobalComponentConfig,
@@ -6,7 +7,7 @@ import type {
 } from '../config-provider/src/internal-interface'
 import { configProviderInjectionKey } from '../config-provider/src/context'
 
-type UseConfigProps = Readonly<{
+export type UseConfigProps = Readonly<{
   bordered?: boolean
   [key: string]: unknown
 }>
@@ -17,8 +18,10 @@ export default function useConfig(
   props: UseConfigProps = {},
   options: {
     defaultBordered?: boolean
+    defaultSize?: GlobalSize
   } = {
-    defaultBordered: true
+    defaultBordered: true,
+    defaultSize: 'medium'
   }
 ): {
     inlineThemeDisabled: boolean | undefined
@@ -28,6 +31,7 @@ export default function useConfig(
     mergedBreakpointsRef: Ref<Breakpoints> | undefined
     mergedComponentPropsRef: Ref<GlobalComponentConfig | undefined> | undefined
     namespaceRef: ComputedRef<string | undefined>
+    globalSize: Ref<GlobalSize>
   } {
   const NConfigProvider = inject(configProviderInjectionKey, null)
   return {
@@ -49,7 +53,16 @@ export default function useConfig(
     mergedClsPrefixRef: NConfigProvider
       ? NConfigProvider.mergedClsPrefixRef
       : shallowRef(defaultClsPrefix),
-    namespaceRef: computed(() => NConfigProvider?.mergedNamespaceRef.value)
+    namespaceRef: computed(() => NConfigProvider?.mergedNamespaceRef.value),
+    globalSize: computed(() => {
+      if (props && props.size) {
+        return props.size as GlobalSize
+      }
+      if (NConfigProvider?.globalSize.value) {
+        return NConfigProvider?.globalSize.value
+      }
+      return options.defaultSize!
+    })
   }
 }
 

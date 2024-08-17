@@ -14,6 +14,7 @@ os-theme.vue
 language.vue
 transparent.vue
 inline-theme-disabled.vue
+size.vue
 ```
 
 ## API
@@ -35,3 +36,4 @@ inline-theme-disabled.vue
 | tag | `string` | `'div'` | `n-config-provider` 被渲染成的元素 |  |
 | theme | `Theme \| null` | `undefined` | 对后代组件生效的主题对象，为 `null` 时会使用默认亮色，为 `undefined` 时会继承上级 `n-config-provider`。更多信息参见[调整主题](../docs/customize-theme) |  |
 | theme-overrides | `ThemeOverrides \| null` | `undefined` | 对后代组件生效的主题变量覆盖，为 `null` 时会清除全部覆盖变量，为 `undefined` 时会继承上级 `n-config-provider`。更多信息参见[调整主题](../docs/customize-theme) |  |
+| size | `small \| medium \| large` | `undefined` | 全局组件大小。 |  |

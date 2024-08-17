@@ -127,6 +127,12 @@ const Button = defineComponent({
       )
     })
     const NButtonGroup = inject(buttonGroupInjectionKey, {})
+    const {
+      inlineThemeDisabled,
+      mergedClsPrefixRef,
+      mergedRtlRef,
+      globalSize
+    } = useConfig(props)
     const { mergedSizeRef } = useFormItem(
       {},
       {
@@ -135,13 +141,18 @@ const Button = defineComponent({
           const { size } = props
           if (size)
             return size
+
           const { size: buttonGroupSize } = NButtonGroup
           if (buttonGroupSize)
             return buttonGroupSize
+
           const { mergedSize: formItemSize } = NFormItem || {}
-          if (formItemSize) {
+          if (formItemSize)
             return formItemSize.value
-          }
+
+          if (globalSize.value)
+            return globalSize.value
+
           return 'medium'
         }
       }
@@ -198,8 +209,6 @@ const Button = defineComponent({
     const handleBlur = (): void => {
       enterPressedRef.value = false
     }
-    const { inlineThemeDisabled, mergedClsPrefixRef, mergedRtlRef }
-      = useConfig(props)
     const themeRef = useTheme(
       'Button',
       '-button',

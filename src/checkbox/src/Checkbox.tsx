@@ -96,8 +96,12 @@ export default defineComponent({
     }
     const NCheckboxGroup = inject(checkboxGroupInjectionKey, null)
     const selfRef = ref<HTMLDivElement | null>(null)
-    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
-      = useConfig(props)
+    const {
+      mergedClsPrefixRef,
+      inlineThemeDisabled,
+      mergedRtlRef,
+      globalSize
+    } = useConfig(props)
     const uncontrolledCheckedRef = ref(props.defaultChecked)
     const controlledCheckedRef = toRef(props, 'checked')
     const mergedCheckedRef = useMergedState(
@@ -121,17 +125,23 @@ export default defineComponent({
         const { size } = props
         if (size !== undefined)
           return size
+
         if (NCheckboxGroup) {
           const { value: mergedSize } = NCheckboxGroup.mergedSizeRef
           if (mergedSize !== undefined) {
             return mergedSize
           }
         }
+
         if (NFormItem) {
           const { mergedSize } = NFormItem
           if (mergedSize !== undefined)
             return mergedSize.value
         }
+
+        if (globalSize.value)
+          return globalSize.value
+
         return 'medium'
       },
       mergedDisabled(NFormItem) {

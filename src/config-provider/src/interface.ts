@@ -23,3 +23,5 @@ export type {
   GlobalIconConfig,
   GlobalComponentConfig
 } from './internal-interface'
+
+export type GlobalSize = 'small' | 'medium' | 'large'

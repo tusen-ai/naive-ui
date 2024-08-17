@@ -37,10 +37,7 @@ const iconRenderMap = {
 
 export const resultProps = {
   ...(useTheme.props as ThemeProps<ResultTheme>),
-  size: {
-    type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
-    default: 'medium'
-  },
+  size: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
   status: {
     type: String as PropType<
       'info' | 'success' | 'warning' | 'error' | '404' | '403' | '500' | '418'
@@ -57,7 +54,8 @@ export default defineComponent({
   name: 'Result',
   props: resultProps,
   setup(props) {
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, globalSize }
+      = useConfig(props)
     const themeRef = useTheme(
       'Result',
       '-result',
@@ -67,7 +65,7 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const cssVarsRef = computed(() => {
-      const { size, status } = props
+      const { status } = props
       const {
         common: { cubicBezierEaseInOut },
         self: {
@@ -76,9 +74,9 @@ export default defineComponent({
           titleTextColor,
           titleFontWeight,
           [createKey('iconColor', status)]: iconColor,
-          [createKey('fontSize', size)]: fontSize,
-          [createKey('titleFontSize', size)]: titleFontSize,
-          [createKey('iconSize', size)]: iconSize
+          [createKey('fontSize', globalSize.value)]: fontSize,
+          [createKey('titleFontSize', globalSize.value)]: titleFontSize,
+          [createKey('iconSize', globalSize.value)]: iconSize
         }
       } = themeRef.value
       return {
@@ -97,10 +95,10 @@ export default defineComponent({
       ? useThemeClass(
         'result',
         computed(() => {
-          const { size, status } = props
+          const { status } = props
           let hash = ''
-          if (size) {
-            hash += size[0]
+          if (globalSize.value) {
+            hash += globalSize.value[0]
           }
           if (status) {
             hash += status[0]

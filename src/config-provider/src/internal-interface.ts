@@ -101,7 +101,7 @@ import type { SplitTheme } from '../../split/styles'
 import type { FlexTheme } from '../../flex/styles'
 import type { FloatButtonGroupTheme } from '../../float-button-group/styles'
 import type { Katex } from './katex'
-import type { GlobalTheme, GlobalThemeOverrides } from './interface'
+import type { GlobalSize, GlobalTheme, GlobalThemeOverrides } from './interface'
 
 export interface GlobalThemeWithoutCommon {
   Alert?: AlertTheme
@@ -269,4 +269,5 @@ export interface ConfigProviderInjection {
   inlineThemeDisabled: boolean
   preflightStyleDisabled: boolean
   styleMountTarget: ParentNode | undefined
+  globalSize: Ref<GlobalSize | undefined>
 }

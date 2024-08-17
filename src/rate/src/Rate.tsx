@@ -33,10 +33,7 @@ export const rateProps = {
     default: null
   },
   readonly: Boolean,
-  size: {
-    type: [String, Number] as PropType<number | 'small' | 'medium' | 'large'>,
-    default: 'medium'
-  },
+  size: [String, Number] as PropType<RateSize>,
   clearable: Boolean,
   color: String,
   onClear: Function as PropType<() => void>,
@@ -47,6 +44,7 @@ export const rateProps = {
 } as const
 
 export type RateProps = ExtractPublicPropTypes<typeof rateProps>
+type RateSize = number | 'small' | 'medium' | 'large'
 
 export default defineComponent({
   name: 'Rate',
@@ -64,7 +62,7 @@ export default defineComponent({
     const controlledValueRef = toRef(props, 'value')
     const uncontrolledValueRef = ref(props.defaultValue)
     const hoverIndexRef = ref<number | null>(null)
-    const formItem = useFormItem(props)
+    const formItem = useFormItem<RateSize>(props)
     const mergedValue = useMergedState(controlledValueRef, uncontrolledValueRef)
     function doUpdateValue(value: number | null): void {
       const { 'onUpdate:value': _onUpdateValue, onUpdateValue } = props
@@ -121,13 +119,13 @@ export default defineComponent({
       cleared = false
     }
     const mergedSizeRef = computed(() => {
-      const { size } = props
+      const { mergedSizeRef: size } = formItem
       const { self } = themeRef.value
-      if (typeof size === 'number') {
-        return `${size}px`
+      if (typeof size.value === 'number') {
+        return `${size.value}px`
       }
       else {
-        return self[createKey('size', size)]
+        return self[createKey('size', size.value)]
       }
     })
     const cssVarsRef = computed(() => {

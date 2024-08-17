@@ -30,10 +30,7 @@ export const tableProps = {
   },
   striped: Boolean,
   singleColumn: Boolean,
-  size: {
-    type: String as PropType<'small' | 'medium' | 'large'>,
-    default: 'medium'
-  }
+  size: String as PropType<'small' | 'medium' | 'large'>
 }
 
 export type TableProps = ExtractPublicPropTypes<typeof tableProps>
@@ -42,8 +39,12 @@ export default defineComponent({
   name: 'Table',
   props: tableProps,
   setup(props) {
-    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
-      = useConfig(props)
+    const {
+      mergedClsPrefixRef,
+      inlineThemeDisabled,
+      mergedRtlRef,
+      globalSize
+    } = useConfig(props)
     const themeRef = useTheme(
       'Table',
       '-table',
@@ -54,7 +55,6 @@ export default defineComponent({
     )
     const rtlEnabledRef = useRtl('Table', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
-      const { size } = props
       const {
         self: {
           borderColor,
@@ -74,9 +74,9 @@ export default defineComponent({
           tdColorStriped,
           tdColorStripedModal,
           tdColorStripedPopover,
-          [createKey('fontSize', size)]: fontSize,
-          [createKey('tdPadding', size)]: tdPadding,
-          [createKey('thPadding', size)]: thPadding
+          [createKey('fontSize', globalSize.value)]: fontSize,
+          [createKey('tdPadding', globalSize.value)]: tdPadding,
+          [createKey('thPadding', globalSize.value)]: thPadding
         },
         common: { cubicBezierEaseInOut }
       } = themeRef.value
@@ -108,7 +108,7 @@ export default defineComponent({
       ? useThemeClass(
         'table',
         computed(() => {
-          return props.size[0]
+          return globalSize.value[0]
         }),
         cssVarsRef,
         props

@@ -43,10 +43,7 @@ export const descriptionsProps = {
     type: String,
     default: ':'
   },
-  size: {
-    type: String as PropType<'small' | 'medium' | 'large'>,
-    default: 'medium'
-  },
+  size: String as PropType<'small' | 'medium' | 'large'>,
   bordered: Boolean,
   labelClass: String,
   labelStyle: [Object, String] as PropType<string | CSSProperties>,
@@ -62,7 +59,8 @@ export default defineComponent({
   name: 'Descriptions',
   props: descriptionsProps,
   setup(props) {
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, globalSize }
+      = useConfig(props)
     const themeRef = useTheme(
       'Descriptions',
       '-descriptions',
@@ -72,7 +70,7 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const cssVarsRef = computed(() => {
-      const { size, bordered } = props
+      const { bordered } = props
       const {
         common: { cubicBezierEaseInOut },
         self: {
@@ -91,11 +89,15 @@ export default defineComponent({
           borderColorPopover,
           borderRadius,
           lineHeight,
-          [createKey('fontSize', size)]: fontSize,
-          [createKey(bordered ? 'thPaddingBordered' : 'thPadding', size)]:
-            thPadding,
-          [createKey(bordered ? 'tdPaddingBordered' : 'tdPadding', size)]:
-            tdPadding
+          [createKey('fontSize', globalSize.value)]: fontSize,
+          [createKey(
+            bordered ? 'thPaddingBordered' : 'thPadding',
+            globalSize.value
+          )]: thPadding,
+          [createKey(
+            bordered ? 'tdPaddingBordered' : 'tdPadding',
+            globalSize.value
+          )]: tdPadding
         }
       } = themeRef.value
       return {
@@ -125,10 +127,10 @@ export default defineComponent({
         'descriptions',
         computed(() => {
           let hash = ''
-          const { size, bordered } = props
+          const { bordered } = props
           if (bordered)
             hash += 'a'
-          hash += size[0]
+          hash += globalSize.value[0]
           return hash
         }),
         cssVarsRef,
@@ -141,7 +143,8 @@ export default defineComponent({
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       compitableColumn: useCompitable(props, ['columns', 'column']),
-      inlineThemeDisabled
+      inlineThemeDisabled,
+      globalSize
     }
   },
   render() {
@@ -154,7 +157,7 @@ export default defineComponent({
       compitableColumn,
       labelPlacement,
       labelAlign,
-      size,
+      globalSize,
       bordered,
       title,
       cssVars,
@@ -317,7 +320,7 @@ export default defineComponent({
           this.themeClass,
           `${mergedClsPrefix}-descriptions--${labelPlacement}-label-placement`,
           `${mergedClsPrefix}-descriptions--${labelAlign}-label-align`,
-          `${mergedClsPrefix}-descriptions--${size}-size`,
+          `${mergedClsPrefix}-descriptions--${globalSize}-size`,
           bordered && `${mergedClsPrefix}-descriptions--bordered`
         ]}
       >

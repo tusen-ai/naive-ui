@@ -76,10 +76,7 @@ export const tabsProps = {
     | 'start'
     | 'end'
   >,
-  size: {
-    type: String as PropType<'small' | 'medium' | 'large'>,
-    default: 'medium'
-  },
+  size: String as PropType<'small' | 'medium' | 'large'>,
   placement: {
     type: String as PropType<'top' | 'left' | 'right' | 'bottom'>,
     default: 'top'
@@ -141,7 +138,8 @@ export default defineComponent({
       })
     }
 
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, globalSize }
+      = useConfig(props)
     const themeRef = useTheme(
       'Tabs',
       '-tabs',
@@ -164,6 +162,15 @@ export default defineComponent({
     const endReachedRef = ref(true)
 
     const compitableSizeRef = useCompitable(props, ['labelSize', 'size'])
+    const mergedSizeRef = computed(() => {
+      if (compitableSizeRef.value)
+        return compitableSizeRef.value
+
+      if (globalSize.value)
+        return globalSize.value
+
+      return 'medium'
+    })
     const compitableValueRef = useCompitable(props, ['activeName', 'value'])
     const uncontrolledValueRef = ref(
       compitableValueRef.value
@@ -668,7 +675,7 @@ export default defineComponent({
     }
 
     const cssVarsRef = computed(() => {
-      const { value: size } = compitableSizeRef
+      const { value: size } = mergedSizeRef
       const { type } = props
       const typeSuffix = (
         {
@@ -752,7 +759,7 @@ export default defineComponent({
       ? useThemeClass(
         'tabs',
         computed(() => {
-          return `${compitableSizeRef.value[0]}${props.type[0]}`
+          return `${mergedSizeRef.value[0]}${props.type[0]}`
         }),
         cssVarsRef,
         props
@@ -773,7 +780,7 @@ export default defineComponent({
       addTabFixed: addTabFixedRef,
       tabWrapperStyle: tabWrapperStyleRef,
       handleNavResize,
-      mergedSize: compitableSizeRef,
+      mergedSize: mergedSizeRef,
       handleScroll,
       handleTabsResize,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,

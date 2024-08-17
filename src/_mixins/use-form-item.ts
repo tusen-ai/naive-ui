@@ -8,6 +8,8 @@ import {
 } from 'vue'
 import type { FormValidationStatus } from '../form/src/interface'
 import { createInjectionKey } from '../_utils'
+import type { UseConfigProps } from './use-config'
+import { useConfig } from './index'
 
 type FormItemSize = 'small' | 'medium' | 'large'
 type AllowedSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge' | number
@@ -58,6 +60,7 @@ export default function useFormItem<T extends AllowedSize = FormItemSize>(
   }: UseFormItemOptions<T> = {}
 ): UseFormItem<T> {
   const NFormItem = inject(formItemInjectionKey, null)
+  const { globalSize } = useConfig(props as UseConfigProps)
   provide(formItemInjectionKey, null)
   const mergedSizeRef = computed(
     mergedSize
@@ -72,6 +75,10 @@ export default function useFormItem<T extends AllowedSize = FormItemSize>(
               return mergedSize.value as T
             }
           }
+
+          if (globalSize.value)
+            return globalSize.value as T
+
           return defaultSize as T
         }
   )

@@ -44,7 +44,9 @@ export default defineComponent({
   props: skeletonProps,
   setup(props) {
     useHoudini()
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, globalSize } = useConfig(props, {
+      defaultSize: undefined
+    })
     const themeRef = useTheme(
       'Skeleton',
       '-skeleton',
@@ -63,10 +65,9 @@ export default defineComponent({
         const selfThemeVars = theme.self
         const { color, colorEnd, borderRadius } = selfThemeVars
         let sizeHeight: string | undefined
-        const { circle, sharp, round, width, height, size, text, animated }
-          = props
-        if (size !== undefined) {
-          sizeHeight = selfThemeVars[createKey('height', size)]
+        const { circle, sharp, round, width, height, text, animated } = props
+        if (globalSize.value !== undefined) {
+          sizeHeight = selfThemeVars[createKey('height', globalSize.value)]
         }
         const mergedWidth = circle ? (width ?? height ?? sizeHeight) : width
         const mergedHeight = (circle ? (width ?? height) : height) ?? sizeHeight
