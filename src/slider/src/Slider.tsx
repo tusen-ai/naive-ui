@@ -19,7 +19,7 @@ import {
   VBinder,
   VFollower,
   VTarget
-} from 'vueuc'
+} from 'vueuc/es'
 import { useIsMounted, useMergedState } from 'vooks'
 import { off, on } from 'evtd'
 import {

@@ -27,7 +27,7 @@ import {
   startOfWeek,
   startOfYear
 } from 'date-fns'
-import type { VirtualListInst } from 'vueuc'
+import type { VirtualListInst } from 'vueuc/es'
 import type { ScrollbarInst } from '../../../_internal'
 import {
   dateArray,

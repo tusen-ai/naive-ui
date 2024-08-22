@@ -25,7 +25,7 @@ import {
   type FollowerPlacement,
   VFocusTrap,
   VFollower
-} from 'vueuc'
+} from 'vueuc/es'
 import { clickoutside, mousemoveoutside } from 'vdirs'
 import { getPreciseEventTarget } from 'seemly'
 import { NxScrollbar } from '../../_internal/scrollbar'
@@ -373,8 +373,8 @@ export default defineComponent({
                 hasHeaderOrFooter
                   ? undefined
                   : `${mergedClsPrefix}-popover__content ${
-                      props.contentClass ?? ''
-                    }`
+                    props.contentClass ?? ''
+                  }`
               }
               contentStyle={hasHeaderOrFooter ? undefined : props.contentStyle}
             >

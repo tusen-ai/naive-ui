@@ -20,7 +20,7 @@ import {
   withDirectives
 } from 'vue'
 import { clickoutside } from 'vdirs'
-import { VFocusTrap } from 'vueuc'
+import { VFocusTrap } from 'vueuc/es'
 import { dialogPropKeys } from '../../dialog/src/dialogProps'
 import { NDialog } from '../../dialog/src/Dialog'
 import { cardBasePropKeys } from '../../card/src/Card'
@@ -260,8 +260,8 @@ export default defineComponent({
                                     <NDialog
                                       {...this.$attrs}
                                       class={[
-                                      `${mergedClsPrefix}-modal`,
-                                      this.$attrs.class
+                                        `${mergedClsPrefix}-modal`,
+                                        this.$attrs.class
                                       ]}
                                       ref="bodyRef"
                                       theme={this.mergedTheme.peers.Dialog}
@@ -278,8 +278,8 @@ export default defineComponent({
                                       {...this.$attrs}
                                       ref="bodyRef"
                                       class={[
-                                      `${mergedClsPrefix}-modal`,
-                                      this.$attrs.class
+                                        `${mergedClsPrefix}-modal`,
+                                        this.$attrs.class
                                       ]}
                                       theme={this.mergedTheme.peers.Card}
                                       themeOverrides={

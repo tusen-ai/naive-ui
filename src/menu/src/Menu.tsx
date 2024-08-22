@@ -20,7 +20,7 @@ import {
   VOverflow,
   type VOverflowInst,
   VResizeObserver
-} from 'vueuc'
+} from 'vueuc/es'
 import { createId } from 'seemly'
 import { layoutSiderInjectionKey } from '../../layout/src/interface'
 import type { DropdownProps } from '../../dropdown'

@@ -15,7 +15,7 @@ import {
   vShow
 } from 'vue'
 import { useBreakpoints, useMemo } from 'vooks'
-import { VResizeObserver, type VResizeObserverOnResize } from 'vueuc'
+import { VResizeObserver, type VResizeObserverOnResize } from 'vueuc/es'
 import { beforeNextFrameOnce, parseResponsivePropValue, pxfy } from 'seemly'
 import { defaultBreakpoints } from '../../config-provider/src/config'
 import { useConfig } from '../../_mixins'

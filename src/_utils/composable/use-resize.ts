@@ -1,5 +1,5 @@
 import { type Ref, onBeforeUnmount, onMounted } from 'vue'
-import { resizeObserverManager } from 'vueuc'
+import { resizeObserverManager } from 'vueuc/es'
 
 export function useOnResize(
   elRef: Ref<HTMLElement | null>,

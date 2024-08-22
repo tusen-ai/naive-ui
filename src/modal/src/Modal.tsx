@@ -13,7 +13,7 @@ import {
 } from 'vue'
 import { zindexable } from 'vdirs'
 import { useClickPosition, useClicked, useIsMounted } from 'vooks'
-import { VLazyTeleport } from 'vueuc'
+import { VLazyTeleport } from 'vueuc/es'
 import { getPreciseEventTarget } from 'seemly'
 import { dialogProviderInjectionKey } from '../../dialog/src/context'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'

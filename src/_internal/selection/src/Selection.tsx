@@ -14,7 +14,7 @@ import {
   watch,
   watchEffect
 } from 'vue'
-import { VOverflow, type VOverflowInst } from 'vueuc'
+import { VOverflow, type VOverflowInst } from 'vueuc/es'
 import { getPadding } from 'seemly'
 import type {
   RenderLabel,

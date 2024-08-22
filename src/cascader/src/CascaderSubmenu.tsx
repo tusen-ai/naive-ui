@@ -1,5 +1,5 @@
 import { type PropType, computed, defineComponent, h, inject, ref } from 'vue'
-import { VirtualList, type VirtualListInst } from 'vueuc'
+import { VirtualList, type VirtualListInst } from 'vueuc/es'
 import { depx } from 'seemly'
 import { NScrollbar } from '../../_internal'
 import type { ScrollbarInst } from '../../_internal'

@@ -26,7 +26,7 @@ import {
   VBinder,
   VFollower,
   VTarget
-} from 'vueuc'
+} from 'vueuc/es'
 import { changeColor, depx, getPreciseEventTarget, happensIn } from 'seemly'
 import { useIsMounted, useMergedState } from 'vooks'
 import type { FormValidationStatus } from '../../form/src/interface'

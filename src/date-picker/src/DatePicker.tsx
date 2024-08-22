@@ -14,7 +14,7 @@ import {
   watchEffect,
   withDirectives
 } from 'vue'
-import { VBinder, VFollower, VTarget } from 'vueuc'
+import { VBinder, VFollower, VTarget } from 'vueuc/es'
 import { clickoutside } from 'vdirs'
 import { format, getTime, isValid } from 'date-fns'
 import { useIsMounted, useMergedState } from 'vooks'

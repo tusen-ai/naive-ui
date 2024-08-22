@@ -21,7 +21,7 @@ import {
   VBinder,
   VFollower,
   VTarget
-} from 'vueuc'
+} from 'vueuc/es'
 import { useCompitable, useIsMounted, useMergedState } from 'vooks'
 import { clickoutside } from 'vdirs'
 import type {

@@ -26,7 +26,7 @@ import {
   VVirtualList,
   type VirtualListInst,
   type VirtualListScrollToOptions
-} from 'vueuc'
+} from 'vueuc/es'
 import { depx, getPadding, pxfy } from 'seemly'
 import { treeSelectInjectionKey } from '../../tree-select/src/interface'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'

@@ -12,7 +12,7 @@ import {
   watchEffect
 } from 'vue'
 import { pxfy, repeat } from 'seemly'
-import { VResizeObserver, VirtualList, type VirtualListInst } from 'vueuc'
+import { VResizeObserver, VirtualList, type VirtualListInst } from 'vueuc/es'
 import type { CNode } from 'css-render'
 import { useMemo } from 'vooks'
 import { cssrAnchorMetaName } from '../../../_mixins/common'

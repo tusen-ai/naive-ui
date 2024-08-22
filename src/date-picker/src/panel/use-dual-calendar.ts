@@ -13,7 +13,7 @@ import {
   startOfQuarter,
   startOfSecond
 } from 'date-fns'
-import type { VirtualListInst } from 'vueuc'
+import type { VirtualListInst } from 'vueuc/es'
 import {
   type DateItem,
   type MonthItem,

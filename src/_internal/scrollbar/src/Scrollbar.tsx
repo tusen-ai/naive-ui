@@ -12,7 +12,7 @@ import {
 } from 'vue'
 import type { CSSProperties, HTMLAttributes, PropType, VNode } from 'vue'
 import { off, on } from 'evtd'
-import { VResizeObserver } from 'vueuc'
+import { VResizeObserver } from 'vueuc/es'
 import { useIsIos } from 'vooks'
 import { depx, getPreciseEventTarget } from 'seemly'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../../_mixins'

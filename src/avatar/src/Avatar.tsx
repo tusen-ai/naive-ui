@@ -12,7 +12,7 @@ import {
   watch,
   watchEffect
 } from 'vue'
-import { VResizeObserver } from 'vueuc'
+import { VResizeObserver } from 'vueuc/es'
 import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
 import {
   type IntersectionObserverOptions,

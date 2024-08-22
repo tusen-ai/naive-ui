@@ -23,6 +23,7 @@
 - 修复 `n-icon` 的 `component` 属性不接受 FunctionalComponent 问题
 - 修复 `n-mention` 的面板在 `placement` 设为 `'top'` 或者组件设定的 padding 的时候位置有问题，关闭 [#6241](https://github.com/tusen-ai/naive-ui/issues/6241)
 - 修复 `n-carousel` 中轮播图的过渡行为不符合预期问题，关闭 [#5993](https://github.com/tusen-ai/naive-ui/issues/5993)
+- 修复 `n-avatar` `n-carousel` `n-back-top` 等使用了vueuc工具库的组件在nuxt下构建失败的问题
 
 ### Features
 

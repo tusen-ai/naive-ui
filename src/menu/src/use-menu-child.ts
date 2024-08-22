@@ -1,6 +1,6 @@
 import type { Key } from 'treemate'
 import { type ComputedRef, type Ref, computed, inject } from 'vue'
-import type { FollowerPlacement } from 'vueuc'
+import type { FollowerPlacement } from 'vueuc/es'
 import type { MergedTheme } from '../../_mixins/use-theme'
 import type { MenuTheme } from '../styles'
 import type { OnUpdateValueImpl } from './interface'

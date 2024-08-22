@@ -13,7 +13,7 @@ import {
   withDirectives
 } from 'vue'
 import { type TreeNode, createTreeMate } from 'treemate'
-import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc'
+import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc/es'
 import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import { getPreciseEventTarget } from 'seemly'

@@ -12,7 +12,7 @@ import {
 } from 'vue'
 import { type Key, type TreeNode, createTreeMate } from 'treemate'
 import { useKeyboard, useMemo, useMergedState } from 'vooks'
-import type { FollowerPlacement } from 'vueuc'
+import type { FollowerPlacement } from 'vueuc/es'
 import type { InternalRenderBody } from '../../popover/src/interface'
 import { popoverBaseProps } from '../../popover/src/Popover'
 import type { PopoverInternalProps } from '../../popover/src/Popover'

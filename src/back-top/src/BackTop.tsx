@@ -13,7 +13,7 @@ import {
   watch,
   watchEffect
 } from 'vue'
-import { VLazyTeleport } from 'vueuc'
+import { VLazyTeleport } from 'vueuc/es'
 import { useIsMounted, useMergedState } from 'vooks'
 import { getScrollParent, unwrapElement } from 'seemly'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
@@ -291,10 +291,10 @@ export default defineComponent({
                         'div',
                         mergeProps(this.$attrs, {
                           class: [
-                              `${mergedClsPrefix}-back-top`,
-                              this.themeClass,
-                              this.transitionDisabled
-                              && `${mergedClsPrefix}-back-top--transition-disabled`
+                            `${mergedClsPrefix}-back-top`,
+                            this.themeClass,
+                            this.transitionDisabled
+                            && `${mergedClsPrefix}-back-top--transition-disabled`
                           ],
                           style: [this.style, this.cssVars],
                           onClick: this.handleClick

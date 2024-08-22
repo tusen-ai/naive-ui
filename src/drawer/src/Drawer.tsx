@@ -11,7 +11,7 @@ import {
   watchEffect,
   withDirectives
 } from 'vue'
-import { VLazyTeleport } from 'vueuc'
+import { VLazyTeleport } from 'vueuc/es'
 import { zindexable } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'

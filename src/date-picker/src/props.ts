@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import type { FollowerPlacement } from 'vueuc'
+import type { FollowerPlacement } from 'vueuc/es'
 import type { ThemeProps } from '../../_mixins'
 import { useTheme } from '../../_mixins'
 import type { MaybeArray } from '../../_utils'

@@ -1,5 +1,5 @@
 import { type PropType, defineComponent, h, inject, ref } from 'vue'
-import { VirtualList, type VirtualListInst } from 'vueuc'
+import { VirtualList, type VirtualListInst } from 'vueuc/es'
 import { NEmpty } from '../../empty'
 import { NScrollbar, type ScrollbarInst } from '../../_internal'
 import { type Option, transferInjectionKey } from './interface'

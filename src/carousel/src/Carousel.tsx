@@ -17,7 +17,7 @@ import {
   withDirectives
 } from 'vue'
 import type { CSSProperties, PropType, Ref, TransitionProps, VNode } from 'vue'
-import { VResizeObserver } from 'vueuc'
+import { VResizeObserver } from 'vueuc/es'
 import { useMergedState } from 'vooks'
 import { off, on } from 'evtd'
 import { getPreciseEventTarget } from 'seemly'
