@@ -4,12 +4,12 @@ import {
   type VirtualListInst,
   type VirtualListItemData,
   type VirtualListScrollToOptions
-} from 'vueuc'
+} from 'vueuc/es'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ScrollbarProps } from '../../scrollbar/src/Scrollbar'
 import { NxScrollbar, type ScrollbarInst } from '../../_internal'
 
-export { type VirtualListInst } from 'vueuc'
+export { type VirtualListInst } from 'vueuc/es'
 
 export const virtualListProps = {
   scrollbarProps: Object as PropType<ScrollbarProps>,

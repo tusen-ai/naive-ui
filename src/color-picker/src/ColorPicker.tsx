@@ -39,7 +39,7 @@ import {
   toRgbaString
 } from 'seemly'
 import { useIsMounted, useMergedState } from 'vooks'
-import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc'
+import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc/es'
 import { clickoutside } from 'vdirs'
 import { colorPickerLight } from '../styles'
 import type { ColorPickerTheme } from '../styles'

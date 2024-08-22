@@ -20,7 +20,7 @@ import {
   type FollowerPlacement,
   VBinder,
   VTarget
-} from 'vueuc'
+} from 'vueuc/es'
 import { useCompitable, useIsMounted, useMemo, useMergedState } from 'vooks'
 import { zindexable } from 'vdirs'
 import {

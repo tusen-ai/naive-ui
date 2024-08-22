@@ -6,7 +6,7 @@ import {
   ref,
   withDirectives
 } from 'vue'
-import { VBinder, VFollower, VTarget } from 'vueuc'
+import { VBinder, VFollower, VTarget } from 'vueuc/es'
 import { clickoutside } from 'vdirs'
 import { getPreciseEventTarget } from 'seemly'
 import MonthPanel from './month'

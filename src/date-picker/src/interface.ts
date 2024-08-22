@@ -1,5 +1,5 @@
 import type { Ref, Slots, UnwrapNestedRefs } from 'vue'
-import type { VirtualListInst } from 'vueuc'
+import type { VirtualListInst } from 'vueuc/es'
 import type { NDateLocale, NLocale } from '../../locales'
 import type { ScrollbarInst } from '../../_internal'
 import type {

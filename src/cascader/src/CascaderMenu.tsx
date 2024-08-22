@@ -7,7 +7,7 @@ import {
   ref,
   withDirectives
 } from 'vue'
-import type { FollowerPlacement } from 'vueuc'
+import type { FollowerPlacement } from 'vueuc/es'
 import { clickoutside } from 'vdirs'
 import FocusDetector from '../../_internal/focus-detector'
 import type { MenuMaskRef } from '../../_internal/menu-mask'

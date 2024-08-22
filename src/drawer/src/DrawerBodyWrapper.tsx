@@ -16,7 +16,7 @@ import {
   watchEffect,
   withDirectives
 } from 'vue'
-import { VFocusTrap } from 'vueuc'
+import { VFocusTrap } from 'vueuc/es'
 import { clickoutside } from 'vdirs'
 import { useConfig, useRtl } from '../../_mixins'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
@@ -272,28 +272,28 @@ export default defineComponent({
                             ref: 'bodyRef',
                             'aria-modal': 'true',
                             class: [
-                                `${mergedClsPrefix}-drawer`,
-                                this.rtlEnabled
-                                && `${mergedClsPrefix}-drawer--rtl`,
-                                `${mergedClsPrefix}-drawer--${this.placement}-placement`,
-                                /**
-                                 * When the mouse is pressed to resize the drawer,
-                                 * disable text selection
-                                 */
-                                this.isDragging
-                                && `${mergedClsPrefix}-drawer--unselectable`,
-                                this.nativeScrollbar
-                                && `${mergedClsPrefix}-drawer--native-scrollbar`
+                              `${mergedClsPrefix}-drawer`,
+                              this.rtlEnabled
+                              && `${mergedClsPrefix}-drawer--rtl`,
+                              `${mergedClsPrefix}-drawer--${this.placement}-placement`,
+                              /**
+                               * When the mouse is pressed to resize the drawer,
+                               * disable text selection
+                               */
+                              this.isDragging
+                              && `${mergedClsPrefix}-drawer--unselectable`,
+                              this.nativeScrollbar
+                              && `${mergedClsPrefix}-drawer--native-scrollbar`
                             ]
                           }),
                           [
                             this.resizable ? (
                               <div
                                 class={[
-                                    `${mergedClsPrefix}-drawer__resize-trigger`,
-                                    (this.isDragging
-                                    || this.isHoverOnResizeTrigger)
-                                    && `${mergedClsPrefix}-drawer__resize-trigger--hover`
+                                  `${mergedClsPrefix}-drawer__resize-trigger`,
+                                  (this.isDragging
+                                  || this.isHoverOnResizeTrigger)
+                                  && `${mergedClsPrefix}-drawer__resize-trigger--hover`
                                 ]}
                                 onMouseenter={
                                   this.handleMouseenterResizeTrigger
@@ -309,8 +309,8 @@ export default defineComponent({
                             this.nativeScrollbar ? (
                               <div
                                 class={[
-                                    `${mergedClsPrefix}-drawer-content-wrapper`,
-                                    this.contentClass
+                                  `${mergedClsPrefix}-drawer-content-wrapper`,
+                                  this.contentClass
                                 ]}
                                 style={this.contentStyle}
                                 role="none"
@@ -322,8 +322,8 @@ export default defineComponent({
                                 {...this.scrollbarProps}
                                 contentStyle={this.contentStyle}
                                 contentClass={[
-                                    `${mergedClsPrefix}-drawer-content-wrapper`,
-                                    this.contentClass
+                                  `${mergedClsPrefix}-drawer-content-wrapper`,
+                                  this.contentClass
                                 ]}
                                 theme={this.mergedTheme.peers.Scrollbar}
                                 themeOverrides={

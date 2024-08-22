@@ -18,7 +18,7 @@ import {
 } from 'vue'
 import { zindexable } from 'vdirs'
 import { useIsMounted } from 'vooks'
-import { LazyTeleport } from 'vueuc'
+import { LazyTeleport } from 'vueuc/es'
 import { off, on } from 'evtd'
 import { beforeNextFrameOnce } from 'seemly'
 import { kebabCase } from 'lodash-es'

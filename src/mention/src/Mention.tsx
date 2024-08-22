@@ -16,7 +16,7 @@ import {
   VBinder,
   VFollower,
   VTarget
-} from 'vueuc'
+} from 'vueuc/es'
 import { useIsMounted, useMergedState } from 'vooks'
 import type { FormValidationStatus } from '../../form/src/interface'
 import type { RenderLabel } from '../../_internal/select-menu/src/interface'

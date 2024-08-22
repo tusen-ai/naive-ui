@@ -14,7 +14,7 @@ import {
   withDirectives
 } from 'vue'
 import { useIsMounted, useKeyboard, useMergedState } from 'vooks'
-import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc'
+import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc/es'
 import { clickoutside } from 'vdirs'
 import { getPreciseEventTarget, happensIn } from 'seemly'
 import {

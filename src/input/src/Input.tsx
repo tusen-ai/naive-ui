@@ -21,7 +21,7 @@ import {
 } from 'vue'
 import { useMemo, useMergedState } from 'vooks'
 import { getPadding } from 'seemly'
-import { VResizeObserver } from 'vueuc'
+import { VResizeObserver } from 'vueuc/es'
 import { off, on } from 'evtd'
 import { isSafari } from '../../_utils/env/browser'
 import type { FormValidationStatus } from '../../form/src/interface'

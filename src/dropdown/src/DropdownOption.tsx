@@ -12,7 +12,7 @@ import {
   provide,
   ref
 } from 'vue'
-import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc'
+import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc/es'
 import { useMemo } from 'vooks'
 import { happensIn } from 'seemly'
 import type { TreeNode } from 'treemate'

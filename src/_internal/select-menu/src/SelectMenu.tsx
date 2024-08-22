@@ -14,7 +14,7 @@ import {
   watch
 } from 'vue'
 import { type TreeNode, createIndexGetter } from 'treemate'
-import { VirtualList, type VirtualListInst } from 'vueuc'
+import { VirtualList, type VirtualListInst } from 'vueuc/es'
 import { depx, getPadding, happensIn } from 'seemly'
 import { NEmpty } from '../../../empty'
 import { NScrollbar } from '../../scrollbar'

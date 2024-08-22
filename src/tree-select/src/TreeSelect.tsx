@@ -19,7 +19,7 @@ import {
   VBinder,
   VFollower,
   VTarget
-} from 'vueuc'
+} from 'vueuc/es'
 import { useIsMounted, useMergedState } from 'vooks'
 import { clickoutside } from 'vdirs'
 import { type CheckStrategy, createTreeMate } from 'treemate'

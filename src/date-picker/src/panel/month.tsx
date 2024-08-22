@@ -1,5 +1,5 @@
 import { type PropType, type VNode, defineComponent, h, onMounted } from 'vue'
-import { VirtualList } from 'vueuc'
+import { VirtualList } from 'vueuc/es'
 import { useLocale } from '../../../_mixins'
 import { NButton, NxButton } from '../../../button'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'

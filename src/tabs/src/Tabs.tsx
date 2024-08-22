@@ -20,7 +20,7 @@ import {
   watchEffect,
   withDirectives
 } from 'vue'
-import { VResizeObserver, VXScroll, type VXScrollInst } from 'vueuc'
+import { VResizeObserver, VXScroll, type VXScrollInst } from 'vueuc/es'
 import { throttle } from 'lodash-es'
 import { onFontsReady, useCompitable, useMergedState } from 'vooks'
 import { depx, getPadding } from 'seemly'
