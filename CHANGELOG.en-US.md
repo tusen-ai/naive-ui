@@ -8,6 +8,7 @@
 
 - Fix `n-config-provider` inherit the class prefix from it's parent by default, closes [#5970](https://github.com/tusen-ai/naive-ui/issues/5970).
 - Fix `n-date-picker` default `weekFormat` that year and week standards are different and use local week and local year
+- Fix `n-progress` not applying `rail-style` attribute when type is set to `circle` closes [#6287](https://github.com/tusen-ai/naive-ui/issues/6287)
 
 ### Fixes
 
@@ -623,7 +624,7 @@
 
 ### Fixes
 
-- Fix `n-select`'s menu missing option check mark in SSR mode, closes <https://github.com/07akioni/naive-ui-nuxt-demo/issues/4>
+- Fix `n-select`'s menu missing option check mark in SSR mode, closes [https://github.com/07akioni/naive-ui-nuxt-demo/issues/4](https://github.com/07akioni/naive-ui-nuxt-demo/issues/4)
 - Fix `n-card`'s `embedded` prop not work in `n-dialog`, closes [#3592](https://github.com/tusen-ai/naive-ui/issues/3592).
 - Fix `n-radio` warning when value prop type is boolean, closes [#3540](https://github.com/tusen-ai/naive-ui/issues/3540).
 - Fix `n-tree` content width may overflow container, closes [#3561](https://github.com/tusen-ai/naive-ui/issues/3561).
@@ -3592,7 +3593,7 @@ See vue3.md
 ### Fixes
 
 - Fix the problem that `n-radio` can not be focused.
-- Fix the problem that `n-data-table`'s `max-height` style is broken. <https://bugs.chromium.org/p/chromium/issues/detail?id=1107223>
+- Fix the problem that `n-data-table`'s `max-height` style is broken. [https://bugs.chromium.org/p/chromium/issues/detail?id=1107223](https://bugs.chromium.org/p/chromium/issues/detail?id=1107223)
 
 ### Refactors
 
