@@ -44,7 +44,7 @@ export interface FormItemValidateOptions {
   options?: ValidateOption
 }
 
-export interface FormItemInternalValidateResult {
+export interface FormItemValidateResult {
   valid: boolean
   errors: ValidateError[] | undefined
   warnings: ValidateError[] | undefined
@@ -54,7 +54,7 @@ export type FormItemInternalValidate = (
   trigger: ValidationTrigger | string | null | undefined,
   shouldRuleBeApplied?: ShouldRuleBeApplied,
   options?: ValidateOption
-) => Promise<FormItemInternalValidateResult>
+) => Promise<FormItemValidateResult>
 
 export type FormItemValidate = ((options: FormItemValidateOptions) => Promise<{
   warnings: ValidateError[] | undefined
