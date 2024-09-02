@@ -15,6 +15,7 @@ export default defineComponent({
       handleUpdateList(...args: unknown[]) {
         console.log(...args)
       },
+      disabled: ref(false),
       multiple: ref(false),
       directory: ref(false),
       directoryDnd: ref(false),
@@ -29,12 +30,14 @@ export default defineComponent({
   <n-upload action="http://fake-api">
     <n-button>Upload</n-button>
   </n-upload>
+  Disabled <n-switch v-model:value="disabled" /><br>
   Multiple <n-switch v-model:value="multiple" /><br>
   Directory <n-switch v-model:value="directory" /><br>
   DirectoryDnd <n-switch v-model:value="directoryDnd" /><br>
   DirectoryDnd undefined <n-switch v-model:value="directoryDndUndefined" />
   <n-upload
     action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+    :disabled="disabled"
     :multiple="multiple"
     :directory="directory"
     :directory-dnd="directoryDndUndefined ? undefined : directoryDnd"
@@ -44,6 +47,7 @@ export default defineComponent({
   </n-upload>
   <n-upload
     action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+    :disabled="disabled"
     :multiple="multiple"
     :directory="directory"
     :directory-dnd="directoryDndUndefined ? undefined : directoryDnd"
