@@ -220,7 +220,7 @@ export const popoverProps = {
   internalRenderBody: Function as PropType<InternalRenderBody>
 }
 
-export type PopoverProps = ExtractPublicPropTypes<typeof popoverBaseProps>
+export type PopoverProps = ExtractPublicPropTypes<typeof popoverProps>
 export type PopoverInternalProps = ExtractInternalPropTypes<typeof popoverProps>
 
 export interface PopoverSlots {
