@@ -389,11 +389,11 @@ export default defineComponent({
                       key="indeterminate"
                       class={`${mergedClsPrefix}-checkbox-icon`}
                     >
-                      {LineMark}
+                      <LineMark />
                     </div>
                   ) : (
                     <div key="check" class={`${mergedClsPrefix}-checkbox-icon`}>
-                      {CheckMark}
+                      <CheckMark />
                     </div>
                   )
               }}
