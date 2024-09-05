@@ -23,6 +23,7 @@
 - 修复 `n-icon` 的 `component` 属性不接受 FunctionalComponent 问题
 - 修复 `n-mention` 的面板在 `placement` 设为 `'top'` 或者组件设定的 padding 的时候位置有问题，关闭 [#6241](https://github.com/tusen-ai/naive-ui/issues/6241)
 - 修复 `n-carousel` 中轮播图的过渡行为不符合预期问题，关闭 [#5993](https://github.com/tusen-ai/naive-ui/issues/5993)
+- 修复 `n-image` 在 `n-modal/n-drawer` 中预览时按下 `esc` 会同时退出预览和 `n-modal/n-drawer`，关闭 [#6177](https://github.com/tusen-ai/naive-ui/issues/6177)
 
 ### Features
 

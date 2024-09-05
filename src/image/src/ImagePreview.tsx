@@ -91,6 +91,7 @@ export default defineComponent({
     }
 
     function handleKeydown(e: KeyboardEvent): void {
+      e.stopPropagation()
       switch (e.key) {
         case ' ':
           e.preventDefault()
@@ -109,15 +110,15 @@ export default defineComponent({
 
     watch(showRef, (value) => {
       if (value) {
-        on('keydown', document, handleKeydown)
+        on('keydown', document, handleKeydown, { capture: true })
       }
       else {
-        off('keydown', document, handleKeydown)
+        off('keydown', document, handleKeydown, { capture: true })
       }
     })
 
     onBeforeUnmount(() => {
-      off('keydown', document, handleKeydown)
+      off('keydown', document, handleKeydown, { capture: true })
     })
 
     let startX = 0
