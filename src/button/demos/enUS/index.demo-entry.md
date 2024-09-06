@@ -36,22 +36,22 @@ popover.vue
 | bordered | `boolean` | `true` | Whether the button shows the border. |  |
 | circle | `boolean` | `false` | Whether the button is round. |  |
 | color | `string` | `undefined` | Button color (support `#FFF`, `#FFFFFF`, `yellow`,`rgb(0, 0, 0)` formatted colors). |  |
-| dashed | `boolean` | `false` | Whether the button's border is a dashed line. |  |
+| dashed | `boolean` | `false` | Whether the button's border is a dashed line (can't be used along with `secondary`, `tertiary` and `quaternary`). |  |
 | disabled | `boolean` | `false` | Whether the button is disabled. |  |
 | focusable | `boolean` | `true` | Whether the button is focusable. |  |
-| ghost | `boolean` | `false` | Whether the button is ghost. |  |
+| ghost | `boolean` | `false` | Whether the button is ghost (can't be used along with `secondary`, `tertiary` and `quaternary`). |  |
 | native-focus-behavior | `boolean` | Browser is not Safari | Whether to follow button's native focus behavior. Since safari's button can't be focused by click, naive-ui uses some tricks to make it focusable on safari. If you don't need the behavior or need the button to be draggable, you can enable the prop. | 2.28.3 |
 | icon-placement | `'left' \| 'right'` | `'left'` | The position of the icon in the button. |  |
 | keyboard | `boolean` | `true` | Whether is supports keyboard operation. |  |
-| quaternary | `boolean` | `false` | Whether the button is quaternary button. |  |
+| quaternary | `boolean` | `false` | Whether the button is quaternary button (can't be used along with `dashed`, `ghost` and `text`). |  |
 | loading | `boolean` | `false` | Whether the button shows the loading status. |  |
 | render-icon | `() => VNodeChild` | `undefined` | Render function that renders button icon. | 2.34.0 |
 | round | `boolean` | `false` | Whether the button shows rounded corners. |  |
-| secondary | `boolean` | `false` | Whether the button is secondary button. |  |
+| secondary | `boolean` | `false` | Whether the button is secondary button (can't be used along with `dashed`, `ghost` and `text`). |  |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | Button size. |  |
 | strong | `boolean` | `false` | Whether to use strong text in the button. |  |
-| tertiary | `boolean` | `false` | Whether the button is tertiary button. |  |
-| text | `boolean` | `false` | Whether to display as a text button. |  |
+| tertiary | `boolean` | `false` | Whether the button is tertiary button (can't be used along with `dashed`, `ghost` and `text`). |  |
+| text | `boolean` | `false` | Whether to display as a text button (can't be used along with `secondary`, `tertiary` and `quaternary`). |  |
 | text-color | `string` | `undefined` | Button text color (support `#FFF`, `#FFFFFF`, `yellow`,`rgb(0, 0, 0)` formatted colors). |  |
 | type | `'default' \| 'tertiary' \| 'primary' \| 'success' \| 'info' \| 'warning' \| 'error'` | `'default'` | Button type. |  |
 | tag | `string` | `'button'` | What tag need the button be rendered as. |  |
