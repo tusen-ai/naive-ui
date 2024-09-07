@@ -39,6 +39,7 @@
 - `n-data-table` adds `allowExport` prop for column.
 - `n-date-picker` adds `year-range` prop.
 - `n-tree-select` adds `header` slot, closes [#5915](https://github.com/tusen-ai/naive-ui/issues/5915).
+- `n-cascader` adds `input-props` prop, closes [#6330](https://github.com/TuSimple/naive-ui/issues/6330).
 
 ## 2.39.0
 
