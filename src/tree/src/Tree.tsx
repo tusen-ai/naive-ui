@@ -1403,7 +1403,7 @@ export default defineComponent({
       if (
         draggingNode.contains(finalDropNode)
         || (finalDropPosition === 'inside'
-        && draggingNode.parent?.key === finalDropNode.key)
+          && draggingNode.parent?.key === finalDropNode.key)
       ) {
         if (
           draggingNode.key === droppingMouseNode.key

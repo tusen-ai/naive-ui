@@ -186,20 +186,20 @@ interface DataTableFilterState {
 
 ```ts
 type DataTableCreateSummary = (pageData: RowData[]) =>
-| Array<{
-  [columnKey: string]: {
-    value?: VNodeChild
-    colSpan?: number
-    rowSpan?: number
+  | Array<{
+    [columnKey: string]: {
+      value?: VNodeChild
+      colSpan?: number
+      rowSpan?: number
+    }
+  }>
+  | {
+    [columnKey: string]: {
+      value?: VNodeChild
+      colSpan?: number
+      rowSpan?: number
+    }
   }
-}>
-| {
-  [columnKey: string]: {
-    value?: VNodeChild
-    colSpan?: number
-    rowSpan?: number
-  }
-}
 ```
 
 ### DataTable Methods

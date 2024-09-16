@@ -18,6 +18,7 @@ import { NBaseClose, NBaseIcon } from '../../_internal'
 import { NButton } from '../../button'
 import { dialogLight } from '../styles'
 import type { DialogTheme } from '../styles'
+import { toValue } from '../../_utils/vue/to-value'
 import { dialogProps } from './dialogProps'
 import style from './styles/index.cssr'
 
@@ -236,8 +237,8 @@ export const NDialog = defineComponent({
                     themeOverrides={mergedTheme.peerOverrides.Button}
                     size="small"
                     type={type === 'default' ? 'primary' : type}
-                    disabled={loading}
-                    loading={loading}
+                    disabled={toValue(loading)}
+                    loading={toValue(loading)}
                     onClick={handlePositiveClick}
                     {...positiveButtonProps}
                   >
@@ -266,8 +267,8 @@ export const NDialog = defineComponent({
         {closable
           ? resolveWrappedSlot(this.$slots.close, (node) => {
             const classNames = [
-                `${mergedClsPrefix}-dialog__close`,
-                this.rtlEnabled && `${mergedClsPrefix}-dialog--rtl`
+              `${mergedClsPrefix}-dialog__close`,
+              this.rtlEnabled && `${mergedClsPrefix}-dialog--rtl`
             ]
             return node ? (
               <div class={classNames}>{node}</div>

@@ -32,19 +32,19 @@ export type OnLoad = (option: CascaderOption) => Promise<void>
 
 export type OnUpdateValue = (
   value: string &
-  number &
-  string[] &
-  number[] &
-  Array<string | number> &
-  (string | null) &
-  (number | null) &
-  (string[] | null) &
-  (number[] | null) &
-  (Array<string | number> | null),
+    number &
+    string[] &
+    number[] &
+    Array<string | number> &
+    (string | null) &
+    (number | null) &
+    (string[] | null) &
+    (number[] | null) &
+    (Array<string | number> | null),
   option: null &
-  CascaderOption &
-  CascaderOption[] &
-  Array<CascaderOption | null>,
+    CascaderOption &
+    CascaderOption[] &
+    Array<CascaderOption | null>,
   path: null & CascaderOption[] & Array<CascaderOption[] | null>
 ) => void
 

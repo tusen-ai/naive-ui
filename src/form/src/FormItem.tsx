@@ -110,10 +110,10 @@ function wrapValidator(
       const validateResult = validator(...args)
       if (
         (!async
-        && (typeof validateResult === 'boolean'
-        || validateResult instanceof Error
-        || Array.isArray(validateResult))) // Error[]
-        || (validateResult as any)?.then
+          && (typeof validateResult === 'boolean'
+            || validateResult instanceof Error
+            || Array.isArray(validateResult))) // Error[]
+            || (validateResult as any)?.then
       ) {
         return validateResult as any
       }
@@ -125,8 +125,8 @@ function wrapValidator(
           'form-item/validate',
           `You return a ${typeof validateResult} `
           + `typed value in the validator method, which is not recommended. Please use ${
-              async ? '`Promise`' : '`boolean`, `Error` or `Promise`'
-            } typed value instead.`
+            async ? '`Promise`' : '`boolean`, `Error` or `Promise`'
+          } typed value instead.`
         )
         return true
       }
@@ -498,8 +498,8 @@ export default defineComponent({
         'form-item',
         computed(() => {
           return `${mergedSizeRef.value[0]}${labelPlacementRef.value[0]}${
-              labelTextAlignRef.value?.[0] || ''
-            }`
+            labelTextAlignRef.value?.[0] || ''
+          }`
         }),
         cssVarsRef,
         props
