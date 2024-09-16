@@ -90,7 +90,7 @@ export-csv.vue
 | pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | The behavior of pagination after filter state is changed. `'first'` means returning to first page on filter, `'current'` means keep at current page on filter. | 2.28.3 |
 | remote | `boolean` | `false` | If data-table do automatic paging. You may set it to `true` in async usage. |  |
 | render-cell | `(value: any, rowData: object, column: DataTableBaseColumn) => VNodeChild` | `undefined` | Render function of cell, it will be overwritten by columns' `render`. | 2.30.5 |
-| render-expand-icon | `({ expanded }: { expanded: boolean }) => VNodeChild` | `undefined` | Render function of expand icon. | 2.32.2, `expanded`: 2.34.4 |
+| render-expand-icon | `({ expanded, rowData }: { expanded: boolean, rowData: object }) => VNodeChild` | `undefined` | Render function of expand icon. | 2.32.2, `expanded`: 2.34.4, `rowData`: `NEXT_VERSION` |
 | row-class-name | `string \| (rowData: object, rowIndex : number) => string` | `undefined` | Class name of each row. |  |
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |  |
 | row-props | `(rowData: object, rowIndex : number) => HTMLAttributes` | `undefined` | Customize row attributes. |  |
