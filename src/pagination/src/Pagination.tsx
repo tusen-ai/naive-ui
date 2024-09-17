@@ -626,9 +626,9 @@ export default defineComponent({
                       !renderPrev
                       && `${mergedClsPrefix}-pagination-item--button`,
                       (mergedPage <= 1
-                      || mergedPage > mergedPageCount
-                      || disabled)
-                      && `${mergedClsPrefix}-pagination-item--disabled`
+                        || mergedPage > mergedPageCount
+                        || disabled)
+                        && `${mergedClsPrefix}-pagination-item--disabled`
                     ]}
                     onClick={handleBackwardClick}
                   >
@@ -765,10 +765,10 @@ export default defineComponent({
                             && `${mergedClsPrefix}-pagination-item--active`,
                             type !== 'page'
                             && ((type === 'fast-backward'
-                            && this.showFastBackwardMenu)
-                            || (type === 'fast-forward'
-                            && this.showFastForwardMenu))
-                            && `${mergedClsPrefix}-pagination-item--hover`,
+                              && this.showFastBackwardMenu)
+                              || (type === 'fast-forward'
+                                && this.showFastForwardMenu))
+                                && `${mergedClsPrefix}-pagination-item--hover`,
                             disabled
                             && `${mergedClsPrefix}-pagination-item--disabled`,
                             type === 'page'

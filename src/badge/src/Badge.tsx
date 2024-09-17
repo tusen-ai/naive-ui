@@ -74,9 +74,9 @@ export default defineComponent({
       return (
         props.show
         && (props.dot
-        || (props.value !== undefined
-        && !(!props.showZero && Number(props.value) <= 0))
-        || !isSlotEmpty(slots.value))
+          || (props.value !== undefined
+            && !(!props.showZero && Number(props.value) <= 0))
+            || !isSlotEmpty(slots.value))
       )
     })
     onMounted(() => {

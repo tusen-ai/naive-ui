@@ -43,13 +43,13 @@ export type Shortcuts =
 
 export type OnUpdateValue = (
   value: number &
-  (number | null) &
-  [number, number] &
-  ([number, number] | null),
+    (number | null) &
+    [number, number] &
+    ([number, number] | null),
   formattedValue: string &
-  (string | null) &
-  [string, string] &
-  ([string, string] | null)
+    (string | null) &
+    [string, string] &
+    ([string, string] | null)
 ) => void
 
 export type OnConfirm = OnUpdateValue
@@ -58,13 +58,13 @@ export type OnConfirmImpl = OnUpdateValueImpl
 
 export type OnUpdateFormattedValue = (
   value: string &
-  (string | null) &
-  [string, string] &
-  ([string, string] | null),
+    (string | null) &
+    [string, string] &
+    ([string, string] | null),
   timestampValue: number &
-  (number | null) &
-  [number, number] &
-  ([number, number] | null)
+    (number | null) &
+    [number, number] &
+    ([number, number] | null)
 ) => void
 
 export type OnUpdateFormattedValueImpl = (
@@ -79,9 +79,9 @@ export type OnUpdateValueImpl = (
 
 export type OnPanelUpdateValue = (
   value: number &
-  (number | null) &
-  [number, number] &
-  ([number, number] | null),
+    (number | null) &
+    [number, number] &
+    ([number, number] | null),
   doUpdate: boolean
 ) => void
 

@@ -256,12 +256,12 @@ export default defineComponent({
                             }
                             return withDirectives(
                               (this.preset === 'confirm'
-                              || this.preset === 'dialog' ? (
+                                || this.preset === 'dialog' ? (
                                     <NDialog
                                       {...this.$attrs}
                                       class={[
-                                      `${mergedClsPrefix}-modal`,
-                                      this.$attrs.class
+                                        `${mergedClsPrefix}-modal`,
+                                        this.$attrs.class
                                       ]}
                                       ref="bodyRef"
                                       theme={this.mergedTheme.peers.Dialog}
@@ -278,8 +278,8 @@ export default defineComponent({
                                       {...this.$attrs}
                                       ref="bodyRef"
                                       class={[
-                                      `${mergedClsPrefix}-modal`,
-                                      this.$attrs.class
+                                        `${mergedClsPrefix}-modal`,
+                                        this.$attrs.class
                                       ]}
                                       theme={this.mergedTheme.peers.Card}
                                       themeOverrides={

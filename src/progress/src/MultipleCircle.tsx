@@ -59,9 +59,9 @@ export default defineComponent({
           `${
             ((Math.PI * v) / 100)
             * (props.viewBoxWidth / 2
-            - (props.strokeWidth / 2) * (1 + 2 * i)
-            - props.circleGap * i)
-            * 2
+              - (props.strokeWidth / 2) * (1 + 2 * i)
+              - props.circleGap * i)
+              * 2
           }, ${props.viewBoxWidth * 8}`
       )
       return strokeDasharrays

@@ -291,10 +291,10 @@ export default defineComponent({
                         'div',
                         mergeProps(this.$attrs, {
                           class: [
-                              `${mergedClsPrefix}-back-top`,
-                              this.themeClass,
-                              this.transitionDisabled
-                              && `${mergedClsPrefix}-back-top--transition-disabled`
+                            `${mergedClsPrefix}-back-top`,
+                            this.themeClass,
+                            this.transitionDisabled
+                            && `${mergedClsPrefix}-back-top--transition-disabled`
                           ],
                           style: [this.style, this.cssVars],
                           onClick: this.handleClick

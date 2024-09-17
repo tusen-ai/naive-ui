@@ -282,8 +282,8 @@ export default defineComponent({
                       `${mergedClsPrefix}-data-table-th`,
                       (leftFixed || rightFixed)
                       && `${mergedClsPrefix}-data-table-th--fixed-${
-                          leftFixed ? 'left' : 'right'
-                        }`,
+                        leftFixed ? 'left' : 'right'
+                      }`,
                       {
                         [`${mergedClsPrefix}-data-table-th--sorting`]:
                           isColumnSorting(column, mergedSortState),

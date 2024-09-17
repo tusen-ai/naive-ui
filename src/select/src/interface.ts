@@ -41,15 +41,15 @@ export type ValueAtom = string | number
 export type Value = ValueAtom | string[] | number[] | ValueAtom[]
 export type OnUpdateValue = (
   value: string &
-  number &
-  ValueAtom &
-  string[] &
-  number[] &
-  ValueAtom[] &
-  (ValueAtom | null) &
-  (string[] | null) &
-  (number[] | null) &
-  (ValueAtom[] | null),
+    number &
+    ValueAtom &
+    string[] &
+    number[] &
+    ValueAtom[] &
+    (ValueAtom | null) &
+    (string[] | null) &
+    (number[] | null) &
+    (ValueAtom[] | null),
   option: SelectBaseOption & null & SelectBaseOption[]
 ) => void
 export type OnUpdateValueImpl = (

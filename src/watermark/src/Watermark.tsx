@@ -181,13 +181,13 @@ export default defineComponent({
               canvasOffsetLeft,
               canvasOffsetTop,
               (props.imageWidth
-              || (imageHeight
-                ? (img.width * imageHeight) / img.height
-                : img.width)) * ratio,
+                || (imageHeight
+                  ? (img.width * imageHeight) / img.height
+                  : img.width)) * ratio,
               (props.imageHeight
-              || (imageWidth
-                ? (img.height * imageWidth) / img.width
-                : img.height)) * ratio
+                || (imageWidth
+                  ? (img.height * imageWidth) / img.width
+                  : img.height)) * ratio
             )
             base64UrlRef.value = canvas.toDataURL()
           }
@@ -269,10 +269,10 @@ export default defineComponent({
                   : ''
                 : props.cross
                   ? `calc(${rotatedImageOffset} + ${
-                      props.width / 2
-                    }px) calc(${rotatedImageOffset} + ${
-                      props.height / 2
-                    }px), ${rotatedImageOffset} ${rotatedImageOffset}`
+                    props.width / 2
+                  }px) calc(${rotatedImageOffset} + ${
+                    props.height / 2
+                  }px), ${rotatedImageOffset} ${rotatedImageOffset}`
                   : rotatedImageOffset,
             backgroundImage: props.cross
               ? `url(${base64UrlRef.value}), url(${base64UrlRef.value})`
