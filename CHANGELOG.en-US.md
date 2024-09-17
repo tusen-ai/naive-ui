@@ -25,7 +25,6 @@
 - Fix `n-carousel` transition not working as expected, closes [#5993](https://github.com/tusen-ai/naive-ui/issues/5993).
 - Fix `n-dialog`, props types now correct if passed getter or ref, added new example of async dialog
 
-
 ### Features
 
 - `n-scrollbar` adds `x-placement` and `y-placement` props, closes [#6089](https://github.com/tusen-ai/naive-ui/issues/6089).

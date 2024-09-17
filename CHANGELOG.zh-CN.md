@@ -25,7 +25,6 @@
 - 修复 `n-carousel` 中轮播图的过渡行为不符合预期问题，关闭 [#5993](https://github.com/tusen-ai/naive-ui/issues/5993)
 - 修复 `n-dialog` 如果传递 getter 或 ref，props 类型现在正确，添加了异步对话框的新示例
 
-
 ### Features
 
 - `n-scrollbar` 新增 `x-placement` 和 `y-placement` 属性， 关闭 [#6089](https://github.com/tusen-ai/naive-ui/issues/6089)
