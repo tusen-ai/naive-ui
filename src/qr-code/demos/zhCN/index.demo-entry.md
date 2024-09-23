@@ -14,6 +14,7 @@ color.vue
 error-correction.vue
 download.vue
 type.vue
+shape.vue
 ```
 
 ## API
@@ -33,6 +34,7 @@ type.vue
 | value | `string` | `''` | 文本信息 | 2.36.0 |
 | size | `number` | `100` | 二维码大小 | 2.36.0 |
 | type | `'canvas'` \| `'svg'` | `'canvas'` | 自定义二维码渲染类型 | 2.38.2 |
+| shape | `'square'` \| `'circle'` \| `'star'` \| `'heart'` \| `'cylinder'` | `'square'` | 二维码形状 | NEXT_VERSION |
 
 ### 关于二维码纠错级别
 

@@ -14,6 +14,7 @@ color.vue
 error-correction.vue
 download.vue
 type.vue
+shape.vue
 ```
 
 ## API
@@ -33,6 +34,7 @@ type.vue
 | value | `string` | `''` | Text information. | 2.36.0 |
 | size | `number` | `100` | Size of the qrcode. | 2.36.0 |
 | type | `'canvas'` \| `'svg'` | `'canvas'` | Customize Render Type. | 2.38.2 |
+| shape | `'square'` \| `'circle'` \| `'star'` \| `'heart'` \| `'cylinder'` | `'square'` | Shape of the QR Code. | NEXT_VERSION |
 
 ### About QR code error correction level
 
