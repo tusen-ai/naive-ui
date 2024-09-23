@@ -20,6 +20,7 @@ export default defineComponent({
       maxHeightRef,
       minHeightRef,
       flexHeightRef,
+      virtualScrollHeaderRef,
       syncScrollState
     } = inject(dataTableInjectionKey)!
 
@@ -47,7 +48,12 @@ export default defineComponent({
     function getHeaderElement(): HTMLElement | null {
       const { value } = headerInstRef
       if (value) {
-        return value.$el
+        if (virtualScrollHeaderRef.value) {
+          return value.virtualListRef?.listElRef || null
+        }
+        else {
+          return value.$el
+        }
       }
       return null
     }

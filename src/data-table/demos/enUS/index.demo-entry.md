@@ -49,6 +49,7 @@ render-header
 custom-style.vue
 ajax-usage
 virtual.vue
+virtual-x.vue
 custom-filter-menu.vue
 tree.vue
 flex-height.vue

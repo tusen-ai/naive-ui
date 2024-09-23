@@ -15,12 +15,18 @@ export interface RowItem {
   colSpan: number
   rowSpan: number
   column: TableColumn
+  colIndex: number
   isLast: boolean
 }
 export interface ColItem {
   key: string | number
   style: CSSProperties
   column: TableSelectionColumn | TableExpandColumn | TableBaseColumn
+  index: number
+  /**
+   * The width property is only applied to horizontally virtual scroll table
+   */
+  width: number
 }
 
 type RowItemMap = WeakMap<TableColumn, RowItem>
@@ -49,7 +55,7 @@ function getRowsAndCols(
       rows[currentDepth] = []
       maxDepth = currentDepth
     }
-    for (const column of columns) {
+    columns.forEach((column, index) => {
       if ('children' in column) {
         ensureMaxDepth(column.children, currentDepth + 1)
       }
@@ -61,7 +67,10 @@ function getRowsAndCols(
             column,
             key !== undefined ? formatLength(getResizableWidth(key)) : undefined
           ),
-          column
+          column,
+          index,
+          // The width property is only applied to horizontally virtual scroll table
+          width: column.width === undefined ? 128 : Number(column.width)
         })
         totalRowSpan += 1
         if (!hasEllipsis) {
@@ -69,7 +78,7 @@ function getRowsAndCols(
         }
         dataRelatedCols.push(column)
       }
-    }
+    })
   }
   ensureMaxDepth(columns, 0)
   let currentLeafIndex = 0
@@ -82,6 +91,7 @@ function getRowsAndCols(
         const cachedCurrentLeafIndex = currentLeafIndex
         const rowItem: RowItem = {
           column,
+          colIndex: currentLeafIndex,
           colSpan: 0,
           rowSpan: 1,
           isLast: false
@@ -112,6 +122,7 @@ function getRowsAndCols(
         const rowItem: RowItem = {
           column,
           colSpan,
+          colIndex: currentLeafIndex,
           rowSpan: maxDepth - currentDepth + 1,
           isLast
         }

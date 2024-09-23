@@ -244,6 +244,11 @@ export default defineComponent({
       renderExpandRef,
       summaryRef: toRef(props, 'summary'),
       virtualScrollRef: toRef(props, 'virtualScroll'),
+      virtualScrollXRef: toRef(props, 'virtualScrollX'),
+      heightForRowRef: toRef(props, 'heightForRow'),
+      minRowHeightRef: toRef(props, 'minRowHeight'),
+      virtualScrollHeaderRef: toRef(props, 'virtualScrollHeader'),
+      headerHeightRef: toRef(props, 'headerHeight'),
       rowPropsRef: toRef(props, 'rowProps'),
       stripedRef: toRef(props, 'striped'),
       checkOptionsRef: computed(() => {
