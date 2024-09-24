@@ -174,7 +174,7 @@ export default defineComponent({
         hoverKeyRef.value = null
       }
     }
-    function handleClick(): void {
+    function handleClick(e: MouseEvent): void {
       const { value: hasSubmenu } = hasSubmenuRef
       const { tmNode } = props
       if (!mergedShowRef.value)
@@ -182,7 +182,8 @@ export default defineComponent({
       if (!hasSubmenu && !tmNode.disabled) {
         NDropdown.doSelect(
           tmNode.key,
-          (tmNode as unknown as TreeNode<DropdownOption>).rawNode
+          (tmNode as unknown as TreeNode<DropdownOption>).rawNode,
+          e
         )
         NDropdown.doUpdateShow(false)
       }

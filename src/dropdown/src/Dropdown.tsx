@@ -256,10 +256,14 @@ export default defineComponent({
       }
     })
     // methods
-    function doSelect(key: Key, node: DropdownOption): void {
+    function doSelect(
+      key: Key,
+      node: DropdownOption,
+      e: MouseEvent | KeyboardEvent
+    ): void {
       const { onSelect } = props
       if (onSelect)
-        call(onSelect as OnUpdateValueImpl, key, node)
+        call(onSelect as OnUpdateValueImpl, key, node, e)
     }
     function doUpdateShow(value: boolean): void {
       const { 'onUpdate:show': _onUpdateShow, onUpdateShow } = props
@@ -289,10 +293,10 @@ export default defineComponent({
     function handleKeydownDown(): void {
       handleKeydown('down')
     }
-    function handleKeydownEnter(): void {
+    function handleKeydownEnter(e: KeyboardEvent): void {
       const pendingNode = getPendingNode()
       if (pendingNode?.isLeaf && mergedShowRef.value) {
-        doSelect(pendingNode.key, pendingNode.rawNode)
+        doSelect(pendingNode.key, pendingNode.rawNode, e as KeyboardEvent)
         doUpdateShow(false)
       }
     }
