@@ -5,6 +5,7 @@ import {
   h,
   inject,
   ref,
+  toRef,
   withDirectives
 } from 'vue'
 import type { FollowerPlacement } from 'vueuc'
@@ -74,7 +75,7 @@ export default defineComponent({
     function handleResize(): void {
       syncCascaderMenuPosition()
     }
-    useOnResize(selfElRef, handleResize)
+    useOnResize(selfElRef, handleResize, { show: toRef(props, 'show') })
     function showErrorMessage(label: string): void {
       const {
         value: { loadingRequiredMessage }
