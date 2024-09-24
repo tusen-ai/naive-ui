@@ -228,10 +228,10 @@ export default defineComponent({
       uncontrolledExpandedKeysRef.value = props.defaultExpandAll
         ? treeMateRef.value.getNonLeafKeys()
         : props.defaultExpandedNames
-        || props.defaultExpandedKeys
-        || treeMateRef.value.getPath(mergedValueRef.value, {
-          includeSelf: false
-        }).keyPath
+          || props.defaultExpandedKeys
+          || treeMateRef.value.getPath(mergedValueRef.value, {
+            includeSelf: false
+          }).keyPath
     }
     if (watchProps?.includes('defaultExpandedKeys')) {
       watchEffect(initUncontrolledExpandedKeys)

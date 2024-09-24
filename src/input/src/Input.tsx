@@ -257,8 +257,8 @@ export default defineComponent({
       return (
         !isComposing
         && (isEmptyInputValue(mergedValue)
-        || (Array.isArray(mergedValue) && isEmptyInputValue(mergedValue[0])))
-        && mergedPlaceholder[0]
+          || (Array.isArray(mergedValue) && isEmptyInputValue(mergedValue[0])))
+          && mergedPlaceholder[0]
       )
     })
     const showPlaceholder2Ref = computed(() => {
@@ -269,7 +269,7 @@ export default defineComponent({
         !isComposing
         && mergedPlaceholder[1]
         && (isEmptyInputValue(mergedValue)
-        || (Array.isArray(mergedValue) && isEmptyInputValue(mergedValue[1])))
+          || (Array.isArray(mergedValue) && isEmptyInputValue(mergedValue[1])))
       )
     })
     // focus
@@ -575,8 +575,8 @@ export default defineComponent({
         !(
           e.relatedTarget !== null
           && (e.relatedTarget === inputElRef.value
-          || e.relatedTarget === inputEl2Ref.value
-          || e.relatedTarget === textareaElRef.value)
+            || e.relatedTarget === inputEl2Ref.value
+            || e.relatedTarget === textareaElRef.value)
         )
       ) {
         activatedRef.value = false
@@ -617,9 +617,9 @@ export default defineComponent({
       if (
         e.relatedTarget !== null
         && (e.relatedTarget === inputElRef.value
-        || e.relatedTarget === inputEl2Ref.value
-        || e.relatedTarget === textareaElRef.value
-        || e.relatedTarget === wrapperElRef.value)
+          || e.relatedTarget === inputEl2Ref.value
+          || e.relatedTarget === textareaElRef.value
+          || e.relatedTarget === wrapperElRef.value)
       ) {
         /**
          * activeElement transfer inside the input, do nothing

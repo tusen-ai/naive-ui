@@ -990,8 +990,8 @@ export default defineComponent({
       ) : type === 'month' || type === 'year' || type === 'quarter' ? (
         <MonthPanel {...commonPanelProps} type={type} key={type} />
       ) : type === 'monthrange'
-      || type === 'yearrange'
-      || type === 'quarterrange' ? (
+        || type === 'yearrange'
+        || type === 'quarterrange' ? (
             <MonthRangePanel {...commonPanelProps} type={type} />
           ) : (
             <DatePanel

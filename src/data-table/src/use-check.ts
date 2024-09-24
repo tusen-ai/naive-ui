@@ -65,11 +65,11 @@ export function useCheck(
     const { value: mergedInderminateRowKeySet } = mergedInderminateRowKeySetRef
     return (
       (countOfCurrentPageCheckedRowsRef.value > 0
-      && countOfCurrentPageCheckedRowsRef.value
-      < length - countOfCurrentPageDisabledRowsRef.value)
-      || paginatedDataRef.value.some(rowData =>
-        mergedInderminateRowKeySet.has(rowData.key)
-      )
+        && countOfCurrentPageCheckedRowsRef.value
+        < length - countOfCurrentPageDisabledRowsRef.value)
+        || paginatedDataRef.value.some(rowData =>
+          mergedInderminateRowKeySet.has(rowData.key)
+        )
     )
   })
   const allRowsCheckedRef = computed(() => {

@@ -13,7 +13,7 @@ export const positionProp = {
 
 export interface LayoutInst {
   scrollTo: ((options: ScrollToOptions) => void) &
-  ((x: number, y: number) => void)
+    ((x: number, y: number) => void)
 }
 
 export type LayoutSiderInst = LayoutInst

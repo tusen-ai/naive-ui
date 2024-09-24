@@ -38,9 +38,9 @@ ${tsToJs(parts.script)}
       mergedParts.jsCode += isVue
         ? `<template>${parts.template}</template>`
         : `<template>\n${parts.template
-            .split('\n')
-            .map(line => (line.length ? `  ${line}` : line))
-            .join('\n')}\n</template>`
+          .split('\n')
+          .map(line => (line.length ? `  ${line}` : line))
+          .join('\n')}\n</template>`
     }
     if (parts.script) {
       if (parts.template) {

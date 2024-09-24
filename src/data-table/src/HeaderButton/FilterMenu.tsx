@@ -78,9 +78,9 @@ export default defineComponent({
       if (shouldUseArrayInSingleMode(props.column)) {
         return (
           (Array.isArray(temporalValue)
-          && temporalValue.length
-          && temporalValue[0])
-          || null
+            && temporalValue.length
+            && temporalValue[0])
+            || null
         )
       }
       if (!Array.isArray(temporalValue))
