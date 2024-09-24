@@ -49,7 +49,11 @@ export default c([
     cM('disabled', `
       opacity: var(--n-item-disabled-opacity);
       cursor: not-allowed;
-    `),
+    `, [
+      c('> *', `
+        pointer-events: none;
+      `)
+    ]),
     cM('image-card', `
       width: 96px;
       height: 96px;
