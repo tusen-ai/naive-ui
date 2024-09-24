@@ -226,26 +226,27 @@ export default defineComponent({
               break
             }
             case 'heart': {
-              const radius = (endX - startX) / 2
-              const cx = startX + radius
-              const cy = startY + radius
+              const size = endX - startX
+              const cx = startX + size / 2
+              const cy = startY + size / 2
+              const scale = 0.8
               ctx.beginPath()
-              ctx.moveTo(cx, cy + radius / 2)
+              ctx.moveTo(cx, cy + (size * scale) / 3.5)
               ctx.bezierCurveTo(
-                cx + radius,
-                cy - radius / 2,
-                cx + radius * 2,
-                cy + radius / 2,
+                cx + (size * scale) / 2,
+                cy - (size * scale) / 3,
+                cx + size * scale,
+                cy + (size * scale) / 3,
                 cx,
-                cy + radius * 2
+                cy + size * scale
               )
               ctx.bezierCurveTo(
-                cx - radius * 2,
-                cy + radius / 2,
-                cx - radius,
-                cy - radius / 2,
+                cx - size * scale,
+                cy + (size * scale) / 3,
+                cx - (size * scale) / 2,
+                cy - (size * scale) / 3,
                 cx,
-                cy + radius / 2
+                cy + (size * scale) / 3.5
               )
               ctx.closePath()
               ctx.fill()
