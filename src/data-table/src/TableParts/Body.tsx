@@ -1076,7 +1076,7 @@ export default defineComponent({
                 <VirtualList
                   ref="virtualListRef"
                   items={displayedData}
-                  itemSize={this.minRowHeight || 28}
+                  itemSize={this.minRowHeight}
                   visibleItemsTag={VirtualListItemWrapper}
                   visibleItemsProps={{
                     clsPrefix: mergedClsPrefix,

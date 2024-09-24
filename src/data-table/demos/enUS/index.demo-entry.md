@@ -82,10 +82,13 @@ export-csv.vue
 | expanded-row-keys | `Array<string \| number>` | `undefined` | Expanded row keys. |  |
 | filter-icon-popover-props | `PopoverProps` | `{ trigger: click, placement: bottom }` | Filter icon's Popover attribute of the button, See [Popover props](popover#Popover-Props) | 2.39.0 |
 | flex-height | `boolean` | `false` | Whether to make table body's height auto fit table area height. Make it enabled will make `table-layout` always set to `'fixed'`. |  |
+| header-height | `number` | `28` | Header height value when `virtual-scroll-header` is enabled. | NEXT_VERSION |
+| height-for-row | `(rowData: object, index: number) => number` | `undefined` | Height configuration function for each row of the table. It must be used with `virtual-scroll-x`. If it's not configured, each rows height would be set to `min-row-height`. | NEXT_VERSION |
 | indent | `number` | `16` | Indent of row content when using tree data. |  |
 | loading | `boolean` | `false` | Whether to display loading status. |  |
 | max-height | `number \| string` | `undefined` | The max-height of the table content. Can be a CSS value. |  |
 | min-height | `number \| string` | `undefined` | The min-height of the table content. Can be a CSS value. |  |
+| min-row-height | `number` | `28` | Min row height of the table when `virtual-scroll` or `virtual-scroll-x` is enabled. Each row's height must be larger than its value. | NEXT_VERSION |
 | paginate-single-page | `boolean` | `true` | Whether show pagination data is less than one page. | 2.28.0 |
 | pagination | `false \| object` | `false` | See [Pagination props](pagination#Pagination-Props) |  |
 | pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | The behavior of pagination after filter state is changed. `'first'` means returning to first page on filter, `'current'` means keep at current page on filter. | 2.28.3 |
@@ -106,7 +109,9 @@ export-csv.vue
 | summary | `DataTableCreateSummary` | `undefined` | Data of table summary row. For types, see <n-a href="#DataTableCreateSummary-Type">DataTableCreateSummary Type</n-a>. |  |
 | summary-placement | `'top' \| 'bottom'` | `'bottom'` | Summary rows placement. | 2.33.3 |
 | table-layout | `'auto' \| 'fixed'` | `'auto'` | Style `table-layout` of the table. When `ellipsis` or `max-height` or `flex-height` are set, it will always be `'fixed'` regardless of what you set. |  |
-| virtual-scroll | `boolean` | `false` | Whether to use virtual scroll to deal with large data. Make sure `max-height` is set before using it. When `virtual-scroll` is `true`, `rowSpan` will not take effect. |  |
+| virtual-scroll | `boolean` | `false` | Whether to use virtual scrolling to deal with large data. Make sure `max-height` is set before using it. When `virtual-scroll` is `true`, `rowSpan` will not take effect. |  |
+| virtual-scroll-header | `boolean` | `false` | Whether to use virtual scrolling in table header. If there are too many columns, you can enable the prop. You must configure `header-height` at the same time. Enabling the prop will disable header cells that cross columns & rows. | NEXT_VERSION |
+| virtual-scroll-x | `boolean` | `false` | Whether to use horizontal virtual scrolling in table body. If there are too many columns, you can enable the prop. Enabling the prop will disable body cells that cross columns & rows. If the prop is enabled, every column should have `width` prop configured and `virtual-scroll`, `scroll-x`, `min-row-height`, `height-for-row`, `virtual-scroll-header` (optional), `header-height` (optional) props should be configured at the same time. You can refer to <n-a href="#virtual-x.vue">the example</n-a>. | NEXT_VERSION |
 | on-load | `(rowData: object) => Promise<void>` | `undefined` | Callback of async tree data expanding. | 2.27.0 |
 | on-scroll | `(e: Event) => void` | `undefined` | Callback of table body scrolling. | 2.29.1 |
 | on-update:checked-row-keys | `(keys: Array<string \| number>, rows: object[], meta: { row: object \| undefined, action: 'check' \| 'uncheck' \| 'checkAll' \| 'uncheckAll' }) => void` | `undefined` | The callback function triggered when the checked-row-keys value changes. | `rows` 2.30.5, `meta` 2.33.4 |

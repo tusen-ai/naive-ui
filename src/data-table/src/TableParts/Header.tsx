@@ -377,7 +377,7 @@ export default defineComponent({
           style={{ height: pxfy(headerHeight) }}
           onScroll={this.handleTableHeaderScroll}
           columns={cols}
-          itemSize={headerHeight || 28}
+          itemSize={headerHeight}
           showScrollbar={false}
           items={[{}]}
           itemResizable={false}

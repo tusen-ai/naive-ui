@@ -93,9 +93,9 @@ export const dataTableProps = {
   virtualScroll: Boolean,
   virtualScrollX: Boolean,
   virtualScrollHeader: Boolean,
-  headerHeight: Number,
+  headerHeight: { type: Number, default: 28 },
   heightForRow: Function as PropType<DataTableHeightForRow>,
-  minRowHeight: Number,
+  minRowHeight: { type: Number, default: 28 },
   tableLayout: {
     type: String as PropType<'auto' | 'fixed'>,
     default: 'auto'
@@ -396,10 +396,10 @@ export interface DataTableInjection {
   rawPaginatedDataRef: Ref<InternalRowData[]>
   virtualScrollRef: Ref<boolean>
   virtualScrollXRef: Ref<boolean>
-  minRowHeightRef: Ref<number | undefined>
+  minRowHeightRef: Ref<number>
   heightForRowRef: Ref<DataTableHeightForRow | undefined>
   virtualScrollHeaderRef: Ref<boolean>
-  headerHeightRef: Ref<number | undefined>
+  headerHeightRef: Ref<number>
   bodyWidthRef: Ref<number | null>
   mergedTableLayoutRef: Ref<'auto' | 'fixed'>
   maxHeightRef: Ref<string | number | undefined>
