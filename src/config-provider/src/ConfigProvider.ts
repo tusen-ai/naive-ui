@@ -18,9 +18,11 @@ import type { NDateLocale, NLocale } from '../../locales'
 import type {
   GlobalComponentConfig,
   GlobalIconConfig,
+  GlobalSize,
   GlobalTheme,
   GlobalThemeOverrides
 } from './interface'
+
 import type {
   Breakpoints,
   RtlEnabledState,
@@ -48,6 +50,7 @@ export const configProviderProps = {
   katex: Object as PropType<Katex>,
   theme: Object as PropType<GlobalTheme | null>,
   themeOverrides: Object as PropType<GlobalThemeOverrides | null>,
+  size: String as PropType<GlobalSize>,
   componentOptions: Object as PropType<GlobalComponentConfig>,
   icons: Object as PropType<GlobalIconConfig>,
   breakpoints: Object as PropType<Breakpoints>,
@@ -228,7 +231,11 @@ export default defineComponent({
       mergedThemeOverridesRef,
       inlineThemeDisabled: inlineThemeDisabled || false,
       preflightStyleDisabled: preflightStyleDisabled || false,
-      styleMountTarget
+      styleMountTarget,
+      globalSize: computed(() => {
+        const { size } = props
+        return size === undefined ? undefined : size
+      })
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,

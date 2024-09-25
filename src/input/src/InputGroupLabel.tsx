@@ -1,5 +1,5 @@
 import { type PropType, computed, defineComponent, h } from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
@@ -10,10 +10,7 @@ import type { Size } from './interface'
 
 export const inputGroupLabelProps = {
   ...(useTheme.props as ThemeProps<InputTheme>),
-  size: {
-    type: String as PropType<Size>,
-    default: 'medium'
-  },
+  size: String as PropType<Size>,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -38,8 +35,8 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const { mergedSizeRef } = useFormItem(props)
     const cssVarsRef = computed(() => {
-      const { size } = props
       const {
         common: { cubicBezierEaseInOut },
         self: {
@@ -48,8 +45,8 @@ export default defineComponent({
           groupLabelTextColor,
           lineHeight,
           groupLabelBorder,
-          [createKey('fontSize', size)]: fontSize,
-          [createKey('height', size)]: height
+          [createKey('fontSize', mergedSizeRef.value)]: fontSize,
+          [createKey('height', mergedSizeRef.value)]: height
         }
       } = themeRef.value
       return {
@@ -66,7 +63,7 @@ export default defineComponent({
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
         'input-group-label',
-        computed(() => props.size[0]),
+        computed(() => mergedSizeRef.value[0]),
         cssVarsRef,
         props
       )

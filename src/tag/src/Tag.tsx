@@ -92,7 +92,8 @@ export default defineComponent({
       mergedBorderedRef,
       mergedClsPrefixRef,
       inlineThemeDisabled,
-      mergedRtlRef
+      mergedRtlRef,
+      globalSize
     } = useConfig(props)
     const themeRef = useTheme(
       'Tag',
@@ -143,7 +144,7 @@ export default defineComponent({
     }
     const rtlEnabledRef = useRtl('Tag', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
-      const { type, size, color: { color, textColor } = {} } = props
+      const { type, color: { color, textColor } = {} } = props
       const {
         common: { cubicBezierEaseInOut },
         self: {
@@ -164,10 +165,10 @@ export default defineComponent({
           closeBorderRadius,
           fontWeightStrong,
           [createKey('colorBordered', type)]: colorBordered,
-          [createKey('closeSize', size)]: closeSize,
-          [createKey('closeIconSize', size)]: closeIconSize,
-          [createKey('fontSize', size)]: fontSize,
-          [createKey('height', size)]: height,
+          [createKey('closeSize', globalSize.value)]: closeSize,
+          [createKey('closeIconSize', globalSize.value)]: closeIconSize,
+          [createKey('fontSize', globalSize.value)]: fontSize,
+          [createKey('height', globalSize.value)]: height,
           [createKey('color', type)]: typedColor,
           [createKey('textColor', type)]: typeTextColor,
           [createKey('border', type)]: border,
@@ -222,9 +223,9 @@ export default defineComponent({
         'tag',
         computed(() => {
           let hash = ''
-          const { type, size, color: { color, textColor } = {} } = props
+          const { type, color: { color, textColor } = {} } = props
           hash += type[0]
-          hash += size[0]
+          hash += globalSize.value[0]
           if (color) {
             hash += `a${color2Class(color)}`
           }
