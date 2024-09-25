@@ -7,7 +7,7 @@
 ### Breaking Changes
 
 - Fix `n-config-provider` inherit the class prefix from it's parent by default, closes [#5970](https://github.com/tusen-ai/naive-ui/issues/5970).
-- Fix `n-date-picker` default `weekFormat` that year and week standards are different and use local week and local year
+- Fix `n-date-picker`'s `weekFormat` uses different standards for year and week formatting. Now it uses local week and local year for year and week formatting.
 
 ### Fixes
 
@@ -18,8 +18,8 @@
 - Fix `n-date-picker`'s `input-readonly` prop not work in the panel's input for `'datetime'` or `'datetimerange'`.
 - Fix `n-menu` can't apply HTML attributes correctly on the component when `responsive` is set.
 - Fix `n-float-button` error when used with `popover` component, closes [#5933](https://github.com/tusen-ai/naive-ui/issues/5933).
-- Fix `n-badge` unable to mask focus element border, closes [#5929](https://github.com/tusen-ai/naive-ui/issues/5929)
-- Fix `n-button` font-weight CSS variable name error, closes [#5922](https://github.com/tusen-ai/naive-ui/issues/5922)
+- Fix `n-badge` unable to mask focus element border, closes [#5929](https://github.com/tusen-ai/naive-ui/issues/5929).
+- Fix `n-button` font-weight CSS variable name error, closes [#5922](https://github.com/tusen-ai/naive-ui/issues/5922).
 - Fix `n-icon`'s `component` prop not accepting FunctionalComponent.
 - Fix `n-mention`'s panel is misplaced if `placement` is set to `'top'` or padding is set to component's style, closes [#6241](https://github.com/tusen-ai/naive-ui/issues/6241).
 - Fix `n-carousel` transition not working as expected, closes [#5993](https://github.com/tusen-ai/naive-ui/issues/5993).
@@ -28,18 +28,18 @@
 
 - `n-scrollbar` adds `x-placement` and `y-placement` props, closes [#6089](https://github.com/tusen-ai/naive-ui/issues/6089).
 - `n-date-picker` adds `clear` `now` `confirm` slot, closes [#6013](https://github.com/tusen-ai/naive-ui/issues/6013).
-- `n-upload` adds `on-retry` prop, closes [#6031](https://github.com/tusen-ai/naive-ui/issues/6031)
+- `n-upload` adds `on-retry` prop, closes [#6031](https://github.com/tusen-ai/naive-ui/issues/6031).
 - Adds `n-highlight` component.
-- `n-slider` `marks` prop to support render function, closes [#5967](https://github.com/tusen-ai/naive-ui/issues/5967)
-- `n-transfer` `source-title` `target-title` prop to support render function, closes [#6004](https://github.com/tusen-ai/naive-ui/issues/6004)
-- `n-data-table` add `rowData` return for `render-expand-icon`, closes [#6108](https://github.com/tusen-ai/naive-ui/issues/6108)
+- `n-slider` `marks` prop to support render function, closes [#5967](https://github.com/tusen-ai/naive-ui/issues/5967).
+- `n-transfer` `source-title` `target-title` prop to support render function, closes [#6004](https://github.com/tusen-ai/naive-ui/issues/6004).
+- `n-data-table` add `rowData` return for `render-expand-icon`, closes [#6108](https://github.com/tusen-ai/naive-ui/issues/6108).
 - `n-empty` `size` prop to support `tiny` size.
 - `n-config-provider` adds `style-mount-target` prop to control where to mount components' style.
 - `n-cascader` filter ignore case sensitive.
 - `n-data-table` adds `allowExport` prop for column.
 - `n-date-picker` adds `year-range` prop.
 - `n-tree-select` adds `header` slot, closes [#5915](https://github.com/tusen-ai/naive-ui/issues/5915).
-- `n-data-table` adds `virtual-scroll-x`, `virtual-scroll-header`, `height-for-row`, `header-height`, `min-row-height` props for supporting horizontal virtual scrolling when there are massive columns.
+- `n-data-table` adds `virtual-scroll-x`, `virtual-scroll-header`, `height-for-row`, `header-height` and `min-row-height` props for supporting horizontal virtual scrolling when there are massive columns.
 
 ## 2.39.0
 
