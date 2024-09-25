@@ -62,6 +62,12 @@ export const qrCodeProps = {
   type: {
     type: String,
     default: 'canvas'
+  },
+  shape: {
+    type: String as PropType<
+      'square' | 'circle' | 'star' | 'heart' | 'cylinder'
+    >,
+    default: 'square'
   }
 } as const
 
@@ -181,7 +187,85 @@ export default defineComponent({
           const endX = Math.ceil((x + 1) * scale)
           const startY = Math.floor(y * scale)
           const endY = Math.ceil((y + 1) * scale)
-          ctx.fillRect(startX, startY, endX - startX, endY - startY)
+          switch (props.shape) {
+            case 'circle': {
+              const radius = (endX - startX) / 2
+              ctx.beginPath()
+              ctx.arc(startX + radius, startY + radius, radius, 0, 2 * Math.PI)
+              ctx.fill()
+              break
+            }
+            case 'star': {
+              const radius = (endX - startX) / 2
+              const cx = startX + radius
+              const cy = startY + radius
+              const spikes = 5
+              const outerRadius = radius
+              const innerRadius = radius / 2
+              let rot = (Math.PI / 2) * 3
+              let x = cx
+              let y = cy
+              const step = Math.PI / spikes
+
+              ctx.beginPath()
+              ctx.moveTo(cx, cy - outerRadius)
+              for (let i = 0; i < spikes; i++) {
+                x = cx + Math.cos(rot) * outerRadius
+                y = cy + Math.sin(rot) * outerRadius
+                ctx.lineTo(x, y)
+                rot += step
+
+                x = cx + Math.cos(rot) * innerRadius
+                y = cy + Math.sin(rot) * innerRadius
+                ctx.lineTo(x, y)
+                rot += step
+              }
+              ctx.lineTo(cx, cy - outerRadius)
+              ctx.closePath()
+              ctx.fill()
+              break
+            }
+            case 'heart': {
+              const size = endX - startX
+              const cx = startX + size / 2
+              const cy = startY + size / 2
+              const scale = 0.8
+              ctx.beginPath()
+              ctx.moveTo(cx, cy + (size * scale) / 3.5)
+              ctx.bezierCurveTo(
+                cx + (size * scale) / 2,
+                cy - (size * scale) / 3,
+                cx + size * scale,
+                cy + (size * scale) / 3,
+                cx,
+                cy + size * scale
+              )
+              ctx.bezierCurveTo(
+                cx - size * scale,
+                cy + (size * scale) / 3,
+                cx - (size * scale) / 2,
+                cy - (size * scale) / 3,
+                cx,
+                cy + (size * scale) / 3.5
+              )
+              ctx.closePath()
+              ctx.fill()
+              break
+            }
+            case 'cylinder': {
+              const radius = (endX - startX) / 2
+              const cx = startX + radius
+              const cy = startY + radius
+              ctx.beginPath()
+              ctx.ellipse(cx, cy, radius, radius / 2, 0, 0, 2 * Math.PI)
+              ctx.fill()
+              break
+            }
+            default: {
+              ctx.fillRect(startX, startY, endX - startX, endY - startY)
+              break
+            }
+          }
         }
       }
       if (iconConfig) {
