@@ -783,11 +783,7 @@ export default defineComponent({
                 })
                 : cols
               const virtualXRowHeight = isVirtualX
-                ? pxfy(
-                  heightForRow?.(rowData, actualRowIndex)
-                  || minRowHeight
-                  || 28
-                )
+                ? pxfy(heightForRow?.(rowData, actualRowIndex) || minRowHeight)
                 : undefined
               const cells = iteratedCols.map((col) => {
                 const colIndex = col.index

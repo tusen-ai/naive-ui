@@ -6,8 +6,10 @@
 
 ### Breaking Changes
 
-- 修复 `n-config-provider` 默认继承父级的类前缀 `cls-prefix`, 关闭 [#5970](https://github.com/tusen-ai/naive-ui/issues/5970)
-- 修复 `n-date-picker` 默认 `weekFormat` 中 year 和 week 标准不同，使用 local year 和 local week
+- 修复 `n-config-provider` 默认继承父级的类前缀 `cls-prefix`，关闭 [#5970](https://github.com/tusen-ai/naive-ui/issues/5970)
+- 修复 `n-date-picker` 默认 `weekFormat` 中 year 和 week 标准不同，现在使用 local year 和 local week
+- 依赖 `date-fns` 升级到 V3
+- `n-cascader` 过滤算法现在忽略大小写
 
 ### Fixes
 
@@ -17,29 +19,29 @@
 - 修复 `n-upload` 在某些老浏览器下目录上传最多只能上传 100 个文件，关闭 [#6027](https://github.com/tusen-ai/naive-ui/issues/6027)
 - 修复 `n-date-picker` 的 `input-readonly` 属性在 `'datetime'`、`'datetimerange'` 类型的面板输入框中不生效
 - 修复 `n-menu` 在 `responsive` 被设定的情况下，HTML 属性无法正确的应用到组件上
-- 修复 `n-float-button` 和 `popover` 一起使用会报错, 关闭 [#5933](https://github.com/tusen-ai/naive-ui/issues/5933)
+- 修复 `n-float-button` 和 `popover` 一起使用会报错，关闭 [#5933](https://github.com/tusen-ai/naive-ui/issues/5933)
 - 修复 `n-badge` 中无法遮盖聚焦元素边框问题，关闭 [#5929](https://github.com/tusen-ai/naive-ui/issues/5929)
 - 修复 `n-button` font-weight CSS 变量名错误的问题，关闭 [#5922](https://github.com/tusen-ai/naive-ui/issues/5922)
-- 修复 `n-icon` 的 `component` 属性不接受 FunctionalComponent 问题
+- 修复 `n-icon` 的 `component` 属性不接受 FunctionalComponent
 - 修复 `n-mention` 的面板在 `placement` 设为 `'top'` 或者组件设定的 padding 的时候位置有问题，关闭 [#6241](https://github.com/tusen-ai/naive-ui/issues/6241)
-- 修复 `n-carousel` 中轮播图的过渡行为不符合预期问题，关闭 [#5993](https://github.com/tusen-ai/naive-ui/issues/5993)
+- 修复 `n-carousel` 中轮播图的过渡行为不符合预期，关闭 [#5993](https://github.com/tusen-ai/naive-ui/issues/5993)
 
 ### Features
 
-- `n-scrollbar` 新增 `x-placement` 和 `y-placement` 属性， 关闭 [#6089](https://github.com/tusen-ai/naive-ui/issues/6089)
-- `n-date-picker` 新增 `clear` `now` `confirm` 插槽，关闭 [#6013](https://github.com/tusen-ai/naive-ui/issues/6013)
+- `n-scrollbar` 新增 `x-placement` 和 `y-placement` 属性，关闭 [#6089](https://github.com/tusen-ai/naive-ui/issues/6089)
+- `n-date-picker` 新增 `clear`、`now` 和 `confirm` 插槽，关闭 [#6013](https://github.com/tusen-ai/naive-ui/issues/6013)
 - `n-upload` 新增 `on-retry`属性，关闭 [#6031](https://github.com/tusen-ai/naive-ui/issues/6031)
 - 新增 `n-highlight` 组件
-- `n-slider` `marks` 支持渲染函数，关闭 [#5967](https://github.com/tusen-ai/naive-ui/issues/5967)
-- `n-transfer` `source-title` `target-title` 支持渲染函数，关闭 [#6004](https://github.com/tusen-ai/naive-ui/issues/6004)
-- `n-data-table` `render-expand-icon` 新增 `rowData`，关闭 [#6108](https://github.com/tusen-ai/naive-ui/issues/6108)
-- `n-empty` `size` 支持 `tiny` 尺寸
+- `n-slider` 的 `marks` 属性支持渲染函数，关闭 [#5967](https://github.com/tusen-ai/naive-ui/issues/5967)
+- `n-transfer` 的 `source-title` 和 `target-title` 属性支持渲染函数，关闭 [#6004](https://github.com/tusen-ai/naive-ui/issues/6004)
+- `n-data-table` 的 `render-expand-icon` 属性新增 `rowData` 参数，关闭 [#6108](https://github.com/tusen-ai/naive-ui/issues/6108)
+- `n-empty` 的 `size` 属性支持 `tiny` 尺寸
 - `n-config-provider` 新增 `style-mount-target` 属性，用于控制样式的挂载位置
-- `n-cascader` 过滤算法忽略大小写
 - `n-data-table` 在列的配置中新增 `allowExport` 属性
 - `n-date-picker` 新增 `year-range` 属性
 - `n-tree-select` 新增 `header` 插槽，关闭 [#5915](https://github.com/tusen-ai/naive-ui/issues/5915)
 - `n-data-table` 新增 `virtual-scroll-x`、`virtual-scroll-header`、`height-for-row`、`header-height`、`min-row-height` 属性，用于支持大量列数据的虚拟滚动
+- `n-select` 新增 `menu-size` 属性
 
 ## 2.39.0
 
