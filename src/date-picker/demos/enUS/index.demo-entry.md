@@ -59,7 +59,7 @@ panel.vue
 | value | `number \| [number, number] \| null` | `undefined` | Value of the date picker when being manually set. |  |
 | value-format | `string` | Follow `format` prop | Format of the binding value. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.24.0 |
 | year-format | `string` | `'y'` | Format of year item in the panel. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.37.0 |
-| year-range | `[number, number]` | `[1901, 2100]` | Year range in month picker in panel. | NEXT_VERSION |
+| year-range | `[number, number]` | `[1901, 2100]` | Year range in month picker in panel. | 2.40.0 |
 | on-clear | `() => void` | `undefined` | On clear callback. | 2.28.3 |
 | on-confirm | `(value: number \| [number, number] \| null, formattedValue: string \| [string, string] \| null) => void` | `undefined` | On confirm callback. | 2.28.3 |
 | on-blur | `() => void` | `undefined` | On blur callback. |  |
@@ -200,23 +200,23 @@ panel.vue
 
 | 名称 | 参数 | 说明 | 版本 |
 | --- | --- | --- | --- |
-| clear | `(props: { onClear: () => void, text: string })` | Clear button of the panel. | NEXT_VERSION |
-| now | `(props: { onNow: () => void, text: string })` | Now button of the panel. | NEXT_VERSION |
+| clear | `(props: { onClear: () => void, text: string })` | Clear button of the panel. | 2.40.0 |
+| now | `(props: { onNow: () => void, text: string })` | Now button of the panel. | 2.40.0 |
 
 ### DateRange, DateTimeRange, MonthRange, YearRange Slots
 
 | 名称 | 参数 | 说明 | 版本 |
 | --- | --- | --- | --- |
-| clear | `(props: { onClear: () => void, text: string })` | Clear button of the panel. | NEXT_VERSION |
-| confirm | `(props: { onConfirm: () => void, disabled: boolean, text: string })` | Confirm button of the panel. | NEXT_VERSION |
+| clear | `(props: { onClear: () => void, text: string })` | Clear button of the panel. | 2.40.0 |
+| confirm | `(props: { onConfirm: () => void, disabled: boolean, text: string })` | Confirm button of the panel. | 2.40.0 |
 
 ### DateTime, Month, Quarter Slots
 
 | 名称 | 参数 | 说明 | 版本 |
 | --- | --- | --- | --- |
-| now | `(props: { onNow: () => void, text: string })` | Now button of the panel. | NEXT_VERSION |
-| clear | `(props: { onClear: () => void, text: string })` | Clear button of the panel. | NEXT_VERSION |
-| confirm | `(props: { onConfirm: () => void, disabled: boolean, text: string })` | Confirm button of the panel. | NEXT_VERSION |
+| now | `(props: { onNow: () => void, text: string })` | Now button of the panel. | 2.40.0 |
+| clear | `(props: { onClear: () => void, text: string })` | Clear button of the panel. | 2.40.0 |
+| confirm | `(props: { onConfirm: () => void, disabled: boolean, text: string })` | Confirm button of the panel. | 2.40.0 |
 
 ### DatePicker Methods
 

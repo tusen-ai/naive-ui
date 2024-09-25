@@ -1,8 +1,8 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.40.0
 
-`xxxx-xx-xx`
+`2024-09-26`
 
 ### Breaking Changes
 
