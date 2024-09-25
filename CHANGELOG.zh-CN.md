@@ -39,6 +39,7 @@
 - `n-data-table` 在列的配置中新增 `allowExport` 属性
 - `n-date-picker` 新增 `year-range` 属性
 - `n-tree-select` 新增 `header` 插槽，关闭 [#5915](https://github.com/tusen-ai/naive-ui/issues/5915)
+- `n-data-table` 新增 `virtual-scroll-x`、`virtual-scroll-header`、`height-for-row`、`header-height`、`min-row-height` 属性，用于支持大量列数据的虚拟滚动
 
 ## 2.39.0
 

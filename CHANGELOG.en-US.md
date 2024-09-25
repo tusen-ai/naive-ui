@@ -39,6 +39,7 @@
 - `n-data-table` adds `allowExport` prop for column.
 - `n-date-picker` adds `year-range` prop.
 - `n-tree-select` adds `header` slot, closes [#5915](https://github.com/tusen-ai/naive-ui/issues/5915).
+- `n-data-table` adds `virtual-scroll-x`, `virtual-scroll-header`, `height-for-row`, `header-height`, `min-row-height` props for supporting horizontal virtual scrolling when there are massive columns.
 
 ## 2.39.0
 
