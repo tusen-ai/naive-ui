@@ -628,7 +628,14 @@ const Button = defineComponent({
                                 key="loading"
                                 class={`${mergedClsPrefix}-icon-slot`}
                                 strokeWidth={20}
-                              />
+                              >
+                                {{
+                                  default: () =>
+                                    this.$slots.loading
+                                      ? this.$slots.loading()
+                                      : null
+                                }}
+                              </NBaseLoading>
                             ) : (
                               <div
                                 key="icon"

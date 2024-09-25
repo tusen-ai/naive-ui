@@ -5,12 +5,16 @@
 </markdown>
 
 <script lang="ts">
-import { CashOutline as CashIcon } from '@vicons/ionicons5'
+import {
+  CashOutline as CashIcon,
+  TimeOutline as TimeIcon
+} from '@vicons/ionicons5'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   components: {
-    CashIcon
+    CashIcon,
+    TimeIcon
   },
   setup() {
     const loadingRef = ref(false)
@@ -39,6 +43,12 @@ export default defineComponent({
     </n-button>
     <n-button :loading="loading" @click="handleClick">
       点我
+    </n-button>
+    <n-button :loading="loading" @click="handleClick">
+      点我
+      <template #loading>
+        <TimeIcon />
+      </template>
     </n-button>
   </n-space>
 </template>

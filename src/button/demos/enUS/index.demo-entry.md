@@ -69,6 +69,7 @@ popover.vue
 | ------- | ---------- | ---------------------------------- |
 | default | `()`       | The default content of the button. |
 | icon    | `()`       | The icon of the button.            |
+| loading | `()`       | The loading status of the button.  |
 
 ### ButtonGroup Slots
 
