@@ -28,10 +28,11 @@
 
 ### Features
 
+- 🌟 `n-data-table` adds `virtual-scroll-x`, `virtual-scroll-header`, `height-for-row`, `header-height` and `min-row-height` props for supporting horizontal virtual scrolling when there are massive columns.
+- 🌟 Adds `n-highlight` component.
 - `n-scrollbar` adds `x-placement` and `y-placement` props, closes [#6089](https://github.com/tusen-ai/naive-ui/issues/6089).
 - `n-date-picker` adds `clear`, `now` and `confirm` slots, closes [#6013](https://github.com/tusen-ai/naive-ui/issues/6013).
 - `n-upload` adds `on-retry` prop, closes [#6031](https://github.com/tusen-ai/naive-ui/issues/6031).
-- Adds `n-highlight` component.
 - `n-slider`'s `marks` prop supports render function, closes [#5967](https://github.com/tusen-ai/naive-ui/issues/5967).
 - `n-transfer`'s `source-title` and `target-title` props support render function, closes [#6004](https://github.com/tusen-ai/naive-ui/issues/6004).
 - `n-data-table` add `rowData` params for `render-expand-icon` prop, closes [#6108](https://github.com/tusen-ai/naive-ui/issues/6108).
@@ -40,7 +41,6 @@
 - `n-data-table` adds `allowExport` prop for column object.
 - `n-date-picker` adds `year-range` prop.
 - `n-tree-select` adds `header` slot, closes [#5915](https://github.com/tusen-ai/naive-ui/issues/5915).
-- `n-data-table` adds `virtual-scroll-x`, `virtual-scroll-header`, `height-for-row`, `header-height` and `min-row-height` props for supporting horizontal virtual scrolling when there are massive columns.
 - `n-select` adds `menu-size` prop.
 
 ## 2.39.0

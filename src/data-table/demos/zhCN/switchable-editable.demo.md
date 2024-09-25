@@ -1,7 +1,5 @@
 # 可切换的可编辑表格
 
-不太简单，胜在好看
-
 ```html
 <n-data-table
   :key="(row) => row.key"

@@ -1,7 +1,5 @@
 # Switchable Editable Table
 
-Not too simple, but good-looking.
-
 ```html
 <n-data-table
   :key="(row) => row.key"

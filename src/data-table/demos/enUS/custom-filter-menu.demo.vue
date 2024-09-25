@@ -13,11 +13,13 @@ import { PawOutline, SearchOutline } from '@vicons/ionicons5'
 const data = [
   {
     Left: '1',
-    Right: '1'
+    Right: '1',
+    key: 1
   },
   {
     Left: '2',
-    Right: '2'
+    Right: '2',
+    key: 2
   }
 ]
 

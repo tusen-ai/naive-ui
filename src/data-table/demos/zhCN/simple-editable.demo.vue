@@ -1,7 +1,5 @@
 <markdown>
 # 简单的可编辑表格
-
-虽然简单，但是实用
 </markdown>
 
 <script lang="ts">

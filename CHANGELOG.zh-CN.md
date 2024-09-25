@@ -28,10 +28,11 @@
 
 ### Features
 
+- 🌟 `n-data-table` 新增 `virtual-scroll-x`、`virtual-scroll-header`、`height-for-row`、`header-height`、`min-row-height` 属性，用于支持大量列数据的虚拟滚动
+- 🌟 新增 `n-highlight` 组件
 - `n-scrollbar` 新增 `x-placement` 和 `y-placement` 属性，关闭 [#6089](https://github.com/tusen-ai/naive-ui/issues/6089)
 - `n-date-picker` 新增 `clear`、`now` 和 `confirm` 插槽，关闭 [#6013](https://github.com/tusen-ai/naive-ui/issues/6013)
 - `n-upload` 新增 `on-retry`属性，关闭 [#6031](https://github.com/tusen-ai/naive-ui/issues/6031)
-- 新增 `n-highlight` 组件
 - `n-slider` 的 `marks` 属性支持渲染函数，关闭 [#5967](https://github.com/tusen-ai/naive-ui/issues/5967)
 - `n-transfer` 的 `source-title` 和 `target-title` 属性支持渲染函数，关闭 [#6004](https://github.com/tusen-ai/naive-ui/issues/6004)
 - `n-data-table` 的 `render-expand-icon` 属性新增 `rowData` 参数，关闭 [#6108](https://github.com/tusen-ai/naive-ui/issues/6108)
@@ -40,7 +41,6 @@
 - `n-data-table` 在列的配置中新增 `allowExport` 属性
 - `n-date-picker` 新增 `year-range` 属性
 - `n-tree-select` 新增 `header` 插槽，关闭 [#5915](https://github.com/tusen-ai/naive-ui/issues/5915)
-- `n-data-table` 新增 `virtual-scroll-x`、`virtual-scroll-header`、`height-for-row`、`header-height`、`min-row-height` 属性，用于支持大量列数据的虚拟滚动
 - `n-select` 新增 `menu-size` 属性
 
 ## 2.39.0
