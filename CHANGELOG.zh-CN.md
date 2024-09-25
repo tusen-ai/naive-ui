@@ -8,6 +8,7 @@
 
 - 修复 `n-config-provider` 默认继承父级的类前缀 `cls-prefix`, 关闭 [#5970](https://github.com/tusen-ai/naive-ui/issues/5970)
 - 修复 `n-date-picker` 默认 `weekFormat` 中 year 和 week 标准不同，使用 local year 和 local week
+- 修复 `n-progress` 当类型为 `circle` 时 `rail-style` 属性不生效问题 关闭 [#6287](https://github.com/tusen-ai/naive-ui/issues/6287)
 
 ### Fixes
 
@@ -624,7 +625,7 @@
 
 ### Fixes
 
-- 修复 `n-select` 菜单在 SSR 情况下缺少勾选图标，关闭 <https://github.com/07akioni/naive-ui-nuxt-demo/issues/4>
+- 修复 `n-select` 菜单在 SSR 情况下缺少勾选图标，关闭 [https://github.com/07akioni/naive-ui-nuxt-demo/issues/4](https://github.com/07akioni/naive-ui-nuxt-demo/issues/4)
 - 修复 `n-card` 的 `embedded` 属性在 `n-dialog` 中不生效，关闭 [#3592](https://github.com/tusen-ai/naive-ui/issues/3592)
 - 修复 `n-radio` 当 `value` 属性为布尔值时报警告，关闭 [#3540](https://github.com/tusen-ai/naive-ui/issues/3540)
 - 修复 `n-pagination` 被禁用时，快速跳转菜单还会触发并可进行分页跳转
@@ -3594,7 +3595,7 @@
 ### Fixes
 
 - 修正了 `n-radio` 无法聚焦的问题
-- 修正了 `n-data-table` 的 `max-height` 样式失效的问题 <https://bugs.chromium.org/p/chromium/issues/detail?id=1107223>
+- 修正了 `n-data-table` 的 `max-height` 样式失效的问题 [https://bugs.chromium.org/p/chromium/issues/detail?id=1107223](https://bugs.chromium.org/p/chromium/issues/detail?id=1107223)
 
 ### Refactors
 

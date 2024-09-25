@@ -110,6 +110,11 @@ export default defineComponent({
       const { pathString: fillPathString, pathStyle: fillPathStyle }
         = getPathStyles(percentage, offsetDegree, fillColor)
       const viewBoxSize = 100 + strokeWidth
+      // https://github.com/tusen-ai/naive-ui/issues/6287
+      const mergedRailStyle
+        = typeof props.railStyle === 'object'
+          ? { ...railPathStyle, ...props.railStyle }
+          : railPathStyle
       return (
         <div class={`${clsPrefix}-progress-content`} role="none">
           <div class={`${clsPrefix}-progress-graph`} aria-hidden>
@@ -129,7 +134,7 @@ export default defineComponent({
                     stroke-width={strokeWidth}
                     stroke-linecap="round"
                     fill="none"
-                    style={railPathStyle}
+                    style={mergedRailStyle}
                   />
                 </g>
                 <g>
