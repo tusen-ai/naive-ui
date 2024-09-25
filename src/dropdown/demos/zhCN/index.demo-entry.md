@@ -41,7 +41,7 @@ scrollable-debug.vue
 | render-option | `(props: { node: VNode, option: DropdownOption \| DropdownGroupOption }) => VNodeChild` | `undefined` | 批量处理下拉菜单渲染 | 2.29.1 |
 | size | `'small'\|'medium'\|'large'\|'huge'` | `'medium'` | 下拉菜单的尺寸大小 |  |
 | on-clickoutside | `(e: MouseEvent) => void` | `undefined` | clickoutside 的时候触发的回调函数 |  |
-| on-select | `(key: string \| number, option: DropdownOption) => void` | `undefined` | select 选中时触发的回调函数 |  |
+| on-select | `(key: string \| number, option: DropdownOption, event: MouseEvent \| KeyboardEvent) => void` | `undefined` | select 选中时触发的回调函数, `event`: NEXT_VERSION |  |
 
 对于其他 Props，例如 `placement`，请参考 [Popover Props](popover#Popover-Props)。注意 `raw` 属性不可用。
 

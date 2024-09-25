@@ -39,7 +39,7 @@ render-option.vue
 | render-option | `(props: { node: VNode, option: DropdownOption \| DropdownGroupOption }) => VNodeChild` | `undefined` | Render function that renders option itself. | 2.29.1 |
 | size | `'small'\|'medium'\|'large'\|'huge'` | `'medium'` | Dropdown size. |  |
 | on-clickoutside | `(e: MouseEvent) => void` | `undefined` | Callback function triggered when there is a click outside of the component. |  |
-| on-select | `(key: string \| number, option: DropdownOption) => void` | `undefined` | Callback function for after an option is selected. |  |
+| on-select | `(key: string \| number, option: DropdownOption, event: MouseEvent \| KeyboardEvent) => void` | `undefined` | Callback function for after an option is selected. `event`: NEXT_VERSION |  |
 
 For other props, for example `placement`, please see [Popover Props](popover#Popover-Props). Note that `raw` is not available.
 

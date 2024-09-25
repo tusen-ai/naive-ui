@@ -34,7 +34,8 @@ export type TmNode = TreeNode<
 
 export type OnUpdateValue = <T extends string & number & (string | number)>(
   value: T,
-  option: DropdownOption
+  option: DropdownOption,
+  e: MouseEvent | KeyboardEvent
 ) => void
 
 export type OnUpdateKeys = <
@@ -45,7 +46,8 @@ export type OnUpdateKeys = <
 
 export type OnUpdateValueImpl = <T extends string | number | (string | number)>(
   value: T,
-  option: DropdownOption
+  option: DropdownOption,
+  e: MouseEvent | KeyboardEvent
 ) => void
 
 export type OnUpdateKeysImpl = <
