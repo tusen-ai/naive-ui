@@ -533,7 +533,6 @@ export default defineComponent({
       } = entry
       const containerWidth = target.parentElement!.parentElement!.offsetWidth
       const containerHeight = target.parentElement!.parentElement!.offsetHeight
-      // console.log(target, target.parentElement, width, containerWidth)
       const { placement } = props
       if (!addTabFixedRef.value) {
         if (placement === 'top' || placement === 'bottom') {

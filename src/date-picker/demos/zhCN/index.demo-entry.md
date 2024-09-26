@@ -60,7 +60,7 @@ form-debug.vue
 | value | `number \| [number, number] \| null` | `undefined` | Date Picker 的值 |  |
 | value-format | `string` | 跟随 `format` 属性 | 绑定值的格式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |
 | year-format | `string` | `'y'` | 设置面板中年的显示方式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | 2.37.0 |
-| year-range | `[number, number]` | `[1901, 2100]` | 设置面板中的年份选择范围 | NEXT_VERSION |
+| year-range | `[number, number]` | `[1901, 2100]` | 设置面板中的年份选择范围 | 2.40.0 |
 | on-clear | `() => void` | `undefined` | 用户 clear 时执行的回调 | 2.28.3 |
 | on-confirm | `(value: number \| [number, number] \| null, formattedValue: string \| [string, string] \| null) => void` | `undefined` | 用户 confirm 时执行的回调 | 2.28.3 |
 | on-blur | `() => void` | `undefined` | 用户 blur 时执行的回调 |  |
@@ -196,27 +196,27 @@ form-debug.vue
 | prev-year  | `()` | 日期面板的 `快速上一个` 图标 | 2.33.4 |
 | separator  | `()` | 日期范围分隔符号             | 2.29.0 |
 
-### Date Year QuarterRange Week Slots
-
-| 名称  | 参数                               | 说明           | 版本         |
-| ----- | ---------------------------------- | -------------- | ------------ |
-| clear | `(props: { onClear: () => void })` | 面板的清除按钮 | NEXT_VERSION |
-| now   | `(props: { onNow: () => void })`   | 面板的此刻按钮 | NEXT_VERSION |
-
-### DateRange DateTimeRange MonthRange YearRange Slots
+### Date, Year, QuarterRange, Week Slots
 
 | 名称 | 参数 | 说明 | 版本 |
 | --- | --- | --- | --- |
-| clear | `(props: { onClear: () => void })` | 面板的清除按钮 | NEXT_VERSION |
-| confirm | `(props: { onConfirm: () => void, disabled: boolean })` | 面板的确认按钮 | NEXT_VERSION |
+| clear | `(props: { onClear: () => void, text: string })` | 面板的清除按钮 | 2.40.0 |
+| now | `(props: { onNow: () => void, text: string })` | 面板的此刻按钮 | 2.40.0 |
 
-### DateTime Month Quarter Slots
+### DateRange, DateTimeRange, MonthRange, YearRange Slots
 
 | 名称 | 参数 | 说明 | 版本 |
 | --- | --- | --- | --- |
-| now | `(props: { onNow: () => void })` | 面板的此刻按钮 | NEXT_VERSION |
-| clear | `(props: { onClear: () => void })` | 面板的清除按钮 | NEXT_VERSION |
-| confirm | `(props: { onConfirm: () => void, disabled: boolean })` | 面板的确认按钮 | NEXT_VERSION |
+| clear | `(props: { onClear: () => void, text: string })` | 面板的清除按钮 | 2.40.0 |
+| confirm | `(props: { onConfirm: () => void, disabled: boolean, text: string })` | 面板的确认按钮 | 2.40.0 |
+
+### DateTime, Month, Quarter Slots
+
+| 名称 | 参数 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| now | `(props: { onNow: () => void, text: string })` | 面板的此刻按钮 | 2.40.0 |
+| clear | `(props: { onClear: () => void, text: string })` | 面板的清除按钮 | 2.40.0 |
+| confirm | `(props: { onConfirm: () => void, disabled: boolean, text: string })` | 面板的确认按钮 | 2.40.0 |
 
 ### DatePicker Methods
 

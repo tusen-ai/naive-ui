@@ -783,11 +783,7 @@ export default defineComponent({
                 })
                 : cols
               const virtualXRowHeight = isVirtualX
-                ? pxfy(
-                  heightForRow?.(rowData, actualRowIndex)
-                  || minRowHeight
-                  || 28
-                )
+                ? pxfy(heightForRow?.(rowData, actualRowIndex) || minRowHeight)
                 : undefined
               const cells = iteratedCols.map((col) => {
                 const colIndex = col.index
@@ -1012,8 +1008,10 @@ export default defineComponent({
 
               const row = (
                 <tr
-                  onMouseenter={() => {
+                  {...props}
+                  onMouseenter={(e) => {
                     this.hoverKey = rowKey
+                    props?.onMouseenter?.(e)
                   }}
                   key={rowKey}
                   class={[
@@ -1024,8 +1022,10 @@ export default defineComponent({
                     mergedRowClassName,
                     props?.class
                   ]}
-                  style={props?.style}
-                  {...props}
+                  style={[
+                    props?.style,
+                    isVirtualX && { height: virtualXRowHeight }
+                  ]}
                 >
                   {cells}
                 </tr>

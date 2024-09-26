@@ -41,7 +41,7 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-transfer-list-header`}>
           {title && (
             <div class={`${mergedClsPrefix}-transfer-list-header__title`}>
-              {typeof title === 'function' ? [title()] : [title]}
+              {typeof title === 'function' ? title() : title}
             </div>
           )}
           {source && (
