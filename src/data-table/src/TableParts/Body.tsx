@@ -1008,8 +1008,10 @@ export default defineComponent({
 
               const row = (
                 <tr
-                  onMouseenter={() => {
+                  {...props}
+                  onMouseenter={(e) => {
                     this.hoverKey = rowKey
+                    props?.onMouseenter?.(e)
                   }}
                   key={rowKey}
                   class={[
@@ -1020,8 +1022,10 @@ export default defineComponent({
                     mergedRowClassName,
                     props?.class
                   ]}
-                  style={props?.style}
-                  {...props}
+                  style={[
+                    props?.style,
+                    isVirtualX && { height: virtualXRowHeight }
+                  ]}
                 >
                   {cells}
                 </tr>

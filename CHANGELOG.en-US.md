@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2.40.1
+
+`2024-09-26`
+
+### Fixes
+
+- Fix `n-data-table` in virtual-x mode, when all column objects do not have the `fixed` attribute configured, it cannot be displayed normally.
+- Fix `css-render` dependency version is not high enough to affect the `style-mount-target` attribute of `n-config-provider`.
+- Fix `n-data-table`'s `rowProps` generated `class` will override the original row DOM's class.
+
 ## 2.40.0
 
 `2024-09-26`

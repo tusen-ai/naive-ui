@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2.40.1
+
+`2024-09-26`
+
+### Fixes
+
+- 修复 `n-data-table` 在设定 `virtual-x`，且所有的 column 对象均没有配置 `fixed` 属性的时候无法正常显示
+- 修复 `css-render` 依赖版本不够高可能会影响 `n-config-provider` 的 `style-mount-target` 属性的问题
+- 修复 `n-data-table` 的 `rowProps` 产生的 `class` 会覆盖原本行 DOM 的 class
+
 ## 2.40.0
 
 `2024-09-26`
