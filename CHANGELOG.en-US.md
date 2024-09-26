@@ -4,6 +4,10 @@
 
 `2024-09-26`
 
+### Features
+
+- `n-image` `download` support method local file, close [#6394](https://github.com/tusen-ai/naive-ui/issues/6394)
+
 ### Fixes
 
 - Fix `n-data-table` in virtual-x mode, when all column objects do not have the `fixed` attribute configured, it cannot be displayed normally.
