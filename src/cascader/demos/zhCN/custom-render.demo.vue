@@ -1,5 +1,5 @@
 <markdown>
-# 自定义渲染
+# 自定义选项渲染
 
 使用 `render-label` 可以批量控制 cascader 菜单的选项渲染。
 </markdown>
