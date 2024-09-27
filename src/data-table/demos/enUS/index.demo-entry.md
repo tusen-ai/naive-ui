@@ -90,7 +90,7 @@ export-csv.vue
 | min-height | `number \| string` | `undefined` | The min-height of the table content. Can be a CSS value. |  |
 | min-row-height | `number` | `28` | Min row height of the table when `virtual-scroll` or `virtual-scroll-x` is enabled. Each row's height must be larger than its value. | 2.40.0 |
 | paginate-single-page | `boolean` | `true` | Whether show pagination data is less than one page. | 2.28.0 |
-| pagination | `false \| object` | `false` | See [Pagination props](pagination#Pagination-Props) |  |
+| pagination | `false \| object` | `false` | See [Pagination props](pagination#Pagination-Props). If the table data is from a remote server or needs to be loaded asynchronously, it is recommended to set the `remote` property to `true` to correctly handle the paging logic. |  |
 | pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | The behavior of pagination after filter state is changed. `'first'` means returning to first page on filter, `'current'` means keep at current page on filter. | 2.28.3 |
 | remote | `boolean` | `false` | If data-table do automatic paging. You may set it to `true` in async usage. |  |
 | render-cell | `(value: any, rowData: object, column: DataTableBaseColumn) => VNodeChild` | `undefined` | Render function of cell, it will be overwritten by columns' `render`. | 2.30.5 |

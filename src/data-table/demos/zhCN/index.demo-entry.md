@@ -101,7 +101,7 @@ rtl-debug.vue
 | min-height | `number \| string` | `undefined` | 表格内容的最低高度，可以是 CSS 属性值 |  |
 | min-row-height | `number` | `28` | 在开启 `virtual-scroll` 或 `virtual-scroll-x` 的情况下，每一行的最小高度，所有的行的高度必须比这个值更大 | 2.40.0 |
 | paginate-single-page | `boolean` | `true` | 当表格数据只有一页时是否显示分页面 | 2.28.0 |
-| pagination | `false \| object` | `false` | 属性参考 [Pagination props](pagination#Pagination-Props) |  |
+| pagination | `false \| object` | `false` | 属性参考 [Pagination props](pagination#Pagination-Props)。如果表格数据来自远程服务器或需要进行异步加载，建议将 `remote` 属性设置为 `true`，以便正确处理分页逻辑 |  |
 | pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | 过滤操作后页面的状态，`'first'` 为回到首页，`'current'` 为停留在当前页 | 2.28.3 |
 | remote | `boolean` | `false` | 表格是否自动分页数据，在异步的状况下你可能需要把它设为 `true` |  |
 | render-cell | `(value: any, rowData: object, column: DataTableBaseColumn) => VNodeChild` | `undefined` | 自定义单元格渲染，优先级低于列的 `render` | 2.30.5 |
