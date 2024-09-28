@@ -1,5 +1,7 @@
 <markdown>
 # Grouped header
+
+Note: If you want grouped header to be fixed, you need to set width of all fixed columns, includes columns with `children`. If not it may not display normally.
 </markdown>
 
 <script lang="ts">
