@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix the issue where Chinese column names are encoded when exporting using the `downloadCsv` method of `n-data-table`
+- Fix the issue where data containing `,` is truncated when exporting using the `downloadCsv` method of `n-data-table`
+
 ## 2.40.1
 
 `2024-09-26`

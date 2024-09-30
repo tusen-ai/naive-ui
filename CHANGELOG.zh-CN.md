@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- 修复 `n-data-table` 的 `downloadCsv` 方法在导出中文列名的时候，中文列名会被编码的问题
+- 修复 `n-data-table` 的 `downloadCsv` 方法在导出包含 `,` 的数据时，数据会被截断的问题
+
 ## 2.40.1
 
 `2024-09-26`
