@@ -194,15 +194,19 @@ export function isColumnSorting(
 }
 
 function formatCsvCell(value: unknown): string {
-  if (typeof value === 'string') {
-    return value.replace(/,/g, '\\,')
-  }
-  else if (value === null || value === undefined) {
+  if (value === null || value === undefined) {
     return ''
   }
-  else {
-    return `${value}`.replace(/,/g, '\\,')
+  const stringValue = String(value)
+  if (
+    stringValue.includes('"')
+    || stringValue.includes(',')
+    || stringValue.includes('\n')
+  ) {
+    const escapedValue = stringValue.replace(/"/g, '""')
+    return `"${escapedValue}"`
   }
+  return stringValue
 }
 
 export function generateCsv(columns: TableColumn[], data: RowData[]): string {
