@@ -53,6 +53,10 @@ export const floatButtonProps = {
     type: Boolean,
     default: undefined
   },
+  menuPosition: {
+    type: String as PropType<'top' | 'right' | 'bottom' | 'left'>,
+    default: 'top'
+  },
   onUpdateShowMenu: {
     type: [Function, Array] as PropType<MaybeArray<(value: boolean) => void>>,
     default: undefined
@@ -224,7 +228,8 @@ export default defineComponent({
       themeClass,
       $slots,
       inlineStyle,
-      onRender
+      onRender,
+      menuPosition
     } = this
     onRender?.()
     return (
@@ -270,7 +275,10 @@ export default defineComponent({
               e.stopPropagation()
             }}
             data-float-button-menu
-            class={`${mergedClsPrefix}-float-button__menu`}
+            class={[
+              `${mergedClsPrefix}-float-button__menu`,
+              `${mergedClsPrefix}-float-button__${menuPosition}-menu`
+            ]}
           >
             {resolveSlot($slots.menu, () => [])}
           </div>

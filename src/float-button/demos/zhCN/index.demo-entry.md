@@ -13,6 +13,7 @@ tooltip.vue
 custom.vue
 group.vue
 menu.vue
+menu-position.vue
 ```
 
 ## API
@@ -24,6 +25,7 @@ menu.vue
 | bottom | `number \| string` | `40` | 按钮的 CSS `bottom` 属性 | 2.38.0 |
 | height | `number \| string` | `40` | 按钮的 CSS `height` 属性 | 2.38.0 |
 | left | `number \| string` | `undefined` | 按钮的 CSS `left` 属性 | 2.38.0 |
+| menu-position | `'top' \| 'bottom' \| 'left' \| 'right'` | `'top'` | 菜单显示位置 | NEXT_VERSION |
 | menu-trigger | `'click' \| 'hover'` | `undefined` | 触发菜单显示的方式 | 2.38.0 |
 | position | `'relative' \| 'absolute' \| 'fixed'` | `'fixed'` | 按钮组的定位方式 | 2.38.0 |
 | right | `number \| string` | `undefined` | 按钮的 CSS `right` 属性 | 2.38.0 |

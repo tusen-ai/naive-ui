@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-float-button` 新增 `menu-position` 属性，用于设置菜单显示位置
+
 ## 2.40.1
 
 `2024-09-26`
