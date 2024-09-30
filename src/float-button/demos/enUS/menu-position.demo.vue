@@ -1,5 +1,5 @@
 <markdown>
-# 菜单显示位置
+# Menu Display Position
 
 The menu can be displayed in different positions using the `menu-position` property
 </markdown>
@@ -16,8 +16,13 @@ export default defineComponent({
 </script>
 
 <template>
-  <n-flex>
-    <n-float-button position="relative" type="primary" menu-trigger="hover">
+  <div style="height: 180px">
+    <n-float-button
+      position="absolute"
+      class="top"
+      type="primary"
+      menu-trigger="hover"
+    >
       <n-icon>
         <CashIcon />
       </n-icon>
@@ -40,8 +45,9 @@ export default defineComponent({
       </template>
     </n-float-button>
     <n-float-button
+      class="bottom"
       menu-position="bottom"
-      position="relative"
+      position="absolute"
       type="primary"
       menu-trigger="hover"
     >
@@ -67,8 +73,9 @@ export default defineComponent({
       </template>
     </n-float-button>
     <n-float-button
+      class="left"
       menu-position="left"
-      position="relative"
+      position="absolute"
       type="primary"
       menu-trigger="hover"
     >
@@ -94,8 +101,9 @@ export default defineComponent({
       </template>
     </n-float-button>
     <n-float-button
+      class="right"
       menu-position="right"
-      position="relative"
+      position="absolute"
       type="primary"
       menu-trigger="hover"
     >
@@ -120,5 +128,26 @@ export default defineComponent({
         </n-float-button>
       </template>
     </n-float-button>
-  </n-flex>
+  </div>
 </template>
+
+<style>
+.top {
+  left: calc(50% - 20px);
+}
+
+.bottom {
+  left: calc(50% - 20px);
+  bottom: 20px;
+}
+
+.left {
+  left: calc(50% - 100px);
+  bottom: 90px;
+}
+
+.right {
+  left: calc(50% + 60px);
+  bottom: 90px;
+}
+</style>
