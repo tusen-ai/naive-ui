@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERION
+
+`NEXT_VERION`
+
+### Features
+
+- `n-float-button` adds `menu-position` prop.
+
 ## 2.40.1
 
 `2024-09-26`

@@ -76,7 +76,6 @@ export default cB('float-button', `
     c('>', [
       cE('menu', `
         pointer-events: all;
-        bottom: 100%;
         opacity: 1;
       `),
       cE('close', `
@@ -86,7 +85,19 @@ export default cB('float-button', `
       cE('body', `
         transform: scale(0.75);
         opacity: 0;
-      `)
+      `),
+      cE('top-menu', `
+        bottom: 100%;
+      `),
+      cE('bottom-menu', `
+        top: calc(100%);
+      `),
+      cE('left-menu', `
+        right: 100%;
+      `),
+      cE('right-menu', `
+        left: 100%;
+      `),
     ])
   ]),
   cE('close', `
@@ -101,20 +112,56 @@ export default cB('float-button', `
   `),
   cE('menu', `
     position: absolute;
-    bottom: calc(100% - 8px);
     display: flex;
-    flex-direction: column;
     opacity: 0;
     pointer-events: none;
-    transition:
-      opacity .3s var(--n-bezier),
-      bottom .3s var(--n-bezier); 
   `, [
-    c('> *', `
-      margin-bottom: 16px;
-    `),
     cB('float-button', `
       position: relative !important;
     `)
-  ])
+  ]),
+  cE('top-menu', `
+    flex-direction: column;
+    bottom: calc(100% - 8px);
+    transition: 
+      opacity .3s var(--n-bezier),
+      bottom .3s var(--n-bezier);
+  `, [
+    c('> *', `
+      margin-bottom: 16px;
+    `)
+  ]),
+  cE('bottom-menu', `
+    flex-direction: column;
+    top: calc(100% - 8px);
+    transition: 
+      opacity .3s var(--n-bezier),
+      top .3s var(--n-bezier);
+  `, [
+    c('> *', `
+      margin-top: 16px;
+    `)
+  ]),
+  cE('left-menu', `
+    flex-direction: row;
+    right: calc(100% - 8px);
+    transition: 
+      opacity .3s var(--n-bezier),
+      right .3s var(--n-bezier);
+  `, [
+    c('> *', `
+      margin-right: 16px;
+    `)
+  ]),
+  cE('right-menu', `
+    flex-direction: row;
+    left: calc(100% - 8px);
+    transition: 
+      opacity .3s var(--n-bezier),
+      left .3s var(--n-bezier);
+  `, [
+    c('> *', `
+      margin-left: 16px;
+    `)
+  ]),
 ])

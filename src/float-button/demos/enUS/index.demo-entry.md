@@ -13,6 +13,7 @@ tooltip.vue
 custom.vue
 group.vue
 menu.vue
+menu-position.vue
 ```
 
 ## API
@@ -24,6 +25,7 @@ menu.vue
 | bottom | `number \| string` | `40` | CSS `bottom` property of the button group. | 2.38.0 |
 | height | `number \| string` | `40` | CSS `height` property of the button group. | 2.38.0 |
 | left | `number \| string` | `undefined` | CSS `left` property of the button group. | 2.38.0 |
+| menu-position | `'top' \| 'bottom' \| 'left' \| 'right'` | `'top'` | Position of the submenu. | NEXT_VERSION |
 | menu-trigger | `'click' \| 'hover'` | `undefined` | Trigger action to show submenu. | 2.38.0 |
 | position | `'relative' \| 'absolute' \| 'fixed'` | `'fixed'` | CSS `position` property of the button group. | 2.38.0 |
 | right | `number \| string` | `undefined` | CSS `right` property of the button group. | 2.38.0 |
