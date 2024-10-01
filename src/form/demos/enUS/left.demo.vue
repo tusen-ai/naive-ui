@@ -167,7 +167,11 @@ export default defineComponent({
     }"
   >
     <n-form-item label="Input" path="inputValue">
-      <n-input v-model:value="model.inputValue" placeholder="Input" />
+      <n-input
+        v-model:value="model.inputValue"
+        placeholder="Input"
+        tooltip="what do you want to write ?"
+      />
     </n-form-item>
     <n-form-item label="Textarea" path="textareaValue">
       <n-input

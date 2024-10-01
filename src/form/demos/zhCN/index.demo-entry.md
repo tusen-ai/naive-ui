@@ -46,6 +46,7 @@ feedback-style.vue
 | show-require-mark | `boolean` | `-` | 是否展示必填的星号 |  |
 | require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | 必填星号的位置 | `'right-hanging'` 2.24.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
+| tooltip | `string` | `undefined` | 提示信息 | NEXT_VERSION |
 | validate-messages | `FormValidateMessages` | `undefined` | `async-validator` 的默认验证信息 | 2.27.0 |
 
 #### FormItemRule Type

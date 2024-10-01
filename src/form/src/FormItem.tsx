@@ -36,6 +36,8 @@ import {
 } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { type FormTheme, formLight } from '../styles'
+import { NTooltip } from '../../tooltip'
+import { QuestionIcon } from '../../_internal/icons'
 import { formItemMisc, formItemRule, formItemSize } from './utils'
 import type {
   FormItemInst,
@@ -76,6 +78,7 @@ export const formItemProps = {
   },
   rule: [Object, Array] as PropType<FormItemRule | FormItemRule[]>,
   size: String as PropType<'small' | 'medium' | 'large'>,
+  tooltip: [String] as PropType<string>,
   ignorePathChange: Boolean,
   validationStatus: String as PropType<'error' | 'warning' | 'success'>,
   feedback: String,
@@ -572,6 +575,22 @@ export default defineComponent({
           </span>
         )
       )
+
+      const tooltipNode = this.tooltip ? (
+        <NTooltip to={false}>
+          {{
+            default: () => {
+              return this.tooltip
+            },
+            trigger: () => (
+              <QuestionIcon
+                class={`${mergedClsPrefix}-form-item-label__tooltip`}
+              />
+            )
+          }}
+        </NTooltip>
+      ) : null
+
       const { labelProps } = this
       return (
         <label
@@ -587,8 +606,8 @@ export default defineComponent({
           ref="labelElementRef"
         >
           {mergedRequireMarkPlacement === 'left'
-            ? [markNode, textNode]
-            : [textNode, markNode]}
+            ? [markNode, textNode, tooltipNode]
+            : [textNode, tooltipNode, markNode]}
         </label>
       )
     }

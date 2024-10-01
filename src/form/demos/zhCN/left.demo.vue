@@ -166,7 +166,11 @@ export default defineComponent({
       maxWidth: '640px',
     }"
   >
-    <n-form-item label="Input" path="inputValue">
+    <n-form-item
+      label="Input"
+      path="inputValue"
+      tooltip="what do you want to write ?"
+    >
       <n-input v-model:value="model.inputValue" placeholder="Input" />
     </n-form-item>
     <n-form-item label="Textarea" path="textareaValue">

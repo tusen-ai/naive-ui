@@ -35,6 +35,15 @@ export default cB('form-item', `
     box-sizing: border-box;
     font-weight: var(--n-label-font-weight);
   `, [
+    cE('tooltip', `
+      grid-area: tooltip;
+      width: 1rem;
+      height: 1rem;
+      color: rgba(0, 0, 0, 0.45);
+      cursor: help;
+      margin-left: 4px;
+      align-self: end;
+    `),
     cE('asterisk', `
       white-space: nowrap;
       user-select: none;
@@ -78,18 +87,18 @@ export default cB('form-item', `
       `),
       cM('left-mark', `
         grid-template-areas:
-          "mark text"
-          ".    text";
+          "mark text tooltip"
+          ".    text .";
       `),
       cM('right-mark', `
         grid-template-areas: 
-          "text mark"
-          "text .";
+          "text tooltip mark"
+          "text . .";
       `),
       cM('right-hanging-mark', `
         grid-template-areas: 
-          "text mark"
-          "text .";
+          "text tooltip mark"
+          "text . .";
       `),
       cE('text', `
         grid-area: text;      
