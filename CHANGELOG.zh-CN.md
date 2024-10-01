@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-input` 新增 `font-weight` 主题变量
+
 ## 2.40.1
 
 `2024-09-26`

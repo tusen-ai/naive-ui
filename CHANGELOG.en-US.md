@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-input` adds `font-weight` theme variable
+
 ## 2.40.1
 
 `2024-09-26`
