@@ -15,6 +15,7 @@ color.vue
 no-indicator.vue
 height.vue
 processing.vue
+linear-gradient.vue
 ```
 
 ## API
