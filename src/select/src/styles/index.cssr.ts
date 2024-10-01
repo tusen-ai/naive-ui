@@ -8,6 +8,7 @@ export default c([
     outline: none;
     width: 100%;
     position: relative;
+    font-weight: var(--n-font-weight);
   `),
   cB('select-menu', `
     margin: 4px 0;

@@ -871,10 +871,12 @@ export default defineComponent({
     }
     const cssVarsRef = computed(() => {
       const {
+        common: { fontWeight },
         self: { menuBoxShadow }
       } = themeRef.value
       return {
-        '--n-menu-box-shadow': menuBoxShadow
+        '--n-menu-box-shadow': menuBoxShadow,
+        '--n-font-weight': fontWeight
       }
     })
     const themeClassHandle = inlineThemeDisabled
@@ -932,7 +934,10 @@ export default defineComponent({
   },
   render() {
     return (
-      <div class={`${this.mergedClsPrefix}-select`}>
+      <div
+        class={`${this.mergedClsPrefix}-select`}
+        style={{ '--n-font-weight': this.cssVars?.['--n-font-weight'] }}
+      >
         <VBinder>
           {{
             default: () => [
