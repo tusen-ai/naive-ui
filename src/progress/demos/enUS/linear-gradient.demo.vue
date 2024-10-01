@@ -22,24 +22,18 @@ export default defineComponent({
 </script>
 
 <template>
-  <n-space vertical>
+  <n-flex vertical>
     <n-progress
       type="line"
       :percentage="percentage"
       :show-indicator="false"
-      :color="{ from: 'white', to: 'orange' }"
+      :color="{ from: 'white', to: 'pink' }"
     />
-    <n-progress
-      type="line"
-      :percentage="percentage"
-      :show-indicator="false"
-      :color="{ from: 'orange', to: 'pink' }"
-    />
-    <n-space>
+    <n-flex>
       <n-progress
         type="circle"
         :percentage="percentage"
-        :color="{ from: 'pink', to: 'red' }"
+        :color="{ from: '#E3F2FD', to: '#2080f0' }"
       />
       <n-progress
         style="width: 120px; margin: 0 8px 12px 0"
@@ -48,14 +42,14 @@ export default defineComponent({
         :circle-gap="10"
         :percentage="[80, 70]"
         :color="[
-          { from: 'orange', to: 'pink' },
-          { from: 'pink', to: 'red' },
+          { from: 'white', to: '#18a058' },
+          { from: '#E3F2FD', to: '#2080f0' },
         ]"
         :rail-color="[
           changeColor(themeVars.infoColor, { alpha: 0.2 }),
           changeColor(themeVars.infoColor, { alpha: 0.2 }),
         ]"
       />
-    </n-space>
-  </n-space>
+    </n-flex>
+  </n-flex>
 </template>

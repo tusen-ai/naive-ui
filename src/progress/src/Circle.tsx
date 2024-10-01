@@ -105,7 +105,7 @@ export default defineComponent({
       return (
         isGradient && (
           <defs>
-            <linearGradient id="gradient">
+            <linearGradient id="gradient" x1="0%" y1="100%" x2="100%" y2="0%">
               <stop offset="0%" stop-color={from} />
               <stop offset="100%" stop-color={to} />
             </linearGradient>

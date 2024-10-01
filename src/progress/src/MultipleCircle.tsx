@@ -77,7 +77,13 @@ export default defineComponent({
       const to = typeof item === 'object' ? item.to : ''
       return (
         typeof props.fillColor[index] === 'object' && (
-          <linearGradient id={`gradient-${index}`}>
+          <linearGradient
+            id={`gradient-${index}`}
+            x1="100%"
+            y1="0%"
+            x2="0%"
+            y2="100%"
+          >
             <stop offset="0%" stop-color={form} />
             <stop offset="100%" stop-color={to} />
           </linearGradient>
