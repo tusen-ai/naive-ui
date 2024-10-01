@@ -26,7 +26,7 @@ empty-debug.vue
 | bordered | `boolean` | `true` | alert 是否显示边框 | 2.32.2 |
 | closable | `boolean` | `false` | alert 信息是否可以关掉 |  |
 | marquee | `boolean` | `false` | alert 信息是否开启轮播效果 | NEXT_VERSION |
-| marquee-speed | `number` | `3` | alert 信息轮播速度 | NEXT_VERSION |
+| marquee-speed | `number` | `6s` | alert 信息轮播速度 | NEXT_VERSION |
 | show-icon | `boolean` | `true` | alert 是否展示 icon |  |
 | title | `string` | `undefined` | alert 的 title 信息 |  |
 | type | `'default' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | alert 的类型 |  |
