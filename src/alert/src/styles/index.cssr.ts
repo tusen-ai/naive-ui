@@ -135,20 +135,20 @@ export default c([
     cM('marquee', [
       cB('alert-body', [
         cE('content', `
-          width: 100%;
           overflow: hidden;
           white-space: nowrap;
         `),
         cE('content-wrapper', `
-          white-space: nowrap;
-           animation: marquee var(--n-marquee-speed) linear infinite;
-        `)
+          display: inline-block;
+          padding-left: 100%;
+          animation: marquee var(--n-marquee-speed) linear infinite;
+        `),
       ])
     ]),
   ]),
   c('@keyframes marquee', `
       from {
-       transform: translateX(100%);
+       transform: translateX(0);
       }
       to {
        transform: translateX(-100%);

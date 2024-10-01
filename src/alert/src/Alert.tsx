@@ -258,7 +258,8 @@ export default defineComponent({
                   class={[
                     `${mergedClsPrefix}-alert-body`,
                     this.mergedBordered
-                    && `${mergedClsPrefix}-alert-body--bordered`
+                    && `${mergedClsPrefix}-alert-body--bordered`,
+                    this.marquee && `${mergedClsPrefix}-alert-body--marquee`
                   ]}
                 >
                   {resolveWrappedSlot($slots.header, (children) => {
