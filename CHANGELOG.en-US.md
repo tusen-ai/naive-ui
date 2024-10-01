@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-alert` adds `marquee` and `marquee-speed` props for implementing message marquee effect.
+
 ## 2.40.1
 
 `2024-09-26`

@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-alert` 新增 `marquee` 和 `marquee-speed` 属性，用于实现消息轮播效果
+
 ## 2.40.1
 
 `2024-09-26`

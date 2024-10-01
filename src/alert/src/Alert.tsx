@@ -51,7 +51,12 @@ export const alertProps = {
   onClose: Function,
   onAfterLeave: Function,
   /** @deprecated */
-  onAfterHide: Function
+  onAfterHide: Function,
+  marquee: Boolean,
+  marqueeSpeed: {
+    type: Number,
+    default: 6
+  }
 }
 
 export type AlertProps = ExtractPublicPropTypes<typeof alertProps>
@@ -196,13 +201,18 @@ export default defineComponent({
                 this.themeClass,
                 this.closable && `${mergedClsPrefix}-alert--closable`,
                 this.showIcon && `${mergedClsPrefix}-alert--show-icon`,
-                // fix: https://github.com/tusen-ai/naive-ui/issues/4588
                 !this.title
                 && this.closable
                 && `${mergedClsPrefix}-alert--right-adjust`,
-                this.rtlEnabled && `${mergedClsPrefix}-alert--rtl`
+                this.rtlEnabled && `${mergedClsPrefix}-alert--rtl`,
+                this.marquee && `${mergedClsPrefix}-alert--marquee`
               ],
-              style: this.cssVars as any,
+              style: [
+                this.cssVars as any,
+                this.marquee
+                  ? { '--n-marquee-speed': `${this.marqueeSpeed}s` }
+                  : {}
+              ],
               role: 'alert'
             }
             return this.visible ? (
@@ -255,13 +265,29 @@ export default defineComponent({
                     const mergedChildren = children || this.title
                     return mergedChildren ? (
                       <div class={`${mergedClsPrefix}-alert-body__title`}>
-                        {mergedChildren}
+                        {this.marquee ? (
+                          <div
+                            class={`${mergedClsPrefix}-alert-body__title-content`}
+                          >
+                            {mergedChildren}
+                          </div>
+                        ) : (
+                          mergedChildren
+                        )}
                       </div>
                     ) : null
                   })}
                   {$slots.default && (
                     <div class={`${mergedClsPrefix}-alert-body__content`}>
-                      {$slots}
+                      {this.marquee ? (
+                        <div
+                          class={`${mergedClsPrefix}-alert-body__content-wrapper`}
+                        >
+                          {$slots}
+                        </div>
+                      ) : (
+                        $slots
+                      )}
                     </div>
                   )}
                 </div>

@@ -10,6 +10,7 @@ bordered.vue
 closable.vue
 icon.vue
 no-icon.vue
+marquee.vue
 ```
 
 ## API
@@ -20,6 +21,8 @@ no-icon.vue
 | --- | --- | --- | --- | --- |
 | bordered | `boolean` | `true` | Whether the alert can show border. | 2.32.2 |
 | closable | `boolean` | `false` | Whether the alert can be closed. |  |
+| marquee | `boolean` | `false` | Whether the alert can show marquee. | NEXT_VERSION |
+| marquee-speed | `number` | `3` | The speed of marquee. | NEXT_VERSION |
 | show-icon | `boolean` | `true` | Whether to show the icon of alert. |  |
 | title | `string` | `undefined` | Title of the alert. |  |
 | type | `'default' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | Alert type. |  |
