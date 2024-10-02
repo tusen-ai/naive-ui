@@ -1,3 +1,5 @@
+<!--single-column-->
+
 # 水印 Watermark
 
 出现在钱上的时候比较可爱。
@@ -8,11 +10,11 @@
 basic.vue
 fullscreen.vue
 image.vue
+multiline.vue
+custom.vue
 ```
 
 ## API
-
-自 `2.38.2` 支持由 `\n` 分割的多行文本。
 
 ### Watermark Props
 
