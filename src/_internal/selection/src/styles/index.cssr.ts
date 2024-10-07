@@ -31,6 +31,7 @@ import {
 // --n-arrow-color
 // --n-arrow-size
 // --n-loading-color
+// --n-font-weight
 // ...clear vars
 // ...form item vars
 export default c([

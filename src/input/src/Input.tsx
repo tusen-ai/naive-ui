@@ -949,6 +949,7 @@ export default defineComponent({
           loadingColor,
           loadingColorError,
           loadingColorWarning,
+          fontWeight,
           [createKey('padding', size)]: padding,
           [createKey('fontSize', size)]: fontSize,
           [createKey('height', size)]: height
@@ -961,6 +962,7 @@ export default defineComponent({
         '--n-count-text-color-disabled': countTextColorDisabled,
         '--n-color': color,
         '--n-font-size': fontSize,
+        '--n-font-weight': fontWeight,
         '--n-border-radius': borderRadius,
         '--n-height': height,
         '--n-padding-left': paddingLeft,

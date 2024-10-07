@@ -33,7 +33,8 @@ function self(vars: ThemeCommonVars) {
     heightTiny,
     heightSmall,
     heightMedium,
-    heightLarge
+    heightLarge,
+    fontWeight
   } = vars
   return {
     ...commonVariables,
@@ -46,6 +47,7 @@ function self(vars: ThemeCommonVars) {
     heightMedium,
     heightLarge,
     borderRadius,
+    fontWeight,
     // default
     textColor: textColor2,
     textColorDisabled,

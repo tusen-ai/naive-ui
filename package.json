@@ -106,7 +106,7 @@
     "@vicons/ionicons5": "^0.12.0",
     "@vitejs/plugin-vue": "^5.0.3",
     "@vue/compiler-sfc": "^3.4.15",
-    "@vue/server-renderer": "~3.4.15",
+    "@vue/server-renderer": "~3.5.11",
     "@vue/test-utils": "^2.4.1",
     "autoprefixer": "^10.4.15",
     "babel-jest": "^29.6.4",
@@ -136,7 +136,7 @@
     "typescript": "5.5.4",
     "vfonts": "^0.0.3",
     "vite": "^5.0.4",
-    "vue": "~3.4.15",
+    "vue": "~3.5.11",
     "vue-router": "^4.2.4",
     "vue-tsc": "^2.0.6"
   },
