@@ -2,11 +2,19 @@
 
 ## NEXT_VERSION
 
-`NEXT_VERSION`
+`xxxx-xx-xx`
+
+### Fixes
+
+- Fix `n-time-picker`'s `use-12-hours` type error warning, closes [#4308](https://github.com/tusen-ai/naive-ui/issues/4308)
 
 ### Features
 
+- `n-image` adds `error` slot, closes [#5649](https://github.com/tusen-ai/naive-ui/issues/5649)
+- `n-date-picker` adds `date-format` prop.
+- `n-progress`'s `color` prop supports gradient config.
 - `n-select` adds `font-weight` theme variable
+
 
 ## 2.40.1
 
