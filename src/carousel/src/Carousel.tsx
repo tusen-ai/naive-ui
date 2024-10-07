@@ -185,10 +185,13 @@ export default defineComponent({
 
     // Carousel size
     const perViewSizeRef = ref({ width: 0, height: 0 })
+    const slideSizesTrigger = ref(0)
     const slideSizesRef = computed(() => {
       const { value: slidesEls } = slideElsRef
       if (!slidesEls.length)
         return []
+      // eslint-disable-next-line ts/no-unused-expressions
+      slideSizesTrigger.value
       const { value: autoSlideSize } = autoSlideSizeRef
       if (autoSlideSize) {
         return slidesEls.map(slide => calculateSize(slide))
@@ -739,8 +742,7 @@ export default defineComponent({
     }
     function handleSlideResize(): void {
       if (autoSlideSizeRef.value) {
-        slideSizesRef.effect.scheduler?.()
-        slideSizesRef.effect.run()
+        slideSizesTrigger.value++
       }
     }
     function handleMouseenter(): void {
