@@ -14,6 +14,7 @@ custom.vue
 tooltip.vue
 lazy.vue
 previewed-img-props.vue
+custom-error.vue
 ```
 
 ## API
@@ -56,6 +57,7 @@ previewed-img-props.vue
 | Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
 | placeholder | `()` | Placeholder shown when image is not loaded. | 2.30.5 |
+| error | `()` | The content when the image fails to load. | NEXT_VERSION |
 
 ### ImageGroup Slots
 

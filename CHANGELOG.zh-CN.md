@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+`NEXT_VERSION`
+
+- `n-image` 新增 `error` 插槽，关闭 [#5649](https://github.com/tusen-ai/naive-ui/issues/5649)
+
 ## 2.40.1
 
 `2024-09-26`
