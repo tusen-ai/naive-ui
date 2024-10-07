@@ -7,6 +7,7 @@
 ### Features
 
 - `n-time-picker` 的 `use-12-hours` 类型错误警告，关闭 [#4308](https://github.com/tusen-ai/naive-ui/issues/4308)
+- `n-image` 新增 `error` 插槽，关闭 [#5649](https://github.com/tusen-ai/naive-ui/issues/5649)
 
 ## 2.40.1
 
