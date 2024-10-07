@@ -10,6 +10,7 @@
 
 ### Features
 
+- `n-alert` adds `marquee` and `marquee-speed` props for implementing message marquee effect.
 - `n-image` adds `error` slot, closes [#5649](https://github.com/tusen-ai/naive-ui/issues/5649)
 - `n-date-picker` adds `date-format` prop.
 - `n-progress`'s `color` prop supports gradient config.

@@ -10,6 +10,7 @@
 
 ### Features
 
+- `n-alert` 新增 `marquee` 和 `marquee-speed` 属性，用于实现消息轮播效果
 - `n-image` 新增 `error` 插槽，关闭 [#5649](https://github.com/tusen-ai/naive-ui/issues/5649)
 - `n-date-picker` 新增 `date-format` 属性
 - `n-progress` 的 `color` 属性支持渐变色配置
