@@ -40,6 +40,7 @@ form-debug.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | clearable | `boolean` | `false` | 是否支持清除 |  |
+| date-format | `string` | `undefined` | 选择面板内部日期输入框的日期格式 | NEXT_VERSION |
 | default-value | `number \| [number, number] \| null` | `undefined` | 默认被选中的日期的时间戳 |  |
 | default-formatted-value | `string \| [string, string] \| null` | `undefined` | Date Picker 格式化后的值 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |

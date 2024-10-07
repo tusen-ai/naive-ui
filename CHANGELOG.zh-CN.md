@@ -2,12 +2,16 @@
 
 ## NEXT_VERSION
 
-`NEXT_VERSION`
+`xxxx-xx-xx`
+
+### Fixes
+
+- `n-time-picker` 的 `use-12-hours` 类型错误警告，关闭 [#4308](https://github.com/tusen-ai/naive-ui/issues/4308)
 
 ### Features
 
-- `n-time-picker` 的 `use-12-hours` 类型错误警告，关闭 [#4308](https://github.com/tusen-ai/naive-ui/issues/4308)
 - `n-image` 新增 `error` 插槽，关闭 [#5649](https://github.com/tusen-ai/naive-ui/issues/5649)
+- `n-date-picker` 新增 `date-format` 属性
 
 ## 2.40.1
 

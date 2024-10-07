@@ -40,6 +40,7 @@ panel.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | clearable | `boolean` | `false` | Whether the date picker is clearable. |  |
+| date-format | `string` | `undefined` | Date input format inside popup panel. | NEXT_VERSION |
 | default-value | `number \| [number, number] \| null` | `undefined` | Date picker's default value. |  |
 | default-formatted-value | `string \| [string, string] \| null` | `undefined` | Date picker's default formatted value. | 2.24.0 |
 | disabled | `boolean` | `false` | Whether the date picker is disabled. |  |
