@@ -185,7 +185,9 @@ export default defineComponent({
 
     // Carousel size
     const perViewSizeRef = ref({ width: 0, height: 0 })
+    const slideSizesTrigger = ref(0)
     const slideSizesRef = computed(() => {
+      slideSizesTrigger.value
       const { value: slidesEls } = slideElsRef
       if (!slidesEls.length)
         return []
@@ -739,8 +741,7 @@ export default defineComponent({
     }
     function handleSlideResize(): void {
       if (autoSlideSizeRef.value) {
-        slideSizesRef.effect.scheduler?.()
-        slideSizesRef.effect.run()
+        slideSizesTrigger.value++
       }
     }
     function handleMouseenter(): void {
