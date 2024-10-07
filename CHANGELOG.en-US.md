@@ -10,6 +10,7 @@
 
 ### Features
 
+- 🌟 Adds `n-marquee` component.
 - `n-image` adds `error` slot, closes [#5649](https://github.com/tusen-ai/naive-ui/issues/5649)
 - `n-date-picker` adds `date-format` prop.
 - `n-progress`'s `color` prop supports gradient config.
