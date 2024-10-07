@@ -2,10 +2,11 @@
 
 ## NEXT_VERSION
 
-### Features
-
 `NEXT_VERSION`
 
+### Features
+
+- Fix `n-time-picker`'s `use-12-hours` type error warning, closes [#4308](https://github.com/tusen-ai/naive-ui/issues/4308)
 - `n-image` adds `error` slot, closes [#5649](https://github.com/tusen-ai/naive-ui/issues/5649)
 
 ## 2.40.1
