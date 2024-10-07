@@ -187,10 +187,11 @@ export default defineComponent({
     const perViewSizeRef = ref({ width: 0, height: 0 })
     const slideSizesTrigger = ref(0)
     const slideSizesRef = computed(() => {
-      slideSizesTrigger.value
       const { value: slidesEls } = slideElsRef
       if (!slidesEls.length)
         return []
+      // eslint-disable-next-line ts/no-unused-expressions
+      slideSizesTrigger.value
       const { value: autoSlideSize } = autoSlideSizeRef
       if (autoSlideSize) {
         return slidesEls.map(slide => calculateSize(slide))
