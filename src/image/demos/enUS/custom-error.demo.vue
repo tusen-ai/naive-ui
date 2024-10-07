@@ -1,8 +1,8 @@
 <markdown>
-  # The custom loading failed. Procedure
+# Error slot
 
-  In most cases, can use 'fallback-src' to set the image when it fails.
-  </markdown>
+You can use `error` slot to custom loading error display.
+</markdown>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'

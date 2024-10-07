@@ -1,8 +1,8 @@
 <markdown>
-  # Linear Gradient
+# Linear Gradient
 
-  You may want to use color combinations.
-  </markdown>
+You may want to use color combinations.
+</markdown>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
@@ -27,13 +27,13 @@ export default defineComponent({
       type="line"
       :percentage="percentage"
       :show-indicator="false"
-      :color="{ from: 'white', to: 'pink' }"
+      :color="{ stops: ['white', 'pink'] }"
     />
     <n-flex>
       <n-progress
         type="circle"
         :percentage="percentage"
-        :color="{ from: '#E3F2FD', to: '#2080f0' }"
+        :color="{ stops: ['#E3F2FD', '#2080f0'] }"
       />
       <n-progress
         style="width: 120px; margin: 0 8px 12px 0"
@@ -42,8 +42,8 @@ export default defineComponent({
         :circle-gap="10"
         :percentage="[80, 70]"
         :color="[
-          { from: 'white', to: '#18a058' },
-          { from: '#E3F2FD', to: '#2080f0' },
+          { stops: ['white', '#18a058'] },
+          { stops: ['#E3F2FD', '#2080f0'] },
         ]"
         :rail-color="[
           changeColor(themeVars.infoColor, { alpha: 0.2 }),

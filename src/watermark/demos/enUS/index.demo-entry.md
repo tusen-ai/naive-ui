@@ -20,7 +20,7 @@ custom.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| content | `string` | `undefined` | Content of watermark. | 2.25.3 |
+| content | `string` | `undefined` | Content of watermark. | 2.25.3, supports multiple line text since 2.38.2 |
 | cross | `boolean` | `false` | Whether to show watermark at cross position. | 2.25.3 |
 | debug | `boolean` | `false` | Whether to show debug grid. | 2.25.3 |
 | font-size | `number` | `14` | Font size. | 2.25.3 |

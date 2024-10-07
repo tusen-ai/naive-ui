@@ -8,13 +8,13 @@ Preview it.
 basic.vue
 group.vue
 error.vue
+custom-error.vue
 preview-disabled.vue
 custom-toolbar.vue
 custom.vue
 tooltip.vue
 lazy.vue
 previewed-img-props.vue
-custom-error.vue
 ```
 
 ## API

@@ -1,8 +1,8 @@
 <markdown>
-  # 自定义加载失败
+# 加载失败的插槽
 
-  多数情况下可以使用 `fallback-src` 设定失败时的图像。
-  </markdown>
+你可以使用 `error` slot 来自定义加载失败时的内容。
+</markdown>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'

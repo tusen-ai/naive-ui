@@ -13,7 +13,7 @@ import {
   SuccessIcon as SuccessCircleIcon,
   WarningIcon
 } from '../../_internal/icons'
-import type { Gradient, Status } from './interface'
+import type { ProgressGradient, ProgressStatus } from './public-types'
 
 const iconMap = {
   success: <SuccessCircleIcon />,
@@ -35,9 +35,9 @@ export default defineComponent({
     },
     railColor: String,
     railStyle: [String, Object] as PropType<string | CSSProperties>,
-    fillColor: [String, Object] as PropType<string | Gradient>,
+    fillColor: [String, Object] as PropType<string | ProgressGradient>,
     status: {
-      type: String as PropType<Status>,
+      type: String as PropType<ProgressStatus>,
       required: true
     },
     indicatorPlacement: {
@@ -67,7 +67,7 @@ export default defineComponent({
     })
     const styleFillColorRef = computed(() => {
       return typeof props.fillColor === 'object'
-        ? `linear-gradient(to right, ${props.fillColor?.from} , ${props.fillColor?.to})`
+        ? `linear-gradient(to right, ${props.fillColor?.stops[0]} , ${props.fillColor?.stops[1]})`
         : props.fillColor
     })
     const styleRailBorderRadiusRef = computed(() => {

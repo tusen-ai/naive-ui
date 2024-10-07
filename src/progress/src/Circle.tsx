@@ -6,7 +6,7 @@ import {
   SuccessIcon,
   WarningIcon
 } from '../../_internal/icons'
-import type { Gradient, Status } from './interface'
+import type { ProgressGradient, ProgressStatus } from './public-types'
 
 const iconMap = {
   success: <SuccessIcon />,
@@ -23,14 +23,14 @@ export default defineComponent({
       required: true
     },
     status: {
-      type: String as PropType<Status>,
+      type: String as PropType<ProgressStatus>,
       required: true
     },
     strokeWidth: {
       type: Number,
       required: true
     },
-    fillColor: [String, Object] as PropType<string | Gradient>,
+    fillColor: [String, Object] as PropType<string | ProgressGradient>,
     railColor: String,
     railStyle: [String, Object] as PropType<string | CSSProperties>,
     percentage: {
@@ -64,7 +64,7 @@ export default defineComponent({
     function getPathStyles(
       percent: number,
       offsetDegree: number,
-      strokeColor?: string | Gradient,
+      strokeColor?: string | ProgressGradient,
       type?: 'rail' | 'fill'
     ): { pathString: string, pathStyle: CSSProperties } {
       const { gapDegree, viewBoxWidth, strokeWidth } = props
@@ -100,8 +100,8 @@ export default defineComponent({
 
     const createGradientNode = (): false | JSX.Element => {
       const isGradient = typeof props.fillColor === 'object'
-      const from = isGradient ? props.fillColor.from : ''
-      const to = isGradient ? props.fillColor.to : ''
+      const from = isGradient ? props.fillColor.stops[0] : ''
+      const to = isGradient ? props.fillColor.stops[1] : ''
       return (
         isGradient && (
           <defs>

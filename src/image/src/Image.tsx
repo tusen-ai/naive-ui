@@ -12,7 +12,7 @@ import {
   watchEffect
 } from 'vue'
 import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { type ExtractPublicPropTypes, resolveSlot } from '../../_utils'
 import { useConfig } from '../../_mixins'
 import { imageContextKey, imagePreviewSharedProps } from './interface'
 import { observeIntersection } from './utils'
@@ -152,12 +152,12 @@ export default defineComponent({
   },
   render() {
     const { mergedClsPrefix, imgProps = {}, loaded, $attrs, lazy } = this
-    const errorNode = this.$slots.error?.()
+    const errorNode = resolveSlot(this.$slots.error, () => [])
     const placeholderNode = this.$slots.placeholder?.()
     const loadSrc = this.src || imgProps.src
 
     const imgNode
-      = this.showError && errorNode
+      = this.showError && errorNode.length
         ? errorNode
         : h('img', {
           ...imgProps,

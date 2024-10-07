@@ -5,7 +5,7 @@ import {
   defineComponent,
   h
 } from 'vue'
-import type { Gradient } from './interface'
+import type { ProgressGradient } from './public-types'
 
 function circlePath(r: number, sw: number, vw: number = 100): string {
   return `m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${
@@ -41,7 +41,7 @@ export default defineComponent({
       required: true
     },
     fillColor: {
-      type: Array as PropType<string[] | Gradient[]>,
+      type: Array as PropType<string[] | ProgressGradient[]>,
       default: () => []
     },
     railColor: {
@@ -73,8 +73,8 @@ export default defineComponent({
       index: number
     ): false | JSX.Element => {
       const item = props.fillColor[index]
-      const form = typeof item === 'object' ? item.from : ''
-      const to = typeof item === 'object' ? item.to : ''
+      const form = typeof item === 'object' ? item.stops[0] : ''
+      const to = typeof item === 'object' ? item.stops[1] : ''
       return (
         typeof props.fillColor[index] === 'object' && (
           <linearGradient
