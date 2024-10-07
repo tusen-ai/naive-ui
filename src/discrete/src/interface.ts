@@ -11,6 +11,7 @@ import type { ModalProviderProps } from '../../modal/src/ModalProvider'
 import type { ModalApi } from '../../modal'
 
 export type MaybeRef<T> = Ref<T> | T
+export type MaybeRefOrGetter<T> = T | Ref<T> | (() => T)
 
 export interface DiscreteApiOptions {
   configProviderProps?: MaybeRef<ConfigProviderProps>
