@@ -1,3 +1,5 @@
+<!--single-column-->
+
 # Watermark
 
 Watermark.
@@ -8,11 +10,11 @@ Watermark.
 basic.vue
 fullscreen.vue
 image.vue
+multiline.vue
+custom.vue
 ```
 
 ## API
-
-Supports multiple lines text separated by `\n` since `2.38.2`.
 
 ### Watermark Props
 
