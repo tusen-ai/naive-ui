@@ -11,7 +11,7 @@ import { type ExtractPublicPropTypes, createKey } from '../../_utils'
 import { progressLight } from '../styles'
 import type { ProgressTheme } from '../styles'
 import style from './styles/index.cssr'
-import type { Status } from './interface'
+import type { Gradient, Status } from './interface'
 import Line from './Line'
 import Circle from './Circle'
 import MultipleCircle from './MultipleCircle'
@@ -35,7 +35,9 @@ export const progressProps = {
   railStyle: [String, Array] as PropType<
     string | CSSProperties | Array<string | CSSProperties>
   >,
-  color: [String, Array] as PropType<string | string[]>,
+  color: [String, Array, Object] as PropType<
+    string | string[] | Gradient | Gradient[]
+  >,
   viewBoxWidth: {
     type: Number,
     default: 100
