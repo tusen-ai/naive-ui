@@ -102,10 +102,7 @@ export const inputProps = {
   },
   pair: Boolean,
   separator: String,
-  readonly: {
-    type: [String, Boolean],
-    default: false
-  },
+  readonly: Boolean,
   passivelyActivated: Boolean,
   showPasswordOn: String as PropType<'mousedown' | 'click'>,
   stateful: {
@@ -257,8 +254,8 @@ export default defineComponent({
       return (
         !isComposing
         && (isEmptyInputValue(mergedValue)
-          || (Array.isArray(mergedValue) && isEmptyInputValue(mergedValue[0])))
-          && mergedPlaceholder[0]
+        || (Array.isArray(mergedValue) && isEmptyInputValue(mergedValue[0])))
+        && mergedPlaceholder[0]
       )
     })
     const showPlaceholder2Ref = computed(() => {
@@ -269,7 +266,7 @@ export default defineComponent({
         !isComposing
         && mergedPlaceholder[1]
         && (isEmptyInputValue(mergedValue)
-          || (Array.isArray(mergedValue) && isEmptyInputValue(mergedValue[1])))
+        || (Array.isArray(mergedValue) && isEmptyInputValue(mergedValue[1])))
       )
     })
     // focus
@@ -575,8 +572,8 @@ export default defineComponent({
         !(
           e.relatedTarget !== null
           && (e.relatedTarget === inputElRef.value
-            || e.relatedTarget === inputEl2Ref.value
-            || e.relatedTarget === textareaElRef.value)
+          || e.relatedTarget === inputEl2Ref.value
+          || e.relatedTarget === textareaElRef.value)
         )
       ) {
         activatedRef.value = false
@@ -617,9 +614,9 @@ export default defineComponent({
       if (
         e.relatedTarget !== null
         && (e.relatedTarget === inputElRef.value
-          || e.relatedTarget === inputEl2Ref.value
-          || e.relatedTarget === textareaElRef.value
-          || e.relatedTarget === wrapperElRef.value)
+        || e.relatedTarget === inputEl2Ref.value
+        || e.relatedTarget === textareaElRef.value
+        || e.relatedTarget === wrapperElRef.value)
       ) {
         /**
          * activeElement transfer inside the input, do nothing
@@ -1185,7 +1182,7 @@ export default defineComponent({
                         disabled={this.mergedDisabled}
                         maxlength={countGraphemes ? undefined : this.maxlength}
                         minlength={countGraphemes ? undefined : this.minlength}
-                        readonly={this.readonly as any}
+                        readonly={this.readonly}
                         tabindex={
                           this.passivelyActivated && !this.activated
                             ? -1
@@ -1268,7 +1265,7 @@ export default defineComponent({
                     ? this.mergedValue[0]
                     : (this.mergedValue as any)
                 }
-                readonly={this.readonly as any}
+                readonly={this.readonly}
                 autofocus={this.autofocus}
                 size={this.attrSize}
                 onBlur={this.handleInputBlur}
@@ -1396,7 +1393,7 @@ export default defineComponent({
                     ? this.mergedValue[1]
                     : undefined
                 }
-                readonly={this.readonly as any}
+                readonly={this.readonly}
                 style={this.textDecorationStyle[1] as any}
                 onBlur={this.handleInputBlur}
                 onFocus={(e) => {
