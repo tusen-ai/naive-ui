@@ -44,6 +44,7 @@ custom-card.vue
 | loop | `boolean` | `true` | 是否循环播放 | 2.24.0 |
 | mousewheel | `boolean` | `false` | 是否通过鼠标滚轮切换轮播图 | 2.24.0 |
 | next-slide-style | `object \| string` | `undefined` | 下一张轮播图的样式 | 2.27.0 |
+| pause-on-hover | `boolean` | `true` | 是否在悬停时暂停自动播放 | NEXT_VERSION |
 | prev-slide-style | `object \| string` | `undefined` | 上一张轮播图的样式 | 2.27.0 |
 | slides-per-view | `'auto' \| number` | `1` | 每一页显示的轮播图数量 | 2.24.0 |
 | space-between | `number` | `0` | 轮播图之间的间距 | 2.24.0 |

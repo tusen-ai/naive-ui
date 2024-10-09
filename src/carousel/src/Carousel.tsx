@@ -122,6 +122,10 @@ export const carouselProps = {
   transitionProps: Object as PropType<TransitionProps>,
   draggable: Boolean,
   prevSlideStyle: [Object, String] as PropType<CSSProperties | string>,
+  pauseOnHover: {
+    type: Boolean,
+    default: true
+  },
   nextSlideStyle: [Object, String] as PropType<CSSProperties | string>,
   touchable: {
     type: Boolean,
@@ -744,12 +748,12 @@ export default defineComponent({
       }
     }
     function handleMouseenter(): void {
-      if (props.autoplay) {
+      if (props.autoplay && props.pauseOnHover) {
         stopAutoplay()
       }
     }
     function handleMouseleave(): void {
-      if (props.autoplay) {
+      if (props.autoplay && props.pauseOnHover) {
         resetAutoplay()
       }
     }
