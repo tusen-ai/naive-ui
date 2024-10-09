@@ -44,6 +44,7 @@ custom-card.vue
 | loop | `boolean` | `true` | Whether to loop. | 2.24.0 |
 | mousewheel | `boolean` | `false` | Whether to switch the carousel through the mouse wheel. | 2.24.0 |
 | next-slide-style | `object \| string` | `undefined` | Next slide's style. | 2.27.0 |
+| pause-on-hover | `boolean` | `true` | Whether to pause auto play when hovering. | NEXT_VERSION |
 | prev-slide-style | `object \| string` | `undefined` | Previous slide's style. | 2.27.0 |
 | show-arrow | `boolean` | `false` | Whether to show arrow buttons. | 2.24.0 |
 | show-dots | `boolean` | `true` | Whether to show dots. | 2.24.0 |
