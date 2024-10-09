@@ -14,6 +14,7 @@ show-options-by-value.vue
 customized-rendering.vue
 status.vue
 append.vue
+scroll.vue
 ```
 
 ## API
@@ -46,6 +47,7 @@ append.vue
 | on-focus | `(event: FocusEvent) => void` | `undefined` | On focus callback function. |  |
 | on-select | `(value: string) => void` | `undefined` | On select callback function. |  |
 | on-update:value | `(value: string \| null) => void` | `undefined` | On update callback function. |  |
+| on-scroll | `(e: Event) => void` | `undefined` | On scroll callback function. | NEXT_VERSION |
 
 #### AutoCompleteOption Properties
 

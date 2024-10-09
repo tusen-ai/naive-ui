@@ -15,6 +15,8 @@ export type AutoCompleteOptions = Array<
 
 export type OnUpdateValue = (value: string & (string | null)) => void
 export type OnUpdateImpl = (value: string | null) => void
+export type OnScroll = (e: Event) => void
+export type OnScrollImpl = (e: Event) => void
 export type OnSelect = (value: string & number) => void
 export type OnSelectImpl = (value: string | number) => void
 

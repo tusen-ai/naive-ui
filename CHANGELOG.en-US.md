@@ -16,6 +16,7 @@
 - `n-progress`'s `color` prop supports gradient config.
 - `n-select` adds `font-weight` theme variable
 - `n-input` adds `font-weight` theme variable
+- `n-auto-complete` adds `on-scroll` prop.
 
 ## 2.40.1
 
