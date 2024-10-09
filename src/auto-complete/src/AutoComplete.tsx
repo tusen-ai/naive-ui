@@ -51,6 +51,8 @@ import type {
   AutoCompleteInst,
   AutoCompleteOption,
   AutoCompleteOptions,
+  OnScroll,
+  OnScrollImpl,
   OnSelect,
   OnSelectImpl,
   OnUpdateImpl,
@@ -105,6 +107,7 @@ export const autoCompleteProps = {
   status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  onScroll: [Function, Array] as PropType<MaybeArray<OnScroll>>,
   onSelect: [Function, Array] as PropType<MaybeArray<OnSelect>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
@@ -192,6 +195,12 @@ export default defineComponent({
       nTriggerFormInput()
       nTriggerFormChange()
     }
+    function doScroll(e: Event): void {
+      const { onScroll } = props
+      if (onScroll) {
+        call(onScroll as OnScrollImpl, e)
+      }
+    }
     function doSelect(value: string | number): void {
       const { onSelect } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
@@ -275,6 +284,9 @@ export default defineComponent({
       canBeActivatedRef.value = true
       doUpdateValue(value)
     }
+    function handleScroll(e: Event): void {
+      doScroll(e)
+    }
     function handleToggle(option: TreeNode<SelectBaseOption>): void {
       select(option.rawNode as AutoCompleteOption)
     }
@@ -331,6 +343,7 @@ export default defineComponent({
       handleFocus,
       handleBlur,
       handleInput,
+      handleScroll,
       handleToggle,
       handleClickOutsideMenu,
       handleCompositionStart,
@@ -445,6 +458,7 @@ export default defineComponent({
                               renderLabel={this.renderLabel}
                               renderOption={this.renderOption}
                               size="medium"
+                              onScroll={this.handleScroll}
                               onToggle={this.handleToggle}
                             >
                               {{ empty: () => this.$slots.empty?.() }}

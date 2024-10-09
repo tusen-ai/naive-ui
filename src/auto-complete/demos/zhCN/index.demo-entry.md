@@ -14,6 +14,7 @@ show-options-by-value.vue
 customized-rendering.vue
 status.vue
 append.vue
+scroll.vue
 ```
 
 ## API
@@ -46,6 +47,7 @@ append.vue
 | on-focus | `(event: FocusEvent) => void` | `undefined` | focus 时触发的回调函数 |  |
 | on-select | `(value: string) => void` | `undefined` | select 选中时触发的回调函数 |  |
 | on-update:value | `(value: string \| null) => void` | `undefined` | 可控数据更新时触发的回调函数 |  |
+| on-scroll | `(e: Event) => void` | `undefined` | 菜单滚动时触发的回调函数 | NEXT_VERSION |
 
 #### AutoCompleteOption Properties
 
