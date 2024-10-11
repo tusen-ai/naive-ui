@@ -88,6 +88,33 @@ export default cB('timeline', `
       `)
     ])
   ]),
+  cM('alternate-placement', [
+    cB('timeline-item', `
+      text-align: left;
+    `, [
+      c('&:nth-child(even)', [
+        cB('timeline-item-content', `
+          width: calc(50% - 12px);
+          text-align: right;
+          margin-right: 0;
+        `),
+        cB('timeline-item-timeline', `
+          inset-inline-start: 50%;
+        `)
+      ]),
+      c('&:nth-child(odd)', [
+        cB('timeline-item-content', `
+          position: relative;
+          inset-inline-start: calc(50% + 24px);
+          width: calc(50% - 12px);
+          text-align: start;
+        `),
+        cB('timeline-item-timeline', `
+          inset-inline-start: 50%;
+        `)
+      ])
+    ])
+  ]),
   cB('timeline-item', `
     position: relative;
   `, [

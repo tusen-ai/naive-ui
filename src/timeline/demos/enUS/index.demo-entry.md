@@ -16,12 +16,12 @@ customize-icon.vue
 
 ### Timeline Props
 
-| Name           | Type                  | Default     | Description        |
-| -------------- | --------------------- | ----------- | ------------------ |
-| horizontal     | `boolean`             | `'false'`   | Horizontal         |
-| icon-size      | `number`              | `undefined` | Size of icon part. |
-| item-placement | `'left' \| 'right'`   | `'left'`    | Direction.         |
-| size           | `'medium' \| 'large'` | `'medium'`  | Size.              |
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| horizontal | `boolean` | `'false'` | Horizontal |
+| icon-size | `number` | `undefined` | Size of icon part. |
+| item-placement | `'left' \| 'right' \| 'alternate'` | `'left'` | Direction, `alternate`: NEXT_VERSION |
+| size | `'medium' \| 'large'` | `'medium'` | Size. |
 
 ### TimelineItem Props
 

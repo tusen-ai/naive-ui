@@ -21,7 +21,7 @@ export const timelineProps = {
   ...(useTheme.props as ThemeProps<TimelineTheme>),
   horizontal: Boolean,
   itemPlacement: {
-    type: String as PropType<'left' | 'right'>,
+    type: String as PropType<'left' | 'right' | 'alternate'>,
     default: 'left'
   },
   size: {

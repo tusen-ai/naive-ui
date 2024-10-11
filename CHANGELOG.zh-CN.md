@@ -16,6 +16,7 @@
 - `n-progress` 的 `color` 属性支持渐变色配置
 - `n-select` 新增 `font-weight` 主题变量
 - `n-input` 新增 `font-weight` 主题变量
+- `n-timeline` `item-placement` 新增 `alternate` 属性，关闭 [#5289](https://github.com/tusen-ai/naive-ui/issues/5289)
 
 ## 2.40.1
 
