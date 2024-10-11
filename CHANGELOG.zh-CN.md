@@ -16,6 +16,7 @@
 - `n-progress` 的 `color` 属性支持渐变色配置
 - `n-select` 新增 `font-weight` 主题变量
 - `n-input` 新增 `font-weight` 主题变量
+- `n-calendar` 新增 `cell` 插槽
 
 ## 2.40.1
 

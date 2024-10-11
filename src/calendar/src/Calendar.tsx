@@ -292,6 +292,17 @@ export default defineComponent({
               const notInCurrentMonth = !inCurrentMonth
               const disabled = isDateDisabled?.(ts) === true
               const selected = normalizedValue === startOfDay(ts).valueOf()
+              const cellData = {
+                date: dateObject,
+                data: {
+                  timestamp: ts,
+                  inCurrentMonth,
+                  isCurrentDate,
+                  isSelected: selected,
+                  day: date,
+                  isDisabled: disabled
+                }
+              }
               return (
                 <div
                   key={`${calendarMonth}-${index}`}
@@ -323,24 +334,28 @@ export default defineComponent({
                     })
                   }}
                 >
-                  <div class={`${mergedClsPrefix}-calendar-date`}>
-                    <div
-                      class={`${mergedClsPrefix}-calendar-date__date`}
-                      title={fullDate}
-                    >
-                      {date}
-                    </div>
-                    {index < 7 && (
+                  {$slots.cell ? (
+                    $slots.cell(cellData)
+                  ) : (
+                    <div class={`${mergedClsPrefix}-calendar-date`}>
                       <div
-                        class={`${mergedClsPrefix}-calendar-date__day`}
+                        class={`${mergedClsPrefix}-calendar-date__date`}
                         title={fullDate}
                       >
-                        {format(ts, 'EEE', {
-                          locale
-                        })}
+                        {date}
                       </div>
-                    )}
-                  </div>
+                      {index < 7 && (
+                        <div
+                          class={`${mergedClsPrefix}-calendar-date__day`}
+                          title={fullDate}
+                        >
+                          {format(ts, 'EEE', {
+                            locale
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  )}
                   {$slots.default?.({
                     year,
                     month: month + 1,
