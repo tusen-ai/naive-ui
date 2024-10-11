@@ -80,15 +80,15 @@ export default defineComponent({
         <div v-if="data.day === 16 || data.day === 18">
           <div class="flex-col-center">
             <n-badge dot />
-            <span style="margin-left: 6px">A high priority task</span>
+            <span style="margin-left: 6px">High priority task</span>
           </div>
           <div class="flex-col-center">
             <n-badge dot color="orange" />
-            <span style="margin-left: 6px">A medium priority task</span>
+            <span style="margin-left: 6px">Medium priority task</span>
           </div>
           <div class="flex-col-center">
             <n-badge dot color="#18a058" />
-            <span style="margin-left: 6px">A low priority task</span>
+            <span style="margin-left: 6px">Low priority task</span>
           </div>
         </div>
       </div>
