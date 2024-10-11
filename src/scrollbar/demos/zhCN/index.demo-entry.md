@@ -22,7 +22,6 @@ placement.vue
 | --- | --- | --- | --- | --- |
 | content-class | `string` | `undefined` | 内容 div 的类名 | 2.38.2 |
 | content-style | `string \| object` | `undefined` | 内容 div 的 style | 2.38.2 |
-| size | `number` | `undefined` | 滚动条的大小 | 2.34.4 |
 | trigger | `'hover' \| 'none'` | `'hover'` | 显示滚动条的时机，`'none'` 表示一直显示 | 2.29.1 |
 | x-scrollable | `boolean` | `false` | 是否可以横向滚动 |  |
 | x-placement | `'top' \| 'bottom'` | `bottom` | 横向滚动时滚动条的位置 | 2.40.0 |
