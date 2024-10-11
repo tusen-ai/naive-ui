@@ -16,6 +16,7 @@
 - `n-progress`'s `color` prop supports gradient config.
 - `n-select` adds `font-weight` theme variable
 - `n-input` adds `font-weight` theme variable
+- `n-timeline` `item-placement` adds `alternate` prop, closes [#5289](https://github.com/tusen-ai/naive-ui/issues/5289)
 
 ## 2.40.1
 
