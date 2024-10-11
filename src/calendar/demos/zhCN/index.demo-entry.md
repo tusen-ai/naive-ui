@@ -8,6 +8,7 @@
 
 ```demo
 basic.vue
+cell.vue
 ```
 
 ## API
@@ -28,3 +29,4 @@ basic.vue
 | --- | --- | --- | --- |
 | default | `(props: { year: number, month: number, date: number })` | 每个日期中渲染的内容 |  |
 | header | `(props: { year: number, month: number })` | 日历的标题，`month` 从 1 开始 | 2.29.1 |
+| cell | `(props: { date: { year: number, month: number, date: number }, data: { timestamp: number, inCurrentMonth: boolean, isCurrentDate: boolean, isSelected: boolean, day: number, isDisabled: boolean } })` | 每个单元格中渲染的内容 | NEXT_VERSION |

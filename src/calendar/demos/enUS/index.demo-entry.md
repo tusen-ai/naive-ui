@@ -8,6 +8,7 @@ How time flies.
 
 ```demo
 basic.vue
+cell.vue
 ```
 
 ## API
@@ -28,3 +29,4 @@ basic.vue
 | --- | --- | --- | --- |
 | default | `({ year: number, month: number, date: number })` | Content to be rendered in each date. |  |
 | header | `(props: { year: number, month: number })` | Header of the calendar. `month` starts from 1. | 2.29.1 |
+| cell | `(props: { date: { year: number, month: number, date: number }, data: { timestamp: number, inCurrentMonth: boolean, isCurrentDate: boolean, isSelected: boolean, day: number, isDisabled: boolean } })` | Content to be rendered in each cell. | NEXT_VERSION |
