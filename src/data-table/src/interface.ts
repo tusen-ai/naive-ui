@@ -172,6 +172,10 @@ export const dataTableProps = {
   >,
   onCheckedRowKeysChange: [Function, Array] as PropType<
     MaybeArray<OnUpdateCheckedRowKeys> | undefined
+  >,
+  onResizeStart: Function as PropType<(column: TableBaseColumn) => void>,
+  onResize: Function as PropType<
+    (column: TableBaseColumn, displacementX: number) => void
   >
 } as const
 
@@ -447,6 +451,14 @@ export interface DataTableInjection {
     | undefined
     | ((value: any, rowData: object, column: TableBaseColumn) => VNodeChild)
   >
+  onResizeStart: ((column: TableBaseColumn) => void) | undefined
+  onResize:
+    | ((
+      column: TableBaseColumn,
+      displacementX: number,
+      startWidth?: number
+    ) => void)
+    | undefined
 }
 
 export const dataTableInjectionKey

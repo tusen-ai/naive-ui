@@ -104,7 +104,9 @@ export default defineComponent({
       handleTableHeaderScroll,
       deriveNextSorter,
       doUncheckAll,
-      doCheckAll
+      doCheckAll,
+      onResizeStart,
+      onResize
     } = inject(dataTableInjectionKey)!
     const virtualListRef = ref<VirtualListInst | null>()
     const cellElsRef = ref<Record<ColumnKey, HTMLTableCellElement>>({})
@@ -141,6 +143,7 @@ export default defineComponent({
     }
     const resizeStartWidthMap = new Map<ColumnKey, number | undefined>()
     function handleColumnResizeStart(column: TableBaseColumn): void {
+      onResizeStart?.(column)
       resizeStartWidthMap.set(column.key, getCellActualWidth(column.key))
     }
     function handleColumnResize(
@@ -148,6 +151,7 @@ export default defineComponent({
       displacementX: number
     ): void {
       const startWidth = resizeStartWidthMap.get(column.key)
+      onResize?.(column, displacementX, startWidth)
       if (startWidth === undefined) {
         return
       }

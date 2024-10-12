@@ -16,6 +16,7 @@
 - `n-progress` 的 `color` 属性支持渐变色配置
 - `n-select` 新增 `font-weight` 主题变量
 - `n-input` 新增 `font-weight` 主题变量
+- `n-data-table` 新增 `on-resize-start` 和 `on-resize` 事件，关闭 [#3827](https://github.com/tusen-ai/naive-ui/issues/3827)
 
 ## 2.40.1
 
