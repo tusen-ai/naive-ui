@@ -292,7 +292,9 @@ export default defineComponent({
       handleTableHeaderScroll,
       handleTableBodyScroll,
       setHeaderScrollLeft,
-      renderCell: toRef(props, 'renderCell')
+      renderCell: toRef(props, 'renderCell'),
+      onResizeStart: props.onResizeStart,
+      onResize: props.onResize
     })
     const exposedMethods: DataTableInst = {
       filter,

@@ -16,6 +16,7 @@
 - `n-progress`'s `color` prop supports gradient config.
 - `n-select` adds `font-weight` theme variable
 - `n-input` adds `font-weight` theme variable
+- `n-data-table` adds `on-resize-start` and `on-resize` events, closes [#3827](https://github.com/tusen-ai/naive-ui/issues/3827)
 
 ## 2.40.1
 
