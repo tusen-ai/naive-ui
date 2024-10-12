@@ -76,6 +76,6 @@ export default defineComponent({
     :options="options"
     trigger="click"
   >
-    <n-button>{{ value || '弹出选择' }}</n-button>
+    <n-button>{{ value || 'Nothing' }}</n-button>
   </n-popselect>
 </template>
