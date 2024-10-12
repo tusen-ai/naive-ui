@@ -10,6 +10,7 @@ size.vue
 scrollable.vue
 multiple.vue
 slot.vue
+custom-field.vue
 ```
 
 ## API
@@ -18,6 +19,7 @@ slot.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| label-field | `string` | `'label'` | The field name of the option label. | NEXT_VERSION |
 | multiple | `boolean` | `false` | Whether to select multiple values. |  |
 | node-props | `(option: SelectOption \| SelectGroupOption) => object` | `undefined` | Option's DOM attrs generator. | 2.30.4 |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` | For details of configuration options, see [Select](select#SelectOption-Properties) |  |
@@ -25,6 +27,7 @@ slot.vue
 | scrollable | `boolean` | `false` | Whether the select menu is scrollable. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the Popselect. |  |
 | value | `string \| number \| Array<string \| number> \| null` | `null` | Value in controlled mode. |  |
+| value-field | `string` | `'value'` | The field name of the option value. | NEXT_VERSION |
 | virtual-scroll | `boolean` | `false` | Whether to enable virtual scrolling. | 2.30.4 |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: SelectBaseOption \| null \| Array<SelectBaseOption>) => void` | `undefined` | Callback of value updating. |  |
 

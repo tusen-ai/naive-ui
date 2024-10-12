@@ -16,6 +16,7 @@
 - `n-progress` 的 `color` 属性支持渐变色配置
 - `n-select` 新增 `font-weight` 主题变量
 - `n-input` 新增 `font-weight` 主题变量
+- `n-popselect` 新增 `label-field` 和 `value-field` 属性，关闭 [#3795](https://github.com/tusen-ai/naive-ui/issues/3795)
 
 ## 2.40.1
 
