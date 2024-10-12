@@ -10,6 +10,7 @@ size.vue
 scrollable.vue
 multiple.vue
 slot.vue
+custom-field.vue
 ```
 
 ## API
@@ -18,6 +19,7 @@ slot.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| label-field | `string` | `'label'` | 选项标签字段 | NEXT_VERSION |
 | multiple | `boolean` | `false` | 是否为多选 |  |
 | node-props | `(option: SelectOption \| SelectGroupOption) => object` | `undefined` | 选项的 DOM 属性生成函数 | 2.30.4 |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` | 配置选项内容，详情参考 [Select](select#SelectOption-Properties) |  |
@@ -25,6 +27,7 @@ slot.vue
 | render-label | `(option: SelectOption \| SelectGroupOption) => VNodeChild` | `undefined` | 控制全部选项的渲染 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |
 | value | `string \| number \| Array<string \| number> \| null` | `null` | 受控模式下的值 |  |
+| value-field | `string` | `'value'` | 选项值字段 | NEXT_VERSION |
 | virtual-scroll | `boolean` | `false` | 是否启用虚拟滚动 | 2.30.4 |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: SelectBaseOption \| null \| Array<SelectBaseOption>) => void` | `undefined` | 值更新的回调 |  |
 

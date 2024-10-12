@@ -50,6 +50,14 @@ export const panelProps = {
     type: String as PropType<PopselectSize>,
     default: 'medium'
   },
+  labelField: {
+    type: String,
+    default: 'label'
+  },
+  valueField: {
+    type: String,
+    default: 'value'
+  },
   scrollable: Boolean,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -101,7 +109,7 @@ export default defineComponent({
         SelectBaseOption,
         SelectGroupOption,
         SelectIgnoredOption
-      >(props.options, createTmOptions('value', 'children'))
+      >(props.options, createTmOptions(props.valueField, 'children'))
     })
 
     function doUpdateValue(
@@ -237,6 +245,8 @@ export default defineComponent({
         onMouseenter={this.onMouseenter}
         onMouseleave={this.onMouseenter}
         onMousedown={this.handleMenuMousedown}
+        labelField={this.labelField}
+        valueField={this.valueField}
         showCheckmark={this.showCheckmark}
       >
         {{
