@@ -7,6 +7,7 @@
 ### Fixes
 
 - `n-time-picker` 的 `use-12-hours` 类型错误警告，关闭 [#4308](https://github.com/tusen-ai/naive-ui/issues/4308)
+- `n-modal` 导致 Chrome 控制台中出现错误，关闭 [#4308](https://github.com/tusen-ai/naive-ui/issues/4308)
 
 ### Features
 

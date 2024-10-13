@@ -7,6 +7,7 @@
 ### Fixes
 
 - Fix `n-time-picker`'s `use-12-hours` type error warning, closes [#4308](https://github.com/tusen-ai/naive-ui/issues/4308)
+- Fix `n-modal` `aria-hidden` causes an error in the Chrome console, closes [#6436](https://github.com/tusen-ai/naive-ui/issues/6436)
 
 ### Features
 
