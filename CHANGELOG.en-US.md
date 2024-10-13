@@ -16,7 +16,7 @@
 - `n-progress`'s `color` prop supports gradient config.
 - `n-select` adds `font-weight` theme variable
 - `n-input` adds `font-weight` theme variable
-- `n-transfer` adds `label-field` and `value-field` props, closes [#5649](https://github.com/tusen-ai/naive-ui/issues/5649)
+- `n-transfer` adds `label-field` and `value-field` props, closes [#5844](https://github.com/tusen-ai/naive-ui/issues/5844)
 
 ## 2.40.1
 
