@@ -5,9 +5,10 @@ import type { TransferTheme } from '../styles'
 
 export type OptionValue = string | number
 export interface Option {
-  label: string
-  value: OptionValue
+  label?: string
+  value?: OptionValue
   disabled?: boolean
+  [key: string]: any
 }
 
 export type Filter = (

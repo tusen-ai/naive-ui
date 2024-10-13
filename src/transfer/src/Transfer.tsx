@@ -88,7 +88,15 @@ export const transferProps = {
   renderTargetList: Function as PropType<TransferRenderSourceList>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
+  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
+  labelField: {
+    type: String,
+    default: 'label'
+  },
+  valueField: {
+    type: String,
+    default: 'value'
+  }
 } as const
 
 export type TransferProps = ExtractPublicPropTypes<typeof transferProps>
@@ -350,6 +358,8 @@ export default defineComponent({
                   disabled={this.mergedDisabled}
                   virtualScroll={this.virtualScroll}
                   itemSize={this.itemSize}
+                  labelField={this.labelField}
+                  valueField={this.valueField}
                 />
               )}
             </div>
