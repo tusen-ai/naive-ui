@@ -1,4 +1,5 @@
-import { type ExtractPropTypes, computed, inject, ref, watch } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
+import { computed, inject, ref, watch } from 'vue'
 import {
   addMonths,
   format,
@@ -43,7 +44,7 @@ const useDualCalendarProps = {
   defaultCalendarEndTime: Number,
   bindCalendarMonths: Boolean,
   actions: {
-    type: Array,
+    type: Array as PropType<string[]>,
     default: () => ['clear', 'confirm']
   }
 } as const

@@ -540,7 +540,6 @@ export default defineComponent({
       } = entry
       const containerWidth = target.parentElement!.parentElement!.offsetWidth
       const containerHeight = target.parentElement!.parentElement!.offsetHeight
-      // console.log(target, target.parentElement, width, containerWidth)
       const { placement } = props
       if (!addTabFixedRef.value) {
         if (placement === 'top' || placement === 'bottom') {
@@ -856,9 +855,9 @@ export default defineComponent({
                   internalLeftPadded={
                     index !== 0
                     && (!mergedJustifyContent
-                    || mergedJustifyContent === 'center'
-                    || mergedJustifyContent === 'start'
-                    || mergedJustifyContent === 'end')
+                      || mergedJustifyContent === 'center'
+                      || mergedJustifyContent === 'start'
+                      || mergedJustifyContent === 'end')
                   }
                 >
                   {tabPaneVNode.children
@@ -1045,7 +1044,7 @@ export default defineComponent({
         </div>
         {showPane
         && (this.animated
-        && (resolvedPlacement === 'top' || resolvedPlacement === 'bottom') ? (
+          && (resolvedPlacement === 'top' || resolvedPlacement === 'bottom') ? (
               <div
                 ref="tabsPaneWrapperRef"
                 style={paneWrapperStyle}

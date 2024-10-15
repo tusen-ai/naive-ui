@@ -15,16 +15,16 @@ export type TreeSelectTmNode = TreeNode<TreeSelectOption>
 
 export type OnUpdateValue = (
   value: string &
-  number &
-  (string | number) &
-  string[] &
-  number[] &
-  Array<string | number> &
-  null,
+    number &
+    (string | number) &
+    string[] &
+    number[] &
+    Array<string | number> &
+    null,
   option: TreeSelectOption &
-  null &
-    TreeSelectOption[] &
-    Array<TreeSelectOption | null>,
+    null &
+      TreeSelectOption[] &
+      Array<TreeSelectOption | null>,
   meta:
     | {
       node: TreeSelectOption

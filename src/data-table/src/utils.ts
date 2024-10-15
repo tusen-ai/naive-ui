@@ -128,7 +128,7 @@ export function shouldUseArrayInSingleMode(column: TableBaseColumn): boolean {
   return (
     column.filterOptionValues !== undefined
     || (column.filterOptionValue === undefined
-    && column.defaultFilterOptionValues !== undefined)
+      && column.defaultFilterOptionValues !== undefined)
   )
 }
 

@@ -1,7 +1,7 @@
 <markdown>
 # 加载失败
 
-使用 `fallback-src` 设定失败时的图像。
+使用 `fallback-src` 设定失败时的图像。或者你可以使用下一个例子里的 `error` slot。
 </markdown>
 
 <template>

@@ -61,14 +61,14 @@ download.vue
 | trigger-class | `string` | `undefined` | Class of trigger area. | 2.36.0 |
 | trigger-style | `Object \| string` | `undefined` | Style of trigger area. | 2.29.1 |
 | with-credentials | `boolean` | `false` | Any credentials to be sent with the request (e.g. cookie). |  |
-| on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | Uploaded file(s) status change callback. |  |
+| on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `undefined` | Uploaded file(s) status change callback. |  |
 | on-error | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| void` | `undefined` | Upload failed callback. | 2.24.0 |
 | on-finish | `(options: { file: UploadFileInfo, event?: Event }) => UploadFileInfo \| undefined` | `({ file }) => file` | Upload finished callback. You can intercept and even modify the uploaded `UploadFileInfo`. Note: file will be null in next event-loop |  |
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo> }) => (Promise<boolean \| void> \| boolean \| void)` | `true` | Upload ready to start callback. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel the upload. |  |
-| on-download | `(file: FileInfo) => void` | `undefined` | Callback for clicking download buttons. Returning `false`, `Promise resolve false`, `Promise rejected` will cancel the download. |  |
+| on-download | `(file: FileInfo) => Promise<boolean> \| boolean \| any` | `undefined` | Callback for clicking download buttons. Returning `false`, `Promise resolve false`, `Promise rejected` will cancel the download. |  |
 | on-preview | `(file: FileInfo, detail: { event: MouseEvent }) => void` | `undefined` | Callback for clicking file links or preview buttons. You can use `preventDefault` to prevent default anchor link open behavior. | `detail.event` 2.39.0 |
 | on-remove | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, index: number }) => Promise<boolean> \| boolean \| any` | `() => true` | File removed callback. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel this removal. | `index` 2.38.2 |
-| on-retry | `(options: { file: UploadFileInfo }) => (Promise<boolean \| void> \| boolean \| void)` | `undefined` | Click retry callback function. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel the retry. | NEXT_VERSION |
+| on-retry | `(options: { file: UploadFileInfo }) => (Promise<boolean \| void> \| boolean \| void)` | `undefined` | Click retry callback function. Returning `false`, a promise resolved with `false`, or a rejected promise will cancel the retry. | 2.40.0 |
 | on-update:file-list | `(fileList: UploadFileInfo[]) => void` | `undefined` | Callback function triggered on file-list changes. |  |
 
 #### UploadFileInfo Type

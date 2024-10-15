@@ -37,10 +37,12 @@ const internalSelectionDark: InternalSelectionTheme = {
       heightTiny,
       heightSmall,
       heightMedium,
-      heightLarge
+      heightLarge,
+      fontWeight
     } = vars
     return {
       ...commonVars,
+      fontWeight,
       fontSizeTiny,
       fontSizeSmall,
       fontSizeMedium,

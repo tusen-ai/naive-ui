@@ -37,6 +37,8 @@ const usePanelCommonProps = {
   onConfirm: Function as PropType<(value: Value | null) => void>,
   onClose: Function as PropType<OnClose>,
   onTabOut: Function,
+  onKeydown: Function,
+  actions: Array as PropType<string[]>,
   onUpdateValue: {
     type: Function as PropType<OnPanelUpdateValue>,
     required: true
@@ -50,7 +52,7 @@ const usePanelCommonProps = {
   onPrevYear: Function as PropType<() => void>
 } as const
 
-type UsePanelCommonProps = ExtractPropTypes<typeof usePanelCommonProps>
+export type UsePanelCommonProps = ExtractPropTypes<typeof usePanelCommonProps>
 
 function usePanelCommon(props: UsePanelCommonProps) {
   const {

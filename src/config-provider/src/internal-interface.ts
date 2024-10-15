@@ -100,6 +100,7 @@ import type { RowTheme } from '../../legacy-grid/styles'
 import type { SplitTheme } from '../../split/styles'
 import type { FlexTheme } from '../../flex/styles'
 import type { FloatButtonGroupTheme } from '../../float-button-group/styles'
+import type { MarqueeTheme } from '../../marquee/styles'
 import type { Katex } from './katex'
 import type { GlobalSize, GlobalTheme, GlobalThemeOverrides } from './interface'
 
@@ -190,6 +191,7 @@ export interface GlobalThemeWithoutCommon {
   Watermark?: WatermarkTheme
   Split?: SplitTheme
   Row?: RowTheme
+  Marquee?: MarqueeTheme
   // internal
   InternalSelectMenu?: InternalSelectMenuTheme
   InternalSelection?: InternalSelectionTheme

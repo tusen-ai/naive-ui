@@ -134,8 +134,8 @@ const TreeNode = defineComponent({
       () =>
         NTree.checkableRef.value
         && (NTree.cascadeRef.value
-        || NTree.mergedCheckStrategyRef.value !== 'child'
-        || props.tmNode.isLeaf)
+          || NTree.mergedCheckStrategyRef.value !== 'child'
+          || props.tmNode.isLeaf)
     )
 
     const checkedRef = useMemo(() =>

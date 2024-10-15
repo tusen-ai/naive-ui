@@ -15,6 +15,7 @@ color.vue
 no-indicator.vue
 height.vue
 processing.vue
+gradient.vue
 ```
 
 ## API
@@ -25,7 +26,7 @@ processing.vue
 | --- | --- | --- | --- | --- |
 | border-radius | `number \| string` | `undefined` | `'line'` typed progress's border-radius. Keep half of default height if not passed. |  |
 | circle-gap | `number` | `1` | The gap between circles when type is `'multiple-circle'`, suppose `viewbox` size is `100`. |  |
-| color | `string \| string[]` | `undefined` | Progress color. |  |
+| color | `string \| string[] \| { stops: string[] } \| Array<{ stops: string[] }>` | `undefined` | Progress color. `{ stops: string[] }` indicates a gradient color. `stops` array must have length of 2. The first element is gradient start color. The second element is gradient end color. | `stops` since NEXT_VERSION |
 | fill-border-radius | `number \| string` | `undefined` | `'line'` typed progress's fill's border-radius. Keep `border-radius` if not passed. |  |
 | gap-degree | `number` | `75` | The gap degree of half circle, 0 ~ 360. | 2.25.2 |
 | gap-offset-degree | `number` | `0` | The gap offset degree. | 2.25.2 |

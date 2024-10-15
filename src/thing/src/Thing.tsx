@@ -85,10 +85,10 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-thing-main`}>
             {!props.contentIndented
             && (slots.header
-            || props.title
-            || slots['header-extra']
-            || props.titleExtra
-            || slots.avatar) ? (
+              || props.title
+              || slots['header-extra']
+              || props.titleExtra
+              || slots.avatar) ? (
                   <div class={`${mergedClsPrefix}-thing-avatar-header-wrapper`}>
                     {slots.avatar ? (
                       <div class={`${mergedClsPrefix}-thing-avatar`}>
@@ -117,8 +117,8 @@ export default defineComponent({
                             {slots.description || props.description ? (
                               <div
                                 class={[
-                          `${mergedClsPrefix}-thing-main__description`,
-                          props.descriptionClass
+                                  `${mergedClsPrefix}-thing-main__description`,
+                                  props.descriptionClass
                                 ]}
                                 style={props.descriptionStyle}
                               >
@@ -154,8 +154,8 @@ export default defineComponent({
                     {slots.description || props.description ? (
                       <div
                         class={[
-                      `${mergedClsPrefix}-thing-main__description`,
-                      props.descriptionClass
+                          `${mergedClsPrefix}-thing-main__description`,
+                          props.descriptionClass
                         ]}
                         style={props.descriptionStyle}
                       >

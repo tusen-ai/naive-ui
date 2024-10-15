@@ -37,10 +37,12 @@ function self(vars: ThemeCommonVars) {
     iconColor,
     iconColorDisabled,
     iconColorHover,
-    iconColorPressed
+    iconColorPressed,
+    fontWeight
   } = vars
   return {
     ...commonVariables,
+    fontWeight,
     countTextColorDisabled: textColorDisabled,
     countTextColor: textColor3,
     heightTiny,

@@ -184,6 +184,7 @@ export default c([
       background-color: var(--n-merged-th-color);
     `),
     cB('data-table-tr', `
+      position: relative;
       box-sizing: border-box;
       background-clip: padding-box;
       transition: background-color .3s var(--n-bezier);
