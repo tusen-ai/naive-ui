@@ -68,7 +68,9 @@
 - `n-data-table` adds `allowExport` prop for column object.
 - `n-date-picker` adds `year-range` prop.
 - `n-tree-select` adds `header` slot, closes [#5915](https://github.com/tusen-ai/naive-ui/issues/5915).
+- `n-config-provider` add `size` prop closes [#356](https://github.com/tusen-ai/naive-ui/issues/356)
 - `n-select` adds `menu-size` prop.
+
 
 ## 2.39.0
 

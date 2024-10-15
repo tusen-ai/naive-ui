@@ -28,10 +28,7 @@ import style from './styles/index.cssr'
 
 export const switchProps = {
   ...(useTheme.props as ThemeProps<SwitchTheme>),
-  size: {
-    type: String as PropType<'small' | 'medium' | 'large'>,
-    default: 'medium'
-  },
+  size: String as PropType<'small' | 'medium' | 'large'>,
   value: {
     type: [String, Number, Boolean] as PropType<
       string | number | boolean | undefined

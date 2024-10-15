@@ -78,10 +78,7 @@ const dropdownBaseProps = {
     type: Boolean,
     default: true
   },
-  size: {
-    type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
-    default: 'medium'
-  },
+  size: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
   inverted: Boolean,
   placement: {
     type: String as PropType<FollowerPlacement>,
@@ -214,7 +211,8 @@ export default defineComponent({
       keyboardEnabledRef
     )
 
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, globalSize }
+      = useConfig(props)
 
     const themeRef = useTheme(
       'Dropdown',
@@ -343,7 +341,7 @@ export default defineComponent({
       }
     }
     const cssVarsRef = computed(() => {
-      const { size, inverted } = props
+      const { inverted } = props
       const {
         common: { cubicBezierEaseInOut },
         self
@@ -353,13 +351,15 @@ export default defineComponent({
         dividerColor,
         borderRadius,
         optionOpacityDisabled,
-        [createKey('optionIconSuffixWidth', size)]: optionIconSuffixWidth,
-        [createKey('optionSuffixWidth', size)]: optionSuffixWidth,
-        [createKey('optionIconPrefixWidth', size)]: optionIconPrefixWidth,
-        [createKey('optionPrefixWidth', size)]: optionPrefixWidth,
-        [createKey('fontSize', size)]: fontSize,
-        [createKey('optionHeight', size)]: optionHeight,
-        [createKey('optionIconSize', size)]: optionIconSize
+        [createKey('optionIconSuffixWidth', globalSize.value)]:
+          optionIconSuffixWidth,
+        [createKey('optionSuffixWidth', globalSize.value)]: optionSuffixWidth,
+        [createKey('optionIconPrefixWidth', globalSize.value)]:
+          optionIconPrefixWidth,
+        [createKey('optionPrefixWidth', globalSize.value)]: optionPrefixWidth,
+        [createKey('fontSize', globalSize.value)]: fontSize,
+        [createKey('optionHeight', globalSize.value)]: optionHeight,
+        [createKey('optionIconSize', globalSize.value)]: optionIconSize
       } = self
       const vars: any = {
         '--n-bezier': cubicBezierEaseInOut,
@@ -408,7 +408,7 @@ export default defineComponent({
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
         'dropdown',
-        computed(() => `${props.size[0]}${props.inverted ? 'i' : ''}`),
+        computed(() => `${globalSize.value[0]}${props.inverted ? 'i' : ''}`),
         cssVarsRef,
         props
       )

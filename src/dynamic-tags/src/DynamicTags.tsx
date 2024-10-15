@@ -42,10 +42,7 @@ import style from './styles/index.cssr'
 export const dynamicTagsProps = {
   ...(useTheme.props as ThemeProps<DynamicTagsTheme>),
   ...commonProps,
-  size: {
-    type: String as PropType<'small' | 'medium' | 'large'>,
-    default: 'medium'
-  },
+  size: String as PropType<'small' | 'medium' | 'large'>,
   closable: {
     type: Boolean,
     default: true
@@ -91,7 +88,8 @@ export default defineComponent({
         }
       })
     }
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, globalSize }
+      = useConfig(props)
     const { localeRef } = useLocale('DynamicTags')
     const formItem = useFormItem(props)
     const { mergedDisabledRef } = formItem
@@ -117,7 +115,7 @@ export default defineComponent({
       return localeRef.value.add
     })
     const inputSizeRef = computed(() => {
-      return smallerSize(props.size)
+      return smallerSize(globalSize.value)
     })
     const triggerDisabledRef = computed(() => {
       return (
@@ -190,6 +188,7 @@ export default defineComponent({
       inputInstRef,
       localizedAdd: localizedAddRef,
       inputSize: inputSizeRef,
+      globalSize,
       inputValue: inputValueRef,
       showInput: showInputRef,
       inputForceFocused: inputForceFocusedRef,
@@ -227,7 +226,7 @@ export default defineComponent({
               tagStyle,
               type,
               round,
-              size,
+              globalSize,
               color,
               closable,
               mergedDisabled,
@@ -258,7 +257,7 @@ export default defineComponent({
                     style={tagStyle}
                     type={type}
                     round={round}
-                    size={size}
+                    size={globalSize}
                     color={color}
                     closable={closable}
                     disabled={mergedDisabled}

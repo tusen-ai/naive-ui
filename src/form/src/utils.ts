@@ -1,6 +1,7 @@
 import { type ComputedRef, computed, inject, ref } from 'vue'
 import { get } from 'lodash-es'
 import { formatLength } from '../../_utils'
+import { useConfig } from '../../_mixins'
 import type { FormItemSetupProps } from './FormItem'
 import { formInjectionKey } from './context'
 import type { FormItemRule, Size } from './interface'
@@ -9,12 +10,18 @@ export function formItemSize(props: FormItemSetupProps): {
   mergedSize: ComputedRef<Size>
 } {
   const NForm = inject(formInjectionKey, null)
+  const { globalSize } = useConfig(props)
   return {
     mergedSize: computed(() => {
       if (props.size !== undefined)
         return props.size
+
       if (NForm?.props.size !== undefined)
         return NForm.props.size
+
+      if (globalSize.value !== undefined)
+        return globalSize.value
+
       return 'medium'
     })
   }

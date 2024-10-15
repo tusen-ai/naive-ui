@@ -46,10 +46,7 @@ export const panelProps = {
     type: Array as PropType<SelectMixedOption[]>,
     default: () => []
   },
-  size: {
-    type: String as PropType<PopselectSize>,
-    default: 'medium'
-  },
+  size: String as PropType<PopselectSize>,
   scrollable: Boolean,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -85,7 +82,8 @@ export default defineComponent({
 
     const NPopselect = inject(popselectInjectionKey)!
 
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, globalSize }
+      = useConfig(props)
 
     const themeRef = useTheme(
       'Popselect',
@@ -212,7 +210,8 @@ export default defineComponent({
       handleMenuMousedown,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
-      onRender: themeClassHandle?.onRender
+      onRender: themeClassHandle?.onRender,
+      globalSize
     }
   },
   render() {
@@ -228,7 +227,7 @@ export default defineComponent({
         themeOverrides={this.mergedTheme.peerOverrides.InternalSelectMenu}
         multiple={this.multiple}
         treeMate={this.treeMate}
-        size={this.size}
+        size={this.globalSize}
         value={this.value}
         virtualScroll={this.virtualScroll}
         scrollable={this.scrollable}

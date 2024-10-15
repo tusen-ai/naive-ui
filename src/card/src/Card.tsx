@@ -39,10 +39,7 @@ export const cardBaseProps = {
     type: [Boolean, Object] as PropType<boolean | CardSegmented>,
     default: false
   },
-  size: {
-    type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
-    default: 'medium'
-  },
+  size: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
   bordered: {
     type: Boolean,
     default: true
@@ -80,8 +77,12 @@ export default defineComponent({
       if (onClose)
         call(onClose)
     }
-    const { inlineThemeDisabled, mergedClsPrefixRef, mergedRtlRef }
-      = useConfig(props)
+    const {
+      inlineThemeDisabled,
+      mergedClsPrefixRef,
+      mergedRtlRef,
+      globalSize
+    } = useConfig(props)
     const themeRef = useTheme(
       'Card',
       '-card',
@@ -92,7 +93,6 @@ export default defineComponent({
     )
     const rtlEnabledRef = useRtl('Card', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
-      const { size } = props
       const {
         self: {
           color,
@@ -118,9 +118,9 @@ export default defineComponent({
           colorEmbedded,
           colorEmbeddedModal,
           colorEmbeddedPopover,
-          [createKey('padding', size)]: padding,
-          [createKey('fontSize', size)]: fontSize,
-          [createKey('titleFontSize', size)]: titleFontSize
+          [createKey('padding', globalSize.value)]: padding,
+          [createKey('fontSize', globalSize.value)]: fontSize,
+          [createKey('titleFontSize', globalSize.value)]: titleFontSize
         },
         common: { cubicBezierEaseInOut }
       } = themeRef.value
@@ -166,7 +166,7 @@ export default defineComponent({
       ? useThemeClass(
         'card',
         computed(() => {
-          return props.size[0]
+          return globalSize.value[0]
         }),
         cssVarsRef,
         props

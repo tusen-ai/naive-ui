@@ -43,12 +43,7 @@ export const spaceProps = {
   inline: Boolean,
   vertical: Boolean,
   reverse: Boolean,
-  size: {
-    type: [String, Number, Array] as PropType<
-      'small' | 'medium' | 'large' | number | [number, number]
-    >,
-    default: 'medium'
-  },
+  size: [String, Number, Array] as PropType<Size>,
   wrapItem: {
     type: Boolean,
     default: true
@@ -67,12 +62,13 @@ export const spaceProps = {
 } as const
 
 export type SpaceProps = ExtractPublicPropTypes<typeof spaceProps>
+type Size = 'small' | 'medium' | 'large' | number | [number, number]
 
 export default defineComponent({
   name: 'Space',
   props: spaceProps,
   setup(props) {
-    const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
+    const { mergedClsPrefixRef, mergedRtlRef, globalSize } = useConfig(props)
     const themeRef = useTheme(
       'Space',
       '-space',
@@ -87,21 +83,20 @@ export default defineComponent({
       rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
       margin: computed<{ horizontal: number, vertical: number }>(() => {
-        const { size } = props
-        if (Array.isArray(size)) {
+        if (Array.isArray(globalSize.value)) {
           return {
-            horizontal: size[0],
-            vertical: size[1]
+            horizontal: globalSize.value[0],
+            vertical: globalSize.value[1]
           }
         }
-        if (typeof size === 'number') {
+        if (typeof (globalSize.value as Size) === 'number') {
           return {
-            horizontal: size,
-            vertical: size
+            horizontal: globalSize.value,
+            vertical: globalSize.value
           }
         }
         const {
-          self: { [createKey('gap', size)]: gap }
+          self: { [createKey('gap', globalSize.value)]: gap }
         } = themeRef.value
         const { row, col } = getGap(gap)
         return {
