@@ -34,6 +34,8 @@ export const cardBaseProps = {
   headerExtraStyle: [Object, String] as PropType<CSSProperties | string>,
   footerClass: String,
   footerStyle: [Object, String] as PropType<CSSProperties | string>,
+  actionClass: String,
+  actionStyle: [Object, String] as PropType<CSSProperties | string>,
   embedded: Boolean,
   segmented: {
     type: [Boolean, Object] as PropType<boolean | CardSegmented>,
@@ -325,7 +327,11 @@ export default defineComponent({
             : children
           return (
             mergedChildren && (
-              <div class={`${mergedClsPrefix}-card__action`} role="none">
+              <div
+                class={[`${mergedClsPrefix}-card__action`, this.actionClass]}
+                style={this.actionStyle}
+                role="none"
+              >
                 {mergedChildren}
               </div>
             )
