@@ -16,7 +16,7 @@
 - `n-progress`'s `color` prop supports gradient config.
 - `n-select` adds `font-weight` theme variable
 - `n-input` adds `font-weight` theme variable
-- `n-card` adds `action-class`、`action-style` props
+- `n-card` adds `action-class` and `action-style` props
 
 ## 2.40.1
 
