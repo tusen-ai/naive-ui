@@ -28,6 +28,8 @@ embedded-debug.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | action | `() => VNodeChild` | `undefined` | 操作区域内容，需要是 render 函数 | 2.38.2 |
+| action-class | `string` | `undefined` | 操作区域内容的类名 | NEXT_VERSION |
+| action-style | `Object \| string` | `undefined` | 操作区域内容的样式 | NEXT_VERSION |
 | bordered | `boolean` | `true` | 是否显示卡片边框 |  |
 | closable | `boolean` | `false` | 是否允许关闭 |  |
 | content | `string \| (() => VNodeChild)` | `undefined` | 卡片内容，可以是 render 函数 | 2.38.2 |

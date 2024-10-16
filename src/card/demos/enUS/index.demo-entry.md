@@ -26,6 +26,8 @@ embedded.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | action | `() => VNodeChild` | `undefined` | Operating area content, must be a render function. | 2.38.2 |
+| action-class | `string` | `undefined` | The class of the action area of the card. | NEXT_VERSION |
+| action-style | `Object \| string` | `undefined` | The style of the action area of the card. | NEXT_VERSION |
 | bordered | `boolean` | `true` | Whether to show the card border. |  |
 | closable | `boolean` | `false` | Is it allowed to close. |  |
 | content | `string \| (() => VNodeChild)` | `undefined` | Card content, can be a render function. | 2.38.2 |
