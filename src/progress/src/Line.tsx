@@ -137,7 +137,7 @@ export default defineComponent({
                   ]}
                   style={{
                     maxWidth: `${props.percentage}%`,
-                    background: styleFillColorRef.value,
+                    backgroundColor: styleFillColorRef.value,
                     height: styleHeightRef.value,
                     lineHeight: styleHeightRef.value,
                     borderRadius: styleFillBorderRadiusRef.value
