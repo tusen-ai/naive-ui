@@ -1,5 +1,5 @@
 import { type PropType, computed, defineComponent, h } from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
@@ -30,6 +30,20 @@ export default defineComponent({
   setup(props) {
     const { mergedBorderedRef, mergedClsPrefixRef, inlineThemeDisabled }
       = useConfig(props)
+
+    const formItem = useFormItem(props, {
+      mergedSize(NFormItem) {
+        if (NFormItem) {
+          const { mergedSize } = NFormItem
+          if (mergedSize.value !== undefined) {
+            return mergedSize.value
+          }
+        }
+        return props.size
+      }
+    })
+    const { mergedSizeRef } = formItem
+
     const themeRef = useTheme(
       'Input',
       '-input-group-label',
@@ -39,7 +53,7 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const cssVarsRef = computed(() => {
-      const { size } = props
+      const { value: size } = mergedSizeRef
       const {
         common: { cubicBezierEaseInOut },
         self: {
@@ -66,7 +80,10 @@ export default defineComponent({
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
         'input-group-label',
-        computed(() => props.size[0]),
+        computed(() => {
+          const { value: size } = mergedSizeRef
+          return size[0]
+        }),
         cssVarsRef,
         props
       )
@@ -74,6 +91,7 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
+      mergedSize: mergedSizeRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender

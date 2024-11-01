@@ -7,6 +7,7 @@
 ### Fixes
 
 - Fix `n-time-picker`'s `use-12-hours` type error warning, closes [#4308](https://github.com/tusen-ai/naive-ui/issues/4308)
+- Fix `n-input-group-label` component is not affected by the `size` attribute of the `n-form` component, closes [#6504](https://github.com/tusen-ai/naive-ui/issues/6504)
 
 ### Features
 
