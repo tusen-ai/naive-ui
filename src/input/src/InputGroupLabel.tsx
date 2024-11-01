@@ -10,10 +10,7 @@ import type { Size } from './interface'
 
 export const inputGroupLabelProps = {
   ...(useTheme.props as ThemeProps<InputTheme>),
-  size: {
-    type: String as PropType<Size>,
-    default: 'medium'
-  },
+  size: String as PropType<Size>,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -33,13 +30,16 @@ export default defineComponent({
 
     const formItem = useFormItem(props, {
       mergedSize(NFormItem) {
+        const { size } = props
+        if (size !== undefined)
+          return size
         if (NFormItem) {
           const { mergedSize } = NFormItem
           if (mergedSize.value !== undefined) {
             return mergedSize.value
           }
         }
-        return props.size
+        return 'medium'
       }
     })
     const { mergedSizeRef } = formItem
