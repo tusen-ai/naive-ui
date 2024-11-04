@@ -739,8 +739,10 @@ export default defineComponent({
     }
     function handleSlideResize(): void {
       if (autoSlideSizeRef.value) {
-        slideSizesRef.effect.scheduler?.()
-        slideSizesRef.effect.run()
+        // slideSizesRef.effect.scheduler?.()
+        // slideSizesRef.effect.run()
+        ;(slideSizesRef.effect as any).scheduler?.()
+        ;(slideSizesRef.effect as any).run()
       }
     }
     function handleMouseenter(): void {

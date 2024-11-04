@@ -55,15 +55,15 @@ export const mentionProps = {
       (pattern: string, option: MentionOption) => boolean
     >,
     default: (pattern: string, option: MentionOption) => {
-      if (!pattern)
-        return true
-      if (typeof option.label === 'string') {
-        return option.label.startsWith(pattern)
-      }
-      if (typeof option.value === 'string') {
-        return option.value.startsWith(pattern)
-      }
-      return false
+      if (!pattern) return true;
+      const lowerCasePattern = pattern.toLowerCase();
+
+      // Match both label and value, if they are strings
+      const matchesLabel = typeof option.label === 'string' && option.label.toLowerCase().startsWith(lowerCasePattern);
+      const matchesValue = typeof option.value === 'string' && option.value.toLowerCase().startsWith(lowerCasePattern);
+
+      // Return true if either matches
+      return matchesLabel || matchesValue;
     }
   },
   type: {
