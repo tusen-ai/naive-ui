@@ -7,6 +7,7 @@
 ### Fixes
 
 - `n-time-picker` 的 `use-12-hours` 类型错误警告，关闭 [#4308](https://github.com/tusen-ai/naive-ui/issues/4308)
+- 修复 `n-date-picker` 禁用的日期还可以触发的问题，关闭 [#6503](https://github.com/tusen-ai/naive-ui/issues/6503)
 
 ### Features
 

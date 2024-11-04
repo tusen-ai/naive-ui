@@ -423,6 +423,8 @@ function useDualCalendar(
   }
   // for daterange & datetimerange
   function handleDateClick(dateItem: DateItem): void {
+    if (mergedIsDateDisabled(dateItem.ts))
+      return
     if (!isSelectingRef.value) {
       isSelectingRef.value = true
       memorizedStartDateTimeRef.value = dateItem.ts

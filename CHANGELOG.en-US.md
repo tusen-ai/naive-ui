@@ -7,6 +7,7 @@
 ### Fixes
 
 - Fix `n-time-picker`'s `use-12-hours` type error warning, closes [#4308](https://github.com/tusen-ai/naive-ui/issues/4308)
+- Fix the problem that the disabled dates in the `n-date-picker` can still be triggered, closes [#6503](https://github.com/tusen-ai/naive-ui/issues/6503)
 
 ### Features
 
