@@ -16,6 +16,7 @@
 - `n-progress` 的 `color` 属性支持渐变色配置
 - `n-select` 新增 `font-weight` 主题变量
 - `n-input` 新增 `font-weight` 主题变量
+- `n-upload` `on-before-upload` 支持返回附件，方便对图片类型附件进行压缩处理
 
 ## 2.40.1
 
