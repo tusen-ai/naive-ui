@@ -28,6 +28,7 @@ icon.vue
 | checked | `boolean` | `false` | Whether the tag is checked. Note: used with `checkable`. |  |
 | closable | `boolean` | `false` | Whether the tag shows a close button. |  |
 | color | `{ color?: string, borderColor?: string, textColor?: string }` | `undefined` | Color of the tag. Note: this will override the type property's color. |  |
+| content-style | `string \| Object` | `undefined` | Content style of the tag. | NEXT-VERSION |
 | disabled | `boolean` | `false` | Whether the tag is disabled. |  |
 | round | `boolean` | `false` | Whether the tag has rounded corners. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the tag. |  |
