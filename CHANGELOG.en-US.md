@@ -19,6 +19,7 @@
 - Fix `n-time-picker`'s `use-12-hours` type error warning, closes [#4308](https://github.com/tusen-ai/naive-ui/issues/4308)
 - Fix `input-number` the problem that the negative sign is replaced when the negative sign is entered.
 - Fix `n-data-table`'s header will show scrollbar in some old browsers, closes [#6557](https://github.com/tusen-ai/naive-ui/issues/6557).
+- Fix `n-transfer`'s `target-filter-placeholder` prop not working, closes [#6537](https://github.com/tusen-ai/naive-ui/issues/6537)
 
 ### Features
 
