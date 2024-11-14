@@ -16,6 +16,7 @@
 - `n-progress`'s `color` prop supports gradient config.
 - `n-select` adds `font-weight` theme variable
 - `n-input` adds `font-weight` theme variable
+- `n-upload` `on-before-upload` return file, It can be compressed when the attachment is a picture
 
 ## 2.40.1
 
