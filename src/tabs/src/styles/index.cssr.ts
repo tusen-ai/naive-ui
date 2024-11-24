@@ -234,6 +234,7 @@ export default cB('tabs', `
       c('&::-webkit-scrollbar, &::-webkit-scrollbar-track-piece, &::-webkit-scrollbar-thumb', `
         width: 0;
         height: 0;
+        display: none;
       `)
     ]),
     c('&::before, &::after', `

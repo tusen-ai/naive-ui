@@ -514,6 +514,7 @@ export default c([
       scrollbar-width: none;
     `, [
       c('&::-webkit-scrollbar, &::-webkit-scrollbar-track-piece, &::-webkit-scrollbar-thumb', `
+        display: none;
         width: 0;
         height: 0;
       `)
