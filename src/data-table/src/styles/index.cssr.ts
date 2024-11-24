@@ -513,7 +513,7 @@ export default c([
       transition: border-color .3s var(--n-bezier);
       scrollbar-width: none;
     `, [
-      c('&::-webkit-scrollbar', `
+      c('&::-webkit-scrollbar, &::-webkit-scrollbar-track-piece, &::-webkit-scrollbar-thumb', `
         width: 0;
         height: 0;
       `)
