@@ -22,6 +22,10 @@ export default defineComponent({
       type: Boolean,
       required: true
     },
+    monthYearSeparator: {
+      type: String,
+      required: true
+    },
     calendarMonth: {
       type: String,
       required: true
@@ -98,6 +102,9 @@ export default defineComponent({
                                 ref="monthPanelRef"
                                 onUpdateValue={this.onUpdateValue}
                                 actions={[]}
+                                calendarHeaderMonthYearSeparator={
+                                  this.monthYearSeparator
+                                }
                                 // month and year click show month type
                                 type="month"
                                 key="month"

@@ -131,6 +131,10 @@ function useDualCalendar(
     () => props.dateFormat || localeRef.value.dateFormat
   )
 
+  const mergedDayFormatRef = computed(
+    () => props.calendarDayFormat || localeRef.value.dayFormat
+  )
+
   const startDateInput = ref(
     Array.isArray(value)
       ? format(
@@ -177,7 +181,7 @@ function useDualCalendar(
       const { ts } = dateItem
       return format(
         ts,
-        localeRef.value.dayFormat,
+        mergedDayFormatRef.value,
         panelCommon.dateFnsOptions.value
       )
     })
@@ -185,28 +189,28 @@ function useDualCalendar(
   const startCalendarMonthRef = computed(() => {
     return format(
       startCalendarDateTimeRef.value,
-      localeRef.value.monthFormat,
+      props.calendarHeaderMonthFormat || localeRef.value.monthFormat,
       panelCommon.dateFnsOptions.value
     )
   })
   const endCalendarMonthRef = computed(() => {
     return format(
       endCalendarDateTimeRef.value,
-      localeRef.value.monthFormat,
+      props.calendarHeaderMonthFormat || localeRef.value.monthFormat,
       panelCommon.dateFnsOptions.value
     )
   })
   const startCalendarYearRef = computed(() => {
     return format(
       startCalendarDateTimeRef.value,
-      localeRef.value.yearFormat,
+      props.calendarHeaderYearFormat || localeRef.value.yearFormat,
       panelCommon.dateFnsOptions.value
     )
   })
   const endCalendarYearRef = computed(() => {
     return format(
       endCalendarDateTimeRef.value,
-      localeRef.value.yearFormat,
+      props.calendarHeaderYearFormat || localeRef.value.yearFormat,
       panelCommon.dateFnsOptions.value
     )
   })
@@ -269,6 +273,11 @@ function useDualCalendar(
     return monthArray(endValue ?? Date.now(), endValue, nowRef.value, {
       monthFormat: monthFormatRef.value
     })
+  })
+  const calendarMonthBeforeYearRef = computed(() => {
+    return (
+      props.calendarHeaderMonthBeforeYear ?? localeRef.value.monthBeforeYear
+    )
   })
   watch(
     computed(() => props.value),
@@ -892,6 +901,7 @@ function useDualCalendar(
     mergedIsDateDisabled,
     changeStartEndTime,
     ranges: rangesRef,
+    calendarMonthBeforeYear: calendarMonthBeforeYearRef,
     startCalendarMonth: startCalendarMonthRef,
     startCalendarYear: startCalendarYearRef,
     endCalendarMonth: endCalendarMonthRef,

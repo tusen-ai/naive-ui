@@ -22,6 +22,14 @@ const TIME_FORMAT = 'HH:mm:ss'
 const usePanelCommonProps = {
   active: Boolean,
   dateFormat: String,
+  calendarDayFormat: String,
+  calendarHeaderYearFormat: String,
+  calendarHeaderMonthFormat: String,
+  calendarHeaderMonthYearSeparator: { type: String, required: true },
+  calendarHeaderMonthBeforeYear: {
+    type: Boolean,
+    default: undefined
+  },
   timerPickerFormat: {
     type: String,
     value: TIME_FORMAT

@@ -66,7 +66,8 @@ export default defineComponent({
               {resolveSlot($slots['prev-month'], () => [<BackwardIcon />])}
             </div>
             <PanelHeader
-              monthBeforeYear={this.locale.monthBeforeYear}
+              monthYearSeparator={this.calendarHeaderMonthYearSeparator}
+              monthBeforeYear={this.calendarMonthBeforeYear}
               value={this.startCalendarDateTime}
               onUpdateValue={this.onUpdateStartCalendarValue}
               mergedClsPrefix={mergedClsPrefix}
@@ -156,7 +157,8 @@ export default defineComponent({
               {resolveSlot($slots['prev-month'], () => [<BackwardIcon />])}
             </div>
             <PanelHeader
-              monthBeforeYear={this.locale.monthBeforeYear}
+              monthYearSeparator={this.calendarHeaderMonthYearSeparator}
+              monthBeforeYear={this.calendarMonthBeforeYear}
               value={this.endCalendarDateTime}
               onUpdateValue={this.onUpdateEndCalendarValue}
               mergedClsPrefix={mergedClsPrefix}

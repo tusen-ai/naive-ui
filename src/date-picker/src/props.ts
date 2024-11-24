@@ -30,6 +30,17 @@ export const datePickerProps = {
   },
   clearable: Boolean,
   updateValueOnClose: Boolean,
+  calendarDayFormat: String,
+  calendarHeaderYearFormat: String,
+  calendarHeaderMonthFormat: String,
+  calendarHeaderMonthYearSeparator: {
+    type: String,
+    default: ' '
+  },
+  calendarHeaderMonthBeforeYear: {
+    type: Boolean,
+    default: undefined
+  },
   defaultValue: [Number, Array] as PropType<Value | null>,
   defaultFormattedValue: [String, Array] as PropType<FormattedValue | null>,
   defaultTime: [Number, String, Array] as PropType<DefaultTime>,

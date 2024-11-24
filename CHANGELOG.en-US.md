@@ -12,8 +12,13 @@
 ### Features
 
 - 🌟 Adds `n-marquee` component.
-- `n-image` adds `error` slot, closes [#5649](https://github.com/tusen-ai/naive-ui/issues/5649)
+- `n-image` adds `error` slot, closes [#5649](https://github.com/tusen-ai/naive-ui/issues/5649).
 - `n-date-picker` adds `date-format` prop.
+- `n-date-picker` adds `calendar-day-format` prop.
+- `n-date-picker` adds `calendar-header-year-format` prop.
+- `n-date-picker` adds `calendar-header-month-format` prop.
+- `n-date-picker` adds `calendar-header-month-before-year` prop.
+- `n-date-picker` adds `calendar-header-month-year-separator` prop.
 - `n-progress`'s `color` prop supports gradient config.
 - `n-select` adds `font-weight` theme variable
 - `n-input` adds `font-weight` theme variable

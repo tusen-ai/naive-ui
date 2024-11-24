@@ -93,6 +93,9 @@ function useCalendar(
   const mergedDateFormatRef = computed(
     () => props.dateFormat || localeRef.value.dateFormat
   )
+  const mergedDayFormatRef = computed(
+    () => props.calendarDayFormat || localeRef.value.dayFormat
+  )
   const dateInputValueRef = ref(
     props.value === null || Array.isArray(props.value)
       ? ''
@@ -155,7 +158,7 @@ function useCalendar(
       const { ts } = dateItem
       return format(
         ts,
-        localeRef.value.dayFormat,
+        mergedDayFormatRef.value,
         panelCommon.dateFnsOptions.value
       )
     })
@@ -163,15 +166,20 @@ function useCalendar(
   const calendarMonthRef = computed(() => {
     return format(
       calendarValueRef.value,
-      localeRef.value.monthFormat,
+      props.calendarHeaderMonthFormat || localeRef.value.monthFormat,
       panelCommon.dateFnsOptions.value
     )
   })
   const calendarYearRef = computed(() => {
     return format(
       calendarValueRef.value,
-      localeRef.value.yearFormat,
+      props.calendarHeaderYearFormat || localeRef.value.yearFormat,
       panelCommon.dateFnsOptions.value
+    )
+  })
+  const calendarMonthBeforeYearRef = computed(() => {
+    return (
+      props.calendarHeaderMonthBeforeYear ?? localeRef.value.monthBeforeYear
     )
   })
   watch(calendarValueRef, (value, oldValue) => {
@@ -541,6 +549,7 @@ function useCalendar(
     calendarYear: calendarYearRef,
     calendarMonth: calendarMonthRef,
     weekdays: weekdaysRef,
+    calendarMonthBeforeYear: calendarMonthBeforeYearRef,
     mergedIsDateDisabled,
     nextYear,
     prevYear,

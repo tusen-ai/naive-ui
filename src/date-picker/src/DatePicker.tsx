@@ -963,7 +963,12 @@ export default defineComponent({
       onNextYear: this.onNextYear,
       onPrevYear: this.onPrevYear,
       timerPickerFormat: this.timerPickerFormat,
-      dateFormat: this.dateFormat
+      dateFormat: this.dateFormat,
+      calendarDayFormat: this.calendarDayFormat,
+      calendarHeaderYearFormat: this.calendarHeaderYearFormat,
+      calendarHeaderMonthFormat: this.calendarHeaderMonthFormat,
+      calendarHeaderMonthYearSeparator: this.calendarHeaderMonthYearSeparator,
+      calendarHeaderMonthBeforeYear: this.calendarHeaderMonthBeforeYear
     }
     const renderPanel = (): VNode => {
       const { type } = this

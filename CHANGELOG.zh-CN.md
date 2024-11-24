@@ -14,6 +14,11 @@
 - 🌟 新增 `n-marquee` 组件
 - `n-image` 新增 `error` 插槽，关闭 [#5649](https://github.com/tusen-ai/naive-ui/issues/5649)
 - `n-date-picker` 新增 `date-format` 属性
+- `n-date-picker` 新增 `calendar-day-format` 属性
+- `n-date-picker` 新增 `calendar-header-year-format` 属性
+- `n-date-picker` 新增 `calendar-header-month-format` 属性
+- `n-date-picker` 新增 `calendar-header-month-before-year` 属性
+- `n-date-picker` 新增 `calendar-header-month-year-separator` 属性
 - `n-progress` 的 `color` 属性支持渐变色配置
 - `n-select` 新增 `font-weight` 主题变量
 - `n-input` 新增 `font-weight` 主题变量

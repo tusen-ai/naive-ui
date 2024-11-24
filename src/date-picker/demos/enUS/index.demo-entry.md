@@ -39,6 +39,11 @@ panel.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| calendar-day-format | `string` | `undefined` | Weekday format inside popup panel. | NEXT_VERSION |
+| calendar-header-year-format | `string` | `undefined` | Year format inside the header of popup panel's calendar. | NEXT_VERSION |
+| calendar-header-month-format | `string` | `undefined` | Month format inside the header of popup panel's calendar. | NEXT_VERSION |
+| calendar-header-month-before-year | `string` | `undefined` | Whether to show month before year inside the header of popup panel's calender. | NEXT_VERSION |
+| calendar-header-month-year-separator | `string` | `' '` | Separator between month and year inside the header of popup panel's calendar. | NEXT_VERSION |
 | clearable | `boolean` | `false` | Whether the date picker is clearable. |  |
 | date-format | `string` | `undefined` | Date input format inside popup panel. | NEXT_VERSION |
 | default-value | `number \| [number, number] \| null` | `undefined` | Date picker's default value. |  |
