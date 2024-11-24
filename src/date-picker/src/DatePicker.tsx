@@ -64,6 +64,7 @@ import MonthRangePanel from './panel/monthrange'
 import style from './styles/index.cssr'
 import type { DatePickerInst } from './public-types'
 import { datePickerProps } from './props'
+import type { UsePanelCommonProps } from './panel/use-panel-common'
 
 export type DatePickerSetupProps = ExtractPropTypes<typeof datePickerProps>
 
@@ -936,7 +937,10 @@ export default defineComponent({
   },
   render() {
     const { clearable, triggerOnRender, mergedClsPrefix, $slots } = this
-    const commonPanelProps = {
+    const commonPanelProps: UsePanelCommonProps & {
+      ref: string
+      style: CSSProperties
+    } = {
       onUpdateValue: this.handlePanelUpdateValue,
       onTabOut: this.handlePanelTabOut,
       onClose: this.handlePanelClose,
@@ -958,7 +962,8 @@ export default defineComponent({
       onPrevMonth: this.onPrevMonth,
       onNextYear: this.onNextYear,
       onPrevYear: this.onPrevYear,
-      timerPickerFormat: this.timerPickerFormat
+      timerPickerFormat: this.timerPickerFormat,
+      dateFormat: this.dateFormat
     }
     const renderPanel = (): VNode => {
       const { type } = this
@@ -990,8 +995,8 @@ export default defineComponent({
       ) : type === 'month' || type === 'year' || type === 'quarter' ? (
         <MonthPanel {...commonPanelProps} type={type} key={type} />
       ) : type === 'monthrange'
-      || type === 'yearrange'
-      || type === 'quarterrange' ? (
+        || type === 'yearrange'
+        || type === 'quarterrange' ? (
             <MonthRangePanel {...commonPanelProps} type={type} />
           ) : (
             <DatePanel

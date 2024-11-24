@@ -590,6 +590,10 @@ export const enComponentRoutes = [
     path: 'highlight',
     component: () =>
       import('../../src/highlight/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'marquee',
+    component: () => import('../../src/marquee/demos/enUS/index.demo-entry.md')
   }
 ]
 
@@ -999,6 +1003,10 @@ export const zhComponentRoutes = [
     path: 'highlight',
     component: () =>
       import('../../src/highlight/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'marquee',
+    component: () => import('../../src/marquee/demos/zhCN/index.demo-entry.md')
   }
 ]
 

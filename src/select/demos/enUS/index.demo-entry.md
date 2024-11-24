@@ -54,6 +54,7 @@ custom-field.vue
 | loading | `boolean` | `false` | Whether to show a loading state. |  |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Maximum selected values to display while in `multiple` mode. `responsive` will keep all the tags in single line. |  |
 | menu-props | `HTMLAttributes` | `undefined` | The menu's dom props. |  |
+| menu-size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | Size of select menu. | 2.40.0 |
 | multiple | `boolean` | `false` | Whether to allow selecting multiple values. |  |
 | node-props | `(option: SelectOption \| SelectGroupOption) => object` | `undefined` | Option's DOM attrs generator. | 2.32.2 |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` | Options that can be selected. For more details see SelectOption Properties (below). |  |

@@ -65,6 +65,7 @@ create-debug.vue
 | loading | `boolean` | `false` | 是否为加载状态 |  |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |  |
 | menu-props | `HTMLAttributes` | `undefined` | 菜单的 DOM 属性 |  |
+| menu-size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 菜单的尺寸 | 2.40.0 |
 | multiple | `boolean` | `false` | 是否为多选 |  |
 | node-props | `(option: SelectOption \| SelectGroupOption) => object` | `undefined` | 选项的 DOM 属性生成函数 | 2.32.2 |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` | 配置选项内容，详情见 SelectOption Properties |  |

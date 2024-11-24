@@ -1,7 +1,5 @@
 <markdown>
 # Simple Editable Table
-
-Simple, but practical.
 </markdown>
 
 <script lang="ts">

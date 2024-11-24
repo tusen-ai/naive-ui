@@ -248,7 +248,7 @@ export default defineComponent({
             }}
           </NBaseLoading>
         ) : this.checkStrategy === 'child'
-        && !(this.multiple && this.cascade) ? (
+          && !(this.multiple && this.cascade) ? (
               <Transition name="fade-in-scale-up-transition">
                 {{
                   default: () =>
@@ -282,7 +282,7 @@ export default defineComponent({
           `${mergedClsPrefix}-cascader-option`,
           this.keyboardPending
           || (this.hoverPending
-          && `${mergedClsPrefix}-cascader-option--pending`),
+            && `${mergedClsPrefix}-cascader-option--pending`),
           this.disabled && `${mergedClsPrefix}-cascader-option--disabled`,
           this.showCheckbox && `${mergedClsPrefix}-cascader-option--show-prefix`
         ]}

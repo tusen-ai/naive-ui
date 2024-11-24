@@ -200,7 +200,8 @@ export default defineComponent({
                 ? resolveSlotWithProps(
                   this.$slots.clear,
                     {
-                      onClear: this.clearSelectedDateTime
+                      onClear: this.clearSelectedDateTime,
+                      text: this.locale.clear
                     } satisfies DatePickerClearSlotProps,
                     () => [
                       <NButton
@@ -218,7 +219,8 @@ export default defineComponent({
                 ? resolveSlotWithProps(
                   $slots.now,
                     {
-                      onNow: this.handleNowClick
+                      onNow: this.handleNowClick,
+                      text: this.locale.now
                     } satisfies DatePickerNowSlotProps,
                     () => [
                       <NButton
@@ -237,7 +239,8 @@ export default defineComponent({
                   $slots.confirm,
                     {
                       onConfirm: this.handleConfirmClick,
-                      disabled: this.isDateInvalid
+                      disabled: this.isDateInvalid,
+                      text: this.locale.confirm
                     } satisfies DatePickerConfirmSlotProps,
                     () => [
                       <NButton

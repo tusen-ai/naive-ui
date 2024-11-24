@@ -279,10 +279,10 @@ export default defineComponent({
     function handleClickOutside(e: MouseEvent): void {
       if (
         (props.trigger === 'click'
-        && !getTriggerElement().contains(
-          getPreciseEventTarget(e) as Node | null
-        ))
-        || props.onClickoutside
+          && !getTriggerElement().contains(
+            getPreciseEventTarget(e) as Node | null
+          ))
+          || props.onClickoutside
       ) {
         NPopover.handleClickOutside(e)
       }
@@ -373,8 +373,8 @@ export default defineComponent({
                 hasHeaderOrFooter
                   ? undefined
                   : `${mergedClsPrefix}-popover__content ${
-                      props.contentClass ?? ''
-                    }`
+                    props.contentClass ?? ''
+                  }`
               }
               contentStyle={hasHeaderOrFooter ? undefined : props.contentStyle}
             >

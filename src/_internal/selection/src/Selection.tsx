@@ -424,6 +424,7 @@ export default defineComponent({
       const {
         common: { cubicBezierEaseInOut },
         self: {
+          fontWeight,
           borderRadius,
           color,
           placeholderColor,
@@ -533,7 +534,9 @@ export default defineComponent({
         '--n-clear-color-hover': clearColorHover,
         '--n-clear-color-pressed': clearColorPressed,
         // arrow-size
-        '--n-arrow-size': arrowSize
+        '--n-arrow-size': arrowSize,
+        // font-weight
+        '--n-font-weight': fontWeight
       }
     })
     const themeClassHandle = inlineThemeDisabled

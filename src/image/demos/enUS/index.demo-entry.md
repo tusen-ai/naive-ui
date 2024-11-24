@@ -8,6 +8,7 @@ Preview it.
 basic.vue
 group.vue
 error.vue
+custom-error.vue
 preview-disabled.vue
 custom-toolbar.vue
 custom.vue
@@ -56,6 +57,7 @@ previewed-img-props.vue
 | Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
 | placeholder | `()` | Placeholder shown when image is not loaded. | 2.30.5 |
+| error | `()` | The content when the image fails to load. | NEXT_VERSION |
 
 ### ImageGroup Slots
 

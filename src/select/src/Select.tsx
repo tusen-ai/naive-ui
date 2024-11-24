@@ -107,6 +107,9 @@ export const selectProps = {
   menuProps: Object as PropType<HTMLAttributes>,
   multiple: Boolean,
   size: String as PropType<Size>,
+  menuSize: {
+    type: String as PropType<Size>
+  },
   filterable: Boolean,
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
@@ -1040,7 +1043,7 @@ export default defineComponent({
                               }
                               treeMate={this.treeMate}
                               multiple={this.multiple}
-                              size={this.size}
+                              size={this.menuSize}
                               renderOption={this.renderOption}
                               renderLabel={this.renderLabel}
                               value={this.mergedValue}

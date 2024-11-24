@@ -61,10 +61,10 @@ export default (level: '1' | '2' | '3' | '4' | '5' | '6') =>
       })
       const themeClassHandle = inlineThemeDisabled
         ? useThemeClass(
-            `h${level}`,
-            computed(() => props.type[0]),
-            cssVarsRef,
-            props
+          `h${level}`,
+          computed(() => props.type[0]),
+          cssVarsRef,
+          props
         )
         : undefined
       return {

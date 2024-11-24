@@ -87,6 +87,7 @@ import { watermarkLight } from '../watermark/styles'
 import { splitLight } from '../split/styles'
 import { flexLight } from '../flex/styles'
 import { floatButtonGroupLight } from '../float-button-group/styles'
+import { marqueeLight } from '../marquee/styles'
 import type { BuiltInGlobalTheme } from './interface'
 
 export const lightTheme: BuiltInGlobalTheme = {
@@ -177,5 +178,6 @@ export const lightTheme: BuiltInGlobalTheme = {
   Watermark: watermarkLight,
   Split: splitLight,
   FloatButton: floatButtonLight,
-  FloatButtonGroup: floatButtonGroupLight
+  FloatButtonGroup: floatButtonGroupLight,
+  Marquee: marqueeLight
 }

@@ -305,7 +305,8 @@ export default defineComponent({
                 ? resolveSlotWithProps(
                   this.$slots.clear,
                     {
-                      onClear: this.handleClearClick
+                      onClear: this.handleClearClick,
+                      text: this.locale.clear
                     } satisfies DatePickerClearSlotProps,
                     () => [
                       <NxButton
@@ -324,7 +325,8 @@ export default defineComponent({
                   this.$slots.confirm,
                     {
                       disabled: this.isRangeInvalid,
-                      onConfirm: this.handleConfirmClick
+                      onConfirm: this.handleConfirmClick,
+                      text: this.locale.confirm
                     } satisfies DatePickerConfirmSlotProps,
                     () => [
                       <NxButton

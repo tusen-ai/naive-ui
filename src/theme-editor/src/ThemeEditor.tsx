@@ -102,7 +102,7 @@ export default defineComponent({
           continue
         }
         ;(overrides as any)[key] = (mergedTheme[key]?.self?.(common)
-        || lightTheme[key].self?.(common)) as any
+          || lightTheme[key].self?.(common)) as any
         // There (last line) we must use as any, nor ts 2590 will be raised since the union
         // is too complex
         if (mergedThemeOverrides && (overrides as any)[key]) {

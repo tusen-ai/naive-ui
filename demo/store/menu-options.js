@@ -664,6 +664,13 @@ export function createComponentMenuOptions({ lang, theme }) {
           path: '/drawer'
         },
         {
+          en: 'Marquee',
+          zh: '跑马灯',
+          enSuffix: true,
+          path: '/marquee',
+          isNew: true
+        },
+        {
           en: 'Message',
           zh: '信息',
           enSuffix: true,
