@@ -16,8 +16,7 @@ export function parse(value: string): number | null {
 // allow negative sign
 export function isWipValue(value: string): boolean {
   return (
-    value === '-'
-    || (value.includes('.') && /^-?\d*\.?\d*$/.test(value))
+    (value.includes('.') && /^-?\d*\.?\d*$/.test(value))
     || /^-?\d*$/.test(value)
   )
 }
