@@ -7,6 +7,7 @@
 ### Fixes
 
 - `n-time-picker` 的 `use-12-hours` 类型错误警告，关闭 [#4308](https://github.com/tusen-ai/naive-ui/issues/4308)
+- 修复 `input-number` 存在负号时被替换的问题
 
 ### Features
 

@@ -13,10 +13,12 @@ export function parse(value: string): number | null {
 
 // can be parsed to number but shouldn't be applied when inputing
 // when value includes `.`, ending with 0 and`.`, doesn't update, if 0 parse func will remove 0
+// allow negative sign
 export function isWipValue(value: string): boolean {
   return (
-    value.includes('.')
-    && (/^(-)?\d+.*(\.|0)$/.test(value) || /^\.\d+$/.test(value))
+    value === '-'
+    || (value.includes('.') && /^-?\d*\.?\d*$/.test(value))
+    || /^-?\d*$/.test(value)
   )
 }
 
