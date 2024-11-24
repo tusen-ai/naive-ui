@@ -542,14 +542,14 @@ export default defineComponent({
             fullPath:
               entry?.fullPath ?? `/${file.webkitRelativePath || file.name}`
           }
-          if (
-            !onBeforeUpload
-            || (await onBeforeUpload({
-              file: fileInfo,
-              fileList: mergedFileListRef.value
-            })) !== false
-          ) {
+          if (!onBeforeUpload) {
             return fileInfo
+          }
+          else {
+            const tmp: any = await onBeforeUpload({ file: fileInfo, fileList: mergedFileListRef.value })
+            if (tmp !== false) {
+              return tmp
+            }
           }
           return null
         })
