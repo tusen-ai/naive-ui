@@ -22,3 +22,4 @@ export type {
   FilterState as DataTableFilterState,
   SortState as DataTableSortState
 } from './src/interface'
+export * from './src/publicTypes'

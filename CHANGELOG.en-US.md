@@ -23,6 +23,7 @@
 - `n-progress`'s `color` prop supports gradient config.
 - `n-select` adds `font-weight` theme variable
 - `n-input` adds `font-weight` theme variable
+- `n-data-table` adds `get-csv-header` and `get-csv-cell` props, closes [#6542](https://github.com/tusen-ai/naive-ui/issues/6542).
 
 ## 2.40.1
 

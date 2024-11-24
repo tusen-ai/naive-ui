@@ -21,6 +21,7 @@ import type { DataTableTheme } from '../styles'
 import type { BaseLoadingExposedProps } from '../../_internal'
 import type { PopoverProps } from '../../popover'
 import type { ColItem, RowItem } from './use-group-header'
+import type { DataTableGetCsvCell, DataTableGetCsvHeader } from './publicTypes'
 
 export const dataTableProps = {
   ...(useTheme.props as ThemeProps<DataTableTheme>),
@@ -129,6 +130,8 @@ export const dataTableProps = {
   >,
   renderExpandIcon: Function as PropType<RenderExpandIcon>,
   spinProps: { type: Object as PropType<BaseLoadingExposedProps>, default: {} },
+  getCsvCell: Function as PropType<DataTableGetCsvCell>,
+  getCsvHeader: Function as PropType<DataTableGetCsvHeader>,
   onLoad: Function as PropType<DataTableOnLoad>,
   'onUpdate:page': [Function, Array] as PropType<
     PaginationProps['onUpdate:page']

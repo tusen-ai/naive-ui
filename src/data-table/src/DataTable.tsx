@@ -137,7 +137,12 @@ export default defineComponent({
     const downloadCsv = (options?: CsvOptionsType): void => {
       const { fileName = 'data.csv', keepOriginalData = false } = options || {}
       const data = keepOriginalData ? props.data : rawPaginatedDataRef.value
-      const csvData = generateCsv(props.columns, data)
+      const csvData = generateCsv(
+        props.columns,
+        data,
+        props.getCsvCell,
+        props.getCsvHeader
+      )
       const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8' })
       const downloadUrl = URL.createObjectURL(blob)
       download(

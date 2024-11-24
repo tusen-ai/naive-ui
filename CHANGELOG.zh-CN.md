@@ -23,6 +23,7 @@
 - `n-progress` 的 `color` 属性支持渐变色配置
 - `n-select` 新增 `font-weight` 主题变量
 - `n-input` 新增 `font-weight` 主题变量
+- `n-data-table` 新增 `get-csv-header` 和 `get-csv-cell` 属性，关闭 [#6542](https://github.com/tusen-ai/naive-ui/issues/6542)
 
 ## 2.40.1
 
