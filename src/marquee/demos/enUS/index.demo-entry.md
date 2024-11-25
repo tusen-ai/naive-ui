@@ -2,7 +2,7 @@
 
 A trivia: There's a deprecated HTML Element called `marquee`.
 
-Available since `NEXT_VERSION`.
+Available since `2.40.1`.
 
 ## Demos
 
@@ -18,11 +18,11 @@ auto-fill.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| auto-fill | `boolean` | `false` | Whether to fill the blank of the container using its content repeatly. | NEXT_VERSION |
-| speed | `number` | `48` | The speed calculated as pixels/second. | NEXT_VERSION |
+| auto-fill | `boolean` | `false` | Whether to fill the blank of the container using its content repeatly. | 2.40.1 |
+| speed | `number` | `48` | The speed calculated as pixels/second. | 2.40.1 |
 
 ### Marquee Slots
 
-| Name    | Parameters | Description | Version      |
-| ------- | ---------- | ----------- | ------------ |
-| default | `()`       | Content.    | NEXT_VERSION |
+| Name    | Parameters | Description | Version |
+| ------- | ---------- | ----------- | ------- |
+| default | `()`       | Content.    | 2.40.1  |
