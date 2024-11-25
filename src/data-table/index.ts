@@ -2,6 +2,7 @@ export { default as NDataTable } from './src/DataTable'
 export { dataTableProps } from './src/interface'
 export type {
   DataTableProps,
+  RowData as DataTableRowData,
   RowKey as DataTableRowKey,
   RenderFilter as DataTableRenderFilter,
   RenderSorter as DataTableRenderSorter,

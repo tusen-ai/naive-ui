@@ -6,9 +6,7 @@ You can set mount target of loading by `to` prop.
 
 <script lang="ts">
 import { defineComponent, h, ref } from 'vue'
-import { NButton } from '../../../button'
-import { NSpace } from '../../../space'
-import { useLoadingBar } from '../../src/use-loading-bar'
+import { NButton, NSpace, useLoadingBar } from 'naive-ui'
 
 export default defineComponent({
   components: {

@@ -4,12 +4,12 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import type { Option } from '../../src/interface'
+import type { TransferOption } from 'naive-ui'
 
 export default defineComponent({
   setup() {
     const values = ref([1])
-    const options = ref<Option[]>([])
+    const options = ref<TransferOption[]>([])
     const getOptions = () => {
       setTimeout(() => {
         options.value = [
