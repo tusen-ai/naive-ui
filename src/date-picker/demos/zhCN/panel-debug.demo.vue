@@ -1,5 +1,5 @@
 <markdown>
-# 只使用面板
+# 只使用面板 Debug
 </markdown>
 
 <script lang="ts">
@@ -25,12 +25,44 @@ export default defineComponent({
 
 <template>
   <n-space vertical>
-    <n-date-picker panel type="date" @update:value="log" />
-    <n-date-picker panel type="datetime" @update:value="log" />
-    <n-date-picker panel type="daterange" @update:value="log" />
+    <n-date-picker
+      panel
+      type="date"
+      calendar-day-format="（eeeeee）"
+      calendar-header-month-before-year
+      calendar-header-year-format="（yyyy）"
+      calendar-header-month-format="（MM）"
+      calendar-header-month-year-separator="~"
+      @update:value="log"
+    />
+    <n-date-picker
+      panel
+      type="datetime"
+      calendar-day-format="（eeeeee）"
+      calendar-header-month-before-year
+      calendar-header-year-format="（yyyy）"
+      calendar-header-month-format="（MM）"
+      calendar-header-month-year-separator="~"
+      @update:value="log"
+    />
+    <n-date-picker
+      panel
+      type="daterange"
+      calendar-day-format="（eeeeee）"
+      calendar-header-month-before-year
+      calendar-header-year-format="（yyyy）"
+      calendar-header-month-format="（MM）"
+      calendar-header-month-year-separator="~"
+      @update:value="log"
+    />
     <n-date-picker
       panel
       type="datetimerange"
+      calendar-day-format="（eeeeee）"
+      calendar-header-month-before-year
+      calendar-header-year-format="（yyyy）"
+      calendar-header-month-format="（MM）"
+      calendar-header-month-year-separator="~"
       :default-time="['13:22:11', '16:00:00']"
       :shortcuts="rangeShortcuts"
       @update:value="log"

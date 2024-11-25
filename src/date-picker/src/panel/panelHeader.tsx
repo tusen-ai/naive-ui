@@ -84,8 +84,16 @@ export default defineComponent({
                       onClick={this.handleHeaderClick}
                     >
                       {this.monthBeforeYear
-                        ? [this.calendarMonth, ' ', this.calendarYear]
-                        : [this.calendarYear, ' ', this.calendarMonth]}
+                        ? [
+                            this.calendarMonth,
+                            this.monthYearSeparator,
+                            this.calendarYear
+                          ]
+                        : [
+                            this.calendarYear,
+                            this.monthYearSeparator,
+                            this.calendarMonth
+                          ]}
                     </div>
                   )
                 }}
