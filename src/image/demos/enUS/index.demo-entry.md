@@ -57,7 +57,7 @@ previewed-img-props.vue
 | Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
 | placeholder | `()` | Placeholder shown when image is not loaded. | 2.30.5 |
-| error | `()` | The content when the image fails to load. | NEXT_VERSION |
+| error | `()` | The content when the image fails to load. | 2.40.2 |
 
 ### ImageGroup Slots
 

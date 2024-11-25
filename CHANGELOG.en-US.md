@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.40.2
 
 `xxxx-xx-xx`
 
