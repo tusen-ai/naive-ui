@@ -11,7 +11,8 @@ const {
   DINGTALK_TOKEN_2,
   DINGTALK_TOKEN_3,
   DINGTALK_TOKEN_4,
-  DINGTALK_TOKEN_5
+  DINGTALK_TOKEN_5,
+  DINGTALK_TOKEN_6
 } = process.env
 
 
@@ -49,7 +50,8 @@ async function releaseChangelogToDingTalk() {
           DINGTALK_TOKEN_2,
           DINGTALK_TOKEN_3,
           DINGTALK_TOKEN_4,
-          DINGTALK_TOKEN_5
+          DINGTALK_TOKEN_5,
+          DINGTALK_TOKEN_6
         ]) {
           await request
             .post('https://oapi.dingtalk.com/robot/send')
