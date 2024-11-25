@@ -1,19 +1,19 @@
+import type { ImagePreviewInst } from './ImagePreview'
+import type { ImageRenderToolbar } from './public-types'
+import { createId } from 'seemly'
 import {
-  type Ref,
   defineComponent,
   getCurrentInstance,
   h,
   provide,
+  type Ref,
   ref,
   toRef
 } from 'vue'
-import { createId } from 'seemly'
-import { type ExtractPublicPropTypes, createInjectionKey } from '../../_utils'
 import { useConfig } from '../../_mixins'
+import { createInjectionKey, type ExtractPublicPropTypes } from '../../_utils'
 import NImagePreview from './ImagePreview'
-import type { ImagePreviewInst } from './ImagePreview'
 import { imagePreviewSharedProps } from './interface'
-import type { ImageRenderToolbar } from './public-types'
 
 export const imageGroupInjectionKey = createInjectionKey<
   ImagePreviewInst & {

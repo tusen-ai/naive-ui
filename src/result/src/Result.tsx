@@ -1,27 +1,27 @@
-import {
-  type CSSProperties,
-  type PropType,
-  computed,
-  defineComponent,
-  h
-} from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type { ResultTheme } from '../styles'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  h,
+  type PropType
+} from 'vue'
+import { NBaseIcon } from '../../_internal'
 import {
   ErrorIcon,
   InfoIcon,
   SuccessIcon,
   WarningIcon
 } from '../../_internal/icons'
-import { NBaseIcon } from '../../_internal'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { createKey } from '../../_utils'
 import { resultLight } from '../styles'
-import type { ResultTheme } from '../styles'
-import image404 from './404'
-import image500 from './500'
-import image418 from './418'
 import image403 from './403'
+import image404 from './404'
+import image418 from './418'
+import image500 from './500'
 import style from './styles/index.cssr'
 
 const iconRenderMap = {

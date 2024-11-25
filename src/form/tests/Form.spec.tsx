@@ -1,9 +1,9 @@
+import type { FormValidateCallback } from '../src/interface'
 /* eslint-disable unused-imports/no-unused-vars */
 import { mount } from '@vue/test-utils'
 import { defineComponent, h, ref } from 'vue'
 import { NInput } from '../../input'
 import { type FormInst, NForm, NFormItem } from '../index'
-import type { FormValidateCallback } from '../src/interface'
 
 describe('n-form', () => {
   it('should work with import on demand', () => {

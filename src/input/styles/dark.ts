@@ -1,7 +1,7 @@
+import type { InputTheme } from './light'
 import { changeColor } from 'seemly'
 import { commonDark } from '../../_styles/common'
 import commonVariables from './_common'
-import type { InputTheme } from './light'
 
 const inputDark: InputTheme = {
   name: 'Input',

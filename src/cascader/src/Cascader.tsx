@@ -1,59 +1,10 @@
-import {
-  type CSSProperties,
-  type HTMLAttributes,
-  type PropType,
-  type VNode,
-  type VNodeChild,
-  computed,
-  defineComponent,
-  h,
-  isReactive,
-  nextTick,
-  provide,
-  ref,
-  toRef,
-  watch,
-  watchEffect
-} from 'vue'
-import {
-  type CheckStrategy,
-  SubtreeNotLoadedError,
-  createTreeMate
-} from 'treemate'
-import {
-  type FollowerInst,
-  type FollowerPlacement,
-  VBinder,
-  VFollower,
-  VTarget
-} from 'vueuc'
-import { changeColor, depx, getPreciseEventTarget, happensIn } from 'seemly'
-import { useIsMounted, useMergedState } from 'vooks'
-import type { FormValidationStatus } from '../../form/src/interface'
-import type { SelectBaseOption } from '../../select/src/interface'
-import { NInternalSelection } from '../../_internal'
 import type { InternalSelectionInst } from '../../_internal'
-import {
-  useConfig,
-  useFormItem,
-  useLocale,
-  useTheme,
-  useThemeClass
-} from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import {
-  call,
-  markEventEffectPerformed,
-  useAdjustedTo,
-  warnOnce
-} from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { cascaderLight } from '../styles'
-import type { CascaderTheme } from '../styles'
+import type { FormValidationStatus } from '../../form/src/interface'
 import type { PopoverProps } from '../../popover'
-import { getPathLabel, getRawNodePath } from './utils'
-import CascaderMenu from './CascaderMenu'
-import CascaderSelectMenu from './CascaderSelectMenu'
+import type { SelectBaseOption } from '../../select/src/interface'
+import type { CascaderTheme } from '../styles'
 import type {
   CascaderInst,
   CascaderMenuInstance,
@@ -67,8 +18,57 @@ import type {
   SelectMenuInstance,
   Value
 } from './interface'
+import { changeColor, depx, getPreciseEventTarget, happensIn } from 'seemly'
+import {
+  type CheckStrategy,
+  createTreeMate,
+  SubtreeNotLoadedError
+} from 'treemate'
+import { useIsMounted, useMergedState } from 'vooks'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  h,
+  type HTMLAttributes,
+  isReactive,
+  nextTick,
+  type PropType,
+  provide,
+  ref,
+  toRef,
+  type VNode,
+  type VNodeChild,
+  watch,
+  watchEffect
+} from 'vue'
+import {
+  type FollowerInst,
+  type FollowerPlacement,
+  VBinder,
+  VFollower,
+  VTarget
+} from 'vueuc'
+import { NInternalSelection } from '../../_internal'
+import {
+  useConfig,
+  useFormItem,
+  useLocale,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
+import {
+  call,
+  markEventEffectPerformed,
+  useAdjustedTo,
+  warnOnce
+} from '../../_utils'
+import { cascaderLight } from '../styles'
+import CascaderMenu from './CascaderMenu'
+import CascaderSelectMenu from './CascaderSelectMenu'
 import { cascaderInjectionKey } from './interface'
 import style from './styles/index.cssr'
+import { getPathLabel, getRawNodePath } from './utils'
 
 export const cascaderProps = {
   ...(useTheme.props as ThemeProps<CascaderTheme>),

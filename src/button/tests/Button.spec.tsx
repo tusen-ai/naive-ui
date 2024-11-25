@@ -1,8 +1,8 @@
-import { h } from 'vue'
-import { mount } from '@vue/test-utils'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
-import { NButton, NxButton } from '../index'
+import { mount } from '@vue/test-utils'
+import { h } from 'vue'
 import { NIcon } from '../../icon'
+import { NButton, NxButton } from '../index'
 
 describe('n-button', () => {
   it('should work with import on demand', () => {

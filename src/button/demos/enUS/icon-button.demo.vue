@@ -5,8 +5,8 @@ Sometimes you may want to use an icon as a button and customize its size. You ca
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   components: {

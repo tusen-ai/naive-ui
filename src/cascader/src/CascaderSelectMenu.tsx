@@ -1,28 +1,8 @@
-import {
-  type PropType,
-  Transition,
-  computed,
-  defineComponent,
-  h,
-  inject,
-  ref,
-  withDirectives
-} from 'vue'
-import { clickoutside } from 'vdirs'
-import { type TreeNode, createTreeMate } from 'treemate'
 import type {
   SelectBaseOption,
   SelectGroupOption,
   SelectIgnoredOption
 } from '../../select/src/interface'
-import { createTmOptions } from '../../select/src/utils'
-import {
-  type InternalSelectMenuRef,
-  NInternalSelectMenu
-} from '../../_internal'
-import { resolveSlot } from '../../_utils'
-import { createSelectOptions } from './utils'
-import { cascaderInjectionKey } from './interface'
 import type {
   CascaderOption,
   Filter,
@@ -30,6 +10,26 @@ import type {
   TmNode,
   Value
 } from './interface'
+import { createTreeMate, type TreeNode } from 'treemate'
+import { clickoutside } from 'vdirs'
+import {
+  computed,
+  defineComponent,
+  h,
+  inject,
+  type PropType,
+  ref,
+  Transition,
+  withDirectives
+} from 'vue'
+import {
+  type InternalSelectMenuRef,
+  NInternalSelectMenu
+} from '../../_internal'
+import { resolveSlot } from '../../_utils'
+import { createTmOptions } from '../../select/src/utils'
+import { cascaderInjectionKey } from './interface'
+import { createSelectOptions } from './utils'
 
 export default defineComponent({
   name: 'NCascaderSelectMenu',

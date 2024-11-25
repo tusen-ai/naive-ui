@@ -1,5 +1,5 @@
-import { type CSSProperties, type PropType, defineComponent } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import { type CSSProperties, defineComponent, type PropType } from 'vue'
 import { DESCRIPTION_ITEM_FLAG } from './utils'
 
 export const descriptionsItemProps = {

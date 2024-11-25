@@ -5,8 +5,8 @@ If you want to add attr or event handlers to a row, use `row-props` prop.
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 interface RowData {
   key: number

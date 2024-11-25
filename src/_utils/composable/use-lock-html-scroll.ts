@@ -1,10 +1,10 @@
 import {
-  type Ref,
-  type WatchStopHandle,
   onBeforeUnmount,
   onMounted,
+  type Ref,
   ref,
-  watch
+  watch,
+  type WatchStopHandle
 } from 'vue'
 
 let lockCount = 0

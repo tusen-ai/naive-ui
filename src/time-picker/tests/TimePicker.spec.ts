@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { h } from 'vue'
-import { NTimePicker } from '../index'
 import { NInput } from '../../input'
+import { NTimePicker } from '../index'
 
 describe('n-time-picker', () => {
   it('should work with import on demand', () => {

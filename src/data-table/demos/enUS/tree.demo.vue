@@ -5,8 +5,8 @@ Set `children` in row data to show tree data. If you want to use other key to ge
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import type { DataTableColumns } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 interface RowData {
   name: string

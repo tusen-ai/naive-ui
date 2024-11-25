@@ -1,8 +1,8 @@
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
 import { useLoadingBar } from 'naive-ui'
-import SiteHeader from './SiteHeader.vue'
+import { defineComponent, onMounted } from 'vue'
 import { loadingBarApiRef } from './routes/router'
+import SiteHeader from './SiteHeader.vue'
 import { useIsMobile } from './utils/composables'
 
 export default defineComponent({

@@ -5,7 +5,7 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import type { StepsProps } from 'naive-ui'
 import {
   MdArrowRoundBack,
   MdArrowRoundForward,
@@ -13,7 +13,7 @@ import {
   MdHappy,
   MdSad
 } from '@vicons/ionicons4'
-import type { StepsProps } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   components: {

@@ -1,25 +1,25 @@
-import {
-  type CSSProperties,
-  type ExtractPropTypes,
-  Fragment,
-  type PropType,
-  Teleport,
-  type VNodeChild,
-  defineComponent,
-  h,
-  provide,
-  reactive,
-  ref
-} from 'vue'
-import { createId } from 'seemly'
-import { omit } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { MessageTheme } from '../styles'
 import type { MessageOptions, MessageType } from './types'
-import MessageEnvironment from './MessageEnvironment'
+import { createId } from 'seemly'
+import {
+  type CSSProperties,
+  defineComponent,
+  type ExtractPropTypes,
+  Fragment,
+  h,
+  type PropType,
+  provide,
+  reactive,
+  ref,
+  Teleport,
+  type VNodeChild
+} from 'vue'
+import { useConfig, useTheme } from '../../_mixins'
+import { omit } from '../../_utils'
 import { messageApiInjectionKey, messageProviderInjectionKey } from './context'
+import MessageEnvironment from './MessageEnvironment'
 
 type ContentType = string | (() => VNodeChild)
 

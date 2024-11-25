@@ -1,40 +1,40 @@
+import type { CNode } from 'css-render'
 import type { CSSProperties, PropType, VNode, VNodeChild } from 'vue'
+import type { VirtualListInst } from 'vueuc'
+import type { ColItem } from '../use-group-header'
+import { pxfy, repeat } from 'seemly'
+import { useMemo } from 'vooks'
 import {
-  Fragment,
   computed,
   defineComponent,
+  Fragment,
   h,
   inject,
   onUnmounted,
   ref,
   watchEffect
 } from 'vue'
-import { pxfy, repeat } from 'seemly'
-import { VResizeObserver, VirtualList } from 'vueuc'
-import type { VirtualListInst } from 'vueuc'
-import type { CNode } from 'css-render'
-import { useMemo } from 'vooks'
-import { cssrAnchorMetaName } from '../../../_mixins/common'
-import { c } from '../../../_utils/cssr'
+import { VirtualList, VResizeObserver } from 'vueuc'
 import { NScrollbar, type ScrollbarInst } from '../../../_internal'
+import { cssrAnchorMetaName } from '../../../_mixins/common'
 import { formatLength, resolveSlot, warn } from '../../../_utils'
+import { c } from '../../../_utils/cssr'
+import { configProviderInjectionKey } from '../../../config-provider/src/context'
 import { NEmpty } from '../../../empty'
 import {
   type ColumnKey,
+  dataTableInjectionKey,
   type MainTableBodyRef,
   type RowData,
   type RowKey,
   type SummaryRowData,
-  type TmNode,
-  dataTableInjectionKey
+  type TmNode
 } from '../interface'
 import { createRowClassName, getColKey, isColumnSorting } from '../utils'
-import type { ColItem } from '../use-group-header'
-import { configProviderInjectionKey } from '../../../config-provider/src/context'
-import Cell from './Cell'
-import ExpandTrigger from './ExpandTrigger'
 import RenderSafeCheckbox from './BodyCheckbox'
 import RenderSafeRadio from './BodyRadio'
+import Cell from './Cell'
+import ExpandTrigger from './ExpandTrigger'
 import TableHeader from './Header'
 
 interface NormalRowRenderInfo {

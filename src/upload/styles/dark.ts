@@ -1,8 +1,8 @@
+import type { UploadTheme } from './light'
 import { changeColor } from 'seemly'
+import { commonDark } from '../../_styles/common'
 import { buttonDark } from '../../button/styles'
 import { progressDark } from '../../progress/styles'
-import { commonDark } from '../../_styles/common'
-import type { UploadTheme } from './light'
 import { self } from './light'
 
 const uploadDark: UploadTheme = {

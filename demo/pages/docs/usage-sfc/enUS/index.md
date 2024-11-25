@@ -48,8 +48,8 @@ No tree-shaking. Bundle will have redundant codes.
 If you want to install globally but don't want all components, please see [Import on Demand](import-on-demand).
 
 ```js
-import { createApp } from 'vue'
 import naive from 'naive-ui'
+import { createApp } from 'vue'
 
 const app = createApp(App)
 app.use(naive)

@@ -1,6 +1,6 @@
 // use absolute path to make sure no circular ref of style
 // this -> modal-index -> modal-style
-import { type PropType, defineComponent, h, ref } from 'vue'
+import { defineComponent, h, type PropType, ref } from 'vue'
 import NModal, { modalProps } from './Modal'
 
 export const NModalEnvironment = defineComponent({

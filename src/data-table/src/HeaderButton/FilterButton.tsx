@@ -1,8 +1,3 @@
-import { type PropType, computed, defineComponent, h, inject, ref } from 'vue'
-import { FilterIcon } from '../../../_internal/icons'
-import { NBaseIcon } from '../../../_internal'
-import { NPopover } from '../../../popover'
-import { dataTableInjectionKey } from '../interface'
 import type {
   ColumnKey,
   FilterOption,
@@ -10,7 +5,12 @@ import type {
   FilterState,
   TableBaseColumn
 } from '../interface'
+import { computed, defineComponent, h, inject, type PropType, ref } from 'vue'
+import { NBaseIcon } from '../../../_internal'
+import { FilterIcon } from '../../../_internal/icons'
 import { useConfig } from '../../../_mixins'
+import { NPopover } from '../../../popover'
+import { dataTableInjectionKey } from '../interface'
 import NDataTableFilterMenu from './FilterMenu'
 import RenderFilter from './RenderFilter'
 

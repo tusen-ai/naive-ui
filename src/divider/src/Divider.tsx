@@ -1,16 +1,16 @@
-import {
-  type CSSProperties,
-  Fragment,
-  type PropType,
-  computed,
-  defineComponent,
-  h
-} from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { dividerLight } from '../styles'
 import type { DividerTheme } from '../styles'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  Fragment,
+  h,
+  type PropType
+} from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { dividerLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const dividerProps = {

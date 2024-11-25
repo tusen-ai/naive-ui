@@ -3,7 +3,6 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h } from 'vue'
 import type {
   TreeSelectNodeProps,
   TreeSelectOption,
@@ -11,6 +10,7 @@ import type {
   TreeSelectRenderTag
 } from 'naive-ui'
 import { NTag } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   setup() {

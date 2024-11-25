@@ -1,5 +1,17 @@
+import type { CSSProperties, PropType, Ref, TransitionProps, VNode } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { CarouselTheme } from '../styles'
+import type {
+  ArrowScopedSlotProps,
+  CarouselInst,
+  DotScopedSlotProps,
+  Size
+} from './interface'
+import { off, on } from 'evtd'
+import { getPreciseEventTarget } from 'seemly'
+import { useMergedState } from 'vooks'
 import {
-  Transition,
   cloneVNode,
   computed,
   defineComponent,
@@ -11,22 +23,24 @@ import {
   onUpdated,
   ref,
   toRef,
+  Transition,
   vShow,
   watch,
   watchEffect,
   withDirectives
 } from 'vue'
-import type { CSSProperties, PropType, Ref, TransitionProps, VNode } from 'vue'
 import { VResizeObserver } from 'vueuc'
-import { useMergedState } from 'vooks'
-import { off, on } from 'evtd'
-import { getPreciseEventTarget } from 'seemly'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import { flatten, keep, resolveSlotWithProps } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { carouselLight } from '../styles'
-import type { CarouselTheme } from '../styles'
+import NCarouselArrow from './CarouselArrow'
+import {
+  type CarouselContextValue,
+  provideCarouselContext
+} from './CarouselContext'
+import NCarouselDots from './CarouselDots'
+import NCarouselItem, { isCarouselItem } from './CarouselItem'
+import style from './styles/index.cssr'
 import {
   addDuplicateSlides,
   calculateSize,
@@ -39,20 +53,6 @@ import {
   isTouchEvent,
   resolveSpeed
 } from './utils'
-import {
-  type CarouselContextValue,
-  provideCarouselContext
-} from './CarouselContext'
-import NCarouselDots from './CarouselDots'
-import NCarouselArrow from './CarouselArrow'
-import NCarouselItem, { isCarouselItem } from './CarouselItem'
-import type {
-  ArrowScopedSlotProps,
-  CarouselInst,
-  DotScopedSlotProps,
-  Size
-} from './interface'
-import style from './styles/index.cssr'
 
 const transitionProperties = [
   'transitionDuration',

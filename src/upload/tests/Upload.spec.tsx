@@ -1,16 +1,16 @@
 import { mount } from '@vue/test-utils'
-import { h } from 'vue'
 import { sleep } from 'seemly'
+import { h } from 'vue'
+import { NButton } from '../../button'
+import { NButtonGroup } from '../../button-group'
+import { NCard } from '../../card'
+import { NImageGroup } from '../../image'
 import {
   NUpload,
   NUploadDragger,
   NUploadFileList,
   NUploadTrigger
 } from '../index'
-import { NButton } from '../../button'
-import { NButtonGroup } from '../../button-group'
-import { NCard } from '../../card'
-import { NImageGroup } from '../../image'
 import { matchType } from '../src/utils'
 
 function getMockFile(element: Element, files: File[]): void {

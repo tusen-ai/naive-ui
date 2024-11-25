@@ -1,32 +1,37 @@
+import type { ThemeProps } from '../../_mixins'
+import type { FormValidationStatus } from '../../form/src/interface'
+import type { InputTheme } from '../styles'
+import type {
+  InputWrappedRef,
+  OnUpdateValue,
+  OnUpdateValueImpl,
+  Size
+} from './interface'
+import { off, on } from 'evtd'
+import { getPadding } from 'seemly'
+import { useMemo, useMergedState } from 'vooks'
 import {
-  type CSSProperties,
-  Fragment,
-  type InputHTMLAttributes,
-  type PropType,
-  type TextareaHTMLAttributes,
-  type VNode,
-  type VNodeChild,
-  type WatchStopHandle,
   computed,
+  type CSSProperties,
   defineComponent,
+  Fragment,
   getCurrentInstance,
   h,
+  type InputHTMLAttributes,
   nextTick,
   onMounted,
+  type PropType,
   provide,
   ref,
+  type TextareaHTMLAttributes,
   toRef,
+  type VNode,
+  type VNodeChild,
   watch,
-  watchEffect
+  watchEffect,
+  type WatchStopHandle
 } from 'vue'
-import { useMemo, useMergedState } from 'vooks'
-import { getPadding } from 'seemly'
 import { VResizeObserver } from 'vueuc'
-import { off, on } from 'evtd'
-import { isSafari } from '../../_utils/env/browser'
-import type { FormValidationStatus } from '../../form/src/interface'
-import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
-import { useRtl } from '../../_mixins/use-rtl'
 import {
   NBaseClear,
   NBaseIcon,
@@ -34,6 +39,7 @@ import {
   NScrollbar,
   type ScrollbarInst
 } from '../../_internal'
+import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
 import {
   useConfig,
   useFormItem,
@@ -42,28 +48,22 @@ import {
   useTheme,
   useThemeClass
 } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
 import {
-  type ExtractPublicPropTypes,
-  type MaybeArray,
   call,
   createKey,
+  type ExtractPublicPropTypes,
+  type MaybeArray,
   resolveSlot,
   resolveWrappedSlot,
   warnOnce
 } from '../../_utils'
+import { isSafari } from '../../_utils/env/browser'
 import { inputLight } from '../styles'
-import type { InputTheme } from '../styles'
-import type {
-  InputWrappedRef,
-  OnUpdateValue,
-  OnUpdateValueImpl,
-  Size
-} from './interface'
 import { inputInjectionKey } from './interface'
+import style, { safariStyle } from './styles/input.cssr'
 import { isEmptyInputValue, useCursor } from './utils'
 import WordCount from './WordCount'
-import style, { safariStyle } from './styles/input.cssr'
 
 export const inputProps = {
   ...(useTheme.props as ThemeProps<InputTheme>),
@@ -258,7 +258,7 @@ export default defineComponent({
         !isComposing
         && (isEmptyInputValue(mergedValue)
           || (Array.isArray(mergedValue) && isEmptyInputValue(mergedValue[0])))
-          && mergedPlaceholder[0]
+        && mergedPlaceholder[0]
       )
     })
     const showPlaceholder2Ref = computed(() => {

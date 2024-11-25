@@ -1,11 +1,11 @@
-import { checkboxDark } from '../../checkbox/styles'
-import { scrollbarDark } from '../../_internal/scrollbar/styles'
-import { inputDark } from '../../input/styles'
-import { commonDark } from '../../_styles/common'
-import { emptyDark } from '../../empty/styles'
-import { buttonDark } from '../../button/styles'
-import commonVariables from './_common'
 import type { TransferTheme } from './light'
+import { scrollbarDark } from '../../_internal/scrollbar/styles'
+import { commonDark } from '../../_styles/common'
+import { buttonDark } from '../../button/styles'
+import { checkboxDark } from '../../checkbox/styles'
+import { emptyDark } from '../../empty/styles'
+import { inputDark } from '../../input/styles'
+import commonVariables from './_common'
 
 const transferDark: TransferTheme = {
   name: 'Transfer',

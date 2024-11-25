@@ -5,9 +5,9 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h, ref } from 'vue'
 import type { SelectRenderTag } from 'naive-ui'
 import { NTag } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
 
 export default defineComponent({
   setup() {

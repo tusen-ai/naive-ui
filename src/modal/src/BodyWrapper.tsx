@@ -1,34 +1,34 @@
+import { clickoutside } from 'vdirs'
 import {
-  type ComponentPublicInstance,
-  type DirectiveArguments,
-  type PropType,
-  Transition,
-  type VNode,
-  type VNodeChild,
   cloneVNode,
+  type ComponentPublicInstance,
   computed,
   defineComponent,
+  type DirectiveArguments,
   h,
   inject,
   mergeProps,
   nextTick,
+  type PropType,
   provide,
   ref,
   toRef,
+  Transition,
+  type VNode,
+  type VNodeChild,
   vShow,
   watch,
   withDirectives
 } from 'vue'
-import { clickoutside } from 'vdirs'
 import { VFocusTrap } from 'vueuc'
-import { dialogPropKeys } from '../../dialog/src/dialogProps'
-import { NDialog } from '../../dialog/src/Dialog'
+import { NScrollbar, type ScrollbarInst } from '../../_internal'
+import { getFirstSlotVNode, keep, useLockHtmlScroll, warn } from '../../_utils'
+import { NCard } from '../../card'
 import { cardBasePropKeys } from '../../card/src/Card'
+import { NDialog } from '../../dialog/src/Dialog'
+import { dialogPropKeys } from '../../dialog/src/dialogProps'
 import { drawerBodyInjectionKey } from '../../drawer/src/interface'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
-import { NScrollbar, type ScrollbarInst } from '../../_internal'
-import { NCard } from '../../card'
-import { getFirstSlotVNode, keep, useLockHtmlScroll, warn } from '../../_utils'
 import { modalBodyInjectionKey, modalInjectionKey } from './interface'
 import { presetProps } from './presetProps'
 

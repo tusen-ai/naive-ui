@@ -5,9 +5,9 @@ You can change any parts of notifications existed.
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h, ref } from 'vue'
 import type { NotificationReactive } from 'naive-ui'
 import { NAvatar, useNotification } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
 
 export default defineComponent({
   setup() {

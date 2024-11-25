@@ -1,12 +1,12 @@
+import type { FormValidationStatus } from '../form/src/interface'
 import {
-  type ComputedRef,
-  type Ref,
   computed,
+  type ComputedRef,
   inject,
   onBeforeUnmount,
-  provide
+  provide,
+  type Ref
 } from 'vue'
-import type { FormValidationStatus } from '../form/src/interface'
 import { createInjectionKey } from '../_utils'
 
 type FormItemSize = 'small' | 'medium' | 'large'

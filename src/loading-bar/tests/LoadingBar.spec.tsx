@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
-import { defineComponent, h } from 'vue'
 import { sleep } from 'seemly'
+import { defineComponent, h } from 'vue'
 import { NLoadingBarProvider, useLoadingBar } from '../index'
 
 const Provider = defineComponent({

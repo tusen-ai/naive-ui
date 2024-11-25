@@ -5,8 +5,8 @@ If you want to activate the input by pressing enter after it's focused, use `pas
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {

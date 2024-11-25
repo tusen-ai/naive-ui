@@ -1,9 +1,9 @@
 import type { ImgHTMLAttributes, PropType, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import { useTheme } from '../../_mixins'
-import { createInjectionKey } from '../../_utils'
 import type { ImageTheme } from '../styles'
 import type { ImageRenderToolbar } from './public-types'
+import { useTheme } from '../../_mixins'
+import { createInjectionKey } from '../../_utils'
 
 export interface MoveStrategy {
   moveVerticalDirection: 'verticalTop' | 'verticalBottom'

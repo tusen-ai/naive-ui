@@ -1,5 +1,5 @@
-import { commonDark } from '../../_styles/common'
 import type { CodeTheme } from './light'
+import { commonDark } from '../../_styles/common'
 
 const codeDark: CodeTheme = {
   name: 'Code',

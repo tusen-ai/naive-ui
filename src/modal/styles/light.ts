@@ -1,9 +1,9 @@
-import { scrollbarLight } from '../../_internal/scrollbar/styles'
-import { dialogLight } from '../../dialog/styles'
-import { cardLight } from '../../card/styles'
-import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
+import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import { createTheme } from '../../_mixins'
+import { commonLight } from '../../_styles/common'
+import { cardLight } from '../../card/styles'
+import { dialogLight } from '../../dialog/styles'
 
 export function self(vars: ThemeCommonVars) {
   const { modalColor, textColor2, boxShadow3 } = vars

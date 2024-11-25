@@ -5,9 +5,9 @@
 </markdown>
 
 <script lang="ts">
-import MdSearch from '@vicons/ionicons4/MdSearch'
 import Flash16Regular from '@vicons/fluent/Flash16Regular'
 import FlashCheckmark16Regular from '@vicons/fluent/FlashCheckmark16Regular'
+import MdSearch from '@vicons/ionicons4/MdSearch'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({

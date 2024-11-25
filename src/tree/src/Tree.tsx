@@ -1,53 +1,8 @@
-import {
-  type CSSProperties,
-  type PropType,
-  type VNode,
-  type VNodeChild,
-  computed,
-  defineComponent,
-  h,
-  inject,
-  nextTick,
-  provide,
-  ref,
-  toRef,
-  watch,
-  watchEffect
-} from 'vue'
-import {
-  type CheckStrategy,
-  type TreeMateOptions,
-  createIndexGetter,
-  createTreeMate,
-  flatten
-} from 'treemate'
-import { useMergedState } from 'vooks'
-import {
-  VVirtualList,
-  type VirtualListInst,
-  type VirtualListScrollToOptions
-} from 'vueuc'
-import { depx, getPadding, pxfy } from 'seemly'
-import { treeSelectInjectionKey } from '../../tree-select/src/interface'
-import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import { call, createDataKey, resolveSlot, warn, warnOnce } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { NxScrollbar } from '../../_internal'
 import type { ScrollbarInst } from '../../_internal'
-import { treeLight } from '../styles'
-import type { TreeTheme } from '../styles'
-import { NEmpty } from '../../empty'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { ScrollbarProps } from '../../scrollbar/src/Scrollbar'
-import NTreeNode from './TreeNode'
-import {
-  emptyImage,
-  filterTree,
-  isNodeDisabled,
-  keysWithFilter,
-  useMergedCheckStrategy
-} from './utils'
-import { useKeyboard } from './keyboard'
+import type { TreeTheme } from '../styles'
 import type {
   AllowDrop,
   CheckOnClick,
@@ -72,10 +27,55 @@ import type {
   TreeOptions,
   TreeOverrideNodeClickBehavior
 } from './interface'
-import { treeInjectionKey } from './interface'
-import MotionWrapper from './MotionWrapper'
+import { depx, getPadding, pxfy } from 'seemly'
+import {
+  type CheckStrategy,
+  createIndexGetter,
+  createTreeMate,
+  flatten,
+  type TreeMateOptions
+} from 'treemate'
+import { useMergedState } from 'vooks'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  h,
+  inject,
+  nextTick,
+  type PropType,
+  provide,
+  ref,
+  toRef,
+  type VNode,
+  type VNodeChild,
+  watch,
+  watchEffect
+} from 'vue'
+import {
+  type VirtualListInst,
+  type VirtualListScrollToOptions,
+  VVirtualList
+} from 'vueuc'
+import { NxScrollbar } from '../../_internal'
+import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
+import { call, createDataKey, resolveSlot, warn, warnOnce } from '../../_utils'
+import { NEmpty } from '../../empty'
+import { treeSelectInjectionKey } from '../../tree-select/src/interface'
+import { treeLight } from '../styles'
 import { defaultAllowDrop } from './dnd'
+import { treeInjectionKey } from './interface'
+import { useKeyboard } from './keyboard'
+import MotionWrapper from './MotionWrapper'
 import style from './styles/index.cssr'
+import NTreeNode from './TreeNode'
+import {
+  emptyImage,
+  filterTree,
+  isNodeDisabled,
+  keysWithFilter,
+  useMergedCheckStrategy
+} from './utils'
 
 export function createTreeMateOptions<T>(
   keyField: string,

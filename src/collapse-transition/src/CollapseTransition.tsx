@@ -1,19 +1,19 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { CollapseTransitionTheme } from '../styles'
 import {
-  type PropType,
   computed,
   defineComponent,
   h,
   mergeProps,
+  type PropType,
   watchEffect
 } from 'vue'
+import { NFadeInExpandTransition } from '../../_internal'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
-import type { ThemeProps } from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { warnOnce } from '../../_utils'
-import type { CollapseTransitionTheme } from '../styles'
 import { collapseTransitionLight } from '../styles'
-import { NFadeInExpandTransition } from '../../_internal'
 import style from './styles/index.cssr'
 
 export const collapseTransitionProps = {

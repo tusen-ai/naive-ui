@@ -1,25 +1,25 @@
+import type { ImagePreviewInst } from './ImagePreview'
+import type { IntersectionObserverOptions } from './utils'
 import {
-  type ImgHTMLAttributes,
-  type PropType,
   defineComponent,
   h,
+  type ImgHTMLAttributes,
   inject,
   onBeforeUnmount,
   onMounted,
+  type PropType,
   provide,
   ref,
   toRef,
   watchEffect
 } from 'vue'
-import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
-import { type ExtractPublicPropTypes, resolveSlot } from '../../_utils'
 import { useConfig } from '../../_mixins'
-import { imageContextKey, imagePreviewSharedProps } from './interface'
-import { observeIntersection } from './utils'
-import type { IntersectionObserverOptions } from './utils'
-import type { ImagePreviewInst } from './ImagePreview'
+import { type ExtractPublicPropTypes, resolveSlot } from '../../_utils'
+import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
 import { imageGroupInjectionKey } from './ImageGroup'
 import NImagePreview from './ImagePreview'
+import { imageContextKey, imagePreviewSharedProps } from './interface'
+import { observeIntersection } from './utils'
 
 export interface ImageInst {
   click: () => void

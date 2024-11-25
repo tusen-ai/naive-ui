@@ -14,8 +14,8 @@ Use `n-config-provider` to set the theme of all its descendant components.
 ```
 
 ```js
-import { defineComponent, ref } from 'vue'
 import { darkTheme } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {

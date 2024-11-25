@@ -1,8 +1,8 @@
 import {
-  type PropType,
   defineComponent,
   h,
   inject,
+  type PropType,
   ref,
   watchEffect
 } from 'vue'

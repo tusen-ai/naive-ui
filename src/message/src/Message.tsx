@@ -1,31 +1,31 @@
+import type { MessageRenderMessage, MessageType } from './types'
 /* eslint-disable no-cond-assign */
 import {
-  type CSSProperties,
-  type PropType,
-  type VNodeChild,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
-  inject
+  inject,
+  type PropType,
+  type VNodeChild
 } from 'vue'
-import {
-  ErrorIcon,
-  InfoIcon,
-  SuccessIcon,
-  WarningIcon
-} from '../../_internal/icons'
 import {
   NBaseClose,
   NBaseIcon,
   NBaseLoading,
   NIconSwitchTransition
 } from '../../_internal'
-import { createKey, render } from '../../_utils'
+import {
+  ErrorIcon,
+  InfoIcon,
+  SuccessIcon,
+  WarningIcon
+} from '../../_internal/icons'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
+import { createKey, render } from '../../_utils'
 import { messageLight } from '../styles'
-import { messageProps } from './message-props'
-import type { MessageRenderMessage, MessageType } from './types'
 import { messageProviderInjectionKey } from './context'
+import { messageProps } from './message-props'
 import style from './styles/index.cssr'
 
 const iconRenderMap = {

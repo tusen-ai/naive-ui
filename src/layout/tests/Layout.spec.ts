@@ -1,5 +1,7 @@
-import { h } from 'vue'
 import { mount } from '@vue/test-utils'
+import { h } from 'vue'
+import { NCard } from '../../card'
+import { NH2 } from '../../typography'
 import {
   NLayout,
   NLayoutContent,
@@ -7,8 +9,6 @@ import {
   NLayoutHeader,
   NLayoutSider
 } from '../index'
-import { NH2 } from '../../typography'
-import { NCard } from '../../card'
 
 describe('n-layout', () => {
   it('should work with import on demand', () => {

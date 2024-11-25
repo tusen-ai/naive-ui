@@ -5,9 +5,9 @@ Set theme of inner components of `n-config-provider`.
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { darkTheme } from 'naive-ui'
 import type { GlobalTheme } from 'naive-ui'
+import { darkTheme } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {

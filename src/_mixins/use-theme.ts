@@ -1,18 +1,18 @@
-import {
-  type ComputedRef,
-  type PropType,
-  type Ref,
-  computed,
-  inject,
-  onBeforeMount
-} from 'vue'
-import { merge } from 'lodash-es'
 import type { CNode } from 'css-render'
+import type { ThemeCommonVars } from '../_styles/common'
+import type { GlobalTheme } from '../config-provider'
 import { useSsrAdapter } from '@css-render/vue3-ssr'
+import { merge } from 'lodash-es'
+import {
+  computed,
+  type ComputedRef,
+  inject,
+  onBeforeMount,
+  type PropType,
+  type Ref
+} from 'vue'
 import globalStyle from '../_styles/global/index.cssr'
 import { configProviderInjectionKey } from '../config-provider/src/context'
-import type { GlobalTheme } from '../config-provider'
-import type { ThemeCommonVars } from '../_styles/common'
 import { cssrAnchorMetaName } from './common'
 
 export interface Theme<N, T = Record<string, unknown>, R = any> {

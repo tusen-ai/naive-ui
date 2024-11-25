@@ -1,5 +1,5 @@
-import { commonDark } from '../../_styles/common'
 import type { SkeletonTheme } from './light'
+import { commonDark } from '../../_styles/common'
 
 export const skeletonDark: SkeletonTheme = {
   name: 'Skeleton',

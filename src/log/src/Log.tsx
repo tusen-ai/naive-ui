@@ -1,16 +1,20 @@
+import type { ScrollbarInst } from '../../_internal'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { LogTheme } from '../styles'
+import { throttle } from 'lodash-es'
 import {
-  type PropType,
-  type Ref,
-  Transition,
   computed,
   defineComponent,
   h,
   nextTick,
+  type PropType,
   provide,
+  type Ref,
   ref,
-  toRef
+  toRef,
+  Transition
 } from 'vue'
-import { throttle } from 'lodash-es'
+import { NScrollbar } from '../../_internal'
 import {
   type Hljs,
   type ThemeProps,
@@ -19,16 +23,12 @@ import {
   useTheme,
   useThemeClass
 } from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { warn } from '../../_utils'
-import { NScrollbar } from '../../_internal'
-import type { ScrollbarInst } from '../../_internal'
 import { NCode } from '../../code'
-import type { LogTheme } from '../styles'
 import { logLight } from '../styles'
-import NLogLoader from './LogLoader'
-import NLogLine from './LogLine'
 import { logInjectionKey } from './context'
+import NLogLine from './LogLine'
+import NLogLoader from './LogLoader'
 import style from './styles/index.cssr'
 
 export interface LogInjection {

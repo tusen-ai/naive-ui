@@ -1,11 +1,13 @@
-import {
-  type ExtractPropTypes,
-  type PropType,
-  computed,
-  inject,
-  ref,
-  watch
-} from 'vue'
+import type { VirtualListInst } from 'vueuc'
+import type { ScrollbarInst } from '../../../_internal'
+import type {
+  FirstDayOfWeek,
+  IsSingleDateDisabled,
+  IsSingleDateDisabledDetail,
+  PanelChildComponentRefs,
+  Shortcuts
+} from '../interface'
+import type { DateItem, MonthItem, QuarterItem, YearItem } from '../utils'
 import {
   addMonths,
   addYears,
@@ -27,8 +29,16 @@ import {
   startOfWeek,
   startOfYear
 } from 'date-fns'
-import type { VirtualListInst } from 'vueuc'
-import type { ScrollbarInst } from '../../../_internal'
+import {
+  computed,
+  type ExtractPropTypes,
+  inject,
+  type PropType,
+  ref,
+  watch
+} from 'vue'
+import { MONTH_ITEM_HEIGHT } from '../config'
+import { datePickerInjectionKey } from '../interface'
 import {
   dateArray,
   getDefaultTime,
@@ -37,16 +47,6 @@ import {
   strictParse,
   yearArray
 } from '../utils'
-import type {
-  FirstDayOfWeek,
-  IsSingleDateDisabled,
-  IsSingleDateDisabledDetail,
-  PanelChildComponentRefs,
-  Shortcuts
-} from '../interface'
-import { datePickerInjectionKey } from '../interface'
-import type { DateItem, MonthItem, QuarterItem, YearItem } from '../utils'
-import { MONTH_ITEM_HEIGHT } from '../config'
 import { usePanelCommon, usePanelCommonProps } from './use-panel-common'
 
 const useCalendarProps = {
@@ -219,8 +219,8 @@ function useCalendar(
       // refer to makeWeekMatcher
       const weekStartsOn = (((firstDayOfWeekRef.value
         ?? localeRef.value.firstDayOfWeek)
-        + 1)
-        % 7) as FirstDayOfWeek
+      + 1)
+    % 7) as FirstDayOfWeek
       return getTime(
         startOfWeek(value, {
           weekStartsOn

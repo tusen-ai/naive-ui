@@ -1,5 +1,3 @@
-import { type CSSProperties, type ComputedRef, computed } from 'vue'
-import { formatLength } from '../../_utils'
 import type {
   ColumnKey,
   DataTableSetupProps,
@@ -9,6 +7,8 @@ import type {
   TableExpandColumn,
   TableSelectionColumn
 } from './interface'
+import { computed, type ComputedRef, type CSSProperties } from 'vue'
+import { formatLength } from '../../_utils'
 import { createCustomWidthStyle, getColKey } from './utils'
 
 export interface RowItem {

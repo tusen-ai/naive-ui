@@ -4,8 +4,8 @@
 // display 2 0 1 2 0
 // real    0 1 2 3 4
 
-import { cloneVNode } from 'vue'
 import type { VNode } from 'vue'
+import { cloneVNode } from 'vue'
 
 export function addDuplicateSlides(slides: VNode[]): VNode[] {
   const { length } = slides

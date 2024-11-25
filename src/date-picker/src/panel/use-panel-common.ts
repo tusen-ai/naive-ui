@@ -1,20 +1,20 @@
-import {
-  type ExtractPropTypes,
-  type PropType,
-  computed,
-  inject,
-  nextTick,
-  ref
-} from 'vue'
 import { useKeyboard } from 'vooks'
 import {
+  computed,
+  type ExtractPropTypes,
+  inject,
+  nextTick,
+  type PropType,
+  ref
+} from 'vue'
+import {
+  datePickerInjectionKey,
   type DefaultTime,
   type OnClose,
   type OnPanelUpdateValue,
   type OnPanelUpdateValueImpl,
   type Shortcuts,
-  type Value,
-  datePickerInjectionKey
+  type Value
 } from '../interface'
 
 const TIME_FORMAT = 'HH:mm:ss'

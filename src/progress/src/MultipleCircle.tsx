@@ -1,11 +1,11 @@
-import {
-  type CSSProperties,
-  type PropType,
-  computed,
-  defineComponent,
-  h
-} from 'vue'
 import type { ProgressGradient } from './public-types'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  h,
+  type PropType
+} from 'vue'
 
 function circlePath(r: number, sw: number, vw: number = 100): string {
   return `m ${vw / 2} ${vw / 2 - r} a ${r} ${r} 0 1 1 0 ${
@@ -62,7 +62,7 @@ export default defineComponent({
             * (props.viewBoxWidth / 2
               - (props.strokeWidth / 2) * (1 + 2 * i)
               - props.circleGap * i)
-              * 2
+            * 2
           }, ${props.viewBoxWidth * 8}`
       )
       return strokeDasharrays

@@ -1,7 +1,7 @@
 import hljs from 'highlight.js/lib/core'
+import cpp from 'highlight.js/lib/languages/cpp'
 import javascript from 'highlight.js/lib/languages/javascript'
 import python from 'highlight.js/lib/languages/python'
-import cpp from 'highlight.js/lib/languages/cpp'
 import xml from 'highlight.js/lib/languages/xml'
 
 hljs.registerLanguage('javascript', javascript)

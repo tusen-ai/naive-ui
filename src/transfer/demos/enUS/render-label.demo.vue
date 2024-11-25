@@ -5,9 +5,9 @@ Transfer can be applied for many scenarios.
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h, ref } from 'vue'
 import type { TransferRenderTargetLabel } from 'naive-ui'
 import { NAvatar } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
 
 const options = [
   {

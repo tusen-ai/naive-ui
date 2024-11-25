@@ -1,9 +1,9 @@
-import { type ComputedRef, type Ref, computed, inject, shallowRef } from 'vue'
 import type {
   Breakpoints,
   GlobalComponentConfig,
   RtlEnabledState
 } from '../config-provider/src/internal-interface'
+import { computed, type ComputedRef, inject, type Ref, shallowRef } from 'vue'
 import { configProviderInjectionKey } from '../config-provider/src/context'
 
 type UseConfigProps = Readonly<{

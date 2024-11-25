@@ -5,10 +5,10 @@ You can use `render-option` to add tooltip for option.
 </markdown>
 
 <script lang="ts">
-import type { VNode } from 'vue'
-import { defineComponent, h } from 'vue'
 import type { DropdownGroupOption, DropdownOption } from 'naive-ui'
+import type { VNode } from 'vue'
 import { NTooltip, useMessage } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   setup() {

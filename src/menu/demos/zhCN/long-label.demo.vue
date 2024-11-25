@@ -5,9 +5,9 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h } from 'vue'
 import type { MenuOption } from 'naive-ui'
 import { NEllipsis } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   setup() {

@@ -1,7 +1,7 @@
+import type { LoadingBarApiInjection } from './LoadingBarProvider'
 import { inject } from 'vue'
 import { throwError } from '../../_utils'
 import { loadingBarApiInjectionKey } from './context'
-import type { LoadingBarApiInjection } from './LoadingBarProvider'
 
 export function useLoadingBar(): LoadingBarApiInjection {
   const loadingBar = inject(loadingBarApiInjectionKey, null)

@@ -1,6 +1,4 @@
 import type { CSSProperties } from 'vue'
-import { depx } from 'seemly'
-import { formatLength } from '../../_utils'
 import type {
   CreateRowClassName,
   InternalRowData,
@@ -14,6 +12,8 @@ import type {
   TableSelectionColumn
 } from './interface'
 import type { DataTableGetCsvCell, DataTableGetCsvHeader } from './publicTypes'
+import { depx } from 'seemly'
+import { formatLength } from '../../_utils'
 
 export const SELECTION_COL_WIDTH = 40
 export const EXPAND_COL_WIDTH = 40

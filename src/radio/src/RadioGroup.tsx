@@ -1,27 +1,27 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { RadioTheme } from '../styles'
+import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
+import type { RadioBaseProps } from './use-radio'
+import { useMergedState } from 'vooks'
 import {
-  type CSSProperties,
-  type PropType,
-  type VNode,
-  type VNodeChild,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
+  type PropType,
   provide,
   ref,
-  toRef
+  toRef,
+  type VNode,
+  type VNodeChild
 } from 'vue'
-import { useMergedState } from 'vooks'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import { call, createKey, flatten, getSlot, warn } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { radioLight } from '../styles'
-import type { RadioTheme } from '../styles'
 import { useRtl } from '../../_mixins/use-rtl'
-import type { RadioBaseProps } from './use-radio'
-import { radioGroupInjectionKey } from './use-radio'
+import { call, createKey, flatten, getSlot, warn } from '../../_utils'
+import { radioLight } from '../styles'
 import style from './styles/radio-group.cssr'
-import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
+import { radioGroupInjectionKey } from './use-radio'
 
 function mapSlot(
   defaultSlot: VNode[],

@@ -5,8 +5,8 @@ Use `checked-value` and `unchecked-value` to customize value.
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import { useMessage } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {

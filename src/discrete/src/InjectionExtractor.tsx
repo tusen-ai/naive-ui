@@ -1,4 +1,4 @@
-import { type PropType, defineComponent } from 'vue'
+import { defineComponent, type PropType } from 'vue'
 
 export const NInjectionExtractor = defineComponent({
   name: 'InjectionExtractor',

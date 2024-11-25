@@ -1,5 +1,5 @@
-import { h, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
+import { h, nextTick } from 'vue'
 import { NImage, NImageGroup } from '../index'
 import NImagePreview from '../src/ImagePreview'
 

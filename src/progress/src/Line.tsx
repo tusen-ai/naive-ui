@@ -1,11 +1,11 @@
+import type { ProgressGradient, ProgressStatus } from './public-types'
 import {
-  type CSSProperties,
-  type PropType,
   computed,
+  type CSSProperties,
   defineComponent,
-  h
+  h,
+  type PropType
 } from 'vue'
-import { formatLength } from '../../_utils'
 import { NBaseIcon } from '../../_internal'
 import {
   ErrorIcon as ErrorCircleIcon,
@@ -13,7 +13,7 @@ import {
   SuccessIcon as SuccessCircleIcon,
   WarningIcon
 } from '../../_internal/icons'
-import type { ProgressGradient, ProgressStatus } from './public-types'
+import { formatLength } from '../../_utils'
 
 const iconMap = {
   success: <SuccessCircleIcon />,

@@ -31,11 +31,11 @@ pnpm install --save-dev @css-render/vue3-ssr
 ```js
 // .vitepress/theme/index.js
 
-import { defineComponent, h, inject } from 'vue'
-import DefaultTheme from 'vitepress/theme'
-import { NConfigProvider } from 'naive-ui'
 import { setup } from '@css-render/vue3-ssr'
+import { NConfigProvider } from 'naive-ui'
 import { useRoute } from 'vitepress'
+import DefaultTheme from 'vitepress/theme'
+import { defineComponent, h, inject } from 'vue'
 
 const { Layout } = DefaultTheme
 

@@ -1,8 +1,8 @@
+import type { ThemeCommonVars } from '../../../_styles/common'
 import { changeColor } from 'seemly'
+import { createTheme } from '../../../_mixins'
 import { commonLight } from '../../../_styles/common'
 import { popoverLight } from '../../../popover/styles'
-import type { ThemeCommonVars } from '../../../_styles/common'
-import { createTheme } from '../../../_mixins'
 import commonVariables from './_common'
 
 function self(vars: ThemeCommonVars) {

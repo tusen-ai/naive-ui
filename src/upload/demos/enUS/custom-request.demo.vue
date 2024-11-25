@@ -5,10 +5,10 @@ User `custom-request` to customize upload request.
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import type { UploadCustomRequestOptions } from 'naive-ui'
 import { lyla } from '@lylajs/web'
 import { useMessage } from 'naive-ui'
-import type { UploadCustomRequestOptions } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {

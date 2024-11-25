@@ -1,8 +1,8 @@
-import { h, nextTick } from 'vue'
-import { mount } from '@vue/test-utils'
-import { NColorPicker } from '../index'
 import type { ColorPickerMode } from '../src/utils'
+import { mount } from '@vue/test-utils'
+import { h, nextTick } from 'vue'
 import { NButton } from '../../button'
+import { NColorPicker } from '../index'
 
 describe('n-color-picker', () => {
   it('should work with import on demand', () => {

@@ -20,8 +20,8 @@ export function isWipValue(value: string): boolean {
   return (
     (value.includes('.')
       && (/^(-)?\d+.*(\.|0)$/.test(value) || /^(-)?\.\d+$/.test(value)))
-      || value === '-'
-      || value === '-0'
+    || value === '-'
+    || value === '-0'
   )
 }
 

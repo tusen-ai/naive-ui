@@ -1,19 +1,19 @@
-import {
-  type PropType,
-  type Ref,
-  defineComponent,
-  h,
-  provide,
-  toRef
-} from 'vue'
 import { useMemo } from 'vooks'
 import {
-  type ExtractPublicPropTypes,
+  defineComponent,
+  h,
+  type PropType,
+  provide,
+  type Ref,
+  toRef
+} from 'vue'
+import { useConfig, useRtl, useStyle } from '../../_mixins'
+import {
   createInjectionKey,
+  type ExtractPublicPropTypes,
   formatLength,
   keysOf
 } from '../../_utils'
-import { useConfig, useRtl, useStyle } from '../../_mixins'
 import style from './styles/index.cssr'
 
 export interface RowInjection {

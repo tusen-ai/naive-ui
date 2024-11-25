@@ -1,10 +1,10 @@
+import { repeat } from 'seemly'
 import { computed, defineComponent, h, nextTick, ref } from 'vue'
 import { VResizeObserver } from 'vueuc'
-import { repeat } from 'seemly'
 import { useConfig, useTheme } from '../../_mixins'
 import { marqueeLight } from '../styles'
-import style from './styles/index.cssr'
 import { marqueeProps } from './props'
+import style from './styles/index.cssr'
 
 export default defineComponent({
   name: 'Marquee',

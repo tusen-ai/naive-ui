@@ -1,23 +1,24 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { ModalTheme } from '../styles'
+import { getPreciseEventTarget } from 'seemly'
+import { zindexable } from 'vdirs'
+import { useClicked, useClickPosition, useIsMounted } from 'vooks'
 import {
-  type CSSProperties,
-  type PropType,
-  Transition,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
   inject,
+  type PropType,
   provide,
   ref,
   toRef,
+  Transition,
   withDirectives
 } from 'vue'
-import { zindexable } from 'vdirs'
-import { useClickPosition, useClicked, useIsMounted } from 'vooks'
 import { VLazyTeleport } from 'vueuc'
-import { getPreciseEventTarget } from 'seemly'
-import { dialogProviderInjectionKey } from '../../dialog/src/context'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import {
   call,
   eventEffectNotPerformed,
@@ -25,12 +26,11 @@ import {
   useIsComposing,
   warnOnce
 } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import { dialogProviderInjectionKey } from '../../dialog/src/context'
 import { modalLight } from '../styles'
-import type { ModalTheme } from '../styles'
-import { presetProps, presetPropsKeys } from './presetProps'
 import NModalBodyWrapper from './BodyWrapper'
 import { modalInjectionKey, modalProviderInjectionKey } from './interface'
+import { presetProps, presetPropsKeys } from './presetProps'
 import style from './styles/index.cssr'
 
 export const modalProps = {

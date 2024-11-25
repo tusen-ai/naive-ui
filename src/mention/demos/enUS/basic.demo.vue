@@ -5,11 +5,11 @@ If `label` is a render function, the `value` property will be used for matching.
 </markdown>
 
 <script lang="ts">
-import type { VNodeChild } from 'vue'
-import { defineComponent, h } from 'vue'
 import type { MentionOption } from 'naive-ui'
-import { NIcon } from 'naive-ui'
+import type { VNodeChild } from 'vue'
 import { TelescopeOutline } from '@vicons/ionicons5'
+import { NIcon } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   setup() {

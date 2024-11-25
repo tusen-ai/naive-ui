@@ -1,17 +1,17 @@
-import {
-  type CSSProperties,
-  type PropType,
-  computed,
-  defineComponent,
-  h
-} from 'vue'
-import { useCompitable } from 'vooks'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey, warn } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { typographyLight } from '../styles'
 import type { TypographyTheme } from '../styles'
+import { useCompitable } from 'vooks'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  h,
+  type PropType
+} from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { createKey, warn } from '../../_utils'
+import { typographyLight } from '../styles'
 import style from './styles/text.cssr'
 
 export const textProps = {

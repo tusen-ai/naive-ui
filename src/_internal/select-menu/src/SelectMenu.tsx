@@ -1,24 +1,4 @@
-import {
-  type CSSProperties,
-  type PropType,
-  type WatchStopHandle,
-  computed,
-  defineComponent,
-  h,
-  nextTick,
-  onBeforeUnmount,
-  onMounted,
-  provide,
-  ref,
-  toRef,
-  watch
-} from 'vue'
-import { type TreeNode, createIndexGetter } from 'treemate'
-import { VirtualList, type VirtualListInst } from 'vueuc'
-import { depx, getPadding, happensIn } from 'seemly'
-import { NEmpty } from '../../../empty'
-import { NScrollbar } from '../../scrollbar'
-import type { ScrollbarInst } from '../../scrollbar'
+import type { ThemeProps } from '../../../_mixins'
 import type {
   SelectGroupOption,
   SelectIgnoredOption,
@@ -26,18 +6,7 @@ import type {
   SelectTreeMate,
   Value
 } from '../../../select/src/interface'
-import { resolveSlot, resolveWrappedSlot, useOnResize } from '../../../_utils'
-import { createKey } from '../../../_utils/cssr'
-import { useConfig, useRtl, useTheme, useThemeClass } from '../../../_mixins'
-import type { ThemeProps } from '../../../_mixins'
-import NInternalLoading from '../../loading'
-import NFocusDetector from '../../focus-detector'
-import {
-  type InternalSelectMenuTheme,
-  internalSelectMenuLight
-} from '../styles'
-import NSelectOption from './SelectOption'
-import NSelectGroupHeader from './SelectGroupHeader'
+import type { ScrollbarInst } from '../../scrollbar'
 import type {
   InternalExposedProps,
   NodeProps,
@@ -45,10 +14,41 @@ import type {
   RenderOption,
   Size
 } from './interface'
+import { depx, getPadding, happensIn } from 'seemly'
+import { createIndexGetter, type TreeNode } from 'treemate'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  h,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  type PropType,
+  provide,
+  ref,
+  toRef,
+  watch,
+  type WatchStopHandle
+} from 'vue'
+import { VirtualList, type VirtualListInst } from 'vueuc'
+import { useConfig, useRtl, useTheme, useThemeClass } from '../../../_mixins'
+import { resolveSlot, resolveWrappedSlot, useOnResize } from '../../../_utils'
+import { createKey } from '../../../_utils/cssr'
+import { NEmpty } from '../../../empty'
+import NFocusDetector from '../../focus-detector'
+import NInternalLoading from '../../loading'
+import { NScrollbar } from '../../scrollbar'
+import {
+  internalSelectMenuLight,
+  type InternalSelectMenuTheme
+} from '../styles'
 import {
   internalSelectionMenuBodyInjectionKey,
   internalSelectionMenuInjectionKey
 } from './interface'
+import NSelectGroupHeader from './SelectGroupHeader'
+import NSelectOption from './SelectOption'
 import style from './styles/index.cssr'
 
 export default defineComponent({

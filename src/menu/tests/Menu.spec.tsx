@@ -1,15 +1,15 @@
+import { HappyOutline } from '@vicons/ionicons5'
 /* eslint-disable unused-imports/no-unused-vars */
 import { mount } from '@vue/test-utils'
-import { HappyOutline } from '@vicons/ionicons5'
-import { Comment, h } from 'vue'
 import { sleep } from 'seemly'
+import { Comment, h } from 'vue'
+import { NIcon } from '../../icon'
 import {
   type MenuDividerOption,
   type MenuGroupOption,
   type MenuOption,
   NMenu
 } from '../index'
-import { NIcon } from '../../icon'
 
 describe('n-menu', () => {
   it('should work with import on demand', () => {

@@ -1,27 +1,28 @@
+import { off, on } from 'evtd'
+import { kebabCase } from 'lodash-es'
+import { beforeNextFrameOnce } from 'seemly'
+import { zindexable } from 'vdirs'
+import { useIsMounted } from 'vooks'
 import {
-  type CSSProperties,
-  Fragment,
-  type PropType,
-  Transition,
-  type VNode,
   computed,
+  type CSSProperties,
   defineComponent,
+  Fragment,
   h,
   inject,
   normalizeStyle,
   onBeforeUnmount,
+  type PropType,
   ref,
   toRef,
+  Transition,
+  type VNode,
   vShow,
   watch,
   withDirectives
 } from 'vue'
-import { zindexable } from 'vdirs'
-import { useIsMounted } from 'vooks'
 import { LazyTeleport } from 'vueuc'
-import { off, on } from 'evtd'
-import { beforeNextFrameOnce } from 'seemly'
-import { kebabCase } from 'lodash-es'
+import { NBaseIcon } from '../../_internal'
 import {
   DownloadIcon,
   ResizeSmallIcon,
@@ -31,15 +32,14 @@ import {
   ZoomOutIcon
 } from '../../_internal/icons'
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
-import { NBaseIcon } from '../../_internal'
 import { download } from '../../_utils'
 import { NTooltip } from '../../tooltip'
 import { imageLight } from '../styles'
 import { closeIcon, nextIcon, prevIcon } from './icons'
 import {
-  type MoveStrategy,
   imageContextKey,
-  imagePreviewSharedProps
+  imagePreviewSharedProps,
+  type MoveStrategy
 } from './interface'
 import style from './styles/index.cssr'
 

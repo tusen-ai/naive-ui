@@ -1,7 +1,6 @@
 import type { CSSProperties, Ref, VNodeChild } from 'vue'
-import type { ImageGroupProps } from '../../image'
 import type { MergedTheme } from '../../_mixins'
-import { createInjectionKey } from '../../_utils'
+import type { ImageGroupProps } from '../../image'
 import type { UploadTheme } from '../styles'
 import type {
   UploadCustomRequestOptions,
@@ -11,6 +10,7 @@ import type {
   UploadOnRemove,
   UploadSettledFileInfo
 } from './public-types'
+import { createInjectionKey } from '../../_utils'
 
 export type ShouldUseThumbnailUrl = (file: UploadSettledFileInfo) => boolean
 

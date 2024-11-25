@@ -1,16 +1,16 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { ThingTheme } from '../styles'
 import {
-  type CSSProperties,
-  Fragment,
-  type PropType,
   computed,
+  type CSSProperties,
   defineComponent,
-  h
+  Fragment,
+  h,
+  type PropType
 } from 'vue'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import type { ThemeProps } from '../../_mixins'
 import { thingLight } from '../styles'
-import type { ThingTheme } from '../styles'
 import style from './styles/index.cssr'
 
 export const thingProps = {

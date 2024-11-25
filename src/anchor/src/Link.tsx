@@ -1,14 +1,14 @@
-import { type Ref, defineComponent, h, inject, ref, toRef, watch } from 'vue'
 import { useMemo } from 'vooks'
+import { defineComponent, h, inject, type Ref, ref, toRef, watch } from 'vue'
+import {
+  createInjectionKey,
+  type ExtractPublicPropTypes,
+  getTitleAttribute
+} from '../../_utils'
 import {
   useInjectionCollection,
   useInjectionElementCollection
 } from '../../_utils/composable'
-import {
-  type ExtractPublicPropTypes,
-  createInjectionKey,
-  getTitleAttribute
-} from '../../_utils'
 
 export interface AnchorInjection {
   activeHref: Ref<string | null>

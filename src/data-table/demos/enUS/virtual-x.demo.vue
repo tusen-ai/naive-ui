@@ -20,8 +20,8 @@ The example below corresponds to a table with 1000 rows * 1000 columns.
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import type { DataTableColumns } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 interface RowData {
   key: number

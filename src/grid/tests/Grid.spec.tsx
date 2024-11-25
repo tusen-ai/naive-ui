@@ -1,5 +1,5 @@
-import { defineComponent, h } from 'vue'
 import { mount } from '@vue/test-utils'
+import { defineComponent, h } from 'vue'
 import { NGi, NGrid, NGridItem } from '../index'
 
 const renderNGi = Array.from({ length: 6 })

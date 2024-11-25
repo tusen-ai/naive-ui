@@ -1,12 +1,11 @@
 import type { PropType } from 'vue'
 import type { FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
-import { useTheme } from '../../_mixins'
 import type { MaybeArray } from '../../_utils'
-import { useAdjustedTo } from '../../_utils'
-import type { DatePickerTheme } from '../styles'
 import type { FormValidationStatus } from '../../form/src/interface'
 import type { TimePickerProps } from '../../time-picker'
+import type { DatePickerTheme } from '../styles'
+import type { DatePickerType } from './config'
 import type {
   DefaultTime,
   FirstDayOfWeek,
@@ -19,7 +18,8 @@ import type {
   Shortcuts,
   Value
 } from './interface'
-import type { DatePickerType } from './config'
+import { useTheme } from '../../_mixins'
+import { useAdjustedTo } from '../../_utils'
 
 export const datePickerProps = {
   ...(useTheme.props as ThemeProps<DatePickerTheme>),

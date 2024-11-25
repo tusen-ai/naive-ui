@@ -3,13 +3,13 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
 import type {
   DataTableBaseColumn,
   DataTableColumns,
   DataTableFilterState
 } from 'naive-ui'
 import { unstableDataTableRtl } from 'naive-ui'
+import { defineComponent, reactive, ref } from 'vue'
 
 interface Row {
   key: number

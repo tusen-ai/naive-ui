@@ -1,5 +1,5 @@
-import { defineComponent, h } from 'vue'
 import { mount } from '@vue/test-utils'
+import { defineComponent, h } from 'vue'
 import { NCol, NRow } from '../index'
 
 describe('n-grid', () => {

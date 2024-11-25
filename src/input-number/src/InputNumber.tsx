@@ -1,41 +1,41 @@
+import type { ThemeProps } from '../../_mixins'
+import type { FormValidationStatus } from '../../form/src/interface'
+import type { InputInst } from '../../input'
+import type { InputNumberTheme } from '../styles'
+import type { InputNumberInst, OnUpdateValue, Size } from './interface'
+import { on } from 'evtd'
+import { rgba } from 'seemly'
+import { useMemo, useMergedState } from 'vooks'
 import {
-  type InputHTMLAttributes,
-  type PropType,
-  type VNode,
   computed,
   defineComponent,
   h,
+  type InputHTMLAttributes,
   nextTick,
+  type PropType,
   ref,
   toRef,
+  type VNode,
   watch,
   watchEffect
 } from 'vue'
-import { rgba } from 'seemly'
-import { useMemo, useMergedState } from 'vooks'
-import { on } from 'evtd'
-import type { FormValidationStatus } from '../../form/src/interface'
-import { AddIcon, RemoveIcon } from '../../_internal/icons'
-import { NInput } from '../../input'
-import type { InputInst } from '../../input'
 import { NBaseIcon } from '../../_internal'
-import { NxButton } from '../../button'
+import { AddIcon, RemoveIcon } from '../../_internal/icons'
 import { useConfig, useFormItem, useLocale, useTheme } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
 import {
+  call,
   type ExtractPublicPropTypes,
   type MaybeArray,
-  call,
   resolveSlot,
   resolveWrappedSlot,
   warnOnce
 } from '../../_utils'
+import { NxButton } from '../../button'
+import { NInput } from '../../input'
 import { inputNumberLight } from '../styles'
-import type { InputNumberTheme } from '../styles'
-import { useRtl } from '../../_mixins/use-rtl'
-import { format, isWipValue, parse, parseNumber, validator } from './utils'
-import type { InputNumberInst, OnUpdateValue, Size } from './interface'
 import style from './styles/input-number.cssr'
+import { format, isWipValue, parse, parseNumber, validator } from './utils'
 
 const HOLDING_CHANGE_THRESHOLD = 800
 const HOLDING_CHANGE_INTERVAL = 100

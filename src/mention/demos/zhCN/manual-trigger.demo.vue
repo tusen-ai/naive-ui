@@ -5,11 +5,11 @@
 </markdown>
 
 <script lang="ts">
-import type { VNodeChild } from 'vue'
-import { defineComponent, h, ref } from 'vue'
 import type { MentionInst, MentionOption } from 'naive-ui'
-import { NIcon } from 'naive-ui'
+import type { VNodeChild } from 'vue'
 import { HomeOutline as HomeIcon } from '@vicons/ionicons5'
+import { NIcon } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
 
 export default defineComponent({
   setup() {

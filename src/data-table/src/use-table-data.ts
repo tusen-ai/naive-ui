@@ -1,9 +1,4 @@
-import { type ComputedRef, computed, ref } from 'vue'
-import { useMemo, useMergedState } from 'vooks'
-import { createTreeMate } from 'treemate'
 import type { PaginationProps } from '../../pagination/src/Pagination'
-import { call, warn } from '../../_utils'
-import { getDefaultPageSize } from '../../pagination/src/utils'
 import type {
   ColumnKey,
   DataTableSetupProps,
@@ -17,8 +12,13 @@ import type {
   TableSelectionColumn,
   TmNode
 } from './interface'
-import { createShallowClonedObject } from './utils'
+import { createTreeMate } from 'treemate'
+import { useMemo, useMergedState } from 'vooks'
+import { computed, type ComputedRef, ref } from 'vue'
+import { call, warn } from '../../_utils'
+import { getDefaultPageSize } from '../../pagination/src/utils'
 import { useSorter } from './use-sorter'
+import { createShallowClonedObject } from './utils'
 
 // useTableData combines filter, sorter and pagination
 export function useTableData(

@@ -1,9 +1,9 @@
+import { setup } from '@css-render/vue3-ssr'
+import { renderToString } from '@vue/server-renderer'
 /**
  * @jest-environment node
  */
 import { createSSRApp, h } from 'vue'
-import { renderToString } from '@vue/server-renderer'
-import { setup } from '@css-render/vue3-ssr'
 import { NDropdown } from '../..'
 
 describe('sSR', () => {

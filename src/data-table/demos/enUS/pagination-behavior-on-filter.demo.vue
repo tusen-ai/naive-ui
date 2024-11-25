@@ -7,8 +7,8 @@ If table stays on the current page and the total amount of filtered data cannot 
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import type { DataTableColumns } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 interface RowData {
   key: number

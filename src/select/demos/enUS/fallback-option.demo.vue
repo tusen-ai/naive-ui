@@ -5,8 +5,8 @@ If you don't need fallback options, setting `fallback-option` to `false` ensures
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import type { SelectOption } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {

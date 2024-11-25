@@ -5,9 +5,9 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { changeColor } from 'seemly'
 import { useThemeVars } from 'naive-ui'
+import { changeColor } from 'seemly'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {

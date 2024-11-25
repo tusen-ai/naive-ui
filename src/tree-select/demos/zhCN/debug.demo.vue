@@ -3,8 +3,8 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import type { TreeSelectOption } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 function createData(level = 4, baseKey = ''): TreeSelectOption[] | undefined {
   if (!level)

@@ -1,10 +1,10 @@
 import { computed, defineComponent, h, inject } from 'vue'
-import { AddIcon } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
+import { AddIcon } from '../../_internal/icons'
 import { resolveSlot, throwError } from '../../_utils'
 import { uploadInjectionKey } from './interface'
-import { getFilesFromEntries } from './utils'
 import NUploadDragger from './UploadDragger'
+import { getFilesFromEntries } from './utils'
 
 export default defineComponent({
   name: 'UploadTrigger',

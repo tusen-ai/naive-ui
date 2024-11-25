@@ -1,15 +1,17 @@
-import {
-  type CSSProperties,
-  type PropType,
-  type VNode,
-  computed,
-  defineComponent,
-  h
-} from 'vue'
-import { useCompitable } from 'vooks'
-import { repeat } from 'seemly'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { DescriptionsTheme } from '../styles'
+import { repeat } from 'seemly'
+import { useCompitable } from 'vooks'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  h,
+  type PropType,
+  type VNode
+} from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import {
   createKey,
   flatten,
@@ -17,11 +19,9 @@ import {
   getVNodeChildren,
   warn
 } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { descriptionsLight } from '../styles'
-import type { DescriptionsTheme } from '../styles'
-import { isDescriptionsItem } from './utils'
 import style from './styles/index.cssr'
+import { isDescriptionsItem } from './utils'
 
 export const descriptionsProps = {
   ...(useTheme.props as ThemeProps<DescriptionsTheme>),

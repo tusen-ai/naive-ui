@@ -5,8 +5,8 @@ You can just render something which is not related to options data by setting `t
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h } from 'vue'
 import { NAvatar, NText, useMessage } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 function renderCustomHeader() {
   return h(

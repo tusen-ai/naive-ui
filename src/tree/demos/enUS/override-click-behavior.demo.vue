@@ -7,8 +7,8 @@ For example, you can change non-leaf key's default behavior to `'toggleExpand'` 
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import type { TreeOverrideNodeClickBehavior } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {

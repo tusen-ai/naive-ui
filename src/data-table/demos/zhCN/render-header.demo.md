@@ -5,8 +5,8 @@
 ```
 
 ```js
-import { defineComponent, h } from 'vue'
 import { NGradientText, NTooltip } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 function renderTooltip(trigger, content) {
   return h(NTooltip, null, {

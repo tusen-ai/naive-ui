@@ -1,42 +1,5 @@
-import {
-  type CSSProperties,
-  type ExtractPropTypes,
-  type LabelHTMLAttributes,
-  type PropType,
-  type Slot,
-  Transition,
-  type VNodeChild,
-  computed,
-  defineComponent,
-  h,
-  inject,
-  onMounted,
-  provide,
-  ref,
-  toRef,
-  watch
-} from 'vue'
-import Schema from 'async-validator'
 import type { RuleItem, ValidateError, ValidateOption } from 'async-validator'
-import { get } from 'lodash-es'
-import { createId } from 'seemly'
-import { formItemInjectionKey } from '../../_mixins/use-form-item'
-import {
-  type ThemeProps,
-  useConfig,
-  useTheme,
-  useThemeClass
-} from '../../_mixins'
-import {
-  createKey,
-  keysOf,
-  resolveWrappedSlot,
-  useInjectionInstanceCollection,
-  warn
-} from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { type FormTheme, formLight } from '../styles'
-import { formItemMisc, formItemRule, formItemSize } from './utils'
 import type {
   FormItemInst,
   FormItemInternalValidate,
@@ -51,8 +14,45 @@ import type {
   ValidateCallback,
   ValidationTrigger
 } from './interface'
+import Schema from 'async-validator'
+import { get } from 'lodash-es'
+import { createId } from 'seemly'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  type ExtractPropTypes,
+  h,
+  inject,
+  type LabelHTMLAttributes,
+  onMounted,
+  type PropType,
+  provide,
+  ref,
+  type Slot,
+  toRef,
+  Transition,
+  type VNodeChild,
+  watch
+} from 'vue'
+import {
+  type ThemeProps,
+  useConfig,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
+import { formItemInjectionKey } from '../../_mixins/use-form-item'
+import {
+  createKey,
+  keysOf,
+  resolveWrappedSlot,
+  useInjectionInstanceCollection,
+  warn
+} from '../../_utils'
+import { formLight, type FormTheme } from '../styles'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
 import style from './styles/form-item.cssr'
+import { formItemMisc, formItemRule, formItemSize } from './utils'
 
 export const formItemProps = {
   ...(useTheme.props as ThemeProps<FormTheme>),

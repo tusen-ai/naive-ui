@@ -1,34 +1,34 @@
+import { cloneDeep, merge } from 'lodash-es'
 import {
-  Fragment,
   computed,
   defineComponent,
+  Fragment,
   h,
   inject,
   ref,
   toRaw,
   watch
 } from 'vue'
-import { cloneDeep, merge } from 'lodash-es'
-import { configProviderInjectionKey } from '../../config-provider/src/context'
-import { lightTheme } from '../../themes/light'
+import { useLocale } from '../../_mixins'
+import { download, lockHtmlScrollRightCompensationRef } from '../../_utils'
+import { NButton } from '../../button'
+import { NCollapse, NCollapseItem } from '../../collapse'
+import { NColorPicker } from '../../color-picker'
 import {
   type GlobalTheme,
   type GlobalThemeOverrides,
   NConfigProvider
 } from '../../config-provider'
-import { NPopover } from '../../popover'
-import { NCollapse, NCollapseItem } from '../../collapse'
-import { NInput } from '../../input'
-import { NSpace } from '../../space'
-import { NGi, NGrid } from '../../grid'
-import { useLocale } from '../../_mixins'
-import { NElement } from '../../element'
+import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { NDivider } from '../../divider'
-import { NButton } from '../../button'
-import { NColorPicker } from '../../color-picker'
+import { NElement } from '../../element'
 import { NEmpty } from '../../empty'
-import { download, lockHtmlScrollRightCompensationRef } from '../../_utils'
+import { NGi, NGrid } from '../../grid'
 import { NIcon } from '../../icon'
+import { NInput } from '../../input'
+import { NPopover } from '../../popover'
+import { NSpace } from '../../space'
+import { lightTheme } from '../../themes/light'
 import { MaximizeIcon } from './MaximizeIcon'
 import { MinimizeIcon } from './MinimizeIcon'
 

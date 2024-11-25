@@ -1,4 +1,4 @@
-import { Fragment, computed, defineComponent, h } from 'vue'
+import { computed, defineComponent, Fragment, h } from 'vue'
 import { useIsMobile, useIsSmallDesktop, useIsTablet } from './composables'
 
 export default defineComponent({

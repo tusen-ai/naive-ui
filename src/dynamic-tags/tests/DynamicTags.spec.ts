@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils'
 import { h } from 'vue'
-import { NDynamicTags } from '../index'
 import { NAutoComplete } from '../../auto-complete/index'
 import { NButton } from '../../button/index'
 import { NTag } from '../../tag'
+import { NDynamicTags } from '../index'
 
 describe('n-dynamic-tags', () => {
   it('should work with import on demand', () => {

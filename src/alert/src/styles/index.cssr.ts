@@ -1,5 +1,5 @@
-import { c, cB, cE, cM } from '../../../_utils/cssr'
 import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-in-height-expand.cssr'
+import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier

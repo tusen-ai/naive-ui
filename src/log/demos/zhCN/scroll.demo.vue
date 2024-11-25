@@ -5,9 +5,9 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import type { LogInst } from 'naive-ui'
 import { useMessage } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 function log() {
   const l: string[] = []

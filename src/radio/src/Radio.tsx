@@ -1,12 +1,12 @@
-import { type CSSProperties, computed, defineComponent, h } from 'vue'
-import { useRtl } from '../../_mixins/use-rtl'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey, resolveWrappedSlot } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { type RadioTheme, radioLight } from '../styles'
-import { radioBaseProps, setup } from './use-radio'
+import { computed, type CSSProperties, defineComponent, h } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
+import { createKey, resolveWrappedSlot } from '../../_utils'
+import { radioLight, type RadioTheme } from '../styles'
 import style from './styles/radio.cssr'
+import { radioBaseProps, setup } from './use-radio'
 
 export const radioProps = {
   ...(useTheme.props as ThemeProps<RadioTheme>),

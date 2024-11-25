@@ -1,30 +1,30 @@
-import {
-  type PropType,
-  type VNode,
-  defineComponent,
-  h,
-  onMounted,
-  renderSlot,
-  watchEffect
-} from 'vue'
-import { VirtualList } from 'vueuc'
-import { useLocale } from '../../../_mixins'
-import { NxButton } from '../../../button'
-import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
-import { resolveSlotWithProps, warnOnce } from '../../../_utils'
-import {
-  type MonthItem,
-  type QuarterItem,
-  type YearItem,
-  getMonthString,
-  getQuarterString,
-  getYearString
-} from '../utils'
-import { MONTH_ITEM_HEIGHT } from '../config'
 import type {
   DatePickerClearSlotProps,
   DatePickerConfirmSlotProps
 } from '../public-types'
+import {
+  defineComponent,
+  h,
+  onMounted,
+  type PropType,
+  renderSlot,
+  type VNode,
+  watchEffect
+} from 'vue'
+import { VirtualList } from 'vueuc'
+import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
+import { useLocale } from '../../../_mixins'
+import { resolveSlotWithProps, warnOnce } from '../../../_utils'
+import { NxButton } from '../../../button'
+import { MONTH_ITEM_HEIGHT } from '../config'
+import {
+  getMonthString,
+  getQuarterString,
+  getYearString,
+  type MonthItem,
+  type QuarterItem,
+  type YearItem
+} from '../utils'
 import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
 
 export default defineComponent({

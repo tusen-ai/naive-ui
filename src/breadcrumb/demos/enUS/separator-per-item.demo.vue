@@ -5,8 +5,8 @@ Use separator prop or separator slot to custom separator of an item. When both a
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import { MdCash } from '@vicons/ionicons4'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   components: {

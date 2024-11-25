@@ -1,9 +1,9 @@
-import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
-import { createTheme } from '../../_mixins/use-theme'
-import { treeLight } from '../../tree/styles'
-import { emptyLight } from '../../empty/styles'
 import { internalSelectionLight } from '../../_internal/selection/styles'
+import { createTheme } from '../../_mixins/use-theme'
+import { commonLight } from '../../_styles/common'
+import { emptyLight } from '../../empty/styles'
+import { treeLight } from '../../tree/styles'
 
 export function self(vars: ThemeCommonVars) {
   const {

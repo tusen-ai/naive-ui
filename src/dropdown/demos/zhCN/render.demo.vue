@@ -5,8 +5,8 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h } from 'vue'
 import { NAvatar, NText, useMessage } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 function renderCustomHeader() {
   return h(

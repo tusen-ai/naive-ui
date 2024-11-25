@@ -1,6 +1,4 @@
-import { type Ref, inject, ref } from 'vue'
 import type { TreeNode } from 'treemate'
-import { treeSelectInjectionKey } from '../../tree-select/src/interface'
 import type {
   Key,
   TmNode,
@@ -8,6 +6,8 @@ import type {
   TreeOverrideNodeClickBehavior,
   TreeOverrideNodeClickBehaviorReturn
 } from './interface'
+import { inject, type Ref, ref } from 'vue'
+import { treeSelectInjectionKey } from '../../tree-select/src/interface'
 
 export function useKeyboard({
   props,

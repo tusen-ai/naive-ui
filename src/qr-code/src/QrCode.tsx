@@ -1,18 +1,18 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import {
-  type PropType,
   computed,
   defineComponent,
   h,
   onMounted,
+  type PropType,
   ref,
   watchEffect
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import { type QrCodeTheme, qrcodeLight } from '../styles'
-import style from './styles/index.cssr'
+import { qrcodeLight, type QrCodeTheme } from '../styles'
 import qrcodegen from './qrcodegen'
+import style from './styles/index.cssr'
 
 type Modules = ReturnType<qrcodegen.QrCode['getModules']>
 

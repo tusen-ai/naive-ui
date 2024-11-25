@@ -5,8 +5,8 @@ In some scenes, menu's value is passed from outside. The component is hard to un
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import type { MenuInst } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {

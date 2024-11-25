@@ -1,8 +1,8 @@
-import { h } from 'vue'
-import { mount } from '@vue/test-utils'
 import { IosAirplane } from '@vicons/ionicons4'
-import { NAlert } from '../index'
+import { mount } from '@vue/test-utils'
+import { h } from 'vue'
 import { NIcon } from '../../icon'
+import { NAlert } from '../index'
 
 describe('n-alert', () => {
   it('should work with import on demand', () => {

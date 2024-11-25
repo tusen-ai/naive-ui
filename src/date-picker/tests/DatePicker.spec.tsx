@@ -1,9 +1,9 @@
-import { ref } from 'vue'
+import type { Value } from '../src/interface'
 import { mount } from '@vue/test-utils'
 import { format } from 'date-fns'
-import { NDatePicker } from '../index'
-import type { Value } from '../src/interface'
+import { ref } from 'vue'
 import { dateEnUS } from '../../locales'
+import { NDatePicker } from '../index'
 
 describe('n-date-picker', () => {
   it('should work with import on demand', () => {

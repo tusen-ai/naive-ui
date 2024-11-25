@@ -1,41 +1,41 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { ButtonProps } from '../../button'
+import type { DynamicInputTheme } from '../styles'
+import type { OnUpdateValue } from './interface'
+import { createId } from 'seemly'
+import { useMergedState } from 'vooks'
 import {
-  type CSSProperties,
-  type PropType,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
   inject,
   isProxy,
+  type PropType,
   provide,
   ref,
   toRaw,
   toRef,
   watchEffect
 } from 'vue'
-import { useMergedState } from 'vooks'
-import { createId } from 'seemly'
+import { NBaseIcon } from '../../_internal'
 import {
   AddIcon,
   ArrowDownIcon,
   ArrowUpIcon,
   RemoveIcon
 } from '../../_internal/icons'
+import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import { formItemInjectionKey } from '../../_mixins/use-form-item'
-import { NBaseIcon } from '../../_internal'
+import { useRtl } from '../../_mixins/use-rtl'
+import { call, resolveSlot, resolveSlotWithProps, warnOnce } from '../../_utils'
 import { NButton } from '../../button'
 import { NButtonGroup } from '../../button-group'
-import type { ButtonProps } from '../../button'
-import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import { call, resolveSlot, resolveSlotWithProps, warnOnce } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { dynamicInputLight } from '../styles'
-import type { DynamicInputTheme } from '../styles'
-import { useRtl } from '../../_mixins/use-rtl'
 import NDynamicInputInputPreset from './InputPreset'
-import NDynamicInputPairPreset from './PairPreset'
 import { dynamicInputInjectionKey } from './interface'
-import type { OnUpdateValue } from './interface'
+import NDynamicInputPairPreset from './PairPreset'
 import style from './styles/index.cssr'
 
 const globalDataKeyMap = new WeakMap()

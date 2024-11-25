@@ -1,14 +1,14 @@
 import {
-  TransitionGroup,
   computed,
   defineComponent,
   h,
   ref,
   toRef,
+  TransitionGroup,
   watch
 } from 'vue'
-import NFadeInExpandTransition from '../../fade-in-expand-transition'
 import { useStyle } from '../../../_mixins'
+import NFadeInExpandTransition from '../../fade-in-expand-transition'
 import SlotMachineNumber from './SlotMachineNumber'
 import style from './styles/index.cssr'
 

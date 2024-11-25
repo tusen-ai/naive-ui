@@ -1,15 +1,22 @@
+import type {
+  CsvOptionsType,
+  DataTableInst,
+  MainTableRef,
+  RowKey
+} from './interface'
+import { createId } from 'seemly'
 import {
-  type CSSProperties,
-  Transition,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
   provide,
   ref,
   toRef,
+  Transition,
   watchEffect
 } from 'vue'
-import { createId } from 'seemly'
+import { NBaseLoading } from '../../_internal'
 import {
   useConfig,
   useLocale,
@@ -17,25 +24,18 @@ import {
   useTheme,
   useThemeClass
 } from '../../_mixins'
-import { NBaseLoading } from '../../_internal'
-import { NPagination } from '../../pagination'
 import { createKey, download, resolveSlot, warnOnce } from '../../_utils'
+import { NPagination } from '../../pagination'
 import { dataTableLight } from '../styles'
-import MainTable from './MainTable'
-import { useCheck } from './use-check'
-import { useTableData } from './use-table-data'
-import { useScroll } from './use-scroll'
-import { useResizable } from './use-resizable'
-import type {
-  CsvOptionsType,
-  DataTableInst,
-  MainTableRef,
-  RowKey
-} from './interface'
 import { dataTableInjectionKey, dataTableProps } from './interface'
-import { useGroupHeader } from './use-group-header'
-import { useExpand } from './use-expand'
+import MainTable from './MainTable'
 import style from './styles/index.cssr'
+import { useCheck } from './use-check'
+import { useExpand } from './use-expand'
+import { useGroupHeader } from './use-group-header'
+import { useResizable } from './use-resizable'
+import { useScroll } from './use-scroll'
+import { useTableData } from './use-table-data'
 import { generateCsv } from './utils'
 
 export default defineComponent({

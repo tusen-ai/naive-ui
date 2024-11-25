@@ -1,10 +1,12 @@
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { IconTheme } from '../styles'
 import {
   type Component,
-  type PropType,
   computed,
   defineComponent,
   h,
-  mergeProps
+  mergeProps,
+  type PropType
 } from 'vue'
 import {
   type ThemeProps,
@@ -12,9 +14,7 @@ import {
   useTheme,
   useThemeClass
 } from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { formatLength, warn } from '../../_utils'
-import type { IconTheme } from '../styles'
 import { iconLight } from '../styles'
 import style from './styles/index.cssr'
 

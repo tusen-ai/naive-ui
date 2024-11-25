@@ -1,9 +1,9 @@
+import type { ThemeCommonVars } from '../../_styles/common'
 import { changeColor } from 'seemly'
+import { createTheme } from '../../_mixins'
+import { commonLight } from '../../_styles/common'
 import { buttonLight } from '../../button/styles'
 import { progressLight } from '../../progress/styles'
-import { commonLight } from '../../_styles/common'
-import type { ThemeCommonVars } from '../../_styles/common'
-import { createTheme } from '../../_mixins'
 
 export function self(vars: ThemeCommonVars) {
   const {

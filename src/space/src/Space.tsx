@@ -1,19 +1,19 @@
-import {
-  type CSSProperties,
-  Comment,
-  type PropType,
-  computed,
-  defineComponent,
-  h
-} from 'vue'
-import { depx, getGap } from 'seemly'
-import { createKey, flatten, getSlot } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { spaceLight } from '../styles'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { SpaceTheme } from '../styles'
+import { depx, getGap } from 'seemly'
+import {
+  Comment,
+  computed,
+  type CSSProperties,
+  defineComponent,
+  h,
+  type PropType
+} from 'vue'
+import { useConfig, useTheme } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
+import { createKey, flatten, getSlot } from '../../_utils'
+import { spaceLight } from '../styles'
 import { ensureSupportFlexGap } from './utils'
 
 type Align =

@@ -5,9 +5,9 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h } from 'vue'
-import { NAlert, useMessage } from 'naive-ui'
 import type { MessageRenderMessage } from 'naive-ui'
+import { NAlert, useMessage } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 const renderMessage: MessageRenderMessage = (props) => {
   const { type } = props

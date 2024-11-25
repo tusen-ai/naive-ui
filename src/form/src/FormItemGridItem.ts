@@ -1,12 +1,12 @@
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { FormItemInst } from './interface'
 import { defineComponent, h, ref } from 'vue'
+import { keep, keysOf } from '../../_utils'
 import NGridItem, {
   gridItemPropKeys,
   gridItemProps
 } from '../../grid/src/GridItem'
-import { keep, keysOf } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import NFormItem, { formItemPropKeys, formItemProps } from './FormItem'
-import type { FormItemInst } from './interface'
 
 export const formItemGiProps = {
   ...gridItemProps,

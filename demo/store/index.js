@@ -1,21 +1,21 @@
-import { computed, ref } from 'vue'
-import { useMemo } from 'vooks'
 import {
-  NConfigProvider,
   darkTheme,
   dateEnUS,
   dateZhCN,
   enUS,
+  NConfigProvider,
   useOsTheme,
   zhCN
 } from 'naive-ui'
+import { useMemo } from 'vooks'
+import { computed, ref } from 'vue'
 import { TsConfigProvider } from '../../themes/tusimple/src'
 import { i18n, useIsMobile } from '../utils/composables'
+import hljs from './hljs'
 import {
   createComponentMenuOptions,
   createDocumentationMenuOptions
 } from './menu-options'
-import hljs from './hljs'
 
 let route = null
 let router = null

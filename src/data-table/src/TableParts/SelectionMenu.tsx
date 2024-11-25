@@ -1,9 +1,9 @@
-import { type Ref, computed, defineComponent, h, inject } from 'vue'
-import { NDropdown } from '../../../dropdown'
 import type { NLocale } from '../../../locales'
+import type { DataTableSelectionOption, InternalRowData } from '../interface'
+import { computed, defineComponent, h, inject, type Ref } from 'vue'
 import { NBaseIcon } from '../../../_internal'
 import { ChevronDownIcon } from '../../../_internal/icons'
-import type { DataTableSelectionOption, InternalRowData } from '../interface'
+import { NDropdown } from '../../../dropdown'
 import { dataTableInjectionKey } from '../interface'
 
 const allKey = '_n_all__'

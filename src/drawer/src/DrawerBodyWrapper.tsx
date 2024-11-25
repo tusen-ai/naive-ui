@@ -1,29 +1,29 @@
+import type { ScrollbarProps } from '../../_internal'
+import { clickoutside } from 'vdirs'
 import {
-  type CSSProperties,
-  type DirectiveArguments,
-  type PropType,
-  Transition,
   computed,
+  type CSSProperties,
   defineComponent,
+  type DirectiveArguments,
   h,
   inject,
   mergeProps,
   onBeforeUnmount,
+  type PropType,
   provide,
   ref,
+  Transition,
   vShow,
   watch,
   watchEffect,
   withDirectives
 } from 'vue'
 import { VFocusTrap } from 'vueuc'
-import { clickoutside } from 'vdirs'
-import { useConfig, useRtl } from '../../_mixins'
-import { popoverBodyInjectionKey } from '../../popover/src/interface'
-import { modalBodyInjectionKey } from '../../modal/src/interface'
 import { NScrollbar } from '../../_internal'
-import type { ScrollbarProps } from '../../_internal'
+import { useConfig, useRtl } from '../../_mixins'
 import { useLockHtmlScroll } from '../../_utils'
+import { modalBodyInjectionKey } from '../../modal/src/interface'
+import { popoverBodyInjectionKey } from '../../popover/src/interface'
 import { drawerBodyInjectionKey, drawerInjectionKey } from './interface'
 
 export type Placement = 'left' | 'right' | 'top' | 'bottom'
@@ -293,7 +293,7 @@ export default defineComponent({
                                   `${mergedClsPrefix}-drawer__resize-trigger`,
                                   (this.isDragging
                                     || this.isHoverOnResizeTrigger)
-                                    && `${mergedClsPrefix}-drawer__resize-trigger--hover`
+                                  && `${mergedClsPrefix}-drawer__resize-trigger--hover`
                                 ]}
                                 onMouseenter={
                                   this.handleMouseenterResizeTrigger

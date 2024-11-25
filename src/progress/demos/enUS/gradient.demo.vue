@@ -5,9 +5,9 @@ You may want to use color combinations.
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { changeColor } from 'seemly'
 import { useThemeVars } from 'naive-ui'
+import { changeColor } from 'seemly'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {

@@ -1,7 +1,7 @@
-import { inputLight } from '../../input/styles'
-import { buttonLight } from '../../button/styles'
-import { commonLight } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
+import { commonLight } from '../../_styles/common'
+import { buttonLight } from '../../button/styles'
+import { inputLight } from '../../input/styles'
 import commonVariables from './_common'
 
 function self() {

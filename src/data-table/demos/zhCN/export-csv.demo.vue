@@ -7,7 +7,6 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h, ref } from 'vue'
 import type {
   DataTableColumns,
   DataTableGetCsvCell,
@@ -15,6 +14,7 @@ import type {
   DataTableInst,
   DataTableRowData
 } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
 
 interface Song {
   key: number

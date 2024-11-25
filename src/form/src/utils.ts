@@ -1,9 +1,9 @@
-import { type ComputedRef, computed, inject, ref } from 'vue'
-import { get } from 'lodash-es'
-import { formatLength } from '../../_utils'
 import type { FormItemSetupProps } from './FormItem'
-import { formInjectionKey } from './context'
 import type { FormItemRule, Size } from './interface'
+import { get } from 'lodash-es'
+import { computed, type ComputedRef, inject, ref } from 'vue'
+import { formatLength } from '../../_utils'
+import { formInjectionKey } from './context'
 
 export function formItemSize(props: FormItemSetupProps): {
   mergedSize: ComputedRef<Size>

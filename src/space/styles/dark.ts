@@ -1,5 +1,5 @@
-import commonVars from './_common'
 import type { SpaceTheme } from './light'
+import commonVars from './_common'
 
 const spaceDark: SpaceTheme = {
   name: 'Space',

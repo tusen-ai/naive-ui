@@ -1,14 +1,22 @@
-import { Fragment, defineComponent, h, inject, ref } from 'vue'
 import type { PropType, VNode, VNodeChild } from 'vue'
-import { happensIn, pxfy } from 'seemly'
 import type { VirtualListInst } from 'vueuc'
+import type { ColItem, RowItem } from '../use-group-header'
+import { happensIn, pxfy } from 'seemly'
+import { defineComponent, Fragment, h, inject, ref } from 'vue'
 import { VVirtualList } from 'vueuc'
 import { formatLength } from '../../../_utils'
 import { NCheckbox } from '../../../checkbox'
 import { NEllipsis } from '../../../ellipsis'
-import SortButton from '../HeaderButton/SortButton'
 import FilterButton from '../HeaderButton/FilterButton'
 import ResizeButton from '../HeaderButton/ResizeButton'
+import SortButton from '../HeaderButton/SortButton'
+import {
+  type ColumnKey,
+  dataTableInjectionKey,
+  type TableBaseColumn,
+  type TableColumnGroup,
+  type TableExpandColumn
+} from '../interface'
 import {
   clampValueFollowCSSRules,
   createNextSorter,
@@ -18,14 +26,6 @@ import {
   isColumnSortable,
   isColumnSorting
 } from '../utils'
-import {
-  type ColumnKey,
-  type TableBaseColumn,
-  type TableColumnGroup,
-  type TableExpandColumn,
-  dataTableInjectionKey
-} from '../interface'
-import type { ColItem, RowItem } from '../use-group-header'
 import SelectionMenu from './SelectionMenu'
 
 function renderTitle(

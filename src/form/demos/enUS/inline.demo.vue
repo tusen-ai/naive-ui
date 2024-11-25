@@ -5,9 +5,9 @@ An example of an inline form.
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import type { FormInst } from 'naive-ui'
 import { useMessage } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {

@@ -5,8 +5,8 @@ Different ways to `trigger`/`show` a dropdown.
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import { useMessage } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {

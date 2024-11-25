@@ -1,7 +1,7 @@
-import { defineComponent, h, inject } from 'vue'
 import { useMemo } from 'vooks'
-import { NCheckbox } from '../../checkbox'
+import { defineComponent, h, inject } from 'vue'
 import { getTitleAttribute } from '../../_utils'
+import { NCheckbox } from '../../checkbox'
 import { transferInjectionKey } from './interface'
 
 export default defineComponent({

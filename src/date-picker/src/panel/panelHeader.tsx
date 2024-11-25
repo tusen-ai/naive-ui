@@ -1,14 +1,14 @@
+import { getPreciseEventTarget } from 'seemly'
+import { clickoutside } from 'vdirs'
 import {
-  type PropType,
-  Transition,
   defineComponent,
   h,
+  type PropType,
   ref,
+  Transition,
   withDirectives
 } from 'vue'
 import { VBinder, VFollower, VTarget } from 'vueuc'
-import { clickoutside } from 'vdirs'
-import { getPreciseEventTarget } from 'seemly'
 import MonthPanel from './month'
 
 export default defineComponent({

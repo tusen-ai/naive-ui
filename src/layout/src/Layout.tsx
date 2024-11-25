@@ -1,22 +1,22 @@
+import type { ScrollbarInst, ScrollbarProps } from '../../_internal'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { LayoutTheme } from '../styles'
+import type { LayoutInst } from './interface'
 import {
-  type CSSProperties,
-  type ExtractPropTypes,
-  type PropType,
   computed,
+  type CSSProperties,
   defineComponent,
+  type ExtractPropTypes,
   h,
+  type PropType,
   provide,
   ref
 } from 'vue'
 import { NScrollbar } from '../../_internal'
-import type { ScrollbarInst, ScrollbarProps } from '../../_internal'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { createInjectionKey, useReactivated } from '../../_utils'
-import type { ThemeProps } from '../../_mixins'
 import { layoutLight } from '../styles'
-import type { LayoutTheme } from '../styles'
-import type { LayoutInst } from './interface'
 import { positionProp } from './interface'
 import style from './styles/layout.cssr'
 

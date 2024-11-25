@@ -1,11 +1,13 @@
+import type { ExtractPublicPropTypes } from '../../_utils'
 import {
-  type CSSProperties,
-  type PropType,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
-  inject
+  inject,
+  type PropType
 } from 'vue'
+import { useConfig, useThemeClass } from '../../_mixins'
 import {
   createKey,
   formatLength,
@@ -14,8 +16,6 @@ import {
   throwError,
   useHoudini
 } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import { useConfig, useThemeClass } from '../../_mixins'
 import { timelineInjectionKey } from './Timeline'
 
 export const timelineItemProps = {

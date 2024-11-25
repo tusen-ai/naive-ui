@@ -1,5 +1,5 @@
-import { vi } from 'date-fns/locale'
 import type { NDateLocale } from './enUS'
+import { vi } from 'date-fns/locale'
 
 const dateVi: NDateLocale = {
   name: 'vi-VN',

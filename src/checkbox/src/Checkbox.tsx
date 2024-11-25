@@ -1,39 +1,39 @@
-import {
-  type CSSProperties,
-  type PropType,
-  computed,
-  defineComponent,
-  h,
-  inject,
-  ref,
-  toRef,
-  watchEffect
-} from 'vue'
-import { useMemo, useMergedState } from 'vooks'
-import { createId } from 'seemly'
-import { on } from 'evtd'
-import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { NIconSwitchTransition } from '../../_internal'
-import {
-  type ExtractPublicPropTypes,
-  type MaybeArray,
-  call,
-  createKey,
-  resolveWrappedSlot,
-  warnOnce
-} from '../../_utils'
-import { checkboxLight } from '../styles'
 import type { CheckboxTheme } from '../styles'
-import { useRtl } from '../../_mixins/use-rtl'
-import CheckMark from './CheckMark'
-import LineMark from './LineMark'
-import { checkboxGroupInjectionKey } from './CheckboxGroup'
 import type {
   CheckboxInst,
   OnUpdateChecked,
   OnUpdateCheckedImpl
 } from './interface'
+import { on } from 'evtd'
+import { createId } from 'seemly'
+import { useMemo, useMergedState } from 'vooks'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  h,
+  inject,
+  type PropType,
+  ref,
+  toRef,
+  watchEffect
+} from 'vue'
+import { NIconSwitchTransition } from '../../_internal'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
+import {
+  call,
+  createKey,
+  type ExtractPublicPropTypes,
+  type MaybeArray,
+  resolveWrappedSlot,
+  warnOnce
+} from '../../_utils'
+import { checkboxLight } from '../styles'
+import { checkboxGroupInjectionKey } from './CheckboxGroup'
+import CheckMark from './CheckMark'
+import LineMark from './LineMark'
 import style from './styles/index.cssr'
 
 export const checkboxProps = {

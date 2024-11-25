@@ -1,4 +1,5 @@
-import { type CSSProperties, type PropType, defineComponent, h } from 'vue'
+import type { ProgressGradient, ProgressStatus } from './public-types'
+import { type CSSProperties, defineComponent, h, type PropType } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {
   ErrorIcon,
@@ -6,7 +7,6 @@ import {
   SuccessIcon,
   WarningIcon
 } from '../../_internal/icons'
-import type { ProgressGradient, ProgressStatus } from './public-types'
 
 const iconMap = {
   success: <SuccessIcon />,

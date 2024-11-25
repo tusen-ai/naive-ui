@@ -1,6 +1,6 @@
-import { commonLight } from '../../_styles/common'
-import type { ThemeCommonVars } from '../../_styles/common'
 import type { Theme } from '../../_mixins/use-theme'
+import type { ThemeCommonVars } from '../../_styles/common'
+import { commonLight } from '../../_styles/common'
 
 function self(vars: ThemeCommonVars) {
   const { textColor2, fontSize, fontWeightStrong, textColor3 } = vars

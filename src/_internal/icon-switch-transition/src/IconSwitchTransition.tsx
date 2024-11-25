@@ -1,5 +1,5 @@
-import { Transition, defineComponent, h } from 'vue'
 import { useIsMounted } from 'vooks'
+import { defineComponent, h, Transition } from 'vue'
 
 export default defineComponent({
   name: 'BaseIconSwitchTransition',

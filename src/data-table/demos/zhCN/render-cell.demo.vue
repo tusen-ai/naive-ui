@@ -5,9 +5,9 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h } from 'vue'
-import { NText } from 'naive-ui'
 import type { DataTableColumns } from 'naive-ui'
+import { NText } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 interface Song {
   no: number

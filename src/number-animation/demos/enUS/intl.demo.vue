@@ -7,8 +7,8 @@ Please note that, the feature uses `Intl` API. For compitability refers to [form
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import type { NumberAnimationInst } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {

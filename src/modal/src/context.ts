@@ -1,9 +1,9 @@
-import { createInjectionKey } from '../../_utils'
 import type {
   ModalApiInjection,
   ModalProviderInjection,
   ModalReactiveListInjection
 } from './ModalProvider'
+import { createInjectionKey } from '../../_utils'
 
 export const modalProviderInjectionKey
   = createInjectionKey<ModalProviderInjection>('n-modal-provider')

@@ -3,9 +3,9 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h, ref } from 'vue'
-import { NButton, useMessage } from 'naive-ui'
 import type { DataTableColumns, PaginationProps } from 'naive-ui'
+import { NButton, useMessage } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
 
 interface Song {
   no: number

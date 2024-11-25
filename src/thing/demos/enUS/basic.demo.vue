@@ -5,8 +5,8 @@ Thing provides many slots to custom.
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   components: {

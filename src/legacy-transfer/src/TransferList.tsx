@@ -1,16 +1,16 @@
 import {
-  Fragment,
-  type PropType,
-  Transition,
-  TransitionGroup,
   defineComponent,
+  Fragment,
   h,
   inject,
-  ref
+  type PropType,
+  ref,
+  Transition,
+  TransitionGroup
 } from 'vue'
 import { VirtualList, type VirtualListInst } from 'vueuc'
-import { NEmpty } from '../../empty'
 import { NScrollbar, type ScrollbarInst } from '../../_internal'
+import { NEmpty } from '../../empty'
 import { type Option, transferInjectionKey } from './interface'
 import NTransferListItem from './TransferListItem'
 

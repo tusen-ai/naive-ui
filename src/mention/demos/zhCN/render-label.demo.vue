@@ -5,10 +5,10 @@
 </markdown>
 
 <script lang="ts">
-import type { VNodeChild } from 'vue'
-import { defineComponent, h } from 'vue'
 import type { MentionOption } from 'naive-ui'
+import type { VNodeChild } from 'vue'
 import { NAvatar } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   setup() {

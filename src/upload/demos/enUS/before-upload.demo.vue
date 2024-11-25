@@ -5,9 +5,9 @@ Use `before-upload` to perform a function before the upload starts (e.g. cancel 
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { useMessage } from 'naive-ui'
 import type { UploadFileInfo } from 'naive-ui'
+import { useMessage } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {

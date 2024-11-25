@@ -5,8 +5,8 @@ Various data would come from backend.
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import type { SelectGroupOption, SelectOption } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {

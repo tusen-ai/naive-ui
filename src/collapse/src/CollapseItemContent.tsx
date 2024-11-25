@@ -1,12 +1,12 @@
+import { useFalseUntilTruthy } from 'vooks'
 import {
-  type PropType,
   defineComponent,
   h,
+  type PropType,
   toRef,
   vShow,
   withDirectives
 } from 'vue'
-import { useFalseUntilTruthy } from 'vooks'
 import { NFadeInExpandTransition } from '../../_internal'
 
 export default defineComponent({

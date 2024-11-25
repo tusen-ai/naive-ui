@@ -1,12 +1,12 @@
-import { type PropType, computed, defineComponent, h } from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { inputLight } from '../styles'
 import type { InputTheme } from '../styles'
-import style from './styles/input-group-label.cssr'
 import type { Size } from './interface'
+import { computed, defineComponent, h, type PropType } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { createKey } from '../../_utils'
+import { inputLight } from '../styles'
+import style from './styles/input-group-label.cssr'
 
 export const inputGroupLabelProps = {
   ...(useTheme.props as ThemeProps<InputTheme>),

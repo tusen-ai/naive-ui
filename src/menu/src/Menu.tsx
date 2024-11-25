@@ -1,36 +1,7 @@
-import {
-  type ExtractPropTypes,
-  type PropType,
-  type VNode,
-  type VNodeChild,
-  computed,
-  defineComponent,
-  h,
-  inject,
-  mergeProps,
-  provide,
-  ref,
-  toRef,
-  watchEffect
-} from 'vue'
-import { type Key, createTreeMate } from 'treemate'
-import { useCompitable, useMergedState } from 'vooks'
-import {
-  type FollowerPlacement,
-  VOverflow,
-  type VOverflowInst,
-  VResizeObserver
-} from 'vueuc'
-import { createId } from 'seemly'
-import { layoutSiderInjectionKey } from '../../layout/src/interface'
-import type { DropdownProps } from '../../dropdown'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call } from '../../_utils'
 import type { MaybeArray } from '../../_utils'
-import { menuLight } from '../styles'
+import type { DropdownProps } from '../../dropdown'
 import type { MenuTheme } from '../styles'
-import { isIgnoredNode, itemRenderer } from './utils'
 import type {
   MenuGroupOption,
   MenuIgnoredOption,
@@ -43,10 +14,39 @@ import type {
   OnUpdateValue,
   OnUpdateValueImpl
 } from './interface'
-import { useCheckDeprecated } from './useCheckDeprecated'
+import { createId } from 'seemly'
+import { createTreeMate, type Key } from 'treemate'
+import { useCompitable, useMergedState } from 'vooks'
+import {
+  computed,
+  defineComponent,
+  type ExtractPropTypes,
+  h,
+  inject,
+  mergeProps,
+  type PropType,
+  provide,
+  ref,
+  toRef,
+  type VNode,
+  type VNodeChild,
+  watchEffect
+} from 'vue'
+import {
+  type FollowerPlacement,
+  VOverflow,
+  type VOverflowInst,
+  VResizeObserver
+} from 'vueuc'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { call } from '../../_utils'
+import { layoutSiderInjectionKey } from '../../layout/src/interface'
+import { menuLight } from '../styles'
 import { menuInjectionKey } from './context'
-import { NSubmenu } from './Submenu'
 import style from './styles/index.cssr'
+import { NSubmenu } from './Submenu'
+import { useCheckDeprecated } from './useCheckDeprecated'
+import { isIgnoredNode, itemRenderer } from './utils'
 
 export const menuProps = {
   ...(useTheme.props as ThemeProps<MenuTheme>),

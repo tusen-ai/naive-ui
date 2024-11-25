@@ -5,8 +5,8 @@ Do whatever you want.
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h, ref } from 'vue'
 import type { CountdownProps } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
 
 export default defineComponent({
   setup() {

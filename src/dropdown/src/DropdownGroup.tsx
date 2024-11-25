@@ -1,16 +1,16 @@
-import { Fragment, type PropType, defineComponent, h } from 'vue'
 import type { TreeNode } from 'treemate'
-import { warn } from '../../_utils'
-
-import NDropdownOption from './DropdownOption'
-import NDropdownDivider from './DropdownDivider'
-import NDropdownGroupHeader from './DropdownGroupHeader'
-import { isDividerNode } from './utils'
 import type {
   DropdownGroupOption,
   DropdownIgnoredOption,
   DropdownOption
 } from './interface'
+import { defineComponent, Fragment, h, type PropType } from 'vue'
+
+import { warn } from '../../_utils'
+import NDropdownDivider from './DropdownDivider'
+import NDropdownGroupHeader from './DropdownGroupHeader'
+import NDropdownOption from './DropdownOption'
+import { isDividerNode } from './utils'
 
 export default defineComponent({
   name: 'NDropdownGroup',

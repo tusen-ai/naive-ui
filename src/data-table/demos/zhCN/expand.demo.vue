@@ -5,9 +5,9 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h } from 'vue'
-import { NButton, NTag, useMessage } from 'naive-ui'
 import type { DataTableColumns } from 'naive-ui'
+import { NButton, NTag, useMessage } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 interface RowData {
   key: number

@@ -1,3 +1,4 @@
+import { merge } from 'lodash-es'
 import {
   defineComponent,
   inject,
@@ -5,9 +6,8 @@ import {
   onUnmounted,
   watchEffect
 } from 'vue'
-import { merge } from 'lodash-es'
-import { warn } from '../../_utils'
 import { commonLight } from '../../_styles/common'
+import { warn } from '../../_utils'
 import { configProviderInjectionKey } from '../../config-provider/src/context'
 
 export default defineComponent({

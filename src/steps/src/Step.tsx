@@ -1,16 +1,18 @@
+import type { ExtractPublicPropTypes } from '../../_utils'
 import {
-  type CSSProperties,
-  type PropType,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
-  inject
+  inject,
+  type PropType
 } from 'vue'
+import { NBaseIcon, NIconSwitchTransition } from '../../_internal'
 import {
   CloseIcon as ErrorIcon,
   CheckmarkIcon as FinishedIcon
 } from '../../_internal/icons'
-import { NBaseIcon, NIconSwitchTransition } from '../../_internal'
+import { useConfig, useThemeClass } from '../../_mixins'
 import {
   call,
   createKey,
@@ -18,8 +20,6 @@ import {
   resolveWrappedSlot,
   throwError
 } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import { useConfig, useThemeClass } from '../../_mixins'
 import { stepsInjectionKey } from './Steps'
 
 export const stepProps = {

@@ -1,5 +1,5 @@
-import { et } from 'date-fns/locale'
 import type { NDateLocale } from './enUS'
+import { et } from 'date-fns/locale'
 
 const dateEtEE: NDateLocale = {
   name: 'et-EE',
