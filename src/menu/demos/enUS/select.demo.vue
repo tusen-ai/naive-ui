@@ -5,17 +5,17 @@ Usually you can use vue-router here to accomplish routing. Also, you can render 
 </markdown>
 
 <script lang="ts">
-import type { Component } from 'vue'
-import { defineComponent, h } from 'vue'
-import { RouterLink } from 'vue-router'
-import { NIcon, useMessage } from 'naive-ui'
 import type { MenuOption } from 'naive-ui'
+import type { Component } from 'vue'
 import {
   BookOutline as BookIcon,
   HomeOutline as HomeIcon,
   PersonOutline as PersonIcon,
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
+import { NIcon, useMessage } from 'naive-ui'
+import { defineComponent, h } from 'vue'
+import { RouterLink } from 'vue-router'
 
 function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })

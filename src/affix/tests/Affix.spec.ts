@@ -1,6 +1,6 @@
-import { h } from 'vue'
 import { mount } from '@vue/test-utils'
 import { sleep } from 'seemly'
+import { h } from 'vue'
 import { NAffix } from '../index'
 
 async function makeScroll(

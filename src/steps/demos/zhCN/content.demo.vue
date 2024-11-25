@@ -3,8 +3,8 @@
 </markdown>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
 import type { StepsProps } from 'naive-ui'
+import { computed, defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {

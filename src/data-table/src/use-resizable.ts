@@ -1,5 +1,5 @@
-import { ref } from 'vue'
 import type { ColumnKey, TableColumn } from './interface'
+import { ref } from 'vue'
 import { isColumnResizable } from './utils'
 
 export function useResizable() {

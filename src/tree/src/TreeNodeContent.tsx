@@ -1,9 +1,9 @@
 import {
-  type HTMLAttributes,
-  type PropType,
   defineComponent,
   h,
+  type HTMLAttributes,
   inject,
+  type PropType,
   ref
 } from 'vue'
 import { render } from '../../_utils'

@@ -3,12 +3,12 @@ import type { ConfigProviderProps } from '../../config-provider'
 import type { DialogApi, DialogProviderProps } from '../../dialog'
 import type { LoadingBarApi, LoadingBarProviderProps } from '../../loading-bar'
 import type { MessageApi, MessageProviderProps } from '../../message'
+import type { ModalApi } from '../../modal'
+import type { ModalProviderProps } from '../../modal/src/ModalProvider'
 import type {
   NotificationApi,
   NotificationProviderProps
 } from '../../notification'
-import type { ModalProviderProps } from '../../modal/src/ModalProvider'
-import type { ModalApi } from '../../modal'
 
 export type MaybeRef<T> = Ref<T> | T
 

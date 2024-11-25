@@ -5,8 +5,8 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h } from 'vue'
 import { NInput } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 const showInput = defineComponent({
   render() {

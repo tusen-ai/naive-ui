@@ -1,5 +1,5 @@
-import { type PropType, computed, defineComponent, h } from 'vue'
 import { hsv2rgb, hsva, toRgbaString } from 'seemly'
+import { computed, defineComponent, h, type PropType } from 'vue'
 import { warn } from '../../_utils'
 import { type ColorPickerMode, convertColor, getModeFromValue } from './utils'
 

@@ -5,9 +5,9 @@ The default style of toolbar may not meet your demand, let's make some configura
 </markdown>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
 import type { GlobalThemeOverrides } from 'naive-ui'
 import { useThemeVars } from 'naive-ui'
+import { computed, defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {

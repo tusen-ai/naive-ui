@@ -1,8 +1,8 @@
-import { type CSSProperties, computed, defineComponent, h } from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { typographyLight } from '../styles'
 import type { TypographyTheme } from '../styles'
+import { computed, type CSSProperties, defineComponent, h } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { typographyLight } from '../styles'
 import style from './styles/hr.cssr'
 
 export default defineComponent({

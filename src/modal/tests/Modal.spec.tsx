@@ -1,7 +1,7 @@
-import { defineComponent, h, ref } from 'vue'
 import { mount } from '@vue/test-utils'
-import { type ModalProps, NModal } from '../index'
+import { defineComponent, h, ref } from 'vue'
 import { NButton } from '../../button'
+import { type ModalProps, NModal } from '../index'
 
 function mountModal({
   modalProps,

@@ -3,8 +3,8 @@ export {
   loadingBarProviderProps
 } from './src/LoadingBarProvider'
 export type {
+  LoadingBarApiInjection as LoadingBarApi,
   LoadingBarProviderInst,
-  LoadingBarProviderProps,
-  LoadingBarApiInjection as LoadingBarApi
+  LoadingBarProviderProps
 } from './src/LoadingBarProvider'
 export { useLoadingBar } from './src/use-loading-bar'

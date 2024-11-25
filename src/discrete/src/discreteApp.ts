@@ -1,4 +1,6 @@
-import { type App, type Component, type VNode, createApp, h, unref } from 'vue'
+import type { DiscreteApiType, MaybeRef } from './interface'
+import { type App, type Component, createApp, h, unref, type VNode } from 'vue'
+import { isBrowser, warn } from '../../_utils'
 import {
   type ConfigProviderProps,
   NConfigProvider
@@ -6,11 +8,9 @@ import {
 import { type DialogApi, useDialog } from '../../dialog'
 import { type LoadingBarApi, useLoadingBar } from '../../loading-bar'
 import { type MessageApi, useMessage } from '../../message'
-import { type NotificationApi, useNotification } from '../../notification'
 import { type ModalApi, useModal } from '../../modal'
-import { isBrowser, warn } from '../../_utils'
+import { type NotificationApi, useNotification } from '../../notification'
 import { NInjectionExtractor } from './InjectionExtractor'
-import type { DiscreteApiType, MaybeRef } from './interface'
 
 export type Provider<P = any> = new (...args: any[]) => { $props: P }
 

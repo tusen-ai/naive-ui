@@ -1,11 +1,11 @@
 import {
-  type CSSProperties,
-  type PropType,
-  type Ref,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
+  type PropType,
   provide,
+  type Ref,
   toRef
 } from 'vue'
 import {
@@ -15,8 +15,8 @@ import {
   useThemeClass
 } from '../../_mixins'
 import {
-  type ExtractPublicPropTypes,
   createInjectionKey,
+  type ExtractPublicPropTypes,
   formatLength
 } from '../../_utils'
 import floatButtonGroupLight, {

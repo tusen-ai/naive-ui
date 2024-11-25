@@ -1,3 +1,5 @@
+import type { BuiltInGlobalTheme } from './interface'
+import { scrollbarLight } from '../_internal/scrollbar/styles'
 // The file is for internal usage, do not export it, since all the components
 // have default light theme.
 import { commonLight } from '../_styles/common'
@@ -33,8 +35,10 @@ import { elementLight } from '../element/styles'
 import { ellipsisLight } from '../ellipsis/styles'
 import { emptyLight } from '../empty/styles'
 import { equationLight } from '../equation/styles'
-import { formLight } from '../form/styles'
+import { flexLight } from '../flex/styles'
 import { floatButtonLight } from '../float-button/styles'
+import { floatButtonGroupLight } from '../float-button-group/styles'
+import { formLight } from '../form/styles'
 import { gradientTextLight } from '../gradient-text/styles'
 import { iconLight } from '../icon/styles'
 import { iconWrapperLight } from '../icon-wrapper/styles'
@@ -42,12 +46,14 @@ import { imageLight } from '../image/styles'
 import { inputLight } from '../input/styles'
 import { inputNumberLight } from '../input-number/styles'
 import { layoutLight } from '../layout/styles'
+import { rowLight } from '../legacy-grid/styles'
 import { legacyTransferLight } from '../legacy-transfer/styles'
 import { listLight } from '../list/styles'
 import { loadingBarLight } from '../loading-bar/styles'
 import { logLight } from '../log/styles'
-import { menuLight } from '../menu/styles'
+import { marqueeLight } from '../marquee/styles'
 import { mentionLight } from '../mention/styles'
+import { menuLight } from '../menu/styles'
 import { messageLight } from '../message/styles'
 import { modalLight } from '../modal/styles'
 import { notificationLight } from '../notification/styles'
@@ -61,13 +67,12 @@ import { qrcodeLight } from '../qr-code/styles'
 import { radioLight } from '../radio/styles'
 import { rateLight } from '../rate/styles'
 import { resultLight } from '../result/styles'
-import { rowLight } from '../legacy-grid/styles'
-import { scrollbarLight } from '../_internal/scrollbar/styles'
 import { selectLight } from '../select/styles'
 import { skeletonLight } from '../skeleton/styles'
 import { sliderLight } from '../slider/styles'
 import { spaceLight } from '../space/styles'
 import { spinLight } from '../spin/styles'
+import { splitLight } from '../split/styles'
 import { statisticLight } from '../statistic/styles'
 import { stepsLight } from '../steps/styles'
 import { switchLight } from '../switch/styles'
@@ -79,15 +84,11 @@ import { timePickerLight } from '../time-picker/styles'
 import { timelineLight } from '../timeline/styles'
 import { tooltipLight } from '../tooltip/styles'
 import { transferLight } from '../transfer/styles'
-import { typographyLight } from '../typography/styles'
 import { treeLight } from '../tree/styles'
 import { treeSelectLight } from '../tree-select/styles'
+import { typographyLight } from '../typography/styles'
 import { uploadLight } from '../upload/styles'
 import { watermarkLight } from '../watermark/styles'
-import { splitLight } from '../split/styles'
-import { flexLight } from '../flex/styles'
-import { floatButtonGroupLight } from '../float-button-group/styles'
-import type { BuiltInGlobalTheme } from './interface'
 
 export const lightTheme: BuiltInGlobalTheme = {
   name: 'light',
@@ -177,5 +178,6 @@ export const lightTheme: BuiltInGlobalTheme = {
   Watermark: watermarkLight,
   Split: splitLight,
   FloatButton: floatButtonLight,
-  FloatButtonGroup: floatButtonGroupLight
+  FloatButtonGroup: floatButtonGroupLight,
+  Marquee: marqueeLight
 }

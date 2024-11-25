@@ -1,19 +1,19 @@
-import { type PropType, defineComponent, h, watchEffect } from 'vue'
+import type {
+  DatePickerClearSlotProps,
+  DatePickerNowSlotProps
+} from '../public-types'
+import { defineComponent, h, type PropType, watchEffect } from 'vue'
+import { NBaseFocusDetector } from '../../../_internal'
 import {
   BackwardIcon,
   FastBackwardIcon,
   FastForwardIcon,
   ForwardIcon
 } from '../../../_internal/icons'
-import { NButton, NxButton } from '../../../button'
-import { NBaseFocusDetector } from '../../../_internal'
 import { resolveSlot, resolveSlotWithProps, warnOnce } from '../../../_utils'
-import type {
-  DatePickerClearSlotProps,
-  DatePickerNowSlotProps
-} from '../public-types'
-import { useCalendar, useCalendarProps } from './use-calendar'
+import { NButton, NxButton } from '../../../button'
 import PanelHeader from './panelHeader'
+import { useCalendar, useCalendarProps } from './use-calendar'
 
 /**
  * Date Panel
@@ -75,7 +75,8 @@ export default defineComponent({
               {resolveSlot($slots['prev-month'], () => [<BackwardIcon />])}
             </div>
             <PanelHeader
-              monthBeforeYear={this.locale.monthBeforeYear}
+              monthYearSeparator={this.calendarHeaderMonthYearSeparator}
+              monthBeforeYear={this.calendarMonthBeforeYear}
               value={this.calendarValue}
               onUpdateValue={this.onUpdateCalendarValue}
               mergedClsPrefix={mergedClsPrefix}

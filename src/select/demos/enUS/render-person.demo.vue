@@ -5,9 +5,9 @@ I've found that people often want to make a people picker. Here is an example th
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h } from 'vue'
 import type { SelectRenderLabel, SelectRenderTag } from 'naive-ui'
 import { NAvatar, NTag, NText } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   setup() {

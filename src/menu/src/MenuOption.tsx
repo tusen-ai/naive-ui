@@ -1,11 +1,11 @@
-import { type PropType, computed, defineComponent, h } from 'vue'
+import type { TmNode } from './interface'
 import { useMemo } from 'vooks'
-import { render } from '../../_utils'
+import { computed, defineComponent, h, type PropType } from 'vue'
+import { keysOf, render } from '../../_utils'
 import { NTooltip } from '../../tooltip'
 import NMenuOptionContent from './MenuOptionContent'
 import { useMenuChild } from './use-menu-child'
 import { useMenuChildProps } from './use-menu-child-props'
-import type { TmNode } from './interface'
 
 export const menuItemProps = {
   ...useMenuChildProps,
@@ -17,6 +17,8 @@ export const menuItemProps = {
   icon: Function,
   onClick: Function
 } as const
+
+export const menuItemPropKeys = keysOf(menuItemProps)
 
 export const NMenuOption = defineComponent({
   name: 'MenuOption',

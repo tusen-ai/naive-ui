@@ -1,9 +1,9 @@
+import type { PaginationTheme } from './light'
 import { changeColor } from 'seemly'
+import { commonDark } from '../../_styles/common'
+import { inputDark } from '../../input/styles'
 import { popselectDark } from '../../popselect/styles'
 import { selectDark } from '../../select/styles'
-import { inputDark } from '../../input/styles'
-import { commonDark } from '../../_styles/common'
-import type { PaginationTheme } from './light'
 import { self } from './light'
 
 const paginationDark: PaginationTheme = {

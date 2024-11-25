@@ -5,8 +5,8 @@ Inject `dialog` to create a dialog.
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import { useDialog, useMessage } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {

@@ -1,20 +1,26 @@
+import type { ThemeProps } from '../../_mixins'
+import type { PopoverTheme } from '../styles'
+import type { PopoverTrigger } from './interface'
+import type { PopoverInjection } from './Popover'
+import { getPreciseEventTarget } from 'seemly'
+import { clickoutside, mousemoveoutside } from 'vdirs'
 import {
+  computed,
   type CSSProperties,
+  defineComponent,
   type DirectiveArguments,
   Fragment,
-  type PropType,
-  Transition,
-  type VNode,
-  type VNodeChild,
-  computed,
-  defineComponent,
   h,
   inject,
   mergeProps,
   onBeforeUnmount,
+  type PropType,
   provide,
   ref,
   toRef,
+  Transition,
+  type VNode,
+  type VNodeChild,
   vShow,
   watch,
   watchEffect,
@@ -26,13 +32,8 @@ import {
   VFocusTrap,
   VFollower
 } from 'vueuc'
-import { clickoutside, mousemoveoutside } from 'vdirs'
-import { getPreciseEventTarget } from 'seemly'
 import { NxScrollbar } from '../../_internal/scrollbar'
-import { drawerBodyInjectionKey } from '../../drawer/src/interface'
-import { modalBodyInjectionKey } from '../../modal/src/interface'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import {
   formatLength,
   isJsdom,
@@ -40,10 +41,9 @@ import {
   resolveWrappedSlot,
   useAdjustedTo
 } from '../../_utils'
+import { drawerBodyInjectionKey } from '../../drawer/src/interface'
+import { modalBodyInjectionKey } from '../../modal/src/interface'
 import { popoverLight } from '../styles'
-import type { PopoverTheme } from '../styles'
-import type { PopoverInjection } from './Popover'
-import type { PopoverTrigger } from './interface'
 import { popoverBodyInjectionKey } from './interface'
 import style from './styles/index.cssr'
 

@@ -1,6 +1,6 @@
-import { dialogProps } from '../../dialog/src/dialogProps'
-import { cardBaseProps } from '../../card/src/Card'
 import { keysOf } from '../../_utils'
+import { cardBaseProps } from '../../card/src/Card'
+import { dialogProps } from '../../dialog/src/dialogProps'
 
 const presetProps = {
   ...cardBaseProps,

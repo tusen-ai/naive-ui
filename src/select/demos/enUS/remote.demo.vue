@@ -5,8 +5,8 @@ Asynchronous example for a single select case.
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import type { SelectOption } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 const options = [
   {

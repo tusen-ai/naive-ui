@@ -1,7 +1,7 @@
-import { type Ref, inject } from 'vue'
+import type { ModalApiInjection, ModalReactive } from './ModalProvider'
+import { inject, type Ref } from 'vue'
 import { throwError } from '../../_utils'
 import { modalApiInjectionKey, modalReactiveListInjectionKey } from './context'
-import type { ModalApiInjection, ModalReactive } from './ModalProvider'
 
 export function useModal(): ModalApiInjection {
   const modal = inject(modalApiInjectionKey, null)

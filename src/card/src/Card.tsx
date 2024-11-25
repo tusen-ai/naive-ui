@@ -1,21 +1,21 @@
-import {
-  type CSSProperties,
-  type PropType,
-  type VNodeChild,
-  computed,
-  defineComponent,
-  h
-} from 'vue'
-import { getPadding } from 'seemly'
-import { useRtl } from '../../_mixins/use-rtl'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, createKey, keysOf, resolveWrappedSlot } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { NBaseClose } from '../../_internal'
-import { cardLight } from '../styles'
 import type { CardTheme } from '../styles'
+import { getPadding } from 'seemly'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  h,
+  type PropType,
+  type VNodeChild
+} from 'vue'
+import { NBaseClose } from '../../_internal'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
+import { call, createKey, keysOf, resolveWrappedSlot } from '../../_utils'
 import { ensureValidVNode } from '../../_utils/vue/resolve-slot'
+import { cardLight } from '../styles'
 import style from './styles/index.cssr'
 
 export interface CardSegmented {

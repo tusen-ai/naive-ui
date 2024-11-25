@@ -82,6 +82,8 @@ export-csv.vue
 | expanded-row-keys | `Array<string \| number>` | `undefined` | Expanded row keys. |  |
 | filter-icon-popover-props | `PopoverProps` | `{ trigger: click, placement: bottom }` | Filter icon's Popover attribute of the button, See [Popover props](popover#Popover-Props) | 2.39.0 |
 | flex-height | `boolean` | `false` | Whether to make table body's height auto fit table area height. Make it enabled will make `table-layout` always set to `'fixed'`. |  |
+| get-csv-cell | `(value: any, row: object, col: DataTableBaseColumn) => string` | `undefined` | Get CSV's cell content. | 2.40.2 |
+| get-csv-header | `(cols: Array<DataTableColumn>) => string` | `undefined` | Get CSV's header content. | 2.40.2 |
 | header-height | `number` | `28` | Header height value when `virtual-scroll-header` is enabled. | 2.40.0 |
 | height-for-row | `(rowData: object, index: number) => number` | `undefined` | Height configuration function for each row of the table. It must be used with `virtual-scroll-x`. If it's not configured, each rows height would be set to `min-row-height`. | 2.40.0 |
 | indent | `number` | `16` | Indent of row content when using tree data. |  |

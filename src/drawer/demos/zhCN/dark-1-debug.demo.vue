@@ -3,9 +3,9 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { useMessage } from 'naive-ui'
 import type { FormInst, FormProps, FormRules } from 'naive-ui'
+import { useMessage } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {

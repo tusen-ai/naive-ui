@@ -1,20 +1,20 @@
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { ScrollTarget } from './utils'
+import { beforeNextFrameOnce, unwrapElement } from 'seemly'
 import {
-  type CSSProperties,
-  type PropType,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
   onBeforeUnmount,
   onMounted,
+  type PropType,
   ref
 } from 'vue'
-import { beforeNextFrameOnce, unwrapElement } from 'seemly'
 import { useConfig, useStyle } from '../../_mixins'
 import { keysOf, warn } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import { getRect, getScrollTop } from './utils'
-import type { ScrollTarget } from './utils'
 import style from './styles/index.cssr'
+import { getRect, getScrollTop } from './utils'
 
 export const affixProps = {
   listenTo: [String, Object, Function] as PropType<

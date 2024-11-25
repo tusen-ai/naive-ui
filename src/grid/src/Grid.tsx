@@ -1,23 +1,22 @@
+import { beforeNextFrameOnce, parseResponsivePropValue, pxfy } from 'seemly'
+import { useBreakpoints, useMemo } from 'vooks'
 import {
-  type CSSProperties,
-  type PropType,
-  type Ref,
-  type VNode,
   cloneVNode,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
   mergeProps,
   onMounted,
+  type PropType,
   provide,
+  type Ref,
   ref,
   toRef,
+  type VNode,
   vShow
 } from 'vue'
-import { useBreakpoints, useMemo } from 'vooks'
 import { VResizeObserver, type VResizeObserverOnResize } from 'vueuc'
-import { beforeNextFrameOnce, parseResponsivePropValue, pxfy } from 'seemly'
-import { defaultBreakpoints } from '../../config-provider/src/config'
 import { useConfig } from '../../_mixins'
 import {
   type ExtractPublicPropTypes,
@@ -26,6 +25,7 @@ import {
   isBrowser,
   isNodeVShowFalse
 } from '../../_utils'
+import { defaultBreakpoints } from '../../config-provider/src/config'
 import { defaultSpan, gridInjectionKey } from './config'
 
 const defaultCols = 24

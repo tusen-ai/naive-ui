@@ -5,9 +5,9 @@
 </markdown>
 
 <script lang="ts">
-import { computed, defineComponent, nextTick, ref, watch } from 'vue'
 import type { AutoCompleteInst } from 'naive-ui'
 import Add from '@vicons/ionicons5/Add'
+import { computed, defineComponent, nextTick, ref, watch } from 'vue'
 
 export default defineComponent({
   components: {

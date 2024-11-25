@@ -1,2 +1,2 @@
-export { default as NCode, codeProps } from './src/Code'
+export { codeProps, default as NCode } from './src/Code'
 export type { CodeProps } from './src/Code'

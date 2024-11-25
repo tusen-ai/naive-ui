@@ -3,9 +3,9 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h } from 'vue'
 import type { DataTableColumns } from 'naive-ui'
 import { repeat } from 'seemly'
+import { defineComponent, h } from 'vue'
 
 const columns: DataTableColumns<{
   key: number

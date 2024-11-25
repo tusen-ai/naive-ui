@@ -5,8 +5,8 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import type { TreeSelectOverrideNodeClickBehavior } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {

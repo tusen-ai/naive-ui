@@ -5,8 +5,8 @@ Naive UI provides `useOsTheme` to get the current theme of your OS.
 </markdown>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
 import { darkTheme, useOsTheme } from 'naive-ui'
+import { computed, defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {

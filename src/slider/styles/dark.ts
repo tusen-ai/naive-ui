@@ -1,6 +1,6 @@
+import type { SliderTheme } from './light'
 import { commonDark } from '../../_styles/common'
 import sizeVariables from './_common'
-import type { SliderTheme } from './light'
 
 const sliderDark: SliderTheme = {
   name: 'Slider',

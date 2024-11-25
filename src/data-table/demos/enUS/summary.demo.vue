@@ -5,8 +5,8 @@ Use `summary` prop to render summary.
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h } from 'vue'
 import type { DataTableColumns, DataTableCreateSummary } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 interface RowData {
   key: number

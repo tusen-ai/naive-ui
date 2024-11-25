@@ -1,5 +1,8 @@
-import { type CSSProperties, computed, defineComponent, h } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { DialogTheme } from '../styles'
 import { getMargin } from 'seemly'
+import { computed, type CSSProperties, defineComponent, h } from 'vue'
+import { NBaseClose, NBaseIcon } from '../../_internal'
 import {
   ErrorIcon,
   InfoIcon,
@@ -7,17 +10,14 @@ import {
   WarningIcon
 } from '../../_internal/icons'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import {
   createKey,
   render,
   resolveSlot,
   resolveWrappedSlot
 } from '../../_utils'
-import { NBaseClose, NBaseIcon } from '../../_internal'
 import { NButton } from '../../button'
 import { dialogLight } from '../styles'
-import type { DialogTheme } from '../styles'
 import { dialogProps } from './dialogProps'
 import style from './styles/index.cssr'
 

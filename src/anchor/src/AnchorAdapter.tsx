@@ -1,15 +1,15 @@
-import { type CSSProperties, computed, defineComponent, h, ref } from 'vue'
-import { NAffix } from '../../affix'
-import { affixPropKeys, affixProps } from '../../affix/src/Affix'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { keep } from '../../_utils'
-import { anchorLight } from '../styles'
 import type { AnchorTheme } from '../styles'
-import style from './styles/index.cssr'
-import NBaseAnchor, { baseAnchorPropKeys, baseAnchorProps } from './BaseAnchor'
 import type { BaseAnchorInst } from './BaseAnchor'
+import { computed, type CSSProperties, defineComponent, h, ref } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { keep } from '../../_utils'
+import { NAffix } from '../../affix'
+import { affixPropKeys, affixProps } from '../../affix/src/Affix'
+import { anchorLight } from '../styles'
+import NBaseAnchor, { baseAnchorPropKeys, baseAnchorProps } from './BaseAnchor'
+import style from './styles/index.cssr'
 
 export interface AnchorInst {
   scrollTo: (href: string) => void

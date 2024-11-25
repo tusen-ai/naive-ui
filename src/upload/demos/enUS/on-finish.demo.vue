@@ -5,9 +5,9 @@ You can change a file's properties after its upload has finished.
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { useMessage } from 'naive-ui'
 import type { UploadFileInfo } from 'naive-ui'
+import { useMessage } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {

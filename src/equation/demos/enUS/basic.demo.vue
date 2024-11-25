@@ -3,8 +3,8 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import katex from 'katex'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {

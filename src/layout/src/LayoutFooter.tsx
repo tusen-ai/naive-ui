@@ -1,9 +1,9 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { LayoutTheme } from '../styles'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import { layoutLight } from '../styles'
-import type { LayoutTheme } from '../styles'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { positionProp } from './interface'
 import style from './styles/layout-footer.cssr'
 

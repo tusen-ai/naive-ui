@@ -1,5 +1,30 @@
 # CHANGELOG
 
+## 2.40.2
+
+`2025-11-26`
+
+### Fixes
+
+- Fix `n-time-picker`'s `use-12-hours` type error warning, closes [#4308](https://github.com/tusen-ai/naive-ui/issues/4308)
+- Fix `input-number` the problem that the negative sign is replaced when the negative sign is entered.
+- Fix `n-data-table`'s header will show scrollbar in some old browsers, closes [#6557](https://github.com/tusen-ai/naive-ui/issues/6557).
+
+### Features
+
+- 🌟 Adds `n-marquee` component.
+- `n-image` adds `error` slot, closes [#5649](https://github.com/tusen-ai/naive-ui/issues/5649).
+- `n-date-picker` adds `date-format` prop.
+- `n-date-picker` adds `calendar-day-format` prop.
+- `n-date-picker` adds `calendar-header-year-format` prop.
+- `n-date-picker` adds `calendar-header-month-format` prop.
+- `n-date-picker` adds `calendar-header-month-before-year` prop.
+- `n-date-picker` adds `calendar-header-month-year-separator` prop.
+- `n-progress`'s `color` prop supports gradient config.
+- `n-select` adds `font-weight` theme variable
+- `n-input` adds `font-weight` theme variable
+- `n-data-table` adds `get-csv-header` and `get-csv-cell` props, closes [#6542](https://github.com/tusen-ai/naive-ui/issues/6542).
+
 ## 2.40.1
 
 `2024-09-26`

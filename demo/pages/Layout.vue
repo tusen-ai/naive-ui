@@ -1,12 +1,12 @@
 <script lang="ts">
+import { useMemo } from 'vooks'
 // Frame component for components & docs page
 import { computed, defineComponent, ref, toRef, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { useMemo } from 'vooks'
-import { findMenuValue } from '../utils/route'
-import { useIsMobile, useIsTablet } from '../utils/composables'
 import { useComponentOptions, useDocOptions } from '../store'
 import { renderMenuLabel } from '../store/menu-options'
+import { useIsMobile, useIsTablet } from '../utils/composables'
+import { findMenuValue } from '../utils/route'
 import SiteFooter from './home/Footer.vue'
 
 export default defineComponent({

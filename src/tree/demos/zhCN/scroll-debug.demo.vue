@@ -3,9 +3,9 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import type { TreeOption } from 'naive-ui'
 import { NScrollbar, NTree } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 function createData(level = 10): TreeOption[] {
   if (!level)

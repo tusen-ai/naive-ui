@@ -1,8 +1,8 @@
 // use absolute path to make sure no circular ref of style
 // this -> modal-index -> modal-style
-import { type CSSProperties, type PropType, defineComponent, h, ref } from 'vue'
-import NModal from '../../modal/src/Modal'
+import { type CSSProperties, defineComponent, h, type PropType, ref } from 'vue'
 import { keep } from '../../_utils'
+import NModal from '../../modal/src/Modal'
 import { NDialog } from './Dialog'
 import { dialogPropKeys, dialogProps } from './dialogProps'
 

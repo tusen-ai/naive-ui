@@ -1,19 +1,3 @@
-import {
-  type ComputedRef,
-  type ExtractPropTypes,
-  type PropType,
-  computed,
-  defineComponent,
-  h,
-  inject,
-  markRaw,
-  provide
-} from 'vue'
-import { useMemo } from 'vooks'
-import { merge } from 'lodash-es'
-import { hash } from 'css-render'
-import { warn } from '../../_utils'
-import { type Hljs, defaultClsPrefix } from '../../_mixins'
 import type { NDateLocale, NLocale } from '../../locales'
 import type {
   GlobalComponentConfig,
@@ -26,8 +10,24 @@ import type {
   RtlEnabledState,
   RtlProp
 } from './internal-interface'
-import { configProviderInjectionKey } from './context'
 import type { Katex } from './katex'
+import { hash } from 'css-render'
+import { merge } from 'lodash-es'
+import { useMemo } from 'vooks'
+import {
+  computed,
+  type ComputedRef,
+  defineComponent,
+  type ExtractPropTypes,
+  h,
+  inject,
+  markRaw,
+  type PropType,
+  provide
+} from 'vue'
+import { defaultClsPrefix, type Hljs } from '../../_mixins'
+import { warn } from '../../_utils'
+import { configProviderInjectionKey } from './context'
 
 export const configProviderProps = {
   abstract: Boolean,

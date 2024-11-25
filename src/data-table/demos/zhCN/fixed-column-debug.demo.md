@@ -102,7 +102,7 @@ function createCols() {
 }
 
 function createData() {
-  return Array(50)
+  return Array.from({ length: 50 })
     .fill(null)
     .map((_, i) => {
       return {

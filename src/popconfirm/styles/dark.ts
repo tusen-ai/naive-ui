@@ -1,7 +1,7 @@
+import type { PopconfirmTheme } from './light'
+import { commonDark } from '../../_styles/common'
 import { buttonDark } from '../../button/styles'
 import { popoverDark } from '../../popover/styles'
-import { commonDark } from '../../_styles/common'
-import type { PopconfirmTheme } from './light'
 import { self } from './light'
 
 const popconfirmDark: PopconfirmTheme = {

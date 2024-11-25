@@ -5,8 +5,8 @@ Tree accept `pattern` and `filter` to do searching.
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import type { TreeOption } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 const data: TreeOption[] = [
   {

@@ -1,13 +1,13 @@
 import {
-  type ExtractPropTypes,
-  type PropType,
-  Transition,
   defineComponent,
+  type ExtractPropTypes,
   h,
   inject,
   nextTick,
   onMounted,
-  ref
+  type PropType,
+  ref,
+  Transition
 } from 'vue'
 import { keep } from '../../_utils'
 import { notificationProviderInjectionKey } from './context'

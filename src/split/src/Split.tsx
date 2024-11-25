@@ -1,22 +1,22 @@
+import type { SplitOnUpdateSize } from './types'
+import { off, on } from 'evtd'
+import { depx } from 'seemly'
+import { useMergedState } from 'vooks'
 import {
-  type CSSProperties,
-  type PropType,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
+  type PropType,
   ref,
   toRef,
   watchEffect
 } from 'vue'
-import { off, on } from 'evtd'
-import { useMergedState } from 'vooks'
-import { depx } from 'seemly'
-import { type ExtractPublicPropTypes, call, resolveSlot } from '../../_utils'
-import useConfig from '../../_mixins/use-config'
 import { type ThemeProps, useTheme, useThemeClass } from '../../_mixins'
-import { type SplitTheme, splitLight } from '../styles'
+import useConfig from '../../_mixins/use-config'
+import { call, type ExtractPublicPropTypes, resolveSlot } from '../../_utils'
+import { splitLight, type SplitTheme } from '../styles'
 import style from './styles/index.cssr'
-import type { SplitOnUpdateSize } from './types'
 
 export const splitProps = {
   ...(useTheme.props as ThemeProps<SplitTheme>),

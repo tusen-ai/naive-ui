@@ -1,10 +1,10 @@
 import {
   Comment,
   Fragment,
+  isVNode,
   type Slot,
   type VNodeArrayChildren,
-  type VNodeChild,
-  isVNode
+  type VNodeChild
 } from 'vue'
 
 export function ensureValidVNode(

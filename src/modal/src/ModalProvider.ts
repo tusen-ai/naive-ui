@@ -1,4 +1,3 @@
-import { Fragment, defineComponent, h, provide, reactive, ref } from 'vue'
 import type {
   CSSProperties,
   DefineComponent,
@@ -6,17 +5,18 @@ import type {
   PropType,
   Ref
 } from 'vue'
-import { createId } from 'seemly'
-import { useClickPosition, useClicked } from 'vooks'
-import { omit } from '../../_utils'
 import type { ExtractPublicPropTypes, Mutable } from '../../_utils'
-import { NModalEnvironment } from './ModalEnvironment'
+import type { modalProps } from './Modal'
+import { createId } from 'seemly'
+import { useClicked, useClickPosition } from 'vooks'
+import { defineComponent, Fragment, h, provide, reactive, ref } from 'vue'
+import { omit } from '../../_utils'
 import {
   modalApiInjectionKey,
   modalProviderInjectionKey,
   modalReactiveListInjectionKey
 } from './context'
-import type { modalProps } from './Modal'
+import { NModalEnvironment } from './ModalEnvironment'
 
 export type ModalOptions = Mutable<
   Omit<Partial<ExtractPropTypes<typeof modalProps>>, 'internalStyle'> & {

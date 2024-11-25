@@ -39,7 +39,13 @@ form-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| calendar-day-format | `string` | `undefined` | 选择面板内部星期几的格式 | 2.40.2 |
+| calendar-header-year-format | `string` | `undefined` | 选择面板内部年的格式 | 2.40.2 |
+| calendar-header-month-format | `string` | `undefined` | 选择面板内部月的格式 | 2.40.2 |
+| calendar-header-month-before-year | `string` | `undefined` | 选择面板内部月是否显示在年的前面 | 2.40.2 |
+| calendar-header-month-year-separator | `string` | `' '` | 选择面板内部年和月的分隔字符 | 2.40.2 |
 | clearable | `boolean` | `false` | 是否支持清除 |  |
+| date-format | `string` | `undefined` | 选择面板内部日期输入框的日期格式 | 2.40.2 |
 | default-value | `number \| [number, number] \| null` | `undefined` | 默认被选中的日期的时间戳 |  |
 | default-formatted-value | `string \| [string, string] \| null` | `undefined` | Date Picker 格式化后的值 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |

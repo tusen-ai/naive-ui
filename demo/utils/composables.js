@@ -1,5 +1,5 @@
-import { inject, provide, reactive, toRef, watchEffect } from 'vue'
 import { useBreakpoint, useMemo } from 'vooks'
+import { inject, provide, reactive, toRef, watchEffect } from 'vue'
 
 export function useIsMobile() {
   const breakpointRef = useBreakpoint()

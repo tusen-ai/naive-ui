@@ -4,8 +4,8 @@ const { terseCssr } = require('./terse-cssr')
 
 // replace __DEV__
 
-const { genWebTypes } = require('./gen-web-types')
 const { completePath } = require('./complete-path')
+const { genWebTypes } = require('./gen-web-types')
 
 ;
 

@@ -1,5 +1,5 @@
-import type { ThemeCommonVars } from '../../_styles/common'
 import type { ExtractThemeOverrides } from '../../_mixins/use-theme'
+import type { ThemeCommonVars } from '../../_styles/common'
 import type { GlobalThemeWithoutCommon } from './internal-interface'
 
 export type { ThemeCommonVars }
@@ -20,6 +20,6 @@ export type GlobalThemeOverrides = {
 }
 
 export type {
-  GlobalIconConfig,
-  GlobalComponentConfig
+  GlobalComponentConfig,
+  GlobalIconConfig
 } from './internal-interface'

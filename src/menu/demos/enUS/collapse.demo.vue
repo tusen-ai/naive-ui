@@ -5,15 +5,15 @@ Use collapsable vertical menu with layout sider. Use `collapsed` to control coll
 </markdown>
 
 <script lang="ts">
-import type { Component } from 'vue'
-import { defineComponent, h, ref } from 'vue'
-import { NIcon } from 'naive-ui'
 import type { MenuOption } from 'naive-ui'
+import type { Component } from 'vue'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
+import { NIcon } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
 
 function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })

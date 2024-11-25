@@ -1,43 +1,43 @@
-import {
-  type CSSProperties,
-  Fragment,
-  type InputHTMLAttributes,
-  type PropType,
-  type VNode,
-  computed,
-  defineComponent,
-  h,
-  nextTick,
-  onMounted,
-  ref,
-  toRef,
-  watch,
-  watchEffect
-} from 'vue'
-import { VOverflow, type VOverflowInst } from 'vueuc'
-import { getPadding } from 'seemly'
+import type { ThemeProps } from '../../../_mixins'
+import type { FormValidationStatus } from '../../../form/src/interface'
+import type { SelectBaseOption } from '../../../select/src/interface'
+import type { TagRef } from '../../../tag/src/Tag'
 import type {
   RenderLabel,
   RenderLabelImpl
 } from '../../select-menu/src/interface'
-import type { SelectBaseOption } from '../../../select/src/interface'
-import type { FormValidationStatus } from '../../../form/src/interface'
-import type { TagRef } from '../../../tag/src/Tag'
-import { NPopover, type PopoverProps } from '../../../popover'
-import { NTag } from '../../../tag'
-import { useConfig, useRtl, useTheme, useThemeClass } from '../../../_mixins'
-import type { ThemeProps } from '../../../_mixins'
+import type { InternalSelectionTheme } from '../styles'
+import type { RenderTag } from './interface'
+import { getPadding } from 'seemly'
 import {
-  Wrapper,
+  computed,
+  type CSSProperties,
+  defineComponent,
+  Fragment,
+  h,
+  type InputHTMLAttributes,
+  nextTick,
+  onMounted,
+  type PropType,
+  ref,
+  toRef,
+  type VNode,
+  watch,
+  watchEffect
+} from 'vue'
+import { VOverflow, type VOverflowInst } from 'vueuc'
+import { useConfig, useRtl, useTheme, useThemeClass } from '../../../_mixins'
+import {
   createKey,
   getTitleAttribute,
   render,
-  useOnResize
+  useOnResize,
+  Wrapper
 } from '../../../_utils'
+import { NPopover, type PopoverProps } from '../../../popover'
+import { NTag } from '../../../tag'
 import Suffix from '../../suffix'
 import { internalSelectionLight } from '../styles'
-import type { InternalSelectionTheme } from '../styles'
-import type { RenderTag } from './interface'
 import style from './styles/index.cssr'
 
 export interface InternalSelectionInst {
@@ -424,6 +424,7 @@ export default defineComponent({
       const {
         common: { cubicBezierEaseInOut },
         self: {
+          fontWeight,
           borderRadius,
           color,
           placeholderColor,
@@ -533,7 +534,9 @@ export default defineComponent({
         '--n-clear-color-hover': clearColorHover,
         '--n-clear-color-pressed': clearColorPressed,
         // arrow-size
-        '--n-arrow-size': arrowSize
+        '--n-arrow-size': arrowSize,
+        // font-weight
+        '--n-font-weight': fontWeight
       }
     })
     const themeClassHandle = inlineThemeDisabled

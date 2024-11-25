@@ -1,5 +1,5 @@
-import type { HTMLAttributes, Ref, UnwrapRef, VNode, VNodeChild } from 'vue'
 import type { TreeNode } from 'treemate'
+import type { HTMLAttributes, Ref, UnwrapRef, VNode, VNodeChild } from 'vue'
 import type {
   SelectBaseOption,
   SelectGroupOption,

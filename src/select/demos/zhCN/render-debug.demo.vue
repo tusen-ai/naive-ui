@@ -3,10 +3,10 @@
 </markdown>
 
 <script lang="ts">
-import type { VNode } from 'vue'
-import { defineComponent, h } from 'vue'
 import type { SelectGroupOption, SelectOption } from 'naive-ui'
+import type { VNode } from 'vue'
 import { NTooltip } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   setup() {

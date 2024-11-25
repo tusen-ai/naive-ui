@@ -1,8 +1,8 @@
-import { Fragment, computed, defineComponent, h, inject, mergeProps } from 'vue'
-import { AddIcon } from '../../_internal/icons'
-import { NBaseClose, NBaseIcon } from '../../_internal'
-import { omit, render } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import { computed, defineComponent, Fragment, h, inject, mergeProps } from 'vue'
+import { NBaseClose, NBaseIcon } from '../../_internal'
+import { AddIcon } from '../../_internal/icons'
+import { omit, render } from '../../_utils'
 import { type OnBeforeLeaveImpl, tabsInjectionKey } from './interface'
 import { tabPaneProps } from './TabPane'
 

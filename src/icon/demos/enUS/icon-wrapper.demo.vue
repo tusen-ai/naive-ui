@@ -5,8 +5,8 @@ Sometime it looks better with a background.
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import Checkmark16Filled from '@vicons/fluent/Checkmark16Filled'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {

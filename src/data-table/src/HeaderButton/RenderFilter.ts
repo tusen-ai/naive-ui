@@ -1,5 +1,5 @@
-import { type PropType, defineComponent } from 'vue'
 import type { RenderFilter } from '../interface'
+import { defineComponent, type PropType } from 'vue'
 
 export default defineComponent({
   name: 'DataTableRenderFilter',

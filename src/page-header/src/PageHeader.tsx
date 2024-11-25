@@ -1,12 +1,12 @@
-import { type PropType, computed, defineComponent, h } from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { pageHeaderLight } from '../styles/light'
-import type { PageHeaderTheme } from '../styles/light'
-import { ArrowBackIcon } from '../../_internal/icons'
-import { NBaseIcon } from '../../_internal'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type { PageHeaderTheme } from '../styles/light'
+import { computed, defineComponent, h, type PropType } from 'vue'
+import { NBaseIcon } from '../../_internal'
+import { ArrowBackIcon } from '../../_internal/icons'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
+import { pageHeaderLight } from '../styles/light'
 import style from './styles/index.cssr'
 
 export const pageHeaderProps = {

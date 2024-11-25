@@ -1,3 +1,4 @@
+import type { ColorPickerMode } from './utils'
 import {
   type HSL,
   type HSLA,
@@ -5,19 +6,18 @@ import {
   type HSVA,
   type RGB,
   type RGBA,
-  toHexString,
   toHexaString,
-  toHslString,
+  toHexString,
   toHslaString,
-  toHsvString,
+  toHslString,
   toHsvaString,
-  toRgbString,
-  toRgbaString
+  toHsvString,
+  toRgbaString,
+  toRgbString
 } from 'seemly'
-import { type PropType, defineComponent, h } from 'vue'
+import { defineComponent, h, type PropType } from 'vue'
 import { NInputGroup } from '../../input'
 import ColorInputUnit from './ColorInputUnit'
-import type { ColorPickerMode } from './utils'
 
 export default defineComponent({
   name: 'ColorInput',

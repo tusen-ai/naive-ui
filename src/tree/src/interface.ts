@@ -2,8 +2,8 @@ import type { CheckStrategy, TreeNode } from 'treemate'
 import type { HTMLAttributes, Ref, VNodeChild } from 'vue'
 import type { VirtualListScrollTo } from 'vueuc'
 import type { MergedTheme } from '../../_mixins'
-import { createInjectionKey } from '../../_utils'
 import type { TreeTheme } from '../styles'
+import { createInjectionKey } from '../../_utils'
 
 export type Key = string | number
 

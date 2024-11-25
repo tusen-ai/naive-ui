@@ -51,7 +51,7 @@ const columns = [
   }
 ]
 
-const data = Array(987)
+const data = Array.from({ length: 987 })
   .fill(null)
   .map((_, index) => {
     return {

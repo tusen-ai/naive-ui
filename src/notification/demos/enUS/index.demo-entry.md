@@ -19,8 +19,8 @@ For example:
 ```
 
 ```js
-import { defineComponent } from 'vue'
 import { useNotification } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 // content
 export default defineComponent({

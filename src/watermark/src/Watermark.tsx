@@ -1,9 +1,9 @@
-import { type PropType, defineComponent, h, ref, watchEffect } from 'vue'
-import { onFontsReady } from 'vooks'
-import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
+import { onFontsReady } from 'vooks'
+import { defineComponent, h, type PropType, ref, watchEffect } from 'vue'
+import { useConfig, useTheme } from '../../_mixins'
 import { type ExtractPublicPropTypes, isBrowser, warnOnce } from '../../_utils'
-import { type WatermarkTheme, watermarkLight } from '../styles'
+import { watermarkLight, type WatermarkTheme } from '../styles'
 import style from './styles/index.cssr'
 
 function getRatio(context: any): number {

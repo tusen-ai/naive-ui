@@ -5,8 +5,8 @@ You can use `handle` slot to customize handle button.
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import AnimalCat24Regular from '@vicons/fluent/AnimalCat24Regular'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {

@@ -1,9 +1,9 @@
 import {
   Comment,
+  createTextVNode,
   Fragment,
   type VNode,
-  type VNodeChild,
-  createTextVNode
+  type VNodeChild
 } from 'vue'
 
 // o(n) flatten

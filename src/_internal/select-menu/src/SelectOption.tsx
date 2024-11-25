@@ -1,22 +1,22 @@
+import type { TreeNode } from 'treemate'
+import type { SelectOption } from '../../../select/src/interface'
+import { useMemo } from 'vooks'
 import {
+  defineComponent,
+  h,
+  inject,
   type PropType,
   type Ref,
   Transition,
-  type VNode,
-  defineComponent,
-  h,
-  inject
+  type VNode
 } from 'vue'
-import type { TreeNode } from 'treemate'
-import { useMemo } from 'vooks'
-import type { SelectOption } from '../../../select/src/interface'
 import { mergeEventHandlers, render } from '../../../_utils'
-import { CheckmarkIcon } from '../../icons'
 import { NBaseIcon } from '../../icon'
+import { CheckmarkIcon } from '../../icons'
 import {
+  internalSelectionMenuInjectionKey,
   type RenderLabelImpl,
-  type RenderOptionImpl,
-  internalSelectionMenuInjectionKey
+  type RenderOptionImpl
 } from './interface'
 
 function renderCheckMark(show: boolean, clsPrefix: string): VNode {

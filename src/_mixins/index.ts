@@ -1,15 +1,15 @@
-export { default as useFormItem } from './use-form-item'
-export { default as useTheme, createTheme } from './use-theme'
-export type {
-  ThemeProps,
-  MergedTheme,
-  ThemePropsReactive,
-  Theme
-} from './use-theme'
 export { default as useConfig, defaultClsPrefix } from './use-config'
-export { default as useLocale } from './use-locale'
-export { default as useStyle } from './use-style'
+export { useThemeClass } from './use-css-vars-class'
+export { default as useFormItem } from './use-form-item'
 export { default as useHljs } from './use-hljs'
 export type { Hljs } from './use-hljs'
-export { useThemeClass } from './use-css-vars-class'
+export { default as useLocale } from './use-locale'
 export { useRtl } from './use-rtl'
+export { default as useStyle } from './use-style'
+export { createTheme, default as useTheme } from './use-theme'
+export type {
+  MergedTheme,
+  Theme,
+  ThemeProps,
+  ThemePropsReactive
+} from './use-theme'

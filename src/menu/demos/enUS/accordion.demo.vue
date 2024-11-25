@@ -5,15 +5,15 @@ Like an accordion. You can use `accordion` prop to switch this mode for the firs
 </markdown>
 
 <script lang="ts">
-import type { Component } from 'vue'
-import { defineComponent, h } from 'vue'
-import { NIcon } from 'naive-ui'
 import type { MenuOption } from 'naive-ui'
+import type { Component } from 'vue'
 import {
   BagOutline as BagOutlineIcon,
   FishOutline as FishIcon,
   PawOutline as PawIcon
 } from '@vicons/ionicons5'
+import { NIcon } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })

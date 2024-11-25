@@ -1,7 +1,7 @@
 const path = require('node:path')
-const fs = require('fs-extra')
-const glob = require('fast-glob')
 const babel = require('@babel/core')
+const glob = require('fast-glob')
+const fs = require('fs-extra')
 
 const formatConfigs = {
   es: {

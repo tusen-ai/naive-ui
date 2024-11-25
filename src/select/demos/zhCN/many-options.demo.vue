@@ -5,8 +5,8 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import { repeat } from 'seemly'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {

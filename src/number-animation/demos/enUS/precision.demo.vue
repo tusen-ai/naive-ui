@@ -5,8 +5,8 @@ Use `precision` to set precision.
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import type { NumberAnimationInst } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {

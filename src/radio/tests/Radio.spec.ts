@@ -1,5 +1,5 @@
-import { h } from 'vue'
 import { mount } from '@vue/test-utils'
+import { h } from 'vue'
 import { NRadio, NRadioGroup } from '../index'
 
 describe('n-radio', () => {

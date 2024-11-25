@@ -3,10 +3,10 @@
 </markdown>
 
 <script lang="ts">
-import type { PropType } from 'vue'
-import { defineComponent, h, ref } from 'vue'
 import type { NotificationPlacement } from 'naive-ui'
+import type { PropType } from 'vue'
 import { NButton, NSpace, useNotification } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
 
 const PlacementButtons = defineComponent({
   props: {

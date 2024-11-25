@@ -1,6 +1,6 @@
+const { default: generate } = require('@babel/generator')
 const parser = require('@babel/parser')
 const { default: traverse } = require('@babel/traverse')
-const { default: generate } = require('@babel/generator')
 
 module.exports = function terseCssr(code) {
   const patternSpace = / +/g

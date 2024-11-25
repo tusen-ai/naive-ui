@@ -1,7 +1,7 @@
-export { default as internalSelectionLight } from './light'
 export { default as internalSelectionDark } from './dark'
-export { internalSelectionRtl } from './rtl'
+export { default as internalSelectionLight } from './light'
 export type {
   InternalSelectionTheme,
   InternalSelectionThemeVars
 } from './light'
+export { internalSelectionRtl } from './rtl'

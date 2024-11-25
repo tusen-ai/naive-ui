@@ -1,7 +1,7 @@
-import { h, toRaw } from 'vue'
 import { mount } from '@vue/test-utils'
 import hljs from 'highlight.js/lib/core'
 import javascript from 'highlight.js/lib/languages/javascript'
+import { h, toRaw } from 'vue'
 import { NCode } from '../index'
 
 hljs.registerLanguage('javascript', javascript)

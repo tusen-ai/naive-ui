@@ -5,8 +5,8 @@ You can use a `ref` to get a handle on files uploaded, and the `submit` method t
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import type { UploadFileInfo, UploadInst } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {

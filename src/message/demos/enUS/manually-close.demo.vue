@@ -3,9 +3,9 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount } from 'vue'
 import type { MessageReactive } from 'naive-ui'
 import { useMessage } from 'naive-ui'
+import { defineComponent, onBeforeUnmount } from 'vue'
 
 export default defineComponent({
   setup() {

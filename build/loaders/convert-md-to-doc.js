@@ -1,7 +1,7 @@
 const path = require('node:path')
 const fse = require('fs-extra')
-const { marked } = require('marked')
 const camelCase = require('lodash/camelCase')
+const { marked } = require('marked')
 const createRenderer = require('./md-renderer')
 const projectPath = require('./project-path')
 

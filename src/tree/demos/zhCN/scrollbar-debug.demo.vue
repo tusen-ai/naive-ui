@@ -3,9 +3,9 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { repeat } from 'seemly'
 import type { TreeOption } from 'naive-ui'
+import { repeat } from 'seemly'
+import { defineComponent } from 'vue'
 
 function createData(level = 4, baseKey = ''): TreeOption[] | undefined {
   if (!level)

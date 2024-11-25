@@ -93,6 +93,8 @@ rtl-debug.vue
 | expanded-row-keys | `Array<string \| number>` | `undefined` | 展开行的 key 值 |  |
 | filter-icon-popover-props | `PopoverProps` | `{ trigger: click, placement: bottom }` | 过滤按钮的 Popover 属性，属性参考 [Popover props](popover#Popover-Props) | 2.39.0 |
 | flex-height | `boolean` | `false` | 是否让表格主体的高度自动适应整个表格区域的高度，打开这个选项会让 `table-layout` 始终为 `'fixed'` |  |
+| get-csv-cell | `(value: any, row: object, col: DataTableBaseColumn) => string` | `undefined` | 获取 CSV 的单元格数据 | 2.40.2 |
+| get-csv-header | `(cols: Array<DataTableColumn>) => string` | `undefined` | 获取 CSV 的 header | 2.40.2 |
 | header-height | `number` | `28` | 在开启 `virtual-scroll-header` 属性的情况下，表头的高度 | 2.40.0 |
 | height-for-row | `(rowData: object, index: number) => number` | `undefined` | 每行高度的配置函数，必须配合 `virtual-scroll-x` 使用，如果不进行配置，每一行的高度会被设为 `min-row-height` | 2.40.0 |
 | indent | `number` | `16` | 使用树形数据时行内容的缩进 |  |

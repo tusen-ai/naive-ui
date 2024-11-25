@@ -11,12 +11,17 @@ export function parse(value: string): number | null {
   return Number(value)
 }
 
-// can be parsed to number but shouldn't be applied when inputing
-// when value includes `.`, ending with 0 and`.`, doesn't update, if 0 parse func will remove 0
+// This function is created for `update-value-on-input` prop. When the prop is
+// true, the input value will update the value and <input />'s value at the same
+// time. So we need to make user's content won't be replaced by its parsed value
+// in some certain cases. For example '0.' should be parsed and replaced by '0',
+// '-0' should be parsed and replaced by '0', since user may input '-0.1' after.
 export function isWipValue(value: string): boolean {
   return (
-    value.includes('.')
-    && (/^(-)?\d+.*(\.|0)$/.test(value) || /^\.\d+$/.test(value))
+    (value.includes('.')
+      && (/^(-)?\d+.*(\.|0)$/.test(value) || /^-?\d*$/.test(value)))
+    || value === '-'
+    || value === '-0'
   )
 }
 

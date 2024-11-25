@@ -1,7 +1,7 @@
-import { h, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NPopconfirm } from '../index'
+import { h, nextTick } from 'vue'
 import { NButton } from '../../button'
+import { NPopconfirm } from '../index'
 
 describe('n-popconfirm', () => {
   it('should work with import on demand', () => {

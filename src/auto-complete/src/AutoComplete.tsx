@@ -1,52 +1,16 @@
-import {
-  type CSSProperties,
-  type HTMLAttributes,
-  type InputHTMLAttributes,
-  type PropType,
-  Transition,
-  computed,
-  defineComponent,
-  h,
-  ref,
-  toRef,
-  watchEffect,
-  withDirectives
-} from 'vue'
-import { type TreeNode, createTreeMate } from 'treemate'
-import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc'
-import { clickoutside } from 'vdirs'
-import { useIsMounted, useMergedState } from 'vooks'
-import { getPreciseEventTarget } from 'seemly'
 import type {
   RenderLabel,
   RenderOption
 } from '../../_internal/select-menu/src/interface'
-import { createTmOptions } from '../../select/src/utils'
+import type { ThemeProps } from '../../_mixins'
 import type { FormValidationStatus } from '../../form/src/interface'
+import type { InputInst } from '../../input'
 import type {
   SelectBaseOption,
   SelectGroupOption,
   SelectIgnoredOption
 } from '../../select/src/interface'
-import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import {
-  type ExtractPublicPropTypes,
-  type MaybeArray,
-  call,
-  getFirstSlotVNode,
-  useAdjustedTo,
-  warnOnce
-} from '../../_utils'
-import {
-  type InternalSelectMenuRef,
-  NInternalSelectMenu
-} from '../../_internal'
-import type { InputInst } from '../../input'
-import { NInput } from '../../input'
-import { autoCompleteLight } from '../styles'
 import type { AutoCompleteTheme } from '../styles'
-import { mapAutoCompleteOptionsToSelectOptions } from './utils'
 import type {
   AutoCompleteInst,
   AutoCompleteOption,
@@ -56,7 +20,43 @@ import type {
   OnUpdateImpl,
   OnUpdateValue
 } from './interface'
+import { getPreciseEventTarget } from 'seemly'
+import { createTreeMate, type TreeNode } from 'treemate'
+import { clickoutside } from 'vdirs'
+import { useIsMounted, useMergedState } from 'vooks'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  h,
+  type HTMLAttributes,
+  type InputHTMLAttributes,
+  type PropType,
+  ref,
+  toRef,
+  Transition,
+  watchEffect,
+  withDirectives
+} from 'vue'
+import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc'
+import {
+  type InternalSelectMenuRef,
+  NInternalSelectMenu
+} from '../../_internal'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import {
+  call,
+  type ExtractPublicPropTypes,
+  getFirstSlotVNode,
+  type MaybeArray,
+  useAdjustedTo,
+  warnOnce
+} from '../../_utils'
+import { NInput } from '../../input'
+import { createTmOptions } from '../../select/src/utils'
+import { autoCompleteLight } from '../styles'
 import style from './styles/index.cssr'
+import { mapAutoCompleteOptionsToSelectOptions } from './utils'
 
 export const autoCompleteProps = {
   ...(useTheme.props as ThemeProps<AutoCompleteTheme>),

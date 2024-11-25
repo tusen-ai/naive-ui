@@ -1,29 +1,29 @@
-import {
-  Fragment,
-  Transition,
-  computed,
-  defineComponent,
-  h,
-  mergeProps,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  watchEffect
-} from 'vue'
 import type { CSSProperties, HTMLAttributes, PropType, VNode } from 'vue'
-import { off, on } from 'evtd'
-import { VResizeObserver } from 'vueuc'
-import { useIsIos } from 'vooks'
-import { depx, getPreciseEventTarget } from 'seemly'
-import { useConfig, useRtl, useTheme, useThemeClass } from '../../../_mixins'
 import type { ThemeProps } from '../../../_mixins'
 import type {
   ExtractInternalPropTypes,
   ExtractPublicPropTypes
 } from '../../../_utils'
-import { Wrapper, rtlInset, useReactivated } from '../../../_utils'
-import { scrollbarLight } from '../styles'
 import type { ScrollbarTheme } from '../styles'
+import { off, on } from 'evtd'
+import { depx, getPreciseEventTarget } from 'seemly'
+import { useIsIos } from 'vooks'
+import {
+  computed,
+  defineComponent,
+  Fragment,
+  h,
+  mergeProps,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  Transition,
+  watchEffect
+} from 'vue'
+import { VResizeObserver } from 'vueuc'
+import { useConfig, useRtl, useTheme, useThemeClass } from '../../../_mixins'
+import { rtlInset, useReactivated, Wrapper } from '../../../_utils'
+import { scrollbarLight } from '../styles'
 import style from './styles/index.cssr'
 
 export interface ScrollTo {

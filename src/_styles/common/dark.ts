@@ -1,5 +1,5 @@
-import { composite, rgba, scaleColor } from 'seemly'
 import type { ThemeCommonVars } from './light'
+import { composite, rgba, scaleColor } from 'seemly'
 import commonVariables from './_common'
 
 const base = {

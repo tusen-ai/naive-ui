@@ -1,5 +1,3 @@
-import { type ComputedRef, computed, ref } from 'vue'
-import { call } from '../../_utils'
 import type {
   ColumnKey,
   CompareFn,
@@ -13,6 +11,8 @@ import type {
   TableSelectionColumn,
   TmNode
 } from './interface'
+import { computed, type ComputedRef, ref } from 'vue'
+import { call } from '../../_utils'
 import { getFlagOfOrder } from './utils'
 
 function getMultiplePriority(

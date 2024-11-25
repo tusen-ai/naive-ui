@@ -1,13 +1,13 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { PopoverInst } from '../../popover'
+import type { TooltipTheme } from '../styles'
 // Tooltip: popover wearing waistcoat
 import { computed, defineComponent, h, ref } from 'vue'
+import { useConfig, useTheme } from '../../_mixins'
 import { NPopover } from '../../popover'
 import { popoverBaseProps } from '../../popover/src/Popover'
-import type { PopoverInst } from '../../popover'
-import { useConfig, useTheme } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import { tooltipLight } from '../styles'
-import type { TooltipTheme } from '../styles'
-import type { ExtractPublicPropTypes } from '../../_utils'
 
 export type TooltipInst = PopoverInst
 

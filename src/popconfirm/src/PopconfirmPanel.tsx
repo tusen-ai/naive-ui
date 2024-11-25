@@ -1,17 +1,17 @@
 import {
-  type CSSProperties,
-  type PropType,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
   inject,
+  type PropType,
   toRef
 } from 'vue'
-import { NButton } from '../../button'
 import { NBaseIcon } from '../../_internal'
 import { WarningIcon } from '../../_internal/icons'
 import { useConfig, useLocale, useThemeClass } from '../../_mixins'
 import { keysOf, resolveSlot, resolveWrappedSlot } from '../../_utils'
+import { NButton } from '../../button'
 import { popconfirmInjectionKey } from './interface'
 
 export const panelProps = {

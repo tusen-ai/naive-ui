@@ -1,5 +1,5 @@
-import { ptBR } from 'date-fns/locale'
 import type { NDateLocale } from './enUS'
+import { ptBR } from 'date-fns/locale'
 
 const datePtBr: NDateLocale = {
   name: 'pt-BR',

@@ -1,17 +1,17 @@
+import type {
+  DatePickerClearSlotProps,
+  DatePickerConfirmSlotProps
+} from '../public-types'
 import { defineComponent, h, watchEffect } from 'vue'
-import { NButton, NxButton } from '../../../button'
+import { NBaseFocusDetector } from '../../../_internal'
 import {
   BackwardIcon,
   FastBackwardIcon,
   FastForwardIcon,
   ForwardIcon
 } from '../../../_internal/icons'
-import { NBaseFocusDetector } from '../../../_internal'
 import { resolveSlot, resolveSlotWithProps, warnOnce } from '../../../_utils'
-import type {
-  DatePickerClearSlotProps,
-  DatePickerConfirmSlotProps
-} from '../public-types'
+import { NButton, NxButton } from '../../../button'
 import PanelHeader from './panelHeader'
 import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
 
@@ -66,7 +66,8 @@ export default defineComponent({
               {resolveSlot($slots['prev-month'], () => [<BackwardIcon />])}
             </div>
             <PanelHeader
-              monthBeforeYear={this.locale.monthBeforeYear}
+              monthYearSeparator={this.calendarHeaderMonthYearSeparator}
+              monthBeforeYear={this.calendarMonthBeforeYear}
               value={this.startCalendarDateTime}
               onUpdateValue={this.onUpdateStartCalendarValue}
               mergedClsPrefix={mergedClsPrefix}
@@ -156,7 +157,8 @@ export default defineComponent({
               {resolveSlot($slots['prev-month'], () => [<BackwardIcon />])}
             </div>
             <PanelHeader
-              monthBeforeYear={this.locale.monthBeforeYear}
+              monthYearSeparator={this.calendarHeaderMonthYearSeparator}
+              monthBeforeYear={this.calendarMonthBeforeYear}
               value={this.endCalendarDateTime}
               onUpdateValue={this.onUpdateEndCalendarValue}
               mergedClsPrefix={mergedClsPrefix}

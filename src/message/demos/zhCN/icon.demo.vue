@@ -3,9 +3,9 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h } from 'vue'
-import { NIcon, useMessage } from 'naive-ui'
 import { MdHourglass } from '@vicons/ionicons4'
+import { NIcon, useMessage } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   setup() {

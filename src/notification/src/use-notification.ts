@@ -1,7 +1,7 @@
+import type { NotificationApiInjection } from './NotificationProvider'
 import { inject } from 'vue'
 import { throwError } from '../../_utils'
 import { notificationApiInjectionKey } from './NotificationProvider'
-import type { NotificationApiInjection } from './NotificationProvider'
 
 export function useNotification(): NotificationApiInjection {
   const api = inject(notificationApiInjectionKey, null)

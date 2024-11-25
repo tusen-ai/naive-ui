@@ -1,5 +1,5 @@
-import { type CSSProperties, type VNode, h } from 'vue'
 import type { DropPosition, TreeOption } from './interface'
+import { type CSSProperties, h, type VNode } from 'vue'
 
 export function renderDropMark({
   position,

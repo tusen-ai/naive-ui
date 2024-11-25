@@ -5,10 +5,10 @@
 </markdown>
 
 <script lang="ts">
-import type { VNode } from 'vue'
-import { defineComponent, h, ref } from 'vue'
 import type { SelectOption } from 'naive-ui'
+import type { VNode } from 'vue'
 import { NTooltip } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
 
 export default defineComponent({
   setup() {

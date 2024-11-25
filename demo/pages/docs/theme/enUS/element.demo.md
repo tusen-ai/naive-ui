@@ -22,8 +22,8 @@ Naive UI has `n-element` component. See [Element](../components/element).
 ```
 
 ```js
-import { defineComponent, ref } from 'vue'
 import { darkTheme } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {

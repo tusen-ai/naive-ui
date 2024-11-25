@@ -3,8 +3,8 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import { ArrowBackOutline, ArrowForwardOutline } from '@vicons/ionicons5'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {

@@ -11,8 +11,8 @@
 ```
 
 ```js
-import { computed, defineComponent, h, nextTick, ref } from 'vue'
 import { NInput } from 'naive-ui'
+import { computed, defineComponent, h, nextTick, ref } from 'vue'
 
 function createData() {
   return Array.from({ length: 100 }).map((_, index) => ({

@@ -1,8 +1,8 @@
 import type { Ref } from 'vue'
 import type { ScrollbarInst } from '../../_internal'
 import type { MergedTheme } from '../../_mixins'
-import { createInjectionKey } from '../../_utils'
 import type { TimePickerTheme } from '../styles'
+import { createInjectionKey } from '../../_utils'
 
 export type ItemValue = number | 'am' | 'pm'
 

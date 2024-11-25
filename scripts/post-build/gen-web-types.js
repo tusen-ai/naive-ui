@@ -244,7 +244,7 @@ exports.genWebTypes = function genWebTypes() {
 
     function extractComponentDescription() {
       const description = docsFile.match(
-        RegExp(`#.*${componentName}\n(.*)## Demos`, 's')
+        new RegExp(`#.*${componentName}\n(.*)## Demos`, 's')
       )
       if (description) {
         return description[1].trim()
@@ -254,7 +254,7 @@ exports.genWebTypes = function genWebTypes() {
     function extractSectionTable(sectionName) {
       const result = {}
       try {
-        const sectionHeaderRegex = RegExp(
+        const sectionHeaderRegex = new RegExp(
           `##.*${componentName}[, ].*${sectionName}\n`
         )
         const location = docsFile.match(sectionHeaderRegex)

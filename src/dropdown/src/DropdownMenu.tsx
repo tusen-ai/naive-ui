@@ -1,24 +1,31 @@
+import type { TreeNode } from 'treemate'
+import type {
+  DropdownGroupOption,
+  DropdownIgnoredOption,
+  DropdownOption,
+  DropdownRenderOption
+} from './interface'
 import {
-  type CSSProperties,
-  type PropType,
-  type Ref,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
   inject,
+  type PropType,
   provide,
+  type Ref,
   ref
 } from 'vue'
-import type { TreeNode } from 'treemate'
-import { renderArrow } from '../../popover/src/PopoverBody'
 import { NxScrollbar } from '../../_internal/scrollbar'
-import { modalBodyInjectionKey } from '../../modal/src/interface'
 import { drawerBodyInjectionKey } from '../../drawer/src/interface'
+import { modalBodyInjectionKey } from '../../modal/src/interface'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
+import { renderArrow } from '../../popover/src/PopoverBody'
+
+import { dropdownInjectionKey, dropdownMenuInjectionKey } from './context'
+
 import NDropdownDivider from './DropdownDivider'
-
 import NDropdownGroup from './DropdownGroup'
-
 import NDropdownOption from './DropdownOption'
 import NDropdownRenderOption from './DropdownRenderOption'
 import {
@@ -27,13 +34,6 @@ import {
   isRenderNode,
   isSubmenuNode
 } from './utils'
-import { dropdownInjectionKey, dropdownMenuInjectionKey } from './context'
-import type {
-  DropdownGroupOption,
-  DropdownIgnoredOption,
-  DropdownOption,
-  DropdownRenderOption
-} from './interface'
 
 export interface NDropdownMenuInjection {
   showIconRef: Ref<boolean>

@@ -1,40 +1,5 @@
-import {
-  type CSSProperties,
-  type ComponentPublicInstance,
-  type ExtractPropTypes,
-  type PropType,
-  TransitionGroup,
-  type VNode,
-  type VNodeChild,
-  cloneVNode,
-  computed,
-  defineComponent,
-  h,
-  nextTick,
-  onMounted,
-  provide,
-  ref,
-  toRef,
-  vShow,
-  watch,
-  watchEffect,
-  withDirectives
-} from 'vue'
-import { VResizeObserver, VXScroll, type VXScrollInst } from 'vueuc'
-import { throttle } from 'lodash-es'
-import { onFontsReady, useCompitable, useMergedState } from 'vooks'
-import { depx, getPadding } from 'seemly'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import {
-  call,
-  createKey,
-  flatten,
-  resolveWrappedSlot,
-  warnOnce
-} from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { tabsLight } from '../styles'
 import type { TabsTheme } from '../styles'
 import type {
   Addable,
@@ -46,10 +11,45 @@ import type {
   TabsInst,
   TabsType
 } from './interface'
-import { tabsInjectionKey } from './interface'
-import Tab from './Tab'
 import type { tabPaneProps } from './TabPane'
+import { throttle } from 'lodash-es'
+import { depx, getPadding } from 'seemly'
+import { onFontsReady, useCompitable, useMergedState } from 'vooks'
+import {
+  cloneVNode,
+  type ComponentPublicInstance,
+  computed,
+  type CSSProperties,
+  defineComponent,
+  type ExtractPropTypes,
+  h,
+  nextTick,
+  onMounted,
+  type PropType,
+  provide,
+  ref,
+  toRef,
+  TransitionGroup,
+  type VNode,
+  type VNodeChild,
+  vShow,
+  watch,
+  watchEffect,
+  withDirectives
+} from 'vue'
+import { VResizeObserver, VXScroll, type VXScrollInst } from 'vueuc'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import {
+  call,
+  createKey,
+  flatten,
+  resolveWrappedSlot,
+  warnOnce
+} from '../../_utils'
+import { tabsLight } from '../styles'
+import { tabsInjectionKey } from './interface'
 import style from './styles/index.cssr'
+import Tab from './Tab'
 
 type TabPaneProps = ExtractPropTypes<typeof tabPaneProps> & {
   'display-directive': 'if' | 'show' | 'show:lazy'
@@ -170,7 +170,8 @@ export default defineComponent({
       ?? props.defaultValue
       ?? (slots.default
         ? ((flatten((slots as any).default() as VNodeChild[])[0] as any)
-            ?.props?.name as string | number)
+            ?.props
+            ?.name as string | number)
         : null)
     )
     const mergedValueRef = useMergedState(

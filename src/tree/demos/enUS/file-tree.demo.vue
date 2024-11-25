@@ -5,14 +5,14 @@ Use `on-update:expanded-keys` to change the prefix icon style of the node in dif
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h } from 'vue'
 import type { TreeOption } from 'naive-ui'
-import { NIcon, useMessage } from 'naive-ui'
 import {
   FileTrayFullOutline,
   Folder,
   FolderOpenOutline
 } from '@vicons/ionicons5'
+import { NIcon, useMessage } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   setup() {

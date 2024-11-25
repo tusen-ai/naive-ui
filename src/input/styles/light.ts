@@ -1,7 +1,7 @@
+import type { Theme } from '../../_mixins'
+import type { ThemeCommonVars } from '../../_styles/common'
 import { changeColor } from 'seemly'
 import { commonLight } from '../../_styles/common'
-import type { ThemeCommonVars } from '../../_styles/common'
-import type { Theme } from '../../_mixins'
 import commonVariables from './_common'
 
 function self(vars: ThemeCommonVars) {
@@ -37,10 +37,12 @@ function self(vars: ThemeCommonVars) {
     iconColor,
     iconColorDisabled,
     iconColorHover,
-    iconColorPressed
+    iconColorPressed,
+    fontWeight
   } = vars
   return {
     ...commonVariables,
+    fontWeight,
     countTextColorDisabled: textColorDisabled,
     countTextColor: textColor3,
     heightTiny,

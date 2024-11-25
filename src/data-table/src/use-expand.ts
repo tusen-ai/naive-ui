@@ -1,13 +1,13 @@
-import { type Ref, ref, toRef } from 'vue'
-import { useMemo, useMergedState } from 'vooks'
 import type { TreeMate } from 'treemate'
-import { call, warn } from '../../_utils'
 import type {
   DataTableSetupProps,
   Expandable,
   InternalRowData,
   RowKey
 } from './interface'
+import { useMemo, useMergedState } from 'vooks'
+import { type Ref, ref, toRef } from 'vue'
+import { call, warn } from '../../_utils'
 
 export function useExpand(
   props: DataTableSetupProps,

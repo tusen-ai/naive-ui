@@ -1,35 +1,6 @@
-import {
-  type CSSProperties,
-  type PropType,
-  type VNodeChild,
-  computed,
-  defineComponent,
-  h,
-  nextTick,
-  ref,
-  toRef,
-  watchEffect
-} from 'vue'
-import { useMergedState } from 'vooks'
-import commonProps from '../../tag/src/common-props'
-import { AddIcon } from '../../_internal/icons'
-import { NButton } from '../../button'
-import { NSpace } from '../../space'
-import type { InputInst, InputProps } from '../../input'
-import { NInput } from '../../input'
-import { NTag } from '../../tag'
-import { NBaseIcon } from '../../_internal'
-import {
-  useConfig,
-  useFormItem,
-  useLocale,
-  useTheme,
-  useThemeClass
-} from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, smallerSize, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { dynamicTagsLight } from '../styles'
+import type { InputInst, InputProps } from '../../input'
 import type { DynamicTagsTheme } from '../styles'
 import type {
   DynamicTagsOption,
@@ -37,6 +8,35 @@ import type {
   OnUpdateValue,
   OnUpdateValueImpl
 } from './interface'
+import { useMergedState } from 'vooks'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  h,
+  nextTick,
+  type PropType,
+  ref,
+  toRef,
+  type VNodeChild,
+  watchEffect
+} from 'vue'
+import { NBaseIcon } from '../../_internal'
+import { AddIcon } from '../../_internal/icons'
+import {
+  useConfig,
+  useFormItem,
+  useLocale,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
+import { call, smallerSize, warnOnce } from '../../_utils'
+import { NButton } from '../../button'
+import { NInput } from '../../input'
+import { NSpace } from '../../space'
+import { NTag } from '../../tag'
+import commonProps from '../../tag/src/common-props'
+import { dynamicTagsLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const dynamicTagsProps = {

@@ -3,8 +3,8 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import { SwapHorizontal as SwapHorizontalIcon } from '@vicons/ionicons5'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   components: {

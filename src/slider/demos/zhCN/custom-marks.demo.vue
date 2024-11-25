@@ -5,10 +5,10 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h, ref } from 'vue'
 import Temperature16Regular from '@vicons/fluent/Temperature16Regular'
-import { NIcon } from '../../../icon'
+import { defineComponent, h, ref } from 'vue'
 import { NFlex } from '../../../flex'
+import { NIcon } from '../../../icon'
 
 export default defineComponent({
   setup() {

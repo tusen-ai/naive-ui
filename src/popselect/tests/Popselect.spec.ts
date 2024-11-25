@@ -1,7 +1,7 @@
-import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NPopselect } from '../index'
+import { h } from 'vue'
 import { NScrollbar } from '../../_internal'
+import { NPopselect } from '../index'
 
 describe('n-popselect', () => {
   it('should work with import on demand', () => {

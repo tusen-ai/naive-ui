@@ -1,18 +1,18 @@
+import type { MaybeArray } from '../../_utils'
+import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
+import { useMemo, useMergedState } from 'vooks'
 import {
   type ComputedRef,
   type ExtractPropTypes,
+  inject,
   type PropType,
   type Ref,
-  inject,
   ref,
   toRef,
   watchEffect
 } from 'vue'
-import { useMemo, useMergedState } from 'vooks'
 import { useConfig, useFormItem } from '../../_mixins'
 import { call, createInjectionKey, warnOnce } from '../../_utils'
-import type { MaybeArray } from '../../_utils'
-import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
 
 export const radioBaseProps = {
   name: String,

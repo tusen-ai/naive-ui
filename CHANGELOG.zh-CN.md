@@ -1,5 +1,30 @@
 # CHANGELOG
 
+## 2.40.2
+
+`2025-11-26`
+
+### Fixes
+
+- `n-time-picker` 的 `use-12-hours` 类型错误警告，关闭 [#4308](https://github.com/tusen-ai/naive-ui/issues/4308)
+- 修复 `input-number` 存在负号时被替换的问题
+- 修复 `n-data-table` 的 header 在部分浏览器中会出现滚动条，关闭 [#6557](https://github.com/tusen-ai/naive-ui/issues/6557)
+
+### Features
+
+- 🌟 新增 `n-marquee` 组件
+- `n-image` 新增 `error` 插槽，关闭 [#5649](https://github.com/tusen-ai/naive-ui/issues/5649)
+- `n-date-picker` 新增 `date-format` 属性
+- `n-date-picker` 新增 `calendar-day-format` 属性
+- `n-date-picker` 新增 `calendar-header-year-format` 属性
+- `n-date-picker` 新增 `calendar-header-month-format` 属性
+- `n-date-picker` 新增 `calendar-header-month-before-year` 属性
+- `n-date-picker` 新增 `calendar-header-month-year-separator` 属性
+- `n-progress` 的 `color` 属性支持渐变色配置
+- `n-select` 新增 `font-weight` 主题变量
+- `n-input` 新增 `font-weight` 主题变量
+- `n-data-table` 新增 `get-csv-header` 和 `get-csv-cell` 属性，关闭 [#6542](https://github.com/tusen-ai/naive-ui/issues/6542)
+
 ## 2.40.1
 
 `2024-09-26`

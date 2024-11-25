@@ -1,8 +1,8 @@
-import { defineComponent, h, onBeforeUpdate, ref } from 'vue'
 import type { PropType } from 'vue'
-import { indexMap } from 'seemly'
-import { useConfig } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import { indexMap } from 'seemly'
+import { defineComponent, h, onBeforeUpdate, ref } from 'vue'
+import { useConfig } from '../../_mixins'
 import { useCarouselContext } from './CarouselContext'
 
 const carouselDotsProps = {

@@ -3,10 +3,10 @@
 </markdown>
 
 <script lang="ts">
-import type { VNode } from 'vue'
-import { defineComponent, h, ref } from 'vue'
-import { NButton, useMessage } from 'naive-ui'
 import type { MessageProviderProps } from 'naive-ui'
+import type { VNode } from 'vue'
+import { NButton, useMessage } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
 
 interface Item {
   placement: MessageProviderProps['placement']

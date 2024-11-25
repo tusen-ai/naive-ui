@@ -1,15 +1,30 @@
+import type { InternalSelectMenuRef } from '../../_internal'
+import type { RenderLabel } from '../../_internal/select-menu/src/interface'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { FormValidationStatus } from '../../form/src/interface'
+import type { InputInst } from '../../input'
+import type { Size as InputSize } from '../../input/src/interface'
+import type {
+  SelectBaseOption,
+  SelectGroupOption,
+  SelectIgnoredOption
+} from '../../select/src/interface'
+import type { MentionTheme } from '../styles'
+import type { MentionOption } from './interface'
+import { createTreeMate, type TreeNode } from 'treemate'
+import { useIsMounted, useMergedState } from 'vooks'
 import {
-  type CSSProperties,
-  type PropType,
-  Transition,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
   nextTick,
+  type PropType,
   ref,
-  toRef
+  toRef,
+  Transition
 } from 'vue'
-import { type TreeNode, createTreeMate } from 'treemate'
 import {
   type FollowerInst,
   type FollowerPlacement,
@@ -17,28 +32,13 @@ import {
   VFollower,
   VTarget
 } from 'vueuc'
-import { useIsMounted, useMergedState } from 'vooks'
-import type { FormValidationStatus } from '../../form/src/interface'
-import type { RenderLabel } from '../../_internal/select-menu/src/interface'
-import type { Size as InputSize } from '../../input/src/interface'
-import { NInput } from '../../input'
-import type { InputInst } from '../../input'
-import type {
-  SelectBaseOption,
-  SelectGroupOption,
-  SelectIgnoredOption
-} from '../../select/src/interface'
 import { NInternalSelectMenu } from '../../_internal'
-import type { InternalSelectMenuRef } from '../../_internal'
-import { call, useAdjustedTo, warn } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
+import { call, useAdjustedTo, warn } from '../../_utils'
+import { NInput } from '../../input'
 import { mentionLight } from '../styles'
-import type { MentionTheme } from '../styles'
-import { getRelativePosition } from './utils'
-import type { MentionOption } from './interface'
 import style from './styles/index.cssr'
+import { getRelativePosition } from './utils'
 
 export const mentionProps = {
   ...(useTheme.props as ThemeProps<MentionTheme>),

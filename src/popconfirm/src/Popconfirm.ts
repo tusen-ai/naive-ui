@@ -1,25 +1,25 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { ButtonProps } from '../../button'
+import type { PopoverTrigger } from '../../popover'
+import type { InternalPopoverInst } from '../../popover/src/interface'
+import type { PopconfirmTheme } from '../styles'
+import type { PopconfirmInst } from './interface'
 import {
-  type ExtractPropTypes,
-  type PropType,
   defineComponent,
+  type ExtractPropTypes,
   h,
+  type PropType,
   provide,
   ref
 } from 'vue'
-import type { InternalPopoverInst } from '../../popover/src/interface'
-import { NPopover } from '../../popover'
-import type { PopoverTrigger } from '../../popover'
-import type { ButtonProps } from '../../button'
-import { popoverBaseProps } from '../../popover/src/Popover'
-import { call, keep, omit } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { useConfig, useTheme } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
+import { call, keep, omit } from '../../_utils'
+import { NPopover } from '../../popover'
+import { popoverBaseProps } from '../../popover/src/Popover'
 import { popconfirmLight } from '../styles'
-import type { PopconfirmTheme } from '../styles'
-import PopconfirmPanel, { panelPropKeys } from './PopconfirmPanel'
 import { popconfirmInjectionKey } from './interface'
-import type { PopconfirmInst } from './interface'
+import PopconfirmPanel, { panelPropKeys } from './PopconfirmPanel'
 import style from './styles/index.cssr'
 
 export const popconfirmProps = {

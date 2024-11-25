@@ -1,31 +1,31 @@
+import type { BaseWaveRef } from '../../_internal'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { ButtonTheme } from '../styles'
+import type { Size, Type } from './interface'
+import { changeColor } from 'seemly'
+import { useMemo } from 'vooks'
 import {
   type ButtonHTMLAttributes,
-  type CSSProperties,
-  type ExtractPropTypes,
-  type PropType,
-  type VNodeChild,
   computed,
+  type CSSProperties,
   defineComponent,
+  type ExtractPropTypes,
   h,
   inject,
+  type PropType,
   ref,
+  type VNodeChild,
   watchEffect
 } from 'vue'
-import { useMemo } from 'vooks'
-import { changeColor } from 'seemly'
-import { createHoverColor, createPressedColor } from '../../_utils/color/index'
-import { buttonGroupInjectionKey } from '../../button-group/src/context'
-import { useRtl } from '../../_mixins/use-rtl'
-import { isSafari } from '../../_utils/env/browser'
-import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import {
   NBaseLoading,
   NBaseWave,
   NFadeInExpandTransition,
   NIconSwitchTransition
 } from '../../_internal'
-import type { BaseWaveRef } from '../../_internal'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
 import {
   call,
   color2Class,
@@ -34,10 +34,10 @@ import {
   resolveWrappedSlot,
   warnOnce
 } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import { createHoverColor, createPressedColor } from '../../_utils/color/index'
+import { isSafari } from '../../_utils/env/browser'
+import { buttonGroupInjectionKey } from '../../button-group/src/context'
 import { buttonLight } from '../styles'
-import type { ButtonTheme } from '../styles'
-import type { Size, Type } from './interface'
 import style from './styles/index.cssr'
 
 export const buttonProps = {

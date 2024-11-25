@@ -1,14 +1,14 @@
+import type { ScrollbarProps } from '../../_internal'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import {
   type CSSProperties,
-  type PropType,
   defineComponent,
   h,
-  inject
+  inject,
+  type PropType
 } from 'vue'
 import { NBaseClose, NScrollbar } from '../../_internal'
-import type { ScrollbarProps } from '../../_internal'
 import { throwError } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { drawerInjectionKey } from './interface'
 
 export const drawerContentProps = {

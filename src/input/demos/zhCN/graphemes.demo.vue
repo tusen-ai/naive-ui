@@ -5,8 +5,8 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import GraphemeSplitter from 'grapheme-splitter'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {

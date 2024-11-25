@@ -5,8 +5,8 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import { CheckmarkCircle } from '@vicons/ionicons5'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {

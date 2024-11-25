@@ -3,10 +3,10 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h } from 'vue'
 import type { DataTableColumns } from 'naive-ui'
-import { NIcon } from 'naive-ui'
 import { ArrowForward } from '@vicons/ionicons5'
+import { NIcon } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 interface RowData {
   name: string

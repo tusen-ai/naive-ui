@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
-import { NProgress } from '../index'
 import { SuccessIcon } from '../../_internal/icons'
+import { NProgress } from '../index'
 
 describe('n-progress', () => {
   it('should work with import on demand', () => {
@@ -30,7 +30,7 @@ describe('n-progress', () => {
     })
     expect(
       wrapper.find('.n-progress-graph-line-fill').attributes('style')
-    ).toContain('background-color: rgb(51, 51, 51);')
+    ).toContain('max-width: 0%; background: rgb(51, 51, 51);')
     expect(
       wrapper.find('.n-progress-graph-line-rail').attributes('style')
     ).toContain('background-color: rgb(68, 68, 68);')

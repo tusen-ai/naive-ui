@@ -1,14 +1,14 @@
 import {
-  type CSSProperties,
-  type VNode,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
-  inject
+  inject,
+  type VNode
 } from 'vue'
+import { NFadeInExpandTransition } from '../../_internal'
 import { throwError } from '../../_utils'
 import { NImageGroup } from '../../image'
-import { NFadeInExpandTransition } from '../../_internal'
 import { uploadInjectionKey } from './interface'
 import NUploadFile from './UploadFile'
 import NUploadTrigger from './UploadTrigger'

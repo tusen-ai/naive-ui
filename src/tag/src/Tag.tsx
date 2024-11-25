@@ -1,20 +1,22 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { TagTheme } from '../styles'
+import { getMargin } from 'seemly'
 import {
-  type CSSProperties,
-  type PropType,
-  type Ref,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
+  type PropType,
   provide,
+  type Ref,
   ref,
   toRef,
   watchEffect
 } from 'vue'
-import { getMargin } from 'seemly'
-import { useRtl } from '../../_mixins/use-rtl'
 import { NBaseClose } from '../../_internal/close'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
 import {
   call,
   color2Class,
@@ -23,9 +25,7 @@ import {
   resolveWrappedSlot,
   warnOnce
 } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { tagLight } from '../styles'
-import type { TagTheme } from '../styles'
 import commonProps from './common-props'
 import style from './styles/index.cssr'
 

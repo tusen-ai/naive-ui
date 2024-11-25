@@ -5,8 +5,8 @@ You can use CSS variables from it. If you need to use those variables in JS, ple
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import { darkTheme } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {

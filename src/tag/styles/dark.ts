@@ -1,7 +1,7 @@
+import type { TagTheme } from './light'
 import { changeColor, scaleColor } from 'seemly'
 import { commonDark } from '../../_styles/common'
 import commonVariables from './_common'
-import type { TagTheme } from './light'
 
 const tagDark: TagTheme = {
   name: 'Tag',

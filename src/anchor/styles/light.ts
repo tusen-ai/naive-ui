@@ -1,7 +1,7 @@
+import type { Theme } from '../../_mixins'
+import type { ThemeCommonVars } from '../../_styles/common'
 import { changeColor } from 'seemly'
 import { commonLight } from '../../_styles/common'
-import type { ThemeCommonVars } from '../../_styles/common'
-import type { Theme } from '../../_mixins'
 import commonVars from './_common'
 
 export function self(vars: ThemeCommonVars) {

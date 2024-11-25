@@ -1,13 +1,7 @@
-import {
-  type CSSProperties,
-  Fragment,
-  type PropType,
-  computed,
-  defineComponent,
-  h,
-  ref,
-  toRef
-} from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { CalendarTheme } from '../styles'
+import type { DateItem, OnPanelChange, OnUpdateValue } from './interface'
 import {
   addMonths,
   format,
@@ -17,18 +11,24 @@ import {
   startOfMonth
 } from 'date-fns'
 import { useMergedState } from 'vooks'
-import { dateArray } from '../../date-picker/src/utils'
-import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  Fragment,
+  h,
+  type PropType,
+  ref,
+  toRef
+} from 'vue'
 import { NBaseIcon } from '../../_internal'
+import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
+import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import { call, resolveSlotWithProps } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { NButton } from '../../button'
 import { NButtonGroup } from '../../button-group'
-import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
+import { dateArray } from '../../date-picker/src/utils'
 import { calendarLight } from '../styles'
-import type { CalendarTheme } from '../styles'
-import type { DateItem, OnPanelChange, OnUpdateValue } from './interface'
 import style from './styles/index.cssr'
 
 export const calendarProps = {

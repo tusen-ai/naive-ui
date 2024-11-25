@@ -1,33 +1,28 @@
+import type { ThemeProps } from '../../_mixins'
+import type { LegacyTransferTheme } from '../styles'
+import { depx } from 'seemly'
+import { useIsMounted } from 'vooks'
 import {
-  type CSSProperties,
-  type PropType,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
+  type PropType,
   provide,
   watchEffect
 } from 'vue'
-import { useIsMounted } from 'vooks'
-import { depx } from 'seemly'
-import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
-import { NButton } from '../../button'
+import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
 import { useConfig, useFormItem, useLocale, useTheme } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import { createKey } from '../../_utils/cssr'
 import {
+  call,
   type ExtractPublicPropTypes,
   type MaybeArray,
-  call,
   warnOnce
 } from '../../_utils'
+import { createKey } from '../../_utils/cssr'
+import { NButton } from '../../button'
 import { legacyTransferLight } from '../styles'
-import type { LegacyTransferTheme } from '../styles'
-import NTransferHeader from './TransferHeader'
-import NTransferList from './TransferList'
-import NTransferFilter from './TransferFilter'
-import { useTransferData } from './use-transfer-data'
-import style from './styles/index.cssr'
 import {
   type Filter,
   type OnUpdateValue,
@@ -35,6 +30,11 @@ import {
   type OptionValue,
   transferInjectionKey
 } from './interface'
+import style from './styles/index.cssr'
+import NTransferFilter from './TransferFilter'
+import NTransferHeader from './TransferHeader'
+import NTransferList from './TransferList'
+import { useTransferData } from './use-transfer-data'
 
 export const transferProps = {
   ...(useTheme.props as ThemeProps<LegacyTransferTheme>),
