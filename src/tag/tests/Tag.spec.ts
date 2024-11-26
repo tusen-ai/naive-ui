@@ -166,4 +166,17 @@ describe('n-tag', () => {
       '--n-merged-size: var(--n-avatar-size-override, 34px);'
     )
   })
+
+  it('should work with `content-style` prop', () => {
+    const wrapper = mount(NTag, {
+      props: {
+        contentStyle: {
+          color: 'rgb(204, 204, 204)'
+        }
+      }
+    })
+    expect(wrapper.find('.n-tag__content').attributes('style')).toContain(
+      'color: rgb(204, 204, 204);'
+    )
+  })
 })

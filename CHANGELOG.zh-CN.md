@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`xxxx-xx-xx`
+
+### Fixes
+
+### Features
+
+- `n-tag` 新增 `content-style` 属性
+
 ## 2.40.2
 
 `2025-11-26`

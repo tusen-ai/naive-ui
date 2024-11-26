@@ -45,6 +45,7 @@ export const tagProps = {
   },
   checked: Boolean,
   checkable: Boolean,
+  contentStyle: [Object, String] as PropType<CSSProperties | string>,
   strong: Boolean,
   triggerClickOnClose: Boolean,
   onClose: [Array, Function] as PropType<MaybeArray<(e: MouseEvent) => void>>,
@@ -259,6 +260,7 @@ export default defineComponent({
       rtlEnabled,
       closable,
       color: { borderColor } = {},
+      contentStyle,
       round,
       onRender,
       $slots
@@ -299,7 +301,11 @@ export default defineComponent({
         onMouseleave={this.onMouseleave}
       >
         {iconNode || avatarNode}
-        <span class={`${mergedClsPrefix}-tag__content`} ref="contentRef">
+        <span
+          class={`${mergedClsPrefix}-tag__content`}
+          ref="contentRef"
+          style={contentStyle}
+        >
           {this.$slots.default?.()}
         </span>
         {!this.checkable && closable ? (
