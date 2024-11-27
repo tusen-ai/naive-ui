@@ -1,5 +1,5 @@
 <markdown>
-# 单 number 类型 size 调试 &#10004;
+# 单 number 类型 size 调试
 </markdown>
 
 <template>

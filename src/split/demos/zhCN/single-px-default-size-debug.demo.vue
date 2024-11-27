@@ -1,5 +1,5 @@
 <markdown>
-# 单 px 类型 default size 调试
+# 单 px 类型 default-size 调试
 </markdown>
 
 <template>

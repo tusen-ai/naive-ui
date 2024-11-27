@@ -23,6 +23,12 @@ single-px-default-size-debug.vue
 single-number-default-size-debug.vue
 single-px-size-threshold-debug.vue
 single-number-size-threshold-debug.vue
+mutil-number-default-size-debug.vue
+mutil-number-size-debug.vue
+mutil-number-size-threshold-debug.vue
+mutil-px-default-size-debug.vue
+mutil-px-size-debug.vue
+mutil-px-size-threshold-debug.vue
 ```
 
 ## API
