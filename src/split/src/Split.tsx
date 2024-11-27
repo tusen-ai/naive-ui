@@ -121,15 +121,10 @@ export default defineComponent({
 
     const mouseMoveEvent = 'mousemove'
     const mouseUpEvent = 'mouseup'
-    const getMousePosition = (e: MouseEvent | TouchEvent) => {
-      const clientAxis
-        = props.direction === 'horizontal' ? 'clientX' : 'clientY'
-      if ('touches' in e)
-        return e.touches[0][clientAxis]
-      return e[clientAxis]
-    }
+    const getMousePosition = (e: MouseEvent) =>
+      e[props.direction === 'horizontal' ? 'clientX' : 'clientY']
 
-    const onDraging = (e: MouseEvent | TouchEvent) => {
+    const onDraging = (e: MouseEvent) => {
       if (props.onDragMove)
         props.onDragMove(e)
 

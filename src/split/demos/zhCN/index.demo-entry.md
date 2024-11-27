@@ -14,6 +14,7 @@ event.vue
 slot.vue
 controlled.vue
 pixel-value.vue
+snap-offset.vue
 ```
 
 ## API
@@ -33,6 +34,7 @@ pixel-value.vue
 | pane2-style | `Object \| string` | `undefined` | 第二个面板的样式 | 2.38.2 |
 | resize-trigger-size | `number` | `3` | Split 的分隔条大小 | 2.36.0 |
 | size | `string \| number` | `undefined` | Split 的受控分割大小，为 `number` 类型时应该为 0 ~ 1 之间的值，为 `string` 类型时应该为 `${number}px` 格式 | 2.38.0, `string` 2.38.2 |
+| snap-offset | `number` | `undefined` | Split 的吸附偏移量 | NEXT_VERSION |
 | watch-props | `Array<'defaultSize'>` | `undefined` | 需要检测变更的默认属性，检测后组件状态会更新。注意：`watch-props` 本身不是响应式的 | 2.38.0 |
 | on-drag-start | `(e: Event) => void` | `undefined` | 开始拖拽的回调函数 | 2.36.0 |
 | on-drag-move | `(e: Event) => void` | `undefined` | 拖拽中的回调函数 | 2.36.0 |

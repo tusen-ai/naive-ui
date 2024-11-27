@@ -13,6 +13,8 @@ nest.vue
 event.vue
 slot.vue
 controlled.vue
+pixel-value.vue
+snap-offset.vue
 ```
 
 ## API
