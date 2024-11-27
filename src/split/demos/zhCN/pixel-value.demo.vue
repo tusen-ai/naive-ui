@@ -8,7 +8,7 @@
   <n-split
     direction="horizontal"
     style="height: 200px"
-    max="300px"
+    max="600px"
     min="100px"
     default-size="200px"
   >

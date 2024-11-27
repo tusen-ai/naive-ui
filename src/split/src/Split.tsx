@@ -1,21 +1,21 @@
-import type { SplitOnUpdateSize } from './types'
-import { off, on } from 'evtd'
-import { depx } from 'seemly'
-import { useMergedState } from 'vooks'
 import {
-  computed,
   type CSSProperties,
+  Fragment,
+  type PropType,
+  type StyleValue,
+  computed,
   defineComponent,
   h,
-  type PropType,
-  ref,
-  toRef,
-  watchEffect
+  onMounted,
+  ref
 } from 'vue'
+import { off, on } from 'evtd'
+import { VResizeObserver } from 'vueuc'
 import { type ThemeProps, useTheme, useThemeClass } from '../../_mixins'
 import useConfig from '../../_mixins/use-config'
-import { call, type ExtractPublicPropTypes, resolveSlot } from '../../_utils'
-import { splitLight, type SplitTheme } from '../styles'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import { type SplitTheme, splitLight } from '../styles'
+import type { SizeType, SplitOnUpdateSize } from './types'
 import style from './styles/index.cssr'
 
 export const splitProps = {
@@ -30,8 +30,8 @@ export const splitProps = {
   },
   disabled: Boolean,
   defaultSize: {
-    type: [String, Number] as PropType<string | number>,
-    default: 0.5
+    type: [Number, String, Array] as PropType<SizeType>,
+    default: undefined
   },
   'onUpdate:size': [Function, Array] as PropType<
     SplitOnUpdateSize | SplitOnUpdateSize[]
@@ -39,14 +39,21 @@ export const splitProps = {
   onUpdateSize: [Function, Array] as PropType<
     SplitOnUpdateSize | SplitOnUpdateSize[]
   >,
-  size: [String, Number] as PropType<string | number>,
+  size: {
+    type: [Number, String, Array] as PropType<SizeType>,
+    default: undefined
+  },
   min: {
-    type: [String, Number] as PropType<string | number>,
-    default: 0
+    type: [Number, String, Array] as PropType<SizeType>,
+    default: undefined
   },
   max: {
-    type: [String, Number] as PropType<string | number>,
-    default: 1
+    type: [Number, String, Array] as PropType<SizeType>,
+    default: undefined
+  },
+  snapOffset: {
+    type: Number,
+    default: 0
   },
   pane1Class: String,
   pane1Style: [Object, String] as PropType<CSSProperties | string>,
@@ -62,8 +69,9 @@ export type SplitProps = ExtractPublicPropTypes<typeof splitProps>
 
 export default defineComponent({
   name: 'Split',
+  inheritAttrs: false,
   props: splitProps,
-  setup(props) {
+  setup(props, { slots }) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Split',
@@ -85,202 +93,292 @@ export default defineComponent({
         '--n-resize-trigger-color-hover': resizableTriggerColorHover
       }
     })
-    const resizeTriggerElRef = ref<HTMLElement | null>(null)
-    const isDraggingRef = ref(false)
-    const controlledSizeRef = toRef(props, 'size')
-    const uncontrolledSizeRef = ref(props.defaultSize)
-    if (props.watchProps?.includes('defaultSize')) {
-      watchEffect(() => (uncontrolledSizeRef.value = props.defaultSize))
-    }
-    // use to update controlled or uncontrolled values
-    const doUpdateSize = (size: number | string): void => {
-      const _onUpdateSize = props['onUpdate:size']
-      if (props.onUpdateSize)
-        call(props.onUpdateSize, size as string & number)
-      if (_onUpdateSize)
-        call(_onUpdateSize, size as string & number)
-      uncontrolledSizeRef.value = size
-    }
-    const mergedSizeRef = useMergedState(controlledSizeRef, uncontrolledSizeRef)
-
-    const firstPaneStyle = computed(() => {
-      const sizeValue = mergedSizeRef.value
-      if (typeof sizeValue === 'string') {
-        return {
-          flex: `0 0 ${sizeValue}`
-        }
-      }
-      else if (typeof sizeValue === 'number') {
-        const size = sizeValue * 100
-        return {
-          flex: `0 0 calc(${size}% - ${
-            (props.resizeTriggerSize * size) / 100
-          }px)`
-        }
-      }
-    })
-
-    const resizeTriggerStyle = computed(() => {
-      return props.direction === 'horizontal'
-        ? {
-            width: `${props.resizeTriggerSize}px`,
-            height: '100%'
-          }
-        : {
-            width: '100%',
-            height: `${props.resizeTriggerSize}px`
-          }
-    })
-
-    const resizeTriggerWrapperStyle = computed(() => {
-      const horizontal = props.direction === 'horizontal'
-      return {
-        width: horizontal ? `${props.resizeTriggerSize}px` : '',
-        height: horizontal ? '' : `${props.resizeTriggerSize}px`,
-        cursor: props.direction === 'horizontal' ? 'col-resize' : 'row-resize'
-      }
-    })
-
-    let offset = 0
-    const handleMouseDown = (e: MouseEvent): void => {
-      e.preventDefault()
-      isDraggingRef.value = true
-      if (props.onDragStart)
-        props.onDragStart(e)
-      const mouseMoveEvent = 'mousemove'
-      const mouseUpEvent = 'mouseup'
-      const onMouseMove = (e: MouseEvent): void => {
-        updateSize(e)
-        if (props.onDragMove)
-          props.onDragMove(e)
-      }
-      const onMouseUp = (): void => {
-        off(mouseMoveEvent, document, onMouseMove)
-        off(mouseUpEvent, document, onMouseUp)
-        isDraggingRef.value = false
-        if (props.onDragEnd)
-          props.onDragEnd(e)
-        document.body.style.cursor = ''
-      }
-      document.body.style.cursor = resizeTriggerWrapperStyle.value.cursor
-      on(mouseMoveEvent, document, onMouseMove)
-      on(mouseUpEvent, document, onMouseUp)
-
-      const resizeTriggerEl = resizeTriggerElRef.value
-      if (resizeTriggerEl) {
-        const elRect = resizeTriggerEl.getBoundingClientRect()
-        if (props.direction === 'horizontal') {
-          offset = e.clientX - elRect.left
-        }
-        else {
-          offset = elRect.top - e.clientY
-        }
-      }
-      updateSize(e)
-    }
-
-    function updateSize(event: MouseEvent): void {
-      const containerRect
-        = resizeTriggerElRef.value?.parentElement?.getBoundingClientRect()
-      if (!containerRect)
-        return
-
-      const { direction } = props
-
-      const containerUsableWidth = containerRect.width - props.resizeTriggerSize
-      const containerUsableHeight
-        = containerRect.height - props.resizeTriggerSize
-      const containerUsableSize
-        = direction === 'horizontal'
-          ? containerUsableWidth
-          : containerUsableHeight
-
-      const newPxSize
-        = direction === 'horizontal'
-          ? event.clientX - containerRect.left - offset
-          : event.clientY - containerRect.top + offset
-
-      const { min, max } = props
-
-      const pxMin
-        = typeof min === 'string' ? depx(min) : min * containerUsableSize
-      const pxMax
-        = typeof max === 'string' ? depx(max) : max * containerUsableSize
-
-      let nextPxSize = newPxSize
-      nextPxSize = Math.max(nextPxSize, pxMin)
-      nextPxSize = Math.min(nextPxSize, pxMax, containerUsableSize)
-      // in pixel mode
-      if (typeof mergedSizeRef.value === 'string') {
-        doUpdateSize(`${nextPxSize}px`)
-      }
-      else {
-        // in percentage mode
-        doUpdateSize(nextPxSize / containerUsableSize)
-      }
-    }
 
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass('split', undefined, cssVarsRef, props)
       : undefined
 
+    const isHorizontal = props.direction === 'horizontal'
+    const isDraggingRef = ref(false)
+    const containerElSizeRef = ref(0)
+    const panelSizes = ref<number[]>([])
+    const triggerIndex = ref(-1)
+    const dragStartPos = ref(0)
+
+    // if (props.watchProps?.includes('defaultSize')) {
+    //   watchEffect(() => (uncontrolledSizeRef.value = props.defaultSize))
+    // }
+
+    const convertToPercentage = (value: number | string): number => {
+      if (typeof value === 'number') {
+        return value
+      }
+      if (typeof value === 'string' && value.endsWith('px')) {
+        return Number.parseInt(value) / containerElSizeRef.value
+      }
+      return 0
+    }
+
+    const mouseMoveEvent = 'mousemove'
+    const mouseUpEvent = 'mouseup'
+    const getMousePosition = (e: MouseEvent | TouchEvent) => {
+      const clientAxis
+        = props.direction === 'horizontal' ? 'clientX' : 'clientY'
+      if ('touches' in e)
+        return e.touches[0][clientAxis]
+      return e[clientAxis]
+    }
+
+    const onDraging = (e: MouseEvent | TouchEvent) => {
+      if (isDraggingRef.value)
+        return
+
+      const currentPosition = getMousePosition(e)
+      const mouseMoved = currentPosition - dragStartPos.value
+      const percentageMoved = mouseMoved / containerElSizeRef.value
+
+      const aSize = panelSizes.value[triggerIndex.value]
+      const bSize = panelSizes.value[triggerIndex.value + 1]
+
+      let newASize = aSize + percentageMoved
+      let newBSize = bSize - percentageMoved
+
+      const minSizeA = Array.isArray(props.min)
+        ? convertToPercentage(props.min[triggerIndex.value] ?? 0)
+        : convertToPercentage(props.min ?? 0)
+      const minSizeB = Array.isArray(props.min)
+        ? convertToPercentage(props.min[triggerIndex.value + 1] ?? 0)
+        : convertToPercentage(props.min ?? 0)
+
+      const maxSizeA = Array.isArray(props.max)
+        ? convertToPercentage(props.max[triggerIndex.value] ?? 1)
+        : convertToPercentage(props.max ?? 1)
+      const maxSizeB = Array.isArray(props.max)
+        ? convertToPercentage(props.max[triggerIndex.value + 1] ?? 1)
+        : convertToPercentage(props.max ?? 1)
+
+      const snapOffset = props.snapOffset / containerElSizeRef.value
+      let snapped = false
+
+      // 检查最小值约束
+      if (newASize < minSizeA + snapOffset) {
+        newASize = minSizeA
+        newBSize = aSize + bSize - minSizeA
+        snapped = true
+      }
+      else if (newBSize < minSizeB + snapOffset) {
+        newBSize = minSizeB
+        newASize = aSize + bSize - minSizeB
+        snapped = true
+      }
+
+      // 检查最大值约束
+      if (minSizeA !== 0 && newASize > maxSizeA - snapOffset) {
+        newASize = maxSizeA
+        newBSize = aSize + bSize - maxSizeA
+        snapped = true
+      }
+      else if (minSizeB !== 0 && newBSize > maxSizeB - snapOffset) {
+        newBSize = maxSizeB
+        newASize = aSize + bSize - maxSizeB
+        snapped = true
+      }
+
+      if (
+        newASize >= minSizeA
+        && newBSize >= minSizeB
+        && (minSizeA === 0 || newASize <= maxSizeA)
+        && (minSizeB === 0 || newBSize <= maxSizeB)
+      ) {
+        panelSizes.value[triggerIndex.value] = newASize
+        panelSizes.value[triggerIndex.value + 1] = newBSize
+
+        if (!snapped) {
+          dragStartPos.value = currentPosition
+        }
+      }
+    }
+
+    const onStopDrag = () => {
+      isDraggingRef.value = false
+      off(mouseMoveEvent, document, onDraging)
+      off(mouseUpEvent, document, onStopDrag)
+    }
+
+    const handleOnMouseDown = (
+      e: MouseEvent | TouchEvent,
+      gutterIndex: number
+    ) => {
+      e.preventDefault()
+      triggerIndex.value = gutterIndex
+      dragStartPos.value = getMousePosition(e)
+      on(mouseMoveEvent, document, onDraging)
+      on(mouseUpEvent, document, onStopDrag)
+    }
+
+    const getNumericSlotsLength = () =>
+      Object.keys(slots).filter(key => /^\d+$/.test(key)).length
+
+    const initializeSingleValue = (value: number | string) => {
+      const panelSlotLength = getNumericSlotsLength()
+      const percentage = convertToPercentage(value)
+      return [
+        percentage,
+        ...Array(panelSlotLength - 1).fill(
+          (1 - percentage) / (panelSlotLength - 1)
+        )
+      ]
+    }
+
+    const initializeArrayValue = (value: (number | string)[]) => {
+      const panelSlotLength = getNumericSlotsLength()
+      const percentages = value.map(v => convertToPercentage(v))
+      return percentages.length >= panelSlotLength
+        ? percentages.slice(0, panelSlotLength)
+        : [
+            ...percentages,
+            ...Array(panelSlotLength - percentages.length).fill(
+              1 / panelSlotLength
+            )
+          ]
+    }
+
+    const initializeSplit = () => {
+      if (Array.isArray(props.size)) {
+        panelSizes.value = initializeArrayValue(props.size)
+      }
+      else if (props.size !== undefined) {
+        panelSizes.value = initializeSingleValue(props.size)
+      }
+      else if (Array.isArray(props.defaultSize)) {
+        panelSizes.value = initializeArrayValue(props.defaultSize)
+      }
+      else if (props.defaultSize !== undefined) {
+        panelSizes.value = initializeSingleValue(props.defaultSize)
+      }
+      else {
+        const panelSlotLength = getNumericSlotsLength()
+        panelSizes.value = Array(panelSlotLength).fill(1 / panelSlotLength)
+      }
+    }
+
+    onMounted(() => {
+      initializeSplit()
+    })
+
+    const getPanelStyle = (index: number) => {
+      const size = panelSizes.value[index]
+      const totalTriggerSize
+        = (getNumericSlotsLength() - 1) * props.resizeTriggerSize
+      const availableSpace
+        = 100 - (totalTriggerSize / containerElSizeRef.value) * 100
+      return {
+        'flex-basis': `calc(${size * 100}% * ${availableSpace / 100})`
+      }
+    }
+
+    const resizeTriggerStyle = computed(() => {
+      if (isHorizontal) {
+        return {
+          width: `${props.resizeTriggerSize}px`,
+          flexBasis: `${props.resizeTriggerSize}px`,
+          cursor: 'col-resize'
+        }
+      }
+      else {
+        return {
+          height: `${props.resizeTriggerSize}px`,
+          flexBasis: `${props.resizeTriggerSize}px`,
+          cursor: 'row-resize'
+        }
+      }
+    })
+
+    const onContainerResize = (e: ResizeObserverEntry) => {
+      containerElSizeRef.value = isHorizontal
+        ? e.contentRect.width
+        : e.contentRect.height
+    }
+
+    // const resizeTriggerWrapperStyle = computed(() => {
+    //   return {
+    //     width: isHorizontal ? `${props.resizeTriggerSize}px` : '',
+    //     height: isHorizontal ? '' : `${props.resizeTriggerSize}px`,
+    //     cursor: isHorizontal ? 'col-resize' : 'row-resize'
+    //   }
+    // })
+
     return {
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
-      resizeTriggerElRef,
       isDragging: isDraggingRef,
       mergedClsPrefix: mergedClsPrefixRef,
-      resizeTriggerWrapperStyle,
       resizeTriggerStyle,
-      handleMouseDown,
-      firstPaneStyle
+      panelSizes,
+      handleOnMouseDown,
+      getPanelStyle,
+      getNumericSlotsLength,
+      onContainerResize
     }
   },
   render() {
     this.onRender?.()
+    const {
+      handleOnMouseDown,
+      getPanelStyle,
+      resizeTriggerStyle,
+      getNumericSlotsLength,
+      onContainerResize,
+      $attrs,
+      mergedClsPrefix,
+      themeClass,
+      isDragging,
+      direction,
+      $slots,
+      cssVars
+    } = this
     return (
-      <div
-        class={[
-          `${this.mergedClsPrefix}-split`,
-          `${this.mergedClsPrefix}-split--${this.direction}`,
-          this.themeClass
-        ]}
-        style={this.cssVars as CSSProperties}
-      >
-        <div
-          class={[`${this.mergedClsPrefix}-split-pane-1`, this.pane1Class]}
-          style={[this.firstPaneStyle, this.pane1Style]}
-        >
-          {this.$slots[1]?.()}
-        </div>
-        {!this.disabled && (
-          <div
-            ref="resizeTriggerElRef"
-            class={`${this.mergedClsPrefix}-split__resize-trigger-wrapper`}
-            style={this.resizeTriggerWrapperStyle}
-            onMousedown={this.handleMouseDown}
-          >
-            {resolveSlot(this.$slots['resize-trigger'], () => [
-              <div
-                style={this.resizeTriggerStyle}
-                class={[
-                  `${this.mergedClsPrefix}-split__resize-trigger`,
-                  this.isDragging
-                  && `${this.mergedClsPrefix}-split__resize-trigger--hover`
-                ]}
-              >
-              </div>
-            ])}
-          </div>
-        )}
-        <div
-          class={[`${this.mergedClsPrefix}-split-pane-2`, this.pane2Class]}
-          style={this.pane2Style}
-        >
-          {this.$slots[2]?.()}
-        </div>
-      </div>
+      <VResizeObserver onResize={onContainerResize}>
+        {{
+          default: () => (
+            <div
+              {...$attrs}
+              class={[
+                $attrs.class,
+                `${mergedClsPrefix}-split`,
+                `${mergedClsPrefix}-split--${direction}`,
+                themeClass
+              ]}
+              style={[$attrs.style as StyleValue, cssVars as CSSProperties]}
+            >
+              {Array.from({ length: getNumericSlotsLength() }).map(
+                (_, index) => (
+                  <Fragment key={index}>
+                    <div
+                      style={getPanelStyle(index)}
+                      class={[`${mergedClsPrefix}-split-pane`]}
+                    >
+                      {$slots[`${index + 1}`]?.()}
+                    </div>
+                    {index < getNumericSlotsLength() - 1 && (
+                      <div
+                        class={[
+                          `${mergedClsPrefix}-split__resize-trigger`,
+                          isDragging
+                          && `${mergedClsPrefix}-split__resize-trigger--hover`
+                        ]}
+                        style={resizeTriggerStyle}
+                        onMousedown={e => handleOnMouseDown(e, index)}
+                      />
+                    )}
+                  </Fragment>
+                )
+              )}
+            </div>
+          )
+        }}
+      </VResizeObserver>
     )
   }
 })
