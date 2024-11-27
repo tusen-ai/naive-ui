@@ -99,7 +99,7 @@ export default defineComponent({
       : undefined
 
     const isHorizontal = props.direction === 'horizontal'
-    const isDraggingRef = ref(false)
+    const isDraggingRef = ref(-1)
     const containerElSizeRef = ref(0)
     const panelSizes = ref<Array<string | number>>([])
     const triggerIndex = ref(-1)
@@ -218,7 +218,7 @@ export default defineComponent({
     }
 
     const onStopDrag = (e: MouseEvent) => {
-      isDraggingRef.value = false
+      isDraggingRef.value = -1
       if (props.onDragEnd)
         props.onDragEnd(e)
       off(mouseMoveEvent, document, onDraging)
@@ -230,6 +230,7 @@ export default defineComponent({
       if (props.onDragStart)
         props.onDragStart(e)
       triggerIndex.value = index
+      isDraggingRef.value = index
       dragStartPos.value = getMousePosition(e)
       on(mouseMoveEvent, document, onDraging)
       on(mouseUpEvent, document, onStopDrag)
@@ -413,7 +414,7 @@ export default defineComponent({
                       <div
                         class={[
                           `${mergedClsPrefix}-split__resize-trigger`,
-                          isDragging
+                          isDragging === index
                           && `${mergedClsPrefix}-split__resize-trigger--hover`
                         ]}
                         style={resizeTriggerStyle}
