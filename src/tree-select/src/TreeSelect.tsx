@@ -1,44 +1,19 @@
-import type { ThemeProps } from '../../_mixins'
-import type { FormValidationStatus } from '../../form/src/interface'
-import type { PopoverProps } from '../../popover'
-import type { SelectBaseOption, SelectOption } from '../../select/src/interface'
-import type {
-  GetChildren,
-  InternalTreeInst,
-  Key,
-  TreeOption,
-  TreeOverrideNodeClickBehaviorReturn
-} from '../../tree/src/interface'
-import type { OnUpdateExpandedKeysImpl } from '../../tree/src/Tree'
-import type {
-  OnUpdateIndeterminateKeysImpl,
-  OnUpdateValue,
-  OnUpdateValueImpl,
-  TreeSelectInst,
-  TreeSelectNodeProps,
-  TreeSelectOption,
-  TreeSelectRenderLabel,
-  TreeSelectRenderPrefix,
-  TreeSelectRenderSuffix,
-  TreeSelectRenderTag,
-  Value
-} from './interface'
 import { getPreciseEventTarget, happensIn } from 'seemly'
 import { type CheckStrategy, createTreeMate } from 'treemate'
 import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
-  computed,
   type CSSProperties,
-  defineComponent,
-  h,
   type HTMLAttributes,
   type PropType,
+  Transition,
+  type VNodeChild,
+  computed,
+  defineComponent,
+  h,
   provide,
   ref,
   toRef,
-  Transition,
-  type VNodeChild,
   watchEffect,
   withDirectives
 } from 'vue'
@@ -49,6 +24,18 @@ import {
   VFollower,
   VTarget
 } from 'vueuc'
+import type { OnUpdateExpandedKeysImpl } from '../../tree/src/Tree'
+import type {
+  GetChildren,
+  InternalTreeInst,
+  Key,
+  TreeOption,
+  TreeOverrideNodeClickBehaviorReturn
+} from '../../tree/src/interface'
+import type { SelectBaseOption, SelectOption } from '../../select/src/interface'
+import type { PopoverProps } from '../../popover'
+import type { FormValidationStatus } from '../../form/src/interface'
+import type { ThemeProps } from '../../_mixins'
 import {
   type InternalSelectionInst,
   NBaseFocusDetector,
@@ -62,10 +49,10 @@ import {
   useThemeClass
 } from '../../_mixins'
 import {
-  call,
   type ExtractPublicPropTypes,
-  markEventEffectPerformed,
   type MaybeArray,
+  call,
+  markEventEffectPerformed,
   resolveSlot,
   resolveWrappedSlot,
   useAdjustedTo,
@@ -76,7 +63,20 @@ import { NEmpty } from '../../empty'
 import { NTree } from '../../tree'
 import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
 import { useMergedCheckStrategy } from '../../tree/src/utils'
-import { treeSelectLight, type TreeSelectTheme } from '../styles'
+import { type TreeSelectTheme, treeSelectLight } from '../styles'
+import type {
+  OnUpdateIndeterminateKeysImpl,
+  OnUpdateValue,
+  OnUpdateValueImpl,
+  TreeSelectInst,
+  TreeSelectNodeProps,
+  TreeSelectOption,
+  TreeSelectRenderLabel,
+  TreeSelectRenderPrefix,
+  TreeSelectRenderSuffix,
+  TreeSelectRenderTag,
+  Value
+} from './interface'
 import { treeSelectInjectionKey } from './interface'
 import style from './styles/index.cssr'
 import {
@@ -140,6 +140,7 @@ export const treeSelectProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
+  showLine: Boolean,
   size: String as PropType<'small' | 'medium' | 'large'>,
   value: [String, Number, Array] as PropType<
     string | number | Array<string | number> | null
@@ -988,6 +989,7 @@ export default defineComponent({
                               <NTree
                                 ref="treeInstRef"
                                 blockLine
+                                showLine={this.showLine}
                                 allowCheckingNotLoaded={
                                   this.allowCheckingNotLoaded
                                 }
