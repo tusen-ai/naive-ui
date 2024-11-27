@@ -1,5 +1,5 @@
 export {
-  default as NFloatButtonGroup,
-  floatButtonGroupProps
+  floatButtonGroupProps,
+  default as NFloatButtonGroup
 } from './src/FloatButtonGroup'
 export type { FloatButtonGroupProps } from './src/FloatButtonGroup'

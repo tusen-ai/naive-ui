@@ -1,5 +1,5 @@
 export { useModal, useModalReactiveList } from './src/composables'
-export { default as NModal, modalProps } from './src/Modal'
+export { modalProps, default as NModal } from './src/Modal'
 
 export type { ModalProps } from './src/Modal'
 export { modalProviderProps, NModalProvider } from './src/ModalProvider'
