@@ -23,17 +23,17 @@ snap-offset.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| default-size | `number` | `0.5` | Default split size, when it's `number` it should in 0 ~ 1, when it's `string` it should be formatted in `${number}px`. | 2.36.0, `string` 2.38.2, `(string \| number)[]` NEXT_VERSION |
+| default-size | `number \| string \| (string \| number)[]` | `0.5` | Default split size, when it's `number` it should in 0 ~ 1, when it's `string` it should be formatted in `${number}px`. | 2.36.0, `string` 2.38.2, `(string \| number)[]` NEXT_VERSION |
 | direction | `'horizontal' \| 'vertical'` | `'horizontal'` | The direction of the split. | 2.36.0 |
 | disabled | `boolean` | `false` | Whether to disable the split. | 2.36.0 |
-| max | `string \| number` | `1` | The maximum split threshold, when it's `number` it should in 0 ~ 1, when it's `string` it should be formatted in `${number}px`. | 2.36.0, `string` 2.38.2,`(string \| number)[]` NEXT_VERSION |
-| min | `string \| number` | `0` | The minimum threshold for splitting, when it's `number` it should in 0 ~ 1, when it's `string` it should be formatted in `${number}px`. | 2.36.0, `string` 2.38.2,`(string \| number)[]` NEXT_VERSION |
+| max | `string \| number \| (string \| number)[]` | `1` | The maximum split threshold, when it's `number` it should in 0 ~ 1, when it's `string` it should be formatted in `${number}px`. | 2.36.0, `string` 2.38.2,`(string \| number)[]` NEXT_VERSION |
+| min | `string \| number \| (string \| number)[]` | `0` | The minimum threshold for splitting, when it's `number` it should in 0 ~ 1, when it's `string` it should be formatted in `${number}px`. | 2.36.0, `string` 2.38.2,`(string \| number)[]` NEXT_VERSION |
 | pane1-class | `string` | `undefined` | The class name of the first pane. | 2.38.2 |
 | pane1-style | `Object \| string` | `undefined` | The Style of the first pane | 2.38.2 |
 | pane2-class | `string` | `undefined` | The class name of the second pane. | 2.38.2 |
 | pane2-style | `Object \| string` | `undefined` | The Style of the second pane | 2.38.2 |
 | resize-trigger-size | `number` | `3` | Size of the resize trigger. | 2.36.0 |
-| size | `string \| number` | `undefined` | Split is the controlled split size, when it's `number` it should in 0 ~ 1, when it's `string` it should be formatted in `${number}px`. | 2.38.0, `string` 2.38.2,`(string \| number)[]` NEXT_VERSION |
+| size | `string \| number \| (string \| number)[]` | `undefined` | Split is the controlled split size, when it's `number` it should in 0 ~ 1, when it's `string` it should be formatted in `${number}px`. | 2.38.0, `string` 2.38.2,`(string \| number)[]` NEXT_VERSION |
 | snap-offset | `number` | `undefined` | The snap offset of the split. | NEXT_VERSION |
 | watch-props | `Array<'defaultSize'>` | `undefined` | Default prop names that needed to be watched. Components will be updated after the prop is changed. Note: the `watch-props` itself is not reactive. | 2.38.0 |
 | on-drag-start | `(e: Event) => void` | `undefined` | Callback function when drag start. | 2.36.0 |
