@@ -15,6 +15,8 @@ slot.vue
 controlled.vue
 pixel-value.vue
 snap-offset.vue
+mutil-panel.vue
+mutil-panel-nest.vue
 ```
 
 ## API
