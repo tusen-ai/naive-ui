@@ -17,6 +17,12 @@ pixel-value.vue
 snap-offset.vue
 mutil-panel.vue
 mutil-panel-nest.vue
+single-px-size-debug.vue
+single-number-size-debug.vue
+single-px-default-size-debug.vue
+single-number-default-size-debug.vue
+single-px-size-threshold-debug.vue
+single-number-size-threshold-debug.vue
 ```
 
 ## API
