@@ -15,12 +15,10 @@ export default cB('split', `
   cM('vertical', `
     flex-direction: column;
   `),
-  cB('split-pane-1', `
+  cB('split-pane', `
     overflow: hidden;
-  `),
-  cB('split-pane-2', `
-    overflow: hidden;
-    flex: 1;
+    flex-grow: 0;
+    flex-shrink: 0;
   `),
   cE('resize-trigger', `
     background-color: var(--n-resize-trigger-color);
