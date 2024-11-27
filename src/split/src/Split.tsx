@@ -130,8 +130,8 @@ export default defineComponent({
     }
 
     const onDraging = (e: MouseEvent | TouchEvent) => {
-      if (isDraggingRef.value)
-        return
+      if (props.onDragMove)
+        props.onDragMove(e)
 
       const currentPosition = getMousePosition(e)
       const mouseMoved = currentPosition - dragStartPos.value
@@ -160,7 +160,6 @@ export default defineComponent({
       const snapOffset = props.snapOffset / containerElSizeRef.value
       let snapped = false
 
-      // 检查最小值约束
       if (newASize < minSizeA + snapOffset) {
         newASize = minSizeA
         newBSize = aSize + bSize - minSizeA
@@ -172,7 +171,6 @@ export default defineComponent({
         snapped = true
       }
 
-      // 检查最大值约束
       if (minSizeA !== 0 && newASize > maxSizeA - snapOffset) {
         newASize = maxSizeA
         newBSize = aSize + bSize - maxSizeA
@@ -199,18 +197,19 @@ export default defineComponent({
       }
     }
 
-    const onStopDrag = () => {
+    const onStopDrag = (e: MouseEvent) => {
       isDraggingRef.value = false
+      if (props.onDragEnd)
+        props.onDragEnd(e)
       off(mouseMoveEvent, document, onDraging)
       off(mouseUpEvent, document, onStopDrag)
     }
 
-    const handleOnMouseDown = (
-      e: MouseEvent | TouchEvent,
-      gutterIndex: number
-    ) => {
+    const handleOnMouseDown = (e: MouseEvent, index: number) => {
       e.preventDefault()
-      triggerIndex.value = gutterIndex
+      if (props.onDragStart)
+        props.onDragStart(e)
+      triggerIndex.value = index
       dragStartPos.value = getMousePosition(e)
       on(mouseMoveEvent, document, onDraging)
       on(mouseUpEvent, document, onStopDrag)
