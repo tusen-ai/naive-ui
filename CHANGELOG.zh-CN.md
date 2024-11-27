@@ -9,7 +9,7 @@
 - `n-time-picker` 的 `use-12-hours` 类型错误警告，关闭 [#4308](https://github.com/tusen-ai/naive-ui/issues/4308)
 - 修复 `input-number` 存在负号时被替换的问题
 - 修复 `n-data-table` 的 header 在部分浏览器中会出现滚动条，关闭 [#6557](https://github.com/tusen-ai/naive-ui/issues/6557)
-- 修复 `Modal` 中 `aria-hidden` 属性引发的浏览器警告，关闭 [#6436](https://github.com/tusen-ai/naive-ui/issues/6436)
+- 修复 `n-modal` 中 `aria-hidden` 属性引发的控制台报警告，关闭 [#6436](https://github.com/tusen-ai/naive-ui/issues/6436)
 
 ### Features
 

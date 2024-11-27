@@ -9,7 +9,7 @@
 - Fix `n-time-picker`'s `use-12-hours` type error warning, closes [#4308](https://github.com/tusen-ai/naive-ui/issues/4308)
 - Fix `input-number` the problem that the negative sign is replaced when the negative sign is entered.
 - Fix `n-data-table`'s header will show scrollbar in some old browsers, closes [#6557](https://github.com/tusen-ai/naive-ui/issues/6557).
-- Fix browser warnings caused by `aria-hidden` attribute in `Modal`, closes [#6436](https://github.com/tusen-ai/naive-ui/issues/6436)
+- Fix `n-modal` has log warnings of console when use `aria-hidden` attribute, closes [#6436](https://github.com/tusen-ai/naive-ui/issues/6436)
 
 ### Features
 
