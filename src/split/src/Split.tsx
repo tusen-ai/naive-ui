@@ -101,7 +101,7 @@ export default defineComponent({
     const isHorizontal = props.direction === 'horizontal'
     const isDraggingRef = ref(false)
     const containerElSizeRef = ref(0)
-    const panelSizes = ref<number[]>([])
+    const panelSizes = ref<Array<string | number>>([])
     const triggerIndex = ref(-1)
     const dragStartPos = ref(0)
 
@@ -109,12 +109,19 @@ export default defineComponent({
     //   watchEffect(() => (uncontrolledSizeRef.value = props.defaultSize))
     // }
 
-    const convertToPercentage = (value: number | string): number => {
+    const convertSizeToPixel = (value: string | number): number => {
       if (typeof value === 'number') {
-        return value
+        return value * containerElSizeRef.value
       }
-      if (typeof value === 'string' && value.endsWith('px')) {
-        return Number.parseInt(value) / containerElSizeRef.value
+      if (typeof value === 'string') {
+        if (value.endsWith('px')) {
+          return Number.parseInt(value)
+        }
+        if (value === 'auto') {
+          return (
+            containerElSizeRef.value - convertSizeToPixel(panelSizes.value[0])
+          )
+        }
       }
       return 0
     }
@@ -130,61 +137,79 @@ export default defineComponent({
 
       const currentPosition = getMousePosition(e)
       const mouseMoved = currentPosition - dragStartPos.value
-      const percentageMoved = mouseMoved / containerElSizeRef.value
 
       const aSize = panelSizes.value[triggerIndex.value]
       const bSize = panelSizes.value[triggerIndex.value + 1]
 
-      let newASize = aSize + percentageMoved
-      let newBSize = bSize - percentageMoved
+      const aSizeInPx = convertSizeToPixel(aSize)
+      const bSizeInPx = convertSizeToPixel(bSize)
 
-      const minSizeA = Array.isArray(props.min)
-        ? convertToPercentage(props.min[triggerIndex.value] ?? 0)
-        : convertToPercentage(props.min ?? 0)
-      const minSizeB = Array.isArray(props.min)
-        ? convertToPercentage(props.min[triggerIndex.value + 1] ?? 0)
-        : convertToPercentage(props.min ?? 0)
+      let newASizeInPx = aSizeInPx + mouseMoved
+      let newBSizeInPx = bSizeInPx - mouseMoved
 
-      const maxSizeA = Array.isArray(props.max)
-        ? convertToPercentage(props.max[triggerIndex.value] ?? 1)
-        : convertToPercentage(props.max ?? 1)
-      const maxSizeB = Array.isArray(props.max)
-        ? convertToPercentage(props.max[triggerIndex.value + 1] ?? 1)
-        : convertToPercentage(props.max ?? 1)
+      const minA = Array.isArray(props.min)
+        ? convertSizeToPixel(props.min[triggerIndex.value] ?? 0)
+        : convertSizeToPixel(props.min ?? 0)
+      const minB = Array.isArray(props.min)
+        ? convertSizeToPixel(props.min[triggerIndex.value + 1] ?? 0)
+        : convertSizeToPixel(props.min ?? 0)
 
-      const snapOffset = props.snapOffset / containerElSizeRef.value
+      const maxA = Array.isArray(props.max)
+        ? convertSizeToPixel(props.max[triggerIndex.value] ?? 1)
+        : convertSizeToPixel(props.max ?? 1)
+      const maxB = Array.isArray(props.max)
+        ? convertSizeToPixel(props.max[triggerIndex.value + 1] ?? 1)
+        : convertSizeToPixel(props.max ?? 1)
+
+      const snapOffset = props.snapOffset
       let snapped = false
 
-      if (newASize < minSizeA + snapOffset) {
-        newASize = minSizeA
-        newBSize = aSize + bSize - minSizeA
+      if (newASizeInPx < minA + snapOffset) {
+        newASizeInPx = minA
+        newBSizeInPx = aSizeInPx + bSizeInPx - minA
         snapped = true
       }
-      else if (newBSize < minSizeB + snapOffset) {
-        newBSize = minSizeB
-        newASize = aSize + bSize - minSizeB
+      else if (newBSizeInPx < minB + snapOffset) {
+        newBSizeInPx = minB
+        newASizeInPx = aSizeInPx + bSizeInPx - minB
         snapped = true
       }
 
-      if (minSizeA !== 0 && newASize > maxSizeA - snapOffset) {
-        newASize = maxSizeA
-        newBSize = aSize + bSize - maxSizeA
+      if (maxA !== 0 && newASizeInPx > maxA - snapOffset) {
+        newASizeInPx = maxA
+        newBSizeInPx = aSizeInPx + bSizeInPx - maxA
         snapped = true
       }
-      else if (minSizeB !== 0 && newBSize > maxSizeB - snapOffset) {
-        newBSize = maxSizeB
-        newASize = aSize + bSize - maxSizeB
+      else if (maxB !== 0 && newBSizeInPx > maxB - snapOffset) {
+        newBSizeInPx = maxB
+        newASizeInPx = aSizeInPx + bSizeInPx - maxB
         snapped = true
       }
 
       if (
-        newASize >= minSizeA
-        && newBSize >= minSizeB
-        && (minSizeA === 0 || newASize <= maxSizeA)
-        && (minSizeB === 0 || newBSize <= maxSizeB)
+        newASizeInPx >= minA
+        && newBSizeInPx >= minB
+        && (minA === 0 || newASizeInPx <= maxA)
+        && (minB === 0 || newBSizeInPx <= maxB)
       ) {
-        panelSizes.value[triggerIndex.value] = newASize
-        panelSizes.value[triggerIndex.value + 1] = newBSize
+        if (typeof aSize === 'number') {
+          panelSizes.value[triggerIndex.value]
+            = newASizeInPx / containerElSizeRef.value
+        }
+        else {
+          panelSizes.value[triggerIndex.value] = `${newASizeInPx}px`
+        }
+
+        if (bSize === 'auto') {
+          panelSizes.value[triggerIndex.value + 1] = `${newBSizeInPx}px`
+        }
+        else if (typeof bSize === 'number') {
+          panelSizes.value[triggerIndex.value + 1]
+            = newBSizeInPx / containerElSizeRef.value
+        }
+        else {
+          panelSizes.value[triggerIndex.value + 1] = `${newBSizeInPx}px`
+        }
 
         if (!snapped) {
           dragStartPos.value = currentPosition
@@ -215,25 +240,27 @@ export default defineComponent({
 
     const initializeSingleValue = (value: number | string) => {
       const panelSlotLength = getNumericSlotsLength()
-      const percentage = convertToPercentage(value)
-      return [
-        percentage,
-        ...Array(panelSlotLength - 1).fill(
-          (1 - percentage) / (panelSlotLength - 1)
-        )
-      ]
+      if (typeof value === 'number') {
+        return [
+          value,
+          ...Array(panelSlotLength - 1).fill(
+            (1 - value) / (panelSlotLength - 1)
+          )
+        ]
+      }
+      if (typeof value === 'string' && value.endsWith('px')) {
+        return [value, ...Array(panelSlotLength - 1).fill('auto')]
+      }
+      return Array(panelSlotLength).fill(1 / panelSlotLength)
     }
 
-    const initializeArrayValue = (value: (number | string)[]) => {
+    const initializeArrayValue = (value: Array<string | number>) => {
       const panelSlotLength = getNumericSlotsLength()
-      const percentages = value.map(v => convertToPercentage(v))
-      return percentages.length >= panelSlotLength
-        ? percentages.slice(0, panelSlotLength)
+      return value.length >= panelSlotLength
+        ? value.slice(0, panelSlotLength)
         : [
-            ...percentages,
-            ...Array(panelSlotLength - percentages.length).fill(
-              1 / panelSlotLength
-            )
+            ...value,
+            ...Array(panelSlotLength - value.length).fill(1 / panelSlotLength)
           ]
     }
 
@@ -266,8 +293,35 @@ export default defineComponent({
         = (getNumericSlotsLength() - 1) * props.resizeTriggerSize
       const availableSpace
         = 100 - (totalTriggerSize / containerElSizeRef.value) * 100
+
+      if (typeof size === 'number') {
+        return {
+          'flex-basis': `calc(${size * 100}% * ${availableSpace / 100})`,
+          'flex-grow': '0',
+          'flex-shrink': '0'
+        }
+      }
+
+      if (typeof size === 'string') {
+        if (size === 'auto') {
+          return {
+            'flex-basis': '0',
+            'flex-grow': '1',
+            'flex-shrink': '1'
+          }
+        }
+        if (size.endsWith('px')) {
+          const pxValue = Number.parseInt(size)
+          return {
+            'flex-basis': `calc(${pxValue}px * ${availableSpace / 100})`,
+            'flex-grow': '0',
+            'flex-shrink': '0'
+          }
+        }
+      }
+
       return {
-        'flex-basis': `calc(${size * 100}% * ${availableSpace / 100})`
+        'flex-basis': '0'
       }
     }
 
