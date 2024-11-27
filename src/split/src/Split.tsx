@@ -186,34 +186,43 @@ export default defineComponent({
         snapped = true
       }
 
-      if (
-        newASizeInPx >= minA
-        && newBSizeInPx >= minB
-        && (minA === 0 || newASizeInPx <= maxA)
-        && (minB === 0 || newBSizeInPx <= maxB)
-      ) {
-        if (typeof aSize === 'number') {
-          panelSizes.value[triggerIndex.value]
-            = newASizeInPx / containerElSizeRef.value
-        }
-        else {
-          panelSizes.value[triggerIndex.value] = `${newASizeInPx}px`
-        }
+      const halfSize = containerElSizeRef.value / 2
+      if (Math.abs(newASizeInPx - halfSize) <= snapOffset) {
+        newASizeInPx = halfSize
+        newBSizeInPx = aSizeInPx + bSizeInPx - halfSize
+        snapped = true
+      }
 
-        if (bSize === 'auto') {
-          panelSizes.value[triggerIndex.value + 1] = `${newBSizeInPx}px`
-        }
-        else if (typeof bSize === 'number') {
-          panelSizes.value[triggerIndex.value + 1]
-            = newBSizeInPx / containerElSizeRef.value
-        }
-        else {
-          panelSizes.value[triggerIndex.value + 1] = `${newBSizeInPx}px`
-        }
+      newASizeInPx = Math.max(
+        minA,
+        Math.min(maxA || containerElSizeRef.value, newASizeInPx)
+      )
+      newBSizeInPx = Math.max(
+        minB,
+        Math.min(maxB || containerElSizeRef.value, newBSizeInPx)
+      )
 
-        if (!snapped) {
-          dragStartPos.value = currentPosition
-        }
+      if (typeof aSize === 'number') {
+        panelSizes.value[triggerIndex.value]
+          = newASizeInPx / containerElSizeRef.value
+      }
+      else {
+        panelSizes.value[triggerIndex.value] = `${newASizeInPx}px`
+      }
+
+      if (bSize === 'auto') {
+        panelSizes.value[triggerIndex.value + 1] = `${newBSizeInPx}px`
+      }
+      else if (typeof bSize === 'number') {
+        panelSizes.value[triggerIndex.value + 1]
+          = newBSizeInPx / containerElSizeRef.value
+      }
+      else {
+        panelSizes.value[triggerIndex.value + 1] = `${newBSizeInPx}px`
+      }
+
+      if (!snapped) {
+        dragStartPos.value = currentPosition
       }
     }
 
