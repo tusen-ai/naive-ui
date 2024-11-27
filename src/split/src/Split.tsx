@@ -55,6 +55,10 @@ export const splitProps = {
     type: Number,
     default: 0
   },
+  snapToCenter: {
+    type: Boolean,
+    default: false
+  },
   pane1Class: String,
   pane1Style: [Object, String] as PropType<CSSProperties | string>,
   pane2Class: String,
@@ -187,7 +191,10 @@ export default defineComponent({
       }
 
       const halfSize = containerElSizeRef.value / 2
-      if (Math.abs(newASizeInPx - halfSize) <= snapOffset) {
+      if (
+        props.snapToCenter
+        && Math.abs(newASizeInPx - halfSize) <= snapOffset
+      ) {
         newASizeInPx = halfSize
         newBSizeInPx = aSizeInPx + bSizeInPx - halfSize
         snapped = true
