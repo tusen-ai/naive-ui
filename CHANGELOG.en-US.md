@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-tree-select` adds `show-line` prop.
+
 ## 2.40.2
 
 `2024-11-26`

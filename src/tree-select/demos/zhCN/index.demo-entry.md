@@ -63,6 +63,7 @@ render-debug.vue
 | render-switcher-icon | `() => VNodeChild` | `undefined` | 节点展开开关的渲染函数 | 2.30.7 |
 | render-tag | `(props: { option: TreeSelectOption, handleClose: () => void }) => VNodeChild` | `undefined` | 控制标签的渲染 | 2.30.7 |
 | separator | `string` | `' / '` | 数据分隔符 |  |
+| show-line | `boolean` | `false` | 是否显示节点连接线 | NEXT_VERSION |
 | show-path | `boolean` | `false` | 是否在选择器中显示选项路径 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
