@@ -120,6 +120,7 @@
     "grapheme-splitter": "^1.0.4",
     "husky": "^9.0.6",
     "inquirer": "^10.0.3",
+    "jsdom": "^25.0.1",
     "katex": "^0.16.8",
     "lint-staged": "^15.1.0",
     "marked": "^12.0.2",
