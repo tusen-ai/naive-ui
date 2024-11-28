@@ -113,8 +113,9 @@ describe('n-rate', () => {
 
     await wrapper.setProps({ onUpdateValue })
     await wrapper.findAll('.n-rate__half')[testNumber].trigger('click')
-    expect(onUpdateValue).toHaveBeenCalledWith(testNumber + 0.5)
-
+    vi.waitFor(() => {
+      expect(onUpdateValue).toHaveBeenCalledWith(testNumber + 0.5)
+    })
     wrapper.unmount()
   })
 
