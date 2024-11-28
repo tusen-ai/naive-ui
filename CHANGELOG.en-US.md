@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`xxxx-xx-xx`
+
+### Fixes
+
+### Features
+
+- `n-tag` adds `content-style` prop.
+
 ## 2.40.2
 
 `2024-11-26`

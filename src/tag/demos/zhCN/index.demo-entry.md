@@ -29,6 +29,7 @@ rtl-debug.vue
 | checked | `boolean` | `false` | 是否被选中，配合 checkable 一起使用 |  |
 | closable | `boolean` | `false` | 是否可关闭 |  |
 | color | `{ color?: string, borderColor?: string, textColor?: string }` | `undefined` | 标签颜色，设置该项后 `type` 无效 |  |
+| content-style | `string \| Object` | `undefined` | tag 内容的样式 | NEXT_VERSION |
 | disabled | `boolean` | `false` | 是否禁用 |  |
 | round | `boolean` | `false` | 是否圆角 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
