@@ -127,8 +127,8 @@ describe('n-alert', () => {
   })
 
   it('should trigger callback when closed', async () => {
-    const handleCloseClick = jest.fn()
-    const handleOnAfterLeave = jest.fn()
+    const handleCloseClick = vi.fn()
+    const handleOnAfterLeave = vi.fn()
     const wrapper = mount(NAlert, {
       props: {
         closable: true,
@@ -138,15 +138,12 @@ describe('n-alert', () => {
     })
     const closeBtn = wrapper.find('.n-base-close.n-alert__close')
     expect(closeBtn.exists()).toBe(true)
-
     await closeBtn.trigger('click')
     expect(wrapper.emitted()).toHaveProperty('click')
-
     expect(handleCloseClick).toHaveBeenCalled()
-
-    setTimeout(() => {
+    vi.waitFor(() => {
       expect(handleOnAfterLeave).toHaveBeenCalled()
-      wrapper.unmount()
-    }, 0)
+    })
+    wrapper.unmount()
   })
 })

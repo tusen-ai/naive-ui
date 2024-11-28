@@ -248,32 +248,46 @@ describe('n-date-picker', () => {
       props: { type: 'date' }
     })
 
-    await wrapper.find('.n-input__input').trigger('click')
-    expect(document.querySelector('.n-date-panel--date')).not.toEqual(null)
+    wrapper.find('.n-input__input').trigger('click')
+    vi.waitFor(() => {
+      expect(document.querySelector('.n-date-panel--date')).not.toEqual(null)
+    })
 
     await wrapper.setProps({ type: 'datetime' })
-    await wrapper.find('.n-input__input').trigger('click')
-    expect(document.querySelector('.n-date-panel--datetime')).not.toEqual(null)
+    vi.waitFor(() => {
+      wrapper.find('.n-input__input').trigger('click')
+      expect(document.querySelector('.n-date-panel--datetime')).not.toEqual(
+        null
+      )
+    })
 
     await wrapper.setProps({ type: 'daterange' })
-    await wrapper.find('.n-input__input').trigger('click')
-    expect(document.querySelector('.n-date-panel--daterange')).not.toEqual(null)
+    vi.waitFor(() => {
+      wrapper.find('.n-input__input').trigger('click')
+      expect(document.querySelector('.n-date-panel--daterange')).not.toEqual(
+        null
+      )
+    })
 
     await wrapper.setProps({ type: 'datetimerange' })
-    await wrapper.find('.n-input__input').trigger('click')
-    expect(document.querySelector('.n-date-panel--datetimerange')).not.toEqual(
-      null
-    )
+    vi.waitFor(() => {
+      wrapper.find('.n-input__input').trigger('click')
+      expect(
+        document.querySelector('.n-date-panel--datetimerange')
+      ).not.toEqual(null)
+    })
 
-    await wrapper.setProps({ type: 'month' })
-    await wrapper.find('.n-input__input').trigger('click')
-    expect(document.querySelector('.n-date-panel--month')).not.toEqual(null)
+    vi.waitFor(() => {
+      wrapper.setProps({ type: 'month' })
+      wrapper.find('.n-input__input').trigger('click')
+      expect(document.querySelector('.n-date-panel--month')).not.toEqual(null)
+    })
 
     wrapper.unmount()
   })
 
   it('should work with `onBlur` prop', async () => {
-    const onBlur = jest.fn()
+    const onBlur = vi.fn()
     const wrapper = mount(NDatePicker, {
       props: { onBlur }
     })
@@ -286,7 +300,7 @@ describe('n-date-picker', () => {
   })
 
   it('should work with `onFocus` prop', async () => {
-    const onFocus = jest.fn()
+    const onFocus = vi.fn()
     const wrapper = mount(NDatePicker, {
       props: { onFocus }
     })
@@ -328,45 +342,54 @@ describe('n-date-picker', () => {
       }
     })
 
-    await wrapper.find('.n-input__input').trigger('click')
-    expect(
-      document.querySelectorAll(
-        '.n-date-panel-month-calendar__picker-col-item'
-      )[0].textContent
-    ).toBe('1')
+    wrapper.find('.n-input__input').trigger('click')
+    vi.waitFor(() => {
+      expect(
+        document.querySelectorAll(
+          '.n-date-panel-month-calendar__picker-col-item'
+        )[0].textContent
+      ).toBe('1')
+    })
 
-    await wrapper.setProps({ monthFormat: 'MM' })
-    await wrapper.find('.n-input__input').trigger('click')
-    expect(
-      document.querySelectorAll(
-        '.n-date-panel-month-calendar__picker-col-item'
-      )[0].textContent
-    ).toBe('01')
+    vi.waitFor(() => {
+      wrapper.setProps({ monthFormat: 'MM' })
+      wrapper.find('.n-input__input').trigger('click')
+      expect(
+        document.querySelectorAll(
+          '.n-date-panel-month-calendar__picker-col-item'
+        )[0].textContent
+      ).toBe('01')
+    })
 
-    await wrapper.setProps({ monthFormat: 'MMMM' })
-    await wrapper.find('.n-input__input').trigger('click')
-    expect(
-      document.querySelectorAll(
-        '.n-date-panel-month-calendar__picker-col-item'
-      )[0].textContent
-    ).toBe('January')
+    vi.waitFor(() => {
+      wrapper.setProps({ monthFormat: 'MMMM' })
+      wrapper.find('.n-input__input').trigger('click')
+      expect(
+        document.querySelectorAll(
+          '.n-date-panel-month-calendar__picker-col-item'
+        )[0].textContent
+      ).toBe('January')
+    })
 
-    await wrapper.setProps({ monthFormat: 'MMM' })
-    await wrapper.find('.n-input__input').trigger('click')
-    expect(
-      document.querySelectorAll(
-        '.n-date-panel-month-calendar__picker-col-item'
-      )[0].textContent
-    ).toBe('Jan')
+    vi.waitFor(() => {
+      wrapper.setProps({ monthFormat: 'MMM' })
+      wrapper.find('.n-input__input').trigger('click')
+      expect(
+        document.querySelectorAll(
+          '.n-date-panel-month-calendar__picker-col-item'
+        )[0].textContent
+      ).toBe('Jan')
+    })
 
-    await wrapper.setProps({ monthFormat: 'MMMMM' })
-    await wrapper.find('.n-input__input').trigger('click')
-    expect(
-      document.querySelectorAll(
-        '.n-date-panel-month-calendar__picker-col-item'
-      )[0].textContent
-    ).toBe('J')
-
+    vi.waitFor(() => {
+      wrapper.setProps({ monthFormat: 'MMMMM' })
+      wrapper.find('.n-input__input').trigger('click')
+      expect(
+        document.querySelectorAll(
+          '.n-date-panel-month-calendar__picker-col-item'
+        )[0].textContent
+      ).toBe('J')
+    })
     wrapper.unmount()
   })
 })

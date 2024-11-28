@@ -120,7 +120,7 @@ describe('n-dialog', () => {
   })
 
   it('onMaskClick', async () => {
-    const onMaskClick = jest.fn()
+    const onMaskClick = vi.fn()
     const Test = defineComponent({
       setup() {
         const dialog = useDialog()

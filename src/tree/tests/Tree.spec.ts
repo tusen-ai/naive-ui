@@ -386,7 +386,7 @@ describe('n-tree', () => {
   })
 
   it('should work with `onLoad`', async () => {
-    const onLoad = jest.fn()
+    const onLoad = vi.fn()
     const wrapper = mount(NTree, {
       props: {
         data: [
@@ -418,12 +418,12 @@ describe('n-tree', () => {
         onLoad
       }
     })
-    setTimeout(() => {
+    vi.waitFor(() => {
       expect(onLoad).toHaveBeenCalled()
       wrapper.setProps({ expandedKeys: [1, 2] }).then(() => {
         expect(onLoad).toHaveBeenCalled()
       })
-    }, 0)
+    })
   })
 
   it('should work witch `multiple`', async () => {

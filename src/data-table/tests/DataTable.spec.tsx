@@ -72,7 +72,7 @@ describe('n-data-table', () => {
           name: index
         }
       })
-    const onPageChange = jest.fn((page: number): void => {
+    const onPageChange = vi.fn((page: number): void => {
       setTimeout(() => {
         pagination.page = page
         pagination.itemCount = data.length
@@ -830,17 +830,17 @@ describe('n-data-table', () => {
           name: index
         }
       })
-    let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
+    const wrapper = mount(() => <NDataTable columns={columns} data={data} />)
     expect(wrapper.find('tbody').element.children.length).not.toBe(0)
-    wrapper = mount(() => (
-      <NDataTable columns={columns} data={data} virtual-scroll={true} />
-    ))
-    expect(wrapper.find('tbody').element.children.length).toBe(0)
+    vi.waitFor(() => {
+      wrapper.setProps({ virtualScroll: true })
+      expect(wrapper.find('tbody').element.children.length).toBe(0)
+    })
     wrapper.unmount()
   })
 
   it('should work with `on-update:checked-row-keys` prop', async () => {
-    const handleCheck = jest.fn()
+    const handleCheck = vi.fn()
     const columns: DataTableColumns = [
       {
         type: 'selection'
@@ -1343,10 +1343,10 @@ describe('props.columns', () => {
 
     await radios[1].trigger('click')
 
-    setTimeout(() => {
+    vi.waitFor(() => {
       expect(radios[1].classes()).toContain('n-radio--checked')
       expect(radios[4].classes()).not.toContain('n-radio--checked')
-    }, 0)
+    })
     wrapper.unmount()
   })
 })

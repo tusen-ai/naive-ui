@@ -11,7 +11,8 @@
     "paths": {
       "naive-ui": ["./src"]
     },
-    "types": ["vue/jsx", "jest"],
+    
+    "types": ["vue/jsx", "vitest/globals"],
     "strict": true,
     "strictNullChecks": true,
     "noImplicitAny": true,

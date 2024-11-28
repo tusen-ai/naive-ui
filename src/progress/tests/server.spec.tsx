@@ -1,8 +1,5 @@
 import { setup } from '@css-render/vue3-ssr'
 import { renderToString } from '@vue/server-renderer'
-/**
- * @jest-environment node
- */
 import { createSSRApp, h } from 'vue'
 import { NProgress } from '../..'
 

@@ -8,7 +8,9 @@ describe('n-breadcrumb', () => {
   })
 
   it('should raise an error if breadcrumbItem is not inside a BreadCrumb', () => {
-    const mockErrorLogger = jest.spyOn(console, 'error').mockImplementation()
+    const mockErrorLogger = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {})
     const wrapper = mount(NBreadcrumbItem)
 
     expect(wrapper.isVisible()).toBe(false)
@@ -107,7 +109,7 @@ describe('n-breadcrumb', () => {
 
     it('should add `aria-current` if the item is the current location', () => {
       const originalWindow = window
-      const windowSpy = jest.spyOn(globalThis, 'window', 'get')
+      const windowSpy = vi.spyOn(globalThis, 'window', 'get')
       const currentUrl = 'http://some-domaine/path2'
       const url = 'http://some-domaine/path1'
       windowSpy.mockImplementation(() => {

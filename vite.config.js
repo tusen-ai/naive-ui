@@ -1,5 +1,5 @@
-const path = require('node:path')
 const dns = require('node:dns')
+const path = require('node:path')
 const process = require('node:process')
 const { babel } = require('@rollup/plugin-babel')
 const createDemoPlugin = require('./build/vite-plugin-demo')
@@ -12,6 +12,14 @@ dns.setDefaultResultOrder('verbatim')
 module.exports = {
   root: __dirname,
   plugins: createDemoPlugin(),
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json-summary', 'json']
+    }
+  },
   resolve: {
     // In production site build, we want to import naive-ui from node_modules
     alias:
