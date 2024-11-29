@@ -8,14 +8,9 @@ import type {
 import type { ExtractPublicPropTypes, Mutable } from '../../_utils'
 import type { modalProps } from './Modal'
 import { createId } from 'seemly'
-import { useClicked, useClickPosition } from 'vooks'
 import { defineComponent, Fragment, h, provide, reactive, ref } from 'vue'
 import { omit } from '../../_utils'
-import {
-  modalApiInjectionKey,
-  modalProviderInjectionKey,
-  modalReactiveListInjectionKey
-} from './context'
+import { modalApiInjectionKey, modalReactiveListInjectionKey } from './context'
 import { NModalEnvironment } from './ModalEnvironment'
 
 export type ModalOptions = Mutable<
@@ -69,9 +64,6 @@ export const NModalProvider: DefineComponent<{ to?: string | HTMLElement }>
     name: 'ModalProvider',
     props: modalProviderProps,
     setup() {
-      const clickedRef = useClicked(64)
-      const clickedPositionRef = useClickPosition()
-
       const modalListRef = ref<TypeSafeModalReactive[]>([])
       const modalInstRefs: Record<string, ModalInst | undefined> = {}
       function create(options: ModalOptions = {}): ModalReactive {
@@ -107,15 +99,7 @@ export const NModalProvider: DefineComponent<{ to?: string | HTMLElement }>
       }
 
       provide(modalApiInjectionKey, api)
-      provide(modalProviderInjectionKey, {
-        clickedRef: useClicked(64),
-        clickedPositionRef: useClickPosition()
-      })
       provide(modalReactiveListInjectionKey, modalListRef)
-      provide(modalProviderInjectionKey, {
-        clickedRef,
-        clickedPositionRef
-      })
       return {
         ...api,
         modalList: modalListRef,

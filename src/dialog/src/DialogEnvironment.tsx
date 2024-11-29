@@ -157,7 +157,6 @@ export const NDialogEnvironment = defineComponent({
         autoFocus={this.autoFocus}
         transformOrigin={this.transformOrigin}
         internalAppear
-        internalDialog
       >
         {{
           default: () => (

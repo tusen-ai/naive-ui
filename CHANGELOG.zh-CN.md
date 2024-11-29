@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- `n-modal` 新增 `draggable` 属性，关闭 [#6525](https://github.com/tusen-ai/naive-ui/issues/6525)，[#5792](https://github.com/tusen-ai/naive-ui/issues/5792)，[#5711](https://github.com/tusen-ai/naive-ui/issues/5711)，[#5501](https://github.com/tusen-ai/naive-ui/issues/5501)，[#2152](https://github.com/tusen-ai/naive-ui/issues/2152)
+
 ## 2.40.2
 
 `2024-11-26`
