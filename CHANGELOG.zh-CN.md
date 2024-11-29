@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`xxxx-xx-xx`
+
+### Fixes
+
+- 修复 `n-transfer` 的 `target-filter-placeholder` 属性不生效，关闭 [#6537](https://github.com/tusen-ai/naive-ui/issues/6537)
+
+### Features
+
 ## 2.40.2
 
 `2024-11-26`
