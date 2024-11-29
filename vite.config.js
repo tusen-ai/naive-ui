@@ -17,7 +17,8 @@ module.exports = {
     environment: 'jsdom',
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'json-summary', 'json']
+      reporter: ['text', 'json-summary', 'json'],
+      include: ['src/**/src/*.{ts,tsx}']
     }
   },
   resolve: {
