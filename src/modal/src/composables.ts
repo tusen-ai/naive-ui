@@ -68,6 +68,7 @@ export function useDragModal(
     let mousedownEvent: MouseEvent | undefined
 
     function handleMouseDown(event: MouseEvent) {
+      event.preventDefault()
       mousedownEvent = event
       const { x, y, right, bottom } = modal.getBoundingClientRect()
 
