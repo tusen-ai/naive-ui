@@ -31,3 +31,11 @@ export interface ModalInjection {
 }
 
 export const modalInjectionKey = createInjectionKey<ModalInjection>('n-modal')
+
+export interface ModalDraggableOptions {
+  /**
+   * 拖拽时限制在屏幕边缘
+   * @default true
+   */
+  sticky?: boolean
+}

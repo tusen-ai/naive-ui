@@ -1,3 +1,4 @@
+import type { ModalDraggableOptions } from './interface'
 import { clickoutside } from 'vdirs'
 import {
   cloneVNode,
@@ -23,12 +24,14 @@ import {
 import { VFocusTrap } from 'vueuc'
 import { NScrollbar, type ScrollbarInst } from '../../_internal'
 import { getFirstSlotVNode, keep, useLockHtmlScroll, warn } from '../../_utils'
+import { mergeClass } from '../../_utils/css'
 import { NCard } from '../../card'
 import { cardBasePropKeys } from '../../card/src/Card'
 import { NDialog } from '../../dialog/src/Dialog'
 import { dialogPropKeys } from '../../dialog/src/dialogProps'
 import { drawerBodyInjectionKey } from '../../drawer/src/interface'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
+import { useDragModal } from './composables'
 import { modalBodyInjectionKey, modalInjectionKey } from './interface'
 import { presetProps } from './presetProps'
 
@@ -54,6 +57,10 @@ export default defineComponent({
       default: true
     },
     blockScroll: Boolean,
+    draggable: {
+      type: [Boolean, Object] as PropType<boolean | ModalDraggableOptions>,
+      default: false
+    },
     ...presetProps,
     renderMask: Function as PropType<() => VNodeChild>,
     // events
@@ -78,7 +85,7 @@ export default defineComponent({
       type: Function,
       required: true
     },
-    onAfterEnter: Function as PropType<() => void>,
+    onAfterEnter: Function as PropType<(el: HTMLElement) => void>,
     onEsc: Function as PropType<(e: KeyboardEvent) => void>
   },
   setup(props) {
@@ -87,10 +94,24 @@ export default defineComponent({
     const displayedRef = ref(props.show)
     const transformOriginXRef = ref<number | null>(null)
     const transformOriginYRef = ref<number | null>(null)
+
+    const { stopDrag, startDrag, canDraggable, draggableClass } = useDragModal(
+      toRef(props, 'draggable')
+    )
+
+    const dialogTitleClass = computed(() => {
+      return mergeClass(props.titleClass, draggableClass.value)
+    })
+
+    const cardHeaderClass = computed(() => {
+      return mergeClass(props.headerClass, draggableClass.value)
+    })
+
     watch(toRef(props, 'show'), (value) => {
       if (value)
         displayedRef.value = true
     })
+
     useLockHtmlScroll(computed(() => props.blockScroll && displayedRef.value))
     const NModal = inject(modalInjectionKey)!
     function styleTransformOrigin(): string {
@@ -137,10 +158,16 @@ export default defineComponent({
       el.style.transformOrigin = styleTransformOrigin()
       props.onBeforeLeave()
     }
+    function handleAfterEnter(el: Element): void {
+      const element = el as HTMLElement
+      canDraggable.value && startDrag(element)
+      props.onAfterEnter && props.onAfterEnter(element)
+    }
     function handleAfterLeave(): void {
       displayedRef.value = false
       transformOriginXRef.value = null
       transformOriginYRef.value = null
+      stopDrag()
       props.onAfterLeave()
     }
     function handleCloseClick(): void {
@@ -166,6 +193,7 @@ export default defineComponent({
         })
       }
     })
+
     provide(modalBodyInjectionKey, bodyRef)
     provide(drawerBodyInjectionKey, null)
     provide(popoverBodyInjectionKey, null)
@@ -176,11 +204,15 @@ export default defineComponent({
       mergedClsPrefix: NModal.mergedClsPrefixRef,
       bodyRef,
       scrollbarRef,
+      draggableClass,
       displayed: displayedRef,
       childNodeRef,
+      cardHeaderClass,
+      dialogTitleClass,
       handlePositiveClick,
       handleNegativeClick,
       handleCloseClick,
+      handleAfterEnter,
       handleAfterLeave,
       handleBeforeLeave,
       handleEnter
@@ -191,6 +223,7 @@ export default defineComponent({
       $slots,
       $attrs,
       handleEnter,
+      handleAfterEnter,
       handleAfterLeave,
       handleBeforeLeave,
       preset,
@@ -198,7 +231,9 @@ export default defineComponent({
     } = this
     let childNode: VNode | null = null
     if (!preset) {
-      childNode = getFirstSlotVNode($slots)
+      childNode = getFirstSlotVNode($slots, 'default', {
+        draggableClass: this.draggableClass
+      })
       if (!childNode) {
         warn('modal', 'default slot is empty')
         return
@@ -236,7 +271,7 @@ export default defineComponent({
                         name="fade-in-scale-up-transition"
                         appear={this.appear ?? this.isMounted}
                         onEnter={handleEnter as any}
-                        onAfterEnter={this.onAfterEnter}
+                        onAfterEnter={handleAfterEnter}
                         onAfterLeave={handleAfterLeave}
                         onBeforeLeave={handleBeforeLeave as any}
                       >
@@ -269,6 +304,7 @@ export default defineComponent({
                                         this.mergedTheme.peerOverrides.Dialog
                                       }
                                       {...keep(this.$props, dialogPropKeys)}
+                                      titleClass={this.dialogTitleClass}
                                       aria-modal="true"
                                     >
                                       {$slots}
@@ -286,6 +322,7 @@ export default defineComponent({
                                         this.mergedTheme.peerOverrides.Card
                                       }
                                       {...keep(this.$props, cardBasePropKeys)}
+                                      headerClass={this.cardHeaderClass}
                                       aria-modal="true"
                                       role="dialog"
                                     >

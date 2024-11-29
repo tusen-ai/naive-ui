@@ -1,6 +1,7 @@
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { ModalTheme } from '../styles'
+import type { ModalDraggableOptions } from './interface'
 import { getPreciseEventTarget } from 'seemly'
 import { zindexable } from 'vdirs'
 import { useClicked, useClickPosition, useIsMounted } from 'vooks'
@@ -69,6 +70,7 @@ export const modalProps = {
   },
   blockScroll: { type: Boolean, default: true },
   ...presetProps,
+  draggable: [Boolean, Object] as PropType<boolean | ModalDraggableOptions>,
   // events
   onEsc: Function as PropType<() => void>,
   'onUpdate:show': [Function, Array] as PropType<
@@ -323,6 +325,7 @@ export default defineComponent({
                   preset={this.preset}
                   autoFocus={this.autoFocus}
                   trapFocus={this.trapFocus}
+                  draggable={this.draggable}
                   blockScroll={this.blockScroll}
                   {...this.presetProps}
                   onEsc={this.handleEsc}
