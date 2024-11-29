@@ -96,7 +96,10 @@ export default defineComponent({
     const transformOriginYRef = ref<number | null>(null)
 
     const { stopDrag, startDrag, canDraggable, draggableClass } = useDragModal(
-      toRef(props, 'draggable')
+      toRef(props, 'draggable'),
+      {
+        onEnd: syncTransformOrigin
+      }
     )
 
     const dialogTitleClass = computed(() => {

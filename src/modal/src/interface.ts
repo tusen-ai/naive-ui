@@ -15,9 +15,6 @@ export interface ModalProviderInjection {
   clickedPositionRef: Ref<{ x: number, y: number } | null>
 }
 
-export const modalProviderInjectionKey
-  = createInjectionKey<ModalProviderInjection>('n-modal-provider')
-
 export interface ModalInjection {
   getMousePosition: () => {
     x: number

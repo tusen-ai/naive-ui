@@ -3,7 +3,8 @@ import type { ModalDraggableOptions } from './interface'
 import type { ModalApiInjection, ModalReactive } from './ModalProvider'
 import { off, on } from 'evtd'
 import { isBoolean } from 'lodash-es'
-import { computed, inject, onUnmounted } from 'vue'
+import { useClickPosition } from 'vooks'
+import { computed, inject, onUnmounted, ref, watch } from 'vue'
 import { throwError } from '../../_utils'
 import { modalApiInjectionKey, modalReactiveListInjectionKey } from './context'
 
@@ -27,11 +28,18 @@ export function useModalReactiveList(): Ref<readonly ModalReactive[]> {
 }
 
 export const DRAGGABLE_CLASS = 'modal-body--draggable'
-export function useDragModal(options: Ref<boolean | ModalDraggableOptions>) {
+
+interface UseDragModalOptions {
+  onEnd?: (el: HTMLElement, event: MouseEvent) => void
+}
+export function useDragModal(
+  draggableProps: Ref<boolean | ModalDraggableOptions>,
+  options: UseDragModalOptions = {}
+) {
   let cleanup: undefined | (() => void)
 
   const canDraggable = computed(() => {
-    return options.value !== false
+    return draggableProps.value !== false
   })
 
   const draggableClass = computed(() => {
@@ -39,10 +47,10 @@ export function useDragModal(options: Ref<boolean | ModalDraggableOptions>) {
   })
 
   const sticky = computed(() => {
-    if (isBoolean(options.value)) {
+    if (isBoolean(draggableProps.value)) {
       return true
     }
-    return options.value.sticky !== false
+    return draggableProps.value.sticky !== false
   })
 
   function startDrag(modal: HTMLElement) {
@@ -102,8 +110,9 @@ export function useDragModal(options: Ref<boolean | ModalDraggableOptions>) {
       modal.style.left = `${x}px`
     }
 
-    function handleMouseUp() {
+    function handleMouseUp(event: MouseEvent) {
       mousedownEvent = undefined
+      options.onEnd && options.onEnd(modal, event)
     }
 
     on('mousedown', header, handleMouseDown)
@@ -131,4 +140,25 @@ export function useDragModal(options: Ref<boolean | ModalDraggableOptions>) {
     canDraggable,
     draggableClass
   }
+}
+
+export function useCaptureOpenModalElementPosition(show: Ref<boolean>) {
+  const positionRef = useClickPosition()
+  const elementPositionRef = ref<{ x: number, y: number } | null>(null)
+
+  watch(
+    show,
+    (value) => {
+      if (value && positionRef.value) {
+        const { x, y } = positionRef.value
+        elementPositionRef.value = {
+          x,
+          y
+        }
+      }
+    },
+    { immediate: true }
+  )
+
+  return elementPositionRef
 }
