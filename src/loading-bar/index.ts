@@ -1,6 +1,6 @@
 export {
-  default as NLoadingBarProvider,
-  loadingBarProviderProps
+  loadingBarProviderProps,
+  default as NLoadingBarProvider
 } from './src/LoadingBarProvider'
 export type {
   LoadingBarApiInjection as LoadingBarApi,

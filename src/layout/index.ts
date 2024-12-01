@@ -1,24 +1,24 @@
 export type {
-  LayoutInst,
   LayoutInst as LayoutContentInst,
+  LayoutInst,
   LayoutSiderInst
 } from './src/interface'
 export {
-  default as NLayout,
+  layoutProps as layoutContentProps,
   layoutProps,
-  layoutProps as layoutContentProps
+  default as NLayout
 } from './src/Layout'
 export type {
-  LayoutProps,
-  LayoutProps as LayoutContentProps
+  LayoutProps as LayoutContentProps,
+  LayoutProps
 } from './src/Layout'
 export { default as NLayoutContent } from './src/LayoutContent'
-export { default as NLayoutFooter, layoutFooterProps } from './src/LayoutFooter'
+export { layoutFooterProps, default as NLayoutFooter } from './src/LayoutFooter'
 export type { LayoutFooterProps } from './src/LayoutFooter'
 export {
-  default as NLayoutHeader,
-  headerProps as layoutHeaderProps
+  headerProps as layoutHeaderProps,
+  default as NLayoutHeader
 } from './src/LayoutHeader'
 export type { LayoutHeaderProps } from './src/LayoutHeader'
-export { default as NLayoutSider, layoutSiderProps } from './src/LayoutSider'
+export { layoutSiderProps, default as NLayoutSider } from './src/LayoutSider'
 export type { LayoutSiderProps } from './src/LayoutSider'
