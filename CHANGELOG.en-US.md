@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.40.3
+
+`2024-12-02`
+
+- Fix marquee is not exported with correct name.
+
 ## 2.40.2
 
 `2024-11-26`
