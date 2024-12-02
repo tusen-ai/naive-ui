@@ -396,7 +396,7 @@ describe('n-carousel', () => {
   })
 
   it('should work with `on-update:current-index` prop', async () => {
-    const onUpdate = jest.fn()
+    const onUpdate = vi.fn()
     const wrapper = mount(NCarousel, {
       props: {
         onUpdateCurrentIndex: onUpdate

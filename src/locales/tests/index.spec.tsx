@@ -1,9 +1,10 @@
-import type { NLocale } from './common/enUS'
-import type { NDateLocale } from './date/enUS'
+import type { NLocale } from '../common/enUS'
+import type { NDateLocale } from '../date/enUS'
 import { mount } from '@vue/test-utils'
 import { defineComponent, h, onMounted, type PropType, ref } from 'vue'
-import { NConfigProvider } from '../config-provider/index'
-import { NDatePicker } from '../date-picker/index'
+import { NConfigProvider } from '../../config-provider/index'
+import { NDatePicker } from '../../date-picker/index'
+import { NInput } from '../../input/index'
 import {
   arDZ,
   azAZ,
@@ -62,8 +63,7 @@ import {
   zhCN,
   zhTW
 } from '../index'
-import { NInput } from '../input/index'
-import { createLocale } from './utils/index'
+import { createLocale } from '../utils/index'
 
 const Wrapper = defineComponent({
   props: {

@@ -5,7 +5,8 @@
     "outDir": "./es",
     "module": "ES6",
     "target": "ES6",
-    "jsx": "react"
+    "jsx": "react",
+    "types": ["vue/jsx"],
   },
   "references": [{ "path": "../../src/tsconfig.esm.json" }]
 }

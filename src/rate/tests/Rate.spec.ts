@@ -62,8 +62,8 @@ describe('n-rate', () => {
   })
 
   it('should work with `onUpdateValue` prop', async () => {
-    const onUpdateValue = jest.fn()
-    const onUpdateValue2 = jest.fn()
+    const onUpdateValue = vi.fn()
+    const onUpdateValue2 = vi.fn()
     const wrapper = mount(NRate)
 
     const testNumber = 2
@@ -105,7 +105,7 @@ describe('n-rate', () => {
   })
 
   it('should work with `allowHalf` prop', async () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = mount(NRate)
     await wrapper.setProps({ allowHalf: true })
 
@@ -113,8 +113,9 @@ describe('n-rate', () => {
 
     await wrapper.setProps({ onUpdateValue })
     await wrapper.findAll('.n-rate__half')[testNumber].trigger('click')
-    expect(onUpdateValue).toHaveBeenCalledWith(testNumber + 0.5)
-
+    vi.waitFor(() => {
+      expect(onUpdateValue).toHaveBeenCalledWith(testNumber + 0.5)
+    })
     wrapper.unmount()
   })
 

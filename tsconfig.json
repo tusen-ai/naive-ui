@@ -1,17 +1,18 @@
 {
   "compilerOptions": {
     "composite": true,
-    "target": "ES6",
+    "target": "ESNext",
     "jsx": "preserve",
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
     "lib": ["ESNext", "DOM"],
-    "module": "ES6",
+    "module": "ESNext",
     "moduleResolution": "Node",
     "paths": {
       "naive-ui": ["./src"]
     },
-    "types": ["vue/jsx", "jest"],
+    
+    "types": ["vue/jsx", "vitest/globals"],
     "strict": true,
     "strictNullChecks": true,
     "noImplicitAny": true,

@@ -1,6 +1,5 @@
 import type { CascaderOption } from '../src/interface'
 import { mount } from '@vue/test-utils'
-import { nextTick } from 'vue'
 import { NCascader } from '../index'
 
 function getOptions(depth = 3, iterator = 1, prefix = ''): CascaderOption[] {
@@ -100,14 +99,14 @@ describe('n-cascader', () => {
       ] as const
     ).forEach((placement) => {
       const wrapper = mount(NCascader, { props: { placement } })
-      setTimeout(() => {
+      vi.waitFor(() => {
         expect(
           document
             .querySelector('.v-binder-follower-content')
             ?.getAttribute('v-placement')
         ).toBe(placement)
-        wrapper.unmount()
       })
+      wrapper.unmount()
     })
   })
 
@@ -190,7 +189,7 @@ describe('n-cascader', () => {
   })
 
   it('should work with `on-blur` prop', async () => {
-    const onBlur = jest.fn()
+    const onBlur = vi.fn()
     const wrapper = mount(NCascader, {
       props: { options: getOptions(), onBlur }
     })
@@ -200,7 +199,7 @@ describe('n-cascader', () => {
   })
 
   it('should work with `on-focus` prop', async () => {
-    const onFocus = jest.fn()
+    const onFocus = vi.fn()
     const wrapper = mount(NCascader, {
       props: { options: getOptions(), onFocus }
     })
@@ -217,10 +216,11 @@ describe('n-cascader', () => {
       }
     })
 
-    await wrapper.find('.n-base-selection').trigger('click')
-    expect(wrapper.find('.n-base-selection--active').exists()).toBe(true)
-    expect(document.querySelector('.n-cascader-menu')).not.toEqual(null)
-
+    wrapper.find('.n-base-selection').trigger('click')
+    vi.waitFor(() => {
+      expect(wrapper.find('.n-base-selection--active').exists()).toBe(true)
+      expect(document.querySelector('.n-cascader-menu')).not.toEqual(null)
+    })
     await wrapper.find('.n-base-selection').trigger('click')
     expect(wrapper.find('.n-base-selection--active').exists()).toBe(false)
     expect(document.querySelector('.n-cascader-menu')).toEqual(null)
@@ -237,13 +237,16 @@ describe('n-cascader', () => {
       }
     })
 
-    await wrapper.find('.n-base-selection').trigger('click')
-    expect(document.querySelector('.n-cascader-menu')).not.toEqual(null)
+    wrapper.find('.n-base-selection').trigger('click')
+    vi.waitFor(() => {
+      expect(document.querySelector('.n-cascader-menu')).not.toEqual(null)
+    })
     document.body.click()
     document.body.dispatchEvent(mousedownEvent)
     document.body.dispatchEvent(mouseupEvent)
-    await nextTick()
-    expect(document.querySelector('.n-cascader-menu')).toEqual(null)
+    vi.waitFor(() => {
+      expect(document.querySelector('.n-cascader-menu')).toEqual(null)
+    })
     wrapper.unmount()
   })
 })

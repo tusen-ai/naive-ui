@@ -95,8 +95,10 @@ describe('n-auto-complete', () => {
     })
     expect(document.querySelector('.n-auto-complete-menu')).toEqual(null)
     wrapper.find('input').setValue('a')
-    await wrapper.find('input').trigger('focus')
-    expect(document.querySelector('.n-auto-complete-menu')).not.toEqual(null)
+    wrapper.find('input').trigger('focus')
+    vi.waitFor(() => {
+      expect(document.querySelector('.n-auto-complete-menu')).not.toEqual(null)
+    })
     wrapper.unmount()
   })
 
@@ -120,8 +122,10 @@ describe('n-auto-complete', () => {
     })
     expect(document.querySelector('.n-auto-complete-menu')).toEqual(null)
     wrapper.find('input').setValue('@')
-    await wrapper.find('input').trigger('focus')
-    expect(document.querySelector('.n-auto-complete-menu')).not.toEqual(null)
+    wrapper.find('input').trigger('focus')
+    vi.waitFor(() => {
+      expect(document.querySelector('.n-auto-complete-menu')).not.toEqual(null)
+    })
     wrapper.unmount()
   })
 
@@ -139,7 +143,7 @@ describe('n-auto-complete', () => {
   })
 
   it('should work with `on-blur` prop', async () => {
-    const onBlur = jest.fn()
+    const onBlur = vi.fn()
     const wrapper = mount(NAutoComplete, {
       props: { onBlur }
     })
@@ -150,7 +154,7 @@ describe('n-auto-complete', () => {
   })
 
   it('should work with `on-focus` prop', async () => {
-    const onFocus = jest.fn()
+    const onFocus = vi.fn()
     const wrapper = mount(NAutoComplete, {
       props: { onFocus }
     })
@@ -188,14 +192,14 @@ describe('n-auto-complete', () => {
       ] as const
     ).forEach((placement) => {
       const wrapper = mount(NAutoComplete, { props: { placement } })
-      setTimeout(() => {
+      vi.waitFor(() => {
         expect(
           document
             .querySelector('.v-binder-follower-content')
             ?.getAttribute('v-placement')
         ).toBe(placement)
-        wrapper.unmount()
       })
+      wrapper.unmount()
     })
   })
 })

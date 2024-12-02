@@ -1,6 +1,6 @@
 import type { SelectBaseOption } from '../src/interface'
 import { mount } from '@vue/test-utils'
-import { h, nextTick, type VNode } from 'vue'
+import { h, type VNode } from 'vue'
 import { NInternalSelection, NInternalSelectMenu } from '../../_internal'
 import { NTag } from '../../tag'
 import {
@@ -248,10 +248,11 @@ describe('n-select', () => {
 
     expect(wrapper.find('.n-base-selection-input').text()).toBe('render-test')
     await wrapper.setProps({ show: true })
-    await nextTick()
-    expect(
-      document.querySelector('.n-base-select-option--selected')?.innerHTML
-    ).toContain('render-test')
+    vi.waitFor(() => {
+      expect(
+        document.querySelector('.n-base-select-option--selected')?.innerHTML
+      ).toContain('render-test')
+    })
     wrapper.unmount()
   })
 

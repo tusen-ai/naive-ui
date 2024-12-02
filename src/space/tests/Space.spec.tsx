@@ -24,7 +24,9 @@ describe('n-space', () => {
         return <NSpace />
       }
     })
-    expect(wrapper.find('.n-space')).not.toBe(null)
+    vi.waitFor(() => {
+      expect(wrapper.find('.n-space').exists()).toBe(true)
+    })
     expect(wrapper.html()).toMatchSnapshot()
     wrapper.unmount()
   })

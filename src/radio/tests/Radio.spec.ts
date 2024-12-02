@@ -91,17 +91,18 @@ describe('n-radio', () => {
   })
 
   it('should work with `onUpdate:checked` prop', async () => {
-    const onUpdate1 = jest.fn()
-    const onUpdate2 = jest.fn()
+    const onUpdate1 = vi.fn()
+    const onUpdate2 = vi.fn()
     const wrapper = mount(NRadio, {
       props: { 'onUpdate:checked': onUpdate1, onUpdateChecked: onUpdate2 }
     })
 
-    await wrapper.find('.n-radio').trigger('click')
-    setTimeout(() => {
+    wrapper.find('.n-radio').trigger('click')
+    vi.waitFor(() => {
       expect(onUpdate1).toHaveBeenCalled()
       expect(onUpdate2).toHaveBeenCalled()
-    }, 0)
+    })
+
     wrapper.unmount()
   })
 })
@@ -215,7 +216,7 @@ describe('n-radio-group', () => {
   })
 
   it('should work with `on-update:value` prop', async () => {
-    const onUpdate = jest.fn()
+    const onUpdate = vi.fn()
     const wrapper = mount(NRadioGroup, {
       props: {
         onUpdateValue: onUpdate
@@ -228,10 +229,10 @@ describe('n-radio-group', () => {
       }
     })
 
-    await wrapper.findAll('.n-radio')[1].trigger('click')
-    setTimeout(() => {
+    wrapper.findAll('.n-radio')[1].trigger('click')
+    vi.waitFor(() => {
       expect(onUpdate).toHaveBeenCalled()
-      wrapper.unmount()
-    }, 0)
+    })
+    wrapper.unmount()
   })
 })
