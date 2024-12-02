@@ -22,6 +22,7 @@ import {
   dateIdID,
   dateItIT,
   dateJaJP,
+  dateKmKH,
   dateKoKR,
   dateNbNO,
   dateNlNL,
@@ -47,6 +48,7 @@ import {
   idID,
   itIT,
   jaJP,
+  kmKH,
   koKR,
   nbNO,
   nlNL,
@@ -201,6 +203,18 @@ describe('locale', () => {
         props: {
           dateLocale: dateJaJP,
           locale: jaJP,
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
+        }
+      }).html()
+    ).toMatchSnapshot()
+
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateKmKH,
+          locale: kmKH,
           onMounted: (date: string) => {
             expect(date).toMatchSnapshot()
           }
