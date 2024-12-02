@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### i18n
+
+- 添加 kmKH 国际化
+
 ## 2.40.3
 
 `2024-12-02`

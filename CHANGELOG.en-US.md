@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### i18n
+
+- Add kmKH locale.
+
 ## 2.40.3
 
 `2024-12-02`
