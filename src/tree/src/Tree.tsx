@@ -46,6 +46,7 @@ import {
   type PropType,
   provide,
   ref,
+  type SlotsType,
   toRef,
   type VNode,
   type VNodeChild,
@@ -348,9 +349,15 @@ export const treeProps = {
 
 export type TreeProps = ExtractPublicPropTypes<typeof treeProps>
 
+export interface TreeSlots {
+  default?: any
+  empty?: any
+}
+
 export default defineComponent({
   name: 'Tree',
   props: treeProps,
+  slots: Object as SlotsType<TreeSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {
