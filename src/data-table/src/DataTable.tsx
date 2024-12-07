@@ -1,6 +1,7 @@
 import type {
   CsvOptionsType,
   DataTableInst,
+  DataTableSlots,
   MainTableRef,
   RowKey
 } from './interface'
@@ -12,6 +13,7 @@ import {
   h,
   provide,
   ref,
+  type SlotsType,
   toRef,
   Transition,
   watchEffect
@@ -42,6 +44,7 @@ export default defineComponent({
   name: 'DataTable',
   alias: ['AdvancedTable'],
   props: dataTableProps,
+  slots: Object as SlotsType<DataTableSlots>,
   setup(props, { slots }) {
     if (__DEV__) {
       watchEffect(() => {
