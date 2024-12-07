@@ -10,6 +10,7 @@ import {
   onMounted,
   type PropType,
   ref,
+  type SlotsType,
   toRef
 } from 'vue'
 import { NBaseIcon } from '../../_internal'
@@ -65,9 +66,16 @@ export const floatButtonProps = {
 
 export type FloatButtonProps = ExtractPublicPropTypes<typeof floatButtonProps>
 
+export interface FloatButtonSlots {
+  default?: any
+  description?: any
+  menu?: any
+}
+
 export default defineComponent({
   name: 'FloatButton',
   props: floatButtonProps,
+  slots: Object as SlotsType<FloatButtonSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
 
