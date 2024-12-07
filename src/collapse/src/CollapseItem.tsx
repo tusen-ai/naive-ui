@@ -1,4 +1,9 @@
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type {
+  CollapseItemArrowSlotOptions,
+  CollapseItemHeaderExtraSlotOptions,
+  CollapseItemHeaderSlotOptions
+} from './interface'
 import { createId, happensIn } from 'seemly'
 import { useMemo } from 'vooks'
 import { computed, defineComponent, h, inject, type PropType, toRef } from 'vue'
@@ -25,6 +30,13 @@ export const collapseItemProps = {
 } as const
 
 export type CollapseItemProps = ExtractPublicPropTypes<typeof collapseItemProps>
+
+export interface CollapseItemSlots {
+  default?: any
+  header?: (props: CollapseItemHeaderSlotOptions) => any
+  'header-extra'?: (props: CollapseItemHeaderExtraSlotOptions) => any
+  arrow?: (props: CollapseItemArrowSlotOptions) => any
+}
 
 export default defineComponent({
   name: 'CollapseItem',
