@@ -117,7 +117,7 @@ export const autoCompleteProps = {
 export type AutoCompleteProps = ExtractPublicPropTypes<typeof autoCompleteProps>
 
 export interface AutoCompleteSlots {
-  default?: AutoCompleteDefaultSlotOptions
+  default?: (options: AutoCompleteDefaultSlotOptions) => any
   empty?: any
   prefix?: any
   suffix?: any
