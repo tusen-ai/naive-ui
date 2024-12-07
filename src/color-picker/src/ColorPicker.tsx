@@ -43,6 +43,7 @@ import {
   provide,
   type Ref,
   ref,
+  type SlotsType,
   toRef,
   Transition,
   type VNode,
@@ -124,9 +125,16 @@ export const colorPickerProps = {
 
 export type ColorPickerProps = ExtractPublicPropTypes<typeof colorPickerProps>
 
+export interface ColorPickerSlots {
+  default?: any
+  label?: (color: string | null) => any
+  action?: any
+}
+
 export default defineComponent({
   name: 'ColorPicker',
   props: colorPickerProps,
+  slots: Object as SlotsType<ColorPickerSlots>,
   setup(props, { slots }) {
     const selfRef = ref<HTMLElement | null>(null)
     let upcomingValue: string | null = null
