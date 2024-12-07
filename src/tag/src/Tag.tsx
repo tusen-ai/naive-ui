@@ -11,6 +11,7 @@ import {
   provide,
   type Ref,
   ref,
+  type SlotsType,
   toRef,
   watchEffect
 } from 'vue'
@@ -73,9 +74,16 @@ export const tagInjectionKey = createInjectionKey<TagInjection>('n-tag')
 
 export type TagProps = ExtractPublicPropTypes<typeof tagProps>
 
+export interface TagSlots {
+  default?: any
+  avatar?: any
+  icon?: any
+}
+
 export default defineComponent({
   name: 'Tag',
   props: tagProps,
+  slots: Object as SlotsType<TagSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {
