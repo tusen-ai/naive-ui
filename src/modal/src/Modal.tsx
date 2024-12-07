@@ -1,5 +1,7 @@
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { CardSlots } from '../../card'
+import type { DialogSlots } from '../../dialog'
 import type { ModalTheme } from '../styles'
 import { getPreciseEventTarget } from 'seemly'
 import { zindexable } from 'vdirs'
@@ -13,6 +15,7 @@ import {
   type PropType,
   provide,
   ref,
+  type SlotsType,
   toRef,
   Transition,
   withDirectives
@@ -100,10 +103,15 @@ export const modalProps = {
 
 export type ModalProps = ExtractPublicPropTypes<typeof modalProps>
 
+export interface ModalSlots extends CardSlots, DialogSlots {
+  default?: any
+}
+
 export default defineComponent({
   name: 'Modal',
   inheritAttrs: false,
   props: modalProps,
+  slots: Object as SlotsType<ModalSlots>,
   setup(props) {
     if (__DEV__) {
       if (props.onHide) {

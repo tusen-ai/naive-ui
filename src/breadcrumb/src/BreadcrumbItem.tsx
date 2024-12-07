@@ -4,7 +4,8 @@ import {
   type ExtractPropTypes,
   h,
   inject,
-  type PropType
+  type PropType,
+  type SlotsType
 } from 'vue'
 import { resolveSlot, warn } from '../../_utils'
 import { useBrowserLocation } from '../../_utils/composable/use-browser-location'
@@ -24,9 +25,15 @@ export type BreadcrumbItemProps = Partial<
   ExtractPropTypes<typeof breadcrumbItemProps>
 >
 
+export interface BreadcrumbItemSlots {
+  default?: any
+  separator?: any
+}
+
 export default defineComponent({
   name: 'BreadcrumbItem',
   props: breadcrumbItemProps,
+  slots: Object as SlotsType<BreadcrumbItemSlots>,
   setup(props, { slots }) {
     const NBreadcrumb = inject(breadcrumbInjectionKey, null)
     if (!NBreadcrumb) {

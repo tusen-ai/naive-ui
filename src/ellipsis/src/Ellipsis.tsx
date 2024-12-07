@@ -10,7 +10,8 @@ import {
   mergeProps,
   onDeactivated,
   type PropType,
-  ref
+  ref,
+  type SlotsType
 } from 'vue'
 import { useTheme } from '../../_mixins'
 import { useMergedClsPrefix } from '../../_mixins/use-config'
@@ -38,10 +39,16 @@ export const ellipsisProps = {
 
 export type EllipsisProps = ExtractPublicPropTypes<typeof ellipsisProps>
 
+export interface EllipsisSlots {
+  default?: any
+  tooltip?: any
+}
+
 export default defineComponent({
   name: 'Ellipsis',
   inheritAttrs: false,
   props: ellipsisProps,
+  slots: Object as SlotsType<EllipsisSlots>,
   setup(props, { slots, attrs }) {
     const mergedClsPrefixRef = useMergedClsPrefix()
     const mergedTheme = useTheme(

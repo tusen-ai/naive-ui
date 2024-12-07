@@ -10,6 +10,7 @@ import {
   type PropType,
   provide,
   ref,
+  type SlotsType,
   toRef,
   watchEffect
 } from 'vue'
@@ -51,9 +52,16 @@ export const imageProps = {
 
 export type ImageProps = ExtractPublicPropTypes<typeof imageProps>
 
+export interface ImageSlots {
+  placeholder?: any
+  error?: any
+  [key: string]: any
+}
+
 export default defineComponent({
   name: 'Image',
   props: imageProps,
+  slots: Object as SlotsType<ImageSlots>,
   inheritAttrs: false,
   setup(props) {
     const imageRef = ref<HTMLImageElement | null>(null)

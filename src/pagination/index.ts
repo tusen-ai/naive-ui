@@ -4,4 +4,4 @@ export type {
   PaginationSizeOption
 } from './src/interface'
 export { default as NPagination, paginationProps } from './src/Pagination'
-export type { PaginationProps } from './src/Pagination'
+export type { PaginationProps, PaginationSlots } from './src/Pagination'

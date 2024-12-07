@@ -23,6 +23,7 @@ import {
   provide,
   type Ref,
   ref,
+  type SlotsType,
   toRef,
   Transition,
   type VNode,
@@ -68,9 +69,20 @@ import {
 
 export type DatePickerSetupProps = ExtractPropTypes<typeof datePickerProps>
 
+export interface DatePickerSlots {
+  'date-icon'?: any
+  footer?: any
+  'next-month'?: any
+  'next-year'?: any
+  'prev-month'?: any
+  'prev-year'?: any
+  separator?: any
+}
+
 export default defineComponent({
   name: 'DatePicker',
   props: datePickerProps,
+  slots: Object as SlotsType<DatePickerSlots>,
   setup(props, { slots }) {
     if (__DEV__) {
       watchEffect(() => {

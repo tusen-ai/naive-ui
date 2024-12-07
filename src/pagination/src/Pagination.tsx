@@ -5,6 +5,7 @@ import type { SelectProps } from '../../select'
 import type { Size as SelectSize } from '../../select/src/interface'
 import type { PaginationTheme } from '../styles'
 import type {
+  PaginationInfo,
   PaginationRenderLabel,
   PaginationSizeOption,
   RenderGoto,
@@ -25,6 +26,7 @@ import {
   nextTick,
   type PropType,
   ref,
+  type SlotsType,
   toRef,
   type VNodeChild,
   watchEffect
@@ -123,9 +125,20 @@ export const paginationProps = {
 
 export type PaginationProps = ExtractPublicPropTypes<typeof paginationProps>
 
+export interface PaginationSlots {
+  default?: any
+  goto?: any
+  label?: any
+  next?: (info: PaginationInfo) => any
+  prev?: (info: PaginationInfo) => any
+  prefix?: (info: PaginationInfo) => any
+  suffix?: (info: PaginationInfo) => any
+}
+
 export default defineComponent({
   name: 'Pagination',
   props: paginationProps,
+  slots: Object as SlotsType<PaginationSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {
