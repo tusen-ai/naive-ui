@@ -36,6 +36,7 @@ import {
   type PropType,
   provide,
   ref,
+  type SlotsType,
   toRef,
   type VNode,
   type VNodeChild,
@@ -193,9 +194,17 @@ export const cascaderProps = {
 
 export type CascaderProps = ExtractPublicPropTypes<typeof cascaderProps>
 
+export interface CascaderSlots {
+  action?: any
+  arrow?: any
+  empty?: any
+  'not-found'?: any
+}
+
 export default defineComponent({
   name: 'Cascader',
   props: cascaderProps,
+  slots: Object as SlotsType<CascaderSlots>,
   setup(props, { slots }) {
     if (__DEV__) {
       watchEffect(() => {
