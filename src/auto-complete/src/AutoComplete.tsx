@@ -12,6 +12,7 @@ import type {
 } from '../../select/src/interface'
 import type { AutoCompleteTheme } from '../styles'
 import type {
+  AutoCompleteDefaultSlotOptions,
   AutoCompleteInst,
   AutoCompleteOption,
   AutoCompleteOptions,
@@ -33,6 +34,7 @@ import {
   type InputHTMLAttributes,
   type PropType,
   ref,
+  type SlotsType,
   toRef,
   Transition,
   watchEffect,
@@ -114,9 +116,17 @@ export const autoCompleteProps = {
 
 export type AutoCompleteProps = ExtractPublicPropTypes<typeof autoCompleteProps>
 
+export interface AutoCompleteSlots {
+  default?: AutoCompleteDefaultSlotOptions
+  empty?: any
+  prefix?: any
+  suffix?: any
+}
+
 export default defineComponent({
   name: 'AutoComplete',
   props: autoCompleteProps,
+  slots: Object as SlotsType<AutoCompleteSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {
@@ -368,7 +378,7 @@ export default defineComponent({
                         handleFocus: this.handleFocus,
                         handleBlur: this.handleBlur,
                         value: this.mergedValue
-                      })
+                      } as AutoCompleteDefaultSlotOptions)
                     }
                     const { mergedTheme } = this
                     return (
