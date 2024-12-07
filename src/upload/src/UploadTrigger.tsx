@@ -1,3 +1,4 @@
+import type { UploadTriggerDefaultSlotOptions } from './interface'
 import { computed, defineComponent, h, inject } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import { AddIcon } from '../../_internal/icons'
@@ -5,6 +6,10 @@ import { resolveSlot, throwError } from '../../_utils'
 import { uploadInjectionKey } from './interface'
 import NUploadDragger from './UploadDragger'
 import { getFilesFromEntries } from './utils'
+
+export interface UploadTriggerSlots {
+  default?: (options: UploadTriggerDefaultSlotOptions) => any
+}
 
 export default defineComponent({
   name: 'UploadTrigger',
