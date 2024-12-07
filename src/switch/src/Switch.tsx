@@ -11,6 +11,7 @@ import {
   h,
   type PropType,
   ref,
+  type SlotsType,
   toRef,
   watchEffect
 } from 'vue'
@@ -74,11 +75,21 @@ export const switchProps = {
 
 export type SwitchProps = ExtractPublicPropTypes<typeof switchProps>
 
+export interface SwitchSlots {
+  default?: any
+  checked?: any
+  'checked-icon'?: any
+  icon?: any
+  unchecked?: any
+  'unchecked-icon'?: any
+}
+
 let supportCssMax: boolean | undefined
 
 export default defineComponent({
   name: 'Switch',
   props: switchProps,
+  slots: Object as SlotsType<SwitchSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {
