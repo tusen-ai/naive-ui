@@ -2,7 +2,11 @@ import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { ButtonProps } from '../../button'
 import type { DynamicInputTheme } from '../styles'
-import type { OnUpdateValue } from './interface'
+import type {
+  DynamicInputActionSlotOptions,
+  DynamicInputDefaultSlotOptions,
+  OnUpdateValue
+} from './interface'
 import { createId } from 'seemly'
 import { useMergedState } from 'vooks'
 import {
@@ -87,6 +91,13 @@ export const dynamicInputProps = {
 } as const
 
 export type DynamicInputProps = ExtractPublicPropTypes<typeof dynamicInputProps>
+
+export interface DynamicInputSlots {
+  action?: (options: DynamicInputActionSlotOptions) => any
+  default?: (options: DynamicInputDefaultSlotOptions) => any
+  'create-button-default'?: any
+  'create-button-icon'?: any
+}
 
 export default defineComponent({
   name: 'DynamicInput',
