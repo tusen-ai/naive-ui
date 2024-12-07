@@ -1,7 +1,13 @@
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { PageHeaderTheme } from '../styles/light'
-import { computed, defineComponent, h, type PropType } from 'vue'
+import {
+  computed,
+  defineComponent,
+  h,
+  type PropType,
+  type SlotsType
+} from 'vue'
 import { NBaseIcon } from '../../_internal'
 import { ArrowBackIcon } from '../../_internal/icons'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
@@ -19,9 +25,21 @@ export const pageHeaderProps = {
 
 export type PageHeaderProps = ExtractPublicPropTypes<typeof pageHeaderProps>
 
+export interface PageHeaderSlots {
+  avatar?: any
+  header?: any
+  default?: any
+  extra?: any
+  footer?: any
+  subtitle?: any
+  title?: any
+  back?: any
+}
+
 export default defineComponent({
   name: 'PageHeader',
   props: pageHeaderProps,
+  slots: Object as SlotsType<PageHeaderSlots>,
   setup(props) {
     const { mergedClsPrefixRef, mergedRtlRef, inlineThemeDisabled }
       = useConfig(props)
