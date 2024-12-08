@@ -6,7 +6,7 @@ import type {
 } from '../../../_utils'
 import type { ScrollbarTheme } from '../styles'
 import { off, on } from 'evtd'
-import { depx, getPreciseEventTarget } from 'seemly'
+import { depx, getPadding, getPreciseEventTarget } from 'seemly'
 import { useIsIos } from 'vooks'
 import {
   computed,
@@ -701,6 +701,43 @@ const Scrollbar = defineComponent({
           railColor
         }
       } = themeRef.value
+
+      const {
+        top: railTopHorizontalTop,
+        right: railRightHorizontalTop,
+        bottom: railBottomHorizontalTop,
+        left: railLeftHorizontalTop
+      } = getPadding(railInsetHorizontalTop)
+
+      const {
+        top: railTopHorizontalBottom,
+        right: railRightHorizontalBottom,
+        bottom: railBottomHorizontalBottom,
+        left: railLeftHorizontalBottom
+      } = getPadding(railInsetHorizontalBottom)
+
+      const {
+        top: railTopVerticalRight,
+        right: railRightVerticalRight,
+        bottom: railBottomVerticalRight,
+        left: railLeftVerticalRight
+      } = getPadding(
+        rtlEnabledRef?.value
+          ? rtlInset(railInsetVerticalRight)
+          : railInsetVerticalRight
+      )
+
+      const {
+        top: railTopVerticalLeft,
+        right: railRightVerticalLeft,
+        bottom: railBottomVerticalLeft,
+        left: railLeftVerticalLeft
+      } = getPadding(
+        rtlEnabledRef?.value
+          ? rtlInset(railInsetVerticalLeft)
+          : railInsetVerticalLeft
+      )
+
       return {
         '--n-scrollbar-bezier': cubicBezierEaseInOut,
         '--n-scrollbar-color': color,
@@ -708,14 +745,23 @@ const Scrollbar = defineComponent({
         '--n-scrollbar-border-radius': borderRadius,
         '--n-scrollbar-width': width,
         '--n-scrollbar-height': height,
-        '--n-scrollbar-rail-inset-horizontal-top': railInsetHorizontalTop,
-        '--n-scrollbar-rail-inset-horizontal-bottom': railInsetHorizontalBottom,
-        '--n-scrollbar-rail-inset-vertical-right': rtlEnabledRef?.value
-          ? rtlInset(railInsetVerticalRight)
-          : railInsetVerticalRight,
-        '--n-scrollbar-rail-inset-vertical-left': rtlEnabledRef?.value
-          ? rtlInset(railInsetVerticalLeft)
-          : railInsetVerticalLeft,
+        '--n-scrollbar-rail-top-horizontal-top': railTopHorizontalTop,
+        '--n-scrollbar-rail-right-horizontal-top': railRightHorizontalTop,
+        '--n-scrollbar-rail-bottom-horizontal-top': railBottomHorizontalTop,
+        '--n-scrollbar-rail-left-horizontal-top': railLeftHorizontalTop,
+        '--n-scrollbar-rail-top-horizontal-bottom': railTopHorizontalBottom,
+        '--n-scrollbar-rail-right-horizontal-bottom': railRightHorizontalBottom,
+        '--n-scrollbar-rail-bottom-horizontal-bottom':
+          railBottomHorizontalBottom,
+        '--n-scrollbar-rail-left-horizontal-bottom': railLeftHorizontalBottom,
+        '--n-scrollbar-rail-top-vertical-right': railTopVerticalRight,
+        '--n-scrollbar-rail-right-vertical-right': railRightVerticalRight,
+        '--n-scrollbar-rail-bottom-vertical-right': railBottomVerticalRight,
+        '--n-scrollbar-rail-left-vertical-right': railLeftVerticalRight,
+        '--n-scrollbar-rail-top-vertical-left': railTopVerticalLeft,
+        '--n-scrollbar-rail-right-vertical-left': railRightVerticalLeft,
+        '--n-scrollbar-rail-bottom-vertical-left': railBottomVerticalLeft,
+        '--n-scrollbar-rail-left-vertical-left': railLeftVerticalLeft,
         '--n-scrollbar-rail-color': railColor
       }
     })
