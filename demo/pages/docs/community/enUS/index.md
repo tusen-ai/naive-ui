@@ -22,4 +22,4 @@ If you want to contribute excellent resources, please contact 07akioni or amadeu
 | [Dumogu-admin](https://admin.dumogu.top/base-naive-ui/) | Vue3, Vite5, Naive UI, Minimalist clean background management template. |
 | [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web) | ChatGPT demo web page built with Express and Vue3 |
 | [pro-components-naive-ui](https://github.com/Zheng-Changfu/pro-components-naive-ui) | Based on Naive UI secondary encapsulation, more functions are extended on the original components |
-| [vue3-dynamic-form](https://vue3-dynamic-form.dumogu.top/) | A dynamic form designer based on Vue3, Naive UI, to implement a lot of basic controls, can be very convenient to customize the control. |
+| [vue3-dynamic-form](https://github.com/yayaluoya/vue3-dynamic-form) | A dynamic form designer based on Vue3, Naive UI, to implement a lot of basic controls, can be very convenient to customize the control. |
