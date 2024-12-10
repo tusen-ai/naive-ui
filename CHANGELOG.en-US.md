@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- `n-number-animation` adds `on-update` prop.
+
 ## 2.40.3
 
 `2024-12-02`

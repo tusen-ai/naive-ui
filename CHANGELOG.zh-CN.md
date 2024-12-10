@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- `n-number-animation` 新增 `on-update` 属性
+
 ## 2.40.3
 
 `2024-12-02`
