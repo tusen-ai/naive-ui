@@ -10,6 +10,7 @@ precision.vue
 separator.vue
 intl.vue
 finish.vue
+update.vue
 ```
 
 ## API
@@ -26,6 +27,7 @@ finish.vue
 | show-separator | `boolean` | `false` | 是否显示分隔符 | 2.23.2 |
 | to | `number` | `undefined` | 目标值 | 2.23.2 |
 | on-finish | `() => void` | `undefined` | 动画结束的回调 | 2.31.0 |
+| on-update | `(value: number) => void` | `undefined` | 动画更新的回调 | NEXT_VERSION |
 
 ### NumberAnimation Methods
 

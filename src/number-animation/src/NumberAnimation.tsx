@@ -31,6 +31,7 @@ export const numberAnimationProps = {
     type: Number,
     default: 2000
   },
+  onUpdate: Function as PropType<(value: number) => void>,
   onFinish: Function as PropType<() => void>
 }
 
@@ -58,6 +59,7 @@ export default defineComponent({
     let animating = false
     const onUpdate = (currentValue: number): void => {
       displayedValueRef.value = currentValue
+      props.onUpdate?.(currentValue)
     }
     const onFinish = (): void => {
       displayedValueRef.value = props.to

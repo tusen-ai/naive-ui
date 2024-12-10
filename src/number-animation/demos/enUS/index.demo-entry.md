@@ -10,6 +10,7 @@ precision.vue
 separator.vue
 intl.vue
 finish.vue
+update.vue
 ```
 
 ## API
@@ -26,6 +27,7 @@ finish.vue
 | show-separator | `boolean` | `false` | Whether to show separator. | 2.23.2 |
 | to | `number` | `undefined` | Target value. | 2.23.2 |
 | on-finish | `() => void` | `undefined` | The callback on animation is finished. | 2.31.0 |
+| on-update | `(value: number) => void` | `undefined` | The number animation update callback. | NEXT_VERSION |
 
 ### NumberAnimation Methods
 
