@@ -5,6 +5,7 @@
 `2024-12-02`
 
 - Fix marquee is not exported with correct name.
+- Fixed 'n-qr-code' size 'attribute not adding' paddding 'attribute, resulting in an issue with the actual width of the graph 
 
 ## 2.40.2
 
