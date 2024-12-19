@@ -1,22 +1,22 @@
+import { happensIn, repeat } from 'seemly'
+import { useMemo } from 'vooks'
 import {
   type ComponentPublicInstance,
-  type PropType,
-  type VNode,
   computed,
   defineComponent,
   h,
   inject,
   onMounted,
-  ref
+  type PropType,
+  ref,
+  type VNode
 } from 'vue'
-import { useMemo } from 'vooks'
-import { happensIn, repeat } from 'seemly'
 import { createDataKey } from '../../_utils'
-import NTreeNodeSwitcher from './TreeNodeSwitcher'
+import { renderDropMark } from './dnd'
+import { type TmNode, treeInjectionKey } from './interface'
 import NTreeNodeCheckbox from './TreeNodeCheckbox'
 import NTreeNodeContent from './TreeNodeContent'
-import { type TmNode, treeInjectionKey } from './interface'
-import { renderDropMark } from './dnd'
+import NTreeNodeSwitcher from './TreeNodeSwitcher'
 import { isNodeDisabled } from './utils'
 
 const TreeNode = defineComponent({
@@ -134,8 +134,8 @@ const TreeNode = defineComponent({
       () =>
         NTree.checkableRef.value
         && (NTree.cascadeRef.value
-        || NTree.mergedCheckStrategyRef.value !== 'child'
-        || props.tmNode.isLeaf)
+          || NTree.mergedCheckStrategyRef.value !== 'child'
+          || props.tmNode.isLeaf)
     )
 
     const checkedRef = useMemo(() =>
@@ -510,18 +510,18 @@ const TreeNode = defineComponent({
           {draggable
             ? this.showDropMark
               ? renderDropMark({
-                el: this.contentElRef.value!,
-                position: this.droppingPosition!,
-                offsetLevel: this.droppingOffsetLevel,
-                indent
-              })
-              : this.showDropMarkAsParent
-                ? renderDropMark({
                   el: this.contentElRef.value!,
-                  position: 'inside',
+                  position: this.droppingPosition!,
                   offsetLevel: this.droppingOffsetLevel,
                   indent
                 })
+              : this.showDropMarkAsParent
+                ? renderDropMark({
+                    el: this.contentElRef.value!,
+                    position: 'inside',
+                    offsetLevel: this.droppingOffsetLevel,
+                    indent
+                  })
                 : null
             : null}
           {checkboxOnRight ? checkboxNode : null}

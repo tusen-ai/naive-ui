@@ -1,11 +1,11 @@
 <script lang="ts">
-import { computed, defineComponent, nextTick, ref, watch } from 'vue'
 import { CodeOutline } from '@vicons/ionicons5'
+import { computed, defineComponent, nextTick, ref, watch } from 'vue'
 import { useDisplayMode } from '../store'
 import { i18n } from '../utils/composables'
-import EditOnGithubButton from './EditOnGithubButton.vue'
-import EditInCodeSandboxButton from './EditInCodeSandboxButton.vue'
 import CopyCodeButton from './CopyCodeButton.vue'
+import EditInCodeSandboxButton from './EditInCodeSandboxButton.vue'
+import EditOnGithubButton from './EditOnGithubButton.vue'
 
 export default defineComponent({
   components: {

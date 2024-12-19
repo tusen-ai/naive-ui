@@ -231,9 +231,10 @@ export default cB('tabs', `
       overflow-y: auto; 
       scrollbar-width: none;
     `, [
-      c('&::-webkit-scrollbar', `
+      c('&::-webkit-scrollbar, &::-webkit-scrollbar-track-piece, &::-webkit-scrollbar-thumb', `
         width: 0;
         height: 0;
+        display: none;
       `)
     ]),
     c('&::before, &::after', `

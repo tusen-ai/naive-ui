@@ -1,7 +1,7 @@
-import { commonDark } from '../../_styles/common'
-import { internalSelectMenuDark } from '../../_internal/select-menu/styles'
-import { inputDark } from '../../input/styles'
 import type { MentionTheme } from './light'
+import { internalSelectMenuDark } from '../../_internal/select-menu/styles'
+import { commonDark } from '../../_styles/common'
+import { inputDark } from '../../input/styles'
 
 const listDark: MentionTheme = {
   name: 'Mention',

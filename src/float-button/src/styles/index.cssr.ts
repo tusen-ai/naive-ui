@@ -34,7 +34,10 @@ export default cB('float-button', `
   `),
   cE('fill', `
     position: absolute;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0
+    left: 0;
     transition: background-color .3s var(--n-bezier);
     border-radius: inherit;
   `),
@@ -93,7 +96,10 @@ export default cB('float-button', `
     opacity: 0;
     transform: scale(0.75);
     position: absolute;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     display: flex;
     align-items: center;
     justify-content: center;

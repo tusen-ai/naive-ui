@@ -5,8 +5,8 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, nextTick, ref } from 'vue'
 import { useMessage } from 'naive-ui'
+import { defineComponent, nextTick, ref } from 'vue'
 
 const options = [
   {

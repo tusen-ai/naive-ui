@@ -1,5 +1,3 @@
-import { type ComputedRef, computed, ref } from 'vue'
-import { call } from '../../_utils'
 import type {
   ColumnKey,
   CompareFn,
@@ -13,6 +11,8 @@ import type {
   TableSelectionColumn,
   TmNode
 } from './interface'
+import { computed, type ComputedRef, ref } from 'vue'
+import { call } from '../../_utils'
 import { getFlagOfOrder } from './utils'
 
 function getMultiplePriority(
@@ -31,8 +31,8 @@ function getSortFunction(
   if (
     columnKey
     && (sorter === undefined
-    || sorter === 'default'
-    || (typeof sorter === 'object' && sorter.compare === 'default'))
+      || sorter === 'default'
+      || (typeof sorter === 'object' && sorter.compare === 'default'))
   ) {
     return getDefaultSorterFn(columnKey)
   }
@@ -111,8 +111,8 @@ export function useSorter(
         column.type !== 'selection'
         && column.sorter !== undefined
         && (column.sortOrder === 'ascend'
-        || column.sortOrder === 'descend'
-        || column.sortOrder === false)
+          || column.sortOrder === 'descend'
+          || column.sortOrder === false)
     )
     // if multiple columns are controlled sortable, then we need to find columns with active sortOrder
     const columnToSort: TableBaseColumn[] | undefined = (

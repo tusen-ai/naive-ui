@@ -5,10 +5,8 @@ You can set mount target of loading by `to` prop.
 </markdown>
 
 <script lang="ts">
+import { NButton, NSpace, useLoadingBar } from 'naive-ui'
 import { defineComponent, h, ref } from 'vue'
-import { NButton } from '../../../button'
-import { NSpace } from '../../../space'
-import { useLoadingBar } from '../../src/use-loading-bar'
 
 export default defineComponent({
   components: {
@@ -51,7 +49,10 @@ export default defineComponent({
       ref="loadingBarTargetRef"
       style="
         position: absolute;
-        inset: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
         border-radius: var(--n-border-radius);
         overflow: hidden;
         pointer-events: none;

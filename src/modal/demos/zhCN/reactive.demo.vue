@@ -7,8 +7,8 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h } from 'vue'
 import { NButton, useMessage, useModal } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   setup() {

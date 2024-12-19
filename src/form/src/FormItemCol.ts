@@ -1,9 +1,9 @@
-import { defineComponent, h, ref } from 'vue'
-import NCol, { colPropKeys, colProps } from '../../legacy-grid/src/Col'
-import { keep, keysOf } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import NFormItem, { formItemPropKeys, formItemProps } from './FormItem'
 import type { FormItemInst } from './interface'
+import { defineComponent, h, ref } from 'vue'
+import { keep, keysOf } from '../../_utils'
+import NCol, { colPropKeys, colProps } from '../../legacy-grid/src/Col'
+import NFormItem, { formItemPropKeys, formItemProps } from './FormItem'
 
 export const formItemColProps = {
   ...colProps,

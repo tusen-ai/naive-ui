@@ -1,6 +1,6 @@
-import { Fragment, defineComponent, h, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import { createId } from 'seemly'
+import { defineComponent, Fragment, h, nextTick } from 'vue'
 import { NPopover, type PopoverInst } from '../index'
 
 const popoverBodyHeader = '.n-popover__header'

@@ -1,6 +1,6 @@
+import type { BackTopTheme } from './light'
 import { commonDark } from '../../_styles/common'
 import commonVariables from './_common'
-import type { BackTopTheme } from './light'
 
 const backTopDark: BackTopTheme = {
   name: 'BackTop',

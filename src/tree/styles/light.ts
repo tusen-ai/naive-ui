@@ -1,10 +1,10 @@
+import type { ThemeCommonVars } from '../../_styles/common'
 import { changeColor } from 'seemly'
+import { scrollbarLight } from '../../_internal/scrollbar/styles'
+import { createTheme } from '../../_mixins/use-theme'
+import { commonLight } from '../../_styles/common'
 import { checkboxLight } from '../../checkbox/styles'
 import { emptyLight } from '../../empty/styles'
-import { scrollbarLight } from '../../_internal/scrollbar/styles'
-import { commonLight } from '../../_styles/common'
-import type { ThemeCommonVars } from '../../_styles/common'
-import { createTheme } from '../../_mixins/use-theme'
 
 export function self(vars: ThemeCommonVars) {
   const {

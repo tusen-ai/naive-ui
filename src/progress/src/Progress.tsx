@@ -1,20 +1,20 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ProgressTheme } from '../styles'
+import type { ProgressGradient, ProgressStatus } from './public-types'
 import {
-  type CSSProperties,
-  type PropType,
   computed,
+  type CSSProperties,
   defineComponent,
-  h
+  h,
+  type PropType
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import { type ExtractPublicPropTypes, createKey } from '../../_utils'
+import { createKey, type ExtractPublicPropTypes } from '../../_utils'
 import { progressLight } from '../styles'
-import type { ProgressTheme } from '../styles'
-import style from './styles/index.cssr'
-import type { Status } from './interface'
-import Line from './Line'
 import Circle from './Circle'
+import Line from './Line'
 import MultipleCircle from './MultipleCircle'
+import style from './styles/index.cssr'
 
 export const progressProps = {
   ...(useTheme.props as ThemeProps<ProgressTheme>),
@@ -28,14 +28,16 @@ export const progressProps = {
   gapDegree: Number,
   gapOffsetDegree: Number,
   status: {
-    type: String as PropType<Status>,
+    type: String as PropType<ProgressStatus>,
     default: 'default'
   },
   railColor: [String, Array] as PropType<string | string[]>,
   railStyle: [String, Array] as PropType<
     string | CSSProperties | Array<string | CSSProperties>
   >,
-  color: [String, Array] as PropType<string | string[]>,
+  color: [String, Array, Object] as PropType<
+    string | string[] | ProgressGradient | ProgressGradient[]
+  >,
   viewBoxWidth: {
     type: Number,
     default: 100
@@ -138,11 +140,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'progress',
-        computed(() => props.status[0]),
-        cssVarsRef,
-        props
-      )
+          'progress',
+          computed(() => props.status[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,

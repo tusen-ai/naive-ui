@@ -1,8 +1,8 @@
-import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NStep, NSteps } from '../index'
-import { NIcon } from '../../icon'
+import { h } from 'vue'
 import { CloseIcon as ErrorIcon } from '../../_internal/icons'
+import { NIcon } from '../../icon'
+import { NStep, NSteps } from '../index'
 
 describe('n-steps', () => {
   it('should work with import on demand', () => {

@@ -1,23 +1,23 @@
+import type { OffsetTarget } from './utils'
+import { throttle } from 'lodash-es'
+import { unwrapElement } from 'seemly'
+import { onFontsReady } from 'vooks'
 import {
-  type PropType,
   computed,
   defineComponent,
   h,
   nextTick,
   onBeforeUnmount,
   onMounted,
+  type PropType,
   provide,
   ref,
   toRef,
   watch
 } from 'vue'
-import { throttle } from 'lodash-es'
-import { unwrapElement } from 'seemly'
-import { onFontsReady } from 'vooks'
 import { NScrollbar } from '../../_internal'
 import { keysOf } from '../../_utils'
 import { anchorInjectionKey } from './Link'
-import type { OffsetTarget } from './utils'
 import { getOffset } from './utils'
 
 export interface BaseAnchorInst {

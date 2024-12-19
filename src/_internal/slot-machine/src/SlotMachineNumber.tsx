@@ -1,9 +1,9 @@
 import {
-  type PropType,
   computed,
   defineComponent,
   h,
   nextTick,
+  type PropType,
   ref,
   toRef,
   watch

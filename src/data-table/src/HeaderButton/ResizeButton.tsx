@@ -1,6 +1,6 @@
-import { defineComponent, h, inject, onBeforeUnmount, ref } from 'vue'
 import type { PropType } from 'vue'
 import { off, on } from 'evtd'
+import { defineComponent, h, inject, onBeforeUnmount, ref } from 'vue'
 import { dataTableInjectionKey } from '../interface'
 
 export default defineComponent({

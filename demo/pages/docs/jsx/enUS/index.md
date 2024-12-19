@@ -11,8 +11,8 @@ For how to enable JSX & TSX, please look at your toolchain's docs.
 We recommend importing components directly when using JSX.
 
 ```js
-import { defineComponent } from 'vue'
 import { NButton } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   render() {

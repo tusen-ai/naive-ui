@@ -1,14 +1,14 @@
 import type { CSSProperties, PropType, VNodeChild } from 'vue'
-import type { ButtonProps } from '../../button'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { keysOf } from '../../_utils'
+import type { ButtonProps } from '../../button'
 import type { IconPlacement } from './interface'
+import { keysOf } from '../../_utils'
 
 const dialogProps = {
   icon: Function as PropType<() => VNodeChild>,
   type: {
     type: String as PropType<
-    'info' | 'success' | 'warning' | 'error' | 'default'
+      'info' | 'success' | 'warning' | 'error' | 'default'
     >,
     default: 'default'
   },

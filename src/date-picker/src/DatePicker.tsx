@@ -1,29 +1,38 @@
+import type { InputInst, InputProps } from '../../input'
+import type { Size as TimePickerSize } from '../../time-picker/src/interface'
+import type {
+  FormattedValue,
+  OnConfirmImpl,
+  OnUpdateFormattedValueImpl,
+  OnUpdateValueImpl,
+  PanelRef,
+  Value
+} from './interface'
+import type { UsePanelCommonProps } from './panel/use-panel-common'
+import type { DatePickerInst } from './public-types'
+import { format, getTime, isValid } from 'date-fns'
+import { getPreciseEventTarget, happensIn } from 'seemly'
+import { clickoutside } from 'vdirs'
+import { useIsMounted, useMergedState } from 'vooks'
 import {
-  type CSSProperties,
-  type ExtractPropTypes,
-  type Ref,
-  Transition,
-  type VNode,
   computed,
+  type CSSProperties,
   defineComponent,
+  type ExtractPropTypes,
   h,
   provide,
+  type Ref,
   ref,
   toRef,
+  Transition,
+  type VNode,
   watch,
   watchEffect,
   withDirectives
 } from 'vue'
 import { VBinder, VFollower, VTarget } from 'vueuc'
-import { clickoutside } from 'vdirs'
-import { format, getTime, isValid } from 'date-fns'
-import { useIsMounted, useMergedState } from 'vooks'
-import { getPreciseEventTarget, happensIn } from 'seemly'
-import type { Size as TimePickerSize } from '../../time-picker/src/interface'
-import { DateIcon, ToIcon } from '../../_internal/icons'
-import type { InputInst, InputProps } from '../../input'
-import { NInput } from '../../input'
 import { NBaseIcon } from '../../_internal'
+import { DateIcon, ToIcon } from '../../_internal/icons'
 import {
   useConfig,
   useFormItem,
@@ -40,30 +49,22 @@ import {
   warn,
   warnOnce
 } from '../../_utils'
+import { NInput } from '../../input'
 import { datePickerLight } from '../styles'
+import { datePickerInjectionKey } from './interface'
+import DatePanel from './panel/date'
+import DaterangePanel from './panel/daterange'
+import DatetimePanel from './panel/datetime'
+import DatetimerangePanel from './panel/datetimerange'
+import MonthPanel from './panel/month'
+import MonthRangePanel from './panel/monthrange'
+import { datePickerProps } from './props'
+import style from './styles/index.cssr'
 import { strictParse } from './utils'
 import {
   dualCalendarValidation,
   uniCalendarValidation
 } from './validation-utils'
-import type {
-  FormattedValue,
-  OnConfirmImpl,
-  OnUpdateFormattedValueImpl,
-  OnUpdateValueImpl,
-  PanelRef,
-  Value
-} from './interface'
-import { datePickerInjectionKey } from './interface'
-import DatetimePanel from './panel/datetime'
-import DatetimerangePanel from './panel/datetimerange'
-import DatePanel from './panel/date'
-import DaterangePanel from './panel/daterange'
-import MonthPanel from './panel/month'
-import MonthRangePanel from './panel/monthrange'
-import style from './styles/index.cssr'
-import type { DatePickerInst } from './public-types'
-import { datePickerProps } from './props'
 
 export type DatePickerSetupProps = ExtractPropTypes<typeof datePickerProps>
 
@@ -749,11 +750,11 @@ export default defineComponent({
     })
     const triggerThemeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'date-picker-trigger',
-        undefined,
-        triggerCssVarsRef,
-        props
-      )
+          'date-picker-trigger',
+          undefined,
+          triggerCssVarsRef,
+          props
+        )
       : undefined
 
     const cssVarsRef = computed(() => {
@@ -869,13 +870,13 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'date-picker',
-        computed(() => {
-          return props.type
-        }),
-        cssVarsRef,
-        props
-      )
+          'date-picker',
+          computed(() => {
+            return props.type
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     return {
@@ -936,7 +937,10 @@ export default defineComponent({
   },
   render() {
     const { clearable, triggerOnRender, mergedClsPrefix, $slots } = this
-    const commonPanelProps = {
+    const commonPanelProps: UsePanelCommonProps & {
+      ref: string
+      style: CSSProperties
+    } = {
       onUpdateValue: this.handlePanelUpdateValue,
       onTabOut: this.handlePanelTabOut,
       onClose: this.handlePanelClose,
@@ -958,7 +962,13 @@ export default defineComponent({
       onPrevMonth: this.onPrevMonth,
       onNextYear: this.onNextYear,
       onPrevYear: this.onPrevYear,
-      timerPickerFormat: this.timerPickerFormat
+      timerPickerFormat: this.timerPickerFormat,
+      dateFormat: this.dateFormat,
+      calendarDayFormat: this.calendarDayFormat,
+      calendarHeaderYearFormat: this.calendarHeaderYearFormat,
+      calendarHeaderMonthFormat: this.calendarHeaderMonthFormat,
+      calendarHeaderMonthYearSeparator: this.calendarHeaderMonthYearSeparator,
+      calendarHeaderMonthBeforeYear: this.calendarHeaderMonthBeforeYear
     }
     const renderPanel = (): VNode => {
       const { type } = this
@@ -990,8 +1000,8 @@ export default defineComponent({
       ) : type === 'month' || type === 'year' || type === 'quarter' ? (
         <MonthPanel {...commonPanelProps} type={type} key={type} />
       ) : type === 'monthrange'
-      || type === 'yearrange'
-      || type === 'quarterrange' ? (
+        || type === 'yearrange'
+        || type === 'quarterrange' ? (
             <MonthRangePanel {...commonPanelProps} type={type} />
           ) : (
             <DatePanel
@@ -1065,15 +1075,15 @@ export default defineComponent({
                           separator: () =>
                             this.separator === undefined
                               ? resolveSlot($slots.separator, () => [
-                                <NBaseIcon
-                                  clsPrefix={mergedClsPrefix}
-                                  class={`${mergedClsPrefix}-date-picker-icon`}
-                                >
-                                  {{
-                                    default: () => <ToIcon />
-                                  }}
-                                </NBaseIcon>
-                              ])
+                                  <NBaseIcon
+                                    clsPrefix={mergedClsPrefix}
+                                    class={`${mergedClsPrefix}-date-picker-icon`}
+                                  >
+                                    {{
+                                      default: () => <ToIcon />
+                                    }}
+                                  </NBaseIcon>
+                                ])
                               : this.separator,
                           [clearable ? 'clear-icon-placeholder' : 'suffix']:
                             () =>

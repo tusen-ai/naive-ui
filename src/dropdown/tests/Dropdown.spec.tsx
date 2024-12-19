@@ -1,9 +1,9 @@
 import type { VueWrapper } from '@vue/test-utils/dist/vueWrapper'
-import { mount } from '@vue/test-utils'
-import { type ComponentPublicInstance, type VNodeChild, h, nextTick } from 'vue'
-import { CashOutline as CashIcon } from '@vicons/ionicons5'
-import { NIcon } from '../../icon'
 import type { DropdownMixedOption } from '../src/interface'
+import { CashOutline as CashIcon } from '@vicons/ionicons5'
+import { mount } from '@vue/test-utils'
+import { type ComponentPublicInstance, h, nextTick, type VNodeChild } from 'vue'
+import { NIcon } from '../../icon'
 import { type DropdownProps, NDropdown } from '../index'
 
 const pendingOptionClassName

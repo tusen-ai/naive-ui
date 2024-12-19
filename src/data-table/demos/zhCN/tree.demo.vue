@@ -5,8 +5,8 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import type { DataTableColumns } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 interface RowData {
   name: string

@@ -1,7 +1,7 @@
+import { mount, type VueWrapper } from '@vue/test-utils'
 import { Fragment, h } from 'vue'
-import { type VueWrapper, mount } from '@vue/test-utils'
-import { NCheckbox, NCheckboxGroup } from '../index'
 import { NForm, NFormItem } from '../../form'
+import { NCheckbox, NCheckboxGroup } from '../index'
 
 function expectChecked(wrapper: VueWrapper<any>, value: boolean): void {
   expect(wrapper.classes().some(c => c.includes('checked'))).toEqual(value)

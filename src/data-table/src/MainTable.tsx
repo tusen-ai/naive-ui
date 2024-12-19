@@ -1,13 +1,13 @@
-import { computed, defineComponent, h, inject, ref, watchEffect } from 'vue'
-import { formatLength } from '../../_utils'
-import TableHeader from './TableParts/Header'
-import TableBody from './TableParts/Body'
 import type {
   MainTableBodyRef,
   MainTableHeaderRef,
   MainTableRef
 } from './interface'
+import { computed, defineComponent, h, inject, ref, watchEffect } from 'vue'
+import { formatLength } from '../../_utils'
 import { dataTableInjectionKey } from './interface'
+import TableBody from './TableParts/Body'
+import TableHeader from './TableParts/Header'
 
 export default defineComponent({
   name: 'MainTable',
@@ -20,6 +20,7 @@ export default defineComponent({
       maxHeightRef,
       minHeightRef,
       flexHeightRef,
+      virtualScrollHeaderRef,
       syncScrollState
     } = inject(dataTableInjectionKey)!
 
@@ -47,7 +48,12 @@ export default defineComponent({
     function getHeaderElement(): HTMLElement | null {
       const { value } = headerInstRef
       if (value) {
-        return value.$el
+        if (virtualScrollHeaderRef.value) {
+          return value.virtualListRef?.listElRef || null
+        }
+        else {
+          return value.$el
+        }
       }
       return null
     }

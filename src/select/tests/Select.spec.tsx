@@ -1,14 +1,14 @@
-import { type VNode, h, nextTick } from 'vue'
+import type { SelectBaseOption } from '../src/interface'
 import { mount } from '@vue/test-utils'
+import { h, nextTick, type VNode } from 'vue'
+import { NInternalSelection, NInternalSelectMenu } from '../../_internal'
+import { NTag } from '../../tag'
 import {
   NSelect,
   type SelectGroupOption,
   type SelectOption,
   type SelectProps
 } from '../index'
-import { NInternalSelectMenu, NInternalSelection } from '../../_internal'
-import { NTag } from '../../tag'
-import type { SelectBaseOption } from '../src/interface'
 
 describe('n-select', () => {
   it('should work with import on demand', () => {

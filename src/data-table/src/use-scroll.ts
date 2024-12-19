@@ -1,12 +1,12 @@
-import { beforeNextFrameOnce } from 'seemly'
-import { type ComputedRef, type Ref, computed, ref, watch } from 'vue'
-import { formatLength } from '../../_utils'
 import type {
   ColumnKey,
   DataTableSetupProps,
   MainTableRef,
   TableColumn
 } from './interface'
+import { beforeNextFrameOnce } from 'seemly'
+import { computed, type ComputedRef, type Ref, ref, watch } from 'vue'
+import { formatLength } from '../../_utils'
 import { getColKey, getNumberColWidth } from './utils'
 
 export function useScroll(

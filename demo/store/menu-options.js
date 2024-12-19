@@ -1,8 +1,8 @@
 // rubbish code here
 
+import { NSpace, NTag } from 'naive-ui'
 import { h } from 'vue'
 import { RouterLink } from 'vue-router'
-import { NSpace, NTag } from 'naive-ui'
 
 export function renderMenuLabel(option) {
   if (!('path' in option) || option.label === '--Debug') {
@@ -662,6 +662,13 @@ export function createComponentMenuOptions({ lang, theme }) {
           zh: '抽屉',
           enSuffix: true,
           path: '/drawer'
+        },
+        {
+          en: 'Marquee',
+          zh: '跑马灯',
+          enSuffix: true,
+          path: '/marquee',
+          isNew: true
         },
         {
           en: 'Message',

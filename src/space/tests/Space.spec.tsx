@@ -1,9 +1,9 @@
-import { type VueWrapper, mount } from '@vue/test-utils'
-import { Fragment, createCommentVNode, h } from 'vue'
-import { NSpace } from '../index'
-import { NConfigProvider } from '../../config-provider'
 import type { Justify } from '../src/Space'
+import { mount, type VueWrapper } from '@vue/test-utils'
+import { createCommentVNode, Fragment, h } from 'vue'
 import { c } from '../../_utils/cssr'
+import { NConfigProvider } from '../../config-provider'
+import { NSpace } from '../index'
 
 function getChildrenNode(wrapper: VueWrapper<any>): any[] {
   return (

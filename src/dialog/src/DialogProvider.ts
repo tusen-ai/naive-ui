@@ -1,28 +1,28 @@
+import type { ExtractPublicPropTypes, Mutable } from '../../_utils'
+import { createId } from 'seemly'
+import { useClicked, useClickPosition } from 'vooks'
 import {
   type CSSProperties,
+  defineComponent,
   type ExtractPropTypes,
   Fragment,
-  type PropType,
-  type Ref,
-  defineComponent,
   h,
+  type PropType,
   provide,
   reactive,
+  type Ref,
   ref
 } from 'vue'
-import { createId } from 'seemly'
-import { useClickPosition, useClicked } from 'vooks'
 import { omit } from '../../_utils'
-import type { ExtractPublicPropTypes, Mutable } from '../../_utils'
-import {
-  NDialogEnvironment,
-  type exposedDialogEnvProps
-} from './DialogEnvironment'
 import {
   dialogApiInjectionKey,
   dialogProviderInjectionKey,
   dialogReactiveListInjectionKey
 } from './context'
+import {
+  type exposedDialogEnvProps,
+  NDialogEnvironment
+} from './DialogEnvironment'
 
 export type DialogOptions = Mutable<
   Omit<

@@ -1,22 +1,22 @@
+import type { TmNode } from './interface'
 import {
-  Fragment,
-  type PropType,
   defineComponent,
+  Fragment,
   h,
   inject,
+  type PropType,
   provide
 } from 'vue'
-import { render } from '../../_utils'
-import { useMenuChild } from './use-menu-child'
-import { useMenuChildProps } from './use-menu-child-props'
-
-import { itemRenderer } from './utils'
-import type { TmNode } from './interface'
+import { keysOf, render } from '../../_utils'
 import {
   menuInjectionKey,
   menuItemGroupInjectionKey,
   submenuInjectionKey
 } from './context'
+
+import { useMenuChild } from './use-menu-child'
+import { useMenuChildProps } from './use-menu-child-props'
+import { itemRenderer } from './utils'
 
 export const menuItemGroupProps = {
   ...useMenuChildProps,
@@ -29,6 +29,8 @@ export const menuItemGroupProps = {
     required: true
   }
 } as const
+
+export const menuItemGroupPropKeys = keysOf(menuItemGroupProps)
 
 export const NMenuOptionGroup = defineComponent({
   name: 'MenuOptionGroup',

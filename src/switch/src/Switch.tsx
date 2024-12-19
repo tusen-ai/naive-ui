@@ -1,18 +1,21 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { SwitchTheme } from '../styles'
+import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
+import { depx, pxfy } from 'seemly'
+import { useMergedState } from 'vooks'
 import {
-  type CSSProperties,
-  type PropType,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
+  type PropType,
   ref,
   toRef,
   watchEffect
 } from 'vue'
-import { depx, pxfy } from 'seemly'
-import { useMergedState } from 'vooks'
-import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import { NBaseLoading, NIconSwitchTransition } from '../../_internal'
-import type { ThemeProps } from '../../_mixins'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import {
   call,
   createKey,
@@ -20,10 +23,7 @@ import {
   resolveWrappedSlot,
   warnOnce
 } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { switchLight } from '../styles'
-import type { SwitchTheme } from '../styles'
-import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
 import style from './styles/index.cssr'
 
 export const switchProps = {
@@ -263,13 +263,13 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'switch',
-        computed(() => {
-          return mergedSizeRef.value[0]
-        }),
-        cssVarsRef,
-        props
-      )
+          'switch',
+          computed(() => {
+            return mergedSizeRef.value[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       handleClick,

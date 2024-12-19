@@ -1,5 +1,5 @@
-import { type VueWrapper, mount } from '@vue/test-utils'
-import { Fragment, createCommentVNode, h } from 'vue'
+import { mount, type VueWrapper } from '@vue/test-utils'
+import { createCommentVNode, Fragment, h } from 'vue'
 import { NFlex } from '../index'
 
 function getChildrenNode(wrapper: VueWrapper<any>): any[] {

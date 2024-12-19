@@ -5,8 +5,8 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import type { CascaderOption } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 function getOptions(depth = 3, iterator = 1, prefix = '') {
   const length = iterator === 1 ? 5000 : 2

@@ -1,21 +1,8 @@
-import {
-  type PropType,
-  computed,
-  defineComponent,
-  h,
-  inject,
-  nextTick,
-  toRef,
-  watch,
-  watchEffect
-} from 'vue'
-import { type TreeNode, createTreeMate } from 'treemate'
-import { happensIn } from 'seemly'
 import type {
   NodeProps,
   RenderLabel
 } from '../../_internal/select-menu/src/interface'
-import { createTmOptions } from '../../select/src/utils'
+import type { MaybeArray } from '../../_utils'
 import type {
   OnUpdateValue,
   OnUpdateValueImpl,
@@ -26,12 +13,25 @@ import type {
   Value,
   ValueAtom
 } from '../../select/src/interface'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import { NInternalSelectMenu } from '../../_internal'
-import { call, keysOf, warn } from '../../_utils'
-import type { MaybeArray } from '../../_utils'
-import { popselectLight } from '../styles'
 import type { PopselectSize } from './interface'
+import { happensIn } from 'seemly'
+import { createTreeMate, type TreeNode } from 'treemate'
+import {
+  computed,
+  defineComponent,
+  h,
+  inject,
+  nextTick,
+  type PropType,
+  toRef,
+  watch,
+  watchEffect
+} from 'vue'
+import { NInternalSelectMenu } from '../../_internal'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { call, keysOf, warn } from '../../_utils'
+import { createTmOptions } from '../../select/src/utils'
+import { popselectLight } from '../styles'
 import { popselectInjectionKey } from './interface'
 import style from './styles/index.cssr'
 

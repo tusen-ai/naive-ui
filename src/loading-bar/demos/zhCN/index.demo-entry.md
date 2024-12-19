@@ -16,8 +16,8 @@
 ```
 
 ```js
-import { defineComponent } from 'vue'
 import { useLoadingBar } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 // content
 export default defineComponent({

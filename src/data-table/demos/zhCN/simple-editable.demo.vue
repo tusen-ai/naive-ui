@@ -1,13 +1,11 @@
 <markdown>
 # 简单的可编辑表格
-
-虽然简单，但是实用
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h, ref } from 'vue'
-import { NInput } from 'naive-ui'
 import type { DataTableColumns } from 'naive-ui'
+import { NInput } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
 
 interface RowData {
   key: number

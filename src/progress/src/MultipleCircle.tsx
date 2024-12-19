@@ -1,9 +1,10 @@
+import type { ProgressGradient } from './public-types'
 import {
-  type CSSProperties,
-  type PropType,
   computed,
+  type CSSProperties,
   defineComponent,
-  h
+  h,
+  type PropType
 } from 'vue'
 
 function circlePath(r: number, sw: number, vw: number = 100): string {
@@ -40,7 +41,7 @@ export default defineComponent({
       required: true
     },
     fillColor: {
-      type: Array as PropType<string[]>,
+      type: Array as PropType<string[] | ProgressGradient[]>,
       default: () => []
     },
     railColor: {
@@ -59,13 +60,37 @@ export default defineComponent({
           `${
             ((Math.PI * v) / 100)
             * (props.viewBoxWidth / 2
-            - (props.strokeWidth / 2) * (1 + 2 * i)
-            - props.circleGap * i)
+              - (props.strokeWidth / 2) * (1 + 2 * i)
+              - props.circleGap * i)
             * 2
           }, ${props.viewBoxWidth * 8}`
       )
       return strokeDasharrays
     })
+
+    const createGradientNode = (
+      p: number,
+      index: number
+    ): false | JSX.Element => {
+      const item = props.fillColor[index]
+      const form = typeof item === 'object' ? item.stops[0] : ''
+      const to = typeof item === 'object' ? item.stops[1] : ''
+      return (
+        typeof props.fillColor[index] === 'object' && (
+          <linearGradient
+            id={`gradient-${index}`}
+            x1="100%"
+            y1="0%"
+            x2="0%"
+            y2="100%"
+          >
+            <stop offset="0%" stop-color={form} />
+            <stop offset="100%" stop-color={to} />
+          </linearGradient>
+        )
+      )
+    }
+
     return () => {
       const {
         viewBoxWidth,
@@ -83,6 +108,11 @@ export default defineComponent({
           <div class={`${clsPrefix}-progress-graph`} aria-hidden>
             <div class={`${clsPrefix}-progress-graph-circle`}>
               <svg viewBox={`0 0 ${viewBoxWidth} ${viewBoxWidth}`}>
+                <defs>
+                  {percentage.map((p, index) => {
+                    return createGradientNode(p, index)
+                  })}
+                </defs>
                 {percentage.map((p, index) => {
                   return (
                     <g key={index}>
@@ -127,7 +157,10 @@ export default defineComponent({
                         style={{
                           strokeDasharray: strokeDasharrayRef.value[index],
                           strokeDashoffset: 0,
-                          stroke: fillColor[index]
+                          stroke:
+                            typeof fillColor[index] === 'object'
+                              ? `url(#gradient-${index})`
+                              : fillColor[index]
                         }}
                       />
                     </g>

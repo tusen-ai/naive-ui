@@ -1,6 +1,4 @@
 import type { CSSProperties } from 'vue'
-import { depx } from 'seemly'
-import { formatLength } from '../../_utils'
 import type {
   CreateRowClassName,
   InternalRowData,
@@ -13,6 +11,9 @@ import type {
   TableExpandColumn,
   TableSelectionColumn
 } from './interface'
+import type { DataTableGetCsvCell, DataTableGetCsvHeader } from './publicTypes'
+import { depx } from 'seemly'
+import { formatLength } from '../../_utils'
 
 export const SELECTION_COL_WIDTH = 40
 export const EXPAND_COL_WIDTH = 40
@@ -128,7 +129,7 @@ export function shouldUseArrayInSingleMode(column: TableBaseColumn): boolean {
   return (
     column.filterOptionValues !== undefined
     || (column.filterOptionValue === undefined
-    && column.defaultFilterOptionValues !== undefined)
+      && column.defaultFilterOptionValues !== undefined)
   )
 }
 
@@ -205,17 +206,30 @@ function formatCsvCell(value: unknown): string {
   }
 }
 
-export function generateCsv(columns: TableColumn[], data: RowData[]): string {
+export function generateCsv(
+  columns: TableColumn[],
+  data: RowData[],
+  getCsvCell: DataTableGetCsvCell | undefined,
+  getCsvHeader: DataTableGetCsvHeader | undefined
+): string {
   const exportableColumns = columns.filter(
-    (column) =>
-      column.type !== 'expand' &&
-      column.type !== 'selection' &&
-      column.allowExport !== false
+    column =>
+      column.type !== 'expand'
+      && column.type !== 'selection'
+      && column.allowExport !== false
   )
-  const header = exportableColumns.map((col: any) => col.title).join(',')
+  const header = exportableColumns
+    .map((col: any) => {
+      return getCsvHeader ? getCsvHeader(col) : col.title
+    })
+    .join(',')
   const rows = data.map((row) => {
     return exportableColumns
-      .map((col: any) => formatCsvCell(row[col.key]))
+      .map((col: any) => {
+        return getCsvCell
+          ? getCsvCell(row[col.key], row, col)
+          : formatCsvCell(row[col.key])
+      })
       .join(',')
   })
   return [header, ...rows].join('\n')

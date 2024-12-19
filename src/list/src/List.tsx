@@ -1,10 +1,10 @@
-import { computed, defineComponent, h, provide, toRef } from 'vue'
 import type { CSSProperties, PropType, Ref } from 'vue'
-import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { type ExtractPublicPropTypes, createInjectionKey } from '../../_utils'
-import { listLight } from '../styles'
 import type { ListTheme } from '../styles'
+import { computed, defineComponent, h, provide, toRef } from 'vue'
+import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
+import { createInjectionKey, type ExtractPublicPropTypes } from '../../_utils'
+import { listLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const listProps = {

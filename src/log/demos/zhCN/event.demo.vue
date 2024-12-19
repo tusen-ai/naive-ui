@@ -5,8 +5,8 @@ Log 有 `require-more`、`reach-top` 和 `reach-bottom` 事件。需要注意的
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import { useMessage } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 function log() {
   const l: string[] = []

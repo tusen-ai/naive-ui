@@ -1,7 +1,7 @@
-import { isBrowser } from '../../_utils'
-import { error } from '../../_utils/naive/warn'
 import type { FileAndEntry, ShouldUseThumbnailUrl } from './interface'
 import type { UploadFileInfo, UploadSettledFileInfo } from './public-types'
+import { isBrowser } from '../../_utils'
+import { error } from '../../_utils/naive/warn'
 
 export function isImageFileType(type: string): boolean {
   return type.includes('image/')

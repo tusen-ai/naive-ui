@@ -5,8 +5,8 @@ Set `show-zero` prop to display zero.
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import { MdAdd, MdRemove } from '@vicons/ionicons4'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   components: {

@@ -3,8 +3,8 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h } from 'vue'
 import { NTimePicker, useDialog } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   setup() {

@@ -1,5 +1,5 @@
-import { commonDark } from '../../_styles/common'
 import type { FloatButtonTheme } from './light'
+import { commonDark } from '../../_styles/common'
 
 const floatButtonDark: FloatButtonTheme = {
   name: 'FloatButton',

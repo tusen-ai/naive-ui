@@ -1,30 +1,30 @@
-import {
-  type PropType,
-  type VNode,
-  defineComponent,
-  h,
-  onMounted,
-  renderSlot,
-  watchEffect
-} from 'vue'
-import { VirtualList } from 'vueuc'
-import { useLocale } from '../../../_mixins'
-import { NxButton } from '../../../button'
-import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
-import { resolveSlotWithProps, warnOnce } from '../../../_utils'
-import {
-  type MonthItem,
-  type QuarterItem,
-  type YearItem,
-  getMonthString,
-  getQuarterString,
-  getYearString
-} from '../utils'
-import { MONTH_ITEM_HEIGHT } from '../config'
 import type {
   DatePickerClearSlotProps,
   DatePickerConfirmSlotProps
 } from '../public-types'
+import {
+  defineComponent,
+  h,
+  onMounted,
+  type PropType,
+  renderSlot,
+  type VNode,
+  watchEffect
+} from 'vue'
+import { VirtualList } from 'vueuc'
+import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
+import { useLocale } from '../../../_mixins'
+import { resolveSlotWithProps, warnOnce } from '../../../_utils'
+import { NxButton } from '../../../button'
+import { MONTH_ITEM_HEIGHT } from '../config'
+import {
+  getMonthString,
+  getQuarterString,
+  getYearString,
+  type MonthItem,
+  type QuarterItem,
+  type YearItem
+} from '../utils'
 import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
 
 export default defineComponent({
@@ -83,21 +83,21 @@ export default defineComponent({
         >
           {item.type === 'month'
             ? getMonthString(
-              item.dateObject.month,
-              item.monthFormat,
-              dateLocaleRef.value.locale
-            )
-            : item.type === 'quarter'
-              ? getQuarterString(
-                item.dateObject.quarter,
-                item.quarterFormat,
+                item.dateObject.month,
+                item.monthFormat,
                 dateLocaleRef.value.locale
               )
+            : item.type === 'quarter'
+              ? getQuarterString(
+                  item.dateObject.quarter,
+                  item.quarterFormat,
+                  dateLocaleRef.value.locale
+                )
               : getYearString(
-                item.dateObject.year,
-                item.yearFormat,
-                dateLocaleRef.value.locale
-              )}
+                  item.dateObject.year,
+                  item.yearFormat,
+                  dateLocaleRef.value.locale
+                )}
         </div>
       )
     }
@@ -303,9 +303,10 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
               {this.actions?.includes('clear')
                 ? resolveSlotWithProps(
-                  this.$slots.clear,
+                    this.$slots.clear,
                     {
-                      onClear: this.handleClearClick
+                      onClear: this.handleClearClick,
+                      text: this.locale.clear
                     } satisfies DatePickerClearSlotProps,
                     () => [
                       <NxButton
@@ -317,14 +318,15 @@ export default defineComponent({
                         {{ default: () => this.locale.clear }}
                       </NxButton>
                     ]
-                )
+                  )
                 : null}
               {this.actions?.includes('confirm')
                 ? resolveSlotWithProps(
-                  this.$slots.confirm,
+                    this.$slots.confirm,
                     {
                       disabled: this.isRangeInvalid,
-                      onConfirm: this.handleConfirmClick
+                      onConfirm: this.handleConfirmClick,
+                      text: this.locale.confirm
                     } satisfies DatePickerConfirmSlotProps,
                     () => [
                       <NxButton
@@ -338,7 +340,7 @@ export default defineComponent({
                         {{ default: () => this.locale.confirm }}
                       </NxButton>
                     ]
-                )
+                  )
                 : null}
             </div>
           </div>

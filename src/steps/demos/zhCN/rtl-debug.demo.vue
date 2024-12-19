@@ -3,10 +3,10 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import type { StepsProps } from 'naive-ui'
-import { unstableStepsRtl } from 'naive-ui'
 import { MdArrowRoundBack, MdArrowRoundForward } from '@vicons/ionicons4'
+import { unstableStepsRtl } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   components: { MdArrowRoundBack, MdArrowRoundForward },

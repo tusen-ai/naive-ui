@@ -3,13 +3,13 @@
 </markdown>
 
 <script lang="ts">
+import type { TransferOption } from 'naive-ui'
 import { defineComponent, ref } from 'vue'
-import type { Option } from '../../src/interface'
 
 export default defineComponent({
   setup() {
     const values = ref([1])
-    const options = ref<Option[]>([])
+    const options = ref<TransferOption[]>([])
     const getOptions = () => {
       setTimeout(() => {
         options.value = [

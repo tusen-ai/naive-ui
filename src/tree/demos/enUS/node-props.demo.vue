@@ -5,10 +5,10 @@ Use `node-props` to bind HTML attributes to node. For example click or contextme
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { repeat } from 'seemly'
 import type { DropdownOption, TreeOption } from 'naive-ui'
 import { useMessage } from 'naive-ui'
+import { repeat } from 'seemly'
+import { defineComponent, ref } from 'vue'
 
 function createData(level = 4, baseKey = ''): TreeOption[] | undefined {
   if (!level)

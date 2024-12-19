@@ -1,17 +1,17 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { TableTheme } from '../styles'
 import {
-  type CSSProperties,
-  type PropType,
   computed,
+  type CSSProperties,
   defineComponent,
-  h
+  h,
+  type PropType
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
-import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { tableLight } from '../styles'
-import type { TableTheme } from '../styles'
 import style from './styles/index.cssr'
 
 export const tableProps = {
@@ -106,13 +106,13 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'table',
-        computed(() => {
-          return props.size[0]
-        }),
-        cssVarsRef,
-        props
-      )
+          'table',
+          computed(() => {
+            return props.size[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       rtlEnabled: rtlEnabledRef,

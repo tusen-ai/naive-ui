@@ -1,23 +1,5 @@
-import {
-  type CSSProperties,
-  type ExtractPropTypes,
-  type PropType,
-  type Ref,
-  type Slots,
-  computed,
-  defineComponent,
-  h,
-  provide,
-  ref
-} from 'vue'
-import { useMergedState } from 'vooks'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, createInjectionKey, warn } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { type CollapseTheme, collapseLight } from '../styles'
-import { useRtl } from '../../_mixins/use-rtl'
-import style from './styles/index.cssr'
 import type {
   HeaderClickInfo,
   OnItemHeaderClick,
@@ -25,6 +7,24 @@ import type {
   OnUpdateExpandedNames,
   OnUpdateExpandedNamesImpl
 } from './interface'
+import { useMergedState } from 'vooks'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  type ExtractPropTypes,
+  h,
+  type PropType,
+  provide,
+  type Ref,
+  ref,
+  type Slots
+} from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
+import { call, createInjectionKey, warn } from '../../_utils'
+import { collapseLight, type CollapseTheme } from '../styles'
+import style from './styles/index.cssr'
 
 export const collapseProps = {
   ...(useTheme.props as ThemeProps<CollapseTheme>),

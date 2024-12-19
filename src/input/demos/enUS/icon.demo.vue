@@ -5,8 +5,8 @@ Set a prefix and/or suffix for the input.
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import { FlashOutline } from '@vicons/ionicons5'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {

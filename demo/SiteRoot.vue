@@ -1,8 +1,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { initRouter, siteSetup } from './store'
 import Site from './Site.vue'
+import { initRouter, siteSetup } from './store'
 
 export default defineComponent({
   name: 'SiteProvider',

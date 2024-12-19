@@ -1,22 +1,22 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { RateTheme } from '../styles'
+import type { RateOnUpdateValue, RateOnUpdateValueImpl } from './interface'
+import { useMergedState } from 'vooks'
 import {
-  type CSSProperties,
-  type PropType,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
+  type PropType,
   ref,
   renderList,
   toRef
 } from 'vue'
-import { useMergedState } from 'vooks'
 import { NBaseIcon } from '../../_internal'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import { call, color2Class, createKey } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { rateLight } from '../styles'
-import type { RateTheme } from '../styles'
-import type { RateOnUpdateValue, RateOnUpdateValueImpl } from './interface'
 import StarIcon from './StarIcon'
 import style from './styles/index.cssr'
 
@@ -146,22 +146,22 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'rate',
-        computed(() => {
-          const size = mergedSizeRef.value
-          const { color } = props
-          let hash = ''
-          if (size) {
-            hash += size[0]
-          }
-          if (color) {
-            hash += color2Class(color)
-          }
-          return hash
-        }),
-        cssVarsRef,
-        props
-      )
+          'rate',
+          computed(() => {
+            const size = mergedSizeRef.value
+            const { color } = props
+            let hash = ''
+            if (size) {
+              hash += size[0]
+            }
+            if (color) {
+              hash += color2Class(color)
+            }
+            return hash
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     return {

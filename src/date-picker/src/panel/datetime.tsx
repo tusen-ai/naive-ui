@@ -1,22 +1,22 @@
+import type {
+  DatePickerClearSlotProps,
+  DatePickerConfirmSlotProps,
+  DatePickerNowSlotProps
+} from '../public-types'
 import { defineComponent, h } from 'vue'
-import { NButton, NxButton } from '../../../button'
-import { NTimePicker } from '../../../time-picker'
-import { NInput } from '../../../input'
+import { NBaseFocusDetector } from '../../../_internal'
 import {
   BackwardIcon,
   FastBackwardIcon,
   FastForwardIcon,
   ForwardIcon
 } from '../../../_internal/icons'
-import { NBaseFocusDetector } from '../../../_internal'
 import { resolveSlot, resolveSlotWithProps } from '../../../_utils'
-import type {
-  DatePickerClearSlotProps,
-  DatePickerConfirmSlotProps,
-  DatePickerNowSlotProps
-} from '../public-types'
-import { useCalendar, useCalendarProps } from './use-calendar'
+import { NButton, NxButton } from '../../../button'
+import { NInput } from '../../../input'
+import { NTimePicker } from '../../../time-picker'
 import PanelHeader from './panelHeader'
+import { useCalendar, useCalendarProps } from './use-calendar'
 
 /**
  * DateTime Panel
@@ -100,7 +100,8 @@ export default defineComponent({
               {resolveSlot($slots['prev-month'], () => [<BackwardIcon />])}
             </div>
             <PanelHeader
-              monthBeforeYear={this.locale.monthBeforeYear}
+              monthYearSeparator={this.calendarHeaderMonthYearSeparator}
+              monthBeforeYear={this.calendarMonthBeforeYear}
               value={this.calendarValue}
               onUpdateValue={this.onUpdateCalendarValue}
               mergedClsPrefix={mergedClsPrefix}
@@ -198,9 +199,10 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
               {this.actions?.includes('clear')
                 ? resolveSlotWithProps(
-                  this.$slots.clear,
+                    this.$slots.clear,
                     {
-                      onClear: this.clearSelectedDateTime
+                      onClear: this.clearSelectedDateTime,
+                      text: this.locale.clear
                     } satisfies DatePickerClearSlotProps,
                     () => [
                       <NButton
@@ -212,13 +214,14 @@ export default defineComponent({
                         {{ default: () => this.locale.clear }}
                       </NButton>
                     ]
-                )
+                  )
                 : null}
               {this.actions?.includes('now')
                 ? resolveSlotWithProps(
-                  $slots.now,
+                    $slots.now,
                     {
-                      onNow: this.handleNowClick
+                      onNow: this.handleNowClick,
+                      text: this.locale.now
                     } satisfies DatePickerNowSlotProps,
                     () => [
                       <NButton
@@ -230,14 +233,15 @@ export default defineComponent({
                         {{ default: () => this.locale.now }}
                       </NButton>
                     ]
-                )
+                  )
                 : null}
               {this.actions?.includes('confirm')
                 ? resolveSlotWithProps(
-                  $slots.confirm,
+                    $slots.confirm,
                     {
                       onConfirm: this.handleConfirmClick,
-                      disabled: this.isDateInvalid
+                      disabled: this.isDateInvalid,
+                      text: this.locale.confirm
                     } satisfies DatePickerConfirmSlotProps,
                     () => [
                       <NButton
@@ -251,7 +255,7 @@ export default defineComponent({
                         {{ default: () => this.locale.confirm }}
                       </NButton>
                     ]
-                )
+                  )
                 : null}
             </div>
           </div>

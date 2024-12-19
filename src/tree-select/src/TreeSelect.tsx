@@ -1,30 +1,7 @@
-import {
-  type CSSProperties,
-  type HTMLAttributes,
-  type PropType,
-  Transition,
-  type VNodeChild,
-  computed,
-  defineComponent,
-  h,
-  provide,
-  ref,
-  toRef,
-  watchEffect,
-  withDirectives
-} from 'vue'
-import {
-  type FollowerInst,
-  type FollowerPlacement,
-  VBinder,
-  VFollower,
-  VTarget
-} from 'vueuc'
-import { useIsMounted, useMergedState } from 'vooks'
-import { clickoutside } from 'vdirs'
-import { type CheckStrategy, createTreeMate } from 'treemate'
-import { getPreciseEventTarget, happensIn } from 'seemly'
+import type { ThemeProps } from '../../_mixins'
 import type { FormValidationStatus } from '../../form/src/interface'
+import type { PopoverProps } from '../../popover'
+import type { SelectBaseOption, SelectOption } from '../../select/src/interface'
 import type {
   GetChildren,
   InternalTreeInst,
@@ -32,38 +9,7 @@ import type {
   TreeOption,
   TreeOverrideNodeClickBehaviorReturn
 } from '../../tree/src/interface'
-import type { SelectBaseOption, SelectOption } from '../../select/src/interface'
-import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
 import type { OnUpdateExpandedKeysImpl } from '../../tree/src/Tree'
-import {
-  type InternalSelectionInst,
-  NBaseFocusDetector,
-  NInternalSelection
-} from '../../_internal'
-import { NTree } from '../../tree'
-import { NEmpty } from '../../empty'
-import {
-  useConfig,
-  useFormItem,
-  useLocale,
-  useTheme,
-  useThemeClass
-} from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import {
-  type ExtractPublicPropTypes,
-  type MaybeArray,
-  call,
-  markEventEffectPerformed,
-  resolveSlot,
-  resolveWrappedSlot,
-  useAdjustedTo,
-  useOnResize,
-  warnOnce
-} from '../../_utils'
-import { type TreeSelectTheme, treeSelectLight } from '../styles'
-import { useMergedCheckStrategy } from '../../tree/src/utils'
-import type { PopoverProps } from '../../popover'
 import type {
   OnUpdateIndeterminateKeysImpl,
   OnUpdateValue,
@@ -77,12 +23,66 @@ import type {
   TreeSelectRenderTag,
   Value
 } from './interface'
+import { getPreciseEventTarget, happensIn } from 'seemly'
+import { type CheckStrategy, createTreeMate } from 'treemate'
+import { clickoutside } from 'vdirs'
+import { useIsMounted, useMergedState } from 'vooks'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  h,
+  type HTMLAttributes,
+  type PropType,
+  provide,
+  ref,
+  toRef,
+  Transition,
+  type VNodeChild,
+  watchEffect,
+  withDirectives
+} from 'vue'
+import {
+  type FollowerInst,
+  type FollowerPlacement,
+  VBinder,
+  VFollower,
+  VTarget
+} from 'vueuc'
+import {
+  type InternalSelectionInst,
+  NBaseFocusDetector,
+  NInternalSelection
+} from '../../_internal'
+import {
+  useConfig,
+  useFormItem,
+  useLocale,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
+import {
+  call,
+  type ExtractPublicPropTypes,
+  markEventEffectPerformed,
+  type MaybeArray,
+  resolveSlot,
+  resolveWrappedSlot,
+  useAdjustedTo,
+  useOnResize,
+  warnOnce
+} from '../../_utils'
+import { NEmpty } from '../../empty'
+import { NTree } from '../../tree'
+import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
+import { useMergedCheckStrategy } from '../../tree/src/utils'
+import { treeSelectLight, type TreeSelectTheme } from '../styles'
 import { treeSelectInjectionKey } from './interface'
+import style from './styles/index.cssr'
 import {
   treeOption2SelectOption,
   treeOption2SelectOptionWithPath
 } from './utils'
-import style from './styles/index.cssr'
 
 type OnLoad = (node: TreeSelectOption) => Promise<void>
 
@@ -305,11 +305,11 @@ export default defineComponent({
         if (tmNode !== null) {
           return showPath
             ? treeOption2SelectOptionWithPath(
-              tmNode,
-              treeMate.getPath(mergedValue).treeNodePath,
-              separator,
-              labelField
-            )
+                tmNode,
+                treeMate.getPath(mergedValue).treeNodePath,
+                separator,
+                labelField
+              )
             : treeOption2SelectOption(tmNode, labelField)
         }
       }
@@ -335,11 +335,11 @@ export default defineComponent({
             res.push(
               showPath
                 ? treeOption2SelectOptionWithPath(
-                  tmNode,
-                  treeMate.getPath(value).treeNodePath,
-                  separator,
-                  labelField
-                )
+                    tmNode,
+                    treeMate.getPath(value).treeNodePath,
+                    separator,
+                    labelField
+                  )
                 : treeOption2SelectOption(tmNode, labelField)
             )
           }

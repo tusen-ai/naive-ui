@@ -5,11 +5,11 @@ After much deliberation, I decided to drop the slot API for rendering options; h
 </markdown>
 
 <script lang="ts">
-import type { VNodeChild } from 'vue'
-import { defineComponent, h } from 'vue'
 import type { SelectGroupOption, SelectOption } from 'naive-ui'
-import { NIcon } from 'naive-ui'
+import type { VNodeChild } from 'vue'
 import { MdMusicalNote as MusicIcon } from '@vicons/ionicons4'
+import { NIcon } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   setup() {

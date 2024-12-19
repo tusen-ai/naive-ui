@@ -1,7 +1,7 @@
 const fs = require('node:fs').promises
 const path = require('node:path')
-const { genDts, collectVars } = require('./utils/collect-vars')
 const { walk } = require('./utils')
+const { genDts, collectVars } = require('./utils/collect-vars')
 
 const srcPath = path.resolve(__dirname, '..', 'src')
 

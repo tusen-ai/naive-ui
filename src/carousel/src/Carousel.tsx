@@ -1,5 +1,17 @@
+import type { CSSProperties, PropType, Ref, TransitionProps, VNode } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { CarouselTheme } from '../styles'
+import type {
+  ArrowScopedSlotProps,
+  CarouselInst,
+  DotScopedSlotProps,
+  Size
+} from './interface'
+import { off, on } from 'evtd'
+import { getPreciseEventTarget } from 'seemly'
+import { useMergedState } from 'vooks'
 import {
-  Transition,
   cloneVNode,
   computed,
   defineComponent,
@@ -11,22 +23,24 @@ import {
   onUpdated,
   ref,
   toRef,
+  Transition,
   vShow,
   watch,
   watchEffect,
   withDirectives
 } from 'vue'
-import type { CSSProperties, PropType, Ref, TransitionProps, VNode } from 'vue'
 import { VResizeObserver } from 'vueuc'
-import { useMergedState } from 'vooks'
-import { off, on } from 'evtd'
-import { getPreciseEventTarget } from 'seemly'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import { flatten, keep, resolveSlotWithProps } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { carouselLight } from '../styles'
-import type { CarouselTheme } from '../styles'
+import NCarouselArrow from './CarouselArrow'
+import {
+  type CarouselContextValue,
+  provideCarouselContext
+} from './CarouselContext'
+import NCarouselDots from './CarouselDots'
+import NCarouselItem, { isCarouselItem } from './CarouselItem'
+import style from './styles/index.cssr'
 import {
   addDuplicateSlides,
   calculateSize,
@@ -39,20 +53,6 @@ import {
   isTouchEvent,
   resolveSpeed
 } from './utils'
-import {
-  type CarouselContextValue,
-  provideCarouselContext
-} from './CarouselContext'
-import NCarouselDots from './CarouselDots'
-import NCarouselArrow from './CarouselArrow'
-import NCarouselItem, { isCarouselItem } from './CarouselItem'
-import type {
-  ArrowScopedSlotProps,
-  CarouselInst,
-  DotScopedSlotProps,
-  Size
-} from './interface'
-import style from './styles/index.cssr'
 
 const transitionProperties = [
   'transitionDuration',
@@ -185,10 +185,13 @@ export default defineComponent({
 
     // Carousel size
     const perViewSizeRef = ref({ width: 0, height: 0 })
+    const slideSizesTrigger = ref(0)
     const slideSizesRef = computed(() => {
       const { value: slidesEls } = slideElsRef
       if (!slidesEls.length)
         return []
+      // eslint-disable-next-line ts/no-unused-expressions
+      slideSizesTrigger.value
       const { value: autoSlideSize } = autoSlideSizeRef
       if (autoSlideSize) {
         return slidesEls.map(slide => calculateSize(slide))
@@ -739,8 +742,7 @@ export default defineComponent({
     }
     function handleSlideResize(): void {
       if (autoSlideSizeRef.value) {
-        slideSizesRef.effect.scheduler?.()
-        slideSizesRef.effect.run()
+        slideSizesTrigger.value++
       }
     }
     function handleMouseenter(): void {
@@ -1005,17 +1007,17 @@ export default defineComponent({
               >
                 {userWantsControl
                   ? slides.map((slide, i) => (
-                    <div style={slideStyles[i]} key={i}>
-                      {withDirectives(
-                        <Transition {...transitionProps}>
-                          {{
-                            default: () => slide
-                          }}
-                        </Transition>,
-                        [[vShow, this.isActive(i)]]
-                      )}
-                    </div>
-                  ))
+                      <div style={slideStyles[i]} key={i}>
+                        {withDirectives(
+                          <Transition {...transitionProps}>
+                            {{
+                              default: () => slide
+                            }}
+                          </Transition>,
+                          [[vShow, this.isActive(i)]]
+                        )}
+                      </div>
+                    ))
                   : slides}
               </div>
             )

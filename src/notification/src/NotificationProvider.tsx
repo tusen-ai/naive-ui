@@ -1,30 +1,30 @@
+import type { MergedTheme, ThemeProps } from '../../_mixins'
+import type { NotificationOptions } from './NotificationEnvironment'
+import { createId } from 'seemly'
 import {
   type CSSProperties,
+  defineComponent,
   type ExtractPropTypes,
   Fragment,
-  type PropType,
-  type Ref,
-  Teleport,
-  defineComponent,
   h,
+  type PropType,
   provide,
   reactive,
-  ref
+  type Ref,
+  ref,
+  Teleport
 } from 'vue'
-import { createId } from 'seemly'
 import { useConfig, useTheme } from '../../_mixins'
-import type { MergedTheme, ThemeProps } from '../../_mixins'
 import {
+  createInjectionKey,
   type ExtractPublicPropTypes,
   type Mutable,
-  createInjectionKey,
   omit
 } from '../../_utils'
-import { type NotificationTheme, notificationLight } from '../styles'
+import { notificationLight, type NotificationTheme } from '../styles'
+import { notificationProviderInjectionKey } from './context'
 import { NotificationContainer } from './NotificationContainer'
 import { NotificationEnvironment } from './NotificationEnvironment'
-import type { NotificationOptions } from './NotificationEnvironment'
-import { notificationProviderInjectionKey } from './context'
 import style from './styles/index.cssr'
 
 export type NotificationPlacement =

@@ -1,7 +1,7 @@
 import type { Ref } from 'vue'
 import type { MergedTheme } from '../../_mixins'
-import { createInjectionKey } from '../../_utils'
 import type { LegacyTransferTheme } from '../styles'
+import { createInjectionKey } from '../../_utils'
 
 export type OptionValue = string | number
 export interface Option {

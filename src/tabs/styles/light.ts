@@ -1,6 +1,6 @@
-import { commonLight } from '../../_styles/common'
-import type { ThemeCommonVars } from '../../_styles/common'
 import type { Theme } from '../../_mixins'
+import type { ThemeCommonVars } from '../../_styles/common'
+import { commonLight } from '../../_styles/common'
 import sizeVariables from './_common'
 
 export function self(vars: ThemeCommonVars) {

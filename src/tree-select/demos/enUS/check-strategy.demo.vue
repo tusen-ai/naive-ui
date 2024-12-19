@@ -5,8 +5,8 @@ Set the way to display selected nodes when parents and children are selected. `a
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import type { TreeSelectOption } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {

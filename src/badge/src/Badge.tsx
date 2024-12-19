@@ -1,16 +1,19 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { BadgeTheme } from '../styles'
 import {
-  type CSSProperties,
-  type PropType,
-  Transition,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
   onMounted,
-  ref
+  type PropType,
+  ref,
+  Transition
 } from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import { NBaseSlotMachine, NBaseWave } from '../../_internal'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
 import {
   color2Class,
   createKey,
@@ -18,10 +21,7 @@ import {
   isSlotEmpty,
   resolveSlot
 } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { badgeLight } from '../styles'
-import type { BadgeTheme } from '../styles'
-import { useRtl } from '../../_mixins/use-rtl'
 import style from './styles/index.cssr'
 
 export const badgeProps = {
@@ -74,9 +74,9 @@ export default defineComponent({
       return (
         props.show
         && (props.dot
-        || (props.value !== undefined
-        && !(!props.showZero && Number(props.value) <= 0))
-        || !isSlotEmpty(slots.value))
+          || (props.value !== undefined
+            && !(!props.showZero && Number(props.value) <= 0))
+          || !isSlotEmpty(slots.value))
       )
     })
     onMounted(() => {
@@ -103,21 +103,21 @@ export default defineComponent({
 
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'badge',
-        computed(() => {
-          let hash = ''
-          const { type, color } = props
-          if (type) {
-            hash += type[0]
-          }
-          if (color) {
-            hash += color2Class(color)
-          }
-          return hash
-        }),
-        cssVarsRef,
-        props
-      )
+          'badge',
+          computed(() => {
+            let hash = ''
+            const { type, color } = props
+            if (type) {
+              hash += type[0]
+            }
+            if (color) {
+              hash += color2Class(color)
+            }
+            return hash
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     const offsetStyleRef = computed(() => {

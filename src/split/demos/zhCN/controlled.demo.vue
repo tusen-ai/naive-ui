@@ -3,8 +3,8 @@
 </markdown>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { NInputNumber, NSplit } from 'naive-ui'
+import { ref } from 'vue'
 
 const split = ref<number>(0.8)
 </script>

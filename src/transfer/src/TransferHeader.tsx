@@ -1,6 +1,6 @@
-import { type PropType, type VNodeChild, defineComponent, h, inject } from 'vue'
-import { NButton } from '../../button'
+import { defineComponent, h, inject, type PropType, type VNodeChild } from 'vue'
 import { useLocale } from '../../_mixins'
+import { NButton } from '../../button'
 import { transferInjectionKey } from './interface'
 
 export default defineComponent({
@@ -41,7 +41,7 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-transfer-list-header`}>
           {title && (
             <div class={`${mergedClsPrefix}-transfer-list-header__title`}>
-              {typeof title === 'function' ? [title()] : [title]}
+              {typeof title === 'function' ? title() : title}
             </div>
           )}
           {source && (

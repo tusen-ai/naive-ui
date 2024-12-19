@@ -1,10 +1,10 @@
-import { internalSelectionLight } from '../../_internal/selection/styles'
-import { internalSelectMenuLight } from '../../_internal/select-menu/styles'
-import { scrollbarLight } from '../../_internal/scrollbar/styles'
-import { checkboxLight } from '../../checkbox/styles'
-import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
+import { scrollbarLight } from '../../_internal/scrollbar/styles'
+import { internalSelectMenuLight } from '../../_internal/select-menu/styles'
+import { internalSelectionLight } from '../../_internal/selection/styles'
 import { createTheme } from '../../_mixins'
+import { commonLight } from '../../_styles/common'
+import { checkboxLight } from '../../checkbox/styles'
 import { emptyLight } from '../../empty/styles'
 
 export function self(vars: ThemeCommonVars) {

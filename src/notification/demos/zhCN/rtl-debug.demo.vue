@@ -3,13 +3,13 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h, ref } from 'vue'
 import {
   NAvatar,
   NButton,
   unstableNotificationRtl,
   useNotification
 } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
 
 const NotificationButton = defineComponent({
   setup() {

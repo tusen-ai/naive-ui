@@ -5,8 +5,8 @@ Set `multiple: false` to make the column of `type='selection` a single selection
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import type { DataTableColumns } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 interface RowData {
   key: number

@@ -1,9 +1,9 @@
-import { type PropType, defineComponent, h, ref, watchEffect } from 'vue'
-import { onFontsReady } from 'vooks'
-import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
+import { onFontsReady } from 'vooks'
+import { defineComponent, h, type PropType, ref, watchEffect } from 'vue'
+import { useConfig, useTheme } from '../../_mixins'
 import { type ExtractPublicPropTypes, isBrowser, warnOnce } from '../../_utils'
-import { type WatermarkTheme, watermarkLight } from '../styles'
+import { watermarkLight, type WatermarkTheme } from '../styles'
 import style from './styles/index.cssr'
 
 function getRatio(context: any): number {
@@ -181,13 +181,13 @@ export default defineComponent({
               canvasOffsetLeft,
               canvasOffsetTop,
               (props.imageWidth
-              || (imageHeight
-                ? (img.width * imageHeight) / img.height
-                : img.width)) * ratio,
+                || (imageHeight
+                  ? (img.width * imageHeight) / img.height
+                  : img.width)) * ratio,
               (props.imageHeight
-              || (imageWidth
-                ? (img.height * imageWidth) / img.width
-                : img.height)) * ratio
+                || (imageWidth
+                  ? (img.height * imageWidth) / img.width
+                  : img.height)) * ratio
             )
             base64UrlRef.value = canvas.toDataURL()
           }
@@ -269,10 +269,10 @@ export default defineComponent({
                   : ''
                 : props.cross
                   ? `calc(${rotatedImageOffset} + ${
-                      props.width / 2
-                    }px) calc(${rotatedImageOffset} + ${
-                      props.height / 2
-                    }px), ${rotatedImageOffset} ${rotatedImageOffset}`
+                    props.width / 2
+                  }px) calc(${rotatedImageOffset} + ${
+                    props.height / 2
+                  }px), ${rotatedImageOffset} ${rotatedImageOffset}`
                   : rotatedImageOffset,
             backgroundImage: props.cross
               ? `url(${base64UrlRef.value}), url(${base64UrlRef.value})`

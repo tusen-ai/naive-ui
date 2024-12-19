@@ -5,19 +5,21 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h, reactive } from 'vue'
 import type { DataTableBaseColumn, DataTableColumns } from 'naive-ui'
-import { NButton, NIcon, NSpace } from 'naive-ui'
 import { PawOutline, SearchOutline } from '@vicons/ionicons5'
+import { NButton, NIcon, NSpace } from 'naive-ui'
+import { defineComponent, h, reactive } from 'vue'
 
 const data = [
   {
     Left: '1',
-    Right: '1'
+    Right: '1',
+    key: 1
   },
   {
     Left: '2',
-    Right: '2'
+    Right: '2',
+    key: 2
   }
 ]
 

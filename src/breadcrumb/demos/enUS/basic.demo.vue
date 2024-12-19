@@ -3,8 +3,8 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import { MdCash } from '@vicons/ionicons4'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {

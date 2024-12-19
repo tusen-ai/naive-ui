@@ -1,46 +1,9 @@
-import {
-  type CSSProperties,
-  Fragment,
-  type PropType,
-  type VNodeChild,
-  computed,
-  defineComponent,
-  h,
-  nextTick,
-  ref,
-  toRef,
-  watchEffect
-} from 'vue'
-import { useMergedState } from 'vooks'
-import { NPopselect } from '../../popselect'
-import { NSelect } from '../../select'
-import type { SelectProps } from '../../select'
-import { NInput } from '../../input'
-import { NBaseIcon } from '../../_internal'
-import {
-  BackwardIcon,
-  FastBackwardIcon,
-  FastForwardIcon,
-  ForwardIcon,
-  MoreIcon
-} from '../../_internal/icons'
 import type { ThemeProps } from '../../_mixins'
-import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
-import type { PaginationTheme } from '../styles'
-import { paginationLight } from '../styles'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import {
-  call,
-  createKey,
-  resolveSlot,
-  smallerSize,
-  useAdjustedTo,
-  warn,
-  warnOnce
-} from '../../_utils'
 import type { Size as InputSize } from '../../input/src/interface'
+import type { SelectProps } from '../../select'
 import type { Size as SelectSize } from '../../select/src/interface'
-import { useRtl } from '../../_mixins/use-rtl'
+import type { PaginationTheme } from '../styles'
 import type {
   PaginationRenderLabel,
   PaginationSizeOption,
@@ -51,9 +14,46 @@ import type {
   RenderSuffix,
   Size
 } from './interface'
+import type { PageItem } from './utils'
+import { useMergedState } from 'vooks'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  Fragment,
+  h,
+  nextTick,
+  type PropType,
+  ref,
+  toRef,
+  type VNodeChild,
+  watchEffect
+} from 'vue'
+import { NBaseIcon } from '../../_internal'
+import {
+  BackwardIcon,
+  FastBackwardIcon,
+  FastForwardIcon,
+  ForwardIcon,
+  MoreIcon
+} from '../../_internal/icons'
+import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
+import {
+  call,
+  createKey,
+  resolveSlot,
+  smallerSize,
+  useAdjustedTo,
+  warn,
+  warnOnce
+} from '../../_utils'
+import { NInput } from '../../input'
+import { NPopselect } from '../../popselect'
+import { NSelect } from '../../select'
+import { paginationLight } from '../styles'
 import style from './styles/index.cssr'
 import { createPageItemsInfo, getDefaultPageSize } from './utils'
-import type { PageItem } from './utils'
 
 export const paginationProps = {
   ...(useTheme.props as ThemeProps<PaginationTheme>),
@@ -501,16 +501,16 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'pagination',
-        computed(() => {
-          let hash = ''
-          const { size } = props
-          hash += size[0]
-          return hash
-        }),
-        cssVarsRef,
-        props
-      )
+          'pagination',
+          computed(() => {
+            let hash = ''
+            const { size } = props
+            hash += size[0]
+            return hash
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       rtlEnabled: rtlEnabledRef,
@@ -626,8 +626,8 @@ export default defineComponent({
                       !renderPrev
                       && `${mergedClsPrefix}-pagination-item--button`,
                       (mergedPage <= 1
-                      || mergedPage > mergedPageCount
-                      || disabled)
+                        || mergedPage > mergedPageCount
+                        || disabled)
                       && `${mergedClsPrefix}-pagination-item--disabled`
                     ]}
                     onClick={handleBackwardClick}
@@ -765,9 +765,9 @@ export default defineComponent({
                             && `${mergedClsPrefix}-pagination-item--active`,
                             type !== 'page'
                             && ((type === 'fast-backward'
-                            && this.showFastBackwardMenu)
+                              && this.showFastBackwardMenu)
                             || (type === 'fast-forward'
-                            && this.showFastForwardMenu))
+                              && this.showFastForwardMenu))
                             && `${mergedClsPrefix}-pagination-item--hover`,
                             disabled
                             && `${mergedClsPrefix}-pagination-item--disabled`,

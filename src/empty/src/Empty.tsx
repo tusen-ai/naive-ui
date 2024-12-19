@@ -1,18 +1,18 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { EmptyTheme } from '../styles'
 import {
-  type PropType,
-  type VNodeChild,
   computed,
   defineComponent,
-  h
+  h,
+  type PropType,
+  type VNodeChild
 } from 'vue'
 import { NBaseIcon } from '../../_internal/icon'
 import { EmptyIcon } from '../../_internal/icons'
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { emptyLight } from '../styles'
-import type { EmptyTheme } from '../styles'
 import style from './styles/index.cssr'
 
 export const emptyProps = {
@@ -83,16 +83,16 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'empty',
-        computed(() => {
-          let hash = ''
-          const { size } = props
-          hash += size[0]
-          return hash
-        }),
-        cssVarsRef,
-        props
-      )
+          'empty',
+          computed(() => {
+            let hash = ''
+            const { size } = props
+            hash += size[0]
+            return hash
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,

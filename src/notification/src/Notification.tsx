@@ -1,22 +1,22 @@
+import { getPadding } from 'seemly'
 import {
-  type CSSProperties,
-  type PropType,
-  type VNodeChild,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
-  inject
+  inject,
+  type PropType,
+  type VNodeChild
 } from 'vue'
-import { getPadding } from 'seemly'
+import { NBaseClose, NBaseIcon } from '../../_internal'
 import {
   ErrorIcon,
   InfoIcon,
   SuccessIcon,
   WarningIcon
 } from '../../_internal/icons'
-import { createKey, keysOf, render } from '../../_utils'
-import { NBaseClose, NBaseIcon } from '../../_internal'
 import { useConfig, useRtl, useThemeClass } from '../../_mixins'
+import { createKey, keysOf, render } from '../../_utils'
 import { notificationProviderInjectionKey } from './context'
 
 const iconRenderMap = {
@@ -139,11 +139,11 @@ export const Notification = defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'notification',
-        computed(() => props.type[0]),
-        cssVarsRef,
-        providerProps
-      )
+          'notification',
+          computed(() => props.type[0]),
+          cssVarsRef,
+          providerProps
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,

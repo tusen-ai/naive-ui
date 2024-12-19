@@ -5,9 +5,9 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h, nextTick, ref } from 'vue'
 import type { DataTableColumns, DropdownOption } from 'naive-ui'
 import { useMessage } from 'naive-ui'
+import { defineComponent, h, nextTick, ref } from 'vue'
 
 interface Song {
   no: number

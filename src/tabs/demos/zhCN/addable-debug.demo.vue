@@ -3,8 +3,8 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import { NTab, NTabs } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'App',

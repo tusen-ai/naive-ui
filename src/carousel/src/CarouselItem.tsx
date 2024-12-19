@@ -1,3 +1,5 @@
+import type { VNode } from 'vue'
+import { camelCase } from 'lodash-es'
 import {
   computed,
   defineComponent,
@@ -6,8 +8,6 @@ import {
   onMounted,
   ref
 } from 'vue'
-import type { VNode } from 'vue'
-import { camelCase } from 'lodash-es'
 import { useConfig } from '../../_mixins'
 import { useCarouselContext } from './CarouselContext'
 

@@ -1,5 +1,5 @@
-import type { ExtractPropTypes, PropType, VNodeChild } from 'vue'
 import type { Key } from 'treemate'
+import type { ExtractPropTypes, PropType, VNodeChild } from 'vue'
 
 export const useMenuChildProps = {
   internalKey: {

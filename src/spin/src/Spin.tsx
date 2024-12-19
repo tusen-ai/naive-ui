@@ -1,21 +1,21 @@
+import type { ThemeProps } from '../../_mixins'
+import type { SpinTheme } from '../styles'
+import { pxfy } from 'seemly'
+import { useCompitable } from 'vooks'
 import {
-  type CSSProperties,
-  type PropType,
-  Transition,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
+  type PropType,
   ref,
+  Transition,
   watchEffect
 } from 'vue'
-import { useCompitable } from 'vooks'
-import { pxfy } from 'seemly'
 import { NBaseLoading } from '../../_internal'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import { type ExtractPublicPropTypes, createKey, warnOnce } from '../../_utils'
+import { createKey, type ExtractPublicPropTypes, warnOnce } from '../../_utils'
 import { spinLight } from '../styles'
-import type { SpinTheme } from '../styles'
 import style from './styles/index.cssr'
 
 const STROKE_WIDTH = {
@@ -99,14 +99,14 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'spin',
-        computed(() => {
-          const { size } = props
-          return typeof size === 'number' ? String(size) : size[0]
-        }),
-        cssVarsRef,
-        props
-      )
+          'spin',
+          computed(() => {
+            const { size } = props
+            return typeof size === 'number' ? String(size) : size[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     const compitableShow = useCompitable(props, ['spinning', 'show'])

@@ -1,8 +1,8 @@
-import { type ComputedRef, computed } from 'vue'
 import type { CheckStrategy } from 'treemate'
-import { happensIn } from 'seemly'
-import { isBrowser } from '../../_utils'
 import type { Key, TmNode, TreeOption } from './interface'
+import { happensIn } from 'seemly'
+import { computed, type ComputedRef } from 'vue'
+import { isBrowser } from '../../_utils'
 
 export function useMergedCheckStrategy(props: {
   leafOnly: boolean

@@ -1,7 +1,7 @@
-import { composite } from 'seemly'
-import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
+import { composite } from 'seemly'
 import { createTheme } from '../../_mixins'
+import { commonLight } from '../../_styles/common'
 import { buttonLight } from '../../button/styles'
 import commonVariables from './_common'
 

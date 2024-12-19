@@ -1,5 +1,5 @@
-import { h } from 'vue'
 import { mount } from '@vue/test-utils'
+import { h } from 'vue'
 import {
   NPagination,
   type PaginationInfo,

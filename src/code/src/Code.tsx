@@ -1,9 +1,11 @@
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { CodeTheme } from '../styles'
 import {
-  type PropType,
   computed,
   defineComponent,
   h,
   onMounted,
+  type PropType,
   ref,
   toRef,
   watch
@@ -17,8 +19,6 @@ import {
   useThemeClass
 } from '../../_mixins'
 import { codeLight } from '../styles'
-import type { CodeTheme } from '../styles'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import style from './styles/index.cssr'
 
 export const codeProps = {
@@ -171,13 +171,13 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'code',
-        computed(() => {
-          return `${props.internalFontSize || 'a'}`
-        }),
-        cssVarsRef,
-        props
-      )
+          'code',
+          computed(() => {
+            return `${props.internalFontSize || 'a'}`
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,

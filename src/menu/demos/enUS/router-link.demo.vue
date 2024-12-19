@@ -5,15 +5,15 @@ Usually you can use vue-router here to accomplish routing. You can render `label
 </markdown>
 
 <script lang="ts">
-import type { Component } from 'vue'
-import { defineComponent, h } from 'vue'
-import { NIcon } from 'naive-ui'
 import type { MenuOption } from 'naive-ui'
-import { RouterLink } from 'vue-router'
+import type { Component } from 'vue'
 import {
   LogOutOutline as HomeIcon,
   LaptopOutline as WorkIcon
 } from '@vicons/ionicons5'
+import { NIcon } from 'naive-ui'
+import { defineComponent, h } from 'vue'
+import { RouterLink } from 'vue-router'
 
 function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })

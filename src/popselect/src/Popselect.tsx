@@ -1,23 +1,23 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { PopoverInst, PopoverTrigger } from '../../popover'
+import type { PopoverInternalProps } from '../../popover/src/Popover'
+import type { PopselectTheme } from '../styles'
 import {
-  type ExtractPropTypes,
-  type PropType,
   defineComponent,
+  type ExtractPropTypes,
   h,
+  type PropType,
   provide,
   ref
 } from 'vue'
-import { popoverBaseProps } from '../../popover/src/Popover'
-import type { PopoverInternalProps } from '../../popover/src/Popover'
-import { NPopover } from '../../popover'
-import type { PopoverInst, PopoverTrigger } from '../../popover'
-import { createRefSetter, keep, mergeEventHandlers, omit } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { useConfig, useTheme } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
+import { createRefSetter, keep, mergeEventHandlers, omit } from '../../_utils'
+import { NPopover } from '../../popover'
+import { popoverBaseProps } from '../../popover/src/Popover'
 import { popselectLight } from '../styles'
-import type { PopselectTheme } from '../styles'
+import { popselectInjectionKey, type PopselectInst } from './interface'
 import NPopselectPanel, { panelPropKeys, panelProps } from './PopselectPanel'
-import { type PopselectInst, popselectInjectionKey } from './interface'
 
 export const popselectProps = {
   ...(useTheme.props as ThemeProps<PopselectTheme>),

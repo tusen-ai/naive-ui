@@ -1,10 +1,10 @@
 import {
-  type InjectionKey,
-  type Ref,
   getCurrentInstance,
   inject,
+  type InjectionKey,
   onBeforeUnmount,
   onMounted,
+  type Ref,
   watch
 } from 'vue'
 

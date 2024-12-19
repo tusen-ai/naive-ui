@@ -5,9 +5,9 @@ Is there anybody who needs slots on a cascader menu?
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import type { CascaderOption } from 'naive-ui'
 import Flash16Regular from '@vicons/fluent/Flash16Regular'
+import { defineComponent, ref } from 'vue'
 
 function getOptions(depth = 2, iterator = 1, prefix = '') {
   const length = 12

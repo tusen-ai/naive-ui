@@ -5,8 +5,8 @@ Naive UI 提供 `useOsTheme` 来获取当前操作系统的主题。
 </markdown>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
 import { darkTheme, useOsTheme } from 'naive-ui'
+import { computed, defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {

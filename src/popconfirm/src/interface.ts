@@ -1,9 +1,9 @@
 import type { Ref } from 'vue'
-import type { PopoverInst } from '../../popover'
 import type { MergedTheme } from '../../_mixins'
-import { createInjectionKey } from '../../_utils'
+import type { PopoverInst } from '../../popover'
 import type { PopconfirmTheme } from '../styles'
 import type { PopconfirmSetupProps } from './Popconfirm'
+import { createInjectionKey } from '../../_utils'
 
 export type PopconfirmInst = PopoverInst
 

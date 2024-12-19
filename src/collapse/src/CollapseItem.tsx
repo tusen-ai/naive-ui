@@ -1,14 +1,14 @@
-import { type PropType, computed, defineComponent, h, inject, toRef } from 'vue'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { createId, happensIn } from 'seemly'
 import { useMemo } from 'vooks'
+import { computed, defineComponent, h, inject, type PropType, toRef } from 'vue'
+import { NBaseIcon } from '../../_internal'
 import {
   ChevronLeftIcon as ArrowLeftIcon,
   ChevronRightIcon as ArrowRightIcon
 } from '../../_internal/icons'
-import { useRtl } from '../../_mixins/use-rtl'
 import { useConfig } from '../../_mixins'
-import { NBaseIcon } from '../../_internal'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { useRtl } from '../../_mixins/use-rtl'
 import {
   resolveSlotWithProps,
   resolveWrappedSlotWithProps,

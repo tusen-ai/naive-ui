@@ -1,2 +1,2 @@
-export { default as NAvatarGroup, avatarGroupProps } from './src/AvatarGroup'
-export type { AvatarGroupProps, AvatarGroupOption } from './src/AvatarGroup'
+export { avatarGroupProps, default as NAvatarGroup } from './src/AvatarGroup'
+export type { AvatarGroupOption, AvatarGroupProps } from './src/AvatarGroup'

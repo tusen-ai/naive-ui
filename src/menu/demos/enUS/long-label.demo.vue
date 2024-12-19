@@ -5,9 +5,9 @@ Set `label` to render function that renders `n-ellipsis`.
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h } from 'vue'
-import { NEllipsis } from 'naive-ui'
 import type { MenuOption } from 'naive-ui'
+import { NEllipsis } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   setup() {

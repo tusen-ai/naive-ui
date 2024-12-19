@@ -1,21 +1,21 @@
 import type { Ref, Slots, UnwrapNestedRefs } from 'vue'
 import type { VirtualListInst } from 'vueuc'
-import type { NDateLocale, NLocale } from '../../locales'
 import type { ScrollbarInst } from '../../_internal'
+import type { MergedTheme } from '../../_mixins'
+import type { ButtonProps } from '../../button'
+import type { NDateLocale, NLocale } from '../../locales'
 import type {
   IsHourDisabled,
   IsMinuteDisabled,
   IsSecondDisabled
 } from '../../time-picker/src/interface'
 import type { TimePickerProps } from '../../time-picker/src/TimePicker'
-import type { MergedTheme } from '../../_mixins'
-import { createInjectionKey } from '../../_utils'
 import type { DatePickerTheme } from '../styles/light'
-import type { ButtonProps } from '../../button'
 import type {
   dualCalendarValidation,
   uniCalendarValidation
 } from './validation-utils'
+import { createInjectionKey } from '../../_utils'
 
 export type Value = number | [number, number]
 
@@ -43,13 +43,13 @@ export type Shortcuts =
 
 export type OnUpdateValue = (
   value: number &
-  (number | null) &
-  [number, number] &
-  ([number, number] | null),
+    (number | null) &
+    [number, number] &
+    ([number, number] | null),
   formattedValue: string &
-  (string | null) &
-  [string, string] &
-  ([string, string] | null)
+    (string | null) &
+    [string, string] &
+    ([string, string] | null)
 ) => void
 
 export type OnConfirm = OnUpdateValue
@@ -58,13 +58,13 @@ export type OnConfirmImpl = OnUpdateValueImpl
 
 export type OnUpdateFormattedValue = (
   value: string &
-  (string | null) &
-  [string, string] &
-  ([string, string] | null),
+    (string | null) &
+    [string, string] &
+    ([string, string] | null),
   timestampValue: number &
-  (number | null) &
-  [number, number] &
-  ([number, number] | null)
+    (number | null) &
+    [number, number] &
+    ([number, number] | null)
 ) => void
 
 export type OnUpdateFormattedValueImpl = (
@@ -79,9 +79,9 @@ export type OnUpdateValueImpl = (
 
 export type OnPanelUpdateValue = (
   value: number &
-  (number | null) &
-  [number, number] &
-  ([number, number] | null),
+    (number | null) &
+    [number, number] &
+    ([number, number] | null),
   doUpdate: boolean
 ) => void
 

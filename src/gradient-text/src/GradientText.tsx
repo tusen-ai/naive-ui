@@ -1,10 +1,10 @@
-import { type PropType, computed, defineComponent, h } from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { createKey, formatLength, useHoudini } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { gradientTextLight } from '../styles'
 import type { GradientTextTheme } from '../styles'
+import { computed, defineComponent, h, type PropType } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { createKey, formatLength, useHoudini } from '../../_utils'
+import { gradientTextLight } from '../styles'
 import style from './styles/index.cssr'
 
 type Gradient =
@@ -93,11 +93,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'gradient-text',
-        computed(() => compatibleTypeRef.value[0]),
-        cssVarsRef,
-        props
-      )
+          'gradient-text',
+          computed(() => compatibleTypeRef.value[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,

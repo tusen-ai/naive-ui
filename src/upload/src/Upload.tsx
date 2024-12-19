@@ -1,26 +1,6 @@
-import {
-  type CSSProperties,
-  Fragment,
-  type InputHTMLAttributes,
-  type PropType,
-  Teleport,
-  computed,
-  defineComponent,
-  h,
-  nextTick,
-  provide,
-  ref,
-  toRef
-} from 'vue'
-import { createId } from 'seemly'
-import { useMergedState } from 'vooks'
-import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { call, throwError, warn } from '../../_utils'
 import type { ImageGroupProps } from '../../image'
-import { type UploadTheme, uploadLight } from '../styles'
-import { uploadDraggerKey } from './UploadDragger'
 import type {
   CreateThumbnailUrl,
   CustomRequest,
@@ -38,16 +18,6 @@ import type {
   UploadInternalInst,
   XhrHandlers
 } from './interface'
-import { uploadInjectionKey } from './interface'
-import {
-  createImageDataUrl,
-  createSettledFileInfo,
-  environmentSupportFile,
-  isImageFile,
-  matchType
-} from './utils'
-import NUploadTrigger from './UploadTrigger'
-import NUploadFileList from './UploadFileList'
 import type {
   UploadFileInfo,
   UploadInst,
@@ -57,7 +27,37 @@ import type {
   UploadOnRemove,
   UploadSettledFileInfo
 } from './public-types'
+import { createId } from 'seemly'
+import { useMergedState } from 'vooks'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  Fragment,
+  h,
+  type InputHTMLAttributes,
+  nextTick,
+  type PropType,
+  provide,
+  ref,
+  Teleport,
+  toRef
+} from 'vue'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import { call, throwError, warn } from '../../_utils'
+import { uploadLight, type UploadTheme } from '../styles'
+import { uploadInjectionKey } from './interface'
 import style from './styles/index.cssr'
+import { uploadDraggerKey } from './UploadDragger'
+import NUploadFileList from './UploadFileList'
+import NUploadTrigger from './UploadTrigger'
+import {
+  createImageDataUrl,
+  createSettledFileInfo,
+  environmentSupportFile,
+  isImageFile,
+  matchType
+} from './utils'
 
 /**
  * fils status ['pending', 'uploading', 'finished', 'removed', 'error']
@@ -443,10 +443,10 @@ export default defineComponent({
       handleFileAddition(
         target.files
           ? Array.from(target.files).map(file => ({
-            file,
-            entry: null,
-            source: 'input'
-          }))
+              file,
+              entry: null,
+              source: 'input'
+            }))
           : null,
         e
       )

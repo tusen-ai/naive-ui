@@ -1,9 +1,9 @@
 import type { Ref } from 'vue'
-import { createInjectionKey } from '../../_utils'
 import type {
   MessageApiInjection,
   MessageProviderSetupProps
 } from './MessageProvider'
+import { createInjectionKey } from '../../_utils'
 
 export const messageApiInjectionKey
   = createInjectionKey<MessageApiInjection>('n-message-api')

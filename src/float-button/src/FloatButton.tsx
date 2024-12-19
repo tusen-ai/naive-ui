@@ -1,31 +1,31 @@
+import { off, on } from 'evtd'
+import { useMergedState } from 'vooks'
 import {
-  type CSSProperties,
-  type PropType,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
   inject,
   onBeforeUnmount,
   onMounted,
+  type PropType,
   ref,
   toRef
 } from 'vue'
-import { useMergedState } from 'vooks'
-import { off, on } from 'evtd'
-import { floatButtonGroupInjectionKey } from '../../float-button-group/src/FloatButtonGroup'
+import { NBaseIcon } from '../../_internal'
+import { CloseIcon } from '../../_internal/icons'
+import { type ThemeProps, useTheme, useThemeClass } from '../../_mixins'
+import useConfig from '../../_mixins/use-config'
 import {
-  type ExtractPublicPropTypes,
-  type MaybeArray,
   call,
+  type ExtractPublicPropTypes,
   formatLength,
+  type MaybeArray,
   resolveSlot,
   resolveWrappedSlot
 } from '../../_utils'
-import useConfig from '../../_mixins/use-config'
-import { type ThemeProps, useTheme, useThemeClass } from '../../_mixins'
-import { type FloatButtonTheme, floatButtonLight } from '../styles'
-import { NBaseIcon } from '../../_internal'
-import { CloseIcon } from '../../_internal/icons'
+import { floatButtonGroupInjectionKey } from '../../float-button-group/src/FloatButtonGroup'
+import { floatButtonLight, type FloatButtonTheme } from '../styles'
 import style from './styles/index.cssr'
 
 export const floatButtonProps = {
@@ -177,11 +177,11 @@ export default defineComponent({
 
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'float-button',
-        computed(() => props.type[0]),
-        cssVarsRef,
-        props
-      )
+          'float-button',
+          computed(() => props.type[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     onMounted(() => {

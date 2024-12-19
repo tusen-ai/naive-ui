@@ -5,9 +5,9 @@ Dropdown options can be cascaded.
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h } from 'vue'
-import { NIcon, useMessage } from 'naive-ui'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
+import { NIcon, useMessage } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 const options = [
   {

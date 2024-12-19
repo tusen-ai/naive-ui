@@ -1,10 +1,10 @@
-import type { Ref, VNodeChild } from 'vue'
 import type {
   RuleItem,
   ValidateError,
   ValidateMessages,
   ValidateOption
 } from 'async-validator'
+import type { Ref, VNodeChild } from 'vue'
 import type { FormSetupProps } from './Form'
 
 export interface FormRules {

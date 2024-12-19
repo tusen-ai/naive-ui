@@ -1,20 +1,20 @@
-import {
-  type CSSProperties,
-  type PropType,
-  computed,
-  defineComponent,
-  h,
-  provide
-} from 'vue'
-import type { Size } from '../../avatar/src/interface'
-import { avatarGroupInjectionKey } from '../../avatar/src/context'
-import NAvatar from '../../avatar/src/Avatar'
-import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { useRtl } from '../../_mixins/use-rtl'
-import { avatarGroupLight } from '../styles'
+import type { Size } from '../../avatar/src/interface'
 import type { AvatarGroupTheme } from '../styles'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  h,
+  type PropType,
+  provide
+} from 'vue'
+import { useConfig, useTheme } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
+import NAvatar from '../../avatar/src/Avatar'
+import { avatarGroupInjectionKey } from '../../avatar/src/context'
+import { avatarGroupLight } from '../styles'
 import style from './styles/avatar-group.cssr'
 
 export interface AvatarGroupInjection {

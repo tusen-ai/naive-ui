@@ -8,18 +8,20 @@ import type {
   Slots,
   VNodeChild
 } from 'vue'
-import type { ScrollTo, ScrollbarProps } from '../../scrollbar/src/Scrollbar'
-import type { EllipsisProps } from '../../ellipsis/src/Ellipsis'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { NLocale } from '../../locales'
+import type { VirtualListInst } from 'vueuc'
+import type { BaseLoadingExposedProps } from '../../_internal'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { EllipsisProps } from '../../ellipsis/src/Ellipsis'
+import type { NLocale } from '../../locales'
+import type { PaginationProps } from '../../pagination'
+import type { PopoverProps } from '../../popover'
+import type { ScrollbarProps, ScrollTo } from '../../scrollbar/src/Scrollbar'
+import type { DataTableTheme } from '../styles'
+import type { DataTableGetCsvCell, DataTableGetCsvHeader } from './publicTypes'
+import type { ColItem, RowItem } from './use-group-header'
 import { useTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
-import type { PaginationProps } from '../../pagination'
-import type { DataTableTheme } from '../styles'
-import type { BaseLoadingExposedProps } from '../../_internal'
-import type { PopoverProps } from '../../popover'
-import type { ColItem, RowItem } from './use-group-header'
 
 export const dataTableProps = {
   ...(useTheme.props as ThemeProps<DataTableTheme>),
@@ -90,6 +92,11 @@ export const dataTableProps = {
   expandedRowKeys: Array as PropType<RowKey[]>,
   stickyExpandedRows: Boolean,
   virtualScroll: Boolean,
+  virtualScrollX: Boolean,
+  virtualScrollHeader: Boolean,
+  headerHeight: { type: Number, default: 28 },
+  heightForRow: Function as PropType<DataTableHeightForRow>,
+  minRowHeight: { type: Number, default: 28 },
   tableLayout: {
     type: String as PropType<'auto' | 'fixed'>,
     default: 'auto'
@@ -123,6 +130,8 @@ export const dataTableProps = {
   >,
   renderExpandIcon: Function as PropType<RenderExpandIcon>,
   spinProps: { type: Object as PropType<BaseLoadingExposedProps>, default: {} },
+  getCsvCell: Function as PropType<DataTableGetCsvCell>,
+  getCsvHeader: Function as PropType<DataTableGetCsvHeader>,
   onLoad: Function as PropType<DataTableOnLoad>,
   'onUpdate:page': [Function, Array] as PropType<
     PaginationProps['onUpdate:page']
@@ -230,6 +239,11 @@ export interface CommonColumnInfo<T = InternalRowData> {
   allowExport?: boolean
   cellProps?: (rowData: T, rowIndex: number) => HTMLAttributes
 }
+
+export type DataTableHeightForRow<T = RowData> = (
+  rowData: T,
+  rowIndex: number
+) => number
 
 export type TableColumnTitle =
   | string
@@ -384,6 +398,11 @@ export interface DataTableInjection {
   summaryRef: Ref<undefined | CreateSummary>
   rawPaginatedDataRef: Ref<InternalRowData[]>
   virtualScrollRef: Ref<boolean>
+  virtualScrollXRef: Ref<boolean>
+  minRowHeightRef: Ref<number>
+  heightForRowRef: Ref<DataTableHeightForRow | undefined>
+  virtualScrollHeaderRef: Ref<boolean>
+  headerHeightRef: Ref<number>
   bodyWidthRef: Ref<number | null>
   mergedTableLayoutRef: Ref<'auto' | 'fixed'>
   maxHeightRef: Ref<string | number | undefined>
@@ -502,6 +521,7 @@ export interface MainTableBodyRef {
 
 export interface MainTableHeaderRef {
   $el: HTMLElement | null
+  virtualListRef: Ref<VirtualListInst | null>
 }
 
 export type OnFilterMenuChange = <

@@ -5,8 +5,8 @@
   </markdown>
 
 <script lang="ts">
-import { defineComponent, nextTick, ref } from 'vue'
 import type { TabsInst } from 'naive-ui'
+import { defineComponent, nextTick, ref } from 'vue'
 
 export default defineComponent({
   setup() {

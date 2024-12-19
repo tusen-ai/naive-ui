@@ -1,5 +1,5 @@
-import { commonDark } from '../../_styles/common'
 import type { QrCodeTheme } from './light'
+import { commonDark } from '../../_styles/common'
 
 const qrcodeDark: QrCodeTheme = {
   name: 'QrCode',

@@ -1,17 +1,17 @@
-import { useMemo } from 'vooks'
 import { off, on } from 'evtd'
+import { useMemo } from 'vooks'
 import {
   type ComponentPublicInstance,
   type ComputedRef,
-  type PropType,
   inject,
   onBeforeUnmount,
   onMounted,
+  type PropType,
   ref
 } from 'vue'
 import { internalSelectionMenuBodyInjectionKey } from '../../_internal/select-menu/src/interface'
-import { modalBodyInjectionKey } from '../../modal/src/interface'
 import { drawerBodyInjectionKey } from '../../drawer/src/interface'
+import { modalBodyInjectionKey } from '../../modal/src/interface'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
 
 interface UseAdjustedToProps {

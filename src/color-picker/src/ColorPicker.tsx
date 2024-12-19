@@ -1,48 +1,56 @@
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { ColorPickerTheme } from '../styles'
+import type {
+  OnClear,
+  OnConfirmImpl,
+  OnUpdateValue,
+  OnUpdateValueImpl,
+  RenderLabel
+} from './interface'
+import type { ActionType, ColorPickerMode } from './utils'
 import {
-  type CSSProperties,
-  type PropType,
-  type Ref,
-  Transition,
-  type VNode,
+  getPreciseEventTarget,
+  hsl2hsv,
+  hsl2rgb,
+  type HSLA,
+  hsla,
+  hsv2hsl,
+  hsv2rgb,
+  type HSVA,
+  hsva,
+  rgb2hsl,
+  rgb2hsv,
+  type RGBA,
+  rgba,
+  toHexaString,
+  toHexString,
+  toHslaString,
+  toHslString,
+  toHsvaString,
+  toHsvString,
+  toRgbaString,
+  toRgbString
+} from 'seemly'
+import { clickoutside } from 'vdirs'
+import { useIsMounted, useMergedState } from 'vooks'
+import {
   computed,
+  type CSSProperties,
   defineComponent,
   h,
   nextTick,
+  type PropType,
   provide,
+  type Ref,
   ref,
   toRef,
+  Transition,
+  type VNode,
   watch,
   watchEffect,
   withDirectives
 } from 'vue'
-import {
-  type HSLA,
-  type HSVA,
-  type RGBA,
-  getPreciseEventTarget,
-  hsl2hsv,
-  hsl2rgb,
-  hsla,
-  hsv2hsl,
-  hsv2rgb,
-  hsva,
-  rgb2hsl,
-  rgb2hsv,
-  rgba,
-  toHexString,
-  toHexaString,
-  toHslString,
-  toHslaString,
-  toHsvString,
-  toHsvaString,
-  toRgbString,
-  toRgbaString
-} from 'seemly'
-import { useIsMounted, useMergedState } from 'vooks'
 import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc'
-import { clickoutside } from 'vdirs'
-import { colorPickerLight } from '../styles'
-import type { ColorPickerTheme } from '../styles'
 import {
   type ThemeProps,
   useConfig,
@@ -52,26 +60,18 @@ import {
   useThemeClass
 } from '../../_mixins'
 import { call, createKey, useAdjustedTo } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { NButton } from '../../button'
-import HueSlider from './HueSlider'
+import { colorPickerLight } from '../styles'
 import AlphaSlider from './AlphaSlider'
-import Pallete from './Pallete'
 import ColorInput from './ColorInput'
-import ColorPickerTrigger from './ColorPickerTrigger'
-import { deriveDefaultValue, getModeFromValue } from './utils'
-import type { ActionType, ColorPickerMode } from './utils'
-import type {
-  OnClear,
-  OnConfirmImpl,
-  OnUpdateValue,
-  OnUpdateValueImpl,
-  RenderLabel
-} from './interface'
 import ColorPickerSwatches from './ColorPickerSwatches'
+import ColorPickerTrigger from './ColorPickerTrigger'
 import ColorPreview from './ColorPreview'
 import { colorPickerInjectionKey } from './context'
+import HueSlider from './HueSlider'
+import Pallete from './Pallete'
 import style from './styles/index.cssr'
+import { deriveDefaultValue, getModeFromValue } from './utils'
 
 export const colorPickerProps = {
   ...(useTheme.props as ThemeProps<ColorPickerTheme>),
@@ -526,13 +526,13 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'color-picker',
-        computed(() => {
-          return mergedSizeRef.value[0]
-        }),
-        cssVarsRef,
-        props
-      )
+          'color-picker',
+          computed(() => {
+            return mergedSizeRef.value[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     function renderPanel(): VNode {
@@ -746,13 +746,13 @@ export default defineComponent({
                         default: () =>
                           this.mergedShow
                             ? withDirectives(this.renderPanel(), [
-                              [
-                                clickoutside,
-                                this.handleClickOutside,
-                                undefined as any as string,
-                                { capture: true }
-                              ]
-                            ])
+                                [
+                                  clickoutside,
+                                  this.handleClickOutside,
+                                  undefined as any as string,
+                                  { capture: true }
+                                ]
+                              ])
                             : null
                       }}
                     </Transition>

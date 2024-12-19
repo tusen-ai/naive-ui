@@ -5,10 +5,10 @@ The `render-label`, `render-icon`, `expand-icon` can be used to batch render men
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h, ref } from 'vue'
-import { NIcon } from 'naive-ui'
 import type { MenuOption } from 'naive-ui'
 import { BookmarkOutline, CaretDownOutline } from '@vicons/ionicons5'
+import { NIcon } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
 
 const menuOptions: MenuOption[] = [
   {

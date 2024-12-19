@@ -1,20 +1,20 @@
-import {
-  type ExtractPropTypes,
-  type PropType,
-  computed,
-  inject,
-  nextTick,
-  ref
-} from 'vue'
 import { useKeyboard } from 'vooks'
 import {
+  computed,
+  type ExtractPropTypes,
+  inject,
+  nextTick,
+  type PropType,
+  ref
+} from 'vue'
+import {
+  datePickerInjectionKey,
   type DefaultTime,
   type OnClose,
   type OnPanelUpdateValue,
   type OnPanelUpdateValueImpl,
   type Shortcuts,
-  type Value,
-  datePickerInjectionKey
+  type Value
 } from '../interface'
 
 const TIME_FORMAT = 'HH:mm:ss'
@@ -22,6 +22,14 @@ const TIME_FORMAT = 'HH:mm:ss'
 const usePanelCommonProps = {
   active: Boolean,
   dateFormat: String,
+  calendarDayFormat: String,
+  calendarHeaderYearFormat: String,
+  calendarHeaderMonthFormat: String,
+  calendarHeaderMonthYearSeparator: { type: String, required: true },
+  calendarHeaderMonthBeforeYear: {
+    type: Boolean,
+    default: undefined
+  },
   timerPickerFormat: {
     type: String,
     value: TIME_FORMAT
@@ -37,6 +45,8 @@ const usePanelCommonProps = {
   onConfirm: Function as PropType<(value: Value | null) => void>,
   onClose: Function as PropType<OnClose>,
   onTabOut: Function,
+  onKeydown: Function,
+  actions: Array as PropType<string[]>,
   onUpdateValue: {
     type: Function as PropType<OnPanelUpdateValue>,
     required: true
@@ -50,7 +60,7 @@ const usePanelCommonProps = {
   onPrevYear: Function as PropType<() => void>
 } as const
 
-type UsePanelCommonProps = ExtractPropTypes<typeof usePanelCommonProps>
+export type UsePanelCommonProps = ExtractPropTypes<typeof usePanelCommonProps>
 
 function usePanelCommon(props: UsePanelCommonProps) {
   const {

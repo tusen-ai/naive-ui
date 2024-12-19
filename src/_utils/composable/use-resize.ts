@@ -1,10 +1,4 @@
-import {
-  type Ref,
-  isRef,
-  onBeforeUnmount,
-  onBeforeUpdate,
-  onMounted
-} from 'vue'
+import { onBeforeUnmount, onMounted, type Ref } from 'vue'
 import { resizeObserverManager } from 'vueuc'
 
 interface UseOnResizeOptions {

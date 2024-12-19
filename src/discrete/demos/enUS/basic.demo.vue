@@ -5,9 +5,9 @@ Use `createDiscreteApi` to create series of API.
 </markdown>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
 import type { ConfigProviderProps } from 'naive-ui'
 import { createDiscreteApi, darkTheme, lightTheme } from 'naive-ui'
+import { computed, defineComponent, ref } from 'vue'
 
 const themeRef = ref<'light' | 'dark'>('light')
 const configProviderPropsRef = computed<ConfigProviderProps>(() => ({

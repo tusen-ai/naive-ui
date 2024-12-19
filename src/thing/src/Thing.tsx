@@ -1,16 +1,16 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { ThingTheme } from '../styles'
 import {
-  type CSSProperties,
-  Fragment,
-  type PropType,
   computed,
+  type CSSProperties,
   defineComponent,
-  h
+  Fragment,
+  h,
+  type PropType
 } from 'vue'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import type { ThemeProps } from '../../_mixins'
 import { thingLight } from '../styles'
-import type { ThingTheme } from '../styles'
 import style from './styles/index.cssr'
 
 export const thingProps = {
@@ -85,10 +85,10 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-thing-main`}>
             {!props.contentIndented
             && (slots.header
-            || props.title
-            || slots['header-extra']
-            || props.titleExtra
-            || slots.avatar) ? (
+              || props.title
+              || slots['header-extra']
+              || props.titleExtra
+              || slots.avatar) ? (
                   <div class={`${mergedClsPrefix}-thing-avatar-header-wrapper`}>
                     {slots.avatar ? (
                       <div class={`${mergedClsPrefix}-thing-avatar`}>
@@ -117,8 +117,8 @@ export default defineComponent({
                             {slots.description || props.description ? (
                               <div
                                 class={[
-                          `${mergedClsPrefix}-thing-main__description`,
-                          props.descriptionClass
+                                  `${mergedClsPrefix}-thing-main__description`,
+                                  props.descriptionClass
                                 ]}
                                 style={props.descriptionStyle}
                               >
@@ -154,8 +154,8 @@ export default defineComponent({
                     {slots.description || props.description ? (
                       <div
                         class={[
-                      `${mergedClsPrefix}-thing-main__description`,
-                      props.descriptionClass
+                          `${mergedClsPrefix}-thing-main__description`,
+                          props.descriptionClass
                         ]}
                         style={props.descriptionStyle}
                       >

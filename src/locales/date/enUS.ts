@@ -1,5 +1,5 @@
-import { enUS } from 'date-fns/locale'
 import type { Locale } from 'date-fns'
+import { enUS } from 'date-fns/locale'
 
 interface NDateLocale {
   name: string

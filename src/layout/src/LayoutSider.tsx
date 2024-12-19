@@ -1,32 +1,32 @@
+import type { ScrollbarInst, ScrollbarProps } from '../../_internal'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { LayoutTheme } from '../styles'
+import { useMergedState } from 'vooks'
 import {
-  type CSSProperties,
-  type PropType,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
   inject,
+  type PropType,
   provide,
   ref,
   toRef
 } from 'vue'
-import { useMergedState } from 'vooks'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import { call, formatLength, useReactivated, warn } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { NScrollbar } from '../../_internal'
-import type { ScrollbarInst, ScrollbarProps } from '../../_internal'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { call, formatLength, useReactivated, warn } from '../../_utils'
 import { layoutLight } from '../styles'
-import type { LayoutTheme } from '../styles'
-import style from './styles/layout-sider.cssr'
-import ToggleButton from './ToggleButton'
-import ToggleBar from './ToggleBar'
 import {
-  type LayoutSiderInst,
   layoutSiderInjectionKey,
+  type LayoutSiderInst,
   positionProp
 } from './interface'
 import { layoutInjectionKey } from './Layout'
+import style from './styles/layout-sider.cssr'
+import ToggleBar from './ToggleBar'
+import ToggleButton from './ToggleButton'
 
 export const layoutSiderProps = {
   position: positionProp,
@@ -263,11 +263,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'layout-sider',
-        computed(() => (props.inverted ? 'a' : 'b')),
-        cssVarsRef,
-        props
-      )
+          'layout-sider',
+          computed(() => (props.inverted ? 'a' : 'b')),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       scrollableElRef,

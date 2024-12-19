@@ -1,13 +1,13 @@
+import type { ExtractPublicPropTypes } from '../../_utils'
 import {
-  type PropType,
-  type VNodeChild,
   defineComponent,
   onBeforeUnmount,
   onMounted,
+  type PropType,
   ref,
+  type VNodeChild,
   watchEffect
 } from 'vue'
-import type { ExtractPublicPropTypes } from '../../_utils'
 
 export interface CountdownTimeInfo {
   hours: number

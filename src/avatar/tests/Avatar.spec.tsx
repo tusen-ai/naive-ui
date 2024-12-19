@@ -1,8 +1,8 @@
+import { CashOutline as CashIcon } from '@vicons/ionicons5'
 import { mount } from '@vue/test-utils'
 import { h, nextTick } from 'vue'
-import { CashOutline as CashIcon } from '@vicons/ionicons5'
-import { NAvatar } from '../index'
 import { NIcon } from '../../icon'
+import { NAvatar } from '../index'
 
 // Please note that resize observer doesn't work in JSDOM, so text transfrom
 // can't be tested.

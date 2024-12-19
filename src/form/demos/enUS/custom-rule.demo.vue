@@ -5,7 +5,6 @@ Sometimes builtin triggers don't meet your needs. You can customize these valida
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import type {
   FormInst,
   FormItemInst,
@@ -14,6 +13,7 @@ import type {
   FormValidationError
 } from 'naive-ui'
 import { useMessage } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 interface ModelType {
   age: string | null

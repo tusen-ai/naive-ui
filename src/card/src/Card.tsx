@@ -1,21 +1,21 @@
-import {
-  type CSSProperties,
-  type PropType,
-  type VNodeChild,
-  computed,
-  defineComponent,
-  h
-} from 'vue'
-import { getPadding } from 'seemly'
-import { useRtl } from '../../_mixins/use-rtl'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { call, createKey, keysOf, resolveWrappedSlot } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { NBaseClose } from '../../_internal'
-import { cardLight } from '../styles'
 import type { CardTheme } from '../styles'
+import { getPadding } from 'seemly'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  h,
+  type PropType,
+  type VNodeChild
+} from 'vue'
+import { NBaseClose } from '../../_internal'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
+import { call, createKey, keysOf, resolveWrappedSlot } from '../../_utils'
 import { ensureValidVNode } from '../../_utils/vue/resolve-slot'
+import { cardLight } from '../styles'
 import style from './styles/index.cssr'
 
 export interface CardSegmented {
@@ -164,13 +164,13 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'card',
-        computed(() => {
-          return props.size[0]
-        }),
-        cssVarsRef,
-        props
-      )
+          'card',
+          computed(() => {
+            return props.size[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       rtlEnabled: rtlEnabledRef,
@@ -240,8 +240,8 @@ export default defineComponent({
           const { title } = this
           const mergedChildren = title
             ? ensureValidVNode(
-              typeof title === 'function' ? [title()] : [title]
-            )
+                typeof title === 'function' ? [title()] : [title]
+              )
             : children
           return mergedChildren || this.closable ? (
             <div
@@ -288,8 +288,8 @@ export default defineComponent({
           const { content } = this
           const mergedChildren = content
             ? ensureValidVNode(
-              typeof content === 'function' ? [content()] : [content]
-            )
+                typeof content === 'function' ? [content()] : [content]
+              )
             : children
           return (
             mergedChildren && (

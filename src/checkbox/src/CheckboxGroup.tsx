@@ -1,22 +1,22 @@
+import { useMergedState } from 'vooks'
 import {
-  type ComputedRef,
-  type PropType,
-  type Ref,
   computed,
+  type ComputedRef,
   defineComponent,
   h,
+  type PropType,
   provide,
+  type Ref,
   ref,
   toRef,
   watchEffect
 } from 'vue'
-import { useMergedState } from 'vooks'
 import { useConfig, useFormItem } from '../../_mixins'
 import {
-  type ExtractPublicPropTypes,
-  type MaybeArray,
   call,
   createInjectionKey,
+  type ExtractPublicPropTypes,
+  type MaybeArray,
   warnOnce
 } from '../../_utils'
 

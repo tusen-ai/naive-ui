@@ -1,9 +1,9 @@
-import { type PropType, computed, defineComponent, h, inject } from 'vue'
+import type { TmNode } from './interface'
+import { computed, defineComponent, h, inject, type PropType } from 'vue'
+import { NBaseIcon } from '../../_internal'
 import { ChevronDownFilledIcon } from '../../_internal/icons'
 import { render } from '../../_utils'
-import { NBaseIcon } from '../../_internal'
 import { menuInjectionKey } from './context'
-import type { TmNode } from './interface'
 
 export default defineComponent({
   name: 'MenuOptionContent',

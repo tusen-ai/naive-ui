@@ -1,16 +1,19 @@
+import type { OnUpdateValueImpl } from './interface'
+import { off, on } from 'evtd'
+import { useIsMounted, useMergedState } from 'vooks'
 import {
-  type CSSProperties,
   type ComponentPublicInstance,
-  type PropType,
-  Transition,
-  type VNodeChild,
   computed,
+  type CSSProperties,
   defineComponent,
   h,
   nextTick,
   onBeforeUnmount,
+  type PropType,
   ref,
   toRef,
+  Transition,
+  type VNodeChild,
   watch
 } from 'vue'
 import {
@@ -20,8 +23,6 @@ import {
   VFollower,
   VTarget
 } from 'vueuc'
-import { useIsMounted, useMergedState } from 'vooks'
-import { off, on } from 'evtd'
 import {
   type ThemeProps,
   useConfig,
@@ -30,16 +31,15 @@ import {
   useThemeClass
 } from '../../_mixins'
 import {
+  call,
   type ExtractPublicPropTypes,
   type MaybeArray,
-  call,
   resolveSlot,
   useAdjustedTo
 } from '../../_utils'
-import { type SliderTheme, sliderLight } from '../styles'
-import type { OnUpdateValueImpl } from './interface'
-import { isTouchEvent, useRefs } from './utils'
+import { sliderLight, type SliderTheme } from '../styles'
 import style from './styles/index.cssr'
+import { isTouchEvent, useRefs } from './utils'
 
 export interface ClosestMark {
   value: number

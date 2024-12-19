@@ -1,6 +1,6 @@
-import { type Ref, computed, ref, toRef } from 'vue'
-import { useMemo, useMergedState } from 'vooks'
 import type { CheckedStatus, Filter, Option, OptionValue } from './interface'
+import { useMemo, useMergedState } from 'vooks'
+import { computed, type Ref, ref, toRef } from 'vue'
 
 interface UseTransferDataProps {
   defaultValue: OptionValue[] | null

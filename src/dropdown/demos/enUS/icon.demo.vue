@@ -5,14 +5,14 @@ Dropdown options can also have icons!
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h } from 'vue'
 import type { Component } from 'vue'
-import { NIcon } from 'naive-ui'
 import {
   Pencil as EditIcon,
   LogOutOutline as LogoutIcon,
   PersonCircleOutline as UserIcon
 } from '@vicons/ionicons5'
+import { NIcon } from 'naive-ui'
+import { defineComponent, h } from 'vue'
 
 function renderIcon(icon: Component) {
   return () => {

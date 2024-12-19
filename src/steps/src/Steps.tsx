@@ -1,19 +1,19 @@
+import type { MergedTheme, ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { StepsTheme } from '../styles'
 import {
+  defineComponent,
   type ExtractPropTypes,
+  h,
   type PropType,
+  provide,
   type Ref,
   type Slots,
   type VNode,
-  type VNodeChild,
-  defineComponent,
-  h,
-  provide
+  type VNodeChild
 } from 'vue'
-import type { MergedTheme, ThemeProps } from '../../_mixins'
 import { useConfig, useRtl, useTheme } from '../../_mixins'
 import { createInjectionKey, flatten, getSlot } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { StepsTheme } from '../styles'
 import { stepsLight } from '../styles'
 import style from './styles/index.cssr'
 

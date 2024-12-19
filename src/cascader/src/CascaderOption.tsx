@@ -1,18 +1,18 @@
+import { happensIn } from 'seemly'
+import { useMemo } from 'vooks'
 import {
-  type PropType,
-  Transition,
-  type VNode,
   computed,
   defineComponent,
   h,
-  inject
+  inject,
+  type PropType,
+  Transition,
+  type VNode
 } from 'vue'
-import { useMemo } from 'vooks'
-import { happensIn } from 'seemly'
-import { NCheckbox } from '../../checkbox'
 import { NBaseIcon, NBaseLoading } from '../../_internal'
 import { CheckmarkIcon, ChevronRightIcon } from '../../_internal/icons'
-import { type TmNode, cascaderInjectionKey } from './interface'
+import { NCheckbox } from '../../checkbox'
+import { cascaderInjectionKey, type TmNode } from './interface'
 
 export default defineComponent({
   name: 'NCascaderOption',
@@ -214,10 +214,10 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-cascader-option__prefix`}>
           {renderPrefix
             ? renderPrefix({
-              option: this.tmNode.rawNode,
-              checked: this.checked,
-              node: originalNode
-            })
+                option: this.tmNode.rawNode,
+                checked: this.checked,
+                node: originalNode
+              })
             : originalNode}
         </div>
       )
@@ -248,7 +248,7 @@ export default defineComponent({
             }}
           </NBaseLoading>
         ) : this.checkStrategy === 'child'
-        && !(this.multiple && this.cascade) ? (
+          && !(this.multiple && this.cascade) ? (
               <Transition name="fade-in-scale-up-transition">
                 {{
                   default: () =>
@@ -269,10 +269,10 @@ export default defineComponent({
       <div class={`${mergedClsPrefix}-cascader-option__suffix`}>
         {renderSuffix
           ? renderSuffix({
-            option: this.tmNode.rawNode,
-            checked: this.checked,
-            node: originalSuffixChild
-          })
+              option: this.tmNode.rawNode,
+              checked: this.checked,
+              node: originalSuffixChild
+            })
           : originalSuffixChild}
       </div>
     )
@@ -282,7 +282,7 @@ export default defineComponent({
           `${mergedClsPrefix}-cascader-option`,
           this.keyboardPending
           || (this.hoverPending
-          && `${mergedClsPrefix}-cascader-option--pending`),
+            && `${mergedClsPrefix}-cascader-option--pending`),
           this.disabled && `${mergedClsPrefix}-cascader-option--disabled`,
           this.showCheckbox && `${mergedClsPrefix}-cascader-option--show-prefix`
         ]}

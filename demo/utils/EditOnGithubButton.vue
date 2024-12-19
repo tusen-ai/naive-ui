@@ -1,8 +1,8 @@
 <script lang="ts">
-import type { PropType } from 'vue'
-import { defineComponent } from 'vue'
 import type { ButtonProps } from 'naive-ui'
+import type { PropType } from 'vue'
 import EditIcon from '@vicons/fluent/Compose16Regular.js'
+import { defineComponent } from 'vue'
 import { blobUrl } from './github-url'
 
 export default defineComponent({

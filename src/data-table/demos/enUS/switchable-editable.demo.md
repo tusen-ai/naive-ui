@@ -1,7 +1,5 @@
 # Switchable Editable Table
 
-Not too simple, but good-looking.
-
 ```html
 <n-data-table
   :key="(row) => row.key"
@@ -13,8 +11,8 @@ Not too simple, but good-looking.
 ```
 
 ```js
-import { computed, defineComponent, h, nextTick, ref } from 'vue'
 import { NInput } from 'naive-ui'
+import { computed, defineComponent, h, nextTick, ref } from 'vue'
 
 function createData() {
   return Array.from({ length: 100 }).map((_, index) => ({
@@ -53,14 +51,14 @@ const ShowOrEdit = defineComponent({
         },
         isEdit.value
           ? h(NInput, {
-            ref: inputRef,
-            value: inputValue.value,
-            onUpdateValue: (v) => {
-              inputValue.value = v
-            },
-            onChange: handleChange,
-            onBlur: handleChange
-          })
+              ref: inputRef,
+              value: inputValue.value,
+              onUpdateValue: (v) => {
+                inputValue.value = v
+              },
+              onChange: handleChange,
+              onBlur: handleChange
+            })
           : props.value
       )
   }

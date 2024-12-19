@@ -5,8 +5,8 @@ Scroll to the latest when log is gradually increasing.
 </markdown>
 
 <script lang="ts">
-import { defineComponent, nextTick, onMounted, ref, watchEffect } from 'vue'
 import type { LogInst } from 'naive-ui'
+import { defineComponent, nextTick, onMounted, ref, watchEffect } from 'vue'
 
 function log() {
   const l: string[] = []

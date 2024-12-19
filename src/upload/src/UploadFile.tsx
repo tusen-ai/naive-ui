@@ -1,15 +1,20 @@
+import type { ExtractThemeOverrides } from '../../_mixins/use-theme'
+import type { ButtonTheme } from '../../button/styles'
+import type { ImageInst } from '../../image/src/Image'
+import type { ListType } from './interface'
+import type { UploadSettledFileInfo } from './public-types'
+import { useMemo } from 'vooks'
 import {
-  type PropType,
-  type VNode,
   computed,
   defineComponent,
   h,
   inject,
+  type PropType,
   ref,
+  type VNode,
   watchEffect
 } from 'vue'
-import { useMemo } from 'vooks'
-import type { ImageInst } from '../../image/src/Image'
+import { NBaseIcon, NIconSwitchTransition } from '../../_internal'
 import {
   AttachIcon,
   CancelIcon,
@@ -18,17 +23,12 @@ import {
   RetryIcon,
   TrashIcon
 } from '../../_internal/icons'
-import type { ExtractThemeOverrides } from '../../_mixins/use-theme'
-import type { ButtonTheme } from '../../button/styles'
-import { NImage } from '../../image'
-import { NButton } from '../../button'
-import { NBaseIcon, NIconSwitchTransition } from '../../_internal'
 import { download, warn } from '../../_utils'
-import NUploadProgress from './UploadProgress'
-import { uploadInjectionKey } from './interface'
-import type { ListType } from './interface'
-import type { UploadSettledFileInfo } from './public-types'
+import { NButton } from '../../button'
+import { NImage } from '../../image'
 import { documentIcon, imageIcon } from './icons'
+import { uploadInjectionKey } from './interface'
+import NUploadProgress from './UploadProgress'
 import { isImageFile } from './utils'
 
 const buttonThemeOverrides: ExtractThemeOverrides<ButtonTheme> = {
@@ -158,10 +158,10 @@ export default defineComponent({
       void Promise.resolve(
         onRemove
           ? onRemove({
-            file: Object.assign({}, file),
-            fileList: mergedFileList,
-            index: props.index
-          })
+              file: Object.assign({}, file),
+              fileList: mergedFileList,
+              index: props.index
+            })
           : true
       ).then((result) => {
         if (result === false)

@@ -1,15 +1,15 @@
+import type { ExtractPublicPropTypes } from '../../_utils'
 import {
+  defineComponent,
+  h,
   type HTMLAttributes,
+  inject,
   type PropType,
   type VNode,
   type VNodeChild,
-  defineComponent,
-  h,
-  inject,
   watchEffect
 } from 'vue'
 import { throwError, warnOnce } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { tabsInjectionKey } from './interface'
 
 export const tabPaneProps = {

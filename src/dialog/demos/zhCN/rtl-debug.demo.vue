@@ -3,8 +3,8 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, h, ref } from 'vue'
 import { NButton, unstableDialogRtl, useDialog, useMessage } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
 
 const DialogButton = defineComponent({
   setup() {

@@ -1,4 +1,6 @@
-import { type ExtractPropTypes, computed, inject, ref, watch } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
+import type { VirtualListInst } from 'vueuc'
+import type { ScrollbarInst } from '../../../_internal'
 import {
   addMonths,
   format,
@@ -13,28 +15,27 @@ import {
   startOfQuarter,
   startOfSecond
 } from 'date-fns'
-import type { VirtualListInst } from 'vueuc'
+import { computed, inject, ref, watch } from 'vue'
+import { MONTH_ITEM_HEIGHT } from '../config'
 import {
-  type DateItem,
-  type MonthItem,
-  type QuarterItem,
-  type YearItem,
-  dateArray,
-  getDefaultTime,
-  monthArray,
-  pluckValueFromRange,
-  quarterArray,
-  strictParse,
-  yearArray
-} from '../utils'
-import {
+  datePickerInjectionKey,
   type IsRangeDateDisabled,
   type RangePanelChildComponentRefs,
-  type Shortcuts,
-  datePickerInjectionKey
+  type Shortcuts
 } from '../interface'
-import type { ScrollbarInst } from '../../../_internal'
-import { MONTH_ITEM_HEIGHT } from '../config'
+import {
+  dateArray,
+  type DateItem,
+  getDefaultTime,
+  monthArray,
+  type MonthItem,
+  pluckValueFromRange,
+  quarterArray,
+  type QuarterItem,
+  strictParse,
+  yearArray,
+  type YearItem
+} from '../utils'
 import { usePanelCommon, usePanelCommonProps } from './use-panel-common'
 
 const useDualCalendarProps = {
@@ -43,7 +44,7 @@ const useDualCalendarProps = {
   defaultCalendarEndTime: Number,
   bindCalendarMonths: Boolean,
   actions: {
-    type: Array,
+    type: Array as PropType<string[]>,
     default: () => ['clear', 'confirm']
   }
 } as const
@@ -130,22 +131,26 @@ function useDualCalendar(
     () => props.dateFormat || localeRef.value.dateFormat
   )
 
+  const mergedDayFormatRef = computed(
+    () => props.calendarDayFormat || localeRef.value.dayFormat
+  )
+
   const startDateInput = ref(
     Array.isArray(value)
       ? format(
-        value[0],
-        mergedDateFormatRef.value,
-        panelCommon.dateFnsOptions.value
-      )
+          value[0],
+          mergedDateFormatRef.value,
+          panelCommon.dateFnsOptions.value
+        )
       : ''
   )
   const endDateInputRef = ref(
     Array.isArray(value)
       ? format(
-        value[1],
-        mergedDateFormatRef.value,
-        panelCommon.dateFnsOptions.value
-      )
+          value[1],
+          mergedDateFormatRef.value,
+          panelCommon.dateFnsOptions.value
+        )
       : ''
   )
 
@@ -176,7 +181,7 @@ function useDualCalendar(
       const { ts } = dateItem
       return format(
         ts,
-        localeRef.value.dayFormat,
+        mergedDayFormatRef.value,
         panelCommon.dateFnsOptions.value
       )
     })
@@ -184,28 +189,28 @@ function useDualCalendar(
   const startCalendarMonthRef = computed(() => {
     return format(
       startCalendarDateTimeRef.value,
-      localeRef.value.monthFormat,
+      props.calendarHeaderMonthFormat || localeRef.value.monthFormat,
       panelCommon.dateFnsOptions.value
     )
   })
   const endCalendarMonthRef = computed(() => {
     return format(
       endCalendarDateTimeRef.value,
-      localeRef.value.monthFormat,
+      props.calendarHeaderMonthFormat || localeRef.value.monthFormat,
       panelCommon.dateFnsOptions.value
     )
   })
   const startCalendarYearRef = computed(() => {
     return format(
       startCalendarDateTimeRef.value,
-      localeRef.value.yearFormat,
+      props.calendarHeaderYearFormat || localeRef.value.yearFormat,
       panelCommon.dateFnsOptions.value
     )
   })
   const endCalendarYearRef = computed(() => {
     return format(
       endCalendarDateTimeRef.value,
-      localeRef.value.yearFormat,
+      props.calendarHeaderYearFormat || localeRef.value.yearFormat,
       panelCommon.dateFnsOptions.value
     )
   })
@@ -268,6 +273,11 @@ function useDualCalendar(
     return monthArray(endValue ?? Date.now(), endValue, nowRef.value, {
       monthFormat: monthFormatRef.value
     })
+  })
+  const calendarMonthBeforeYearRef = computed(() => {
+    return (
+      props.calendarHeaderMonthBeforeYear ?? localeRef.value.monthBeforeYear
+    )
   })
   watch(
     computed(() => props.value),
@@ -785,19 +795,19 @@ function useDualCalendar(
       = dateItem.type === 'year' && type !== 'yearrange'
         ? noCurrentValue
           ? set(dateItem.ts, {
-            month: getMonth(
-              type === 'quarterrange'
-                ? startOfQuarter(new Date())
-                : new Date()
-            )
-          }).valueOf()
+              month: getMonth(
+                type === 'quarterrange'
+                  ? startOfQuarter(new Date())
+                  : new Date()
+              )
+            }).valueOf()
           : set(dateItem.ts, {
-            month: getMonth(
-              type === 'quarterrange'
-                ? startOfQuarter(value[clickType === 'start' ? 0 : 1])
-                : value[clickType === 'start' ? 0 : 1]
-            )
-          }).valueOf()
+              month: getMonth(
+                type === 'quarterrange'
+                  ? startOfQuarter(value[clickType === 'start' ? 0 : 1])
+                  : value[clickType === 'start' ? 0 : 1]
+              )
+            }).valueOf()
         : dateItem.ts
     if (noCurrentValue) {
       const partialValue = sanitizeValue(itemTs)
@@ -891,6 +901,7 @@ function useDualCalendar(
     mergedIsDateDisabled,
     changeStartEndTime,
     ranges: rangesRef,
+    calendarMonthBeforeYear: calendarMonthBeforeYearRef,
     startCalendarMonth: startCalendarMonthRef,
     startCalendarYear: startCalendarYearRef,
     endCalendarMonth: endCalendarMonthRef,

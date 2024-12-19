@@ -1,8 +1,7 @@
-import { type PropType, computed, defineComponent, h, inject, ref } from 'vue'
+import type { MaybeArray } from '../../_utils'
+import { computed, defineComponent, h, inject, type PropType, ref } from 'vue'
 import { NBaseFocusDetector, NScrollbar } from '../../_internal'
 import { NButton } from '../../button'
-import type { MaybeArray } from '../../_utils'
-import { getAmPm, getTimeUnits, time } from './utils'
 import {
   type IsHourDisabled,
   type IsMinuteDisabled,
@@ -12,6 +11,7 @@ import {
   timePickerInjectionKey
 } from './interface'
 import PanelCol from './PanelCol'
+import { getAmPm, getTimeUnits, time } from './utils'
 
 const timePickerPanelProps = {
   actions: {
@@ -148,10 +148,10 @@ export default defineComponent({
           value: Number(second),
           disabled: isSecondDisabled
             ? isSecondDisabled(
-              Number(second),
-              props.minuteValue,
-              props.hourValue
-            )
+                Number(second),
+                props.minuteValue,
+                props.hourValue
+              )
             : false
         }
       })

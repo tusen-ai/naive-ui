@@ -1,9 +1,9 @@
 import type { Ref } from 'vue'
-import { createInjectionKey } from '../../_utils'
 import type {
   LoadingBarApiInjection,
   LoadingBarProviderSetupProps
 } from './LoadingBarProvider'
+import { createInjectionKey } from '../../_utils'
 
 export const loadingBarProviderInjectionKey = createInjectionKey<{
   props: LoadingBarProviderSetupProps

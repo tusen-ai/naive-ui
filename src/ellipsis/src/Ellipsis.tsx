@@ -1,21 +1,21 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { PopoverProps } from '../../popover/src/Popover'
+import type { TooltipInst } from '../../tooltip/src/Tooltip'
+import type { EllipsisTheme } from '../styles'
 import {
-  type PropType,
   computed,
   defineComponent,
   h,
   mergeProps,
   onDeactivated,
+  type PropType,
   ref
 } from 'vue'
-import type { PopoverProps } from '../../popover/src/Popover'
-import type { TooltipInst } from '../../tooltip/src/Tooltip'
-import { NTooltip } from '../../tooltip'
-import { useMergedClsPrefix } from '../../_mixins/use-config'
 import { useTheme } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { useMergedClsPrefix } from '../../_mixins/use-config'
+import { NTooltip } from '../../tooltip'
 import { ellipsisLight } from '../styles'
-import type { EllipsisTheme } from '../styles'
 import style from './styles/index.cssr'
 
 export function createLineClampClass(clsPrefix: string): string {

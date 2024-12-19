@@ -3,9 +3,9 @@
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { dateZhCN, zhCN } from 'naive-ui'
 import type { NDateLocale, NLocale } from 'naive-ui'
+import { dateZhCN, zhCN } from 'naive-ui'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {

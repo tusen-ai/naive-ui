@@ -1,21 +1,21 @@
+import type {
+  DatePickerClearSlotProps,
+  DatePickerConfirmSlotProps
+} from '../public-types'
 import { defineComponent, h, watchEffect } from 'vue'
-import { NButton, NxButton } from '../../../button'
-import { NInput } from '../../../input'
-import { NTimePicker } from '../../../time-picker'
+import { NBaseFocusDetector } from '../../../_internal'
 import {
   BackwardIcon,
   FastBackwardIcon,
   FastForwardIcon,
   ForwardIcon
 } from '../../../_internal/icons'
-import { NBaseFocusDetector } from '../../../_internal'
 import { resolveSlot, resolveSlotWithProps, warnOnce } from '../../../_utils'
-import type {
-  DatePickerClearSlotProps,
-  DatePickerConfirmSlotProps
-} from '../public-types'
-import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
+import { NButton, NxButton } from '../../../button'
+import { NInput } from '../../../input'
+import { NTimePicker } from '../../../time-picker'
 import PanelHeader from './panelHeader'
+import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
 
 export default defineComponent({
   name: 'DateTimeRangePanel',
@@ -141,7 +141,8 @@ export default defineComponent({
               {resolveSlot($slots['prev-month'], () => [<BackwardIcon />])}
             </div>
             <PanelHeader
-              monthBeforeYear={this.locale.monthBeforeYear}
+              monthYearSeparator={this.calendarHeaderMonthYearSeparator}
+              monthBeforeYear={this.calendarMonthBeforeYear}
               value={this.startCalendarDateTime}
               onUpdateValue={this.onUpdateStartCalendarValue}
               mergedClsPrefix={mergedClsPrefix}
@@ -241,10 +242,11 @@ export default defineComponent({
               {resolveSlot($slots['prev-month'], () => [<BackwardIcon />])}
             </div>
             <PanelHeader
-              monthBeforeYear={this.locale.monthBeforeYear}
+              monthBeforeYear={this.calendarMonthBeforeYear}
               value={this.endCalendarDateTime}
               onUpdateValue={this.onUpdateEndCalendarValue}
               mergedClsPrefix={mergedClsPrefix}
+              monthYearSeparator={this.calendarHeaderMonthYearSeparator}
               calendarMonth={this.endCalendarMonth}
               calendarYear={this.endCalendarYear}
             />
@@ -355,9 +357,10 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
               {this.actions?.includes('clear')
                 ? resolveSlotWithProps(
-                  $slots.clear,
+                    $slots.clear,
                     {
-                      onClear: this.handleClearClick
+                      onClear: this.handleClearClick,
+                      text: this.locale.clear
                     } satisfies DatePickerClearSlotProps,
                     () => [
                       <NButton
@@ -369,14 +372,15 @@ export default defineComponent({
                         {{ default: () => this.locale.clear }}
                       </NButton>
                     ]
-                )
+                  )
                 : null}
               {this.actions?.includes('confirm')
                 ? resolveSlotWithProps(
-                  $slots.confirm,
+                    $slots.confirm,
                     {
                       onConfirm: this.handleConfirmClick,
-                      disabled: this.isRangeInvalid || this.isSelecting
+                      disabled: this.isRangeInvalid || this.isSelecting,
+                      text: this.locale.confirm
                     } satisfies DatePickerConfirmSlotProps,
                     () => [
                       <NButton
@@ -390,7 +394,7 @@ export default defineComponent({
                         {{ default: () => this.locale.confirm }}
                       </NButton>
                     ]
-                )
+                  )
                 : null}
             </div>
           </div>

@@ -1,5 +1,5 @@
-import { de } from 'date-fns/locale'
 import type { NDateLocale } from './enUS'
+import { de } from 'date-fns/locale'
 
 const dateDeDE: NDateLocale = {
   name: 'de-DE',

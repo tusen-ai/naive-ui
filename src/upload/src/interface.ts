@@ -1,7 +1,6 @@
 import type { CSSProperties, Ref, VNodeChild } from 'vue'
-import type { ImageGroupProps } from '../../image'
 import type { MergedTheme } from '../../_mixins'
-import { createInjectionKey } from '../../_utils'
+import type { ImageGroupProps } from '../../image'
 import type { UploadTheme } from '../styles'
 import type {
   UploadCustomRequestOptions,
@@ -11,6 +10,7 @@ import type {
   UploadOnRemove,
   UploadSettledFileInfo
 } from './public-types'
+import { createInjectionKey } from '../../_utils'
 
 export type ShouldUseThumbnailUrl = (file: UploadSettledFileInfo) => boolean
 
@@ -90,12 +90,6 @@ export interface XhrHandlers {
   handleXHRAbort: (e: ProgressEvent) => void
   handleXHRProgress: (e: ProgressEvent) => void
   handleXHRError: (e: ProgressEvent) => void
-}
-
-export interface UploadInst {
-  openOpenFileDialog: () => void
-  submit: (fileId?: string) => void
-  clear: () => void
 }
 
 export type OnBeforeUpload = (data: {

@@ -3,8 +3,8 @@
 </markdown>
 
 <script lang="ts">
-import { ref } from 'vue'
 import { NButton, NImage, NModal, NSpace } from 'naive-ui'
+import { ref } from 'vue'
 
 export default {
   name: 'App',

@@ -1,42 +1,5 @@
-import {
-  type CSSProperties,
-  type ExtractPropTypes,
-  type LabelHTMLAttributes,
-  type PropType,
-  type Slot,
-  Transition,
-  type VNodeChild,
-  computed,
-  defineComponent,
-  h,
-  inject,
-  onMounted,
-  provide,
-  ref,
-  toRef,
-  watch
-} from 'vue'
-import Schema from 'async-validator'
 import type { RuleItem, ValidateError, ValidateOption } from 'async-validator'
-import { get } from 'lodash-es'
-import { createId } from 'seemly'
-import { formItemInjectionKey } from '../../_mixins/use-form-item'
-import {
-  type ThemeProps,
-  useConfig,
-  useTheme,
-  useThemeClass
-} from '../../_mixins'
-import {
-  createKey,
-  keysOf,
-  resolveWrappedSlot,
-  useInjectionInstanceCollection,
-  warn
-} from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { type FormTheme, formLight } from '../styles'
-import { formItemMisc, formItemRule, formItemSize } from './utils'
 import type {
   FormItemInst,
   FormItemInternalValidate,
@@ -51,8 +14,45 @@ import type {
   ValidateCallback,
   ValidationTrigger
 } from './interface'
+import Schema from 'async-validator'
+import { get } from 'lodash-es'
+import { createId } from 'seemly'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  type ExtractPropTypes,
+  h,
+  inject,
+  type LabelHTMLAttributes,
+  onMounted,
+  type PropType,
+  provide,
+  ref,
+  type Slot,
+  toRef,
+  Transition,
+  type VNodeChild,
+  watch
+} from 'vue'
+import {
+  type ThemeProps,
+  useConfig,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
+import { formItemInjectionKey } from '../../_mixins/use-form-item'
+import {
+  createKey,
+  keysOf,
+  resolveWrappedSlot,
+  useInjectionInstanceCollection,
+  warn
+} from '../../_utils'
+import { formLight, type FormTheme } from '../styles'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
 import style from './styles/form-item.cssr'
+import { formItemMisc, formItemRule, formItemSize } from './utils'
 
 export const formItemProps = {
   ...(useTheme.props as ThemeProps<FormTheme>),
@@ -110,10 +110,10 @@ function wrapValidator(
       const validateResult = validator(...args)
       if (
         (!async
-        && (typeof validateResult === 'boolean'
-        || validateResult instanceof Error
-        || Array.isArray(validateResult))) // Error[]
-        || (validateResult as any)?.then
+          && (typeof validateResult === 'boolean'
+            || validateResult instanceof Error
+            || Array.isArray(validateResult))) // Error[]
+            || (validateResult as any)?.then
       ) {
         return validateResult as any
       }
@@ -125,8 +125,8 @@ function wrapValidator(
           'form-item/validate',
           `You return a ${typeof validateResult} `
           + `typed value in the validator method, which is not recommended. Please use ${
-              async ? '`Promise`' : '`boolean`, `Error` or `Promise`'
-            } typed value instead.`
+            async ? '`Promise`' : '`boolean`, `Error` or `Promise`'
+          } typed value instead.`
         )
         return true
       }
@@ -225,13 +225,13 @@ export default defineComponent({
         !trigger
           ? rules
           : rules.filter((rule) => {
-            if (Array.isArray(rule.trigger)) {
-              return rule.trigger.includes(trigger)
-            }
-            else {
-              return rule.trigger === trigger
-            }
-          })
+              if (Array.isArray(rule.trigger)) {
+                return rule.trigger.includes(trigger)
+              }
+              else {
+                return rule.trigger === trigger
+              }
+            })
       )
         .filter(shouldRuleBeApplied)
         .map((rule, i) => {
@@ -495,15 +495,15 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'form-item',
-        computed(() => {
-          return `${mergedSizeRef.value[0]}${labelPlacementRef.value[0]}${
+          'form-item',
+          computed(() => {
+            return `${mergedSizeRef.value[0]}${labelPlacementRef.value[0]}${
               labelTextAlignRef.value?.[0] || ''
             }`
-        }),
-        cssVarsRef,
-        props
-      )
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     const reverseColSpaceRef = computed(() => {
       // label placement left

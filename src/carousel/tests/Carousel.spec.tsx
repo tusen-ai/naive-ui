@@ -1,6 +1,6 @@
-import { h, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import { sleep } from 'seemly'
+import { h, nextTick } from 'vue'
 import { NCarousel, NCarouselItem } from '../index'
 
 describe('n-carousel', () => {
@@ -13,7 +13,7 @@ describe('n-carousel', () => {
     const wrapper = mount(NCarousel, {
       slots: {
         default: () => {
-          return [...Array(3).keys()].map((i) => {
+          return [...Array.from({ length: 3 }).keys()].map((i) => {
             return h('div', {}, i.toString())
           })
         }
@@ -58,7 +58,7 @@ describe('n-carousel', () => {
       },
       slots: {
         default: () => {
-          return [...Array(3).keys()].map((i) => {
+          return [...Array.from({ length: 3 }).keys()].map((i) => {
             return h('div', {}, i.toString())
           })
         }
@@ -141,7 +141,7 @@ describe('n-carousel', () => {
       },
       slots: {
         default: () => {
-          return [...Array(5).keys()].map((i) => {
+          return [...Array.from({ length: 5 }).keys()].map((i) => {
             return h(NCarouselItem, {
               style: `width: ${(i + 1) * 10}%;`,
               slots: {
@@ -176,7 +176,7 @@ describe('n-carousel', () => {
       },
       slots: {
         default: () => {
-          return [...Array(3).keys()].map((i) => {
+          return [...Array.from({ length: 3 }).keys()].map((i) => {
             return h('div', {}, i.toString())
           })
         }

@@ -5,10 +5,10 @@
   </markdown>
 
 <script lang="ts">
-import { defineComponent, h, ref } from 'vue'
-import { ClipboardOutline, OpenOutline } from '@vicons/ionicons5'
 import type { ImageRenderToolbarProps } from 'naive-ui'
+import { ClipboardOutline, OpenOutline } from '@vicons/ionicons5'
 import { NButton, useMessage } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
 
 export default defineComponent({
   setup() {

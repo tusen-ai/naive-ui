@@ -1,65 +1,13 @@
-import {
-  type HTMLAttributes,
-  type InputHTMLAttributes,
-  type PropType,
-  Transition,
-  computed,
-  defineComponent,
-  h,
-  ref,
-  toRef,
-  vShow,
-  watch,
-  watchEffect,
-  withDirectives
-} from 'vue'
-import { getPreciseEventTarget, happensIn } from 'seemly'
-import { type TreeNode, createTreeMate } from 'treemate'
-import {
-  type FollowerInst,
-  type FollowerPlacement,
-  VBinder,
-  VFollower,
-  VTarget
-} from 'vueuc'
-import { useCompitable, useIsMounted, useMergedState } from 'vooks'
-import { clickoutside } from 'vdirs'
 import type {
   NodeProps,
   RenderLabel,
   RenderOption
 } from '../../_internal/select-menu/src/interface'
 import type { RenderTag } from '../../_internal/selection/src/interface'
-import type { FormValidationStatus } from '../../form/src/interface'
-import {
-  useConfig,
-  useFormItem,
-  useLocale,
-  useTheme,
-  useThemeClass
-} from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import {
-  call,
-  markEventEffectPerformed,
-  useAdjustedTo,
-  warnOnce
-} from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import {
-  type InternalSelectMenuRef,
-  type InternalSelectionInst,
-  NInternalSelectMenu,
-  NInternalSelection
-} from '../../_internal'
-import { type SelectTheme, selectLight } from '../styles'
+import type { FormValidationStatus } from '../../form/src/interface'
 import type { PopoverProps } from '../../popover'
-import {
-  createTmOptions,
-  createValOptMap,
-  filterOptions,
-  patternMatched
-} from './utils'
 import type {
   OnUpdateValue,
   OnUpdateValueImpl,
@@ -76,7 +24,59 @@ import type {
   Value,
   ValueAtom
 } from './interface'
+import { getPreciseEventTarget, happensIn } from 'seemly'
+import { createTreeMate, type TreeNode } from 'treemate'
+import { clickoutside } from 'vdirs'
+import { useCompitable, useIsMounted, useMergedState } from 'vooks'
+import {
+  computed,
+  defineComponent,
+  h,
+  type HTMLAttributes,
+  type InputHTMLAttributes,
+  type PropType,
+  ref,
+  toRef,
+  Transition,
+  vShow,
+  watch,
+  watchEffect,
+  withDirectives
+} from 'vue'
+import {
+  type FollowerInst,
+  type FollowerPlacement,
+  VBinder,
+  VFollower,
+  VTarget
+} from 'vueuc'
+import {
+  type InternalSelectionInst,
+  type InternalSelectMenuRef,
+  NInternalSelection,
+  NInternalSelectMenu
+} from '../../_internal'
+import {
+  useConfig,
+  useFormItem,
+  useLocale,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
+import {
+  call,
+  markEventEffectPerformed,
+  useAdjustedTo,
+  warnOnce
+} from '../../_utils'
+import { selectLight, type SelectTheme } from '../styles'
 import style from './styles/index.cssr'
+import {
+  createTmOptions,
+  createValOptMap,
+  filterOptions,
+  patternMatched
+} from './utils'
 
 export const selectProps = {
   ...(useTheme.props as ThemeProps<SelectTheme>),
@@ -107,6 +107,9 @@ export const selectProps = {
   menuProps: Object as PropType<HTMLAttributes>,
   multiple: Boolean,
   size: String as PropType<Size>,
+  menuSize: {
+    type: String as PropType<Size>
+  },
   filterable: Boolean,
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
@@ -1040,7 +1043,7 @@ export default defineComponent({
                               }
                               treeMate={this.treeMate}
                               multiple={this.multiple}
-                              size={this.size}
+                              size={this.menuSize}
                               renderOption={this.renderOption}
                               renderLabel={this.renderLabel}
                               value={this.mergedValue}

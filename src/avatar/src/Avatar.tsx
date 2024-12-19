@@ -1,37 +1,37 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { AvatarTheme } from '../styles'
+import type { ObjectFit, Size } from './interface'
 import {
-  type ImgHTMLAttributes,
-  type PropType,
-  type VNodeChild,
   computed,
   defineComponent,
   h,
+  type ImgHTMLAttributes,
   inject,
   onBeforeUnmount,
   onMounted,
+  type PropType,
   ref,
+  type VNodeChild,
   watch,
   watchEffect
 } from 'vue'
 import { VResizeObserver } from 'vueuc'
-import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
-import {
-  type IntersectionObserverOptions,
-  observeIntersection
-} from '../../image/src/utils'
-import { tagInjectionKey } from '../../tag/src/Tag'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import {
   color2Class,
   createKey,
   resolveSlot,
   resolveWrappedSlot
 } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
+import {
+  type IntersectionObserverOptions,
+  observeIntersection
+} from '../../image/src/utils'
+import { tagInjectionKey } from '../../tag/src/Tag'
 import { avatarLight } from '../styles'
-import type { AvatarTheme } from '../styles'
 import { avatarGroupInjectionKey } from './context'
-import type { ObjectFit, Size } from './interface'
 import style from './styles/index.cssr'
 
 export const avatarProps = {
@@ -165,35 +165,35 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'avatar',
-        computed(() => {
-          const size = mergedSizeRef.value
-          const round = mergedRoundRef.value
-          const bordered = mergedBorderedRef.value
-          const { color } = props
-          let hash = ''
-          if (size) {
-            if (typeof size === 'number') {
-              hash += `a${size}`
+          'avatar',
+          computed(() => {
+            const size = mergedSizeRef.value
+            const round = mergedRoundRef.value
+            const bordered = mergedBorderedRef.value
+            const { color } = props
+            let hash = ''
+            if (size) {
+              if (typeof size === 'number') {
+                hash += `a${size}`
+              }
+              else {
+                hash += size[0]
+              }
             }
-            else {
-              hash += size[0]
+            if (round) {
+              hash += 'b'
             }
-          }
-          if (round) {
-            hash += 'b'
-          }
-          if (bordered) {
-            hash += 'c'
-          }
-          if (color) {
-            hash += color2Class(color)
-          }
-          return hash
-        }),
-        cssVarsRef,
-        props
-      )
+            if (bordered) {
+              hash += 'c'
+            }
+            if (color) {
+              hash += color2Class(color)
+            }
+            return hash
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     const shouldStartLoadingRef = ref(!props.lazy)
@@ -281,8 +281,8 @@ export default defineComponent({
       img = this.renderFallback
         ? this.renderFallback()
         : resolveSlot($slots.fallback, () => [
-          <img src={this.fallbackSrc} style={{ objectFit: this.objectFit }} />
-        ])
+            <img src={this.fallbackSrc} style={{ objectFit: this.objectFit }} />
+          ])
     }
     else {
       img = resolveWrappedSlot($slots.default, (children) => {

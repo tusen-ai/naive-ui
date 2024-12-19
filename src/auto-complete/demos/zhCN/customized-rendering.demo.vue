@@ -5,10 +5,10 @@
 </markdown>
 
 <script lang="ts">
-import type { VNodeChild } from 'vue'
-import { computed, defineComponent, h, ref } from 'vue'
 import type { SelectOption } from 'naive-ui'
+import type { VNodeChild } from 'vue'
 import { NTag } from 'naive-ui'
+import { computed, defineComponent, h, ref } from 'vue'
 
 export default defineComponent({
   setup() {
