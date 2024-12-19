@@ -32,8 +32,8 @@ import {
 } from '../../_utils'
 import { checkboxLight } from '../styles'
 import { checkboxGroupInjectionKey } from './CheckboxGroup'
-import CheckMark from './CheckMark'
-import LineMark from './LineMark'
+import renderCheckMark from './CheckMark'
+import renderLineMark from './LineMark'
 import style from './styles/index.cssr'
 
 export const checkboxProps = {
@@ -246,8 +246,8 @@ export default defineComponent({
           colorTableHeader,
           colorTableHeaderModal,
           colorTableHeaderPopover,
-          checkMarkColor,
-          checkMarkColorDisabled,
+          renderCheckMarkColor,
+          renderCheckMarkColorDisabled,
           border,
           borderFocus,
           borderDisabled,
@@ -255,7 +255,7 @@ export default defineComponent({
           boxShadowFocus,
           textColor,
           textColorDisabled,
-          checkMarkColorDisabledChecked,
+          renderCheckMarkColorDisabledChecked,
           colorDisabledChecked,
           borderDisabledChecked,
           labelPadding,
@@ -286,9 +286,10 @@ export default defineComponent({
         '--n-color-disabled-checked': colorDisabledChecked,
         '--n-text-color': textColor,
         '--n-text-color-disabled': textColorDisabled,
-        '--n-check-mark-color': checkMarkColor,
-        '--n-check-mark-color-disabled': checkMarkColorDisabled,
-        '--n-check-mark-color-disabled-checked': checkMarkColorDisabledChecked,
+        '--n-check-mark-color': renderCheckMarkColor,
+        '--n-check-mark-color-disabled': renderCheckMarkColorDisabled,
+        '--n-check-mark-color-disabled-checked':
+          renderCheckMarkColorDisabledChecked,
         '--n-font-size': fontSize,
         '--n-label-padding': labelPadding
       }
@@ -389,11 +390,11 @@ export default defineComponent({
                       key="indeterminate"
                       class={`${mergedClsPrefix}-checkbox-icon`}
                     >
-                      {LineMark}
+                      {renderLineMark()}
                     </div>
                   ) : (
                     <div key="check" class={`${mergedClsPrefix}-checkbox-icon`}>
-                      {CheckMark}
+                      {renderCheckMark()}
                     </div>
                   )
               }}
