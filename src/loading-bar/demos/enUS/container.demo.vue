@@ -49,7 +49,10 @@ export default defineComponent({
       ref="loadingBarTargetRef"
       style="
         position: absolute;
-        inset: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
         border-radius: var(--n-border-radius);
         overflow: hidden;
         pointer-events: none;
