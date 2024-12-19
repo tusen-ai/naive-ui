@@ -23,6 +23,7 @@ import {
   type PropType,
   provide,
   ref,
+  type SlotsType,
   type TextareaHTMLAttributes,
   toRef,
   type VNode,
@@ -170,9 +171,20 @@ export const inputProps = {
 
 export type InputProps = ExtractPublicPropTypes<typeof inputProps>
 
+export interface InputSlots {
+  'clear-icon'?: any
+  count?: (props: { value: string }) => any
+  'password-invisible-icon'?: any
+  'password-visible-icon'?: any
+  prefix?: any
+  separator?: any
+  suffix?: any
+}
+
 export default defineComponent({
   name: 'Input',
   props: inputProps,
+  slots: Object as SlotsType<InputSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {

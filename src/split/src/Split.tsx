@@ -9,6 +9,7 @@ import {
   h,
   type PropType,
   ref,
+  type SlotsType,
   toRef,
   watchEffect
 } from 'vue'
@@ -60,9 +61,17 @@ export const splitProps = {
 
 export type SplitProps = ExtractPublicPropTypes<typeof splitProps>
 
+export interface SplitSlots {
+  default?: any
+  1?: any
+  2?: any
+  'resize-trigger'?: any
+}
+
 export default defineComponent({
   name: 'Split',
   props: splitProps,
+  slots: Object as SlotsType<SplitSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(

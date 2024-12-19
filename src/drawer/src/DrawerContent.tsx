@@ -5,7 +5,8 @@ import {
   defineComponent,
   h,
   inject,
-  type PropType
+  type PropType,
+  type SlotsType
 } from 'vue'
 import { NBaseClose, NScrollbar } from '../../_internal'
 import { throwError } from '../../_utils'
@@ -30,9 +31,16 @@ export type DrawerContentProps = ExtractPublicPropTypes<
   typeof drawerContentProps
 >
 
+export interface DrawerContentSlots {
+  default?: any
+  header?: any
+  footer?: any
+}
+
 export default defineComponent({
   name: 'DrawerContent',
   props: drawerContentProps,
+  slots: Object as SlotsType<DrawerContentSlots>,
   setup() {
     const NDrawer = inject(drawerInjectionKey, null)
     if (!NDrawer) {

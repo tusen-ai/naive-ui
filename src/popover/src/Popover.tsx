@@ -23,6 +23,7 @@ import {
   provide,
   type Ref,
   ref,
+  type SlotsType,
   Text,
   toRef,
   type VNode,
@@ -222,10 +223,19 @@ export const popoverProps = {
 export type PopoverProps = ExtractPublicPropTypes<typeof popoverBaseProps>
 export type PopoverInternalProps = ExtractInternalPropTypes<typeof popoverProps>
 
+export interface PopoverSlots {
+  trigger?: any
+  footer?: any
+  header?: any
+  default?: any
+  [key: string]: any
+}
+
 export default defineComponent({
   name: 'Popover',
   inheritAttrs: false,
   props: popoverProps,
+  slots: Object as SlotsType<PopoverSlots>,
   __popover__: true,
   setup(props) {
     if (__DEV__) {

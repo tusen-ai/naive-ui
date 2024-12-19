@@ -132,3 +132,11 @@ export interface FileAndEntry {
   entry: FileSystemFileEntry | null
   source: 'dnd' | 'input'
 }
+
+export interface UploadTriggerDefaultSlotOptions {
+  handleClick: () => void
+  handleDragOver: (e: DragEvent) => void
+  handleDragEnter: (e: DragEvent) => void
+  handleDragLeave: (e: DragEvent) => void
+  handleDrop: (e: DragEvent) => void
+}

@@ -178,6 +178,11 @@ export const timePickerProps = {
 
 export type TimePickerProps = ExtractPublicPropTypes<typeof timePickerProps>
 
+export interface TimePickerSlots {
+  default?: any
+  icon?: any
+}
+
 export default defineComponent({
   name: 'TimePicker',
   props: timePickerProps,

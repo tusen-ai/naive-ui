@@ -21,6 +21,7 @@ export type {
   RowData as DataTableRowData,
   RowKey as DataTableRowKey,
   TableSelectionColumn as DataTableSelectionColumn,
+  DataTableSlots,
   SortState as DataTableSortState
 } from './src/interface'
 export * from './src/publicTypes'
