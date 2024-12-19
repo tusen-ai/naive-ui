@@ -13,6 +13,7 @@ import {
   inject,
   type PropType,
   ref,
+  toRef,
   Transition,
   withDirectives
 } from 'vue'
@@ -74,7 +75,7 @@ export default defineComponent({
     function handleResize(): void {
       syncCascaderMenuPosition()
     }
-    useOnResize(selfElRef, handleResize)
+    useOnResize(selfElRef, handleResize, { show: toRef(props, 'show') })
     function showErrorMessage(label: string): void {
       const {
         value: { loadingRequiredMessage }
