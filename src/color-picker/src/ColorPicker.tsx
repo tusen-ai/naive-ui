@@ -526,13 +526,13 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'color-picker',
-        computed(() => {
-          return mergedSizeRef.value[0]
-        }),
-        cssVarsRef,
-        props
-      )
+          'color-picker',
+          computed(() => {
+            return mergedSizeRef.value[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     function renderPanel(): VNode {
@@ -746,13 +746,13 @@ export default defineComponent({
                         default: () =>
                           this.mergedShow
                             ? withDirectives(this.renderPanel(), [
-                              [
-                                clickoutside,
-                                this.handleClickOutside,
-                                undefined as any as string,
-                                { capture: true }
-                              ]
-                            ])
+                                [
+                                  clickoutside,
+                                  this.handleClickOutside,
+                                  undefined as any as string,
+                                  { capture: true }
+                                ]
+                              ])
                             : null
                       }}
                     </Transition>

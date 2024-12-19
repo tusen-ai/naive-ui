@@ -387,12 +387,12 @@ export default defineComponent({
           )
           const arrow = props.showArrow
             ? renderArrow({
-              arrowClass: props.arrowClass,
-              arrowStyle: props.arrowStyle,
-              arrowWrapperClass: props.arrowWrapperClass,
-              arrowWrapperStyle: props.arrowWrapperStyle,
-              clsPrefix: mergedClsPrefix
-            })
+                arrowClass: props.arrowClass,
+                arrowStyle: props.arrowStyle,
+                arrowWrapperClass: props.arrowWrapperClass,
+                arrowWrapperStyle: props.arrowWrapperStyle,
+                clsPrefix: mergedClsPrefix
+              })
             : null
           return [maybeScrollableBody, arrow]
         }

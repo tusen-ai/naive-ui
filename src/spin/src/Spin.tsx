@@ -99,14 +99,14 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'spin',
-        computed(() => {
-          const { size } = props
-          return typeof size === 'number' ? String(size) : size[0]
-        }),
-        cssVarsRef,
-        props
-      )
+          'spin',
+          computed(() => {
+            const { size } = props
+            return typeof size === 'number' ? String(size) : size[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     const compitableShow = useCompitable(props, ['spinning', 'show'])

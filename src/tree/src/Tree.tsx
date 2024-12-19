@@ -446,18 +446,18 @@ export default defineComponent({
     const dataTreeMateRef = props.internalTreeSelect
       ? treeSelectInjection!.dataTreeMate
       : computed(() =>
-        props.showIrrelevantNodes
-          ? displayTreeMateRef.value
-          : createTreeMate(
-            props.data,
-            createTreeMateOptions(
-              props.keyField,
-              props.childrenField,
-              props.disabledField,
-              props.getChildren
-            )
-          )
-      )
+          props.showIrrelevantNodes
+            ? displayTreeMateRef.value
+            : createTreeMate(
+                props.data,
+                createTreeMateOptions(
+                  props.keyField,
+                  props.childrenField,
+                  props.disabledField,
+                  props.getChildren
+                )
+              )
+        )
     const { watchProps } = props
     const uncontrolledCheckedKeysRef = ref<Key[]>([])
     if (watchProps?.includes('defaultCheckedKeys')) {
@@ -1874,12 +1874,12 @@ export default defineComponent({
         >
           {!fNodes.length
             ? resolveSlot(this.$slots.empty, () => [
-              <NEmpty
-                class={`${mergedClsPrefix}-tree__empty`}
-                theme={this.mergedTheme.peers.Empty}
-                themeOverrides={this.mergedTheme.peerOverrides.Empty}
-              />
-            ])
+                <NEmpty
+                  class={`${mergedClsPrefix}-tree__empty`}
+                  theme={this.mergedTheme.peers.Empty}
+                  themeOverrides={this.mergedTheme.peerOverrides.Empty}
+                />
+              ])
             : fNodes.map(createNode)}
         </div>
       )

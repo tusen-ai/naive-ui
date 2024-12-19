@@ -117,15 +117,15 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'step',
-        computed(() => {
-          const { value: status } = mergedStatusRef
-          const { size } = stepsProps
-          return `${status[0]}${size[0]}`
-        }),
-        cssVarsRef,
-        stepsProps
-      )
+          'step',
+          computed(() => {
+            const { value: status } = mergedStatusRef
+            const { size } = stepsProps
+            return `${status[0]}${size[0]}`
+          }),
+          cssVarsRef,
+          stepsProps
+        )
       : undefined
 
     const handleStepClick = computed((): undefined | (() => void) => {

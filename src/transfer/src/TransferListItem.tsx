@@ -89,13 +89,13 @@ export default defineComponent({
           {source
             ? renderSourceLabel
               ? renderSourceLabel({
-                option: this.option
-              })
+                  option: this.option
+                })
               : label
             : renderTargetLabel
               ? renderTargetLabel({
-                option: this.option
-              })
+                  option: this.option
+                })
               : label}
         </div>
         {!source && !disabled && (

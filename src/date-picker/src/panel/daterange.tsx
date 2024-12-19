@@ -262,7 +262,7 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
               {this.actions?.includes('clear')
                 ? resolveSlotWithProps(
-                  $slots.clear,
+                    $slots.clear,
                     {
                       onClear: this.handleClearClick,
                       text: this.locale.clear
@@ -277,11 +277,11 @@ export default defineComponent({
                         {{ default: () => this.locale.clear }}
                       </NButton>
                     ]
-                )
+                  )
                 : null}
               {this.actions?.includes('confirm')
                 ? resolveSlotWithProps(
-                  $slots.confirm,
+                    $slots.confirm,
                     {
                       onConfirm: this.handleConfirmClick,
                       disabled: this.isRangeInvalid || this.isSelecting,
@@ -299,7 +299,7 @@ export default defineComponent({
                         {{ default: () => this.locale.confirm }}
                       </NButton>
                     ]
-                )
+                  )
                 : null}
             </div>
           </div>

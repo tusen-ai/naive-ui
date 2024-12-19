@@ -225,13 +225,13 @@ export default defineComponent({
         !trigger
           ? rules
           : rules.filter((rule) => {
-            if (Array.isArray(rule.trigger)) {
-              return rule.trigger.includes(trigger)
-            }
-            else {
-              return rule.trigger === trigger
-            }
-          })
+              if (Array.isArray(rule.trigger)) {
+                return rule.trigger.includes(trigger)
+              }
+              else {
+                return rule.trigger === trigger
+              }
+            })
       )
         .filter(shouldRuleBeApplied)
         .map((rule, i) => {
@@ -495,15 +495,15 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'form-item',
-        computed(() => {
-          return `${mergedSizeRef.value[0]}${labelPlacementRef.value[0]}${
-            labelTextAlignRef.value?.[0] || ''
-          }`
-        }),
-        cssVarsRef,
-        props
-      )
+          'form-item',
+          computed(() => {
+            return `${mergedSizeRef.value[0]}${labelPlacementRef.value[0]}${
+              labelTextAlignRef.value?.[0] || ''
+            }`
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     const reverseColSpaceRef = computed(() => {
       // label placement left

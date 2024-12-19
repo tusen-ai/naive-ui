@@ -181,7 +181,7 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
               {this.actions?.includes('clear')
                 ? resolveSlotWithProps(
-                  this.$slots.clear,
+                    this.$slots.clear,
                     {
                       onClear: this.handleClearClick,
                       text: this.locale.clear
@@ -196,11 +196,11 @@ export default defineComponent({
                         {{ default: () => this.locale.clear }}
                       </NButton>
                     ]
-                )
+                  )
                 : null}
               {this.actions?.includes('now')
                 ? resolveSlotWithProps(
-                  this.$slots.now,
+                    this.$slots.now,
                     {
                       onNow: this.handleNowClick,
                       text: this.locale.now
@@ -215,7 +215,7 @@ export default defineComponent({
                         {{ default: () => this.locale.now }}
                       </NButton>
                     ]
-                )
+                  )
                 : null}
               {/** we don't need a confirm button for date picking */}
             </div>

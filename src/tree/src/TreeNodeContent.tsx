@@ -78,30 +78,30 @@ export default defineComponent({
           <div class={`${clsPrefix}-tree-node-content__prefix`}>
             {renderPrefix
               ? renderPrefix({
-                option: rawNode,
-                selected,
-                checked
-              })
+                  option: rawNode,
+                  selected,
+                  checked
+                })
               : render(prefix)}
           </div>
         ) : null}
         <div class={`${clsPrefix}-tree-node-content__text`}>
           {renderLabel
             ? renderLabel({
-              option: rawNode,
-              selected,
-              checked
-            })
+                option: rawNode,
+                selected,
+                checked
+              })
             : render(label)}
         </div>
         {renderSuffix || suffix ? (
           <div class={`${clsPrefix}-tree-node-content__suffix`}>
             {renderSuffix
               ? renderSuffix({
-                option: rawNode,
-                selected,
-                checked
-              })
+                  option: rawNode,
+                  selected,
+                  checked
+                })
               : render(suffix)}
           </div>
         ) : null}

@@ -139,11 +139,11 @@ export const Notification = defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'notification',
-        computed(() => props.type[0]),
-        cssVarsRef,
-        providerProps
-      )
+          'notification',
+          computed(() => props.type[0]),
+          cssVarsRef,
+          providerProps
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,

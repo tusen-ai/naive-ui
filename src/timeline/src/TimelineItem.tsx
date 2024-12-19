@@ -89,17 +89,17 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'timeline-item',
-        computed(() => {
-          const {
-            props: { size, iconSize: iconSizeProp }
-          } = NTimeline
-          const { type } = props
-          return `${size[0]}${iconSizeProp || 'a'}${type[0]}`
-        }),
-        cssVarsRef,
-        NTimeline.props
-      )
+          'timeline-item',
+          computed(() => {
+            const {
+              props: { size, iconSize: iconSizeProp }
+            } = NTimeline
+            const { type } = props
+            return `${size[0]}${iconSizeProp || 'a'}${type[0]}`
+          }),
+          cssVarsRef,
+          NTimeline.props
+        )
       : undefined
     return {
       mergedClsPrefix: NTimeline.mergedClsPrefixRef,

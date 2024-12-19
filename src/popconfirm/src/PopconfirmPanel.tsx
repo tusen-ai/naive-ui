@@ -58,11 +58,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'popconfirm-panel',
-        undefined,
-        cssVarsRef,
-        popconfirmProps
-      )
+          'popconfirm-panel',
+          undefined,
+          cssVarsRef,
+          popconfirmProps
+        )
       : undefined
     return {
       ...useLocale('Popconfirm'),

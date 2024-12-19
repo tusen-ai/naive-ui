@@ -245,111 +245,111 @@ export default defineComponent({
     const { $slots, mergedClsPrefix } = this
     return this.displayDirective === 'show' || this.displayed || this.show
       ? withDirectives(
-        /* Keep the wrapper dom. Make sure the drawer has a host.
+          /* Keep the wrapper dom. Make sure the drawer has a host.
           Nor the detached content will disappear without transition */
-        <div role="none">
-          <VFocusTrap
-            disabled={!this.showMask || !this.trapFocus}
-            active={this.show}
-            autoFocus={this.autoFocus}
-            onEsc={this.onEsc}
-          >
-            {{
-              default: () => (
-                <Transition
-                  name={this.transitionName}
-                  appear={this.isMounted}
-                  onAfterEnter={this.onAfterEnter}
-                  onAfterLeave={this.handleAfterLeave}
-                >
-                  {{
-                    default: () =>
-                      withDirectives(
-                        h(
-                          'div',
-                          mergeProps(this.$attrs, {
-                            role: 'dialog',
-                            ref: 'bodyRef',
-                            'aria-modal': 'true',
-                            class: [
-                              `${mergedClsPrefix}-drawer`,
-                              this.rtlEnabled
-                              && `${mergedClsPrefix}-drawer--rtl`,
-                              `${mergedClsPrefix}-drawer--${this.placement}-placement`,
-                              /**
-                               * When the mouse is pressed to resize the drawer,
-                               * disable text selection
-                               */
-                              this.isDragging
-                              && `${mergedClsPrefix}-drawer--unselectable`,
-                              this.nativeScrollbar
-                              && `${mergedClsPrefix}-drawer--native-scrollbar`
+          <div role="none">
+            <VFocusTrap
+              disabled={!this.showMask || !this.trapFocus}
+              active={this.show}
+              autoFocus={this.autoFocus}
+              onEsc={this.onEsc}
+            >
+              {{
+                default: () => (
+                  <Transition
+                    name={this.transitionName}
+                    appear={this.isMounted}
+                    onAfterEnter={this.onAfterEnter}
+                    onAfterLeave={this.handleAfterLeave}
+                  >
+                    {{
+                      default: () =>
+                        withDirectives(
+                          h(
+                            'div',
+                            mergeProps(this.$attrs, {
+                              role: 'dialog',
+                              ref: 'bodyRef',
+                              'aria-modal': 'true',
+                              class: [
+                                `${mergedClsPrefix}-drawer`,
+                                this.rtlEnabled
+                                && `${mergedClsPrefix}-drawer--rtl`,
+                                `${mergedClsPrefix}-drawer--${this.placement}-placement`,
+                                /**
+                                 * When the mouse is pressed to resize the drawer,
+                                 * disable text selection
+                                 */
+                                this.isDragging
+                                && `${mergedClsPrefix}-drawer--unselectable`,
+                                this.nativeScrollbar
+                                && `${mergedClsPrefix}-drawer--native-scrollbar`
+                              ]
+                            }),
+                            [
+                              this.resizable ? (
+                                <div
+                                  class={[
+                                    `${mergedClsPrefix}-drawer__resize-trigger`,
+                                    (this.isDragging
+                                      || this.isHoverOnResizeTrigger)
+                                    && `${mergedClsPrefix}-drawer__resize-trigger--hover`
+                                  ]}
+                                  onMouseenter={
+                                    this.handleMouseenterResizeTrigger
+                                  }
+                                  onMouseleave={
+                                    this.handleMouseleaveResizeTrigger
+                                  }
+                                  onMousedown={
+                                    this.handleMousedownResizeTrigger
+                                  }
+                                />
+                              ) : null,
+                              this.nativeScrollbar ? (
+                                <div
+                                  class={[
+                                    `${mergedClsPrefix}-drawer-content-wrapper`,
+                                    this.contentClass
+                                  ]}
+                                  style={this.contentStyle}
+                                  role="none"
+                                >
+                                  {$slots}
+                                </div>
+                              ) : (
+                                <NScrollbar
+                                  {...this.scrollbarProps}
+                                  contentStyle={this.contentStyle}
+                                  contentClass={[
+                                    `${mergedClsPrefix}-drawer-content-wrapper`,
+                                    this.contentClass
+                                  ]}
+                                  theme={this.mergedTheme.peers.Scrollbar}
+                                  themeOverrides={
+                                    this.mergedTheme.peerOverrides.Scrollbar
+                                  }
+                                >
+                                  {$slots}
+                                </NScrollbar>
+                              )
                             ]
-                          }),
-                          [
-                            this.resizable ? (
-                              <div
-                                class={[
-                                  `${mergedClsPrefix}-drawer__resize-trigger`,
-                                  (this.isDragging
-                                    || this.isHoverOnResizeTrigger)
-                                  && `${mergedClsPrefix}-drawer__resize-trigger--hover`
-                                ]}
-                                onMouseenter={
-                                  this.handleMouseenterResizeTrigger
-                                }
-                                onMouseleave={
-                                  this.handleMouseleaveResizeTrigger
-                                }
-                                onMousedown={
-                                  this.handleMousedownResizeTrigger
-                                }
-                              />
-                            ) : null,
-                            this.nativeScrollbar ? (
-                              <div
-                                class={[
-                                  `${mergedClsPrefix}-drawer-content-wrapper`,
-                                  this.contentClass
-                                ]}
-                                style={this.contentStyle}
-                                role="none"
-                              >
-                                {$slots}
-                              </div>
-                            ) : (
-                              <NScrollbar
-                                {...this.scrollbarProps}
-                                contentStyle={this.contentStyle}
-                                contentClass={[
-                                  `${mergedClsPrefix}-drawer-content-wrapper`,
-                                  this.contentClass
-                                ]}
-                                theme={this.mergedTheme.peers.Scrollbar}
-                                themeOverrides={
-                                  this.mergedTheme.peerOverrides.Scrollbar
-                                }
-                              >
-                                {$slots}
-                              </NScrollbar>
-                            )
-                          ]
-                        ),
-                        this.bodyDirectives
-                      )
-                  }}
-                </Transition>
-              )
-            }}
-          </VFocusTrap>
-        </div>,
-        [
+                          ),
+                          this.bodyDirectives
+                        )
+                    }}
+                  </Transition>
+                )
+              }}
+            </VFocusTrap>
+          </div>,
           [
-            vShow,
-            this.displayDirective === 'if' || this.displayed || this.show
+            [
+              vShow,
+              this.displayDirective === 'if' || this.displayed || this.show
+            ]
           ]
-        ]
-      )
+        )
       : null
   }
 })

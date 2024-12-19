@@ -165,35 +165,35 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'avatar',
-        computed(() => {
-          const size = mergedSizeRef.value
-          const round = mergedRoundRef.value
-          const bordered = mergedBorderedRef.value
-          const { color } = props
-          let hash = ''
-          if (size) {
-            if (typeof size === 'number') {
-              hash += `a${size}`
+          'avatar',
+          computed(() => {
+            const size = mergedSizeRef.value
+            const round = mergedRoundRef.value
+            const bordered = mergedBorderedRef.value
+            const { color } = props
+            let hash = ''
+            if (size) {
+              if (typeof size === 'number') {
+                hash += `a${size}`
+              }
+              else {
+                hash += size[0]
+              }
             }
-            else {
-              hash += size[0]
+            if (round) {
+              hash += 'b'
             }
-          }
-          if (round) {
-            hash += 'b'
-          }
-          if (bordered) {
-            hash += 'c'
-          }
-          if (color) {
-            hash += color2Class(color)
-          }
-          return hash
-        }),
-        cssVarsRef,
-        props
-      )
+            if (bordered) {
+              hash += 'c'
+            }
+            if (color) {
+              hash += color2Class(color)
+            }
+            return hash
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     const shouldStartLoadingRef = ref(!props.lazy)
@@ -281,8 +281,8 @@ export default defineComponent({
       img = this.renderFallback
         ? this.renderFallback()
         : resolveSlot($slots.fallback, () => [
-          <img src={this.fallbackSrc} style={{ objectFit: this.objectFit }} />
-        ])
+            <img src={this.fallbackSrc} style={{ objectFit: this.objectFit }} />
+          ])
     }
     else {
       img = resolveWrappedSlot($slots.default, (children) => {

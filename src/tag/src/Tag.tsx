@@ -219,26 +219,26 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'tag',
-        computed(() => {
-          let hash = ''
-          const { type, size, color: { color, textColor } = {} } = props
-          hash += type[0]
-          hash += size[0]
-          if (color) {
-            hash += `a${color2Class(color)}`
-          }
-          if (textColor) {
-            hash += `b${color2Class(textColor)}`
-          }
-          if (mergedBorderedRef.value) {
-            hash += 'c'
-          }
-          return hash
-        }),
-        cssVarsRef,
-        props
-      )
+          'tag',
+          computed(() => {
+            let hash = ''
+            const { type, size, color: { color, textColor } = {} } = props
+            hash += type[0]
+            hash += size[0]
+            if (color) {
+              hash += `a${color2Class(color)}`
+            }
+            if (textColor) {
+              hash += `b${color2Class(textColor)}`
+            }
+            if (mergedBorderedRef.value) {
+              hash += 'c'
+            }
+            return hash
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       ...tagPublicMethods,

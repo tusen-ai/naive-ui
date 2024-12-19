@@ -750,13 +750,13 @@ export default defineComponent({
 
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'tabs',
-        computed(() => {
-          return `${compitableSizeRef.value[0]}${props.type[0]}`
-        }),
-        cssVarsRef,
-        props
-      )
+          'tabs',
+          computed(() => {
+            return `${compitableSizeRef.value[0]}${props.type[0]}`
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     return {
@@ -808,13 +808,13 @@ export default defineComponent({
 
     const tabPaneChildren = defaultSlot
       ? flatten(defaultSlot()).filter((v) => {
-        return (v.type as any).__TAB_PANE__ === true
-      })
+          return (v.type as any).__TAB_PANE__ === true
+        })
       : []
     const tabChildren = defaultSlot
       ? flatten(defaultSlot()).filter((v) => {
-        return (v.type as any).__TAB__ === true
-      })
+          return (v.type as any).__TAB__ === true
+        })
       : []
     const showPane = !tabChildren.length
     const isCard = type === 'card'
@@ -839,47 +839,47 @@ export default defineComponent({
           )}
           {showPane
             ? tabPaneChildren.map((tabPaneVNode: any, index: number) => {
-              renderNameListRef.value.push(
-                tabPaneVNode.props.name as string | number
-              )
-              return justifyTabDynamicProps(
-                <Tab
-                  {...tabPaneVNode.props}
-                  internalCreatedByPane={true}
-                  internalLeftPadded={
-                    index !== 0
-                    && (!mergedJustifyContent
-                      || mergedJustifyContent === 'center'
-                      || mergedJustifyContent === 'start'
-                      || mergedJustifyContent === 'end')
-                  }
-                >
-                  {tabPaneVNode.children
-                    ? {
-                        default: tabPaneVNode.children.tab
-                      }
-                    : undefined}
-                </Tab>
-              )
-            })
-            : tabChildren.map((tabVNode: any, index: number) => {
-              renderNameListRef.value.push(
-                tabVNode.props.name as string | number
-              )
-              if (index !== 0 && !mergedJustifyContent) {
-                return justifyTabDynamicProps(
-                  createLeftPaddedTabVNode(tabVNode as VNode)
+                renderNameListRef.value.push(
+                  tabPaneVNode.props.name as string | number
                 )
-              }
-              else {
-                return justifyTabDynamicProps(tabVNode as VNode)
-              }
-            })}
+                return justifyTabDynamicProps(
+                  <Tab
+                    {...tabPaneVNode.props}
+                    internalCreatedByPane={true}
+                    internalLeftPadded={
+                      index !== 0
+                      && (!mergedJustifyContent
+                        || mergedJustifyContent === 'center'
+                        || mergedJustifyContent === 'start'
+                        || mergedJustifyContent === 'end')
+                    }
+                  >
+                    {tabPaneVNode.children
+                      ? {
+                          default: tabPaneVNode.children.tab
+                        }
+                      : undefined}
+                  </Tab>
+                )
+              })
+            : tabChildren.map((tabVNode: any, index: number) => {
+                renderNameListRef.value.push(
+                  tabVNode.props.name as string | number
+                )
+                if (index !== 0 && !mergedJustifyContent) {
+                  return justifyTabDynamicProps(
+                    createLeftPaddedTabVNode(tabVNode as VNode)
+                  )
+                }
+                else {
+                  return justifyTabDynamicProps(tabVNode as VNode)
+                }
+              })}
           {!addTabFixed && addable && isCard
             ? createAddTag(
-              addable,
-              (showPane ? tabPaneChildren.length : tabChildren.length) !== 0
-            )
+                addable,
+                (showPane ? tabPaneChildren.length : tabChildren.length) !== 0
+              )
             : null}
           {mergedJustifyContent ? null : (
             <div
@@ -958,36 +958,36 @@ export default defineComponent({
                     </div>
                     {showPane
                       ? tabPaneChildren.map(
-                        (tabPaneVNode: any, index: number) => {
-                          renderNameListRef.value.push(
-                            tabPaneVNode.props.name as string | number
-                          )
-                          return (
-                            <Tab
-                              {...tabPaneVNode.props}
-                              internalCreatedByPane={true}
-                              internalLeftPadded={index !== 0}
-                            >
-                              {tabPaneVNode.children
-                                ? {
-                                    default: tabPaneVNode.children.tab
-                                  }
-                                : undefined}
-                            </Tab>
-                          )
-                        }
-                      )
-                      : tabChildren.map((tabVNode: any, index: number) => {
-                        renderNameListRef.value.push(
-                          tabVNode.props.name as string | number
+                          (tabPaneVNode: any, index: number) => {
+                            renderNameListRef.value.push(
+                              tabPaneVNode.props.name as string | number
+                            )
+                            return (
+                              <Tab
+                                {...tabPaneVNode.props}
+                                internalCreatedByPane={true}
+                                internalLeftPadded={index !== 0}
+                              >
+                                {tabPaneVNode.children
+                                  ? {
+                                      default: tabPaneVNode.children.tab
+                                    }
+                                  : undefined}
+                              </Tab>
+                            )
+                          }
                         )
-                        if (index === 0) {
-                          return tabVNode
-                        }
-                        else {
-                          return createLeftPaddedTabVNode(tabVNode as VNode)
-                        }
-                      })}
+                      : tabChildren.map((tabVNode: any, index: number) => {
+                          renderNameListRef.value.push(
+                            tabVNode.props.name as string | number
+                          )
+                          if (index === 0) {
+                            return tabVNode
+                          }
+                          else {
+                            return createLeftPaddedTabVNode(tabVNode as VNode)
+                          }
+                        })}
                   </div>
                 )
               }}

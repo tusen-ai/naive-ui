@@ -102,8 +102,8 @@ export default defineComponent({
       return (
         pattern
           ? selectOptionsRef.value.filter((option) => {
-            return mergedFilter(pattern, option.rawNode, option.path)
-          })
+              return mergedFilter(pattern, option.rawNode, option.path)
+            })
           : selectOptionsRef.value
       ).map(option => ({
         value: option.value,
@@ -192,35 +192,35 @@ export default defineComponent({
           default: () =>
             this.show
               ? withDirectives(
-                <NInternalSelectMenu
-                  ref="menuInstRef"
-                  onResize={this.handleResize}
-                  clsPrefix={mergedClsPrefix}
-                  class={`${mergedClsPrefix}-cascader-menu`}
-                  autoPending
-                  themeOverrides={
-                    mergedTheme.peerOverrides.InternalSelectMenu
-                  }
-                  theme={mergedTheme.peers.InternalSelectMenu}
-                  treeMate={this.selectTreeMate}
-                  multiple={this.multiple}
-                  value={this.value}
-                  onToggle={this.handleToggle}
-                >
-                  {{
-                    empty: () =>
-                      resolveSlot(cascaderSlots['not-found'], () => [])
-                  }}
-                </NInternalSelectMenu>,
-                [
+                  <NInternalSelectMenu
+                    ref="menuInstRef"
+                    onResize={this.handleResize}
+                    clsPrefix={mergedClsPrefix}
+                    class={`${mergedClsPrefix}-cascader-menu`}
+                    autoPending
+                    themeOverrides={
+                      mergedTheme.peerOverrides.InternalSelectMenu
+                    }
+                    theme={mergedTheme.peers.InternalSelectMenu}
+                    treeMate={this.selectTreeMate}
+                    multiple={this.multiple}
+                    value={this.value}
+                    onToggle={this.handleToggle}
+                  >
+                    {{
+                      empty: () =>
+                        resolveSlot(cascaderSlots['not-found'], () => [])
+                    }}
+                  </NInternalSelectMenu>,
                   [
-                    clickoutside,
-                    this.handleClickOutside,
-                    undefined as unknown as string,
-                    { capture: true }
+                    [
+                      clickoutside,
+                      this.handleClickOutside,
+                      undefined as unknown as string,
+                      { capture: true }
+                    ]
                   ]
-                ]
-              )
+                )
               : null
         }}
       </Transition>

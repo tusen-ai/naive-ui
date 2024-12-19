@@ -95,21 +95,21 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'result',
-        computed(() => {
-          const { size, status } = props
-          let hash = ''
-          if (size) {
-            hash += size[0]
-          }
-          if (status) {
-            hash += status[0]
-          }
-          return hash
-        }),
-        cssVarsRef,
-        props
-      )
+          'result',
+          computed(() => {
+            const { size, status } = props
+            let hash = ''
+            if (size) {
+              hash += size[0]
+            }
+            if (status) {
+              hash += status[0]
+            }
+            return hash
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     return {

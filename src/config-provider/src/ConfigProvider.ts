@@ -241,12 +241,12 @@ export default defineComponent({
   render() {
     return !this.abstract
       ? h(
-        this.as || this.tag,
-        {
-          class: `${this.mergedClsPrefix || defaultClsPrefix}-config-provider`
-        },
-        this.$slots.default?.()
-      )
+          this.as || this.tag,
+          {
+            class: `${this.mergedClsPrefix || defaultClsPrefix}-config-provider`
+          },
+          this.$slots.default?.()
+        )
       : this.$slots.default?.()
   }
 })

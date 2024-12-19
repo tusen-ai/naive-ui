@@ -141,13 +141,13 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'alert',
-        computed(() => {
-          return props.type[0]
-        }),
-        cssVarsRef,
-        props
-      )
+          'alert',
+          computed(() => {
+            return props.type[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     const visibleRef = ref(true)
     const doAfterLeave = (): void => {

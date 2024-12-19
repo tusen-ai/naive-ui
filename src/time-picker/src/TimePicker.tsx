@@ -289,10 +289,10 @@ export default defineComponent({
           = mergedValue === null
             ? ''
             : mergedFormatRef.value(
-              mergedValue,
-              props.format,
-              dateFnsOptionsRef.value
-            )
+                mergedValue,
+                props.format,
+                dateFnsOptionsRef.value
+              )
       },
       {
         immediate: true
@@ -804,11 +804,11 @@ export default defineComponent({
     })
     const triggerThemeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'time-picker-trigger',
-        undefined,
-        triggerCssVarsRef,
-        props
-      )
+          'time-picker-trigger',
+          undefined,
+          triggerCssVarsRef,
+          props
+        )
       : undefined
     const cssVarsRef = computed(() => {
       const {
