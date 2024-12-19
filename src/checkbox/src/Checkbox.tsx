@@ -246,8 +246,8 @@ export default defineComponent({
           colorTableHeader,
           colorTableHeaderModal,
           colorTableHeaderPopover,
-          renderCheckMarkColor,
-          renderCheckMarkColorDisabled,
+          checkMarkColor,
+          checkMarkColorDisabled,
           border,
           borderFocus,
           borderDisabled,
@@ -255,7 +255,7 @@ export default defineComponent({
           boxShadowFocus,
           textColor,
           textColorDisabled,
-          renderCheckMarkColorDisabledChecked,
+          checkMarkColorDisabledChecked,
           colorDisabledChecked,
           borderDisabledChecked,
           labelPadding,
@@ -286,10 +286,9 @@ export default defineComponent({
         '--n-color-disabled-checked': colorDisabledChecked,
         '--n-text-color': textColor,
         '--n-text-color-disabled': textColorDisabled,
-        '--n-check-mark-color': renderCheckMarkColor,
-        '--n-check-mark-color-disabled': renderCheckMarkColorDisabled,
-        '--n-check-mark-color-disabled-checked':
-          renderCheckMarkColorDisabledChecked,
+        '--n-check-mark-color': checkMarkColor,
+        '--n-check-mark-color-disabled': checkMarkColorDisabled,
+        '--n-check-mark-color-disabled-checked': checkMarkColorDisabledChecked,
         '--n-font-size': fontSize,
         '--n-label-padding': labelPadding
       }

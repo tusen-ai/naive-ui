@@ -17,7 +17,7 @@ import { NBaseIcon } from '../../_internal'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import { call, color2Class, createKey } from '../../_utils'
 import { rateLight } from '../styles'
-import StarIcon from './StarIcon'
+import renderStarIcon from './StarIcon'
 import style from './styles/index.cssr'
 
 export const rateProps = {
@@ -204,7 +204,7 @@ export default defineComponent({
             defaultSlot({ index })
           ) : (
             <NBaseIcon clsPrefix={mergedClsPrefix}>
-              {{ default: () => StarIcon }}
+              {{ default: renderStarIcon }}
             </NBaseIcon>
           )
           const entireStarActive

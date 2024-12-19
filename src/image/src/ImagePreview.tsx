@@ -35,7 +35,7 @@ import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import { download } from '../../_utils'
 import { NTooltip } from '../../tooltip'
 import { imageLight } from '../styles'
-import { closeIcon, nextIcon, prevIcon } from './icons'
+import { renderCloseIcon, renderNextIcon, renderPrevIcon } from './icons'
 import {
   imageContextKey,
   imagePreviewSharedProps,
@@ -507,13 +507,13 @@ export default defineComponent({
 
     const prevNode = withTooltip(
       <NBaseIcon clsPrefix={clsPrefix} onClick={this.handleSwitchPrev}>
-        {{ default: () => prevIcon }}
+        {{ default: renderPrevIcon }}
       </NBaseIcon>,
       'tipPrevious'
     )
     const nextNode = withTooltip(
       <NBaseIcon clsPrefix={clsPrefix} onClick={this.handleSwitchNext}>
-        {{ default: () => nextIcon }}
+        {{ default: renderNextIcon }}
       </NBaseIcon>,
       'tipNext'
     )
@@ -560,7 +560,7 @@ export default defineComponent({
 
     const closeNode = withTooltip(
       <NBaseIcon clsPrefix={clsPrefix} onClick={this.toggleShow}>
-        {{ default: () => closeIcon }}
+        {{ default: renderCloseIcon }}
       </NBaseIcon>,
       'tipClose'
     )

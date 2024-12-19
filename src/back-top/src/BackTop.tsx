@@ -30,7 +30,7 @@ import {
   warnOnce
 } from '../../_utils'
 import { backTopLight } from '../styles'
-import BackTopIcon from './BackTopIcon'
+import renderBackTopIcon from './BackTopIcon'
 import style from './styles/index.cssr'
 
 export const backTopProps = {
@@ -301,7 +301,7 @@ export default defineComponent({
                           }),
                           resolveSlot(this.$slots.default, () => [
                             <NBaseIcon clsPrefix={mergedClsPrefix}>
-                              {{ default: () => BackTopIcon }}
+                              {{ default: renderBackTopIcon }}
                             </NBaseIcon>
                           ])
                         )

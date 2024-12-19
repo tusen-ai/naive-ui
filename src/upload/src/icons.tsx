@@ -5,7 +5,7 @@ import { h } from 'vue'
  * now.
  */
 
-export const imageIcon = (
+export const renderImageIcon = (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
     <g fill="none">
       <path
@@ -17,7 +17,7 @@ export const imageIcon = (
   </svg>
 )
 
-export const documentIcon = (
+export const renderDocumentIcon = (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
     <g fill="none">
       <path
