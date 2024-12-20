@@ -12,4 +12,4 @@ export type {
   TreeSelectRenderTag
 } from './src/interface'
 export { default as NTreeSelect, treeSelectProps } from './src/TreeSelect'
-export type { TreeSelectProps } from './src/TreeSelect'
+export type { TreeSelectProps, TreeSelectSlots } from './src/TreeSelect'

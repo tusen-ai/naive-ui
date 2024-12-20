@@ -9,6 +9,7 @@ import {
   h,
   type PropType,
   ref,
+  type SlotsType,
   Transition,
   watchEffect
 } from 'vue'
@@ -55,9 +56,16 @@ export const spinProps = {
 
 export type SpinProps = ExtractPublicPropTypes<typeof spinProps>
 
+export interface SpinSlots {
+  default?: any
+  description?: any
+  icon?: any
+}
+
 export default defineComponent({
   name: 'Spin',
   props: spinProps,
+  slots: Object as SlotsType<SpinSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {

@@ -3,7 +3,9 @@ import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { InputInst, InputProps } from '../../input'
 import type { DynamicTagsTheme } from '../styles'
 import type {
+  DynamicTagsInputSlotOptions,
   DynamicTagsOption,
+  DynamicTagsTriggerSlotOptions,
   OnCreate,
   OnUpdateValue,
   OnUpdateValueImpl
@@ -17,6 +19,7 @@ import {
   nextTick,
   type PropType,
   ref,
+  type SlotsType,
   toRef,
   type VNodeChild,
   watchEffect
@@ -77,9 +80,16 @@ export const dynamicTagsProps = {
 
 export type DynamicTagsProps = ExtractPublicPropTypes<typeof dynamicTagsProps>
 
+export interface DynamicTagsSlots {
+  input?: (info: DynamicTagsInputSlotOptions) => any
+  trigger?: (info: DynamicTagsTriggerSlotOptions) => any
+  default?: any
+}
+
 export default defineComponent({
   name: 'DynamicTags',
   props: dynamicTagsProps,
+  slots: Object as SlotsType<DynamicTagsSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {

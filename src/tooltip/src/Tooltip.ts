@@ -1,9 +1,9 @@
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { PopoverInst } from '../../popover'
+import type { PopoverInst, PopoverSlots } from '../../popover'
 import type { TooltipTheme } from '../styles'
 // Tooltip: popover wearing waistcoat
-import { computed, defineComponent, h, ref } from 'vue'
+import { computed, defineComponent, h, ref, type SlotsType } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { NPopover } from '../../popover'
 import { popoverBaseProps } from '../../popover/src/Popover'
@@ -18,9 +18,12 @@ export const tooltipProps = {
 
 export type TooltipProps = ExtractPublicPropTypes<typeof tooltipProps>
 
+export interface TooltipSlots extends PopoverSlots {}
+
 export default defineComponent({
   name: 'Tooltip',
   props: tooltipProps,
+  slots: Object as SlotsType<TooltipSlots>,
   __popover__: true,
   setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
