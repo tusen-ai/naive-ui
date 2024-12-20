@@ -1,6 +1,8 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.41.0
+
+`2025-01-05`
 
 ### Breaking Changes
 
@@ -9,10 +11,11 @@
 ### i18n
 
 - 添加 kmKH 国际化
+- 添加 ugCN 国际化
 
 ### Features
 
-- `n-modal` 新增 `draggable` 属性，关闭 [#6525](https://github.com/tusen-ai/naive-ui/issues/6525)，[#5792](https://github.com/tusen-ai/naive-ui/issues/5792)，[#5711](https://github.com/tusen-ai/naive-ui/issues/5711)，[#5501](https://github.com/tusen-ai/naive-ui/issues/5501)，[#2152](https://github.com/tusen-ai/naive-ui/issues/2152)
+- `n-modal` 新增 `draggable` 属性，关闭 [#6525](https://github.com/tusen-ai/naive-ui/issues/6525)、[#5792](https://github.com/tusen-ai/naive-ui/issues/5792)、[#5711](https://github.com/tusen-ai/naive-ui/issues/5711)、[#5501](https://github.com/tusen-ai/naive-ui/issues/5501)、[#2152](https://github.com/tusen-ai/naive-ui/issues/2152)
 - `useDialog` 支持 `draggable` 参数
 - `useModal` 支持 `draggable` 参数
 
