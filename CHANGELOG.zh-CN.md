@@ -4,8 +4,16 @@
 
 ### Fixes
 
-- 修复 `n-scrollbar`、`n-float-button`、`n-float-button-group`、`n-popover` 组件中的 `inset` 属性在部分浏览器中有兼容性问题，close [#6604](https://github.com/tusen-ai/naive-ui/issues/6604)，close [#6602](https://github.com/tusen-ai/naive-ui/issues/6602)
-- 修复 `n-data-table`在使用树形数据的时候出现多个扩展icon的问题
+- 修复 `n-data-table` 在使用树形数据的时候出现多个展开 icon
+
+## 2.40.4
+
+`2024-12-20`
+
+### Fixes
+
+- 修复 `n-scrollbar`、`n-float-button`、`n-float-button-group`、`n-popover` 组件中的 `inset` 属性在部分浏览器中有兼容性问题，关闭 [#6604](https://github.com/tusen-ai/naive-ui/issues/6604)，关闭 [#6602](https://github.com/tusen-ai/naive-ui/issues/6602)
+- 修复和较新版本 vue 配合使用时的内存泄露问题。注意：修复后你可能仍然会在 Chrome >= 129 中发现内存泄漏，因为他们引入了一个 bug，参考：https://github.com/vuejs/core/issues/12306 https://issues.chromium.org/issues/376777343
 
 ## 2.40.3
 
