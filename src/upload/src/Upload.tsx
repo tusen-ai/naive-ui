@@ -443,10 +443,10 @@ export default defineComponent({
       handleFileAddition(
         target.files
           ? Array.from(target.files).map(file => ({
-            file,
-            entry: null,
-            source: 'input'
-          }))
+              file,
+              entry: null,
+              source: 'input'
+            }))
           : null,
         e
       )

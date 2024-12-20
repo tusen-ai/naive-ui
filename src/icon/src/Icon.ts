@@ -67,11 +67,11 @@ export const NIcon = defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'icon',
-        computed(() => `${props.depth || 'd'}`),
-        cssVarsRef,
-        props
-      )
+          'icon',
+          computed(() => `${props.depth || 'd'}`),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,

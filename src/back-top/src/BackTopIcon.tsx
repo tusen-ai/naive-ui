@@ -1,6 +1,6 @@
 import { h } from 'vue'
 
-export default (
+export default () => (
   <svg
     viewBox="0 0 24 24"
     version="1.1"

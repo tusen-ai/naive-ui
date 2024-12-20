@@ -263,13 +263,13 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'switch',
-        computed(() => {
-          return mergedSizeRef.value[0]
-        }),
-        cssVarsRef,
-        props
-      )
+          'switch',
+          computed(() => {
+            return mergedSizeRef.value[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       handleClick,

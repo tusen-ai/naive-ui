@@ -103,21 +103,21 @@ export default defineComponent({
 
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'badge',
-        computed(() => {
-          let hash = ''
-          const { type, color } = props
-          if (type) {
-            hash += type[0]
-          }
-          if (color) {
-            hash += color2Class(color)
-          }
-          return hash
-        }),
-        cssVarsRef,
-        props
-      )
+          'badge',
+          computed(() => {
+            let hash = ''
+            const { type, color } = props
+            if (type) {
+              hash += type[0]
+            }
+            if (color) {
+              hash += color2Class(color)
+            }
+            return hash
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     const offsetStyleRef = computed(() => {

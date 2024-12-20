@@ -164,13 +164,13 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'card',
-        computed(() => {
-          return props.size[0]
-        }),
-        cssVarsRef,
-        props
-      )
+          'card',
+          computed(() => {
+            return props.size[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       rtlEnabled: rtlEnabledRef,
@@ -240,8 +240,8 @@ export default defineComponent({
           const { title } = this
           const mergedChildren = title
             ? ensureValidVNode(
-              typeof title === 'function' ? [title()] : [title]
-            )
+                typeof title === 'function' ? [title()] : [title]
+              )
             : children
           return mergedChildren || this.closable ? (
             <div
@@ -288,8 +288,8 @@ export default defineComponent({
           const { content } = this
           const mergedChildren = content
             ? ensureValidVNode(
-              typeof content === 'function' ? [content()] : [content]
-            )
+                typeof content === 'function' ? [content()] : [content]
+              )
             : children
           return (
             mergedChildren && (

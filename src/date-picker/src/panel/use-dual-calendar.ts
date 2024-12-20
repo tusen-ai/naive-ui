@@ -138,19 +138,19 @@ function useDualCalendar(
   const startDateInput = ref(
     Array.isArray(value)
       ? format(
-        value[0],
-        mergedDateFormatRef.value,
-        panelCommon.dateFnsOptions.value
-      )
+          value[0],
+          mergedDateFormatRef.value,
+          panelCommon.dateFnsOptions.value
+        )
       : ''
   )
   const endDateInputRef = ref(
     Array.isArray(value)
       ? format(
-        value[1],
-        mergedDateFormatRef.value,
-        panelCommon.dateFnsOptions.value
-      )
+          value[1],
+          mergedDateFormatRef.value,
+          panelCommon.dateFnsOptions.value
+        )
       : ''
   )
 
@@ -795,19 +795,19 @@ function useDualCalendar(
       = dateItem.type === 'year' && type !== 'yearrange'
         ? noCurrentValue
           ? set(dateItem.ts, {
-            month: getMonth(
-              type === 'quarterrange'
-                ? startOfQuarter(new Date())
-                : new Date()
-            )
-          }).valueOf()
+              month: getMonth(
+                type === 'quarterrange'
+                  ? startOfQuarter(new Date())
+                  : new Date()
+              )
+            }).valueOf()
           : set(dateItem.ts, {
-            month: getMonth(
-              type === 'quarterrange'
-                ? startOfQuarter(value[clickType === 'start' ? 0 : 1])
-                : value[clickType === 'start' ? 0 : 1]
-            )
-          }).valueOf()
+              month: getMonth(
+                type === 'quarterrange'
+                  ? startOfQuarter(value[clickType === 'start' ? 0 : 1])
+                  : value[clickType === 'start' ? 0 : 1]
+              )
+            }).valueOf()
         : dateItem.ts
     if (noCurrentValue) {
       const partialValue = sanitizeValue(itemTs)

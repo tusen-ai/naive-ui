@@ -1007,17 +1007,17 @@ export default defineComponent({
               >
                 {userWantsControl
                   ? slides.map((slide, i) => (
-                    <div style={slideStyles[i]} key={i}>
-                      {withDirectives(
-                        <Transition {...transitionProps}>
-                          {{
-                            default: () => slide
-                          }}
-                        </Transition>,
-                        [[vShow, this.isActive(i)]]
-                      )}
-                    </div>
-                  ))
+                      <div style={slideStyles[i]} key={i}>
+                        {withDirectives(
+                          <Transition {...transitionProps}>
+                            {{
+                              default: () => slide
+                            }}
+                          </Transition>,
+                          [[vShow, this.isActive(i)]]
+                        )}
+                      </div>
+                    ))
                   : slides}
               </div>
             )

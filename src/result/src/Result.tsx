@@ -18,17 +18,17 @@ import {
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { createKey } from '../../_utils'
 import { resultLight } from '../styles'
-import image403 from './403'
-import image404 from './404'
-import image418 from './418'
-import image500 from './500'
+import { render403 } from './403'
+import { render404 } from './404'
+import { render418 } from './418'
+import { render500 } from './500'
 import style from './styles/index.cssr'
 
 const iconRenderMap = {
-  403: () => image403,
-  404: () => image404,
-  418: () => image418,
-  500: () => image500,
+  403: render403,
+  404: render404,
+  418: render418,
+  500: render500,
   info: () => <InfoIcon />,
   success: () => <SuccessIcon />,
   warning: () => <WarningIcon />,
@@ -95,21 +95,21 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'result',
-        computed(() => {
-          const { size, status } = props
-          let hash = ''
-          if (size) {
-            hash += size[0]
-          }
-          if (status) {
-            hash += status[0]
-          }
-          return hash
-        }),
-        cssVarsRef,
-        props
-      )
+          'result',
+          computed(() => {
+            const { size, status } = props
+            let hash = ''
+            if (size) {
+              hash += size[0]
+            }
+            if (status) {
+              hash += status[0]
+            }
+            return hash
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     return {

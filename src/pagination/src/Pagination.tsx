@@ -501,16 +501,16 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'pagination',
-        computed(() => {
-          let hash = ''
-          const { size } = props
-          hash += size[0]
-          return hash
-        }),
-        cssVarsRef,
-        props
-      )
+          'pagination',
+          computed(() => {
+            let hash = ''
+            const { size } = props
+            hash += size[0]
+            return hash
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       rtlEnabled: rtlEnabledRef,

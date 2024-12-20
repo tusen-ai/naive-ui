@@ -83,16 +83,16 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'empty',
-        computed(() => {
-          let hash = ''
-          const { size } = props
-          hash += size[0]
-          return hash
-        }),
-        cssVarsRef,
-        props
-      )
+          'empty',
+          computed(() => {
+            let hash = ''
+            const { size } = props
+            hash += size[0]
+            return hash
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,

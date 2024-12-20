@@ -1,8 +1,7 @@
 import { h } from 'vue'
 import { replaceable } from './replaceable'
 
-export default replaceable(
-  'date',
+export default replaceable('date', () => (
   <svg
     width="28px"
     height="28px"
@@ -16,4 +15,4 @@ export default replaceable(
       </g>
     </g>
   </svg>
-)
+))

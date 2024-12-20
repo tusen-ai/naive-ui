@@ -1,8 +1,7 @@
 import { h } from 'vue'
 import { replaceable } from './replaceable'
 
-export default replaceable(
-  'rotateClockwise',
+export default replaceable('rotateClockwise', () => (
   <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10C17 12.7916 15.3658 15.2026 13 16.3265V14.5C13 14.2239 12.7761 14 12.5 14C12.2239 14 12 14.2239 12 14.5V17.5C12 17.7761 12.2239 18 12.5 18H15.5C15.7761 18 16 17.7761 16 17.5C16 17.2239 15.7761 17 15.5 17H13.8758C16.3346 15.6357 18 13.0128 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 10.2761 2.22386 10.5 2.5 10.5C2.77614 10.5 3 10.2761 3 10Z"
@@ -15,4 +14,4 @@ export default replaceable(
     >
     </path>
   </svg>
-)
+))

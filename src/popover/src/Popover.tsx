@@ -583,23 +583,31 @@ export default defineComponent({
             return [
               this.internalTrapFocus && mergedShow
                 ? withDirectives(
-                  <div style={{ position: 'fixed', inset: 0 }} />,
-                  [
+                    <div
+                      style={{
+                        position: 'fixed',
+                        top: 0,
+                        right: 0,
+                        bottom: 0,
+                        left: 0
+                      }}
+                    />,
                     [
-                      zindexable,
-                      {
-                        enabled: mergedShow,
-                        zIndex: this.zIndex
-                      }
+                      [
+                        zindexable,
+                        {
+                          enabled: mergedShow,
+                          zIndex: this.zIndex
+                        }
+                      ]
                     ]
-                  ]
-                )
+                  )
                 : null,
               positionManually
                 ? null
                 : h(VTarget, null, {
-                  default: () => triggerVNode
-                }),
+                    default: () => triggerVNode
+                  }),
               h(
                 NPopoverBody,
                 keep(this.$props, bodyPropKeys, {

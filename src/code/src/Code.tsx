@@ -171,13 +171,13 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'code',
-        computed(() => {
-          return `${props.internalFontSize || 'a'}`
-        }),
-        cssVarsRef,
-        props
-      )
+          'code',
+          computed(() => {
+            return `${props.internalFontSize || 'a'}`
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,

@@ -177,11 +177,11 @@ export default defineComponent({
 
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'float-button',
-        computed(() => props.type[0]),
-        cssVarsRef,
-        props
-      )
+          'float-button',
+          computed(() => props.type[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     onMounted(() => {

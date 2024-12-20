@@ -491,11 +491,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'menu',
-        computed(() => (props.inverted ? 'a' : 'b')),
-        cssVarsRef,
-        props
-      )
+          'menu',
+          computed(() => (props.inverted ? 'a' : 'b')),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     const ellipsisNodeId = createId()

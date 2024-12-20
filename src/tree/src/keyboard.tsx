@@ -43,10 +43,10 @@ export function useKeyboard({
   const pendingNodeKeyRef = treeSelectInjection
     ? treeSelectInjection.pendingNodeKeyRef
     : ref<null | Key>(
-      mergedSelectedKeys.length
-        ? mergedSelectedKeys[mergedSelectedKeys.length - 1]
-        : null
-    )
+        mergedSelectedKeys.length
+          ? mergedSelectedKeys[mergedSelectedKeys.length - 1]
+          : null
+      )
   function handleKeydown(e: KeyboardEvent): {
     enterBehavior: TreeOverrideNodeClickBehaviorReturn | null
   } {

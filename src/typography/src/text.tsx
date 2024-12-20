@@ -86,11 +86,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'text',
-        computed(() => `${props.type[0]}${props.depth || ''}`),
-        cssVarsRef,
-        props
-      )
+          'text',
+          computed(() => `${props.type[0]}${props.depth || ''}`),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,

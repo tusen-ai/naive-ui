@@ -417,11 +417,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'data-table',
-        computed(() => props.size[0]),
-        cssVarsRef,
-        props
-      )
+          'data-table',
+          computed(() => props.size[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
     const mergedShowPaginationRef = computed(() => {
       if (!props.pagination)

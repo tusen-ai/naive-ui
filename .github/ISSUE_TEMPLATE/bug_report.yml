@@ -29,7 +29,7 @@ body:
     id: reproduction
     attributes:
       label: Link to minimal reproduction
-      description: Please provide a  [minimal reproduction](https://stackoverflow.com/help/minimal-reproducible-example). Provide a streamlined CodePen/CodeSandbox or GitHub repository link. Please don't fill in a link randomly.
+      description: Please provide a  [minimal reproduction](https://stackoverflow.com/help/minimal-reproducible-example). Provide a streamlined [Playground](https://play.pro-components.cn)/CodePen/CodeSandbox or GitHub repository link. Please don't fill in a link randomly.
       placeholder: Reproduction
     validations:
       required: true

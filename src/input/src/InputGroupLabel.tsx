@@ -65,11 +65,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'input-group-label',
-        computed(() => props.size[0]),
-        cssVarsRef,
-        props
-      )
+          'input-group-label',
+          computed(() => props.size[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,

@@ -411,11 +411,11 @@ export default defineComponent({
     const { inlineThemeDisabled } = props
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'internal-select-menu',
-        computed(() => props.size[0]),
-        cssVarsRef,
-        props
-      )
+          'internal-select-menu',
+          computed(() => props.size[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
     const exposedProps: InternalExposedProps = {
       selfRef,

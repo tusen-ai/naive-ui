@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2.40.4
+
+`2024-12-20`
+
+### Fixes
+
+- Fix `inset` CSS property caused compatibility issues in some browsers, closes [#6604](https://github.com/tusen-ai/naive-ui/issues/6604)，close [#6602](https://github.com/tusen-ai/naive-ui/issues/6602).
+- Fix memory leak problem when used with new version of vue. Note: After the fix you may still find memory leak in Chrome >= 129, since they introduced a bug, see https://github.com/vuejs/core/issues/12306, https://issues.chromium.org/issues/376777343
+
 ## 2.40.3
 
 `2024-12-02`
