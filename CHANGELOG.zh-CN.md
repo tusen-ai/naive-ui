@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-scrollbar`、`n-float-button`、`n-float-button-group`、`n-popover` 组件中的 `inset` 属性在部分浏览器中有兼容性问题，close [#6604](https://github.com/tusen-ai/naive-ui/issues/6604)，close [#6602](https://github.com/tusen-ai/naive-ui/issues/6602)
+- 修复 `n-select`在设置tag和show为false的时候，clear无法清除原先生成的标签导致无法选中
 
 ## 2.40.3
 

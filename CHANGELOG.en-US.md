@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-select` don't clear createdOptions in clear event when `show` is false with `tag`.
+
 ## 2.40.3
 
 `2024-12-02`
