@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-scrollbar`、`n-float-button`、`n-float-button-group`、`n-popover` 组件中的 `inset` 属性在部分浏览器中有兼容性问题，close [#6604](https://github.com/tusen-ai/naive-ui/issues/6604)，close [#6602](https://github.com/tusen-ai/naive-ui/issues/6602)
+- 修复 `n-input` 组件 `type` 为 `textarea`的时候，`autosize` 配置发生变化，高度却没有改变
 
 ## 2.40.3
 
