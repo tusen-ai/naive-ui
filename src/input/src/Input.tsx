@@ -367,6 +367,9 @@ export default defineComponent({
         }
       }
     }
+    const autoSizeOptionNeedWatch = typeof props.autosize !== 'boolean'
+    if (autoSizeOptionNeedWatch)
+      watch(toRef(props, 'autosize'), () => updateTextAreaStyle())
     // word count
     const maxlengthRef = computed(() => {
       const { maxlength } = props

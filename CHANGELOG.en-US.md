@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-input` when the type is `textarea` the height cannot respond to `autosize` option changes.
+
 ## 2.40.3
 
 `2024-12-02`
