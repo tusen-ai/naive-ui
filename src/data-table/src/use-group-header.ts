@@ -50,12 +50,13 @@ function getRowsAndCols(
   let maxDepth = -1
   let totalRowSpan = 0
   let hasEllipsis = false
+  let currentLeafIndex = 0
   function ensureMaxDepth(columns: TableColumns, currentDepth: number): void {
     if (currentDepth > maxDepth) {
       rows[currentDepth] = []
       maxDepth = currentDepth
     }
-    columns.forEach((column, index) => {
+    columns.forEach((column) => {
       if ('children' in column) {
         ensureMaxDepth(column.children, currentDepth + 1)
       }
@@ -68,7 +69,7 @@ function getRowsAndCols(
             key !== undefined ? formatLength(getResizableWidth(key)) : undefined
           ),
           column,
-          index,
+          index: currentLeafIndex++,
           // The width property is only applied to horizontally virtual scroll table
           width: column.width === undefined ? 128 : Number(column.width)
         })
@@ -81,7 +82,7 @@ function getRowsAndCols(
     })
   }
   ensureMaxDepth(columns, 0)
-  let currentLeafIndex = 0
+  currentLeafIndex = 0
   function ensureColLayout(columns: TableColumns, currentDepth: number): void {
     let hideUntilIndex = 0
     columns.forEach((column) => {
