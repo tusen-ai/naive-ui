@@ -785,8 +785,8 @@ export default defineComponent({
               const virtualXRowHeight = isVirtualX
                 ? pxfy(heightForRow?.(rowData, actualRowIndex) || minRowHeight)
                 : undefined
-              const cells = iteratedCols.map((col, colIdx) => {
-                const colIndex = isVirtualX ? col.index : colIdx
+              const cells = iteratedCols.map((col) => {
+                const colIndex = col.index
                 if (displayedRowIndex in cordToPass) {
                   const cordOfRowToPass = cordToPass[displayedRowIndex]
                   const indexInCordOfRowToPass
