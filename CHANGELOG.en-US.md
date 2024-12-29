@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-data-table` multiple expandTrigger with tree data.
+
 ## 2.40.3
 
 `2024-12-02`

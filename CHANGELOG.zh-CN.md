@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-scrollbar`、`n-float-button`、`n-float-button-group`、`n-popover` 组件中的 `inset` 属性在部分浏览器中有兼容性问题，close [#6604](https://github.com/tusen-ai/naive-ui/issues/6604)，close [#6602](https://github.com/tusen-ai/naive-ui/issues/6602)
+- 修复 `n-data-table`在使用树形数据的时候出现多个扩展icon的问题
 
 ## 2.40.3
 
