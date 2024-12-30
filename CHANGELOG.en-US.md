@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-data-table` may have multiple expand trigger with tree data.
+- Fix `n-input-number` misalignment issue when used in `n-input-group` with `n-input-group-label`, closes [#6608](https://github.com/tusen-ai/naive-ui/issues/6608).
 
 ## 2.40.4
 
