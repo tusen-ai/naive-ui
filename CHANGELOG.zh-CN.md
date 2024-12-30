@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`2024-12-30`
+
+### Fixes
+
+- 修复 UMD 构建产物浏览器兼容性问题，Chrome84测试通过，其他浏览器未进行测试
+
 ## 2.40.4
 
 ### Fixes
