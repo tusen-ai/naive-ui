@@ -36,7 +36,15 @@ const umdConfig = defineConfig({
     globals: {
       vue: 'Vue'
     }
-  }
+  },
+  plugins: [
+    esbuild({
+      target: 'es2015',
+      jsx: 'transform',
+      jsxFactory: 'h',
+      jsxFragment: 'Fragment'
+    }),
+  ]
 })
 
 const esmConfig = defineConfig({
