@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES2015",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment"
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "../../src/tsconfig.esm.json"
+    },
+    {
+      "path": "../../themes/tusimple/tsconfig.esm.json"
+    }
+  ]
+}

@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`2024-12-31`
+
+### Features
+
+- 新增 build:package:es2015 脚本，构建的UMD产物支持较低版本浏览器，Chrome 84已测试通过
+-
+
 ## 2.40.4
 
 ### Fixes
