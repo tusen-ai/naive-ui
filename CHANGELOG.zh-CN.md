@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-skeleton` 导出 `skeletonDark` 主题变量，关闭 [#5777](https://github.com/tusen-ai/naive-ui/issues/5777)
+
 ## 2.40.4
 
 ### Fixes
