@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## 2.40.4
+## NEXT_VERSION
+
+### Features
+
+- 为所有的组件增加插槽类型
 
 ### Fixes
 

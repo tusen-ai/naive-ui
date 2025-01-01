@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## 2.40.4
+## NEXT_VERSION
+
+### Features
+
+- Add slot type for all components.
 
 ### Fixes
 
