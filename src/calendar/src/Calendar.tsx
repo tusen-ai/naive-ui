@@ -1,7 +1,13 @@
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CalendarTheme } from '../styles'
-import type { DateItem, OnPanelChange, OnUpdateValue } from './interface'
+import type {
+  CalendarDefaultSlotOptions,
+  CalendarHeaderSlotOptions,
+  DateItem,
+  OnPanelChange,
+  OnUpdateValue
+} from './interface'
 import {
   addMonths,
   format,
@@ -19,6 +25,7 @@ import {
   h,
   type PropType,
   ref,
+  type SlotsType,
   toRef
 } from 'vue'
 import { NBaseIcon } from '../../_internal'
@@ -46,9 +53,15 @@ export const calendarProps = {
 
 export type CalendarProps = ExtractPublicPropTypes<typeof calendarProps>
 
+export interface CalendarSlots {
+  default?: (props: CalendarDefaultSlotOptions) => any
+  header?: (props: CalendarHeaderSlotOptions) => any
+}
+
 export default defineComponent({
   name: 'Calendar',
   props: calendarProps,
+  slots: Object as SlotsType<CalendarSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(

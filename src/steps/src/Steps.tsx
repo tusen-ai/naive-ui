@@ -9,6 +9,7 @@ import {
   provide,
   type Ref,
   type Slots,
+  type SlotsType,
   type VNode,
   type VNodeChild
 } from 'vue'
@@ -60,11 +61,18 @@ export interface StepsInjection {
 
 export type StepsProps = ExtractPublicPropTypes<typeof stepsProps>
 
+export interface StepsSlots {
+  default?: any
+  'finish-icon'?: any
+  'error-icon'?: any
+}
+
 export const stepsInjectionKey = createInjectionKey<StepsInjection>('n-steps')
 
 export default defineComponent({
   name: 'Steps',
   props: stepsProps,
+  slots: Object as SlotsType<StepsSlots>,
   setup(props, { slots }) {
     const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
     const rtlEnabledRef = useRtl('Steps', mergedRtlRef, mergedClsPrefixRef)

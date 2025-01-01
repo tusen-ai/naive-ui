@@ -1,9 +1,18 @@
-import type { CSSProperties, PropType, Ref, TransitionProps, VNode } from 'vue'
+import type {
+  CSSProperties,
+  PropType,
+  Ref,
+  SlotsType,
+  TransitionProps,
+  VNode
+} from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { CarouselTheme } from '../styles'
 import type {
   ArrowScopedSlotProps,
+  CarouselArrowSlotOptions,
+  CarouselDotSlotOptions,
   CarouselInst,
   DotScopedSlotProps,
   Size
@@ -139,12 +148,19 @@ export const carouselProps = {
 
 export type CarouselProps = ExtractPublicPropTypes<typeof carouselProps>
 
+export interface CarouselSlots {
+  default?: () => any
+  arrow?: (info: CarouselArrowSlotOptions) => any
+  dots?: (info: CarouselDotSlotOptions) => any
+}
+
 // only one carousel is allowed to trigger touch globally
 let globalDragging = false
 
 export default defineComponent({
   name: 'Carousel',
   props: carouselProps,
+  slots: Object as SlotsType<CarouselSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     // Dom

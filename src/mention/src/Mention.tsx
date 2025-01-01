@@ -22,6 +22,7 @@ import {
   nextTick,
   type PropType,
   ref,
+  type SlotsType,
   toRef,
   Transition
 } from 'vue'
@@ -131,9 +132,15 @@ export const mentionProps = {
 
 export type MentionProps = ExtractPublicPropTypes<typeof mentionProps>
 
+export interface MentionSlots {
+  default?: any
+  empty?: any
+}
+
 export default defineComponent({
   name: 'Mention',
   props: mentionProps,
+  slots: Object as SlotsType<MentionSlots>,
   setup(props) {
     const {
       namespaceRef,

@@ -178,6 +178,12 @@ export const dataTableProps = {
   >
 } as const
 
+export interface DataTableSlots {
+  default?: any
+  empty?: any
+  loading?: any
+}
+
 export type FilterOptionValue = string | number
 export type ColumnKey = string | number
 export type RowKey = string | number

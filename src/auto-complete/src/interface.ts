@@ -22,3 +22,11 @@ export interface AutoCompleteInst {
   focus: () => void
   blur: () => void
 }
+
+export interface AutoCompleteDefaultSlotOptions {
+  handleInput: (value: string) => void
+  handleFocus: (e: FocusEvent) => void
+  handleBlur: (e: FocusEvent) => void
+  value: string
+  theme: string | null
+}

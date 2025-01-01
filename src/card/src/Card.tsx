@@ -8,6 +8,7 @@ import {
   defineComponent,
   h,
   type PropType,
+  type SlotsType,
   type VNodeChild
 } from 'vue'
 import { NBaseClose } from '../../_internal'
@@ -71,9 +72,19 @@ export const cardProps = {
 
 export type CardProps = ExtractPublicPropTypes<typeof cardProps>
 
+export interface CardSlots {
+  default?: any
+  cover?: any
+  header?: any
+  'header-extra'?: any
+  footer?: any
+  action?: any
+}
+
 export default defineComponent({
   name: 'Card',
   props: cardProps,
+  slots: Object as SlotsType<CardSlots>,
   setup(props) {
     const handleCloseClick = (): void => {
       const { onClose } = props

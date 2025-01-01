@@ -36,6 +36,7 @@ import {
   type InputHTMLAttributes,
   type PropType,
   ref,
+  type SlotsType,
   toRef,
   Transition,
   vShow,
@@ -217,9 +218,18 @@ export const selectProps = {
 
 export type SelectProps = ExtractPublicPropTypes<typeof selectProps>
 
+export interface SelectSlots {
+  default?: any
+  header?: any
+  action?: any
+  empty?: any
+  arrow?: any
+}
+
 export default defineComponent({
   name: 'Select',
   props: selectProps,
+  slots: Object as SlotsType<SelectSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {

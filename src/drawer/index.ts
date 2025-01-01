@@ -5,4 +5,7 @@ export {
   drawerContentProps,
   default as NDrawerContent
 } from './src/DrawerContent'
-export type { DrawerContentProps } from './src/DrawerContent'
+export type {
+  DrawerContentProps,
+  DrawerContentSlots
+} from './src/DrawerContent'
