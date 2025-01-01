@@ -36,7 +36,6 @@ export {
   omit,
   render,
   resolveSlot,
-  resolveSlotWithProps,
   resolveSlotWithTypedProps,
   resolveWrappedSlot,
   resolveWrappedSlotWithProps,

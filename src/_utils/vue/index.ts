@@ -19,7 +19,6 @@ export { render } from './render'
 export {
   isSlotEmpty,
   resolveSlot,
-  resolveSlotWithProps,
   resolveSlotWithTypedProps,
   resolveWrappedSlot,
   resolveWrappedSlotWithProps

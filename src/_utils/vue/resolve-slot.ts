@@ -39,14 +39,6 @@ export function resolveSlot(
   return (slot && ensureValidVNode(slot())) || fallback()
 }
 
-export function resolveSlotWithProps<T>(
-  slot: Slot | undefined,
-  props: T,
-  fallback: (props: T) => VNodeArrayChildren
-): VNodeArrayChildren {
-  return (slot && ensureValidVNode(slot(props))) || fallback(props)
-}
-
 export function resolveSlotWithTypedProps<T>(
   slot: Slot<T> | undefined,
   props: T,

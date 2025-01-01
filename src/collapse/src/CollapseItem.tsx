@@ -23,7 +23,7 @@ import {
 import { useConfig } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
 import {
-  resolveSlotWithProps,
+  resolveSlotWithTypedProps,
   resolveWrappedSlotWithProps,
   throwError
 } from '../../_utils'
@@ -129,7 +129,7 @@ export default defineComponent({
       disabled,
       triggerAreas
     } = this
-    const headerNode = resolveSlotWithProps(
+    const headerNode = resolveSlotWithTypedProps(
       $slots.header,
       { collapsed },
       () => [this.title]
@@ -165,7 +165,7 @@ export default defineComponent({
               key={this.rtlEnabled ? 0 : 1}
               data-arrow
             >
-              {resolveSlotWithProps(arrowSlot, { collapsed }, () => [
+              {resolveSlotWithTypedProps(arrowSlot, { collapsed }, () => [
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
                   {{
                     default: () =>

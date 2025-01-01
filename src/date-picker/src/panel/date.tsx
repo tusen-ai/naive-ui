@@ -10,7 +10,11 @@ import {
   FastForwardIcon,
   ForwardIcon
 } from '../../../_internal/icons'
-import { resolveSlot, resolveSlotWithProps, warnOnce } from '../../../_utils'
+import {
+  resolveSlot,
+  resolveSlotWithTypedProps,
+  warnOnce
+} from '../../../_utils'
 import { NButton, NxButton } from '../../../button'
 import PanelHeader from './panelHeader'
 import { useCalendar, useCalendarProps } from './use-calendar'
@@ -194,7 +198,7 @@ export default defineComponent({
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
               {this.actions?.includes('clear')
-                ? resolveSlotWithProps(
+                ? resolveSlotWithTypedProps(
                     this.$slots.clear,
                     {
                       onClear: this.handleClearClick,
@@ -213,7 +217,7 @@ export default defineComponent({
                   )
                 : null}
               {this.actions?.includes('now')
-                ? resolveSlotWithProps(
+                ? resolveSlotWithTypedProps(
                     this.$slots.now,
                     {
                       onNow: this.handleNowClick,

@@ -10,7 +10,11 @@ import {
   FastForwardIcon,
   ForwardIcon
 } from '../../../_internal/icons'
-import { resolveSlot, resolveSlotWithProps, warnOnce } from '../../../_utils'
+import {
+  resolveSlot,
+  resolveSlotWithTypedProps,
+  warnOnce
+} from '../../../_utils'
 import { NButton, NxButton } from '../../../button'
 import { NInput } from '../../../input'
 import { NTimePicker } from '../../../time-picker'
@@ -372,7 +376,7 @@ export default defineComponent({
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
               {this.actions?.includes('clear')
-                ? resolveSlotWithProps(
+                ? resolveSlotWithTypedProps(
                     datePickerSlots.clear,
                     {
                       onClear: this.handleClearClick,
@@ -391,7 +395,7 @@ export default defineComponent({
                   )
                 : null}
               {this.actions?.includes('confirm')
-                ? resolveSlotWithProps(
+                ? resolveSlotWithTypedProps(
                     datePickerSlots.confirm,
                     {
                       onConfirm: this.handleConfirmClick,
