@@ -13,6 +13,7 @@ import {
   ref,
   type SlotsType,
   toRef,
+  type VNode,
   watchEffect
 } from 'vue'
 import { NBaseClose } from '../../_internal/close'
@@ -75,9 +76,9 @@ export const tagInjectionKey = createInjectionKey<TagInjection>('n-tag')
 export type TagProps = ExtractPublicPropTypes<typeof tagProps>
 
 export interface TagSlots {
-  default?: any
-  avatar?: any
-  icon?: any
+  default?: () => VNode[]
+  avatar?: () => VNode[]
+  icon?: () => VNode[]
 }
 
 export default defineComponent({

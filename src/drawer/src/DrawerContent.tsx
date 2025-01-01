@@ -6,7 +6,8 @@ import {
   h,
   inject,
   type PropType,
-  type SlotsType
+  type SlotsType,
+  type VNode
 } from 'vue'
 import { NBaseClose, NScrollbar } from '../../_internal'
 import { throwError } from '../../_utils'
@@ -32,9 +33,9 @@ export type DrawerContentProps = ExtractPublicPropTypes<
 >
 
 export interface DrawerContentSlots {
-  default?: any
-  header?: any
-  footer?: any
+  default?: () => VNode[]
+  header?: () => VNode[]
+  footer?: () => VNode[]
 }
 
 export default defineComponent({

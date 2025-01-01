@@ -224,11 +224,10 @@ export type PopoverProps = ExtractPublicPropTypes<typeof popoverBaseProps>
 export type PopoverInternalProps = ExtractInternalPropTypes<typeof popoverProps>
 
 export interface PopoverSlots {
-  trigger?: any
-  footer?: any
-  header?: any
-  default?: any
-  [key: string]: any
+  trigger?: () => VNode[]
+  footer?: () => VNode[]
+  header?: () => VNode[]
+  default?: () => VNode[]
 }
 
 export default defineComponent({
@@ -495,12 +494,7 @@ export default defineComponent({
     let triggerVNode: VNode | null
     let popoverInside = false
     if (!positionManually) {
-      if (slots.activator) {
-        triggerVNode = getFirstSlotVNode(slots, 'activator')
-      }
-      else {
-        triggerVNode = getFirstSlotVNode(slots, 'trigger')
-      }
+      triggerVNode = getFirstSlotVNode(slots, 'trigger')
       if (triggerVNode) {
         triggerVNode = cloneVNode(triggerVNode)
         triggerVNode

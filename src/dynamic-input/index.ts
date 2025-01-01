@@ -1,6 +1,6 @@
 export { dynamicInputProps, default as NDynamicInput } from './src/DynamicInput'
 export type { DynamicInputProps, DynamicInputSlots } from './src/DynamicInput'
 export type {
-  DynamicInputActionSlotOptions,
-  DynamicInputDefaultSlotOptions
+  DynamicInputActionSlotProps,
+  DynamicInputDefaultSlotProps
 } from './src/interface'

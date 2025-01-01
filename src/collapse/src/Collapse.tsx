@@ -1,7 +1,8 @@
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type {
-  CollapseArrowSlotOptions,
+  CollapseArrowSlotProps,
+  CollapseItemHeaderExtraSlotProps,
   HeaderClickInfo,
   OnItemHeaderClick,
   OnItemHeaderClickImpl,
@@ -19,8 +20,8 @@ import {
   provide,
   type Ref,
   ref,
-  type Slots,
-  type SlotsType
+  type SlotsType,
+  type VNode
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
@@ -85,15 +86,16 @@ export const collapseProps = {
 export type CollapseProps = ExtractPublicPropTypes<typeof collapseProps>
 
 export interface CollapseSlots {
-  default?: any
-  arrow?: (props: CollapseArrowSlotOptions) => any
+  default?: () => VNode[]
+  arrow?: (props: CollapseArrowSlotProps) => VNode[]
+  'header-extra'?: (props: CollapseItemHeaderExtraSlotProps) => VNode[]
 }
 
 export interface NCollapseInjection {
   props: ExtractPropTypes<typeof collapseProps>
   expandedNamesRef: Ref<string | number | Array<string | number> | null>
   mergedClsPrefixRef: Ref<string>
-  slots: Slots
+  slots: CollapseSlots
   toggleItem: (
     collapse: boolean,
     name: string | number,

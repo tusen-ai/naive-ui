@@ -11,7 +11,8 @@ import {
   onDeactivated,
   type PropType,
   ref,
-  type SlotsType
+  type SlotsType,
+  type VNode
 } from 'vue'
 import { useTheme } from '../../_mixins'
 import { useMergedClsPrefix } from '../../_mixins/use-config'
@@ -40,8 +41,8 @@ export const ellipsisProps = {
 export type EllipsisProps = ExtractPublicPropTypes<typeof ellipsisProps>
 
 export interface EllipsisSlots {
-  default?: any
-  tooltip?: any
+  default?: () => VNode[]
+  tooltip?: () => VNode[]
 }
 
 export default defineComponent({

@@ -13,6 +13,7 @@ import {
   type PropType,
   ref,
   type SlotsType,
+  type VNode,
   type VNodeChild,
   watch,
   watchEffect
@@ -67,9 +68,9 @@ export const avatarProps = {
 export type AvatarProps = ExtractPublicPropTypes<typeof avatarProps>
 
 export interface AvatarSlots {
-  default: any
-  placeholder: any
-  fallback: any
+  default?: () => VNode[]
+  placeholder?: () => VNode[]
+  fallback?: () => VNode[]
 }
 
 export default defineComponent({

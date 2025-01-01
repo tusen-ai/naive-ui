@@ -14,6 +14,7 @@ import {
   type SlotsType,
   toRef,
   Transition,
+  type VNode,
   type VNodeChild,
   watch
 } from 'vue'
@@ -106,8 +107,8 @@ export const sliderProps = {
 export type SliderProps = ExtractPublicPropTypes<typeof sliderProps>
 
 export interface SliderSlots {
-  thumb?: any
-  default?: any
+  thumb?: () => VNode[]
+  default?: () => VNode[]
 }
 
 export default defineComponent({

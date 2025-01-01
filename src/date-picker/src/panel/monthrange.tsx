@@ -7,14 +7,17 @@ import {
   h,
   onMounted,
   type PropType,
-  renderSlot,
   type VNode,
   watchEffect
 } from 'vue'
 import { VirtualList } from 'vueuc'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
 import { useLocale } from '../../../_mixins'
-import { resolveSlotWithProps, warnOnce } from '../../../_utils'
+import {
+  resolveSlotWithTypedProps,
+  resolveWrappedSlot,
+  warnOnce
+} from '../../../_utils'
 import { NxButton } from '../../../button'
 import { MONTH_ITEM_HEIGHT } from '../config'
 import {
@@ -270,11 +273,11 @@ export default defineComponent({
             ) : null}
           </div>
         </div>
-        {this.datePickerSlots.footer ? (
-          <div class={`${mergedClsPrefix}-date-panel-footer`}>
-            {renderSlot(this.datePickerSlots, 'footer')}
-          </div>
-        ) : null}
+        {resolveWrappedSlot(this.datePickerSlots.footer, (children) => {
+          return children ? (
+            <div class={`${mergedClsPrefix}-date-panel-footer`}>{children}</div>
+          ) : null
+        })}
         {this.actions?.length || shortcuts ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
@@ -302,8 +305,8 @@ export default defineComponent({
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
               {this.actions?.includes('clear')
-                ? resolveSlotWithProps(
-                    this.$slots.clear,
+                ? resolveSlotWithTypedProps(
+                    this.datePickerSlots.clear,
                     {
                       onClear: this.handleClearClick,
                       text: this.locale.clear
@@ -321,8 +324,8 @@ export default defineComponent({
                   )
                 : null}
               {this.actions?.includes('confirm')
-                ? resolveSlotWithProps(
-                    this.$slots.confirm,
+                ? resolveSlotWithTypedProps(
+                    this.datePickerSlots.confirm,
                     {
                       disabled: this.isRangeInvalid,
                       onConfirm: this.handleConfirmClick,

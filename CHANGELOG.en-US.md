@@ -2,13 +2,15 @@
 
 ## NEXT_VERSION
 
-### Features
+### Breaking Changes
 
-- Add slot type for all components.
+- (**Vue 3.3+ required**) Add slot type for all components.
 
 ### Fixes
 
 - Fix `n-data-table` may have multiple expand trigger with tree data.
+- Fix `n-date-picker`'s `confirm`, `now`, `clear` slots doesn't work with `'month'`, `'monthrange'`, `'quarter'`, `'quarterrange'`, `'year'` and `'yearrange'` type.
+- Fix `n-input`'s `render-count` prop doesn't work when type is not `'textarea'`.
 
 ## 2.40.4
 

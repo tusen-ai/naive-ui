@@ -3,9 +3,9 @@ import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { InputInst, InputProps } from '../../input'
 import type { DynamicTagsTheme } from '../styles'
 import type {
-  DynamicTagsInputSlotOptions,
+  DynamicTagsInputSlotProps,
   DynamicTagsOption,
-  DynamicTagsTriggerSlotOptions,
+  DynamicTagsTriggerSlotProps,
   OnCreate,
   OnUpdateValue,
   OnUpdateValueImpl
@@ -21,6 +21,7 @@ import {
   ref,
   type SlotsType,
   toRef,
+  type VNode,
   type VNodeChild,
   watchEffect
 } from 'vue'
@@ -81,9 +82,9 @@ export const dynamicTagsProps = {
 export type DynamicTagsProps = ExtractPublicPropTypes<typeof dynamicTagsProps>
 
 export interface DynamicTagsSlots {
-  input?: (info: DynamicTagsInputSlotOptions) => any
-  trigger?: (info: DynamicTagsTriggerSlotOptions) => any
-  default?: any
+  input?: (props: DynamicTagsInputSlotProps) => VNode[]
+  trigger?: (props: DynamicTagsTriggerSlotProps) => VNode[]
+  default?: () => VNode[]
 }
 
 export default defineComponent({

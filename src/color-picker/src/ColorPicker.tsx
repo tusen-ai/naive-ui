@@ -126,9 +126,9 @@ export const colorPickerProps = {
 export type ColorPickerProps = ExtractPublicPropTypes<typeof colorPickerProps>
 
 export interface ColorPickerSlots {
-  default?: any
-  label?: (color: string | null) => any
-  action?: any
+  default?: () => VNode[]
+  label?: (color: string | null) => VNode[]
+  action?: () => VNode[]
 }
 
 export default defineComponent({
@@ -709,7 +709,7 @@ export default defineComponent({
     }
   },
   render() {
-    const { $slots, mergedClsPrefix, onRender } = this
+    const { mergedClsPrefix, onRender } = this
     onRender?.()
     return (
       <div
@@ -729,11 +729,7 @@ export default defineComponent({
                       hsla={this.hsla}
                       disabled={this.mergedDisabled}
                       onClick={this.handleTriggerClick}
-                    >
-                      {{
-                        label: $slots.label
-                      }}
-                    </ColorPickerTrigger>
+                    />
                   )
                 }}
               </VTarget>,

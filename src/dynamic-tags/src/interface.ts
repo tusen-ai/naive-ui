@@ -18,12 +18,12 @@ export interface DynamicTagsOption {
   value: string
 }
 
-export interface DynamicTagsInputSlotOptions {
+export interface DynamicTagsInputSlotProps {
   submit: (value: any) => void
   deactivate: () => void
 }
 
-export interface DynamicTagsTriggerSlotOptions {
+export interface DynamicTagsTriggerSlotProps {
   activate: () => void
   disabled: boolean
 }

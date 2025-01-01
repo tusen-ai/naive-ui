@@ -11,6 +11,7 @@ import {
   type PropType,
   ref,
   type SlotsType,
+  type VNode,
   watchEffect
 } from 'vue'
 import { NBaseClose, NBaseIcon, NFadeInExpandTransition } from '../../_internal'
@@ -58,9 +59,9 @@ export const alertProps = {
 export type AlertProps = ExtractPublicPropTypes<typeof alertProps>
 
 export interface AlertSlots {
-  default?: any
-  icon?: any
-  header?: any
+  default?: () => VNode[]
+  icon?: () => VNode[]
+  header?: () => VNode[]
 }
 
 export default defineComponent({

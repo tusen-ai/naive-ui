@@ -1,7 +1,7 @@
 export { autoCompleteProps, default as NAutoComplete } from './src/AutoComplete'
 export type { AutoCompleteProps, AutoCompleteSlots } from './src/AutoComplete'
 export type {
-  AutoCompleteDefaultSlotOptions,
+  AutoCompleteDefaultSlotProps,
   AutoCompleteGroupOption,
   AutoCompleteInst,
   AutoCompleteOption

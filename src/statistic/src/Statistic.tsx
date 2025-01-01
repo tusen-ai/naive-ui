@@ -1,7 +1,7 @@
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { StatisticTheme } from '../styles'
-import { computed, defineComponent, h, type SlotsType } from 'vue'
+import { computed, defineComponent, h, type SlotsType, type VNode } from 'vue'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import { resolveWrappedSlot } from '../../_utils'
 import { statisticLight } from '../styles'
@@ -17,10 +17,10 @@ export const statisticProps = {
 export type StatisticProps = ExtractPublicPropTypes<typeof statisticProps>
 
 export interface StatisticSlots {
-  default?: any
-  label?: any
-  prefix?: any
-  suffix?: any
+  default?: () => VNode[]
+  label?: () => VNode[]
+  prefix?: () => VNode[]
+  suffix?: () => VNode[]
 }
 
 export default defineComponent({

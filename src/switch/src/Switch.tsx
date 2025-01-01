@@ -13,6 +13,7 @@ import {
   ref,
   type SlotsType,
   toRef,
+  type VNode,
   watchEffect
 } from 'vue'
 import { NBaseLoading, NIconSwitchTransition } from '../../_internal'
@@ -76,12 +77,12 @@ export const switchProps = {
 export type SwitchProps = ExtractPublicPropTypes<typeof switchProps>
 
 export interface SwitchSlots {
-  default?: any
-  checked?: any
-  'checked-icon'?: any
-  icon?: any
-  unchecked?: any
-  'unchecked-icon'?: any
+  default?: () => VNode[]
+  checked?: () => VNode[]
+  'checked-icon'?: () => VNode[]
+  icon?: () => VNode[]
+  unchecked?: () => VNode[]
+  'unchecked-icon'?: () => VNode[]
 }
 
 let supportCssMax: boolean | undefined

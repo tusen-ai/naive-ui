@@ -11,7 +11,8 @@ import {
   type PropType,
   ref,
   type SlotsType,
-  toRef
+  toRef,
+  type VNode
 } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import { CloseIcon } from '../../_internal/icons'
@@ -67,9 +68,9 @@ export const floatButtonProps = {
 export type FloatButtonProps = ExtractPublicPropTypes<typeof floatButtonProps>
 
 export interface FloatButtonSlots {
-  default?: any
-  description?: any
-  menu?: any
+  default?: () => VNode[]
+  description?: () => VNode[]
+  menu?: () => VNode[]
 }
 
 export default defineComponent({

@@ -350,8 +350,8 @@ export const treeProps = {
 export type TreeProps = ExtractPublicPropTypes<typeof treeProps>
 
 export interface TreeSlots {
-  default?: any
-  empty?: any
+  default?: () => VNode[]
+  empty?: () => VNode[]
 }
 
 export default defineComponent({

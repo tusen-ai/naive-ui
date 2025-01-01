@@ -11,6 +11,7 @@ import {
   ref,
   type SlotsType,
   Transition,
+  type VNode,
   watchEffect
 } from 'vue'
 import { NBaseLoading } from '../../_internal'
@@ -57,9 +58,9 @@ export const spinProps = {
 export type SpinProps = ExtractPublicPropTypes<typeof spinProps>
 
 export interface SpinSlots {
-  default?: any
-  description?: any
-  icon?: any
+  default?: () => VNode[]
+  description?: () => VNode[]
+  icon?: () => VNode[]
 }
 
 export default defineComponent({

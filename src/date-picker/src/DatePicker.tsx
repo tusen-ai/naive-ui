@@ -70,13 +70,20 @@ import {
 export type DatePickerSetupProps = ExtractPropTypes<typeof datePickerProps>
 
 export interface DatePickerSlots {
-  'date-icon'?: any
-  footer?: any
-  'next-month'?: any
-  'next-year'?: any
-  'prev-month'?: any
-  'prev-year'?: any
-  separator?: any
+  'date-icon'?: () => VNode[]
+  footer?: () => VNode[]
+  'next-month'?: () => VNode[]
+  'next-year'?: () => VNode[]
+  'prev-month'?: () => VNode[]
+  'prev-year'?: () => VNode[]
+  separator?: () => VNode[]
+  confirm?: (props: {
+    onConfirm: () => void
+    disabled: boolean
+    text: string
+  }) => VNode[]
+  clear?: (props: { onClear: () => void, text: string }) => VNode[]
+  now?: (props: { onNow: () => void, text: string }) => VNode[]
 }
 
 export default defineComponent({

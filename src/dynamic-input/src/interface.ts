@@ -15,12 +15,12 @@ export const dynamicInputInjectionKey
 
 export type OnUpdateValue = <T>(value: T[]) => void
 
-export interface DynamicInputDefaultSlotOptions {
+export interface DynamicInputDefaultSlotProps {
   value: any
   index: number
 }
 
-export interface DynamicInputActionSlotOptions {
+export interface DynamicInputActionSlotProps {
   value: any
   index: number
   create: (index: number) => void

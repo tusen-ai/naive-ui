@@ -1,12 +1,20 @@
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type {
-  CollapseItemArrowSlotOptions,
-  CollapseItemHeaderExtraSlotOptions,
-  CollapseItemHeaderSlotOptions
+  CollapseItemArrowSlotProps,
+  CollapseItemHeaderExtraSlotProps,
+  CollapseItemHeaderSlotProps
 } from './interface'
 import { createId, happensIn } from 'seemly'
 import { useMemo } from 'vooks'
-import { computed, defineComponent, h, inject, type PropType, toRef } from 'vue'
+import {
+  computed,
+  defineComponent,
+  h,
+  inject,
+  type PropType,
+  toRef,
+  type VNode
+} from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {
   ChevronLeftIcon as ArrowLeftIcon,
@@ -32,10 +40,10 @@ export const collapseItemProps = {
 export type CollapseItemProps = ExtractPublicPropTypes<typeof collapseItemProps>
 
 export interface CollapseItemSlots {
-  default?: any
-  header?: (props: CollapseItemHeaderSlotOptions) => any
-  'header-extra'?: (props: CollapseItemHeaderExtraSlotOptions) => any
-  arrow?: (props: CollapseItemArrowSlotOptions) => any
+  default?: () => VNode[]
+  header?: (props: CollapseItemHeaderSlotProps) => VNode[]
+  'header-extra'?: (props: CollapseItemHeaderExtraSlotProps) => VNode[]
+  arrow?: (props: CollapseItemArrowSlotProps) => VNode[]
 }
 
 export default defineComponent({
@@ -160,14 +168,8 @@ export default defineComponent({
               {resolveSlotWithProps(arrowSlot, { collapsed }, () => [
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
                   {{
-                    default:
-                      collapseSlots.expandIcon
-                      ?? (() =>
-                        this.rtlEnabled ? (
-                          <ArrowLeftIcon />
-                        ) : (
-                          <ArrowRightIcon />
-                        ))
+                    default: () =>
+                      this.rtlEnabled ? <ArrowLeftIcon /> : <ArrowRightIcon />
                   }}
                 </NBaseIcon>
               ])}

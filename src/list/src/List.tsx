@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType, Ref, SlotsType } from 'vue'
+import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ListTheme } from '../styles'
 import { computed, defineComponent, h, provide, toRef } from 'vue'
@@ -25,9 +25,9 @@ export const listProps = {
 export type ListProps = ExtractPublicPropTypes<typeof listProps>
 
 export interface ListSlots {
-  default?: any
-  footer?: any
-  header?: any
+  default?: () => VNode[]
+  footer?: () => VNode[]
+  header?: () => VNode[]
 }
 
 interface ListInjection {

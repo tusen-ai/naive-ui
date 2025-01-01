@@ -26,7 +26,7 @@ export interface Size {
   height: number
 }
 
-export interface CarouselArrowSlotOptions {
+export interface CarouselArrowSlotProps {
   total: number
   currentIndex: number
   to: (index: number) => void
@@ -34,7 +34,7 @@ export interface CarouselArrowSlotOptions {
   next: () => void
 }
 
-export interface CarouselDotSlotOptions {
+export interface CarouselDotSlotProps {
   total: number
   currentIndex: number
   to: (index: number) => void

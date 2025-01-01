@@ -8,7 +8,6 @@ import {
   type PropType,
   provide,
   type Ref,
-  type Slots,
   type SlotsType,
   type VNode,
   type VNodeChild
@@ -56,15 +55,15 @@ export interface StepsInjection {
   props: ExtractPropTypes<typeof stepsProps>
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<StepsTheme>>
-  stepsSlots: Slots
+  stepsSlots: StepsSlots
 }
 
 export type StepsProps = ExtractPublicPropTypes<typeof stepsProps>
 
 export interface StepsSlots {
-  default?: any
-  'finish-icon'?: any
-  'error-icon'?: any
+  default?: () => VNode[]
+  'finish-icon'?: () => VNode[]
+  'error-icon'?: () => VNode[]
 }
 
 export const stepsInjectionKey = createInjectionKey<StepsInjection>('n-steps')

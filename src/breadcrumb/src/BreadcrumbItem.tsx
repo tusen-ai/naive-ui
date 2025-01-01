@@ -5,7 +5,8 @@ import {
   h,
   inject,
   type PropType,
-  type SlotsType
+  type SlotsType,
+  type VNode
 } from 'vue'
 import { resolveSlot, warn } from '../../_utils'
 import { useBrowserLocation } from '../../_utils/composable/use-browser-location'
@@ -26,8 +27,8 @@ export type BreadcrumbItemProps = Partial<
 >
 
 export interface BreadcrumbItemSlots {
-  default?: any
-  separator?: any
+  default?: () => VNode[]
+  separator?: () => VNode[]
 }
 
 export default defineComponent({

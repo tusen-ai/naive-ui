@@ -9,6 +9,7 @@ import {
   h,
   type PropType,
   type SlotsType,
+  type VNode,
   type VNodeChild
 } from 'vue'
 import { NBaseClose } from '../../_internal'
@@ -73,12 +74,12 @@ export const cardProps = {
 export type CardProps = ExtractPublicPropTypes<typeof cardProps>
 
 export interface CardSlots {
-  default?: any
-  cover?: any
-  header?: any
-  'header-extra'?: any
-  footer?: any
-  action?: any
+  default?: () => VNode[]
+  cover?: () => VNode[]
+  header?: () => VNode[]
+  'header-extra'?: () => VNode[]
+  footer?: () => VNode[]
+  action?: () => VNode[]
 }
 
 export default defineComponent({

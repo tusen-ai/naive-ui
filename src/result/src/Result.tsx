@@ -7,7 +7,8 @@ import {
   defineComponent,
   h,
   type PropType,
-  type SlotsType
+  type SlotsType,
+  type VNode
 } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {
@@ -55,9 +56,9 @@ export const resultProps = {
 export type ResultProps = ExtractPublicPropTypes<typeof resultProps>
 
 export interface ResultSlots {
-  default?: any
-  footer?: any
-  icon?: any
+  default?: () => VNode[]
+  footer?: () => VNode[]
+  icon?: () => VNode[]
 }
 
 export default defineComponent({

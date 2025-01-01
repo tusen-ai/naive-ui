@@ -116,9 +116,9 @@ export const tabsProps = {
 export type TabsProps = ExtractPublicPropTypes<typeof tabsProps>
 
 export interface TabsSlots {
-  default?: any
-  prefix?: any
-  suffix?: any
+  default?: () => VNode[]
+  prefix?: () => VNode[]
+  suffix?: () => VNode[]
 }
 
 export default defineComponent({

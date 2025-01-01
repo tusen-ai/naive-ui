@@ -6,7 +6,8 @@ import {
   h,
   inject,
   type PropType,
-  type SlotsType
+  type SlotsType,
+  type VNode
 } from 'vue'
 import { NBaseIcon, NIconSwitchTransition } from '../../_internal'
 import {
@@ -38,9 +39,9 @@ export const stepProps = {
 export type StepProps = ExtractPublicPropTypes<typeof stepProps>
 
 export interface StepSlots {
-  default?: any
-  icon?: any
-  title?: any
+  default?: () => VNode[]
+  icon?: () => VNode[]
+  title?: () => VNode[]
 }
 
 export default defineComponent({

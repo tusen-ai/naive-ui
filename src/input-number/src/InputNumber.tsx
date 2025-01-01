@@ -112,10 +112,10 @@ export const inputNumberProps = {
 export type InputNumberProps = ExtractPublicPropTypes<typeof inputNumberProps>
 
 export interface InputNumberSlots {
-  'add-icon'?: any
-  'minus-icon'?: any
-  prefix?: any
-  suffix?: any
+  'add-icon'?: () => VNode[]
+  'minus-icon'?: () => VNode[]
+  prefix?: () => VNode[]
+  suffix?: () => VNode[]
 }
 
 export default defineComponent({

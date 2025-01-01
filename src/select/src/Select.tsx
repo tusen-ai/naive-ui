@@ -39,6 +39,7 @@ import {
   type SlotsType,
   toRef,
   Transition,
+  type VNode,
   vShow,
   watch,
   watchEffect,
@@ -219,11 +220,11 @@ export const selectProps = {
 export type SelectProps = ExtractPublicPropTypes<typeof selectProps>
 
 export interface SelectSlots {
-  default?: any
-  header?: any
-  action?: any
-  empty?: any
-  arrow?: any
+  default?: () => VNode[]
+  header?: () => VNode[]
+  action?: () => VNode[]
+  empty?: () => VNode[]
+  arrow?: () => VNode[]
 }
 
 export default defineComponent({

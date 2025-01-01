@@ -2,13 +2,15 @@
 
 ## NEXT_VERSION
 
-### Features
+### Breaking Changes
 
-- 为所有的组件增加插槽类型
+- （需要 Vue 3.3+）为所有的组件增加插槽的类型标注
 
 ### Fixes
 
 - 修复 `n-data-table` 在使用树形数据的时候出现多个展开 icon
+- 修复 `n-date-picker` 的 `confirm`、`now`、`clear` 插槽对 `'month'`、`'monthrange'`、`'quarter'`、`'quarterrange'`、`'year'` 和 `'yearrange'` 类型不生效
+- 修复 `n-input` 的 `render-count` 属性在类型非 `'textarea'` 时不生效
 
 ## 2.40.4
 

@@ -60,8 +60,8 @@ export type DescriptionsProps = ExtractPublicPropTypes<typeof descriptionsProps>
 export type DescriptionProps = DescriptionsProps
 
 export interface DescriptionsSlots {
-  default?: any
-  header?: any
+  default?: () => VNode[]
+  header?: () => VNode[]
 }
 
 export default defineComponent({

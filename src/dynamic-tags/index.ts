@@ -1,7 +1,7 @@
 export { dynamicTagsProps, default as NDynamicTags } from './src/DynamicTags'
 export type { DynamicTagsProps, DynamicTagsSlots } from './src/DynamicTags'
 export type {
-  DynamicTagsInputSlotOptions,
+  DynamicTagsInputSlotProps,
   DynamicTagsOption,
-  DynamicTagsTriggerSlotOptions
+  DynamicTagsTriggerSlotProps
 } from './src/interface'

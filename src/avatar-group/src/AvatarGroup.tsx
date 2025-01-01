@@ -3,8 +3,8 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import type { Size } from '../../avatar/src/interface'
 import type { AvatarGroupTheme } from '../styles'
 import type {
-  AvatarGroupAvatarSlotOptions,
-  AvatarGroupRestSlotOptions
+  AvatarGroupAvatarSlotProps,
+  AvatarGroupRestSlotProps
 } from './interface'
 import {
   computed,
@@ -13,7 +13,8 @@ import {
   h,
   type PropType,
   provide,
-  type SlotsType
+  type SlotsType,
+  type VNode
 } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
@@ -46,9 +47,9 @@ export const avatarGroupProps = {
 export type AvatarGroupProps = ExtractPublicPropTypes<typeof avatarGroupProps>
 
 export interface AvatarGroupSlots {
-  avatar?: (info: AvatarGroupAvatarSlotOptions) => any
-  rest?: (info: AvatarGroupRestSlotOptions) => any
-  default?: any
+  avatar?: (props: AvatarGroupAvatarSlotProps) => VNode[]
+  rest?: (props: AvatarGroupRestSlotProps) => VNode[]
+  default?: () => VNode[]
 }
 
 export default defineComponent({

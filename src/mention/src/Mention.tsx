@@ -24,7 +24,8 @@ import {
   ref,
   type SlotsType,
   toRef,
-  Transition
+  Transition,
+  type VNode
 } from 'vue'
 import {
   type FollowerInst,
@@ -133,8 +134,8 @@ export const mentionProps = {
 export type MentionProps = ExtractPublicPropTypes<typeof mentionProps>
 
 export interface MentionSlots {
-  default?: any
-  empty?: any
+  default?: () => VNode[]
+  empty?: () => VNode[]
 }
 
 export default defineComponent({

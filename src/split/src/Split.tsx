@@ -11,6 +11,7 @@ import {
   ref,
   type SlotsType,
   toRef,
+  type VNode,
   watchEffect
 } from 'vue'
 import { type ThemeProps, useTheme, useThemeClass } from '../../_mixins'
@@ -62,10 +63,10 @@ export const splitProps = {
 export type SplitProps = ExtractPublicPropTypes<typeof splitProps>
 
 export interface SplitSlots {
-  default?: any
-  1?: any
-  2?: any
-  'resize-trigger'?: any
+  default?: () => VNode[]
+  1?: () => VNode[]
+  2?: () => VNode[]
+  'resize-trigger'?: () => VNode[]
 }
 
 export default defineComponent({

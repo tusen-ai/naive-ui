@@ -6,7 +6,8 @@ import {
   type CSSProperties,
   defineComponent,
   h,
-  type SlotsType
+  type SlotsType,
+  type VNode
 } from 'vue'
 import { NBaseClose, NBaseIcon } from '../../_internal'
 import {
@@ -36,11 +37,11 @@ const iconRenderMap = {
 }
 
 export interface DialogSlots {
-  action?: any
-  default?: any
-  header?: any
-  icon?: any
-  close?: any
+  action?: () => VNode[]
+  default?: () => VNode[]
+  header?: () => VNode[]
+  icon?: () => VNode[]
+  close?: () => VNode[]
 }
 
 export const NDialog = defineComponent({

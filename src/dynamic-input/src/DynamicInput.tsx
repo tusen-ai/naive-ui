@@ -3,8 +3,8 @@ import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { ButtonProps } from '../../button'
 import type { DynamicInputTheme } from '../styles'
 import type {
-  DynamicInputActionSlotOptions,
-  DynamicInputDefaultSlotOptions,
+  DynamicInputActionSlotProps,
+  DynamicInputDefaultSlotProps,
   OnUpdateValue
 } from './interface'
 import { createId } from 'seemly'
@@ -21,6 +21,7 @@ import {
   ref,
   toRaw,
   toRef,
+  type VNode,
   watchEffect
 } from 'vue'
 import { NBaseIcon } from '../../_internal'
@@ -33,7 +34,12 @@ import {
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import { formItemInjectionKey } from '../../_mixins/use-form-item'
 import { useRtl } from '../../_mixins/use-rtl'
-import { call, resolveSlot, resolveSlotWithProps, warnOnce } from '../../_utils'
+import {
+  call,
+  resolveSlot,
+  resolveSlotWithTypedProps,
+  warnOnce
+} from '../../_utils'
 import { NButton } from '../../button'
 import { NButtonGroup } from '../../button-group'
 import { dynamicInputLight } from '../styles'
@@ -93,10 +99,10 @@ export const dynamicInputProps = {
 export type DynamicInputProps = ExtractPublicPropTypes<typeof dynamicInputProps>
 
 export interface DynamicInputSlots {
-  action?: (options: DynamicInputActionSlotOptions) => any
-  default?: (options: DynamicInputDefaultSlotOptions) => any
-  'create-button-default'?: any
-  'create-button-icon'?: any
+  action?: (props: DynamicInputActionSlotProps) => VNode[]
+  default?: (props: DynamicInputDefaultSlotProps) => VNode[]
+  'create-button-default'?: () => VNode[]
+  'create-button-icon'?: () => VNode[]
 }
 
 export default defineComponent({
@@ -389,7 +395,7 @@ export default defineComponent({
               class={[`${mergedClsPrefix}-dynamic-input-item`, itemClass]}
               style={itemStyle}
             >
-              {resolveSlotWithProps(
+              {resolveSlotWithTypedProps(
                 $slots.default,
                 {
                   value: mergedValue[index],
@@ -435,7 +441,7 @@ export default defineComponent({
                   ]
                 }
               )}
-              {resolveSlotWithProps(
+              {resolveSlotWithTypedProps(
                 $slots.action,
                 {
                   value: mergedValue[index],

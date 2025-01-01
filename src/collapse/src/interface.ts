@@ -37,18 +37,18 @@ export interface HeaderClickInfo<T> {
   event: MouseEvent
 }
 
-export interface CollapseArrowSlotOptions {
+export interface CollapseArrowSlotProps {
   collapsed: boolean
 }
 
-export interface CollapseItemHeaderSlotOptions {
+export interface CollapseItemHeaderSlotProps {
   collapsed: boolean
 }
 
-export interface CollapseItemHeaderExtraSlotOptions {
+export interface CollapseItemHeaderExtraSlotProps {
   collapsed: boolean
 }
 
-export interface CollapseItemArrowSlotOptions {
+export interface CollapseItemArrowSlotProps {
   collapsed: boolean
 }

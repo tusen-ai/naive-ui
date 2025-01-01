@@ -1,5 +1,12 @@
 import type { UploadTriggerDefaultSlotOptions } from './interface'
-import { computed, defineComponent, h, inject } from 'vue'
+import {
+  computed,
+  defineComponent,
+  h,
+  inject,
+  type SlotsType,
+  type VNode
+} from 'vue'
 import { NBaseIcon } from '../../_internal'
 import { AddIcon } from '../../_internal/icons'
 import { resolveSlot, throwError } from '../../_utils'
@@ -8,7 +15,7 @@ import NUploadDragger from './UploadDragger'
 import { getFilesFromEntries } from './utils'
 
 export interface UploadTriggerSlots {
-  default?: (options: UploadTriggerDefaultSlotOptions) => any
+  default?: (options: UploadTriggerDefaultSlotOptions) => VNode[]
 }
 
 export default defineComponent({
@@ -16,6 +23,7 @@ export default defineComponent({
   props: {
     abstract: Boolean
   },
+  slots: Object as SlotsType<UploadTriggerSlots>,
   setup(props, { slots }) {
     const NUpload = inject(uploadInjectionKey, null)
     if (!NUpload) {
@@ -24,7 +32,6 @@ export default defineComponent({
         '`n-upload-trigger` must be placed inside `n-upload`.'
       )
     }
-
     const {
       mergedClsPrefixRef,
       mergedDisabledRef,

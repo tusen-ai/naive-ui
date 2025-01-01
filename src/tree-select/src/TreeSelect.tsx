@@ -39,6 +39,7 @@ import {
   type SlotsType,
   toRef,
   Transition,
+  type VNode,
   type VNodeChild,
   watchEffect,
   withDirectives
@@ -183,10 +184,10 @@ export const treeSelectProps = {
 export type TreeSelectProps = ExtractPublicPropTypes<typeof treeSelectProps>
 
 export interface TreeSelectSlots {
-  header?: any
-  action?: any
-  arrow?: any
-  empty?: any
+  header?: () => VNode[]
+  action?: () => VNode[]
+  arrow?: () => VNode[]
+  empty?: () => VNode[]
 }
 
 export default defineComponent({

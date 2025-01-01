@@ -7,6 +7,7 @@ import {
   h,
   type PropType,
   type SlotsType,
+  type VNode,
   type VNodeChild
 } from 'vue'
 import { NBaseIcon } from '../../_internal/icon'
@@ -37,9 +38,9 @@ export const emptyProps = {
 export type EmptyProps = ExtractPublicPropTypes<typeof emptyProps>
 
 export interface EmptySlots {
-  default?: any
-  extra?: any
-  icon?: any
+  default?: () => VNode[]
+  extra?: () => VNode[]
+  icon?: () => VNode[]
 }
 
 export default defineComponent({

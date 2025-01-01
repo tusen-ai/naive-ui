@@ -10,7 +10,8 @@ import {
   type PropType,
   provide,
   ref,
-  type SlotsType
+  type SlotsType,
+  type VNode
 } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { createRefSetter, keep, mergeEventHandlers, omit } from '../../_utils'
@@ -38,10 +39,10 @@ export type PopselectSetupProps = ExtractPropTypes<typeof popselectProps>
 export type PopselectProps = ExtractPublicPropTypes<typeof popselectProps>
 
 export interface PopselectSlots {
-  default?: any
-  header?: any
-  action?: any
-  empty?: any
+  default?: () => VNode[]
+  header?: () => VNode[]
+  action?: () => VNode[]
+  empty?: () => VNode[]
 }
 
 export default defineComponent({

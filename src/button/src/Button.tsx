@@ -16,6 +16,7 @@ import {
   type PropType,
   ref,
   type SlotsType,
+  type VNode,
   type VNodeChild,
   watchEffect
 } from 'vue'
@@ -97,8 +98,8 @@ export const buttonProps = {
 export type ButtonProps = ExtractPublicPropTypes<typeof buttonProps>
 
 export interface ButtonSlots {
-  default?: any
-  icon?: any
+  default?: () => VNode[]
+  icon?: () => VNode[]
 }
 
 const Button = defineComponent({

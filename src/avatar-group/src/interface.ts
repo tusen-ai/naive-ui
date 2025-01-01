@@ -1,8 +1,10 @@
-export interface AvatarGroupAvatarSlotOptions {
-  option: Record<string, any>
+import type { AvatarGroupOption } from './AvatarGroup'
+
+export interface AvatarGroupAvatarSlotProps {
+  option: AvatarGroupOption
 }
 
-export interface AvatarGroupRestSlotOptions {
-  options: Array<any>
+export interface AvatarGroupRestSlotProps {
+  options: Array<AvatarGroupOption>
   rest: number
 }

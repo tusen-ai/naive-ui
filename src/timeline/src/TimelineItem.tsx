@@ -6,7 +6,8 @@ import {
   h,
   inject,
   type PropType,
-  type SlotsType
+  type SlotsType,
+  type VNode
 } from 'vue'
 import { useConfig, useThemeClass } from '../../_mixins'
 import {
@@ -39,10 +40,10 @@ export const timelineItemProps = {
 export type TimelineItemProps = ExtractPublicPropTypes<typeof timelineItemProps>
 
 export interface TimelineItemSlots {
-  default?: any
-  icon?: any
-  footer?: any
-  header?: any
+  default?: () => VNode[]
+  icon?: () => VNode[]
+  footer?: () => VNode[]
+  header?: () => VNode[]
 }
 
 export default defineComponent({

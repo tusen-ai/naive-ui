@@ -28,6 +28,7 @@ import {
   ref,
   type SlotsType,
   toRef,
+  type VNode,
   type VNodeChild,
   watchEffect
 } from 'vue'
@@ -126,13 +127,13 @@ export const paginationProps = {
 export type PaginationProps = ExtractPublicPropTypes<typeof paginationProps>
 
 export interface PaginationSlots {
-  default?: any
-  goto?: any
-  label?: any
-  next?: (info: PaginationInfo) => any
-  prev?: (info: PaginationInfo) => any
-  prefix?: (info: PaginationInfo) => any
-  suffix?: (info: PaginationInfo) => any
+  default?: () => VNode[]
+  goto?: () => VNode[]
+  label?: () => VNode[]
+  next?: (props: PaginationInfo) => VNode
+  prev?: (props: PaginationInfo) => VNode
+  prefix?: (props: PaginationInfo) => VNode
+  suffix?: (props: PaginationInfo) => VNode
 }
 
 export default defineComponent({
@@ -599,8 +600,8 @@ export default defineComponent({
       onRender
     } = this
     onRender?.()
-    const renderPrefix = ($slots.prefix as RenderPrefix | undefined) || prefix
-    const renderSuffix = ($slots.suffix as RenderSuffix | undefined) || suffix
+    const renderPrefix = prefix || $slots.prefix
+    const renderSuffix = suffix || $slots.suffix
     const renderPrev = prev || $slots.prev
     const renderNext = next || $slots.next
     const renderLabel = label || $slots.label

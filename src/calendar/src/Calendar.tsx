@@ -2,8 +2,8 @@ import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CalendarTheme } from '../styles'
 import type {
-  CalendarDefaultSlotOptions,
-  CalendarHeaderSlotOptions,
+  CalendarDefaultSlotProps,
+  CalendarHeaderSlotProps,
   DateItem,
   OnPanelChange,
   OnUpdateValue
@@ -26,12 +26,13 @@ import {
   type PropType,
   ref,
   type SlotsType,
-  toRef
+  toRef,
+  type VNode
 } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
-import { call, resolveSlotWithProps } from '../../_utils'
+import { call, resolveSlotWithTypedProps } from '../../_utils'
 import { NButton } from '../../button'
 import { NButtonGroup } from '../../button-group'
 import { dateArray } from '../../date-picker/src/utils'
@@ -54,8 +55,8 @@ export const calendarProps = {
 export type CalendarProps = ExtractPublicPropTypes<typeof calendarProps>
 
 export interface CalendarSlots {
-  default?: (props: CalendarDefaultSlotOptions) => any
-  header?: (props: CalendarHeaderSlotOptions) => any
+  default?: (props: CalendarDefaultSlotProps) => VNode[]
+  header?: (props: CalendarHeaderSlotProps) => VNode[]
 }
 
 export default defineComponent({
@@ -230,7 +231,7 @@ export default defineComponent({
       >
         <div class={`${mergedClsPrefix}-calendar-header`}>
           <div class={`${mergedClsPrefix}-calendar-header__title`}>
-            {resolveSlotWithProps(
+            {resolveSlotWithTypedProps(
               $slots.header,
               { year, month: calendarMonth },
               () => {

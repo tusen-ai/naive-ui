@@ -103,9 +103,7 @@ export const modalProps = {
 
 export type ModalProps = ExtractPublicPropTypes<typeof modalProps>
 
-export interface ModalSlots extends CardSlots, DialogSlots {
-  default?: any
-}
+export interface ModalSlots extends CardSlots, DialogSlots {}
 
 export default defineComponent({
   name: 'Modal',

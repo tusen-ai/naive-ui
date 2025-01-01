@@ -44,8 +44,14 @@ export default defineComponent({
     return useCalendar(props, props.type)
   },
   render() {
-    const { mergedClsPrefix, mergedTheme, shortcuts, onRender, $slots, type }
-      = this
+    const {
+      mergedClsPrefix,
+      mergedTheme,
+      shortcuts,
+      onRender,
+      datePickerSlots,
+      type
+    } = this
     onRender?.()
     return (
       <div
@@ -66,13 +72,17 @@ export default defineComponent({
               class={`${mergedClsPrefix}-date-panel-month__fast-prev`}
               onClick={this.prevYear}
             >
-              {resolveSlot($slots['prev-year'], () => [<FastBackwardIcon />])}
+              {resolveSlot(datePickerSlots['prev-year'], () => [
+                <FastBackwardIcon />
+              ])}
             </div>
             <div
               class={`${mergedClsPrefix}-date-panel-month__prev`}
               onClick={this.prevMonth}
             >
-              {resolveSlot($slots['prev-month'], () => [<BackwardIcon />])}
+              {resolveSlot(datePickerSlots['prev-month'], () => [
+                <BackwardIcon />
+              ])}
             </div>
             <PanelHeader
               monthYearSeparator={this.calendarHeaderMonthYearSeparator}
@@ -87,13 +97,17 @@ export default defineComponent({
               class={`${mergedClsPrefix}-date-panel-month__next`}
               onClick={this.nextMonth}
             >
-              {resolveSlot($slots['next-month'], () => [<ForwardIcon />])}
+              {resolveSlot(datePickerSlots['next-month'], () => [
+                <ForwardIcon />
+              ])}
             </div>
             <div
               class={`${mergedClsPrefix}-date-panel-month__fast-next`}
               onClick={this.nextYear}
             >
-              {resolveSlot($slots['next-year'], () => [<FastForwardIcon />])}
+              {resolveSlot(datePickerSlots['next-year'], () => [
+                <FastForwardIcon />
+              ])}
             </div>
           </div>
           <div class={`${mergedClsPrefix}-date-panel-weekdays`}>

@@ -195,10 +195,10 @@ export const cascaderProps = {
 export type CascaderProps = ExtractPublicPropTypes<typeof cascaderProps>
 
 export interface CascaderSlots {
-  action?: any
-  arrow?: any
-  empty?: any
-  'not-found'?: any
+  action?: () => VNode[]
+  arrow?: () => VNode[]
+  empty?: () => VNode[]
+  'not-found'?: () => VNode[]
 }
 
 export default defineComponent({

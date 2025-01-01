@@ -3,7 +3,8 @@ import {
   type CSSProperties,
   defineComponent,
   type PropType,
-  type SlotsType
+  type SlotsType,
+  type VNode
 } from 'vue'
 import { DESCRIPTION_ITEM_FLAG } from './utils'
 
@@ -24,8 +25,8 @@ export type DescriptionItemProps = ExtractPublicPropTypes<
 >
 
 export interface DescriptionItemSlots {
-  default?: any
-  label?: any
+  default?: () => VNode[]
+  label?: () => VNode[]
 }
 
 export default defineComponent({

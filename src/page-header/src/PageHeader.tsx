@@ -6,7 +6,8 @@ import {
   defineComponent,
   h,
   type PropType,
-  type SlotsType
+  type SlotsType,
+  type VNode
 } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import { ArrowBackIcon } from '../../_internal/icons'
@@ -26,14 +27,14 @@ export const pageHeaderProps = {
 export type PageHeaderProps = ExtractPublicPropTypes<typeof pageHeaderProps>
 
 export interface PageHeaderSlots {
-  avatar?: any
-  header?: any
-  default?: any
-  extra?: any
-  footer?: any
-  subtitle?: any
-  title?: any
-  back?: any
+  avatar?: () => VNode[]
+  header?: () => VNode[]
+  default?: () => VNode[]
+  extra?: () => VNode[]
+  footer?: () => VNode[]
+  subtitle?: () => VNode[]
+  title?: () => VNode[]
+  back?: () => VNode[]
 }
 
 export default defineComponent({
