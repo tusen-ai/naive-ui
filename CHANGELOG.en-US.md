@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-skeleton` export `skeletonDark` theme variable, closes [#5777](https://github.com/tusen-ai/naive-ui/issues/5777)
+
 ## 2.40.4
 
 ### Fixes
