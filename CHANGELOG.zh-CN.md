@@ -12,6 +12,10 @@
 - 修复 `n-date-picker` 的 `confirm`、`now`、`clear` 插槽对 `'month'`、`'monthrange'`、`'quarter'`、`'quarterrange'`、`'year'` 和 `'yearrange'` 类型不生效
 - 修复 `n-input` 的 `render-count` 属性在类型非 `'textarea'` 时不生效
 
+### Features
+
+- `n-calendar` 新增 `extra` slot，关闭 [#6648](https://github.com/tusen-ai/naive-ui/issues/6648)
+
 ## 2.40.4
 
 `2024-12-20`

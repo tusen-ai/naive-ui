@@ -28,3 +28,4 @@ basic.vue
 | --- | --- | --- | --- |
 | default | `(props: { year: number, month: number, date: number })` | 每个日期中渲染的内容 |  |
 | header | `(props: { year: number, month: number })` | 日历的标题，`month` 从 1 开始 | 2.29.1 |
+| extra | `(props: { year: number, month: number, prev: () => void, next: () => void, today: () => void })` | `month` 从 1 开始 | NEXT_VERSION |
