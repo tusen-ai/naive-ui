@@ -75,6 +75,7 @@ Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有�
 | 越南语（越南）     | viVN | dateViVN | 2.30.7 |
 | 简体中文           | zhCN | dateZhCN |        |
 | 繁体中文           | zhTW | dateZhTW |        |
+| 维吾尔语           | ugCN | dateUgCN |        |
 
 ## 在现有国际化基础上调整
 

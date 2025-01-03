@@ -75,6 +75,7 @@ The following list is sorted by 'Config' column.
 | Vietnamese (Vietnam)       | viVN   | dateViVN    | 2.30.7  |
 | Chinese (Simplified)       | zhCN   | dateZhCN    |         |
 | Chinese (Traditional)      | zhTW   | dateZhTW    |         |
+| Uyghur(China)              | ugCN   | dateUgCN    |         |
 
 ## Customize the existing locale
 
