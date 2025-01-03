@@ -39,7 +39,7 @@ custom-select.vue
 group-header.vue
 controlled-page.vue
 controlled-filter.vue
-controlled-sorter
+controlled-sorter.vue
 controlled-multiple-sorter
 fixed-header.vue
 fixed-header-column.vue
