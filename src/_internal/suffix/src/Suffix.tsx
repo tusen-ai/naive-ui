@@ -39,7 +39,7 @@ export default defineComponent({
         >
           {{
             default: () =>
-              props.showArrow ? (
+              props.showArrow || props.showClear ? (
                 <NBaseClear
                   clsPrefix={clsPrefix}
                   show={props.showClear}
