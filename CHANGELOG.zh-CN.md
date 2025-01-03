@@ -11,6 +11,7 @@
 - 修复 `n-data-table` 在使用树形数据的时候出现多个展开 icon
 - 修复 `n-date-picker` 的 `confirm`、`now`、`clear` 插槽对 `'month'`、`'monthrange'`、`'quarter'`、`'quarterrange'`、`'year'` 和 `'yearrange'` 类型不生效
 - 修复 `n-input` 的 `render-count` 属性在类型非 `'textarea'` 时不生效
+- 修复 `n-select` 在 `show-arrow` 为 `false` 时设置 `clearable` 为 `true` 会导致清除图标不显示，关闭 [#6671](https://github.com/tusen-ai/naive-ui/issues/6671)
 
 ## 2.40.4
 

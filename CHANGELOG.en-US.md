@@ -11,6 +11,7 @@
 - Fix `n-data-table` may have multiple expand trigger with tree data.
 - Fix `n-date-picker`'s `confirm`, `now`, `clear` slots doesn't work with `'month'`, `'monthrange'`, `'quarter'`, `'quarterrange'`, `'year'` and `'yearrange'` type.
 - Fix `n-input`'s `render-count` prop doesn't work when type is not `'textarea'`.
+- Fix `n-select` set `clearable` to `true` when `show-arrow` is `false` causing the Clear icon to not appear，close [#6671](https://github.com/tusen-ai/naive-ui/issues/6671)
 
 ## 2.40.4
 
