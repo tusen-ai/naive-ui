@@ -32,6 +32,7 @@ import {
   dateSvSE,
   dateThTH,
   dateTrTR,
+  dateUgCN,
   dateUkUA,
   dateUzUZ,
   dateZhCN,
@@ -63,6 +64,7 @@ import {
   zhTW
 } from '../index'
 import { NInput } from '../input/index'
+import ugCN from './common/ugCN'
 import { createLocale } from './utils/index'
 
 const Wrapper = defineComponent({
@@ -390,6 +392,14 @@ describe('locale', () => {
         props: {
           dateLocale: dateAzAZ,
           locale: azAZ
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateUgCN,
+          locale: ugCN
         }
       }).html()
     ).toMatchSnapshot()
