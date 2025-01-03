@@ -38,30 +38,43 @@ export default defineComponent({
           show={props.loading}
         >
           {{
-            default: () =>
-              props.showArrow ? (
-                <NBaseClear
-                  clsPrefix={clsPrefix}
-                  show={props.showClear}
-                  onClear={props.onClear}
-                >
-                  {{
-                    placeholder: () => (
-                      <NBaseIcon
-                        clsPrefix={clsPrefix}
-                        class={`${clsPrefix}-base-suffix__arrow`}
-                      >
-                        {{
-                          default: () =>
-                            resolveSlot(slots.default, () => [
-                              <ChevronDownIcon />
-                            ])
-                        }}
-                      </NBaseIcon>
-                    )
-                  }}
-                </NBaseClear>
-              ) : null
+            default: () => {
+              if (props.showArrow) {
+                return (
+                  <NBaseClear
+                    clsPrefix={clsPrefix}
+                    show={props.showClear}
+                    onClear={props.onClear}
+                  >
+                    {{
+                      placeholder: () => (
+                        <NBaseIcon
+                          clsPrefix={clsPrefix}
+                          class={`${clsPrefix}-base-suffix__arrow`}
+                        >
+                          {{
+                            default: () =>
+                              resolveSlot(slots.default, () => [
+                                <ChevronDownIcon />
+                              ])
+                          }}
+                        </NBaseIcon>
+                      )
+                    }}
+                  </NBaseClear>
+                )
+              }
+              if (props.showClear) {
+                return (
+                  <NBaseClear
+                    clsPrefix={clsPrefix}
+                    show={true}
+                    onClear={props.onClear}
+                  />
+                )
+              }
+              return null
+            }
           }}
         </NBaseLoading>
       )
