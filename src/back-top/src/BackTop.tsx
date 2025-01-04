@@ -288,23 +288,23 @@ export default defineComponent({
                     this.onRender?.()
                     return this.mergedShow
                       ? h(
-                          'div',
-                          mergeProps(this.$attrs, {
-                            class: [
-                              `${mergedClsPrefix}-back-top`,
-                              this.themeClass,
-                              this.transitionDisabled
-                              && `${mergedClsPrefix}-back-top--transition-disabled`
-                            ],
-                            style: [this.style, this.cssVars],
-                            onClick: this.handleClick
-                          }),
-                          resolveSlot(this.$slots.default, () => [
-                            <NBaseIcon clsPrefix={mergedClsPrefix}>
-                              {{ default: renderBackTopIcon }}
-                            </NBaseIcon>
-                          ])
-                        )
+                        'div',
+                        mergeProps(this.$attrs, {
+                          class: [
+                            `${mergedClsPrefix}-back-top`,
+                            this.themeClass,
+                            this.transitionDisabled
+                            && `${mergedClsPrefix}-back-top--transition-disabled`
+                          ],
+                          style: [this.style, this.cssVars],
+                          onClick: this.handleClick
+                        }),
+                        resolveSlot(this.$slots.default, () => [
+                          <NBaseIcon clsPrefix={mergedClsPrefix}>
+                            {{ default: renderBackTopIcon }}
+                          </NBaseIcon>
+                        ])
+                      )
                       : null
                   }
                 }}

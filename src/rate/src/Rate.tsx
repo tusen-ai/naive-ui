@@ -146,22 +146,22 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-          'rate',
-          computed(() => {
-            const size = mergedSizeRef.value
-            const { color } = props
-            let hash = ''
-            if (size) {
-              hash += size[0]
-            }
-            if (color) {
-              hash += color2Class(color)
-            }
-            return hash
-          }),
-          cssVarsRef,
-          props
-        )
+        'rate',
+        computed(() => {
+          const size = mergedSizeRef.value
+          const { color } = props
+          let hash = ''
+          if (size) {
+            hash += size[0]
+          }
+          if (color) {
+            hash += color2Class(color)
+          }
+          return hash
+        }),
+        cssVarsRef,
+        props
+      )
       : undefined
 
     return {

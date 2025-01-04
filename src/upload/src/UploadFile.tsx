@@ -158,10 +158,10 @@ export default defineComponent({
       void Promise.resolve(
         onRemove
           ? onRemove({
-              file: Object.assign({}, file),
-              fileList: mergedFileList,
-              index: props.index
-            })
+            file: Object.assign({}, file),
+            fileList: mergedFileList,
+            index: props.index
+          })
           : true
       ).then((result) => {
         if (result === false)

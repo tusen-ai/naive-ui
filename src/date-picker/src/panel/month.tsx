@@ -244,7 +244,7 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
               {actions?.includes('clear')
                 ? resolveSlotWithTypedProps(
-                    this.datePickerSlots.clear,
+                  this.datePickerSlots.clear,
                     {
                       onClear: this.handleClearClick,
                       text: this.locale.clear
@@ -259,11 +259,11 @@ export default defineComponent({
                         {{ default: () => this.locale.clear }}
                       </NButton>
                     ]
-                  )
+                )
                 : null}
               {actions?.includes('now')
                 ? resolveSlotWithTypedProps(
-                    this.datePickerSlots.now,
+                  this.datePickerSlots.now,
                     {
                       onNow: this.handleNowClick,
                       text: this.locale.now
@@ -278,11 +278,11 @@ export default defineComponent({
                         {{ default: () => this.locale.now }}
                       </NButton>
                     ]
-                  )
+                )
                 : null}
               {actions?.includes('confirm')
                 ? resolveSlotWithTypedProps(
-                    this.datePickerSlots.confirm,
+                  this.datePickerSlots.confirm,
                     {
                       onConfirm: this.handleConfirmClick,
                       disabled: this.isDateInvalid,
@@ -300,7 +300,7 @@ export default defineComponent({
                         {{ default: () => this.locale.confirm }}
                       </NButton>
                     ]
-                  )
+                )
                 : null}
             </div>
           </div>
