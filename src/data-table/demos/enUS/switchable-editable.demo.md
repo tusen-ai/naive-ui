@@ -51,14 +51,14 @@ const ShowOrEdit = defineComponent({
         },
         isEdit.value
           ? h(NInput, {
-            ref: inputRef,
-            value: inputValue.value,
-            onUpdateValue: (v) => {
-              inputValue.value = v
-            },
-            onChange: handleChange,
-            onBlur: handleChange
-          })
+              ref: inputRef,
+              value: inputValue.value,
+              onUpdateValue: (v) => {
+                inputValue.value = v
+              },
+              onChange: handleChange,
+              onBlur: handleChange
+            })
           : props.value
       )
   }

@@ -263,11 +263,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'layout-sider',
-        computed(() => (props.inverted ? 'a' : 'b')),
-        cssVarsRef,
-        props
-      )
+          'layout-sider',
+          computed(() => (props.inverted ? 'a' : 'b')),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       scrollableElRef,

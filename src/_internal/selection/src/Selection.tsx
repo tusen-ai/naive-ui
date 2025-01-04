@@ -152,16 +152,16 @@ export default defineComponent({
       return props.selectedOption
         ? props.renderTag
           ? props.renderTag({
-            option: props.selectedOption,
-            handleClose: () => {}
-          })
+              option: props.selectedOption,
+              handleClose: () => {}
+            })
           : props.renderLabel
             ? props.renderLabel(props.selectedOption as never, true)
             : render(
-              props.selectedOption[props.labelField],
-              props.selectedOption,
-              true
-            )
+                props.selectedOption[props.labelField],
+                props.selectedOption,
+                true
+              )
         : props.placeholder
     })
     const labelRef = computed(() => {
@@ -541,13 +541,13 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'internal-selection',
-        computed(() => {
-          return props.size[0]
-        }),
-        cssVarsRef,
-        props
-      )
+          'internal-selection',
+          computed(() => {
+            return props.size[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedTheme: themeRef,
@@ -903,9 +903,9 @@ export default defineComponent({
                 <div class={`${clsPrefix}-base-selection-overlay__wrapper`}>
                   {renderTag
                     ? renderTag({
-                      option: this.selectedOption!,
-                      handleClose: () => {}
-                    })
+                        option: this.selectedOption!,
+                        handleClose: () => {}
+                      })
                     : renderLabel
                       ? renderLabel(this.selectedOption!, true)
                       : render(this.label, this.selectedOption, true)}
@@ -942,9 +942,9 @@ export default defineComponent({
                 <div class={`${clsPrefix}-base-selection-input__content`}>
                   {renderTag
                     ? renderTag({
-                      option: this.selectedOption!,
-                      handleClose: () => {}
-                    })
+                        option: this.selectedOption!,
+                        handleClose: () => {}
+                      })
                     : renderLabel
                       ? renderLabel(this.selectedOption!, true)
                       : render(this.label, this.selectedOption, true)}

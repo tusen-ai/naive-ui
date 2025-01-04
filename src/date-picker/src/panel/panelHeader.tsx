@@ -106,28 +106,28 @@ export default defineComponent({
                         default: () =>
                           this.show
                             ? withDirectives(
-                              <MonthPanel
-                                ref="monthPanelRef"
-                                onUpdateValue={this.onUpdateValue}
-                                actions={[]}
-                                calendarHeaderMonthYearSeparator={
-                                  this.monthYearSeparator
-                                }
-                                // month and year click show month type
-                                type="month"
-                                key="month"
-                                useAsQuickJump
-                                value={this.value}
-                              />,
-                              [
+                                <MonthPanel
+                                  ref="monthPanelRef"
+                                  onUpdateValue={this.onUpdateValue}
+                                  actions={[]}
+                                  calendarHeaderMonthYearSeparator={
+                                    this.monthYearSeparator
+                                  }
+                                  // month and year click show month type
+                                  type="month"
+                                  key="month"
+                                  useAsQuickJump
+                                  value={this.value}
+                                />,
                                 [
-                                  clickoutside,
-                                  handleClickOutside,
-                                  undefined as unknown as string,
-                                  { capture: true }
+                                  [
+                                    clickoutside,
+                                    handleClickOutside,
+                                    undefined as unknown as string,
+                                    { capture: true }
+                                  ]
                                 ]
-                              ]
-                            )
+                              )
                             : null
                       }}
                     </Transition>

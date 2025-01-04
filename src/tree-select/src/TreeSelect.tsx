@@ -315,11 +315,11 @@ export default defineComponent({
         if (tmNode !== null) {
           return showPath
             ? treeOption2SelectOptionWithPath(
-              tmNode,
-              treeMate.getPath(mergedValue).treeNodePath,
-              separator,
-              labelField
-            )
+                tmNode,
+                treeMate.getPath(mergedValue).treeNodePath,
+                separator,
+                labelField
+              )
             : treeOption2SelectOption(tmNode, labelField)
         }
       }
@@ -345,11 +345,11 @@ export default defineComponent({
             res.push(
               showPath
                 ? treeOption2SelectOptionWithPath(
-                  tmNode,
-                  treeMate.getPath(value).treeNodePath,
-                  separator,
-                  labelField
-                )
+                    tmNode,
+                    treeMate.getPath(value).treeNodePath,
+                    separator,
+                    labelField
+                  )
                 : treeOption2SelectOption(tmNode, labelField)
             )
           }

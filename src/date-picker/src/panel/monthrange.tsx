@@ -86,21 +86,21 @@ export default defineComponent({
         >
           {item.type === 'month'
             ? getMonthString(
-              item.dateObject.month,
-              item.monthFormat,
-              dateLocaleRef.value.locale
-            )
-            : item.type === 'quarter'
-              ? getQuarterString(
-                item.dateObject.quarter,
-                item.quarterFormat,
+                item.dateObject.month,
+                item.monthFormat,
                 dateLocaleRef.value.locale
               )
+            : item.type === 'quarter'
+              ? getQuarterString(
+                  item.dateObject.quarter,
+                  item.quarterFormat,
+                  dateLocaleRef.value.locale
+                )
               : getYearString(
-                item.dateObject.year,
-                item.yearFormat,
-                dateLocaleRef.value.locale
-              )}
+                  item.dateObject.year,
+                  item.yearFormat,
+                  dateLocaleRef.value.locale
+                )}
         </div>
       )
     }
@@ -306,7 +306,7 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
               {this.actions?.includes('clear')
                 ? resolveSlotWithTypedProps(
-                  this.datePickerSlots.clear,
+                    this.datePickerSlots.clear,
                     {
                       onClear: this.handleClearClick,
                       text: this.locale.clear
@@ -321,11 +321,11 @@ export default defineComponent({
                         {{ default: () => this.locale.clear }}
                       </NxButton>
                     ]
-                )
+                  )
                 : null}
               {this.actions?.includes('confirm')
                 ? resolveSlotWithTypedProps(
-                  this.datePickerSlots.confirm,
+                    this.datePickerSlots.confirm,
                     {
                       disabled: this.isRangeInvalid,
                       onConfirm: this.handleConfirmClick,
@@ -343,7 +343,7 @@ export default defineComponent({
                         {{ default: () => this.locale.confirm }}
                       </NxButton>
                     ]
-                )
+                  )
                 : null}
             </div>
           </div>

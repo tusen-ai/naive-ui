@@ -382,9 +382,9 @@ function useCalendar(
     newValue = getTime(
       dateItem.type === 'quarter' && dateItem.dateObject.quarter
         ? setQuarter(
-          setYear(newValue, dateItem.dateObject.year),
-          dateItem.dateObject.quarter
-        )
+            setYear(newValue, dateItem.dateObject.year),
+            dateItem.dateObject.quarter
+          )
         : set(newValue, dateItem.dateObject)
     )
     panelCommon.doUpdateValue(

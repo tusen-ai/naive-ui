@@ -162,8 +162,8 @@ export default c([
     ]),
     (isBrowser && 'MozBoxSizing' in document.createElement('div').style)
       ? c('&::moz-focus-inner', {
-        border: 0
-      })
+          border: 0
+        })
       : null,
     cE('border, state-border', `
       position: absolute;

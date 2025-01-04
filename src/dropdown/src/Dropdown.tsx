@@ -407,11 +407,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'dropdown',
-        computed(() => `${props.size[0]}${props.inverted ? 'i' : ''}`),
-        cssVarsRef,
-        props
-      )
+          'dropdown',
+          computed(() => `${props.size[0]}${props.inverted ? 'i' : ''}`),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,

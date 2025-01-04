@@ -80,11 +80,11 @@ export default defineComponent({
     const rtlEnabledRef = useRtl('Radio', mergedRtlRef, mergedClsPrefixRef)
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'radio',
-        computed(() => radio.mergedSize.value[0]),
-        cssVarsRef,
-        props
-      )
+          'radio',
+          computed(() => radio.mergedSize.value[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
     return Object.assign(radio, {
       rtlEnabled: rtlEnabledRef,

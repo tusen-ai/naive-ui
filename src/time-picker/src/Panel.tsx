@@ -148,10 +148,10 @@ export default defineComponent({
           value: Number(second),
           disabled: isSecondDisabled
             ? isSecondDisabled(
-              Number(second),
-              props.minuteValue,
-              props.hourValue
-            )
+                Number(second),
+                props.minuteValue,
+                props.hourValue
+              )
             : false
         }
       })
