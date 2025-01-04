@@ -3,15 +3,15 @@ import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CardSlots } from '../../card'
 import type { DialogSlots } from '../../dialog'
 import type { ModalTheme } from '../styles'
+import type { ModalDraggableOptions } from './interface'
 import { getPreciseEventTarget } from 'seemly'
 import { zindexable } from 'vdirs'
-import { useClicked, useClickPosition, useIsMounted } from 'vooks'
+import { useIsMounted } from 'vooks'
 import {
   computed,
   type CSSProperties,
   defineComponent,
   h,
-  inject,
   type PropType,
   provide,
   ref,
@@ -29,10 +29,10 @@ import {
   useIsComposing,
   warnOnce
 } from '../../_utils'
-import { dialogProviderInjectionKey } from '../../dialog/src/context'
 import { modalLight } from '../styles'
 import NModalBodyWrapper from './BodyWrapper'
-import { modalInjectionKey, modalProviderInjectionKey } from './interface'
+import { useCaptureOpenModalElementPosition } from './composables'
+import { modalInjectionKey } from './interface'
 import { presetProps, presetPropsKeys } from './presetProps'
 import style from './styles/index.cssr'
 
@@ -72,6 +72,7 @@ export const modalProps = {
   },
   blockScroll: { type: Boolean, default: true },
   ...presetProps,
+  draggable: [Boolean, Object] as PropType<boolean | ModalDraggableOptions>,
   // events
   onEsc: Function as PropType<() => void>,
   'onUpdate:show': [Function, Array] as PropType<
@@ -88,8 +89,6 @@ export const modalProps = {
   onNegativeClick: Function as PropType<() => Promise<boolean> | boolean | any>,
   onMaskClick: Function as PropType<(e: MouseEvent) => void>,
   // private
-  internalDialog: Boolean,
-  internalModal: Boolean,
   internalAppear: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -145,17 +144,11 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    const clickedRef = useClicked(64)
-    const clickedPositionRef = useClickPosition()
     const isMountedRef = useIsMounted()
-    const NDialogProvider = props.internalDialog
-      ? inject(dialogProviderInjectionKey, null)
-      : null
-    const NModalProvider = props.internalModal
-      ? inject(modalProviderInjectionKey, null)
-      : null
-
     const isComposingRef = useIsComposing()
+    const openModalElPosition = useCaptureOpenModalElementPosition(
+      toRef(props, 'show')
+    )
 
     function doUpdateShow(show: boolean): void {
       const { onUpdateShow, 'onUpdate:show': _onUpdateShow, onHide } = props
@@ -245,17 +238,7 @@ export default defineComponent({
     }
     provide(modalInjectionKey, {
       getMousePosition: () => {
-        const mergedProvider = NDialogProvider || NModalProvider
-        if (mergedProvider) {
-          const { clickedRef, clickedPositionRef } = mergedProvider
-          if (clickedRef.value && clickedPositionRef.value) {
-            return clickedPositionRef.value
-          }
-        }
-        if (clickedRef.value) {
-          return clickedPositionRef.value
-        }
-        return null
+        return openModalElPosition.value
       },
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
@@ -329,6 +312,7 @@ export default defineComponent({
                   preset={this.preset}
                   autoFocus={this.autoFocus}
                   trapFocus={this.trapFocus}
+                  draggable={this.draggable}
                   blockScroll={this.blockScroll}
                   {...this.presetProps}
                   onEsc={this.handleEsc}

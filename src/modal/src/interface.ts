@@ -15,9 +15,6 @@ export interface ModalProviderInjection {
   clickedPositionRef: Ref<{ x: number, y: number } | null>
 }
 
-export const modalProviderInjectionKey
-  = createInjectionKey<ModalProviderInjection>('n-modal-provider')
-
 export interface ModalInjection {
   getMousePosition: () => {
     x: number
@@ -31,3 +28,11 @@ export interface ModalInjection {
 }
 
 export const modalInjectionKey = createInjectionKey<ModalInjection>('n-modal')
+
+export interface ModalDraggableOptions {
+  /**
+   * 拖拽时限制在屏幕边缘
+   * @default true
+   */
+  sticky?: boolean
+}
