@@ -1,8 +1,7 @@
 import { h } from 'vue'
 import { replaceable } from './replaceable'
 
-export default replaceable(
-  'retry',
+export default replaceable('retry', () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
     <path
       d="M320,146s24.36-12-64-12A160,160,0,1,0,416,294"
@@ -13,4 +12,4 @@ export default replaceable(
       style="fill: none; stroke: currentcolor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 32px;"
     />
   </svg>
-)
+))

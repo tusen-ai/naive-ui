@@ -46,6 +46,7 @@ import {
   type PropType,
   provide,
   ref,
+  type SlotsType,
   toRef,
   type VNode,
   type VNodeChild,
@@ -348,9 +349,15 @@ export const treeProps = {
 
 export type TreeProps = ExtractPublicPropTypes<typeof treeProps>
 
+export interface TreeSlots {
+  default?: () => VNode[]
+  empty?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Tree',
   props: treeProps,
+  slots: Object as SlotsType<TreeSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {
@@ -446,18 +453,18 @@ export default defineComponent({
     const dataTreeMateRef = props.internalTreeSelect
       ? treeSelectInjection!.dataTreeMate
       : computed(() =>
-        props.showIrrelevantNodes
-          ? displayTreeMateRef.value
-          : createTreeMate(
-            props.data,
-            createTreeMateOptions(
-              props.keyField,
-              props.childrenField,
-              props.disabledField,
-              props.getChildren
-            )
-          )
-      )
+          props.showIrrelevantNodes
+            ? displayTreeMateRef.value
+            : createTreeMate(
+                props.data,
+                createTreeMateOptions(
+                  props.keyField,
+                  props.childrenField,
+                  props.disabledField,
+                  props.getChildren
+                )
+              )
+        )
     const { watchProps } = props
     const uncontrolledCheckedKeysRef = ref<Key[]>([])
     if (watchProps?.includes('defaultCheckedKeys')) {
@@ -1874,12 +1881,12 @@ export default defineComponent({
         >
           {!fNodes.length
             ? resolveSlot(this.$slots.empty, () => [
-              <NEmpty
-                class={`${mergedClsPrefix}-tree__empty`}
-                theme={this.mergedTheme.peers.Empty}
-                themeOverrides={this.mergedTheme.peerOverrides.Empty}
-              />
-            ])
+                <NEmpty
+                  class={`${mergedClsPrefix}-tree__empty`}
+                  theme={this.mergedTheme.peers.Empty}
+                  themeOverrides={this.mergedTheme.peerOverrides.Empty}
+                />
+              ])
             : fNodes.map(createNode)}
         </div>
       )

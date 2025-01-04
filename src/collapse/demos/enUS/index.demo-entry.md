@@ -46,14 +46,15 @@ trigger-areas.vue
 
 | Name | Parameters | Description |
 | --- | --- | --- |
-| default | `()` | The contents of the collapsible panel. |
 | arrow | `(props: { collapsed: boolean })` | Custom icons for folding panels. |
+| default | `()` | The contents of the collapsible panel. |
+| header | `(props: { collapsed: boolean })` | The content of the header of the collapsed panel node. |
 
 ### CollapseItem Slots
 
 | Name | Parameters | Description |
 | --- | --- | --- |
+| arrow | `(props: { collapsed: boolean })` | The custom icon of the node header of the collapsible panel. |
 | default | `()` | The contents of the collapsible panel node. |
 | header | `(props: { collapsed: boolean })` | The content of the header of the collapsed panel node. |
 | header-extra | `(props: { collapsed: boolean })` | The extra content of the header of the collapsed panel node. |
-| arrow | `(props: { collapsed: boolean })` | The custom icon of the node header of the collapsible panel. |

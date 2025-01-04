@@ -12,6 +12,7 @@ import type {
 } from '../../select/src/interface'
 import type { AutoCompleteTheme } from '../styles'
 import type {
+  AutoCompleteDefaultSlotProps,
   AutoCompleteInst,
   AutoCompleteOption,
   AutoCompleteOptions,
@@ -33,8 +34,10 @@ import {
   type InputHTMLAttributes,
   type PropType,
   ref,
+  type SlotsType,
   toRef,
   Transition,
+  type VNode,
   watchEffect,
   withDirectives
 } from 'vue'
@@ -47,7 +50,7 @@ import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import {
   call,
   type ExtractPublicPropTypes,
-  getFirstSlotVNode,
+  getFirstSlotVNodeWithTypedProps,
   type MaybeArray,
   useAdjustedTo,
   warnOnce
@@ -114,9 +117,17 @@ export const autoCompleteProps = {
 
 export type AutoCompleteProps = ExtractPublicPropTypes<typeof autoCompleteProps>
 
+export interface AutoCompleteSlots {
+  default?: (options: AutoCompleteDefaultSlotProps) => VNode[]
+  empty?: () => VNode[]
+  prefix?: () => VNode[]
+  suffix?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'AutoComplete',
   props: autoCompleteProps,
+  slots: Object as SlotsType<AutoCompleteSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {
@@ -363,12 +374,16 @@ export default defineComponent({
                   default: () => {
                     const defaultSlot = this.$slots.default
                     if (defaultSlot) {
-                      return getFirstSlotVNode(this.$slots, 'default', {
-                        handleInput: this.handleInput,
-                        handleFocus: this.handleFocus,
-                        handleBlur: this.handleBlur,
-                        value: this.mergedValue
-                      })
+                      return getFirstSlotVNodeWithTypedProps(
+                        'default',
+                        defaultSlot,
+                        {
+                          handleInput: this.handleInput,
+                          handleFocus: this.handleFocus,
+                          handleBlur: this.handleBlur,
+                          value: this.mergedValue
+                        }
+                      )
                     }
                     const { mergedTheme } = this
                     return (

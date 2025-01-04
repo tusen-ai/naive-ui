@@ -11,8 +11,10 @@ import {
   onBeforeUnmount,
   type PropType,
   ref,
+  type SlotsType,
   toRef,
   Transition,
+  type VNode,
   type VNodeChild,
   watch
 } from 'vue'
@@ -104,9 +106,15 @@ export const sliderProps = {
 
 export type SliderProps = ExtractPublicPropTypes<typeof sliderProps>
 
+export interface SliderSlots {
+  thumb?: () => VNode[]
+  default?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Slider',
   props: sliderProps,
+  slots: Object as SlotsType<SliderSlots>,
   setup(props) {
     const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled }
       = useConfig(props)

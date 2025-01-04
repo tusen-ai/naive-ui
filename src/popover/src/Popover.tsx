@@ -23,6 +23,7 @@ import {
   provide,
   type Ref,
   ref,
+  type SlotsType,
   Text,
   toRef,
   type VNode,
@@ -222,10 +223,18 @@ export const popoverProps = {
 export type PopoverProps = ExtractPublicPropTypes<typeof popoverBaseProps>
 export type PopoverInternalProps = ExtractInternalPropTypes<typeof popoverProps>
 
+export interface PopoverSlots {
+  trigger?: () => VNode[]
+  footer?: () => VNode[]
+  header?: () => VNode[]
+  default?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Popover',
   inheritAttrs: false,
   props: popoverProps,
+  slots: Object as SlotsType<PopoverSlots>,
   __popover__: true,
   setup(props) {
     if (__DEV__) {
@@ -485,12 +494,7 @@ export default defineComponent({
     let triggerVNode: VNode | null
     let popoverInside = false
     if (!positionManually) {
-      if (slots.activator) {
-        triggerVNode = getFirstSlotVNode(slots, 'activator')
-      }
-      else {
-        triggerVNode = getFirstSlotVNode(slots, 'trigger')
-      }
+      triggerVNode = getFirstSlotVNode(slots, 'trigger')
       if (triggerVNode) {
         triggerVNode = cloneVNode(triggerVNode)
         triggerVNode
@@ -583,23 +587,31 @@ export default defineComponent({
             return [
               this.internalTrapFocus && mergedShow
                 ? withDirectives(
-                  <div style={{ position: 'fixed', inset: 0 }} />,
-                  [
+                    <div
+                      style={{
+                        position: 'fixed',
+                        top: 0,
+                        right: 0,
+                        bottom: 0,
+                        left: 0
+                      }}
+                    />,
                     [
-                      zindexable,
-                      {
-                        enabled: mergedShow,
-                        zIndex: this.zIndex
-                      }
+                      [
+                        zindexable,
+                        {
+                          enabled: mergedShow,
+                          zIndex: this.zIndex
+                        }
+                      ]
                     ]
-                  ]
-                )
+                  )
                 : null,
               positionManually
                 ? null
                 : h(VTarget, null, {
-                  default: () => triggerVNode
-                }),
+                    default: () => triggerVNode
+                  }),
               h(
                 NPopoverBody,
                 keep(this.$props, bodyPropKeys, {

@@ -1,5 +1,5 @@
 import { computed, defineComponent, h, inject } from 'vue'
-import { resolveSlotWithProps } from '../../_utils'
+import { resolveSlotWithTypedProps } from '../../_utils'
 import { inputInjectionKey } from './interface'
 import { len } from './utils'
 
@@ -23,7 +23,7 @@ export default defineComponent({
       const { value: mergedValue } = mergedValueRef
       return (
         <span class={`${mergedClsPrefixRef.value}-input-word-count`}>
-          {resolveSlotWithProps(
+          {resolveSlotWithTypedProps(
             slots.default,
             {
               value:

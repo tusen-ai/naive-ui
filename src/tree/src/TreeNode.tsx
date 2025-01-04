@@ -510,18 +510,18 @@ const TreeNode = defineComponent({
           {draggable
             ? this.showDropMark
               ? renderDropMark({
-                el: this.contentElRef.value!,
-                position: this.droppingPosition!,
-                offsetLevel: this.droppingOffsetLevel,
-                indent
-              })
-              : this.showDropMarkAsParent
-                ? renderDropMark({
                   el: this.contentElRef.value!,
-                  position: 'inside',
+                  position: this.droppingPosition!,
                   offsetLevel: this.droppingOffsetLevel,
                   indent
                 })
+              : this.showDropMarkAsParent
+                ? renderDropMark({
+                    el: this.contentElRef.value!,
+                    position: 'inside',
+                    offsetLevel: this.droppingOffsetLevel,
+                    indent
+                  })
                 : null
             : null}
           {checkboxOnRight ? checkboxNode : null}

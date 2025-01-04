@@ -348,11 +348,12 @@ export default defineComponent({
         </div>,
         [
           [
-            vShow,
-            this.displayDirective === 'if' || this.displayed || this.show
+            [
+              vShow,
+              this.displayDirective === 'if' || this.displayed || this.show
+            ]
           ]
-        ]
-      )
+        )
       : null
   }
 })

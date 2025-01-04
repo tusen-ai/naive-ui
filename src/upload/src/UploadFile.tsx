@@ -26,7 +26,7 @@ import {
 import { download, warn } from '../../_utils'
 import { NButton } from '../../button'
 import { NImage } from '../../image'
-import { documentIcon, imageIcon } from './icons'
+import { renderDocumentIcon, renderImageIcon } from './icons'
 import { uploadInjectionKey } from './interface'
 import NUploadProgress from './UploadProgress'
 import { isImageFile } from './utils'
@@ -158,10 +158,10 @@ export default defineComponent({
       void Promise.resolve(
         onRemove
           ? onRemove({
-            file: Object.assign({}, file),
-            fileList: mergedFileList,
-            index: props.index
-          })
+              file: Object.assign({}, file),
+              fileList: mergedFileList,
+              index: props.index
+            })
           : true
       ).then((result) => {
         if (result === false)
@@ -265,11 +265,11 @@ export default defineComponent({
               renderIcon(file)
             ) : isImageFile(file) ? (
               <NBaseIcon clsPrefix={clsPrefix}>
-                {{ default: () => imageIcon }}
+                {{ default: renderImageIcon }}
               </NBaseIcon>
             ) : (
               <NBaseIcon clsPrefix={clsPrefix}>
-                {{ default: () => documentIcon }}
+                {{ default: renderDocumentIcon }}
               </NBaseIcon>
             )}
           </span>

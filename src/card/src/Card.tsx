@@ -8,6 +8,8 @@ import {
   defineComponent,
   h,
   type PropType,
+  type SlotsType,
+  type VNode,
   type VNodeChild
 } from 'vue'
 import { NBaseClose } from '../../_internal'
@@ -71,9 +73,19 @@ export const cardProps = {
 
 export type CardProps = ExtractPublicPropTypes<typeof cardProps>
 
+export interface CardSlots {
+  default?: () => VNode[]
+  cover?: () => VNode[]
+  header?: () => VNode[]
+  'header-extra'?: () => VNode[]
+  footer?: () => VNode[]
+  action?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Card',
   props: cardProps,
+  slots: Object as SlotsType<CardSlots>,
   setup(props) {
     const handleCloseClick = (): void => {
       const { onClose } = props
@@ -164,13 +176,13 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'card',
-        computed(() => {
-          return props.size[0]
-        }),
-        cssVarsRef,
-        props
-      )
+          'card',
+          computed(() => {
+            return props.size[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       rtlEnabled: rtlEnabledRef,
@@ -240,8 +252,8 @@ export default defineComponent({
           const { title } = this
           const mergedChildren = title
             ? ensureValidVNode(
-              typeof title === 'function' ? [title()] : [title]
-            )
+                typeof title === 'function' ? [title()] : [title]
+              )
             : children
           return mergedChildren || this.closable ? (
             <div
@@ -288,8 +300,8 @@ export default defineComponent({
           const { content } = this
           const mergedChildren = content
             ? ensureValidVNode(
-              typeof content === 'function' ? [content()] : [content]
-            )
+                typeof content === 'function' ? [content()] : [content]
+              )
             : children
           return (
             mergedChildren && (

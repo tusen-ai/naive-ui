@@ -214,10 +214,10 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-cascader-option__prefix`}>
           {renderPrefix
             ? renderPrefix({
-              option: this.tmNode.rawNode,
-              checked: this.checked,
-              node: originalNode
-            })
+                option: this.tmNode.rawNode,
+                checked: this.checked,
+                node: originalNode
+              })
             : originalNode}
         </div>
       )
@@ -269,10 +269,10 @@ export default defineComponent({
       <div class={`${mergedClsPrefix}-cascader-option__suffix`}>
         {renderSuffix
           ? renderSuffix({
-            option: this.tmNode.rawNode,
-            checked: this.checked,
-            node: originalSuffixChild
-          })
+              option: this.tmNode.rawNode,
+              checked: this.checked,
+              node: originalSuffixChild
+            })
           : originalSuffixChild}
       </div>
     )

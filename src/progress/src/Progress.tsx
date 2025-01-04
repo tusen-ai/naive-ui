@@ -140,11 +140,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'progress',
-        computed(() => props.status[0]),
-        cssVarsRef,
-        props
-      )
+          'progress',
+          computed(() => props.status[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,

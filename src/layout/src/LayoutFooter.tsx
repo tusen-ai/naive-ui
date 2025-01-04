@@ -51,11 +51,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'layout-footer',
-        computed(() => (props.inverted ? 'a' : 'b')),
-        cssVarsRef,
-        props
-      )
+          'layout-footer',
+          computed(() => (props.inverted ? 'a' : 'b')),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,

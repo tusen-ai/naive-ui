@@ -17,3 +17,13 @@ export interface DynamicTagsOption {
   label: string
   value: string
 }
+
+export interface DynamicTagsInputSlotProps {
+  submit: (value: any) => void
+  deactivate: () => void
+}
+
+export interface DynamicTagsTriggerSlotProps {
+  activate: () => void
+  disabled: boolean
+}

@@ -45,7 +45,7 @@ function createKey<P extends string, S extends string>(
     + (suffix === 'default'
       ? ''
       : suffix.replace(/^[a-z]/, startChar =>
-        startChar.toUpperCase()))) as any
+          startChar.toUpperCase()))) as any
 }
 
 export {

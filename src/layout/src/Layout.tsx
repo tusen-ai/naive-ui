@@ -126,13 +126,13 @@ export function createLayoutComponent(isContent: boolean) {
       })
       const themeClassHandle = inlineThemeDisabled
         ? useThemeClass(
-          'layout',
-          computed(() => {
-            return props.embedded ? 'e' : ''
-          }),
-          cssVarsRef,
-          props
-        )
+            'layout',
+            computed(() => {
+              return props.embedded ? 'e' : ''
+            }),
+            cssVarsRef,
+            props
+          )
         : undefined
       return {
         mergedClsPrefix: mergedClsPrefixRef,

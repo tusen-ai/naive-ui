@@ -11,7 +11,9 @@ import {
   h,
   type PropType,
   provide,
-  ref
+  ref,
+  type SlotsType,
+  type VNode
 } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { call, keep, omit } from '../../_utils'
@@ -49,9 +51,17 @@ export type PopconfirmProps = ExtractPublicPropTypes<typeof popconfirmProps>
 
 export type PopconfirmSetupProps = ExtractPropTypes<typeof popconfirmProps>
 
+export interface PopconfirmSlots {
+  action?: () => VNode[]
+  default?: () => VNode[]
+  icon?: () => VNode[]
+  trigger?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Popconfirm',
   props: popconfirmProps,
+  slots: Object as SlotsType<PopconfirmSlots>,
   __popover__: true,
   setup(props) {
     const { mergedClsPrefixRef } = useConfig()
@@ -122,7 +132,7 @@ export default defineComponent({
         ref: 'popoverInstRef'
       }),
       {
-        trigger: slots.activator || slots.trigger,
+        trigger: slots.trigger,
         default: () => {
           const panelProps = keep(props, panelPropKeys)
           return h(

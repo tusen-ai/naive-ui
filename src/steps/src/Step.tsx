@@ -5,7 +5,9 @@ import {
   defineComponent,
   h,
   inject,
-  type PropType
+  type PropType,
+  type SlotsType,
+  type VNode
 } from 'vue'
 import { NBaseIcon, NIconSwitchTransition } from '../../_internal'
 import {
@@ -36,9 +38,16 @@ export const stepProps = {
 
 export type StepProps = ExtractPublicPropTypes<typeof stepProps>
 
+export interface StepSlots {
+  default?: () => VNode[]
+  icon?: () => VNode[]
+  title?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Step',
   props: stepProps,
+  slots: Object as SlotsType<StepSlots>,
   setup(props) {
     const NSteps = inject(stepsInjectionKey, null)
 
@@ -117,15 +126,15 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'step',
-        computed(() => {
-          const { value: status } = mergedStatusRef
-          const { size } = stepsProps
-          return `${status[0]}${size[0]}`
-        }),
-        cssVarsRef,
-        stepsProps
-      )
+          'step',
+          computed(() => {
+            const { value: status } = mergedStatusRef
+            const { size } = stepsProps
+            return `${status[0]}${size[0]}`
+          }),
+          cssVarsRef,
+          stepsProps
+        )
       : undefined
 
     const handleStepClick = computed((): undefined | (() => void) => {

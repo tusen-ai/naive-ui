@@ -106,13 +106,13 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'table',
-        computed(() => {
-          return props.size[0]
-        }),
-        cssVarsRef,
-        props
-      )
+          'table',
+          computed(() => {
+            return props.size[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       rtlEnabled: rtlEnabledRef,

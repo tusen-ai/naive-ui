@@ -7,7 +7,9 @@ import {
   defineComponent,
   Fragment,
   h,
-  type PropType
+  type PropType,
+  type SlotsType,
+  type VNode
 } from 'vue'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import { thingLight } from '../styles'
@@ -28,9 +30,20 @@ export const thingProps = {
 
 export type ThingProps = ExtractPublicPropTypes<typeof thingProps>
 
+export interface ThingSlots {
+  action?: () => VNode[]
+  avatar?: () => VNode[]
+  default?: () => VNode[]
+  description?: () => VNode[]
+  footer?: () => VNode[]
+  'header-extra'?: () => VNode[]
+  header?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Thing',
   props: thingProps,
+  slots: Object as SlotsType<ThingSlots>,
   setup(props, { slots }) {
     const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
       = useConfig(props)

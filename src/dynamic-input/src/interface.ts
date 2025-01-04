@@ -14,3 +14,16 @@ export const dynamicInputInjectionKey
   = createInjectionKey<DynamicInputInjection>('n-dynamic-input')
 
 export type OnUpdateValue = <T>(value: T[]) => void
+
+export interface DynamicInputDefaultSlotProps {
+  value: any
+  index: number
+}
+
+export interface DynamicInputActionSlotProps {
+  value: any
+  index: number
+  create: (index: number) => void
+  remove: (index: number) => void
+  move: (type: 'up' | 'down', index: number) => void
+}

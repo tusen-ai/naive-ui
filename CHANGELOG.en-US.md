@@ -1,5 +1,32 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Breaking Changes
+
+- (**Vue 3.3+ required**) Add slot type for all components.
+
+### Fixes
+
+- Fix `n-data-table` may have multiple expand trigger with tree data.
+- Fix `n-date-picker`'s `confirm`, `now`, `clear` slots doesn't work with `'month'`, `'monthrange'`, `'quarter'`, `'quarterrange'`, `'year'` and `'yearrange'` type.
+- Fix `n-input`'s `render-count` prop doesn't work when type is not `'textarea'`.
+
+## 2.40.4
+
+`2024-12-20`
+
+### Fixes
+
+- Fix `inset` CSS property caused compatibility issues in some browsers, closes [#6604](https://github.com/tusen-ai/naive-ui/issues/6604)，close [#6602](https://github.com/tusen-ai/naive-ui/issues/6602).
+- Fix memory leak problem when used with new version of vue. Note: After the fix you may still find memory leak in Chrome >= 129, since they introduced a bug, see https://github.com/vuejs/core/issues/12306, https://issues.chromium.org/issues/376777343
+
+## 2.40.3
+
+`2024-12-02`
+
+- Fix marquee is not exported with correct name.
+
 ## 2.40.2
 
 `2024-11-26`

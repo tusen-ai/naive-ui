@@ -32,8 +32,8 @@ import {
 } from '../../_utils'
 import { checkboxLight } from '../styles'
 import { checkboxGroupInjectionKey } from './CheckboxGroup'
-import CheckMark from './CheckMark'
-import LineMark from './LineMark'
+import renderCheckMark from './CheckMark'
+import renderLineMark from './LineMark'
 import style from './styles/index.cssr'
 
 export const checkboxProps = {
@@ -295,11 +295,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'checkbox',
-        computed(() => mergedSizeRef.value[0]),
-        cssVarsRef,
-        props
-      )
+          'checkbox',
+          computed(() => mergedSizeRef.value[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
     return Object.assign(formItem, exposedMethods, {
       rtlEnabled: rtlEnabledRef,
@@ -389,11 +389,11 @@ export default defineComponent({
                       key="indeterminate"
                       class={`${mergedClsPrefix}-checkbox-icon`}
                     >
-                      {LineMark}
+                      {renderLineMark()}
                     </div>
                   ) : (
                     <div key="check" class={`${mergedClsPrefix}-checkbox-icon`}>
-                      {CheckMark}
+                      {renderCheckMark()}
                     </div>
                   )
               }}
