@@ -11,6 +11,7 @@
 - 修复 `n-data-table` 在使用树形数据的时候出现多个展开 icon
 - 修复 `n-date-picker` 的 `confirm`、`now`、`clear` 插槽对 `'month'`、`'monthrange'`、`'quarter'`、`'quarterrange'`、`'year'` 和 `'yearrange'` 类型不生效
 - 修复 `n-input` 的 `render-count` 属性在类型非 `'textarea'` 时不生效
+- 修复 `n-tree` 的 `on-scroll` 回调在开启了虚拟滚动后没调用
 
 ## 2.40.4
 
