@@ -33,3 +33,5 @@ export type PaginationRenderLabel = (
       active: boolean
     }
 ) => VNodeChild
+
+export type PaginationLabelInfo = Parameters<PaginationRenderLabel>[0]
