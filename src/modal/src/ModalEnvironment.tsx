@@ -115,6 +115,7 @@ export const NModalEnvironment = defineComponent({
         onEsc={handleEsc}
         onAfterLeave={handleAfterLeave}
         internalAppear
+        internalModal
       >
       </NModal>
     )

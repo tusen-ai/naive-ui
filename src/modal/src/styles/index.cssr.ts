@@ -60,6 +60,6 @@ export default c([
     c(`.${DRAGGABLE_CLASS}`, `
       cursor: move;
       user-select: none;
-  `),
+    `),
   ])
 ])

@@ -1,5 +1,6 @@
 import type { ExtractPublicPropTypes, Mutable } from '../../_utils'
 import { createId } from 'seemly'
+import { useClicked, useClickPosition } from 'vooks'
 import {
   type CSSProperties,
   defineComponent,
@@ -15,6 +16,7 @@ import {
 import { omit } from '../../_utils'
 import {
   dialogApiInjectionKey,
+  dialogProviderInjectionKey,
   dialogReactiveListInjectionKey
 } from './context'
 import {
@@ -125,6 +127,10 @@ export const NDialogProvider = defineComponent({
       error: typedApi[3]
     }
     provide(dialogApiInjectionKey, api)
+    provide(dialogProviderInjectionKey, {
+      clickedRef: useClicked(64),
+      clickedPositionRef: useClickPosition()
+    })
     provide(dialogReactiveListInjectionKey, dialogListRef)
     return {
       ...api,

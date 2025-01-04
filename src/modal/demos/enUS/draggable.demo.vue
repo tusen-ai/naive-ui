@@ -1,9 +1,9 @@
 <markdown>
-# 可拖拽
+# Draggable
 
-设定 `draggable` 属性为 `true`，弹窗即可拖拽。如果你希望弹窗可以被拖出 window 的范围，可以设置 `draggable` 为 `{ bounds: 'none' }`。
+Set `draggable` to `true` to make modal draggable. If you want it to be dragged out of the window, you can set `draggable` to `{ bounds: 'none' }`.
 
-如果你希望拖拽完全自定义 modal 的内容，你可以使用 `default` 插槽内的 `draggableClass`，设定在你希望触发拖拽的元素上。
+If you want to completely customize the content of the modal, you can use the `draggableClass` in the `default` slot to set it on the element you want to trigger the drag.
 </markdown>
 
 <script lang="ts">
@@ -16,19 +16,19 @@ export default defineComponent({
 
     function showDialogPreset() {
       modal.create({
-        title: 'Dialog 预设拖拽',
+        title: 'Dialog preset',
         draggable: true,
         preset: 'dialog',
-        content: '无意义的内容....'
+        content: 'Placeholder....'
       })
     }
 
     function showCardPreset() {
       modal.create({
-        title: 'Card 预设拖拽',
+        title: 'Card preset',
         draggable: true,
         preset: 'card',
-        content: '无意义的内容....'
+        content: 'Placeholder....'
       })
     }
 
@@ -47,22 +47,22 @@ export default defineComponent({
 <template>
   <n-flex>
     <n-button @click="showModal1 = !showModal1">
-      card 预设
+      Card preset
     </n-button>
     <n-button @click="showModal2 = !showModal2">
-      dialog 预设
+      Dialog preset
     </n-button>
     <n-button @click="showModal3 = !showModal3">
-      无预设
+      No preset
     </n-button>
     <n-button @click="showDialogPreset">
-      dialog 预设（命令式 Api）
+      Imperative dialog preset
     </n-button>
     <n-button @click="showCardPreset">
-      card 预设（命令式 Api）
+      Imperative card preset
     </n-button>
     <n-button @click="showModal4 = !showModal4">
-      弹窗嵌套
+      Nested draggable
     </n-button>
   </n-flex>
   <n-modal
@@ -72,58 +72,58 @@ export default defineComponent({
     draggable
     :style="{ width: '800px' }"
   >
-    <div>无意义的内容...</div>
-    <div>无意义的内容...</div>
-    <div>无意义的内容...</div>
-    <div>无意义的内容...</div>
-    <div>无意义的内容...</div>
-    <div>无意义的内容...</div>
-    <div>无意义的内容...</div>
-    <div>无意义的内容...</div>
-    <div>无意义的内容...</div>
-    <div>无意义的内容...</div>
+    <div>Placeholder...</div>
+    <div>Placeholder...</div>
+    <div>Placeholder...</div>
+    <div>Placeholder...</div>
+    <div>Placeholder...</div>
+    <div>Placeholder...</div>
+    <div>Placeholder...</div>
+    <div>Placeholder...</div>
+    <div>Placeholder...</div>
+    <div>Placeholder...</div>
   </n-modal>
   <n-modal
     v-model:show="showModal2"
-    title="dialog 预设拖拽"
+    title="Dialog preset draggable"
     preset="dialog"
     draggable
     :style="{ width: '800px' }"
   >
-    <div>无意义的内容...</div>
-    <div>无意义的内容...</div>
-    <div>无意义的内容...</div>
-    <div>无意义的内容...</div>
-    <div>无意义的内容...</div>
-    <div>无意义的内容...</div>
-    <div>无意义的内容...</div>
-    <div>无意义的内容...</div>
-    <div>无意义的内容...</div>
-    <div>无意义的内容...</div>
+    <div>Placeholder...</div>
+    <div>Placeholder...</div>
+    <div>Placeholder...</div>
+    <div>Placeholder...</div>
+    <div>Placeholder...</div>
+    <div>Placeholder...</div>
+    <div>Placeholder...</div>
+    <div>Placeholder...</div>
+    <div>Placeholder...</div>
+    <div>Placeholder...</div>
   </n-modal>
   <n-modal
     v-model:show="showModal3"
-    title="无预设拖拽"
+    title="No preset draggable"
     draggable
     :style="{ width: '800px' }"
   >
     <template #default="{ draggableClass }">
       <n-card>
         <div :class="draggableClass">
-          点我拖拽
+          Mouse down here to drag
         </div>
       </n-card>
     </template>
   </n-modal>
   <n-modal
     v-model:show="showModal4"
-    title="嵌套弹窗拖拽"
+    title="Nested draggable"
     preset="card"
     :draggable="{ bounds: 'none' }"
     :style="{ width: '800px' }"
   >
     <n-button @click="showDialogPreset">
-      再开一个弹窗
+      Create a new modal
     </n-button>
   </n-modal>
 </template>

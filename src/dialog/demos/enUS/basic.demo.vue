@@ -19,6 +19,7 @@ export default defineComponent({
           content: 'Are you sure?',
           positiveText: 'Sure',
           negativeText: 'Not Sure',
+          draggable: true,
           onPositiveClick: () => {
             message.success('Sure')
           },

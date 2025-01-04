@@ -73,8 +73,8 @@ mask-click-debug.vue
 | auto-focus | `boolean` | `true` | 是否自动聚焦 Modal 第一个可聚焦的元素 | 2.24.2 |
 | block-scroll | `boolean` | `true` | 是否在打开时禁用 body 滚动 | 2.28.3 |
 | close-on-esc | `boolean` | `true` | 是否在摁下 Esc 键的时候关闭 Modal | 2.24.2 |
-| draggable | `boolean \| {sticky?: boolean}` | `false` | 是否可拖拽，`sticky` 限制拖拽时不可超出视口 | NEXT_VERSION |
 | display-directive | `'if' \| 'show'` | `'if'` | 使用何种指令控制模态框主体的条件渲染 |  |
+| draggable | `boolean \| { bounds?: 'none' }` | `false` | 是否可拖拽，`bounds === 'none'` 时拖拽可超出视口 | NEXT_VERSION |
 | mask-closable | `boolean` | `true` | 点击遮罩时是否发出 `update:show` 事件 |  |
 | preset | `'dialog' \| 'card'` | `undefined` | 模态框使用何种预设 |  |
 | show | `boolean` | `false` | 是否展示 Modal |  |
@@ -106,6 +106,10 @@ mask-click-debug.vue
 
 参考 [Card slots](card#Card-Slots)
 
+注意，`default` slot 参数类型为 `(props: { draggableClass: string })`
+
 ### Modal（Dialog 预设）Slots
 
 参考 [Dialog slots](dialog#Dialog-Slots)
+
+注意，`default` slot 参数类型为 `(props: { draggableClass: string })`

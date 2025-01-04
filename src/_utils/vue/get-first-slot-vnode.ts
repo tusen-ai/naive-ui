@@ -25,9 +25,12 @@ export function getFirstSlotVNode(
 
 export function getFirstSlotVNodeWithTypedProps<T>(
   slotName: string,
-  slot: (props: T) => VNode[],
+  slot: ((props: T) => VNode[]) | undefined,
   props: T
 ): VNode | null {
+  if (!slot) {
+    return null
+  }
   const slotContent = flatten(slot(props))
   // vue will normalize the slot, so slot must be an array
   if (slotContent.length === 1) {
