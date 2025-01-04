@@ -6,6 +6,7 @@ import type { Size as SelectSize } from '../../select/src/interface'
 import type { PaginationTheme } from '../styles'
 import type {
   PaginationInfo,
+  PaginationLabelInfo,
   PaginationRenderLabel,
   PaginationSizeOption,
   RenderGoto,
@@ -129,7 +130,7 @@ export type PaginationProps = ExtractPublicPropTypes<typeof paginationProps>
 export interface PaginationSlots {
   default?: () => VNode[]
   goto?: () => VNode[]
-  label?: () => VNode[]
+  label?: (props: PaginationLabelInfo) => VNode[]
   next?: (props: PaginationInfo) => VNode
   prev?: (props: PaginationInfo) => VNode
   prefix?: (props: PaginationInfo) => VNode
@@ -515,16 +516,16 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-          'pagination',
-          computed(() => {
-            let hash = ''
-            const { size } = props
-            hash += size[0]
-            return hash
-          }),
-          cssVarsRef,
-          props
-        )
+        'pagination',
+        computed(() => {
+          let hash = ''
+          const { size } = props
+          hash += size[0]
+          return hash
+        }),
+        cssVarsRef,
+        props
+      )
       : undefined
     return {
       rtlEnabled: rtlEnabledRef,
