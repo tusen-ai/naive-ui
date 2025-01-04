@@ -8,7 +8,7 @@ import { defineComponent, h, onMounted, type PropType, type VNode } from 'vue'
 import { VirtualList } from 'vueuc'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
 import { useLocale } from '../../../_mixins'
-import { resolveSlotWithProps } from '../../../_utils'
+import { resolveSlotWithTypedProps, resolveWrappedSlot } from '../../../_utils'
 import { NButton, NxButton } from '../../../button'
 import { MONTH_ITEM_HEIGHT } from '../config'
 import {
@@ -212,13 +212,11 @@ export default defineComponent({
             </div>
           ) : null}
         </div>
-        {this.datePickerSlots.footer ? (
-          <div class={`${mergedClsPrefix}-date-panel-footer`}>
-            {{
-              default: this.datePickerSlots.footer
-            }}
-          </div>
-        ) : null}
+        {resolveWrappedSlot(this.datePickerSlots.footer, (children) => {
+          return children ? (
+            <div class={`${mergedClsPrefix}-date-panel-footer`}>{children}</div>
+          ) : null
+        })}
         {actions?.length || shortcuts ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
@@ -245,8 +243,8 @@ export default defineComponent({
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
               {actions?.includes('clear')
-                ? resolveSlotWithProps(
-                  this.$slots.now,
+                ? resolveSlotWithTypedProps(
+                    this.datePickerSlots.clear,
                     {
                       onClear: this.handleClearClick,
                       text: this.locale.clear
@@ -261,11 +259,11 @@ export default defineComponent({
                         {{ default: () => this.locale.clear }}
                       </NButton>
                     ]
-                )
+                  )
                 : null}
               {actions?.includes('now')
-                ? resolveSlotWithProps(
-                  this.$slots.now,
+                ? resolveSlotWithTypedProps(
+                    this.datePickerSlots.now,
                     {
                       onNow: this.handleNowClick,
                       text: this.locale.now
@@ -280,11 +278,11 @@ export default defineComponent({
                         {{ default: () => this.locale.now }}
                       </NButton>
                     ]
-                )
+                  )
                 : null}
               {actions?.includes('confirm')
-                ? resolveSlotWithProps(
-                  this.$slots.confirm,
+                ? resolveSlotWithTypedProps(
+                    this.datePickerSlots.confirm,
                     {
                       onConfirm: this.handleConfirmClick,
                       disabled: this.isDateInvalid,
@@ -302,7 +300,7 @@ export default defineComponent({
                         {{ default: () => this.locale.confirm }}
                       </NButton>
                     ]
-                )
+                  )
                 : null}
             </div>
           </div>

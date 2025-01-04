@@ -2,9 +2,34 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- （需要 Vue 3.3+）为所有的组件增加插槽的类型标注
+
 ### i18n
 
 - 添加 kmKH 国际化
+
+### Features
+
+- `n-modal` 新增 `draggable` 属性，关闭 [#6525](https://github.com/tusen-ai/naive-ui/issues/6525)，[#5792](https://github.com/tusen-ai/naive-ui/issues/5792)，[#5711](https://github.com/tusen-ai/naive-ui/issues/5711)，[#5501](https://github.com/tusen-ai/naive-ui/issues/5501)，[#2152](https://github.com/tusen-ai/naive-ui/issues/2152)
+- `useDialog` 支持 `draggable` 参数
+- `useModal` 支持 `draggable` 参数
+
+### Fixes
+
+- 修复 `n-data-table` 在使用树形数据的时候出现多个展开 icon
+- 修复 `n-date-picker` 的 `confirm`、`now`、`clear` 插槽对 `'month'`、`'monthrange'`、`'quarter'`、`'quarterrange'`、`'year'` 和 `'yearrange'` 类型不生效
+- 修复 `n-input` 的 `render-count` 属性在类型非 `'textarea'` 时不生效
+
+## 2.40.4
+
+`2024-12-20`
+
+### Fixes
+
+- 修复 `n-scrollbar`、`n-float-button`、`n-float-button-group`、`n-popover` 组件中的 `inset` 属性在部分浏览器中有兼容性问题，关闭 [#6604](https://github.com/tusen-ai/naive-ui/issues/6604)，关闭 [#6602](https://github.com/tusen-ai/naive-ui/issues/6602)
+- 修复和较新版本 vue 配合使用时的内存泄露问题。注意：修复后你可能仍然会在 Chrome >= 129 中发现内存泄漏，因为他们引入了一个 bug，参考：https://github.com/vuejs/core/issues/12306 https://issues.chromium.org/issues/376777343
 
 ## 2.40.3
 

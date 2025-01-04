@@ -28,7 +28,7 @@ export default defineComponent({
     @positive-click="handlePositiveClick"
     @negative-click="handleNegativeClick"
   >
-    <template #activator>
+    <template #trigger>
       <n-button>Quit Game</n-button>
     </template>
     I heared that players will still be abused after purchasing in some games

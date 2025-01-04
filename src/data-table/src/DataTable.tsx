@@ -1,6 +1,7 @@
 import type {
   CsvOptionsType,
   DataTableInst,
+  DataTableSlots,
   MainTableRef,
   RowKey
 } from './interface'
@@ -12,6 +13,7 @@ import {
   h,
   provide,
   ref,
+  type SlotsType,
   toRef,
   Transition,
   watchEffect
@@ -42,6 +44,7 @@ export default defineComponent({
   name: 'DataTable',
   alias: ['AdvancedTable'],
   props: dataTableProps,
+  slots: Object as SlotsType<DataTableSlots>,
   setup(props, { slots }) {
     if (__DEV__) {
       watchEffect(() => {
@@ -417,11 +420,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'data-table',
-        computed(() => props.size[0]),
-        cssVarsRef,
-        props
-      )
+          'data-table',
+          computed(() => props.size[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
     const mergedShowPaginationRef = computed(() => {
       if (!props.pagination)

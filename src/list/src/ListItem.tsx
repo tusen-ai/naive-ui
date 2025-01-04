@@ -1,9 +1,17 @@
+import type { SlotsType, VNode } from 'vue'
 import { defineComponent, h, inject } from 'vue'
 import { throwError } from '../../_utils'
 import { listInjectionKey } from './List'
 
+export interface ListItemSlots {
+  default?: () => VNode[]
+  prefix?: () => VNode[]
+  suffix?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'ListItem',
+  slots: Object as SlotsType<ListItemSlots>,
   setup() {
     const listInjection = inject(listInjectionKey, null)
     if (!listInjection) {

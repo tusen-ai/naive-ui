@@ -119,11 +119,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'message',
-        computed(() => props.type[0]),
-        cssVarsRef,
-        {}
-      )
+          'message',
+          computed(() => props.type[0]),
+          cssVarsRef,
+          {}
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,

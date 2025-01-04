@@ -69,9 +69,6 @@ export const NModalProvider: DefineComponent<{ to?: string | HTMLElement }>
     name: 'ModalProvider',
     props: modalProviderProps,
     setup() {
-      const clickedRef = useClicked(64)
-      const clickedPositionRef = useClickPosition()
-
       const modalListRef = ref<TypeSafeModalReactive[]>([])
       const modalInstRefs: Record<string, ModalInst | undefined> = {}
       function create(options: ModalOptions = {}): ModalReactive {
@@ -112,10 +109,6 @@ export const NModalProvider: DefineComponent<{ to?: string | HTMLElement }>
         clickedPositionRef: useClickPosition()
       })
       provide(modalReactiveListInjectionKey, modalListRef)
-      provide(modalProviderInjectionKey, {
-        clickedRef,
-        clickedPositionRef
-      })
       return {
         ...api,
         modalList: modalListRef,

@@ -61,10 +61,16 @@ export default cB('scrollbar', `
         ])
       ]),
       cM('horizontal--top', `
-        inset: var(--n-scrollbar-rail-inset-horizontal-top);  
+        top: var(--n-scrollbar-rail-top-horizontal-top);  
+        right: var(--n-scrollbar-rail-right-horizontal-top);  
+        bottom: var(--n-scrollbar-rail-bottom-horizontal-top);  
+        left: var(--n-scrollbar-rail-left-horizontal-top);  
       `),
       cM('horizontal--bottom', `
-        inset: var(--n-scrollbar-rail-inset-horizontal-bottom);  
+        top: var(--n-scrollbar-rail-top-horizontal-bottom);  
+        right: var(--n-scrollbar-rail-right-horizontal-bottom);  
+        bottom: var(--n-scrollbar-rail-bottom-horizontal-bottom);  
+        left: var(--n-scrollbar-rail-left-horizontal-bottom);  
       `),
       cM('vertical', `
         width: var(--n-scrollbar-width);
@@ -78,10 +84,16 @@ export default cB('scrollbar', `
         ])
       ]),
       cM('vertical--left', `
-        inset: var(--n-scrollbar-rail-inset-vertical-left);  
+        top: var(--n-scrollbar-rail-top-vertical-left);  
+        right: var(--n-scrollbar-rail-right-vertical-left);  
+        bottom: var(--n-scrollbar-rail-bottom-vertical-left);  
+        left: var(--n-scrollbar-rail-left-vertical-left);  
       `),
       cM('vertical--right', `
-        inset: var(--n-scrollbar-rail-inset-vertical-right);  
+        top: var(--n-scrollbar-rail-top-vertical-right);  
+        right: var(--n-scrollbar-rail-right-vertical-right);  
+        bottom: var(--n-scrollbar-rail-bottom-vertical-right);  
+        left: var(--n-scrollbar-rail-left-vertical-right);  
       `),
       cM('disabled', [
         c('>', [

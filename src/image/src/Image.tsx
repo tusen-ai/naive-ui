@@ -10,7 +10,9 @@ import {
   type PropType,
   provide,
   ref,
+  type SlotsType,
   toRef,
+  type VNode,
   watchEffect
 } from 'vue'
 import { useConfig } from '../../_mixins'
@@ -51,9 +53,15 @@ export const imageProps = {
 
 export type ImageProps = ExtractPublicPropTypes<typeof imageProps>
 
+export interface ImageSlots {
+  placeholder?: () => VNode[]
+  error?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Image',
   props: imageProps,
+  slots: Object as SlotsType<ImageSlots>,
   inheritAttrs: false,
   setup(props) {
     const imageRef = ref<HTMLImageElement | null>(null)
@@ -160,39 +168,39 @@ export default defineComponent({
       = this.showError && errorNode.length
         ? errorNode
         : h('img', {
-          ...imgProps,
-          ref: 'imageRef',
-          width: this.width || imgProps.width,
-          height: this.height || imgProps.height,
-          src: this.showError
-            ? this.fallbackSrc
-            : lazy && this.intersectionObserverOptions
-              ? this.shouldStartLoading
-                ? loadSrc
-                : undefined
-              : loadSrc,
-          alt: this.alt || imgProps.alt,
-          'aria-label': this.alt || imgProps.alt,
-          onClick: this.mergedOnClick,
-          onError: this.mergedOnError,
-          onLoad: this.mergedOnLoad,
-          // If interseciton observer options is set, do not use native lazy
-          loading:
+            ...imgProps,
+            ref: 'imageRef',
+            width: this.width || imgProps.width,
+            height: this.height || imgProps.height,
+            src: this.showError
+              ? this.fallbackSrc
+              : lazy && this.intersectionObserverOptions
+                ? this.shouldStartLoading
+                  ? loadSrc
+                  : undefined
+                : loadSrc,
+            alt: this.alt || imgProps.alt,
+            'aria-label': this.alt || imgProps.alt,
+            onClick: this.mergedOnClick,
+            onError: this.mergedOnError,
+            onLoad: this.mergedOnLoad,
+            // If interseciton observer options is set, do not use native lazy
+            loading:
               isImageSupportNativeLazy
               && lazy
               && !this.intersectionObserverOptions
                 ? 'lazy'
                 : 'eager',
-          style: [
-            imgProps.style || '',
-            placeholderNode && !loaded
-              ? { height: '0', width: '0', visibility: 'hidden' }
-              : '',
-            { objectFit: this.objectFit }
-          ],
-          'data-error': this.showError,
-          'data-preview-src': this.previewSrc || this.src
-        })
+            style: [
+              imgProps.style || '',
+              placeholderNode && !loaded
+                ? { height: '0', width: '0', visibility: 'hidden' }
+                : '',
+              { objectFit: this.objectFit }
+            ],
+            'data-error': this.showError,
+            'data-preview-src': this.previewSrc || this.src
+          })
     return (
       <div
         {...$attrs}
@@ -217,8 +225,7 @@ export default defineComponent({
             renderToolbar={this.renderToolbar}
           >
             {{
-              default: () => imgNode,
-              toolbar: () => this.$slots.toolbar?.()
+              default: () => imgNode
             }}
           </NImagePreview>
         )}

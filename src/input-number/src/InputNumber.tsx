@@ -14,6 +14,7 @@ import {
   nextTick,
   type PropType,
   ref,
+  type SlotsType,
   toRef,
   type VNode,
   watch,
@@ -110,9 +111,17 @@ export const inputNumberProps = {
 
 export type InputNumberProps = ExtractPublicPropTypes<typeof inputNumberProps>
 
+export interface InputNumberSlots {
+  'add-icon'?: () => VNode[]
+  'minus-icon'?: () => VNode[]
+  prefix?: () => VNode[]
+  suffix?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'InputNumber',
   props: inputNumberProps,
+  slots: Object as SlotsType<InputNumberSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {

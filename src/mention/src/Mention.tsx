@@ -22,8 +22,10 @@ import {
   nextTick,
   type PropType,
   ref,
+  type SlotsType,
   toRef,
-  Transition
+  Transition,
+  type VNode
 } from 'vue'
 import {
   type FollowerInst,
@@ -131,9 +133,15 @@ export const mentionProps = {
 
 export type MentionProps = ExtractPublicPropTypes<typeof mentionProps>
 
+export interface MentionSlots {
+  default?: () => VNode[]
+  empty?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Mention',
   props: mentionProps,
+  slots: Object as SlotsType<MentionSlots>,
   setup(props) {
     const {
       namespaceRef,

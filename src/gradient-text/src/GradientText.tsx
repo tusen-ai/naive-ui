@@ -93,11 +93,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'gradient-text',
-        computed(() => compatibleTypeRef.value[0]),
-        cssVarsRef,
-        props
-      )
+          'gradient-text',
+          computed(() => compatibleTypeRef.value[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,

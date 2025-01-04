@@ -220,9 +220,9 @@ panel.vue
 
 | 名称 | 参数 | 说明 | 版本 |
 | --- | --- | --- | --- |
-| now | `(props: { onNow: () => void, text: string })` | Now button of the panel. | 2.40.0 |
 | clear | `(props: { onClear: () => void, text: string })` | Clear button of the panel. | 2.40.0 |
 | confirm | `(props: { onConfirm: () => void, disabled: boolean, text: string })` | Confirm button of the panel. | 2.40.0 |
+| now | `(props: { onNow: () => void, text: string })` | Now button of the panel. | 2.40.0 |
 
 ### DatePicker Methods
 

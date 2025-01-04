@@ -30,7 +30,7 @@ import {
   warnOnce
 } from '../../_utils'
 import { backTopLight } from '../styles'
-import BackTopIcon from './BackTopIcon'
+import renderBackTopIcon from './BackTopIcon'
 import style from './styles/index.cssr'
 
 export const backTopProps = {
@@ -288,23 +288,23 @@ export default defineComponent({
                     this.onRender?.()
                     return this.mergedShow
                       ? h(
-                        'div',
-                        mergeProps(this.$attrs, {
-                          class: [
-                            `${mergedClsPrefix}-back-top`,
-                            this.themeClass,
-                            this.transitionDisabled
-                            && `${mergedClsPrefix}-back-top--transition-disabled`
-                          ],
-                          style: [this.style, this.cssVars],
-                          onClick: this.handleClick
-                        }),
-                        resolveSlot(this.$slots.default, () => [
-                          <NBaseIcon clsPrefix={mergedClsPrefix}>
-                            {{ default: () => BackTopIcon }}
-                          </NBaseIcon>
-                        ])
-                      )
+                          'div',
+                          mergeProps(this.$attrs, {
+                            class: [
+                              `${mergedClsPrefix}-back-top`,
+                              this.themeClass,
+                              this.transitionDisabled
+                              && `${mergedClsPrefix}-back-top--transition-disabled`
+                            ],
+                            style: [this.style, this.cssVars],
+                            onClick: this.handleClick
+                          }),
+                          resolveSlot(this.$slots.default, () => [
+                            <NBaseIcon clsPrefix={mergedClsPrefix}>
+                              {{ default: renderBackTopIcon }}
+                            </NBaseIcon>
+                          ])
+                        )
                       : null
                   }
                 }}

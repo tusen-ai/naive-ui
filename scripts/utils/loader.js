@@ -48,8 +48,8 @@ function getPartsOfMdDemo(tokens) {
 function createBlockTemplate(tag, content, attrs) {
   const attrsStr = attrs
     ? Object.keys(attrs).reduce((attrsStr, key) => {
-      return `${attrsStr} ${key}="${attrs[key]}"`
-    }, '')
+        return `${attrsStr} ${key}="${attrs[key]}"`
+      }, '')
     : ''
   return `<${tag}${attrsStr}>
 ${content}

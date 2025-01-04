@@ -774,13 +774,13 @@ export default defineComponent({
                   : createRowClassName(rowData, actualRowIndex, rowClassName)
               const iteratedCols = isVirtualX
                 ? cols.filter((col, index) => {
-                  if (startColIndex <= index && index <= endColIndex)
-                    return true
-                  if (col.column.fixed) {
-                    return true
-                  }
-                  return false
-                })
+                    if (startColIndex <= index && index <= endColIndex)
+                      return true
+                    if (col.column.fixed) {
+                      return true
+                    }
+                    return false
+                  })
                 : cols
               const virtualXRowHeight = isVirtualX
                 ? pxfy(heightForRow?.(rowData, actualRowIndex) || minRowHeight)

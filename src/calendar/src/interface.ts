@@ -7,3 +7,14 @@ export interface DateItem {
 }
 
 export type OnPanelChange = (info: { year: number, month: number }) => void
+
+export interface CalendarDefaultSlotProps {
+  year: number
+  month: number
+  date: number
+}
+
+export interface CalendarHeaderSlotProps {
+  year: number
+  month: number
+}

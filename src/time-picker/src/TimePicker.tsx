@@ -47,6 +47,7 @@ import {
   ref,
   toRef,
   Transition,
+  type VNode,
   watch,
   watchEffect,
   withDirectives
@@ -178,6 +179,11 @@ export const timePickerProps = {
 
 export type TimePickerProps = ExtractPublicPropTypes<typeof timePickerProps>
 
+export interface TimePickerSlots {
+  default?: () => VNode[]
+  icon?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'TimePicker',
   props: timePickerProps,
@@ -289,10 +295,10 @@ export default defineComponent({
           = mergedValue === null
             ? ''
             : mergedFormatRef.value(
-              mergedValue,
-              props.format,
-              dateFnsOptionsRef.value
-            )
+                mergedValue,
+                props.format,
+                dateFnsOptionsRef.value
+              )
       },
       {
         immediate: true
@@ -804,11 +810,11 @@ export default defineComponent({
     })
     const triggerThemeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'time-picker-trigger',
-        undefined,
-        triggerCssVarsRef,
-        props
-      )
+          'time-picker-trigger',
+          undefined,
+          triggerCssVarsRef,
+          props
+        )
       : undefined
     const cssVarsRef = computed(() => {
       const {

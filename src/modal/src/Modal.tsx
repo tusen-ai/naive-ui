@@ -1,6 +1,9 @@
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { CardSlots } from '../../card'
+import type { DialogSlots } from '../../dialog'
 import type { ModalTheme } from '../styles'
+import type { ModalDraggableOptions } from './interface'
 import { getPreciseEventTarget } from 'seemly'
 import { zindexable } from 'vdirs'
 import { useClicked, useClickPosition, useIsMounted } from 'vooks'
@@ -13,8 +16,10 @@ import {
   type PropType,
   provide,
   ref,
+  type SlotsType,
   toRef,
   Transition,
+  type VNode,
   withDirectives
 } from 'vue'
 import { VLazyTeleport } from 'vueuc'
@@ -69,6 +74,7 @@ export const modalProps = {
   },
   blockScroll: { type: Boolean, default: true },
   ...presetProps,
+  draggable: [Boolean, Object] as PropType<boolean | ModalDraggableOptions>,
   // events
   onEsc: Function as PropType<() => void>,
   'onUpdate:show': [Function, Array] as PropType<
@@ -100,10 +106,15 @@ export const modalProps = {
 
 export type ModalProps = ExtractPublicPropTypes<typeof modalProps>
 
+export type ModalSlots = Omit<CardSlots & DialogSlots, 'default'> & {
+  default?: (props: { draggableClass: string }) => VNode[]
+}
+
 export default defineComponent({
   name: 'Modal',
   inheritAttrs: false,
   props: modalProps,
+  slots: Object as SlotsType<ModalSlots>,
   setup(props) {
     if (__DEV__) {
       if (props.onHide) {
@@ -148,7 +159,6 @@ export default defineComponent({
     const NModalProvider = props.internalModal
       ? inject(modalProviderInjectionKey, null)
       : null
-
     const isComposingRef = useIsComposing()
 
     function doUpdateShow(show: boolean): void {
@@ -323,6 +333,7 @@ export default defineComponent({
                   preset={this.preset}
                   autoFocus={this.autoFocus}
                   trapFocus={this.trapFocus}
+                  draggable={this.draggable}
                   blockScroll={this.blockScroll}
                   {...this.presetProps}
                   onEsc={this.handleEsc}

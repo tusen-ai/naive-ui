@@ -9,7 +9,9 @@ import {
   h,
   type PropType,
   ref,
+  type SlotsType,
   toRef,
+  type VNode,
   watchEffect
 } from 'vue'
 import { type ThemeProps, useTheme, useThemeClass } from '../../_mixins'
@@ -60,9 +62,17 @@ export const splitProps = {
 
 export type SplitProps = ExtractPublicPropTypes<typeof splitProps>
 
+export interface SplitSlots {
+  default?: () => VNode[]
+  1?: () => VNode[]
+  2?: () => VNode[]
+  'resize-trigger'?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Split',
   props: splitProps,
+  slots: Object as SlotsType<SplitSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(

@@ -4,4 +4,7 @@ export {
   breadcrumbItemProps,
   default as NBreadcrumbItem
 } from './src/BreadcrumbItem'
-export type { BreadcrumbItemProps } from './src/BreadcrumbItem'
+export type {
+  BreadcrumbItemProps,
+  BreadcrumbItemSlots
+} from './src/BreadcrumbItem'

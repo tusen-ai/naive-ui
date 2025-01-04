@@ -31,10 +31,10 @@ export default defineComponent({
           lineHeight
         } = NConfigProvider
           ? merge(
-            {},
-            NConfigProvider.mergedThemeRef.value?.common || commonLight,
-            NConfigProvider.mergedThemeOverridesRef.value?.common
-          )
+              {},
+              NConfigProvider.mergedThemeRef.value?.common || commonLight,
+              NConfigProvider.mergedThemeOverridesRef.value?.common
+            )
           : commonLight
         if (styleApplied || !body.hasAttribute('n-styled')) {
           style.setProperty('-webkit-text-size-adjust', '100%')

@@ -15,6 +15,8 @@ import {
   inject,
   type PropType,
   ref,
+  type SlotsType,
+  type VNode,
   type VNodeChild,
   watchEffect
 } from 'vue'
@@ -95,9 +97,15 @@ export const buttonProps = {
 
 export type ButtonProps = ExtractPublicPropTypes<typeof buttonProps>
 
+export interface ButtonSlots {
+  default?: () => VNode[]
+  icon?: () => VNode[]
+}
+
 const Button = defineComponent({
   name: 'Button',
   props: buttonProps,
+  slots: Object as SlotsType<ButtonSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {
@@ -316,23 +324,23 @@ const Button = defineComponent({
         colorProps = {
           '--n-color': isColoredType
             ? changeColor(mergedTextColor, {
-              alpha: Number(self.colorOpacitySecondary)
-            })
+                alpha: Number(self.colorOpacitySecondary)
+              })
             : self.colorSecondary,
           '--n-color-hover': isColoredType
             ? changeColor(mergedTextColor, {
-              alpha: Number(self.colorOpacitySecondaryHover)
-            })
+                alpha: Number(self.colorOpacitySecondaryHover)
+              })
             : self.colorSecondaryHover,
           '--n-color-pressed': isColoredType
             ? changeColor(mergedTextColor, {
-              alpha: Number(self.colorOpacitySecondaryPressed)
-            })
+                alpha: Number(self.colorOpacitySecondaryPressed)
+              })
             : self.colorSecondaryPressed,
           '--n-color-focus': isColoredType
             ? changeColor(mergedTextColor, {
-              alpha: Number(self.colorOpacitySecondaryHover)
-            })
+                alpha: Number(self.colorOpacitySecondaryHover)
+              })
             : self.colorSecondaryHover,
           '--n-color-disabled': self.colorSecondary,
           '--n-ripple-color': '#0000',
@@ -486,53 +494,53 @@ const Button = defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'button',
-        computed(() => {
-          let hash = ''
-          const {
-            dashed,
-            type,
-            ghost,
-            text,
-            color,
-            round,
-            circle,
-            textColor,
-            secondary,
-            tertiary,
-            quaternary,
-            strong
-          } = props
-          if (dashed)
-            hash += 'a'
-          if (ghost)
-            hash += 'b'
-          if (text)
-            hash += 'c'
-          if (round)
-            hash += 'd'
-          if (circle)
-            hash += 'e'
-          if (secondary)
-            hash += 'f'
-          if (tertiary)
-            hash += 'g'
-          if (quaternary)
-            hash += 'h'
-          if (strong)
-            hash += 'i'
-          if (color)
-            hash += `j${color2Class(color)}`
-          if (textColor)
-            hash += `k${color2Class(textColor)}`
-          const { value: size } = mergedSizeRef
-          hash += `l${size[0]}`
-          hash += `m${type[0]}`
-          return hash
-        }),
-        cssVarsRef,
-        props
-      )
+          'button',
+          computed(() => {
+            let hash = ''
+            const {
+              dashed,
+              type,
+              ghost,
+              text,
+              color,
+              round,
+              circle,
+              textColor,
+              secondary,
+              tertiary,
+              quaternary,
+              strong
+            } = props
+            if (dashed)
+              hash += 'a'
+            if (ghost)
+              hash += 'b'
+            if (text)
+              hash += 'c'
+            if (round)
+              hash += 'd'
+            if (circle)
+              hash += 'e'
+            if (secondary)
+              hash += 'f'
+            if (tertiary)
+              hash += 'g'
+            if (quaternary)
+              hash += 'h'
+            if (strong)
+              hash += 'i'
+            if (color)
+              hash += `j${color2Class(color)}`
+            if (textColor)
+              hash += `k${color2Class(textColor)}`
+            const { value: size } = mergedSizeRef
+            hash += `l${size[0]}`
+            hash += `m${type[0]}`
+            return hash
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     return {

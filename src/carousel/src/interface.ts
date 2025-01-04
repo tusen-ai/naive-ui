@@ -25,3 +25,17 @@ export interface Size {
   width: number
   height: number
 }
+
+export interface CarouselArrowSlotProps {
+  total: number
+  currentIndex: number
+  to: (index: number) => void
+  prev: () => void
+  next: () => void
+}
+
+export interface CarouselDotSlotProps {
+  total: number
+  currentIndex: number
+  to: (index: number) => void
+}

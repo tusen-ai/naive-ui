@@ -23,6 +23,7 @@ import {
   provide,
   type Ref,
   ref,
+  type SlotsType,
   toRef,
   Transition,
   type VNode,
@@ -68,9 +69,27 @@ import {
 
 export type DatePickerSetupProps = ExtractPropTypes<typeof datePickerProps>
 
+export interface DatePickerSlots {
+  'date-icon'?: () => VNode[]
+  footer?: () => VNode[]
+  'next-month'?: () => VNode[]
+  'next-year'?: () => VNode[]
+  'prev-month'?: () => VNode[]
+  'prev-year'?: () => VNode[]
+  separator?: () => VNode[]
+  confirm?: (props: {
+    onConfirm: () => void
+    disabled: boolean
+    text: string
+  }) => VNode[]
+  clear?: (props: { onClear: () => void, text: string }) => VNode[]
+  now?: (props: { onNow: () => void, text: string }) => VNode[]
+}
+
 export default defineComponent({
   name: 'DatePicker',
   props: datePickerProps,
+  slots: Object as SlotsType<DatePickerSlots>,
   setup(props, { slots }) {
     if (__DEV__) {
       watchEffect(() => {
@@ -750,11 +769,11 @@ export default defineComponent({
     })
     const triggerThemeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'date-picker-trigger',
-        undefined,
-        triggerCssVarsRef,
-        props
-      )
+          'date-picker-trigger',
+          undefined,
+          triggerCssVarsRef,
+          props
+        )
       : undefined
 
     const cssVarsRef = computed(() => {
@@ -870,13 +889,13 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'date-picker',
-        computed(() => {
-          return props.type
-        }),
-        cssVarsRef,
-        props
-      )
+          'date-picker',
+          computed(() => {
+            return props.type
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     return {
@@ -1075,15 +1094,15 @@ export default defineComponent({
                           separator: () =>
                             this.separator === undefined
                               ? resolveSlot($slots.separator, () => [
-                                <NBaseIcon
-                                  clsPrefix={mergedClsPrefix}
-                                  class={`${mergedClsPrefix}-date-picker-icon`}
-                                >
-                                  {{
-                                    default: () => <ToIcon />
-                                  }}
-                                </NBaseIcon>
-                              ])
+                                  <NBaseIcon
+                                    clsPrefix={mergedClsPrefix}
+                                    class={`${mergedClsPrefix}-date-picker-icon`}
+                                  >
+                                    {{
+                                      default: () => <ToIcon />
+                                    }}
+                                  </NBaseIcon>
+                                ])
                               : this.separator,
                           [clearable ? 'clear-icon-placeholder' : 'suffix']:
                             () =>

@@ -168,65 +168,65 @@ export default defineComponent({
         {!wrapItem && (useGap || internalUseGap)
           ? children
           : children.map((child, index) =>
-            child.type === Comment ? (
-              child
-            ) : (
-              <div
-                role="none"
-                class={itemClass}
-                style={[
-                  itemStyle as any,
-                  {
-                    maxWidth: '100%'
-                  },
-                  useGap
-                    ? ''
-                    : vertical
-                      ? {
-                          marginBottom:
-                              index !== lastIndex ? verticalMargin : ''
-                        }
-                      : rtlEnabled
+              child.type === Comment ? (
+                child
+              ) : (
+                <div
+                  role="none"
+                  class={itemClass}
+                  style={[
+                    itemStyle as any,
+                    {
+                      maxWidth: '100%'
+                    },
+                    useGap
+                      ? ''
+                      : vertical
                         ? {
-                            marginLeft: isJustifySpace
-                              ? justify === 'space-between'
-                              && index === lastIndex
-                                ? ''
-                                : semiHorizontalMargin
-                              : index !== lastIndex
-                                ? horizontalMargin
-                                : '',
-                            marginRight: isJustifySpace
-                              ? justify === 'space-between' && index === 0
-                                ? ''
-                                : semiHorizontalMargin
-                              : '',
-                            paddingTop: semiVerticalMargin,
-                            paddingBottom: semiVerticalMargin
+                            marginBottom:
+                              index !== lastIndex ? verticalMargin : ''
                           }
-                        : {
-                            marginRight: isJustifySpace
-                              ? justify === 'space-between'
-                              && index === lastIndex
-                                ? ''
-                                : semiHorizontalMargin
-                              : index !== lastIndex
-                                ? horizontalMargin
+                        : rtlEnabled
+                          ? {
+                              marginLeft: isJustifySpace
+                                ? justify === 'space-between'
+                                && index === lastIndex
+                                  ? ''
+                                  : semiHorizontalMargin
+                                : index !== lastIndex
+                                  ? horizontalMargin
+                                  : '',
+                              marginRight: isJustifySpace
+                                ? justify === 'space-between' && index === 0
+                                  ? ''
+                                  : semiHorizontalMargin
                                 : '',
-                            marginLeft: isJustifySpace
-                              ? justify === 'space-between' && index === 0
-                                ? ''
-                                : semiHorizontalMargin
-                              : '',
-                            paddingTop: semiVerticalMargin,
-                            paddingBottom: semiVerticalMargin
-                          }
-                ]}
-              >
-                {child}
-              </div>
-            )
-          )}
+                              paddingTop: semiVerticalMargin,
+                              paddingBottom: semiVerticalMargin
+                            }
+                          : {
+                              marginRight: isJustifySpace
+                                ? justify === 'space-between'
+                                && index === lastIndex
+                                  ? ''
+                                  : semiHorizontalMargin
+                                : index !== lastIndex
+                                  ? horizontalMargin
+                                  : '',
+                              marginLeft: isJustifySpace
+                                ? justify === 'space-between' && index === 0
+                                  ? ''
+                                  : semiHorizontalMargin
+                                : '',
+                              paddingTop: semiVerticalMargin,
+                              paddingBottom: semiVerticalMargin
+                            }
+                  ]}
+                >
+                  {child}
+                </div>
+              )
+            )}
       </div>
     )
   }
