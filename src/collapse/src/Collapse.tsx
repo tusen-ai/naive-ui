@@ -3,6 +3,7 @@ import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type {
   CollapseArrowSlotProps,
   CollapseItemHeaderExtraSlotProps,
+  CollapseItemHeaderSlotProps,
   HeaderClickInfo,
   OnItemHeaderClick,
   OnItemHeaderClickImpl,
@@ -88,6 +89,7 @@ export type CollapseProps = ExtractPublicPropTypes<typeof collapseProps>
 export interface CollapseSlots {
   default?: () => VNode[]
   arrow?: (props: CollapseArrowSlotProps) => VNode[]
+  header?: (props: CollapseItemHeaderSlotProps) => VNode[]
   'header-extra'?: (props: CollapseItemHeaderExtraSlotProps) => VNode[]
 }
 
