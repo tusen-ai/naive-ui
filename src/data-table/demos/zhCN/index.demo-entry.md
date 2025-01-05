@@ -57,7 +57,7 @@ tree.vue
 flex-height.vue
 striped.vue
 simple-editable.vue
-switchable-editable
+switchable-editable.vue
 context-menu.vue
 async-expand.vue
 render-cell.vue
