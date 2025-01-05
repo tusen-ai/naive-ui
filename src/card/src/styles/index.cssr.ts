@@ -98,8 +98,7 @@ export default c([
         cE('main', `
           font-weight: var(--n-title-font-weight);
           transition: color .3s var(--n-bezier);
-          flex: 1;
-          min-width: 0;
+          flex-shrink: 0;
           color: var(--n-title-text-color);
         `),
         cE('extra', `
