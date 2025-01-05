@@ -47,6 +47,7 @@ import {
   ref,
   toRef,
   Transition,
+  type VNode,
   watch,
   watchEffect,
   withDirectives
@@ -177,6 +178,11 @@ export const timePickerProps = {
 }
 
 export type TimePickerProps = ExtractPublicPropTypes<typeof timePickerProps>
+
+export interface TimePickerSlots {
+  default?: () => VNode[]
+  icon?: () => VNode[]
+}
 
 export default defineComponent({
   name: 'TimePicker',

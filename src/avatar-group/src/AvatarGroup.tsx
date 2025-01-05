@@ -2,13 +2,19 @@ import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { Size } from '../../avatar/src/interface'
 import type { AvatarGroupTheme } from '../styles'
+import type {
+  AvatarGroupAvatarSlotProps,
+  AvatarGroupRestSlotProps
+} from './interface'
 import {
   computed,
   type CSSProperties,
   defineComponent,
   h,
   type PropType,
-  provide
+  provide,
+  type SlotsType,
+  type VNode
 } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
@@ -40,9 +46,16 @@ export const avatarGroupProps = {
 
 export type AvatarGroupProps = ExtractPublicPropTypes<typeof avatarGroupProps>
 
+export interface AvatarGroupSlots {
+  avatar?: (props: AvatarGroupAvatarSlotProps) => VNode[]
+  rest?: (props: AvatarGroupRestSlotProps) => VNode[]
+  default?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'AvatarGroup',
   props: avatarGroupProps,
+  slots: Object as SlotsType<AvatarGroupSlots>,
   setup(props) {
     const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
     const mergedThemeRef = useTheme(

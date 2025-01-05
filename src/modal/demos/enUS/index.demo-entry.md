@@ -27,6 +27,7 @@ preset-card.vue
 preset-confirm.vue
 preset-confirm-slot.vue
 transform-origin.vue
+draggable.vue
 ```
 
 ## API
@@ -58,6 +59,7 @@ Provided since `2.38.0`.
 | block-scroll | `boolean` | `true` | Whether to disabled body scrolling when it's active. | 2.28.3 |
 | close-on-esc | `boolean` | `true` | Whether to close modal on Esc is pressed. | 2.24.2 |
 | display-directive | `'if' \| 'show'` | `'if'` | Use which directive to control the rendering of modal body. |  |
+| draggable | `boolean \| { bounds?: 'window' }` | `false` | Whether the modal is draggable. Make its position not bound inside window using `bounds === 'none'`. | 2.41.0 |
 | mask-closable | `boolean` | `true` | Whether to emit `hide` event when click mask. |  |
 | preset | `'dialog' \| 'card'` | `undefined` | The preset of `n-modal`. |  |
 | show | `boolean` | `false` | Whether to show modal. |  |
@@ -97,6 +99,10 @@ See [Dialog props](dialog#Dialog-Props)
 
 See [Card slots](card#Card-Slots)
 
+`default` slot's parameter is different, which is `(props: { draggableClass: string })`.
+
 ### Modal with Preset Dialog Slots
 
 See [Dialog slots](dialog#Dialog-Slots)
+
+`default` slot's parameter is different, which is `(props: { draggableClass: string })`.

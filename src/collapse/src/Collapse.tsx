@@ -1,6 +1,9 @@
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type {
+  CollapseArrowSlotProps,
+  CollapseItemHeaderExtraSlotProps,
+  CollapseItemHeaderSlotProps,
   HeaderClickInfo,
   OnItemHeaderClick,
   OnItemHeaderClickImpl,
@@ -18,7 +21,8 @@ import {
   provide,
   type Ref,
   ref,
-  type Slots
+  type SlotsType,
+  type VNode
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
@@ -82,11 +86,18 @@ export const collapseProps = {
 
 export type CollapseProps = ExtractPublicPropTypes<typeof collapseProps>
 
+export interface CollapseSlots {
+  default?: () => VNode[]
+  arrow?: (props: CollapseArrowSlotProps) => VNode[]
+  header?: (props: CollapseItemHeaderSlotProps) => VNode[]
+  'header-extra'?: (props: CollapseItemHeaderExtraSlotProps) => VNode[]
+}
+
 export interface NCollapseInjection {
   props: ExtractPropTypes<typeof collapseProps>
   expandedNamesRef: Ref<string | number | Array<string | number> | null>
   mergedClsPrefixRef: Ref<string>
-  slots: Slots
+  slots: CollapseSlots
   toggleItem: (
     collapse: boolean,
     name: string | number,
@@ -100,6 +111,7 @@ export const collapseInjectionKey
 export default defineComponent({
   name: 'Collapse',
   props: collapseProps,
+  slots: Object as SlotsType<CollapseSlots>,
   setup(props, { slots }) {
     const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
       = useConfig(props)

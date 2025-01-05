@@ -23,6 +23,7 @@ import {
   type PropType,
   provide,
   ref,
+  type SlotsType,
   type TextareaHTMLAttributes,
   toRef,
   type VNode,
@@ -170,9 +171,20 @@ export const inputProps = {
 
 export type InputProps = ExtractPublicPropTypes<typeof inputProps>
 
+export interface InputSlots {
+  'clear-icon'?: () => VNode[]
+  count?: (props: { value: string }) => VNode[]
+  'password-invisible-icon'?: () => VNode[]
+  'password-visible-icon'?: () => VNode[]
+  prefix?: () => VNode[]
+  separator?: () => VNode[]
+  suffix?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Input',
   props: inputProps,
+  slots: Object as SlotsType<InputSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {
@@ -1340,7 +1352,13 @@ export default defineComponent({
                       this.showCount && this.type !== 'textarea' ? (
                         <WordCount>
                           {{
-                            default: (props: unknown) => $slots.count?.(props)
+                            default: (props: unknown) => {
+                              const { renderCount } = this
+                              if (renderCount) {
+                                return renderCount(props as { value: string })
+                              }
+                              return $slots.count?.(props)
+                            }
                           }}
                         </WordCount>
                       ) : null,

@@ -31,3 +31,10 @@ export interface ModalInjection {
 }
 
 export const modalInjectionKey = createInjectionKey<ModalInjection>('n-modal')
+
+export interface ModalDraggableOptions {
+  /**
+   * If set to 'none', the modal's position will not be bounded to the window.
+   */
+  bounds?: 'none'
+}

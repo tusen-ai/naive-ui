@@ -60,6 +60,7 @@ Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有�
 | 印度尼西亚语       | idID | dateIdID |        |
 | 意大利语           | itIT | dateItIT | 2.24.2 |
 | 日语               | jaJP | dateJaJP |        |
+| 高棉语（柬埔寨）   | kmKH | dateKmKH | 2.41.0 |
 | 韩语               | koKR | dateKoKR | 2.28.1 |
 | 书面挪威语         | nbNO | dateNbNO |        |
 | 荷兰语（荷兰）     | nlNL | dateNlNL | 2.29.0 |
@@ -70,6 +71,7 @@ Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有�
 | 瑞典語             | svSE | dateSvSE | 2.35.0 |
 | 泰语（泰国）       | thTH | dateThTH | 2.27.0 |
 | 土耳其语           | trTR | dateTrTR | 2.34.0 |
+| 维吾尔语           | ugCN | dateUgCN | 2.41.0 |
 | 乌克兰语           | ukUA | dateUkUA |        |
 | 乌兹别克语         | uzUZ | dateUzUZ | 2.39.0 |
 | 越南语（越南）     | viVN | dateViVN | 2.30.7 |

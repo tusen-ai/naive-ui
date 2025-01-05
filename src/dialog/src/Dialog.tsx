@@ -1,7 +1,14 @@
 import type { ThemeProps } from '../../_mixins'
 import type { DialogTheme } from '../styles'
 import { getMargin } from 'seemly'
-import { computed, type CSSProperties, defineComponent, h } from 'vue'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  h,
+  type SlotsType,
+  type VNode
+} from 'vue'
 import { NBaseClose, NBaseIcon } from '../../_internal'
 import {
   ErrorIcon,
@@ -29,6 +36,14 @@ const iconRenderMap = {
   error: () => <ErrorIcon />
 }
 
+export interface DialogSlots {
+  action?: () => VNode[]
+  default?: () => VNode[]
+  header?: () => VNode[]
+  icon?: () => VNode[]
+  close?: () => VNode[]
+}
+
 export const NDialog = defineComponent({
   name: 'Dialog',
   alias: [
@@ -39,6 +54,7 @@ export const NDialog = defineComponent({
     ...(useTheme.props as ThemeProps<DialogTheme>),
     ...dialogProps
   },
+  slots: Object as SlotsType<DialogSlots>,
   setup(props) {
     const {
       mergedComponentPropsRef,

@@ -1,5 +1,5 @@
 export { inputProps, default as NInput } from './src/Input'
-export type { InputProps } from './src/Input'
+export type { InputProps, InputSlots } from './src/Input'
 export { inputGroupProps, default as NInputGroup } from './src/InputGroup'
 export type { InputGroupProps } from './src/InputGroup'
 export {

@@ -15,6 +15,8 @@ import {
   inject,
   type PropType,
   ref,
+  type SlotsType,
+  type VNode,
   type VNodeChild,
   watchEffect
 } from 'vue'
@@ -95,9 +97,15 @@ export const buttonProps = {
 
 export type ButtonProps = ExtractPublicPropTypes<typeof buttonProps>
 
+export interface ButtonSlots {
+  default?: () => VNode[]
+  icon?: () => VNode[]
+}
+
 const Button = defineComponent({
   name: 'Button',
   props: buttonProps,
+  slots: Object as SlotsType<ButtonSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {

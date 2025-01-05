@@ -5,6 +5,8 @@ import type { SelectProps } from '../../select'
 import type { Size as SelectSize } from '../../select/src/interface'
 import type { PaginationTheme } from '../styles'
 import type {
+  PaginationInfo,
+  PaginationLabelInfo,
   PaginationRenderLabel,
   PaginationSizeOption,
   RenderGoto,
@@ -25,7 +27,9 @@ import {
   nextTick,
   type PropType,
   ref,
+  type SlotsType,
   toRef,
+  type VNode,
   type VNodeChild,
   watchEffect
 } from 'vue'
@@ -123,9 +127,20 @@ export const paginationProps = {
 
 export type PaginationProps = ExtractPublicPropTypes<typeof paginationProps>
 
+export interface PaginationSlots {
+  default?: () => VNode[]
+  goto?: () => VNode[]
+  label?: (props: PaginationLabelInfo) => VNode[]
+  next?: (props: PaginationInfo) => VNode
+  prev?: (props: PaginationInfo) => VNode
+  prefix?: (props: PaginationInfo) => VNode
+  suffix?: (props: PaginationInfo) => VNode
+}
+
 export default defineComponent({
   name: 'Pagination',
   props: paginationProps,
+  slots: Object as SlotsType<PaginationSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {
@@ -586,8 +601,8 @@ export default defineComponent({
       onRender
     } = this
     onRender?.()
-    const renderPrefix = ($slots.prefix as RenderPrefix | undefined) || prefix
-    const renderSuffix = ($slots.suffix as RenderSuffix | undefined) || suffix
+    const renderPrefix = prefix || $slots.prefix
+    const renderSuffix = suffix || $slots.suffix
     const renderPrev = prev || $slots.prev
     const renderNext = next || $slots.next
     const renderLabel = label || $slots.label

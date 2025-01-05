@@ -28,6 +28,7 @@ import {
   type PropType,
   provide,
   ref,
+  type SlotsType,
   toRef,
   TransitionGroup,
   type VNode,
@@ -114,9 +115,16 @@ export const tabsProps = {
 
 export type TabsProps = ExtractPublicPropTypes<typeof tabsProps>
 
+export interface TabsSlots {
+  default?: () => VNode[]
+  prefix?: () => VNode[]
+  suffix?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Tabs',
   props: tabsProps,
+  slots: Object as SlotsType<TabsSlots>,
   setup(props, { slots }) {
     if (__DEV__) {
       watchEffect(() => {

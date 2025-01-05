@@ -5,7 +5,7 @@ import type {
   HTMLAttributes,
   PropType,
   Ref,
-  Slots,
+  VNode,
   VNodeChild
 } from 'vue'
 import type { VirtualListInst } from 'vueuc'
@@ -177,6 +177,12 @@ export const dataTableProps = {
     MaybeArray<OnUpdateCheckedRowKeys> | undefined
   >
 } as const
+
+export interface DataTableSlots {
+  default?: () => VNode[]
+  empty?: () => VNode[]
+  loading?: () => VNode[]
+}
 
 export type FilterOptionValue = string | number
 export type ColumnKey = string | number
@@ -357,7 +363,7 @@ export type DataTableSelectionOptions<T = InternalRowData> = Array<
 >
 export interface DataTableInjection {
   props: DataTableSetupProps
-  slots: Slots
+  slots: DataTableSlots
   indentRef: Ref<number>
   childTriggerColIndexRef: Ref<number>
   componentId: string

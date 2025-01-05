@@ -1,9 +1,10 @@
 import { type HSLA, toHslaString } from 'seemly'
-import { defineComponent, h, inject, type PropType } from 'vue'
+import { defineComponent, h, inject, type PropType, type SlotsType } from 'vue'
 import { colorPickerInjectionKey } from './context'
 
 export default defineComponent({
   name: 'ColorPickerTrigger',
+  slots: Object as SlotsType<Record<string, never>>,
   props: {
     clsPrefix: {
       type: String,

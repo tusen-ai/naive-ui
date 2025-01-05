@@ -1,5 +1,28 @@
 # CHANGELOG
 
+## 2.41.0
+
+### Breaking Changes
+
+- (**Vue 3.3+ required**) Add slot type for all components.
+
+### i18n
+
+- Add kmKH locale.
+- Add ugCN locale.
+
+### Features
+
+- `n-modal` adds `draggable` prop, closes [#6525](https://github.com/tusen-ai/naive-ui/issues/6525), [#5792](https://github.com/tusen-ai/naive-ui/issues/5792), [#5711](https://github.com/tusen-ai/naive-ui/issues/5711), [#5501](https://github.com/tusen-ai/naive-ui/issues/5501) and [#2152](https://github.com/tusen-ai/naive-ui/issues/2152).
+- `useDialog` supports `draggable` option.
+- `useModal` supports `draggable` option.
+
+### Fixes
+
+- Fix `n-data-table` may have multiple expand trigger with tree data.
+- Fix `n-date-picker`'s `confirm`, `now`, `clear` slots doesn't work with `'month'`, `'monthrange'`, `'quarter'`, `'quarterrange'`, `'year'` and `'yearrange'` type.
+- Fix `n-input`'s `render-count` prop doesn't work when type is not `'textarea'`.
+
 ## 2.40.4
 
 `2024-12-20`

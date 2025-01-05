@@ -1,4 +1,4 @@
-import type { Ref, Slots, UnwrapNestedRefs } from 'vue'
+import type { Ref, UnwrapNestedRefs } from 'vue'
 import type { VirtualListInst } from 'vueuc'
 import type { ScrollbarInst } from '../../_internal'
 import type { MergedTheme } from '../../_mixins'
@@ -11,6 +11,7 @@ import type {
 } from '../../time-picker/src/interface'
 import type { TimePickerProps } from '../../time-picker/src/TimePicker'
 import type { DatePickerTheme } from '../styles/light'
+import type { DatePickerSlots } from './DatePicker'
 import type {
   dualCalendarValidation,
   uniCalendarValidation
@@ -135,7 +136,7 @@ export type DatePickerInjection = {
   monthFormatRef: Ref<string>
   yearFormatRef: Ref<string>
   quarterFormatRef: Ref<string>
-  datePickerSlots: Slots
+  datePickerSlots: DatePickerSlots
   yearRangeRef: Ref<[number, number]>
 } & ReturnType<typeof uniCalendarValidation> &
 ReturnType<typeof dualCalendarValidation>

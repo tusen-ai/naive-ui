@@ -1,6 +1,14 @@
+import type { ModalDraggableOptions } from '../../modal/src/interface'
 // use absolute path to make sure no circular ref of style
 // this -> modal-index -> modal-style
-import { type CSSProperties, defineComponent, h, type PropType, ref } from 'vue'
+import {
+  type CSSProperties,
+  defineComponent,
+  h,
+  normalizeClass,
+  type PropType,
+  ref
+} from 'vue'
 import { keep } from '../../_utils'
 import NModal from '../../modal/src/Modal'
 import { NDialog } from './Dialog'
@@ -30,7 +38,8 @@ export const exposedDialogEnvProps = {
     (e: MouseEvent) => Promise<unknown> | unknown
   >,
   onClose: Function as PropType<() => Promise<unknown> | unknown>,
-  onMaskClick: Function as PropType<(e: MouseEvent) => void>
+  onMaskClick: Function as PropType<(e: MouseEvent) => void>,
+  draggable: [Boolean, Object] as PropType<boolean | ModalDraggableOptions>
 } as const
 
 export const NDialogEnvironment = defineComponent({
@@ -156,13 +165,15 @@ export const NDialogEnvironment = defineComponent({
         blockScroll={this.blockScroll}
         autoFocus={this.autoFocus}
         transformOrigin={this.transformOrigin}
+        draggable={this.draggable}
         internalAppear
         internalDialog
       >
         {{
-          default: () => (
+          default: ({ draggableClass }: { draggableClass: string }) => (
             <NDialog
               {...keep(this.$props, dialogPropKeys)}
+              titleClass={normalizeClass([this.titleClass, draggableClass])}
               style={this.internalStyle}
               onClose={handleCloseClick}
               onNegativeClick={handleNegativeClick}

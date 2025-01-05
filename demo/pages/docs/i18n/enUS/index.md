@@ -60,6 +60,7 @@ The following list is sorted by 'Config' column.
 | Bahasa Indonesia           | idID   | dateIdID    |         |
 | Italiano                   | itIT   | dateItIT    | 2.24.2  |
 | Japanese                   | jaJP   | dateJaJP    |         |
+| Khmer (Cambodia)           | kmKH   | dateKmKH    | 2.41.0  |
 | Korean (South Korea)       | koKR   | dateKoKR    | 2.28.1  |
 | Norwegian Bokmål (Norway)  | nbNO   | dateNbNO    |         |
 | Dutch (Netherlands)        | nlNL   | dateNlNL    | 2.29.0  |
@@ -70,6 +71,7 @@ The following list is sorted by 'Config' column.
 | Swedish                    | svSE   | dateSvSE    | 2.35.0  |
 | Thai (Thailand)            | thTH   | dateThTH    | 2.27.0  |
 | Turkish                    | trTR   | dateTrTR    | 2.34.0  |
+| Uyghur (China)             | ugCN   | dateUgCN    |         |
 | Ukrainian                  | ukUA   | dateUkUA    |         |
 | Uzbek (Uzbekistan)         | uzUZ   | dateUzUZ    | 2.39.0  |
 | Vietnamese (Vietnam)       | viVN   | dateViVN    | 2.30.7  |

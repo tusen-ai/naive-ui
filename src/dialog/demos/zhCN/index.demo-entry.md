@@ -67,8 +67,8 @@ rtl-debug.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | action | `() => VNodeChild` | `undefined` | 操作区域的内容，需要是渲染函数 |  |
-| actionClass | `string` | 操作区域的类名 | 2.38.2 |
-| actionStyle | `Object \| string` | 操作区域的样式 | 2.38.2 |
+| actionClass | `string` | `undefined` | 操作区域的类名 | 2.38.2 |
+| actionStyle | `Object \| string` | `undefined` | 操作区域的样式 | 2.38.2 |
 | autoFocus | `boolean` | `true` | 是否自动聚焦 Modal 第一个可聚焦的元素 | 2.28.3 |
 | blockScroll | `boolean` | `true` | 是否在打开时禁用 body 滚动 | 2.28.3 |
 | bordered | `boolean` | `false` | 是否显示 `border` |  |
@@ -76,8 +76,9 @@ rtl-debug.vue
 | closable | `boolean` | `true` | 是否显示 `close` 图标 |  |
 | closeOnEsc | `boolean` | `true` | 是否在摁下 Esc 键的时候关闭对话框 | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | `undefined` | 对话框内容，可以是渲染函数 |  |
-| contentClass | `string` | 内容的类名 | 2.38.2 |
-| contentStyle | `Object \| string` | 内容的样式 | 2.38.2 |
+| contentClass | `string` | `undefined` | 内容的类名 | 2.38.2 |
+| contentStyle | `Object \| string` | `undefined` | 内容的样式 | 2.38.2 |
+| draggable | `boolean \| { bounds?: 'none' }` | `false` | 是否可拖拽 | 2.41.0 |
 | iconPlacement | `'left' \| 'top'` | `'left'` | 图标的位置 |  |
 | icon | `() => VNodeChild` | `undefined` | 对话框 `icon`, 需要是渲染函数 |  |
 | loading | `boolean` | `false` | 是否显示 `loading` 状态 |  |
@@ -89,8 +90,8 @@ rtl-debug.vue
 | showIcon | `boolean` | `true` | 是否显示 `icon` |  |
 | style | `string \| Object` | `undefined` | 样式 |  |
 | title | `string \| (() => VNodeChild)` | `undefined` | 标题，可以是渲染函数 |  |
-| titleClass | `string` | 标题的类名 | 2.38.2 |
-| titleStyle | `Object \| string` | 标题的样式 | 2.38.2 |
+| titleClass | `string` | `undefined` | 标题的类名 | 2.38.2 |
+| titleStyle | `Object \| string` | `undefined` | 标题的样式 | 2.38.2 |
 | transformOrigin | `'mouse' \| 'center'` | `'mouse'` | 对话框动画出现的位置 | 2.34.0 |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | 对话框类型 |  |
 | onAfterEnter | `() => void` | `undefined` | 出现动画完成执行的回调 | 2.33.0 |

@@ -11,7 +11,9 @@ import {
   h,
   type PropType,
   ref,
+  type SlotsType,
   toRef,
+  type VNode,
   watchEffect
 } from 'vue'
 import { NBaseLoading, NIconSwitchTransition } from '../../_internal'
@@ -74,11 +76,21 @@ export const switchProps = {
 
 export type SwitchProps = ExtractPublicPropTypes<typeof switchProps>
 
+export interface SwitchSlots {
+  default?: () => VNode[]
+  checked?: () => VNode[]
+  'checked-icon'?: () => VNode[]
+  icon?: () => VNode[]
+  unchecked?: () => VNode[]
+  'unchecked-icon'?: () => VNode[]
+}
+
 let supportCssMax: boolean | undefined
 
 export default defineComponent({
   name: 'Switch',
   props: switchProps,
+  slots: Object as SlotsType<SwitchSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {

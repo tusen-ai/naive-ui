@@ -10,7 +10,9 @@ import {
   type PropType,
   provide,
   ref,
+  type SlotsType,
   toRef,
+  type VNode,
   watchEffect
 } from 'vue'
 import { useConfig } from '../../_mixins'
@@ -51,9 +53,15 @@ export const imageProps = {
 
 export type ImageProps = ExtractPublicPropTypes<typeof imageProps>
 
+export interface ImageSlots {
+  placeholder?: () => VNode[]
+  error?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Image',
   props: imageProps,
+  slots: Object as SlotsType<ImageSlots>,
   inheritAttrs: false,
   setup(props) {
     const imageRef = ref<HTMLImageElement | null>(null)
@@ -217,8 +225,7 @@ export default defineComponent({
             renderToolbar={this.renderToolbar}
           >
             {{
-              default: () => imgNode,
-              toolbar: () => this.$slots.toolbar?.()
+              default: () => imgNode
             }}
           </NImagePreview>
         )}

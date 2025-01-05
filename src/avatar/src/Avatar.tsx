@@ -12,6 +12,8 @@ import {
   onMounted,
   type PropType,
   ref,
+  type SlotsType,
+  type VNode,
   type VNodeChild,
   watch,
   watchEffect
@@ -65,9 +67,16 @@ export const avatarProps = {
 
 export type AvatarProps = ExtractPublicPropTypes<typeof avatarProps>
 
+export interface AvatarSlots {
+  default?: () => VNode[]
+  placeholder?: () => VNode[]
+  fallback?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Avatar',
   props: avatarProps,
+  slots: Object as SlotsType<AvatarSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const hasLoadErrorRef = ref(false)

@@ -9,6 +9,7 @@ import {
   defineComponent,
   h,
   type PropType,
+  type SlotsType,
   type VNode
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
@@ -58,9 +59,15 @@ export type DescriptionsProps = ExtractPublicPropTypes<typeof descriptionsProps>
 /** @deprecated You should use `DescriptionsProps` */
 export type DescriptionProps = DescriptionsProps
 
+export interface DescriptionsSlots {
+  default?: () => VNode[]
+  header?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Descriptions',
   props: descriptionsProps,
+  slots: Object as SlotsType<DescriptionsSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(

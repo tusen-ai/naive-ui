@@ -43,6 +43,7 @@ import {
   provide,
   type Ref,
   ref,
+  type SlotsType,
   toRef,
   Transition,
   type VNode,
@@ -124,9 +125,16 @@ export const colorPickerProps = {
 
 export type ColorPickerProps = ExtractPublicPropTypes<typeof colorPickerProps>
 
+export interface ColorPickerSlots {
+  default?: () => VNode[]
+  label?: (color: string | null) => VNode[]
+  action?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'ColorPicker',
   props: colorPickerProps,
+  slots: Object as SlotsType<ColorPickerSlots>,
   setup(props, { slots }) {
     const selfRef = ref<HTMLElement | null>(null)
     let upcomingValue: string | null = null
@@ -701,7 +709,7 @@ export default defineComponent({
     }
   },
   render() {
-    const { $slots, mergedClsPrefix, onRender } = this
+    const { mergedClsPrefix, onRender } = this
     onRender?.()
     return (
       <div
@@ -721,11 +729,7 @@ export default defineComponent({
                       hsla={this.hsla}
                       disabled={this.mergedDisabled}
                       onClick={this.handleTriggerClick}
-                    >
-                      {{
-                        label: $slots.label
-                      }}
-                    </ColorPickerTrigger>
+                    />
                   )
                 }}
               </VTarget>,

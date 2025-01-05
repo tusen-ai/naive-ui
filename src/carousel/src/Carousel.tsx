@@ -1,9 +1,18 @@
-import type { CSSProperties, PropType, Ref, TransitionProps, VNode } from 'vue'
+import type {
+  CSSProperties,
+  PropType,
+  Ref,
+  SlotsType,
+  TransitionProps,
+  VNode
+} from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { CarouselTheme } from '../styles'
 import type {
   ArrowScopedSlotProps,
+  CarouselArrowSlotProps,
+  CarouselDotSlotProps,
   CarouselInst,
   DotScopedSlotProps,
   Size
@@ -31,7 +40,7 @@ import {
 } from 'vue'
 import { VResizeObserver } from 'vueuc'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import { flatten, keep, resolveSlotWithProps } from '../../_utils'
+import { flatten, keep, resolveSlotWithTypedProps } from '../../_utils'
 import { carouselLight } from '../styles'
 import NCarouselArrow from './CarouselArrow'
 import {
@@ -139,12 +148,19 @@ export const carouselProps = {
 
 export type CarouselProps = ExtractPublicPropTypes<typeof carouselProps>
 
+export interface CarouselSlots {
+  default?: () => VNode[]
+  arrow?: (props: CarouselArrowSlotProps) => VNode[]
+  dots?: (props: CarouselDotSlotProps) => VNode[]
+}
+
 // only one carousel is allowed to trigger touch globally
 let globalDragging = false
 
 export default defineComponent({
   name: 'Carousel',
   props: carouselProps,
+  slots: Object as SlotsType<CarouselSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     // Dom
@@ -1025,7 +1041,7 @@ export default defineComponent({
         </VResizeObserver>
         {this.showDots
         && dotSlotProps.total > 1
-        && resolveSlotWithProps(dotsSlot, dotSlotProps, () => [
+        && resolveSlotWithTypedProps(dotsSlot, dotSlotProps, () => [
           <NCarouselDots
             key={dotType + dotPlacement}
             total={dotSlotProps.total}
@@ -1036,7 +1052,7 @@ export default defineComponent({
           />
         ])}
         {showArrow
-        && resolveSlotWithProps(arrowSlot, arrowSlotProps, () => [
+        && resolveSlotWithTypedProps(arrowSlot, arrowSlotProps, () => [
           <NCarouselArrow />
         ])}
       </div>

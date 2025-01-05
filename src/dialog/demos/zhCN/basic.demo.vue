@@ -19,6 +19,7 @@ export default defineComponent({
           content: '你确定？',
           positiveText: '确定',
           negativeText: '不确定',
+          draggable: true,
           onPositiveClick: () => {
             message.success('确定')
           },

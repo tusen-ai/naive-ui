@@ -4,7 +4,10 @@ export { createDataKey } from './create-data-key'
 export { createInjectionKey } from './create-injection-key'
 export { createRefSetter } from './create-ref-setter'
 export { flatten } from './flatten'
-export { getFirstSlotVNode } from './get-first-slot-vnode'
+export {
+  getFirstSlotVNode,
+  getFirstSlotVNodeWithTypedProps
+} from './get-first-slot-vnode'
 export { getSlot } from './get-slot'
 export { getVNodeChildren } from './get-v-node-children'
 export { isNodeVShowFalse } from './is-node-v-show-false'
@@ -16,7 +19,7 @@ export { render } from './render'
 export {
   isSlotEmpty,
   resolveSlot,
-  resolveSlotWithProps,
+  resolveSlotWithTypedProps,
   resolveWrappedSlot,
   resolveWrappedSlotWithProps
 } from './resolve-slot'

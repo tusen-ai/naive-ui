@@ -5,6 +5,7 @@ import {
   type HTMLAttributes,
   inject,
   type PropType,
+  type SlotsType,
   type VNode,
   type VNodeChild,
   watchEffect
@@ -38,11 +39,18 @@ export const tabPaneProps = {
 
 export type TabPaneProps = ExtractPublicPropTypes<typeof tabPaneProps>
 
+export interface TabPaneSlots {
+  default?: () => VNode[]
+  prefix?: () => VNode[]
+  suffix?: () => VNode[]
+}
+
 export default defineComponent({
   __TAB_PANE__: true,
   name: 'TabPane',
   alias: ['TabPanel'],
   props: tabPaneProps,
+  slots: Object as SlotsType<TabPaneSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {

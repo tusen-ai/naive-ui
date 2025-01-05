@@ -11,7 +11,7 @@ import {
   FastForwardIcon,
   ForwardIcon
 } from '../../../_internal/icons'
-import { resolveSlot, resolveSlotWithProps } from '../../../_utils'
+import { resolveSlot, resolveSlotWithTypedProps } from '../../../_utils'
 import { NButton, NxButton } from '../../../button'
 import { NInput } from '../../../input'
 import { NTimePicker } from '../../../time-picker'
@@ -36,8 +36,8 @@ export default defineComponent({
       mergedTheme,
       shortcuts,
       timePickerProps,
-      onRender,
-      $slots
+      datePickerSlots,
+      onRender
     } = this
     onRender?.()
 
@@ -91,13 +91,17 @@ export default defineComponent({
               class={`${mergedClsPrefix}-date-panel-month__fast-prev`}
               onClick={this.prevYear}
             >
-              {resolveSlot($slots['prev-year'], () => [<FastBackwardIcon />])}
+              {resolveSlot(datePickerSlots['prev-year'], () => [
+                <FastBackwardIcon />
+              ])}
             </div>
             <div
               class={`${mergedClsPrefix}-date-panel-month__prev`}
               onClick={this.prevMonth}
             >
-              {resolveSlot($slots['prev-month'], () => [<BackwardIcon />])}
+              {resolveSlot(datePickerSlots['prev-month'], () => [
+                <BackwardIcon />
+              ])}
             </div>
             <PanelHeader
               monthYearSeparator={this.calendarHeaderMonthYearSeparator}
@@ -112,13 +116,17 @@ export default defineComponent({
               class={`${mergedClsPrefix}-date-panel-month__next`}
               onClick={this.nextMonth}
             >
-              {resolveSlot($slots['next-month'], () => [<ForwardIcon />])}
+              {resolveSlot(datePickerSlots['next-month'], () => [
+                <ForwardIcon />
+              ])}
             </div>
             <div
               class={`${mergedClsPrefix}-date-panel-month__fast-next`}
               onClick={this.nextYear}
             >
-              {resolveSlot($slots['next-year'], () => [<FastForwardIcon />])}
+              {resolveSlot(datePickerSlots['next-year'], () => [
+                <FastForwardIcon />
+              ])}
             </div>
           </div>
           <div class={`${mergedClsPrefix}-date-panel-weekdays`}>
@@ -198,8 +206,8 @@ export default defineComponent({
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
               {this.actions?.includes('clear')
-                ? resolveSlotWithProps(
-                    this.$slots.clear,
+                ? resolveSlotWithTypedProps(
+                    this.datePickerSlots.clear,
                     {
                       onClear: this.clearSelectedDateTime,
                       text: this.locale.clear
@@ -217,8 +225,8 @@ export default defineComponent({
                   )
                 : null}
               {this.actions?.includes('now')
-                ? resolveSlotWithProps(
-                    $slots.now,
+                ? resolveSlotWithTypedProps(
+                    datePickerSlots.now,
                     {
                       onNow: this.handleNowClick,
                       text: this.locale.now
@@ -236,8 +244,8 @@ export default defineComponent({
                   )
                 : null}
               {this.actions?.includes('confirm')
-                ? resolveSlotWithProps(
-                    $slots.confirm,
+                ? resolveSlotWithTypedProps(
+                    datePickerSlots.confirm,
                     {
                       onConfirm: this.handleConfirmClick,
                       disabled: this.isDateInvalid,

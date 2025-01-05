@@ -9,7 +9,9 @@ import {
   h,
   type PropType,
   ref,
+  type SlotsType,
   Transition,
+  type VNode,
   watchEffect
 } from 'vue'
 import { NBaseLoading } from '../../_internal'
@@ -55,9 +57,16 @@ export const spinProps = {
 
 export type SpinProps = ExtractPublicPropTypes<typeof spinProps>
 
+export interface SpinSlots {
+  default?: () => VNode[]
+  description?: () => VNode[]
+  icon?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Spin',
   props: spinProps,
+  slots: Object as SlotsType<SpinSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {

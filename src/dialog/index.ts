@@ -1,5 +1,6 @@
 export { useDialog, useDialogReactiveList } from './src/composables'
 export { NDialog } from './src/Dialog'
+export type { DialogSlots } from './src/Dialog'
 export { dialogProps } from './src/dialogProps'
 export type { DialogProps } from './src/dialogProps'
 export { dialogProviderProps, NDialogProvider } from './src/DialogProvider'

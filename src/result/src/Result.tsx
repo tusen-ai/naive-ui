@@ -6,7 +6,9 @@ import {
   type CSSProperties,
   defineComponent,
   h,
-  type PropType
+  type PropType,
+  type SlotsType,
+  type VNode
 } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {
@@ -53,9 +55,16 @@ export const resultProps = {
 
 export type ResultProps = ExtractPublicPropTypes<typeof resultProps>
 
+export interface ResultSlots {
+  default?: () => VNode[]
+  footer?: () => VNode[]
+  icon?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Result',
   props: resultProps,
+  slots: Object as SlotsType<ResultSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
