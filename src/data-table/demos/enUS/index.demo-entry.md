@@ -45,7 +45,7 @@ summary.vue
 ellipsis.vue
 ellipsis-tooltip.vue
 expand.vue
-render-header
+render-header.vue
 custom-style.vue
 ajax-usage
 virtual.vue

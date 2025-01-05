@@ -9,7 +9,7 @@ import type { DataTableColumns } from 'naive-ui'
 import { NButton, NTag, useMessage } from 'naive-ui'
 import { defineComponent, h } from 'vue'
 
-interface RawData {
+interface RowData {
   key: number
   name: string
   age: number
@@ -18,14 +18,14 @@ interface RawData {
 }
 
 interface SendMail {
-  (rowData: RawData): void
+  (rowData: RowData): void
 }
 
 function createColumns({
   sendMail
 }: {
   sendMail: SendMail
-}): DataTableColumns<RawData> {
+}): DataTableColumns<RowData> {
   return [
     {
       title: 'Name',
@@ -84,7 +84,7 @@ function createColumns({
   ]
 }
 
-function createData(): RawData[] {
+function createData(): RowData[] {
   return [
     {
       key: 0,
@@ -113,7 +113,7 @@ function createData(): RawData[] {
 export default defineComponent({
   setup() {
     const message = useMessage()
-    function sendMail(rowData: RawData) {
+    function sendMail(rowData: RowData) {
       message.info(`send mail to ${rowData.name}`)
     }
     return {
