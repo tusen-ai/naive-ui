@@ -9,6 +9,7 @@
 ### i18n
 
 - 添加 kmKH 国际化
+- 添加 ugCN 国际化
 
 ### Features
 

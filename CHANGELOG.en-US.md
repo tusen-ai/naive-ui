@@ -9,6 +9,7 @@
 ### i18n
 
 - Add kmKH locale.
+- Add ugCN locale.
 
 ### Features
 
