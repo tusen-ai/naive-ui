@@ -59,7 +59,7 @@ Provided since `2.38.0`.
 | block-scroll | `boolean` | `true` | Whether to disabled body scrolling when it's active. | 2.28.3 |
 | close-on-esc | `boolean` | `true` | Whether to close modal on Esc is pressed. | 2.24.2 |
 | display-directive | `'if' \| 'show'` | `'if'` | Use which directive to control the rendering of modal body. |  |
-| draggable | `boolean \| { bounds?: 'window' }` | `false` | Whether the modal is draggable. Make its position not bound inside window using `bounds === 'none'`. | NEXT_VERSION |
+| draggable | `boolean \| { bounds?: 'window' }` | `false` | Whether the modal is draggable. Make its position not bound inside window using `bounds === 'none'`. | 2.41.0 |
 | mask-closable | `boolean` | `true` | Whether to emit `hide` event when click mask. |  |
 | preset | `'dialog' \| 'card'` | `undefined` | The preset of `n-modal`. |  |
 | show | `boolean` | `false` | Whether to show modal. |  |

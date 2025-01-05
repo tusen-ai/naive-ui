@@ -78,7 +78,7 @@ rtl-debug.vue
 | content | `string \| (() => VNodeChild)` | `undefined` | 对话框内容，可以是渲染函数 |  |
 | contentClass | `string` | `undefined` | 内容的类名 | 2.38.2 |
 | contentStyle | `Object \| string` | `undefined` | 内容的样式 | 2.38.2 |
-| draggable | `boolean \| { bounds?: 'none' }` | `false` | 是否可拖拽 | NEXT_VERSION |
+| draggable | `boolean \| { bounds?: 'none' }` | `false` | 是否可拖拽 | 2.41.0 |
 | iconPlacement | `'left' \| 'top'` | `'left'` | 图标的位置 |  |
 | icon | `() => VNodeChild` | `undefined` | 对话框 `icon`, 需要是渲染函数 |  |
 | loading | `boolean` | `false` | 是否显示 `loading` 状态 |  |
