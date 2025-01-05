@@ -28,7 +28,7 @@ empty.vue
 border.vue
 size.vue
 row-props.vue
-merge-cell
+merge-cell.vue
 filter-and-sorter
 pagination-behavior-on-filter.vue
 multiple-sorter
