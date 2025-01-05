@@ -76,7 +76,7 @@ use-dialog-reactive-list.vue
 | content | `string \| (() => VNodeChild)` | `undefined` | Content, can be a render function. |  |
 | contentClass | `string` | `undefined` | The class name of the content. | 2.38.2 |
 | contentStyle | `Object \| string` | `undefined` | The style of the content. | 2.38.2 |
-| draggable | `boolean \| { bounds?: 'none' }` | `false` | Whether it is draggable. | NEXT_VERSION |
+| draggable | `boolean \| { bounds?: 'none' }` | `false` | Whether it is draggable. | 2.41.0 |
 | iconPlacement | `'left' \| 'top'` | `'left'` | Icon placement. |  |
 | icon | `() => VNodeChild` | `undefined` | `Render` function of `icon`. |  |
 | loading | `boolean` | `false` | Whether to display `loading` status. |  |

@@ -74,7 +74,7 @@ mask-click-debug.vue
 | block-scroll | `boolean` | `true` | 是否在打开时禁用 body 滚动 | 2.28.3 |
 | close-on-esc | `boolean` | `true` | 是否在摁下 Esc 键的时候关闭 Modal | 2.24.2 |
 | display-directive | `'if' \| 'show'` | `'if'` | 使用何种指令控制模态框主体的条件渲染 |  |
-| draggable | `boolean \| { bounds?: 'none' }` | `false` | 是否可拖拽，`bounds === 'none'` 时拖拽可超出视口 | NEXT_VERSION |
+| draggable | `boolean \| { bounds?: 'none' }` | `false` | 是否可拖拽，`bounds === 'none'` 时拖拽可超出视口 | 2.41.0 |
 | mask-closable | `boolean` | `true` | 点击遮罩时是否发出 `update:show` 事件 |  |
 | preset | `'dialog' \| 'card'` | `undefined` | 模态框使用何种预设 |  |
 | show | `boolean` | `false` | 是否展示 Modal |  |
