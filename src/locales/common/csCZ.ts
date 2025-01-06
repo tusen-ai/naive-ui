@@ -25,7 +25,7 @@ const csCZ: NLocale = {
   DatePicker: {
     yearFormat: 'yyyy',
     monthFormat: 'MMM',
-    dayFormat: 'EEEE',
+    dayFormat: 'EEEEEE',
     yearTypeFormat: 'yyyy',
     monthTypeFormat: 'MMM-yyyy',
     dateFormat: 'd-M-yyyy',
