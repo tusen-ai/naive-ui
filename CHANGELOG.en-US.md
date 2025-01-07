@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-tab-pane` slots type error.
+
 ## 2.41.0
 
 ### Breaking Changes

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-tab-pane` 插槽的类型错误问题
+
 ## 2.41.0
 
 `2025-01-05`
