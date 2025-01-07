@@ -41,8 +41,7 @@ export type TabPaneProps = ExtractPublicPropTypes<typeof tabPaneProps>
 
 export interface TabPaneSlots {
   default?: () => VNode[]
-  prefix?: () => VNode[]
-  suffix?: () => VNode[]
+  tab?: () => VNode[]
 }
 
 export default defineComponent({
