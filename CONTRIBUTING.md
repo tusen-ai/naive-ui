@@ -3,13 +3,25 @@
 - For new features & bug fixes, please create pull request to `main` branch.
 - For documentation, please create pull request to `docs` branch.
 
+## Recommend Tool
+
+- [fnm](https://github.com/Schniz/fnm) to manage node version
+- [corepack](https://github.com/nodejs/corepack) to manage packageManager version
+
+```bash
+# set node version to 22 or above
+fnm use v22
+# prepreck package manager
+corepack enable&&corepack prepare
+```
+
 ## Useful Commands
 
 ```bash
 # open the dev server, please note that hot module reload doesn't work well
 # if you find anything doesn't work, just refresh the page
 # if you aren't able to open the page at the first time, try to refresh a couple of times
-# pnpm version 7.0.0 and above is required
+# The version of the package manager must match the version specified in the packageManager field of package.json.
 pnpm run dev
 
 # testing
@@ -29,6 +41,9 @@ pnpm run lint:type
 
 # lint code & type
 pnpm run lint
+
+# lint auto fix
+pnpm lint:fix
 
 # build site (if vercel preview failed, you might need to run `git clean -fdx` first)
 pnpm run build:site
