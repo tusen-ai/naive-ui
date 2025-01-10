@@ -1,5 +1,5 @@
 <markdown>
-# Customized rendering
+# Customized option rendering
 
 The `render-label` can be used to batch render cascader menu options.
 </markdown>

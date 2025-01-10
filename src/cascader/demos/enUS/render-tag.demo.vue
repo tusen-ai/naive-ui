@@ -1,12 +1,32 @@
 <markdown>
-# 自定义选项渲染
+# Customize tag rendering
 
-使用 `render-label` 可以批量控制 cascader 菜单的选项渲染。
+Give the tag a little color.
 </markdown>
 
-<script lang="ts">
-import type { CascaderOption } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { h } from 'vue'
+import type { CascaderOption, CascaderRenderTag } from 'naive-ui'
+import { NTag } from 'naive-ui'
+
+const tagTypes = ['success', 'warning', 'error'] as const
+const renderTag: CascaderRenderTag = ({ option, handleClose }) => {
+  const { level, label } = option
+  return h(
+    NTag,
+    {
+      type: tagTypes[(level as number) - 1],
+      closable: (level as number) === 1,
+      onClose: (e: MouseEvent) => {
+        e.stopPropagation()
+        handleClose()
+      }
+    },
+    { default: () => label }
+  )
+}
+
+const options = getOptions()
 
 function getOptions(depth = 3, iterator = 1, prefix = '') {
   const length = 12
@@ -16,6 +36,7 @@ function getOptions(depth = 3, iterator = 1, prefix = '') {
       options.push({
         value: `v-${i}`,
         label: `l-${i}`,
+        level: iterator,
         disabled: i % 5 === 0,
         children: getOptions(depth, iterator + 1, `${String(i)}`)
       })
@@ -24,6 +45,7 @@ function getOptions(depth = 3, iterator = 1, prefix = '') {
       options.push({
         value: `v-${prefix}-${i}`,
         label: `l-${prefix}-${i}`,
+        level: iterator,
         disabled: i % 5 === 0
       })
     }
@@ -32,36 +54,15 @@ function getOptions(depth = 3, iterator = 1, prefix = '') {
         value: `v-${prefix}-${i}`,
         label: `l-${prefix}-${i}`,
         disabled: i % 5 === 0,
+        level: iterator,
         children: getOptions(depth, iterator + 1, `${prefix}-${i}`)
       })
     }
   }
   return options
 }
-
-export default defineComponent({
-  setup() {
-    return {
-      value: ref(null),
-      options: getOptions(),
-      handleUpdateValue(...args: unknown[]) {
-        console.log(...args)
-      },
-      renderLabel(option: { value?: string | number, label?: string }) {
-        return `prefix ${option.label}`
-      }
-    }
-  }
-})
 </script>
 
 <template>
-  <n-cascader
-    v-model:value="value"
-    placeholder="没啥用的值"
-    :options="options"
-    :filterable="true"
-    :render-label="renderLabel"
-    @update:value="handleUpdateValue"
-  />
+  <n-cascader multiple clearable :render-tag="renderTag" :options="options" />
 </template>
