@@ -31,6 +31,7 @@ import {
   defineComponent,
   h,
   type HTMLAttributes,
+  type InputHTMLAttributes,
   isReactive,
   nextTick,
   type PropType,
@@ -137,6 +138,7 @@ export const cascaderProps = {
   ellipsisTagPopoverProps: Object as PropType<PopoverProps>,
   menuProps: Object as PropType<HTMLAttributes>,
   filterMenuProps: Object as PropType<HTMLAttributes>,
+  inputProps: Object as PropType<InputHTMLAttributes>,
   virtualScroll: {
     type: Boolean,
     default: true
@@ -1097,6 +1099,7 @@ export default defineComponent({
                       onResize={this.handleTriggerResize}
                       ref="triggerInstRef"
                       status={this.mergedStatus}
+                      inputProps={this.inputProps}
                       clsPrefix={mergedClsPrefix}
                       maxTagCount={this.maxTagCount}
                       ellipsisTagPopoverProps={this.ellipsisTagPopoverProps}
