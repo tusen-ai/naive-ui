@@ -47,6 +47,7 @@ feedback-style.vue
 | require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | 必填星号的位置 | `'right-hanging'` 2.24.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
 | validate-messages | `FormValidateMessages` | `undefined` | `async-validator` 的默认验证信息 | 2.27.0 |
+| on-validate | `(path: string \| undefined, result: FormItemValidateResult) => void` | `-` | 任一表项被校验后执行的回调 | NEXT_VERSION |
 
 #### FormItemRule Type
 

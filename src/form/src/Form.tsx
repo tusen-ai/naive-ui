@@ -4,7 +4,7 @@ import type { FormTheme } from '../styles'
 import type {
   FormInst,
   FormItemInst,
-  FormItemInternalValidateResult,
+  FormItemValidateResult,
   FormRules,
   FormValidateCallback,
   FormValidateMessages,
@@ -62,7 +62,10 @@ export const formProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  validateMessages: Object as PropType<Partial<FormValidateMessages>>
+  validateMessages: Object as PropType<Partial<FormValidateMessages>>,
+  onValidate: Function as PropType<
+    (path: string | undefined, result: FormItemValidateResult) => void
+  >
 } as const
 
 export type FormSetupProps = ExtractPropTypes<typeof formProps>
@@ -94,7 +97,7 @@ export default defineComponent({
       return await new Promise<{ warnings: ValidateError[][] | undefined }>(
         (resolve, reject) => {
           const formItemValidationPromises: Array<
-            Promise<FormItemInternalValidateResult>
+            Promise<FormItemValidateResult>
           > = []
           for (const key of keysOf(formItems)) {
             const formItemInstances = formItems[key]
