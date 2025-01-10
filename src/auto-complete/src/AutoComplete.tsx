@@ -258,11 +258,11 @@ export default defineComponent({
         if (props.clearAfterSelect) {
           doUpdateValue(null)
         }
-        else if (option.label !== undefined) {
+        else {
           doUpdateValue(
             props.append
-              ? `${mergedValueRef.value}${option.label}`
-              : option.label
+              ? `${mergedValueRef.value}${option.value}`
+              : option.value
           )
         }
         canBeActivatedRef.value = false
