@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### NEXT_VERSION
+
+### Features
+
+- `n-form` 新增 `on-validate` 属性, 关闭 [#5883](https://github.com/tusen-ai/naive-ui/issues/5883)
+
 ## 2.41.0
 
 `2025-01-05`

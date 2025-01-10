@@ -3,11 +3,11 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import type {
   FormItemInst,
   FormItemInternalValidate,
-  FormItemInternalValidateResult,
   FormItemRule,
   FormItemRuleValidator,
   FormItemRuleValidatorParams,
   FormItemValidateOptions,
+  FormItemValidateResult,
   LabelAlign,
   LabelPlacement,
   ShouldRuleBeApplied,
@@ -262,7 +262,7 @@ export default defineComponent({
         r => r.level === 'warning'
       )
 
-      const validationResult: FormItemInternalValidateResult = {
+      const validationResult: FormItemValidateResult = {
         valid: true,
         errors: undefined,
         warnings: undefined
@@ -277,7 +277,7 @@ export default defineComponent({
       const warningValidator = new Schema({
         [mergedPath]: activeWarningRules as RuleItem[]
       })
-      const { validateMessages } = NForm?.props || {}
+      const { validateMessages, onValidate } = NForm?.props || {}
       if (validateMessages) {
         validator.messages(validateMessages)
         warningValidator.messages(validateMessages)
@@ -339,6 +339,9 @@ export default defineComponent({
         validationWarnedRef.value = !!validationResult.warnings
       }
 
+      if (onValidate && activeRules.length > 0) {
+        onValidate(path, validationResult)
+      }
       return validationResult
     }
     function handleContentBlur(): void {

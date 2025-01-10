@@ -5,7 +5,7 @@
 </markdown>
 
 <script lang="ts">
-import type { FormInst } from 'naive-ui'
+import type { FormInst, FormItemValidateResult } from 'naive-ui'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -33,6 +33,9 @@ export default defineComponent({
             return rule?.key === 'a'
           }
         )
+      },
+      handleValidate(path: string | undefined, result: FormItemValidateResult) {
+        console.log('validate', path, result)
       },
       formInstRef,
       model: ref({
@@ -70,7 +73,12 @@ export default defineComponent({
         清空验证
       </n-button>
     </n-space>
-    <n-form ref="formInstRef" :model="model" :rules="rules">
+    <n-form
+      ref="formInstRef"
+      :model="model"
+      :rules="rules"
+      @validate="handleValidate"
+    >
       <n-form-item label="最短长度为 3" path="fieldA">
         <n-input v-model:value="model.fieldA" />
       </n-form-item>
