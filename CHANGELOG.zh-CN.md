@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### NEXT_VERSION
+
+### Features
+
+- `n-infinite` 新增 `reverse` 属性，关闭 [#6308](https://github.com/tusen-ai/naive-ui/issues/6308)
+
 ## 2.41.0
 
 `2025-01-05`

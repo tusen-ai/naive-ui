@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### NEXT_VERSION
+
+### Features
+
+- `n-infinite` adds `reverse` prop，closes [#6308](https://github.com/tusen-ai/naive-ui/issues/6308)
+
 ## 2.41.0
 
 ### Breaking Changes
