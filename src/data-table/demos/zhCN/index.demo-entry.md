@@ -31,7 +31,7 @@ row-props.vue
 merge-cell.vue
 filter-and-sorter
 pagination-behavior-on-filter.vue
-multiple-sorter
+multiple-sorter.vue
 column-draggable.vue
 select.vue
 select-single.vue
