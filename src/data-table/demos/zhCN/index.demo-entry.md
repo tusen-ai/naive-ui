@@ -40,7 +40,7 @@ group-header.vue
 controlled-page.vue
 controlled-filter.vue
 controlled-sorter.vue
-controlled-multiple-sorter
+controlled-multiple-sorter.vue
 fixed-header.vue
 fixed-header-column.vue
 summary.vue

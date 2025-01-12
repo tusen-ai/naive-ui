@@ -1,22 +1,30 @@
+<markdown>
 # Controlled multi-column sorting
 
 If column object's `sortOrder` is set to `'ascend'`, `'descend'` or `false`, the data table would be in controlled state.
 
 If you only want UI to display multiple sort state, you can leave `compare` empty.
+</markdown>
 
-```html
-<n-data-table
-  :columns="columns"
-  :data="data"
-  :pagination="pagination"
-  @update:sorter="handleUpdateSorter"
-/>
-```
-
-```js
+<script lang="ts">
+import type {
+  DataTableColumnKey,
+  DataTableColumns,
+  DataTableSortOrder,
+  DataTableSortState
+} from 'naive-ui'
 import { computed, defineComponent, ref } from 'vue'
 
-const data = [
+interface RowData {
+  key: number
+  name: string
+  age: number
+  chinese: number
+  math: number
+  english: number
+}
+
+const data: RowData[] = [
   {
     key: 0,
     name: 'John Brown',
@@ -53,16 +61,24 @@ const data = [
 
 export default defineComponent({
   setup() {
-    const sortStatesRef = ref([])
-    const sortKeyMapOrderRef = computed(() =>
-      sortStatesRef.value.reduce((result, { columnKey, order }) => {
-        result[columnKey] = order
-        return result
-      }, {})
+    const sortStatesRef = ref<DataTableSortState[]>([])
+    const sortKeyMapOrderRef = computed<
+      Record<DataTableColumnKey, DataTableSortOrder>
+    >(() =>
+      sortStatesRef.value.reduce(
+        (
+          result: Record<DataTableColumnKey, DataTableSortOrder>,
+          { columnKey, order }
+        ) => {
+          result[columnKey] = order
+          return result
+        },
+        {}
+      )
     )
     const paginationRef = ref({ pageSize: 5 })
 
-    const columnsRef = computed(() => [
+    const columnsRef = computed<DataTableColumns<RowData>>(() => [
       {
         title: 'Name',
         key: 'name'
@@ -104,9 +120,9 @@ export default defineComponent({
       }
     ])
 
-    function handleUpdateSorter(sorters) {
+    function handleUpdateSorter(sorters: DataTableSortState[]) {
       console.log(sorters)
-      sortStatesRef.value = [].concat(sorters)
+      sortStatesRef.value = ([] as DataTableSortState[]).concat(sorters)
     }
     return {
       columns: columnsRef,
@@ -116,4 +132,13 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
+
+<template>
+  <n-data-table
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+    @update:sorter="handleUpdateSorter"
+  />
+</template>
