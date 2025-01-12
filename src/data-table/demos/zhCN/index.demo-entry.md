@@ -29,7 +29,7 @@ border.vue
 size.vue
 row-props.vue
 merge-cell.vue
-filter-and-sorter
+filter-and-sorter.vue
 pagination-behavior-on-filter.vue
 multiple-sorter.vue
 column-draggable.vue
