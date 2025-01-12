@@ -6,6 +6,7 @@ export interface UploadInst {
   openOpenFileDialog: () => void
   submit: (fileId?: string) => void
   clear: () => void
+  abort: (fileId?: string) => void
 }
 
 export interface UploadFileInfo {

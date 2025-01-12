@@ -499,6 +499,46 @@ export default defineComponent({
         warn('upload', 'File has no corresponding id in current file list.')
       }
     }
+    function doRemove(file: UploadSettledFileInfo, index: number): void {
+      void Promise.resolve(
+        props.onRemove
+          ? props.onRemove({
+              file: Object.assign({}, file),
+              fileList: mergedFileListRef.value,
+              index
+            })
+          : true
+      ).then((result) => {
+        if (result === false)
+          return
+        const fileAfterChange = Object.assign({}, file, {
+          status: 'removed'
+        })
+        xhrMap.delete(file.id)
+        doChange(fileAfterChange, undefined, {
+          remove: true
+        })
+      })
+    }
+    function doAbort(fileId?: string): void {
+      const fileIdsToBeRemoved: string[] = []
+      if (fileId === undefined) {
+        xhrMap.forEach((xhr, key) => {
+          xhr.abort()
+          fileIdsToBeRemoved.push(key)
+        })
+      }
+      else {
+        xhrMap.get(fileId)?.abort()
+        fileIdsToBeRemoved.push(fileId)
+      }
+      const fileList = mergedFileListRef.value.filter(file =>
+        fileIdsToBeRemoved.includes(file.id)
+      )
+      fileList.forEach((file, index) => {
+        doRemove(file, index)
+      })
+    }
     function handleFileAddition(
       fileAndEntries: FileAndEntry[] | null,
       e?: Event
@@ -708,6 +748,8 @@ export default defineComponent({
       xhrMap,
       submit,
       doChange,
+      doRemove,
+      doAbort,
       showPreviewButtonRef: toRef(props, 'showPreviewButton'),
       onPreviewRef: toRef(props, 'onPreview'),
       getFileThumbnailUrlResolver,
@@ -738,7 +780,8 @@ export default defineComponent({
         uncontrolledFileListRef.value = []
       },
       submit,
-      openOpenFileDialog
+      openOpenFileDialog,
+      abort: doAbort
     }
 
     return {

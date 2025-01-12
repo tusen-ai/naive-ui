@@ -70,6 +70,8 @@ export interface UploadInjection {
   triggerClassRef: Ref<string | undefined>
   triggerStyleRef: Ref<CSSProperties | string | undefined>
   doChange: DoChange
+  doRemove: (file: UploadSettledFileInfo, index: number) => void
+  doAbort: (fileId?: string) => void
   onRender: undefined | (() => void)
   submit: (fileId?: string) => void
   onRetryRef: Ref<undefined | OnRetry>
