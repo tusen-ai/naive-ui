@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- `n-upload` adds `abort` method, closes [#3881](https://github.com/tusen-ai/naive-ui/issues/3881).
+
 ## 2.41.0
 
 ### Breaking Changes
