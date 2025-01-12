@@ -29,7 +29,8 @@ import {
 import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
 import {
   type IntersectionObserverOptions,
-  observeIntersection
+  observeIntersection,
+  resolveOptionsAndHash
 } from '../../image/src/utils'
 import { tagInjectionKey } from '../../tag/src/Tag'
 import { avatarLight } from '../styles'
@@ -208,23 +209,43 @@ export default defineComponent({
     const shouldStartLoadingRef = ref(!props.lazy)
 
     onMounted(() => {
-      // Use IntersectionObserver if lazy and intersectionObserverOptions is set
+      // Use IntersectionObserver if lazy is enabled and intersectionObserverOptions are configured
       if (props.lazy && props.intersectionObserverOptions) {
-        let unobserve: (() => void) | undefined
+        // Observe image
+        const imageShouldStartLoading = ref(false)
+        let unobserveImage: (() => void) | undefined
         const stopWatchHandle = watchEffect(() => {
-          unobserve?.()
-          unobserve = undefined
-          if (props.lazy) {
-            unobserve = observeIntersection(
-              selfRef.value,
-              props.intersectionObserverOptions,
-              shouldStartLoadingRef
-            )
-          }
+          unobserveImage?.()
+          unobserveImage = undefined
+          unobserveImage = observeIntersection(
+            selfRef.value,
+            props.intersectionObserverOptions,
+            imageShouldStartLoading
+          )
+        })
+        // Observe root if options.root is configured
+        const rootShouldStartLoading = ref(false)
+        const hasObserveRoot = !!props.intersectionObserverOptions?.root
+        let unobserveRoot: (() => void) | undefined
+        if (hasObserveRoot) {
+          const rootObserverOptions = resolveOptionsAndHash(
+            props.intersectionObserverOptions
+          ).options
+          unobserveRoot = observeIntersection(
+            rootObserverOptions.root as HTMLElement,
+            undefined,
+            rootShouldStartLoading
+          )
+        }
+        watchEffect(() => {
+          shouldStartLoadingRef.value = hasObserveRoot
+            ? rootShouldStartLoading.value && imageShouldStartLoading.value
+            : imageShouldStartLoading.value
         })
         onBeforeUnmount(() => {
           stopWatchHandle()
-          unobserve?.()
+          unobserveImage?.()
+          unobserveRoot?.()
         })
       }
     })
@@ -251,8 +272,6 @@ export default defineComponent({
       shouldStartLoading: shouldStartLoadingRef,
       loaded: loadedRef,
       mergedOnError: (e: Event) => {
-        if (!shouldStartLoadingRef.value)
-          return
         hasLoadErrorRef.value = true
         const { onError, imgProps: { onError: imgPropsOnError } = {} } = props
         onError?.(e)
@@ -309,7 +328,7 @@ export default defineComponent({
           )
         }
         else if (src || imgProps.src) {
-          const loadSrc = this.src || imgProps.src
+          const loadSrc = src || imgProps.src
           return h('img', {
             ...imgProps,
             loading:

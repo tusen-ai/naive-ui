@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-image` 和 `n-avatar` 单独设置 `lazy` 时未触发 `error` 事件
+
 ## 2.41.0
 
 `2025-01-05`

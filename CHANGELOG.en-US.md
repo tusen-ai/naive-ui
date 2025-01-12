@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### NEXT_VERSION
+
+### Fixes
+
+- Fix `n-image` and `n-avatar` not trigger `error` event when set `lazy` prop only.
+
 ## 2.41.0
 
 ### Breaking Changes
