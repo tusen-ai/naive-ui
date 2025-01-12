@@ -18,13 +18,13 @@ export function resolveOptionsAndHash(
     hash: `${options.rootMargin || '0px 0px 0px 0px'}-${
       Array.isArray(options.threshold)
         ? options.threshold.join(',')
-        : (options.threshold ?? '0')
+        : options.threshold ?? '0'
     }`,
     options: {
       ...options,
       root:
         (typeof root === 'string' ? document.querySelector(root) : root)
-        || document.documentElement
+        || document
     }
   }
 }
@@ -36,7 +36,7 @@ const observers = new WeakMap<
 >()
 
 const unobserveHandleMap = new WeakMap<HTMLElement, () => void>()
-const shouldStartLoadingRefMap = new WeakMap<HTMLElement, Ref<boolean>>()
+const shouldStartLoadingRefMap = new WeakMap<HTMLElement, Set<Ref<boolean>>>()
 
 export const observeIntersection: (
   el: HTMLElement | null,
@@ -81,13 +81,15 @@ export const observeIntersection: (
           const _unobserve = unobserveHandleMap.get(
             entry.target as HTMLImageElement
           )
-          const _shouldStartLoadingRef = shouldStartLoadingRefMap.get(
+          const _shouldStartLoadingRefs = shouldStartLoadingRefMap.get(
             entry.target as HTMLImageElement
           )
           if (_unobserve)
             _unobserve()
-          if (_shouldStartLoadingRef) {
-            _shouldStartLoadingRef.value = true
+          if (_shouldStartLoadingRefs) {
+            _shouldStartLoadingRefs.forEach((loadingRef) => {
+              loadingRef.value = true
+            })
           }
         }
       })
@@ -115,6 +117,12 @@ export const observeIntersection: (
     }
   }
   unobserveHandleMap.set(el, unobserve)
-  shouldStartLoadingRefMap.set(el, shouldStartLoadingRef)
+  if (shouldStartLoadingRefMap.has(el)) {
+    const _shouldStartLoadingRefs = shouldStartLoadingRefMap.get(el)!
+    _shouldStartLoadingRefs.add(shouldStartLoadingRef)
+  }
+  else {
+    shouldStartLoadingRefMap.set(el, new Set([shouldStartLoadingRef]))
+  }
   return unobserve
 }
