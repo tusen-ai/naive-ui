@@ -11,6 +11,7 @@ export type {
   CreateRowProps as DataTableCreateRowProps,
   CreateSummary as DataTableCreateSummary,
   TableExpandColumn as DataTableExpandColumn,
+  FilterOptionValue as DataTableFilterOptionValue,
   FilterState as DataTableFilterState,
   DataTableInst,
   DataTableProps,

@@ -47,7 +47,7 @@ ellipsis-tooltip.vue
 expand.vue
 render-header.vue
 custom-style.vue
-ajax-usage
+ajax-usage.vue
 virtual.vue
 virtual-x.vue
 custom-filter-menu.vue
