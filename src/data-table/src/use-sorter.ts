@@ -220,7 +220,10 @@ export function useSorter(
     uncontrolledSortStateRef.value = sortState
   }
 
-  function sort(columnKey: ColumnKey, order: SortOrder = 'ascend'): void {
+  function sort(
+    columnKey: ColumnKey | null,
+    order: SortOrder = 'ascend'
+  ): void {
     if (!columnKey) {
       clearSorter()
     }

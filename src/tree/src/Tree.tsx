@@ -86,9 +86,9 @@ export function createTreeMateOptions<T>(
 ): TreeMateOptions<T, T, T> {
   const settledGetChildren: GetChildren
     = getChildren
-    || ((node: T) => {
-      return (node as any)[childrenField]
-    })
+      || ((node: T) => {
+        return (node as any)[childrenField]
+      })
   return {
     getIsGroup() {
       return false

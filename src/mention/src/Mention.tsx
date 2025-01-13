@@ -404,8 +404,8 @@ export default defineComponent({
       props.onSelect?.(tmNode.rawNode as MentionOption, cachedPrefix)
       const nextSelectionEnd
         = cachedPartialPatternStart
-        + nextMiddlePart.length
-        + (alreadySeparated ? 1 : 0)
+          + nextMiddlePart.length
+          + (alreadySeparated ? 1 : 0)
       void nextTick().then(() => {
         // input value is updated
         inputEl.selectionStart = nextSelectionEnd

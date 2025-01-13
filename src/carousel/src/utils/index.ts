@@ -9,12 +9,12 @@ export function calculateSize(element: HTMLElement, innerOnly?: boolean): Size {
     const style = getComputedStyle(element)
     width
       = width
-      - Number.parseFloat(style.getPropertyValue('padding-left'))
-      - Number.parseFloat(style.getPropertyValue('padding-right'))
+        - Number.parseFloat(style.getPropertyValue('padding-left'))
+        - Number.parseFloat(style.getPropertyValue('padding-right'))
     height
       = height
-      - Number.parseFloat(style.getPropertyValue('padding-top'))
-      - Number.parseFloat(style.getPropertyValue('padding-bottom'))
+        - Number.parseFloat(style.getPropertyValue('padding-top'))
+        - Number.parseFloat(style.getPropertyValue('padding-bottom'))
   }
   return { width, height }
 }

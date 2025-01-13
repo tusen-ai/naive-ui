@@ -99,7 +99,7 @@ export default defineComponent({
           if (triggerInner) {
             tooltipDisabled
               = triggerInner.getBoundingClientRect().width
-              <= trigger.getBoundingClientRect().width
+                <= trigger.getBoundingClientRect().width
           }
         }
         syncCursorStyle(trigger, tooltipDisabled)

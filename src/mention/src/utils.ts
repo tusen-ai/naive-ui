@@ -168,9 +168,9 @@ export function getRelativePosition(
         const height = Number.parseInt(computed.height as string)
         const outerHeight
           = Number.parseInt(computed.paddingTop as string)
-          + Number.parseInt(computed.paddingBottom as string)
-          + Number.parseInt(computed.borderTopWidth as string)
-          + Number.parseInt(computed.borderBottomWidth as string)
+            + Number.parseInt(computed.paddingBottom as string)
+            + Number.parseInt(computed.borderTopWidth as string)
+            + Number.parseInt(computed.borderBottomWidth as string)
         const targetHeight
           = outerHeight + Number.parseInt(computed.lineHeight as string)
         if (height > targetHeight) {
@@ -263,13 +263,13 @@ export function setElementPositionBasedOnCaret(
   if (detectBoundary) {
     pos.left
       = pos.left + (element.clientWidth + margin) + offset.left
-      > window.scrollX + window.innerWidth
+        > window.scrollX + window.innerWidth
         ? (pos.left
             = window.scrollX + window.innerWidth - (element.clientWidth + margin))
         : (pos.left += offset.left)
     pos.top
       = pos.top + (element.clientWidth + margin) + offset.top
-      > window.scrollY + window.innerHeight
+        > window.scrollY + window.innerHeight
         ? (pos.top -= element.clientWidth + margin)
         : (pos.top += offset.top)
   }
