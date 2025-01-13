@@ -1,6 +1,6 @@
-<mardown>
+<markdown>
   # Uncontrolled filter and sorter
-</mardown>
+</markdown>
 
 <script lang="ts">
 import type { DataTableColumns, DataTableInst } from 'naive-ui'
