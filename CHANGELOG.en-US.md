@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-marquee` component Non-function value encountered for default slot warning.
+
 ## 2.41.0
 
 ### Breaking Changes
