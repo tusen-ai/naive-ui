@@ -95,11 +95,15 @@ export default defineComponent({
     } = this
     const originalNode = (
       <VResizeObserver onResize={this.handleContentResize}>
-        <div
-          class={`${mergedClsPrefix}-marquee__item ${mergedClsPrefix}-marquee__original-item`}
-        >
-          {$slots}
-        </div>
+        {{
+          default: () => (
+            <div
+              class={`${mergedClsPrefix}-marquee__item ${mergedClsPrefix}-marquee__original-item`}
+            >
+              {$slots}
+            </div>
+          )
+        }}
       </VResizeObserver>
     )
     const mirrorNode = (
@@ -108,22 +112,26 @@ export default defineComponent({
     if (this.autoFill) {
       return (
         <VResizeObserver onResize={this.handleContainerResize}>
-          <div
-            class={`${mergedClsPrefix}-marquee ${mergedClsPrefix}-marquee--auto-fill`}
-            ref="containerElRef"
-            style={animationCssVars}
-          >
-            <div
-              class={`${mergedClsPrefix}-marquee__group`}
-              onAnimationiteration={handleAnimationIteration}
-            >
-              {originalNode}
-              {repeat(repeatCountInOneGroup - 1, mirrorNode)}
-            </div>
-            <div class={`${mergedClsPrefix}-marquee__group`}>
-              {repeat(repeatCountInOneGroup, mirrorNode)}
-            </div>
-          </div>
+          {{
+            default: () => (
+              <div
+                class={`${mergedClsPrefix}-marquee ${mergedClsPrefix}-marquee--auto-fill`}
+                ref="containerElRef"
+                style={animationCssVars}
+              >
+                <div
+                  class={`${mergedClsPrefix}-marquee__group`}
+                  onAnimationiteration={handleAnimationIteration}
+                >
+                  {originalNode}
+                  {repeat(repeatCountInOneGroup - 1, mirrorNode)}
+                </div>
+                <div class={`${mergedClsPrefix}-marquee__group`}>
+                  {repeat(repeatCountInOneGroup, mirrorNode)}
+                </div>
+              </div>
+            )
+          }}
         </VResizeObserver>
       )
     }
