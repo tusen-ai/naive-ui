@@ -2,6 +2,7 @@
 
 ## NEXT_VERSION
 
+
 ### Fixes
 
 - 修复 `n-tabs` TabPane tab slots 的类型异常
@@ -9,6 +10,7 @@
 
 ### Features
 
+- `n-data-table` 新增 `sticky-summary`、`summary-max-height` 属性，用于支持表格内容滚动时，总结栏固定不动，关闭 [#6585](https://github.com/tusen-ai/naive-ui/issues/6585)、[#6432](https://github.com/tusen-ai/naive-ui/issues/6432)、[#6170](https://github.com/tusen-ai/naive-ui/issues/6170)、[#2814](https://github.com/tusen-ai/naive-ui/issues/2814)
 - `n-upload` 新增 `custom-download` 属性，关闭 [#5946](https://github.com/tusen-ai/naive-ui/issues/5946)、[#6800](https://github.com/tusen-ai/naive-ui/issues/6800)
 - `n-upload` 新增 `uploadDownload` 工具方法
 - `n-tree-select` 新增 `indent` 属性

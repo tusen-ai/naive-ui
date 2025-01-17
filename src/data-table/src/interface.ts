@@ -43,6 +43,8 @@ export const dataTableProps = {
   },
   minHeight: [Number, String] as PropType<string | number>,
   maxHeight: [Number, String] as PropType<string | number>,
+  summaryMaxHeight: [Number, String] as PropType<string | number>,
+  stickySummary: Boolean,
   // Use any type as row data to make prop data acceptable
   columns: {
     type: Array as PropType<TableColumns<any>>,
@@ -413,6 +415,8 @@ export interface DataTableInjection {
   mergedTableLayoutRef: Ref<'auto' | 'fixed'>
   maxHeightRef: Ref<string | number | undefined>
   minHeightRef: Ref<string | number | undefined>
+  summaryMaxHeightRef: Ref<string | number | undefined>
+  stickySummaryRef: Ref<boolean>
   rowPropsRef: Ref<CreateRowProps | undefined>
   flexHeightRef: Ref<boolean>
   headerCheckboxDisabledRef: Ref<boolean>
