@@ -121,6 +121,8 @@ rtl-debug.vue
 | striped | `boolean` | `false` | 是否使用斑马线条纹 |  |
 | summary | `DataTableCreateSummary` | `undefined` | 表格总结栏的数据，类型见 <n-a href="#DataTableCreateSummary-Type">DataTableCreateSummary Type</n-a> |  |
 | summary-placement | `'top' \| 'bottom'` | `'bottom'` | 总结栏的位置 | 2.33.3 |
+| sticky-summary | `boolean` | `false` | 总结栏是否不随表格纵向滚动 | NEXT_VERSION |
+| summary-max-height | `number \| string` | `undefined` | 当 `sticky-summary` 为 `true` 时，总结栏最大高度，可以是 CSS 属性值 | NEXT_VERSION |
 | table-layout | `'auto' \| 'fixed'` | `'auto'` | 表格的 `table-layout` 样式属性，在设定 `ellipsis` 或 `max-height` 的情况下固定为 `'fixed'` |  |
 | virtual-scroll | `boolean` | `false` | 是否开启虚拟滚动，应对大规模数据，开启前请设定好 `max-height`。当 `virtual-scroll` 为 `true` 时，`rowSpan` 将不生效 |  |
 | virtual-scroll-header | `boolean` | `false` | 是否打开表头的虚拟滚动，如果横向列太多，可以考虑打开此属性，打开此属性会导致表头单元格跨行列的功能不可用，同时必须要配置 `header-height` | 2.40.0 |
