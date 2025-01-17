@@ -86,7 +86,10 @@ export default c([
               flex-grow: 1;
             `, [
               c('>', [
-                cB('data-table-base-table-body', 'flex-basis: 0;', [
+                cB('data-table-base-table-body', `
+                  flex-basis: 0;
+                  flex-grow: 1;
+                `, [
                   // last-child means there is no empty icon
                   // body is a scrollbar, we need to override height 100%
                   c('&:last-child', 'flex-grow: 1;')
@@ -517,6 +520,23 @@ export default c([
         display: none;
         width: 0;
         height: 0;
+      `)
+    ]),
+    cB('data-table-base-table-summary', `
+      z-index: 3;
+      overflow: scroll;
+      flex-shrink: 0;
+      transition: border-color .3s var(--n-bezier);
+      scrollbar-width: none;
+    `, [
+      c('&::-webkit-scrollbar, &::-webkit-scrollbar-track-piece, &::-webkit-scrollbar-thumb', `
+        display: none;
+        width: 0;
+        height: 0;
+      `),
+      cM('bottom', `
+        border-bottom-left-radius: calc(var(--n-border-radius) - 1px);
+        border-bottom-right-radius: calc(var(--n-border-radius) - 1px);
       `)
     ]),
     cB('data-table-check-extra', `
