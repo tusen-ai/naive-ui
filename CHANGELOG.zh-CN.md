@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- `n-data-table`
+  - 增加 `sticky-summary` 属性，支持表格滚动时固定总结栏。
+  - 增加 `summary-max-height` 属性，用于设置 `sticky-summary` 为 `true` 时总结行的最大高度。
+
 ## 2.41.0
 
 `2025-01-05`

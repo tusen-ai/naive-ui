@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- `n-data-table`
+  - Add `sticky-summary` prop to enable sticky summary rows when the table is scrollable.
+  - Add `summary-max-height` prop to set the maximum height of the summary row when `sticky-summary` is `true`.
+
 ## 2.41.0
 
 ### Breaking Changes

@@ -110,6 +110,8 @@ export-csv.vue
 | striped | `boolean` | `false` | Whether to show zebra stripes on rows. |  |
 | summary | `DataTableCreateSummary` | `undefined` | Data of table summary row. For types, see <n-a href="#DataTableCreateSummary-Type">DataTableCreateSummary Type</n-a>. |  |
 | summary-placement | `'top' \| 'bottom'` | `'bottom'` | Summary rows placement. | 2.33.3 |
+| sticky-summary | `boolean` | `false` | Whether the summary rows is sticky when the table is scrollable. | NEXT_VERSION |
+| summary-max-height | `number \| string` | `undefined` | The max-height of the summary rows when `sticky-summary` is set to `true`. Can be a CSS value. | NEXT_VERSION |
 | table-layout | `'auto' \| 'fixed'` | `'auto'` | Style `table-layout` of the table. When `ellipsis` or `max-height` or `flex-height` are set, it will always be `'fixed'` regardless of what you set. |  |
 | virtual-scroll | `boolean` | `false` | Whether to use virtual scrolling to deal with large data. Make sure `max-height` is set before using it. When `virtual-scroll` is `true`, `rowSpan` will not take effect. |  |
 | virtual-scroll-header | `boolean` | `false` | Whether to use virtual scrolling in table header. If there are too many columns, you can enable the prop. You must configure `header-height` at the same time. Enabling the prop will disable header cells that cross columns & rows. | 2.40.0 |
