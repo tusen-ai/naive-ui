@@ -1,11 +1,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { i18n } from '../utils/composables'
+import ChangeLogButton from './ChangeLogButton.vue'
 import EditOnGithubButton from './EditOnGithubButton.vue'
 
 export default defineComponent({
   name: 'EditOnGithubHeader',
   components: {
+    ChangeLogButton,
     EditOnGithubButton
   },
   props: {
@@ -22,10 +24,12 @@ export default defineComponent({
     return {
       ...i18n({
         'zh-CN': {
-          editOnGithub: '在 GitHub 上编辑'
+          editOnGithub: '在 GitHub 上编辑',
+          changeLog: '更新日志'
         },
         'en-US': {
-          editOnGithub: 'Edit on GitHub'
+          editOnGithub: 'Edit on GitHub',
+          changeLog: 'Change Log'
         }
       })
     }
@@ -40,7 +44,7 @@ export default defineComponent({
 
 <template>
   <n-h1 :id="id" class="naive-doc-title">
-    <span>{{ text }}</span>
+    {{ text }}
     <span class="edit-button">
       <n-tooltip placement="right" :show-arrow="false">
         <template #trigger>
@@ -52,6 +56,14 @@ export default defineComponent({
           />
         </template>
         {{ t('editOnGithub') }}
+      </n-tooltip>
+    </span>
+    <span class="edit-button">
+      <n-tooltip placement="right" :show-arrow="false">
+        <template #trigger>
+          <ChangeLogButton :id="id" text quaternary />
+        </template>
+        {{ t('changeLog') }}
       </n-tooltip>
     </span>
   </n-h1>
