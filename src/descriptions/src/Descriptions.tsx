@@ -156,8 +156,6 @@ export default defineComponent({
     const children = defaultSlots ? flatten(defaultSlots()) : []
     const memorizedLength = children.length
     const {
-      contentClass,
-      labelClass,
       compitableColumn,
       labelPlacement,
       labelAlign,
@@ -202,8 +200,12 @@ export default defineComponent({
       state.span += itemSpan
       const labelStyle
         = props.labelStyle || props['label-style'] || this.labelStyle
+      const labelClass
+        = props.labelClass || props['label-class'] || this.labelClass
       const contentStyle
         = props.contentStyle || props['content-style'] || this.contentStyle
+      const contentClass
+        = props.contentClass || props['content-class'] || this.contentClass
       if (labelPlacement === 'left') {
         if (bordered) {
           state.row.push(
