@@ -2,6 +2,8 @@
 
 ## 2.41.0
 
+`2025-01-05`
+
 ### Breaking Changes
 
 - (**Vue 3.3+ required**) Add slot type for all components.
