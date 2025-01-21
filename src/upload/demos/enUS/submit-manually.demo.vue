@@ -1,5 +1,5 @@
 <markdown>
-# Uncontrolled manually submit
+# Uncontrolled manually submit & abort
 
 You can use a `ref` to get a handle on files uploaded, and the `submit` method to submit them when you're ready.
 </markdown>
@@ -21,6 +21,9 @@ export default defineComponent({
       },
       handleClick() {
         uploadRef.value?.submit()
+      },
+      handleAbort() {
+        uploadRef.value?.abort()
       }
     }
   }
@@ -28,13 +31,14 @@ export default defineComponent({
 </script>
 
 <template>
-  <n-button
-    :disabled="!fileListLength"
-    style="margin-bottom: 12px"
-    @click="handleClick"
-  >
-    Upload File
-  </n-button>
+  <n-space style="margin-bottom: 12px">
+    <n-button :disabled="!fileListLength" @click="handleClick">
+      Upload File
+    </n-button>
+    <n-button @click="handleAbort">
+      Abort Uploading
+    </n-button>
+  </n-space>
   <n-upload
     ref="upload"
     action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
