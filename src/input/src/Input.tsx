@@ -103,10 +103,7 @@ export const inputProps = {
   },
   pair: Boolean,
   separator: String,
-  readonly: {
-    type: [String, Boolean],
-    default: false
-  },
+  readonly: Boolean,
   passivelyActivated: Boolean,
   showPasswordOn: String as PropType<'mousedown' | 'click'>,
   stateful: {
@@ -1197,7 +1194,7 @@ export default defineComponent({
                         disabled={this.mergedDisabled}
                         maxlength={countGraphemes ? undefined : this.maxlength}
                         minlength={countGraphemes ? undefined : this.minlength}
-                        readonly={this.readonly as any}
+                        readonly={this.readonly}
                         tabindex={
                           this.passivelyActivated && !this.activated
                             ? -1
@@ -1280,7 +1277,7 @@ export default defineComponent({
                     ? this.mergedValue[0]
                     : (this.mergedValue as any)
                 }
-                readonly={this.readonly as any}
+                readonly={this.readonly}
                 autofocus={this.autofocus}
                 size={this.attrSize}
                 onBlur={this.handleInputBlur}
@@ -1414,7 +1411,7 @@ export default defineComponent({
                     ? this.mergedValue[1]
                     : undefined
                 }
-                readonly={this.readonly as any}
+                readonly={this.readonly}
                 style={this.textDecorationStyle[1] as any}
                 onBlur={this.handleInputBlur}
                 onFocus={(e) => {
