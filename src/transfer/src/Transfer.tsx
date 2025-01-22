@@ -370,7 +370,7 @@ export default defineComponent({
                 onUpdateValue={this.handleTgtFilterUpdateValue}
                 value={this.tgtPattern}
                 disabled={this.mergedDisabled}
-                placeholder={this.sourceFilterPlaceholder}
+                placeholder={this.targetFilterPlaceholder}
               />
             ) : null}
             <div class={`${mergedClsPrefix}-transfer-list-flex-container`}>

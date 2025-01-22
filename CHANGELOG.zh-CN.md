@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-transfer` 的 `target-filter-placeholder` 属性不生效
+
 ## 2.41.0
 
 `2025-01-05`
