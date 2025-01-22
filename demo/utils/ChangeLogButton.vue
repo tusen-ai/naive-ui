@@ -28,7 +28,7 @@ export default defineComponent({
     const route = useRoute()
     const themeVars = useThemeVars()
     const isCN = route.path.startsWith('/zh-CN')
-    const componentName = `n-${props.id?.split('-')?.[1]}`.toLocaleLowerCase()
+    const componentName = `n-${props.id?.split('-').slice(1).join('-').toLowerCase()}`
     const logs = isCN ? zhCN[componentName] : enUS[componentName]
     const drawerRef = ref(false)
     const renderer = new marked.Renderer()
