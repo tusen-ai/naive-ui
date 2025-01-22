@@ -1,5 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { useRoute } from 'vue-router'
+import { zhComponentRoutes } from '../routes/routes'
 import { i18n } from '../utils/composables'
 import ChangeLogButton from './ChangeLogButton.vue'
 import EditOnGithubButton from './EditOnGithubButton.vue'
@@ -21,6 +23,9 @@ export default defineComponent({
     }
   },
   setup() {
+    const components = zhComponentRoutes.map((route: any) => route.path)
+    const route = useRoute()
+    const isComponent = components.includes(route.fullPath.split('/').pop())
     return {
       ...i18n({
         'zh-CN': {
@@ -31,7 +36,8 @@ export default defineComponent({
           editOnGithub: 'Edit on GitHub',
           changeLog: 'Change Log'
         }
-      })
+      }),
+      isComponent
     }
   },
   computed: {
@@ -58,7 +64,7 @@ export default defineComponent({
         {{ t('editOnGithub') }}
       </n-tooltip>
     </span>
-    <span class="edit-button">
+    <span v-if="isComponent" class="edit-button">
       <n-tooltip placement="right" :show-arrow="false">
         <template #trigger>
           <ChangeLogButton :id="id" text quaternary />

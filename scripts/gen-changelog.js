@@ -37,8 +37,7 @@ function parseChangelog(content) {
       return
 
     const componentName = componentMatch[1]
-    const cleanLine = line.slice(2).replace(/`n-[^`]*`\s*的?/, '')
-    const content = `${isBreaking ? '⚠️ ' : ''}${cleanLine.trim()}`
+    const content = isBreaking ? `${line.trim()} 🚨` : `${line.trim()}`
 
     if (!logs[componentName]) {
       logs[componentName] = []
