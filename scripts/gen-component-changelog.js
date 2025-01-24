@@ -119,7 +119,7 @@ function main() {
       'utf-8'
     )
     fs.writeFileSync(
-      path.resolve(__dirname, `../components-changelog-${lang}.json`),
+      path.resolve(__dirname, `../preset/components-changelog-${lang}.json`),
       JSON.stringify(parseChangelog(content), null, 2)
     )
   })
