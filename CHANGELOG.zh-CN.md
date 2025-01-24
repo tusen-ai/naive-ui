@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- `n-data-table` 新增 `sticky-summary`、`summary-max-height` 属性，用于支持表格内容滚动时，总结栏固定不动，关闭 [#6585](https://github.com/tusen-ai/naive-ui/issues/6585)、[#6432](https://github.com/tusen-ai/naive-ui/issues/6432)、[#6170](https://github.com/tusen-ai/naive-ui/issues/6170)、[#2814](https://github.com/tusen-ai/naive-ui/issues/2814)
+
 ## 2.41.0
 
 `2025-01-05`
