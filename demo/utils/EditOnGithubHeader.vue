@@ -50,7 +50,7 @@ export default defineComponent({
 
 <template>
   <n-h1 :id="id" class="naive-doc-title">
-    {{ text }}
+    <span>{{ text }}</span>
     <span class="edit-button">
       <n-tooltip placement="right" :show-arrow="false">
         <template #trigger>
