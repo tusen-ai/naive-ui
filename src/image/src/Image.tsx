@@ -1,5 +1,4 @@
 import type { ImagePreviewInst } from './ImagePreview'
-import type { IntersectionObserverOptions } from './utils'
 import {
   defineComponent,
   h,
@@ -21,7 +20,11 @@ import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
 import { imageGroupInjectionKey } from './ImageGroup'
 import NImagePreview from './ImagePreview'
 import { imageContextKey, imagePreviewSharedProps } from './interface'
-import { observeIntersection } from './utils'
+import {
+  type IntersectionObserverOptions,
+  observeIntersection,
+  resolveOptionsAndHash
+} from './utils'
 
 export interface ImageInst {
   click: () => void
@@ -99,21 +102,44 @@ export default defineComponent({
     })
 
     onMounted(() => {
-      // Use IntersectionObserver if lazy and intersectionObserverOptions is set
+      // Use IntersectionObserver if lazy is enabled and intersectionObserverOptions are configured
       if (props.lazy && props.intersectionObserverOptions) {
-        let unobserve: (() => void) | undefined
+        // Observe image
+        const imageShouldStartLoading = ref(false)
+        let unobserveImage: (() => void) | undefined
         const stopWatchHandle = watchEffect(() => {
-          unobserve?.()
-          unobserve = undefined
-          unobserve = observeIntersection(
+          unobserveImage?.()
+          unobserveImage = undefined
+          unobserveImage = observeIntersection(
             imageRef.value,
             props.intersectionObserverOptions,
-            shouldStartLoadingRef
+            imageShouldStartLoading
           )
+        })
+        // Observe root if options.root is configured
+        const rootShouldStartLoading = ref(false)
+        const hasObserveRoot = !!props.intersectionObserverOptions?.root
+        let unobserveRoot: (() => void) | undefined
+        if (hasObserveRoot) {
+          const rootObserverOptions = resolveOptionsAndHash(
+            props.intersectionObserverOptions
+          ).options
+          unobserveRoot = observeIntersection(
+            rootObserverOptions.root as HTMLElement,
+            undefined,
+            rootShouldStartLoading
+          )
+        }
+
+        watchEffect(() => {
+          shouldStartLoadingRef.value = hasObserveRoot
+            ? rootShouldStartLoading.value && imageShouldStartLoading.value
+            : imageShouldStartLoading.value
         })
         onBeforeUnmount(() => {
           stopWatchHandle()
-          unobserve?.()
+          unobserveImage?.()
+          unobserveRoot?.()
         })
       }
     })
@@ -142,8 +168,6 @@ export default defineComponent({
         props.imgProps?.onClick?.(e)
       },
       mergedOnError: (e: Event) => {
-        if (!shouldStartLoadingRef.value)
-          return
         showErrorRef.value = true
         const { onError, imgProps: { onError: imgPropsOnError } = {} } = props
         onError?.(e)

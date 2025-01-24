@@ -22,7 +22,10 @@ export default defineComponent({
         'https://picsum.photos/id/9/100/100',
         'https://picsum.photos/id/10/100/100',
         'xxx.png'
-      ]
+      ],
+      handleLoadError(e: Event) {
+        console.error(e)
+      }
     }
   }
 })
@@ -36,7 +39,9 @@ export default defineComponent({
   </n-p>
   <n-avatar
     lazy
-    src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+    src="xxx.png"
+    fallback-src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+    @error="handleLoadError"
   />
   <n-p>
     <n-text code>
@@ -62,6 +67,7 @@ export default defineComponent({
         :intersection-observer-options="{
           root: '#image-scroll-container',
         }"
+        @error="handleLoadError"
       />
     </n-space>
   </div>
