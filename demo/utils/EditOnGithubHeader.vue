@@ -25,7 +25,8 @@ export default defineComponent({
   setup() {
     const route = useRoute()
     const components = zhComponentRoutes.map((route: any) => route.path)
-    const isComponent = components.includes(route.fullPath.split('/').pop())
+    const text = route.fullPath.match(/\/([^\/#?]+)(?:#.*)?$/)?.[1]
+    const isComponent = components.includes(text)
     return {
       ...i18n({
         'zh-CN': {

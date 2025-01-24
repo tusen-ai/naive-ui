@@ -1,6 +1,30 @@
 const fs = require('node:fs')
 const path = require('node:path')
 
+const extraKeys = ['createDiscreteApi']
+const componentMapping = {
+  'n-collapse-item': 'n-collapse',
+  'n-float-button-group': 'n-float-button',
+  'n-checkbox-group': 'n-checkbox',
+  'n-form-item': 'n-form',
+  'n-form-item-gi': 'n-form-item',
+  'n-input-group': 'n-input',
+  'n-upload-trigger': 'n-upload',
+  'n-descriptions-item': 'n-descriptions',
+  'n-image-group': 'n-image',
+  'n-list-item': 'n-list',
+  'n-timeline-item': 'n-timeline',
+  'n-anchor-link': 'n-anchor',
+  'n-breadcrumb-item': 'n-breadcrumb',
+  'n-tab-pane': 'n-tabs',
+  'n-drawer-content': 'n-drawer',
+  'n-layout-sider': 'n-layout',
+  'n-layout-header': 'n-layout',
+  'n-layout-footer': 'n-layout',
+  'n-layout-content': 'n-layout',
+  'n-grid-item': 'n-grid'
+}
+
 function parseChangelog(content) {
   const logs = {}
   let version = ''
@@ -32,35 +56,53 @@ function parseChangelog(content) {
       return
     }
 
-    const componentMatch = line.match(/^- .*?`(n-[^`]*)`/)
-    const apiMatch = line.match(/^- .*?`([^`]*Api)`/)
+    const componentMatches = Array.from(line.matchAll(/`(n-[^`]*)`/g)).map(
+      match => match[1]
+    )
 
-    const name = componentMatch
-      ? componentMatch[1]
-      : apiMatch
-        ? apiMatch[1]
-        : ''
+    const extraMatches = extraKeys.filter(key => line.includes(`\`${key}\``))
+
+    const names = new Set()
+
+    componentMatches.forEach((name) => {
+      if (componentMapping[name]) {
+        names.add(componentMapping[name])
+      }
+      else {
+        names.add(name)
+      }
+    })
+
+    extraMatches.forEach((name) => {
+      names.add(name)
+    })
+
+    if (names.size === 0) {
+      names.add('')
+    }
 
     const content = isBreaking ? `${line.trim()} 🚨` : `${line.trim()}`
 
-    if (!logs[name]) {
-      logs[name] = []
-    }
+    names.forEach((name) => {
+      if (!logs[name]) {
+        logs[name] = []
+      }
 
-    const existingLog = logs[name].find(
-      log => log.version === version && log.date === date
-    )
+      const existingLog = logs[name].find(
+        log => log.version === version && log.date === date
+      )
 
-    if (existingLog) {
-      existingLog.changes.push(content)
-    }
-    else {
-      logs[name].push({
-        version,
-        date,
-        changes: [content]
-      })
-    }
+      if (existingLog) {
+        existingLog.changes.push(content)
+      }
+      else {
+        logs[name].push({
+          version,
+          date,
+          changes: [content]
+        })
+      }
+    })
   })
 
   return logs

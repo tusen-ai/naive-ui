@@ -16,7 +16,6 @@ export default defineComponent({
     HistoryIcon
   },
   props: {
-    text: Boolean,
     quaternary: Boolean,
     size: {
       type: String as PropType<ButtonProps['size']>,
@@ -30,8 +29,8 @@ export default defineComponent({
       discrete: 'createDiscreteApi'
     }
     const isCN = route.path.startsWith('/zh-CN')
-    const name = route.fullPath.split('/').pop()
-    const componentName = miscMap[name as string] || `n-${name}`
+    const text = route.fullPath.match(/\/([^\/#?]+)(?:#.*)?$/)?.[1]
+    const componentName = miscMap[text as string] || `n-${text}`
     const logs = isCN ? zhCN[componentName] : enUS[componentName]
     const drawerRef = ref(false)
     const renderer = new marked.Renderer()
