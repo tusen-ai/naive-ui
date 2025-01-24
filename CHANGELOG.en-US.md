@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix `n-upload` default slot non-function value encountered warning.
+
 ## 2.41.0
 
 `2025-01-05`

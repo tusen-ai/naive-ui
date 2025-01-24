@@ -265,11 +265,11 @@ export default defineComponent({
               renderIcon(file)
             ) : isImageFile(file) ? (
               <NBaseIcon clsPrefix={clsPrefix}>
-                {{ default: renderImageIcon }}
+                {{ default: () => renderImageIcon }}
               </NBaseIcon>
             ) : (
               <NBaseIcon clsPrefix={clsPrefix}>
-                {{ default: renderDocumentIcon }}
+                {{ default: () => renderDocumentIcon }}
               </NBaseIcon>
             )}
           </span>
