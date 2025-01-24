@@ -94,7 +94,11 @@ export default defineComponent({
           </n-flex>
         </template>
         <n-timeline>
-          <n-timeline-item v-for="log in logs" :key="log.version" type="info">
+          <n-timeline-item
+            v-for="log in logs"
+            :key="log.version"
+            type="success"
+          >
             <template #header>
               <n-flex justify="space-between">
                 <n-h3>
@@ -102,7 +106,7 @@ export default defineComponent({
                 </n-h3>
 
                 <n-tag
-                  type="info"
+                  type="success"
                   size="small"
                   style="width: 86px; text-align: center"
                 >
