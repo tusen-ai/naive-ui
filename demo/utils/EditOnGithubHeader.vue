@@ -23,8 +23,8 @@ export default defineComponent({
     }
   },
   setup() {
-    const components = zhComponentRoutes.map((route: any) => route.path)
     const route = useRoute()
+    const components = zhComponentRoutes.map((route: any) => route.path)
     const isComponent = components.includes(route.fullPath.split('/').pop())
     return {
       ...i18n({
@@ -67,7 +67,7 @@ export default defineComponent({
     <span v-if="isComponent" class="edit-button">
       <n-tooltip placement="right" :show-arrow="false">
         <template #trigger>
-          <ChangeLogButton :id="id" text quaternary />
+          <ChangeLogButton quaternary />
         </template>
         {{ t('changeLog') }}
       </n-tooltip>

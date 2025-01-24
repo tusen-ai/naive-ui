@@ -17,18 +17,21 @@ export default defineComponent({
   },
   props: {
     text: Boolean,
-    id: String,
     quaternary: Boolean,
     size: {
       type: String as PropType<ButtonProps['size']>,
       default: 'small'
     }
   },
-  setup(props) {
+  setup() {
     const route = useRoute()
     const themeVars = useThemeVars()
+    const miscMap: { [key: string]: string } = {
+      discrete: 'createDiscreteApi'
+    }
     const isCN = route.path.startsWith('/zh-CN')
-    const componentName = `n-${props.id?.split('-').slice(1).join('-').toLowerCase()}`
+    const name = route.fullPath.split('/').pop()
+    const componentName = miscMap[name as string] || `n-${name}`
     const logs = isCN ? zhCN[componentName] : enUS[componentName]
     const drawerRef = ref(false)
     const renderer = new marked.Renderer()

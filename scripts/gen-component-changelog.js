@@ -33,17 +33,21 @@ function parseChangelog(content) {
     }
 
     const componentMatch = line.match(/^- .*?`(n-[^`]*)`/)
-    if (!componentMatch)
-      return
+    const apiMatch = line.match(/^- .*?`([^`]*Api)`/)
 
-    const componentName = componentMatch[1]
+    const name = componentMatch
+      ? componentMatch[1]
+      : apiMatch
+        ? apiMatch[1]
+        : ''
+
     const content = isBreaking ? `${line.trim()} 🚨` : `${line.trim()}`
 
-    if (!logs[componentName]) {
-      logs[componentName] = []
+    if (!logs[name]) {
+      logs[name] = []
     }
 
-    const existingLog = logs[componentName].find(
+    const existingLog = logs[name].find(
       log => log.version === version && log.date === date
     )
 
@@ -51,7 +55,7 @@ function parseChangelog(content) {
       existingLog.changes.push(content)
     }
     else {
-      logs[componentName].push({
+      logs[name].push({
         version,
         date,
         changes: [content]
