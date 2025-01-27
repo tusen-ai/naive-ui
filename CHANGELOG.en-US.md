@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix: When the 'expanded keys' attribute of' n-tree 'contains a' key 'that does not exist in the tree, the component cannot expand
+
 ## 2.41.0
 
 `2025-01-05`
