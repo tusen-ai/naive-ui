@@ -234,6 +234,7 @@ export function self(vars: ThemeCommonVars) {
     borderDisabledError: `1px solid ${errorColor}`,
     rippleColorError: errorColor,
     waveOpacity: '0.6',
+    shineOpacity: '0.26',
     fontWeight,
     fontWeightStrong
   }
