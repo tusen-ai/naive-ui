@@ -40,6 +40,7 @@ status.vue
 | filter | `(pattern: string, option: CascaderOption, path: CascaderOption[]) => boolean` | A string based filter algorithm. | Filter function of the cascader. |  |
 | filter-menu-props | `HTMLAttributes` | `undefined` | The filter menu's dom props. | 2.27.0 |
 | get-column-style | `(detail: { level: number }) => string \| object` | `undefined` | Function that resolves column style. `level` starts from `0`. | 2.38.2 |
+| input-props | `InputHTMLAttributes` | `undefined` | The attributes of input element in the trigger. It only works when the cascader is filterable. | NEXT_VERSION |
 | value-field | `string` | `'value'` | The value field in `CascaderOption`. |  |
 | label-field | `string` | `'label'` | The label field in `CascaderOption`. |  |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Max tag count in multiple select mode. `responsive` will keep all the tags in single line. |  |
