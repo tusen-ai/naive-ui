@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-data-table` incorrect position when the fixed columns can be draggable, closes [#5050](https://github.com/tusen-ai/naive-ui/issues/5050).
+
 ## 2.41.0
 
 `2025-01-05`

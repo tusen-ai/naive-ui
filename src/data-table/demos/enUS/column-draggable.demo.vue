@@ -12,6 +12,7 @@ import { defineComponent, h } from 'vue'
 interface Song {
   no: number
   title: string
+  band: string
   length: string
 }
 
@@ -22,25 +23,40 @@ function createColumns({
 }): DataTableColumns<Song> {
   return [
     {
+      type: 'selection',
+      fixed: 'left'
+    },
+    {
       title: 'No',
       key: 'no',
-      width: 50
+      width: 100,
+      fixed: 'left',
+      resizable: true
     },
     {
       title: 'Title',
       key: 'title',
+      width: 200,
+      fixed: 'left',
       resizable: true
     },
     {
-      title: 'Length',
-      key: 'length',
-      resizable: true,
-      minWidth: 50,
-      maxWidth: 100
+      title: 'Length (minWidth: 100, maxWidth: 500)',
+      key: 'length'
+    },
+    {
+      title: 'Band',
+      key: 'band',
+      width: 100,
+      fixed: 'right',
+      resizable: true
     },
     {
       title: 'Action',
       key: 'actions',
+      fixed: 'right',
+      width: 100,
+      resizable: true,
       render(row) {
         return h(
           NButton,
@@ -81,9 +97,11 @@ export default defineComponent({
 
 <template>
   <n-data-table
+    :row-key="(row) => row.no"
     :columns="columns"
     :data="data"
     :pagination="pagination"
     :bordered="false"
+    :scroll-x="1800"
   />
 </template>
