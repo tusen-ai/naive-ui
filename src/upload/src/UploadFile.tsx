@@ -135,10 +135,10 @@ export default defineComponent({
       e.preventDefault()
       const { file } = props
       if (['finished', 'pending', 'error'].includes(file.status)) {
-        handleRemove(file)
+        NUpload.doRemove(file, props.index)
       }
       else if (['uploading'].includes(file.status)) {
-        handleAbort(file)
+        NUpload.doAbort(file.id)
       }
       else {
         warn('upload', 'The button clicked type is unknown.')
@@ -147,33 +147,6 @@ export default defineComponent({
     function handleDownloadClick(e: MouseEvent): void {
       e.preventDefault()
       handleDownload(props.file)
-    }
-    function handleRemove(file: UploadSettledFileInfo): void {
-      const {
-        xhrMap,
-        doChange,
-        onRemoveRef: { value: onRemove },
-        mergedFileListRef: { value: mergedFileList }
-      } = NUpload
-      void Promise.resolve(
-        onRemove
-          ? onRemove({
-              file: Object.assign({}, file),
-              fileList: mergedFileList,
-              index: props.index
-            })
-          : true
-      ).then((result) => {
-        if (result === false)
-          return
-        const fileAfterChange = Object.assign({}, file, {
-          status: 'removed'
-        })
-        xhrMap.delete(file.id)
-        doChange(fileAfterChange, undefined, {
-          remove: true
-        })
-      })
     }
     function handleDownload(file: UploadSettledFileInfo): void {
       const {
@@ -186,12 +159,6 @@ export default defineComponent({
           download(file.url, file.name)
         }
       })
-    }
-    function handleAbort(file: UploadSettledFileInfo): void {
-      const { xhrMap } = NUpload
-      const xhr = xhrMap.get(file.id)
-      xhr?.abort()
-      handleRemove(Object.assign({}, file))
     }
     function handlePreviewClick(e: MouseEvent): void {
       const {
