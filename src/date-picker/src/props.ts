@@ -29,6 +29,9 @@ export const datePickerProps = {
     default: undefined
   },
   clearable: Boolean,
+  closePanelOnSelectDate: Boolean,
+  closePanelOnSelectYear: Boolean,
+  closePanelOnSelectMonth: Boolean,
   updateValueOnClose: Boolean,
   calendarDayFormat: String,
   calendarHeaderYearFormat: String,

@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-date-picker` 新增 `close-panel-on-select-date` 参数
+- `n-date-picker` 新增 `close-panel-on-select-year` 参数
+- `n-date-picker` 新增 `close-panel-on-select-month` 参数
+
 ## 2.41.0
 
 `2025-01-05`
