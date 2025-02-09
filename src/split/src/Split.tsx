@@ -189,7 +189,48 @@ export default defineComponent({
       updateSize(e)
     }
 
-    function updateSize(event: MouseEvent): void {
+    const handleTouchStart = (e: TouchEvent): void => {
+      e.preventDefault()
+      isDraggingRef.value = true
+      console.log('touchstart');
+      
+      if (props.onDragStart)
+      props.onDragStart(e)
+      const touchMoveEvent = 'touchmove'
+      const touchEndEvent = 'touchend'
+      const onTouchMove = (e: TouchEvent): void => {
+        updateSize(e)
+        if (props.onDragMove)
+          props.onDragMove(e)
+      }
+      const onTouchEnd= (): void => {
+        console.log('touchend');
+        
+        off(touchMoveEvent, document, onTouchMove)
+        off(touchEndEvent, document, onTouchEnd)
+        isDraggingRef.value = false
+        if (props.onDragEnd)
+          props.onDragEnd(e)
+        document.body.style.cursor = ''
+      }
+      document.body.style.cursor = resizeTriggerWrapperStyle.value.cursor
+      on(touchMoveEvent, document, onTouchMove)
+      on(touchEndEvent, document, onTouchEnd)
+
+      const resizeTriggerEl = resizeTriggerElRef.value
+      if (resizeTriggerEl) {
+        const elRect = resizeTriggerEl.getBoundingClientRect()
+        if (props.direction === 'horizontal') {
+          offset = e.touches[0].clientX - elRect.left
+        }
+        else {
+          offset = elRect.top - e.touches[0].clientY
+        }
+      }
+      updateSize(e)
+    }
+
+    function updateSize(event: MouseEvent|TouchEvent): void {
       const containerRect
         = resizeTriggerElRef.value?.parentElement?.getBoundingClientRect()
       if (!containerRect)
@@ -205,10 +246,12 @@ export default defineComponent({
           ? containerUsableWidth
           : containerUsableHeight
 
+          const clientX= event instanceof MouseEvent ? event.clientX : event.touches[0].clientX;
+          const clientY= event instanceof MouseEvent ? event.clientY : event.touches[0].clientY;
       const newPxSize
         = direction === 'horizontal'
-          ? event.clientX - containerRect.left - offset
-          : event.clientY - containerRect.top + offset
+          ? clientX - containerRect.left - offset
+          : clientY - containerRect.top + offset
 
       const { min, max } = props
 
@@ -244,6 +287,7 @@ export default defineComponent({
       resizeTriggerWrapperStyle,
       resizeTriggerStyle,
       handleMouseDown,
+      handleTouchStart,
       firstPaneStyle
     }
   },
@@ -270,6 +314,7 @@ export default defineComponent({
             class={`${this.mergedClsPrefix}-split__resize-trigger-wrapper`}
             style={this.resizeTriggerWrapperStyle}
             onMousedown={this.handleMouseDown}
+            onTouchstart={this.handleTouchStart}
           >
             {resolveSlot(this.$slots['resize-trigger'], () => [
               <div
