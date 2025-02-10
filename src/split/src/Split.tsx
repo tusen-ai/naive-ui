@@ -123,8 +123,7 @@ export default defineComponent({
       else if (typeof sizeValue === 'number') {
         const size = sizeValue * 100
         return {
-          flex: `0 0 calc(${size}% - ${
-            (props.resizeTriggerSize * size) / 100
+          flex: `0 0 calc(${size}% - ${(props.resizeTriggerSize * size) / 100
           }px)`
         }
       }
@@ -192,10 +191,8 @@ export default defineComponent({
     const handleTouchStart = (e: TouchEvent): void => {
       e.preventDefault()
       isDraggingRef.value = true
-      console.log('touchstart');
-      
       if (props.onDragStart)
-      props.onDragStart(e)
+        props.onDragStart(e)
       const touchMoveEvent = 'touchmove'
       const touchEndEvent = 'touchend'
       const onTouchMove = (e: TouchEvent): void => {
@@ -203,9 +200,7 @@ export default defineComponent({
         if (props.onDragMove)
           props.onDragMove(e)
       }
-      const onTouchEnd= (): void => {
-        console.log('touchend');
-        
+      const onTouchEnd = (): void => {
         off(touchMoveEvent, document, onTouchMove)
         off(touchEndEvent, document, onTouchEnd)
         isDraggingRef.value = false
@@ -230,7 +225,7 @@ export default defineComponent({
       updateSize(e)
     }
 
-    function updateSize(event: MouseEvent|TouchEvent): void {
+    function updateSize(event: MouseEvent | TouchEvent): void {
       const containerRect
         = resizeTriggerElRef.value?.parentElement?.getBoundingClientRect()
       if (!containerRect)
@@ -246,13 +241,12 @@ export default defineComponent({
           ? containerUsableWidth
           : containerUsableHeight
 
-          const clientX= event instanceof MouseEvent ? event.clientX : event.touches[0].clientX;
-          const clientY= event instanceof MouseEvent ? event.clientY : event.touches[0].clientY;
+      const clientX = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX
+      const clientY = event instanceof MouseEvent ? event.clientY : event.touches[0].clientY
       const newPxSize
         = direction === 'horizontal'
           ? clientX - containerRect.left - offset
           : clientY - containerRect.top + offset
-
       const { min, max } = props
 
       const pxMin
