@@ -113,7 +113,7 @@
     "codesandbox": "^2.2.3",
     "cssnano": "^7.0.4",
     "deepmerge": "^4.3.1",
-    "esbuild": "0.23.0",
+    "esbuild": "0.25.0",
     "eslint": "^9.6.0",
     "express": "^4.18.2",
     "fast-glob": "^3.3.1",
