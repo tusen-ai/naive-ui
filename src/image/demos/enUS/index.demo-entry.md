@@ -15,6 +15,7 @@ custom.vue
 tooltip.vue
 lazy.vue
 previewed-img-props.vue
+manually-open-preview.vue
 ```
 
 ## API
@@ -64,3 +65,9 @@ previewed-img-props.vue
 | Name    | Parameters | Description                             |
 | ------- | ---------- | --------------------------------------- |
 | default | `()`       | The default content of the image group. |
+
+### Image Methods
+
+| Name        | Type         | Description                     | 版本 |
+| ----------- | ------------ | ------------------------------- | ---- |
+| showPreview | `() => void` | manually open preview big image |      |

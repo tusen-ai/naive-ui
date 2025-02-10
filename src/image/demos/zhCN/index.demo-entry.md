@@ -16,6 +16,7 @@ tooltip.vue
 full-debug.vue
 lazy.vue
 previewed-img-props.vue
+manually-open-preview.vue
 ```
 
 ## API
@@ -64,3 +65,9 @@ previewed-img-props.vue
 | 名称    | 参数 | 说明         |
 | ------- | ---- | ------------ |
 | default | `()` | 图像组的内容 |
+
+### Image Methods
+
+| 名称        | 类型         | 说明             | 版本 |
+| ----------- | ------------ | ---------------- | ---- |
+| showPreview | `() => void` | 手动打开大图预览 |      |

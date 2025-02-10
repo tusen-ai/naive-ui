@@ -69,24 +69,29 @@ export default defineComponent({
     const previewInstRef = ref<ImagePreviewInst | null>(null)
     const imageGroupHandle = inject(imageGroupInjectionKey, null)
     const { mergedClsPrefixRef } = imageGroupHandle || useConfig(props)
+
+    const showPreview = () => {
+      if (props.previewDisabled || showErrorRef.value)
+        return
+      const mergedPreviewSrc = props.previewSrc || props.src
+      if (imageGroupHandle) {
+        imageGroupHandle.setPreviewSrc(mergedPreviewSrc)
+        imageGroupHandle.setThumbnailEl(imageRef.value)
+        imageGroupHandle.toggleShow()
+        return
+      }
+      const { value: previewInst } = previewInstRef
+      if (!previewInst)
+        return
+      previewInst.setPreviewSrc(mergedPreviewSrc)
+      previewInst.setThumbnailEl(imageRef.value)
+      previewInst.toggleShow()
+    }
     const exposedMethods = {
       click: () => {
-        if (props.previewDisabled || showErrorRef.value)
-          return
-        const mergedPreviewSrc = props.previewSrc || props.src
-        if (imageGroupHandle) {
-          imageGroupHandle.setPreviewSrc(mergedPreviewSrc)
-          imageGroupHandle.setThumbnailEl(imageRef.value)
-          imageGroupHandle.toggleShow()
-          return
-        }
-        const { value: previewInst } = previewInstRef
-        if (!previewInst)
-          return
-        previewInst.setPreviewSrc(mergedPreviewSrc)
-        previewInst.setThumbnailEl(imageRef.value)
-        previewInst.toggleShow()
-      }
+        showPreview()
+      },
+      showPreview
     }
 
     const shouldStartLoadingRef = ref(!props.lazy)
