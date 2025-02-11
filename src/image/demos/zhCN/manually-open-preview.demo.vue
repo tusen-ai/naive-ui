@@ -4,23 +4,15 @@
 允许通过调用 showPreview 来触发大图预览。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import type { ImageInst } from 'naive-ui'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const imageRef = ref<ImageRef>(null)
+const imageRef = ref<ImageInst | null>(null)
 
-    const handleClick = () => {
-      imageRef.value.showPreview()
-    }
-
-    return {
-      imageRef,
-      handleClick
-    }
-  }
-})
+function handleClick() {
+  imageRef.value?.showPreview()
+}
 </script>
 
 <template>

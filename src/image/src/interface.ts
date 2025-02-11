@@ -21,6 +21,10 @@ export const imagePreviewSharedProps = {
   renderToolbar: Function as PropType<ImageRenderToolbar>
 }
 
+export interface ImageInst {
+  showPreview: () => void
+}
+
 export interface ImageContext {
   previewedImgPropsRef: Ref<ImgHTMLAttributes | undefined>
 }
