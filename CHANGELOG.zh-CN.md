@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2.41.1
+
+### Features
+
+- `n-image` 增加 showPreview 方法, closes [#6695](https://github.com/tusen-ai/naive-ui/issues/6695)
+- `n-image-preview` ,`n-image-group` 支持单独使用
+
 ## 2.41.0
 
 `2025-01-05`
