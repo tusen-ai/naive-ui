@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.41.1
+
+### Features
+
+- `n-modal` add `max-height` props.
+
 ## 2.41.0
 
 `2025-01-05`

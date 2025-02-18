@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.41.1
+
+### Features
+
+- `n-modal` 新增 `max-height` 属性
+
 ## 2.41.0
 
 `2025-01-05`

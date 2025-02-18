@@ -138,6 +138,7 @@ export default defineComponent({
     v-model:show="showModal"
     title="Dark Modal Debug"
     preset="card"
+    :max-height="300"
     :style="{ marginTop: '24px', marginBottom: '24px', width: '800px' }"
   >
     <n-radio-group

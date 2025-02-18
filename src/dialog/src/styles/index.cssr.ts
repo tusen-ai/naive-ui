@@ -37,6 +37,8 @@ export default c([
     color: var(--n-text-color);
     box-sizing: border-box;
     margin: auto;
+    display: flex;
+    flex-direction: column;
     border-radius: var(--n-border-radius);
     padding: var(--n-padding);
     transition: 
