@@ -70,9 +70,49 @@ export default defineComponent({
     title="card 预设拖拽"
     preset="card"
     draggable
-    max-height="30%"
+    max-height="200px"
     :style="{ width: '800px' }"
   >
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
+    <div>无意义的内容...</div>
     <div>无意义的内容...</div>
     <div>无意义的内容...</div>
     <div>无意义的内容...</div>
@@ -89,8 +129,7 @@ export default defineComponent({
     title="dialog 预设拖拽"
     preset="dialog"
     draggable
-    height="30%"
-    max-height="200"
+    max-height="20%"
     :style="{ width: '800px' }"
   >
     <div>无意义的内容...</div>

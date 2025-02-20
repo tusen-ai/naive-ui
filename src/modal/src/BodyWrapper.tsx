@@ -12,6 +12,7 @@ import {
   mergeProps,
   nextTick,
   normalizeClass,
+  onMounted,
   type PropType,
   provide,
   ref,
@@ -24,7 +25,7 @@ import {
   watch,
   withDirectives
 } from 'vue'
-import { VFocusTrap } from 'vueuc'
+import { VFocusTrap, VResizeObserver } from 'vueuc'
 import { NScrollbar, type ScrollbarInst } from '../../_internal'
 import {
   formatLength,
@@ -209,6 +210,7 @@ export default defineComponent({
     function handlePositiveClick(): void {
       props.onPositiveClick()
     }
+
     const childNodeRef = ref<VNode | null>(null)
     watch(childNodeRef, (node) => {
       if (node) {
@@ -224,6 +226,38 @@ export default defineComponent({
     provide(modalBodyInjectionKey, bodyRef)
     provide(drawerBodyInjectionKey, null)
     provide(popoverBodyInjectionKey, null)
+
+    const computedMaxHeightRef = ref<number | string | null | undefined>('')
+    const bodyWrapperRef = ref<HTMLDivElement | null>(null)
+
+    const needResizeObserver = computed(() => {
+      return (
+        typeof props.maxHeight === 'string' && props.maxHeight.endsWith('%')
+      )
+    })
+
+    const formatHeight = () => {
+      if (needResizeObserver.value) {
+        const wrapperEl = bodyWrapperRef.value
+        if (!wrapperEl)
+          return
+        const rect = wrapperEl.getBoundingClientRect()
+        const percentage = Number.parseFloat(String(props.maxHeight)) / 100
+        computedMaxHeightRef.value = `${rect.height * percentage}px`
+      }
+      else {
+        computedMaxHeightRef.value = formatLength(props.maxHeight)
+      }
+    }
+
+    const handleContentResize = () => {
+      formatHeight()
+    }
+
+    onMounted(() => {
+      formatHeight()
+    })
+
     return {
       mergedTheme: NModal.mergedThemeRef,
       appear: NModal.appearRef,
@@ -242,7 +276,11 @@ export default defineComponent({
       handleAfterEnter,
       handleAfterLeave,
       handleBeforeLeave,
-      handleEnter
+      handleEnter,
+      bodyWrapperRef,
+      handleContentResize,
+      computedMaxHeight: computedMaxHeightRef,
+      needResizeObserver
     }
   },
   render() {
@@ -255,7 +293,9 @@ export default defineComponent({
       handleBeforeLeave,
       preset,
       mergedClsPrefix,
-      maxHeight
+      handleContentResize,
+      computedMaxHeight,
+      needResizeObserver
     } = this
     let childNode: VNode | null = null
     if (!preset) {
@@ -270,12 +310,6 @@ export default defineComponent({
       childNode.props = mergeProps(
         {
           class: `${mergedClsPrefix}-modal`
-        },
-        {
-          style: {
-            maxHeight: formatLength(maxHeight),
-            ...(this.$attrs.style || {})
-          }
         },
         $attrs,
         childNode.props || {}
@@ -316,7 +350,7 @@ export default defineComponent({
                       <NDialog
                         {...this.$attrs}
                         style={{
-                          maxHeight: formatLength(maxHeight),
+                          maxHeight: computedMaxHeight,
                           ...(this.$attrs.style || {})
                         }}
                         class={[`${mergedClsPrefix}-modal`, this.$attrs.class]}
@@ -337,7 +371,7 @@ export default defineComponent({
                         {...this.$attrs}
                         ref="bodyRef"
                         style={{
-                          maxHeight: formatLength(maxHeight),
+                          maxHeight: computedMaxHeight,
                           ...(this.$attrs.style || {})
                         }}
                         class={[`${mergedClsPrefix}-modal`, this.$attrs.class]}
@@ -347,7 +381,9 @@ export default defineComponent({
                         headerClass={this.cardHeaderClass}
                         aria-modal="true"
                         role="dialog"
-                        contentStyle={{ overflow: 'auto' }}
+                        contentStyle={{
+                          overflow: 'auto'
+                        }}
                       >
                         {$slots}
                       </NCard>
@@ -364,19 +400,7 @@ export default defineComponent({
       </VFocusTrap>
     )
 
-    const scrollableContent = maxHeight ? (
-      <div
-        class={`${mergedClsPrefix}-modal-scroll-content`}
-        style={{
-          width: '100%',
-          height: '100%',
-          overflow: 'hidden'
-        }}
-      >
-        {this.renderMask?.()}
-        {content}
-      </div>
-    ) : (
+    const scrollbarContent = (
       <NScrollbar
         ref="scrollbarRef"
         theme={this.mergedTheme.peers.Scrollbar}
@@ -388,11 +412,22 @@ export default defineComponent({
         }}
       </NScrollbar>
     )
-
     return this.displayDirective === 'show' || this.displayed || this.show
       ? withDirectives(
-          <div role="none" class={`${mergedClsPrefix}-modal-body-wrapper`}>
-            {scrollableContent}
+          <div
+            ref="bodyWrapperRef"
+            role="none"
+            class={`${mergedClsPrefix}-modal-body-wrapper`}
+          >
+            {needResizeObserver ? (
+              <VResizeObserver onResize={handleContentResize}>
+                {{
+                  default: () => scrollbarContent
+                }}
+              </VResizeObserver>
+            ) : (
+              scrollbarContent
+            )}
           </div>,
           [
             [
