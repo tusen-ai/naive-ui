@@ -34,6 +34,10 @@ export const scrollbarProps = {
   xPlacement: {
     type: String as PropType<'top' | 'bottom'>,
     default: 'bottom'
+  },
+  yBarMinSize: {
+    type: Number,
+    default: 0
   }
 } as const
 

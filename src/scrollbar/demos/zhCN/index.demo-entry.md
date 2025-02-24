@@ -27,6 +27,7 @@ placement.vue
 | x-scrollable | `boolean` | `false` | 是否可以横向滚动 |  |
 | x-placement | `'top' \| 'bottom'` | `bottom` | 横向滚动时滚动条的位置 | 2.40.0 |
 | y-placement | `'left' \| 'right'` | `right` | 纵向滚动时滚动条的位置 | 2.40.0 |
+| y-bar-min-size | `number` | `0` | 当大于`0`时生效，保证垂直滚动条的高度至少为`x`px | 2.41.1 |
 | on-scroll | `(e: Event) => void` | `undefined` | 滚动的回调 |  |
 
 ### Scrollbar Slots

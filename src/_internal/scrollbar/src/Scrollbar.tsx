@@ -113,6 +113,10 @@ const scrollbarProps = {
   xPlacement: {
     type: String as PropType<'top' | 'bottom'>,
     default: 'bottom'
+  },
+  yBarMinSize: {
+    type: Number,
+    default: 0
   }
 } as const
 
@@ -180,11 +184,15 @@ const Scrollbar = defineComponent({
         return 0
       }
       else {
-        return Math.min(
+        const calculatedSize = Math.min(
           containerHeight,
           (yRailSize * containerHeight) / contentHeight
           + depx(themeRef.value.self.width) * 1.5
         )
+
+        return props.yBarMinSize > 0
+          ? Math.max(calculatedSize, props.yBarMinSize)
+          : calculatedSize
       }
     })
     const yBarSizePxRef = computed(() => {
