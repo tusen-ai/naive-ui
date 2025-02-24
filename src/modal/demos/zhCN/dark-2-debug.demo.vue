@@ -22,6 +22,7 @@ export default defineComponent({
     v-model:show="modalActive"
     title="Dark Modal Debug"
     preset="card"
+    max-height="20%"
     :style="{ marginTop: '24px', marginBottom: '24px', width: '800px' }"
   >
     <n-table :bordered="false" :single-line="false">

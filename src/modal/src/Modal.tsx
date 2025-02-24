@@ -27,6 +27,7 @@ import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import {
   call,
   eventEffectNotPerformed,
+  formatLength,
   keep,
   useIsComposing,
   warnOnce
@@ -101,7 +102,8 @@ export const modalProps = {
   overlayStyle: [String, Object] as PropType<string | CSSProperties>,
   onBeforeHide: Function as PropType<() => void>,
   onAfterHide: Function as PropType<() => void>,
-  onHide: Function as PropType<(value: false) => void>
+  onHide: Function as PropType<(value: false) => void>,
+  maxHeight: [Number, String] as PropType<string | number>
 }
 
 export type ModalProps = ExtractPublicPropTypes<typeof modalProps>
@@ -282,6 +284,7 @@ export default defineComponent({
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass('theme-class', undefined, cssVarsRef, props)
       : undefined
+
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       namespace: namespaceRef,
@@ -306,7 +309,7 @@ export default defineComponent({
     }
   },
   render() {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, maxHeight } = this
     return (
       <VLazyTeleport to={this.to} show={this.show}>
         {{
@@ -335,6 +338,7 @@ export default defineComponent({
                   trapFocus={this.trapFocus}
                   draggable={this.draggable}
                   blockScroll={this.blockScroll}
+                  maxHeight={maxHeight}
                   {...this.presetProps}
                   onEsc={this.handleEsc}
                   onClose={this.handleCloseClick}
