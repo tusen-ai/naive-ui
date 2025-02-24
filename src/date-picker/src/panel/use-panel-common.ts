@@ -22,6 +22,9 @@ const TIME_FORMAT = 'HH:mm:ss'
 const usePanelCommonProps = {
   active: Boolean,
   dateFormat: String,
+  closePanelOnSelectDate: Boolean,
+  closePanelOnSelectYear: Boolean,
+  closePanelOnSelectMonth: Boolean,
   calendarDayFormat: String,
   calendarHeaderYearFormat: String,
   calendarHeaderMonthFormat: String,
@@ -47,6 +50,8 @@ const usePanelCommonProps = {
   onTabOut: Function,
   onKeydown: Function,
   actions: Array as PropType<string[]>,
+  onSelectYear: Function,
+  onSelectMonth: Function,
   onUpdateValue: {
     type: Function as PropType<OnPanelUpdateValue>,
     required: true
