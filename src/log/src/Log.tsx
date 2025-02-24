@@ -1,3 +1,5 @@
+import type { VirtualListInst } from 'vueuc'
+import type { ItemData } from 'vueuc/lib/virtual-list/src/type'
 import type { ScrollbarInst } from '../../_internal'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { LogTheme } from '../styles'
@@ -14,6 +16,7 @@ import {
   toRef,
   Transition
 } from 'vue'
+import { VirtualList } from 'vueuc'
 import { NScrollbar } from '../../_internal'
 import {
   type Hljs,
@@ -76,6 +79,10 @@ export const logProps = {
     type: Number,
     default: 0
   },
+  virtualScroll: {
+    type: Boolean,
+    default: true
+  },
   hljs: Object,
   onReachTop: Function as PropType<() => void>,
   onReachBottom: Function as PropType<() => void>,
@@ -89,6 +96,7 @@ export default defineComponent({
   props: logProps,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const virtualListRef = ref<VirtualListInst | null>()
     const silentRef = ref(false)
     const highlightRef = computed(() => {
       return props.language !== undefined
@@ -98,13 +106,28 @@ export default defineComponent({
         props.rows * props.lineHeight * props.fontSize
       )}px)`
     })
+
+    const itemSize = computed(() => {
+      return props.lineHeight * props.fontSize
+    })
+
     const mergedLinesRef = computed(() => {
       const { log } = props
+      let lines: string[] = []
       if (log) {
-        return log.split('\n')
+        lines = log.split('\n')
       }
-      return props.lines
+      else {
+        lines = props.lines || []
+      }
+      const result: ItemData[] = []
+      lines.forEach((line, index) => {
+        result.push({ key: index, value: line })
+      })
+
+      return result
     })
+
     const scrollbarRef = ref<ScrollbarInst | null>(null)
     const themeRef = useTheme(
       'Log',
@@ -114,7 +137,29 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+
+    function scrollContainer(): HTMLElement | null {
+      const { value } = virtualListRef
+      if (!value)
+        return null
+      const { listElRef } = value
+      return listElRef
+    }
+    function scrollContent(): HTMLElement | null {
+      const { value } = virtualListRef
+      if (!value)
+        return null
+      const { itemsElRef } = value
+      return itemsElRef
+    }
+
+    function syncVLScroller(e: Event): void {
+      scrollbarRef.value?.sync()
+      handleScroll(e)
+    }
+
     function handleScroll(e: Event): void {
+      scrollbarRef.value?.sync()
       const container = e.target as HTMLElement
       const content = container.firstElementChild as HTMLElement
       if (silentRef.value) {
@@ -261,6 +306,11 @@ export default defineComponent({
       mergedTheme: themeRef,
       styleHeight: styleHeightRef,
       mergedLines: mergedLinesRef,
+      virtualListRef,
+      itemSize,
+      syncVLScroller,
+      scrollContent,
+      scrollContainer,
       scrollToTop,
       scrollToBottom,
       handleWheel,
@@ -271,7 +321,13 @@ export default defineComponent({
     }
   },
   render() {
-    const { mergedClsPrefix, mergedTheme, onRender } = this
+    const {
+      mergedClsPrefix,
+      mergedTheme,
+      onRender,
+      virtualScroll,
+      syncVLScroller
+    } = this
     onRender?.()
     return h(
       'div',
@@ -291,24 +347,51 @@ export default defineComponent({
           ref="scrollbarRef"
           theme={mergedTheme.peers.Scrollbar}
           themeOverrides={mergedTheme.peerOverrides.Scrollbar}
-          onScroll={this.handleScroll}
+          container={virtualScroll ? this.scrollContainer : undefined}
+          content={virtualScroll ? this.scrollContent : undefined}
+          onScroll={virtualScroll ? undefined : this.handleScroll}
         >
           {{
-            default: () => (
-              <NCode
-                internalNoHighlight
-                internalFontSize={this.fontSize}
-                theme={mergedTheme.peers.Code}
-                themeOverrides={mergedTheme.peerOverrides.Code}
-              >
-                {{
-                  default: () =>
-                    this.mergedLines.map((line, index) => {
-                      return <NLogLine key={index} line={line} />
-                    })
-                }}
-              </NCode>
-            )
+            default: () => {
+              return virtualScroll ? (
+                <NCode
+                  internalNoHighlight
+                  internalFontSize={this.fontSize}
+                  theme={mergedTheme.peers.Code}
+                  themeOverrides={mergedTheme.peerOverrides.Code}
+                >
+                  <VirtualList
+                    ref="virtualListRef"
+                    style={{ height: '100%' }}
+                    class={`${mergedClsPrefix}-virtual-list`}
+                    items={this.mergedLines}
+                    itemSize={this.itemSize}
+                    showScrollbar={false}
+                    onScroll={syncVLScroller}
+                  >
+                    {{
+                      default: ({ item }: { item: ItemData }) => (
+                        <NLogLine key={item.key} line={item.value} />
+                      )
+                    }}
+                  </VirtualList>
+                </NCode>
+              ) : (
+                <NCode
+                  internalNoHighlight
+                  internalFontSize={this.fontSize}
+                  theme={mergedTheme.peers.Code}
+                  themeOverrides={mergedTheme.peerOverrides.Code}
+                >
+                  {{
+                    default: () =>
+                      this.mergedLines.map((item) => {
+                        return <NLogLine key={item.key} line={item.value} />
+                      })
+                  }}
+                </NCode>
+              )
+            }
           }}
         </NScrollbar>,
         <Transition name="fade-in-scale-up-transition">

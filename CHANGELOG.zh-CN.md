@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.41.1
+
+- `n-log` 新增 `virtual-scroll` 属性.
+
 ## 2.41.0
 
 `2025-01-05`

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.41.1
+
+- `n-log` adds `virtual-scroll` prop.
+
 ## 2.41.0
 
 `2025-01-05`
