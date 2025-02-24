@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`xxxx-xx-xx`
+
+### Fixes
+
+- 修复 `n-descriptions-item` 的属性 `label-class` 和 `content-class` 不生效, 关闭 [#6290](https://github.com/tusen-ai/naive-ui/issues/6290)
+
 ## 2.41.0
 
 `2025-01-05`
