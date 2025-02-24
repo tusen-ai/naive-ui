@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-split` 组件支持触控拖动
+
 ## 2.41.0
 
 `2025-01-05`
