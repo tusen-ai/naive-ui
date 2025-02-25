@@ -16,6 +16,7 @@ no-indicator.vue
 height.vue
 processing.vue
 gradient.vue
+size.vue
 ```
 
 ## API
@@ -43,6 +44,7 @@ gradient.vue
 | stroke-width | `number` | `7` | 进度条宽度 |  |
 | type | `'line' \| 'circle' \| 'multiple-circle' \| 'dashboard'` | `'line'` | 进度条类型 | `'dashboard'` 2.25.2 |
 | unit | `string` | `%` | 进度条单位 |  |
+| size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |
 
 ### Progress Slots
 
