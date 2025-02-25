@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.41.1
+
+### Features
+
+- `n-progress` add `size` props. 关闭 [#6650](https://github.com/tusen-ai/naive-ui/issues/6650)
+
 ## 2.41.0
 
 `2025-01-05`

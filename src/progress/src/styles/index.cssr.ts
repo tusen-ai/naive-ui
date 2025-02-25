@@ -55,9 +55,9 @@ export default c([
         `)
       ])
     ]),
-    cM('circle, dashboard', {
-      width: '120px'
-    }, [
+    cM('circle, dashboard', `
+      width: var(--n-circle-width)
+    `, [
       cB('progress-custom-content', `
         position: absolute;
         left: 50%;
@@ -93,7 +93,7 @@ export default c([
       `)
     ]),
     cM('multiple-circle', `
-      width: 200px;
+      width: var(--n-multiple-circle-width);
       color: inherit;
     `, [
       cB('progress-text', `
@@ -107,6 +107,7 @@ export default c([
         align-items: center;
         justify-content: center;
         transition: color .3s var(--n-bezier);
+        font-size: var(--n-multiple-circle-font-size);
       `)
     ]),
     cB('progress-content', {
