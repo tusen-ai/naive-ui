@@ -31,7 +31,7 @@ export default defineComponent({
         </n-radio>
       </n-space>
     </n-radio-group>
-    <n-tabs type="bar" :size="size">
+    <n-tabs type="segment" animated :size="size">
       <n-tab-pane name="oasis" tab="Oasis">
         Wonderwall
       </n-tab-pane>

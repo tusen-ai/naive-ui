@@ -9,6 +9,7 @@ const base = {
   neutralCard: '#fff',
   neutralModal: '#fff',
   neutralBody: '#fff',
+  neutralSegment: '#f5f5f5',
 
   alpha1: '0.82',
   alpha2: '0.72',
@@ -165,6 +166,7 @@ const derived = {
   cardColor: base.neutralCard,
   modalColor: base.neutralModal,
   bodyColor: base.neutralBody,
+  segmentColor: base.neutralSegment,
   tagColor: '#eee',
   avatarColor: neutral(base.alphaAvatar),
   invertedColor: 'rgb(0, 20, 40)',
