@@ -522,6 +522,13 @@ export function createComponentMenuOptions({ lang, theme }) {
           isNew: true
         },
         {
+          en: 'Segment',
+          zh: '分段控制器',
+          enSuffix: true,
+          path: '/segment',
+          isNew: true
+        },
+        {
           en: 'Statistic',
           zh: '统计数据',
           enSuffix: true,

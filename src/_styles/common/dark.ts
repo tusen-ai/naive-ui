@@ -10,6 +10,7 @@ const base = {
   neutralCard: 'rgb(24, 24, 28)',
   neutralModal: 'rgb(44, 44, 50)',
   neutralBody: 'rgb(16, 16, 20)',
+  neutralSegment: '#262727',
 
   alpha1: '0.9',
   alpha2: '0.82',
@@ -167,6 +168,7 @@ const derived: ThemeCommonVars = {
   cardColor: base.neutralCard,
   modalColor: base.neutralModal,
   bodyColor: base.neutralBody,
+  segmentColor: base.neutralSegment,
   tagColor: neutral(base.alphaTag),
   avatarColor: overlay(base.alphaAvatar),
   invertedColor: base.neutralBase,

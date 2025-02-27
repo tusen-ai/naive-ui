@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.41.1
+
+### Feat
+
+- adds `n-segment` component, closes[#5499](https://github.com/tusen-ai/naive-ui/issues/5499)
+
 ## 2.41.0
 
 `2025-01-05`
