@@ -159,8 +159,16 @@ export default defineComponent({
     )
     const displayedValueRef = ref('')
     const getPrecision = (value: string | number): number => {
-      const fraction = String(value).split('.')[1]
-      return fraction ? fraction.length : 0
+      const stringifiedValue = String(value)
+      const hasScientificNotation = stringifiedValue.includes('e')
+      const decimalSeparator = hasScientificNotation ? 'e' : '.'
+      const decimalPart = stringifiedValue.split(decimalSeparator)[1]
+
+      if (hasScientificNotation) {
+        return Math.abs(Number(decimalPart))
+      }
+
+      return decimalPart ? decimalPart.length : 0
     }
     const getMaxPrecision = (currentValue: number): number => {
       const precisions = [props.min, props.max, props.step, currentValue].map(
