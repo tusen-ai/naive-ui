@@ -1952,7 +1952,7 @@
 ### Feats
 
 - `n-divider` 的 CSS 变量使用 `n` 作为前缀
-- `typography` 的 CSS 变量使用 `n` 作为前缀
+- `n-typography` 的 CSS 变量使用 `n` 作为前缀
 - `n-badge` 的 CSS 变量使用 `n` 作为前缀
 
 ## 2.22.0
@@ -2957,7 +2957,7 @@
 ### Fixes
 
 - 修复 `n-date-picker` `n-provider` 传递 `date-locale` 属性无效，关闭 [#250](https://github.com/tusen-ai/naive-ui/issues/250)
-- Fix `n-input` clear button placeholder prevent clicking on actual component [#288](https://github.com/tusen-ai/naive-ui/issues/288)
+- 修复 `n-input` clear button placeholder prevent clicking on actual component [#288](https://github.com/tusen-ai/naive-ui/issues/288)
 - 修复 `n-carousel` 点击当前页对应的控制按钮时，组件显示异常
 - 修复 `n-menu` 折叠时 `render-label` 对于 tooltip 不生效
 - 修复 `n-dropdown` 不能在选项中渲染 `n-popover`
