@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.41.1
+
+### Features
+
+- `n-auto-complete` add `auto-pending` to set whether to preselect the first option
+
 ## 2.41.0
 
 `2025-01-05`

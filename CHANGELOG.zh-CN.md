@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.41.1
+
+### Features
+
+- `n-auto-complete` 新增 `auto-pending` 来设置是否预选第一个选项
+
 ## 2.41.0
 
 `2025-01-05`
