@@ -345,6 +345,11 @@ export default defineComponent({
         onKeyup={this.handleKeyup}
         onKeydown={this.handleKeydown}
       >
+        <p>
+          {' '}
+          {this.mergedValue}
+          {this.checked}
+        </p>
         <div
           class={`${mergedClsPrefix}-switch__rail`}
           aria-hidden="true"

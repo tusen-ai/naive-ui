@@ -12,6 +12,8 @@ export default {
 
   borderRadius: '3px',
   borderRadiusSmall: '2px',
+  borderRadiusMedium: '4px',
+  borderRadiusLarge: '6px',
 
   fontSize: '14px',
   fontSizeMini: '12px',

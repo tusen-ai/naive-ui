@@ -278,6 +278,10 @@ export const enComponentRoutes = [
     component: () => import('../../src/radio/demos/enUS/index.demo-entry.md')
   },
   {
+    path: 'segment',
+    component: () => import('../../src/segment/demos/enUS/index.demo-entry.md')
+  },
+  {
     path: 'form',
     component: () => import('../../src/form/demos/enUS/index.demo-entry.md')
   },
@@ -689,6 +693,10 @@ export const zhComponentRoutes = [
   {
     path: 'radio',
     component: () => import('../../src/radio/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'segment',
+    component: () => import('../../src/segment/demos/zhCN/index.demo-entry.md')
   },
   {
     path: 'form',

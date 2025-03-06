@@ -45,7 +45,7 @@ export default defineComponent({
 
 <template>
   <n-space vertical>
-    <n-radio-group v-model:value="value" name="radiobuttongroup1">
+    <n-radio-group name="radiobuttongroup1">
       <n-radio-button
         v-for="song in songs"
         :key="song.value"
