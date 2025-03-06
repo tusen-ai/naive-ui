@@ -293,6 +293,9 @@ export default defineComponent({
       if (pendingTmNode) {
         setPendingTmNode(pendingTmNode.getNext({ loop: true }), true)
       }
+      else {
+        setPendingTmNode(props.treeMate.getFirstAvailableNode(), true)
+      }
     }
     function prev(): void {
       const { value: pendingTmNode } = pendingNodeRef

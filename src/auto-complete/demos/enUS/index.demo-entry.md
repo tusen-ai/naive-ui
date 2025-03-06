@@ -14,6 +14,7 @@ show-options-by-value.vue
 customized-rendering.vue
 status.vue
 append.vue
+not-auto-pending.vue
 ```
 
 ## API
@@ -42,6 +43,7 @@ append.vue
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validation status. | 2.27.0 |
 | to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
 | value | `string` | `undefined` | Input of autocomplete. |  |
+| auto-pending | `boolean` | `true` | Whether to auto preselect the first option. | 2.41.1 |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | On blur callback function. |  |
 | on-focus | `(event: FocusEvent) => void` | `undefined` | On focus callback function. |  |
 | on-select | `(value: string) => void` | `undefined` | On select callback function. |  |

@@ -111,6 +111,10 @@ export const autoCompleteProps = {
   onSelect: [Function, Array] as PropType<MaybeArray<OnSelect>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
+  autoPending: {
+    type: Boolean,
+    default: true
+  },
   // deprecated
   onInput: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
@@ -445,7 +449,7 @@ export default defineComponent({
                                 this.mergedTheme.peerOverrides
                                   .InternalSelectMenu
                               }
-                              auto-pending
+                              autoPending={this.autoPending}
                               class={[
                                 `${mergedClsPrefix}-auto-complete-menu`,
                                 this.themeClass,

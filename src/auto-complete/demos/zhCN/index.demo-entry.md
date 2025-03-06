@@ -14,6 +14,7 @@ show-options-by-value.vue
 customized-rendering.vue
 status.vue
 append.vue
+not-auto-pending.vue
 ```
 
 ## API
@@ -42,6 +43,7 @@ append.vue
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | to | `string \| HTMLElement \| false` | `body` | 菜单的容器节点，`false` 会待在原地 |  |
 | value | `string` | `undefined` | 自动填充的数据用户可控 |  |
+| auto-pending | `boolean` | `true` | 是否预选第一个选项 | 2.41.1 |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | blur 时触发的回调函数 |  |
 | on-focus | `(event: FocusEvent) => void` | `undefined` | focus 时触发的回调函数 |  |
 | on-select | `(value: string) => void` | `undefined` | select 选中时触发的回调函数 |  |
