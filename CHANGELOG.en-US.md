@@ -2,6 +2,8 @@
 
 ## 2.41.0
 
+`2025-01-05`
+
 ### Breaking Changes
 
 - (**Vue 3.3+ required**) Add slot type for all components.
@@ -1947,7 +1949,7 @@
 ### Feats
 
 - `n-divider` uses `n` as CSS vars prefix.
-- `typography` uses `n` as CSS vars prefix.
+- `n-typography` uses `n` as CSS vars prefix.
 - `n-badge` uses `n` as CSS vars prefix.
 
 ## 2.22.0
