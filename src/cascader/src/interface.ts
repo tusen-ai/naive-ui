@@ -32,19 +32,19 @@ export type OnLoad = (option: CascaderOption) => Promise<void>
 
 export type OnUpdateValue = (
   value: string &
-    number &
-    string[] &
-    number[] &
-    Array<string | number> &
-    (string | null) &
-    (number | null) &
-    (string[] | null) &
-    (number[] | null) &
-    (Array<string | number> | null),
+  number &
+  string[] &
+  number[] &
+  Array<string | number> &
+  (string | null) &
+  (number | null) &
+  (string[] | null) &
+  (number[] | null) &
+  (Array<string | number> | null),
   option: null &
-    CascaderOption &
-    CascaderOption[] &
-    Array<CascaderOption | null>,
+  CascaderOption &
+  CascaderOption[] &
+  Array<CascaderOption | null>,
   path: null & CascaderOption[] & Array<CascaderOption[] | null>
 ) => void
 
@@ -118,6 +118,11 @@ export interface CascaderInjection {
 export interface CascaderSubmenuInstance {
   scroll: (index: number, elSize: number) => void
 }
+
+export type CascaderRenderTag = (props: {
+  option: CascaderOption
+  handleClose: () => void
+}) => VNodeChild
 
 export interface CascaderMenuExposedMethods {
   scroll: (depth: number, index: number, elSize: number) => void

@@ -15,6 +15,7 @@ virtual.vue
 check-strategy.vue
 custom-field.vue
 custom-render.vue
+render-tag.vue
 focus.vue
 status.vue
 default-value-debug.vue
@@ -53,6 +54,7 @@ default-value-debug.vue
 | render-prefix | `(info: { option: CascaderOption, node: VNode \| null, checked: boolean }) => VNodeChild` | `undefined` | 节点前缀的渲染函数 | 2.38.2 |
 | render-label | `(option: CascaderOption, checked: boolean) => VNodeChild` | `undefined` | Cascader 菜单选项标签渲染函数 | 2.24.0 |
 | render-suffix | `(info: { option: CascaderOption, checked: boolean }) => VNodeChild` | `undefined` | 节点后缀的渲染函数 | 2.38.2 |
+| render-tag | `(props: { option: CascaderOption, handleClose: () => void }) => VNodeChild` | `undefined` | 标签的渲染函数 | NEXT_VERSION |
 | separator | `string` | `' / '` | 数据分隔符 |  |
 | show | `boolean` | `undefined` | 是否打开菜单 |  |
 | show-path | `boolean` | `true` | 是否在选择器中显示选项路径 |  |
