@@ -59,7 +59,8 @@ export default defineComponent({
     },
     height: [String, Number],
     railBorderRadius: [String, Number],
-    fillBorderRadius: [String, Number]
+    fillBorderRadius: [String, Number],
+    indeterminate: Boolean
   },
   setup(props, { slots }) {
     const styleHeightRef = computed(() => {
@@ -102,6 +103,7 @@ export default defineComponent({
         status,
         showIndicator,
         processing,
+        indeterminate,
         clsPrefix
       } = props
       return (
@@ -133,7 +135,9 @@ export default defineComponent({
                   class={[
                     `${clsPrefix}-progress-graph-line-fill`,
                     processing
-                    && `${clsPrefix}-progress-graph-line-fill--processing`
+                    && `${clsPrefix}-progress-graph-line-fill--processing`,
+                    indeterminate
+                    && `${clsPrefix}-progress-graph-line-fill--indeterminate`
                   ]}
                   style={{
                     maxWidth: `${props.percentage}%`,

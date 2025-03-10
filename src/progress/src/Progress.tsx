@@ -78,6 +78,14 @@ export const progressProps = {
     type: String as PropType<ProgressSize>,
     default: 'medium'
   },
+  indeterminate: {
+    type: Boolean,
+    default: false
+  },
+  duration: {
+    type: Number,
+    default: 3
+  },
   height: Number,
   borderRadius: [String, Number] as PropType<string | number>,
   fillBorderRadius: [String, Number] as PropType<string | number>,
@@ -159,7 +167,8 @@ export default defineComponent({
         '--n-text-color-circle': textColorCircle,
         '--n-text-color-line-inner': textColorLineInner,
         '--n-text-color-line-outer': textColorLineOuter,
-        '--n-circle-width': circleWidth
+        '--n-circle-width': circleWidth,
+        '--n-progress-indeterminate-duration': `${props.duration}s`
       }
     })
     const themeClassHandle = inlineThemeDisabled
@@ -174,9 +183,10 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       mergedIndicatorPlacement: mergedIndicatorPlacementRef,
       gapDeg,
+      indeterminate: props.indeterminate,
+
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
-      mergedSize: mergedSizeRef,
       onRender: themeClassHandle?.onRender
     }
   },
@@ -205,8 +215,8 @@ export default defineComponent({
       gapDeg,
       gapOffsetDegree,
       themeClass,
+      indeterminate,
       $slots,
-      mergedSize,
       onRender
     } = this
     onRender?.()
@@ -232,7 +242,6 @@ export default defineComponent({
           <Circle
             clsPrefix={mergedClsPrefix}
             status={status}
-            size={mergedSize}
             showIndicator={showIndicator}
             indicatorTextColor={indicatorTextColor}
             railColor={railColor as any}
@@ -261,6 +270,7 @@ export default defineComponent({
             railStyle={railStyle as any}
             percentage={percentage as number}
             processing={processing}
+            indeterminate={indeterminate}
             indicatorPlacement={mergedIndicatorPlacement}
             unit={unit}
             fillBorderRadius={fillBorderRadius}

@@ -214,7 +214,11 @@ export default c([
                 background-image: var(--n-line-bg-processing);
                 animation: progress-processing-animation 2s var(--n-bezier) infinite;
               `)
-            ])
+            ]),
+            cM('indeterminate', `
+              transform: translateZ(0);
+              animation: indeterminate var(--n-progress-indeterminate-duration) infinite;
+            `)
           ])
         ])
       ])
@@ -244,6 +248,15 @@ export default c([
       bottom: 0;
       right: 0;
       opacity: 0;
+    }
+  `),
+  c('@keyframes indeterminate', `
+    0% {
+      left: -100%;
+    }
+
+    100% {
+      left: 100%;
     }
   `)
 ])

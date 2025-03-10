@@ -5,6 +5,7 @@
 ### Features
 
 - `n-progress` add `size` props. closes [#6650](https://github.com/tusen-ai/naive-ui/issues/6650)
+- `n-progress` add `indeterminate`, `duration` props. closes [#6786](https://github.com/tusen-ai/naive-ui/issues/6786)
 
 ## 2.41.0
 
