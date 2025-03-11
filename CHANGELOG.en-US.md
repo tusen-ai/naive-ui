@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### Feature
+### Features
 
 - 为 Split组件添加了 lazy 延迟渲染属性
 
