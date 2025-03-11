@@ -106,7 +106,7 @@ export default defineComponent({
     if (props.watchProps?.includes('defaultSize')) {
       watchEffect(() => (uncontrolledSizeRef.value = props.defaultSize))
     }
-    // 更新受控或非受控的大小值
+    // Update controlled or uncontrolled size values
     const doUpdateSize = (size: number | string): void => {
       const _onUpdateSize = props['onUpdate:size']
       if (props.onUpdateSize)
@@ -116,9 +116,9 @@ export default defineComponent({
       uncontrolledSizeRef.value = size
     }
     const mergedSizeRef = useMergedState(controlledSizeRef, uncontrolledSizeRef)
-    // 当 lazy 为 true 时，拖拽过程中先将新的大小保存到 pendingSizeRef
+    // When lazy is true, save the new size to pendingSizeRef during dragging
     const pendingSizeRef = ref(mergedSizeRef.value)
-    // 用于实时显示拖拽指示线的样式
+    // Styles for real-time display of drag and drop indicator lines
     const indicatorStyle = ref<CSSProperties>({})
 
     const firstPaneStyle = computed(() => {
@@ -173,7 +173,7 @@ export default defineComponent({
           props.onDragMove(e)
       }
       const onMouseUp = (e: MouseEvent): void => {
-        // lazy 模式下拖拽结束时更新大小，并清空指示线
+        // Update the size at the end of dragging in lazy mode and clear the indicator line
         if (props.lazy) {
           doUpdateSize(pendingSizeRef.value)
           indicatorStyle.value = {}
@@ -240,10 +240,10 @@ export default defineComponent({
       else {
         newSize = nextPxSize / containerUsableSize
       }
-      // 根据 lazy 判断是否立即更新
+      // Judging from lazy whether to update immediately
       if (props.lazy) {
         pendingSizeRef.value = newSize
-        // 更新指示线样式，指示线跟随鼠标移动
+        // Update the indicator line style, the indicator line follows the mouse
         if (direction === 'horizontal') {
           indicatorStyle.value = {
             position: 'absolute',
