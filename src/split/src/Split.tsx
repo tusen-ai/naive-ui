@@ -41,6 +41,10 @@ export const splitProps = {
   onUpdateSize: [Function, Array] as PropType<
     SplitOnUpdateSize | SplitOnUpdateSize[]
   >,
+  lazy: {
+    type: Boolean as PropType<boolean>,
+    default: false
+  },
   size: [String, Number] as PropType<string | number>,
   min: {
     type: [String, Number] as PropType<string | number>,
@@ -102,7 +106,7 @@ export default defineComponent({
     if (props.watchProps?.includes('defaultSize')) {
       watchEffect(() => (uncontrolledSizeRef.value = props.defaultSize))
     }
-    // use to update controlled or uncontrolled values
+    // 更新受控或非受控的大小值
     const doUpdateSize = (size: number | string): void => {
       const _onUpdateSize = props['onUpdate:size']
       if (props.onUpdateSize)
@@ -112,6 +116,10 @@ export default defineComponent({
       uncontrolledSizeRef.value = size
     }
     const mergedSizeRef = useMergedState(controlledSizeRef, uncontrolledSizeRef)
+    // 当 lazy 为 true 时，拖拽过程中先将新的大小保存到 pendingSizeRef
+    const pendingSizeRef = ref(mergedSizeRef.value)
+    // 用于实时显示拖拽指示线的样式
+    const indicatorStyle = ref<CSSProperties>({})
 
     const firstPaneStyle = computed(() => {
       const sizeValue = mergedSizeRef.value
@@ -164,7 +172,12 @@ export default defineComponent({
         if (props.onDragMove)
           props.onDragMove(e)
       }
-      const onMouseUp = (): void => {
+      const onMouseUp = (e: MouseEvent): void => {
+        // lazy 模式下拖拽结束时更新大小，并清空指示线
+        if (props.lazy) {
+          doUpdateSize(pendingSizeRef.value)
+          indicatorStyle.value = {}
+        }
         off(mouseMoveEvent, document, onMouseMove)
         off(mouseUpEvent, document, onMouseUp)
         isDraggingRef.value = false
@@ -211,7 +224,6 @@ export default defineComponent({
           : event.clientY - containerRect.top + offset
 
       const { min, max } = props
-
       const pxMin
         = typeof min === 'string' ? depx(min) : min * containerUsableSize
       const pxMax
@@ -220,13 +232,41 @@ export default defineComponent({
       let nextPxSize = newPxSize
       nextPxSize = Math.max(nextPxSize, pxMin)
       nextPxSize = Math.min(nextPxSize, pxMax, containerUsableSize)
-      // in pixel mode
+
+      let newSize: number | string
       if (typeof mergedSizeRef.value === 'string') {
-        doUpdateSize(`${nextPxSize}px`)
+        newSize = `${nextPxSize}px`
       }
       else {
-        // in percentage mode
-        doUpdateSize(nextPxSize / containerUsableSize)
+        newSize = nextPxSize / containerUsableSize
+      }
+      // 根据 lazy 判断是否立即更新
+      if (props.lazy) {
+        pendingSizeRef.value = newSize
+        // 更新指示线样式，指示线跟随鼠标移动
+        if (direction === 'horizontal') {
+          indicatorStyle.value = {
+            position: 'absolute',
+            left: `${nextPxSize}px`,
+            top: '0',
+            bottom: '0',
+            width: '1px',
+            background: cssVarsRef.value['--n-resize-trigger-color-hover']
+          }
+        }
+        else {
+          indicatorStyle.value = {
+            position: 'absolute',
+            top: `${nextPxSize}px`,
+            left: '0',
+            right: '0',
+            height: '1px',
+            background: cssVarsRef.value['--n-resize-trigger-color-hover']
+          }
+        }
+      }
+      else {
+        doUpdateSize(newSize)
       }
     }
 
@@ -244,7 +284,9 @@ export default defineComponent({
       resizeTriggerWrapperStyle,
       resizeTriggerStyle,
       handleMouseDown,
-      firstPaneStyle
+      firstPaneStyle,
+      indicatorStyle,
+      lazy: props.lazy
     }
   },
   render() {
@@ -256,7 +298,7 @@ export default defineComponent({
           `${this.mergedClsPrefix}-split--${this.direction}`,
           this.themeClass
         ]}
-        style={this.cssVars as CSSProperties}
+        style={[this.cssVars as CSSProperties, { position: 'relative' }]}
       >
         <div
           class={[`${this.mergedClsPrefix}-split-pane-1`, this.pane1Class]}
@@ -282,6 +324,13 @@ export default defineComponent({
               >
               </div>
             ])}
+          </div>
+        )}
+        {this.lazy && this.isDragging && (
+          <div
+            class={`${this.mergedClsPrefix}-split__resize-indicator`}
+            style={this.indicatorStyle}
+          >
           </div>
         )}
         <div
