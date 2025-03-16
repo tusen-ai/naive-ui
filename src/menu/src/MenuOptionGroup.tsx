@@ -38,16 +38,16 @@ export const NMenuOptionGroup = defineComponent({
   props: menuItemGroupProps,
   setup(props) {
     const MenuChild = useMenuChild(props)
-
-    const mergedDisabled = computed(() => {
-      return (
-        MenuChild.NSubmenu?.mergedDisabledRef.value || props.tmNode.disabled
-      )
+    const { NSubmenu } = MenuChild
+    const mergedDisabledRef = computed(() => {
+      const { disabled } = props.tmNode
+      if (NSubmenu?.mergedDisabledRef.value)
+        return true
+      return disabled
     })
-
     provide(submenuInjectionKey, {
-      mergedDisabledRef: mergedDisabled,
-      paddingLeftRef: MenuChild.paddingLeft
+      paddingLeftRef: MenuChild.paddingLeft,
+      mergedDisabledRef
     })
 
     provide(menuItemGroupInjectionKey, {
@@ -78,9 +78,7 @@ export const NMenuOptionGroup = defineComponent({
             ) : null}
           </div>
           <div>
-            {props.tmNodes.map((tmNode) => {
-              return itemRenderer(tmNode, menuProps)
-            })}
+            {props.tmNodes.map(tmNode => itemRenderer(tmNode, menuProps))}
           </div>
         </div>
       )
