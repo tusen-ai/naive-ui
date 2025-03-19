@@ -22,6 +22,7 @@ import {
   type CSSProperties,
   defineComponent,
   type ExtractPropTypes,
+  Fragment,
   h,
   nextTick,
   onMounted,
@@ -51,6 +52,7 @@ import { tabsLight } from '../styles'
 import { tabsInjectionKey } from './interface'
 import style from './styles/index.cssr'
 import Tab from './Tab'
+import TabsButton from './TabsButton'
 
 type TabPaneProps = ExtractPropTypes<typeof tabPaneProps> & {
   'display-directive': 'if' | 'show' | 'show:lazy'
@@ -435,6 +437,10 @@ export default defineComponent({
         call(onClose as OnCloseImpl, panelName)
     }
 
+    function handleButtonClick(type: string): void {
+      // animationDirectionRef.value = type
+    }
+
     let firstTimeUpdatePosition = true
     function updateBarPositionInstantly(): void {
       const { value: barEl } = barElRef
@@ -599,6 +605,7 @@ export default defineComponent({
       })
     }
 
+    const isScroll = ref(false)
     function deriveScrollShadow(el: HTMLElement | null): void {
       if (!el)
         return
@@ -607,11 +614,13 @@ export default defineComponent({
         const { scrollLeft, scrollWidth, offsetWidth } = el
         startReachedRef.value = scrollLeft <= 0
         endReachedRef.value = scrollLeft + offsetWidth >= scrollWidth
+        isScroll.value = offsetWidth < scrollWidth
       }
       else {
         const { scrollTop, scrollHeight, offsetHeight } = el
         startReachedRef.value = scrollTop <= 0
         endReachedRef.value = scrollTop + offsetHeight >= scrollHeight
+        isScroll.value = offsetHeight < scrollHeight
       }
     }
 
@@ -794,6 +803,10 @@ export default defineComponent({
       onAnimationEnter,
       onAnimationAfterEnter,
       onRender: themeClassHandle?.onRender,
+      startReachedRef,
+      endReachedRef,
+      isScroll,
+      handleButtonClick,
       ...exposedMethods
     }
   },
@@ -809,6 +822,10 @@ export default defineComponent({
       onRender,
       paneWrapperClass,
       paneWrapperStyle,
+      startReachedRef,
+      endReachedRef,
+      isScroll,
+      handleButtonClick,
       $slots: { default: defaultSlot, prefix: prefixSlot, suffix: suffixSlot }
     } = this
 
@@ -951,6 +968,7 @@ export default defineComponent({
                 </div>
               )
           )}
+
           {isSegment ? (
             <VResizeObserver onResize={this.handleSegmentResize}>
               {{
@@ -1001,35 +1019,58 @@ export default defineComponent({
               }}
             </VResizeObserver>
           ) : (
-            <VResizeObserver onResize={this.handleNavResize}>
-              {{
-                default: () => (
-                  <div
-                    class={`${mergedClsPrefix}-tabs-nav-scroll-wrapper`}
-                    ref="scrollWrapperElRef"
-                  >
-                    {['top', 'bottom'].includes(resolvedPlacement) ? (
-                      <VXScroll
-                        ref="xScrollInstRef"
-                        onScroll={this.handleScroll}
-                      >
-                        {{
-                          default: scrollContent
-                        }}
-                      </VXScroll>
-                    ) : (
-                      <div
-                        class={`${mergedClsPrefix}-tabs-nav-y-scroll`}
-                        onScroll={this.handleScroll}
-                        ref="yScrollElRef"
-                      >
-                        {scrollContent()}
-                      </div>
-                    )}
-                  </div>
-                )
-              }}
-            </VResizeObserver>
+            <>
+
+              { isScroll && (
+                <TabsButton
+                  mergedClsPrefix={mergedClsPrefix}
+                  type="prev"
+                  vertical={resolvedPlacement === 'left' || resolvedPlacement === 'right'}
+                  disabled={startReachedRef}
+                  onClick={handleButtonClick}
+                />
+              )}
+
+              <VResizeObserver onResize={this.handleNavResize}>
+                {{
+                  default: () => (
+                    <div
+                      class={`${mergedClsPrefix}-tabs-nav-scroll-wrapper`}
+                      ref="scrollWrapperElRef"
+                    >
+                      {['top', 'bottom'].includes(resolvedPlacement) ? (
+                        <VXScroll
+                          ref="xScrollInstRef"
+                          onScroll={this.handleScroll}
+                        >
+                          {{
+                            default: scrollContent
+                          }}
+                        </VXScroll>
+                      ) : (
+                        <div
+                          class={`${mergedClsPrefix}-tabs-nav-y-scroll`}
+                          onScroll={this.handleScroll}
+                          ref="yScrollElRef"
+                        >
+                          {scrollContent()}
+                        </div>
+                      )}
+                    </div>
+                  )
+                }}
+              </VResizeObserver>
+
+              { isScroll && (
+                <TabsButton
+                  mergedClsPrefix={mergedClsPrefix}
+                  type="next"
+                  vertical={resolvedPlacement === 'left' || resolvedPlacement === 'right'}
+                  disabled={endReachedRef}
+                  onClick={handleButtonClick}
+                />
+              )}
+            </>
           )}
           {addTabFixed && addable && isCard
             ? createAddTag(addable, true)
