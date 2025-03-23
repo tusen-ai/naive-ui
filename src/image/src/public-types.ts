@@ -17,3 +17,11 @@ export interface ImageRenderToolbarProps {
 export type ImageRenderToolbar = (props: ImageRenderToolbarProps) => VNodeChild
 export type ImageGroupRenderToolbarProps = ImageRenderToolbarProps
 export type ImageGroupRenderToolbar = ImageRenderToolbar
+
+export interface ImagePreviewProps {
+  /**
+   * 是否启用鼠标滚轮缩放图片
+   * @default true
+   */
+  enableWheel?: boolean
+}
