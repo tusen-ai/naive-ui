@@ -18,6 +18,7 @@
 - `n-modal` adds `draggable` prop, closes [#6525](https://github.com/tusen-ai/naive-ui/issues/6525), [#5792](https://github.com/tusen-ai/naive-ui/issues/5792), [#5711](https://github.com/tusen-ai/naive-ui/issues/5711), [#5501](https://github.com/tusen-ai/naive-ui/issues/5501) and [#2152](https://github.com/tusen-ai/naive-ui/issues/2152).
 - `useDialog` supports `draggable` option.
 - `useModal` supports `draggable` option.
+- `n-image`支持通过`enable-wheel`属性配置是否启用鼠标滚轮缩放，默认为`true`
 
 ### Fixes
 
