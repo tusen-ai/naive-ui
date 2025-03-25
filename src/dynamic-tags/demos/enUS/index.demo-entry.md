@@ -12,6 +12,7 @@ slot.vue
 render-tag.vue
 option-format.vue
 on-create.vue
+draggable.vue
 ```
 
 ## API
@@ -35,6 +36,7 @@ on-create.vue
 | tag-style | `string \| Object` | `undefined` | Customize the style of the tag. |  |
 | type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | Type of the tag. |  |
 | value | `string[]` | `undefined` | Value if manually set. |  |
+| draggable | `boolean` | `false` | Whether you can drag to change the tag order. | 2.41.1 |
 | on-create | `((label: string) => string) \| ((label: string) => ({ label: string, value: string }))` | `label => label` | Create derived value from input. | 2.30.4 |
 | on-update:value | `((value: string[]) => void) \| ((value: DynamicTagsOption[]) => void)` | `undefined` | Callback when the component's value changes. |  |
 
