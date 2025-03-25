@@ -7,7 +7,6 @@ import {
   ChevronRightIcon as ArrowRightIcon,
   ArrowUpIcon
 } from '../../_internal/icons'
-// import IconHover from '../_components/icon-hover.vue'
 
 type ButtonTypes = 'prev' | 'next'
 
@@ -16,7 +15,7 @@ export default defineComponent({
   props: {
     type: {
       type: String as PropType<ButtonTypes>,
-      default: 'next',
+      default: 'next'
     },
     mergedClsPrefix: {
       type: String,
@@ -24,15 +23,15 @@ export default defineComponent({
     },
     vertical: {
       type: Boolean,
-      default: false,
+      default: false
     },
     disabled: {
       type: Boolean,
-      default: false,
+      default: false
     },
     onClick: {
-      type: Function as PropType<(type: ButtonTypes, ev: Event) => void>,
-    },
+      type: Function as PropType<(type: ButtonTypes, ev: Event) => void>
+    }
   },
   emits: ['click'],
   setup(props, { emit }) {
@@ -57,20 +56,6 @@ export default defineComponent({
       }
     }
 
-    // const cls = computed(() => [
-    //   prefixCls,
-    //   {
-    //     [`${prefixCls}-disabled`]: props.disabled,
-    //     [`${prefixCls}-left`]:
-    //       props.direction === 'horizontal' && props.type === 'previous',
-    //     [`${prefixCls}-right`]:
-    //       props.direction === 'horizontal' && props.type === 'next',
-    //     [`${prefixCls}-up`]:
-    //       props.direction === 'vertical' && props.type === 'previous',
-    //     [`${prefixCls}-down`]:
-    //       props.direction === 'vertical' && props.type === 'next',
-    //   },
-    // ])
     return {
       renderIcon,
       handleClick
@@ -81,19 +66,32 @@ export default defineComponent({
       mergedClsPrefix,
       renderIcon,
       disabled,
+      type,
+      vertical,
       handleClick
     } = this
 
     return (
       <div
         class={[
+          `${mergedClsPrefix}-tabs-nav-button`,
+          !vertical
+          && type === 'prev'
+          && `${mergedClsPrefix}-tabs-nav-button--left`,
+          !vertical
+          && type === 'next'
+          && `${mergedClsPrefix}-tabs-nav-button--right`,
+          vertical
+          && type === 'prev'
+          && `${mergedClsPrefix}-tabs-nav-button--up`,
+          vertical
+          && type === 'next'
+          && `${mergedClsPrefix}-tabs-nav-button--down`,
           disabled && `${mergedClsPrefix}-tabs-nav-button--disabled`
         ]}
         onClick={handleClick}
       >
-        <NBaseIcon clsPrefix={mergedClsPrefix}>
-          {renderIcon()}
-        </NBaseIcon>
+        <NBaseIcon clsPrefix={mergedClsPrefix}>{renderIcon()}</NBaseIcon>
       </div>
     )
   }

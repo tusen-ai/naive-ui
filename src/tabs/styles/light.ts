@@ -20,7 +20,9 @@ export function self(vars: ThemeCommonVars) {
     textColor1,
     borderRadius,
     fontSize,
-    fontWeightStrong
+    fontWeightStrong,
+    iconColorDisabled,
+    primaryColorHover
   } = vars
   return {
     ...sizeVariables,
@@ -56,7 +58,9 @@ export function self(vars: ThemeCommonVars) {
     tabFontWeight: fontWeight,
     tabBorderRadius: borderRadius,
     paneTextColor: textColor2,
-    fontWeightStrong
+    fontWeightStrong,
+    iconColorDisabled,
+    navButtonHoverColor: primaryColorHover
   }
 }
 

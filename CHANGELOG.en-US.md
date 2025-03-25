@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2.41.1
+
+## 2.41.1
+
+### Features
+
+- `n-tabs` adds `show-scroll-button`，`center-active-tab` prop，closes [#5846](https://github.com/tusen-ai/naive-ui/issues/5846)、[#2128](https://github.com/tusen-ai/naive-ui/issues/2128)
+
 ## 2.41.0
 
 `2025-01-05`

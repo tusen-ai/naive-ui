@@ -112,7 +112,15 @@ export const tabsProps = {
   activeName: [String, Number] as PropType<string | number>,
   onActiveNameChange: [Function, Array] as PropType<
     MaybeArray<(value: string & number) => void>
-  >
+  >,
+  showScrollButton: {
+    type: Boolean,
+    default: false
+  },
+  centerActiveTab: {
+    type: Boolean,
+    default: false
+  }
 } as const
 
 export type TabsProps = ExtractPublicPropTypes<typeof tabsProps>
@@ -302,35 +310,93 @@ export default defineComponent({
         hideBarStyle()
       }
     }
-    function updateCurrentScrollPosition(): void {
-      const scrollWrapperEl: HTMLElement | undefined = xScrollInstRef.value?.$el
-      if (!scrollWrapperEl)
-        return
-      const tabEl = getCurrentEl()
-      if (!tabEl)
-        return
-      const {
-        scrollLeft: scrollWrapperElScrollLeft,
-        offsetWidth: scrollWrapperElOffsetWidth
-      } = scrollWrapperEl
-      const { offsetLeft: tabElOffsetLeft, offsetWidth: tabElOffsetWidth }
-        = tabEl
-      if (scrollWrapperElScrollLeft > tabElOffsetLeft) {
-        scrollWrapperEl.scrollTo({
-          top: 0,
-          left: tabElOffsetLeft,
+
+    function scrollToElement(
+      scrollContainer: HTMLElement,
+      targetElement: HTMLElement,
+      isHorizontal: boolean,
+      centerActiveTab: boolean
+    ) {
+      if (centerActiveTab) {
+        const containerSize = isHorizontal
+          ? scrollContainer.offsetWidth
+          : scrollContainer.offsetHeight
+        const elementSize = isHorizontal
+          ? targetElement.offsetWidth
+          : targetElement.offsetHeight
+        const elementOffset = isHorizontal
+          ? targetElement.offsetLeft
+          : targetElement.offsetTop
+        const centerOffset = (containerSize - elementSize) / 2
+        const targetScroll = elementOffset - centerOffset
+
+        scrollContainer.scrollTo({
+          top: isHorizontal ? 0 : targetScroll,
+          left: isHorizontal ? targetScroll : 0,
           behavior: 'smooth'
         })
       }
-      else if (
-        tabElOffsetLeft + tabElOffsetWidth
-        > scrollWrapperElScrollLeft + scrollWrapperElOffsetWidth
-      ) {
-        scrollWrapperEl.scrollTo({
-          top: 0,
-          left: tabElOffsetLeft + tabElOffsetWidth - scrollWrapperElOffsetWidth,
-          behavior: 'smooth'
-        })
+      else {
+        const containerScroll = isHorizontal
+          ? scrollContainer.scrollLeft
+          : scrollContainer.scrollTop
+        const containerSize = isHorizontal
+          ? scrollContainer.offsetWidth
+          : scrollContainer.offsetHeight
+        const elementOffset = isHorizontal
+          ? targetElement.offsetLeft
+          : targetElement.offsetTop
+        const elementSize = isHorizontal
+          ? targetElement.offsetWidth
+          : targetElement.offsetHeight
+
+        if (containerScroll > elementOffset) {
+          scrollContainer.scrollTo({
+            top: isHorizontal ? 0 : elementOffset,
+            left: isHorizontal ? elementOffset : 0,
+            behavior: 'smooth'
+          })
+        }
+        else if (
+          elementOffset + elementSize
+          > containerScroll + containerSize
+        ) {
+          scrollContainer.scrollTo({
+            top: isHorizontal ? 0 : elementOffset + elementSize - containerSize,
+            left: isHorizontal
+              ? elementOffset + elementSize - containerSize
+              : 0,
+            behavior: 'smooth'
+          })
+        }
+      }
+    }
+
+    function updateCurrentScrollPosition(): void {
+      const isHorizontal = ['top', 'bottom'].includes(props.placement)
+      if (isHorizontal) {
+        const scrollWrapperEl: HTMLElement | undefined
+          = xScrollInstRef.value?.$el
+        if (!scrollWrapperEl)
+          return
+        const tabEl = getCurrentEl()
+        if (!tabEl)
+          return
+        scrollToElement(
+          scrollWrapperEl,
+          tabEl,
+          isHorizontal,
+          props.centerActiveTab
+        )
+      }
+      else {
+        const { value: yScrollInst } = yScrollElRef
+        if (!yScrollInst)
+          return
+        const tabEl = getCurrentEl()
+        if (!tabEl)
+          return
+        scrollToElement(yScrollInst, tabEl, isHorizontal, props.centerActiveTab)
       }
     }
 
@@ -438,7 +504,34 @@ export default defineComponent({
     }
 
     function handleButtonClick(type: string): void {
-      // animationDirectionRef.value = type
+      if (['top', 'bottom'].includes(props.placement)) {
+        const { value: xScrollInst } = xScrollInstRef
+        if (!xScrollInst)
+          return
+        const scrollLeft = xScrollInst.$el?.scrollLeft
+        const offsetWidth = xScrollInst.$el?.offsetWidth
+        const left
+          = type === 'next' ? scrollLeft + offsetWidth : scrollLeft - offsetWidth
+        xScrollInst.scrollTo({
+          left,
+          top: 0,
+          behavior: 'smooth'
+        })
+      }
+      else {
+        const { value: yScrollInst } = yScrollElRef
+        if (!yScrollInst)
+          return
+        const height = yScrollInst.scrollTop
+        const offsetHeight = yScrollInst.offsetHeight
+        const top
+          = type === 'next' ? height + offsetHeight : height - offsetHeight
+        yScrollInst.scrollTo({
+          top,
+          left: 0,
+          behavior: 'smooth'
+        })
+      }
     }
 
     let firstTimeUpdatePosition = true
@@ -716,6 +809,8 @@ export default defineComponent({
           closeColorHover,
           closeColorPressed,
           closeBorderRadius,
+          iconColorDisabled,
+          navButtonHoverColor,
           [createKey('panePadding', size)]: panePadding,
           [createKey('tabPadding', sizeType)]: tabPadding,
           [createKey('tabPaddingVertical', sizeType)]: tabPaddingVertical,
@@ -761,7 +856,9 @@ export default defineComponent({
         '--n-pane-padding-top': getPadding(panePadding, 'top'),
         '--n-pane-padding-bottom': getPadding(panePadding, 'bottom'),
         '--n-font-weight-strong': fontWeightStrong,
-        '--n-tab-color-segment': tabColorSegment
+        '--n-tab-color-segment': tabColorSegment,
+        '--n-icon-color-disabled': iconColorDisabled,
+        '--n-nav-button-color-hover': navButtonHoverColor
       }
     })
 
@@ -825,6 +922,7 @@ export default defineComponent({
       startReachedRef,
       endReachedRef,
       isScroll,
+      showScrollButton,
       handleButtonClick,
       $slots: { default: defaultSlot, prefix: prefixSlot, suffix: suffixSlot }
     } = this
@@ -1020,12 +1118,14 @@ export default defineComponent({
             </VResizeObserver>
           ) : (
             <>
-
-              { isScroll && (
+              {showScrollButton && isScroll && (
                 <TabsButton
                   mergedClsPrefix={mergedClsPrefix}
                   type="prev"
-                  vertical={resolvedPlacement === 'left' || resolvedPlacement === 'right'}
+                  vertical={
+                    resolvedPlacement === 'left'
+                    || resolvedPlacement === 'right'
+                  }
                   disabled={startReachedRef}
                   onClick={handleButtonClick}
                 />
@@ -1061,11 +1161,14 @@ export default defineComponent({
                 }}
               </VResizeObserver>
 
-              { isScroll && (
+              {showScrollButton && isScroll && (
                 <TabsButton
                   mergedClsPrefix={mergedClsPrefix}
                   type="next"
-                  vertical={resolvedPlacement === 'left' || resolvedPlacement === 'right'}
+                  vertical={
+                    resolvedPlacement === 'left'
+                    || resolvedPlacement === 'right'
+                  }
                   disabled={endReachedRef}
                   onClick={handleButtonClick}
                 />

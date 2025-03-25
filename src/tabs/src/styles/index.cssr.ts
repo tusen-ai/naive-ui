@@ -587,5 +587,36 @@ export default cB('tabs', `
         `)
       ])
     ])
+  ]),
+  cB('tabs-nav-button', `
+    font-size: 16px;
+    user-select: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `, [
+    cM('disabled', `
+      cursor: not-allowed;
+      color: var(--n-icon-color-disabled);
+    `),
+    cM('left', `
+      margin-left: 10px;
+      margin-right: 6px;`),
+    cM('right', `
+      margin-right: 10px;
+      margin-left: 6px;
+    `),
+    cM('up', `
+      margin-bottom: 10px;
+    `),
+    cM('down', `
+      margin-top: 10px;
+    `),
+    cNotM('disabled', [
+      c('&:hover', `
+        color: var(--n-nav-button-color-hover);
+      `)
+    ])
   ])
 ])
