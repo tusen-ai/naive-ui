@@ -1,0 +1,17 @@
+import { c, cB } from '../../../_utils/cssr'
+
+export default c([
+  cB('verification-code', `
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    column-gap: 4px;`, [
+      cB('input', `
+        width: 40px;
+        padding-right: 0;
+        padding-left: 0;
+        text-align: center;`)
+    ]
+  )
+])

@@ -100,6 +100,7 @@ import type { TreeSelectTheme } from '../../tree-select/styles'
 import type { TreeTheme } from '../../tree/styles'
 import type { TypographyTheme } from '../../typography/styles'
 import type { UploadTheme } from '../../upload/styles'
+import type { VerificationCodeTheme } from '../../verification-code/styles'
 import type { WatermarkTheme } from '../../watermark/styles'
 import type { GlobalTheme, GlobalThemeOverrides } from './interface'
 import type { Katex } from './katex'
@@ -195,6 +196,7 @@ export interface GlobalThemeWithoutCommon {
   // internal
   InternalSelectMenu?: InternalSelectMenuTheme
   InternalSelection?: InternalSelectionTheme
+  VerificationCode?: VerificationCodeTheme
 }
 
 export interface GlobalComponentConfig {
