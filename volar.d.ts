@@ -79,6 +79,7 @@ declare module 'vue' {
     NInputGroup: (typeof import('naive-ui'))['NInputGroup']
     NInputGroupLabel: (typeof import('naive-ui'))['NInputGroupLabel']
     NInputNumber: (typeof import('naive-ui'))['NInputNumber']
+    NInputOpt: (typeof import('naive-ui'))['NInputOpt']
     NLayout: (typeof import('naive-ui'))['NLayout']
     NLayoutContent: (typeof import('naive-ui'))['NLayoutContent']
     NLayoutFooter: (typeof import('naive-ui'))['NLayoutFooter']
@@ -150,7 +151,6 @@ declare module 'vue' {
     NUploadDragger: (typeof import('naive-ui'))['NUploadDragger']
     NUploadFileList: (typeof import('naive-ui'))['NUploadFileList']
     NUploadTrigger: (typeof import('naive-ui'))['NUploadTrigger']
-    NVerificationCode: (typeof import('naive-ui'))['NVerificationCode']
     NVirtualList: (typeof import('naive-ui'))['NVirtualList']
     NWatermark: (typeof import('naive-ui'))['NWatermark']
   }

@@ -381,10 +381,10 @@ export function createComponentMenuOptions({ lang, theme }) {
           path: '/input-number'
         },
         {
-          en: 'Verification Code',
-          zh: '验证码输入框',
+          en: 'Input Opt',
+          zh: '验证码',
           enSuffix: true,
-          path: '/verification-code',
+          path: '/input-opt',
           isNew: true
         },
         {

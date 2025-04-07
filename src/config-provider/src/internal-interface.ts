@@ -52,6 +52,7 @@ import type { IconWrapperTheme } from '../../icon-wrapper/styles'
 import type { IconTheme } from '../../icon/styles'
 import type { ImageTheme } from '../../image/styles'
 import type { InputNumberTheme } from '../../input-number/styles'
+import type { InputOptTheme } from '../../input-opt/styles'
 import type { Size as InputSize } from '../../input/src/interface'
 import type { InputTheme } from '../../input/styles'
 import type { LayoutTheme } from '../../layout/styles'
@@ -100,7 +101,6 @@ import type { TreeSelectTheme } from '../../tree-select/styles'
 import type { TreeTheme } from '../../tree/styles'
 import type { TypographyTheme } from '../../typography/styles'
 import type { UploadTheme } from '../../upload/styles'
-import type { VerificationCodeTheme } from '../../verification-code/styles'
 import type { WatermarkTheme } from '../../watermark/styles'
 import type { GlobalTheme, GlobalThemeOverrides } from './interface'
 import type { Katex } from './katex'
@@ -196,7 +196,7 @@ export interface GlobalThemeWithoutCommon {
   // internal
   InternalSelectMenu?: InternalSelectMenuTheme
   InternalSelection?: InternalSelectionTheme
-  VerificationCode?: VerificationCodeTheme
+  InputOpt?: InputOptTheme
 }
 
 export interface GlobalComponentConfig {

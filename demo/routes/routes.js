@@ -221,9 +221,9 @@ export const enComponentRoutes = [
     component: () => import('../../src/input/demos/enUS/index.demo-entry.md')
   },
   {
-    path: 'verification-code',
+    path: 'input-opt',
     component: () =>
-      import('../../src/verification-code/demos/enUS/index.demo-entry.md')
+      import('../../src/input-opt/demos/enUS/index.demo-entry.md')
   },
   {
     path: 'select',
@@ -639,9 +639,9 @@ export const zhComponentRoutes = [
     component: () => import('../../src/input/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'verification-code',
+    path: 'input-opt',
     component: () =>
-      import('../../src/verification-code/demos/zhCN/index.demo-entry.md')
+      import('../../src/input-opt/demos/zhCN/index.demo-entry.md')
   },
   {
     path: 'select',

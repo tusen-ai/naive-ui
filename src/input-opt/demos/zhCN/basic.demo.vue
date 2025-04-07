@@ -1,7 +1,7 @@
 <markdown>
 # 基础用法
 
-好在这颗树不是活的，也不平衡。
+字符数由 length 选项定义，默认情况下设置为 6。
 </markdown>
 
 <script lang="ts" setup>
@@ -11,5 +11,5 @@ const value = ref('654321')
 </script>
 
 <template>
-  <n-verification-code v-model="value" style="width: 300px" />
+  <n-input-opt v-model:value="value" />
 </template>

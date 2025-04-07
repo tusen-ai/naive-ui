@@ -1,7 +1,7 @@
 <markdown>
-# 基础用法
+# mask
 
-好在这颗树不是活的，也不平衡。
+Use mask = true to turn on password mode
 </markdown>
 
 <script lang="ts" setup>
@@ -11,5 +11,5 @@ const value = ref('654321')
 </script>
 
 <template>
-  <n-verification-code v-model="value" style="width: 300px" />
+  <n-input-opt v-model="value" mask />
 </template>
