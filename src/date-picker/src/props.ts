@@ -66,7 +66,7 @@ export const datePickerProps = {
   endPlaceholder: String,
   format: String,
   dateFormat: String,
-  timerPickerFormat: String,
+  timePickerFormat: String,
   actions: Array as PropType<Array<'clear' | 'confirm' | 'now'> | null>,
   shortcuts: Object as PropType<Shortcuts>,
   isDateDisabled: Function as PropType<IsDateDisabled>,
