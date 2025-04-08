@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-date-picker` 的 `time-picker-format` 属性不生效的问题
+
 ## 2.41.0
 
 `2025-01-05`
