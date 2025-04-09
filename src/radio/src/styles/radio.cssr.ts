@@ -50,7 +50,7 @@ export default cB('radio', `
     top: 0;
     bottom: 0;
     opacity: 0;
-    z-index: 1;
+    z-index: 0;
     cursor: pointer;
   `),
   cE('dot', `
