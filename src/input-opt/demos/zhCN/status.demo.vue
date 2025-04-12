@@ -1,7 +1,7 @@
 <markdown>
-# Status、
+# 状态
 
-Disabled Status、 Error status、Readonly Status
+禁用状态、 错误状态、只读状态
 </markdown>
 
 <template>
