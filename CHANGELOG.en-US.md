@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+- `n-tree-select` adds `indent` prop.
+
 ## 2.41.0
 
 `2025-01-05`
