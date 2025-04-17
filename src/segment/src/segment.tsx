@@ -1,4 +1,4 @@
-import type { FunctionalComponent, PropType } from 'vue'
+import type { ExtractPublicPropTypes, FunctionalComponent, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { SegmentTheme } from '../styles'
 import type {
@@ -18,6 +18,7 @@ import {
   toRef,
   watch
 } from 'vue'
+import { VResizeObserver } from 'vueuc'
 import {
   useConfig,
   useFormItem,
@@ -66,6 +67,8 @@ export const segmentProps = {
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>
 } as const
+
+export type SegmentProps = ExtractPublicPropTypes<typeof segmentProps>
 
 export default defineComponent({
   name: 'Segment',
@@ -249,7 +252,8 @@ export default defineComponent({
       themeClass: themeClassHandle?.themeClass,
       doUpdateValue,
       handleFocusout,
-      handleFocusin
+      handleFocusin,
+      updateSegmentPosition
     }
   },
   render() {
@@ -264,7 +268,8 @@ export default defineComponent({
       themeClass,
       doUpdateValue,
       handleFocusin,
-      handleFocusout
+      handleFocusout,
+      updateSegmentPosition
     } = this
 
     const SegmentOption: FunctionalComponent<
@@ -312,40 +317,44 @@ export default defineComponent({
       )
     }
     return (
-      <div
-        class={[
-          `${mergedClsPrefix}-segment`,
-          block && `${mergedClsPrefix}-segment--block`,
-          rtlEnabled && `${mergedClsPrefix}-segment--rtl`,
-          vertical && `${mergedClsPrefix}-segment--vertical`
-        ]}
-        style={cssVars}
+      <VResizeObserver
+        onResize={() => updateSegmentPosition({ transitionDisabled: true })}
       >
         <div
-          ref="groupRef"
-          class={[`${mergedClsPrefix}-segment-group`, themeClass]}
-          onFocusin={handleFocusin}
-          onFocusout={handleFocusout}
+          class={[
+            `${mergedClsPrefix}-segment`,
+            block && `${mergedClsPrefix}-segment--block`,
+            rtlEnabled && `${mergedClsPrefix}-segment--rtl`,
+            vertical && `${mergedClsPrefix}-segment--vertical`
+          ]}
+          style={cssVars}
         >
           <div
-            class={`${mergedClsPrefix}-segment-capsule`}
-            ref="segmentCapsuleElRef"
+            ref="groupRef"
+            class={[`${mergedClsPrefix}-segment-group`, themeClass]}
+            onFocusin={handleFocusin}
+            onFocusout={handleFocusout}
           >
-            <div class={`${mergedClsPrefix}-segment-wrapper`}>
-              <div class={`${mergedClsPrefix}-segment-thumb`} />
-            </div>
-          </div>
-          {this.options.map(segmentOption => (
-            <SegmentOption
-              key={segmentOption.value}
-              {...segmentOption}
-              checked={mergedValue === segmentOption.value}
-              disabled={mergedDisabled || !!segmentOption.disabled}
+            <div
+              class={`${mergedClsPrefix}-segment-capsule`}
+              ref="segmentCapsuleElRef"
             >
-            </SegmentOption>
-          ))}
+              <div class={`${mergedClsPrefix}-segment-wrapper`}>
+                <div class={`${mergedClsPrefix}-segment-thumb`} />
+              </div>
+            </div>
+            {this.options.map(segmentOption => (
+              <SegmentOption
+                key={segmentOption.value}
+                {...segmentOption}
+                checked={mergedValue === segmentOption.value}
+                disabled={mergedDisabled || !!segmentOption.disabled}
+              >
+              </SegmentOption>
+            ))}
+          </div>
         </div>
-      </div>
+      </VResizeObserver>
     )
   }
 })

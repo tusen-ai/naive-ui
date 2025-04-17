@@ -3,11 +3,12 @@
 </markdown>
 
 <script lang="ts" setup>
+import type { SegmentItemType } from 'naive-ui'
 import { ref } from 'vue'
 
 const value = ref('Shakermaker')
 
-const options = ref([
+const options = ref<SegmentItemType[]>([
   {
     value: 'Rock\'n\'Roll Star',
     label: 'Rock\'n\'Roll Star'

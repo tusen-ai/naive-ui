@@ -3,12 +3,13 @@
 </markdown>
 
 <script lang="ts" setup>
+import type { SegmentItemType } from 'naive-ui'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 import { ref } from 'vue'
 
 const value = ref('Shakermaker')
 
-const options = ref([
+const options = ref<SegmentItemType[]>([
   {
     value: 'Rock\'n\'Roll Star',
     label: 'Rock\'n\'Roll Star'
@@ -26,8 +27,8 @@ const options = ref([
     label: 'Up in the Sky'
   },
   {
-    value: '...',
-    label: '...'
+    value: 1,
+    label: '1'
   }
 ])
 </script>
