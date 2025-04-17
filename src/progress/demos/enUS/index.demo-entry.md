@@ -47,7 +47,7 @@ indeterminate.vue
 | indeterminate | `boolean` | `false` | set indeterminate progress | 2.41.1 |
 | duration | `number` | `3` | control the animation duration of indeterminate progress or striped flow progress | 2.41.1 |
 | unit | `string` | `%` | Progress unit. |  |
-| size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | Progress size. |  |
+| size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | Progress size. | 2.41.1 |
 
 ### Progress Slots
 
