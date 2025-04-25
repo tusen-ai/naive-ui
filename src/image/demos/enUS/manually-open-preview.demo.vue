@@ -4,27 +4,19 @@
 allow big image preview by call showPreview method.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { ImageInst } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const imageRef = ref<ImageInst | null>(null)
-    const handleClick = () => {
-      imageRef.value?.showPreview()
-    }
-    return {
-      imageRef,
-      handleClick
-    }
-  }
-})
+const imageRef = ref<ImageInst | null>(null)
+function handleClick() {
+  imageRef.value?.showPreview()
+}
 </script>
 
 <template>
   <n-flex vertical inline>
-    <n-button @click="handleClick">
+    <n-button type="primary" @click="handleClick">
       show image preview
     </n-button>
     <n-image

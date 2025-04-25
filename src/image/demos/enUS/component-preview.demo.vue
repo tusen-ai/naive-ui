@@ -27,6 +27,6 @@ function handleUpdateShow(value: boolean) {
   <n-image-preview
     v-model:show="showRef"
     src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
-    @update-show="handleUpdateShow"
+    @update:show="handleUpdateShow"
   />
 </template>

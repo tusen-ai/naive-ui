@@ -5,14 +5,23 @@
 </markdown>
 
 <script lang="ts" setup>
-import type { ImageGroupInst } from 'naive-ui'
+import { useMessage } from 'naive-ui'
 import { ref } from 'vue'
 
 const currentIndex = ref(0)
 
-const imageGroupRef = ref<ImageGroupInst>()
+const showRef = ref(false)
 function onClick() {
-  imageGroupRef.value?.toggleShow()
+  showRef.value = true
+}
+
+const message = useMessage()
+function handleUpdateShow(value: boolean) {
+  message.info(`${value}`)
+}
+
+function handleUpdateCurrent(current: number) {
+  message.info(`${current}`)
 }
 </script>
 
@@ -21,7 +30,7 @@ function onClick() {
     Click me to preview multiple image
   </n-button>
   <n-image-group
-    ref="imageGroupRef"
+    v-model:show="showRef"
     v-model:current="currentIndex"
     :src-list="[
       'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
@@ -36,6 +45,8 @@ function onClick() {
       'https://picsum.photos/id/9/100/100',
       'https://picsum.photos/id/10/100/100',
     ]"
+    @update:show="handleUpdateShow"
+    @update:current="handleUpdateCurrent"
   />
   <pre>currentIndex: {{ currentIndex }}</pre>
 </template>

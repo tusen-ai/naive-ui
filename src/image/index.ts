@@ -1,7 +1,6 @@
 export { imageProps, default as NImage } from './src/Image'
 export type { ImageInst, ImageProps, ImageSlots } from './src/Image'
 export { imageGroupProps, default as NImageGroup } from './src/ImageGroup'
-export type { ImageGroupInst, ImageGroupProps } from './src/ImageGroup'
+export type { ImageGroupProps } from './src/ImageGroup'
 export { default as NImagePreview } from './src/ImagePreview'
-export type { ImagePreviewInst } from './src/interface'
 export type * from './src/public-types'

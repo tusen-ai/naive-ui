@@ -16,7 +16,7 @@ function handleClick() {
 
 <template>
   <n-flex vertical inline>
-    <n-button @click="handleClick">
+    <n-button type="primary" @click="handleClick">
       show image preview
     </n-button>
     <n-image

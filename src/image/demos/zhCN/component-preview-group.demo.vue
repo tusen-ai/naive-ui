@@ -5,6 +5,7 @@
 </markdown>
 
 <script lang="ts" setup>
+import { useMessage } from 'naive-ui'
 import { ref } from 'vue'
 
 const currentIndex = ref(0)
@@ -12,6 +13,15 @@ const currentIndex = ref(0)
 const showRef = ref(false)
 function onClick() {
   showRef.value = true
+}
+
+const message = useMessage()
+function handleUpdateShow(value: boolean) {
+  message.info(`${value}`)
+}
+
+function handleUpdateCurrent(current: number) {
+  message.info(`${current}`)
 }
 </script>
 
@@ -35,6 +45,8 @@ function onClick() {
       'https://picsum.photos/id/9/100/100',
       'https://picsum.photos/id/10/100/100',
     ]"
+    @update:show="handleUpdateShow"
+    @update:current="handleUpdateCurrent"
   />
   <pre>currentIndex: {{ currentIndex }}</pre>
 </template>

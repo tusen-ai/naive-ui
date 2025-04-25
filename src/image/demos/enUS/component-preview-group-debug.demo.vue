@@ -6,16 +6,15 @@
 import { ref } from 'vue'
 
 const currentIndex = ref(1)
-
-const imageGroupRef = ref()
+const showRef = ref(false)
 function onClick() {
-  imageGroupRef.value?.toggleShow()
+  showRef.value = true
 }
 
 const currentIndex2 = ref(0)
-const imageGroupRef2 = ref()
+const showRef2 = ref(false)
 function onClick2() {
-  imageGroupRef2.value?.toggleShow()
+  showRef2.value = true
 }
 </script>
 
@@ -26,7 +25,7 @@ function onClick2() {
       Click me to preview multiple image
     </n-button>
     <n-image-group
-      ref="imageGroupRef"
+      v-model:show="showRef"
       v-model:current="currentIndex"
       :src-list="[
         'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
@@ -59,7 +58,7 @@ function onClick2() {
     <n-button type="primary" @click="onClick2">
       Click me to preview multiple image
     </n-button>
-    <n-image-group ref="imageGroupRef2" v-model:current="currentIndex2">
+    <n-image-group v-model:show="showRef2" v-model:current="currentIndex2">
       <n-space>
         <n-image
           width="100"

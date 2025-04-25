@@ -53,7 +53,7 @@ export type ImageGroupProps = ExtractPublicPropTypes<typeof imageGroupProps>
 export default defineComponent({
   name: 'ImageGroup',
   props: imageGroupProps,
-  emit: ['update:show'],
+  emit: ['update:show', 'update:current', 'change'],
   setup(props, { emit }) {
     const { srcList, show } = toRefs(props)
 

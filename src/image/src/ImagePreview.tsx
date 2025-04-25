@@ -66,6 +66,9 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    'onUpdate:show': [Function, Array] as PropType<
+      MaybeArray<(value: boolean) => void>
+    >,
     onUpdateShow: [Function, Array] as PropType<
       MaybeArray<(show: boolean) => void>
     >,
@@ -125,17 +128,23 @@ export default defineComponent({
       }
     }
 
+    function doUpdateShow(value: boolean): void {
+      const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
+      if (onUpdateShow) {
+        call(onUpdateShow, value)
+      }
+      if (_onUpdateShow) {
+        call(_onUpdateShow, value)
+      }
+      uncontrolledShowRef.value = value
+      displayedRef.value = true
+    }
+
     watch(mergedShowRef, (value) => {
       if (value) {
-        const { onUpdateShow } = props
-        if (onUpdateShow)
-          call(onUpdateShow, value)
         on('keydown', document, handleKeydown)
       }
       else {
-        const { onUpdateShow } = props
-        if (onUpdateShow)
-          call(onUpdateShow, value)
         off('keydown', document, handleKeydown)
       }
     })
@@ -420,15 +429,9 @@ export default defineComponent({
     function close() {
       if (mergedShowRef.value) {
         emit('close')
-        emit('update:show', !mergedShowRef.value)
+        doUpdateShow(false)
         uncontrolledShowRef.value = false
       }
-    }
-
-    function doUpdateShow(show: boolean): void {
-      emit('update:show', !mergedShowRef.value)
-      uncontrolledShowRef.value = show
-      displayedRef.value = true
     }
 
     function resizeToOrignalImageSize(): void {
