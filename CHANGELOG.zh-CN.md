@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- 修复 `n-upload` 默认插槽非函数的警告问题
+
 ## 2.41.0
 
 `2025-01-05`
