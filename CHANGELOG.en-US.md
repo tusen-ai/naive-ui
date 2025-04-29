@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.41.1
+
+### Features
+
+- `n-scrollbar` adds `y-bar-min-size` to set the minimum height of the vertical scrollbar thumb.
+
 ## 2.41.0
 
 `2025-01-05`

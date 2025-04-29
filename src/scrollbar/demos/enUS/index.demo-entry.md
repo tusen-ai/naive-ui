@@ -26,6 +26,7 @@ placement.vue
 | x-scrollable | `boolean` | `false` | Whether it can scroll horizontally. |  |
 | x-placement | `'top' \| 'bottom'` | `bottom` | Scrollbar placement when scrolling horizontally. | 2.40.0 |
 | y-placement | `'left' \| 'right'` | `right` | Scrollbar placement when scrolling vertically. | 2.40.0 |
+| y-bar-min-size | `number` | `0` | Takes effect when greater than `0`, ensuring the vertical scrollbar thumb's height is at least `x`px | 2.41.1 |
 | on-scroll | `(e: Event) => void` | `undefined` | Callback on scroll. |  |
 
 ### Scrollbar Slots

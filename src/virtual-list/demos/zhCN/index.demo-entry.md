@@ -13,6 +13,7 @@ basic.vue
 dynamic-size.vue
 scroll.vue
 keep-alive.vue
+custom-scroll.vue
 ```
 
 ## API

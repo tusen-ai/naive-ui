@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.41.1
+
+### Features
+
+- `n-scrollbar` 新增 `y-bar-min-size` 来设置滚动条的最小高度
+
 ## 2.41.0
 
 `2025-01-05`
