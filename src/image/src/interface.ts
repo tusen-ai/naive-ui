@@ -18,7 +18,8 @@ export const imagePreviewSharedProps = {
   onPreviewNext: Function as PropType<() => void>,
   showToolbar: { type: Boolean, default: true },
   showToolbarTooltip: Boolean,
-  renderToolbar: Function as PropType<ImageRenderToolbar>
+  renderToolbar: Function as PropType<ImageRenderToolbar>,
+  enableWheel: { type: Boolean, default: true }
 }
 
 export interface ImageContext {

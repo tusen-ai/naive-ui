@@ -223,6 +223,7 @@ export default defineComponent({
             showToolbar={this.showToolbar}
             showToolbarTooltip={this.showToolbarTooltip}
             renderToolbar={this.renderToolbar}
+            enableWheel={this.enableWheel}
           >
             {{
               default: () => imgNode
