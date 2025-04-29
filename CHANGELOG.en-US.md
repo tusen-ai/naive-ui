@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-date-picker`'s `time-picker-format` prop doesn't work
+
 ## 2.41.0
 
 `2025-01-05`

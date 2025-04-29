@@ -981,7 +981,7 @@ export default defineComponent({
       onPrevMonth: this.onPrevMonth,
       onNextYear: this.onNextYear,
       onPrevYear: this.onPrevYear,
-      timerPickerFormat: this.timerPickerFormat,
+      timePickerFormat: this.timePickerFormat,
       dateFormat: this.dateFormat,
       calendarDayFormat: this.calendarDayFormat,
       calendarHeaderYearFormat: this.calendarHeaderYearFormat,

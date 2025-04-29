@@ -71,7 +71,7 @@ export default defineComponent({
           <NTimePicker
             size={this.timePickerSize}
             placeholder={this.locale.selectTime}
-            format={this.timerPickerFormat}
+            format={this.timePickerFormat}
             {...(Array.isArray(timePickerProps) ? undefined : timePickerProps)}
             showIcon={false}
             to={false}
