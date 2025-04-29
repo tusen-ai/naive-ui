@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-data-table` 可排序表格背景颜色变量丢失问题
+
 ## 2.41.0
 
 `2025-01-05`
