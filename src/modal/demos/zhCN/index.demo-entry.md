@@ -82,6 +82,7 @@ mask-click-debug.vue
 | transform-origin | `'mouse' \| 'center'` | `'mouse'` | 模态框动画出现的位置 |  |
 | trap-focus | `boolean` | `true` | 是否将焦点锁定在 Modal 内部 | 2.24.2 |
 | z-index | `number` | `undefined` | Modal 的 z-index | 2.24.0 |
+| max-height | `number \| string` | `undefined` | modal 窗口的最大高度 |  |
 | on-after-enter | `() => void` | `undefined` | Modal 出现后的回调 |  |
 | on-after-leave | `() => void` | `undefined` | Modal 关闭后的回调 |  |
 | on-esc | `() => void` | `undefined` | 焦点在 Modal 内部时按下 Esc 键的回调 | 2.24.2 |
