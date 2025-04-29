@@ -7,3 +7,7 @@ export type ProgressStatus =
 export interface ProgressGradient {
   stops: string[]
 }
+
+export type ProgressSize = 'tiny' | 'small' | 'medium' | 'large'
+
+export type ProgressType = 'line' | 'circle' | 'multiple-circle' | 'dashboard'

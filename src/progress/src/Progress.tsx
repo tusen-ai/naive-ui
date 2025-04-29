@@ -1,12 +1,20 @@
 import type { ThemeProps } from '../../_mixins'
 import type { ProgressTheme } from '../styles'
-import type { ProgressGradient, ProgressStatus } from './public-types'
+import type {
+  ProgressGradient,
+  ProgressSize,
+  ProgressStatus,
+  ProgressType
+} from './public-types'
+import { useMergedState } from 'vooks'
 import {
   computed,
   type CSSProperties,
   defineComponent,
   h,
-  type PropType
+  type PropType,
+  ref,
+  toRef
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { createKey, type ExtractPublicPropTypes } from '../../_utils'
@@ -20,9 +28,7 @@ export const progressProps = {
   ...(useTheme.props as ThemeProps<ProgressTheme>),
   processing: Boolean,
   type: {
-    type: String as PropType<
-      'line' | 'circle' | 'multiple-circle' | 'dashboard'
-    >,
+    type: String as PropType<ProgressType>,
     default: 'line'
   },
   gapDegree: Number,
@@ -68,6 +74,18 @@ export const progressProps = {
     type: Number,
     default: 1
   },
+  size: {
+    type: String as PropType<ProgressSize>,
+    default: 'medium'
+  },
+  indeterminate: {
+    type: Boolean,
+    default: false
+  },
+  duration: {
+    type: Number,
+    default: 3
+  },
   height: Number,
   borderRadius: [String, Number] as PropType<string | number>,
   fillBorderRadius: [String, Number] as PropType<string | number>,
@@ -80,6 +98,10 @@ export default defineComponent({
   name: 'Progress',
   props: progressProps,
   setup(props) {
+    const uncontrolledSizeRef = ref(props.size)
+    const controlledSizeRef = toRef(props, 'size')
+    const mergedSizeRef = useMergedState(controlledSizeRef, uncontrolledSizeRef)
+
     const mergedIndicatorPlacementRef = computed(() => {
       return props.indicatorPlacement || props.indicatorPosition
     })
@@ -101,15 +123,13 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+
     const cssVarsRef = computed(() => {
       const { status } = props
       const {
         common: { cubicBezierEaseInOut },
         self: {
-          fontSize,
-          fontSizeCircle,
           railColor,
-          railHeight,
           iconSizeCircle,
           iconSizeLine,
           textColorCircle,
@@ -117,10 +137,19 @@ export default defineComponent({
           textColorLineOuter,
           lineBgProcessing,
           fontWeightCircle,
+          [createKey('railHeight', mergedSizeRef.value)]: railHeight,
+          [createKey('circleWidth', mergedSizeRef.value)]: circleWidth,
+          [createKey('multipleCircleWidth', mergedSizeRef.value)]:
+            multipleCircleWidth,
+          [createKey('multipleCircleFontSize', mergedSizeRef.value)]:
+            multipleCircleFontSize,
+          [createKey('fontSizeCircle', mergedSizeRef.value)]: fontSizeCircle,
+          [createKey('fontSize', mergedSizeRef.value)]: fontSize,
           [createKey('iconColor', status)]: iconColor,
           [createKey('fillColor', status)]: fillColor
         }
       } = themeRef.value
+
       return {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-fill-color': fillColor,
@@ -133,9 +162,13 @@ export default defineComponent({
         '--n-line-bg-processing': lineBgProcessing,
         '--n-rail-color': railColor,
         '--n-rail-height': railHeight,
+        '--n-multiple-circle-width': multipleCircleWidth,
+        '--n-multiple-circle-font-size': multipleCircleFontSize,
         '--n-text-color-circle': textColorCircle,
         '--n-text-color-line-inner': textColorLineInner,
-        '--n-text-color-line-outer': textColorLineOuter
+        '--n-text-color-line-outer': textColorLineOuter,
+        '--n-circle-width': circleWidth,
+        '--n-progress-indeterminate-duration': `${props.duration}s`
       }
     })
     const themeClassHandle = inlineThemeDisabled
@@ -150,6 +183,8 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       mergedIndicatorPlacement: mergedIndicatorPlacementRef,
       gapDeg,
+      indeterminate: props.indeterminate,
+
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
@@ -180,6 +215,7 @@ export default defineComponent({
       gapDeg,
       gapOffsetDegree,
       themeClass,
+      indeterminate,
       $slots,
       onRender
     } = this
@@ -234,6 +270,7 @@ export default defineComponent({
             railStyle={railStyle as any}
             percentage={percentage as number}
             processing={processing}
+            indeterminate={indeterminate}
             indicatorPlacement={mergedIndicatorPlacement}
             unit={unit}
             fillBorderRadius={fillBorderRadius}
