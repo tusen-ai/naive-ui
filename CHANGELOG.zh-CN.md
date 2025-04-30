@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-tree` 的 `expanded-keys` 属性包含不存在于树中的 `key` 时，组件无法展开
+
 ## 2.41.0
 
 `2025-01-05`

@@ -86,9 +86,9 @@ export function createTreeMateOptions<T>(
 ): TreeMateOptions<T, T, T> {
   const settledGetChildren: GetChildren
     = getChildren
-    || ((node: T) => {
-      return (node as any)[childrenField]
-    })
+      || ((node: T) => {
+        return (node as any)[childrenField]
+      })
   return {
     getIsGroup() {
       return false
@@ -770,7 +770,6 @@ export default defineComponent({
           )
         }
       }
-      aipRef.value = true
       afNodesRef.value
         = displayTreeMateRef.value.getFlattenedNodes(baseExpandedKeys)
       if (addedKey !== null) {
@@ -782,6 +781,7 @@ export default defineComponent({
             .children
           // sometimes user will pass leaf keys in
           if (children) {
+            aipRef.value = true
             const expandedChildren = flatten(children, value)
             afNodesRef.value.splice(expandedNodeIndex + 1, 0, {
               __motion: true,
