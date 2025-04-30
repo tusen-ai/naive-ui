@@ -16,7 +16,7 @@ export const Equation = defineComponent({
   name: 'Equation',
   props: equationProps,
   setup(props) {
-    const configProviderContext = inject(configProviderInjectionKey)
+    const configProviderContext = inject(configProviderInjectionKey, null)
     const extractedHtmlInfo = computed(() => {
       const outerHtml
         = (
