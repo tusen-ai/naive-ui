@@ -13,6 +13,7 @@ nest.vue
 event.vue
 slot.vue
 controlled.vue
+lazy.vue
 ```
 
 ## API
@@ -32,6 +33,7 @@ controlled.vue
 | pane2-style | `Object \| string` | `undefined` | The Style of the second pane | 2.38.2 |
 | resize-trigger-size | `number` | `3` | Size of the resize trigger. | 2.36.0 |
 | size | `string \| number` | `undefined` | Split is the controlled split size, when it's `number` it should in 0 ~ 1, when it's `string` it should be formatted in `${number}px`. | 2.38.0, `string` 2.38.2 |
+| lazy | `boolean` | `false` | Delay rendering | NEXT_VERSION |
 | watch-props | `Array<'defaultSize'>` | `undefined` | Default prop names that needed to be watched. Components will be updated after the prop is changed. Note: the `watch-props` itself is not reactive. | 2.38.0 |
 | on-drag-start | `(e: Event) => void` | `undefined` | Callback function when drag start. | 2.36.0 |
 | on-drag-move | `(e: Event) => void` | `undefined` | Callback function when dragging. | 2.36.0 |
