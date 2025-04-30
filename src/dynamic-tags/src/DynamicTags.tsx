@@ -59,6 +59,10 @@ export const dynamicTagsProps = {
     default: () => []
   },
   value: Array as PropType<Array<string | DynamicTagsOption>>,
+  draggable: {
+    type: Boolean,
+    default: false
+  },
   inputClass: String,
   inputStyle: [String, Object] as PropType<string | CSSProperties>,
   inputProps: Object as PropType<InputProps>,
@@ -196,6 +200,46 @@ export default defineComponent({
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass('dynamic-tags', undefined, cssVarsRef, props)
       : undefined
+
+    const mergedDraggerRef = computed(() => {
+      return (
+        props.draggable
+        && !mergedDisabledRef.value
+        && mergedValueRef.value.length > 1
+      )
+    })
+    const dragIndex = ref(-1)
+
+    const handleOnDragStart = (index: number) => {
+      dragIndex.value = index
+    }
+
+    const handleOnDropEnd = () => {
+      dragIndex.value = -1
+    }
+
+    function handleOnDragenter(event: DragEvent, targetIndex: number) {
+      event.preventDefault()
+      if (dragIndex.value < 0 || dragIndex.value === targetIndex)
+        return
+      if (targetIndex === undefined) {
+        return
+      }
+      const str = JSON.stringify(mergedValueRef.value)
+      const ls: Array<any> = JSON.parse(str)
+      ;[ls[dragIndex.value], ls[targetIndex]] = [
+        ls[targetIndex],
+        ls[dragIndex.value]
+      ]
+      if (str === JSON.stringify(ls))
+        return
+      doChange(ls)
+      dragIndex.value = targetIndex
+    }
+
+    function handleOnDragover(event: DragEvent) {
+      event.preventDefault()
+    }
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       inputInstRef,
@@ -207,11 +251,16 @@ export default defineComponent({
       mergedValue: mergedValueRef,
       mergedDisabled: mergedDisabledRef,
       triggerDisabled: triggerDisabledRef,
+      mergedDragger: mergedDraggerRef,
       handleInputKeyDown,
       handleAddClick,
       handleInputBlur,
       handleCloseClick,
       handleInputConfirm,
+      handleOnDragStart,
+      handleOnDropEnd,
+      handleOnDragenter,
+      handleOnDragover,
       mergedTheme: themeRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
@@ -219,7 +268,39 @@ export default defineComponent({
     }
   },
   render() {
-    const { mergedTheme, cssVars, mergedClsPrefix, onRender, renderTag } = this
+    const {
+      cssVars,
+      mergedClsPrefix,
+      onRender,
+      renderTag,
+      mergedTheme,
+      tagClass,
+      tagStyle,
+      type,
+      round,
+      size,
+      color,
+      closable,
+      mergedDisabled,
+      showInput,
+      inputValue,
+      inputClass,
+      inputStyle,
+      inputSize,
+      inputForceFocused,
+      triggerDisabled,
+      mergedDragger,
+      handleInputKeyDown,
+      handleInputBlur,
+      handleAddClick,
+      handleCloseClick,
+      handleInputConfirm,
+      handleOnDragStart,
+      handleOnDropEnd,
+      handleOnDragover,
+      handleOnDragenter,
+      $slots
+    } = this
     onRender?.()
     return (
       <NSpace
@@ -227,38 +308,31 @@ export default defineComponent({
         size="small"
         style={cssVars as any}
         theme={mergedTheme.peers.Space}
+        wrap-item={false}
         themeOverrides={mergedTheme.peerOverrides.Space}
-        itemStyle="display: flex;"
       >
         {{
-          default: () => {
-            const {
-              mergedTheme,
-              tagClass,
-              tagStyle,
-              type,
-              round,
-              size,
-              color,
-              closable,
-              mergedDisabled,
-              showInput,
-              inputValue,
-              inputClass,
-              inputStyle,
-              inputSize,
-              inputForceFocused,
-              triggerDisabled,
-              handleInputKeyDown,
-              handleInputBlur,
-              handleAddClick,
-              handleCloseClick,
-              handleInputConfirm,
-              $slots
-            } = this
-            return this.mergedValue
-              .map((tag, index) =>
-                renderTag ? (
+          default: () => [
+            this.mergedValue.map((tag, index) => {
+              const baseProps = {
+                key: typeof tag === 'string' ? tag : tag.value || index
+              }
+
+              const draggableProps = mergedDragger
+                ? {
+                    class: `${mergedClsPrefix}-dynamic-tag-move`,
+                    draggable: true,
+                    onDragstart: () => handleOnDragStart(index),
+                    onDragend: handleOnDropEnd,
+                    onDragover: handleOnDragover,
+                    onDragenter: (e: DragEvent) => handleOnDragenter(e, index)
+                  }
+                : {}
+
+              const itemProps = { ...baseProps, ...draggableProps }
+
+              const renderTagItem = () => {
+                return renderTag ? (
                   renderTag(tag as string & DynamicTagsOption, index)
                 ) : (
                   <NTag
@@ -282,59 +356,64 @@ export default defineComponent({
                     }}
                   </NTag>
                 )
+              }
+              return mergedDragger ? (
+                <div {...itemProps}>{renderTagItem()}</div>
+              ) : (
+                renderTagItem()
               )
-              .concat(
-                showInput ? (
-                  $slots.input ? (
-                    $slots.input({
-                      submit: handleInputConfirm,
-                      deactivate: handleInputBlur
-                    })
-                  ) : (
-                    <NInput
-                      placeholder=""
-                      size={inputSize}
-                      style={inputStyle}
-                      class={inputClass}
-                      autosize
-                      {...this.inputProps}
-                      ref="inputInstRef"
-                      value={inputValue}
-                      onUpdateValue={(v) => {
-                        this.inputValue = v
-                      }}
-                      theme={mergedTheme.peers.Input}
-                      themeOverrides={mergedTheme.peerOverrides.Input}
-                      onKeydown={handleInputKeyDown}
-                      onBlur={handleInputBlur}
-                      internalForceFocus={inputForceFocused}
-                    />
+            }),
+
+            showInput ? (
+              $slots.input ? (
+                $slots.input({
+                  submit: handleInputConfirm,
+                  deactivate: handleInputBlur
+                })
+              ) : (
+                <NInput
+                  placeholder=""
+                  size={inputSize}
+                  style={inputStyle}
+                  class={inputClass}
+                  autosize
+                  {...this.inputProps}
+                  ref="inputInstRef"
+                  value={inputValue}
+                  onUpdateValue={(v) => {
+                    this.inputValue = v
+                  }}
+                  theme={mergedTheme.peers.Input}
+                  themeOverrides={mergedTheme.peerOverrides.Input}
+                  onKeydown={handleInputKeyDown}
+                  onBlur={handleInputBlur}
+                  internalForceFocus={inputForceFocused}
+                />
+              )
+            ) : $slots.trigger ? (
+              $slots.trigger({
+                activate: handleAddClick,
+                disabled: triggerDisabled
+              })
+            ) : (
+              <NButton
+                dashed
+                disabled={triggerDisabled}
+                theme={mergedTheme.peers.Button}
+                themeOverrides={mergedTheme.peerOverrides.Button}
+                size={inputSize}
+                onClick={handleAddClick}
+              >
+                {{
+                  icon: () => (
+                    <NBaseIcon clsPrefix={mergedClsPrefix}>
+                      {{ default: () => <AddIcon /> }}
+                    </NBaseIcon>
                   )
-                ) : $slots.trigger ? (
-                  $slots.trigger({
-                    activate: handleAddClick,
-                    disabled: triggerDisabled
-                  })
-                ) : (
-                  <NButton
-                    dashed
-                    disabled={triggerDisabled}
-                    theme={mergedTheme.peers.Button}
-                    themeOverrides={mergedTheme.peerOverrides.Button}
-                    size={inputSize}
-                    onClick={handleAddClick}
-                  >
-                    {{
-                      icon: () => (
-                        <NBaseIcon clsPrefix={mergedClsPrefix}>
-                          {{ default: () => <AddIcon /> }}
-                        </NBaseIcon>
-                      )
-                    }}
-                  </NButton>
-                )
-              )
-          }
+                }}
+              </NButton>
+            )
+          ]
         }}
       </NSpace>
     )
