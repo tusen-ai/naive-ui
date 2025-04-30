@@ -358,7 +358,6 @@ export default defineComponent({
                               default: () => {
                                 return this.show ? (
                                   <div
-                                    aria-hidden
                                     ref="containerRef"
                                     class={`${mergedClsPrefix}-modal-mask`}
                                     onClick={this.handleClickoutside}
