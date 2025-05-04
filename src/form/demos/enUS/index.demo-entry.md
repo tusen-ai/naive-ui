@@ -47,6 +47,7 @@ feedback-style.vue
 | require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | Require mark placement | `'right-hanging'` 2.24.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |  |
 | validate-messages | `FormValidateMessages` | `undefined` | Validation messages of `async-validator`. | 2.27.0 |
+| on-validate | `(path: string \| undefined, result: FormItemValidateResult) => void` | `-` | Callback executed after any form item is validated | NEXT_VERSION |
 
 #### FormItemRule Type
 

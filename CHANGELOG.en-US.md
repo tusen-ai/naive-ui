@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### NEXT_VERSION
+
+### Features
+
+- `n-form` adds `on-validate` prop, closes [#5883](https://github.com/tusen-ai/naive-ui/issues/5883).
+
 ## 2.41.0
 
 `2025-01-05`
