@@ -26,6 +26,18 @@ export default defineComponent({
       type: String,
       required: true
     },
+    closePanelOnSelectDate: {
+      type: Boolean,
+      required: false
+    },
+    closePanelOnSelectYear: {
+      type: Boolean,
+      required: false
+    },
+    closePanelOnSelectMonth: {
+      type: Boolean,
+      required: false
+    },
     calendarMonth: {
       type: String,
       required: true
@@ -39,10 +51,20 @@ export default defineComponent({
       required: true
     }
   },
-  setup() {
+  setup(props) {
     const triggerRef = ref<HTMLElement | null>(null)
     const monthPanelRef = ref<InstanceType<typeof MonthPanel> | null>(null)
     const showRef = ref(false)
+    function handleSelectYear(): void {
+      if (props.closePanelOnSelectDate || props.closePanelOnSelectYear) {
+        handleHeaderClick()
+      }
+    }
+    function handleSelectMonth(): void {
+      if (props.closePanelOnSelectDate || props.closePanelOnSelectMonth) {
+        handleHeaderClick()
+      }
+    }
     function handleClickOutside(e: MouseEvent): void {
       if (
         showRef.value
@@ -58,6 +80,8 @@ export default defineComponent({
       show: showRef,
       triggerRef,
       monthPanelRef,
+      handleSelectYear,
+      handleSelectMonth,
       handleHeaderClick,
       handleClickOutside
     }
@@ -109,6 +133,8 @@ export default defineComponent({
                                 <MonthPanel
                                   ref="monthPanelRef"
                                   onUpdateValue={this.onUpdateValue}
+                                  onSelectYear={this.handleSelectYear}
+                                  onSelectMonth={this.handleSelectMonth}
                                   actions={[]}
                                   calendarHeaderMonthYearSeparator={
                                     this.monthYearSeparator

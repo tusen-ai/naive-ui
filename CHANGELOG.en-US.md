@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-date-picker` adds `close-panel-on-select-date` prop.
+- `n-date-picker` adds `close-panel-on-select-year` prop.
+- `n-date-picker` adds `close-panel-on-select-month` prop.
+
 ## 2.41.0
 
 `2025-01-05`

@@ -31,6 +31,7 @@ focus.vue
 status.vue
 icon.vue
 panel.vue
+close-panel-on-select.vue
 ```
 
 ## API
@@ -85,6 +86,9 @@ panel.vue
 | format | `string` | `'yyyy-MM-dd'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `() => false` | Validator of the date. | `detail` 2.37.1 |
 | placeholder | `string` | `'Select Date'` | Placeholder. |  |
+| close-panel-on-select-date | `boolean` | `undefined` | Close year and month panel after selecting year or month. | NEXT_VERSION |
+| close-panel-on-select-year | `boolean` | `undefined` | Close year and month panel after selecting year. | NEXT_VERSION |
+| close-panel-on-select-month | `boolean` | `undefined` | Close year and month panel after selecting month. | NEXT_VERSION |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | Date selected callback. | 2.24.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Date selected callback. | `formattedValue` 2.24.0 |
 
@@ -99,6 +103,9 @@ panel.vue
 | is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `() => false` | Validator of the date. | `detail` 2.37.1 |
 | is-time-disabled | `(current: number) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | Validator of the time. |  |
 | placeholder | `string` | `'Select Date and Time'` | Placeholder. |  |
+| close-panel-on-select-date | `boolean` | `undefined` | Close year and month panel after selecting year or month. | NEXT_VERSION |
+| close-panel-on-select-year | `boolean` | `undefined` | Close year and month panel after selecting year. | NEXT_VERSION |
+| close-panel-on-select-month | `boolean` | `undefined` | Close year and month panel after selecting month. | NEXT_VERSION |
 | time-picker-props | `TimePickerProps` | `undefined` | Time picker props in the panel. | 2.27.0 |
 | update-value-on-close | `boolean` | `false` | Whether to update value on close. |  |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | Date selected callback. | MEXT_VERSION |
@@ -114,6 +121,9 @@ panel.vue
 | default-calendar-end-time | `number` | `undefined` | Default panel calendar end month timestamp. | 2.28.3 |
 | end-placeholder | `string` | `'End Date'` | Placeholder at end part of the input. |  |
 | format | `string` | `'yyyy-MM-dd'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
+| close-panel-on-select-date | `boolean` | `undefined` | Close year and month panel after selecting year or month. | NEXT_VERSION |
+| close-panel-on-select-year | `boolean` | `undefined` | Close year and month panel after selecting year. | NEXT_VERSION |
+| close-panel-on-select-month | `boolean` | `undefined` | Close year and month panel after selecting month. | NEXT_VERSION |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. | `detail` 2.37.1 |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: (hour: number) => boolean, isMinuteDisabled?: (minute: number, hour: number \| null) => boolean, isSecondDisabled?: (second: number, minute: number \| null, hour: number \| null) => boolean }` | `undefined` | Validator of the time. `null` in validators means value of picker is empty. |  |
 | close-on-select | `boolean` | `false` | Whether to close the panel after the user has selected a time range. |  |
@@ -134,6 +144,9 @@ panel.vue
 | default-time | `string \| Array<string \| undefined>` | `undefined` | Default time of the selected date. It's format is `HH:mm:ss`. | 2.22.0 |
 | end-placeholder | `string` | `'End Date and Time'` | Placeholder at end part of the input. |  |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
+| close-panel-on-select-date | `boolean` | `undefined` | Close year and month panel after selecting year or month. | NEXT_VERSION |
+| close-panel-on-select-year | `boolean` | `undefined` | Close year and month panel after selecting year. | NEXT_VERSION |
+| close-panel-on-select-month | `boolean` | `undefined` | Close year and month panel after selecting month. | NEXT_VERSION |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. |  |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: (hour: number) => boolean, isMinuteDisabled?: (minute: number, hour: number \| null) => boolean, isSecondDisabled?: (second: number, minute: number \| null, hour: number \| null) => boolean }` | `undefined` | Validator of the time. `null` in validators means value of picker is empty. |  |
 | separator | `string` | internal icon | The separator between the start input and the end input. |  |
