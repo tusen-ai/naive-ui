@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### NEXT_VERSION
+
+### Features
+
+- `n-cascader` adds `input-props` prop, closes [#6330](https://github.com/TuSimple/naive-ui/issues/6330).
+
 ## 2.41.0
 
 `2025-01-05`
