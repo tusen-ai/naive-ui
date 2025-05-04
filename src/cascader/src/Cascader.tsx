@@ -1,4 +1,5 @@
 import type { InternalSelectionInst } from '../../_internal'
+import type { RenderTag } from '../../_internal/selection/src/interface'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/interface'
@@ -9,6 +10,7 @@ import type {
   CascaderInst,
   CascaderMenuInstance,
   CascaderOption,
+  CascaderRenderTag,
   ExpandTrigger,
   Filter,
   Key,
@@ -160,6 +162,7 @@ export const cascaderProps = {
   renderLabel: Function as PropType<
     (option: CascaderOption, checked: boolean) => VNodeChild
   >,
+  renderTag: Function as PropType<CascaderRenderTag>,
   status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -467,6 +470,25 @@ export default defineComponent({
         hoverKeyRef.value = key
       }
     }
+    const cascaderRenderTagRef = computed<RenderTag | undefined>(() => {
+      const { renderTag } = props
+      if (!renderTag)
+        return undefined
+      const { getNode } = treeMateRef.value
+      return ({ option, handleClose }) => {
+        const { value } = option
+        if (value !== undefined) {
+          const tmNode = getNode(value)
+          if (tmNode) {
+            return renderTag({
+              option: tmNode.rawNode,
+              handleClose
+            })
+          }
+        }
+        return value
+      }
+    })
     const selectedOptionsRef = computed(() => {
       if (props.multiple) {
         const { showPath, separator, labelField, cascade } = props
@@ -1063,6 +1085,7 @@ export default defineComponent({
       selectedOptions: selectedOptionsRef,
       adjustedTo: adjustedToRef,
       menuModel: menuModelRef,
+      cascaderRenderTag: cascaderRenderTagRef,
       handleMenuTabout,
       handleMenuFocus,
       handleMenuBlur,
@@ -1112,6 +1135,7 @@ export default defineComponent({
                       selectedOption={this.selectedOption}
                       selectedOptions={this.selectedOptions}
                       multiple={this.multiple}
+                      renderTag={this.cascaderRenderTag}
                       filterable={this.filterable}
                       clearable={this.clearable}
                       disabled={this.mergedDisabled}

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### NEXT_VERSION
+
+### Features
+
+- `n-cascader` adds `render-tag` prop，closes [#6389](https://github.com/tusen-ai/naive-ui/issues/6389).
+
 ## 2.41.0
 
 `2025-01-05`
