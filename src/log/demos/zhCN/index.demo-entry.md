@@ -49,14 +49,15 @@ scroll.vue
 highlight.vue
 loading.vue
 auto-bottom.vue
+debug.vue
 ```
 
 ## API
 
 ### Log Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
 | font-size | `number` | `14` | 文字大小 |
 | hljs | `Object` | `undefined` | 如果你想局部设定 `hljs` ，可以通过这个属性传给组件 |
 | language | `string` | `undefined` | 日志在 `highlightjs` 中的语言 |
@@ -66,6 +67,7 @@ auto-bottom.vue
 | log | `string` | `undefined` | 日志的内容 |
 | rows | `number` | `15` | 日志的尺寸 |
 | trim | `boolean` | `false` | 是否显示 `trim` 后的日志 |
+| virtual-scroll | `boolean` | `true` | 是否启用虚拟滚动 | 2.41.1 |
 | on-require-more | `(from: 'top' \| 'bottom') => void` | `undefined` | 滚动加载日志的回调函数 |
 | on-reach-top | `() => void` | `undefined` | 滚动到顶部的回调函数 |
 | on-reach-bottom | `() => void` | `undefined` | 滚动到底部的回调函数 |
