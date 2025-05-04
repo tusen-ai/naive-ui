@@ -1,5 +1,5 @@
 <markdown>
-# Basic
+# Reverse
 </markdown>
 
 <script setup lang="ts">
@@ -11,7 +11,7 @@ async function handleLoad() {
   loading.value = true
   try {
     const data = await loadData()
-    dataRef.value.push(...data)
+    dataRef.value.unshift(...data)
   }
   finally {
     loading.value = false
@@ -22,17 +22,23 @@ function loadData(): Promise<number[]> {
   const result = Array.from({ length: 10 })
     .fill(null)
     .map((_, i) => index + i + 1)
+    .reverse()
   return new Promise(resolve => setTimeout(() => resolve(result), 1000))
 }
 </script>
 
 <template>
-  <n-infinite-scroll style="height: 240px" :distance="100" @load="handleLoad">
-    <div v-for="i in dataRef" :key="i" class="item">
-      {{ i }}
-    </div>
+  <n-infinite-scroll
+    style="height: 240px"
+    reverse
+    :distance="100"
+    @load="handleLoad"
+  >
     <div v-if="loading" class="text">
       loading...
+    </div>
+    <div v-for="i in dataRef" :key="i" class="item">
+      {{ i }}
     </div>
   </n-infinite-scroll>
 </template>
