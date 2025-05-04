@@ -221,6 +221,11 @@ export const enComponentRoutes = [
     component: () => import('../../src/input/demos/enUS/index.demo-entry.md')
   },
   {
+    path: 'input-opt',
+    component: () =>
+      import('../../src/input-opt/demos/enUS/index.demo-entry.md')
+  },
+  {
     path: 'select',
     component: () => import('../../src/select/demos/enUS/index.demo-entry.md')
   },
@@ -632,6 +637,11 @@ export const zhComponentRoutes = [
   {
     path: 'input',
     component: () => import('../../src/input/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'input-opt',
+    component: () =>
+      import('../../src/input-opt/demos/zhCN/index.demo-entry.md')
   },
   {
     path: 'select',

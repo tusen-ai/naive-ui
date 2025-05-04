@@ -186,16 +186,6 @@ export default defineComponent({
   props: inputProps,
   slots: Object as SlotsType<InputSlots>,
   setup(props) {
-    if (__DEV__) {
-      watchEffect(() => {
-        if (props.showPasswordToggle) {
-          warnOnce(
-            'input',
-            '`show-password-toggle` is deprecated, please use `showPasswordOn="click"` instead'
-          )
-        }
-      })
-    }
     const {
       mergedClsPrefixRef,
       mergedBorderedRef,

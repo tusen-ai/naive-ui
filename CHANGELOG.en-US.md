@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.41.1
+
+### Features
+
+- adds `n-input-opt` component. closes [#1385](https://github.com/tusen-ai/naive-ui/issues/1385), [#5681](https://github.com/tusen-ai/naive-ui/issues/5681), [#6222](https://github.com/tusen-ai/naive-ui/issues/6222)
+
 ## 2.41.0
 
 `2025-01-05`
