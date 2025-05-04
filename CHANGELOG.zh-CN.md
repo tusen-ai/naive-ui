@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-data-table` 在固定列设置可拖拽时定位不正确，关闭 [#5050](https://github.com/tusen-ai/naive-ui/issues/5050)
+
 ## 2.41.0
 
 `2025-01-05`
