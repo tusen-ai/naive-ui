@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`xxxx-xx-xx`
+
+### Fixes
+
+- Fix `n-descriptions-item`'s prop `label-class` and `content-class` not working, closes [#6290](https://github.com/tusen-ai/naive-ui/issues/6290).
+
 ## 2.41.0
 
 `2025-01-05`
