@@ -1,5 +1,11 @@
 # CHANGELOG
 
+### NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-popover` 的 `PopoverProps` 类型未包含 `theme-overrides`, 关闭 [#6292](https://github.com/tusen-ai/naive-ui/issues/6292)
+
 ## 2.41.0
 
 `2025-01-05`
