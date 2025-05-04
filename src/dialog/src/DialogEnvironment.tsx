@@ -31,6 +31,7 @@ export const exposedDialogEnvProps = {
     type: Boolean,
     default: true
   },
+  zIndex: Number,
   onPositiveClick: Function as PropType<
     (e: MouseEvent) => Promise<unknown> | unknown
   >,
@@ -148,6 +149,7 @@ export const NDialogEnvironment = defineComponent({
       handleMaskClick,
       handleEsc,
       to,
+      zIndex,
       maskClosable,
       show
     } = this
@@ -158,6 +160,7 @@ export const NDialogEnvironment = defineComponent({
         onMaskClick={handleMaskClick}
         onEsc={handleEsc}
         to={to}
+        zIndex={zIndex}
         maskClosable={maskClosable}
         onAfterEnter={this.onAfterEnter}
         onAfterLeave={handleAfterLeave}
