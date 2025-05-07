@@ -161,6 +161,12 @@ export const dataTableProps = {
   onUpdateExpandedRowKeys: [Function, Array] as PropType<
     MaybeArray<OnUpdateExpandedRowKeys>
   >,
+  'onUpdate:resizedColumn': [Function, Array] as PropType<
+    MaybeArray<OnUpdateResizedColumn>
+  >,
+  onUpdateResizedColumn: [Function, Array] as PropType<
+    MaybeArray<OnUpdateResizedColumn>
+  >,
   onScroll: Function as PropType<(e: Event) => void>,
   // deprecated
   onPageChange: [Function, Array] as PropType<PaginationProps['onUpdate:page']>,
@@ -480,6 +486,7 @@ export type RenderSorterIcon = RenderSorter
 export type RenderFilterMenu = (actions: { hide: () => void }) => VNodeChild
 
 export type OnUpdateExpandedRowKeys = (keys: RowKey[]) => void
+export type OnUpdateResizedColumn = (width: number, column: TableColumn) => void
 export type OnUpdateCheckedRowKeys = (
   keys: RowKey[],
   rows: InternalRowData[],
