@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.41.1
+
+### Fixes
+
+- `n-tabs` 修复了TabPane中tab Slots的类型异常。
+
 ## 2.41.0
 
 `2025-01-05`
