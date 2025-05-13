@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.41.1
+
+### Fixes
+
+- `n-tabs` Fix the type exception of the tab slots in TabPane.
+
 ## 2.41.0
 
 `2025-01-05`
