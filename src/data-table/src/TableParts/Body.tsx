@@ -37,6 +37,14 @@ import Cell from './Cell'
 import ExpandTrigger from './ExpandTrigger'
 import TableHeader from './Header'
 
+interface StyleCProps {
+  leftActiveFixedColKey: ColumnKey | null
+  leftActiveFixedChildrenColKeys: ColumnKey[]
+  rightActiveFixedColKey: ColumnKey | null
+  rightActiveFixedChildrenColKeys: ColumnKey[]
+  componentId: string
+}
+
 interface NormalRowRenderInfo {
   striped: boolean
   tmNode: TmNode
@@ -358,14 +366,6 @@ export default defineComponent({
           scrollbarInstRef.value?.scrollTo(arg0, arg1)
         }
       }
-    }
-
-    interface StyleCProps {
-      leftActiveFixedColKey: ColumnKey | null
-      leftActiveFixedChildrenColKeys: ColumnKey[]
-      rightActiveFixedColKey: ColumnKey | null
-      rightActiveFixedChildrenColKeys: ColumnKey[]
-      componentId: string
     }
 
     // manually control shadow style to avoid rerender
