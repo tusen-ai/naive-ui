@@ -15,6 +15,7 @@ before-upload.vue
 image-style.vue
 image-card-style.vue
 custom-request.vue
+custom-download.vue
 abstract.vue
 download.vue
 ```
