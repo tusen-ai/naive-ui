@@ -1,6 +1,6 @@
 <!--single-column-->
 
-# 页头 PageHeader
+# 页头 Page Header
 
 我感觉你很可能用不上这个组件，因为根据你拿到的设计稿很可能是重写一个简单。
 
