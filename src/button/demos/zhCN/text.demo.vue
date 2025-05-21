@@ -4,15 +4,8 @@
 长得就像文本。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { TrainOutline as TrainIcon } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    TrainIcon
-  }
-})
 </script>
 
 <template>

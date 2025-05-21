@@ -4,20 +4,13 @@
 处理按钮的事件。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      handleClick() {
-        message.info('Button Clicked')
-      }
-    }
-  }
-})
+const message = useMessage()
+function handleClick() {
+  message.info('Button Clicked')
+}
 </script>
 
 <template>
