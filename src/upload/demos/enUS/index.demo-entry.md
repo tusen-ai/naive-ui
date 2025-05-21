@@ -31,6 +31,7 @@ download.vue
 | action | `string` | `undefined` | The URL to submit data to. |  |
 | create-thumbnail-url | `(file: File \| null, fileInfo: UploadSettledFileInfo) => (Promise<string> \| string \| undefined)` | `undefined` | Customize file thumbnails. If `undefined` is returned, the file would use default thumbnail display logic. | `fileInfo` 2.34.0 |
 | custom-request | `(options: UploadCustomRequestOptions) => void` | `undefined` | Customize upload request. For types, see <n-a href="#UploadCustomRequestOptions-Type">UploadCustomRequestOptions</n-a> |  |
+| custom-download | `(file: FileInfo) => void` | `undefined` | Customize download request | 2.41.1 |
 | data | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | The additional fileds data of HTTP request's form data. |  |
 | default-file-list | `Array<UploadFileInfo>` | `[]` | The default file list in uncontrolled manner. |  |
 | default-upload | `boolean` | `true` | If file uploaded immediately after file is selected. |  |

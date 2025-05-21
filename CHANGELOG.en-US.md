@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.41.1
+
+### Features
+
+- `n-upload` adds `custom-download` closes[#5946](https://github.com/tusen-ai/naive-ui/issues/5946)closes[#6800](https://github.com/tusen-ai/naive-ui/issues/6800)
+
 ## 2.41.0
 
 `2025-01-05`

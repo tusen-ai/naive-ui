@@ -32,6 +32,7 @@ debug.vue
 | action | `string` | `undefined` | 请求提交的地址 |  |
 | create-thumbnail-url | `(file: File \| null, fileInfo: UploadSettledFileInfo) => (Promise<string> \| string \| undefined)` | `undefined` | 自定义文件缩略图，如果返回了 `undefined`，会使用默认的缩略图展示逻辑 | `fileInfo` 2.34.0 |
 | custom-request | `(options: UploadCustomRequestOptions) => void` | `undefined` | 自定义上传方法，类型参考 <n-a href="#UploadCustomRequestOptions-Type">UploadCustomRequestOptions</n-a> |  |
+| custom-download | `(file: FileInfo) => void` | `undefined` | 自定义下载方法 | 2.41.1 |
 | data | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | 提交表单需要附加的数据 |  |
 | default-file-list | `Array<UploadFileInfo>` | `[]` | 非受控状态下默认的文件列表 |  |
 | default-upload | `boolean` | `true` | 选择文件时候是否默认上传 |  |
