@@ -16,7 +16,7 @@ export default defineComponent({
   },
   setup() {
     return {
-      rtlEnabled: ref(false),
+      rtlEnabled: ref(true),
       rtlStyles: [unstableButtonGroupRtl, unstableButtonRtl]
     }
   }
