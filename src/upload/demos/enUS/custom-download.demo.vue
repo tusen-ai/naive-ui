@@ -1,7 +1,7 @@
 <markdown>
 # Custom Download
 
-User `on-download` to customize download file
+User `custom-download` to customize download file
 </markdown>
 
 <script lang="ts" setup>
