@@ -4,16 +4,10 @@
 字号会根据内容文字自动调整。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      value: ref('Oasis')
-    }
-  }
-})
+const value = ref('Oasis')
 </script>
 
 <template>
