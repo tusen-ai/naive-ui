@@ -4,15 +4,8 @@
 I like using an icon in an avatar.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { MdCash } from '@vicons/ionicons4'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    MdCash
-  }
-})
 </script>
 
 <template>
