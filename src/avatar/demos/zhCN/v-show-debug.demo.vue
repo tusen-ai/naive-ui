@@ -2,28 +2,22 @@
 # v-show debug
 </markdown>
 
-<script lang="ts">
-import { defineComponent, onMounted, onUpdated, ref } from 'vue'
+<script lang="ts" setup>
+import { onMounted, onUpdated, ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const isShow = ref(false)
-    const toggle = () => {
-      isShow.value = !isShow.value
-    }
-    onMounted(() => {
-      console.log('world')
-    })
+const isShow = ref(false)
+const value = ref('Oasis111')
 
-    onUpdated(() => {
-      console.log('hello')
-    })
-    return {
-      value: ref('Oasis111'),
-      toggle,
-      isShow
-    }
-  }
+function toggle() {
+  isShow.value = !isShow.value
+}
+
+onMounted(() => {
+  console.log('world')
+})
+
+onUpdated(() => {
+  console.log('hello')
 })
 </script>
 
