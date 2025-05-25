@@ -16,6 +16,7 @@ tooltip.vue
 full-debug.vue
 lazy.vue
 previewed-img-props.vue
+wheel-zoom.vue
 ```
 
 ## API
@@ -25,6 +26,7 @@ previewed-img-props.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | alt | `string` | `undefined` | 图片说明 |  |
+| enable-wheel | `boolean` | `true` | 是否启用鼠标滚轮缩放图片 | 2.41.0 |
 | fallback-src | `string` | `undefined` | 图片加载失败时显示的地址 |  |
 | height | `string \| number` | `undefined` | 图片高度 |  |
 | img-props | `ImgHTMLAttributes` | `undefined` | 组件中 img 元素的属性 |  |
@@ -46,6 +48,7 @@ previewed-img-props.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| enable-wheel | `boolean` | `true` | 是否启用鼠标滚轮缩放图片 | 2.41.0 |
 | render-toolbar | `(props: { nodes: { prev: VNode, next: VNode, rotateCounterclockwise: VNode, rotateClockwise: VNode, resizeToOriginalSize: VNode, zoomOut: VNode, zoomIn: VNode, download: VNode, close: VNode } }) => VNodeChild` | `undefined` | 工具栏的渲染函数 | `2.38.2` |
 | show-toolbar | `boolean` | `true` | 图片放大后是否展示底部工具栏 |  |
 | show-toolbar-tooltip | `boolean` | `false` | 是否展示工具栏的提示 | 2.24.0 |
