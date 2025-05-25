@@ -332,6 +332,7 @@ export const uploadProps = {
   isErrorState: Function as PropType<(xhr: XMLHttpRequest) => boolean>,
   /** currently not used */
   onDownload: Function as PropType<UploadOnDownload>,
+  customDownload: Function as PropType<UploadOnDownload>,
   defaultUpload: {
     type: Boolean,
     default: true
@@ -700,6 +701,7 @@ export default defineComponent({
       showRetryButtonRef: toRef(props, 'showRetryButton'),
       onRemoveRef: toRef(props, 'onRemove'),
       onDownloadRef: toRef(props, 'onDownload'),
+      customDownloadRef: toRef(props, 'customDownload'),
       mergedFileListRef,
       triggerClassRef: toRef(props, 'triggerClass'),
       triggerStyleRef: toRef(props, 'triggerStyle'),
