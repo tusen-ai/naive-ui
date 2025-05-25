@@ -20,6 +20,12 @@ import { keysOf } from '../../_utils'
 import { anchorInjectionKey } from './Link'
 import { getOffset } from './utils'
 
+interface LinkInfo {
+  top: number
+  height: number
+  href: string
+}
+
 export interface BaseAnchorInst {
   setActiveHref: (href: string) => void
 }
@@ -162,11 +168,6 @@ export default defineComponent({
     }
 
     function _handleScroll(transition = true): void {
-      interface LinkInfo {
-        top: number
-        height: number
-        href: string
-      }
       const links: LinkInfo[] = []
       const offsetTarget = unwrapElement(props.offsetTarget ?? document)
       collectedLinkHrefs.forEach((href) => {
