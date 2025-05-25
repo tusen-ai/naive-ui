@@ -38,6 +38,7 @@ debug.vue
 | disabled | `boolean` | `false` | Disabled state. |  |
 | ellipsis-tag-popover-props | `PopoverProps` | `undefined` | `popover` props of the preview ellipsis tag. | 2.37.0 |
 | expanded-keys | `Array<string \| number>` | `undefined` | Collection of expanded keys. |  |
+| indent | `number` | `24` | Indent of per level of the tree. | NEXT_VERSION |
 | indeterminate-keys | `Array<string \| number>` | `undefined` | Indeterminate keys of the tree. |  |
 | filterable | `boolean` | `false` | Whether to show a filter. |  |
 | filter | `(pattern: string, option: TreeSelectOption) => boolean` | - | Filter function. |  |

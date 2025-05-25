@@ -1016,6 +1016,7 @@ export default defineComponent({
                                 themeOverrides={mergedTheme.peerOverrides.Tree}
                                 defaultExpandAll={this.defaultExpandAll}
                                 defaultExpandedKeys={this.defaultExpandedKeys}
+                                indent={this.indent}
                                 expandedKeys={this.mergedExpandedKeys}
                                 checkedKeys={this.treeCheckedKeys}
                                 selectedKeys={this.treeSelectedKeys}

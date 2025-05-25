@@ -4,25 +4,16 @@
 Icons can be used in buttons. You can use `render-icon` prop or `icon` slot.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 import { NIcon } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 
-export default defineComponent({
-  components: {
-    CashIcon
-  },
-  setup() {
-    return {
-      renderIcon() {
-        return h(NIcon, null, {
-          default: () => h(CashIcon)
-        })
-      }
-    }
-  }
-})
+function renderIcon() {
+  return h(NIcon, null, {
+    default: () => h(CashIcon)
+  })
+}
 </script>
 
 <template>
@@ -32,9 +23,9 @@ export default defineComponent({
     </n-button>
     <n-button icon-placement="right">
       <template #icon>
-        <n-icon>
+        <NIcon>
           <CashIcon />
-        </n-icon>
+        </NIcon>
       </template>
       +100$
     </n-button>
