@@ -4,7 +4,8 @@
 
 ### Fixes
 
-- `n-tabs` Fix the type exception of the tab slots in TabPane.
+- Fix `n-tabs`'s type exception of the tab slots in TabPane.
+- Fix `n-data-table` missing css variable of sorting cells, closes [#6521](https://github.com/tusen-ai/naive-ui/issues/6521).
 
 ### Features
 
