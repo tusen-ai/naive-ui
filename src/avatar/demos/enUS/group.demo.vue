@@ -4,42 +4,36 @@
 Crowded people.
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup() {
-    return {
-      options: [
-        {
-          name: 'Leonardo DiCaprio',
-          src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
-        },
-        {
-          name: 'Jennifer Lawrence',
-          src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
-        },
-        {
-          name: 'Audrey Hepburn',
-          src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
-        },
-        {
-          name: 'Anne Hathaway',
-          src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
-        },
-        {
-          name: 'Taylor Swift',
-          src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
-        }
-      ],
-      createDropdownOptions: (options: Array<{ name: string, src: string }>) =>
-        options.map(option => ({
-          key: option.name,
-          label: option.name
-        }))
-    }
+<script lang="ts" setup>
+const options = [
+  {
+    name: 'Leonardo DiCaprio',
+    src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+  },
+  {
+    name: 'Jennifer Lawrence',
+    src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+  },
+  {
+    name: 'Audrey Hepburn',
+    src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+  },
+  {
+    name: 'Anne Hathaway',
+    src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+  },
+  {
+    name: 'Taylor Swift',
+    src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
   }
-})
+]
+
+function createDropdownOptions(options: Array<{ name: string, src: string }>) {
+  return options.map(option => ({
+    key: option.name,
+    label: option.name
+  }))
+}
 </script>
 
 <template>
