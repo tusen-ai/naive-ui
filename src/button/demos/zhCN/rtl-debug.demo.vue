@@ -2,22 +2,13 @@
 # Rtl Debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 import { unstableButtonRtl } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  components: {
-    CashIcon
-  },
-  setup() {
-    return {
-      rtlEnabled: ref(false),
-      rtlStyles: [unstableButtonRtl]
-    }
-  }
-})
+const rtlEnabled = ref(false)
+const rtlStyles = [unstableButtonRtl]
 </script>
 
 <template>

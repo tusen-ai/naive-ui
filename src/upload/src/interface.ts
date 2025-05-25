@@ -51,6 +51,7 @@ export interface UploadInjection {
   mergedFileListRef: Ref<UploadSettledFileInfo[]>
   onRemoveRef: Ref<UploadOnRemove | undefined>
   onDownloadRef: Ref<UploadOnDownload | undefined>
+  customDownloadRef: Ref<UploadOnDownload | undefined>
   xhrMap: Map<string, XMLHttpRequest>
   showPreviewButtonRef: Ref<boolean>
   onPreviewRef: Ref<OnPreview | undefined>

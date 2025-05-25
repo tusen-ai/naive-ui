@@ -4,27 +4,17 @@
 按钮有加载状态。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  components: {
-    CashIcon
-  },
-  setup() {
-    const loadingRef = ref(false)
-    return {
-      handleClick() {
-        loadingRef.value = true
-        setTimeout(() => {
-          loadingRef.value = false
-        }, 2000)
-      },
-      loading: loadingRef
-    }
-  }
-})
+const loading = ref(false)
+function handleClick() {
+  loading.value = true
+  setTimeout(() => {
+    loading.value = false
+  }, 2000)
+}
 </script>
 
 <template>

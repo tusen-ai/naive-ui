@@ -2,6 +2,15 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
+- 修复 `n-tabs` TabPane tab slots 的类型异常
+- 修复 `n-data-table` 可排序表格背景颜色变量丢失，关闭 [#6521](https://github.com/tusen-ai/naive-ui/issues/6521)
+
+### Features
+
+- `n-upload` 新增 `custom-download` 属性，关闭 [#5946](https://github.com/tusen-ai/naive-ui/issues/5946)、[#6800](https://github.com/tusen-ai/naive-ui/issues/6800)
+- `n-upload` 新增 `uploadDownload` 工具方法
 - `n-tree-select` 新增 `indent` 属性
 
 ## 2.41.0

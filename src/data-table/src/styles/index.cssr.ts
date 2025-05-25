@@ -66,6 +66,7 @@ export default c([
     --n-merged-th-color: var(--n-th-color);
     --n-merged-td-color: var(--n-td-color);
     --n-merged-border-color: var(--n-border-color);
+    --n-merged-th-color-hover: var(--n-th-color-hover);
     --n-merged-th-color-sorting: var(--n-th-color-sorting);
     --n-merged-td-color-hover: var(--n-td-color-hover);
     --n-merged-td-color-sorting: var(--n-td-color-sorting);

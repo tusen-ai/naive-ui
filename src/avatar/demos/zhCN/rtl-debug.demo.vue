@@ -2,40 +2,36 @@
 # Rtl Debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { unstableAvatarGroupRtl, unstableSpaceRtl } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      rtlEnabled: ref(false),
-      rtlStyles: [unstableAvatarGroupRtl, unstableSpaceRtl],
-      options: [
-        {
-          name: 'Leonardo DiCaprio',
-          src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
-        },
-        {
-          name: 'Jennifer Lawrence',
-          src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
-        },
-        {
-          name: 'Audrey Hepburn',
-          src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
-        },
-        {
-          name: 'Anne Hathaway',
-          src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
-        },
-        {
-          name: 'Taylor Swift',
-          src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
-        }
-      ]
-    }
+const rtlEnabled = ref(false)
+
+const rtlStyles = [unstableAvatarGroupRtl, unstableSpaceRtl]
+
+const options = [
+  {
+    name: 'Leonardo DiCaprio',
+    src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+  },
+  {
+    name: 'Jennifer Lawrence',
+    src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+  },
+  {
+    name: 'Audrey Hepburn',
+    src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+  },
+  {
+    name: 'Anne Hathaway',
+    src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+  },
+  {
+    name: 'Taylor Swift',
+    src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
   }
-})
+]
 </script>
 
 <template>
