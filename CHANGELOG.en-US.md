@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## 2.41.1
+## NEXT_VERSION
+
+### Fixes
+
+- `n-tabs` Fix the type exception of the tab slots in TabPane.
 
 ### Features
 
