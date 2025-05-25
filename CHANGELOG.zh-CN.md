@@ -4,7 +4,8 @@
 
 ### Fixes
 
-- `n-tabs` 修复了TabPane中tab Slots的类型异常。
+- 修复 `n-tabs` TabPane tab slots 的类型异常
+- 修复 `n-data-table` 可排序表格背景颜色变量丢失
 
 ### Features
 
