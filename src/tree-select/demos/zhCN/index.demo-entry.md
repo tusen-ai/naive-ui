@@ -41,6 +41,7 @@ render-debug.vue
 | disabled | `boolean` | `false` | 是否禁用 |  |
 | ellipsis-tag-popover-props | `PopoverProps` | `undefined` | 选中选项过多省略显示时，预览弹出 `popover` 的属性 | 2.37.0 |
 | expanded-keys | `Array<string \| number>` | `undefined` | 展开节点的 key |  |
+| indent | `number` | `24` | 树的每一级缩进的大小 | NEXT_VERSION |
 | indeterminate-keys | `string \| number` | `undefined` | 部分选中选项的 key |  |
 | filterable | `boolean` | `false` | 是否可过滤 |  |
 | filter | `(pattern: string, option: TreeSelectOption) => boolean` | - | 过滤器函数 |  |
