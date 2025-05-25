@@ -52,6 +52,7 @@ export {
   inputNumberDark,
   inputNumberRtl as unstableInputNumberRtl
 } from './input-number/styles'
+export { inputOptDark, inputOptRtl as unstableInputOptRtl } from './input-opt/styles'
 export { inputDark, inputRtl as unstableInputRtl } from './input/styles'
 export { layoutDark } from './layout/styles'
 export { rowRtl as unstableRowRtl } from './legacy-grid/styles'

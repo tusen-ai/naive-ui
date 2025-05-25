@@ -40,8 +40,7 @@ function renderItemExtra(rawItem, isZh) {
 function getItemExtraString(rawItem, isZh) {
   if (!rawItem.enSuffix || !isZh) {
     return ''
-  }
-  else {
+  } else {
     return rawItem.en
   }
 }
@@ -380,6 +379,13 @@ export function createComponentMenuOptions({ lang, theme }) {
           zh: '数字输入',
           enSuffix: true,
           path: '/input-number'
+        },
+        {
+          en: 'Input Opt',
+          zh: '验证码',
+          enSuffix: true,
+          path: '/input-opt',
+          isNew: true
         },
         {
           en: 'Mention',
