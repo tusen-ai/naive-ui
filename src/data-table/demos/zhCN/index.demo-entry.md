@@ -133,6 +133,7 @@ rtl-debug.vue
 | on-update:page | `(page: number)` | `undefined` | page 改变时触发的回调函数 |  |
 | on-update:page-size | `(pageSize: number) => void` | `undefined` | page-size 改变时触发的回调函数 |  |
 | on-update:sorter | `(options: DataTableSortState \| DataTableSortState[] \| null) => void` | `undefined` | 如果变动列为多列排序则返回 `DataTableSortState[] \| null` 否则返回 `DataTableSortState \| null` |  |
+| on-update:resized-column | `(width:number,column:TableColumn) => void` | `undefined` | 列拖动改变宽度后触发的回调函数 |  |
 
 #### DataTableColumn Properties
 
