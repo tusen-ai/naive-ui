@@ -185,7 +185,7 @@ export default defineComponent({
       ).then((res) => {
         if (res !== false) {
           if (customDownload) {
-            customDownload(file)
+            customDownload(Object.assign({}, file))
           }
           else {
             download(file.url, file.name)
