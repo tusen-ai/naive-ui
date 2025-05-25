@@ -139,3 +139,7 @@ interface UploadCustomRequestOptions {
 | 名称 | 参数 | 说明 |
 | --- | --- | --- |
 | default | `(options: { handleClick: () => void, handleDragOver: (e: DragEvent) => void, handleDragEnter: (e: DragEvent) => void, handleDragLeave: (e: DragEvent) => void, handleDrop: (e: DragEvent) => void})` | `handleClick` 为点击上传函数，`handleDrop` 为拖拽上传函数，`handleDragEnter`、`handleDragOver` 和 `handleDragLeave` 为拖拽事件函数 |
+
+### 其他
+
+1. `uploadDownload`，类型为 `(url: string, name: string | undefined): void`，你可以直接从 naive-ui import 此函数

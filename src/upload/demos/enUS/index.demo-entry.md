@@ -138,3 +138,7 @@ interface UploadCustomRequestOptions {
 | Name | Parameters | Description |
 | --- | --- | --- |
 | default | `(options: { handleClick: () => void, handleDragOver: (e: DragEvent) => void, handleDragEnter: (e: DragEvent) => void, handleDragLeave: (e: DragEvent) => void, handleDrop: (e: DragEvent) => void})` | `handleClick` is the click upload function, `handleDrop` is the drag and drop upload function, `handleDragEnter`, `handleDragOver` and `handleDragLeave` are the drag and drop event functions. |
+
+### Others
+
+1. `uploadDownload`, with type of `(url: string, name: string | undefined): void`, you can import the method directly from naive-ui.

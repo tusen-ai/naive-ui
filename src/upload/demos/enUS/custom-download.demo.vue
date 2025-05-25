@@ -1,7 +1,11 @@
 <markdown>
-# Custom Download
+# Custom download
 
-User `custom-download` to customize download file
+Use `custom-download` to customize file downloading.
+
+By default, naive-ui uses native download logic (which initiates downloading by perform a click on an `<a />` element with correspoding URL).
+
+However, you may want to preform custom download logic for example in a cross origin downloading process.
 </markdown>
 
 <script lang="ts" setup>
