@@ -5,7 +5,7 @@
 ### Fixes
 
 - 修复 `n-tabs` TabPane tab slots 的类型异常
-- 修复 `n-data-table` 可排序表格背景颜色变量丢失
+- 修复 `n-data-table` 可排序表格背景颜色变量丢失，关闭 [#6521](https://github.com/tusen-ai/naive-ui/issues/6521)
 
 ### Features
 
