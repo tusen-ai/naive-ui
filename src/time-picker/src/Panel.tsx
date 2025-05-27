@@ -1,6 +1,7 @@
 import type { MaybeArray } from '../../_utils'
 import { computed, defineComponent, h, inject, type PropType, ref } from 'vue'
 import { NBaseFocusDetector, NScrollbar } from '../../_internal'
+import { useLocale } from '../../_mixins'
 import { NButton } from '../../button'
 import {
   type IsHourDisabled,
@@ -98,6 +99,7 @@ export default defineComponent({
     const { mergedThemeRef, mergedClsPrefixRef } = inject(
       timePickerInjectionKey
     )!
+    const { dateLocaleRef } = useLocale('DatePicker')
 
     const hoursRef = computed<Item[]>(() => {
       const { isHourDisabled, hours, use12Hours, amPmValue } = props
@@ -174,12 +176,12 @@ export default defineComponent({
       }
       return [
         {
-          label: 'AM',
+          label: dateLocaleRef.value.locale.localize.dayPeriod('am'),
           value: 'am',
           disabled: amDisabled
         },
         {
-          label: 'PM',
+          label: dateLocaleRef.value.locale.localize.dayPeriod('pm'),
           value: 'pm',
           disabled: pmDisabled
         }
