@@ -274,6 +274,10 @@ export const treeProps = {
     type: Boolean,
     default: true
   },
+  ellipsis: {
+    type: Boolean,
+    default: false
+  },
   checkboxPlacement: {
     type: String as PropType<'left' | 'right'>,
     default: 'left'
@@ -1748,6 +1752,7 @@ export default defineComponent({
       blockLine,
       draggable,
       disabled,
+      ellipsis,
       internalFocusable,
       checkable,
       handleKeydown,
@@ -1762,7 +1767,8 @@ export default defineComponent({
       rtlEnabled && `${mergedClsPrefix}-tree--rtl`,
       checkable && `${mergedClsPrefix}-tree--checkable`,
       (blockLine || blockNode) && `${mergedClsPrefix}-tree--block-node`,
-      blockLine && `${mergedClsPrefix}-tree--block-line`
+      blockLine && `${mergedClsPrefix}-tree--block-line`,
+      ellipsis && `${mergedClsPrefix}-tree--ellipsis`
     ]
     const createNode = (tmNode: TmNode | MotionData): VNode => {
       return '__motion' in tmNode ? (
