@@ -278,6 +278,8 @@ export default defineComponent({
       mergedTableLayoutRef,
       maxHeightRef: toRef(props, 'maxHeight'),
       minHeightRef: toRef(props, 'minHeight'),
+      summaryMaxHeightRef: toRef(props, 'summaryMaxHeight'),
+      stickySummaryRef: toRef(props, 'stickySummary'),
       flexHeightRef: toRef(props, 'flexHeight'),
       headerCheckboxDisabledRef,
       paginationBehaviorOnFilterRef: toRef(props, 'paginationBehaviorOnFilter'),
