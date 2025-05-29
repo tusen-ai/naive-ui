@@ -21,6 +21,7 @@ declare module 'vue' {
     NCarousel: (typeof import('naive-ui'))['NCarousel']
     NCarouselItem: (typeof import('naive-ui'))['NCarouselItem']
     NCascader: (typeof import('naive-ui'))['NCascader']
+    NCascaderPanel: (typeof import('naive-ui'))['NCascaderPanel']
     NCheckbox: (typeof import('naive-ui'))['NCheckbox']
     NCheckboxGroup: (typeof import('naive-ui'))['NCheckboxGroup']
     NCode: (typeof import('naive-ui'))['NCode']

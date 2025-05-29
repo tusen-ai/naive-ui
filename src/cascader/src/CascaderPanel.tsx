@@ -1,9 +1,6 @@
-import type { InternalSelectionInst } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/interface'
-import type { PopoverProps } from '../../popover'
-import type { SelectBaseOption } from '../../select/src/interface'
 import type { CascaderTheme } from '../styles'
 import type {
   CascaderInst,
@@ -18,16 +15,15 @@ import type {
   SelectMenuInstance,
   Value
 } from './interface'
-import { changeColor, depx, getPreciseEventTarget, happensIn } from 'seemly'
+import { changeColor, depx, happensIn } from 'seemly'
 import { type CheckStrategy, SubtreeNotLoadedError } from 'treemate'
-import { useIsMounted, useMergedState } from 'vooks'
+import { useIsMounted } from 'vooks'
 import {
   computed,
   type CSSProperties,
   defineComponent,
   h,
   type HTMLAttributes,
-  nextTick,
   type PropType,
   provide,
   ref,
@@ -35,17 +31,8 @@ import {
   toRef,
   type VNode,
   type VNodeChild,
-  watch,
   watchEffect
 } from 'vue'
-import {
-  type FollowerInst,
-  type FollowerPlacement,
-  VBinder,
-  VFollower,
-  VTarget
-} from 'vueuc'
-import { NInternalSelection } from '../../_internal'
 import {
   useConfig,
   useFormItem,
@@ -53,12 +40,7 @@ import {
   useTheme,
   useThemeClass
 } from '../../_mixins'
-import {
-  call,
-  markEventEffectPerformed,
-  useAdjustedTo,
-  warnOnce
-} from '../../_utils'
+import { call, markEventEffectPerformed, warnOnce } from '../../_utils'
 import { cascaderLight } from '../styles'
 import CascaderMenu from './CascaderMenu'
 import CascaderSelectMenu from './CascaderSelectMenu'
@@ -67,10 +49,9 @@ import { cascaderInjectionKey } from './interface'
 import style from './styles/index.cssr'
 import { getRawNodePath } from './utils'
 
-export const cascaderProps = {
+export const cascaderPanelProps = {
   ...(useTheme.props as ThemeProps<CascaderTheme>),
   allowCheckingNotLoaded: Boolean,
-  to: useAdjustedTo.propTo,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -112,10 +93,6 @@ export const cascaderProps = {
     default: ' / '
   },
   filter: Function as PropType<Filter>,
-  placement: {
-    type: String as PropType<FollowerPlacement>,
-    default: 'bottom-start'
-  },
   cascade: {
     type: Boolean,
     default: true
@@ -125,12 +102,6 @@ export const cascaderProps = {
     type: Boolean,
     default: true
   },
-  show: {
-    type: Boolean as PropType<boolean | undefined>,
-    default: undefined
-  },
-  maxTagCount: [String, Number] as PropType<number | 'responsive'>,
-  ellipsisTagPopoverProps: Object as PropType<PopoverProps>,
   menuProps: Object as PropType<HTMLAttributes>,
   filterMenuProps: Object as PropType<HTMLAttributes>,
   virtualScroll: {
@@ -159,12 +130,6 @@ export const cascaderProps = {
   status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-  'onUpdate:show': [Function, Array] as PropType<
-    MaybeArray<(show: boolean) => void>
-  >,
-  onUpdateShow: [Function, Array] as PropType<
-    MaybeArray<(show: boolean) => void>
-  >,
   onBlur: Function as PropType<(e: FocusEvent) => void>,
   onFocus: Function as PropType<(e: FocusEvent) => void>,
   getColumnStyle: Function as PropType<
@@ -188,9 +153,11 @@ export const cascaderProps = {
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
 
-export type CascaderProps = ExtractPublicPropTypes<typeof cascaderProps>
+export type CascaderPanelProps = ExtractPublicPropTypes<
+  typeof cascaderPanelProps
+>
 
-export interface CascaderSlots {
+export interface CascaderPanelSlots {
   action?: () => VNode[]
   arrow?: () => VNode[]
   empty?: () => VNode[]
@@ -198,9 +165,9 @@ export interface CascaderSlots {
 }
 
 export default defineComponent({
-  name: 'Cascader',
-  props: cascaderProps,
-  slots: Object as SlotsType<CascaderSlots>,
+  name: 'CascaderPanel',
+  props: cascaderPanelProps,
+  slots: Object as SlotsType<CascaderPanelSlots>,
   setup(props, { slots }) {
     if (__DEV__) {
       watchEffect(() => {
@@ -218,12 +185,8 @@ export default defineComponent({
         }
       })
     }
-    const {
-      mergedBorderedRef,
-      mergedClsPrefixRef,
-      namespaceRef,
-      inlineThemeDisabled
-    } = useConfig(props)
+    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled }
+      = useConfig(props)
     const themeRef = useTheme(
       'Cascader',
       '-cascader',
@@ -280,14 +243,8 @@ export default defineComponent({
 
     const patternRef = ref('')
     const formItem = useFormItem(props)
-    const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     const cascaderMenuInstRef = ref<CascaderMenuInstance | null>(null)
     const selectMenuInstRef = ref<SelectMenuInstance | null>(null)
-    const triggerInstRef = ref<InternalSelectionInst | null>(null)
-    const selectMenuFollowerRef = ref<FollowerInst | null>(null)
-    const cascaderMenuFollowerRef = ref<FollowerInst | null>(null)
-    const adjustedToRef = useAdjustedTo(props)
-    const focusedRef = ref(false)
 
     const {
       uncontrolledValueRef,
@@ -317,17 +274,6 @@ export default defineComponent({
     const optionHeightRef = computed(() => {
       return themeRef.value.self.optionHeight
     })
-    const uncontrolledShowRef = ref(false)
-    function doUpdateShow(value: boolean): void {
-      const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
-      if (onUpdateShow) {
-        call(onUpdateShow, value)
-      }
-      if (_onUpdateShow) {
-        call(_onUpdateShow, value)
-      }
-      uncontrolledShowRef.value = value
-    }
     function doUpdateValue(
       value: Value | null,
       option: CascaderOption | null | Array<CascaderOption | null>,
@@ -354,7 +300,7 @@ export default defineComponent({
     }
 
     function doCheck(key: Key): boolean {
-      const { cascade, multiple, filterable } = props
+      const { cascade, multiple } = props
       const {
         value: { check, getNode, getPath }
       } = treeMateRef
@@ -372,8 +318,6 @@ export default defineComponent({
               getRawNodePath(getPath(checkedKey)?.treeNodePath)
             )
           )
-          if (filterable)
-            focusSelectionInput()
           keyboardKeyRef.value = key
           hoverKeyRef.value = key
         }
@@ -440,9 +384,6 @@ export default defineComponent({
         hoverKeyRef.value = key
       }
     }
-
-    const controlledShowRef = toRef(props, 'show')
-    const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
     const localizedPlaceholderRef = computed(() => {
       const { placeholder } = props
       if (placeholder !== undefined)
@@ -453,43 +394,6 @@ export default defineComponent({
     const showSelectMenuRef = computed(() => {
       return !!(props.filterable && patternRef.value)
     })
-    // init hover key
-    watch(
-      mergedShowRef,
-      (show) => {
-        if (!show)
-          return
-        if (props.multiple)
-          return
-        const { value } = mergedValueRef
-        if (!Array.isArray(value) && value !== null) {
-          keyboardKeyRef.value = value
-          hoverKeyRef.value = value
-          void nextTick(() => {
-            if (!mergedShowRef.value)
-              return
-            const { value: hoverKey } = hoverKeyRef
-            if (mergedValueRef.value !== null) {
-              const node = treeMateRef.value.getNode(hoverKey)
-              if (node) {
-                cascaderMenuInstRef.value?.scroll(
-                  node.level,
-                  node.index,
-                  depx(optionHeightRef.value)
-                )
-              }
-            }
-          })
-        }
-        else {
-          keyboardKeyRef.value = null
-          hoverKeyRef.value = null
-        }
-      },
-      {
-        immediate: true
-      }
-    )
     // --- methods
     function doBlur(e: FocusEvent): void {
       const { onBlur } = props
@@ -505,46 +409,11 @@ export default defineComponent({
         call(onFocus, e)
       nTriggerFormFocus()
     }
-    function focusSelectionInput(): void {
-      triggerInstRef.value?.focusInput()
-    }
-    function focusSelection(): void {
-      triggerInstRef.value?.focus()
-    }
-    function openMenu(): void {
-      if (!mergedDisabledRef.value) {
-        patternRef.value = ''
-        doUpdateShow(true)
-        if (props.filterable) {
-          focusSelectionInput()
-        }
-      }
-    }
-    function closeMenu(returnFocus = false): void {
-      if (returnFocus) {
-        focusSelection()
-      }
-      doUpdateShow(false)
+    function closeMenu(_ = false): void {
       patternRef.value = ''
     }
-    function handleCascaderMenuClickOutside(e: MouseEvent): void {
-      if (showSelectMenuRef.value)
-        return
-      if (mergedShowRef.value) {
-        if (
-          !triggerInstRef.value?.$el.contains(
-            getPreciseEventTarget(e) as Node | null
-          )
-        ) {
-          closeMenu()
-        }
-      }
-    }
-    function handleSelectMenuClickOutside(e: MouseEvent): void {
-      if (!showSelectMenuRef.value)
-        return
-      handleCascaderMenuClickOutside(e)
-    }
+    function handleCascaderMenuClickOutside(): void {}
+    function handleSelectMenuClickOutside(): void {}
     function clearPattern(): void {
       if (props.clearFilterAfterSelect)
         patternRef.value = ''
@@ -640,11 +509,13 @@ export default defineComponent({
       }
     }
     function handleKeydown(e: KeyboardEvent): void {
+      const showSelectMenu = showSelectMenuRef.value
+      const keyboardKey = keyboardKeyRef.value
       switch (e.key) {
         case ' ':
         case 'ArrowDown':
         case 'ArrowUp':
-          if (props.filterable && mergedShowRef.value) {
+          if (props.filterable) {
             break
           }
           e.preventDefault()
@@ -658,177 +529,93 @@ export default defineComponent({
             return
         // eslint-disable-next-line no-fallthrough
         case 'Enter':
-          if (!mergedShowRef.value) {
-            openMenu()
-          }
-          else {
-            const { value: showSelectMenu } = showSelectMenuRef
-            const { value: keyboardKey } = keyboardKeyRef
-            if (!showSelectMenu) {
-              if (keyboardKey !== null) {
-                if (
-                  checkedKeysRef.value.includes(keyboardKey)
-                  || indeterminateKeysRef.value.includes(keyboardKey)
-                ) {
-                  doUncheck(keyboardKey)
-                }
-                else {
-                  const checkIsValid = doCheck(keyboardKey)
-                  if (!props.multiple && checkIsValid) {
-                    closeMenu(true)
-                  }
-                }
+          if (!showSelectMenu) {
+            if (keyboardKey !== null) {
+              if (
+                checkedKeysRef.value.includes(keyboardKey)
+                || indeterminateKeysRef.value.includes(keyboardKey)
+              ) {
+                doUncheck(keyboardKey)
               }
-            }
-            else {
-              if (selectMenuInstRef.value) {
-                const hasCorrespondingOption = selectMenuInstRef.value.enter()
-                if (hasCorrespondingOption)
-                  clearPattern()
+              else {
+                const checkIsValid = doCheck(keyboardKey)
+                if (!props.multiple && checkIsValid) {
+                  closeMenu(true)
+                }
               }
             }
           }
+          else {
+            if (selectMenuInstRef.value) {
+              const hasCorrespondingOption = selectMenuInstRef.value.enter()
+              if (hasCorrespondingOption)
+                clearPattern()
+            }
+          }
+
           break
         case 'ArrowUp':
           e.preventDefault()
-          if (mergedShowRef.value) {
-            if (showSelectMenuRef.value) {
-              selectMenuInstRef.value?.prev()
-            }
-            else {
-              move('prev')
-            }
+
+          if (showSelectMenuRef.value) {
+            selectMenuInstRef.value?.prev()
           }
+          else {
+            move('prev')
+          }
+
           break
         case 'ArrowDown':
           e.preventDefault()
-          if (mergedShowRef.value) {
-            if (showSelectMenuRef.value) {
-              selectMenuInstRef.value?.next()
-            }
-            else {
-              move('next')
-            }
+
+          if (showSelectMenuRef.value) {
+            selectMenuInstRef.value?.next()
           }
           else {
-            openMenu()
+            move('next')
           }
+
           break
         case 'ArrowLeft':
           e.preventDefault()
-          if (mergedShowRef.value && !showSelectMenuRef.value) {
+          if (!showSelectMenuRef.value) {
             move('parent')
           }
           break
         case 'ArrowRight':
           e.preventDefault()
-          if (mergedShowRef.value && !showSelectMenuRef.value) {
+          if (!showSelectMenuRef.value) {
             move('child')
           }
           break
         case 'Escape':
-          if (mergedShowRef.value) {
-            markEventEffectPerformed(e)
-            closeMenu(true)
-          }
+          markEventEffectPerformed(e)
+          closeMenu(true)
       }
     }
     function handleMenuKeydown(e: KeyboardEvent): void {
       handleKeydown(e)
     }
     // --- search
-    function handleClear(e: MouseEvent): void {
-      e.stopPropagation()
-      if (props.multiple) {
-        doUpdateValue([], [], [])
-      }
-      else {
-        doUpdateValue(null, null, null)
-      }
-    }
-    function handleTriggerFocus(e: FocusEvent): void {
-      if (!cascaderMenuInstRef.value?.$el.contains(e.relatedTarget as Node)) {
-        focusedRef.value = true
-        doFocus(e)
-      }
-    }
-    function handleTriggerBlur(e: FocusEvent): void {
-      if (!cascaderMenuInstRef.value?.$el.contains(e.relatedTarget as Node)) {
-        focusedRef.value = false
-        doBlur(e)
-        closeMenu()
-      }
-    }
     function handleMenuFocus(e: FocusEvent): void {
-      if (!triggerInstRef.value?.$el.contains(e.relatedTarget as Node)) {
-        focusedRef.value = true
-        doFocus(e)
-      }
+      doFocus(e)
     }
     function handleMenuBlur(e: FocusEvent): void {
-      if (!triggerInstRef.value?.$el.contains(e.relatedTarget as Node)) {
-        focusedRef.value = false
-        doBlur(e)
-      }
+      doBlur(e)
     }
     function handleMenuMousedown(e: MouseEvent): void {
       if (!happensIn(e, 'action')) {
         if (props.multiple && props.filter) {
           e.preventDefault()
-          focusSelectionInput()
         }
       }
     }
     function handleMenuTabout(): void {
       closeMenu(true)
     }
-    function handleTriggerClick(): void {
-      if (props.filterable) {
-        openMenu()
-      }
-      else {
-        if (mergedShowRef.value) {
-          closeMenu(true)
-        }
-        else {
-          openMenu()
-        }
-      }
-    }
-    function handlePatternInput(e: InputEvent): void {
-      patternRef.value = (e.target as HTMLInputElement).value
-    }
-    function handleDeleteOption(option: SelectBaseOption): void {
-      const { multiple } = props
-      const { value: mergedValue } = mergedValueRef
-      if (
-        multiple
-        && Array.isArray(mergedValue)
-        && option.value !== undefined
-      ) {
-        doUncheck(option.value)
-      }
-      else {
-        doUpdateValue(null, null, null)
-      }
-    }
     // sync position
-    function syncSelectMenuPosition(): void {
-      selectMenuFollowerRef.value?.syncPosition()
-    }
-    function syncCascaderMenuPosition(): void {
-      cascaderMenuFollowerRef.value?.syncPosition()
-    }
-    function handleTriggerResize(): void {
-      if (mergedShowRef.value) {
-        if (showSelectMenuRef.value) {
-          syncSelectMenuPosition()
-        }
-        else {
-          syncCascaderMenuPosition()
-        }
-      }
-    }
+    function syncSelectMenuPosition(): void {}
+    function syncCascaderMenuPosition(): void {}
     provide(cascaderInjectionKey, {
       slots,
       mergedClsPrefixRef,
@@ -869,54 +656,34 @@ export default defineComponent({
       handleCascaderMenuClickOutside,
       clearPattern
     })
+
     const exposedMethods: CascaderInst = {
-      focus: () => {
-        triggerInstRef.value?.focus()
-      },
-      blur: () => {
-        triggerInstRef.value?.blur()
-      },
+      focus: () => {},
+      blur: () => {},
       getCheckedData,
       getIndeterminateData
     }
 
     return {
       ...exposedMethods,
-      handleTriggerResize,
-      mergedStatus: mergedStatusRef,
-      selectMenuFollowerRef,
-      cascaderMenuFollowerRef,
-      triggerInstRef,
       selectMenuInstRef,
       cascaderMenuInstRef,
-      mergedBordered: mergedBorderedRef,
       mergedClsPrefix: mergedClsPrefixRef,
       namespace: namespaceRef,
       mergedValue: mergedValueRef,
-      mergedShow: mergedShowRef,
       showSelectMenu: showSelectMenuRef,
       pattern: patternRef,
       treeMate: treeMateRef,
-      mergedSize: mergedSizeRef,
-      mergedDisabled: mergedDisabledRef,
       localizedPlaceholder: localizedPlaceholderRef,
       selectedOption: selectedOptionRef,
       selectedOptions: selectedOptionsRef,
-      adjustedTo: adjustedToRef,
       menuModel: menuModelRef,
       handleMenuTabout,
       handleMenuFocus,
       handleMenuBlur,
       handleMenuKeydown,
       handleMenuMousedown,
-      handleTriggerFocus,
-      handleTriggerBlur,
-      handleTriggerClick,
-      handleClear,
-      handleDeleteOption,
-      handlePatternInput,
       handleKeydown,
-      focused: focusedRef,
       optionHeight: optionHeightRef,
       mergedTheme: themeRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
@@ -925,133 +692,46 @@ export default defineComponent({
     }
   },
   render() {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, filterMenuProps, menuProps } = this
+    this.onRender?.()
     return (
       <div class={`${mergedClsPrefix}-cascader`}>
-        <VBinder>
-          {{
-            default: () => [
-              <VTarget>
-                {{
-                  default: () => (
-                    <NInternalSelection
-                      onResize={this.handleTriggerResize}
-                      ref="triggerInstRef"
-                      status={this.mergedStatus}
-                      clsPrefix={mergedClsPrefix}
-                      maxTagCount={this.maxTagCount}
-                      ellipsisTagPopoverProps={this.ellipsisTagPopoverProps}
-                      bordered={this.mergedBordered}
-                      size={this.mergedSize}
-                      theme={this.mergedTheme.peers.InternalSelection}
-                      themeOverrides={
-                        this.mergedTheme.peerOverrides.InternalSelection
-                      }
-                      active={this.mergedShow}
-                      pattern={this.pattern}
-                      placeholder={this.localizedPlaceholder}
-                      selectedOption={this.selectedOption}
-                      selectedOptions={this.selectedOptions}
-                      multiple={this.multiple}
-                      filterable={this.filterable}
-                      clearable={this.clearable}
-                      disabled={this.mergedDisabled}
-                      focused={this.focused}
-                      onFocus={this.handleTriggerFocus}
-                      onBlur={this.handleTriggerBlur}
-                      onClick={this.handleTriggerClick}
-                      onClear={this.handleClear}
-                      onDeleteOption={this.handleDeleteOption}
-                      onPatternInput={this.handlePatternInput}
-                      onKeydown={this.handleKeydown}
-                    >
-                      {{
-                        arrow: () => this.$slots.arrow?.()
-                      }}
-                    </NInternalSelection>
-                  )
-                }}
-              </VTarget>,
-              <VFollower
-                key="cascaderMenu"
-                ref="cascaderMenuFollowerRef"
-                show={this.mergedShow && !this.showSelectMenu}
-                containerClass={this.namespace}
-                placement={this.placement}
-                width={!this.options.length ? 'target' : undefined}
-                teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
-                to={this.adjustedTo}
-              >
-                {{
-                  default: () => {
-                    this.onRender?.()
-                    const { menuProps } = this
-                    return (
-                      <CascaderMenu
-                        {...menuProps}
-                        ref="cascaderMenuInstRef"
-                        class={[this.themeClass, menuProps?.class]}
-                        value={this.mergedValue}
-                        show={this.mergedShow && !this.showSelectMenu}
-                        menuModel={this.menuModel}
-                        style={[
-                          this.cssVars as CSSProperties,
-                          menuProps?.style
-                        ]}
-                        onFocus={this.handleMenuFocus}
-                        onBlur={this.handleMenuBlur}
-                        onKeydown={this.handleMenuKeydown}
-                        onMousedown={this.handleMenuMousedown}
-                        onTabout={this.handleMenuTabout}
-                      >
-                        {{
-                          action: () => this.$slots.action?.(),
-                          empty: () => this.$slots.empty?.()
-                        }}
-                      </CascaderMenu>
-                    )
-                  }
-                }}
-              </VFollower>,
-              <VFollower
-                key="selectMenu"
-                ref="selectMenuFollowerRef"
-                show={this.mergedShow && this.showSelectMenu}
-                containerClass={this.namespace}
-                width="target"
-                placement={this.placement}
-                to={this.adjustedTo}
-                teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
-              >
-                {{
-                  default: () => {
-                    this.onRender?.()
-                    const { filterMenuProps } = this
-                    return (
-                      <CascaderSelectMenu
-                        {...filterMenuProps}
-                        ref="selectMenuInstRef"
-                        class={[this.themeClass, filterMenuProps?.class]}
-                        value={this.mergedValue}
-                        show={this.mergedShow && this.showSelectMenu}
-                        pattern={this.pattern}
-                        multiple={this.multiple}
-                        tmNodes={this.treeMate.treeNodes}
-                        filter={this.filter}
-                        labelField={this.labelField}
-                        separator={this.separator}
-                        style={[
-                          this.cssVars as CSSProperties,
-                          filterMenuProps?.style
-                        ]}
-                      />
-                    )
-                  }
-                }}
-              </VFollower>
-            ]
-          }}
-        </VBinder>
+        {!this.showSelectMenu ? (
+          <CascaderMenu
+            {...menuProps}
+            ref="cascaderMenuInstRef"
+            class={[this.themeClass, menuProps?.class]}
+            value={this.mergedValue}
+            show={!this.showSelectMenu}
+            menuModel={this.menuModel}
+            style={[this.cssVars as CSSProperties, menuProps?.style]}
+            onFocus={this.handleMenuFocus}
+            onBlur={this.handleMenuBlur}
+            onKeydown={this.handleMenuKeydown}
+            onMousedown={this.handleMenuMousedown}
+            onTabout={this.handleMenuTabout}
+          >
+            {{
+              action: () => this.$slots.action?.(),
+              empty: () => this.$slots.empty?.()
+            }}
+          </CascaderMenu>
+        ) : (
+          <CascaderSelectMenu
+            {...filterMenuProps}
+            ref="selectMenuInstRef"
+            class={[this.themeClass, filterMenuProps?.class]}
+            value={this.mergedValue}
+            show={this.showSelectMenu}
+            pattern={this.pattern}
+            multiple={this.multiple}
+            tmNodes={this.treeMate.treeNodes}
+            filter={this.filter}
+            labelField={this.labelField}
+            separator={this.separator}
+            style={[this.cssVars as CSSProperties, filterMenuProps?.style]}
+          />
+        )}
       </div>
     )
   }
