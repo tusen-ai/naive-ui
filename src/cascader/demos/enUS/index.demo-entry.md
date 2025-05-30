@@ -17,6 +17,7 @@ custom-field.vue
 custom-render.vue
 focus.vue
 status.vue
+cascaderPanel.vue
 ```
 
 ## API
@@ -66,6 +67,45 @@ status.vue
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback executed when menu is opened & closed. |  |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: CascaderOption \| Array<CascaderOption \| null> \| null, pathValues: Array<CascaderOption \| null> \| Array<CascaderOption[] \| null> \| null) => void` | `undefined` | Callback executed when the value changes. |  |
 
+### CascaderPanel Props
+
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| allow-checking-not-loaded | `boolean` | `false` | Whether to allow cascade checking on not loaded nodes. If you want to use this, you should know the `value` may be incomplete. Also, you should aware about the consistency bewteen naive's checking logic and your backend's checking logic, especially when there are disabled nodes. |  |
+| cascade | `boolean` | `true` | Whether to cascade the checkbox selection onto children. |  |
+| check-strategy | `string` | `'all'` | The way to show checked options. `all` means showing all checked node. `parent` means showing all checked parent node when all child node are checked (not working in single select mode). `child` means showing all child node. |  |
+| children-field | `string` | `'children'` | The children field in `CascaderOption`. |  |
+| clearable | `boolean` | `false` | Whether the cascader is clearable. |  |
+| clear-filter-after-select | `boolean` | `true` | When multiple and filter is true, whether to clear filter keyword after select an option. |  |
+| default-value | `string \| number \| Array<number \| string> \| null` | `null` | Data selected by default if no value is set. |  |
+| disabled | `boolean` | `false` | Whether to disable the cascader. |  |
+| disabled-field | `string` | `'disabled'` | The disabled field in `CascaderOption`. |  |
+| expand-trigger | `'click' \| 'hover'` | `'click'` | If `remote` is set, `'hover'` won't work. |  |
+| filterable | `boolean` | `false` | Note: If `remote` is set, this won't have any effect. |  |
+| filter | `(pattern: string, option: CascaderOption, path: CascaderOption[]) => boolean` | A string based filter algorithm. | Filter function of the cascader. |  |
+| filter-menu-props | `HTMLAttributes` | `undefined` | The filter menu's dom props. |  |
+| get-column-style | `(detail: { level: number }) => string \| object` | `undefined` | Function that resolves column style. `level` starts from `0`. |  |
+| value-field | `string` | `'value'` | The value field in `CascaderOption`. |  |
+| label-field | `string` | `'label'` | The label field in `CascaderOption`. |  |
+| menu-props | `HTMLAttributes` | `undefined` | The menu's dom props. |  |
+| multiple | `boolean` | `false` | Whether to allow multiple options being selected. |  |
+| options | `CascaderOption[]` | `[]` | Options of the cascader. |  |
+| placeholder | `string` | `'Please Select'` | Placeholder text. |  |
+| remote | `boolean` | `false` | Whether to obtain data remotely. |  |
+| render-prefix | `(info: { option: CascaderOption, node: VNode \| null, checked: boolean }) => VNodeChild` | `undefined` | Render function of all the options' prefix. |  |
+| render-label | `(option: CascaderOption, checked: boolean) => VNodeChild` | `undefined` | Render function for cascader menu option label. |  |
+| render-suffix | `(info: { option: CascaderOption, node: VNode \| null, checked: boolean }) => VNodeChild` | `undefined` | Render function of all the options' suffix. |  |
+| separator | `string` | `' / '` | Selected option path value separator (used with `show-path`). |  |
+| show-path | `boolean` | `true` | Whether to show the selected options as a path. |  |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Cascader size. |  |
+| status | `'success' \| 'warning' \| 'error'` | `undefined` | Validation status. |  |
+| value | `string \| number \| Array<number \| string> \| null` | `undefined` | Value of the cascader (if being set manually). |  |
+| virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. |  |
+| on-blur | `() => void` | `undefined` | Callback on blurred. |  |
+| on-focus | `() => void` | `undefined` | Callback on focused. |  |
+| on-load | `(option: CascaderOption) => Promise<void>` | `undefined` | Callback when a node is loaded. Set `option.children` in the returned promise. Loading will stop after the promise is resolved or rejected. |  |
+| on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: CascaderOption \| Array<CascaderOption \| null> \| null, pathValues: Array<CascaderOption \| null> \| Array<CascaderOption[] \| null> \| null) => void` | `undefined` | Callback executed when the value changes. |  |
+
 #### CascaderOption Properties
 
 | Name | Type | Description | Version |
@@ -84,6 +124,15 @@ status.vue
 | empty | `()` | Empty state slot for the options cascading menu. | 2.22.0 |
 | not-found | `()` | Data not found slot when searching. | 2.34.0 |
 
+### CascaderPanel Slots
+
+| Name | Parameters | Description | Version |
+| --- | --- | --- | --- |
+| action | `()` | Action content displayed in the cascading menu. |  |
+| arrow | `()` | Arrow content displayed in the cascading menu. |  |
+| empty | `()` | Empty state slot for the options cascading menu. |  |
+| not-found | `()` | Data not found slot when searching. |  |
+
 ### Cascader Methods
 
 | Name | Type | Description | Version |
@@ -92,3 +141,12 @@ status.vue
 | focus | `() => void` | Focus. | 2.24.2 |
 | getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get checked data. | 2.34.0 |
 | getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get indeterminate data. | 2.34.0 |
+
+### CascaderPanel Methods
+
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| blur | `() => void` | Blur. |  |
+| focus | `() => void` | Focus. |  |
+| getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get checked data. |  |
+| getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get indeterminate data. |  |

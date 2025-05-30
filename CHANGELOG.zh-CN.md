@@ -13,6 +13,7 @@
 - `n-upload` 新增 `uploadDownload` 工具方法
 - `n-tree-select` 新增 `indent` 属性
 - 新增 `n-input-opt` 组件，关闭 [#1385](https://github.com/tusen-ai/naive-ui/issues/1385)、[#5681](https://github.com/tusen-ai/naive-ui/issues/5681)、[#6222](https://github.com/tusen-ai/naive-ui/issues/6222)
+- 新增 `n-cascader-panel` 组件，关闭 [#5347](https://github.com/tusen-ai/naive-ui/issues/5347)
 
 ## 2.41.0
 
