@@ -731,7 +731,7 @@ function useDualCalendar(
     const shortcutValue = panelCommon.getShortcutValue(shortcut)
     if (!Array.isArray(shortcutValue))
       return
-    changeStartEndTime(shortcutValue[0], shortcutValue[1], 'done')
+    changeStartEndTime(shortcutValue[0], shortcutValue[1], 'shortcutPreview')
     panelCommon.clearPendingValue()
     handleConfirmClick()
   }
