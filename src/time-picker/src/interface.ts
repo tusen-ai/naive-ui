@@ -53,7 +53,7 @@ export type IsSecondDisabled = (
   hour: number | null
 ) => boolean
 
-export type Size = 'small' | 'medium' | 'large'
+export type Size = 'tiny' | 'small' | 'medium' | 'large'
 
 export interface TimePickerInst {
   focus: () => void
