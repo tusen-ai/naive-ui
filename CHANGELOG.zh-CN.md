@@ -2,10 +2,13 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
 ### Fixes
 
 - 修复 `n-tabs` TabPane tab slots 的类型异常
 - 修复 `n-data-table` 可排序表格背景颜色变量丢失，关闭 [#6521](https://github.com/tusen-ai/naive-ui/issues/6521)
+- 修复文档中 `n-data-table` 组件的 `disabled` 方法参数错误：文档标注为 `disabled (rowData: object, rowIndex: number) => boolean`，但实际实现为 `disabled (rowData: object) => boolean`。
 
 ### Features
 
