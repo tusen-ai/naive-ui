@@ -1,8 +1,8 @@
-# InputOtp
+# Input OTP
 
-InputOtp is used to enter one time passwords.
+InputOTP is used to enter one time password.
 
-Available since `2.38.2`.
+Available since `NEXT_VERSION`.
 
 ## Demos
 
@@ -18,7 +18,7 @@ pattern.vue
 
 ## API
 
-### InputOtp Props
+### InputOTP Props
 
 | Name | Type | Type Alais | Default | Description | Version |
 | --- | --- | --- | --- | --- | --- |
@@ -32,13 +32,13 @@ pattern.vue
 | readonly | `boolean` |  | `false` | Whether the component is readonly. | NEXT_VERSION |
 | size | `'small' \| 'medium' \| 'large'` | `InputOtpSize` | `'medium'` | Size of the component. | NEXT_VERSION |
 | status | `'success' \| 'warning' \| 'error'` | `FormValidationStatus` | `undefined` | The validation status of the component. | NEXT_VERSION |
-| value | `string \| null` | `undefined` |  | Value of the component (in controlled mode). | NEXT_VERSION |
+| value | `string \| null` |  | `undefined` | Value of the component (in controlled mode). | NEXT_VERSION |
 | on-blur | `(event: FocusEvent, index: number) => void` | `InputOtpOnBlur` | `undefined` | Callback fired when the focus is out of the component. | NEXT_VERSION |
 | on-finish | `(value: string[]) => void` | `InputOtpOnFinish` | `undefined` | Callback fired when all child inputs are settled. | NEXT_VERSION |
 | on-focus | `(event: FocusEvent, index: number) => void` | `InputOtpOnFocus` | `undefined` | Callback fired when the focus is moved from outside to the component. | NEXT_VERSION |
 | on-update:value | `(value: string[], meta: { diff: string, index: number, source: 'input' \| 'delete' \| 'paste' }) => void` | `InputOtpOnUpdateValue`, `InputOtpOnUpdateValueMeta`, `InputOtpOnUpdateValueMetaSource` | `undefined` | Callback fired when user inputs value. `meta.index` is the start index of the value change.`meta.diff` is the content that changes. `meta.source` is the reason of the value change. If reason is `'delete'`, `meta.diff` is `''`. If reason is `'paste'`, `meta.diff` is the final accepted part of the paste content. | NEXT_VERSION |
 
-### InputOtp Slots
+### InputOTP Slots
 
 | Name | Parameters | Type Alias | Description | Version |
 | --- | --- | --- | --- | --- |
