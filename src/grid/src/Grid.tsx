@@ -57,6 +57,10 @@ export const gridProps = {
   yGap: {
     type: [Number, String] as PropType<number | string>,
     default: 0
+  },
+  suffixAlign: {
+    type: String as PropType<'left' | 'right'>,
+    default: 'right'
   }
 } as const
 
@@ -265,8 +269,10 @@ export default defineComponent({
             ) ?? defaultSpan
           )
           maybeSuffixNode.props.privateSpan = suffixSpan
-          maybeSuffixNode.props.privateColStart
-            = responsiveCols + 1 - suffixSpan
+          if (this.suffixAlign === 'right') {
+            maybeSuffixNode.props.privateColStart
+              = responsiveCols + 1 - suffixSpan
+          }
           maybeSuffixNode.props.privateShow
             = maybeSuffixNode.props.privateShow ?? true
         }
