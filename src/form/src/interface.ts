@@ -114,6 +114,4 @@ export interface FormInst {
   restoreValidation: () => void
 }
 
-export type FormValidationStatus = 'success' | 'error' | 'warning'
-
 export interface FormValidateMessages extends ValidateMessages {}
