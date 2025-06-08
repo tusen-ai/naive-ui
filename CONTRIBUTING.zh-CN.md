@@ -3,13 +3,25 @@
 - 对于新特性和 bug fix，请对 `main` 分支提交 Pull Request
 - 对于文档更新，请对 `docs` 分支提交 Pull Request
 
+## 推荐工具
+
+- [fnm](https://github.com/Schniz/fnm) 管理 node 版本
+- [corepack](https://github.com/nodejs/corepack) 管理包管理器版本
+
+```bash
+# 设置 node 版本
+fnm use v22
+# 准备对应版本的包管理器
+corepack enable&&corepack prepare
+```
+
 ## 有用的指令
 
 ```bash
 # 开启开发服务器，注意热更新不是很好用
 # 如果你觉得哪里有问题，刷新页面即可
 # 第一次运行打不开时，你可以试试刷新几次浏览器
-# 需要 pnpm 在 7.0.0 及以上版本
+# 需要 pnpm 版本和 package.json 的 packageManager 字段一致
 pnpm run dev
 
 # 测试
@@ -29,6 +41,9 @@ pnpm run lint:type
 
 # 上面俩个都检查
 pnpm run lint
+
+# 自动修复以上 lint 错误
+pnpm lint:fix
 
 # 构建文档网站（如果 vercel 的预览挂掉了，你可能需要先运行一下 `git clean -fdx`）
 pnpm run build:site
