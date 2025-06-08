@@ -4,11 +4,11 @@ import { renderToString } from '@vue/server-renderer'
  * @jest-environment node
  */
 import { createSSRApp, h } from 'vue'
-import { NAlert } from '../..'
+import { NInputOtp } from '../..'
 
 describe('server side rendering', () => {
   it('works', async () => {
-    const app = createSSRApp(() => <NAlert />)
+    const app = createSSRApp(() => <NInputOtp />)
     setup(app)
     try {
       await renderToString(app)

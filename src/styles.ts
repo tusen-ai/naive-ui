@@ -54,7 +54,7 @@ export {
 } from './input-number/styles'
 export {
   inputOtpDark,
-  inputOtpRtl as unstableInputOptRtl
+  inputOtpRtl as unstableInputOtpRtl
 } from './input-otp/styles'
 export { inputDark, inputRtl as unstableInputRtl } from './input/styles'
 export { layoutDark } from './layout/styles'

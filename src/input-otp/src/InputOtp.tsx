@@ -1,9 +1,9 @@
 import type { InputInst } from 'naive-ui'
 import type { CSSProperties, PropType, SlotsType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import type { MaybeArray } from '../../_utils'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/public-types'
-import type { InputOptTheme } from '../styles/light'
+import type { InputOtpTheme } from '../styles/light'
 import type {
   InputOtpAllowInput,
   InputOtpOnBlur,
@@ -34,8 +34,8 @@ import { NInput } from '../../input'
 import inputOtpLight from '../styles/light'
 import style from './styles/index.cssr'
 
-export const InputOptProps = {
-  ...(useTheme.props as ThemeProps<InputOptTheme>),
+export const inputOtpProps = {
+  ...(useTheme.props as ThemeProps<InputOtpTheme>),
   defaultValue: { type: Array as PropType<string[]>, default: [] },
   value: Array as PropType<null | string[]>,
   length: {
@@ -61,9 +61,11 @@ export const InputOptProps = {
   onFinish: [Function, Array] as PropType<MaybeArray<InputOtpOnFinish>>
 }
 
+export type InputOtpProps = ExtractPublicPropTypes<typeof inputOtpProps>
+
 export default defineComponent({
   name: 'InputOtp',
-  props: InputOptProps,
+  props: inputOtpProps,
   slots: Object as SlotsType<InputOtpSlots>,
   setup(props) {
     const { mergedClsPrefixRef, mergedRtlRef, inlineThemeDisabled }

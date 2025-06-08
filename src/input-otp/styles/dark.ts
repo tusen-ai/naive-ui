@@ -1,9 +1,9 @@
-import type { InputOptTheme } from './light'
+import type { InputOtpTheme } from './light'
 import { commonDark } from '../../_styles/common'
 import { inputDark } from '../../styles'
 import { self } from './light'
 
-const inputOtpDark: InputOptTheme = {
+const inputOtpDark: InputOtpTheme = {
   name: 'InputOtp',
   common: commonDark,
   peers: {

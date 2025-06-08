@@ -27,3 +27,4 @@ export interface InputOtpOnUpdateValueMeta {
   source: InputOtpOnUpdateValueMetaSource
 }
 export type InputOtpOnUpdateValueMetaSource = 'paste' | 'input' | 'delete'
+export interface InputOtpInst {}
