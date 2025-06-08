@@ -4,18 +4,12 @@
 你可以设定监听哪个元素来触发 Back Top。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const scrollContainerRef = ref<HTMLElement | undefined>(undefined)
-    return {
-      scrollContainer: scrollContainerRef,
-      target: () => scrollContainerRef.value
-    }
-  }
-})
+const scrollContainer = ref<HTMLElement | undefined>(undefined)
+
+const target = () => scrollContainer.value
 </script>
 
 <template>
