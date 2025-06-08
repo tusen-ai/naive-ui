@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.41.1
 
 ### Fixes
 
@@ -9,10 +9,10 @@
 
 ### Features
 
+- 🌟 新增 `n-input-otp` 组件，关闭 [#1385](https://github.com/tusen-ai/naive-ui/issues/1385)、[#5681](https://github.com/tusen-ai/naive-ui/issues/5681)、[#6222](https://github.com/tusen-ai/naive-ui/issues/6222)
 - `n-upload` 新增 `custom-download` 属性，关闭 [#5946](https://github.com/tusen-ai/naive-ui/issues/5946)、[#6800](https://github.com/tusen-ai/naive-ui/issues/6800)
 - `n-upload` 新增 `uploadDownload` 工具方法
 - `n-tree-select` 新增 `indent` 属性
-- 新增 `n-input-otp` 组件，关闭 [#1385](https://github.com/tusen-ai/naive-ui/issues/1385)、[#5681](https://github.com/tusen-ai/naive-ui/issues/5681)、[#6222](https://github.com/tusen-ai/naive-ui/issues/6222)
 
 ## 2.41.0
 
