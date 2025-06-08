@@ -23,7 +23,7 @@ rtl-debug.vue
 
 | 名称 | 类型 | 类型别名 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- | --- |
-| allow-input | `(char: string, index: number, currentValue: string[]) => boolean` | `InputOptAllowInput` | `undefined` | 校验当前的输入是否合法，如果返回 `false` 输入框便不会响应此次的输入 | NEXT_VERSION |
+| allow-input | `(char: string, index: number, currentValue: string[]) => boolean` | `InputOtpAllowInput` | `undefined` | 校验当前的输入是否合法，如果返回 `false` 输入框便不会响应此次的输入 | NEXT_VERSION |
 | default-value | `string[]` |  | `[]` | 默认值 | NEXT_VERSION |
 | disabled | `boolean` |  | `false` | 是否禁用 | NEXT_VERSION |
 | gap | `string \| number` |  | `undefined` | 不同输入框之间的距离，如果不设定将使用默认值 | NEXT_VERSION |

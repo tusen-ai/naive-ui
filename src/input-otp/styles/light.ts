@@ -23,4 +23,4 @@ const inputOtpLight = createTheme({
 })
 
 export default inputOtpLight
-export type InputOptTheme = typeof inputOtpLight
+export type InputOtpTheme = typeof inputOtpLight

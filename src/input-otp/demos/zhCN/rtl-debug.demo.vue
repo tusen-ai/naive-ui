@@ -3,11 +3,11 @@
 </markdown>
 
 <script lang="ts" setup>
-import { unstableInputOptRtl } from 'naive-ui'
+import { unstableInputOtpRtl } from 'naive-ui'
 import { ref } from 'vue'
 
 const rtlEnabled = ref(false)
-const rtlStyles = [unstableInputOptRtl]
+const rtlStyles = [unstableInputOtpRtl]
 const value = ref('654321')
 </script>
 

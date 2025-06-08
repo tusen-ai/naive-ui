@@ -22,7 +22,7 @@ pattern.vue
 
 | Name | Type | Type Alais | Default | Description | Version |
 | --- | --- | --- | --- | --- | --- |
-| allow-input | `(char: string, index: number, currentValue: string[]) => boolean` | `InputOptAllowInput` | `undefined` | Check the incoming value, if it returns `false`, input will not be accepted. | NEXT_VERSION |
+| allow-input | `(char: string, index: number, currentValue: string[]) => boolean` | `InputOtpAllowInput` | `undefined` | Check the incoming value, if it returns `false`, input will not be accepted. | NEXT_VERSION |
 | default-value | `string[]` |  | `[]` | Default value. | NEXT_VERSION |
 | disabled | `boolean` |  | `false` | Whether the component is disabled. | NEXT_VERSION |
 | gap | `string \| number` |  | `undefined` | Gap between different input. If not specified, the default styling would be applied. | NEXT_VERSION |
