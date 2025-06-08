@@ -2,6 +2,8 @@
 
 ## 2.41.1
 
+`2025-06-08`
+
 ### Fixes
 
 - Fix `n-tabs`'s type exception of the tab slots in TabPane.
