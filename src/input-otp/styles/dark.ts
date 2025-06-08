@@ -1,0 +1,15 @@
+import type { InputOptTheme } from './light'
+import { commonDark } from '../../_styles/common'
+import { inputDark } from '../../styles'
+import { self } from './light'
+
+const inputOtpDark: InputOptTheme = {
+  name: 'InputOtp',
+  common: commonDark,
+  peers: {
+    Input: inputDark
+  },
+  self
+}
+
+export default inputOtpDark

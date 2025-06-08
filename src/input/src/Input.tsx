@@ -1,5 +1,5 @@
 import type { ThemeProps } from '../../_mixins'
-import type { FormValidationStatus } from '../../form/src/interface'
+import type { FormValidationStatus } from '../../form/src/public-types'
 import type { InputTheme } from '../styles'
 import type {
   InputWrappedRef,
