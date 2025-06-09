@@ -34,7 +34,7 @@ const options = ref([
 
 <template>
   <n-segment v-model:value="value" size="small" :options="options">
-    <template #label="{ value: val, label }">
+    <template #default="{ value: val, label }">
       <div style="padding: 4px 4px">
         <n-icon>
           <CashIcon />

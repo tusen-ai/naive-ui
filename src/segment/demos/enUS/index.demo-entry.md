@@ -2,7 +2,7 @@
 
 Display multiple options and allow users to select a single option.
 
-Available since 2.41.1.
+Available since `NEXT_VERSION`.
 
 ## Demos
 
@@ -22,17 +22,26 @@ rtl-debug.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| value | `string \| number \| boolean` | - | The currently selected segment value. |  |
-| default-value | `string \| number \| boolean` | `null` | The default checked value. |  |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size |  |
-| disabled | `boolean` | `false` | Disabled state. |  |
-| vertical | `boolean` | `false` | Whether to separate vertically. |  |
-| block | `boolean` | `false` | Whether is displayed as a block-level element. |  |
-| options | `Array<SegmentItemType>` | `[]` | Options of the segment group. |  |
-| on-update:value | `(value: string \| number \| boolean) => void` | `undefined` | On update callback function. |
+| value | `string \| number` | - | The currently selected segment value. | NEXT_VERSION |
+| default-value | `string \| number` | `null` | The default checked value. | NEXT_VERSION |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size | NEXT_VERSION |
+| disabled | `boolean` | `false` | Disabled state. | NEXT_VERSION |
+| vertical | `boolean` | `false` | Whether to separate vertically. | NEXT_VERSION |
+| block | `boolean` | `false` | Whether is displayed as a block-level element. | NEXT_VERSION |
+| name | `string` | `undefined` | The name attribute of all input[type="radio"] elements under Segment uses a randomly generated name if not set. | NEXT_VERSION |
+| options | `Array<SegmentItemType>` | `[]` | Options of the segment group. | NEXT_VERSION |
+| on-update:value | `(value: string \| number) => void` | `undefined` | On update callback function. | NEXT_VERSION |
+
+### SegmentItemType Properties
+
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| value | `string \| number` | - | Value for Segment item | NEXT_VERSION |
+| label | `string` | - | Display text for Segment item | NEXT_VERSION |
+| disabled? | `boolean` | `false` | Disabled state of segment item | NEXT_VERSION |
 
 ### Segment Slots
 
-| 名称  | 参数 | 说明                     |
-| ----- | ---- | ------------------------ |
-| label | `()` | Segment option rendering |
+| Name | Parameters | Type Alias | Description | Version |
+| --- | --- | --- | --- | --- |
+| default | `(value: string \| number; label: string \| number)` | `SegmentDefaultSlot` | Segment option rendering | NEXT_VERSION |

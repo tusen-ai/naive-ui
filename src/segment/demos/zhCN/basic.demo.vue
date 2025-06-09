@@ -33,5 +33,5 @@ const options = ref<SegmentItemType[]>([
 </script>
 
 <template>
-  <n-segment v-model:value="value" :options="options" />
+  <n-segment v-model:value="value" :options="options" name="sky" />
 </template>

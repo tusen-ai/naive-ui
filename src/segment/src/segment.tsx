@@ -1,13 +1,16 @@
-import type { ExtractPublicPropTypes, FunctionalComponent, PropType } from 'vue'
+import type { ExtractPublicPropTypes, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { SegmentTheme } from '../styles'
 import type {
   OnUpdateValue,
   OnUpdateValueImpl,
   SegmentItemType,
-  SegmentSize
-} from './interface'
-import { useMergedState } from 'vooks'
+  SegmentSize,
+  SegmentSlots,
+  segmentValueType
+} from './public-types'
+import { createId } from 'seemly'
+import { useMemo, useMergedState } from 'vooks'
 import {
   computed,
   defineComponent,
@@ -35,20 +38,19 @@ import {
 import { segmentLight } from '../styles'
 import style from './styles/index.cssr'
 
-export type segmentValueType = string | number | boolean | null
-
 export const segmentProps = {
   ...(useTheme.props as ThemeProps<SegmentTheme>),
+  name: String,
   options: {
-    type: Array<SegmentItemType>,
-    default: []
+    type: Array as PropType<SegmentItemType[]>,
+    default: () => []
   },
   value: {
-    type: [String, Number, Boolean] as PropType<segmentValueType>,
+    type: [String, Number] as PropType<segmentValueType>,
     default: undefined
   },
   defaultValue: {
-    type: [String, Number, Boolean] as PropType<segmentValueType>,
+    type: [String, Number] as PropType<segmentValueType>,
     default: null
   },
   size: String as PropType<SegmentSize>,
@@ -56,10 +58,7 @@ export const segmentProps = {
     type: Boolean,
     default: false
   },
-  disabled: {
-    type: Boolean as PropType<boolean | undefined>,
-    default: undefined
-  },
+  disabled: Boolean,
   block: {
     type: Boolean,
     default: false
@@ -73,10 +72,16 @@ export type SegmentProps = ExtractPublicPropTypes<typeof segmentProps>
 export default defineComponent({
   name: 'Segment',
   props: segmentProps,
+  slots: Object as SlotsType<SegmentSlots>,
   setup(props) {
     const groupRef = ref<HTMLDivElement | null>(null)
     const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
       = useConfig(props)
+    const randomName = createId()
+    const mergedNameRef = useMemo(() => {
+      return props.name ?? randomName
+    })
+
     const themeRef = useTheme(
       'Segment',
       '-segment',
@@ -85,16 +90,11 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const rtlEnabledRef = useRtl('Segment', mergedRtlRef, mergedClsPrefixRef)
 
+    // form-item
     const formItem = useFormItem(props)
-    const {
-      mergedSizeRef,
-      mergedDisabledRef,
-      nTriggerFormChange,
-      nTriggerFormInput,
-      nTriggerFormBlur,
-      nTriggerFormFocus
-    } = formItem
+    const { mergedSizeRef, mergedDisabledRef } = formItem
 
     const cssVarsRef = computed(() => {
       const { value: size } = mergedSizeRef
@@ -131,6 +131,10 @@ export default defineComponent({
       }
     })
 
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('segment', mergedSizeRef, cssVarsRef, props)
+      : undefined
+
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
@@ -138,17 +142,20 @@ export default defineComponent({
       uncontrolledValueRef
     )
 
-    function doUpdateValue(value: string | number | boolean): void {
+    function doUpdateValue(value: string | number): void {
+      const { nTriggerFormInput, nTriggerFormChange } = formItem
       const { onUpdateValue, 'onUpdate:value': _onUpdateValue } = props
+
       if (onUpdateValue) {
         call(onUpdateValue as OnUpdateValueImpl, value)
       }
       if (_onUpdateValue) {
         call(_onUpdateValue as OnUpdateValueImpl, value)
       }
+
       uncontrolledValueRef.value = value
-      nTriggerFormChange()
       nTriggerFormInput()
+      nTriggerFormChange()
     }
 
     function handleFocusin(e: FocusEvent): void {
@@ -157,6 +164,7 @@ export default defineComponent({
         return
       if (selfEl.contains(e.relatedTarget as HTMLElement | null))
         return
+      const { nTriggerFormFocus } = formItem
       nTriggerFormFocus()
     }
     function handleFocusout(e: FocusEvent): void {
@@ -165,14 +173,9 @@ export default defineComponent({
         return
       if (selfEl.contains(e.relatedTarget as HTMLElement | null))
         return
+      const { nTriggerFormBlur } = formItem
       nTriggerFormBlur()
     }
-
-    const themeClassHandle = inlineThemeDisabled
-      ? useThemeClass('segment', mergedSizeRef, cssVarsRef, props)
-      : undefined
-
-    const rtlEnabledRef = useRtl('Segment', mergedRtlRef, mergedClsPrefixRef)
 
     const segmentCapsuleElRef = ref<HTMLElement | null>(null)
 
@@ -195,36 +198,43 @@ export default defineComponent({
       if (transitionDisabled)
         tabsEl.classList.add('transition-disabled')
       const activeTabEl = getCurrentEl()
-      if (activeTabEl && segmentCapsuleElRef.value) {
-        segmentCapsuleElRef.value.style.width = `${activeTabEl.offsetWidth}px`
-        segmentCapsuleElRef.value.style.height = `${activeTabEl.offsetHeight}px`
+      const capsuleEl = segmentCapsuleElRef.value
+
+      if (activeTabEl && capsuleEl) {
+        capsuleEl.style.width = `${activeTabEl.offsetWidth}px`
+        capsuleEl.style.height = `${activeTabEl.offsetHeight}px`
 
         if (props.vertical) {
-          segmentCapsuleElRef.value.style.transform = `translateY(${
-            activeTabEl.offsetTop
-          }px)`
+          capsuleEl.style.transform = `translateY(${activeTabEl.offsetTop}px)`
         }
         else {
           if (rtlEnabledRef?.value) {
             const parentWidth = tabsEl.offsetWidth
             const rightOffset
               = parentWidth - activeTabEl.offsetLeft - activeTabEl.offsetWidth
-            segmentCapsuleElRef.value.style.transform = `translateX(${-rightOffset}px)`
+            capsuleEl.style.transform = `translateX(${-rightOffset}px)`
           }
           else {
-            segmentCapsuleElRef.value.style.transform = `translateX(${
+            capsuleEl.style.transform = `translateX(${
               activeTabEl.offsetLeft
             }px)`
           }
         }
 
         if (transitionDisabled) {
-          void segmentCapsuleElRef.value.offsetWidth
+          void capsuleEl.offsetWidth
         }
       }
       if (transitionDisabled) {
         tabsEl.classList.remove('transition-disabled')
       }
+    }
+
+    const handleChange = (item: SegmentItemType) => {
+      const { value, disabled } = item
+      if (mergedDisabledRef.value || disabled)
+        return
+      doUpdateValue(value)
     }
 
     watch([mergedValueRef], () => {
@@ -246,11 +256,12 @@ export default defineComponent({
       segmentCapsuleElRef,
       mergedDisabled: mergedDisabledRef,
       mergedValue: mergedValueRef,
+      mergedName: mergedNameRef,
       mergedClsPrefix: mergedClsPrefixRef,
       rtlEnabled: rtlEnabledRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
-      doUpdateValue,
+      handleChange,
       handleFocusout,
       handleFocusin,
       updateSegmentPosition
@@ -266,56 +277,52 @@ export default defineComponent({
       vertical,
       cssVars,
       themeClass,
-      doUpdateValue,
+      mergedName,
       handleFocusin,
       handleFocusout,
-      updateSegmentPosition
+      updateSegmentPosition,
+      handleChange
     } = this
 
-    const SegmentOption: FunctionalComponent<
-      SegmentItemType & {
-        checked?: boolean
-      }
-    > = (props) => {
-      const { value, label, checked, disabled } = props
-      const handleChange = () => {
-        if (disabled) {
-          return
-        }
-        doUpdateValue(value)
-      }
+    const optionNodes: VNode[] = this.options.map((segmentOption, index) => {
+      const isChecked = mergedValue === segmentOption.value
+      const isDisabled = mergedDisabled || !!segmentOption.disabled
 
       return (
         <label
-          key={value}
-          data-name={value}
+          key={segmentOption.value || index}
+          data-name={segmentOption.value}
           class={[
             `${mergedClsPrefix}-segment-item`,
-            checked && `${mergedClsPrefix}-segment-item--checked`,
-            disabled && `${mergedClsPrefix}-segment-item--disabled`
+            isChecked && `${mergedClsPrefix}-segment-item--checked`,
+            isDisabled && `${mergedClsPrefix}-segment-item--disabled`
           ]}
         >
           <input
             class={[`${mergedClsPrefix}-segment-item-input`]}
             type="radio"
-            disabled={disabled}
-            checked={checked}
-            onChange={handleChange}
+            name={mergedName}
+            value={segmentOption.value}
+            disabled={isDisabled}
+            checked={isChecked}
+            onChange={() => handleChange(segmentOption)}
           />
-
-          <div class={[`${mergedClsPrefix}-segment-item-label`]} title={label}>
+          <div
+            class={[`${mergedClsPrefix}-segment-item-label`]}
+            title={segmentOption.label}
+          >
             {resolveSlotWithTypedProps(
-              this.$slots.label,
+              this.$slots.default,
               {
-                value,
-                label
+                ...segmentOption
               },
-              () => [label]
+              () => [segmentOption.label]
             )}
           </div>
         </label>
       )
-    }
+    })
+
     return (
       <VResizeObserver
         onResize={() => updateSegmentPosition({ transitionDisabled: true })}
@@ -343,15 +350,7 @@ export default defineComponent({
                 <div class={`${mergedClsPrefix}-segment-thumb`} />
               </div>
             </div>
-            {this.options.map(segmentOption => (
-              <SegmentOption
-                key={segmentOption.value}
-                {...segmentOption}
-                checked={mergedValue === segmentOption.value}
-                disabled={mergedDisabled || !!segmentOption.disabled}
-              >
-              </SegmentOption>
-            ))}
+            {optionNodes}
           </div>
         </div>
       </VResizeObserver>

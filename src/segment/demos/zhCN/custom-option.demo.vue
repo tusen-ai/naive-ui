@@ -12,7 +12,8 @@ const value = ref('Shakermaker')
 const options = ref<SegmentItemType[]>([
   {
     value: 'Rock\'n\'Roll Star',
-    label: 'Rock\'n\'Roll Star'
+    label: 'Rock\'n\'Roll Star',
+    icon: 'icon'
   },
   {
     value: 'Shakermaker',
@@ -27,15 +28,15 @@ const options = ref<SegmentItemType[]>([
     label: 'Up in the Sky'
   },
   {
-    value: 1,
-    label: '1'
+    value: '...',
+    label: '...'
   }
 ])
 </script>
 
 <template>
   <n-segment v-model:value="value" size="small" :options="options">
-    <template #label="{ value: val, label }">
+    <template #default="{ value: val, label }">
       <div style="padding: 4px 4px">
         <n-icon>
           <CashIcon />

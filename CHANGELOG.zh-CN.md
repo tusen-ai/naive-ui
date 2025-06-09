@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- 🌟 新增 `n-segment` 组件, 关闭 [#5499](https://github.com/tusen-ai/naive-ui/issues/5499)
+
 ## 2.41.1
 
 ### Fixes
