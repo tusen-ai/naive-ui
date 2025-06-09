@@ -1,10 +1,18 @@
 # CHANGELOG
 
-## 2.41.1
+## NEXT_VERSION
 
-### Feat
+### Fixes
 
-- adds `n-segment` component, closes[#5499](https://github.com/tusen-ai/naive-ui/issues/5499)
+- Fix `n-tabs`'s type exception of the tab slots in TabPane.
+- Fix `n-data-table` missing css variable of sorting cells, closes [#6521](https://github.com/tusen-ai/naive-ui/issues/6521).
+
+### Features
+
+- `n-upload` adds `custom-download`, closes [#5946](https://github.com/tusen-ai/naive-ui/issues/5946), [#6800](https://github.com/tusen-ai/naive-ui/issues/6800).
+- `n-upload` adds `uploadDownload` util method.
+- `n-tree-select` adds `indent` prop.
+- Adds `n-input-opt` component. closes [#1385](https://github.com/tusen-ai/naive-ui/issues/1385), [#5681](https://github.com/tusen-ai/naive-ui/issues/5681), [#6222](https://github.com/tusen-ai/naive-ui/issues/6222).
 
 ## 2.41.0
 

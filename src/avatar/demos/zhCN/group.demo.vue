@@ -4,42 +4,36 @@
 人多不一定是好事。
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup() {
-    return {
-      options: [
-        {
-          name: '张三',
-          src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
-        },
-        {
-          name: '李四',
-          src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
-        },
-        {
-          name: '王五',
-          src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
-        },
-        {
-          name: '赵六',
-          src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
-        },
-        {
-          name: '七仔',
-          src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
-        }
-      ],
-      createDropdownOptions: (options: Array<{ name: string, src: string }>) =>
-        options.map(option => ({
-          key: option.name,
-          label: option.name
-        }))
-    }
+<script lang="ts" setup>
+const options = [
+  {
+    name: '张三',
+    src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+  },
+  {
+    name: '李四',
+    src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+  },
+  {
+    name: '王五',
+    src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+  },
+  {
+    name: '赵六',
+    src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+  },
+  {
+    name: '七仔',
+    src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
   }
-})
+]
+
+function createDropdownOptions(options: Array<{ name: string, src: string }>) {
+  return options.map(option => ({
+    key: option.name,
+    label: option.name
+  }))
+}
 </script>
 
 <template>
