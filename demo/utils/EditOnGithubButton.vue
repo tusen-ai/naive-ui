@@ -19,7 +19,7 @@ export default defineComponent({
     quaternary: Boolean,
     size: {
       type: String as PropType<ButtonProps['size']>,
-      default: 'tiny'
+      default: 'small'
     }
   },
   setup(props) {
