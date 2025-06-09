@@ -112,9 +112,9 @@ function useDualCalendar(
   const { value } = props
   const defaultCalendarStartTime
     = props.defaultCalendarStartTime
-    ?? (Array.isArray(value) && typeof value[0] === 'number'
-      ? value[0]
-      : Date.now())
+      ?? (Array.isArray(value) && typeof value[0] === 'number'
+        ? value[0]
+        : Date.now())
   const startCalendarDateTimeRef = ref(defaultCalendarStartTime)
   const endCalendarDateTimeRef = ref(
     props.defaultCalendarEndTime

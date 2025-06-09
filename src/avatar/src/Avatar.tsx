@@ -281,10 +281,10 @@ export default defineComponent({
     let img: VNodeChild
     const placeholderNode
       = !loaded
-      && !hasLoadError
-      && (this.renderPlaceholder
-        ? this.renderPlaceholder()
-        : this.$slots.placeholder?.())
+        && !hasLoadError
+        && (this.renderPlaceholder
+          ? this.renderPlaceholder()
+          : this.$slots.placeholder?.())
 
     if (this.hasLoadError) {
       img = this.renderFallback

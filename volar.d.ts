@@ -79,7 +79,7 @@ declare module 'vue' {
     NInputGroup: (typeof import('naive-ui'))['NInputGroup']
     NInputGroupLabel: (typeof import('naive-ui'))['NInputGroupLabel']
     NInputNumber: (typeof import('naive-ui'))['NInputNumber']
-    NInputOpt: (typeof import('naive-ui'))['NInputOpt']
+    NInputOtp: (typeof import('naive-ui'))['NInputOtp']
     NLayout: (typeof import('naive-ui'))['NLayout']
     NLayoutContent: (typeof import('naive-ui'))['NLayoutContent']
     NLayoutFooter: (typeof import('naive-ui'))['NLayoutFooter']

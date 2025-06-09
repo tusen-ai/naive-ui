@@ -1,3 +1,4 @@
+// danger zone, internal styles
 export { scrollbarDark } from './_internal/scrollbar/styles'
 export { scrollbarRtl as unstableScrollbarRtl } from './_internal/scrollbar/styles'
 export { internalSelectMenuDark } from './_internal/select-menu/styles'
@@ -52,9 +53,9 @@ export {
   inputNumberRtl as unstableInputNumberRtl
 } from './input-number/styles'
 export {
-  inputOptDark,
-  inputOptRtl as unstableInputOptRtl
-} from './input-opt/styles'
+  inputOtpDark,
+  inputOtpRtl as unstableInputOtpRtl
+} from './input-otp/styles'
 export { inputDark, inputRtl as unstableInputRtl } from './input/styles'
 export { layoutDark } from './layout/styles'
 export { rowRtl as unstableRowRtl } from './legacy-grid/styles'
@@ -80,8 +81,6 @@ export { progressDark } from './progress/styles'
 export { radioDark, radioRtl as unstableRadioRtl } from './radio/styles'
 export { rateDark } from './rate/styles'
 export { resultDark } from './result/styles'
-// danger zone, internal styles
-export { segmentRtl as unstableSegmentRtl } from './segment/styles'
 export { selectDark, selectRtl as unstableSelectRtl } from './select/styles'
 export { sliderDark } from './slider/styles'
 export { spaceDark, spaceRtl as unstableSpaceRtl } from './space/styles'

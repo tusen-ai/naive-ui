@@ -298,8 +298,8 @@ export default defineComponent({
       themeClassHandle?.onRender()
       const shouldRenderDom
         = props.displayDirective === 'show'
-        || props.show
-        || (props.animated && displayedRef.value)
+          || props.show
+          || (props.animated && displayedRef.value)
       if (!shouldRenderDom) {
         return null
       }
