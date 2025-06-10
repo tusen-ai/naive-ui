@@ -12,12 +12,12 @@ function getRatio(context: any): number {
   }
   const backingStore
     = context.backingStorePixelRatio
-    || context.webkitBackingStorePixelRatio
-    || context.mozBackingStorePixelRatio
-    || context.msBackingStorePixelRatio
-    || context.oBackingStorePixelRatio
-    || context.backingStorePixelRatio
-    || 1
+      || context.webkitBackingStorePixelRatio
+      || context.mozBackingStorePixelRatio
+      || context.msBackingStorePixelRatio
+      || context.oBackingStorePixelRatio
+      || context.backingStorePixelRatio
+      || 1
   return (window.devicePixelRatio || 1) / backingStore
 }
 

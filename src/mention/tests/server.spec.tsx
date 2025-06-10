@@ -6,7 +6,7 @@ import { renderToString } from '@vue/server-renderer'
 import { createSSRApp, h } from 'vue'
 import { NMention } from '../..'
 
-describe('sSR', () => {
+describe('server side rendering', () => {
   it('works', async () => {
     const app = createSSRApp(() => <NMention />)
     setup(app)

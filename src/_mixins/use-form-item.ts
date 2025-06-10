@@ -1,4 +1,4 @@
-import type { FormValidationStatus } from '../form/src/interface'
+import type { FormValidationStatus } from '../form/src/public-types'
 import {
   computed,
   type ComputedRef,
