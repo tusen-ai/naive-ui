@@ -78,6 +78,7 @@ import type { QrCodeTheme } from '../../qr-code/styles'
 import type { RadioTheme } from '../../radio/styles'
 import type { RateTheme } from '../../rate/styles'
 import type { ResultTheme } from '../../result/styles'
+import type { SegmentTheme } from '../../segment/styles'
 import type { Size as SelectSize } from '../../select/src/interface'
 import type { SelectTheme } from '../../select/styles'
 import type { SkeletonTheme } from '../../skeleton/styles'
@@ -193,6 +194,8 @@ export interface GlobalThemeWithoutCommon {
   Split?: SplitTheme
   Row?: RowTheme
   Marquee?: MarqueeTheme
+  Segment?: SegmentTheme
+
   // internal
   InternalSelectMenu?: InternalSelectMenuTheme
   InternalSelection?: InternalSelectionTheme

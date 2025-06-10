@@ -116,6 +116,7 @@ declare module 'vue' {
     NResult: (typeof import('naive-ui'))['NResult']
     NRow: (typeof import('naive-ui'))['NRow']
     NScrollbar: (typeof import('naive-ui'))['NScrollbar']
+    NSegment: (typeof import('naive-ui'))['NSegment']
     NSelect: (typeof import('naive-ui'))['NSelect']
     NSkeleton: (typeof import('naive-ui'))['NSkeleton']
     NSlider: (typeof import('naive-ui'))['NSlider']
