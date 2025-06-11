@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- `n-popover` supports RTL.
+
 ## 2.41.1
 
 ### Fixes
