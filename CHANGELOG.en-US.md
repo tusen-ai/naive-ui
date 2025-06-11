@@ -6,6 +6,8 @@
 
 - `n-popover` supports RTL.
 - `n-tooltip` supports RTL.
+- `n-upload` supports RTL.
+- `n-tree-select` supports RTL.
 
 ## 2.41.1
 
