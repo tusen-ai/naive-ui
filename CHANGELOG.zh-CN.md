@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- `n-modal` 新增 `max-height` 属性，关闭 [#4848](https://github.com/tusen-ai/naive-ui/issues/4848)
+
 ## 2.41.1
 
 ### Fixes
