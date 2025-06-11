@@ -19,6 +19,7 @@ file-picker.vue
 debug.vue
 field-search-debug.vue
 render-debug.vue
+rtl-debug.vue
 ```
 
 ## API

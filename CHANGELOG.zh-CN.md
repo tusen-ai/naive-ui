@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- `n-popover` 支持 RTL
+- `n-tooltip` 支持 RTL
+- `n-upload` 支持 RTL
+- `n-tree-select` 支持 RTL
+
 ## 2.41.1
 
 ### Fixes

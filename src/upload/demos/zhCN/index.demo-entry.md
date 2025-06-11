@@ -19,6 +19,7 @@ custom-request.vue
 custom-download.vue
 abstract.vue
 debug.vue
+rtl-debug.vue
 ```
 
 ## API
