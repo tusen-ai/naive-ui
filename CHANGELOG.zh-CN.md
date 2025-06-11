@@ -5,6 +5,7 @@
 ### Features
 
 - `n-popover` 支持 RTL
+- `n-tooltip` 支持 RTL
 
 ## 2.41.1
 
