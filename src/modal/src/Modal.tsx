@@ -27,7 +27,6 @@ import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import {
   call,
   eventEffectNotPerformed,
-  formatLength,
   keep,
   useIsComposing,
   warnOnce

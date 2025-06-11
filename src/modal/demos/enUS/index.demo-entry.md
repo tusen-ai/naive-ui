@@ -67,7 +67,7 @@ Provided since `2.38.0`.
 | transform-origin | `'mouse' \| 'center'` | `'mouse'` | The transform origin of the modal's display animation. |  |
 | trap-focus | `boolean` | `true` | Whether to trap focus inside modal. | 2.24.2 |
 | z-index | `number` | `undefined` | Z index of the modal. | 2.24.0 |
-| max-height | `number \| string` | `undefined` | Maximum height of a modal window |  |
+| max-height | `number \| string` | `undefined` | Maximum height of a modal window | NEXT_VERSION |
 | on-after-enter | `() => void` | `undefined` | Callback after modal is opened. |  |
 | on-after-leave | `() => void` | `undefined` | Callback after modal is closed. |  |
 | on-esc | `() => void` | `undefined` | Callback fired when the escape key is pressed and focus is within modal. | 2.24.2 |
