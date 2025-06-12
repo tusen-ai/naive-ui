@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-input-otp` Remove event bindings when elements are disabled (disabled/readonly)
+
 ## 2.41.1
 
 ### Fixes
@@ -9,7 +15,7 @@
 
 ### Features
 
-- 🌟 Adds `n-input-otp` componen, closes [#1385](https://github.com/tusen-ai/naive-ui/issues/1385), [#5681](https://github.com/tusen-ai/naive-ui/issues/5681), [#6222](https://github.com/tusen-ai/naive-ui/issues/6222).
+- 🌟 Adds `n-input-otp` component, closes [#1385](https://github.com/tusen-ai/naive-ui/issues/1385), [#5681](https://github.com/tusen-ai/naive-ui/issues/5681), [#6222](https://github.com/tusen-ai/naive-ui/issues/6222).
 - `n-upload` adds `custom-download`, closes [#5946](https://github.com/tusen-ai/naive-ui/issues/5946), [#6800](https://github.com/tusen-ai/naive-ui/issues/6800).
 - `n-upload` adds `uploadDownload` util method.
 - `n-tree-select` adds `indent` prop.

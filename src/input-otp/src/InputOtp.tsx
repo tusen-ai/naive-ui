@@ -363,7 +363,7 @@ export default defineComponent({
               theme: mergedTheme.peers.Input,
               themeOverrides: mergedTheme.peerOverrides.Input,
               ref: (el: any) => (this.inputRefList[index] = el),
-              ...getTemplateEvents(index)
+              ...(mergedDisabled || readonly ? {} : getTemplateEvents(index))
             },
             ({ index, ...restProps }) => [<NInput {...restProps} key={index} />]
           )
