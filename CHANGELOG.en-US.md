@@ -4,7 +4,7 @@
 
 ### Fixes
 
-- Fix `n-input-otp` Remove event bindings when elements are disabled (disabled/readonly)
+- Fix `n-input-otp` Remove event bindings when elements are disabled (disabled/readonly), Fix width style specificity conflict
 
 ## 2.41.1
 
