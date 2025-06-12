@@ -11,6 +11,7 @@ basic.vue
 status.vue
 mask.vue
 template.vue
+block.vue
 size.vue
 form.vue
 pattern.vue
@@ -30,6 +31,7 @@ rtl-debug.vue
 | length | `number` |  | `6` | 验证码的长度，根据长度渲染对应个数的输入框 | 2.41.1 |
 | mask | `boolean` |  | `false` | 是否是密码模式 | 2.41.1 |
 | placeholder | `string` |  | `''` | 输入的占位内容 | 2.41.1 |
+| block | `boolean` |  | `false` | 将宽度调整为父元素宽度 | NEXT_VERSION |
 | readonly | `boolean` |  | `false` | 是否只读 | 2.41.1 |
 | size | `'small' \| 'medium' \| 'large'` | `InputOtpSize` | `'medium'` | 输入框尺寸 | 2.41.1 |
 | status | `'success' \| 'warning' \| 'error'` | `FormValidationStatus` | `undefined` | 验证状态 | 2.41.1 |
