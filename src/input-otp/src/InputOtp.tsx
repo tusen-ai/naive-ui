@@ -42,6 +42,7 @@ export const inputOtpProps = {
     type: Number,
     default: 6
   },
+  block: Boolean,
   size: String as PropType<InputOtpSize>,
   disabled: Boolean,
   mask: Boolean,
@@ -339,7 +340,8 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-input-otp`,
           themeClass,
-          this.rtlEnabled && `${mergedClsPrefix}-input-otp--rtl`
+          this.rtlEnabled && `${mergedClsPrefix}-input-otp--rtl`,
+          this.block && `${mergedClsPrefix}-input-otp--block`
         ]}
       >
         {repeat(this.length, undefined).map((_, index) =>
