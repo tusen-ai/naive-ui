@@ -121,6 +121,10 @@ const enUS = {
     tipClose: 'Close (Esc)',
     // TODO: translation
     tipOriginalSize: 'Zoom to original size'
+  },
+  Heatmap: {
+    less: 'less',
+    more: 'more'
   }
 }
 

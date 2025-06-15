@@ -14,7 +14,8 @@ export const rectProps = {
   unit: {
     type: String,
     require: true
-  }
+  },
+  style: Object
 } as const
 
 export type RectProps = ExtractPublicPropTypes<typeof rectProps>
@@ -24,24 +25,23 @@ export default defineComponent({
   props: rectProps,
   setup() {},
   render() {
-    const { data, mergedClsPrefix, color, unit } = this
+    const { data, mergedClsPrefix, color, unit, style } = this
     return (
-      <span>
-        <Tooltip trigger="hover">
-          {{
-            default: () =>
-              `${data?.value} ${unit} on ${format(data!.date, 'yyy-MM-dd')}`,
-            trigger: () => (
-              <div
-                class={`${mergedClsPrefix}-heatmap__rect`}
-                style={{
-                  backgroundColor: color
-                }}
-              />
-            )
-          }}
-        </Tooltip>
-      </span>
+      <Tooltip trigger="hover">
+        {{
+          default: () =>
+            `${data?.value} ${unit} on ${format(data!.date, 'yyyy-MM-dd')}`,
+          trigger: () => (
+            <div
+              class={`${mergedClsPrefix}-heatmap__rect`}
+              style={{
+                backgroundColor: color,
+                ...style
+              }}
+            />
+          )
+        }}
+      </Tooltip>
     )
   }
 })
