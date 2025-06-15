@@ -44,6 +44,7 @@ import { iconWrapperLight } from '../icon-wrapper/styles'
 import { iconLight } from '../icon/styles'
 import { imageLight } from '../image/styles'
 import { inputNumberLight } from '../input-number/styles'
+import { inputOtpLight } from '../input-otp/styles'
 import { inputLight } from '../input/styles'
 import { layoutLight } from '../layout/styles'
 import { rowLight } from '../legacy-grid/styles'
@@ -133,6 +134,7 @@ export const lightTheme: BuiltInGlobalTheme = {
   Image: imageLight,
   Input: inputLight,
   InputNumber: inputNumberLight,
+  InputOtp: inputOtpLight,
   Layout: layoutLight,
   LegacyTransfer: legacyTransferLight,
   List: listLight,

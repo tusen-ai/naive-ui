@@ -1,5 +1,5 @@
 import type { ThemeProps } from '../../_mixins'
-import type { FormValidationStatus } from '../../form/src/interface'
+import type { FormValidationStatus } from '../../form/src/public-types'
 import type { InputTheme } from '../styles'
 import type {
   InputWrappedRef,
@@ -56,8 +56,7 @@ import {
   type ExtractPublicPropTypes,
   type MaybeArray,
   resolveSlot,
-  resolveWrappedSlot,
-  warnOnce
+  resolveWrappedSlot
 } from '../../_utils'
 import { isSafari } from '../../_utils/env/browser'
 import { inputLight } from '../styles'

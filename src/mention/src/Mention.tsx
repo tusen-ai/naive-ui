@@ -2,7 +2,7 @@ import type { InternalSelectMenuRef } from '../../_internal'
 import type { RenderLabel } from '../../_internal/select-menu/src/interface'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { FormValidationStatus } from '../../form/src/interface'
+import type { FormValidationStatus } from '../../form/src/public-types'
 import type { InputInst } from '../../input'
 import type { Size as InputSize } from '../../input/src/interface'
 import type {

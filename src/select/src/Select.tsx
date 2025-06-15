@@ -6,7 +6,7 @@ import type {
 import type { RenderTag } from '../../_internal/selection/src/interface'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { FormValidationStatus } from '../../form/src/interface'
+import type { FormValidationStatus } from '../../form/src/public-types'
 import type { PopoverProps } from '../../popover'
 import type {
   OnUpdateValue,
