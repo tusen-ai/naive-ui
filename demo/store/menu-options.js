@@ -40,7 +40,8 @@ function renderItemExtra(rawItem, isZh) {
 function getItemExtraString(rawItem, isZh) {
   if (!rawItem.enSuffix || !isZh) {
     return ''
-  } else {
+  }
+  else {
     return rawItem.en
   }
 }
@@ -575,6 +576,13 @@ export function createComponentMenuOptions({ lang, theme }) {
           zh: '高亮文本',
           enSuffix: true,
           path: '/highlight',
+          isNew: true
+        },
+        {
+          en: 'Heatmap',
+          zh: '热力图',
+          enSuffix: true,
+          path: '/heatmap',
           isNew: true
         }
       ]

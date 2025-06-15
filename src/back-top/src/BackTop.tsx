@@ -158,8 +158,8 @@ export default defineComponent({
       scrollListenerRegistered = true
       const scrollEl
         = props.target?.()
-        || unwrapElement(props.listenTo)
-        || getScrollParent(placeholderRef.value)
+          || unwrapElement(props.listenTo)
+          || getScrollParent(placeholderRef.value)
       if (!scrollEl) {
         if (__DEV__) {
           warn(

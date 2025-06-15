@@ -61,6 +61,7 @@ declare module 'vue' {
     NGlobalStyle: (typeof import('naive-ui'))['NGlobalStyle']
     NGradientText: (typeof import('naive-ui'))['NGradientText']
     NGrid: (typeof import('naive-ui'))['NGrid']
+    NHeatmap: (typeof import('naive-ui'))['NHeatmap']
     NGridItem: (typeof import('naive-ui'))['NGridItem']
     NH1: (typeof import('naive-ui'))['NH1']
     NH2: (typeof import('naive-ui'))['NH2']

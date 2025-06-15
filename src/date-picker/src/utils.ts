@@ -173,10 +173,10 @@ function dateItem(
   }
   const selected
     = valueTs !== null
-    && (Array.isArray(valueTs)
-      ? matchDate(valueTs[0], time, 'date')
-      || matchDate(valueTs[1], time, 'date')
-      : matchDate(valueTs, time, 'date'))
+      && (Array.isArray(valueTs)
+        ? matchDate(valueTs[0], time, 'date')
+        || matchDate(valueTs[1], time, 'date')
+        : matchDate(valueTs, time, 'date'))
   return {
     type: 'date',
     dateObject: {
@@ -243,10 +243,10 @@ function weekItem(
   }
   const inSelectedWeek
     = valueTs !== null
-    && (Array.isArray(valueTs)
-      ? matchDate(valueTs[0], time, 'week', firstDayOfWeek)
-      || matchDate(valueTs[1], time, 'week', firstDayOfWeek)
-      : matchDate(valueTs, time, 'week', firstDayOfWeek))
+      && (Array.isArray(valueTs)
+        ? matchDate(valueTs[0], time, 'week', firstDayOfWeek)
+        || matchDate(valueTs[1], time, 'week', firstDayOfWeek)
+        : matchDate(valueTs, time, 'week', firstDayOfWeek))
   return {
     type: 'date',
     dateObject: {

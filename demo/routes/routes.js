@@ -1017,6 +1017,10 @@ export const zhComponentRoutes = [
   {
     path: 'marquee',
     component: () => import('../../src/marquee/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'heatmap',
+    component: () => import('../../src/heatmap/demos/zhCN/index.demo-entry.md')
   }
 ]
 

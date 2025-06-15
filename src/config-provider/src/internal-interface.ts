@@ -48,6 +48,7 @@ import type { FloatButtonGroupTheme } from '../../float-button-group/styles'
 import type { FloatButtonTheme } from '../../float-button/styles'
 import type { FormTheme } from '../../form/styles'
 import type { GradientTextTheme } from '../../gradient-text/styles'
+import type { HeatmapTheme } from '../../heatmap/styles'
 import type { IconWrapperTheme } from '../../icon-wrapper/styles'
 import type { IconTheme } from '../../icon/styles'
 import type { ImageTheme } from '../../image/styles'
@@ -193,6 +194,7 @@ export interface GlobalThemeWithoutCommon {
   Split?: SplitTheme
   Row?: RowTheme
   Marquee?: MarqueeTheme
+  Heatmap?: HeatmapTheme
   // internal
   InternalSelectMenu?: InternalSelectMenuTheme
   InternalSelection?: InternalSelectionTheme
