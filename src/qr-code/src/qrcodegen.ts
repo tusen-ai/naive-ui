@@ -560,7 +560,7 @@ namespace qrcodegen {
         }
         result
           += this.finderPenaltyTerminateAndCount(runColor, runX, runHistory)
-          * QrCode.PENALTY_N3
+            * QrCode.PENALTY_N3
       }
       // Adjacent modules in column having same color, and finder-like patterns
       for (let x = 0; x < this.size; x++) {
@@ -589,7 +589,7 @@ namespace qrcodegen {
         }
         result
           += this.finderPenaltyTerminateAndCount(runColor, runY, runHistory)
-          * QrCode.PENALTY_N3
+            * QrCode.PENALTY_N3
       }
 
       // 2*2 blocks of modules having same color
@@ -739,10 +739,10 @@ namespace qrcodegen {
       const n: int = runHistory[1]
       const core: boolean
         = n > 0
-        && runHistory[2] === n
-        && runHistory[3] === n * 3
-        && runHistory[4] === n
-        && runHistory[5] === n
+          && runHistory[2] === n
+          && runHistory[3] === n * 3
+          && runHistory[4] === n
+          && runHistory[5] === n
       return (
         (core && runHistory[0] >= n * 4 && runHistory[6] >= n ? 1 : 0)
         + (core && runHistory[6] >= n * 4 && runHistory[0] >= n ? 1 : 0)

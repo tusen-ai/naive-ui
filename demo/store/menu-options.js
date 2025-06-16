@@ -382,6 +382,13 @@ export function createComponentMenuOptions({ lang, theme }) {
           path: '/input-number'
         },
         {
+          en: 'Input OTP',
+          zh: '验证码',
+          enSuffix: true,
+          path: '/input-otp',
+          isNew: true
+        },
+        {
           en: 'Mention',
           zh: '提及',
           enSuffix: true,

@@ -7,6 +7,7 @@ export { isJsdom } from './env/is-jsdom'
 export { eventEffectNotPerformed, markEventEffectPerformed } from './event'
 export {
   getTitleAttribute,
+  isArrayShallowEqual,
   largerSize,
   smallerSize,
   throwError,
