@@ -11,6 +11,7 @@ basic.vue
 status.vue
 mask.vue
 template.vue
+block.vue
 size.vue
 form.vue
 pattern.vue
@@ -29,6 +30,7 @@ pattern.vue
 | length | `number` |  | `6` | Number of characters to initiate. | 2.41.1 |
 | mask | `boolean` |  | `false` | Whether to enable password mode. | 2.41.1 |
 | placeholder | `string` |  | `''` | Input placeholder. | 2.41.1 |
+| block | `boolean` |  | `false` | Option to fit width to its parent's width | NEXT_VERSION |
 | readonly | `boolean` |  | `false` | Whether the component is readonly. | 2.41.1 |
 | size | `'small' \| 'medium' \| 'large'` | `InputOtpSize` | `'medium'` | Size of the component. | 2.41.1 |
 | status | `'success' \| 'warning' \| 'error'` | `FormValidationStatus` | `undefined` | The validation status of the component. | 2.41.1 |
