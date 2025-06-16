@@ -104,6 +104,7 @@ import type { UploadTheme } from '../../upload/styles'
 import type { WatermarkTheme } from '../../watermark/styles'
 import type { GlobalTheme, GlobalThemeOverrides } from './interface'
 import type { Katex } from './katex'
+import { BubbleTheme } from '../../bubble/styles/light'
 
 export interface GlobalThemeWithoutCommon {
   Alert?: AlertTheme
@@ -116,6 +117,7 @@ export interface GlobalThemeWithoutCommon {
   Breadcrumb?: BreadcrumbTheme
   Button?: ButtonTheme
   ButtonGroup?: ButtonGroupTheme
+  Bubble?: BubbleTheme
   Calendar?: CalendarTheme
   Card?: CardTheme
   Carousel?: CarouselTheme
