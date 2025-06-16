@@ -6,6 +6,10 @@
 
 - 修复 `n-input-otp` 组件，当被禁用 (disabled/readonly) 时移除事件绑定，防止禁用状态下仍可触发交互行为，修复宽度样式权重冲突问题
 
+### Features
+
+- `n-anchor-link` 新增 `title` slot，关闭 [#6845](https://github.com/tusen-ai/naive-ui/issues/6845)
+
 ## 2.41.1
 
 ### Fixes
