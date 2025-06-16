@@ -4,7 +4,7 @@
 
 ### Breaking Changes
 
-- 修复 `n-date-picker` 的 `time-picker-format` 属性不生效的问题，这个属性之前被错误的拼写为 `timer-picker-format`
+- 修复 `n-date-picker` 的 `time-picker-format` 属性不生效的问题，这个属性之前被错误的拼写为 `timer-picker-format`，关闭 [#6820](https://github.com/tusen-ai/naive-ui/issues/6820)
 
 ### Fixes
 
