@@ -36,9 +36,9 @@ scrollto.vue
 
 ### AnchorLink Slots
 
-| Name  | Parameters | Description            | Version      |
-| ----- | ---------- | ---------------------- | ------------ |
-| title | `()`       | The title of the link. | NEXT_VERSION |
+| Name  | Parameters | Description            | Version |
+| ----- | ---------- | ---------------------- | ------- |
+| title | `()`       | The title of the link. | 2.42.0  |
 
 ### Anchor Methods
 

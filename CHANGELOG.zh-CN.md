@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.42.0
 
 ### Breaking Changes
 
