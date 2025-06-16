@@ -25,13 +25,13 @@ rtl-debug.vue
 | 名称 | 类型 | 类型别名 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- | --- |
 | allow-input | `(char: string, index: number, currentValue: string[]) => boolean` | `InputOtpAllowInput` | `undefined` | 校验当前的输入是否合法，如果返回 `false` 输入框便不会响应此次的输入 | 2.41.1 |
+| block | `boolean` |  | `false` | 是否将宽度调整为父元素宽度 | NEXT_VERSION |
 | default-value | `string[]` |  | `[]` | 默认值 | 2.41.1 |
 | disabled | `boolean` |  | `false` | 是否禁用 | 2.41.1 |
 | gap | `string \| number` |  | `undefined` | 不同输入框之间的距离，如果不设定将使用默认值 | 2.41.1 |
 | length | `number` |  | `6` | 验证码的长度，根据长度渲染对应个数的输入框 | 2.41.1 |
 | mask | `boolean` |  | `false` | 是否是密码模式 | 2.41.1 |
 | placeholder | `string` |  | `''` | 输入的占位内容 | 2.41.1 |
-| block | `boolean` |  | `false` | 将宽度调整为父元素宽度 | NEXT_VERSION |
 | readonly | `boolean` |  | `false` | 是否只读 | 2.41.1 |
 | size | `'small' \| 'medium' \| 'large'` | `InputOtpSize` | `'medium'` | 输入框尺寸 | 2.41.1 |
 | status | `'success' \| 'warning' \| 'error'` | `FormValidationStatus` | `undefined` | 验证状态 | 2.41.1 |

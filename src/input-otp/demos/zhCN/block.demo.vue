@@ -1,7 +1,7 @@
 <markdown>
-# block
+# 沾满宽度
 
-`block` 属性使其适合父元素宽度。
+设定 `block` 属性使其适合父元素宽度。
 </markdown>
 
 <script lang="ts" setup>

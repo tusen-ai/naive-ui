@@ -1,5 +1,5 @@
 <markdown>
-# block
+# Block
 
 `block` property will make the `n-input-otp` fit to its parent width.
 </markdown>

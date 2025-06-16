@@ -225,6 +225,10 @@ export default defineComponent({
     }
 
     const handlePaste = (e: ClipboardEvent, index: number) => {
+      if (props.readonly || mergedDisabledRef.value) {
+        return
+      }
+
       e.preventDefault()
       const { clipboardData } = e
       const text = clipboardData?.getData('text')
@@ -260,9 +264,11 @@ export default defineComponent({
     }
 
     const handleKeydown = (e: KeyboardEvent, index: number) => {
+      if (mergedDisabledRef.value)
+        return
       const keyCode = e.code || e.key
       const currentValue = justifyValue(mergedValueRef.value)
-      if (keyCode === 'Backspace') {
+      if (keyCode === 'Backspace' && !props.readonly) {
         e.preventDefault()
         currentValue[Math.max(index, 0)] = ''
         doUpdateValue(currentValue, { diff: '', index, source: 'delete' })
@@ -365,7 +371,7 @@ export default defineComponent({
               theme: mergedTheme.peers.Input,
               themeOverrides: mergedTheme.peerOverrides.Input,
               ref: (el: any) => (this.inputRefList[index] = el),
-              ...(mergedDisabled || readonly ? {} : getTemplateEvents(index))
+              ...getTemplateEvents(index)
             },
             ({ index, ...restProps }) => [<NInput {...restProps} key={index} />]
           )
