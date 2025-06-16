@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- Fix `n-date-picker`'s `time-picker-format` prop doesn't work, the prop is misspelled as `timer-picker-format` before.
+
 ### Fixes
 
 - Fix `n-input-otp` event bindings not removed when elements are disabled (disabled/readonly), fix width style specificity conflict.
