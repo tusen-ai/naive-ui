@@ -32,13 +32,13 @@ scrollto.vue
 | Name  | Type     | Default     | Description         |
 | ----- | -------- | ----------- | ------------------- |
 | href  | `string` | `undefined` | The target of link  |
-| title | `stirng` | `undefined` | The content of link |
+| title | `string` | `undefined` | The content of link |
 
 ### AnchorLink Slots
 
-| 名称  | 类型          | 说明                | 版本         |
-| ----- | ------------- | ------------------- | ------------ |
-| title | `() => VNode` | The content of link | NEXT_VERSION |
+| Name  | Parameters | Description            | Version      |
+| ----- | ---------- | ---------------------- | ------------ |
+| title | `()`       | The title of the link. | NEXT_VERSION |
 
 ### Anchor Methods
 

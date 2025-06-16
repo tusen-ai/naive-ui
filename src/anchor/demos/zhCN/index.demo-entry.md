@@ -37,9 +37,9 @@ max-height-debug.vue
 
 ### AnchorLink Slots
 
-| 名称  | 类型          | 说明     | 版本         |
-| ----- | ------------- | -------- | ------------ |
-| title | `() => VNode` | 锚点标题 | NEXT_VERSION |
+| 名称  | 参数 | 说明     | 版本         |
+| ----- | ---- | -------- | ------------ |
+| title | `()` | 锚点标题 | NEXT_VERSION |
 
 ### Anchor Methods
 

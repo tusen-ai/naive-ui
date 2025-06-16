@@ -1,4 +1,5 @@
-import type { Ref, SlotsType, VNode } from 'vue'
+import type { Ref, SlotsType } from 'vue'
+import type { AnchorLinkSlots } from './public-types'
 import { useMemo } from 'vooks'
 import { defineComponent, h, inject, ref, toRef, watch } from 'vue'
 import {
@@ -30,11 +31,6 @@ export const anchorLinkProps = {
 } as const
 
 export type AnchorLinkProps = ExtractPublicPropTypes<typeof anchorLinkProps>
-
-export interface AnchorLinkSlots {
-  default?: () => VNode[]
-  title?: () => VNode[]
-}
 
 export default defineComponent({
   name: 'AnchorLink',
