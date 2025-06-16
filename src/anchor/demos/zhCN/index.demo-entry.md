@@ -35,6 +35,12 @@ max-height-debug.vue
 | href  | `string` | `undefined` | 锚点链接 |
 | title | `stirng` | `undefined` | 锚点标题 |
 
+### AnchorLink Slots
+
+| 名称  | 类型          | 说明     | 版本         |
+| ----- | ------------- | -------- | ------------ |
+| title | `() => VNode` | 锚点标题 | NEXT_VERSION |
+
 ### Anchor Methods
 
 | 名称     | 类型                     | 说明                   |
