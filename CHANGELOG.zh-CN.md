@@ -19,6 +19,8 @@
 
 ## 2.41.1
 
+`2025-06-08`
+
 ### Fixes
 
 - 修复 `n-tabs` TabPane tab slots 的类型异常
