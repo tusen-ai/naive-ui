@@ -174,6 +174,9 @@ async function convertMd2ComponentDocumentation(
   const forceShowAnchor = !!~text.search('<!--anchor:on-->')
   const colSpan = ~text.search('<!--single-column-->') ? 1 : 2
   const hasApi = !!~text.search('## API')
+  const Contributors = `
+    <Contributors />
+  `
   const tokens = marked.lexer(text)
   // resolve external components
   const componentsIndex = tokens.findIndex(
@@ -237,6 +240,7 @@ async function convertMd2ComponentDocumentation(
   >
     <div :style="contentStyle">
       ${docMainTemplate}
+      ${Contributors}
     </div>
     <div style="width: 192px;" v-if="showAnchor">
       ${
