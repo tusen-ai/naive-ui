@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix `n-upload` component Non-function value encountered for default slot warning.
+
 ## 2.42.0
 
 ### Breaking Changes

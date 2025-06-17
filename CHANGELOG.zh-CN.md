@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- 修复 `n-upload` 组件 Non-function value encountered for default slot 警告
+
 ## 2.42.0
 
 ### Breaking Changes
