@@ -54,7 +54,7 @@ async function getContributors() {
 
 const locales = {
   'zh-CN': {
-    title: '文档贡献者：',
+    title: '贡献者：',
     lastCommitTime: '最后更新',
     thanksMessage: '感谢所有贡献者的辛勤付出！'
   },
@@ -118,29 +118,24 @@ watchEffect(() => {
 
 <style scoped>
 .contributors-container {
-  background-color: #ffffff;
   border-radius: 8px;
   margin-top: 24px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .contributors-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
 }
 
 .contributors-title {
   font-size: 16px;
   font-weight: 600;
-  color: #1f2937;
   margin: 0;
 }
 
 .contributors-meta {
   font-size: 12px;
-  color: #6b7280;
 }
 
 .contributors-time {
@@ -152,7 +147,6 @@ watchEffect(() => {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 16px;
 }
 
 .contributor-item {
@@ -167,7 +161,6 @@ watchEffect(() => {
 .contributors-thanks {
   padding-top: 12px;
   padding-bottom: 12px;
-  border-top: 1px solid #f3f4f6;
 }
 
 .contributors-thanks span {
