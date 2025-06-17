@@ -27,3 +27,4 @@ web-types.json
 ~*
 .pnpm-debug.log
 .history
+preset/components-changelog*

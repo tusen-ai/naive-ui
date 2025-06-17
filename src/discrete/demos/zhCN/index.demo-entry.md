@@ -1,4 +1,6 @@
-# 脱离上下文的 API（v2.29.0）
+# 脱离上下文的 API DiscreteAPI
+
+自 `2.29.1` 开始提供。
 
 如果你想在 `setup` 外使用 `useDialog`、`useMessage`、`useNotification`、`useLoadingBar`，`useModal`，可以通过 `createDiscreteApi` 来构建对应的 API。
 
