@@ -127,6 +127,19 @@ export default cB('tree', `
       `)
     ])
   ]),
+  cM('ellipsis', [
+    cB('tree-node', [
+      cB('tree-node-content', `
+        overflow: hidden;
+      `, [
+        cE('text', `
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+        `)
+      ])
+    ])
+  ]),
   cB('tree-node-indent', `
     flex-grow: 0;
     flex-shrink: 0;
