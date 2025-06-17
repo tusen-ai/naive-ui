@@ -2,6 +2,7 @@
   "semi": false,
   "singleQuote": true,
   "printWidth": 80,
+  "removeUnused": false,
   "trailingComma": "none",
   "proseWrap": "never"
 }
