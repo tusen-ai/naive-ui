@@ -2,6 +2,8 @@
 
 ## 2.42.0
 
+`2025-06-17`
+
 ### Breaking Changes
 
 - Fix `n-date-picker`'s `time-picker-format` prop doesn't work, the prop is misspelled as `timer-picker-format` before, closes [#6820](https://github.com/tusen-ai/naive-ui/issues/6820).
