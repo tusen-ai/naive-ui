@@ -4,16 +4,10 @@
 使用 `n-skeleton` 模拟加载效果。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      loading: ref(true)
-    }
-  }
-})
+const loading = ref(true)
 </script>
 
 <template>
