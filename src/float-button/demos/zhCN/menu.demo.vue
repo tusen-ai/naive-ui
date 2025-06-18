@@ -4,15 +4,8 @@
 设定 `menu-trigger` 后，更多的 `n-float-button` 可被折叠于一个 `n-float-button` 中。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    CashIcon
-  }
-})
 </script>
 
 <template>

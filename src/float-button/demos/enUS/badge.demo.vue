@@ -4,15 +4,8 @@
 You can put a hover button with the number of badges on any element.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { AlarmOutline as AlarmOutlineIcon } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    AlarmOutlineIcon
-  }
-})
 </script>
 
 <template>
