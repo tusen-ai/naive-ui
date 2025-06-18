@@ -4,26 +4,20 @@
 在选中选项后清除内容或者选择后 Blur。
 </markdown>
 
-<script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { computed, ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const valueRef = ref('')
+const valueRef = ref('')
+const value = valueRef
+const options = computed(() => {
+  return ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {
+    const value = valueRef.value === null ? '' : valueRef.value
+    const prefix = value.split('@')[0]
     return {
-      value: valueRef,
-      options: computed(() => {
-        return ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {
-          const value = valueRef.value === null ? '' : valueRef.value
-          const prefix = value.split('@')[0]
-          return {
-            label: prefix + suffix,
-            value: prefix + suffix
-          }
-        })
-      })
+      label: prefix + suffix,
+      value: prefix + suffix
     }
-  }
+  })
 })
 </script>
 
