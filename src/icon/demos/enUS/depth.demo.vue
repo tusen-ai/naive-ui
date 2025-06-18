@@ -4,17 +4,8 @@
 To match different text color levels, icon provides a `depth` property.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { CashOutline } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup() {
-    return {
-      CashOutline
-    }
-  }
-})
 </script>
 
 <template>
