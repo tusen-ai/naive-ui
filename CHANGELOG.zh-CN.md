@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.42.1
+
+### Fixes
+
+- 修复 `n-menu` 在父节点设置 `disabled`，子节点为 `type: "group"` 的禁用样式失效，关闭 [#6792](https://github.com/tusen-ai/naive-ui/issues/6792)
+
 ## 2.42.0
 
 `2025-06-17`

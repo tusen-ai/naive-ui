@@ -1,5 +1,6 @@
 import type { TmNode } from './interface'
 import {
+  computed,
   defineComponent,
   Fragment,
   h,
@@ -36,8 +37,18 @@ export const NMenuOptionGroup = defineComponent({
   name: 'MenuOptionGroup',
   props: menuItemGroupProps,
   setup(props) {
-    provide(submenuInjectionKey, null)
     const MenuChild = useMenuChild(props)
+    const { NSubmenu } = MenuChild
+    const mergedDisabledRef = computed(() => {
+      const { disabled } = props.tmNode
+      if (NSubmenu?.mergedDisabledRef.value)
+        return true
+      return disabled
+    })
+    provide(submenuInjectionKey, {
+      paddingLeftRef: MenuChild.paddingLeft,
+      mergedDisabledRef
+    })
     provide(menuItemGroupInjectionKey, {
       paddingLeftRef: MenuChild.paddingLeft
     })
