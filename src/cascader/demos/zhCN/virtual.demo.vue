@@ -4,9 +4,9 @@
 下面这个例子有 5000 \* 2 \* 2 = 20000 条数据。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { CascaderOption } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 function getOptions(depth = 3, iterator = 1, prefix = '') {
   const length = iterator === 1 ? 5000 : 2
@@ -39,19 +39,13 @@ function getOptions(depth = 3, iterator = 1, prefix = '') {
   return options
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      checkStrategyIsChild: ref(true),
-      cascade: ref(true),
-      showPath: ref(true),
-      hoverTrigger: ref(false),
-      filterable: ref(false),
-      value: ref(null),
-      options: getOptions()
-    }
-  }
-})
+const checkStrategyIsChild = ref(true)
+const cascade = ref(true)
+const showPath = ref(true)
+const hoverTrigger = ref(false)
+const filterable = ref(false)
+const value = ref(null)
+const options = getOptions()
 </script>
 
 <template>

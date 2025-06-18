@@ -4,9 +4,9 @@
 设置勾选策略来指定显示的勾选节点，`all` 表示显示全部选中节点；`parent` 表示只显示父节点（当父节点下所有子节点都选中时）；`child` 表示只显示子节点。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { CascaderOption } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 function getOptions(depth = 4, iterator = 1, prefix = '') {
   const length = 3
@@ -39,17 +39,12 @@ function getOptions(depth = 4, iterator = 1, prefix = '') {
   return options
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      checkStrategy: ref<'all' | 'child' | 'parent'>('all'),
-      options: getOptions(),
-      handleUpdateValue: (values: string | string[]) => {
-        console.log(values)
-      }
-    }
-  }
-})
+const checkStrategy = ref<'all' | 'child' | 'parent'>('all')
+const options = getOptions()
+
+function handleUpdateValue(values: string | string[]) {
+  console.log(values)
+}
 </script>
 
 <template>

@@ -4,10 +4,10 @@
 有人要在级联菜单里用这些插槽吗？
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { CascaderOption } from 'naive-ui'
 import Flash16Regular from '@vicons/fluent/Flash16Regular'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 function getOptions(depth = 2, iterator = 1, prefix = '') {
   const length = 12
@@ -40,17 +40,8 @@ function getOptions(depth = 2, iterator = 1, prefix = '') {
   return options
 }
 
-export default defineComponent({
-  components: {
-    Flash16Regular
-  },
-  setup() {
-    return {
-      value: ref(null),
-      options: getOptions()
-    }
-  }
-})
+const value = ref(null)
+const options = getOptions()
 </script>
 
 <template>
