@@ -4,9 +4,8 @@
 A dropdown has different sizes.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent } from 'vue'
 
 const options = [
   {
@@ -55,21 +54,14 @@ const options = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      options,
-      handleSelect(key: string | number) {
-        message.info(String(key))
-      }
-    }
-  }
-})
+const message = useMessage()
+function handleSelect(key: string | number) {
+  message.info(String(key))
+}
 </script>
 
 <template>
-  <n-space vertical>
+  <n-space>
     <n-dropdown
       placement="bottom-start"
       trigger="click"
@@ -77,7 +69,7 @@ export default defineComponent({
       :options="options"
       @select="handleSelect"
     >
-      <n-button>Small Size</n-button>
+      <n-button>Small</n-button>
     </n-dropdown>
     <n-dropdown
       placement="bottom-start"
@@ -86,7 +78,7 @@ export default defineComponent({
       :options="options"
       @select="handleSelect"
     >
-      <n-button>Medium Size</n-button>
+      <n-button>Medium</n-button>
     </n-dropdown>
     <n-dropdown
       placement="bottom-start"
@@ -95,7 +87,7 @@ export default defineComponent({
       :options="options"
       @select="handleSelect"
     >
-      <n-button>Large Size</n-button>
+      <n-button>Large</n-button>
     </n-dropdown>
     <n-dropdown
       placement="bottom-start"
@@ -104,7 +96,7 @@ export default defineComponent({
       :options="options"
       @select="handleSelect"
     >
-      <n-button>Huge Size</n-button>
+      <n-button>Huge</n-button>
     </n-dropdown>
   </n-space>
 </template>

@@ -2,9 +2,8 @@
 # Scrollable debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DropdownMenuProps } from 'naive-ui'
-import { defineComponent } from 'vue'
 
 const options = [
   {
@@ -97,18 +96,10 @@ const options = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    const menuProps: DropdownMenuProps = (option, options) => {
-      console.log(option, options)
-      return { style: 'max-height: 200px;' }
-    }
-    return {
-      options,
-      menuProps
-    }
-  }
-})
+const menuProps: DropdownMenuProps = (option, options) => {
+  console.log(option, options)
+  return { style: 'max-height: 200px;' }
+}
 </script>
 
 <template>

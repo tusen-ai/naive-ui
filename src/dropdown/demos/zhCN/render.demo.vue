@@ -4,9 +4,9 @@
 你可以单纯的只是想渲染一些内容，和选项数据无关。此时你可以加入 `type='render'` 的选项。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { NAvatar, NText, useMessage } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 
 function renderCustomHeader() {
   return h(
@@ -34,39 +34,34 @@ function renderCustomHeader() {
   )
 }
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      options: [
-        {
-          key: 'header',
-          type: 'render',
-          render: renderCustomHeader
-        },
-        {
-          key: 'header-divider',
-          type: 'divider'
-        },
-        {
-          label: '处理群消息 342 条',
-          key: 'stmt1'
-        },
-        {
-          label: '被 @ 58 次',
-          key: 'stmt2'
-        },
-        {
-          label: '加入群 17 个',
-          key: 'stmt3'
-        }
-      ],
-      handleSelect(key: string | number) {
-        message.info(String(key))
-      }
-    }
+const message = useMessage()
+const options = [
+  {
+    key: 'header',
+    type: 'render',
+    render: renderCustomHeader
+  },
+  {
+    key: 'header-divider',
+    type: 'divider'
+  },
+  {
+    label: '处理群消息 342 条',
+    key: 'stmt1'
+  },
+  {
+    label: '被 @ 58 次',
+    key: 'stmt2'
+  },
+  {
+    label: '加入群 17 个',
+    key: 'stmt3'
   }
-})
+]
+
+function handleSelect(key: string | number) {
+  message.info(String(key))
+}
 </script>
 
 <template>
