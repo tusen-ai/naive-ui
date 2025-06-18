@@ -24,7 +24,6 @@ export default defineComponent({
         const { content, options } = props
         const html = DOMPurify.sanitize(content, options) as string
 
-
         return {
             mergedClsPrefix: mergedClsPrefixRef,
             html
