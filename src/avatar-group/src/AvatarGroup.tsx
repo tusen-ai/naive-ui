@@ -28,6 +28,7 @@ export interface AvatarGroupInjection {
 }
 
 export interface AvatarGroupOption {
+  name: string
   src: string
 }
 

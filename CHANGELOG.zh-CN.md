@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.42.1
+
+### Fixes
+
+- 修复 `n-avatar-group` 的 `AvatarGroupOption` 类型 `name` 丢失，关闭 [#6909](https://github.com/tusen-ai/naive-ui/issues/6909)
+
 ## 2.42.0
 
 `2025-06-17`
