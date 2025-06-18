@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.42.1
+
+### Fixes
+
+- Fix `n-menu`'s disabled style not working when parent node is set to `disabled` and child node has `type: "group"`, closes [#6792](https://github.com/tusen-ai/naive-ui/issues/6792)
+
 ## 2.42.0
 
 `2025-06-17`
