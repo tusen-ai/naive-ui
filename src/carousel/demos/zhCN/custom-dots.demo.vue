@@ -1,5 +1,5 @@
 <markdown>
-# Custom Dots
+# 自定义指示点
 </markdown>
 
 <template>
