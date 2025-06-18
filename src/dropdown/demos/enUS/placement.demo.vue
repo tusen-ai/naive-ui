@@ -1,7 +1,7 @@
 <markdown>
 # Placement
 
-Use different placements.
+Dropdown options can be aligned using the `placement` property.
 </markdown>
 
 <script lang="ts" setup>

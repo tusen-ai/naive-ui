@@ -78,6 +78,6 @@ function renderDropdownIcon() {
     :render-label="renderDropdownLabel"
     :render-icon="renderDropdownIcon"
   >
-    <n-button>I'm Batch Rendered</n-button>
+    <n-button>Batch Rendered</n-button>
   </n-dropdown>
 </template>
