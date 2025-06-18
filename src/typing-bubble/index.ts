@@ -1,0 +1,1 @@
+export { default as TypingBubble } from './src/TypingBubble'

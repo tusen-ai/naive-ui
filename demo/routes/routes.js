@@ -425,6 +425,16 @@ export const enComponentRoutes = [
     component: () => import('../../src/bubble/demos/enUS/index.demo-entry.md')
   },
   {
+    path: 'typing-bubble',
+    component: () =>
+      import('../../src/typing-bubble/demos/enUS/index.demo-entry.md')
+  },
+    {
+    path: 'rich-text',
+    component: () =>
+      import('../../src/rich-text/demos/enUS/index.demo-entry.md')
+  },
+  {
     path: 'list',
     component: () => import('../../src/list/demos/enUS/index.demo-entry.md')
   },
@@ -757,9 +767,19 @@ export const zhComponentRoutes = [
     path: 'divider',
     component: () => import('../../src/divider/demos/zhCN/index.demo-entry.md')
   },
-    {
+  {
     path: 'bubble',
     component: () => import('../../src/bubble/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'typing-bubble',
+    component: () =>
+      import('../../src/typing-bubble/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'rich-text',
+    component: () =>
+      import('../../src/rich-text/demos/zhCN/index.demo-entry.md')
   },
   {
     path: 'popconfirm',

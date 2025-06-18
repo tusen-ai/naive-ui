@@ -218,6 +218,27 @@ export function createDocumentationMenuOptions({ lang, theme }) {
 export function createComponentMenuOptions({ lang, theme }) {
   return createItems(lang, theme, '/components', [
     appendCounts({
+      zh: '对话组件',
+      en: 'Chat Components',
+      type: 'group',
+      children: [
+        {
+          en: 'Bubble',
+          zh: '对话气泡',
+          enSuffix: true,
+          path: '/bubble',
+          isNew: true
+        },
+        {
+          en: 'TypingBubble',
+          zh: '对话气泡',
+          enSuffix: true,
+          path: '/typing-bubble',
+          isNew: true
+        }
+      ]
+    }),
+    appendCounts({
       zh: '通用组件',
       en: 'Common Components',
       type: 'group',
@@ -578,10 +599,10 @@ export function createComponentMenuOptions({ lang, theme }) {
           isNew: true
         },
         {
-          en: 'Bubble',
-          zh: '对话气泡',
+          en: 'richText',
+          zh: '富文本',
           enSuffix: true,
-          path: '/bubble',
+          path: '/rich-text',
           isNew: true
         }
       ]

@@ -114,6 +114,7 @@ declare module 'vue' {
     NRadioGroup: (typeof import('naive-ui'))['NRadioGroup']
     NRate: (typeof import('naive-ui'))['NRate']
     NResult: (typeof import('naive-ui'))['NResult']
+    NRichText: (typeof import('naive-ui'))['NRichText']
     NRow: (typeof import('naive-ui'))['NRow']
     NScrollbar: (typeof import('naive-ui'))['NScrollbar']
     NSelect: (typeof import('naive-ui'))['NSelect']

@@ -105,6 +105,7 @@ import type { WatermarkTheme } from '../../watermark/styles'
 import type { GlobalTheme, GlobalThemeOverrides } from './interface'
 import type { Katex } from './katex'
 import { BubbleTheme } from '../../bubble/styles/light'
+import { TypingBubbleTheme } from '../../typing-bubble/styles/light'
 
 export interface GlobalThemeWithoutCommon {
   Alert?: AlertTheme
@@ -199,6 +200,7 @@ export interface GlobalThemeWithoutCommon {
   InternalSelectMenu?: InternalSelectMenuTheme
   InternalSelection?: InternalSelectionTheme
   InputOtp?: InputOtpTheme
+  TypingBubble?: TypingBubbleTheme
 }
 
 export interface GlobalComponentConfig {
