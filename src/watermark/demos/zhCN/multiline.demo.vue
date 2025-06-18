@@ -6,7 +6,7 @@
 水印支持显示多行文本内容。
 </markdown>
 
-<script setup>
+<script lang="ts" setup>
 import { ref } from 'vue'
 
 const content = ref('Naive UI\n有点意思...')

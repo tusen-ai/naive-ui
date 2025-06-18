@@ -6,7 +6,7 @@ Supports multiple lines text separated by `\n` since `2.38.2`.
 Watermark supports displaying multiline text content.
 </markdown>
 
-<script setup>
+<script lang="ts" setup>
 import { ref } from 'vue'
 
 const content = ref('Naive UI\nQuite Interesting...')

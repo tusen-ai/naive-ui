@@ -4,7 +4,7 @@
 Preview watermark effects by configuring custom parameters.
 </markdown>
 
-<script setup>
+<script lang="ts" setup>
 import { ref } from 'vue'
 
 const content = ref('Watermark\nCustom Watermark')
@@ -12,7 +12,9 @@ const fontSize = ref(16)
 const rotate = ref(-15)
 const fontColor = ref('rgba(128, 128, 128, .3)')
 const cross = ref(true)
-const fontStyle = ref('normal')
+const fontStyle = ref<'normal' | 'italic' | 'oblique' | `oblique ${number}deg`>(
+  'normal'
+)
 const fontWeight = ref(400)
 const globalRotate = ref(0)
 const lineHeight = ref(16)
@@ -23,7 +25,7 @@ const yGap = ref(0)
 const xOffset = ref(12)
 const yOffset = ref(28)
 const zIndex = ref(10)
-const textAlign = ref('left')
+const textAlign = ref<'left' | 'center' | 'right'>('left')
 </script>
 
 <template>
