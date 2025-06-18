@@ -4,30 +4,24 @@
 You can customize some shorcut buttons.
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      ts1: ref(null),
-      ts2: ref(1183135260000),
-      range1: ref(null),
-      range2: ref(null),
-      shortcuts: {
-        'Honey birthday': 1631203200000,
-        Yesterday: () => new Date().getTime() - 24 * 60 * 60 * 1000
-      },
-      rangeShortcuts: {
-        'Happy holiday': [1629216000000, 1631203200000] as const,
-        'Last 2 hours': () => {
-          const cur = new Date().getTime()
-          return [cur - 2 * 60 * 60 * 1000, cur] as const
-        }
-      }
-    }
+const ts1 = ref(null)
+const ts2 = ref(1183135260000)
+const range1 = ref(null)
+const range2 = ref(null)
+const shortcuts = {
+  'Honey birthday': 1631203200000,
+  Yesterday: () => new Date().getTime() - 24 * 60 * 60 * 1000
+}
+const rangeShortcuts = {
+  'Happy holiday': [1629216000000, 1631203200000] as const,
+  'Last 2 hours': () => {
+    const cur = new Date().getTime()
+    return [cur - 2 * 60 * 60 * 1000, cur] as const
   }
-})
+}
 </script>
 
 <template>

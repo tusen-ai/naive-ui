@@ -2,25 +2,18 @@
 # 只使用面板 Debug
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
+function log(...args: unknown[]) {
+  console.log('value', ...args)
+}
 
-export default defineComponent({
-  setup() {
-    return {
-      log(...args: unknown[]) {
-        console.log('value', ...args)
-      },
-      rangeShortcuts: {
-        快乐假期: [1629216000000, 1631203200000] as const,
-        近2小时: () => {
-          const cur = new Date().getTime()
-          return [cur - 2 * 60 * 60 * 1000, cur] as const
-        }
-      }
-    }
+const rangeShortcuts = {
+  快乐假期: [1629216000000, 1631203200000] as const,
+  近2小时: () => {
+    const cur = new Date().getTime()
+    return [cur - 2 * 60 * 60 * 1000, cur] as const
   }
-})
+}
 </script>
 
 <template>
