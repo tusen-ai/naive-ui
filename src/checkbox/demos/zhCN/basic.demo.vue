@@ -2,17 +2,11 @@
 # 基础用法
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      value: ref(false),
-      disabled: ref(true)
-    }
-  }
-})
+const value = ref(false)
+const disabled = ref(true)
 </script>
 
 <template>
