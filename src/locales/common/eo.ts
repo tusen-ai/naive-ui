@@ -124,6 +124,12 @@ const eo: NLocale = {
     tipDownload: 'Elŝuti',
     tipClose: 'Fermi (Esc)',
     tipOriginalSize: 'Zoom to original size'
+  },
+  Heatmap: {
+    less: 'less',
+    more: 'more',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

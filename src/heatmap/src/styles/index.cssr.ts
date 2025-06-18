@@ -1,105 +1,103 @@
-import { cB, cE } from '../../../_utils/cssr'
+import { c, cB, cE } from '../../../_utils/cssr'
 
 // vars:
-export default cB('heatmap', `
- display: flex;
- flex-direction: column;
- max-width: fit-content;
- gap: 8px;
- font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+// --n-font-size
+// --n-font-weight
+// --n-text-color
+// --n-border-radius
+// --n-x-gap
+// --n-y-gap
+// --n-rect-color (for individual rect background color)
+
+export default c([
+  cB('heatmap', `
+    display: flex;
+    flex-direction: column;
+    max-width: fit-content;
+    font-size: var(--n-font-size);
   `, [
-  cE('content', `
-    display: block;
-  `),
-  cE('table', `
-    border-collapse: separate;
-    border-spacing: 3px;
-    font-size: 12px;
-  `),
-  cE('week-header', `
-    width: 27px;
-    padding: 0;
-    border: none;
-    font-size: 12px;
-  `),
-  cE('month-label', `
-    font-size: 12px;
-    color: #656d76;
-    text-align: left;
-    height: 15px;
-    line-height: 15px;
-    font-weight: 400;
-    padding: 0 2px 8px;
-    border: none;
-    vertical-align: bottom;
-  `),
-  cE('day-row', `
-    height: 11px;
-  `),
-  cE('week-label', `
-    font-size: 12px;
-    color: #656d76;
-    text-align: right;
-    width: 27px;
-    height: 11px;
-    line-height: 11px;
-    padding: 0 4px 0 0;
-    border: none;
-    vertical-align: middle;
-    white-space: nowrap;
-    font-weight: 400;
-  `),
-  cE('cell', `
-    width: 11px;
-    height: 11px;
-    padding: 0;
-    border: none;
-    vertical-align: middle;
-  `),
-  cE('rect', `
-    width: 11px;
-    height: 11px;
-    border-radius: 2px;
-    background-color: #ebedf0;
-    border: 1px solid rgba(27,31,35,0.06);
-    box-sizing: border-box;
+    cE('content', `
+      display: block;
+    `),
+    cE('calendar-table', `
+      border-collapse: separate;
+      border-spacing: var(--n-y-gap) var(--n-x-gap);
+      font-size: var(--n-font-size);
+    `),
+    cE('week-header-cell', `
+      width: 27px;
+      padding: 0;
+      border: none;
+      font-size: var(--n-font-size);
+    `),
+    cE('month-label-cell', `
+      font-size: var(--n-font-size);
+      color: var(--n-text-color);
+      text-align: left;
+      height: 15px;
+      line-height: 15px;
+      font-weight: var(--n-font-weight);
+      padding: 0 2px 8px;
+      vertical-align: bottom;
+    `),
+    cE('week-label-cell', `
+      font-size: var(--n-font-size);
+      color: var(--n-text-color);
+      text-align: right;
+      width: 27px;
+      height: 11px;
+      line-height: 11px;
+      padding: 0 4px 0 0;
+      border: none;
+      vertical-align: middle;
+      white-space: nowrap;
+      font-weight: var(--n-font-weight);
+    `),
+    cE('day-cell', `
+      width: 10px;
+      height: 10px;
+      padding: 0;
+      border: none;
+      vertical-align: middle;
+    `),
+    cE('empty-cell', `
+      width: 11px;
+      height: 11px;
+    `),
+    cE('footer', `
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+    `)
+  ]),
+  cB('heatmap-rect', `
+    width: 10px;
+    height: 10px;
+    border-radius: var(--n-border-radius);
     cursor: pointer;
     transition: all 0.1s ease-in-out;
-    
-    &:hover {
-      border: 1px solid rgba(27,31,35,0.15);
-    }
+    background-color: var(--n-rect-color);
   `),
-  cE('placeholder', `
-    width: 11px;
-    height: 11px;
-  `),
-  cE('footer', `
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 8px;
-  `),
-  cE('color-indicator', `
+  cB('heatmap-color-indicator', `
     display: flex;
     align-items: center;
     justify-content: flex-end;
     gap: 4px;
-    font-size: 12px;
-    color: #656d76;
-  `),
-  cE('color-squares', `
-    display: flex;
-    gap: 2px;
-  `),
-  cE('color-square', `
-    width: 11px;
-    height: 11px;
-    border-radius: 2px;
-    border: 1px solid rgba(27,31,35,0.06);
-  `),
-  cE('color-indicator-text', `
-    font-size: 12px;
-    color: #656d76;
-  `),
+    font-size: var(--n-font-size);
+  `, [
+    cE('cells', `
+      display: flex;
+      gap: 2px;
+    `),
+    cE('cell', `
+      width: 10px;
+      height: 10px;
+      border-radius: var(--n-border-radius);
+    `),
+    cE('label', `
+      font-size: var(--n-font-size);
+      color: var(--n-text-color);
+    `)
+  ])
 ])

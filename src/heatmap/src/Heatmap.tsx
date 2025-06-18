@@ -5,15 +5,20 @@ import type { HeatmapTheme } from '../styles/light'
 import type { DayRect, RectData, WeekStartDay } from './interface'
 import { format, startOfWeek } from 'date-fns'
 import { groupBy, mapValues, maxBy } from 'lodash-es'
+import { pxfy } from 'seemly'
 import { computed, defineComponent, h, type PropType } from 'vue'
-import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
+import {
+  useConfig,
+  useLocale,
+  useRtl,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
 import heatmapLight from '../styles/light'
 import ColorIndicator from './ColorIndicator'
 import Rect from './Rect'
 import style from './styles/index.cssr'
 import { completeDataGaps, createDayRect, createSparseMatrix } from './utils'
-
-const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] as const
 
 export const HeatmapThemes = {
   github: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
@@ -28,7 +33,16 @@ export type HeatmapThemeType = keyof typeof HeatmapThemes
 
 export const heatmapProps = {
   ...(useTheme.props as ThemeProps<HeatmapTheme>),
+  colors: {
+    type: Array as PropType<string[]>,
+    default: undefined
+  },
+  colorTheme: {
+    type: String as PropType<HeatmapThemeType>,
+    default: 'github'
+  },
   data: Array as PropType<RectData[]>,
+  loading: Boolean,
   weekStartOn: {
     type: Number as PropType<WeekStartDay>,
     default: 0
@@ -41,22 +55,20 @@ export const heatmapProps = {
     type: Boolean,
     default: true
   },
-  showLabels: {
+  showWeekLabels: {
+    type: Boolean,
+    default: true
+  },
+  showMonthLabels: {
     type: Boolean,
     default: true
   },
   unit: {
     type: String,
-    require: true
+    required: true
   },
-  colors: {
-    type: Array as PropType<string[]>,
-    default: undefined
-  },
-  colorTheme: {
-    type: String as PropType<HeatmapThemeType>,
-    default: 'github'
-  }
+  xGap: [Number, String] as PropType<number | string>,
+  yGap: [Number, String] as PropType<number | string>
 } as const
 
 export type HeatmapProps = ExtractPublicPropTypes<typeof heatmapProps>
@@ -67,6 +79,7 @@ export default defineComponent({
   setup(props) {
     const { mergedClsPrefixRef, mergedRtlRef, inlineThemeDisabled }
       = useConfig(props)
+    const { localeRef, dateLocaleRef } = useLocale('Heatmap')
     const themeRef = useTheme(
       'Heatmap',
       '-heatmap',
@@ -77,13 +90,32 @@ export default defineComponent({
     )
     const rtlEnabledRef = useRtl('Heatmap', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
+      const { xGap, yGap } = props
       const {
-        // eslint-disable-next-line no-empty-pattern
-        self: {},
-        // eslint-disable-next-line no-empty-pattern
-        common: {}
+        self: { fontSize, fontWeight, textColor, borderRadius, borderColor }
       } = themeRef.value
-      return {}
+
+      const cssVars = {
+        '--n-font-size': fontSize,
+        '--n-font-weight': fontWeight,
+        '--n-text-color': textColor,
+        '--n-border-radius': borderRadius,
+        '--n-border-color': borderColor,
+        '--n-x-gap':
+          xGap === undefined
+            ? '3px'
+            : typeof xGap === 'number'
+              ? pxfy(xGap)
+              : xGap,
+        '--n-y-gap':
+          yGap === undefined
+            ? '3px'
+            : typeof yGap === 'number'
+              ? pxfy(yGap)
+              : yGap
+      }
+
+      return cssVars
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass('heatmap', undefined, cssVarsRef, props)
@@ -129,10 +161,14 @@ export default defineComponent({
 
     const weekLabelsRef = computed(() => {
       const { weekStartOn } = props
+      const { weekdayFormat } = localeRef.value
+      const { locale } = dateLocaleRef.value
+
       return Array.from({ length: 7 }, (_, i) => {
         const actualDayOfWeek = (weekStartOn + i) % 7
+        const sampleDate = new Date(2023, 0, 1 + actualDayOfWeek)
         return {
-          label: weekDays[actualDayOfWeek],
+          label: format(sampleDate, weekdayFormat, { locale }),
           visible: i % 2 !== 0
         }
       })
@@ -141,6 +177,8 @@ export default defineComponent({
     const monthLabelsRef = computed(() => {
       const matrix = heatmapMatrixRef.value
       const cols = matrix[0].length
+      const { monthFormat } = localeRef.value
+      const { locale } = dateLocaleRef.value
 
       const monthColumns = Array.from({ length: cols }, (_, col) => {
         const cell = matrix.find(row => row[col]?.value !== null)?.[col]
@@ -161,10 +199,13 @@ export default defineComponent({
 
       return Object.entries(monthStats)
         .filter(([, stats]) => stats.count >= 3)
-        .map(([monthKey, stats]) => ({
-          name: format(new Date(`${monthKey}-01`), 'MMM'),
-          colSpan: stats.end - stats.start + 1
-        }))
+        .map(([monthKey, stats]) => {
+          const monthDate = new Date(`${monthKey}-01`)
+          return {
+            name: format(monthDate, monthFormat, { locale }),
+            colSpan: stats.end - stats.start + 1
+          }
+        })
     })
 
     return {
@@ -173,6 +214,7 @@ export default defineComponent({
       mergedColors: mergedColorsRef,
       mergedClsPrefix: mergedClsPrefixRef,
       rtlEnabled: rtlEnabledRef,
+      locale: localeRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
@@ -181,31 +223,38 @@ export default defineComponent({
   },
   render() {
     const {
-      showLabels,
+      showWeekLabels,
+      showMonthLabels,
       showColorIndicator,
       mergedClsPrefix,
       themeClass,
+      cssVars,
+      locale,
       weekLabels,
       monthLabels,
       mergedColors,
       $slots,
       unit,
-      heatmapMatrix
+      heatmapMatrix,
+      onRender
     } = this
-
+    onRender?.()
     return (
-      <div class={[`${mergedClsPrefix}-heatmap`, themeClass]}>
+      <div class={[themeClass, `${mergedClsPrefix}-heatmap`]} style={cssVars}>
         <div class={`${mergedClsPrefix}-heatmap__content`}>
-          <table class={`${mergedClsPrefix}-heatmap__table`}>
-            {showLabels && (
+          <table class={`${mergedClsPrefix}-heatmap__calendar-table`}>
+            {showMonthLabels && (
               <thead>
                 <tr>
-                  <th class={`${mergedClsPrefix}-heatmap__week-header`}></th>
+                  <th
+                    class={`${mergedClsPrefix}-heatmap__week-header-cell`}
+                  >
+                  </th>
                   {monthLabels.map((monthLabel, index) => (
                     <th
                       key={`month-${index}`}
                       colspan={monthLabel.colSpan}
-                      class={`${mergedClsPrefix}-heatmap__month-label`}
+                      class={`${mergedClsPrefix}-heatmap__month-label-cell`}
                     >
                       {monthLabel.name}
                     </th>
@@ -216,12 +265,9 @@ export default defineComponent({
             <tbody>
               {weekLabels.map((weekLabel, rowIdx) => {
                 return (
-                  <tr
-                    key={`row-${rowIdx}`}
-                    class={`${mergedClsPrefix}-heatmap__day-row`}
-                  >
-                    {showLabels && (
-                      <td class={`${mergedClsPrefix}-heatmap__week-label`}>
+                  <tr key={`row-${rowIdx}`}>
+                    {showWeekLabels && (
+                      <td class={`${mergedClsPrefix}-heatmap__week-label-cell`}>
                         {weekLabel.visible ? weekLabel.label : null}
                       </td>
                     )}
@@ -230,7 +276,7 @@ export default defineComponent({
                         return day.value !== null ? (
                           <td
                             key={`day-${rowIdx}-${weekIdx}`}
-                            class={`${mergedClsPrefix}-heatmap__cell`}
+                            class={`${mergedClsPrefix}-heatmap__day-cell`}
                           >
                             <Rect
                               mergedClsPrefix={mergedClsPrefix}
@@ -242,10 +288,10 @@ export default defineComponent({
                         ) : (
                           <td
                             key={`empty-${rowIdx}-${weekIdx}`}
-                            class={`${mergedClsPrefix}-heatmap__cell`}
+                            class={`${mergedClsPrefix}-heatmap__day-cell`}
                           >
                             <div
-                              class={`${mergedClsPrefix}-heatmap__placeholder`}
+                              class={`${mergedClsPrefix}-heatmap__empty-cell`}
                             />
                           </td>
                         )
@@ -263,6 +309,7 @@ export default defineComponent({
             <ColorIndicator
               colors={mergedColors}
               mergedClsPrefix={mergedClsPrefix}
+              indicatorText={[locale.less, locale.more]}
             />
           )}
         </div>

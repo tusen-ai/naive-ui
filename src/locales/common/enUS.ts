@@ -124,7 +124,9 @@ const enUS = {
   },
   Heatmap: {
     less: 'less',
-    more: 'more'
+    more: 'more',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eee'
   }
 }
 

@@ -122,6 +122,12 @@ const ugCN: NLocale = {
     tipDownload: 'چۈشۈرۈش',
     tipClose: 'تاقاش（Esc）',
     tipOriginalSize: 'ئەسلىگە قايتۇرۇش'
+  },
+  Heatmap: {
+    less: 'less',
+    more: 'more',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 
