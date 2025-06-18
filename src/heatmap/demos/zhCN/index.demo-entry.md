@@ -2,12 +2,13 @@
 
 # 热力图 Heatmap
 
-GitHub 小绿墙
+数字民工有属于自己的墙要刷
 
 ## 演示
 
 ```demo
 basic.vue
+themes.vue
 colors.vue
 ```
 

@@ -21,7 +21,7 @@ export const rectProps = {
 export type RectProps = ExtractPublicPropTypes<typeof rectProps>
 
 export default defineComponent({
-  name: 'heatmap',
+  name: 'Rect',
   props: rectProps,
   setup() {},
   render() {
@@ -30,7 +30,7 @@ export default defineComponent({
       <Tooltip trigger="hover">
         {{
           default: () =>
-            `${data?.value} ${unit} on ${format(data!.date, 'yyyy-MM-dd')}`,
+            `${data!.value} ${unit} on ${format(data!.date, 'yyyy-MM-dd')}`,
           trigger: () => (
             <div
               class={`${mergedClsPrefix}-heatmap__rect`}

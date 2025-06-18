@@ -1,7 +1,7 @@
 <markdown>
-# 自定义颜色
+# Custom Colors
 
-每一种颜色都有它的温度。
+Each color has its own temperature.
 </markdown>
 
 <script setup lang="ts">
@@ -18,7 +18,7 @@ const customColors = ref([
   '#216e39'
 ])
 
-const colorLabels = ['空白', '低活跃', '中活跃', '高活跃', '极高活跃']
+const colorLabels = ['Empty', 'Low', 'Medium', 'High', 'Very High']
 </script>
 
 <template>

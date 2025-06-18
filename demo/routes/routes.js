@@ -599,6 +599,10 @@ export const enComponentRoutes = [
   {
     path: 'marquee',
     component: () => import('../../src/marquee/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'heatmap',
+    component: () => import('../../src/heatmap/demos/enUS/index.demo-entry.md')
   }
 ]
 
