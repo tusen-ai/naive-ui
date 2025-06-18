@@ -2,22 +2,16 @@
 # Rtl Debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { unstableTagRtl, useMessage } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      rtlEnabled: ref(false),
-      rtlStyles: [unstableTagRtl],
-      handleClose() {
-        message.info('tag close')
-      }
-    }
-  }
-})
+const message = useMessage()
+const rtlEnabled = ref(false)
+const rtlStyles = [unstableTagRtl]
+function handleClose() {
+  message.info('tag close')
+}
 </script>
 
 <template>

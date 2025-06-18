@@ -4,17 +4,8 @@
 Use icon in tag.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { CheckmarkCircle } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup() {
-    return {
-      CheckmarkCircle
-    }
-  }
-})
 </script>
 
 <template>
