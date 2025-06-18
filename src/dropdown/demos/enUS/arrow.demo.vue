@@ -1,5 +1,7 @@
 <markdown>
-# Show Arrow
+# Arrow
+
+Show an arrow with the dropdown.
 </markdown>
 
 <script lang="ts" setup>
