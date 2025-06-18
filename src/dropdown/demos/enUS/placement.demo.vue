@@ -1,41 +1,35 @@
 <markdown>
 # Placement
 
-Dropdown options can be aligned using the `placement` property.
+Use different placements.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      options: [
-        {
-          label: 'Marina Bay Sands',
-          key: 'Marina Bay Sands'
-        },
-        {
-          label: 'Brown\'s Hotel, London',
-          key: 'Brown\'s Hotel, London'
-        },
-        {
-          label: 'Atlantis Bahamas, Nassau',
-          key: 'Atlantis Bahamas, Nassau'
-        },
-        {
-          label: 'The Beverly Hills Hotel, Los Angeles',
-          key: 'The Beverly Hills Hotel, Los Angeles'
-        }
-      ],
-      handleSelect(key: string | number) {
-        message.info(String(key))
-      }
-    }
+const message = useMessage()
+const options = [
+  {
+    label: 'Marina Bay Sands',
+    key: 'marina bay sands'
+  },
+  {
+    label: 'Brown\'s Hotel, London',
+    key: 'brown\'s hotel, london'
+  },
+  {
+    label: 'Atlantis Bahamas, Nassau',
+    key: 'atlantis nahamas, nassau'
+  },
+  {
+    label: 'The Beverly Hills Hotel, Los Angeles',
+    key: 'the beverly hills hotel, los angeles'
   }
-})
+]
+
+function handleSelect(key: string | number) {
+  message.info(String(key))
+}
 </script>
 
 <template>
