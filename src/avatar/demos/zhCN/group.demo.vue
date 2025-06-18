@@ -28,7 +28,7 @@ const options = [
   }
 ]
 
-function createDropdownOptions(options: Array<{ name: string, src: string }>) {
+function createDropdownOptions<T extends { [key: string]: any }>(options: T[]) {
   return options.map(option => ({
     key: option.name,
     label: option.name

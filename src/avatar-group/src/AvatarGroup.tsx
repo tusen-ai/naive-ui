@@ -29,6 +29,7 @@ export interface AvatarGroupInjection {
 
 export interface AvatarGroupOption {
   src: string
+  [key: string]: unknown
 }
 
 export const avatarGroupProps = {
