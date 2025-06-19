@@ -4,16 +4,10 @@
 默认状况下，`n-dynamic-input` 的预设是 `input`。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      value: ref(['', '', ''])
-    }
-  }
-})
+const value = ref(['', '', ''])
 </script>
 
 <template>

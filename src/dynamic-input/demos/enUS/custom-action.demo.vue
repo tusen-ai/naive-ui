@@ -2,28 +2,16 @@
 # Customizing action
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {
   BagAddOutline as AddIcon,
   ChevronDownCircleOutline as DownIcon,
   BagRemoveOutline as RemoveIcon,
   ChevronUpCircleOutline as UpIcon
 } from '@vicons/ionicons5'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  components: {
-    AddIcon,
-    RemoveIcon,
-    UpIcon,
-    DownIcon
-  },
-  setup() {
-    return {
-      value: ref(['Vue', 'Vue3', 'React'])
-    }
-  }
-})
+const value = ref(['Vue', 'Vue3', 'React'])
 </script>
 
 <template>
