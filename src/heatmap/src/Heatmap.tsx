@@ -327,12 +327,12 @@ export default defineComponent({
             $slots.info,
             children =>
               children && (
-                <div class={`${mergedClsPrefix}-heatmap__footer-info`}>
+                <div class={`${mergedClsPrefix}-heatmap__footer__info`}>
                   {children}
                 </div>
               )
           )}
-          <div class={`${mergedClsPrefix}-heatmap__footer-indicator`}>
+          <div class={`${mergedClsPrefix}-heatmap__footer__indicator`}>
             {resolveSlot($slots.indicator, () => [
               showColorIndicator && (
                 <ColorIndicator
