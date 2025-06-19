@@ -292,6 +292,7 @@ export default defineComponent({
       mergedClsPrefix,
       themeClass,
       cssVars,
+      rtlEnabled,
       locale,
       weekLabels,
       monthLabels,
@@ -303,7 +304,14 @@ export default defineComponent({
     } = this
     onRender?.()
     return (
-      <div class={[themeClass, `${mergedClsPrefix}-heatmap`]} style={cssVars}>
+      <div
+        class={[
+          themeClass,
+          `${mergedClsPrefix}-heatmap`,
+          rtlEnabled && `${mergedClsPrefix}-heatmap--rtl`
+        ]}
+        style={cssVars}
+      >
         <div class={`${mergedClsPrefix}-heatmap__content`}>
           <table class={`${mergedClsPrefix}-heatmap__calendar-table`}>
             {showMonthLabels && (
