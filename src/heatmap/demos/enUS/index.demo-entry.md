@@ -10,6 +10,7 @@ Digital workers have their own wall to paint.
 basic.vue
 themes.vue
 colors.vue
+slots.vue
 ```
 
 ## API
@@ -27,6 +28,7 @@ colors.vue
 
 ### Heatmap Slots
 
-| Name   | Parameters | Description         |
-| ------ | ---------- | ------------------- |
-| footer | `()`       | Footer slot content |
+| Name | Parameters | Description |
+| --- | --- | --- |
+| info | `()` | Left footer info slot, aligned with the left side of heatmap table |
+| indicator | `()` | Right footer indicator slot, aligned with the right side of heatmap table |

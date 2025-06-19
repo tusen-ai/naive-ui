@@ -69,7 +69,19 @@ export default c([
       justify-content: space-between;
       align-items: center;
       margin-top: 8px;
-    `)
+    `, [
+      cE('info', `
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-left: calc(27px + 4px + var(--n-x-gap)); /* Align with the first data cell */
+      `),
+      cE('indicator', `
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      `)
+    ])
   ]),
   cB('heatmap-rect', `
     width: 10px;

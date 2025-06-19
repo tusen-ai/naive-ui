@@ -1,12 +1,12 @@
+import type { PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-
 import type { HeatmapTheme } from '../styles/light'
 import type { DayRect, RectData, WeekStartDay } from './interface'
 import { format, startOfWeek } from 'date-fns'
 import { groupBy, mapValues, maxBy } from 'lodash-es'
 import { pxfy } from 'seemly'
-import { computed, defineComponent, h, type PropType } from 'vue'
+import { computed, defineComponent, h } from 'vue'
 import {
   useConfig,
   useLocale,
@@ -14,6 +14,7 @@ import {
   useTheme,
   useThemeClass
 } from '../../_mixins'
+import { resolveSlot, resolveWrappedSlot } from '../../_utils'
 import heatmapLight from '../styles/light'
 import ColorIndicator from './ColorIndicator'
 import Rect from './Rect'
@@ -30,6 +31,11 @@ export const HeatmapThemes = {
 }
 
 export type HeatmapThemeType = keyof typeof HeatmapThemes
+
+export interface HeatmapSlots {
+  info?: () => VNode[]
+  indicator?: () => VNode[]
+}
 
 export const heatmapProps = {
   ...(useTheme.props as ThemeProps<HeatmapTheme>),
@@ -75,6 +81,7 @@ export type HeatmapProps = ExtractPublicPropTypes<typeof heatmapProps>
 
 export default defineComponent({
   name: 'Heatmap',
+  slots: Object as SlotsType<HeatmapSlots>,
   props: heatmapProps,
   setup(props) {
     const { mergedClsPrefixRef, mergedRtlRef, inlineThemeDisabled }
@@ -304,14 +311,26 @@ export default defineComponent({
           </table>
         </div>
         <div class={`${mergedClsPrefix}-heatmap__footer`}>
-          {$slots.footer?.()}
-          {showColorIndicator && (
-            <ColorIndicator
-              colors={mergedColors}
-              mergedClsPrefix={mergedClsPrefix}
-              indicatorText={[locale.less, locale.more]}
-            />
+          {resolveWrappedSlot(
+            $slots.info,
+            children =>
+              children && (
+                <div class={`${mergedClsPrefix}-heatmap__footer-info`}>
+                  {children}
+                </div>
+              )
           )}
+          <div class={`${mergedClsPrefix}-heatmap__footer-indicator`}>
+            {resolveSlot($slots.indicator, () => [
+              showColorIndicator && (
+                <ColorIndicator
+                  colors={mergedColors}
+                  mergedClsPrefix={mergedClsPrefix}
+                  indicatorText={[locale.less, locale.more]}
+                />
+              )
+            ])}
+          </div>
         </div>
       </div>
     )

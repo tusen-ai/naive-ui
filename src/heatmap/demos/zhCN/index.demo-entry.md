@@ -10,6 +10,7 @@
 basic.vue
 themes.vue
 colors.vue
+slots.vue
 ```
 
 ## API
@@ -27,6 +28,7 @@ colors.vue
 
 ### Heatmap Slots
 
-| 名称   | 参数 | 说明         |
-| ------ | ---- | ------------ |
-| footer | `()` | 底部插槽内容 |
+| 名称      | 参数 | 说明                                          |
+| --------- | ---- | --------------------------------------------- |
+| info      | `()` | 底部左侧信息插槽，与 heatmap table 左边对齐   |
+| indicator | `()` | 底部右侧指示器插槽，与 heatmap table 右边对齐 |
