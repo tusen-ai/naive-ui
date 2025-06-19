@@ -60,6 +60,7 @@ const showMonthLabels = ref(true)
 const showColorIndicator = ref(true)
 const loading = ref(false)
 const weekStartOn = ref<0 | 1 | 2 | 3 | 4 | 5 | 6>(0)
+const size = ref<'small' | 'medium' | 'large'>('medium')
 
 const weekStartOptions = [
   { label: 'Sunday', value: 0 },
@@ -69,6 +70,12 @@ const weekStartOptions = [
   { label: 'Thursday', value: 4 },
   { label: 'Friday', value: 5 },
   { label: 'Saturday', value: 6 }
+]
+
+const sizeOptions = [
+  { label: 'Small', value: 'small' },
+  { label: 'Medium', value: 'medium' },
+  { label: 'Large', value: 'large' }
 ]
 </script>
 
@@ -118,6 +125,16 @@ const weekStartOptions = [
           </template>
         </n-switch>
         <n-divider vertical />
+        <span>Size:</span>
+        <n-radio-group v-model:value="size" name="size">
+          <n-radio-button
+            v-for="option in sizeOptions"
+            :key="option.value"
+            :value="option.value"
+            :label="option.label"
+          />
+        </n-radio-group>
+        <n-divider vertical />
         <span>Week Starts On:</span>
         <n-select
           v-model:value="weekStartOn"
@@ -145,10 +162,11 @@ const weekStartOptions = [
     </n-alert>
 
     <n-heatmap
-      :key="`heatmap-${value}-${weekStartOn}`"
+      :key="`heatmap-${value}-${weekStartOn}-${size}`"
       :data="yearData"
       :week-start-on="weekStartOn"
       :loading="loading"
+      :size="size"
       unit="activities"
       :show-week-labels="showWeekLabels"
       :show-month-labels="showMonthLabels"

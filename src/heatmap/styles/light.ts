@@ -6,6 +6,8 @@ export function self(vars: ThemeCommonVars) {
   const {
     borderRadius,
     fontSizeMini,
+    fontSizeTiny,
+    fontSizeSmall,
     fontWeight,
     lineHeight,
     textColor2,
@@ -39,7 +41,20 @@ export function self(vars: ThemeCommonVars) {
     cellColorPopover: popoverColor,
     barColor: primaryColor,
     loadingColorStart: 'rgba(0, 0, 0, 0.06)',
-    loadingColorEnd: 'rgba(0, 0, 0, 0.12)'
+    loadingColorEnd: 'rgba(0, 0, 0, 0.12)',
+    // Size-related properties
+    rectSizeSmall: '8px',
+    rectSizeMedium: '10px',
+    rectSizeLarge: '12px',
+    xGapSmall: '2px',
+    xGapMedium: '3px',
+    xGapLarge: '4px',
+    yGapSmall: '2px',
+    yGapMedium: '3px',
+    yGapLarge: '4px',
+    fontSizeSmall: fontSizeTiny,
+    fontSizeMedium: fontSizeMini,
+    fontSizeLarge: fontSizeSmall
   }
 }
 

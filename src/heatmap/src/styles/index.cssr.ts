@@ -7,6 +7,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --n-border-radius
 // --n-x-gap
 // --n-y-gap
+// --n-rect-size
 // --n-loading-color-start
 // --n-loading-color-end
 // --n-rect-color (for individual rect background color)
@@ -70,19 +71,19 @@ export default c([
       font-weight: var(--n-font-weight);
     `),
     cE('day-cell', `
-      width: 10px;
-      height: 10px;
+      width: var(--n-rect-size);
+      height: var(--n-rect-size);
       padding: 0;
       border: none;
       vertical-align: middle;
     `),
     cE('empty-cell', `
-      width: 11px;
-      height: 11px;
+      width: calc(var(--n-rect-size) + 1px);
+      height: calc(var(--n-rect-size) + 1px);
     `),
     cE('loading-cell', `
-      width: 11px;
-      height: 11px;
+      width: calc(var(--n-rect-size) + 1px);
+      height: calc(var(--n-rect-size) + 1px);
       border-radius: var(--n-border-radius);
       animation: 2s heatmap-loading infinite cubic-bezier(0.36, 0, 0.64, 1);
       background: var(--n-loading-color-start);
@@ -109,8 +110,8 @@ export default c([
     `)
   ]),
   cB('heatmap-rect', `
-    width: 10px;
-    height: 10px;
+    width: var(--n-rect-size);
+    height: var(--n-rect-size);
     border-radius: var(--n-border-radius);
     cursor: pointer;
     transition: all 0.1s ease-in-out;
@@ -134,8 +135,8 @@ export default c([
       gap: 2px;
     `),
     cE('cell', `
-      width: 10px;
-      height: 10px;
+      width: var(--n-rect-size);
+      height: var(--n-rect-size);
       border-radius: var(--n-border-radius);
     `),
     cE('label', `

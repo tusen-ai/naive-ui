@@ -15,7 +15,7 @@ import {
   useTheme,
   useThemeClass
 } from '../../_mixins'
-import { resolveSlot, resolveWrappedSlot } from '../../_utils'
+import { createKey, resolveSlot, resolveWrappedSlot } from '../../_utils'
 import heatmapLight from '../styles/light'
 import ColorIndicator from './ColorIndicator'
 import Rect from './Rect'
@@ -80,6 +80,10 @@ export const heatmapProps = {
     type: String,
     required: true
   },
+  size: {
+    type: String as PropType<'small' | 'medium' | 'large'>,
+    default: 'medium'
+  },
   xGap: [Number, String] as PropType<number | string>,
   yGap: [Number, String] as PropType<number | string>,
   tooltip: {
@@ -108,7 +112,7 @@ export default defineComponent({
     )
     const rtlEnabledRef = useRtl('Heatmap', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
-      const { xGap, yGap } = props
+      const { xGap, yGap, size } = props
       const {
         self: {
           fontSize,
@@ -117,36 +121,49 @@ export default defineComponent({
           borderRadius,
           borderColor,
           loadingColorStart,
-          loadingColorEnd
+          loadingColorEnd,
+          [createKey('rectSize', size)]: rectSize,
+          [createKey('xGap', size)]: defaultXGap,
+          [createKey('yGap', size)]: defaultYGap,
+          [createKey('fontSize', size)]: sizeFontSize
         }
       } = themeRef.value
 
       const cssVars = {
-        '--n-font-size': fontSize,
+        '--n-font-size': sizeFontSize || fontSize,
         '--n-font-weight': fontWeight,
         '--n-text-color': textColor,
         '--n-border-radius': borderRadius,
         '--n-border-color': borderColor,
         '--n-loading-color-start': loadingColorStart,
         '--n-loading-color-end': loadingColorEnd,
+        '--n-rect-size': rectSize || '10px',
         '--n-x-gap':
-          xGap === undefined
-            ? '3px'
-            : typeof xGap === 'number'
+          xGap !== undefined
+            ? typeof xGap === 'number'
               ? pxfy(xGap)
-              : xGap,
+              : xGap
+            : defaultXGap || '3px',
         '--n-y-gap':
-          yGap === undefined
-            ? '3px'
-            : typeof yGap === 'number'
+          yGap !== undefined
+            ? typeof yGap === 'number'
               ? pxfy(yGap)
               : yGap
+            : defaultYGap || '3px'
       }
 
       return cssVars
     })
     const themeClassHandle = inlineThemeDisabled
-      ? useThemeClass('heatmap', undefined, cssVarsRef, props)
+      ? useThemeClass(
+          'heatmap',
+          computed(() => {
+            const { size } = props
+            return size[0] // 使用 size 的首字母作为 hash
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     const mergedColorsRef = computed(() => {

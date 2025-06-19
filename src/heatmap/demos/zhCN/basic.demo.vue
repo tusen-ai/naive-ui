@@ -68,6 +68,7 @@ const showMonthLabels = ref(true)
 const showColorIndicator = ref(true)
 const loading = ref(false)
 const weekStartOn = ref<0 | 1 | 2 | 3 | 4 | 5 | 6>(0)
+const size = ref<'small' | 'medium' | 'large'>('medium')
 
 const weekStartOptions = [
   { label: '周日', value: 0 },
@@ -77,6 +78,12 @@ const weekStartOptions = [
   { label: '周四', value: 4 },
   { label: '周五', value: 5 },
   { label: '周六', value: 6 }
+]
+
+const sizeOptions = [
+  { label: '小', value: 'small' },
+  { label: '中', value: 'medium' },
+  { label: '大', value: 'large' }
 ]
 </script>
 
@@ -123,6 +130,17 @@ const weekStartOptions = [
         style="width: 120px"
       />
       <n-divider vertical />
+    </n-flex>
+    <n-flex>
+      <n-radio-group v-model:value="size" name="size">
+        <n-radio-button
+          v-for="option in sizeOptions"
+          :key="option.value"
+          :value="option.value"
+          :label="option.label"
+        />
+      </n-radio-group>
+      <n-divider vertical />
       <n-radio-group v-model:value="value" name="year">
         <n-radio-button
           v-for="range in dateRanges"
@@ -152,10 +170,11 @@ const weekStartOptions = [
 
     <n-flex align="center">
       <n-heatmap
-        :key="`heatmap-${value}-${weekStartOn}`"
+        :key="`heatmap-${value}-${weekStartOn}-${size}`"
         :data="yearData"
         :week-start-on="weekStartOn"
         :loading="loading"
+        :size="size"
         unit="activities"
         :show-week-labels="showWeekLabels"
         :show-month-labels="showMonthLabels"
