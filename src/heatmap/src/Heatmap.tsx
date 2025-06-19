@@ -1,6 +1,7 @@
 import type { PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type { PopoverProps } from '../../popover/src/Popover'
 import type { HeatmapTheme } from '../styles/light'
 import type { DayRect, RectData, WeekStartDay } from './interface'
 import { format, startOfWeek } from 'date-fns'
@@ -35,6 +36,11 @@ export type HeatmapThemeType = keyof typeof HeatmapThemes
 export interface HeatmapSlots {
   info?: () => VNode[]
   indicator?: () => VNode[]
+  tooltip?: (data: {
+    date: Date
+    value: number | null
+    unit: string
+  }) => VNode[]
 }
 
 export const heatmapProps = {
@@ -74,7 +80,11 @@ export const heatmapProps = {
     required: true
   },
   xGap: [Number, String] as PropType<number | string>,
-  yGap: [Number, String] as PropType<number | string>
+  yGap: [Number, String] as PropType<number | string>,
+  tooltip: {
+    type: [Boolean, Object] as PropType<PopoverProps | boolean>,
+    default: true
+  }
 } as const
 
 export type HeatmapProps = ExtractPublicPropTypes<typeof heatmapProps>
@@ -290,6 +300,8 @@ export default defineComponent({
                               data={day}
                               color={day.color}
                               unit={unit}
+                              tooltip={this.tooltip}
+                              tooltipSlot={$slots.tooltip}
                             />
                           </td>
                         ) : (

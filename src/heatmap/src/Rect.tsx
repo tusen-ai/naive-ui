@@ -1,7 +1,8 @@
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type { PopoverProps } from '../../popover/src/Popover'
 import type { RectData } from './interface'
 import { format } from 'date-fns'
-import { computed, defineComponent, h, type PropType } from 'vue'
+import { computed, defineComponent, h, type PropType, type VNode } from 'vue'
 import Tooltip from '../../tooltip/src/Tooltip'
 
 export const rectProps = {
@@ -21,7 +22,14 @@ export const rectProps = {
     type: String,
     required: true
   },
-  style: Object
+  style: Object,
+  tooltip: {
+    type: [Boolean, Object] as PropType<PopoverProps | boolean>,
+    default: true
+  },
+  tooltipSlot: Function as PropType<
+    (data: { date: Date, value: number | null, unit: string }) => VNode[]
+  >
 } as const
 
 export type RectProps = ExtractPublicPropTypes<typeof rectProps>
@@ -30,32 +38,61 @@ export default defineComponent({
   name: 'Rect',
   props: rectProps,
   setup(props) {
-    const cssVarsRef = computed(() => {
-      return {
-        '--n-rect-color': props.color
-      }
+    const cssVarsRef = computed(() => ({
+      '--n-rect-color': props.color
+    }))
+
+    const tooltipPropsRef = computed(() => {
+      return typeof props.tooltip === 'object' ? props.tooltip : {}
+    })
+
+    const defaultTooltipContentRef = computed(() => {
+      return `${props.data.value} ${props.unit} on ${format(props.data.date, 'yyyy-MM-dd')}`
+    })
+
+    const tooltipContentRef = computed(() => {
+      return props.tooltipSlot
+        ? props.tooltipSlot({
+            date: props.data.date,
+            value: props.data.value,
+            unit: props.unit
+          })
+        : defaultTooltipContentRef.value
     })
 
     return {
-      cssVars: cssVarsRef
+      cssVars: cssVarsRef,
+      tooltipProps: tooltipPropsRef,
+      tooltipContent: tooltipContentRef
     }
   },
   render() {
-    const { data, mergedClsPrefix, unit, style, cssVars } = this
-    return (
-      <Tooltip trigger="hover">
+    const {
+      mergedClsPrefix,
+      style,
+      cssVars,
+      tooltip,
+      tooltipProps,
+      tooltipContent
+    } = this
+
+    const rectElement = (
+      <div
+        class={`${mergedClsPrefix}-heatmap-rect`}
+        style={{
+          ...cssVars,
+          ...style
+        }}
+      />
+    )
+
+    return !tooltip ? (
+      rectElement
+    ) : (
+      <Tooltip trigger="hover" {...tooltipProps}>
         {{
-          default: () =>
-            `${data.value} ${unit} on ${format(data.date, 'yyyy-MM-dd')}`,
-          trigger: () => (
-            <div
-              class={`${mergedClsPrefix}-heatmap-rect`}
-              style={{
-                ...cssVars,
-                ...style
-              }}
-            />
-          )
+          default: () => tooltipContent,
+          trigger: () => rectElement
         }}
       </Tooltip>
     )
