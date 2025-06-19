@@ -122,6 +122,12 @@ const faIR: NLocale = {
     tipDownload: 'بارگیری',
     tipClose: 'بستن (Esc)',
     tipOriginalSize: 'اندازه اصلی تصویر'
+  },
+  Heatmap: {
+    less: 'less',
+    more: 'more',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

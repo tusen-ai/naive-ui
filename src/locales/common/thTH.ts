@@ -126,6 +126,12 @@ const thTH: NLocale = {
     tipClose: 'ปิด (Esc)',
     // TODO: translation
     tipOriginalSize: 'Zoom to original size'
+  },
+  Heatmap: {
+    less: 'น้อย',
+    more: 'มาก',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

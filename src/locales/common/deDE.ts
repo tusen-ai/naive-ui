@@ -122,6 +122,12 @@ const deDE: NLocale = {
     tipDownload: 'Download',
     tipClose: 'Schließen (Esc)',
     tipOriginalSize: 'Zoom zurücksetzen'
+  },
+  Heatmap: {
+    less: 'weniger',
+    more: 'mehr',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

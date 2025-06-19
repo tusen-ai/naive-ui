@@ -122,6 +122,12 @@ const kmKH: NLocale = {
     tipDownload: 'ទាញយក',
     tipClose: 'ការបិទ（Esc）',
     tipOriginalSize: 'ធ្វើមាត្រដ្ឋានទៅទំហំដើម'
+  },
+  Heatmap: {
+    less: 'less',
+    more: 'more',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

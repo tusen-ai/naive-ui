@@ -126,6 +126,12 @@ const esAR: NLocale = {
     tipClose: 'Cerrar (Esc)',
     // TODO: translation
     tipOriginalSize: 'Zoom to original size'
+  },
+  Heatmap: {
+    less: 'menos',
+    more: 'más',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 
