@@ -12,6 +12,7 @@ import type { AvatarTheme } from '../../avatar/styles'
 import type { BackTopTheme } from '../../back-top/styles'
 import type { BadgeTheme } from '../../badge/styles'
 import type { BreadcrumbTheme } from '../../breadcrumb/styles'
+import type { BubbleTheme } from '../../bubble/styles/light'
 import type { ButtonGroupTheme } from '../../button-group/styles/light'
 import type { Size as ButtonSize } from '../../button/src/interface'
 import type { ButtonTheme } from '../../button/styles'
@@ -62,6 +63,7 @@ import type { ListTheme } from '../../list/styles'
 import type { LoadingBarTheme } from '../../loading-bar/styles'
 import type { NDateLocale, NLocale } from '../../locales'
 import type { LogTheme } from '../../log/styles'
+import type { MarkdownTheme } from '../../markdown/styles'
 import type { MarqueeTheme } from '../../marquee/styles'
 import type { MentionTheme } from '../../mention/styles'
 import type { MenuTheme } from '../../menu/styles'
@@ -99,13 +101,12 @@ import type { TooltipTheme } from '../../tooltip/styles'
 import type { TransferTheme } from '../../transfer/styles'
 import type { TreeSelectTheme } from '../../tree-select/styles'
 import type { TreeTheme } from '../../tree/styles'
+import type { TypingBubbleTheme } from '../../typing-bubble/styles/light'
 import type { TypographyTheme } from '../../typography/styles'
 import type { UploadTheme } from '../../upload/styles'
 import type { WatermarkTheme } from '../../watermark/styles'
 import type { GlobalTheme, GlobalThemeOverrides } from './interface'
 import type { Katex } from './katex'
-import { BubbleTheme } from '../../bubble/styles/light'
-import { TypingBubbleTheme } from '../../typing-bubble/styles/light'
 
 export interface GlobalThemeWithoutCommon {
   Alert?: AlertTheme
@@ -201,6 +202,7 @@ export interface GlobalThemeWithoutCommon {
   InternalSelection?: InternalSelectionTheme
   InputOtp?: InputOtpTheme
   TypingBubble?: TypingBubbleTheme
+  Markdown?: MarkdownTheme
 }
 
 export interface GlobalComponentConfig {

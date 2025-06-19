@@ -429,10 +429,10 @@ export const enComponentRoutes = [
     component: () =>
       import('../../src/typing-bubble/demos/enUS/index.demo-entry.md')
   },
-    {
-    path: 'rich-text',
+  {
+    path: 'markdown',
     component: () =>
-      import('../../src/rich-text/demos/enUS/index.demo-entry.md')
+      import('../../src/markdown/demos/enUS/index.demo-entry.md')
   },
   {
     path: 'list',
@@ -777,9 +777,9 @@ export const zhComponentRoutes = [
       import('../../src/typing-bubble/demos/zhCN/index.demo-entry.md')
   },
   {
-    path: 'rich-text',
+    path: 'markdown',
     component: () =>
-      import('../../src/rich-text/demos/zhCN/index.demo-entry.md')
+      import('../../src/markdown/demos/zhCN/index.demo-entry.md')
   },
   {
     path: 'popconfirm',

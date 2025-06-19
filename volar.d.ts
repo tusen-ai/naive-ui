@@ -114,7 +114,6 @@ declare module 'vue' {
     NRadioGroup: (typeof import('naive-ui'))['NRadioGroup']
     NRate: (typeof import('naive-ui'))['NRate']
     NResult: (typeof import('naive-ui'))['NResult']
-    NRichText: (typeof import('naive-ui'))['NRichText']
     NRow: (typeof import('naive-ui'))['NRow']
     NScrollbar: (typeof import('naive-ui'))['NScrollbar']
     NSelect: (typeof import('naive-ui'))['NSelect']
@@ -154,6 +153,7 @@ declare module 'vue' {
     NUploadTrigger: (typeof import('naive-ui'))['NUploadTrigger']
     NVirtualList: (typeof import('naive-ui'))['NVirtualList']
     NWatermark: (typeof import('naive-ui'))['NWatermark']
+    NMarkdown: (typeof import('naive-ui'))['NMarkdown']
   }
 }
 export {}

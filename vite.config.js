@@ -66,7 +66,8 @@ module.exports = {
     output: {
       manualChunks: {
         'grapheme-splitter': ['grapheme-splitter'],
-        katex: ['katex']
+        katex: ['katex'],
+        remark: ['remark']
       }
     },
     rollupOptions: {

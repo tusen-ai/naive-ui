@@ -599,10 +599,10 @@ export function createComponentMenuOptions({ lang, theme }) {
           isNew: true
         },
         {
-          en: 'richText',
-          zh: '富文本',
+          en: 'markdown',
+          zh: 'Markdown',
           enSuffix: true,
-          path: '/rich-text',
+          path: '/markdown',
           isNew: true
         }
       ]
