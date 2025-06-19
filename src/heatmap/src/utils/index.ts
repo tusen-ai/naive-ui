@@ -164,3 +164,24 @@ export function generateHeatmapData(range?: 'recent' | number): RectData[] {
     return { date: day, value }
   })
 }
+
+/**
+ * This creates a 7x53 matrix (typical year layout) filled with loading cells
+ */
+export function createLoadingMatrix(
+  weekStartOn: WeekStartDay = 0
+): DayRect[][] {
+  const rows = 7
+  const cols = 53 // Approximate number of weeks in a year
+  const currentDate = new Date()
+
+  return Array.from({ length: rows }, (_, row) =>
+    Array.from({ length: cols }, (_, col) => ({
+      date: currentDate,
+      value: 0,
+      color: '#000000', // Will be overridden by loading styles
+      dayOfWeek: (weekStartOn + row) % 7,
+      rowIndex: row,
+      colIndex: col
+    })))
+}

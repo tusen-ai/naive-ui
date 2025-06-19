@@ -23,6 +23,10 @@ export const rectProps = {
     required: true
   },
   style: Object,
+  loading: {
+    type: Boolean,
+    default: false
+  },
   tooltip: {
     type: [Boolean, Object] as PropType<PopoverProps | boolean>,
     default: true
@@ -73,12 +77,16 @@ export default defineComponent({
       cssVars,
       tooltip,
       tooltipProps,
-      tooltipContent
+      tooltipContent,
+      loading
     } = this
 
     const rectElement = (
       <div
-        class={`${mergedClsPrefix}-heatmap-rect`}
+        class={[
+          `${mergedClsPrefix}-heatmap-rect`,
+          loading && `${mergedClsPrefix}-heatmap-rect--loading`
+        ]}
         style={{
           ...cssVars,
           ...style
@@ -86,7 +94,7 @@ export default defineComponent({
       />
     )
 
-    return !tooltip ? (
+    return !tooltip || loading ? (
       rectElement
     ) : (
       <Tooltip trigger="hover" {...tooltipProps}>

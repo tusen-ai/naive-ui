@@ -20,7 +20,12 @@ import heatmapLight from '../styles/light'
 import ColorIndicator from './ColorIndicator'
 import Rect from './Rect'
 import style from './styles/index.cssr'
-import { completeDataGaps, createDayRect, createSparseMatrix } from './utils'
+import {
+  completeDataGaps,
+  createDayRect,
+  createLoadingMatrix,
+  createSparseMatrix
+} from './utils'
 
 export const HeatmapThemes = {
   github: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
@@ -58,10 +63,6 @@ export const heatmapProps = {
   weekStartOn: {
     type: Number as PropType<WeekStartDay>,
     default: 0
-  },
-  type: {
-    type: String as PropType<'month' | 'year'>,
-    default: 'year'
   },
   showColorIndicator: {
     type: Boolean,
@@ -109,7 +110,15 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const { xGap, yGap } = props
       const {
-        self: { fontSize, fontWeight, textColor, borderRadius, borderColor }
+        self: {
+          fontSize,
+          fontWeight,
+          textColor,
+          borderRadius,
+          borderColor,
+          loadingColorStart,
+          loadingColorEnd
+        }
       } = themeRef.value
 
       const cssVars = {
@@ -118,6 +127,8 @@ export default defineComponent({
         '--n-text-color': textColor,
         '--n-border-radius': borderRadius,
         '--n-border-color': borderColor,
+        '--n-loading-color-start': loadingColorStart,
+        '--n-loading-color-end': loadingColorEnd,
         '--n-x-gap':
           xGap === undefined
             ? '3px'
@@ -155,6 +166,10 @@ export default defineComponent({
     })
 
     const heatmapMatrixRef = computed(() => {
+      if (props.loading) {
+        return createLoadingMatrix(props.weekStartOn)
+      }
+
       const data = normalizedDataRef.value
 
       const { weekStartOn } = props
@@ -192,6 +207,19 @@ export default defineComponent({
     })
 
     const monthLabelsRef = computed(() => {
+      if (props.loading) {
+        const { monthFormat } = localeRef.value
+        const { locale } = dateLocaleRef.value
+        const currentYear = new Date().getFullYear()
+        return Array.from({ length: 12 }, (_, i) => {
+          const monthDate = new Date(currentYear, i, 1)
+          return {
+            name: format(monthDate, monthFormat, { locale }),
+            colSpan: Math.floor(53 / 12)
+          }
+        })
+      }
+
       const matrix = heatmapMatrixRef.value
       const cols = matrix[0].length
       const { monthFormat } = localeRef.value
@@ -240,6 +268,7 @@ export default defineComponent({
   },
   render() {
     const {
+      loading,
       showWeekLabels,
       showMonthLabels,
       showColorIndicator,
@@ -263,10 +292,12 @@ export default defineComponent({
             {showMonthLabels && (
               <thead>
                 <tr>
-                  <th
-                    class={`${mergedClsPrefix}-heatmap__week-header-cell`}
-                  >
-                  </th>
+                  {showWeekLabels && (
+                    <th
+                      class={`${mergedClsPrefix}-heatmap__week-header-cell`}
+                    >
+                    </th>
+                  )}
                   {monthLabels.map((monthLabel, index) => (
                     <th
                       key={`month-${index}`}
@@ -302,6 +333,7 @@ export default defineComponent({
                               unit={unit}
                               tooltip={this.tooltip}
                               tooltipSlot={$slots.tooltip}
+                              loading={loading}
                             />
                           </td>
                         ) : (
@@ -334,7 +366,7 @@ export default defineComponent({
           )}
           <div class={`${mergedClsPrefix}-heatmap__footer__indicator`}>
             {resolveSlot($slots.indicator, () => [
-              showColorIndicator && (
+              !loading && showColorIndicator && (
                 <ColorIndicator
                   colors={mergedColors}
                   mergedClsPrefix={mergedClsPrefix}

@@ -37,7 +37,9 @@ export function self(vars: ThemeCommonVars) {
     cellColor: cardColor,
     cellColorModal: modalColor,
     cellColorPopover: popoverColor,
-    barColor: primaryColor
+    barColor: primaryColor,
+    loadingColorStart: 'rgba(0, 0, 0, 0.06)',
+    loadingColorEnd: 'rgba(0, 0, 0, 0.12)'
   }
 }
 

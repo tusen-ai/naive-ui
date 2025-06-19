@@ -1,4 +1,4 @@
-import { c, cB, cE } from '../../../_utils/cssr'
+import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 // vars:
 // --n-font-size
@@ -7,9 +7,25 @@ import { c, cB, cE } from '../../../_utils/cssr'
 // --n-border-radius
 // --n-x-gap
 // --n-y-gap
+// --n-loading-color-start
+// --n-loading-color-end
 // --n-rect-color (for individual rect background color)
 
 export default c([
+  c('@keyframes heatmap-loading', `
+    0% {
+      background: var(--n-loading-color-start);
+    }
+    40% {
+      background: var(--n-loading-color-end);
+    }
+    80% {
+      background: var(--n-loading-color-start);
+    }
+    100% {
+      background: var(--n-loading-color-start);
+    }
+  `),
   cB('heatmap', `
     display: flex;
     flex-direction: column;
@@ -64,6 +80,13 @@ export default c([
       width: 11px;
       height: 11px;
     `),
+    cE('loading-cell', `
+      width: 11px;
+      height: 11px;
+      border-radius: var(--n-border-radius);
+      animation: 2s heatmap-loading infinite cubic-bezier(0.36, 0, 0.64, 1);
+      background: var(--n-loading-color-start);
+    `),
     cE('footer', `
       display: flex;
       justify-content: space-between;
@@ -92,7 +115,13 @@ export default c([
     cursor: pointer;
     transition: all 0.1s ease-in-out;
     background-color: var(--n-rect-color);
-  `),
+  `, [
+    cM('loading', `
+      cursor: default;
+      animation: 2s heatmap-loading infinite cubic-bezier(0.36, 0, 0.64, 1);
+      background: var(--n-loading-color-start) !important;
+    `)
+  ]),
   cB('heatmap-color-indicator', `
     display: flex;
     align-items: center;

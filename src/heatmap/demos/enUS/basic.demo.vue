@@ -55,8 +55,10 @@ const dataStats = computed(() => {
   }
 })
 
-const showLabels = ref(true)
+const showWeekLabels = ref(true)
+const showMonthLabels = ref(true)
 const showColorIndicator = ref(true)
+const loading = ref(false)
 const weekStartOn = ref<0 | 1 | 2 | 3 | 4 | 5 | 6>(0)
 
 const weekStartOptions = [
@@ -83,12 +85,20 @@ const weekStartOptions = [
 
     <n-card title="Display Controls" size="small" style="min-width: 600px">
       <n-space align="center" justify="start">
-        <n-switch v-model:value="showLabels">
+        <n-switch v-model:value="showWeekLabels">
           <template #checked>
-            Show Labels
+            Show Week Labels
           </template>
           <template #unchecked>
-            Hide Labels
+            Hide Week Labels
+          </template>
+        </n-switch>
+        <n-switch v-model:value="showMonthLabels">
+          <template #checked>
+            Show Month Labels
+          </template>
+          <template #unchecked>
+            Hide Month Labels
           </template>
         </n-switch>
         <n-switch v-model:value="showColorIndicator">
@@ -97,6 +107,14 @@ const weekStartOptions = [
           </template>
           <template #unchecked>
             Hide Color Indicator
+          </template>
+        </n-switch>
+        <n-switch v-model:value="loading">
+          <template #checked>
+            Loading
+          </template>
+          <template #unchecked>
+            Normal
           </template>
         </n-switch>
         <n-divider vertical />
@@ -130,8 +148,10 @@ const weekStartOptions = [
       :key="`heatmap-${value}-${weekStartOn}`"
       :data="yearData"
       :week-start-on="weekStartOn"
+      :loading="loading"
       unit="activities"
-      :show-labels="showLabels"
+      :show-week-labels="showWeekLabels"
+      :show-month-labels="showMonthLabels"
       :show-color-indicator="showColorIndicator"
     />
   </n-space>

@@ -63,8 +63,10 @@ const dataStats = computed(() => {
   }
 })
 
-const showLabels = ref(true)
+const showWeekLabels = ref(true)
+const showMonthLabels = ref(true)
 const showColorIndicator = ref(true)
+const loading = ref(false)
 const weekStartOn = ref<0 | 1 | 2 | 3 | 4 | 5 | 6>(0)
 
 const weekStartOptions = [
@@ -81,12 +83,20 @@ const weekStartOptions = [
 <template>
   <n-flex vertical>
     <n-flex align="center" justify="start">
-      <n-switch v-model:value="showLabels">
+      <n-switch v-model:value="showWeekLabels">
         <template #checked>
-          显示标签
+          显示周标签
         </template>
         <template #unchecked>
-          隐藏标签
+          隐藏周标签
+        </template>
+      </n-switch>
+      <n-switch v-model:value="showMonthLabels">
+        <template #checked>
+          显示月份标签
+        </template>
+        <template #unchecked>
+          隐藏月份标签
         </template>
       </n-switch>
       <n-switch v-model:value="showColorIndicator">
@@ -95,6 +105,14 @@ const weekStartOptions = [
         </template>
         <template #unchecked>
           隐藏颜色指示器
+        </template>
+      </n-switch>
+      <n-switch v-model:value="loading">
+        <template #checked>
+          加载中
+        </template>
+        <template #unchecked>
+          正常显示
         </template>
       </n-switch>
       <n-divider vertical />
@@ -137,8 +155,10 @@ const weekStartOptions = [
         :key="`heatmap-${value}-${weekStartOn}`"
         :data="yearData"
         :week-start-on="weekStartOn"
+        :loading="loading"
         unit="activities"
-        :show-labels="showLabels"
+        :show-week-labels="showWeekLabels"
+        :show-month-labels="showMonthLabels"
         :show-color-indicator="showColorIndicator"
       />
     </n-flex>
