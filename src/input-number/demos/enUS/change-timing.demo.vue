@@ -4,16 +4,10 @@
 Set `update-value-on-input` to `false`, the value won't be changed on input.
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      value: ref(35)
-    }
-  }
-})
+const value = ref(35)
 </script>
 
 <template>

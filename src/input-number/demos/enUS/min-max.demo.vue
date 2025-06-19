@@ -4,16 +4,10 @@
 You can set minimum and maximum values too.
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      value: ref(null)
-    }
-  }
-})
+const value = ref(null)
 </script>
 
 <template>
