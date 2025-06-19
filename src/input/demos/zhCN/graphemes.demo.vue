@@ -4,18 +4,11 @@
 浏览器默认的 `maxlength` 和 `minlength` 以及 naive-ui 自带的字数统计功能并不能准确地拆分所有的字符串，你可以使用 `count-graphemes` 属性来精确的测量文字长度。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import GraphemeSplitter from 'grapheme-splitter'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const splitter = new GraphemeSplitter()
-    return {
-      countGraphemes: (value: string) => splitter.countGraphemes(value)
-    }
-  }
-})
+const splitter = new GraphemeSplitter()
+const countGraphemes = (value: string) => splitter.countGraphemes(value)
 </script>
 
 <template>

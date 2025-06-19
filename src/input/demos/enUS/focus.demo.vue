@@ -4,37 +4,35 @@
  Clear. Focus. Blur. Selection. Scroll.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { InputInst } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const inputInstRef = ref<InputInst | null>(null)
-    return {
-      inputInstRef,
-      inputValue: ref('I heard you\'re going to select all? '.repeat(4).trim()),
-      handleClear() {
-        inputInstRef.value?.clear()
-      },
-      handleFocus() {
-        inputInstRef.value?.focus()
-      },
-      handleBlur() {
-        inputInstRef.value?.blur()
-      },
-      handleSelect() {
-        inputInstRef.value?.select()
-      },
-      handleScrollEnd() {
-        inputInstRef.value?.scrollTo({
-          behavior: 'smooth',
-          left: 10000
-        })
-      }
-    }
-  }
-})
+const inputInstRef = ref<InputInst | null>(null)
+const inputValue = ref('I heard you\'re going to select all? '.repeat(4).trim())
+
+function handleClear() {
+  inputInstRef.value?.clear()
+}
+
+function handleFocus() {
+  inputInstRef.value?.focus()
+}
+
+function handleBlur() {
+  inputInstRef.value?.blur()
+}
+
+function handleSelect() {
+  inputInstRef.value?.select()
+}
+
+function handleScrollEnd() {
+  inputInstRef.value?.scrollTo({
+    behavior: 'smooth',
+    left: 10000
+  })
+}
 </script>
 
 <template>

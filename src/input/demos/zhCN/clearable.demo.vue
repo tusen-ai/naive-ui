@@ -4,17 +4,8 @@
 让输入值可以清除（当有值的时候）。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { TrashBinOutline } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup() {
-    return {
-      TrashBinOutline
-    }
-  }
-})
 </script>
 
 <template>

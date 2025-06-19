@@ -4,18 +4,11 @@
 文本输入可以被禁用。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { FlashOutline } from '@vicons/ionicons5'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      FlashOutline,
-      active: ref(false)
-    }
-  }
-})
+const active = ref(false)
 </script>
 
 <template>
@@ -35,7 +28,7 @@ export default defineComponent({
       round
     />
     <n-input pair separator="to" clearable :disabled="!active">
-      <template #affix>
+      <template #suffix>
         <n-icon :component="FlashOutline" />
       </template>
     </n-input>

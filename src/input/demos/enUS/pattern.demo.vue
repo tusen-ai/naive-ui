@@ -4,17 +4,9 @@
 Use `allow-input` to limit input value to desired format. You can use it to achieve trim effect.
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup() {
-    return {
-      onlyAllowNumber: (value: string) => !value || /^\d+$/.test(value),
-      noSideSpace: (value: string) => !/ /g.test(value)
-    }
-  }
-})
+<script lang="ts" setup>
+const onlyAllowNumber = (value: string) => !value || /^\d+$/.test(value)
+const noSideSpace = (value: string) => !/ /g.test(value)
 </script>
 
 <template>
