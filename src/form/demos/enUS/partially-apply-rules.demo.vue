@@ -4,57 +4,54 @@
 During the validation, you may not want to validate all items. You can use the second parameter of `form.validate` to control which rules to be applied.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { FormInst } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const formInstRef = ref<FormInst | null>(null)
-    return {
-      clear() {
-        formInstRef.value?.restoreValidation()
-      },
-      validateAll() {
-        formInstRef.value?.validate((errors) => {
-          if (errors) {
-            console.error(errors)
-          }
-        })
-      },
-      validatePartial() {
-        formInstRef.value?.validate(
-          (errors) => {
-            if (errors) {
-              console.error(errors)
-            }
-          },
-          (rule) => {
-            return rule?.key === 'a'
-          }
-        )
-      },
-      formInstRef,
-      model: ref({
-        fieldA: '',
-        fieldB: ''
-      }),
-      rules: {
-        fieldA: {
-          key: 'a',
-          required: true,
-          min: 3,
-          message: 'Min length is 3'
-        },
-        fieldB: {
-          required: true,
-          min: 2,
-          message: 'Min length is 2'
-        }
-      }
-    }
-  }
+const formInstRef = ref<FormInst | null>(null)
+const model = ref({
+  fieldA: '',
+  fieldB: ''
 })
+
+const rules = {
+  fieldA: {
+    key: 'a',
+    required: true,
+    min: 3,
+    message: 'Min length is 3'
+  },
+  fieldB: {
+    required: true,
+    min: 2,
+    message: 'Min length is 2'
+  }
+}
+
+function clear() {
+  formInstRef.value?.restoreValidation()
+}
+
+function validateAll() {
+  formInstRef.value?.validate((errors) => {
+    if (errors) {
+      console.error(errors)
+    }
+  })
+}
+
+function validatePartial() {
+  formInstRef.value?.validate(
+    (errors) => {
+      if (errors) {
+        console.error(errors)
+      }
+    },
+    (rule) => {
+      return rule?.key === 'a'
+    }
+  )
+}
 </script>
 
 <template>

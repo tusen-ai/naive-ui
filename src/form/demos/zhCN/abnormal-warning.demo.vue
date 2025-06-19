@@ -4,59 +4,54 @@
 你可能需要对可能异常的值向用户显示警告，但是不希望 `validate` 方法抛出异常， 这种情况下 `FormItemRule` 的 `level` 属性可以帮到你（`level: 'warning'`）。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { FormInst, FormItemRule, FormRules } from 'naive-ui'
 import { useMessage } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const formRef = ref<FormInst | null>(null)
-    const message = useMessage()
-    return {
-      formRef,
-      formValue: ref({
-        count: undefined
-      }),
-      rules: {
-        count: [
-          {
-            required: true,
-            message: '请作答',
-            type: 'number',
-            trigger: ['input', 'blur']
-          },
-          {
-            trigger: ['input', 'blur'],
-            level: 'warning',
-            validator(_rule: FormItemRule, value: number) {
-              if (value !== 4) {
-                return new Error('你确定吗？')
-              }
-              return true
-            }
-          }
-        ]
-      } satisfies FormRules,
-      handleValidateClick(e: MouseEvent) {
-        e.preventDefault()
-        formRef.value?.validate((errors, { warnings }) => {
-          if (errors) {
-            console.error(errors)
-            message.error('校验未通过')
-          }
-          else if (warnings) {
-            message.warning('校验通过但是留意还有警告')
-            console.warn(warnings)
-          }
-          else {
-            message.success('完美')
-          }
-        })
+const formRef = ref<FormInst | null>(null)
+const message = useMessage()
+const formValue = ref({
+  count: undefined
+})
+
+const rules = {
+  count: [
+    {
+      required: true,
+      message: '请作答',
+      type: 'number',
+      trigger: ['input', 'blur']
+    },
+    {
+      trigger: ['input', 'blur'],
+      level: 'warning',
+      validator(_rule: FormItemRule, value: number) {
+        if (value !== 4) {
+          return new Error('你确定吗？')
+        }
+        return true
       }
     }
-  }
-})
+  ]
+} satisfies FormRules
+
+function handleValidateClick(e: MouseEvent) {
+  e.preventDefault()
+  formRef.value?.validate((errors, { warnings }) => {
+    if (errors) {
+      console.error(errors)
+      message.error('校验未通过')
+    }
+    else if (warnings) {
+      message.warning('校验通过但是留意还有警告')
+      console.warn(warnings)
+    }
+    else {
+      message.success('完美')
+    }
+  })
+}
 </script>
 
 <template>

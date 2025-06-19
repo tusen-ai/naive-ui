@@ -4,30 +4,18 @@
 If `show-label` will default to `true` if not set and inherit `n-form`'s `show-label`.
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const formRef = ref(null)
-    const formShowLabel = ref(true)
-    const formItemShowLabel = ref(true)
-    return {
-      formRef,
-      formValue: ref({
-        user: {
-          name: '',
-          age: ''
-        },
-        phone: ''
-      }),
-      formShowLabel,
-      formItemShowLabel,
-      switchStyle: {
-        marginBottom: '12px'
-      }
-    }
-  }
+const formRef = ref(null)
+const formShowLabel = ref(true)
+const formItemShowLabel = ref(true)
+const formValue = ref({
+  user: {
+    name: '',
+    age: ''
+  },
+  phone: ''
 })
 </script>
 

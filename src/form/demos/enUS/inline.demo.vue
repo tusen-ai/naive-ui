@@ -4,59 +4,54 @@
 An example of an inline form.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { FormInst } from 'naive-ui'
 import { useMessage } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const formRef = ref<FormInst | null>(null)
-    const message = useMessage()
-    return {
-      formRef,
-      size: ref<'small' | 'medium' | 'large'>('medium'),
-      formValue: ref({
-        user: {
-          name: '',
-          age: ''
-        },
-        phone: ''
-      }),
-      rules: {
-        user: {
-          name: {
-            required: true,
-            message: 'Please input your name',
-            trigger: 'blur'
-          },
-          age: {
-            required: true,
-            message: 'Please input your age',
-            trigger: ['input', 'blur']
-          }
-        },
-        phone: {
-          required: true,
-          message: 'Please input your number',
-          trigger: ['input']
-        }
-      },
-      handleValidateClick(e: MouseEvent) {
-        e.preventDefault()
-        formRef.value?.validate((errors) => {
-          if (!errors) {
-            message.success('Valid')
-          }
-          else {
-            console.log(errors)
-            message.error('Invalid')
-          }
-        })
-      }
-    }
-  }
+const formRef = ref<FormInst | null>(null)
+const message = useMessage()
+const size = ref<'small' | 'medium' | 'large'>('medium')
+const formValue = ref({
+  user: {
+    name: '',
+    age: ''
+  },
+  phone: ''
 })
+
+const rules = {
+  user: {
+    name: {
+      required: true,
+      message: 'Please input your name',
+      trigger: 'blur'
+    },
+    age: {
+      required: true,
+      message: 'Please input your age',
+      trigger: ['input', 'blur']
+    }
+  },
+  phone: {
+    required: true,
+    message: 'Please input your number',
+    trigger: ['input']
+  }
+}
+
+function handleValidateClick(e: MouseEvent) {
+  e.preventDefault()
+  formRef.value?.validate((errors) => {
+    if (!errors) {
+      message.success('Valid')
+    }
+    else {
+      console.log(errors)
+      message.error('Invalid')
+    }
+  })
+}
 </script>
 
 <template>
