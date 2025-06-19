@@ -2,16 +2,10 @@
 # Max tag count
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      tags: ref(['teacher', 'programmer'])
-    }
-  }
-})
+const tags = ref(['teacher', 'programmer'])
 </script>
 
 <template>
