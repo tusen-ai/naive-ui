@@ -4,40 +4,34 @@
 一个选项组看起来就挺舒服。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      value: ref(null),
-      songs: [
-        {
-          value: 'Rock\'n\'Roll Star',
-          label: 'Rock\'n\'Roll Star'
-        },
-        {
-          value: 'Shakermaker',
-          label: 'Shakermaker'
-        },
-        {
-          value: 'Live Forever',
-          label: 'Live Forever'
-        },
-        {
-          value: 'Up in the Sky',
-          label: 'Up in the Sky'
-        },
-        {
-          value: '...',
-          label: '...'
-        }
-      ].map((s) => {
-        s.value = s.value.toLowerCase()
-        return s
-      })
-    }
+const value = ref(null)
+const songs = [
+  {
+    value: 'Rock\'n\'Roll Star',
+    label: 'Rock\'n\'Roll Star'
+  },
+  {
+    value: 'Shakermaker',
+    label: 'Shakermaker'
+  },
+  {
+    value: 'Live Forever',
+    label: 'Live Forever'
+  },
+  {
+    value: 'Up in the Sky',
+    label: 'Up in the Sky'
+  },
+  {
+    value: '...',
+    label: '...'
   }
+].map((s) => {
+  s.value = s.value.toLowerCase()
+  return s
 })
 </script>
 

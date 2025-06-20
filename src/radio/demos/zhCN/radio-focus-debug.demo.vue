@@ -2,16 +2,10 @@
 # 基础用法
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  data() {
-    return {
-      value: null
-    }
-  }
-})
+const value = ref(null)
 </script>
 
 <template>
