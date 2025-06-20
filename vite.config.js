@@ -1,5 +1,5 @@
-const path = require('node:path')
 const dns = require('node:dns')
+const path = require('node:path')
 const process = require('node:process')
 const { babel } = require('@rollup/plugin-babel')
 const createDemoPlugin = require('./build/vite-plugin-demo')
@@ -67,7 +67,14 @@ module.exports = {
       manualChunks: {
         'grapheme-splitter': ['grapheme-splitter'],
         katex: ['katex'],
-        remark: ['remark']
+        'remark': [
+          'unified',
+          'remark-gfm',
+          'remark-parse',
+          'remark-rehype',
+          'rehype-sanitize',
+          'rehype-stringify'
+        ],
       }
     },
     rollupOptions: {

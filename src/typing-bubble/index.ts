@@ -1,1 +1,1 @@
-export { default as TypingBubble } from './src/TypingBubble'
+export { default as NTypingBubble } from './src/TypingBubble'

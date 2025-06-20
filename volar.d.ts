@@ -154,6 +154,7 @@ declare module 'vue' {
     NVirtualList: (typeof import('naive-ui'))['NVirtualList']
     NWatermark: (typeof import('naive-ui'))['NWatermark']
     NMarkdown: (typeof import('naive-ui'))['NMarkdown']
+    NTypingBubble: (typeof import('naive-ui'))['NTypingBubble']
   }
 }
 export {}

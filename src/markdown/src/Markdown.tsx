@@ -1,21 +1,31 @@
+import type { Preset } from 'unified'
 import type { CSSProperties } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { MarkdownTheme } from '../styles/light'
-import { computed, defineComponent, h, toRef } from 'vue'
+import { unified } from 'unified'
+import { computed, defineComponent, h, inject, toRef } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { configProviderInjectionKey } from '../../config-provider/src/context'
 import bubbleLight from '../styles/light'
-import { MarkdownProps } from './public-types'
 import style from './styles/index.cssr'
 
 export const bubbleProps = {
   ...(useTheme.props as ThemeProps<MarkdownTheme>),
-  ...MarkdownProps
+  content: {
+    type: String,
+    default: ''
+  },
+  mdPlugins: {
+    type: Array as () => any,
+    default: () => []
+  }
 }
 
 export default defineComponent({
   name: 'Markdown',
   props: bubbleProps,
   setup(props) {
+    const configProviderContext = inject(configProviderInjectionKey)
     const { inlineThemeDisabled, mergedClsPrefixRef }
             = useConfig(props)
     const themeRef = useTheme(
@@ -35,9 +45,31 @@ export default defineComponent({
       ? useThemeClass('Markdown', undefined, cssVarsRef, props)
       : undefined
 
+    const md = unified()
+
+    function initMarkdownPlugins() {
+      if (configProviderContext?.mergedMdPluginsRef.value) {
+        configProviderContext?.mergedMdPluginsRef.value.forEach((plugin: Preset | null | undefined) => {
+          md.use(plugin)
+        })
+      }
+      if (props.mdPlugins.length) {
+        props.mdPlugins.forEach((plugin: Preset | null | undefined) => {
+          md.use(plugin)
+        })
+      }
+    }
+    initMarkdownPlugins()
+
     const content = toRef(props, 'content')
     const renderedContent = computed(() => {
-      return content.value
+      try {
+        const res = md.processSync(content.value)
+        return res.toString()
+      }
+      catch {
+        return 'markdown渲染异常'
+      }
     })
 
     return {
@@ -51,7 +83,6 @@ export default defineComponent({
   render() {
     const {
       mergedClsPrefix,
-      mergedTheme,
       renderedContent
     } = this
     return (

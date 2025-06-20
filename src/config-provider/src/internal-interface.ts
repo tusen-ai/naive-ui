@@ -269,6 +269,7 @@ export interface ConfigProviderInjection {
   mergedDateLocaleRef: Ref<NDateLocale | undefined>
   mergedHljsRef: Ref<Hljs | undefined>
   mergedKatexRef: Ref<Katex | undefined>
+  mergedMdPluginsRef: Ref<any>
   mergedComponentPropsRef: Ref<GlobalComponentConfig | undefined>
   mergedIconsRef: Ref<GlobalIconConfig | undefined>
   mergedThemeRef: Ref<GlobalTheme | undefined>

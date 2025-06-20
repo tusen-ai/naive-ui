@@ -1,7 +1,7 @@
 <markdown>
-# 基础用法
+# 基本使用
 </markdown>
 
 <template>
-    <n-bubble content="hello world  !" />
+  <n-typing-bubble content="听下面一段对话，每段对话有几个小题，从题中所给的A、B、C三个选项中选出最佳选项，并标在试卷的相应位置。听完每段对话后，你都有10秒钟的时间来回答有关小题和阅读下一小题。每段对话仅读一遍。例如，你有5秒钟的时间阅读试卷上的例题。" />
 </template>
