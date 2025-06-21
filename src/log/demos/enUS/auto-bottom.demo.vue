@@ -4,9 +4,9 @@
 Scroll to the latest when log is gradually increasing.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { LogInst } from 'naive-ui'
-import { defineComponent, nextTick, onMounted, ref, watchEffect } from 'vue'
+import { nextTick, onMounted, ref, watchEffect } from 'vue'
 
 function log() {
   const l: string[] = []
@@ -16,40 +16,30 @@ function log() {
   return `${l.join('\n')}\n`
 }
 
-export default defineComponent({
-  setup() {
-    const logRef = ref(log())
-    const logInstRef = ref<LogInst | null>(null)
-    const startRef = ref(false)
-    const timerRef = ref<number | null>(null)
-    const handleClick = () => {
-      startRef.value = !startRef.value
-      if (startRef.value) {
-        timerRef.value = window.setInterval(() => {
-          logRef.value = logRef.value + log()
-        }, 1000)
-      }
-      else if (timerRef.value) {
-        clearInterval(timerRef.value)
-        timerRef.value = null
-      }
-    }
-    onMounted(() => {
-      watchEffect(() => {
-        if (logRef.value) {
-          nextTick(() => {
-            logInstRef.value?.scrollTo({ position: 'bottom', silent: true })
-          })
-        }
-      })
-    })
-
-    return {
-      log: logRef,
-      logInst: logInstRef,
-      handleClick
-    }
+const logRef = ref(log())
+const logInstRef = ref<LogInst | null>(null)
+const startRef = ref(false)
+const timerRef = ref<number | null>(null)
+function handleClick() {
+  startRef.value = !startRef.value
+  if (startRef.value) {
+    timerRef.value = window.setInterval(() => {
+      logRef.value = logRef.value + log()
+    }, 1000)
   }
+  else if (timerRef.value) {
+    clearInterval(timerRef.value)
+    timerRef.value = null
+  }
+}
+onMounted(() => {
+  watchEffect(() => {
+    if (logRef.value) {
+      nextTick(() => {
+        logInstRef.value?.scrollTo({ position: 'bottom', silent: true })
+      })
+    }
+  })
 })
 </script>
 
@@ -58,6 +48,6 @@ export default defineComponent({
     <n-button @click="handleClick">
       Add Data
     </n-button>
-    <n-log ref="logInst" :log="log" language="naive-log" trim />
+    <n-log ref="logInstRef" :log="logRef" language="naive-log" trim />
   </n-space>
 </template>

@@ -2,8 +2,8 @@
 # Loading
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
 function log() {
   const l: string[] = []
@@ -13,16 +13,11 @@ function log() {
   return `${l.join('\n')}\n`
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      loading: ref(false),
-      log: ref(log())
-    }
-  }
-})
+const loading = ref(false)
+const logRef = ref(log())
 </script>
 
 <template>
-  <n-switch v-model:value="loading" /> <n-log :loading="loading" :log="log" />
+  <n-switch v-model:value="loading" />
+  <n-log :loading="loading" :log="logRef" />
 </template>
