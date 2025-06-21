@@ -2,20 +2,14 @@
 # 标记
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      value: ref([50, 70]),
-      marks: {
-        34: '太棒了',
-        75: '不错'
-      }
-    }
-  }
-})
+const value = ref([50, 70])
+const marks = {
+  34: '太棒了',
+  75: '不错'
+}
 </script>
 
 <template>
