@@ -4,9 +4,9 @@
 Tree accept `pattern` and `filter` to do searching.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { TreeOption } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 const data: TreeOption[] = [
   {
@@ -55,15 +55,8 @@ const data: TreeOption[] = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    return {
-      data,
-      pattern: ref(''),
-      showIrrelevantNodes: ref(false)
-    }
-  }
-})
+const pattern = ref('')
+const showIrrelevantNodes = ref(false)
 </script>
 
 <template>

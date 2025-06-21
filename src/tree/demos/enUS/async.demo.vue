@@ -4,9 +4,9 @@
 Use `on-load` callback to load data. When loading async, all nodes with `isLeaf` set to `false` and `chilren`'s type is not `Array` will be reckon as unloaded nodes.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { TreeDropInfo, TreeOption } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 function createData() {
   return [
@@ -56,78 +56,66 @@ function findSiblingsAndIndex(
   return [null, null]
 }
 
-export default defineComponent({
-  setup() {
-    const expandedKeysRef = ref<string[]>([])
-    const checkedKeysRef = ref<string[]>([])
-    const dataRef = ref(createData())
+const checkStrategy = ref<'all' | 'parent' | 'child'>('all')
+const cascade = ref(true)
+const expandedKeysRef = ref<string[]>([])
+const checkedKeysRef = ref<string[]>([])
+const dataRef = ref(createData())
 
-    return {
-      checkStrategy: ref<'all' | 'parent' | 'child'>('all'),
-      cascade: ref(true),
-      data: dataRef,
-      expandedKeys: expandedKeysRef,
-      checkedKeys: checkedKeysRef,
-      handleExpandedKeysChange(expandedKeys: string[]) {
-        expandedKeysRef.value = expandedKeys
-      },
-      handleCheckedKeysChange(checkedKeys: string[]) {
-        checkedKeysRef.value = checkedKeys
-      },
-      handleDrop({ node, dragNode, dropPosition }: TreeDropInfo) {
-        const [dragNodeSiblings, dragNodeIndex] = findSiblingsAndIndex(
-          dragNode,
-          dataRef.value
-        )
-        if (dragNodeSiblings === null || dragNodeIndex === null)
-          return
-        dragNodeSiblings.splice(dragNodeIndex, 1)
-        if (dropPosition === 'inside') {
-          if (node.children) {
-            node.children.unshift(dragNode)
-          }
-          else {
-            node.children = [dragNode]
-          }
-        }
-        else if (dropPosition === 'before') {
-          const [nodeSiblings, nodeIndex] = findSiblingsAndIndex(
-            node,
-            dataRef.value
-          )
-          if (nodeSiblings === null || nodeIndex === null)
-            return
-          nodeSiblings.splice(nodeIndex, 0, dragNode)
-        }
-        else if (dropPosition === 'after') {
-          const [nodeSiblings, nodeIndex] = findSiblingsAndIndex(
-            node,
-            dataRef.value
-          )
-          if (nodeSiblings === null || nodeIndex === null)
-            return
-          nodeSiblings.splice(nodeIndex + 1, 0, dragNode)
-        }
+function handleExpandedKeysChange(expandedKeys: string[]) {
+  expandedKeysRef.value = expandedKeys
+}
 
-        dataRef.value = Array.from(dataRef.value)
-      },
-      handleLoad(node: TreeOption) {
-        return new Promise<void>((resolve) => {
-          setTimeout(() => {
-            node.children = [
-              {
-                label: nextLabel(node.label),
-                key: node.key + nextLabel(node.label),
-                isLeaf: false
-              }
-            ]
-            resolve()
-          }, 1000)
-        })
-      }
+function handleCheckedKeysChange(checkedKeys: string[]) {
+  checkedKeysRef.value = checkedKeys
+}
+
+function handleDrop({ node, dragNode, dropPosition }: TreeDropInfo) {
+  const [dragNodeSiblings, dragNodeIndex] = findSiblingsAndIndex(
+    dragNode,
+    dataRef.value
+  )
+  if (dragNodeSiblings === null || dragNodeIndex === null)
+    return
+  dragNodeSiblings.splice(dragNodeIndex, 1)
+  if (dropPosition === 'inside') {
+    if (node.children) {
+      node.children.unshift(dragNode)
+    }
+    else {
+      node.children = [dragNode]
     }
   }
-})
+  else if (dropPosition === 'before') {
+    const [nodeSiblings, nodeIndex] = findSiblingsAndIndex(node, dataRef.value)
+    if (nodeSiblings === null || nodeIndex === null)
+      return
+    nodeSiblings.splice(nodeIndex, 0, dragNode)
+  }
+  else if (dropPosition === 'after') {
+    const [nodeSiblings, nodeIndex] = findSiblingsAndIndex(node, dataRef.value)
+    if (nodeSiblings === null || nodeIndex === null)
+      return
+    nodeSiblings.splice(nodeIndex + 1, 0, dragNode)
+  }
+
+  dataRef.value = Array.from(dataRef.value)
+}
+
+function handleLoad(node: TreeOption) {
+  return new Promise<void>((resolve) => {
+    setTimeout(() => {
+      node.children = [
+        {
+          label: nextLabel(node.label),
+          key: node.key + nextLabel(node.label),
+          isLeaf: false
+        }
+      ]
+      resolve()
+    }, 1000)
+  })
+}
 </script>
 
 <template>
@@ -150,10 +138,10 @@ export default defineComponent({
       block-line
       checkable
       draggable
-      :data="data"
-      :checked-keys="checkedKeys"
+      :data="dataRef"
+      :checked-keys="checkedKeysRef"
       :on-load="handleLoad"
-      :expanded-keys="expandedKeys"
+      :expanded-keys="expandedKeysRef"
       :check-strategy="checkStrategy"
       :allow-checking-not-loaded="cascade"
       :cascade="cascade"
@@ -161,6 +149,6 @@ export default defineComponent({
       @update:checked-keys="handleCheckedKeysChange"
       @update:expanded-keys="handleExpandedKeysChange"
     />
-    {{ JSON.stringify(checkedKeys) }}
+    {{ JSON.stringify(checkedKeysRef) }}
   </n-space>
 </template>

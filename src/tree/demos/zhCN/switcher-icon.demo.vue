@@ -4,12 +4,12 @@
 使用 `render-switcher-icon` 定制展开开关的图标。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { TreeOption } from 'naive-ui'
 import { ChevronForward, PlanetOutline, SunnyOutline } from '@vicons/ionicons5'
 import { NIcon } from 'naive-ui'
 import { repeat } from 'seemly'
-import { defineComponent, h, ref } from 'vue'
+import { h, ref } from 'vue'
 
 function createData(level = 4, baseKey = ''): TreeOption[] | undefined {
   if (!level)
@@ -36,20 +36,16 @@ function createLabel(level: number): string {
   return ''
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      data: createData(),
-      defaultExpandedKeys: ref(['40', '41']),
-      renderSwitcherIcon: () =>
-        h(NIcon, null, { default: () => h(ChevronForward) }),
-      renderSwitcherIconWithExpaned: ({ expanded }: { expanded: boolean }) =>
-        h(NIcon, null, {
-          default: () => h(expanded ? SunnyOutline : PlanetOutline)
-        })
-    }
-  }
-})
+const data = createData()
+const defaultExpandedKeys = ref(['40', '41'])
+function renderSwitcherIcon() {
+  return h(NIcon, null, { default: () => h(ChevronForward) })
+}
+function renderSwitcherIconWithExpaned({ expanded }: { expanded: boolean }) {
+  return h(NIcon, null, {
+    default: () => h(expanded ? SunnyOutline : PlanetOutline)
+  })
+}
 </script>
 
 <template>
