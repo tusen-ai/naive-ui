@@ -2,19 +2,10 @@
 # Basic usage
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import katex from 'katex'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const equation = '\\displaystyle= \\frac{k(k+1)}{2}+k+1'
-    return {
-      equation,
-      katex
-    }
-  }
-})
+const equation = '\\displaystyle= \\frac{k(k+1)}{2}+k+1'
 </script>
 
 <template>
