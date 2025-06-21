@@ -4,49 +4,43 @@
 Do whatever you want.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { CountdownProps } from 'naive-ui'
-import { defineComponent, h, ref } from 'vue'
+import { h, ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const renderCountdown: CountdownProps['render'] = ({
-      hours,
-      minutes,
-      seconds
-    }) => {
-      return [
-        h(
-          'span',
-          {
-            style: 'display: inline-block; transform: rotate(90deg);'
-          },
-          [String(hours).padStart(2, '0')]
-        ),
-        ':',
-        h(
-          'span',
-          {
-            style: 'display: inline-block; transform: rotate(180deg);'
-          },
-          [String(minutes).padStart(2, '0')]
-        ),
-        ':',
-        h(
-          'span',
-          {
-            style: 'display: inline-block; transform: rotate(270deg);'
-          },
-          [String(seconds).padStart(2, '0')]
-        )
-      ]
-    }
-    return {
-      renderCountdown,
-      active: ref(false)
-    }
-  }
-})
+const renderCountdown: CountdownProps['render'] = ({
+  hours,
+  minutes,
+  seconds
+}) => {
+  return [
+    h(
+      'span',
+      {
+        style: 'display: inline-block; transform: rotate(90deg);'
+      },
+      [String(hours).padStart(2, '0')]
+    ),
+    ':',
+    h(
+      'span',
+      {
+        style: 'display: inline-block; transform: rotate(180deg);'
+      },
+      [String(minutes).padStart(2, '0')]
+    ),
+    ':',
+    h(
+      'span',
+      {
+        style: 'display: inline-block; transform: rotate(270deg);'
+      },
+      [String(seconds).padStart(2, '0')]
+    )
+  ]
+}
+
+const active = ref(false)
 </script>
 
 <template>
