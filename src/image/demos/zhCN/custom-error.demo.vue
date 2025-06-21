@@ -4,29 +4,17 @@
 你可以使用 `error` slot 来自定义加载失败时的内容。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { ImageOutline as ImageOutlineIcon } from '@vicons/ionicons5'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  components: {
-    ImageOutlineIcon
-  },
-  setup() {
-    const url = ref('人生嘛，失败总是难免的')
-    const refresh = () => {
-      url.value = 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
-    }
-    const reloadError = () => {
-      url.value = '人生嘛，失败总是难免的'
-    }
-    return {
-      url,
-      refresh,
-      reloadError
-    }
-  }
-})
+const url = ref('人生嘛，失败总是难免的')
+function refresh() {
+  url.value = 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+}
+function reloadError() {
+  url.value = '人生嘛，失败总是难免的'
+}
 </script>
 
 <template>

@@ -4,29 +4,17 @@
 You can use `error` slot to custom loading error display.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { ImageOutline as ImageOutlineIcon } from '@vicons/ionicons5'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  components: {
-    ImageOutlineIcon
-  },
-  setup() {
-    const url = ref('blablabla')
-    const refresh = () => {
-      url.value = 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
-    }
-    const reloadError = () => {
-      url.value = 'blablabla'
-    }
-    return {
-      url,
-      refresh,
-      reloadError
-    }
-  }
-})
+const url = ref('blablabla')
+function refresh() {
+  url.value = 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+}
+function reloadError() {
+  url.value = 'blablabla'
+}
 </script>
 
 <template>
