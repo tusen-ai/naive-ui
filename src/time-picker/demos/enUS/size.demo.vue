@@ -4,16 +4,10 @@
 The Time Picker can be a `small`, `medium` or `large` size.
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      timestamp: ref(null)
-    }
-  }
-})
+const timestamp = ref(null)
 </script>
 
 <template>

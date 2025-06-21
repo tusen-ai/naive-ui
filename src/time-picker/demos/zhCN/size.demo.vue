@@ -4,16 +4,10 @@
 可以是 `small`、`medium` 或 `large` 尺寸。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      timestamp: ref(null)
-    }
-  }
-})
+const timestamp = ref(null)
 </script>
 
 <template>

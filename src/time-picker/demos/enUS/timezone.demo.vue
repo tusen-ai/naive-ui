@@ -2,16 +2,10 @@
 # Time zone
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      value: ref(Date.now())
-    }
-  }
-})
+const value = ref(Date.now())
 </script>
 
 <template>

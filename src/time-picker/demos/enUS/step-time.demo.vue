@@ -4,16 +4,10 @@
 Pass a number as an incremental step, or use an array to specify the values you want to show. If inputs do not adhere to these parameters, an invalid status will be shown (strikethrough text).
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      time: ref(1183135260000)
-    }
-  }
-})
+const time = ref(1183135260000)
 </script>
 
 <template>
