@@ -4,9 +4,9 @@
 异步单选的例子。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { SelectOption } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 const options = [
   {
@@ -59,31 +59,21 @@ const options = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    const loadingRef = ref(false)
-    const optionsRef = ref<SelectOption[]>([])
+const value = ref(null)
+const loadingRef = ref(false)
+const optionsRef = ref<SelectOption[]>([])
 
-    return {
-      value: ref(null),
-      loading: loadingRef,
-      options: optionsRef,
-      handleSearch: (query: string) => {
-        if (!query.length) {
-          optionsRef.value = []
-          return
-        }
-        loadingRef.value = true
-        window.setTimeout(() => {
-          optionsRef.value = options.filter(
-            item => ~item.label.indexOf(query)
-          )
-          loadingRef.value = false
-        }, 1000)
-      }
-    }
+function handleSearch(query: string) {
+  if (!query.length) {
+    optionsRef.value = []
+    return
   }
-})
+  loadingRef.value = true
+  window.setTimeout(() => {
+    optionsRef.value = options.filter(item => ~item.label.indexOf(query))
+    loadingRef.value = false
+  }, 1000)
+}
 </script>
 
 <template>
@@ -91,8 +81,8 @@ export default defineComponent({
     v-model:value="value"
     filterable
     placeholder="搜索歌曲"
-    :options="options"
-    :loading="loading"
+    :options="optionsRef"
+    :loading="loadingRef"
     clearable
     remote
     @search="handleSearch"
