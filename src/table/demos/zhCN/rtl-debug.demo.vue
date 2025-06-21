@@ -2,21 +2,15 @@
 # Rtl Debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { unstableTableRtl } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      singleColumn: ref(false),
-      singleLine: ref(false),
-      bordered: ref(false),
-      rtlEnabled: ref(false),
-      rtlStyles: [unstableTableRtl]
-    }
-  }
-})
+const singleColumn = ref(false)
+const singleLine = ref(false)
+const bordered = ref(false)
+const rtlEnabled = ref(false)
+const rtlStyles = [unstableTableRtl]
 </script>
 
 <template>
