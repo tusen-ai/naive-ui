@@ -4,13 +4,8 @@
 可以在代码块左侧显示行号。
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup() {
-    return {
-      code: `#include <bits/stdc++.h>
+<script lang="ts" setup>
+const code = `#include <bits/stdc++.h>
 using namespace std;
 
 int main() {
@@ -24,9 +19,6 @@ int main() {
   cout <<"开" << endl;
   return 0;
 }`
-    }
-  }
-})
 </script>
 
 <template>
