@@ -171,7 +171,7 @@ export default defineComponent({
     })
 
     const normalizedDataRef = computed(() => {
-      if (!props.data) {
+      if (!props.data || props.data.length === 0) {
         return []
       }
       return completeDataGaps(props.data, props.weekStartsOn)
@@ -183,12 +183,11 @@ export default defineComponent({
     })
 
     const heatmapMatrixRef = computed(() => {
-      if (props.loading) {
-        return createLoadingMatrix(props.weekStartsOn)
-      }
-
       const data = normalizedDataRef.value
 
+      if (props.loading || data.length === 0) {
+        return createLoadingMatrix(props.weekStartsOn)
+      }
       const { weekStartsOn } = props
       const maxValue = maxValueRef.value
       const colors = mergedColorsRef.value
