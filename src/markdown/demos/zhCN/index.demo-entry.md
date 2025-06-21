@@ -10,6 +10,7 @@
 
 下面的代码展示了如何为 Markdown 设定 unified。
 
+<!--
 ```html
 <template>
   <n-config-provider
@@ -26,13 +27,13 @@
   import remarkParse from 'remark-parse'
   import remarkRehype from 'remark-rehype'
 </script>
-```
+``` -->
 
 ## 演示
 
 ```demo
 basic.vue
-mdPlugins.vue
+github-syntax-guide.vue
 ```
 
 ## API

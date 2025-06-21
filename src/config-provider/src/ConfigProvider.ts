@@ -11,7 +11,6 @@ import type {
   RtlProp
 } from './internal-interface'
 import type { Katex } from './katex'
-import type { Unified } from './Unified'
 import { hash } from 'css-render'
 import { merge } from 'lodash-es'
 import { useMemo } from 'vooks'
@@ -29,6 +28,7 @@ import {
 import { defaultClsPrefix, type Hljs } from '../../_mixins'
 import { warn } from '../../_utils'
 import { configProviderInjectionKey } from './context'
+import { Pluggable } from './Unified'
 
 export const configProviderProps = {
   abstract: Boolean,
@@ -47,8 +47,7 @@ export const configProviderProps = {
   },
   hljs: Object as PropType<Hljs>,
   katex: Object as PropType<Katex>,
-  mdPlugins: Array as PropType<any>,
-  unified: Function as PropType<Unified>,
+  mdPlugins: Array as PropType<Pluggable>,
   theme: Object as PropType<GlobalTheme | null>,
   themeOverrides: Object as PropType<GlobalThemeOverrides | null>,
   componentOptions: Object as PropType<GlobalComponentConfig>,

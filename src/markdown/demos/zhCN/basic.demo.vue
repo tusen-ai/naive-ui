@@ -3,26 +3,36 @@
 </markdown>
 
 <script lang="ts" setup>
-import rehypeStringify from 'rehype-stringify'
-import remarkParse from 'remark-parse'
-import remarkRehype from 'remark-rehype'
-import { unified } from 'unified'
+import rehypeRaw from 'rehype-raw'
+import remarkGfm from 'remark-gfm'
 import { ref } from 'vue'
 
 const markdownText = ref(`
-   #### 标题 \n 
-   这是一个 Markdown 示例。\n 
-   - 列表项 1 \n 
-   - 列表项 2 **粗体文本** 和 *斜体文本* \n 
-   ~one~ and ~~two~~`
+![](https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg)
+# This is an H1
+## This is an H2
+### This is an H3
+#### This is an H4
+##### This is an H5
+`
 )
+
+function handleAddMd() {
+  markdownText.value += `
+  ### This is an H3
+#### This is an H4
+##### This is an H5`
+}
 </script>
 
 <template>
-  <n-config-provider
-    :unified="unified"
-    :md-plugins="[remarkParse, rehypeStringify, remarkRehype]"
-  >
-    <n-markdown :content="markdownText" />
-  </n-config-provider>
+    <n-button @click="handleAddMd" />
+    <n-markdown
+      :content="markdownText"
+      :remark-rehype-options="{
+        fontSize: '22px',
+      }"
+      :remark-plugins="[remarkGfm]"
+      :rehype-plugins="[rehypeRaw]"
+    />
 </template>

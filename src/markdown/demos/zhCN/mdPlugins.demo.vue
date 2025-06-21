@@ -27,8 +27,7 @@ const markdownText = ref(`
 
 <template>
   <n-config-provider
-    :unified="unified"
-    :md-plugins="[remarkParse, rehypeStringify, remarkRehype]"
+    :md-plugins="[unified, remarkParse, rehypeStringify, remarkRehype]"
   >
     <n-markdown
       :content="markdownText"
