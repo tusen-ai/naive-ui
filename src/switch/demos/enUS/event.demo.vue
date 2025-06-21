@@ -2,21 +2,15 @@
 # Event
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      active: ref(false),
-      handleChange(value: boolean) {
-        message.info(`Update value: ${value}`)
-      }
-    }
-  }
-})
+const message = useMessage()
+const active = ref(false)
+function handleChange(value: boolean) {
+  message.info(`Update value: ${value}`)
+}
 </script>
 
 <template>
