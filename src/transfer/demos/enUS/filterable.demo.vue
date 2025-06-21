@@ -2,8 +2,8 @@
 # Filterable
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
 function createOptions() {
   return Array.from({ length: 100 }).map((v, i) => ({
@@ -17,16 +17,10 @@ function createValues() {
   return Array.from({ length: 50 }).map((v, i) => i)
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      options1: createOptions(),
-      value1: ref(createValues()),
-      options2: createOptions(),
-      value2: ref(createValues())
-    }
-  }
-})
+const options1 = createOptions()
+const value1 = ref(createValues())
+const options2 = createOptions()
+const value2 = ref(createValues())
 </script>
 
 <template>

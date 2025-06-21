@@ -2,11 +2,11 @@
 # Custom source list
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { TransferRenderSourceList, TreeOption } from 'naive-ui'
 import { NTree } from 'naive-ui'
 import { repeat } from 'seemly'
-import { defineComponent, h, ref } from 'vue'
+import { h, ref } from 'vue'
 
 function createLabel(level: number): string {
   if (level === 4)
@@ -51,36 +51,29 @@ function flattenTree(list: undefined | Option[]): Option[] {
   return result
 }
 
-export default defineComponent({
-  setup() {
-    const treeData = createData()
-    const valueRef = ref<Array<string | number>>([])
-    const renderSourceList: TransferRenderSourceList = function ({
-      onCheck,
-      pattern
-    }) {
-      return h(NTree, {
-        style: 'margin: 0 4px;',
-        keyField: 'value',
-        checkable: true,
-        selectable: false,
-        blockLine: true,
-        checkOnClick: true,
-        data: treeData as unknown as TreeOption[],
-        pattern,
-        checkedKeys: valueRef.value,
-        onUpdateCheckedKeys: (checkedKeys: Array<string | number>) => {
-          onCheck(checkedKeys)
-        }
-      })
+const treeData = createData()
+const value = ref<Array<string | number>>([])
+const renderSourceList: TransferRenderSourceList = function ({
+  onCheck,
+  pattern
+}) {
+  return h(NTree, {
+    style: 'margin: 0 4px;',
+    keyField: 'value',
+    checkable: true,
+    selectable: false,
+    blockLine: true,
+    checkOnClick: true,
+    data: treeData as unknown as TreeOption[],
+    pattern,
+    checkedKeys: value.value,
+    onUpdateCheckedKeys: (checkedKeys: Array<string | number>) => {
+      onCheck(checkedKeys)
     }
-    return {
-      options: flattenTree(createData()),
-      value: valueRef,
-      renderSourceList
-    }
-  }
-})
+  })
+}
+
+const options = flattenTree(createData())
 </script>
 
 <template>

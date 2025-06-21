@@ -4,8 +4,8 @@
 穿梭框的基础用法。如果你有一大堆数据，看下一个例子。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
 function createOptions() {
   return Array.from({ length: 100 }).map((v, i) => ({
@@ -15,14 +15,8 @@ function createOptions() {
   }))
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      options: createOptions(),
-      value: ref([])
-    }
-  }
-})
+const options = createOptions()
+const value = ref([])
 </script>
 
 <template>

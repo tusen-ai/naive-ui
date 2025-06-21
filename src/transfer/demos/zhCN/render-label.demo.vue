@@ -4,10 +4,10 @@
 可以变成通讯录、菜单等，应用场景挺多。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { TransferRenderTargetLabel } from 'naive-ui'
 import { NAvatar } from 'naive-ui'
-import { defineComponent, h, ref } from 'vue'
+import { h, ref } from 'vue'
 
 const options = [
   {
@@ -32,48 +32,41 @@ const options = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    const renderLabel: TransferRenderTargetLabel = function ({ option }) {
-      return h(
-        'div',
-        {
-          style: {
-            display: 'flex',
-            margin: '6px 0'
-          }
-        },
-        {
-          default: () => [
-            h(NAvatar, {
-              round: true,
-              src: option.value as string,
-              size: 'small',
-              fallbackSrc:
-                'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
-            }),
-            h(
-              'div',
-              {
-                style: {
-                  display: 'flex',
-                  marginLeft: '6px',
-                  alignSelf: 'center'
-                }
-              },
-              { default: () => option.label }
-            )
-          ]
-        }
-      )
+const renderLabel: TransferRenderTargetLabel = function ({ option }) {
+  return h(
+    'div',
+    {
+      style: {
+        display: 'flex',
+        margin: '6px 0'
+      }
+    },
+    {
+      default: () => [
+        h(NAvatar, {
+          round: true,
+          src: option.value as string,
+          size: 'small',
+          fallbackSrc:
+            'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+        }),
+        h(
+          'div',
+          {
+            style: {
+              display: 'flex',
+              marginLeft: '6px',
+              alignSelf: 'center'
+            }
+          },
+          { default: () => option.label }
+        )
+      ]
     }
-    return {
-      options,
-      value: ref([options[0].value]),
-      renderLabel
-    }
-  }
-})
+  )
+}
+
+const value = ref([options[0].value])
 </script>
 
 <template>

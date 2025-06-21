@@ -4,8 +4,8 @@
 Basic example of the Transfer component. If you have tons of data, see below for virtualized list.
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
 function createOptions() {
   return Array.from({ length: 100 }).map((v, i) => ({
@@ -15,14 +15,8 @@ function createOptions() {
   }))
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      options: createOptions(),
-      value: ref([])
-    }
-  }
-})
+const options = createOptions()
+const value = ref([])
 </script>
 
 <template>
