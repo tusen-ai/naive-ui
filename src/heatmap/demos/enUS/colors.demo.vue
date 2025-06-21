@@ -5,8 +5,8 @@ Each color has its own temperature.
 </markdown>
 
 <script setup lang="ts">
+import { generateHeatmapData } from 'naive-ui'
 import { ref } from 'vue'
-import { generateHeatmapData } from '../../src/utils'
 
 const data = ref(generateHeatmapData())
 

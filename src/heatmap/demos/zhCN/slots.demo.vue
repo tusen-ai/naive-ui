@@ -5,8 +5,8 @@
 </markdown>
 
 <script setup lang="ts">
+import { generateHeatmapData } from 'naive-ui'
 import { computed, ref } from 'vue'
-import { generateHeatmapData } from '../../src/utils'
 
 const value = ref<'recent' | number>('recent')
 const yearData = computed(() => {
@@ -29,7 +29,9 @@ const yearData = computed(() => {
       </template>
       <template #tooltip="{ date, value: tooltipValue, unit }">
         <div>
-          <div><strong>日期:</strong> {{ date.toLocaleDateString() }}</div>
+          <div>
+            <strong>日期:</strong> {{ new Date(date).toLocaleDateString() }}
+          </div>
           <div><strong>数值:</strong> {{ tooltipValue ?? 0 }} {{ unit }}</div>
           <div v-if="tooltipValue !== null && tooltipValue > 5">
             <n-tag type="success" size="small">
@@ -65,7 +67,7 @@ const yearData = computed(() => {
           <template #header>
             活动详情
           </template>
-          <div>{{ date.toLocaleDateString() }}</div>
+          <div>{{ new Date(date).toLocaleDateString() }}</div>
           <div>{{ tooltipValue ?? 0 }} {{ unit }}</div>
         </n-card>
       </template>

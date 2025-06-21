@@ -1,12 +1,12 @@
-import type { DayRect, RectData, WeekStartDay } from '../interface'
+import type { DayRect, RectData, WeekStartsOn } from '../interface'
 import {
   differenceInCalendarDays,
   eachDayOfInterval,
   endOfWeek,
   endOfYear,
-  format,
   getDay,
   isWithinInterval,
+  startOfDay,
   startOfWeek,
   startOfYear,
   subYears
@@ -25,9 +25,9 @@ export function calcColorByValue(
 
   const ratio = Math.min(value / maxValue, 1)
   const maxLevel = colors.length - 1
-  const index = Math.min(Math.ceil(ratio * maxLevel), maxLevel)
+  const level = Math.min(Math.ceil(ratio * maxLevel), maxLevel)
 
-  return colors[index]
+  return colors[level]
 }
 
 /**
@@ -39,40 +39,37 @@ export function calcColorByValue(
  */
 export function completeDataGaps(
   data: RectData[],
-  weekStartOn: WeekStartDay = 0
+  weekStartsOn: WeekStartsOn = 0
 ): RectData[] {
-  const sortedData = [...data].sort(
-    (a, b) => a.date.getTime() - b.date.getTime()
-  )
+  const sortedData = [...data].sort((a, b) => a.date - b.date)
   const firstDate = sortedData[0].date
   const lastDate = sortedData[sortedData.length - 1].date
 
   const firstCalendarDate = startOfWeek(firstDate, {
-    weekStartsOn: weekStartOn
+    weekStartsOn
   })
-  const lastCalendarEndDate = endOfWeek(lastDate, { weekStartsOn: weekStartOn })
+  const lastCalendarEndDate = endOfWeek(lastDate, { weekStartsOn })
 
   const dataMap = new Map(
-    sortedData.map(d => [format(d.date, 'yyyy-MM-dd'), d])
+    sortedData.map(d => [startOfDay(d.date).getTime(), d])
   )
 
   const allCalendarDates = eachDayOfInterval({
     start: firstCalendarDate,
     end: lastCalendarEndDate
   })
-
   return allCalendarDates.map((date) => {
-    const dateStr = format(date, 'yyyy-MM-dd')
-    const existingData = dataMap.get(dateStr)
+    const key = startOfDay(date).getTime()
+    const dateValue = dataMap.get(key)
 
-    if (existingData) {
-      return existingData
+    if (dateValue) {
+      return dateValue
     }
 
     const value = isWithinInterval(date, { start: firstDate, end: lastDate })
       ? 0
       : null
-    return { date: new Date(date), value }
+    return { date: date.getTime(), value }
   })
 }
 
@@ -81,7 +78,7 @@ export function completeDataGaps(
  */
 export function createDayRect(
   item: RectData,
-  calendarStartDate: Date,
+  calendarStartDate: number,
   weekStartOn: number,
   colors: string[],
   maxValue: number
@@ -90,6 +87,7 @@ export function createDayRect(
     item.date,
     calendarStartDate
   )
+
   const colIndex = Math.floor(daysFromGridStart / 7)
   const dayOfWeek = getDay(item.date)
   const rowIndex = (dayOfWeek - weekStartOn + 7) % 7
@@ -113,9 +111,8 @@ export function createSparseMatrix<T>(
   getRowIndex: (item: T) => number,
   getColIndex: (item: T) => number
 ): T[][] {
-  // Group items by row index using lodash for clarity
   const groupedByRow = groupBy(items, getRowIndex)
-  // Create matrix with the specified number of rows
+
   return Array.from({ length: rows }, (_, rowIndex) => {
     const rowData = groupedByRow[rowIndex] || []
     const row: T[] = []
@@ -124,6 +121,27 @@ export function createSparseMatrix<T>(
     })
     return row
   })
+}
+
+/**
+ * This creates a 7x53 matrix (typical year layout) filled with loading cells
+ */
+export function createLoadingMatrix(
+  weekStartsOn: WeekStartsOn = 0
+): DayRect[][] {
+  const rows = 7
+  const cols = 53
+  const currentTimestamp = Date.now()
+
+  return Array.from({ length: rows }, (_, row) =>
+    Array.from({ length: cols }, (_, col) => ({
+      date: currentTimestamp,
+      value: 0,
+      color: '#000000',
+      dayOfWeek: (weekStartsOn + row) % 7,
+      rowIndex: row,
+      colIndex: col
+    })))
 }
 
 /**
@@ -152,36 +170,15 @@ export function generateHeatmapData(range?: 'recent' | number): RectData[] {
     const isWeekend = dayOfWeek === 0 || dayOfWeek === 6
 
     if (isWeekend && Math.random() < 0.7) {
-      return { date: day, value: 0 }
+      return { date: day.getTime(), value: 0 }
     }
 
     if (!isWeekend && Math.random() < 0.15) {
-      return { date: day, value: 0 }
+      return { date: day.getTime(), value: 0 }
     }
 
     const value = Math.floor(Math.random() ** 2 * 40) + 1
 
-    return { date: day, value }
+    return { date: day.getTime(), value }
   })
-}
-
-/**
- * This creates a 7x53 matrix (typical year layout) filled with loading cells
- */
-export function createLoadingMatrix(
-  weekStartOn: WeekStartDay = 0
-): DayRect[][] {
-  const rows = 7
-  const cols = 53 // Approximate number of weeks in a year
-  const currentDate = new Date()
-
-  return Array.from({ length: rows }, (_, row) =>
-    Array.from({ length: cols }, (_, col) => ({
-      date: currentDate,
-      value: 0,
-      color: '#000000', // Will be overridden by loading styles
-      dayOfWeek: (weekStartOn + row) % 7,
-      rowIndex: row,
-      colIndex: col
-    })))
 }

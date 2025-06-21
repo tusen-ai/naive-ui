@@ -5,8 +5,9 @@ Every square is a piece of persistence, and blanks are the rhythm of life.
 </markdown>
 
 <script setup lang="ts">
+import type { WeekStartsOn } from 'naive-ui'
+import { generateHeatmapData } from 'naive-ui'
 import { computed, ref } from 'vue'
-import { generateHeatmapData } from '../../src/utils'
 
 const value = ref<'recent' | number>('recent')
 const dateRanges = [
@@ -16,21 +17,29 @@ const dateRanges = [
   },
   {
     value: 2025,
-    label: '2025'
+    label: 2025
   },
   {
     value: 2024,
-    label: '2024'
+    label: 2024
   },
   {
     value: 2023,
-    label: '2023'
+    label: 2023
   },
   {
     value: 2022,
-    label: '2022'
+    label: 2022
   }
-]
+].map((r) => {
+  return {
+    ...r,
+    label: r.label.toString()
+  }
+}) as {
+  value: 'recent' | number
+  label: string
+}[]
 
 const yearData = computed(() => {
   return generateHeatmapData(value.value)
@@ -59,7 +68,7 @@ const showWeekLabels = ref(true)
 const showMonthLabels = ref(true)
 const showColorIndicator = ref(true)
 const loading = ref(false)
-const weekStartOn = ref<0 | 1 | 2 | 3 | 4 | 5 | 6>(0)
+const weekStartsOn = ref<WeekStartsOn>(0)
 const size = ref<'small' | 'medium' | 'large'>('medium')
 
 const weekStartOptions = [
@@ -80,72 +89,71 @@ const sizeOptions = [
 </script>
 
 <template>
-  <n-space vertical>
-    <n-radio-group v-model:value="value" name="year">
-      <n-radio-button
-        v-for="range in dateRanges"
-        :key="range.value"
-        :value="range.value"
-        :label="range.label"
+  <n-flex vertical>
+    <n-flex align="center" justify="start">
+      <n-switch v-model:value="showWeekLabels">
+        <template #checked>
+          Show Week Labels
+        </template>
+        <template #unchecked>
+          Hide Week Labels
+        </template>
+      </n-switch>
+      <n-switch v-model:value="showMonthLabels">
+        <template #checked>
+          Show Month Labels
+        </template>
+        <template #unchecked>
+          Hide Month Labels
+        </template>
+      </n-switch>
+      <n-switch v-model:value="showColorIndicator">
+        <template #checked>
+          Show Color Indicator
+        </template>
+        <template #unchecked>
+          Hide Color Indicator
+        </template>
+      </n-switch>
+      <n-switch v-model:value="loading">
+        <template #checked>
+          Loading
+        </template>
+        <template #unchecked>
+          Normal
+        </template>
+      </n-switch>
+      <n-divider vertical />
+      <span>Week Starts On:</span>
+      <n-select
+        v-model:value="weekStartsOn"
+        :options="weekStartOptions"
+        style="width: 120px"
       />
-    </n-radio-group>
-
-    <n-card title="Display Controls" size="small" style="min-width: 600px">
-      <n-space align="center" justify="start">
-        <n-switch v-model:value="showWeekLabels">
-          <template #checked>
-            Show Week Labels
-          </template>
-          <template #unchecked>
-            Hide Week Labels
-          </template>
-        </n-switch>
-        <n-switch v-model:value="showMonthLabels">
-          <template #checked>
-            Show Month Labels
-          </template>
-          <template #unchecked>
-            Hide Month Labels
-          </template>
-        </n-switch>
-        <n-switch v-model:value="showColorIndicator">
-          <template #checked>
-            Show Color Indicator
-          </template>
-          <template #unchecked>
-            Hide Color Indicator
-          </template>
-        </n-switch>
-        <n-switch v-model:value="loading">
-          <template #checked>
-            Loading
-          </template>
-          <template #unchecked>
-            Normal
-          </template>
-        </n-switch>
-        <n-divider vertical />
-        <span>Size:</span>
-        <n-radio-group v-model:value="size" name="size">
-          <n-radio-button
-            v-for="option in sizeOptions"
-            :key="option.value"
-            :value="option.value"
-            :label="option.label"
-          />
-        </n-radio-group>
-        <n-divider vertical />
-        <span>Week Starts On:</span>
-        <n-select
-          v-model:value="weekStartOn"
-          :options="weekStartOptions"
-          style="width: 120px"
+      <n-divider vertical />
+    </n-flex>
+    <n-flex>
+      <n-radio-group v-model:value="size" name="size">
+        <n-radio-button
+          v-for="option in sizeOptions"
+          :key="option.value"
+          :value="option.value"
+          :label="option.label"
         />
-      </n-space>
-    </n-card>
+      </n-radio-group>
+      <n-divider vertical />
+      <n-radio-group v-model:value="value" name="year">
+        <n-radio-button
+          v-for="range in dateRanges"
+          :key="range.value"
+          :value="range.value"
+          :label="range.label"
+        />
+      </n-radio-group>
+    </n-flex>
 
     <n-alert type="success" title="Data Statistics">
-      <n-space>
+      <n-flex>
         <n-tag round type="info">
           Total Days: {{ dataStats.total }}
         </n-tag>
@@ -158,19 +166,21 @@ const sizeOptions = [
         <n-tag round type="primary">
           Average: {{ dataStats.avgValue }}
         </n-tag>
-      </n-space>
+      </n-flex>
     </n-alert>
 
-    <n-heatmap
-      :key="`heatmap-${value}-${weekStartOn}-${size}`"
-      :data="yearData"
-      :week-start-on="weekStartOn"
-      :loading="loading"
-      :size="size"
-      unit="activities"
-      :show-week-labels="showWeekLabels"
-      :show-month-labels="showMonthLabels"
-      :show-color-indicator="showColorIndicator"
-    />
-  </n-space>
+    <n-flex align="center">
+      <n-heatmap
+        :key="`heatmap-${value}-${weekStartsOn}-${size}`"
+        :data="yearData"
+        :week-starts-on="weekStartsOn"
+        :loading="loading"
+        :size="size"
+        unit="commit"
+        :show-week-labels="showWeekLabels"
+        :show-month-labels="showMonthLabels"
+        :show-color-indicator="showColorIndicator"
+      />
+    </n-flex>
+  </n-flex>
 </template>

@@ -5,8 +5,8 @@ Use the `color-theme` prop to apply built-in color themes. Available themes: `gi
 </markdown>
 
 <script setup lang="ts">
+import { generateHeatmapData } from 'naive-ui'
 import { ref } from 'vue'
-import { generateHeatmapData } from '../../src/utils'
 
 const data = ref(generateHeatmapData())
 
@@ -21,12 +21,12 @@ const themes = [
 </script>
 
 <template>
-  <n-space vertical size="large">
+  <n-flex vertical size="large">
     <div v-for="theme in themes" :key="theme.value">
       <n-divider title-placement="left">
         {{ theme.name }}
       </n-divider>
       <n-heatmap :data="data" unit="commits" :color-theme="theme.value" />
     </div>
-  </n-space>
+  </n-flex>
 </template>

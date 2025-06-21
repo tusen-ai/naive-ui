@@ -3,8 +3,8 @@ import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { PopoverProps } from '../../popover/src/Popover'
 import type { HeatmapTheme } from '../styles/light'
-import type { DayRect, RectData, WeekStartDay } from './interface'
-import { format, startOfWeek } from 'date-fns'
+import type { DayRect, RectData, ToolTipData, WeekStartsOn } from './interface'
+import { addDays, format, parseISO, startOfWeek } from 'date-fns'
 import { groupBy, mapValues, maxBy } from 'lodash-es'
 import { pxfy } from 'seemly'
 import { computed, defineComponent, h } from 'vue'
@@ -38,14 +38,15 @@ export const HeatmapThemes = {
 
 export type HeatmapThemeType = keyof typeof HeatmapThemes
 
+interface Col {
+  week: number
+  month: string
+}
+
 export interface HeatmapSlots {
   info?: () => VNode[]
   indicator?: () => VNode[]
-  tooltip?: (data: {
-    date: Date
-    value: number | null
-    unit: string
-  }) => VNode[]
+  tooltip?: (data: ToolTipData) => VNode[]
 }
 
 export const heatmapProps = {
@@ -60,8 +61,8 @@ export const heatmapProps = {
   },
   data: Array as PropType<RectData[]>,
   loading: Boolean,
-  weekStartOn: {
-    type: Number as PropType<WeekStartDay>,
+  weekStartsOn: {
+    type: Number as PropType<WeekStartsOn>,
     default: 0
   },
   showColorIndicator: {
@@ -76,10 +77,7 @@ export const heatmapProps = {
     type: Boolean,
     default: true
   },
-  unit: {
-    type: String,
-    required: true
-  },
+  unit: String,
   size: {
     type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'
@@ -115,7 +113,6 @@ export default defineComponent({
       const { xGap, yGap, size } = props
       const {
         self: {
-          fontSize,
           fontWeight,
           textColor,
           borderRadius,
@@ -125,31 +122,31 @@ export default defineComponent({
           [createKey('rectSize', size)]: rectSize,
           [createKey('xGap', size)]: defaultXGap,
           [createKey('yGap', size)]: defaultYGap,
-          [createKey('fontSize', size)]: sizeFontSize
+          [createKey('fontSize', size)]: fontSize
         }
       } = themeRef.value
 
       const cssVars = {
-        '--n-font-size': sizeFontSize || fontSize,
+        '--n-font-size': fontSize,
         '--n-font-weight': fontWeight,
         '--n-text-color': textColor,
         '--n-border-radius': borderRadius,
         '--n-border-color': borderColor,
         '--n-loading-color-start': loadingColorStart,
         '--n-loading-color-end': loadingColorEnd,
-        '--n-rect-size': rectSize || '10px',
+        '--n-rect-size': rectSize,
         '--n-x-gap':
           xGap !== undefined
             ? typeof xGap === 'number'
               ? pxfy(xGap)
               : xGap
-            : defaultXGap || '3px',
+            : defaultXGap,
         '--n-y-gap':
           yGap !== undefined
             ? typeof yGap === 'number'
               ? pxfy(yGap)
               : yGap
-            : defaultYGap || '3px'
+            : defaultYGap
       }
 
       return cssVars
@@ -159,7 +156,7 @@ export default defineComponent({
           'heatmap',
           computed(() => {
             const { size } = props
-            return size[0] // 使用 size 的首字母作为 hash
+            return size[0]
           }),
           cssVarsRef,
           props
@@ -174,7 +171,10 @@ export default defineComponent({
     })
 
     const normalizedDataRef = computed(() => {
-      return props.data ? completeDataGaps(props.data, props.weekStartOn) : []
+      if (!props.data) {
+        return []
+      }
+      return completeDataGaps(props.data, props.weekStartsOn)
     })
 
     const maxValueRef = computed(() => {
@@ -184,20 +184,18 @@ export default defineComponent({
 
     const heatmapMatrixRef = computed(() => {
       if (props.loading) {
-        return createLoadingMatrix(props.weekStartOn)
+        return createLoadingMatrix(props.weekStartsOn)
       }
 
       const data = normalizedDataRef.value
 
-      const { weekStartOn } = props
+      const { weekStartsOn } = props
       const maxValue = maxValueRef.value
       const colors = mergedColorsRef.value
-      const calendarStartDate = startOfWeek(data[0].date, {
-        weekStartsOn: weekStartOn
-      })
+      const calendarStartDate = data[0].date
 
       const dayRects = data.map(item =>
-        createDayRect(item, calendarStartDate, weekStartOn, colors, maxValue)
+        createDayRect(item, calendarStartDate, weekStartsOn, colors, maxValue)
       )
 
       return createSparseMatrix(
@@ -209,65 +207,91 @@ export default defineComponent({
     })
 
     const weekLabelsRef = computed(() => {
-      const { weekStartOn } = props
+      const { weekStartsOn } = props
       const { weekdayFormat } = localeRef.value
       const { locale } = dateLocaleRef.value
 
+      const baseDate = startOfWeek(new Date(), {
+        weekStartsOn
+      })
+
       return Array.from({ length: 7 }, (_, i) => {
-        const actualDayOfWeek = (weekStartOn + i) % 7
-        const sampleDate = new Date(2023, 0, 1 + actualDayOfWeek)
         return {
-          label: format(sampleDate, weekdayFormat, { locale }),
+          label: format(addDays(baseDate, i), weekdayFormat, { locale }),
           visible: i % 2 !== 0
         }
       })
     })
 
-    const monthLabelsRef = computed(() => {
-      if (props.loading) {
-        const { monthFormat } = localeRef.value
-        const { locale } = dateLocaleRef.value
-        const currentYear = new Date().getFullYear()
-        return Array.from({ length: 12 }, (_, i) => {
-          const monthDate = new Date(currentYear, i, 1)
-          return {
-            name: format(monthDate, monthFormat, { locale }),
-            colSpan: Math.floor(53 / 12)
-          }
-        })
-      }
-
-      const matrix = heatmapMatrixRef.value
-      const cols = matrix[0].length
+    const loadingMonthLabelsRef = computed(() => {
       const { monthFormat } = localeRef.value
       const { locale } = dateLocaleRef.value
+      const currentYear = new Date().getFullYear()
+      // for more consistent month label widths
+      const colSpans = [5, 4, 5, 4, 5, 4, 5, 4, 4, 5, 4, 4]
+      return Array.from({ length: 12 }, (_, i) => {
+        const monthDate = new Date(currentYear, i, 1)
+        return {
+          name: format(monthDate, monthFormat, { locale }),
+          colSpan: colSpans[i]
+        }
+      })
+    })
 
-      const monthColumns = Array.from({ length: cols }, (_, col) => {
-        const cell = matrix.find(row => row[col]?.value !== null)?.[col]
-        return cell ? { col, monthKey: format(cell.date, 'yyyy-MM') } : null
-      }).filter(Boolean) as Array<{ col: number, monthKey: string }>
+    function getColsMonth(matrix: DayRect[][]): Col[] {
+      const cols = matrix[0].length
+      const res: Col[] = []
+      for (let col = 0; col < cols; col++) {
+        for (let row = 0; row < matrix.length; row++) {
+          const cell = matrix[row][col]
+          if (cell?.value !== null) {
+            res.push({
+              week: col,
+              month: format(cell.date, 'yyyy-MM')
+            })
+            break
+          }
+        }
+      }
+      return res
+    }
 
+    const dataMonthLabelsRef = computed(() => {
+      const { monthFormat } = localeRef.value
+      const { locale } = dateLocaleRef.value
+      const matrix = heatmapMatrixRef.value
+      if (!matrix || matrix.length === 0 || !matrix[0]) {
+        return []
+      }
+      const colsWithMonth = getColsMonth(matrix)
       const monthStats = mapValues(
-        groupBy(monthColumns, 'monthKey'),
-        (columns) => {
-          const colNumbers = columns.map(c => c.col)
+        groupBy(colsWithMonth, 'month'),
+        (entries) => {
+          const weekNumbers = entries.map(e => e.week)
           return {
-            count: columns.length,
-            start: Math.min(...colNumbers),
-            end: Math.max(...colNumbers)
+            weekCount: entries.length,
+            start: Math.min(...weekNumbers),
+            end: Math.max(...weekNumbers)
           }
         }
       )
 
       return Object.entries(monthStats)
-        .filter(([, stats]) => stats.count >= 3)
-        .map(([monthKey, stats]) => {
-          const monthDate = new Date(`${monthKey}-01`)
+        .filter(([, stats]) => stats.weekCount >= 3) // ensure have enough space
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([month, stats]) => {
+          const monthDate = new Date(parseISO(`${month}-01`))
           return {
             name: format(monthDate, monthFormat, { locale }),
             colSpan: stats.end - stats.start + 1
           }
         })
+    })
+
+    const monthLabelsRef = computed(() => {
+      return props.loading
+        ? loadingMonthLabelsRef.value
+        : dataMonthLabelsRef.value
     })
 
     return {

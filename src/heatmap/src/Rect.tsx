@@ -1,6 +1,6 @@
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { PopoverProps } from '../../popover/src/Popover'
-import type { RectData } from './interface'
+import type { RectData, ToolTipData } from './interface'
 import { format } from 'date-fns'
 import { computed, defineComponent, h, type PropType, type VNode } from 'vue'
 import Tooltip from '../../tooltip/src/Tooltip'
@@ -18,10 +18,7 @@ export const rectProps = {
     type: String,
     required: true
   },
-  unit: {
-    type: String,
-    required: true
-  },
+  unit: String,
   style: Object,
   loading: {
     type: Boolean,
@@ -31,9 +28,7 @@ export const rectProps = {
     type: [Boolean, Object] as PropType<PopoverProps | boolean>,
     default: true
   },
-  tooltipSlot: Function as PropType<
-    (data: { date: Date, value: number | null, unit: string }) => VNode[]
-  >
+  tooltipSlot: Function as PropType<(data: ToolTipData) => VNode[]>
 } as const
 
 export type RectProps = ExtractPublicPropTypes<typeof rectProps>
@@ -51,7 +46,7 @@ export default defineComponent({
     })
 
     const defaultTooltipContentRef = computed(() => {
-      return `${props.data.value} ${props.unit} on ${format(props.data.date, 'yyyy-MM-dd')}`
+      return `${props.data.value} ${props.unit ?? ''} ${format(new Date(props.data.date), 'yyyy-MM-dd')}`
     })
 
     const tooltipContentRef = computed(() => {
@@ -81,7 +76,7 @@ export default defineComponent({
       loading
     } = this
 
-    const rectElement = (
+    const triggerNode = (
       <div
         class={[
           `${mergedClsPrefix}-heatmap-rect`,
@@ -95,12 +90,12 @@ export default defineComponent({
     )
 
     return !tooltip || loading ? (
-      rectElement
+      triggerNode
     ) : (
       <Tooltip trigger="hover" {...tooltipProps}>
         {{
           default: () => tooltipContent,
-          trigger: () => rectElement
+          trigger: () => triggerNode
         }}
       </Tooltip>
     )

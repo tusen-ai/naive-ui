@@ -5,8 +5,9 @@
 </markdown>
 
 <script setup lang="ts">
+import type { WeekStartsOn } from 'naive-ui'
+import { generateHeatmapData } from 'naive-ui'
 import { computed, ref } from 'vue'
-import { generateHeatmapData } from '../../src/utils'
 
 const value = ref<'recent' | number>('recent')
 const dateRanges = [
@@ -67,7 +68,7 @@ const showWeekLabels = ref(true)
 const showMonthLabels = ref(true)
 const showColorIndicator = ref(true)
 const loading = ref(false)
-const weekStartOn = ref<0 | 1 | 2 | 3 | 4 | 5 | 6>(0)
+const weekStartsOn = ref<WeekStartsOn>(0)
 const size = ref<'small' | 'medium' | 'large'>('medium')
 
 const weekStartOptions = [
@@ -125,7 +126,7 @@ const sizeOptions = [
       <n-divider vertical />
       <span>周开始日：</span>
       <n-select
-        v-model:value="weekStartOn"
+        v-model:value="weekStartsOn"
         :options="weekStartOptions"
         style="width: 120px"
       />
@@ -170,12 +171,12 @@ const sizeOptions = [
 
     <n-flex align="center">
       <n-heatmap
-        :key="`heatmap-${value}-${weekStartOn}-${size}`"
+        :key="`heatmap-${value}-${weekStartsOn}-${size}`"
         :data="yearData"
-        :week-start-on="weekStartOn"
+        :week-starts-on="weekStartsOn"
         :loading="loading"
         :size="size"
-        unit="activities"
+        unit="提交"
         :show-week-labels="showWeekLabels"
         :show-month-labels="showMonthLabels"
         :show-color-indicator="showColorIndicator"
