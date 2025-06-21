@@ -2,9 +2,9 @@
 # Debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { TreeSelectOption } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 function createData(level = 4, baseKey = ''): TreeSelectOption[] | undefined {
   if (!level)
@@ -19,17 +19,11 @@ function createData(level = 4, baseKey = ''): TreeSelectOption[] | undefined {
   })
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      multiple: ref(false),
-      checkable: ref(false),
-      cascade: ref(false),
-      filterable: ref(false),
-      options: createData()
-    }
-  }
-})
+const multiple = ref(false)
+const checkable = ref(false)
+const cascade = ref(false)
+const filterable = ref(false)
+const options = createData()
 </script>
 
 <template>

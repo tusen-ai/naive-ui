@@ -4,9 +4,9 @@
 Use `on-load` callback to load data. When loading async, all nodes with `isLeaf` set to `false` and `chilren`'s type is not `Array` will be reckon as unloaded nodes.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { TreeSelectOption } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 function getChildren(option: TreeSelectOption) {
   const children = []
@@ -21,32 +21,27 @@ function getChildren(option: TreeSelectOption) {
   return children
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      checkStrategy: ref<'all' | 'parent' | 'child'>('all'),
-      cascade: ref(false),
-      showPath: ref(true),
-      value: ref(null),
-      options: ref([
-        {
-          label: 'l-0',
-          key: 'v-0',
-          depth: 1,
-          isLeaf: false
-        }
-      ]),
-      handleLoad(option: TreeSelectOption) {
-        return new Promise<void>((resolve) => {
-          window.setTimeout(() => {
-            option.children = getChildren(option)
-            resolve()
-          }, 1000)
-        })
-      }
-    }
+const checkStrategy = ref<'all' | 'parent' | 'child'>('all')
+const cascade = ref(false)
+const showPath = ref(true)
+const value = ref(null)
+const options = ref([
+  {
+    label: 'l-0',
+    key: 'v-0',
+    depth: 1,
+    isLeaf: false
   }
-})
+])
+
+function handleLoad(option: TreeSelectOption) {
+  return new Promise<void>((resolve) => {
+    window.setTimeout(() => {
+      option.children = getChildren(option)
+      resolve()
+    }, 1000)
+  })
+}
 </script>
 
 <template>
