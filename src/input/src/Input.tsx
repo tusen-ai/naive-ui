@@ -1258,7 +1258,9 @@ export default defineComponent({
                   this.inputProps?.style
                 ]}
                 tabindex={
-                  this.passivelyActivated && !this.activated ? -1 : undefined
+                  this.passivelyActivated && !this.activated
+                    ? -1
+                    : this.inputProps?.tabindex
                 }
                 placeholder={this.mergedPlaceholder[0]}
                 disabled={this.mergedDisabled}
