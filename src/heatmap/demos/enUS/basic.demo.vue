@@ -123,16 +123,16 @@ const sizeOptions = [
           Normal
         </template>
       </n-switch>
-      <n-divider vertical />
-      <span>Week Starts On:</span>
+    </n-flex>
+    <n-flex align="center" justify="start">
+      <n-text>Week Starts On:</n-text>
       <n-select
         v-model:value="weekStartsOn"
         :options="weekStartOptions"
         style="width: 120px"
       />
       <n-divider vertical />
-    </n-flex>
-    <n-flex>
+      <n-text>Size:</n-text>
       <n-radio-group v-model:value="size" name="size">
         <n-radio-button
           v-for="option in sizeOptions"
@@ -176,7 +176,7 @@ const sizeOptions = [
         :week-starts-on="weekStartsOn"
         :loading="loading"
         :size="size"
-        unit="commit"
+        unit="commits"
         :show-week-labels="showWeekLabels"
         :show-month-labels="showMonthLabels"
         :show-color-indicator="showColorIndicator"
