@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.42.1
+
+### Fixes
+
+- 修复 `n-input` 的 `input-props` 属性设置 `tabindex` 不生效的问题
+
 ## 2.42.0
 
 `2025-06-17`
