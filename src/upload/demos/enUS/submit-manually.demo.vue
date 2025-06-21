@@ -4,27 +4,23 @@
 You can use a `ref` to get a handle on files uploaded, and the `submit` method to submit them when you're ready.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { UploadFileInfo, UploadInst } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const fileListLengthRef = ref(0)
-    const uploadRef = ref<UploadInst | null>(null)
+const fileListLengthRef = ref(0)
+const uploadRef = ref<UploadInst | null>(null)
 
-    return {
-      upload: uploadRef,
-      fileListLength: fileListLengthRef,
-      handleChange(data: { fileList: UploadFileInfo[] }) {
-        fileListLengthRef.value = data.fileList.length
-      },
-      handleClick() {
-        uploadRef.value?.submit()
-      }
-    }
-  }
-})
+const fileListLength = fileListLengthRef
+const upload = uploadRef
+
+function handleChange(data: { fileList: UploadFileInfo[] }) {
+  fileListLengthRef.value = data.fileList.length
+}
+
+function handleClick() {
+  uploadRef.value?.submit()
+}
 </script>
 
 <template>

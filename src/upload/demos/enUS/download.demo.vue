@@ -4,42 +4,37 @@
 set `show-download-button` to show download button. set `on-download` to provide a handler function when download button clicked.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { UploadFileInfo } from 'naive-ui'
 import { useMessage } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    const fileListRef = ref<UploadFileInfo[]>([
-      {
-        id: 'a',
-        name: 'My Fault.png',
-        status: 'error'
-      },
-      {
-        id: 'c',
-        name: 'Finished you can dowload.png',
-        status: 'finished',
-        url: '__HTTP__://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
-      },
-      {
-        id: 'd',
-        name: 'Waiting for the finish .doc',
-        status: 'uploading',
-        percentage: 50
-      }
-    ])
-    const handleDownload = (file: UploadFileInfo) => {
-      message.success(`success：${file.name}`)
-    }
-    return {
-      fileList: fileListRef,
-      handleDownload
-    }
+const message = useMessage()
+const fileListRef = ref<UploadFileInfo[]>([
+  {
+    id: 'a',
+    name: 'My Fault.png',
+    status: 'error'
+  },
+  {
+    id: 'c',
+    name: 'Finished you can dowload.png',
+    status: 'finished',
+    url: '__HTTP__://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+  },
+  {
+    id: 'd',
+    name: 'Waiting for the finish .doc',
+    status: 'uploading',
+    percentage: 50
   }
-})
+])
+
+const fileList = fileListRef
+
+function handleDownload(file: UploadFileInfo) {
+  message.success(`success：${file.name}`)
+}
 </script>
 
 <template>

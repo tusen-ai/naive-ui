@@ -2,26 +2,18 @@
 # Debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { ArchiveOutline as ArchiveIcon } from '@vicons/ionicons5'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  components: {
-    ArchiveIcon
-  },
-  setup() {
-    return {
-      handleUpdateList(...args: unknown[]) {
-        console.log(...args)
-      },
-      multiple: ref(false),
-      directory: ref(false),
-      directoryDnd: ref(false),
-      directoryDndUndefined: ref(true)
-    }
-  }
-})
+function handleUpdateList(...args: unknown[]) {
+  console.log(...args)
+}
+
+const multiple = ref(false)
+const directory = ref(false)
+const directoryDnd = ref(false)
+const directoryDndUndefined = ref(true)
 </script>
 
 <template>

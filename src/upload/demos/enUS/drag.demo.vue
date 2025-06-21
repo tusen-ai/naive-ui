@@ -4,15 +4,8 @@
 You can set `directory-dnd` to `true` to make directory drag and drop available.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { ArchiveOutline as ArchiveIcon } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    ArchiveIcon
-  }
-})
 </script>
 
 <template>

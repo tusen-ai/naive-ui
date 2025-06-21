@@ -4,15 +4,8 @@
 你可以把 `directory-dnd` 设为 `true` 来允许拖拽上传文件夹。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { ArchiveOutline as ArchiveIcon } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    ArchiveIcon
-  }
-})
 </script>
 
 <template>
