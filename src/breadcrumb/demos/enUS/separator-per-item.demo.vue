@@ -4,15 +4,8 @@
 Use separator prop or separator slot to custom separator of an item. When both are present, separator slot will be used.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { MdCash } from '@vicons/ionicons4'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    MdCash
-  }
-})
 </script>
 
 <template>
