@@ -4,7 +4,7 @@
 Usually you can use vue-router here to accomplish routing. Also, you can render `label` as `<router-link />` or `<a />` to set route.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { MenuOption } from 'naive-ui'
 import type { Component } from 'vue'
 import {
@@ -14,7 +14,7 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
 import { NIcon, useMessage } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 import { RouterLink } from 'vue-router'
 
 function renderIcon(icon: Component) {
@@ -131,18 +131,12 @@ const menuOptions: MenuOption[] = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      menuOptions,
-      handleUpdateValue(key: string, item: MenuOption) {
-        message.info(`[onUpdate:value]: ${JSON.stringify(key)}`)
-        message.info(`[onUpdate:value]: ${JSON.stringify(item)}`)
-      }
-    }
-  }
-})
+const message = useMessage()
+
+function handleUpdateValue(key: string, item: MenuOption) {
+  message.info(`[onUpdate:value]: ${JSON.stringify(key)}`)
+  message.info(`[onUpdate:value]: ${JSON.stringify(item)}`)
+}
 </script>
 
 <template>
