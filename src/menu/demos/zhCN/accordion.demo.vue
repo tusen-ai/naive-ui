@@ -4,7 +4,7 @@
 像一个手风琴。使用 `accordion` 属性对一级菜单使用该模式。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { MenuOption } from 'naive-ui'
 import type { Component } from 'vue'
 import {
@@ -13,7 +13,7 @@ import {
   PawOutline as PawIcon
 } from '@vicons/ionicons5'
 import { NIcon } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 
 function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
@@ -71,14 +71,7 @@ const menuOptions: MenuOption[] = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    return {
-      menuOptions,
-      defaultExpandedKeys: ['fish', 'braise']
-    }
-  }
-})
+const defaultExpandedKeys = ['fish', 'braise']
 </script>
 
 <template>
