@@ -4,23 +4,18 @@
 `positive-click` & `negative-click`
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      handlePositiveClick() {
-        message.info('positive click')
-      },
-      handleNegativeClick() {
-        message.info('negative click')
-      }
-    }
-  }
-})
+const message = useMessage()
+
+function handlePositiveClick() {
+  message.info('positive click')
+}
+
+function handleNegativeClick() {
+  message.info('negative click')
+}
 </script>
 
 <template>
