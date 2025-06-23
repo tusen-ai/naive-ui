@@ -4,25 +4,20 @@
 An example of preset `dialog`.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
+const message = useMessage()
+const showModal = ref(false)
 
-    return {
-      showModal: ref(false),
-      cancelCallback() {
-        message.success('Cancel')
-      },
-      submitCallback() {
-        message.success('Submit')
-      }
-    }
-  }
-})
+function cancelCallback() {
+  message.success('Cancel')
+}
+
+function submitCallback() {
+  message.success('Submit')
+}
 </script>
 
 <template>
