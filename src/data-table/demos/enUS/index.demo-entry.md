@@ -31,7 +31,7 @@ filter-and-sorter.vue
 pagination-behavior-on-filter.vue
 multiple-sorter.vue
 column-draggable.vue
-select.vue.vue
+select.vue
 select-single.vue
 custom-select.vue
 group-header.vue
