@@ -32,11 +32,11 @@ const data: Song[] = [
 
 const options: DropdownOption[] = [
   {
-    label: 'Edit',
+    label: '编辑',
     key: 'edit'
   },
   {
-    label: () => h('span', { style: { color: 'red' } }, 'Delete'),
+    label: () => h('span', { style: { color: 'red' } }, '删除'),
     key: 'delete'
   }
 ]
@@ -45,7 +45,7 @@ const message = useMessage()
 const showDropdownRef = ref(false)
 const xRef = ref(0)
 const yRef = ref(0)
-const cols: DataTableColumns<Song> = [
+const colsReactive: DataTableColumns<Song> = [
   {
     title: 'No.',
     key: 'no'
@@ -59,6 +59,11 @@ const cols: DataTableColumns<Song> = [
     key: 'length'
   }
 ]
+
+const cols = colsReactive
+const showDropdown = showDropdownRef
+const x = xRef
+const y = yRef
 
 function handleSelect() {
   showDropdownRef.value = false

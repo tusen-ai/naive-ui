@@ -6,12 +6,12 @@
 import type {
   DataTableColumn,
   DataTableColumns,
-  DataTableFilterOptionValue,
   DataTableFilterState,
   DataTableSortOrder,
   DataTableSortState,
   PaginationInfo
 } from 'naive-ui'
+import type { FilterOptionValue } from '../../src/interface'
 import { defineComponent, onMounted, reactive, ref } from 'vue'
 
 interface RowData {
@@ -67,7 +67,7 @@ interface QueryParams {
   page: number
   pageSize: number
   order?: DataTableSortOrder
-  filterValues?: DataTableFilterOptionValue[] | null
+  filterValues?: FilterOptionValue[] | null | undefined
 }
 
 interface QueryResult {
