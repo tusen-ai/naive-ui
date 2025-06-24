@@ -33,6 +33,7 @@
 
 ```demo
 basic.vue
+katex.vue
 github-syntax-guide.vue
 ```
 
@@ -40,7 +41,8 @@ github-syntax-guide.vue
 
 ### Markdown Props
 
-| 名称      | 类型       | 默认值      | 说明             | 版本         |
-| --------- | ---------- | ----------- | ---------------- | ------------ |
-| content   | `string`   | `undefined` | 要展示的文本内容 | NEXT_VERSION |
-| mdPlugins | `Plugin[]` | `[]`        | 插件             | NEXT_VERSION |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| content | `string` | `undefined` | 要展示的文本内容 | NEXT_VERSION |
+| allowHtml | `boolean` | `false` | 是否允许在markdown内容中使用HTML | NEXT_VERSION |
+| enableLatex | `boolean` | `true` | 启用LaTeX数学表达式 | NEXT_VERSION |

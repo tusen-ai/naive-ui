@@ -3,10 +3,11 @@
 </markdown>
 
 <script lang="ts" setup>
-import { rehypeGithubAlerts } from 'rehype-github-alerts'
-import remarkBreaks from 'remark-breaks'
-import remarkGfm from 'remark-gfm'
 import { ref } from 'vue'
+
+const options = {
+  isBreaks: true
+}
 
 const markdownText = ref(`
 
@@ -46,9 +47,8 @@ A footnote can also have multiple lines[^2].
 </script>
 
 <template>
-    <n-markdown
-      :content="markdownText"
-      :remark-plugins="[remarkGfm, remarkBreaks]"
-      :rehype-plugins="[rehypeGithubAlerts]"
-    />
+  <n-markdown
+    :content="markdownText"
+    v-bind="options"
+  />
 </template>

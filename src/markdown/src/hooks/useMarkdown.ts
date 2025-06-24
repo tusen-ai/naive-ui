@@ -1,14 +1,15 @@
-// import type { Props } from 'hast-util-to-jsx-runtime'
-import type { PluggableList } from 'unified'
 import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
-// import { NImage } from 'naive-ui'
-// import rehypeStringify from 'rehype-stringify'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import { unified } from 'unified'
-import { Fragment, h, withCtx } from 'vue'
+import { Fragment } from 'vue'
+import { jsx } from 'vue/jsx-runtime'
+import { useMarkdownComponents } from './useComponents'
+import { useMarkdownRehypePlugins } from './useMarkdownRehypePlugins'
+import { useMarkdownRemarkPlugins } from './useMarkdownRemarkPlugins'
+import { useMarkdownContent } from './useMarkdownContent'
+// import { useMarkdownContent } from './useMarkdownContent'
 
-const emptyPlugins: PluggableList[] = []
 const emptyRemarkRehypeOptions = { allowDangerousHtml: true }
 
 export interface TagReplacement {
@@ -22,46 +23,37 @@ export interface MarkdownOptions {
 }
 
 function createProcessor(options: any) {
-  const rehypePlugins = options.rehypePlugins || emptyPlugins
-  const remarkPlugins = options.remarkPlugins || emptyPlugins
   const remarkRehypeOptions = options.remarkRehypeOptions
     ? { ...options.remarkRehypeOptions, ...emptyRemarkRehypeOptions }
     : emptyRemarkRehypeOptions
 
+  const rehypePluginsList = useMarkdownRehypePlugins(options)
+  const remarkPluginsList = useMarkdownRemarkPlugins(options)
+
   const processor = unified()
     .use(remarkParse)
-    .use(remarkPlugins)
+    .use(remarkPluginsList.value)
     .use(remarkRehype, remarkRehypeOptions)
-    .use(rehypePlugins)
+    .use(rehypePluginsList.value)
 
   return processor
 }
 
-export function useMarkdownComponents() {
+const Components = useMarkdownComponents()
+
+export function useMarkdown() {
   function Markdown(options: any, content: string) {
     const processor = createProcessor(options)
 
+    const escapedContent = useMarkdownContent(content || '', options)
+
     // hast
-    const hast = processor.runSync(processor.parse(content))
- 
-    function jsx(type, props, key) {
-      const { children } = props
-      delete props.children
+    const hast = processor.runSync(processor.parse(escapedContent))
 
-      if (arguments.length > 2) {
-        props.key = key
-      }
-      if (type === Fragment) {
-        return h(type, props, children as any) as any as JSX.Element
-      }
-
-      return h(type ?? 'div', props, {
-        default: withCtx(() => children),
-      }) as JSX.Element
-    }
-
+    // vnode
     const vnode = toJsxRuntime(hast, {
       Fragment,
+      components: Components,
       jsx,
       jsxs: jsx,
       elementAttributeNameCase: 'html',
@@ -70,7 +62,6 @@ export function useMarkdownComponents() {
       passNode: true
     })
 
-    console.log(hast, vnode, 'vnode')
     return vnode
   }
 

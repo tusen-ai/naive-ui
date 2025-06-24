@@ -8,26 +8,6 @@
   由于包体积原因，Naive UI 不内置 unified。如果你需要使用公式组件，请确保你在使用之前已经设定了 unified。
 </n-alert>
 
-下面的代码展示了如何为 Markdown 设定 unified。
-
-```html
-<template>
-  <n-config-provider
-    :unified="unified"
-    :md-plugins="[remarkParse, rehypeStringify, remarkRehype]"
-  >
-    <my-app />
-  </n-config-provider>
-</template>
-
-<script setup>
-  import unified from 'unified'
-  import rehypeStringify from 'rehype-stringify'
-  import remarkParse from 'remark-parse'
-  import remarkRehype from 'remark-rehype'
-</script>
-```
-
 ## 演示
 
 ```demo
@@ -41,5 +21,6 @@ mdPlugins.vue
 
 | 名称      | 类型       | 默认值      | 说明             | 版本         |
 | --------- | ---------- | ----------- | ---------------- | ------------ |
-| content   | `string`   | `undefined` | 要展示的文本内容 | NEXT_VERSION |
-| mdPlugins | `Plugin[]` | `[]`        | 插件             | NEXT_VERSION |
+| content   | `string`   | `undefined` | Markdown content to render | NEXT_VERSION |
+| allowHtml | `boolean` | `false` | Whether to allow HTML in markdown content | NEXT_VERSION |
+| enableLatex | `boolean` | `false` | Enable LaTeX math expressions | NEXT_VERSION |

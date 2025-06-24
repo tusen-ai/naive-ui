@@ -4,9 +4,8 @@ import type { ThemeProps } from '../../_mixins'
 import type { MarkdownTheme } from '../styles/light'
 import { computed, defineComponent, h, toRef } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-// import { configProviderInjectionKey } from '../../config-provider/src/context'
 import markdownLight from '../styles/light'
-import { useMarkdownComponents } from './hooks/useMarkdown'
+import { useMarkdown } from './hooks/useMarkdown'
 import style from './styles/index.cssr'
 
 export const markdownProps = {
@@ -17,11 +16,19 @@ export const markdownProps = {
   },
   remarkPlugins: {
     type: Array as () => PluggableList,
-    default: undefined
+    default: []
   },
   rehypePlugins: {
     type: Array as () => PluggableList,
-    default: undefined
+    default: []
+  },
+  allowHtml: {
+    type: Boolean,
+    default: false
+  },
+  enableLatex: {
+    type: Boolean,
+    default: true
   }
 }
 
@@ -29,7 +36,6 @@ export default defineComponent({
   name: 'Markdown',
   props: markdownProps,
   setup(props) {
-    // const configProviderContext = inject(configProviderInjectionKey)
     const { inlineThemeDisabled, mergedClsPrefixRef }
             = useConfig(props)
     const themeRef = useTheme(
@@ -56,14 +62,13 @@ export default defineComponent({
       ? useThemeClass('Markdown', undefined, cssVarsRef, props)
       : undefined
 
-    const { Markdown } = useMarkdownComponents()
+    const { Markdown } = useMarkdown()
 
     const content = toRef(props, 'content')
     const renderedContent = computed(() => {
       try {
         const res = Markdown({
-          remarkPlugins: props.remarkPlugins,
-          rehypePlugins: props.rehypePlugins
+          ...props
         }, content.value)
         return res
       }

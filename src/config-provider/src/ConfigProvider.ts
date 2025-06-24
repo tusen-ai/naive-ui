@@ -11,6 +11,7 @@ import type {
   RtlProp
 } from './internal-interface'
 import type { Katex } from './katex'
+import type { Pluggable } from './Unified'
 import { hash } from 'css-render'
 import { merge } from 'lodash-es'
 import { useMemo } from 'vooks'
@@ -28,7 +29,6 @@ import {
 import { defaultClsPrefix, type Hljs } from '../../_mixins'
 import { warn } from '../../_utils'
 import { configProviderInjectionKey } from './context'
-import { Pluggable } from './Unified'
 
 export const configProviderProps = {
   abstract: Boolean,
