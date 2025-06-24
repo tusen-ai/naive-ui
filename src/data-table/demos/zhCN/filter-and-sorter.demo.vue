@@ -93,7 +93,7 @@ export default defineComponent({
         tableRef.value?.filter(null)
       },
       clearSorter() {
-        tableRef.value?.sort(null)
+        tableRef.value?.clearSorter()
       }
     }
   }

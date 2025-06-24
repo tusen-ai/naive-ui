@@ -4,10 +4,10 @@
   Set colspan and rowspan by setting `colSpan` and `rowSpan` of column object. Set colspan in header by setting `titleColSpan` of column object.
   </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DataTableColumns } from 'naive-ui'
 import { NButton, NTag, useMessage } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 
 interface RowData {
   key: number
@@ -110,21 +110,16 @@ function createData(): RowData[] {
   ]
 }
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    function sendMail(rowData: RowData) {
-      message.info(`send mail to ${rowData.name}`)
-    }
-    return {
-      data: createData(),
-      columns: createColumns({ sendMail }),
-      pagination: {
-        pageSize: 10
-      }
-    }
-  }
-})
+const message = useMessage()
+function sendMail(rowData: RowData) {
+  message.info(`send mail to ${rowData.name}`)
+}
+
+const data = createData()
+const columns = createColumns({ sendMail })
+const pagination = {
+  pageSize: 10
+}
 </script>
 
 <template>

@@ -2,7 +2,7 @@
   # Async
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type {
   DataTableColumn,
   DataTableColumns,
@@ -12,7 +12,7 @@ import type {
   PaginationInfo
 } from 'naive-ui'
 import type { FilterOptionValue } from '../../src/interface'
-import { defineComponent, onMounted, reactive, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 
 interface RowData {
   column1: number
@@ -103,115 +103,103 @@ function query({
   })
 }
 
-export default defineComponent({
-  setup() {
-    const dataRef = ref<RowData[]>([])
-    const loadingRef = ref(true)
-    const columnsRef = ref(columns)
-    const column1Reactive = reactive(column1)
-    const column2Reactive = reactive(column2)
-    const paginationReactive = reactive({
-      page: 1,
-      pageCount: 1,
-      pageSize: 10,
-      itemCount: 0,
-      prefix({ itemCount }: PaginationInfo) {
-        return `Total is ${itemCount}.`
-      }
-    })
+const dataRef = ref<RowData[]>([])
+const loadingRef = ref(true)
+const column1Reactive = reactive(column1)
+const column2Reactive = reactive(column2)
+const paginationReactive = reactive({
+  page: 1,
+  pageCount: 1,
+  pageSize: 10,
+  itemCount: 0,
+  prefix({ itemCount }: PaginationInfo) {
+    return `Total is ${itemCount}.`
+  }
+})
 
-    onMounted(() => {
+onMounted(() => {
+  query({
+    page: paginationReactive.page,
+    pageSize: paginationReactive.pageSize,
+    order: column1Reactive.sortOrder,
+    filterValues: column2Reactive.filterOptionValues
+  }).then((data) => {
+    dataRef.value = data.data
+    paginationReactive.pageCount = data.pageCount
+    paginationReactive.itemCount = data.total
+    loadingRef.value = false
+  })
+})
+
+function rowKey(rowData: RowData) {
+  return rowData.column1
+}
+
+function handleSorterChange(sorter: DataTableSortState) {
+  if (!sorter || sorter.columnKey === 'column1') {
+    if (!loadingRef.value) {
+      loadingRef.value = true
       query({
         page: paginationReactive.page,
         pageSize: paginationReactive.pageSize,
-        order: column1Reactive.sortOrder,
+        order: !sorter ? false : sorter.order,
         filterValues: column2Reactive.filterOptionValues
       }).then((data) => {
+        column1Reactive.sortOrder = !sorter ? false : sorter.order
         dataRef.value = data.data
         paginationReactive.pageCount = data.pageCount
         paginationReactive.itemCount = data.total
         loadingRef.value = false
       })
-    })
-
-    return {
-      data: dataRef,
-      columns: columnsRef,
-      column1: column1Reactive,
-      column2: column2Reactive,
-      pagination: paginationReactive,
-      loading: loadingRef,
-      rowKey(rowData: RowData) {
-        return rowData.column1
-      },
-      handleSorterChange(sorter: DataTableSortState) {
-        if (!sorter || sorter.columnKey === 'column1') {
-          if (!loadingRef.value) {
-            loadingRef.value = true
-            query({
-              page: paginationReactive.page,
-              pageSize: paginationReactive.pageSize,
-              order: !sorter ? false : sorter.order,
-              filterValues: column2Reactive.filterOptionValues
-            }).then((data) => {
-              column1Reactive.sortOrder = !sorter ? false : sorter.order
-              dataRef.value = data.data
-              paginationReactive.pageCount = data.pageCount
-              paginationReactive.itemCount = data.total
-              loadingRef.value = false
-            })
-          }
-        }
-      },
-      handleFiltersChange(filters: DataTableFilterState) {
-        if (!loadingRef.value) {
-          loadingRef.value = true
-          const filterValues = Array.isArray(filters.column2)
-            ? filters.column2
-            : []
-          query({
-            page: paginationReactive.page,
-            pageSize: paginationReactive.pageSize,
-            order: column1Reactive.sortOrder,
-            filterValues
-          }).then((data) => {
-            column2Reactive.filterOptionValues = filterValues
-            dataRef.value = data.data
-            paginationReactive.pageCount = data.pageCount
-            paginationReactive.itemCount = data.total
-            loadingRef.value = false
-          })
-        }
-      },
-      handlePageChange(currentPage: number) {
-        if (!loadingRef.value) {
-          loadingRef.value = true
-          query({
-            page: currentPage,
-            pageSize: paginationReactive.pageSize,
-            order: column1Reactive.sortOrder,
-            filterValues: column2Reactive.filterOptionValues
-          }).then((data) => {
-            dataRef.value = data.data
-            paginationReactive.page = currentPage
-            paginationReactive.pageCount = data.pageCount
-            paginationReactive.itemCount = data.total
-            loadingRef.value = false
-          })
-        }
-      }
     }
   }
-})
+}
+
+function handleFiltersChange(filters: DataTableFilterState) {
+  if (!loadingRef.value) {
+    loadingRef.value = true
+    const filterValues = Array.isArray(filters.column2) ? filters.column2 : []
+    query({
+      page: paginationReactive.page,
+      pageSize: paginationReactive.pageSize,
+      order: column1Reactive.sortOrder,
+      filterValues
+    }).then((data) => {
+      column2Reactive.filterOptionValues = filterValues
+      dataRef.value = data.data
+      paginationReactive.pageCount = data.pageCount
+      paginationReactive.itemCount = data.total
+      loadingRef.value = false
+    })
+  }
+}
+
+function handlePageChange(currentPage: number) {
+  if (!loadingRef.value) {
+    loadingRef.value = true
+    query({
+      page: currentPage,
+      pageSize: paginationReactive.pageSize,
+      order: column1Reactive.sortOrder,
+      filterValues: column2Reactive.filterOptionValues
+    }).then((data) => {
+      dataRef.value = data.data
+      paginationReactive.page = currentPage
+      paginationReactive.pageCount = data.pageCount
+      paginationReactive.itemCount = data.total
+      loadingRef.value = false
+    })
+  }
+}
 </script>
 
 <template>
   <n-data-table
     remote
     :columns="columns"
-    :data="data"
-    :loading="loading"
-    :pagination="pagination"
+    :data="dataRef"
+    :loading="loadingRef"
+    :pagination="paginationReactive"
     :row-key="rowKey"
     @update:sorter="handleSorterChange"
     @update:filters="handleFiltersChange"

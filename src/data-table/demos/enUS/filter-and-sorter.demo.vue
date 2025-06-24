@@ -2,9 +2,9 @@
   # Uncontrolled filter and sorter
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DataTableColumns, DataTableInst } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 interface RowData {
   key: number
@@ -72,32 +72,26 @@ const data = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    const tableRef = ref<DataTableInst | null>(null)
+const table = ref<DataTableInst | null>(null)
+const pagination = { pageSize: 5 }
 
-    return {
-      table: tableRef,
-      data,
-      columns,
-      pagination: { pageSize: 5 },
-      filterAddress() {
-        tableRef.value?.filter({
-          address: ['London']
-        })
-      },
-      sortName() {
-        tableRef.value?.sort('name', 'ascend')
-      },
-      clearFilters() {
-        tableRef.value?.filter(null)
-      },
-      clearSorter() {
-        tableRef.value?.sort(null)
-      }
-    }
-  }
-})
+function filterAddress() {
+  table.value?.filter({
+    address: ['London']
+  })
+}
+
+function sortName() {
+  table.value?.sort('name', 'ascend')
+}
+
+function clearFilters() {
+  table.value?.clearFilters()
+}
+
+function clearSorter() {
+  table.value?.clearSorter()
+}
 </script>
 
 <template>

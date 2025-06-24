@@ -2,7 +2,7 @@
   # Switchable Editable Table
   </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { InputInst } from 'naive-ui'
 import type { PropType } from 'vue'
 import { NInput } from 'naive-ui'
@@ -69,73 +69,64 @@ const ShowOrEdit = defineComponent({
   }
 })
 
-export default defineComponent({
-  setup() {
-    const data = ref(createData())
-    const page = ref(1)
+const data = ref(createData())
+const page = ref(1)
 
-    const getDataIndex = (key: number) => {
-      return data.value.findIndex(item => item.key === key)
-    }
-    const handlePageChange = (curPage: number) => {
-      page.value = curPage
-    }
+function getDataIndex(key: number) {
+  return data.value.findIndex(item => item.key === key)
+}
+function handlePageChange(curPage: number) {
+  page.value = curPage
+}
 
-    const paginationRef = computed(() => ({
-      pageSize: 10,
-      page: page.value
-    }))
+const paginationRef = computed(() => ({
+  pageSize: 10,
+  page: page.value
+}))
 
-    return {
-      data,
-      paginationRef,
-      handlePageChange,
-      columns: [
-        {
-          title: 'Name',
-          key: 'name',
-          width: 150,
-          render(row: RowData) {
-            const index = getDataIndex(row.key)
-            return h(ShowOrEdit, {
-              value: row.name,
-              onUpdateValue(v: string) {
-                data.value[index].name = v
-              }
-            })
-          }
-        },
-        {
-          title: 'Age',
-          key: 'age',
-          width: 100,
-          render(row: RowData) {
-            const index = getDataIndex(row.key)
-            return h(ShowOrEdit, {
-              value: row.age,
-              onUpdateValue(v: string) {
-                data.value[index].age = Number(v)
-              }
-            })
-          }
-        },
-        {
-          title: 'Address',
-          key: 'address',
-          render(row: RowData) {
-            const index = getDataIndex(row.key)
-            return h(ShowOrEdit, {
-              value: row.address,
-              onUpdateValue(v: string) {
-                data.value[index].address = v
-              }
-            })
-          }
+const columns = [
+  {
+    title: 'Name',
+    key: 'name',
+    width: 150,
+    render(row: RowData) {
+      const index = getDataIndex(row.key)
+      return h(ShowOrEdit, {
+        value: row.name,
+        onUpdateValue(v: string) {
+          data.value[index].name = v
         }
-      ]
+      })
+    }
+  },
+  {
+    title: 'Age',
+    key: 'age',
+    width: 100,
+    render(row: RowData) {
+      const index = getDataIndex(row.key)
+      return h(ShowOrEdit, {
+        value: row.age,
+        onUpdateValue(v: string) {
+          data.value[index].age = Number(v)
+        }
+      })
+    }
+  },
+  {
+    title: 'Address',
+    key: 'address',
+    render(row: RowData) {
+      const index = getDataIndex(row.key)
+      return h(ShowOrEdit, {
+        value: row.address,
+        onUpdateValue(v: string) {
+          data.value[index].address = v
+        }
+      })
     }
   }
-})
+]
 </script>
 
 <template>

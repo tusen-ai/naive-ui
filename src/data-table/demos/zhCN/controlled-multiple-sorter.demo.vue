@@ -6,14 +6,14 @@
   如果你只需要 UI 显示多列排序的状态，那么不传 `compare` 即可。
   </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type {
   DataTableColumnKey,
   DataTableColumns,
   DataTableSortOrder,
   DataTableSortState
 } from 'naive-ui'
-import { computed, defineComponent, ref } from 'vue'
+import { computed, ref } from 'vue'
 
 interface RowData {
   key: number
@@ -59,79 +59,69 @@ const data: RowData[] = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    const sortStatesRef = ref<DataTableSortState[]>([])
-    const sortKeyMapOrderRef = computed<
-      Record<DataTableColumnKey, DataTableSortOrder>
-    >(() =>
-      sortStatesRef.value.reduce(
-        (
-          result: Record<DataTableColumnKey, DataTableSortOrder>,
-          { columnKey, order }
-        ) => {
-          result[columnKey] = order
-          return result
-        },
-        {}
-      )
-    )
-    const paginationRef = ref({ pageSize: 5 })
+const sortStates = ref<DataTableSortState[]>([])
+const sortKeyMapOrder = computed<
+  Record<DataTableColumnKey, DataTableSortOrder>
+>(() =>
+  sortStates.value.reduce(
+    (
+      result: Record<DataTableColumnKey, DataTableSortOrder>,
+      { columnKey, order }
+    ) => {
+      result[columnKey] = order
+      return result
+    },
+    {}
+  )
+)
+const pagination = ref({ pageSize: 5 })
 
-    const columnsRef = computed<DataTableColumns<RowData>>(() => [
-      {
-        title: 'Name',
-        key: 'name'
-      },
-      {
-        title: 'Age',
-        key: 'age',
-        sortOrder: sortKeyMapOrderRef.value.age || false,
-        sorter(rowA, rowB) {
-          return rowA.age - rowB.age
-        }
-      },
-      {
-        title: 'Chinese Score',
-        key: 'chinese',
-        sortOrder: sortKeyMapOrderRef.value.chinese || false,
-        sorter: {
-          compare: (a, b) => a.chinese - b.chinese,
-          multiple: 3
-        }
-      },
-      {
-        title: 'Math Score',
-        key: 'math',
-        sortOrder: sortKeyMapOrderRef.value.math || false,
-        sorter: {
-          compare: (a, b) => a.math - b.math,
-          multiple: 2
-        }
-      },
-      {
-        title: 'English Score',
-        sortOrder: sortKeyMapOrderRef.value.english || false,
-        key: 'english',
-        sorter: {
-          compare: (a, b) => a.english - b.english,
-          multiple: 1
-        }
-      }
-    ])
-
-    function handleUpdateSorter(sorters: DataTableSortState[]) {
-      console.log(sorters)
-      sortStatesRef.value = ([] as DataTableSortState[]).concat(sorters)
+const columns = computed<DataTableColumns<RowData>>(() => [
+  {
+    title: 'Name',
+    key: 'name'
+  },
+  {
+    title: 'Age',
+    key: 'age',
+    sortOrder: sortKeyMapOrder.value.age || false,
+    sorter(rowA, rowB) {
+      return rowA.age - rowB.age
     }
-    return {
-      columns: columnsRef,
-      handleUpdateSorter,
-      data,
-      pagination: paginationRef
+  },
+  {
+    title: 'Chinese Score',
+    key: 'chinese',
+    sortOrder: sortKeyMapOrder.value.chinese || false,
+    sorter: {
+      compare: (a, b) => a.chinese - b.chinese,
+      multiple: 3
+    }
+  },
+  {
+    title: 'Math Score',
+    key: 'math',
+    sortOrder: sortKeyMapOrder.value.math || false,
+    sorter: {
+      compare: (a, b) => a.math - b.math,
+      multiple: 2
+    }
+  },
+  {
+    title: 'English Score',
+    sortOrder: sortKeyMapOrder.value.english || false,
+    key: 'english',
+    sorter: {
+      compare: (a, b) => a.english - b.english,
+      multiple: 1
     }
   }
-})
+])
+
+function handleUpdateSorter(sorters: DataTableSortState[]) {
+  console.log(sorters)
+  sortStates.value = ([] as DataTableSortState[]).concat(sorters)
+}
 </script>
 
 <template>

@@ -2,11 +2,11 @@
   # Customized column header rendering
   </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DataTableBaseColumn, DataTableColumns } from 'naive-ui'
 import type { ComponentInternalInstance, VNode, VNodeChild } from 'vue'
 import { NGradientText, NTooltip } from 'naive-ui'
-import { defineComponent, getCurrentInstance, h } from 'vue'
+import { getCurrentInstance, h } from 'vue'
 
 interface RowData extends Record<string, unknown> {
   key: number
@@ -92,18 +92,11 @@ const data = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    const instance = getCurrentInstance()
-    return {
-      data,
-      columns: createColumns(instance),
-      pagination: {
-        pageSize: 10
-      }
-    }
-  }
-})
+const instance = getCurrentInstance()
+const columns = createColumns(instance)
+const pagination = {
+  pageSize: 10
+}
 </script>
 
 <template>

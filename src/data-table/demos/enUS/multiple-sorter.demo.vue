@@ -4,9 +4,9 @@
   Set `multiple` and `compare` on `sorter` to enable multiple column sorting. `multiple` is the priority of sorting (larger value means higher priority).
   </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DataTableColumns, DataTableInst } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 interface RowData {
   key: number
@@ -113,31 +113,26 @@ const data: RowData[] = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    const dataTableInstRef = ref<DataTableInst | null>(null)
-    return {
-      data,
-      columns,
-      dataTableInst: dataTableInstRef,
-      pagination: ref({ pageSize: 5 }),
-      filterAddress() {
-        dataTableInstRef.value?.filter({
-          address: ['London']
-        })
-      },
-      sortName() {
-        dataTableInstRef.value?.sort('name', 'ascend')
-      },
-      clearFilters() {
-        dataTableInstRef.value?.filter(null)
-      },
-      clearSorter() {
-        dataTableInstRef.value?.sort(null)
-      }
-    }
-  }
-})
+const dataTableInst = ref<DataTableInst | null>(null)
+const pagination = ref({ pageSize: 5 })
+
+function filterAddress() {
+  dataTableInst.value?.filter({
+    address: ['London']
+  })
+}
+
+function sortName() {
+  dataTableInst.value?.sort('name', 'ascend')
+}
+
+function clearFilters() {
+  dataTableInst.value?.clearFilters()
+}
+
+function clearSorter() {
+  dataTableInst.value?.clearSorter()
+}
 </script>
 
 <template>
