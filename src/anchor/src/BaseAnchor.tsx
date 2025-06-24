@@ -164,7 +164,7 @@ export default defineComponent({
       if (!transition) {
         disableTransitionOneTick()
       }
-      handleScroll()
+      // handleScroll()
     }
 
     function _handleScroll(transition = true): void {
