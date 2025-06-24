@@ -1,28 +1,24 @@
-# Multiple column sorting
+<markdown>
+  # Multiple column sorting
 
-Set `multiple` and `compare` on `sorter` to enable multiple column sorting. `multiple` is the priority of sorting (larger value means higher priority).
+  Set `multiple` and `compare` on `sorter` to enable multiple column sorting. `multiple` is the priority of sorting (larger value means higher priority).
+  </markdown>
 
-```html
-<n-space vertical :size="12">
-  <n-space>
-    <n-button @click="sortName">Sort By Name (Ascend)</n-button>
-    <n-button @click="filterAddress">Filter Address (London)</n-button>
-    <n-button @click="clearFilters">Clear Filters</n-button>
-    <n-button @click="clearSorter">Clear Sorter</n-button>
-  </n-space>
-  <n-data-table
-    ref="dataTableInst"
-    :columns="columns"
-    :data="data"
-    :pagination="pagination"
-  />
-</n-space>
-```
-
-```js
+<script lang="ts">
+import type { DataTableColumns, DataTableInst } from 'naive-ui'
 import { defineComponent, ref } from 'vue'
 
-const columns = [
+interface RowData {
+  key: number
+  name: string
+  age: number
+  address: string
+  chinese: number
+  math: number
+  english: number
+}
+
+const columns: DataTableColumns<RowData> = [
   {
     title: 'Name',
     key: 'name'
@@ -73,12 +69,12 @@ const columns = [
       }
     ],
     filter(value, row) {
-      return ~row.address.indexOf(value)
+      return Boolean(~row.address.indexOf(value as string))
     }
   }
 ]
 
-const data = [
+const data: RowData[] = [
   {
     key: 0,
     name: 'John Brown',
@@ -119,27 +115,52 @@ const data = [
 
 export default defineComponent({
   setup() {
-    const dataTableInstRef = ref(null)
+    const dataTableInstRef = ref<DataTableInst | null>(null)
     return {
       data,
       columns,
       dataTableInst: dataTableInstRef,
       pagination: ref({ pageSize: 5 }),
       filterAddress() {
-        dataTableInstRef.value.filter({
+        dataTableInstRef.value?.filter({
           address: ['London']
         })
       },
       sortName() {
-        dataTableInstRef.value.sort('name', 'ascend')
+        dataTableInstRef.value?.sort('name', 'ascend')
       },
       clearFilters() {
-        dataTableInstRef.value.filter(null)
+        dataTableInstRef.value?.filter(null)
       },
       clearSorter() {
-        dataTableInstRef.value.sort(null)
+        dataTableInstRef.value?.sort(null)
       }
     }
   }
 })
-```
+</script>
+
+<template>
+  <n-space vertical :size="12">
+    <n-space>
+      <n-button @click="sortName">
+        Sort By Name (Ascend)
+      </n-button>
+      <n-button @click="filterAddress">
+        Filter Address (London)
+      </n-button>
+      <n-button @click="clearFilters">
+        Clear Filters
+      </n-button>
+      <n-button @click="clearSorter">
+        Clear Sorter
+      </n-button>
+    </n-space>
+    <n-data-table
+      ref="dataTableInst"
+      :columns="columns"
+      :data="data"
+      :pagination="pagination"
+    />
+  </n-space>
+</template>
