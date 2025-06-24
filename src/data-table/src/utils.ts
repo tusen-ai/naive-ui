@@ -167,6 +167,9 @@ export function createNextSorter(
 ): SortState | null {
   if (column.sorter === undefined)
     return null
+
+  const { customSorter } = column
+
   if (currentSortState === null || currentSortState.columnKey !== column.key) {
     return {
       columnKey: column.key,
@@ -175,6 +178,14 @@ export function createNextSorter(
     }
   }
   else {
+    if (customSorter) {
+      const nextOrder = customSorter(currentSortState.order)
+      return {
+        columnKey: column.key,
+        sorter: column.sorter,
+        order: nextOrder
+      }
+    }
     return {
       ...currentSortState,
       order: getNextOrderOf(currentSortState.order)

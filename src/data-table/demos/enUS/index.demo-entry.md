@@ -30,6 +30,7 @@ merge-cell
 filter-and-sorter
 pagination-behavior-on-filter.vue
 multiple-sorter
+custom-sorter.vue
 column-draggable.vue
 select.vue
 select-single.vue
@@ -164,6 +165,7 @@ export-csv.vue
 | rowSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | The row span of the cell. |  |
 | sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | The controlled sort order of the column. If multiple columns' sortOrder is set, the first one will affect. |  |
 | sorter | `boolean \| function \| 'default'` | `false` | The sorter of the column. If set `'default'`, it will use a basic builtin compare function. If set to `true`, it will only display sort icon on the column, which can be used in async status. Otherwise it works like `Array.sort`'s compare function. |  |
+| customSorter | `(order: 'descend' \| 'ascend' \| false) => 'descend' \| 'ascend' \| false` | `undefined` | Custom sorting status function. | NEXT_VERSION |
 | tree | `boolean` | `false` | Whether to show tree data expand trigger in the column. | 2.28.3 |
 | title | `string \| (() => VNodeChild)` | `undefined` | Column title, Can be a render function. |  |
 | titleColSpan | `number` | `undefined` | The number of cells occupied by the title col. |  |

@@ -32,6 +32,7 @@ merge-cell
 filter-and-sorter
 pagination-behavior-on-filter.vue
 multiple-sorter
+custom-sorter.vue
 column-draggable.vue
 select.vue
 select-single.vue
@@ -175,6 +176,7 @@ rtl-debug.vue
 | rowSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | 该列单元格的 row span |  |
 | sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | 受控状态下表格的排序方式。如果多列都设定了有效值，那么只有第一个会生效 |  |
 | sorter | `boolean \| function \| 'default'` | `undefined` | 这一列的排序方法。如果设为 `'default'` 表格将会使用一个内置的排序函数；如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。其他情况下它工作的方式类似 `Array.sort` 的对比函数 |  |
+| customSorter | `(order: 'descend' \| 'ascend' \| false) => 'descend' \| 'ascend' \| false` | `undefined` | 自定义排序状态函数 | NEXT_VERSION |
 | tree | `boolean` | `false` | 是否在这一列展示树形数据的展开按钮 | 2.28.3 |
 | title | `string \| (() => VNodeChild)` | `undefined` | 列的 title 信息，可以是渲染函数 |  |
 | titleColSpan | `number` | `undefined` | title 列占据的列数 |  |
