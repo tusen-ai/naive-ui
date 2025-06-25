@@ -8,7 +8,7 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {
-    const equation = '\\displaystyle= \\frac{k(k+1)}{2}+k+1'
+    const equation = `'\\displaystyle= \\frac{k(k+1)}{2}+k+1'`
     return {
       katex,
       equation

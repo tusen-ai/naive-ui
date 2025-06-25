@@ -36,11 +36,9 @@ $$
 
 我是一个带有分式、测试长度超长的泰勒公式：
 
-$$
-\\begin{equation}
+$
 f(x) = f(a) + f'(a)(x - a) + \\frac{f''(a)}{2!}(x - a)^2 + \\frac{f'''(a)}{3!}(x - a)^3 + \\cdots + \\frac{f^{(n)}(a)}{n!}(x - a)^n + R_n(x)
-\\end{equation}
-$$
+$
 
 我是上面公式的行内版本，看看我会不会折行：$ f(x) = f(a) + f'(a)(x - a) + \\frac{f''(a)}{2!}(x - a)^2 + \\frac{f'''(a)}{3!}(x - a)^3 + \\cdots + \\frac{f^{(n)}(a)}{n!}(x - a)^n + R_n(x) $
 
@@ -48,11 +46,6 @@ $$
 我是一个带有上下标的公式：
 $$
 q_1 q_2 = (w_1 w_2 - \\vec{v}_1^T \\vec{v}_2, \\, w_1 \\vec{v}_2 + w_2 \\vec{v}_1 + \\vec{v}_1 \\times \\vec{v}_2)
-$$
-
-我是一个带有 tag 的公式：
-$$
-q = a + bi + cj + dk \\tag{1}
 $$
 `)
 </script>

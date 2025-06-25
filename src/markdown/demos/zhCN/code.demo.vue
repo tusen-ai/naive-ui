@@ -6,7 +6,8 @@
 import { ref } from 'vue'
 
 const options = {
-  allowHtml: true
+  allowHtml: true,
+  animated: true
 }
 
 const markdownText = ref(`
@@ -41,11 +42,5 @@ $1
 </script>
 
 <template>
-  <n-markdown
-    :content="markdownText"
-    :remark-rehype-options="{
-      fontSize: '22px',
-    }"
-    v-bind="options"
-  />
+  <n-markdown :content="markdownText" v-bind="options" />
 </template>

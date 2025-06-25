@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'vue'
-import type { PluggableList, Components } from 'vue-markdown-unified'
+import type { Components, PluggableList } from 'vue-markdown-unified'
 import type { ThemeProps } from '../../_mixins'
 import type { MarkdownTheme } from '../styles/light'
 import { computed, defineComponent, h, toRef } from 'vue'
@@ -8,7 +8,6 @@ import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import markdownLight from '../styles/light'
 import { useMarkdownComponents } from './hooks/useComponents'
 import style from './styles/index.cssr'
-import { useMarkdownContent } from './hooks/useMarkdownContent'
 
 export const markdownProps = {
   ...(useTheme.props as ThemeProps<MarkdownTheme>),
@@ -31,6 +30,10 @@ export const markdownProps = {
   enableLatex: {
     type: Boolean,
     default: true
+  },
+  animated: {
+    type: Boolean,
+    default: true
   }
 }
 
@@ -38,8 +41,7 @@ export default defineComponent({
   name: 'Markdown',
   props: markdownProps,
   setup(props) {
-    const { inlineThemeDisabled, mergedClsPrefixRef }
-            = useConfig(props)
+    const { inlineThemeDisabled, mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Markdown',
       '-markdown',
@@ -87,13 +89,11 @@ export default defineComponent({
     const content = toRef(props, 'content')
     const renderedContent = computed(() => {
       try {
-        const escapedContent = useMarkdownContent(content.value || '', { ...props})
-
-        const res = Markdown(`${escapedContent}`, {
+        const res = Markdown(content.value, {
           components: Components,
           ...props
         })
-        console.log(res)
+        // console.log(res)
         return res
       }
       catch {
@@ -110,16 +110,10 @@ export default defineComponent({
     }
   },
   render() {
-    const {
-      mergedClsPrefix,
-      renderedContent
-    } = this
+    const { mergedClsPrefix, renderedContent } = this
     return (
       <div
-        class={[
-          `${mergedClsPrefix}-markdown`,
-          this.themeClass
-        ]}
+        class={[`${mergedClsPrefix}-markdown`, this.themeClass]}
         style={this.cssVars as CSSProperties}
       >
         {h(renderedContent)}
