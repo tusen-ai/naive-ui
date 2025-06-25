@@ -37,6 +37,12 @@ an example | *an example* | **an example**
 
 ---
 
+![](https://picsum.photos/id/1/100/100)
+
+![](https://picsum.photos/id/2/100/100)
+
+---
+
 1. Bird
 1. McHale
 1. Parish
@@ -55,44 +61,14 @@ an example | *an example* | **an example**
 
 ---
 
-This is [an example](http://example.com/ "Title") inline link.
+This is [an example](https://baike.baidu.com/item/%E4%B8%94%E5%90%AC%E9%A3%8E%E5%90%9F "Title") inline link.
 
-<http://example.com/>
+<https://baike.baidu.com/item/%E4%B8%94%E5%90%AC%E9%A3%8E%E5%90%9F>
 
 
 | title | title | title |
 | --- | --- | --- |
 | content | content | content |
-
-
-\`\`\`bash
-$ pnpm install
-\`\`\`
-
-
-\`\`\`javascript
-import { renderHook } from '@testing-library/react-hooks';
-import { act } from 'react-dom/test-utils';
-import { useDropNodeOnCanvas } from './useDropNodeOnCanvas';
-\`\`\`
-
-
-\`\`\`mermaid
-graph TD
-A[Enter Chart Definition] --> B(Preview)
-B --> C{decide}
-C --> D[Keep]
-C --> E[Edit Definition]
-E --> B
-D --> F[Save Image and Code]
-F --> B
-\`\`\`
-
----
-
-![](https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg)
-
-![](https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg)
 `)
 </script>
 

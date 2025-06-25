@@ -5,10 +5,11 @@
 自 `NEXT_VERSION` 开始提供。
 
 <n-alert title="注意" type="warning" style="margin-bottom: 16px;" :bordered="false">
-  由于包体积原因，Naive UI 不内置 unified。如果你需要使用公式组件，请确保你在使用之前已经设定了 unified。
+  由于包体积原因，Naive UI 不内置 unified。如果你需要使用Markdown组件，请确保你在使用之前已经设定了 unified。
+  我们将markdown渲染逻辑集成到vue-markdown-unified插件中
 </n-alert>
 
-下面的代码展示了如何为 Markdown 设定 unified。
+下面的代码展示了如何为 Markdown 设定 vue-markdown-unified
 
 <!--
 ```html
@@ -34,6 +35,7 @@
 ```demo
 basic.vue
 katex.vue
+code.vue
 github-syntax-guide.vue
 ```
 

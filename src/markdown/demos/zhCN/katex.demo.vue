@@ -17,7 +17,6 @@ const markdownText = ref(`
 我是一个行内公式：$E=mc^2$
 
 我是一个独立的傅里叶公式：
-
 $$
 f(x) = a_0 + \\sum_{n=1}^{\\infty} \\left( a_n \\cos(nx) + b_n \\sin(nx) \\right)
 $$
@@ -35,12 +34,25 @@ $$
 b_n = \\frac{1}{\\pi} \\int_{-\\pi}^{\\pi} f(x) \\sin(nx) \\, dx \\quad \\text{for} \\quad n \\geq 1
 $$
 
-看看我会不会折行：$ f(x) = f(a) + f'(a)(x - a) + \\frac{f''(a)}{2!}(x - a)^2 + \\frac{f'''(a)}{3!}(x - a)^3 + \\cdots + \\frac{f^{(n)}(a)}{n!}(x - a)^n + R_n(x) $
+我是一个带有分式、测试长度超长的泰勒公式：
+
+$$
+\\begin{equation}
+f(x) = f(a) + f'(a)(x - a) + \\frac{f''(a)}{2!}(x - a)^2 + \\frac{f'''(a)}{3!}(x - a)^3 + \\cdots + \\frac{f^{(n)}(a)}{n!}(x - a)^n + R_n(x)
+\\end{equation}
+$$
+
+我是上面公式的行内版本，看看我会不会折行：$ f(x) = f(a) + f'(a)(x - a) + \\frac{f''(a)}{2!}(x - a)^2 + \\frac{f'''(a)}{3!}(x - a)^3 + \\cdots + \\frac{f^{(n)}(a)}{n!}(x - a)^n + R_n(x) $
 
 
 我是一个带有上下标的公式：
 $$
 q_1 q_2 = (w_1 w_2 - \\vec{v}_1^T \\vec{v}_2, \\, w_1 \\vec{v}_2 + w_2 \\vec{v}_1 + \\vec{v}_1 \\times \\vec{v}_2)
+$$
+
+我是一个带有 tag 的公式：
+$$
+q = a + bi + cj + dk \\tag{1}
 $$
 `)
 </script>
@@ -50,7 +62,7 @@ $$
     <n-markdown
       :content="markdownText"
       :remark-rehype-options="{
-        fontSize: '22px',
+        fontSize: '42px',
       }"
       v-bind="options"
     />

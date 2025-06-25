@@ -1,4 +1,4 @@
-import { c, cB, cCB } from '../../../_utils/cssr'
+import { c, cB } from '../../../_utils/cssr'
 
 export default c([
   cB('markdown', `
@@ -18,6 +18,60 @@ export default c([
       padding-block: 0;
       padding-inline: 1em;
     `),
+    c(`h1,h2,h3,h4,h5,h6`, `
+      transition: color .3s var(--n-bezier);
+      color: var(--n-text-color);`
+    ),
+    c(`p`, `
+      box-sizing: border-box;
+      transition: color .3s var(--n-bezier);
+      font-size: var(--n-font-size);
+      line-height: var(--n-line-height);
+      color: var(--n-text-color);
+    `),
+    c(`hr`, `
+      margin: 12px 0;
+      transition: border-color .3s var(--n-bezier);
+      border-left: none;
+      border-right: none;
+      border-bottom: none;
+      border-top: 1px solid var(--n-hr-color);
+    `),
+    c(`ul`, `
+      font-size: var(--n-font-size);
+      padding: var(--n-ul-padding);
+    `),
+    c(`ol`, `
+      font-size: var(--n-font-size);
+      padding: var(--n-ol-padding);
+    `),
+    c(`a`, `
+      cursor: pointer;
+      transition: color .3s var(--n-bezier), text-decoration-color .3s var(--n-bezier);
+      text-decoration-color: var(--n-a-text-color);
+      color: var(--n-a-text-color);
+    `),
+    c(`code`, `
+      background-color: var(--n-code-bg-color);
+      padding: var(--n-code-padding);
+    `),
+    c('.contains-task-list', `
+      list-style-type: none;
+      padding-inline-start: 0;
+    `),
+    c('table thead', `
+      background: var(--n-thead-bg-color);
+    `),
+    c('table th', `
+      padding: var(--n-th-padding);
+      text-align: start;
+      padding-inline: 1em;
+    `),
+    c('table td',`
+      min-width: 120px;
+      padding: var(--n-td-padding);
+      padding-inline: 1em;
+    `)
   ]),
   cB('markdown .markdown-alert', `
     border-inline-start: solid 4px #e3e3e3;
@@ -58,5 +112,12 @@ export default c([
   cB('markdown .markdown-alert-caution .markdown-alert-title', `
     color: #ec5e41;
     fill: #ec5e41;
+  `),
+  cB('markdown .octicon', `
+    overflow: visible !important;
+    display: inline-block;
+    -webkit-margin-end: 0.5em;
+    margin-inline-end: 0.5em;
+    vertical-align: text-bottom;
   `)
 ])

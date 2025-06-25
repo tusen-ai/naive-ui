@@ -4,12 +4,24 @@ import { commonLight } from '../../_styles/common'
 
 export function self(vars: ThemeCommonVars) {
   const {
+    primaryColor,
     fontSize,
-    lineHeight
+    lineHeight,
+    dividerColor,
+    tagColor
   } = vars
   return {
     fontSize,
-    lineHeight
+    lineHeight,
+    hrColor: dividerColor,
+    ulPadding: '0 0 0 2em',
+    olPadding: '0 0 0 2em',
+    aTextColor: primaryColor,
+    tagColor,
+    codePadding: '0 7px',
+    theadBgColor: 'rgba(0, 0, 0, 0.015)',
+    thPaddingMedium: '12px',
+    tdPaddingMedium: '12px'
   }
 }
 

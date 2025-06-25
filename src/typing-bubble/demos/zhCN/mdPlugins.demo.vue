@@ -5,12 +5,6 @@
 </markdown>
 
 <script lang="ts" setup>
-import rehypeSanitize from 'rehype-sanitize'
-import rehypeStringify from 'rehype-stringify'
-import remarkGfm from 'remark-gfm'
-import remarkParse from 'remark-parse'
-import remarkRehype from 'remark-rehype'
-import { unified } from 'unified'
 import { ref } from 'vue'
 
 const markdownText = ref(`
@@ -26,14 +20,8 @@ const markdownText = ref(`
 </script>
 
 <template>
-  <n-config-provider
-    :unified="unified"
-    :md-plugins="[remarkParse, rehypeStringify, remarkRehype]"
-  >
-    <n-typing-bubble
-      :is-markdown="true"
-      :content="markdownText"
-      :md-plugins="[remarkGfm, rehypeSanitize]"
-    />
-  </n-config-provider>
+  <n-typing-bubble
+    :is-markdown="true"
+    :content="markdownText"
+  />
 </template>

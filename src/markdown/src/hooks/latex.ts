@@ -1,3 +1,5 @@
+import { renderToString } from 'katex';
+
 export function convertLatexDelimiters(text: string): string {
   const pattern = /(```[\S\s]*?```|`.*?`)|\\\[([\S\s]*?[^\\])\\]|\\\((.*?)\\\)/g
   return text.replaceAll(
@@ -52,3 +54,36 @@ export function preprocessLaTeX(str: string): string {
   content = escapeTextUnderscores(content)
   return content
 }
+
+const extractIncompleteFormula = (text: string) => {
+  // Count the number of $$ delimiters
+  const dollarsCount = (text.match(/\$\$/g) || []).length;
+
+  // If odd number of $$ delimiters, extract content after the last $$
+  if (dollarsCount % 2 === 1) {
+    const match = text.match(/\$\$([^]*)$/);
+    return match ? match[1] : '';
+  }
+
+  // If even number of $$ delimiters, return empty string
+  return '';
+};
+
+export const isLastFormulaRenderable = (text: string) => {
+  const formula = extractIncompleteFormula(text);
+
+  // If no incomplete formula, return true
+  if (!formula) return true;
+
+  // Try to render the last formula
+  try {
+    renderToString(formula, {
+      displayMode: true,
+      throwOnError: true,
+    });
+    return true;
+  } catch (error) {
+    console.log(`LaTeX formula rendering error: ${error}`);
+    return false;
+  }
+};

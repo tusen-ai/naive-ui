@@ -3,10 +3,6 @@
 </markdown>
 
 <script lang="ts" setup>
-import rehypeStringify from 'rehype-stringify'
-import remarkParse from 'remark-parse'
-import remarkRehype from 'remark-rehype'
-import { unified } from 'unified'
 import { ref } from 'vue'
 
 const markdownText = ref(`
@@ -19,10 +15,5 @@ const markdownText = ref(`
 </script>
 
 <template>
-  <n-config-provider
-    :unified="unified"
-    :md-plugins="[remarkParse, rehypeStringify, remarkRehype]"
-  >
-    <n-markdown :content="markdownText" />
-  </n-config-provider>
+  <n-markdown :content="markdownText" />
 </template>
