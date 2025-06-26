@@ -51,10 +51,6 @@ export default c([
       text-decoration-color: var(--n-a-text-color);
       color: var(--n-a-text-color);
     `),
-    c(`code`, `
-      background-color: var(--n-code-bg-color);
-      padding: var(--n-code-padding);
-    `),
     c('.contains-task-list', `
       list-style-type: none;
       padding-inline-start: 0;
@@ -71,6 +67,21 @@ export default c([
       min-width: 120px;
       padding: var(--n-td-padding);
       padding-inline: 1em;
+    `),   
+    c(`code`, `
+      background-color: var(--n-code-bg-color);
+      padding: var(--n-code-padding);
+    `),
+    c('pre', `
+      background-color: #F3F3F3;
+      padding: 16px;
+      overflow-x: auto;
+      margin: 0;
+      text-wrap: nowrap;
+      margin-block-start: 12px;
+    `),
+    c('pre code', `
+        display: block;
     `)
   ]),
   cB('markdown .markdown-alert', `

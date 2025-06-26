@@ -30,15 +30,7 @@ const markdownText = ref(`
 
 ## Github Tasks
 
-- [x] 架构选型 unified 渲染markdown
-- [x] 实现hast转换vnode
-- [x] 实现自定义组件映射
-- [x] 实现自定义插件
-- [x] 提出unified 相关插件分包
-- [x] 高亮
-- [ ] 代码框折叠
-- [ ] 引文
-- [ ] 图片组预览
+- [x] highlight
 - [ ] Mermaid
 `)
 </script>

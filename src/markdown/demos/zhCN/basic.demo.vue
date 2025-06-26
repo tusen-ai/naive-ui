@@ -75,9 +75,6 @@ This is [an example](https://baike.baidu.com/item/%E4%B8%94%E5%90%AC%E9%A3%8E%E5
 <template>
   <n-markdown
     :content="markdownText"
-    :remark-rehype-options="{
-      fontSize: '22px',
-    }"
     v-bind="options"
   />
 </template>

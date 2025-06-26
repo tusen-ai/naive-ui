@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'vue'
+import type { PropType } from 'vue'
 import type { Components, PluggableList } from 'vue-markdown-unified'
 import type { ThemeProps } from '../../_mixins'
 import type { MarkdownTheme } from '../styles/light'
@@ -31,9 +32,21 @@ export const markdownProps = {
     type: Boolean,
     default: true
   },
+  isBreaks: {
+    type: Boolean,
+    default: false
+  },
   animated: {
     type: Boolean,
-    default: true
+    default: false
+  },
+  enableSanitize: {
+    type: Boolean,
+    default: false
+  },
+  components: {
+    type: Object as PropType<Components>,
+    default: () => {}
   }
 }
 
@@ -84,16 +97,15 @@ export default defineComponent({
       ? useThemeClass('Markdown', undefined, cssVarsRef, props)
       : undefined
 
-    const Components = useMarkdownComponents() as Components
+    const Components = useMarkdownComponents(props.components)
 
     const content = toRef(props, 'content')
     const renderedContent = computed(() => {
       try {
         const res = Markdown(content.value, {
+          ...props,
           components: Components,
-          ...props
         })
-        // console.log(res)
         return res
       }
       catch {

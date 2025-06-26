@@ -5,38 +5,19 @@
 自 `NEXT_VERSION` 开始提供。
 
 <n-alert title="注意" type="warning" style="margin-bottom: 16px;" :bordered="false">
-  由于包体积原因，Naive UI 不内置 unified。如果你需要使用Markdown组件，请确保你在使用之前已经设定了 unified。
-  我们将markdown渲染逻辑集成到vue-markdown-unified插件中
+  由于包体积原因，Naive UI 不内置 markdown渲染逻辑。如果你需要使用Markdown组件，请确保你在使用之前已经设定了 vue-markdown-unified。
 </n-alert>
 
 下面的代码展示了如何为 Markdown 设定 vue-markdown-unified
-
-<!--
-```html
-<template>
-  <n-config-provider
-    :unified="unified"
-    :md-plugins="[remarkParse, rehypeStringify, remarkRehype]"
-  >
-    <my-app />
-  </n-config-provider>
-</template>
-
-<script setup>
-  import unified from 'unified'
-  import rehypeStringify from 'rehype-stringify'
-  import remarkParse from 'remark-parse'
-  import remarkRehype from 'remark-rehype'
-</script>
-``` -->
 
 ## 演示
 
 ```demo
 basic.vue
-katex.vue
-code.vue
 github-syntax-guide.vue
+components.vue
+code.vue
+katex.vue
 ```
 
 ## API
@@ -48,3 +29,7 @@ github-syntax-guide.vue
 | content | `string` | `undefined` | 要展示的文本内容 | NEXT_VERSION |
 | allowHtml | `boolean` | `false` | 是否允许在markdown内容中使用HTML | NEXT_VERSION |
 | enableLatex | `boolean` | `true` | 启用LaTeX数学表达式 | NEXT_VERSION |
+| isBreaks | `boolean` | `false` | 支持硬中断，无需空格或转义 | NEXT_VERSION |
+| rehypePlugins | `Pluggable[]` | `true` | 其他 rehype 插件 | NEXT_VERSION |
+| remarkPlugins | `Pluggable[]` | `true` | 其他remark插件 | NEXT_VERSION |
+| components | `Components ` | - | Markdown 元素的自定义组件 | NEXT_VERSION |
