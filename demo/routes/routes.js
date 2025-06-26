@@ -597,6 +597,10 @@ export const enComponentRoutes = [
       import('../../src/highlight/demos/enUS/index.demo-entry.md')
   },
   {
+    path: 'markdown',
+    component: () => import('../../src/markdown/demos/enUS/index.demo-entry.md')
+  },
+  {
     path: 'marquee',
     component: () => import('../../src/marquee/demos/enUS/index.demo-entry.md')
   }
@@ -1013,6 +1017,10 @@ export const zhComponentRoutes = [
     path: 'highlight',
     component: () =>
       import('../../src/highlight/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'markdown',
+    component: () => import('../../src/markdown/demos/zhCN/index.demo-entry.md')
   },
   {
     path: 'marquee',

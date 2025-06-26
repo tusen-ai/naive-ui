@@ -577,6 +577,13 @@ export function createComponentMenuOptions({ lang, theme }) {
           enSuffix: true,
           path: '/highlight',
           isNew: true
+        },
+        {
+          en: 'Markdown',
+          zh: 'markdown',
+          enSuffix: true,
+          path: '/markdown',
+          isNew: true
         }
       ]
     }),

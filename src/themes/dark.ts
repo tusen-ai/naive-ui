@@ -48,6 +48,7 @@ import { legacyTransferDark } from '../legacy-transfer/styles'
 import { listDark } from '../list/styles'
 import { loadingBarDark } from '../loading-bar/styles'
 import { logDark } from '../log/styles'
+import { markdownDark } from '../markdown/styles'
 import { marqueeDark } from '../marquee/styles'
 import { mentionDark } from '../mention/styles'
 import { menuDark } from '../menu/styles'
@@ -178,5 +179,6 @@ export const darkTheme: BuiltInGlobalTheme = {
   Split: splitDark,
   FloatButton: floatButtonDark,
   FloatButtonGroup: floatButtonGroupDark,
-  Marquee: marqueeDark
+  Marquee: marqueeDark,
+  Markdown: markdownDark
 }

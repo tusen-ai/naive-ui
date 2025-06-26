@@ -62,6 +62,7 @@ import type { ListTheme } from '../../list/styles'
 import type { LoadingBarTheme } from '../../loading-bar/styles'
 import type { NDateLocale, NLocale } from '../../locales'
 import type { LogTheme } from '../../log/styles'
+import type { MarkdownTheme } from '../../markdown/styles'
 import type { MarqueeTheme } from '../../marquee/styles'
 import type { MentionTheme } from '../../mention/styles'
 import type { MenuTheme } from '../../menu/styles'
@@ -197,6 +198,7 @@ export interface GlobalThemeWithoutCommon {
   InternalSelectMenu?: InternalSelectMenuTheme
   InternalSelection?: InternalSelectionTheme
   InputOtp?: InputOtpTheme
+  Markdown?: MarkdownTheme
 }
 
 export interface GlobalComponentConfig {

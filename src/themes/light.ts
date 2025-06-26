@@ -52,6 +52,7 @@ import { legacyTransferLight } from '../legacy-transfer/styles'
 import { listLight } from '../list/styles'
 import { loadingBarLight } from '../loading-bar/styles'
 import { logLight } from '../log/styles'
+import { markdownLight } from '../markdown/styles'
 import { marqueeLight } from '../marquee/styles'
 import { mentionLight } from '../mention/styles'
 import { menuLight } from '../menu/styles'
@@ -181,5 +182,6 @@ export const lightTheme: BuiltInGlobalTheme = {
   Split: splitLight,
   FloatButton: floatButtonLight,
   FloatButtonGroup: floatButtonGroupLight,
-  Marquee: marqueeLight
+  Marquee: marqueeLight,
+  Markdown: markdownLight
 }
