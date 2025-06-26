@@ -73,7 +73,7 @@ import { spinDark } from '../spin/styles'
 import { splitDark } from '../split/styles'
 import { statisticDark } from '../statistic/styles'
 import { stepsDark } from '../steps/styles'
-import { flexDark, inputOtpDark } from '../styles'
+import { flexDark, inputOtpDark, typewriterDark } from '../styles'
 import { switchDark } from '../switch/styles'
 import { tableDark } from '../table/styles'
 import { tabsDark } from '../tabs/styles'
@@ -180,5 +180,6 @@ export const darkTheme: BuiltInGlobalTheme = {
   FloatButton: floatButtonDark,
   FloatButtonGroup: floatButtonGroupDark,
   Marquee: marqueeDark,
-  Markdown: markdownDark
+  Markdown: markdownDark,
+  Typewriter: typewriterDark
 }

@@ -100,9 +100,10 @@ export { timePickerDark } from './time-picker/styles'
 export { timelineDark } from './timeline/styles'
 export { tooltipDark } from './tooltip/styles'
 export { transferDark } from './transfer/styles'
-
 export { treeSelectDark } from './tree-select/styles'
+
 export { treeDark, treeRtl as unstableTreeRtl } from './tree/styles'
+export { typewriterDark } from './typewriter/styles'
 export { typographyDark } from './typography/styles'
 export { uploadDark } from './upload/styles'
 export { watermarkDark } from './watermark/styles'

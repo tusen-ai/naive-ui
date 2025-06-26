@@ -5,6 +5,7 @@
 ### Features
 
 - 🌟 Adds `n-markdown` component
+- 🌟 Adds `n-typewriter` component
 
 ## 2.42.0
 

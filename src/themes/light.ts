@@ -88,6 +88,7 @@ import { tooltipLight } from '../tooltip/styles'
 import { transferLight } from '../transfer/styles'
 import { treeSelectLight } from '../tree-select/styles'
 import { treeLight } from '../tree/styles'
+import { typewriterLight } from '../typewriter/styles'
 import { typographyLight } from '../typography/styles'
 import { uploadLight } from '../upload/styles'
 import { watermarkLight } from '../watermark/styles'
@@ -183,5 +184,6 @@ export const lightTheme: BuiltInGlobalTheme = {
   FloatButton: floatButtonLight,
   FloatButtonGroup: floatButtonGroupLight,
   Marquee: marqueeLight,
-  Markdown: markdownLight
+  Markdown: markdownLight,
+  Typewriter: typewriterLight
 }

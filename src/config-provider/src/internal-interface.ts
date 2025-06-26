@@ -100,6 +100,7 @@ import type { TooltipTheme } from '../../tooltip/styles'
 import type { TransferTheme } from '../../transfer/styles'
 import type { TreeSelectTheme } from '../../tree-select/styles'
 import type { TreeTheme } from '../../tree/styles'
+import type { TypewriterTheme } from '../../typewriter/styles'
 import type { TypographyTheme } from '../../typography/styles'
 import type { UploadTheme } from '../../upload/styles'
 import type { WatermarkTheme } from '../../watermark/styles'
@@ -199,6 +200,7 @@ export interface GlobalThemeWithoutCommon {
   InternalSelection?: InternalSelectionTheme
   InputOtp?: InputOtpTheme
   Markdown?: MarkdownTheme
+  Typewriter?: TypewriterTheme
 }
 
 export interface GlobalComponentConfig {

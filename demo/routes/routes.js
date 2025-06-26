@@ -601,6 +601,11 @@ export const enComponentRoutes = [
     component: () => import('../../src/markdown/demos/enUS/index.demo-entry.md')
   },
   {
+    path: 'typewriter',
+    component: () =>
+      import('../../src/typewriter/demos/enUS/index.demo-entry.md')
+  },
+  {
     path: 'marquee',
     component: () => import('../../src/marquee/demos/enUS/index.demo-entry.md')
   }
@@ -1021,6 +1026,11 @@ export const zhComponentRoutes = [
   {
     path: 'markdown',
     component: () => import('../../src/markdown/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'typewriter',
+    component: () =>
+      import('../../src/typewriter/demos/zhCN/index.demo-entry.md')
   },
   {
     path: 'marquee',
