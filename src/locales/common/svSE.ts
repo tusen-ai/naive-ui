@@ -122,6 +122,12 @@ const svSE: NLocale = {
     tipDownload: 'Ladda ned',
     tipClose: 'Stäng (Esc)',
     tipOriginalSize: 'Zooma till ursprunglig storlek'
+  },
+  Heatmap: {
+    less: 'mindre',
+    more: 'mer',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

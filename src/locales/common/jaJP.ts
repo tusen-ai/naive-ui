@@ -122,6 +122,12 @@ const jaJP: NLocale = {
     tipDownload: 'ダウンロード',
     tipClose: '閉じる (Esc)',
     tipOriginalSize: '元のサイズに戻す'
+  },
+  Heatmap: {
+    less: '少',
+    more: '多',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

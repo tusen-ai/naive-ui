@@ -122,6 +122,12 @@ const ptBR: NLocale = {
     tipDownload: 'Download',
     tipClose: 'Fechar (Esc)',
     tipOriginalSize: 'Exibir no tamanho original'
+  },
+  Heatmap: {
+    less: 'menos',
+    more: 'mais',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

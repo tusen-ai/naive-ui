@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT\_\_VERSION
+
+### Features
+
+- Add `n-heatmap` component.
+
 ## 2.42.0
 
 `2025-06-17`

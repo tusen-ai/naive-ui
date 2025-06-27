@@ -123,6 +123,12 @@ const trTR: NLocale = {
     tipClose: 'Kapat (Esc)',
     // TODO: translation
     tipOriginalSize: 'Orijinal boyuta yakınlaştır'
+  },
+  Heatmap: {
+    less: 'az',
+    more: 'çok',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

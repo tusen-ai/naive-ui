@@ -122,6 +122,12 @@ const azAZ: NLocale = {
     tipDownload: 'Yüklə',
     tipClose: 'Bağla (Esc)',
     tipOriginalSize: 'Orijinal ölçüyə yaxınlaşdır'
+  },
+  Heatmap: {
+    less: 'less',
+    more: 'more',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

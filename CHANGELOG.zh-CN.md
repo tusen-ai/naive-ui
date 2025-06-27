@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT\_\_VERSION
+
+### Features
+
+- 新增组件 `n-heatmap`
+
 ## 2.42.0
 
 `2025-06-17`

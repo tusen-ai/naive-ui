@@ -123,6 +123,12 @@ const ukUA: NLocale = {
     tipDownload: 'звантажити',
     tipClose: 'Закрити (Esc)',
     tipOriginalSize: 'Масштабувати до оригінального розміру'
+  },
+  Heatmap: {
+    less: 'менше',
+    more: 'більше',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 
