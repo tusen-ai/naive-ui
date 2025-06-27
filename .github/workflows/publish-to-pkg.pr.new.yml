@@ -1,17 +1,11 @@
 name: Publish to pkg.pr.new
 on:
   push:
-    branches:
-      - main
-      - master
   pull_request:
-    branches:
-      - main
-      - master
 
 jobs:
   publish:
-    runs-on: macos-14
+    runs-on:  ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
