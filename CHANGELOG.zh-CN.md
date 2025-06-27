@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- 🌟 新增 `n-markdown` 组件
+- 🌟 新增 `n-typewriter` 组件
+
 ## 2.42.0
 
 `2025-06-17`

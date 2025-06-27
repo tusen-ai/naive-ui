@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- 🌟 Adds `n-markdown` component
+- 🌟 Adds `n-typewriter` component
+
 ## 2.42.0
 
 `2025-06-17`

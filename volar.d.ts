@@ -91,6 +91,7 @@ declare module 'vue' {
     NListItem: (typeof import('naive-ui'))['NListItem']
     NLoadingBarProvider: (typeof import('naive-ui'))['NLoadingBarProvider']
     NLog: (typeof import('naive-ui'))['NLog']
+    NMarkdown: (typeof import('naive-ui'))['NMarkdown']
     NMarquee: (typeof import('naive-ui'))['NMarquee']
     NMention: (typeof import('naive-ui'))['NMention']
     NMenu: (typeof import('naive-ui'))['NMenu']
@@ -153,6 +154,7 @@ declare module 'vue' {
     NUploadTrigger: (typeof import('naive-ui'))['NUploadTrigger']
     NVirtualList: (typeof import('naive-ui'))['NVirtualList']
     NWatermark: (typeof import('naive-ui'))['NWatermark']
+    NTypewriter: (typeof import('naive-ui'))['NTypewriter']
   }
 }
 export {}

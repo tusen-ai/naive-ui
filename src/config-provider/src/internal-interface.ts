@@ -62,6 +62,7 @@ import type { ListTheme } from '../../list/styles'
 import type { LoadingBarTheme } from '../../loading-bar/styles'
 import type { NDateLocale, NLocale } from '../../locales'
 import type { LogTheme } from '../../log/styles'
+import type { MarkdownTheme } from '../../markdown/styles'
 import type { MarqueeTheme } from '../../marquee/styles'
 import type { MentionTheme } from '../../mention/styles'
 import type { MenuTheme } from '../../menu/styles'
@@ -99,6 +100,7 @@ import type { TooltipTheme } from '../../tooltip/styles'
 import type { TransferTheme } from '../../transfer/styles'
 import type { TreeSelectTheme } from '../../tree-select/styles'
 import type { TreeTheme } from '../../tree/styles'
+import type { TypewriterTheme } from '../../typewriter/styles'
 import type { TypographyTheme } from '../../typography/styles'
 import type { UploadTheme } from '../../upload/styles'
 import type { WatermarkTheme } from '../../watermark/styles'
@@ -197,6 +199,8 @@ export interface GlobalThemeWithoutCommon {
   InternalSelectMenu?: InternalSelectMenuTheme
   InternalSelection?: InternalSelectionTheme
   InputOtp?: InputOtpTheme
+  Markdown?: MarkdownTheme
+  Typewriter?: TypewriterTheme
 }
 
 export interface GlobalComponentConfig {
