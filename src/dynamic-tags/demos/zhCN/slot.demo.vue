@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import type { AutoCompleteInst } from 'naive-ui'
-import Add from '@vicons/ionicons5/Add'
+import { Add } from '@vicons/ionicons5'
 import { computed, defineComponent, nextTick, ref, watch } from 'vue'
 
 export default defineComponent({
