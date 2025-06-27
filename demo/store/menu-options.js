@@ -594,7 +594,7 @@ export function createComponentMenuOptions({ lang, theme }) {
         },
         {
           en: 'Markdown',
-          zh: 'markdown',
+          zh: 'Markdown',
           enSuffix: true,
           path: '/markdown',
           isNew: true
