@@ -57,6 +57,7 @@ module.exports = {
       'highlight.js/lib/languages/xml',
       '@vicons/ionicons5',
       '@vicons/ionicons4',
+      '@vicons/antd',
       '@vicons/fluent/Compose16Regular.js'
     ],
     exclude: ['__INDEX__']

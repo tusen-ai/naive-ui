@@ -73,7 +73,8 @@ import { spinDark } from '../spin/styles'
 import { splitDark } from '../split/styles'
 import { statisticDark } from '../statistic/styles'
 import { stepsDark } from '../steps/styles'
-import { flexDark, inputOtpDark, typewriterDark } from '../styles'
+import { typewriterDark } from '../typewriter/styles'
+import { flexDark, inputOtpDark } from '../styles'
 import { switchDark } from '../switch/styles'
 import { tableDark } from '../table/styles'
 import { tabsDark } from '../tabs/styles'
@@ -88,6 +89,7 @@ import { treeDark } from '../tree/styles'
 import { typographyDark } from '../typography/styles'
 import { uploadDark } from '../upload/styles'
 import { watermarkDark } from '../watermark/styles'
+import { bubbleDark } from '../bubble/styles'
 
 export const darkTheme: BuiltInGlobalTheme = {
   name: 'dark',
@@ -181,5 +183,6 @@ export const darkTheme: BuiltInGlobalTheme = {
   FloatButtonGroup: floatButtonGroupDark,
   Marquee: marqueeDark,
   Markdown: markdownDark,
-  Typewriter: typewriterDark
+  Typewriter: typewriterDark,
+  Bubble: bubbleDark
 }

@@ -106,6 +106,7 @@ import type { UploadTheme } from '../../upload/styles'
 import type { WatermarkTheme } from '../../watermark/styles'
 import type { GlobalTheme, GlobalThemeOverrides } from './interface'
 import type { Katex } from './katex'
+import type { BubbleTheme } from '../../bubble/styles'
 
 export interface GlobalThemeWithoutCommon {
   Alert?: AlertTheme
@@ -201,6 +202,7 @@ export interface GlobalThemeWithoutCommon {
   InputOtp?: InputOtpTheme
   Markdown?: MarkdownTheme
   Typewriter?: TypewriterTheme
+  Bubble?: BubbleTheme
 }
 
 export interface GlobalComponentConfig {

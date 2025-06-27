@@ -102,6 +102,7 @@
     "@rollup/plugin-terser": "^0.4.3",
     "@types/estree": "^1.0.1",
     "@types/jest": "^29.5.4",
+    "@vicons/antd": "^0.13.0",
     "@vicons/fluent": "^0.13.0",
     "@vicons/ionicons4": "^0.13.0",
     "@vicons/ionicons5": "^0.13.0",

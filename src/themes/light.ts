@@ -92,6 +92,7 @@ import { typewriterLight } from '../typewriter/styles'
 import { typographyLight } from '../typography/styles'
 import { uploadLight } from '../upload/styles'
 import { watermarkLight } from '../watermark/styles'
+import { bubbleLight } from '../bubble/styles'
 
 export const lightTheme: BuiltInGlobalTheme = {
   name: 'light',
@@ -185,5 +186,6 @@ export const lightTheme: BuiltInGlobalTheme = {
   FloatButtonGroup: floatButtonGroupLight,
   Marquee: marqueeLight,
   Markdown: markdownLight,
-  Typewriter: typewriterLight
+  Typewriter: typewriterLight,
+  Bubble: bubbleLight
 }
