@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.42.1
+
+### Fixes
+
+- Fix `n-popover`'s `themeOverrides` property does not have the `Scrollbar` style configuration.
+
 ## 2.42.0
 
 `2025-06-17`
