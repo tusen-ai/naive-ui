@@ -8,8 +8,6 @@
   由于包体积原因，Naive UI 不内置 Markdown 渲染逻辑。如果你需要使用 Markdown 组件，请确保你在使用之前已经安装了 vue-markdown-unified。
 </n-alert>
 
-`pnpm i vue-markdown-unified`
-
 ## 演示
 
 ```demo

@@ -8,8 +8,6 @@ Available since `NEXT_VERSION`.
 Due to package size considerations, Naive UI does not include Markdown rendering logic. If you need to use the Markdown component, ensure that you have installed `vue-markdown-unified` before use.
 </n-alert>
 
-`pnpm i vue-markdown-unified`
-
 ## 演示
 
 ```demo

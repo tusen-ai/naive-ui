@@ -227,7 +227,8 @@ export function createComponentMenuOptions({ lang, theme }) {
           en: 'Typewriter',
           zh: '打字器',
           enSuffix: true,
-          path: '/typewriter'
+          path: '/typewriter',
+          isNew: true
         }
       ]
     }),
