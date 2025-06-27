@@ -1,5 +1,5 @@
 <markdown>
-# 基本使用
+# Basic
 </markdown>
 
 <script lang="ts" setup>

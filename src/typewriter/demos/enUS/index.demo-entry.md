@@ -1,4 +1,4 @@
-# 打字器
+# Typewriter
 
 `Typewriter` It is a typing device component.
 
@@ -10,6 +10,7 @@ Available since `NEXT_VERSION`.
 basic.vue
 markdown.vue
 customRender.vue
+options.vue
 ```
 
 ## API

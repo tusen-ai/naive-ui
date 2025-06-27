@@ -1,7 +1,5 @@
 <markdown>
-# Markdown 渲染
-
-参考 NMarkdown 组件
+# Typewriter Options
 </markdown>
 
 <script lang="ts" setup>
@@ -9,7 +7,8 @@ import { ref } from 'vue'
 import 'vue-markdown-unified/dist/themes/prism.min.css'
 
 const num = ref(1)
-const content = ref(`# This is an H1
+const content = ref(`
+# This is an H1
 ## This is an H2
 ### This is an H3
 #### This is an H4
@@ -41,7 +40,8 @@ import { useDropNodeOnCanvas } from './useDropNodeOnCanvas';
 \`\`\``
   }
   else {
-    content.value = `# This is an H1
+    content.value = `
+# This is an H1
 ## This is an H2
 ### This is an H3
 #### This is an H4
@@ -56,5 +56,12 @@ import { useDropNodeOnCanvas } from './useDropNodeOnCanvas';
   <n-button @click="setContents">
     重新加载内容
   </n-button>
-  <n-typewriter :is-markdown="true" :content="content" />
+  <n-typewriter
+    :is-markdown="true"
+    :content="content"
+    :options="{
+      interval: 5,
+      step: 2,
+    }"
+  />
 </template>

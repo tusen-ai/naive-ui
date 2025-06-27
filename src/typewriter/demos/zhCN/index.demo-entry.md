@@ -10,6 +10,7 @@
 basic.vue
 markdown.vue
 customRender.vue
+options.vue
 ```
 
 ## API
