@@ -4,17 +4,11 @@
 Some parts of component are detached to `document.body`. If you want to add a class to those detached elements, use `namespace` prop of `n-config-provider`. Open devtools to see detached part.
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      ns: ref('custom-app-namespace1'),
-      isActive: ref(false)
-    }
-  }
-})
+const ns = ref('custom-app-namespace1')
+const isActive = ref(false)
 </script>
 
 <template>

@@ -2,17 +2,11 @@
 # Nested debug
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      show1: ref(false),
-      show2: ref(false)
-    }
-  }
-})
+const show1 = ref(false)
+const show2 = ref(false)
 </script>
 
 <template>

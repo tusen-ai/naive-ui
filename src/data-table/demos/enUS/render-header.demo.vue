@@ -1,25 +1,34 @@
-# Customized column header rendering
+<markdown>
+  # Customized column header rendering
+  </markdown>
 
-```html
-<n-data-table :columns="columns" :data="data" :pagination="pagination" />
-```
-
-```js
+<script lang="ts" setup>
+import type { DataTableBaseColumn, DataTableColumns } from 'naive-ui'
+import type { ComponentInternalInstance, VNode, VNodeChild } from 'vue'
 import { NGradientText, NTooltip } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { getCurrentInstance, h } from 'vue'
 
-function renderTooltip(trigger, content) {
+interface RowData extends Record<string, unknown> {
+  key: number
+  name: string
+  age: number
+  address: string
+}
+
+function renderTooltip(trigger: VNode, content: string): VNodeChild {
   return h(NTooltip, null, {
     trigger: () => trigger,
     default: () => content
   })
 }
 
-function createColumns(instance) {
+function createColumns(
+  _instance: ComponentInternalInstance | null
+): DataTableColumns<RowData> {
   return [
     {
       key: 'name',
-      title(column) {
+      title(_column: DataTableBaseColumn<RowData>) {
         return renderTooltip(
           h(
             NGradientText,
@@ -35,7 +44,7 @@ function createColumns(instance) {
     },
     {
       key: 'age',
-      title(column) {
+      title(_column: DataTableBaseColumn<RowData>) {
         return h(
           NGradientText,
           {
@@ -48,7 +57,7 @@ function createColumns(instance) {
     },
     {
       key: 'address',
-      title(column) {
+      title(_column: DataTableBaseColumn<RowData>) {
         return h(
           NGradientText,
           {
@@ -83,15 +92,13 @@ const data = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    return {
-      data,
-      columns: createColumns(this),
-      pagination: {
-        pageSize: 10
-      }
-    }
-  }
-})
-```
+const instance = getCurrentInstance()
+const columns = createColumns(instance)
+const pagination = {
+  pageSize: 10
+}
+</script>
+
+<template>
+  <n-data-table :columns="columns" :data="data" :pagination="pagination" />
+</template>

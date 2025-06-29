@@ -6,9 +6,8 @@
 
 <script lang="ts" setup>
 import Temperature16Regular from '@vicons/fluent/Temperature16Regular'
-import { h, ref } from 'vue'
-import { NFlex } from '../../../flex'
-import { NIcon } from '../../../icon'
+import { NFlex, NIcon } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
 
 function renderMark(value: number, color: string) {
   return h(

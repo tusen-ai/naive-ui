@@ -1,20 +1,25 @@
-# Switchable Editable Table
+<markdown>
+  # 可切换的可编辑表格
+  </markdown>
 
-```html
-<n-data-table
-  :key="(row) => row.key"
-  :columns="columns"
-  :data="data"
-  :pagination="paginationRef"
-  :on-update:page="handlePageChange"
-/>
-```
-
-```js
+<script lang="ts">
+import type { InputInst } from 'naive-ui'
+import type { PropType } from 'vue'
 import { NInput } from 'naive-ui'
 import { computed, defineComponent, h, nextTick, ref } from 'vue'
 
-function createData() {
+interface RowData {
+  key: number
+  name: string
+  age: number
+  address: string
+}
+
+interface OnUpdateValue {
+  (value: string): void
+}
+
+function createData(): RowData[] {
   return Array.from({ length: 100 }).map((_, index) => ({
     key: index,
     name: `John Brown ${index}`,
@@ -26,20 +31,20 @@ function createData() {
 const ShowOrEdit = defineComponent({
   props: {
     value: [String, Number],
-    onUpdateValue: [Function, Array]
+    onUpdateValue: [Function, Array] as PropType<OnUpdateValue>
   },
   setup(props) {
     const isEdit = ref(false)
-    const inputRef = ref(null)
+    const inputRef = ref<InputInst | null>(null)
     const inputValue = ref(props.value)
     function handleOnClick() {
       isEdit.value = true
       nextTick(() => {
-        inputRef.value.focus()
+        inputRef.value?.focus()
       })
     }
     function handleChange() {
-      props.onUpdateValue(inputValue.value)
+      props.onUpdateValue?.(String(inputValue.value))
       isEdit.value = false
     }
     return () =>
@@ -52,7 +57,7 @@ const ShowOrEdit = defineComponent({
         isEdit.value
           ? h(NInput, {
               ref: inputRef,
-              value: inputValue.value,
+              value: String(inputValue.value),
               onUpdateValue: (v) => {
                 inputValue.value = v
               },
@@ -67,13 +72,12 @@ const ShowOrEdit = defineComponent({
 export default defineComponent({
   setup() {
     const data = ref(createData())
-
-    const getDataIndex = (key) => {
-      return data.value.findIndex(item => item.key === key)
-    }
     const page = ref(1)
 
-    const handlePageChange = (curPage) => {
+    const getDataIndex = (key: number) => {
+      return data.value.findIndex(item => item.key === key)
+    }
+    const handlePageChange = (curPage: number) => {
       page.value = curPage
     }
 
@@ -91,11 +95,11 @@ export default defineComponent({
           title: 'Name',
           key: 'name',
           width: 150,
-          render(row) {
+          render(row: RowData) {
             const index = getDataIndex(row.key)
             return h(ShowOrEdit, {
               value: row.name,
-              onUpdateValue(v) {
+              onUpdateValue(v: string) {
                 data.value[index].name = v
               }
             })
@@ -105,12 +109,12 @@ export default defineComponent({
           title: 'Age',
           key: 'age',
           width: 100,
-          render(row) {
+          render(row: RowData) {
             const index = getDataIndex(row.key)
             return h(ShowOrEdit, {
               value: row.age,
-              onUpdateValue(v) {
-                data.value[index].age = v
+              onUpdateValue(v: string) {
+                data.value[index].age = Number(v)
               }
             })
           }
@@ -118,11 +122,11 @@ export default defineComponent({
         {
           title: 'Address',
           key: 'address',
-          render(row) {
+          render(row: RowData) {
             const index = getDataIndex(row.key)
             return h(ShowOrEdit, {
               value: row.address,
-              onUpdateValue(v) {
+              onUpdateValue(v: string) {
                 data.value[index].address = v
               }
             })
@@ -132,4 +136,14 @@ export default defineComponent({
     }
   }
 })
-```
+</script>
+
+<template>
+  <n-data-table
+    :key="(row: RowData) => row.key"
+    :columns="columns"
+    :data="data"
+    :pagination="paginationRef"
+    :on-update:page="handlePageChange"
+  />
+</template>

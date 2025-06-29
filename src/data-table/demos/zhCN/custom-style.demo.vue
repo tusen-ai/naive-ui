@@ -4,9 +4,7 @@
 列：在列对象上设定 `className` 属性为确定的列设定 class。
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
+<script lang="ts" setup>
 interface RowData {
   key: number
   name: string
@@ -35,34 +33,28 @@ const data: RowData[] = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    return {
-      data,
-      columns: [
-        {
-          title: 'Name',
-          key: 'name'
-        },
-        {
-          title: 'Age',
-          key: 'age',
-          className: 'age'
-        },
-        {
-          title: 'Address',
-          key: 'address'
-        }
-      ],
-      rowClassName(row: RowData) {
-        if (row.age > 32) {
-          return 'too-old'
-        }
-        return ''
-      }
-    }
+const columns = [
+  {
+    title: 'Name',
+    key: 'name'
+  },
+  {
+    title: 'Age',
+    key: 'age',
+    className: 'age'
+  },
+  {
+    title: 'Address',
+    key: 'address'
   }
-})
+]
+
+function rowClassName(row: RowData) {
+  if (row.age > 32) {
+    return 'too-old'
+  }
+  return ''
+}
 </script>
 
 <template>
