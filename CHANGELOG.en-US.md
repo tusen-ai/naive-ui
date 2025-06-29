@@ -7,6 +7,7 @@
 - Fix `n-image` zoom in & out locale text in `da-DK` `sv-SE`.
 - Fix `n-popover`'s `themeOverrides` property does not have the `Scrollbar` style configuration.
 - Fix `n-anchor` can't activate link in the bottom of the page by click, closes [#7033](https://github.com/tusen-ai/naive-ui/issues/7033).
+- Fix `n-upload` component 'Non-function value encountered for default slot' warning.
 
 ## 2.42.0
 
