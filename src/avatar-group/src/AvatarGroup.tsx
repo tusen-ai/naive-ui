@@ -4,8 +4,9 @@ import type { Size } from '../../avatar/src/interface'
 import type { AvatarGroupTheme } from '../styles'
 import type {
   AvatarGroupAvatarSlotProps,
+  AvatarGroupOption,
   AvatarGroupRestSlotProps
-} from './interface'
+} from './public-types'
 import {
   computed,
   type CSSProperties,
@@ -25,11 +26,6 @@ import style from './styles/avatar-group.cssr'
 
 export interface AvatarGroupInjection {
   size?: Size | undefined
-}
-
-export interface AvatarGroupOption {
-  src: string
-  [key: string]: unknown
 }
 
 export const avatarGroupProps = {
@@ -130,6 +126,7 @@ export default defineComponent({
             $slots.avatar({ option })
           ) : (
             <NAvatar
+              size={this.size}
               src={option.src}
               theme={mergedTheme.peers.Avatar}
               themeOverrides={mergedTheme.peerOverrides.Avatar}
@@ -142,6 +139,7 @@ export default defineComponent({
           $slots.rest({ options: restOptions, rest: restOptions.length })
         ) : (
           <NAvatar
+            size={this.size}
             style={this.maxStyle}
             theme={mergedTheme.peers.Avatar}
             themeOverrides={mergedTheme.peerOverrides.Avatar}

@@ -27,6 +27,7 @@
     "README.md",
     "dist",
     "es",
+    "generic",
     "lib",
     "volar.d.ts",
     "web-types.json"
