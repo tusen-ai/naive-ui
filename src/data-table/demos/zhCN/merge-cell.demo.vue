@@ -1,24 +1,35 @@
-# Merge cell
+<markdown>
+  # 合并单元格
 
-Set colspan and rowspan by setting `colSpan` and `rowSpan` of column object. Set colspan in header by setting `titleColSpan` of column object.
+  设定列的 `colSpan` 和 `rowSpan` 来控制单元格的 `colspan` 和 `rowspan`。设定列的 `titleColSpan` 控制表头的 colspan。
+  </markdown>
 
-```html
-<n-data-table
-  :columns="columns"
-  :data="data"
-  :pagination="pagination"
-  :single-line="false"
-/>
-```
-
-```js
+<script lang="ts" setup>
+import type { DataTableColumns } from 'naive-ui'
 import { NButton, NTag, useMessage } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 
-function createColumns({ sendMail }) {
+interface RowData {
+  key: number
+  name: string
+  age: number
+  address: string
+  tags: string[]
+}
+
+interface SendMail {
+  (rowData: RowData): void
+}
+
+function createColumns({
+  sendMail
+}: {
+  sendMail: SendMail
+}): DataTableColumns<RowData> {
   return [
     {
       title: 'Name',
+      titleColSpan: 2,
       key: 'name',
       rowSpan: (rowData, rowIndex) => (rowIndex === 0 ? 2 : 1),
       colSpan: (rowData, rowIndex) => (rowIndex === 0 ? 2 : 1)
@@ -35,6 +46,7 @@ function createColumns({ sendMail }) {
     {
       title: 'Tags',
       key: 'tags',
+      titleColSpan: 2,
       render(row) {
         const tags = row.tags.map((tagKey) => {
           return h(
@@ -72,7 +84,7 @@ function createColumns({ sendMail }) {
   ]
 }
 
-function createData() {
+function createData(): RowData[] {
   return [
     {
       key: 0,
@@ -98,20 +110,23 @@ function createData() {
   ]
 }
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      data: createData(),
-      columns: createColumns({
-        sendMail(rowData) {
-          message.info(`send mail to ${rowData.name}`)
-        }
-      }),
-      pagination: {
-        pageSize: 10
-      }
-    }
-  }
-})
-```
+const message = useMessage()
+function sendMail(rowData: RowData) {
+  message.info(`send mail to ${rowData.name}`)
+}
+
+const data = createData()
+const columns = createColumns({ sendMail })
+const pagination = {
+  pageSize: 10
+}
+</script>
+
+<template>
+  <n-data-table
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+    :single-line="false"
+  />
+</template>

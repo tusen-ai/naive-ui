@@ -4,7 +4,7 @@
 有时候你可能想将折叠侧边栏放在右侧。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { Component } from 'vue'
 import {
   BookOutline as BookIcon,
@@ -12,7 +12,7 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
 import { NIcon } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 
 function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
@@ -92,14 +92,6 @@ const menuOptions = [
     ]
   }
 ]
-
-export default defineComponent({
-  setup() {
-    return {
-      menuOptions
-    }
-  }
-})
 </script>
 
 <template>

@@ -4,9 +4,7 @@
 Ellipsize cell content via setting `column.ellipsis`.
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
+<script lang="ts" setup>
 const columns = [
   {
     title: 'Name',
@@ -54,15 +52,7 @@ const data = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    return {
-      data,
-      columns,
-      pagination: { pageSize: 10 }
-    }
-  }
-})
+const pagination = { pageSize: 10 }
 </script>
 
 <template>

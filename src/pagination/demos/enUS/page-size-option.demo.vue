@@ -2,36 +2,30 @@
 # Custom page size options
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const pageSizes = [
-      {
-        label: '10 per page',
-        value: 10
-      },
-      {
-        label: '20 per page',
-        value: 20
-      },
-      {
-        label: '30 per page',
-        value: 30
-      },
-      {
-        label: '40 per page',
-        value: 40
-      }
-    ]
-    return {
-      page: ref(2),
-      pageSize: ref(20),
-      pageSizes
-    }
+const pageSizes = [
+  {
+    label: '10 per page',
+    value: 10
+  },
+  {
+    label: '20 per page',
+    value: 20
+  },
+  {
+    label: '30 per page',
+    value: 30
+  },
+  {
+    label: '40 per page',
+    value: 40
   }
-})
+]
+
+const page = ref(2)
+const pageSize = ref(20)
 </script>
 
 <template>

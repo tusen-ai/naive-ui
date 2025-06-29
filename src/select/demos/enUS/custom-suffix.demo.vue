@@ -7,7 +7,7 @@ Make arrow a bit different.
 <script lang="ts" setup>
 import Flash16Regular from '@vicons/fluent/Flash16Regular'
 import FlashCheckmark16Regular from '@vicons/fluent/FlashCheckmark16Regular'
-import MdSearch from '@vicons/ionicons4/MdSearch'
+import { MdSearch } from '@vicons/ionicons4'
 import { ref } from 'vue'
 
 const show1 = ref(false)

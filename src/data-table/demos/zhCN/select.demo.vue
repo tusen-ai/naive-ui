@@ -4,9 +4,9 @@
 可以通过把第一列的类型设为 `selection` 来让行变成可选的。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DataTableColumns, DataTableRowKey } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 interface RowData {
   key: number
@@ -44,28 +44,23 @@ const data = Array.from({ length: 46 }).map((_, index) => ({
   address: `London, Park Lane no. ${index}`
 }))
 
-export default defineComponent({
-  setup() {
-    const checkedRowKeysRef = ref<DataTableRowKey[]>([])
+const checkedRowKeysRef = ref<DataTableRowKey[]>([])
+const columns = createColumns()
+const pagination = {
+  pageSize: 5
+}
 
-    return {
-      data,
-      columns: createColumns(),
-      checkedRowKeys: checkedRowKeysRef,
-      pagination: {
-        pageSize: 5
-      },
-      rowKey: (row: RowData) => row.address,
-      handleCheck(rowKeys: DataTableRowKey[]) {
-        checkedRowKeysRef.value = rowKeys
-      }
-    }
-  }
-})
+function rowKey(row: RowData) {
+  return row.address
+}
+
+function handleCheck(rowKeys: DataTableRowKey[]) {
+  checkedRowKeysRef.value = rowKeys
+}
 </script>
 
 <template>
-  <n-p> 你选中了 {{ checkedRowKeys.length }} 行。 </n-p>
+  <n-p> 你选中了 {{ checkedRowKeysRef.length }} 行。 </n-p>
 
   <n-data-table
     :columns="columns"
