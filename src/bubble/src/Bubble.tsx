@@ -2,7 +2,7 @@ import type { CSSProperties, PropType, SlotsType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { BubbleTheme } from '../styles/light'
 import type { BubblePlacement, BubbleShape, BubbleSlots, BubbleVariant } from './public-types'
-import { NAvatar, NTypewriter, TypewriterOptions } from 'naive-ui'
+import { NAvatar, NMarkdown, NTypewriter, TypewriterOptions } from 'naive-ui'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { resolveSlot } from '../../_utils'
@@ -43,6 +43,10 @@ export const bubbleProps = {
       step: 1,
       initialIndex: 5
     }
+  },
+  isMarkdown: {
+    type: Boolean,
+    default: false
   }
 }
 
@@ -187,13 +191,19 @@ export default defineComponent({
                 </div>
               ) : (
                 this.isTyping ? (
-                  <NTypewriter content={this.content} options={this.options}>
+                  <NTypewriter content={this.content} isMarkdown={this.isMarkdown} options={this.options}>
                     { this.$slots.content && { default: this.$slots.content } }
                   </NTypewriter>
                 ) : (
-                  this.$slots.content
-                    ? this.$slots.content()
-                    : this.content
+                  this.isMarkdown ? (
+                    <NMarkdown content={this.content}>
+                      {this.$slots.content && { default: this.$slots.content }}
+                    </NMarkdown>) 
+                  : (
+                    this.$slots.content
+                      ? this.$slots.content()
+                      : this.content
+                  )
                 )
               )
             }

@@ -3,6 +3,10 @@
 </markdown>
 
 <template>
-    <n-bubble content="hello world  !" />
+    <n-bubble content="hello world  !">
+        <template #content>
+            234
+        </template>
+    </n-bubble>
 </template>
     
