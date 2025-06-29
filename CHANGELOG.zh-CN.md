@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.42.1
+
+### Fixes
+
+- 修复 `n-popover` 的 `themeOverrides` 属性没有 `Scrollbar` 样式配置
+
 ## 2.42.0
 
 `2025-06-17`
