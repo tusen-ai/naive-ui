@@ -78,10 +78,10 @@ mask-click-debug.vue
 | mask-closable | `boolean` | `true` | 点击遮罩时是否发出 `update:show` 事件 |  |
 | preset | `'dialog' \| 'card'` | `undefined` | 模态框使用何种预设 |  |
 | show | `boolean` | `false` | 是否展示 Modal |  |
-| unstable-show-mask | `boolean` | `true` | 是否展示遮罩 |  |
 | to | `string \| HTMLElement` | `body` | Modal 的挂载位置 |  |
 | transform-origin | `'mouse' \| 'center'` | `'mouse'` | 模态框动画出现的位置 |  |
 | trap-focus | `boolean` | `true` | 是否将焦点锁定在 Modal 内部 | 2.24.2 |
+| unstable-show-mask | `boolean` | `true` | 是否展示遮罩。这个属性并不稳定，请谨慎使用 |  |
 | z-index | `number` | `undefined` | Modal 的 z-index | 2.24.0 |
 | on-after-enter | `() => void` | `undefined` | Modal 出现后的回调 |  |
 | on-after-leave | `() => void` | `undefined` | Modal 关闭后的回调 |  |
