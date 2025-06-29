@@ -4,15 +4,8 @@
 在 `n-float-button` 上展示描述信息。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { Document as DocumentIcon } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    DocumentIcon
-  }
-})
 </script>
 
 <template>

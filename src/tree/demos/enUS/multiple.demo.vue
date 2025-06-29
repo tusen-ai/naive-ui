@@ -4,10 +4,10 @@
 Set `multiple` to select multiple nodes.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { TreeOption } from 'naive-ui'
 import { repeat } from 'seemly'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 function createData(level = 4, baseKey = ''): TreeOption[] | undefined {
   if (!level)
@@ -34,14 +34,8 @@ function createLabel(level: number): string {
   return ''
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      data: createData(),
-      value: ref([])
-    }
-  }
-})
+const data = createData()
+const value = ref([])
 </script>
 
 <template>

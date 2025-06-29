@@ -1,10 +1,21 @@
 # CHANGELOG
 
-## 2.42.1
+## NEXT_VERSION
 
 ### Fixes
 
+- Fix `n-image` zoom in & out locale text in `da-DK` `sv-SE`.
+- Fix `n-popover`'s `themeOverrides` property does not have the `Scrollbar` style configuration.
+- Fix `n-anchor` can't activate link in the bottom of the page by click, closes [#7033](https://github.com/tusen-ai/naive-ui/issues/7033), closes [#6918](https://github.com/tusen-ai/naive-ui/issues/6918), [#6844](https://github.com/tusen-ai/naive-ui/issues/6844), [#6782](https://github.com/tusen-ai/naive-ui/issues/6782).
+- Fix `n-upload` component 'Non-function value encountered for default slot' warning.
+- Fix `n-input`'s `tabindex` property setting of `input-props` does not take effect.
+- Fix `n-tab` scroll shadow pseudo-class style conflicts in multi-layer tab nesting scenarios, closes [#6854](https://github.com/tusen-ai/naive-ui/issues/6854).
+- Fix `n-menu`'s disabled style not working when parent node is set to `disabled` and child node has `type: "group"`, closes [#6792](https://github.com/tusen-ai/naive-ui/issues/6792)
 - Fix `n-avatar-group`'s `AvatarGroupOption` type add generic fields, closes [#6909](https://github.com/tusen-ai/naive-ui/issues/6909)
+
+### Features
+
+- `n-data-table`'s column adds `customNextSortOrder` attribute, closes [#6850](https://github.com/tusen-ai/naive-ui/issues/6850).
 
 ## 2.42.0
 

@@ -4,27 +4,18 @@
 若 `show-label` 在 `n-form-item` 上未被设定，则会继承 `n-form` 的 `show-label`，默认为 `true`。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const formRef = ref(null)
-    const formShowLabel = ref(true)
-    const formItemShowLabel = ref(true)
-    return {
-      formRef,
-      formValue: ref({
-        user: {
-          name: '',
-          age: ''
-        },
-        phone: ''
-      }),
-      formShowLabel,
-      formItemShowLabel
-    }
-  }
+const formRef = ref(null)
+const formShowLabel = ref(true)
+const formItemShowLabel = ref(true)
+const formValue = ref({
+  user: {
+    name: '',
+    age: ''
+  },
+  phone: ''
 })
 </script>
 

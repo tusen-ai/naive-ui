@@ -286,6 +286,7 @@ export type TableBaseColumn<T = InternalRowData> = {
   sorter?: boolean | Sorter<T> | 'default'
   defaultSortOrder?: SortOrder
   sortOrder?: SortOrder // controlled
+  customNextSortOrder?: (order: SortOrder) => SortOrder
 
   resizable?: boolean
   minWidth?: string | number

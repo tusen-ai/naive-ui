@@ -4,24 +4,16 @@
   使用 `error-correction-level` 来设定纠错级别。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const errorCorrectionLevel = ref('M')
-    const errorCorrectionOptions = [
-      { value: 'L', label: 'L' },
-      { value: 'M', label: 'M' },
-      { value: 'Q', label: 'Q' },
-      { value: 'H', label: 'H' }
-    ]
-    return {
-      errorCorrectionLevel,
-      errorCorrectionOptions
-    }
-  }
-})
+const errorCorrectionLevel = ref('M')
+const errorCorrectionOptions = [
+  { value: 'L', label: 'L' },
+  { value: 'M', label: 'M' },
+  { value: 'Q', label: 'Q' },
+  { value: 'H', label: 'H' }
+]
 </script>
 
 <template>

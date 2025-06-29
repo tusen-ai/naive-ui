@@ -4,8 +4,8 @@
 注意：如果你希望分组的表头拥有固定列的效果，你需要给所有固定列表头都设定好宽度，包括所有的父级节点，否则可能产生错位。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
 function createCols() {
   return [
@@ -57,16 +57,10 @@ function createData() {
   })
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      data: ref(createData()),
-      columns: ref(createCols()),
-      pagination: ref({
-        pageSize: 10
-      })
-    }
-  }
+const data = ref(createData())
+const columns = ref(createCols())
+const pagination = ref({
+  pageSize: 10
 })
 </script>
 

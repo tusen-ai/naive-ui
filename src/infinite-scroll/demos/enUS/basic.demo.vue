@@ -2,21 +2,13 @@
 # Basic
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const count = ref(6)
-    const handleLoad = () => {
-      count.value += 1
-    }
-    return {
-      count,
-      handleLoad
-    }
-  }
-})
+const count = ref(6)
+function handleLoad() {
+  count.value += 1
+}
 </script>
 
 <template>

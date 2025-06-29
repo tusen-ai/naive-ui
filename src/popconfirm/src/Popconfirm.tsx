@@ -123,29 +123,30 @@ export default defineComponent({
   },
   render() {
     const { $slots: slots, $props: props, mergedTheme } = this
-    return h(
-      NPopover,
-      omit(props, panelPropKeys, {
-        theme: mergedTheme.peers.Popover,
-        themeOverrides: mergedTheme.peerOverrides.Popover,
-        internalExtraClass: ['popconfirm'],
-        ref: 'popoverInstRef'
-      }),
-      {
-        trigger: slots.trigger,
-        default: () => {
-          const panelProps = keep(props, panelPropKeys)
-          return h(
-            PopconfirmPanel,
-            {
-              ...panelProps,
-              onPositiveClick: this.handlePositiveClick,
-              onNegativeClick: this.handleNegativeClick
-            },
-            slots
-          )
-        }
-      }
+    return (
+      <NPopover
+        {...omit(props, panelPropKeys)}
+        theme={mergedTheme.peers.Popover}
+        themeOverrides={mergedTheme.peerOverrides.Popover}
+        internalExtraClass={['popconfirm']}
+        ref="popoverInstRef"
+      >
+        {{
+          trigger: slots.trigger,
+          default: () => {
+            const panelProps = keep(props, panelPropKeys)
+            return (
+              <PopconfirmPanel
+                {...panelProps}
+                onPositiveClick={this.handlePositiveClick}
+                onNegativeClick={this.handleNegativeClick}
+              >
+                {slots}
+              </PopconfirmPanel>
+            )
+          }
+        }}
+      </NPopover>
     )
   }
 })

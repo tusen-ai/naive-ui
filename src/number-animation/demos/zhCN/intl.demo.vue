@@ -6,21 +6,14 @@
 需要注意的是，该功能使用了 `Intl` API，兼容性请参考 [format](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/format) 和 [formatToParts](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/formatToParts)。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { NumberAnimationInst } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const numberAnimationInstRef = ref<NumberAnimationInst | null>(null)
-    return {
-      numberAnimationInstRef,
-      handleClick() {
-        numberAnimationInstRef.value?.play()
-      }
-    }
-  }
-})
+const numberAnimationInstRef = ref<NumberAnimationInst | null>(null)
+function handleClick() {
+  numberAnimationInstRef.value?.play()
+}
 </script>
 
 <template>

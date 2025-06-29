@@ -4,16 +4,10 @@
 Is there anybody who needs slots in a select menu?
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      value: ref('Empty')
-    }
-  }
-})
+const value = ref('Empty')
 </script>
 
 <template>
