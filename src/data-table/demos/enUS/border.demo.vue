@@ -2,10 +2,10 @@
 # Unbordered & no row divider & no column divider
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DataTableColumns } from 'naive-ui'
 import { NButton, NTag, useMessage } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 
 interface RowData {
   key: number
@@ -98,22 +98,16 @@ function createData(): RowData[] {
   ]
 }
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      data: createData(),
-      columns: createColumns({
-        sendMail(rowData) {
-          message.info(`send mail to ${rowData.name}`)
-        }
-      }),
-      pagination: {
-        pageSize: 10
-      }
-    }
+const message = useMessage()
+const data = createData()
+const columns = createColumns({
+  sendMail(rowData) {
+    message.info(`send mail to ${rowData.name}`)
   }
 })
+const pagination = {
+  pageSize: 10
+}
 </script>
 
 <template>
