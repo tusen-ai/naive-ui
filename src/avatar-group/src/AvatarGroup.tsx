@@ -126,7 +126,6 @@ export default defineComponent({
             $slots.avatar({ option })
           ) : (
             <NAvatar
-              size={this.size}
               src={option.src}
               theme={mergedTheme.peers.Avatar}
               themeOverrides={mergedTheme.peerOverrides.Avatar}
@@ -139,7 +138,6 @@ export default defineComponent({
           $slots.rest({ options: restOptions, rest: restOptions.length })
         ) : (
           <NAvatar
-            size={this.size}
             style={this.maxStyle}
             theme={mergedTheme.peers.Avatar}
             themeOverrides={mergedTheme.peerOverrides.Avatar}
