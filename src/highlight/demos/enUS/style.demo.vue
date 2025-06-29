@@ -4,20 +4,13 @@
 Change the style to make the highlight more striking.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useThemeVars } from 'naive-ui'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const themeVars = useThemeVars()
-    return {
-      text: 'Naive UI is written in full TypeScript and works seamlessly with your TypeScript projects',
-      patterns: ['Naive UI', 'typeScript'],
-      themeVars
-    }
-  }
-})
+const themeVars = useThemeVars()
+const text
+  = 'Naive UI is written in full TypeScript and works seamlessly with your TypeScript projects'
+const patterns = ['Naive UI', 'typeScript']
 </script>
 
 <template>

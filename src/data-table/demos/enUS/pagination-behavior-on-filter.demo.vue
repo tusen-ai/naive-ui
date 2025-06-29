@@ -6,9 +6,8 @@ Set `pagination-behavior-on-filter` to control the behavior (whether to stay at 
 If table stays on the current page and the total amount of filtered data cannot reach the current page, the last page of data would be shown.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DataTableColumns } from 'naive-ui'
-import { defineComponent } from 'vue'
 
 interface RowData {
   key: number
@@ -73,15 +72,7 @@ const data: RowData[] = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    return {
-      data,
-      columns,
-      pagination: { pageSize: 3 }
-    }
-  }
-})
+const pagination = { pageSize: 3 }
 </script>
 
 <template>

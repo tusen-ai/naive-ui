@@ -4,7 +4,7 @@
 If you don't set `default-expanded-keys`, menu will expand all the ascendant of selected option by default.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { MenuOption } from 'naive-ui'
 import type { Component } from 'vue'
 import {
@@ -13,7 +13,7 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
 import { NIcon, useMessage } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 
 function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
@@ -94,19 +94,12 @@ const menuOptions: MenuOption[] = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
+const message = useMessage()
+const defaultExpandedKeys = ['dance-dance-dance', 'food']
 
-    return {
-      menuOptions,
-      defaultExpandedKeys: ['dance-dance-dance', 'food'],
-      handleUpdateExpandedKeys(value: string[]) {
-        message.info(`[onUpdate:expandedKeys]: ${JSON.stringify(value)}`)
-      }
-    }
-  }
-})
+function handleUpdateExpandedKeys(value: string[]) {
+  message.info(`[onUpdate:expandedKeys]: ${JSON.stringify(value)}`)
+}
 </script>
 
 <template>

@@ -2,15 +2,8 @@
 # 基础用法
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { MdSave } from '@vicons/ionicons4'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    MdSave
-  }
-})
 </script>
 
 <template>

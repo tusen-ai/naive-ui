@@ -2,16 +2,10 @@
 # Keep alive debug
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      showLayout: ref(true)
-    }
-  }
-})
+const showLayout = ref(true)
 </script>
 
 <template>

@@ -2,8 +2,8 @@
 # Empty
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
 function createColumns() {
   return [
@@ -30,14 +30,8 @@ function createColumns() {
   ]
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      data: ref([]),
-      columns: createColumns()
-    }
-  }
-})
+const data = ref([])
+const columns = createColumns()
 </script>
 
 <template>
