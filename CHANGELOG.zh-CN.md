@@ -2,13 +2,16 @@
 
 ## NEXT_VERSION
 
-`NEXT_VERSION`
-
 ### Fixes
 
-- 修复 `n-upload` 组件 Non-function value encountered for default slot 警告
+- 修复 `n-image` 放大缩小在 `da-DK` `sv-SE` 本地化的文案
+- 修复 `n-popover` 的 `themeOverrides` 属性没有 `Scrollbar` 样式配置
+- 修复 `n-anchor` 对页面底部的 link 无法通过点击激活，关闭 [#7033](https://github.com/tusen-ai/naive-ui/issues/7033)
+- 修复 `n-upload` 组件 'Non-function value encountered for default slot' 警告
 
 ## 2.42.0
+
+`2025-06-17`
 
 ### Breaking Changes
 

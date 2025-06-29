@@ -2,17 +2,11 @@
 # Basic
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      showRail: ref(true),
-      showBackground: ref(true)
-    }
-  }
-})
+const showRail = ref(true)
+const showBackground = ref(true)
 </script>
 
 <template>

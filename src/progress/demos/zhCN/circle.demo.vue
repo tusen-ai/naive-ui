@@ -4,34 +4,24 @@
 进度可以是个圈，它支持 `default`、`info`、`success`、`warning` 和 `error` 的 `status`。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const percentageRef = ref(0)
+const percentage = ref(0)
 
-    const add = () => {
-      percentageRef.value += 10
-      if (percentageRef.value > 100) {
-        percentageRef.value = 0
-      }
-    }
-
-    const minus = () => {
-      percentageRef.value -= 10
-      if (percentageRef.value < 0) {
-        percentageRef.value = 100
-      }
-    }
-
-    return {
-      percentage: percentageRef,
-      add,
-      minus
-    }
+function add() {
+  percentage.value += 10
+  if (percentage.value > 100) {
+    percentage.value = 0
   }
-})
+}
+
+function minus() {
+  percentage.value -= 10
+  if (percentage.value < 0) {
+    percentage.value = 100
+  }
+}
 </script>
 
 <template>

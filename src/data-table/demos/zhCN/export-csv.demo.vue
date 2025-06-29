@@ -6,7 +6,7 @@
 如果默认的 CSV 生成逻辑不能满足你的需求，例如 `title` 使用了渲染函数，或者需要调整每个单元格的数据格式，你可以用 `get-csv-header` 和 `get-csv-cell` 属性自定义导出的表头和单元格。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type {
   DataTableColumns,
   DataTableGetCsvCell,
@@ -14,7 +14,7 @@ import type {
   DataTableInst,
   DataTableRowData
 } from 'naive-ui'
-import { defineComponent, h, ref } from 'vue'
+import { h, ref } from 'vue'
 
 interface Song {
   key: number
@@ -84,47 +84,36 @@ const data: Song[] = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    const tableRef = ref<DataTableInst>()
+const tableRef = ref<DataTableInst>()
 
-    const downloadCsv = () =>
-      tableRef.value?.downloadCsv({ fileName: 'data-table' })
+function downloadCsv() {
+  return tableRef.value?.downloadCsv({ fileName: 'data-table' })
+}
 
-    const exportSorterAndFilterCsv = () =>
-      tableRef.value?.downloadCsv({
-        fileName: 'sorter-filter',
-        keepOriginalData: false
-      })
+function exportSorterAndFilterCsv() {
+  return tableRef.value?.downloadCsv({
+    fileName: 'sorter-filter',
+    keepOriginalData: false
+  })
+}
 
-    const getCsvCell: DataTableGetCsvCell = (value, _, column) => {
-      if (column.key === 'age') {
-        return `${value} years old`
-      }
-      return value
-    }
-
-    const getCsvHeader: DataTableGetCsvHeader = (col) => {
-      if (typeof col.title === 'function') {
-        return col.key === 'age' ? 'Age' : 'Unknown'
-      }
-      else {
-        return col.title || 'Unknown'
-      }
-    }
-
-    return {
-      data,
-      tableRef,
-      downloadCsv,
-      exportSorterAndFilterCsv,
-      columns,
-      pagination: false as const,
-      getCsvCell,
-      getCsvHeader
-    }
+const getCsvCell: DataTableGetCsvCell = (value, _, column) => {
+  if (column.key === 'age') {
+    return `${value} years old`
   }
-})
+  return value
+}
+
+const getCsvHeader: DataTableGetCsvHeader = (col) => {
+  if (typeof col.title === 'function') {
+    return col.key === 'age' ? 'Age' : 'Unknown'
+  }
+  else {
+    return col.title || 'Unknown'
+  }
+}
+
+const pagination = false as const
 </script>
 
 <template>

@@ -4,16 +4,10 @@
 插槽也会随着预设变动。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      showModal: ref(false)
-    }
-  }
-})
+const showModal = ref(false)
 </script>
 
 <template>

@@ -4,7 +4,7 @@
 你通常可以在这个地方配合 vue-router 完成路由。当然，你也可以通过将 `label` 渲染为 `<router-link />` 或 `<a />` 来改变路由。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { MenuOption } from 'naive-ui'
 import type { Component } from 'vue'
 import {
@@ -14,7 +14,7 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
 import { NIcon, useMessage } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 import { RouterLink } from 'vue-router'
 
 function renderIcon(icon: Component) {
@@ -131,18 +131,12 @@ const menuOptions: MenuOption[] = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      menuOptions,
-      handleUpdateValue(key: string, item: MenuOption) {
-        message.info(`[onUpdate:value]: ${JSON.stringify(key)}`)
-        message.info(`[onUpdate:value]: ${JSON.stringify(item)}`)
-      }
-    }
-  }
-})
+const message = useMessage()
+
+function handleUpdateValue(key: string, item: MenuOption) {
+  message.info(`[onUpdate:value]: ${JSON.stringify(key)}`)
+  message.info(`[onUpdate:value]: ${JSON.stringify(item)}`)
+}
 </script>
 
 <template>

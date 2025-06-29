@@ -2,17 +2,10 @@
 # Basic
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup() {
-    return {
-      text: 'Naive UI is a Vue3 component library, it is relatively complete, tunable themes, written in TypeScript, fast.',
-      patterns: ['Naive UI', 'Vue3', 'TypeScript', 'fast']
-    }
-  }
-})
+<script lang="ts" setup>
+const text
+  = 'Naive UI is a Vue3 component library, it is relatively complete, tunable themes, written in TypeScript, fast.'
+const patterns = ['Naive UI', 'Vue3', 'TypeScript', 'fast']
 </script>
 
 <template>
