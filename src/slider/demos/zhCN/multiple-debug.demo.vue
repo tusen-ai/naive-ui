@@ -4,16 +4,10 @@
 虽然我也不知道有啥用，但是这看起来很屌。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      value: ref([50, 70, 80, 90])
-    }
-  }
-})
+const value = ref([50, 70, 80, 90])
 </script>
 
 <template>
