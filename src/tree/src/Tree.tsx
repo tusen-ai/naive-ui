@@ -274,10 +274,7 @@ export const treeProps = {
     type: Boolean,
     default: true
   },
-  ellipsis: {
-    type: Boolean,
-    default: false
-  },
+  ellipsis: Boolean,
   checkboxPlacement: {
     type: String as PropType<'left' | 'right'>,
     default: 'left'
