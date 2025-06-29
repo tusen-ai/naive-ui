@@ -43,7 +43,13 @@ import {
   Teleport,
   toRef
 } from 'vue'
-import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import {
+  useConfig,
+  useFormItem,
+  useRtl,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
 import { call, throwError, warn } from '../../_utils'
 import { uploadLight, type UploadTheme } from '../styles'
 import { uploadInjectionKey } from './interface'
@@ -404,7 +410,8 @@ export default defineComponent({
         'when the list-type is image-card, abstract is not supported.'
       )
     }
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
+      = useConfig(props)
     const themeRef = useTheme(
       'Upload',
       '-upload',
@@ -413,6 +420,9 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+
+    const rtlEnabledRef = useRtl('Upload', mergedRtlRef, mergedClsPrefixRef)
+
     const formItem = useFormItem(props)
     const uncontrolledFileListRef = ref(props.defaultFileList)
     const controlledFileListRef = toRef(props, 'fileList')
@@ -746,6 +756,7 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       draggerInsideRef,
+      rtlEnabled: rtlEnabledRef,
       inputElRef,
       mergedTheme: themeRef,
       dragOver: dragOverRef,
@@ -796,6 +807,7 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-upload`,
+          this.rtlEnabled && `${mergedClsPrefix}-upload--rtl`,
           draggerInsideRef.value && `${mergedClsPrefix}-upload--dragger-inside`,
           this.dragOver && `${mergedClsPrefix}-upload--drag-over`,
           this.themeClass

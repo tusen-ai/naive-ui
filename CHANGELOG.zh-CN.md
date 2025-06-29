@@ -21,6 +21,10 @@
 - `n-data-table` 的列增加 `customNextSortOrder` 属性，关闭 [#6850](https://github.com/tusen-ai/naive-ui/issues/6850)
 - 新增 `n-avatar-group` 对应的泛型组件 `NGAvatarGroup`，关闭 [#6909](https://github.com/tusen-ai/naive-ui/issues/6909)
 - `n-avatar-group` 新增 `size` 属性
+- `n-popover` 支持 RTL
+- `n-tooltip` 支持 RTL
+- `n-upload` 支持 RTL
+- `n-tree-select` 支持 RTL
 
 ## 2.42.0
 

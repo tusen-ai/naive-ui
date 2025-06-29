@@ -21,6 +21,10 @@
 - `n-data-table`'s column adds `customNextSortOrder` attribute, closes [#6850](https://github.com/tusen-ai/naive-ui/issues/6850).
 - Add `n-avatar-group`'s corresponding generic component `NGAvatarGroup`, closes [#6909](https://github.com/tusen-ai/naive-ui/issues/6909).
 - `n-avatar-group` adds `size` prop.
+- `n-popover` supports RTL.
+- `n-tooltip` supports RTL.
+- `n-upload` supports RTL.
+- `n-tree-select` supports RTL.
 
 ## 2.42.0
 
