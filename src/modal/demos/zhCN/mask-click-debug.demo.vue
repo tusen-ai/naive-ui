@@ -2,36 +2,19 @@
 # Mask click debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { NButton, NImage, NModal, NSpace } from 'naive-ui'
 import { ref } from 'vue'
 
-export default {
-  name: 'App',
-  components: {
-    NSpace,
-    NButton,
-    NModal,
-    NImage
-  },
-  setup() {
-    const showModalOne = ref(false)
-    const showModalTwo = ref(false)
+const showModalOne = ref(false)
+const showModalTwo = ref(false)
 
-    function handleCloseOne() {
-      showModalOne.value = false
-    }
-    function handleCloseTwo() {
-      showModalTwo.value = false
-    }
+function handleCloseOne() {
+  showModalOne.value = false
+}
 
-    return {
-      showModalOne,
-      showModalTwo,
-      handleCloseOne,
-      handleCloseTwo
-    }
-  }
+function handleCloseTwo() {
+  showModalTwo.value = false
 }
 </script>
 

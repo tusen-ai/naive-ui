@@ -1,26 +1,19 @@
-# 非受控过滤 & 排序
+<markdown>
+  # 非受控过滤 & 排序
+  </markdown>
 
-```html
-<n-space vertical :size="12">
-  <n-space>
-    <n-button @click="sortName">Sort By Name (Ascend)</n-button>
-    <n-button @click="filterAddress">Filter Address (London)</n-button>
-    <n-button @click="clearFilters">Clear Filters</n-button>
-    <n-button @click="clearSorter">Clear Sorter</n-button>
-  </n-space>
-  <n-data-table
-    ref="table"
-    :columns="columns"
-    :data="data"
-    :pagination="pagination"
-  />
-</n-space>
-```
-
-```js
+<script lang="ts">
+import type { DataTableColumns, DataTableInst } from 'naive-ui'
 import { defineComponent, ref } from 'vue'
 
-const columns = [
+interface RowData {
+  key: number
+  name: string
+  age: number
+  address: string
+}
+
+const columns: DataTableColumns<RowData> = [
   {
     title: 'Name',
     key: 'name',
@@ -47,7 +40,7 @@ const columns = [
       }
     ],
     filter(value, row) {
-      return ~row.address.indexOf(value)
+      return Boolean(~row.address.indexOf(value as string))
     }
   }
 ]
@@ -81,7 +74,7 @@ const data = [
 
 export default defineComponent({
   setup() {
-    const tableRef = ref(null)
+    const tableRef = ref<DataTableInst | null>(null)
 
     return {
       table: tableRef,
@@ -89,20 +82,45 @@ export default defineComponent({
       columns,
       pagination: { pageSize: 5 },
       filterAddress() {
-        tableRef.value.filter({
+        tableRef.value?.filter({
           address: ['London']
         })
       },
       sortName() {
-        tableRef.value.sort('name', 'ascend')
+        tableRef.value?.sort('name', 'ascend')
       },
       clearFilters() {
-        tableRef.value.filter(null)
+        tableRef.value?.filter(null)
       },
       clearSorter() {
-        tableRef.value.sort(null)
+        tableRef.value?.clearSorter()
       }
     }
   }
 })
-```
+</script>
+
+<template>
+  <n-space vertical :size="12">
+    <n-space>
+      <n-button @click="sortName">
+        Sort By Name (Ascend)
+      </n-button>
+      <n-button @click="filterAddress">
+        Filter Address (London)
+      </n-button>
+      <n-button @click="clearFilters">
+        Clear Filters
+      </n-button>
+      <n-button @click="clearSorter">
+        Clear Sorter
+      </n-button>
+    </n-space>
+    <n-data-table
+      ref="table"
+      :columns="columns"
+      :data="data"
+      :pagination="pagination"
+    />
+  </n-space>
+</template>

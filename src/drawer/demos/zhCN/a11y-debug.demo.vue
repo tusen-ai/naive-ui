@@ -2,20 +2,14 @@
 # A11y debug
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const activeRef = ref(false)
-    return {
-      active: activeRef,
-      handleClick() {
-        activeRef.value = !activeRef.value
-      }
-    }
-  }
-})
+const active = ref(false)
+
+function handleClick() {
+  active.value = !active.value
+}
 </script>
 
 <template>

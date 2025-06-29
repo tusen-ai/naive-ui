@@ -4,10 +4,10 @@
 设定 `cascade` 进行级联选择。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { TreeOption } from 'naive-ui'
 import { repeat } from 'seemly'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 function createData(level = 4, baseKey = ''): TreeOption[] | undefined {
   if (!level)
@@ -34,25 +34,20 @@ function createLabel(level: number): string {
   return ''
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      data: createData(),
-      defaultExpandedKeys: ref(['40', '4030', '403020']),
-      defaultCheckedKeys: ref(['40302010']),
-      updateCheckedKeys: (
-        keys: Array<string | number>,
-        options: Array<TreeOption | null>,
-        meta: {
-          node: TreeOption | null
-          action: 'check' | 'uncheck'
-        }
-      ) => {
-        console.log('updateCheckedKeys', keys, options, meta)
-      }
-    }
+const data = createData()
+const defaultExpandedKeys = ref(['40', '4030', '403020'])
+const defaultCheckedKeys = ref(['40302010'])
+
+function updateCheckedKeys(
+  keys: Array<string | number>,
+  options: Array<TreeOption | null>,
+  meta: {
+    node: TreeOption | null
+    action: 'check' | 'uncheck'
   }
-})
+) {
+  console.log('updateCheckedKeys', keys, options, meta)
+}
 </script>
 
 <template>

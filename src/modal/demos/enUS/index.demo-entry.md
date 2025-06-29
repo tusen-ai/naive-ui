@@ -66,6 +66,7 @@ Provided since `2.38.0`.
 | to | `string \| HTMLElement` | `body` | Container node of the modal content. |  |
 | transform-origin | `'mouse' \| 'center'` | `'mouse'` | The transform origin of the modal's display animation. |  |
 | trap-focus | `boolean` | `true` | Whether to trap focus inside modal. | 2.24.2 |
+| unstable-show-mask | `boolean` | `true` | Whether to show mask. The feature is unstable, please use it with caution. |  |
 | z-index | `number` | `undefined` | Z index of the modal. | 2.24.0 |
 | on-after-enter | `() => void` | `undefined` | Callback after modal is opened. |  |
 | on-after-leave | `() => void` | `undefined` | Callback after modal is closed. |  |

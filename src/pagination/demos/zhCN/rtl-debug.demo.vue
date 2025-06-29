@@ -2,19 +2,13 @@
 # Rtl Debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { unstablePaginationRtl } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      rtlEnabled: ref(false),
-      rtlStyles: [unstablePaginationRtl],
-      page: ref(2)
-    }
-  }
-})
+const rtlEnabled = ref(false)
+const rtlStyles = [unstablePaginationRtl]
+const page = ref(2)
 </script>
 
 <template>

@@ -2,21 +2,15 @@
 # Disabled
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      disabled: ref(true),
-      handleClose() {
-        message.info('tag close')
-      }
-    }
-  }
-})
+const message = useMessage()
+const disabled = ref(true)
+function handleClose() {
+  message.info('tag close')
+}
 </script>
 
 <template>
