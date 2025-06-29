@@ -2,16 +2,10 @@
 # Dark Debug 2
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  data() {
-    return {
-      modalActive: false
-    }
-  }
-})
+const modalActive = ref(false)
 </script>
 
 <template>
@@ -190,44 +184,6 @@ export default defineComponent({
       </n-descriptions-item>
     </n-descriptions>
     <n-descriptions>
-      <n-descriptions-item>
-        <template #label>
-          Breakfast
-        </template>
-        Apple
-      </n-descriptions-item>
-      <n-descriptions-item label="Lunch">
-        Apple
-      </n-descriptions-item>
-      <n-descriptions-item label="Supper">
-        Apple
-      </n-descriptions-item>
-      <n-descriptions-item label="Why Long">
-        Why <br>
-        Long <br>
-        Long <br>
-        Long <br>
-        Long <br>
-        Long
-      </n-descriptions-item>
-      <n-descriptions-item label="Why Long">
-        Why <br>
-        Long <br>
-        Long <br>
-        Long <br>
-        Long <br>
-        Long
-      </n-descriptions-item>
-      <n-descriptions-item label="Why Long">
-        Why <br>
-        Long <br>
-        Long <br>
-        Long <br>
-        Long <br>
-        Long
-      </n-descriptions-item>
-    </n-descriptions>
-    <n-descriptions label-placement="left">
       <n-descriptions-item>
         <template #label>
           Breakfast

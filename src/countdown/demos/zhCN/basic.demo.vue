@@ -4,16 +4,10 @@
 一个字符串而已。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      active: ref(false)
-    }
-  }
-})
+const active = ref(false)
 </script>
 
 <template>

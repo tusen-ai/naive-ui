@@ -1,18 +1,9 @@
-# Fixed Column Debug2
+<markdown>
+  # Debug
+</markdown>
 
-```html
-<n-data-table
-  :columns="columns"
-  :data="data"
-  :pagination="pagination"
-  :scroll-x="2000"
-/>
-```
-
-```js
-import { defineComponent } from 'vue'
-
-function createColumns() {
+<script lang="ts" setup>
+function createColumns(): any {
   return [
     {
       title: '1',
@@ -110,7 +101,6 @@ function createColumns() {
           key: 'b2',
           width: 100,
           fixed: 'right',
-
           align: 'center'
         }
       ]
@@ -136,13 +126,16 @@ function createData() {
   ]
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      data: createData(),
-      columns: createColumns(),
-      pagination: { pageSize: 10 }
-    }
-  }
-})
-```
+const data = createData()
+const columns = createColumns()
+const pagination = { pageSize: 10 }
+</script>
+
+<template>
+  <n-data-table
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+    :scroll-x="2000"
+  />
+</template>

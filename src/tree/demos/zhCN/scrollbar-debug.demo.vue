@@ -2,10 +2,9 @@
 # Scrollbar debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { TreeOption } from 'naive-ui'
 import { repeat } from 'seemly'
-import { defineComponent } from 'vue'
 
 function createData(level = 4, baseKey = ''): TreeOption[] | undefined {
   if (!level)
@@ -31,13 +30,8 @@ function createLabel(level: number): string {
     return '三生万物'
   return ''
 }
-export default defineComponent({
-  setup() {
-    return {
-      data: createData()
-    }
-  }
-})
+
+const data = createData()
 </script>
 
 <template>

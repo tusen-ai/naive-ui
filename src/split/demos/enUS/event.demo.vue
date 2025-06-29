@@ -2,26 +2,19 @@
   # Event
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      handleOnDragStart: () => {
-        message.info('Move Start')
-      },
-      handleOnDragMove: () => {
-        message.info('Moving')
-      },
-      handleOnDragEnd: () => {
-        message.info('Move end')
-      }
-    }
-  }
-})
+const message = useMessage()
+function handleOnDragStart() {
+  message.info('Move Start')
+}
+function handleOnDragMove() {
+  message.info('Moving')
+}
+function handleOnDragEnd() {
+  message.info('Move end')
+}
 </script>
 
 <template>

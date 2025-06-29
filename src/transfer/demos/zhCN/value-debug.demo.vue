@@ -2,8 +2,8 @@
 # Value debug
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
 function createOptions() {
   return Array.from({ length: 100 }).map((v, i) => ({
@@ -13,14 +13,8 @@ function createOptions() {
   }))
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      options: createOptions(),
-      value: ref([9999, 9998, 9997])
-    }
-  }
-})
+const options = createOptions()
+const value = ref([9999, 9998, 9997])
 </script>
 
 <template>

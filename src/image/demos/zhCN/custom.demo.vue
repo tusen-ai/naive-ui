@@ -4,27 +4,21 @@
 默认的工具栏样式不一定符合你的需求，我们来调整一下。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { GlobalThemeOverrides } from 'naive-ui'
 import { useThemeVars } from 'naive-ui'
-import { computed, defineComponent } from 'vue'
+import { computed } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      imageGroupThemeOverrides: computed(() => {
-        const { popoverColor, boxShadow2, textColor2, borderRadius }
-          = useThemeVars().value
-        const themeOverrides: NonNullable<GlobalThemeOverrides['Image']> = {
-          toolbarColor: popoverColor,
-          toolbarBoxShadow: boxShadow2,
-          toolbarIconColor: textColor2,
-          toolbarBorderRadius: borderRadius
-        }
-        return themeOverrides
-      })
-    }
+const imageGroupThemeOverrides = computed(() => {
+  const { popoverColor, boxShadow2, textColor2, borderRadius }
+    = useThemeVars().value
+  const themeOverrides: NonNullable<GlobalThemeOverrides['Image']> = {
+    toolbarColor: popoverColor,
+    toolbarBoxShadow: boxShadow2,
+    toolbarIconColor: textColor2,
+    toolbarBorderRadius: borderRadius
   }
+  return themeOverrides
 })
 </script>
 

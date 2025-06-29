@@ -5,6 +5,7 @@ import { useDisplayMode } from '../store'
 import { i18n } from '../utils/composables'
 import CopyCodeButton from './CopyCodeButton.vue'
 import EditInCodeSandboxButton from './EditInCodeSandboxButton.vue'
+import EditInPlaygroundButton from './EditInPlaygroundButton.vue'
 import EditOnGithubButton from './EditOnGithubButton.vue'
 
 export default defineComponent({
@@ -12,7 +13,8 @@ export default defineComponent({
     CodeOutline,
     EditOnGithubButton,
     EditInCodeSandboxButton,
-    CopyCodeButton
+    CopyCodeButton,
+    EditInPlaygroundButton
   },
   props: {
     title: {
@@ -76,6 +78,7 @@ export default defineComponent({
           hide: '收起代码',
           editOnGithub: '在 GitHub 中编辑',
           editInCodeSandbox: '在 CodeSandbox 中编辑',
+          editInPlayground: '在 Playground 中编辑',
           copyCode: '复制代码',
           copySuccess: '复制成功'
         },
@@ -84,6 +87,7 @@ export default defineComponent({
           hide: 'Hide Code',
           editOnGithub: 'Edit on GitHub',
           editInCodeSandbox: 'Edit in CodeSandbox',
+          editInPlayground: 'Edit in Playground',
           copyCode: 'Copy Code',
           copySuccess: 'Successfully Copied'
         }
@@ -109,6 +113,16 @@ export default defineComponent({
       </span>
     </template>
     <template #header-extra>
+      <n-tooltip>
+        <template #trigger>
+          <EditInPlaygroundButton
+            style="padding: 0; margin-right: 6px"
+            size="tiny"
+            :code="showTs ? sfcTsCode : sfcJsCode"
+          />
+        </template>
+        {{ t('editInPlayground') }}
+      </n-tooltip>
       <n-tooltip>
         <template #trigger>
           <EditInCodeSandboxButton
