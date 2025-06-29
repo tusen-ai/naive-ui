@@ -141,11 +141,11 @@ rtl-debug.vue
 | --- | --- | --- | --- | --- |
 | align | `'left' \| 'right' \| 'center'` | `'left'` | 列内的文本排列 |  |
 | allowExport | `boolean` | `true` | 这一列是否可以导出 | 2.40.0 |
-| titleAlign | `'left' \| 'right' \| 'center'` | `'null'` | 表头列对齐方式，若不设置该项，则使用列内的文本排列 | 2.34.4 |
 | cellProps | `(rowData: object, rowIndex: number) => object` | `undefined` | 该列单元格的 HTML 属性 | 2.27.0 |
 | children | `DataTableColumn[]` | `undefined` | 成组列头的子节点 |  |
 | className | `string` | `undefined` | 列的类名 |  |
 | colSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | 该列单元格的的 col span |  |
+| customNextSortOrder | `(order: 'descend' \| 'ascend' \| false) => 'descend' \| 'ascend' \| false` | `undefined` | 使用这个函数自定义下一个排序的状态 | NEXT_VERSION |
 | defaultFilterOptionValue | `string \| number \| null` | `null` | 非受控状态下默认的过滤器选项值（过滤器单选时生效） |  |
 | defaultFilterOptionValues | `Array<string \| number>` | `[]` | 非受控状态下默认的过滤器选项值（过滤器多选时生效） |  |
 | defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | 非受控状态下表格默认的排序方式 |  |
@@ -159,11 +159,10 @@ rtl-debug.vue
 | filterOptionValue | `string \| number \| null` | `undefined` | 受控状态下，当前激活的过滤器选项值。如果不做设定，这一列的过滤行为将是非受控的（过滤器单选时生效） |  |
 | filterOptionValues | `Array<string \| number> \| null` | `undefined` | 受控状态下，当前激活的过滤器选项值数组。如果不做设定，这一列的过滤行为将是非受控的（过滤器多选时生效） |  |
 | filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | filter 的 options 数据 |  |
-| resizable | `boolean` | `undefined` | 列宽是否可以拖动 | 2.33.4 |
 | fixed | `'left \| 'right' \| false` | `false` | 该列是否需要 fixed |  |
 | key | `string \| number` | `undefined` | 这一列的 key，不可重复。 |  |
-| minWidth | `number \| string` | `undefined` | 列的最小宽度 | 2.28.3 |
 | maxWidth | `number \| string` | `undefined` | 列的最大宽度，仅在 `resizable` 为 `true` 的时候生效 | 2.33.4 |
+| minWidth | `number \| string` | `undefined` | 列的最小宽度 | 2.28.3 |
 | multiple | `boolean` | `true` | 是否开启多选，仅在 `type` 为 `'selection'` 的时候生效 | 2.31.0 |
 | options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData[]) => void }>` | `undefined` | 自定义选择项的选项，只对 `type='selection'` 生效 |  |
 | render | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | 渲染函数，渲染这一列的每一行的单元格 |  |
@@ -173,13 +172,14 @@ rtl-debug.vue
 | renderFilterMenu | `(actions: { hide: () => void }) => VNodeChild` | `undefined` | 渲染函数，渲染这一列的过滤器菜单 |  |
 | renderSorter | `(options: { order: 'descend' \| 'ascend' \| false }) => VNodeChild` | `undefined` | 渲染函数，渲染排序触发 | 2.24.2 |
 | renderSorterIcon | `(options: { order: 'descend' \| 'ascend' \| false }) => VNodeChild` | `undefined` | 渲染函数，渲染排序图标 | 2.24.2 |
+| resizable | `boolean` | `undefined` | 列宽是否可以拖动 | 2.33.4 |
 | rowSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | 该列单元格的 row span |  |
 | sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | 受控状态下表格的排序方式。如果多列都设定了有效值，那么只有第一个会生效 |  |
 | sorter | `boolean \| function \| 'default'` | `undefined` | 这一列的排序方法。如果设为 `'default'` 表格将会使用一个内置的排序函数；如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。其他情况下它工作的方式类似 `Array.sort` 的对比函数 |  |
-| customSorter | `(order: 'descend' \| 'ascend' \| false) => 'descend' \| 'ascend' \| false` | `undefined` | 自定义排序状态函数 | NEXT_VERSION |
-| tree | `boolean` | `false` | 是否在这一列展示树形数据的展开按钮 | 2.28.3 |
 | title | `string \| (() => VNodeChild)` | `undefined` | 列的 title 信息，可以是渲染函数 |  |
+| titleAlign | `'left' \| 'right' \| 'center'` | `'null'` | 表头列对齐方式，若不设置该项，则使用列内的文本排列 | 2.34.4 |
 | titleColSpan | `number` | `undefined` | title 列占据的列数 |  |
+| tree | `boolean` | `false` | 是否在这一列展示树形数据的展开按钮 | 2.28.3 |
 | type | `'selection' \| 'expand'` | `undefined` | 列的类型 |  |
 | width | `number \| string` | `undefined` | 列的宽度（在列固定时是**必需**的，并且需要为 `number` 类型） | 2.24.0（`string` 类型） |
 

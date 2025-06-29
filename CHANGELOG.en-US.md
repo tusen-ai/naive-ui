@@ -9,6 +9,10 @@
 - Fix `n-anchor` can't activate link in the bottom of the page by click, closes [#7033](https://github.com/tusen-ai/naive-ui/issues/7033), closes [#6918](https://github.com/tusen-ai/naive-ui/issues/6918), [#6844](https://github.com/tusen-ai/naive-ui/issues/6844), [#6782](https://github.com/tusen-ai/naive-ui/issues/6782)
 - Fix `n-upload` component 'Non-function value encountered for default slot' warning.
 
+### Features
+
+- `n-data-table`'s column adds `customNextSortOrder` attribute, closes [#6850](https://github.com/tusen-ai/naive-ui/issues/6850).
+
 ## 2.42.0
 
 `2025-06-17`

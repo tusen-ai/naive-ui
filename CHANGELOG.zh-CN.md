@@ -9,6 +9,10 @@
 - 修复 `n-anchor` 对页面底部的 link 无法通过点击激活，关闭 [#7033](https://github.com/tusen-ai/naive-ui/issues/7033)，关闭 [#6918](https://github.com/tusen-ai/naive-ui/issues/6918)、[#6844](https://github.com/tusen-ai/naive-ui/issues/6844)、[#6782](https://github.com/tusen-ai/naive-ui/issues/6782)
 - 修复 `n-upload` 组件 'Non-function value encountered for default slot' 警告
 
+### Features
+
+- `n-data-table` 的列增加 `customNextSortOrder` 属性，关闭 [#6850](https://github.com/tusen-ai/naive-ui/issues/6850)
+
 ## 2.42.0
 
 `2025-06-17`

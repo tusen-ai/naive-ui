@@ -130,11 +130,11 @@ export-csv.vue
 | --- | --- | --- | --- | --- |
 | align | `'left' \| 'right' \| 'center'` | `'left'` | Text align in column. |  |
 | allowExport | `boolean` | `true` | Can the column exported | 2.40.0 |
-| titleAlign | `'left' \| 'right' \| 'center'` | `null` | alignment of the table header. If omitted, the value of the above align attribute will be applied | 2.34.4 |
 | cellProps | `(rowData: object, rowIndex: number) => object` | `undefined` | HTML attributes of the column's cell. | 2.27.0 |
 | children | `DataTableColumn[]` | `undefined` | Child nodes of a grouped column. |  |
 | className | `string` | `undefined` | Class name of the column. |  |
 | colSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | The col span of the column cell. |  |
+| customNextSortOrder | `(order: 'descend' \| 'ascend' \| false) => 'descend' \| 'ascend' \| false` | `undefined` | A function for custom next sorting status. | NEXT_VERSION |
 | defaultFilterOptionValue | `string \| number \| null` | `null` | The default active filter option value in uncontrolled manner. (works when not using multiple filters). |  |
 | defaultFilterOptionValues | `Array<string \| number>` | `[]` | The default active filter option values in uncontrolled manner. (works when there are multiple filters). |  |
 | defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | The default sort order of the table in uncontrolled manner. |  |
@@ -148,11 +148,10 @@ export-csv.vue
 | filterOptionValue | `string \| number \| null` | `undefined` | The active filter option value in controlled manner. If not set, the filter of the column works in an uncontrolled manner. (works when not using multiple filters). |  |
 | filterOptionValues | `Array<string \| number> \| null` | `undefined` | The active filter option values in controlled manner. If not set, the filter of the column works in an uncontrolled manner. (works when there are multiple filters). |  |
 | filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | Filter options. |  |
-| resizable | `boolean` | `undefined` | Whethe the column width can be dragged. | 2.33.4 |
 | fixed | `'left \| 'right' \| false` | `false` | Whether the column needs to be fixed. |  |
 | key | `string \| number` | `undefined` | Unique key of this column, this is not repeatable. |  |
-| minWidth | `number \| string` | `undefined` | Min width of the column. | 2.28.3 |
 | maxWidth | `number \| string` | `undefined` | Max width of the column. Only works when `resizable` is `true`. | 2.33.4 |
+| minWidth | `number \| string` | `undefined` | Min width of the column. | 2.28.3 |
 | multiple | `boolean` | `true` | Whether to enable multiple selection mode. Only works when `type` is `'selection'`. | 2.31.0 |
 | options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData[]) => void }>` | `undefined` | Options of custom selection. Only work with `type='selection'`. |  |
 | render | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | Render function of column row cell. |  |
@@ -162,13 +161,14 @@ export-csv.vue
 | renderFilterMenu | `(actions: { hide: () => void }) => VNodeChild` | `undefined` | Render function of column filter menu. |  |
 | renderSorter | `(options: { order: 'descend' \| 'ascend' \| false }) => VNodeChild` | `undefined` | Render function of column sorter trigger. | 2.24.2 |
 | renderSorterIcon | `(options: { order: 'descend' \| 'ascend' \| false }) => VNodeChild` | `undefined` | Render function of column sorter icon. | 2.24.2 |
+| resizable | `boolean` | `undefined` | Whethe the column width can be dragged. | 2.33.4 |
 | rowSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | The row span of the cell. |  |
 | sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | The controlled sort order of the column. If multiple columns' sortOrder is set, the first one will affect. |  |
 | sorter | `boolean \| function \| 'default'` | `false` | The sorter of the column. If set `'default'`, it will use a basic builtin compare function. If set to `true`, it will only display sort icon on the column, which can be used in async status. Otherwise it works like `Array.sort`'s compare function. |  |
-| customSorter | `(order: 'descend' \| 'ascend' \| false) => 'descend' \| 'ascend' \| false` | `undefined` | Custom sorting status function. | NEXT_VERSION |
-| tree | `boolean` | `false` | Whether to show tree data expand trigger in the column. | 2.28.3 |
 | title | `string \| (() => VNodeChild)` | `undefined` | Column title, Can be a render function. |  |
+| titleAlign | `'left' \| 'right' \| 'center'` | `null` | alignment of the table header. If omitted, the value of the above align attribute will be applied | 2.34.4 |
 | titleColSpan | `number` | `undefined` | The number of cells occupied by the title col. |  |
+| tree | `boolean` | `false` | Whether to show tree data expand trigger in the column. | 2.28.3 |
 | type | `'selection' \| 'expand'` | `undefined` | Column type. |  |
 | width | `number \| string` | `undefined` | Width of the column (**required and should be number** when fixed). | 2.24.0 (`string` type) |
 
