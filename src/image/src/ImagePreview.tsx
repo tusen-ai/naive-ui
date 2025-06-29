@@ -351,6 +351,24 @@ export default defineComponent({
       }
     }
 
+    function zoomToOriginalSize(): void {
+      const originalScale = getOrignalImageSizeScale()
+      if (scale > originalScale) {
+        const originalScaleValue = scale
+        scaleExp = Math.floor(Math.log(originalScale) / Math.log(scaleRadix))
+        scale = Math.max(originalScale, scaleRadix ** scaleExp)
+        const diff = originalScaleValue - scale
+        derivePreviewStyle(false)
+        const offset = getDerivedOffset()
+        scale += diff
+        derivePreviewStyle(false)
+        scale -= diff
+        offsetX = offset.offsetX
+        offsetY = offset.offsetY
+        derivePreviewStyle()
+      }
+    }
+
     function handleDownloadClick(): void {
       const src = previewSrcRef.value
       if (src) {
@@ -474,6 +492,14 @@ export default defineComponent({
       previewedImgProps: imageContext?.previewedImgPropsRef,
       handleWheel(e: WheelEvent) {
         e.preventDefault()
+        if (props.enableWheel && showRef.value) {
+          if (e.deltaY < 0) {
+            zoomIn()
+          }
+          else {
+            zoomToOriginalSize()
+          }
+        }
       },
       handlePreviewMousedown,
       handlePreviewDblclick,
@@ -489,6 +515,7 @@ export default defineComponent({
       },
       zoomIn,
       zoomOut,
+      zoomToOriginalSize,
       handleDownloadClick,
       rotateCounterclockwise,
       rotateClockwise,
