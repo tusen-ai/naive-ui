@@ -15,6 +15,7 @@ jobs:
         with:
           node-version: 22
           cache: "pnpm"
+          cache-dependency-path: "package.json"
 
       - name: Install dependencies
         run: pnpm install
