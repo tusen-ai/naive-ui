@@ -4,20 +4,13 @@
 圆的 Tag 长得像个胶囊。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      handleClose() {
-        message.info('tag close')
-      }
-    }
-  }
-})
+const message = useMessage()
+function handleClose() {
+  message.info('tag close')
+}
 </script>
 
 <template>

@@ -4,18 +4,11 @@
 你可以使用上面的 CSS 变量。如果你需要在 JS 中使用这些变量，请使用 [useThemeVars](../docs/theme#use-theme-vars)。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { darkTheme } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      darkTheme,
-      theme: ref<typeof darkTheme | null>(null)
-    }
-  }
-})
+const theme = ref<typeof darkTheme | null>(null)
 </script>
 
 <template>

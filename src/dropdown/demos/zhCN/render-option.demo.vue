@@ -4,57 +4,54 @@
 你可以通过 `render-option` 为选项增添 Tooltip。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DropdownGroupOption, DropdownOption } from 'naive-ui'
 import type { VNode } from 'vue'
 import { NTooltip, useMessage } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      renderOption: ({
-        node,
-        option
-      }: {
-        node: VNode
-        option: DropdownOption | DropdownGroupOption
-      }) => {
-        return h(
-          NTooltip,
-          { keepAliveOnHover: false, style: { width: 'max-content' } },
-          {
-            trigger: () => [node],
-            default: () => option.key
-          }
-        )
-      },
-      options: [
-        {
-          label: '滨海湾金沙，新加坡',
-          key: 'marina bay sands',
-          disabled: true
-        },
-        {
-          label: '布朗酒店，伦敦',
-          key: 'brown\'s hotel, london'
-        },
-        {
-          label: '亚特兰蒂斯巴哈马，拿骚',
-          key: 'atlantis nahamas, nassau'
-        },
-        {
-          label: '比佛利山庄酒店，洛杉矶',
-          key: 'the beverly hills hotel, los angeles'
-        }
-      ],
-      handleSelect(key: string | number) {
-        message.info(String(key))
-      }
+const message = useMessage()
+
+function renderOption({
+  node,
+  option
+}: {
+  node: VNode
+  option: DropdownOption | DropdownGroupOption
+}) {
+  return h(
+    NTooltip,
+    { keepAliveOnHover: false, style: { width: 'max-content' } },
+    {
+      trigger: () => [node],
+      default: () => option.key
     }
+  )
+}
+
+const options = [
+  {
+    label: '滨海湾金沙，新加坡',
+    key: 'marina bay sands',
+    disabled: true
+  },
+  {
+    label: '布朗酒店，伦敦',
+    key: 'brown\'s hotel, london'
+  },
+  {
+    label: '亚特兰蒂斯巴哈马，拿骚',
+    key: 'atlantis nahamas, nassau'
+  },
+  {
+    label: '比佛利山庄酒店，洛杉矶',
+    key: 'the beverly hills hotel, los angeles'
   }
-})
+]
+
+function handleSelect(key: string | number) {
+  message.info(String(key))
+}
 </script>
 
 <template>

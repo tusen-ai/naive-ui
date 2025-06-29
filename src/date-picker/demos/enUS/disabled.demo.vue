@@ -2,20 +2,14 @@
 # Disabled
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      datetime: ref(null),
-      date: ref(null),
-      datetimerange: ref(null),
-      daterange: ref(null),
-      disabled: ref(true)
-    }
-  }
-})
+const datetime = ref(null)
+const date = ref(null)
+const datetimerange = ref(null)
+const daterange = ref(null)
+const disabled = ref(true)
 </script>
 
 <template>

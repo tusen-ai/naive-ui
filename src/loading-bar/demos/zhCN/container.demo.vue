@@ -4,32 +4,24 @@
 你可以设定 `to` 来控制进度条的挂载位置
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { NButton, NSpace, useLoadingBar } from 'naive-ui'
 import { defineComponent, h, ref } from 'vue'
 
-export default defineComponent({
-  components: {
-    LoadingBarTrigger: defineComponent({
-      setup() {
-        const loadingBar = useLoadingBar()
-        return () => {
-          return h(NSpace, null, {
-            default: () => [
-              h(NButton, { onClick: () => loadingBar.start() }, () => 'Start'),
-              h(NButton, { onClick: () => loadingBar.finish() }, () => 'Finish')
-            ]
-          })
-        }
-      }
+// 定义 LoadingBarTrigger 组件
+const LoadingBarTrigger = defineComponent(() => {
+  const loadingBar = useLoadingBar()
+  return () => {
+    return h(NSpace, null, {
+      default: () => [
+        h(NButton, { onClick: () => loadingBar.start() }, () => 'Start'),
+        h(NButton, { onClick: () => loadingBar.finish() }, () => 'Finish')
+      ]
     })
-  },
-  setup() {
-    return {
-      loadingBarTargetRef: ref<undefined | HTMLElement>(undefined)
-    }
   }
 })
+
+const loadingBarTargetRef = ref<undefined | HTMLElement>(undefined)
 </script>
 
 <template>

@@ -4,8 +4,8 @@
 Note: If you want grouped header to be fixed, you need to set width of all fixed columns, includes columns with `children`. If not it may not display normally.
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
 function createCols() {
   return [
@@ -57,16 +57,10 @@ function createData() {
   })
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      data: ref(createData()),
-      columns: ref(createCols()),
-      pagination: ref({
-        pageSize: 10
-      })
-    }
-  }
+const data = ref(createData())
+const columns = ref(createCols())
+const pagination = ref({
+  pageSize: 10
 })
 </script>
 

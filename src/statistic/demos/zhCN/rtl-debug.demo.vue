@@ -2,22 +2,13 @@
 # Rtl Debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { MdSave } from '@vicons/ionicons4'
 import { unstableRowRtl, unstableStatisticRtl } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  components: {
-    MdSave
-  },
-  setup() {
-    return {
-      rtlEnabled: ref(false),
-      rtlStyles: [unstableStatisticRtl, unstableRowRtl]
-    }
-  }
-})
+const rtlEnabled = ref(false)
+const rtlStyles = [unstableStatisticRtl, unstableRowRtl]
 </script>
 
 <template>

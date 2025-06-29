@@ -2,49 +2,44 @@
 # Rtl Debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { unstableRadioRtl, unstableSpaceRtl } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const checkedValueRef = ref<string | null>(null)
-    return {
-      rtlEnabled: ref(false),
-      rtlStyles: [unstableRadioRtl, unstableSpaceRtl],
-      checkedValue: checkedValueRef,
-      value: ref(null),
-      songs: [
-        {
-          value: 'Rock\'n\'Roll Star',
-          label: 'Rock\'n\'Roll Star'
-        },
-        {
-          value: 'Shakermaker',
-          label: 'Shakermaker'
-        },
-        {
-          value: 'Live Forever',
-          label: 'Live Forever'
-        },
-        {
-          value: 'Up in the Sky',
-          label: 'Up in the Sky'
-        },
-        {
-          value: '...',
-          label: '...'
-        }
-      ].map((s) => {
-        s.value = s.value.toLowerCase()
-        return s
-      }),
-      handleChange(e: Event) {
-        checkedValueRef.value = (e.target as HTMLInputElement).value
-      }
-    }
+const checkedValueRef = ref<string | null>(null)
+const rtlEnabled = ref(false)
+const rtlStyles = [unstableRadioRtl, unstableSpaceRtl]
+const checkedValue = checkedValueRef
+const value = ref(null)
+const songs = [
+  {
+    value: 'Rock\'n\'Roll Star',
+    label: 'Rock\'n\'Roll Star'
+  },
+  {
+    value: 'Shakermaker',
+    label: 'Shakermaker'
+  },
+  {
+    value: 'Live Forever',
+    label: 'Live Forever'
+  },
+  {
+    value: 'Up in the Sky',
+    label: 'Up in the Sky'
+  },
+  {
+    value: '...',
+    label: '...'
   }
+].map((s) => {
+  s.value = s.value.toLowerCase()
+  return s
 })
+
+function handleChange(e: Event) {
+  checkedValueRef.value = (e.target as HTMLInputElement).value
+}
 </script>
 
 <template>

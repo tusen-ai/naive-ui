@@ -4,10 +4,10 @@
 Some users said that they want to use alert as message.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { MessageRenderMessage } from 'naive-ui'
 import { NAlert, useMessage } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 
 const renderMessage: MessageRenderMessage = (props) => {
   const { type } = props
@@ -30,20 +30,14 @@ const renderMessage: MessageRenderMessage = (props) => {
   )
 }
 
-export default defineComponent({
-  setup() {
-    const { error } = useMessage()
-    function handleClick() {
-      error('Lorem ipsum dolor sit amet, consectetur adipiscing elit', {
-        render: renderMessage,
-        closable: true
-      })
-    }
-    return {
-      handleClick
-    }
-  }
-})
+const { error } = useMessage()
+
+function handleClick() {
+  error('Lorem ipsum dolor sit amet, consectetur adipiscing elit', {
+    render: renderMessage,
+    closable: true
+  })
+}
 </script>
 
 <template>

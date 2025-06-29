@@ -6,42 +6,34 @@ Set `draggable` to `true` to make modal draggable. If you want it to be dragged 
 If you want to completely customize the content of the modal, you can use the `draggableClass` in the `default` slot to set it on the element you want to trigger the drag.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useModal } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  data() {
-    const modal = useModal()
+const modal = useModal()
 
-    function showDialogPreset() {
-      modal.create({
-        title: 'Dialog preset',
-        draggable: true,
-        preset: 'dialog',
-        content: 'Placeholder....'
-      })
-    }
+const showModal1 = ref(false)
+const showModal2 = ref(false)
+const showModal3 = ref(false)
+const showModal4 = ref(false)
 
-    function showCardPreset() {
-      modal.create({
-        title: 'Card preset',
-        draggable: true,
-        preset: 'card',
-        content: 'Placeholder....'
-      })
-    }
+function showDialogPreset() {
+  modal.create({
+    title: 'Dialog preset',
+    draggable: true,
+    preset: 'dialog',
+    content: 'Placeholder....'
+  })
+}
 
-    return {
-      showModal1: ref(false),
-      showModal2: ref(false),
-      showModal3: ref(false),
-      showModal4: ref(false),
-      showCardPreset,
-      showDialogPreset
-    }
-  }
-})
+function showCardPreset() {
+  modal.create({
+    title: 'Card preset',
+    draggable: true,
+    preset: 'card',
+    content: 'Placeholder....'
+  })
+}
 </script>
 
 <template>

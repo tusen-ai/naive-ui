@@ -2,16 +2,10 @@
 # Size
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      value: ref(0)
-    }
-  }
-})
+const value = ref(0)
 </script>
 
 <template>

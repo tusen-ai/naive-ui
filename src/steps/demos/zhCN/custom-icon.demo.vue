@@ -4,7 +4,7 @@
 可以定制 `'finish'` 和 `'error'` 状态下的图标和每一步的图标。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { StepsProps } from 'naive-ui'
 import {
   MdArrowRoundBack,
@@ -13,38 +13,27 @@ import {
   MdHappy,
   MdSad
 } from '@vicons/ionicons4'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  components: {
-    MdArrowRoundBack,
-    MdArrowRoundForward,
-    MdHappy,
-    MdSad,
-    MdCafe
-  },
-  setup() {
-    const currentRef = ref<number | null>(1)
-    return {
-      currentStatus: ref<StepsProps['status']>('finish'),
-      current: currentRef,
-      next() {
-        if (currentRef.value === null)
-          currentRef.value = 1
-        else if (currentRef.value >= 4)
-          currentRef.value = null
-        else currentRef.value++
-      },
-      prev() {
-        if (currentRef.value === 0)
-          currentRef.value = null
-        else if (currentRef.value === null)
-          currentRef.value = 4
-        else currentRef.value--
-      }
-    }
-  }
-})
+const currentRef = ref<number | null>(1)
+const currentStatus = ref<StepsProps['status']>('finish')
+const current = currentRef
+
+function next() {
+  if (currentRef.value === null)
+    currentRef.value = 1
+  else if (currentRef.value >= 4)
+    currentRef.value = null
+  else currentRef.value++
+}
+
+function prev() {
+  if (currentRef.value === 0)
+    currentRef.value = null
+  else if (currentRef.value === null)
+    currentRef.value = 4
+  else currentRef.value--
+}
 </script>
 
 <template>
