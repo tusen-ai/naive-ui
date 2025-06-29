@@ -170,26 +170,26 @@ export default cB('tabs', `
       cB('tabs-nav', [
         cB('tabs-nav-scroll-wrapper', [
           c('&::before', `
-        top: 0;
-        bottom: 0;
-        left: 0;
-        width: 20px;
-      `),
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 20px;
+          `),
           c('&::after', `
-        top: 0;
-        bottom: 0;
-        right: 0;
-        width: 20px;
-      `),
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 20px;
+          `),
           cM('shadow-start', [
             c('&::before', `
-          box-shadow: inset 10px 0 8px -8px rgba(0, 0, 0, .12);
-        `)
+              box-shadow: inset 10px 0 8px -8px rgba(0, 0, 0, .12);
+            `)
           ]),
           cM('shadow-end', [
             c('&::after', `
-          box-shadow: inset -10px 0 8px -8px rgba(0, 0, 0, .12);
-        `)
+              box-shadow: inset -10px 0 8px -8px rgba(0, 0, 0, .12);
+            `)
           ])
         ])
       ])
