@@ -63,6 +63,7 @@ Provided since `2.38.0`.
 | mask-closable | `boolean` | `true` | Whether to emit `hide` event when click mask. |  |
 | preset | `'dialog' \| 'card'` | `undefined` | The preset of `n-modal`. |  |
 | show | `boolean` | `false` | Whether to show modal. |  |
+| unstable-show-mask | `boolean` | `true` | Whether to show mask. |  |
 | to | `string \| HTMLElement` | `body` | Container node of the modal content. |  |
 | transform-origin | `'mouse' \| 'center'` | `'mouse'` | The transform origin of the modal's display animation. |  |
 | trap-focus | `boolean` | `true` | Whether to trap focus inside modal. | 2.24.2 |
