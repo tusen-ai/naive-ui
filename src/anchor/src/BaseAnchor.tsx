@@ -72,6 +72,7 @@ export default defineComponent({
     const slotRef = ref<HTMLElement | null>(null)
     const barRef = ref<HTMLElement | null>(null)
     const selfRef = ref<HTMLElement | null>(null)
+    const skipScrollCalcRef = ref(false)
     const isBlockTypeRef = computed(() => {
       return props.type === 'block'
     })
@@ -159,15 +160,21 @@ export default defineComponent({
       const linkEl = document.getElementById(idMatchResult[1])
       if (!linkEl)
         return
+      skipScrollCalcRef.value = true
       activeHrefRef.value = href
       linkEl.scrollIntoView()
       if (!transition) {
         disableTransitionOneTick()
       }
-      handleScroll()
+      setTimeout(() => {
+        skipScrollCalcRef.value = false
+      }, 300)
     }
 
     function _handleScroll(transition = true): void {
+      if (skipScrollCalcRef.value) {
+        return
+      }
       const links: LinkInfo[] = []
       const offsetTarget = unwrapElement(props.offsetTarget ?? document)
       collectedLinkHrefs.forEach((href) => {
