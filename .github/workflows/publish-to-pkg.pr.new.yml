@@ -1,11 +1,19 @@
 name: Publish to pkg.pr.new
 on:
   push:
+    branches: [main]
   pull_request:
+    types: [labeled]
+
+# Cancel all previous workflows on main.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
 
 jobs:
   publish:
-    runs-on:  ubuntu-latest
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && contains(github.event.label.name, 'preview'))
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
