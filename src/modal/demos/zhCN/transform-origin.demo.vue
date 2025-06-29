@@ -1,7 +1,7 @@
 <markdown>
 # 变换原点
 
-虽然从点击位置展开模态框的动画很好看，但是有时候我们需要简单点的从屏幕中间开始的动画。你可以把 `transfrom-origin` 设为 `'center'` 来达成这个效果。
+虽然从点击位置展开模态框的动画很好看，但是有时候我们需要简单点的从屏幕中间开始的动画。你可以把 `transform-origin` 设为 `'center'` 来达成这个效果。
 </markdown>
 
 <script lang="ts" setup>
