@@ -2,8 +2,8 @@
 # Disabled form
 </markdown>
 
-<script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { computed, ref } from 'vue'
 
 function genOptions(depth = 2, iterator = 1, prefix = ''): any {
   const length = 12
@@ -35,66 +35,60 @@ function genOptions(depth = 2, iterator = 1, prefix = ''): any {
   }
   return options
 }
-export default defineComponent({
-  setup() {
-    const formRef = ref(null)
-    const model = ref({
-      inputValue: null,
-      selectValue: null,
-      autoCompleteValue: '',
-      dynamicTagsValue: ['teacher', 'frontend'],
-      cascaderValue: null,
-      datetimeValue: null,
-      switchValue: false,
-      checkboxValue: false,
-      checkboxGroupValue: null,
-      radioValue: 'Definitely Maybe',
-      radioGroupValue: null,
-      radioButtonGroupValue: null,
-      inputNumberValue: null,
-      timePickerValue: null,
-      colorValue: null,
-      sliderValue: 0,
-      transferValue: null
-    })
-    return {
-      updateDisabled: ref(false),
-      formRef,
-      model,
-      generalOptions: ['groode', 'veli good', 'emazing', 'lidiculous'].map(
-        v => ({
-          label: v,
-          value: v
-        })
-      ),
-      options: genOptions(),
-      treeSelectOptions: [
-        {
-          label: 'Rubber Soul',
-          key: 'Rubber Soul',
-          children: [
-            {
-              label: 'Drive My Car',
-              key: 'Drive My Car'
-            },
-            {
-              label: 'Michelle',
-              key: 'Michelle'
-            }
-          ]
-        }
-      ],
-      autoCompleteOptions: computed(() => {
-        return ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {
-          const prefix = model.value.autoCompleteValue.split('@')[0]
-          return {
-            label: prefix + suffix,
-            value: prefix + suffix
-          }
-        })
-      })
-    }
+
+const formRef = ref(null)
+const model = ref({
+  inputValue: null,
+  selectValue: null,
+  autoCompleteValue: '',
+  dynamicTagsValue: ['teacher', 'frontend'],
+  cascaderValue: null,
+  datetimeValue: null,
+  switchValue: false,
+  checkboxValue: false,
+  checkboxGroupValue: null,
+  radioValue: 'Definitely Maybe',
+  radioGroupValue: null,
+  radioButtonGroupValue: null,
+  inputNumberValue: null,
+  timePickerValue: null,
+  colorValue: null,
+  sliderValue: 0,
+  transferValue: null
+})
+
+const updateDisabled = ref(false)
+const generalOptions = ['groode', 'veli good', 'emazing', 'lidiculous'].map(
+  v => ({
+    label: v,
+    value: v
+  })
+)
+const options = genOptions()
+const treeSelectOptions = [
+  {
+    label: 'Rubber Soul',
+    key: 'Rubber Soul',
+    children: [
+      {
+        label: 'Drive My Car',
+        key: 'Drive My Car'
+      },
+      {
+        label: 'Michelle',
+        key: 'Michelle'
+      }
+    ]
   }
+]
+const autoCompleteOptions = computed(() => {
+  return ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {
+    const prefix = model.value.autoCompleteValue.split('@')[0]
+    return {
+      label: prefix + suffix,
+      value: prefix + suffix
+    }
+  })
 })
 </script>
 
