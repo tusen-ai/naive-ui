@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### i18n
+
+- Add daDK locale.
+
 ### Fixes
 
 - Fix `n-image` zoom in & out locale text in `da-DK` `sv-SE`.

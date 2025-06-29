@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### i18n
+
+- Add daDK locale.
+
 ### Fixes
 
 - 修复 `n-image` 放大缩小在 `da-DK` `sv-SE` 本地化的文案
