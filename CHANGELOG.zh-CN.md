@@ -1,5 +1,40 @@
 # CHANGELOG
 
+## 2.42.0
+
+`2025-06-17`
+
+### Breaking Changes
+
+- 修复 `n-date-picker` 的 `time-picker-format` 属性不生效的问题，这个属性之前被错误的拼写为 `timer-picker-format`，关闭 [#6820](https://github.com/tusen-ai/naive-ui/issues/6820)
+
+### Fixes
+
+- 修复 `n-input-otp` 组件，当被禁用（disabled、readonly）时移除事件绑定，防止禁用状态下仍可触发交互行为，修复宽度样式权重冲突问题
+- 修复 `n-date-picker` 在 `type="datetimerange"` 情况下，设定 `default-time` 会影响 `shortcuts` 选项选中的值，关闭 [#6902](https://github.com/tusen-ai/naive-ui/pull/6902)、[#6901](https://github.com/tusen-ai/naive-ui/pull/6901)
+- 修复 `n-radio`、`n-radio-button` 中无法正常使用 `n-popover`，关闭 [#6837](https://github.com/tusen-ai/naive-ui/pull/6837)、[#6832](https://github.com/tusen-ai/naive-ui/pull/6832)
+- 优化图层过多导致的滚动性能问题，关闭 [#6887](https://github.com/tusen-ai/naive-ui/issues/6887)
+
+### Features
+
+- `n-anchor-link` 新增 `title` slot，关闭 [#6845](https://github.com/tusen-ai/naive-ui/issues/6845)
+
+## 2.41.1
+
+`2025-06-08`
+
+### Fixes
+
+- 修复 `n-tabs` TabPane tab slots 的类型异常
+- 修复 `n-data-table` 可排序表格背景颜色变量丢失，关闭 [#6521](https://github.com/tusen-ai/naive-ui/issues/6521)
+
+### Features
+
+- 🌟 新增 `n-input-otp` 组件，关闭 [#1385](https://github.com/tusen-ai/naive-ui/issues/1385)、[#5681](https://github.com/tusen-ai/naive-ui/issues/5681)、[#6222](https://github.com/tusen-ai/naive-ui/issues/6222)
+- `n-upload` 新增 `custom-download` 属性，关闭 [#5946](https://github.com/tusen-ai/naive-ui/issues/5946)、[#6800](https://github.com/tusen-ai/naive-ui/issues/6800)
+- `n-upload` 新增 `uploadDownload` 工具方法
+- `n-tree-select` 新增 `indent` 属性
+
 ## 2.41.0
 
 `2025-01-05`
@@ -1952,7 +1987,7 @@
 ### Feats
 
 - `n-divider` 的 CSS 变量使用 `n` 作为前缀
-- `typography` 的 CSS 变量使用 `n` 作为前缀
+- `n-typography` 的 CSS 变量使用 `n` 作为前缀
 - `n-badge` 的 CSS 变量使用 `n` 作为前缀
 
 ## 2.22.0
@@ -2957,7 +2992,7 @@
 ### Fixes
 
 - 修复 `n-date-picker` `n-provider` 传递 `date-locale` 属性无效，关闭 [#250](https://github.com/tusen-ai/naive-ui/issues/250)
-- Fix `n-input` clear button placeholder prevent clicking on actual component [#288](https://github.com/tusen-ai/naive-ui/issues/288)
+- 修复 `n-input` clear button placeholder prevent clicking on actual component [#288](https://github.com/tusen-ai/naive-ui/issues/288)
 - 修复 `n-carousel` 点击当前页对应的控制按钮时，组件显示异常
 - 修复 `n-menu` 折叠时 `render-label` 对于 tooltip 不生效
 - 修复 `n-dropdown` 不能在选项中渲染 `n-popover`

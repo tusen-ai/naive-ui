@@ -1,6 +1,43 @@
 # CHANGELOG
 
+## 2.42.0
+
+`2025-06-17`
+
+### Breaking Changes
+
+- Fix `n-date-picker`'s `time-picker-format` prop doesn't work, the prop is misspelled as `timer-picker-format` before, closes [#6820](https://github.com/tusen-ai/naive-ui/issues/6820).
+
+### Fixes
+
+- Fix `n-input-otp` event bindings not removed when elements are disabled (disabled/readonly), fix width style specificity conflict.
+- Fix `n-date-picker`'s `shortcuts`' time value will be overrided if `default-time` is set in with `type="datetimerange"`, closes [#6902](https://github.com/tusen-ai/naive-ui/pull/6902), [#6901](https://github.com/tusen-ai/naive-ui/pull/6901).
+- Fix `n-radio`, `n-radio-button` can't use `n-popover` inside, closes [#6837](https://github.com/tusen-ai/naive-ui/pull/6837), [#6832](https://github.com/tusen-ai/naive-ui/pull/6832).
+- Fix scrolling performance issue caused by too many layers, closes [#6887](https://github.com/tusen-ai/naive-ui/issues/6887).
+
+### Features
+
+- `n-anchor-link` adds `title` slot, closes [#6845](https://github.com/tusen-ai/naive-ui/issues/6845).
+
+## 2.41.1
+
+`2025-06-08`
+
+### Fixes
+
+- Fix `n-tabs`'s type exception of the tab slots in TabPane.
+- Fix `n-data-table` missing css variable of sorting cells, closes [#6521](https://github.com/tusen-ai/naive-ui/issues/6521).
+
+### Features
+
+- 🌟 Adds `n-input-otp` component, closes [#1385](https://github.com/tusen-ai/naive-ui/issues/1385), [#5681](https://github.com/tusen-ai/naive-ui/issues/5681), [#6222](https://github.com/tusen-ai/naive-ui/issues/6222).
+- `n-upload` adds `custom-download`, closes [#5946](https://github.com/tusen-ai/naive-ui/issues/5946), [#6800](https://github.com/tusen-ai/naive-ui/issues/6800).
+- `n-upload` adds `uploadDownload` util method.
+- `n-tree-select` adds `indent` prop.
+
 ## 2.41.0
+
+`2025-01-05`
 
 ### Breaking Changes
 
@@ -1947,7 +1984,7 @@
 ### Feats
 
 - `n-divider` uses `n` as CSS vars prefix.
-- `typography` uses `n` as CSS vars prefix.
+- `n-typography` uses `n` as CSS vars prefix.
 - `n-badge` uses `n` as CSS vars prefix.
 
 ## 2.22.0

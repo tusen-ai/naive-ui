@@ -4,15 +4,8 @@
 可以把几个按钮结合成按钮组。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { LogInOutline as LogInIcon } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    LogInIcon
-  }
-})
 </script>
 
 <template>

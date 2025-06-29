@@ -68,6 +68,7 @@ declare module 'vue' {
     NH4: (typeof import('naive-ui'))['NH4']
     NH5: (typeof import('naive-ui'))['NH5']
     NH6: (typeof import('naive-ui'))['NH6']
+    NHighlight: (typeof import('naive-ui'))['NHighlight']
     NHr: (typeof import('naive-ui'))['NHr']
     NIcon: (typeof import('naive-ui'))['NIcon']
     NIconWrapper: (typeof import('naive-ui'))['NIconWrapper']
@@ -78,6 +79,7 @@ declare module 'vue' {
     NInputGroup: (typeof import('naive-ui'))['NInputGroup']
     NInputGroupLabel: (typeof import('naive-ui'))['NInputGroupLabel']
     NInputNumber: (typeof import('naive-ui'))['NInputNumber']
+    NInputOtp: (typeof import('naive-ui'))['NInputOtp']
     NLayout: (typeof import('naive-ui'))['NLayout']
     NLayoutContent: (typeof import('naive-ui'))['NLayoutContent']
     NLayoutFooter: (typeof import('naive-ui'))['NLayoutFooter']
@@ -89,6 +91,7 @@ declare module 'vue' {
     NListItem: (typeof import('naive-ui'))['NListItem']
     NLoadingBarProvider: (typeof import('naive-ui'))['NLoadingBarProvider']
     NLog: (typeof import('naive-ui'))['NLog']
+    NMarquee: (typeof import('naive-ui'))['NMarquee']
     NMention: (typeof import('naive-ui'))['NMention']
     NMenu: (typeof import('naive-ui'))['NMenu']
     NMessageProvider: (typeof import('naive-ui'))['NMessageProvider']
@@ -150,8 +153,6 @@ declare module 'vue' {
     NUploadTrigger: (typeof import('naive-ui'))['NUploadTrigger']
     NVirtualList: (typeof import('naive-ui'))['NVirtualList']
     NWatermark: (typeof import('naive-ui'))['NWatermark']
-    NHighlight: (typeof import('naive-ui'))['NHighlight']
-    NMarquee: (typeof import('naive-ui'))['NMarquee']
   }
 }
 export {}
