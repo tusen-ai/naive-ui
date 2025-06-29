@@ -10,6 +10,7 @@
 - 修复 `n-upload` 组件 'Non-function value encountered for default slot' 警告
 - 修复 `n-input` 的 `input-props` 属性设置 `tabindex` 不生效的问题
 - 修复 `n-tab` 在多层 tab 嵌套的场景下，阴影的伪类样式冲突，关闭 [#6854](https://github.com/tusen-ai/naive-ui/issues/6854)
+- 修复 `n-menu` 在父节点设置 `disabled`，子节点为 `type: "group"` 的禁用样式失效，关闭 [#6792](https://github.com/tusen-ai/naive-ui/issues/6792)
 
 ### Features
 
