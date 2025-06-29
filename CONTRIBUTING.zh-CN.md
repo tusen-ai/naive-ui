@@ -3,17 +3,23 @@
 - 对于新特性和 bug fix，请对 `main` 分支提交 Pull Request
 - 对于文档更新，请对 `docs` 分支提交 Pull Request
 
-## 推荐工具
+## 环境配置
 
 - [fnm](https://github.com/Schniz/fnm) 管理 node 版本
 - [corepack](https://github.com/nodejs/corepack) 管理包管理器版本
 
 ```bash
-# 设置 node 版本
+# 设置 node 版本为 22 或更高版本
 fnm use v22
-# 准备对应版本的包管理器
-corepack enable&&corepack prepare
+
+# 启用 corepack 并准备 package.json 中指定的包管理器版本
+corepack enable && corepack prepare
+
+# 安装依赖
+pnpm i
 ```
+
+> **注意**：包管理器版本必须与 `package.json` 中 `packageManager` 字段指定的版本一致。如果遇到问题，请在更新后重新运行 `corepack prepare`
 
 ## 有用的指令
 

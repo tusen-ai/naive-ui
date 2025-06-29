@@ -3,17 +3,23 @@
 - For new features & bug fixes, please create pull request to `main` branch.
 - For documentation, please create pull request to `docs` branch.
 
-## Recommend Tool
+## Setup
 
 - [fnm](https://github.com/Schniz/fnm) to manage node version
 - [corepack](https://github.com/nodejs/corepack) to manage packageManager version
 
 ```bash
-# set node version to 22 or above
+# Set node version to 22 or above
 fnm use v22
-# prepreck package manager
-corepack enable&&corepack prepare
+
+# Enable corepack and prepare the package manager version specified in package.json
+corepack enable && corepack prepare
+
+# Install dependencies
+pnpm i
 ```
+
+> **Note**: The package manager version must match the version specified in the `packageManager` field of `package.json`. If you encounter issues, try running `corepack prepare` again after updating.
 
 ## Useful Commands
 
