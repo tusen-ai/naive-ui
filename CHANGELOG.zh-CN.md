@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-image` 放大缩小在 `da-DK` `sv-SE` 本地化的文案
+- 修复 `n-popover` 的 `themeOverrides` 属性没有 `Scrollbar` 样式配置
 
 ## 2.42.0
 

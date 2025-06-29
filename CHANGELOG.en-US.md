@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-image` zoom in & out locale text in `da-DK` `sv-SE`.
+- Fix `n-popover`'s `themeOverrides` property does not have the `Scrollbar` style configuration.
 
 ## 2.42.0
 
