@@ -133,7 +133,7 @@ export default defineComponent({
         dataTableInstRef.value?.filter(null)
       },
       clearSorter() {
-        dataTableInstRef.value?.sort(null)
+        dataTableInstRef.value?.clearSorter()
       }
     }
   }

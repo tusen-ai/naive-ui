@@ -55,7 +55,7 @@ function change() {
     <n-button @click="open">
       打开它
     </n-button>
-    <n-button :disabled="!n" @click="change">
+    <n-button :disabled="!nRef" @click="change">
       改它
     </n-button>
   </n-space>
