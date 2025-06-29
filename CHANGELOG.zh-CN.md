@@ -2,14 +2,52 @@
 
 ## NEXT_VERSION
 
+### i18n
+
+- Add daDK locale.
+
+### Fixes
+
+- 修复 `n-image` 放大缩小在 `da-DK` `sv-SE` 本地化的文案
+- 修复 `n-popover` 的 `themeOverrides` 属性没有 `Scrollbar` 样式配置
+- 修复 `n-anchor` 对页面底部的 link 无法通过点击激活，关闭 [#7033](https://github.com/tusen-ai/naive-ui/issues/7033)，关闭 [#6918](https://github.com/tusen-ai/naive-ui/issues/6918)、[#6844](https://github.com/tusen-ai/naive-ui/issues/6844)、[#6782](https://github.com/tusen-ai/naive-ui/issues/6782)
+- 修复 `n-upload` 组件 'Non-function value encountered for default slot' 警告
+- 修复 `n-input` 的 `input-props` 属性设置 `tabindex` 不生效的问题
+- 修复 `n-tab` 在多层 tab 嵌套的场景下，阴影的伪类样式冲突，关闭 [#6854](https://github.com/tusen-ai/naive-ui/issues/6854)
+- 修复 `n-menu` 在父节点设置 `disabled`，子节点为 `type: "group"` 的禁用样式失效，关闭 [#6792](https://github.com/tusen-ai/naive-ui/issues/6792)
+
 ### Features
 
+- `n-data-table` 的列增加 `customNextSortOrder` 属性，关闭 [#6850](https://github.com/tusen-ai/naive-ui/issues/6850)
+- 新增 `n-avatar-group` 对应的泛型组件 `NGAvatarGroup`，关闭 [#6909](https://github.com/tusen-ai/naive-ui/issues/6909)
+- `n-avatar-group` 新增 `size` 属性
 - `n-popover` 支持 RTL
 - `n-tooltip` 支持 RTL
 - `n-upload` 支持 RTL
 - `n-tree-select` 支持 RTL
 
+## 2.42.0
+
+`2025-06-17`
+
+### Breaking Changes
+
+- 修复 `n-date-picker` 的 `time-picker-format` 属性不生效的问题，这个属性之前被错误的拼写为 `timer-picker-format`，关闭 [#6820](https://github.com/tusen-ai/naive-ui/issues/6820)
+
+### Fixes
+
+- 修复 `n-input-otp` 组件，当被禁用（disabled、readonly）时移除事件绑定，防止禁用状态下仍可触发交互行为，修复宽度样式权重冲突问题
+- 修复 `n-date-picker` 在 `type="datetimerange"` 情况下，设定 `default-time` 会影响 `shortcuts` 选项选中的值，关闭 [#6902](https://github.com/tusen-ai/naive-ui/pull/6902)、[#6901](https://github.com/tusen-ai/naive-ui/pull/6901)
+- 修复 `n-radio`、`n-radio-button` 中无法正常使用 `n-popover`，关闭 [#6837](https://github.com/tusen-ai/naive-ui/pull/6837)、[#6832](https://github.com/tusen-ai/naive-ui/pull/6832)
+- 优化图层过多导致的滚动性能问题，关闭 [#6887](https://github.com/tusen-ai/naive-ui/issues/6887)
+
+### Features
+
+- `n-anchor-link` 新增 `title` slot，关闭 [#6845](https://github.com/tusen-ai/naive-ui/issues/6845)
+
 ## 2.41.1
+
+`2025-06-08`
 
 ### Fixes
 

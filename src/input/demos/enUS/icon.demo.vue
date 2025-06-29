@@ -4,17 +4,8 @@
 Set a prefix and/or suffix for the input.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { FlashOutline } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup() {
-    return {
-      FlashOutline
-    }
-  }
-})
 </script>
 
 <template>

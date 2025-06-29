@@ -4,16 +4,10 @@
 Honestly I don't like the feature. Since at most of time it's not a best practice to passing time string around. However, real world is complex, I hope it can help you resolve some tricky problems.
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      formattedValue: ref('2007-06-30 12:08:55')
-    }
-  }
-})
+const formattedValue = ref('2007-06-30 12:08:55')
 </script>
 
 <template>

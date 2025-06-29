@@ -9,7 +9,8 @@
     "module": "ES6",
     "moduleResolution": "Node",
     "paths": {
-      "naive-ui": ["./src"]
+      "naive-ui": ["./src"],
+      "naive-ui/generic": ["./generic"]
     },
     "types": ["vue/jsx", "jest"],
     "strict": true,

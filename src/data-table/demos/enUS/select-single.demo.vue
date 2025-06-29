@@ -4,9 +4,9 @@
 Set `multiple: false` to make the column of `type='selection` a single selection mode.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DataTableColumns } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 interface RowData {
   key: number
@@ -46,24 +46,16 @@ function createColumns(): DataTableColumns<RowData> {
   ]
 }
 
-export default defineComponent({
-  setup() {
-    const checkedRowKeysRef = ref([4, 1])
-    return {
-      checkedRowKeys: checkedRowKeysRef,
-      data,
-      pagination: {
-        pageSize: 6
-      },
-      columns: createColumns()
-    }
-  }
-})
+const checkedRowKeysRef = ref([4, 1])
+const columns = createColumns()
+const pagination = {
+  pageSize: 6
+}
 </script>
 
 <template>
   <n-data-table
-    v-model:checked-row-keys="checkedRowKeys"
+    v-model:checked-row-keys="checkedRowKeysRef"
     :columns="columns"
     :data="data"
     :pagination="pagination"

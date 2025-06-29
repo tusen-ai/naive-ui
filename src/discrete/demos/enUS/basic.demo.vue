@@ -4,14 +4,14 @@
 Use `createDiscreteApi` to create series of API.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { ConfigProviderProps } from 'naive-ui'
 import { createDiscreteApi, darkTheme, lightTheme } from 'naive-ui'
-import { computed, defineComponent, ref } from 'vue'
+import { computed, ref } from 'vue'
 
-const themeRef = ref<'light' | 'dark'>('light')
+const theme = ref<'light' | 'dark'>('light')
 const configProviderPropsRef = computed<ConfigProviderProps>(() => ({
-  theme: themeRef.value === 'light' ? lightTheme : darkTheme
+  theme: theme.value === 'light' ? lightTheme : darkTheme
 }))
 
 const { message, notification, dialog, loadingBar, modal } = createDiscreteApi(
@@ -21,39 +21,37 @@ const { message, notification, dialog, loadingBar, modal } = createDiscreteApi(
   }
 )
 
-export default defineComponent({
-  setup() {
-    return {
-      theme: themeRef,
-      handleThemeChangeClick() {
-        if (themeRef.value === 'light')
-          themeRef.value = 'dark'
-        else themeRef.value = 'light'
-      },
-      handleMessageTriggerClick() {
-        message.info('Message')
-      },
-      handleNotificationTriggerClick() {
-        notification.create({ title: 'Notification' })
-      },
-      handleDialogTriggerClick() {
-        dialog.info({ title: 'Dialog' })
-      },
-      handleModalTriggerClick() {
-        modal.create({
-          preset: 'card',
-          title: 'Modal'
-        })
-      },
-      handleLoadingBarTriggerClick() {
-        loadingBar.start()
-        setTimeout(() => {
-          loadingBar.finish()
-        }, 1000)
-      }
-    }
-  }
-})
+function handleThemeChangeClick() {
+  if (theme.value === 'light')
+    theme.value = 'dark'
+  else theme.value = 'light'
+}
+
+function handleMessageTriggerClick() {
+  message.info('Message')
+}
+
+function handleNotificationTriggerClick() {
+  notification.create({ title: 'Notification' })
+}
+
+function handleDialogTriggerClick() {
+  dialog.info({ title: 'Dialog' })
+}
+
+function handleModalTriggerClick() {
+  modal.create({
+    preset: 'card',
+    title: 'Modal'
+  })
+}
+
+function handleLoadingBarTriggerClick() {
+  loadingBar.start()
+  setTimeout(() => {
+    loadingBar.finish()
+  }, 1000)
+}
 </script>
 
 <template>

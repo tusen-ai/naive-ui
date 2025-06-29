@@ -23,8 +23,8 @@ export type OnUpdateValue = (
     null,
   option: TreeSelectOption &
     null &
-      TreeSelectOption[] &
-      Array<TreeSelectOption | null>,
+    TreeSelectOption[] &
+    Array<TreeSelectOption | null>,
   meta:
     | {
       node: TreeSelectOption

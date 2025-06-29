@@ -1,20 +1,11 @@
 <markdown>
 # Icon with background
 
-Sometime it looks better with a background.
+Sometimes it looks better with a background.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import Checkmark16Filled from '@vicons/fluent/Checkmark16Filled'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup() {
-    return {
-      Checkmark16Filled
-    }
-  }
-})
 </script>
 
 <template>

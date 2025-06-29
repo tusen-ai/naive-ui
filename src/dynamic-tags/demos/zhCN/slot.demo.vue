@@ -4,51 +4,41 @@
 你可以替换 `dynamic-tags` 的输入或触发元素。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { AutoCompleteInst } from 'naive-ui'
-import Add from '@vicons/ionicons5/Add'
-import { computed, defineComponent, nextTick, ref, watch } from 'vue'
+import { Add } from '@vicons/ionicons5'
+import { computed, nextTick, ref, watch } from 'vue'
 
-export default defineComponent({
-  components: {
-    Add
-  },
-  setup() {
-    const autoCompleteInstRef = ref<AutoCompleteInst | null>(null)
-    watch(autoCompleteInstRef, (value) => {
-      if (value)
-        nextTick(() => value.focus())
-    })
-    const inputValueRef = ref('')
-    const options = computed(() => {
-      if (inputValueRef.value === null) {
-        return []
-      }
-      const prefix = inputValueRef.value.split('@')[0]
-      const inputSuffix = inputValueRef.value.split('@')[1]
-      if (inputSuffix) {
-        return [
-          {
-            label: `${prefix}@${inputSuffix}`,
-            value: `${prefix}@${inputSuffix}`
-          }
-        ]
-      }
-      return ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {
-        return {
-          label: prefix + suffix,
-          value: prefix + suffix
-        }
-      })
-    })
-    return {
-      autoCompleteInstRef,
-      tags: ref(['教师', '程序员']),
-      inputValue: inputValueRef,
-      options
-    }
-  }
+const autoCompleteInstRef = ref<AutoCompleteInst | null>(null)
+watch(autoCompleteInstRef, (value) => {
+  if (value)
+    nextTick(() => value.focus())
 })
+
+const inputValue = ref('')
+const options = computed(() => {
+  if (inputValue.value === null) {
+    return []
+  }
+  const prefix = inputValue.value.split('@')[0]
+  const inputSuffix = inputValue.value.split('@')[1]
+  if (inputSuffix) {
+    return [
+      {
+        label: `${prefix}@${inputSuffix}`,
+        value: `${prefix}@${inputSuffix}`
+      }
+    ]
+  }
+  return ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {
+    return {
+      label: prefix + suffix,
+      value: prefix + suffix
+    }
+  })
+})
+
+const tags = ref(['教师', '程序员'])
 </script>
 
 <template>

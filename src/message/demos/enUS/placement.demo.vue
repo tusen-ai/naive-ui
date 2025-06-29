@@ -2,9 +2,8 @@
 # Placement
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { MessageProviderProps } from 'naive-ui'
-import type { VNode } from 'vue'
 import { NButton, useMessage } from 'naive-ui'
 import { defineComponent, h, ref } from 'vue'
 
@@ -12,9 +11,17 @@ interface Item {
   placement: MessageProviderProps['placement']
   text: string
 }
-export const Buttons = defineComponent({
+
+const placementRef = ref<MessageProviderProps['placement']>('top')
+
+function changePlacement(val: MessageProviderProps['placement']) {
+  placementRef.value = val
+}
+
+// Buttons component
+const Buttons = defineComponent({
   emits: ['changePlacement'],
-  setup() {
+  setup(props, { emit }) {
     const message = useMessage()
     const placementArray: Item[] = [
       { placement: 'top', text: 'Top' },
@@ -24,49 +31,29 @@ export const Buttons = defineComponent({
       { placement: 'bottom-left', text: 'BottomLeft' },
       { placement: 'bottom-right', text: 'BottomRight' }
     ]
-    return {
-      message,
-      placementArray
-    }
-  },
-  render(): VNode[] {
-    const { message, placementArray, $emit } = this
-    return placementArray.map((item: Item) =>
-      h(
-        NButton,
-        {
-          onClick: () => {
-            $emit('changePlacement', item.placement)
-            message.info('How many roads must a man walk down')
-          },
-          style: {
-            marginRight: '10px'
-          }
-        },
-        { default: () => item.text }
-      )
-    )
-  }
-})
 
-export default defineComponent({
-  components: {
-    Buttons
-  },
-  setup() {
-    const placementRef = ref<MessageProviderProps['placement']>('top')
-    return {
-      placement: placementRef,
-      changePlacement(val: MessageProviderProps['placement']) {
-        placementRef.value = val
-      }
-    }
+    return () =>
+      placementArray.map((item: Item) =>
+        h(
+          NButton,
+          {
+            onClick: () => {
+              emit('changePlacement', item.placement)
+              message.info('How many roads must a man walk down')
+            },
+            style: {
+              marginRight: '10px'
+            }
+          },
+          { default: () => item.text }
+        )
+      )
   }
 })
 </script>
 
 <template>
-  <n-message-provider :placement="placement">
+  <n-message-provider :placement="placementRef">
     <Buttons @change-placement="changePlacement" />
   </n-message-provider>
 </template>

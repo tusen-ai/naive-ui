@@ -376,6 +376,8 @@ export default defineComponent({
           )
           const maybeScrollableBody = props.scrollable ? (
             <NxScrollbar
+              themeOverrides={themeRef.value.peerOverrides.Scrollbar}
+              theme={themeRef.value.peers.Scrollbar}
               contentClass={
                 hasHeaderOrFooter
                   ? undefined

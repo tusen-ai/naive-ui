@@ -11,6 +11,7 @@ basic.vue
 status.vue
 mask.vue
 template.vue
+block.vue
 size.vue
 form.vue
 pattern.vue
@@ -24,6 +25,7 @@ rtl-debug.vue
 | 名称 | 类型 | 类型别名 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- | --- |
 | allow-input | `(char: string, index: number, currentValue: string[]) => boolean` | `InputOtpAllowInput` | `undefined` | 校验当前的输入是否合法，如果返回 `false` 输入框便不会响应此次的输入 | 2.41.1 |
+| block | `boolean` |  | `false` | 是否将宽度调整为父元素宽度 | 2.42.0 |
 | default-value | `string[]` |  | `[]` | 默认值 | 2.41.1 |
 | disabled | `boolean` |  | `false` | 是否禁用 | 2.41.1 |
 | gap | `string \| number` |  | `undefined` | 不同输入框之间的距离，如果不设定将使用默认值 | 2.41.1 |

@@ -21,7 +21,7 @@ If you want to contribute excellent resources, please contact 07akioni or amadeu
 | [Nova admin](https://github.com/chansee97/nova-admin) | a clean and concise back-end management template based on Vue3, Vite5, Typescript, and Naive UI. It implements complete functionality in a simple way, while also considering code standards, readability, and avoiding excessive encapsulation to facilitate secondary development. |
 | [Dumogu-admin](https://admin.dumogu.top/base-naive-ui/) | Vue3, Vite5, Naive UI, Minimalist clean background management template. |
 | [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web) | ChatGPT demo web page built with Express and Vue3 |
-| [pro-components-naive-ui](https://github.com/Zheng-Changfu/pro-components-naive-ui) | Based on Naive UI secondary encapsulation, more functions are extended on the original components |
+| [pro-naive-ui](https://github.com/Zheng-Changfu/pro-naive-ui) | Based on Naive UI secondary encapsulation, more functions are extended on the original components |
 | [vue3-dynamic-form](https://github.com/yayaluoya/vue3-dynamic-form) | A dynamic form designer based on Vue3, Naive UI, to implement a lot of basic controls, can be very convenient to customize the control. |
 | [astral-3d-editor](https://github.com/mlt131220/Astral3DEditor) | 3D scene building tool based on Vue3 + Naive UI + ThreeJS + Vite5 + Typescript, supporting CAD & BIM analysis, including weather system, particle system, plug-in center... |
 | [it-tools](https://github.com/CorentinTh/it-tools) | Developed based on Vue3 and the Naive UI component library, it brings together a variety of practical online tools |
