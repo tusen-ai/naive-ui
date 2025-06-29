@@ -33,7 +33,8 @@ export default antfu(
       'style/comma-dangle': 'off',
       'style/quote-props': 'off',
       'jsdoc/require-returns-description': 'off',
-      'jsdoc/check-param-names': 'off'
+      'jsdoc/check-param-names': 'off',
+      'no-console': 'off'
     }
   }
 )
