@@ -7,7 +7,7 @@ You can use `marks` prop to customize handle button.
 <script lang="ts" setup>
 import Temperature16Regular from '@vicons/fluent/Temperature16Regular'
 import { NFlex, NIcon } from 'naive-ui'
-import { defineComponent, h, ref } from 'vue'
+import { h, ref } from 'vue'
 
 function renderMark(value: number, color: string) {
   return h(
