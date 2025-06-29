@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-image` 放大缩小在 `da-DK` `sv-SE` 本地化的文案
+
 ## 2.42.0
 
 `2025-06-17`

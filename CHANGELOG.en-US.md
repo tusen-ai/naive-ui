@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-image` zoom in & out locale text in `da-DK` `sv-SE`.
+
 ## 2.42.0
 
 `2025-06-17`
