@@ -7,6 +7,15 @@
 <p align="center"><b>比较完整，主题可调，使用 TypeScript，快</b></p>
 <p align="center">有点意思</p>
 
+<p align="center">
+  <a href="https://npmjs.com/package/naive-ui">
+    <img src="https://img.shields.io/npm/v/naive-ui.svg" alt="npm">
+  </a>
+  <a href="https://pkg.pr.new/~/tusen-ai/naive-ui">
+    <img src="https://pkg.pr.new/badge/tusen-ai/naive-ui" alt="pkg.pr.new">
+  </a>
+</p>
+
 <p align="center"><a href="README.md">English</a> | 中文</p>
 
 ## 文档
