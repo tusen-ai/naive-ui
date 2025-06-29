@@ -4,32 +4,26 @@
 Your can determine is whether to show menu based on value when it is focused.
 </markdown>
 
-<script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { computed, ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const valueRef = ref('')
+const valueRef = ref('')
+const value = valueRef
+const options = computed(() => {
+  return ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {
+    const prefix = valueRef.value.split('@')[0]
     return {
-      value: valueRef,
-      options: computed(() => {
-        return ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {
-          const prefix = valueRef.value.split('@')[0]
-          return {
-            label: prefix + suffix,
-            value: prefix + suffix
-          }
-        })
-      }),
-      getShow: (value: string) => {
-        if (value === 'a') {
-          return true
-        }
-        return false
-      }
+      label: prefix + suffix,
+      value: prefix + suffix
     }
-  }
+  })
 })
+function getShow(value: string) {
+  if (value === 'a') {
+    return true
+  }
+  return false
+}
 </script>
 
 <template>

@@ -4,15 +4,8 @@
   带有徽章数的悬浮按钮
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { AlarmOutline as AlarmOutlineIcon } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    AlarmOutlineIcon
-  }
-})
 </script>
 
 <template>

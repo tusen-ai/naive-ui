@@ -1,21 +1,11 @@
-# Fixed Column Debug
+<markdown>
+  # Debug
+</markdown>
 
-```html
-<n-data-table
-  bordered
-  :scroll-x="2000"
-  :max-height="200"
-  :data="data"
-  :columns="columns"
-  :single-line="false"
-  :pagination="pagination"
-/>
-```
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-```js
-import { defineComponent, ref } from 'vue'
-
-function createCols() {
+function createCols(): any {
   return [
     {
       title: 'Name',
@@ -116,15 +106,21 @@ function createData() {
     })
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      data: ref(createData()),
-      columns: ref(createCols()),
-      pagination: ref({
-        pageSize: 10
-      })
-    }
-  }
+const data = ref(createData())
+const columns = ref(createCols())
+const pagination = ref({
+  pageSize: 10
 })
-```
+</script>
+
+<template>
+  <n-data-table
+    bordered
+    :scroll-x="2000"
+    :max-height="200"
+    :data="data"
+    :columns="columns"
+    :single-line="false"
+    :pagination="pagination"
+  />
+</template>

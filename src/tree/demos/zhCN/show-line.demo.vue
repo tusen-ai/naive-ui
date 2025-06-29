@@ -2,10 +2,10 @@
   # 连接线
   </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { TreeOption } from 'naive-ui'
 import { repeat } from 'seemly'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 function createData(level = 4, baseKey = ''): TreeOption[] | undefined {
   if (!level)
@@ -32,15 +32,9 @@ function createLabel(level: number): string {
   return ''
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      showLine: ref(false),
-      data: createData(),
-      defaultExpandedKeys: ref(['40', '4030', '403020'])
-    }
-  }
-})
+const showLine = ref(false)
+const data = createData()
+const defaultExpandedKeys = ref(['40', '4030', '403020'])
 </script>
 
 <template>

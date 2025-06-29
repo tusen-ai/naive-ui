@@ -4,17 +4,8 @@
 为了搭配不同级的文字颜色，图标提供 `depth` 选项。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { CashOutline } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup() {
-    return {
-      CashOutline
-    }
-  }
-})
 </script>
 
 <template>
