@@ -22,7 +22,10 @@ function setContents() {
     重新加载内容
   </n-button>
   <n-bubble is-typing :content="content" />
-  <n-bubble is-typing :content="content">
+  <n-bubble is-typing :content="content" :options="{
+      interval: 5,
+      step: 2,
+    }">
     <template #content>
       <n-p>{{ content }}</n-p>
     </template>

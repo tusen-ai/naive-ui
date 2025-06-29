@@ -1,18 +1,49 @@
-import type { CSSProperties, SlotsType } from 'vue'
+import type { CSSProperties, PropType, SlotsType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { BubbleTheme } from '../styles/light'
-import type { BubbleSlots } from './public-types'
-import { NAvatar, NTypewriter } from 'naive-ui'
+import type { BubblePlacement, BubbleShape, BubbleSlots, BubbleVariant } from './public-types'
+import { NAvatar, NTypewriter, TypewriterOptions } from 'naive-ui'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { resolveSlot } from '../../_utils'
 import bubbleLight from '../styles/light'
-import { BubbleProps } from './public-types'
 import style from './styles/index.cssr'
 
 export const bubbleProps = {
   ...(useTheme.props as ThemeProps<BubbleTheme>),
-  ...BubbleProps
+  placement: {
+      type: String as PropType<BubblePlacement>,
+      default: 'start'
+  },
+  variant: {
+    type: String as PropType<BubbleVariant>,
+    default: 'filled'
+  },
+  avatar: {
+    type: String
+  },
+  content: {
+    type: String
+  },
+  shape: {
+    type: String as PropType<BubbleShape>
+  },
+  loading: {
+    type: Boolean,
+    default: false
+  },
+  isTyping: {
+    type: Boolean,
+    default: false
+  },
+  options: {
+    type: Object as PropType<TypewriterOptions>,
+    default: {
+      interval: 80,
+      step: 1,
+      initialIndex: 5
+    }
+  }
 }
 
 export default defineComponent({
@@ -156,7 +187,7 @@ export default defineComponent({
                 </div>
               ) : (
                 this.isTyping ? (
-                  <NTypewriter content={this.content}>
+                  <NTypewriter content={this.content} options={this.options}>
                     { this.$slots.content && { default: this.$slots.content } }
                   </NTypewriter>
                 ) : (

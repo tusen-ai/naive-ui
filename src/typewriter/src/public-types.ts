@@ -1,6 +1,6 @@
 import type { VNode } from 'vue'
 
-export interface Options {
+export interface TypewriterOptions {
   interval?: number
   step?: number | number[]
   initialIndex?: number

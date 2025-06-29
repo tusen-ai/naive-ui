@@ -11,6 +11,8 @@ headerAndFooter.vue
 variant.vue
 loading.vue
 typing.vue
+markdown.vue
+customRender.vue
 ```
 
 ## API
