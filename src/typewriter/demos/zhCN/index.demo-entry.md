@@ -17,13 +17,13 @@ options.vue
 
 ### Typewriter Props
 
-| 名称       | 类型      | 默认值      | 说明                   | 版本         |
-| ---------- | --------- | ----------- | ---------------------- | ------------ |
-| content    | `string`  | `undefined` | 要展示的文本内容       | NEXT_VERSION |
-| isMarkdown | `Boolean` | `false`     | 是否开启 Markdown 渲染 | NEXT_VERSION |
-| options    | `Options` | `-`         | 打字器配置             | NEXT_VERSION |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| content | `string` | `undefined` | 要展示的文本内容 | NEXT_VERSION |
+| isMarkdown | `Boolean` | `false` | 是否开启 Markdown 渲染 | NEXT_VERSION |
+| options | `TypewriterOptions` | `-` | 打字器配置 | NEXT_VERSION |
 
-### Options
+### TypewriterOptions
 
 | 参数 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |

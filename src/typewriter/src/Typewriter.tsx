@@ -6,7 +6,7 @@ import type {
 } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { TypewriterTheme } from '../styles/light'
-import type { Options, TypewriterSlots } from './public-types'
+import type { TypewriterOptions, TypewriterSlots } from './public-types'
 import { NMarkdown } from 'naive-ui'
 import { computed, defineComponent, h, toRef } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
@@ -26,7 +26,7 @@ export const typewriterProps = {
     default: false
   },
   options: {
-    type: Object as PropType<Options>,
+    type: Object as PropType<TypewriterOptions>,
     default: {
       interval: 80,
       step: 1,

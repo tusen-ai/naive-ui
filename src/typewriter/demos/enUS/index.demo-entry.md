@@ -21,9 +21,9 @@ options.vue
 | --- | --- | --- | --- | --- |
 | content | `string` | `undefined` | The text content to be displayed | NEXT_VERSION |
 | isMarkdown | `Boolean` | `false` | Whether to enable Markdown rendering | NEXT_VERSION |
-| options | `Options` | `-` | Typing machine configuration | NEXT_VERSION |
+| options | `TypewriterOptions` | `-` | Typing machine configuration | NEXT_VERSION |
 
-### Options
+### TypewriterOptions
 
 | 参数 | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |

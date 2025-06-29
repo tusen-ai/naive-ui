@@ -1,12 +1,15 @@
 import type { Ref } from 'vue'
-import type { Options } from '../public-types'
+import type { TypewriterOptions } from '../public-types'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 
 function getRandomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
-export function useTypewriter(content: Ref<string>, options: Options = {}) {
+export function useTypewriter(
+  content: Ref<string>,
+  options: TypewriterOptions = {}
+) {
   const { interval = 80, step = 1, initialIndex = 5 } = options
   const length = computed(() => content.value.length)
 

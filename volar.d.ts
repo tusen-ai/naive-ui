@@ -147,6 +147,7 @@ declare module 'vue' {
     NTransfer: (typeof import('naive-ui'))['NTransfer']
     NTree: (typeof import('naive-ui'))['NTree']
     NTreeSelect: (typeof import('naive-ui'))['NTreeSelect']
+    NTypewriter: (typeof import('naive-ui'))['NTypewriter']
     NUl: (typeof import('naive-ui'))['NUl']
     NUpload: (typeof import('naive-ui'))['NUpload']
     NUploadDragger: (typeof import('naive-ui'))['NUploadDragger']
@@ -154,7 +155,6 @@ declare module 'vue' {
     NUploadTrigger: (typeof import('naive-ui'))['NUploadTrigger']
     NVirtualList: (typeof import('naive-ui'))['NVirtualList']
     NWatermark: (typeof import('naive-ui'))['NWatermark']
-    NTypewriter: (typeof import('naive-ui'))['NTypewriter']
   }
 }
 export {}
