@@ -86,9 +86,9 @@ export function createTreeMateOptions<T>(
 ): TreeMateOptions<T, T, T> {
   const settledGetChildren: GetChildren
     = getChildren
-    || ((node: T) => {
-      return (node as any)[childrenField]
-    })
+      || ((node: T) => {
+        return (node as any)[childrenField]
+      })
   return {
     getIsGroup() {
       return false
@@ -195,6 +195,10 @@ export const treeSharedProps = {
     type: Array as PropType<Key[]>,
     default: () => []
   },
+  indent: {
+    type: Number,
+    default: 24
+  },
   indeterminateKeys: Array as PropType<Key[]>,
   renderSwitcherIcon: Function as PropType<RenderSwitcherIcon>,
   onUpdateIndeterminateKeys: [Function, Array] as PropType<
@@ -262,10 +266,6 @@ export const treeProps = {
     default: true
   },
   scrollbarProps: Object as PropType<ScrollbarProps>,
-  indent: {
-    type: Number,
-    default: 24
-  },
   allowDrop: {
     type: Function as PropType<AllowDrop>,
     default: defaultAllowDrop
@@ -274,6 +274,7 @@ export const treeProps = {
     type: Boolean,
     default: true
   },
+  ellipsis: Boolean,
   checkboxPlacement: {
     type: String as PropType<'left' | 'right'>,
     default: 'left'
@@ -1748,6 +1749,7 @@ export default defineComponent({
       blockLine,
       draggable,
       disabled,
+      ellipsis,
       internalFocusable,
       checkable,
       handleKeydown,
@@ -1762,7 +1764,8 @@ export default defineComponent({
       rtlEnabled && `${mergedClsPrefix}-tree--rtl`,
       checkable && `${mergedClsPrefix}-tree--checkable`,
       (blockLine || blockNode) && `${mergedClsPrefix}-tree--block-node`,
-      blockLine && `${mergedClsPrefix}-tree--block-line`
+      blockLine && `${mergedClsPrefix}-tree--block-line`,
+      ellipsis && `${mergedClsPrefix}-tree--ellipsis`
     ]
     const createNode = (tmNode: TmNode | MotionData): VNode => {
       return '__motion' in tmNode ? (

@@ -1,5 +1,5 @@
-const path = require('node:path')
 const dns = require('node:dns')
+const path = require('node:path')
 const process = require('node:process')
 const { babel } = require('@rollup/plugin-babel')
 const createDemoPlugin = require('./build/vite-plugin-demo')
@@ -17,6 +17,10 @@ module.exports = {
     alias:
       process.env.NODE_ENV !== 'production'
         ? [
+            {
+              find: 'naive-ui/generic',
+              replacement: path.resolve(__dirname, './generic')
+            },
             {
               find: 'naive-ui',
               replacement: path.resolve(__dirname, './src')

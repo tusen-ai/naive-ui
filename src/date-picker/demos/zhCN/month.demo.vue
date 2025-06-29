@@ -4,16 +4,10 @@
 可以使用 `month-format` 属性指定面板中月份的显示方式。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      timestamp: ref(1183135260000)
-    }
-  }
-})
+const timestamp = ref(1183135260000)
 </script>
 
 <template>

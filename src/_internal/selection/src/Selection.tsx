@@ -1,5 +1,5 @@
 import type { ThemeProps } from '../../../_mixins'
-import type { FormValidationStatus } from '../../../form/src/interface'
+import type { FormValidationStatus } from '../../../form/src/public-types'
 import type { SelectBaseOption } from '../../../select/src/interface'
 import type { TagRef } from '../../../tag/src/Tag'
 import type {

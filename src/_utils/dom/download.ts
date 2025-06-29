@@ -10,3 +10,7 @@ export function download(url: string | null, name: string | undefined): void {
   a.click()
   document.body.removeChild(a)
 }
+
+export function publicDownload(url: string, name: string | undefined): void {
+  download(url, name)
+}

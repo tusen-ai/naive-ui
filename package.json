@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "2.41.0",
+  "version": "2.42.0",
   "packageManager": "pnpm@9.5.0",
   "description": "A Vue 3 Component Library. Fairly Complete, Theme Customizable, Uses TypeScript, Fast",
   "author": "07akioni",
@@ -27,6 +27,7 @@
     "README.md",
     "dist",
     "es",
+    "generic",
     "lib",
     "volar.d.ts",
     "web-types.json"
@@ -117,6 +118,7 @@
     "eslint": "^9.6.0",
     "express": "^4.18.2",
     "fast-glob": "^3.3.1",
+    "fflate": "^0.8.2",
     "fs-extra": "^11.1.1",
     "grapheme-splitter": "^1.0.4",
     "husky": "^9.0.6",

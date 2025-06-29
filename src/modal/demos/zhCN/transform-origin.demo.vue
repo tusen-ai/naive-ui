@@ -1,40 +1,34 @@
 <markdown>
-# 出现位置
+# 变换原点
 
-虽然从鼠标位置出现的动画看起来很酷，但是我们有时也想要一些朴实无华的从屏幕中间弹出来的动画。这时你可以将 `transform-origin` 设为 `'center'`。
+虽然从点击位置展开模态框的动画很好看，但是有时候我们需要简单点的从屏幕中间开始的动画。你可以把 `transform-origin` 设为 `'center'` 来达成这个效果。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      showModal: ref(false)
-    }
-  }
-})
+const showModal = ref(false)
 </script>
 
 <template>
   <n-button @click="showModal = true">
-    没什么的
+    没什么
   </n-button>
   <n-modal v-model:show="showModal" transform-origin="center">
     <n-card
       style="width: 600px"
-      title="自愿"
+      title="好的"
       :bordered="false"
       size="huge"
       role="dialog"
       aria-modal="true"
     >
       <template #header-extra>
-        按需
+        行
       </template>
-      原则
+      可以
       <template #footer>
-        支持一下
+        不错
       </template>
     </n-card>
   </n-modal>

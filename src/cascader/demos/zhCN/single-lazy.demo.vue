@@ -2,9 +2,9 @@
 # 单项（异步）
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { CascaderOption } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 function getChildren(option: CascaderOption) {
   const children = []
@@ -19,31 +19,26 @@ function getChildren(option: CascaderOption) {
   return children
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      checkStrategyIsChild: ref(true),
-      showPath: ref(true),
-      value: ref(null),
-      options: ref([
-        {
-          label: 'l-0',
-          value: 'v-0',
-          depth: 1,
-          isLeaf: false
-        }
-      ]),
-      handleLoad(option: CascaderOption) {
-        return new Promise<void>((resolve) => {
-          window.setTimeout(() => {
-            option.children = getChildren(option)
-            resolve()
-          }, 1000)
-        })
-      }
-    }
+const checkStrategyIsChild = ref(true)
+const showPath = ref(true)
+const value = ref(null)
+const options = ref([
+  {
+    label: 'l-0',
+    value: 'v-0',
+    depth: 1,
+    isLeaf: false
   }
-})
+])
+
+function handleLoad(option: CascaderOption) {
+  return new Promise<void>((resolve) => {
+    window.setTimeout(() => {
+      option.children = getChildren(option)
+      resolve()
+    }, 1000)
+  })
+}
 </script>
 
 <template>
