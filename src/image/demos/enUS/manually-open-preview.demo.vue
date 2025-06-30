@@ -1,7 +1,7 @@
 <markdown>
 # Manually Open Preview
 
-allow big image preview by call showPreview method.
+Allow invoking image preview by calling `showPreview` method.
 </markdown>
 
 <script lang="ts" setup>

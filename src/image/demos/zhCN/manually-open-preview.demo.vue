@@ -1,7 +1,7 @@
 <markdown>
 # 手动打开预览
 
-允许通过调用 showPreview 来触发大图预览。
+允许通过调用 `showPreview` 来触发大图预览。
 </markdown>
 
 <script lang="ts" setup>

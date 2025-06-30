@@ -32,7 +32,7 @@
 - `useDialog` 的选项支持 `z-index`，关闭 [#4349](https://github.com/tusen-ai/naive-ui/issues/4349)
 - 新增组件 `n-heatmap`
 - `n-image` 增加 showPreview 方法, closes [#6695](https://github.com/tusen-ai/naive-ui/issues/6695)
-- `n-image-preview` ,`n-image-group` 支持单独使用
+- `n-image-preview`，`n-image-group` 支持单独使用
 
 ## 2.42.0
 
