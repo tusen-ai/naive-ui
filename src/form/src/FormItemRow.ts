@@ -20,12 +20,12 @@ export default defineComponent({
   props: formItemRowProps,
   setup() {
     const formItemColInstRef = ref<FormItemColRef | null>(null)
-    const validate: FormItemColRef['validate'] = ((...args: any[]) => {
+    const validate = ((...args: any[]) => {
       const { value } = formItemColInstRef
       if (value) {
-        return (value.validate as any)(...args)
+        return value.validate(...args)
       }
-    }) as any
+    }) as FormItemColRef['validate']
     const restoreValidation: FormItemColRef['restoreValidation'] = () => {
       const { value } = formItemColInstRef
       if (value) {
