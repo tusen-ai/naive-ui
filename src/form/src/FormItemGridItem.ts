@@ -24,12 +24,12 @@ export default defineComponent({
   props: formItemGiProps,
   setup() {
     const formItemInstRef = ref<FormItemInst | null>(null)
-    const validate: FormItemInst['validate'] = ((...args: any[]) => {
+    const validate = ((...args: any[]) => {
       const { value } = formItemInstRef
       if (value) {
-        return (value.validate as any)(...args)
+        return value.validate(...args)
       }
-    }) as any
+    }) as FormItemInst['validate']
     const restoreValidation: FormItemInst['restoreValidation'] = () => {
       const { value } = formItemInstRef
       if (value) {
