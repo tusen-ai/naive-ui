@@ -26,6 +26,7 @@
 - `n-upload` 支持 RTL
 - `n-tree-select` 支持 RTL
 - `useDialog` 的选项支持 `z-index`，关闭 [#4349](https://github.com/tusen-ai/naive-ui/issues/4349)
+- 新增组件 `n-heatmap`
 
 ## 2.42.0
 

@@ -577,6 +577,13 @@ export function createComponentMenuOptions({ lang, theme }) {
           enSuffix: true,
           path: '/highlight',
           isNew: true
+        },
+        {
+          en: 'Heatmap',
+          zh: '热力图',
+          enSuffix: true,
+          path: '/heatmap',
+          isNew: true
         }
       ]
     }),

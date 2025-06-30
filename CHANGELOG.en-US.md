@@ -26,6 +26,7 @@
 - `n-upload` supports RTL.
 - `n-tree-select` supports RTL.
 - `useDialog`'s option supports `z-index`, closes [#4349](https://github.com/tusen-ai/naive-ui/issues/4349).
+- Add `n-heatmap` component.
 
 ## 2.42.0
 
