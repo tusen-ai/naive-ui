@@ -12,16 +12,15 @@ function utoa(data: string): string {
 }
 
 function serialized(data: string): string {
-  const code = decodeURIComponent(data)
   const originCode = {
     'App.vue': appCode,
-    'Demo.vue': code
+    'Demo.vue': data
   }
   return utoa(JSON.stringify(originCode))
 }
 
 export default defineComponent({
-  name: 'CopyCodeButton',
+  name: 'PlaygroundButton',
   props: {
     code: {
       type: String,
