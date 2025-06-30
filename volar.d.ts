@@ -154,6 +154,7 @@ declare module 'vue' {
     NUploadTrigger: (typeof import('naive-ui'))['NUploadTrigger']
     NVirtualList: (typeof import('naive-ui'))['NVirtualList']
     NWatermark: (typeof import('naive-ui'))['NWatermark']
+    NImagePreview: (typeof import('naive-ui'))['NImagePreview']
     NColorIndicator: (typeof import('naive-ui'))['NColorIndicator']
   }
 }
