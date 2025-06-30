@@ -4,37 +4,32 @@
 You can prevent or postpone tab switching.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      handleBeforeLeave: (tabName: string) => {
-        switch (tabName) {
-          case 'not-allowed':
-            message.error('Not allowed')
-            return false
-          case 'wait':
-            return new Promise<boolean>((resolve) => {
-              const messageInstance = message.loading('Wait for 1s')
-              setTimeout(() => {
-                messageInstance.destroy()
-                resolve(true)
-              }, 1000)
-            })
-          default:
-            return true
-        }
-      },
-      handleUpdateValue: (value: string) => {
-        message.info(value)
-      }
-    }
+const message = useMessage()
+
+function handleBeforeLeave(tabName: string) {
+  switch (tabName) {
+    case 'not-allowed':
+      message.error('Not allowed')
+      return false
+    case 'wait':
+      return new Promise<boolean>((resolve) => {
+        const messageInstance = message.loading('Wait for 1s')
+        setTimeout(() => {
+          messageInstance.destroy()
+          resolve(true)
+        }, 1000)
+      })
+    default:
+      return true
   }
-})
+}
+
+function handleUpdateValue(value: string) {
+  message.info(value)
+}
 </script>
 
 <template>

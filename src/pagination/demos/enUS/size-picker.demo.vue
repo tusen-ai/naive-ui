@@ -2,17 +2,11 @@
 # Size picker
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      page: ref(2),
-      pageSize: ref(20)
-    }
-  }
-})
+const page = ref(2)
+const pageSize = ref(20)
 </script>
 
 <template>

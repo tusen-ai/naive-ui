@@ -4,8 +4,9 @@ import type { Size } from '../../avatar/src/interface'
 import type { AvatarGroupTheme } from '../styles'
 import type {
   AvatarGroupAvatarSlotProps,
+  AvatarGroupOption,
   AvatarGroupRestSlotProps
-} from './interface'
+} from './public-types'
 import {
   computed,
   type CSSProperties,
@@ -25,10 +26,6 @@ import style from './styles/avatar-group.cssr'
 
 export interface AvatarGroupInjection {
   size?: Size | undefined
-}
-
-export interface AvatarGroupOption {
-  src: string
 }
 
 export const avatarGroupProps = {

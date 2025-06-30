@@ -4,20 +4,13 @@
 使用 `checked-value` 和 `unchecked-value` 制定选中的值。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      handleUpdateValue(value: string) {
-        message.info(value)
-      }
-    }
-  }
-})
+const message = useMessage()
+function handleUpdateValue(value: string) {
+  message.info(value)
+}
 </script>
 
 <template>

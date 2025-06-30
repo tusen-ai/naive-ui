@@ -8,9 +8,11 @@ import {
   arDZ,
   azAZ,
   csCZ,
+  daDK,
   dateArDZ,
   dateAzAZ,
   dateCsCZ,
+  dateDaDK,
   dateDeDE,
   dateEnGB,
   dateEnUS,
@@ -414,6 +416,14 @@ describe('locale', () => {
         props: {
           dateLocale: dateUgCN,
           locale: ugCN
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateDaDK,
+          locale: daDK
         }
       }).html()
     ).toMatchSnapshot()

@@ -1,5 +1,6 @@
 import type { TmNode } from './interface'
 import {
+  computed,
   defineComponent,
   Fragment,
   h,
@@ -8,11 +9,7 @@ import {
   provide
 } from 'vue'
 import { keysOf, render } from '../../_utils'
-import {
-  menuInjectionKey,
-  menuItemGroupInjectionKey,
-  submenuInjectionKey
-} from './context'
+import { menuInjectionKey, menuItemGroupInjectionKey } from './context'
 
 import { useMenuChild } from './use-menu-child'
 import { useMenuChildProps } from './use-menu-child-props'
@@ -36,10 +33,16 @@ export const NMenuOptionGroup = defineComponent({
   name: 'MenuOptionGroup',
   props: menuItemGroupProps,
   setup(props) {
-    provide(submenuInjectionKey, null)
     const MenuChild = useMenuChild(props)
+    const { NSubmenu } = MenuChild
+    const mergedDisabledRef = computed(() => {
+      if (NSubmenu?.mergedDisabledRef.value)
+        return true
+      return props.tmNode.disabled
+    })
     provide(menuItemGroupInjectionKey, {
-      paddingLeftRef: MenuChild.paddingLeft
+      paddingLeftRef: MenuChild.paddingLeft,
+      mergedDisabledRef
     })
     const { mergedClsPrefixRef, props: menuProps } = inject(menuInjectionKey)!
     return function () {

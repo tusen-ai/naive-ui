@@ -11,7 +11,7 @@ import { NConfigProvider } from '../../config-provider'
 
 hljs.registerLanguage('javascript', javascript)
 
-describe('sSR', () => {
+describe('server side rendering', () => {
   it('works', async () => {
     const app = createSSRApp(() => (
       <NConfigProvider hljs={hljs}>

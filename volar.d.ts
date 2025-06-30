@@ -61,6 +61,7 @@ declare module 'vue' {
     NGlobalStyle: (typeof import('naive-ui'))['NGlobalStyle']
     NGradientText: (typeof import('naive-ui'))['NGradientText']
     NGrid: (typeof import('naive-ui'))['NGrid']
+    NHeatmap: (typeof import('naive-ui'))['NHeatmap']
     NGridItem: (typeof import('naive-ui'))['NGridItem']
     NH1: (typeof import('naive-ui'))['NH1']
     NH2: (typeof import('naive-ui'))['NH2']
@@ -79,6 +80,7 @@ declare module 'vue' {
     NInputGroup: (typeof import('naive-ui'))['NInputGroup']
     NInputGroupLabel: (typeof import('naive-ui'))['NInputGroupLabel']
     NInputNumber: (typeof import('naive-ui'))['NInputNumber']
+    NInputOtp: (typeof import('naive-ui'))['NInputOtp']
     NLayout: (typeof import('naive-ui'))['NLayout']
     NLayoutContent: (typeof import('naive-ui'))['NLayoutContent']
     NLayoutFooter: (typeof import('naive-ui'))['NLayoutFooter']
@@ -153,6 +155,7 @@ declare module 'vue' {
     NVirtualList: (typeof import('naive-ui'))['NVirtualList']
     NWatermark: (typeof import('naive-ui'))['NWatermark']
     NImagePreview: (typeof import('naive-ui'))['NImagePreview']
+    NColorIndicator: (typeof import('naive-ui'))['NColorIndicator']
   }
 }
 export {}

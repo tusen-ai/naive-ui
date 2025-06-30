@@ -58,11 +58,13 @@ expand-debug.vue
 | default-expanded-keys | `Array<string \| number>` | `[]` | 默认展开项 |  |
 | default-selected-keys | `Array<string \| number>` | `[]` | 默认选中的节点 |  |
 | draggable | `boolean` | `false` | 是否可拖拽 |  |
+| ellipsis | `boolean` | `false` | 是否省略超出宽度的文本 | NEXT_VERSION |
 | expand-on-dragenter | `boolean` | `true` | 是否在拖入后展开节点 |  |
 | expand-on-click | `boolean` | `false` | 是否在点击节点后展开或收缩节点 | 2.29.1 |
 | expanded-keys | `Array<string \| number>` | `undefined` | 如果设定则展开受控 |  |
 | filter | `(pattern: string, node: TreeOption) => boolean` | 一个简单的字符串过滤算法 | 基于 pattern 指定过滤节点的函数 |  |
 | get-children | `(option: any) => unknown` | `undefined` | 获取当前选项的子选项 | 2.34.3 |
+| indent | `number` | `24` | 树的每一级缩进的大小 | 2.9.0 |
 | indeterminate-keys | `Array<string \| number>` | `undefined` | 部分选中选项的 key |  |
 | keyboard | `boolean` | `true` | 是否支持键盘操作 | 2.32.2 |
 | key-field | `string` | `'key'` | 替代 `TreeOption` 中的 key 字段名 |  |

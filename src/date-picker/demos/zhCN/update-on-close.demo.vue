@@ -2,16 +2,10 @@
 # 关闭时更新值
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      updateValueOnClose: ref(true)
-    }
-  }
-})
+const updateValueOnClose = ref(true)
 </script>
 
 <template>
