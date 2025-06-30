@@ -58,6 +58,7 @@ expand-debug.vue
 | default-expanded-keys | `Array<string \| number>` | `[]` | 默认展开项 |  |
 | default-selected-keys | `Array<string \| number>` | `[]` | 默认选中的节点 |  |
 | draggable | `boolean` | `false` | 是否可拖拽 |  |
+| ellipsis | `boolean` | `false` | 是否省略超出宽度的文本 | NEXT_VERSION |
 | expand-on-dragenter | `boolean` | `true` | 是否在拖入后展开节点 |  |
 | expand-on-click | `boolean` | `false` | 是否在点击节点后展开或收缩节点 | 2.29.1 |
 | expanded-keys | `Array<string \| number>` | `undefined` | 如果设定则展开受控 |  |

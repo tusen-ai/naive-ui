@@ -6,9 +6,8 @@
 如果设置停留在当前页，过滤后的数据总数达不到当前页时，会展示最后一页的数据。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DataTableColumns } from 'naive-ui'
-import { defineComponent } from 'vue'
 
 interface RowData {
   key: number
@@ -73,15 +72,7 @@ const data: RowData[] = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    return {
-      data,
-      columns,
-      pagination: { pageSize: 3 }
-    }
-  }
-})
+const pagination = { pageSize: 3 }
 </script>
 
 <template>

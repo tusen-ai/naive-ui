@@ -4,16 +4,10 @@
 Use fixed position to set the position of the modal.
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      showModal: ref(false)
-    }
-  }
-})
+const showModal = ref(false)
 </script>
 
 <template>

@@ -92,6 +92,7 @@ use-dialog-reactive-list.vue
 | titleStyle | `Object \| string` | `undefined` | The style of the content. | 2.38.2 |
 | transformOrigin | `'mouse' \| 'center'` | `'mouse'` | The transform origin of the dialog's display animation. | 2.34.0 |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | Dialog type. |  |
+| zIndex | `number` | `undefined` | Z index of the dialog. | NEXT_VERSION |
 | onAfterEnter | `() => void` | `undefined` | Callback on enter animation ends. | 2.33.0 |
 | onAfterLeave | `() => void` | `undefined` | Callback on leave animation ends. | 2.33.3 |
 | onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or `Promise rejected` will prevent the default behavior. |  |

@@ -2,20 +2,13 @@
 # Confirm
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      handleConfirm(value: number | null) {
-        message.success(`Confirm${value}`)
-      }
-    }
-  }
-})
+const message = useMessage()
+function handleConfirm(value: number | null) {
+  message.success(`Confirm${value}`)
+}
 </script>
 
 <template>

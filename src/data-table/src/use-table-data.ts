@@ -54,7 +54,7 @@ export function useTableData(
     return createTreeMate<InternalRowData>(props.data, {
       ignoreEmptyChildren: true,
       getKey: props.rowKey,
-      getChildren: rowData => rowData[childrenKey] as any,
+      getChildren: rowData => rowData[childrenKey],
       getDisabled: (rowData) => {
         if (selectionColumnRef.value?.disabled?.(rowData)) {
           return true

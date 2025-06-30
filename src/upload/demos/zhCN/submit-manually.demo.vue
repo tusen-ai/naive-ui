@@ -4,27 +4,23 @@
 你可以使用 submit 方法来进行非受控状态下的手动提交。当然你也可以在受控模式下完全控制提交行为。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { UploadFileInfo, UploadInst } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const fileListLengthRef = ref(0)
-    const uploadRef = ref<UploadInst | null>(null)
+const fileListLengthRef = ref(0)
+const uploadRef = ref<UploadInst | null>(null)
 
-    return {
-      upload: uploadRef,
-      fileListLength: fileListLengthRef,
-      handleChange(options: { fileList: UploadFileInfo[] }) {
-        fileListLengthRef.value = options.fileList.length
-      },
-      handleClick() {
-        uploadRef.value?.submit()
-      }
-    }
-  }
-})
+const fileListLength = fileListLengthRef
+const upload = uploadRef
+
+function handleChange(options: { fileList: UploadFileInfo[] }) {
+  fileListLengthRef.value = options.fileList.length
+}
+
+function handleClick() {
+  uploadRef.value?.submit()
+}
 </script>
 
 <template>

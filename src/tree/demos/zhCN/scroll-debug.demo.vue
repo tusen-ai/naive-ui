@@ -2,10 +2,9 @@
 # Scroll debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { TreeOption } from 'naive-ui'
 import { NScrollbar, NTree } from 'naive-ui'
-import { defineComponent } from 'vue'
 
 function createData(level = 10): TreeOption[] {
   if (!level)
@@ -19,17 +18,7 @@ function createData(level = 10): TreeOption[] {
   ]
 }
 
-export default defineComponent({
-  components: {
-    NScrollbar,
-    NTree
-  },
-  setup() {
-    return {
-      data: createData()
-    }
-  }
-})
+const data = createData()
 </script>
 
 <template>

@@ -19,9 +19,8 @@
 `naive-ui` 的表格可以轻松的支持千万级的表格数据，你在不收钱的组件库不容易找得到这样的功能。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DataTableColumns } from 'naive-ui'
-import { defineComponent } from 'vue'
 
 interface RowData {
   key: number
@@ -47,23 +46,14 @@ for (let i = 0; i < 1000; ++i) {
   })
 }
 
-export default defineComponent({
-  setup() {
-    const data: RowData[] = Array.from({ length: 1000 }).map((_, index) => ({
-      key: index,
-      name: `Edward King ${index}`,
-      age: 32,
-      address: `London, Park Lane no. ${index}`
-    }))
-    return {
-      data,
-      columns,
-      scrollX,
-      minRowHeight: 48,
-      heightForRow: () => 48
-    }
-  }
-})
+const data: RowData[] = Array.from({ length: 1000 }).map((_, index) => ({
+  key: index,
+  name: `Edward King ${index}`,
+  age: 32,
+  address: `London, Park Lane no. ${index}`
+}))
+
+const heightForRow = () => 48
 </script>
 
 <template>

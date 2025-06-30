@@ -4,30 +4,21 @@
   Download two-dimensional code code implementation, you can also choose to right-click the picture to save it.
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup() {
-    const handleDownloadQRCode = () => {
-      const canvas = document
-        .querySelector('#qr-code')
-        ?.querySelector<HTMLCanvasElement>('canvas')
-      if (canvas) {
-        const url = canvas.toDataURL()
-        const a = document.createElement('a')
-        a.download = 'QRCode.png'
-        a.href = url
-        document.body.appendChild(a)
-        a.click()
-        document.body.removeChild(a)
-      }
-    }
-    return {
-      handleDownloadQRCode
-    }
+<script lang="ts" setup>
+function handleDownloadQRCode() {
+  const canvas = document
+    .querySelector('#qr-code')
+    ?.querySelector<HTMLCanvasElement>('canvas')
+  if (canvas) {
+    const url = canvas.toDataURL()
+    const a = document.createElement('a')
+    a.download = 'QRCode.png'
+    a.href = url
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
   }
-})
+}
 </script>
 
 <template>
