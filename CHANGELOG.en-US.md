@@ -13,7 +13,7 @@
 - `n-upload` adds `uploadDownload` util method.
 - `n-tree-select` adds `indent` prop.
 - Adds `n-input-opt` component. closes [#1385](https://github.com/tusen-ai/naive-ui/issues/1385), [#5681](https://github.com/tusen-ai/naive-ui/issues/5681), [#6222](https://github.com/tusen-ai/naive-ui/issues/6222).
-- Adds `n-cascader-panel` component. closes [#5347](https://github.com/tusen-ai/naive-ui/issues/5347)
+- Adds `n-cascader-panel` component, closes [#5347](https://github.com/tusen-ai/naive-ui/issues/5347)
 
 ## 2.41.0
 
