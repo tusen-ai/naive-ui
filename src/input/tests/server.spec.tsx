@@ -6,7 +6,7 @@ import { renderToString } from '@vue/server-renderer'
 import { createSSRApp, h } from 'vue'
 import { NInput } from '../..'
 
-describe('sSR', () => {
+describe('server side rendering', () => {
   it('works', async () => {
     const app = createSSRApp(() => <NInput />)
     setup(app)

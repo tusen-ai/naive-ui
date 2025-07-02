@@ -1,7 +1,7 @@
 import type { InternalSelectionInst } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { FormValidationStatus } from '../../form/src/interface'
+import type { FormValidationStatus } from '../../form/src/public-types'
 import type { PopoverProps } from '../../popover'
 import type { SelectBaseOption } from '../../select/src/interface'
 import type { CascaderTheme } from '../styles'

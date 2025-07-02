@@ -6,7 +6,7 @@ import { renderToString } from '@vue/server-renderer'
 import { createSSRApp, h } from 'vue'
 import { NGrid, NGridItem } from '../..'
 
-describe('sSR', () => {
+describe('server side rendering', () => {
   it('works 1', async () => {
     const app = createSSRApp(() => <NGrid />)
     setup(app)
