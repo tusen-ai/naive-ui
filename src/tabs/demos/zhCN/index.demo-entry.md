@@ -62,8 +62,8 @@ center-active-tab.vue
 | trigger | `'click' \| 'hover'` | `'click'` | 触发 tab 的方式 | 2.27.0 |
 | type | `'bar' \| 'line' \| 'card' \| 'segment'` | `'bar'` | 标签类型 |  |
 | value | `string \| number` | `undefined` | 受控模式下的值 |  |
-| show-scroll-button | `boolean` | `false` | 是否显示滚动按钮 | 2.41.1 |
-| center-active-tab | `boolean` | `false` | 控制活动标签是否居中显示。设置为 true 时，活动标签将滚动到滚动容器的中心位置 | 2.41.1 |
+| show-scroll-button | `boolean` | `false` | 是否显示滚动按钮 | NEXT_VERSION |
+| center-active-tab | `boolean` | `false` | 控制活动标签是否居中显示。设置为 true 时，活动标签将滚动到滚动容器的中心位置 | NEXT_VERSION |
 | on-add | `() => void` | `undefined` | 添加标签的回调函数 |  |
 | on-before-leave | `(name: string \| number, oldName: string \| number \| null) => boolean \| Promise<boolean>` | `undefined` | 切换标签之前的钩子函数，返回 `false` 或 promise resolve `false` 或 promise reject 会阻止切换 |  |
 | on-close | `(name: string \| number) => void` | `undefined` | 关闭标签的回调函数 |  |

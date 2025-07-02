@@ -53,8 +53,8 @@ center-active-tab.vue
 | trigger | `'click' \| 'hover'` | `'click'` | Trigger of activating a tab | 2.27.0 |
 | type | `'bar' \| 'line' \| 'card' \| 'segment'` | `'bar'` | Tabs type. |  |
 | value | `string \| number` | `undefined` | Value in controlled mode. |  |
-| show-scroll-button | boolean | false | Whether to display the scroll button | 2.41.1 |
-| center-active-tab | `boolean` | `false` | When set to true, the active tab will scroll to the center of the scroll container | 2.41.1 |
+| show-scroll-button | boolean | false | Whether to display the scroll button | NEXT_VERSION |
+| center-active-tab | `boolean` | `false` | When set to true, the active tab will scroll to the center of the scroll container | NEXT_VERSION |
 | on-add | `() => void` | `undefined` | Callback function triggered when add tag. |  |
 | on-before-leave | `(activeName: string \| number, oldActiveName: string \| number \| null) => boolean \| Promise<boolean>` | `undefined` | Hook function before switching tab. Returning `false` or promise resolving `false` or promise rejection will prevent tab switching. |  |
 | on-close | `(name: string \| number) => void` | `undefined` | Callback function triggered when close tag. |  |
