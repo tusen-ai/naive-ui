@@ -519,13 +519,13 @@ function useDualCalendar(
   function changeStartEndTime(
     startTime: number,
     endTime: number,
-    source: 'shortcutPreview' | 'wipPreview' | 'done'
+    source: 'shortcutPreview' | 'wipPreview' | 'done' | 'shortcutDone'
   ): void {
     if (typeof startTime !== 'number') {
       startTime = getTime(startTime)
     }
 
-    if (source !== 'shortcutPreview') {
+    if (source !== 'shortcutPreview' && source !== 'shortcutDone') {
       let startDefaultTime:
         | { hours: number, minutes: number, seconds: number }
         | undefined
@@ -553,7 +553,7 @@ function useDualCalendar(
 
     panelCommon.doUpdateValue(
       [startTime, endTime],
-      props.panel && source === 'done'
+      props.panel && (source === 'done' || source === 'shortcutDone')
     )
   }
   function sanitizeValue(datetime: number): number {
@@ -731,7 +731,7 @@ function useDualCalendar(
     const shortcutValue = panelCommon.getShortcutValue(shortcut)
     if (!Array.isArray(shortcutValue))
       return
-    changeStartEndTime(shortcutValue[0], shortcutValue[1], 'done')
+    changeStartEndTime(shortcutValue[0], shortcutValue[1], 'shortcutDone')
     panelCommon.clearPendingValue()
     handleConfirmClick()
   }
