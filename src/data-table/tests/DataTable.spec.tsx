@@ -388,8 +388,8 @@ describe('n-data-table', () => {
     ): Promise<boolean> => {
       const matchResult
         = (await checkIsMatched('.chinese-col', targets[0]))
-        && (await checkIsMatched('.math-col', targets[1]))
-        && (await checkIsMatched('.english-col', targets[2]))
+          && (await checkIsMatched('.math-col', targets[1]))
+          && (await checkIsMatched('.english-col', targets[2]))
 
       return matchResult
     }
@@ -517,11 +517,11 @@ describe('n-data-table', () => {
       await nextTick()
       const result
         = (await checkIsMatched('.age-col', [42, 32, 32, 32]))
-        && (await checkScoreIsMatched([
-          [98, 98, 98, 88],
-          [66, 60, 66, 99],
-          [89, 70, 89, 89]
-        ]))
+          && (await checkScoreIsMatched([
+            [98, 98, 98, 88],
+            [66, 60, 66, 99],
+            [89, 70, 89, 89]
+          ]))
       expect(result).toEqual(true)
     })
   })

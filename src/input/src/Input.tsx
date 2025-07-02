@@ -1,5 +1,5 @@
 import type { ThemeProps } from '../../_mixins'
-import type { FormValidationStatus } from '../../form/src/interface'
+import type { FormValidationStatus } from '../../form/src/public-types'
 import type { InputTheme } from '../styles'
 import type {
   InputWrappedRef,
@@ -56,8 +56,7 @@ import {
   type ExtractPublicPropTypes,
   type MaybeArray,
   resolveSlot,
-  resolveWrappedSlot,
-  warnOnce
+  resolveWrappedSlot
 } from '../../_utils'
 import { isSafari } from '../../_utils/env/browser'
 import { inputLight } from '../styles'
@@ -186,16 +185,6 @@ export default defineComponent({
   props: inputProps,
   slots: Object as SlotsType<InputSlots>,
   setup(props) {
-    if (__DEV__) {
-      watchEffect(() => {
-        if (props.showPasswordToggle) {
-          warnOnce(
-            'input',
-            '`show-password-toggle` is deprecated, please use `showPasswordOn="click"` instead'
-          )
-        }
-      })
-    }
     const {
       mergedClsPrefixRef,
       mergedBorderedRef,

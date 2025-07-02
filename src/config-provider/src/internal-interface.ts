@@ -52,6 +52,7 @@ import type { IconWrapperTheme } from '../../icon-wrapper/styles'
 import type { IconTheme } from '../../icon/styles'
 import type { ImageTheme } from '../../image/styles'
 import type { InputNumberTheme } from '../../input-number/styles'
+import type { InputOtpTheme } from '../../input-otp/styles'
 import type { Size as InputSize } from '../../input/src/interface'
 import type { InputTheme } from '../../input/styles'
 import type { LayoutTheme } from '../../layout/styles'
@@ -195,6 +196,7 @@ export interface GlobalThemeWithoutCommon {
   // internal
   InternalSelectMenu?: InternalSelectMenuTheme
   InternalSelection?: InternalSelectionTheme
+  InputOtp?: InputOtpTheme
 }
 
 export interface GlobalComponentConfig {

@@ -177,13 +177,19 @@ export default defineComponent({
     }
     function handleDownload(file: UploadSettledFileInfo): void {
       const {
-        onDownloadRef: { value: onDownload }
+        onDownloadRef: { value: onDownload },
+        customDownloadRef: { value: customDownload }
       } = NUpload
       void Promise.resolve(
         onDownload ? onDownload(Object.assign({}, file)) : true
       ).then((res) => {
         if (res !== false) {
-          download(file.url, file.name)
+          if (customDownload) {
+            customDownload(Object.assign({}, file))
+          }
+          else {
+            download(file.url, file.name)
+          }
         }
       })
     }

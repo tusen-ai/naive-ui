@@ -22,4 +22,6 @@ Naive UI 是统一设计规范的高质量 Vue 组件库，我们倾向于只提
 | [Dumogu-admin](https://admin.dumogu.top/base-naive-ui/) | 一个基于Vue3、Vite5、Naive UI, 简洁干净后台管理模板，方便二次开发，易于上手，只有基础功能。 |
 | [chatgpt-web](https://github.com/Chanzhaoyu/chatgpt-web) | 使用 Express 和 Vue3 搭建的 ChatGPT 演示网页 |
 | [pro-components-naive-ui](https://github.com/Zheng-Changfu/pro-components-naive-ui) | 基于 Naive UI 二次封装, 基于原有组件扩展了更多功能 |
-| [vue3-dynamic-form](https://github.com/yayaluoya/vue3-dynamic-form) | 一个基于Vue3、Naive UI, 的动态表单设计器，实现了很多基础控件，能非常方便的自定义控件。 |
+| [vue3-dynamic-form](https://github.com/yayaluoya/vue3-dynamic-form) | 一个基于 Vue3、Naive UI 的动态表单设计器，实现了很多基础控件，能非常方便的自定义控件。 |
+| [astral-3d-editor](https://github.com/mlt131220/Astral3DEditor) | 基于 Vue3 + Naive UI + ThreeJS + Vite5 + Typescript 的三维场景构建工具，支持 CAD & BIM 解析，内含天气系统、粒子系统、插件中心... |
+| [it-tools](https://github.com/CorentinTh/it-tools) | 基于 Vue3 和 Naive UI 组件库开发，汇集了多种实用的在线工具 |
