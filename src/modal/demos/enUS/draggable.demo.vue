@@ -67,7 +67,7 @@ export default defineComponent({
   </n-flex>
   <n-modal
     v-model:show="showModal1"
-    title="card 预设拖拽"
+    title="Card preset draggable"
     preset="card"
     draggable
     :style="{ width: '800px' }"

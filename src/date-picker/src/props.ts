@@ -2,7 +2,7 @@ import type { PropType } from 'vue'
 import type { FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type { MaybeArray } from '../../_utils'
-import type { FormValidationStatus } from '../../form/src/interface'
+import type { FormValidationStatus } from '../../form/src/public-types'
 import type { TimePickerProps } from '../../time-picker'
 import type { DatePickerTheme } from '../styles'
 import type { DatePickerType } from './config'
@@ -66,7 +66,7 @@ export const datePickerProps = {
   endPlaceholder: String,
   format: String,
   dateFormat: String,
-  timerPickerFormat: String,
+  timePickerFormat: String,
   actions: Array as PropType<Array<'clear' | 'confirm' | 'now'> | null>,
   shortcuts: Object as PropType<Shortcuts>,
   isDateDisabled: Function as PropType<IsDateDisabled>,

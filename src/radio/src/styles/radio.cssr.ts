@@ -44,14 +44,10 @@ export default cB('radio', `
   cB('radio-input', `
     position: absolute;
     border: 0;
-    border-radius: inherit;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+    width: 0;
+    height: 0;
     opacity: 0;
-    z-index: 1;
-    cursor: pointer;
+    margin: 0;
   `),
   cE('dot', `
     position: absolute;
