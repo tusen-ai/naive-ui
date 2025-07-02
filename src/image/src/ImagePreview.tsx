@@ -108,6 +108,7 @@ export default defineComponent({
       const tbox = thumbnailEl.getBoundingClientRect()
       const tx = tbox.left + tbox.width / 2
       const ty = tbox.top + tbox.height / 2
+
       style.transformOrigin = `${tx}px ${ty}px`
     }
 
@@ -122,8 +123,16 @@ export default defineComponent({
         case 'ArrowRight':
           props.onNext?.()
           break
+        case 'ArrowUp':
+          e.preventDefault()
+          zoomIn()
+          break
+        case 'ArrowDown':
+          e.preventDefault()
+          zoomOut()
+          break
         case 'Escape':
-          doUpdateShow(false)
+          close()
           break
       }
     }
@@ -198,6 +207,7 @@ export default defineComponent({
         deltaVertical
       }
     }
+
     // avoid image move outside viewport
     function getDerivedOffset(moveStrategy?: MoveStrategy): {
       offsetX: number
@@ -362,6 +372,7 @@ export default defineComponent({
       }
       return Math.max(heightScale, widthScale)
     }
+
     function zoomIn(): void {
       const maxScale = getMaxScale()
       if (scale < maxScale) {
@@ -502,6 +513,10 @@ export default defineComponent({
       ? useThemeClass('image-preview', undefined, cssVarsRef, props)
       : undefined
 
+    function handleWheel(event: WheelEvent) {
+      event.preventDefault()
+    }
+
     return {
       clsPrefix: mergedClsPrefixRef,
       previewRef,
@@ -511,9 +526,7 @@ export default defineComponent({
       appear: useIsMounted(),
       displayed: displayedRef,
       previewedImgProps: imageContext?.previewedImgPropsRef,
-      handleWheel(e: WheelEvent) {
-        e.preventDefault()
-      },
+      handleWheel,
       handlePreviewMousedown,
       handlePreviewDblclick,
       syncTransformOrigin,
@@ -625,6 +638,7 @@ export default defineComponent({
               this.onRender?.()
               return withDirectives(
                 <div
+                  ref="containerRef"
                   class={[
                     `${clsPrefix}-image-preview-container`,
                     this.themeClass
