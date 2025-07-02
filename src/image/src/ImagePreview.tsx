@@ -1,4 +1,5 @@
-import type { MaybeArray } from '../../_utils'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { ImagePreviewInst } from './public-types'
 import { off, on } from 'evtd'
 import { kebabCase } from 'lodash-es'
 import { beforeNextFrameOnce } from 'seemly'
@@ -47,37 +48,36 @@ import style from './styles/index.cssr'
 
 const BLEEDING = 32
 
-export interface ImagePreviewInst {
-  setThumbnailEl: (e: HTMLImageElement | null) => void
+export const imagePreviewProps = {
+  ...imagePreviewSharedProps,
+  src: {
+    type: String
+  },
+  show: {
+    type: Boolean,
+    default: undefined
+  },
+  defaultShow: {
+    type: Boolean,
+    default: false
+  },
+  'onUpdate:show': [Function, Array] as PropType<
+    MaybeArray<(value: boolean) => void>
+  >,
+  onUpdateShow: [Function, Array] as PropType<
+    MaybeArray<(show: boolean) => void>
+  >,
+  onNext: Function as PropType<() => void>,
+  onPrev: Function as PropType<() => void>,
+  onClose: [Function, Array] as PropType<MaybeArray<() => void>>
 }
+
+export type ImagePreviewProps = ExtractPublicPropTypes<typeof imagePreviewProps>
 
 export default defineComponent({
   name: 'ImagePreview',
-  props: {
-    ...imagePreviewSharedProps,
-    src: {
-      type: String
-    },
-    show: {
-      type: Boolean,
-      default: undefined
-    },
-    defaultShow: {
-      type: Boolean,
-      default: false
-    },
-    'onUpdate:show': [Function, Array] as PropType<
-      MaybeArray<(value: boolean) => void>
-    >,
-    onUpdateShow: [Function, Array] as PropType<
-      MaybeArray<(show: boolean) => void>
-    >,
-    onNext: Function as PropType<() => void>,
-    onPrev: Function as PropType<() => void>,
-    onClose: Function
-  },
-  emit: ['close', 'update:show'],
-  setup(props, { emit }) {
+  props: imagePreviewProps,
+  setup(props) {
     const { src } = toRefs(props)
 
     const { mergedClsPrefixRef } = useConfig(props)
@@ -142,6 +142,7 @@ export default defineComponent({
 
     watch(mergedShowRef, (value) => {
       if (value) {
+        doUpdateShow(true)
         on('keydown', document, handleKeydown)
       }
       else {
@@ -428,7 +429,9 @@ export default defineComponent({
 
     function close() {
       if (mergedShowRef.value) {
-        emit('close')
+        const { onClose } = props
+        if (onClose)
+          call(onClose)
         doUpdateShow(false)
         uncontrolledShowRef.value = false
       }

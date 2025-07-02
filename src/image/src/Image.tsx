@@ -1,4 +1,4 @@
-import type { ImagePreviewInst } from './ImagePreview'
+import type { ImagePreviewInst, ImageSlots } from './public-types'
 import type { IntersectionObserverOptions } from './utils'
 import {
   defineComponent,
@@ -12,7 +12,6 @@ import {
   ref,
   type SlotsType,
   toRef,
-  type VNode,
   watchEffect
 } from 'vue'
 import { useConfig } from '../../_mixins'
@@ -22,10 +21,6 @@ import { imageGroupInjectionKey } from './ImageGroup'
 import NImagePreview from './ImagePreview'
 import { imageContextKey, imagePreviewSharedProps } from './interface'
 import { observeIntersection } from './utils'
-
-export interface ImageInst {
-  showPreview: () => void
-}
 
 export const imageProps = {
   alt: String,
@@ -52,11 +47,6 @@ export const imageProps = {
 }
 
 export type ImageProps = ExtractPublicPropTypes<typeof imageProps>
-
-export interface ImageSlots {
-  placeholder?: () => VNode[]
-  error?: () => VNode[]
-}
 
 let uuid = 0
 
@@ -138,7 +128,7 @@ export default defineComponent({
       const unRegister = imageGroupHandle?.registerImageUrl?.(
         imageId,
         props.previewSrc || props.src || ''
-      )
+      ) as (() => void) | undefined
       onInvalidate(() => {
         unRegister?.()
       })

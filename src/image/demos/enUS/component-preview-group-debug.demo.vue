@@ -20,7 +20,7 @@ function onClick2() {
 
 <template>
   <n-space vertical>
-    <p>src-list</p>
+    <p>src-list && n-image</p>
     <n-button type="primary" @click="onClick">
       Click me to preview multiple image
     </n-button>
