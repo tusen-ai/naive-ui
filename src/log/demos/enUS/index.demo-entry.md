@@ -66,7 +66,7 @@ auto-bottom.vue
 | log | `string` | `undefined` | The content of the log. |
 | rows | `number` | `15` | Log size. |
 | trim | `boolean` | `false` | Whether to display the log after `trim`. |
-| virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. | 2.41.1 |
+| virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. | NEXT_VERSION |
 | on-require-more | `(from: 'top' \| 'bottom') => void` | `undefined` | Callback function for scroll loading log. |
 | on-reach-top | `() => void` | `undefined` | Scroll to the top callback function. |
 | on-reach-bottom | `() => void` | `undefined` | Scroll to the bottom callback function. |
