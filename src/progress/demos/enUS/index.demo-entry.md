@@ -44,10 +44,10 @@ indeterminate.vue
 | status | `'default' \| 'success' \| 'error' \| 'warning' \| 'info'` | `'default'` | Progress status. |  |
 | stroke-width | `number` | `7` | Progress width. |  |
 | type | `'line' \| 'circle' \| 'multiple-circle' \| 'dashboard'` | `line` | Progress type. | `'dashboard'` 2.25.2 |
-| indeterminate | `boolean` | `false` | set indeterminate progress | 2.41.1 |
-| duration | `number` | `3` | control the animation duration of indeterminate progress or striped flow progress | 2.41.1 |
+| indeterminate | `boolean` | `false` | set indeterminate progress. | NEXT_VERSION |
+| duration | `number` | `3` | control the animation duration of indeterminate progress or striped flow progress. | NEXT_VERSION |
 | unit | `string` | `%` | Progress unit. |  |
-| size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | Progress size. | 2.41.1 |
+| size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | Progress size. | NEXT_VERSION |
 
 ### Progress Slots
 

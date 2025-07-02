@@ -5,11 +5,15 @@
 </markdown>
 
 <template>
-  <n-progress
-    type="line"
-    :percentage="60"
-    indicator-placement="inside"
-    indeterminate
-    :duration="5"
-  />
+  <n-space vertical>
+    <n-progress type="line" :percentage="60" indeterminate :duration="5" />
+
+    <n-progress
+      type="line"
+      :percentage="60"
+      indicator-placement="inside"
+      indeterminate
+      :duration="5"
+    />
+  </n-space>
 </template>

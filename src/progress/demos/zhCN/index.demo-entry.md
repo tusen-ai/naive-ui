@@ -44,10 +44,10 @@ indeterminate.vue
 | status | `'default' \| 'success' \| 'error' \| 'warning' \| 'info'` | `'default'` | 进度条状态 |  |
 | stroke-width | `number` | `7` | 进度条宽度 |  |
 | type | `'line' \| 'circle' \| 'multiple-circle' \| 'dashboard'` | `'line'` | 进度条类型 | `'dashboard'` 2.25.2 |
-| indeterminate | `boolean` | `false` | 是否为动画进度条 | 2.41.1 |
-| duration | `number` | `3` | 控制动画进度条速度和条纹进度条流动速度 | 2.41.1 |
+| indeterminate | `boolean` | `false` | 是否为动画进度条 | NEXT_VERSION |
+| duration | `number` | `3` | 控制动画进度条速度和条纹进度条流动速度 | NEXT_VERSION |
 | unit | `string` | `%` | 进度条单位 |  |
-| size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 | 2.41.1 |
+| size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 滚动条组件的尺寸 | NEXT_VERSION |
 
 ### Progress Slots
 
