@@ -24,6 +24,7 @@ customRender.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | content | `string` | `undefined` | Content of Bubble. | NEXT_VERSION |
+| gap | `string \| number` | `undefined` | The distance between the avatar and the bubble, if not set, will use the default value. | NEXT_VERSION |
 | placement | `'start' \| 'end'` | `start` | Direction of Bubble. | NEXT_VERSION |
 | avatar | `string` | '' | The image address of the bubble avatar. | NEXT_VERSION |
 | loading | `boolean` | `false` | Whether to display the loading status. When it is set to 'true', loading will be displayed inside the bubble. | NEXT_VERSION |

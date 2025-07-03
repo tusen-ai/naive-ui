@@ -24,6 +24,7 @@ customRender.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | content | `string` | `undefined` | 气泡内要展示的文本内容 | NEXT_VERSION |
+| gap | `string \| number` | `undefined` | 头像与气泡之间的距离，如果不设定将使用默认值 | NEXT_VERSION |
 | placement | `'start' \| 'end'` | `start` | 信息位置 | NEXT_VERSION |
 | avatar | `string` | '' | 气泡头像的图片地址 | NEXT_VERSION |
 | loading | `boolean` | `false` | 是否显示加载状态。为 `true` 时，气泡内会显示加载 | NEXT_VERSION |
