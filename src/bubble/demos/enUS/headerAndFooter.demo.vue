@@ -1,7 +1,7 @@
 <markdown>
-# 头和尾
+# Header and Footer
 
-通过 `header` 和 `footer` 树形设置气泡的头部和底部。
+Set the header and footer of the bubble through the `header` and `footer` tree structure.
 </markdown>
 
 <script lang="ts" setup>
@@ -10,9 +10,7 @@ import { CopyOutline, Sync } from '@vicons/ionicons5'
 </script>
 
 <template>
-  <n-bubble
-    content="两者在生产环境的最终产物差异较小，但开发体验的差距较大，选择时需根据团队需求和项目规模权衡。"
-  >
+  <n-bubble content="Hello, I'm the 07akioni. Basically... run!">
     <template #avatar>
       <n-avatar
         round
@@ -32,7 +30,7 @@ import { CopyOutline, Sync } from '@vicons/ionicons5'
               </template>
             </n-button>
           </template>
-          重新生成
+          Reload
         </n-tooltip>
 
         <n-tooltip trigger="hover">
@@ -43,7 +41,7 @@ import { CopyOutline, Sync } from '@vicons/ionicons5'
               </template>
             </n-button>
           </template>
-          复制
+          Copy
         </n-tooltip>
 
         <n-tooltip trigger="hover">
@@ -54,7 +52,7 @@ import { CopyOutline, Sync } from '@vicons/ionicons5'
               </template>
             </n-button>
           </template>
-          喜欢
+          Like
         </n-tooltip>
 
         <n-tooltip trigger="hover">
@@ -65,7 +63,7 @@ import { CopyOutline, Sync } from '@vicons/ionicons5'
               </template>
             </n-button>
           </template>
-          不喜欢
+          UnLike
         </n-tooltip>
       </div>
     </template>

@@ -3,10 +3,11 @@
 </markdown>
 
 <template>
-    <n-bubble content="hello world  !">
-        <template #content>
-            234
-        </template>
-    </n-bubble>
+  <n-bubble>
+    <template #content>
+      <n-p>
+        魔女死于爱情，阴谋家死于忠诚，旅者死于归乡，死神困于冥河，牧羊人死于信仰，黄昏巨人倒在黎明之前，烈阳扼杀远古太阳的光，空想家从未存在，偷盗者最终一无所有，窥视人死于求知。不眠者陷入永眠，星之匙困于星空，旅法师永不归乡，命运之蛇被命运左右。锚能载黑皇帝亦能覆黑皇帝。
+      </n-p>
+    </template>
+  </n-bubble>
 </template>
-    

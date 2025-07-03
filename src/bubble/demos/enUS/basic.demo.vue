@@ -1,6 +1,7 @@
 <markdown>
-# 基础用法
+# Basic
 </markdown>
 
 <template>
+  <n-bubble content="hello world  !" />
 </template>

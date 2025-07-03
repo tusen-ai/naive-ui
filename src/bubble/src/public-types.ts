@@ -1,36 +1,8 @@
-import type { PropType, VNode } from 'vue'
+import type { VNode } from 'vue'
 
 export type BubblePlacement = 'start' | 'end'
 export type BubbleVariant = 'filled' | 'borderless' | 'outlined' | 'shadow'
 export type BubbleShape = 'round' | 'corner'
-
-export const BubbleProps = {
-  placement: {
-    type: String as PropType<BubblePlacement>,
-    default: 'start'
-  },
-  variant: {
-    type: String as PropType<BubbleVariant>,
-    default: 'filled'
-  },
-  avatar: {
-    type: String
-  },
-  content: {
-    type: String
-  },
-  shape: {
-    type: String as PropType<BubbleShape>
-  },
-  loading: {
-    type: Boolean,
-    default: false
-  },
-  isTyping: {
-    type: Boolean,
-    default: false
-  }
-}
 
 export type BubbleAvatarSlot = () => VNode[]
 export type BubbleHeaderSlot = () => VNode[]
@@ -45,3 +17,5 @@ export interface BubbleSlots {
   loading?: BubbleLoadingSlot
   content?: BubbleContentSlot
 }
+
+export interface BubbleInst {}

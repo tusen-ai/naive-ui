@@ -54,7 +54,7 @@ import { useDropNodeOnCanvas } from './useDropNodeOnCanvas';
 
 <template>
   <n-button @click="setContents">
-    重新加载内容
+    Reload the content
   </n-button>
   <n-typewriter
     :is-markdown="true"

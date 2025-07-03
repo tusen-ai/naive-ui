@@ -11,7 +11,13 @@ const bubbleDark: BubbleTheme = {
   },
   self(vars) {
     const commonSelf = self(vars)
-    return commonSelf
+    return {
+      ...commonSelf,
+      filledBackgroundColor: '#313131',
+      outlinedBorder: '1px solid #303030',
+      shadowBoxShadow:
+        '0px 12px 32px 4px rgba(0,0,0,.04),0px 8px 20px rgba(0,0,0,.08)'
+    }
   }
 }
 

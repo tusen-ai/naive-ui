@@ -3,69 +3,62 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 export default c([
   cB('bubble', `
         display: flex;
-        column-gap: 12px;
+        gap: var(--n-gap);
     `, [
     cM('end', `
-            justify-content: end;
-            flex-direction: row-reverse;
-        `, [
+        justify-content: end;
+        flex-direction: row-reverse;
+      `, [
       cE('content-wrapper', `
-                align-items: flex-end;
-            `)
+        align-items: flex-end;
+      `)
     ]),
-    cE('avatar', ``, [
-      cM('placeholder', `
-                width: 34px;
-                height: 34px;
-            `)
-    ]),
+    cE('avatar', ``),
     cE('header', `
-            font-size: 14px;
-            color: #303133;
-            line-height: 24px;
-        `),
+        font-size: var(--n-font-size);
+        line-height: var(--n-line-height);
+    `),
     cE('content', `
-            word-break: break-word;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            min-width: 0;
-            max-width: 100%;
-            padding: 12px 16px;
-            border-radius: 8px;
-            min-height: 22px;
+        word-break: break-word;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        min-width: 0;
+        max-width: 100%;
+        padding: var(--n-content-padding);
+        border-radius: var(--n-border-radius);
+        min-height: var(--n-content-min-height);
         `, [
       cM('filled', `
-                background-color: #f0f2f5
+                background-color: var(--n-filled-background-color);
             `),
       cM('outlined', `
-                border: 1px solid #dcdfe6;
-            `),
+        border: var(--n-outlined-border);
+      `),
       cM('shadow', `
-                box-shadow: 0px 12px 32px 4px rgba(0,0,0,.04),0px 8px 20px rgba(0,0,0,.08);
-            `),
+          box-shadow: var(--n-shadow-box-shadow);
+        `),
       cM('round', `
-                border-radius: 23px;
-                padding-inline: 20px;
-            `),
-
+          border-radius: var(--n-round-border-radius);
+          padding-inline: var(--n-round-padding-inline);
+      `),
     ]),
     cE('content-wrapper', `
-            flex: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            min-width: 0;
-            max-width: 100%;
+        flex: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        min-width: 0;
+        max-width: var(--n-content-wrapper-max-width);
     `),
     cNotM('end', ``, [
       cE('content', ``, [
-        cM('corner', `border-start-start-radius: 2px;`)
+        cM('corner', `border-start-start-radius: var(--n-corner-border-radius)`)
       ])
     ]),
     cM('end', ``, [
       cE('content', ``, [
-        cM('corner', `border-start-end-radius: 2px;`)
+        cM('corner', `border-start-end-radius: var(--n-corner-border-radius)`)
       ])
     ]),
     cE('footer', `

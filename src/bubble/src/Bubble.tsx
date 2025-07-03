@@ -1,19 +1,27 @@
+import type { TypewriterOptions } from 'naive-ui'
 import type { CSSProperties, PropType, SlotsType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { BubbleTheme } from '../styles/light'
-import type { BubblePlacement, BubbleShape, BubbleSlots, BubbleVariant } from './public-types'
-import { NAvatar, NMarkdown, NTypewriter, TypewriterOptions } from 'naive-ui'
+import type {
+  BubblePlacement,
+  BubbleShape,
+  BubbleSlots,
+  BubbleVariant
+} from './public-types'
+import { NAvatar, NMarkdown, NTypewriter } from 'naive-ui'
+import { pxfy } from 'seemly'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import { resolveSlot } from '../../_utils'
+import { createKey, resolveSlot } from '../../_utils'
 import bubbleLight from '../styles/light'
 import style from './styles/index.cssr'
 
 export const bubbleProps = {
   ...(useTheme.props as ThemeProps<BubbleTheme>),
   placement: {
-      type: String as PropType<BubblePlacement>,
-      default: 'start'
+    type: String as PropType<BubblePlacement>,
+    default: 'start'
   },
   variant: {
     type: String as PropType<BubbleVariant>,
@@ -47,16 +55,18 @@ export const bubbleProps = {
   isMarkdown: {
     type: Boolean,
     default: false
-  }
+  },
+  gap: [String, Number] as PropType<string | number>
 }
+
+export type BubbleProps = ExtractPublicPropTypes<typeof bubbleProps>
 
 export default defineComponent({
   name: 'Bubble',
   props: bubbleProps,
   slots: Object as SlotsType<BubbleSlots>,
   setup(props) {
-    const { inlineThemeDisabled, mergedClsPrefixRef }
-            = useConfig(props)
+    const { inlineThemeDisabled, mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Bubble',
       '-bubble',
@@ -66,8 +76,43 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const cssVarsRef = computed(() => {
+      const { gap: propGap } = props
+      const {
+        self: {
+          gap,
+          fontSize,
+          lineHeight,
+          borderRadius,
+          contentWrapperMaxWidth,
+          contentPadding,
+          contentMinHeight,
+          cornerBorderRadius,
+          roundBorderRadius,
+          roundPaddingInline,
+          filledBackgroundColor,
+          outlinedBorder,
+          shadowBoxShadow
+        }
+      } = themeRef.value
       return {
-
+        '--n-gap':
+          propGap === undefined
+            ? gap
+            : typeof propGap === 'number'
+              ? pxfy(propGap)
+              : propGap,
+        '--n-font-size': fontSize,
+        '--n-line-height': lineHeight,
+        '--n-border-radius': borderRadius,
+        '--n-content-wrapper-max-width': contentWrapperMaxWidth,
+        '--n-content-padding': contentPadding,
+        '--n-content-min-height': contentMinHeight,
+        '--n-corner-border-radius': cornerBorderRadius,
+        '--n-round-border-radius': roundBorderRadius,
+        '--n-round-padding-inline': roundPaddingInline,
+        '--n-filled-background-color': filledBackgroundColor,
+        '--n-outlined-border': outlinedBorder,
+        '--n-shadow-box-shadow': shadowBoxShadow
       }
     })
     const themeClassHandle = inlineThemeDisabled
@@ -78,16 +123,11 @@ export default defineComponent({
       mergedTheme: themeRef,
       mergedClsPrefix: mergedClsPrefixRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
-      themeClass: themeClassHandle?.themeClass,
+      themeClass: themeClassHandle?.themeClass
     }
   },
   render() {
-    const {
-      mergedClsPrefix,
-      mergedTheme,
-      $slots,
-      loading
-    } = this
+    const { mergedClsPrefix, mergedTheme, $slots, loading } = this
     return (
       <div
         class={[
@@ -98,49 +138,26 @@ export default defineComponent({
         ]}
         style={this.cssVars as CSSProperties}
       >
-        {
-          !$slots.avatar && this.avatar && (
-            <div
-              class={[
-                `${mergedClsPrefix}-bubble__avatar`,
-              ]}
-            >
-              <NAvatar
-                src={this.avatar}
-                theme={mergedTheme.peers.Avatar}
-                themeOverrides={mergedTheme.peerOverrides.Avatar}
-              />
-            </div>
-          )
-        }
-        {
-          $slots.avatar && (
-            <div
-              class={[
-                `${mergedClsPrefix}-bubble__avatar`,
-              ]}
-            >
-              {$slots.avatar()}
-            </div>
-          )
-        }
+        {($slots.avatar || this.avatar) && (
+          <div class={[`${mergedClsPrefix}-bubble__avatar`]}>
+            {resolveSlot($slots.avatar, () => [
+              this.avatar && (
+                <NAvatar
+                  src={this.avatar}
+                  theme={mergedTheme.peers.Avatar}
+                  themeOverrides={mergedTheme.peerOverrides.Avatar}
+                />
+              )
+            ])}
+          </div>
+        )}
 
-        <div
-          class={[
-            `${mergedClsPrefix}-bubble__content-wrapper`
-          ]}
-        >
-          {
-            $slots.header && (
-              <div
-                class={[
-                  `${mergedClsPrefix}-bubble__header`
-                ]}
-              >
-                {$slots.header()}
-              </div>
-            )
-          }
+        <div class={[`${mergedClsPrefix}-bubble__content-wrapper`]}>
+          {$slots.header && (
+            <div class={[`${mergedClsPrefix}-bubble__header`]}>
+              {$slots.header()}
+            </div>
+          )}
           <div
             class={[
               `${mergedClsPrefix}-bubble__content`,
@@ -148,83 +165,66 @@ export default defineComponent({
               this.shape && `${mergedClsPrefix}-bubble__content--${this.shape}`
             ]}
           >
-            {
-              loading ? (
-                <div class={[
-                  `${mergedClsPrefix}-bubble__loading-wrap`
-                ]}
-                >
-                  {
-                    resolveSlot(this.$slots.loading, () => [
-                      <div class={[
-                        `${mergedClsPrefix}-bubble__loading-dots`
+            {loading ? (
+              <div class={[`${mergedClsPrefix}-bubble__loading-wrap`]}>
+                {resolveSlot(this.$slots.loading, () => [
+                  <div class={[`${mergedClsPrefix}-bubble__loading-dots`]}>
+                    <div
+                      class={[
+                        `${mergedClsPrefix}-bubble__dot`,
+                        `${mergedClsPrefix}-bubble__dot-1`
                       ]}
-                      >
-                        <div
-                          class={[
-                            `${mergedClsPrefix}-bubble__dot`,
-                            `${mergedClsPrefix}-bubble__dot-1`
-                          ]}
-                        >
-                        </div>
-                        <div class={[
-                          `${mergedClsPrefix}-bubble__dot`,
-                          `${mergedClsPrefix}-bubble__dot-2`
-                        ]}
-                        >
-                        </div>
-                        <div class={[
-                          `${mergedClsPrefix}-bubble__dot`,
-                          `${mergedClsPrefix}-bubble__dot-3`
-                        ]}
-                        >
-                        </div>
-                        <div class={[
-                          `${mergedClsPrefix}-bubble__dot`,
-                          `${mergedClsPrefix}-bubble__dot-4`
-                        ]}
-                        >
-                        </div>
-                      </div>
-                    ])
-                  }
-                </div>
-              ) : (
-                this.isTyping ? (
-                  <NTypewriter content={this.content} isMarkdown={this.isMarkdown} options={this.options}>
-                    { this.$slots.content && { default: this.$slots.content } }
-                  </NTypewriter>
-                ) : (
-                  this.isMarkdown ? (
-                    <NMarkdown content={this.content}>
-                      {this.$slots.content && { default: this.$slots.content }}
-                    </NMarkdown>) 
-                  : (
-                    this.$slots.content
-                      ? this.$slots.content()
-                      : this.content
-                  )
-                )
-              )
-            }
-          </div>
-          {
-            $slots.footer && (
-              <div
-                class={[
-                  `${mergedClsPrefix}-bubble__footer`
-                ]}
-              >
-                <div
-                  class={[
-                    `${mergedClsPrefix}-bubble__footer--content`
-                  ]}
-                >
-                  {$slots.footer()}
-                </div>
+                    >
+                    </div>
+                    <div
+                      class={[
+                        `${mergedClsPrefix}-bubble__dot`,
+                        `${mergedClsPrefix}-bubble__dot-2`
+                      ]}
+                    >
+                    </div>
+                    <div
+                      class={[
+                        `${mergedClsPrefix}-bubble__dot`,
+                        `${mergedClsPrefix}-bubble__dot-3`
+                      ]}
+                    >
+                    </div>
+                    <div
+                      class={[
+                        `${mergedClsPrefix}-bubble__dot`,
+                        `${mergedClsPrefix}-bubble__dot-4`
+                      ]}
+                    >
+                    </div>
+                  </div>
+                ])}
               </div>
-            )
-          }
+            ) : this.isTyping ? (
+              <NTypewriter
+                content={this.content}
+                isMarkdown={this.isMarkdown}
+                options={this.options}
+              >
+                {this.$slots.content && { default: this.$slots.content }}
+              </NTypewriter>
+            ) : this.isMarkdown ? (
+              <NMarkdown content={this.content}>
+                {this.$slots.content && { default: this.$slots.content }}
+              </NMarkdown>
+            ) : this.$slots.content ? (
+              this.$slots.content()
+            ) : (
+              this.content
+            )}
+          </div>
+          {$slots.footer && (
+            <div class={[`${mergedClsPrefix}-bubble__footer`]}>
+              <div class={[`${mergedClsPrefix}-bubble__footer--content`]}>
+                {$slots.footer()}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     )

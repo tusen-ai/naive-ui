@@ -1,7 +1,7 @@
 <markdown>
-# 加载
+# Loading
 
-通过 `loading` 参数控制加载状态
+Control the `loading` state via the loading parameter.
 </markdown>
 
 <script lang="ts" setup>
@@ -24,7 +24,7 @@ const content = 'hello world  !'
     <n-bubble :content="content" />
 
     <n-space>
-      状态：
+      Loading：
       <n-switch v-model:value="loading" />
     </n-space>
   </n-space>
