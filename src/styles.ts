@@ -12,6 +12,7 @@ export { avatarDark } from './avatar/styles'
 export { backTopDark } from './back-top/styles'
 export { badgeDark, badgeRtl as unstableBadgeRtl } from './badge/styles'
 export { breadcrumbDark } from './breadcrumb/styles'
+export { bubbleDark } from './bubble/styles'
 export {
   buttonGroupDark,
   buttonGroupRtl as unstableButtonGroupRtl
@@ -100,8 +101,8 @@ export { timePickerDark } from './time-picker/styles'
 export { timelineDark } from './timeline/styles'
 export { tooltipDark } from './tooltip/styles'
 export { transferDark } from './transfer/styles'
-export { treeSelectDark } from './tree-select/styles'
 
+export { treeSelectDark } from './tree-select/styles'
 export { treeDark, treeRtl as unstableTreeRtl } from './tree/styles'
 export { typewriterDark } from './typewriter/styles'
 export { typographyDark } from './typography/styles'

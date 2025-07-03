@@ -11,3 +11,4 @@ export interface TypewriterSlots {
 }
 
 export type TypewriterDefaultSlot = (PROPS: { typedContent: string }) => VNode[]
+export interface TypewriterInst {}

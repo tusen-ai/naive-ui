@@ -19,20 +19,20 @@ options.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| content | `string` | `undefined` | The text content to be displayed | NEXT_VERSION |
-| isMarkdown | `Boolean` | `false` | Whether to enable Markdown rendering | NEXT_VERSION |
-| options | `TypewriterOptions` | `-` | Typing machine configuration | NEXT_VERSION |
+| content | `string` | `undefined` | The text content to be displayed. | NEXT_VERSION |
+| isMarkdown | `Boolean` | `false` | Whether to enable Markdown rendering. | NEXT_VERSION |
+| options | `TypewriterOptions` | `-` | Typing machine configuration. | NEXT_VERSION |
 
 ### TypewriterOptions
 
-| 参数 | Type | Default | Description | Version |
+| Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| interval | `number` | `80` | Interval | NEXT_VERSION |
-| step | `number \| [number, number]` | `1` | Each time the number of characters added is in an array, it is randomly assigned between two numbers | NEXT_VERSION |
-| initialIndex | `number` | `5` | Initial display of word count | NEXT_VERSION |
+| interval | `number` | `80` | Interval. | NEXT_VERSION |
+| step | `number \| [number, number]` | `1` | Each time the number of characters added is in an array, it is randomly assigned between two numbers. | NEXT_VERSION |
+| initialIndex | `number` | `5` | Initial display of word count. | NEXT_VERSION |
 
 ### Typewriter Slots
 
-| Name | 参数 | Type Alias | Description | Version |
+| Name | Type | Type Alias | Description | Version |
 | --- | --- | --- | --- | --- |
-| default | `(props: { typedContent: string })` | `TypewriterDefaultSlot` | Content rendering | NEXT_VERSION |
+| default | `(props: { typedContent: string })` | `TypewriterDefaultSlot` | Content rendering. | NEXT_VERSION |

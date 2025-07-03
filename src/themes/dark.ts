@@ -9,6 +9,7 @@ import { avatarDark } from '../avatar/styles'
 import { backTopDark } from '../back-top/styles'
 import { badgeDark } from '../badge/styles'
 import { breadcrumbDark } from '../breadcrumb/styles'
+import { bubbleDark } from '../bubble/styles'
 import { buttonGroupDark } from '../button-group/styles'
 import { buttonDark } from '../button/styles'
 import { calendarDark } from '../calendar/styles'
@@ -73,7 +74,7 @@ import { spinDark } from '../spin/styles'
 import { splitDark } from '../split/styles'
 import { statisticDark } from '../statistic/styles'
 import { stepsDark } from '../steps/styles'
-import { flexDark, inputOtpDark, typewriterDark } from '../styles'
+import { flexDark, inputOtpDark } from '../styles'
 import { switchDark } from '../switch/styles'
 import { tableDark } from '../table/styles'
 import { tabsDark } from '../tabs/styles'
@@ -85,6 +86,7 @@ import { tooltipDark } from '../tooltip/styles'
 import { transferDark } from '../transfer/styles'
 import { treeSelectDark } from '../tree-select/styles'
 import { treeDark } from '../tree/styles'
+import { typewriterDark } from '../typewriter/styles'
 import { typographyDark } from '../typography/styles'
 import { uploadDark } from '../upload/styles'
 import { watermarkDark } from '../watermark/styles'
@@ -181,5 +183,6 @@ export const darkTheme: BuiltInGlobalTheme = {
   FloatButtonGroup: floatButtonGroupDark,
   Marquee: marqueeDark,
   Markdown: markdownDark,
-  Typewriter: typewriterDark
+  Typewriter: typewriterDark,
+  Bubble: bubbleDark
 }

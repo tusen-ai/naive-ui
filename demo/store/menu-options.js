@@ -229,6 +229,13 @@ export function createComponentMenuOptions({ lang, theme }) {
           enSuffix: true,
           path: '/typewriter',
           isNew: true
+        },
+        {
+          en: 'Bubble',
+          zh: '对话气泡',
+          enSuffix: true,
+          path: '/bubble',
+          isNew: true
         }
       ]
     }),

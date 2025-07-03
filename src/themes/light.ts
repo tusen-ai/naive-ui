@@ -11,6 +11,7 @@ import { avatarLight } from '../avatar/styles'
 import { backTopLight } from '../back-top/styles'
 import { badgeLight } from '../badge/styles'
 import { breadcrumbLight } from '../breadcrumb/styles'
+import { bubbleLight } from '../bubble/styles'
 import { buttonGroupLight } from '../button-group/styles'
 import { buttonLight } from '../button/styles'
 import { calendarLight } from '../calendar/styles'
@@ -185,5 +186,6 @@ export const lightTheme: BuiltInGlobalTheme = {
   FloatButtonGroup: floatButtonGroupLight,
   Marquee: marqueeLight,
   Markdown: markdownLight,
-  Typewriter: typewriterLight
+  Typewriter: typewriterLight,
+  Bubble: bubbleLight
 }
