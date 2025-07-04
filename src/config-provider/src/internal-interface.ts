@@ -12,6 +12,7 @@ import type { AvatarTheme } from '../../avatar/styles'
 import type { BackTopTheme } from '../../back-top/styles'
 import type { BadgeTheme } from '../../badge/styles'
 import type { BreadcrumbTheme } from '../../breadcrumb/styles'
+import type { BubbleListTheme } from '../../bubble-list/styles'
 import type { BubbleTheme } from '../../bubble/styles'
 import type { ButtonGroupTheme } from '../../button-group/styles/light'
 import type { Size as ButtonSize } from '../../button/src/interface'
@@ -203,6 +204,7 @@ export interface GlobalThemeWithoutCommon {
   Markdown?: MarkdownTheme
   Typewriter?: TypewriterTheme
   Bubble?: BubbleTheme
+  BubbleList?: BubbleListTheme
 }
 
 export interface GlobalComponentConfig {

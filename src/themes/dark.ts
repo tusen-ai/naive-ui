@@ -9,6 +9,7 @@ import { avatarDark } from '../avatar/styles'
 import { backTopDark } from '../back-top/styles'
 import { badgeDark } from '../badge/styles'
 import { breadcrumbDark } from '../breadcrumb/styles'
+import { bubbleListDark } from '../bubble-list/styles'
 import { bubbleDark } from '../bubble/styles'
 import { buttonGroupDark } from '../button-group/styles'
 import { buttonDark } from '../button/styles'
@@ -184,5 +185,6 @@ export const darkTheme: BuiltInGlobalTheme = {
   Marquee: marqueeDark,
   Markdown: markdownDark,
   Typewriter: typewriterDark,
-  Bubble: bubbleDark
+  Bubble: bubbleDark,
+  BubbleList: bubbleListDark
 }

@@ -236,6 +236,13 @@ export function createComponentMenuOptions({ lang, theme }) {
           enSuffix: true,
           path: '/bubble',
           isNew: true
+        },
+        {
+          en: 'BubbleList',
+          zh: '对话列表',
+          enSuffix: true,
+          path: '/bubbleList',
+          isNew: true
         }
       ]
     }),

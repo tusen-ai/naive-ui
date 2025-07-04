@@ -59,7 +59,8 @@ export default c([
     cM('end', ``, [
       cE('content', ``, [
         cM('corner', `border-start-end-radius: var(--n-corner-border-radius)`)
-      ])
+      ]),
+      cE('footer', `align-items: flex-end;`)
     ]),
     cE('footer', `
         display: flex;
@@ -68,6 +69,9 @@ export default c([
         overflow: hidden;
         width: 100%;
         justify-content: flex-end;
+    `),
+    cM('content', `
+      justify-content: flex-end;
     `),
     cE('loading-wrap', `
       height: 100%;

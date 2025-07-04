@@ -12,6 +12,7 @@ export { avatarDark } from './avatar/styles'
 export { backTopDark } from './back-top/styles'
 export { badgeDark, badgeRtl as unstableBadgeRtl } from './badge/styles'
 export { breadcrumbDark } from './breadcrumb/styles'
+export { bubbleListDark } from './bubble-list/styles'
 export { bubbleDark } from './bubble/styles'
 export {
   buttonGroupDark,

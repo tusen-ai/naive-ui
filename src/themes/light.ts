@@ -11,6 +11,7 @@ import { avatarLight } from '../avatar/styles'
 import { backTopLight } from '../back-top/styles'
 import { badgeLight } from '../badge/styles'
 import { breadcrumbLight } from '../breadcrumb/styles'
+import { bubbleListLight } from '../bubble-list/styles'
 import { bubbleLight } from '../bubble/styles'
 import { buttonGroupLight } from '../button-group/styles'
 import { buttonLight } from '../button/styles'
@@ -187,5 +188,6 @@ export const lightTheme: BuiltInGlobalTheme = {
   Marquee: marqueeLight,
   Markdown: markdownLight,
   Typewriter: typewriterLight,
-  Bubble: bubbleLight
+  Bubble: bubbleLight,
+  BubbleList: bubbleListLight
 }

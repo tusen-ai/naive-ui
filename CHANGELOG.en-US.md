@@ -4,8 +4,10 @@
 
 ### Features
 
-- 🌟 Adds `n-markdown` component
-- 🌟 Adds `n-typewriter` component
+- 🌟 Adds `n-markdown` component.
+- 🌟 Adds `n-typewriter` component.
+- 🌟 Adds `n-bubble` component.
+- 🌟 Adds `n-bubble-list` component.
 
 ## 2.42.0
 

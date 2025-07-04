@@ -13,7 +13,7 @@ import { NAvatar, NMarkdown, NTypewriter } from 'naive-ui'
 import { pxfy } from 'seemly'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import { createKey, resolveSlot } from '../../_utils'
+import { resolveSlot } from '../../_utils'
 import bubbleLight from '../styles/light'
 import style from './styles/index.cssr'
 
@@ -200,6 +200,8 @@ export default defineComponent({
                   </div>
                 ])}
               </div>
+            ) : this.$slots?.content ? (
+              this.$slots.content()
             ) : this.isTyping ? (
               <NTypewriter
                 content={this.content}
@@ -212,17 +214,13 @@ export default defineComponent({
               <NMarkdown content={this.content}>
                 {this.$slots.content && { default: this.$slots.content }}
               </NMarkdown>
-            ) : this.$slots.content ? (
-              this.$slots.content()
             ) : (
               this.content
             )}
           </div>
           {$slots.footer && (
             <div class={[`${mergedClsPrefix}-bubble__footer`]}>
-              <div class={[`${mergedClsPrefix}-bubble__footer--content`]}>
-                {$slots.footer()}
-              </div>
+              {$slots.footer()}
             </div>
           )}
         </div>
