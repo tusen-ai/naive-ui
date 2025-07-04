@@ -3,7 +3,11 @@
 </markdown>
 
 <script lang="ts" setup>
-import type { BubbleListData, BubbleListInst, BubbleListRolesType } from 'naive-ui'
+import type {
+  BubbleListData,
+  BubbleListInst,
+  BubbleListRolesType
+} from 'naive-ui'
 import { reactive, ref } from 'vue'
 import 'vue-markdown-unified/dist/themes/prism.min.css'
 
@@ -13,10 +17,6 @@ const roles: BubbleListRolesType = {
   assistant: {
     placement: 'start',
     isTyping: true,
-    options: {
-      step: 5,
-      interval: 20
-    },
     variant: 'outlined',
     shape: 'corner',
     isMarkdown: true

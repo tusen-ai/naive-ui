@@ -1,2 +1,3 @@
-export { default as BubbleList } from './src/BubbleList'
+export { default as BubbleList, bubbleListProps } from './src/BubbleList'
+export type { BubbleListProps } from './src/BubbleList'
 export type * from './src/public-types'
