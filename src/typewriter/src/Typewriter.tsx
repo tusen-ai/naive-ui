@@ -11,7 +11,7 @@ import { NMarkdown } from 'naive-ui'
 import { computed, defineComponent, h, toRef } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { resolveSlotWithTypedProps } from '../../_utils'
-import bubbleLight from '../styles/light'
+import typewriterLight from '../styles/light'
 import { useTypewriter } from './hooks/useTypewriter'
 import style from './styles/index.cssr'
 
@@ -47,7 +47,7 @@ export default defineComponent({
       'Typewriter',
       '-typewriter',
       style,
-      bubbleLight,
+      typewriterLight,
       props,
       mergedClsPrefixRef
     )
