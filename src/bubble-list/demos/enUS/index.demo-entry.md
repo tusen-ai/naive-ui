@@ -17,6 +17,7 @@ autoScroll.vue
 | data | `BubbleListData[]` | `[]` | Bubble data list. | NEXT_VERSION |
 | roles | `Record<LLMRoleType, RoleType>` | `{}` | Set the default properties of the bubble. The `role` in `data` will be automatically matched. | NEXT_VERSION |
 | autoScroll | `boolean` | `true` | When the content is updated, scroll to the latest position automatically. If the user scrolls, the automatic scrolling will be paused. | NEXT_VERSION |
+| gap | `string \| number` | `undefined` | The distance between Bubble, if not set, will use the default value. | NEXT_VERSION |
 | scrollbar-props | `ScrollbarProps` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props). | NEXT_VERSION |
 
 ### BubbleList Slots

@@ -19,6 +19,7 @@ autoScroll.vue
 | data | `BubbleListData[]` | `[]` | 气泡数据列表 | NEXT_VERSION |
 | roles | `Record<LLMRoleType, RoleType>` | `{}` | 设置气泡默认属性，`data` 中的 `role` 会进行自动对应 | NEXT_VERSION |
 | autoScroll | `boolean` | `true` | 当内容更新时，自动滚动到最新位置。如果用户滚动，则会暂停自动滚动。 | NEXT_VERSION |
+| gap | `string \| number` | `undefined` | 行与行之间的距离，如果不设定将使用默认值 | NEXT_VERSION |
 | scrollbar-props | `ScrollbarProps` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props) | NEXT_VERSION |
 
 ### BubbleList Slots
