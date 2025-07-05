@@ -208,7 +208,7 @@ export default defineComponent({
       () => {
         if (props.data && props.data.length) {
           nextTick(() => {
-            if (!stopAutoScrollToBottom.value && scrollState.isNearBottom) {
+            if (!stopAutoScrollToBottom.value) {
               autoScroll()
             }
           })
