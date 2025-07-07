@@ -5,8 +5,23 @@
 自 `NEXT_VERSION` 开始提供。
 
 <n-alert title="注意" type="warning" style="margin-bottom: 16px;" :bordered="false">
-  由于包体积原因，Naive UI 不内置 Markdown 渲染逻辑。如果你需要使用 Markdown 组件，请确保你在使用之前已经安装了 vue-markdown-unified。
+  由于包体积原因，Naive UI 不内置 Markdown 渲染逻辑。如果你需要使用 Markdown 组件，请确保你在使用之前已经设定了 vue-markdown-unified。
 </n-alert>
+
+下面的代码展示了如何为 Markdown 设定 vue-markdown-unified。
+
+```html
+<template>
+  <n-config-provider :markdown="markdown">
+    <my-app />
+  </n-config-provider>
+</template>
+
+<script setup>
+  import { defineComponent } from 'vue'
+  import { markdown } from 'vue-markdown-unified'
+</script>
+```
 
 ## 演示
 

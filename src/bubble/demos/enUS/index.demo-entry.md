@@ -4,7 +4,7 @@
 
 Available since `NEXT_VERSION`.
 
-## 演示
+## Demos
 
 ```demo
 basic.vue
