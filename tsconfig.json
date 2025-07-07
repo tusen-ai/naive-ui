@@ -6,7 +6,7 @@
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
     "lib": ["ESNext", "DOM"],
-    "module": "ES6",
+    "module": "esnext",
     "moduleResolution": "Node",
     "paths": {
       "naive-ui": ["./src"]

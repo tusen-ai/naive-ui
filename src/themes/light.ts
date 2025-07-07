@@ -55,6 +55,7 @@ import { logLight } from '../log/styles'
 import { marqueeLight } from '../marquee/styles'
 import { mentionLight } from '../mention/styles'
 import { menuLight } from '../menu/styles'
+import { mermaidLight } from '../mermaid/styles'
 import { messageLight } from '../message/styles'
 import { modalLight } from '../modal/styles'
 import { notificationLight } from '../notification/styles'
@@ -181,5 +182,6 @@ export const lightTheme: BuiltInGlobalTheme = {
   Split: splitLight,
   FloatButton: floatButtonLight,
   FloatButtonGroup: floatButtonGroupLight,
-  Marquee: marqueeLight
+  Marquee: marqueeLight,
+  Mermaid: mermaidLight
 }

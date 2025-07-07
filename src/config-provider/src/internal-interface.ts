@@ -65,6 +65,7 @@ import type { LogTheme } from '../../log/styles'
 import type { MarqueeTheme } from '../../marquee/styles'
 import type { MentionTheme } from '../../mention/styles'
 import type { MenuTheme } from '../../menu/styles'
+import type { MermaidTheme } from '../../mermaid/styles'
 import type { MessageTheme } from '../../message/styles'
 import type { ModalTheme } from '../../modal/styles'
 import type { NotificationTheme } from '../../notification/styles'
@@ -197,6 +198,7 @@ export interface GlobalThemeWithoutCommon {
   InternalSelectMenu?: InternalSelectMenuTheme
   InternalSelection?: InternalSelectionTheme
   InputOtp?: InputOtpTheme
+  Mermaid?: MermaidTheme
 }
 
 export interface GlobalComponentConfig {

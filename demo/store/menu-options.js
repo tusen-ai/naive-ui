@@ -577,6 +577,13 @@ export function createComponentMenuOptions({ lang, theme }) {
           enSuffix: true,
           path: '/highlight',
           isNew: true
+        },
+        {
+          en: 'Mermaid',
+          zh: 'Mermaid',
+          enSuffix: true,
+          path: '/mermaid',
+          isNew: true
         }
       ]
     }),
