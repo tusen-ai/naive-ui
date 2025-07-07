@@ -14,6 +14,8 @@ declare module 'vue' {
     NBlockquote: (typeof import('naive-ui'))['NBlockquote']
     NBreadcrumb: (typeof import('naive-ui'))['NBreadcrumb']
     NBreadcrumbItem: (typeof import('naive-ui'))['NBreadcrumbItem']
+    NBubble: (typeof import('naive-ui'))['NBubble']
+    NBubbleList: (typeof import('naive-ui'))['NBubbleList']
     NButton: (typeof import('naive-ui'))['NButton']
     NButtonGroup: (typeof import('naive-ui'))['NButtonGroup']
     NCalendar: (typeof import('naive-ui'))['NCalendar']
@@ -155,7 +157,6 @@ declare module 'vue' {
     NUploadTrigger: (typeof import('naive-ui'))['NUploadTrigger']
     NVirtualList: (typeof import('naive-ui'))['NVirtualList']
     NWatermark: (typeof import('naive-ui'))['NWatermark']
-    NBubble: (typeof import('naive-ui'))['NBubble']
   }
 }
 export {}

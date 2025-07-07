@@ -1,10 +1,8 @@
 import type { CSSProperties, ExtractPublicPropTypes, PropType } from 'vue'
-import type { Components, PluggableList } from 'vue-markdown-unified'
-import type { ThemeProps } from '../../_mixins'
+import type { Components, Markdown, PluggableList, ThemeProps } from '../../_mixins'
 import type { MarkdownTheme } from '../styles/light'
 import { computed, defineComponent, h, toRef } from 'vue'
-import { Markdown } from 'vue-markdown-unified'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useConfig, useMarkdown, useTheme, useThemeClass } from '../../_mixins'
 import markdownLight from '../styles/light'
 import { useMarkdownComponents } from './hooks/useComponents'
 import style from './styles/index.cssr'
@@ -46,7 +44,8 @@ export const markdownProps = {
   components: {
     type: Object as PropType<Components>,
     default: () => {}
-  }
+  },
+  markdown: Object as PropType<typeof Markdown>
 }
 
 export type MarkdownProps = ExtractPublicPropTypes<typeof markdownProps>
@@ -56,6 +55,7 @@ export default defineComponent({
   props: markdownProps,
   setup(props) {
     const { inlineThemeDisabled, mergedClsPrefixRef } = useConfig(props)
+    const markdownRef = useMarkdown(props)
     const themeRef = useTheme(
       'Markdown',
       '-markdown',
@@ -103,7 +103,7 @@ export default defineComponent({
     const content = toRef(props, 'content')
     const renderedContent = computed(() => {
       try {
-        const res = Markdown(content.value, {
+        const res = markdownRef.value?.(content.value, {
           ...props,
           components: Components
         })
@@ -129,7 +129,7 @@ export default defineComponent({
         class={[`${mergedClsPrefix}-markdown`, this.themeClass]}
         style={this.cssVars as CSSProperties}
       >
-        {h(renderedContent)}
+        {renderedContent}
       </div>
     )
   }
