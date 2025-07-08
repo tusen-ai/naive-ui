@@ -4,11 +4,13 @@
 
 Available since `NEXT_VERSION`.
 
+## Prequisites
+
 <n-alert title="Attention" type="warning" style="margin-bottom: 16px;" :bordered="false">
 Due to package size considerations, Naive UI does not include Markdown rendering logic. If you need to use Markdown, make sure you have set  `vue-markdown-unified` before use.
 </n-alert>
 
-The following markdown shows how to set vue-markdown-unified of Code.
+The following markdown shows how to set vue-markdown-unified of Markdown.
 
 ```html
 <template>
