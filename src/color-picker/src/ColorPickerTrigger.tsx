@@ -1,6 +1,7 @@
 import { type HSLA, toHslaString } from 'seemly'
 import { defineComponent, h, inject, type PropType, type SlotsType } from 'vue'
 import { colorPickerInjectionKey } from './context'
+import { getWCAGContrast } from './utils'
 
 export default defineComponent({
   name: 'ColorPickerTrigger',
@@ -53,7 +54,7 @@ export default defineComponent({
               <div
                 class={`${clsPrefix}-color-picker-trigger__value`}
                 style={{
-                  color: hsla[2] > 50 || hsla[3] < 0.5 ? 'black' : 'white'
+                  color: getWCAGContrast(hsla) ? 'white' : 'black'
                 }}
               >
                 {renderLabel ? renderLabel(value) : value}
