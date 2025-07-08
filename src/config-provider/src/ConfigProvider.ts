@@ -1,4 +1,4 @@
-import type { defaultClsPrefix, type Hljs, Mermaid } from '../../_mixins'
+import type { Hljs, Mermaid } from '../../_mixins'
 import type { NDateLocale, NLocale } from '../../locales'
 import type {
   GlobalComponentConfig,
@@ -26,6 +26,7 @@ import {
   type PropType,
   provide
 } from 'vue'
+import { defaultClsPrefix } from '../../_mixins'
 import { warn } from '../../_utils'
 import { configProviderInjectionKey } from './context'
 
