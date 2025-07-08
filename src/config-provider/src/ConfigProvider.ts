@@ -1,3 +1,4 @@
+import type { defaultClsPrefix, type Hljs, Mermaid } from '../../_mixins'
 import type { NDateLocale, NLocale } from '../../locales'
 import type {
   GlobalComponentConfig,
@@ -25,7 +26,6 @@ import {
   type PropType,
   provide
 } from 'vue'
-import { defaultClsPrefix, type Hljs } from '../../_mixins'
 import { warn } from '../../_utils'
 import { configProviderInjectionKey } from './context'
 
@@ -45,6 +45,7 @@ export const configProviderProps = {
     default: 'div'
   },
   hljs: Object as PropType<Hljs>,
+  mermaid: Object as PropType<Mermaid>,
   katex: Object as PropType<Katex>,
   theme: Object as PropType<GlobalTheme | null>,
   themeOverrides: Object as PropType<GlobalThemeOverrides | null>,
@@ -217,6 +218,12 @@ export default defineComponent({
       mergedHljsRef: computed(() => {
         const { hljs } = props
         return hljs === undefined ? NConfigProvider?.mergedHljsRef.value : hljs
+      }),
+      mergedMermaidRef: computed(() => {
+        const { mermaid } = props
+        return mermaid === undefined
+          ? NConfigProvider?.mergedMermaidRef.value
+          : mermaid
       }),
       mergedKatexRef: computed(() => {
         const { katex } = props

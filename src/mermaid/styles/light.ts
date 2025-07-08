@@ -1,14 +1,9 @@
 import { createTheme } from '../../_mixins'
 import { commonLight } from '../../_styles/common'
 
-export function self() {
-  return {}
-}
-
 const mermaidLight = createTheme({
   name: 'Mermaid',
-  common: commonLight,
-  self
+  common: commonLight
 })
 
 export default mermaidLight

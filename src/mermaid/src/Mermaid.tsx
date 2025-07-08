@@ -1,13 +1,14 @@
-import type { CSSProperties, ImgHTMLAttributes, PropType } from 'vue'
-import type { ThemeProps } from '../../_mixins'
+import type { ImgHTMLAttributes, PropType } from 'vue'
+import type { MermaidConfig, ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { MermaidTheme } from '../styles/light'
 import { NImage } from 'naive-ui'
 import { createId } from 'seemly'
 import { computed, defineComponent, h, ref, watchEffect } from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useConfig, useMermaid, useTheme } from '../../_mixins'
 import mermaidLight from '../styles/light'
-import { useMermaid } from './hooks/useMermaid'
+import { mermaidThemes } from './const'
+import { useMermaidContent } from './hooks/useMermaidContent'
 import style from './styles/index.cssr'
 
 export const mermaidProps = {
@@ -27,7 +28,15 @@ export const mermaidProps = {
     default: 'contain'
   },
   imgProps: Object as PropType<ImgHTMLAttributes>,
-  previewedImgProps: Object as PropType<ImgHTMLAttributes>
+  previewedImgProps: Object as PropType<ImgHTMLAttributes>,
+  mermaidTheme: {
+    type: String as PropType<MermaidConfig['theme']>,
+    default: 'default'
+  },
+  themeVariables: {
+    type: Object as PropType<Record<string, any>>,
+    default: undefined
+  }
 }
 
 export type MermaidProps = ExtractPublicPropTypes<typeof mermaidProps>
@@ -36,7 +45,7 @@ export default defineComponent({
   name: 'Mermaid',
   props: mermaidProps,
   setup(props) {
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Mermaid',
       '-mermaid',
@@ -46,19 +55,18 @@ export default defineComponent({
       mergedClsPrefixRef
     )
 
-    const cssVarsRef = computed(() => {
-      // eslint-disable-next-line no-empty-pattern
-      const {} = themeRef.value
-      return {}
+    const background = computed(() => {
+      return mermaidThemes.find(item => item.id === props.mermaidTheme)
+        ?.background
     })
 
-    const themeClassHandle = inlineThemeDisabled
-      ? useThemeClass('mermaid', undefined, cssVarsRef, props)
-      : undefined
+    const mermaid = useMermaid(props)
 
     const batchId = createId()
-    const { svg, isLoading } = useMermaid(props.value, {
-      id: `mermaid-${batchId}`
+    const { svg, isLoading } = useMermaidContent(mermaid, props.value, {
+      id: `mermaid-${batchId}`,
+      theme: props.mermaidTheme,
+      themeVariables: props.themeVariables
     })
 
     const blobUrl = ref('')
@@ -74,20 +82,14 @@ export default defineComponent({
     return {
       mergedTheme: themeRef,
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
-      themeClass: themeClassHandle?.themeClass,
-      onRender: themeClassHandle?.onRender,
-      blobUrl
+      blobUrl,
+      background
     }
   },
   render() {
-    const { mergedClsPrefix, themeClass, onRender, blobUrl } = this
-    onRender?.()
+    const { mergedClsPrefix, blobUrl } = this
     return (
-      <div
-        style={this.cssVars as CSSProperties}
-        class={[`${mergedClsPrefix}-mermaid`, themeClass]}
-      >
+      <div class={[`${mergedClsPrefix}-mermaid`]}>
         {blobUrl && (
           <NImage
             class={`${mergedClsPrefix}-mermaid-contain`}
@@ -96,8 +98,14 @@ export default defineComponent({
             alt="mermaid"
             objectFit={this.objectFit}
             previewDisabled={this.previewDisabled}
-            imgProps={this.imgProps}
-            previewedImgProps={this.previewedImgProps}
+            imgProps={{
+              style: { background: this.background },
+              ...this.imgProps
+            }}
+            previewedImgProps={{
+              style: { background: this.background },
+              ...this.previewedImgProps
+            }}
           />
         )}
       </div>

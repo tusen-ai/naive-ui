@@ -1,14 +1,14 @@
 <markdown>
-# Basic
+# Pie Chart
 </markdown>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-const value = ref(`sequenceDiagram
-    Alice->>John: Hello John, how are you?
-    John-->>Alice: Great!
-    Alice-)John: See you later!
+const value = ref(`pie title Pets adopted by volunteers
+    "Dogs" : 386
+    "Cats" : 85
+    "Rats" : 15
 `)
 </script>
 

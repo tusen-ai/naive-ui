@@ -6,7 +6,7 @@ export default c([
         height: auto;
     `),
   cB('mermaid-contain', `
-         width: 100%;
+        width: 100%;
         height: auto;
         overflow: auto;
     `)

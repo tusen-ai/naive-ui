@@ -1,14 +1,13 @@
 <markdown>
-# Basic
+# Kanban Diagram
 </markdown>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-const value = ref(`sequenceDiagram
-    Alice->>John: Hello John, how are you?
-    John-->>Alice: Great!
-    Alice-)John: See you later!
+const value = ref(`kanban
+  column1[Column Title]
+    task1[Task Description]
 `)
 </script>
 

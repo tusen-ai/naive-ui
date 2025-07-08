@@ -1,3 +1,4 @@
+import mermaid from 'mermaid'
 import {
   darkTheme,
   dateEnUS,
@@ -131,6 +132,7 @@ export function siteSetup() {
     }),
     configProvider: configProviderRef,
     hljs,
+    mermaid,
     themeName: themeNameRef,
     theme: themeRef,
     locale: localeRef,

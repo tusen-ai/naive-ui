@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+## Features
+
+- 🌟 新增 `n-mermaid` 组件
+
 ## 2.42.0
 
 ### Breaking Changes

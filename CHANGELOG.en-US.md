@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+## Features
+
+- 🌟 Adds `n-mermaid` component.
+
 ## 2.42.0
 
 ### Breaking Changes
