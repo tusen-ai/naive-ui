@@ -3,17 +3,18 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import type { InputTheme } from '../styles'
 import type { Size } from './interface'
 import { computed, defineComponent, h, type PropType } from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import { createKey } from '../../_utils'
 import { inputLight } from '../styles'
 import style from './styles/input-group-label.cssr'
 
 export const inputGroupLabelProps = {
   ...(useTheme.props as ThemeProps<InputTheme>),
-  size: {
-    type: String as PropType<Size>,
-    default: 'medium'
-  },
+  // size: {
+  //   type: String as PropType<Size | undefined>,
+  //   default: undefined
+  // },
+  size: String as PropType<Size>,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -30,6 +31,9 @@ export default defineComponent({
   setup(props) {
     const { mergedBorderedRef, mergedClsPrefixRef, inlineThemeDisabled }
       = useConfig(props)
+    // form-item
+    const formItem = useFormItem(props) // medium 默认值， 思路：让他受外部包裹的 form-item 的 size 控制？如何实现？
+    const { mergedSizeRef } = formItem
     const themeRef = useTheme(
       'Input',
       '-input-group-label',
@@ -39,7 +43,7 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const cssVarsRef = computed(() => {
-      const { size } = props
+      const { value: size } = mergedSizeRef
       const {
         common: { cubicBezierEaseInOut },
         self: {
@@ -66,7 +70,10 @@ export default defineComponent({
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
           'input-group-label',
-          computed(() => props.size[0]),
+          computed(() => {
+            const { value: size } = mergedSizeRef
+            return size[0]
+          }),
           cssVarsRef,
           props
         )
