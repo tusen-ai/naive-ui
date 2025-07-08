@@ -6,14 +6,11 @@ import { computed, defineComponent, h, type PropType } from 'vue'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import { createKey } from '../../_utils'
 import { inputLight } from '../styles'
+
 import style from './styles/input-group-label.cssr'
 
 export const inputGroupLabelProps = {
   ...(useTheme.props as ThemeProps<InputTheme>),
-  // size: {
-  //   type: String as PropType<Size | undefined>,
-  //   default: undefined
-  // },
   size: String as PropType<Size>,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
@@ -31,8 +28,7 @@ export default defineComponent({
   setup(props) {
     const { mergedBorderedRef, mergedClsPrefixRef, inlineThemeDisabled }
       = useConfig(props)
-    // form-item
-    const formItem = useFormItem(props) // medium 默认值， 思路：让他受外部包裹的 form-item 的 size 控制？如何实现？
+    const formItem = useFormItem(props)
     const { mergedSizeRef } = formItem
     const themeRef = useTheme(
       'Input',
