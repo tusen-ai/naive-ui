@@ -122,6 +122,12 @@ const uzUZ: NLocale = {
     tipDownload: 'Yuklab olish',
     tipClose: 'Yopish (Esc)',
     tipOriginalSize: 'Asl o`lchamga qaytish'
+  },
+  Heatmap: {
+    less: 'less',
+    more: 'more',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

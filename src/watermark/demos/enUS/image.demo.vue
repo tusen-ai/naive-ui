@@ -6,16 +6,10 @@ Put image here.
 Please note about cross origin setting of the image URL. It will influence whether the image can be displayed.
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      show: ref(false)
-    }
-  }
-})
+const show = ref(false)
 </script>
 
 <template>

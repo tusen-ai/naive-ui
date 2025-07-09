@@ -4,9 +4,9 @@
 级联选择有 `small`、`medium` 和 `large` 尺寸。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { CascaderOption } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 function getOptions(depth = 2, iterator = 1, prefix = '') {
   const length = 12
@@ -39,14 +39,8 @@ function getOptions(depth = 2, iterator = 1, prefix = '') {
   return options
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      value: ref(null),
-      options: getOptions()
-    }
-  }
-})
+const value = ref(null)
+const options = getOptions()
 </script>
 
 <template>

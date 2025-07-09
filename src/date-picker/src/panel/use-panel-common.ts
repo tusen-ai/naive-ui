@@ -30,7 +30,7 @@ const usePanelCommonProps = {
     type: Boolean,
     default: undefined
   },
-  timerPickerFormat: {
+  timePickerFormat: {
     type: String,
     value: TIME_FORMAT
   },

@@ -6,42 +6,34 @@
 如果你希望拖拽完全自定义 modal 的内容，你可以使用 `default` 插槽内的 `draggableClass`，设定在你希望触发拖拽的元素上。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useModal } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  data() {
-    const modal = useModal()
+const modal = useModal()
 
-    function showDialogPreset() {
-      modal.create({
-        title: 'Dialog 预设拖拽',
-        draggable: true,
-        preset: 'dialog',
-        content: '无意义的内容....'
-      })
-    }
+const showModal1 = ref(false)
+const showModal2 = ref(false)
+const showModal3 = ref(false)
+const showModal4 = ref(false)
 
-    function showCardPreset() {
-      modal.create({
-        title: 'Card 预设拖拽',
-        draggable: true,
-        preset: 'card',
-        content: '无意义的内容....'
-      })
-    }
+function showDialogPreset() {
+  modal.create({
+    title: 'Dialog 预设拖拽',
+    draggable: true,
+    preset: 'dialog',
+    content: '无意义的内容....'
+  })
+}
 
-    return {
-      showModal1: ref(false),
-      showModal2: ref(false),
-      showModal3: ref(false),
-      showModal4: ref(false),
-      showCardPreset,
-      showDialogPreset
-    }
-  }
-})
+function showCardPreset() {
+  modal.create({
+    title: 'Card 预设拖拽',
+    draggable: true,
+    preset: 'card',
+    content: '无意义的内容....'
+  })
+}
 </script>
 
 <template>

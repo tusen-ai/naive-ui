@@ -2,22 +2,16 @@
 # No icon
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      createMessage() {
-        message.warning('I never needed anybody\'s help in any way', {
-          showIcon: false
-        })
-      }
-    }
-  }
-})
+const message = useMessage()
+
+function createMessage() {
+  message.warning('I never needed anybody\'s help in any way', {
+    showIcon: false
+  })
+}
 </script>
 
 <template>

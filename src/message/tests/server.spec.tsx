@@ -6,7 +6,7 @@ import { renderToString } from '@vue/server-renderer'
 import { createSSRApp, defineComponent, h } from 'vue'
 import { NMessageProvider, useMessage } from '../..'
 
-describe('sSR', () => {
+describe('server side rendering', () => {
   it('works', async () => {
     const Component = defineComponent({
       setup() {

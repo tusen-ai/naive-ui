@@ -1,5 +1,5 @@
 import type { ThemeProps } from '../../_mixins'
-import type { FormValidationStatus } from '../../form/src/interface'
+import type { FormValidationStatus } from '../../form/src/public-types'
 import type { PopoverProps } from '../../popover'
 import type { SelectBaseOption, SelectOption } from '../../select/src/interface'
 import type {
@@ -1016,6 +1016,7 @@ export default defineComponent({
                                 themeOverrides={mergedTheme.peerOverrides.Tree}
                                 defaultExpandAll={this.defaultExpandAll}
                                 defaultExpandedKeys={this.defaultExpandedKeys}
+                                indent={this.indent}
                                 expandedKeys={this.mergedExpandedKeys}
                                 checkedKeys={this.treeCheckedKeys}
                                 selectedKeys={this.treeSelectedKeys}

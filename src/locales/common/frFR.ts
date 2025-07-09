@@ -122,6 +122,12 @@ const frFR: NLocale = {
     tipDownload: 'Descargar',
     tipClose: 'Fermer (Échap.)',
     tipOriginalSize: 'Zoom à la taille originale'
+  },
+  Heatmap: {
+    less: 'moins',
+    more: 'plus',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

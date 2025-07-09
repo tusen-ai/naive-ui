@@ -14,6 +14,7 @@ size.vue
 radio-focus-debug.vue
 rtl-debug.vue
 uncontrolled-debug.vue
+tooltip-debug.vue
 ```
 
 ## API

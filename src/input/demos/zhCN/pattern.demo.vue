@@ -4,18 +4,11 @@
 使用 `allow-input` 限制输入框的输入格式，你可以使用它来达到 `trim` 的效果。
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup() {
-    return {
-      onlyAllowNumber: (value: string) => !value || /^\d+$/.test(value),
-      noSideSpace: (value: string) =>
-        !value.startsWith(' ') && !value.endsWith(' ')
-    }
-  }
-})
+<script lang="ts" setup>
+const onlyAllowNumber = (value: string) => !value || /^\d+$/.test(value)
+function noSideSpace(value: string) {
+  return !value.startsWith(' ') && !value.endsWith(' ')
+}
 </script>
 
 <template>

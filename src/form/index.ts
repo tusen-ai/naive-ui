@@ -25,3 +25,5 @@ export type {
   FormRules,
   FormValidationError
 } from './src/interface'
+
+export type * from './src/public-types'

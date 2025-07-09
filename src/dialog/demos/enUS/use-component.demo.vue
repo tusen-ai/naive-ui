@@ -4,23 +4,18 @@
 Sometimes you may want to use a component.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      handleNegativeClick() {
-        message.warning('Cancel')
-      },
-      handlePositiveClick() {
-        message.success('Confirm')
-      }
-    }
-  }
-})
+const message = useMessage()
+
+function handleNegativeClick() {
+  message.warning('Cancel')
+}
+
+function handlePositiveClick() {
+  message.success('Confirm')
+}
 </script>
 
 <template>

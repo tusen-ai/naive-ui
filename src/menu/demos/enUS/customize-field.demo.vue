@@ -4,7 +4,7 @@
 Various data would come from backend, you can customize `key`, `label` and `children`'s field name.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { MenuOption } from 'naive-ui'
 import type { Component } from 'vue'
 import {
@@ -13,7 +13,7 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
 import { NIcon } from 'naive-ui'
-import { defineComponent, h, ref } from 'vue'
+import { h, ref } from 'vue'
 
 function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
@@ -94,14 +94,7 @@ const menuOptions: MenuOption[] = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    return {
-      collapsed: ref(true),
-      menuOptions
-    }
-  }
-})
+const collapsed = ref(true)
 </script>
 
 <template>

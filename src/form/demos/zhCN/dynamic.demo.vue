@@ -4,47 +4,35 @@
 动态增加、删除表单项。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { FormInst } from 'naive-ui'
-import { defineComponent, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const formRef = ref<FormInst | null>(null)
+const formRef = ref<FormInst | null>(null)
 
-    const dynamicForm = reactive({
-      name: '',
-      hobbies: [{ hobby: '' }]
-    })
-
-    const removeItem = (index: number) => {
-      dynamicForm.hobbies.splice(index, 1)
-    }
-
-    const addItem = () => {
-      dynamicForm.hobbies.push({ hobby: '' })
-    }
-
-    const handleValidateClick = () => {
-      formRef.value?.validate((errors) => {
-        if (!errors) {
-          console.log('验证通过')
-        }
-        else {
-          console.log(errors)
-        }
-      })
-    }
-
-    return {
-      formRef,
-      dynamicForm,
-      addItem,
-      removeItem,
-      handleValidateClick
-    }
-  }
+const dynamicForm = reactive({
+  name: '',
+  hobbies: [{ hobby: '' }]
 })
+
+function removeItem(index: number) {
+  dynamicForm.hobbies.splice(index, 1)
+}
+
+function addItem() {
+  dynamicForm.hobbies.push({ hobby: '' })
+}
+
+function handleValidateClick() {
+  formRef.value?.validate((errors) => {
+    if (!errors) {
+      console.log('验证通过')
+    }
+    else {
+      console.log(errors)
+    }
+  })
+}
 </script>
 
 <template>

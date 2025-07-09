@@ -4,9 +4,9 @@
 **Tip: When `virtual-scroll` is `true`, `rowSpan` will not take effect.**
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DataTableColumns } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 
 interface RowData {
   key: number
@@ -63,20 +63,12 @@ const columns: DataTableColumns<RowData> = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    const data: RowData[] = Array.from({ length: 5000 }).map((_, index) => ({
-      key: index,
-      name: `Edward King ${index}`,
-      age: 32,
-      address: `London, Park Lane no. ${index}`
-    }))
-    return {
-      data,
-      columns
-    }
-  }
-})
+const data: RowData[] = Array.from({ length: 5000 }).map((_, index) => ({
+  key: index,
+  name: `Edward King ${index}`,
+  age: 32,
+  address: `London, Park Lane no. ${index}`
+}))
 </script>
 
 <template>

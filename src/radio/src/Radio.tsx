@@ -108,18 +108,6 @@ export default defineComponent({
         ]}
         style={this.cssVars as CSSProperties}
       >
-        <input
-          ref="inputRef"
-          type="radio"
-          class={`${mergedClsPrefix}-radio-input`}
-          value={this.value}
-          name={this.mergedName}
-          checked={this.renderSafeChecked}
-          disabled={this.mergedDisabled}
-          onChange={this.handleRadioInputChange}
-          onFocus={this.handleRadioInputFocus}
-          onBlur={this.handleRadioInputBlur}
-        />
         <div class={`${mergedClsPrefix}-radio__dot-wrapper`}>
           &nbsp;
           <div
@@ -127,6 +115,18 @@ export default defineComponent({
               `${mergedClsPrefix}-radio__dot`,
               this.renderSafeChecked && `${mergedClsPrefix}-radio__dot--checked`
             ]}
+          />
+          <input
+            ref="inputRef"
+            type="radio"
+            class={`${mergedClsPrefix}-radio-input`}
+            value={this.value}
+            name={this.mergedName}
+            checked={this.renderSafeChecked}
+            disabled={this.mergedDisabled}
+            onChange={this.handleRadioInputChange}
+            onFocus={this.handleRadioInputFocus}
+            onBlur={this.handleRadioInputBlur}
           />
         </div>
         {resolveWrappedSlot($slots.default, (children) => {

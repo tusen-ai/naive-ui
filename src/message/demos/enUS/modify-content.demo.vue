@@ -2,47 +2,37 @@
 # Modify exist message
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { MessageReactive, MessageType } from 'naive-ui'
 import { useMessage } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    const types: MessageType[] = [
-      'success',
-      'info',
-      'warning',
-      'error',
-      'loading'
-    ]
-    const countRef = ref(0)
-    let typeIndex = 0
-    let msgReactive: MessageReactive | null = null
+const message = useMessage()
+const types: MessageType[] = ['success', 'info', 'warning', 'error', 'loading']
+const countRef = ref(0)
+let typeIndex = 0
+let msgReactive: MessageReactive | null = null
 
-    return {
-      plus() {
-        if (msgReactive) {
-          countRef.value++
-          msgReactive.content = `${countRef.value}`
-        }
-      },
-      changeType() {
-        if (msgReactive) {
-          typeIndex = (typeIndex + 1) % types.length
-          msgReactive.type = types[typeIndex]
-        }
-      },
-      createMessage() {
-        msgReactive = message.create(`${countRef.value}`, {
-          type: types[typeIndex],
-          duration: 10000
-        })
-      }
-    }
+function plus() {
+  if (msgReactive) {
+    countRef.value++
+    msgReactive.content = `${countRef.value}`
   }
-})
+}
+
+function changeType() {
+  if (msgReactive) {
+    typeIndex = (typeIndex + 1) % types.length
+    msgReactive.type = types[typeIndex]
+  }
+}
+
+function createMessage() {
+  msgReactive = message.create(`${countRef.value}`, {
+    type: types[typeIndex],
+    duration: 10000
+  })
+}
 </script>
 
 <template>
