@@ -368,11 +368,15 @@ export default defineComponent({
     }
     function isRealPrev(slideOrIndex: HTMLElement | number): boolean {
       const index = getSlideIndex(slideOrIndex)
-      return index !== null && getRealPrevIndex() === index
+      return (
+        index !== null && getRealPrevIndex() === index && totalViewRef.value > 1
+      )
     }
     function isRealNext(slideOrIndex: HTMLElement | number): boolean {
       const index = getSlideIndex(slideOrIndex)
-      return index !== null && getRealNextIndex() === index
+      return (
+        index !== null && getRealNextIndex() === index && totalViewRef.value > 1
+      )
     }
     function isRealActive(slideOrIndex: HTMLElement | number): boolean {
       return realIndexRef.value === getSlideIndex(slideOrIndex)
