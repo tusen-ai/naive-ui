@@ -99,7 +99,7 @@ export default defineComponent({
     const { mergedThemeRef, mergedClsPrefixRef } = inject(
       timePickerInjectionKey
     )!
-    const { dateLocaleRef } = useLocale('DatePicker')
+    const { localeRef } = useLocale('TimePicker')
 
     const hoursRef = computed<Item[]>(() => {
       const { isHourDisabled, hours, use12Hours, amPmValue } = props
@@ -176,12 +176,12 @@ export default defineComponent({
       }
       return [
         {
-          label: dateLocaleRef.value.locale.localize.dayPeriod('am'),
+          label: localeRef.value.am,
           value: 'am',
           disabled: amDisabled
         },
         {
-          label: dateLocaleRef.value.locale.localize.dayPeriod('pm'),
+          label: localeRef.value.pm,
           value: 'pm',
           disabled: pmDisabled
         }

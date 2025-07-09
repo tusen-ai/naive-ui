@@ -6,21 +6,21 @@ const daDK: NLocale = {
     undo: 'Fortryd',
     redo: 'Gentag',
     confirm: 'Bekræft',
-    clear: 'Ryd',
+    clear: 'Ryd'
   },
   Popconfirm: {
     positiveText: 'Bekræft',
-    negativeText: 'Annuller',
+    negativeText: 'Annuller'
   },
   Cascader: {
     placeholder: 'Vælg venligst',
     loading: 'Indlæser',
     loadingRequiredMessage: (label: string): string =>
-      `Indlæs venligst alle underpunkter til ${label} før du vælger punktet.`,
+      `Indlæs venligst alle underpunkter til ${label} før du vælger punktet.`
   },
   Time: {
     dateFormat: 'yyyy-MM-dd',
-    dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
+    dateTimeFormat: 'yyyy-MM-dd HH:mm:ss'
   },
   DatePicker: {
     yearFormat: 'yyyy',
@@ -51,30 +51,30 @@ const daDK: NLocale = {
     endMonthPlaceholder: 'Slutmåned',
     monthBeforeYear: true,
     firstDayOfWeek: 0 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
-    today: 'I dag',
+    today: 'I dag'
   },
   DataTable: {
     checkTableAll: 'Vælg alle',
     uncheckTableAll: 'Vælg ingen',
     confirm: 'Bekræft',
-    clear: 'Ryd',
+    clear: 'Ryd'
   },
   LegacyTransfer: {
     sourceTitle: 'Kilde',
-    targetTitle: 'Mål',
+    targetTitle: 'Mål'
   },
   Transfer: {
     selectAll: 'Vælg alle',
     unselectAll: 'Vælg ingen',
     clearAll: 'Ryd',
     total: (num: number): string => `I alt ${num} rækker`,
-    selected: (num: number): string => `${num} rækker valgt`,
+    selected: (num: number): string => `${num} rækker valgt`
   },
   Empty: {
-    description: 'Ingen data',
+    description: 'Ingen data'
   },
   Select: {
-    placeholder: 'Vælg venligst',
+    placeholder: 'Vælg venligst'
   },
   TimePicker: {
     placeholder: 'Vælg tid',
@@ -82,25 +82,27 @@ const daDK: NLocale = {
     negativeText: 'Annuller',
     now: 'Nu',
     clear: 'Ryd',
+    am: 'a.m.',
+    pm: 'p.m.'
   },
   Pagination: {
     goto: 'Gå til',
-    selectionSuffix: 'side',
+    selectionSuffix: 'side'
   },
   DynamicTags: {
-    add: 'Tilføj',
+    add: 'Tilføj'
   },
   Log: {
-    loading: 'Indlæser',
+    loading: 'Indlæser'
   },
   Input: {
-    placeholder: 'Udfyld venligst',
+    placeholder: 'Udfyld venligst'
   },
   InputNumber: {
-    placeholder: 'Udfyld venligst',
+    placeholder: 'Udfyld venligst'
   },
   DynamicInput: {
-    create: 'Opret',
+    create: 'Opret'
   },
   ThemeEditor: {
     title: 'Temaværktøj',
@@ -110,7 +112,7 @@ const daDK: NLocale = {
     filterVarName: 'Filtrer efter variabelnavn',
     import: 'Importér',
     export: 'Eksportér',
-    restore: 'Nulstil til oprindelige valg',
+    restore: 'Nulstil til oprindelige valg'
   },
   Image: {
     tipPrevious: 'Forrige billede (←)',
@@ -121,8 +123,8 @@ const daDK: NLocale = {
     tipZoomIn: 'Zoom ind',
     tipDownload: 'Download',
     tipClose: 'Luk (Esc)',
-    tipOriginalSize: 'Zoom til oprindelig størrelse',
-  },
+    tipOriginalSize: 'Zoom til oprindelig størrelse'
+  }
 }
 
 export default daDK

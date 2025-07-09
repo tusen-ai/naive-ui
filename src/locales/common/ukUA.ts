@@ -82,7 +82,9 @@ const ukUA: NLocale = {
     positiveText: 'OK',
     negativeText: 'Скасувати',
     now: 'Зараз',
-    clear: 'Стерти'
+    clear: 'Стерти',
+    am: 'ДП',
+    pm: 'ПП'
   },
   Pagination: {
     goto: 'Перейти',
