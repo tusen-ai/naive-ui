@@ -5,7 +5,7 @@
     "composite": false,
     "target": "ES6",
     "rootDirs": [".", "../generic"],
-    "module": "CommonJS",
+    "module": "es6",
     "noEmit": true
   },
   "include": ["./**/*.ts", "./**/*.tsx", "./**/*.vue"],
