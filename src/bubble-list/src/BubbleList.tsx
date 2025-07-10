@@ -153,7 +153,7 @@ export default defineComponent({
       const lastItem = listBubbles[listBubbles.length - 1]
       if (lastItem) {
         resizeObserver.value = new ResizeObserver(() => {
-          if (!stopAutoScrollToBottom.value && scrollState.isNearBottom) {
+          if (!stopAutoScrollToBottom.value) {
             scrollTo({ position: 'bottom' })
           }
         })
@@ -207,13 +207,12 @@ export default defineComponent({
       () => props.data.length,
       () => {
         if (props.data && props.data.length) {
-          nextTick(() => {
-            if (!stopAutoScrollToBottom.value) {
-              autoScroll()
-            }
-          })
+          stopAutoScrollToBottom.value = false
+          scrollState.isNearBottom = true
+          autoScroll()
         }
-      }
+      },
+      { immediate: true, flush: 'post' }
     )
 
     const exportedMethods: BubbleListInst = {
