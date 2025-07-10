@@ -24,6 +24,7 @@ import { imageContextKey, imagePreviewSharedProps } from './interface'
 import { observeIntersection } from './utils'
 
 export interface ImageInst {
+  click: () => void
   showPreview: () => void
 }
 

@@ -24,7 +24,7 @@ export const imageGroupInjectionKey = createInjectionKey<
     groupId: string
     mergedClsPrefixRef: Ref<string>
     renderToolbarRef: Ref<ImageRenderToolbar | undefined>
-    registerImageUrl: (id: number, url: string) => void
+    registerImageUrl: (id: number, url: string) => () => void
     toggleShow: (imageId: number) => void
   }
 >('n-image-group')
