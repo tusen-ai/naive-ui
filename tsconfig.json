@@ -12,7 +12,8 @@
       "naive-ui": ["./src"],
       "naive-ui/generic": ["./generic"]
     },
-    "types": ["vue/jsx", "jest"],
+    "resolveJsonModule": true,
+    "types": ["vue/jsx", "jest", "node"],
     "strict": true,
     "strictNullChecks": true,
     "noImplicitAny": true,

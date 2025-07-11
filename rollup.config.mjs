@@ -1,12 +1,16 @@
-const path = require('path')
-const merge = require('deepmerge')
-const { defineConfig } = require('rollup')
-const nodeResolve = require('@rollup/plugin-node-resolve').default
-const babel = require('@rollup/plugin-babel').default
-const replace = require('@rollup/plugin-replace')
-const commonjs = require('@rollup/plugin-commonjs')
-const esbuild = require('rollup-plugin-esbuild').default
-const terser = require('@rollup/plugin-terser')
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import babel from '@rollup/plugin-babel'
+import commonjs from '@rollup/plugin-commonjs'
+import nodeResolve from '@rollup/plugin-node-resolve'
+import replace from '@rollup/plugin-replace'
+import terser from '@rollup/plugin-terser'
+import merge from 'deepmerge'
+import { defineConfig } from 'rollup'
+import esbuild from 'rollup-plugin-esbuild'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const extensions = ['.mjs', '.js', '.json', '.ts']
 
@@ -94,7 +98,7 @@ const esmProdOutputConfig = defineConfig({
   }
 })
 
-module.exports = [
+export default [
   // umd dev
   merge.all([baseConfig, umdConfig, devConfig, umdDevOutputConfig]),
   // umd prod

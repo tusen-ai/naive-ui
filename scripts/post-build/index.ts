@@ -1,9 +1,8 @@
-// terse cssr
-// replace __DEV__
-const { replaceDefine, outDirs, srcDir } = require('../utils')
-const { completePath } = require('./complete-path')
-const { genWebTypes } = require('./gen-web-types')
-const { terseCssr } = require('./terse-cssr')
+import { outDirs, replaceDefine, srcDir } from '../utils'
+import { completePath } from './complete-path'
+import { genWebTypes } from './gen-web-types'
+import { terseCssr } from './terse-cssr'
+
 ;
 
 (async () => {

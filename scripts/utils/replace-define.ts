@@ -1,9 +1,12 @@
-const fs = require('node:fs').promises
-const { walk } = require('.')
+import { promises as fs } from 'node:fs'
+import { walk } from '.'
 
-exports.replaceDefine = async (dirs, defines) => {
+export async function replaceDefine(
+  dirs: string[],
+  defines: Record<string, string>
+): Promise<void> {
   const defineKeys = Object.keys(defines)
-  const patterns = {}
+  const patterns: Record<string, RegExp> = {}
   defineKeys.forEach((key) => {
     patterns[key] = new RegExp(key, 'g')
   })

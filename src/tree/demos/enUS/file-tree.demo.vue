@@ -16,10 +16,14 @@ import { h } from 'vue'
 
 const message = useMessage()
 
-function updatePrefixWithExpaned(_keys: Array<string | number>, _option: Array<TreeOption | null>, meta: {
-  node: TreeOption | null
-  action: 'expand' | 'collapse' | 'filter'
-}) {
+function updatePrefixWithExpaned(
+  _keys: Array<string | number>,
+  _option: Array<TreeOption | null>,
+  meta: {
+    node: TreeOption | null
+    action: 'expand' | 'collapse' | 'filter'
+  }
+) {
   if (!meta.node)
     return
   switch (meta.action) {

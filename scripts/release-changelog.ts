@@ -1,8 +1,9 @@
-import request from 'superagent'
-import url from 'url'
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
+import { env } from 'node:process'
+import url from 'node:url'
 import inquirer from 'inquirer'
+import request from 'superagent'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
@@ -13,13 +14,11 @@ const {
   DINGTALK_TOKEN_4,
   DINGTALK_TOKEN_5,
   DINGTALK_TOKEN_6
-} = process.env
+} = env
 
+const { DISCORD_TOKEN } = env
 
-const { DISCORD_TOKEN } = process.env
-
-
-async function releaseChangelogToDingTalk() {
+async function releaseChangelogToDingTalk(): Promise<void> {
   const allLog = fs
     .readFileSync(path.resolve(__dirname, '../CHANGELOG.zh-CN.md'), 'utf-8')
     .split(/^## /gm)[1]
@@ -53,28 +52,30 @@ async function releaseChangelogToDingTalk() {
           DINGTALK_TOKEN_5,
           DINGTALK_TOKEN_6
         ]) {
-          await request
-            .post('https://oapi.dingtalk.com/robot/send')
-            .query({
-              access_token: token
-            })
-            .type('application/json')
-            .send({
-              msgtype: 'markdown',
-              markdown: {
-                title,
-                text: `${title}\n\n${text}`
-              }
-            })
-            .then((res) => {
-              console.log(res.text)
-            })
+          if (token) {
+            await request
+              .post('https://oapi.dingtalk.com/robot/send')
+              .query({
+                access_token: token
+              })
+              .type('application/json')
+              .send({
+                msgtype: 'markdown',
+                markdown: {
+                  title,
+                  text: `${title}\n\n${text}`
+                }
+              })
+              .then((res) => {
+                console.log(res.text)
+              })
+          }
         }
       }
     })
 }
 
-async function releaseChangelogToDiscord() {
+async function releaseChangelogToDiscord(): Promise<void> {
   const changelog = fs
     .readFileSync(path.resolve(__dirname, '../CHANGELOG.en-US.md'), 'utf-8')
     .split(/^## /gm)[1]
@@ -94,21 +95,23 @@ async function releaseChangelogToDiscord() {
     .then((ans) => {
       if (ans['release-changelog']) {
         ;(async () => {
-          for (let i = 0; i < message.length; i += 1800) {
-            const part = message.slice(i, i + 1800)
-            await request
-              .post(`https://discord.com/api/webhooks/${DISCORD_TOKEN}`)
-              .type('application/json')
-              .send({
-                content: part
-              })
-              .then(() => {
-                console.log('done')
-              })
-              .catch((e) => {
-                console.error(e)
-                console.log('Error happens.')
-              })
+          if (DISCORD_TOKEN) {
+            for (let i = 0; i < message.length; i += 1800) {
+              const part = message.slice(i, i + 1800)
+              await request
+                .post(`https://discord.com/api/webhooks/${DISCORD_TOKEN}`)
+                .type('application/json')
+                .send({
+                  content: part
+                })
+                .then(() => {
+                  console.log('done')
+                })
+                .catch((e) => {
+                  console.error(e)
+                  console.log('Error happens.')
+                })
+            }
           }
         })()
       }
