@@ -1,7 +1,7 @@
 <markdown>
 # 单独使用多图预览组件
 
-单独使用 `<n-image-group>` 预览多张图片。
+`单独使用 <n-image-group> 预览多张图片`
 </markdown>
 
 <script lang="ts" setup>

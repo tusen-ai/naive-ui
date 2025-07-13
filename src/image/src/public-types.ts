@@ -17,3 +17,20 @@ export interface ImageRenderToolbarProps {
 export type ImageRenderToolbar = (props: ImageRenderToolbarProps) => VNodeChild
 export type ImageGroupRenderToolbarProps = ImageRenderToolbarProps
 export type ImageGroupRenderToolbar = ImageRenderToolbar
+
+export interface ImageInst {
+  click: () => void
+  showPreview: () => void
+}
+
+export interface ImageSlots {
+  placeholder?: ImagePlaceholderSlot
+  error?: ImageErrorSlot
+}
+
+export type ImagePlaceholderSlot = () => VNode[]
+export type ImageErrorSlot = () => VNode[]
+
+export interface ImagePreviewInst {
+  setThumbnailEl: (e: HTMLImageElement | null) => void
+}

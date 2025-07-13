@@ -18,6 +18,10 @@ const message = useMessage()
 function handleUpdateShow(value: boolean) {
   message.info(`${value}`)
 }
+
+function handleClose() {
+  message.info('close')
+}
 </script>
 
 <template>
@@ -28,5 +32,6 @@ function handleUpdateShow(value: boolean) {
     v-model:show="showRef"
     src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
     @update:show="handleUpdateShow"
+    @close="handleClose"
   />
 </template>

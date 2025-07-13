@@ -1,6 +1,6 @@
 import type { PropType, Ref } from 'vue'
-import type { ImagePreviewInst } from './ImagePreview'
-import type { ImageRenderToolbar } from './public-types'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { ImagePreviewInst, ImageRenderToolbar } from './public-types'
 import { isArray, isUndefined } from 'lodash-es'
 import { createId } from 'seemly'
 import { useMergedState } from 'vooks'
@@ -15,7 +15,8 @@ import {
   watch
 } from 'vue'
 import { useConfig } from '../../_mixins'
-import { createInjectionKey, type ExtractPublicPropTypes } from '../../_utils'
+import { call, createInjectionKey } from '../../_utils'
+
 import NImagePreview from './ImagePreview'
 import { imagePreviewSharedProps } from './interface'
 
@@ -24,7 +25,7 @@ export const imageGroupInjectionKey = createInjectionKey<
     groupId: string
     mergedClsPrefixRef: Ref<string>
     renderToolbarRef: Ref<ImageRenderToolbar | undefined>
-    registerImageUrl: (id: number, url: string) => () => void
+    registerImageUrl: (id: number, url: string) => void
     toggleShow: (imageId: number) => void
   }
 >('n-image-group')
@@ -45,7 +46,19 @@ export const imageGroupProps = {
     type: Boolean,
     default: undefined
   },
-  defaultShow: Boolean
+  defaultShow: Boolean,
+  onUpdateShow: [Function, Array] as PropType<
+    MaybeArray<(show: boolean) => void>
+  >,
+  'onUpdate:show': [Function, Array] as PropType<
+    MaybeArray<(show: boolean) => void>
+  >,
+  onUpdateCurrent: [Function, Array] as PropType<
+    MaybeArray<(current: number) => void>
+  >,
+  'onUpdate:current': [Function, Array] as PropType<
+    MaybeArray<(current: number) => void>
+  >
 }
 
 export type ImageGroupProps = ExtractPublicPropTypes<typeof imageGroupProps>
@@ -53,9 +66,8 @@ export type ImageGroupProps = ExtractPublicPropTypes<typeof imageGroupProps>
 export default defineComponent({
   name: 'ImageGroup',
   props: imageGroupProps,
-  emit: ['update:show', 'update:current', 'change'],
-  setup(props, { emit }) {
-    const { srcList, show } = toRefs(props)
+  setup(props) {
+    const { srcList } = toRefs(props)
 
     const { mergedClsPrefixRef } = useConfig(props)
     const groupId = `c${createId()}`
@@ -106,8 +118,13 @@ export default defineComponent({
 
     const setCurrentIndex = (index: number) => {
       if (index !== mergedCurrentRef.value) {
-        emit('change', index)
-        emit('update:current', index)
+        const { onUpdateCurrent, 'onUpdate:current': _onUpdateCurrent } = props
+        if (onUpdateCurrent) {
+          call(onUpdateCurrent, index)
+        }
+        if (_onUpdateCurrent) {
+          call(_onUpdateCurrent, index)
+        }
         uncontrolledCurrentRef.value = index
       }
     }
@@ -122,9 +139,19 @@ export default defineComponent({
 
     const currentUrl = computed(() => imageUrlMap.value.get(currentId.value))
 
+    function doUpdateShow(value: boolean): void {
+      const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
+      if (onUpdateShow) {
+        call(onUpdateShow, value)
+      }
+      if (_onUpdateShow) {
+        call(_onUpdateShow, value)
+      }
+      uncontrolledShowRef.value = value
+    }
+
     function onClose() {
-      emit('update:show', !show.value)
-      uncontrolledShowRef.value = false
+      doUpdateShow(false)
     }
 
     const nextIndex = computed(() => {
@@ -176,13 +203,19 @@ export default defineComponent({
         previewInstRef.value?.setThumbnailEl(el)
       },
       toggleShow: (imageId: number) => {
-        emit('update:show', true)
-        uncontrolledShowRef.value = true
+        doUpdateShow(true)
         setCurrentId(imageId)
       },
       groupId,
       renderToolbarRef: toRef(props, 'renderToolbar')
     })
+
+    watch(mergedShowRef, (value) => {
+      if (value) {
+        doUpdateShow(true)
+      }
+    })
+
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       previewInstRef,
