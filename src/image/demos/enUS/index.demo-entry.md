@@ -58,9 +58,9 @@ component-preview-group-debug.vue
 | render-toolbar | `(props: { nodes: { prev: VNode, next: VNode, rotateCounterclockwise: VNode, rotateClockwise: VNode, resizeToOriginalSize: VNode, zoomOut: VNode, zoomIn: VNode, download: VNode, close: VNode } }) => VNodeChild` | `undefined` | Toolbar rendering function. | `2.38.2` |
 | show-toolbar | `boolean` | `true` | Whether to show the bottom toolbar when the image enlarge. |  |
 | show-toolbar-tooltip | `boolean` | `false` | Whether to show toolbar buttons' tooltip. | 2.24.0 |
-| src-list | `string[]` | `undefined` | Picture list | NEXT_VERSION |
-| on-preview-next | `() => void` | `undefined` | Click the callback on the next slide |
-| on-preview-prev | `() => void` | `undefined` | Click the callback from the previous slide |  |
+| src-list | `string[]` | `undefined` | Picture list. | NEXT_VERSION |
+| on-preview-next | `() => void` | `undefined` | Click the callback on the next slide. |
+| on-preview-prev | `() => void` | `undefined` | Click the callback from the previous slide. |  |
 
 ### ImagePreview Props
 
@@ -84,9 +84,9 @@ component-preview-group-debug.vue
 
 ### Image Methods
 
-| Name        | Type         | Description                     | 版本 |
-| ----------- | ------------ | ------------------------------- | ---- |
-| showPreview | `() => void` | manually open preview big image |      |
+| Name        | Type         | Description                      | 版本 |
+| ----------- | ------------ | -------------------------------- | ---- |
+| showPreview | `() => void` | manually open preview big image. |      |
 
 ### ImageGroup Slots
 
