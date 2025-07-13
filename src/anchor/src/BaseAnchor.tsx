@@ -150,7 +150,7 @@ export default defineComponent({
       }
     }
 
-    let currentThrottleTimerId: number | undefined
+    let currentThrottleTimerId: ReturnType<typeof setTimeout> | undefined
     let hasTrailingThrottledTask = false
     let isInThrottledPeriod = false
     const handleScroll = () => {

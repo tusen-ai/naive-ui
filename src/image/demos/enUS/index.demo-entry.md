@@ -58,8 +58,21 @@ component-preview-group-debug.vue
 | render-toolbar | `(props: { nodes: { prev: VNode, next: VNode, rotateCounterclockwise: VNode, rotateClockwise: VNode, resizeToOriginalSize: VNode, zoomOut: VNode, zoomIn: VNode, download: VNode, close: VNode } }) => VNodeChild` | `undefined` | Toolbar rendering function. | `2.38.2` |
 | show-toolbar | `boolean` | `true` | Whether to show the bottom toolbar when the image enlarge. |  |
 | show-toolbar-tooltip | `boolean` | `false` | Whether to show toolbar buttons' tooltip. | 2.24.0 |
-| on-preview-prev | `() => void` | `undefined` | Click the callback from the previous slide |  |
+| src-list | `string[]` | `undefined` | Picture list | NEXT_VERSION |
 | on-preview-next | `() => void` | `undefined` | Click the callback on the next slide |
+| on-preview-prev | `() => void` | `undefined` | Click the callback from the previous slide |  |
+
+### ImagePreview Props
+
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| default-show | `boolean` | `undefined` | Whether to show the preview big image by default. | NEXT_VERSION |
+| render-toolbar | `(props: { nodes: { prev: VNode, next: VNode, rotateCounterclockwise: VNode, rotateClockwise: VNode, resizeToOriginalSize: VNode, zoomOut: VNode, zoomIn: VNode, download: VNode, close: VNode } }) => VNodeChild` | `undefined` | Toolbar rendering function. | NEXT_VERSION |
+| show | `boolean` | `undefined` | Whether to the show preview big image | NEXT_VERSION |
+| show-toolbar | `boolean` | `true` | Whether to show the bottom toolbar when the image enlarge. | NEXT_VERSION |
+| show-toolbar-tooltip | `boolean` | `false` | Whether to show toolbar buttons' tooltip. | NEXT_VERSION |
+| src | `string` | `undefined` | Image source. | NEXT_VERSION |
+| on-update:show | `(value: boolean) => void` | `undefined` | Callback on show status changes. | NEXT_VERSION |
 
 ### ImagePreview Props
 
@@ -80,6 +93,12 @@ component-preview-group-debug.vue
 | --- | --- | --- | --- |
 | placeholder | `()` | Placeholder shown when image is not loaded. | 2.30.5 |
 | error | `()` | The content when the image fails to load. | 2.40.2 |
+
+### Image Methods
+
+| Name        | Type         | Description                     | 版本 |
+| ----------- | ------------ | ------------------------------- | ---- |
+| showPreview | `() => void` | manually open preview big image |      |
 
 ### ImageGroup Slots
 

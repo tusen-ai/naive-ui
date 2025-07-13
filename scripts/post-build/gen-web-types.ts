@@ -1,17 +1,78 @@
-// I don't like web-types, why can't webstrom just work with typescript?
-const fs = require('node:fs')
-const path = require('node:path')
-const { kebabCase } = require('lodash')
+import fs from 'node:fs'
+import path, { dirname } from 'node:path'
+import process, { argv } from 'node:process'
+import { fileURLToPath } from 'node:url'
+import { kebabCase } from 'lodash'
+import * as components from '../../src/components'
+import version from '../../src/version'
 
-const baseDir = path.resolve(__dirname, '../..')
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+const baseDir = path.resolve(process.cwd())
 
-exports.genWebTypes = function genWebTypes() {
-  const components = require('../../lib/components')
-  const { default: version } = require('../../lib/version')
+interface WebTypesScaffold {
+  $schema: string
+  framework: string
+  name: string
+  version: string
+  'js-types-syntax': string
+  contributions: {
+    html: {
+      'vue-components': VueComponent[]
+    }
+  }
+}
 
-  const vueComponents = []
+interface VueComponent {
+  name: string
+  description?: string
+  'doc-url'?: string
+  source: {
+    symbol: string
+  }
+  slots: Slot[]
+  attributes: any[]
+  props: Prop[]
+  js: {
+    events: Event[]
+  }
+}
 
-  const scaffold = {
+interface Slot {
+  name: string
+  'doc-url'?: string
+  description?: string
+  type?: string
+  'description-sections'?: {
+    since: string
+  }
+}
+
+interface Prop {
+  name: string
+  'doc-url'?: string
+  type?: string
+  description?: string
+  default?: string
+  'description-sections'?: {
+    since: string
+  }
+}
+
+interface Event {
+  name: string
+  'doc-url'?: string
+  description?: string
+  type?: string
+  'description-sections'?: {
+    since: string
+  }
+}
+
+export function genWebTypes(): void {
+  const vueComponents: VueComponent[] = []
+
+  const scaffold: WebTypesScaffold = {
     $schema:
       'https://raw.githubusercontent.com/JetBrains/web-types/master/schema/web-types.json',
     framework: 'vue',
@@ -27,106 +88,110 @@ exports.genWebTypes = function genWebTypes() {
 
   const ignoredPropNames = ['theme', 'themeOverrides', 'builtinThemeOverrides']
 
-  Object.entries(components).forEach(([exportName, component]) => {
-    if (exportName[0] !== 'N')
-      return
-    if (exportName.startsWith('Nx'))
-      return
-
-    const {
-      props: docProps,
-      slots: docSlots,
-      description,
-      docUrl
-    } = loadDocs(component.name)
-
-    const { props: componentProps } = component
-    const name = exportName
-    const slots = []
-    const attributes = []
-    const props = []
-    const events = []
-    componentProps
-    && Object.entries(componentProps).forEach(([propName, prop]) => {
-      if (propName.startsWith('internal'))
+  Object.entries(components).forEach(
+    ([exportName, component]: [string, any]) => {
+      if (exportName[0] !== 'N')
         return
-      if (ignoredPropNames.includes(propName))
+      if (exportName.startsWith('Nx'))
         return
-      if (propName.startsWith('on') && /[A-Z]/.test(propName[2])) {
-        // is event
-        const event = {
-          name: kebabCase(propName.slice(2)),
+
+      const {
+        props: docProps,
+        slots: docSlots,
+        description,
+        docUrl
+      } = loadDocs(component.name)
+
+      const { props: componentProps } = component
+      const name = exportName
+      const slots: Slot[] = []
+      const attributes: any[] = []
+      const props: Prop[] = []
+      const events: Event[] = []
+      componentProps
+      && Object.entries(componentProps).forEach(
+        ([propName, prop]: [string, any]) => {
+          if (propName.startsWith('internal'))
+            return
+          if (ignoredPropNames.includes(propName))
+            return
+          if (propName.startsWith('on') && /[A-Z]/.test(propName[2])) {
+            // is event
+            const event: Event = {
+              name: kebabCase(propName.slice(2)),
+              'doc-url': docUrl
+            }
+            assignDocs(event, docProps[kebabCase(propName)])
+            delete docProps[kebabCase(propName)]
+            events.push(event)
+          }
+          else {
+            const resultProp: Prop = {
+              name: kebabCase(propName),
+              'doc-url': docUrl
+            }
+            const type = prop ? getType(prop) : null
+            if (type !== null) {
+              resultProp.type = type
+            }
+            assignDocs(resultProp, docProps[resultProp.name])
+            delete docProps[resultProp.name]
+            props.push(resultProp)
+          }
+        }
+      )
+
+      // Add the rest of the props and events from docs
+      for (const name in docProps) {
+        const prop: Prop = {
+          name,
           'doc-url': docUrl
         }
-        assignDocs(event, docProps[kebabCase(propName)])
-        delete docProps[kebabCase(propName)]
-        events.push(event)
+        assignDocs(prop, docProps[name])
+        if (prop.name.startsWith('on-')) {
+          ;(prop as any).name = prop.name.substring(3)
+          events.push(prop as any)
+        }
+        else {
+          props.push(prop)
+        }
       }
-      else {
-        const resultProp = {
-          name: kebabCase(propName),
+
+      for (const name in docSlots) {
+        const slot: Slot = {
+          name,
           'doc-url': docUrl
         }
-        const type = prop ? getType(prop) : null
-        if (type !== null) {
-          resultProp.type = type
+        assignDocs(slot, docSlots[name])
+        slots.push(slot)
+      }
+
+      vueComponents.push({
+        name,
+        description,
+        'doc-url': docUrl,
+        source: {
+          symbol: exportName
+        },
+        slots,
+        attributes,
+        props,
+        js: {
+          events
         }
-        assignDocs(resultProp, docProps[resultProp.name])
-        delete docProps[resultProp.name]
-        props.push(resultProp)
-      }
-    })
-
-    // Add the rest of the props and events from docs
-    for (const name in docProps) {
-      const prop = {
-        name,
-        'doc-url': docUrl
-      }
-      assignDocs(prop, docProps[name])
-      if (prop.name.startsWith('on-')) {
-        prop.name = prop.name.substring(3)
-        events.push(prop)
-      }
-      else {
-        props.push(prop)
-      }
+      })
     }
-
-    for (const name in docSlots) {
-      const slot = {
-        name,
-        'doc-url': docUrl
-      }
-      assignDocs(slot, docSlots[name])
-      slots.push(slot)
-    }
-
-    vueComponents.push({
-      name,
-      description,
-      'doc-url': docUrl,
-      source: {
-        symbol: exportName
-      },
-      slots,
-      attributes,
-      props,
-      js: {
-        events
-      }
-    })
-  })
+  )
 
   fs.writeFileSync(
-    path.resolve(__dirname, '../../web-types.json'),
-    JSON.stringify(scaffold, 0, 2),
+    path.resolve(process.cwd(), 'web-types.json'),
+    JSON.stringify(scaffold, null, 2),
     {
       encoding: 'utf-8'
     }
   )
 
-  function getType(prop) {
+  function getType(prop: any): string | null {
     if (typeof prop !== 'object' && typeof prop !== 'function') {
       console.error(`invalid prop: ${prop}`)
       return null
@@ -140,7 +205,7 @@ exports.genWebTypes = function genWebTypes() {
     return _getType(prop)
   }
 
-  function _getType(propType) {
+  function _getType(propType: any): string | null {
     if (Array.isArray(propType)) {
       const types = propType.map(mapType)
       if (types.includes(null))
@@ -150,28 +215,31 @@ exports.genWebTypes = function genWebTypes() {
     return mapType(propType)
   }
 
-  function mapType(type) {
-    switch (type) {
-      case String:
-        return 'string'
-      case Number:
-        return 'number'
-      case Boolean:
-        return 'boolean'
-      case Array:
-        return 'Array'
-      case Object:
-        return 'object'
-      case Function:
-        return 'Function'
-      case Date:
-        return 'Date'
+  function mapType(type: any): string | null {
+    const typeMap = new Map<any, string>([
+      [String, 'string'],
+      [Number, 'number'],
+      [Boolean, 'boolean'],
+      [Array, 'Array'],
+      [Object, 'object'],
+      [Function, 'Function'],
+      [Date, 'Date']
+    ])
+
+    if (typeMap.has(type)) {
+      return typeMap.get(type)!
     }
-    console.error(`unkown type ${type}`)
+
+    console.error(`unknown type ${type}`)
     return null
   }
 
-  function loadDocs(componentName) {
+  function loadDocs(componentName: string): {
+    props: Record<string, any>
+    slots: Record<string, any>
+    description?: string
+    docUrl?: string
+  } {
     let componentPath = kebabCase(componentName)
     switch (componentPath) {
       case 'row':
@@ -209,7 +277,7 @@ exports.genWebTypes = function genWebTypes() {
         componentPath = 'tabs'
         break
     }
-    let docsPath
+    let docsPath: string | undefined
     do {
       docsPath = path.resolve(
         baseDir,
@@ -223,7 +291,7 @@ exports.genWebTypes = function genWebTypes() {
       )
     } while (componentPath)
 
-    if (!componentPath) {
+    if (!componentPath || !docsPath) {
       console.log(`Docs not found for ${componentName}`)
       return {
         props: {},
@@ -242,7 +310,7 @@ exports.genWebTypes = function genWebTypes() {
       docUrl: `https://www.naiveui.com/en-US/os-theme/components/${componentPath}`
     }
 
-    function extractComponentDescription() {
+    function extractComponentDescription(): string | undefined {
       const description = docsFile.match(
         new RegExp(`#.*${componentName}\n(.*)## Demos`, 's')
       )
@@ -251,20 +319,20 @@ exports.genWebTypes = function genWebTypes() {
       }
     }
 
-    function extractSectionTable(sectionName) {
-      const result = {}
+    function extractSectionTable(sectionName: string): Record<string, any> {
+      const result: Record<string, any> = {}
       try {
         const sectionHeaderRegex = new RegExp(
           `##.*${componentName}[, ].*${sectionName}\n`
         )
         const location = docsFile.match(sectionHeaderRegex)
-        if (!location || location.index < 0)
+        if (!location || location.index === undefined || location.index < 0)
           return result
         let end = docsFile.indexOf('##', location.index + 3)
         if (end < 0)
           end = docsFile.length
 
-        const rowRegex = /\|((\\\||[^|])+)/g
+        const rowRegex = /\|((?:\\\||[^|])+)/g
         const sectionContents = docsFile.substring(
           location.index + location[0].length,
           end
@@ -287,7 +355,7 @@ exports.genWebTypes = function genWebTypes() {
           for (let i = 1; i < table.length; i++) {
             const row = table[i]
             const name = row[0]
-            const info = {}
+            const info: Record<string, any> = {}
             for (let j = 1; j < row.length; j++) {
               info[table[0][j].toLowerCase()] = row[j]
             }
@@ -305,7 +373,7 @@ exports.genWebTypes = function genWebTypes() {
     }
   }
 
-  function assignDocs(target, docs) {
+  function assignDocs(target: any, docs: any): void {
     if (!docs)
       return
     if (docs.parameters) {
@@ -331,7 +399,7 @@ exports.genWebTypes = function genWebTypes() {
     }
   }
 
-  function strip(str, prefix, suffix) {
+  function strip(str: string, prefix: string, suffix?: string): string {
     if (!str)
       return str
     if (!suffix)
@@ -343,6 +411,6 @@ exports.genWebTypes = function genWebTypes() {
   }
 }
 
-if (require.main === module) {
-  exports.genWebTypes()
+if (import.meta.url === `file://${argv[1]}`) {
+  genWebTypes()
 }

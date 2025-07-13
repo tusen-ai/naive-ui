@@ -1,10 +1,10 @@
-const hljs = require('highlight.js')
-const { marked } = require('marked')
+import hljs from 'highlight.js'
+import { Renderer } from 'marked'
 
-function createRenderer(wrapCodeWithCard = true) {
-  const renderer = new marked.Renderer()
-  const overrides = {
-    table(header, body) {
+export function createRenderer(wrapCodeWithCard = true): Renderer {
+  const renderer = new Renderer()
+  const overrides: any = {
+    table(header: string, body: string): string {
       if (body)
         body = `<tbody>${body}</tbody>`
       return (
@@ -14,17 +14,20 @@ function createRenderer(wrapCodeWithCard = true) {
       )
     },
 
-    tablerow(content) {
+    tablerow(content: string): string {
       return `<tr>\n${content}</tr>\n`
     },
 
-    tablecell(content, flags) {
+    tablecell(
+      content: string,
+      flags: { header: boolean, align: 'center' | 'left' | 'right' | null }
+    ): string {
       const type = flags.header ? 'th' : 'td'
       const tag = flags.align ? `<${type} align="${flags.align}">` : `<${type}>`
       return `${tag + content}</${type}>\n`
     },
 
-    code: (code, language) => {
+    code: (code: string, language: string): string => {
       if (language.startsWith('__')) {
         language = language.replace('__', '')
       }
@@ -44,46 +47,42 @@ function createRenderer(wrapCodeWithCard = true) {
           </n-card>`
         : content
     },
-    heading: (text, level) => {
+    heading: (text: string, level: number): string => {
       const id = text.replace(/ /g, '-')
       return `<n-h${level} id="${id}">${text}</n-h${level}>`
     },
-    blockquote: (quote) => {
+    blockquote: (quote: string): string => {
       return `<n-blockquote>${quote}</n-blockquote>`
     },
-    hr: () => '<n-hr />',
-    paragraph: (text) => {
+    hr: (): string => '<n-hr />',
+    paragraph: (text: string): string => {
       return `<n-p>${text}</n-p>`
     },
-    link(href, title, text) {
+    link(href: string, title: string | null | undefined, text: string): string {
       if (/^(http:|https:)/.test(href)) {
         return `<n-a href="${href}" target="_blank">${text}</n-a>`
       }
       return `<router-link to="${href}" #="{ navigate, href }" custom><n-a :href="href" @click="navigate">${text}</n-a></router-link>`
     },
-    list(body, ordered, start) {
+    list(body: string, ordered: boolean, start: number): string {
       const type = ordered ? 'n-ol' : 'n-ul'
       const startatt = ordered && start !== 1 ? ` start="${start}"` : ''
       return `<${type}${startatt}>\n${body}</${type}>\n`
     },
-    listitem(text) {
+    listitem(text: string): string {
       return `<n-li>${text}</n-li>`
     },
-    codespan(code) {
+    codespan(code: string): string {
       return `<n-text code>${code}</n-text>`
     },
-    strong(text) {
+    strong(text: string): string {
       return `<n-text strong>${text}</n-text>`
     },
-    checkbox(checked) {
+    checkbox(checked: boolean): string {
       return `<n-checkbox :checked="${checked}" style="vertical-align: -2px; margin-right: 8px;" />`
     }
   }
 
-  Object.keys(overrides).forEach((key) => {
-    renderer[key] = overrides[key]
-  })
+  Object.assign(renderer, overrides)
   return renderer
 }
-
-module.exports = createRenderer

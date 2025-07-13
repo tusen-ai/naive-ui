@@ -1,36 +1,29 @@
 const pattern = /var\(([^)]+)\)/g
 const patternDetail = /var\(([^)]+)\)/
-const commentPattern = /^( *)(\*|(\/\/)|(\/\*))/g
+const commentPattern = /^( *)(\*|(\S\S)|(\S\*))/g
 
-/**
- * Collect css vars
- * @param {string} code
- */
-function collectVars(code) {
-  const vars = new Set()
+export function collectVars(code: string): string[] {
+  const vars = new Set<string>()
   const lines = code.split('\n')
   lines.forEach((line) => {
-    if (line.match(commentPattern))
+    if (line.match(commentPattern)) {
       return
+    }
     const result = line.match(pattern)
     if (result) {
       result.forEach((varExpr) => {
-        vars.add(varExpr.match(patternDetail)[1])
+        const match = varExpr.match(patternDetail)
+        if (match)
+          vars.add(match[1])
       })
     }
   })
   return Array.from(vars).sort()
 }
 
-/**
- * @param {string[]} vars
- */
-function genDts(vars) {
+export function genDts(vars: string[]): string {
   console.log(vars)
   return `interface CssVars {
 ${vars.map(v => `  '${v}': string`).join('\n')}
-}\n`
+}`
 }
-
-exports.genDts = genDts
-exports.collectVars = collectVars

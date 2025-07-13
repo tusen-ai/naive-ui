@@ -1,50 +1,49 @@
-// The file is not designed to run directly. `cwd` should be project root.
+import { existsSync } from 'node:fs'
+import { readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import process from 'node:process'
-import fs from 'fs-extra'
 import * as globalComponents from '../src/components'
 
 const TYPE_ROOT = process.cwd()
 
 // XButton is for tsx type checking, shouldn't be exported
-const excludeComponents = ['NxButton']
+const excludeComponents: string[] = ['NxButton']
 
-function exist(path) {
-  return fs.existsSync(path)
+function exist(path: string): boolean {
+  return existsSync(path)
 }
 
-function parseComponentsDeclaration(code) {
+function parseComponentsDeclaration(code: string): Record<string, string> {
   if (!code) {
     return {}
   }
   return Object.fromEntries(
     Array.from(code.matchAll(/(?<!\/\/)\s+\s+['"]?(.+?)['"]?:\s(.+?)\n/g)).map(
-      i => [i[1], i[2]]
+      (i: string[]) => [i[1], i[2]]
     )
   )
 }
 
-async function generateComponentsType() {
-  const components = {}
-  Object.keys(globalComponents).forEach((key) => {
+async function generateComponentsType(): Promise<void> {
+  const components: Record<string, string> = {}
+  Object.keys(globalComponents).forEach((key: string) => {
     const entry = `(typeof import('naive-ui'))['${key}']`
     if (key.startsWith('N') && !excludeComponents.includes(key)) {
       components[key] = entry
     }
   })
   const originalContent = exist(path.resolve(TYPE_ROOT, 'volar.d.ts'))
-    ? await fs.readFile(path.resolve(TYPE_ROOT, 'volar.d.ts'), 'utf-8')
+    ? await readFile(path.resolve(TYPE_ROOT, 'volar.d.ts'), 'utf-8')
     : ''
-
   const originImports = parseComponentsDeclaration(originalContent)
   const lines = Object.entries({
     ...originImports,
     ...components
   })
-    .filter(([name]) => {
+    .filter(([name]: [string, string]) => {
       return components[name]
     })
-    .map(([name, v]) => {
+    .map(([name, v]: [string, string]) => {
       if (!/^\w+$/.test(name)) {
         name = `'${name}'`
       }
@@ -58,8 +57,10 @@ declare module 'vue' {
 }
 export {}
 `
+
   if (code !== originalContent) {
-    await fs.writeFile(path.resolve(TYPE_ROOT, 'volar.d.ts'), code, 'utf-8')
+    await writeFile(path.resolve(TYPE_ROOT, 'volar.d.ts'), code, 'utf-8')
   }
 }
+
 generateComponentsType()

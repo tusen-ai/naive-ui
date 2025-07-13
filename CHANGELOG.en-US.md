@@ -8,13 +8,17 @@
 
 ### Fixes
 
+- Fix `n-color-picker` black and white effect of text is not obvious, closes [#7074](https://github.com/tusen-ai/naive-ui/issues/7074).
 - Fix `n-image` zoom in & out locale text in `da-DK` `sv-SE`.
 - Fix `n-popover`'s `themeOverrides` property does not have the `Scrollbar` style configuration.
+- Fix `n-input`'s `themeOverrides` property does not have the `Scrollbar` style configuration.
 - Fix `n-anchor` can't activate link in the bottom of the page by click, closes [#7033](https://github.com/tusen-ai/naive-ui/issues/7033), closes [#6918](https://github.com/tusen-ai/naive-ui/issues/6918), [#6844](https://github.com/tusen-ai/naive-ui/issues/6844), [#6782](https://github.com/tusen-ai/naive-ui/issues/6782).
 - Fix `n-upload` component 'Non-function value encountered for default slot' warning.
 - Fix `n-input`'s `tabindex` property setting of `input-props` does not take effect.
 - Fix `n-tab` scroll shadow pseudo-class style conflicts in multi-layer tab nesting scenarios, closes [#6854](https://github.com/tusen-ai/naive-ui/issues/6854).
 - Fix `n-menu`'s disabled style not working when parent node is set to `disabled` and child node has `type: "group"`, closes [#6792](https://github.com/tusen-ai/naive-ui/issues/6792)
+- Fix `n-input-group-label` not injecting `formItemInjectionKey`, causing the `size` property to fail, and close [#7066](https://github.com/tusen-ai/naive-ui/issues/7066)
+- Fix the issue of style confusion in `n-carousel` when there is only one image, close [#6476](https://github.com/tusen-ai/naive-ui/issues/6476)
 
 ### Features
 
@@ -27,7 +31,7 @@
 - `n-tree-select` supports RTL.
 - `useDialog`'s option supports `z-index`, closes [#4349](https://github.com/tusen-ai/naive-ui/issues/4349).
 - Add `n-heatmap` component.
-- - `n-image` adds showPreview methods, closes [#6695](https://github.com/tusen-ai/naive-ui/issues/6695)
+- - `n-image` adds showPreview methods, closes [#6695](https://github.com/tusen-ai/naive-ui/issues/6695).
 - `n-image-preview` `n-image-group` support being used independently.
 
 ## 2.42.0

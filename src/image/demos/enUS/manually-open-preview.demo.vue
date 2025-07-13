@@ -8,7 +8,7 @@ allow big image preview by call showPreview method.
 import type { ImageInst } from 'naive-ui'
 import { ref } from 'vue'
 
-const imageRef = ref<ImageInst>(null)
+const imageRef = ref<ImageInst>()
 function handleClick() {
   imageRef.value?.showPreview()
 }

@@ -17,7 +17,9 @@ export interface ImageRenderToolbarProps {
 export type ImageRenderToolbar = (props: ImageRenderToolbarProps) => VNodeChild
 export type ImageGroupRenderToolbarProps = ImageRenderToolbarProps
 export type ImageGroupRenderToolbar = ImageRenderToolbar
+
 export interface ImageInst {
+  click: () => void
   showPreview: () => void
 }
 

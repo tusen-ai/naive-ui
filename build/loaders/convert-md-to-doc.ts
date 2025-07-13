@@ -1,26 +1,51 @@
-const path = require('node:path')
-const fse = require('fs-extra')
-const camelCase = require('lodash/camelCase')
-const { marked } = require('marked')
-const createRenderer = require('./md-renderer')
-const projectPath = require('./project-path')
+import type { Token, Tokens } from 'marked'
+import path from 'node:path'
+import fse from 'fs-extra'
+import camelCase from 'lodash/camelCase'
+import { marked } from 'marked'
+import { createRenderer } from './md-renderer'
+import projectPath from './project-path'
 
 const mdRenderer = createRenderer()
 
-async function resolveDemoTitle(fileName, demoEntryPath) {
+interface DemoInfo {
+  id: string
+  title: string
+  debug: boolean
+  variable?: string
+  fileName?: string
+  tag?: string
+}
+
+interface ComponentInfo {
+  ids: string[]
+  importStmt: string
+}
+
+async function resolveDemoTitle(
+  fileName: string,
+  demoEntryPath: string
+): Promise<string> {
   const demoStr = await fse.readFile(
     path.resolve(projectPath, demoEntryPath, '..', fileName),
     'utf-8'
   )
-  return demoStr.match(/# ([^\n]+)/)[1]
+  const match = demoStr.match(/# ([^\n]+)/)
+  if (!match)
+    throw new Error('No demo title found')
+  return match[1]
 }
 
-async function resolveDemoInfos(literal, url, env) {
+async function resolveDemoInfos(
+  literal: string,
+  url: string,
+  env: string
+): Promise<DemoInfo[]> {
   const ids = literal
     .split('\n')
     .map(line => line.trim())
     .filter(id => id.length)
-  const infos = []
+  const infos: DemoInfo[] = []
   for (const id of ids) {
     const debug = id.includes('debug') || id.includes('Debug')
     if (env === 'production' && debug) {
@@ -46,18 +71,18 @@ async function resolveDemoInfos(literal, url, env) {
   return infos
 }
 
-function genDemosTemplate(demoInfos, colSpan) {
+function genDemosTemplate(demoInfos: DemoInfo[], colSpan: number): string {
   return `<component-demos :span="${colSpan}">${demoInfos
     .map(({ tag }) => tag)
     .join('\n')}</component-demos>`
 }
 
 function genAnchorTemplate(
-  children,
-  options = {
+  children: string,
+  options: { ignoreGap: boolean } = {
     ignoreGap: false
   }
-) {
+): string {
   return `
     <n-anchor
       internal-scrollable
@@ -72,8 +97,10 @@ function genAnchorTemplate(
   `
 }
 
-function genDemosApiAnchorTemplate(tokens) {
-  const api = [
+function genDemosApiAnchorTemplate(
+  tokens: Token[]
+): (DemoInfo | { id: string, title: string, debug: boolean })[] {
+  const api: DemoInfo[] = [
     {
       id: 'API',
       title: 'API',
@@ -82,7 +109,10 @@ function genDemosApiAnchorTemplate(tokens) {
   ]
   return api.concat(
     tokens
-      .filter(token => token.type === 'heading' && token.depth === 3)
+      .filter(
+        (token): token is Tokens.Heading =>
+          token.type === 'heading' && token.depth === 3
+      )
       .map(token => ({
         id: token.text.replace(/ /g, '-'),
         title: token.text,
@@ -91,9 +121,15 @@ function genDemosApiAnchorTemplate(tokens) {
   )
 }
 
-function genDemosAnchorTemplate(demoInfos, hasApi, tokens) {
+function genDemosAnchorTemplate(
+  demoInfos: DemoInfo[],
+  hasApi: boolean,
+  tokens: Token[]
+): string {
   const links = (
-    hasApi ? demoInfos.concat(genDemosApiAnchorTemplate(tokens)) : demoInfos
+    hasApi
+      ? demoInfos.concat(genDemosApiAnchorTemplate(tokens) as DemoInfo[])
+      : demoInfos
   ).map(
     ({ id, title, debug }) => `<n-anchor-link
       v-if="(displayMode === 'debug') || ${!debug}"
@@ -106,9 +142,12 @@ function genDemosAnchorTemplate(demoInfos, hasApi, tokens) {
   })
 }
 
-function genPageAnchorTemplate(tokens) {
+function genPageAnchorTemplate(tokens: Token[]): string {
   const titles = tokens
-    .filter(token => token.type === 'heading' && token.depth === 2)
+    .filter(
+      (token): token is Tokens.Heading =>
+        token.type === 'heading' && token.depth === 2
+    )
     .map(token => token.text)
   const links = titles.map((title) => {
     const href = title.replace(/ /g, '-')
@@ -117,7 +156,12 @@ function genPageAnchorTemplate(tokens) {
   return genAnchorTemplate(links.join('\n'), { ignoreGap: true })
 }
 
-function genScript(demoInfos, components = [], url, forceShowAnchor) {
+function genScript(
+  demoInfos: DemoInfo[],
+  components: ComponentInfo[] = [],
+  url: string,
+  forceShowAnchor: boolean
+): string {
   const showAnchor = !!(demoInfos.length || forceShowAnchor)
   const importStmts = demoInfos
     .map(({ variable, fileName }) => `import ${variable} from './${fileName}'`)
@@ -156,7 +200,7 @@ export default {
       contentStyle: computed(() => {
         return showAnchorRef.value
           ? 'width: calc(100% - 228px); margin-right: 36px;'
-          : 'width: 100%; padding-right: 12px;'; 
+          : 'width: 100%; padding-right: 12px;';
       }),
       url: ${JSON.stringify(url)}
     }
@@ -166,23 +210,24 @@ export default {
   return script
 }
 
-async function convertMd2ComponentDocumentation(
-  text,
-  url,
-  env = 'development'
-) {
+export async function convertMd2ComponentDocumentation(
+  text: string,
+  url: string,
+  env: string = 'development'
+): Promise<string> {
   const forceShowAnchor = !!~text.search('<!--anchor:on-->')
   const colSpan = ~text.search('<!--single-column-->') ? 1 : 2
   const hasApi = !!~text.search('## API')
   const tokens = marked.lexer(text)
   // resolve external components
   const componentsIndex = tokens.findIndex(
-    token => token.type === 'code' && token.lang === 'component'
+    token =>
+      token.type === 'code' && (token as Tokens.Code).lang === 'component'
   )
-  let components = []
+  let components: ComponentInfo[] = []
   if (~componentsIndex) {
-    components = tokens[componentsIndex].text
-    components = components
+    const token = tokens[componentsIndex] as Tokens.Code
+    components = token.text
       .split('\n')
       .map((component) => {
         const [ids, importStmt] = component.split(':')
@@ -203,26 +248,32 @@ async function convertMd2ComponentDocumentation(
     token => token.type === 'heading' && token.depth === 1
   )
   if (titleIndex > -1) {
-    const titleText = JSON.stringify(tokens[titleIndex].text)
-    const btnTemplate = `<edit-on-github-header relative-url="${url}" text=${titleText}></edit-on-github-header>`
+    const titleText = JSON.stringify(
+      (tokens[titleIndex] as Tokens.Heading).text
+    )
+    const btnTemplate = `<edit-on-github-header relative-url="${url}" text=${titleText}><\/edit-on-github-header>`
     tokens.splice(titleIndex, 1, {
       type: 'html',
       pre: false,
       text: btnTemplate
-    })
+    } as Tokens.HTML)
   }
   // resolve demos, debug demos are removed from production build
   const demosIndex = tokens.findIndex(
-    token => token.type === 'code' && token.lang === 'demo'
+    token => token.type === 'code' && (token as Tokens.Code).lang === 'demo'
   )
-  let demoInfos = []
+  let demoInfos: DemoInfo[] = []
   if (~demosIndex) {
-    demoInfos = await resolveDemoInfos(tokens[demosIndex].text, url, env)
+    demoInfos = await resolveDemoInfos(
+      (tokens[demosIndex] as Tokens.Code).text,
+      url,
+      env
+    )
     tokens.splice(demosIndex, 1, {
       type: 'html',
       pre: false,
       text: genDemosTemplate(demoInfos, colSpan)
-    })
+    } as any)
   }
   const docMainTemplate = marked.parser(tokens, {
     gfm: true,
@@ -250,5 +301,3 @@ async function convertMd2ComponentDocumentation(
   const docScript = await genScript(demoInfos, components, url, forceShowAnchor)
   return `${docTemplate}\n\n${docScript}`
 }
-
-module.exports = convertMd2ComponentDocumentation

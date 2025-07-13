@@ -2,9 +2,11 @@ import {
   hsl2hsv,
   hsl2rgb,
   hsla,
+  type HSLA,
   hsv2hsl,
   hsv2rgb,
   hsva,
+  type RGB,
   rgb2hsl,
   rgb2hsv,
   rgba,
@@ -52,6 +54,43 @@ export function getModeFromValue(color: string | null): ColorPickerMode | null {
   if (color.includes('hsv'))
     return 'hsv'
   return null
+}
+
+export function getWCAGContrast(
+  hsla: HSLA,
+  contrastColor: RGB = [255, 255, 255],
+  level: 'AA' | 'AAA' = 'AA'
+): boolean {
+  const [r, g, b, a] = rgba(toHslaString(hsla))
+
+  if (a === 1) {
+    const luminance1 = rgb2luminance([r, g, b])
+    const luminance2 = rgb2luminance(contrastColor)
+    const contrast
+      = (Math.max(luminance1, luminance2) + 0.05)
+        / (Math.min(luminance1, luminance2) + 0.05)
+    return contrast >= (level === 'AA' ? 4.5 : 7)
+  }
+
+  const blendedR = Math.round(r * a + contrastColor[0] * (1 - a))
+  const blendedG = Math.round(g * a + contrastColor[1] * (1 - a))
+  const blendedB = Math.round(b * a + contrastColor[2] * (1 - a))
+
+  const luminanceBlended = rgb2luminance([blendedR, blendedG, blendedB])
+  const luminanceWhite = rgb2luminance(contrastColor)
+  const contrastBlended
+    = (Math.max(luminanceBlended, luminanceWhite) + 0.05)
+      / (Math.min(luminanceBlended, luminanceWhite) + 0.05)
+
+  return contrastBlended >= (level === 'AA' ? 4.5 : 7)
+}
+
+function rgb2luminance(rgb: RGB): number {
+  const [cr, cg, cb] = rgb.map((c) => {
+    c /= 255
+    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
+  })
+  return 0.2126 * cr + 0.7152 * cg + 0.0722 * cb
 }
 
 export function floor(color: number[]): number[] {

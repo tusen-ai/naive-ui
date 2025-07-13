@@ -1,5 +1,4 @@
-// replace lodash-es
-const { replaceDefine, srcDir } = require('../utils')
+import { replaceDefine, srcDir } from '../utils'
 
 ;
 

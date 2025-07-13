@@ -1,30 +1,62 @@
-const fs = require('node:fs')
-const path = require('node:path')
-const { marked } = require('marked')
-const handleMergeCode = require('../utils/handle-merge-code.js')
-const createRenderer = require('./md-renderer')
+import type { Token } from 'marked'
+import fs from 'node:fs'
+import path from 'node:path'
+import process from 'node:process'
+import { fileURLToPath } from 'node:url'
+import { marked } from 'marked'
+import { handleMergeCode } from '../utils/handle-merge-code'
+import { createRenderer } from './md-renderer'
+
+interface Parts {
+  template?: string
+  script?: string
+  style?: string
+  title: string
+  content: string
+  language: 'ts' | 'js'
+  api: 'composition' | 'options'
+}
+
+interface MergedParts extends Parts {
+  tsCode: string
+  jsCode: string
+}
+
+interface MergePartsOptions {
+  parts: Parts
+  isVue: boolean
+}
+
+interface ConvertVue2DemoOptions {
+  content: string
+  resourcePath: string
+  relativeUrl: string
+  isVue?: boolean
+}
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const mdRenderer = createRenderer()
 
-const __HTTP__
-  = require('node:process').env.NODE_ENV !== 'production' ? 'http' : 'https'
+const __HTTP__ = process.env.NODE_ENV !== 'production' ? 'http' : 'https'
 
 const demoBlock = fs
   .readFileSync(path.resolve(__dirname, 'ComponentDemoTemplate.vue'))
   .toString()
 
-function mergeParts({ parts, isVue }) {
-  const mergedParts = {
-    ...parts
+function mergeParts({ parts, isVue }: MergePartsOptions): MergedParts {
+  const mergedParts: Partial<MergedParts> = {
+    ...parts,
+    title: parts.title,
+    content: parts.content,
+    tsCode: '',
+    jsCode: ''
   }
-  mergedParts.title = parts.title
-  mergedParts.content = parts.content
-  mergedParts.tsCode = ''
-  mergedParts.jsCode = ''
-  handleMergeCode({ parts, mergedParts, isVue })
-  mergedParts.tsCode = encodeURIComponent(mergedParts.tsCode)
-  mergedParts.jsCode = encodeURIComponent(mergedParts.jsCode)
-  return mergedParts
+  handleMergeCode({ parts, mergedParts: mergedParts as MergedParts, isVue })
+  mergedParts.tsCode = encodeURIComponent(mergedParts.tsCode!)
+  mergedParts.jsCode = encodeURIComponent(mergedParts.jsCode!)
+  return mergedParts as MergedParts
 }
 
 const cssRuleRegex = /([^{}]*)(\{[^}]*\})/g
@@ -34,13 +66,15 @@ const cssRuleRegex = /([^{}]*)(\{[^}]*\})/g
 // xxx {
 //   mystyle
 // }
-function genStyle(sourceStyle) {
+function genStyle(sourceStyle: string): string | null {
   let match
   let matched = false
-  const rules = []
+  const rules: string[] = []
 
-  // eslint-disable-next-line no-cond-assign
-  while ((match = cssRuleRegex.exec(sourceStyle)) !== null) {
+  let matchResult = cssRuleRegex.exec(sourceStyle)
+  while (matchResult !== null) {
+    match = matchResult
+    matchResult = cssRuleRegex.exec(sourceStyle)
     matched = true
     const selector = match[1]
     const body = match[2]
@@ -56,7 +90,11 @@ function genStyle(sourceStyle) {
   return `<style scoped>\n${rules.join('\n')}</style>`
 }
 
-function genVueComponent(parts, fileName, relativeUrl) {
+function genVueComponent(
+  parts: MergedParts,
+  fileName: string,
+  relativeUrl: string
+): string {
   const demoFileNameReg = /<!-- DEMO_FILE_NAME -->/g
   const relativeUrlReg = /<!-- URL -->/g
   const titleReg = /<!-- TITLE_SLOT -->/g
@@ -107,13 +145,13 @@ function genVueComponent(parts, fileName, relativeUrl) {
   return src.trim()
 }
 
-function getFileName(resourcePath) {
+function getFileName(resourcePath: string): [string, string] {
   const dirs = resourcePath.split('/')
   const fileNameWithExtension = dirs[dirs.length - 1]
   return [fileNameWithExtension.split('.')[0], fileNameWithExtension]
 }
 
-function getPartsOfDemo(text) {
+function getPartsOfDemo(text: string): Parts {
   // slot template
   const firstIndex = text.indexOf('<template>')
   let template = text.slice(firstIndex + 10)
@@ -121,11 +159,10 @@ function getPartsOfDemo(text) {
   template = template.slice(0, lastIndex)
   const script = text.match(/<script[\s\S]*?>([\s\S]*?)<\/script>/)?.[1]?.trim()
   const style = text.match(/<style>([\s\S]*?)<\/style>/)?.[1]
-  const markdownText = text
-    .match(/<markdown>([\s\S]*?)<\/markdown>/)?.[1]
-    ?.trim()
+  const markdownText
+    = text.match(/<markdown>([\s\S]*?)<\/markdown>/)?.[1]?.trim() ?? ''
   const tokens = marked.lexer(markdownText)
-  const contentTokens = []
+  const contentTokens: Token[] = []
   let title = ''
   for (const token of tokens) {
     if (token.type === 'heading' && token.depth === 1) {
@@ -135,9 +172,8 @@ function getPartsOfDemo(text) {
       contentTokens.push(token)
     }
   }
-  const scriptAttributes = text
-    .match(/<script([\s\S]*?)>[\s\S]*?<\/script>/)?.[1]
-    .trim()
+  const scriptAttributes
+    = text.match(/<script([\s\S]*?)>[\s\S]*?<\/script>/)?.[1].trim() ?? ''
   const languageType = scriptAttributes?.includes('lang="ts"') ? 'ts' : 'js'
   const apiType = scriptAttributes?.includes('setup')
     ? 'composition'
@@ -155,7 +191,8 @@ function getPartsOfDemo(text) {
   }
 }
 
-function convertVue2Demo(content, { resourcePath, relativeUrl, isVue = true }) {
+export function convertVue2Demo(options: ConvertVue2DemoOptions): string {
+  const { content, resourcePath, relativeUrl, isVue = true } = options
   const parts = getPartsOfDemo(content)
   const mergedParts = mergeParts({ parts, isVue })
   const [fileName] = getFileName(resourcePath)
@@ -166,5 +203,3 @@ function convertVue2Demo(content, { resourcePath, relativeUrl, isVue = true }) {
   )
   return vueComponent
 }
-
-module.exports = convertVue2Demo

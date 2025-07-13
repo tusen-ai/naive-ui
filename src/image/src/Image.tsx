@@ -129,6 +129,7 @@ export default defineComponent({
         imageId,
         props.previewSrc || props.src || ''
       ) as (() => void) | undefined
+
       onInvalidate(() => {
         unRegister?.()
       })
