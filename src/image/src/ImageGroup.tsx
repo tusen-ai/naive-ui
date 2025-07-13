@@ -15,7 +15,7 @@ import {
   watch
 } from 'vue'
 import { useConfig } from '../../_mixins'
-import { call, createInjectionKey } from '../../_utils'
+import { call, createInjectionKey, throwError } from '../../_utils'
 
 import NImagePreview from './ImagePreview'
 import { imagePreviewSharedProps } from './interface'
@@ -94,6 +94,14 @@ export default defineComponent({
     const imageCount = computed(() => imageIdList.value.length)
 
     function registerImageUrl(id: number, url: string) {
+      // Check whether srcList and slot are mixed
+      if (srcList.value && srcList.value.length > 0) {
+        throwError(
+          'image-group',
+          'When passing in srcList, do not use the `n-image` component inside `n-image-group`, otherwise the preview behavior may be abnormal.'
+        )
+      }
+
       if (!propImageUrlMap.value.has(id)) {
         imageUrlMap.value.set(id, url)
       }
