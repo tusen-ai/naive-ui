@@ -1157,6 +1157,8 @@ export default defineComponent({
               ref="textareaScrollbarInstRef"
               class={`${mergedClsPrefix}-input__textarea`}
               container={this.getTextareaScrollContainer}
+              theme={this.theme?.peers?.Scrollbar}
+              themeOverrides={this.themeOverrides?.peers?.Scrollbar}
               triggerDisplayManually
               useUnifiedContainer
               internalHoistYRail
