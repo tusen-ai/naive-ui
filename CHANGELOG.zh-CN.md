@@ -8,6 +8,7 @@
 
 ### Fixes
 
+- 修复 `n-color-picker` 的 trigger 文字黑白颜色效果不明显问题，关闭 [#7074](https://github.com/tusen-ai/naive-ui/issues/7074)
 - 修复 `n-image` 放大缩小在 `da-DK` `sv-SE` 本地化的文案
 - 修复 `n-popover` 的 `themeOverrides` 属性没有 `Scrollbar` 样式配置
 - 修复 `n-anchor` 对页面底部的 link 无法通过点击激活，关闭 [#7033](https://github.com/tusen-ai/naive-ui/issues/7033)，关闭 [#6918](https://github.com/tusen-ai/naive-ui/issues/6918)、[#6844](https://github.com/tusen-ai/naive-ui/issues/6844)、[#6782](https://github.com/tusen-ai/naive-ui/issues/6782)

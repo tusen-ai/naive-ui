@@ -8,6 +8,7 @@
 
 ### Fixes
 
+- Fix `n-color-picker` black and white effect of text is not obvious, closes [#7074](https://github.com/tusen-ai/naive-ui/issues/7074).
 - Fix `n-image` zoom in & out locale text in `da-DK` `sv-SE`.
 - Fix `n-popover`'s `themeOverrides` property does not have the `Scrollbar` style configuration.
 - Fix `n-anchor` can't activate link in the bottom of the page by click, closes [#7033](https://github.com/tusen-ai/naive-ui/issues/7033), closes [#6918](https://github.com/tusen-ai/naive-ui/issues/6918), [#6844](https://github.com/tusen-ai/naive-ui/issues/6844), [#6782](https://github.com/tusen-ai/naive-ui/issues/6782).
