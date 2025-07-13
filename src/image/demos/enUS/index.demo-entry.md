@@ -66,18 +66,6 @@ component-preview-group-debug.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| default-show | `boolean` | `undefined` | Whether to show the preview big image by default. | NEXT_VERSION |
-| render-toolbar | `(props: { nodes: { prev: VNode, next: VNode, rotateCounterclockwise: VNode, rotateClockwise: VNode, resizeToOriginalSize: VNode, zoomOut: VNode, zoomIn: VNode, download: VNode, close: VNode } }) => VNodeChild` | `undefined` | Toolbar rendering function. | NEXT_VERSION |
-| show | `boolean` | `undefined` | Whether to the show preview big image | NEXT_VERSION |
-| show-toolbar | `boolean` | `true` | Whether to show the bottom toolbar when the image enlarge. | NEXT_VERSION |
-| show-toolbar-tooltip | `boolean` | `false` | Whether to show toolbar buttons' tooltip. | NEXT_VERSION |
-| src | `string` | `undefined` | Image source. | NEXT_VERSION |
-| on-update:show | `(value: boolean) => void` | `undefined` | Callback on show status changes. | NEXT_VERSION |
-
-### ImagePreview Props
-
-| Name | Type | Default | Description | Version |
-| --- | --- | --- | --- | --- |
 | src | `string` | `undefined` | Image source. | NEXT_VERSION |
 | show | `boolean` | `undefined` | Whether to the show preview big image | NEXT_VERSION |
 | default-show | `boolean` | `undefined` | Whether to show the preview big image by default. | NEXT_VERSION |
