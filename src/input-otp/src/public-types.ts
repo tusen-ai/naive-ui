@@ -27,4 +27,6 @@ export interface InputOtpOnUpdateValueMeta {
   source: InputOtpOnUpdateValueMetaSource
 }
 export type InputOtpOnUpdateValueMetaSource = 'paste' | 'input' | 'delete'
-export interface InputOtpInst {}
+export interface InputOtpInst {
+  focusOnChar: (charIndex: number) => void
+}
