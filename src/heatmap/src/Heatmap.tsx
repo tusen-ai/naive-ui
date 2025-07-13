@@ -1,9 +1,14 @@
-import type { PropType, SlotsType, VNode } from 'vue'
+import type { PropType, SlotsType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { PopoverProps } from '../../popover/src/Popover'
+import type { TooltipProps } from '../../tooltip'
 import type { HeatmapTheme } from '../styles/light'
-import type { DayRect, RectData, ToolTipData, WeekStartsOn } from './interface'
+import type { DayRect } from './interface'
+import type {
+  HeatmapData,
+  HeatmapFirstDayOfWeek,
+  HeatmapSlots
+} from './public-types'
 import { addDays, format, parseISO, startOfWeek } from 'date-fns'
 import { groupBy, mapValues, maxBy } from 'lodash-es'
 import { pxfy } from 'seemly'
@@ -16,10 +21,12 @@ import {
   useThemeClass
 } from '../../_mixins'
 import { createKey, resolveSlot, resolveWrappedSlot } from '../../_utils'
+import { transformNaiveFirstDayOfWeekToDateFns } from '../../date-picker/src/utils'
 import heatmapLight from '../styles/light'
-import ColorIndicator from './ColorIndicator'
+import HeatmapColorIndicator from './ColorIndicator'
 import Rect from './Rect'
 import style from './styles/index.cssr'
+import { type HeatmapColorTheme, heatmapColorThemes } from './theme'
 import {
   completeDataGaps,
   createDayRect,
@@ -27,42 +34,22 @@ import {
   createSparseMatrix
 } from './utils'
 
-export const HeatmapThemes = {
-  github: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
-  green: ['#f0f0f0', '#c6e48b', '#7bc96f', '#239a3b', '#196127'],
-  blue: ['#ebedf0', '#c0e7ff', '#73b3ff', '#0969da', '#0550ae'],
-  orange: ['#ebedf0', '#fed7aa', '#fb923c', '#ea580c', '#c2410c'],
-  purple: ['#ebedf0', '#e9d5ff', '#c084fc', '#9333ea', '#7c3aed'],
-  red: ['#ebedf0', '#fecaca', '#f87171', '#dc2626', '#b91c1c']
-}
-
-export type HeatmapThemeType = keyof typeof HeatmapThemes
-
 interface Col {
   week: number
   month: string
 }
 
-export interface HeatmapSlots {
-  info?: () => VNode[]
-  indicator?: () => VNode[]
-  tooltip?: (data: ToolTipData) => VNode[]
-}
-
 export const heatmapProps = {
   ...(useTheme.props as ThemeProps<HeatmapTheme>),
-  colors: {
-    type: Array as PropType<string[]>,
-    default: undefined
-  },
+  colors: Array as PropType<string[]>,
   colorTheme: {
-    type: String as PropType<HeatmapThemeType>,
+    type: String as PropType<HeatmapColorTheme>,
     default: 'github'
   },
-  data: Array as PropType<RectData[]>,
+  data: Array as PropType<HeatmapData>,
   loading: Boolean,
-  weekStartsOn: {
-    type: Number as PropType<WeekStartsOn>,
+  firstDayOfWeek: {
+    type: Number as PropType<HeatmapFirstDayOfWeek>,
     default: 0
   },
   showColorIndicator: {
@@ -77,7 +64,6 @@ export const heatmapProps = {
     type: Boolean,
     default: true
   },
-  unit: String,
   size: {
     type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'
@@ -85,7 +71,7 @@ export const heatmapProps = {
   xGap: [Number, String] as PropType<number | string>,
   yGap: [Number, String] as PropType<number | string>,
   tooltip: {
-    type: [Boolean, Object] as PropType<PopoverProps | boolean>,
+    type: [Boolean, Object] as PropType<TooltipProps | false>,
     default: true
   }
 } as const
@@ -112,6 +98,7 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const { xGap, yGap, size } = props
       const {
+        common: { cubicBezierEaseInOut },
         self: {
           fontWeight,
           textColor,
@@ -127,6 +114,7 @@ export default defineComponent({
       } = themeRef.value
 
       const cssVars = {
+        '--n-bezier': cubicBezierEaseInOut,
         '--n-font-size': fontSize,
         '--n-font-weight': fontWeight,
         '--n-text-color': textColor,
@@ -167,14 +155,17 @@ export default defineComponent({
       if (props.colors && props.colors.length > 0) {
         return props.colors
       }
-      return HeatmapThemes[props.colorTheme]
+      return heatmapColorThemes[props.colorTheme]
     })
 
     const normalizedDataRef = computed(() => {
       if (!props.data || props.data.length === 0) {
         return []
       }
-      return completeDataGaps(props.data, props.weekStartsOn)
+      return completeDataGaps(
+        props.data,
+        transformNaiveFirstDayOfWeekToDateFns(props.firstDayOfWeek)
+      )
     })
 
     const maxValueRef = computed(() => {
@@ -186,15 +177,22 @@ export default defineComponent({
       const data = normalizedDataRef.value
 
       if (props.loading || data.length === 0) {
-        return createLoadingMatrix(props.weekStartsOn)
+        return createLoadingMatrix(
+          transformNaiveFirstDayOfWeekToDateFns(props.firstDayOfWeek)
+        )
       }
-      const { weekStartsOn } = props
       const maxValue = maxValueRef.value
       const colors = mergedColorsRef.value
-      const calendarStartDate = data[0].date
+      const calendarStartDate = data[0].timestamp
 
       const dayRects = data.map(item =>
-        createDayRect(item, calendarStartDate, weekStartsOn, colors, maxValue)
+        createDayRect(
+          item,
+          calendarStartDate,
+          transformNaiveFirstDayOfWeekToDateFns(props.firstDayOfWeek),
+          colors,
+          maxValue
+        )
       )
 
       return createSparseMatrix(
@@ -206,12 +204,13 @@ export default defineComponent({
     })
 
     const weekLabelsRef = computed(() => {
-      const { weekStartsOn } = props
       const { weekdayFormat } = localeRef.value
       const { locale } = dateLocaleRef.value
 
       const baseDate = startOfWeek(new Date(), {
-        weekStartsOn
+        weekStartsOn: transformNaiveFirstDayOfWeekToDateFns(
+          props.firstDayOfWeek
+        )
       })
 
       return Array.from({ length: 7 }, (_, i) => {
@@ -246,7 +245,7 @@ export default defineComponent({
           if (cell?.value !== null) {
             res.push({
               week: col,
-              month: format(cell.date, 'yyyy-MM')
+              month: format(cell.timestamp, 'yyyy-MM')
             })
             break
           }
@@ -321,7 +320,6 @@ export default defineComponent({
       monthLabels,
       mergedColors,
       $slots,
-      unit,
       heatmapMatrix,
       onRender
     } = this
@@ -343,8 +341,7 @@ export default defineComponent({
                   {showWeekLabels && (
                     <th
                       class={`${mergedClsPrefix}-heatmap__week-header-cell`}
-                    >
-                    </th>
+                    />
                   )}
                   {monthLabels.map((monthLabel, index) => (
                     <th
@@ -378,7 +375,6 @@ export default defineComponent({
                               mergedClsPrefix={mergedClsPrefix}
                               data={day}
                               color={day.color}
-                              unit={unit}
                               tooltip={this.tooltip}
                               tooltipSlot={$slots.tooltip}
                               loading={loading}
@@ -415,9 +411,9 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-heatmap__footer__indicator`}>
             {resolveSlot($slots.indicator, () => [
               !loading && showColorIndicator && (
-                <ColorIndicator
+                <HeatmapColorIndicator
                   colors={mergedColors}
-                  mergedClsPrefix={mergedClsPrefix}
+                  clsPrefix={mergedClsPrefix}
                   indicatorText={[locale.less, locale.more]}
                 />
               )

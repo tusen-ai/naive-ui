@@ -1,4 +1,9 @@
-import type { DayRect, RectData, WeekStartsOn } from '../interface'
+import type { DayRect } from '../interface'
+import type {
+  HeatmapData,
+  HeatmapDataItem,
+  HeatmapFirstDayOfWeek
+} from '../public-types'
 import {
   differenceInCalendarDays,
   eachDayOfInterval,
@@ -16,10 +21,10 @@ import { groupBy } from 'lodash-es'
 /** get color by value/maxValue */
 export function calcColorByValue(
   colors: string[],
-  value: number | null,
+  value: number | null | undefined,
   maxValue: number
 ): string {
-  if (maxValue === 0 || value === null || value <= 0) {
+  if (maxValue === 0 || value === null || value === undefined || value <= 0) {
     return colors[0]
   }
 
@@ -38,20 +43,22 @@ export function calcColorByValue(
  * [firstCalendarDate,firstDate] and [lastDate,lastCalendarDate] with value null
  */
 export function completeDataGaps(
-  data: RectData[],
-  weekStartsOn: WeekStartsOn = 0
-): RectData[] {
-  const sortedData = [...data].sort((a, b) => a.date - b.date)
-  const firstDate = sortedData[0].date
-  const lastDate = sortedData[sortedData.length - 1].date
+  data: HeatmapData,
+  firstDayOfWeek: HeatmapFirstDayOfWeek
+): HeatmapData {
+  const sortedData = [...data].sort((a, b) => a.timestamp - b.timestamp)
+  const firstDate = sortedData[0].timestamp
+  const lastDate = sortedData[sortedData.length - 1].timestamp
 
   const firstCalendarDate = startOfWeek(firstDate, {
-    weekStartsOn
+    weekStartsOn: firstDayOfWeek
   })
-  const lastCalendarEndDate = endOfWeek(lastDate, { weekStartsOn })
+  const lastCalendarEndDate = endOfWeek(lastDate, {
+    weekStartsOn: firstDayOfWeek
+  })
 
   const dataMap = new Map(
-    sortedData.map(d => [startOfDay(d.date).getTime(), d])
+    sortedData.map(d => [startOfDay(d.timestamp).getTime(), d])
   )
 
   const allCalendarDates = eachDayOfInterval({
@@ -69,7 +76,7 @@ export function completeDataGaps(
     const value = isWithinInterval(date, { start: firstDate, end: lastDate })
       ? 0
       : null
-    return { date: date.getTime(), value }
+    return { timestamp: date.getTime(), value }
   })
 }
 
@@ -77,23 +84,23 @@ export function completeDataGaps(
  * Create a DayRect object with position information
  */
 export function createDayRect(
-  item: RectData,
+  item: HeatmapDataItem,
   calendarStartDate: number,
   weekStartOn: number,
   colors: string[],
   maxValue: number
 ): DayRect {
   const daysFromGridStart = differenceInCalendarDays(
-    item.date,
+    item.timestamp,
     calendarStartDate
   )
 
   const colIndex = Math.floor(daysFromGridStart / 7)
-  const dayOfWeek = getDay(item.date)
+  const dayOfWeek = getDay(item.timestamp)
   const rowIndex = (dayOfWeek - weekStartOn + 7) % 7
 
   return {
-    date: item.date,
+    timestamp: item.timestamp,
     value: item.value,
     color: calcColorByValue(colors, item.value, maxValue),
     dayOfWeek,
@@ -127,7 +134,7 @@ export function createSparseMatrix<T>(
  * This creates a 7x53 matrix (typical year layout) filled with loading cells
  */
 export function createLoadingMatrix(
-  weekStartsOn: WeekStartsOn = 0
+  firstDayOfWeek: HeatmapFirstDayOfWeek
 ): DayRect[][] {
   const rows = 7
   const cols = 53
@@ -135,10 +142,10 @@ export function createLoadingMatrix(
 
   return Array.from({ length: rows }, (_, row) =>
     Array.from({ length: cols }, (_, col) => ({
-      date: currentTimestamp,
+      timestamp: currentTimestamp,
       value: 0,
       color: '#000000',
-      dayOfWeek: (weekStartsOn + row) % 7,
+      dayOfWeek: (firstDayOfWeek + row) % 7,
       rowIndex: row,
       colIndex: col
     })))
@@ -149,18 +156,18 @@ export function createLoadingMatrix(
  * This function generates random data and the result is not stable.
  * @param range - 'recent' for last year, or a specific year number
  */
-export function generateHeatmapData(range?: 'recent' | number): RectData[] {
+export function heatmapMockData(year?: 'recent' | number): HeatmapData {
   let start: Date
   let end: Date
 
-  if (range === undefined || range === 'recent') {
+  if (year === undefined || year === 'recent') {
     end = new Date()
     start = subYears(end, 1)
   }
   else {
-    const year = Number(range)
-    start = startOfYear(new Date(year, 0, 1))
-    end = endOfYear(new Date(year, 11, 31))
+    const _year = Number(year)
+    start = startOfYear(new Date(_year, 0, 1))
+    end = endOfYear(new Date(_year, 11, 31))
   }
 
   const allDays = eachDayOfInterval({ start, end })
@@ -170,15 +177,15 @@ export function generateHeatmapData(range?: 'recent' | number): RectData[] {
     const isWeekend = dayOfWeek === 0 || dayOfWeek === 6
 
     if (isWeekend && Math.random() < 0.7) {
-      return { date: day.getTime(), value: 0 }
+      return { timestamp: day.getTime(), value: 0 }
     }
 
     if (!isWeekend && Math.random() < 0.15) {
-      return { date: day.getTime(), value: 0 }
+      return { timestamp: day.getTime(), value: 0 }
     }
 
     const value = Math.floor(Math.random() ** 2 * 40) + 1
 
-    return { date: day.getTime(), value }
+    return { timestamp: day.getTime(), value }
   })
 }

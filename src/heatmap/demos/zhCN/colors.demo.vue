@@ -5,18 +5,11 @@
 </markdown>
 
 <script setup lang="ts">
-import { generateHeatmapData } from 'naive-ui'
-import { ref } from 'vue'
+import { heatmapMockData } from 'naive-ui'
 
-const data = ref(generateHeatmapData())
+const data = heatmapMockData()
 
-const customColors = ref([
-  '#ebedf0',
-  '#9be9a8',
-  '#40c463',
-  '#30a14e',
-  '#216e39'
-])
+const customColors = ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39']
 
 const colorLabels = ['空白', '低活跃', '中活跃', '高活跃', '极高活跃']
 </script>
@@ -37,5 +30,5 @@ const colorLabels = ['空白', '低活跃', '中活跃', '高活跃', '极高活
     </div>
   </n-flex>
   <n-divider />
-  <n-heatmap :data="data" unit="commits" :colors="customColors" />
+  <n-heatmap :data="data" :colors="customColors" />
 </template>
