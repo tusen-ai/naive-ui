@@ -1,12 +1,18 @@
-const path = require('node:path')
-const babel = require('@babel/core')
-const glob = require('fast-glob')
-const fs = require('fs-extra')
+import path from 'node:path'
+import process from 'node:process'
+import * as babel from '@babel/core'
+import glob from 'fast-glob'
+import fs from 'fs-extra'
 
-const formatConfigs = {
+interface FormatConfig {
+  root: string
+  parse: (code: string, filePath: string, currentDir: string) => Promise<void>
+}
+
+const formatConfigs: Record<string, FormatConfig> = {
   es: {
-    root: path.join(__dirname, '../../es'),
-    async parse(code, filePath, currentDir) {
+    root: path.join(process.cwd(), 'es'),
+    async parse(code: string, filePath: string, currentDir: string) {
       const suffix = '.mjs'
       const result = await babel.transformAsync(code, {
         root: this.root,
@@ -44,13 +50,13 @@ const formatConfigs = {
         ]
       })
       const newFilePath = replaceExtname(filePath, suffix)
-      await fs.writeFile(newFilePath, result.code || code)
+      await fs.writeFile(newFilePath, result?.code || code)
       await fs.unlink(filePath)
     }
   },
   lib: {
-    root: path.join(__dirname, '../../lib'),
-    async parse(code, filePath, currentDir) {
+    root: path.join(process.cwd(), 'lib'),
+    async parse(code: string, filePath: string, currentDir: string) {
       const suffix = '.js'
       const result = await babel.transformAsync(code, {
         root: this.root,
@@ -78,15 +84,12 @@ const formatConfigs = {
           }
         ]
       })
-      await fs.writeFile(filePath, result.code || code)
+      await fs.writeFile(filePath, result?.code || code)
     }
   }
 }
 
-/**
- * @param {('es' | 'lib')[]} formats
- */
-module.exports.completePath = async (formats) => {
+export async function completePath(formats: ('es' | 'lib')[]): Promise<void> {
   await Promise.all(
     formats.map(async (format) => {
       const config = formatConfigs[format]
@@ -105,13 +108,11 @@ module.exports.completePath = async (formats) => {
   )
 }
 
-/**
- * @param {string} source
- * @param {string} currentDir
- * @param {string} suffix
- * @returns {string | null}
- */
-function parseSource(source, currentDir, suffix) {
+function parseSource(
+  source: string,
+  currentDir: string,
+  suffix: string
+): string | null {
   if (source.startsWith('.')) {
     const fullPath = joinPath(currentDir, source)
     return fs.existsSync(fullPath)
@@ -125,19 +126,16 @@ function parseSource(source, currentDir, suffix) {
   }
 }
 
-function replaceExtname(filePath, ext) {
+function replaceExtname(filePath: string, ext: string): string {
   const oldExt = path.extname(filePath)
   if (!oldExt)
     return filePath + ext
   return joinPath(path.dirname(filePath), path.basename(filePath, oldExt) + ext)
 }
 
-/**
- * @param {string} path
- */
-const normalizePath = path => path.replace(/\\/g, '/')
+const normalizePath = (p: string): string => p.replace(/\\/g, '/')
 
-function joinPath(firstPath, ...restPath) {
+function joinPath(firstPath: string, ...restPath: string[]): string {
   const joinedPath = normalizePath(path.join(firstPath, ...restPath))
   return firstPath.startsWith('./') ? `./${joinedPath}` : joinedPath
 }

@@ -1,15 +1,13 @@
-const dns = require('node:dns')
-const path = require('node:path')
-const process = require('node:process')
-const { babel } = require('@rollup/plugin-babel')
-const createDemoPlugin = require('./build/vite-plugin-demo')
+import dns from 'node:dns'
+import path from 'node:path'
+import process from 'node:process'
+import { babel } from '@rollup/plugin-babel'
+import { defineConfig } from 'vite'
+import { createDemoPlugin } from './build/vite-plugin-demo'
 
 dns.setDefaultResultOrder('verbatim')
 
-/**
- * @type {import('vite').UserConfig}
- */
-module.exports = {
+export default defineConfig({
   root: __dirname,
   plugins: createDemoPlugin(),
   resolve: {
@@ -67,13 +65,13 @@ module.exports = {
   },
   build: {
     outDir: 'site',
-    output: {
-      manualChunks: {
-        'grapheme-splitter': ['grapheme-splitter'],
-        katex: ['katex']
-      }
-    },
     rollupOptions: {
+      output: {
+        manualChunks: {
+          'grapheme-splitter': ['grapheme-splitter'],
+          katex: ['katex']
+        }
+      },
       plugins: [
         babel({
           babelHelpers: 'bundled'
@@ -86,4 +84,4 @@ module.exports = {
     jsxFactory: 'h',
     jsxFragment: 'Fragment'
   }
-}
+})

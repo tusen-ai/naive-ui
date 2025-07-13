@@ -1,6 +1,26 @@
-const tsToJs = require('./tsToJs')
+import { tsToJs } from './tsToJs'
 
-module.exports = function handleMergeCode({ parts, mergedParts, isVue }) {
+interface Parts {
+  api?: 'composition' | 'options'
+  language?: 'ts' | 'js'
+  template?: string
+  script?: string
+  style?: string
+}
+
+interface MergedParts {
+  tsCode: string
+  jsCode: string
+}
+
+interface MergeCodeOptions {
+  parts: Parts
+  mergedParts: MergedParts
+  isVue: boolean
+}
+
+export function handleMergeCode(options: MergeCodeOptions): void {
+  const { parts, mergedParts, isVue } = options
   const isCompositionApi = parts.api === 'composition'
   if (isVue && parts.language === 'ts') {
     // ts and js
@@ -39,16 +59,14 @@ ${tsToJs(parts.script)}
         ? `<template>${parts.template}</template>`
         : `<template>\n${parts.template
           .split('\n')
-          .map(line => (line.length ? `  ${line}` : line))
+          .map((line: string) => (line.length ? `  ${line}` : line))
           .join('\n')}\n</template>`
     }
     if (parts.script) {
       if (parts.template) {
         mergedParts.jsCode += '\n\n'
       }
-      mergedParts.jsCode += `<script${isCompositionApi ? ' setup' : ''}>
-${parts.script}
-</script>`
+      mergedParts.jsCode += `<script${isCompositionApi ? ' setup' : ''}>\n${parts.script}\n</script>`
     }
     if (parts.style) {
       if (parts.template || parts.script) {
@@ -56,9 +74,7 @@ ${parts.script}
       }
       const style = isVue
         ? `<style scoped>${parts.style}</style>`
-        : `<style scoped>
-${parts.style}
-</style>`
+        : `<style scoped>\n${parts.style}\n</style>`
       mergedParts.jsCode += style
     }
   }
