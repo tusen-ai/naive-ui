@@ -1,6 +1,7 @@
+import type { HeatmapData } from '../index'
 import { mount } from '@vue/test-utils'
 import { h } from 'vue'
-import { generateHeatmapData, NHeatmap } from '../index'
+import { heatmapMockData, NHeatmap } from '../index'
 
 describe('n-heatmap', () => {
   it('should work with import on demand', () => {
@@ -8,9 +9,9 @@ describe('n-heatmap', () => {
   })
 
   it('should work with `data` prop', () => {
-    const data = [
-      { date: new Date('2024-01-01').getTime(), value: 5 },
-      { date: new Date('2024-01-02').getTime(), value: 3 }
+    const data: HeatmapData = [
+      { timestamp: new Date('2024-01-01').getTime(), value: 5 },
+      { timestamp: new Date('2024-01-02').getTime(), value: 3 }
     ]
     const wrapper = mount(NHeatmap, { props: { data } })
     expect(wrapper.find('.n-heatmap').exists()).toBe(true)
@@ -27,7 +28,7 @@ describe('n-heatmap', () => {
   })
 
   it('should work with `showWeekLabels` prop', async () => {
-    const data = generateHeatmapData()
+    const data = heatmapMockData()
     const wrapper = mount(NHeatmap, { props: { data, showWeekLabels: true } })
     expect(wrapper.find('.n-heatmap__week-label-cell').exists()).toBe(true)
 
@@ -37,7 +38,7 @@ describe('n-heatmap', () => {
   })
 
   it('should work with `showMonthLabels` prop', async () => {
-    const data = generateHeatmapData()
+    const data = heatmapMockData()
     const wrapper = mount(NHeatmap, { props: { data, showMonthLabels: true } })
     expect(wrapper.find('.n-heatmap__month-label-cell').exists()).toBe(true)
 
@@ -47,7 +48,7 @@ describe('n-heatmap', () => {
   })
 
   it('should work with `showColorIndicator` prop', async () => {
-    const data = generateHeatmapData()
+    const data = heatmapMockData()
     const wrapper = mount(NHeatmap, {
       props: { data, showColorIndicator: true }
     })
@@ -60,7 +61,7 @@ describe('n-heatmap', () => {
 
   it('should work with `colorTheme` prop', () => {
     ;(['github', 'blue', 'green'] as const).forEach((theme) => {
-      const data = generateHeatmapData()
+      const data = heatmapMockData()
       const wrapper = mount(NHeatmap, { props: { data, colorTheme: theme } })
       expect(wrapper.find('.n-heatmap').exists()).toBe(true)
       wrapper.unmount()
@@ -69,7 +70,7 @@ describe('n-heatmap', () => {
 
   it('should work with `size` prop', () => {
     ;(['small', 'medium', 'large'] as const).forEach((size) => {
-      const data = generateHeatmapData()
+      const data = heatmapMockData()
       const wrapper = mount(NHeatmap, { props: { data, size } })
       expect(wrapper.find('.n-heatmap').exists()).toBe(true)
       wrapper.unmount()
@@ -78,7 +79,7 @@ describe('n-heatmap', () => {
 
   it('should work with `weekStartsOn` prop', () => {
     ;([0, 1, 6] as const).forEach((weekStartsOn) => {
-      const data = generateHeatmapData()
+      const data = heatmapMockData()
       const wrapper = mount(NHeatmap, { props: { data, weekStartsOn } })
       expect(wrapper.find('.n-heatmap').exists()).toBe(true)
       wrapper.unmount()
@@ -86,7 +87,7 @@ describe('n-heatmap', () => {
   })
 
   it('should work with info slot', () => {
-    const data = generateHeatmapData()
+    const data = heatmapMockData()
     const wrapper = mount(NHeatmap, {
       props: { data },
       slots: {
@@ -99,7 +100,7 @@ describe('n-heatmap', () => {
   })
 
   it('should work with indicator slot', () => {
-    const data = generateHeatmapData()
+    const data = heatmapMockData()
     const wrapper = mount(NHeatmap, {
       props: { data, showColorIndicator: false },
       slots: {

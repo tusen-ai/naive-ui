@@ -5,10 +5,10 @@ Each color has its own temperature.
 </markdown>
 
 <script setup lang="ts">
-import { generateHeatmapData } from 'naive-ui'
+import { heatmapMockData } from 'naive-ui'
 import { ref } from 'vue'
 
-const data = ref(generateHeatmapData())
+const data = ref(heatmapMockData())
 
 const customColors = ref([
   '#ebedf0',

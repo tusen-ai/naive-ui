@@ -11,6 +11,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --n-loading-color-start
 // --n-loading-color-end
 // --n-rect-color (for individual rect background color)
+// --n-bezier
 
 export default c([
   c('@keyframes heatmap-loading', `
@@ -56,6 +57,7 @@ export default c([
       font-weight: var(--n-font-weight);
       padding: 0 2px 8px;
       vertical-align: bottom;
+      transition: color .3s var(--n-bezier);
     `),
     cE('week-label-cell', `
       font-size: var(--n-font-size);
@@ -69,6 +71,7 @@ export default c([
       vertical-align: middle;
       white-space: nowrap;
       font-weight: var(--n-font-weight);
+      transition: color .3s var(--n-bezier);
     `),
     cE('day-cell', `
       width: var(--n-rect-size);
@@ -76,6 +79,7 @@ export default c([
       padding: 0;
       border: none;
       vertical-align: middle;
+      transition: color .3s var(--n-bezier);
     `),
     cE('empty-cell', `
       width: calc(var(--n-rect-size) + 1px);
@@ -113,7 +117,6 @@ export default c([
     width: var(--n-rect-size);
     height: var(--n-rect-size);
     border-radius: var(--n-border-radius);
-    cursor: pointer;
     transition: all 0.1s ease-in-out;
     background-color: var(--n-rect-color);
   `, [
@@ -142,6 +145,7 @@ export default c([
     cE('label', `
       font-size: var(--n-font-size);
       color: var(--n-text-color);
+      transition: color .3s var(--n-bezier);
     `)
   ])
 ])

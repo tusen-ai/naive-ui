@@ -6,7 +6,7 @@ Every square is a piece of persistence, and blanks are the rhythm of life.
 
 <script setup lang="ts">
 import type { WeekStartsOn } from 'naive-ui'
-import { generateHeatmapData } from 'naive-ui'
+import { heatmapMockData } from 'naive-ui'
 import { computed, ref } from 'vue'
 
 const value = ref<'recent' | number>('recent')
@@ -42,7 +42,7 @@ const dateRanges = [
 }[]
 
 const yearData = computed(() => {
-  return generateHeatmapData(value.value)
+  return heatmapMockData(value.value)
 })
 
 const dataStats = computed(() => {
