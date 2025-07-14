@@ -1,5 +1,12 @@
 export const heatmapColorThemes = {
   github: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
+  githubDark: [
+    'rgba(255, 255, 255, 0.04)',
+    '#0e4429',
+    '#006d32',
+    '#26a641',
+    '#39d353'
+  ],
   green: ['#f0f0f0', '#c6e48b', '#7bc96f', '#239a3b', '#196127'],
   blue: ['#ebedf0', '#c0e7ff', '#73b3ff', '#0969da', '#0550ae'],
   orange: ['#ebedf0', '#fed7aa', '#fb923c', '#ea580c', '#c2410c'],

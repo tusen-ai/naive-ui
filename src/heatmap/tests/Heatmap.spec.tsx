@@ -86,16 +86,16 @@ describe('n-heatmap', () => {
     })
   })
 
-  it('should work with info slot', () => {
+  it('should work with footer slot', () => {
     const data = heatmapMockData()
     const wrapper = mount(NHeatmap, {
       props: { data },
       slots: {
-        info: () => h('div', { class: 'custom-info' }, 'Custom Info')
+        footer: () => h('div', { class: 'custom-footer' }, 'Custom Footer')
       }
     })
-    expect(wrapper.find('.custom-info').exists()).toBe(true)
-    expect(wrapper.find('.custom-info').text()).toBe('Custom Info')
+    expect(wrapper.find('.custom-footer').exists()).toBe(true)
+    expect(wrapper.find('.custom-footer').text()).toBe('Custom Footer')
     wrapper.unmount()
   })
 

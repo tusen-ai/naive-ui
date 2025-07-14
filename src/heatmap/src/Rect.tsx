@@ -38,12 +38,18 @@ export default defineComponent({
     })
 
     const tooltipContentRef = computed(() => {
-      return props.tooltipSlot
-        ? props.tooltipSlot({
-            timestamp: props.data.timestamp,
-            value: props.data.value
-          })
-        : null
+      if (props.tooltipSlot) {
+        return props.tooltipSlot({
+          timestamp: props.data.timestamp,
+          value: props.data.value
+        })
+      }
+      // Default tooltip content
+      if (props.data.value !== null) {
+        const date = new Date(props.data.timestamp).toLocaleDateString()
+        return `${date}: ${props.data.value}`
+      }
+      return null
     })
 
     return {
@@ -73,7 +79,7 @@ export default defineComponent({
       />
     )
 
-    return typeof tooltip === 'boolean' || loading ? (
+    return tooltip === false || loading ? (
       triggerNode
     ) : (
       <Tooltip trigger="hover" {...tooltipProps}>

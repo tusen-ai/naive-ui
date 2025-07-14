@@ -41,10 +41,13 @@ export function calcColorByValue(
  * fill gaps [firstDate,lastDate] with value 0
  *
  * [firstCalendarDate,firstDate] and [lastDate,lastCalendarDate] with value null
+ *
+ * @param fillAllCalendarDates - if true, fill all calendar dates with 0 instead of null for dates outside data range
  */
 export function completeDataGaps(
   data: HeatmapData,
-  firstDayOfWeek: HeatmapFirstDayOfWeek
+  firstDayOfWeek: HeatmapFirstDayOfWeek,
+  fillAllCalendarDates?: boolean
 ): HeatmapData {
   const sortedData = [...data].sort((a, b) => a.timestamp - b.timestamp)
   const firstDate = sortedData[0].timestamp
@@ -73,9 +76,12 @@ export function completeDataGaps(
       return dateValue
     }
 
-    const value = isWithinInterval(date, { start: firstDate, end: lastDate })
-      ? 0
-      : null
+    // For recent year mode, fill all calendar dates with 0 to ensure first column is complete
+    const value
+      = fillAllCalendarDates
+        || isWithinInterval(date, { start: firstDate, end: lastDate })
+        ? 0
+        : null
     return { timestamp: date.getTime(), value }
   })
 }

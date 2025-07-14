@@ -10,24 +10,32 @@ import { ref } from 'vue'
 
 const data = ref(heatmapMockData())
 
-const customColors = ref([
-  '#ebedf0',
-  '#9be9a8',
-  '#40c463',
-  '#30a14e',
-  '#216e39'
-])
+const customActiveColors = ref(['#9be9a8', '#40c463', '#30a14e', '#216e39'])
+
+const minimumColor = ref('#ebedf0')
 
 const colorLabels = ['Empty', 'Low', 'Medium', 'High', 'Very High']
 </script>
 
 <template>
   <n-flex justify="space-around">
-    <div v-for="(_, index) in customColors" :key="index">
+    <div>
       <n-flex vertical align="center">
-        <span>{{ colorLabels[index] }}</span>
+        <span>Minimum Color</span>
         <n-color-picker
-          v-model:value="customColors[index]"
+          v-model:value="minimumColor"
+          :show-alpha="false"
+          size="small"
+          :modes="['hex']"
+          style="width: 100px"
+        />
+      </n-flex>
+    </div>
+    <div v-for="(_, index) in customActiveColors" :key="index">
+      <n-flex vertical align="center">
+        <span>{{ colorLabels[index + 1] }}</span>
+        <n-color-picker
+          v-model:value="customActiveColors[index]"
           :show-alpha="false"
           size="small"
           :modes="['hex']"
@@ -37,5 +45,12 @@ const colorLabels = ['Empty', 'Low', 'Medium', 'High', 'Very High']
     </div>
   </n-flex>
   <n-divider />
-  <n-heatmap :data="data" unit="commits" :colors="customColors" />
+  <n-scrollbar x-scrollable style="max-width: 100%">
+    <n-heatmap
+      :data="data"
+      unit="commits"
+      :active-colors="customActiveColors"
+      :minimum-color="minimumColor"
+    />
+  </n-scrollbar>
 </template>

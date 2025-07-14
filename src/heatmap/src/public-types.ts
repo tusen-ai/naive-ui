@@ -1,3 +1,5 @@
+import type { VNode } from 'vue'
+
 export type HeatmapData = HeatmapDataItem[]
 export interface HeatmapDataItem {
   timestamp: number
@@ -8,9 +10,11 @@ export interface HeatmapTooltipSlotProps extends HeatmapDataItem {
 }
 
 export interface HeatmapSlots {
-  info?: () => any
-  indicator?: () => any
-  tooltip?: (data: HeatmapTooltipSlotProps) => any
+  footer?: () => VNode[]
+  indicator?: () => VNode[]
+  'indicator-leading-text'?: () => VNode[]
+  'indicator-trailing-text'?: () => VNode[]
+  tooltip?: (data: HeatmapTooltipSlotProps) => VNode[]
 }
 
 export type HeatmapFirstDayOfWeek = 0 | 1 | 2 | 3 | 4 | 5 | 6

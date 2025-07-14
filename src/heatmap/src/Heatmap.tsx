@@ -12,7 +12,7 @@ import type {
 import { addDays, format, parseISO, startOfWeek } from 'date-fns'
 import { groupBy, mapValues, maxBy } from 'lodash-es'
 import { pxfy } from 'seemly'
-import { computed, defineComponent, h } from 'vue'
+import { computed, defineComponent, h, inject } from 'vue'
 import {
   useConfig,
   useLocale,
@@ -21,6 +21,7 @@ import {
   useThemeClass
 } from '../../_mixins'
 import { createKey, resolveSlot, resolveWrappedSlot } from '../../_utils'
+import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { transformNaiveFirstDayOfWeekToDateFns } from '../../date-picker/src/utils'
 import heatmapLight from '../styles/light'
 import HeatmapColorIndicator from './ColorIndicator'
@@ -41,7 +42,8 @@ interface Col {
 
 export const heatmapProps = {
   ...(useTheme.props as ThemeProps<HeatmapTheme>),
-  colors: Array as PropType<string[]>,
+  minimumColor: String,
+  activeColors: Array as PropType<string[]>,
   colorTheme: {
     type: String as PropType<HeatmapColorTheme>,
     default: 'github'
@@ -73,7 +75,8 @@ export const heatmapProps = {
   tooltip: {
     type: [Boolean, Object] as PropType<TooltipProps | false>,
     default: true
-  }
+  },
+  fillCalendar: Boolean
 } as const
 
 export type HeatmapProps = ExtractPublicPropTypes<typeof heatmapProps>
@@ -86,6 +89,7 @@ export default defineComponent({
     const { mergedClsPrefixRef, mergedRtlRef, inlineThemeDisabled }
       = useConfig(props)
     const { localeRef, dateLocaleRef } = useLocale('Heatmap')
+    const NConfigProvider = inject(configProviderInjectionKey, null)
     const themeRef = useTheme(
       'Heatmap',
       '-heatmap',
@@ -102,11 +106,11 @@ export default defineComponent({
         self: {
           fontWeight,
           textColor,
-          borderRadius,
           borderColor,
           loadingColorStart,
           loadingColorEnd,
           [createKey('rectSize', size)]: rectSize,
+          [createKey('borderRadius', size)]: sizeBorderRadius,
           [createKey('xGap', size)]: defaultXGap,
           [createKey('yGap', size)]: defaultYGap,
           [createKey('fontSize', size)]: fontSize
@@ -118,7 +122,7 @@ export default defineComponent({
         '--n-font-size': fontSize,
         '--n-font-weight': fontWeight,
         '--n-text-color': textColor,
-        '--n-border-radius': borderRadius,
+        '--n-border-radius': sizeBorderRadius,
         '--n-border-color': borderColor,
         '--n-loading-color-start': loadingColorStart,
         '--n-loading-color-end': loadingColorEnd,
@@ -152,10 +156,24 @@ export default defineComponent({
       : undefined
 
     const mergedColorsRef = computed(() => {
-      if (props.colors && props.colors.length > 0) {
-        return props.colors
+      let mergedColors: string[] = []
+      if (props.minimumColor) {
+        mergedColors.push(props.minimumColor)
       }
-      return heatmapColorThemes[props.colorTheme]
+      if (Array.isArray(props.activeColors)) {
+        mergedColors.push(...props.activeColors)
+      }
+      else {
+        const mergedTheme = NConfigProvider?.mergedThemeRef.value
+        const isDarkTheme = mergedTheme?.name === 'dark'
+        const theme
+          = props.colorTheme === 'github' && isDarkTheme
+            ? 'githubDark'
+            : props.colorTheme
+        mergedColors = heatmapColorThemes[theme]
+      }
+
+      return mergedColors
     })
 
     const normalizedDataRef = computed(() => {
@@ -164,7 +182,8 @@ export default defineComponent({
       }
       return completeDataGaps(
         props.data,
-        transformNaiveFirstDayOfWeekToDateFns(props.firstDayOfWeek)
+        transformNaiveFirstDayOfWeekToDateFns(props.firstDayOfWeek),
+        props.fillCalendar
       )
     })
 
@@ -400,22 +419,32 @@ export default defineComponent({
         </div>
         <div class={`${mergedClsPrefix}-heatmap__footer`}>
           {resolveWrappedSlot(
-            $slots.info,
+            $slots.footer,
             children =>
               children && (
-                <div class={`${mergedClsPrefix}-heatmap__footer__info`}>
+                <div class={`${mergedClsPrefix}-heatmap__footer`}>
                   {children}
                 </div>
               )
           )}
-          <div class={`${mergedClsPrefix}-heatmap__footer__indicator`}>
+          <div class={`${mergedClsPrefix}-heatmap__indicator`}>
             {resolveSlot($slots.indicator, () => [
               !loading && showColorIndicator && (
                 <HeatmapColorIndicator
                   colors={mergedColors}
                   clsPrefix={mergedClsPrefix}
-                  indicatorText={[locale.less, locale.more]}
-                />
+                >
+                  {{
+                    'leading-text': () =>
+                      resolveSlot($slots['indicator-leading-text'], () => [
+                        locale.less
+                      ]),
+                    'trailing-text': () =>
+                      resolveSlot($slots['indicator-trailing-text'], () => [
+                        locale.more
+                      ])
+                  }}
+                </HeatmapColorIndicator>
               )
             ])}
           </div>
