@@ -74,6 +74,7 @@
     "@types/katex": "^0.16.2",
     "@types/lodash": "^4.14.198",
     "@types/lodash-es": "^4.17.9",
+    "@vicons/antd": "^0.13.0",
     "async-validator": "^4.2.5",
     "css-render": "^0.15.14",
     "csstype": "^3.1.3",
