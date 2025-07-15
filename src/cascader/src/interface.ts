@@ -124,6 +124,10 @@ export interface CascaderMenuExposedMethods {
   showErrorMessage: (label: string) => void
 }
 
+export interface CascaderMenuBaseInst {
+  showErrorMessage: (label: string) => void
+}
+
 export type CascaderMenuInstance = {
   $el: HTMLElement
 } & CascaderMenuExposedMethods
