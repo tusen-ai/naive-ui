@@ -2,6 +2,9 @@ import { generate } from '@babel/generator'
 import { parse } from '@babel/parser'
 import traverse from '@babel/traverse'
 
+// Hack to handle both CJS and ESM imports
+const traverseBabel = (traverse as any).default || traverse
+
 export function terseCssr(code: string): string {
   const patternSpace = / +/g
   const patternEnter = /\n+/g
@@ -10,7 +13,7 @@ export function terseCssr(code: string): string {
     sourceType: 'module'
   })
 
-  traverse(ast, {
+  traverseBabel(ast, {
     TemplateElement(path: any) {
       ;(['raw', 'cooked'] as const).forEach((type) => {
         path.node.value[type] = path.node.value[type]
