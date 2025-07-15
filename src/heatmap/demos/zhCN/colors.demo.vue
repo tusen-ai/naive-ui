@@ -18,7 +18,7 @@ const customActiveColors = ref(['#9be9a8', '#40c463', '#30a14e', '#216e39'])
 
 const minimumColor = ref('#ebedf0')
 
-const colorLabels = ['空白', '低活跃', '中活跃', '高活跃', '极高活跃']
+const colorLabels = ['低活跃', '中活跃', '高活跃', '极高活跃']
 </script>
 
 <template>
@@ -37,7 +37,7 @@ const colorLabels = ['空白', '低活跃', '中活跃', '高活跃', '极高活
     </div>
     <div v-for="(_, index) in customActiveColors" :key="index">
       <n-flex vertical align="center">
-        <span>{{ colorLabels[index + 1] }}</span>
+        <span>{{ colorLabels[index] }}</span>
         <n-color-picker
           v-model:value="customActiveColors[index]"
           :show-alpha="false"

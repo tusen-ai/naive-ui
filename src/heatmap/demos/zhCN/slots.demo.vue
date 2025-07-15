@@ -24,12 +24,12 @@ const yearData = heatmapMockData()
             右侧指示器插槽
           </n-text>
         </template>
-        <template #tooltip="{ timestamp: date, value: tooltipValue, unit }">
+        <template #tooltip="{ timestamp: date, value: tooltipValue }">
           <div>
             <div>
               <strong>日期:</strong> {{ new Date(date).toLocaleDateString() }}
             </div>
-            <div><strong>数值:</strong> {{ tooltipValue ?? 0 }} {{ unit }}</div>
+            <div><strong>数值:</strong> {{ tooltipValue ?? 0 }}</div>
             <div v-if="tooltipValue != null && tooltipValue > 5">
               <n-tag type="success" size="small">
                 高活跃度

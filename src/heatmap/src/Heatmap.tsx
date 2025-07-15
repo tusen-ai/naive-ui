@@ -41,15 +41,16 @@ interface Col {
 
 export const heatmapProps = {
   ...(useTheme.props as ThemeProps<HeatmapTheme>),
-  minimumColor: String,
   activeColors: Array as PropType<string[]>,
   colorTheme: String as PropType<HeatmapColorTheme>,
   data: Array as PropType<HeatmapData>,
-  loading: Boolean,
+  fillCalendarLeading: Boolean,
   firstDayOfWeek: {
     type: Number as PropType<HeatmapFirstDayOfWeek>,
     default: 0
   },
+  loading: Boolean,
+  minimumColor: String,
   showColorIndicator: {
     type: Boolean,
     default: true
@@ -66,13 +67,12 @@ export const heatmapProps = {
     type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'
   },
-  xGap: [Number, String] as PropType<number | string>,
-  yGap: [Number, String] as PropType<number | string>,
   tooltip: {
-    type: [Boolean, Object] as PropType<TooltipProps | false>,
+    type: [Boolean, Object] as PropType<TooltipProps | boolean>,
     default: true
   },
-  fillCalendarLeading: Boolean
+  xGap: [Number, String] as PropType<number | string>,
+  yGap: [Number, String] as PropType<number | string>
 } as const
 
 export type HeatmapProps = ExtractPublicPropTypes<typeof heatmapProps>
@@ -381,9 +381,12 @@ export default defineComponent({
                               data={day}
                               color={day.color}
                               tooltip={this.tooltip}
-                              tooltipSlot={$slots.tooltip}
                               loading={loading}
-                            />
+                            >
+                              {{
+                                tooltip: () => $slots.tooltip?.(day)
+                              }}
+                            </Rect>
                           </td>
                         ) : (
                           <td

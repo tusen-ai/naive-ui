@@ -1,10 +1,17 @@
+import type { PropType, SlotsType, VNode } from 'vue'
 import type { PopoverProps } from '../../popover/src/Popover'
-import type { HeatmapDataItem, HeatmapTooltipSlotProps } from './public-types'
-import { computed, defineComponent, h, type PropType, type VNode } from 'vue'
+import type { HeatmapDataItem } from './public-types'
+import { computed, defineComponent, h } from 'vue'
+import { resolveSlotWithTypedProps } from '../../_utils'
 import Tooltip from '../../tooltip/src/Tooltip'
+
+export interface RectSlots {
+  tooltip?: (data: HeatmapDataItem) => VNode[]
+}
 
 export default defineComponent({
   name: 'HeatmapRect',
+  slots: Object as SlotsType<RectSlots>,
   props: {
     mergedClsPrefix: {
       type: String,
@@ -21,12 +28,9 @@ export default defineComponent({
     style: Object,
     loading: Boolean,
     tooltip: {
-      type: [Boolean, Object] as PropType<PopoverProps | false>,
+      type: [Boolean, Object] as PropType<PopoverProps | boolean>,
       default: true
-    },
-    tooltipSlot: Function as PropType<
-      (props: HeatmapTooltipSlotProps) => VNode[]
-    >
+    }
   },
   setup(props) {
     const cssVarsRef = computed(() => ({
@@ -37,25 +41,15 @@ export default defineComponent({
       return typeof props.tooltip === 'object' ? props.tooltip : {}
     })
 
-    const tooltipContentRef = computed(() => {
-      if (props.tooltipSlot) {
-        return props.tooltipSlot({
-          timestamp: props.data.timestamp,
-          value: props.data.value
-        })
-      }
-      // Default tooltip content
-      if (props.data.value !== null) {
-        const date = new Date(props.data.timestamp).toLocaleDateString()
-        return `${date}: ${props.data.value}`
-      }
-      return null
+    const defaultTooltipContentRef = computed(() => {
+      const date = new Date(props.data.timestamp).toLocaleDateString()
+      return props.data.value !== null ? `${date}: ${props.data.value}` : date
     })
 
     return {
       cssVars: cssVarsRef,
       tooltipProps: tooltipPropsRef,
-      tooltipContent: tooltipContentRef
+      defaultTooltipContent: defaultTooltipContentRef
     }
   },
   render() {
@@ -65,10 +59,10 @@ export default defineComponent({
       cssVars,
       tooltip,
       tooltipProps,
-      tooltipContent,
-      loading
+      defaultTooltipContent,
+      loading,
+      data
     } = this
-
     const triggerNode = (
       <div
         class={[
@@ -84,7 +78,10 @@ export default defineComponent({
     ) : (
       <Tooltip trigger="hover" {...tooltipProps}>
         {{
-          default: () => tooltipContent,
+          default: () =>
+            resolveSlotWithTypedProps(this.$slots.tooltip, data, () => [
+              <div>{defaultTooltipContent}</div>
+            ]),
           trigger: () => triggerNode
         }}
       </Tooltip>

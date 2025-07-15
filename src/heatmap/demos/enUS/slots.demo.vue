@@ -24,14 +24,12 @@ const yearData = heatmapMockData()
             Right indicator slot
           </n-text>
         </template>
-        <template #tooltip="{ timestamp: date, value: tooltipValue, unit }">
+        <template #tooltip="{ timestamp: date, value: tooltipValue }">
           <div>
             <div>
               <strong>Date:</strong> {{ new Date(date).toLocaleDateString() }}
             </div>
-            <div>
-              <strong>Value:</strong> {{ tooltipValue ?? 0 }} {{ unit }}
-            </div>
+            <div><strong>Value:</strong> {{ tooltipValue ?? 0 }}</div>
             <div v-if="tooltipValue != null && tooltipValue > 5">
               <n-tag type="success" size="small">
                 High Activity

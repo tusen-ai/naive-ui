@@ -5,16 +5,13 @@ export interface HeatmapDataItem {
   timestamp: number
   value?: number | null
 }
-export interface HeatmapTooltipSlotProps extends HeatmapDataItem {
-  unit?: string
-}
 
 export interface HeatmapSlots {
   footer?: () => VNode[]
   indicator?: () => VNode[]
   'indicator-leading-text'?: () => VNode[]
   'indicator-trailing-text'?: () => VNode[]
-  tooltip?: (data: HeatmapTooltipSlotProps) => VNode[]
+  tooltip?: (data: HeatmapDataItem) => VNode[]
 }
 
 export type HeatmapFirstDayOfWeek = 0 | 1 | 2 | 3 | 4 | 5 | 6
