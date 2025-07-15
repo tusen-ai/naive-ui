@@ -84,6 +84,7 @@ export default c([
     cE('empty-cell', `
       width: calc(var(--n-rect-size) + 1px);
       height: calc(var(--n-rect-size) + 1px);
+      border-radius: var(--n-border-radius);
     `),
     cE('loading-cell', `
       width: calc(var(--n-rect-size) + 1px);
@@ -95,19 +96,14 @@ export default c([
     cE('footer', `
       display: flex;
       justify-content: space-between;
+      margin-left: 17px;
       align-items: center;
       margin-top: 8px;
       &:has(> :only-child) {
         justify-content: flex-end;
       }
     `),
-    cE('footer__info', `
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      margin-left: 27px;
-    `),
-    cE('footer__indicator', `
+    cE('indicator', `
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -117,14 +113,23 @@ export default c([
     width: var(--n-rect-size);
     height: var(--n-rect-size);
     border-radius: var(--n-border-radius);
-    transition: all 0.1s ease-in-out;
+    transition: all 0.15s ease-in-out;
     background-color: var(--n-rect-color);
+    cursor: pointer;
   `, [
+    c('&:hover', `
+      outline: 1px solid var(--n-border-color);
+      outline-offset: 1px;
+    `),
     cM('loading', `
       cursor: default;
       animation: 2s heatmap-loading infinite cubic-bezier(0.36, 0, 0.64, 1);
       background: var(--n-loading-color-start) !important;
-    `)
+    `, [
+      c('&:hover', `
+        outline: none;
+      `)
+    ])
   ]),
   cB('heatmap-color-indicator', `
     display: flex;
