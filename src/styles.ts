@@ -12,6 +12,8 @@ export { avatarDark } from './avatar/styles'
 export { backTopDark } from './back-top/styles'
 export { badgeDark, badgeRtl as unstableBadgeRtl } from './badge/styles'
 export { breadcrumbDark } from './breadcrumb/styles'
+export { bubbleListDark } from './bubble-list/styles'
+export { bubbleDark } from './bubble/styles'
 export {
   buttonGroupDark,
   buttonGroupRtl as unstableButtonGroupRtl
@@ -62,6 +64,7 @@ export { rowRtl as unstableRowRtl } from './legacy-grid/styles'
 export { listDark, listRtl as unstableListRtl } from './list/styles'
 export { loadingBarDark } from './loading-bar/styles'
 export { logDark } from './log/styles'
+export { markdownDark } from './markdown/styles'
 export { mentionDark } from './mention/styles'
 export { menuDark } from './menu/styles'
 export { messageRtl as unstableMessageRtl } from './message/styles'
@@ -103,8 +106,8 @@ export {
   treeSelectDark,
   treeSelectRtl as unstableTreeSelectRtl
 } from './tree-select/styles'
-
 export { treeDark, treeRtl as unstableTreeRtl } from './tree/styles'
+export { typewriterDark } from './typewriter/styles'
 export { typographyDark } from './typography/styles'
 export { uploadRtl as unstableUploadsRtl, uploadDark } from './upload/styles'
 export { watermarkDark } from './watermark/styles'
