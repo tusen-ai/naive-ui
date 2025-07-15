@@ -62,7 +62,6 @@ export default defineComponent({
       mergedThemeRef,
       getColumnStyleRef
     } = inject(cascaderInjectionKey)!
-    const submenuInstRefs: CascaderSubmenuInstance[] = []
 
     function handleClickOutside(e: MouseEvent): void {
       handleCascaderMenuClickOutside(e)
@@ -73,19 +72,17 @@ export default defineComponent({
       cascaderMenuBaseRef.value!.showErrorMessage(label)
     }
 
+    function scroll(depth: number, index: number, elSize: number) {
+      cascaderMenuBaseRef.value!.scroll(depth, index, elSize)
+    }
+
     const exposedRef: CascaderMenuExposedMethods = {
-      scroll(depth: number, index: number, elSize: number) {
-        const submenuInst = submenuInstRefs[depth]
-        if (submenuInst) {
-          submenuInst.scroll(index, elSize)
-        }
-      },
+      scroll,
       showErrorMessage
     }
     return {
       isMounted: isMountedRef,
       mergedClsPrefix: mergedClsPrefixRef,
-      submenuInstRefs,
       mergedTheme: mergedThemeRef,
       getColumnStyle: getColumnStyleRef,
       handleClickOutside,
@@ -93,7 +90,7 @@ export default defineComponent({
     }
   },
   render() {
-    const { submenuInstRefs, mergedClsPrefix, mergedTheme } = this
+    const { mergedClsPrefix, mergedTheme } = this
     return (
       <Transition name="fade-in-scale-up-transition" appear={this.isMounted}>
         {{
@@ -105,7 +102,6 @@ export default defineComponent({
                 ref="cascaderMenuBaseRef"
                 mergedClsPrefix={mergedClsPrefix}
                 mergedTheme={mergedTheme}
-                submenuInstRefs={submenuInstRefs}
                 menuModel={this.menuModel}
                 onMousedown={this.onMousedown}
                 onFocus={this.onFocus}
@@ -113,6 +109,10 @@ export default defineComponent({
                 onKeydown={this.onKeydown}
                 onTabout={this.onTabout}
               >
+                {{
+                  action: () => this.$slots.action?.(),
+                  empty: () => this.$slots.empty?.()
+                }}
               </NCascaderMenuBase>,
               [
                 [

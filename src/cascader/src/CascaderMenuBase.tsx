@@ -28,10 +28,6 @@ export default defineComponent({
       type: Object as PropType<any>,
       required: true
     },
-    submenuInstRefs: {
-      type: Array as PropType<CascaderSubmenuInstance[]>,
-      required: true
-    },
     onMousedown: {
       type: Function as PropType<(e: MouseEvent) => void>,
       required: true
@@ -61,6 +57,8 @@ export default defineComponent({
       syncCascaderMenuPosition()
     }
     useOnResize(selfElRef, handleResize)
+    const submenuInstRefs: CascaderSubmenuInstance[] = []
+
     function handleFocusin(e: FocusEvent): void {
       const { value: selfEl } = selfElRef
       if (!selfEl)
@@ -88,14 +86,23 @@ export default defineComponent({
       maskInstRef.value?.showOnce(loadingRequiredMessage(label))
     }
 
+    function scroll(depth: number, index: number, elSize: number) {
+      const submenuInst = submenuInstRefs[depth]
+      if (submenuInst) {
+        submenuInst.scroll(index, elSize)
+      }
+    }
+
     const exposedRef: CascaderMenuBaseInst = {
-      showErrorMessage
+      showErrorMessage,
+      scroll
     }
 
     return {
       handleFocusin,
       handleFocusout,
       getColumnStyle: getColumnStyleRef,
+      submenuInstRefs,
       ...exposedRef
     }
   },

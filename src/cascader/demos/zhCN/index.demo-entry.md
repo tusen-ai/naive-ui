@@ -18,6 +18,7 @@ custom-render.vue
 focus.vue
 status.vue
 default-value-debug.vue
+cascader-panel.vue
 ```
 
 ## API

@@ -125,6 +125,7 @@ export interface CascaderMenuExposedMethods {
 }
 
 export interface CascaderMenuBaseInst {
+  scroll: (depth: number, index: number, elSize: number) => void
   showErrorMessage: (label: string) => void
 }
 
