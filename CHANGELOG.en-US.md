@@ -34,6 +34,7 @@
 - - `n-image` adds showPreview methods, closes [#6695](https://github.com/tusen-ai/naive-ui/issues/6695).
 - `n-image-preview` `n-image-group` support being used independently.
 - `n-input-otp` adds `focusOnChar` util method, closes [#7073](https://github.com/tusen-ai/naive-ui/issues/7073).
+- 🌟 Adds `n-cascader-panel` component. close [#5347](https://github.com/tusen-ai/naive-ui/issues/5347), [#5901](https://github.com/tusen-ai/naive-ui/issues/5901)
 
 ## 2.42.0
 

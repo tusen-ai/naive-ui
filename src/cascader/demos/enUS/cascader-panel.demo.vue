@@ -1,5 +1,5 @@
 <markdown>
-# 级联面板
+# CascaderPanel.demo
 </markdown>
 
 <script lang="ts" setup>
@@ -46,7 +46,7 @@ const options = getOptions()
   <span>{{ value }}</span>
   <NCascaderPanel v-model:value="value" :options="options">
     <template #action>
-      站在能分割世界的桥
+      Standing on a bridge that can divide the world
     </template>
     <template #arrow>
       <Flash16Regular />

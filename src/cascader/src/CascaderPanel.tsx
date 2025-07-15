@@ -1,26 +1,18 @@
-import type { FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { SelectBaseOption } from '../../select/src/interface'
 import type { CascaderTheme } from '../styles'
 import type {
-  CascaderInst,
   CascaderMenuInstance,
   CascaderOption,
+  CascaderPanelInst,
   ExpandTrigger,
-  Filter,
   Key,
   OnLoad,
   OnUpdateValue,
-  OnUpdateValueImpl,
   Value
 } from './interface'
 import { changeColor, depx, happensIn } from 'seemly'
-import {
-  type CheckStrategy,
-  createTreeMate,
-  SubtreeNotLoadedError
-} from 'treemate'
+import { type CheckStrategy, SubtreeNotLoadedError } from 'treemate'
 import { useIsMounted } from 'vooks'
 import {
   computed,
@@ -28,33 +20,32 @@ import {
   defineComponent,
   h,
   type HTMLAttributes,
-  isReactive,
   type PropType,
   provide,
   ref,
   type SlotsType,
   toRef,
   type VNode,
-  type VNodeChild,
-  watch,
-  watchEffect
+  type VNodeChild
 } from 'vue'
-import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
-import { call, markEventEffectPerformed, warnOnce } from '../../_utils'
+import {
+  useConfig,
+  useFormItem,
+  useLocale,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
+import { markEventEffectPerformed } from '../../_utils'
 import { cascaderLight } from '../styles'
 import NCascaderMenuBase from './CascaderMenuBase'
 import { useCascader } from './hooks/useCascader'
 import { cascaderInjectionKey } from './interface'
 import style from './styles/index.cssr'
-import { getPathLabel, getRawNodePath } from './utils'
+import { getRawNodePath } from './utils'
 
-export const cascaderProps = {
+export const cascaderPanelProps = {
   ...(useTheme.props as ThemeProps<CascaderTheme>),
   allowCheckingNotLoaded: Boolean,
-  bordered: {
-    type: Boolean as PropType<boolean | undefined>,
-    default: undefined
-  },
   options: {
     type: Array as PropType<CascaderOption[]>,
     default: () => []
@@ -66,10 +57,6 @@ export const cascaderProps = {
   },
   multiple: Boolean,
   size: String as PropType<'small' | 'medium' | 'large'>,
-  disabled: {
-    type: Boolean as PropType<boolean | undefined>,
-    default: undefined
-  },
   disabledField: {
     type: String,
     default: 'disabled'
@@ -78,17 +65,11 @@ export const cascaderProps = {
     type: String as PropType<ExpandTrigger>,
     default: 'click'
   },
-  clearable: Boolean,
   remote: Boolean,
   onLoad: Function as PropType<OnLoad>,
   separator: {
     type: String,
     default: ' / '
-  },
-  filter: Function as PropType<Filter>,
-  placement: {
-    type: String as PropType<FollowerPlacement>,
-    default: 'bottom-start'
   },
   cascade: {
     type: Boolean,
@@ -125,8 +106,6 @@ export const cascaderProps = {
   >,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
-  onBlur: Function as PropType<(e: FocusEvent) => void>,
-  onFocus: Function as PropType<(e: FocusEvent) => void>,
   getColumnStyle: Function as PropType<
     (detail: { level: number }) => string | CSSProperties
   >,
@@ -143,12 +122,12 @@ export const cascaderProps = {
       checked: boolean
       node: VNode | null
     }) => VNodeChild
-  >,
-  // deprecated
-  onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
+  >
 } as const
 
-export type CascaderProps = ExtractPublicPropTypes<typeof cascaderProps>
+export type CascaderPanelProps = ExtractPublicPropTypes<
+  typeof cascaderPanelProps
+>
 
 export interface CascaderPanelSlots {
   action?: () => VNode[]
@@ -159,25 +138,9 @@ export interface CascaderPanelSlots {
 
 export default defineComponent({
   name: 'CascaderPanel',
-  props: cascaderProps,
+  props: cascaderPanelProps,
   slots: Object as SlotsType<CascaderPanelSlots>,
   setup(props, { slots }) {
-    if (__DEV__) {
-      watchEffect(() => {
-        if (props.leafOnly) {
-          warnOnce(
-            'cascader',
-            '`leaf-only` is deprecated, please use `check-strategy="child"` instead'
-          )
-        }
-        if (props.onChange !== undefined) {
-          warnOnce(
-            'cascader',
-            '`on-change` is deprecated, please use `on-update:value` instead.'
-          )
-        }
-      })
-    }
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Cascader',
@@ -188,8 +151,9 @@ export default defineComponent({
       mergedClsPrefixRef
     )
 
+    const { localeRef } = useLocale('Cascader')
+    const formItem = useFormItem(props)
     const {
-      uncontrolledValueRef,
       mergedValueRef,
       mergedCheckStrategyRef,
       keyboardKeyRef,
@@ -207,40 +171,16 @@ export default defineComponent({
       updateHoverKey,
       getOptionsByKeys,
       selectedOptionsRef,
-      selectedOptionRef
-    } = useCascader(props)
+      selectedOptionRef,
+      doUpdateValue,
+      doUncheck
+    } = useCascader(props, formItem)
 
-    const formItem = useFormItem(props)
-    const cascaderMenuBaseRef = ref<CascaderMenuInstance | null>(null)
+    const cascaderMenuInstRef = ref<CascaderMenuInstance | null>(null)
 
     const optionHeightRef = computed(() => {
       return themeRef.value.self.optionHeight
     })
-
-    function doUpdateValue(
-      value: Value | null,
-      option: CascaderOption | null | Array<CascaderOption | null>,
-      optionPath: null | CascaderOption[] | Array<CascaderOption[] | null>
-    ): void {
-      const {
-        onUpdateValue,
-        'onUpdate:value': _onUpdateValue,
-        onChange
-      } = props
-      const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (onUpdateValue) {
-        call(onUpdateValue as OnUpdateValueImpl, value, option, optionPath)
-      }
-      if (_onUpdateValue) {
-        call(_onUpdateValue as OnUpdateValueImpl, value, option, optionPath)
-      }
-      if (onChange) {
-        call(onChange as OnUpdateValueImpl, value, option, optionPath)
-      }
-      uncontrolledValueRef.value = value
-      nTriggerFormInput()
-      nTriggerFormChange()
-    }
 
     function doCheck(key: Key): boolean {
       const { cascade, multiple } = props
@@ -266,10 +206,10 @@ export default defineComponent({
         }
         catch (err) {
           if (err instanceof SubtreeNotLoadedError) {
-            if (cascaderMenuBaseRef.value) {
+            if (cascaderMenuInstRef.value) {
               const tmNode = getNode(key)
               if (tmNode !== null) {
-                cascaderMenuBaseRef.value.showErrorMessage(
+                cascaderMenuInstRef.value.showErrorMessage(
                   (tmNode.rawNode as any)[props.labelField] as string
                 )
               }
@@ -305,28 +245,7 @@ export default defineComponent({
       }
       return true
     }
-    function doUncheck(key: Key): void {
-      const { cascade, multiple } = props
-      if (multiple) {
-        const {
-          value: { uncheck, getNode, getPath }
-        } = treeMateRef
-        const { checkedKeys } = uncheck(key, mergedKeysRef.value.checkedKeys, {
-          cascade,
-          checkStrategy: mergedCheckStrategyRef.value,
-          allowNotLoaded: props.allowCheckingNotLoaded
-        })
-        doUpdateValue(
-          checkedKeys,
-          checkedKeys.map(checkedKey => getNode(checkedKey)?.rawNode || null),
-          checkedKeys.map(checkedKey =>
-            getRawNodePath(getPath(checkedKey)?.treeNodePath)
-          )
-        )
-        keyboardKeyRef.value = key
-        hoverKeyRef.value = key
-      }
-    }
+
     // --- keyboard
     function move(direction: 'prev' | 'next' | 'child' | 'parent'): void {
       const { value: keyboardKey } = keyboardKeyRef
@@ -337,7 +256,7 @@ export default defineComponent({
             const node = treeMate.getPrev(keyboardKey, { loop: true })
             if (node !== null) {
               updateKeyboardKey(node.key)
-              cascaderMenuBaseRef.value?.scroll(
+              cascaderMenuInstRef.value?.scroll(
                 node.level,
                 node.index,
                 depx(optionHeightRef.value)
@@ -350,7 +269,7 @@ export default defineComponent({
             const node = treeMate.getFirstAvailableNode()
             if (node !== null) {
               updateKeyboardKey(node.key)
-              cascaderMenuBaseRef.value?.scroll(
+              cascaderMenuInstRef.value?.scroll(
                 node.level,
                 node.index,
                 depx(optionHeightRef.value)
@@ -361,7 +280,7 @@ export default defineComponent({
             const node = treeMate.getNext(keyboardKey, { loop: true })
             if (node !== null) {
               updateKeyboardKey(node.key)
-              cascaderMenuBaseRef.value?.scroll(
+              cascaderMenuInstRef.value?.scroll(
                 node.level,
                 node.index,
                 depx(optionHeightRef.value)
@@ -498,6 +417,7 @@ export default defineComponent({
       syncSelectMenuPosition,
       keyboardKeyRef,
       hoverKeyRef,
+      localeRef,
       remoteRef: toRef(props, 'remote'),
       loadingKeySetRef,
       expandTriggerRef: toRef(props, 'expandTrigger'),
@@ -505,7 +425,6 @@ export default defineComponent({
       onLoadRef: toRef(props, 'onLoad'),
       virtualScrollRef: toRef(props, 'virtualScroll'),
       optionHeightRef,
-      localeRef: undefined,
       labelFieldRef: toRef(props, 'labelField'),
       renderLabelRef: toRef(props, 'renderLabel'),
       getColumnStyleRef: toRef(props, 'getColumnStyle'),
@@ -522,7 +441,7 @@ export default defineComponent({
       handleCascaderMenuClickOutside,
       clearPattern
     })
-    const exposedMethods: CascaderInst = {
+    const exposedMethods: CascaderPanelInst = {
       getCheckedData: () => {
         if (showCheckboxRef.value) {
           const checkedKeys = checkedKeysRef.value
@@ -597,7 +516,7 @@ export default defineComponent({
 
     return {
       ...exposedMethods,
-      cascaderMenuBaseRef,
+      cascaderMenuInstRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
       treeMate: treeMateRef,
@@ -624,7 +543,7 @@ export default defineComponent({
     return (
       <div class={`${mergedClsPrefix}-cascader`}>
         <NCascaderMenuBase
-          ref="cascaderMenuBaseRef"
+          ref="cascaderMenuInstRef"
           class={[this.themeClass, menuProps?.class]}
           mergedClsPrefix={mergedClsPrefix}
           mergedTheme={mergedTheme}

@@ -1,21 +1,32 @@
+import type { CheckStrategy } from 'treemate'
+import type { Ref } from 'vue'
+import type { UseFormItem } from '../../../_mixins/use-form-item'
 import type { CascaderProps } from '../Cascader'
-import type { CascaderOption, Key } from '../interface'
+import type {
+  CascaderOption,
+  Key,
+  OnUpdateValueImpl,
+  Value
+} from '../interface'
 import { createTreeMate } from 'treemate'
 import { useMergedState } from 'vooks'
 import { computed, isReactive, ref, watch } from 'vue'
-import { getPathLabel } from '../utils'
+import { call } from '../../../_utils'
+import { getPathLabel, getRawNodePath } from '../utils'
 
-// , formItem, extra = {}
-export function useCascader(props: CascaderProps) {
+export function useCascader<T = unknown>(
+  props: CascaderProps,
+  formItem: UseFormItem<T>
+) {
   const uncontrolledValueRef = ref(props.defaultValue)
   const controlledValueRef = computed(() => props.value)
   const mergedValueRef = useMergedState(
     controlledValueRef,
     uncontrolledValueRef
-  )
+  ) as Ref<Value>
 
   const mergedCheckStrategyRef = computed(() => {
-    return props.leafOnly ? 'child' : props.checkStrategy
+    return props.leafOnly ? 'child' : (props.checkStrategy as CheckStrategy)
   })
 
   const keyboardKeyRef = ref<Key | null>(null)
@@ -29,15 +40,15 @@ export function useCascader(props: CascaderProps) {
   }
   const treeMateRef = computed(() => {
     const { valueField, childrenField, disabledField } = props
-    return createTreeMate(props.options, {
+    return createTreeMate(props.options || [], {
       getDisabled(node) {
-        return (node as any)[disabledField]
+        return (node as any)[disabledField || 'disabled']
       },
       getKey(node) {
-        return (node as any)[valueField]
+        return (node as any)[valueField || 'value']
       },
       getChildren(node) {
-        return (node as any)[childrenField]
+        return (node as any)[childrenField || 'children']
       }
     })
   })
@@ -86,12 +97,15 @@ export function useCascader(props: CascaderProps) {
   })
 
   if (isReactive(props.options)) {
-    watch(props.options, (value, oldValue) => {
-      if (!(value === oldValue)) {
-        hoverKeyRef.value = null
-        keyboardKeyRef.value = null
+    watch(
+      () => props.options,
+      (value, oldValue) => {
+        if (!(value === oldValue)) {
+          hoverKeyRef.value = null
+          keyboardKeyRef.value = null
+        }
       }
-    })
+    )
   }
   function updateKeyboardKey(key: Key | null): void {
     keyboardKeyRef.value = key
@@ -126,8 +140,8 @@ export function useCascader(props: CascaderProps) {
         else {
           return {
             label: showPath
-              ? getPathLabel(node, separator, labelField)
-              : (node.rawNode as any)[labelField],
+              ? getPathLabel(node, separator, labelField || 'label')
+              : (node.rawNode as any)[labelField || 'label'],
             value: node.key
           }
         }
@@ -155,8 +169,8 @@ export function useCascader(props: CascaderProps) {
       else {
         return {
           label: showPath
-            ? getPathLabel(node, separator, labelField)
-            : (node.rawNode as any)[labelField],
+            ? getPathLabel(node, separator, labelField || 'label')
+            : (node.rawNode as any)[labelField || 'label'],
           value: node.key
         }
       }
@@ -165,6 +179,50 @@ export function useCascader(props: CascaderProps) {
       return null
     }
   })
+
+  function doUpdateValue(
+    value: Value | null,
+    option: CascaderOption | null | Array<CascaderOption | null>,
+    optionPath: null | CascaderOption[] | Array<CascaderOption[] | null>
+  ): void {
+    const { onUpdateValue, 'onUpdate:value': _onUpdateValue, onChange } = props
+    const { nTriggerFormInput, nTriggerFormChange } = formItem
+    if (onUpdateValue) {
+      call(onUpdateValue as OnUpdateValueImpl, value, option, optionPath)
+    }
+    if (_onUpdateValue) {
+      call(_onUpdateValue as OnUpdateValueImpl, value, option, optionPath)
+    }
+    if (onChange) {
+      call(onChange as OnUpdateValueImpl, value, option, optionPath)
+    }
+    uncontrolledValueRef.value = value
+    nTriggerFormInput()
+    nTriggerFormChange()
+  }
+
+  function doUncheck(key: Key): void {
+    const { cascade, multiple } = props
+    if (multiple) {
+      const {
+        value: { uncheck, getNode, getPath }
+      } = treeMateRef
+      const { checkedKeys } = uncheck(key, mergedKeysRef.value.checkedKeys, {
+        cascade,
+        checkStrategy: mergedCheckStrategyRef.value,
+        allowNotLoaded: props.allowCheckingNotLoaded
+      })
+      doUpdateValue(
+        checkedKeys,
+        checkedKeys.map(checkedKey => getNode(checkedKey)?.rawNode || null),
+        checkedKeys.map(checkedKey =>
+          getRawNodePath(getPath(checkedKey)?.treeNodePath)
+        )
+      )
+      keyboardKeyRef.value = key
+      hoverKeyRef.value = key
+    }
+  }
 
   return {
     uncontrolledValueRef,
@@ -186,6 +244,8 @@ export function useCascader(props: CascaderProps) {
     updateHoverKey,
     getOptionsByKeys,
     selectedOptionsRef,
-    selectedOptionRef
+    selectedOptionRef,
+    doUpdateValue,
+    doUncheck
   }
 }

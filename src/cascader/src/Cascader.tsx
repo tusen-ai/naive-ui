@@ -14,7 +14,6 @@ import type {
   Key,
   OnLoad,
   OnUpdateValue,
-  OnUpdateValueImpl,
   SelectMenuInstance,
   Value
 } from './interface'
@@ -233,8 +232,10 @@ export default defineComponent({
       mergedClsPrefixRef
     )
 
+    const { localeRef } = useLocale('Cascader')
+    const patternRef = ref('')
+    const formItem = useFormItem(props)
     const {
-      uncontrolledValueRef,
       mergedValueRef,
       mergedCheckStrategyRef,
       keyboardKeyRef,
@@ -252,12 +253,11 @@ export default defineComponent({
       updateHoverKey,
       getOptionsByKeys,
       selectedOptionsRef,
-      selectedOptionRef
-    } = useCascader(props)
+      selectedOptionRef,
+      doUpdateValue,
+      doUncheck
+    } = useCascader(props, formItem)
 
-    const { localeRef } = useLocale('Cascader')
-    const patternRef = ref('')
-    const formItem = useFormItem(props)
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     const cascaderMenuInstRef = ref<CascaderMenuInstance | null>(null)
     const selectMenuInstRef = ref<SelectMenuInstance | null>(null)
@@ -282,30 +282,6 @@ export default defineComponent({
         call(_onUpdateShow, value)
       }
       uncontrolledShowRef.value = value
-    }
-    function doUpdateValue(
-      value: Value | null,
-      option: CascaderOption | null | Array<CascaderOption | null>,
-      optionPath: null | CascaderOption[] | Array<CascaderOption[] | null>
-    ): void {
-      const {
-        onUpdateValue,
-        'onUpdate:value': _onUpdateValue,
-        onChange
-      } = props
-      const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (onUpdateValue) {
-        call(onUpdateValue as OnUpdateValueImpl, value, option, optionPath)
-      }
-      if (_onUpdateValue) {
-        call(_onUpdateValue as OnUpdateValueImpl, value, option, optionPath)
-      }
-      if (onChange) {
-        call(onChange as OnUpdateValueImpl, value, option, optionPath)
-      }
-      uncontrolledValueRef.value = value
-      nTriggerFormInput()
-      nTriggerFormChange()
     }
 
     function doCheck(key: Key): boolean {
@@ -372,28 +348,6 @@ export default defineComponent({
         }
       }
       return true
-    }
-    function doUncheck(key: Key): void {
-      const { cascade, multiple } = props
-      if (multiple) {
-        const {
-          value: { uncheck, getNode, getPath }
-        } = treeMateRef
-        const { checkedKeys } = uncheck(key, mergedKeysRef.value.checkedKeys, {
-          cascade,
-          checkStrategy: mergedCheckStrategyRef.value,
-          allowNotLoaded: props.allowCheckingNotLoaded
-        })
-        doUpdateValue(
-          checkedKeys,
-          checkedKeys.map(checkedKey => getNode(checkedKey)?.rawNode || null),
-          checkedKeys.map(checkedKey =>
-            getRawNodePath(getPath(checkedKey)?.treeNodePath)
-          )
-        )
-        keyboardKeyRef.value = key
-        hoverKeyRef.value = key
-      }
     }
 
     const controlledShowRef = toRef(props, 'show')
