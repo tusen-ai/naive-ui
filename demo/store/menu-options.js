@@ -607,6 +607,13 @@ export function createComponentMenuOptions({ lang, theme }) {
           isNew: true
         },
         {
+          en: 'Heatmap',
+          zh: '热力图',
+          enSuffix: true,
+          path: '/heatmap',
+          isNew: true
+        },
+        {
           en: 'Markdown',
           zh: 'Markdown',
           enSuffix: true,

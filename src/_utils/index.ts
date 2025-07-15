@@ -19,6 +19,7 @@ export type {
   ExtractPublicPropTypes,
   Mutable
 } from './naive'
+export type * from './ts/ts'
 export {
   call,
   createDataKey,

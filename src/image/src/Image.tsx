@@ -1,4 +1,4 @@
-import type { ImagePreviewInst } from './ImagePreview'
+import type { ImagePreviewInst, ImageSlots } from './public-types'
 import type { IntersectionObserverOptions } from './utils'
 import {
   defineComponent,
@@ -12,7 +12,6 @@ import {
   ref,
   type SlotsType,
   toRef,
-  type VNode,
   watchEffect
 } from 'vue'
 import { useConfig } from '../../_mixins'
@@ -22,10 +21,6 @@ import { imageGroupInjectionKey } from './ImageGroup'
 import NImagePreview from './ImagePreview'
 import { imageContextKey, imagePreviewSharedProps } from './interface'
 import { observeIntersection } from './utils'
-
-export interface ImageInst {
-  click: () => void
-}
 
 export const imageProps = {
   alt: String,
@@ -53,10 +48,7 @@ export const imageProps = {
 
 export type ImageProps = ExtractPublicPropTypes<typeof imageProps>
 
-export interface ImageSlots {
-  placeholder?: () => VNode[]
-  error?: () => VNode[]
-}
+let uuid = 0
 
 export default defineComponent({
   name: 'Image',
@@ -69,24 +61,33 @@ export default defineComponent({
     const previewInstRef = ref<ImagePreviewInst | null>(null)
     const imageGroupHandle = inject(imageGroupInjectionKey, null)
     const { mergedClsPrefixRef } = imageGroupHandle || useConfig(props)
+
+    const mergedPreviewSrc = props.previewSrc || props.src
+
+    const previewShowRef = ref(false)
+
+    const imageId = uuid++
+
+    const showPreview = () => {
+      if (props.previewDisabled || showErrorRef.value)
+        return
+      if (imageGroupHandle) {
+        imageGroupHandle.setThumbnailEl(imageRef.value)
+        imageGroupHandle.toggleShow(imageId)
+        return
+      }
+      const { value: previewInst } = previewInstRef
+      if (!previewInst)
+        return
+      previewInst.setThumbnailEl(imageRef.value)
+      previewShowRef.value = true
+    }
+
     const exposedMethods = {
       click: () => {
-        if (props.previewDisabled || showErrorRef.value)
-          return
-        const mergedPreviewSrc = props.previewSrc || props.src
-        if (imageGroupHandle) {
-          imageGroupHandle.setPreviewSrc(mergedPreviewSrc)
-          imageGroupHandle.setThumbnailEl(imageRef.value)
-          imageGroupHandle.toggleShow()
-          return
-        }
-        const { value: previewInst } = previewInstRef
-        if (!previewInst)
-          return
-        previewInst.setPreviewSrc(mergedPreviewSrc)
-        previewInst.setThumbnailEl(imageRef.value)
-        previewInst.toggleShow()
-      }
+        showPreview()
+      },
+      showPreview
     }
 
     const shouldStartLoadingRef = ref(!props.lazy)
@@ -123,6 +124,26 @@ export default defineComponent({
       showErrorRef.value = false
     })
 
+    watchEffect((onInvalidate) => {
+      const unRegister = imageGroupHandle?.registerImageUrl?.(
+        imageId,
+        props.previewSrc || props.src || ''
+      ) as (() => void) | undefined
+
+      onInvalidate(() => {
+        unRegister?.()
+      })
+    })
+
+    function onImgClick(e: MouseEvent) {
+      exposedMethods.click()
+      props.imgProps?.onClick?.(e)
+    }
+
+    function onPreviewClose() {
+      previewShowRef.value = false
+    }
+
     const loadedRef = ref(false)
 
     provide(imageContextKey, {
@@ -133,14 +154,14 @@ export default defineComponent({
       groupId: imageGroupHandle?.groupId,
       previewInstRef,
       imageRef,
-
+      mergedPreviewSrc,
       showError: showErrorRef,
       shouldStartLoading: shouldStartLoadingRef,
       loaded: loadedRef,
       mergedOnClick: (e: MouseEvent) => {
-        exposedMethods.click()
-        props.imgProps?.onClick?.(e)
+        onImgClick(e)
       },
+      onPreviewClose,
       mergedOnError: (e: Event) => {
         if (!shouldStartLoadingRef.value)
           return
@@ -155,6 +176,7 @@ export default defineComponent({
         imgPropsOnLoad?.(e)
         loadedRef.value = true
       },
+      previewShow: previewShowRef,
       ...exposedMethods
     }
   },
@@ -218,11 +240,13 @@ export default defineComponent({
           <NImagePreview
             theme={this.theme}
             themeOverrides={this.themeOverrides}
-            clsPrefix={mergedClsPrefix}
             ref="previewInstRef"
             showToolbar={this.showToolbar}
             showToolbarTooltip={this.showToolbarTooltip}
             renderToolbar={this.renderToolbar}
+            src={this.mergedPreviewSrc}
+            show={this.previewShow}
+            onClose={this.onPreviewClose}
           >
             {{
               default: () => imgNode

@@ -2,19 +2,13 @@
 # Rtl Debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { unstableInputNumberRtl } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      value: ref(0),
-      rtlEnabled: ref(false),
-      rtlStyles: [unstableInputNumberRtl]
-    }
-  }
-})
+const value = ref(0)
+const rtlEnabled = ref(false)
+const rtlStyles = [unstableInputNumberRtl]
 </script>
 
 <template>

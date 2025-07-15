@@ -1,5 +1,4 @@
 import type { OffsetTarget } from './utils'
-import { throttle } from 'lodash-es'
 import { unwrapElement } from 'seemly'
 import { onFontsReady } from 'vooks'
 import {
@@ -72,6 +71,7 @@ export default defineComponent({
     const slotRef = ref<HTMLElement | null>(null)
     const barRef = ref<HTMLElement | null>(null)
     const selfRef = ref<HTMLElement | null>(null)
+    let skipScrollHandling = false
     const isBlockTypeRef = computed(() => {
       return props.type === 'block'
     })
@@ -149,9 +149,30 @@ export default defineComponent({
           slotEl.style.transition = ''
       }
     }
-    const handleScroll = throttle(() => {
-      _handleScroll(true)
-    }, 128)
+
+    let currentThrottleTimerId: ReturnType<typeof setTimeout> | undefined
+    let hasTrailingThrottledTask = false
+    let isInThrottledPeriod = false
+    const handleScroll = () => {
+      if (isInThrottledPeriod) {
+        hasTrailingThrottledTask = true
+      }
+      else {
+        if (skipScrollHandling) {
+          return
+        }
+        _handleScroll(true)
+        isInThrottledPeriod = true
+        clearTimeout(currentThrottleTimerId)
+        currentThrottleTimerId = setTimeout(() => {
+          isInThrottledPeriod = false
+          if (hasTrailingThrottledTask) {
+            hasTrailingThrottledTask = false
+            handleScroll()
+          }
+        }, 128)
+      }
+    }
     function setActiveHref(href: string, transition = true): void {
       const idMatchResult = /^#([^#]+)$/.exec(href)
       if (!idMatchResult)
@@ -159,12 +180,16 @@ export default defineComponent({
       const linkEl = document.getElementById(idMatchResult[1])
       if (!linkEl)
         return
+      skipScrollHandling = true
       activeHrefRef.value = href
       linkEl.scrollIntoView()
       if (!transition) {
         disableTransitionOneTick()
       }
-      handleScroll()
+      hasTrailingThrottledTask = false
+      setTimeout(() => {
+        skipScrollHandling = false
+      }, 0)
     }
 
     function _handleScroll(transition = true): void {
@@ -254,6 +279,7 @@ export default defineComponent({
       _handleScroll(false)
     })
     onBeforeUnmount(() => {
+      clearTimeout(currentThrottleTimerId)
       document.removeEventListener('scroll', handleScroll, true)
     })
     watch(activeHrefRef, (value) => {

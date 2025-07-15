@@ -117,11 +117,17 @@ const svSE: NLocale = {
     tipNext: 'Nästa bild (→)',
     tipCounterclockwise: 'Moturs',
     tipClockwise: 'Medurs',
-    tipZoomOut: 'Zooma in',
-    tipZoomIn: 'Zooma ut',
+    tipZoomOut: 'Zooma ut',
+    tipZoomIn: 'Zooma in',
     tipDownload: 'Ladda ned',
     tipClose: 'Stäng (Esc)',
     tipOriginalSize: 'Zooma till ursprunglig storlek'
+  },
+  Heatmap: {
+    less: 'mindre',
+    more: 'mer',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

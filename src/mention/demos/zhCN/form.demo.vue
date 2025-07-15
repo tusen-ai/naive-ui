@@ -2,52 +2,46 @@
 # 配合表单
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { FormInst } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const formInstRef = ref<FormInst | null>(null)
-    const formModelRef = ref({
-      cool: '',
-      veryCool: ''
-    })
-    const rules = {
-      cool: {
-        trigger: ['input', 'blur'],
-        required: true,
-        message: 'Cool is required'
-      },
-      veryCool: {
-        trigger: ['input', 'blur'],
-        validator() {
-          if (!formModelRef.value.veryCool.includes('@07akioni')) {
-            return new Error('07akioni should be very cool!')
-          }
-        }
-      }
-    }
-    return {
-      formModel: formModelRef,
-      formInstRef,
-      rules,
-      options: [
-        {
-          label: '07akioni',
-          value: '07akioni'
-        },
-        {
-          label: 'star-kirby',
-          value: 'star-kirby'
-        }
-      ],
-      handleButtonClick() {
-        formInstRef.value?.validate()
+const formInstRef = ref<FormInst | null>(null)
+const formModel = ref({
+  cool: '',
+  veryCool: ''
+})
+
+const rules = {
+  cool: {
+    trigger: ['input', 'blur'],
+    required: true,
+    message: 'Cool is required'
+  },
+  veryCool: {
+    trigger: ['input', 'blur'],
+    validator() {
+      if (!formModel.value.veryCool.includes('@07akioni')) {
+        return new Error('07akioni should be very cool!')
       }
     }
   }
-})
+}
+
+const options = [
+  {
+    label: '07akioni',
+    value: '07akioni'
+  },
+  {
+    label: 'star-kirby',
+    value: 'star-kirby'
+  }
+]
+
+function handleButtonClick() {
+  formInstRef.value?.validate()
+}
 </script>
 
 <template>

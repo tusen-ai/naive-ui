@@ -94,6 +94,7 @@ rtl-debug.vue
 | titleStyle | `Object \| string` | `undefined` | 标题的样式 | 2.38.2 |
 | transformOrigin | `'mouse' \| 'center'` | `'mouse'` | 对话框动画出现的位置 | 2.34.0 |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | 对话框类型 |  |
+| zIndex | `number` | `undefined` | Dialog 的 z-index | NEXT_VERSION |
 | onAfterEnter | `() => void` | `undefined` | 出现动画完成执行的回调 | 2.33.0 |
 | onAfterLeave | `() => void` | `undefined` | 关闭动画完成执行的回调 | 2.33.3 |
 | onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | 默认行为是关闭确认框。返回 `false` 或者 `resolve false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |

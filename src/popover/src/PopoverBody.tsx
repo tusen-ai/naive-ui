@@ -33,7 +33,7 @@ import {
   VFollower
 } from 'vueuc'
 import { NxScrollbar } from '../../_internal/scrollbar'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import {
   formatLength,
   isJsdom,
@@ -121,8 +121,12 @@ export default defineComponent({
   inheritAttrs: false,
   props: popoverBodyProps,
   setup(props, { slots, attrs }) {
-    const { namespaceRef, mergedClsPrefixRef, inlineThemeDisabled }
-      = useConfig(props)
+    const {
+      namespaceRef,
+      mergedClsPrefixRef,
+      inlineThemeDisabled,
+      mergedRtlRef
+    } = useConfig(props)
     const themeRef = useTheme(
       'Popover',
       '-popover',
@@ -131,6 +135,9 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+
+    const rtlEnabledRef = useRtl('Popover', mergedRtlRef, mergedClsPrefixRef)
+
     const followerRef = ref<FollowerInst | null>(null)
     const NPopover = inject<PopoverInjection>('NPopover') as PopoverInjection
     const bodyRef = ref<HTMLElement | null>(null)
@@ -369,6 +376,8 @@ export default defineComponent({
           )
           const maybeScrollableBody = props.scrollable ? (
             <NxScrollbar
+              themeOverrides={themeRef.value.peerOverrides.Scrollbar}
+              theme={themeRef.value.peers.Scrollbar}
               contentClass={
                 hasHeaderOrFooter
                   ? undefined
@@ -403,6 +412,7 @@ export default defineComponent({
               class: [
                 `${mergedClsPrefix}-popover`,
                 `${mergedClsPrefix}-popover-shared`,
+                rtlEnabledRef?.value && `${mergedClsPrefix}-popover--rtl`,
                 themeClassHandle?.themeClass.value,
                 extraClass.map(v => `${mergedClsPrefix}-${v}`),
                 {
@@ -441,6 +451,7 @@ export default defineComponent({
           // Shadow class exists for reuse box-shadow.
           [
             `${mergedClsPrefix}-popover-shared`,
+            rtlEnabledRef?.value && `${mergedClsPrefix}-popover--rtl`,
             themeClassHandle?.themeClass.value,
             props.overlap && `${mergedClsPrefix}-popover-shared--overlap`,
             props.showArrow && `${mergedClsPrefix}-popover-shared--show-arrow`,

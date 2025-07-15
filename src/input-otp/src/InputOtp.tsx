@@ -6,6 +6,7 @@ import type { FormValidationStatus } from '../../form/src/public-types'
 import type { InputOtpTheme } from '../styles/light'
 import type {
   InputOtpAllowInput,
+  InputOtpInst,
   InputOtpOnBlur,
   InputOtpOnFinish,
   InputOtpOnFocus,
@@ -308,6 +309,10 @@ export default defineComponent({
       }
     }
 
+    const exposedMethods: InputOtpInst = {
+      focusOnChar
+    }
+
     return {
       mergedTheme: themeRef,
       perItemValueArray: computed(() => justifyValue(mergedValueRef.value)),
@@ -320,7 +325,8 @@ export default defineComponent({
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       getTemplateEvents,
-      onRender: themeClassHandle?.onRender
+      onRender: themeClassHandle?.onRender,
+      ...exposedMethods
     }
   },
   render() {

@@ -4,59 +4,54 @@
 一个行内表单的例子。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { FormInst } from 'naive-ui'
 import { useMessage } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const formRef = ref<FormInst | null>(null)
-    const message = useMessage()
-    return {
-      formRef,
-      size: ref<'small' | 'medium' | 'large'>('medium'),
-      formValue: ref({
-        user: {
-          name: '',
-          age: ''
-        },
-        phone: ''
-      }),
-      rules: {
-        user: {
-          name: {
-            required: true,
-            message: '请输入姓名',
-            trigger: 'blur'
-          },
-          age: {
-            required: true,
-            message: '请输入年龄',
-            trigger: ['input', 'blur']
-          }
-        },
-        phone: {
-          required: true,
-          message: '请输入电话号码',
-          trigger: ['input']
-        }
-      },
-      handleValidateClick(e: MouseEvent) {
-        e.preventDefault()
-        formRef.value?.validate((errors) => {
-          if (!errors) {
-            message.success('Valid')
-          }
-          else {
-            console.log(errors)
-            message.error('Invalid')
-          }
-        })
-      }
-    }
-  }
+const formRef = ref<FormInst | null>(null)
+const message = useMessage()
+const size = ref<'small' | 'medium' | 'large'>('medium')
+const formValue = ref({
+  user: {
+    name: '',
+    age: ''
+  },
+  phone: ''
 })
+
+const rules = {
+  user: {
+    name: {
+      required: true,
+      message: '请输入姓名',
+      trigger: 'blur'
+    },
+    age: {
+      required: true,
+      message: '请输入年龄',
+      trigger: ['input', 'blur']
+    }
+  },
+  phone: {
+    required: true,
+    message: '请输入电话号码',
+    trigger: ['input']
+  }
+}
+
+function handleValidateClick(e: MouseEvent) {
+  e.preventDefault()
+  formRef.value?.validate((errors) => {
+    if (!errors) {
+      message.success('Valid')
+    }
+    else {
+      console.log(errors)
+      message.error('Invalid')
+    }
+  })
+}
 </script>
 
 <template>
@@ -99,6 +94,5 @@ export default defineComponent({
     </n-form-item>
   </n-form>
 
-  <pre>{{ JSON.stringify(formValue, null, 2) }}
-</pre>
+  <pre>{{ JSON.stringify(formValue, null, 2) }}</pre>
 </template>

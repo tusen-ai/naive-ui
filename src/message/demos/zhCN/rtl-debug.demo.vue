@@ -5,7 +5,9 @@
 <script lang="ts">
 import { NButton, unstableMessageRtl, useMessage } from 'naive-ui'
 import { defineComponent, h, ref } from 'vue'
+</script>
 
+<script lang="ts" setup>
 const MessageButton = defineComponent({
   setup() {
     const message = useMessage()
@@ -32,17 +34,8 @@ const MessageButton = defineComponent({
   }
 })
 
-export default defineComponent({
-  components: {
-    MessageButton
-  },
-  setup() {
-    return {
-      rtlEnabled: ref(true),
-      rtlStyles: [unstableMessageRtl]
-    }
-  }
-})
+const rtlEnabled = ref(true)
+const rtlStyles = [unstableMessageRtl]
 </script>
 
 <template>

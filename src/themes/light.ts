@@ -42,6 +42,7 @@ import { floatButtonGroupLight } from '../float-button-group/styles'
 import { floatButtonLight } from '../float-button/styles'
 import { formLight } from '../form/styles'
 import { gradientTextLight } from '../gradient-text/styles'
+import { heatmapLight } from '../heatmap/styles'
 import { iconWrapperLight } from '../icon-wrapper/styles'
 import { iconLight } from '../icon/styles'
 import { imageLight } from '../image/styles'
@@ -133,6 +134,7 @@ export const lightTheme: BuiltInGlobalTheme = {
   Flex: flexLight,
   Form: formLight,
   GradientText: gradientTextLight,
+  Heatmap: heatmapLight,
   Icon: iconLight,
   IconWrapper: iconWrapperLight,
   Image: imageLight,

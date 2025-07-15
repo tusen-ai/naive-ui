@@ -9,7 +9,7 @@ export const messageProps = {
     default: 'info'
   },
   content: [String, Number, Function] as PropType<
-  string | number | (() => VNodeChild)
+    string | number | (() => VNodeChild)
   >,
   showIcon: {
     type: Boolean,

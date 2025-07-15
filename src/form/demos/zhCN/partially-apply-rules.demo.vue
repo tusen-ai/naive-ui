@@ -4,57 +4,54 @@
 在验证的过程中，你可能并不总想验证全部的表单项，你可以使用 `form.validate` 的第二个参数控制应用的规则。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { FormInst } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const formInstRef = ref<FormInst | null>(null)
-    return {
-      clear() {
-        formInstRef.value?.restoreValidation()
-      },
-      validateAll() {
-        formInstRef.value?.validate((errors) => {
-          if (errors) {
-            console.error(errors)
-          }
-        })
-      },
-      validatePartial() {
-        formInstRef.value?.validate(
-          (errors) => {
-            if (errors) {
-              console.error(errors)
-            }
-          },
-          (rule) => {
-            return rule?.key === 'a'
-          }
-        )
-      },
-      formInstRef,
-      model: ref({
-        fieldA: '',
-        fieldB: ''
-      }),
-      rules: {
-        fieldA: {
-          key: 'a',
-          required: true,
-          min: 3,
-          message: '最短长度为 3'
-        },
-        fieldB: {
-          required: true,
-          min: 2,
-          message: '最短长度为 2'
-        }
-      }
-    }
-  }
+const formInstRef = ref<FormInst | null>(null)
+const model = ref({
+  fieldA: '',
+  fieldB: ''
 })
+
+const rules = {
+  fieldA: {
+    key: 'a',
+    required: true,
+    min: 3,
+    message: '最短长度为 3'
+  },
+  fieldB: {
+    required: true,
+    min: 2,
+    message: '最短长度为 2'
+  }
+}
+
+function clear() {
+  formInstRef.value?.restoreValidation()
+}
+
+function validateAll() {
+  formInstRef.value?.validate((errors) => {
+    if (errors) {
+      console.error(errors)
+    }
+  })
+}
+
+function validatePartial() {
+  formInstRef.value?.validate(
+    (errors) => {
+      if (errors) {
+        console.error(errors)
+      }
+    },
+    (rule) => {
+      return rule?.key === 'a'
+    }
+  )
+}
 </script>
 
 <template>

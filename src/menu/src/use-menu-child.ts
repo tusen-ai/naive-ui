@@ -35,6 +35,7 @@ export interface SubmenuInjection {
 
 export interface MenuOptionGroupInjection {
   paddingLeftRef: Ref<number | undefined>
+  mergedDisabledRef: Ref<boolean>
 }
 
 export interface UseMenuChild {
@@ -45,6 +46,7 @@ export interface UseMenuChild {
   iconMarginRight: ComputedRef<number>
   NMenu: MenuInjection
   NSubmenu: SubmenuInjection | null
+  NMenuOptionGroup: MenuOptionGroupInjection | null
 }
 
 export function useMenuChild(props: UseMenuChildProps): UseMenuChild {
@@ -129,6 +131,7 @@ export function useMenuChild(props: UseMenuChildProps): UseMenuChild {
     paddingLeft: paddingLeftRef,
     iconMarginRight: iconMarginRightRef,
     NMenu,
-    NSubmenu
+    NSubmenu,
+    NMenuOptionGroup
   }
 }

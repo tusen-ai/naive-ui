@@ -2,16 +2,10 @@
 # Placement
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      overlap: ref(false)
-    }
-  }
-})
+const overlap = ref(false)
 </script>
 
 <template>

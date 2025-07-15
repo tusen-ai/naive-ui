@@ -4,17 +4,10 @@
   Let the QR code no longer monotonous.
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const color = ref('#225A95FF')
-    return {
-      color
-    }
-  }
-})
+const color = ref('#225A95FF')
 </script>
 
 <template>

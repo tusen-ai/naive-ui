@@ -2,41 +2,28 @@
 # Max
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { NButton, useNotification } from 'naive-ui'
-import { defineComponent, h, ref } from 'vue'
+import { h, ref } from 'vue'
 
-const NotificationButton = defineComponent({
-  setup() {
-    const notification = useNotification()
-    const index = ref(0)
-    return {
-      notification,
-      index
-    }
-  },
-  render() {
-    return h(
-      NButton,
-      {
-        onClick: () => {
-          this.index++
-          this.notification.info({
-            title: `Notification index: ${this.index}`,
-            content: 'You can limit the index of notifications'
-          })
-        }
-      },
-      { default: () => 'Max notification count: 3' }
-    )
-  }
-})
+function NotificationButton() {
+  const notification = useNotification()
+  const index = ref(0)
 
-export default defineComponent({
-  components: {
-    NotificationButton
-  }
-})
+  return h(
+    NButton,
+    {
+      onClick: () => {
+        index.value++
+        notification.info({
+          title: `Notification index: ${index.value}`,
+          content: 'You can limit the index of notifications'
+        })
+      }
+    },
+    { default: () => 'Max notification count: 3' }
+  )
+}
 </script>
 
 <template>

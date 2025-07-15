@@ -4,25 +4,16 @@
 You can customize display area by `to` prop. Remember to set `:trap-focus="false"` and `:block-scroll="false"`, otherwise content outside drawer won't be focusable and body won't be scrollable.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DrawerPlacement } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const active = ref(false)
-    const placement = ref<DrawerPlacement>('right')
-    const activate = (place: DrawerPlacement) => {
-      active.value = true
-      placement.value = place
-    }
-    return {
-      active,
-      placement,
-      activate
-    }
-  }
-})
+const active = ref(false)
+const placement = ref<DrawerPlacement>('right')
+function activate(place: DrawerPlacement) {
+  active.value = true
+  placement.value = place
+}
 </script>
 
 <template>

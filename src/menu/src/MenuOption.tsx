@@ -25,13 +25,15 @@ export const NMenuOption = defineComponent({
   props: menuItemProps,
   setup(props) {
     const MenuChild = useMenuChild(props)
-    const { NSubmenu, NMenu } = MenuChild
+    const { NSubmenu, NMenu, NMenuOptionGroup } = MenuChild
     const { props: menuProps, mergedClsPrefixRef, mergedCollapsedRef } = NMenu
-    const submenuDisabledRef = NSubmenu
+    const parentDisabledRef = NSubmenu
       ? NSubmenu.mergedDisabledRef
-      : { value: false }
+      : NMenuOptionGroup
+        ? NMenuOptionGroup.mergedDisabledRef
+        : { value: false }
     const mergedDisabledRef = computed(() => {
-      return submenuDisabledRef.value || props.disabled
+      return parentDisabledRef.value || props.disabled
     })
     function doClick(e: MouseEvent): void {
       const { onClick } = props

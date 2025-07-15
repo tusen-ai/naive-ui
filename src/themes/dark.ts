@@ -39,6 +39,7 @@ import { floatButtonGroupDark } from '../float-button-group/styles'
 import { floatButtonDark } from '../float-button/styles'
 import { formDark } from '../form/styles'
 import { gradientTextDark } from '../gradient-text/styles'
+import { heatmapDark } from '../heatmap/styles'
 import { iconWrapperDark } from '../icon-wrapper/styles'
 import { iconDark } from '../icon/styles'
 import { imageDark } from '../image/styles'
@@ -130,6 +131,7 @@ export const darkTheme: BuiltInGlobalTheme = {
   Flex: flexDark,
   Form: formDark,
   GradientText: gradientTextDark,
+  Heatmap: heatmapDark,
   Icon: iconDark,
   IconWrapper: iconWrapperDark,
   Image: imageDark,

@@ -1,6 +1,6 @@
 import type { ExtractThemeOverrides } from '../../_mixins/use-theme'
 import type { ButtonTheme } from '../../button/styles'
-import type { ImageInst } from '../../image/src/Image'
+import type { ImageInst } from '../../image'
 import type { ListType } from './interface'
 import type { UploadSettledFileInfo } from './public-types'
 import { useMemo } from 'vooks'
@@ -213,7 +213,7 @@ export default defineComponent({
         const { value } = imageRef
         if (!value)
           return
-        value.click()
+        value.showPreview()
       }
     }
 

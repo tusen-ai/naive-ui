@@ -1157,6 +1157,8 @@ export default defineComponent({
               ref="textareaScrollbarInstRef"
               class={`${mergedClsPrefix}-input__textarea`}
               container={this.getTextareaScrollContainer}
+              theme={this.theme?.peers?.Scrollbar}
+              themeOverrides={this.themeOverrides?.peers?.Scrollbar}
               triggerDisplayManually
               useUnifiedContainer
               internalHoistYRail
@@ -1258,7 +1260,9 @@ export default defineComponent({
                   this.inputProps?.style
                 ]}
                 tabindex={
-                  this.passivelyActivated && !this.activated ? -1 : undefined
+                  this.passivelyActivated && !this.activated
+                    ? -1
+                    : this.inputProps?.tabindex
                 }
                 placeholder={this.mergedPlaceholder[0]}
                 disabled={this.mergedDisabled}

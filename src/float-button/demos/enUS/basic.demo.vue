@@ -2,15 +2,8 @@
 # Basic
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    CashIcon
-  }
-})
 </script>
 
 <template>

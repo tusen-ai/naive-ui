@@ -2,30 +2,20 @@
   # Basic size
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
+const avatars = [
+  'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
+  'https://avatars.githubusercontent.com/u/20943608?s=60&v=4',
+  'https://avatars.githubusercontent.com/u/46394163?s=60&v=4',
+  'https://avatars.githubusercontent.com/u/39197136?s=60&v=4',
+  'https://avatars.githubusercontent.com/u/19239641?s=60&v=4'
+]
 
-export default defineComponent({
-  setup() {
-    const avatars = [
-      'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
-      'https://avatars.githubusercontent.com/u/20943608?s=60&v=4',
-      'https://avatars.githubusercontent.com/u/46394163?s=60&v=4',
-      'https://avatars.githubusercontent.com/u/39197136?s=60&v=4',
-      'https://avatars.githubusercontent.com/u/19239641?s=60&v=4'
-    ]
-
-    const items = Array.from({ length: 10000 }, (_, i) => ({
-      key: `${i}`,
-      value: i,
-      avatar: avatars[i % avatars.length]
-    }))
-
-    return {
-      items
-    }
-  }
-})
+const items = Array.from({ length: 10000 }, (_, i) => ({
+  key: `${i}`,
+  value: i,
+  avatar: avatars[i % avatars.length]
+}))
 </script>
 
 <template>
