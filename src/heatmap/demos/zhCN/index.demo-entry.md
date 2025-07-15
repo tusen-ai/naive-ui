@@ -6,6 +6,16 @@
 
 自 `NEXT_VERSION` 开始提供。
 
+<n-alert type="info" title="使用前提" :bordered="false">
+  <n-text>
+    颜色相关的属性 <n-text code>active-colors</n-text> 和 <n-text code>minimum-color</n-text> 的优先级高于 <n-text code>color-theme</n-text>，如果同时设置了这三个属性，则使用 <n-text code>active-colors</n-text> 和 <n-text code>minimum-color</n-text>建议不要同时设置。
+  </n-text>
+  <br />
+  <n-text>
+    都不设置时，使用 Naive 内置的默认值 类 GitHub 的一套主题。
+  </n-text>
+</n-alert>
+
 ## 演示
 
 ```demo
@@ -21,7 +31,7 @@ slots.vue
 
 | 名称 | 类型 | 相关类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- | --- |
-| color-theme | `'github' \| 'green' \| 'blue' \| 'orange' \| 'purple' \| 'red'` | `HeatmapColorTheme` | `'github'` | 内置颜色主题 | NEXT_VERSION |
+| color-theme | `'green' \| 'blue' \| 'orange' \| 'purple' \| 'red'` | `HeatmapColorTheme` | `'undefined'` | 内置颜色主题 | NEXT_VERSION |
 | active-colors | `string[]` |  | `undefined` | 颜色数组，按从浅到深的顺序排列，优先级高于 `color-theme` | NEXT_VERSION |
 | minimum-color | `string` |  | `undefined` | 热力图最小颜色，默认为 `active-colors` 中的第一个颜色 | NEXT_VERSION |
 | data | `Array<{ timestamp: number, value?: number \| null }>` | `HeatmapData`, `HeatmapDataItem` | `[]` | 热力图数据，包含日期和数值 | NEXT_VERSION |

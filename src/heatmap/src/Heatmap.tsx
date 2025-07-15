@@ -12,7 +12,7 @@ import type {
 import { addDays, format, parseISO, startOfWeek } from 'date-fns'
 import { groupBy, mapValues, maxBy } from 'lodash-es'
 import { pxfy } from 'seemly'
-import { computed, defineComponent, h, inject } from 'vue'
+import { computed, defineComponent, h } from 'vue'
 import {
   useConfig,
   useLocale,
@@ -21,7 +21,6 @@ import {
   useThemeClass
 } from '../../_mixins'
 import { createKey, resolveSlot, resolveWrappedSlot } from '../../_utils'
-import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { transformNaiveFirstDayOfWeekToDateFns } from '../../date-picker/src/utils'
 import heatmapLight from '../styles/light'
 import HeatmapColorIndicator from './ColorIndicator'
@@ -44,10 +43,7 @@ export const heatmapProps = {
   ...(useTheme.props as ThemeProps<HeatmapTheme>),
   minimumColor: String,
   activeColors: Array as PropType<string[]>,
-  colorTheme: {
-    type: String as PropType<HeatmapColorTheme>,
-    default: 'github'
-  },
+  colorTheme: String as PropType<HeatmapColorTheme>,
   data: Array as PropType<HeatmapData>,
   loading: Boolean,
   firstDayOfWeek: {
@@ -89,7 +85,6 @@ export default defineComponent({
     const { mergedClsPrefixRef, mergedRtlRef, inlineThemeDisabled }
       = useConfig(props)
     const { localeRef, dateLocaleRef } = useLocale('Heatmap')
-    const NConfigProvider = inject(configProviderInjectionKey, null)
     const themeRef = useTheme(
       'Heatmap',
       '-heatmap',
@@ -154,26 +149,17 @@ export default defineComponent({
           props
         )
       : undefined
-
     const mergedColorsRef = computed(() => {
-      let mergedColors: string[] = []
-      if (props.minimumColor) {
-        mergedColors.push(props.minimumColor)
-      }
-      if (Array.isArray(props.activeColors)) {
-        mergedColors.push(...props.activeColors)
-      }
-      else {
-        const mergedTheme = NConfigProvider?.mergedThemeRef.value
-        const isDarkTheme = mergedTheme?.name === 'dark'
-        const theme
-          = props.colorTheme === 'github' && isDarkTheme
-            ? 'githubDark'
-            : props.colorTheme
-        mergedColors = heatmapColorThemes[theme]
-      }
+      const {
+        mininumColor: builtInMinimumColor,
+        activeColors: builtInActiveColors
+      } = themeRef.value.self
+      const mergedMininumColor = props.minimumColor || builtInMinimumColor
+      const theme = props.colorTheme && heatmapColorThemes[props.colorTheme]
+      const mergedActiveColors
+        = props.activeColors || theme || builtInActiveColors
 
-      return mergedColors
+      return [mergedMininumColor, ...mergedActiveColors]
     })
 
     const normalizedDataRef = computed(() => {
