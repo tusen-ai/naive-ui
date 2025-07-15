@@ -8,7 +8,7 @@ Each color has its own temperature.
 import { heatmapMockData } from 'naive-ui'
 import { ref } from 'vue'
 
-const data = ref(heatmapMockData())
+const data = heatmapMockData()
 
 const customActiveColors = ref(['#9be9a8', '#40c463', '#30a14e', '#216e39'])
 

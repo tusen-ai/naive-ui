@@ -60,7 +60,7 @@ describe('n-heatmap', () => {
   })
 
   it('should work with `colorTheme` prop', () => {
-    ;(['github', 'blue', 'green'] as const).forEach((theme) => {
+    ;(['orange', 'blue', 'green'] as const).forEach((theme) => {
       const data = heatmapMockData()
       const wrapper = mount(NHeatmap, { props: { data, colorTheme: theme } })
       expect(wrapper.find('.n-heatmap').exists()).toBe(true)

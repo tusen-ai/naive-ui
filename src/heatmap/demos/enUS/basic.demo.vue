@@ -125,14 +125,48 @@ const sizeOptions = [
       </n-switch>
     </n-flex>
     <n-flex align="center" justify="start">
-      <n-text>Week Starts On:</n-text>
+      <n-switch v-model:value="showWeekLabels">
+        <template #checked>
+          Show Week Labels
+        </template>
+        <template #unchecked>
+          Hide Week Labels
+        </template>
+      </n-switch>
+      <n-switch v-model:value="showMonthLabels">
+        <template #checked>
+          Show Month Labels
+        </template>
+        <template #unchecked>
+          Hide Month Labels
+        </template>
+      </n-switch>
+      <n-switch v-model:value="showColorIndicator">
+        <template #checked>
+          Show Color Indicator
+        </template>
+        <template #unchecked>
+          Hide Color Indicator
+        </template>
+      </n-switch>
+      <n-switch v-model:value="loading">
+        <template #checked>
+          Loading
+        </template>
+        <template #unchecked>
+          Normal
+        </template>
+      </n-switch>
+      <n-divider vertical />
+      <span>Week Starts On:</span>
       <n-select
         v-model:value="firstDayOfWeek"
         :options="weekStartOptions"
         style="width: 120px"
       />
       <n-divider vertical />
-      <n-text>Size:</n-text>
+    </n-flex>
+    <n-flex>
       <n-radio-group v-model:value="size" name="size">
         <n-radio-button
           v-for="option in sizeOptions"
@@ -181,7 +215,7 @@ const sizeOptions = [
           :show-week-labels="showWeekLabels"
           :show-month-labels="showMonthLabels"
           :show-color-indicator="showColorIndicator"
-          :fill-calendar="value === 'recent'"
+          :fill-calendar-leading="value === 'recent'"
         />
       </n-flex>
     </n-scrollbar>

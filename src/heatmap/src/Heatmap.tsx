@@ -72,7 +72,7 @@ export const heatmapProps = {
     type: [Boolean, Object] as PropType<TooltipProps | false>,
     default: true
   },
-  fillCalendar: Boolean
+  fillCalendarLeading: Boolean
 } as const
 
 export type HeatmapProps = ExtractPublicPropTypes<typeof heatmapProps>
@@ -169,7 +169,7 @@ export default defineComponent({
       return completeDataGaps(
         props.data,
         transformNaiveFirstDayOfWeekToDateFns(props.firstDayOfWeek),
-        props.fillCalendar
+        props.fillCalendarLeading
       )
     })
 

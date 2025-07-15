@@ -11,14 +11,14 @@ export function self(vars: ThemeCommonVars) {
     fontWeight,
     textColor2,
     cardColor,
-    codeColor
+    buttonColor2Hover
   } = vars
   return {
     activeColors: ['#9be9a8', '#40c463', '#30a14e', '#216e39'],
     borderRadius,
     borderColor: cardColor,
     textColor: textColor2,
-    mininumColor: codeColor,
+    mininumColor: buttonColor2Hover,
     fontWeight,
     loadingColorStart: 'rgba(0, 0, 0, 0.06)',
     loadingColorEnd: 'rgba(0, 0, 0, 0.12)',

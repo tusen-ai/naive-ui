@@ -2,6 +2,10 @@
 # 自定义颜色
 
 每一种颜色都有它的温度。
+
+通过 `active-colors` 和 `minimum-color` 属性自定义热力图的颜色。
+
+`active-colors` 是一个颜色数组，按从浅到深的顺序排列，优先级高于内置主题。`minimum-color` 用于设置最小值的颜色。
 </markdown>
 
 <script setup lang="ts">

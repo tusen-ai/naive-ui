@@ -178,7 +178,7 @@ const sizeOptions = [
           :show-week-labels="showWeekLabels"
           :show-month-labels="showMonthLabels"
           :show-color-indicator="showColorIndicator"
-          :fill-calendar="value === 'recent'"
+          :fill-calendar-leading="value === 'recent'"
         />
       </n-flex>
     </n-scrollbar>

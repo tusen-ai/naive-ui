@@ -1,7 +1,7 @@
 <markdown>
 # 插槽用法
 
-自定义 footer 区域，支持 footer 信息插槽和 indicator 指示器插槽。同时支持自定义 tooltip 内容，以及指示器文本插槽。
+自定义 footer 区域，支持 `footer` 插槽和 `indicator` 插槽。同时支持自定义 `tooltip` 内容，以及指示器文本插槽。
 </markdown>
 
 <script setup lang="ts">
