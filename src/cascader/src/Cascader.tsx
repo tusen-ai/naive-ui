@@ -19,11 +19,7 @@ import type {
   Value
 } from './interface'
 import { changeColor, depx, getPreciseEventTarget, happensIn } from 'seemly'
-import {
-  type CheckStrategy,
-  createTreeMate,
-  SubtreeNotLoadedError
-} from 'treemate'
+import { type CheckStrategy, SubtreeNotLoadedError } from 'treemate'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
@@ -31,7 +27,6 @@ import {
   defineComponent,
   h,
   type HTMLAttributes,
-  isReactive,
   nextTick,
   type PropType,
   provide,
@@ -67,9 +62,10 @@ import {
 import { cascaderLight } from '../styles'
 import CascaderMenu from './CascaderMenu'
 import CascaderSelectMenu from './CascaderSelectMenu'
+import { useCascader } from './hooks/useCascader'
 import { cascaderInjectionKey } from './interface'
 import style from './styles/index.cssr'
-import { getPathLabel, getRawNodePath } from './utils'
+import { getRawNodePath } from './utils'
 
 export const cascaderProps = {
   ...(useTheme.props as ThemeProps<CascaderTheme>),
@@ -236,103 +232,46 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+
+    const {
+      uncontrolledValueRef,
+      mergedValueRef,
+      mergedCheckStrategyRef,
+      keyboardKeyRef,
+      hoverKeyRef,
+      loadingKeySetRef,
+      addLoadingKey,
+      deleteLoadingKey,
+      treeMateRef,
+      mergedKeysRef,
+      checkedKeysRef,
+      indeterminateKeysRef,
+      menuModelRef,
+      hoverKeyPathRef,
+      updateKeyboardKey,
+      updateHoverKey,
+      getOptionsByKeys,
+      selectedOptionsRef,
+      selectedOptionRef
+    } = useCascader(props)
+
     const { localeRef } = useLocale('Cascader')
-    const uncontrolledValueRef = ref(props.defaultValue)
-    const controlledValueRef = computed(() => props.value)
-    const mergedValueRef = useMergedState(
-      controlledValueRef,
-      uncontrolledValueRef
-    )
-    const mergedCheckStrategyRef = computed(() => {
-      return props.leafOnly ? 'child' : props.checkStrategy
-    })
     const patternRef = ref('')
     const formItem = useFormItem(props)
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     const cascaderMenuInstRef = ref<CascaderMenuInstance | null>(null)
     const selectMenuInstRef = ref<SelectMenuInstance | null>(null)
     const triggerInstRef = ref<InternalSelectionInst | null>(null)
-    const keyboardKeyRef = ref<Key | null>(null)
-    const hoverKeyRef = ref<Key | null>(null)
-    const loadingKeySetRef = ref<Set<Key>>(new Set())
+
     const selectMenuFollowerRef = ref<FollowerInst | null>(null)
     const cascaderMenuFollowerRef = ref<FollowerInst | null>(null)
     const adjustedToRef = useAdjustedTo(props)
     const focusedRef = ref(false)
-    const addLoadingKey = (key: Key): void => {
-      loadingKeySetRef.value.add(key)
-    }
-    const deleteLoadingKey = (key: Key): void => {
-      loadingKeySetRef.value.delete(key)
-    }
-    const treeMateRef = computed(() => {
-      const { valueField, childrenField, disabledField } = props
-      return createTreeMate(props.options, {
-        getDisabled(node) {
-          return (node as any)[disabledField]
-        },
-        getKey(node) {
-          return (node as any)[valueField]
-        },
-        getChildren(node) {
-          return (node as any)[childrenField]
-        }
-      })
-    })
-    const mergedKeysRef = computed(() => {
-      const { cascade, multiple } = props
-      if (multiple && Array.isArray(mergedValueRef.value)) {
-        return treeMateRef.value.getCheckedKeys(mergedValueRef.value, {
-          cascade,
-          allowNotLoaded: props.allowCheckingNotLoaded
-        })
-      }
-      else {
-        return {
-          checkedKeys: [],
-          indeterminateKeys: []
-        }
-      }
-    })
-    const checkedKeysRef = computed(() => mergedKeysRef.value.checkedKeys)
-    const indeterminateKeysRef = computed(
-      () => mergedKeysRef.value.indeterminateKeys
-    )
-    const menuModelRef = computed(() => {
-      const { treeNodePath, treeNode } = treeMateRef.value.getPath(
-        hoverKeyRef.value
-      )
-      let ret
-      if (treeNode === null) {
-        ret = [treeMateRef.value.treeNodes]
-      }
-      else {
-        ret = treeNodePath.map(treeNode => treeNode.siblings)
-        if (
-          !treeNode.isLeaf
-          && !loadingKeySetRef.value.has(treeNode.key)
-          && treeNode.children
-        ) {
-          ret.push(treeNode.children)
-        }
-      }
-      return ret
-    })
-    const hoverKeyPathRef = computed(() => {
-      const { keyPath } = treeMateRef.value.getPath(hoverKeyRef.value)
-      return keyPath
-    })
+
     const optionHeightRef = computed(() => {
       return themeRef.value.self.optionHeight
     })
-    if (isReactive(props.options)) {
-      watch(props.options, (value, oldValue) => {
-        if (!(value === oldValue)) {
-          hoverKeyRef.value = null
-          keyboardKeyRef.value = null
-        }
-      })
-    }
+
     const uncontrolledShowRef = ref(false)
     function doUpdateShow(value: boolean): void {
       const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
@@ -368,18 +307,7 @@ export default defineComponent({
       nTriggerFormInput()
       nTriggerFormChange()
     }
-    function updateKeyboardKey(key: Key | null): void {
-      keyboardKeyRef.value = key
-    }
-    function updateHoverKey(key: Key | null): void {
-      hoverKeyRef.value = key
-    }
-    function getOptionsByKeys(keys: Key[]): Array<CascaderOption | null> {
-      const {
-        value: { getNode }
-      } = treeMateRef
-      return keys.map(keys => getNode(keys)?.rawNode || null)
-    }
+
     function doCheck(key: Key): boolean {
       const { cascade, multiple, filterable } = props
       const {
@@ -467,65 +395,7 @@ export default defineComponent({
         hoverKeyRef.value = key
       }
     }
-    const selectedOptionsRef = computed(() => {
-      if (props.multiple) {
-        const { showPath, separator, labelField, cascade } = props
-        const { getCheckedKeys, getNode } = treeMateRef.value
-        const value = getCheckedKeys(checkedKeysRef.value, {
-          cascade,
-          checkStrategy: mergedCheckStrategyRef.value,
-          allowNotLoaded: props.allowCheckingNotLoaded
-        }).checkedKeys
-        return value.map((key) => {
-          const node = getNode(key)
-          if (node === null) {
-            return {
-              label: String(key),
-              value: key
-            }
-          }
-          else {
-            return {
-              label: showPath
-                ? getPathLabel(node, separator, labelField)
-                : (node.rawNode as any)[labelField],
-              value: node.key
-            }
-          }
-        })
-      }
-      else {
-        return []
-      }
-    })
-    const selectedOptionRef = computed(() => {
-      const { multiple, showPath, separator, labelField } = props
-      const { value } = mergedValueRef
-      if (!multiple && !Array.isArray(value)) {
-        const { getNode } = treeMateRef.value
-        if (value === null) {
-          return null
-        }
-        const node = getNode(value)
-        if (node === null) {
-          return {
-            label: String(value),
-            value
-          }
-        }
-        else {
-          return {
-            label: showPath
-              ? getPathLabel(node, separator, labelField)
-              : (node.rawNode as any)[labelField],
-            value: node.key
-          }
-        }
-      }
-      else {
-        return null
-      }
-    })
+
     const controlledShowRef = toRef(props, 'show')
     const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
     const localizedPlaceholderRef = computed(() => {
