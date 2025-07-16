@@ -109,11 +109,48 @@ describe('n-rate', () => {
     const wrapper = mount(NRate)
     await wrapper.setProps({ allowHalf: true })
 
-    const testNumber = 2
-
     await wrapper.setProps({ onUpdateValue })
-    await wrapper.findAll('.n-rate__half')[testNumber].trigger('click')
-    expect(onUpdateValue).toHaveBeenCalledWith(testNumber + 0.5)
+    // Test clicking on the left half of the third star (index 2)
+    const rateItem = wrapper.findAll('.n-rate__item')[2]
+    const mockEvent = new MouseEvent('click', {
+      bubbles: true,
+      cancelable: true
+    })
+    // Mock offsetX to be in the left half of the star
+    Object.defineProperty(mockEvent, 'offsetX', {
+      value: 10, // Small value to simulate left half
+      writable: true
+    })
+    Object.defineProperty(mockEvent, 'currentTarget', {
+      value: {
+        offsetWidth: 30 // Mock width
+      },
+      writable: true
+    })
+    await rateItem.element.dispatchEvent(mockEvent)
+    // Should be 2.5 (index 2 + 0.5)
+    expect(onUpdateValue).toHaveBeenCalledWith(2.5)
+
+    // Test clicking on the right half of the same star
+    onUpdateValue.mockClear()
+    const mockEventRight = new MouseEvent('click', {
+      bubbles: true,
+      cancelable: true
+    })
+    // Mock offsetX to be in the right half of the star
+    Object.defineProperty(mockEventRight, 'offsetX', {
+      value: 20, // Larger value to simulate right half (>= 15, which is Math.floor(30/2))
+      writable: true
+    })
+    Object.defineProperty(mockEventRight, 'currentTarget', {
+      value: {
+        offsetWidth: 30 // Mock width
+      },
+      writable: true
+    })
+    await rateItem.element.dispatchEvent(mockEventRight)
+    // Should be 3 (index 2 + 1)
+    expect(onUpdateValue).toHaveBeenCalledWith(3)
 
     wrapper.unmount()
   })
