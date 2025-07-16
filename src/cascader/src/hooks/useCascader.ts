@@ -1,23 +1,54 @@
 import type { CheckStrategy } from 'treemate'
 import type { Ref } from 'vue'
-import type { UseFormItem } from '../../../_mixins/use-form-item'
 import type { CascaderProps } from '../Cascader'
 import type {
+  CascaderMenuInstance,
   CascaderOption,
   Key,
   OnUpdateValueImpl,
   Value
 } from '../interface'
-import { createTreeMate } from 'treemate'
+import { changeColor, depx } from 'seemly'
+import { createTreeMate, SubtreeNotLoadedError } from 'treemate'
 import { useMergedState } from 'vooks'
 import { computed, isReactive, ref, watch } from 'vue'
+import {
+  useConfig,
+  useFormItem,
+  useLocale,
+  useTheme,
+  useThemeClass
+} from '../../../_mixins'
 import { call } from '../../../_utils'
+import { cascaderLight } from '../../styles'
+import style from '../styles/index.cssr'
 import { getPathLabel, getRawNodePath } from '../utils'
 
-export function useCascader<T = unknown>(
-  props: CascaderProps,
-  formItem: UseFormItem<T>
-) {
+export function useCascader(props: CascaderProps) {
+  const {
+    mergedBorderedRef,
+    mergedClsPrefixRef,
+    namespaceRef,
+    inlineThemeDisabled
+  } = useConfig(props)
+
+  const formItem = useFormItem(props)
+
+  const { localeRef } = useLocale('Cascader')
+
+  const themeRef = useTheme(
+    'Cascader',
+    '-cascader',
+    style,
+    cascaderLight,
+    props,
+    mergedClsPrefixRef
+  )
+
+  const optionHeightRef = computed(() => {
+    return themeRef.value.self.optionHeight
+  })
+
   const uncontrolledValueRef = ref(props.defaultValue)
   const controlledValueRef = computed(() => props.value)
   const mergedValueRef = useMergedState(
@@ -28,6 +59,8 @@ export function useCascader<T = unknown>(
   const mergedCheckStrategyRef = computed(() => {
     return props.leafOnly ? 'child' : (props.checkStrategy as CheckStrategy)
   })
+
+  const cascaderMenuInstRef = ref<CascaderMenuInstance | null>(null)
 
   const keyboardKeyRef = ref<Key | null>(null)
   const hoverKeyRef = ref<Key | null>(null)
@@ -119,6 +152,14 @@ export function useCascader<T = unknown>(
     } = treeMateRef
     return keys.map(keys => getNode(keys)?.rawNode || null)
   }
+
+  const showCheckboxRef = computed(() => {
+    if (props.multiple && props.cascade)
+      return true
+    if (mergedCheckStrategyRef.value !== 'child')
+      return true
+    return false
+  })
 
   const selectedOptionsRef = computed(() => {
     if (props.multiple) {
@@ -224,7 +265,213 @@ export function useCascader<T = unknown>(
     }
   }
 
+  function doCheck(key: Key, focusSelectionInput?: () => void): boolean {
+    const { cascade, multiple, filterable } = props
+    const {
+      value: { check, getNode, getPath }
+    } = treeMateRef
+    if (multiple) {
+      try {
+        const { checkedKeys } = check(key, mergedKeysRef.value.checkedKeys, {
+          cascade,
+          checkStrategy: mergedCheckStrategyRef.value,
+          allowNotLoaded: props.allowCheckingNotLoaded
+        })
+        doUpdateValue(
+          checkedKeys,
+          getOptionsByKeys(checkedKeys),
+          checkedKeys.map(checkedKey =>
+            getRawNodePath(getPath(checkedKey)?.treeNodePath)
+          )
+        )
+        if (filterable && focusSelectionInput)
+          focusSelectionInput()
+        keyboardKeyRef.value = key
+        hoverKeyRef.value = key
+      }
+      catch (err) {
+        if (err instanceof SubtreeNotLoadedError) {
+          if (cascaderMenuInstRef.value) {
+            const tmNode = getNode(key)
+            if (tmNode !== null) {
+              cascaderMenuInstRef.value.showErrorMessage(
+                (tmNode.rawNode as any)[props.labelField || 'label'] as string
+              )
+            }
+          }
+        }
+        else {
+          throw err
+        }
+      }
+    }
+    else {
+      if (mergedCheckStrategyRef.value === 'child') {
+        const tmNode = getNode(key)
+        if (tmNode?.isLeaf) {
+          doUpdateValue(
+            key,
+            tmNode.rawNode,
+            getRawNodePath(getPath(key).treeNodePath)
+          )
+        }
+        else {
+          return false
+        }
+      }
+      else {
+        const tmNode = getNode(key)
+        doUpdateValue(
+          key,
+          tmNode?.rawNode || null,
+          getRawNodePath(getPath(key)?.treeNodePath)
+        )
+      }
+    }
+    return true
+  }
+
+  function move(direction: 'prev' | 'next' | 'child' | 'parent'): void {
+    const { value: keyboardKey } = keyboardKeyRef
+    const { value: treeMate } = treeMateRef
+    switch (direction) {
+      case 'prev':
+        if (keyboardKey !== null) {
+          const node = treeMate.getPrev(keyboardKey, { loop: true })
+          if (node !== null) {
+            updateKeyboardKey(node.key)
+            updateHoverKey(node.key)
+            cascaderMenuInstRef.value?.scroll(
+              node.level,
+              node.index,
+              depx(optionHeightRef.value)
+            )
+          }
+        }
+        break
+      case 'next':
+        if (keyboardKey === null) {
+          const node = treeMate.getFirstAvailableNode()
+          if (node !== null) {
+            updateKeyboardKey(node.key)
+            updateHoverKey(node.key)
+            cascaderMenuInstRef.value?.scroll(
+              node.level,
+              node.index,
+              depx(optionHeightRef.value)
+            )
+          }
+        }
+        else {
+          const node = treeMate.getNext(keyboardKey, { loop: true })
+          if (node !== null) {
+            updateKeyboardKey(node.key)
+            updateHoverKey(node.key)
+            cascaderMenuInstRef.value?.scroll(
+              node.level,
+              node.index,
+              depx(optionHeightRef.value)
+            )
+          }
+        }
+        break
+      case 'child':
+        if (keyboardKey !== null) {
+          const currentNode = treeMate.getNode(keyboardKey)
+          if (currentNode !== null) {
+            if (currentNode.shallowLoaded) {
+              const node = treeMate.getChild(keyboardKey)
+              if (node !== null) {
+                updateHoverKey(node.key)
+                updateKeyboardKey(node.key)
+              }
+            }
+            else {
+              const { value: loadingKeySet } = loadingKeySetRef
+              if (!loadingKeySet.has(keyboardKey)) {
+                addLoadingKey(keyboardKey)
+                updateHoverKey(keyboardKey)
+                const { onLoad } = props
+                if (onLoad) {
+                  onLoad(currentNode.rawNode)
+                    .then(() => {
+                      deleteLoadingKey(keyboardKey)
+                    })
+                    .catch(() => {
+                      deleteLoadingKey(keyboardKey)
+                    })
+                }
+              }
+            }
+          }
+        }
+        break
+      case 'parent':
+        if (keyboardKey !== null) {
+          const node = treeMate.getParent(keyboardKey)
+          if (node !== null) {
+            updateHoverKey(node.key)
+            updateKeyboardKey(node.key)
+          }
+        }
+        break
+    }
+  }
+
+  const cssVarsRef = computed(() => {
+    const {
+      self: {
+        optionArrowColor,
+        optionTextColor,
+        optionTextColorActive,
+        optionTextColorDisabled,
+        optionCheckMarkColor,
+        menuColor,
+        menuBoxShadow,
+        menuDividerColor,
+        menuBorderRadius,
+        menuHeight,
+        optionColorHover,
+        optionHeight,
+        optionFontSize,
+        loadingColor,
+        columnWidth
+      },
+      common: { cubicBezierEaseInOut }
+    } = themeRef.value
+    return {
+      '--n-bezier': cubicBezierEaseInOut,
+      '--n-menu-border-radius': menuBorderRadius,
+      '--n-menu-box-shadow': menuBoxShadow,
+      '--n-menu-height': menuHeight,
+      '--n-column-width': columnWidth,
+      '--n-menu-color': menuColor,
+      '--n-menu-divider-color': menuDividerColor,
+      '--n-option-height': optionHeight,
+      '--n-option-font-size': optionFontSize,
+      '--n-option-text-color': optionTextColor,
+      '--n-option-text-color-disabled': optionTextColorDisabled,
+      '--n-option-text-color-active': optionTextColorActive,
+      '--n-option-color-hover': optionColorHover,
+      '--n-option-check-mark-color': optionCheckMarkColor,
+      '--n-option-arrow-color': optionArrowColor,
+      '--n-menu-mask-color': changeColor(menuColor, { alpha: 0.75 }),
+      '--n-loading-color': loadingColor
+    }
+  })
+  const themeClassHandle = inlineThemeDisabled
+    ? useThemeClass('cascader', undefined, cssVarsRef, props)
+    : undefined
+
   return {
+    mergedBorderedRef,
+    mergedClsPrefixRef,
+    namespaceRef,
+    inlineThemeDisabled,
+    themeRef,
+    formItem,
+    localeRef,
+    optionHeightRef,
     uncontrolledValueRef,
     controlledValueRef,
     mergedValueRef,
@@ -243,9 +490,15 @@ export function useCascader<T = unknown>(
     updateKeyboardKey,
     updateHoverKey,
     getOptionsByKeys,
+    showCheckboxRef,
     selectedOptionsRef,
     selectedOptionRef,
     doUpdateValue,
-    doUncheck
+    cascaderMenuInstRef,
+    doUncheck,
+    doCheck,
+    move,
+    cssVarsRef,
+    themeClassHandle
   }
 }

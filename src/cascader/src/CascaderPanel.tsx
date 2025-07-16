@@ -1,47 +1,34 @@
+import type { CheckStrategy } from 'treemate'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CascaderTheme } from '../styles'
 import type {
-  CascaderMenuInstance,
   CascaderOption,
   CascaderPanelInst,
   ExpandTrigger,
-  Key,
   OnLoad,
   OnUpdateValue,
   Value
 } from './interface'
-import { changeColor, depx, happensIn } from 'seemly'
-import { type CheckStrategy, SubtreeNotLoadedError } from 'treemate'
+import { happensIn } from 'seemly'
 import { useIsMounted } from 'vooks'
 import {
-  computed,
   type CSSProperties,
   defineComponent,
   h,
   type HTMLAttributes,
   type PropType,
   provide,
-  ref,
   type SlotsType,
   toRef,
   type VNode,
   type VNodeChild
 } from 'vue'
-import {
-  useConfig,
-  useFormItem,
-  useLocale,
-  useTheme,
-  useThemeClass
-} from '../../_mixins'
+import { useTheme } from '../../_mixins'
 import { markEventEffectPerformed } from '../../_utils'
-import { cascaderLight } from '../styles'
 import NCascaderMenuBase from './CascaderMenuBase'
 import { useCascader } from './hooks/useCascader'
 import { cascaderInjectionKey } from './interface'
-import style from './styles/index.cssr'
-import { getRawNodePath } from './utils'
 
 export const cascaderPanelProps = {
   ...(useTheme.props as ThemeProps<CascaderTheme>),
@@ -141,19 +128,12 @@ export default defineComponent({
   props: cascaderPanelProps,
   slots: Object as SlotsType<CascaderPanelSlots>,
   setup(props, { slots }) {
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
-    const themeRef = useTheme(
-      'Cascader',
-      '-cascader',
-      style,
-      cascaderLight,
-      props,
-      mergedClsPrefixRef
-    )
-
-    const { localeRef } = useLocale('Cascader')
-    const formItem = useFormItem(props)
     const {
+      mergedClsPrefixRef,
+      inlineThemeDisabled,
+      themeRef,
+      localeRef,
+      optionHeightRef,
       mergedValueRef,
       mergedCheckStrategyRef,
       keyboardKeyRef,
@@ -162,7 +142,6 @@ export default defineComponent({
       addLoadingKey,
       deleteLoadingKey,
       treeMateRef,
-      mergedKeysRef,
       checkedKeysRef,
       indeterminateKeysRef,
       menuModelRef,
@@ -170,169 +149,18 @@ export default defineComponent({
       updateKeyboardKey,
       updateHoverKey,
       getOptionsByKeys,
+      showCheckboxRef,
       selectedOptionsRef,
       selectedOptionRef,
-      doUpdateValue,
-      doUncheck
-    } = useCascader(props, formItem)
-
-    const cascaderMenuInstRef = ref<CascaderMenuInstance | null>(null)
-
-    const optionHeightRef = computed(() => {
-      return themeRef.value.self.optionHeight
-    })
-
-    function doCheck(key: Key): boolean {
-      const { cascade, multiple } = props
-      const {
-        value: { check, getNode, getPath }
-      } = treeMateRef
-      if (multiple) {
-        try {
-          const { checkedKeys } = check(key, mergedKeysRef.value.checkedKeys, {
-            cascade,
-            checkStrategy: mergedCheckStrategyRef.value,
-            allowNotLoaded: props.allowCheckingNotLoaded
-          })
-          doUpdateValue(
-            checkedKeys,
-            getOptionsByKeys(checkedKeys),
-            checkedKeys.map(checkedKey =>
-              getRawNodePath(getPath(checkedKey)?.treeNodePath)
-            )
-          )
-          keyboardKeyRef.value = key
-          hoverKeyRef.value = key
-        }
-        catch (err) {
-          if (err instanceof SubtreeNotLoadedError) {
-            if (cascaderMenuInstRef.value) {
-              const tmNode = getNode(key)
-              if (tmNode !== null) {
-                cascaderMenuInstRef.value.showErrorMessage(
-                  (tmNode.rawNode as any)[props.labelField] as string
-                )
-              }
-            }
-          }
-          else {
-            throw err
-          }
-        }
-      }
-      else {
-        if (mergedCheckStrategyRef.value === 'child') {
-          const tmNode = getNode(key)
-          if (tmNode?.isLeaf) {
-            doUpdateValue(
-              key,
-              tmNode.rawNode,
-              getRawNodePath(getPath(key).treeNodePath)
-            )
-          }
-          else {
-            return false
-          }
-        }
-        else {
-          const tmNode = getNode(key)
-          doUpdateValue(
-            key,
-            tmNode?.rawNode || null,
-            getRawNodePath(getPath(key)?.treeNodePath)
-          )
-        }
-      }
-      return true
-    }
+      doUncheck,
+      doCheck,
+      cascaderMenuInstRef,
+      move,
+      cssVarsRef,
+      themeClassHandle
+    } = useCascader(props)
 
     // --- keyboard
-    function move(direction: 'prev' | 'next' | 'child' | 'parent'): void {
-      const { value: keyboardKey } = keyboardKeyRef
-      const { value: treeMate } = treeMateRef
-      switch (direction) {
-        case 'prev':
-          if (keyboardKey !== null) {
-            const node = treeMate.getPrev(keyboardKey, { loop: true })
-            if (node !== null) {
-              updateKeyboardKey(node.key)
-              updateHoverKey(node.key)
-              cascaderMenuInstRef.value?.scroll(
-                node.level,
-                node.index,
-                depx(optionHeightRef.value)
-              )
-            }
-          }
-          break
-        case 'next':
-          if (keyboardKey === null) {
-            const node = treeMate.getFirstAvailableNode()
-            if (node !== null) {
-              updateKeyboardKey(node.key)
-              updateHoverKey(node.key)
-              cascaderMenuInstRef.value?.scroll(
-                node.level,
-                node.index,
-                depx(optionHeightRef.value)
-              )
-            }
-          }
-          else {
-            const node = treeMate.getNext(keyboardKey, { loop: true })
-            if (node !== null) {
-              updateKeyboardKey(node.key)
-              updateHoverKey(node.key)
-              cascaderMenuInstRef.value?.scroll(
-                node.level,
-                node.index,
-                depx(optionHeightRef.value)
-              )
-            }
-          }
-          break
-        case 'child':
-          if (keyboardKey !== null) {
-            const currentNode = treeMate.getNode(keyboardKey)
-            if (currentNode !== null) {
-              if (currentNode.shallowLoaded) {
-                const node = treeMate.getChild(keyboardKey)
-                if (node !== null) {
-                  updateHoverKey(node.key)
-                  updateKeyboardKey(node.key)
-                }
-              }
-              else {
-                const { value: loadingKeySet } = loadingKeySetRef
-                if (!loadingKeySet.has(keyboardKey)) {
-                  addLoadingKey(keyboardKey)
-                  updateHoverKey(keyboardKey)
-                  const { onLoad } = props
-                  if (onLoad) {
-                    onLoad(currentNode.rawNode)
-                      .then(() => {
-                        deleteLoadingKey(keyboardKey)
-                      })
-                      .catch(() => {
-                        deleteLoadingKey(keyboardKey)
-                      })
-                  }
-                }
-              }
-            }
-          }
-          break
-        case 'parent':
-          if (keyboardKey !== null) {
-            const node = treeMate.getParent(keyboardKey)
-            if (node !== null) {
-              updateHoverKey(node.key)
-              updateKeyboardKey(node.key)
-            }
-          }
-          break
-      }
-    }
     function handleKeydown(e: KeyboardEvent): void {
       if (happensIn(e, 'action'))
         return
@@ -388,13 +216,6 @@ export default defineComponent({
     function handleTriggerClick(): void {}
     function handleMenuTabout(): void {}
 
-    const showCheckboxRef = computed(() => {
-      if (props.multiple && props.cascade)
-        return true
-      if (mergedCheckStrategyRef.value !== 'child')
-        return true
-      return false
-    })
     provide(cascaderInjectionKey, {
       slots,
       mergedClsPrefixRef,
@@ -463,50 +284,6 @@ export default defineComponent({
         }
       }
     }
-    const cssVarsRef = computed(() => {
-      const {
-        self: {
-          optionArrowColor,
-          optionTextColor,
-          optionTextColorActive,
-          optionTextColorDisabled,
-          optionCheckMarkColor,
-          menuColor,
-          menuBoxShadow,
-          menuDividerColor,
-          menuBorderRadius,
-          menuHeight,
-          optionColorHover,
-          optionHeight,
-          optionFontSize,
-          loadingColor,
-          columnWidth
-        },
-        common: { cubicBezierEaseInOut }
-      } = themeRef.value
-      return {
-        '--n-bezier': cubicBezierEaseInOut,
-        '--n-menu-border-radius': menuBorderRadius,
-        '--n-menu-box-shadow': menuBoxShadow,
-        '--n-menu-height': menuHeight,
-        '--n-column-width': columnWidth,
-        '--n-menu-color': menuColor,
-        '--n-menu-divider-color': menuDividerColor,
-        '--n-option-height': optionHeight,
-        '--n-option-font-size': optionFontSize,
-        '--n-option-text-color': optionTextColor,
-        '--n-option-text-color-disabled': optionTextColorDisabled,
-        '--n-option-text-color-active': optionTextColorActive,
-        '--n-option-color-hover': optionColorHover,
-        '--n-option-check-mark-color': optionCheckMarkColor,
-        '--n-option-arrow-color': optionArrowColor,
-        '--n-menu-mask-color': changeColor(menuColor, { alpha: 0.75 }),
-        '--n-loading-color': loadingColor
-      }
-    })
-    const themeClassHandle = inlineThemeDisabled
-      ? useThemeClass('cascader', undefined, cssVarsRef, props)
-      : undefined
 
     return {
       ...exposedMethods,
