@@ -19,6 +19,7 @@
 - Fix `n-menu`'s disabled style not working when parent node is set to `disabled` and child node has `type: "group"`, closes [#6792](https://github.com/tusen-ai/naive-ui/issues/6792)
 - Fix `n-input-group-label` not injecting `formItemInjectionKey`, causing the `size` property to fail, and close [#7066](https://github.com/tusen-ai/naive-ui/issues/7066)
 - Fix the issue of style confusion in `n-carousel` when there is only one image, close [#6476](https://github.com/tusen-ai/naive-ui/issues/6476)
+- Fix the issue where the cursor could not be moved with the left and right arrow keys after entering text when the filterable option was enabled in the n-cascader component. close [#6934](https://github.com/tusen-ai/naive-ui/issues/6934)
 
 ### Features
 
@@ -35,7 +36,8 @@
 - `n-image-preview` `n-image-group` support being used independently.
 - `n-input-otp` adds `focusOnChar` util method, closes [#7073](https://github.com/tusen-ai/naive-ui/issues/7073).
 - 🌟 Adds `n-cascader-panel` component. close [#5347](https://github.com/tusen-ai/naive-ui/issues/5347), [#5901](https://github.com/tusen-ai/naive-ui/issues/5901)
-- Add the description for the `isLeaf` parameter in the `CascaderOption Properties` of the `n-cascader` component. [#6276](https://github.com/tusen-ai/naive-ui/issues/6276)
+- Add the description for the `isLeaf` parameter in the `CascaderOption Properties` of the `n-cascader` component. close [#6276](https://github.com/tusen-ai/naive-ui/issues/6276)
+- The `n-cascader` and `n-cascader-panel` components now support using the arrow keys (up, down, left, right) to navigate through dropdown options, and the Enter key to select an option. close [#6852](https://github.com/tusen-ai/naive-ui/issues/6852)
 
 ## 2.42.0
 

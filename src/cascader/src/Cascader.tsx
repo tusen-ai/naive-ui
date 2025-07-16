@@ -468,6 +468,7 @@ export default defineComponent({
             const node = treeMate.getPrev(keyboardKey, { loop: true })
             if (node !== null) {
               updateKeyboardKey(node.key)
+              updateHoverKey(node.key)
               cascaderMenuInstRef.value?.scroll(
                 node.level,
                 node.index,
@@ -481,6 +482,7 @@ export default defineComponent({
             const node = treeMate.getFirstAvailableNode()
             if (node !== null) {
               updateKeyboardKey(node.key)
+              updateHoverKey(node.key)
               cascaderMenuInstRef.value?.scroll(
                 node.level,
                 node.index,
@@ -492,6 +494,7 @@ export default defineComponent({
             const node = treeMate.getNext(keyboardKey, { loop: true })
             if (node !== null) {
               updateKeyboardKey(node.key)
+              updateHoverKey(node.key)
               cascaderMenuInstRef.value?.scroll(
                 node.level,
                 node.index,
@@ -507,7 +510,7 @@ export default defineComponent({
               if (currentNode.shallowLoaded) {
                 const node = treeMate.getChild(keyboardKey)
                 if (node !== null) {
-                  updateHoverKey(keyboardKey)
+                  updateHoverKey(node.key)
                   updateKeyboardKey(node.key)
                 }
               }
@@ -535,37 +538,25 @@ export default defineComponent({
           if (keyboardKey !== null) {
             const node = treeMate.getParent(keyboardKey)
             if (node !== null) {
+              updateHoverKey(node.key)
               updateKeyboardKey(node.key)
-              const parentNode = node.getParent()
-              if (parentNode === null) {
-                updateHoverKey(null)
-              }
-              else {
-                updateHoverKey(parentNode.key)
-              }
             }
           }
           break
       }
     }
     function handleKeydown(e: KeyboardEvent): void {
-      switch (e.key) {
-        case ' ':
-        case 'ArrowDown':
-        case 'ArrowUp':
-          if (props.filterable && mergedShowRef.value) {
-            break
-          }
-          e.preventDefault()
-          break
+      if (
+        props.filterable
+        && document.activeElement instanceof HTMLInputElement
+        && e.target === document.activeElement
+        && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')
+      ) {
+        return
       }
       if (happensIn(e, 'action'))
         return
       switch (e.key) {
-        case ' ':
-          if (props.filterable)
-            return
-        // eslint-disable-next-line no-fallthrough
         case 'Enter':
           if (!mergedShowRef.value) {
             openMenu()
@@ -640,6 +631,7 @@ export default defineComponent({
             markEventEffectPerformed(e)
             closeMenu(true)
           }
+          break
       }
     }
     function handleMenuKeydown(e: KeyboardEvent): void {

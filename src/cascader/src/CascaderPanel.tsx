@@ -256,6 +256,7 @@ export default defineComponent({
             const node = treeMate.getPrev(keyboardKey, { loop: true })
             if (node !== null) {
               updateKeyboardKey(node.key)
+              updateHoverKey(node.key)
               cascaderMenuInstRef.value?.scroll(
                 node.level,
                 node.index,
@@ -269,6 +270,7 @@ export default defineComponent({
             const node = treeMate.getFirstAvailableNode()
             if (node !== null) {
               updateKeyboardKey(node.key)
+              updateHoverKey(node.key)
               cascaderMenuInstRef.value?.scroll(
                 node.level,
                 node.index,
@@ -280,6 +282,7 @@ export default defineComponent({
             const node = treeMate.getNext(keyboardKey, { loop: true })
             if (node !== null) {
               updateKeyboardKey(node.key)
+              updateHoverKey(node.key)
               cascaderMenuInstRef.value?.scroll(
                 node.level,
                 node.index,
@@ -295,7 +298,7 @@ export default defineComponent({
               if (currentNode.shallowLoaded) {
                 const node = treeMate.getChild(keyboardKey)
                 if (node !== null) {
-                  updateHoverKey(keyboardKey)
+                  updateHoverKey(node.key)
                   updateKeyboardKey(node.key)
                 }
               }
@@ -323,27 +326,14 @@ export default defineComponent({
           if (keyboardKey !== null) {
             const node = treeMate.getParent(keyboardKey)
             if (node !== null) {
+              updateHoverKey(node.key)
               updateKeyboardKey(node.key)
-              const parentNode = node.getParent()
-              if (parentNode === null) {
-                updateHoverKey(null)
-              }
-              else {
-                updateHoverKey(parentNode.key)
-              }
             }
           }
           break
       }
     }
     function handleKeydown(e: KeyboardEvent): void {
-      switch (e.key) {
-        case ' ':
-        case 'ArrowDown':
-        case 'ArrowUp':
-          e.preventDefault()
-          break
-      }
       if (happensIn(e, 'action'))
         return
       switch (e.key) {
@@ -354,6 +344,10 @@ export default defineComponent({
               || indeterminateKeysRef.value.includes(keyboardKeyRef.value)
             ) {
               doUncheck(keyboardKeyRef.value)
+            }
+            else {
+              const { value: keyboardKey } = keyboardKeyRef
+              doCheck(keyboardKey)
             }
           }
           break

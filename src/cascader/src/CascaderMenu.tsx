@@ -86,6 +86,7 @@ export default defineComponent({
       mergedTheme: mergedThemeRef,
       getColumnStyle: getColumnStyleRef,
       handleClickOutside,
+      cascaderMenuBaseRef,
       ...exposedRef
     }
   },

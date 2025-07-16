@@ -19,6 +19,7 @@
 - 修复 `n-menu` 在父节点设置 `disabled`，子节点为 `type: "group"` 的禁用样式失效，关闭 [#6792](https://github.com/tusen-ai/naive-ui/issues/6792)
 - 修复 `n-input-group-label` 没有注入 `formItemInjectionKey`，导致 `size` 属性失效的问题，关闭 [#7066](https://github.com/tusen-ai/naive-ui/issues/7066)
 - 修复 `n-carousel` 只有一张图的情況下样式错乱的问题，关闭 [#6476](https://github.com/tusen-ai/naive-ui/issues/6476)
+- 修复 `n-cascader` 开启过滤filterable后，输入内容后，光标无法通过键盘左右键移动 [#6934](https://github.com/tusen-ai/naive-ui/issues/6934)
 
 ### Features
 
@@ -36,6 +37,7 @@
 - `n-input-otp` 增加 `focusOnChar` 方法，关闭 [#7073](https://github.com/tusen-ai/naive-ui/issues/7073)
 - 🌟 新增 `n-cascader-panel` 组件，关闭 [#5347](https://github.com/tusen-ai/naive-ui/issues/5347)、[#5901](https://github.com/tusen-ai/naive-ui/issues/5901)
 - 增加 `n-cascader` 组件 `CascaderOption Properties` `isLeaf` 参数说明，关闭 [#6276](https://github.com/tusen-ai/naive-ui/issues/6276)
+- `n-cascader` `n-cascader-panel` 组件支持上下左右键去定位下拉选择项，通过回车键选择选项，关闭 [#6852](https://github.com/tusen-ai/naive-ui/issues/6852)
 
 ## 2.42.0
 
