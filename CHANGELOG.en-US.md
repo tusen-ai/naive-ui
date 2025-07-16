@@ -38,6 +38,7 @@
 - 🌟 Adds `n-cascader-panel` component. close [#5347](https://github.com/tusen-ai/naive-ui/issues/5347), [#5901](https://github.com/tusen-ai/naive-ui/issues/5901)
 - Add the description for the `isLeaf` parameter in the `CascaderOption Properties` of the `n-cascader` component. close [#6276](https://github.com/tusen-ai/naive-ui/issues/6276)
 - The `n-cascader` and `n-cascader-panel` components now support using the arrow keys (up, down, left, right) to navigate through dropdown options, and the Enter key to select an option. close [#6852](https://github.com/tusen-ai/naive-ui/issues/6852)
+- `n-cascader` adds `render-tag` prop. close [#6389](https://github.com/tusen-ai/naive-ui/issues/6389)
 
 ## 2.42.0
 

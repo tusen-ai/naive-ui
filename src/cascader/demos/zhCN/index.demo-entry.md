@@ -19,6 +19,7 @@ focus.vue
 status.vue
 default-value-debug.vue
 cascader-panel.vue
+render-tag.vue
 ```
 
 ## API
@@ -54,6 +55,7 @@ cascader-panel.vue
 | render-prefix | `(info: { option: CascaderOption, node: VNode \| null, checked: boolean }) => VNodeChild` | `undefined` | 节点前缀的渲染函数 | 2.38.2 |
 | render-label | `(option: CascaderOption, checked: boolean) => VNodeChild` | `undefined` | Cascader 菜单选项标签渲染函数 | 2.24.0 |
 | render-suffix | `(info: { option: CascaderOption, checked: boolean }) => VNodeChild` | `undefined` | 节点后缀的渲染函数 | 2.38.2 |
+| render-tag | `(props: { option: SelectBaseOption, handleClose: () => void }) => VNodeChild` | `undefined` | 控制标签的渲染 | NEXT_VERSION |
 | separator | `string` | `' / '` | 数据分隔符 |  |
 | show | `boolean` | `undefined` | 是否打开菜单 |  |
 | show-path | `boolean` | `true` | 是否在选择器中显示选项路径 |  |
