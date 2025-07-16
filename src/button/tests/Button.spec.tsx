@@ -28,11 +28,11 @@ describe('n-button', () => {
       }
     })
     await inst.trigger('click')
-    expect(onClick).toBeCalledTimes(1)
+    expect(onClick).toHaveBeenCalledTimes(1)
     await inst.trigger('keydown.space')
-    expect(onClick).toBeCalledTimes(1)
+    expect(onClick).toHaveBeenCalledTimes(1)
     await inst.trigger('keydown.enter')
-    expect(onClick).toBeCalledTimes(1)
+    expect(onClick).toHaveBeenCalledTimes(1)
     inst.unmount()
   })
   it('disabled', async () => {

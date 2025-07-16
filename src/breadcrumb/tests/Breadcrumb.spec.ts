@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { h } from 'vue'
+import * as useBrowserLocationModule from '../../_utils/composable/use-browser-location'
 import { NBreadcrumb, NBreadcrumbItem } from '../index'
 
 describe('n-breadcrumb', () => {
@@ -12,7 +13,7 @@ describe('n-breadcrumb', () => {
     const wrapper = mount(NBreadcrumbItem)
 
     expect(wrapper.isVisible()).toBe(false)
-    expect(mockErrorLogger).toBeCalledWith(
+    expect(mockErrorLogger).toHaveBeenCalledWith(
       '[naive/breadcrumb]: `n-breadcrumb-item` must be placed inside `n-breadcrumb`.'
     )
     wrapper.unmount()
@@ -106,19 +107,20 @@ describe('n-breadcrumb', () => {
     })
 
     it('should add `aria-current` if the item is the current location', () => {
-      const originalWindow = window
-      const windowSpy = jest.spyOn(globalThis, 'window', 'get')
       const currentUrl = 'http://some-domaine/path2'
       const url = 'http://some-domaine/path1'
-      windowSpy.mockImplementation(() => {
-        const mockedWindow = Object.create(originalWindow)
-        Object.defineProperty(mockedWindow, 'location', {
-          value: {
-            href: currentUrl
-          }
-        })
-        return mockedWindow
-      })
+      // Create a mock implementation that doesn't interfere with JSDOM's location object
+      // We'll mock the useBrowserLocation composable directly instead
+      const mockUseBrowserLocation = jest.fn(() => ({
+        value: { href: currentUrl }
+      }))
+      // Store the original composable to restore it later
+      const originalUseBrowserLocation
+        = useBrowserLocationModule.useBrowserLocation
+      // Mock the composable
+      ;(useBrowserLocationModule as any).useBrowserLocation
+        = mockUseBrowserLocation
+
       const wrapper = mount(NBreadcrumb, {
         slots: {
           default: () => [
@@ -143,18 +145,20 @@ describe('n-breadcrumb', () => {
 
       expect(
         wrapper.find('span.n-breadcrumb-item__link').attributes('aria-current')
-      ).toBe(undefined)
+      ).toBeUndefined()
       expect(
         wrapper
           .find(`a.n-breadcrumb-item__link[href="${url}"]`)
           .attributes('aria-current')
-      ).toBe(undefined)
+      ).toBeUndefined()
       expect(
         wrapper
           .find(`a.n-breadcrumb-item__link[href="${currentUrl}"]`)
           .attributes('aria-current')
       ).toBe('location')
-      windowSpy.mockRestore()
+      // Restore the original composable
+      ;(useBrowserLocationModule as any).useBrowserLocation
+        = originalUseBrowserLocation
       wrapper.unmount()
     })
 

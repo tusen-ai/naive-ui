@@ -5,7 +5,7 @@ Every square is a piece of persistence, and blanks are the rhythm of life.
 </markdown>
 
 <script setup lang="ts">
-import type { WeekStartsOn } from 'naive-ui'
+import type { HeatmapFirstDayOfWeek } from 'naive-ui'
 import { heatmapMockData } from 'naive-ui'
 import { computed, ref } from 'vue'
 
@@ -68,7 +68,7 @@ const showWeekLabels = ref(true)
 const showMonthLabels = ref(true)
 const showColorIndicator = ref(true)
 const loading = ref(false)
-const weekStartsOn = ref<WeekStartsOn>(0)
+const firstDayOfWeek = ref<HeatmapFirstDayOfWeek>(0)
 const size = ref<'small' | 'medium' | 'large'>('medium')
 
 const weekStartOptions = [
@@ -127,7 +127,7 @@ const sizeOptions = [
     <n-flex align="center" justify="start">
       <n-text>Week Starts On:</n-text>
       <n-select
-        v-model:value="weekStartsOn"
+        v-model:value="firstDayOfWeek"
         :options="weekStartOptions"
         style="width: 120px"
       />
@@ -171,9 +171,9 @@ const sizeOptions = [
 
     <n-flex align="center">
       <n-heatmap
-        :key="`heatmap-${value}-${weekStartsOn}-${size}`"
+        :key="`heatmap-${value}-${firstDayOfWeek}-${size}`"
         :data="yearData"
-        :week-starts-on="weekStartsOn"
+        :first-day-of-week="firstDayOfWeek"
         :loading="loading"
         :size="size"
         unit="commits"
