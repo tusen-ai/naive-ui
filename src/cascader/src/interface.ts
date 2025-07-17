@@ -15,6 +15,7 @@ export interface CascaderOption {
   value?: ValueAtom
   disabled?: boolean
   children?: CascaderOption[]
+  isLeaf?: boolean
   [key: string]: unknown
 }
 
@@ -124,6 +125,11 @@ export interface CascaderMenuExposedMethods {
   showErrorMessage: (label: string) => void
 }
 
+export interface CascaderMenuBaseInst {
+  scroll: (depth: number, index: number, elSize: number) => void
+  showErrorMessage: (label: string) => void
+}
+
 export type CascaderMenuInstance = {
   $el: HTMLElement
 } & CascaderMenuExposedMethods
@@ -140,6 +146,14 @@ export const cascaderInjectionKey
 export interface CascaderInst {
   focus: () => void
   blur: () => void
+  getCheckedData: () => { keys: Key[], options: Array<CascaderOption | null> }
+  getIndeterminateData: () => {
+    keys: Key[]
+    options: Array<CascaderOption | null>
+  }
+}
+
+export interface CascaderPanelInst {
   getCheckedData: () => { keys: Key[], options: Array<CascaderOption | null> }
   getIndeterminateData: () => {
     keys: Key[]

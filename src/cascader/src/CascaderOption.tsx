@@ -280,9 +280,7 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-cascader-option`,
-          this.keyboardPending
-          || (this.hoverPending
-            && `${mergedClsPrefix}-cascader-option--pending`),
+          this.hoverPending && `${mergedClsPrefix}-cascader-option--pending`,
           this.disabled && `${mergedClsPrefix}-cascader-option--disabled`,
           this.showCheckbox && `${mergedClsPrefix}-cascader-option--show-prefix`
         ]}

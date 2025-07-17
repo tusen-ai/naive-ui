@@ -51,7 +51,7 @@ function createSelectOptions(
 
 function getPathLabel(
   node: TmNode | null,
-  separator: string,
+  separator: string = ' / ',
   labelField: string
 ): string {
   const path: string[] = []
