@@ -45,6 +45,7 @@ component-preview-group-debug.vue
 | width | `string \| number` | `undefined` | Image width. |  |
 | on-error | `(e: Event) => void` | `undefined` | Callback executed when the image fails to load. |  |
 | on-load | `(e: Event) => void` | `undefined` | Callback executed after the image is loaded. |  |
+| custom-download | `(imgSrc: string) => void` | `undefined` | Customize download request | NEXT_VERSION |
 
 ### ImageGroup Props
 
@@ -61,6 +62,7 @@ component-preview-group-debug.vue
 | src-list | `string[]` | `undefined` | Picture list. | NEXT_VERSION |
 | on-preview-next | `() => void` | `undefined` | Click the callback on the next slide. |
 | on-preview-prev | `() => void` | `undefined` | Click the callback from the previous slide. |  |
+| custom-download | `(imgSrc: string) => void` | `undefined` | Customize download request | NEXT_VERSION |
 
 ### ImagePreview Props
 
@@ -74,6 +76,7 @@ component-preview-group-debug.vue
 | show-toolbar-tooltip | `boolean` | `false` | Whether to show toolbar buttons' tooltip. | NEXT_VERSION |
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback on show status changes. | NEXT_VERSION |
 | onClose | `() => void` | `undefined` | Callback when close imagePreview. | NEXT_VERSION |
+| custom-download | `(imgSrc: string) => void` | `undefined` | Customize download request | NEXT_VERSION |
 
 ### Image Slots
 

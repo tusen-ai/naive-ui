@@ -34,6 +34,7 @@
 - - `n-image` adds showPreview methods, closes [#6695](https://github.com/tusen-ai/naive-ui/issues/6695).
 - `n-image-preview` `n-image-group` support being used independently.
 - `n-input-otp` adds `focusOnChar` util method, closes [#7073](https://github.com/tusen-ai/naive-ui/issues/7073).
+- `n-image` `n-image-preview` `n-image-group` adds `custom-download`, closes [#6255](https://github.com/tusen-ai/naive-ui/issues/6255), [#6574](https://github.com/tusen-ai/naive-ui/issues/6574).
 
 ## 2.42.0
 

@@ -1,7 +1,7 @@
 import type { ImgHTMLAttributes, PropType, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ImageTheme } from '../styles'
-import type { ImageRenderToolbar } from './public-types'
+import type { ImageCustomDownload, ImageRenderToolbar } from './public-types'
 import { useTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
 
@@ -18,7 +18,8 @@ export const imagePreviewSharedProps = {
   onPreviewNext: Function as PropType<() => void>,
   showToolbar: { type: Boolean, default: true },
   showToolbarTooltip: Boolean,
-  renderToolbar: Function as PropType<ImageRenderToolbar>
+  renderToolbar: Function as PropType<ImageRenderToolbar>,
+  customDownload: Function as PropType<ImageCustomDownload>
 }
 
 export interface ImageContext {

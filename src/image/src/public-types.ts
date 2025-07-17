@@ -34,3 +34,5 @@ export type ImageErrorSlot = () => VNode[]
 export interface ImagePreviewInst {
   setThumbnailEl: (e: HTMLImageElement | null) => void
 }
+
+export type ImageCustomDownload = (imgSrc: string) => void

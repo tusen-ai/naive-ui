@@ -78,7 +78,7 @@ export default defineComponent({
   name: 'ImagePreview',
   props: imagePreviewProps,
   setup(props) {
-    const { src } = toRefs(props)
+    const { src, customDownload } = toRefs(props)
 
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
@@ -401,7 +401,12 @@ export default defineComponent({
     function handleDownloadClick(): void {
       const imgSrc = src.value
       if (imgSrc) {
-        download(imgSrc, undefined)
+        if (customDownload && typeof customDownload.value === 'function') {
+          customDownload.value(imgSrc)
+        }
+        else {
+          download(imgSrc, undefined)
+        }
       }
     }
 

@@ -181,7 +181,14 @@ export default defineComponent({
     }
   },
   render() {
-    const { mergedClsPrefix, imgProps = {}, loaded, $attrs, lazy } = this
+    const {
+      mergedClsPrefix,
+      imgProps = {},
+      loaded,
+      $attrs,
+      lazy,
+      customDownload
+    } = this
     const errorNode = resolveSlot(this.$slots.error, () => [])
     const placeholderNode = this.$slots.placeholder?.()
     const loadSrc = this.src || imgProps.src
@@ -247,6 +254,7 @@ export default defineComponent({
             src={this.mergedPreviewSrc}
             show={this.previewShow}
             onClose={this.onPreviewClose}
+            customDownload={customDownload}
           >
             {{
               default: () => imgNode

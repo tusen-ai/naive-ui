@@ -252,6 +252,7 @@ export default defineComponent({
         showToolbarTooltip={this.showToolbarTooltip}
         renderToolbar={this.renderToolbar}
         onClose={this.onClose}
+        customDownload={this.customDownload}
       >
         {this.$slots}
       </NImagePreview>
