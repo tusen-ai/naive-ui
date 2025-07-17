@@ -4,6 +4,7 @@ import type {
   FirstDayOfWeek,
   IsSingleDateDisabled,
   IsSingleDateDisabledDetail,
+  IsSingleDefaultTime,
   PanelChildComponentRefs,
   Shortcuts
 } from '../interface'
@@ -41,6 +42,7 @@ import { MONTH_ITEM_HEIGHT } from '../config'
 import { datePickerInjectionKey } from '../interface'
 import {
   dateArray,
+  extractSingleDefaultTime,
   getDefaultTime,
   monthArray,
   quarterArray,
@@ -374,7 +376,18 @@ function useCalendar(
       && props.defaultTime !== null
       && !Array.isArray(props.defaultTime)
     ) {
-      const time = getDefaultTime(props.defaultTime)
+      let time: { hours: number, minutes: number, seconds: number } | undefined
+
+      if (typeof props.defaultTime === 'function') {
+        time = extractSingleDefaultTime(
+          dateItem.ts,
+          props.defaultTime as IsSingleDefaultTime
+        )
+      }
+      else {
+        time = getDefaultTime(props.defaultTime)
+      }
+
       if (time) {
         newValue = getTime(set(newValue, time)) // setDate getTime(addMilliseconds(startOfDay(newValue), time))
       }

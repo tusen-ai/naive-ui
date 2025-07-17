@@ -26,6 +26,7 @@ import {
 import {
   dateArray,
   type DateItem,
+  extractRangeDefaultTime,
   getDefaultTime,
   monthArray,
   type MonthItem,
@@ -534,12 +535,26 @@ function useDualCalendar(
         | undefined
       if (type === 'datetimerange') {
         const { defaultTime } = props
-        if (Array.isArray(defaultTime)) {
+        if (typeof defaultTime === 'function') {
+          startDefaultTime = extractRangeDefaultTime(
+            startTime,
+            defaultTime,
+            'start',
+            [startTime, endTime]
+          )
+          endDefaultTime = extractRangeDefaultTime(
+            endTime,
+            defaultTime,
+            'end',
+            [startTime, endTime]
+          )
+        }
+        else if (Array.isArray(defaultTime)) {
           startDefaultTime = getDefaultTime(defaultTime[0])
           endDefaultTime = getDefaultTime(defaultTime[1])
         }
         else {
-          startDefaultTime = getDefaultTime(defaultTime)
+          startDefaultTime = getDefaultTime(defaultTime as string)
           endDefaultTime = startDefaultTime
         }
       }
