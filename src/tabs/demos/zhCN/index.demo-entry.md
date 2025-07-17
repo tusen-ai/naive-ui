@@ -46,6 +46,7 @@ modal-debug.vue
 | animated | `boolean` | `false` | 标签页切换是否使用动画，当 `placement` 为 `'left'` 或 `'right'` 时不生效 | 2.27.0 |
 | bar-width | `number` | `undefined` | 标签条的宽度 | 2.25.0 |
 | closable | `boolean` | `false` | 是否允许关闭标签，只在标签的 `type` 为 `card` 时生效 |  |
+| close-trigger | `'hover' \| 'none'` | `'none'` | 显示关闭按钮时机，只在标签的 `type` 为 `card` 时生效，`'none'` 表示一直显示 | NEXT_VERSION |
 | default-value | `string \| number` | `undefined` | 非受控模式下的默认值 |  |
 | justify-content | `'space-between' \| 'space-around' \| 'space-evenly' \| 'start' \| 'center' \| 'end'` | `undefined` | `flex` 布局下主轴的排列方式，只对 `'line'` 和 `'bar'` 类型生效 | `space-*` 2.29.1 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 标签页的尺寸 |  |
@@ -70,6 +71,7 @@ modal-debug.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | closable | `boolean` | `false` | 是否允许关闭标签，只在标签的 `type` 为 `card` 时生效 |  |
+| close-trigger | `'hover' \| 'none'` | `'none'` | 显示关闭按钮时机，只在标签的 `type` 为 `card` 时生效，`'none'` 表示一直显示 | NEXT_VERSION |
 | disabled | `boolean` | `false` | 是否禁用 |  |
 | display-directive | `'if' \| 'show' \| 'show:lazy'` | `'if'` | 选择性渲染使用的指令，`if` 对应 `v-if`，`show` 对应 `v-show`，使用 `show` 的时候标签页状态切换后不会被重置，使用 `show:lazy` 的时候显示效果跟 `show` 一致，不过内容会进行延迟加载 |  |
 | name | `string \| number` | `undefined` | 必填，标签的名称 |  |
@@ -79,8 +81,9 @@ modal-debug.vue
 ### Tab Props
 
 | 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | closable | `boolean` | `false` | 是否允许关闭标签，只在标签的 `type` 为 `card` 时生效 |
+| close-trigger | `'hover' \| 'none'` | `'none'` | 显示关闭按钮时机，只在标签的 `type` 为 `card` 时生效，`'none'` 表示一直显示 | NEXT_VERSION |
 | disabled | `boolean` | `false` | 是否禁用 |
 | name | `string \| number` | `undefined` | 必填，标签的名称 |
 

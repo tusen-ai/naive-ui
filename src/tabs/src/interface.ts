@@ -23,6 +23,7 @@ export interface TabsInjection {
   valueRef: Ref<string | number | null>
   typeRef: Ref<TabsType>
   closableRef: Ref<boolean>
+  closeTriggerRef: Ref<'hover' | 'none'>
   tabStyleRef: Ref<string | CSSProperties | undefined>
   tabClassRef: Ref<string | undefined>
   addTabClassRef: Ref<string | undefined>
