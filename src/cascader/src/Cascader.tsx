@@ -380,9 +380,8 @@ export default defineComponent({
     function handleKeydown(e: KeyboardEvent): void {
       if (
         props.filterable
-        && document.activeElement instanceof HTMLInputElement
-        && e.target === document.activeElement
-        && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')
+        && patternRef.value
+        && ['ArrowLeft', 'ArrowRight'].includes(e.key)
       ) {
         return
       }
