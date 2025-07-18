@@ -5,15 +5,9 @@
 </markdown>
 
 <script setup lang="ts">
-import type {
-  IsRangeDefaultTime,
-  IsSingleDefaultTime
-} from '../../src/interface'
 import { format, isAfter, isToday } from 'date-fns'
 
-const getSingleDefaultTime: IsSingleDefaultTime = (
-  timestamp: number
-): string => {
+function getSingleDefaultTime(timestamp: number): string {
   const now = new Date()
 
   if (isToday(timestamp)) {
@@ -27,10 +21,7 @@ const getSingleDefaultTime: IsSingleDefaultTime = (
   }
 }
 
-const getRangeDefaultTime: IsRangeDefaultTime = (
-  timestamp: number,
-  position: 'start' | 'end'
-): string => {
+function getRangeDefaultTime(timestamp: number, position: 'start' | 'end'): string {
   const now = new Date()
 
   if (position === 'start') {
