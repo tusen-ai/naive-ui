@@ -80,12 +80,12 @@ modal-debug.vue
 
 ### Tab Props
 
-| 名称 | 类型 | 默认值 | 说明 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| closable | `boolean` | `false` | 是否允许关闭标签，只在标签的 `type` 为 `card` 时生效 |
+| closable | `boolean` | `false` | 是否允许关闭标签，只在标签的 `type` 为 `card` 时生效 |  |
 | close-trigger | `'hover' \| 'none'` | `'none'` | 显示关闭按钮时机，只在标签的 `type` 为 `card` 时生效，`'none'` 表示一直显示 | NEXT_VERSION |
-| disabled | `boolean` | `false` | 是否禁用 |
-| name | `string \| number` | `undefined` | 必填，标签的名称 |
+| disabled | `boolean` | `false` | 是否禁用 |  |
+| name | `string \| number` | `undefined` | 必填，标签的名称 |  |
 
 ### Tabs Slots
 
