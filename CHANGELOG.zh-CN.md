@@ -15,7 +15,7 @@
 - 修复 `n-anchor` 对页面底部的 link 无法通过点击激活，关闭 [#7033](https://github.com/tusen-ai/naive-ui/issues/7033)，关闭 [#6918](https://github.com/tusen-ai/naive-ui/issues/6918)、[#6844](https://github.com/tusen-ai/naive-ui/issues/6844)、[#6782](https://github.com/tusen-ai/naive-ui/issues/6782)
 - 修复 `n-upload` 组件 'Non-function value encountered for default slot' 警告
 - 修复 `n-input` 的 `input-props` 属性设置 `tabindex` 不生效的问题
-- 修复 `n-tab` 在多层 tab 嵌套的场景下，阴影的伪类样式冲突，关闭 [#6854](https://github.com/tusen-ai/naive-ui/issues/6854)
+- 修复 `n-tabs` 在多层 `tabs` 嵌套的场景下，阴影的伪类样式冲突，关闭 [#6854](https://github.com/tusen-ai/naive-ui/issues/6854)
 - 修复 `n-menu` 在父节点设置 `disabled`，子节点为 `type: "group"` 的禁用样式失效，关闭 [#6792](https://github.com/tusen-ai/naive-ui/issues/6792)
 - 修复 `n-input-group-label` 没有注入 `formItemInjectionKey`，导致 `size` 属性失效的问题，关闭 [#7066](https://github.com/tusen-ai/naive-ui/issues/7066)
 - 修复 `n-carousel` 只有一张图的情況下样式错乱的问题，关闭 [#6476](https://github.com/tusen-ai/naive-ui/issues/6476)
