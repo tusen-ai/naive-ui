@@ -60,6 +60,7 @@ component-preview-group-debug.vue
 | show-toolbar | `boolean` | `true` | 图片放大后是否展示底部工具栏 |  |
 | show-toolbar-tooltip | `boolean` | `false` | 是否展示工具栏的提示 | 2.24.0 |
 | src-list | `string[]` | `undefined` | 图片列表 | NEXT_VERSION |
+| infinite | `boolean` | `true` | 是否无限循环图片预览 | NEXT_VERSION |
 | on-preview-next | `() => void` | `undefined` | 点击下一张的回调 |  |
 | on-preview-prev | `() => void` | `undefined` | 点击上一张的回调 |  |
 | custom-download | `(imgSrc: string) => void` | `undefined` | 自定义下载方法 | NEXT_VERSION |

@@ -47,6 +47,10 @@ export const imageGroupProps = {
     default: undefined
   },
   defaultShow: Boolean,
+  infinite: {
+    type: Boolean,
+    default: true
+  },
   onUpdateShow: [Function, Array] as PropType<
     MaybeArray<(show: boolean) => void>
   >,
@@ -174,7 +178,15 @@ export default defineComponent({
       }
 
       const next = findNext(mergedCurrentRef.value + 1, imageCount.value - 1)
-      return isUndefined(next) ? findNext(0, mergedCurrentRef.value - 1) : next
+      if (isUndefined(next)) {
+        if (props.infinite) {
+          return findNext(0, mergedCurrentRef.value - 1)
+        }
+        else {
+          return undefined
+        }
+      }
+      return next
     })
 
     const prevIndex = computed(() => {
@@ -189,19 +201,29 @@ export default defineComponent({
       }
 
       const prev = findPrev(mergedCurrentRef.value - 1, 0)
-      return isUndefined(prev)
-        ? findPrev(imageCount.value - 1, mergedCurrentRef.value + 1)
-        : prev
+      if (isUndefined(prev)) {
+        if (props.infinite) {
+          return findPrev(imageCount.value - 1, mergedCurrentRef.value + 1)
+        }
+        else {
+          return undefined
+        }
+      }
+      return prev
     })
 
     function go(step: 1 | -1): void {
       if (step === 1) {
-        !isUndefined(prevIndex.value) && setCurrentIndex(nextIndex.value!)
-        props.onPreviewNext?.()
+        if (!isUndefined(nextIndex.value)) {
+          setCurrentIndex(nextIndex.value!)
+          props.onPreviewNext?.()
+        }
       }
       else {
-        !isUndefined(nextIndex.value) && setCurrentIndex(prevIndex.value!)
-        props.onPreviewPrev?.()
+        if (!isUndefined(prevIndex.value)) {
+          setCurrentIndex(prevIndex.value!)
+          props.onPreviewPrev?.()
+        }
       }
     }
     provide(imageGroupInjectionKey, {

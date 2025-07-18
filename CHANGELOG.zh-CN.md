@@ -35,6 +35,7 @@
 - `n-image-preview`，`n-image-group` 支持单独使用
 - `n-input-otp` 增加 `focusOnChar` 方法，关闭 [#7073](https://github.com/tusen-ai/naive-ui/issues/7073)
 - `n-image` `n-image-preview` `n-image-group` 新增 `custom-download` 属性，关闭 [#6255](https://github.com/tusen-ai/naive-ui/issues/6255)、[#6574](https://github.com/tusen-ai/naive-ui/issues/6574)
+- `n-image-group` 增加 `infinite` 属性，关闭 [#6842](https://github.com/tusen-ai/naive-ui/issues/6842)
 
 ## 2.42.0
 
