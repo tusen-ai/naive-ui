@@ -6,12 +6,18 @@
 import type { TabsProps } from 'naive-ui'
 import { ref } from 'vue'
 
+const size = ref<NonNullable<TabsProps['size']>>('medium')
 const placement = ref<NonNullable<TabsProps['placement']>>('left')
 const type = ref<TabsProps['type']>('card')
 </script>
 
 <template>
   <n-space vertical>
+    <n-radio-group v-model:value="size">
+      <n-radio label="large" value="large" />
+      <n-radio label="medium" value="medium" />
+      <n-radio label="small" value="small" />
+    </n-radio-group>
     <n-radio-group v-model:value="placement">
       <n-radio label="top" value="top" />
       <n-radio label="bottom" value="bottom" />
@@ -29,11 +35,14 @@ const type = ref<TabsProps['type']>('card')
       :type="type"
       animated
       :placement="placement"
+      :size="size"
       :style="
         placement === 'left' || placement === 'right'
           ? { height: '240px' }
           : undefined
       "
+      closable
+      close-trigger="hover"
     >
       <template #prefix>
         Prefix
