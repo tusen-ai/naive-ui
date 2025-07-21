@@ -83,7 +83,9 @@ const thTH: NLocale = {
     positiveText: 'ตกลง',
     negativeText: 'ยกเลิก',
     now: 'วันนี้',
-    clear: 'ล้าง'
+    clear: 'ล้าง',
+    am: 'ก่อนเที่ยง',
+    pm: 'หลังเที่ยง'
   },
   Pagination: {
     goto: 'ไปยัง',

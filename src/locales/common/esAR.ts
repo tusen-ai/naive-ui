@@ -84,7 +84,9 @@ const esAR: NLocale = {
     positiveText: 'OK',
     negativeText: 'Cancelar',
     now: 'Ahora',
-    clear: 'Borrar'
+    clear: 'Borrar',
+    am: 'a.m.',
+    pm: 'p.m.'
   },
   Pagination: {
     goto: 'Ir a',
