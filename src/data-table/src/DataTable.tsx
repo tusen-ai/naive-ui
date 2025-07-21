@@ -272,7 +272,7 @@ export default defineComponent({
           '--n-action-padding': actionPadding,
           '--n-action-button-margin': actionButtonMargin,
           '--n-action-divider-color': actionDividerColor
-        } satisfies CSSProperties
+        }
       }),
       onLoadRef: toRef(props, 'onLoad'),
       mergedTableLayoutRef,
@@ -476,7 +476,7 @@ export default defineComponent({
             [`${mergedClsPrefix}-data-table--flex-height`]: this.flexHeight
           }
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         <div class={`${mergedClsPrefix}-data-table-wrapper`}>
           <MainTable ref="mainTableInstRef" />

@@ -6,7 +6,6 @@ import type { RadioBaseProps } from './use-radio'
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   type PropType,
@@ -265,7 +264,7 @@ export default defineComponent({
           this.themeClass,
           isButtonGroup && `${mergedClsPrefix}-radio-group--button-group`
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         {children}
       </div>

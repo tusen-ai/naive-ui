@@ -1010,7 +1010,7 @@ export default defineComponent({
           `${mergedClsPrefix}-carousel--${this.effect}`,
           userWantsControl && `${mergedClsPrefix}-carousel--usercontrol`
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
         {...slidesControlListeners}
         onMouseenter={this.handleMouseenter}
         onMouseleave={this.handleMouseleave}

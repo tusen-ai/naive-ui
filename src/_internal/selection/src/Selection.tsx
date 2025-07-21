@@ -11,7 +11,6 @@ import type { RenderTag } from './interface'
 import { getPadding } from 'seemly'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   Fragment,
   h,
@@ -985,7 +984,7 @@ export default defineComponent({
             [`${clsPrefix}-base-selection--focus`]: this.focused
           }
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
         onClick={this.onClick}
         onMouseenter={this.handleMouseEnter}
         onMouseleave={this.handleMouseLeave}

@@ -1,6 +1,6 @@
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { computed, type CSSProperties, defineComponent, h } from 'vue'
+import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
 import { createKey, resolveWrappedSlot } from '../../_utils'
@@ -106,7 +106,7 @@ export default defineComponent({
           this.renderSafeChecked && `${mergedClsPrefix}-radio--checked`,
           this.focus && `${mergedClsPrefix}-radio--focus`
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         <div class={`${mergedClsPrefix}-radio__dot-wrapper`}>
           &nbsp;

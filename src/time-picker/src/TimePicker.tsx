@@ -925,7 +925,7 @@ export default defineComponent({
     return (
       <div
         class={[`${mergedClsPrefix}-time-picker`, this.triggerThemeClass]}
-        style={this.triggerCssVars as CSSProperties}
+        style={this.triggerCssVars}
       >
         <VBinder>
           {{
@@ -1005,7 +1005,7 @@ export default defineComponent({
                                 ref="panelInstRef"
                                 actions={this.actions}
                                 class={this.themeClass}
-                                style={this.cssVars as CSSProperties}
+                                style={this.cssVars}
                                 seconds={this.seconds}
                                 minutes={this.minutes}
                                 hours={this.hours}

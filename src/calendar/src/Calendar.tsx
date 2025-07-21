@@ -227,7 +227,7 @@ export default defineComponent({
     return (
       <div
         class={[`${mergedClsPrefix}-calendar`, this.themeClass]}
-        style={cssVars as CSSProperties}
+        style={cssVars}
       >
         <div class={`${mergedClsPrefix}-calendar-header`}>
           <div class={`${mergedClsPrefix}-calendar-header__title`}>

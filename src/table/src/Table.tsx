@@ -1,13 +1,7 @@
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { TableTheme } from '../styles'
-import {
-  computed,
-  type CSSProperties,
-  defineComponent,
-  h,
-  type PropType
-} from 'vue'
+import { computed, defineComponent, h, type PropType } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
 import { createKey } from '../../_utils'
@@ -139,7 +133,7 @@ export default defineComponent({
             [`${mergedClsPrefix}-table--striped`]: this.striped
           }
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         {this.$slots}
       </table>
