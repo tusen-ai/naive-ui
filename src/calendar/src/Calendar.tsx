@@ -19,7 +19,6 @@ import {
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   Fragment,
   h,

@@ -8,7 +8,6 @@ import type {
 import { createId } from 'seemly'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   provide,

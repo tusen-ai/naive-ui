@@ -1,14 +1,7 @@
 import type { ThemeProps } from '../../_mixins'
 import type { DialogTheme } from '../styles'
 import { getMargin } from 'seemly'
-import {
-  computed,
-  type CSSProperties,
-  defineComponent,
-  h,
-  type SlotsType,
-  type VNode
-} from 'vue'
+import { computed, defineComponent, h, type SlotsType, type VNode } from 'vue'
 import { NBaseClose, NBaseIcon } from '../../_internal'
 import {
   ErrorIcon,

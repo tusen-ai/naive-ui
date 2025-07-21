@@ -38,7 +38,6 @@ import { clickoutside } from 'vdirs'
 import { useIsMounted, useKeyboard, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   nextTick,
