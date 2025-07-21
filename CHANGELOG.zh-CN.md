@@ -39,6 +39,7 @@
 - 增加 `n-cascader` 组件 `CascaderOption Properties` `isLeaf` 参数说明，关闭 [#6276](https://github.com/tusen-ai/naive-ui/issues/6276)
 - `n-cascader` `n-cascader-panel` 组件支持上下左右键去定位下拉选择项，通过回车键选择选项，关闭 [#6852](https://github.com/tusen-ai/naive-ui/issues/6852)
 - `n-cascader` 新增 `render-tag` 属性，关闭 [#6389](https://github.com/tusen-ai/naive-ui/issues/6389)
+- `n-cascader` 新增 `consistent-menu-width` 属性，关闭 [#7059](https://github.com/tusen-ai/naive-ui/issues/7059)
 
 ## 2.42.0
 
