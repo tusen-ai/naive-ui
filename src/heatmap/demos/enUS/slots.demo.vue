@@ -5,12 +5,12 @@ Customize footer area with info slot and indicator slot. Also supports custom to
 </markdown>
 
 <script setup lang="ts">
-import { generateHeatmapData } from 'naive-ui'
+import { heatmapMockData } from 'naive-ui'
 import { computed, ref } from 'vue'
 
 const value = ref<'recent' | number>('recent')
 const yearData = computed(() => {
-  return generateHeatmapData(value.value)
+  return heatmapMockData(value.value)
 })
 </script>
 
@@ -27,7 +27,7 @@ const yearData = computed(() => {
           Right indicator slot
         </n-text>
       </template>
-      <template #tooltip="{ date, value: tooltipValue, unit }">
+      <template #tooltip="{ timestamp: date, value: tooltipValue, unit }">
         <div>
           <div>
             <strong>Date:</strong> {{ new Date(date).toLocaleDateString() }}
@@ -66,7 +66,7 @@ const yearData = computed(() => {
           Bottom tooltip with 500ms delay
         </n-text>
       </template>
-      <template #tooltip="{ date, value: tooltipValue, unit }">
+      <template #tooltip="{ timestamp: date, value: tooltipValue, unit }">
         <n-card size="small" style="max-width: 200px">
           <template #header>
             Activity Details

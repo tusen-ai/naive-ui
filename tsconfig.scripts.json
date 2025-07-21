@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "nodenext",
+    "resolveJsonModule": true,
+    "types": ["node", "jest"],
+    "esModuleInterop": true
+  },
+  "references": [{ "path": "./src/tsconfig.esm.json" }],
+  "include": ["scripts/**/*.ts", "build/**/*.ts", "package.json"]
+}

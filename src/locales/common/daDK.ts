@@ -124,6 +124,12 @@ const daDK: NLocale = {
     tipDownload: 'Download',
     tipClose: 'Luk (Esc)',
     tipOriginalSize: 'Zoom til oprindelig størrelse'
+  },
+  Heatmap: {
+    less: 'mindre',
+    more: 'mere',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eee'
   }
 }
 

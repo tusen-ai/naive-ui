@@ -5,10 +5,9 @@
 </markdown>
 
 <script setup lang="ts">
-import { generateHeatmapData } from 'naive-ui'
-import { ref } from 'vue'
+import { heatmapMockData } from 'naive-ui'
 
-const data = ref(generateHeatmapData())
+const data = heatmapMockData()
 
 const themes = [
   { name: 'GitHub（默认）', value: 'github' },
@@ -26,7 +25,7 @@ const themes = [
       <n-divider title-placement="left">
         {{ theme.name }}
       </n-divider>
-      <n-heatmap :data="data" unit="提交" :color-theme="theme.value" />
+      <n-heatmap :data="data" :color-theme="theme.value" />
     </div>
   </n-flex>
 </template>

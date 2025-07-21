@@ -5,8 +5,8 @@
 </markdown>
 
 <script setup lang="ts">
-import type { WeekStartsOn } from 'naive-ui'
-import { generateHeatmapData } from 'naive-ui'
+import type { HeatmapFirstDayOfWeek } from 'naive-ui'
+import { heatmapMockData } from 'naive-ui'
 import { computed, ref } from 'vue'
 
 const value = ref<'recent' | number>('recent')
@@ -42,7 +42,7 @@ const dateRanges = [
 }[]
 
 const yearData = computed(() => {
-  return generateHeatmapData(value.value)
+  return heatmapMockData(value.value)
 })
 
 const dataStats = computed(() => {
@@ -68,17 +68,17 @@ const showWeekLabels = ref(true)
 const showMonthLabels = ref(true)
 const showColorIndicator = ref(true)
 const loading = ref(false)
-const weekStartsOn = ref<WeekStartsOn>(0)
+const weekStartsOn = ref<HeatmapFirstDayOfWeek>(0)
 const size = ref<'small' | 'medium' | 'large'>('medium')
 
 const weekStartOptions = [
-  { label: '周日', value: 0 },
-  { label: '周一', value: 1 },
-  { label: '周二', value: 2 },
-  { label: '周三', value: 3 },
-  { label: '周四', value: 4 },
-  { label: '周五', value: 5 },
-  { label: '周六', value: 6 }
+  { label: '周一', value: 0 },
+  { label: '周二', value: 1 },
+  { label: '周三', value: 2 },
+  { label: '周四', value: 3 },
+  { label: '周五', value: 4 },
+  { label: '周六', value: 5 },
+  { label: '周日', value: 6 }
 ]
 
 const sizeOptions = [
@@ -151,7 +151,6 @@ const sizeOptions = [
         />
       </n-radio-group>
     </n-flex>
-
     <n-alert type="success" title="数据统计">
       <n-flex>
         <n-tag round type="info">
@@ -168,7 +167,6 @@ const sizeOptions = [
         </n-tag>
       </n-flex>
     </n-alert>
-
     <n-flex align="center">
       <n-heatmap
         :key="`heatmap-${value}-${weekStartsOn}-${size}`"
@@ -176,7 +174,6 @@ const sizeOptions = [
         :week-starts-on="weekStartsOn"
         :loading="loading"
         :size="size"
-        unit="提交"
         :show-week-labels="showWeekLabels"
         :show-month-labels="showMonthLabels"
         :show-color-indicator="showColorIndicator"

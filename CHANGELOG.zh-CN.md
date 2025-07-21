@@ -8,13 +8,17 @@
 
 ### Fixes
 
+- 修复 `n-color-picker` 的 trigger 文字黑白颜色效果不明显问题，关闭 [#7074](https://github.com/tusen-ai/naive-ui/issues/7074)
 - 修复 `n-image` 放大缩小在 `da-DK` `sv-SE` 本地化的文案
 - 修复 `n-popover` 的 `themeOverrides` 属性没有 `Scrollbar` 样式配置
+- 修复 `n-input` 的 `themeOverrides` 属性没有 `Scrollbar` 样式配置
 - 修复 `n-anchor` 对页面底部的 link 无法通过点击激活，关闭 [#7033](https://github.com/tusen-ai/naive-ui/issues/7033)，关闭 [#6918](https://github.com/tusen-ai/naive-ui/issues/6918)、[#6844](https://github.com/tusen-ai/naive-ui/issues/6844)、[#6782](https://github.com/tusen-ai/naive-ui/issues/6782)
 - 修复 `n-upload` 组件 'Non-function value encountered for default slot' 警告
 - 修复 `n-input` 的 `input-props` 属性设置 `tabindex` 不生效的问题
 - 修复 `n-tab` 在多层 tab 嵌套的场景下，阴影的伪类样式冲突，关闭 [#6854](https://github.com/tusen-ai/naive-ui/issues/6854)
 - 修复 `n-menu` 在父节点设置 `disabled`，子节点为 `type: "group"` 的禁用样式失效，关闭 [#6792](https://github.com/tusen-ai/naive-ui/issues/6792)
+- 修复 `n-input-group-label` 没有注入 `formItemInjectionKey`，导致 `size` 属性失效的问题，关闭 [#7066](https://github.com/tusen-ai/naive-ui/issues/7066)
+- 修复 `n-carousel` 只有一张图的情況下样式错乱的问题，关闭 [#6476](https://github.com/tusen-ai/naive-ui/issues/6476)
 
 ### Features
 
@@ -27,8 +31,9 @@
 - `n-tree-select` 支持 RTL
 - `useDialog` 的选项支持 `z-index`，关闭 [#4349](https://github.com/tusen-ai/naive-ui/issues/4349)
 - 新增组件 `n-heatmap`
-- `n-image` 增加 showPreview 方法, closes [#6695](https://github.com/tusen-ai/naive-ui/issues/6695)
-- `n-image-preview` ,`n-image-group` 支持单独使用
+- `n-image` 增加 showPreview 方法，关闭 [#6695](https://github.com/tusen-ai/naive-ui/issues/6695)
+- `n-image-preview`，`n-image-group` 支持单独使用
+- `n-input-otp` 增加 `focusOnChar` 方法，关闭 [#7073](https://github.com/tusen-ai/naive-ui/issues/7073)
 
 ## 2.42.0
 

@@ -5,18 +5,14 @@
 </markdown>
 
 <script setup lang="ts">
-import { generateHeatmapData } from 'naive-ui'
-import { computed, ref } from 'vue'
+import { heatmapMockData } from 'naive-ui'
 
-const value = ref<'recent' | number>('recent')
-const yearData = computed(() => {
-  return generateHeatmapData(value.value)
-})
+const yearData = heatmapMockData()
 </script>
 
 <template>
   <n-flex vertical>
-    <n-heatmap :data="yearData" unit="activities" :show-color-indicator="false">
+    <n-heatmap :data="yearData" :show-color-indicator="false">
       <template #info>
         <n-text depth="3">
           左侧信息插槽
@@ -27,27 +23,18 @@ const yearData = computed(() => {
           右侧指示器插槽
         </n-text>
       </template>
-      <template #tooltip="{ date, value: tooltipValue, unit }">
+      <template #tooltip="{ timestamp: date, value: tooltipValue, unit }">
         <div>
           <div>
             <strong>日期:</strong> {{ new Date(date).toLocaleDateString() }}
           </div>
           <div><strong>数值:</strong> {{ tooltipValue ?? 0 }} {{ unit }}</div>
-          <div v-if="tooltipValue !== null && tooltipValue > 5">
+          <div v-if="tooltipValue != null && tooltipValue > 5">
             <n-tag type="success" size="small">
               高活跃度
             </n-tag>
           </div>
         </div>
-      </template>
-    </n-heatmap>
-    <n-divider />
-    <h4>禁用 Tooltip</h4>
-    <n-heatmap :data="yearData" unit="activities" :tooltip="false">
-      <template #info>
-        <n-text depth="3">
-          已禁用 tooltip
-        </n-text>
       </template>
     </n-heatmap>
     <n-divider />
@@ -62,14 +49,10 @@ const yearData = computed(() => {
           底部显示 tooltip，延迟 500ms
         </n-text>
       </template>
-      <template #tooltip="{ date, value: tooltipValue, unit }">
-        <n-card size="small" style="max-width: 200px">
-          <template #header>
-            活动详情
-          </template>
-          <div>{{ new Date(date).toLocaleDateString() }}</div>
-          <div>{{ tooltipValue ?? 0 }} {{ unit }}</div>
-        </n-card>
+      <template #tooltip="{ timestamp: date, value: tooltipValue }">
+        活动详情<br>
+        <div>{{ new Date(date).toLocaleDateString() }}</div>
+        <div>{{ tooltipValue ?? 0 }}</div>
       </template>
     </n-heatmap>
   </n-flex>

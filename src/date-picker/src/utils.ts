@@ -56,9 +56,15 @@ function makeWeekMatcher(firstDayOfWeek: FirstDayOfWeek) {
   return (sourceTime: number, patternTime: number | Date) => {
     // date-fns: 0 - Sunday
     // naive-ui: 0 - Monday
-    const weekStartsOn = ((firstDayOfWeek + 1) % 7) as FirstDayOfWeek
+    const weekStartsOn = transformNaiveFirstDayOfWeekToDateFns(firstDayOfWeek)
     return isSameWeek(sourceTime, patternTime, { weekStartsOn })
   }
+}
+
+export function transformNaiveFirstDayOfWeekToDateFns(
+  firstDayOfWeek: FirstDayOfWeek
+): FirstDayOfWeek {
+  return ((firstDayOfWeek + 1) % 7) as FirstDayOfWeek
 }
 
 function matchDate(
