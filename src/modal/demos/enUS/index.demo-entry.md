@@ -28,6 +28,7 @@ preset-confirm.vue
 preset-confirm-slot.vue
 transform-origin.vue
 draggable.vue
+mask-visible.vue
 ```
 
 ## API
@@ -61,6 +62,7 @@ Provided since `2.38.0`.
 | display-directive | `'if' \| 'show'` | `'if'` | Use which directive to control the rendering of modal body. |  |
 | draggable | `boolean \| { bounds?: 'window' }` | `false` | Whether the modal is draggable. Make its position not bound inside window using `bounds === 'none'`. | 2.41.0 |
 | mask-closable | `boolean` | `true` | Whether to emit `hide` event when click mask. |  |
+| mask-visible | `boolean` | `true` | Whether to display the mask. | NEXT_VERSION |
 | preset | `'dialog' \| 'card'` | `undefined` | The preset of `n-modal`. |  |
 | show | `boolean` | `false` | Whether to show modal. |  |
 | to | `string \| HTMLElement` | `body` | Container node of the modal content. |  |
