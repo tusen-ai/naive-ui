@@ -18,7 +18,7 @@ import type {
   SelectMenuInstance,
   Value
 } from './interface'
-import { changeColor, depx, getPreciseEventTarget, happensIn } from 'seemly'
+import { depx, getPreciseEventTarget, happensIn } from 'seemly'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
@@ -45,7 +45,7 @@ import {
   VTarget
 } from 'vueuc'
 import { NInternalSelection } from '../../_internal'
-import { useTheme, useThemeClass } from '../../_mixins'
+import { useTheme } from '../../_mixins'
 import {
   call,
   markEventEffectPerformed,
@@ -148,6 +148,10 @@ export const cascaderProps = {
   >,
   renderTag: Function as PropType<RenderTag>,
   status: String as PropType<FormValidationStatus>,
+  consistentMenuWidth: {
+    type: Boolean,
+    default: true
+  },
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   'onUpdate:show': [Function, Array] as PropType<
@@ -270,6 +274,9 @@ export default defineComponent({
 
     const controlledShowRef = toRef(props, 'show')
     const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
+    const virtualScrollRef = computed(
+      () => props.virtualScroll && props.consistentMenuWidth
+    )
     const localizedPlaceholderRef = computed(() => {
       const { placeholder } = props
       if (placeholder !== undefined)
@@ -561,6 +568,7 @@ export default defineComponent({
         }
       }
     }
+
     provide(cascaderInjectionKey, {
       slots,
       mergedClsPrefixRef,
@@ -580,7 +588,7 @@ export default defineComponent({
       expandTriggerRef: toRef(props, 'expandTrigger'),
       isMountedRef: useIsMounted(),
       onLoadRef: toRef(props, 'onLoad'),
-      virtualScrollRef: toRef(props, 'virtualScroll'),
+      virtualScrollRef,
       optionHeightRef,
       localeRef,
       labelFieldRef: toRef(props, 'labelField'),
@@ -774,7 +782,8 @@ export default defineComponent({
                 ref="selectMenuFollowerRef"
                 show={this.mergedShow && this.showSelectMenu}
                 containerClass={this.namespace}
-                width="target"
+                width={this.consistentMenuWidth ? 'target' : undefined}
+                minWidth="target"
                 placement={this.placement}
                 to={this.adjustedTo}
                 teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
