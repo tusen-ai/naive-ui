@@ -1,12 +1,12 @@
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   inject,
   nextTick,
   type PropType,
   ref,
+  type StyleValue,
   Transition,
   vShow,
   withDirectives
@@ -27,7 +27,7 @@ export default defineComponent({
   name: 'LoadingBar',
   props: {
     containerClass: String,
-    containerStyle: [String, Object] as PropType<string | CSSProperties>
+    containerStyle: Object as PropType<StyleValue>
   },
   setup() {
     const { inlineThemeDisabled } = useConfig()
@@ -199,10 +199,7 @@ export default defineComponent({
                 <div
                   ref="loadingBarRef"
                   class={[`${mergedClsPrefix}-loading-bar`]}
-                  style={[
-                    this.cssVars as any,
-                    this.mergedLoadingBarStyle as any
-                  ]}
+                  style={[this.cssVars, this.mergedLoadingBarStyle]}
                 />
               </div>,
               [[vShow, this.loading || (!this.loading && this.entering)]]

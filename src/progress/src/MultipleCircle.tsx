@@ -1,10 +1,10 @@
 import type { ProgressGradient } from './public-types'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
-  type PropType
+  type PropType,
+  type StyleValue
 } from 'vue'
 
 function circlePath(r: number, sw: number, vw: number = 100): string {
@@ -49,7 +49,7 @@ export default defineComponent({
       default: () => []
     },
     railStyle: {
-      type: Array as PropType<Array<string | CSSProperties>>,
+      type: Array as PropType<StyleValue[]>,
       default: () => []
     }
   },
@@ -128,15 +128,13 @@ export default defineComponent({
                         stroke-width={strokeWidth}
                         stroke-linecap="round"
                         fill="none"
-                        style={
-                          [
-                            {
-                              strokeDashoffset: 0,
-                              stroke: railColor[index]
-                            },
-                            railStyle[index]
-                          ] as any
-                        }
+                        style={[
+                          {
+                            strokeDashoffset: 0,
+                            stroke: railColor[index]
+                          },
+                          railStyle[index]
+                        ]}
                       />
                       <path
                         class={[

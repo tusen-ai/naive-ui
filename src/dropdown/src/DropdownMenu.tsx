@@ -7,14 +7,14 @@ import type {
 } from './interface'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   inject,
   type PropType,
   provide,
   type Ref,
-  ref
+  ref,
+  type StyleValue
 } from 'vue'
 import { NxScrollbar } from '../../_internal/scrollbar'
 import { drawerBodyInjectionKey } from '../../drawer/src/interface'
@@ -45,7 +45,7 @@ export default defineComponent({
   props: {
     scrollable: Boolean,
     showArrow: Boolean,
-    arrowStyle: [String, Object] as PropType<string | CSSProperties>,
+    arrowStyle: Object as PropType<StyleValue>,
     clsPrefix: {
       type: String,
       required: true

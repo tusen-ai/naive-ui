@@ -1,12 +1,12 @@
 import type { ScrollbarProps } from '../../_internal'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import {
-  type CSSProperties,
   defineComponent,
   h,
   inject,
   type PropType,
   type SlotsType,
+  type StyleValue,
   type VNode
 } from 'vue'
 import { NBaseClose, NScrollbar } from '../../_internal'
@@ -16,13 +16,13 @@ import { drawerInjectionKey } from './interface'
 export const drawerContentProps = {
   title: String,
   headerClass: String,
-  headerStyle: [Object, String] as PropType<string | CSSProperties>,
+  headerStyle: Object as PropType<StyleValue>,
   footerClass: String,
-  footerStyle: [Object, String] as PropType<string | CSSProperties>,
+  footerStyle: Object as PropType<StyleValue>,
   bodyClass: String,
-  bodyStyle: [Object, String] as PropType<string | CSSProperties>,
+  bodyStyle: Object as PropType<StyleValue>,
   bodyContentClass: String,
-  bodyContentStyle: [Object, String] as PropType<string | CSSProperties>,
+  bodyContentStyle: Object as PropType<StyleValue>,
   nativeScrollbar: { type: Boolean, default: true },
   scrollbarProps: Object as PropType<ScrollbarProps>,
   closable: Boolean

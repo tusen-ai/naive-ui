@@ -1,5 +1,5 @@
 import type { CheckStrategy, TreeNode } from 'treemate'
-import type { CSSProperties, Ref, Slots, VNode, VNodeChild } from 'vue'
+import type { Ref, Slots, StyleValue, VNode, VNodeChild } from 'vue'
 import type { MergedTheme } from '../../_mixins'
 import type { NLocale } from '../../locales'
 import type { CascaderTheme } from '../styles'
@@ -56,6 +56,8 @@ export type OnUpdateValueImpl = (
 
 export type MenuModel = TmNode[][]
 
+export type ColumnStyleGetter = (detail: { level: number }) => StyleValue
+
 export interface CascaderInjection {
   slots: Slots
   mergedClsPrefixRef: Ref<string>
@@ -79,9 +81,7 @@ export interface CascaderInjection {
   optionHeightRef: Ref<string>
   labelFieldRef: Ref<string>
   showCheckboxRef: Ref<boolean>
-  getColumnStyleRef: Ref<
-    ((detail: { level: number }) => string | CSSProperties) | undefined
-  >
+  getColumnStyleRef: Ref<ColumnStyleGetter | undefined>
   renderPrefixRef: Ref<
     | ((info: {
       option: CascaderOption

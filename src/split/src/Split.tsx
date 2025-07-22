@@ -4,12 +4,12 @@ import { depx } from 'seemly'
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   type PropType,
   ref,
   type SlotsType,
+  type StyleValue,
   toRef,
   type VNode,
   watchEffect
@@ -51,9 +51,9 @@ export const splitProps = {
     default: 1
   },
   pane1Class: String,
-  pane1Style: [Object, String] as PropType<CSSProperties | string>,
+  pane1Style: Object as PropType<StyleValue>,
   pane2Class: String,
-  pane2Style: [Object, String] as PropType<CSSProperties | string>,
+  pane2Style: Object as PropType<StyleValue>,
   onDragStart: Function as PropType<(e: Event) => void>,
   onDragMove: Function as PropType<(e: Event) => void>,
   onDragEnd: Function as PropType<(e: Event) => void>,

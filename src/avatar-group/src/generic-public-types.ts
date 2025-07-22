@@ -1,4 +1,4 @@
-import type { CSSProperties, VNode } from 'vue'
+import type { StyleValue, VNode } from 'vue'
 import type { Equal, Expect, ThemeRelatedProps } from '../../_utils'
 import type { Size } from '../../avatar/src/interface'
 import type { AvatarGroupProps } from './AvatarGroup'
@@ -16,7 +16,7 @@ interface ResolvableAvatarGroupProps<
   expandOnHover?: boolean
   size?: Size
   max?: number
-  maxStyle?: string | CSSProperties
+  maxStyle?: StyleValue
 }
 
 // eslint-disable-next-line ts/ban-ts-comment

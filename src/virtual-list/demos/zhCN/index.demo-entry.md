@@ -27,7 +27,7 @@ keep-alive.vue
 | items | `Array<object>` | `[]` | 需要展示的数据 | 2.36.0 |
 | item-resizable | `number` | `false` | 是否启用动态尺寸，你不必关心项目大小，它会自动计算 | 2.36.0 |
 | item-size | `number` | required | 以像素为单位显示项目的最小高度，用于计算滚动大小和位置 | 2.36.0 |
-| items-style | `string \| CSSProperties` | `undefined` | 全部内容的容器样式 | 2.36.0 |
+| items-style | `StyleValue` | 全部内容的容器样式 | 2.36.0 |
 | key-field | `string` | `'key'` | 选项 key 的字段名 | 2.36.0 |
 | padding-top | `string \| number` | `undefined` | 距离上部的距离 | 2.36.0 |
 | padding-bottom | `string \| number` | `undefined` | 距离底部的距离 | 2.36.0 |

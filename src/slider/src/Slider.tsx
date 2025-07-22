@@ -4,7 +4,6 @@ import { useIsMounted, useMergedState } from 'vooks'
 import {
   type ComponentPublicInstance,
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   nextTick,
@@ -12,6 +11,7 @@ import {
   type PropType,
   ref,
   type SlotsType,
+  type StyleValue,
   toRef,
   Transition,
   type VNode,
@@ -216,7 +216,7 @@ export default defineComponent({
         active: boolean
         label: string | (() => VNodeChild)
         key: number
-        style: CSSProperties
+        style: StyleValue
       }> = []
       const { marks } = props
       if (marks) {
@@ -247,7 +247,7 @@ export default defineComponent({
       return mergedMarks
     })
 
-    function getHandleStyle(value: number, index: number): Record<string, any> {
+    function getHandleStyle(value: number, index: number): StyleValue {
       const percentage = valueToPercentage(value)
       const { value: styleDirection } = styleDirectionRef
       return {

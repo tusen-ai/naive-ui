@@ -1,5 +1,5 @@
 import type { DropPosition, TreeOption } from './interface'
-import { type CSSProperties, h, type VNode } from 'vue'
+import { h, type StyleValue, type VNode } from 'vue'
 
 export function renderDropMark({
   position,
@@ -12,7 +12,7 @@ export function renderDropMark({
   indent: number
   el: HTMLElement
 }): VNode {
-  const style: CSSProperties = {
+  const style: StyleValue = {
     position: 'absolute',
     boxSizing: 'border-box',
     right: 0

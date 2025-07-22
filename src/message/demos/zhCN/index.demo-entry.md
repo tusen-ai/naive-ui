@@ -61,7 +61,7 @@ rtl-debug.vue
 | --- | --- | --- | --- | --- |
 | closable | `boolean` | `false` | 所有 Message 是否显示 close 图标 |  |
 | container-class | `string` | `undefined` | Message 容器的类名 | 2.36.0 |
-| container-style | `string \| CSSProperties` | `undefined` | Message 容器的样式 |  |
+| container-style | `StyleValue` | Message 容器的样式 |  |
 | duration | `number` | `3000` | 所有 Message 默认的持续时长 |  |
 | keep-alive-on-hover | `boolean` | `false` | 所有 Message 在悬浮信息上时是否不销毁 |  |
 | max | `number` | `undefined` | 限制提示信息显示的个数 |  |

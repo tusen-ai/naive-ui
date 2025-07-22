@@ -9,6 +9,7 @@ import type {
   CascaderInst,
   CascaderMenuInstance,
   CascaderOption,
+  ColumnStyleGetter,
   ExpandTrigger,
   Filter,
   Key,
@@ -27,7 +28,6 @@ import {
 import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   type HTMLAttributes,
@@ -171,9 +171,7 @@ export const cascaderProps = {
   >,
   onBlur: Function as PropType<(e: FocusEvent) => void>,
   onFocus: Function as PropType<(e: FocusEvent) => void>,
-  getColumnStyle: Function as PropType<
-    (detail: { level: number }) => string | CSSProperties
-  >,
+  getColumnStyle: Function as PropType<ColumnStyleGetter>,
   renderPrefix: Function as PropType<
     (props: {
       option: CascaderOption

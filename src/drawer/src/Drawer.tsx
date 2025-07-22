@@ -6,12 +6,12 @@ import { zindexable } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   type PropType,
   provide,
   ref,
+  type StyleValue,
   toRef,
   Transition,
   watchEffect,
@@ -61,7 +61,7 @@ export const drawerProps = {
   onMaskClick: Function as PropType<(e: MouseEvent) => void>,
   scrollbarProps: Object as PropType<ScrollbarProps>,
   contentClass: String,
-  contentStyle: [Object, String] as PropType<string | CSSProperties>,
+  contentStyle: Object as PropType<StyleValue>,
   trapFocus: {
     type: Boolean,
     default: true
@@ -113,7 +113,7 @@ export const drawerProps = {
   onAfterEnter: Function as PropType<() => void>,
   onAfterLeave: Function as PropType<() => void>,
   /** @deprecated */
-  drawerStyle: [String, Object] as PropType<string | CSSProperties>,
+  drawerStyle: Object as PropType<StyleValue>,
   drawerClass: String,
   target: null,
   onShow: Function as PropType<(value: boolean) => void>,
@@ -213,7 +213,7 @@ export default defineComponent({
       uncontrolledHeightRef.value = value
     }
 
-    const mergedBodyStyleRef = computed<Array<CSSProperties | string>>(() => {
+    const mergedBodyStyleRef = computed<StyleValue>(() => {
       return [
         {
           width: styleWidthRef.value,

@@ -4,12 +4,12 @@ import { pxfy } from 'seemly'
 import { useCompitable } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   type PropType,
   ref,
   type SlotsType,
+  type StyleValue,
   Transition,
   type VNode,
   watchEffect
@@ -29,7 +29,7 @@ const STROKE_WIDTH = {
 export const spinProps = {
   ...(useTheme.props as ThemeProps<SpinTheme>),
   contentClass: String,
-  contentStyle: [Object, String] as PropType<CSSProperties | string>,
+  contentStyle: Object as PropType<StyleValue>,
   description: String,
   stroke: String,
   size: {

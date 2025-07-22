@@ -1,9 +1,9 @@
 import type { ExtractPublicPropTypes } from '../../_utils'
 import {
-  type CSSProperties,
   defineComponent,
   type PropType,
   type SlotsType,
+  type StyleValue,
   type VNode
 } from 'vue'
 import { DESCRIPTION_ITEM_FLAG } from './utils'
@@ -15,9 +15,9 @@ export const descriptionsItemProps = {
     default: 1
   },
   labelClass: String,
-  labelStyle: [Object, String] as PropType<string | CSSProperties>,
+  labelStyle: Object as PropType<StyleValue>,
   contentClass: String,
-  contentStyle: [Object, String] as PropType<string | CSSProperties>
+  contentStyle: Object as PropType<StyleValue>
 } as const
 
 export type DescriptionItemProps = ExtractPublicPropTypes<

@@ -11,7 +11,6 @@ import { createId } from 'seemly'
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   inject,
@@ -19,6 +18,7 @@ import {
   type PropType,
   provide,
   ref,
+  type StyleValue,
   toRaw,
   toRef,
   type VNode,
@@ -69,7 +69,7 @@ export const dynamicInputProps = {
   },
   keyField: String,
   itemClass: String,
-  itemStyle: [String, Object] as PropType<string | CSSProperties>,
+  itemStyle: Object as PropType<StyleValue>,
   // for preset pair
   keyPlaceholder: {
     type: String,

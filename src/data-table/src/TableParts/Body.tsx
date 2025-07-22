@@ -1,5 +1,5 @@
 import type { CNode } from 'css-render'
-import type { CSSProperties, PropType, VNode, VNodeChild } from 'vue'
+import type { PropType, StyleValue, VNode, VNodeChild } from 'vue'
 import type { VirtualListInst } from 'vueuc'
 import type { ColItem } from '../use-group-header'
 import { pxfy, repeat } from 'seemly'
@@ -151,7 +151,7 @@ export default defineComponent({
     onResize: Function as PropType<(e: ResizeObserverEntry) => void>,
     showHeader: Boolean,
     flexHeight: Boolean,
-    bodyStyle: Object as PropType<CSSProperties>
+    bodyStyle: Object as PropType<StyleValue>
   },
   setup(props) {
     const {
@@ -551,7 +551,7 @@ export default defineComponent({
     const isBasicAutoLayout = !scrollable && mergedTableLayout === 'auto'
     const xScrollable = scrollX !== undefined || isBasicAutoLayout
 
-    const contentStyle: CSSProperties = {
+    const contentStyle: StyleValue = {
       minWidth: formatLength(scrollX) || '100%'
     }
     if (scrollX)

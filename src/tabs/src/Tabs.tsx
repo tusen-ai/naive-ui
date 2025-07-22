@@ -19,7 +19,6 @@ import {
   cloneVNode,
   type ComponentPublicInstance,
   computed,
-  type CSSProperties,
   defineComponent,
   type ExtractPropTypes,
   h,
@@ -29,6 +28,7 @@ import {
   provide,
   ref,
   type SlotsType,
+  type StyleValue,
   toRef,
   TransitionGroup,
   type VNode,
@@ -85,15 +85,15 @@ export const tabsProps = {
     type: String as PropType<'top' | 'left' | 'right' | 'bottom'>,
     default: 'top'
   },
-  tabStyle: [String, Object] as PropType<string | CSSProperties>,
+  tabStyle: Object as PropType<StyleValue>,
   tabClass: String,
-  addTabStyle: [String, Object] as PropType<string | CSSProperties>,
+  addTabStyle: Object as PropType<StyleValue>,
   addTabClass: String,
   barWidth: Number,
   paneClass: String,
-  paneStyle: [String, Object] as PropType<string | CSSProperties>,
+  paneStyle: Object as PropType<StyleValue>,
   paneWrapperClass: String,
-  paneWrapperStyle: [String, Object] as PropType<string | CSSProperties>,
+  paneWrapperStyle: Object as PropType<StyleValue>,
   addable: [Boolean, Object] as PropType<Addable>,
   tabsPadding: {
     type: Number,
@@ -386,12 +386,15 @@ export default defineComponent({
           tabsPaneWrapperEl.style.cssText = paneWrapperStyle
         }
         else if (paneWrapperStyle) {
-          const { maxHeight, height } = paneWrapperStyle
+          const { maxHeight, height } = paneWrapperStyle as {
+            maxHeight?: string
+            height?: string
+          }
           if (maxHeight !== undefined) {
-            tabsPaneWrapperEl.style.maxHeight = maxHeight as string
+            tabsPaneWrapperEl.style.maxHeight = maxHeight
           }
           if (height !== undefined) {
-            tabsPaneWrapperEl.style.height = height as string
+            tabsPaneWrapperEl.style.height = height
           }
         }
       }
