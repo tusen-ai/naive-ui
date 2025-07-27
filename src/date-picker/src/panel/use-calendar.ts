@@ -60,7 +60,8 @@ const useCalendarProps = {
 
 function useCalendar(
   props: ExtractPropTypes<typeof useCalendarProps>,
-  type: 'date' | 'datetime' | 'month' | 'year' | 'quarter' | 'week'
+  type: 'date' | 'datetime' | 'month' | 'year' | 'quarter' | 'week',
+  showWeekPrefix?: boolean
 ) {
   const panelCommon = usePanelCommon(props)
   const {
@@ -117,7 +118,8 @@ function useCalendar(
       nowRef.value,
       firstDayOfWeekRef.value ?? localeRef.value.firstDayOfWeek,
       false,
-      type === 'week'
+      type === 'week',
+      showWeekPrefix
     )
   })
   const monthArrayRef = computed(() => {
@@ -154,14 +156,21 @@ function useCalendar(
     )
   })
   const weekdaysRef = computed(() => {
-    return dateArrayRef.value.slice(0, 7).map((dateItem) => {
-      const { ts } = dateItem
-      return format(
-        ts,
-        mergedDayFormatRef.value,
-        panelCommon.dateFnsOptions.value
-      )
-    })
+    const range = showWeekPrefix ? [0, 8] : [0, 7]
+    const weekDays = dateArrayRef.value
+      .slice(...range)
+      .map((dateItem, index) => {
+        if (showWeekPrefix && index === 0) {
+          return ' '
+        }
+        const { ts } = dateItem
+        return format(
+          ts,
+          mergedDayFormatRef.value,
+          panelCommon.dateFnsOptions.value
+        )
+      })
+    return weekDays
   })
   const calendarMonthRef = computed(() => {
     return format(

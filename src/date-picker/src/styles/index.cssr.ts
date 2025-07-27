@@ -304,6 +304,9 @@ export default c([
       margin-bottom: 4px;
       border-bottom: 1px solid var(--n-calendar-days-divider-color);
     `, [
+      cM('prefix', `
+        grid-template-columns: repeat(8, var(--n-item-cell-width));
+      `),
       cE('day', `
         white-space: nowrap;
         user-select: none;
@@ -327,6 +330,9 @@ export default c([
       justify-items: center;
       flex-wrap: wrap;
     `, [
+      cM('prefix', `
+        grid-template-columns: repeat(8, var(--n-item-cell-width));
+      `),
       cB('date-panel-date', `
         user-select: none;
         -webkit-user-select: none;
@@ -470,6 +476,14 @@ export default c([
           c('&:nth-child(7n + 7)::before', `
             border-top-right-radius: var(--n-item-border-radius);
             border-bottom-right-radius: var(--n-item-border-radius);
+          `)
+        ]),
+        cM('week-number', `
+          cursor: default;
+          color: var(--n-item-text-color-disabled);
+        `, [
+          c('&:hover', `
+            background-color: transparent;
           `)
         ])
       ])

@@ -12,6 +12,7 @@ import {
   getMonth,
   getQuarter,
   getTime,
+  getWeek,
   getYear,
   isSameDay,
   isSameMonth,
@@ -104,6 +105,7 @@ export interface DateItem {
   selected: boolean
   inSelectedWeek: boolean
   ts: number
+  weekNumber?: number // only for week mode
 }
 
 export interface MonthItem {
@@ -349,7 +351,8 @@ function dateArray(
   currentTs: number,
   startDay: 0 | 1 | 2 | 3 | 4 | 5 | 6,
   strip: boolean = false,
-  weekMode: boolean = false
+  weekMode: boolean = false,
+  showWeekPrefix: boolean = false
 ): DateItem[] {
   const granularity = weekMode ? 'week' : 'date'
   const displayMonth = getMonth(monthTs)
@@ -409,6 +412,21 @@ function dateArray(
     )
     displayMonthIterator = getTime(addDays(displayMonthIterator, 1))
   }
+
+  if (weekMode && showWeekPrefix) {
+    const calendarDaysWithPrefix: DateItem[] = []
+    for (let i = 0; i < calendarDays.length; i += 7) {
+      const firstDayOfWeek = calendarDays[i]
+      const prefixItem: DateItem = {
+        ...firstDayOfWeek,
+        weekNumber: getWeek(firstDayOfWeek.ts, { weekStartsOn: startDay })
+      }
+      calendarDaysWithPrefix.push(prefixItem)
+      calendarDaysWithPrefix.push(...calendarDays.slice(i, i + 7))
+    }
+    return calendarDaysWithPrefix
+  }
+
   return calendarDays
 }
 
