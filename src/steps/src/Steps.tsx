@@ -43,6 +43,10 @@ export const stepsProps = {
     default: 'medium'
   },
   vertical: Boolean,
+  contentPlacement: {
+    type: String as PropType<'right' | 'bottom'>,
+    default: 'right'
+  },
   'onUpdate:current': [Function, Array] as PropType<
     MaybeArray<(current: number) => void>
   >,
@@ -101,7 +105,9 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-steps`,
           this.rtlEnabled && `${mergedClsPrefix}-steps--rtl`,
-          this.vertical && `${mergedClsPrefix}-steps--vertical`
+          this.vertical && `${mergedClsPrefix}-steps--vertical`,
+          this.contentPlacement === 'bottom'
+          && `${mergedClsPrefix}-steps--content-bottom`
         ]}
       >
         {stepsWithIndex(flatten(getSlot(this)))}
