@@ -970,7 +970,13 @@ export default defineComponent({
     }
   },
   render() {
-    const { clearable, triggerOnRender, mergedClsPrefix, $slots } = this
+    const {
+      clearable,
+      triggerOnRender,
+      mergedClsPrefix,
+      $slots,
+      showWeekPrefix
+    } = this
     const commonPanelProps: UsePanelCommonProps & {
       ref: string
       style: CSSProperties
@@ -1043,6 +1049,7 @@ export default defineComponent({
             <DatePanel
               {...commonPanelProps}
               type={type}
+              showWeekPrefix={showWeekPrefix}
               defaultCalendarStartTime={this.defaultCalendarStartTime}
             >
               {{ ...$slots }}
