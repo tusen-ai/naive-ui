@@ -73,9 +73,43 @@ const base = {
 const baseBackgroundRgb = rgba(base.neutralBase)
 const baseInvertBackgroundRgb = rgba(base.neutralInvertBase)
 const overlayPrefix = `rgba(${baseInvertBackgroundRgb.slice(0, 3).join(', ')}, `
-function overlay(alpha: number | string): string {
-  return `${overlayPrefix + String(alpha)})`
+
+function truncateExcessiveDecimals(num: number) {
+  // 处理非数字、无穷大或整数
+  if (!Number.isFinite(num) || Number.isInteger(num)) {
+    return num
+  }
+  // 将数字转换为字符串以便分析小数部分
+  const numStr = num.toString()
+  // 检查是否有小数点
+  const decimalIndex = numStr.indexOf('.')
+  if (decimalIndex === -1) {
+    return num // 没有小数点，直接返回
+  }
+  // 获取小数部分
+  const decimalPart = numStr.slice(decimalIndex + 1)
+  // 如果小数部分长度≤3，直接返回原数字
+  if (decimalPart.length <= 3) {
+    return num
+  }
+
+  // 否则，使用toFixed(3)进行截断（四舍五入）
+  const numArray = num.toFixed(3).split('.')
+  // 判断中间位数是否为0,如果是0则只保留一位小数
+  if (numArray[1][1] === '0') {
+    return Number(num.toFixed(1))
+  }
+  // 注意：toFixed返回字符串，需要转回数字
+  return Number(num.toFixed(3))
 }
+
+function overlay(alpha: number | string): string {
+  if (typeof alpha === 'string') {
+    return `${overlayPrefix + String(alpha)})`
+  }
+  return `${overlayPrefix + String(truncateExcessiveDecimals(alpha))})`
+}
+
 function neutral(alpha: number | string): string {
   const overlayRgba = Array.from(baseInvertBackgroundRgb)
   overlayRgba[3] = Number(alpha)
@@ -84,6 +118,7 @@ function neutral(alpha: number | string): string {
     overlayRgba as [number, number, number, number]
   )
 }
+
 const derived: ThemeCommonVars = {
   name: 'common' as const,
 
@@ -196,5 +231,4 @@ const derived: ThemeCommonVars = {
   boxShadow3:
     '0 6px 16px -9px rgba(0, 0, 0, .08), 0 9px 28px 0 rgba(0, 0, 0, .05), 0 12px 48px 16px rgba(0, 0, 0, .03)'
 }
-
 export default derived
