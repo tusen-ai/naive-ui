@@ -304,7 +304,7 @@ export default c([
       margin-bottom: 4px;
       border-bottom: 1px solid var(--n-calendar-days-divider-color);
     `, [
-      cM('prefix', `
+      cM('has-prefix', `
         grid-template-columns: repeat(8, var(--n-item-cell-width));
       `),
       cE('day', `
@@ -330,7 +330,7 @@ export default c([
       justify-items: center;
       flex-wrap: wrap;
     `, [
-      cM('prefix', `
+      cM('has-prefix', `
         grid-template-columns: repeat(8, var(--n-item-cell-width));
       `),
       cB('date-panel-date', `
@@ -450,33 +450,69 @@ export default c([
             })
           ])
         ]),
-        cM('week-hovered', [
-          c('&::before', `
-            background-color: var(--n-item-color-included);
-          `),
-          c('&:nth-child(7n + 1)::before', `
-            border-top-left-radius: var(--n-item-border-radius);
-            border-bottom-left-radius: var(--n-item-border-radius);
-          `),
-          c('&:nth-child(7n + 7)::before', `
-            border-top-right-radius: var(--n-item-border-radius);
-            border-bottom-right-radius: var(--n-item-border-radius);
-          `)
+        cNotM('has-prefix', [
+          cM('week-hovered', [
+            c('&::before', `
+              background-color: var(--n-item-color-included);
+            `),
+            c('&:nth-child(7n + 1)::before', `
+              border-top-left-radius: var(--n-item-border-radius);
+              border-bottom-left-radius: var(--n-item-border-radius);
+            `),
+            c('&:nth-child(7n + 7)::before', `
+              border-top-right-radius: var(--n-item-border-radius);
+              border-bottom-right-radius: var(--n-item-border-radius);
+            `)
+          ]),
         ]),
-        cM('week-selected', `
+        cNotM('has-prefix', [
+          cM('week-selected', `
           color: var(--n-item-text-color-active)
         `, [
-          c('&::before', `
+            c('&::before', `
             background-color: var(--n-item-color-active);
           `),
-          c('&:nth-child(7n + 1)::before', `
+            c('&:nth-child(7n + 1)::before', `
             border-top-left-radius: var(--n-item-border-radius);
             border-bottom-left-radius: var(--n-item-border-radius);
           `),
-          c('&:nth-child(7n + 7)::before', `
+            c('&:nth-child(7n + 7)::before', `
             border-top-right-radius: var(--n-item-border-radius);
             border-bottom-right-radius: var(--n-item-border-radius);
           `)
+          ]),
+        ]),
+        cM('has-prefix', [
+          cM('week-hovered', [
+            c('&::before', `
+              background-color: var(--n-item-color-included);
+            `),
+            c('&:nth-child(8n + 1)::before', `
+              border-top-left-radius: var(--n-item-border-radius);
+              border-bottom-left-radius: var(--n-item-border-radius);
+            `),
+            c('&:nth-child(8n + 8)::before', `
+              border-top-right-radius: var(--n-item-border-radius);
+              border-bottom-right-radius: var(--n-item-border-radius);
+            `)
+          ]),
+        ]),
+        cM('has-prefix', [
+          cM('week-selected', `
+          color: var(--n-item-text-color-active)
+        `, [
+            c('&::before', `
+            background-color: var(--n-item-color-active);
+          `),
+            c('&:nth-child(8n + 1)::before', `
+            border-top-left-radius: var(--n-item-border-radius);
+            border-bottom-left-radius: var(--n-item-border-radius);
+          `),
+            c('&:nth-child(8n + 8)::before', `
+            border-top-right-radius: var(--n-item-border-radius);
+            border-bottom-right-radius: var(--n-item-border-radius);
+          `)
+          ]),
         ]),
         cM('week-number', `
           cursor: default;

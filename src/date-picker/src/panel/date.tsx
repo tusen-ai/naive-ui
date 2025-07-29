@@ -29,20 +29,18 @@ export default defineComponent({
   name: 'DatePanel',
   props: {
     ...useCalendarProps,
-    type: {
-      type: String as PropType<'date' | 'week'>,
-      required: true
-    },
     showWeekPrefix: {
       type: Boolean,
       default: undefined
+    },
+    type: {
+      type: String as PropType<'date' | 'week'>,
+      required: true
     }
   },
   setup(props) {
     const mergedShowWeekPrefix = computed(() => {
-      return props.showWeekPrefix !== undefined
-        ? props.showWeekPrefix
-        : props.type === 'week'
+      return props.type === 'week' && (props.showWeekPrefix ?? true)
     })
     if (__DEV__) {
       watchEffect(() => {
@@ -77,7 +75,6 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-date-panel`,
           `${mergedClsPrefix}-date-panel--${type}`,
-          type === 'week' && `${mergedClsPrefix}-date-panel--prefix`,
           !this.panel && `${mergedClsPrefix}-date-panel--shadow`,
           this.themeClass
         ]}
@@ -131,9 +128,10 @@ export default defineComponent({
           <div
             class={[
               `${mergedClsPrefix}-date-panel-weekdays`,
-              mergedShowWeekPrefix
-                ? `${mergedClsPrefix}-date-panel-weekdays--prefix`
-                : undefined
+              {
+                [`${mergedClsPrefix}-date-panel-weekdays--has-prefix`]:
+                  mergedShowWeekPrefix
+              }
             ]}
           >
             {this.weekdays.map(weekday => (
@@ -148,9 +146,10 @@ export default defineComponent({
           <div
             class={[
               `${mergedClsPrefix}-date-panel-dates`,
-              mergedShowWeekPrefix
-                ? `${mergedClsPrefix}-date-panel-dates--prefix`
-                : undefined
+              {
+                [`${mergedClsPrefix}-date-panel-dates--has-prefix`]:
+                  mergedShowWeekPrefix
+              }
             ]}
           >
             {this.dateArray.map((dateItem, i) => (
@@ -177,19 +176,17 @@ export default defineComponent({
                       this.isWeekHovered(dateItem),
                     [`${mergedClsPrefix}-date-panel-date--week-selected`]:
                       dateItem.inSelectedWeek,
+                    [`${mergedClsPrefix}-date-panel-date--has-prefix`]:
+                      mergedShowWeekPrefix,
                     [`${mergedClsPrefix}-date-panel-date--week-number`]:
                       dateItem.weekNumber !== undefined
                   }
                 ]}
                 onClick={() => {
-                  if (dateItem.weekNumber === undefined) {
-                    this.handleDateClick(dateItem)
-                  }
+                  this.handleDateClick(dateItem)
                 }}
                 onMouseenter={() => {
-                  if (dateItem.weekNumber === undefined) {
-                    this.handleDateMouseEnter(dateItem)
-                  }
+                  this.handleDateMouseEnter(dateItem)
                 }}
               >
                 <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />

@@ -189,6 +189,7 @@ form-debug.vue
 | placeholder | `string` | 中文为 `'选择周'`，随语言变化 | 没有值时的占位信息 | 2.37.0 |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | 受控数据更新时触发的回调函数 | 2.37.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | 受控数据更新时触发的回调函数 | 2.37.0 |
+| show-week-prefix | `boolean` | `undefined` | 是否显示周前缀,`type=week`时有效,周选择器中默认为 `true` | NEXT_VERSION |
 
 ### DatePicker Slots
 

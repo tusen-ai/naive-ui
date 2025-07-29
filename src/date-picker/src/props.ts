@@ -75,6 +75,10 @@ export const datePickerProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
+  showWeekPrefix: {
+    type: Boolean,
+    default: undefined
+  },
   panel: Boolean,
   ranges: Object as PropType<Record<string, [number, number]>>,
   firstDayOfWeek: Number as PropType<FirstDayOfWeek>,
