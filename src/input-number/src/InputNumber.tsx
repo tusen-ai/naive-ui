@@ -529,6 +529,9 @@ export default defineComponent({
       doMinus()
     }
     function handleKeyDown(e: KeyboardEvent): void {
+      if (props.readonly) {
+        return
+      }
       if (e.key === 'Enter') {
         if (e.target === inputInstRef.value?.wrapperElRef) {
           // hit input wrapper
