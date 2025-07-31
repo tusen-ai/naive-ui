@@ -624,12 +624,14 @@ export default defineComponent({
         const { value: beingCreatedOptions } = beingCreatedOptionsRef
         const beingCreatedOption = beingCreatedOptions[0] || null
         if (beingCreatedOption) {
-          const createdOptions = createdOptionsRef.value
-          if (!createdOptions.length) {
-            createdOptionsRef.value = [beingCreatedOption]
-          }
-          else {
-            createdOptions.push(beingCreatedOption)
+          if (beingCreatedOption[valueField] === option[valueField]) {
+            const createdOptions = createdOptionsRef.value
+            if (!createdOptions.length) {
+              createdOptionsRef.value = [beingCreatedOption]
+            }
+            else {
+              createdOptions.push(beingCreatedOption)
+            }
           }
           beingCreatedOptionsRef.value = emptyArray
         }
