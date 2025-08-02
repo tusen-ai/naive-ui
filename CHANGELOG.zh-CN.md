@@ -19,6 +19,7 @@
 - 修复 `n-menu` 在父节点设置 `disabled`，子节点为 `type: "group"` 的禁用样式失效，关闭 [#6792](https://github.com/tusen-ai/naive-ui/issues/6792)
 - 修复 `n-input-group-label` 没有注入 `formItemInjectionKey`，导致 `size` 属性失效的问题，关闭 [#7066](https://github.com/tusen-ai/naive-ui/issues/7066)
 - 修复 `n-carousel` 只有一张图的情況下样式错乱的问题，关闭 [#6476](https://github.com/tusen-ai/naive-ui/issues/6476)
+- 修复 `n-divider` 的分割线条显示粗细不均的问题
 
 ### Features
 
@@ -34,6 +35,8 @@
 - `n-image` 增加 showPreview 方法，关闭 [#6695](https://github.com/tusen-ai/naive-ui/issues/6695)
 - `n-image-preview`，`n-image-group` 支持单独使用
 - `n-input-otp` 增加 `focusOnChar` 方法，关闭 [#7073](https://github.com/tusen-ai/naive-ui/issues/7073)
+- `n-divider` 增加 `type`、`offset`、`title-class`、`title-style` 属性，原 ~~`dashed`~~ 属性替换为 `type="dashed"`，`title-placement` 类型改为 `'before' | 'center' | 'after'`，支持 `vertical` 排版使用标题
+- `n-divider` 增加 `borderWidth`、`fontSize`、`margin`、`verticalMargin` 主题变量，关闭 [#5348](https://github.com/tusen-ai/naive-ui/issues/5348)
 
 ## 2.42.0
 

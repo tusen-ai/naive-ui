@@ -4,16 +4,14 @@
 
 <template>
   Oops
-  <n-divider title-placement="left">
-    Left
+  <n-divider title-placement="before">
+    Before
   </n-divider>
   Oops
-  <n-divider title-placement="right">
-    Right
+  <n-divider title-placement="after">
+    After
   </n-divider>
   Oops
-  <n-divider dashed>
-    Dashed
-  </n-divider>
+  <n-divider> Center </n-divider>
   Oops
 </template>
