@@ -3,7 +3,10 @@
 </markdown>
 
 <template>
-  啊
+  实线
   <n-divider />
-  啊
+  虚线
+  <n-divider type="dashed" />
+  点线
+  <n-divider type="dotted" />
 </template>
