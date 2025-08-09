@@ -51,7 +51,7 @@ panel.vue
 | disabled | `boolean` | `false` | Whether the date picker is disabled. |  |
 | first-day-of-week | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | `undefined` | The first day of a week on calendar, 0 means Monday. |  |
 | input-readonly | `boolean` | `false` | Set the `readonly` attribute of the input (avoids virtual keyboard on touch devices). |  |
-| input-props | `InputHTMLAttributes` | `undefined` | The attributes of input element in autocomplete. | NEXT_VERSION |
+| input-props | `InputHTMLAttributes` | `undefined` | The attributes of input element in the trigger. | NEXT_VERSION |
 | month-format | `string` | `'M'` | Format of month item in the panel. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.37.0 |
 | panel | `boolean` | `false` | Whether to use date-picker as panel. | 2.29.1 |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Panel's placement. | 2.25.0 |
