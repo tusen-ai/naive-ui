@@ -19,10 +19,12 @@ import {
   type CSSProperties,
   defineComponent,
   h,
+  type InputHTMLAttributes,
   nextTick,
   type PropType,
   ref,
   type SlotsType,
+  type TextareaHTMLAttributes,
   toRef,
   Transition,
   type VNode
@@ -106,6 +108,7 @@ export const mentionProps = {
     type: String as PropType<FollowerPlacement>,
     default: 'bottom-start'
   },
+  inputProps: Object as PropType<InputHTMLAttributes | TextareaHTMLAttributes>,
   size: String as PropType<InputSize>,
   renderLabel: Function as PropType<RenderLabel>,
   status: String as PropType<FormValidationStatus>,
@@ -469,6 +472,7 @@ export default defineComponent({
           bordered={this.mergedBordered}
           disabled={this.disabled}
           value={this.mergedValue}
+          inputProps={this.inputProps}
         />
         <VBinder>
           {{
