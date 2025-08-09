@@ -1,4 +1,4 @@
-import type { PropType } from 'vue'
+import type { InputHTMLAttributes, PropType, TextareaHTMLAttributes } from 'vue'
 import type { FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type { MaybeArray } from '../../_utils'
@@ -79,6 +79,7 @@ export const datePickerProps = {
   ranges: Object as PropType<Record<string, [number, number]>>,
   firstDayOfWeek: Number as PropType<FirstDayOfWeek>,
   inputReadonly: Boolean,
+  inputProps: Object as PropType<TextareaHTMLAttributes | InputHTMLAttributes>,
   closeOnSelect: Boolean,
   status: String as PropType<FormValidationStatus>,
   timePickerProps: [Object, Array] as PropType<

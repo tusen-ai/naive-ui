@@ -1042,6 +1042,7 @@ export default defineComponent({
       passivelyActivated: true,
       disabled: this.mergedDisabled,
       readonly: this.inputReadonly || this.mergedDisabled,
+      inputProps: this.inputProps,
       clearable,
       onClear: this.handleClear,
       onClick: this.handleTriggerClick,
