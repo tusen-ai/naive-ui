@@ -34,6 +34,7 @@ rtl-debug.vue
 | display-order | `Array<'pages' \| 'size-picker' \| 'quick-jumper'>` | `['pages', 'size-picker', 'quick-jumper']` | 不同部分的展示顺序 | 2.32.2 |
 | goto | `() => VNodeChild` | `undefined` | 渲染快速跳转的文本内容 | 2.34.3 |
 | item-count | `number` | `undefined` | 总条数 |  |
+| input-props | `InputHTMLAttributes` | `undefined` | 快速跳转中 input 元素的属性 | NEXT_VERSION |
 | next | `(info: PaginationInfo) => VNodeChild` | `undefined` | 下一页 |  |
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | 上一页 |  |
 | label | `PaginationRenderLabel` | `undefined` | 每一项的内容 | 2.24.0 |

@@ -31,6 +31,7 @@ page-size-option.vue
 | disabled | `boolean` | `false` | Whether to disable the pagination. |  |
 | display-order | `Array<'pages' \| 'size-picker' \| 'quick-jumper'>` | `['pages', 'size-picker', 'quick-jumper']` | Display order of different parts. | 2.32.2 |
 | goto | `() => VNodeChild` | `undefined` | Fast jump content render function. | 2.34.3 |
+| input-props | `InputHTMLAttributes` | `undefined` | The attributes of input element in the goto. | NEXT_VERSION |
 | item-count | `number` | `undefined` | Total number. |  |
 | next | `(info: PaginationInfo) => VNodeChild` | `undefined` | Next page. |  |
 | prev | `(info: PaginationInfo) => VNodeChild` | `undefined` | Previous page. |  |
