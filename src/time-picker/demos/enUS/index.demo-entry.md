@@ -36,6 +36,7 @@ timezone.vue
 | minutes | `number \| number[]` | `undefined` | The array of minutes that can be selected. If a number, it'll be converted into an array of numbers using that increment. |  |
 | seconds | `number \| number[]` | `undefined` | The array of seconds that can be selected. If a number, it'll be converted into an array of numbers using that increment. |  |
 | input-readonly | `boolean` | `false` | Readonly state (does not apply to touch devices). |  |
+| input-props | `InputHTMLAttributes` | `undefined` | The attributes of input element in the trigger. | NEXT_VERSION |
 | is-hour-disabled | `(hour: number) => boolean` | `() => false` | Callback function for disabling hours. |  |
 | is-minute-disabled | `(minute: number, hour: number \| null) => boolean` | `() => false` | Callback function for disabling minutes. When value is empty, `hour` is `null`. |  |
 | is-second-disabled | `(second: number, minute: number \| null, hour: number \| null) => boolean` | `() => false` | Callback function for disabling seconds. When value is empty, `hour` and `minute` are `null`. |  |
