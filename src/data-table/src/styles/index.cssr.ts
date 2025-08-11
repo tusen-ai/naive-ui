@@ -575,8 +575,8 @@ export default c([
     --n-merged-border-color: var(--n-border-color-modal);
     --n-merged-th-color-hover: var(--n-th-color-hover-modal);
     --n-merged-td-color-hover: var(--n-td-color-hover-modal);
-    --n-merged-th-color-sorting: var(--n-th-color-hover-modal);
-    --n-merged-td-color-sorting: var(--n-td-color-hover-modal);
+    --n-merged-th-color-sorting: var(--n-th-color-sorting-modal);
+    --n-merged-td-color-sorting: var(--n-td-color-sorting-modal);
     --n-merged-td-color-striped: var(--n-td-color-striped-modal);
   `)),
   insidePopover(cB('data-table', `
@@ -585,8 +585,8 @@ export default c([
     --n-merged-border-color: var(--n-border-color-popover);
     --n-merged-th-color-hover: var(--n-th-color-hover-popover);
     --n-merged-td-color-hover: var(--n-td-color-hover-popover);
-    --n-merged-th-color-sorting: var(--n-th-color-hover-popover);
-    --n-merged-td-color-sorting: var(--n-td-color-hover-popover);
+    --n-merged-th-color-sorting: var(--n-th-color-sorting-popover);
+    --n-merged-td-color-sorting: var(--n-td-color-sorting-popover);
     --n-merged-td-color-striped: var(--n-td-color-striped-popover);
   `))
 ])
