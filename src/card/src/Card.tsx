@@ -259,11 +259,12 @@ export default defineComponent({
             <div
               class={[`${mergedClsPrefix}-card-header`, this.headerClass]}
               style={this.headerStyle}
-              role="heading"
+              role="none"
             >
               <div
                 class={`${mergedClsPrefix}-card-header__main`}
                 role="heading"
+                aria-level="2"
               >
                 {mergedChildren}
               </div>
