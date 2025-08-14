@@ -709,7 +709,7 @@ export default defineComponent({
             [`${mergedClsPrefix}-slider--reverse`]: this.reverse
           }
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
         onKeydown={this.handleRailKeyDown}
         onMousedown={this.handleRailMouseDown}
         onTouchstart={this.handleRailMouseDown}
@@ -825,10 +825,7 @@ export default defineComponent({
                                             this.indicatorThemeClass,
                                             `${mergedClsPrefix}-slider-handle-indicator--${this.mergedPlacement}`
                                           ]}
-                                          style={
-                                            this
-                                              .indicatorCssVars as CSSProperties
-                                          }
+                                          style={this.indicatorCssVars}
                                         >
                                           {typeof formatTooltip === 'function'
                                             ? formatTooltip(value)

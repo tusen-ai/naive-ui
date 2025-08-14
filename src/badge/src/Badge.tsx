@@ -3,7 +3,6 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import type { BadgeTheme } from '../styles'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   onMounted,
@@ -162,7 +161,7 @@ export default defineComponent({
             [`${mergedClsPrefix}-badge--as-is`]: !children
           }
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         {children}
         <Transition

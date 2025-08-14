@@ -1,11 +1,4 @@
-import {
-  computed,
-  type CSSProperties,
-  defineComponent,
-  h,
-  inject,
-  type VNode
-} from 'vue'
+import { computed, defineComponent, h, inject, type VNode } from 'vue'
 import { NFadeInExpandTransition } from '../../_internal'
 import { throwError } from '../../_utils'
 import { NImageGroup } from '../../image'
@@ -80,7 +73,7 @@ export default defineComponent({
           ]}
           style={[
             abstract && cssVarsRef ? cssVarsRef.value : '',
-            fileListStyleRef.value as CSSProperties
+            fileListStyleRef.value
           ]}
         >
           {renderUploadFileList()}

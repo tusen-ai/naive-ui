@@ -38,7 +38,6 @@ import {
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   inject,
@@ -1822,7 +1821,7 @@ export default defineComponent({
                   paddingBottom={padding.bottom}
                   class={this.themeClass}
                   style={[
-                    this.cssVars as CSSProperties,
+                    this.cssVars,
                     {
                       paddingLeft: padding.left,
                       paddingRight: padding.right
@@ -1855,7 +1854,7 @@ export default defineComponent({
           tabindex={tabindex}
           onKeydown={mergedFocusable ? handleKeydown : undefined}
           onFocusout={mergedFocusable ? handleFocusout : undefined}
-          style={this.cssVars as CSSProperties}
+          style={this.cssVars}
           contentStyle={{ padding: this.internalScrollablePadding }}
         >
           {{
@@ -1877,7 +1876,7 @@ export default defineComponent({
           class={treeClass}
           tabindex={tabindex}
           ref="selfElRef"
-          style={this.cssVars as CSSProperties}
+          style={this.cssVars}
           onKeydown={mergedFocusable ? handleKeydown : undefined}
           onFocusout={mergedFocusable ? handleFocusout : undefined}
           onDragleave={draggable ? this.handleDragLeaveTree : undefined}

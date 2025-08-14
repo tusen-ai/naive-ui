@@ -872,7 +872,7 @@ export default defineComponent({
                             left: pxfy(fixedColumnLeftMap[colKey]?.start),
                             right: pxfy(fixedColumnRightMap[colKey]?.start)
                           },
-                      indentOffsetStyle as CSSProperties,
+                      indentOffsetStyle,
                       resolvedCellProps?.style || ''
                     ]}
                     colspan={mergedColSpan}

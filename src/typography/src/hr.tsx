@@ -1,6 +1,6 @@
 import type { ThemeProps } from '../../_mixins'
 import type { TypographyTheme } from '../styles'
-import { computed, type CSSProperties, defineComponent, h } from 'vue'
+import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { typographyLight } from '../styles'
 import style from './styles/hr.cssr'
@@ -45,7 +45,7 @@ export default defineComponent({
     return (
       <hr
         class={[`${this.mergedClsPrefix}-hr`, this.themeClass]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       />
     )
   }

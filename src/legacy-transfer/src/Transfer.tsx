@@ -4,7 +4,6 @@ import { depx } from 'seemly'
 import { useIsMounted } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   type PropType,
@@ -315,7 +314,7 @@ export default defineComponent({
           this.mergedDisabled && `${mergedClsPrefix}-legacy-transfer--disabled`,
           this.filterable && `${mergedClsPrefix}-legacy-transfer--filterable`
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         <div class={`${mergedClsPrefix}-legacy-transfer-list`}>
           <NTransferHeader

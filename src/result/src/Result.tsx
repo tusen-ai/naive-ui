@@ -3,7 +3,6 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ResultTheme } from '../styles'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   type PropType,
@@ -134,7 +133,7 @@ export default defineComponent({
     return (
       <div
         class={[`${mergedClsPrefix}-result`, this.themeClass]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         <div class={`${mergedClsPrefix}-result-icon`}>
           {$slots.icon?.() || (

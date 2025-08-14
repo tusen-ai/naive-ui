@@ -1,6 +1,5 @@
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   type PropType,
@@ -106,7 +105,7 @@ export default defineComponent({
           `${mergedClsPrefix}-float-button-group`,
           `${mergedClsPrefix}-float-button-group--${shape}-shape`
         ]}
-        style={cssVars as CSSProperties}
+        style={cssVars}
         role="group"
       >
         {this.$slots}

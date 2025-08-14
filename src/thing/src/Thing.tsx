@@ -84,11 +84,7 @@ export default defineComponent({
             themeClassHandle?.themeClass,
             rtlEnabled && `${mergedClsPrefix}-thing--rtl`
           ]}
-          style={
-            inlineThemeDisabled
-              ? undefined
-              : (cssVarsRef.value as CSSProperties)
-          }
+          style={inlineThemeDisabled ? undefined : cssVarsRef.value}
         >
           {slots.avatar && props.contentIndented ? (
             <div class={`${mergedClsPrefix}-thing-avatar`}>

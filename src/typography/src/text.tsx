@@ -2,13 +2,7 @@ import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { TypographyTheme } from '../styles'
 import { useCompitable } from 'vooks'
-import {
-  computed,
-  type CSSProperties,
-  defineComponent,
-  h,
-  type PropType
-} from 'vue'
+import { computed, defineComponent, h, type PropType } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { createKey, warn } from '../../_utils'
 import { typographyLight } from '../styles'
@@ -116,11 +110,11 @@ export default defineComponent({
     ]
     const children = this.$slots.default?.()
     return this.code ? (
-      <code class={textClass} style={this.cssVars as CSSProperties}>
+      <code class={textClass} style={this.cssVars}>
         {this.delete ? <del>{children}</del> : children}
       </code>
     ) : this.delete ? (
-      <del class={textClass} style={this.cssVars as CSSProperties}>
+      <del class={textClass} style={this.cssVars}>
         {children}
       </del>
     ) : (
