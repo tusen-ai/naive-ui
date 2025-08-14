@@ -524,7 +524,10 @@ export default defineComponent({
         )
       }
     }
-    const handleNavResize = throttle(_handleNavResize, 64)
+    const handleNavResize: (entry: ResizeObserverEntry) => void = throttle(
+      _handleNavResize,
+      64
+    )
     watch([() => props.justifyContent, () => props.size], () => {
       void nextTick(() => {
         const { type } = props
@@ -580,7 +583,10 @@ export default defineComponent({
         (xScrollInstRef.value?.$el as undefined | HTMLElement) || null
       )
     }
-    const handleTabsResize = throttle(_handleTabsResize, 64)
+    const handleTabsResize: (entry: ResizeObserverEntry) => void = throttle(
+      _handleTabsResize,
+      64
+    )
 
     function handleAdd(): void {
       const { onAdd } = props
@@ -615,7 +621,7 @@ export default defineComponent({
       }
     }
 
-    const handleScroll = throttle((e: Event) => {
+    const handleScroll: (e: Event) => void = throttle((e: Event) => {
       deriveScrollShadow(e.target as HTMLElement)
     }, 64)
     provide(tabsInjectionKey, {
