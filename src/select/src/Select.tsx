@@ -1084,7 +1084,7 @@ export default defineComponent({
                                   [
                                     clickoutside,
                                     this.handleMenuClickOutside,
-                                    undefined as unknown as string,
+                                    undefined,
                                     { capture: true }
                                   ]
                                 ]
@@ -1092,7 +1092,7 @@ export default defineComponent({
                                   [
                                     clickoutside,
                                     this.handleMenuClickOutside,
-                                    undefined as unknown as string,
+                                    undefined,
                                     { capture: true }
                                   ]
                                 ]
