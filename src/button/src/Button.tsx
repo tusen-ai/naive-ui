@@ -8,7 +8,6 @@ import { useMemo } from 'vooks'
 import {
   type ButtonHTMLAttributes,
   computed,
-  type CSSProperties,
   defineComponent,
   type ExtractPropTypes,
   h,
@@ -605,7 +604,7 @@ const Button = defineComponent({
         ]}
         tabindex={this.mergedFocusable ? 0 : -1}
         type={this.attrType}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
         disabled={this.disabled}
         onClick={this.handleClick}
         onBlur={this.handleBlur}
@@ -661,14 +660,14 @@ const Button = defineComponent({
           <div
             aria-hidden
             class={`${mergedClsPrefix}-button__border`}
-            style={this.customColorCssVars as CSSProperties}
+            style={this.customColorCssVars}
           />
         ) : null}
         {this.showBorder ? (
           <div
             aria-hidden
             class={`${mergedClsPrefix}-button__state-border`}
-            style={this.customColorCssVars as CSSProperties}
+            style={this.customColorCssVars}
           />
         ) : null}
       </Component>

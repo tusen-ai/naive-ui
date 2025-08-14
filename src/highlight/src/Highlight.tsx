@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType, VNode, VNodeChild } from 'vue'
+import type { PropType, StyleValue, VNode, VNodeChild } from 'vue'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig } from '../../_mixins'
 import { splitAndMarkByRegex } from './utils'
@@ -19,7 +19,7 @@ export const highlightProps = {
     default: () => []
   },
   highlightClass: String,
-  highlightStyle: [Object, String] as PropType<CSSProperties | string>
+  highlightStyle: Object as PropType<StyleValue>
 } as const
 
 export default defineComponent({

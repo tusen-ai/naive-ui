@@ -3,10 +3,10 @@ import type { ProgressTheme } from '../styles'
 import type { ProgressGradient, ProgressStatus } from './public-types'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
-  type PropType
+  type PropType,
+  type StyleValue
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { createKey, type ExtractPublicPropTypes } from '../../_utils'
@@ -32,9 +32,7 @@ export const progressProps = {
     default: 'default'
   },
   railColor: [String, Array] as PropType<string | string[]>,
-  railStyle: [String, Array] as PropType<
-    string | CSSProperties | Array<string | CSSProperties>
-  >,
+  railStyle: Array as PropType<StyleValue[]>,
   color: [String, Array, Object] as PropType<
     string | string[] | ProgressGradient | ProgressGradient[]
   >,
@@ -192,7 +190,7 @@ export default defineComponent({
           `${mergedClsPrefix}-progress--${type}`,
           `${mergedClsPrefix}-progress--${status}`
         ]}
-        style={cssVars as CSSProperties}
+        style={cssVars}
         aria-valuemax={100}
         aria-valuemin={0}
         aria-valuenow={percentage as number}
@@ -210,7 +208,7 @@ export default defineComponent({
             indicatorTextColor={indicatorTextColor}
             railColor={railColor as any}
             fillColor={color as any}
-            railStyle={railStyle as any}
+            railStyle={railStyle}
             offsetDegree={this.offsetDegree}
             percentage={percentage as number}
             viewBoxWidth={viewBoxWidth}
@@ -231,7 +229,7 @@ export default defineComponent({
             indicatorTextColor={indicatorTextColor}
             railColor={railColor as any}
             fillColor={color as any}
-            railStyle={railStyle as any}
+            railStyle={railStyle}
             percentage={percentage as number}
             processing={processing}
             indicatorPlacement={mergedIndicatorPlacement}
@@ -248,7 +246,7 @@ export default defineComponent({
             strokeWidth={strokeWidth}
             railColor={railColor as any}
             fillColor={color as any}
-            railStyle={railStyle as any}
+            railStyle={railStyle}
             viewBoxWidth={viewBoxWidth}
             percentage={percentage as number[]}
             showIndicator={showIndicator}

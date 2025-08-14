@@ -3,7 +3,6 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import type { LoadingBarTheme } from '../styles'
 import { useIsMounted } from 'vooks'
 import {
-  type CSSProperties,
   defineComponent,
   type ExtractPropTypes,
   Fragment,
@@ -12,6 +11,7 @@ import {
   type PropType,
   provide,
   ref,
+  type StyleValue,
   Teleport
 } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
@@ -37,11 +37,11 @@ export const loadingBarProviderProps = {
     default: undefined
   },
   containerClass: String,
-  containerStyle: [String, Object] as PropType<string | CSSProperties>,
+  containerStyle: Object as PropType<StyleValue>,
   loadingBarStyle: {
     type: Object as PropType<{
-      loading?: string | CSSProperties
-      error?: string | CSSProperties
+      loading?: StyleValue
+      error?: StyleValue
     }>
   }
 }

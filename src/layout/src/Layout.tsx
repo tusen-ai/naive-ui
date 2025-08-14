@@ -5,13 +5,13 @@ import type { LayoutTheme } from '../styles'
 import type { LayoutInst } from './interface'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   type ExtractPropTypes,
   h,
   type PropType,
   provide,
-  ref
+  ref,
+  type StyleValue
 } from 'vue'
 import { NScrollbar } from '../../_internal'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
@@ -31,7 +31,7 @@ export const layoutProps = {
   onScroll: Function as PropType<(e: Event) => void>,
   contentClass: String,
   contentStyle: {
-    type: [String, Object] as PropType<string | CSSProperties>,
+    type: Object as PropType<StyleValue>,
     default: ''
   },
   hasSider: Boolean,
@@ -104,7 +104,7 @@ export function createLayoutComponent(isContent: boolean) {
           }
         }
       })
-      const hasSiderStyle: CSSProperties = {
+      const hasSiderStyle: StyleValue = {
         display: 'flex',
         flexWrap: 'nowrap',
         width: '100%',
@@ -158,7 +158,7 @@ export function createLayoutComponent(isContent: boolean) {
         `${mergedClsPrefix}-layout--${this.position}-positioned`
       ]
       return (
-        <div class={layoutClass} style={this.cssVars as CSSProperties}>
+        <div class={layoutClass} style={this.cssVars}>
           {this.nativeScrollbar ? (
             <div
               ref="scrollableElRef"

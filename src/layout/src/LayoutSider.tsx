@@ -5,13 +5,13 @@ import type { LayoutTheme } from '../styles'
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   inject,
   type PropType,
   provide,
   ref,
+  type StyleValue,
   toRef
 } from 'vue'
 import { NScrollbar } from '../../_internal'
@@ -41,7 +41,7 @@ export const layoutSiderProps = {
   },
   contentClass: String,
   contentStyle: {
-    type: [String, Object] as PropType<string | CSSProperties>,
+    type: Object as PropType<StyleValue>,
     default: ''
   },
   collapseMode: {
@@ -67,12 +67,12 @@ export const layoutSiderProps = {
   },
   inverted: Boolean,
   scrollbarProps: Object as PropType<
-    Partial<ScrollbarProps> & { style: CSSProperties }
+    Partial<ScrollbarProps> & { style: StyleValue }
   >,
   triggerClass: String,
-  triggerStyle: [String, Object] as PropType<string | CSSProperties>,
+  triggerStyle: Object as PropType<StyleValue>,
   collapsedTriggerClass: String,
-  collapsedTriggerStyle: [String, Object] as PropType<string | CSSProperties>,
+  collapsedTriggerStyle: Object as PropType<StyleValue>,
   'onUpdate:collapsed': [Function, Array] as PropType<
     MaybeArray<(value: boolean) => void>
   >,
@@ -125,7 +125,7 @@ export default defineComponent({
         mergedCollapsedRef.value ? props.collapsedWidth : props.width
       )
     })
-    const scrollContainerStyleRef = computed<CSSProperties>(() => {
+    const scrollContainerStyleRef = computed<StyleValue>(() => {
       if (props.collapseMode !== 'transform')
         return {}
       return {

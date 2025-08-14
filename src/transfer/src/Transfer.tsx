@@ -4,7 +4,6 @@ import { depx } from 'seemly'
 import { useIsMounted } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   type PropType,
@@ -305,7 +304,7 @@ export default defineComponent({
           `${mergedClsPrefix}-transfer`,
           this.mergedDisabled && `${mergedClsPrefix}-transfer--disabled`
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         <div
           class={`${mergedClsPrefix}-transfer-list ${mergedClsPrefix}-transfer-list--source`}

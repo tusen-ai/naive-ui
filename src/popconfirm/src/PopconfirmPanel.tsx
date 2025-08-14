@@ -1,12 +1,4 @@
-import {
-  computed,
-  type CSSProperties,
-  defineComponent,
-  h,
-  inject,
-  type PropType,
-  toRef
-} from 'vue'
+import { computed, defineComponent, h, inject, type PropType, toRef } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import { WarningIcon } from '../../_internal/icons'
 import { useConfig, useLocale, useThemeClass } from '../../_mixins'
@@ -116,7 +108,7 @@ export default defineComponent({
     return (
       <div
         class={[`${mergedClsPrefix}-popconfirm__panel`, this.themeClass]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         {resolveWrappedSlot($slots.default, children =>
           showIcon || children ? (

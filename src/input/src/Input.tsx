@@ -12,7 +12,6 @@ import { getPadding } from 'seemly'
 import { useMemo, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   Fragment,
   getCurrentInstance,
@@ -1126,7 +1125,7 @@ export default defineComponent({
             [`${mergedClsPrefix}-input--stateful`]: this.stateful
           }
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
         tabindex={
           !this.mergedDisabled && this.passivelyActivated && !this.activated
             ? 0
@@ -1338,7 +1337,7 @@ export default defineComponent({
                           loading={this.loading}
                           showArrow={false}
                           showClear={false}
-                          style={this.cssVars as CSSProperties}
+                          style={this.cssVars}
                         />
                       ) : null,
                       this.internalLoadingBeforeSuffix ? children : null,

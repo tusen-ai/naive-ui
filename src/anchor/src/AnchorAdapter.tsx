@@ -2,7 +2,7 @@ import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { AnchorTheme } from '../styles'
 import type { BaseAnchorInst } from './BaseAnchor'
-import { computed, type CSSProperties, defineComponent, h, ref } from 'vue'
+import { computed, defineComponent, h, ref } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { keep } from '../../_utils'
 import { NAffix } from '../../affix'
@@ -82,11 +82,7 @@ export default defineComponent({
         return (
           <NBaseAnchor
             ref={anchorRef}
-            style={
-              inlineThemeDisabled
-                ? undefined
-                : (cssVarsRef.value as CSSProperties)
-            }
+            style={inlineThemeDisabled ? undefined : cssVarsRef.value}
             class={themeClassHandle?.themeClass.value}
             {...keep(props, baseAnchorPropKeys)}
             mergedClsPrefix={mergedClsPrefixRef.value}

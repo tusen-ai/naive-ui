@@ -322,7 +322,7 @@ export default defineComponent({
                   this.themeClass,
                   this.namespace
                 ]}
-                style={this.cssVars as CSSProperties}
+                style={this.cssVars}
               >
                 <NModalBodyWrapper
                   style={this.overlayStyle}

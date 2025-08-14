@@ -27,7 +27,7 @@ keep-alive.vue
 | items | `Array<object>` | `[]` | Data to display. | 2.36.0 |
 | item-resizable | `number` | `false` | Whether dynamic sizing is enabled, you don't have to care about the size of the item, it will be calculated automatically. | 2.36.0 |
 | item-size | `number` | required | Displays the minimum height of the item in pixels to calculate scroll size and position. | 2.36.0 |
-| items-style | `string \| CSSProperties` | `undefined` | Items container style. | 2.36.0 |
+| items-style | `StyleValue` | Items container style. | 2.36.0 |
 | key-field | `string` | `'key'` | Field name of option key. | 2.36.0 |
 | padding-top | `string \| number` | `undefined` | Distance from the top. | 2.36.0 |
 | padding-bottom | `string \| number` | `undefined` | Distance from the bottom. | 2.36.0 |

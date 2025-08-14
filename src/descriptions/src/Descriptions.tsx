@@ -5,11 +5,11 @@ import { repeat } from 'seemly'
 import { useCompitable } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   type PropType,
   type SlotsType,
+  type StyleValue,
   type VNode
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
@@ -50,9 +50,9 @@ export const descriptionsProps = {
   },
   bordered: Boolean,
   labelClass: String,
-  labelStyle: [Object, String] as PropType<string | CSSProperties>,
+  labelStyle: Object as PropType<StyleValue>,
   contentClass: String,
-  contentStyle: [Object, String] as PropType<string | CSSProperties>
+  contentStyle: Object as PropType<StyleValue>
 } as const
 
 export type DescriptionsProps = ExtractPublicPropTypes<typeof descriptionsProps>
@@ -318,7 +318,7 @@ export default defineComponent({
     ))
     return (
       <div
-        style={cssVars as any}
+        style={cssVars}
         class={[
           `${mergedClsPrefix}-descriptions`,
           this.themeClass,

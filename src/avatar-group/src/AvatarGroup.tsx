@@ -9,12 +9,12 @@ import type {
 } from './public-types'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   type PropType,
   provide,
   type SlotsType,
+  type StyleValue,
   type VNode
 } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
@@ -31,7 +31,7 @@ export interface AvatarGroupInjection {
 export const avatarGroupProps = {
   ...(useTheme.props as ThemeProps<AvatarGroupTheme>),
   max: Number,
-  maxStyle: [Object, String] as PropType<CSSProperties | string>,
+  maxStyle: Object as PropType<StyleValue>,
   options: {
     type: Array as PropType<AvatarGroupOption[]>,
     default: () => []
