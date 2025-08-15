@@ -24,6 +24,7 @@ import {
   defineComponent,
   Fragment,
   h,
+  type InputHTMLAttributes,
   nextTick,
   type PropType,
   ref,
@@ -88,6 +89,7 @@ export const paginationProps = {
     default: 'medium'
   },
   disabled: Boolean,
+  inputProps: Object as PropType<InputHTMLAttributes>,
   pageSlot: {
     type: Number,
     default: 9
@@ -677,6 +679,7 @@ export default defineComponent({
                           theme={mergedTheme.peers.Input}
                           themeOverrides={mergedTheme.peerOverrides.Input}
                           onChange={handleQuickJumperChange}
+                          inputProps={this.inputProps}
                         />
                       </div>
                       &nbsp;/
@@ -942,6 +945,7 @@ export default defineComponent({
                     theme={mergedTheme.peers.Input}
                     themeOverrides={mergedTheme.peerOverrides.Input}
                     onChange={handleQuickJumperChange}
+                    inputProps={this.inputProps}
                   />
                 </div>
               ) : null

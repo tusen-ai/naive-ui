@@ -41,6 +41,7 @@ import {
   type CSSProperties,
   defineComponent,
   h,
+  type InputHTMLAttributes,
   nextTick,
   type PropType,
   provide,
@@ -119,6 +120,7 @@ export const timePickerProps = {
   isMinuteDisabled: Function as PropType<IsMinuteDisabled>,
   isSecondDisabled: Function as PropType<IsSecondDisabled>,
   inputReadonly: Boolean,
+  inputProps: Object as PropType<InputHTMLAttributes>,
   clearable: Boolean,
   status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -959,6 +961,7 @@ export default defineComponent({
                       internalDeactivateOnEnter
                       internalForceFocus={this.mergedShow}
                       readonly={this.inputReadonly || this.mergedDisabled}
+                      inputProps={this.inputProps}
                       onClick={this.handleTriggerClick}
                       onKeydown={this.handleInputKeydown}
                     >
