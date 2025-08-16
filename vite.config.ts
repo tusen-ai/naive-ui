@@ -59,6 +59,7 @@ export default defineConfig({
       'highlight.js/lib/languages/xml',
       '@vicons/ionicons5',
       '@vicons/ionicons4',
+      '@vicons/antd',
       '@vicons/fluent/Compose16Regular.js'
     ],
     exclude: ['__INDEX__']
@@ -69,7 +70,8 @@ export default defineConfig({
       output: {
         manualChunks: {
           'grapheme-splitter': ['grapheme-splitter'],
-          katex: ['katex']
+          katex: ['katex'],
+          'vue-markdown-unified': ['vue-markdown-unified']
         }
       },
       plugins: [
