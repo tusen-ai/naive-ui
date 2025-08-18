@@ -19,6 +19,7 @@
 - Fix `n-menu`'s disabled style not working when parent node is set to `disabled` and child node has `type: "group"`, closes [#6792](https://github.com/tusen-ai/naive-ui/issues/6792)
 - Fix `n-input-group-label` not injecting `formItemInjectionKey`, causing the `size` property to fail, and close [#7066](https://github.com/tusen-ai/naive-ui/issues/7066)
 - Fix the issue of style confusion in `n-carousel` when there is only one image, close [#6476](https://github.com/tusen-ai/naive-ui/issues/6476)
+- Fix `n-divider`'s uneven thickness in dividing lines.
 
 ### Features
 
@@ -34,6 +35,8 @@
 - - `n-image` adds showPreview methods, closes [#6695](https://github.com/tusen-ai/naive-ui/issues/6695).
 - `n-image-preview` `n-image-group` support being used independently.
 - `n-input-otp` adds `focusOnChar` util method, closes [#7073](https://github.com/tusen-ai/naive-ui/issues/7073).
+- `n-divider` adds `type`, `offset`, `title-class`, `title-style` props, the original ~~`dashed`~~ prop is replaced with `type="dashed"`, `title-placement` type is changed to `'before' | 'center' | 'after'`, supports using title in `vertical` layout.
+- `n-divider` adds `borderWidth`, `fontSize`, `margin`, `verticalMargin` theme variables. closes [#5348](https://github.com/tusen-ai/naive-ui/issues/5348)
 
 ## 2.42.0
 
