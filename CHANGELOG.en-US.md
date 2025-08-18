@@ -19,6 +19,7 @@
 - Fix `n-menu`'s disabled style not working when parent node is set to `disabled` and child node has `type: "group"`, closes [#6792](https://github.com/tusen-ai/naive-ui/issues/6792)
 - Fix `n-input-group-label` not injecting `formItemInjectionKey`, causing the `size` property to fail, and close [#7066](https://github.com/tusen-ai/naive-ui/issues/7066)
 - Fix the issue of style confusion in `n-carousel` when there is only one image, close [#6476](https://github.com/tusen-ai/naive-ui/issues/6476)
+- Fix `n-select` residual search text issue when using dynamic option creation and selecting options after searching.
 
 ### Features
 
