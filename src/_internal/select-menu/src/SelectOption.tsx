@@ -155,6 +155,9 @@ export default defineComponent({
     const node = (
       <div
         {...attrs}
+        title={
+          renderOption || renderLabel ? undefined : (rawNode.label as string)
+        }
         class={[
           `${clsPrefix}-base-select-option`,
           rawNode.class,
