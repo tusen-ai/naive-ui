@@ -15,7 +15,7 @@ import {
   watch
 } from 'vue'
 import { useConfig } from '../../_mixins'
-import { call, createInjectionKey } from '../../_utils'
+import { call, createInjectionKey, throwError } from '../../_utils'
 
 import NImagePreview from './ImagePreview'
 import { imagePreviewSharedProps } from './interface'
@@ -47,6 +47,10 @@ export const imageGroupProps = {
     default: undefined
   },
   defaultShow: Boolean,
+  infinite: {
+    type: Boolean,
+    default: true
+  },
   onUpdateShow: [Function, Array] as PropType<
     MaybeArray<(show: boolean) => void>
   >,
@@ -94,6 +98,14 @@ export default defineComponent({
     const imageCount = computed(() => imageIdList.value.length)
 
     function registerImageUrl(id: number, url: string) {
+      // Check whether srcList and slot are mixed
+      if (srcList.value && srcList.value.length > 0) {
+        throwError(
+          'image-group',
+          'When passing in srcList, do not use the `n-image` component inside `n-image-group`, otherwise the preview behavior may be abnormal.'
+        )
+      }
+
       if (!propImageUrlMap.value.has(id)) {
         imageUrlMap.value.set(id, url)
       }
@@ -166,7 +178,15 @@ export default defineComponent({
       }
 
       const next = findNext(mergedCurrentRef.value + 1, imageCount.value - 1)
-      return isUndefined(next) ? findNext(0, mergedCurrentRef.value - 1) : next
+      if (isUndefined(next)) {
+        if (props.infinite) {
+          return findNext(0, mergedCurrentRef.value - 1)
+        }
+        else {
+          return undefined
+        }
+      }
+      return next
     })
 
     const prevIndex = computed(() => {
@@ -181,19 +201,29 @@ export default defineComponent({
       }
 
       const prev = findPrev(mergedCurrentRef.value - 1, 0)
-      return isUndefined(prev)
-        ? findPrev(imageCount.value - 1, mergedCurrentRef.value + 1)
-        : prev
+      if (isUndefined(prev)) {
+        if (props.infinite) {
+          return findPrev(imageCount.value - 1, mergedCurrentRef.value + 1)
+        }
+        else {
+          return undefined
+        }
+      }
+      return prev
     })
 
     function go(step: 1 | -1): void {
       if (step === 1) {
-        !isUndefined(prevIndex.value) && setCurrentIndex(nextIndex.value!)
-        props.onPreviewNext?.()
+        if (!isUndefined(nextIndex.value)) {
+          setCurrentIndex(nextIndex.value!)
+          props.onPreviewNext?.()
+        }
       }
       else {
-        !isUndefined(nextIndex.value) && setCurrentIndex(prevIndex.value!)
-        props.onPreviewPrev?.()
+        if (!isUndefined(prevIndex.value)) {
+          setCurrentIndex(prevIndex.value!)
+          props.onPreviewPrev?.()
+        }
       }
     }
     provide(imageGroupInjectionKey, {
@@ -244,6 +274,7 @@ export default defineComponent({
         showToolbarTooltip={this.showToolbarTooltip}
         renderToolbar={this.renderToolbar}
         onClose={this.onClose}
+        customDownload={this.customDownload}
       >
         {this.$slots}
       </NImagePreview>
