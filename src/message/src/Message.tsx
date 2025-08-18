@@ -71,6 +71,7 @@ export default defineComponent({
           fontSize,
           lineHeight,
           borderRadius,
+          border,
           iconColorInfo,
           iconColorSuccess,
           iconColorWarning,
@@ -114,7 +115,8 @@ export default defineComponent({
         '--n-close-icon-color-pressed': closeIconColorPressed,
         '--n-close-icon-color-hover': closeIconColorHover,
         '--n-line-height': lineHeight,
-        '--n-border-radius': borderRadius
+        '--n-border-radius': borderRadius,
+        '--n-border': border
       }
     })
     const themeClassHandle = inlineThemeDisabled

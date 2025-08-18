@@ -34,6 +34,7 @@
 - `n-image` 增加 showPreview 方法，关闭 [#6695](https://github.com/tusen-ai/naive-ui/issues/6695)
 - `n-image-preview`，`n-image-group` 支持单独使用
 - `n-input-otp` 增加 `focusOnChar` 方法，关闭 [#7073](https://github.com/tusen-ai/naive-ui/issues/7073)
+- `n-message` 增加 `border` 主题变量，关闭 [#7105](https://github.com/tusen-ai/naive-ui/issues/7105)
 
 ## 2.42.0
 
