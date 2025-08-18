@@ -30,6 +30,7 @@ export const tabPaneProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
+  closeTrigger: String as PropType<'hover' | 'none'>,
   tabProps: Object as PropType<HTMLAttributes>,
   /** @deprecated */
   label: [String, Number, Object, Function] as PropType<

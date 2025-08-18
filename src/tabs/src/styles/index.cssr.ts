@@ -295,12 +295,15 @@ export default cB('tabs', `
       margin-left: 6px;
       transition:
         background-color .3s var(--n-bezier),
-        color .3s var(--n-bezier);
+        color .3s var(--n-bezier),
+        opacity .3s var(--n-bezier),
+        transform .3s var(--n-bezier);
     `),
     cE('label', `
       display: flex;
       align-items: center;
       z-index: 1;
+      transition: transform .3s var(--n-bezier);
     `)
   ]),
   cB('tabs-bar', `
@@ -489,6 +492,30 @@ export default cB('tabs', `
         cM('disabled', 'color: var(--n-tab-text-color-disabled);')
       ]),
     ]),
+    cM('top, bottom', [
+      cM('card-type', [
+        cB('tabs-tab', [
+          cM('hover', [
+            cE('label', `
+            transform: translateX(var(--n-tab-label-offset));
+            `),
+            cE('close', `
+            opacity: 0;
+            transform: scale(0);
+            `),
+            c('&:hover', [
+              cE('label', `
+              transform: translateX(0);
+              `),
+              cE('close', `
+              opacity: 1;
+              transform: scale(1);
+              `)
+            ])
+          ]),
+        ])
+      ])
+    ]),
     cM('left, right', `
       flex-direction: column;  
     `, [
@@ -505,6 +532,22 @@ export default cB('tabs', `
           height: var(--n-tab-gap-vertical);
           width: 100%;
         `)
+      ]),
+      cM('card-type', [
+        cB('tabs-tab', [
+          cM('hover', [
+            cE('close', `
+            opacity: 0;
+            transform: scale(0);
+            `),
+            c('&:hover', [
+              cE('close', `
+              opacity: 1;
+              transform: scale(1);
+              `)
+            ])
+          ]),
+        ])
       ])
     ]),
     cM('top', [
