@@ -69,6 +69,10 @@ export default defineComponent({
       type: [Boolean, Object] as PropType<boolean | ModalDraggableOptions>,
       default: false
     },
+    mouseEventPenetrate: {
+      type: Boolean,
+      default: false
+    },
     ...presetProps,
     renderMask: Function as PropType<() => VNodeChild>,
     // events
@@ -271,7 +275,14 @@ export default defineComponent({
     }
     return this.displayDirective === 'show' || this.displayed || this.show
       ? withDirectives(
-          <div role="none" class={`${mergedClsPrefix}-modal-body-wrapper`}>
+          <div
+            role="none"
+            class={[
+              `${mergedClsPrefix}-modal-body-wrapper`,
+              this.mouseEventPenetrate
+              && `${mergedClsPrefix}-modal-body-wrapper--penetrate`
+            ]}
+          >
             <NScrollbar
               ref="scrollbarRef"
               theme={this.mergedTheme.peers.Scrollbar}
