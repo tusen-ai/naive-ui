@@ -19,6 +19,7 @@
 - 修复 `n-menu` 在父节点设置 `disabled`，子节点为 `type: "group"` 的禁用样式失效，关闭 [#6792](https://github.com/tusen-ai/naive-ui/issues/6792)
 - 修复 `n-input-group-label` 没有注入 `formItemInjectionKey`，导致 `size` 属性失效的问题，关闭 [#7066](https://github.com/tusen-ai/naive-ui/issues/7066)
 - 修复 `n-carousel` 只有一张图的情況下样式错乱的问题，关闭 [#6476](https://github.com/tusen-ai/naive-ui/issues/6476)
+- 修复 `n-input-number` readonly时仍然可以通过键盘的上下箭头修改值 关闭[#7112](https://github.com/tusen-ai/naive-ui/issues/7112)
 
 ### Features
 
