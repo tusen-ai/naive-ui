@@ -6,6 +6,7 @@ import type {
 } from './interface'
 import { beforeNextFrameOnce } from 'seemly'
 import { computed, type ComputedRef, type Ref, ref, watch } from 'vue'
+import { useConfig, useRtl } from '../../_mixins'
 import { formatLength } from '../../_utils'
 import { getColKey, getNumberColWidth } from './utils'
 
@@ -27,6 +28,8 @@ export function useScroll(
   const leftActiveFixedChildrenColKeysRef = ref<ColumnKey[]>([])
   const rightActiveFixedColKeyRef = ref<ColumnKey | null>(null)
   const rightActiveFixedChildrenColKeysRef = ref<ColumnKey[]>([])
+  const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
+  const rtlEnabledRef = useRtl('Scrollbar', mergedRtlRef, mergedClsPrefixRef)
   const styleScrollXRef = computed(() => {
     return formatLength(props.scrollX)
   })
@@ -89,14 +92,39 @@ export function useScroll(
     let leftWidth = 0
     const { value: fixedColumnLeftMap } = fixedColumnLeftMapRef
     let leftActiveFixedColKey: string | number | null = null
-    for (let i = 0; i < leftFixedColumns.length; ++i) {
-      const key = getColKey(leftFixedColumns[i])
-      if (lastScrollLeft > (fixedColumnLeftMap[key]?.start || 0) - leftWidth) {
-        leftActiveFixedColKey = key
-        leftWidth = fixedColumnLeftMap[key]?.end || 0
+    if (rtlEnabledRef?.value) {
+      const { value: tableWidth } = bodyWidthRef
+      if (tableWidth === null)
+        return
+      const scrollWidth = Number(props.scrollX) || tableWidth
+      const effectiveScrollLeft = scrollWidth - tableWidth + lastScrollLeft
+      for (let i = 0; i < leftFixedColumns.length; ++i) {
+        const key = getColKey(leftFixedColumns[i])
+        if (
+          effectiveScrollLeft
+          > (fixedColumnLeftMap[key]?.start || 0) - leftWidth
+        ) {
+          leftActiveFixedColKey = key
+          leftWidth = fixedColumnLeftMap[key]?.end || 0
+        }
+        else {
+          break
+        }
       }
-      else {
-        break
+    }
+    else {
+      for (let i = 0; i < leftFixedColumns.length; ++i) {
+        const key = getColKey(leftFixedColumns[i])
+        if (
+          lastScrollLeft
+          > (fixedColumnLeftMap[key]?.start || 0) - leftWidth
+        ) {
+          leftActiveFixedColKey = key
+          leftWidth = fixedColumnLeftMap[key]?.end || 0
+        }
+        else {
+          break
+        }
       }
     }
     leftActiveFixedColKeyRef.value = leftActiveFixedColKey
@@ -128,21 +156,39 @@ export function useScroll(
     let rightWidth = 0
     let rightActiveFixedColKey: string | number | null = null
     const { value: fixedColumnRightMap } = fixedColumnRightMapRef
-    for (let i = rightFixedColumns.length - 1; i >= 0; --i) {
-      const key = getColKey(rightFixedColumns[i])
-      if (
-        Math.round(
-          lastScrollLeft
-          + (fixedColumnRightMap[key]?.start || 0)
-          + tableWidth
-          - rightWidth
-        ) < scrollWidth
-      ) {
-        rightActiveFixedColKey = key
-        rightWidth = fixedColumnRightMap[key]?.end || 0
+    if (rtlEnabledRef?.value) {
+      for (let i = rightFixedColumns.length - 1; i >= 0; --i) {
+        const key = getColKey(rightFixedColumns[i])
+        const effectiveScrollLeft = Math.abs(lastScrollLeft)
+        if (
+          effectiveScrollLeft + tableWidth
+          > scrollWidth - (fixedColumnRightMap[key]?.start || 0)
+        ) {
+          rightActiveFixedColKey = key
+          rightWidth = fixedColumnRightMap[key]?.end || 0
+        }
+        else {
+          break
+        }
       }
-      else {
-        break
+    }
+    else {
+      for (let i = rightFixedColumns.length - 1; i >= 0; --i) {
+        const key = getColKey(rightFixedColumns[i])
+        if (
+          Math.round(
+            lastScrollLeft
+            + (fixedColumnRightMap[key]?.start || 0)
+            + tableWidth
+            - rightWidth
+          ) < scrollWidth
+        ) {
+          rightActiveFixedColKey = key
+          rightWidth = fixedColumnRightMap[key]?.end || 0
+        }
+        else {
+          break
+        }
       }
     }
     rightActiveFixedColKeyRef.value = rightActiveFixedColKey
@@ -240,7 +286,7 @@ export function useScroll(
     const { header } = getScrollElements()
     if (!header)
       return
-    header.scrollLeft = left
+    header.scrollLeft = left * (rtlEnabledRef?.value ? -1 : 1)
     syncScrollState()
   }
   watch(mergedCurrentPageRef, () => {
