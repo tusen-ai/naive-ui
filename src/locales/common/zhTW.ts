@@ -81,7 +81,9 @@ const zhTW: NLocale = {
     positiveText: '確定',
     negativeText: '取消',
     now: '現在',
-    clear: '清除'
+    clear: '清除',
+    am: '上午',
+    pm: '下午'
   },
   Pagination: {
     goto: '跳至',
