@@ -19,6 +19,7 @@ import {
   type PropType,
   provide,
   ref,
+  type SlotsType,
   toRaw,
   toRef,
   type VNode,
@@ -108,6 +109,7 @@ export interface DynamicInputSlots {
 export default defineComponent({
   name: 'DynamicInput',
   props: dynamicInputProps,
+  slots: Object as SlotsType<DynamicInputSlots>,
   setup(props, { slots }) {
     if (__DEV__) {
       watchEffect(() => {
