@@ -1064,7 +1064,8 @@ export default defineComponent({
                 >
                   <table
                     style={{
-                      tableLayout: this.mergedTableLayout
+                      tableLayout: this.mergedTableLayout,
+                      ...contentStyle
                     }}
                     class={`${mergedClsPrefix}-data-table-table`}
                   >
