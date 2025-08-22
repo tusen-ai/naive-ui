@@ -168,6 +168,7 @@ export function useScroll(
   function getScrollElements(): {
     header: HTMLElement | null
     body: HTMLElement | null
+    summaryStickyEl: HTMLElement | null
   } {
     const header = mainTableInstRef.value
       ? mainTableInstRef.value.getHeaderElement()
@@ -175,8 +176,12 @@ export function useScroll(
     const body = mainTableInstRef.value
       ? mainTableInstRef.value.getBodyElement()
       : null
+    const summaryStickyEl = mainTableInstRef.value
+      ? mainTableInstRef.value.getSummaryStickyEl()
+      : null
     return {
       header,
+      summaryStickyEl,
       body
     }
   }
@@ -207,7 +212,7 @@ export function useScroll(
     // We can't simply use props.scrollX to determine whether the table has
     // need to be sync since user may set column width for each column.
     // Just let it be, the scroll listener won't be triggered for a basic table.
-    const { header, body } = getScrollElements()
+    const { header, body, summaryStickyEl } = getScrollElements()
     if (!body)
       return
     const { value: tableWidth } = bodyWidthRef
@@ -222,10 +227,12 @@ export function useScroll(
       if (scrollPartRef.value === 'head') {
         lastScrollLeft = header.scrollLeft
         body.scrollLeft = lastScrollLeft
+        summaryStickyEl && (summaryStickyEl.scrollLeft = lastScrollLeft)
       }
       else {
         lastScrollLeft = body.scrollLeft
         header.scrollLeft = lastScrollLeft
+        summaryStickyEl && (summaryStickyEl.scrollLeft = lastScrollLeft)
       }
     }
     else {

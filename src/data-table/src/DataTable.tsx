@@ -251,6 +251,7 @@ export default defineComponent({
       rowKeyRef: toRef(props, 'rowKey'),
       renderExpandRef,
       summaryRef: toRef(props, 'summary'),
+      summaryStickyRef: toRef(props, 'summarySticky'),
       virtualScrollRef: toRef(props, 'virtualScroll'),
       virtualScrollXRef: toRef(props, 'virtualScrollX'),
       heightForRowRef: toRef(props, 'heightForRow'),

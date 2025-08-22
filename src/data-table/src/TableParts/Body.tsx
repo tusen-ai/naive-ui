@@ -175,6 +175,7 @@ export default defineComponent({
       renderExpandRef,
       hoverKeyRef,
       summaryRef,
+      summaryStickyRef,
       mergedSortStateRef,
       virtualScrollRef,
       virtualScrollXRef,
@@ -206,6 +207,7 @@ export default defineComponent({
     const NConfigProvider = inject(configProviderInjectionKey)
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const virtualListRef = ref<VirtualListInst | null>(null)
+    const summaryStickyElRef = ref<HTMLElement | null>(null)
     const emptyElRef = ref<HTMLElement | null>(null)
     const emptyRef = useMemo(() => paginatedDataRef.value.length === 0)
     // If header is not inside & empty is displayed, no table part would be
@@ -277,7 +279,12 @@ export default defineComponent({
       }
       doCheck(tmNode.key, true, rowInfo)
     }
-
+    function getSummaryStickyEl(): HTMLElement | null {
+      if (summaryStickyRef.value) {
+        return summaryStickyElRef.value
+      }
+      return null
+    }
     function getScrollContainer(): HTMLElement | null {
       if (!shouldDisplaySomeTablePartRef.value) {
         const { value: emptyEl } = emptyElRef
@@ -358,6 +365,7 @@ export default defineComponent({
     }
     const exposedMethods: MainTableBodyRef = {
       getScrollContainer,
+      getSummaryStickyEl,
       scrollTo(arg0: any, arg1?: any) {
         if (virtualScrollRef.value) {
           virtualListRef.value?.scrollTo(arg0, arg1)
@@ -452,6 +460,8 @@ export default defineComponent({
       virtualListRef,
       emptyElRef,
       summary: summaryRef,
+      summarySticky: summaryStickyRef,
+      summaryStickyElRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: mergedThemeRef,
       scrollX: scrollXRef,
@@ -618,7 +628,7 @@ export default defineComponent({
             const mergedPaginationData = hasChildren
               ? flatten(paginatedData, mergedExpandedRowKeySet)
               : paginatedData
-
+            let summaryRowsGlobal: RowRenderInfo[] = []
             if (summary) {
               const summaryRows = summary(this.rawPaginatedData)
               if (Array.isArray(summaryRows)) {
@@ -635,6 +645,7 @@ export default defineComponent({
                   = this.summaryPlacement === 'top'
                     ? [...summaryRowData, ...mergedPaginationData]
                     : [...mergedPaginationData, ...summaryRowData]
+                summaryRowsGlobal = summaryRowData
               }
               else {
                 const summaryRowData = {
@@ -650,6 +661,7 @@ export default defineComponent({
                   = this.summaryPlacement === 'top'
                     ? [summaryRowData, ...mergedPaginationData]
                     : [...mergedPaginationData, summaryRowData]
+                summaryRowsGlobal = [summaryRowData]
               }
             }
             else {
@@ -1032,7 +1044,57 @@ export default defineComponent({
               )
               return row
             }
-
+            const renderSummarySticky = (
+              rows: RowRenderInfo[],
+              placement: 'top' | 'bottom'
+            ) => {
+              return (
+                <div
+                  ref="summaryStickyElRef"
+                  style={{
+                    // it is very trouble to make scroll together with header and body,so use overflow:hidden
+                    overflow: 'hidden',
+                    position: 'sticky',
+                    scrollbarWidth: 'none',
+                    zIndex: 1,
+                    top: placement === 'top' ? 0 : undefined,
+                    bottom: placement === 'bottom' ? 0 : undefined
+                  }}
+                  class={`${mergedClsPrefix}-data-table-summary-sticky`}
+                >
+                  <table
+                    style={{
+                      tableLayout: this.mergedTableLayout
+                    }}
+                    class={`${mergedClsPrefix}-data-table-table`}
+                  >
+                    <colgroup>
+                      {cols.map(col => (
+                        <col key={col.key} style={col.style}></col>
+                      ))}
+                    </colgroup>
+                    <tbody
+                      data-n-id={componentId}
+                      class={`${mergedClsPrefix}-data-table-tbody`}
+                    >
+                      {rows.map((row, rowIndex) => {
+                        return renderRow({
+                          rowInfo: row,
+                          displayedRowIndex: rowIndex,
+                          isVirtual: false,
+                          isVirtualX: false,
+                          startColIndex: -1,
+                          endColIndex: -1,
+                          getLeft(_index) {
+                            return -1
+                          }
+                        })
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              )
+            }
             if (!virtualScroll) {
               return (
                 <table
@@ -1073,71 +1135,81 @@ export default defineComponent({
             }
             else {
               return (
-                <VirtualList
-                  ref="virtualListRef"
-                  items={displayedData}
-                  itemSize={this.minRowHeight}
-                  visibleItemsTag={VirtualListItemWrapper}
-                  visibleItemsProps={{
-                    clsPrefix: mergedClsPrefix,
-                    id: componentId,
-                    cols,
-                    onMouseleave: handleMouseleaveTable
-                  }}
-                  showScrollbar={false}
-                  onResize={this.handleVirtualListResize}
-                  onScroll={this.handleVirtualListScroll}
-                  itemsStyle={contentStyle}
-                  itemResizable={!virtualScrollX}
-                  columns={cols}
-                  renderItemWithCols={
-                    virtualScrollX
-                      ? ({
-                          itemIndex,
-                          item,
-                          startColIndex,
-                          endColIndex,
-                          getLeft
-                        }) => {
-                          return renderRow({
-                            displayedRowIndex: itemIndex,
-                            isVirtual: true,
-                            isVirtualX: true,
-                            rowInfo: item as RowRenderInfo,
+                <>
+                  {this.summarySticky
+                  && this.summaryPlacement === 'top'
+                  && summary
+                  && renderSummarySticky(summaryRowsGlobal, 'top')}
+                  <VirtualList
+                    ref="virtualListRef"
+                    items={displayedData}
+                    itemSize={this.minRowHeight}
+                    visibleItemsTag={VirtualListItemWrapper}
+                    visibleItemsProps={{
+                      clsPrefix: mergedClsPrefix,
+                      id: componentId,
+                      cols,
+                      onMouseleave: handleMouseleaveTable
+                    }}
+                    showScrollbar={false}
+                    onResize={this.handleVirtualListResize}
+                    onScroll={this.handleVirtualListScroll}
+                    itemsStyle={contentStyle}
+                    itemResizable={!virtualScrollX}
+                    columns={cols}
+                    renderItemWithCols={
+                      virtualScrollX
+                        ? ({
+                            itemIndex,
+                            item,
                             startColIndex,
                             endColIndex,
                             getLeft
-                          })
-                        }
-                      : undefined
-                  }
-                >
-                  {{
-                    default: ({
-                      item,
-                      index,
-                      renderedItemWithCols
-                    }: {
-                      item: RowRenderInfo
-                      index: number
-                      renderedItemWithCols: VNodeChild
-                    }) => {
-                      if (renderedItemWithCols)
-                        return renderedItemWithCols
-                      return renderRow({
-                        rowInfo: item,
-                        displayedRowIndex: index,
-                        isVirtual: true,
-                        isVirtualX: false,
-                        startColIndex: 0,
-                        endColIndex: 0,
-                        getLeft(_index) {
-                          return 0
-                        }
-                      })
+                          }) => {
+                            return renderRow({
+                              displayedRowIndex: itemIndex,
+                              isVirtual: true,
+                              isVirtualX: true,
+                              rowInfo: item as RowRenderInfo,
+                              startColIndex,
+                              endColIndex,
+                              getLeft
+                            })
+                          }
+                        : undefined
                     }
-                  }}
-                </VirtualList>
+                  >
+                    {{
+                      default: ({
+                        item,
+                        index,
+                        renderedItemWithCols
+                      }: {
+                        item: RowRenderInfo
+                        index: number
+                        renderedItemWithCols: VNodeChild
+                      }) => {
+                        if (renderedItemWithCols)
+                          return renderedItemWithCols
+                        return renderRow({
+                          rowInfo: item,
+                          displayedRowIndex: index,
+                          isVirtual: true,
+                          isVirtualX: false,
+                          startColIndex: 0,
+                          endColIndex: 0,
+                          getLeft(_index) {
+                            return 0
+                          }
+                        })
+                      }
+                    }}
+                  </VirtualList>
+                  {this.summarySticky
+                  && this.summaryPlacement === 'bottom'
+                  && summary
+                  && renderSummarySticky(summaryRowsGlobal, 'bottom')}
+                </>
               )
             }
           }

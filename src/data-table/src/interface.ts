@@ -33,6 +33,10 @@ export const dataTableProps = {
       getColumnWidth: (key: ColumnKey) => number | undefined
     ) => void
   >,
+  summarySticky: {
+    type: Boolean,
+    default: false
+  },
   pagination: {
     type: [Object, Boolean] as PropType<false | PaginationProps>,
     default: false
@@ -403,6 +407,7 @@ export interface DataTableInjection {
   rowKeyRef: Ref<CreateRowKey | undefined>
   renderExpandRef: Ref<undefined | RenderExpand>
   summaryRef: Ref<undefined | CreateSummary>
+  summaryStickyRef: Ref<boolean>
   rawPaginatedDataRef: Ref<InternalRowData[]>
   virtualScrollRef: Ref<boolean>
   virtualScrollXRef: Ref<boolean>
@@ -518,11 +523,13 @@ export type FilterState = Record<
 export interface MainTableRef {
   getHeaderElement: () => HTMLElement | null
   getBodyElement: () => HTMLElement | null
+  getSummaryStickyEl: () => HTMLElement | null
   scrollTo: ScrollTo
 }
 
 export interface MainTableBodyRef {
   getScrollContainer: () => HTMLElement | null
+  getSummaryStickyEl: () => HTMLElement | null
   scrollTo: ScrollTo
 }
 
