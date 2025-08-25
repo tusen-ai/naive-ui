@@ -10,7 +10,7 @@ function createColumns() {
     {
       title: 'Age',
       key: 'age',
-      width: 200
+      width: 500
     },
     {
       title: 'Name',
@@ -19,8 +19,7 @@ function createColumns() {
     },
     {
       title: 'Address',
-      key: 'address',
-      width: 600
+      key: 'address'
     }
   ] as any
 }
@@ -40,87 +39,87 @@ function createData() {
       address: 'London No. 1 Lake Park'
     },
     {
-      key: 1,
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      key: 1,
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      key: 1,
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      key: 1,
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      key: 1,
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      key: 1,
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      key: 1,
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      key: 1,
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      key: 1,
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      key: 1,
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      key: 1,
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      key: 1,
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      key: 1,
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
       key: 2,
+      name: 'Jim Green',
+      age: 42,
+      address: 'London No. 1 Lake Park'
+    },
+    {
+      key: 3,
+      name: 'Jim Green',
+      age: 42,
+      address: 'London No. 1 Lake Park'
+    },
+    {
+      key: 4,
+      name: 'Jim Green',
+      age: 42,
+      address: 'London No. 1 Lake Park'
+    },
+    {
+      key: 5,
+      name: 'Jim Green',
+      age: 42,
+      address: 'London No. 1 Lake Park'
+    },
+    {
+      key: 6,
+      name: 'Jim Green',
+      age: 42,
+      address: 'London No. 1 Lake Park'
+    },
+    {
+      key: 61,
+      name: 'Jim Green',
+      age: 42,
+      address: 'London No. 1 Lake Park'
+    },
+    {
+      key: 7,
+      name: 'Jim Green',
+      age: 42,
+      address: 'London No. 1 Lake Park'
+    },
+    {
+      key: 8,
+      name: 'Jim Green',
+      age: 42,
+      address: 'London No. 1 Lake Park'
+    },
+    {
+      key: 9,
+      name: 'Jim Green',
+      age: 42,
+      address: 'London No. 1 Lake Park'
+    },
+    {
+      key: 10,
+      name: 'Jim Green',
+      age: 42,
+      address: 'London No. 1 Lake Park'
+    },
+    {
+      key: 11,
+      name: 'Jim Green',
+      age: 42,
+      address: 'London No. 1 Lake Park'
+    },
+    {
+      key: 12,
+      name: 'Jim Green',
+      age: 42,
+      address: 'London No. 1 Lake Park'
+    },
+    {
+      key: 13,
+      name: 'Jim Green',
+      age: 42,
+      address: 'London No. 1 Lake Park'
+    },
+    {
+      key: 14,
       name: 'Joe Black',
-      age: 32,
+      age: 132,
       address: 'Sidney No. 1 Lake Park'
     }
   ]
@@ -131,7 +130,7 @@ function createSummary() {
     {
       name: {
         value: h('span', { style: { color: 'red' } }, '7'),
-        colSpan: 2,
+        colSpan: 1,
         rowSpan: 1
       },
       age: {
@@ -149,10 +148,10 @@ const columns = createColumns()
 <template>
   <n-data-table
     virtual-scroll
-    :scroll-x="1300"
+    :max-height="300"
     summary-placement="bottom"
     :summary-sticky="true"
-    :max-height="200"
+    :scroll-x="1200"
     :scrollbar-props="{ trigger: 'none', size: 12 }"
     :columns="columns"
     :data="data"

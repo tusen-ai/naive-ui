@@ -303,6 +303,16 @@ export default defineComponent({
         return value.containerRef
       return null
     }
+    function getNeedScrollbar(): { x: boolean, y: boolean } {
+      const { value } = scrollbarInstRef
+      if (value) {
+        return {
+          x: value.needXBarRef,
+          y: value.needYBarRef
+        }
+      }
+      return { x: false, y: false }
+    }
     // For table row with children, tmNode is non-nullable
     // For table row is expandable but is not tree data, tmNode is null
     function handleUpdateExpanded(key: RowKey, tmNode: TmNode | null): void {
@@ -524,6 +534,7 @@ export default defineComponent({
       stickyExpandedRows: stickyExpandedRowsRef,
       renderExpandIcon: renderExpandIconRef,
       scrollbarProps: scrollbarPropsRef,
+      getNeedScrollbar,
       setHeaderScrollLeft,
       handleVirtualListScroll,
       handleVirtualListResize,
@@ -549,7 +560,8 @@ export default defineComponent({
       flexHeight,
       loadingKeySet,
       onResize,
-      setHeaderScrollLeft
+      setHeaderScrollLeft,
+      getNeedScrollbar
     } = this
     const scrollable
       = scrollX !== undefined || maxHeight !== undefined || flexHeight
@@ -1058,7 +1070,8 @@ export default defineComponent({
                     scrollbarWidth: 'none',
                     zIndex: 1,
                     top: placement === 'top' ? 0 : undefined,
-                    bottom: placement === 'bottom' ? 0 : undefined
+                    bottom: placement === 'bottom' ? 0 : undefined,
+                    display: getNeedScrollbar().y ? 'block' : 'none' // only show when need scrollbar on y axis
                   }}
                   class={`${mergedClsPrefix}-data-table-summary-sticky`}
                 >

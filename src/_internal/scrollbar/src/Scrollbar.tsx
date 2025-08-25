@@ -1,4 +1,10 @@
-import type { CSSProperties, HTMLAttributes, PropType, VNode } from 'vue'
+import type {
+  ComputedRef,
+  CSSProperties,
+  HTMLAttributes,
+  PropType,
+  VNode
+} from 'vue'
 import type { ThemeProps } from '../../../_mixins'
 import type {
   ExtractInternalPropTypes,
@@ -64,6 +70,8 @@ export interface ScrollbarInstMethods {
   sync: () => void
   handleMouseEnterWrapper: () => void
   handleMouseLeaveWrapper: () => void
+  needYBarRef: ComputedRef<boolean>
+  needXBarRef: ComputedRef<boolean>
 }
 
 export interface ScrollbarInst extends ScrollbarInstMethods {
@@ -774,7 +782,9 @@ const Scrollbar = defineComponent({
       sync,
       syncUnifiedContainer,
       handleMouseEnterWrapper,
-      handleMouseLeaveWrapper
+      handleMouseLeaveWrapper,
+      needYBarRef,
+      needXBarRef
     }
     return {
       ...exposedMethods,
