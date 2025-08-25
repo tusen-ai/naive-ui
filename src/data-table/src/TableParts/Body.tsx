@@ -306,10 +306,7 @@ export default defineComponent({
     function getNeedScrollbar(): { x: boolean, y: boolean } {
       const { value } = scrollbarInstRef
       if (value) {
-        return {
-          x: value.needXBarRef,
-          y: value.needYBarRef
-        }
+        return value.getNeedBars()
       }
       return { x: false, y: false }
     }
