@@ -30,3 +30,4 @@ export type InputOtpOnUpdateValueMetaSource = 'paste' | 'input' | 'delete'
 export interface InputOtpInst {
   focusOnChar: (charIndex: number) => void
 }
+export type InputOtpDeleteBehavior = 'delAndMove' | 'delThenMove'
