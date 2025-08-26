@@ -20,6 +20,7 @@
 - 修复 `n-input-group-label` 没有注入 `formItemInjectionKey`，导致 `size` 属性失效的问题，关闭 [#7066](https://github.com/tusen-ai/naive-ui/issues/7066)
 - 修复 `n-carousel` 只有一张图的情況下样式错乱的问题，关闭 [#6476](https://github.com/tusen-ai/naive-ui/issues/6476)
 - 修复 `n-dropdown` 的 `suffix` 元素 `z-index` 层级样式遮挡问题
+- 修复 `n-menu` 的 `dropdown-props` 属性与自身的 `render-icon` `render-label` 属性共用问题
 
 ### Features
 

@@ -20,6 +20,7 @@
 - Fix `n-input-group-label` not injecting `formItemInjectionKey`, causing the `size` property to fail, and close [#7066](https://github.com/tusen-ai/naive-ui/issues/7066)
 - Fix the issue of style confusion in `n-carousel` when there is only one image, close [#6476](https://github.com/tusen-ai/naive-ui/issues/6476)
 - Fix `n-dropdown`'s `suffix` element `z-index` layer style occlusion problem.
+- Fix `n-menu`'s `dropdown-props` property shares problem with its own `render-icon` `render-label` properties.
 
 ### Features
 
