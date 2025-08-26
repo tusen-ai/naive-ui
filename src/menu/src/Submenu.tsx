@@ -128,6 +128,12 @@ export const NSubmenu = defineComponent({
       mergedClsPrefix,
       menuProps: { renderIcon, renderLabel }
     } = this
+
+    const mergedRenderIcon
+      = this.menuProps?.dropdownProps?.renderIcon || renderIcon
+    const mergedRenderLabel
+      = this.menuProps?.dropdownProps?.renderLabel || renderLabel
+
     const createSubmenuItem = (): VNode => {
       const {
         isHorizontal,
@@ -213,8 +219,8 @@ export const NSubmenu = defineComponent({
         options={this.rawNodes}
         onSelect={this.doSelect}
         inverted={this.inverted}
-        renderIcon={renderIcon}
-        renderLabel={renderLabel}
+        renderIcon={mergedRenderIcon}
+        renderLabel={mergedRenderLabel}
       >
         {{
           default: () => (
