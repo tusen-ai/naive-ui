@@ -148,7 +148,6 @@ export default cB('dropdown-menu', `
         padding: 0 8px;
         transition: color .3s var(--n-bezier);
         color: var(--n-suffix-color);
-        z-index: 1;
       `, [
         cM('has-submenu', `
           width: var(--n-option-icon-suffix-width);
