@@ -74,6 +74,10 @@ export default cB('divider', `
           `)
     ]),
   ]),
+  cE('title', `
+    white-space: nowrap;
+    font-weight: var(--n-font-weight);
+  `),
   cE('line', `
     transition:
       border-color .3s var(--n-bezier);
