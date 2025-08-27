@@ -3,7 +3,10 @@
 </markdown>
 
 <template>
-  Oops
+  Solid
   <n-divider />
-  Oops
+  Dashed
+  <n-divider type="dashed" />
+  Dotted
+  <n-divider type="dotted" />
 </template>

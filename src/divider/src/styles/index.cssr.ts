@@ -4,83 +4,82 @@ import { cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // --n-bezier
 // --n-color
 // --n-text-color
+// --n-font-size
 // --n-font-weight
+// --n-offset
+// --n-border-width
 export default cB('divider', `
   position: relative;
-  display: flex;
-  width: 100%;
+  display: grid;
   box-sizing: border-box;
-  font-size: 16px;
+  font-size: var(--n-font-size);
   color: var(--n-text-color);
   transition:
-    color .3s var(--n-bezier),
-    background-color .3s var(--n-bezier);
+    color .3s var(--n-bezier);
 `, [
-  cNotM('vertical', `
-    margin-top: 24px;
-    margin-bottom: 24px;
-  `, [
-    cNotM('no-title', `
-      display: flex;
-      align-items: center;
-    `)
+  cNotM('vertical', [
+    `
+    width: 100%;
+    align-items: center;
+    margin: var(--n-margin);
+    `,
+    cM('title-position-before', `grid-template-columns: var(--n-offset) auto 1fr;`),
+    cM('title-position-center', `grid-template-columns: 1fr auto 1fr;`),
+    cM('title-position-after', `grid-template-columns: 1fr auto var(--n-offset);`),
+    cE('title', `margin: 0 16px;`),
+    cE('line', `
+        width: 100%;
+        border-color: var(--n-color);
+        border-top-width: var(--n-border-width);
+        border-top-style: solid;
+      `),
+    cM('dashed', [
+      cE('line', `
+          border-top-style: dashed;
+        `)
+    ]),
+    cM('dotted', [
+      cE('line', `
+          border-top-style: dotted;
+        `)
+    ]),
+  ]),
+  cM('vertical', [
+    `
+    display: inline-grid;
+    vertical-align: middle;
+    min-height: 1em;
+    height: 100%;
+    justify-items: center;
+    margin: var(--n-vertical-margin);
+    `,
+    cM('title-position-before', `grid-template-rows: var(--n-offset) auto 1fr;`),
+    cM('title-position-center', `grid-template-rows: 1fr auto 1fr;`),
+    cM('title-position-after', `grid-template-rows: 1fr auto var(--n-offset);`),
+    cE('title', `margin: 16px 0;writing-mode: vertical-lr;`),
+    cE('line', `
+        height: 100%;
+        border-color: var(--n-color);
+        border-left-width: var(--n-border-width);
+        border-left-style: solid;
+      `),
+    cM('dashed', [
+      cE('line', `
+            border-left-style: dashed;
+          `)
+    ]),
+    cM('dotted', [
+      cE('line', `
+            border-left-style: dotted;
+          `)
+    ]),
   ]),
   cE('title', `
-    display: flex;
-    align-items: center;
-    margin-left: 12px;
-    margin-right: 12px;
     white-space: nowrap;
     font-weight: var(--n-font-weight);
   `),
-  cM('title-position-left', [
-    cE('line', [
-      cM('left', {
-        width: '28px'
-      })
-    ])
-  ]),
-  cM('title-position-right', [
-    cE('line', [
-      cM('right', {
-        width: '28px'
-      })
-    ])
-  ]),
-  cM('dashed', [
-    cE('line', `
-      background-color: #0000;
-      height: 0px;
-      width: 100%;
-      border-style: dashed;
-      border-width: 1px 0 0;
-    `)
-  ]),
-  cM('vertical', `
-    display: inline-block;
-    height: 1em;
-    margin: 0 8px;
-    vertical-align: middle;
-    width: 1px;
-  `),
   cE('line', `
-    border: none;
-    transition: background-color .3s var(--n-bezier), border-color .3s var(--n-bezier);
-    height: 1px;
-    width: 100%;
-    margin: 0;
-  `),
-  cNotM('dashed', [
-    cE('line', {
-      backgroundColor: 'var(--n-color)'
-    })
-  ]),
-  cM('dashed', [
-    cE('line', {
-      borderColor: 'var(--n-color)'
-    })
-  ]),
-  cM('vertical', {
-    backgroundColor: 'var(--n-color)'
-  })
+    transition:
+      border-color .3s var(--n-bezier);
+  `)
 ])

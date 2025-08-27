@@ -7,7 +7,11 @@ export function self(vars: ThemeCommonVars) {
   return {
     textColor: textColor1,
     color: dividerColor,
-    fontWeight: fontWeightStrong
+    fontWeight: fontWeightStrong,
+    borderWidth: '1px',
+    fontSize: '16px',
+    margin: '24px 0',
+    verticalMargin: '0 8px'
   }
 }
 

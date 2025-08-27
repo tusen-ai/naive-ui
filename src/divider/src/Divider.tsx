@@ -15,11 +15,20 @@ import style from './styles/index.cssr'
 
 export const dividerProps = {
   ...(useTheme.props as ThemeProps<DividerTheme>),
+  type: {
+    type: String as PropType<'solid' | 'dashed' | 'dotted'>,
+    default: 'solid'
+  },
   titlePlacement: {
-    type: String as PropType<'left' | 'center' | 'right'>,
+    type: String as PropType<'before' | 'center' | 'after' | 'left' | 'right'>,
     default: 'center'
   },
-  dashed: Boolean,
+  offset: {
+    type: Number,
+    default: 28
+  },
+  titleClass: String,
+  titleStyle: [Object, String] as PropType<string | Record<string, any>>,
   vertical: Boolean
 } as const
 
@@ -41,13 +50,26 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const {
         common: { cubicBezierEaseInOut },
-        self: { color, textColor, fontWeight }
+        self: {
+          color,
+          textColor,
+          fontWeight,
+          borderWidth,
+          fontSize,
+          margin,
+          verticalMargin
+        }
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-color': color,
         '--n-text-color': textColor,
-        '--n-font-weight': fontWeight
+        '--n-font-size': fontSize,
+        '--n-font-weight': fontWeight,
+        '--n-border-width': borderWidth,
+        '--n-margin': margin,
+        '--n-vertical-margin': verticalMargin,
+        '--n-offset': `${props.offset || 0}px`
       }
     })
     const themeClassHandle = inlineThemeDisabled
@@ -65,10 +87,20 @@ export default defineComponent({
       $slots,
       titlePlacement,
       vertical,
-      dashed,
+      type,
       cssVars,
-      mergedClsPrefix
+      mergedClsPrefix,
+      titleClass,
+      titleStyle
     } = this
+
+    const placement
+      = titlePlacement === 'left'
+        ? 'before'
+        : titlePlacement === 'right'
+          ? 'after'
+          : titlePlacement
+
     this.onRender?.()
     return (
       <div
@@ -78,24 +110,26 @@ export default defineComponent({
           this.themeClass,
           {
             [`${mergedClsPrefix}-divider--vertical`]: vertical,
-            [`${mergedClsPrefix}-divider--no-title`]: !$slots.default,
-            [`${mergedClsPrefix}-divider--dashed`]: dashed,
-            [`${mergedClsPrefix}-divider--title-position-${titlePlacement}`]:
-              $slots.default && titlePlacement
+            [`${mergedClsPrefix}-divider--${type}`]: type,
+            [`${mergedClsPrefix}-divider--title-position-${placement}`]:
+              $slots.default && placement
           }
         ]}
         style={cssVars as CSSProperties}
       >
-        {!vertical ? (
-          <div
-            class={`${mergedClsPrefix}-divider__line ${mergedClsPrefix}-divider__line--left`}
-          />
-        ) : null}
-        {!vertical && $slots.default ? (
+        <div
+          class={`${mergedClsPrefix}-divider__line ${mergedClsPrefix}-divider__line--before`}
+        />
+        {$slots.default ? (
           <>
-            <div class={`${mergedClsPrefix}-divider__title`}>{this.$slots}</div>
             <div
-              class={`${mergedClsPrefix}-divider__line ${mergedClsPrefix}-divider__line--right`}
+              class={[`${mergedClsPrefix}-divider__title`, titleClass]}
+              style={titleStyle}
+            >
+              {this.$slots}
+            </div>
+            <div
+              class={`${mergedClsPrefix}-divider__line ${mergedClsPrefix}-divider__line--after`}
             />
           </>
         ) : null}

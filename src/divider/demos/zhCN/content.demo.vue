@@ -4,16 +4,14 @@
 
 <template>
   啊
-  <n-divider title-placement="left">
-    左
+  <n-divider title-placement="before">
+    前
   </n-divider>
   啊
-  <n-divider title-placement="right">
-    右
+  <n-divider title-placement="after">
+    后
   </n-divider>
   啊
-  <n-divider dashed>
-    虚线
-  </n-divider>
+  <n-divider> 居中 </n-divider>
   啊
 </template>
