@@ -58,6 +58,10 @@ export const backTopProps = {
   listenTo: [String, Object, Function] as PropType<
     string | HTMLElement | Document | (() => HTMLElement | Document)
   >,
+  direction: {
+    type: String,
+    default: 'top'
+  },
   'onUpdate:show': {
     type: Function,
     default: () => {}
@@ -101,14 +105,23 @@ export default defineComponent({
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
 
     const scrollTopRef = ref<number | null>(null)
-    const uncontrolledShowRef = ref(false)
+    const scrollHeightRef = ref<number | null>(null)
+    const uncontrolledShowRef = ref<number | null>(null)
     watchEffect(() => {
       const { value: scrollTop } = scrollTopRef
+      const { value: scrollHeight } = scrollHeightRef
       if (scrollTop === null) {
         uncontrolledShowRef.value = false
         return
       }
-      uncontrolledShowRef.value = scrollTop >= props.visibilityHeight
+      if (props.direction === 'top') {
+        uncontrolledShowRef.value = scrollTop >= props.visibilityHeight
+      }
+      else {
+        uncontrolledShowRef.value
+          = scrollTop <= scrollHeight - props.visibilityHeight
+      }
+      // console.log(scrollTop, scrollHeight - props.visibilityHeight)
     })
     const DomInfoReadyRef = ref(false)
     watch(uncontrolledShowRef, (value) => {
@@ -180,11 +193,11 @@ export default defineComponent({
       handleScroll()
     }
     function handleClick(): void {
-      ;(isDocument(scrollElement)
+      const target = isDocument(scrollElement)
         ? document.documentElement
         : scrollElement
-      ).scrollTo({
-        top: 0,
+      target.scrollTo({
+        top: props.direction === 'top' ? 0 : target.scrollHeight,
         behavior: 'smooth'
       })
     }
@@ -192,6 +205,9 @@ export default defineComponent({
       scrollTopRef.value = (
         isDocument(scrollElement) ? document.documentElement : scrollElement
       ).scrollTop
+      scrollHeightRef.value = (
+        isDocument(scrollElement) ? document.documentElement : scrollElement
+      ).offsetHeight
       if (!DomInfoReadyRef.value) {
         void nextTick(() => {
           DomInfoReadyRef.value = true
