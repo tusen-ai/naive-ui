@@ -106,10 +106,12 @@ export default defineComponent({
 
     const scrollTopRef = ref<number | null>(null)
     const scrollHeightRef = ref<number | null>(null)
+    const clientHeightRef = ref<number | null>(null)
     const uncontrolledShowRef = ref<number | null>(null)
     watchEffect(() => {
       const { value: scrollTop } = scrollTopRef
       const { value: scrollHeight } = scrollHeightRef
+      const { value: clientHeight } = clientHeightRef
       if (scrollTop === null) {
         uncontrolledShowRef.value = false
         return
@@ -119,7 +121,7 @@ export default defineComponent({
       }
       else {
         uncontrolledShowRef.value
-          = scrollTop <= scrollHeight - props.visibilityHeight
+          = scrollTop + clientHeight <= scrollHeight - props.visibilityHeight
       }
       // console.log(scrollTop, scrollHeight - props.visibilityHeight)
     })
@@ -207,7 +209,10 @@ export default defineComponent({
       ).scrollTop
       scrollHeightRef.value = (
         isDocument(scrollElement) ? document.documentElement : scrollElement
-      ).offsetHeight
+      ).scrollHeight
+      clientHeightRef.value = (
+        isDocument(scrollElement) ? document.documentElement : scrollElement
+      ).clientHeight
       if (!DomInfoReadyRef.value) {
         void nextTick(() => {
           DomInfoReadyRef.value = true
