@@ -1,7 +1,7 @@
 <markdown>
 # Scroll to the bottom
 
-BackTop determines whether to scroll to the top or the bottom by setting the `direction`
+BackTop determines whether to scroll to the top or the bottom by setting the `direction`.
 </markdown>
 
 <script setup lang="ts"></script>
