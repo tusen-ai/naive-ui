@@ -1,4 +1,10 @@
-import type { MenuMixedOption, TmNode } from './interface'
+import type { TreeNode } from 'treemate'
+import type {
+  MenuGroupOption,
+  MenuMixedOption,
+  MenuOption,
+  TmNode
+} from './interface'
 import { useMemo } from 'vooks'
 import {
   computed,
@@ -12,7 +18,6 @@ import {
 } from 'vue'
 import { NFadeInExpandTransition } from '../../_internal'
 import { keysOf } from '../../_utils'
-
 import { NDropdown } from '../../dropdown'
 import { menuItemGroupInjectionKey, submenuInjectionKey } from './context'
 import NMenuOptionContent from './MenuOptionContent'
@@ -62,6 +67,16 @@ export const NSubmenu = defineComponent({
         return true
       return disabled
     })
+    const ancestorsAreGroupMenus = computed(() => {
+      let tmNode = props.tmNode as any as TreeNode<MenuOption, MenuGroupOption>
+      while (tmNode.parent) {
+        if (!tmNode.parent.isGroup) {
+          return false
+        }
+        tmNode = tmNode.parent
+      }
+      return true
+    })
     const dropdownShowRef = ref(false)
     provide(submenuInjectionKey, {
       paddingLeftRef: MenuChild.paddingLeft,
@@ -86,6 +101,7 @@ export const NSubmenu = defineComponent({
     }
     return {
       menuProps,
+      ancestorsAreGroupMenus,
       mergedTheme: mergedThemeRef,
       doSelect: NMenu.doSelect,
       inverted: NMenu.invertedRef,
@@ -192,7 +208,7 @@ export const NSubmenu = defineComponent({
         </NFadeInExpandTransition>
       )
     }
-    return this.root ? (
+    return this.root || this.ancestorsAreGroupMenus ? (
       <NDropdown
         size="large"
         trigger="hover"
