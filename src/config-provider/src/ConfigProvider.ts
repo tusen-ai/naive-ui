@@ -1,3 +1,4 @@
+import type { Hljs, Markdown } from '../../_mixins'
 import type { NDateLocale, NLocale } from '../../locales'
 import type {
   GlobalComponentConfig,
@@ -25,7 +26,7 @@ import {
   type PropType,
   provide
 } from 'vue'
-import { defaultClsPrefix, type Hljs } from '../../_mixins'
+import { defaultClsPrefix } from '../../_mixins'
 import { warn } from '../../_utils'
 import { configProviderInjectionKey } from './context'
 
@@ -45,6 +46,7 @@ export const configProviderProps = {
     default: 'div'
   },
   hljs: Object as PropType<Hljs>,
+  markdown: Object as PropType<Markdown>,
   katex: Object as PropType<Katex>,
   theme: Object as PropType<GlobalTheme | null>,
   themeOverrides: Object as PropType<GlobalThemeOverrides | null>,
@@ -217,6 +219,12 @@ export default defineComponent({
       mergedHljsRef: computed(() => {
         const { hljs } = props
         return hljs === undefined ? NConfigProvider?.mergedHljsRef.value : hljs
+      }),
+      mergedMarkdownRef: computed(() => {
+        const { markdown } = props
+        return markdown === undefined
+          ? NConfigProvider?.mergedMarkdownRef.value
+          : markdown
       }),
       mergedKatexRef: computed(() => {
         const { katex } = props
