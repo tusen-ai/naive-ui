@@ -1,12 +1,8 @@
 import type { TokensList } from 'marked'
-import path, { dirname } from 'node:path'
+import path from 'node:path'
 import process from 'node:process'
-import { fileURLToPath } from 'node:url'
 import fs from 'fs-extra'
 import { marked } from 'marked'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
 
 const fileRegex = /\.demo\.md$/
 
@@ -117,7 +113,7 @@ async function updateIndexEntryDemo(file: FileInfo): Promise<void> {
     const index = file.name.indexOf('.')
     const name = file.name.slice(0, index)
     indexFileContent = indexFileContent.replace(name, `${name}.vue`)
-    await fs.writeFileSync(
+    fs.writeFileSync(
       path.resolve(file.dir, './index.demo-entry.md'),
       indexFileContent
     )
@@ -157,7 +153,7 @@ async function transformMdToVueAndUpdateEntryFile(
       }
       await fs.remove(file.path)
       await fs.ensureDir(file.dir)
-      await fs.writeFileSync(
+      fs.writeFileSync(
         path.resolve(file.dir, `./${file.name}.vue`),
         `${vueDemoBlocks.join(LINE_SPACE)}\n`
       )
