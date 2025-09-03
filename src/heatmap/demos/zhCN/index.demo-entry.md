@@ -29,6 +29,8 @@ slots.vue
 
 ### Heatmap Props
 
+类型 `HeatmapProps`
+
 | 名称 | 类型 | 相关类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- | --- |
 | active-colors | `string[]` | - | `undefined` | 颜色数组，按从浅到深的顺序排列，优先级高于 `color-theme` | NEXT_VERSION |
@@ -48,6 +50,8 @@ slots.vue
 | y-gap | `number \| string` | - | `undefined` | 垂直方向间距 | NEXT_VERSION |
 
 ### Heatmap Slots
+
+类型 `HeatmapSlots`
 
 | 名称 | 参数 | 相关类型 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |

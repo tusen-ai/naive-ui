@@ -29,6 +29,8 @@ slots.vue
 
 ### Heatmap Props
 
+Type `HeatmapProps`
+
 | Name | Type | Related Type | Default | Description | Version |
 | --- | --- | --- | --- | --- | --- |
 | active-colors | `string[]` | - | `undefined` | Color array arranged from light to dark, higher priority than `color-theme`. | NEXT_VERSION |
@@ -48,6 +50,8 @@ slots.vue
 | y-gap | `number \| string` | - | `undefined` | Vertical gap | NEXT_VERSION |
 
 ### Heatmap Slots
+
+Type `HeatmapSlots`
 
 | Name | Parameters | Related Type | Description | Version |
 | --- | --- | --- | --- | --- |
