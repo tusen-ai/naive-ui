@@ -5,7 +5,7 @@ Every square is a piece of persistence, and blanks are the rhythm of life.
 </markdown>
 
 <script setup lang="ts">
-import type { WeekStartsOn } from 'naive-ui'
+import type { HeatmapFirstDayOfWeek } from 'naive-ui'
 import { heatmapMockData } from 'naive-ui'
 import { computed, ref } from 'vue'
 
@@ -68,7 +68,7 @@ const showWeekLabels = ref(true)
 const showMonthLabels = ref(true)
 const showColorIndicator = ref(true)
 const loading = ref(false)
-const weekStartsOn = ref<WeekStartsOn>(0)
+const firstDayOfWeek = ref<HeatmapFirstDayOfWeek>(0)
 const size = ref<'small' | 'medium' | 'large'>('medium')
 
 const weekStartOptions = [
@@ -125,14 +125,48 @@ const sizeOptions = [
       </n-switch>
     </n-flex>
     <n-flex align="center" justify="start">
-      <n-text>Week Starts On:</n-text>
+      <n-switch v-model:value="showWeekLabels">
+        <template #checked>
+          Show Week Labels
+        </template>
+        <template #unchecked>
+          Hide Week Labels
+        </template>
+      </n-switch>
+      <n-switch v-model:value="showMonthLabels">
+        <template #checked>
+          Show Month Labels
+        </template>
+        <template #unchecked>
+          Hide Month Labels
+        </template>
+      </n-switch>
+      <n-switch v-model:value="showColorIndicator">
+        <template #checked>
+          Show Color Indicator
+        </template>
+        <template #unchecked>
+          Hide Color Indicator
+        </template>
+      </n-switch>
+      <n-switch v-model:value="loading">
+        <template #checked>
+          Loading
+        </template>
+        <template #unchecked>
+          Normal
+        </template>
+      </n-switch>
+      <n-divider vertical />
+      <span>Week Starts On:</span>
       <n-select
-        v-model:value="weekStartsOn"
+        v-model:value="firstDayOfWeek"
         :options="weekStartOptions"
         style="width: 120px"
       />
       <n-divider vertical />
-      <n-text>Size:</n-text>
+    </n-flex>
+    <n-flex>
       <n-radio-group v-model:value="size" name="size">
         <n-radio-button
           v-for="option in sizeOptions"
@@ -169,18 +203,21 @@ const sizeOptions = [
       </n-flex>
     </n-alert>
 
-    <n-flex align="center">
-      <n-heatmap
-        :key="`heatmap-${value}-${weekStartsOn}-${size}`"
-        :data="yearData"
-        :week-starts-on="weekStartsOn"
-        :loading="loading"
-        :size="size"
-        unit="commits"
-        :show-week-labels="showWeekLabels"
-        :show-month-labels="showMonthLabels"
-        :show-color-indicator="showColorIndicator"
-      />
-    </n-flex>
+    <n-scrollbar x-scrollable style="max-width: 100%">
+      <n-flex align="center">
+        <n-heatmap
+          :key="`heatmap-${value}-${firstDayOfWeek}-${size}`"
+          :data="yearData"
+          :first-day-of-week="firstDayOfWeek"
+          :loading="loading"
+          :size="size"
+          unit="commits"
+          :show-week-labels="showWeekLabels"
+          :show-month-labels="showMonthLabels"
+          :show-color-indicator="showColorIndicator"
+          :fill-calendar-leading="value === 'recent'"
+        />
+      </n-flex>
+    </n-scrollbar>
   </n-flex>
 </template>

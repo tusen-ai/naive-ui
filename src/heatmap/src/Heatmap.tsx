@@ -41,17 +41,16 @@ interface Col {
 
 export const heatmapProps = {
   ...(useTheme.props as ThemeProps<HeatmapTheme>),
-  colors: Array as PropType<string[]>,
-  colorTheme: {
-    type: String as PropType<HeatmapColorTheme>,
-    default: 'github'
-  },
+  activeColors: Array as PropType<string[]>,
+  colorTheme: String as PropType<HeatmapColorTheme>,
   data: Array as PropType<HeatmapData>,
-  loading: Boolean,
+  fillCalendarLeading: Boolean,
   firstDayOfWeek: {
     type: Number as PropType<HeatmapFirstDayOfWeek>,
     default: 0
   },
+  loading: Boolean,
+  minimumColor: String,
   showColorIndicator: {
     type: Boolean,
     default: true
@@ -68,12 +67,12 @@ export const heatmapProps = {
     type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'
   },
-  xGap: [Number, String] as PropType<number | string>,
-  yGap: [Number, String] as PropType<number | string>,
   tooltip: {
-    type: [Boolean, Object] as PropType<TooltipProps | false>,
+    type: [Boolean, Object] as PropType<TooltipProps | boolean>,
     default: true
-  }
+  },
+  xGap: [Number, String] as PropType<number | string>,
+  yGap: [Number, String] as PropType<number | string>
 } as const
 
 export type HeatmapProps = ExtractPublicPropTypes<typeof heatmapProps>
@@ -102,11 +101,11 @@ export default defineComponent({
         self: {
           fontWeight,
           textColor,
-          borderRadius,
           borderColor,
           loadingColorStart,
           loadingColorEnd,
           [createKey('rectSize', size)]: rectSize,
+          [createKey('borderRadius', size)]: sizeBorderRadius,
           [createKey('xGap', size)]: defaultXGap,
           [createKey('yGap', size)]: defaultYGap,
           [createKey('fontSize', size)]: fontSize
@@ -118,7 +117,7 @@ export default defineComponent({
         '--n-font-size': fontSize,
         '--n-font-weight': fontWeight,
         '--n-text-color': textColor,
-        '--n-border-radius': borderRadius,
+        '--n-border-radius': sizeBorderRadius,
         '--n-border-color': borderColor,
         '--n-loading-color-start': loadingColorStart,
         '--n-loading-color-end': loadingColorEnd,
@@ -150,12 +149,17 @@ export default defineComponent({
           props
         )
       : undefined
-
     const mergedColorsRef = computed(() => {
-      if (props.colors && props.colors.length > 0) {
-        return props.colors
-      }
-      return heatmapColorThemes[props.colorTheme]
+      const {
+        mininumColor: builtInMinimumColor,
+        activeColors: builtInActiveColors
+      } = themeRef.value.self
+      const mergedMininumColor = props.minimumColor || builtInMinimumColor
+      const theme = props.colorTheme && heatmapColorThemes[props.colorTheme]
+      const mergedActiveColors
+        = props.activeColors || theme || builtInActiveColors
+
+      return [mergedMininumColor, ...mergedActiveColors]
     })
 
     const normalizedDataRef = computed(() => {
@@ -164,7 +168,8 @@ export default defineComponent({
       }
       return completeDataGaps(
         props.data,
-        transformNaiveFirstDayOfWeekToDateFns(props.firstDayOfWeek)
+        transformNaiveFirstDayOfWeekToDateFns(props.firstDayOfWeek),
+        props.fillCalendarLeading
       )
     })
 
@@ -376,9 +381,12 @@ export default defineComponent({
                               data={day}
                               color={day.color}
                               tooltip={this.tooltip}
-                              tooltipSlot={$slots.tooltip}
                               loading={loading}
-                            />
+                            >
+                              {{
+                                tooltip: () => $slots.tooltip?.(day)
+                              }}
+                            </Rect>
                           </td>
                         ) : (
                           <td
@@ -400,22 +408,32 @@ export default defineComponent({
         </div>
         <div class={`${mergedClsPrefix}-heatmap__footer`}>
           {resolveWrappedSlot(
-            $slots.info,
+            $slots.footer,
             children =>
               children && (
-                <div class={`${mergedClsPrefix}-heatmap__footer__info`}>
+                <div class={`${mergedClsPrefix}-heatmap__footer`}>
                   {children}
                 </div>
               )
           )}
-          <div class={`${mergedClsPrefix}-heatmap__footer__indicator`}>
+          <div class={`${mergedClsPrefix}-heatmap__indicator`}>
             {resolveSlot($slots.indicator, () => [
               !loading && showColorIndicator && (
                 <HeatmapColorIndicator
                   colors={mergedColors}
                   clsPrefix={mergedClsPrefix}
-                  indicatorText={[locale.less, locale.more]}
-                />
+                >
+                  {{
+                    'leading-text': () =>
+                      resolveSlot($slots['indicator-leading-text'], () => [
+                        locale.less
+                      ]),
+                    'trailing-text': () =>
+                      resolveSlot($slots['indicator-trailing-text'], () => [
+                        locale.more
+                      ])
+                  }}
+                </HeatmapColorIndicator>
               )
             ])}
           </div>
