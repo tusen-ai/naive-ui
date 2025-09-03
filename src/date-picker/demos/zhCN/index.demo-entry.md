@@ -29,6 +29,7 @@ footerslot.vue
 status.vue
 icon.vue
 panel.vue
+prefix.vue
 panel-debug.vue
 form-debug.vue
 ```
@@ -201,6 +202,7 @@ form-debug.vue
 | prev-month | `()` | 日期面板的 `上一个` 图标     | 2.33.4 |
 | prev-year  | `()` | 日期面板的 `快速上一个` 图标 | 2.33.4 |
 | separator  | `()` | 日期范围分隔符号             | 2.29.0 |
+| prefix     | `()` | 日期前缀                     |        |
 
 ### Date, Year, QuarterRange, Week Slots
 
