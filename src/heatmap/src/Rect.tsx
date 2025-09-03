@@ -27,6 +27,7 @@ export default defineComponent({
     },
     style: Object,
     loading: Boolean,
+    loadingClass: String,
     tooltip: {
       type: [Boolean, Object] as PropType<PopoverProps | boolean>,
       default: true
@@ -67,7 +68,8 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-heatmap-rect`,
-          loading && `${mergedClsPrefix}-heatmap-rect--loading`
+          loading && `${mergedClsPrefix}-heatmap-rect--loading`,
+          loading && this.loadingClass
         ]}
         style={[cssVars, style]}
       />

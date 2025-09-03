@@ -23,6 +23,7 @@ import {
 import { createKey, resolveSlot, resolveWrappedSlot } from '../../_utils'
 import { transformNaiveFirstDayOfWeekToDateFns } from '../../date-picker/src/utils'
 import heatmapLight from '../styles/light'
+import { useLoadingStyleClass } from './animationStyle'
 import HeatmapColorIndicator from './ColorIndicator'
 import Rect from './Rect'
 import style from './styles/index.cssr'
@@ -103,7 +104,6 @@ export default defineComponent({
           textColor,
           borderColor,
           loadingColorStart,
-          loadingColorEnd,
           [createKey('rectSize', size)]: rectSize,
           [createKey('borderRadius', size)]: sizeBorderRadius,
           [createKey('xGap', size)]: defaultXGap,
@@ -111,7 +111,6 @@ export default defineComponent({
           [createKey('fontSize', size)]: fontSize
         }
       } = themeRef.value
-
       const cssVars = {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-font-size': fontSize,
@@ -120,7 +119,6 @@ export default defineComponent({
         '--n-border-radius': sizeBorderRadius,
         '--n-border-color': borderColor,
         '--n-loading-color-start': loadingColorStart,
-        '--n-loading-color-end': loadingColorEnd,
         '--n-rect-size': rectSize,
         '--n-x-gap':
           xGap !== undefined
@@ -297,6 +295,8 @@ export default defineComponent({
         : dataMonthLabelsRef.value
     })
 
+    const loadingClassRef = useLoadingStyleClass(props, themeRef)
+
     return {
       weekLabels: weekLabelsRef,
       monthLabels: monthLabelsRef,
@@ -307,7 +307,8 @@ export default defineComponent({
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
-      heatmapMatrix: heatmapMatrixRef
+      heatmapMatrix: heatmapMatrixRef,
+      loadingClass: loadingClassRef
     }
   },
   render() {
@@ -326,6 +327,7 @@ export default defineComponent({
       mergedColors,
       $slots,
       heatmapMatrix,
+      loadingClass,
       onRender
     } = this
     onRender?.()
@@ -382,6 +384,7 @@ export default defineComponent({
                               color={day.color}
                               tooltip={this.tooltip}
                               loading={loading}
+                              loadingClass={loadingClass}
                             >
                               {{
                                 tooltip: () => $slots.tooltip?.(day)
