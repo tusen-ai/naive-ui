@@ -2,7 +2,6 @@ import type { MessageRenderMessage, MessageType } from './types'
 /* eslint-disable no-cond-assign */
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   inject,
@@ -165,7 +164,7 @@ export default defineComponent({
               ? 'flex-start'
               : 'flex-end'
           },
-          cssVars as CSSProperties
+          cssVars
         ]}
       >
         {renderMessage ? (

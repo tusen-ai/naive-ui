@@ -16,7 +16,6 @@ import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   type ExtractPropTypes,
   h,
@@ -24,6 +23,7 @@ import {
   type Ref,
   ref,
   type SlotsType,
+  type StyleValue,
   toRef,
   Transition,
   type VNode,
@@ -958,7 +958,7 @@ export default defineComponent({
     const { clearable, triggerOnRender, mergedClsPrefix, $slots } = this
     const commonPanelProps: UsePanelCommonProps & {
       ref: string
-      style: CSSProperties
+      style: StyleValue
     } = {
       onUpdateValue: this.handlePanelUpdateValue,
       onTabOut: this.handlePanelTabOut,
@@ -971,7 +971,7 @@ export default defineComponent({
       active: this.mergedShow,
       actions: this.actions,
       shortcuts: this.shortcuts,
-      style: this.cssVars as CSSProperties,
+      style: this.cssVars,
       defaultTime: this.defaultTime,
       themeClass: this.themeClass,
       panel: this.panel,
@@ -1060,7 +1060,7 @@ export default defineComponent({
           this.isRange && `${mergedClsPrefix}-date-picker--range`,
           this.triggerThemeClass
         ]}
-        style={this.triggerCssVars as CSSProperties}
+        style={this.triggerCssVars}
         onKeydown={this.handleKeydown}
       >
         <VBinder>

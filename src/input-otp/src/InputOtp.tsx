@@ -1,5 +1,5 @@
 import type { InputInst } from 'naive-ui'
-import type { CSSProperties, PropType, SlotsType } from 'vue'
+import type { PropType, SlotsType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/public-types'
@@ -348,7 +348,7 @@ export default defineComponent({
     onRender?.()
     return (
       <div
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
         class={[
           `${mergedClsPrefix}-input-otp`,
           themeClass,

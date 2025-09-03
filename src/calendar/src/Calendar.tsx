@@ -19,7 +19,6 @@ import {
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   Fragment,
   h,
@@ -227,7 +226,7 @@ export default defineComponent({
     return (
       <div
         class={[`${mergedClsPrefix}-calendar`, this.themeClass]}
-        style={cssVars as CSSProperties}
+        style={cssVars}
       >
         <div class={`${mergedClsPrefix}-calendar-header`}>
           <div class={`${mergedClsPrefix}-calendar-header__title`}>

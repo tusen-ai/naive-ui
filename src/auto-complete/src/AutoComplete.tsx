@@ -27,7 +27,6 @@ import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   type HTMLAttributes,
@@ -451,10 +450,7 @@ export default defineComponent({
                                 this.themeClass,
                                 menuProps?.class
                               ]}
-                              style={[
-                                menuProps?.style,
-                                this.cssVars as CSSProperties
-                              ]}
+                              style={[menuProps?.style, this.cssVars]}
                               treeMate={this.treeMate}
                               multiple={false}
                               renderLabel={this.renderLabel}
