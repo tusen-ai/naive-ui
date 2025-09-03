@@ -196,9 +196,13 @@ export default defineComponent({
           transformNaiveFirstDayOfWeekToDateFns(props.firstDayOfWeek)
         )
       }
+
+      const finalData = props.loading ? loadingData : data
+      if (!finalData.length)
+        return []
+
       const maxValue = maxValueRef.value
       const colors = mergedColorsRef.value
-      const finalData = props.loading ? loadingData : data
       const calendarStartDate = finalData[0].timestamp
 
       const dayRects = finalData.map(item =>
@@ -384,7 +388,7 @@ export default defineComponent({
                         {weekLabel.visible ? weekLabel.label : null}
                       </td>
                     )}
-                    {heatmapMatrix[rowIdx].map(
+                    {(heatmapMatrix[rowIdx] || []).map(
                       (day: DayRect, weekIdx: number) => {
                         return day.value !== null ? (
                           <td
