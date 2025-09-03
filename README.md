@@ -7,6 +7,15 @@
 <p align="center"><b>Fairly Complete, Theme Customizable, Uses TypeScript, Fast</b></p>
 <p align="center">Kinda Interesting</p>
 
+<p align="center">
+  <a href="https://npmjs.com/package/naive-ui">
+    <img src="https://img.shields.io/npm/v/naive-ui.svg" alt="npm">
+  </a>
+  <a href="https://pkg.pr.new/~/tusen-ai/naive-ui">
+    <img src="https://pkg.pr.new/badge/tusen-ai/naive-ui" alt="pkg.pr.new">
+  </a>
+</p>
+
 <p align="center">English | <a href="README.zh-CN.md">中文</a></p>
 
 ## Documentation
