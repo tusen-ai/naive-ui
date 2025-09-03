@@ -18,7 +18,6 @@ import { depx, getPadding, happensIn } from 'seemly'
 import { createIndexGetter, type TreeNode } from 'treemate'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   nextTick,
@@ -476,7 +475,7 @@ export default defineComponent({
           themeClass,
           this.multiple && `${clsPrefix}-base-select-menu--multiple`
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
         onFocusin={this.handleFocusin}
         onFocusout={this.handleFocusout}
         onKeyup={this.handleKeyUp}

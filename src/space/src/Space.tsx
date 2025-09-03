@@ -5,10 +5,10 @@ import { depx, getGap } from 'seemly'
 import {
   Comment,
   computed,
-  type CSSProperties,
   defineComponent,
   h,
-  type PropType
+  type PropType,
+  type StyleValue
 } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
@@ -54,7 +54,7 @@ export const spaceProps = {
     default: true
   },
   itemClass: String,
-  itemStyle: [String, Object] as PropType<string | CSSProperties>,
+  itemStyle: Object as PropType<StyleValue>,
   wrap: {
     type: Boolean,
     default: true
@@ -175,7 +175,7 @@ export default defineComponent({
                   role="none"
                   class={itemClass}
                   style={[
-                    itemStyle as any,
+                    itemStyle,
                     {
                       maxWidth: '100%'
                     },

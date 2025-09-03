@@ -84,7 +84,7 @@ feedback-style.vue
 | label-align | `'left' \| 'right'` | `undefined` | Text alignment inside the label. If not set, it will inherit the parent form's `label-align`. |  |
 | label-placement | `'left' \| 'top'` | `undefined` | If not set, it will inherit the parent form's `label-placement`. |  |
 | label-props | `LabelHTMLAttributes` | `undefined` | HTML attributes of the label element inside form item. | 2.24.0 |
-| label-style | `CSSProperties \| string` | `undefined` | Label style. |  |
+| label-style | `StyleValue` | Label style. |  |
 | label-width | `number \| string \| 'auto'` | `undefined` | If not set, it will inherit the parent form's `label-width`,`'auto'` means label width will be auto adjusted. |  |
 | path | `string` | `undefined` | The path to use in the parent form's model object. |  |
 | required | `boolean` | `false` | Whether to show the "required" symbol. Note: a required rule has higher priority than this prop & this prop **won't** have any effect on validation. Validation still depends on rules. |  |

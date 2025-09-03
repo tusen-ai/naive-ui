@@ -1,7 +1,6 @@
 import type { ExtractPublicPropTypes } from '../../_utils'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   inject,
@@ -129,7 +128,7 @@ export default defineComponent({
           `${mergedClsPrefix}-timeline-item--${this.type}-type`,
           `${mergedClsPrefix}-timeline-item--${this.lineType}-line-type`
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         <div class={`${mergedClsPrefix}-timeline-item-timeline`}>
           <div class={`${mergedClsPrefix}-timeline-item-timeline__line`} />

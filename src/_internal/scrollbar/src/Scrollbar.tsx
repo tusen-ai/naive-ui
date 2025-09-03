@@ -1,4 +1,4 @@
-import type { CSSProperties, HTMLAttributes, PropType, VNode } from 'vue'
+import type { HTMLAttributes, PropType, StyleValue, VNode } from 'vue'
 import type { ThemeProps } from '../../../_mixins'
 import type {
   ExtractInternalPropTypes,
@@ -94,11 +94,11 @@ const scrollbarProps = {
   container: Function as PropType<() => HTMLElement | null | undefined>,
   content: Function as PropType<() => HTMLElement | null | undefined>,
   containerClass: String,
-  containerStyle: [String, Object] as PropType<string | CSSProperties>,
+  containerStyle: Object as PropType<StyleValue>,
   contentClass: [String, Array] as PropType<string | Array<string | undefined>>,
-  contentStyle: [String, Object] as PropType<string | CSSProperties>,
-  horizontalRailStyle: [String, Object] as PropType<string | CSSProperties>,
-  verticalRailStyle: [String, Object] as PropType<string | CSSProperties>,
+  contentStyle: Object as PropType<StyleValue>,
+  horizontalRailStyle: Object as PropType<StyleValue>,
+  verticalRailStyle: Object as PropType<StyleValue>,
   onScroll: Function as PropType<(e: Event) => void>,
   onWheel: Function as PropType<(e: WheelEvent) => void>,
   onResize: Function as PropType<(e: ResizeObserverEntry) => void>,
@@ -821,7 +821,7 @@ const Scrollbar = defineComponent({
     const triggerIsNone = this.trigger === 'none'
     const createYRail = (
       className: string | undefined,
-      style: CSSProperties | undefined
+      style?: StyleValue
     ): VNode => {
       return (
         <div
@@ -833,7 +833,7 @@ const Scrollbar = defineComponent({
             className
           ]}
           data-scrollbar-rail
-          style={[style || '', this.verticalRailStyle as CSSProperties]}
+          style={[style, this.verticalRailStyle]}
           aria-hidden
         >
           {h(
@@ -897,14 +897,12 @@ const Scrollbar = defineComponent({
                     <div
                       ref="contentRef"
                       role="none"
-                      style={
-                        [
-                          {
-                            width: this.xScrollable ? 'fit-content' : null
-                          },
-                          this.contentStyle
-                        ] as any
-                      }
+                      style={[
+                        {
+                          width: this.xScrollable ? 'fit-content' : undefined
+                        },
+                        this.contentStyle
+                      ]}
                       class={[
                         `${mergedClsPrefix}-scrollbar-content`,
                         this.contentClass

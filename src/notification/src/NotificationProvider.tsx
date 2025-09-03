@@ -2,7 +2,6 @@ import type { MergedTheme, ThemeProps } from '../../_mixins'
 import type { NotificationOptions } from './NotificationEnvironment'
 import { createId } from 'seemly'
 import {
-  type CSSProperties,
   defineComponent,
   type ExtractPropTypes,
   Fragment,
@@ -12,6 +11,7 @@ import {
   reactive,
   type Ref,
   ref,
+  type StyleValue,
   Teleport
 } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
@@ -81,7 +81,7 @@ interface NotificationRef {
 export const notificationProviderProps = {
   ...(useTheme.props as ThemeProps<NotificationTheme>),
   containerClass: String,
-  containerStyle: [String, Object] as PropType<string | CSSProperties>,
+  containerStyle: Object as PropType<StyleValue>,
   to: [String, Object] as PropType<string | HTMLElement>,
   scrollable: {
     type: Boolean,

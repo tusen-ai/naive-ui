@@ -13,13 +13,13 @@ import type {
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   nextTick,
   type PropType,
   ref,
   type SlotsType,
+  type StyleValue,
   toRef,
   type VNode,
   type VNodeChild,
@@ -60,11 +60,11 @@ export const dynamicTagsProps = {
   },
   value: Array as PropType<Array<string | DynamicTagsOption>>,
   inputClass: String,
-  inputStyle: [String, Object] as PropType<string | CSSProperties>,
+  inputStyle: Object as PropType<StyleValue>,
   inputProps: Object as PropType<InputProps>,
   max: Number as PropType<number>,
   tagClass: String,
-  tagStyle: [String, Object] as PropType<string | CSSProperties>,
+  tagStyle: Object as PropType<StyleValue>,
   renderTag: Function as PropType<
     | ((tag: string, index: number) => VNodeChild)
     | ((tag: DynamicTagsOption, index: number) => VNodeChild)

@@ -1,7 +1,6 @@
 import type { ExtractPublicPropTypes } from '../../_utils'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   inject,
@@ -191,7 +190,7 @@ export default defineComponent({
           descriptionNode && `${mergedClsPrefix}-step--show-description`,
           `${mergedClsPrefix}-step--${this.mergedStatus}-status`
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
         onClick={handleStepClick}
       >
         <div class={`${mergedClsPrefix}-step-indicator`}>

@@ -1,4 +1,4 @@
-import type { CSSProperties, Ref, VNode } from 'vue'
+import type { Ref, StyleValue, VNode } from 'vue'
 import { createInjectionKey } from '../../_utils/vue/create-injection-key'
 
 export type PopoverTrigger = 'click' | 'hover' | 'focus' | 'manual'
@@ -20,7 +20,7 @@ export const popoverBodyInjectionKey
 export type InternalRenderBody = (
   className: any,
   ref: Ref<HTMLElement | null>,
-  style: CSSProperties[],
+  style: StyleValue[],
   onMouseenter: (e: MouseEvent) => void,
   onMouseleave: (e: MouseEvent) => void
 ) => VNode

@@ -35,7 +35,6 @@ import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   nextTick,
@@ -558,11 +557,7 @@ export default defineComponent({
           onDragstart={(e) => {
             e.preventDefault()
           }}
-          style={
-            inlineThemeDisabled
-              ? undefined
-              : (cssVarsRef.value as CSSProperties)
-          }
+          style={inlineThemeDisabled ? undefined : cssVarsRef.value}
         >
           <div class={`${mergedClsPrefix}-color-picker-control`}>
             <Pallete
@@ -715,7 +710,7 @@ export default defineComponent({
       <div
         class={[this.themeClass, `${mergedClsPrefix}-color-picker`]}
         ref="selfRef"
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         <VBinder>
           {{

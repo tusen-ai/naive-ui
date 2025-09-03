@@ -5,7 +5,6 @@ import type { RateOnUpdateValue, RateOnUpdateValueImpl } from './interface'
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   type PropType,
@@ -196,7 +195,7 @@ export default defineComponent({
           },
           this.themeClass
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
         onMouseleave={this.handleMouseLeave}
       >
         {renderList(this.count, (_, index) => {

@@ -1,10 +1,10 @@
 import type { TreeMate, TreeNode } from 'treemate'
 import type {
-  CSSProperties,
   ExtractPropTypes,
   HTMLAttributes,
   PropType,
   Ref,
+  StyleValue,
   VNode,
   VNodeChild
 } from 'vue'
@@ -398,7 +398,7 @@ export interface DataTableInjection {
   mergedCheckedRowKeySetRef: Ref<Set<RowKey>>
   mergedInderminateRowKeySetRef: Ref<Set<RowKey>>
   localeRef: Ref<NLocale['DataTable']>
-  filterMenuCssVarsRef: Ref<CSSProperties>
+  filterMenuCssVarsRef: Ref<StyleValue>
   mergedExpandedRowKeysRef: Ref<RowKey[]>
   rowKeyRef: Ref<CreateRowKey | undefined>
   renderExpandRef: Ref<undefined | RenderExpand>

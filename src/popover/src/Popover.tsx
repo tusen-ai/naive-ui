@@ -16,7 +16,6 @@ import {
   cloneVNode,
   computed,
   type ComputedRef,
-  type CSSProperties,
   defineComponent,
   h,
   type PropType,
@@ -24,6 +23,7 @@ import {
   type Ref,
   ref,
   type SlotsType,
+  type StyleValue,
   Text,
   toRef,
   type VNode,
@@ -149,9 +149,9 @@ export const popoverBaseProps = {
     default: 'if'
   },
   arrowClass: String,
-  arrowStyle: [String, Object] as PropType<string | CSSProperties>,
+  arrowStyle: Object as PropType<StyleValue>,
   arrowWrapperClass: String,
-  arrowWrapperStyle: [String, Object] as PropType<string | CSSProperties>,
+  arrowWrapperStyle: Object as PropType<StyleValue>,
   flip: {
     type: Boolean,
     default: true
@@ -173,11 +173,11 @@ export const popoverBaseProps = {
   to: useAdjustedTo.propTo,
   scrollable: Boolean,
   contentClass: String,
-  contentStyle: [Object, String] as PropType<CSSProperties | string>,
+  contentStyle: Object as PropType<StyleValue>,
   headerClass: String,
-  headerStyle: [Object, String] as PropType<CSSProperties | string>,
+  headerStyle: Object as PropType<StyleValue>,
   footerClass: String,
-  footerStyle: [Object, String] as PropType<CSSProperties | string>,
+  footerStyle: Object as PropType<StyleValue>,
   // events
   onClickoutside: Function as PropType<(e: MouseEvent) => void>,
   'onUpdate:show': [Function, Array] as PropType<

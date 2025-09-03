@@ -16,13 +16,13 @@ import { createTreeMate, type TreeNode } from 'treemate'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   nextTick,
   type PropType,
   ref,
   type SlotsType,
+  type StyleValue,
   toRef,
   Transition,
   type VNode
@@ -476,7 +476,7 @@ export default defineComponent({
               <VTarget>
                 {{
                   default: () => {
-                    const style: CSSProperties = {
+                    const style: StyleValue = {
                       position: 'absolute',
                       width: 0
                     }
@@ -522,7 +522,7 @@ export default defineComponent({
                               loading={this.loading}
                               treeMate={this.treeMate}
                               virtualScroll={false}
-                              style={this.cssVars as any}
+                              style={this.cssVars}
                               onToggle={this.handleSelect}
                               renderLabel={this.renderLabel}
                             >

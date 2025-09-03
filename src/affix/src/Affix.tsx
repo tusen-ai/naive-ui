@@ -3,13 +3,13 @@ import type { ScrollTarget } from './utils'
 import { beforeNextFrameOnce, unwrapElement } from 'seemly'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   onBeforeUnmount,
   onMounted,
   type PropType,
-  ref
+  ref,
+  type StyleValue
 } from 'vue'
 import { useConfig, useStyle } from '../../_mixins'
 import { keysOf, warn } from '../../_utils'
@@ -184,8 +184,8 @@ export default defineComponent({
       selfRef,
       affixed: affixedRef,
       mergedClsPrefix: mergedClsPrefixRef,
-      mergedstyle: computed<CSSProperties>(() => {
-        const style: CSSProperties = {}
+      mergedstyle: computed<StyleValue>(() => {
+        const style: StyleValue = {}
         if (
           stickToTopRef.value
           && mergedOffsetTopRef.value !== undefined

@@ -7,7 +7,7 @@ import type {
   TableExpandColumn,
   TableSelectionColumn
 } from './interface'
-import { computed, type ComputedRef, type CSSProperties } from 'vue'
+import { computed, type ComputedRef, type StyleValue } from 'vue'
 import { formatLength } from '../../_utils'
 import { createCustomWidthStyle, getColKey } from './utils'
 
@@ -20,7 +20,7 @@ export interface RowItem {
 }
 export interface ColItem {
   key: string | number
-  style: CSSProperties
+  style: StyleValue
   column: TableSelectionColumn | TableExpandColumn | TableBaseColumn
   index: number
   /**

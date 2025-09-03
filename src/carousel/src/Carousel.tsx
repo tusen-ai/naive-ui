@@ -3,6 +3,7 @@ import type {
   PropType,
   Ref,
   SlotsType,
+  StyleValue,
   TransitionProps,
   VNode
 } from 'vue'
@@ -130,8 +131,8 @@ export const carouselProps = {
   },
   transitionProps: Object as PropType<TransitionProps>,
   draggable: Boolean,
-  prevSlideStyle: [Object, String] as PropType<CSSProperties | string>,
-  nextSlideStyle: [Object, String] as PropType<CSSProperties | string>,
+  prevSlideStyle: Object as PropType<StyleValue>,
+  nextSlideStyle: Object as PropType<StyleValue>,
   touchable: {
     type: Boolean,
     default: true
@@ -280,7 +281,7 @@ export default defineComponent({
       }
       const { effect, spaceBetween } = props
       const { value: spaceAxis } = spaceAxisRef
-      return slidesEls.reduce<CSSProperties[]>((styles, _, i) => {
+      return slidesEls.reduce<StyleValue[]>((styles, _, i) => {
         const style = {
           ...getSlideSize(i),
           [`margin-${spaceAxis}`]: `${spaceBetween}px`
@@ -438,7 +439,7 @@ export default defineComponent({
 
     // record the translate of each slide, so that it can be restored at touch
     let previousTranslate = 0
-    const translateStyleRef = ref({}) as Ref<CSSProperties>
+    const translateStyleRef = ref({}) as Ref<TransitionStyle>
     function updateTranslate(translate: number, speed = 0): void {
       translateStyleRef.value = Object.assign({}, transitionStyleRef.value, {
         transform: verticalRef.value
@@ -545,7 +546,7 @@ export default defineComponent({
     ): string | Record<string, string | number> | undefined {
       const index = getSlideIndex(slide)
       if (index !== -1) {
-        const styles: any[] = [slideStylesRef.value[index]]
+        const styles = [slideStylesRef.value[index]]
         const isPrev = carouselContext.isPrev(index)
         const isNext = carouselContext.isNext(index)
         if (isPrev) {
@@ -1010,7 +1011,7 @@ export default defineComponent({
           `${mergedClsPrefix}-carousel--${this.effect}`,
           userWantsControl && `${mergedClsPrefix}-carousel--usercontrol`
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
         {...slidesControlListeners}
         onMouseenter={this.handleMouseenter}
         onMouseleave={this.handleMouseleave}

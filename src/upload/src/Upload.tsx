@@ -31,7 +31,6 @@ import { createId } from 'seemly'
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   Fragment,
   h,
@@ -40,6 +39,7 @@ import {
   type PropType,
   provide,
   ref,
+  type StyleValue,
   Teleport,
   toRef
 } from 'vue'
@@ -349,7 +349,7 @@ export const uploadProps = {
   >,
   onUpdateFileList: [Function, Array] as PropType<MaybeArray<OnUpdateFileList>>,
   fileListClass: String,
-  fileListStyle: [String, Object] as PropType<string | CSSProperties>,
+  fileListStyle: Object as PropType<StyleValue>,
   defaultFileList: {
     type: Array as PropType<UploadFileInfo[]>,
     default: () => []
@@ -394,7 +394,7 @@ export const uploadProps = {
   imageGroupProps: Object as PropType<ImageGroupProps>,
   inputProps: Object as PropType<InputHTMLAttributes>,
   triggerClass: String,
-  triggerStyle: [String, Object] as PropType<CSSProperties | string>,
+  triggerStyle: Object as PropType<StyleValue>,
   renderIcon: Function as PropType<RenderIcon>
 } as const
 
