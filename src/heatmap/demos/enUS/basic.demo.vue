@@ -123,40 +123,6 @@ const sizeOptions = [
           Normal
         </template>
       </n-switch>
-    </n-flex>
-    <n-flex align="center" justify="start">
-      <n-switch v-model:value="showWeekLabels">
-        <template #checked>
-          Show Week Labels
-        </template>
-        <template #unchecked>
-          Hide Week Labels
-        </template>
-      </n-switch>
-      <n-switch v-model:value="showMonthLabels">
-        <template #checked>
-          Show Month Labels
-        </template>
-        <template #unchecked>
-          Hide Month Labels
-        </template>
-      </n-switch>
-      <n-switch v-model:value="showColorIndicator">
-        <template #checked>
-          Show Color Indicator
-        </template>
-        <template #unchecked>
-          Hide Color Indicator
-        </template>
-      </n-switch>
-      <n-switch v-model:value="loading">
-        <template #checked>
-          Loading
-        </template>
-        <template #unchecked>
-          Normal
-        </template>
-      </n-switch>
       <n-divider vertical />
       <span>Week Starts On:</span>
       <n-select
@@ -185,7 +151,6 @@ const sizeOptions = [
         />
       </n-radio-group>
     </n-flex>
-
     <n-alert type="success" title="Data Statistics">
       <n-flex>
         <n-tag round type="info">
@@ -202,22 +167,19 @@ const sizeOptions = [
         </n-tag>
       </n-flex>
     </n-alert>
-
     <n-scrollbar x-scrollable style="max-width: 100%">
-      <n-flex align="center">
-        <n-heatmap
-          :key="`heatmap-${value}-${firstDayOfWeek}-${size}`"
-          :data="yearData"
-          :first-day-of-week="firstDayOfWeek"
-          :loading="loading"
-          :size="size"
-          unit="commits"
-          :show-week-labels="showWeekLabels"
-          :show-month-labels="showMonthLabels"
-          :show-color-indicator="showColorIndicator"
-          :fill-calendar-leading="value === 'recent'"
-        />
-      </n-flex>
+      <n-heatmap
+        :data="yearData"
+        :loading-data="yearData"
+        :first-day-of-week="firstDayOfWeek"
+        :loading="loading"
+        :size="size"
+        unit="commits"
+        :show-week-labels="showWeekLabels"
+        :show-month-labels="showMonthLabels"
+        :show-color-indicator="showColorIndicator"
+        :fill-calendar-leading="value === 'recent'"
+      />
     </n-scrollbar>
   </n-flex>
 </template>

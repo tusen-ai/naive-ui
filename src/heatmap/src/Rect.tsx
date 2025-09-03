@@ -6,7 +6,7 @@ import { resolveSlotWithTypedProps } from '../../_utils'
 import Tooltip from '../../tooltip/src/Tooltip'
 
 export interface RectSlots {
-  tooltip?: (data: HeatmapDataItem) => VNode[]
+  tooltip?: (props: HeatmapDataItem) => VNode[]
 }
 
 export default defineComponent({
@@ -44,7 +44,7 @@ export default defineComponent({
 
     const defaultTooltipContentRef = computed(() => {
       const date = new Date(props.data.timestamp).toLocaleDateString()
-      return props.data.value !== null ? `${date}: ${props.data.value}` : date
+      return props.data.value !== null ? `${date} ${props.data.value}` : date
     })
 
     return {

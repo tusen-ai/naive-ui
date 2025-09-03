@@ -168,19 +168,17 @@ const sizeOptions = [
       </n-flex>
     </n-alert>
     <n-scrollbar x-scrollable style="max-width: 100%">
-      <n-flex align="center">
-        <n-heatmap
-          :key="`heatmap-${value}-${firstDayOfWeek}-${size}`"
-          :data="yearData"
-          :first-day-of-week="firstDayOfWeek"
-          :loading="loading"
-          :size="size"
-          :show-week-labels="showWeekLabels"
-          :show-month-labels="showMonthLabels"
-          :show-color-indicator="showColorIndicator"
-          :fill-calendar-leading="value === 'recent'"
-        />
-      </n-flex>
+      <n-heatmap
+        :data="yearData"
+        :loading-data="yearData"
+        :first-day-of-week="firstDayOfWeek"
+        :loading="loading"
+        :size="size"
+        :show-week-labels="showWeekLabels"
+        :show-month-labels="showMonthLabels"
+        :show-color-indicator="showColorIndicator"
+        :fill-calendar-leading="value === 'recent'"
+      />
     </n-scrollbar>
   </n-flex>
 </template>

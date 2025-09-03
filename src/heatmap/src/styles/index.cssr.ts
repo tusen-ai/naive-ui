@@ -92,6 +92,7 @@ export default c([
     border-radius: var(--n-border-radius);
     background-color: var(--n-rect-color);
     cursor: pointer;
+    transition: background-color .3s var(--n-bezier);
   `, [
     cM('loading', `
       cursor: default;
@@ -107,12 +108,13 @@ export default c([
   `, [
     cE('cells', `
       display: flex;
-      gap: 2px;
+      gap: var(--n-x-gap);
     `),
     cE('cell', `
       width: var(--n-rect-size);
       height: var(--n-rect-size);
       border-radius: var(--n-border-radius);
+      transition: background-color .3s var(--n-bezier);
     `),
     cE('label', `
       font-size: var(--n-font-size);
