@@ -70,6 +70,7 @@ import {
 export type DatePickerSetupProps = ExtractPropTypes<typeof datePickerProps>
 
 export interface DatePickerSlots {
+  prefix?: () => VNode[]
   'date-icon'?: () => VNode[]
   footer?: () => VNode[]
   'next-month'?: () => VNode[]
@@ -1091,6 +1092,7 @@ export default defineComponent({
                         {...commonInputProps}
                       >
                         {{
+                          prefix: $slots.prefix,
                           separator: () =>
                             this.separator === undefined
                               ? resolveSlot($slots.separator, () => [
@@ -1137,6 +1139,7 @@ export default defineComponent({
                         {...commonInputProps}
                       >
                         {{
+                          prefix: $slots.prefix,
                           [clearable ? 'clear-icon-placeholder' : 'suffix']:
                             () => (
                               <NBaseIcon
