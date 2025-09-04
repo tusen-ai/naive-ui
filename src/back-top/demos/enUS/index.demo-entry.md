@@ -13,6 +13,7 @@ basic.vue
 visibility-height.vue
 change-position.vue
 target-container-selector.vue
+to-bottom.vue
 ```
 
 ## API
@@ -26,5 +27,6 @@ target-container-selector.vue
 | right | `number \| string` | `40` | The width of BackTop from the right side of the page |
 | show | `boolean` | `undefined` | Whether to show BackTop |
 | to | `string \| HTMLElement` | `'body'` | Container node to show BackTop |
+| direction | `'top' \| 'bottom'` | `'top'` | The default position for BackTop to return to is the top |
 | visibility-height | `number` | `180` | BackTop's trigger scroll top. |
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback is triggered when back-top display changes. |

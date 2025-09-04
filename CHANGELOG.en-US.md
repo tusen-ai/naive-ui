@@ -35,6 +35,7 @@
 - - `n-image` adds showPreview methods, closes [#6695](https://github.com/tusen-ai/naive-ui/issues/6695).
 - `n-image-preview` `n-image-group` support being used independently.
 - `n-input-otp` adds `focusOnChar` util method, closes [#7073](https://github.com/tusen-ai/naive-ui/issues/7073).
+- `n-back-top` adds `direction` prop，closes [#6830](https://github.com/tusen-ai/naive-ui/issues/6830)
 
 ## 2.42.0
 
