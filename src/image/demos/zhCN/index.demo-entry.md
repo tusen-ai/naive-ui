@@ -45,6 +45,7 @@ component-preview-group-debug.vue
 | width | `string \| number` | `undefined` | 图片宽度 |  |
 | on-error | `(e: Event) => void` | `undefined` | 图片加载失败执行的回调 |  |
 | on-load | `(e: Event) => void` | `undefined` | 图片加载完成执行的回调 |  |
+| custom-download | `(imgSrc: string) => void` | `undefined` | 自定义下载方法 | NEXT_VERSION |
 
 ### ImageGroup Props
 
@@ -59,8 +60,10 @@ component-preview-group-debug.vue
 | show-toolbar | `boolean` | `true` | 图片放大后是否展示底部工具栏 |  |
 | show-toolbar-tooltip | `boolean` | `false` | 是否展示工具栏的提示 | 2.24.0 |
 | src-list | `string[]` | `undefined` | 图片列表 | NEXT_VERSION |
+| infinite | `boolean` | `true` | 是否无限循环图片预览 | NEXT_VERSION |
 | on-preview-next | `() => void` | `undefined` | 点击下一张的回调 |  |
 | on-preview-prev | `() => void` | `undefined` | 点击上一张的回调 |  |
+| custom-download | `(imgSrc: string) => void` | `undefined` | 自定义下载方法 | NEXT_VERSION |
 
 ### ImagePreview Props
 
@@ -74,6 +77,7 @@ component-preview-group-debug.vue
 | show-toolbar-tooltip | `boolean` | `false` | 是否展示工具栏的提示 | NEXT_VERSION |
 | on-update:show | `(value: boolean) => void` | `undefined` | 显示状态改变的回调函数 | NEXT_VERSION |
 | onClose | `() => void` | `undefined` | 关闭预览时的回调 | NEXT_VERSION |
+| custom-download | `(imgSrc: string) => void` | `undefined` | 自定义下载方法 | NEXT_VERSION |
 
 ### Image Slots
 
