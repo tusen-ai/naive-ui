@@ -31,6 +31,7 @@ focus.vue
 status.vue
 icon.vue
 panel.vue
+prefix.vue
 ```
 
 ## API
@@ -201,6 +202,7 @@ panel.vue
 | prev-month | `()`       | Prev icon of the date panel.      | 2.33.4  |
 | prev-year  | `()`       | Fast prev icon of the date panel. | 2.33.4  |
 | separator  | `()`       | Separator of range picker.        | 2.29.0  |
+| prefix     | `()`       | Date prefix.                      |         |
 
 ### Date, Year, QuarterRange, Week Slots
 
