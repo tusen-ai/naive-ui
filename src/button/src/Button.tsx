@@ -4,7 +4,6 @@ import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { ButtonTheme } from '../styles'
 import type { Size, Type } from './interface'
 import { changeColor } from 'seemly'
-import { useMemo } from 'vooks'
 import {
   type ButtonHTMLAttributes,
   computed,
@@ -124,7 +123,7 @@ const Button = defineComponent({
     const selfElRef = ref<HTMLElement | null>(null)
     const waveElRef = ref<BaseWaveRef | null>(null)
     const enterPressedRef = ref(false)
-    const showBorderRef = useMemo(() => {
+    const showBorderRef = computed(() => {
       return (
         !props.quaternary
         && !props.tertiary
