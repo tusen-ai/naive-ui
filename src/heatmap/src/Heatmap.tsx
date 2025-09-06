@@ -23,6 +23,7 @@ import {
 import { createKey, resolveSlot, resolveWrappedSlot } from '../../_utils'
 import { transformNaiveFirstDayOfWeekToDateFns } from '../../date-picker/src/utils'
 import heatmapLight from '../styles/light'
+import { useLoadingStyleClass } from './animationStyle'
 import HeatmapColorIndicator from './ColorIndicator'
 import Rect from './Rect'
 import style from './styles/index.cssr'
@@ -41,17 +42,17 @@ interface Col {
 
 export const heatmapProps = {
   ...(useTheme.props as ThemeProps<HeatmapTheme>),
-  colors: Array as PropType<string[]>,
-  colorTheme: {
-    type: String as PropType<HeatmapColorTheme>,
-    default: 'github'
-  },
+  activeColors: Array as PropType<string[]>,
+  colorTheme: String as PropType<HeatmapColorTheme>,
   data: Array as PropType<HeatmapData>,
-  loading: Boolean,
+  loadingData: Object as PropType<HeatmapData>,
+  fillCalendarLeading: Boolean,
   firstDayOfWeek: {
     type: Number as PropType<HeatmapFirstDayOfWeek>,
     default: 0
   },
+  loading: Boolean,
+  minimumColor: String,
   showColorIndicator: {
     type: Boolean,
     default: true
@@ -68,12 +69,12 @@ export const heatmapProps = {
     type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'
   },
-  xGap: [Number, String] as PropType<number | string>,
-  yGap: [Number, String] as PropType<number | string>,
   tooltip: {
-    type: [Boolean, Object] as PropType<TooltipProps | false>,
-    default: true
-  }
+    type: [Boolean, Object] as PropType<TooltipProps | boolean>,
+    default: false
+  },
+  xGap: [Number, String] as PropType<number | string>,
+  yGap: [Number, String] as PropType<number | string>
 } as const
 
 export type HeatmapProps = ExtractPublicPropTypes<typeof heatmapProps>
@@ -102,26 +103,23 @@ export default defineComponent({
         self: {
           fontWeight,
           textColor,
-          borderRadius,
           borderColor,
           loadingColorStart,
-          loadingColorEnd,
           [createKey('rectSize', size)]: rectSize,
+          [createKey('borderRadius', size)]: sizeBorderRadius,
           [createKey('xGap', size)]: defaultXGap,
           [createKey('yGap', size)]: defaultYGap,
           [createKey('fontSize', size)]: fontSize
         }
       } = themeRef.value
-
       const cssVars = {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-font-size': fontSize,
         '--n-font-weight': fontWeight,
         '--n-text-color': textColor,
-        '--n-border-radius': borderRadius,
+        '--n-border-radius': sizeBorderRadius,
         '--n-border-color': borderColor,
         '--n-loading-color-start': loadingColorStart,
-        '--n-loading-color-end': loadingColorEnd,
         '--n-rect-size': rectSize,
         '--n-x-gap':
           xGap !== undefined
@@ -150,12 +148,17 @@ export default defineComponent({
           props
         )
       : undefined
-
     const mergedColorsRef = computed(() => {
-      if (props.colors && props.colors.length > 0) {
-        return props.colors
-      }
-      return heatmapColorThemes[props.colorTheme]
+      const {
+        mininumColor: builtInMinimumColor,
+        activeColors: builtInActiveColors
+      } = themeRef.value.self
+      const mergedMininumColor = props.minimumColor || builtInMinimumColor
+      const theme = props.colorTheme && heatmapColorThemes[props.colorTheme]
+      const mergedActiveColors
+        = props.activeColors || theme || builtInActiveColors
+
+      return [mergedMininumColor, ...mergedActiveColors]
     })
 
     const normalizedDataRef = computed(() => {
@@ -164,7 +167,19 @@ export default defineComponent({
       }
       return completeDataGaps(
         props.data,
-        transformNaiveFirstDayOfWeekToDateFns(props.firstDayOfWeek)
+        transformNaiveFirstDayOfWeekToDateFns(props.firstDayOfWeek),
+        props.fillCalendarLeading
+      )
+    })
+
+    const normalizedLoadingDataRef = computed(() => {
+      if (!props.loadingData || props.loadingData.length === 0) {
+        return []
+      }
+      return completeDataGaps(
+        props.loadingData,
+        transformNaiveFirstDayOfWeekToDateFns(props.firstDayOfWeek),
+        props.fillCalendarLeading
       )
     })
 
@@ -175,17 +190,22 @@ export default defineComponent({
 
     const heatmapMatrixRef = computed(() => {
       const data = normalizedDataRef.value
-
-      if (props.loading || data.length === 0) {
+      const loadingData = normalizedLoadingDataRef.value
+      if (props.loading && !loadingData.length) {
         return createLoadingMatrix(
           transformNaiveFirstDayOfWeekToDateFns(props.firstDayOfWeek)
         )
       }
+
+      const finalData = props.loading ? loadingData : data
+      if (!finalData.length)
+        return []
+
       const maxValue = maxValueRef.value
       const colors = mergedColorsRef.value
-      const calendarStartDate = data[0].timestamp
+      const calendarStartDate = finalData[0].timestamp
 
-      const dayRects = data.map(item =>
+      const dayRects = finalData.map(item =>
         createDayRect(
           item,
           calendarStartDate,
@@ -287,10 +307,12 @@ export default defineComponent({
     })
 
     const monthLabelsRef = computed(() => {
-      return props.loading
+      return props.loading && !props.loadingData
         ? loadingMonthLabelsRef.value
         : dataMonthLabelsRef.value
     })
+
+    const loadingClassRef = useLoadingStyleClass(props, themeRef)
 
     return {
       weekLabels: weekLabelsRef,
@@ -302,7 +324,8 @@ export default defineComponent({
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
-      heatmapMatrix: heatmapMatrixRef
+      heatmapMatrix: heatmapMatrixRef,
+      loadingClass: loadingClassRef
     }
   },
   render() {
@@ -321,6 +344,7 @@ export default defineComponent({
       mergedColors,
       $slots,
       heatmapMatrix,
+      loadingClass,
       onRender
     } = this
     onRender?.()
@@ -364,7 +388,7 @@ export default defineComponent({
                         {weekLabel.visible ? weekLabel.label : null}
                       </td>
                     )}
-                    {heatmapMatrix[rowIdx].map(
+                    {(heatmapMatrix[rowIdx] || []).map(
                       (day: DayRect, weekIdx: number) => {
                         return day.value !== null ? (
                           <td
@@ -376,9 +400,13 @@ export default defineComponent({
                               data={day}
                               color={day.color}
                               tooltip={this.tooltip}
-                              tooltipSlot={$slots.tooltip}
                               loading={loading}
-                            />
+                              loadingClass={loadingClass}
+                            >
+                              {{
+                                tooltip: () => $slots.tooltip?.(day)
+                              }}
+                            </Rect>
                           </td>
                         ) : (
                           <td
@@ -400,22 +428,32 @@ export default defineComponent({
         </div>
         <div class={`${mergedClsPrefix}-heatmap__footer`}>
           {resolveWrappedSlot(
-            $slots.info,
+            $slots.footer,
             children =>
               children && (
-                <div class={`${mergedClsPrefix}-heatmap__footer__info`}>
+                <div class={`${mergedClsPrefix}-heatmap__footer`}>
                   {children}
                 </div>
               )
           )}
-          <div class={`${mergedClsPrefix}-heatmap__footer__indicator`}>
+          <div class={`${mergedClsPrefix}-heatmap__indicator`}>
             {resolveSlot($slots.indicator, () => [
-              !loading && showColorIndicator && (
+              showColorIndicator && (
                 <HeatmapColorIndicator
                   colors={mergedColors}
                   clsPrefix={mergedClsPrefix}
-                  indicatorText={[locale.less, locale.more]}
-                />
+                >
+                  {{
+                    'leading-text': () =>
+                      resolveSlot($slots['indicator-leading-text'], () => [
+                        locale.less
+                      ]),
+                    'trailing-text': () =>
+                      resolveSlot($slots['indicator-trailing-text'], () => [
+                        locale.more
+                      ])
+                  }}
+                </HeatmapColorIndicator>
               )
             ])}
           </div>

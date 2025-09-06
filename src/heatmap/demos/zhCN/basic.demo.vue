@@ -68,7 +68,7 @@ const showWeekLabels = ref(true)
 const showMonthLabels = ref(true)
 const showColorIndicator = ref(true)
 const loading = ref(false)
-const weekStartsOn = ref<HeatmapFirstDayOfWeek>(0)
+const firstDayOfWeek = ref<HeatmapFirstDayOfWeek>(0)
 const size = ref<'small' | 'medium' | 'large'>('medium')
 
 const weekStartOptions = [
@@ -126,7 +126,7 @@ const sizeOptions = [
       <n-divider vertical />
       <span>周开始日：</span>
       <n-select
-        v-model:value="weekStartsOn"
+        v-model:value="firstDayOfWeek"
         :options="weekStartOptions"
         style="width: 120px"
       />
@@ -167,17 +167,18 @@ const sizeOptions = [
         </n-tag>
       </n-flex>
     </n-alert>
-    <n-flex align="center">
+    <n-scrollbar x-scrollable style="max-width: 100%">
       <n-heatmap
-        :key="`heatmap-${value}-${weekStartsOn}-${size}`"
         :data="yearData"
-        :week-starts-on="weekStartsOn"
+        :loading-data="yearData"
+        :first-day-of-week="firstDayOfWeek"
         :loading="loading"
         :size="size"
         :show-week-labels="showWeekLabels"
         :show-month-labels="showMonthLabels"
         :show-color-indicator="showColorIndicator"
+        :fill-calendar-leading="value === 'recent'"
       />
-    </n-flex>
+    </n-scrollbar>
   </n-flex>
 </template>
