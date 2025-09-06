@@ -6,6 +6,7 @@ import type { FormValidationStatus } from '../../form/src/public-types'
 import type { InputOtpTheme } from '../styles/light'
 import type {
   InputOtpAllowInput,
+  InputOtpDeleteBehavior,
   InputOtpInst,
   InputOtpOnBlur,
   InputOtpOnFinish,
@@ -54,6 +55,7 @@ export const inputOtpProps = {
   allowInput: Function as PropType<InputOtpAllowInput>,
   onBlur: [Function, Array] as PropType<MaybeArray<InputOtpOnBlur>>,
   onFocus: [Function, Array] as PropType<MaybeArray<InputOtpOnFocus>>,
+  deleteBehavior: String as PropType<InputOtpDeleteBehavior>,
   'onUpdate:value': [Function, Array] as PropType<
     MaybeArray<InputOtpOnUpdateValue>
   >,
@@ -271,9 +273,20 @@ export default defineComponent({
       const currentValue = justifyValue(mergedValueRef.value)
       if (keyCode === 'Backspace' && !props.readonly) {
         e.preventDefault()
-        currentValue[Math.max(index, 0)] = ''
-        doUpdateValue(currentValue, { diff: '', index, source: 'delete' })
-        focusOnPrevChar(index)
+        if (props.deleteBehavior === 'delThenMove') {
+          if (currentValue[Math.max(index, 0)]) {
+            currentValue[Math.max(index, 0)] = ''
+            doUpdateValue(currentValue, { diff: '', index, source: 'delete' })
+          }
+          else {
+            focusOnPrevChar(index)
+          }
+        }
+        else {
+          currentValue[Math.max(index, 0)] = ''
+          doUpdateValue(currentValue, { diff: '', index, source: 'delete' })
+          focusOnPrevChar(index)
+        }
       }
       else if (keyCode === 'ArrowLeft') {
         e.preventDefault()

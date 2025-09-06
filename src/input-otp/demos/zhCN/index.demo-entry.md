@@ -15,6 +15,7 @@ block.vue
 size.vue
 form.vue
 pattern.vue
+deleteBehavior.vue
 rtl-debug.vue
 ```
 
@@ -35,6 +36,7 @@ rtl-debug.vue
 | readonly | `boolean` |  | `false` | 是否只读 | 2.41.1 |
 | size | `'small' \| 'medium' \| 'large'` | `InputOtpSize` | `'medium'` | 输入框尺寸 | 2.41.1 |
 | status | `'success' \| 'warning' \| 'error'` | `FormValidationStatus` | `undefined` | 验证状态 | 2.41.1 |
+| deleteBehavior | `'delAndMove' \| 'delThenMove'` | `InputOtpDeleteBehavior` | `delAndMove` | 删除行为 | NEXT_VERSION |
 | value | `string \| null` |  | `undefined` | 验证码输入框的值，受控模式 | 2.41.1 |
 | on-blur | `(event: FocusEvent, index: number) => void` | `InputOtpOnBlur` | `undefined` | 从一个输入框被聚焦触发，到没有任何一个输入框被聚焦的回调 | 2.41.1 |
 | on-finish | `(value: string[]) => void` | `InputOtpOnFinish` | `undefined` | 完成输入的回调 | 2.41.1 |

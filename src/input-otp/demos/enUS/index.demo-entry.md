@@ -15,6 +15,7 @@ block.vue
 size.vue
 form.vue
 pattern.vue
+deleteBehavior.vue
 ```
 
 ## API
@@ -34,6 +35,7 @@ pattern.vue
 | readonly | `boolean` |  | `false` | Whether the component is readonly. | 2.41.1 |
 | size | `'small' \| 'medium' \| 'large'` | `InputOtpSize` | `'medium'` | Size of the component. | 2.41.1 |
 | status | `'success' \| 'warning' \| 'error'` | `FormValidationStatus` | `undefined` | The validation status of the component. | 2.41.1 |
+| deleteBehavior | `'delAndMove' \| 'delThenMove'` | `InputOtpDeleteBehavior` | `delAndMove` | deleteBehavior | NEXT_VERSION |
 | value | `string \| null` |  | `undefined` | Value of the component (in controlled mode). | 2.41.1 |
 | on-blur | `(event: FocusEvent, index: number) => void` | `InputOtpOnBlur` | `undefined` | Callback fired when the focus is out of the component. | 2.41.1 |
 | on-finish | `(value: string[]) => void` | `InputOtpOnFinish` | `undefined` | Callback fired when all child inputs are settled. | 2.41.1 |
