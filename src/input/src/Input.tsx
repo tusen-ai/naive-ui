@@ -663,7 +663,7 @@ export default defineComponent({
         onMousedown(e)
       const { tagName } = e.target as HTMLElement
       if (tagName !== 'INPUT' && tagName !== 'TEXTAREA') {
-        if (props.resizable) {
+        if (props.type === 'textarea' && props.resizable) {
           const { value: wrapperEl } = wrapperElRef
           if (wrapperEl) {
             const { left, top, width, height }
