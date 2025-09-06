@@ -20,6 +20,7 @@
 - 修复 `n-input-group-label` 没有注入 `formItemInjectionKey`，导致 `size` 属性失效的问题，关闭 [#7066](https://github.com/tusen-ai/naive-ui/issues/7066)
 - 修复 `n-carousel` 只有一张图的情況下样式错乱的问题，关闭 [#6476](https://github.com/tusen-ai/naive-ui/issues/6476)
 - 修复 `n-marquee` 组件 'Non-function value encountered for default slot' 警告
+- 修复 `n-input` 的 `type` 不为 `textarea` 时，点击右下角区域无法触发聚焦的问题，关闭 [#7181](https://github.com/tusen-ai/naive-ui/issues/7181)
 
 ### Features
 
