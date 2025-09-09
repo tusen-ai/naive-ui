@@ -597,6 +597,24 @@ export const enComponentRoutes = [
       import('../../src/highlight/demos/enUS/index.demo-entry.md')
   },
   {
+    path: 'markdown',
+    component: () => import('../../src/markdown/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'typewriter',
+    component: () =>
+      import('../../src/typewriter/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'bubble',
+    component: () => import('../../src/bubble/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'bubbleList',
+    component: () =>
+      import('../../src/bubble-list/demos/enUS/index.demo-entry.md')
+  },
+  {
     path: 'marquee',
     component: () => import('../../src/marquee/demos/enUS/index.demo-entry.md')
   },
@@ -1017,6 +1035,24 @@ export const zhComponentRoutes = [
     path: 'highlight',
     component: () =>
       import('../../src/highlight/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'markdown',
+    component: () => import('../../src/markdown/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'typewriter',
+    component: () =>
+      import('../../src/typewriter/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'bubble',
+    component: () => import('../../src/bubble/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'bubbleList',
+    component: () =>
+      import('../../src/bubble-list/demos/zhCN/index.demo-entry.md')
   },
   {
     path: 'marquee',

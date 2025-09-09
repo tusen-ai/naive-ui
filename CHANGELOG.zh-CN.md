@@ -35,6 +35,10 @@
 - `n-image` 增加 showPreview 方法，关闭 [#6695](https://github.com/tusen-ai/naive-ui/issues/6695)
 - `n-image-preview`，`n-image-group` 支持单独使用
 - `n-input-otp` 增加 `focusOnChar` 方法，关闭 [#7073](https://github.com/tusen-ai/naive-ui/issues/7073)
+- 🌟 新增 `n-markdown` 组件
+- 🌟 新增 `n-typewriter` 组件
+- 🌟 新增 `n-bubble` 组件
+- 🌟 新增 `n-bubble-list` 组件
 
 ## 2.42.0
 

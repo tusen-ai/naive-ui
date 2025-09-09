@@ -4,6 +4,7 @@ import type { ScrollbarTheme } from '../../_internal/scrollbar/styles'
 import type { InternalSelectMenuTheme } from '../../_internal/select-menu/styles'
 import type { InternalSelectionTheme } from '../../_internal/selection/styles'
 import type { Hljs } from '../../_mixins'
+import type { Markdown } from '../../_mixins/use-markdown'
 import type { AlertTheme } from '../../alert/styles'
 import type { AnchorTheme } from '../../anchor/styles'
 import type { AutoCompleteTheme } from '../../auto-complete/styles'
@@ -12,6 +13,8 @@ import type { AvatarTheme } from '../../avatar/styles'
 import type { BackTopTheme } from '../../back-top/styles'
 import type { BadgeTheme } from '../../badge/styles'
 import type { BreadcrumbTheme } from '../../breadcrumb/styles'
+import type { BubbleListTheme } from '../../bubble-list/styles'
+import type { BubbleTheme } from '../../bubble/styles'
 import type { ButtonGroupTheme } from '../../button-group/styles/light'
 import type { Size as ButtonSize } from '../../button/src/interface'
 import type { ButtonTheme } from '../../button/styles'
@@ -63,6 +66,7 @@ import type { ListTheme } from '../../list/styles'
 import type { LoadingBarTheme } from '../../loading-bar/styles'
 import type { NDateLocale, NLocale } from '../../locales'
 import type { LogTheme } from '../../log/styles'
+import type { MarkdownTheme } from '../../markdown/styles'
 import type { MarqueeTheme } from '../../marquee/styles'
 import type { MentionTheme } from '../../mention/styles'
 import type { MenuTheme } from '../../menu/styles'
@@ -100,6 +104,7 @@ import type { TooltipTheme } from '../../tooltip/styles'
 import type { TransferTheme } from '../../transfer/styles'
 import type { TreeSelectTheme } from '../../tree-select/styles'
 import type { TreeTheme } from '../../tree/styles'
+import type { TypewriterTheme } from '../../typewriter/styles'
 import type { TypographyTheme } from '../../typography/styles'
 import type { UploadTheme } from '../../upload/styles'
 import type { WatermarkTheme } from '../../watermark/styles'
@@ -199,6 +204,10 @@ export interface GlobalThemeWithoutCommon {
   InternalSelectMenu?: InternalSelectMenuTheme
   InternalSelection?: InternalSelectionTheme
   InputOtp?: InputOtpTheme
+  Markdown?: MarkdownTheme
+  Typewriter?: TypewriterTheme
+  Bubble?: BubbleTheme
+  BubbleList?: BubbleListTheme
 }
 
 export interface GlobalComponentConfig {
@@ -264,6 +273,7 @@ export interface ConfigProviderInjection {
   mergedLocaleRef: Ref<NLocale | undefined>
   mergedDateLocaleRef: Ref<NDateLocale | undefined>
   mergedHljsRef: Ref<Hljs | undefined>
+  mergedMarkdownRef: Ref<Markdown | undefined>
   mergedKatexRef: Ref<Katex | undefined>
   mergedComponentPropsRef: Ref<GlobalComponentConfig | undefined>
   mergedIconsRef: Ref<GlobalIconConfig | undefined>

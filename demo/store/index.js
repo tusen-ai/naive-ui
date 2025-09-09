@@ -9,6 +9,7 @@ import {
 } from 'naive-ui'
 import { useMemo } from 'vooks'
 import { computed, ref } from 'vue'
+import { Markdown } from 'vue-markdown-unified'
 import { TsConfigProvider } from '../../themes/tusimple/src'
 import { i18n, useIsMobile } from '../utils/composables'
 import hljs from './hljs'
@@ -134,7 +135,8 @@ export function siteSetup() {
     themeName: themeNameRef,
     theme: themeRef,
     locale: localeRef,
-    dateLocale: dateLocaleRef
+    dateLocale: dateLocaleRef,
+    markdown: Markdown
   }
 }
 

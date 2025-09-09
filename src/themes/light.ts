@@ -11,6 +11,8 @@ import { avatarLight } from '../avatar/styles'
 import { backTopLight } from '../back-top/styles'
 import { badgeLight } from '../badge/styles'
 import { breadcrumbLight } from '../breadcrumb/styles'
+import { bubbleListLight } from '../bubble-list/styles'
+import { bubbleLight } from '../bubble/styles'
 import { buttonGroupLight } from '../button-group/styles'
 import { buttonLight } from '../button/styles'
 import { calendarLight } from '../calendar/styles'
@@ -53,6 +55,7 @@ import { legacyTransferLight } from '../legacy-transfer/styles'
 import { listLight } from '../list/styles'
 import { loadingBarLight } from '../loading-bar/styles'
 import { logLight } from '../log/styles'
+import { markdownLight } from '../markdown/styles'
 import { marqueeLight } from '../marquee/styles'
 import { mentionLight } from '../mention/styles'
 import { menuLight } from '../menu/styles'
@@ -88,6 +91,7 @@ import { tooltipLight } from '../tooltip/styles'
 import { transferLight } from '../transfer/styles'
 import { treeSelectLight } from '../tree-select/styles'
 import { treeLight } from '../tree/styles'
+import { typewriterLight } from '../typewriter/styles'
 import { typographyLight } from '../typography/styles'
 import { uploadLight } from '../upload/styles'
 import { watermarkLight } from '../watermark/styles'
@@ -183,5 +187,9 @@ export const lightTheme: BuiltInGlobalTheme = {
   Split: splitLight,
   FloatButton: floatButtonLight,
   FloatButtonGroup: floatButtonGroupLight,
-  Marquee: marqueeLight
+  Marquee: marqueeLight,
+  Markdown: markdownLight,
+  Typewriter: typewriterLight,
+  Bubble: bubbleLight,
+  BubbleList: bubbleListLight
 }
