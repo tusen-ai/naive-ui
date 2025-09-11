@@ -176,6 +176,7 @@ export default defineComponent({
       }>
     >([])
     const feedbackIdRef = ref(createId())
+    const labelElementRef = ref<null | HTMLLabelElement>(null)
     const mergedDisabledRef = NForm
       ? toRef(NForm.props, 'disabled')
       : ref(false)
@@ -192,6 +193,20 @@ export default defineComponent({
         return
       restoreValidation()
     })
+    function calcLabelWidth(): void {
+      if (!formItemMiscRefs.isAutoLabelWidth.value)
+        return
+      const labelElement = labelElementRef.value
+      if (labelElement !== null) {
+        const memoizedWhitespace = labelElement.style.whiteSpace
+        labelElement.style.whiteSpace = 'nowrap'
+        labelElement.style.width = ''
+        NForm?.deriveMaxChildLabelWidth(
+          Number(getComputedStyle(labelElement).width.slice(0, -2))
+        )
+        labelElement.style.whiteSpace = memoizedWhitespace
+      }
+    }
     function restoreValidation(): void {
       renderExplainsRef.value = []
       validationErroredRef.value = false
@@ -421,23 +436,10 @@ export default defineComponent({
     const exposedRef: FormItemInst = {
       validate,
       restoreValidation,
-      internalValidate
+      internalValidate,
+      calcLabelWidth
     }
-    const labelElementRef = ref<null | HTMLLabelElement>(null)
-    onMounted((): void => {
-      if (!formItemMiscRefs.isAutoLabelWidth.value)
-        return
-      const labelElement = labelElementRef.value
-      if (labelElement !== null) {
-        const memoizedWhitespace = labelElement.style.whiteSpace
-        labelElement.style.whiteSpace = 'nowrap'
-        labelElement.style.width = ''
-        NForm?.deriveMaxChildLabelWidth(
-          Number(getComputedStyle(labelElement).width.slice(0, -2))
-        )
-        labelElement.style.whiteSpace = memoizedWhitespace
-      }
-    })
+    onMounted(calcLabelWidth)
     const cssVarsRef = computed(() => {
       const { value: size } = mergedSizeRef
       const { value: labelPlacement } = labelPlacementRef
