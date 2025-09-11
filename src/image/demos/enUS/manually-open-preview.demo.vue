@@ -1,7 +1,7 @@
 <markdown>
 # Manually Open Preview
 
-allow big image preview by call showPreview method.
+Toggle big image preview by calling `showPreview` method.
 </markdown>
 
 <script lang="ts" setup>
@@ -17,7 +17,7 @@ function handleClick() {
 <template>
   <n-space vertical>
     <n-button type="primary" @click="handleClick">
-      show image preview
+      Show image preview
     </n-button>
     <n-image
       ref="imageRef"

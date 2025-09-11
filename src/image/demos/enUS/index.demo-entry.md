@@ -18,7 +18,6 @@ previewed-img-props.vue
 manually-open-preview.vue
 component-preview.vue
 component-preview-group.vue
-component-preview-group-debug.vue
 ```
 
 ## API
@@ -50,15 +49,14 @@ component-preview-group-debug.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| src-list | `string[]` | `undefined` | Picture list | NEXT_VERSION |
-| show | `boolean` | `undefined` | Whether to the show preview big image | NEXT_VERSION |
-| default-show | `boolean` | `undefined` | Whether to show the preview big image by default. | NEXT_VERSION |
-| current | `number` | `undefined` | The subscript of the currently displayed image | NEXT_VERSION |
-| default-current | `number` | `0` | The subscript of the default displayed image | NEXT_VERSION |
+| current | `number` | `undefined` | The subscript of the currently displayed image. | NEXT_VERSION |
+| default-current | `number` | `0` | The subscript of the default displayed image. | NEXT_VERSION |
+| default-show | `boolean` | `false` | Whether to show the preview big image by default. | NEXT_VERSION |
 | render-toolbar | `(props: { nodes: { prev: VNode, next: VNode, rotateCounterclockwise: VNode, rotateClockwise: VNode, resizeToOriginalSize: VNode, zoomOut: VNode, zoomIn: VNode, download: VNode, close: VNode } }) => VNodeChild` | `undefined` | Toolbar rendering function. | `2.38.2` |
+| show | `boolean` | `undefined` | Whether to the show preview big image. | NEXT_VERSION |
 | show-toolbar | `boolean` | `true` | Whether to show the bottom toolbar when the image enlarge. |  |
 | show-toolbar-tooltip | `boolean` | `false` | Whether to show toolbar buttons' tooltip. | 2.24.0 |
-| src-list | `string[]` | `undefined` | Picture list. | NEXT_VERSION |
+| src-list | `string[]` | `undefined` | Picture src list. | NEXT_VERSION |
 | on-preview-next | `() => void` | `undefined` | Click the callback on the next slide. |
 | on-preview-prev | `() => void` | `undefined` | Click the callback from the previous slide. |  |
 
@@ -66,27 +64,21 @@ component-preview-group-debug.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| src | `string` | `undefined` | Image source. | NEXT_VERSION |
-| show | `boolean` | `undefined` | Whether to the show preview big image | NEXT_VERSION |
-| default-show | `boolean` | `undefined` | Whether to show the preview big image by default. | NEXT_VERSION |
+| default-show | `boolean` | `false` | Whether to show the preview big image by default. | NEXT_VERSION |
 | render-toolbar | `(props: { nodes: { prev: VNode, next: VNode, rotateCounterclockwise: VNode, rotateClockwise: VNode, resizeToOriginalSize: VNode, zoomOut: VNode, zoomIn: VNode, download: VNode, close: VNode } }) => VNodeChild` | `undefined` | Toolbar rendering function. | NEXT_VERSION |
+| show | `boolean` | `undefined` | Whether to the show preview big image. | NEXT_VERSION |
 | show-toolbar | `boolean` | `true` | Whether to show the bottom toolbar when the image enlarge. | NEXT_VERSION |
 | show-toolbar-tooltip | `boolean` | `false` | Whether to show toolbar buttons' tooltip. | NEXT_VERSION |
+| src | `string` | `undefined` | Image source. | NEXT_VERSION |
+| on-close | `() => void` | `undefined` | Callback when close the preview of the image. | NEXT_VERSION |
 | on-update:show | `(value: boolean) => void` | `undefined` | Callback on show status changes. | NEXT_VERSION |
-| onClose | `() => void` | `undefined` | Callback when close imagePreview. | NEXT_VERSION |
 
 ### Image Slots
 
 | Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
-| placeholder | `()` | Placeholder shown when image is not loaded. | 2.30.5 |
 | error | `()` | The content when the image fails to load. | 2.40.2 |
-
-### Image Methods
-
-| Name        | Type         | Description                      | 版本 |
-| ----------- | ------------ | -------------------------------- | ---- |
-| showPreview | `() => void` | manually open preview big image. |      |
+| placeholder | `()` | Placeholder shown when image is not loaded. | 2.30.5 |
 
 ### ImageGroup Slots
 
@@ -96,6 +88,6 @@ component-preview-group-debug.vue
 
 ### Image Methods
 
-| Name        | Type         | Description                      | Version      |
-| ----------- | ------------ | -------------------------------- | ------------ |
-| showPreview | `() => void` | manually open preview big image. | NEXT_VERSION |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| showPreview | `() => void` | Show preview interface of the image. | NEXT_VERSION |

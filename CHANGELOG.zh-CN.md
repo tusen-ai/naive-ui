@@ -32,8 +32,9 @@
 - `n-tree-select` 支持 RTL
 - `useDialog` 的选项支持 `z-index`，关闭 [#4349](https://github.com/tusen-ai/naive-ui/issues/4349)
 - 新增组件 `n-heatmap`
-- `n-image` 增加 showPreview 方法，关闭 [#6695](https://github.com/tusen-ai/naive-ui/issues/6695)
-- `n-image-preview`，`n-image-group` 支持单独使用
+- `n-image` 增加 `showPreview` 方法，关闭 [#6695](https://github.com/tusen-ai/naive-ui/issues/6695)
+- 新增 `n-image-preview` 组件
+- `n-image-group` 可以脱离 `n-image` 使用
 - `n-input-otp` 增加 `focusOnChar` 方法，关闭 [#7073](https://github.com/tusen-ai/naive-ui/issues/7073)
 
 ## 2.42.0

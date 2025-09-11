@@ -33,7 +33,8 @@
 - `useDialog`'s option supports `z-index`, closes [#4349](https://github.com/tusen-ai/naive-ui/issues/4349).
 - Add `n-heatmap` component.
 - - `n-image` adds showPreview methods, closes [#6695](https://github.com/tusen-ai/naive-ui/issues/6695).
-- `n-image-preview` `n-image-group` support being used independently.
+- Add `n-image-preview` component.
+- `n-image-group` can be used without `n-image`.
 - `n-input-otp` adds `focusOnChar` util method, closes [#7073](https://github.com/tusen-ai/naive-ui/issues/7073).
 
 ## 2.42.0
