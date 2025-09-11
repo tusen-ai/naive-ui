@@ -60,6 +60,8 @@ component-preview-group-debug.vue
 | src-list | `string[]` | `undefined` | 图片列表 | NEXT_VERSION |
 | on-preview-next | `() => void` | `undefined` | 点击下一张的回调 |  |
 | on-preview-prev | `() => void` | `undefined` | 点击上一张的回调 |  |
+| on-update:current | `(value: number) => void` | `undefined` | 显示状态改变的回调函数 | NEXT_VERSION |
+| on-update:show | `(value: boolean) => void` | `undefined` | 显示状态改变的回调函数 | NEXT_VERSION |
 
 ### ImagePreview Props
 

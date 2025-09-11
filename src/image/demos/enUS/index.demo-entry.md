@@ -30,8 +30,7 @@ component-preview-group.vue
 | fallback-src | `string` | `undefined` | URL to show when the image fails to load. |  |
 | height | `string \| number` | `undefined` | Image height. |  |
 | img-props | `ImgHTMLAttributes` | `undefined` | The props of the img element inside the component. |  |
-| lazy | `boolean` | `false` | Load image after it enters viewport. When used alone, it will be assigned the property value of [HTMLImageElement.loading](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading). Alternatively, it can be used in conjunction with the `intersection-observer-options` configuration to achieve lazy loading. |
-| 2.30.5 |
+| lazy | `boolean` | `false` | Load image after it enters viewport. When used alone, it will be assigned the property value of [HTMLImageElement.loading](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading). Alternatively, it can be used in conjunction with the `intersection-observer-options` configuration to achieve lazy loading. | 2.30.5 |
 | intersection-observer-options | `{ root?: Element \| Document \| string \| null, rootMargin?: string, threshold?: number \| number[]; }` | `undefined` | Intersection observer's config to be applied when `lazy=true`. | 2.30.5 |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `fill` | Object-fit type of the image in the container. |  |
 | preview-src | `string` | `undefined` | Source of preview image. |  |
@@ -59,6 +58,8 @@ component-preview-group.vue
 | src-list | `string[]` | `undefined` | Picture src list. | NEXT_VERSION |
 | on-preview-next | `() => void` | `undefined` | Click the callback on the next slide. |
 | on-preview-prev | `() => void` | `undefined` | Click the callback from the previous slide. |  |
+| on-update:current | `(value: number) => void` | `undefined` | Callback on currently displayed image changes. | NEXT_VERSION |
+| on-update:show | `(value: boolean) => void` | `undefined` | Callback on show status changes. | NEXT_VERSION |
 
 ### ImagePreview Props
 

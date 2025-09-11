@@ -57,7 +57,7 @@ export const imagePreviewProps = {
   },
   defaultShow: Boolean,
   'onUpdate:show': [Function, Array] as PropType<
-    MaybeArray<(value: boolean) => void>
+    MaybeArray<(show: boolean) => void>
   >,
   onUpdateShow: [Function, Array] as PropType<
     MaybeArray<(show: boolean) => void>
