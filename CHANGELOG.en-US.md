@@ -20,6 +20,7 @@
 - Fix `n-input-group-label` not injecting `formItemInjectionKey`, causing the `size` property to fail, and close [#7066](https://github.com/tusen-ai/naive-ui/issues/7066)
 - Fix the issue of style confusion in `n-carousel` when there is only one image, close [#6476](https://github.com/tusen-ai/naive-ui/issues/6476)
 - Fix `n-marquee` component 'Non-function value encountered for default slot' warning.
+- Fix `n-input` can't trigger focus when clicking the bottom right corner when `type` is not `textarea`, closes [#7181](https://github.com/tusen-ai/naive-ui/issues/7181)
 
 ### Features
 
