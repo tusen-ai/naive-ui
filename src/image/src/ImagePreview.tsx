@@ -7,7 +7,6 @@ import { zindexable } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   Fragment,
   h,
@@ -637,7 +636,7 @@ export default defineComponent({
                     `${clsPrefix}-image-preview-container`,
                     this.themeClass
                   ]}
-                  style={this.cssVars as CSSProperties}
+                  style={this.cssVars}
                   onWheel={this.handleWheel}
                 >
                   <Transition name="fade-in-transition" appear={this.appear}>

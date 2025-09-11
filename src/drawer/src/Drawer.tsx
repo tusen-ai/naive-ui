@@ -351,7 +351,7 @@ export default defineComponent({
                   this.namespace,
                   this.themeClass
                 ]}
-                style={this.cssVars as CSSProperties}
+                style={this.cssVars}
                 role="none"
               >
                 {this.showMask ? (

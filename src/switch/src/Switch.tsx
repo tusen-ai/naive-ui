@@ -338,7 +338,7 @@ export default defineComponent({
           this.rubberBand && `${mergedClsPrefix}-switch--rubber-band`
         ]}
         tabindex={!this.mergedDisabled ? 0 : undefined}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
         onClick={this.handleClick}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}

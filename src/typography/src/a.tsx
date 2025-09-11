@@ -1,7 +1,7 @@
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { TypographyTheme } from '../styles'
-import { computed, type CSSProperties, defineComponent, h } from 'vue'
+import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { typographyLight } from '../styles'
 import style from './styles/a.cssr'
@@ -50,7 +50,7 @@ export default defineComponent({
     return (
       <a
         class={[`${this.mergedClsPrefix}-a`, this.themeClass]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         {this.$slots}
       </a>

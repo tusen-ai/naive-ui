@@ -29,7 +29,6 @@ import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   type HTMLAttributes,
@@ -975,10 +974,7 @@ export default defineComponent({
                                 this.themeClass
                               ]}
                               ref="menuElRef"
-                              style={[
-                                menuProps?.style || '',
-                                this.cssVars as CSSProperties
-                              ]}
+                              style={[menuProps?.style || '', this.cssVars]}
                               tabindex={0}
                               onMousedown={this.handleMenuMousedown}
                               onKeydown={this.handleKeydown}

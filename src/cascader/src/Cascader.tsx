@@ -1153,10 +1153,7 @@ export default defineComponent({
                         value={this.mergedValue}
                         show={this.mergedShow && !this.showSelectMenu}
                         menuModel={this.menuModel}
-                        style={[
-                          this.cssVars as CSSProperties,
-                          menuProps?.style
-                        ]}
+                        style={[this.cssVars, menuProps?.style]}
                         onFocus={this.handleMenuFocus}
                         onBlur={this.handleMenuBlur}
                         onKeydown={this.handleMenuKeydown}
@@ -1199,10 +1196,7 @@ export default defineComponent({
                         filter={this.filter}
                         labelField={this.labelField}
                         separator={this.separator}
-                        style={[
-                          this.cssVars as CSSProperties,
-                          filterMenuProps?.style
-                        ]}
+                        style={[this.cssVars, filterMenuProps?.style]}
                       />
                     )
                   }

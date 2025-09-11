@@ -246,7 +246,7 @@ export default defineComponent({
           mergedShowMenu && `${mergedClsPrefix}-float-button--show-menu`,
           themeClass
         ]}
-        style={[cssVars as CSSProperties, inlineStyle]}
+        style={[cssVars, inlineStyle]}
         onMouseenter={this.Mouseenter}
         onMouseleave={this.handleMouseleave}
         onClick={this.handleClick}
