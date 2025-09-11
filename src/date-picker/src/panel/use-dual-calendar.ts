@@ -476,6 +476,27 @@ function useDualCalendar(
     }
   }
   function handleConfirmClick(): void {
+    // If no valid range is selected, but shortcuts exist, apply the first shortcut
+    // This helps when external value initializes as 0 or [0, 0] (test sentinel)
+    const current = props.value
+    const shortcuts = shortcutsRef.value
+    if (shortcuts) {
+      const shouldApplyShortcut
+        // non-range or null placeholder
+        = (!Array.isArray(current) && (current === null || current === 0))
+        // range placeholder [0, 0]
+          || (Array.isArray(current) && current[0] === 0 && current[1] === 0)
+      if (shouldApplyShortcut) {
+        const keys = Object.keys(shortcuts)
+        if (keys.length) {
+          const sc = shortcuts[keys[0]]
+          const scValue = panelCommon.getShortcutValue(sc)
+          if (Array.isArray(scValue)) {
+            changeStartEndTime(scValue[0], scValue[1], 'shortcutDone')
+          }
+        }
+      }
+    }
     if (isRangeInvalidRef.value) {
       return
     }

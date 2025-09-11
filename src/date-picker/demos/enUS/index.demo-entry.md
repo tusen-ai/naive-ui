@@ -9,6 +9,7 @@ date.vue
 datetime.vue
 datetimeformat.vue
 daterange.vue
+daterange-minimal.vue
 datetimerange.vue
 month.vue
 monthrange.vue
@@ -18,11 +19,13 @@ quarter.vue
 quarterrange.vue
 week.vue
 size.vue
+button-size.vue
 default-time.vue
 disabled.vue
 disabled-time.vue
 actions.vue
 shortcuts.vue
+shortcuts-position.vue
 events.vue
 format.vue
 footerslot.vue
@@ -56,12 +59,14 @@ panel.vue
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Panel's placement. | 2.25.0 |
 | quarter-format | `string` | `'Q'Q` | Format of quarter item in the panel. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.37.0 |
 | shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| (() => [number, number])>` | `undefined` | Shortcut button customizations. |  |
+| shortcuts-position | `'left' \| 'right' \| 'bottom'` | `'bottom'` | Shortcuts panel placement. | MEXT_VERSION |
 | show | `boolean` | `undefined` | Whether to show panel. | 2.28.3 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |  |
+| button-size | `'small' \| 'medium' \| 'large'` | `undefined` | Panel button size (Shortcuts/Clear/Now/Confirm). | MEXT_VERSION |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validation status. | 2.27.0 |
 | time-picker-format | `string \| undefined` | `undefined` | Format of the binding value in time picker inside date picker of type `'datetime'` and `'datetimerange'`. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.38.2 |
 | to | `string \| HTMLElement \| false` | `body` | Container node of the panel. `false` will keep it not detached. |  |
-| type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'monthrange' \| 'year' \| 'yearrange' \| 'quarter' \| 'quarterrange' \| 'week'` | `'date'` | Date picker type. | `'quarter'` v2.22.0, `'monthrange'` 2.28.3 |
+| type | `'date' \| 'datetime' \| 'daterange' \| 'daterange-minimal' \| 'datetimerange' \| 'month' \| 'monthrange' \| 'year' \| 'yearrange' \| 'quarter' \| 'quarterrange' \| 'week'` | `'date'` | Date picker type. | `'quarter'` v2.22.0, `'monthrange'` 2.28.3, `'daterange-minimal'` MEXT_VERSION |
 | value | `number \| [number, number] \| null` | `undefined` | Value of the date picker when being manually set. |  |
 | value-format | `string` | Follow `format` prop | Format of the binding value. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.24.0 |
 | year-format | `string` | `'y'` | Format of year item in the panel. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.37.0 |

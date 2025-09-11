@@ -55,6 +55,7 @@ import { datePickerLight } from '../styles'
 import { datePickerInjectionKey } from './interface'
 import DatePanel from './panel/date'
 import DaterangePanel from './panel/daterange'
+import DaterangeMinimalPanel from './panel/daterange-minimal'
 import DatetimePanel from './panel/datetime'
 import DatetimerangePanel from './panel/datetimerange'
 import MonthPanel from './panel/month'
@@ -131,6 +132,7 @@ export default defineComponent({
       switch (props.type) {
         case 'date':
         case 'daterange':
+        case 'daterange-minimal':
           return localeRef.value.dateFormat
         case 'datetime':
         case 'datetimerange':
@@ -227,7 +229,8 @@ export default defineComponent({
         'datetimerange',
         'monthrange',
         'quarterrange',
-        'yearrange'
+        'yearrange',
+        'daterange-minimal'
       ].includes(props.type)
     })
     const localizedPlacehoderRef = computed(() => {
@@ -257,7 +260,7 @@ export default defineComponent({
     })
     const localizedStartPlaceholderRef = computed(() => {
       if (props.startPlaceholder === undefined) {
-        if (props.type === 'daterange') {
+        if (props.type === 'daterange' || props.type === 'daterange-minimal') {
           return localeRef.value.startDatePlaceholder
         }
         else if (props.type === 'datetimerange') {
@@ -274,7 +277,7 @@ export default defineComponent({
     })
     const localizedEndPlaceholderRef = computed(() => {
       if (props.endPlaceholder === undefined) {
-        if (props.type === 'daterange') {
+        if (props.type === 'daterange' || props.type === 'daterange-minimal') {
           return localeRef.value.endDatePlaceholder
         }
         else if (props.type === 'datetimerange') {
@@ -307,6 +310,10 @@ export default defineComponent({
           return result
         }
         case 'daterange': {
+          result.push('confirm')
+          return result
+        }
+        case 'daterange-minimal': {
           result.push('confirm')
           return result
         }
@@ -778,6 +785,7 @@ export default defineComponent({
 
     const cssVarsRef = computed(() => {
       const { type } = props
+      const paddingType = type === 'daterange-minimal' ? 'daterange' : type
       const {
         common: { cubicBezierEaseInOut },
         self: {
@@ -820,11 +828,15 @@ export default defineComponent({
           iconColor,
           iconColorDisabled,
           scrollItemBorderRadius,
-          calendarTitleColorHover,
-          [createKey('calendarLeftPadding', type)]: calendarLeftPadding,
-          [createKey('calendarRightPadding', type)]: calendarRightPadding
+          calendarTitleColorHover
         }
       } = themeRef.value
+      const calendarLeftPadding = (themeRef.value.self as any)[
+        createKey('calendarLeftPadding', paddingType)
+      ]
+      const calendarRightPadding = (themeRef.value.self as any)[
+        createKey('calendarRightPadding', paddingType)
+      ]
       return {
         '--n-bezier': cubicBezierEaseInOut,
 
@@ -987,6 +999,8 @@ export default defineComponent({
       calendarHeaderYearFormat: this.calendarHeaderYearFormat,
       calendarHeaderMonthFormat: this.calendarHeaderMonthFormat,
       calendarHeaderMonthYearSeparator: this.calendarHeaderMonthYearSeparator,
+      shortcutsPosition: this.shortcutsPosition,
+      buttonSize: this.buttonSize,
       calendarHeaderMonthBeforeYear: this.calendarHeaderMonthBeforeYear
     }
     const renderPanel = (): VNode => {
@@ -1007,6 +1021,15 @@ export default defineComponent({
         >
           {$slots}
         </DaterangePanel>
+      ) : type === 'daterange-minimal' ? (
+        <DaterangeMinimalPanel
+          {...commonPanelProps}
+          defaultCalendarStartTime={this.defaultCalendarStartTime}
+          defaultCalendarEndTime={this.defaultCalendarEndTime}
+          bindCalendarMonths={this.bindCalendarMonths}
+        >
+          {$slots}
+        </DaterangeMinimalPanel>
       ) : type === 'datetimerange' ? (
         <DatetimerangePanel
           {...commonPanelProps}

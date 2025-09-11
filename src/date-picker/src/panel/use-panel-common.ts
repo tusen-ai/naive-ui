@@ -39,6 +39,7 @@ const usePanelCommonProps = {
     default: null
   },
   shortcuts: Object as PropType<Shortcuts>,
+  shortcutsPosition: String as PropType<'left' | 'right' | 'bottom'>,
   defaultTime: [Number, String, Array] as PropType<DefaultTime>,
   inputReadonly: Boolean,
   onClear: Function,
@@ -47,6 +48,7 @@ const usePanelCommonProps = {
   onTabOut: Function,
   onKeydown: Function,
   actions: Array as PropType<string[]>,
+  buttonSize: String as PropType<'small' | 'medium' | 'large'>,
   onUpdateValue: {
     type: Function as PropType<OnPanelUpdateValue>,
     required: true

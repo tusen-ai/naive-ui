@@ -55,6 +55,7 @@ export const datePickerProps = {
   value: [Number, Array] as PropType<Value | null>,
   formattedValue: [String, Array] as PropType<FormattedValue | null>,
   size: String as PropType<'small' | 'medium' | 'large'>,
+  buttonSize: String as PropType<'small' | 'medium' | 'large'>,
   type: {
     type: String as PropType<DatePickerType>,
     default: 'date'
@@ -69,6 +70,10 @@ export const datePickerProps = {
   timePickerFormat: String,
   actions: Array as PropType<Array<'clear' | 'confirm' | 'now'> | null>,
   shortcuts: Object as PropType<Shortcuts>,
+  shortcutsPosition: {
+    type: String as PropType<'left' | 'right' | 'bottom'>,
+    default: 'bottom'
+  },
   isDateDisabled: Function as PropType<IsDateDisabled>,
   isTimeDisabled: Function as PropType<IsTimeDisabled>,
   show: {
