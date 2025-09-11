@@ -2,7 +2,7 @@ import type {
   DatePickerClearSlotProps,
   DatePickerNowSlotProps
 } from '../public-types'
-import { defineComponent, h, type PropType, watchEffect } from 'vue'
+import { computed, defineComponent, h, type PropType, watchEffect } from 'vue'
 import { NBaseFocusDetector } from '../../../_internal'
 import {
   BackwardIcon,
@@ -29,12 +29,19 @@ export default defineComponent({
   name: 'DatePanel',
   props: {
     ...useCalendarProps,
+    showWeekPrefix: {
+      type: Boolean,
+      default: undefined
+    },
     type: {
       type: String as PropType<'date' | 'week'>,
       required: true
     }
   },
   setup(props) {
+    const mergedShowWeekPrefix = computed(() => {
+      return props.type === 'week' && (props.showWeekPrefix ?? true)
+    })
     if (__DEV__) {
       watchEffect(() => {
         if (props.actions?.includes('confirm')) {
@@ -45,7 +52,10 @@ export default defineComponent({
         }
       })
     }
-    return useCalendar(props, props.type)
+    return {
+      ...useCalendar(props, props.type, mergedShowWeekPrefix.value),
+      mergedShowWeekPrefix
+    }
   },
   render() {
     const {
@@ -54,7 +64,8 @@ export default defineComponent({
       shortcuts,
       onRender,
       datePickerSlots,
-      type
+      type,
+      mergedShowWeekPrefix
     } = this
     onRender?.()
     return (
@@ -114,7 +125,15 @@ export default defineComponent({
               ])}
             </div>
           </div>
-          <div class={`${mergedClsPrefix}-date-panel-weekdays`}>
+          <div
+            class={[
+              `${mergedClsPrefix}-date-panel-weekdays`,
+              {
+                [`${mergedClsPrefix}-date-panel-weekdays--has-prefix`]:
+                  mergedShowWeekPrefix
+              }
+            ]}
+          >
             {this.weekdays.map(weekday => (
               <div
                 key={weekday}
@@ -124,7 +143,15 @@ export default defineComponent({
               </div>
             ))}
           </div>
-          <div class={`${mergedClsPrefix}-date-panel-dates`}>
+          <div
+            class={[
+              `${mergedClsPrefix}-date-panel-dates`,
+              {
+                [`${mergedClsPrefix}-date-panel-dates--has-prefix`]:
+                  mergedShowWeekPrefix
+              }
+            ]}
+          >
             {this.dateArray.map((dateItem, i) => (
               <div
                 data-n-date
@@ -148,7 +175,11 @@ export default defineComponent({
                     [`${mergedClsPrefix}-date-panel-date--week-hovered`]:
                       this.isWeekHovered(dateItem),
                     [`${mergedClsPrefix}-date-panel-date--week-selected`]:
-                      dateItem.inSelectedWeek
+                      dateItem.inSelectedWeek,
+                    [`${mergedClsPrefix}-date-panel-date--has-prefix`]:
+                      mergedShowWeekPrefix,
+                    [`${mergedClsPrefix}-date-panel-date--week-number`]:
+                      dateItem.weekNumber !== undefined
                   }
                 ]}
                 onClick={() => {
@@ -159,7 +190,9 @@ export default defineComponent({
                 }}
               >
                 <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
-                {dateItem.dateObject.date}
+                {dateItem.weekNumber !== undefined
+                  ? `${dateItem.weekNumber}.`
+                  : dateItem.dateObject.date}
                 {dateItem.isCurrentDate ? (
                   <div class={`${mergedClsPrefix}-date-panel-date__sup`} />
                 ) : null}

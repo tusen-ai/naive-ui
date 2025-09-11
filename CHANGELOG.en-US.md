@@ -36,6 +36,7 @@
 - Add `n-image-preview` component.
 - `n-image-group` can be used without `n-image`.
 - `n-input-otp` adds `focusOnChar` util method, closes [#7073](https://github.com/tusen-ai/naive-ui/issues/7073).
+- `n-date-picker` adds `show-week-prefix` prop to control whether to show week prefix in week picker.
 
 ## 2.42.0
 
