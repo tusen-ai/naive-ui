@@ -1,8 +1,8 @@
 import type {
   DatePickerClearSlotProps,
-  DatePickerNowSlotProps
+  DatePickerConfirmSlotProps
 } from '../public-types'
-import { defineComponent, h, type PropType, watchEffect } from 'vue'
+import { defineComponent, h, watchEffect } from 'vue'
 import { NBaseFocusDetector } from '../../../_internal'
 import {
   BackwardIcon,
@@ -17,35 +17,23 @@ import {
 } from '../../../_utils'
 import { NButton, NxButton } from '../../../button'
 import PanelHeader from './panelHeader'
-import { useCalendar, useCalendarProps } from './use-calendar'
+import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
 
-/**
- * Date Panel
- * Update picker value on:
- * 1. item click
- * 2. clear click
- */
 export default defineComponent({
-  name: 'DatePanel',
-  props: {
-    ...useCalendarProps,
-    type: {
-      type: String as PropType<'date' | 'week'>,
-      required: true
-    }
-  },
+  name: 'DateRangeMinimalPanel',
+  props: useDualCalendarProps,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {
-        if (props.actions?.includes('confirm')) {
+        if (props.actions?.includes('now')) {
           warnOnce(
             'date-picker',
-            'The `confirm` action is not supported for n-date-picker of `date` type'
+            'The `now` action is not supported for n-date-picker of `daterange-minimal` type'
           )
         }
       })
     }
-    return useCalendar(props, props.type)
+    return useDualCalendar(props, 'daterange')
   },
   render() {
     const {
@@ -53,30 +41,34 @@ export default defineComponent({
       mergedTheme,
       shortcuts,
       onRender,
-      datePickerSlots,
-      type
+      datePickerSlots
     } = this
     onRender?.()
+
     return (
       <div
         ref="selfRef"
         tabindex={0}
         class={[
           `${mergedClsPrefix}-date-panel`,
-          `${mergedClsPrefix}-date-panel--${type}`,
+          `${mergedClsPrefix}-date-panel--daterange`,
+          `${mergedClsPrefix}-date-panel--daterange-minimal`,
           !this.panel && `${mergedClsPrefix}-date-panel--shadow`,
           this.themeClass,
           this.shortcuts
           && `${mergedClsPrefix}-date-panel--shortcuts-${this.shortcutsPosition}`
         ]}
-        onFocus={this.handlePanelFocus}
         onKeydown={this.handlePanelKeyDown}
+        onFocus={this.handlePanelFocus}
       >
-        <div class={`${mergedClsPrefix}-date-panel-calendar`}>
+        <div
+          ref="startDatesElRef"
+          class={`${mergedClsPrefix}-date-panel-calendar ${mergedClsPrefix}-date-panel-calendar--start`}
+        >
           <div class={`${mergedClsPrefix}-date-panel-month`}>
             <div
               class={`${mergedClsPrefix}-date-panel-month__fast-prev`}
-              onClick={this.prevYear}
+              onClick={this.startCalendarPrevYear}
             >
               {resolveSlot(datePickerSlots['prev-year'], () => [
                 <FastBackwardIcon />
@@ -84,7 +76,7 @@ export default defineComponent({
             </div>
             <div
               class={`${mergedClsPrefix}-date-panel-month__prev`}
-              onClick={this.prevMonth}
+              onClick={this.startCalendarPrevMonth}
             >
               {resolveSlot(datePickerSlots['prev-month'], () => [
                 <BackwardIcon />
@@ -93,15 +85,15 @@ export default defineComponent({
             <PanelHeader
               monthYearSeparator={this.calendarHeaderMonthYearSeparator}
               monthBeforeYear={this.calendarMonthBeforeYear}
-              value={this.calendarValue}
-              onUpdateValue={this.onUpdateCalendarValue}
+              value={this.startCalendarDateTime}
+              onUpdateValue={this.onUpdateStartCalendarValue}
               mergedClsPrefix={mergedClsPrefix}
-              calendarMonth={this.calendarMonth}
-              calendarYear={this.calendarYear}
+              calendarMonth={this.startCalendarMonth}
+              calendarYear={this.startCalendarYear}
             />
             <div
               class={`${mergedClsPrefix}-date-panel-month__next`}
-              onClick={this.nextMonth}
+              onClick={this.startCalendarNextMonth}
             >
               {resolveSlot(datePickerSlots['next-month'], () => [
                 <ForwardIcon />
@@ -109,7 +101,7 @@ export default defineComponent({
             </div>
             <div
               class={`${mergedClsPrefix}-date-panel-month__fast-next`}
-              onClick={this.nextYear}
+              onClick={this.startCalendarNextYear}
             >
               {resolveSlot(datePickerSlots['next-year'], () => [
                 <FastForwardIcon />
@@ -126,31 +118,29 @@ export default defineComponent({
               </div>
             ))}
           </div>
+          <div class={`${mergedClsPrefix}-date-panel__divider`} />
           <div class={`${mergedClsPrefix}-date-panel-dates`}>
-            {this.dateArray.map((dateItem, i) => (
+            {this.startDateArray.map((dateItem, i) => (
               <div
                 data-n-date
                 key={i}
                 class={[
                   `${mergedClsPrefix}-date-panel-date`,
                   {
+                    [`${mergedClsPrefix}-date-panel-date--excluded`]:
+                      !dateItem.inCurrentMonth,
                     [`${mergedClsPrefix}-date-panel-date--current`]:
                       dateItem.isCurrentDate,
                     [`${mergedClsPrefix}-date-panel-date--selected`]:
                       dateItem.selected,
-                    [`${mergedClsPrefix}-date-panel-date--excluded`]:
-                      !dateItem.inCurrentMonth,
+                    [`${mergedClsPrefix}-date-panel-date--covered`]:
+                      dateItem.inSpan,
+                    [`${mergedClsPrefix}-date-panel-date--start`]:
+                      dateItem.startOfSpan,
+                    [`${mergedClsPrefix}-date-panel-date--end`]:
+                      dateItem.endOfSpan,
                     [`${mergedClsPrefix}-date-panel-date--disabled`]:
-                      this.mergedIsDateDisabled(dateItem.ts, {
-                        type: 'date',
-                        year: dateItem.dateObject.year,
-                        month: dateItem.dateObject.month,
-                        date: dateItem.dateObject.date
-                      }),
-                    [`${mergedClsPrefix}-date-panel-date--week-hovered`]:
-                      this.isWeekHovered(dateItem),
-                    [`${mergedClsPrefix}-date-panel-date--week-selected`]:
-                      dateItem.inSelectedWeek
+                      this.mergedIsDateDisabled(dateItem.ts)
                   }
                 ]}
                 onClick={() => {
@@ -178,22 +168,23 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-date-panel-shortcuts`}>
             {Object.keys(shortcuts).map((key) => {
               const shortcut = shortcuts[key]
-              return Array.isArray(shortcut) ? null : (
-                <NxButton
-                  size={this.buttonSize ?? 'tiny'}
-                  onMouseenter={() => {
-                    this.handleSingleShortcutMouseenter(shortcut)
-                  }}
-                  onClick={() => {
-                    this.handleSingleShortcutClick(shortcut)
-                  }}
-                  onMouseleave={() => {
-                    this.handleShortcutMouseleave()
-                  }}
-                >
-                  {{ default: () => key }}
-                </NxButton>
-              )
+              return Array.isArray(shortcut)
+                || typeof shortcut === 'function' ? (
+                    <NxButton
+                      size={this.buttonSize ?? 'tiny'}
+                      onMouseenter={() => {
+                        this.handleRangeShortcutMouseenter(shortcut)
+                      }}
+                      onClick={() => {
+                        this.handleRangeShortcutClick(shortcut)
+                      }}
+                      onMouseleave={() => {
+                        this.handleShortcutMouseleave()
+                      }}
+                    >
+                      {{ default: () => key }}
+                    </NxButton>
+                  ) : null
             })}
           </div>
         ) : null}
@@ -207,7 +198,7 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
               {this.actions?.includes('clear')
                 ? resolveSlotWithTypedProps(
-                    this.$slots.clear,
+                    datePickerSlots.clear,
                     {
                       onClear: this.handleClearClick,
                       text: this.locale.clear
@@ -224,26 +215,28 @@ export default defineComponent({
                     ]
                   )
                 : null}
-              {this.actions?.includes('now')
+              {this.actions?.includes('confirm')
                 ? resolveSlotWithTypedProps(
-                    this.$slots.now,
+                    datePickerSlots.confirm,
                     {
-                      onNow: this.handleNowClick,
-                      text: this.locale.now
-                    } satisfies DatePickerNowSlotProps,
+                      onConfirm: this.handleConfirmClick,
+                      disabled: this.isRangeInvalid || this.isSelecting,
+                      text: this.locale.confirm
+                    } satisfies DatePickerConfirmSlotProps,
                     () => [
                       <NButton
                         theme={mergedTheme.peers.Button}
                         themeOverrides={mergedTheme.peerOverrides.Button}
                         size={this.buttonSize ?? 'tiny'}
-                        onClick={this.handleNowClick}
+                        type="primary"
+                        disabled={this.isRangeInvalid || this.isSelecting}
+                        onClick={this.handleConfirmClick}
                       >
-                        {{ default: () => this.locale.now }}
+                        {{ default: () => this.locale.confirm }}
                       </NButton>
                     ]
                   )
                 : null}
-              {/** we don't need a confirm button for date picking */}
             </div>
           </div>
         ) : null}

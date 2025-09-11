@@ -9,6 +9,7 @@ date.vue
 datetime.vue
 datetimeformat.vue
 daterange.vue
+daterange-minimal.vue
 datetimerange.vue
 month.vue
 monthrange.vue
@@ -18,11 +19,13 @@ quarter.vue
 quarterrange.vue
 week.vue
 size.vue
+button-size.vue
 default-time.vue
 disabled.vue
 disabled-time.vue
 actions.vue
 shortcuts.vue
+shortcuts-position.vue
 events.vue
 format.vue
 footerslot.vue
@@ -57,12 +60,14 @@ form-debug.vue
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 面板的弹出位置 | 2.25.0 |
 | quarter-format | `string` | `'Q'Q` | 设置面板中季度的显示方式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | 2.37.0 |
 | shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| (() => [number, number])>` | `undefined` | 自定义快捷按钮 |  |
+| shortcuts-position | `'left' \| 'right' \| 'bottom'` | `'bottom'` | 快捷面板位置。 | MEXT_VERSION |
 | show | `boolean` | `undefined` | 是否展示面板 | 2.28.3 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
+| button-size | `'small' \| 'medium' \| 'large'` | `undefined` | 面板按钮尺寸（快捷/清除/现在/确认）。 | MEXT_VERSION |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | time-picker-format | `string \| undefined` | `undefined` | 日期面板内时间的显示方式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | 2.38.2 |
 | to | `string \| HTMLElement \| false` | `body` | 面板的容器节点，`false` 会待在原地 |  |
-| type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'monthrange' \| 'year' \| 'yearrange' \| 'quarter' \| 'quarterrange' \| 'week'` | `'date'` | Date Picker 的类型 | `'quarter'` v2.22.0, `'monthrange'` 2.28.3 |
+| type | `'date' \| 'datetime' \| 'daterange' \| 'daterange-minimal' \| 'datetimerange' \| 'month' \| 'monthrange' \| 'year' \| 'yearrange' \| 'quarter' \| 'quarterrange' \| 'week'` | `'date'` | Date Picker 的类型 | `'quarter'` v2.22.0, `'monthrange'` 2.28.3, `'daterange-minimal'` MEXT_VERSION |
 | value | `number \| [number, number] \| null` | `undefined` | Date Picker 的值 |  |
 | value-format | `string` | 跟随 `format` 属性 | 绑定值的格式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |
 | year-format | `string` | `'y'` | 设置面板中年的显示方式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | 2.37.0 |

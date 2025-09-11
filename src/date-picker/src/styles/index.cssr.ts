@@ -90,6 +90,8 @@ export default c([
     background-color: var(--n-panel-color);
     color: var(--n-panel-text-color);
     user-select: none;
+    box-sizing: border-box;
+    max-width: calc(100vw - 16px);
   `, [
     fadeInScaleUpTransition(),
     cM('shadow', `
@@ -192,6 +194,7 @@ export default c([
       `
     }),
     cM('daterange', {
+      gridTemplateColumns: 'auto 1px auto',
       gridTemplateAreas: `
         "left-calendar divider right-calendar"
         "footer footer footer"
@@ -212,6 +215,14 @@ export default c([
         "left-calendar divider right-calendar"
         "footer footer footer"
         "action action action"
+      `
+    }),
+    cM('daterange-minimal', {
+      gridTemplateColumns: 'max-content',
+      gridTemplateAreas: `
+        "left-calendar"
+        "footer"
+        "action"
       `
     }),
     cM('month', {
@@ -518,18 +529,16 @@ export default c([
       padding: var(--n-panel-action-padding);
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-end;
       border-top: 1px solid var(--n-panel-action-divider-color);
     `, [
-      cE('prefix, suffix', `
-        display: flex;
-        margin-bottom: -8px;
+      cM('no-divider', `
+        border-top: none;
       `),
       cE('suffix', `
+        display: flex;
+        margin-bottom: -8px;
         align-self: flex-end;
-      `),
-      cE('prefix', `
-        flex-wrap: wrap;
       `),
       cB('button', `
         margin-bottom: 8px;
@@ -538,6 +547,250 @@ export default c([
           margin-right: 8px;
         `)
       ])
+    ]),
+    cB('date-panel-shortcuts', `
+      grid-area: shortcuts;
+      padding: var(--n-panel-action-padding);
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      box-sizing: border-box;
+      /* Constrain side shortcuts column so it doesn't stretch the panel */
+      width: clamp(120px, 24vw, 180px);
+    `, [
+      cB('button', `
+        width: 100%;
+        white-space: nowrap;
+        margin-bottom: 8px;
+      `, [
+        c('&:not(:last-child)', `
+          margin-right: 0;
+        `)
+      ])
+    ]),
+    // Shortcuts placement modifiers
+    cM('shortcuts-bottom', [
+      cB('date-panel-shortcuts', `
+        /* Bottom placement: make shortcuts horizontal */
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        min-width: 0;
+        border-top: 1px solid var(--n-panel-action-divider-color);
+      `, [
+        cB('button', `
+          width: auto;
+          white-space: normal;
+          overflow-wrap: anywhere;
+          word-break: break-word;
+          text-align: left;
+        `, [
+          c('&:not(:last-child)', `
+            margin-right: 8px;
+          `)
+        ])
+      ]),
+      cM('date', {
+        gridTemplateAreas: `
+          "left-calendar"
+          "footer"
+          "shortcuts"
+          "action"
+        `
+      }),
+      cM('week', {
+        gridTemplateAreas: `
+          "left-calendar"
+          "footer"
+          "shortcuts"
+          "action"
+        `
+      }),
+      cM('month', {
+        gridTemplateAreas: `
+          "left-calendar"
+          "footer"
+          "shortcuts"
+          "action"
+        `
+      }),
+      cM('datetime', {
+        gridTemplateAreas: `
+          "header"
+          "left-calendar"
+          "footer"
+          "shortcuts"
+          "action"
+        `
+      }),
+      cM('daterange', {
+        gridTemplateAreas: `
+          "left-calendar divider right-calendar"
+          "footer footer footer"
+          "shortcuts shortcuts shortcuts"
+          "action action action"
+        `
+      }),
+      cM('daterange-minimal', {
+        gridTemplateAreas: `
+          "left-calendar"
+          "footer"
+          "shortcuts"
+          "action"
+        `
+      }),
+      cM('datetimerange', {
+        gridTemplateAreas: `
+          "header header header"
+          "left-calendar divider right-calendar"
+          "footer footer footer"
+          "shortcuts shortcuts shortcuts"
+          "action action action"
+        `
+      })
+    ]),
+    cM('shortcuts-left', [
+      cB('date-panel-shortcuts', `
+        border-right: 1px solid var(--n-calendar-divider-color);
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+      `, [
+        cB('button', `
+          white-space: normal;
+          overflow-wrap: anywhere;
+          word-break: break-word;
+          text-align: left;
+        `)
+      ]),
+      cM('date', {
+        gridTemplateColumns: 'minmax(120px, 180px) max-content',
+        gridTemplateAreas: `
+          "shortcuts left-calendar"
+          "shortcuts footer"
+          "shortcuts action"
+        `
+      }),
+      cM('week', {
+        gridTemplateColumns: 'minmax(120px, 180px) max-content',
+        gridTemplateAreas: `
+          "shortcuts left-calendar"
+          "shortcuts footer"
+          "shortcuts action"
+        `
+      }),
+      cM('month', {
+        gridTemplateColumns: 'minmax(120px, 180px) max-content',
+        gridTemplateAreas: `
+          "shortcuts left-calendar"
+          "shortcuts footer"
+          "shortcuts action"
+        `
+      }),
+      cM('datetime', {
+        gridTemplateColumns: 'minmax(120px, 180px) max-content',
+        gridTemplateAreas: `
+          "header header"
+          "shortcuts left-calendar"
+          "shortcuts footer"
+          "shortcuts action"
+        `
+      }),
+      cM('daterange', {
+        gridTemplateColumns: 'minmax(120px, 180px) max-content 1px max-content',
+        gridTemplateAreas: `
+          "shortcuts left-calendar divider right-calendar"
+          "shortcuts footer footer footer"
+          "shortcuts action action action"
+        `
+      }),
+      cM('daterange-minimal', {
+        gridTemplateColumns: 'minmax(120px, 180px) max-content',
+        gridTemplateAreas: `
+          "shortcuts left-calendar"
+          "shortcuts footer"
+          "shortcuts action"
+        `
+      }),
+      cM('datetimerange', {
+        gridTemplateColumns: 'minmax(120px, 180px) max-content 1px max-content',
+        gridTemplateAreas: `
+          "header header header header"
+          "shortcuts left-calendar divider right-calendar"
+          "shortcuts footer footer footer"
+          "shortcuts action action action"
+        `
+      })
+    ]),
+    cM('shortcuts-right', [
+      cB('date-panel-shortcuts', `
+        border-left: 1px solid var(--n-calendar-divider-color);
+      `, [
+        cB('button', `
+          white-space: normal;
+          overflow-wrap: anywhere;
+          word-break: break-word;
+          text-align: left;
+        `)
+      ]),
+      cM('date', {
+        gridTemplateColumns: 'max-content minmax(120px, 180px)',
+        gridTemplateAreas: `
+          "left-calendar shortcuts"
+          "footer shortcuts"
+          "action shortcuts"
+        `
+      }),
+      cM('week', {
+        gridTemplateColumns: 'max-content minmax(120px, 180px)',
+        gridTemplateAreas: `
+          "left-calendar shortcuts"
+          "footer shortcuts"
+          "action shortcuts"
+        `
+      }),
+      cM('month', {
+        gridTemplateColumns: 'max-content minmax(120px, 180px)',
+        gridTemplateAreas: `
+          "left-calendar shortcuts"
+          "footer shortcuts"
+          "action shortcuts"
+        `
+      }),
+      cM('datetime', {
+        gridTemplateColumns: 'max-content minmax(120px, 180px)',
+        gridTemplateAreas: `
+          "header header"
+          "left-calendar shortcuts"
+          "footer shortcuts"
+          "action shortcuts"
+        `
+      }),
+      cM('daterange', {
+        gridTemplateColumns: 'max-content 1px max-content minmax(120px, 180px)',
+        gridTemplateAreas: `
+          "left-calendar divider right-calendar shortcuts"
+          "footer footer footer shortcuts"
+          "action action action shortcuts"
+        `
+      }),
+      cM('datetimerange', {
+        gridTemplateColumns: 'max-content 1px max-content minmax(120px, 180px)',
+        gridTemplateAreas: `
+          "header header header header"
+          "left-calendar divider right-calendar shortcuts"
+          "footer footer footer shortcuts"
+          "action action action shortcuts"
+        `
+      }),
+      cM('daterange-minimal', {
+        gridTemplateColumns: 'max-content minmax(120px, 180px)',
+        gridTemplateAreas: `
+          "left-calendar shortcuts"
+          "footer shortcuts"
+          "action shortcuts"
+        `
+      })
     ])
   ]),
   c('[data-n-date].transition-disabled', {
@@ -546,5 +799,622 @@ export default c([
     c('&::before, &::after', {
       transition: 'none !important'
     })
+  ]),
+  c('@media (max-width: 640px)', [
+    cB('date-panel', [
+      cM('daterange', {
+        gridTemplateColumns: '1fr',
+        gridTemplateAreas: `
+          "left-calendar"
+          "divider"
+          "right-calendar"
+          "footer"
+          "action"
+        `
+      }, [
+        cE('vertical-divider', `
+          height: 1px;
+          width: 100%;
+        `)
+      ]),
+      cM('datetimerange', {
+        gridTemplateAreas: `
+          "header"
+          "left-calendar"
+          "divider"
+          "right-calendar"
+          "footer"
+          "action"
+        `
+      }, [
+        cE('vertical-divider', `
+          height: 1px;
+          width: 100%;
+        `)
+      ]),
+      cM('shortcuts-left', [
+        cB('date-panel-shortcuts', `
+          flex-direction: row;
+          flex-wrap: wrap;
+          width: 100%;
+          min-width: 0;
+          border-right: none;
+          border-left: none;
+        `, [
+          cB('button', `
+            width: auto;
+          `, [
+            c('&:not(:last-child)', `
+              margin-right: 8px;
+            `)
+          ])
+        ]),
+        cM('date', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('week', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('month', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('datetime', {
+          gridTemplateAreas: `
+            "header"
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('daterange', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "divider"
+            "right-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('datetimerange', {
+          gridTemplateAreas: `
+            "header"
+            "left-calendar"
+            "divider"
+            "right-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        })
+      ]),
+      cM('shortcuts-right', [
+        cB('date-panel-shortcuts', `
+          flex-direction: row;
+          flex-wrap: wrap;
+          width: 100%;
+          min-width: 0;
+          border-left: none;
+          border-right: none;
+        `, [
+          cB('button', `
+            width: auto;
+          `, [
+            c('&:not(:last-child)', `
+              margin-right: 8px;
+            `)
+          ])
+        ]),
+        cM('date', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('week', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('month', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('datetime', {
+          gridTemplateAreas: `
+            "header"
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('daterange', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "divider"
+            "right-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('datetimerange', {
+          gridTemplateAreas: `
+            "header"
+            "left-calendar"
+            "divider"
+            "right-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        })
+      ]),
+      cM('shortcuts-bottom', [
+        cM('date', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('week', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('month', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('datetime', {
+          gridTemplateAreas: `
+            "header"
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('daterange', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "divider"
+            "right-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('datetimerange', {
+          gridTemplateAreas: `
+            "header"
+            "left-calendar"
+            "divider"
+            "right-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        })
+      ])
+    ])
+  ]),
+  c('@media (max-width: 960px)', [
+    cB('date-panel', [
+      cM('daterange', {
+        gridTemplateColumns: '1fr',
+        gridTemplateAreas: `
+          "left-calendar"
+          "divider"
+          "right-calendar"
+          "footer"
+          "action"
+        `
+      }, [
+        cE('vertical-divider', `
+          height: 1px;
+          width: 100%;
+        `)
+      ]),
+      cM('datetimerange', {
+        gridTemplateAreas: `
+          "header"
+          "left-calendar"
+          "divider"
+          "right-calendar"
+          "footer"
+          "action"
+        `
+      }, [
+        cE('vertical-divider', `
+          height: 1px;
+          width: 100%;
+        `)
+      ]),
+      cM('shortcuts-bottom', [
+        cM('daterange', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "divider"
+            "right-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('datetimerange', {
+          gridTemplateAreas: `
+            "header"
+            "left-calendar"
+            "divider"
+            "right-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        })
+      ]),
+      cM('shortcuts-left', [
+        cB('date-panel-shortcuts', `
+          flex-direction: row;
+          flex-wrap: wrap;
+          width: 100%;
+          min-width: 0;
+          border-right: none;
+          border-left: none;
+        `, [
+          cB('button', `
+            width: auto;
+          `, [
+            c('&:not(:last-child)', `
+              margin-right: 8px;
+            `)
+          ])
+        ]),
+        cM('date', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('week', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('month', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('datetime', {
+          gridTemplateAreas: `
+            "header"
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('daterange', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "divider"
+            "right-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('datetimerange', {
+          gridTemplateAreas: `
+            "header"
+            "left-calendar"
+            "divider"
+            "right-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        })
+      ]),
+      cM('shortcuts-right', [
+        cB('date-panel-shortcuts', `
+          flex-direction: row;
+          flex-wrap: wrap;
+          width: 100%;
+          min-width: 0;
+          border-left: none;
+          border-right: none;
+        `, [
+          cB('button', `
+            width: auto;
+          `, [
+            c('&:not(:last-child)', `
+              margin-right: 8px;
+            `)
+          ])
+        ]),
+        cM('date', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('week', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('month', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('datetime', {
+          gridTemplateAreas: `
+            "header"
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('daterange', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "divider"
+            "right-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('datetimerange', {
+          gridTemplateAreas: `
+            "header"
+            "left-calendar"
+            "divider"
+            "right-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        })
+      ])
+    ])
+  ]),
+  c('@media (max-width: 960px)', [
+    cB('date-panel', [
+      cM('shortcuts-left', [
+        cM('date', { gridTemplateColumns: '1fr' }),
+        cM('week', { gridTemplateColumns: '1fr' }),
+        cM('month', { gridTemplateColumns: '1fr' }),
+        cM('datetime', { gridTemplateColumns: '1fr' }),
+        cM('daterange-minimal', { gridTemplateColumns: '1fr' }),
+        cM('daterange', { gridTemplateColumns: '1fr' }),
+        cM('datetimerange', { gridTemplateColumns: '1fr' })
+      ]),
+      cM('shortcuts-right', [
+        cM('date', { gridTemplateColumns: '1fr' }),
+        cM('week', { gridTemplateColumns: '1fr' }),
+        cM('month', { gridTemplateColumns: '1fr' }),
+        cM('datetime', { gridTemplateColumns: '1fr' }),
+        cM('daterange-minimal', { gridTemplateColumns: '1fr' }),
+        cM('daterange', { gridTemplateColumns: '1fr' }),
+        cM('datetimerange', { gridTemplateColumns: '1fr' })
+      ])
+    ])
+  ]),
+  c('@media (max-width: 640px)', [
+    cB('date-panel', [
+      cM('shortcuts-left', [
+        cM('daterange', { gridTemplateColumns: '1fr' }),
+        cM('datetimerange', { gridTemplateColumns: '1fr' })
+      ]),
+      cM('shortcuts-right', [
+        cM('daterange', { gridTemplateColumns: '1fr' }),
+        cM('datetimerange', { gridTemplateColumns: '1fr' })
+      ])
+    ])
+  ]),
+  c('@media (hover: none) and (pointer: coarse)', [
+    cB('date-panel', [
+      cM('shortcuts-left', [
+        cB('date-panel-shortcuts', `
+          flex-direction: row;
+          flex-wrap: wrap;
+          width: 100%;
+          min-width: 0;
+          border-right: none;
+          border-left: none;
+        `, [
+          cB('button', `
+            width: auto;
+          `, [
+            c('&:not(:last-child)', `
+              margin-right: 8px;
+            `)
+          ])
+        ]),
+        cM('date', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('week', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('month', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('datetime', {
+          gridTemplateAreas: `
+            "header"
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('daterange', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "divider"
+            "right-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('datetimerange', {
+          gridTemplateAreas: `
+            "header"
+            "left-calendar"
+            "divider"
+            "right-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        })
+      ]),
+      cM('shortcuts-right', [
+        cB('date-panel-shortcuts', `
+          flex-direction: row;
+          flex-wrap: wrap;
+          width: 100%;
+          min-width: 0;
+          border-left: none;
+          border-right: none;
+        `, [
+          cB('button', `
+            width: auto;
+          `, [
+            c('&:not(:last-child)', `
+              margin-right: 8px;
+            `)
+          ])
+        ]),
+        cM('date', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('week', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('month', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('datetime', {
+          gridTemplateAreas: `
+            "header"
+            "left-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('daterange', {
+          gridTemplateAreas: `
+            "left-calendar"
+            "divider"
+            "right-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        }),
+        cM('datetimerange', {
+          gridTemplateAreas: `
+            "header"
+            "left-calendar"
+            "divider"
+            "right-calendar"
+            "footer"
+            "shortcuts"
+            "action"
+          `
+        })
+      ])
+    ])
   ])
 ])

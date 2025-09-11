@@ -26,7 +26,7 @@ describe('n-date-picker', () => {
     })
     await wrapper.find('.n-input').trigger('click')
     const button: HTMLElement = document
-      .querySelector('.n-date-panel-actions')
+      .querySelector('.n-date-panel-shortcuts')
       ?.querySelector('.n-button') as HTMLElement
     button.click()
     expect(test.value).toEqual(1631203200000)
@@ -36,7 +36,7 @@ describe('n-date-picker', () => {
     })
     await wrapper.find('.n-input').trigger('click')
     const timeButton: HTMLElement = document
-      .querySelector('.n-date-panel-actions')
+      .querySelector('.n-date-panel-shortcuts')
       ?.querySelector('.n-button') as HTMLElement
     timeButton.click()
     expect(test.value).toEqual(1631203200000)
@@ -59,7 +59,7 @@ describe('n-date-picker', () => {
     })
     await wrapper.find('.n-input').trigger('click')
     const button: HTMLElement = document
-      .querySelector('.n-date-panel-actions')
+      .querySelector('.n-date-panel-shortcuts')
       ?.querySelector('.n-button') as HTMLElement
     button.click()
     expect(test.value).toEqual([1629216000000, 1631203200000])
@@ -92,7 +92,7 @@ describe('n-date-picker', () => {
     })
     await wrapper.find('.n-input').trigger('click')
     const button: HTMLElement = document
-      .querySelector('.n-date-panel-actions')
+      .querySelector('.n-date-panel-shortcuts')
       ?.querySelector('.n-button') as HTMLElement
     button.click()
     expect(test.value).toEqual(1631203200000)
@@ -102,7 +102,7 @@ describe('n-date-picker', () => {
     })
     await wrapper.find('.n-input').trigger('click')
     const timeButton: HTMLElement = document
-      .querySelector('.n-date-panel-actions')
+      .querySelector('.n-date-panel-shortcuts')
       ?.querySelector('.n-button') as HTMLElement
     timeButton.click()
     expect(test.value).toEqual(1631203200000)
