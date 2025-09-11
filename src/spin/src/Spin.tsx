@@ -4,12 +4,12 @@ import { pxfy } from 'seemly'
 import { useCompitable } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   type PropType,
   ref,
   type SlotsType,
+  type StyleValue,
   Transition,
   type VNode,
   watchEffect
@@ -29,7 +29,7 @@ const STROKE_WIDTH = {
 export const spinProps = {
   ...(useTheme.props as ThemeProps<SpinTheme>),
   contentClass: String,
-  contentStyle: [Object, String] as PropType<CSSProperties | string>,
+  contentStyle: Object as PropType<StyleValue>,
   description: String,
   stroke: String,
   size: {
@@ -168,7 +168,7 @@ export default defineComponent({
             `${mergedClsPrefix}-spin`,
             rotate && `${mergedClsPrefix}-spin--rotate`
           ]}
-          style={$slots.default ? '' : (this.cssVars as CSSProperties)}
+          style={$slots.default ? '' : this.cssVars}
         >
           {$slots.icon()}
         </div>
@@ -178,7 +178,7 @@ export default defineComponent({
       <div class={[`${mergedClsPrefix}-spin-body`, this.themeClass]}>
         <NBaseLoading
           clsPrefix={mergedClsPrefix}
-          style={$slots.default ? '' : (this.cssVars as CSSProperties)}
+          style={$slots.default ? '' : this.cssVars}
           stroke={this.stroke}
           stroke-width={this.mergedStrokeWidth}
           class={`${mergedClsPrefix}-spin`}
@@ -190,7 +190,7 @@ export default defineComponent({
     return $slots.default ? (
       <div
         class={[`${mergedClsPrefix}-spin-container`, this.themeClass]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         <div
           class={[

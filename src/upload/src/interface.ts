@@ -1,4 +1,4 @@
-import type { CSSProperties, Ref, VNodeChild } from 'vue'
+import type { Ref, StyleValue, VNodeChild } from 'vue'
 import type { MergedTheme } from '../../_mixins'
 import type { ImageGroupProps } from '../../image'
 import type { UploadTheme } from '../styles'
@@ -59,17 +59,17 @@ export interface UploadInjection {
   dragOverRef: Ref<boolean>
   draggerInsideRef: { value: boolean }
   fileListClassRef: Ref<string | undefined>
-  fileListStyleRef: Ref<string | CSSProperties | undefined>
+  fileListStyleRef: Ref<StyleValue>
   mergedDisabledRef: Ref<boolean>
   maxReachedRef: Ref<boolean>
   abstractRef: Ref<boolean>
   imageGroupPropsRef: Ref<ImageGroupProps | undefined>
-  cssVarsRef: undefined | Ref<CSSProperties>
+  cssVarsRef: undefined | Ref<StyleValue>
   themeClassRef: undefined | Ref<string>
   mergedDirectoryDndRef: Ref<boolean>
   acceptRef: Ref<string | undefined>
   triggerClassRef: Ref<string | undefined>
-  triggerStyleRef: Ref<CSSProperties | string | undefined>
+  triggerStyleRef: Ref<StyleValue>
   doChange: DoChange
   onRender: undefined | (() => void)
   submit: (fileId?: string) => void

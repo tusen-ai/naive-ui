@@ -1,10 +1,10 @@
 import type { ProgressGradient, ProgressStatus } from './public-types'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
-  type PropType
+  type PropType,
+  type StyleValue
 } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {
@@ -34,7 +34,7 @@ export default defineComponent({
       default: 0
     },
     railColor: String,
-    railStyle: [String, Object] as PropType<string | CSSProperties>,
+    railStyle: Object as PropType<StyleValue>,
     fillColor: [String, Object] as PropType<string | ProgressGradient>,
     status: {
       type: String as PropType<ProgressStatus>,
@@ -111,23 +111,20 @@ export default defineComponent({
               class={[
                 `${clsPrefix}-progress-graph-line`,
                 {
-                  [`${clsPrefix}-progress-graph-line--indicator-${indicatorPlacement}`]:
-                    true
+                  [`${clsPrefix}-progress-graph-line--indicator-${indicatorPlacement}`]: true
                 }
               ]}
             >
               <div
                 class={`${clsPrefix}-progress-graph-line-rail`}
-                style={
-                  [
-                    {
-                      backgroundColor: railColor,
-                      height: styleHeightRef.value,
-                      borderRadius: styleRailBorderRadiusRef.value
-                    },
-                    railStyle
-                  ] as any
-                }
+                style={[
+                  {
+                    backgroundColor: railColor,
+                    height: styleHeightRef.value,
+                    borderRadius: styleRailBorderRadiusRef.value
+                  },
+                  railStyle
+                ]}
               >
                 <div
                   class={[

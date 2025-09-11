@@ -3,12 +3,12 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ThingTheme } from '../styles'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   Fragment,
   h,
   type PropType,
   type SlotsType,
+  type StyleValue,
   type VNode
 } from 'vue'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
@@ -21,10 +21,10 @@ export const thingProps = {
   titleExtra: String,
   description: String,
   descriptionClass: String,
-  descriptionStyle: [String, Object] as PropType<string | CSSProperties>,
+  descriptionStyle: Object as PropType<StyleValue>,
   content: String,
   contentClass: String,
-  contentStyle: [String, Object] as PropType<string | CSSProperties>,
+  contentStyle: Object as PropType<StyleValue>,
   contentIndented: Boolean
 }
 
@@ -84,11 +84,7 @@ export default defineComponent({
             themeClassHandle?.themeClass,
             rtlEnabled && `${mergedClsPrefix}-thing--rtl`
           ]}
-          style={
-            inlineThemeDisabled
-              ? undefined
-              : (cssVarsRef.value as CSSProperties)
-          }
+          style={inlineThemeDisabled ? undefined : cssVarsRef.value}
         >
           {slots.avatar && props.contentIndented ? (
             <div class={`${mergedClsPrefix}-thing-avatar`}>

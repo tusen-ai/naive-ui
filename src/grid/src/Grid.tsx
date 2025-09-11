@@ -3,7 +3,6 @@ import { useBreakpoints, useMemo } from 'vooks'
 import {
   cloneVNode,
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   mergeProps,
@@ -12,6 +11,7 @@ import {
   provide,
   type Ref,
   ref,
+  type StyleValue,
   toRef,
   type VNode,
   vShow
@@ -49,7 +49,7 @@ export const gridProps = {
     type: Number,
     default: 1
   },
-  itemStyle: [Object, String] as PropType<CSSProperties | string>,
+  itemStyle: Object as PropType<StyleValue>,
   xGap: {
     type: [Number, String] as PropType<number | string>,
     default: 0
@@ -62,7 +62,7 @@ export const gridProps = {
 
 export interface NGridInjection {
   isSsrRef: Ref<boolean>
-  itemStyleRef: Ref<CSSProperties | string | undefined>
+  itemStyleRef: Ref<StyleValue>
   xGapRef: Ref<string | undefined>
   overflowRef: Ref<boolean>
   layoutShiftDisabledRef: Ref<boolean>
@@ -154,7 +154,7 @@ export default defineComponent({
       isSsr: !isBrowser,
       contentEl: contentElRef,
       mergedClsPrefix: mergedClsPrefixRef,
-      style: computed<CSSProperties>(() => {
+      style: computed<StyleValue>(() => {
         if (props.layoutShiftDisabled) {
           return {
             width: '100%',

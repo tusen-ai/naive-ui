@@ -6,7 +6,6 @@ import { getPreciseEventTarget } from 'seemly'
 import { clickoutside, mousemoveoutside } from 'vdirs'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   type DirectiveArguments,
   Fragment,
@@ -17,6 +16,7 @@ import {
   type PropType,
   provide,
   ref,
+  type StyleValue,
   toRef,
   Transition,
   type VNode,
@@ -58,9 +58,9 @@ export const popoverBodyProps = {
   raw: Boolean,
   arrowPointToCenter: Boolean,
   arrowClass: String,
-  arrowStyle: [String, Object] as PropType<string | CSSProperties>,
+  arrowStyle: Object as PropType<StyleValue>,
   arrowWrapperClass: String,
-  arrowWrapperStyle: [String, Object] as PropType<string | CSSProperties>,
+  arrowWrapperStyle: Object as PropType<StyleValue>,
   displayDirective: String as PropType<'if' | 'show'>,
   x: Number,
   y: Number,
@@ -71,11 +71,11 @@ export const popoverBodyProps = {
   keepAliveOnHover: Boolean,
   scrollable: Boolean,
   contentClass: String,
-  contentStyle: [Object, String] as PropType<CSSProperties | string>,
+  contentStyle: Object as PropType<StyleValue>,
   headerClass: String,
-  headerStyle: [Object, String] as PropType<CSSProperties | string>,
+  headerStyle: Object as PropType<StyleValue>,
   footerClass: String,
-  footerStyle: [Object, String] as PropType<CSSProperties | string>,
+  footerStyle: Object as PropType<StyleValue>,
   // private
   internalDeactivateImmediately: Boolean,
   animated: Boolean,
@@ -89,9 +89,9 @@ export const popoverBodyProps = {
 
 interface RenderArrowProps {
   arrowClass: string | undefined
-  arrowStyle: string | CSSProperties | undefined
+  arrowStyle: StyleValue
   arrowWrapperClass: string | undefined
-  arrowWrapperStyle: string | CSSProperties | undefined
+  arrowWrapperStyle: StyleValue
   clsPrefix: string
 }
 
@@ -225,7 +225,7 @@ export default defineComponent({
     const styleRef = computed(() => {
       const width
         = props.width === 'trigger' ? undefined : formatLength(props.width)
-      const style: CSSProperties[] = []
+      const style: StyleValue = []
       if (width) {
         style.push({ width })
       }

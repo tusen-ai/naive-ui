@@ -13,7 +13,6 @@ import type {
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   type ExtractPropTypes,
   h,
@@ -259,7 +258,7 @@ export default defineComponent({
           this.rtlEnabled && `${this.mergedClsPrefix}-collapse--rtl`,
           this.themeClass
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         {this.$slots}
       </div>

@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { type CSSProperties, Fragment, h } from 'vue'
+import { Fragment, h, type StyleValue } from 'vue'
 import { NSwitch } from '../index'
 
 describe('n-switch', () => {
@@ -100,8 +100,8 @@ describe('n-switch', () => {
     }: {
       focused: boolean
       checked: boolean
-    }): CSSProperties | string => {
-      const style: any = {}
+    }): StyleValue => {
+      const style: StyleValue = {}
       if (!checked) {
         style.background = color
         if (focused) {

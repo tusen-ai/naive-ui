@@ -3,7 +3,7 @@
 </markdown>
 
 <script lang="ts" setup>
-import type { CSSProperties } from 'vue'
+import type { StyleValue } from 'vue'
 
 function railStyle({
   focused,
@@ -12,7 +12,7 @@ function railStyle({
   focused: boolean
   checked: boolean
 }) {
-  const style: CSSProperties = {}
+  const style: StyleValue = {}
   if (checked) {
     style.background = '#d03050'
     if (focused) {

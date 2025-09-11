@@ -1,6 +1,6 @@
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ScrollbarProps } from '../../scrollbar/src/Scrollbar'
-import { type CSSProperties, defineComponent, h, type PropType, ref } from 'vue'
+import { defineComponent, h, type PropType, ref, type StyleValue } from 'vue'
 import {
   type VirtualListInst,
   type VirtualListItemData,
@@ -22,7 +22,7 @@ export const virtualListProps = {
     required: true
   },
   itemResizable: Boolean,
-  itemsStyle: [String, Object] as PropType<string | CSSProperties>,
+  itemsStyle: Object as PropType<StyleValue>,
   visibleItemsTag: {
     type: [String, Object] as PropType<string | object>,
     default: 'div'
@@ -125,7 +125,8 @@ export default defineComponent({
                 items={this.items}
                 itemSize={this.itemSize}
                 itemResizable={this.itemResizable}
-                itemsStyle={this.itemsStyle}
+                // FIXME: after vueuc itemsStyle type upgrade, we can remove this
+                itemsStyle={this.itemsStyle as any}
                 visibleItemsTag={this.visibleItemsTag}
                 visibleItemsProps={this.visibleItemsProps}
                 ignoreItemResize={this.ignoreItemResize}

@@ -4,7 +4,6 @@ import type { MessageTheme } from '../styles'
 import type { MessageOptions, MessageType } from './types'
 import { createId } from 'seemly'
 import {
-  type CSSProperties,
   defineComponent,
   type ExtractPropTypes,
   Fragment,
@@ -13,6 +12,7 @@ import {
   provide,
   reactive,
   ref,
+  type StyleValue,
   Teleport,
   type VNodeChild
 } from 'vue'
@@ -78,7 +78,7 @@ export const messageProviderProps = {
   },
   closable: Boolean,
   containerClass: String,
-  containerStyle: [String, Object] as PropType<string | CSSProperties>
+  containerStyle: Object as PropType<StyleValue>
 }
 
 export type MessageProviderProps = ExtractPublicPropTypes<

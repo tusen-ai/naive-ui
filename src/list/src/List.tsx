@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
+import type { PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ListTheme } from '../styles'
 import { computed, defineComponent, h, provide, toRef } from 'vue'
@@ -117,7 +117,7 @@ export default defineComponent({
           this.clickable && `${mergedClsPrefix}-list--clickable`,
           this.themeClass
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         {$slots.header ? (
           <div class={`${mergedClsPrefix}-list__header`}>{$slots.header()}</div>

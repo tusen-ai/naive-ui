@@ -1,5 +1,5 @@
 import type { ProgressGradient, ProgressStatus } from './public-types'
-import { type CSSProperties, defineComponent, h, type PropType } from 'vue'
+import { defineComponent, h, type PropType, type StyleValue } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {
   ErrorIcon,
@@ -32,7 +32,7 @@ export default defineComponent({
     },
     fillColor: [String, Object] as PropType<string | ProgressGradient>,
     railColor: String,
-    railStyle: [String, Object] as PropType<string | CSSProperties>,
+    railStyle: Object as PropType<StyleValue>,
     percentage: {
       type: Number,
       default: 0
@@ -66,7 +66,7 @@ export default defineComponent({
       offsetDegree: number,
       strokeColor?: string | ProgressGradient,
       type?: 'rail' | 'fill'
-    ): { pathString: string, pathStyle: CSSProperties } {
+    ): { pathString: string, pathStyle: StyleValue } {
       const { gapDegree, viewBoxWidth, strokeWidth } = props
       const radius = 50
       const beginPositionX = 0
@@ -78,7 +78,7 @@ export default defineComponent({
       a ${radius},${radius} 0 1 1 ${endPositionX},${-endPositionY}
       a ${radius},${radius} 0 1 1 ${-endPositionX},${endPositionY}`
       const len = Math.PI * 2 * radius
-      const pathStyle: CSSProperties = {
+      const pathStyle: StyleValue = {
         stroke:
           type === 'rail'
             ? (strokeColor as string)

@@ -4,7 +4,6 @@ import type { TagTheme } from '../styles'
 import { getMargin } from 'seemly'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   type PropType,
@@ -302,7 +301,7 @@ export default defineComponent({
             [`${mergedClsPrefix}-tag--closable`]: closable
           }
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
         onClick={this.handleClick}
         onMouseenter={this.onMouseenter}
         onMouseleave={this.onMouseleave}

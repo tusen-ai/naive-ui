@@ -10,7 +10,6 @@ import { createId } from 'seemly'
 import { useMemo, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   inject,
@@ -361,7 +360,7 @@ export default defineComponent({
         role="checkbox"
         aria-checked={indeterminate ? 'mixed' : renderedChecked}
         aria-labelledby={labelId}
-        style={cssVars as CSSProperties}
+        style={cssVars}
         onKeyup={handleKeyUp}
         onKeydown={handleKeyDown}
         onClick={handleClick}

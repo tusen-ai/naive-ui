@@ -2,7 +2,6 @@ import { off, on } from 'evtd'
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   inject,
@@ -11,6 +10,7 @@ import {
   type PropType,
   ref,
   type SlotsType,
+  type StyleValue,
   toRef,
   type VNode
 } from 'vue'
@@ -143,7 +143,7 @@ export default defineComponent({
         '--n-border-radius-square': borderRadiusSquare
       }
     })
-    const inlineStyle = computed<CSSProperties>(() => {
+    const inlineStyle = computed<StyleValue>(() => {
       const { width, height } = props
       return {
         position: floatButtonGroupInjection ? undefined : props.position,
@@ -246,7 +246,7 @@ export default defineComponent({
           mergedShowMenu && `${mergedClsPrefix}-float-button--show-menu`,
           themeClass
         ]}
-        style={[cssVars as CSSProperties, inlineStyle]}
+        style={[cssVars, inlineStyle]}
         onMouseenter={this.Mouseenter}
         onMouseleave={this.handleMouseleave}
         onClick={this.handleClick}

@@ -20,7 +20,6 @@ import type { PageItem } from './utils'
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   Fragment,
   h,
@@ -616,7 +615,7 @@ export default defineComponent({
           disabled && `${mergedClsPrefix}-pagination--disabled`,
           simple && `${mergedClsPrefix}-pagination--simple`
         ]}
-        style={cssVars as CSSProperties}
+        style={cssVars}
       >
         {renderPrefix ? (
           <div class={`${mergedClsPrefix}-pagination-prefix`}>

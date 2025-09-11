@@ -6,12 +6,12 @@ import { depx, pxfy } from 'seemly'
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   type PropType,
   ref,
   type SlotsType,
+  type StyleValue,
   toRef,
   type VNode,
   watchEffect
@@ -64,7 +64,7 @@ export const switchProps = {
     default: false
   },
   railStyle: Function as PropType<
-    (params: { focused: boolean, checked: boolean }) => string | CSSProperties
+    (params: { focused: boolean, checked: boolean }) => StyleValue
   >,
   rubberBand: {
     type: Boolean,
@@ -338,7 +338,7 @@ export default defineComponent({
           this.rubberBand && `${mergedClsPrefix}-switch--rubber-band`
         ]}
         tabindex={!this.mergedDisabled ? 0 : undefined}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
         onClick={this.handleClick}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}

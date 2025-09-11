@@ -60,7 +60,7 @@ no-icon.vue
 | --- | --- | --- | --- | --- |
 | closable | `boolean` | `false` | Whether to show close icon on all messages. |  |
 | container-class | `string` | `undefined` | Message container class. | 2.36.0 |
-| container-style | `string \| CSSProperties` | `undefined` | Message container style. |  |
+| container-style | `StyleValue` | Message container style. |  |
 | duration | `number` | `3000` | Default duration of on all messages. |  |
 | keep-alive-on-hover | `boolean` | `false` | Whether to destroy while hovering on all messages. |  |
 | max | `number` | `undefined` | Limit the number of messages to display. |  |

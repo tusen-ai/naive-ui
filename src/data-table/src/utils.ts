@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'vue'
+import type { StyleValue } from 'vue'
 import type {
   CreateRowClassName,
   InternalRowData,
@@ -95,7 +95,7 @@ export function clampValueFollowCSSRules(
 export function createCustomWidthStyle(
   column: TableBaseColumn | TableSelectionColumn | TableExpandColumn,
   resizedWidth?: string
-): CSSProperties {
+): StyleValue {
   if (resizedWidth !== undefined) {
     return {
       width: resizedWidth,

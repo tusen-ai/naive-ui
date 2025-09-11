@@ -19,7 +19,6 @@ import { get } from 'lodash-es'
 import { createId } from 'seemly'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   type ExtractPropTypes,
   h,
@@ -30,6 +29,7 @@ import {
   provide,
   ref,
   type Slot,
+  type StyleValue,
   toRef,
   Transition,
   type VNodeChild,
@@ -58,7 +58,7 @@ export const formItemProps = {
   ...(useTheme.props as ThemeProps<FormTheme>),
   label: String,
   labelWidth: [Number, String] as PropType<string | number>,
-  labelStyle: [String, Object] as PropType<CSSProperties | string>,
+  labelStyle: Object as PropType<StyleValue>,
   labelAlign: String as PropType<LabelAlign>,
   labelPlacement: String as PropType<LabelPlacement>,
   path: String,
@@ -80,7 +80,7 @@ export const formItemProps = {
   validationStatus: String as PropType<'error' | 'warning' | 'success'>,
   feedback: String,
   feedbackClass: String,
-  feedbackStyle: [String, Object] as PropType<string | CSSProperties>,
+  feedbackStyle: Object as PropType<StyleValue>,
   showLabel: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -604,7 +604,7 @@ export default defineComponent({
           && `${mergedClsPrefix}-form-item--auto-label-width`,
           !mergedShowLabel && `${mergedClsPrefix}-form-item--no-label`
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         {mergedShowLabel && renderLabel()}
         <div

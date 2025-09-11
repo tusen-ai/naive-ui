@@ -1,15 +1,13 @@
+import type { DirectiveArguments, PropType, StyleValue } from 'vue'
 import type { ScrollbarProps } from '../../_internal'
 import { clickoutside } from 'vdirs'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
-  type DirectiveArguments,
   h,
   inject,
   mergeProps,
   onBeforeUnmount,
-  type PropType,
   provide,
   ref,
   Transition,
@@ -46,7 +44,7 @@ export default defineComponent({
       required: true
     },
     contentClass: String,
-    contentStyle: [Object, String] as PropType<string | CSSProperties>,
+    contentStyle: Object as PropType<StyleValue>,
     nativeScrollbar: {
       type: Boolean,
       required: true
