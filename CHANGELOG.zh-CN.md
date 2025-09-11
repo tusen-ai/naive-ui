@@ -36,6 +36,7 @@
 - 新增 `n-image-preview` 组件
 - `n-image-group` 可以脱离 `n-image` 使用
 - `n-input-otp` 增加 `focusOnChar` 方法，关闭 [#7073](https://github.com/tusen-ai/naive-ui/issues/7073)
+- `n-date-picker`、`n-mention`、`n-pagination`、`n-time-picker` 新增 `input-props` 属性，关闭 [#7125](https://github.com/tusen-ai/naive-ui/issues/7125)
 
 ## 2.42.0
 

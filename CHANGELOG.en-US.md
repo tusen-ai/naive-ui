@@ -36,6 +36,7 @@
 - Add `n-image-preview` component.
 - `n-image-group` can be used without `n-image`.
 - `n-input-otp` adds `focusOnChar` util method, closes [#7073](https://github.com/tusen-ai/naive-ui/issues/7073).
+- `n-date-picker`, `n-mention`, `n-pagination`, `n-time-picker` adds `input-props` prop, closes [#7125](https://github.com/tusen-ai/naive-ui/issues/7125)
 
 ## 2.42.0
 
