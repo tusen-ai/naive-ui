@@ -1,3 +1,4 @@
+import type { TimePickerProps } from '../../../time-picker'
 import type {
   DatePickerClearSlotProps,
   DatePickerConfirmSlotProps
@@ -48,6 +49,11 @@ export default defineComponent({
     } = this
     onRender?.()
 
+    const makeTimePickerProps = (props?: TimePickerProps) => ({
+      ...props,
+      disabled: this.isSelecting || props?.disabled
+    })
+
     return (
       <div
         ref="selfRef"
@@ -79,13 +85,14 @@ export default defineComponent({
             placeholder={this.locale.selectTime}
             format={this.timePickerFormat}
             size={this.timePickerSize}
-            {...(Array.isArray(timePickerProps)
-              ? timePickerProps[0]
-              : timePickerProps)}
+            {...makeTimePickerProps(
+              Array.isArray(timePickerProps)
+                ? timePickerProps[0]
+                : timePickerProps
+            )}
             value={this.startTimeValue}
             to={false}
             showIcon={false}
-            disabled={this.isSelecting}
             theme={mergedTheme.peers.TimePicker}
             themeOverrides={mergedTheme.peerOverrides.TimePicker}
             stateful={false}
@@ -111,10 +118,11 @@ export default defineComponent({
             placeholder={this.locale.selectTime}
             format={this.timePickerFormat}
             size={this.timePickerSize}
-            {...(Array.isArray(timePickerProps)
-              ? timePickerProps[1]
-              : timePickerProps)}
-            disabled={this.isSelecting}
+            {...makeTimePickerProps(
+              Array.isArray(timePickerProps)
+                ? timePickerProps[1]
+                : timePickerProps
+            )}
             showIcon={false}
             theme={mergedTheme.peers.TimePicker}
             themeOverrides={mergedTheme.peerOverrides.TimePicker}

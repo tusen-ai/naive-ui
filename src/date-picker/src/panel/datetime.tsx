@@ -72,7 +72,9 @@ export default defineComponent({
             size={this.timePickerSize}
             placeholder={this.locale.selectTime}
             format={this.timePickerFormat}
-            {...(Array.isArray(timePickerProps) ? undefined : timePickerProps)}
+            {...(Array.isArray(timePickerProps)
+              ? timePickerProps[0]
+              : timePickerProps)}
             showIcon={false}
             to={false}
             theme={mergedTheme.peers.TimePicker}
