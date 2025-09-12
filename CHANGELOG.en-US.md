@@ -38,6 +38,7 @@
 
 ### Features
 
+- `n-data-table` adds `cell-` scoped slot, closes [#6825](https://github.com/tusen-ai/naive-ui/issues/6825).
 - `n-data-table`'s column adds `customNextSortOrder` attribute, closes [#6850](https://github.com/tusen-ai/naive-ui/issues/6850).
 - Add `n-avatar-group`'s corresponding generic component `NGAvatarGroup`, closes [#6909](https://github.com/tusen-ai/naive-ui/issues/6909).
 - `n-avatar-group` adds `size` prop.

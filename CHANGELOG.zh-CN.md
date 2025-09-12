@@ -37,6 +37,7 @@
 
 ### Features
 
+- `n-data-table` adds `cell-` scoped slot, closes [#6825](https://github.com/tusen-ai/naive-ui/issues/6825).
 - `n-data-table` 的列增加 `customNextSortOrder` 属性，关闭 [#6850](https://github.com/tusen-ai/naive-ui/issues/6850)
 - 新增 `n-avatar-group` 对应的泛型组件 `NGAvatarGroup`，关闭 [#6909](https://github.com/tusen-ai/naive-ui/issues/6909)
 - `n-avatar-group` 新增 `size` 属性
