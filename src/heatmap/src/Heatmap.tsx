@@ -45,6 +45,7 @@ export const heatmapProps = {
   activeColors: Array as PropType<string[]>,
   colorTheme: String as PropType<HeatmapColorTheme>,
   data: Array as PropType<HeatmapData>,
+  loadingData: Object as PropType<HeatmapData>,
   fillCalendarLeading: Boolean,
   firstDayOfWeek: {
     type: Number as PropType<HeatmapFirstDayOfWeek>,
@@ -70,7 +71,7 @@ export const heatmapProps = {
   },
   tooltip: {
     type: [Boolean, Object] as PropType<TooltipProps | boolean>,
-    default: true
+    default: false
   },
   xGap: [Number, String] as PropType<number | string>,
   yGap: [Number, String] as PropType<number | string>
@@ -171,6 +172,17 @@ export default defineComponent({
       )
     })
 
+    const normalizedLoadingDataRef = computed(() => {
+      if (!props.loadingData || props.loadingData.length === 0) {
+        return []
+      }
+      return completeDataGaps(
+        props.loadingData,
+        transformNaiveFirstDayOfWeekToDateFns(props.firstDayOfWeek),
+        props.fillCalendarLeading
+      )
+    })
+
     const maxValueRef = computed(() => {
       const validData = normalizedDataRef.value.filter(d => d.value !== null)
       return maxBy(validData, d => d.value!)?.value ?? 0
@@ -178,17 +190,22 @@ export default defineComponent({
 
     const heatmapMatrixRef = computed(() => {
       const data = normalizedDataRef.value
-
-      if (props.loading || data.length === 0) {
+      const loadingData = normalizedLoadingDataRef.value
+      if (props.loading && !loadingData.length) {
         return createLoadingMatrix(
           transformNaiveFirstDayOfWeekToDateFns(props.firstDayOfWeek)
         )
       }
+
+      const finalData = props.loading ? loadingData : data
+      if (!finalData.length)
+        return []
+
       const maxValue = maxValueRef.value
       const colors = mergedColorsRef.value
-      const calendarStartDate = data[0].timestamp
+      const calendarStartDate = finalData[0].timestamp
 
-      const dayRects = data.map(item =>
+      const dayRects = finalData.map(item =>
         createDayRect(
           item,
           calendarStartDate,
@@ -290,7 +307,7 @@ export default defineComponent({
     })
 
     const monthLabelsRef = computed(() => {
-      return props.loading
+      return props.loading && !props.loadingData
         ? loadingMonthLabelsRef.value
         : dataMonthLabelsRef.value
     })
@@ -371,7 +388,7 @@ export default defineComponent({
                         {weekLabel.visible ? weekLabel.label : null}
                       </td>
                     )}
-                    {heatmapMatrix[rowIdx].map(
+                    {(heatmapMatrix[rowIdx] || []).map(
                       (day: DayRect, weekIdx: number) => {
                         return day.value !== null ? (
                           <td
@@ -421,7 +438,7 @@ export default defineComponent({
           )}
           <div class={`${mergedClsPrefix}-heatmap__indicator`}>
             {resolveSlot($slots.indicator, () => [
-              !loading && showColorIndicator && (
+              showColorIndicator && (
                 <HeatmapColorIndicator
                   colors={mergedColors}
                   clsPrefix={mergedClsPrefix}

@@ -47,7 +47,7 @@ export function calcColorByValue(
 export function completeDataGaps(
   data: HeatmapData,
   firstDayOfWeek: HeatmapFirstDayOfWeek,
-  fillCalendarLeading?: boolean
+  fillCalendarLeading: boolean
 ): HeatmapData {
   const sortedData = [...data].sort((a, b) => a.timestamp - b.timestamp)
   const firstDate = sortedData[0].timestamp

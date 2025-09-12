@@ -1,15 +1,20 @@
 import type { ComputedRef, Ref } from 'vue'
 import type { MergedTheme, Theme } from '../../_mixins'
 import type { HeatmapThemeVars } from '../styles'
+import { useSsrAdapter } from '@css-render/vue3-ssr'
 import { hash } from 'css-render'
-import { onMounted, ref, watchEffect } from 'vue'
+import { inject, onMounted, ref, watchEffect } from 'vue'
 import { c } from '../../_utils/cssr'
+import { configProviderInjectionKey } from '../../config-provider/src/context'
 
 export function useLoadingStyleClass(
   props: { loading?: boolean },
   themeRef: ComputedRef<MergedTheme<Theme<'Heatmap', HeatmapThemeVars, any>>>
 ): Ref<string> {
   const loadingClassRef = ref('')
+  const adapter = useSsrAdapter()
+  const NConfigProvider = inject(configProviderInjectionKey, null)
+  const styleMountTarget = NConfigProvider?.styleMountTarget
   onMounted(() => {
     watchEffect(() => {
       if (!props.loading) {
@@ -47,10 +52,12 @@ export function useLoadingStyleClass(
         `
         )
       ])
-      cnode.mount({ id: loadingColorHash })
-      return () => {
-        cnode.unmount({ id: loadingColorHash })
-      }
+      // We don't unmount it since we didn't know its mount count
+      cnode.mount({
+        id: loadingColorHash,
+        ssr: adapter,
+        parent: styleMountTarget
+      })
     })
   })
   return loadingClassRef

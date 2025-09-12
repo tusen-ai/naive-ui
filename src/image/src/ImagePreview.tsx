@@ -50,19 +50,14 @@ const BLEEDING = 32
 
 export const imagePreviewProps = {
   ...imagePreviewSharedProps,
-  src: {
-    type: String
-  },
+  src: String,
   show: {
     type: Boolean,
     default: undefined
   },
-  defaultShow: {
-    type: Boolean,
-    default: false
-  },
+  defaultShow: Boolean,
   'onUpdate:show': [Function, Array] as PropType<
-    MaybeArray<(value: boolean) => void>
+    MaybeArray<(show: boolean) => void>
   >,
   onUpdateShow: [Function, Array] as PropType<
     MaybeArray<(show: boolean) => void>
@@ -151,7 +146,6 @@ export default defineComponent({
 
     watch(mergedShowRef, (value) => {
       if (value) {
-        doUpdateShow(true)
         on('keydown', document, handleKeydown)
       }
       else {
