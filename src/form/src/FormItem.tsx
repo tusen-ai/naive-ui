@@ -85,7 +85,9 @@ export const formItemProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  labelProps: Object as PropType<LabelHTMLAttributes>
+  labelProps: Object as PropType<LabelHTMLAttributes>,
+  contentClass: String,
+  contentStyle: [Object, String] as PropType<CSSProperties | string>
 } as const
 
 export type FormItemSetupProps = ExtractPropTypes<typeof formItemProps>
@@ -610,9 +612,11 @@ export default defineComponent({
         <div
           class={[
             `${mergedClsPrefix}-form-item-blank`,
+            this.contentClass,
             this.mergedValidationStatus
             && `${mergedClsPrefix}-form-item-blank--${this.mergedValidationStatus}`
           ]}
+          style={this.contentStyle}
         >
           {$slots}
         </div>
