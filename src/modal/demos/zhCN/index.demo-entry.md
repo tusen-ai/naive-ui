@@ -28,6 +28,7 @@ preset-confirm.vue
 preset-confirm-slot.vue
 transform-origin.vue
 draggable.vue
+mask-visible.vue
 nested-debug.vue
 a11y-debug.vue
 raw-debug.vue
@@ -76,6 +77,7 @@ mask-click-debug.vue
 | display-directive | `'if' \| 'show'` | `'if'` | 使用何种指令控制模态框主体的条件渲染 |  |
 | draggable | `boolean \| { bounds?: 'none' }` | `false` | 是否可拖拽，`bounds === 'none'` 时拖拽可超出视口 | 2.41.0 |
 | mask-closable | `boolean` | `true` | 点击遮罩时是否发出 `update:show` 事件 |  |
+| mask-visible | `boolean` | `true` | 是否显示遮罩层 | NEXT_VERSION |
 | preset | `'dialog' \| 'card'` | `undefined` | 模态框使用何种预设 |  |
 | show | `boolean` | `false` | 是否展示 Modal |  |
 | to | `string \| HTMLElement` | `body` | Modal 的挂载位置 |  |
