@@ -13,6 +13,7 @@ basic.vue
 visibility-height.vue
 change-position.vue
 target-container-selector.vue
+to-bottom.vue
 ```
 
 ## API
@@ -26,5 +27,6 @@ target-container-selector.vue
 | right | `number \| string` | `40` | BackTop 距离页面右侧的宽度 |
 | show | `boolean` | `undefined` | 是否显示 BackTop（受控） |
 | to | `string \| HTMLElement` | `'body'` | BackTop 渲染的容器节点 |
+| direction | `'top' \| 'bottom'` | `'top'` | BackTop 返回的位置，默认是返回顶部 |
 | visibility-height | `number` | `180` | 滚动时触发显示回到顶部的高度 |
 | on-update:show | `(value: boolean) => void` | `undefined` | BackTop 的 show 改变时触发事件 |
