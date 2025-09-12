@@ -36,6 +36,7 @@
 - 新增 `n-image-preview` 组件
 - `n-image-group` 可以脱离 `n-image` 使用
 - `n-input-otp` 增加 `focusOnChar` 方法，关闭 [#7073](https://github.com/tusen-ai/naive-ui/issues/7073)
+- `n-modal` 增加 `mask-visible` 属性
 
 ## 2.42.0
 
