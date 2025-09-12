@@ -36,6 +36,7 @@
 - 新增 `n-image-preview` 组件
 - `n-image-group` 可以脱离 `n-image` 使用
 - `n-input-otp` 增加 `focusOnChar` 方法，关闭 [#7073](https://github.com/tusen-ai/naive-ui/issues/7073)
+- `n-steps` 增加 `content-placement` 属性，关闭 [#7044](https://github.com/tusen-ai/naive-ui/issues/7044)
 
 ## 2.42.0
 
