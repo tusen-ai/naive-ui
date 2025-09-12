@@ -62,6 +62,7 @@ switchable-editable.vue
 context-menu.vue
 async-expand.vue
 render-cell.vue
+cell-slot.vue
 export-csv.vue
 fixed-column-debug.vue
 fixed-column2-debug.vue
@@ -239,7 +240,8 @@ type DataTableCreateSummary = (pageData: RowData[]) =>
 
 ### DataTable Slots
 
-| 名称    | 参数 | 说明                  | 版本   |
-| ------- | ---- | --------------------- | ------ |
-| empty   | `()` | 表格数据为空时的展示  |        |
+| 名称 | 参数 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| empty | `()` | 表格数据为空时的展示 |  |
 | loading | `()` | 表格 loading 时的展示 | 2.34.0 |
+| cell- | `(data: { row: RowData, column: DataTableBaseColumn}) => VNode[]` | 每个单元的自定义插槽 | NEXT_VERSION |
