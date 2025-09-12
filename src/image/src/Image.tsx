@@ -137,7 +137,7 @@ export default defineComponent({
       })
     })
 
-    function onImgClick(e: MouseEvent) {
+    function onImgClick(e: PointerEvent) {
       exposedMethods.showPreview()
       props.imgProps?.onClick?.(e)
     }
@@ -160,7 +160,7 @@ export default defineComponent({
       showError: showErrorRef,
       shouldStartLoading: shouldStartLoadingRef,
       loaded: loadedRef,
-      mergedOnClick: (e: MouseEvent) => {
+      mergedOnClick: (e: PointerEvent) => {
         onImgClick(e)
       },
       onPreviewClose,
