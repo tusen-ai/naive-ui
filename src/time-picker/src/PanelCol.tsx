@@ -1,5 +1,5 @@
-import { h, defineComponent, type PropType } from 'vue'
-import { type Item } from './interface'
+import type { Item } from './interface'
+import { defineComponent, h, type PropType } from 'vue'
 
 export default defineComponent({
   name: 'TimePickerPanelCol',
@@ -13,13 +13,13 @@ export default defineComponent({
       required: true
     },
     activeValue: {
-      type: Number as PropType<number | null | 'am' | 'pm'>,
+      type: [Number, String] as PropType<number | null | 'am' | 'pm'>,
       default: null
     },
     // It should be required but vue's type seems to have bugs
     onItemClick: Function as PropType<(value: number | 'am' | 'pm') => void>
   },
-  render () {
+  render() {
     const { activeValue, onItemClick, clsPrefix } = this
     return this.data.map((item) => {
       const { label, disabled, value } = item

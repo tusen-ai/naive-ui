@@ -4,43 +4,18 @@
 Set `inverted` to add contrast. Usually used with `n-layout`.
 </markdown>
 
-<template>
-  <n-space vertical>
-    <n-space><n-switch v-model:value="inverted" />inverted</n-space>
-    <n-layout has-sider>
-      <n-layout-sider
-        bordered
-        collapse-mode="width"
-        :collapsed-width="64"
-        :width="240"
-        show-trigger
-        :inverted="inverted"
-      >
-        <n-menu
-          :inverted="inverted"
-          :collapsed-width="64"
-          :collapsed-icon-size="22"
-          :options="menuOptions"
-        />
-      </n-layout-sider>
-      <n-layout>
-        <span>Content</span>
-      </n-layout>
-    </n-layout>
-  </n-space>
-</template>
-
-<script lang="ts">
-import { h, defineComponent, ref, Component } from 'vue'
-import { NIcon } from 'naive-ui'
+<script lang="ts" setup>
 import type { MenuOption } from 'naive-ui'
+import type { Component } from 'vue'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
+import { NIcon } from 'naive-ui'
+import { h, ref } from 'vue'
 
-function renderIcon (icon: Component) {
+function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -119,12 +94,31 @@ const menuOptions: MenuOption[] = [
   }
 ]
 
-export default defineComponent({
-  setup () {
-    return {
-      inverted: ref(false),
-      menuOptions
-    }
-  }
-})
+const inverted = ref(false)
 </script>
+
+<template>
+  <n-space vertical>
+    <n-space><n-switch v-model:value="inverted" />inverted</n-space>
+    <n-layout has-sider>
+      <n-layout-sider
+        bordered
+        collapse-mode="width"
+        :collapsed-width="64"
+        :width="240"
+        show-trigger
+        :inverted="inverted"
+      >
+        <n-menu
+          :inverted="inverted"
+          :collapsed-width="64"
+          :collapsed-icon-size="22"
+          :options="menuOptions"
+        />
+      </n-layout-sider>
+      <n-layout>
+        <span>Content</span>
+      </n-layout>
+    </n-layout>
+  </n-space>
+</template>

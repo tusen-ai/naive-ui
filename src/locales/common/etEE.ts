@@ -31,7 +31,7 @@ const etEE: NLocale = {
     dateFormat: 'dd.MM.yyyy',
     dateTimeFormat: 'dd.MM.yyyy HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
-    weekFormat: 'yyyy-w',
+    weekFormat: 'YYYY-w',
     clear: 'Tühjenda',
     now: 'Nüüd',
     confirm: 'Kinnita',
@@ -122,6 +122,12 @@ const etEE: NLocale = {
     tipDownload: 'Lae alla',
     tipClose: 'Sulge (Esc)',
     tipOriginalSize: 'Algsuurus'
+  },
+  Heatmap: {
+    less: 'less',
+    more: 'more',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

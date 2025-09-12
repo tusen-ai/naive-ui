@@ -1,12 +1,12 @@
-import {
-  h,
-  withDirectives,
-  vShow,
-  defineComponent,
-  toRef,
-  type PropType
-} from 'vue'
 import { useFalseUntilTruthy } from 'vooks'
+import {
+  defineComponent,
+  h,
+  type PropType,
+  toRef,
+  vShow,
+  withDirectives
+} from 'vue'
 import { NFadeInExpandTransition } from '../../_internal'
 
 export default defineComponent({
@@ -22,13 +22,13 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
+  setup(props) {
     const onceTrueRef = useFalseUntilTruthy(toRef(props, 'show'))
     return {
       onceTrue: onceTrueRef
     }
   },
-  render () {
+  render() {
     return (
       <NFadeInExpandTransition>
         {{

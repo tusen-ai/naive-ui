@@ -1,16 +1,16 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { TypographyTheme } from '../styles'
 import {
-  h,
-  defineComponent,
   computed,
-  type PropType,
-  type CSSProperties
+  type CSSProperties,
+  defineComponent,
+  h,
+  type PropType
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import { typographyLight } from '../styles'
-import type { TypographyTheme } from '../styles'
 import style from './styles/p.cssr'
-import type { ExtractPublicPropTypes } from '../../_utils'
 
 export const pProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme>),
@@ -22,7 +22,7 @@ export type PProps = ExtractPublicPropTypes<typeof pProps>
 export default defineComponent({
   name: 'P',
   props: pProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Typography',
@@ -55,11 +55,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'p',
-        computed(() => `${props.depth || ''}`),
-        cssVarsRef,
-        props
-      )
+          'p',
+          computed(() => `${props.depth || ''}`),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
@@ -68,7 +68,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     this.onRender?.()
     return (
       <p

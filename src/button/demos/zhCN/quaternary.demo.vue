@@ -1,7 +1,11 @@
 <markdown>
 # 次次次要按钮
-
 </markdown>
+
+<script lang="ts" setup>
+import { CashOutline as CashIcon } from '@vicons/ionicons5'
+</script>
+
 <template>
   <n-space>
     <n-button quaternary>
@@ -42,43 +46,33 @@
     </n-button>
     <n-button quaternary circle>
       <template #icon>
-        <n-icon><cash-icon /></n-icon>
+        <n-icon><CashIcon /></n-icon>
       </template>
     </n-button>
     <n-button quaternary circle type="primary">
       <template #icon>
-        <n-icon><cash-icon /></n-icon>
+        <n-icon><CashIcon /></n-icon>
       </template>
     </n-button>
     <n-button quaternary circle type="info">
       <template #icon>
-        <n-icon><cash-icon /></n-icon>
+        <n-icon><CashIcon /></n-icon>
       </template>
     </n-button>
     <n-button quaternary circle type="success">
       <template #icon>
-        <n-icon><cash-icon /></n-icon>
+        <n-icon><CashIcon /></n-icon>
       </template>
     </n-button>
     <n-button quaternary circle type="warning">
       <template #icon>
-        <n-icon><cash-icon /></n-icon>
+        <n-icon><CashIcon /></n-icon>
       </template>
     </n-button>
     <n-button quaternary circle type="error">
       <template #icon>
-        <n-icon><cash-icon /></n-icon>
+        <n-icon><CashIcon /></n-icon>
       </template>
     </n-button>
   </n-space>
 </template>
-<script lang="ts">
-import { CashOutline as CashIcon } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    CashIcon
-  }
-})
-</script>

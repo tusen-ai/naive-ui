@@ -31,7 +31,7 @@ const jaJP: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
-    weekFormat: 'yyyy-w',
+    weekFormat: 'YYYY-w',
     clear: 'クリア',
     now: '現在',
     confirm: 'OK',
@@ -122,6 +122,12 @@ const jaJP: NLocale = {
     tipDownload: 'ダウンロード',
     tipClose: '閉じる (Esc)',
     tipOriginalSize: '元のサイズに戻す'
+  },
+  Heatmap: {
+    less: '少',
+    more: '多',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

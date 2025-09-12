@@ -1,6 +1,15 @@
 <markdown>
-  # Basic
+# Basic
 </markdown>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const count = ref(6)
+function handleLoad() {
+  count.value += 1
+}
+</script>
 
 <template>
   <n-infinite-scroll style="height: 240px" :distance="10" @load="handleLoad">
@@ -10,21 +19,6 @@
   </n-infinite-scroll>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-export default defineComponent({
-  setup () {
-    const count = ref(6)
-    const handleLoad = () => {
-      count.value += 1
-    }
-    return {
-      count,
-      handleLoad
-    }
-  }
-})
-</script>
 <style>
 .item {
   display: flex;
@@ -32,6 +26,10 @@ export default defineComponent({
   height: 46px;
   justify-content: center;
   margin-bottom: 10px;
-  background-color: #e7f5ee;
+  background-color: rgba(0, 128, 0, 0.16);
+}
+
+.item:last-child {
+  margin-bottom: 0;
 }
 </style>

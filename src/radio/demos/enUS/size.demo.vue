@@ -4,6 +4,39 @@
 Choose the size you want.
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const value = ref(null)
+const disabled2 = ref(false)
+const disabled1 = ref(false)
+const songs = [
+  {
+    value: 'Rock\'n\'Roll Star',
+    label: 'Rock\'n\'Roll Star'
+  },
+  {
+    value: 'Shakermaker',
+    label: 'Shakermaker'
+  },
+  {
+    value: 'Live Forever',
+    label: 'Live Forever'
+  },
+  {
+    value: 'Up in the Sky',
+    label: 'Up in the Sky'
+  },
+  {
+    value: '...',
+    label: '...'
+  }
+].map((s) => {
+  s.value = s.value.toLowerCase()
+  return s
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-radio-group v-model:value="value" name="radiobuttongroup2" size="medium">
@@ -12,8 +45,8 @@ Choose the size you want.
         :key="song.value"
         :value="song.value"
         :disabled="
-          (song.label === 'Live Forever' && disabled1) ||
-            (song.label === 'Shakermaker' && disabled2)
+          (song.label === 'Live Forever' && disabled1)
+            || (song.label === 'Shakermaker' && disabled2)
         "
       >
         {{ song.label }}
@@ -25,8 +58,8 @@ Choose the size you want.
         :key="song.value"
         :value="song.value"
         :disabled="
-          (song.label === 'Live Forever' && disabled1) ||
-            (song.label === 'Shakermaker' && disabled2)
+          (song.label === 'Live Forever' && disabled1)
+            || (song.label === 'Shakermaker' && disabled2)
         "
       >
         {{ song.label }}
@@ -42,42 +75,3 @@ Choose the size you want.
     </n-space>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      value: ref(null),
-      disabled2: ref(false),
-      disabled1: ref(false),
-      songs: [
-        {
-          value: "Rock'n'Roll Star",
-          label: "Rock'n'Roll Star"
-        },
-        {
-          value: 'Shakermaker',
-          label: 'Shakermaker'
-        },
-        {
-          value: 'Live Forever',
-          label: 'Live Forever'
-        },
-        {
-          value: 'Up in the Sky',
-          label: 'Up in the Sky'
-        },
-        {
-          value: '...',
-          label: '...'
-        }
-      ].map((s) => {
-        s.value = s.value.toLowerCase()
-        return s
-      })
-    }
-  }
-})
-</script>

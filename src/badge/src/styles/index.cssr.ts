@@ -1,5 +1,5 @@
-import { c, cB, cM } from '../../../_utils/cssr'
 import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
+import { c, cB, cM } from '../../../_utils/cssr'
 
 // vars:
 // --n-color
@@ -66,11 +66,10 @@ export default c([
       left: 100%;
       bottom: calc(100% - 9px);
       font-variant-numeric: tabular-nums;
-      z-index: 1;
+      z-index: 2;
       display: flex;
       align-items: center;
-    `,
-    [
+    `, [
       fadeInScaleUpTransition({
         transformOrigin: 'left bottom',
         originalTransform: 'translateX(-50%)'

@@ -1,32 +1,34 @@
+import { off, on } from 'evtd'
+import { useMergedState } from 'vooks'
 import {
-  h,
-  defineComponent,
-  type PropType,
   computed,
   type CSSProperties,
+  defineComponent,
+  h,
   inject,
+  onBeforeUnmount,
+  onMounted,
+  type PropType,
   ref,
+  type SlotsType,
   toRef,
-  withDirectives,
-  type DirectiveArguments
+  type VNode
 } from 'vue'
-import { useMergedState } from 'vooks'
-import { mousemoveoutside } from 'vdirs'
-import { floatButtonGroupInjectionKey } from '../../float-button-group/src/FloatButtonGroup'
-import {
-  formatLength,
-  type ExtractPublicPropTypes,
-  resolveWrappedSlot,
-  resolveSlot,
-  type MaybeArray,
-  call
-} from '../../_utils'
-import useConfig from '../../_mixins/use-config'
-import { type ThemeProps, useTheme, useThemeClass } from '../../_mixins'
-import { type FloatButtonTheme, floatButtonLight } from '../styles'
-import style from './styles/index.cssr'
 import { NBaseIcon } from '../../_internal'
 import { CloseIcon } from '../../_internal/icons'
+import { type ThemeProps, useTheme, useThemeClass } from '../../_mixins'
+import useConfig from '../../_mixins/use-config'
+import {
+  call,
+  type ExtractPublicPropTypes,
+  formatLength,
+  type MaybeArray,
+  resolveSlot,
+  resolveWrappedSlot
+} from '../../_utils'
+import { floatButtonGroupInjectionKey } from '../../float-button-group/src/FloatButtonGroup'
+import { floatButtonLight, type FloatButtonTheme } from '../styles'
+import style from './styles/index.cssr'
 
 export const floatButtonProps = {
   ...(useTheme.props as ThemeProps<FloatButtonTheme>),
@@ -65,11 +67,20 @@ export const floatButtonProps = {
 
 export type FloatButtonProps = ExtractPublicPropTypes<typeof floatButtonProps>
 
+export interface FloatButtonSlots {
+  default?: () => VNode[]
+  description?: () => VNode[]
+  menu?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'FloatButton',
   props: floatButtonProps,
-  setup (props) {
+  slots: Object as SlotsType<FloatButtonSlots>,
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+
+    const selfElRef = ref<HTMLDivElement | null>(null)
 
     const themeRef = useTheme(
       'FloatButton',
@@ -89,7 +100,7 @@ export default defineComponent({
       uncontrolledShowMenuRef
     )
 
-    function doUpdateShowMenu (value: boolean): void {
+    function doUpdateShowMenu(value: boolean): void {
       const { onUpdateShowMenu, 'onUpdate:showMenu': _onUpdateShowMenu } = props
       uncontrolledShowMenuRef.value = value
       if (onUpdateShowMenu) {
@@ -167,7 +178,7 @@ export default defineComponent({
       }
     }
 
-    const handleClick = (e: MouseEvent): void => {
+    const handleClick = (): void => {
       if (props.menuTrigger === 'click') {
         doUpdateShowMenu(!mergedShowMenuRef.value)
       }
@@ -175,15 +186,30 @@ export default defineComponent({
 
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'float-button',
-        computed(() => props.type[0]),
-        cssVarsRef,
-        props
-      )
+          'float-button',
+          computed(() => props.type[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
+
+    onMounted(() => {
+      const selfEl = selfElRef.value
+      if (selfEl) {
+        on('mousemoveoutside', selfEl, handleMouseleave)
+      }
+    })
+
+    onBeforeUnmount(() => {
+      const selfEl = selfElRef.value
+      if (selfEl) {
+        off('mousemoveoutside', selfEl, handleMouseleave)
+      }
+    })
 
     return {
       inlineStyle,
+      selfElRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedShape: mergedShapeRef,
@@ -196,7 +222,7 @@ export default defineComponent({
     }
   },
 
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       cssVars,
@@ -209,10 +235,10 @@ export default defineComponent({
       inlineStyle,
       onRender
     } = this
-    const dirs: DirectiveArguments = [[mousemoveoutside, this.handleMouseleave]]
     onRender?.()
-    return withDirectives(
+    return (
       <div
+        ref="selfElRef"
         class={[
           `${mergedClsPrefix}-float-button`,
           `${mergedClsPrefix}-float-button--${mergedShape}-shape`,
@@ -258,8 +284,7 @@ export default defineComponent({
             {resolveSlot($slots.menu, () => [])}
           </div>
         ) : null}
-      </div>,
-      dirs
+      </div>
     )
   }
 })

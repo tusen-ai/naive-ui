@@ -1,12 +1,13 @@
-import { h, defineComponent, type PropType, type CSSProperties } from 'vue'
+import type { CSSProperties, PropType } from 'vue'
+import type { ProgressGradient, ProgressStatus } from './public-types'
+import { computed, defineComponent, h } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {
-  SuccessIcon,
   ErrorIcon,
-  WarningIcon,
-  InfoIcon
+  InfoIcon,
+  SuccessIcon,
+  WarningIcon
 } from '../../_internal/icons'
-import { type Status } from './interface'
 
 const iconMap = {
   success: <SuccessIcon />,
@@ -23,14 +24,14 @@ export default defineComponent({
       required: true
     },
     status: {
-      type: String as PropType<Status>,
+      type: String as PropType<ProgressStatus>,
       required: true
     },
     strokeWidth: {
       type: Number,
       required: true
     },
-    fillColor: String,
+    fillColor: [String, Object] as PropType<string | ProgressGradient>,
     railColor: String,
     railStyle: [String, Object] as PropType<string | CSSProperties>,
     percentage: {
@@ -60,11 +61,19 @@ export default defineComponent({
       default: 0
     }
   },
-  setup (props, { slots }) {
-    function getPathStyles (
+  setup(props, { slots }) {
+    const gradientIdRef = computed(() => {
+      const base = 'gradient'
+      if (typeof props.fillColor === 'object') {
+        return `${base}-${props.fillColor.stops[0]}-${props.fillColor.stops[1]}`
+      }
+      return base
+    })
+    function getPathStyles(
       percent: number,
       offsetDegree: number,
-      strokeColor?: string
+      strokeColor?: string | ProgressGradient,
+      type?: 'rail' | 'fill'
     ): { pathString: string, pathStyle: CSSProperties } {
       const { gapDegree, viewBoxWidth, strokeWidth } = props
       const radius = 50
@@ -78,7 +87,12 @@ export default defineComponent({
       a ${radius},${radius} 0 1 1 ${-endPositionX},${endPositionY}`
       const len = Math.PI * 2 * radius
       const pathStyle: CSSProperties = {
-        stroke: strokeColor,
+        stroke:
+          type === 'rail'
+            ? (strokeColor as string)
+            : typeof props.fillColor === 'object'
+              ? `url(#${gradientIdRef.value})`
+              : (strokeColor as string),
         strokeDasharray: `${(percent / 100) * (len - gapDegree)}px ${
           viewBoxWidth * 8
         }px`,
@@ -91,6 +105,29 @@ export default defineComponent({
         pathStyle
       }
     }
+
+    const createGradientNode = (): false | JSX.Element => {
+      const isGradient = typeof props.fillColor === 'object'
+      const from = isGradient ? props.fillColor.stops[0] : ''
+      const to = isGradient ? props.fillColor.stops[1] : ''
+      return (
+        isGradient && (
+          <defs>
+            <linearGradient
+              id={gradientIdRef.value}
+              x1="0%"
+              y1="100%"
+              x2="100%"
+              y2="0%"
+            >
+              <stop offset="0%" stop-color={from} />
+              <stop offset="100%" stop-color={to} />
+            </linearGradient>
+          </defs>
+        )
+      )
+    }
+
     return () => {
       const {
         fillColor,
@@ -105,10 +142,10 @@ export default defineComponent({
         gapOffsetDegree,
         clsPrefix
       } = props
-      const { pathString: railPathString, pathStyle: railPathStyle } =
-        getPathStyles(100, 0, railColor)
-      const { pathString: fillPathString, pathStyle: fillPathStyle } =
-        getPathStyles(percentage, offsetDegree, fillColor)
+      const { pathString: railPathString, pathStyle: railPathStyle }
+        = getPathStyles(100, 0, railColor, 'rail')
+      const { pathString: fillPathString, pathStyle: fillPathStyle }
+        = getPathStyles(percentage, offsetDegree, fillColor, 'fill')
       const viewBoxSize = 100 + strokeWidth
       return (
         <div class={`${clsPrefix}-progress-content`} role="none">
@@ -122,6 +159,7 @@ export default defineComponent({
               }}
             >
               <svg viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}>
+                {createGradientNode()}
                 <g>
                   <path
                     class={`${clsPrefix}-progress-graph-circle-rail`}
@@ -136,8 +174,8 @@ export default defineComponent({
                   <path
                     class={[
                       `${clsPrefix}-progress-graph-circle-fill`,
-                      percentage === 0 &&
-                        `${clsPrefix}-progress-graph-circle-fill--empty`
+                      percentage === 0
+                      && `${clsPrefix}-progress-graph-circle-fill--empty`
                     ]}
                     d={fillPathString}
                     stroke-width={strokeWidth}

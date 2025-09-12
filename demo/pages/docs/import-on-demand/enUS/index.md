@@ -57,12 +57,12 @@ You can use the `unplugin-auto-import` plugin to automatically import APIs.
 If you develop using SFC, you can use the `unplugin-vue-components` plugin to automatically import components on demand.The plugin will automatically parse the components used in the template and import the components.
 
 ```ts
-// vite.config.ts
-import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
+import Components from 'unplugin-vue-components/vite'
+// vite.config.ts
+import { defineConfig } from 'vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -91,13 +91,13 @@ export default defineConfig({
 ## Install on Demand Globally
 
 ```js
-import { createApp } from 'vue'
 import {
   // create naive ui
   create,
   // component
   NButton
 } from 'naive-ui'
+import { createApp } from 'vue'
 
 const naive = create({
   components: [NButton]

@@ -1,5 +1,5 @@
-import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
+import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
@@ -305,6 +305,7 @@ export default c([
       border-bottom: 1px solid var(--n-calendar-days-divider-color);
     `, [
       cE('day', `
+        white-space: nowrap;
         user-select: none;
         -webkit-user-select: none;
         line-height: 15px;
@@ -312,6 +313,9 @@ export default c([
         text-align: center;
         font-size: var(--n-calendar-days-font-size);
         color: var(--n-item-text-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
       `)
     ]),
     cB('date-panel-dates', `

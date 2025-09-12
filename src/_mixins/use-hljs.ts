@@ -1,7 +1,7 @@
-import { inject, computed, type ComputedRef, type Ref, watchEffect } from 'vue'
 import type { HLJSApi } from 'highlight.js'
-import { configProviderInjectionKey } from '../config-provider/src/context'
+import { computed, type ComputedRef, inject, type Ref, watchEffect } from 'vue'
 import { warn } from '../_utils'
+import { configProviderInjectionKey } from '../config-provider/src/context'
 
 interface UseHljsProps {
   hljs?: unknown
@@ -12,7 +12,7 @@ export interface Hljs {
   highlight: HLJSApi['highlight']
   getLanguage: HLJSApi['getLanguage']
 }
-export default function useHljs (
+export default function useHljs(
   props: UseHljsProps,
   shouldHighlightRef?: Ref<boolean>
 ): ComputedRef<Hljs | undefined> {
@@ -25,7 +25,8 @@ export default function useHljs (
     }
     if (!shouldHighlightRef) {
       warnHljs()
-    } else {
+    }
+    else {
       watchEffect(() => {
         if (shouldHighlightRef.value) {
           warnHljs()

@@ -31,7 +31,7 @@ const thTH: NLocale = {
     dateFormat: 'dd/MMMM/yyyy',
     dateTimeFormat: 'dd/MMMM/yyyy HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
-    weekFormat: 'yyyy-w',
+    weekFormat: 'YYYY-w',
     clear: 'ล้าง',
     now: 'วันนี้',
     confirm: 'ยืนยัน',
@@ -126,6 +126,12 @@ const thTH: NLocale = {
     tipClose: 'ปิด (Esc)',
     // TODO: translation
     tipOriginalSize: 'Zoom to original size'
+  },
+  Heatmap: {
+    less: 'น้อย',
+    more: 'มาก',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

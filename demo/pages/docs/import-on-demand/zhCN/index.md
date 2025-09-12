@@ -57,12 +57,12 @@ Naive UI 支持 tree shaking，组件、语言、主题均可 tree-shaking。
 如果使用模板方式进行开发，可以使用 `unplugin-vue-components` 插件来按需自动加载组件，插件会自动解析模板中的使用到的组件，并导入组件。
 
 ```ts
-// vite.config.ts
-import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
+import Components from 'unplugin-vue-components/vite'
+// vite.config.ts
+import { defineConfig } from 'vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -91,13 +91,13 @@ export default defineConfig({
 ## 按需全局安装组件（手动）
 
 ```js
-import { createApp } from 'vue'
 import {
   // create naive ui
   create,
   // component
   NButton
 } from 'naive-ui'
+import { createApp } from 'vue'
 
 const naive = create({
   components: [NButton]

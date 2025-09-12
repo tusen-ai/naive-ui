@@ -1,12 +1,12 @@
-import { changeColor } from 'seemly'
-import commonVariables from './_common'
-import { commonDark } from '../../_styles/common'
 import type { RadioTheme } from './light'
+import { changeColor } from 'seemly'
+import { commonDark } from '../../_styles/common'
+import commonVariables from './_common'
 
 const radioDark: RadioTheme = {
   name: 'Radio',
   common: commonDark,
-  self (vars) {
+  self(vars) {
     const {
       borderColor,
       primaryColor,

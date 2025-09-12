@@ -1,13 +1,13 @@
-import { h, defineComponent, computed, type PropType } from 'vue'
-import { depx, getGap } from 'seemly'
-import { useRtl } from '../../_mixins/use-rtl'
-import { createKey, flatten, getSlot } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { flexLight } from '../styles'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { FlexTheme } from '../styles'
 import type { FlexAlign, FlexJustify } from './type'
+import { depx, getGap } from 'seemly'
+import { computed, defineComponent, h, type PropType } from 'vue'
+import { useConfig, useTheme } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
+import { createKey, flatten, getSlot } from '../../_utils'
+import { flexLight } from '../styles'
 
 export const flexProps = {
   ...(useTheme.props as ThemeProps<FlexTheme>),
@@ -21,7 +21,7 @@ export const flexProps = {
   reverse: Boolean,
   size: {
     type: [String, Number, Array] as PropType<
-    'small' | 'medium' | 'large' | number | [number, number]
+      'small' | 'medium' | 'large' | number | [number, number]
     >,
     default: 'medium'
   },
@@ -36,7 +36,7 @@ export type FlexProps = ExtractPublicPropTypes<typeof flexProps>
 export default defineComponent({
   name: 'Flex',
   props: flexProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
     const themeRef = useTheme(
       'Flex',
@@ -75,7 +75,7 @@ export default defineComponent({
       })
     }
   },
-  render () {
+  render() {
     const {
       vertical,
       reverse,
@@ -88,7 +88,8 @@ export default defineComponent({
       rtlEnabled
     } = this
     const children = flatten(getSlot(this), false)
-    if (!children.length) return null
+    if (!children.length)
+      return null
     return (
       <div
         role="none"
@@ -99,9 +100,12 @@ export default defineComponent({
         style={{
           display: inline ? 'inline-flex' : 'flex',
           flexDirection: (() => {
-            if (vertical && !reverse) return 'column'
-            if (vertical && reverse) return 'column-reverse'
-            if (!vertical && reverse) return 'row-reverse'
+            if (vertical && !reverse)
+              return 'column'
+            if (vertical && reverse)
+              return 'column-reverse'
+            if (!vertical && reverse)
+              return 'row-reverse'
             else return 'row'
           })(),
           justifyContent: justify,

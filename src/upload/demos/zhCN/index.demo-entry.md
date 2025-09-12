@@ -16,8 +16,10 @@ before-upload.vue
 image-style.vue
 image-card-style.vue
 custom-request.vue
+custom-download.vue
 abstract.vue
 debug.vue
+rtl-debug.vue
 ```
 
 ## API
@@ -31,6 +33,7 @@ debug.vue
 | action | `string` | `undefined` | 请求提交的地址 |  |
 | create-thumbnail-url | `(file: File \| null, fileInfo: UploadSettledFileInfo) => (Promise<string> \| string \| undefined)` | `undefined` | 自定义文件缩略图，如果返回了 `undefined`，会使用默认的缩略图展示逻辑 | `fileInfo` 2.34.0 |
 | custom-request | `(options: UploadCustomRequestOptions) => void` | `undefined` | 自定义上传方法，类型参考 <n-a href="#UploadCustomRequestOptions-Type">UploadCustomRequestOptions</n-a> |  |
+| custom-download | `(file: FileInfo) => void` | `undefined` | 自定义下载方法 | 2.41.1 |
 | data | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | 提交表单需要附加的数据 |  |
 | default-file-list | `Array<UploadFileInfo>` | `[]` | 非受控状态下默认的文件列表 |  |
 | default-upload | `boolean` | `true` | 选择文件时候是否默认上传 |  |
@@ -42,7 +45,7 @@ debug.vue
 | file-list | `Array<UploadFileInfo>` | `undefined` | 文件列表，如果传入组件会处于受控状态 |  |
 | headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | HTTP 请求需要附加的 Headers |  |
 | image-group-props | `ImageGroupProps` | `undefined` | Upload 中预览图片组件的属性，参考 [ImageGroup Props](image#ImageGroup-Props) | 2.24.0 |
-| input-props | `Object` | `undefined` | file input 元素的属性 | 2.24.2 |
+| input-props | `InputHTMLAttributes` | `undefined` | file input 元素的属性 | 2.24.2 |
 | is-error-state | `(xhr: XMLHttpRequest) => boolean` | `undefined` | 判断请求是否为异常状态 | 2.29.1 |
 | list-type | `string` | `'text'` | 文件列表的内建样式，`text`、`image` 和 `image-card` |  |
 | max | `number` | `undefined` | 限制上传文件数量 |  |
@@ -62,13 +65,14 @@ debug.vue
 | trigger-class | `string` | `undefined` | 触发器区域的类名 | 2.36.0 |
 | trigger-style | `Object \| string` | `undefined` | 触发器区域的样式 | 2.29.1 |
 | with-credentials | `boolean` | `false` | 是否携带 Cookie |  |
-| on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `() => {}` | 组件状态变化的回调，组件的任何文件状态变化都会触发回调 |  |
+| on-change | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, event?: Event }) => void` | `undefined` | 组件状态变化的回调，组件的任何文件状态变化都会触发回调 |  |
 | on-error | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| void` | `undefined` | 文件上传失败的回调 | 2.24.0 |
 | on-finish | `(options: { file: UploadFileInfo, event?: ProgressEvent }) => UploadFileInfo \| undefined` | `({ file }) => file` | 文件上传结束的回调，可以修改传入的 UploadFileInfo 或者返回一个新的 UploadFileInfo。注意：file 将会下一次事件循环中被置为 null |  |
 | on-before-upload | `(options: { file: UploadFileInfo, fileList: UploadFileInfo[] }) => (Promise<boolean \| void> \| boolean \| void)` | `undefined` | 文件上传之前的回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次上传 |  |
-| on-download | `(file: FileInfo) => void` | `undefined` | 点击文件下载按钮的回调函数，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次下载 |  |
-| on-preview | `(file: FileInfo) => void` | `undefined` | 点击文件链接或预览按钮的回调函数 |  |
-| on-remove | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, index: number }) => Promise<boolean> \| boolean \| any` | `() => true` | 文件删除回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次删除 | `index` NEXT_VERSION |
+| on-download | `(file: FileInfo) => Promise<boolean> \| boolean \| any` | `undefined` | 点击文件下载按钮的回调函数，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次下载 |  |
+| on-preview | `(file: FileInfo, detail: { event: MouseEvent }) => void` | `undefined` | 点击文件链接或预览按钮的回调函数，你可以通过 `preventDefault` 来取消默认的链接打开行为 | `detail.event` 2.39.0 |
+| on-remove | `(options: { file: UploadFileInfo, fileList: Array<UploadFileInfo>, index: number }) => Promise<boolean> \| boolean \| any` | `() => true` | 文件删除回调，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次删除 | `index` 2.38.2 |
+| on-retry | `(options: { file: UploadFileInfo }) => (Promise<boolean \| void> \| boolean \| void)` | `undefined` | 点击重试的回调函数，返回 `false`、`Promise resolve false`、`Promise rejected` 时会取消本次重试 | 2.40.0 |
 | on-update:file-list | `(fileList: UploadFileInfo[]) => void` | `undefined` | 当 file-list 改变时触发的回调函数 |  |
 
 #### UploadFileInfo Type
@@ -117,7 +121,7 @@ interface UploadCustomRequestOptions {
 | --- | --- | --- | --- |
 | clear | `() => void` | 清空上传列表 | 2.24.2 |
 | openOpenFileDialog | `() => void` | 打开文件选择对话框 |  |
-| submit | `(fileId?: string \| number)` | 提交当前所有处于 pending 状态的文件 |  |
+| submit | `(fileId?: string)` | 提交当前所有处于 pending 状态的文件 |  |
 
 ### Upload Slots
 
@@ -136,3 +140,7 @@ interface UploadCustomRequestOptions {
 | 名称 | 参数 | 说明 |
 | --- | --- | --- |
 | default | `(options: { handleClick: () => void, handleDragOver: (e: DragEvent) => void, handleDragEnter: (e: DragEvent) => void, handleDragLeave: (e: DragEvent) => void, handleDrop: (e: DragEvent) => void})` | `handleClick` 为点击上传函数，`handleDrop` 为拖拽上传函数，`handleDragEnter`、`handleDragOver` 和 `handleDragLeave` 为拖拽事件函数 |
+
+### 其他
+
+1. `uploadDownload`，类型为 `(url: string, name: string | undefined): void`，你可以直接从 naive-ui import 此函数

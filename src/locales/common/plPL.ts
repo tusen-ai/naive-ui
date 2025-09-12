@@ -31,7 +31,7 @@ const plPL: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
-    weekFormat: 'yyyy-w',
+    weekFormat: 'YYYY-w',
     clear: 'Wyczyść',
     now: 'Teraz',
     confirm: 'Potwierdź',
@@ -125,6 +125,12 @@ const plPL: NLocale = {
     tipClose: 'Zamknij (Esc)',
     // TODO: translation
     tipOriginalSize: 'Zoom to original size'
+  },
+  Heatmap: {
+    less: 'mniej',
+    more: 'więcej',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

@@ -1,5 +1,5 @@
-import { h } from 'vue'
 import { mount } from '@vue/test-utils'
+import { h } from 'vue'
 import { NBreadcrumb, NBreadcrumbItem } from '../index'
 
 describe('n-breadcrumb', () => {
@@ -38,7 +38,7 @@ describe('n-breadcrumb', () => {
     wrapper.unmount()
   })
 
-  it("should work with Breadcrumb's `separator` prop", async () => {
+  it('should work with Breadcrumb\'s `separator` prop', async () => {
     const wrapper = mount(NBreadcrumb, {
       props: { separator: '@' },
       slots: {
@@ -52,12 +52,12 @@ describe('n-breadcrumb', () => {
     expect(
       wrapper
         .findAll('.n-breadcrumb-item__separator')
-        .every((i) => i.text() === '@')
+        .every(i => i.text() === '@')
     ).toBe(true)
     wrapper.unmount()
   })
 
-  it("should work with BreadcrumbItem's `separator` prop", async () => {
+  it('should work with BreadcrumbItem\'s `separator` prop', async () => {
     const wrapper = mount(NBreadcrumb, {
       slots: {
         default: () => [

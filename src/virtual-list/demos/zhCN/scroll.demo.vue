@@ -2,6 +2,43 @@
   # 滚动
 </markdown>
 
+<script lang="ts" setup>
+import type { VirtualListInst } from 'naive-ui'
+import { ref } from 'vue'
+
+const virtualListInst = ref<VirtualListInst>()
+
+const avatars = [
+  'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
+  'https://avatars.githubusercontent.com/u/20943608?s=60&v=4',
+  'https://avatars.githubusercontent.com/u/46394163?s=60&v=4',
+  'https://avatars.githubusercontent.com/u/39197136?s=60&v=4',
+  'https://avatars.githubusercontent.com/u/19239641?s=60&v=4'
+]
+
+const items = Array.from({ length: 10000 }, (_, i) => ({
+  key: `${i}`,
+  value: i,
+  avatar: avatars[i % avatars.length]
+}))
+
+function handleScrollToKey() {
+  virtualListInst.value?.scrollTo({ key: '88' })
+}
+
+function handleScrollToPosition() {
+  virtualListInst.value?.scrollTo({ position: 'bottom' })
+}
+
+function handleScrollToIndex() {
+  virtualListInst.value?.scrollTo({ index: 200 })
+}
+
+function handleScrollToDistance() {
+  virtualListInst.value?.scrollTo({ top: 100 })
+}
+</script>
+
 <template>
   <n-space vertical>
     <n-space>
@@ -34,47 +71,6 @@
   </n-space>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { VirtualListInst } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const virtualListInst = ref<VirtualListInst>()
-
-    const avatars = [
-      'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
-      'https://avatars.githubusercontent.com/u/20943608?s=60&v=4',
-      'https://avatars.githubusercontent.com/u/46394163?s=60&v=4',
-      'https://avatars.githubusercontent.com/u/39197136?s=60&v=4',
-      'https://avatars.githubusercontent.com/u/19239641?s=60&v=4'
-    ]
-
-    const items = Array.from({ length: 10000 }, (_, i) => ({
-      key: `${i}`,
-      value: i,
-      avatar: avatars[i % avatars.length]
-    }))
-
-    return {
-      items,
-      virtualListInst,
-      handleScrollToKey: () => {
-        virtualListInst.value?.scrollTo({ key: '88' })
-      },
-      handleScrollToPosition: () => {
-        virtualListInst.value?.scrollTo({ position: 'bottom' })
-      },
-      handleScrollToIndex: () => {
-        virtualListInst.value?.scrollTo({ index: 200 })
-      },
-      handleScrollToDistance: () => {
-        virtualListInst.value?.scrollTo({ top: 100 })
-      }
-    }
-  }
-})
-</script>
 <style>
 .item {
   display: flex;

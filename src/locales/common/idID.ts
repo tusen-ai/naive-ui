@@ -31,7 +31,7 @@ const idID: NLocale = {
     dateFormat: 'dd-MM-yyyy',
     dateTimeFormat: 'dd-MM-yyyy HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
-    weekFormat: 'yyyy-w',
+    weekFormat: 'YYYY-w',
     clear: 'Bersihkan',
     now: 'Sekarang',
     confirm: 'Setuju',
@@ -126,6 +126,12 @@ const idID: NLocale = {
     tipClose: 'Tutup (Esc)',
     // TODO: translation
     tipOriginalSize: 'Zoom ke ukuran asli'
+  },
+  Heatmap: {
+    less: 'less',
+    more: 'more',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

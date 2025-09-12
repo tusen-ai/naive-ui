@@ -1,6 +1,6 @@
-import { h, defineComponent, type PropType, inject } from 'vue'
+import { defineComponent, h, inject, type PropType } from 'vue'
+import { NBaseIcon, NBaseLoading, NIconSwitchTransition } from '../../_internal'
 import { SwitcherIcon } from '../../_internal/icons'
-import { NIconSwitchTransition, NBaseLoading, NBaseIcon } from '../../_internal'
 import { type TmNode, treeInjectionKey } from './interface'
 
 export default defineComponent({
@@ -21,8 +21,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  setup(props) {
     const { renderSwitcherIconRef } = inject(treeInjectionKey, null)!
     return () => {
       const { clsPrefix, expanded, hide, indent, onClick } = props

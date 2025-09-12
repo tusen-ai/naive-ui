@@ -2,6 +2,18 @@
 # Reset
 </markdown>
 
+<script lang="ts" setup>
+import type { CountdownInst } from 'naive-ui'
+import { ref } from 'vue'
+
+const active = ref(true)
+const countdown = ref<CountdownInst | null>(null)
+
+function handleReset() {
+  countdown.value?.reset()
+}
+</script>
+
 <template>
   <n-space>
     <span style="font-variant-numeric: tabular-nums">
@@ -13,23 +25,3 @@
     <n-switch v-model:value="active" />
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { CountdownInst } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const activeRef = ref(true)
-    const countdownRef = ref<CountdownInst | null>()
-    function handleReset () {
-      countdownRef.value?.reset()
-    }
-    return {
-      active: activeRef,
-      countdown: countdownRef,
-      handleReset
-    }
-  }
-})
-</script>

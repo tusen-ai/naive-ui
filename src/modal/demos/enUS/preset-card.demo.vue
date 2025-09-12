@@ -4,6 +4,19 @@
 Modal has some presets, which means you can use props & slots of the preset after set it.
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const bodyStyle = {
+  width: '600px'
+}
+const segmented = {
+  content: 'soft',
+  footer: 'soft'
+} as const
+const showModal = ref(false)
+</script>
+
 <template>
   <n-button @click="showModal = true">
     Start me up
@@ -27,21 +40,3 @@ Modal has some presets, which means you can use props & slots of the preset afte
     </template>
   </n-modal>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      bodyStyle: {
-        width: '600px'
-      },
-      segmented: {
-        content: 'soft',
-        footer: 'soft'
-      } as const,
-      showModal: ref(false)
-    }
-  }
-})
-</script>

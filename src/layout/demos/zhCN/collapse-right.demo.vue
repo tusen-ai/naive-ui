@@ -4,71 +4,17 @@
 有时候你可能想将折叠侧边栏放在右侧。
 </markdown>
 
-<template>
-  <n-space vertical size="large">
-    <n-layout has-sider sider-placement="right">
-      <n-layout-content content-style="padding: 24px;">
-        平山道
-      </n-layout-content>
-      <n-layout-sider
-        collapse-mode="width"
-        :collapsed-width="120"
-        :width="240"
-        :native-scrollbar="true"
-        show-trigger="arrow-circle"
-        content-style="padding: 24px;"
-        bordered
-      >
-        <p>海淀桥 海淀桥 海淀桥 海淀桥 海淀桥</p>
-      </n-layout-sider>
-    </n-layout>
-    <n-layout has-sider sider-placement="right">
-      <n-layout-content content-style="padding: 24px;">
-        平山道
-      </n-layout-content>
-      <n-layout-sider
-        collapse-mode="transform"
-        :collapsed-width="120"
-        :width="240"
-        :native-scrollbar="false"
-        show-trigger="bar"
-        content-style="padding: 24px;"
-        bordered
-      >
-        <n-h2>海淀桥</n-h2>
-      </n-layout-sider>
-    </n-layout>
-    <n-layout has-sider sider-placement="right">
-      <n-layout style="max-height: 320px" />
-      <n-layout-sider
-        bordered
-        show-trigger
-        collapse-mode="width"
-        :collapsed-width="64"
-        :width="240"
-        :native-scrollbar="false"
-        style="max-height: 320px"
-      >
-        <n-menu
-          :collapsed-width="64"
-          :collapsed-icon-size="22"
-          :options="menuOptions"
-        />
-      </n-layout-sider>
-    </n-layout>
-  </n-space>
-</template>
-
-<script lang="ts">
-import { h, defineComponent, Component } from 'vue'
-import { NIcon } from 'naive-ui'
+<script lang="ts" setup>
+import type { Component } from 'vue'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
+import { NIcon } from 'naive-ui'
+import { h } from 'vue'
 
-function renderIcon (icon: Component) {
+function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -146,12 +92,59 @@ const menuOptions = [
     ]
   }
 ]
-
-export default defineComponent({
-  setup () {
-    return {
-      menuOptions
-    }
-  }
-})
 </script>
+
+<template>
+  <n-space vertical size="large">
+    <n-layout has-sider sider-placement="right">
+      <n-layout-content content-style="padding: 24px;">
+        平山道
+      </n-layout-content>
+      <n-layout-sider
+        collapse-mode="width"
+        :collapsed-width="120"
+        :width="240"
+        :native-scrollbar="true"
+        show-trigger="arrow-circle"
+        content-style="padding: 24px;"
+        bordered
+      >
+        <p>海淀桥 海淀桥 海淀桥 海淀桥 海淀桥</p>
+      </n-layout-sider>
+    </n-layout>
+    <n-layout has-sider sider-placement="right">
+      <n-layout-content content-style="padding: 24px;">
+        平山道
+      </n-layout-content>
+      <n-layout-sider
+        collapse-mode="transform"
+        :collapsed-width="120"
+        :width="240"
+        :native-scrollbar="false"
+        show-trigger="bar"
+        content-style="padding: 24px;"
+        bordered
+      >
+        <n-h2>海淀桥</n-h2>
+      </n-layout-sider>
+    </n-layout>
+    <n-layout has-sider sider-placement="right">
+      <n-layout style="max-height: 320px" />
+      <n-layout-sider
+        bordered
+        show-trigger
+        collapse-mode="width"
+        :collapsed-width="64"
+        :width="240"
+        :native-scrollbar="false"
+        style="max-height: 320px"
+      >
+        <n-menu
+          :collapsed-width="64"
+          :collapsed-icon-size="22"
+          :options="menuOptions"
+        />
+      </n-layout-sider>
+    </n-layout>
+  </n-space>
+</template>

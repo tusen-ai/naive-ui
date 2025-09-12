@@ -1,29 +1,29 @@
-import {
-  h,
-  ref,
-  defineComponent,
-  computed,
-  onMounted,
-  onBeforeUnmount,
-  mergeProps,
-  Transition,
-  watchEffect,
-  Fragment
-} from 'vue'
-import type { PropType, CSSProperties, VNode, HTMLAttributes } from 'vue'
-import { on, off } from 'evtd'
-import { VResizeObserver } from 'vueuc'
-import { useIsIos } from 'vooks'
-import { getPreciseEventTarget } from 'seemly'
-import { useConfig, useTheme, useThemeClass, useRtl } from '../../../_mixins'
+import type { CSSProperties, HTMLAttributes, PropType, VNode } from 'vue'
 import type { ThemeProps } from '../../../_mixins'
 import type {
   ExtractInternalPropTypes,
   ExtractPublicPropTypes
 } from '../../../_utils'
-import { useReactivated, Wrapper } from '../../../_utils'
-import { scrollbarLight } from '../styles'
 import type { ScrollbarTheme } from '../styles'
+import { off, on } from 'evtd'
+import { depx, getPadding, getPreciseEventTarget } from 'seemly'
+import { useIsIos } from 'vooks'
+import {
+  computed,
+  defineComponent,
+  Fragment,
+  h,
+  mergeProps,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  Transition,
+  watchEffect
+} from 'vue'
+import { VResizeObserver } from 'vueuc'
+import { useConfig, useRtl, useTheme, useThemeClass } from '../../../_mixins'
+import { rtlInset, useReactivated, Wrapper } from '../../../_utils'
+import { scrollbarLight } from '../styles'
 import style from './styles/index.cssr'
 
 export interface ScrollTo {
@@ -75,10 +75,6 @@ export interface ScrollbarInst extends ScrollbarInstMethods {
 
 const scrollbarProps = {
   ...(useTheme.props as ThemeProps<ScrollbarTheme>),
-  size: {
-    type: Number,
-    default: 5
-  },
   duration: {
     type: Number,
     default: 0
@@ -107,9 +103,17 @@ const scrollbarProps = {
   onWheel: Function as PropType<(e: WheelEvent) => void>,
   onResize: Function as PropType<(e: ResizeObserverEntry) => void>,
   internalOnUpdateScrollLeft: Function as PropType<
-  (scrollLeft: number) => void
+    (scrollLeft: number) => void
   >,
-  internalHoistYRail: Boolean
+  internalHoistYRail: Boolean,
+  yPlacement: {
+    type: String as PropType<'left' | 'right'>,
+    default: 'right'
+  },
+  xPlacement: {
+    type: String as PropType<'top' | 'bottom'>,
+    default: 'bottom'
+  }
 } as const
 
 export type ScrollbarProps = ExtractPublicPropTypes<typeof scrollbarProps>
@@ -121,9 +125,9 @@ const Scrollbar = defineComponent({
   name: 'Scrollbar',
   props: scrollbarProps,
   inheritAttrs: false,
-  setup (props) {
-    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
-      useConfig(props)
+  setup(props) {
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
+      = useConfig(props)
     const rtlEnabledRef = useRtl('Scrollbar', mergedRtlRef, mergedClsPrefixRef)
 
     // dom ref
@@ -155,20 +159,31 @@ const Scrollbar = defineComponent({
     let memoMouseY: number = 0
     const isIos = useIsIos()
 
+    const themeRef = useTheme(
+      'Scrollbar',
+      '-scrollbar',
+      style,
+      scrollbarLight,
+      props,
+      mergedClsPrefixRef
+    )
+
     const yBarSizeRef = computed(() => {
       const { value: containerHeight } = containerHeightRef
       const { value: contentHeight } = contentHeightRef
       const { value: yRailSize } = yRailSizeRef
       if (
-        containerHeight === null ||
-        contentHeight === null ||
-        yRailSize === null
+        containerHeight === null
+        || contentHeight === null
+        || yRailSize === null
       ) {
         return 0
-      } else {
+      }
+      else {
         return Math.min(
           containerHeight,
-          (yRailSize * containerHeight) / contentHeight + props.size * 1.5
+          (yRailSize * containerHeight) / contentHeight
+          + depx(themeRef.value.self.width) * 1.5
         )
       }
     })
@@ -180,13 +195,17 @@ const Scrollbar = defineComponent({
       const { value: contentWidth } = contentWidthRef
       const { value: xRailSize } = xRailSizeRef
       if (
-        containerWidth === null ||
-        contentWidth === null ||
-        xRailSize === null
+        containerWidth === null
+        || contentWidth === null
+        || xRailSize === null
       ) {
         return 0
-      } else {
-        return (xRailSize * containerWidth) / contentWidth + props.size * 1.5
+      }
+      else {
+        return (
+          (xRailSize * containerWidth) / contentWidth
+          + depx(themeRef.value.self.height) * 1.5
+        )
       }
     })
     const xBarSizePxRef = computed(() => {
@@ -198,14 +217,16 @@ const Scrollbar = defineComponent({
       const { value: contentHeight } = contentHeightRef
       const { value: yRailSize } = yRailSizeRef
       if (
-        containerHeight === null ||
-        contentHeight === null ||
-        yRailSize === null
+        containerHeight === null
+        || contentHeight === null
+        || yRailSize === null
       ) {
         return 0
-      } else {
+      }
+      else {
         const heightDiff = contentHeight - containerHeight
-        if (!heightDiff) return 0
+        if (!heightDiff)
+          return 0
         return (
           (containerScrollTop / heightDiff) * (yRailSize - yBarSizeRef.value)
         )
@@ -220,14 +241,16 @@ const Scrollbar = defineComponent({
       const { value: contentWidth } = contentWidthRef
       const { value: xRailSize } = xRailSizeRef
       if (
-        containerWidth === null ||
-        contentWidth === null ||
-        xRailSize === null
+        containerWidth === null
+        || contentWidth === null
+        || xRailSize === null
       ) {
         return 0
-      } else {
+      }
+      else {
         const widthDiff = contentWidth - containerWidth
-        if (!widthDiff) return 0
+        if (!widthDiff)
+          return 0
         return (
           (containerScrollLeft / widthDiff) * (xRailSize - xBarSizeRef.value)
         )
@@ -240,18 +263,18 @@ const Scrollbar = defineComponent({
       const { value: containerHeight } = containerHeightRef
       const { value: contentHeight } = contentHeightRef
       return (
-        containerHeight !== null &&
-        contentHeight !== null &&
-        contentHeight > containerHeight
+        containerHeight !== null
+        && contentHeight !== null
+        && contentHeight > containerHeight
       )
     })
     const needXBarRef = computed(() => {
       const { value: containerWidth } = containerWidthRef
       const { value: contentWidth } = contentWidthRef
       return (
-        containerWidth !== null &&
-        contentWidth !== null &&
-        contentWidth > containerWidth
+        containerWidth !== null
+        && contentWidth !== null
+        && contentWidth > containerWidth
       )
     })
     const mergedShowXBarRef = computed(() => {
@@ -264,52 +287,23 @@ const Scrollbar = defineComponent({
     })
     const mergedContainerRef = computed(() => {
       const { container } = props
-      if (container) return container()
+      if (container)
+        return container()
       return containerRef.value
     })
     const mergedContentRef = computed(() => {
       const { content } = props
-      if (content) return content()
+      if (content)
+        return content()
       return contentRef.value
     })
 
-    const activateState = useReactivated(() => {
-      // Only restore for builtin container & content
-      if (!props.container) {
-        // remount
-        scrollTo({
-          top: containerScrollTopRef.value,
-          left: containerScrollLeftRef.value
-        })
-      }
-    })
-
-    // methods
-    const handleContentResize = (): void => {
-      if (activateState.isDeactivated) return
-      sync()
-    }
-    const handleContainerResize = (e: ResizeObserverEntry): void => {
-      if (activateState.isDeactivated) return
-      const { onResize } = props
-      if (onResize) onResize(e)
-      sync()
-    }
-    interface MergedScrollOptions {
-      left?: number
-      top?: number
-      el?: HTMLElement
-      position?: 'top' | 'bottom'
-      behavior?: ScrollBehavior
-      debounce?: boolean
-      index?: number
-      elSize?: number
-    }
     const scrollTo: ScrollTo = (
       options: MergedScrollOptions | number,
       y?: number
     ): void => {
-      if (!props.scrollable) return
+      if (!props.scrollable)
+        return
       if (typeof options === 'number') {
         scrollToPosition(options, y ?? 0, 0, false, 'auto')
         return
@@ -329,28 +323,70 @@ const Scrollbar = defineComponent({
       }
       if (el !== undefined) {
         scrollToPosition(0, el.offsetTop, el.offsetHeight, debounce, behavior)
-      } else if (index !== undefined && elSize !== undefined) {
+      }
+      else if (index !== undefined && elSize !== undefined) {
         scrollToPosition(0, index * elSize, elSize, debounce, behavior)
-      } else if (position === 'bottom') {
+      }
+      else if (position === 'bottom') {
         scrollToPosition(0, Number.MAX_SAFE_INTEGER, 0, false, behavior)
-      } else if (position === 'top') {
+      }
+      else if (position === 'top') {
         scrollToPosition(0, 0, 0, false, behavior)
       }
+    }
+
+    const activateState = useReactivated(() => {
+      // Only restore for builtin container & content
+      if (!props.container) {
+        // remount
+        scrollTo({
+          top: containerScrollTopRef.value,
+          left: containerScrollLeftRef.value
+        })
+      }
+    })
+
+    // methods
+    const handleContentResize = (): void => {
+      if (activateState.isDeactivated)
+        return
+      sync()
+    }
+    const handleContainerResize = (e: ResizeObserverEntry): void => {
+      if (activateState.isDeactivated)
+        return
+      const { onResize } = props
+      if (onResize)
+        onResize(e)
+      sync()
+    }
+    interface MergedScrollOptions {
+      left?: number
+      top?: number
+      el?: HTMLElement
+      position?: 'top' | 'bottom'
+      behavior?: ScrollBehavior
+      debounce?: boolean
+      index?: number
+      elSize?: number
     }
     const scrollBy: ScrollBy = (
       options: ScrollOptions | number,
       y?: number
     ): void => {
-      if (!props.scrollable) return
+      if (!props.scrollable)
+        return
       const { value: container } = mergedContainerRef
-      if (!container) return
+      if (!container)
+        return
       if (typeof options === 'object') {
         container.scrollBy(options)
-      } else {
+      }
+      else {
         container.scrollBy(options, y || 0)
       }
     }
-    function scrollToPosition (
+    function scrollToPosition(
       left: number,
       top: number,
       elSize: number,
@@ -358,13 +394,15 @@ const Scrollbar = defineComponent({
       behavior?: ScrollBehavior
     ): void {
       const { value: container } = mergedContainerRef
-      if (!container) return
+      if (!container)
+        return
       if (debounce) {
         const { scrollTop, offsetHeight } = container
         if (top > scrollTop) {
           if (top + elSize <= scrollTop + offsetHeight) {
             // do nothing
-          } else {
+          }
+          else {
             container.scrollTo({
               left,
               top: top + elSize - offsetHeight,
@@ -380,19 +418,19 @@ const Scrollbar = defineComponent({
         behavior
       })
     }
-    function handleMouseEnterWrapper (): void {
+    function handleMouseEnterWrapper(): void {
       showXBar()
       showYBar()
       sync()
     }
-    function handleMouseLeaveWrapper (): void {
+    function handleMouseLeaveWrapper(): void {
       hideBar()
     }
-    function hideBar (): void {
+    function hideBar(): void {
       hideYBar()
       hideXBar()
     }
-    function hideYBar (): void {
+    function hideYBar(): void {
       if (yBarVanishTimerId !== undefined) {
         window.clearTimeout(yBarVanishTimerId)
       }
@@ -400,7 +438,7 @@ const Scrollbar = defineComponent({
         isShowYBarRef.value = false
       }, props.duration)
     }
-    function hideXBar (): void {
+    function hideXBar(): void {
       if (xBarVanishTimerId !== undefined) {
         window.clearTimeout(xBarVanishTimerId)
       }
@@ -408,33 +446,34 @@ const Scrollbar = defineComponent({
         isShowXBarRef.value = false
       }, props.duration)
     }
-    function showXBar (): void {
+    function showXBar(): void {
       if (xBarVanishTimerId !== undefined) {
         window.clearTimeout(xBarVanishTimerId)
       }
       isShowXBarRef.value = true
     }
-    function showYBar (): void {
+    function showYBar(): void {
       if (yBarVanishTimerId !== undefined) {
         window.clearTimeout(yBarVanishTimerId)
       }
       isShowYBarRef.value = true
     }
-    function handleScroll (e: Event): void {
+    function handleScroll(e: Event): void {
       const { onScroll } = props
-      if (onScroll) onScroll(e)
+      if (onScroll)
+        onScroll(e)
       syncScrollState()
     }
-    function syncScrollState (): void {
+    function syncScrollState(): void {
       // only collect scroll state, do not trigger any dom event
       const { value: container } = mergedContainerRef
       if (container) {
         containerScrollTopRef.value = container.scrollTop
-        containerScrollLeftRef.value =
-          container.scrollLeft * (rtlEnabledRef?.value ? -1 : 1)
+        containerScrollLeftRef.value
+          = container.scrollLeft * (rtlEnabledRef?.value ? -1 : 1)
       }
     }
-    function syncPositionState (): void {
+    function syncPositionState(): void {
       // only collect position state, do not trigger any dom event
       // Don't use getClientBoundingRect because element may be scale transformed
       const { value: content } = mergedContentRef
@@ -460,12 +499,12 @@ const Scrollbar = defineComponent({
      * Sometimes there's only one element that we can scroll,
      * For example for textarea, there won't be a content element.
      */
-    function syncUnifiedContainer (): void {
+    function syncUnifiedContainer(): void {
       const { value: container } = mergedContainerRef
       if (container) {
         containerScrollTopRef.value = container.scrollTop
-        containerScrollLeftRef.value =
-          container.scrollLeft * (rtlEnabledRef?.value ? -1 : 1)
+        containerScrollLeftRef.value
+          = container.scrollLeft * (rtlEnabledRef?.value ? -1 : 1)
         containerHeightRef.value = container.offsetHeight
         containerWidthRef.value = container.offsetWidth
         contentHeightRef.value = container.scrollHeight
@@ -480,21 +519,23 @@ const Scrollbar = defineComponent({
         yRailSizeRef.value = yRailEl.offsetHeight
       }
     }
-    function sync (): void {
-      if (!props.scrollable) return
+    function sync(): void {
+      if (!props.scrollable)
+        return
       if (props.useUnifiedContainer) {
         syncUnifiedContainer()
-      } else {
+      }
+      else {
         syncPositionState()
         syncScrollState()
       }
     }
-    function isMouseUpAway (e: MouseEvent): boolean {
+    function isMouseUpAway(e: MouseEvent): boolean {
       return !wrapperRef.value?.contains(
         getPreciseEventTarget(e) as Node | null
       )
     }
-    function handleXScrollMouseDown (e: MouseEvent): void {
+    function handleXScrollMouseDown(e: MouseEvent): void {
       e.preventDefault()
       e.stopPropagation()
       xBarPressed = true
@@ -505,8 +546,9 @@ const Scrollbar = defineComponent({
         ? window.innerWidth - e.clientX
         : e.clientX
     }
-    function handleXScrollMouseMove (e: MouseEvent): void {
-      if (!xBarPressed) return
+    function handleXScrollMouseMove(e: MouseEvent): void {
+      if (!xBarPressed)
+        return
       if (xBarVanishTimerId !== undefined) {
         window.clearTimeout(xBarVanishTimerId)
       }
@@ -516,13 +558,14 @@ const Scrollbar = defineComponent({
       const { value: containerWidth } = containerWidthRef
       const { value: contentWidth } = contentWidthRef
       const { value: xBarSize } = xBarSizeRef
-      if (containerWidth === null || contentWidth === null) return
+      if (containerWidth === null || contentWidth === null)
+        return
       const dX = rtlEnabledRef?.value
         ? window.innerWidth - e.clientX - memoMouseX
         : e.clientX - memoMouseX
 
-      const dScrollLeft =
-        (dX * (contentWidth - containerWidth)) / (containerWidth - xBarSize)
+      const dScrollLeft
+        = (dX * (contentWidth - containerWidth)) / (containerWidth - xBarSize)
       const toScrollLeftUpperBound = contentWidth - containerWidth
       let toScrollLeft = memoXLeft + dScrollLeft
       toScrollLeft = Math.min(toScrollLeftUpperBound, toScrollLeft)
@@ -531,10 +574,11 @@ const Scrollbar = defineComponent({
       if (container) {
         container.scrollLeft = toScrollLeft * (rtlEnabledRef?.value ? -1 : 1)
         const { internalOnUpdateScrollLeft } = props
-        if (internalOnUpdateScrollLeft) internalOnUpdateScrollLeft(toScrollLeft)
+        if (internalOnUpdateScrollLeft)
+          internalOnUpdateScrollLeft(toScrollLeft)
       }
     }
-    function handleXScrollMouseUp (e: MouseEvent): void {
+    function handleXScrollMouseUp(e: MouseEvent): void {
       e.preventDefault()
       e.stopPropagation()
       off('mousemove', window, handleXScrollMouseMove, true)
@@ -545,7 +589,7 @@ const Scrollbar = defineComponent({
         hideBar()
       }
     }
-    function handleYScrollMouseDown (e: MouseEvent): void {
+    function handleYScrollMouseDown(e: MouseEvent): void {
       e.preventDefault()
       e.stopPropagation()
       yBarPressed = true
@@ -554,8 +598,9 @@ const Scrollbar = defineComponent({
       memoYTop = containerScrollTopRef.value
       memoMouseY = e.clientY
     }
-    function handleYScrollMouseMove (e: MouseEvent): void {
-      if (!yBarPressed) return
+    function handleYScrollMouseMove(e: MouseEvent): void {
+      if (!yBarPressed)
+        return
       if (xBarVanishTimerId !== undefined) {
         window.clearTimeout(xBarVanishTimerId)
       }
@@ -565,10 +610,11 @@ const Scrollbar = defineComponent({
       const { value: containerHeight } = containerHeightRef
       const { value: contentHeight } = contentHeightRef
       const { value: yBarSize } = yBarSizeRef
-      if (containerHeight === null || contentHeight === null) return
+      if (containerHeight === null || contentHeight === null)
+        return
       const dY = e.clientY - memoMouseY
-      const dScrollTop =
-        (dY * (contentHeight - containerHeight)) / (containerHeight - yBarSize)
+      const dScrollTop
+        = (dY * (contentHeight - containerHeight)) / (containerHeight - yBarSize)
       const toScrollTopUpperBound = contentHeight - containerHeight
       let toScrollTop = memoYTop + dScrollTop
       toScrollTop = Math.min(toScrollTopUpperBound, toScrollTop)
@@ -578,7 +624,7 @@ const Scrollbar = defineComponent({
         container.scrollTop = toScrollTop
       }
     }
-    function handleYScrollMouseUp (e: MouseEvent): void {
+    function handleYScrollMouseUp(e: MouseEvent): void {
       e.preventDefault()
       e.stopPropagation()
       off('mousemove', window, handleYScrollMouseMove, true)
@@ -598,7 +644,8 @@ const Scrollbar = defineComponent({
       if (xRailEl) {
         if (!needXBar) {
           xRailEl.classList.add(`${mergedClsPrefix}-scrollbar-rail--disabled`)
-        } else {
+        }
+        else {
           xRailEl.classList.remove(
             `${mergedClsPrefix}-scrollbar-rail--disabled`
           )
@@ -607,7 +654,8 @@ const Scrollbar = defineComponent({
       if (yRailEl) {
         if (!needYBar) {
           yRailEl.classList.add(`${mergedClsPrefix}-scrollbar-rail--disabled`)
-        } else {
+        }
+        else {
           yRailEl.classList.remove(
             `${mergedClsPrefix}-scrollbar-rail--disabled`
           )
@@ -623,7 +671,8 @@ const Scrollbar = defineComponent({
       // if you pass inner to scrollbar, you may use a ref inside component
       // however, when scrollbar is mounted, ref is not ready at component
       // you need to init by yourself
-      if (props.container) return
+      if (props.container)
+        return
       sync()
     })
     onBeforeUnmount(() => {
@@ -636,31 +685,84 @@ const Scrollbar = defineComponent({
       off('mousemove', window, handleYScrollMouseMove, true)
       off('mouseup', window, handleYScrollMouseUp, true)
     })
-    const themeRef = useTheme(
-      'Scrollbar',
-      '-scrollbar',
-      style,
-      scrollbarLight,
-      props,
-      mergedClsPrefixRef
-    )
     const cssVarsRef = computed(() => {
       const {
-        common: {
-          cubicBezierEaseInOut,
-          scrollbarBorderRadius,
-          scrollbarHeight,
-          scrollbarWidth
-        },
-        self: { color, colorHover }
+        common: { cubicBezierEaseInOut },
+        self: {
+          color,
+          colorHover,
+          height,
+          width,
+          borderRadius,
+          railInsetHorizontalTop,
+          railInsetHorizontalBottom,
+          railInsetVerticalRight,
+          railInsetVerticalLeft,
+          railColor
+        }
       } = themeRef.value
+
+      const {
+        top: railTopHorizontalTop,
+        right: railRightHorizontalTop,
+        bottom: railBottomHorizontalTop,
+        left: railLeftHorizontalTop
+      } = getPadding(railInsetHorizontalTop)
+
+      const {
+        top: railTopHorizontalBottom,
+        right: railRightHorizontalBottom,
+        bottom: railBottomHorizontalBottom,
+        left: railLeftHorizontalBottom
+      } = getPadding(railInsetHorizontalBottom)
+
+      const {
+        top: railTopVerticalRight,
+        right: railRightVerticalRight,
+        bottom: railBottomVerticalRight,
+        left: railLeftVerticalRight
+      } = getPadding(
+        rtlEnabledRef?.value
+          ? rtlInset(railInsetVerticalRight)
+          : railInsetVerticalRight
+      )
+
+      const {
+        top: railTopVerticalLeft,
+        right: railRightVerticalLeft,
+        bottom: railBottomVerticalLeft,
+        left: railLeftVerticalLeft
+      } = getPadding(
+        rtlEnabledRef?.value
+          ? rtlInset(railInsetVerticalLeft)
+          : railInsetVerticalLeft
+      )
+
       return {
         '--n-scrollbar-bezier': cubicBezierEaseInOut,
         '--n-scrollbar-color': color,
         '--n-scrollbar-color-hover': colorHover,
-        '--n-scrollbar-border-radius': scrollbarBorderRadius,
-        '--n-scrollbar-width': scrollbarWidth,
-        '--n-scrollbar-height': scrollbarHeight
+        '--n-scrollbar-border-radius': borderRadius,
+        '--n-scrollbar-width': width,
+        '--n-scrollbar-height': height,
+        '--n-scrollbar-rail-top-horizontal-top': railTopHorizontalTop,
+        '--n-scrollbar-rail-right-horizontal-top': railRightHorizontalTop,
+        '--n-scrollbar-rail-bottom-horizontal-top': railBottomHorizontalTop,
+        '--n-scrollbar-rail-left-horizontal-top': railLeftHorizontalTop,
+        '--n-scrollbar-rail-top-horizontal-bottom': railTopHorizontalBottom,
+        '--n-scrollbar-rail-right-horizontal-bottom': railRightHorizontalBottom,
+        '--n-scrollbar-rail-bottom-horizontal-bottom':
+          railBottomHorizontalBottom,
+        '--n-scrollbar-rail-left-horizontal-bottom': railLeftHorizontalBottom,
+        '--n-scrollbar-rail-top-vertical-right': railTopVerticalRight,
+        '--n-scrollbar-rail-right-vertical-right': railRightVerticalRight,
+        '--n-scrollbar-rail-bottom-vertical-right': railBottomVerticalRight,
+        '--n-scrollbar-rail-left-vertical-right': railLeftVerticalRight,
+        '--n-scrollbar-rail-top-vertical-left': railTopVerticalLeft,
+        '--n-scrollbar-rail-right-vertical-left': railRightVerticalLeft,
+        '--n-scrollbar-rail-bottom-vertical-left': railBottomVerticalLeft,
+        '--n-scrollbar-rail-left-vertical-left': railLeftVerticalLeft,
+        '--n-scrollbar-rail-color': railColor
       }
     })
     const themeClassHandle = inlineThemeDisabled
@@ -703,15 +805,19 @@ const Scrollbar = defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const {
       $slots,
       mergedClsPrefix,
       triggerDisplayManually,
       rtlEnabled,
-      internalHoistYRail
+      internalHoistYRail,
+      yPlacement,
+      xPlacement,
+      xScrollable
     } = this
-    if (!this.scrollable) return $slots.default?.()
+    if (!this.scrollable)
+      return $slots.default?.()
     const triggerIsNone = this.trigger === 'none'
     const createYRail = (
       className: string | undefined,
@@ -723,6 +829,7 @@ const Scrollbar = defineComponent({
           class={[
             `${mergedClsPrefix}-scrollbar-rail`,
             `${mergedClsPrefix}-scrollbar-rail--vertical`,
+            `${mergedClsPrefix}-scrollbar-rail--vertical--${yPlacement}`,
             className
           ]}
           data-scrollbar-rail
@@ -730,7 +837,6 @@ const Scrollbar = defineComponent({
           aria-hidden
         >
           {h(
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             (triggerIsNone ? Wrapper : Transition) as any,
             triggerIsNone ? null : { name: 'fade-in-transition' },
             {
@@ -812,19 +918,19 @@ const Scrollbar = defineComponent({
             </div>
           ),
           internalHoistYRail ? null : createYRail(undefined, undefined),
-          this.xScrollable && (
+          xScrollable && (
             <div
               ref="xRailRef"
               class={[
                 `${mergedClsPrefix}-scrollbar-rail`,
-                `${mergedClsPrefix}-scrollbar-rail--horizontal`
+                `${mergedClsPrefix}-scrollbar-rail--horizontal`,
+                `${mergedClsPrefix}-scrollbar-rail--horizontal--${xPlacement}`
               ]}
               style={this.horizontalRailStyle}
               data-scrollbar-rail
               aria-hidden
             >
               {h(
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
                 (triggerIsNone ? Wrapper : Transition) as any,
                 triggerIsNone ? null : { name: 'fade-in-transition' },
                 {
@@ -863,7 +969,8 @@ const Scrollbar = defineComponent({
           {createYRail(this.themeClass, this.cssVars)}
         </Fragment>
       )
-    } else {
+    }
+    else {
       return scrollbarNode
     }
   }

@@ -1,6 +1,7 @@
-import { cB, c } from '../../../_utils/cssr'
-import { fadeInTransition } from '../../../_styles/transitions/fade-in.cssr'
 import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
+import { fadeInTransition } from '../../../_styles/transitions/fade-in.cssr'
+import { c, cB, cM, } from '../../../_utils/cssr'
+import { DRAGGABLE_CLASS } from '../composables'
 
 // vars:
 // --n-bezier-ease-out
@@ -43,7 +44,8 @@ export default c([
       min-height: 100%;
       display: flex;
       position: relative;
-    `)
+    `),
+    cM('penetrate', `pointer-events: none;`)
   ]),
   cB('modal', `
     position: relative;
@@ -51,10 +53,15 @@ export default c([
     color: var(--n-text-color);
     margin: auto;
     box-shadow: var(--n-box-shadow);
+    pointer-events: all;
   `, [
     fadeInScaleUpTransition({
       duration: '.25s',
       enterScale: '.5'
-    })
+    }),
+    c(`.${DRAGGABLE_CLASS}`, `
+      cursor: move;
+      user-select: none;
+    `),
   ])
 ])

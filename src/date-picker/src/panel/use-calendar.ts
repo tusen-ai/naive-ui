@@ -1,42 +1,5 @@
-import {
-  ref,
-  computed,
-  inject,
-  watch,
-  type ExtractPropTypes,
-  type PropType
-} from 'vue'
-import {
-  addMonths,
-  addYears,
-  isSameMonth,
-  getTime,
-  format,
-  set,
-  getYear,
-  getMonth,
-  getDate,
-  isValid,
-  startOfDay,
-  startOfSecond,
-  startOfMonth,
-  startOfYear,
-  startOfQuarter,
-  startOfWeek,
-  setQuarter,
-  setYear,
-  setMonth
-} from 'date-fns/esm'
 import type { VirtualListInst } from 'vueuc'
 import type { ScrollbarInst } from '../../../_internal'
-import {
-  getDefaultTime,
-  dateArray,
-  monthArray,
-  strictParse,
-  yearArray,
-  quarterArray
-} from '../utils'
 import type {
   FirstDayOfWeek,
   IsSingleDateDisabled,
@@ -44,10 +7,47 @@ import type {
   PanelChildComponentRefs,
   Shortcuts
 } from '../interface'
+import type { DateItem, MonthItem, QuarterItem, YearItem } from '../utils'
+import {
+  addMonths,
+  addYears,
+  format,
+  getDate,
+  getMonth,
+  getTime,
+  getYear,
+  isSameMonth,
+  isValid,
+  set,
+  setMonth,
+  setQuarter,
+  setYear,
+  startOfDay,
+  startOfMonth,
+  startOfQuarter,
+  startOfSecond,
+  startOfWeek,
+  startOfYear
+} from 'date-fns'
+import {
+  computed,
+  type ExtractPropTypes,
+  inject,
+  type PropType,
+  ref,
+  watch
+} from 'vue'
+import { MONTH_ITEM_HEIGHT } from '../config'
 import { datePickerInjectionKey } from '../interface'
-import type { DateItem, MonthItem, YearItem, QuarterItem } from '../utils'
+import {
+  dateArray,
+  getDefaultTime,
+  monthArray,
+  quarterArray,
+  strictParse,
+  yearArray
+} from '../utils'
 import { usePanelCommon, usePanelCommonProps } from './use-panel-common'
-import { MONTH_ITEM_HEIGHT, START_YEAR } from '../config'
 
 const useCalendarProps = {
   ...usePanelCommonProps,
@@ -58,8 +58,7 @@ const useCalendarProps = {
   }
 } as const
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function useCalendar (
+function useCalendar(
   props: ExtractPropTypes<typeof useCalendarProps>,
   type: 'date' | 'datetime' | 'month' | 'year' | 'quarter' | 'week'
 ) {
@@ -78,8 +77,8 @@ function useCalendar (
     datePickerSlots,
     yearFormatRef,
     monthFormatRef,
-    quarterFormatRef
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    quarterFormatRef,
+    yearRangeRef
   } = inject(datePickerInjectionKey)!
   const validation = {
     isValueInvalid: isValueInvalidRef,
@@ -94,6 +93,9 @@ function useCalendar (
   const mergedDateFormatRef = computed(
     () => props.dateFormat || localeRef.value.dateFormat
   )
+  const mergedDayFormatRef = computed(
+    () => props.calendarDayFormat || localeRef.value.dayFormat
+  )
   const dateInputValueRef = ref(
     props.value === null || Array.isArray(props.value)
       ? ''
@@ -101,7 +103,7 @@ function useCalendar (
   )
   const calendarValueRef = ref(
     props.value === null || Array.isArray(props.value)
-      ? props.defaultCalendarStartTime ?? Date.now()
+      ? (props.defaultCalendarStartTime ?? Date.now())
       : props.value
   )
   const yearVlRef = ref<VirtualListInst | null>(null)
@@ -131,9 +133,14 @@ function useCalendar (
   })
   const yearArrayRef = computed(() => {
     const { value } = props
-    return yearArray(Array.isArray(value) ? null : value, nowRef.value, {
-      yearFormat: yearFormatRef.value
-    })
+    return yearArray(
+      Array.isArray(value) ? null : value,
+      nowRef.value,
+      {
+        yearFormat: yearFormatRef.value
+      },
+      yearRangeRef
+    )
   })
   const quarterArrayRef = computed(() => {
     const { value } = props
@@ -151,7 +158,7 @@ function useCalendar (
       const { ts } = dateItem
       return format(
         ts,
-        localeRef.value.dayFormat,
+        mergedDayFormatRef.value,
         panelCommon.dateFnsOptions.value
       )
     })
@@ -159,15 +166,20 @@ function useCalendar (
   const calendarMonthRef = computed(() => {
     return format(
       calendarValueRef.value,
-      localeRef.value.monthFormat,
+      props.calendarHeaderMonthFormat || localeRef.value.monthFormat,
       panelCommon.dateFnsOptions.value
     )
   })
   const calendarYearRef = computed(() => {
     return format(
       calendarValueRef.value,
-      localeRef.value.yearFormat,
+      props.calendarHeaderYearFormat || localeRef.value.yearFormat,
       panelCommon.dateFnsOptions.value
+    )
+  })
+  const calendarMonthBeforeYearRef = computed(() => {
+    return (
+      props.calendarHeaderMonthBeforeYear ?? localeRef.value.monthBeforeYear
     )
   })
   watch(calendarValueRef, (value, oldValue) => {
@@ -187,23 +199,28 @@ function useCalendar (
           panelCommon.dateFnsOptions.value
         )
         calendarValueRef.value = value
-      } else {
+      }
+      else {
         dateInputValueRef.value = ''
       }
     }
   )
 
-  function sanitizeValue (value: number): number {
-    if (type === 'datetime') return getTime(startOfSecond(value))
-    if (type === 'month') return getTime(startOfMonth(value))
-    if (type === 'year') return getTime(startOfYear(value))
-    if (type === 'quarter') return getTime(startOfQuarter(value))
+  function sanitizeValue(value: number): number {
+    if (type === 'datetime')
+      return getTime(startOfSecond(value))
+    if (type === 'month')
+      return getTime(startOfMonth(value))
+    if (type === 'year')
+      return getTime(startOfYear(value))
+    if (type === 'quarter')
+      return getTime(startOfQuarter(value))
     if (type === 'week') {
       // refer to makeWeekMatcher
-      const weekStartsOn = (((firstDayOfWeekRef.value ??
-        localeRef.value.firstDayOfWeek) +
-        1) %
-        7) as FirstDayOfWeek
+      const weekStartsOn = (((firstDayOfWeekRef.value
+        ?? localeRef.value.firstDayOfWeek)
+      + 1)
+    % 7) as FirstDayOfWeek
       return getTime(
         startOfWeek(value, {
           weekStartsOn
@@ -212,17 +229,18 @@ function useCalendar (
     }
     return getTime(startOfDay(value))
   }
-  function mergedIsDateDisabled (
+  function mergedIsDateDisabled(
     ts: number,
     detail: IsSingleDateDisabledDetail
   ): boolean {
     const {
       isDateDisabled: { value: isDateDisabled }
     } = validation
-    if (!isDateDisabled) return false
+    if (!isDateDisabled)
+      return false
     return (isDateDisabled as IsSingleDateDisabled)(ts, detail)
   }
-  function handleDateInput (value: string): void {
+  function handleDateInput(value: string): void {
     const date = strictParse(
       value,
       mergedDateFormatRef.value,
@@ -235,7 +253,8 @@ function useCalendar (
           getTime(sanitizeValue(Date.now())),
           props.panel
         )
-      } else if (!Array.isArray(props.value)) {
+      }
+      else if (!Array.isArray(props.value)) {
         const newDateTime = set(props.value, {
           year: getYear(date),
           month: getMonth(date),
@@ -246,11 +265,12 @@ function useCalendar (
           props.panel
         )
       }
-    } else {
+    }
+    else {
       dateInputValueRef.value = value
     }
   }
-  function handleDateInputBlur (): void {
+  function handleDateInputBlur(): void {
     const date = strictParse(
       dateInputValueRef.value,
       mergedDateFormatRef.value,
@@ -260,7 +280,8 @@ function useCalendar (
     if (isValid(date)) {
       if (props.value === null) {
         panelCommon.doUpdateValue(getTime(sanitizeValue(Date.now())), false)
-      } else if (!Array.isArray(props.value)) {
+      }
+      else if (!Array.isArray(props.value)) {
         const newDateTime = set(props.value, {
           year: getYear(date),
           month: getMonth(date),
@@ -271,38 +292,39 @@ function useCalendar (
           false
         )
       }
-    } else {
+    }
+    else {
       deriveDateInputValue()
     }
   }
-  function clearSelectedDateTime (): void {
+  function clearSelectedDateTime(): void {
     panelCommon.doUpdateValue(null, true)
     dateInputValueRef.value = ''
     panelCommon.doClose(true)
     panelCommon.handleClearClick()
   }
-  function handleNowClick (): void {
+  function handleNowClick(): void {
     panelCommon.doUpdateValue(getTime(sanitizeValue(Date.now())), true)
     const now = Date.now()
     calendarValueRef.value = now
     panelCommon.doClose(true)
     if (
-      props.panel &&
-      (type === 'month' || type === 'quarter' || type === 'year')
+      props.panel
+      && (type === 'month' || type === 'quarter' || type === 'year')
     ) {
       panelCommon.disableTransitionOneTick()
       justifyColumnsScrollState(now)
     }
   }
   const hoveredWeekRef = ref<number | null>(null)
-  function handleDateMouseEnter (
+  function handleDateMouseEnter(
     dateItem: DateItem | MonthItem | YearItem | QuarterItem
   ): void {
     if (dateItem.type === 'date' && type === 'week') {
       hoveredWeekRef.value = sanitizeValue(getTime(dateItem.ts))
     }
   }
-  function isWeekHovered (
+  function isWeekHovered(
     dateItem: DateItem | MonthItem | YearItem | QuarterItem
   ): boolean {
     if (dateItem.type === 'date' && type === 'week') {
@@ -310,7 +332,7 @@ function useCalendar (
     }
     return false
   }
-  function handleDateClick (
+  function handleDateClick(
     dateItem: DateItem | MonthItem | YearItem | QuarterItem
   ): void {
     if (
@@ -343,13 +365,14 @@ function useCalendar (
     let newValue: number
     if (props.value !== null && !Array.isArray(props.value)) {
       newValue = props.value
-    } else {
+    }
+    else {
       newValue = Date.now()
     }
     if (
-      type === 'datetime' &&
-      props.defaultTime !== null &&
-      !Array.isArray(props.defaultTime)
+      type === 'datetime'
+      && props.defaultTime !== null
+      && !Array.isArray(props.defaultTime)
     ) {
       const time = getDefaultTime(props.defaultTime)
       if (time) {
@@ -359,9 +382,9 @@ function useCalendar (
     newValue = getTime(
       dateItem.type === 'quarter' && dateItem.dateObject.quarter
         ? setQuarter(
-          setYear(newValue, dateItem.dateObject.year),
-          dateItem.dateObject.quarter
-        )
+            setYear(newValue, dateItem.dateObject.year),
+            dateItem.dateObject.quarter
+          )
         : set(newValue, dateItem.dateObject)
     )
     panelCommon.doUpdateValue(
@@ -390,14 +413,15 @@ function useCalendar (
     }
   }
 
-  function handleQuickMonthClick (
+  function handleQuickMonthClick(
     dateItem: MonthItem | YearItem | QuarterItem,
     updatePanelValue: (value: number) => void
   ): void {
     let newValue: number
     if (props.value !== null && !Array.isArray(props.value)) {
       newValue = props.value
-    } else {
+    }
+    else {
       newValue = Date.now()
     }
     newValue = getTime(
@@ -408,10 +432,10 @@ function useCalendar (
     updatePanelValue(newValue)
     justifyColumnsScrollState(newValue)
   }
-  function onUpdateCalendarValue (value: number): void {
+  function onUpdateCalendarValue(value: number): void {
     calendarValueRef.value = value
   }
-  function deriveDateInputValue (time?: number): void {
+  function deriveDateInputValue(time?: number): void {
     // If not selected, display nothing,
     // else update datetime related string
     if (props.value === null || Array.isArray(props.value)) {
@@ -427,71 +451,74 @@ function useCalendar (
       panelCommon.dateFnsOptions.value
     )
   }
-  function handleConfirmClick (): void {
+  function handleConfirmClick(): void {
     if (validation.isDateInvalid.value || validation.isTimeInvalid.value) {
       return
     }
     panelCommon.doConfirm()
     closeCalendar()
   }
-  function closeCalendar (): void {
+  function closeCalendar(): void {
     if (props.active) {
       panelCommon.doClose()
     }
   }
-  function nextYear (): void {
+  function nextYear(): void {
     calendarValueRef.value = getTime(addYears(calendarValueRef.value, 1))
     props.onNextYear?.()
   }
-  function prevYear (): void {
+  function prevYear(): void {
     calendarValueRef.value = getTime(addYears(calendarValueRef.value, -1))
     props.onPrevYear?.()
   }
-  function nextMonth (): void {
+  function nextMonth(): void {
     calendarValueRef.value = getTime(addMonths(calendarValueRef.value, 1))
     props.onNextMonth?.()
   }
-  function prevMonth (): void {
+  function prevMonth(): void {
     calendarValueRef.value = getTime(addMonths(calendarValueRef.value, -1))
     props.onPrevMonth?.()
   }
   // For month type
-  function virtualListContainer (): HTMLElement | null {
+  function virtualListContainer(): HTMLElement | null {
     const { value } = yearVlRef
     return value?.listElRef || null
   }
   // For month type
-  function virtualListContent (): HTMLElement | null {
+  function virtualListContent(): HTMLElement | null {
     const { value } = yearVlRef
     return value?.itemsElRef || null
   }
   // For month type
-  function handleVirtualListScroll (e: Event): void {
+  function handleVirtualListScroll(): void {
     yearScrollbarRef.value?.sync()
   }
-  function handleTimePickerChange (value: number | null): void {
-    if (value === null) return
+  function handleTimePickerChange(value: number | null): void {
+    if (value === null)
+      return
     panelCommon.doUpdateValue(value, props.panel)
   }
-  function handleSingleShortcutMouseenter (shortcut: Shortcuts[string]): void {
+  function handleSingleShortcutMouseenter(shortcut: Shortcuts[string]): void {
     panelCommon.cachePendingValue()
     const shortcutValue = panelCommon.getShortcutValue(shortcut)
-    if (typeof shortcutValue !== 'number') return
+    if (typeof shortcutValue !== 'number')
+      return
     panelCommon.doUpdateValue(shortcutValue, false)
   }
-  function handleSingleShortcutClick (shortcut: Shortcuts[string]): void {
+  function handleSingleShortcutClick(shortcut: Shortcuts[string]): void {
     const shortcutValue = panelCommon.getShortcutValue(shortcut)
-    if (typeof shortcutValue !== 'number') return
+    if (typeof shortcutValue !== 'number')
+      return
     panelCommon.doUpdateValue(shortcutValue, props.panel)
     panelCommon.clearPendingValue()
     handleConfirmClick()
   }
 
-  function justifyColumnsScrollState (value?: number): void {
+  function justifyColumnsScrollState(value?: number): void {
     const { value: mergedValue } = props
     if (monthScrollbarRef.value) {
-      const monthIndex =
-        value === undefined
+      const monthIndex
+        = value === undefined
           ? mergedValue === null
             ? getMonth(Date.now())
             : getMonth(mergedValue as number)
@@ -499,12 +526,12 @@ function useCalendar (
       monthScrollbarRef.value.scrollTo({ top: monthIndex * MONTH_ITEM_HEIGHT })
     }
     if (yearVlRef.value) {
-      const yearIndex =
-        (value === undefined
+      const yearIndex
+        = (value === undefined
           ? mergedValue === null
             ? getYear(Date.now())
             : getYear(mergedValue as number)
-          : getYear(value)) - START_YEAR
+          : getYear(value)) - yearRangeRef.value[0]
       yearVlRef.value.scrollTo({ top: yearIndex * MONTH_ITEM_HEIGHT })
     }
   }
@@ -522,6 +549,7 @@ function useCalendar (
     calendarYear: calendarYearRef,
     calendarMonth: calendarMonthRef,
     weekdays: weekdaysRef,
+    calendarMonthBeforeYear: calendarMonthBeforeYearRef,
     mergedIsDateDisabled,
     nextYear,
     prevYear,

@@ -1,7 +1,12 @@
 <markdown>
 # embedded debug
-
 </markdown>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const showModal = ref(false)
+</script>
 
 <template>
   <n-button @click="showModal = true">
@@ -13,15 +18,3 @@
     </n-card>
   </n-modal>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      showModal: ref(false)
-    }
-  }
-})
-</script>

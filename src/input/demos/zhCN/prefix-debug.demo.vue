@@ -2,6 +2,18 @@
 # Prefix debug
 </markdown>
 
+<script lang="ts" setup>
+import { FlashOutline } from '@vicons/ionicons5'
+import { ref } from 'vue'
+
+const value1 = ref(null)
+const value2 = ref(null)
+const value3 = ref(null)
+const value4 = ref(null)
+const value5 = ref('Test value')
+const value6 = ref('Test value')
+</script>
+
 <template>
   <n-space vertical>
     <n-input v-model:value="value1" type="text" placeholder="Basic Input">
@@ -68,22 +80,3 @@
     </n-input>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { FlashOutline } from '@vicons/ionicons5'
-
-export default defineComponent({
-  setup () {
-    return {
-      value1: ref(null),
-      value2: ref(null),
-      value3: ref(null),
-      value4: ref(null),
-      value5: ref('Test value'),
-      value6: ref('Test value'),
-      FlashOutline
-    }
-  }
-})
-</script>

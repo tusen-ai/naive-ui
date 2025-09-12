@@ -1,5 +1,5 @@
-import { type TreeMate } from 'treemate'
-import { type CSSProperties, type VNodeChild, type VNode } from 'vue'
+import type { TreeMate } from 'treemate'
+import type { CSSProperties, VNode, VNodeChild } from 'vue'
 
 export type SelectMixedOption =
   | SelectBaseOption
@@ -41,33 +41,33 @@ export type ValueAtom = string | number
 export type Value = ValueAtom | string[] | number[] | ValueAtom[]
 export type OnUpdateValue = (
   value: string &
-  number &
-  ValueAtom &
-  string[] &
-  number[] &
-  ValueAtom[] &
-  (ValueAtom | null) &
-  (string[] | null) &
-  (number[] | null) &
-  (ValueAtom[] | null),
+    number &
+    ValueAtom &
+    string[] &
+    number[] &
+    ValueAtom[] &
+    (ValueAtom | null) &
+    (string[] | null) &
+    (number[] | null) &
+    (ValueAtom[] | null),
   option: SelectBaseOption & null & SelectBaseOption[]
 ) => void
 export type OnUpdateValueImpl = (
   value:
-  | ValueAtom
-  | string[]
-  | number[]
-  | ValueAtom[]
-  | (ValueAtom | null)
-  | (string[] | null)
-  | (number[] | null)
-  | (ValueAtom[] | null),
+    | ValueAtom
+    | string[]
+    | number[]
+    | ValueAtom[]
+    | (ValueAtom | null)
+    | (string[] | null)
+    | (number[] | null)
+    | (ValueAtom[] | null),
   option: SelectBaseOption | null | SelectBaseOption[]
 ) => void
 export type SelectTreeMate = TreeMate<
-SelectBaseOption,
-SelectGroupOption,
-SelectIgnoredOption
+  SelectBaseOption,
+  SelectGroupOption,
+  SelectIgnoredOption
 >
 
 export type Size = 'tiny' | 'small' | 'medium' | 'large'

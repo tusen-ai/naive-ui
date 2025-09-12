@@ -27,10 +27,10 @@ icon.vue
 | disabled | `boolean` | `false` | Whether to disable the switch. |  |
 | loading | `boolean` | `false` | Whether to show loading state. |  |
 | rail-style | `(info: { focused: boolean, checked: boolean }) => (CSSProperties \| string)` | `undefined` | Rail style generator. |  |
-| round | `boolean` | `true` | Whether the switch has rounded corners.   |  |
+| round | `boolean` | `true` | Whether the switch has rounded corners. |  |
 | rubber-band | `boolean` | `true` | Whether the switch button has rubber band effect. | 2.28.3 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | The size of the switch. |  |
-| unchecked-value | `string \| boolean \| number` | `false` | Value of checked state. |  |
+| unchecked-value | `string \| boolean \| number` | `false` | Value of unchecked state. |  |
 | value | `string \| number \| boolean \| undefined` | `undefined` | Value when being set manually. |  |
 | on-update:value | `(value: boolean) => void` | `undefined` | Callback when the component's value changes. |  |
 

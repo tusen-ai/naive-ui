@@ -1,5 +1,5 @@
-import { c, cB, cE } from '../../../../_utils/cssr'
 import { iconSwitchTransition } from '../../../../_styles/transitions/icon-switch.cssr'
+import { c, cB, cE } from '../../../../_utils/cssr'
 
 export default c([
   c('@keyframes rotator', `
@@ -10,8 +10,7 @@ export default c([
     100% {
       -webkit-transform: rotate(360deg);
       transform: rotate(360deg);
-    }`
-  ),
+    }`),
   cB('base-loading', `
     position: relative;
     line-height: 0;

@@ -1,8 +1,8 @@
-import { h, defineComponent, computed, type PropType, inject } from 'vue'
 import type { KatexOptions } from 'katex'
-import type { Katex } from '../../config-provider/src/katex'
-import { configProviderInjectionKey } from '../../config-provider/src/context'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type { Katex } from '../../config-provider/src/katex'
+import { computed, defineComponent, h, inject, type PropType } from 'vue'
+import { configProviderInjectionKey } from '../../config-provider/src/context'
 
 export const equationProps = {
   value: String,
@@ -15,11 +15,11 @@ export type EquationProps = ExtractPublicPropTypes<typeof equationProps>
 export const Equation = defineComponent({
   name: 'Equation',
   props: equationProps,
-  setup (props) {
+  setup(props) {
     const configProviderContext = inject(configProviderInjectionKey)
     const extractedHtmlInfo = computed(() => {
-      const outerHtml =
-        (
+      const outerHtml
+        = (
           props.katex || configProviderContext?.mergedKatexRef.value
         )?.renderToString(props.value || '', {
           throwOnError: false,

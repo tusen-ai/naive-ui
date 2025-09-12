@@ -1,7 +1,7 @@
-import { onBeforeUnmount, onMounted, type Ref } from 'vue'
+import { onBeforeUnmount, onMounted, type Ref, watch } from 'vue'
 import { resizeObserverManager } from 'vueuc'
 
-export function useOnResize (
+export function useOnResize(
   elRef: Ref<HTMLElement | null>,
   onResize: (() => void) | undefined
 ): void {
@@ -13,6 +13,20 @@ export function useOnResize (
         resizeObserverManager.registerHandler(el, onResize)
       }
     })
+
+    // avoid memory leak
+    watch(
+      elRef,
+      (_, oldEl) => {
+        if (oldEl) {
+          resizeObserverManager.unregisterHandler(oldEl)
+        }
+      },
+      {
+        deep: false
+      }
+    )
+
     onBeforeUnmount(() => {
       const { value: el } = elRef
       if (el) {

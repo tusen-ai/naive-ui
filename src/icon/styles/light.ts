@@ -1,16 +1,10 @@
-import { commonLight } from '../../_styles/common'
-import type { ThemeCommonVars } from '../../_styles/common'
 import type { Theme } from '../../_mixins'
+import type { ThemeCommonVars } from '../../_styles/common'
+import { commonLight } from '../../_styles/common'
 
-export const self = (vars: ThemeCommonVars) => {
-  const {
-    textColorBase,
-    opacity1,
-    opacity2,
-    opacity3,
-    opacity4,
-    opacity5
-  } = vars
+export function self(vars: ThemeCommonVars) {
+  const { textColorBase, opacity1, opacity2, opacity3, opacity4, opacity5 }
+    = vars
   return {
     color: textColorBase,
     opacity1Depth: opacity1,

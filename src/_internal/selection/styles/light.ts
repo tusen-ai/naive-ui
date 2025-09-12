@@ -1,11 +1,11 @@
+import type { ThemeCommonVars } from '../../../_styles/common'
 import { changeColor } from 'seemly'
+import { createTheme } from '../../../_mixins'
 import { commonLight } from '../../../_styles/common'
 import { popoverLight } from '../../../popover/styles'
-import type { ThemeCommonVars } from '../../../_styles/common'
 import commonVariables from './_common'
-import { createTheme } from '../../../_mixins'
 
-const self = (vars: ThemeCommonVars) => {
+function self(vars: ThemeCommonVars) {
   const {
     borderRadius,
     textColor2,
@@ -33,7 +33,8 @@ const self = (vars: ThemeCommonVars) => {
     heightTiny,
     heightSmall,
     heightMedium,
-    heightLarge
+    heightLarge,
+    fontWeight
   } = vars
   return {
     ...commonVariables,
@@ -46,6 +47,7 @@ const self = (vars: ThemeCommonVars) => {
     heightMedium,
     heightLarge,
     borderRadius,
+    fontWeight,
     // default
     textColor: textColor2,
     textColorDisabled,

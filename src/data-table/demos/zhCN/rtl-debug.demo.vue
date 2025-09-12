@@ -2,39 +2,16 @@
 # Rtl Debug
 </markdown>
 
-<template>
-  <n-space vertical :size="12">
-    <n-config-provider :rtl="rtlEnabled ? rtlStyles : undefined">
-      <div :dir="rtlEnabled ? 'rtl' : 'ltr'">
-        <n-button @click="filterAddress">
-          Filter Address(Use Value 'London')
-        </n-button>
-        <n-button @click="unfilterAddress">
-          Clear Address Filters
-        </n-button>
-      </div>
-      <n-space><n-switch v-model:value="rtlEnabled" />Rtl</n-space>
-      {{ rtlEnabled }}
-      <n-data-table
-        :columns="columns"
-        :data="data"
-        :pagination="pagination"
-        @update:filters="handleUpdateFilter"
-      />
-    </n-config-provider>
-  </n-space>
-</template>
-
-<script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
-import {
-  DataTableColumns,
+<script lang="ts" setup>
+import type {
   DataTableBaseColumn,
-  DataTableFilterState,
-  unstableDataTableRtl
+  DataTableColumns,
+  DataTableFilterState
 } from 'naive-ui'
+import { unstableDataTableRtl } from 'naive-ui'
+import { reactive, ref } from 'vue'
 
-type Row = {
+interface Row {
   key: number
   name: string
   age: number
@@ -110,79 +87,98 @@ const data = [
   }
 ]
 
-export default defineComponent({
-  setup () {
-    const addressColumn = reactive<DataTableBaseColumn<Row>>({
-      title: 'Address',
-      key: 'address',
-      filterMultiple: false,
-      filterOptionValue: null,
-      sorter: 'default',
-      filterOptions: [
-        {
-          label: 'London',
-          value: 'London'
-        },
-        {
-          label: 'New York',
-          value: 'New York'
-        }
-      ],
-      filter (value, row) {
-        return !!~row.address.indexOf(value.toString())
-      }
-    })
-
-    const columns = reactive<DataTableColumns<Row>>([
-      {
-        title: 'Name',
-        key: 'name',
-        sorter (rowA, rowB) {
-          return rowA.name.length - rowB.name.length
-        }
-      },
-      {
-        title: 'Age',
-        key: 'age',
-        sorter (rowA, rowB) {
-          return rowA.age - rowB.age
-        }
-      },
-      addressColumn
-    ])
-    const paginationReactive = reactive({
-      page: 1,
-      pageSize: 5,
-      showSizePicker: true,
-      pageSizes: [3, 5, 7],
-      onChange: (page: number) => {
-        paginationReactive.page = page
-      },
-      onUpdatePageSize: (pageSize: number) => {
-        paginationReactive.pageSize = pageSize
-        paginationReactive.page = 1
-      }
-    })
-
-    return {
-      rtlEnabled: ref(true),
-      rtlStyles: [unstableDataTableRtl],
-      data,
-      columns,
-      pagination: paginationReactive,
-      filterAddress () {
-        addressColumn.filterOptionValue = 'London'
-      },
-      unfilterAddress () {
-        addressColumn.filterOptionValue = null
-      },
-      handleUpdateFilter (
-        filters: DataTableFilterState,
-        sourceColumn: DataTableBaseColumn
-      ) {
-        addressColumn.filterOptionValue = filters[sourceColumn.key] as string
-      }
+const addressColumn = reactive<DataTableBaseColumn<Row>>({
+  title: 'Address',
+  key: 'address',
+  filterMultiple: false,
+  filterOptionValue: null,
+  sorter: 'default',
+  filterOptions: [
+    {
+      label: 'London',
+      value: 'London'
+    },
+    {
+      label: 'New York',
+      value: 'New York'
     }
+  ],
+  filter(value, row) {
+    return !!~row.address.indexOf(value.toString())
   }
 })
+
+const columns = reactive<DataTableColumns<Row>>([
+  {
+    title: 'Name',
+    key: 'name',
+    sorter(rowA, rowB) {
+      return rowA.name.length - rowB.name.length
+    }
+  },
+  {
+    title: 'Age',
+    key: 'age',
+    sorter(rowA, rowB) {
+      return rowA.age - rowB.age
+    }
+  },
+  addressColumn
+])
+
+const paginationReactive = reactive({
+  page: 1,
+  pageSize: 5,
+  showSizePicker: true,
+  pageSizes: [3, 5, 7],
+  onChange: (page: number) => {
+    paginationReactive.page = page
+  },
+  onUpdatePageSize: (pageSize: number) => {
+    paginationReactive.pageSize = pageSize
+    paginationReactive.page = 1
+  }
+})
+
+const rtlEnabled = ref(true)
+const rtlStyles = [unstableDataTableRtl]
+const pagination = paginationReactive
+
+function filterAddress() {
+  addressColumn.filterOptionValue = 'London'
+}
+
+function unfilterAddress() {
+  addressColumn.filterOptionValue = null
+}
+
+function handleUpdateFilter(
+  filters: DataTableFilterState,
+  sourceColumn: DataTableBaseColumn
+) {
+  addressColumn.filterOptionValue = filters[sourceColumn.key] as string
+}
 </script>
+
+<template>
+  <n-space vertical :size="12">
+    <n-config-provider :rtl="rtlEnabled ? rtlStyles : undefined">
+      <div :dir="rtlEnabled ? 'rtl' : 'ltr'">
+        <n-button @click="filterAddress">
+          Filter Address(Use Value 'London')
+        </n-button>
+        <n-button @click="unfilterAddress">
+          Clear Address Filters
+        </n-button>
+      </div>
+      <n-space><n-switch v-model:value="rtlEnabled" />Rtl</n-space>
+      {{ rtlEnabled }}
+      <n-data-table
+        :columns="columns"
+        :data="data"
+        :pagination="pagination"
+        @update:filters="handleUpdateFilter"
+      />
+    </n-config-provider>
+  </n-space>
+</template>

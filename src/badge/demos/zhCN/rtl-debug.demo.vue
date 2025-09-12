@@ -1,7 +1,14 @@
 <markdown>
 # Rtl Debug
-
 </markdown>
+
+<script lang="ts" setup>
+import { unstableBadgeRtl } from 'naive-ui'
+import { ref } from 'vue'
+
+const rtlEnabled = ref(false)
+const rtlStyles = [unstableBadgeRtl]
+</script>
 
 <template>
   <n-space vertical>
@@ -18,17 +25,3 @@
     </n-config-provider>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { unstableBadgeRtl } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    return {
-      rtlEnabled: ref(false),
-      rtlStyles: [unstableBadgeRtl]
-    }
-  }
-})
-</script>

@@ -4,6 +4,12 @@
   Let the QR code no longer monotonous.
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const color = ref('#225A95FF')
+</script>
+
 <template>
   <n-flex>
     <n-qr-code value="https://www.naiveui.com/" color="#18a058" />
@@ -22,16 +28,3 @@
     />
   </n-flex>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const color = ref('#225A95FF')
-    return {
-      color
-    }
-  }
-})
-</script>

@@ -4,6 +4,18 @@
 Thing 提供了很多 slot 来定制。
 </markdown>
 
+<script lang="ts" setup>
+import { CashOutline as CashIcon } from '@vicons/ionicons5'
+import { ref } from 'vue'
+
+const avatar = ref(true)
+const header = ref(true)
+const headerExtra = ref(true)
+const description = ref(true)
+const footer = ref(true)
+const action = ref(true)
+</script>
+
 <template>
   <n-row>
     <n-col :span="12">
@@ -46,7 +58,7 @@ Thing 提供了很多 slot 来定制。
     <template v-if="avatar" #avatar>
       <n-avatar>
         <n-icon>
-          <cash-icon />
+          <CashIcon />
         </n-icon>
       </n-avatar>
     </template>
@@ -56,7 +68,7 @@ Thing 提供了很多 slot 来定制。
     <template v-if="headerExtra" #header-extra>
       <n-button circle size="small">
         <template #icon>
-          <cash-icon />
+          <CashIcon />
         </template>
       </n-button>
     </template>
@@ -72,7 +84,7 @@ Thing 提供了很多 slot 来定制。
         <n-button size="small">
           <template #icon>
             <n-icon>
-              <cash-icon />
+              <CashIcon />
             </n-icon>
           </template>
           1 块钱
@@ -80,7 +92,7 @@ Thing 提供了很多 slot 来定制。
         <n-button size="small">
           <template #icon>
             <n-icon>
-              <cash-icon />
+              <CashIcon />
             </n-icon>
           </template>
           10 块钱
@@ -88,7 +100,7 @@ Thing 提供了很多 slot 来定制。
         <n-button size="small">
           <template #icon>
             <n-icon>
-              <cash-icon />
+              <CashIcon />
             </n-icon>
           </template>
           100 块钱
@@ -97,24 +109,3 @@ Thing 提供了很多 slot 来定制。
     </template>
   </n-thing>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { CashOutline as CashIcon } from '@vicons/ionicons5'
-
-export default defineComponent({
-  components: {
-    CashIcon
-  },
-  setup () {
-    return {
-      avatar: ref(true),
-      header: ref(true),
-      headerExtra: ref(true),
-      description: ref(true),
-      footer: ref(true),
-      action: ref(true)
-    }
-  }
-})
-</script>

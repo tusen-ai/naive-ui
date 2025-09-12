@@ -26,10 +26,11 @@ empty.vue
 border.vue
 size.vue
 row-props.vue
-merge-cell
-filter-and-sorter
+merge-cell.vue
+filter-and-sorter.vue
 pagination-behavior-on-filter.vue
-multiple-sorter
+multiple-sorter.vue
+custom-sorter.vue
 column-draggable.vue
 select.vue
 select-single.vue
@@ -37,24 +38,25 @@ custom-select.vue
 group-header.vue
 controlled-page.vue
 controlled-filter.vue
-controlled-sorter
-controlled-multiple-sorter
+controlled-sorter.vue
+controlled-multiple-sorter.vue
 fixed-header.vue
 fixed-header-column.vue
 summary.vue
 ellipsis.vue
 ellipsis-tooltip.vue
 expand.vue
-render-header
+render-header.vue
 custom-style.vue
-ajax-usage
+ajax-usage.vue
 virtual.vue
+virtual-x.vue
 custom-filter-menu.vue
 tree.vue
 flex-height.vue
 striped.vue
 simple-editable.vue
-switchable-editable
+switchable-editable.vue
 context-menu.vue
 async-expand.vue
 render-cell.vue
@@ -79,22 +81,28 @@ export-csv.vue
 | default-expanded-row-keys | `Array<string \| number>` | `[]` | The key value of the expanded tree data by default |  |
 | default-expand-all | `boolean` | `false` | Whether to expand all expandable rows. Can't be used with async expanding data. | 2.30.4 |
 | expanded-row-keys | `Array<string \| number>` | `undefined` | Expanded row keys. |  |
-| pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | The behavior of pagination after filter state is changed. `'first'` means returning to first page on filter, `'current'` means keep at current page on filter. | 2.28.3 |
+| filter-icon-popover-props | `PopoverProps` | `{ trigger: click, placement: bottom }` | Filter icon's Popover attribute of the button, See [Popover props](popover#Popover-Props) | 2.39.0 |
 | flex-height | `boolean` | `false` | Whether to make table body's height auto fit table area height. Make it enabled will make `table-layout` always set to `'fixed'`. |  |
+| get-csv-cell | `(value: any, row: object, col: DataTableBaseColumn) => string` | `undefined` | Get CSV's cell content. | 2.40.2 |
+| get-csv-header | `(cols: Array<DataTableColumn>) => string` | `undefined` | Get CSV's header content. | 2.40.2 |
+| header-height | `number` | `28` | Header height value when `virtual-scroll-header` is enabled. | 2.40.0 |
+| height-for-row | `(rowData: object, index: number) => number` | `undefined` | Height configuration function for each row of the table. It must be used with `virtual-scroll-x`. If it's not configured, each rows height would be set to `min-row-height`. | 2.40.0 |
 | indent | `number` | `16` | Indent of row content when using tree data. |  |
 | loading | `boolean` | `false` | Whether to display loading status. |  |
 | max-height | `number \| string` | `undefined` | The max-height of the table content. Can be a CSS value. |  |
 | min-height | `number \| string` | `undefined` | The min-height of the table content. Can be a CSS value. |  |
+| min-row-height | `number` | `28` | Min row height of the table when `virtual-scroll` or `virtual-scroll-x` is enabled. Each row's height must be larger than its value. | 2.40.0 |
 | paginate-single-page | `boolean` | `true` | Whether show pagination data is less than one page. | 2.28.0 |
 | pagination | `false \| object` | `false` | See [Pagination props](pagination#Pagination-Props) |  |
+| pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | The behavior of pagination after filter state is changed. `'first'` means returning to first page on filter, `'current'` means keep at current page on filter. | 2.28.3 |
 | remote | `boolean` | `false` | If data-table do automatic paging. You may set it to `true` in async usage. |  |
 | render-cell | `(value: any, rowData: object, column: DataTableBaseColumn) => VNodeChild` | `undefined` | Render function of cell, it will be overwritten by columns' `render`. | 2.30.5 |
-| render-expand-icon | `({ expanded }: { expanded: boolean }) => VNodeChild` | `undefined` | Render function of expand icon. | 2.32.2, `expanded`: 2.34.4 |
+| render-expand-icon | `({ expanded, rowData }: { expanded: boolean, rowData: object }) => VNodeChild` | `undefined` | Render function of expand icon. | 2.32.2, `expanded`: 2.34.4, `rowData`: `2.40.0` |
 | row-class-name | `string \| (rowData: object, rowIndex : number) => string` | `undefined` | Class name of each row. |  |
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |  |
-| row-props | `(rowData: object, rowIndex : number) => object` | `undefined` | Customize row attributes. |  |
+| row-props | `(rowData: object, rowIndex : number) => HTMLAttributes` | `undefined` | Customize row attributes. |  |
 | scroll-x | `number \| string` | `undefined` | If columns are horizontal fixed, scroll-x need to be set. |  |
-| scrollbar-props | `object` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props), the `on-scroll` attribute already exists in the `DataTable`, the `on-scroll` attribute does not take effect here. |  |
+| scrollbar-props | `ScrollbarProps` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props), the `on-scroll` attribute already exists in the `DataTable`, the `on-scroll` attribute does not take effect here. |  |
 | single-column | `boolean` | `false` | Whether rows are not divided. If the prop is `true`, table cell has no `border-bottom`. |  |
 | single-line | `boolean` | `true` | Whether columns are not divided. If the prop is `true`, table cell has no `border-right`. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Table size. |  |
@@ -104,7 +112,9 @@ export-csv.vue
 | summary | `DataTableCreateSummary` | `undefined` | Data of table summary row. For types, see <n-a href="#DataTableCreateSummary-Type">DataTableCreateSummary Type</n-a>. |  |
 | summary-placement | `'top' \| 'bottom'` | `'bottom'` | Summary rows placement. | 2.33.3 |
 | table-layout | `'auto' \| 'fixed'` | `'auto'` | Style `table-layout` of the table. When `ellipsis` or `max-height` or `flex-height` are set, it will always be `'fixed'` regardless of what you set. |  |
-| virtual-scroll | `boolean` | `false` | Whether to use virtual scroll to deal with large data. Make sure `max-height` is set before using it. When `virtual-scroll` is `true`, `rowSpan` will not take effect. |  |
+| virtual-scroll | `boolean` | `false` | Whether to use virtual scrolling to deal with large data. Make sure `max-height` is set before using it. When `virtual-scroll` is `true`, `rowSpan` will not take effect. |  |
+| virtual-scroll-header | `boolean` | `false` | Whether to use virtual scrolling in table header. If there are too many columns, you can enable the prop. You must configure `header-height` at the same time. Enabling the prop will disable header cells that cross columns & rows. | 2.40.0 |
+| virtual-scroll-x | `boolean` | `false` | Whether to use horizontal virtual scrolling in table body. If there are too many columns, you can enable the prop. Enabling the prop will disable body cells that cross columns & rows. If the prop is enabled, every column should have `width` prop configured and `virtual-scroll`, `scroll-x`, `min-row-height`, `height-for-row`, `virtual-scroll-header` (optional), `header-height` (optional) props should be configured at the same time. You can refer to <n-a href="#virtual-x.vue">the example</n-a>. | 2.40.0 |
 | on-load | `(rowData: object) => Promise<void>` | `undefined` | Callback of async tree data expanding. | 2.27.0 |
 | on-scroll | `(e: Event) => void` | `undefined` | Callback of table body scrolling. | 2.29.1 |
 | on-update:checked-row-keys | `(keys: Array<string \| number>, rows: object[], meta: { row: object \| undefined, action: 'check' \| 'uncheck' \| 'checkAll' \| 'uncheckAll' }) => void` | `undefined` | The callback function triggered when the checked-row-keys value changes. | `rows` 2.30.5, `meta` 2.33.4 |
@@ -119,15 +129,16 @@ export-csv.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | align | `'left' \| 'right' \| 'center'` | `'left'` | Text align in column. |  |
-| titleAlign | `'left' \| 'right' \| 'center'` | `null` | alignment of the table header. If omitted, the value of the above align attribute will be applied | 2.34.4 |
+| allowExport | `boolean` | `true` | Can the column exported | 2.40.0 |
 | cellProps | `(rowData: object, rowIndex: number) => object` | `undefined` | HTML attributes of the column's cell. | 2.27.0 |
 | children | `DataTableColumn[]` | `undefined` | Child nodes of a grouped column. |  |
 | className | `string` | `undefined` | Class name of the column. |  |
 | colSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | The col span of the column cell. |  |
+| customNextSortOrder | `(order: 'descend' \| 'ascend' \| false) => 'descend' \| 'ascend' \| false` | `undefined` | A function for custom next sorting status. | NEXT_VERSION |
 | defaultFilterOptionValue | `string \| number \| null` | `null` | The default active filter option value in uncontrolled manner. (works when not using multiple filters). |  |
 | defaultFilterOptionValues | `Array<string \| number>` | `[]` | The default active filter option values in uncontrolled manner. (works when there are multiple filters). |  |
 | defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | The default sort order of the table in uncontrolled manner. |  |
-| disabled | `(rowData: object, rowIndex: number) => boolean` | `() => false` | Whether the row is checkable. |  |
+| disabled | `(rowData: object) => boolean` | `() => false` | Whether the row is checkable. |  |
 | ellipsis | `boolean \| EllipsisProps` | `false` | Ellipsis options when content overflows. |  |
 | ellipsis-component | `'ellipsis' \| 'performant-ellipsis'` | `'ellipsis'` | Component for rendering text ellipsis. It works when `ellipsis` is `EllipsisProps`. If it's `'ellipsis'`, table will use regular `n-ellipsis` component to render text ellipsis. If it's `'performant-ellipsis'`, table will use `n-performant-ellipsis` to render text ellipsis. In the later situation, rendering speed will be much faster but component inside table cell would be unmounted & remounted. | 2.35.0 |
 | expandable | `(rowData: object) => boolean` | `undefined` | Whethe the row is expandable. Only works when `type` is `'expand'`. |  |
@@ -137,11 +148,10 @@ export-csv.vue
 | filterOptionValue | `string \| number \| null` | `undefined` | The active filter option value in controlled manner. If not set, the filter of the column works in an uncontrolled manner. (works when not using multiple filters). |  |
 | filterOptionValues | `Array<string \| number> \| null` | `undefined` | The active filter option values in controlled manner. If not set, the filter of the column works in an uncontrolled manner. (works when there are multiple filters). |  |
 | filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | Filter options. |  |
-| resizable | `boolean` | `undefined` | Whethe the column width can be dragged. | 2.33.4 |
 | fixed | `'left \| 'right' \| false` | `false` | Whether the column needs to be fixed. |  |
 | key | `string \| number` | `undefined` | Unique key of this column, this is not repeatable. |  |
-| minWidth | `number \| string` | `undefined` | Min width of the column. | 2.28.3 |
 | maxWidth | `number \| string` | `undefined` | Max width of the column. Only works when `resizable` is `true`. | 2.33.4 |
+| minWidth | `number \| string` | `undefined` | Min width of the column. | 2.28.3 |
 | multiple | `boolean` | `true` | Whether to enable multiple selection mode. Only works when `type` is `'selection'`. | 2.31.0 |
 | options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData[]) => void }>` | `undefined` | Options of custom selection. Only work with `type='selection'`. |  |
 | render | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | Render function of column row cell. |  |
@@ -151,12 +161,14 @@ export-csv.vue
 | renderFilterMenu | `(actions: { hide: () => void }) => VNodeChild` | `undefined` | Render function of column filter menu. |  |
 | renderSorter | `(options: { order: 'descend' \| 'ascend' \| false }) => VNodeChild` | `undefined` | Render function of column sorter trigger. | 2.24.2 |
 | renderSorterIcon | `(options: { order: 'descend' \| 'ascend' \| false }) => VNodeChild` | `undefined` | Render function of column sorter icon. | 2.24.2 |
+| resizable | `boolean` | `undefined` | Whethe the column width can be dragged. | 2.33.4 |
 | rowSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | The row span of the cell. |  |
 | sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | The controlled sort order of the column. If multiple columns' sortOrder is set, the first one will affect. |  |
 | sorter | `boolean \| function \| 'default'` | `false` | The sorter of the column. If set `'default'`, it will use a basic builtin compare function. If set to `true`, it will only display sort icon on the column, which can be used in async status. Otherwise it works like `Array.sort`'s compare function. |  |
-| tree | `boolean` | `false` | Whether to show tree data expand trigger in the column. | 2.28.3 |
 | title | `string \| (() => VNodeChild)` | `undefined` | Column title, Can be a render function. |  |
-| titleRowSpan | `number` | `undefined` | The number of cells occupied by the title row. |  |
+| titleAlign | `'left' \| 'right' \| 'center'` | `null` | alignment of the table header. If omitted, the value of the above align attribute will be applied | 2.34.4 |
+| titleColSpan | `number` | `undefined` | The number of cells occupied by the title col. |  |
+| tree | `boolean` | `false` | Whether to show tree data expand trigger in the column. | 2.28.3 |
 | type | `'selection' \| 'expand'` | `undefined` | Column type. |  |
 | width | `number \| string` | `undefined` | Width of the column (**required and should be number** when fixed). | 2.24.0 (`string` type) |
 
@@ -165,7 +177,7 @@ The following types can be imported from the package.
 #### DataTableSortState Type
 
 ```ts
-type DataTableSortState = {
+interface DataTableSortState {
   columnKey: string | number
   sorter: 'default' | function | boolean
   order: 'ascend' | 'descend' | false
@@ -175,7 +187,7 @@ type DataTableSortState = {
 #### DataTableFilterState Type
 
 ```ts
-type DataTableFilterState = {
+interface DataTableFilterState {
   [key: string]: Array<string | number> | string | number | null | undefined
 }
 ```
@@ -185,19 +197,19 @@ type DataTableFilterState = {
 ```ts
 type DataTableCreateSummary = (pageData: RowData[]) =>
   | Array<{
-      [columnKey: string]: {
-        value?: VNodeChild
-        colSpan?: number
-        rowSpan?: number
-      }
-    }>
-  | {
-      [columnKey: string]: {
-        value?: VNodeChild
-        colSpan?: number
-        rowSpan?: number
-      }
+    [columnKey: string]: {
+      value?: VNodeChild
+      colSpan?: number
+      rowSpan?: number
     }
+  }>
+  | {
+    [columnKey: string]: {
+      value?: VNodeChild
+      colSpan?: number
+      rowSpan?: number
+    }
+  }
 ```
 
 ### DataTable Methods

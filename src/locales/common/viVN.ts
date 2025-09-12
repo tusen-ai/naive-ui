@@ -31,7 +31,7 @@ const viVN: NLocale = {
     dateFormat: 'dd-MM-yyyy',
     dateTimeFormat: 'HH:mm:ss dd-MM-yyyy',
     quarterFormat: 'qqq-yyyy',
-    weekFormat: 'yyyy-w',
+    weekFormat: 'YYYY-w',
     clear: 'Xóa',
     now: 'Hôm nay',
     confirm: 'Xác nhận',
@@ -122,6 +122,12 @@ const viVN: NLocale = {
     tipDownload: 'Tải về',
     tipClose: 'Đóng (Esc)',
     tipOriginalSize: 'Xem kích thước gốc'
+  },
+  Heatmap: {
+    less: 'ít',
+    more: 'nhiều',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

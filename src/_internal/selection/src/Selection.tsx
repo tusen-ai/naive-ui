@@ -1,32 +1,32 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import {
-  h,
-  defineComponent,
-  Fragment,
-  type PropType,
-  ref,
-  computed,
-  watch,
-  toRef,
-  nextTick,
-  type CSSProperties,
-  watchEffect,
-  onMounted,
-  type InputHTMLAttributes,
-  type VNode
-} from 'vue'
-import { VOverflow, type VOverflowInst } from 'vueuc'
+import type { ThemeProps } from '../../../_mixins'
+import type { FormValidationStatus } from '../../../form/src/public-types'
+import type { SelectBaseOption } from '../../../select/src/interface'
+import type { TagRef } from '../../../tag/src/Tag'
 import type {
   RenderLabel,
   RenderLabelImpl
 } from '../../select-menu/src/interface'
-import type { SelectBaseOption } from '../../../select/src/interface'
-import type { FormValidationStatus } from '../../../form/src/interface'
-import type { TagRef } from '../../../tag/src/Tag'
-import { NPopover, type PopoverProps } from '../../../popover'
-import { NTag } from '../../../tag'
-import { useThemeClass, useTheme, useRtl, useConfig } from '../../../_mixins'
-import type { ThemeProps } from '../../../_mixins'
+import type { InternalSelectionTheme } from '../styles'
+import type { RenderTag } from './interface'
+import { getPadding } from 'seemly'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  Fragment,
+  h,
+  type InputHTMLAttributes,
+  nextTick,
+  onMounted,
+  type PropType,
+  ref,
+  toRef,
+  type VNode,
+  watch,
+  watchEffect
+} from 'vue'
+import { VOverflow, type VOverflowInst } from 'vueuc'
+import { useConfig, useRtl, useTheme, useThemeClass } from '../../../_mixins'
 import {
   createKey,
   getTitleAttribute,
@@ -34,12 +34,11 @@ import {
   useOnResize,
   Wrapper
 } from '../../../_utils'
+import { NPopover, type PopoverProps } from '../../../popover'
+import { NTag } from '../../../tag'
 import Suffix from '../../suffix'
 import { internalSelectionLight } from '../styles'
-import type { InternalSelectionTheme } from '../styles'
-import type { RenderTag } from './interface'
 import style from './styles/index.cssr'
-import { getPadding } from 'seemly'
 
 export interface InternalSelectionInst {
   isComposing: boolean
@@ -115,7 +114,7 @@ export default defineComponent({
     ignoreComposition: { type: Boolean, default: true },
     onResize: Function as PropType<() => void>
   },
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
     const rtlEnabledRef = useRtl(
       'InternalSelection',
@@ -153,21 +152,22 @@ export default defineComponent({
       return props.selectedOption
         ? props.renderTag
           ? props.renderTag({
-            option: props.selectedOption,
-            handleClose: () => {}
-          })
+              option: props.selectedOption,
+              handleClose: () => {}
+            })
           : props.renderLabel
             ? props.renderLabel(props.selectedOption as never, true)
             : render(
-              props.selectedOption[props.labelField],
-              props.selectedOption,
-              true
-            )
+                props.selectedOption[props.labelField],
+                props.selectedOption,
+                true
+              )
         : props.placeholder
     })
     const labelRef = computed(() => {
       const option = props.selectedOption
-      if (!option) return undefined
+      if (!option)
+        return undefined
       return option[props.labelField]
     })
     const selectedRef = computed(() => {
@@ -175,11 +175,12 @@ export default defineComponent({
         return !!(
           Array.isArray(props.selectedOptions) && props.selectedOptions.length
         )
-      } else {
+      }
+      else {
         return props.selectedOption !== null
       }
     })
-    function syncMirrorWidth (): void {
+    function syncMirrorWidth(): void {
       const { value: patternInputMirrorEl } = patternInputMirrorRef
       if (patternInputMirrorEl) {
         const { value: patternInputEl } = patternInputRef
@@ -193,72 +194,84 @@ export default defineComponent({
         }
       }
     }
-    function hideInputTag (): void {
+    function hideInputTag(): void {
       const { value: inputTagEl } = inputTagElRef
-      if (inputTagEl) inputTagEl.style.display = 'none'
+      if (inputTagEl)
+        inputTagEl.style.display = 'none'
     }
-    function showInputTag (): void {
+    function showInputTag(): void {
       const { value: inputTagEl } = inputTagElRef
-      if (inputTagEl) inputTagEl.style.display = 'inline-block'
+      if (inputTagEl)
+        inputTagEl.style.display = 'inline-block'
     }
     watch(toRef(props, 'active'), (value) => {
-      if (!value) hideInputTag()
+      if (!value)
+        hideInputTag()
     })
     watch(toRef(props, 'pattern'), () => {
       if (props.multiple) {
         void nextTick(syncMirrorWidth)
       }
     })
-    function doFocus (e: FocusEvent): void {
+    function doFocus(e: FocusEvent): void {
       const { onFocus } = props
-      if (onFocus) onFocus(e)
+      if (onFocus)
+        onFocus(e)
     }
-    function doBlur (e: FocusEvent): void {
+    function doBlur(e: FocusEvent): void {
       const { onBlur } = props
-      if (onBlur) onBlur(e)
+      if (onBlur)
+        onBlur(e)
     }
-    function doDeleteOption (value: SelectBaseOption): void {
+    function doDeleteOption(value: SelectBaseOption): void {
       const { onDeleteOption } = props
-      if (onDeleteOption) onDeleteOption(value)
+      if (onDeleteOption)
+        onDeleteOption(value)
     }
-    function doClear (e: MouseEvent): void {
+    function doClear(e: MouseEvent): void {
       const { onClear } = props
-      if (onClear) onClear(e)
+      if (onClear)
+        onClear(e)
     }
-    function doPatternInput (value: InputEvent): void {
+    function doPatternInput(value: InputEvent): void {
       const { onPatternInput } = props
-      if (onPatternInput) onPatternInput(value)
+      if (onPatternInput)
+        onPatternInput(value)
     }
-    function handleFocusin (e: FocusEvent): void {
+    function handleFocusin(e: FocusEvent): void {
       if (
-        !e.relatedTarget ||
-        !selfRef.value?.contains(e.relatedTarget as Node)
+        !e.relatedTarget
+        || !selfRef.value?.contains(e.relatedTarget as Node)
       ) {
         doFocus(e)
       }
     }
-    function handleFocusout (e: FocusEvent): void {
-      if (selfRef.value?.contains(e.relatedTarget as Node)) return
+    function handleFocusout(e: FocusEvent): void {
+      if (selfRef.value?.contains(e.relatedTarget as Node))
+        return
       doBlur(e)
     }
-    function handleClear (e: MouseEvent): void {
+    function handleClear(e: MouseEvent): void {
       doClear(e)
     }
-    function handleMouseEnter (): void {
+    function handleMouseEnter(): void {
       hoverRef.value = true
     }
-    function handleMouseLeave (): void {
+    function handleMouseLeave(): void {
       hoverRef.value = false
     }
-    function handleMouseDown (e: MouseEvent): void {
-      if (!props.active || !props.filterable) return
-      if (e.target === patternInputRef.value) return
+    function handleMouseDown(e: MouseEvent): void {
+      if (!props.active || !props.filterable)
+        return
+      if (e.target === patternInputRef.value)
+        return
       e.preventDefault()
     }
-    function handleDeleteOption (option: SelectBaseOption): void {
+    function handleDeleteOption(option: SelectBaseOption): void {
       doDeleteOption(option)
     }
-    function handlePatternKeyDown (e: KeyboardEvent): void {
+    const isComposingRef = ref(false)
+    function handlePatternKeyDown(e: KeyboardEvent): void {
       if (e.key === 'Backspace' && !isComposingRef.value) {
         if (!props.pattern.length) {
           const { selectedOptions } = props
@@ -268,11 +281,10 @@ export default defineComponent({
         }
       }
     }
-    const isComposingRef = ref(false)
     // the composition end is later than its input so we can cached the event
     // and return the input event
     let cachedInputEvent: InputEvent | null = null
-    function handlePatternInputInput (e: InputEvent): void {
+    function handlePatternInputInput(e: InputEvent): void {
       // we should sync mirror width here
       const { value: patternInputMirrorEl } = patternInputMirrorRef
       if (patternInputMirrorEl) {
@@ -283,86 +295,94 @@ export default defineComponent({
       if (props.ignoreComposition) {
         if (!isComposingRef.value) {
           doPatternInput(e)
-        } else {
+        }
+        else {
           cachedInputEvent = e
         }
-      } else {
+      }
+      else {
         doPatternInput(e)
       }
     }
-    function handleCompositionStart (): void {
+    function handleCompositionStart(): void {
       isComposingRef.value = true
     }
-    function handleCompositionEnd (): void {
+    function handleCompositionEnd(): void {
       isComposingRef.value = false
       if (props.ignoreComposition) {
         doPatternInput(cachedInputEvent!)
       }
       cachedInputEvent = null
     }
-    function handlePatternInputFocus (e: FocusEvent): void {
+    function handlePatternInputFocus(e: FocusEvent): void {
       patternInputFocusedRef.value = true
       props.onPatternFocus?.(e)
     }
-    function handlePatternInputBlur (e: FocusEvent): void {
+    function handlePatternInputBlur(e: FocusEvent): void {
       patternInputFocusedRef.value = false
       props.onPatternBlur?.(e)
     }
-    function blur (): void {
+    function blur(): void {
       if (props.filterable) {
         patternInputFocusedRef.value = false
         patternInputWrapperRef.value?.blur()
         patternInputRef.value?.blur()
-      } else if (props.multiple) {
+      }
+      else if (props.multiple) {
         const { value: multipleEl } = multipleElRef
         multipleEl?.blur()
-      } else {
+      }
+      else {
         const { value: singleEl } = singleElRef
         singleEl?.blur()
       }
     }
-    function focus (): void {
+    function focus(): void {
       if (props.filterable) {
         patternInputFocusedRef.value = false
         patternInputWrapperRef.value?.focus()
-      } else if (props.multiple) {
+      }
+      else if (props.multiple) {
         multipleElRef.value?.focus()
-      } else {
+      }
+      else {
         singleElRef.value?.focus()
       }
     }
-    function focusInput (): void {
+    function focusInput(): void {
       const { value: patternInputEl } = patternInputRef
       if (patternInputEl) {
         showInputTag()
         patternInputEl.focus()
       }
     }
-    function blurInput (): void {
+    function blurInput(): void {
       const { value: patternInputEl } = patternInputRef
       if (patternInputEl) {
         patternInputEl.blur()
       }
     }
-    function updateCounter (count: number): void {
+    function updateCounter(count: number): void {
       const { value } = counterRef
       if (value) {
         value.setTextContent(`+${count}`)
       }
     }
-    function getCounter (): HTMLElement | null {
+    function getCounter(): HTMLElement | null {
       const { value } = counterWrapperRef
       return value
     }
-    function getTail (): HTMLElement | null {
+    function getTail(): HTMLElement | null {
       return patternInputRef.value
     }
     let enterTimerId: number | null = null
-    function clearEnterTimer (): void {
-      if (enterTimerId !== null) window.clearTimeout(enterTimerId)
+    function clearEnterTimer(): void {
+      if (enterTimerId !== null)
+        window.clearTimeout(enterTimerId)
     }
-    function handleMouseEnterCounter (): void {
-      if (props.active) return
+    function handleMouseEnterCounter(): void {
+      if (props.active)
+        return
       clearEnterTimer()
       enterTimerId = window.setTimeout(() => {
         if (selectedRef.value) {
@@ -370,10 +390,10 @@ export default defineComponent({
         }
       }, 100)
     }
-    function handleMouseLeaveCounter (): void {
+    function handleMouseLeaveCounter(): void {
       clearEnterTimer()
     }
-    function onPopoverUpdateShow (show: boolean): void {
+    function onPopoverUpdateShow(show: boolean): void {
       if (!show) {
         clearEnterTimer()
         showTagsPopoverRef.value = false
@@ -387,10 +407,12 @@ export default defineComponent({
     onMounted(() => {
       watchEffect(() => {
         const patternInputWrapperEl = patternInputWrapperRef.value
-        if (!patternInputWrapperEl) return
+        if (!patternInputWrapperEl)
+          return
         if (props.disabled) {
           patternInputWrapperEl.removeAttribute('tabindex')
-        } else {
+        }
+        else {
           patternInputWrapperEl.tabIndex = patternInputFocusedRef.value ? -1 : 0
         }
       })
@@ -402,6 +424,7 @@ export default defineComponent({
       const {
         common: { cubicBezierEaseInOut },
         self: {
+          fontWeight,
           borderRadius,
           color,
           placeholderColor,
@@ -511,18 +534,20 @@ export default defineComponent({
         '--n-clear-color-hover': clearColorHover,
         '--n-clear-color-pressed': clearColorPressed,
         // arrow-size
-        '--n-arrow-size': arrowSize
+        '--n-arrow-size': arrowSize,
+        // font-weight
+        '--n-font-weight': fontWeight
       }
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'internal-selection',
-        computed(() => {
-          return props.size[0]
-        }),
-        cssVarsRef,
-        props
-      )
+          'internal-selection',
+          computed(() => {
+            return props.size[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedTheme: themeRef,
@@ -575,7 +600,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const {
       status,
       multiple,
@@ -838,7 +863,8 @@ export default defineComponent({
           {placeholder}
         </>
       )
-    } else {
+    }
+    else {
       if (filterable) {
         const hasInput = this.pattern || this.isComposing
         const showPlaceholder = this.active ? !hasInput : !this.selected
@@ -877,9 +903,9 @@ export default defineComponent({
                 <div class={`${clsPrefix}-base-selection-overlay__wrapper`}>
                   {renderTag
                     ? renderTag({
-                      option: this.selectedOption!,
-                      handleClose: () => {}
-                    })
+                        option: this.selectedOption!,
+                        handleClose: () => {}
+                      })
                     : renderLabel
                       ? renderLabel(this.selectedOption!, true)
                       : render(this.label, this.selectedOption, true)}
@@ -899,7 +925,8 @@ export default defineComponent({
             {suffix}
           </div>
         )
-      } else {
+      }
+      else {
         body = (
           <div
             ref="singleElRef"
@@ -915,9 +942,9 @@ export default defineComponent({
                 <div class={`${clsPrefix}-base-selection-input__content`}>
                   {renderTag
                     ? renderTag({
-                      option: this.selectedOption!,
-                      handleClose: () => {}
-                    })
+                        option: this.selectedOption!,
+                        handleClose: () => {}
+                      })
                     : renderLabel
                       ? renderLabel(this.selectedOption!, true)
                       : render(this.label, this.selectedOption, true)}

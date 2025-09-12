@@ -31,7 +31,7 @@ const arDZ: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
-    weekFormat: 'yyyy-w',
+    weekFormat: 'YYYY-w',
     clear: 'مسح',
     now: 'الآن',
     confirm: 'تأكيد',
@@ -122,6 +122,12 @@ const arDZ: NLocale = {
     tipDownload: 'للتحميل',
     tipClose: 'إغلاق (Esc زر)',
     tipOriginalSize: 'تكبير إلى الحجم الأصلي'
+  },
+  Heatmap: {
+    less: 'less',
+    more: 'more',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

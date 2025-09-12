@@ -1,9 +1,9 @@
+import type { ThemeProps } from '../../_mixins'
+import type { IconWrapperTheme } from '../styles'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import { type ExtractPublicPropTypes, formatLength } from '../../_utils'
 import { iconWrapperLight } from '../styles'
-import type { IconWrapperTheme } from '../styles'
 import style from './styles/index.cssr'
 
 export const iconWrapperProps = {
@@ -25,7 +25,7 @@ export type IconWrapperProps = ExtractPublicPropTypes<typeof iconWrapperProps>
 export const NIconWrapper = defineComponent({
   name: 'IconWrapper',
   props: iconWrapperProps,
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'IconWrapper',

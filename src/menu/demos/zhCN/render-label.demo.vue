@@ -4,42 +4,11 @@
 使用 `render-label`、`render-icon`、`expand-icon` 可以批量控制菜单的选项渲染。
 </markdown>
 
-<template>
-  <n-space vertical>
-    <n-switch v-model:value="collapsed" />
-    <n-layout has-sider>
-      <n-layout-sider
-        bordered
-        collapse-mode="width"
-        :collapsed-width="64"
-        :width="240"
-        :collapsed="collapsed"
-        show-trigger
-        @collapse="collapsed = true"
-        @expand="collapsed = false"
-      >
-        <n-menu
-          :collapsed="collapsed"
-          :collapsed-width="64"
-          :collapsed-icon-size="22"
-          :options="menuOptions"
-          :render-label="renderMenuLabel"
-          :render-icon="renderMenuIcon"
-          :expand-icon="expandIcon"
-        />
-      </n-layout-sider>
-      <n-layout>
-        <span>内容</span>
-      </n-layout>
-    </n-layout>
-  </n-space>
-</template>
-
-<script lang="ts">
-import { h, ref, defineComponent } from 'vue'
-import { NIcon } from 'naive-ui'
+<script lang="ts" setup>
 import type { MenuOption } from 'naive-ui'
 import { BookmarkOutline, CaretDownOutline } from '@vicons/ionicons5'
+import { NIcon } from 'naive-ui'
+import { h, ref } from 'vue'
 
 const menuOptions: MenuOption[] = [
   {
@@ -111,32 +80,61 @@ const menuOptions: MenuOption[] = [
   }
 ]
 
-export default defineComponent({
-  setup () {
-    return {
-      collapsed: ref(true),
-      menuOptions,
-      renderMenuLabel (option: MenuOption) {
-        if ('href' in option) {
-          return h(
-            'a',
-            { href: option.href, target: '_blank' },
-            option.label as string
-          )
-        }
-        return option.label as string
-      },
-      renderMenuIcon (option: MenuOption) {
-        // 渲染图标占位符以保持缩进
-        if (option.key === 'sheep-man') return true
-        // 返回 falsy 值，不再渲染图标及占位符
-        if (option.key === 'food') return null
-        return h(NIcon, null, { default: () => h(BookmarkOutline) })
-      },
-      expandIcon () {
-        return h(NIcon, null, { default: () => h(CaretDownOutline) })
-      }
-    }
+const collapsed = ref(true)
+
+function renderMenuLabel(option: MenuOption) {
+  if ('href' in option) {
+    return h(
+      'a',
+      { href: option.href, target: '_blank' },
+      option.label as string
+    )
   }
-})
+  return option.label as string
+}
+
+function renderMenuIcon(option: MenuOption) {
+  // 渲染图标占位符以保持缩进
+  if (option.key === 'sheep-man')
+    return true
+  // 返回 falsy 值，不再渲染图标及占位符
+  if (option.key === 'food')
+    return null
+  return h(NIcon, null, { default: () => h(BookmarkOutline) })
+}
+
+function expandIcon() {
+  return h(NIcon, null, { default: () => h(CaretDownOutline) })
+}
 </script>
+
+<template>
+  <n-space vertical>
+    <n-switch v-model:value="collapsed" />
+    <n-layout has-sider>
+      <n-layout-sider
+        bordered
+        collapse-mode="width"
+        :collapsed-width="64"
+        :width="240"
+        :collapsed="collapsed"
+        show-trigger
+        @collapse="collapsed = true"
+        @expand="collapsed = false"
+      >
+        <n-menu
+          :collapsed="collapsed"
+          :collapsed-width="64"
+          :collapsed-icon-size="22"
+          :options="menuOptions"
+          :render-label="renderMenuLabel"
+          :render-icon="renderMenuIcon"
+          :expand-icon="expandIcon"
+        />
+      </n-layout-sider>
+      <n-layout>
+        <span>内容</span>
+      </n-layout>
+    </n-layout>
+  </n-space>
+</template>

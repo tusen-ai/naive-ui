@@ -4,29 +4,9 @@
 树接受 `pattern` 和 `filter` 来完成搜索。
 </markdown>
 
-<template>
-  <n-space vertical :size="12">
-    <n-input v-model:value="pattern" placeholder="搜索" />
-    <n-switch v-model:value="showIrrelevantNodes">
-      <template #checked>
-        展示搜索无关的节点
-      </template>
-      <template #unchecked>
-        隐藏搜索无关的节点
-      </template>
-    </n-switch>
-    <n-tree
-      :show-irrelevant-nodes="showIrrelevantNodes"
-      :pattern="pattern"
-      :data="data"
-      block-line
-    />
-  </n-space>
-</template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { TreeOption } from 'naive-ui'
+<script lang="ts" setup>
+import type { TreeOption } from 'naive-ui'
+import { ref } from 'vue'
 
 const data: TreeOption[] = [
   {
@@ -75,13 +55,26 @@ const data: TreeOption[] = [
   }
 ]
 
-export default defineComponent({
-  setup () {
-    return {
-      data,
-      pattern: ref(''),
-      showIrrelevantNodes: ref(false)
-    }
-  }
-})
+const pattern = ref('')
+const showIrrelevantNodes = ref(false)
 </script>
+
+<template>
+  <n-space vertical :size="12">
+    <n-input v-model:value="pattern" placeholder="搜索" />
+    <n-switch v-model:value="showIrrelevantNodes">
+      <template #checked>
+        展示搜索无关的节点
+      </template>
+      <template #unchecked>
+        隐藏搜索无关的节点
+      </template>
+    </n-switch>
+    <n-tree
+      :show-irrelevant-nodes="showIrrelevantNodes"
+      :pattern="pattern"
+      :data="data"
+      block-line
+    />
+  </n-space>
+</template>

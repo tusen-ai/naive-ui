@@ -4,6 +4,18 @@
 Content can be indented after avatar.
 </markdown>
 
+<script lang="ts" setup>
+import { CashOutline as CashIcon } from '@vicons/ionicons5'
+import { ref } from 'vue'
+
+const avatar = ref(true)
+const header = ref(true)
+const headerExtra = ref(true)
+const description = ref(true)
+const footer = ref(true)
+const action = ref(true)
+</script>
+
 <template>
   <n-row>
     <n-col :span="12">
@@ -46,7 +58,7 @@ Content can be indented after avatar.
     <template v-if="avatar" #avatar>
       <n-avatar>
         <n-icon>
-          <cash-icon />
+          <CashIcon />
         </n-icon>
       </n-avatar>
     </template>
@@ -56,7 +68,7 @@ Content can be indented after avatar.
     <template v-if="headerExtra" #header-extra>
       <n-button circle size="small">
         <template #icon>
-          <cash-icon />
+          <CashIcon />
         </template>
       </n-button>
     </template>
@@ -74,7 +86,7 @@ Content can be indented after avatar.
         <n-button size="small">
           <template #icon>
             <n-icon>
-              <cash-icon />
+              <CashIcon />
             </n-icon>
           </template>
           1$
@@ -82,7 +94,7 @@ Content can be indented after avatar.
         <n-button size="small">
           <template #icon>
             <n-icon>
-              <cash-icon />
+              <CashIcon />
             </n-icon>
           </template>
           10$
@@ -90,7 +102,7 @@ Content can be indented after avatar.
         <n-button size="small">
           <template #icon>
             <n-icon>
-              <cash-icon />
+              <CashIcon />
             </n-icon>
           </template>
           100$
@@ -99,24 +111,3 @@ Content can be indented after avatar.
     </template>
   </n-thing>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { CashOutline as CashIcon } from '@vicons/ionicons5'
-
-export default defineComponent({
-  components: {
-    CashIcon
-  },
-  setup () {
-    return {
-      avatar: ref(true),
-      header: ref(true),
-      headerExtra: ref(true),
-      description: ref(true),
-      footer: ref(true),
-      action: ref(true)
-    }
-  }
-})
-</script>

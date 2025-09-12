@@ -2,6 +2,23 @@
 # None debug
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const valueRef = ref('a')
+const tabs = ['c', 'd']
+const value = valueRef
+
+function switchTabs() {
+  if (valueRef.value === 'a') {
+    valueRef.value = 'c'
+  }
+  else {
+    valueRef.value = 'a'
+  }
+}
+</script>
+
 <template>
   <n-button @click="switchTabs">
     Switch tabs
@@ -12,25 +29,3 @@
     </n-tab>
   </n-tabs>
 </template>
-
-<script lang="ts">
-import { ref, defineComponent } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const valueRef = ref('a')
-    const switchTabs = () => {
-      if (valueRef.value === 'a') {
-        valueRef.value = 'c'
-      } else {
-        valueRef.value = 'a'
-      }
-    }
-    return {
-      tabs: ['c', 'd'],
-      switchTabs,
-      value: valueRef
-    }
-  }
-})
-</script>

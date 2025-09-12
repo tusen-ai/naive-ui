@@ -38,6 +38,7 @@ debug.vue
 | disabled | `boolean` | `false` | Disabled state. |  |
 | ellipsis-tag-popover-props | `PopoverProps` | `undefined` | `popover` props of the preview ellipsis tag. | 2.37.0 |
 | expanded-keys | `Array<string \| number>` | `undefined` | Collection of expanded keys. |  |
+| indent | `number` | `24` | Indent of per level of the tree. | 2.41.1 |
 | indeterminate-keys | `Array<string \| number>` | `undefined` | Indeterminate keys of the tree. |  |
 | filterable | `boolean` | `false` | Whether to show a filter. |  |
 | filter | `(pattern: string, option: TreeSelectOption) => boolean` | - | Filter function. |  |
@@ -88,6 +89,7 @@ debug.vue
 
 | Name   | Parameters | Description                            | Version |
 | ------ | ---------- | -------------------------------------- | ------- |
+| header | `()`       | Header menu slot.                      | 2.40.0  |
 | action | `()`       | Options menu slot.                     | 2.22.0  |
 | arrow  | `()`       | Arrow icon of trigger.                 | 2.30.4  |
 | empty  | `()`       | Empty state slot for the options menu. | 2.22.0  |

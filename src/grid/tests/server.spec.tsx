@@ -1,19 +1,19 @@
+import { setup } from '@css-render/vue3-ssr'
+import { renderToString } from '@vue/server-renderer'
 /**
  * @jest-environment node
  */
-import { h, createSSRApp } from 'vue'
-import { renderToString } from '@vue/server-renderer'
-import { setup } from '@css-render/vue3-ssr'
+import { createSSRApp, h } from 'vue'
 import { NGrid, NGridItem } from '../..'
 
-describe('SSR', () => {
+describe('server side rendering', () => {
   it('works 1', async () => {
     const app = createSSRApp(() => <NGrid />)
     setup(app)
     try {
       await renderToString(app)
-    } catch (e) {
-      console.log(e)
+    }
+    catch (e) {
       expect(e).not.toBeTruthy()
     }
   })
@@ -24,8 +24,8 @@ describe('SSR', () => {
     setup(app)
     try {
       await renderToString(app)
-    } catch (e) {
-      console.log(e)
+    }
+    catch (e) {
       expect(e).not.toBeTruthy()
     }
   })

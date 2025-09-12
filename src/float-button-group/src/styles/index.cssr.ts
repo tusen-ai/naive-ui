@@ -37,7 +37,13 @@ export default cB('float-button-group', [
         border-bottom-left-radius: 4px;
         border-bottom-right-radius: 4px;
       `),
-      cE('fill', 'inset: 4px; border-radius: var(--n-border-radius-square);')
+      cE('fill', `
+        top: 4px;
+        right: 4px;
+        bottom: 4px;
+        left: 4px;
+        border-radius: var(--n-border-radius-square);  
+      `)
     ])
   ]),
   cM('circle-shape', [

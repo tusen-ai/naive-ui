@@ -17,6 +17,7 @@ vertical.vue
 show-tooltip.vue
 multiple-debug.vue
 custom-thumb.vue
+custom-marks.vue
 ```
 
 ## API
@@ -29,7 +30,7 @@ custom-thumb.vue
 | disabled | `boolean` | `false` | Whether the slider is disabled. |  |
 | format-tooltip | `(value: number) => string \| number` | `undefined` | Format tooltip. |  |
 | keyboard | `boolean` | `true` | Whether the slider can be controlled keyboard. | 2.33.0 |
-| marks | `{ [markValue: number]: string }` | `undefined` | Marks of the slider. |  |
+| marks | `{ [markValue: number]: string \| (() => VNodeChild) }` | `undefined` | Marks of the slider | Render function since 2.40.0 |
 | max | `number` | `100` | Max value of the slider. |  |
 | min | `number` | `0` | Min value of the slider. |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `undefined` | Tooltip's placement | 2.25.0 |

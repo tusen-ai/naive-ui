@@ -31,7 +31,7 @@ const deDE: NLocale = {
     dateFormat: 'dd.MM.yyyy',
     dateTimeFormat: 'dd.MM.yyyy HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
-    weekFormat: 'yyyy-w',
+    weekFormat: 'YYYY-w',
     clear: 'Löschen',
     now: 'Jetzt',
     confirm: 'Bestätigen',
@@ -122,6 +122,12 @@ const deDE: NLocale = {
     tipDownload: 'Download',
     tipClose: 'Schließen (Esc)',
     tipOriginalSize: 'Zoom zurücksetzen'
+  },
+  Heatmap: {
+    less: 'weniger',
+    more: 'mehr',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

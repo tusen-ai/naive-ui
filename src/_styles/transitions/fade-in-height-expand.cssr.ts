@@ -19,7 +19,7 @@ interface FadeInHeightExpandTransitionOption {
   reverse?: boolean
 }
 
-export function fadeInHeightExpandTransition ({
+export function fadeInHeightExpandTransition({
   overflow = 'hidden',
   duration = '.3s',
   originalTransition = '',
@@ -55,7 +55,7 @@ export function fadeInHeightExpandTransition ({
         margin-bottom ${duration} ${cubicBezierEaseInOut} ${leavingDelay},
         padding-top ${duration} ${cubicBezierEaseInOut} ${leavingDelay},
         padding-bottom ${duration} ${cubicBezierEaseInOut} ${leavingDelay}
-        ${originalTransition ? ',' + originalTransition : ''}
+        ${originalTransition ? `,${originalTransition}` : ''}
     `),
     c(`&.fade-in-height-expand-transition-${enterClass}-active`, `
       overflow: ${overflow};
@@ -66,7 +66,7 @@ export function fadeInHeightExpandTransition ({
         margin-bottom ${duration} ${cubicBezierEaseInOut},
         padding-top ${duration} ${cubicBezierEaseInOut},
         padding-bottom ${duration} ${cubicBezierEaseInOut}
-        ${originalTransition ? ',' + originalTransition : ''}
+        ${originalTransition ? `,${originalTransition}` : ''}
     `)
   ]
 }

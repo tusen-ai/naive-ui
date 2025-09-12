@@ -4,6 +4,22 @@
 `dialog` 预设的例子。
 </markdown>
 
+<script lang="ts" setup>
+import { useMessage } from 'naive-ui'
+import { ref } from 'vue'
+
+const message = useMessage()
+const showModal = ref(false)
+
+function cancelCallback() {
+  message.success('Cancel')
+}
+
+function submitCallback() {
+  message.success('Submit')
+}
+</script>
+
 <template>
   <n-button @click="showModal = true">
     来吧
@@ -19,24 +35,3 @@
     @negative-click="cancelCallback"
   />
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { useMessage } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const message = useMessage()
-
-    return {
-      showModal: ref(false),
-      cancelCallback () {
-        message.success('Cancel')
-      },
-      submitCallback () {
-        message.success('Submit')
-      }
-    }
-  }
-})
-</script>

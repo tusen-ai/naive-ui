@@ -2,14 +2,18 @@
 # Customize icon
 </markdown>
 
+<script lang="ts" setup>
+import { CashOutline as CashIcon } from '@vicons/ionicons5'
+</script>
+
 <template>
   <n-collapse>
     <template #header-extra>
-      <n-icon><cash-icon /></n-icon>
+      <n-icon><CashIcon /></n-icon>
     </template>
     <template #arrow>
       <n-icon>
-        <cash-icon />
+        <CashIcon />
       </n-icon>
     </template>
     <n-collapse-item title="Bronze" name="1">
@@ -23,14 +27,3 @@
     </n-collapse-item>
   </n-collapse>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { CashOutline as CashIcon } from '@vicons/ionicons5'
-
-export default defineComponent({
-  components: {
-    CashIcon
-  }
-})
-</script>

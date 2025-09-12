@@ -1,10 +1,10 @@
-import { commonDark } from '../../_styles/common'
 import type { FloatButtonGroupTheme } from './light'
+import { commonDark } from '../../_styles/common'
 
 const floatButtonGroupDark: FloatButtonGroupTheme = {
   name: 'FloatButtonGroup',
   common: commonDark,
-  self (vars) {
+  self(vars) {
     const { popoverColor, dividerColor, borderRadius } = vars
     return {
       color: popoverColor,

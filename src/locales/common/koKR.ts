@@ -31,7 +31,7 @@ const koKR: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
-    weekFormat: 'yyyy-w',
+    weekFormat: 'YYYY-w',
     clear: '지우기',
     now: '현재',
     confirm: '확인',
@@ -125,6 +125,12 @@ const koKR: NLocale = {
     tipClose: '닫기 (Esc)',
     // TODO: translation
     tipOriginalSize: '원본 크기로 확대'
+  },
+  Heatmap: {
+    less: '적음',
+    more: '많음',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

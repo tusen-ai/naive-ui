@@ -4,25 +4,18 @@
 如果你不设定 `default-expanded-keys`，菜单会默认展开选中项的全部父级。
 </markdown>
 
-<template>
-  <n-menu
-    :options="menuOptions"
-    :default-expanded-keys="defaultExpandedKeys"
-    @update:expanded-keys="handleUpdateExpandedKeys"
-  />
-</template>
-
-<script lang="ts">
-import { defineComponent, h, Component } from 'vue'
-import { NIcon, useMessage } from 'naive-ui'
+<script lang="ts" setup>
 import type { MenuOption } from 'naive-ui'
+import type { Component } from 'vue'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
+import { NIcon, useMessage } from 'naive-ui'
+import { h } from 'vue'
 
-function renderIcon (icon: Component) {
+function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -101,16 +94,18 @@ const menuOptions: MenuOption[] = [
   }
 ]
 
-export default defineComponent({
-  setup () {
-    const message = useMessage()
-    return {
-      menuOptions,
-      defaultExpandedKeys: ['dance-dance-dance', 'food'],
-      handleUpdateExpandedKeys (keys: string[]) {
-        message.info('[onUpdate:expandedKeys]: ' + JSON.stringify(keys))
-      }
-    }
-  }
-})
+const message = useMessage()
+const defaultExpandedKeys = ['dance-dance-dance', 'food']
+
+function handleUpdateExpandedKeys(keys: string[]) {
+  message.info(`[onUpdate:expandedKeys]: ${JSON.stringify(keys)}`)
+}
 </script>
+
+<template>
+  <n-menu
+    :options="menuOptions"
+    :default-expanded-keys="defaultExpandedKeys"
+    @update:expanded-keys="handleUpdateExpandedKeys"
+  />
+</template>

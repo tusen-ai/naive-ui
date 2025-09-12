@@ -1,8 +1,9 @@
-import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { isYesterday, format, addMonths, getYear } from 'date-fns/esm'
-import { NCalendar } from '../index'
+import { addMonths, format, getYear, isYesterday } from 'date-fns'
+/* eslint-disable unused-imports/no-unused-vars */
+import { h } from 'vue'
 import { NButton } from '../../button'
+import { NCalendar } from '../index'
 
 describe('n-calendar', () => {
   const now = Date.now()
@@ -12,16 +13,18 @@ describe('n-calendar', () => {
   })
 
   it('props.onUpdate has correct type', () => {
-    ;<NCalendar
-      onUpdateValue={(
-        value: number,
-        time: {
-          date: number
-          month: number
-          year: number
-        }
-      ) => {}}
-    />
+    ;(() => (
+      <NCalendar
+        onUpdateValue={(
+          value: number,
+          time: {
+            date: number
+            month: number
+            year: number
+          }
+        ) => {}}
+      />
+    ))()
   })
 
   it('should follow `default-value` to display month', () => {
@@ -44,7 +47,7 @@ describe('n-calendar', () => {
   })
 
   it('should work with `is-date-disabled` prop', async () => {
-    function disableFunction (timestamp: number): boolean {
+    function disableFunction(timestamp: number): boolean {
       return isYesterday(timestamp)
     }
     const wrapper = mount(NCalendar, {

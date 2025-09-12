@@ -1,8 +1,8 @@
-import { h, type VNode } from 'vue'
 import { mount } from '@vue/test-utils'
+import { h, type VNode } from 'vue'
 import { NDescriptions, NDescriptionsItem } from '../index'
 
-function getDescriptionsItemList (): VNode[] {
+function getDescriptionsItemList(): VNode[] {
   return (['早餐', '午餐', '晚餐', '夜宵'] as const).map((item) => {
     return h(NDescriptionsItem, { label: item }, { default: () => item })
   })

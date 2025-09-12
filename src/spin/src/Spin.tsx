@@ -1,21 +1,23 @@
+import type { ThemeProps } from '../../_mixins'
+import type { SpinTheme } from '../styles'
+import { pxfy } from 'seemly'
+import { useCompitable } from 'vooks'
 import {
   computed,
+  type CSSProperties,
   defineComponent,
   h,
-  Transition,
   type PropType,
-  type CSSProperties,
   ref,
+  type SlotsType,
+  Transition,
+  type VNode,
   watchEffect
 } from 'vue'
-import { useCompitable } from 'vooks'
-import { pxfy } from 'seemly'
 import { NBaseLoading } from '../../_internal'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import { createKey, type ExtractPublicPropTypes, warnOnce } from '../../_utils'
 import { spinLight } from '../styles'
-import type { SpinTheme } from '../styles'
 import style from './styles/index.cssr'
 
 const STROKE_WIDTH = {
@@ -55,10 +57,17 @@ export const spinProps = {
 
 export type SpinProps = ExtractPublicPropTypes<typeof spinProps>
 
+export interface SpinSlots {
+  default?: () => VNode[]
+  description?: () => VNode[]
+  icon?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Spin',
   props: spinProps,
-  setup (props) {
+  slots: Object as SlotsType<SpinSlots>,
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.spinning !== undefined) {
@@ -85,8 +94,8 @@ export default defineComponent({
         self
       } = themeRef.value
       const { opacitySpinning, color, textColor } = self
-      const size =
-        typeof spinSize === 'number'
+      const size
+        = typeof spinSize === 'number'
           ? pxfy(spinSize)
           : self[createKey('size', spinSize)]
       return {
@@ -99,14 +108,14 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'spin',
-        computed(() => {
-          const { size } = props
-          return typeof size === 'number' ? String(size) : size[0]
-        }),
-        cssVarsRef,
-        props
-      )
+          'spin',
+          computed(() => {
+            const { size } = props
+            return typeof size === 'number' ? String(size) : size[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     const compitableShow = useCompitable(props, ['spinning', 'show'])
@@ -134,7 +143,8 @@ export default defineComponent({
       active: activeRef,
       mergedStrokeWidth: computed(() => {
         const { strokeWidth } = props
-        if (strokeWidth !== undefined) return strokeWidth
+        if (strokeWidth !== undefined)
+          return strokeWidth
         const { size } = props
         return STROKE_WIDTH[typeof size === 'number' ? 'medium' : size]
       }),
@@ -143,7 +153,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { $slots, mergedClsPrefix, description } = this
     const rotate = $slots.icon && this.rotate
     const descriptionNode = (description || $slots.description) && (

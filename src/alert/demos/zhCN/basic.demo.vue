@@ -2,12 +2,16 @@
 # 基础用法
 </markdown>
 
+<script lang="ts" setup>
+import { IosAirplane } from '@vicons/ionicons4'
+</script>
+
 <template>
   <n-space vertical :size="12">
     <n-alert title="Default 类型" type="default">
       <template #icon>
         <n-icon>
-          <ios-airplane />
+          <IosAirplane />
         </n-icon>
       </template>
       Gee it's good to be back home
@@ -26,14 +30,3 @@
     </n-alert>
   </n-space>
 </template>
-
-<script lang="ts">
-import { IosAirplane } from '@vicons/ionicons4'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    IosAirplane
-  }
-})
-</script>

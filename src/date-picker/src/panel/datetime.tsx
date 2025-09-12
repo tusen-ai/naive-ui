@@ -1,17 +1,22 @@
-import { h, defineComponent } from 'vue'
-import { NButton, NxButton } from '../../../button'
-import { NTimePicker } from '../../../time-picker'
-import { NInput } from '../../../input'
+import type {
+  DatePickerClearSlotProps,
+  DatePickerConfirmSlotProps,
+  DatePickerNowSlotProps
+} from '../public-types'
+import { defineComponent, h } from 'vue'
+import { NBaseFocusDetector } from '../../../_internal'
 import {
   BackwardIcon,
   FastBackwardIcon,
-  ForwardIcon,
-  FastForwardIcon
+  FastForwardIcon,
+  ForwardIcon
 } from '../../../_internal/icons'
-import { NBaseFocusDetector } from '../../../_internal'
-import { useCalendar, useCalendarProps } from './use-calendar'
+import { resolveSlot, resolveSlotWithTypedProps } from '../../../_utils'
+import { NButton, NxButton } from '../../../button'
+import { NInput } from '../../../input'
+import { NTimePicker } from '../../../time-picker'
 import PanelHeader from './panelHeader'
-import { resolveSlot } from '../../../_utils'
+import { useCalendar, useCalendarProps } from './use-calendar'
 
 /**
  * DateTime Panel
@@ -22,19 +27,20 @@ import { resolveSlot } from '../../../_utils'
 export default defineComponent({
   name: 'DateTimePanel',
   props: useCalendarProps,
-  setup (props) {
+  setup(props) {
     return useCalendar(props, 'datetime')
   },
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       mergedTheme,
       shortcuts,
       timePickerProps,
-      onRender,
-      $slots
+      datePickerSlots,
+      onRender
     } = this
     onRender?.()
+
     return (
       <div
         ref="selfRef"
@@ -55,6 +61,7 @@ export default defineComponent({
             themeOverrides={mergedTheme.peerOverrides.Input}
             stateful={false}
             size={this.timePickerSize}
+            readonly={this.inputReadonly}
             class={`${mergedClsPrefix}-date-panel-date-input`}
             textDecoration={this.isDateInvalid ? 'line-through' : ''}
             placeholder={this.locale.selectDate}
@@ -64,7 +71,7 @@ export default defineComponent({
           <NTimePicker
             size={this.timePickerSize}
             placeholder={this.locale.selectTime}
-            format={this.timeFormat}
+            format={this.timePickerFormat}
             {...(Array.isArray(timePickerProps) ? undefined : timePickerProps)}
             showIcon={false}
             to={false}
@@ -84,16 +91,21 @@ export default defineComponent({
               class={`${mergedClsPrefix}-date-panel-month__fast-prev`}
               onClick={this.prevYear}
             >
-              {resolveSlot($slots['prev-year'], () => [<FastBackwardIcon />])}
+              {resolveSlot(datePickerSlots['prev-year'], () => [
+                <FastBackwardIcon />
+              ])}
             </div>
             <div
               class={`${mergedClsPrefix}-date-panel-month__prev`}
               onClick={this.prevMonth}
             >
-              {resolveSlot($slots['prev-month'], () => [<BackwardIcon />])}
+              {resolveSlot(datePickerSlots['prev-month'], () => [
+                <BackwardIcon />
+              ])}
             </div>
             <PanelHeader
-              monthBeforeYear={this.locale.monthBeforeYear}
+              monthYearSeparator={this.calendarHeaderMonthYearSeparator}
+              monthBeforeYear={this.calendarMonthBeforeYear}
               value={this.calendarValue}
               onUpdateValue={this.onUpdateCalendarValue}
               mergedClsPrefix={mergedClsPrefix}
@@ -104,17 +116,21 @@ export default defineComponent({
               class={`${mergedClsPrefix}-date-panel-month__next`}
               onClick={this.nextMonth}
             >
-              {resolveSlot($slots['next-month'], () => [<ForwardIcon />])}
+              {resolveSlot(datePickerSlots['next-month'], () => [
+                <ForwardIcon />
+              ])}
             </div>
             <div
               class={`${mergedClsPrefix}-date-panel-month__fast-next`}
               onClick={this.nextYear}
             >
-              {resolveSlot($slots['next-year'], () => [<FastForwardIcon />])}
+              {resolveSlot(datePickerSlots['next-year'], () => [
+                <FastForwardIcon />
+              ])}
             </div>
           </div>
           <div class={`${mergedClsPrefix}-date-panel-weekdays`}>
-            {this.weekdays.map((weekday) => (
+            {this.weekdays.map(weekday => (
               <div
                 key={weekday}
                 class={`${mergedClsPrefix}-date-panel-weekdays__day`}
@@ -167,60 +183,88 @@ export default defineComponent({
         {this.actions?.length || shortcuts ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
-              {shortcuts &&
-                Object.keys(shortcuts).map((key) => {
-                  const shortcut = shortcuts[key]
-                  return Array.isArray(shortcut) ? null : (
-                    <NxButton
-                      size="tiny"
-                      onMouseenter={() => {
-                        this.handleSingleShortcutMouseenter(shortcut)
-                      }}
-                      onClick={() => {
-                        this.handleSingleShortcutClick(shortcut)
-                      }}
-                      onMouseleave={() => {
-                        this.handleShortcutMouseleave()
-                      }}
-                    >
-                      {{ default: () => key }}
-                    </NxButton>
-                  )
-                })}
+              {shortcuts
+              && Object.keys(shortcuts).map((key) => {
+                const shortcut = shortcuts[key]
+                return Array.isArray(shortcut) ? null : (
+                  <NxButton
+                    size="tiny"
+                    onMouseenter={() => {
+                      this.handleSingleShortcutMouseenter(shortcut)
+                    }}
+                    onClick={() => {
+                      this.handleSingleShortcutClick(shortcut)
+                    }}
+                    onMouseleave={() => {
+                      this.handleShortcutMouseleave()
+                    }}
+                  >
+                    {{ default: () => key }}
+                  </NxButton>
+                )
+              })}
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
-              {this.actions?.includes('clear') ? (
-                <NButton
-                  theme={mergedTheme.peers.Button}
-                  themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  onClick={this.clearSelectedDateTime}
-                >
-                  {{ default: () => this.locale.clear }}
-                </NButton>
-              ) : null}
-              {this.actions?.includes('now') ? (
-                <NButton
-                  theme={mergedTheme.peers.Button}
-                  themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  onClick={this.handleNowClick}
-                >
-                  {{ default: () => this.locale.now }}
-                </NButton>
-              ) : null}
-              {this.actions?.includes('confirm') ? (
-                <NButton
-                  theme={mergedTheme.peers.Button}
-                  themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  type="primary"
-                  disabled={this.isDateInvalid}
-                  onClick={this.handleConfirmClick}
-                >
-                  {{ default: () => this.locale.confirm }}
-                </NButton>
-              ) : null}
+              {this.actions?.includes('clear')
+                ? resolveSlotWithTypedProps(
+                    this.datePickerSlots.clear,
+                    {
+                      onClear: this.clearSelectedDateTime,
+                      text: this.locale.clear
+                    } satisfies DatePickerClearSlotProps,
+                    () => [
+                      <NButton
+                        theme={mergedTheme.peers.Button}
+                        themeOverrides={mergedTheme.peerOverrides.Button}
+                        size="tiny"
+                        onClick={this.clearSelectedDateTime}
+                      >
+                        {{ default: () => this.locale.clear }}
+                      </NButton>
+                    ]
+                  )
+                : null}
+              {this.actions?.includes('now')
+                ? resolveSlotWithTypedProps(
+                    datePickerSlots.now,
+                    {
+                      onNow: this.handleNowClick,
+                      text: this.locale.now
+                    } satisfies DatePickerNowSlotProps,
+                    () => [
+                      <NButton
+                        theme={mergedTheme.peers.Button}
+                        themeOverrides={mergedTheme.peerOverrides.Button}
+                        size="tiny"
+                        onClick={this.handleNowClick}
+                      >
+                        {{ default: () => this.locale.now }}
+                      </NButton>
+                    ]
+                  )
+                : null}
+              {this.actions?.includes('confirm')
+                ? resolveSlotWithTypedProps(
+                    datePickerSlots.confirm,
+                    {
+                      onConfirm: this.handleConfirmClick,
+                      disabled: this.isDateInvalid,
+                      text: this.locale.confirm
+                    } satisfies DatePickerConfirmSlotProps,
+                    () => [
+                      <NButton
+                        theme={mergedTheme.peers.Button}
+                        themeOverrides={mergedTheme.peerOverrides.Button}
+                        size="tiny"
+                        type="primary"
+                        disabled={this.isDateInvalid}
+                        onClick={this.handleConfirmClick}
+                      >
+                        {{ default: () => this.locale.confirm }}
+                      </NButton>
+                    ]
+                  )
+                : null}
             </div>
           </div>
         ) : null}

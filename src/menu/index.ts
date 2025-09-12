@@ -1,9 +1,9 @@
-export { default as NMenu, menuProps } from './src/Menu'
-export type { MenuProps } from './src/Menu'
 export type {
-  MenuOption,
-  MenuGroupOption,
   MenuDividerOption,
+  MenuGroupOption,
+  MenuInst,
   MenuNodeProps,
-  MenuInst
+  MenuOption
 } from './src/interface'
+export { menuProps, default as NMenu } from './src/Menu'
+export type { MenuProps } from './src/Menu'

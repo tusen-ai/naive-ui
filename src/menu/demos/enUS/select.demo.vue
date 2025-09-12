@@ -4,23 +4,20 @@
 Usually you can use vue-router here to accomplish routing. Also, you can render `label` as `<router-link />` or `<a />` to set route.
 </markdown>
 
-<template>
-  <n-menu :options="menuOptions" @update:value="handleUpdateValue" />
-</template>
-
-<script lang="ts">
-import { defineComponent, h, Component } from 'vue'
-import { RouterLink } from 'vue-router'
-import { NIcon, useMessage } from 'naive-ui'
+<script lang="ts" setup>
 import type { MenuOption } from 'naive-ui'
+import type { Component } from 'vue'
 import {
   BookOutline as BookIcon,
+  HomeOutline as HomeIcon,
   PersonOutline as PersonIcon,
-  WineOutline as WineIcon,
-  HomeOutline as HomeIcon
+  WineOutline as WineIcon
 } from '@vicons/ionicons5'
+import { NIcon, useMessage } from 'naive-ui'
+import { h } from 'vue'
+import { RouterLink } from 'vue-router'
 
-function renderIcon (icon: Component) {
+function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -134,16 +131,14 @@ const menuOptions: MenuOption[] = [
   }
 ]
 
-export default defineComponent({
-  setup () {
-    const message = useMessage()
-    return {
-      menuOptions,
-      handleUpdateValue (key: string, item: MenuOption) {
-        message.info('[onUpdate:value]: ' + JSON.stringify(key))
-        message.info('[onUpdate:value]: ' + JSON.stringify(item))
-      }
-    }
-  }
-})
+const message = useMessage()
+
+function handleUpdateValue(key: string, item: MenuOption) {
+  message.info(`[onUpdate:value]: ${JSON.stringify(key)}`)
+  message.info(`[onUpdate:value]: ${JSON.stringify(item)}`)
+}
 </script>
+
+<template>
+  <n-menu :options="menuOptions" @update:value="handleUpdateValue" />
+</template>

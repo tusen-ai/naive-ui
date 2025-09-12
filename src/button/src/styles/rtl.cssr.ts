@@ -1,4 +1,4 @@
-import { cB, cM, cE, c } from '../../../_utils/cssr'
+import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 export default cB('button', [
   cM('rtl', `

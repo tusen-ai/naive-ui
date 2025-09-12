@@ -2,6 +2,13 @@
 # Custom Icon
 </markdown>
 
+<script lang="ts" setup>
+import { ArrowDownCircleOutline, ArrowUpCircleOutline } from '@vicons/ionicons5'
+import { ref } from 'vue'
+
+const value = ref(0)
+</script>
+
 <template>
   <n-space vertical>
     <n-input-number v-model:value="value">
@@ -14,18 +21,3 @@
     </n-input-number>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { ArrowUpCircleOutline, ArrowDownCircleOutline } from '@vicons/ionicons5'
-
-export default defineComponent({
-  setup () {
-    return {
-      value: ref(0),
-      ArrowUpCircleOutline,
-      ArrowDownCircleOutline
-    }
-  }
-})
-</script>

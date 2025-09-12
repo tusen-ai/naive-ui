@@ -2,6 +2,14 @@
 # Disabled
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const page = ref(2)
+const pageSize = ref(20)
+const disabled = ref(true)
+</script>
+
 <template>
   <n-space vertical>
     <n-pagination
@@ -16,17 +24,3 @@
     <n-switch v-model:value="disabled" />
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      page: ref(2),
-      pageSize: ref(20),
-      disabled: ref(true)
-    }
-  }
-})
-</script>

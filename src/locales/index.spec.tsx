@@ -1,65 +1,75 @@
-import { h, defineComponent, type PropType, ref, onMounted } from 'vue'
+import type { NLocale } from './common/enUS'
+import type { NDateLocale } from './date/enUS'
 import { mount } from '@vue/test-utils'
+import { defineComponent, h, onMounted, type PropType, ref } from 'vue'
+import { NConfigProvider } from '../config-provider/index'
+import { NDatePicker } from '../date-picker/index'
 import {
-  ruRU,
-  zhCN,
-  zhTW,
-  enUS,
-  ukUA,
-  jaJP,
-  koKR,
-  idID,
-  deDE,
-  nbNO,
-  faIR,
-  frFR,
-  esAR,
-  itIT,
-  skSK,
-  csCZ,
-  enGB,
-  plPL,
-  ptBR,
-  thTH,
-  nlNL,
   arDZ,
-  trTR,
-  svSE,
-  etEE,
-  eo,
-  dateEnUS,
-  dateZhCN,
-  dateZhTW,
-  dateRuRU,
-  dateUkUA,
-  dateJaJP,
-  dateKoKR,
-  dateIdID,
+  azAZ,
+  csCZ,
+  daDK,
+  dateArDZ,
+  dateAzAZ,
+  dateCsCZ,
+  dateDaDK,
   dateDeDE,
-  dateNbNO,
+  dateEnGB,
+  dateEnUS,
+  dateEo,
+  dateEsAR,
+  dateEtEE,
   dateFaIR,
   dateFrFR,
-  dateEsAR,
+  dateIdID,
   dateItIT,
-  dateSkSK,
-  dateCsCZ,
-  dateEnGB,
+  dateJaJP,
+  dateKmKH,
+  dateKoKR,
+  dateNbNO,
+  dateNlNL,
   datePlPL,
   datePtBR,
-  dateThTH,
-  dateNlNL,
-  dateArDZ,
-  dateTrTR,
+  dateRuRU,
+  dateSkSK,
   dateSvSE,
-  dateEtEE,
-  dateEo,
-  NConfigProvider,
-  type NDateLocale,
-  type NLocale,
-  NInput
+  dateThTH,
+  dateTrTR,
+  dateUgCN,
+  dateUkUA,
+  dateUzUZ,
+  dateZhCN,
+  dateZhTW,
+  deDE,
+  enGB,
+  enUS,
+  eo,
+  esAR,
+  etEE,
+  faIR,
+  frFR,
+  idID,
+  itIT,
+  jaJP,
+  kmKH,
+  koKR,
+  nbNO,
+  nlNL,
+  plPL,
+  ptBR,
+  ruRU,
+  skSK,
+  svSE,
+  thTH,
+  trTR,
+  ukUA,
+  uzUZ,
+  zhCN,
+  zhTW
 } from '../index'
-import { createLocale } from '.'
-import { NDatePicker } from '../date-picker'
+import { NInput } from '../input/index'
+import ugCN from './common/ugCN'
+import { createLocale } from './utils/index'
 
 const Wrapper = defineComponent({
   props: {
@@ -67,7 +77,7 @@ const Wrapper = defineComponent({
     locale: Object as PropType<NLocale>,
     onMounted: Function as PropType<(date: string) => void>
   },
-  setup (props) {
+  setup() {
     const datePickerWrapperElRef = ref<HTMLElement | null>(null)
     onMounted(() => {
       // const { value: datePickerWrapperEl } = datePickerWrapperElRef
@@ -88,7 +98,7 @@ const Wrapper = defineComponent({
       datePickerWrapperElRef
     }
   },
-  render () {
+  render() {
     return (
       <NConfigProvider {...this.$props}>
         {{
@@ -184,8 +194,31 @@ describe('locale', () => {
     expect(
       mount(Wrapper, {
         props: {
+          dateLocale: dateUzUZ,
+          locale: uzUZ,
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
           dateLocale: dateJaJP,
           locale: jaJP,
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
+        }
+      }).html()
+    ).toMatchSnapshot()
+
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateKmKH,
+          locale: kmKH,
           onMounted: (date: string) => {
             expect(date).toMatchSnapshot()
           }
@@ -367,6 +400,30 @@ describe('locale', () => {
           onMounted: (date: string) => {
             expect(date).toMatchSnapshot()
           }
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateAzAZ,
+          locale: azAZ
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateUgCN,
+          locale: ugCN
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateDaDK,
+          locale: daDK
         }
       }).html()
     ).toMatchSnapshot()

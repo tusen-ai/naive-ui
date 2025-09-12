@@ -1,29 +1,29 @@
+import type { ScrollbarProps } from '../../_internal'
+import { clickoutside } from 'vdirs'
 import {
-  h,
-  Transition,
-  defineComponent,
-  ref,
   computed,
-  watchEffect,
-  provide,
-  inject,
-  type PropType,
-  withDirectives,
-  vShow,
-  mergeProps,
   type CSSProperties,
+  defineComponent,
   type DirectiveArguments,
+  h,
+  inject,
+  mergeProps,
+  onBeforeUnmount,
+  type PropType,
+  provide,
+  ref,
+  Transition,
+  vShow,
   watch,
-  onBeforeUnmount
+  watchEffect,
+  withDirectives
 } from 'vue'
 import { VFocusTrap } from 'vueuc'
-import { clickoutside } from 'vdirs'
-import { useConfig, useRtl } from '../../_mixins'
-import { popoverBodyInjectionKey } from '../../popover/src/interface'
-import { modalBodyInjectionKey } from '../../modal/src/interface'
 import { NScrollbar } from '../../_internal'
-import type { ScrollbarProps } from '../../_internal'
+import { useConfig, useRtl } from '../../_mixins'
 import { useLockHtmlScroll } from '../../_utils'
+import { modalBodyInjectionKey } from '../../modal/src/interface'
+import { popoverBodyInjectionKey } from '../../popover/src/interface'
 import { drawerBodyInjectionKey, drawerInjectionKey } from './interface'
 
 export type Placement = 'left' | 'right' | 'top' | 'bottom'
@@ -74,10 +74,9 @@ export default defineComponent({
     onAfterEnter: Function as PropType<() => void>,
     onEsc: Function as PropType<(e: KeyboardEvent) => void>
   },
-  setup (props) {
+  setup(props) {
     const displayedRef = ref(!!props.show)
     const bodyRef = ref<HTMLElement | null>(null) // used for detached content
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NDrawer = inject(drawerInjectionKey)!
 
     let startPosition = 0
@@ -92,6 +91,8 @@ export default defineComponent({
     const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
 
     const rtlEnabledRef = useRtl('Drawer', mergedRtlRef, mergedClsPrefixRef)
+
+    const handleBodyMouseleave = handleBodyMouseup
 
     const handleMousedownResizeTrigger = (e: MouseEvent): void => {
       isDraggingRef.value = true
@@ -110,7 +111,8 @@ export default defineComponent({
       }
       if (isDraggingRef.value) {
         isHoverOnResizeTriggerRef.value = true
-      } else {
+      }
+      else {
         hoverTimerId = window.setTimeout(() => {
           isHoverOnResizeTriggerRef.value = true
         }, 300)
@@ -129,21 +131,25 @@ export default defineComponent({
 
     const regulateWidth = (size: number): number => {
       const { maxWidth } = props
-      if (maxWidth && size > maxWidth) return maxWidth
+      if (maxWidth && size > maxWidth)
+        return maxWidth
       const { minWidth } = props
-      if (minWidth && size < minWidth) return minWidth
+      if (minWidth && size < minWidth)
+        return minWidth
       return size
     }
 
     const regulateHeight = (size: number): number => {
       const { maxHeight } = props
-      if (maxHeight && size > maxHeight) return maxHeight
+      if (maxHeight && size > maxHeight)
+        return maxHeight
       const { minHeight } = props
-      if (minHeight && size < minHeight) return minHeight
+      if (minHeight && size < minHeight)
+        return minHeight
       return size
     }
 
-    const handleBodyMousemove = (e: MouseEvent): void => {
+    function handleBodyMousemove(e: MouseEvent): void {
       if (isDraggingRef.value) {
         if (isVertical.value) {
           let height = bodyRef.value?.offsetHeight || 0
@@ -152,7 +158,8 @@ export default defineComponent({
           height = regulateHeight(height)
           doUpdateHeight(height)
           startPosition = e.clientY
-        } else {
+        }
+        else {
           let width = bodyRef.value?.offsetWidth || 0
           const increment = startPosition - e.clientX
           width += props.placement === 'right' ? increment : -increment
@@ -163,7 +170,7 @@ export default defineComponent({
       }
     }
 
-    const handleBodyMouseup = (): void => {
+    function handleBodyMouseup(): void {
       if (isDraggingRef.value) {
         startPosition = 0
         isDraggingRef.value = false
@@ -174,10 +181,9 @@ export default defineComponent({
       }
     }
 
-    const handleBodyMouseleave = handleBodyMouseup
-
     watchEffect(() => {
-      if (props.show) displayedRef.value = true
+      if (props.show)
+        displayedRef.value = true
     })
     watch(
       () => props.show,
@@ -203,7 +209,7 @@ export default defineComponent({
       }
       return directives
     })
-    function handleAfterLeave (): void {
+    function handleAfterLeave(): void {
       displayedRef.value = false
       props.onAfterLeave?.()
     }
@@ -235,7 +241,7 @@ export default defineComponent({
       isHoverOnResizeTrigger: isHoverOnResizeTriggerRef
     }
   },
-  render () {
+  render() {
     const { $slots, mergedClsPrefix } = this
     return this.displayDirective === 'show' || this.displayed || this.show
       ? withDirectives(
@@ -267,17 +273,17 @@ export default defineComponent({
                               'aria-modal': 'true',
                               class: [
                                 `${mergedClsPrefix}-drawer`,
-                                this.rtlEnabled &&
-                                  `${mergedClsPrefix}-drawer--rtl`,
+                                this.rtlEnabled
+                                && `${mergedClsPrefix}-drawer--rtl`,
                                 `${mergedClsPrefix}-drawer--${this.placement}-placement`,
                                 /**
                                  * When the mouse is pressed to resize the drawer,
                                  * disable text selection
                                  */
-                                this.isDragging &&
-                                  `${mergedClsPrefix}-drawer--unselectable`,
-                                this.nativeScrollbar &&
-                                  `${mergedClsPrefix}-drawer--native-scrollbar`
+                                this.isDragging
+                                && `${mergedClsPrefix}-drawer--unselectable`,
+                                this.nativeScrollbar
+                                && `${mergedClsPrefix}-drawer--native-scrollbar`
                               ]
                             }),
                             [
@@ -285,9 +291,9 @@ export default defineComponent({
                                 <div
                                   class={[
                                     `${mergedClsPrefix}-drawer__resize-trigger`,
-                                    (this.isDragging ||
-                                      this.isHoverOnResizeTrigger) &&
-                                      `${mergedClsPrefix}-drawer__resize-trigger--hover`
+                                    (this.isDragging
+                                      || this.isHoverOnResizeTrigger)
+                                    && `${mergedClsPrefix}-drawer__resize-trigger--hover`
                                   ]}
                                   onMouseenter={
                                     this.handleMouseenterResizeTrigger
@@ -343,7 +349,7 @@ export default defineComponent({
               this.displayDirective === 'if' || this.displayed || this.show
             ]
           ]
-      )
+        )
       : null
   }
 })

@@ -1,4 +1,4 @@
-import { cB, c, cE, cM, cNotM } from '../../../_utils/cssr'
+import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
@@ -48,6 +48,7 @@ export default cB('input', `
   background-color: var(--n-color);
   transition: background-color .3s var(--n-bezier);
   font-size: var(--n-font-size);
+  font-weight: var(--n-font-weight);
   --n-padding-vertical: calc((var(--n-height) - 1.5 * var(--n-font-size)) / 2);
 `, [
   // common

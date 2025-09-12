@@ -10,7 +10,6 @@ wrap.vue
 description.vue
 customize-icon.vue
 delay.vue
-blocking-debug.vue
 ```
 
 ## API

@@ -31,7 +31,7 @@ const nlNL: NLocale = {
     dateFormat: 'dd/MM/yyyy',
     dateTimeFormat: 'dd/MM/yyyy HH:mm:ss',
     quarterFormat: 'qqq yyyy',
-    weekFormat: 'yyyy-w',
+    weekFormat: 'YYYY-w',
     clear: 'Wis',
     now: 'Nu',
     confirm: 'Bevestig',
@@ -124,6 +124,12 @@ const nlNL: NLocale = {
     tipClose: 'Sluiten (Esc)',
     // TODO: translation
     tipOriginalSize: 'Zoom to original size'
+  },
+  Heatmap: {
+    less: 'minder',
+    more: 'meer',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

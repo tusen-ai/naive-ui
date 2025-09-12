@@ -1,9 +1,9 @@
-import { tagLight } from '../../tag/styles'
-import { inputLight } from '../../input/styles'
-import { buttonLight } from '../../button/styles'
-import { spaceLight } from '../../space/styles'
-import { commonLight } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
+import { commonLight } from '../../_styles/common'
+import { buttonLight } from '../../button/styles'
+import { inputLight } from '../../input/styles'
+import { spaceLight } from '../../space/styles'
+import { tagLight } from '../../tag/styles'
 
 const dynamicTagsLight = createTheme({
   name: 'DynamicTags',
@@ -14,7 +14,7 @@ const dynamicTagsLight = createTheme({
     Tag: tagLight,
     Space: spaceLight
   },
-  self () {
+  self() {
     return {
       inputWidth: '64px'
     }
@@ -22,6 +22,5 @@ const dynamicTagsLight = createTheme({
 })
 
 export default dynamicTagsLight
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface DynamicTagsThemeVars {}
 export type DynamicTagsTheme = typeof dynamicTagsLight

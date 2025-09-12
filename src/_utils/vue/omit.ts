@@ -1,4 +1,4 @@
-export function omit<T, K extends keyof T, R extends Record<string, any>> (
+export function omit<T, K extends keyof T, R extends Record<string, any>>(
   object: T,
   keys: K[] = [],
   rest?: R

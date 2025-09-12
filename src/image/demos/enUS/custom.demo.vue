@@ -4,6 +4,24 @@
 The default style of toolbar may not meet your demand, let's make some configuration.
 </markdown>
 
+<script lang="ts" setup>
+import type { GlobalThemeOverrides } from 'naive-ui'
+import { useThemeVars } from 'naive-ui'
+import { computed } from 'vue'
+
+const imageGroupThemeOverrides = computed(() => {
+  const { popoverColor, boxShadow2, textColor2, borderRadius }
+    = useThemeVars().value
+  const themeOverrides: NonNullable<GlobalThemeOverrides['Image']> = {
+    toolbarColor: popoverColor,
+    toolbarBoxShadow: boxShadow2,
+    toolbarIconColor: textColor2,
+    toolbarBorderRadius: borderRadius
+  }
+  return themeOverrides
+})
+</script>
+
 <template>
   <n-image-group :theme-overrides="imageGroupThemeOverrides">
     <n-space>
@@ -18,26 +36,3 @@ The default style of toolbar may not meet your demand, let's make some configura
     </n-space>
   </n-image-group>
 </template>
-
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
-import { GlobalThemeOverrides, useThemeVars } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    return {
-      imageGroupThemeOverrides: computed(() => {
-        const { popoverColor, boxShadow2, textColor2, borderRadius } =
-          useThemeVars().value
-        const themeOverrides: NonNullable<GlobalThemeOverrides['Image']> = {
-          toolbarColor: popoverColor,
-          toolbarBoxShadow: boxShadow2,
-          toolbarIconColor: textColor2,
-          toolbarBorderRadius: borderRadius
-        }
-        return themeOverrides
-      })
-    }
-  }
-})
-</script>

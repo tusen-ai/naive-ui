@@ -2,41 +2,34 @@
 # 自定义展开图标
 </markdown>
 
-<template>
-  <n-data-table
-    :columns="columns"
-    :data="data"
-    :render-expand-icon="renderExpandIcon"
-    default-expand-all
-  />
-</template>
-
-<script lang="ts">
-import { h, defineComponent } from 'vue'
+<script lang="ts" setup>
 import type { DataTableColumns } from 'naive-ui'
-import { NIcon } from 'naive-ui'
 import { ArrowForward } from '@vicons/ionicons5'
+import { NIcon } from 'naive-ui'
+import { h } from 'vue'
 
-type RowData = {
+interface RowData {
   name: string
   key: string
   children?: RowData[]
 }
 
-const createData = (): RowData[] => [
-  {
-    name: 'John Brown',
-    key: '1'
-  },
-  {
-    name: 'Jim Green',
-    key: '2'
-  },
-  {
-    name: 'Joe Black',
-    key: '3'
-  }
-]
+function createData(): RowData[] {
+  return [
+    {
+      name: 'John Brown',
+      key: '1'
+    },
+    {
+      name: 'Jim Green',
+      key: '2'
+    },
+    {
+      name: 'Joe Black',
+      key: '3'
+    }
+  ]
+}
 
 const columns: DataTableColumns<RowData> = [
   {
@@ -62,15 +55,18 @@ const columns: DataTableColumns<RowData> = [
   }
 ]
 
-export default defineComponent({
-  setup () {
-    return {
-      data: createData(),
-      columns,
-      renderExpandIcon: () => {
-        return h(NIcon, null, { default: () => h(ArrowForward) })
-      }
-    }
-  }
-})
+const data = createData()
+
+function renderExpandIcon() {
+  return h(NIcon, null, { default: () => h(ArrowForward) })
+}
 </script>
+
+<template>
+  <n-data-table
+    :columns="columns"
+    :data="data"
+    :render-expand-icon="renderExpandIcon"
+    default-expand-all
+  />
+</template>

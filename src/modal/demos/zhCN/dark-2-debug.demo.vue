@@ -2,6 +2,12 @@
 # Dark Debug 2
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const modalActive = ref(false)
+</script>
+
 <template>
   <n-button @click="modalActive = !modalActive">
     Toggle
@@ -215,55 +221,5 @@
         Long
       </n-descriptions-item>
     </n-descriptions>
-    <n-descriptions label-placement="left">
-      <n-descriptions-item>
-        <template #label>
-          Breakfast
-        </template>
-        Apple
-      </n-descriptions-item>
-      <n-descriptions-item label="Lunch">
-        Apple
-      </n-descriptions-item>
-      <n-descriptions-item label="Supper">
-        Apple
-      </n-descriptions-item>
-      <n-descriptions-item label="Why Long">
-        Why <br>
-        Long <br>
-        Long <br>
-        Long <br>
-        Long <br>
-        Long
-      </n-descriptions-item>
-      <n-descriptions-item label="Why Long">
-        Why <br>
-        Long <br>
-        Long <br>
-        Long <br>
-        Long <br>
-        Long
-      </n-descriptions-item>
-      <n-descriptions-item label="Why Long">
-        Why <br>
-        Long <br>
-        Long <br>
-        Long <br>
-        Long <br>
-        Long
-      </n-descriptions-item>
-    </n-descriptions>
   </n-modal>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  data () {
-    return {
-      modalActive: false
-    }
-  }
-})
-</script>

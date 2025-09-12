@@ -31,7 +31,7 @@ const csCZ: NLocale = {
     dateFormat: 'd-M-yyyy',
     dateTimeFormat: 'd-M-yyyy HH:mm:ss',
     quarterFormat: 'qqq-yyyy',
-    weekFormat: 'yyyy-w',
+    weekFormat: 'YYYY-w',
     clear: 'Vyčistit',
     now: 'Teď',
     confirm: 'Potvrdit',
@@ -122,6 +122,12 @@ const csCZ: NLocale = {
     tipDownload: 'Stáhnout',
     tipClose: 'Zavřít (Esc)',
     tipOriginalSize: 'Přiblížit na původní velikost'
+  },
+  Heatmap: {
+    less: 'méně',
+    more: 'více',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

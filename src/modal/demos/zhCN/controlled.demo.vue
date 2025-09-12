@@ -4,6 +4,30 @@
 模态框的显示可以是受控的。
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const showModal = ref(false)
+const timeout = ref(6000)
+
+function countdown() {
+  if (timeout.value <= 0) {
+    showModal.value = false
+  }
+  else {
+    timeout.value -= 1000
+    setTimeout(countdown, 1000)
+  }
+}
+
+function handleClick() {
+  showModal.value = true
+  timeout.value = 6000
+
+  countdown()
+}
+</script>
+
 <template>
   <n-button @click="handleClick">
     来吧
@@ -21,36 +45,3 @@
     </n-card>
   </n-modal>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const showModalRef = ref(false)
-    const timeoutRef = ref(6000)
-
-    const countdown = () => {
-      if (timeoutRef.value <= 0) {
-        showModalRef.value = false
-      } else {
-        timeoutRef.value -= 1000
-        setTimeout(countdown, 1000)
-      }
-    }
-
-    const handleClick = () => {
-      showModalRef.value = true
-      timeoutRef.value = 6000
-
-      countdown()
-    }
-
-    return {
-      showModal: showModalRef,
-      timeout: timeoutRef,
-      handleClick
-    }
-  }
-})
-</script>

@@ -3,6 +3,7 @@
 
 `n-tabs` always display a pane. If you only want to show tab, use `n-tab` instead of `n-tab-pane`.
 </markdown>
+
 <template>
   <n-tabs type="line">
     <n-tab name="Riders On the Storm">

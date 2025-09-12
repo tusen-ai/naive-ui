@@ -4,6 +4,51 @@
 Inject `dialog` to create a dialog.
 </markdown>
 
+<script lang="ts" setup>
+import { useDialog, useMessage } from 'naive-ui'
+
+const message = useMessage()
+const dialog = useDialog()
+
+function handleConfirm() {
+  dialog.warning({
+    title: 'Confirm',
+    content: 'Are you sure?',
+    positiveText: 'Sure',
+    negativeText: 'Not Sure',
+    draggable: true,
+    onPositiveClick: () => {
+      message.success('Sure')
+    },
+    onNegativeClick: () => {
+      message.error('Not Sure')
+    }
+  })
+}
+
+function handleSuccess() {
+  dialog.success({
+    title: 'Success',
+    content: 'Cool',
+    positiveText: 'Wow!',
+    onPositiveClick: () => {
+      message.success('Great!')
+    }
+  })
+}
+
+function handleError() {
+  dialog.error({
+    title: 'Error',
+    content: 'A mistake.',
+    positiveText: 'Ahhh!',
+    onPositiveClick: () => {
+      message.success('I knew it...')
+    }
+  })
+}
+</script>
+
 <template>
   <n-space>
     <n-button @click="handleConfirm">
@@ -17,51 +62,3 @@ Inject `dialog` to create a dialog.
     </n-button>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { useMessage, useDialog } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const message = useMessage()
-    const dialog = useDialog()
-    return {
-      handleConfirm () {
-        dialog.warning({
-          title: 'Confirm',
-          content: 'Are you sure?',
-          positiveText: 'Sure',
-          negativeText: 'Not Sure',
-          onPositiveClick: () => {
-            message.success('Sure')
-          },
-          onNegativeClick: () => {
-            message.error('Not Sure')
-          }
-        })
-      },
-      handleSuccess () {
-        dialog.success({
-          title: 'Success',
-          content: 'Cool',
-          positiveText: 'Wow!',
-          onPositiveClick: () => {
-            message.success('Great!')
-          }
-        })
-      },
-      handleError () {
-        dialog.error({
-          title: 'Error',
-          content: 'A mistake.',
-          positiveText: 'Ahhh!',
-          onPositiveClick: () => {
-            message.success('I knew it...')
-          }
-        })
-      }
-    }
-  }
-})
-</script>

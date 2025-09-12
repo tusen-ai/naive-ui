@@ -31,7 +31,7 @@ const eo: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
-    weekFormat: 'yyyy-w',
+    weekFormat: 'YYYY-w',
     clear: 'Malplenigi',
     now: 'Nun',
     confirm: 'Konfirmi',
@@ -124,6 +124,12 @@ const eo: NLocale = {
     tipDownload: 'Elŝuti',
     tipClose: 'Fermi (Esc)',
     tipOriginalSize: 'Zoom to original size'
+  },
+  Heatmap: {
+    less: 'less',
+    more: 'more',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

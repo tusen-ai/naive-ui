@@ -1,19 +1,19 @@
+import type { ProgressGradient, ProgressStatus } from './public-types'
 import {
+  computed,
+  type CSSProperties,
   defineComponent,
   h,
-  type PropType,
-  computed,
-  type CSSProperties
+  type PropType
 } from 'vue'
-import { formatLength } from '../../_utils'
 import { NBaseIcon } from '../../_internal'
 import {
-  WarningIcon,
-  InfoIcon as InfoCircleIcon,
   ErrorIcon as ErrorCircleIcon,
-  SuccessIcon as SuccessCircleIcon
+  InfoIcon as InfoCircleIcon,
+  SuccessIcon as SuccessCircleIcon,
+  WarningIcon
 } from '../../_internal/icons'
-import { type Status } from './interface'
+import { formatLength } from '../../_utils'
 
 const iconMap = {
   success: <SuccessCircleIcon />,
@@ -35,9 +35,9 @@ export default defineComponent({
     },
     railColor: String,
     railStyle: [String, Object] as PropType<string | CSSProperties>,
-    fillColor: String,
+    fillColor: [String, Object] as PropType<string | ProgressGradient>,
     status: {
-      type: String as PropType<Status>,
+      type: String as PropType<ProgressStatus>,
       required: true
     },
     indicatorPlacement: {
@@ -61,9 +61,14 @@ export default defineComponent({
     railBorderRadius: [String, Number],
     fillBorderRadius: [String, Number]
   },
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     const styleHeightRef = computed(() => {
       return formatLength(props.height)
+    })
+    const styleFillColorRef = computed(() => {
+      return typeof props.fillColor === 'object'
+        ? `linear-gradient(to right, ${props.fillColor?.stops[0]} , ${props.fillColor?.stops[1]})`
+        : props.fillColor
     })
     const styleRailBorderRadiusRef = computed(() => {
       if (props.railBorderRadius !== undefined) {
@@ -96,7 +101,6 @@ export default defineComponent({
         indicatorTextColor,
         status,
         showIndicator,
-        fillColor,
         processing,
         clsPrefix
       } = props
@@ -128,12 +132,12 @@ export default defineComponent({
                 <div
                   class={[
                     `${clsPrefix}-progress-graph-line-fill`,
-                    processing &&
-                      `${clsPrefix}-progress-graph-line-fill--processing`
+                    processing
+                    && `${clsPrefix}-progress-graph-line-fill--processing`
                   ]}
                   style={{
                     maxWidth: `${props.percentage}%`,
-                    backgroundColor: fillColor,
+                    background: styleFillColorRef.value,
                     height: styleHeightRef.value,
                     lineHeight: styleHeightRef.value,
                     borderRadius: styleFillBorderRadiusRef.value

@@ -31,7 +31,7 @@ const ruRu: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
-    weekFormat: 'yyyy-w',
+    weekFormat: 'YYYY-w',
     clear: 'Очистить',
     now: 'Сейчас',
     confirm: 'Подтвердить',
@@ -122,6 +122,12 @@ const ruRu: NLocale = {
     tipDownload: 'Скачать',
     tipClose: 'Закрыть (Esc)',
     tipOriginalSize: 'Вернуть исходный размер'
+  },
+  Heatmap: {
+    less: 'меньше',
+    more: 'больше',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

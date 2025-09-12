@@ -1,9 +1,9 @@
-import { h, defineComponent, type PropType, toRef } from 'vue'
-import { resolveSlot } from '../../../_utils'
+import { defineComponent, h, type PropType, toRef } from 'vue'
 import { useStyle } from '../../../_mixins'
-import { ClearIcon } from '../../icons'
+import { resolveSlot } from '../../../_utils'
 import { NBaseIcon } from '../../icon'
 import NIconSwitchTransition from '../../icon-switch-transition'
+import { ClearIcon } from '../../icons'
 import style from './styles/index.cssr'
 
 export default defineComponent({
@@ -16,15 +16,15 @@ export default defineComponent({
     show: Boolean,
     onClear: Function as PropType<(e: MouseEvent) => void>
   },
-  setup (props) {
+  setup(props) {
     useStyle('-base-clear', style, toRef(props, 'clsPrefix'))
     return {
-      handleMouseDown (e: MouseEvent) {
+      handleMouseDown(e: MouseEvent) {
         e.preventDefault()
       }
     }
   },
-  render () {
+  render() {
     const { clsPrefix } = this
     return (
       <div class={`${clsPrefix}-base-clear`}>

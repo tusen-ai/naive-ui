@@ -55,8 +55,10 @@ override-click-behavior.vue
 | expand-on-dragenter | `boolean` | `true` | Whether to expand nodes after dragenter. |  |
 | expand-on-click | `boolean` | `false` | Whether to expand or collapse nodes after click. | 2.29.1 |
 | expanded-keys | `Array<string \| number>` | `undefined` | If set, expanded status will work in controlled manner. |  |
+| ellipsis | `boolean` | `false` | Whether to ellipsis the text that exceeds the width. | NEXT_VERSION |
 | filter | `(pattern: string, node: TreeOption) => boolean` | A simple string based filter. | The function that filter tree nodes based on pattern. |  |
 | get-children | `(option: any) => unknown` | `undefined` | Get children of the option. | 2.34.3 |
+| indent | `number` | `24` | Indent of per level of the tree. | 2.9.0 |
 | indeterminate-keys | `Array<string \| number>` | `undefined` | Indeterminate keys of the tree. |  |
 | keyboard | `boolean` | `true` | Whether to support keyboard operation. | 2.32.2 |
 | key-field | `string` | `'key'` | The key field in `TreeOption`. |  |
@@ -71,7 +73,7 @@ override-click-behavior.vue
 | render-prefix | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of all the options' prefix. |  |
 | render-suffix | `(info: { option: TreeOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of all the options' suffix. |  |
 | render-switcher-icon | `(props: { option: TreeOption, expanded: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of option switcher icon. | 2.24.0, `props` 2.34.0 |
-| scrollbar-props | `object` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props) |  |
+| scrollbar-props | `ScrollbarProps` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props) |  |
 | selectable | `boolean` | `true` | Whether the node can be selected. |  |
 | selected-keys | `Array<string \| number>` | `undefined` | If set, selected status will work in controlled manner. |  |
 | show-irrelevant-nodes | `boolean` | `true` | Whether to filter unmached nodes when tree is in filter mode. | 2.28.1 |
@@ -122,13 +124,13 @@ override-click-behavior.vue
 ```ts
 interface ScrollTo {
   (x: number, y: number): void
-  (options: { left?: number; top?: number; debounce?: boolean }): void
-  (options: { index: number; debounce?: boolean }): void
-  (options: { key: string | number; debounce?: boolean }): void
-  (options: { position: 'top' | 'bottom'; debounce?: boolean }): void
+  (options: { left?: number, top?: number, debounce?: boolean }): void
+  (options: { index: number, debounce?: boolean }): void
+  (options: { key: string | number, debounce?: boolean }): void
+  (options: { position: 'top' | 'bottom', debounce?: boolean }): void
 }
 ```
 
 ### Others
 
-1. `treeGetClickTarget: (e: MouseEvent) => ('checkbox' | 'switcher' | 'node')`: Get click target of a node click event. It can be used in `nodeProps.onClick`.
+1. `treeGetClickTarget: (e: MouseEvent) => ('checkbox' | 'switcher' | 'node')`: Get click target of a node click event. It can be used in `nodeProps.onClick`. You can import it from `naive-ui` package directly.

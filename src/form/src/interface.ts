@@ -1,10 +1,10 @@
-import type { Ref, VNodeChild } from 'vue'
 import type {
-  ValidateError,
   RuleItem,
-  ValidateOption,
-  ValidateMessages
+  ValidateError,
+  ValidateMessages,
+  ValidateOption
 } from 'async-validator'
+import type { Ref, VNodeChild } from 'vue'
 import type { FormSetupProps } from './Form'
 
 export interface FormRules {
@@ -16,7 +16,7 @@ type SetRule<T, R> = T extends (rule: any, ...args: infer K) => infer P
   : never
 
 export type FormItemRuleValidatorParams = Parameters<
-SetRule<NonNullable<RuleItem['validator']>, FormItemRule>
+  SetRule<NonNullable<RuleItem['validator']>, FormItemRule>
 >
 
 export type FormItemRuleValidator = (
@@ -114,10 +114,4 @@ export interface FormInst {
   restoreValidation: () => void
 }
 
-export type FormValidationStatus = 'success' | 'error' | 'warning'
-
 export interface FormValidateMessages extends ValidateMessages {}
-type FeedBackPositonCrosswiseKeys = ['left', 'center', 'right']
-export type FeedBackPositonCrosswise = FeedBackPositonCrosswiseKeys[number]
-type FeedBackPositonVerticalKeys = ['top', 'bottom']
-export type FeedBackPositonVertical = FeedBackPositonVerticalKeys[number]

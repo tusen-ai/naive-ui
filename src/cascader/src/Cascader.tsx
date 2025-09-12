@@ -1,60 +1,14 @@
-import {
-  h,
-  defineComponent,
-  computed,
-  provide,
-  type PropType,
-  ref,
-  watch,
-  toRef,
-  type CSSProperties,
-  isReactive,
-  watchEffect,
-  type VNodeChild,
-  type HTMLAttributes,
-  nextTick
-} from 'vue'
-import {
-  createTreeMate,
-  SubtreeNotLoadedError,
-  type CheckStrategy
-} from 'treemate'
-import {
-  VBinder,
-  VTarget,
-  VFollower,
-  type FollowerPlacement,
-  type FollowerInst
-} from 'vueuc'
-import { depx, changeColor, happensIn, getPreciseEventTarget } from 'seemly'
-import { useIsMounted, useMergedState } from 'vooks'
-import type { FormValidationStatus } from '../../form/src/interface'
-import type { SelectBaseOption } from '../../select/src/interface'
-import { NInternalSelection } from '../../_internal'
 import type { InternalSelectionInst } from '../../_internal'
-import {
-  useLocale,
-  useTheme,
-  useConfig,
-  useFormItem,
-  useThemeClass
-} from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import {
-  call,
-  markEventEffectPerformed,
-  useAdjustedTo,
-  warnOnce
-} from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { cascaderLight } from '../styles'
+import type { FormValidationStatus } from '../../form/src/public-types'
+import type { PopoverProps } from '../../popover'
+import type { SelectBaseOption } from '../../select/src/interface'
 import type { CascaderTheme } from '../styles'
-import { getPathLabel, getRawNodePath } from './utils'
-import CascaderMenu from './CascaderMenu'
-import CascaderSelectMenu from './CascaderSelectMenu'
 import type {
-  CascaderOption,
+  CascaderInst,
   CascaderMenuInstance,
+  CascaderOption,
   ExpandTrigger,
   Filter,
   Key,
@@ -62,12 +16,60 @@ import type {
   OnUpdateValue,
   OnUpdateValueImpl,
   SelectMenuInstance,
-  Value,
-  CascaderInst
+  Value
 } from './interface'
+import { changeColor, depx, getPreciseEventTarget, happensIn } from 'seemly'
+import {
+  type CheckStrategy,
+  createTreeMate,
+  SubtreeNotLoadedError
+} from 'treemate'
+import { useIsMounted, useMergedState } from 'vooks'
+import {
+  computed,
+  type CSSProperties,
+  defineComponent,
+  h,
+  type HTMLAttributes,
+  isReactive,
+  nextTick,
+  type PropType,
+  provide,
+  ref,
+  type SlotsType,
+  toRef,
+  type VNode,
+  type VNodeChild,
+  watch,
+  watchEffect
+} from 'vue'
+import {
+  type FollowerInst,
+  type FollowerPlacement,
+  VBinder,
+  VFollower,
+  VTarget
+} from 'vueuc'
+import { NInternalSelection } from '../../_internal'
+import {
+  useConfig,
+  useFormItem,
+  useLocale,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
+import {
+  call,
+  markEventEffectPerformed,
+  useAdjustedTo,
+  warnOnce
+} from '../../_utils'
+import { cascaderLight } from '../styles'
+import CascaderMenu from './CascaderMenu'
+import CascaderSelectMenu from './CascaderSelectMenu'
 import { cascaderInjectionKey } from './interface'
 import style from './styles/index.cssr'
-import { type PopoverProps } from '../../popover'
+import { getPathLabel, getRawNodePath } from './utils'
 
 export const cascaderProps = {
   ...(useTheme.props as ThemeProps<CascaderTheme>),
@@ -156,29 +158,54 @@ export const cascaderProps = {
     default: 'children'
   },
   renderLabel: Function as PropType<
-  (option: CascaderOption, checked: boolean) => VNodeChild
+    (option: CascaderOption, checked: boolean) => VNodeChild
   >,
   status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   'onUpdate:show': [Function, Array] as PropType<
-  MaybeArray<(show: boolean) => void>
+    MaybeArray<(show: boolean) => void>
   >,
   onUpdateShow: [Function, Array] as PropType<
-  MaybeArray<(show: boolean) => void>
+    MaybeArray<(show: boolean) => void>
   >,
   onBlur: Function as PropType<(e: FocusEvent) => void>,
   onFocus: Function as PropType<(e: FocusEvent) => void>,
+  getColumnStyle: Function as PropType<
+    (detail: { level: number }) => string | CSSProperties
+  >,
+  renderPrefix: Function as PropType<
+    (props: {
+      option: CascaderOption
+      checked: boolean
+      node: VNode | null
+    }) => VNodeChild
+  >,
+  renderSuffix: Function as PropType<
+    (props: {
+      option: CascaderOption
+      checked: boolean
+      node: VNode | null
+    }) => VNodeChild
+  >,
   // deprecated
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
 
 export type CascaderProps = ExtractPublicPropTypes<typeof cascaderProps>
 
+export interface CascaderSlots {
+  action?: () => VNode[]
+  arrow?: () => VNode[]
+  empty?: () => VNode[]
+  'not-found'?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Cascader',
   props: cascaderProps,
-  setup (props, { slots }) {
+  slots: Object as SlotsType<CascaderSlots>,
+  setup(props, { slots }) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.leafOnly) {
@@ -241,13 +268,13 @@ export default defineComponent({
     const treeMateRef = computed(() => {
       const { valueField, childrenField, disabledField } = props
       return createTreeMate(props.options, {
-        getDisabled (node) {
+        getDisabled(node) {
           return (node as any)[disabledField]
         },
-        getKey (node) {
+        getKey(node) {
           return (node as any)[valueField]
         },
-        getChildren (node) {
+        getChildren(node) {
           return (node as any)[childrenField]
         }
       })
@@ -259,7 +286,8 @@ export default defineComponent({
           cascade,
           allowNotLoaded: props.allowCheckingNotLoaded
         })
-      } else {
+      }
+      else {
         return {
           checkedKeys: [],
           indeterminateKeys: []
@@ -277,12 +305,13 @@ export default defineComponent({
       let ret
       if (treeNode === null) {
         ret = [treeMateRef.value.treeNodes]
-      } else {
-        ret = treeNodePath.map((treeNode) => treeNode.siblings)
+      }
+      else {
+        ret = treeNodePath.map(treeNode => treeNode.siblings)
         if (
-          !treeNode.isLeaf &&
-          !loadingKeySetRef.value.has(treeNode.key) &&
-          treeNode.children
+          !treeNode.isLeaf
+          && !loadingKeySetRef.value.has(treeNode.key)
+          && treeNode.children
         ) {
           ret.push(treeNode.children)
         }
@@ -304,7 +333,8 @@ export default defineComponent({
         }
       })
     }
-    function doUpdateShow (value: boolean): void {
+    const uncontrolledShowRef = ref(false)
+    function doUpdateShow(value: boolean): void {
       const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
       if (onUpdateShow) {
         call(onUpdateShow, value)
@@ -314,7 +344,7 @@ export default defineComponent({
       }
       uncontrolledShowRef.value = value
     }
-    function doUpdateValue (
+    function doUpdateValue(
       value: Value | null,
       option: CascaderOption | null | Array<CascaderOption | null>,
       optionPath: null | CascaderOption[] | Array<CascaderOption[] | null>
@@ -338,19 +368,19 @@ export default defineComponent({
       nTriggerFormInput()
       nTriggerFormChange()
     }
-    function updateKeyboardKey (key: Key | null): void {
+    function updateKeyboardKey(key: Key | null): void {
       keyboardKeyRef.value = key
     }
-    function updateHoverKey (key: Key | null): void {
+    function updateHoverKey(key: Key | null): void {
       hoverKeyRef.value = key
     }
-    function getOptionsByKeys (keys: Key[]): Array<CascaderOption | null> {
+    function getOptionsByKeys(keys: Key[]): Array<CascaderOption | null> {
       const {
         value: { getNode }
       } = treeMateRef
-      return keys.map((keys) => getNode(keys)?.rawNode || null)
+      return keys.map(keys => getNode(keys)?.rawNode || null)
     }
-    function doCheck (key: Key): boolean {
+    function doCheck(key: Key): boolean {
       const { cascade, multiple, filterable } = props
       const {
         value: { check, getNode, getPath }
@@ -365,14 +395,16 @@ export default defineComponent({
           doUpdateValue(
             checkedKeys,
             getOptionsByKeys(checkedKeys),
-            checkedKeys.map((checkedKey) =>
+            checkedKeys.map(checkedKey =>
               getRawNodePath(getPath(checkedKey)?.treeNodePath)
             )
           )
-          if (filterable) focusSelectionInput()
+          if (filterable)
+            focusSelectionInput()
           keyboardKeyRef.value = key
           hoverKeyRef.value = key
-        } catch (err) {
+        }
+        catch (err) {
           if (err instanceof SubtreeNotLoadedError) {
             if (cascaderMenuInstRef.value) {
               const tmNode = getNode(key)
@@ -382,11 +414,13 @@ export default defineComponent({
                 )
               }
             }
-          } else {
+          }
+          else {
             throw err
           }
         }
-      } else {
+      }
+      else {
         if (mergedCheckStrategyRef.value === 'child') {
           const tmNode = getNode(key)
           if (tmNode?.isLeaf) {
@@ -395,10 +429,12 @@ export default defineComponent({
               tmNode.rawNode,
               getRawNodePath(getPath(key).treeNodePath)
             )
-          } else {
+          }
+          else {
             return false
           }
-        } else {
+        }
+        else {
           const tmNode = getNode(key)
           doUpdateValue(
             key,
@@ -409,7 +445,7 @@ export default defineComponent({
       }
       return true
     }
-    function doUncheck (key: Key): void {
+    function doUncheck(key: Key): void {
       const { cascade, multiple } = props
       if (multiple) {
         const {
@@ -422,8 +458,8 @@ export default defineComponent({
         })
         doUpdateValue(
           checkedKeys,
-          checkedKeys.map((checkedKey) => getNode(checkedKey)?.rawNode || null),
-          checkedKeys.map((checkedKey) =>
+          checkedKeys.map(checkedKey => getNode(checkedKey)?.rawNode || null),
+          checkedKeys.map(checkedKey =>
             getRawNodePath(getPath(checkedKey)?.treeNodePath)
           )
         )
@@ -447,7 +483,8 @@ export default defineComponent({
               label: String(key),
               value: key
             }
-          } else {
+          }
+          else {
             return {
               label: showPath
                 ? getPathLabel(node, separator, labelField)
@@ -456,7 +493,10 @@ export default defineComponent({
             }
           }
         })
-      } else return []
+      }
+      else {
+        return []
+      }
     })
     const selectedOptionRef = computed(() => {
       const { multiple, showPath, separator, labelField } = props
@@ -472,7 +512,8 @@ export default defineComponent({
             label: String(value),
             value
           }
-        } else {
+        }
+        else {
           return {
             label: showPath
               ? getPathLabel(node, separator, labelField)
@@ -480,14 +521,17 @@ export default defineComponent({
             value: node.key
           }
         }
-      } else return null
+      }
+      else {
+        return null
+      }
     })
-    const uncontrolledShowRef = ref(false)
     const controlledShowRef = toRef(props, 'show')
     const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
     const localizedPlaceholderRef = computed(() => {
       const { placeholder } = props
-      if (placeholder !== undefined) return placeholder
+      if (placeholder !== undefined)
+        return placeholder
       return localeRef.value.placeholder
     })
     // select option related
@@ -498,14 +542,17 @@ export default defineComponent({
     watch(
       mergedShowRef,
       (show) => {
-        if (!show) return
-        if (props.multiple) return
+        if (!show)
+          return
+        if (props.multiple)
+          return
         const { value } = mergedValueRef
         if (!Array.isArray(value) && value !== null) {
           keyboardKeyRef.value = value
           hoverKeyRef.value = value
           void nextTick(() => {
-            if (!mergedShowRef.value) return
+            if (!mergedShowRef.value)
+              return
             const { value: hoverKey } = hoverKeyRef
             if (mergedValueRef.value !== null) {
               const node = treeMateRef.value.getNode(hoverKey)
@@ -518,7 +565,8 @@ export default defineComponent({
               }
             }
           })
-        } else {
+        }
+        else {
           keyboardKeyRef.value = null
           hoverKeyRef.value = null
         }
@@ -528,25 +576,27 @@ export default defineComponent({
       }
     )
     // --- methods
-    function doBlur (e: FocusEvent): void {
+    function doBlur(e: FocusEvent): void {
       const { onBlur } = props
       const { nTriggerFormBlur } = formItem
-      if (onBlur) call(onBlur, e)
+      if (onBlur)
+        call(onBlur, e)
       nTriggerFormBlur()
     }
-    function doFocus (e: FocusEvent): void {
+    function doFocus(e: FocusEvent): void {
       const { onFocus } = props
       const { nTriggerFormFocus } = formItem
-      if (onFocus) call(onFocus, e)
+      if (onFocus)
+        call(onFocus, e)
       nTriggerFormFocus()
     }
-    function focusSelectionInput (): void {
+    function focusSelectionInput(): void {
       triggerInstRef.value?.focusInput()
     }
-    function focusSelection (): void {
+    function focusSelection(): void {
       triggerInstRef.value?.focus()
     }
-    function openMenu (): void {
+    function openMenu(): void {
       if (!mergedDisabledRef.value) {
         patternRef.value = ''
         doUpdateShow(true)
@@ -555,15 +605,16 @@ export default defineComponent({
         }
       }
     }
-    function closeMenu (returnFocus = false): void {
+    function closeMenu(returnFocus = false): void {
       if (returnFocus) {
         focusSelection()
       }
       doUpdateShow(false)
       patternRef.value = ''
     }
-    function handleCascaderMenuClickOutside (e: MouseEvent): void {
-      if (showSelectMenuRef.value) return
+    function handleCascaderMenuClickOutside(e: MouseEvent): void {
+      if (showSelectMenuRef.value)
+        return
       if (mergedShowRef.value) {
         if (
           !triggerInstRef.value?.$el.contains(
@@ -574,15 +625,17 @@ export default defineComponent({
         }
       }
     }
-    function handleSelectMenuClickOutside (e: MouseEvent): void {
-      if (!showSelectMenuRef.value) return
+    function handleSelectMenuClickOutside(e: MouseEvent): void {
+      if (!showSelectMenuRef.value)
+        return
       handleCascaderMenuClickOutside(e)
     }
-    function clearPattern (): void {
-      if (props.clearFilterAfterSelect) patternRef.value = ''
+    function clearPattern(): void {
+      if (props.clearFilterAfterSelect)
+        patternRef.value = ''
     }
     // --- keyboard
-    function move (direction: 'prev' | 'next' | 'child' | 'parent'): void {
+    function move(direction: 'prev' | 'next' | 'child' | 'parent'): void {
       const { value: keyboardKey } = keyboardKeyRef
       const { value: treeMate } = treeMateRef
       switch (direction) {
@@ -610,7 +663,8 @@ export default defineComponent({
                 depx(optionHeightRef.value)
               )
             }
-          } else {
+          }
+          else {
             const node = treeMate.getNext(keyboardKey, { loop: true })
             if (node !== null) {
               updateKeyboardKey(node.key)
@@ -632,7 +686,8 @@ export default defineComponent({
                   updateHoverKey(keyboardKey)
                   updateKeyboardKey(node.key)
                 }
-              } else {
+              }
+              else {
                 const { value: loadingKeySet } = loadingKeySetRef
                 if (!loadingKeySet.has(keyboardKey)) {
                   addLoadingKey(keyboardKey)
@@ -660,7 +715,8 @@ export default defineComponent({
               const parentNode = node.getParent()
               if (parentNode === null) {
                 updateHoverKey(null)
-              } else {
+              }
+              else {
                 updateHoverKey(parentNode.key)
               }
             }
@@ -668,7 +724,7 @@ export default defineComponent({
           break
       }
     }
-    function handleKeydown (e: KeyboardEvent): void {
+    function handleKeydown(e: KeyboardEvent): void {
       switch (e.key) {
         case ' ':
         case 'ArrowDown':
@@ -679,35 +735,41 @@ export default defineComponent({
           e.preventDefault()
           break
       }
-      if (happensIn(e, 'action')) return
+      if (happensIn(e, 'action'))
+        return
       switch (e.key) {
         case ' ':
-          if (props.filterable) return
+          if (props.filterable)
+            return
         // eslint-disable-next-line no-fallthrough
         case 'Enter':
           if (!mergedShowRef.value) {
             openMenu()
-          } else {
+          }
+          else {
             const { value: showSelectMenu } = showSelectMenuRef
             const { value: keyboardKey } = keyboardKeyRef
             if (!showSelectMenu) {
               if (keyboardKey !== null) {
                 if (
-                  checkedKeysRef.value.includes(keyboardKey) ||
-                  indeterminateKeysRef.value.includes(keyboardKey)
+                  checkedKeysRef.value.includes(keyboardKey)
+                  || indeterminateKeysRef.value.includes(keyboardKey)
                 ) {
                   doUncheck(keyboardKey)
-                } else {
+                }
+                else {
                   const checkIsValid = doCheck(keyboardKey)
                   if (!props.multiple && checkIsValid) {
                     closeMenu(true)
                   }
                 }
               }
-            } else {
+            }
+            else {
               if (selectMenuInstRef.value) {
                 const hasCorrespondingOption = selectMenuInstRef.value.enter()
-                if (hasCorrespondingOption) clearPattern()
+                if (hasCorrespondingOption)
+                  clearPattern()
               }
             }
           }
@@ -717,7 +779,8 @@ export default defineComponent({
           if (mergedShowRef.value) {
             if (showSelectMenuRef.value) {
               selectMenuInstRef.value?.prev()
-            } else {
+            }
+            else {
               move('prev')
             }
           }
@@ -727,10 +790,12 @@ export default defineComponent({
           if (mergedShowRef.value) {
             if (showSelectMenuRef.value) {
               selectMenuInstRef.value?.next()
-            } else {
+            }
+            else {
               move('next')
             }
-          } else {
+          }
+          else {
             openMenu()
           }
           break
@@ -753,44 +818,45 @@ export default defineComponent({
           }
       }
     }
-    function handleMenuKeydown (e: KeyboardEvent): void {
+    function handleMenuKeydown(e: KeyboardEvent): void {
       handleKeydown(e)
     }
     // --- search
-    function handleClear (e: MouseEvent): void {
+    function handleClear(e: MouseEvent): void {
       e.stopPropagation()
       if (props.multiple) {
         doUpdateValue([], [], [])
-      } else {
+      }
+      else {
         doUpdateValue(null, null, null)
       }
     }
-    function handleTriggerFocus (e: FocusEvent): void {
+    function handleTriggerFocus(e: FocusEvent): void {
       if (!cascaderMenuInstRef.value?.$el.contains(e.relatedTarget as Node)) {
         focusedRef.value = true
         doFocus(e)
       }
     }
-    function handleTriggerBlur (e: FocusEvent): void {
+    function handleTriggerBlur(e: FocusEvent): void {
       if (!cascaderMenuInstRef.value?.$el.contains(e.relatedTarget as Node)) {
         focusedRef.value = false
         doBlur(e)
         closeMenu()
       }
     }
-    function handleMenuFocus (e: FocusEvent): void {
+    function handleMenuFocus(e: FocusEvent): void {
       if (!triggerInstRef.value?.$el.contains(e.relatedTarget as Node)) {
         focusedRef.value = true
         doFocus(e)
       }
     }
-    function handleMenuBlur (e: FocusEvent): void {
+    function handleMenuBlur(e: FocusEvent): void {
       if (!triggerInstRef.value?.$el.contains(e.relatedTarget as Node)) {
         focusedRef.value = false
         doBlur(e)
       }
     }
-    function handleMenuMousedown (e: MouseEvent): void {
+    function handleMenuMousedown(e: MouseEvent): void {
       if (!happensIn(e, 'action')) {
         if (props.multiple && props.filter) {
           e.preventDefault()
@@ -798,55 +864,61 @@ export default defineComponent({
         }
       }
     }
-    function handleMenuTabout (): void {
+    function handleMenuTabout(): void {
       closeMenu(true)
     }
-    function handleTriggerClick (): void {
+    function handleTriggerClick(): void {
       if (props.filterable) {
         openMenu()
-      } else {
+      }
+      else {
         if (mergedShowRef.value) {
           closeMenu(true)
-        } else {
+        }
+        else {
           openMenu()
         }
       }
     }
-    function handlePatternInput (e: InputEvent): void {
+    function handlePatternInput(e: InputEvent): void {
       patternRef.value = (e.target as HTMLInputElement).value
     }
-    function handleDeleteOption (option: SelectBaseOption): void {
+    function handleDeleteOption(option: SelectBaseOption): void {
       const { multiple } = props
       const { value: mergedValue } = mergedValueRef
       if (
-        multiple &&
-        Array.isArray(mergedValue) &&
-        option.value !== undefined
+        multiple
+        && Array.isArray(mergedValue)
+        && option.value !== undefined
       ) {
         doUncheck(option.value)
-      } else {
+      }
+      else {
         doUpdateValue(null, null, null)
       }
     }
     // sync position
-    function syncSelectMenuPosition (): void {
+    function syncSelectMenuPosition(): void {
       selectMenuFollowerRef.value?.syncPosition()
     }
-    function syncCascaderMenuPosition (): void {
+    function syncCascaderMenuPosition(): void {
       cascaderMenuFollowerRef.value?.syncPosition()
     }
-    function handleTriggerResize (): void {
+    function handleTriggerResize(): void {
       if (mergedShowRef.value) {
         if (showSelectMenuRef.value) {
           syncSelectMenuPosition()
-        } else {
+        }
+        else {
           syncCascaderMenuPosition()
         }
       }
     }
     const showCheckboxRef = computed(() => {
-      if (props.multiple && props.cascade) return true
-      if (mergedCheckStrategyRef.value !== 'child') return true
+      if (props.multiple && props.cascade)
+        return true
+      if (mergedCheckStrategyRef.value !== 'child')
+        return true
       return false
     })
     provide(cascaderInjectionKey, {
@@ -873,6 +945,9 @@ export default defineComponent({
       localeRef,
       labelFieldRef: toRef(props, 'labelField'),
       renderLabelRef: toRef(props, 'renderLabel'),
+      getColumnStyleRef: toRef(props, 'getColumnStyle'),
+      renderPrefixRef: toRef(props, 'renderPrefix'),
+      renderSuffixRef: toRef(props, 'renderSuffix'),
       syncCascaderMenuPosition,
       syncSelectMenuPosition,
       updateKeyboardKey,
@@ -1008,7 +1083,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     return (
       <div class={`${mergedClsPrefix}-cascader`}>

@@ -5,7 +5,7 @@ export const NInjectionExtractor = defineComponent({
   props: {
     onSetup: Function as PropType<() => void>
   },
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     props.onSetup?.()
     return () => slots.default?.()
   }

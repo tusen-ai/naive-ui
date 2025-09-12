@@ -4,6 +4,12 @@
 Add prefix and suffix contents.
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const value = ref(0)
+</script>
+
 <template>
   <n-space vertical>
     <n-input-number v-model:value="value">
@@ -23,15 +29,3 @@ Add prefix and suffix contents.
     </n-input-number>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      value: ref(0)
-    }
-  }
-})
-</script>

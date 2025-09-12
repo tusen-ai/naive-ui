@@ -1,48 +1,51 @@
+import type {
+  CsvOptionsType,
+  DataTableInst,
+  DataTableSlots,
+  MainTableRef,
+  RowKey
+} from './interface'
+import { createId } from 'seemly'
 import {
-  h,
   computed,
-  defineComponent,
-  ref,
-  provide,
-  toRef,
   type CSSProperties,
+  defineComponent,
+  h,
+  provide,
+  ref,
+  type SlotsType,
+  toRef,
   Transition,
   watchEffect
 } from 'vue'
-import { createId } from 'seemly'
+import { NBaseLoading } from '../../_internal'
 import {
   useConfig,
-  useRtl,
   useLocale,
+  useRtl,
   useTheme,
   useThemeClass
 } from '../../_mixins'
-import { NBaseLoading } from '../../_internal'
-import { NPagination } from '../../pagination'
 import { createKey, download, resolveSlot, warnOnce } from '../../_utils'
+import { NPagination } from '../../pagination'
 import { dataTableLight } from '../styles'
-import MainTable from './MainTable'
-import { useCheck } from './use-check'
-import { useTableData } from './use-table-data'
-import { useScroll } from './use-scroll'
-import { useResizable } from './use-resizable'
-import type {
-  RowKey,
-  MainTableRef,
-  DataTableInst,
-  CsvOptionsType
-} from './interface'
 import { dataTableInjectionKey, dataTableProps } from './interface'
-import { useGroupHeader } from './use-group-header'
-import { useExpand } from './use-expand'
+import MainTable from './MainTable'
 import style from './styles/index.cssr'
+import { useCheck } from './use-check'
+import { useExpand } from './use-expand'
+import { useGroupHeader } from './use-group-header'
+import { useResizable } from './use-resizable'
+import { useScroll } from './use-scroll'
+import { useTableData } from './use-table-data'
 import { generateCsv } from './utils'
 
 export default defineComponent({
   name: 'DataTable',
   alias: ['AdvancedTable'],
   props: dataTableProps,
-  setup (props, { slots }) {
+  slots: Object as SlotsType<DataTableSlots>,
+  setup(props, { slots }) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.onPageChange !== undefined) {
@@ -89,8 +92,10 @@ export default defineComponent({
       const { bottomBordered } = props
       // do not add bottom bordered class if bordered is true
       // since border is displayed on wrapper
-      if (mergedBorderedRef.value) return false
-      if (bottomBordered !== undefined) return bottomBordered
+      if (mergedBorderedRef.value)
+        return false
+      if (bottomBordered !== undefined)
+        return bottomBordered
       return true
     })
     const themeRef = useTheme(
@@ -103,23 +108,10 @@ export default defineComponent({
     )
     const bodyWidthRef = ref<number | null>(null)
     const mainTableInstRef = ref<MainTableRef | null>(null)
-    const { getResizableWidth, clearResizableWidth, doUpdateResizableWidth } =
-      useResizable()
-    const { rowsRef, colsRef, dataRelatedColsRef, hasEllipsisRef } =
-      useGroupHeader(props, getResizableWidth)
-
-    const downloadCsv = (options?: CsvOptionsType): void => {
-      const { fileName = 'data.csv', keepOriginalData = false } = options || {}
-      const data = keepOriginalData ? props.data : rawPaginatedDataRef.value
-      const csvData = generateCsv(props.columns, data)
-      const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8' })
-      const downloadUrl = URL.createObjectURL(blob)
-      download(
-        downloadUrl,
-        fileName.endsWith('.csv') ? fileName : `${fileName}.csv`
-      )
-      URL.revokeObjectURL(downloadUrl)
-    }
+    const { getResizableWidth, clearResizableWidth, doUpdateResizableWidth }
+      = useResizable()
+    const { rowsRef, colsRef, dataRelatedColsRef, hasEllipsisRef }
+      = useGroupHeader(props, getResizableWidth)
 
     const {
       treeMateRef,
@@ -144,6 +136,25 @@ export default defineComponent({
       page,
       sort
     } = useTableData(props, { dataRelatedColsRef })
+
+    const downloadCsv = (options?: CsvOptionsType): void => {
+      const { fileName = 'data.csv', keepOriginalData = false } = options || {}
+      const data = keepOriginalData ? props.data : rawPaginatedDataRef.value
+      const csvData = generateCsv(
+        props.columns,
+        data,
+        props.getCsvCell,
+        props.getCsvHeader
+      )
+      const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8' })
+      const downloadUrl = URL.createObjectURL(blob)
+      download(
+        downloadUrl,
+        fileName.endsWith('.csv') ? fileName : `${fileName}.csv`
+      )
+      URL.revokeObjectURL(downloadUrl)
+    }
+
     const {
       doCheckAll,
       doUncheckAll,
@@ -190,10 +201,10 @@ export default defineComponent({
       // virtual |descrete header | ellpisis => fixed
       //    = virtual | maxHeight | ellpisis => fixed
       if (
-        props.virtualScroll ||
-        props.flexHeight ||
-        props.maxHeight !== undefined ||
-        hasEllipsisRef.value
+        props.virtualScroll
+        || props.flexHeight
+        || props.maxHeight !== undefined
+        || hasEllipsisRef.value
       ) {
         return 'fixed'
       }
@@ -241,6 +252,11 @@ export default defineComponent({
       renderExpandRef,
       summaryRef: toRef(props, 'summary'),
       virtualScrollRef: toRef(props, 'virtualScroll'),
+      virtualScrollXRef: toRef(props, 'virtualScrollX'),
+      heightForRowRef: toRef(props, 'heightForRow'),
+      minRowHeightRef: toRef(props, 'minRowHeight'),
+      virtualScrollHeaderRef: toRef(props, 'virtualScrollHeader'),
+      headerHeightRef: toRef(props, 'headerHeight'),
       rowPropsRef: toRef(props, 'rowProps'),
       stripedRef: toRef(props, 'striped'),
       checkOptionsRef: computed(() => {
@@ -266,6 +282,7 @@ export default defineComponent({
       headerCheckboxDisabledRef,
       paginationBehaviorOnFilterRef: toRef(props, 'paginationBehaviorOnFilter'),
       summaryPlacementRef: toRef(props, 'summaryPlacement'),
+      filterIconPopoverPropsRef: toRef(props, 'filterIconPopoverProps'),
       scrollbarPropsRef: toRef(props, 'scrollbarProps'),
       syncScrollState,
       doUpdatePage,
@@ -295,7 +312,6 @@ export default defineComponent({
       clearFilter,
       downloadCsv,
       scrollTo: (arg0: any, arg1?: any) => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         mainTableInstRef.value?.scrollTo(arg0, arg1)
       }
     }
@@ -306,6 +322,12 @@ export default defineComponent({
         self: {
           borderColor,
           tdColorHover,
+          tdColorSorting,
+          tdColorSortingModal,
+          tdColorSortingPopover,
+          thColorSorting,
+          thColorSortingModal,
+          thColorSortingPopover,
           thColor,
           thColorHover,
           tdColor,
@@ -387,27 +409,36 @@ export default defineComponent({
         '--n-opacity-loading': opacityLoading,
         '--n-td-color-striped': tdColorStriped,
         '--n-td-color-striped-modal': tdColorStripedModal,
-        '--n-td-color-striped-popover': tdColorStripedPopover
+        '--n-td-color-striped-popover': tdColorStripedPopover,
+        '--n-td-color-sorting': tdColorSorting,
+        '--n-td-color-sorting-modal': tdColorSortingModal,
+        '--n-td-color-sorting-popover': tdColorSortingPopover,
+        '--n-th-color-sorting': thColorSorting,
+        '--n-th-color-sorting-modal': thColorSortingModal,
+        '--n-th-color-sorting-popover': thColorSortingPopover
       }
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'data-table',
-        computed(() => props.size[0]),
-        cssVarsRef,
-        props
-      )
+          'data-table',
+          computed(() => props.size[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
     const mergedShowPaginationRef = computed(() => {
-      if (!props.pagination) return false
-      if (props.paginateSinglePage) return true
+      if (!props.pagination)
+        return false
+      if (props.paginateSinglePage)
+        return true
       const mergedPagination = mergedPaginationRef.value
       const { pageCount } = mergedPagination
-      if (pageCount !== undefined) return pageCount > 1
+      if (pageCount !== undefined)
+        return pageCount > 1
       return (
-        mergedPagination.itemCount &&
-        mergedPagination.pageSize &&
-        mergedPagination.itemCount > mergedPagination.pageSize
+        mergedPagination.itemCount
+        && mergedPagination.pageSize
+        && mergedPagination.itemCount > mergedPagination.pageSize
       )
     })
     return {
@@ -426,7 +457,7 @@ export default defineComponent({
       ...exposedMethods
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, themeClass, onRender, $slots, spinProps } = this
     onRender?.()
     return (

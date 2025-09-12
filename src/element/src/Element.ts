@@ -1,10 +1,10 @@
-import { computed, h, defineComponent } from 'vue'
-import { kebabCase } from 'lodash-es'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { elementLight } from '../styles'
 import type { ElementTheme } from '../styles'
+import { kebabCase } from 'lodash-es'
+import { computed, defineComponent, h } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { elementLight } from '../styles'
 
 export const elementProps = {
   ...(useTheme.props as ThemeProps<ElementTheme>),
@@ -20,7 +20,7 @@ export default defineComponent({
   name: 'Element',
   alias: ['El'],
   props: elementProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Element',
@@ -49,7 +49,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { tag, mergedClsPrefix, cssVars, themeClass, onRender, $slots } = this
     onRender?.()
     return h(

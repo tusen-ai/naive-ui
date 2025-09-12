@@ -1,14 +1,20 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { h, defineComponent, computed, type PropType } from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { pageHeaderLight } from '../styles/light'
-import type { PageHeaderTheme } from '../styles/light'
-import style from './styles/index.cssr'
-import { ArrowBackIcon } from '../../_internal/icons'
-import { NBaseIcon } from '../../_internal'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type { PageHeaderTheme } from '../styles/light'
+import {
+  computed,
+  defineComponent,
+  h,
+  type PropType,
+  type SlotsType,
+  type VNode
+} from 'vue'
+import { NBaseIcon } from '../../_internal'
+import { ArrowBackIcon } from '../../_internal/icons'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
+import { pageHeaderLight } from '../styles/light'
+import style from './styles/index.cssr'
 
 export const pageHeaderProps = {
   ...(useTheme.props as ThemeProps<PageHeaderTheme>),
@@ -20,12 +26,24 @@ export const pageHeaderProps = {
 
 export type PageHeaderProps = ExtractPublicPropTypes<typeof pageHeaderProps>
 
+export interface PageHeaderSlots {
+  avatar?: () => VNode[]
+  header?: () => VNode[]
+  default?: () => VNode[]
+  extra?: () => VNode[]
+  footer?: () => VNode[]
+  subtitle?: () => VNode[]
+  title?: () => VNode[]
+  back?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'PageHeader',
   props: pageHeaderProps,
-  setup (props) {
-    const { mergedClsPrefixRef, mergedRtlRef, inlineThemeDisabled } =
-      useConfig(props)
+  slots: Object as SlotsType<PageHeaderSlots>,
+  setup(props) {
+    const { mergedClsPrefixRef, mergedRtlRef, inlineThemeDisabled }
+      = useConfig(props)
     const themeRef = useTheme(
       'PageHeader',
       '-page-header',
@@ -74,9 +92,9 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
-    const { onBack, title, subtitle, extra, mergedClsPrefix, cssVars, $slots } =
-      this
+  render() {
+    const { onBack, title, subtitle, extra, mergedClsPrefix, cssVars, $slots }
+      = this
     this.onRender?.()
     const {
       title: titleSlot,

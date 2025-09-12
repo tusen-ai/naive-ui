@@ -31,7 +31,7 @@ const ukUA: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
-    weekFormat: 'yyyy-w',
+    weekFormat: 'YYYY-w',
     clear: 'Стерти',
     now: 'Зараз',
     confirm: 'Підтвердити',
@@ -123,6 +123,12 @@ const ukUA: NLocale = {
     tipDownload: 'звантажити',
     tipClose: 'Закрити (Esc)',
     tipOriginalSize: 'Масштабувати до оригінального розміру'
+  },
+  Heatmap: {
+    less: 'менше',
+    more: 'більше',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

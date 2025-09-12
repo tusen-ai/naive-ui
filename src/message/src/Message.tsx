@@ -1,30 +1,31 @@
+import type { MessageRenderMessage, MessageType } from './types'
+/* eslint-disable no-cond-assign */
 import {
   computed,
-  h,
-  defineComponent,
-  inject,
-  type VNodeChild,
   type CSSProperties,
-  type PropType
+  defineComponent,
+  h,
+  inject,
+  type PropType,
+  type VNodeChild
 } from 'vue'
 import {
+  NBaseClose,
+  NBaseIcon,
+  NBaseLoading,
+  NIconSwitchTransition
+} from '../../_internal'
+import {
+  ErrorIcon,
   InfoIcon,
   SuccessIcon,
-  WarningIcon,
-  ErrorIcon
+  WarningIcon
 } from '../../_internal/icons'
-import {
-  NIconSwitchTransition,
-  NBaseLoading,
-  NBaseIcon,
-  NBaseClose
-} from '../../_internal'
-import { render, createKey } from '../../_utils'
-import { useConfig, useTheme, useThemeClass, useRtl } from '../../_mixins'
+import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
+import { createKey, render } from '../../_utils'
 import { messageLight } from '../styles'
-import { messageProps } from './message-props'
-import type { MessageType, MessageRenderMessage } from './types'
 import { messageProviderInjectionKey } from './context'
+import { messageProps } from './message-props'
 import style from './styles/index.cssr'
 
 const iconRenderMap = {
@@ -41,13 +42,11 @@ export default defineComponent({
     ...messageProps,
     render: Function as PropType<MessageRenderMessage>
   },
-  setup (props) {
+  setup(props) {
     const { inlineThemeDisabled, mergedRtlRef } = useConfig(props)
-    const {
-      props: messageProviderProps,
-      mergedClsPrefixRef
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    } = inject(messageProviderInjectionKey)!
+    const { props: messageProviderProps, mergedClsPrefixRef } = inject(
+      messageProviderInjectionKey
+    )!
     const rtlEnabledRef = useRtl('Message', mergedRtlRef, mergedClsPrefixRef)
     const themeRef = useTheme(
       'Message',
@@ -72,6 +71,7 @@ export default defineComponent({
           fontSize,
           lineHeight,
           borderRadius,
+          border,
           iconColorInfo,
           iconColorSuccess,
           iconColorWarning,
@@ -115,22 +115,23 @@ export default defineComponent({
         '--n-close-icon-color-pressed': closeIconColorPressed,
         '--n-close-icon-color-hover': closeIconColorHover,
         '--n-line-height': lineHeight,
-        '--n-border-radius': borderRadius
+        '--n-border-radius': borderRadius,
+        '--n-border': border
       }
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'message',
-        computed(() => props.type[0]),
-        cssVarsRef,
-        {}
-      )
+          'message',
+          computed(() => props.type[0]),
+          cssVarsRef,
+          {}
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       rtlEnabled: rtlEnabledRef,
       messageProviderProps,
-      handleClose () {
+      handleClose() {
         props.onClose?.()
       },
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
@@ -139,7 +140,7 @@ export default defineComponent({
       placement: messageProviderProps.placement
     }
   },
-  render () {
+  render() {
     const {
       render: renderMessage,
       type,
@@ -178,17 +179,17 @@ export default defineComponent({
               this.rtlEnabled && `${mergedClsPrefix}-message--rtl`
             ]}
           >
-            {(iconNode = createIconVNode(icon, type, mergedClsPrefix)) &&
-            showIcon ? (
-              <div
-                class={`${mergedClsPrefix}-message__icon ${mergedClsPrefix}-message__icon--${type}-type`}
-              >
-                <NIconSwitchTransition>
-                  {{
-                    default: () => iconNode
-                  }}
-                </NIconSwitchTransition>
-              </div>
+            {(iconNode = createIconVNode(icon, type, mergedClsPrefix))
+            && showIcon ? (
+                  <div
+                    class={`${mergedClsPrefix}-message__icon ${mergedClsPrefix}-message__icon--${type}-type`}
+                  >
+                    <NIconSwitchTransition>
+                      {{
+                        default: () => iconNode
+                      }}
+                    </NIconSwitchTransition>
+                  </div>
                 ) : null}
             <div class={`${mergedClsPrefix}-message__content`}>
               {render(content)}
@@ -208,21 +209,23 @@ export default defineComponent({
   }
 })
 
-function createIconVNode (
+function createIconVNode(
   icon: undefined | (() => VNodeChild),
   type: MessageType,
   clsPrefix: string
 ): VNodeChild {
   if (typeof icon === 'function') {
     return icon()
-  } else {
-    const innerIcon =
-      type === 'loading' ? (
+  }
+  else {
+    const innerIcon
+      = type === 'loading' ? (
         <NBaseLoading clsPrefix={clsPrefix} strokeWidth={24} scale={0.85} />
       ) : (
         iconRenderMap[type]()
       )
-    if (!innerIcon) return null
+    if (!innerIcon)
+      return null
     return (
       <NBaseIcon clsPrefix={clsPrefix} key={type}>
         {{

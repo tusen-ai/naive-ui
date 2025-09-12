@@ -18,15 +18,15 @@
 ```
 
 ```js
-import { defineComponent } from 'vue'
 import { useNotification } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 // content
 export default defineComponent({
-  setup () {
+  setup() {
     const notification = useNotification()
     return {
-      warning () {
+      warning() {
         notification.warning({
           content: '...'
         })

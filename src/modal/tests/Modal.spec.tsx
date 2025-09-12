@@ -1,10 +1,9 @@
-import { defineComponent, h, ref } from 'vue'
 import { mount } from '@vue/test-utils'
-import { type ModalProps, NModal } from '../index'
+import { defineComponent, h, ref } from 'vue'
 import { NButton } from '../../button'
+import { type ModalProps, NModal } from '../index'
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function mountModal ({
+function mountModal({
   modalProps,
   show
 }: {
@@ -13,12 +12,12 @@ function mountModal ({
 }) {
   return mount(
     defineComponent({
-      setup () {
+      setup() {
         return {
           show: ref(!!show)
         }
       },
-      render () {
+      render() {
         return [
           <NButton
             onClick={() => {

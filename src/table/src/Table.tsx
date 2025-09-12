@@ -1,17 +1,17 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { TableTheme } from '../styles'
 import {
-  defineComponent,
   computed,
+  type CSSProperties,
+  defineComponent,
   h,
-  type PropType,
-  type CSSProperties
+  type PropType
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
-import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { tableLight } from '../styles'
-import type { TableTheme } from '../styles'
 import style from './styles/index.cssr'
 
 export const tableProps = {
@@ -41,9 +41,9 @@ export type TableProps = ExtractPublicPropTypes<typeof tableProps>
 export default defineComponent({
   name: 'Table',
   props: tableProps,
-  setup (props) {
-    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
-      useConfig(props)
+  setup(props) {
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
+      = useConfig(props)
     const themeRef = useTheme(
       'Table',
       '-table',
@@ -106,13 +106,13 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'table',
-        computed(() => {
-          return props.size[0]
-        }),
-        cssVarsRef,
-        props
-      )
+          'table',
+          computed(() => {
+            return props.size[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       rtlEnabled: rtlEnabledRef,
@@ -122,7 +122,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     this.onRender?.()
     return (

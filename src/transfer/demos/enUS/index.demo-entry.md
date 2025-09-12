@@ -34,10 +34,10 @@ render-source-list.vue
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. | 2.32.0 |
 | source-filterable | `boolean` | `false` | The source filterable state. | 2.32.2 |
 | source-filter-placeholder | `string` | `undefined` | Placeholder for the source items search box. | 2.32.0 |
-| source-title | `string` | `'undefined'` | Source items title. | 2.32.0 |
+| source-title | `string \| (() => VNodeChild)` | `undefined` | Source items title. | 2.32.0, Render function since 2.40.0 |
 | target-filterable | `boolean` | `false` | The target filterable state. | 2.32.2 |
 | target-filter-placeholder | `string` | `undefined` | Placeholder for the target items search box. | 2.32.0 |
-| target-title | `string` | `undefined` | Target items title. | 2.32.0 |
+| target-title | `string \| (() => VNodeChild)` | `undefined` | Target items title. | 2.32.0, Render function since 2.40.0 |
 | value | `Array<string \| number> \| null` | `undefined` | Value when being set manually. | 2.32.0 |
 | on-update:value | `(value: Array<string \| number>) => void` | `undefined` | Callback when the value changes. | 2.32.0 |
 | virtual-scroll | `boolean` | `false` | Enable virtual scrolling. | 2.32.0 |

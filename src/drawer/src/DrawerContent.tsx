@@ -1,14 +1,16 @@
+import type { ScrollbarProps } from '../../_internal'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import {
   type CSSProperties,
   defineComponent,
   h,
   inject,
-  type PropType
+  type PropType,
+  type SlotsType,
+  type VNode
 } from 'vue'
 import { NBaseClose, NScrollbar } from '../../_internal'
-import type { ScrollbarProps } from '../../_internal'
 import { throwError } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { drawerInjectionKey } from './interface'
 
 export const drawerContentProps = {
@@ -30,10 +32,17 @@ export type DrawerContentProps = ExtractPublicPropTypes<
   typeof drawerContentProps
 >
 
+export interface DrawerContentSlots {
+  default?: () => VNode[]
+  header?: () => VNode[]
+  footer?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'DrawerContent',
   props: drawerContentProps,
-  setup () {
+  slots: Object as SlotsType<DrawerContentSlots>,
+  setup() {
     const NDrawer = inject(drawerInjectionKey, null)
     if (!NDrawer) {
       throwError(
@@ -42,7 +51,7 @@ export default defineComponent({
       )
     }
     const { doUpdateShow } = NDrawer
-    function handleCloseClick (): void {
+    function handleCloseClick(): void {
       doUpdateShow(false)
     }
     return {
@@ -51,7 +60,7 @@ export default defineComponent({
       mergedClsPrefix: NDrawer.mergedClsPrefixRef
     }
   },
-  render () {
+  render() {
     const {
       title,
       mergedClsPrefix,
@@ -74,8 +83,8 @@ export default defineComponent({
         role="none"
         class={[
           `${mergedClsPrefix}-drawer-content`,
-          nativeScrollbar &&
-            `${mergedClsPrefix}-drawer-content--native-scrollbar`
+          nativeScrollbar
+          && `${mergedClsPrefix}-drawer-content--native-scrollbar`
         ]}
       >
         {$slots.header || title || closable ? (

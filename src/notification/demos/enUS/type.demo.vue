@@ -2,6 +2,22 @@
 # Type
 </markdown>
 
+<script lang="ts" setup>
+import type { NotificationType } from 'naive-ui'
+import { useNotification } from 'naive-ui'
+
+const notification = useNotification()
+
+function notify(type: NotificationType) {
+  notification[type]({
+    content: 'What to say?',
+    meta: 'I don\'t know',
+    duration: 2500,
+    keepAliveOnHover: true
+  })
+}
+</script>
+
 <template>
   <n-space>
     <n-button @click="notify('info')">
@@ -18,24 +34,3 @@
     </n-button>
   </n-space>
 </template>
-
-<script lang="ts">
-import { useNotification, NotificationType } from 'naive-ui'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const notification = useNotification()
-    return {
-      notify (type: NotificationType) {
-        notification[type]({
-          content: 'What to say?',
-          meta: "I don't know",
-          duration: 2500,
-          keepAliveOnHover: true
-        })
-      }
-    }
-  }
-})
-</script>

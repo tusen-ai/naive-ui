@@ -1,34 +1,42 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { CalendarTheme } from '../styles'
+import type {
+  CalendarDefaultSlotProps,
+  CalendarHeaderSlotProps,
+  DateItem,
+  OnPanelChange,
+  OnUpdateValue
+} from './interface'
+import {
+  addMonths,
+  format,
+  getMonth,
+  getYear,
+  startOfDay,
+  startOfMonth
+} from 'date-fns'
+import { useMergedState } from 'vooks'
 import {
   computed,
-  defineComponent,
-  h,
-  ref,
-  type PropType,
   type CSSProperties,
+  defineComponent,
   Fragment,
-  toRef
+  h,
+  type PropType,
+  ref,
+  type SlotsType,
+  toRef,
+  type VNode
 } from 'vue'
-import {
-  format,
-  getYear,
-  addMonths,
-  startOfDay,
-  startOfMonth,
-  getMonth
-} from 'date-fns/esm'
-import { useMergedState } from 'vooks'
-import { dateArray } from '../../date-picker/src/utils'
-import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
 import { NBaseIcon } from '../../_internal'
-import { call, resolveSlotWithProps } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
+import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
+import { call, resolveSlotWithTypedProps } from '../../_utils'
 import { NButton } from '../../button'
 import { NButtonGroup } from '../../button-group'
-import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
+import { dateArray } from '../../date-picker/src/utils'
 import { calendarLight } from '../styles'
-import type { CalendarTheme } from '../styles'
-import type { OnUpdateValue, DateItem, OnPanelChange } from './interface'
 import style from './styles/index.cssr'
 
 export const calendarProps = {
@@ -46,10 +54,16 @@ export const calendarProps = {
 
 export type CalendarProps = ExtractPublicPropTypes<typeof calendarProps>
 
+export interface CalendarSlots {
+  default?: (props: CalendarDefaultSlotProps) => VNode[]
+  header?: (props: CalendarHeaderSlotProps) => VNode[]
+}
+
 export default defineComponent({
   name: 'Calendar',
   props: calendarProps,
-  setup (props) {
+  slots: Object as SlotsType<CalendarSlots>,
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Calendar',
@@ -69,7 +83,7 @@ export default defineComponent({
       uncontrolledValueRef
     )
 
-    function doUpdateValue (value: number, time: DateItem): void {
+    function doUpdateValue(value: number, time: DateItem): void {
       const { onUpdateValue, 'onUpdate:value': _onUpdateValue } = props
       if (onUpdateValue) {
         call(onUpdateValue, value, time)
@@ -80,7 +94,7 @@ export default defineComponent({
       uncontrolledValueRef.value = value
     }
 
-    function handlePrevClick (): void {
+    function handlePrevClick(): void {
       const monthTs = addMonths(monthTsRef.value, -1).valueOf()
       monthTsRef.value = monthTs
       props.onPanelChange?.({
@@ -88,7 +102,7 @@ export default defineComponent({
         month: getMonth(monthTs) + 1
       })
     }
-    function handleNextClick (): void {
+    function handleNextClick(): void {
       const monthTs = addMonths(monthTsRef.value, 1).valueOf()
       monthTsRef.value = monthTs
       props.onPanelChange?.({
@@ -96,7 +110,7 @@ export default defineComponent({
         month: getMonth(monthTs) + 1
       })
     }
-    function handleTodayClick (): void {
+    function handleTodayClick(): void {
       const { value: monthTs } = monthTsRef
       const oldYear = getYear(monthTs)
       const oldMonth = getMonth(monthTs)
@@ -190,7 +204,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const {
       isDateDisabled,
       mergedClsPrefix,
@@ -217,7 +231,7 @@ export default defineComponent({
       >
         <div class={`${mergedClsPrefix}-calendar-header`}>
           <div class={`${mergedClsPrefix}-calendar-header__title`}>
-            {resolveSlotWithProps(
+            {resolveSlotWithTypedProps(
               $slots.header,
               { year, month: calendarMonth },
               () => {
@@ -298,15 +312,16 @@ export default defineComponent({
                   class={[
                     `${mergedClsPrefix}-calendar-cell`,
                     disabled && `${mergedClsPrefix}-calendar-cell--disabled`,
-                    notInCurrentMonth &&
-                      `${mergedClsPrefix}-calendar-cell--other-month`,
+                    notInCurrentMonth
+                    && `${mergedClsPrefix}-calendar-cell--other-month`,
                     disabled && `${mergedClsPrefix}-calendar-cell--not-allowed`,
-                    isCurrentDate &&
-                      `${mergedClsPrefix}-calendar-cell--current`,
+                    isCurrentDate
+                    && `${mergedClsPrefix}-calendar-cell--current`,
                     selected && `${mergedClsPrefix}-calendar-cell--selected`
                   ]}
                   onClick={() => {
-                    if (disabled) return
+                    if (disabled)
+                      return
                     const monthTs = startOfMonth(ts).valueOf()
                     this.monthTs = monthTs
                     if (notInCurrentMonth) {

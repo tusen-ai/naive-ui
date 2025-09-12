@@ -31,7 +31,7 @@ const skSK: NLocale = {
     dateFormat: 'd-M-yyyy',
     dateTimeFormat: 'd-M-yyyy HH:mm:ss',
     quarterFormat: 'qqq-yyyy',
-    weekFormat: 'yyyy-w',
+    weekFormat: 'YYYY-w',
     clear: 'Vyčistiť',
     now: 'Teraz',
     confirm: 'Potvrdiť',
@@ -122,6 +122,12 @@ const skSK: NLocale = {
     tipDownload: 'Sťahovať',
     tipClose: 'Zavrieť (Esc)',
     tipOriginalSize: 'Priblížiť na pôvodnú veľkosť'
+  },
+  Heatmap: {
+    less: 'menej',
+    more: 'viac',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

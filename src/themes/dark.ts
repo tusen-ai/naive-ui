@@ -1,22 +1,24 @@
+import type { BuiltInGlobalTheme } from './interface'
+import { scrollbarDark } from '../_internal/scrollbar/styles'
 import { commonDark } from '../_styles/common'
 import { alertDark } from '../alert/styles'
 import { anchorDark } from '../anchor/styles'
 import { autoCompleteDark } from '../auto-complete/styles'
-import { avatarDark } from '../avatar/styles'
 import { avatarGroupDark } from '../avatar-group/styles'
+import { avatarDark } from '../avatar/styles'
 import { backTopDark } from '../back-top/styles'
 import { badgeDark } from '../badge/styles'
 import { breadcrumbDark } from '../breadcrumb/styles'
-import { buttonDark } from '../button/styles'
 import { buttonGroupDark } from '../button-group/styles'
+import { buttonDark } from '../button/styles'
 import { calendarDark } from '../calendar/styles'
 import { cardDark } from '../card/styles'
 import { carouselDark } from '../carousel/styles'
 import { cascaderDark } from '../cascader/styles'
 import { checkboxDark } from '../checkbox/styles'
 import { codeDark } from '../code/styles'
-import { collapseDark } from '../collapse/styles'
 import { collapseTransitionDark } from '../collapse-transition/styles'
+import { collapseDark } from '../collapse/styles'
 import { colorPickerDark } from '../color-picker/styles'
 import { dataTableDark } from '../data-table/styles'
 import { datePickerDark } from '../date-picker/styles'
@@ -31,21 +33,25 @@ import { elementDark } from '../element/styles'
 import { ellipsisDark } from '../ellipsis/styles'
 import { emptyDark } from '../empty/styles'
 import { equationDark } from '../equation/styles'
-import { formDark } from '../form/styles'
+import { floatButtonGroupDark } from '../float-button-group/styles'
 import { floatButtonDark } from '../float-button/styles'
+import { formDark } from '../form/styles'
 import { gradientTextDark } from '../gradient-text/styles'
-import { iconDark } from '../icon/styles'
+import { heatmapDark } from '../heatmap/styles'
 import { iconWrapperDark } from '../icon-wrapper/styles'
+import { iconDark } from '../icon/styles'
 import { imageDark } from '../image/styles'
-import { inputDark } from '../input/styles'
 import { inputNumberDark } from '../input-number/styles'
+import { inputDark } from '../input/styles'
 import { layoutDark } from '../layout/styles'
+import { rowDark } from '../legacy-grid/styles'
 import { legacyTransferDark } from '../legacy-transfer/styles'
 import { listDark } from '../list/styles'
 import { loadingBarDark } from '../loading-bar/styles'
 import { logDark } from '../log/styles'
-import { menuDark } from '../menu/styles'
+import { marqueeDark } from '../marquee/styles'
 import { mentionDark } from '../mention/styles'
+import { menuDark } from '../menu/styles'
 import { messageDark } from '../message/styles'
 import { modalDark } from '../modal/styles'
 import { notificationDark } from '../notification/styles'
@@ -59,15 +65,15 @@ import { qrcodeDark } from '../qr-code/styles'
 import { radioDark } from '../radio/styles'
 import { rateDark } from '../rate/styles'
 import { resultDark } from '../result/styles'
-import { rowDark } from '../legacy-grid/styles'
-import { scrollbarDark } from '../_internal/scrollbar/styles'
 import { selectDark } from '../select/styles'
 import { skeletonDark } from '../skeleton/styles'
 import { sliderDark } from '../slider/styles'
 import { spaceDark } from '../space/styles'
 import { spinDark } from '../spin/styles'
+import { splitDark } from '../split/styles'
 import { statisticDark } from '../statistic/styles'
 import { stepsDark } from '../steps/styles'
+import { flexDark, inputOtpDark } from '../styles'
 import { switchDark } from '../switch/styles'
 import { tableDark } from '../table/styles'
 import { tabsDark } from '../tabs/styles'
@@ -78,14 +84,10 @@ import { timelineDark } from '../timeline/styles'
 import { tooltipDark } from '../tooltip/styles'
 import { transferDark } from '../transfer/styles'
 import { treeSelectDark } from '../tree-select/styles'
-import { typographyDark } from '../typography/styles'
 import { treeDark } from '../tree/styles'
+import { typographyDark } from '../typography/styles'
 import { uploadDark } from '../upload/styles'
 import { watermarkDark } from '../watermark/styles'
-import { splitDark } from '../split/styles'
-import type { BuiltInGlobalTheme } from './interface'
-import { flexDark } from '../styles'
-import { floatButtonGroupDark } from '../float-button-group/styles'
 
 export const darkTheme: BuiltInGlobalTheme = {
   name: 'dark',
@@ -125,11 +127,13 @@ export const darkTheme: BuiltInGlobalTheme = {
   Flex: flexDark,
   Form: formDark,
   GradientText: gradientTextDark,
+  Heatmap: heatmapDark,
   Icon: iconDark,
   IconWrapper: iconWrapperDark,
   Image: imageDark,
   Input: inputDark,
   InputNumber: inputNumberDark,
+  InputOtp: inputOtpDark,
   LegacyTransfer: legacyTransferDark,
   Layout: layoutDark,
   List: listDark,
@@ -175,5 +179,6 @@ export const darkTheme: BuiltInGlobalTheme = {
   Watermark: watermarkDark,
   Split: splitDark,
   FloatButton: floatButtonDark,
-  FloatButtonGroup: floatButtonGroupDark
+  FloatButtonGroup: floatButtonGroupDark,
+  Marquee: marqueeDark
 }

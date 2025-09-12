@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/non-nullable-type-assertion-style */
 import { mount } from '@vue/test-utils'
 import { h } from 'vue'
-import { NTimePicker } from '../index'
 import { NInput } from '../../input'
+import { NTimePicker } from '../index'
 
 describe('n-time-picker', () => {
   it('should work with import on demand', () => {
@@ -116,7 +115,6 @@ describe('n-time-picker', () => {
   })
   it('should work with `on-blur` prop when use `ok` button', async () => {
     const onBlur = jest.fn()
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     const Render = () => {
       return h('div', null, [
         h(NTimePicker, {

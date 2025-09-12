@@ -1,10 +1,10 @@
-import { computed, defineComponent, h, provide, toRef } from 'vue'
-import type { PropType, CSSProperties, Ref } from 'vue'
-import { useConfig, useTheme, useThemeClass, useRtl } from '../../_mixins'
+import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
+import type { ListTheme } from '../styles'
+import { computed, defineComponent, h, provide, toRef } from 'vue'
+import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import { createInjectionKey, type ExtractPublicPropTypes } from '../../_utils'
 import { listLight } from '../styles'
-import type { ListTheme } from '../styles'
 import style from './styles/index.cssr'
 
 export const listProps = {
@@ -24,6 +24,12 @@ export const listProps = {
 
 export type ListProps = ExtractPublicPropTypes<typeof listProps>
 
+export interface ListSlots {
+  default?: () => VNode[]
+  footer?: () => VNode[]
+  header?: () => VNode[]
+}
+
 interface ListInjection {
   showDividerRef: Ref<boolean>
   mergedClsPrefixRef: Ref<string>
@@ -34,9 +40,10 @@ export const listInjectionKey = createInjectionKey<ListInjection>('n-list')
 export default defineComponent({
   name: 'List',
   props: listProps,
-  setup (props) {
-    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
-      useConfig(props)
+  slots: Object as SlotsType<ListSlots>,
+  setup(props) {
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
+      = useConfig(props)
     const rtlEnabledRef = useRtl('List', mergedRtlRef, mergedClsPrefixRef)
     const themeRef = useTheme(
       'List',
@@ -96,7 +103,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { $slots, mergedClsPrefix, onRender } = this
     onRender?.()
     return (

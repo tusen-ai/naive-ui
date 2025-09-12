@@ -2,6 +2,12 @@
 # Placement
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const overlap = ref(false)
+</script>
+
 <template>
   <n-switch v-model:value="overlap" /> Overlap Trigger Element
   <n-divider />
@@ -128,17 +134,6 @@
     </n-popover>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      overlap: ref(false)
-    }
-  }
-})
-</script>
 
 <style>
 .popover-grid {

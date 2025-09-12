@@ -1,11 +1,11 @@
-import { changeColor } from 'seemly'
-import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
+import { changeColor } from 'seemly'
 import { createTheme } from '../../_mixins/use-theme'
-import commonVariables from './_common'
+import { commonLight } from '../../_styles/common'
 import { popoverLight } from '../../popover/styles'
+import commonVariables from './_common'
 
-export const self = (vars: ThemeCommonVars) => {
+export function self(vars: ThemeCommonVars) {
   const {
     primaryColor,
     textColor2,

@@ -1,5 +1,5 @@
-import { commonDark } from '../../_styles/common'
 import type { ButtonGroupTheme } from './light'
+import { commonDark } from '../../_styles/common'
 
 const buttonGroupDark: ButtonGroupTheme = {
   name: 'ButtonGroup',

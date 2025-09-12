@@ -10,6 +10,7 @@ bordered.vue
 closable.vue
 icon.vue
 no-icon.vue
+marquee.vue
 ```
 
 ## API

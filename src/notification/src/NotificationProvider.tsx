@@ -1,31 +1,30 @@
-/* eslint-disable @typescript-eslint/no-dynamic-delete */
+import type { MergedTheme, ThemeProps } from '../../_mixins'
+import type { NotificationOptions } from './NotificationEnvironment'
+import { createId } from 'seemly'
 import {
+  type CSSProperties,
+  defineComponent,
+  type ExtractPropTypes,
   Fragment,
   h,
-  reactive,
-  ref,
-  Teleport,
-  defineComponent,
   type PropType,
-  type ExtractPropTypes,
   provide,
+  reactive,
   type Ref,
-  type CSSProperties
+  ref,
+  Teleport
 } from 'vue'
-import { createId } from 'seemly'
 import { useConfig, useTheme } from '../../_mixins'
-import type { MergedTheme, ThemeProps } from '../../_mixins'
 import {
+  createInjectionKey,
   type ExtractPublicPropTypes,
-  omit,
   type Mutable,
-  createInjectionKey
+  omit
 } from '../../_utils'
 import { notificationLight, type NotificationTheme } from '../styles'
+import { notificationProviderInjectionKey } from './context'
 import { NotificationContainer } from './NotificationContainer'
 import { NotificationEnvironment } from './NotificationEnvironment'
-import type { NotificationOptions } from './NotificationEnvironment'
-import { notificationProviderInjectionKey } from './context'
 import style from './styles/index.cssr'
 
 export type NotificationPlacement =
@@ -61,8 +60,8 @@ export interface NotificationApiInjection {
 
 export type NotificationProviderInst = NotificationApiInjection
 
-export const notificationApiInjectionKey =
-  createInjectionKey<NotificationApiInjection>('n-notification-api')
+export const notificationApiInjectionKey
+  = createInjectionKey<NotificationApiInjection>('n-notification-api')
 
 export type NotificationType = 'info' | 'success' | 'warning' | 'error'
 
@@ -103,12 +102,12 @@ export type NotificationProviderProps = ExtractPublicPropTypes<
 export default defineComponent({
   name: 'NotificationProvider',
   props: notificationProviderProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     const notificationListRef = ref<NotificationReactive[]>([])
     const notificationRefs: Record<string, NotificationRef> = {}
     const leavingKeySet = new Set<string>()
-    function create (options: NotificationOptions): NotificationReactive {
+    function create(options: NotificationOptions): NotificationReactive {
       const key = createId()
       const destroy = (): void => {
         leavingKeySet.add(key)
@@ -151,11 +150,11 @@ export default defineComponent({
           create({ ...options, type })
       }
     )
-    function handleAfterLeave (key: string): void {
+    function handleAfterLeave(key: string): void {
       leavingKeySet.delete(key)
       notificationListRef.value.splice(
         notificationListRef.value.findIndex(
-          (notification) => notification.key === key
+          notification => notification.key === key
         ),
         1
       )
@@ -186,10 +185,10 @@ export default defineComponent({
       wipTransitionCountRef
     })
     // deprecated
-    function open (options: NotificationOptions): NotificationReactive {
+    function open(options: NotificationOptions): NotificationReactive {
       return create(options)
     }
-    function destroyAll (): void {
+    function destroyAll(): void {
       Object.values(notificationListRef.value).forEach((notification) => {
         notification.hide()
       })
@@ -204,7 +203,7 @@ export default defineComponent({
       api
     )
   },
-  render () {
+  render() {
     const { placement } = this
     return (
       <>
@@ -229,7 +228,10 @@ export default defineComponent({
                             const refKey = notification.key
                             if (inst === null) {
                               delete this.notificationRefs[refKey]
-                            } else this.notificationRefs[refKey] = inst
+                            }
+                            else {
+                              this.notificationRefs[refKey] = inst
+                            }
                           }) as any
                         }
                         {...omit(notification, [

@@ -2,23 +2,12 @@
 # Rtl Debug
 </markdown>
 
-<template>
-  <n-space><n-switch v-model:value="rtlEnabled" />Rtl</n-space>
-  <n-space>
-    <n-config-provider :rtl="rtlEnabled ? rtlStyles : undefined">
-      <n-dialog-provider>
-        <DialogButton />
-      </n-dialog-provider>
-    </n-config-provider>
-  </n-space>
-</template>
-
-<script lang="ts">
-import { defineComponent, ref, h } from 'vue'
-import { useMessage, useDialog, unstableDialogRtl, NButton } from 'naive-ui'
+<script lang="ts" setup>
+import { NButton, unstableDialogRtl, useDialog, useMessage } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
 
 const DialogButton = defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     const dialog = useDialog()
     return {
@@ -26,7 +15,7 @@ const DialogButton = defineComponent({
       dialog
     }
   },
-  render () {
+  render() {
     return h(
       NButton,
       {
@@ -50,15 +39,17 @@ const DialogButton = defineComponent({
   }
 })
 
-export default defineComponent({
-  components: {
-    DialogButton
-  },
-  setup () {
-    return {
-      rtlEnabled: ref(true),
-      rtlStyles: [unstableDialogRtl]
-    }
-  }
-})
+const rtlEnabled = ref(true)
+const rtlStyles = [unstableDialogRtl]
 </script>
+
+<template>
+  <n-space><n-switch v-model:value="rtlEnabled" />Rtl</n-space>
+  <n-space>
+    <n-config-provider :rtl="rtlEnabled ? rtlStyles : undefined">
+      <n-dialog-provider>
+        <DialogButton />
+      </n-dialog-provider>
+    </n-config-provider>
+  </n-space>
+</template>

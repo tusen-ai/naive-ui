@@ -1,9 +1,9 @@
-import { h, defineComponent, type PropType } from 'vue'
+import { defineComponent, h, type PropType } from 'vue'
+import { resolveSlot } from '../../../_utils/vue'
 import NBaseClear from '../../clear'
-import NBaseLoading from '../../loading'
 import { NBaseIcon } from '../../icon'
 import { ChevronDownIcon } from '../../icons'
-import { resolveSlot } from '../../../_utils/vue'
+import NBaseLoading from '../../loading'
 
 export default defineComponent({
   name: 'InternalSelectionSuffix',
@@ -26,7 +26,7 @@ export default defineComponent({
     },
     onClear: Function as PropType<(e: MouseEvent) => void>
   },
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     return () => {
       const { clsPrefix } = props
       return (

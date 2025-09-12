@@ -36,10 +36,10 @@ value-debug.vue
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 | 2.32.0 |
 | source-filterable | `boolean` | `false` | 源项是否可过滤 | 2.32.2 |
 | source-filter-placeholder | `string` | `undefined` | 源项搜索框中的占位符 | 2.32.0 |
-| source-title | `string` | `undefined` | 源项标题 | 2.32.0 |
+| source-title | `string \| (() => VNodeChild)` | `undefined` | 源项标题 | 2.32.0，2.40.0 支持 render 函数 |
 | target-filterable | `boolean` | `false` | 目标项是否可过滤 | 2.32.2 |
 | target-filter-placeholder | `string` | `undefined` | 目标项搜索框中的占位符 | 2.32.0 |
-| target-title | `string` | `undefined` | 目标项标题 | 2.32.0 |
+| target-title | `string \| (() => VNodeChild)` | `undefined` | 目标项标题 | 2.32.0，2.40.0 支持 render 函数 |
 | value | `Array<string \| number> \| null` | `undefined` | 受控模式下的值 | 2.32.0 |
 | on-update:value | `(value: Array<string \| number>) => void` | `undefined` | 值发生改变时的回调 | 2.32.0 |
 | virtual-scroll | `boolean` | `false` | 是否启用虚拟滚动 | 2.32.0 |

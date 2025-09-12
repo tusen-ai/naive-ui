@@ -1,12 +1,12 @@
+import type { AlertTheme } from './light'
 import { changeColor } from 'seemly'
 import { commonDark } from '../../_styles/common'
-import type { AlertTheme } from './light'
 import commonVars from './_common'
 
 const alertDark: AlertTheme = {
   name: 'Alert',
   common: commonDark,
-  self (vars) {
+  self(vars) {
     const {
       lineHeight,
       borderRadius,

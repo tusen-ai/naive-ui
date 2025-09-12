@@ -48,12 +48,13 @@ custom-field.vue
 | filterable | `boolean` | `false` | Whether options can be filtered. |  |
 | filter | `(pattern: string, option: Object) => boolean` | String search method. | Filter function. |  |
 | ignore-composition | `boolean` | `true` | Ingore IME's composition status. By default `filter` won't be triggered by input event under compositions. | 2.33.4 |
-| input-props | `HTMLInputAttributes` | `undefined` | The attributes of input element in the trigger. It only works when the select is filterable. |  |
+| input-props | `InputHTMLAttributes` | `undefined` | The attributes of input element in the trigger. It only works when the select is filterable. |  |
 | keyboard | `boolean` | `true` | Whether to allow keyboard control. | 2.34.4 |
 | label-field | `string` | `'label'` | Field name of option label. | 2.29.1 |
 | loading | `boolean` | `false` | Whether to show a loading state. |  |
 | max-tag-count | `number \| 'responsive'` | `undefined` | Maximum selected values to display while in `multiple` mode. `responsive` will keep all the tags in single line. |  |
 | menu-props | `HTMLAttributes` | `undefined` | The menu's dom props. |  |
+| menu-size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | Size of select menu. | 2.40.0 |
 | multiple | `boolean` | `false` | Whether to allow selecting multiple values. |  |
 | node-props | `(option: SelectOption \| SelectGroupOption) => object` | `undefined` | Option's DOM attrs generator. | 2.32.2 |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` | Options that can be selected. For more details see SelectOption Properties (below). |  |

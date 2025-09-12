@@ -1,9 +1,9 @@
-import { changeColor } from 'seemly'
-import { tooltipDark } from '../../tooltip/styles'
-import { dropdownDark } from '../../dropdown/styles'
-import { commonDark } from '../../_styles/common'
-import { self } from './light'
 import type { MenuTheme } from './light'
+import { changeColor } from 'seemly'
+import { commonDark } from '../../_styles/common'
+import { dropdownDark } from '../../dropdown/styles'
+import { tooltipDark } from '../../tooltip/styles'
+import { self } from './light'
 
 const menuDark: MenuTheme = {
   name: 'Menu',
@@ -12,7 +12,7 @@ const menuDark: MenuTheme = {
     Tooltip: tooltipDark,
     Dropdown: dropdownDark
   },
-  self (vars) {
+  self(vars) {
     const { primaryColor, primaryColorSuppl } = vars
     const commonSelf = self(vars)
     commonSelf.itemColorActive = changeColor(primaryColor, { alpha: 0.15 })

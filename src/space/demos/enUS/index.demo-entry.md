@@ -2,7 +2,7 @@
 
 A great invention (which is not invented by me).
 
-If you don't have compitable issue for `gap` CSS property, it's suggested to use [Flex](flex).
+If you don't have compatibility issues for `gap` CSS property, it's suggested to use [Flex](flex).
 
 ## Demos
 

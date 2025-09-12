@@ -31,7 +31,7 @@ const ptBR: NLocale = {
     dateFormat: 'dd/MM/yyyy',
     dateTimeFormat: 'dd/MM/yyyy HH:mm:ss',
     quarterFormat: 'yyyy/qqq',
-    weekFormat: 'yyyy-w',
+    weekFormat: 'YYYY-w',
     clear: 'Limpar',
     now: 'Agora',
     confirm: 'Confirmar',
@@ -122,6 +122,12 @@ const ptBR: NLocale = {
     tipDownload: 'Download',
     tipClose: 'Fechar (Esc)',
     tipOriginalSize: 'Exibir no tamanho original'
+  },
+  Heatmap: {
+    less: 'menos',
+    more: 'mais',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

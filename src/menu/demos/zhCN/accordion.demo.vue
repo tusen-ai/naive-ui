@@ -4,25 +4,18 @@
 像一个手风琴。使用 `accordion` 属性对一级菜单使用该模式。
 </markdown>
 
-<template>
-  <n-menu
-    :options="menuOptions"
-    :default-expanded-keys="defaultExpandedKeys"
-    accordion
-  />
-</template>
-
-<script lang="ts">
-import { defineComponent, h, Component } from 'vue'
-import { NIcon } from 'naive-ui'
+<script lang="ts" setup>
 import type { MenuOption } from 'naive-ui'
+import type { Component } from 'vue'
 import {
+  BagOutline as BagOutlineIcon,
   FishOutline as FishIcon,
-  PawOutline as PawIcon,
-  BagOutline as BagOutlineIcon
+  PawOutline as PawIcon
 } from '@vicons/ionicons5'
+import { NIcon } from 'naive-ui'
+import { h } from 'vue'
 
-function renderIcon (icon: Component) {
+function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -78,12 +71,13 @@ const menuOptions: MenuOption[] = [
   }
 ]
 
-export default defineComponent({
-  setup () {
-    return {
-      menuOptions,
-      defaultExpandedKeys: ['fish', 'braise']
-    }
-  }
-})
+const defaultExpandedKeys = ['fish', 'braise']
 </script>
+
+<template>
+  <n-menu
+    :options="menuOptions"
+    :default-expanded-keys="defaultExpandedKeys"
+    accordion
+  />
+</template>

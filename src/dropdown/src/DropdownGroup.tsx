@@ -1,16 +1,16 @@
-import { defineComponent, Fragment, h, type PropType } from 'vue'
 import type { TreeNode } from 'treemate'
-import { warn } from '../../_utils'
-// eslint-disable-next-line import/no-cycle
-import NDropdownOption from './DropdownOption'
-import NDropdownDivider from './DropdownDivider'
-import NDropdownGroupHeader from './DropdownGroupHeader'
-import { isDividerNode } from './utils'
 import type {
   DropdownGroupOption,
   DropdownIgnoredOption,
   DropdownOption
 } from './interface'
+import { defineComponent, Fragment, h, type PropType } from 'vue'
+
+import { warn } from '../../_utils'
+import NDropdownDivider from './DropdownDivider'
+import NDropdownGroupHeader from './DropdownGroupHeader'
+import NDropdownOption from './DropdownOption'
+import { isDividerNode } from './utils'
 
 export default defineComponent({
   name: 'NDropdownGroup',
@@ -21,7 +21,7 @@ export default defineComponent({
     },
     tmNode: {
       type: Object as PropType<
-      TreeNode<DropdownOption, DropdownGroupOption, DropdownIgnoredOption>
+        TreeNode<DropdownOption, DropdownGroupOption, DropdownIgnoredOption>
       >,
       required: true
     },
@@ -30,7 +30,7 @@ export default defineComponent({
       default: null
     }
   },
-  render () {
+  render() {
     const { tmNode, parentKey, clsPrefix } = this
     const { children } = tmNode
     return (
@@ -42,7 +42,8 @@ export default defineComponent({
         />
         {children?.map((child) => {
           const { rawNode } = child
-          if (rawNode.show === false) return null
+          if (rawNode.show === false)
+            return null
           if (isDividerNode(rawNode)) {
             return h(NDropdownDivider, {
               clsPrefix,

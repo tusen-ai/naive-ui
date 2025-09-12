@@ -4,26 +4,11 @@
 Asynchronous options example for a multiple select case.
 </markdown>
 
-<template>
-  <n-select
-    v-model:value="selectedValues"
-    multiple
-    filterable
-    placeholder="Search Songs"
-    :options="options"
-    :loading="loading"
-    clearable
-    remote
-    :clear-filter-after-select="false"
-    @search="handleSearch"
-  />
-</template>
+<script lang="ts" setup>
+import type { SelectOption } from 'naive-ui'
+import { ref } from 'vue'
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { SelectOption } from 'naive-ui'
-
-const options = [
+const optionsData = [
   {
     label: 'Drive My Car',
     value: 'song1'
@@ -33,7 +18,7 @@ const options = [
     value: 'song2'
   },
   {
-    label: "You Won't See",
+    label: 'You Won\'t See',
     value: 'song3'
   },
   {
@@ -61,7 +46,7 @@ const options = [
     value: 'song9'
   },
   {
-    label: "I'm looking through you",
+    label: 'I\'m looking through you',
     value: 'song10'
   },
   {
@@ -74,29 +59,34 @@ const options = [
   }
 ]
 
-export default defineComponent({
-  setup () {
-    const loadingRef = ref(false)
-    const optionsRef = ref<SelectOption[]>([])
+const selectedValues = ref(null)
+const loadingRef = ref(false)
+const optionsRef = ref<SelectOption[]>([])
 
-    return {
-      selectedValues: ref(null),
-      loading: loadingRef,
-      options: optionsRef,
-      handleSearch: (query: string) => {
-        if (!query.length) {
-          optionsRef.value = []
-          return
-        }
-        loadingRef.value = true
-        window.setTimeout(() => {
-          optionsRef.value = options.filter(
-            (item) => ~item.label.indexOf(query)
-          )
-          loadingRef.value = false
-        }, 1000)
-      }
-    }
+function handleSearch(query: string) {
+  if (!query.length) {
+    optionsRef.value = []
+    return
   }
-})
+  loadingRef.value = true
+  window.setTimeout(() => {
+    optionsRef.value = optionsData.filter(item => ~item.label.indexOf(query))
+    loadingRef.value = false
+  }, 1000)
+}
 </script>
+
+<template>
+  <n-select
+    v-model:value="selectedValues"
+    multiple
+    filterable
+    placeholder="Search Songs"
+    :options="optionsRef"
+    :loading="loadingRef"
+    clearable
+    remote
+    :clear-filter-after-select="false"
+    @search="handleSearch"
+  />
+</template>

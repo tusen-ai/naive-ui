@@ -2,6 +2,12 @@
 # Checkbox group
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const cities = ref(null)
+</script>
+
 <template>
   <n-checkbox-group v-model:value="cities">
     <n-space item-style="display: flex;">
@@ -12,15 +18,3 @@
     </n-space>
   </n-checkbox-group>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      cities: ref(null)
-    }
-  }
-})
-</script>

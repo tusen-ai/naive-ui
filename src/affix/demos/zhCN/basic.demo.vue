@@ -4,6 +4,12 @@
 Affix 有 `trigger-top`、`top`、`trigger-bottom` 和 `bottom` 属性。`trigger-top` 是顶部固定的触发距离，`top` 是在触发顶部固定之后 CSS 的 `top` 值。`trigger-bottom` 和 `bottom` 类似。
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const containerRef = ref<HTMLElement | undefined>(undefined)
+</script>
+
 <template>
   <div ref="containerRef" class="container">
     <div class="padding" />
@@ -27,19 +33,6 @@ Affix 有 `trigger-top`、`top`、`trigger-bottom` 和 `bottom` 属性。`trigge
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const containerRef = ref<HTMLElement | undefined>(undefined)
-    return {
-      containerRef
-    }
-  }
-})
-</script>
 
 <style>
 .container {

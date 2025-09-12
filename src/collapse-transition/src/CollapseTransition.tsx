@@ -1,20 +1,20 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { CollapseTransitionTheme } from '../styles'
 import {
   computed,
-  h,
   defineComponent,
+  h,
   mergeProps,
   type PropType,
   watchEffect
 } from 'vue'
+import { NFadeInExpandTransition } from '../../_internal'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
-import type { ThemeProps } from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { warnOnce } from '../../_utils'
-import type { CollapseTransitionTheme } from '../styles'
-import style from './styles/index.cssr'
 import { collapseTransitionLight } from '../styles'
-import { NFadeInExpandTransition } from '../../_internal'
+import style from './styles/index.cssr'
 
 export const collapseTransitionProps = {
   ...(useTheme.props as ThemeProps<CollapseTransitionTheme>),
@@ -41,7 +41,7 @@ export default defineComponent({
   name: 'CollapseTransition',
   props: collapseTransitionProps,
   inheritAttrs: false,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.collapsed !== undefined) {
@@ -52,8 +52,8 @@ export default defineComponent({
         }
       })
     }
-    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
-      useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
+      = useConfig(props)
     const mergedThemeRef = useTheme(
       'CollapseTransition',
       '-collapse-transition',
@@ -96,12 +96,13 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     return (
       <NFadeInExpandTransition appear={this.appear}>
         {{
           default: () => {
-            if (!this.mergedShow) return
+            if (!this.mergedShow)
+              return
             this.onRender?.()
             return h(
               'div', // Don't use jsx since it would cause useless spread in each rendering
@@ -109,8 +110,8 @@ export default defineComponent({
                 {
                   class: [
                     `${this.mergedClsPrefix}-collapse-transition`,
-                    this.rtlEnabled &&
-                      `${this.mergedClsPrefix}-collapse-transition--rtl`,
+                    this.rtlEnabled
+                    && `${this.mergedClsPrefix}-collapse-transition--rtl`,
                     this.themeClass
                   ],
                   style: this.cssVars

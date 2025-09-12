@@ -48,8 +48,8 @@
 如果你想全局安装但是不想安装全部组件，请参考[按需引入](import-on-demand)。
 
 ```js
-import { createApp } from 'vue'
 import naive from 'naive-ui'
+import { createApp } from 'vue'
 
 const app = createApp(App)
 app.use(naive)

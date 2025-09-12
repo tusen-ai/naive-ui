@@ -1,23 +1,25 @@
-import {
-  h,
-  ref,
-  provide,
-  defineComponent,
-  type PropType,
-  type ExtractPropTypes
-} from 'vue'
-import { popoverBaseProps } from '../../popover/src/Popover'
-import type { PopoverInternalProps } from '../../popover/src/Popover'
-import { NPopover } from '../../popover'
-import type { PopoverInst, PopoverTrigger } from '../../popover'
-import NPopselectPanel, { panelPropKeys, panelProps } from './PopselectPanel'
-import { omit, keep, createRefSetter, mergeEventHandlers } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { popselectLight } from '../styles'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { PopoverInst, PopoverTrigger } from '../../popover'
+import type { PopoverInternalProps } from '../../popover/src/Popover'
 import type { PopselectTheme } from '../styles'
+import {
+  defineComponent,
+  type ExtractPropTypes,
+  h,
+  type PropType,
+  provide,
+  ref,
+  type SlotsType,
+  type VNode
+} from 'vue'
+import { useConfig, useTheme } from '../../_mixins'
+import { createRefSetter, keep, mergeEventHandlers, omit } from '../../_utils'
+import { NPopover } from '../../popover'
+import { popoverBaseProps } from '../../popover/src/Popover'
+import { popselectLight } from '../styles'
 import { popselectInjectionKey, type PopselectInst } from './interface'
+import NPopselectPanel, { panelPropKeys, panelProps } from './PopselectPanel'
 
 export const popselectProps = {
   ...(useTheme.props as ThemeProps<PopselectTheme>),
@@ -36,12 +38,20 @@ export const popselectProps = {
 export type PopselectSetupProps = ExtractPropTypes<typeof popselectProps>
 export type PopselectProps = ExtractPublicPropTypes<typeof popselectProps>
 
+export interface PopselectSlots {
+  default?: () => VNode[]
+  header?: () => VNode[]
+  action?: () => VNode[]
+  empty?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Popselect',
   props: popselectProps,
+  slots: Object as SlotsType<PopselectSlots>,
   inheritAttrs: false,
   __popover__: true,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Popselect',
@@ -52,10 +62,10 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const popoverInstRef = ref<PopoverInst | null>(null)
-    function syncPosition (): void {
+    function syncPosition(): void {
       popoverInstRef.value?.syncPosition()
     }
-    function setShow (value: boolean): void {
+    function setShow(value: boolean): void {
       popoverInstRef.value?.setShow(value)
     }
     provide(popselectInjectionKey, {
@@ -74,7 +84,7 @@ export default defineComponent({
       mergedTheme: themeRef
     }
   },
-  render () {
+  render() {
     const { mergedTheme } = this
     const popoverProps: PopoverInternalProps & { ref: string } = {
       theme: mergedTheme.peers.Popover,

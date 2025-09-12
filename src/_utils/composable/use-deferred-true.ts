@@ -1,24 +1,28 @@
-import { ref, type Ref, watch } from 'vue'
+import { type Ref, ref, watch } from 'vue'
 
-export function useDeferredTrue (
+export function useDeferredTrue(
   valueRef: Ref<any>,
   delay: number,
   shouldDelayRef: Ref<boolean>
 ): Ref<boolean> {
-  if (!delay) return valueRef
+  if (!delay)
+    return valueRef
   const delayedRef = ref(valueRef.value)
   let timerId: number | null = null
   watch(valueRef, (value) => {
-    if (timerId !== null) window.clearTimeout(timerId)
+    if (timerId !== null)
+      window.clearTimeout(timerId)
     if (value === true) {
       if (shouldDelayRef && !shouldDelayRef.value) {
         delayedRef.value = true
-      } else {
+      }
+      else {
         timerId = window.setTimeout(() => {
           delayedRef.value = true
         }, delay)
       }
-    } else {
+    }
+    else {
       delayedRef.value = false
     }
   })

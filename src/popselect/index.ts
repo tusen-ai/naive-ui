@@ -1,3 +1,3 @@
-export { default as NPopselect, popselectProps } from './src/Popselect'
 export type { PopselectInst } from './src/interface'
-export type { PopselectProps } from './src/Popselect'
+export { default as NPopselect, popselectProps } from './src/Popselect'
+export type { PopselectProps, PopselectSlots } from './src/Popselect'

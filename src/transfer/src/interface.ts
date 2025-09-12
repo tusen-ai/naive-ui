@@ -1,7 +1,7 @@
 import type { Ref, VNodeChild } from 'vue'
 import type { MergedTheme } from '../../_mixins'
-import { createInjectionKey } from '../../_utils'
 import type { TransferTheme } from '../styles'
+import { createInjectionKey } from '../../_utils'
 
 export type OptionValue = string | number
 export interface Option {
@@ -47,7 +47,7 @@ export interface TransferInjection {
   showSelectedRef: Ref<boolean>
 }
 
-export const transferInjectionKey =
-  createInjectionKey<TransferInjection>('n-transfer')
+export const transferInjectionKey
+  = createInjectionKey<TransferInjection>('n-transfer')
 
 export type OnUpdateValue = (value: OptionValue[]) => void

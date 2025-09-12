@@ -31,7 +31,7 @@ const zhTW: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
-    weekFormat: 'yyyy-w',
+    weekFormat: 'YYYY-w',
     clear: '清除',
     now: '現在',
     confirm: '確定',
@@ -122,6 +122,12 @@ const zhTW: NLocale = {
     tipDownload: '下載',
     tipClose: '關閉（Esc）',
     tipOriginalSize: '縮放到原始尺寸'
+  },
+  Heatmap: {
+    less: '少',
+    more: '多',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

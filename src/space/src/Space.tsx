@@ -1,19 +1,19 @@
-import {
-  h,
-  defineComponent,
-  computed,
-  type PropType,
-  type CSSProperties,
-  Comment
-} from 'vue'
-import { depx, getGap } from 'seemly'
-import { createKey, flatten, getSlot } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import { useConfig, useTheme } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { spaceLight } from '../styles'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { SpaceTheme } from '../styles'
+import { depx, getGap } from 'seemly'
+import {
+  Comment,
+  computed,
+  type CSSProperties,
+  defineComponent,
+  h,
+  type PropType
+} from 'vue'
+import { useConfig, useTheme } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
+import { createKey, flatten, getSlot } from '../../_utils'
+import { spaceLight } from '../styles'
 import { ensureSupportFlexGap } from './utils'
 
 type Align =
@@ -45,7 +45,7 @@ export const spaceProps = {
   reverse: Boolean,
   size: {
     type: [String, Number, Array] as PropType<
-    'small' | 'medium' | 'large' | number | [number, number]
+      'small' | 'medium' | 'large' | number | [number, number]
     >,
     default: 'medium'
   },
@@ -71,7 +71,7 @@ export type SpaceProps = ExtractPublicPropTypes<typeof spaceProps>
 export default defineComponent({
   name: 'Space',
   props: spaceProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
     const themeRef = useTheme(
       'Space',
@@ -111,7 +111,7 @@ export default defineComponent({
       })
     }
   },
-  render () {
+  render() {
     const {
       vertical,
       reverse,
@@ -129,7 +129,8 @@ export default defineComponent({
       internalUseGap
     } = this
     const children = flatten(getSlot(this), false)
-    if (!children.length) return null
+    if (!children.length)
+      return null
     const horizontalMargin = `${margin.horizontal}px`
     const semiHorizontalMargin = `${margin.horizontal / 2}px`
     const verticalMargin = `${margin.vertical}px`
@@ -146,13 +147,16 @@ export default defineComponent({
         style={{
           display: inline ? 'inline-flex' : 'flex',
           flexDirection: (() => {
-            if (vertical && !reverse) return 'column'
-            if (vertical && reverse) return 'column-reverse'
-            if (!vertical && reverse) return 'row-reverse'
+            if (vertical && !reverse)
+              return 'column'
+            if (vertical && reverse)
+              return 'column-reverse'
+            if (!vertical && reverse)
+              return 'row-reverse'
             /** (!vertical && !reverse) */ else return 'row'
           })(),
           justifyContent: ['start', 'end'].includes(justify)
-            ? 'flex-' + justify
+            ? `flex-${justify}`
             : justify,
           flexWrap: !wrap || vertical ? 'nowrap' : 'wrap',
           marginTop: useGap || vertical ? '' : `-${semiVerticalMargin}`,
@@ -164,9 +168,9 @@ export default defineComponent({
         {!wrapItem && (useGap || internalUseGap)
           ? children
           : children.map((child, index) =>
-            child.type === Comment ? (
-              child
-            ) : (
+              child.type === Comment ? (
+                child
+              ) : (
                 <div
                   role="none"
                   class={itemClass}
@@ -185,8 +189,8 @@ export default defineComponent({
                         : rtlEnabled
                           ? {
                               marginLeft: isJustifySpace
-                                ? justify === 'space-between' &&
-                                  index === lastIndex
+                                ? justify === 'space-between'
+                                && index === lastIndex
                                   ? ''
                                   : semiHorizontalMargin
                                 : index !== lastIndex
@@ -202,8 +206,8 @@ export default defineComponent({
                             }
                           : {
                               marginRight: isJustifySpace
-                                ? justify === 'space-between' &&
-                                  index === lastIndex
+                                ? justify === 'space-between'
+                                && index === lastIndex
                                   ? ''
                                   : semiHorizontalMargin
                                 : index !== lastIndex
@@ -221,8 +225,8 @@ export default defineComponent({
                 >
                   {child}
                 </div>
-            )
-          )}
+              )
+            )}
       </div>
     )
   }

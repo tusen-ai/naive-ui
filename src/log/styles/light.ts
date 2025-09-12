@@ -1,10 +1,10 @@
-import { scrollbarLight } from '../../_internal/scrollbar/styles'
-import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
-import { codeLight } from '../../code/styles'
+import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import { createTheme } from '../../_mixins'
+import { commonLight } from '../../_styles/common'
+import { codeLight } from '../../code/styles'
 
-const self = (vars: ThemeCommonVars) => {
+function self(vars: ThemeCommonVars) {
   const { textColor2, modalColor, borderColor, fontSize, primaryColor } = vars
   return {
     loaderFontSize: fontSize,

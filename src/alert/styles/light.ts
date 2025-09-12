@@ -1,10 +1,10 @@
+import type { Theme } from '../../_mixins/use-theme'
+import type { ThemeCommonVars } from '../../_styles/common'
 import { changeColor, composite } from 'seemly'
 import { commonLight } from '../../_styles/common'
-import type { ThemeCommonVars } from '../../_styles/common'
-import type { Theme } from '../../_mixins/use-theme'
 import commonVars from './_common'
 
-const self = (vars: ThemeCommonVars) => {
+function self(vars: ThemeCommonVars) {
   const {
     lineHeight,
     borderRadius,

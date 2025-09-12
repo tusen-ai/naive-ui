@@ -2,6 +2,10 @@
 # Password
 </markdown>
 
+<script lang="ts" setup>
+import { Glasses, GlassesOutline } from '@vicons/ionicons5'
+</script>
+
 <template>
   <n-space vertical>
     <n-input
@@ -25,17 +29,3 @@
     </n-input>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { GlassesOutline, Glasses } from '@vicons/ionicons5'
-
-export default defineComponent({
-  setup () {
-    return {
-      GlassesOutline,
-      Glasses
-    }
-  }
-})
-</script>

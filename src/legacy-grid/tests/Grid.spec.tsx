@@ -1,12 +1,12 @@
-import { defineComponent, h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NRow, NCol } from '../index'
+import { defineComponent, h } from 'vue'
+import { NCol, NRow } from '../index'
 
 describe('n-grid', () => {
   it('should work with import on demand', () => {
     mount(
       defineComponent({
-        render () {
+        render() {
           return (
             <NRow>
               {{

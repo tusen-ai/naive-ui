@@ -1,7 +1,7 @@
 <markdown>
 # 尺寸
 
-有 `small`、`medium`、`large` 和 `huge` 尺寸。
+有 `tiny`、 `small`、`medium`、`large` 和 `huge` 尺寸。
 </markdown>
 
 <template>

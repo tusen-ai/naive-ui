@@ -2,83 +2,30 @@
 
 由于 naive-ui 在使用 CSS in JS，在 SSR 的情况下需要一些额外的配置。
 
-## Nuxt
+## 注意
 
-如果你在使用 Nuxt，请确保你在使用 `naive-ui@>=2.29.0`。
+无论在任何框架下使用 SSR，需要确保项目满足以下条件：
 
-### Nuxt 示例
+1. 构建时，任何被直接和间接引用的 `@css-render/*` 和 `css-render` 包版本都 `>=0.15.14`
+2. 构建时，任何被直接和间接引用的每个 `@css-render/*` 和 `css-render` 包最终只都指向一个目标（一个包不会有多个版本，也不会有同一个版本的多个副本）
 
-如果你在使用 Nuxt，参考[例子](https://github.com/07akioni/naive-ui-nuxt-demo)。
+你可以在 lock file 中搜索 `css-render` 去检查是否有重复的包。
 
-### 重点步骤
+如果上述条件没有满足，可能会导致 SSR 构建失败。
 
-1. 安装 `naive-ui` 和 `@css-render/vue3-ssr`
-2. 在 `nuxt.config.ts` 增添下列配置
+如果因为这个原因遇到问题，你可以通过 `package.json` 中的 `resolution` 字段来让所有相关包指向同一个版本来解决问题。
 
-```ts
-import { defineNuxtConfig } from 'nuxt'
+## Nuxt.js
 
-// https://nuxt.com/docs/api/configuration/nuxt-config
-export default defineNuxtConfig({
-  build: {
-    transpile:
-      process.env.NODE_ENV === 'production'
-        ? [
-            'naive-ui',
-            'vueuc',
-            '@css-render/vue3-ssr',
-            '@juggle/resize-observer'
-          ]
-        : ['@juggle/resize-observer']
-  },
-  vite: {
-    optimizeDeps: {
-      include:
-        process.env.NODE_ENV === 'development'
-          ? ['naive-ui', 'vueuc', 'date-fns-tz/formatInTimeZone']
-          : []
-    }
-  }
-})
-```
+参考 [Nuxt.js](nuxtjs)。
 
-3. 在 Nuxt 项目的 `plugins` 文件夹增加这个[插件](https://github.com/07akioni/naive-ui-nuxt-demo/blob/main/plugins/naive-ui.ts)
+## Vitepress
 
-### 在 Nuxt 中使用自动引入
+参考 [Vitepress](vitepress)。
 
-同样可以使用 `unplugin-auto-import` 插件来自动导入 API，使用 `unplugin-vue-components` 插件来按需自动加载组件。
-在这种情况下，`nuxt.config.ts` 会比上面的例子多几行配置。
+## Vite SSG/SSE
 
-```ts
-import AutoImport from 'unplugin-auto-import/vite';
-import Components from 'unplugin-vue-components/vite';
-import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
-
-// https://nuxt.com/docs/api/configuration/nuxt-config
-export default defineNuxtConfig({
-  build: {
-    transpile:
-      process.env.NODE_ENV === 'production' ? ['naive-ui', 'vueuc', '@css-render/vue3-ssr', 'juggle/resize-observer'] : ['@juggle/resize-observer'],
-  },
-  vite: {
-    optimizeDeps: {
-      include: process.env.NODE_ENV === 'development' ? ['naive-ui', 'vueuc', 'date-fns-tz/esm/formatInTimeZone'] : [],
-    },
-    plugins: [
-      AutoImport({
-        imports: [
-          {
-            'naive-ui': ['useDialog', 'useMessage', 'useNotification', 'useLoadingBar'],
-          },
-        ],
-      }),
-      Components({
-        resolvers: [NaiveUiResolver()]
-      })
-    ]
-  }
-});
-```
+参考 [Vite SSG/SSE](vite-ssge)。
 
 ## Vite 示例
 

@@ -2,49 +2,7 @@
 # 尺寸
 </markdown>
 
-<template>
-  <n-space>
-    <n-dropdown
-      placement="bottom-start"
-      trigger="click"
-      size="small"
-      :options="options"
-      @select="handleSelect"
-    >
-      <n-button>小号</n-button>
-    </n-dropdown>
-    <n-dropdown
-      placement="bottom-start"
-      trigger="click"
-      size="medium"
-      :options="options"
-      @select="handleSelect"
-    >
-      <n-button>中号</n-button>
-    </n-dropdown>
-    <n-dropdown
-      placement="bottom-start"
-      trigger="click"
-      size="large"
-      :options="options"
-      @select="handleSelect"
-    >
-      <n-button>大号</n-button>
-    </n-dropdown>
-    <n-dropdown
-      placement="bottom-start"
-      trigger="click"
-      size="huge"
-      :options="options"
-      @select="handleSelect"
-    >
-      <n-button>巨大号</n-button>
-    </n-dropdown>
-  </n-space>
-</template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
 
 const options = [
@@ -94,15 +52,49 @@ const options = [
   }
 ]
 
-export default defineComponent({
-  setup () {
-    const message = useMessage()
-    return {
-      options,
-      handleSelect (key: string | number) {
-        message.info(String(key))
-      }
-    }
-  }
-})
+const message = useMessage()
+function handleSelect(key: string | number) {
+  message.info(String(key))
+}
 </script>
+
+<template>
+  <n-space>
+    <n-dropdown
+      placement="bottom-start"
+      trigger="click"
+      size="small"
+      :options="options"
+      @select="handleSelect"
+    >
+      <n-button>小号</n-button>
+    </n-dropdown>
+    <n-dropdown
+      placement="bottom-start"
+      trigger="click"
+      size="medium"
+      :options="options"
+      @select="handleSelect"
+    >
+      <n-button>中号</n-button>
+    </n-dropdown>
+    <n-dropdown
+      placement="bottom-start"
+      trigger="click"
+      size="large"
+      :options="options"
+      @select="handleSelect"
+    >
+      <n-button>大号</n-button>
+    </n-dropdown>
+    <n-dropdown
+      placement="bottom-start"
+      trigger="click"
+      size="huge"
+      :options="options"
+      @select="handleSelect"
+    >
+      <n-button>巨大号</n-button>
+    </n-dropdown>
+  </n-space>
+</template>

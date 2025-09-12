@@ -1,41 +1,43 @@
+import type { ThemeProps } from '../../_mixins'
+import type { ProgressTheme } from '../styles'
+import type { ProgressGradient, ProgressStatus } from './public-types'
 import {
-  h,
   computed,
+  type CSSProperties,
   defineComponent,
-  type PropType,
-  type CSSProperties
+  h,
+  type PropType
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import { createKey, type ExtractPublicPropTypes } from '../../_utils'
 import { progressLight } from '../styles'
-import type { ProgressTheme } from '../styles'
-import style from './styles/index.cssr'
-import { type Status } from './interface'
-import Line from './Line'
 import Circle from './Circle'
+import Line from './Line'
 import MultipleCircle from './MultipleCircle'
+import style from './styles/index.cssr'
 
 export const progressProps = {
   ...(useTheme.props as ThemeProps<ProgressTheme>),
   processing: Boolean,
   type: {
     type: String as PropType<
-    'line' | 'circle' | 'multiple-circle' | 'dashboard'
+      'line' | 'circle' | 'multiple-circle' | 'dashboard'
     >,
     default: 'line'
   },
   gapDegree: Number,
   gapOffsetDegree: Number,
   status: {
-    type: String as PropType<Status>,
+    type: String as PropType<ProgressStatus>,
     default: 'default'
   },
   railColor: [String, Array] as PropType<string | string[]>,
   railStyle: [String, Array] as PropType<
-  string | CSSProperties | Array<string | CSSProperties>
+    string | CSSProperties | Array<string | CSSProperties>
   >,
-  color: [String, Array] as PropType<string | string[]>,
+  color: [String, Array, Object] as PropType<
+    string | string[] | ProgressGradient | ProgressGradient[]
+  >,
   viewBoxWidth: {
     type: Number,
     default: 100
@@ -77,7 +79,7 @@ export type ProgressProps = ExtractPublicPropTypes<typeof progressProps>
 export default defineComponent({
   name: 'Progress',
   props: progressProps,
-  setup (props) {
+  setup(props) {
     const mergedIndicatorPlacementRef = computed(() => {
       return props.indicatorPlacement || props.indicatorPosition
     })
@@ -138,11 +140,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'progress',
-        computed(() => props.status[0]),
-        cssVarsRef,
-        props
-      )
+          'progress',
+          computed(() => props.status[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
@@ -153,7 +155,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     // it's ok to expand all prop here since no slots' deps
     const {
       type,

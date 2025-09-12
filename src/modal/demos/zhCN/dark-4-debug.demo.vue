@@ -2,6 +2,12 @@
 # Dark Debug 4
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const showModal = ref(false)
+</script>
+
 <template>
   <n-button @click="showModal = !showModal">
     Toggle
@@ -22,14 +28,3 @@
     </n-popover>
   </n-modal>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  data () {
-    return {
-      showModal: false
-    }
-  }
-})
-</script>

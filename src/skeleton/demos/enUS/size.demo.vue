@@ -4,6 +4,12 @@
 Use `size` to make its height the same as other components.
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const loading = ref(true)
+</script>
+
 <template>
   <n-space vertical>
     <n-space><n-switch v-model:value="loading" />Loading</n-space>
@@ -23,15 +29,3 @@ Use `size` to make its height the same as other components.
     </n-space>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      loading: ref(true)
-    }
-  }
-})
-</script>

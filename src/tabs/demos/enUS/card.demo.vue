@@ -4,6 +4,32 @@
 Set `type='card'`.
 </markdown>
 
+<script lang="ts" setup>
+import { useMessage } from 'naive-ui'
+import { ref } from 'vue'
+
+const nameRef = ref(1)
+const message = useMessage()
+const panelsRef = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
+
+function handleClose(name: number) {
+  const { value: panels } = panelsRef
+  if (panels.length === 1) {
+    message.error('The last one!')
+    return
+  }
+  message.info(`Close ${name}`)
+  const index = panels.findIndex(v => name === v)
+  panels.splice(index, 1)
+  if (nameRef.value === name) {
+    nameRef.value = panels[index]
+  }
+}
+
+const name = nameRef
+const panels = panelsRef
+</script>
+
 <template>
   <n-tabs
     v-model:value="name"
@@ -22,34 +48,3 @@ Set `type='card'`.
     </n-tab-pane>
   </n-tabs>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { useMessage } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const nameRef = ref(1)
-    const message = useMessage()
-    const panelsRef = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
-    function handleClose (name: number) {
-      const { value: panels } = panelsRef
-      if (panels.length === 1) {
-        message.error('The last one!')
-        return
-      }
-      message.info('Close ' + name)
-      const index = panels.findIndex((v) => name === v)
-      panels.splice(index, 1)
-      if (nameRef.value === name) {
-        nameRef.value = panels[index]
-      }
-    }
-    return {
-      panels: panelsRef,
-      name: nameRef,
-      handleClose
-    }
-  }
-})
-</script>

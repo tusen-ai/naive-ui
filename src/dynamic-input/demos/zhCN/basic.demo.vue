@@ -4,6 +4,12 @@
 默认状况下，`n-dynamic-input` 的预设是 `input`。
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const value = ref(['', '', ''])
+</script>
+
 <template>
   <n-dynamic-input
     v-model:value="value"
@@ -13,15 +19,3 @@
   />
   <pre>{{ JSON.stringify(value, null, 2) }}</pre>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      value: ref(['', '', ''])
-    }
-  }
-})
-</script>

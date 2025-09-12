@@ -1,4 +1,6 @@
+import type { DiscreteApiType, MaybeRef } from './interface'
 import { type App, type Component, createApp, h, unref, type VNode } from 'vue'
+import { isBrowser, warn } from '../../_utils'
 import {
   type ConfigProviderProps,
   NConfigProvider
@@ -6,11 +8,9 @@ import {
 import { type DialogApi, useDialog } from '../../dialog'
 import { type LoadingBarApi, useLoadingBar } from '../../loading-bar'
 import { type MessageApi, useMessage } from '../../message'
-import { type NotificationApi, useNotification } from '../../notification'
 import { type ModalApi, useModal } from '../../modal'
-import { isBrowser, warn } from '../../_utils'
+import { type NotificationApi, useNotification } from '../../notification'
 import { NInjectionExtractor } from './InjectionExtractor'
-import type { DiscreteApiType, MaybeRef } from './interface'
 
 export type Provider<P = any> = new (...args: any[]) => { $props: P }
 
@@ -43,11 +43,15 @@ const injectionFactoryMap: Record<DiscreteApiType, any> = {
   modal: useModal
 }
 
-export function createDiscreteApp ({
+export function createDiscreteApp({
   providersAndProps,
   configProviderProps
 }: DiscreteAppOptions): DiscreteApp {
-  const App = (): VNode => {
+  let app: App<Element> | null = createApp(App)
+  const extractedApi: Omit<DiscreteApp, 'unmount'> = {
+    app
+  }
+  function App(): VNode {
     return h(NConfigProvider, unref(configProviderProps), {
       default: () =>
         providersAndProps.map(({ type, Provider, props }) => {
@@ -60,11 +64,6 @@ export function createDiscreteApp ({
           })
         })
     })
-  }
-
-  let app: App<Element> | null = createApp(App)
-  const extractedApi: Omit<DiscreteApp, 'unmount'> = {
-    app
   }
 
   let hostEl: Element | null

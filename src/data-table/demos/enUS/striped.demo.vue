@@ -4,22 +4,17 @@
 Using `striped` prop to make it easier to distinguish rows.
 </markdown>
 
-<template>
-  <n-data-table :columns="columns" :data="data" striped />
-</template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import type { DataTableColumns } from 'naive-ui'
 
-type RowData = {
+interface RowData {
   key: number
   name: string
   age: number
   address: string
 }
 
-const createColumns = (): DataTableColumns<RowData> => {
+function createColumns(): DataTableColumns<RowData> {
   return [
     {
       type: 'selection'
@@ -39,33 +34,33 @@ const createColumns = (): DataTableColumns<RowData> => {
   ]
 }
 
-const createData = (): RowData[] => [
-  {
-    key: 0,
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park'
-  },
-  {
-    key: 1,
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park'
-  },
-  {
-    key: 2,
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park'
-  }
-]
-
-export default defineComponent({
-  setup () {
-    return {
-      data: createData(),
-      columns: createColumns()
+function createData(): RowData[] {
+  return [
+    {
+      key: 0,
+      name: 'John Brown',
+      age: 32,
+      address: 'New York No. 1 Lake Park'
+    },
+    {
+      key: 1,
+      name: 'Jim Green',
+      age: 42,
+      address: 'London No. 1 Lake Park'
+    },
+    {
+      key: 2,
+      name: 'Joe Black',
+      age: 32,
+      address: 'Sidney No. 1 Lake Park'
     }
-  }
-})
+  ]
+}
+
+const data = createData()
+const columns = createColumns()
 </script>
+
+<template>
+  <n-data-table :columns="columns" :data="data" striped />
+</template>

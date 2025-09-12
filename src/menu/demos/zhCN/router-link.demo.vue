@@ -4,21 +4,18 @@
 你可以在这个地方配合 vue-router 完成路由。通过将 `label` 渲染为 `<router-link />` 来改变路由。
 </markdown>
 
-<template>
-  <n-menu :options="menuOptions" />
-</template>
-
-<script lang="ts">
-import { defineComponent, h, Component } from 'vue'
-import { NIcon } from 'naive-ui'
+<script lang="ts" setup>
 import type { MenuOption } from 'naive-ui'
-import { RouterLink } from 'vue-router'
+import type { Component } from 'vue'
 import {
-  LaptopOutline as WorkIcon,
-  LogOutOutline as HomeIcon
+  LogOutOutline as HomeIcon,
+  LaptopOutline as WorkIcon
 } from '@vicons/ionicons5'
+import { NIcon } from 'naive-ui'
+import { h } from 'vue'
+import { RouterLink } from 'vue-router'
 
-function renderIcon (icon: Component) {
+function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -55,12 +52,8 @@ const menuOptions: MenuOption[] = [
     icon: renderIcon(WorkIcon)
   }
 ]
-
-export default defineComponent({
-  setup () {
-    return {
-      menuOptions
-    }
-  }
-})
 </script>
+
+<template>
+  <n-menu :options="menuOptions" />
+</template>

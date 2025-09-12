@@ -2,6 +2,20 @@
 # 操作
 </markdown>
 
+<script lang="ts" setup>
+import { useMessage } from 'naive-ui'
+
+const message = useMessage()
+
+function handlePositiveClick() {
+  message.info('是的')
+}
+
+function handleNegativeClick() {
+  message.info('并不')
+}
+</script>
+
 <template>
   <n-space>
     <n-popconfirm
@@ -42,22 +56,3 @@
     </n-popconfirm>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { useMessage } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const message = useMessage()
-    return {
-      handlePositiveClick () {
-        message.info('是的')
-      },
-      handleNegativeClick () {
-        message.info('并不')
-      }
-    }
-  }
-})
-</script>

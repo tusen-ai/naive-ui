@@ -4,6 +4,12 @@
 Is there anybody who needs slots in a select menu?
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const value = ref('Empty')
+</script>
+
 <template>
   <n-popselect v-model:value="value" :options="[]" trigger="click">
     <n-button>{{ value || 'Popselect' }}</n-button>
@@ -18,15 +24,3 @@ Is there anybody who needs slots in a select menu?
     </template>
   </n-popselect>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      value: ref('Empty')
-    }
-  }
-})
-</script>

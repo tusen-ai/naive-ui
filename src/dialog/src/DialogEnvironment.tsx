@@ -1,10 +1,18 @@
+import type { ModalDraggableOptions } from '../../modal/src/interface'
 // use absolute path to make sure no circular ref of style
 // this -> modal-index -> modal-style
-import { h, defineComponent, type PropType, ref, type CSSProperties } from 'vue'
-import NModal from '../../modal/src/Modal'
+import {
+  type CSSProperties,
+  defineComponent,
+  h,
+  normalizeClass,
+  type PropType,
+  ref
+} from 'vue'
 import { keep } from '../../_utils'
+import NModal from '../../modal/src/Modal'
 import { NDialog } from './Dialog'
-import { dialogProps, dialogPropKeys } from './dialogProps'
+import { dialogPropKeys, dialogProps } from './dialogProps'
 
 export const exposedDialogEnvProps = {
   ...dialogProps,
@@ -23,14 +31,16 @@ export const exposedDialogEnvProps = {
     type: Boolean,
     default: true
   },
+  zIndex: Number,
   onPositiveClick: Function as PropType<
-  (e: MouseEvent) => Promise<unknown> | unknown
+    (e: MouseEvent) => Promise<unknown> | unknown
   >,
   onNegativeClick: Function as PropType<
-  (e: MouseEvent) => Promise<unknown> | unknown
+    (e: MouseEvent) => Promise<unknown> | unknown
   >,
   onClose: Function as PropType<() => Promise<unknown> | unknown>,
-  onMaskClick: Function as PropType<(e: MouseEvent) => void>
+  onMaskClick: Function as PropType<(e: MouseEvent) => void>,
+  draggable: [Boolean, Object] as PropType<boolean | ModalDraggableOptions>
 } as const
 
 export const NDialogEnvironment = defineComponent({
@@ -48,63 +58,73 @@ export const NDialogEnvironment = defineComponent({
       required: true
     }
   },
-  setup (props) {
+  setup(props) {
     const showRef = ref(true)
-    function handleAfterLeave (): void {
+    function handleAfterLeave(): void {
       const { onInternalAfterLeave, internalKey, onAfterLeave } = props
-      if (onInternalAfterLeave) onInternalAfterLeave(internalKey)
-      if (onAfterLeave) onAfterLeave()
+      if (onInternalAfterLeave)
+        onInternalAfterLeave(internalKey)
+      if (onAfterLeave)
+        onAfterLeave()
     }
-    function handlePositiveClick (e: MouseEvent): void {
+    function handlePositiveClick(e: MouseEvent): void {
       const { onPositiveClick } = props
       if (onPositiveClick) {
         void Promise.resolve(onPositiveClick(e)).then((result) => {
-          if (result === false) return
+          if (result === false)
+            return
           hide()
         })
-      } else {
+      }
+      else {
         hide()
       }
     }
-    function handleNegativeClick (e: MouseEvent): void {
+    function handleNegativeClick(e: MouseEvent): void {
       const { onNegativeClick } = props
       if (onNegativeClick) {
         void Promise.resolve(onNegativeClick(e)).then((result) => {
-          if (result === false) return
+          if (result === false)
+            return
           hide()
         })
-      } else {
+      }
+      else {
         hide()
       }
     }
-    function handleCloseClick (): void {
+    function handleCloseClick(): void {
       const { onClose } = props
       if (onClose) {
         void Promise.resolve(onClose()).then((result) => {
-          if (result === false) return
+          if (result === false)
+            return
           hide()
         })
-      } else {
+      }
+      else {
         hide()
       }
     }
-    function handleMaskClick (e: MouseEvent): void {
+    function handleMaskClick(e: MouseEvent): void {
       const { onMaskClick, maskClosable } = props
       if (onMaskClick) {
         onMaskClick(e)
-        maskClosable && hide()
+        if (maskClosable) {
+          hide()
+        }
       }
     }
-    function handleEsc (): void {
+    function handleEsc(): void {
       const { onEsc } = props
       if (onEsc) {
         onEsc()
       }
     }
-    function hide (): void {
+    function hide(): void {
       showRef.value = false
     }
-    function handleUpdateShow (value: boolean): void {
+    function handleUpdateShow(value: boolean): void {
       showRef.value = value
     }
     return {
@@ -119,7 +139,7 @@ export const NDialogEnvironment = defineComponent({
       handleEsc
     }
   },
-  render () {
+  render() {
     const {
       handlePositiveClick,
       handleUpdateShow,
@@ -129,6 +149,7 @@ export const NDialogEnvironment = defineComponent({
       handleMaskClick,
       handleEsc,
       to,
+      zIndex,
       maskClosable,
       show
     } = this
@@ -139,6 +160,7 @@ export const NDialogEnvironment = defineComponent({
         onMaskClick={handleMaskClick}
         onEsc={handleEsc}
         to={to}
+        zIndex={zIndex}
         maskClosable={maskClosable}
         onAfterEnter={this.onAfterEnter}
         onAfterLeave={handleAfterLeave}
@@ -146,13 +168,15 @@ export const NDialogEnvironment = defineComponent({
         blockScroll={this.blockScroll}
         autoFocus={this.autoFocus}
         transformOrigin={this.transformOrigin}
+        draggable={this.draggable}
         internalAppear
         internalDialog
       >
         {{
-          default: () => (
+          default: ({ draggableClass }: { draggableClass: string }) => (
             <NDialog
               {...keep(this.$props, dialogPropKeys)}
+              titleClass={normalizeClass([this.titleClass, draggableClass])}
               style={this.internalStyle}
               onClose={handleCloseClick}
               onNegativeClick={handleNegativeClick}

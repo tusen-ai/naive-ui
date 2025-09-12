@@ -1,9 +1,9 @@
+import type { TmNode } from './interface'
 import { computed, defineComponent, h, inject, type PropType } from 'vue'
+import { NBaseIcon } from '../../_internal'
 import { ChevronDownFilledIcon } from '../../_internal/icons'
 import { render } from '../../_utils'
-import { NBaseIcon } from '../../_internal'
 import { menuInjectionKey } from './context'
-import type { TmNode } from './interface'
 
 export default defineComponent({
   name: 'MenuOptionContent',
@@ -41,8 +41,7 @@ export default defineComponent({
     },
     isEllipsisPlaceholder: Boolean
   },
-  setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  setup(props) {
     const { props: menuProps } = inject(menuInjectionKey)!
     return {
       menuProps,
@@ -61,7 +60,7 @@ export default defineComponent({
       })
     }
   },
-  render () {
+  render() {
     const {
       clsPrefix,
       tmNode,

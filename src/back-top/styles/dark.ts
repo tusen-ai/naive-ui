@@ -1,17 +1,13 @@
-import commonVariables from './_common'
-import { commonDark } from '../../_styles/common'
 import type { BackTopTheme } from './light'
+import { commonDark } from '../../_styles/common'
+import commonVariables from './_common'
 
 const backTopDark: BackTopTheme = {
   name: 'BackTop',
   common: commonDark,
-  self (vars) {
-    const {
-      popoverColor,
-      textColor2,
-      primaryColorHover,
-      primaryColorPressed
-    } = vars
+  self(vars) {
+    const { popoverColor, textColor2, primaryColorHover, primaryColorPressed }
+      = vars
     return {
       ...commonVariables,
       color: popoverColor,

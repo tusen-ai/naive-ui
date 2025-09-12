@@ -39,7 +39,13 @@ form-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| calendar-day-format | `string` | `undefined` | 选择面板内部星期几的格式 | 2.40.2 |
+| calendar-header-year-format | `string` | `undefined` | 选择面板内部年的格式 | 2.40.2 |
+| calendar-header-month-format | `string` | `undefined` | 选择面板内部月的格式 | 2.40.2 |
+| calendar-header-month-before-year | `string` | `undefined` | 选择面板内部月是否显示在年的前面 | 2.40.2 |
+| calendar-header-month-year-separator | `string` | `' '` | 选择面板内部年和月的分隔字符 | 2.40.2 |
 | clearable | `boolean` | `false` | 是否支持清除 |  |
+| date-format | `string` | `undefined` | 选择面板内部日期输入框的日期格式 | 2.40.2 |
 | default-value | `number \| [number, number] \| null` | `undefined` | 默认被选中的日期的时间戳 |  |
 | default-formatted-value | `string \| [string, string] \| null` | `undefined` | Date Picker 格式化后的值 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
@@ -54,12 +60,13 @@ form-debug.vue
 | show | `boolean` | `undefined` | 是否展示面板 | 2.28.3 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
-| time-format | `string \| undefined` | `undefined` | 设置面板中时间的显示方式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | NEXT_VERSION |
+| time-picker-format | `string \| undefined` | `undefined` | 日期面板内时间的显示方式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | 2.38.2 |
 | to | `string \| HTMLElement \| false` | `body` | 面板的容器节点，`false` 会待在原地 |  |
-| type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'monthrange' \| 'year' \| 'quarter' \| 'week'` | `'date'` | Date Picker 的类型 | `'quarter'` v2.22.0, `'monthrange'` 2.28.3 |
+| type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'monthrange' \| 'year' \| 'yearrange' \| 'quarter' \| 'quarterrange' \| 'week'` | `'date'` | Date Picker 的类型 | `'quarter'` v2.22.0, `'monthrange'` 2.28.3 |
 | value | `number \| [number, number] \| null` | `undefined` | Date Picker 的值 |  |
 | value-format | `string` | 跟随 `format` 属性 | 绑定值的格式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |
 | year-format | `string` | `'y'` | 设置面板中年的显示方式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | 2.37.0 |
+| year-range | `[number, number]` | `[1901, 2100]` | 设置面板中的年份选择范围 | 2.40.0 |
 | on-clear | `() => void` | `undefined` | 用户 clear 时执行的回调 | 2.28.3 |
 | on-confirm | `(value: number \| [number, number] \| null, formattedValue: string \| [string, string] \| null) => void` | `undefined` | 用户 confirm 时执行的回调 | 2.28.3 |
 | on-blur | `() => void` | `undefined` | 用户 blur 时执行的回调 |  |
@@ -178,7 +185,7 @@ form-debug.vue
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now'> \| null` | `['clear', 'now']` | Week 类型的 Date Picker 中支持的操作 | 2.37.0 |
 | default-calendar-start-time | `number` | `undefined` | 面板日历默认开始的月份时间戳 | 2.38.1 |
-| format | `string` | 中文为 `'yyyy-w'`，随语言变化 | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | 2.37.0 |
+| format | `string` | 中文为 `'YYYY-w'`，随语言变化 | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | 2.37.0 |
 | placeholder | `string` | 中文为 `'选择周'`，随语言变化 | 没有值时的占位信息 | 2.37.0 |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | 受控数据更新时触发的回调函数 | 2.37.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | 受控数据更新时触发的回调函数 | 2.37.0 |
@@ -194,6 +201,28 @@ form-debug.vue
 | prev-month | `()` | 日期面板的 `上一个` 图标     | 2.33.4 |
 | prev-year  | `()` | 日期面板的 `快速上一个` 图标 | 2.33.4 |
 | separator  | `()` | 日期范围分隔符号             | 2.29.0 |
+
+### Date, Year, QuarterRange, Week Slots
+
+| 名称 | 参数 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| clear | `(props: { onClear: () => void, text: string })` | 面板的清除按钮 | 2.40.0 |
+| now | `(props: { onNow: () => void, text: string })` | 面板的此刻按钮 | 2.40.0 |
+
+### DateRange, DateTimeRange, MonthRange, YearRange Slots
+
+| 名称 | 参数 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| clear | `(props: { onClear: () => void, text: string })` | 面板的清除按钮 | 2.40.0 |
+| confirm | `(props: { onConfirm: () => void, disabled: boolean, text: string })` | 面板的确认按钮 | 2.40.0 |
+
+### DateTime, Month, Quarter Slots
+
+| 名称 | 参数 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| clear | `(props: { onClear: () => void, text: string })` | 面板的清除按钮 | 2.40.0 |
+| confirm | `(props: { onConfirm: () => void, disabled: boolean, text: string })` | 面板的确认按钮 | 2.40.0 |
+| now | `(props: { onNow: () => void, text: string })` | 面板的此刻按钮 | 2.40.0 |
 
 ### DatePicker Methods
 

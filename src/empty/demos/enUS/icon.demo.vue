@@ -4,11 +4,15 @@
 Customize icon in empty.
 </markdown>
 
+<script lang="ts" setup>
+import { IosAirplane } from '@vicons/ionicons4'
+</script>
+
 <template>
   <n-empty description="Custom your icon">
     <template #icon>
       <n-icon>
-        <ios-airplane />
+        <IosAirplane />
       </n-icon>
     </template>
     <template #extra>
@@ -18,14 +22,3 @@ Customize icon in empty.
     </template>
   </n-empty>
 </template>
-
-<script lang="ts">
-import { IosAirplane } from '@vicons/ionicons4'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    IosAirplane
-  }
-})
-</script>
