@@ -41,7 +41,7 @@ import style from './styles/index.cssr'
 export const modalProps = {
   ...(useTheme.props as ThemeProps<ModalTheme>),
   show: Boolean,
-  unstableShowMask: {
+  maskVisible: {
     type: Boolean,
     default: true
   },
@@ -312,7 +312,7 @@ export default defineComponent({
         {{
           default: () => {
             this.onRender?.()
-            const { unstableShowMask } = this
+            const { maskVisible } = this
             return withDirectives(
               <div
                 role="none"
@@ -335,6 +335,7 @@ export default defineComponent({
                   trapFocus={this.trapFocus}
                   draggable={this.draggable}
                   blockScroll={this.blockScroll}
+                  mouseEventPenetrate={!this.maskVisible}
                   {...this.presetProps}
                   onEsc={this.handleEsc}
                   onClose={this.handleCloseClick}
@@ -344,10 +345,10 @@ export default defineComponent({
                   onAfterEnter={this.onAfterEnter}
                   onAfterLeave={this.handleAfterLeave}
                   onClickoutside={
-                    unstableShowMask ? undefined : this.handleClickoutside
+                    maskVisible ? undefined : this.handleClickoutside
                   }
                   renderMask={
-                    unstableShowMask
+                    maskVisible
                       ? () => (
                           <Transition
                             name="fade-in-transition"

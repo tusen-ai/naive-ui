@@ -1,6 +1,7 @@
-import type { ImagePreviewInst, ImageSlots } from './public-types'
+import type { ImageInst, ImagePreviewInst, ImageSlots } from './public-types'
 import type { IntersectionObserverOptions } from './utils'
 import {
+  computed,
   defineComponent,
   h,
   type ImgHTMLAttributes,
@@ -62,7 +63,9 @@ export default defineComponent({
     const imageGroupHandle = inject(imageGroupInjectionKey, null)
     const { mergedClsPrefixRef } = imageGroupHandle || useConfig(props)
 
-    const mergedPreviewSrc = props.previewSrc || props.src
+    const mergedPreviewSrcRef = computed(() => {
+      return props.previewSrc || props.src
+    })
 
     const previewShowRef = ref(false)
 
@@ -73,7 +76,7 @@ export default defineComponent({
         return
       if (imageGroupHandle) {
         imageGroupHandle.setThumbnailEl(imageRef.value)
-        imageGroupHandle.toggleShow(imageId)
+        imageGroupHandle.toggleShow(`r${imageId}`)
         return
       }
       const { value: previewInst } = previewInstRef
@@ -83,7 +86,7 @@ export default defineComponent({
       previewShowRef.value = true
     }
 
-    const exposedMethods = {
+    const exposedMethods: ImageInst = {
       click: () => {
         showPreview()
       },
@@ -125,18 +128,17 @@ export default defineComponent({
     })
 
     watchEffect((onInvalidate) => {
-      const unRegister = imageGroupHandle?.registerImageUrl?.(
+      const unregister = imageGroupHandle?.registerImageUrl?.(
         imageId,
-        props.previewSrc || props.src || ''
-      ) as (() => void) | undefined
-
+        mergedPreviewSrcRef.value || ''
+      )
       onInvalidate(() => {
-        unRegister?.()
+        unregister?.()
       })
     })
 
     function onImgClick(e: MouseEvent) {
-      exposedMethods.click()
+      exposedMethods.showPreview()
       props.imgProps?.onClick?.(e)
     }
 
@@ -154,7 +156,7 @@ export default defineComponent({
       groupId: imageGroupHandle?.groupId,
       previewInstRef,
       imageRef,
-      mergedPreviewSrc,
+      mergedPreviewSrc: mergedPreviewSrcRef,
       showError: showErrorRef,
       shouldStartLoading: shouldStartLoadingRef,
       loaded: loadedRef,
@@ -245,7 +247,7 @@ export default defineComponent({
             showToolbarTooltip={this.showToolbarTooltip}
             renderToolbar={this.renderToolbar}
             src={this.mergedPreviewSrc}
-            show={this.previewShow}
+            show={!this.previewDisabled && this.previewShow}
             onClose={this.onPreviewClose}
           >
             {{

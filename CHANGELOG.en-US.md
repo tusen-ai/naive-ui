@@ -19,6 +19,7 @@
 - Fix `n-menu`'s disabled style not working when parent node is set to `disabled` and child node has `type: "group"`, closes [#6792](https://github.com/tusen-ai/naive-ui/issues/6792)
 - Fix `n-input-group-label` not injecting `formItemInjectionKey`, causing the `size` property to fail, and close [#7066](https://github.com/tusen-ai/naive-ui/issues/7066)
 - Fix the issue of style confusion in `n-carousel` when there is only one image, close [#6476](https://github.com/tusen-ai/naive-ui/issues/6476)
+- Fix `n-marquee` component 'Non-function value encountered for default slot' warning.
 
 ### Features
 
@@ -32,9 +33,11 @@
 - `useDialog`'s option supports `z-index`, closes [#4349](https://github.com/tusen-ai/naive-ui/issues/4349).
 - Add `n-heatmap` component.
 - - `n-image` adds showPreview methods, closes [#6695](https://github.com/tusen-ai/naive-ui/issues/6695).
-- `n-image-preview` `n-image-group` support being used independently.
+- Add `n-image-preview` component.
+- `n-image-group` can be used without `n-image`.
 - `n-input-otp` adds `focusOnChar` util method, closes [#7073](https://github.com/tusen-ai/naive-ui/issues/7073).
 - `n-message` adds `border` theme variable, closes [#7105](https://github.com/tusen-ai/naive-ui/issues/7105).
+- `n-modal` adds `mask-visible` prop.
 
 ## 2.42.0
 
@@ -428,6 +431,7 @@
 - Fix `n-tabs`'s border height in `vertical` mode.
 - Fix `n-tree`'s node's hover color has higher priority than selected color in `block-line` mode.
 - Fix `n-tree` click expand switch causes checkbox being checked.
+- Fix `n-progress` multiple `type="circle"` cases style override issue, closes [#7172](https://github.com/tusen-ai/naive-ui/issues/7172).
 
 ### Features
 
