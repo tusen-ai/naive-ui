@@ -187,7 +187,7 @@ export interface DataTableSlots {
   [key: CellSlotName]: (data: {
     row: RowData
     column: TableBaseColumn
-  }) => VNode
+  }) => VNode[]
 }
 
 export type FilterOptionValue = string | number
