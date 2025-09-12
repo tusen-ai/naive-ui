@@ -1,14 +1,16 @@
 import type { MergedTheme } from '../../../_mixins'
 import type { DataTableTheme } from '../../styles'
 import type {
+  CellSlotName,
   InternalRowData,
   SummaryCell,
   TableBaseColumn
 } from '../interface'
 import { get } from 'lodash-es'
-import { defineComponent, h, type PropType, type VNodeChild } from 'vue'
+import { defineComponent, h, inject, type PropType, type VNodeChild } from 'vue'
 import NEllipsis from '../../../ellipsis/src/Ellipsis'
 import { NPerformantEllipsis } from '../../../ellipsis/src/PerformantEllipsis'
+import { dataTableInjectionKey } from '../interface'
 
 export default defineComponent({
   name: 'DataTableCell',
@@ -38,10 +40,25 @@ export default defineComponent({
       (value: any, rowData: object, column: any) => VNodeChild
     >
   },
+  setup() {
+    const { slots: dataTableSlots } = inject(dataTableInjectionKey)!
+
+    return {
+      dataTableSlots
+    }
+  },
   render() {
-    const { isSummary, column, row, renderCell } = this
-    let cell: VNodeChild
+    const { isSummary, column, row, renderCell, dataTableSlots } = this
+
     const { render, key, ellipsis } = column
+
+    const slotName = `cell-${key}` as CellSlotName
+
+    if (dataTableSlots[slotName]) {
+      return dataTableSlots[slotName]({ row, column })
+    }
+
+    let cell: VNodeChild
     if (render && !isSummary) {
       cell = render(row, this.index)
     }

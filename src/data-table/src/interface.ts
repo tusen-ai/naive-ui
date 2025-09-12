@@ -178,10 +178,16 @@ export const dataTableProps = {
   >
 } as const
 
+export type CellSlotName = `cell-${string}`
+
 export interface DataTableSlots {
   default?: () => VNode[]
   empty?: () => VNode[]
   loading?: () => VNode[]
+  [key: CellSlotName]: (data: {
+    row: RowData
+    column: TableBaseColumn
+  }) => VNode
 }
 
 export type FilterOptionValue = string | number

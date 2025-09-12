@@ -1185,6 +1185,49 @@ describe('props.columns', () => {
     wrapper.unmount()
   })
 
+  it('should work with `cell-` slot', async () => {
+    const columns: DataTableColumns = [
+      {
+        title: 'Name',
+        key: 'name'
+      },
+      {
+        title: 'email',
+        key: 'email',
+        render(rowData: any) {
+          return `${rowData.email}`
+        }
+      }
+    ]
+    const data = Array.from({ length: 5 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index,
+          email: `${index}@example.com`
+        }
+      })
+    const rowKey = (row: any): number => row.name
+    const wrapper = mount(() => (
+      <NDataTable columns={columns} data={data} row-key={rowKey}>
+        {{
+          'cell-name': (slotData: any) => (
+            <p>{`${slotData.row[slotData.column.key]} is a good guy`}</p>
+          )
+        }}
+      </NDataTable>
+    ))
+    expect(wrapper.find('tbody [data-col-key="name"]').text()).toContain(
+      '0 is a good guy'
+    )
+
+    // Uses render function if slot was not provided
+    expect(wrapper.find('tbody [data-col-key="email"]').text()).toContain(
+      '0@example.com'
+    )
+    wrapper.unmount()
+  })
+
   it('should work with `renderExpand` `expandable` prop', async () => {
     const columns: DataTableColumns = [
       {
