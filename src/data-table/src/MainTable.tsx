@@ -64,8 +64,16 @@ export default defineComponent({
       }
       return null
     }
+    function getSummaryStickyEl(): HTMLElement | null {
+      const { value } = bodyInstRef
+      if (value) {
+        return value.getSummaryStickyEl()
+      }
+      return null
+    }
     const exposedMethods: MainTableRef = {
       getBodyElement,
+      getSummaryStickyEl,
       getHeaderElement,
       scrollTo(arg0: any, arg1?: any) {
         bodyInstRef.value?.scrollTo(arg0, arg1)
