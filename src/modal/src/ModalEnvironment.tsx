@@ -117,6 +117,9 @@ export const NModalEnvironment = defineComponent({
         internalAppear
         internalModal
       >
+        {{
+          default: this.$slots.default
+        }}
       </NModal>
     )
   }

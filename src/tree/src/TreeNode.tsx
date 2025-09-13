@@ -174,7 +174,7 @@ const TreeNode = defineComponent({
       }
     }
 
-    function handleNodeClick(e: MouseEvent): void {
+    function handleNodeClick(e: PointerEvent): void {
       if (happensIn(e, 'checkbox') || happensIn(e, 'switcher'))
         return
       if (!disabledRef.value) {
@@ -214,13 +214,13 @@ const TreeNode = defineComponent({
       resolvedNodePropsRef.value?.onClick?.(e)
     }
 
-    function handleContentClick(e: MouseEvent): void {
+    function handleContentClick(e: PointerEvent): void {
       if (blockLineRef.value)
         return
       handleNodeClick(e)
     }
 
-    function handleLineClick(e: MouseEvent): void {
+    function handleLineClick(e: PointerEvent): void {
       if (!blockLineRef.value)
         return
       handleNodeClick(e)

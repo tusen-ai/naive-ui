@@ -19,6 +19,7 @@
 - 修复 `n-menu` 在父节点设置 `disabled`，子节点为 `type: "group"` 的禁用样式失效，关闭 [#6792](https://github.com/tusen-ai/naive-ui/issues/6792)
 - 修复 `n-input-group-label` 没有注入 `formItemInjectionKey`，导致 `size` 属性失效的问题，关闭 [#7066](https://github.com/tusen-ai/naive-ui/issues/7066)
 - 修复 `n-carousel` 只有一张图的情況下样式错乱的问题，关闭 [#6476](https://github.com/tusen-ai/naive-ui/issues/6476)
+- 修复 `n-progress` 多个 `type="circle"`情况下样式覆盖问题，关闭 [#7172](https://github.com/tusen-ai/naive-ui/issues/7172)
 - 修复 `n-marquee` 组件 'Non-function value encountered for default slot' 警告
 
 ### Features
@@ -37,6 +38,9 @@
 - `n-image-group` 可以脱离 `n-image` 使用
 - `n-input-otp` 增加 `focusOnChar` 方法，关闭 [#7073](https://github.com/tusen-ai/naive-ui/issues/7073)
 - `n-form-item` 新增 `content-class`、`content-style` 属性
+- `n-message` 增加 `border` 主题变量，关闭 [#7105](https://github.com/tusen-ai/naive-ui/issues/7105)
+- `n-modal` 增加 `mask-visible` 属性
+- `useModal` 新增 `render` 函数，关闭 [#5857](https://github.com/tusen-ai/naive-ui/issues/5857)
 
 ## 2.42.0
 

@@ -37,6 +37,9 @@
 - `n-image-group` can be used without `n-image`.
 - `n-input-otp` adds `focusOnChar` util method, closes [#7073](https://github.com/tusen-ai/naive-ui/issues/7073).
 - `n-form-item` adds `content-class`、`content-style` props.
+- `n-message` adds `border` theme variable, closes [#7105](https://github.com/tusen-ai/naive-ui/issues/7105).
+- `n-modal` adds `mask-visible` prop.
+- `useModal` add `render` function, closes [#5857](https://github.com/tusen-ai/naive-ui/issues/5857).
 
 ## 2.42.0
 
@@ -430,6 +433,7 @@
 - Fix `n-tabs`'s border height in `vertical` mode.
 - Fix `n-tree`'s node's hover color has higher priority than selected color in `block-line` mode.
 - Fix `n-tree` click expand switch causes checkbox being checked.
+- Fix `n-progress` multiple `type="circle"` cases style override issue, closes [#7172](https://github.com/tusen-ai/naive-ui/issues/7172).
 
 ### Features
 
