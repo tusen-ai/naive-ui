@@ -1,4 +1,12 @@
-import type { ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type {
+  ComponentPublicInstance,
+  CSSProperties,
+  ExtractPropTypes,
+  PropType,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
 import type { VXScrollInst } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
@@ -14,7 +22,7 @@ import type {
   TabsType
 } from './interface'
 import type { tabPaneProps } from './TabPane'
-import { throttle } from 'lodash-es'
+import { throttle as _throttle } from 'lodash-es'
 import { depx, getPadding } from 'seemly'
 import { onFontsReady, useCompitable, useMergedState } from 'vooks'
 import {
@@ -46,6 +54,9 @@ import { tabsLight } from '../styles'
 import { tabsInjectionKey } from './interface'
 import style from './styles/index.cssr'
 import Tab from './Tab'
+
+// Fix vue-tsc error
+const throttle: <T>(f: T, t: number) => T = _throttle
 
 type TabPaneProps = ExtractPropTypes<typeof tabPaneProps> & {
   'display-directive': 'if' | 'show' | 'show:lazy'

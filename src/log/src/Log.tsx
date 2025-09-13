@@ -3,7 +3,7 @@ import type { ScrollbarInst } from '../../_internal'
 import type { Hljs, ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { LogTheme } from '../styles'
-import { throttle } from 'lodash-es'
+import { throttle as _throttle } from 'lodash-es'
 import {
   computed,
   defineComponent,
@@ -15,12 +15,7 @@ import {
   Transition
 } from 'vue'
 import { NScrollbar } from '../../_internal'
-import {
-  useConfig,
-  useHljs,
-  useTheme,
-  useThemeClass
-} from '../../_mixins'
+import { useConfig, useHljs, useTheme, useThemeClass } from '../../_mixins'
 import { warn } from '../../_utils'
 import { NCode } from '../../code'
 import { logLight } from '../styles'
@@ -28,6 +23,9 @@ import { logInjectionKey } from './context'
 import NLogLine from './LogLine'
 import NLogLoader from './LogLoader'
 import style from './styles/index.cssr'
+
+// Fix vue-tsc error
+const throttle: <T>(f: T, t: number) => T = _throttle
 
 export interface LogInjection {
   trimRef: Ref<boolean>
