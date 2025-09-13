@@ -144,12 +144,12 @@
     "superagent": "^10.0.0",
     "ts-jest": "^29.1.1",
     "tsx": "^4.20.3",
-    "typescript": "5.5.4",
+    "typescript": "^5.8.3",
     "vfonts": "^0.0.3",
     "vite": "^5.4.19",
-    "vue": "~3.5.13",
+    "vue": "^3.5.13",
     "vue-router": "^4.2.4",
-    "vue-tsc": "^2.0.6"
+    "vue-tsc": "^3.0.7"
   },
   "pnpm": {
     "peerDependencyRules": {
