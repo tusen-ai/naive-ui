@@ -5,7 +5,7 @@ Crowded people.
 
 ---
 
-Please note that the demo uses `NGAvatarGroup` which is available since naive-ui `NEXT_VERSION`.
+Please note that the demo uses `NGAvatarGroup` which is available since naive-ui `2.43.0`.
 
 The `NGAvatarGroup` is the same as `NAvatarGroup` except with a generic `options` prop which can make slots & props types more accurate in Vue files.
 

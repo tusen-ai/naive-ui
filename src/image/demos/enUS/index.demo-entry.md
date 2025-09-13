@@ -48,31 +48,31 @@ component-preview-group.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| current | `number` | `undefined` | The subscript of the currently displayed image. | NEXT_VERSION |
-| default-current | `number` | `0` | The subscript of the default displayed image. | NEXT_VERSION |
-| default-show | `boolean` | `false` | Whether to show the preview big image by default. | NEXT_VERSION |
+| current | `number` | `undefined` | The subscript of the currently displayed image. | 2.43.0 |
+| default-current | `number` | `0` | The subscript of the default displayed image. | 2.43.0 |
+| default-show | `boolean` | `false` | Whether to show the preview big image by default. | 2.43.0 |
 | render-toolbar | `(props: { nodes: { prev: VNode, next: VNode, rotateCounterclockwise: VNode, rotateClockwise: VNode, resizeToOriginalSize: VNode, zoomOut: VNode, zoomIn: VNode, download: VNode, close: VNode } }) => VNodeChild` | `undefined` | Toolbar rendering function. | `2.38.2` |
-| show | `boolean` | `undefined` | Whether to the show preview big image. | NEXT_VERSION |
+| show | `boolean` | `undefined` | Whether to the show preview big image. | 2.43.0 |
 | show-toolbar | `boolean` | `true` | Whether to show the bottom toolbar when the image enlarge. |  |
 | show-toolbar-tooltip | `boolean` | `false` | Whether to show toolbar buttons' tooltip. | 2.24.0 |
-| src-list | `string[]` | `undefined` | Picture src list. | NEXT_VERSION |
+| src-list | `string[]` | `undefined` | Picture src list. | 2.43.0 |
 | on-preview-next | `() => void` | `undefined` | Click the callback on the next slide. |
 | on-preview-prev | `() => void` | `undefined` | Click the callback from the previous slide. |  |
-| on-update:current | `(value: number) => void` | `undefined` | Callback on currently displayed image changes. | NEXT_VERSION |
-| on-update:show | `(value: boolean) => void` | `undefined` | Callback on show status changes. | NEXT_VERSION |
+| on-update:current | `(value: number) => void` | `undefined` | Callback on currently displayed image changes. | 2.43.0 |
+| on-update:show | `(value: boolean) => void` | `undefined` | Callback on show status changes. | 2.43.0 |
 
 ### ImagePreview Props
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| default-show | `boolean` | `false` | Whether to show the preview big image by default. | NEXT_VERSION |
-| render-toolbar | `(props: { nodes: { prev: VNode, next: VNode, rotateCounterclockwise: VNode, rotateClockwise: VNode, resizeToOriginalSize: VNode, zoomOut: VNode, zoomIn: VNode, download: VNode, close: VNode } }) => VNodeChild` | `undefined` | Toolbar rendering function. | NEXT_VERSION |
-| show | `boolean` | `undefined` | Whether to the show preview big image. | NEXT_VERSION |
-| show-toolbar | `boolean` | `true` | Whether to show the bottom toolbar when the image enlarge. | NEXT_VERSION |
-| show-toolbar-tooltip | `boolean` | `false` | Whether to show toolbar buttons' tooltip. | NEXT_VERSION |
-| src | `string` | `undefined` | Image source. | NEXT_VERSION |
-| on-close | `() => void` | `undefined` | Callback when close the preview of the image. | NEXT_VERSION |
-| on-update:show | `(value: boolean) => void` | `undefined` | Callback on show status changes. | NEXT_VERSION |
+| default-show | `boolean` | `false` | Whether to show the preview big image by default. | 2.43.0 |
+| render-toolbar | `(props: { nodes: { prev: VNode, next: VNode, rotateCounterclockwise: VNode, rotateClockwise: VNode, resizeToOriginalSize: VNode, zoomOut: VNode, zoomIn: VNode, download: VNode, close: VNode } }) => VNodeChild` | `undefined` | Toolbar rendering function. | 2.43.0 |
+| show | `boolean` | `undefined` | Whether to the show preview big image. | 2.43.0 |
+| show-toolbar | `boolean` | `true` | Whether to show the bottom toolbar when the image enlarge. | 2.43.0 |
+| show-toolbar-tooltip | `boolean` | `false` | Whether to show toolbar buttons' tooltip. | 2.43.0 |
+| src | `string` | `undefined` | Image source. | 2.43.0 |
+| on-close | `() => void` | `undefined` | Callback when close the preview of the image. | 2.43.0 |
+| on-update:show | `(value: boolean) => void` | `undefined` | Callback on show status changes. | 2.43.0 |
 
 ### Image Slots
 
@@ -89,6 +89,6 @@ component-preview-group.vue
 
 ### Image Methods
 
-| Name | Type | Description | Version |
-| --- | --- | --- | --- |
-| showPreview | `() => void` | Show preview interface of the image. | NEXT_VERSION |
+| Name        | Type         | Description                          | Version |
+| ----------- | ------------ | ------------------------------------ | ------- |
+| showPreview | `() => void` | Show preview interface of the image. | 2.43.0  |
