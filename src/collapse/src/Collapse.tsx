@@ -1,5 +1,7 @@
+import type { CSSProperties, ExtractPropTypes, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { CollapseTheme } from '../styles'
 import type {
   CollapseArrowSlotProps,
   CollapseItemHeaderExtraSlotProps,
@@ -13,21 +15,15 @@ import type {
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
-  type ExtractPropTypes,
   h,
-  type PropType,
   provide,
-  type Ref,
-  ref,
-  type SlotsType,
-  type VNode
+  ref
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
 import { call, createInjectionKey, warn } from '../../_utils'
-import { collapseLight, type CollapseTheme } from '../styles'
+import { collapseLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const collapseProps = {

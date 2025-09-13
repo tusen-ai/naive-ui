@@ -1,3 +1,4 @@
+import type { PropType, VNodeChild } from 'vue'
 import type { MergedTheme } from '../../../_mixins'
 import type { DataTableTheme } from '../../styles'
 import type {
@@ -6,7 +7,7 @@ import type {
   TableBaseColumn
 } from '../interface'
 import { get } from 'lodash-es'
-import { defineComponent, h, type PropType, type VNodeChild } from 'vue'
+import { defineComponent, h } from 'vue'
 import NEllipsis from '../../../ellipsis/src/Ellipsis'
 import { NPerformantEllipsis } from '../../../ellipsis/src/PerformantEllipsis'
 

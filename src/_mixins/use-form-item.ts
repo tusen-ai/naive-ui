@@ -1,11 +1,10 @@
+import type { ComputedRef, Ref } from 'vue'
 import type { FormValidationStatus } from '../form/src/public-types'
 import {
   computed,
-  type ComputedRef,
   inject,
   onBeforeUnmount,
-  provide,
-  type Ref
+  provide
 } from 'vue'
 import { createInjectionKey } from '../_utils'
 

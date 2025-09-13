@@ -1,32 +1,28 @@
+import type { ComponentPublicInstance, CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type { FollowerInst, FollowerPlacement } from 'vueuc'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { SliderTheme } from '../styles'
 import type { OnUpdateValueImpl } from './interface'
 import { off, on } from 'evtd'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
-  type ComponentPublicInstance,
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   nextTick,
   onBeforeUnmount,
-  type PropType,
   ref,
-  type SlotsType,
   toRef,
   Transition,
-  type VNode,
-  type VNodeChild,
   watch
 } from 'vue'
 import {
-  type FollowerInst,
-  type FollowerPlacement,
   VBinder,
   VFollower,
   VTarget
 } from 'vueuc'
 import {
-  type ThemeProps,
   useConfig,
   useFormItem,
   useTheme,
@@ -34,12 +30,10 @@ import {
 } from '../../_mixins'
 import {
   call,
-  type ExtractPublicPropTypes,
-  type MaybeArray,
   resolveSlot,
   useAdjustedTo
 } from '../../_utils'
-import { sliderLight, type SliderTheme } from '../styles'
+import { sliderLight } from '../styles'
 import style from './styles/index.cssr'
 import { isTouchEvent, useRefs } from './utils'
 

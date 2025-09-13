@@ -1,3 +1,5 @@
+import type { PropType } from 'vue'
+import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { SkeletonTheme } from '../styles'
 import { pxfy, repeat } from 'seemly'
@@ -6,10 +8,9 @@ import {
   defineComponent,
   Fragment,
   h,
-  mergeProps,
-  type PropType
+  mergeProps
 } from 'vue'
-import { type ThemeProps, useConfig, useTheme } from '../../_mixins'
+import { useConfig, useTheme } from '../../_mixins'
 import { createKey, useHoudini } from '../../_utils'
 import { skeletonLight } from '../styles'
 import style from './styles/index.cssr'

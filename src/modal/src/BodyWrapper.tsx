@@ -1,31 +1,27 @@
+import type { ComponentPublicInstance, DirectiveArguments, PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type { ScrollbarInst } from '../../_internal'
 import type { ModalDraggableOptions } from './interface'
 import type { ModalSlots } from './Modal'
 import { clickoutside } from 'vdirs'
 import {
   cloneVNode,
-  type ComponentPublicInstance,
   computed,
   defineComponent,
-  type DirectiveArguments,
   h,
   inject,
   mergeProps,
   nextTick,
   normalizeClass,
-  type PropType,
   provide,
   ref,
-  type SlotsType,
   toRef,
   Transition,
-  type VNode,
-  type VNodeChild,
   vShow,
   watch,
   withDirectives
 } from 'vue'
 import { VFocusTrap } from 'vueuc'
-import { NScrollbar, type ScrollbarInst } from '../../_internal'
+import { NScrollbar } from '../../_internal'
 import {
   getFirstSlotVNodeWithTypedProps,
   keep,

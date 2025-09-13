@@ -1,4 +1,6 @@
+import type { CSSProperties, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CheckboxTheme } from '../styles'
 import type {
   CheckboxInst,
@@ -10,11 +12,9 @@ import { createId } from 'seemly'
 import { useMemo, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   inject,
-  type PropType,
   ref,
   toRef,
   watchEffect
@@ -25,8 +25,6 @@ import { useRtl } from '../../_mixins/use-rtl'
 import {
   call,
   createKey,
-  type ExtractPublicPropTypes,
-  type MaybeArray,
   resolveWrappedSlot,
   warnOnce
 } from '../../_utils'

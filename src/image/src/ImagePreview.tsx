@@ -1,4 +1,6 @@
+import type { CSSProperties, PropType, VNode } from 'vue'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { MoveStrategy } from './interface'
 import type { ImagePreviewInst } from './public-types'
 import { off, on } from 'evtd'
 import { kebabCase } from 'lodash-es'
@@ -7,19 +9,16 @@ import { zindexable } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   Fragment,
   h,
   inject,
   normalizeStyle,
   onBeforeUnmount,
-  type PropType,
   ref,
   toRef,
   toRefs,
   Transition,
-  type VNode,
   vShow,
   watch,
   withDirectives
@@ -41,8 +40,7 @@ import { imageLight } from '../styles'
 import { renderCloseIcon, renderNextIcon, renderPrevIcon } from './icons'
 import {
   imageContextKey,
-  imagePreviewSharedProps,
-  type MoveStrategy
+  imagePreviewSharedProps
 } from './interface'
 import style from './styles/index.cssr'
 

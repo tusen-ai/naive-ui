@@ -1,5 +1,8 @@
+import type { Key, TreeNode } from 'treemate'
+import type { PropType, Ref } from 'vue'
 import type { FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { InternalRenderBody } from '../../popover/src/interface'
 import type { PopoverInternalProps } from '../../popover/src/Popover'
 import type { DropdownTheme } from '../styles'
@@ -20,16 +23,14 @@ import type {
   RenderOption,
   RenderOptionImpl
 } from './interface'
-import { createTreeMate, type Key, type TreeNode } from 'treemate'
+import { createTreeMate } from 'treemate'
 import { useKeyboard, useMemo, useMergedState } from 'vooks'
 import {
   computed,
   defineComponent,
   h,
   mergeProps,
-  type PropType,
   provide,
-  type Ref,
   ref,
   toRef,
   watch
@@ -39,9 +40,7 @@ import {
   call,
   createKey,
   createRefSetter,
-  type ExtractPublicPropTypes,
-  keep,
-  type MaybeArray
+  keep
 } from '../../_utils'
 import { NPopover } from '../../popover'
 import { popoverBaseProps } from '../../popover/src/Popover'

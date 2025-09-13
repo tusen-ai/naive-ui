@@ -1,5 +1,8 @@
 import type { RuleItem, ValidateError, ValidateOption } from 'async-validator'
+import type { CSSProperties, ExtractPropTypes, LabelHTMLAttributes, PropType, Slot, VNodeChild } from 'vue'
+import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type { FormTheme } from '../styles'
 import type {
   FormItemInst,
   FormItemInternalValidate,
@@ -19,24 +22,17 @@ import { get } from 'lodash-es'
 import { createId } from 'seemly'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
-  type ExtractPropTypes,
   h,
   inject,
-  type LabelHTMLAttributes,
   onMounted,
-  type PropType,
   provide,
   ref,
-  type Slot,
   toRef,
   Transition,
-  type VNodeChild,
   watch
 } from 'vue'
 import {
-  type ThemeProps,
   useConfig,
   useTheme,
   useThemeClass
@@ -49,7 +45,7 @@ import {
   useInjectionInstanceCollection,
   warn
 } from '../../_utils'
-import { formLight, type FormTheme } from '../styles'
+import { formLight } from '../styles'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
 import style from './styles/form-item.cssr'
 import { formItemMisc, formItemRule, formItemSize } from './utils'
@@ -370,8 +366,8 @@ export default defineComponent({
       options?: string | null | FormItemValidateOptions,
       callback?: ValidateCallback
     ): Promise<{
-        warnings: ValidateError[] | undefined
-      }> {
+      warnings: ValidateError[] | undefined
+    }> {
       /** the following code is for compatibility */
       let trigger: ValidationTrigger | string | undefined
       let validateCallback: ValidateCallback | undefined

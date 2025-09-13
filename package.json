@@ -90,7 +90,7 @@
     "vueuc": "^0.4.65"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.9.2",
+    "@antfu/eslint-config": "^5.3.0",
     "@babel/core": "^7.28.0",
     "@babel/generator": "^7.28.0",
     "@babel/parser": "^7.28.0",

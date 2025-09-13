@@ -1,3 +1,4 @@
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CardSlots } from '../../card'
@@ -9,17 +10,13 @@ import { zindexable } from 'vdirs'
 import { useClicked, useClickPosition, useIsMounted } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   inject,
-  type PropType,
   provide,
   ref,
-  type SlotsType,
   toRef,
   Transition,
-  type VNode,
   withDirectives
 } from 'vue'
 import { VLazyTeleport } from 'vueuc'

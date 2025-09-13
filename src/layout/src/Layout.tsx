@@ -1,3 +1,4 @@
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
 import type { ScrollbarInst, ScrollbarProps } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
@@ -5,11 +6,8 @@ import type { LayoutTheme } from '../styles'
 import type { LayoutInst } from './interface'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
-  type ExtractPropTypes,
   h,
-  type PropType,
   provide,
   ref
 } from 'vue'

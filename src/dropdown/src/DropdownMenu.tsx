@@ -1,4 +1,5 @@
 import type { TreeNode } from 'treemate'
+import type { CSSProperties, PropType, Ref } from 'vue'
 import type {
   DropdownGroupOption,
   DropdownIgnoredOption,
@@ -7,13 +8,10 @@ import type {
 } from './interface'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   inject,
-  type PropType,
   provide,
-  type Ref,
   ref
 } from 'vue'
 import { NxScrollbar } from '../../_internal/scrollbar'

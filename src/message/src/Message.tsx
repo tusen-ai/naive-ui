@@ -1,13 +1,11 @@
-import type { MessageRenderMessage, MessageType } from './types'
+import type { CSSProperties, PropType, VNodeChild } from 'vue'
 /* eslint-disable no-cond-assign */
+import type { MessageRenderMessage, MessageType } from './types'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
-  inject,
-  type PropType,
-  type VNodeChild
+  inject
 } from 'vue'
 import {
   NBaseClose,
@@ -180,7 +178,7 @@ export default defineComponent({
             ]}
           >
             {(iconNode = createIconVNode(icon, type, mergedClsPrefix))
-            && showIcon ? (
+              && showIcon ? (
                   <div
                     class={`${mergedClsPrefix}-message__icon ${mergedClsPrefix}-message__icon--${type}-type`}
                   >

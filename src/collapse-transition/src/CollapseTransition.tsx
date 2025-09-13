@@ -1,3 +1,4 @@
+import type { PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { CollapseTransitionTheme } from '../styles'
@@ -6,7 +7,6 @@ import {
   defineComponent,
   h,
   mergeProps,
-  type PropType,
   watchEffect
 } from 'vue'
 import { NFadeInExpandTransition } from '../../_internal'

@@ -1,3 +1,4 @@
+import type { PropType } from 'vue'
 import type { TmNode } from './interface'
 import {
   computed,
@@ -5,7 +6,6 @@ import {
   Fragment,
   h,
   inject,
-  type PropType,
   provide
 } from 'vue'
 import { keysOf, render } from '../../_utils'

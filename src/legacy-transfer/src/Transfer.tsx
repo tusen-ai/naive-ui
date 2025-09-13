@@ -1,13 +1,14 @@
+import type { CSSProperties, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { LegacyTransferTheme } from '../styles'
+import type { Filter, OnUpdateValue, Option, OptionValue } from './interface'
 import { depx } from 'seemly'
 import { useIsMounted } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
-  type PropType,
   provide,
   watchEffect
 } from 'vue'
@@ -16,18 +17,12 @@ import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
 import { useConfig, useFormItem, useLocale, useTheme } from '../../_mixins'
 import {
   call,
-  type ExtractPublicPropTypes,
-  type MaybeArray,
   warnOnce
 } from '../../_utils'
 import { createKey } from '../../_utils/cssr'
 import { NButton } from '../../button'
 import { legacyTransferLight } from '../styles'
 import {
-  type Filter,
-  type OnUpdateValue,
-  type Option,
-  type OptionValue,
   transferInjectionKey
 } from './interface'
 import style from './styles/index.cssr'

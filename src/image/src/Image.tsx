@@ -1,22 +1,21 @@
+import type { ImgHTMLAttributes, PropType, SlotsType } from 'vue'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ImageInst, ImagePreviewInst, ImageSlots } from './public-types'
 import type { IntersectionObserverOptions } from './utils'
 import {
   computed,
   defineComponent,
   h,
-  type ImgHTMLAttributes,
   inject,
   onBeforeUnmount,
   onMounted,
-  type PropType,
   provide,
   ref,
-  type SlotsType,
   toRef,
   watchEffect
 } from 'vue'
 import { useConfig } from '../../_mixins'
-import { type ExtractPublicPropTypes, resolveSlot } from '../../_utils'
+import { resolveSlot } from '../../_utils'
 import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
 import { imageGroupInjectionKey } from './ImageGroup'
 import NImagePreview from './ImagePreview'

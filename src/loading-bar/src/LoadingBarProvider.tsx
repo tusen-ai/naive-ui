@@ -1,15 +1,13 @@
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { LoadingBarTheme } from '../styles'
 import { useIsMounted } from 'vooks'
 import {
-  type CSSProperties,
   defineComponent,
-  type ExtractPropTypes,
   Fragment,
   h,
   nextTick,
-  type PropType,
   provide,
   ref,
   Teleport

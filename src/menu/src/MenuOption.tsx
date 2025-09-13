@@ -1,6 +1,7 @@
+import type { PropType } from 'vue'
 import type { TmNode } from './interface'
 import { useMemo } from 'vooks'
-import { computed, defineComponent, h, type PropType } from 'vue'
+import { computed, defineComponent, h } from 'vue'
 import { keysOf, render } from '../../_utils'
 import { NTooltip } from '../../tooltip'
 import NMenuOptionContent from './MenuOptionContent'

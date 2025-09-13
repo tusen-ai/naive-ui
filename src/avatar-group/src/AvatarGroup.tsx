@@ -1,3 +1,4 @@
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { Size } from '../../avatar/src/interface'
@@ -9,13 +10,9 @@ import type {
 } from './public-types'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
-  type PropType,
-  provide,
-  type SlotsType,
-  type VNode
+  provide
 } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
@@ -133,20 +130,20 @@ export default defineComponent({
           )
         })}
         {restOptions !== undefined
-        && restOptions.length > 0
-        && ($slots.rest ? (
-          $slots.rest({ options: restOptions, rest: restOptions.length })
-        ) : (
-          <NAvatar
-            style={this.maxStyle}
-            theme={mergedTheme.peers.Avatar}
-            themeOverrides={mergedTheme.peerOverrides.Avatar}
-          >
-            {{
-              default: () => `+${restOptions.length}`
-            }}
-          </NAvatar>
-        ))}
+          && restOptions.length > 0
+          && ($slots.rest ? (
+            $slots.rest({ options: restOptions, rest: restOptions.length })
+          ) : (
+            <NAvatar
+              style={this.maxStyle}
+              theme={mergedTheme.peers.Avatar}
+              themeOverrides={mergedTheme.peerOverrides.Avatar}
+            >
+              {{
+                default: () => `+${restOptions.length}`
+              }}
+            </NAvatar>
+          ))}
       </div>
     )
   }

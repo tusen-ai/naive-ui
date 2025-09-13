@@ -16,11 +16,11 @@ export type DropdownOption = MenuOption
 export type DropdownGroupOption = MenuGroupOption
 export type DropdownDividerOption = MenuDividerOption
 export type DropdownRenderOption = MenuRenderOption
-export type DropdownMixedOption =
-  | DropdownOption
-  | DropdownGroupOption
-  | DropdownDividerOption
-  | DropdownRenderOption
+export type DropdownMixedOption
+  = | DropdownOption
+    | DropdownGroupOption
+    | DropdownDividerOption
+    | DropdownRenderOption
 
 export type DropdownIgnoredOption = MenuIgnoredOption
 

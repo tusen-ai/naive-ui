@@ -1,7 +1,8 @@
+import type { PropType } from 'vue'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { Span } from './interface'
-import { computed, defineComponent, h, inject, type PropType } from 'vue'
+import { computed, defineComponent, h, inject } from 'vue'
 import {
-  type ExtractPublicPropTypes,
   formatLength,
   keysOf,
   throwError

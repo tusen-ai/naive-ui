@@ -9,6 +9,7 @@ import type {
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { CarouselTheme } from '../styles'
+import type { CarouselContextValue } from './CarouselContext'
 import type {
   ArrowScopedSlotProps,
   CarouselArrowSlotProps,
@@ -44,7 +45,6 @@ import { flatten, keep, resolveSlotWithTypedProps } from '../../_utils'
 import { carouselLight } from '../styles'
 import NCarouselArrow from './CarouselArrow'
 import {
-  type CarouselContextValue,
   provideCarouselContext
 } from './CarouselContext'
 import NCarouselDots from './CarouselDots'
@@ -1044,21 +1044,21 @@ export default defineComponent({
           }}
         </VResizeObserver>
         {this.showDots
-        && dotSlotProps.total > 1
-        && resolveSlotWithTypedProps(dotsSlot, dotSlotProps, () => [
-          <NCarouselDots
-            key={dotType + dotPlacement}
-            total={dotSlotProps.total}
-            currentIndex={dotSlotProps.currentIndex}
-            dotType={dotType}
-            trigger={this.trigger}
-            keyboard={this.keyboard}
-          />
-        ])}
+          && dotSlotProps.total > 1
+          && resolveSlotWithTypedProps(dotsSlot, dotSlotProps, () => [
+            <NCarouselDots
+              key={dotType + dotPlacement}
+              total={dotSlotProps.total}
+              currentIndex={dotSlotProps.currentIndex}
+              dotType={dotType}
+              trigger={this.trigger}
+              keyboard={this.keyboard}
+            />
+          ])}
         {showArrow
-        && resolveSlotWithTypedProps(arrowSlot, arrowSlotProps, () => [
-          <NCarouselArrow />
-        ])}
+          && resolveSlotWithTypedProps(arrowSlot, arrowSlotProps, () => [
+            <NCarouselArrow />
+          ])}
       </div>
     )
   }

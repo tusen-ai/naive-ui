@@ -1,16 +1,12 @@
+import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CardTheme } from '../styles'
 import { getPadding } from 'seemly'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
-  h,
-  type PropType,
-  type SlotsType,
-  type VNode,
-  type VNodeChild
+  h
 } from 'vue'
 import { NBaseClose } from '../../_internal'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'

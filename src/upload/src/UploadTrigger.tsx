@@ -1,11 +1,10 @@
+import type { SlotsType, VNode } from 'vue'
 import type { UploadTriggerDefaultSlotOptions } from './interface'
 import {
   computed,
   defineComponent,
   h,
-  inject,
-  type SlotsType,
-  type VNode
+  inject
 } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import { AddIcon } from '../../_internal/icons'

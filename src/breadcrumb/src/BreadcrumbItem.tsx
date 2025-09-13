@@ -1,12 +1,9 @@
+import type { ExtractPropTypes, PropType, SlotsType, VNode } from 'vue'
 import {
   computed,
   defineComponent,
-  type ExtractPropTypes,
   h,
-  inject,
-  type PropType,
-  type SlotsType,
-  type VNode
+  inject
 } from 'vue'
 import { resolveSlot, warn } from '../../_utils'
 import { useBrowserLocation } from '../../_utils/composable/use-browser-location'

@@ -1,3 +1,4 @@
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CalendarTheme } from '../styles'
@@ -19,15 +20,11 @@ import {
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   Fragment,
   h,
-  type PropType,
   ref,
-  type SlotsType,
-  toRef,
-  type VNode
+  toRef
 } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'

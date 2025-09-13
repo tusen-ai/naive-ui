@@ -1,4 +1,6 @@
+import type { PropType, Ref } from 'vue'
 import type { ScrollbarInst } from '../../_internal'
+import type { Hljs, ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { LogTheme } from '../styles'
 import { throttle } from 'lodash-es'
@@ -7,17 +9,13 @@ import {
   defineComponent,
   h,
   nextTick,
-  type PropType,
   provide,
-  type Ref,
   ref,
   toRef,
   Transition
 } from 'vue'
 import { NScrollbar } from '../../_internal'
 import {
-  type Hljs,
-  type ThemeProps,
   useConfig,
   useHljs,
   useTheme,
@@ -42,8 +40,8 @@ export interface LogInst {
   scrollTo: ((options: {
     silent?: boolean
     position: 'top' | 'bottom'
-  }) => void) &
-  ((options: { silent?: boolean, top: number }) => void)
+  }) => void)
+  & ((options: { silent?: boolean, top: number }) => void)
 }
 
 export const logProps = {

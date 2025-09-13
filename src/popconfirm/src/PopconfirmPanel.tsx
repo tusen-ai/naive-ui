@@ -1,10 +1,9 @@
+import type { CSSProperties, PropType } from 'vue'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   inject,
-  type PropType,
   toRef
 } from 'vue'
 import { NBaseIcon } from '../../_internal'
