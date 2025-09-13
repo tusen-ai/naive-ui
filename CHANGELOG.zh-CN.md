@@ -21,6 +21,7 @@
 - 修复 `n-carousel` 只有一张图的情況下样式错乱的问题，关闭 [#6476](https://github.com/tusen-ai/naive-ui/issues/6476)
 - 修复 `n-progress` 多个 `type="circle"`情况下样式覆盖问题，关闭 [#7172](https://github.com/tusen-ai/naive-ui/issues/7172)
 - 修复 `n-marquee` 组件 'Non-function value encountered for default slot' 警告
+- 修复 `n-upload` icon 导致的内存泄露问题
 
 ### Features
 

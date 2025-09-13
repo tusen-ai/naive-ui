@@ -20,6 +20,7 @@
 - Fix `n-input-group-label` not injecting `formItemInjectionKey`, causing the `size` property to fail, and close [#7066](https://github.com/tusen-ai/naive-ui/issues/7066)
 - Fix the issue of style confusion in `n-carousel` when there is only one image, close [#6476](https://github.com/tusen-ai/naive-ui/issues/6476)
 - Fix `n-marquee` component 'Non-function value encountered for default slot' warning.
+- Fix memory leak caused by `n-upload` icon.
 
 ### Features
 
