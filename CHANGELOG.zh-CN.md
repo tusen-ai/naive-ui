@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- Modal 内部的关闭按钮将无法通过键盘聚焦，并且不再是默认的焦点
+
 ### i18n
 
 - Add daDK locale.
@@ -42,6 +46,8 @@
 - `n-message` 增加 `border` 主题变量，关闭 [#7105](https://github.com/tusen-ai/naive-ui/issues/7105)
 - `n-modal` 增加 `mask-visible` 属性
 - `useModal` 新增 `render` 函数，关闭 [#5857](https://github.com/tusen-ai/naive-ui/issues/5857)
+- `n-card` 新增 `close-focusable` 属性
+- `n-dialog` 新增 `close-focusable` 属性
 
 ## 2.42.0
 

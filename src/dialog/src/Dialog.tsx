@@ -289,6 +289,7 @@ export const NDialog = defineComponent({
                 <div class={classNames}>{node}</div>
               ) : (
                 <NBaseClose
+                  focusable={this.closeFocusable}
                   clsPrefix={mergedClsPrefix}
                   class={classNames}
                   onClick={this.handleCloseClick}

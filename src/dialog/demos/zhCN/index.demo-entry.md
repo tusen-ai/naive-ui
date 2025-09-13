@@ -74,6 +74,7 @@ rtl-debug.vue
 | bordered | `boolean` | `false` | 是否显示 `border` |  |
 | class | `any` | `undefined` | 类名 | 2.33.0 |
 | closable | `boolean` | `true` | 是否显示 `close` 图标 |  |
+| closeFocusable | `boolean` | `false` | 关闭按钮是否可以聚焦 | NEXT_VERSION |
 | closeOnEsc | `boolean` | `true` | 是否在摁下 Esc 键的时候关闭对话框 | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | `undefined` | 对话框内容，可以是渲染函数 |  |
 | contentClass | `string` | `undefined` | 内容的类名 | 2.38.2 |
@@ -115,6 +116,7 @@ rtl-debug.vue
 | bordered | `boolean` | 是否显示 `border` |  |
 | class | `any` | 类名 | 2.33.0 |
 | closable | `boolean` | 是否显示 `close` 图标 |  |
+| closeFocusable | `boolean` | 关闭按钮是否可以聚焦 | NEXT_VERSION |
 | closeOnEsc | `boolean` | 是否在摁下 Esc 键的时候关闭对话框 | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | 对话框内容，可以是渲染函数 |  |
 | contentClass | `string` | 内容的类名 | 2.38.2 |
@@ -155,6 +157,7 @@ rtl-debug.vue
 | action-style | `Object \| string` | `undefined` | 操作区域的样式 | 2.38.2 |
 | bordered | `boolean` | `false` | 是否显示 `border` |  |
 | closable | `boolean` | `true` | 是否显示 `close` 图标 |  |
+| close-focusable | `boolean` | `false` | 关闭按钮是否可以聚焦 | NEXT_VERSION |
 | content | `string \| (() => VNodeChild)` | `undefined` | 对话框内容，可以是渲染函数 |  |
 | content-class | `string` | `undefined` | 内容的类名 | 2.38.2 |
 | content-style | `Object \| string` | `undefined` | 内容的样式 | 2.38.2 |

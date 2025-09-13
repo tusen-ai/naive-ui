@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Breaking Changes
+
+- Modal's inner close button won't be focusable using keyboard and it'll no longer be focused first by default.
+
 ### i18n
 
 - Add daDK locale.
@@ -41,6 +45,8 @@
 - `n-message` adds `border` theme variable, closes [#7105](https://github.com/tusen-ai/naive-ui/issues/7105).
 - `n-modal` adds `show-mask` prop.
 - `useModal` add `render` function, closes [#5857](https://github.com/tusen-ai/naive-ui/issues/5857).
+- `n-card` add `close-focusable` prop.
+- `n-dialog` add `close-focusable` prop.
 
 ## 2.42.0
 

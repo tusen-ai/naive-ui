@@ -61,7 +61,8 @@ export const cardBaseProps = {
   content: [String, Function] as PropType<string | (() => VNodeChild)>,
   footer: Function as PropType<() => VNodeChild>,
   action: Function as PropType<() => VNodeChild>,
-  headerExtra: Function as PropType<() => VNodeChild>
+  headerExtra: Function as PropType<() => VNodeChild>,
+  closeFocusable: Boolean
 } as const
 
 export const cardBasePropKeys = keysOf(cardBaseProps)
@@ -290,6 +291,7 @@ export default defineComponent({
                   clsPrefix={mergedClsPrefix}
                   class={`${mergedClsPrefix}-card-header__close`}
                   onClick={this.handleCloseClick}
+                  focusable={this.closeFocusable}
                   absolute
                 />
               )}
