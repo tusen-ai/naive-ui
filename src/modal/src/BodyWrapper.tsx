@@ -69,10 +69,7 @@ export default defineComponent({
       type: [Boolean, Object] as PropType<boolean | ModalDraggableOptions>,
       default: false
     },
-    mouseEventPenetrate: {
-      type: Boolean,
-      default: false
-    },
+    maskHidden: Boolean,
     ...presetProps,
     renderMask: Function as PropType<() => VNodeChild>,
     // events
@@ -279,8 +276,8 @@ export default defineComponent({
             role="none"
             class={[
               `${mergedClsPrefix}-modal-body-wrapper`,
-              this.mouseEventPenetrate
-              && `${mergedClsPrefix}-modal-body-wrapper--penetrate`
+              this.maskHidden
+              && `${mergedClsPrefix}-modal-body-wrapper--mask-hidden`
             ]}
           >
             <NScrollbar
@@ -293,7 +290,7 @@ export default defineComponent({
                 default: () => [
                   this.renderMask?.(),
                   <VFocusTrap
-                    disabled={!this.trapFocus}
+                    disabled={!this.trapFocus || this.maskHidden}
                     active={this.show}
                     onEsc={this.onEsc}
                     autoFocus={this.autoFocus}

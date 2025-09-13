@@ -1,9 +1,9 @@
 <markdown>
-# Mask Visible
+# Mask visible
 
 You can also hide the modal dialog's mask layer, which allows creating a floating panel.
 
-Note that in this case, all mask-related APIs will be disabled.
+Note that in this case, all mask-related APIs will be disabled, focus won't be limit inside modal (so keyboard event like Esc won't always work).
 </markdown>
 
 <script lang="ts" setup>

@@ -45,7 +45,11 @@ export default c([
       display: flex;
       position: relative;
     `),
-    cM('penetrate', `pointer-events: none;`)
+    cM('mask-hidden', `pointer-events: none;`, [
+      c('> *', `
+        pointer-events: all;
+      `)
+    ])
   ]),
   cB('modal', `
     position: relative;
@@ -53,7 +57,6 @@ export default c([
     color: var(--n-text-color);
     margin: auto;
     box-shadow: var(--n-box-shadow);
-    pointer-events: all;
   `, [
     fadeInScaleUpTransition({
       duration: '.25s',

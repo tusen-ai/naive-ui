@@ -39,7 +39,7 @@
 - `n-input-otp` adds `focusOnChar` util method, closes [#7073](https://github.com/tusen-ai/naive-ui/issues/7073).
 - `n-form-item` adds `content-class`、`content-style` props.
 - `n-message` adds `border` theme variable, closes [#7105](https://github.com/tusen-ai/naive-ui/issues/7105).
-- `n-modal` adds `mask-visible` prop.
+- `n-modal` adds `show-mask` prop.
 - `useModal` add `render` function, closes [#5857](https://github.com/tusen-ai/naive-ui/issues/5857).
 
 ## 2.42.0

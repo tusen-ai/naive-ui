@@ -44,7 +44,7 @@ function showAny() {
       width: '400px',
       background: '#fff'
     },
-    render () {
+    render() {
       return h('div', [
         '随便啥',
         h(
@@ -65,9 +65,9 @@ function showAny() {
     </NButton>
     <NButton @click="showCardPreset">
       来吧 Card
-    </n-button>
-    <n-button @click="showAny">
+    </NButton>
+    <NButton @click="showAny">
       来吧 随便啥
-    </n-button>
+    </NButton>
   </n-flex>
 </template>
