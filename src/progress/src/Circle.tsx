@@ -1,5 +1,6 @@
 import type { CSSProperties, PropType } from 'vue'
 import type { ProgressGradient, ProgressStatus } from './public-types'
+import { hash } from 'css-render'
 import { computed, defineComponent, h } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {
@@ -64,8 +65,9 @@ export default defineComponent({
   setup(props, { slots }) {
     const gradientIdRef = computed(() => {
       const base = 'gradient'
-      if (typeof props.fillColor === 'object') {
-        return `${base}-${props.fillColor.stops[0]}-${props.fillColor.stops[1]}`
+      const { fillColor } = props
+      if (typeof fillColor === 'object') {
+        return `${base}-${hash(JSON.stringify(fillColor))}`
       }
       return base
     })

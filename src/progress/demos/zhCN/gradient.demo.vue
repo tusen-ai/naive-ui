@@ -25,11 +25,6 @@ const themeVars = useThemeVars()
       <n-progress
         type="circle"
         :percentage="percentage"
-        :color="{ stops: ['#605F56', '#EDDECB'] }"
-      />
-      <n-progress
-        type="circle"
-        :percentage="percentage"
         :color="{ stops: ['#E3F2FD', '#2080f0'] }"
       />
       <n-progress
