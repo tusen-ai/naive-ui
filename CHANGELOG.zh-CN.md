@@ -1,6 +1,14 @@
 # CHANGELOG
 
+## 2.43.1
+
+`2025-09-15`
+
+- 修复 esm 格式的产物使用 `lodash` 而非 `lodash-es`
+
 ## 2.43.0
+
+`2025-09-14`
 
 ### Breaking Changes
 

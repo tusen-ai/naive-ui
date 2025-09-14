@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "2.43.0",
+  "version": "2.43.1",
   "packageManager": "pnpm@9.5.0",
   "description": "A Vue 3 Component Library. Fairly Complete, Theme Customizable, Uses TypeScript, Fast",
   "author": "07akioni",
@@ -35,7 +35,7 @@
   "scripts": {
     "start": "pnpm run dev",
     "dev": "pnpm run clean && pnpm run gen-version && pnpm run gen-volar-dts && NODE_ENV=development vite",
-    "build:package": "pnpm run gen-version && pnpm run clean && pnpm run gen-volar-dts && tsc -b --force tsconfig.esm.json && tsx scripts/pre-build/pre-cjs-build.ts && tsc -b --force tsconfig.cjs.json && rollup -c && pnpm run build:themes && pnpm run test:umd && pnpm run test:esm && pnpm run post-build && rimraf {es,lib}/*.tsbuildinfo",
+    "build:package": "pnpm run gen-version && pnpm run clean && pnpm run gen-volar-dts && tsc -b --force tsconfig.esm.json && tsx scripts/pre-build/pre-cjs-build.ts && tsc -b --force tsconfig.cjs.json && rollup -c && pnpm run test:umd && pnpm run test:esm && pnpm run post-build && rimraf {es,lib}/*.tsbuildinfo",
     "build:themes": "tsc -b --force themes/tusimple/tsconfig.esm.json && tsc -b --force themes/tusimple/tsconfig.cjs.json",
     "build:site": "bash ./scripts/pre-build-site/pre-build-site.sh && NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && bash ./scripts/post-build-site/post-build-site.sh",
     "clean": "rimraf site lib es dist node_modules/naive-ui themes/tusimple/es themes/tusimple/lib",

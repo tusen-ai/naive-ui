@@ -1,6 +1,16 @@
 # CHANGELOG
 
+## 2.43.1
+
+`2025-09-15`
+
+### Fixes
+
+- Fix esm format files are importing `lodash` rather than `lodash-es`.
+
 ## 2.43.0
+
+`2025-09-14`
 
 ### Breaking Changes
 
