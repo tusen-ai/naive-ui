@@ -311,7 +311,7 @@ export default defineComponent({
                                 dirs.push([
                                   clickoutside,
                                   this.onClickoutside,
-                                  undefined as unknown as string,
+                                  undefined,
                                   { capture: true }
                                 ])
                               }
