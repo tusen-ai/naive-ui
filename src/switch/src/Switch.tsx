@@ -1,3 +1,4 @@
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { SwitchTheme } from '../styles'
@@ -6,14 +7,10 @@ import { depx, pxfy } from 'seemly'
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
-  type PropType,
   ref,
-  type SlotsType,
   toRef,
-  type VNode,
   watchEffect
 } from 'vue'
 import { NBaseLoading, NIconSwitchTransition } from '../../_internal'

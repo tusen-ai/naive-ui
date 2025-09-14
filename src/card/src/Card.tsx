@@ -1,16 +1,12 @@
+import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CardTheme } from '../styles'
 import { getPadding } from 'seemly'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
-  h,
-  type PropType,
-  type SlotsType,
-  type VNode,
-  type VNodeChild
+  h
 } from 'vue'
 import { NBaseClose } from '../../_internal'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
@@ -61,7 +57,8 @@ export const cardBaseProps = {
   content: [String, Function] as PropType<string | (() => VNodeChild)>,
   footer: Function as PropType<() => VNodeChild>,
   action: Function as PropType<() => VNodeChild>,
-  headerExtra: Function as PropType<() => VNodeChild>
+  headerExtra: Function as PropType<() => VNodeChild>,
+  closeFocusable: Boolean
 } as const
 
 export const cardBasePropKeys = keysOf(cardBaseProps)
@@ -290,6 +287,7 @@ export default defineComponent({
                   clsPrefix={mergedClsPrefix}
                   class={`${mergedClsPrefix}-card-header__close`}
                   onClick={this.handleCloseClick}
+                  focusable={this.closeFocusable}
                   absolute
                 />
               )}

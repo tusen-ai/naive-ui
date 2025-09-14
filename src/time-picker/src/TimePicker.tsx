@@ -1,7 +1,10 @@
 import type { Locale } from 'date-fns'
+import type { CSSProperties, PropType, VNode } from 'vue'
+import type { FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/public-types'
+import type { InputInst } from '../../input'
 import type { TimePickerTheme } from '../styles'
 import type {
   IsHourDisabled,
@@ -38,21 +41,18 @@ import { clickoutside } from 'vdirs'
 import { useIsMounted, useKeyboard, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   nextTick,
-  type PropType,
   provide,
   ref,
   toRef,
   Transition,
-  type VNode,
   watch,
   watchEffect,
   withDirectives
 } from 'vue'
-import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc'
+import { VBinder, VFollower, VTarget } from 'vueuc'
 import { NBaseIcon } from '../../_internal'
 import { TimeIcon } from '../../_internal/icons'
 import {
@@ -69,7 +69,7 @@ import {
   warnOnce
 } from '../../_utils'
 import { strictParse } from '../../date-picker/src/utils'
-import { type InputInst, NInput } from '../../input'
+import { NInput } from '../../input'
 import { timePickerLight } from '../styles'
 import { timePickerInjectionKey } from './interface'
 import Panel from './Panel'

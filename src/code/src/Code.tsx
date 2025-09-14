@@ -1,3 +1,5 @@
+import type { PropType } from 'vue'
+import type { Hljs, ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { CodeTheme } from '../styles'
 import {
@@ -5,14 +7,11 @@ import {
   defineComponent,
   h,
   onMounted,
-  type PropType,
   ref,
   toRef,
   watch
 } from 'vue'
 import {
-  type Hljs,
-  type ThemeProps,
   useConfig,
   useHljs,
   useTheme,

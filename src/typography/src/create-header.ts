@@ -1,8 +1,10 @@
+import type { PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { TypographyTheme } from '../styles'
-import { computed, defineComponent, h, type PropType } from 'vue'
+import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import { createKey, type ExtractPublicPropTypes } from '../../_utils'
+import { createKey } from '../../_utils'
 import { typographyLight } from '../styles'
 import style from './styles/header.cssr'
 

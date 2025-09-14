@@ -1,13 +1,12 @@
+import type { CSSProperties, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { TypographyTheme } from '../styles'
 import { useCompitable } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
-  h,
-  type PropType
+  h
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { createKey, warn } from '../../_utils'

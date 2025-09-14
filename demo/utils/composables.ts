@@ -22,7 +22,7 @@ export function useIsSmallDesktop() {
   })
 }
 
-export const i18n = function (data: Record<string, Record<string, string>>) {
+export function i18n(data: Record<string, Record<string, string>>) {
   const localeReactive = inject<{ locale: string } | null>('i18n', null)
   if (!localeReactive) {
     throw new Error('i18n context not provided')

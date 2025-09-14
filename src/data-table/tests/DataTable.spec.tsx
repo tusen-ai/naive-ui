@@ -1,9 +1,11 @@
-import { mount } from '@vue/test-utils'
+import type { HTMLAttributes } from 'vue'
 /* eslint-disable unused-imports/no-unused-vars */
-import { h, type HTMLAttributes, nextTick, ref } from 'vue'
+import type { DataTableColumns, DataTableInst } from '../index'
+import { mount } from '@vue/test-utils'
+import { h, nextTick, ref } from 'vue'
 import { NButton } from '../../button'
 import { NButtonGroup } from '../../button-group'
-import { type DataTableColumns, type DataTableInst, NDataTable } from '../index'
+import { NDataTable } from '../index'
 
 describe('n-data-table', () => {
   it('should work with import on demand', () => {

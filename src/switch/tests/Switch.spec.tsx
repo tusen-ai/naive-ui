@@ -1,5 +1,6 @@
+import type { CSSProperties } from 'vue'
 import { mount } from '@vue/test-utils'
-import { type CSSProperties, Fragment, h } from 'vue'
+import { Fragment, h } from 'vue'
 import { NSwitch } from '../index'
 
 describe('n-switch', () => {

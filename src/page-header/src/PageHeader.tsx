@@ -1,13 +1,11 @@
+import type { PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { PageHeaderTheme } from '../styles/light'
 import {
   computed,
   defineComponent,
-  h,
-  type PropType,
-  type SlotsType,
-  type VNode
+  h
 } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import { ArrowBackIcon } from '../../_internal/icons'

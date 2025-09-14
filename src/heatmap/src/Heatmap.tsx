@@ -9,6 +9,7 @@ import type {
   HeatmapFirstDayOfWeek,
   HeatmapSlots
 } from './public-types'
+import type { HeatmapColorTheme } from './theme'
 import { addDays, format, parseISO, startOfWeek } from 'date-fns'
 import { groupBy, mapValues, maxBy } from 'lodash-es'
 import { pxfy } from 'seemly'
@@ -27,7 +28,7 @@ import { useLoadingStyleClass } from './animationStyle'
 import HeatmapColorIndicator from './ColorIndicator'
 import Rect from './Rect'
 import style from './styles/index.cssr'
-import { type HeatmapColorTheme, heatmapColorThemes } from './theme'
+import { heatmapColorThemes } from './theme'
 import {
   completeDataGaps,
   createDayRect,

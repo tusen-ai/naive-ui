@@ -1,15 +1,15 @@
+import type { CSSProperties, PropType } from 'vue'
 import type { ScrollbarInst, ScrollbarProps } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { LayoutTheme } from '../styles'
+import type { LayoutSiderInst } from './interface'
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   inject,
-  type PropType,
   provide,
   ref,
   toRef
@@ -20,7 +20,6 @@ import { call, formatLength, useReactivated, warn } from '../../_utils'
 import { layoutLight } from '../styles'
 import {
   layoutSiderInjectionKey,
-  type LayoutSiderInst,
   positionProp
 } from './interface'
 import { layoutInjectionKey } from './Layout'

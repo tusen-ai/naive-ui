@@ -1,10 +1,9 @@
+import type { CSSProperties, PropType } from 'vue'
 import type { ProgressGradient } from './public-types'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
-  h,
-  type PropType
+  h
 } from 'vue'
 
 function circlePath(r: number, sw: number, vw: number = 100): string {

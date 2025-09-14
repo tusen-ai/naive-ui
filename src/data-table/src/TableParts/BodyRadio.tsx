@@ -1,6 +1,8 @@
-import { defineComponent, h, inject, type PropType } from 'vue'
+import type { PropType } from 'vue'
+import type { RowKey } from '../interface'
+import { defineComponent, h, inject } from 'vue'
 import { NRadio } from '../../../radio'
-import { dataTableInjectionKey, type RowKey } from '../interface'
+import { dataTableInjectionKey } from '../interface'
 
 // Extract the radio to avoid useless rendering in table body
 export default defineComponent({

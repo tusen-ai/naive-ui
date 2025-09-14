@@ -1,3 +1,4 @@
+import type { CSSProperties, PropType, VNode, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { RadioTheme } from '../styles'
@@ -6,15 +7,11 @@ import type { RadioBaseProps } from './use-radio'
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
-  type PropType,
   provide,
   ref,
-  toRef,
-  type VNode,
-  type VNodeChild
+  toRef
 } from 'vue'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
@@ -28,9 +25,9 @@ function mapSlot(
   value: string | number | boolean | null,
   clsPrefix: string
 ): {
-    children: VNodeChild[]
-    isButtonGroup: boolean
-  } {
+  children: VNodeChild[]
+  isButtonGroup: boolean
+} {
   const children: VNode[] = []
   let isButtonGroup = false
   for (let i = 0; i < defaultSlot.length; ++i) {

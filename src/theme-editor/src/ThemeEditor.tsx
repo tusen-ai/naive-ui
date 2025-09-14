@@ -1,3 +1,4 @@
+import type { GlobalTheme, GlobalThemeOverrides } from '../../config-provider'
 import { cloneDeep, merge } from 'lodash-es'
 import {
   computed,
@@ -15,8 +16,6 @@ import { NButton } from '../../button'
 import { NCollapse, NCollapseItem } from '../../collapse'
 import { NColorPicker } from '../../color-picker'
 import {
-  type GlobalTheme,
-  type GlobalThemeOverrides,
   NConfigProvider
 } from '../../config-provider'
 import { configProviderInjectionKey } from '../../config-provider/src/context'
@@ -408,9 +407,9 @@ export default defineComponent({
                               const componentTheme:
                                 | Record<string, string>
                                 | undefined
-                                = themeKey === 'common'
-                                  ? this.themeCommonDefault
-                                  : (theme as any)[themeKey]
+                                  = themeKey === 'common'
+                                    ? this.themeCommonDefault
+                                    : (theme as any)[themeKey]
                               if (componentTheme === undefined) {
                                 return null
                               }

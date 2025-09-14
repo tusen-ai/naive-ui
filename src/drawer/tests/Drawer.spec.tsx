@@ -1,9 +1,8 @@
+import type { DrawerContentProps, DrawerProps } from '../index'
 import { mount } from '@vue/test-utils'
 import { defineComponent, h, nextTick, ref } from 'vue'
 import { NButton } from '../../button'
 import {
-  type DrawerContentProps,
-  type DrawerProps,
   NDrawer,
   NDrawerContent
 } from '../index'

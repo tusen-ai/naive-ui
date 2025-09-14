@@ -1,10 +1,9 @@
+import type { CSSProperties, VNode } from 'vue'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
-  inject,
-  type VNode
+  inject
 } from 'vue'
 import { NFadeInExpandTransition } from '../../_internal'
 import { throwError } from '../../_utils'
@@ -85,8 +84,8 @@ export default defineComponent({
         >
           {renderUploadFileList()}
           {showTriggerRef.value
-          && !maxReachedRef.value
-          && isImageCardTypeRef.value && (
+            && !maxReachedRef.value
+            && isImageCardTypeRef.value && (
             <NUploadTrigger>{slots}</NUploadTrigger>
           )}
         </div>

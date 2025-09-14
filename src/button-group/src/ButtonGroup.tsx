@@ -1,6 +1,7 @@
+import type { PropType } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { Size } from '../../button/src/interface'
-import { defineComponent, h, type PropType, provide } from 'vue'
+import { defineComponent, h, provide } from 'vue'
 import { useConfig, useStyle } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
 import { buttonGroupInjectionKey } from './context'

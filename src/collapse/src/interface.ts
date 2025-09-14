@@ -1,10 +1,10 @@
 export type OnUpdateExpandedNames = <
-  T extends string[] &
-  number[] &
-  Array<string | number> &
-  (string | number | null) &
-  (string | null) &
-  (number | null)
+  T extends string[]
+  & number[]
+  & Array<string | number>
+  & (string | number | null)
+  & (string | null)
+  & (number | null)
 >(
   value: T
 ) => void

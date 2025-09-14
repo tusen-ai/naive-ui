@@ -1,15 +1,14 @@
+import type { Component, PropType } from 'vue'
+import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { IconTheme } from '../styles'
 import {
-  type Component,
   computed,
   defineComponent,
   h,
-  mergeProps,
-  type PropType
+  mergeProps
 } from 'vue'
 import {
-  type ThemeProps,
   useConfig,
   useTheme,
   useThemeClass

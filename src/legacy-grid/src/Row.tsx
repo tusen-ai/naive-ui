@@ -1,16 +1,15 @@
+import type { PropType, Ref } from 'vue'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { useMemo } from 'vooks'
 import {
   defineComponent,
   h,
-  type PropType,
   provide,
-  type Ref,
   toRef
 } from 'vue'
 import { useConfig, useRtl, useStyle } from '../../_mixins'
 import {
   createInjectionKey,
-  type ExtractPublicPropTypes,
   formatLength,
   keysOf
 } from '../../_utils'

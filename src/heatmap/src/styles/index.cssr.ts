@@ -91,7 +91,6 @@ export default c([
     height: var(--n-rect-size);
     border-radius: var(--n-border-radius);
     background-color: var(--n-rect-color);
-    cursor: pointer;
     transition: background-color .3s var(--n-bezier);
   `, [
     cM('loading', `

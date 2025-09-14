@@ -1,9 +1,9 @@
+import type { PropType } from 'vue'
 import { getPreciseEventTarget } from 'seemly'
 import { clickoutside } from 'vdirs'
 import {
   defineComponent,
   h,
-  type PropType,
   ref,
   Transition,
   withDirectives

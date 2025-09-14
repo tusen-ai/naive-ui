@@ -1,13 +1,10 @@
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ScrollbarProps } from '../../_internal'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import {
-  type CSSProperties,
   defineComponent,
   h,
-  inject,
-  type PropType,
-  type SlotsType,
-  type VNode
+  inject
 } from 'vue'
 import { NBaseClose, NScrollbar } from '../../_internal'
 import { throwError } from '../../_utils'
