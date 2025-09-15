@@ -115,3 +115,9 @@ export interface FormInst {
 }
 
 export interface FormValidateMessages extends ValidateMessages {}
+
+export interface FormItemSlots {
+  default?: () => VNodeChild
+  feedback?: () => VNodeChild
+  label?: () => VNodeChild
+}
