@@ -1,4 +1,4 @@
-import type { CSSProperties, Ref, VNodeChild } from 'vue'
+import type { CSSProperties, Ref, VNode, VNodeChild } from 'vue'
 import type { MergedTheme } from '../../_mixins'
 import type { ImageGroupProps } from '../../image'
 import type { UploadTheme } from '../styles'
@@ -140,4 +140,8 @@ export interface UploadTriggerDefaultSlotOptions {
   handleDragEnter: (e: DragEvent) => void
   handleDragLeave: (e: DragEvent) => void
   handleDrop: (e: DragEvent) => void
+}
+
+export interface UploadSlots {
+  default?: () => VNode[]
 }
