@@ -9,7 +9,6 @@ import {
 } from 'naive-ui'
 import { useMemo } from 'vooks'
 import { computed, ref } from 'vue'
-import { TsConfigProvider } from '../../themes/tusimple/src'
 import { i18n, useIsMobile } from '../utils/composables'
 import hljs from './hljs'
 import {
@@ -82,14 +81,7 @@ const themeRef = computed(() => {
 })
 
 // config provider
-// eslint-disable-next-line node/prefer-global/process
-const configProviderNameRef = ref(process.env.TUSIMPLE ? 'tusimple' : 'default')
-
-const configProviderRef = computed(() => {
-  return configProviderNameRef.value === 'tusimple'
-    ? TsConfigProvider
-    : NConfigProvider
-})
+const configProviderNameRef = ref('default')
 
 // options
 const docOptionsRef = computed(() =>
@@ -129,7 +121,7 @@ export function siteSetup() {
     themeEditorStyle: computed(() => {
       return isMobileRef.value ? 'right: 18px; bottom: 24px;' : undefined
     }),
-    configProvider: configProviderRef,
+    configProvider: NConfigProvider,
     hljs,
     themeName: themeNameRef,
     theme: themeRef,

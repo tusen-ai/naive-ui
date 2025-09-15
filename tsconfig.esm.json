@@ -2,9 +2,6 @@
   "references": [
     {
       "path": "./src/tsconfig.esm.json"
-    },
-    {
-      "path": "./themes/tusimple/tsconfig.esm.json"
     }
   ],
   "files": []

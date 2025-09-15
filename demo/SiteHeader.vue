@@ -39,7 +39,6 @@ const locales = {
     common: '常规',
     debug: '调试',
     alreadyHome: '别点了，你已经在首页了',
-    tusimpleTheme: '图森主题',
     defaultTheme: '默认主题'
   },
   'en-US': {
@@ -52,7 +51,6 @@ const locales = {
     common: 'Common',
     debug: 'Debug',
     alreadyHome: 'You are already in home page. No clicking anymore.',
-    tusimpleTheme: 'TuSimple Theme',
     defaultTheme: 'Default Theme'
   }
 }
@@ -214,18 +212,6 @@ export default defineComponent({
 
     // config provider
     const configProviderNameRef = useConfigProviderName()
-    const cfgProviderLabelMapRef = computed(() => ({
-      tusimple: t('defaultTheme'),
-      default: t('tusimpleTheme')
-    }))
-    function handleConfigProviderUpdate() {
-      if (configProviderNameRef.value === 'tusimple') {
-        configProviderNameRef.value = 'default'
-      }
-      else {
-        configProviderNameRef.value = 'tusimple'
-      }
-    }
 
     // search
     const searchableOptionsRef = useFlattenedDocOptions()
@@ -293,7 +279,6 @@ export default defineComponent({
       menuInstRef,
       renderMenuLabel,
       mobilePopoverRef,
-      tusimple: process.env.TUSIMPLE,
       dev: __DEV__,
       message,
       t,
@@ -315,8 +300,6 @@ export default defineComponent({
       handleLocaleUpdate,
       // configProvider
       configProviderName: configProviderNameRef,
-      cfgProviderLabelMap: cfgProviderLabelMapRef,
-      handleConfigProviderUpdate,
       // search
       searchPattern: searchPatternRef,
       searchOptions: searchOptionsRef,
@@ -447,15 +430,6 @@ export default defineComponent({
         @click="handleDisplayModeUpdate"
       >
         {{ displayModeLabelMap[displayMode] }}
-      </n-button>
-      <n-button
-        v-if="tusimple || dev"
-        size="small"
-        quaternary
-        class="nav-picker"
-        @click="handleConfigProviderUpdate"
-      >
-        {{ cfgProviderLabelMap[configProviderName] }}
       </n-button>
     </div>
   </n-layout-header>
