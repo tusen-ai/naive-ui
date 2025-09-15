@@ -39,6 +39,7 @@ menu.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | bottom | `number \| string` | `undefined` | CSS `bottom` property of the button group. | 2.38.0 |
+| direction | `'vertical' \| 'horizontal'` | `'vertical'` | Layout direction of the button group. | NEXT_VERSION |
 | left | `number \| string` | `undefined` | CSS `left` property of the button group. | 2.38.0 |
 | position | `'relative' \| 'absolute' \| 'fixed'` | `'fixed'` | CSS `position` property of the button group. | 2.38.0 |
 | right | `number \| string` | `undefined` | CSS `right` property of the button group. | 2.38.0 |

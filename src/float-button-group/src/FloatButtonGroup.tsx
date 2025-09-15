@@ -2,22 +2,9 @@ import type { CSSProperties, PropType, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { FloatButtonGroupTheme } from '../styles/light'
-import {
-  computed,
-  defineComponent,
-  h,
-  provide,
-  toRef
-} from 'vue'
-import {
-  useConfig,
-  useTheme,
-  useThemeClass
-} from '../../_mixins'
-import {
-  createInjectionKey,
-  formatLength
-} from '../../_utils'
+import { computed, defineComponent, h, provide, toRef } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { createInjectionKey, formatLength } from '../../_utils'
 import floatButtonGroupLight from '../styles/light'
 import style from './styles/index.cssr'
 
@@ -34,6 +21,10 @@ export const floatButtonGroupProps = {
   shape: {
     type: String as PropType<'square' | 'circle'>,
     default: 'circle'
+  },
+  direction: {
+    type: String as PropType<'vertical' | 'horizontal'>,
+    default: 'vertical'
   },
   position: {
     type: String as PropType<'relative' | 'absolute' | 'fixed'>,
@@ -96,12 +87,13 @@ export default defineComponent({
     }
   },
   render() {
-    const { mergedClsPrefix, cssVars, shape } = this
+    const { mergedClsPrefix, cssVars, shape, direction } = this
     return (
       <div
         class={[
           `${mergedClsPrefix}-float-button-group`,
-          `${mergedClsPrefix}-float-button-group--${shape}-shape`
+          `${mergedClsPrefix}-float-button-group--${shape}-shape`,
+          `${mergedClsPrefix}-float-button-group--${direction}`
         ]}
         style={cssVars as CSSProperties}
         role="group"

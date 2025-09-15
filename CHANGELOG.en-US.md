@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-float-button` adds `direction` prop.
+
 ## 2.43.1
 
 `2025-09-15`

@@ -39,6 +39,7 @@ menu.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | bottom | `number \| string` | `undefined` | 按钮组的 CSS `bottom` 属性 | 2.38.0 |
+| direction | `'vertical' \| 'horizontal'` | `'vertical'` | 按钮组的排列方向 | NEXT_VERSION |
 | left | `number \| string` | `undefined` | 按钮组的 CSS `left` 属性 | 2.38.0 |
 | position | `'relative' \| 'absolute' \| 'fixed'` | `'fixed'` | 按钮组的定位方式 | 2.38.0 |
 | right | `number \| string` | `undefined` | 按钮组的 CSS `right` 属性 | 2.38.0 |
