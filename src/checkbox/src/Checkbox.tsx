@@ -1,9 +1,10 @@
-import type { CSSProperties, PropType } from 'vue'
+import type { CSSProperties, PropType, SlotsType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CheckboxTheme } from '../styles'
 import type {
   CheckboxInst,
+  CheckboxSlots,
   OnUpdateChecked,
   OnUpdateCheckedImpl
 } from './interface'
@@ -22,12 +23,7 @@ import {
 import { NIconSwitchTransition } from '../../_internal'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
-import {
-  call,
-  createKey,
-  resolveWrappedSlot,
-  warnOnce
-} from '../../_utils'
+import { call, createKey, resolveWrappedSlot, warnOnce } from '../../_utils'
 import { checkboxLight } from '../styles'
 import { checkboxGroupInjectionKey } from './CheckboxGroup'
 import renderCheckMark from './CheckMark'
@@ -81,6 +77,7 @@ export type CheckboxProps = ExtractPublicPropTypes<typeof checkboxProps>
 export default defineComponent({
   name: 'Checkbox',
   props: checkboxProps,
+  slots: Object as SlotsType<CheckboxSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {
