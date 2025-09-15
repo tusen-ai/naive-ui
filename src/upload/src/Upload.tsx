@@ -1,4 +1,9 @@
-import type { CSSProperties, InputHTMLAttributes, PropType } from 'vue'
+import type {
+  CSSProperties,
+  InputHTMLAttributes,
+  PropType,
+  SlotsType
+} from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { ImageGroupProps } from '../../image'
@@ -18,6 +23,7 @@ import type {
   RenderIcon,
   ShouldUseThumbnailUrl,
   UploadInternalInst,
+  UploadSlots,
   XhrHandlers
 } from './interface'
 import type {
@@ -402,6 +408,7 @@ export type UploadProps = ExtractPublicPropTypes<typeof uploadProps>
 export default defineComponent({
   name: 'Upload',
   props: uploadProps,
+  slots: Object as SlotsType<UploadSlots>,
   setup(props) {
     if (props.abstract && props.listType === 'image-card') {
       throwError(
