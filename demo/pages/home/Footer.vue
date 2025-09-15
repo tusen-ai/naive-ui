@@ -20,10 +20,8 @@ export default defineComponent({
           designResources: '设计资源',
           help: '帮助',
           community: '社区',
-          contact: '联系我们',
           changelog: '更新日志',
           commonIssues: '常见问题',
-          tusimple: '图森未来',
           icons: '图标库',
           libraries: '社区精选资源',
           dingTalk: '钉钉',
@@ -39,10 +37,8 @@ export default defineComponent({
           designResources: 'Design Resources',
           help: 'Help',
           community: 'Community',
-          contact: 'Contact Us',
           changelog: 'Change Log',
           commonIssues: 'Common Issues',
-          tusimple: 'TuSimple',
           icons: 'Icon Library',
           libraries: 'Third-Party Libraries',
           dingTalk: 'DingTalk',
@@ -135,14 +131,6 @@ export default defineComponent({
           {{ t('memberLimitReached') }} 31205022250<br>
           {{ t('dingTalkGroupChat') }} 6 62720001971
         </n-tooltip>
-      </div>
-      <div class="footer-links-col footer-links-col--last">
-        <n-text depth="1" class="col-header">
-          {{ t('contact') }}
-        </n-text>
-        <n-button text tag="a" target="_blank" href="https://www.tusimple.com/">
-          {{ t('tusimple') }}
-        </n-button>
       </div>
     </div>
     <n-divider class="footer-divider" />

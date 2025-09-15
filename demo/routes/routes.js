@@ -16,14 +16,6 @@ export const enDocRoutes = [
     path: 'supported-platforms',
     component: () => import('../pages/docs/supported-platforms/enUS/index.md')
   },
-  // {
-  //   path: 'from-v1',
-  //   component: () => import('../pages/docs/vue3/enUS/index.vue')
-  // },
-  // {
-  //   path: 'experimental-features',
-  //   component: () => import('../pages/docs/experimental-features/enUS/index.md')
-  // },
   {
     path: 'customize-theme',
     component: () => import('../pages/docs/customize-theme/enUS/index.md')
@@ -125,10 +117,7 @@ export const zhDocRoutes = [
     path: 'i18n',
     component: () => import('../pages/docs/i18n/zhCN/index.md')
   },
-  // {
-  //   path: 'experimental-features',
-  //   component: () => import('../pages/docs/experimental-features/zhCN/index.md')
-  // },
+
   {
     path: 'changelog',
     component: () => import('../pages/docs/changelog/zhCN/index.vue')
