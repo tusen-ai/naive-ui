@@ -5,6 +5,14 @@ export default cB('float-button-group', [
   cB('float-button', `
     position: relative;
   `),
+  cM('horizontal', `
+    display: inline-flex;
+    flex-direction: row;
+  `),
+  cM('vertical', `
+    display: inline-flex;
+    flex-direction: column;
+  `),
   cM('square-shape', `
     background-color: var(--n-color);
     cursor: pointer;
@@ -13,7 +21,6 @@ export default cB('float-button-group', [
     align-items: center;
     justify-content: center;
     border-radius: var(--n-border-radius-square);
-    flex-direction: column;
     box-shadow: var(--n-box-shadow);
     transition:
       color .3s var(--n-bezier),
@@ -46,9 +53,36 @@ export default cB('float-button-group', [
       `)
     ])
   ]),
+  cM('square-shape', [
+    cM('horizontal', [
+      cB('float-button', [
+        c('&:not(:last-child)', `
+          border-bottom: none;
+          border-right: 1px solid var(--n-button-border-color);
+        `),
+        c('&:first-child', `
+          border-top-left-radius: 4px;
+          border-bottom-left-radius: 4px;
+        `),
+        c('&:last-child', `
+          border-top-right-radius: 4px;
+          border-bottom-right-radius: 4px;
+        `)
+      ])
+    ])
+  ]),
   cM('circle-shape', [
-    c('>:not(:last-child)', `
-      margin-bottom: 16px;
-    `)
+    cM('vertical', [
+      c('>:not(:last-child)', `
+        margin-bottom: 16px;
+        margin-right: 0;
+      `)
+    ]),
+    cM('horizontal', [
+      c('>:not(:last-child)', `
+        margin-right: 16px;
+        margin-bottom: 0;
+      `)
+    ])
   ])
 ])
