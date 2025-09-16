@@ -215,6 +215,20 @@ export default defineComponent({
     provide(drawerBodyInjectionKey, bodyRef)
     provide(popoverBodyInjectionKey, null)
     provide(modalBodyInjectionKey, null)
+
+    const resizeTriggerPropsRef = computed(() => {
+      return {
+        class: [
+          `${NDrawer.mergedClsPrefixRef.value}-drawer__resize-trigger`,
+          (isDraggingRef.value || isHoverOnResizeTriggerRef.value)
+          && `${NDrawer.mergedClsPrefixRef.value}-drawer__resize-trigger--hover`
+        ],
+        onMouseenter: handleMouseenterResizeTrigger,
+        onMouseleave: handleMouseleaveResizeTrigger,
+        onMousedown: handleMousedownResizeTrigger
+      }
+    })
+
     return {
       bodyRef,
       rtlEnabled: rtlEnabledRef,
@@ -236,7 +250,8 @@ export default defineComponent({
       handleMouseenterResizeTrigger,
       handleMouseleaveResizeTrigger,
       isDragging: isDraggingRef,
-      isHoverOnResizeTrigger: isHoverOnResizeTriggerRef
+      isHoverOnResizeTrigger: isHoverOnResizeTriggerRef,
+      resizeTriggerProps: resizeTriggerPropsRef
     }
   },
   render() {
@@ -286,23 +301,13 @@ export default defineComponent({
                             }),
                             [
                               this.resizable ? (
-                                <div
-                                  class={[
-                                    `${mergedClsPrefix}-drawer__resize-trigger`,
-                                    (this.isDragging
-                                      || this.isHoverOnResizeTrigger)
-                                    && `${mergedClsPrefix}-drawer__resize-trigger--hover`
-                                  ]}
-                                  onMouseenter={
-                                    this.handleMouseenterResizeTrigger
-                                  }
-                                  onMouseleave={
-                                    this.handleMouseleaveResizeTrigger
-                                  }
-                                  onMousedown={
-                                    this.handleMousedownResizeTrigger
-                                  }
-                                />
+                                $slots['resize-trigger'] ? (
+                                  $slots['resize-trigger']({
+                                    triggerProps: this.resizeTriggerProps
+                                  })
+                                ) : (
+                                  <div {...this.resizeTriggerProps} />
+                                )
                               ) : null,
                               this.nativeScrollbar ? (
                                 <div

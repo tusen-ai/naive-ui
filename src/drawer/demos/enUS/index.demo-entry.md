@@ -16,6 +16,7 @@ target.vue
 slot.vue
 scroll.vue
 resizable.vue
+custom-resize-trigger.vue
 ```
 
 ## API
@@ -75,9 +76,10 @@ resizable.vue
 
 ### Drawer Slots
 
-| Name    | Parameters | Description                |
-| ------- | ---------- | -------------------------- |
-| default | `()`       | The content of the drawer. |
+| Name | Parameters | Description | Version |
+| --- | --- | --- | --- |
+| default | `()` | The content of the drawer. | Version |
+| resize-trigger | `(options: { triggerProps: object })` | Custom resize trigger. | NEXT_VERSION |
 
 ### DrawerContent Slots
 
