@@ -16,7 +16,11 @@ const containerRef = ref<HTMLElement | undefined>(undefined)
     <div class="content">
       <n-grid :cols="2">
         <n-gi :span="1">
-          <n-affix :top="120" :trigger-top="60" :listen-to="() => containerRef">
+          <n-affix
+            :top="120"
+            :trigger-top="60"
+            :listen-to="() => containerRef as HTMLElement"
+          >
             <n-tag>顶部触发距离 60px</n-tag>
           </n-affix>
         </n-gi>
@@ -24,7 +28,7 @@ const containerRef = ref<HTMLElement | undefined>(undefined)
           <n-affix
             :bottom="120"
             :trigger-bottom="60"
-            :listen-to="() => containerRef"
+            :listen-to="() => containerRef as HTMLElement"
           >
             <n-tag>底部触发距离 60px</n-tag>
           </n-affix>

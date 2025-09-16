@@ -8,7 +8,8 @@ import {
   h,
   onBeforeUnmount,
   onMounted,
-  ref
+  ref,
+  watch
 } from 'vue'
 import { useConfig, useStyle } from '../../_mixins'
 import { keysOf, warn } from '../../_utils'
@@ -27,6 +28,7 @@ export const affixProps = {
     type: String as PropType<'fixed' | 'absolute'>,
     default: 'fixed'
   },
+  onChange: Function as PropType<(affixed: boolean) => void>,
   // deprecated
   offsetTop: {
     type: Number as PropType<number | undefined>,
@@ -179,6 +181,13 @@ export default defineComponent({
         return
       scrollTarget.removeEventListener('scroll', handleScroll)
     })
+
+    watch(affixedRef, (value) => {
+      if (props.onChange) {
+        props.onChange(value)
+      }
+    })
+
     return {
       selfRef,
       affixed: affixedRef,
