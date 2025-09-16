@@ -84,7 +84,9 @@ const nbNO: NLocale = {
     positiveText: 'OK',
     negativeText: 'Avbryt',
     now: 'Nå',
-    clear: 'Tøm'
+    clear: 'Tøm',
+    am: 'a.m.',
+    pm: 'p.m.'
   },
   Pagination: {
     goto: 'Gå til',
