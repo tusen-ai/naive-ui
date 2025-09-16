@@ -78,7 +78,7 @@ export const NMenuOption = defineComponent({
       mergedClsPrefix,
       mergedTheme,
       tmNode,
-      menuProps: { renderLabel, nodeProps }
+      menuProps: { renderLabel, nodeProps, tooltipProps }
     } = this
     const attrs = nodeProps?.(tmNode.rawNode)
     return (
@@ -91,6 +91,7 @@ export const NMenuOption = defineComponent({
           theme={mergedTheme.peers.Tooltip}
           themeOverrides={mergedTheme.peerOverrides.Tooltip}
           trigger="hover"
+          {...tooltipProps}
           placement={this.dropdownPlacement}
           disabled={!this.dropdownEnabled || this.title === undefined}
           internalExtraClass={['menu-tooltip']}

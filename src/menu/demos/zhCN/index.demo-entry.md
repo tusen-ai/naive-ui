@@ -56,6 +56,7 @@ show-debug.vue
 | render-label | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | 批量处理菜单标签渲染 |  |
 | responsive | `boolean` | `false` | 是否收起溢出的菜单，仅对 `mode='horizontal'` 的菜单生效 | 2.36.0 |
 | root-indent | `number` | `32` | 菜单第一级的缩进，如果没有设定，使用 `indent` 代替 |  |
+| tooltip-props | `TooltipProps` | `undefined` | 菜单中 tooltip 的 props，请参考 [Tooltip Props](tooltip#Tooltip-Props) | NEXT_VERSION |
 | value | `string \| null` | `undefined` | 菜单当前的选中值 |  |
 | watch-props | `Array<'defaultValue' \| 'defaultExpandedKeys'>` | `undefined` | 需要检测变更的默认属性，检测后组件状态会更新。注意：`watch-props` 本身不是响应式的 |  |
 | on-update:expanded-keys | `(keys: string[]) => void` | `undefined` | `keys` 是展开菜单项的 `key` 的数组 |  |
