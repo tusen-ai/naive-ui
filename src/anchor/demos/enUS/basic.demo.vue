@@ -14,7 +14,11 @@ const showBackground = ref(true)
     <n-switch v-model:value="showRail" /> Show Rail
     <n-switch v-model:value="showBackground" /> Show Background
   </n-space>
-  <n-anchor :show-rail="showRail" :show-background="showBackground">
+  <n-anchor
+    offset-target=".document-scroll-container"
+    :show-rail="showRail"
+    :show-background="showBackground"
+  >
     <n-anchor-link title="Demos" href="#Demos">
       <n-anchor-link title="Basic" href="#basic.vue" />
       <n-anchor-link title="Ignore-Gap" href="#ignore-gap.vue" />
