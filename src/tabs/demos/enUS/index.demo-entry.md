@@ -37,6 +37,7 @@ placement.vue
 | animated | `boolean` | `false` | Whether to activate tab switching animation. It won't have effect if `placement` is `'left'` or `'right'`. | 2.27.0 |
 | bar-width | `number` | `undefined` | The width of the tab bar. | 2.25.0 |
 | closable | `boolean` | `false` | Whether to allow the tag to be closed. Only works when the tag's `type` is `card`. |  |
+| close-trigger | `'hover' \| 'none'` | `'none'` | Trigger of `card` show close, Only works when the tag's `type` is `card`. `'none'` means always show it. | NEXT_VERSION |
 | default-value | `string \| number` | `undefined` | Default value in uncontrolled mode. |  |
 | justify-content | `'space-between' \| 'space-around' \| 'space-evenly' \| 'start' \| 'center' \| 'end'` | `undefined` | Justify-content value of `flex` layout. Only works with `'line'` or `'bar'` typed tabs. | `space-*` 2.29.1 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of tabs. |  |
@@ -61,6 +62,7 @@ placement.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | closable | `boolean` | `false` | Whether to allow the tag to be closed. Only works when the tag's `type` is `card`. |  |
+| close-trigger | `'hover' \| 'none'` | `'none'` | Trigger of `card` show close, Only works when the tag's `type` is `card`. `'none'` means always show it. | NEXT_VERSION |
 | disabled | `boolean` | `false` | Whether to disable the tabs. |  |
 | display-directive | `'if' \| 'show' \| 'show:lazy'` | `'if'` | The directive to use in conditionally rendering. `if` will use `v-if` and `show` will use `v-show`. When use `show` directive, the status of tab won't be reset after tab changes. When use `show:lazy`, the display effect is the same as `show`, but the content will be lazily loaded. |  |
 | name | `string \| number` | `undefined` | Required, the name of the tab. |  |
@@ -69,11 +71,12 @@ placement.vue
 
 ### Tab Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| closable | `boolean` | `false` | Whether to allow the tag to be closed. Only works when the tag's `type` is `card`. |
-| disabled | `boolean` | `false` | Whether to disable. |
-| name | `string \| number` | `undefined` | Required, the name of the tab. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| closable | `boolean` | `false` | Whether to allow the tag to be closed. Only works when the tag's `type` is `card`. |  |
+| close-trigger | `'hover' \| 'none'` | `'none'` | Trigger of `card` show close, Only works when the tag's `type` is `card`. `'none'` means always show it. | NEXT_VERSION |
+| disabled | `boolean` | `false` | Whether to disable. |  |
+| name | `string \| number` | `undefined` | Required, the name of the tab. |  |
 
 ### Tabs Slots
 
