@@ -19,7 +19,7 @@ const containerRef = ref<HTMLElement | undefined>(undefined)
           <n-affix
             :trigger-top="50"
             position="absolute"
-            :listen-to="() => containerRef"
+            :listen-to="() => containerRef as HTMLElement"
           >
             <n-tag>Affix Trigger Top 50px</n-tag>
           </n-affix>
@@ -28,7 +28,7 @@ const containerRef = ref<HTMLElement | undefined>(undefined)
           <n-affix
             :trigger-bottom="60"
             position="absolute"
-            :listen-to="() => containerRef"
+            :listen-to="() => containerRef as HTMLElement"
           >
             <n-tag>Affix Trigger Bottom 60px</n-tag>
           </n-affix>

@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-affix` 新增 `on-change` 属性，关闭 [#4315](https://github.com/tusen-ai/naive-ui/issues/4315)
+
 ## 2.43.1
 
 `2025-09-15`
