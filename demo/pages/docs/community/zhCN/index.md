@@ -11,6 +11,7 @@ Naive UI 是统一设计规范的高质量 Vue 组件库，我们倾向于只提
 | [Naive UI Admin](https://github.com/jekip/naive-ui-admin) | 免费开源的中后台模板 |
 | [Admin Work](https://github.com/qingqingxuan/admin-work) | 一款免费开源、功能强大、方便易用、漂亮的中后台管理系统模板 |
 | [Soybean Admin](https://github.com/honghuangdc/soybean-admin) | 一个基于 Vue3 + Vite + Naive UI + TypeScript 的漂亮清爽的中后台模版 |
+| [Rengar Admin](https://github.com/RengarJS/rengar-admin) | 基于 Vue 3.5 + Vite 7 + TypeScript + Naive UI + Pinia + UnoCSS 的中后台管理系统模板，简洁不过度封装，代码简单易懂 |
 | [GoView](https://gitee.com/dromara/go-view) | 开源、精美、便捷的「数据可视化」低代码开发平台 |
 | [Vue Naive Admin](https://github.com/zclzone/vue-naive-admin) | 基于 Vue3 + Vite4 + Pinia + Unocss + Naive UI 的轻量级后台管理模板 |
 | [Vue Bag Admin](https://vite.itnavs.com/admin/) | 🎉vue-bag-admin，采用Vite4、Vue3、TypeScript、JavaScript构建，支持多种写法和调用，完整的框架体系，响应式中后台管理系统 |

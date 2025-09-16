@@ -11,6 +11,7 @@ If you want to contribute excellent resources, please contact 07akioni or amadeu
 | [Naive UI Admin](https://github.com/jekip/naive-ui-admin) | A free open source out-of-box UI solution for enterprise applications. |
 | [Admin Work](https://github.com/qingqingxuan/admin-work) | A free open source, powerful, easy to use, beautiful back-office management system solution. |
 | [Soybean Admin](https://github.com/honghuangdc/soybean-admin) | A beautiful vue admin template, based on Vue3 + Vite + Naive UI + TypeScript. |
+| [Rengar Admin](https://github.com/RengarJS/rengar-admin) | A mid-backend management system template based on Vue 3.5 + Vite 7 + TypeScript + Naive UI + Pinia + UnoCSS, which is concise without excessive encapsulation and has simple and easy-to-understand code. |
 | [GoView](https://github.com/dromara/go-view) | A free open source and powerful yet accessible data visualization tool. |
 | [Vue Naive Admin](https://github.com/zclzone/vue-naive-admin) | A lightweight backend management template base on Vue3 + Vite4 + Pinia + Unocss + Naive UI. |
 | [Vue Bag Admin](https://vite.itnavs.com/admin/) | 🎉vue-bag-admin，Using Vite4, Vue3, TypeScript, JavaScript construction, support a variety of writing and call, a complete framework system, responsive background management system |
