@@ -9,6 +9,7 @@ basic.vue
 precision.vue
 separator.vue
 intl.vue
+format.vue
 finish.vue
 ```
 
@@ -21,6 +22,7 @@ finish.vue
 | active | `boolean` | `true` | 是否开始动画 | 2.23.2 |
 | duration | `number` | `3000` | 动画持续时间 | 2.23.2 |
 | from | `number` | `0` | 数值动画起始值 | 2.23.2 |
+| format | `(value: number) => string` | `undefined` | 自定义格式化数值函数 | NEXT_VERSION |
 | locale | `string` | 跟随 config provider | 国际化的语言 | 2.24.2 |
 | precision | `number` | `0` | 精度，保留小数点后几位 | 2.23.2 |
 | show-separator | `boolean` | `false` | 是否显示分隔符 | 2.23.2 |

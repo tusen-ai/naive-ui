@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-number-animation` 添加 `format` 属性，关闭 [#7174](https://github.com/tusen-ai/naive-ui/issues/7174)
+
 ## 2.43.1
 
 `2025-09-15`
