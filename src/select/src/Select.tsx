@@ -259,6 +259,7 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const preOpenMenu = ref(false)
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
@@ -450,6 +451,7 @@ export default defineComponent({
     function doFocus(e: FocusEvent): void {
       const { onFocus, showOnFocus } = props
       const { nTriggerFormFocus } = formItem
+      preOpenMenu.value = true
       if (onFocus)
         call(onFocus, e)
       nTriggerFormFocus()
@@ -532,6 +534,10 @@ export default defineComponent({
       }
     }
     function handleTriggerClick(): void {
+      if (preOpenMenu.value) {
+        uncontrolledShowRef.value = false
+        preOpenMenu.value = false
+      }
       if (mergedDisabledRef.value)
         return
       if (!mergedShowRef.value) {
