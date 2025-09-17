@@ -3,11 +3,7 @@ import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CardTheme } from '../styles'
 import { getPadding } from 'seemly'
-import {
-  computed,
-  defineComponent,
-  h
-} from 'vue'
+import { computed, defineComponent, h } from 'vue'
 import { NBaseClose } from '../../_internal'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
@@ -247,11 +243,9 @@ export default defineComponent({
         })}
         {resolveWrappedSlot($slots.header, (children) => {
           const { title } = this
-          const mergedChildren = title
-            ? ensureValidVNode(
-                typeof title === 'function' ? [title()] : [title]
-              )
-            : children
+          const mergedChildren
+            = children
+              || ensureValidVNode(typeof title === 'function' ? [title()] : [title])
           return mergedChildren || this.closable ? (
             <div
               class={[`${mergedClsPrefix}-card-header`, this.headerClass]}
