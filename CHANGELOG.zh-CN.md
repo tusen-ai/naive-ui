@@ -1,4 +1,10 @@
-# CHANGELOG
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- 修复 `n-card` 的 `title` 插槽不生效的问题，关闭 [#5987](https://github.com/tusen-ai/naive-ui/issues/5987)
 
 ## 2.43.1
 
