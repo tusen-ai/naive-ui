@@ -5,22 +5,25 @@
 <template>
   <n-space vertical>
     <n-date-picker type="date">
-      <template #footer>
+      <template #date-footer>
         extra footer
+      </template>
+      <template #month-footer>
+        extra month footer
       </template>
     </n-date-picker>
     <n-date-picker type="datetime">
-      <template #footer>
+      <template #datetime-footer>
         extra footer
       </template>
     </n-date-picker>
     <n-date-picker type="daterange">
-      <template #footer>
+      <template #daterange-footer>
         extra footer
       </template>
     </n-date-picker>
     <n-date-picker type="datetimerange">
-      <template #footer>
+      <template #datetimerange-footer>
         extra footer
       </template>
     </n-date-picker>

@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-date-picker` adds `footer`、`date-footer`、`month-footer`、`daterange-footer`、`datetime-footer`、`datetimerange-footer`、`monthrange-footer` slots, closes [#5956](https://github.com/tusen-ai/naive-ui/issues/5956)
+
 ## 2.43.1
 
 `2025-09-15`

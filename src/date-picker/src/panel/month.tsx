@@ -10,14 +10,10 @@ import { defineComponent, h, onMounted } from 'vue'
 import { VirtualList } from 'vueuc'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
 import { useLocale } from '../../../_mixins'
-import { resolveSlotWithTypedProps, resolveWrappedSlot } from '../../../_utils'
+import { resolveSlotWithTypedProps } from '../../../_utils'
 import { NButton, NxButton } from '../../../button'
 import { MONTH_ITEM_HEIGHT } from '../config'
-import {
-  getMonthString,
-  getQuarterString,
-  getYearString
-} from '../utils'
+import { getMonthString, getQuarterString, getYearString } from '../utils'
 import { useCalendar, useCalendarProps } from './use-calendar'
 
 /**
@@ -136,6 +132,9 @@ export default defineComponent({
       type,
       onRender
     } = this
+    const footerSlot
+      = this.datePickerSlots['month-footer']?.()
+        || this.datePickerSlots.footer?.()
     onRender?.()
     return (
       <div
@@ -211,11 +210,9 @@ export default defineComponent({
             </div>
           ) : null}
         </div>
-        {resolveWrappedSlot(this.datePickerSlots.footer, (children) => {
-          return children ? (
-            <div class={`${mergedClsPrefix}-date-panel-footer`}>{children}</div>
-          ) : null
-        })}
+        {footerSlot && (
+          <div class={`${mergedClsPrefix}-date-panel-footer`}>{footerSlot}</div>
+        )}
         {actions?.length || shortcuts ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>

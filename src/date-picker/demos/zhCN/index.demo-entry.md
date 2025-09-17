@@ -192,15 +192,21 @@ form-debug.vue
 
 ### DatePicker Slots
 
-| 名称       | 参数 | 说明                         | 版本   |
-| ---------- | ---- | ---------------------------- | ------ |
-| date-icon  | `()` | 日期输入框的图标             | 2.29.0 |
-| footer     | `()` | 添加额外的页脚               |        |
-| next-month | `()` | 日期面板的 `下一个` 图标     | 2.33.4 |
-| next-year  | `()` | 日期面板的 `快速下一个` 图标 | 2.33.4 |
-| prev-month | `()` | 日期面板的 `上一个` 图标     | 2.33.4 |
-| prev-year  | `()` | 日期面板的 `快速上一个` 图标 | 2.33.4 |
-| separator  | `()` | 日期范围分隔符号             | 2.29.0 |
+| 名称 | 参数 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| date-icon | `()` | 日期输入框的图标 | 2.29.0 |
+| next-month | `()` | 日期面板的 `下一个` 图标 | 2.33.4 |
+| next-year | `()` | 日期面板的 `快速下一个` 图标 | 2.33.4 |
+| prev-month | `()` | 日期面板的 `上一个` 图标 | 2.33.4 |
+| prev-year | `()` | 日期面板的 `快速上一个` 图标 | 2.33.4 |
+| separator | `()` | 日期范围分隔符号 | 2.29.0 |
+| footer | `()` | 额外的页脚, 优先级低于指定面板类型的 `footer` 插槽 | NEXT_VERSION |
+| date-footer | `()` | 添加额外的 `Date` 页脚 | NEXT_VERSION |
+| month-footer | `()` | 添加额外的 `Month` 页脚 | NEXT_VERSION |
+| daterange-footer | `()` | 添加额外的 `DateRange` 页脚 | NEXT_VERSION |
+| datetime-footer | `()` | 添加额外的 `DateTime` 页脚 | NEXT_VERSION |
+| datetimerange-footer | `()` | 添加额外的 `DateTimeRange` 页脚 | NEXT_VERSION |
+| monthrange-footer | `()` | 添加额外的 `MonthRange` 页脚 | NEXT_VERSION |
 
 ### Date, Year, QuarterRange, Week Slots
 
