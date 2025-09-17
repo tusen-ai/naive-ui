@@ -1,4 +1,5 @@
 export default {
-  actionMargin: '0 0 0 20px',
+  actionMarginLeft: '0 0 0 20px',
+  actionMarginRight: '0 20px 0 0',
   actionMarginRtl: '0 20px 0 0'
 }
