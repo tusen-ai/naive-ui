@@ -200,6 +200,7 @@ panel.vue
 | prev-month | `()` | Prev icon of the date panel. | 2.33.4 |
 | prev-year | `()` | Fast prev icon of the date panel. | 2.33.4 |
 | separator | `()` | Separator of range picker. | 2.29.0 |
+| footer | `()` | Extra footer, lower priority than the specified footer slot. | NEXT_VERSION |
 | date-footer | `()` | Extra `Date` footer. | NEXT_VERSION |
 | month-footer | `()` | Extra `Month` footer. | NEXT_VERSION |
 | daterange-footer | `()` | Extra `DateRange` footer. | NEXT_VERSION |

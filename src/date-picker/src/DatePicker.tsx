@@ -73,6 +73,7 @@ export type DatePickerSetupProps = ExtractPropTypes<typeof datePickerProps>
 
 export interface DatePickerSlots {
   'date-icon'?: () => VNode[]
+  footer?: () => VNode[]
   'month-footer'?: () => VNode[]
   'date-footer'?: () => VNode[]
   'daterange-footer'?: () => VNode[]

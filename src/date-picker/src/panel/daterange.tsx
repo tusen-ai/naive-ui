@@ -43,6 +43,9 @@ export default defineComponent({
       onRender,
       datePickerSlots
     } = this
+    const footerSlot
+      = this.datePickerSlots['daterange-footer']?.()
+        || this.datePickerSlots.footer?.()
     onRender?.()
 
     return (
@@ -255,11 +258,9 @@ export default defineComponent({
             ))}
           </div>
         </div>
-        {this.datePickerSlots['daterange-footer'] ? (
-          <div class={`${mergedClsPrefix}-date-panel-footer`}>
-            {this.datePickerSlots['daterange-footer']()}
-          </div>
-        ) : null}
+        {footerSlot && (
+          <div class={`${mergedClsPrefix}-date-panel-footer`}>{footerSlot}</div>
+        )}
         {this.actions?.length || shortcuts ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
