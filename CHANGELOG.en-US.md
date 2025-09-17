@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix `n-data-table` scrollbar cannot appear because of the presence of both resizable and ellipsis, closes [#3889](https://github.com/tusen-ai/naive-ui/issues/3889)
+
 ## 2.43.1
 
 `2025-09-15`

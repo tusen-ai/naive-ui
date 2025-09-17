@@ -109,8 +109,10 @@ export default defineComponent({
     const mainTableInstRef = ref<MainTableRef | null>(null)
     const { getResizableWidth, clearResizableWidth, doUpdateResizableWidth }
       = useResizable()
-    const { rowsRef, colsRef, dataRelatedColsRef, hasEllipsisRef }
-      = useGroupHeader(props, getResizableWidth)
+    const { rowsRef, colsRef, dataRelatedColsRef } = useGroupHeader(
+      props,
+      getResizableWidth
+    )
 
     const {
       treeMateRef,
@@ -203,7 +205,6 @@ export default defineComponent({
         props.virtualScroll
         || props.flexHeight
         || props.maxHeight !== undefined
-        || hasEllipsisRef.value
       ) {
         return 'fixed'
       }
