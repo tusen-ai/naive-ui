@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- 修复 `n-data-table` 的 resizable 和 ellipsis 同时存在导致无法出现滚动条问题，关闭 [#3889](https://github.com/tusen-ai/naive-ui/issues/3889)
+
 ## 2.43.1
 
 `2025-09-15`
