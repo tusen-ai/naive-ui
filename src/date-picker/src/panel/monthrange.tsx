@@ -4,12 +4,7 @@ import type {
   DatePickerConfirmSlotProps
 } from '../public-types'
 import type { MonthItem, QuarterItem, YearItem } from '../utils'
-import {
-  defineComponent,
-  h,
-  onMounted,
-  watchEffect
-} from 'vue'
+import { defineComponent, h, onMounted, watchEffect } from 'vue'
 import { VirtualList } from 'vueuc'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
 import { useLocale } from '../../../_mixins'
@@ -20,11 +15,7 @@ import {
 } from '../../../_utils'
 import { NxButton } from '../../../button'
 import { MONTH_ITEM_HEIGHT } from '../config'
-import {
-  getMonthString,
-  getQuarterString,
-  getYearString
-} from '../utils'
+import { getMonthString, getQuarterString, getYearString } from '../utils'
 import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
 
 export default defineComponent({
@@ -270,11 +261,16 @@ export default defineComponent({
             ) : null}
           </div>
         </div>
-        {resolveWrappedSlot(this.datePickerSlots.footer, (children) => {
-          return children ? (
-            <div class={`${mergedClsPrefix}-date-panel-footer`}>{children}</div>
-          ) : null
-        })}
+        {resolveWrappedSlot(
+          this.datePickerSlots['monthrange-footer'],
+          (children) => {
+            return children ? (
+              <div class={`${mergedClsPrefix}-date-panel-footer`}>
+                {children}
+              </div>
+            ) : null
+          }
+        )}
         {this.actions?.length || shortcuts ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>

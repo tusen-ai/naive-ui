@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Breaking Changes
+
+- DatePicker's `footer` slot is removed, and new `date-footer`, `month-footer`, `daterange-footer`, `datetime-footer`, `datetimerange-footer`, `monthrange-footer` slots are added, closes [#5956](https://github.com/tusen-ai/naive-ui/issues/5956)
+
 ## 2.43.1
 
 `2025-09-15`

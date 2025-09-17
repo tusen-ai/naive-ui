@@ -192,15 +192,20 @@ panel.vue
 
 ### DatePicker Slots
 
-| Name       | Parameters | Description                       | Version |
-| ---------- | ---------- | --------------------------------- | ------- |
-| date-icon  | `()`       | Date icon of the input box.       | 2.29.0  |
-| footer     | `()`       | Extra Footer.                     |         |
-| next-month | `()`       | Next icon of the date panel.      | 2.33.4  |
-| next-year  | `()`       | Fast next icon of the date panel. | 2.33.4  |
-| prev-month | `()`       | Prev icon of the date panel.      | 2.33.4  |
-| prev-year  | `()`       | Fast prev icon of the date panel. | 2.33.4  |
-| separator  | `()`       | Separator of range picker.        | 2.29.0  |
+| Name | Parameters | Description | Version |
+| --- | --- | --- | --- |
+| date-icon | `()` | Date icon of the input box. | 2.29.0 |
+| next-month | `()` | Next icon of the date panel. | 2.33.4 |
+| next-year | `()` | Fast next icon of the date panel. | 2.33.4 |
+| prev-month | `()` | Prev icon of the date panel. | 2.33.4 |
+| prev-year | `()` | Fast prev icon of the date panel. | 2.33.4 |
+| separator | `()` | Separator of range picker. | 2.29.0 |
+| date-footer | `()` | Extra `Date` footer. | NEXT_VERSION |
+| month-footer | `()` | Extra `Month` footer. | NEXT_VERSION |
+| daterange-footer | `()` | Extra `DateRange` footer. | NEXT_VERSION |
+| datetime-footer | `()` | Extra `DateTime` footer. | NEXT_VERSION |
+| datetimerange-footer | `()` | Extra `DateTimeRange` footer. | NEXT_VERSION |
+| monthrange-footer | `()` | Extra `MonthRange` footer. | NEXT_VERSION |
 
 ### Date, Year, QuarterRange, Week Slots
 

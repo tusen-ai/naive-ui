@@ -168,9 +168,9 @@ export default defineComponent({
             ))}
           </div>
         </div>
-        {this.datePickerSlots.footer ? (
+        {this.datePickerSlots['date-footer'] ? (
           <div class={`${mergedClsPrefix}-date-panel-footer`}>
-            {this.datePickerSlots.footer()}
+            {this.datePickerSlots['date-footer']()}
           </div>
         ) : null}
         {this.actions?.length || shortcuts ? (

@@ -1,4 +1,10 @@
-import type { CSSProperties, ExtractPropTypes, Ref, SlotsType, VNode } from 'vue'
+import type {
+  CSSProperties,
+  ExtractPropTypes,
+  Ref,
+  SlotsType,
+  VNode
+} from 'vue'
 import type { InputInst, InputProps } from '../../input'
 import type { Size as TimePickerSize } from '../../time-picker/src/interface'
 import type {
@@ -67,7 +73,12 @@ export type DatePickerSetupProps = ExtractPropTypes<typeof datePickerProps>
 
 export interface DatePickerSlots {
   'date-icon'?: () => VNode[]
-  footer?: () => VNode[]
+  'month-footer'?: () => VNode[]
+  'date-footer'?: () => VNode[]
+  'daterange-footer'?: () => VNode[]
+  'datetime-footer'?: () => VNode[]
+  'datetimerange-footer'?: () => VNode[]
+  'monthrange-footer'?: () => VNode[]
   'next-month'?: () => VNode[]
   'next-year'?: () => VNode[]
   'prev-month'?: () => VNode[]

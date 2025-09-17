@@ -13,11 +13,7 @@ import { useLocale } from '../../../_mixins'
 import { resolveSlotWithTypedProps, resolveWrappedSlot } from '../../../_utils'
 import { NButton, NxButton } from '../../../button'
 import { MONTH_ITEM_HEIGHT } from '../config'
-import {
-  getMonthString,
-  getQuarterString,
-  getYearString
-} from '../utils'
+import { getMonthString, getQuarterString, getYearString } from '../utils'
 import { useCalendar, useCalendarProps } from './use-calendar'
 
 /**
@@ -211,11 +207,17 @@ export default defineComponent({
             </div>
           ) : null}
         </div>
-        {resolveWrappedSlot(this.datePickerSlots.footer, (children) => {
-          return children ? (
-            <div class={`${mergedClsPrefix}-date-panel-footer`}>{children}</div>
-          ) : null
-        })}
+        {resolveWrappedSlot(
+          this.datePickerSlots['month-footer'],
+          (children) => {
+            return children ? (
+              <div class={`${mergedClsPrefix}-date-panel-footer`}>
+                {children}
+                {' '}
+              </div>
+            ) : null
+          }
+        )}
         {actions?.length || shortcuts ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
