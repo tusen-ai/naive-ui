@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-message` add `border` theme variable for each type, closes [#7105](https://github.com/tusen-ai/naive-ui/issues/7105).
+
 ## 2.43.1
 
 `2025-09-15`

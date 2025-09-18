@@ -81,15 +81,9 @@ export default c([
       font-size: var(--n-icon-size);
       flex-shrink: 0;
     `, [
-      ['default', 'info', 'success', 'warning', 'error', 'loading'].map(type =>
-        cM(`${type}-type`, [
-          c('> *', `
-            color: var(--n-icon-color-${type});
-            transition: color .3s var(--n-bezier);
-          `)
-        ])
-      ),
       c('> *', `
+        color: var(--n-icon-color);
+        transition: color .3s var(--n-bezier);
         position: absolute;
         left: 0;
         top: 0;

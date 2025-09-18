@@ -1,12 +1,7 @@
 import type { CSSProperties, PropType, VNodeChild } from 'vue'
 /* eslint-disable no-cond-assign */
 import type { MessageRenderMessage, MessageType } from './types'
-import {
-  computed,
-  defineComponent,
-  h,
-  inject
-} from 'vue'
+import { computed, defineComponent, h, inject } from 'vue'
 import {
   NBaseClose,
   NBaseIcon,
@@ -69,22 +64,18 @@ export default defineComponent({
           fontSize,
           lineHeight,
           borderRadius,
-          border,
-          iconColorInfo,
-          iconColorSuccess,
-          iconColorWarning,
-          iconColorError,
-          iconColorLoading,
           closeIconSize,
           closeBorderRadius,
           [createKey('textColor', type)]: textColor,
           [createKey('boxShadow', type)]: boxShadow,
+          [createKey('border', type)]: border,
           [createKey('color', type)]: color,
           [createKey('closeColorHover', type)]: closeColorHover,
           [createKey('closeColorPressed', type)]: closeColorPressed,
           [createKey('closeIconColor', type)]: closeIconColor,
           [createKey('closeIconColorPressed', type)]: closeIconColorPressed,
-          [createKey('closeIconColorHover', type)]: closeIconColorHover
+          [createKey('closeIconColorHover', type)]: closeIconColorHover,
+          [createKey('iconColor', type)]: iconColor
         }
       } = themeRef.value
       return {
@@ -102,11 +93,7 @@ export default defineComponent({
         '--n-text-color': textColor,
         '--n-color': color,
         '--n-box-shadow': boxShadow,
-        '--n-icon-color-info': iconColorInfo,
-        '--n-icon-color-success': iconColorSuccess,
-        '--n-icon-color-warning': iconColorWarning,
-        '--n-icon-color-error': iconColorError,
-        '--n-icon-color-loading': iconColorLoading,
+        '--n-icon-color': iconColor,
         '--n-close-color-hover': closeColorHover,
         '--n-close-color-pressed': closeColorPressed,
         '--n-close-icon-color': closeIconColor,
@@ -179,9 +166,7 @@ export default defineComponent({
           >
             {(iconNode = createIconVNode(icon, type, mergedClsPrefix))
               && showIcon ? (
-                  <div
-                    class={`${mergedClsPrefix}-message__icon ${mergedClsPrefix}-message__icon--${type}-type`}
-                  >
+                  <div class={`${mergedClsPrefix}-message__icon`}>
                     <NIconSwitchTransition>
                       {{
                         default: () => iconNode
