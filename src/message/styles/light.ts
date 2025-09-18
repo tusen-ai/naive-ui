@@ -81,7 +81,12 @@ export function self(vars: ThemeCommonVars) {
     loadingColor: primaryColor,
     lineHeight,
     borderRadius,
-    border: '0'
+    border: '0',
+    borderInfo: '0',
+    borderSuccess: '0',
+    borderWarning: '0',
+    borderError: '0',
+    borderLoading: '0'
   }
 }
 
