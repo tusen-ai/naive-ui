@@ -1,3 +1,5 @@
+import type { TreeNode } from 'treemate'
+import type { PropType } from 'vue'
 import type {
   NodeProps,
   RenderLabel
@@ -15,14 +17,13 @@ import type {
 } from '../../select/src/interface'
 import type { PopselectSize } from './interface'
 import { happensIn } from 'seemly'
-import { createTreeMate, type TreeNode } from 'treemate'
+import { createTreeMate } from 'treemate'
 import {
   computed,
   defineComponent,
   h,
   inject,
   nextTick,
-  type PropType,
   toRef,
   watch,
   watchEffect

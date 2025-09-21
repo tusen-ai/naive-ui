@@ -1,11 +1,9 @@
+import type { Ref } from 'vue'
+import type { NotificationReactive } from '../index'
 import { mount } from '@vue/test-utils'
 import { sleep } from 'seemly'
-import { defineComponent, h, nextTick, onMounted, type Ref, ref } from 'vue'
-import {
-  NNotificationProvider,
-  type NotificationReactive,
-  useNotification
-} from '../index'
+import { defineComponent, h, nextTick, onMounted, ref } from 'vue'
+import { NNotificationProvider, useNotification } from '../index'
 
 const Provider = defineComponent({
   render() {

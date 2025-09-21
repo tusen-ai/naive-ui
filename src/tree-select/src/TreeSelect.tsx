@@ -1,4 +1,16 @@
+import type { CheckStrategy } from 'treemate'
+import type {
+  CSSProperties,
+  HTMLAttributes,
+  PropType,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
+import type { FollowerInst, FollowerPlacement } from 'vueuc'
+import type { InternalSelectionInst } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/public-types'
 import type { PopoverProps } from '../../popover'
 import type { SelectBaseOption, SelectOption } from '../../select/src/interface'
@@ -10,6 +22,7 @@ import type {
   TreeOverrideNodeClickBehaviorReturn
 } from '../../tree/src/interface'
 import type { OnUpdateExpandedKeysImpl } from '../../tree/src/Tree'
+import type { TreeSelectTheme } from '../styles'
 import type {
   OnUpdateIndeterminateKeysImpl,
   OnUpdateValue,
@@ -24,38 +37,22 @@ import type {
   Value
 } from './interface'
 import { getPreciseEventTarget, happensIn } from 'seemly'
-import { type CheckStrategy, createTreeMate } from 'treemate'
+import { createTreeMate } from 'treemate'
 import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
-  type HTMLAttributes,
-  type PropType,
   provide,
   ref,
-  type SlotsType,
   toRef,
   Transition,
-  type VNode,
-  type VNodeChild,
   watchEffect,
   withDirectives
 } from 'vue'
-import {
-  type FollowerInst,
-  type FollowerPlacement,
-  VBinder,
-  VFollower,
-  VTarget
-} from 'vueuc'
-import {
-  type InternalSelectionInst,
-  NBaseFocusDetector,
-  NInternalSelection
-} from '../../_internal'
+import { VBinder, VFollower, VTarget } from 'vueuc'
+import { NBaseFocusDetector, NInternalSelection } from '../../_internal'
 import {
   useConfig,
   useFormItem,
@@ -65,9 +62,7 @@ import {
 } from '../../_mixins'
 import {
   call,
-  type ExtractPublicPropTypes,
   markEventEffectPerformed,
-  type MaybeArray,
   resolveSlot,
   resolveWrappedSlot,
   useAdjustedTo,
@@ -78,7 +73,7 @@ import { NEmpty } from '../../empty'
 import { NTree } from '../../tree'
 import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
 import { useMergedCheckStrategy } from '../../tree/src/utils'
-import { treeSelectLight, type TreeSelectTheme } from '../styles'
+import { treeSelectLight } from '../styles'
 import { treeSelectInjectionKey } from './interface'
 import style from './styles/index.cssr'
 import {

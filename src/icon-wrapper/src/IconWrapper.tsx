@@ -1,8 +1,9 @@
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { IconWrapperTheme } from '../styles'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import { type ExtractPublicPropTypes, formatLength } from '../../_utils'
+import { formatLength } from '../../_utils'
 import { iconWrapperLight } from '../styles'
 import style from './styles/index.cssr'
 

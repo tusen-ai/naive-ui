@@ -10,9 +10,9 @@ export type IntersectionObserverOptions = Omit<
 export function resolveOptionsAndHash(
   options: IntersectionObserverOptions | undefined = {}
 ): {
-    hash: string
-    options: Omit<IntersectionObserverInit, 'root'> & { root: Element | Document }
-  } {
+  hash: string
+  options: Omit<IntersectionObserverInit, 'root'> & { root: Element | Document }
+} {
   const { root = null } = options
   return {
     hash: `${options.rootMargin || '0px 0px 0px 0px'}-${

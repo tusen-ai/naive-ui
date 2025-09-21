@@ -1,11 +1,6 @@
+import type { CSSProperties, PropType } from 'vue'
 import type { ProgressGradient, ProgressStatus } from './public-types'
-import {
-  computed,
-  type CSSProperties,
-  defineComponent,
-  h,
-  type PropType
-} from 'vue'
+import { computed, defineComponent, h } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {
   ErrorIcon as ErrorCircleIcon,
@@ -111,8 +106,7 @@ export default defineComponent({
               class={[
                 `${clsPrefix}-progress-graph-line`,
                 {
-                  [`${clsPrefix}-progress-graph-line--indicator-${indicatorPlacement}`]:
-                    true
+                  [`${clsPrefix}-progress-graph-line--indicator-${indicatorPlacement}`]: true
                 }
               ]}
             >

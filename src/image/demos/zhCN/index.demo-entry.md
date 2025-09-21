@@ -50,37 +50,38 @@ component-preview-group-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| src-list | `string[]` | `undefined` | 图片列表 | NEXT_VERSION |
-| show | `boolean` | `undefined` | 是否展示大图预览 | NEXT_VERSION |
-| default-show | `boolean` | `undefined` | 默认展示大图预览 | NEXT_VERSION |
-| current | `number` | `undefined` | 当前展示的图片的下标 | NEXT_VERSION |
-| default-current | `number` | `0` | 默认展示的图片的下标 | NEXT_VERSION |
+| current | `number` | `undefined` | 当前展示的图片的下标 | 2.43.0 |
+| default-current | `number` | `0` | 默认展示的图片的下标 | 2.43.0 |
+| default-show | `boolean` | `false` | 默认展示大图预览 | 2.43.0 |
 | render-toolbar | `(props: { nodes: { prev: VNode, next: VNode, rotateCounterclockwise: VNode, rotateClockwise: VNode, resizeToOriginalSize: VNode, zoomOut: VNode, zoomIn: VNode, download: VNode, close: VNode } }) => VNodeChild` | `undefined` | 工具栏的渲染函数 | `2.38.2` |
+| show | `boolean` | `undefined` | 是否展示大图预览 | 2.43.0 |
 | show-toolbar | `boolean` | `true` | 图片放大后是否展示底部工具栏 |  |
 | show-toolbar-tooltip | `boolean` | `false` | 是否展示工具栏的提示 | 2.24.0 |
-| src-list | `string[]` | `undefined` | 图片列表 | NEXT_VERSION |
+| src-list | `string[]` | `undefined` | 图片列表 | 2.43.0 |
 | on-preview-next | `() => void` | `undefined` | 点击下一张的回调 |  |
 | on-preview-prev | `() => void` | `undefined` | 点击上一张的回调 |  |
+| on-update:current | `(value: number) => void` | `undefined` | 显示状态改变的回调函数 | 2.43.0 |
+| on-update:show | `(value: boolean) => void` | `undefined` | 显示状态改变的回调函数 | 2.43.0 |
 
 ### ImagePreview Props
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| src | `string` | `undefined` | 图片来源 | NEXT_VERSION |
-| show | `boolean` | `undefined` | 是否展示大图预览 | NEXT_VERSION |
-| default-show | `boolean` | `undefined` | 默认展示大图预览 | NEXT_VERSION |
-| render-toolbar | `(props: { nodes: { prev: VNode, next: VNode, rotateCounterclockwise: VNode, rotateClockwise: VNode, resizeToOriginalSize: VNode, zoomOut: VNode, zoomIn: VNode, download: VNode, close: VNode } }) => VNodeChild` | `undefined` | 工具栏的渲染函数 | NEXT_VERSION |
-| show-toolbar | `boolean` | `true` | 图片放大后是否展示底部工具栏 | NEXT_VERSION |
-| show-toolbar-tooltip | `boolean` | `false` | 是否展示工具栏的提示 | NEXT_VERSION |
-| on-update:show | `(value: boolean) => void` | `undefined` | 显示状态改变的回调函数 | NEXT_VERSION |
-| onClose | `() => void` | `undefined` | 关闭预览时的回调 | NEXT_VERSION |
+| default-show | `boolean` | `false` | 默认展示大图预览 | 2.43.0 |
+| render-toolbar | `(props: { nodes: { prev: VNode, next: VNode, rotateCounterclockwise: VNode, rotateClockwise: VNode, resizeToOriginalSize: VNode, zoomOut: VNode, zoomIn: VNode, download: VNode, close: VNode } }) => VNodeChild` | `undefined` | 工具栏的渲染函数 | 2.43.0 |
+| show | `boolean` | `undefined` | 是否展示大图预览 | 2.43.0 |
+| show-toolbar | `boolean` | `true` | 图片放大后是否展示底部工具栏 | 2.43.0 |
+| show-toolbar-tooltip | `boolean` | `false` | 是否展示工具栏的提示 | 2.43.0 |
+| src | `string` | `undefined` | 图片地址 | 2.43.0 |
+| on-close | `() => void` | `undefined` | 关闭预览时的回调 | 2.43.0 |
+| on-update:show | `(value: boolean) => void` | `undefined` | 显示状态改变的回调函数 | 2.43.0 |
 
 ### Image Slots
 
 | 名称        | 参数 | 说明                       | 版本   |
 | ----------- | ---- | -------------------------- | ------ |
-| placeholder | `()` | 图像没有加载成功时候的占位 | 2.30.5 |
 | error       | `()` | 图像加载失败时候的占位     | 2.40.2 |
+| placeholder | `()` | 图像没有加载成功时候的占位 | 2.30.5 |
 
 ### ImageGroup Slots
 
@@ -90,6 +91,6 @@ component-preview-group-debug.vue
 
 ### Image Methods
 
-| 名称        | 类型         | 说明             | 版本         |
-| ----------- | ------------ | ---------------- | ------------ |
-| showPreview | `() => void` | 手动打开大图预览 | NEXT_VERSION |
+| 名称        | 类型         | 说明             | 版本   |
+| ----------- | ------------ | ---------------- | ------ |
+| showPreview | `() => void` | 手动打开大图预览 | 2.43.0 |

@@ -123,16 +123,16 @@ const sizeOptions = [
           Normal
         </template>
       </n-switch>
-    </n-flex>
-    <n-flex align="center" justify="start">
-      <n-text>Week Starts On:</n-text>
+      <n-divider vertical />
+      <span>Week Starts On:</span>
       <n-select
         v-model:value="firstDayOfWeek"
         :options="weekStartOptions"
         style="width: 120px"
       />
       <n-divider vertical />
-      <n-text>Size:</n-text>
+    </n-flex>
+    <n-flex>
       <n-radio-group v-model:value="size" name="size">
         <n-radio-button
           v-for="option in sizeOptions"
@@ -151,7 +151,6 @@ const sizeOptions = [
         />
       </n-radio-group>
     </n-flex>
-
     <n-alert type="success" title="Data Statistics">
       <n-flex>
         <n-tag round type="info">
@@ -168,11 +167,10 @@ const sizeOptions = [
         </n-tag>
       </n-flex>
     </n-alert>
-
-    <n-flex align="center">
+    <n-scrollbar x-scrollable style="max-width: 100%">
       <n-heatmap
-        :key="`heatmap-${value}-${firstDayOfWeek}-${size}`"
         :data="yearData"
+        :loading-data="yearData"
         :first-day-of-week="firstDayOfWeek"
         :loading="loading"
         :size="size"
@@ -180,7 +178,8 @@ const sizeOptions = [
         :show-week-labels="showWeekLabels"
         :show-month-labels="showMonthLabels"
         :show-color-indicator="showColorIndicator"
+        :fill-calendar-leading="value === 'recent'"
       />
-    </n-flex>
+    </n-scrollbar>
   </n-flex>
 </template>

@@ -1,4 +1,5 @@
-import { mount, type VueWrapper } from '@vue/test-utils'
+import type { VueWrapper } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { Fragment, h } from 'vue'
 import { NForm, NFormItem } from '../../form'
 import { NCheckbox, NCheckboxGroup } from '../index'

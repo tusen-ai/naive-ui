@@ -1,3 +1,4 @@
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { VirtualListInst } from 'vueuc'
 import type { ScrollbarInst } from '../../../_internal'
 import type {
@@ -29,14 +30,7 @@ import {
   startOfWeek,
   startOfYear
 } from 'date-fns'
-import {
-  computed,
-  type ExtractPropTypes,
-  inject,
-  type PropType,
-  ref,
-  watch
-} from 'vue'
+import { computed, inject, ref, watch } from 'vue'
 import { MONTH_ITEM_HEIGHT } from '../config'
 import { datePickerInjectionKey } from '../interface'
 import {

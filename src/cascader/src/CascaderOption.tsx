@@ -1,18 +1,12 @@
+import type { PropType, VNode } from 'vue'
+import type { TmNode } from './interface'
 import { happensIn } from 'seemly'
 import { useMemo } from 'vooks'
-import {
-  computed,
-  defineComponent,
-  h,
-  inject,
-  type PropType,
-  Transition,
-  type VNode
-} from 'vue'
+import { computed, defineComponent, h, inject, Transition } from 'vue'
 import { NBaseIcon, NBaseLoading } from '../../_internal'
 import { CheckmarkIcon, ChevronRightIcon } from '../../_internal/icons'
 import { NCheckbox } from '../../checkbox'
-import { cascaderInjectionKey, type TmNode } from './interface'
+import { cascaderInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'NCascaderOption',
