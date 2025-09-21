@@ -1,14 +1,11 @@
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ResultTheme } from '../styles'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
-  h,
-  type PropType,
-  type SlotsType,
-  type VNode
+  h
 } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {

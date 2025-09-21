@@ -1,13 +1,10 @@
+import type { PropType } from 'vue'
 import type { MaybeArray } from '../../_utils'
-import { computed, defineComponent, h, inject, type PropType, ref } from 'vue'
+import type { IsHourDisabled, IsMinuteDisabled, IsSecondDisabled, Item, ItemValue } from './interface'
+import { computed, defineComponent, h, inject, ref } from 'vue'
 import { NBaseFocusDetector, NScrollbar } from '../../_internal'
 import { NButton } from '../../button'
 import {
-  type IsHourDisabled,
-  type IsMinuteDisabled,
-  type IsSecondDisabled,
-  type Item,
-  type ItemValue,
   timePickerInjectionKey
 } from './interface'
 import PanelCol from './PanelCol'

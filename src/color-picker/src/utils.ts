@@ -1,12 +1,11 @@
+import type { HSLA, RGB } from 'seemly'
 import {
   hsl2hsv,
   hsl2rgb,
   hsla,
-  type HSLA,
   hsv2hsl,
   hsv2rgb,
   hsva,
-  type RGB,
   rgb2hsl,
   rgb2hsv,
   rgba,

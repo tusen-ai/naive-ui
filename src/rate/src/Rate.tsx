@@ -1,3 +1,4 @@
+import type { CSSProperties, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { RateTheme } from '../styles'
@@ -5,10 +6,8 @@ import type { RateOnUpdateValue, RateOnUpdateValueImpl } from './interface'
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
-  type PropType,
   ref,
   renderList,
   toRef

@@ -1,3 +1,4 @@
+import type { PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { BackTopTheme } from '../styles'
@@ -11,7 +12,6 @@ import {
   nextTick,
   onBeforeUnmount,
   onMounted,
-  type PropType,
   ref,
   toRef,
   Transition,

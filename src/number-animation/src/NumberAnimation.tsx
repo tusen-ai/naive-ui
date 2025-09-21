@@ -1,10 +1,10 @@
+import type { PropType } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { round } from 'lodash-es'
 import {
   computed,
   defineComponent,
   onMounted,
-  type PropType,
   ref,
   watchEffect
 } from 'vue'

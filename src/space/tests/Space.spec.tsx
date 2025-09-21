@@ -1,5 +1,6 @@
+import type { VueWrapper } from '@vue/test-utils'
 import type { Justify } from '../src/Space'
-import { mount, type VueWrapper } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { createCommentVNode, Fragment, h } from 'vue'
 import { c } from '../../_utils/cssr'
 import { NConfigProvider } from '../../config-provider'

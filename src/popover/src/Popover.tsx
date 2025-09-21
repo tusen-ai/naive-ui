@@ -1,3 +1,5 @@
+import type { ComputedRef, CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
+import type { BinderInst, FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type {
   ExtractInternalPropTypes,
@@ -15,24 +17,16 @@ import { useCompitable, useIsMounted, useMemo, useMergedState } from 'vooks'
 import {
   cloneVNode,
   computed,
-  type ComputedRef,
-  type CSSProperties,
   defineComponent,
   h,
-  type PropType,
   provide,
-  type Ref,
   ref,
-  type SlotsType,
   Text,
   toRef,
-  type VNode,
   watchEffect,
   withDirectives
 } from 'vue'
 import {
-  type BinderInst,
-  type FollowerPlacement,
   VBinder,
   VTarget
 } from 'vueuc'

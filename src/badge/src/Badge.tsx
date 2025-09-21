@@ -1,13 +1,12 @@
+import type { CSSProperties, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { BadgeTheme } from '../styles'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   onMounted,
-  type PropType,
   ref,
   Transition
 } from 'vue'

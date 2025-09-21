@@ -1,16 +1,11 @@
+import type { ExtractPropTypes, PropType, Ref, SlotsType, VNode, VNodeChild } from 'vue'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { StepsTheme } from '../styles'
 import {
   defineComponent,
-  type ExtractPropTypes,
   h,
-  type PropType,
-  provide,
-  type Ref,
-  type SlotsType,
-  type VNode,
-  type VNodeChild
+  provide
 } from 'vue'
 import { useConfig, useRtl, useTheme } from '../../_mixins'
 import { createInjectionKey, flatten, getSlot } from '../../_utils'

@@ -1,7 +1,7 @@
 <markdown>
 # 单独使用多图预览组件
 
-`单独使用 <n-image-group> 预览多张图片`
+使用 `<n-image-group />` 的 `src-list` 属性预览多张图片，无需使用 `<n-image />`。
 </markdown>
 
 <script lang="ts" setup>
@@ -27,7 +27,7 @@ function handleUpdateCurrent(current: number) {
 
 <template>
   <n-button type="primary" @click="onClick">
-    Click me to preview multiple image
+    点击预览多图
   </n-button>
   <n-image-group
     v-model:show="showRef"

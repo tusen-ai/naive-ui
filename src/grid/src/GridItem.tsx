@@ -1,3 +1,4 @@
+import type { PropType } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { pxfy } from 'seemly'
 import {
@@ -5,8 +6,7 @@ import {
   defineComponent,
   getCurrentInstance,
   h,
-  inject,
-  type PropType
+  inject
 } from 'vue'
 import { keysOf } from '../../_utils'
 import { gridInjectionKey } from './config'
