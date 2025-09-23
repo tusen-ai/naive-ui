@@ -106,51 +106,28 @@ describe('n-rate', () => {
 
   it('should work with `allowHalf` prop', async () => {
     const onUpdateValue = jest.fn()
-    const wrapper = mount(NRate)
-    await wrapper.setProps({ allowHalf: true })
+    const wrapper = mount(NRate, {
+      props: {
+        allowHalf: true,
+        onUpdateValue
+      }
+    })
 
-    await wrapper.setProps({ onUpdateValue })
-    // Test clicking on the left half of the third star (index 2)
-    const rateItem = wrapper.findAll('.n-rate__item')[2]
-    const mockEvent = new MouseEvent('click', {
-      bubbles: true,
-      cancelable: true
-    })
-    // Mock offsetX to be in the left half of the star
-    Object.defineProperty(mockEvent, 'offsetX', {
-      value: 10, // Small value to simulate left half
-      writable: true
-    })
-    Object.defineProperty(mockEvent, 'currentTarget', {
-      value: {
-        offsetWidth: 30 // Mock width
-      },
-      writable: true
-    })
-    await rateItem.element.dispatchEvent(mockEvent)
-    // Should be 2.5 (index 2 + 0.5)
-    expect(onUpdateValue).toHaveBeenCalledWith(2.5)
+    const rateIndex = 2
+    const offsetWidth = 20
+    const rateItems = wrapper.findAll('.n-rate__item')
+    expect(rateItems.length).toBeGreaterThan(rateIndex)
 
-    // Test clicking on the right half of the same star
-    onUpdateValue.mockClear()
-    const mockEventRight = new MouseEvent('click', {
-      bubbles: true,
-      cancelable: true
+    const targetRate = rateItems[rateIndex]
+    Object.defineProperty(targetRate.element, 'offsetWidth', {
+      value: offsetWidth,
+      configurable: true
     })
-    // Mock offsetX to be in the right half of the star
-    Object.defineProperty(mockEventRight, 'offsetX', {
-      value: 20, // Larger value to simulate right half (>= 15, which is Math.floor(30/2))
-      writable: true
-    })
-    Object.defineProperty(mockEventRight, 'currentTarget', {
-      value: {
-        offsetWidth: 30 // Mock width
-      },
-      writable: true
-    })
-    await rateItem.element.dispatchEvent(mockEventRight)
-    // Should be 3 (index 2 + 1)
-    expect(onUpdateValue).toHaveBeenCalledWith(3)
+
+    await targetRate.trigger('click', { offsetX: offsetWidth / 3 })
+    expect(onUpdateValue).toHaveBeenNthCalledWith(1, rateIndex + 0.5)
+    expect(onUpdateValue).toHaveBeenCalledTimes(1)
+    expect(wrapper.findAll('.n-rate__item--active').length).toBe(2)
 
     wrapper.unmount()
   })

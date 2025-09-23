@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { h } from 'vue'
+import { h, ref } from 'vue'
 import * as useBrowserLocationModule from '../../_utils/composable/use-browser-location'
 import { NBreadcrumb, NBreadcrumbItem } from '../index'
 
@@ -107,19 +107,13 @@ describe('n-breadcrumb', () => {
     })
 
     it('should add `aria-current` if the item is the current location', () => {
-      const currentUrl = 'http://some-domaine/path2'
-      const url = 'http://some-domaine/path1'
-      // Create a mock implementation that doesn't interfere with JSDOM's location object
-      // We'll mock the useBrowserLocation composable directly instead
-      const mockUseBrowserLocation = jest.fn(() => ({
-        value: { href: currentUrl }
-      }))
-      // Store the original composable to restore it later
-      const originalUseBrowserLocation
-        = useBrowserLocationModule.useBrowserLocation
-      // Mock the composable
-      ;(useBrowserLocationModule as any).useBrowserLocation
-        = mockUseBrowserLocation
+      const url = 'http://some-domain/path1'
+      const currentUrl = 'http://some-domain/path2'
+      // https://github.com/jsdom/jsdom/issues/3492
+      // https://jestjs.io/blog#known-issues
+      jest
+        .spyOn(useBrowserLocationModule, 'useBrowserLocation')
+        .mockImplementation(() => ref({ href: currentUrl }))
 
       const wrapper = mount(NBreadcrumb, {
         slots: {
@@ -156,9 +150,6 @@ describe('n-breadcrumb', () => {
           .find(`a.n-breadcrumb-item__link[href="${currentUrl}"]`)
           .attributes('aria-current')
       ).toBe('location')
-      // Restore the original composable
-      ;(useBrowserLocationModule as any).useBrowserLocation
-        = originalUseBrowserLocation
       wrapper.unmount()
     })
 
