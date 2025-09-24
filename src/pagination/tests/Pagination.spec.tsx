@@ -1,9 +1,8 @@
+import type { PaginationInfo, PaginationRenderLabel } from '../index'
 import { mount } from '@vue/test-utils'
 import { h } from 'vue'
 import {
-  NPagination,
-  type PaginationInfo,
-  type PaginationRenderLabel
+  NPagination
 } from '../index'
 
 describe('n-pagination', () => {

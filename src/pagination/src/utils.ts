@@ -20,12 +20,12 @@ function createPageItemsInfo(
   pageSlot: number,
   showQuickJumpDropdown: boolean
 ): {
-    hasFastBackward: boolean
-    hasFastForward: boolean
-    fastBackwardTo: number
-    fastForwardTo: number
-    items: PageItem[]
-  } {
+  hasFastBackward: boolean
+  hasFastForward: boolean
+  fastBackwardTo: number
+  fastForwardTo: number
+  items: PageItem[]
+} {
   let hasFastBackward = false
   let hasFastForward = false
   let fastBackwardTo = 1
@@ -172,8 +172,8 @@ function createPageItemsInfo(
   }
 }
 
-export type PageItem =
-  | {
+export type PageItem
+  = | {
     type: 'fast-backward' | 'fast-forward'
     label: undefined
     active: false

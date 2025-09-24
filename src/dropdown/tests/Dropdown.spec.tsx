@@ -1,10 +1,12 @@
 import type { VueWrapper } from '@vue/test-utils'
+import type { ComponentPublicInstance, VNodeChild } from 'vue'
+import type { DropdownProps } from '../index'
 import type { DropdownMixedOption } from '../src/interface'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 import { mount } from '@vue/test-utils'
-import { type ComponentPublicInstance, h, nextTick, type VNodeChild } from 'vue'
+import { h, nextTick } from 'vue'
 import { NIcon } from '../../icon'
-import { type DropdownProps, NDropdown } from '../index'
+import { NDropdown } from '../index'
 
 const pendingOptionClassName
   = 'n-dropdown-option-body n-dropdown-option-body--pending'

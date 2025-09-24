@@ -1,3 +1,4 @@
+import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { InputInst, InputProps } from '../../input'
@@ -13,16 +14,11 @@ import type {
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   nextTick,
-  type PropType,
   ref,
-  type SlotsType,
   toRef,
-  type VNode,
-  type VNodeChild,
   watchEffect
 } from 'vue'
 import { NBaseIcon } from '../../_internal'

@@ -1,8 +1,14 @@
-import type { PropType } from 'vue'
+import type { PropType, SlotsType, VNode } from 'vue'
 import { defineComponent, h } from 'vue'
+
+interface HeatmapColorIndicatorSlots {
+  'leading-text'?: () => VNode[]
+  'trailing-text'?: () => VNode[]
+}
 
 export default defineComponent({
   name: 'HeatmapColorIndicator',
+  slots: Object as SlotsType<HeatmapColorIndicatorSlots>,
   props: {
     colors: {
       type: Array as PropType<string[]>,
@@ -11,23 +17,18 @@ export default defineComponent({
     clsPrefix: {
       type: String,
       required: true
-    },
-    indicatorText: {
-      type: Array as unknown as PropType<[string, string]>,
-      required: true
     }
   },
-  setup(props) {
+  setup(props, { slots }) {
     return () => {
-      const { colors, clsPrefix, indicatorText } = props
-      const [lessText, moreText] = indicatorText
+      const { colors, clsPrefix } = props
       return (
         <div class={`${clsPrefix}-heatmap-color-indicator`}>
           <span class={`${clsPrefix}-heatmap-color-indicator__label`}>
-            {lessText}
+            {slots['leading-text']?.()}
           </span>
           <div class={`${clsPrefix}-heatmap-color-indicator__cells`}>
-            {colors.map((color, index) => (
+            {colors.map((color: string, index: number) => (
               <div
                 key={index}
                 class={`${clsPrefix}-heatmap-color-indicator__cell`}
@@ -36,7 +37,7 @@ export default defineComponent({
             ))}
           </div>
           <span class={`${clsPrefix}-heatmap-color-indicator__label`}>
-            {moreText}
+            {slots['trailing-text']?.()}
           </span>
         </div>
       )

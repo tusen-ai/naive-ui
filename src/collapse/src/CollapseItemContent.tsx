@@ -1,8 +1,8 @@
+import type { PropType } from 'vue'
 import { useFalseUntilTruthy } from 'vooks'
 import {
   defineComponent,
   h,
-  type PropType,
   toRef,
   vShow,
   withDirectives

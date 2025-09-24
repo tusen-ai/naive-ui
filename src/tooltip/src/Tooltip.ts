@@ -1,9 +1,10 @@
+import type { SlotsType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { PopoverInst, PopoverSlots } from '../../popover'
 import type { TooltipTheme } from '../styles'
 // Tooltip: popover wearing waistcoat
-import { computed, defineComponent, h, ref, type SlotsType } from 'vue'
+import { computed, defineComponent, h, ref } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { NPopover } from '../../popover'
 import { popoverBaseProps } from '../../popover/src/Popover'

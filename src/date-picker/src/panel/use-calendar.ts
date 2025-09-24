@@ -1,3 +1,4 @@
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { VirtualListInst } from 'vueuc'
 import type { ScrollbarInst } from '../../../_internal'
 import type {
@@ -31,9 +32,7 @@ import {
 } from 'date-fns'
 import {
   computed,
-  type ExtractPropTypes,
   inject,
-  type PropType,
   ref,
   watch
 } from 'vue'

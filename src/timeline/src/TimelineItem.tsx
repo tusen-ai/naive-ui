@@ -1,13 +1,10 @@
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
-  inject,
-  type PropType,
-  type SlotsType,
-  type VNode
+  inject
 } from 'vue'
 import { useConfig, useThemeClass } from '../../_mixins'
 import {

@@ -14,10 +14,10 @@ import { createInjectionKey } from '../../_utils'
 
 export type ShouldUseThumbnailUrl = (file: UploadSettledFileInfo) => boolean
 
-export type FuncOrRecordOrUndef<T = string> =
-  | Record<string, T>
-  | (({ file }: { file: UploadSettledFileInfo }) => Record<string, T>)
-  | undefined
+export type FuncOrRecordOrUndef<T = string>
+  = | Record<string, T>
+    | (({ file }: { file: UploadSettledFileInfo }) => Record<string, T>)
+    | undefined
 
 export interface UploadInternalInst {
   doChange: DoChange

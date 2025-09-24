@@ -1,10 +1,9 @@
+import type { CSSProperties, PropType } from 'vue'
 import type { ProgressGradient, ProgressStatus } from './public-types'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
-  h,
-  type PropType
+  h
 } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {

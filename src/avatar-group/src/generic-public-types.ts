@@ -21,14 +21,14 @@ interface ResolvableAvatarGroupProps<
 
 // eslint-disable-next-line ts/ban-ts-comment
 // @ts-ignore
-type _ =
+type _
   //
-  Expect<
+  = Expect<
     Equal<Omit<AvatarGroupProps, ThemeRelatedProps>, ResolvableAvatarGroupProps>
   >
 
-export type GAvatarGroupProps<T extends AvatarGroupOption> =
-  ResolvableAvatarGroupProps<T>
+export type GAvatarGroupProps<T extends AvatarGroupOption>
+  = ResolvableAvatarGroupProps<T>
 
 export interface GAvatarGroupSlots<T extends AvatarGroupOption> {
   avatar?: (props: AvatarGroupAvatarSlotProps<T>) => VNode[]

@@ -1,6 +1,7 @@
+import type { TreeOption } from '../index'
 import { mount } from '@vue/test-utils'
 import { nextTick } from 'vue'
-import { NTree, type TreeOption } from '../index'
+import { NTree } from '../index'
 
 describe('n-tree', () => {
   it('should work with import on demand', () => {

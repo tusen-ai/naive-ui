@@ -1,15 +1,12 @@
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ThingTheme } from '../styles'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   Fragment,
-  h,
-  type PropType,
-  type SlotsType,
-  type VNode
+  h
 } from 'vue'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import { thingLight } from '../styles'
@@ -97,11 +94,11 @@ export default defineComponent({
           ) : null}
           <div class={`${mergedClsPrefix}-thing-main`}>
             {!props.contentIndented
-            && (slots.header
-              || props.title
-              || slots['header-extra']
-              || props.titleExtra
-              || slots.avatar) ? (
+              && (slots.header
+                || props.title
+                || slots['header-extra']
+                || props.titleExtra
+                || slots.avatar) ? (
                   <div class={`${mergedClsPrefix}-thing-avatar-header-wrapper`}>
                     {slots.avatar ? (
                       <div class={`${mergedClsPrefix}-thing-avatar`}>
@@ -109,9 +106,9 @@ export default defineComponent({
                       </div>
                     ) : null}
                     {slots.header
-                    || props.title
-                    || slots['header-extra']
-                    || props.titleExtra ? (
+                      || props.title
+                      || slots['header-extra']
+                      || props.titleExtra ? (
                           <div class={`${mergedClsPrefix}-thing-header-wrapper`}>
                             <div class={`${mergedClsPrefix}-thing-header`}>
                               {slots.header || props.title ? (
@@ -146,9 +143,9 @@ export default defineComponent({
                 ) : (
                   <>
                     {slots.header
-                    || props.title
-                    || slots['header-extra']
-                    || props.titleExtra ? (
+                      || props.title
+                      || slots['header-extra']
+                      || props.titleExtra ? (
                           <div class={`${mergedClsPrefix}-thing-header`}>
                             {slots.header || props.title ? (
                               <div class={`${mergedClsPrefix}-thing-header__title`}>

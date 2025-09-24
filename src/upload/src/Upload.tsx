@@ -1,6 +1,8 @@
+import type { CSSProperties, InputHTMLAttributes, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { ImageGroupProps } from '../../image'
+import type { UploadTheme } from '../styles'
 import type {
   CreateThumbnailUrl,
   CustomRequest,
@@ -31,13 +33,10 @@ import { createId } from 'seemly'
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   Fragment,
   h,
-  type InputHTMLAttributes,
   nextTick,
-  type PropType,
   provide,
   ref,
   Teleport,
@@ -51,7 +50,7 @@ import {
   useThemeClass
 } from '../../_mixins'
 import { call, throwError, warn } from '../../_utils'
-import { uploadLight, type UploadTheme } from '../styles'
+import { uploadLight } from '../styles'
 import { uploadInjectionKey } from './interface'
 import style from './styles/index.cssr'
 import { uploadDraggerKey } from './UploadDragger'

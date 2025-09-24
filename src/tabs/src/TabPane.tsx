@@ -1,13 +1,9 @@
+import type { HTMLAttributes, PropType, SlotsType, VNode, VNodeChild } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import {
   defineComponent,
   h,
-  type HTMLAttributes,
   inject,
-  type PropType,
-  type SlotsType,
-  type VNode,
-  type VNodeChild,
   watchEffect
 } from 'vue'
 import { throwError, warnOnce } from '../../_utils'
