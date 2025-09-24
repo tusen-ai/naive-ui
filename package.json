@@ -136,7 +136,7 @@
     "jest-environment-jsdom": "^30.1.2",
     "katex": "^0.16.22",
     "lint-staged": "^16.1.6",
-    "marked": "^12.0.2",
+    "marked": "^16.3.0",
     "prettier": "^3.6.2",
     "rimraf": "^6.0.1",
     "rollup": "^4.45.1",
