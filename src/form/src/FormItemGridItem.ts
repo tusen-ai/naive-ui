@@ -1,5 +1,6 @@
+import type { SlotsType } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { FormItemInst } from './interface'
+import type { FormItemInst, FormItemSlots } from './interface'
 import { defineComponent, h, ref } from 'vue'
 import { keep, keysOf } from '../../_utils'
 import NGridItem, {
@@ -22,6 +23,7 @@ export default defineComponent({
   name: 'FormItemGridItem',
   alias: ['FormItemGi'],
   props: formItemGiProps,
+  slots: Object as SlotsType<FormItemSlots>,
   setup() {
     const formItemInstRef = ref<FormItemInst | null>(null)
     const validate = ((...args: any[]) => {
