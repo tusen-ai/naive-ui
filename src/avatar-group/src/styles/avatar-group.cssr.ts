@@ -46,5 +46,19 @@ export default cB('avatar-group', `
          margin-top: var(--n-gap);
       `)
     ])
+  ]),
+  cM('cascading-left-up', [
+    cB('avatar', [
+      c('&', `
+        z-index: calc(var(--n-avatar-total, 1) - var(--n-avatar-index, 0));
+      `)
+    ])
+  ]),
+  cM('cascading-right-up', [
+    cB('avatar', [
+      c('&', `
+        z-index: calc(var(--n-avatar-index, 0) + 1);
+      `)
+    ])
   ])
 ])

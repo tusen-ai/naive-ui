@@ -8,12 +8,7 @@ import type {
   AvatarGroupOption,
   AvatarGroupRestSlotProps
 } from './public-types'
-import {
-  computed,
-  defineComponent,
-  h,
-  provide
-} from 'vue'
+import { computed, defineComponent, h, provide } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
 import NAvatar from '../../avatar/src/Avatar'
@@ -25,6 +20,8 @@ export interface AvatarGroupInjection {
   size?: Size | undefined
 }
 
+export type CascadingDirection = 'left-up' | 'right-up'
+
 export const avatarGroupProps = {
   ...(useTheme.props as ThemeProps<AvatarGroupTheme>),
   max: Number,
@@ -35,7 +32,11 @@ export const avatarGroupProps = {
   },
   vertical: Boolean,
   expandOnHover: Boolean,
-  size: [String, Number] as PropType<Size | undefined>
+  size: [String, Number] as PropType<Size | undefined>,
+  cascading: {
+    type: String as PropType<CascadingDirection>,
+    default: 'left-up'
+  }
 } as const
 
 export type AvatarGroupProps = ExtractPublicPropTypes<typeof avatarGroupProps>
@@ -93,7 +94,8 @@ export default defineComponent({
       displayedOptions: displayedOptionsRef,
       cssVars: computed(() => {
         return {
-          '--n-gap': mergedThemeRef.value.self.gap
+          '--n-gap': mergedThemeRef.value.self.gap,
+          '--n-avatar-total': displayedOptionsRef.value.length
         }
       })
     }
@@ -113,12 +115,14 @@ export default defineComponent({
           this.rtlEnabled && `${mergedClsPrefix}-avatar-group--rtl`,
           this.vertical && `${mergedClsPrefix}-avatar-group--vertical`,
           this.expandOnHover
-          && `${mergedClsPrefix}-avatar-group--expand-on-hover`
+          && `${mergedClsPrefix}-avatar-group--expand-on-hover`,
+          this.cascading
+          && `${mergedClsPrefix}-avatar-group--cascading-${this.cascading}`
         ]}
         style={this.cssVars}
         role="group"
       >
-        {displayedOptions.map((option) => {
+        {displayedOptions.map((option, index) => {
           return $slots.avatar ? (
             $slots.avatar({ option })
           ) : (
@@ -126,6 +130,12 @@ export default defineComponent({
               src={option.src}
               theme={mergedTheme.peers.Avatar}
               themeOverrides={mergedTheme.peerOverrides.Avatar}
+              style={{
+                '--n-avatar-index': index,
+                ...(option.style && typeof option.style === 'object'
+                  ? option.style
+                  : {})
+              }}
             />
           )
         })}

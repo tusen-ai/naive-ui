@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-avatar-group` adds `cascading` prop, closes [#7227](https://github.com/tusen-ai/naive-ui/issues/7227).
+
 ## 2.43.1
 
 `2025-09-15`

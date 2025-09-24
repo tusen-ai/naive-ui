@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-avatar-group` 增加 `cascading` 属性，关闭 [#7227](https://github.com/tusen-ai/naive-ui/issues/7227)
+
 ## 2.43.1
 
 `2025-09-15`
