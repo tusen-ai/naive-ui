@@ -1,10 +1,5 @@
 import type { Ref, WatchStopHandle } from 'vue'
-import {
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  watch
-} from 'vue'
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 let lockCount = 0
 let originalMarginRight: string = ''

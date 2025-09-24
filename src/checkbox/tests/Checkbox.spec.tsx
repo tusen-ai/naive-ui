@@ -246,7 +246,7 @@ describe('n-checkbox-group', () => {
       }
     })
     await wrapper.findComponent(NCheckbox).trigger('click')
-    expect(onClick).toBeCalled()
+    expect(onClick).toHaveBeenCalled()
     wrapper.unmount()
   })
 

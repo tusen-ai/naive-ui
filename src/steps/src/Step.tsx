@@ -1,11 +1,6 @@
 import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import {
-  computed,
-  defineComponent,
-  h,
-  inject
-} from 'vue'
+import { computed, defineComponent, h, inject } from 'vue'
 import { NBaseIcon, NIconSwitchTransition } from '../../_internal'
 import {
   CloseIcon as ErrorIcon,

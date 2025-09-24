@@ -31,11 +31,7 @@ import type {
   TreeOverrideNodeClickBehavior
 } from './interface'
 import { depx, getPadding, pxfy } from 'seemly'
-import {
-  createIndexGetter,
-  createTreeMate,
-  flatten
-} from 'treemate'
+import { createIndexGetter, createTreeMate, flatten } from 'treemate'
 import { useMergedState } from 'vooks'
 import {
   computed,
@@ -49,9 +45,7 @@ import {
   watch,
   watchEffect
 } from 'vue'
-import {
-  VVirtualList
-} from 'vueuc'
+import { VVirtualList } from 'vueuc'
 import { NxScrollbar } from '../../_internal'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import { call, createDataKey, resolveSlot, warn, warnOnce } from '../../_utils'

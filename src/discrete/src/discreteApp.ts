@@ -8,10 +8,7 @@ import type { NotificationApi } from '../../notification'
 import type { DiscreteApiType, MaybeRef } from './interface'
 import { createApp, h, unref } from 'vue'
 import { isBrowser, warn } from '../../_utils'
-import {
-
-  NConfigProvider
-} from '../../config-provider'
+import { NConfigProvider } from '../../config-provider'
 import { useDialog } from '../../dialog'
 import { useLoadingBar } from '../../loading-bar'
 import { useMessage } from '../../message'

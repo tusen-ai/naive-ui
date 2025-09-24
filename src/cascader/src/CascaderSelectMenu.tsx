@@ -24,9 +24,7 @@ import {
   Transition,
   withDirectives
 } from 'vue'
-import {
-  NInternalSelectMenu
-} from '../../_internal'
+import { NInternalSelectMenu } from '../../_internal'
 import { resolveSlot } from '../../_utils'
 import { createTmOptions } from '../../select/src/utils'
 import { cascaderInjectionKey } from './interface'

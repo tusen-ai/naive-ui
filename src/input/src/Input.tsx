@@ -1,4 +1,13 @@
-import type { CSSProperties, InputHTMLAttributes, PropType, SlotsType, TextareaHTMLAttributes, VNode, VNodeChild, WatchStopHandle } from 'vue'
+import type {
+  CSSProperties,
+  InputHTMLAttributes,
+  PropType,
+  SlotsType,
+  TextareaHTMLAttributes,
+  VNode,
+  VNodeChild,
+  WatchStopHandle
+} from 'vue'
 import type { ScrollbarInst } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
@@ -28,12 +37,7 @@ import {
   watchEffect
 } from 'vue'
 import { VResizeObserver } from 'vueuc'
-import {
-  NBaseClear,
-  NBaseIcon,
-  NBaseSuffix,
-  NScrollbar
-} from '../../_internal'
+import { NBaseClear, NBaseIcon, NBaseSuffix, NScrollbar } from '../../_internal'
 import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
 import {
   useConfig,
@@ -44,12 +48,7 @@ import {
   useThemeClass
 } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
-import {
-  call,
-  createKey,
-  resolveSlot,
-  resolveWrappedSlot
-} from '../../_utils'
+import { call, createKey, resolveSlot, resolveWrappedSlot } from '../../_utils'
 import { isSafari } from '../../_utils/env/browser'
 import { inputLight } from '../styles'
 import { inputInjectionKey } from './interface'

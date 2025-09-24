@@ -1,11 +1,6 @@
 import type { HTMLAttributes, PropType } from 'vue'
 import type { TmNode } from './interface'
-import {
-  defineComponent,
-  h,
-  inject,
-  ref
-} from 'vue'
+import { defineComponent, h, inject, ref } from 'vue'
 import { render } from '../../_utils'
 import { treeInjectionKey } from './interface'
 

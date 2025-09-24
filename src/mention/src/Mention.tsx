@@ -26,11 +26,7 @@ import {
   toRef,
   Transition
 } from 'vue'
-import {
-  VBinder,
-  VFollower,
-  VTarget
-} from 'vueuc'
+import { VBinder, VFollower, VTarget } from 'vueuc'
 import { NInternalSelectMenu } from '../../_internal'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import { call, useAdjustedTo, warn } from '../../_utils'

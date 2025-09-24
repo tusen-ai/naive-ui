@@ -13,11 +13,7 @@ import { useLocale } from '../../../_mixins'
 import { resolveSlotWithTypedProps, resolveWrappedSlot } from '../../../_utils'
 import { NButton, NxButton } from '../../../button'
 import { MONTH_ITEM_HEIGHT } from '../config'
-import {
-  getMonthString,
-  getQuarterString,
-  getYearString
-} from '../utils'
+import { getMonthString, getQuarterString, getYearString } from '../utils'
 import { useCalendar, useCalendarProps } from './use-calendar'
 
 /**

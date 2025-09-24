@@ -30,12 +30,7 @@ import {
   startOfWeek,
   startOfYear
 } from 'date-fns'
-import {
-  computed,
-  inject,
-  ref,
-  watch
-} from 'vue'
+import { computed, inject, ref, watch } from 'vue'
 import { MONTH_ITEM_HEIGHT } from '../config'
 import { datePickerInjectionKey } from '../interface'
 import {

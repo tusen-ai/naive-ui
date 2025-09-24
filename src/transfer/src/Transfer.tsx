@@ -2,28 +2,24 @@ import type { CSSProperties, PropType, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { TransferTheme } from '../styles'
-import type { Filter, OnUpdateValue, Option, OptionValue, TransferRenderSourceLabel, TransferRenderSourceList, TransferRenderTargetLabel } from './interface'
+import type {
+  Filter,
+  OnUpdateValue,
+  Option,
+  OptionValue,
+  TransferRenderSourceLabel,
+  TransferRenderSourceList,
+  TransferRenderTargetLabel
+} from './interface'
 import { depx } from 'seemly'
 import { useIsMounted } from 'vooks'
-import {
-  computed,
-  defineComponent,
-  h,
-  provide,
-  toRef,
-  watchEffect
-} from 'vue'
+import { computed, defineComponent, h, provide, toRef, watchEffect } from 'vue'
 import { NScrollbar } from '../../_internal'
 import { useConfig, useFormItem, useTheme } from '../../_mixins'
-import {
-  call,
-  warnOnce
-} from '../../_utils'
+import { call, warnOnce } from '../../_utils'
 import { createKey } from '../../_utils/cssr'
 import { transferLight } from '../styles'
-import {
-  transferInjectionKey
-} from './interface'
+import { transferInjectionKey } from './interface'
 import style from './styles/index.cssr'
 import NTransferFilter from './TransferFilter'
 import NTransferHeader from './TransferHeader'

@@ -6,14 +6,7 @@ import type { SplitOnUpdateSize } from './types'
 import { off, on } from 'evtd'
 import { depx } from 'seemly'
 import { useMergedState } from 'vooks'
-import {
-  computed,
-  defineComponent,
-  h,
-  ref,
-  toRef,
-  watchEffect
-} from 'vue'
+import { computed, defineComponent, h, ref, toRef, watchEffect } from 'vue'
 import { useTheme, useThemeClass } from '../../_mixins'
 import useConfig from '../../_mixins/use-config'
 import { call, resolveSlot } from '../../_utils'

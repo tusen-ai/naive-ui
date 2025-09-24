@@ -1,5 +1,12 @@
 import type { CheckStrategy } from 'treemate'
-import type { CSSProperties, HTMLAttributes, PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type {
+  CSSProperties,
+  HTMLAttributes,
+  PropType,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
 import type { FollowerInst, FollowerPlacement } from 'vueuc'
 import type { InternalSelectionInst } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
@@ -44,15 +51,8 @@ import {
   watchEffect,
   withDirectives
 } from 'vue'
-import {
-  VBinder,
-  VFollower,
-  VTarget
-} from 'vueuc'
-import {
-  NBaseFocusDetector,
-  NInternalSelection
-} from '../../_internal'
+import { VBinder, VFollower, VTarget } from 'vueuc'
+import { NBaseFocusDetector, NInternalSelection } from '../../_internal'
 import {
   useConfig,
   useFormItem,
