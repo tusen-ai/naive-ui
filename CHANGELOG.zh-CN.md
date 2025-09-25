@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+## Features
+
+- `n-menu` 新增 `tooltip-props` 属性，关闭 [#4226](https://github.com/tusen-ai/naive-ui/issues/4226)
+
 ## 2.43.1
 
 `2025-09-15`

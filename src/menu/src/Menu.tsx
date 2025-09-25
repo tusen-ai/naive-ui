@@ -4,6 +4,7 @@ import type { FollowerPlacement, VOverflowInst } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type { MaybeArray } from '../../_utils'
 import type { DropdownProps } from '../../dropdown'
+import type { TooltipProps } from '../../tooltip'
 import type { MenuTheme } from '../styles'
 import type {
   MenuGroupOption,
@@ -122,6 +123,7 @@ export const menuProps = {
     (option: MenuOption | MenuGroupOption) => VNodeChild
   >,
   dropdownProps: Object as PropType<DropdownProps>,
+  tooltipProps: Object as PropType<TooltipProps>,
   accordion: Boolean,
   nodeProps: Function as PropType<MenuNodeProps>,
   dropdownPlacement: {
