@@ -13,6 +13,7 @@ icon.vue
 name-size.vue
 fallback.vue
 group.vue
+cascading.vue
 lazy.vue
 v-show-debug.vue
 ```
@@ -51,6 +52,7 @@ interface AvatarGroupOption {
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| cascading | `'left-up' \| 'right-up'` | `left-up` | Cascading direction of avatar group. | NEXT_VERSION |
 | expand-on-hover | `boolean` | `false` | Expand on hover. | 2.37.0 |
 | max | `number` | `undefined` | Max avatar count in the group. |  |
 | max-style | `Object \| string` | `undefined` | The style of the overflow placeholder. |  |
