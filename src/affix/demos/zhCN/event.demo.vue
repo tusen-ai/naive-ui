@@ -1,39 +1,35 @@
 <markdown>
-# Basic
+# 状态变化事件
 
-Affix has `trigger-top`, `top`, `trigger-bottom` and `bottom`. `trigger-top` is top affixing trigger point. `top` is the style `top` value after top affixing is trigger. `trigger-bottom` and `bottom` work in similar way.
+使用 `on-change` 属性可以监听固定状态的变化。
 </markdown>
 
 <script lang="ts" setup>
+import { useMessage } from 'naive-ui'
 import { ref } from 'vue'
 
 const containerRef = ref<HTMLElement | undefined>(undefined)
+const message = useMessage()
+
+function handleChange(affixed: boolean) {
+  message.info(affixed ? '已固定' : '未固定')
+}
 </script>
 
 <template>
   <div ref="containerRef" class="container">
     <div class="padding" />
     <div class="content">
-      <n-row>
-        <n-col :span="12">
+      <n-grid :cols="1">
+        <n-gi :span="1">
           <n-affix
             :top="120"
             :trigger-top="60"
             :listen-to="() => containerRef as HTMLElement"
-          >
-            <n-tag>Affix Trigger Top 60px</n-tag>
-          </n-affix>
-        </n-col>
-        <n-col :span="12">
-          <n-affix
-            :bottom="120"
-            :trigger-bottom="60"
-            :listen-to="() => containerRef as HTMLElement"
-          >
-            <n-tag>Affix Trigger Bottom 60px</n-tag>
-          </n-affix>
-        </n-col>
-      </n-row>
+            :on-change="handleChange"
+          />
+        </n-gi>
+      </n-grid>
     </div>
   </div>
 </template>

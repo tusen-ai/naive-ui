@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-affix` adds `on-change` prop, closes[#4315](https://github.com/tusen-ai/naive-ui/issues/4315).
+
 ## 2.43.1
 
 `2025-09-15`
