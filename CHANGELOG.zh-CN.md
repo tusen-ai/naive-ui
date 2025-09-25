@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-dynamic-input` 新增 `placement` 属性，关闭 [#5344](https://github.com/tusen-ai/naive-ui/issues/5344)
+
 ## 2.43.1
 
 `2025-09-15`
