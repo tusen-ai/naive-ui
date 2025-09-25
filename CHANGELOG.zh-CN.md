@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-drawer` 增加 `resize-trigger` 插槽，关闭 [#6761](https://github.com/tusen-ai/naive-ui/issues/6761)
+
 ## 2.43.1
 
 `2025-09-15`

@@ -22,6 +22,7 @@ dark-2-debug.vue
 dark-3-debug.vue
 dark-4-debug.vue
 resizable.vue
+custom-resize-trigger.vue
 rtl-debug.vue
 ```
 
@@ -82,9 +83,10 @@ rtl-debug.vue
 
 ### Drawer Slots
 
-| 名称    | 参数 | 说明       |
-| ------- | ---- | ---------- |
-| default | `()` | 抽屉的内容 |
+| 名称 | 参数 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| default | `()` | 抽屉的内容 |  |
+| resize-trigger | `(options: { triggerProps: object })` | 自定义触发器 | NEXT_VERSION |
 
 ### DrawerContent Slots
 
