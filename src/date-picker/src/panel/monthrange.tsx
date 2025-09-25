@@ -106,6 +106,8 @@ export default defineComponent({
       renderItem,
       onRender
     } = this
+    const footerSlot
+      = this.datePickerSlots['monthrange-footer'] || this.datePickerSlots.footer
     onRender?.()
     return (
       <div
@@ -261,7 +263,7 @@ export default defineComponent({
             ) : null}
           </div>
         </div>
-        {resolveWrappedSlot(this.datePickerSlots.footer, (children) => {
+        {resolveWrappedSlot(footerSlot, (children) => {
           return children ? (
             <div class={`${mergedClsPrefix}-date-panel-footer`}>{children}</div>
           ) : null
