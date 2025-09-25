@@ -130,12 +130,7 @@ export default defineComponent({
               src={option.src}
               theme={mergedTheme.peers.Avatar}
               themeOverrides={mergedTheme.peerOverrides.Avatar}
-              style={{
-                '--n-avatar-index': index,
-                ...(option.style && typeof option.style === 'object'
-                  ? option.style
-                  : {})
-              }}
+              style={{ '--n-avatar-index': index }}
             />
           )
         })}

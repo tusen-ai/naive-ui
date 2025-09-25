@@ -13,5 +13,4 @@ export interface AvatarGroupRestSlotProps<
 
 export interface AvatarGroupOption {
   src: string
-  style?: string | Record<string, any>
 }
