@@ -25,6 +25,7 @@ export const numberAnimationProps = {
     type: Number,
     default: 2000
   },
+  format: Function as PropType<(value: number) => string>,
   onFinish: Function as PropType<() => void>
 }
 
@@ -85,9 +86,13 @@ export default defineComponent({
         .formatToParts(0.5)
         .find(part => part.type === 'decimal')
         ?.value
-      const integer = props.showSeparator
-        ? numberFormatter.format(Number(splitValue[0]))
-        : splitValue[0]
+
+      const intValue = Number(splitValue[0])
+      const integer = props.format
+        ? props.format(intValue)
+        : props.showSeparator
+          ? numberFormatter.format(intValue)
+          : splitValue[0]
       const decimal = splitValue[1]
       return {
         integer,
