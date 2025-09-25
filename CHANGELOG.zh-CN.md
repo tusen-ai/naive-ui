@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-float-button` 新增 `direction` 属性
+
 ## 2.43.1
 
 `2025-09-15`

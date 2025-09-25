@@ -22,6 +22,10 @@ export const floatButtonGroupProps = {
     type: String as PropType<'square' | 'circle'>,
     default: 'circle'
   },
+  direction: {
+    type: String as PropType<'vertical' | 'horizontal'>,
+    default: 'vertical'
+  },
   position: {
     type: String as PropType<'relative' | 'absolute' | 'fixed'>,
     default: 'fixed'
@@ -83,12 +87,13 @@ export default defineComponent({
     }
   },
   render() {
-    const { mergedClsPrefix, cssVars, shape } = this
+    const { mergedClsPrefix, cssVars, shape, direction } = this
     return (
       <div
         class={[
           `${mergedClsPrefix}-float-button-group`,
-          `${mergedClsPrefix}-float-button-group--${shape}-shape`
+          `${mergedClsPrefix}-float-button-group--${shape}-shape`,
+          `${mergedClsPrefix}-float-button-group--${direction}`
         ]}
         style={cssVars as CSSProperties}
         role="group"
