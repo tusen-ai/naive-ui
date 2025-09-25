@@ -17,6 +17,7 @@ interface ResolvableAvatarGroupProps<
   size?: Size
   max?: number
   maxStyle?: string | CSSProperties
+  cascading?: 'left-up' | 'right-up'
 }
 
 // eslint-disable-next-line ts/ban-ts-comment
