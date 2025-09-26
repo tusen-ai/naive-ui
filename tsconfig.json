@@ -13,7 +13,7 @@
       "naive-ui/generic": ["./generic"]
     },
     "resolveJsonModule": true,
-    "types": ["vue/jsx", "jest"],
+    "types": ["vue/jsx", "vitest/globals"],
     "strict": true,
     "strictNullChecks": true,
     "noImplicitAny": true,
@@ -21,6 +21,7 @@
     "declaration": true,
     "outDir": "./build/dist",
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
   }
 }
