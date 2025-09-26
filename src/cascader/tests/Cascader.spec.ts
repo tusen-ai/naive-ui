@@ -83,32 +83,45 @@ describe('n-cascader', () => {
   })
 
   it('should work with `placement` prop', async () => {
-    ;(
-      [
-        'top-start',
-        'top',
-        'top-end',
-        'right-start',
-        'right',
-        'right-end',
-        'bottom-start',
-        'bottom',
-        'bottom-end',
-        'left-start',
-        'left',
-        'left-end'
-      ] as const
-    ).forEach((placement) => {
-      const wrapper = mount(NCascader, { props: { placement } })
-      vi.waitFor(() => {
-        expect(
-          document
-            .querySelector('.v-binder-follower-content')
-            ?.getAttribute('v-placement')
-        ).toBe(placement)
+    const placements = [
+      'top-start',
+      'top',
+      'top-end',
+      'right-start',
+      'right',
+      'right-end',
+      'bottom-start',
+      'bottom',
+      'bottom-end',
+      'left-start',
+      'left',
+      'left-end'
+    ] as const
+
+    for (const placement of placements) {
+      const wrapper = mount(NCascader, {
+        attachTo: document.body,
+        props: {
+          placement,
+          show: true
+        }
+      })
+
+      await nextTick()
+
+      await vi.waitFor(() => {
+        const followerContents = document.querySelectorAll(
+          '.v-binder-follower-content'
+        )
+        const currentFollower = followerContents.item(
+          followerContents.length - 1
+        )
+
+        expect(currentFollower.getAttribute('v-placement')).toBe(placement)
       })
       wrapper.unmount()
-    })
+      await nextTick()
+    }
   })
 
   it('should work with `filterable` prop', async () => {
