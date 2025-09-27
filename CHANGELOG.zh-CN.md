@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-message` 增加各类型的 `border` 主题变量，关闭 [#7105](https://github.com/tusen-ai/naive-ui/issues/7105)
+
 ## 2.43.1
 
 `2025-09-15`
