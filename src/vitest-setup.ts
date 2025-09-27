@@ -1,3 +1,5 @@
+import { isBrowser, isJsdom } from './_utils'
+
 // Polyfill browser APIs
 class _ResizeObserver {
   observe(): void {}
@@ -18,18 +20,12 @@ function _matchMedia(query: string): MediaQueryList {
   }
 }
 
-if (typeof window !== 'undefined') {
-  if (typeof window.ResizeObserver === 'undefined') {
-    window.ResizeObserver = _ResizeObserver
-  }
-  if (typeof window.matchMedia === 'undefined') {
-    window.matchMedia = _matchMedia
-  }
+if (isJsdom() && typeof window !== 'undefined') {
+  window.ResizeObserver = _ResizeObserver
+  window.matchMedia = _matchMedia
+}
 
-  const protoList = [HTMLDivElement.prototype, HTMLElement.prototype]
-  protoList.forEach((proto) => {
-    if (typeof proto.scrollTo !== 'function') {
-      proto.scrollTo = () => {}
-    }
-  })
+// https://github.com/jsdom/jsdom/issues/1422
+if (isBrowser) {
+  HTMLDivElement.prototype.scrollTo = () => {}
 }
