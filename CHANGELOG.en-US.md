@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-notification` adds `border` `color` `headerTextColor` `descriptionTextColor` `actionTextColor` theme variables for each type.
+
+### Fixes
+
+- `n-notification`'s `placement` property has extra `margin` when it is `top-left` `top-right` `bottom-left` `bottom-right`.
+
 ## 2.43.1
 
 `2025-09-15`

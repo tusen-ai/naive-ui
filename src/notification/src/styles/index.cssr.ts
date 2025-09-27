@@ -121,14 +121,13 @@ export default c([
     ]),
     cM('top-right, bottom-right', [
       cB('notification', `
-        margin-left: 28px;
         margin-right: 16px;
       `)
     ]),
     cM('top-left, bottom-left', [
       cB('notification', `
-        margin-left: 16px;
-        margin-right: 28px;
+        margin-left: 12px;
+        margin-right: 16px;
       `)
     ]),
     cM('top-right', `
@@ -220,6 +219,7 @@ export default c([
       max-width: calc(100vw - 16px - 16px);
       border-radius: var(--n-border-radius);
       box-shadow: var(--n-box-shadow);
+      border: var(--n-border);
       box-sizing: border-box;
       opacity: 1;
     `, [
