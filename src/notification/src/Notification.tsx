@@ -67,14 +67,9 @@ export const Notification = defineComponent({
       const { type } = props
       const {
         self: {
-          color,
-          textColor,
           closeIconColor,
           closeIconColorHover,
           closeIconColorPressed,
-          headerTextColor,
-          descriptionTextColor,
-          actionTextColor,
           borderRadius,
           headerFontWeight,
           boxShadow,
@@ -91,13 +86,20 @@ export const Notification = defineComponent({
           titleFontSize,
           metaFontSize,
           descriptionFontSize,
-          [createKey('iconColor', type)]: iconColor
+          [createKey('iconColor', type)]: iconColor,
+          [createKey('color', type)]: color,
+          [createKey('border', type)]: border,
+          [createKey('textColor', type)]: textColor,
+          [createKey('headerTextColor', type)]: headerTextColor,
+          [createKey('descriptionTextColor', type)]: descriptionTextColor,
+          [createKey('actionTextColor', type)]: actionTextColor
         },
         common: { cubicBezierEaseOut, cubicBezierEaseIn, cubicBezierEaseInOut }
       } = mergedThemeRef.value
       const { left, right, top, bottom } = getPadding(padding)
       return {
         '--n-color': color,
+        '--n-border': border,
         '--n-font-size': fontSize,
         '--n-text-color': textColor,
         '--n-description-text-color': descriptionTextColor,

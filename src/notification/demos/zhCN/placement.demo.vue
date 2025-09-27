@@ -17,13 +17,13 @@ function PlacementButtons(props: {
   onPlacementChange?: (placement: NotificationPlacement) => void
 }) {
   const notification = useNotification()
-  const placementList = [
-    { placement: 'top-left' as const, text: '左上' },
-    { placement: 'top-right' as const, text: '右上' },
-    { placement: 'bottom-left' as const, text: '左下' },
-    { placement: 'bottom-right' as const, text: '右下' },
-    { placement: 'bottom' as const, text: '下' },
-    { placement: 'top' as const, text: '上' }
+  const placementList: { placement: NotificationPlacement, text: string }[] = [
+    { placement: 'top-left', text: '左上' },
+    { placement: 'top-right', text: '右上' },
+    { placement: 'bottom-left', text: '左下' },
+    { placement: 'bottom-right', text: '右下' },
+    { placement: 'bottom', text: '下' },
+    { placement: 'top', text: '上' }
   ]
 
   return h(NSpace, null, {
@@ -49,6 +49,6 @@ function PlacementButtons(props: {
 
 <template>
   <n-notification-provider :placement="placementRef">
-    <PlacementButtons :on-placement-change="handlePlacementChange" />
+    <PlacementButtons @placement-change="handlePlacementChange" />
   </n-notification-provider>
 </template>

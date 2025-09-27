@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-notification` 增加各类型的 `border` `color` `headerTextColor` `descriptionTextColor` `actionTextColor` 主题变量
+
+### Fixes
+
+- `n-notification` 的 `placement` 属性为 `top-left` `top-right` `bottom-left` `bottom-right` 时 `margin` 的边距多出的问题
+
 ## 2.43.1
 
 `2025-09-15`
