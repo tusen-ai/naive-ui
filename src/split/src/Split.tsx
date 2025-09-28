@@ -23,6 +23,10 @@ export const splitProps = {
     type: Number,
     default: 3
   },
+  resizeTriggerHitSize: {
+    type: Number,
+    default: 0
+  },
   disabled: Boolean,
   defaultSize: {
     type: [String, Number] as PropType<string | number>,
@@ -85,7 +89,8 @@ export default defineComponent({
       return {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-resize-trigger-color': resizableTriggerColor,
-        '--n-resize-trigger-color-hover': resizableTriggerColorHover
+        '--n-resize-trigger-color-hover': resizableTriggerColorHover,
+        '--n-resize-trigger-hit-size': `${props.resizeTriggerHitSize}px`
       }
     })
     const resizeTriggerElRef = ref<HTMLElement | null>(null)

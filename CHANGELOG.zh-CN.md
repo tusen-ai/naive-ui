@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-split` 新增 `resize-trigger-hit-size` 属性，关闭 [#7223](https://github.com/tusen-ai/naive-ui/issues/7223)
+
 ## 2.43.1
 
 `2025-09-15`

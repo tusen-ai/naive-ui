@@ -1,5 +1,11 @@
 # CHANGELOG
 
+`NEXT_VERSION`
+
+### Features
+
+- `n-split` adds `resize-trigger-hit-size` prop, closes [#7223](https://github.com/tusen-ai/naive-ui/issues/7223).
+
 ## 2.43.1
 
 `2025-09-15`
