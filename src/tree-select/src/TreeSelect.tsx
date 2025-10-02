@@ -89,6 +89,7 @@ export const treeSelectProps = {
     type: Boolean,
     default: true
   },
+  showLine: Boolean,
   cascade: Boolean,
   checkable: Boolean,
   clearable: Boolean,
@@ -993,6 +994,7 @@ export default defineComponent({
                               <NTree
                                 ref="treeInstRef"
                                 blockLine
+                                showLine={this.showLine}
                                 allowCheckingNotLoaded={
                                   this.allowCheckingNotLoaded
                                 }
