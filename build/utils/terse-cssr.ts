@@ -10,7 +10,7 @@ export function terseCssr(code: string): string {
     sourceType: 'module'
   })
 
-  traverse(ast, {
+  traverse.default(ast, {
     TemplateElement(path: any) {
       ;(['raw', 'cooked'] as const).forEach((type) => {
         path.node.value[type] = path.node.value[type]

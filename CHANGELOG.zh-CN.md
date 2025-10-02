@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## `NEXT_VERSION`
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-data-table` 新增 `on-resize-start`、`on-resize` 和 `on-resize-end` 事件
+
 ## 2.43.1
 
 `2025-09-15`

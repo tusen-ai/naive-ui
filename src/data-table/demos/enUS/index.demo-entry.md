@@ -32,6 +32,7 @@ pagination-behavior-on-filter.vue
 multiple-sorter.vue
 custom-sorter.vue
 column-draggable.vue
+resize-event.vue
 select.vue
 select-single.vue
 custom-select.vue
@@ -116,6 +117,9 @@ export-csv.vue
 | virtual-scroll-header | `boolean` | `false` | Whether to use virtual scrolling in table header. If there are too many columns, you can enable the prop. You must configure `header-height` at the same time. Enabling the prop will disable header cells that cross columns & rows. | 2.40.0 |
 | virtual-scroll-x | `boolean` | `false` | Whether to use horizontal virtual scrolling in table body. If there are too many columns, you can enable the prop. Enabling the prop will disable body cells that cross columns & rows. If the prop is enabled, every column should have `width` prop configured and `virtual-scroll`, `scroll-x`, `min-row-height`, `height-for-row`, `virtual-scroll-header` (optional), `header-height` (optional) props should be configured at the same time. You can refer to <n-a href="#virtual-x.vue">the example</n-a>. | 2.40.0 |
 | on-load | `(rowData: object) => Promise<void>` | `undefined` | Callback of async tree data expanding. | 2.27.0 |
+| on-resize-start | `(column: DataTableBaseColumn) => void` | `undefined` | Callback when column resizing starts. | NEXT_VERSION |
+| on-resize | `(column: DataTableBaseColumn, width: number) => void` | `undefined` | Callback when column is being resized. | NEXT_VERSION |
+| on-resize-end | `(column: DataTableBaseColumn) => void` | `undefined` | Callback when column resizing ends. | NEXT_VERSION |
 | on-scroll | `(e: Event) => void` | `undefined` | Callback of table body scrolling. | 2.29.1 |
 | on-update:checked-row-keys | `(keys: Array<string \| number>, rows: object[], meta: { row: object \| undefined, action: 'check' \| 'uncheck' \| 'checkAll' \| 'uncheckAll' }) => void` | `undefined` | The callback function triggered when the checked-row-keys value changes. | `rows` 2.30.5, `meta` 2.33.4 |
 | on-update:expanded-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function triggered when the expanded-row-keys value changes. |  |
