@@ -34,6 +34,7 @@ pagination-behavior-on-filter.vue
 multiple-sorter.vue
 custom-sorter.vue
 column-draggable.vue
+resize-event.vue
 select.vue
 select-single.vue
 custom-select.vue
@@ -127,6 +128,9 @@ rtl-debug.vue
 | virtual-scroll-header | `boolean` | `false` | 是否打开表头的虚拟滚动，如果横向列太多，可以考虑打开此属性，打开此属性会导致表头单元格跨行列的功能不可用，同时必须要配置 `header-height` | 2.40.0 |
 | virtual-scroll-x | `boolean` | `false` | 是否打开表主体的横向虚拟滚动，如果横向列太多，可以考虑打开此属性，打开此属性会导致单元格跨行列的功能不可用，此属性开启时，必须要和 `virtual-scroll`、`scroll-x`、`min-row-height`、`height-for-row`、`virtual-scroll-header`、`header-height` 属性配合使用，同时每一列必须都配置 `width` 属性，你可以参考 <n-a href="#virtual-x.vue">完整的例子</n-a> | 2.40.0 |
 | on-load | `(rowData: object) => Promise<void>` | `undefined` | 异步展开树形数据的回调 | 2.27.0 |
+| on-resize-start | `(column: DataTableBaseColumn) => void` | `undefined` | 列宽开始拖拽时触发的回调函数 | NEXT_VERSION |
+| on-resize | `(column: DataTableBaseColumn, width: number) => void` | `undefined` | 列宽拖拽中触发的回调函数 | NEXT_VERSION |
+| on-resize-end | `(column: DataTableBaseColumn) => void` | `undefined` | 列宽拖拽结束时触发的回调函数 | NEXT_VERSION |
 | on-scroll | `(e: Event) => void` | `undefined` | 表格主体滚动的回调 | 2.29.1 |
 | on-update:checked-row-keys | `(keys: Array<string \| number>, rows: object[], meta: { row: object \| undefined, action: 'check' \| 'uncheck' \| 'checkAll' \| 'uncheckAll' }) => void` | `undefined` | checked-row-keys 值改变时触发的回调函数 | `rows` 2.30.5, `meta` 2.33.4 |
 | on-update:expanded-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | expanded-row-keys 值改变时触发的回调函数 |  |

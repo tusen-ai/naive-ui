@@ -33,6 +33,11 @@ export const dataTableProps = {
       getColumnWidth: (key: ColumnKey) => number | undefined
     ) => void
   >,
+  onResizeStart: Function as PropType<(column: TableBaseColumn) => void>,
+  onResize: Function as PropType<
+    (column: TableBaseColumn, width: number) => void
+  >,
+  onResizeEnd: Function as PropType<(column: TableBaseColumn) => void>,
   pagination: {
     type: [Object, Boolean] as PropType<false | PaginationProps>,
     default: false
@@ -437,6 +442,9 @@ export interface DataTableInjection {
     column: TableBaseColumn,
     getColumnWidth: (key: ColumnKey) => number | undefined
   ) => void
+  onResizeStart: ((column: TableBaseColumn) => void) | undefined
+  onResize: ((column: TableBaseColumn, width: number) => void) | undefined
+  onResizeEnd: ((column: TableBaseColumn) => void) | undefined
   getResizableWidth: (key: ColumnKey) => number | undefined
   clearResizableWidth: () => void
   doUpdateResizableWidth: (column: TableColumn, width: number) => void
