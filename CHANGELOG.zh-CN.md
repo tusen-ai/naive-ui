@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## `NEXT_VERSION`
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-popselect` 新增 `label-field`、`value-field`、`children-field` 属性
+
 ## 2.43.1
 
 `2025-09-15`

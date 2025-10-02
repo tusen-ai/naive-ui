@@ -63,6 +63,18 @@ export const panelProps = {
   },
   nodeProps: Function as PropType<NodeProps>,
   virtualScroll: Boolean,
+  labelField: {
+    type: String,
+    default: 'label'
+  },
+  valueField: {
+    type: String,
+    default: 'value'
+  },
+  childrenField: {
+    type: String,
+    default: 'children'
+  },
   // deprecated
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
@@ -102,7 +114,7 @@ export default defineComponent({
         SelectBaseOption,
         SelectGroupOption,
         SelectIgnoredOption
-      >(props.options, createTmOptions('value', 'children'))
+      >(props.options, createTmOptions(props.valueField, props.childrenField))
     })
 
     function doUpdateValue(
@@ -236,6 +248,8 @@ export default defineComponent({
         renderLabel={this.renderLabel}
         onToggle={this.handleToggle}
         onMouseenter={this.onMouseenter}
+        labelField={this.labelField}
+        valueField={this.valueField}
         onMouseleave={this.onMouseenter}
         onMousedown={this.handleMenuMousedown}
         showCheckmark={this.showCheckmark}
