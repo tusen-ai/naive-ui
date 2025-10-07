@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-upload` supports dragging content (such as images) directly from web pages without saving to the local file system first, closes [#7215](https://github.com/tusen-ai/naive-ui/issues/7215)
+
 ## 2.43.1
 
 `2025-09-15`

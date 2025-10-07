@@ -73,16 +73,31 @@ export default defineComponent({
       }
       const dataTransferItems = e.dataTransfer?.items
       if (dataTransferItems?.length) {
-        void getFilesFromEntries(
-          Array.from(dataTransferItems).map(item => item.webkitGetAsEntry()),
-          mergedDirectoryDndRef.value
+        const entries = Array.from(dataTransferItems).map(item =>
+          item.webkitGetAsEntry()
         )
-          .then((files) => {
-            handleFileAddition(files)
-          })
-          .finally(() => {
-            dragOverRef.value = false
-          })
+        if (entries.some(entry => entry !== null)) {
+          void getFilesFromEntries(entries, mergedDirectoryDndRef.value)
+            .then((files) => {
+              handleFileAddition(files)
+            })
+            .finally(() => {
+              dragOverRef.value = false
+            })
+        }
+        else {
+          const files = Array.from(dataTransferItems)
+            .map(item => item.getAsFile())
+            .filter((file): file is File => file !== null)
+            .map(file => ({
+              file,
+              entry: null,
+              source: 'dnd' as const
+            }))
+
+          handleFileAddition(files.length > 0 ? files : null)
+          dragOverRef.value = false
+        }
       }
       else {
         dragOverRef.value = false
