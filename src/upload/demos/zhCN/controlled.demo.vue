@@ -14,7 +14,6 @@ const fileListRef = ref<UploadFileInfo[]>([
   {
     id: 'url-test',
     name: 'URL 测试',
-    url: '__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f',
     status: 'finished'
   },
   {
@@ -64,6 +63,22 @@ function handleRemove(data: {
   }
 }
 
+function handleFinish({
+  file,
+  event
+}: {
+  file: UploadFileInfo
+  event?: ProgressEvent
+}) {
+  const response = (event?.target as XMLHttpRequest).response
+  const res = JSON.parse(response)
+  message.success(response)
+  file.status = res.status
+  file.url = res.url
+  file.thumbnailUrl = res.thumbnailUrl
+  return file
+}
+
 function handleFileListChange() {
   message.info('是的，file-list 的值变了')
 }
@@ -72,9 +87,10 @@ function handleFileListChange() {
 <template>
   <n-upload
     v-model:file-list="fileList"
-    action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+    action="https://m1.apifoxmock.com/m1/7208154-6934252-default/api/upload"
     @change="handleUploadChange"
     @remove="handleRemove"
+    @finish="handleFinish"
     @update:file-list="handleFileListChange"
   >
     <n-button>上传文件</n-button>

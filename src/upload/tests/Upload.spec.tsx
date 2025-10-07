@@ -73,7 +73,8 @@ describe('n-upload', () => {
     const wrapper = mount(NUpload, {
       props: {
         listType: 'text',
-        action: 'https://www.mocky.io/v2/5e4bafc63100007100d8b70f'
+        action:
+          'https://m1.apifoxmock.com/m1/7208154-6934252-default/api/upload'
       },
       slots: {
         default: () => 'test'

@@ -44,7 +44,7 @@ function handleCustomDownload(file: UploadFileInfo) {
 
 <template>
   <n-upload
-    action="http://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+    action="https://m1.apifoxmock.com/m1/7208154-6934252-default/api/upload"
     :default-file-list="fileList"
     list-type="image"
     show-download-button
