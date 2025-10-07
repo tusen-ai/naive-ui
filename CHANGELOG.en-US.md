@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-tree` adds `switcher-class` and `switcher-style` props
+- `n-tree-select` adds `switcher-class` and `switcher-style` props
+
 ## 2.43.1
 
 `2025-09-15`

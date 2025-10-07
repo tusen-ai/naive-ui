@@ -189,6 +189,8 @@ export const treeSharedProps = {
   },
   indeterminateKeys: Array as PropType<Key[]>,
   renderSwitcherIcon: Function as PropType<RenderSwitcherIcon>,
+  switcherWrapperClass: String,
+  switcherWrapperStyle: [String, Object] as PropType<string | CSSProperties>,
   onUpdateIndeterminateKeys: [Function, Array] as PropType<
     MaybeArray<OnUpdateIndeterminateKeys>
   >,
@@ -1607,6 +1609,8 @@ export default defineComponent({
       renderPrefixRef: toRef(props, 'renderPrefix'),
       renderSuffixRef: toRef(props, 'renderSuffix'),
       renderSwitcherIconRef: toRef(props, 'renderSwitcherIcon'),
+      switcherWrapperClassRef: toRef(props, 'switcherWrapperClass'),
+      switcherWrapperStyleRef: toRef(props, 'switcherWrapperStyle'),
       labelFieldRef: toRef(props, 'labelField'),
       multipleRef: toRef(props, 'multiple'),
       overrideDefaultNodeClickBehaviorRef: toRef(

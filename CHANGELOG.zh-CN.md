@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-tree` 新增 `switcher-wrapper-class` 和 `switcher-wrapper-style` 属性
+- `n-tree-select` 新增 `switcher-wrapper-class` 和 `switcher-wrapper-style` 属性
+
 ## 2.43.1
 
 `2025-09-15`
