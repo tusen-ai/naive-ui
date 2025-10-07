@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-upload` 支持从网页直接拖拽内容（如图片）上传，无需先保存到本地文件系统，关闭 [#7215](https://github.com/tusen-ai/naive-ui/issues/7215)
+
 ## 2.43.1
 
 `2025-09-15`
