@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-calendar` 新增 `cell` 插槽
+
 ## 2.43.1
 
 `2025-09-15`
