@@ -3,6 +3,7 @@ import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CalendarTheme } from '../styles'
 import type {
+  CalendarCellSlotProps,
   CalendarDefaultSlotProps,
   CalendarHeaderSlotProps,
   DateItem,
@@ -47,6 +48,7 @@ export type CalendarProps = ExtractPublicPropTypes<typeof calendarProps>
 export interface CalendarSlots {
   default?: (props: CalendarDefaultSlotProps) => VNode[]
   header?: (props: CalendarHeaderSlotProps) => VNode[]
+  cell?: (props: CalendarCellSlotProps) => VNode[]
 }
 
 export default defineComponent({
@@ -327,30 +329,52 @@ export default defineComponent({
                     })
                   }}
                 >
-                  <div class={`${mergedClsPrefix}-calendar-date`}>
-                    <div
-                      class={`${mergedClsPrefix}-calendar-date__date`}
-                      title={fullDate}
-                    >
-                      {date}
-                    </div>
-                    {index < 7 && (
-                      <div
-                        class={`${mergedClsPrefix}-calendar-date__day`}
-                        title={fullDate}
-                      >
-                        {format(ts, 'EEE', {
-                          locale
-                        })}
-                      </div>
-                    )}
-                  </div>
-                  {$slots.default?.({
-                    year,
-                    month: month + 1,
-                    date
-                  })}
-                  <div class={`${mergedClsPrefix}-calendar-cell__bar`} />
+                  {resolveSlotWithTypedProps(
+                    $slots.cell,
+                    {
+                      date: {
+                        year,
+                        month: month + 1,
+                        date
+                      },
+                      data: {
+                        timestamp: ts,
+                        inCurrentMonth,
+                        isCurrentDate,
+                        isSelected: selected,
+                        day: date,
+                        isDisabled: disabled
+                      }
+                    },
+                    () => {
+                      return [
+                        <div class={`${mergedClsPrefix}-calendar-date`}>
+                          <div
+                            class={`${mergedClsPrefix}-calendar-date__date`}
+                            title={fullDate}
+                          >
+                            {date}
+                          </div>
+                          {index < 7 && (
+                            <div
+                              class={`${mergedClsPrefix}-calendar-date__day`}
+                              title={fullDate}
+                            >
+                              {format(ts, 'EEE', {
+                                locale
+                              })}
+                            </div>
+                          )}
+                        </div>,
+                        $slots.default?.({
+                          year,
+                          month: month + 1,
+                          date
+                        }),
+                        <div class={`${mergedClsPrefix}-calendar-cell__bar`} />
+                      ]
+                    }
+                  )}
                 </div>
               )
             }

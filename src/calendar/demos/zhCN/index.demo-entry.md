@@ -8,6 +8,7 @@
 
 ```demo
 basic.vue
+cell-slot.vue
 ```
 
 ## API
@@ -26,5 +27,6 @@ basic.vue
 
 | 名称 | 参数 | 说明 | 版本 |
 | --- | --- | --- | --- |
+| cell | `(props: { date: { year: number, month: number, date: number }, data: { timestamp: number, inCurrentMonth: boolean, isCurrentDate: boolean, isSelected: boolean, day: number, isDisabled: boolean } })` | 每个单元格中渲染的内容 | NEXT_VERSION |
 | default | `(props: { year: number, month: number, date: number })` | 每个日期中渲染的内容 |  |
 | header | `(props: { year: number, month: number })` | 日历的标题，`month` 从 1 开始 | 2.29.1 |

@@ -18,3 +18,19 @@ export interface CalendarHeaderSlotProps {
   year: number
   month: number
 }
+
+export interface CalendarCellSlotProps {
+  date: {
+    year: number
+    month: number
+    date: number
+  }
+  data: {
+    timestamp: number
+    inCurrentMonth: boolean
+    isCurrentDate: boolean
+    isSelected: boolean
+    day: number
+    isDisabled: boolean
+  }
+}
