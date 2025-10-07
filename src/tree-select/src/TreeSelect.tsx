@@ -1024,6 +1024,8 @@ export default defineComponent({
                                 renderPrefix={this.renderPrefix}
                                 renderSuffix={this.renderSuffix}
                                 renderSwitcherIcon={this.renderSwitcherIcon}
+                                switcherWrapperClass={this.switcherWrapperClass}
+                                switcherWrapperStyle={this.switcherWrapperStyle}
                                 nodeProps={this.nodeProps}
                                 watchProps={this.watchProps}
                                 virtualScroll={

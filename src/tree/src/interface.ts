@@ -1,5 +1,5 @@
 import type { CheckStrategy, TreeNode } from 'treemate'
-import type { HTMLAttributes, Ref, VNodeChild } from 'vue'
+import type { CSSProperties, HTMLAttributes, Ref, VNodeChild } from 'vue'
 import type { VirtualListScrollTo } from 'vueuc'
 import type { MergedTheme } from '../../_mixins'
 import type { TreeTheme } from '../styles'
@@ -127,6 +127,8 @@ export interface TreeInjection {
   renderPrefixRef: Ref<RenderPrefix | undefined>
   renderSuffixRef: Ref<RenderSuffix | undefined>
   renderSwitcherIconRef: Ref<RenderSwitcherIcon | undefined>
+  switcherWrapperClassRef: Ref<string | undefined>
+  switcherWrapperStyleRef: Ref<string | CSSProperties | undefined>
   labelFieldRef: Ref<string>
   nodePropsRef: Ref<TreeNodeProps | undefined>
   multipleRef: Ref<boolean>

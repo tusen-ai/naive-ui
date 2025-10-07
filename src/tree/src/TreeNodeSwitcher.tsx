@@ -24,7 +24,11 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const { renderSwitcherIconRef } = inject(treeInjectionKey, null)!
+    const {
+      renderSwitcherIconRef,
+      switcherWrapperClassRef,
+      switcherWrapperStyleRef
+    } = inject(treeInjectionKey, null)!
     return () => {
       const { clsPrefix, expanded, hide, indent, onClick } = props
       return (
@@ -38,7 +42,13 @@ export default defineComponent({
           style={{ width: `${indent}px` }}
           onClick={onClick}
         >
-          <div class={`${clsPrefix}-tree-node-switcher__icon`}>
+          <div
+            class={[
+              `${clsPrefix}-tree-node-switcher__icon`,
+              switcherWrapperClassRef.value
+            ]}
+            style={switcherWrapperStyleRef.value}
+          >
             <NIconSwitchTransition>
               {{
                 default: () => {
