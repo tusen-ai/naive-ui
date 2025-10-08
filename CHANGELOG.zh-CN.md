@@ -44,6 +44,7 @@
 - 修复 `n-progress` 多个 `type="circle"`情况下样式覆盖问题，关闭 [#7172](https://github.com/tusen-ai/naive-ui/issues/7172)
 - 修复 `n-marquee` 组件 'Non-function value encountered for default slot' 警告
 - 修复 `n-upload` icon 导致的内存泄露问题
+- 修复 `n-progress` 使用仪表盘模式超过 100% 之后样式不正确，关闭 [#6627](https://github.com/tusen-ai/naive-ui/issues/6627)
 
 ### Features
 

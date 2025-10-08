@@ -95,7 +95,7 @@ export default defineComponent({
             : typeof props.fillColor === 'object'
               ? `url(#${gradientIdRef.value})`
               : (strokeColor as string),
-        strokeDasharray: `${(percent / 100) * (len - gapDegree)}px ${
+        strokeDasharray: `${(Math.min(percent, 100) / 100) * (len - gapDegree)}px ${
           viewBoxWidth * 8
         }px`,
         strokeDashoffset: `-${gapDegree / 2}px`,
