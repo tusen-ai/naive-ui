@@ -9,6 +9,7 @@
 ### Feats
 
 - `n-date-picker` prop `defaultTime` can also accept a function that will return a formatted string
+- `n-steps` adds `content-placement` prop, closes [#7044](https://github.com/tusen-ai/naive-ui/issues/7044).
 
 ## 2.43.1
 

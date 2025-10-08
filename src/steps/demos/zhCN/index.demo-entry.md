@@ -10,6 +10,7 @@
 basic.vue
 size.vue
 vertical.vue
+content-placement.vue
 content.vue
 custom-icon.vue
 click.vue
@@ -27,6 +28,7 @@ rtl-debug.vue
 | size | `'small' \| 'medium'` | `'medium'` | 步骤条大小 |  |
 | status | `'process' \| 'finish' \| 'error' \| 'wait'` | `'process'` | 步骤条状态 |  |
 | vertical | `boolean` | `false` | 步骤条方向 |  |
+| content-placement | `'right' \| 'bottom'` | `right` | 步骤条内容位置，仅在横向模式下生效 |  |
 | on-update:current | `(index: number) => void` | `undefined` | 更新当前第几步的回调，设定后可点击切换步骤 | 2.29.1 |
 
 ### Step Props

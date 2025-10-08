@@ -9,6 +9,7 @@
 ### Feats
 
 - `n-date-picker` 的 `defaultTime` 属性可以接受返回格式化字符串的函数
+- `n-steps` 增加 `content-placement` 属性，关闭 [#7044](https://github.com/tusen-ai/naive-ui/issues/7044)
 
 ## 2.43.1
 
