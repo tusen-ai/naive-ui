@@ -74,15 +74,15 @@ describe('n-data-table', () => {
           name: index
         }
       })
-    const onPageChange = jest.fn((page: number): void => {
-      setTimeout(() => {
+    const onPageChange = vi.fn((page: number): void => {
+      vi.waitFor(() => {
         pagination.page = page
         pagination.itemCount = data.length
         data = data.slice(
           (page - 1) * pagination.pageSize,
           page * pagination.pageSize
         )
-      }, 1000)
+      })
     })
     const columns = [
       {
@@ -842,7 +842,7 @@ describe('n-data-table', () => {
   })
 
   it('should work with `on-update:checked-row-keys` prop', async () => {
-    const handleCheck = jest.fn()
+    const handleCheck = vi.fn()
     const columns: DataTableColumns = [
       {
         type: 'selection'
@@ -1345,10 +1345,10 @@ describe('props.columns', () => {
 
     await radios[1].trigger('click')
 
-    setTimeout(() => {
+    vi.waitFor(() => {
       expect(radios[1].classes()).toContain('n-radio--checked')
       expect(radios[4].classes()).not.toContain('n-radio--checked')
-    }, 0)
+    })
     wrapper.unmount()
   })
 })

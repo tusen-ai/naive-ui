@@ -4,13 +4,7 @@ import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { LayoutTheme } from '../styles'
 import type { LayoutInst } from './interface'
-import {
-  computed,
-  defineComponent,
-  h,
-  provide,
-  ref
-} from 'vue'
+import { computed, defineComponent, h, provide, ref } from 'vue'
 import { NScrollbar } from '../../_internal'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { createInjectionKey, useReactivated } from '../../_utils'

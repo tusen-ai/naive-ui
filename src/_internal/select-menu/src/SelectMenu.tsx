@@ -40,9 +40,7 @@ import { NEmpty } from '../../../empty'
 import NFocusDetector from '../../focus-detector'
 import NInternalLoading from '../../loading'
 import { NScrollbar } from '../../scrollbar'
-import {
-  internalSelectMenuLight
-} from '../styles'
+import { internalSelectMenuLight } from '../styles'
 import {
   internalSelectionMenuBodyInjectionKey,
   internalSelectionMenuInjectionKey

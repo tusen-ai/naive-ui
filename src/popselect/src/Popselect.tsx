@@ -5,12 +5,7 @@ import type { PopoverInst, PopoverTrigger } from '../../popover'
 import type { PopoverInternalProps } from '../../popover/src/Popover'
 import type { PopselectTheme } from '../styles'
 import type { PopselectInst } from './interface'
-import {
-  defineComponent,
-  h,
-  provide,
-  ref
-} from 'vue'
+import { defineComponent, h, provide, ref } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { createRefSetter, keep, mergeEventHandlers, omit } from '../../_utils'
 import { NPopover } from '../../popover'

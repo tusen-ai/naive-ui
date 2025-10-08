@@ -5,7 +5,7 @@
     "module": "ESNext",
     "moduleResolution": "nodenext",
     "resolveJsonModule": true,
-    "types": ["node", "jest"],
+    "types": ["node"],
     "esModuleInterop": true
   },
   "references": [{ "path": "./src/tsconfig.esm.json" }],

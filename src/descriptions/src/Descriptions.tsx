@@ -4,11 +4,7 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import type { DescriptionsTheme } from '../styles'
 import { repeat } from 'seemly'
 import { useCompitable } from 'vooks'
-import {
-  computed,
-  defineComponent,
-  h
-} from 'vue'
+import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import {
   createKey,

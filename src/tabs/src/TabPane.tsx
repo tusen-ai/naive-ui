@@ -1,11 +1,12 @@
-import type { HTMLAttributes, PropType, SlotsType, VNode, VNodeChild } from 'vue'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import {
-  defineComponent,
-  h,
-  inject,
-  watchEffect
+import type {
+  HTMLAttributes,
+  PropType,
+  SlotsType,
+  VNode,
+  VNodeChild
 } from 'vue'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import { defineComponent, h, inject, watchEffect } from 'vue'
 import { throwError, warnOnce } from '../../_utils'
 import { tabsInjectionKey } from './interface'
 

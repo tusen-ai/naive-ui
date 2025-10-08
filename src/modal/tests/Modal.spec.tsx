@@ -61,11 +61,11 @@ describe('n-modal', () => {
     expect(document.querySelector('.n-modal-body-wrapper')).not.toEqual(null)
     document.querySelector('.n-modal-mask')?.dispatchEvent(mousedownEvent)
     document.querySelector('.n-modal-mask')?.dispatchEvent(mouseupEvent)
-    setTimeout(() => {
+    vi.waitFor(() => {
       expect(
         document.querySelector('.n-modal-body-wrapper')?.children.length
       ).toBe(0)
-    }, 300)
+    })
     wrapper.unmount()
     wrapper = mountModal({ modalProps: { displayDirective: 'show' } })
     expect(document.querySelector('.n-modal-body-wrapper')).toEqual(null)
@@ -73,14 +73,14 @@ describe('n-modal', () => {
     expect(document.querySelector('.n-modal-body-wrapper')).not.toEqual(null)
     document.querySelector('.n-modal-mask')?.dispatchEvent(mousedownEvent)
     document.querySelector('.n-modal-mask')?.dispatchEvent(mouseupEvent)
-    setTimeout(() => {
+    vi.waitFor(() => {
       expect(
         document.querySelector('.n-modal-body-wrapper')?.children.length
       ).not.toBe(0)
       expect(
         document.querySelector('.n-modal-body-wrapper')?.getAttribute('style')
       ).toContain('display: none')
-    }, 300)
+    })
     wrapper.unmount()
   })
 

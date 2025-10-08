@@ -1,5 +1,12 @@
 import type { CheckStrategy } from 'treemate'
-import type { CSSProperties, HTMLAttributes, PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type {
+  CSSProperties,
+  HTMLAttributes,
+  PropType,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
 import type { FollowerInst, FollowerPlacement } from 'vueuc'
 import type { InternalSelectionInst } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
@@ -22,10 +29,7 @@ import type {
   Value
 } from './interface'
 import { changeColor, depx, getPreciseEventTarget, happensIn } from 'seemly'
-import {
-  createTreeMate,
-  SubtreeNotLoadedError
-} from 'treemate'
+import { createTreeMate, SubtreeNotLoadedError } from 'treemate'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
@@ -39,11 +43,7 @@ import {
   watch,
   watchEffect
 } from 'vue'
-import {
-  VBinder,
-  VFollower,
-  VTarget
-} from 'vueuc'
+import { VBinder, VFollower, VTarget } from 'vueuc'
 import { NInternalSelection } from '../../_internal'
 import {
   useConfig,

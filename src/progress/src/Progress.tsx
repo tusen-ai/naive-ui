@@ -3,11 +3,7 @@ import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ProgressTheme } from '../styles'
 import type { ProgressGradient, ProgressStatus } from './public-types'
-import {
-  computed,
-  defineComponent,
-  h
-} from 'vue'
+import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { createKey } from '../../_utils'
 import { progressLight } from '../styles'

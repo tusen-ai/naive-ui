@@ -1,5 +1,12 @@
 import type { TreeNode } from 'treemate'
-import type { CSSProperties, HTMLAttributes, InputHTMLAttributes, PropType, SlotsType, VNode } from 'vue'
+import type {
+  CSSProperties,
+  HTMLAttributes,
+  InputHTMLAttributes,
+  PropType,
+  SlotsType,
+  VNode
+} from 'vue'
 import type { FollowerPlacement } from 'vueuc'
 import type { InternalSelectMenuRef } from '../../_internal'
 import type {
@@ -41,9 +48,7 @@ import {
   withDirectives
 } from 'vue'
 import { VBinder, VFollower, VTarget } from 'vueuc'
-import {
-  NInternalSelectMenu
-} from '../../_internal'
+import { NInternalSelectMenu } from '../../_internal'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import {
   call,

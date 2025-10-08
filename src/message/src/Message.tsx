@@ -1,12 +1,7 @@
 import type { CSSProperties, PropType, VNodeChild } from 'vue'
 /* eslint-disable no-cond-assign */
 import type { MessageRenderMessage, MessageType } from './types'
-import {
-  computed,
-  defineComponent,
-  h,
-  inject
-} from 'vue'
+import { computed, defineComponent, h, inject } from 'vue'
 import {
   NBaseClose,
   NBaseIcon,

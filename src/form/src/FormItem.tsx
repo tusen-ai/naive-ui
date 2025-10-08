@@ -1,5 +1,12 @@
 import type { RuleItem, ValidateError, ValidateOption } from 'async-validator'
-import type { CSSProperties, ExtractPropTypes, LabelHTMLAttributes, PropType, Slot, VNodeChild } from 'vue'
+import type {
+  CSSProperties,
+  ExtractPropTypes,
+  LabelHTMLAttributes,
+  PropType,
+  Slot,
+  VNodeChild
+} from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { FormTheme } from '../styles'
@@ -32,11 +39,7 @@ import {
   Transition,
   watch
 } from 'vue'
-import {
-  useConfig,
-  useTheme,
-  useThemeClass
-} from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { formItemInjectionKey } from '../../_mixins/use-form-item'
 import {
   createKey,

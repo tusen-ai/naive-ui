@@ -94,7 +94,7 @@ panel.vue
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` | Operations supported for the `datetime` type date picker. |  |
 | default-calendar-start-time | `number` | `undefined` | Default panel calendar start month timestamp. | 2.38.1 |
-| default-time | `string` | `undefined` | Default time of the selected date. It's format is `HH:mm:ss`. | 2.22.0 |
+| default-time | `string \| (timestamp: number) => string` | `undefined` | Default time of the selected date. Can accept a function with a timestamp argument that returns a formatted string. It's format is `HH:mm:ss`. | 2.22.0, functional since NEXT_VERSION |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `() => false` | Validator of the date. | `detail` 2.37.1 |
 | is-time-disabled | `(current: number) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | Validator of the time. |  |
@@ -131,7 +131,7 @@ panel.vue
 | bind-calendar-months | `boolean` | `false` | Whether months in panel calendar are consecutive. | 2.28.3 |
 | default-calendar-start-time | `number` | `undefined` | Default panel calendar start month timestamp. | 2.28.3 |
 | default-calendar-end-time | `number` | `undefined` | Default panel calendar end month timestamp. | 2.28.3 |
-| default-time | `string \| Array<string \| undefined>` | `undefined` | Default time of the selected date. It's format is `HH:mm:ss`. | 2.22.0 |
+| default-time | `string \| Array<string \| undefined> \| (timestamp: number, position: "start" \| "end", value: [number, number] \| null) => string` | `undefined` | Default time of the selected date. Can accept a function with timestamp, position and value arguments that returns a formatted string. It's format is `HH:mm:ss`. | 2.22.0, functional since NEXT_VERSION |
 | end-placeholder | `string` | `'End Date and Time'` | Placeholder at end part of the input. |  |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. |  |

@@ -2,12 +2,7 @@ import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ThingTheme } from '../styles'
-import {
-  computed,
-  defineComponent,
-  Fragment,
-  h
-} from 'vue'
+import { computed, defineComponent, Fragment, h } from 'vue'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import { thingLight } from '../styles'
 import style from './styles/index.cssr'

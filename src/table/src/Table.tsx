@@ -2,11 +2,7 @@ import type { CSSProperties, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { TableTheme } from '../styles'
-import {
-  computed,
-  defineComponent,
-  h
-} from 'vue'
+import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
 import { createKey } from '../../_utils'

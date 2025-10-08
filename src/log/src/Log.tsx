@@ -139,7 +139,7 @@ export default defineComponent({
           onReachBottom()
       }
     }
-    const handleWheel = throttle(_handleWheel, 300)
+    const handleWheel: (e: WheelEvent) => void = throttle(_handleWheel, 300)
     function _handleWheel(e: WheelEvent): void {
       if (silentRef.value) {
         void nextTick(() => {
