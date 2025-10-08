@@ -1,3 +1,4 @@
+import type { PropType, VNode } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type {
   CollapseItemArrowSlotProps,
@@ -6,15 +7,7 @@ import type {
 } from './interface'
 import { createId, happensIn } from 'seemly'
 import { useMemo } from 'vooks'
-import {
-  computed,
-  defineComponent,
-  h,
-  inject,
-  type PropType,
-  toRef,
-  type VNode
-} from 'vue'
+import { computed, defineComponent, h, inject, toRef } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {
   ChevronLeftIcon as ArrowLeftIcon,

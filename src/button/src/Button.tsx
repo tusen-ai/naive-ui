@@ -1,3 +1,12 @@
+import type {
+  ButtonHTMLAttributes,
+  CSSProperties,
+  ExtractPropTypes,
+  PropType,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
 import type { BaseWaveRef } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
@@ -5,21 +14,7 @@ import type { ButtonTheme } from '../styles'
 import type { Size, Type } from './interface'
 import { changeColor } from 'seemly'
 import { useMemo } from 'vooks'
-import {
-  type ButtonHTMLAttributes,
-  computed,
-  type CSSProperties,
-  defineComponent,
-  type ExtractPropTypes,
-  h,
-  inject,
-  type PropType,
-  ref,
-  type SlotsType,
-  type VNode,
-  type VNodeChild,
-  watchEffect
-} from 'vue'
+import { computed, defineComponent, h, inject, ref, watchEffect } from 'vue'
 import {
   NBaseLoading,
   NBaseWave,

@@ -1,4 +1,6 @@
+import type { InputHTMLAttributes, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/public-types'
 import type { InputInst } from '../../input'
 import type { InputNumberTheme } from '../styles'
@@ -10,13 +12,9 @@ import {
   computed,
   defineComponent,
   h,
-  type InputHTMLAttributes,
   nextTick,
-  type PropType,
   ref,
-  type SlotsType,
   toRef,
-  type VNode,
   watch,
   watchEffect
 } from 'vue'
@@ -24,14 +22,7 @@ import { NBaseIcon } from '../../_internal'
 import { AddIcon, RemoveIcon } from '../../_internal/icons'
 import { useConfig, useFormItem, useLocale, useTheme } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
-import {
-  call,
-  type ExtractPublicPropTypes,
-  type MaybeArray,
-  resolveSlot,
-  resolveWrappedSlot,
-  warnOnce
-} from '../../_utils'
+import { call, resolveSlot, resolveWrappedSlot, warnOnce } from '../../_utils'
 import { NxButton } from '../../button'
 import { NInput } from '../../input'
 import { inputNumberLight } from '../styles'

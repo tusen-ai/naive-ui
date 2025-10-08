@@ -1,3 +1,5 @@
+import type { ComputedRef, ExtractPropTypes, PropType } from 'vue'
+import type { Hljs } from '../../_mixins'
 import type { NDateLocale, NLocale } from '../../locales'
 import type {
   GlobalComponentConfig,
@@ -14,18 +16,8 @@ import type { Katex } from './katex'
 import { hash } from 'css-render'
 import { merge } from 'lodash-es'
 import { useMemo } from 'vooks'
-import {
-  computed,
-  type ComputedRef,
-  defineComponent,
-  type ExtractPropTypes,
-  h,
-  inject,
-  markRaw,
-  type PropType,
-  provide
-} from 'vue'
-import { defaultClsPrefix, type Hljs } from '../../_mixins'
+import { computed, defineComponent, h, inject, markRaw, provide } from 'vue'
+import { defaultClsPrefix } from '../../_mixins'
 import { warn } from '../../_utils'
 import { configProviderInjectionKey } from './context'
 

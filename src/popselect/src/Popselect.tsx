@@ -1,24 +1,17 @@
+import type { ExtractPropTypes, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { PopoverInst, PopoverTrigger } from '../../popover'
 import type { PopoverInternalProps } from '../../popover/src/Popover'
 import type { PopselectTheme } from '../styles'
-import {
-  defineComponent,
-  type ExtractPropTypes,
-  h,
-  type PropType,
-  provide,
-  ref,
-  type SlotsType,
-  type VNode
-} from 'vue'
+import type { PopselectInst } from './interface'
+import { defineComponent, h, provide, ref } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { createRefSetter, keep, mergeEventHandlers, omit } from '../../_utils'
 import { NPopover } from '../../popover'
 import { popoverBaseProps } from '../../popover/src/Popover'
 import { popselectLight } from '../styles'
-import { popselectInjectionKey, type PopselectInst } from './interface'
+import { popselectInjectionKey } from './interface'
 import NPopselectPanel, { panelPropKeys, panelProps } from './PopselectPanel'
 
 export const popselectProps = {

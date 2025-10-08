@@ -5,7 +5,7 @@
 
 ---
 
-请注意，该演示使用了 `NGAvatarGroup` 组件，该组件自 naive-ui 的 `NEXT_VERSION` 起才可用。
+请注意，该演示使用了 `NGAvatarGroup` 组件，该组件自 naive-ui 的 `2.43.0` 起才可用。
 
 `NGAvatarGroup` 与 `NAvatarGroup` 几乎完全相同，不同之处在于它新增了一个通用的 `options` 属性（generic `options` prop），这可以使在 `.vue` 文件中使用时让 slots 和 props 的类型更精确。
 

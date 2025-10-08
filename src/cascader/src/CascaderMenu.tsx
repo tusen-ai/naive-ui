@@ -1,3 +1,4 @@
+import type { PropType } from 'vue'
 import type { FollowerPlacement } from 'vueuc'
 import type { MenuMaskRef } from '../../_internal/menu-mask'
 import type {
@@ -11,7 +12,6 @@ import {
   defineComponent,
   h,
   inject,
-  type PropType,
   ref,
   Transition,
   withDirectives

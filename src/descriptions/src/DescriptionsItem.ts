@@ -1,11 +1,6 @@
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import {
-  type CSSProperties,
-  defineComponent,
-  type PropType,
-  type SlotsType,
-  type VNode
-} from 'vue'
+import { defineComponent } from 'vue'
 import { DESCRIPTION_ITEM_FLAG } from './utils'
 
 export const descriptionsItemProps = {

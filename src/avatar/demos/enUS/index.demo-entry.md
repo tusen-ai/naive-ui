@@ -39,7 +39,7 @@ v-show-debug.vue
 
 ### AvatarGroup Props
 
-The generic type is `<T extends AvatarGroupOption = AvatarGroupOption>` (available since `NEXT_VERSION`).
+The generic type is `<T extends AvatarGroupOption = AvatarGroupOption>` (available since `2.43.0`).
 
 It is only supported in `.vue` files with `Vue >= 3.3`. You can use it by `importing NGAvatarGroup from 'naive-ui/generic'`. Otherwise, please use the regular `n-avatar-group` component.
 
@@ -55,7 +55,7 @@ interface AvatarGroupOption {
 | max | `number` | `undefined` | Max avatar count in the group. |  |
 | max-style | `Object \| string` | `undefined` | The style of the overflow placeholder. |  |
 | options | `Array<T extends AvatarGroupOption = AvatarGroupOption>` | `[]` | Avatar group options. |  |
-| size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Avatar's size. | NEXT_VERSION |
+| size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Avatar's size. | 2.43.0 |
 | vertical | `boolean` | `false` | Whether display a vertical avatar group. |  |
 
 ### Avatar Slots

@@ -1,11 +1,10 @@
+import type { CSSProperties, PropType } from 'vue'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   inject,
   nextTick,
-  type PropType,
   ref,
   Transition,
   vShow,
