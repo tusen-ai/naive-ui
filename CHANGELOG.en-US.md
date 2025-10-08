@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix seemly dependency version range allows incompatible versions.
+- Fix `n-progress` style is incorrect after using the dashboard mode exceeding 100%, closes [#6627](https://github.com/tusen-ai/naive-ui/issues/6627)
 
 ### Feats
 
@@ -46,7 +47,6 @@
 - Fix the issue of style confusion in `n-carousel` when there is only one image, close [#6476](https://github.com/tusen-ai/naive-ui/issues/6476)
 - Fix `n-marquee` component 'Non-function value encountered for default slot' warning.
 - Fix memory leak caused by `n-upload` icon.
-- Fix `n-progress` style is incorrect after using the dashboard mode exceeding 100%, closes [#6627](https://github.com/tusen-ai/naive-ui/issues/6627)
 
 ### Features
 
