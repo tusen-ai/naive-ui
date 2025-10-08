@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
+- 修复 seemly 依赖的版本未更新到最新
+
 ### Feats
 
 - `n-date-picker` 的 `defaultTime` 属性可以接受返回格式化字符串的函数

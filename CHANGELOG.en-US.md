@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
+- Fix seemly dependency version range allows incompatible versions.
+
 ### Feats
 
 - `n-date-picker` prop `defaultTime` can also accept a function that will return a formatted string
