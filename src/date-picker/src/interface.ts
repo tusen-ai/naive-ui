@@ -37,24 +37,24 @@ export type ConfirmButtonProps = Pick<
   'size' | 'onClick' | 'type' | 'disabled'
 >
 
-export type Shortcuts =
-  | Record<string, number | (() => number)>
-  | Record<
-    string,
-    | [number, number]
-    | readonly [number, number]
-    | (() => [number, number] | readonly [number, number])
-  >
+export type Shortcuts
+  = | Record<string, number | (() => number)>
+    | Record<
+      string,
+      | [number, number]
+      | readonly [number, number]
+      | (() => [number, number] | readonly [number, number])
+    >
 
 export type OnUpdateValue = (
-  value: number &
-    (number | null) &
-    [number, number] &
-    ([number, number] | null),
-  formattedValue: string &
-    (string | null) &
-    [string, string] &
-    ([string, string] | null)
+  value: number
+    & (number | null)
+    & [number, number]
+    & ([number, number] | null),
+  formattedValue: string
+    & (string | null)
+    & [string, string]
+    & ([string, string] | null)
 ) => void
 
 export type OnConfirm = OnUpdateValue
@@ -62,14 +62,14 @@ export type OnConfirm = OnUpdateValue
 export type OnConfirmImpl = OnUpdateValueImpl
 
 export type OnUpdateFormattedValue = (
-  value: string &
-    (string | null) &
-    [string, string] &
-    ([string, string] | null),
-  timestampValue: number &
-    (number | null) &
-    [number, number] &
-    ([number, number] | null)
+  value: string
+    & (string | null)
+    & [string, string]
+    & ([string, string] | null),
+  timestampValue: number
+    & (number | null)
+    & [number, number]
+    & ([number, number] | null)
 ) => void
 
 export type OnUpdateFormattedValueImpl = (
@@ -83,10 +83,10 @@ export type OnUpdateValueImpl = (
 ) => void
 
 export type OnPanelUpdateValue = (
-  value: number &
-    (number | null) &
-    [number, number] &
-    ([number, number] | null),
+  value: number
+    & (number | null)
+    & [number, number]
+    & ([number, number] | null),
   doUpdate: boolean
 ) => void
 
@@ -142,16 +142,16 @@ export type DatePickerInjection = {
   quarterFormatRef: Ref<string>
   datePickerSlots: DatePickerSlots
   yearRangeRef: Ref<[number, number]>
-} & ReturnType<typeof uniCalendarValidation> &
-ReturnType<typeof dualCalendarValidation>
+} & ReturnType<typeof uniCalendarValidation>
+& ReturnType<typeof dualCalendarValidation>
 
 export const datePickerInjectionKey
   = createInjectionKey<DatePickerInjection>('n-date-picker')
 
 export type IsDateDisabled = IsSingleDateDisabled | IsRangeDateDisabled
 
-export type IsSingleDateDisabledDetail =
-  | {
+export type IsSingleDateDisabledDetail
+  = | {
     type: 'date'
     year: number
     month: number

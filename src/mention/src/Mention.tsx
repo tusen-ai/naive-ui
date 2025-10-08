@@ -1,3 +1,6 @@
+import type { TreeNode } from 'treemate'
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { FollowerInst, FollowerPlacement } from 'vueuc'
 import type { InternalSelectMenuRef } from '../../_internal'
 import type { RenderLabel } from '../../_internal/select-menu/src/interface'
 import type { ThemeProps } from '../../_mixins'
@@ -12,28 +15,18 @@ import type {
 } from '../../select/src/interface'
 import type { MentionTheme } from '../styles'
 import type { MentionOption } from './interface'
-import { createTreeMate, type TreeNode } from 'treemate'
+import { createTreeMate } from 'treemate'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   nextTick,
-  type PropType,
   ref,
-  type SlotsType,
   toRef,
-  Transition,
-  type VNode
+  Transition
 } from 'vue'
-import {
-  type FollowerInst,
-  type FollowerPlacement,
-  VBinder,
-  VFollower,
-  VTarget
-} from 'vueuc'
+import { VBinder, VFollower, VTarget } from 'vueuc'
 import { NInternalSelectMenu } from '../../_internal'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import { call, useAdjustedTo, warn } from '../../_utils'

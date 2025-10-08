@@ -28,6 +28,7 @@ preset-confirm.vue
 preset-confirm-slot.vue
 transform-origin.vue
 draggable.vue
+mask-visible.vue
 ```
 
 ## API
@@ -63,10 +64,10 @@ Provided since `2.38.0`.
 | mask-closable | `boolean` | `true` | Whether to emit `hide` event when click mask. |  |
 | preset | `'dialog' \| 'card'` | `undefined` | The preset of `n-modal`. |  |
 | show | `boolean` | `false` | Whether to show modal. |  |
+| show-mask | `boolean` | `true` | Whether to display the mask. If it's set to `false`, all mask-related APIs will be disabled, focus won't be limit inside modal (so keyboard event like Esc won't always work). | 2.43.0 |
 | to | `string \| HTMLElement` | `body` | Container node of the modal content. |  |
 | transform-origin | `'mouse' \| 'center'` | `'mouse'` | The transform origin of the modal's display animation. |  |
 | trap-focus | `boolean` | `true` | Whether to trap focus inside modal. | 2.24.2 |
-| unstable-show-mask | `boolean` | `true` | Whether to show mask. The feature is unstable, please use it with caution. |  |
 | z-index | `number` | `undefined` | Z index of the modal. | 2.24.0 |
 | on-after-enter | `() => void` | `undefined` | Callback after modal is opened. |  |
 | on-after-leave | `() => void` | `undefined` | Callback after modal is closed. |  |

@@ -1,21 +1,11 @@
 import type { PropType, Ref } from 'vue'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { ImagePreviewInst, ImageRenderToolbar } from './public-types'
-import { isArray, isUndefined } from 'lodash-es'
 import { createId } from 'seemly'
 import { useMergedState } from 'vooks'
-import {
-  computed,
-  defineComponent,
-  h,
-  provide,
-  ref,
-  toRef,
-  toRefs,
-  watch
-} from 'vue'
+import { computed, defineComponent, h, provide, ref, toRef } from 'vue'
 import { useConfig } from '../../_mixins'
-import { call, createInjectionKey } from '../../_utils'
+import { call, createInjectionKey, throwError } from '../../_utils'
 
 import NImagePreview from './ImagePreview'
 import { imagePreviewSharedProps } from './interface'
@@ -25,19 +15,15 @@ export const imageGroupInjectionKey = createInjectionKey<
     groupId: string
     mergedClsPrefixRef: Ref<string>
     renderToolbarRef: Ref<ImageRenderToolbar | undefined>
-    registerImageUrl: (id: number, url: string) => void
-    toggleShow: (imageId: number) => void
+    registerImageUrl: (id: number, url: string) => () => void
+    toggleShow: (imageId: string) => void
   }
 >('n-image-group')
 
 export const imageGroupProps = {
   ...imagePreviewSharedProps,
-  srcList: {
-    type: Array as PropType<string[]>
-  },
-  current: {
-    type: Number
-  },
+  srcList: Array as PropType<string[]>,
+  current: Number,
   defaultCurrent: {
     type: Number,
     default: 0
@@ -67,47 +53,52 @@ export default defineComponent({
   name: 'ImageGroup',
   props: imageGroupProps,
   setup(props) {
-    const { srcList } = toRefs(props)
-
     const { mergedClsPrefixRef } = useConfig(props)
     const groupId = `c${createId()}`
-    // const vm = getCurrentInstance()
     const previewInstRef = ref<ImagePreviewInst | null>(null)
 
     const uncontrolledShowRef = ref(props.defaultShow)
     const controlledShowRef = toRef(props, 'show')
     const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
 
-    const propImageUrlMap = computed(
-      () =>
-        new Map(
-          isArray(srcList?.value)
-            ? srcList?.value.map((url, index) => [index, url])
-            : []
-        )
+    const registeredImageUrlMap = ref(new Map<string, string>())
+
+    const mergedImageUrlMap = computed(() => {
+      if (props.srcList) {
+        const map: Map<string, string> = new Map()
+        props.srcList.forEach((url, index) => {
+          map.set(`p${index}`, url)
+        })
+        return map
+      }
+      return registeredImageUrlMap.value
+    })
+
+    const imageIdListRef = computed(() =>
+      Array.from(mergedImageUrlMap.value.keys())
     )
 
-    const imageUrlMap = ref(new Map(propImageUrlMap.value || []))
-
-    const imageIdList = computed(() => Array.from(imageUrlMap.value.keys()))
-
-    const imageCount = computed(() => imageIdList.value.length)
+    const imageCountGetter = () => imageIdListRef.value.length
 
     function registerImageUrl(id: number, url: string) {
-      if (!propImageUrlMap.value.has(id)) {
-        imageUrlMap.value.set(id, url)
+      if (props.srcList) {
+        throwError(
+          'image-group',
+          '`n-image` can\'t be placed inside `n-image-group` when image group\'s `src-list` prop is set.'
+        )
       }
 
-      return function unRegisterPreviewUrl() {
-        if (!propImageUrlMap.value.has(id)) {
-          imageUrlMap.value.delete(id)
+      const sid = `r${id}`
+      if (!registeredImageUrlMap.value.has(`r${sid}`)) {
+        registeredImageUrlMap.value.set(sid, url)
+      }
+
+      return function unregisterPreviewUrl() {
+        if (!registeredImageUrlMap.value.has(sid)) {
+          registeredImageUrlMap.value.delete(sid)
         }
       }
     }
-
-    watch(propImageUrlMap, () => {
-      imageUrlMap.value = new Map(propImageUrlMap.value || [])
-    })
 
     const uncontrolledCurrentRef = ref(props.defaultCurrent)
     const controlledCurrentRef = toRef(props, 'current')
@@ -129,15 +120,19 @@ export default defineComponent({
       }
     }
 
-    const currentId = computed(() => imageIdList.value[mergedCurrentRef.value])
-    const setCurrentId = (nextId: number) => {
-      const nextIndex = imageIdList.value.indexOf(nextId)
+    const currentId = computed(
+      () => imageIdListRef.value[mergedCurrentRef.value]
+    )
+    const setCurrentId = (nextId: string) => {
+      const nextIndex = imageIdListRef.value.indexOf(nextId)
       if (nextIndex !== mergedCurrentRef.value) {
         setCurrentIndex(nextIndex)
       }
     }
 
-    const currentUrl = computed(() => imageUrlMap.value.get(currentId.value))
+    const currentUrl = computed(() =>
+      mergedImageUrlMap.value.get(currentId.value)
+    )
 
     function doUpdateShow(value: boolean): void {
       const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
@@ -157,23 +152,23 @@ export default defineComponent({
     const nextIndex = computed(() => {
       const findNext = (start: number, end: number) => {
         for (let i = start; i <= end; i++) {
-          const id = imageIdList.value[i]
-          if (imageUrlMap.value.get(id)) {
+          const id = imageIdListRef.value[i]
+          if (mergedImageUrlMap.value.get(id)) {
             return i
           }
         }
         return undefined
       }
 
-      const next = findNext(mergedCurrentRef.value + 1, imageCount.value - 1)
-      return isUndefined(next) ? findNext(0, mergedCurrentRef.value - 1) : next
+      const next = findNext(mergedCurrentRef.value + 1, imageCountGetter() - 1)
+      return next === undefined ? findNext(0, mergedCurrentRef.value - 1) : next
     })
 
     const prevIndex = computed(() => {
       const findPrev = (start: number, end: number) => {
         for (let i = start; i >= end; i--) {
-          const id = imageIdList.value[i]
-          if (imageUrlMap.value.get(id)) {
+          const id = imageIdListRef.value[i]
+          if (mergedImageUrlMap.value.get(id)) {
             return i
           }
         }
@@ -181,18 +176,18 @@ export default defineComponent({
       }
 
       const prev = findPrev(mergedCurrentRef.value - 1, 0)
-      return isUndefined(prev)
-        ? findPrev(imageCount.value - 1, mergedCurrentRef.value + 1)
+      return prev === undefined
+        ? findPrev(imageCountGetter() - 1, mergedCurrentRef.value + 1)
         : prev
     })
 
     function go(step: 1 | -1): void {
       if (step === 1) {
-        !isUndefined(prevIndex.value) && setCurrentIndex(nextIndex.value!)
+        prevIndex.value !== undefined && setCurrentIndex(nextIndex.value!)
         props.onPreviewNext?.()
       }
       else {
-        !isUndefined(nextIndex.value) && setCurrentIndex(prevIndex.value!)
+        nextIndex.value !== undefined && setCurrentIndex(prevIndex.value!)
         props.onPreviewPrev?.()
       }
     }
@@ -202,18 +197,12 @@ export default defineComponent({
       setThumbnailEl: (el) => {
         previewInstRef.value?.setThumbnailEl(el)
       },
-      toggleShow: (imageId: number) => {
+      toggleShow: (imageId: string) => {
         doUpdateShow(true)
         setCurrentId(imageId)
       },
       groupId,
       renderToolbarRef: toRef(props, 'renderToolbar')
-    })
-
-    watch(mergedShowRef, (value) => {
-      if (value) {
-        doUpdateShow(true)
-      }
     })
 
     return {

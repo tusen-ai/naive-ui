@@ -60,7 +60,6 @@ declare module 'vue' {
     NGi: (typeof import('naive-ui'))['NGi']
     NGrid: (typeof import('naive-ui'))['NGrid']
     NGridItem: (typeof import('naive-ui'))['NGridItem']
-    NColorIndicator: (typeof import('naive-ui'))['NColorIndicator']
     NHeatmap: (typeof import('naive-ui'))['NHeatmap']
     NHighlight: (typeof import('naive-ui'))['NHighlight']
     NIcon: (typeof import('naive-ui'))['NIcon']

@@ -1,19 +1,9 @@
+import type { HTMLAttributes, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { AlertTheme } from '../styles'
 import { getMargin } from 'seemly'
-import {
-  computed,
-  defineComponent,
-  h,
-  type HTMLAttributes,
-  mergeProps,
-  type PropType,
-  ref,
-  type SlotsType,
-  type VNode,
-  watchEffect
-} from 'vue'
+import { computed, defineComponent, h, mergeProps, ref, watchEffect } from 'vue'
 import { NBaseClose, NBaseIcon, NFadeInExpandTransition } from '../../_internal'
 import {
   ErrorIcon,

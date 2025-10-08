@@ -1,3 +1,6 @@
+import type { CheckStrategy, TreeMateOptions } from 'treemate'
+import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type { VirtualListInst, VirtualListScrollToOptions } from 'vueuc'
 import type { ScrollbarInst } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
@@ -28,36 +31,21 @@ import type {
   TreeOverrideNodeClickBehavior
 } from './interface'
 import { depx, getPadding, pxfy } from 'seemly'
-import {
-  type CheckStrategy,
-  createIndexGetter,
-  createTreeMate,
-  flatten,
-  type TreeMateOptions
-} from 'treemate'
+import { createIndexGetter, createTreeMate, flatten } from 'treemate'
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   inject,
   nextTick,
-  type PropType,
   provide,
   ref,
-  type SlotsType,
   toRef,
-  type VNode,
-  type VNodeChild,
   watch,
   watchEffect
 } from 'vue'
-import {
-  type VirtualListInst,
-  type VirtualListScrollToOptions,
-  VVirtualList
-} from 'vueuc'
+import { VVirtualList } from 'vueuc'
 import { NxScrollbar } from '../../_internal'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import { call, createDataKey, resolveSlot, warn, warnOnce } from '../../_utils'

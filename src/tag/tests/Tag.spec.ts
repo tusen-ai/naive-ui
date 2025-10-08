@@ -27,7 +27,7 @@ describe('n-tag', () => {
     })
 
     wrapper.trigger('click')
-    expect(onClick).toBeCalled()
+    expect(onClick).toHaveBeenCalled()
   })
 
   it('should be `checkable` prop', async () => {
@@ -55,8 +55,8 @@ describe('n-tag', () => {
     })
 
     wrapper.trigger('click')
-    expect(onChecked).toBeCalled()
-    expect(onChecked).toBeCalledTimes(2)
+    expect(onChecked).toHaveBeenCalled()
+    expect(onChecked).toHaveBeenCalledTimes(2)
   })
 
   it('should work with `closable` `on-close` prop', () => {
@@ -70,7 +70,7 @@ describe('n-tag', () => {
 
     expect(wrapper.find('.n-tag__close').exists()).toBe(true)
     wrapper.find('.n-tag__close').trigger('click')
-    expect(onClose).toBeCalled()
+    expect(onClose).toHaveBeenCalled()
   })
 
   it('should work with `disabled` prop', async () => {
@@ -85,7 +85,7 @@ describe('n-tag', () => {
 
     expect(wrapper.find('.n-tag').classes()).toContain('n-tag--disabled')
     wrapper.find('.n-tag__close').trigger('click')
-    expect(onClose).not.toBeCalled()
+    expect(onClose).not.toHaveBeenCalled()
   })
 
   it('should work with `round` prop', () => {
