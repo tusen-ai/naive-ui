@@ -1,5 +1,7 @@
 # CHANGELOG
 
+- `n-date-picker` prop `defaultTime` can also accept a function that will return a formatted string
+
 ## 2.43.1
 
 `2025-09-15`
