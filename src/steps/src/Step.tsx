@@ -1,6 +1,6 @@
 import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { computed, defineComponent, Fragment, h, inject } from 'vue'
+import { computed, defineComponent, Fragment, h, inject, toRef } from 'vue'
 import { NBaseIcon, NIconSwitchTransition } from '../../_internal'
 import {
   CloseIcon as ErrorIcon,
@@ -55,12 +55,10 @@ export default defineComponent({
       stepsSlots
     } = NSteps
 
-    const verticalRef = computed(() => {
-      return stepsProps.vertical
-    })
-    const contentPlacementRef = computed(() => {
-      return stepsProps.contentPlacement
-    })
+    const verticalRef = toRef(stepsProps, 'vertical')
+
+    const contentPlacementRef = toRef(stepsProps, 'contentPlacement')
+
     const mergedStatusRef = computed<'process' | 'finish' | 'error' | 'wait'>(
       () => {
         const { status } = props
