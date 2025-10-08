@@ -27,7 +27,14 @@ import { NxButton } from '../../button'
 import { NInput } from '../../input'
 import { inputNumberLight } from '../styles'
 import style from './styles/input-number.cssr'
-import { format, isWipValue, parse, parseNumber, validator } from './utils'
+import {
+  format,
+  isExponentialNotation,
+  isWipValue,
+  parse,
+  parseNumber,
+  validator
+} from './utils'
 
 const HOLDING_CHANGE_THRESHOLD = 800
 const HOLDING_CHANGE_INTERVAL = 100
@@ -150,8 +157,16 @@ export default defineComponent({
     )
     const displayedValueRef = ref('')
     const getPrecision = (value: string | number): number => {
-      const fraction = String(value).split('.')[1]
-      return fraction ? fraction.length : 0
+      const valueStr = String(value)
+      const isExponential = isExponentialNotation(valueStr)
+      const separator = isExponential ? 'e' : '.'
+      const [_, fractionOrExponent] = valueStr.toLowerCase().split(separator)
+
+      if (isExponential) {
+        return Math.abs(Number(fractionOrExponent))
+      }
+
+      return fractionOrExponent ? fractionOrExponent.length : 0
     }
     const getMaxPrecision = (currentValue: number): number => {
       const precisions = [props.min, props.max, props.step, currentValue].map(
