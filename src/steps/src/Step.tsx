@@ -184,7 +184,7 @@ export default defineComponent({
     const splitorNode = <div class={`${mergedClsPrefix}-step-splitor`} />
 
     const indicatorNode = (
-      // We need a key here to make reconcile progress doesn't affect styling.
+      // We need a key here to prevent reconcile progress from affecting styling.
       // A DOM can be reused so if it is used both for A component & B component,
       // the styling transition bewteen two components may be incorrect.
       <div class={`${mergedClsPrefix}-step-indicator`} key={contentPlacement}>
