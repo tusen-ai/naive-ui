@@ -18,7 +18,9 @@ const directoryDndUndefined = ref(true)
 
 <template>
   Retry
-  <n-upload action="http://fake-api">
+  <n-upload
+    action="https://m1.apifoxmock.com/m1/7208154-6934252-default/api/upload"
+  >
     <n-button>Upload</n-button>
   </n-upload>
   Multiple <n-switch v-model:value="multiple" /><br>
@@ -26,7 +28,7 @@ const directoryDndUndefined = ref(true)
   DirectoryDnd <n-switch v-model:value="directoryDnd" /><br>
   DirectoryDnd undefined <n-switch v-model:value="directoryDndUndefined" />
   <n-upload
-    action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+    action="https://m1.apifoxmock.com/m1/7208154-6934252-default/api/upload"
     :multiple="multiple"
     :directory="directory"
     :directory-dnd="directoryDndUndefined ? undefined : directoryDnd"
@@ -35,7 +37,7 @@ const directoryDndUndefined = ref(true)
     <n-button>Upload</n-button>
   </n-upload>
   <n-upload
-    action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+    action="https://m1.apifoxmock.com/m1/7208154-6934252-default/api/upload"
     :multiple="multiple"
     :directory="directory"
     :directory-dnd="directoryDndUndefined ? undefined : directoryDnd"

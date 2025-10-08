@@ -12,7 +12,7 @@ import { ArchiveOutline as ArchiveIcon } from '@vicons/ionicons5'
   <n-upload
     multiple
     directory-dnd
-    action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+    action="https://m1.apifoxmock.com/m1/7208154-6934252-default/api/upload"
     :max="5"
   >
     <n-upload-dragger>

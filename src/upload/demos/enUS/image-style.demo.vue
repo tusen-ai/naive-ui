@@ -58,7 +58,7 @@ function createThumbnailUrl(file: File | null): Promise<string> | undefined {
 
 <template>
   <n-upload
-    action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+    action="https://m1.apifoxmock.com/m1/7208154-6934252-default/api/upload"
     :default-file-list="fileList"
     list-type="image"
     :create-thumbnail-url="createThumbnailUrl"

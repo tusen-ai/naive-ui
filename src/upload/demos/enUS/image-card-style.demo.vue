@@ -64,7 +64,7 @@ const previewFileList = ref<UploadFileInfo[]>([
 
 <template>
   <n-upload
-    action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+    action="https://m1.apifoxmock.com/m1/7208154-6934252-default/api/upload"
     :default-file-list="fileList"
     list-type="image-card"
   >
@@ -72,7 +72,7 @@ const previewFileList = ref<UploadFileInfo[]>([
   </n-upload>
   <n-divider />
   <n-upload
-    action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+    action="https://m1.apifoxmock.com/m1/7208154-6934252-default/api/upload"
     :default-file-list="previewFileList"
     list-type="image-card"
     @preview="handlePreview"
