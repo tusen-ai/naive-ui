@@ -2,10 +2,10 @@ import type { ExtractPropTypes, PropType } from 'vue'
 import type { VirtualListInst } from 'vueuc'
 import type { ScrollbarInst } from '../../../_internal'
 import type {
+  DatePickerGetDefaultTime,
   FirstDayOfWeek,
   IsSingleDateDisabled,
   IsSingleDateDisabledDetail,
-  IsSingleDefaultTime,
   PanelChildComponentRefs,
   Shortcuts
 } from '../interface'
@@ -375,7 +375,7 @@ function useCalendar(
       if (typeof props.defaultTime === 'function') {
         time = extractSingleDefaultTime(
           dateItem.ts,
-          props.defaultTime as IsSingleDefaultTime
+          props.defaultTime as DatePickerGetDefaultTime
         )
       }
       else {

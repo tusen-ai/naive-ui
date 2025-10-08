@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
 - `n-date-picker` prop `defaultTime` can also accept a function that will return a formatted string
 
 ## 2.43.1

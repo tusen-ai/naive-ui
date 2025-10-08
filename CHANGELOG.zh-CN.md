@@ -1,6 +1,10 @@
 # CHANGELOG
 
-- `n-date-picker` prop `defaultTime` can also accept a function that will return a formatted string
+## NEXT_VERSION
+
+### Feats
+
+- `n-date-picker` 的 `defaultTime` 属性可以接受返回格式化字符串的函数
 
 ## 2.43.1
 

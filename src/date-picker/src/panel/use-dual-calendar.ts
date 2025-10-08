@@ -551,7 +551,7 @@ function useDualCalendar(
           endDefaultTime = getDefaultTime(defaultTime[1])
         }
         else {
-          startDefaultTime = getDefaultTime(defaultTime as string)
+          startDefaultTime = getDefaultTime(defaultTime)
           endDefaultTime = startDefaultTime
         }
       }

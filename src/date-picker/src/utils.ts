@@ -1,9 +1,9 @@
 import type { Ref } from 'vue'
 import type { NDateLocale } from '../../locales'
 import type {
+  DatePickerGetDefaultTime,
+  DatePickerGetRangeDefaultTime,
   FirstDayOfWeek,
-  IsRangeDefaultTime,
-  IsSingleDefaultTime,
   Value
 } from './interface'
 import {
@@ -495,7 +495,7 @@ function strictParse(
 
 function extractSingleDefaultTime(
   timestamp: number,
-  defaultTimeExtractor: IsSingleDefaultTime
+  defaultTimeExtractor: DatePickerGetDefaultTime
 ):
   | {
     hours: number
@@ -510,7 +510,7 @@ function extractSingleDefaultTime(
 
 function extractRangeDefaultTime(
   timestamp: number,
-  defaultTimeExtractor: IsRangeDefaultTime,
+  defaultTimeExtractor: DatePickerGetRangeDefaultTime,
   position: 'start' | 'end',
   value: [number, number] | null
 ):

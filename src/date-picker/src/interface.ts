@@ -20,11 +20,11 @@ import { createInjectionKey } from '../../_utils'
 
 export type Value = number | [number, number]
 
-export type DefaultTime =
-  | string
-  | [string | undefined, string | undefined]
-  | IsSingleDefaultTime
-  | IsRangeDefaultTime
+export type DefaultTime
+  = | string
+    | [string | undefined, string | undefined]
+    | DatePickerGetDefaultTime
+    | DatePickerGetRangeDefaultTime
 
 export type FormattedValue = string | [string, string]
 
@@ -199,8 +199,8 @@ export type IsRangeTimeDisabled = (
   value: [number, number] // date must exist to have time validation
 ) => TimeValidator
 
-export type IsSingleDefaultTime = (timestamp: number) => string
-export type IsRangeDefaultTime = (
+export type DatePickerGetDefaultTime = (timestamp: number) => string
+export type DatePickerGetRangeDefaultTime = (
   timestamp: number,
   position: 'start' | 'end',
   value: [number, number] | null
