@@ -9,7 +9,9 @@ describe('n-breadcrumb', () => {
   })
 
   it('should raise an error if breadcrumbItem is not inside a BreadCrumb', () => {
-    const mockErrorLogger = jest.spyOn(console, 'error').mockImplementation()
+    const mockErrorLogger = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {})
     const wrapper = mount(NBreadcrumbItem)
 
     expect(wrapper.isVisible()).toBe(false)
@@ -111,9 +113,10 @@ describe('n-breadcrumb', () => {
       const currentUrl = 'http://some-domain/path2'
       // https://github.com/jsdom/jsdom/issues/3492
       // https://jestjs.io/blog#known-issues
-      jest
-        .spyOn(useBrowserLocationModule, 'useBrowserLocation')
-        .mockImplementation(() => ref({ href: currentUrl }))
+      vi.spyOn(
+        useBrowserLocationModule,
+        'useBrowserLocation'
+      ).mockImplementation(() => ref({ href: currentUrl }))
 
       const wrapper = mount(NBreadcrumb, {
         slots: {

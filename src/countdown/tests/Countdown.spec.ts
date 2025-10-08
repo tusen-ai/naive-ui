@@ -52,7 +52,7 @@ describe('n-countdown', () => {
     wrapper.unmount()
   })
   it('should work with `on-finish` prop', async () => {
-    const onFinish = jest.fn()
+    const onFinish = vi.fn()
     const wrapper = mount(NCountdown, {
       props: {
         duration: 1,

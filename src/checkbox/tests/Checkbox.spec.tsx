@@ -38,7 +38,7 @@ describe('n-checkbox', () => {
   })
 
   it('should work with `checked-value` prop', async () => {
-    const onUpdateChecked = jest.fn()
+    const onUpdateChecked = vi.fn()
     const wrapper = mount(NCheckbox, {
       props: {
         checkedValue: 'fooo',
@@ -137,7 +137,7 @@ describe('n-checkbox', () => {
   })
 
   it('should work with `on-update:checked` & `onUpdateChecked` prop', async () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
     const wrapper = mount(NCheckbox, {
       props: {
         'onUpdate:checked': onClick,
@@ -236,7 +236,7 @@ describe('n-checkbox-group', () => {
   })
 
   it('should work with `on-update:value` prop', async () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
     const wrapper = mount(NCheckboxGroup, {
       props: {
         'on-update:value': onClick
