@@ -19,7 +19,7 @@ const options = [
   },
   {
     label: 'Atlantis Bahamas, Nassau',
-    key: 'atlantis nahamas, nassau'
+    key: 'atlantis bahamas, nassau'
   },
   {
     label: 'The Beverly Hills Hotel, Los Angeles',
