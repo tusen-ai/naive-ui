@@ -22,11 +22,11 @@ click.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| content-placement | `'right' \| 'bottom'` | `right` | Steps content placement, only can be used in horizontal mode. | NEXT_VERSION |
 | current | `number` | `undefined` | Currently active step index. |  |
 | size | `'small' \| 'medium'` | `'medium'` | Steps size. |  |
 | status | `'process' \| 'finish' \| 'error' \| 'wait'` | `'process'` | Steps status. |  |
 | vertical | `boolean` | `false` | Steps vertical. |  |
-| content-placement | `'right' \| 'bottom'` | `right` | Steps content placement, only can be used in horizontal mode. | NEXT_VERSION |
 | on-update:current | `(index: number) => void` | `undefined` | Callback on currently active step index changed. If it's set, step can be switched by click. | 2.29.1 |
 
 ### Step Props

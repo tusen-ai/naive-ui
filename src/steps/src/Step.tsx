@@ -159,7 +159,14 @@ export default defineComponent({
     }
   },
   render() {
-    const { mergedClsPrefix, onRender, handleStepClick, disabled } = this
+    const {
+      mergedClsPrefix,
+      onRender,
+      handleStepClick,
+      disabled,
+      contentPlacement,
+      vertical
+    } = this
     const descriptionNode = resolveWrappedSlot(
       this.$slots.default,
       (children) => {
@@ -177,7 +184,10 @@ export default defineComponent({
     const splitorNode = <div class={`${mergedClsPrefix}-step-splitor`} />
 
     const indicatorNode = (
-      <div class={`${mergedClsPrefix}-step-indicator`}>
+      // We need a key here to make reconcile progress doesn't affect styling.
+      // A DOM can be reused so if it is used both for A component & B component,
+      // the styling transition bewteen two components may be incorrect.
+      <div class={`${mergedClsPrefix}-step-indicator`} key={contentPlacement}>
         <div class={`${mergedClsPrefix}-step-indicator-slot`}>
           <NIconSwitchTransition>
             {{
@@ -219,7 +229,7 @@ export default defineComponent({
             }}
           </NIconSwitchTransition>
         </div>
-        {this.vertical ? splitorNode : null}
+        {vertical ? splitorNode : null}
       </div>
     )
     const contentNode = (
@@ -228,27 +238,28 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-step-content-header__title`}>
             {resolveSlot(this.$slots.title, () => [this.title])}
           </div>
-          {!this.vertical && this.contentPlacement === 'right'
-            ? splitorNode
-            : null}
+          {!vertical && contentPlacement === 'right' ? splitorNode : null}
         </div>
         {descriptionNode}
       </div>
     )
 
-    let stepNode = (
-      <Fragment>
-        {indicatorNode}
-        {contentNode}
-      </Fragment>
-    )
-    if (!this.vertical && this.contentPlacement === 'bottom') {
+    let stepNode: VNode
+    if (!vertical && contentPlacement === 'bottom') {
       stepNode = (
         <Fragment>
-          <div class={`${mergedClsPrefix}-step-content-bottom-header`}>
+          <div class={`${mergedClsPrefix}-step-line`}>
             {indicatorNode}
             {splitorNode}
           </div>
+          {contentNode}
+        </Fragment>
+      )
+    }
+    else {
+      stepNode = (
+        <Fragment>
+          {indicatorNode}
           {contentNode}
         </Fragment>
       )

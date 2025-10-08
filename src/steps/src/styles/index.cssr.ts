@@ -154,12 +154,12 @@ export default cB('steps', `
     c('>', [
       cB('step', 'flex-direction: column', [
         c('>', [
-          cB('step-content-bottom-header', 'display: flex;', [
+          cB('step-line', 'display: flex;', [
             c('>', [
               cB('step-splitor', `
-                  margin-top: 0;
-                  align-self: center;
-                `)
+                margin-top: 0;
+                align-self: center;
+              `)
             ]),
           ])
         ]),
