@@ -1529,8 +1529,12 @@ export default defineComponent({
       })
       resetDndState()
     }
-    function handleScroll(): void {
+    function handleScroll(e: Event): void {
       syncScrollbar()
+      const { virtualScroll, scrollbarProps } = props
+      if (virtualScroll && scrollbarProps?.onScroll) {
+        scrollbarProps?.onScroll(e)
+      }
     }
     function handleResize(): void {
       syncScrollbar()
