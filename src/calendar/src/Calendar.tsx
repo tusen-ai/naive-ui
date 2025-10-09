@@ -4,6 +4,7 @@ import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CalendarTheme } from '../styles'
 import type {
   CalendarDefaultSlotProps,
+  CalendarExtraSlotProps,
   CalendarHeaderSlotProps,
   DateItem,
   OnPanelChange,
@@ -47,6 +48,7 @@ export type CalendarProps = ExtractPublicPropTypes<typeof calendarProps>
 export interface CalendarSlots {
   default?: (props: CalendarDefaultSlotProps) => VNode[]
   header?: (props: CalendarHeaderSlotProps) => VNode[]
+  extra?: (props: CalendarExtraSlotProps) => VNode[]
 }
 
 export default defineComponent({
@@ -235,56 +237,68 @@ export default defineComponent({
             )}
           </div>
           <div class={`${mergedClsPrefix}-calendar-header__extra`}>
-            <NButtonGroup>
-              {{
-                default: () => (
-                  <>
-                    <NButton
-                      size="small"
-                      onClick={handlePrevClick}
-                      theme={mergedTheme.peers.Button}
-                      themeOverrides={mergedTheme.peerOverrides.Button}
-                    >
-                      {{
-                        icon: () => (
-                          <NBaseIcon
-                            clsPrefix={mergedClsPrefix}
-                            class={`${mergedClsPrefix}-calendar-prev-btn`}
-                          >
-                            {{ default: () => <ChevronLeftIcon /> }}
-                          </NBaseIcon>
-                        )
-                      }}
-                    </NButton>
-                    <NButton
-                      size="small"
-                      onClick={handleTodayClick}
-                      theme={mergedTheme.peers.Button}
-                      themeOverrides={mergedTheme.peerOverrides.Button}
-                    >
-                      {{ default: () => today }}
-                    </NButton>
-                    <NButton
-                      size="small"
-                      onClick={handleNextClick}
-                      theme={mergedTheme.peers.Button}
-                      themeOverrides={mergedTheme.peerOverrides.Button}
-                    >
-                      {{
-                        icon: () => (
-                          <NBaseIcon
-                            clsPrefix={mergedClsPrefix}
-                            class={`${mergedClsPrefix}-calendar-next-btn`}
-                          >
-                            {{ default: () => <ChevronRightIcon /> }}
-                          </NBaseIcon>
-                        )
-                      }}
-                    </NButton>
-                  </>
-                )
-              }}
-            </NButtonGroup>
+            {resolveSlotWithTypedProps(
+              $slots.extra,
+              {
+                year,
+                month: calendarMonth,
+                prev: handlePrevClick,
+                next: handleNextClick,
+                today: handleTodayClick
+              },
+              () => [
+                <NButtonGroup>
+                  {{
+                    default: () => (
+                      <>
+                        <NButton
+                          size="small"
+                          onClick={handlePrevClick}
+                          theme={mergedTheme.peers.Button}
+                          themeOverrides={mergedTheme.peerOverrides.Button}
+                        >
+                          {{
+                            icon: () => (
+                              <NBaseIcon
+                                clsPrefix={mergedClsPrefix}
+                                class={`${mergedClsPrefix}-calendar-prev-btn`}
+                              >
+                                {{ default: () => <ChevronLeftIcon /> }}
+                              </NBaseIcon>
+                            )
+                          }}
+                        </NButton>
+                        <NButton
+                          size="small"
+                          onClick={handleTodayClick}
+                          theme={mergedTheme.peers.Button}
+                          themeOverrides={mergedTheme.peerOverrides.Button}
+                        >
+                          {{ default: () => today }}
+                        </NButton>
+                        <NButton
+                          size="small"
+                          onClick={handleNextClick}
+                          theme={mergedTheme.peers.Button}
+                          themeOverrides={mergedTheme.peerOverrides.Button}
+                        >
+                          {{
+                            icon: () => (
+                              <NBaseIcon
+                                clsPrefix={mergedClsPrefix}
+                                class={`${mergedClsPrefix}-calendar-next-btn`}
+                              >
+                                {{ default: () => <ChevronRightIcon /> }}
+                              </NBaseIcon>
+                            )
+                          }}
+                        </NButton>
+                      </>
+                    )
+                  }}
+                </NButtonGroup>
+              ]
+            )}
           </div>
         </div>
         <div class={`${mergedClsPrefix}-calendar-dates`}>
