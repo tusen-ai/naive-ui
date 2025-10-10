@@ -19,6 +19,7 @@ events.vue
 shape.vue
 ghost.vue
 loading.vue
+shine.vue
 color.vue
 group.vue
 icon-button.vue
@@ -50,6 +51,7 @@ popover.vue
 | secondary | `boolean` | `false` | Whether the button is secondary button. |  |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | Button size. |  |
 | strong | `boolean` | `false` | Whether to use strong text in the button. |  |
+| shine | `boolean` | `false` | Enable shine effect in the button. |  |
 | tertiary | `boolean` | `false` | Whether the button is tertiary button. |  |
 | text | `boolean` | `false` | Whether to display as a text button. |  |
 | text-color | `string` | `undefined` | Button text color (support `#FFF`, `#FFFFFF`, `yellow`,`rgb(0, 0, 0)` formatted colors). |  |
