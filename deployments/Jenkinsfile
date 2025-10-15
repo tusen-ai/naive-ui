@@ -6,8 +6,8 @@ pipeline {
     string(name: 'Tags', defaultValue: 'alpha', description: 'Specify tags to be added to the package version')
   }
   environment {
-    NodeVersion="20.9.0"
-    NpmVersion="11.6.2"
+    NodeVersion="22.14.0"
+    NpmVersion="10.9.2"
     PnpmVersion="9.5.0"
   }
   stages {
