@@ -30,6 +30,7 @@ pipeline {
               
               pnpm install
               pnpm build:package
+              git restore .npmrc
               if [ -n "${params.Tags}" ]; then
                 echo "Publishing to ${params.Tags} tag"
                 pnpm publish --tag ${params.Tags}
