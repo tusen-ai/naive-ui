@@ -2,8 +2,8 @@ pipeline {
   agent { label "staging-vm" }
   options { disableConcurrentBuilds() }
   parameters {
-    string(name: 'Branch', defaultValue: 'alpha', description: 'Specify branch to be deployed')
-    string(name: 'Tags', defaultValue: 'alpha', description: 'Specify tags to be added to the package version')
+    string(name: 'Branch', defaultValue: 'main', description: 'Specify branch to be deployed')
+    string(name: 'Tags', defaultValue: 'rc', description: 'Specify tags to be added to the package version')
   }
   environment {
     NodeVersion="22.14.0"
@@ -14,32 +14,29 @@ pipeline {
     stage ('Build') {
       steps {
         npm_private_packages_configure("gcp-appengine-deploy", "frontend-core", scope="@platform-ui")
-        dir('packages/naive-ui') {
-          withEnv(["PATH=${HOME}/.volta/bin:${PATH}"]) {
-            sh("""#!/bin/bash
-              set -e
-              set -o pipefail
-              curl https://get.volta.sh | bash
-              volta install node@${env.NodeVersion} npm@${env.NpmVersion}
-              
-              npm install -g pnpm@${env.PnpmVersion}
+        withEnv(["PATH=${HOME}/.volta/bin:${PATH}"]) {
+          sh("""#!/bin/bash
+            set -e
+            set -o pipefail
+            curl https://get.volta.sh | bash
+            volta install node@${env.NodeVersion} npm@${env.NpmVersion}
 
-              echo "pnpm version: \$(pnpm -v)"
-              echo "npm version: \$(npm -v)"
-              echo "node version: \$(node -v)"
-              
-              pnpm install
-              pnpm build:package
-              git restore .npmrc
-              if [ -n "${params.Tags}" ]; then
-                echo "Publishing to ${params.Tags} tag"
-                pnpm publish --tag ${params.Tags}
-              else
-                echo "Publishing to latest tag"
-                pnpm publish
-              fi
-            """)
-          }
+            npm install -g pnpm@${env.PnpmVersion}
+
+            echo "pnpm version: \$(pnpm -v)"
+            echo "npm version: \$(npm -v)"
+            echo "node version: \$(node -v)"
+
+            pnpm install
+            pnpm run build:package
+            if [ -n "${params.Tags}" ]; then
+              echo "Publishing to ${params.Tags} tag"
+              pnpm publish --no-git-checks --tag ${params.Tags}
+            else
+              echo "Publishing to latest tag"
+              pnpm publish --no-git-checks
+            fi
+          """)
         }
       }
     }
