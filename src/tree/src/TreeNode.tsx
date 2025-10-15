@@ -211,7 +211,7 @@ const TreeNode = defineComponent({
           _handleClick(e)
         }
       }
-      resolvedNodePropsRef.value?.onClick?.(e)
+      resolvedNodePropsRef.value?.onClick?.(e as PointerEvent)
     }
 
     function handleContentClick(e: MouseEvent): void {

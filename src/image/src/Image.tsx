@@ -137,7 +137,7 @@ export default defineComponent({
 
     function onImgClick(e: MouseEvent) {
       exposedMethods.click()
-      props.imgProps?.onClick?.(e)
+      props.imgProps?.onClick?.(e as PointerEvent)
     }
 
     function onPreviewClose() {
