@@ -1,5 +1,5 @@
 {
-  "name": "naive-ui",
+  "name": "@platform-ui/naive-ui",
   "version": "2.42.0",
   "packageManager": "pnpm@9.5.0",
   "description": "A Vue 3 Component Library. Fairly Complete, Theme Customizable, Uses TypeScript, Fast",
@@ -8,7 +8,7 @@
   "homepage": "https://www.naiveui.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tusen-ai/naive-ui"
+    "url": "https://github.com/gohighlevel/naive-ui"
   },
   "keywords": [
     "naive-ui",
@@ -185,5 +185,8 @@
       "prettier --write --parser markdown --prose-wrap never",
       "eslint --fix"
     ]
+  },
+  "publishConfig": {
+    "registry": "https://us-central1-npm.pkg.dev/highlevel-staging/frontend-core/"
   }
 }
