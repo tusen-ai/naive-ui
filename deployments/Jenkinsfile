@@ -7,6 +7,7 @@ pipeline {
   }
   environment {
     NodeVersion="20.9.0"
+    NpmVersion="11.6.2"
     PnpmVersion="9.5.0"
   }
   stages {
@@ -19,10 +20,12 @@ pipeline {
               set -e
               set -o pipefail
               curl https://get.volta.sh | bash
-              volta install node@${env.NodeVersion} pnpm@${env.PnpmVersion}
-              volta pin pnpm@${env.PnpmVersion}
+              volta install node@${env.NodeVersion} npm@${env.NpmVersion}
+              
+              npm install -g pnpm@${env.PnpmVersion}
 
               echo "pnpm version: \$(pnpm -v)"
+              echo "npm version: \$(npm -v)"
               echo "node version: \$(node -v)"
               
               pnpm install
