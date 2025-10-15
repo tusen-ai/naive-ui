@@ -18,6 +18,7 @@ const badgeDark: BadgeTheme = {
       colorSuccess: successColorSuppl,
       colorError: errorColorSuppl,
       colorWarning: warningColorSuppl,
+      textColor: '#FFF',
       fontSize: '12px',
       fontFamily
     }

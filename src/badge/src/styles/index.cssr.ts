@@ -54,7 +54,7 @@ export default c([
       transition:
         background-color .3s var(--n-bezier),
         color .3s var(--n-bezier);
-      color: #FFF;
+      color: var(--n-text-color);
       position: absolute;
       height: 18px;
       line-height: 18px;
