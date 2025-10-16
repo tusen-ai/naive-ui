@@ -1,7 +1,7 @@
 <markdown>
-# 单面板 日期范围 Debug
+# Single panel
 
-仅daterange，datetimerange 待完善UI
+It is valid when type is daterange
 </markdown>
 
 <script lang="ts" setup>
