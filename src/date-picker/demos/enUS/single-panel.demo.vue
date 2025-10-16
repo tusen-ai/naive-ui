@@ -1,7 +1,7 @@
 <markdown>
 # Single panel
 
-It is valid when type is daterange
+It is valid when type is daterange.
 </markdown>
 
 <script lang="ts" setup>

@@ -1,7 +1,7 @@
 <markdown>
 # 单面板
 
-type为daterange时有效
+type为daterange时有效。
 </markdown>
 
 <script lang="ts" setup>
