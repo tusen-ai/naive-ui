@@ -77,15 +77,9 @@ function createPageItemsInfo(
   let middleEnd = currentPage
   const middleDelta = (pageSlot - 5) / 2
   middleEnd += Math.ceil(middleDelta)
-  middleEnd = Math.min(
-    Math.max(middleEnd, firstPage + pageSlot - 3),
-    lastPage - 2
-  )
+  middleEnd = clampValue(middleEnd, firstPage + pageSlot - 3, lastPage - 2)
   middleStart -= Math.floor(middleDelta)
-  middleStart = Math.max(
-    Math.min(middleStart, lastPage - pageSlot + 3),
-    firstPage + 2
-  )
+  middleStart = clampValue(middleStart, firstPage + 2, lastPage - pageSlot + 3)
   let leftSplit = false
   let rightSplit = false
   if (middleStart > firstPage + 2)

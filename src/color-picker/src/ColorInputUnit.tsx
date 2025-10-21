@@ -1,12 +1,13 @@
 import type { PropType } from 'vue'
 import { defineComponent, h, inject, ref, watchEffect } from 'vue'
+import { clampValue } from '../../_utils'
 import { NInput } from '../../input'
 import { colorPickerInjectionKey } from './context'
 
 // 0 - 255
 function normalizeRgbUnit(value: string): number | false {
   if (/^\d{1,3}\.?\d*$/.test(value.trim())) {
-    return Math.max(0, Math.min(Number.parseInt(value), 255))
+    return clampValue(Number.parseInt(value), 0, 255)
   }
   return false
 }
@@ -14,7 +15,7 @@ function normalizeRgbUnit(value: string): number | false {
 // 0 - 360
 function normalizeHueUnit(value: string): number | false {
   if (/^\d{1,3}\.?\d*$/.test(value.trim())) {
-    return Math.max(0, Math.min(Number.parseInt(value), 360))
+    return clampValue(Number.parseInt(value), 0, 360)
   }
   return false
 }
@@ -22,7 +23,7 @@ function normalizeHueUnit(value: string): number | false {
 // 0 - 100
 function normalizeSlvUnit(value: string): number | false {
   if (/^\d{1,3}\.?\d*$/.test(value.trim())) {
-    return Math.max(0, Math.min(Number.parseInt(value), 100))
+    return clampValue(Number.parseInt(value), 0, 100)
   }
   return false
 }
@@ -38,7 +39,7 @@ function normalizeHexaUnit(value: string): boolean {
 // 0 - 100%
 function normalizeAlphaUnit(value: string): number | false {
   if (/^\d{1,3}\.?\d*%$/.test(value.trim())) {
-    return Math.max(0, Math.min(Number.parseInt(value) / 100, 100))
+    return clampValue(Number.parseInt(value) / 100, 0, 100)
   }
   return false
 }

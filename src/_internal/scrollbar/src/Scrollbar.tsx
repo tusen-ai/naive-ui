@@ -22,7 +22,7 @@ import {
 } from 'vue'
 import { VResizeObserver } from 'vueuc'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../../_mixins'
-import { rtlInset, useReactivated, Wrapper } from '../../../_utils'
+import { clampValue, rtlInset, useReactivated, Wrapper } from '../../../_utils'
 import { scrollbarLight } from '../styles'
 import style from './styles/index.cssr'
 
@@ -568,8 +568,7 @@ const Scrollbar = defineComponent({
         = (dX * (contentWidth - containerWidth)) / (containerWidth - xBarSize)
       const toScrollLeftUpperBound = contentWidth - containerWidth
       let toScrollLeft = memoXLeft + dScrollLeft
-      toScrollLeft = Math.min(toScrollLeftUpperBound, toScrollLeft)
-      toScrollLeft = Math.max(toScrollLeft, 0)
+      toScrollLeft = clampValue(toScrollLeft, 0, toScrollLeftUpperBound)
       const { value: container } = mergedContainerRef
       if (container) {
         container.scrollLeft = toScrollLeft * (rtlEnabledRef?.value ? -1 : 1)
@@ -617,8 +616,7 @@ const Scrollbar = defineComponent({
         = (dY * (contentHeight - containerHeight)) / (containerHeight - yBarSize)
       const toScrollTopUpperBound = contentHeight - containerHeight
       let toScrollTop = memoYTop + dScrollTop
-      toScrollTop = Math.min(toScrollTopUpperBound, toScrollTop)
-      toScrollTop = Math.max(toScrollTop, 0)
+      toScrollTop = clampValue(toScrollTop, 0, toScrollTopUpperBound)
       const { value: container } = mergedContainerRef
       if (container) {
         container.scrollTop = toScrollTop
