@@ -1,4 +1,5 @@
 import type { PaginationProps } from './Pagination'
+import { clampValue } from '../../_utils'
 
 export function getDefaultPageSize(
   paginationProps: PaginationProps | false
