@@ -1,3 +1,4 @@
+import type { ComputedRef, Ref } from 'vue'
 import type {
   ColumnKey,
   DataTableSetupProps,
@@ -5,7 +6,7 @@ import type {
   TableColumn
 } from './interface'
 import { beforeNextFrameOnce } from 'seemly'
-import { computed, type ComputedRef, type Ref, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { formatLength } from '../../_utils'
 import { getColKey, getNumberColWidth } from './utils'
 

@@ -134,7 +134,7 @@ export-csv.vue
 | children | `DataTableColumn[]` | `undefined` | Child nodes of a grouped column. |  |
 | className | `string` | `undefined` | Class name of the column. |  |
 | colSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | The col span of the column cell. |  |
-| customNextSortOrder | `(order: 'descend' \| 'ascend' \| false) => 'descend' \| 'ascend' \| false` | `undefined` | A function for custom next sorting status. | NEXT_VERSION |
+| customNextSortOrder | `(order: 'descend' \| 'ascend' \| false) => 'descend' \| 'ascend' \| false` | `undefined` | A function for custom next sorting status. | 2.43.0 |
 | defaultFilterOptionValue | `string \| number \| null` | `null` | The default active filter option value in uncontrolled manner. (works when not using multiple filters). |  |
 | defaultFilterOptionValues | `Array<string \| number>` | `[]` | The default active filter option values in uncontrolled manner. (works when there are multiple filters). |  |
 | defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | The default sort order of the table in uncontrolled manner. |  |

@@ -1,80 +1,79 @@
 <markdown>
 # Slots
 
-Customize footer area with info slot and indicator slot. Also supports custom tooltip content.
+Customize footer area with `footer` slot and `indicator` slot. Also supports custom `tooltip` content and indicator text slots.
 </markdown>
 
 <script setup lang="ts">
 import { heatmapMockData } from 'naive-ui'
-import { computed, ref } from 'vue'
 
-const value = ref<'recent' | number>('recent')
-const yearData = computed(() => {
-  return heatmapMockData(value.value)
-})
+const yearData = heatmapMockData()
 </script>
 
 <template>
   <n-flex vertical>
-    <n-heatmap :data="yearData" unit="activities" :show-color-indicator="false">
-      <template #info>
-        <n-text depth="3">
-          Left info slot
-        </n-text>
-      </template>
-      <template #indicator>
-        <n-text depth="3">
-          Right indicator slot
-        </n-text>
-      </template>
-      <template #tooltip="{ timestamp: date, value: tooltipValue, unit }">
-        <div>
+    <n-scrollbar x-scrollable style="max-width: 100%">
+      <n-heatmap :data="yearData" :show-color-indicator="false">
+        <template #footer>
+          <n-text depth="3">
+            Left footer slot
+          </n-text>
+        </template>
+        <template #indicator>
+          <n-text depth="3">
+            Right indicator slot
+          </n-text>
+        </template>
+        <template #tooltip="{ timestamp: date, value: tooltipValue }">
           <div>
-            <strong>Date:</strong> {{ new Date(date).toLocaleDateString() }}
+            <div>
+              <strong>Date:</strong> {{ new Date(date).toLocaleDateString() }}
+            </div>
+            <div><strong>Value:</strong> {{ tooltipValue ?? 0 }}</div>
+            <div v-if="tooltipValue != null && tooltipValue > 5">
+              <n-tag type="success" size="small">
+                High Activity
+              </n-tag>
+            </div>
           </div>
-          <div><strong>Value:</strong> {{ tooltipValue ?? 0 }} {{ unit }}</div>
-          <div v-if="tooltipValue !== null && tooltipValue > 5">
-            <n-tag type="success" size="small">
-              High Activity
-            </n-tag>
-          </div>
-        </div>
-      </template>
-    </n-heatmap>
-
+        </template>
+      </n-heatmap>
+    </n-scrollbar>
     <n-divider />
-
-    <h4>Disabled Tooltip</h4>
-    <n-heatmap :data="yearData" unit="activities" :tooltip="false">
-      <template #info>
-        <n-text depth="3">
-          Tooltip disabled
-        </n-text>
-      </template>
-    </n-heatmap>
-
+    <h4>Custom Indicator Text</h4>
+    <n-scrollbar x-scrollable style="max-width: 100%">
+      <n-heatmap :data="yearData">
+        <template #indicator-leading-text>
+          <n-text depth="3" style="font-style: italic">
+            Less
+          </n-text>
+        </template>
+        <template #indicator-trailing-text>
+          <n-text depth="3" style="font-style: italic">
+            More
+          </n-text>
+        </template>
+      </n-heatmap>
+    </n-scrollbar>
     <n-divider />
-
     <h4>Custom Tooltip Configuration</h4>
-    <n-heatmap
-      :data="yearData"
-      unit="activities"
-      :tooltip="{ placement: 'bottom', delay: 500 }"
-    >
-      <template #info>
-        <n-text depth="3">
-          Bottom tooltip with 500ms delay
-        </n-text>
-      </template>
-      <template #tooltip="{ timestamp: date, value: tooltipValue, unit }">
-        <n-card size="small" style="max-width: 200px">
-          <template #header>
-            Activity Details
-          </template>
+    <n-scrollbar x-scrollable style="max-width: 100%">
+      <n-heatmap
+        :data="yearData"
+        unit="activities"
+        :tooltip="{ placement: 'bottom', delay: 500 }"
+      >
+        <template #footer>
+          <n-text depth="3">
+            Tooltip shown at bottom with 500ms delay
+          </n-text>
+        </template>
+        <template #tooltip="{ timestamp: date, value: tooltipValue }">
+          Activity Details<br>
           <div>{{ new Date(date).toLocaleDateString() }}</div>
-          <div>{{ tooltipValue ?? 0 }} {{ unit }}</div>
-        </n-card>
-      </template>
-    </n-heatmap>
+          <div>{{ tooltipValue ?? 0 }}</div>
+        </template>
+      </n-heatmap>
+    </n-scrollbar>
   </n-flex>
 </template>

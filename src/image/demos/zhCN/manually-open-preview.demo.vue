@@ -1,7 +1,7 @@
 <markdown>
 # 手动打开预览
 
-允许通过调用 showPreview 来触发大图预览。
+通过调用 `showPreview` 来触发大图预览。
 </markdown>
 
 <script lang="ts" setup>
@@ -17,7 +17,7 @@ function handleClick() {
 <template>
   <n-space vertical>
     <n-button type="primary" @click="handleClick">
-      show image preview
+      展示图片预览
     </n-button>
     <n-image
       ref="imageRef"

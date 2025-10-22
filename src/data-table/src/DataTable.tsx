@@ -1,3 +1,4 @@
+import type { CSSProperties, SlotsType } from 'vue'
 import type {
   CsvOptionsType,
   DataTableInst,
@@ -8,12 +9,10 @@ import type {
 import { createId } from 'seemly'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   provide,
   ref,
-  type SlotsType,
   toRef,
   Transition,
   watchEffect

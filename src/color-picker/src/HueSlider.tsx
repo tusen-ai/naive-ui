@@ -1,5 +1,6 @@
+import type { PropType } from 'vue'
 import { off, on } from 'evtd'
-import { defineComponent, h, type PropType, ref } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 import { normalizeHue } from './utils'
 
 const HANDLE_SIZE = '12px'

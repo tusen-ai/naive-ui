@@ -111,7 +111,7 @@ describe('n-card', () => {
   })
 
   it('should work with `closable` and `on-close` prop', async () => {
-    const onClose = jest.fn()
+    const onClose = vi.fn()
     const wrapper = mount(NCard, {
       props: {
         closable: true,

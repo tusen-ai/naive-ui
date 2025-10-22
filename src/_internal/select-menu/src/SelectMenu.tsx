@@ -1,3 +1,6 @@
+import type { TreeNode } from 'treemate'
+import type { CSSProperties, PropType, WatchStopHandle } from 'vue'
+import type { VirtualListInst } from 'vueuc'
 import type { ThemeProps } from '../../../_mixins'
 import type {
   SelectGroupOption,
@@ -7,6 +10,7 @@ import type {
   Value
 } from '../../../select/src/interface'
 import type { ScrollbarInst } from '../../scrollbar'
+import type { InternalSelectMenuTheme } from '../styles'
 import type {
   InternalExposedProps,
   NodeProps,
@@ -15,23 +19,20 @@ import type {
   Size
 } from './interface'
 import { depx, getPadding, happensIn } from 'seemly'
-import { createIndexGetter, type TreeNode } from 'treemate'
+import { createIndexGetter } from 'treemate'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   nextTick,
   onBeforeUnmount,
   onMounted,
-  type PropType,
   provide,
   ref,
   toRef,
-  watch,
-  type WatchStopHandle
+  watch
 } from 'vue'
-import { VirtualList, type VirtualListInst } from 'vueuc'
+import { VirtualList } from 'vueuc'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../../_mixins'
 import { resolveSlot, resolveWrappedSlot, useOnResize } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
@@ -39,10 +40,7 @@ import { NEmpty } from '../../../empty'
 import NFocusDetector from '../../focus-detector'
 import NInternalLoading from '../../loading'
 import { NScrollbar } from '../../scrollbar'
-import {
-  internalSelectMenuLight,
-  type InternalSelectMenuTheme
-} from '../styles'
+import { internalSelectMenuLight } from '../styles'
 import {
   internalSelectionMenuBodyInjectionKey,
   internalSelectionMenuInjectionKey

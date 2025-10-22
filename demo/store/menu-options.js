@@ -20,7 +20,13 @@ export function renderMenuLabel(option) {
 function renderNewTag(isZh) {
   return h(
     NTag,
-    { type: 'success', size: 'small', round: true, bordered: false },
+    {
+      type: 'success',
+      size: 'small',
+      round: true,
+      bordered: false,
+      style: { pointerEvents: 'none' }
+    },
     { default: isZh ? () => '新' : () => 'New' }
   )
 }

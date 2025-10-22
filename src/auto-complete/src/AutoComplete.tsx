@@ -1,8 +1,20 @@
+import type { TreeNode } from 'treemate'
+import type {
+  CSSProperties,
+  HTMLAttributes,
+  InputHTMLAttributes,
+  PropType,
+  SlotsType,
+  VNode
+} from 'vue'
+import type { FollowerPlacement } from 'vueuc'
+import type { InternalSelectMenuRef } from '../../_internal'
 import type {
   RenderLabel,
   RenderOption
 } from '../../_internal/select-menu/src/interface'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/public-types'
 import type { InputInst } from '../../input'
 import type {
@@ -22,36 +34,25 @@ import type {
   OnUpdateValue
 } from './interface'
 import { getPreciseEventTarget } from 'seemly'
-import { createTreeMate, type TreeNode } from 'treemate'
+import { createTreeMate } from 'treemate'
 import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
-  type HTMLAttributes,
-  type InputHTMLAttributes,
-  type PropType,
   ref,
-  type SlotsType,
   toRef,
   Transition,
-  type VNode,
   watchEffect,
   withDirectives
 } from 'vue'
-import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc'
-import {
-  type InternalSelectMenuRef,
-  NInternalSelectMenu
-} from '../../_internal'
+import { VBinder, VFollower, VTarget } from 'vueuc'
+import { NInternalSelectMenu } from '../../_internal'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import {
   call,
-  type ExtractPublicPropTypes,
   getFirstSlotVNodeWithTypedProps,
-  type MaybeArray,
   useAdjustedTo,
   warnOnce
 } from '../../_utils'

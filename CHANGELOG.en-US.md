@@ -2,6 +2,33 @@
 
 ## NEXT_VERSION
 
+### Fixes
+
+- Fix seemly dependency version range allows incompatible versions.
+- Fix `n-progress` style is incorrect after using the dashboard mode exceeding 100%, closes [#6627](https://github.com/tusen-ai/naive-ui/issues/6627)
+- Fix `n-modal`'s outside content can't be interacted with `show-mask` is set to `false`.
+
+### Feats
+
+- `n-date-picker` prop `defaultTime` can also accept a function that will return a formatted string
+- `n-steps` adds `content-placement` prop, closes [#7044](https://github.com/tusen-ai/naive-ui/issues/7044).
+
+## 2.43.1
+
+`2025-09-14`
+
+### Fixes
+
+- Fix esm format files are importing `lodash` rather than `lodash-es`.
+
+## 2.43.0
+
+`2025-09-13`
+
+### Breaking Changes
+
+- Modal's inner close button won't be focusable using keyboard and it'll no longer be focused first by default.
+
 ### i18n
 
 - Add daDK locale.
@@ -13,12 +40,14 @@
 - Fix `n-popover`'s `themeOverrides` property does not have the `Scrollbar` style configuration.
 - Fix `n-input`'s `themeOverrides` property does not have the `Scrollbar` style configuration.
 - Fix `n-anchor` can't activate link in the bottom of the page by click, closes [#7033](https://github.com/tusen-ai/naive-ui/issues/7033), closes [#6918](https://github.com/tusen-ai/naive-ui/issues/6918), [#6844](https://github.com/tusen-ai/naive-ui/issues/6844), [#6782](https://github.com/tusen-ai/naive-ui/issues/6782).
-- Fix `n-upload` component 'Non-function value encountered for default slot' warning.
+- Fix `n-upload` component `'Non-function value encountered for default slot'` warning.
 - Fix `n-input`'s `tabindex` property setting of `input-props` does not take effect.
 - Fix `n-tab` scroll shadow pseudo-class style conflicts in multi-layer tab nesting scenarios, closes [#6854](https://github.com/tusen-ai/naive-ui/issues/6854).
 - Fix `n-menu`'s disabled style not working when parent node is set to `disabled` and child node has `type: "group"`, closes [#6792](https://github.com/tusen-ai/naive-ui/issues/6792)
 - Fix `n-input-group-label` not injecting `formItemInjectionKey`, causing the `size` property to fail, and close [#7066](https://github.com/tusen-ai/naive-ui/issues/7066)
 - Fix the issue of style confusion in `n-carousel` when there is only one image, close [#6476](https://github.com/tusen-ai/naive-ui/issues/6476)
+- Fix `n-marquee` component 'Non-function value encountered for default slot' warning.
+- Fix memory leak caused by `n-upload` icon.
 
 ### Features
 
@@ -32,8 +61,15 @@
 - `useDialog`'s option supports `z-index`, closes [#4349](https://github.com/tusen-ai/naive-ui/issues/4349).
 - Add `n-heatmap` component.
 - - `n-image` adds showPreview methods, closes [#6695](https://github.com/tusen-ai/naive-ui/issues/6695).
-- `n-image-preview` `n-image-group` support being used independently.
+- Add `n-image-preview` component.
+- `n-image-group` can be used without `n-image`.
 - `n-input-otp` adds `focusOnChar` util method, closes [#7073](https://github.com/tusen-ai/naive-ui/issues/7073).
+- `n-form-item` adds `content-class`、`content-style` props.
+- `n-message` adds `border` theme variable, closes [#7105](https://github.com/tusen-ai/naive-ui/issues/7105).
+- `n-modal` adds `show-mask` prop.
+- `useModal` add `render` function, closes [#5857](https://github.com/tusen-ai/naive-ui/issues/5857).
+- `n-card` add `close-focusable` prop.
+- `n-dialog` add `close-focusable` prop.
 
 ## 2.42.0
 
@@ -427,6 +463,7 @@
 - Fix `n-tabs`'s border height in `vertical` mode.
 - Fix `n-tree`'s node's hover color has higher priority than selected color in `block-line` mode.
 - Fix `n-tree` click expand switch causes checkbox being checked.
+- Fix `n-progress` multiple `type="circle"` cases style override issue, closes [#7172](https://github.com/tusen-ai/naive-ui/issues/7172).
 
 ### Features
 

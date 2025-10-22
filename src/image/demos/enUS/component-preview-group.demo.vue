@@ -1,7 +1,7 @@
 <markdown>
 # Multi-image preview
 
-`to wrap the <n-image-group> component to preview multiple images.`
+Use `src-list` of `<n-image-group />` to preview images without `<n-image />`.
 </markdown>
 
 <script lang="ts" setup>

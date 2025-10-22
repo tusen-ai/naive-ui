@@ -1,13 +1,13 @@
 import type { VNodeChild } from 'vue'
 import type { MessageSetupProps } from './message-props'
 
-export type MessageType =
-  | 'info'
-  | 'success'
-  | 'warning'
-  | 'error'
-  | 'loading'
-  | 'default'
+export type MessageType
+  = | 'info'
+    | 'success'
+    | 'warning'
+    | 'error'
+    | 'loading'
+    | 'default'
 
 // We should export keepAliveOnHover since it's not managed by users
 export type RenderMessageProps = Pick<
