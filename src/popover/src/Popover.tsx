@@ -1,28 +1,40 @@
+import type {
+  ComputedRef,
+  CSSProperties,
+  PropType,
+  Ref,
+  SlotsType,
+  VNode
+} from 'vue'
+import type { BinderInst, FollowerPlacement } from 'vueuc'
+import type { ThemeProps } from '../../_mixins'
+import type {
+  ExtractInternalPropTypes,
+  ExtractPublicPropTypes,
+  MaybeArray
+} from '../../_utils'
+import type { PopoverTheme } from '../styles'
+import type {
+  InternalPopoverInst,
+  InternalRenderBody,
+  PopoverTrigger
+} from './interface'
+import { zindexable } from 'vdirs'
+import { useCompitable, useIsMounted, useMemo, useMergedState } from 'vooks'
 import {
-  type CSSProperties,
-  type ComputedRef,
-  type PropType,
-  type Ref,
-  Text,
-  type VNode,
   cloneVNode,
   computed,
   defineComponent,
   h,
   provide,
   ref,
+  Text,
   toRef,
   watchEffect,
   withDirectives
 } from 'vue'
-import {
-  type BinderInst,
-  type FollowerPlacement,
-  VBinder,
-  VTarget
-} from 'vueuc'
-import { useCompitable, useIsMounted, useMemo, useMergedState } from 'vooks'
-import { zindexable } from 'vdirs'
+import { VBinder, VTarget } from 'vueuc'
+import { useTheme } from '../../_mixins'
 import {
   call,
   getFirstSlotVNode,
@@ -30,20 +42,7 @@ import {
   useAdjustedTo,
   warnOnce
 } from '../../_utils'
-import type {
-  ExtractInternalPropTypes,
-  ExtractPublicPropTypes,
-  MaybeArray
-} from '../../_utils'
-import { useTheme } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import type { PopoverTheme } from '../styles'
 import NPopoverBody, { popoverBodyProps } from './PopoverBody'
-import type {
-  InternalPopoverInst,
-  InternalRenderBody,
-  PopoverTrigger
-} from './interface'
 
 const bodyPropKeys = Object.keys(popoverBodyProps) as Array<
   keyof typeof popoverBodyProps
@@ -222,10 +221,18 @@ export const popoverProps = {
 export type PopoverProps = ExtractPublicPropTypes<typeof popoverBaseProps>
 export type PopoverInternalProps = ExtractInternalPropTypes<typeof popoverProps>
 
+export interface PopoverSlots {
+  trigger?: () => VNode[]
+  footer?: () => VNode[]
+  header?: () => VNode[]
+  default?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Popover',
   inheritAttrs: false,
   props: popoverProps,
+  slots: Object as SlotsType<PopoverSlots>,
   __popover__: true,
   setup(props) {
     if (__DEV__) {
@@ -485,12 +492,7 @@ export default defineComponent({
     let triggerVNode: VNode | null
     let popoverInside = false
     if (!positionManually) {
-      if (slots.activator) {
-        triggerVNode = getFirstSlotVNode(slots, 'activator')
-      }
-      else {
-        triggerVNode = getFirstSlotVNode(slots, 'trigger')
-      }
+      triggerVNode = getFirstSlotVNode(slots, 'trigger')
       if (triggerVNode) {
         triggerVNode = cloneVNode(triggerVNode)
         triggerVNode
@@ -583,23 +585,31 @@ export default defineComponent({
             return [
               this.internalTrapFocus && mergedShow
                 ? withDirectives(
-                  <div style={{ position: 'fixed', inset: 0 }} />,
-                  [
+                    <div
+                      style={{
+                        position: 'fixed',
+                        top: 0,
+                        right: 0,
+                        bottom: 0,
+                        left: 0
+                      }}
+                    />,
                     [
-                      zindexable,
-                      {
-                        enabled: mergedShow,
-                        zIndex: this.zIndex
-                      }
+                      [
+                        zindexable,
+                        {
+                          enabled: mergedShow,
+                          zIndex: this.zIndex
+                        }
+                      ]
                     ]
-                  ]
-                )
+                  )
                 : null,
               positionManually
                 ? null
                 : h(VTarget, null, {
-                  default: () => triggerVNode
-                }),
+                    default: () => triggerVNode
+                  }),
               h(
                 NPopoverBody,
                 keep(this.$props, bodyPropKeys, {

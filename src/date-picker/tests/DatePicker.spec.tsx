@@ -1,9 +1,9 @@
-import { ref } from 'vue'
+import type { Value } from '../src/interface'
 import { mount } from '@vue/test-utils'
 import { format } from 'date-fns'
-import { NDatePicker } from '../index'
-import type { Value } from '../src/interface'
+import { ref } from 'vue'
 import { dateEnUS } from '../../locales'
+import { NDatePicker } from '../index'
 
 describe('n-date-picker', () => {
   it('should work with import on demand', () => {
@@ -273,7 +273,7 @@ describe('n-date-picker', () => {
   })
 
   it('should work with `onBlur` prop', async () => {
-    const onBlur = jest.fn()
+    const onBlur = vi.fn()
     const wrapper = mount(NDatePicker, {
       props: { onBlur }
     })
@@ -286,7 +286,7 @@ describe('n-date-picker', () => {
   })
 
   it('should work with `onFocus` prop', async () => {
-    const onFocus = jest.fn()
+    const onFocus = vi.fn()
     const wrapper = mount(NDatePicker, {
       props: { onFocus }
     })

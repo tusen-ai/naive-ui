@@ -1,5 +1,5 @@
 export {
-  default as NInfiniteScroll,
-  infiniteScrollProps
+  infiniteScrollProps,
+  default as NInfiniteScroll
 } from './src/InfiniteScroll'
 export type { InfiniteScrollProps } from './src/InfiniteScroll'

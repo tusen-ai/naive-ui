@@ -1,8 +1,7 @@
 import { h } from 'vue'
 import { replaceable } from './replaceable'
 
-export default replaceable(
-  'zoomOut',
+export default replaceable('zoomOut', () => (
   <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M11 8C11.2761 8 11.5 8.22386 11.5 8.5C11.5 8.77614 11.2761 9 11 9H6C5.72386 9 5.5 8.77614 5.5 8.5C5.5 8.22386 5.72386 8 6 8H11Z"
@@ -15,4 +14,4 @@ export default replaceable(
     >
     </path>
   </svg>
-)
+))

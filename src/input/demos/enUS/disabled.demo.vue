@@ -5,8 +5,8 @@ Inputs can also be disabled.
 </markdown>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
 import { FlashOutline } from '@vicons/ionicons5'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {
@@ -35,7 +35,7 @@ export default defineComponent({
       round
     />
     <n-input pair separator="to" clearable :disabled="!active">
-      <template #affix>
+      <template #suffix>
         <n-icon :component="FlashOutline" />
       </template>
     </n-input>

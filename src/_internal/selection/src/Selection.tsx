@@ -1,11 +1,21 @@
+import type { CSSProperties, InputHTMLAttributes, PropType, VNode } from 'vue'
+import type { VOverflowInst } from 'vueuc'
+import type { ThemeProps } from '../../../_mixins'
+import type { FormValidationStatus } from '../../../form/src/public-types'
+import type { PopoverProps } from '../../../popover'
+import type { SelectBaseOption } from '../../../select/src/interface'
+import type { TagRef } from '../../../tag/src/Tag'
+import type {
+  RenderLabel,
+  RenderLabelImpl
+} from '../../select-menu/src/interface'
+import type { InternalSelectionTheme } from '../styles'
+import type { RenderTag } from './interface'
+import { getPadding } from 'seemly'
 import {
-  type CSSProperties,
-  Fragment,
-  type InputHTMLAttributes,
-  type PropType,
-  type VNode,
   computed,
   defineComponent,
+  Fragment,
   h,
   nextTick,
   onMounted,
@@ -14,30 +24,19 @@ import {
   watch,
   watchEffect
 } from 'vue'
-import { VOverflow, type VOverflowInst } from 'vueuc'
-import { getPadding } from 'seemly'
-import type {
-  RenderLabel,
-  RenderLabelImpl
-} from '../../select-menu/src/interface'
-import type { SelectBaseOption } from '../../../select/src/interface'
-import type { FormValidationStatus } from '../../../form/src/interface'
-import type { TagRef } from '../../../tag/src/Tag'
-import { NPopover, type PopoverProps } from '../../../popover'
-import { NTag } from '../../../tag'
+import { VOverflow } from 'vueuc'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../../_mixins'
-import type { ThemeProps } from '../../../_mixins'
 import {
-  Wrapper,
   createKey,
   getTitleAttribute,
   render,
-  useOnResize
+  useOnResize,
+  Wrapper
 } from '../../../_utils'
+import { NPopover } from '../../../popover'
+import { NTag } from '../../../tag'
 import Suffix from '../../suffix'
 import { internalSelectionLight } from '../styles'
-import type { InternalSelectionTheme } from '../styles'
-import type { RenderTag } from './interface'
 import style from './styles/index.cssr'
 
 export interface InternalSelectionInst {
@@ -152,16 +151,16 @@ export default defineComponent({
       return props.selectedOption
         ? props.renderTag
           ? props.renderTag({
-            option: props.selectedOption,
-            handleClose: () => {}
-          })
+              option: props.selectedOption,
+              handleClose: () => {}
+            })
           : props.renderLabel
             ? props.renderLabel(props.selectedOption as never, true)
             : render(
-              props.selectedOption[props.labelField],
-              props.selectedOption,
-              true
-            )
+                props.selectedOption[props.labelField],
+                props.selectedOption,
+                true
+              )
         : props.placeholder
     })
     const labelRef = computed(() => {
@@ -541,13 +540,13 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'internal-selection',
-        computed(() => {
-          return props.size[0]
-        }),
-        cssVarsRef,
-        props
-      )
+          'internal-selection',
+          computed(() => {
+            return props.size[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedTheme: themeRef,
@@ -903,9 +902,9 @@ export default defineComponent({
                 <div class={`${clsPrefix}-base-selection-overlay__wrapper`}>
                   {renderTag
                     ? renderTag({
-                      option: this.selectedOption!,
-                      handleClose: () => {}
-                    })
+                        option: this.selectedOption!,
+                        handleClose: () => {}
+                      })
                     : renderLabel
                       ? renderLabel(this.selectedOption!, true)
                       : render(this.label, this.selectedOption, true)}
@@ -942,9 +941,9 @@ export default defineComponent({
                 <div class={`${clsPrefix}-base-selection-input__content`}>
                   {renderTag
                     ? renderTag({
-                      option: this.selectedOption!,
-                      handleClose: () => {}
-                    })
+                        option: this.selectedOption!,
+                        handleClose: () => {}
+                      })
                     : renderLabel
                       ? renderLabel(this.selectedOption!, true)
                       : render(this.label, this.selectedOption, true)}

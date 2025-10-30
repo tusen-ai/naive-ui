@@ -1,7 +1,18 @@
+import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { InputInst, InputProps } from '../../input'
+import type { DynamicTagsTheme } from '../styles'
+import type {
+  DynamicTagsInputSlotProps,
+  DynamicTagsOption,
+  DynamicTagsTriggerSlotProps,
+  OnCreate,
+  OnUpdateValue,
+  OnUpdateValueImpl
+} from './interface'
+import { useMergedState } from 'vooks'
 import {
-  type CSSProperties,
-  type PropType,
-  type VNodeChild,
   computed,
   defineComponent,
   h,
@@ -10,15 +21,8 @@ import {
   toRef,
   watchEffect
 } from 'vue'
-import { useMergedState } from 'vooks'
-import commonProps from '../../tag/src/common-props'
-import { AddIcon } from '../../_internal/icons'
-import { NButton } from '../../button'
-import { NSpace } from '../../space'
-import type { InputInst, InputProps } from '../../input'
-import { NInput } from '../../input'
-import { NTag } from '../../tag'
 import { NBaseIcon } from '../../_internal'
+import { AddIcon } from '../../_internal/icons'
 import {
   useConfig,
   useFormItem,
@@ -26,17 +30,13 @@ import {
   useTheme,
   useThemeClass
 } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import { call, smallerSize, warnOnce } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import { NButton } from '../../button'
+import { NInput } from '../../input'
+import { NSpace } from '../../space'
+import { NTag } from '../../tag'
+import commonProps from '../../tag/src/common-props'
 import { dynamicTagsLight } from '../styles'
-import type { DynamicTagsTheme } from '../styles'
-import type {
-  DynamicTagsOption,
-  OnCreate,
-  OnUpdateValue,
-  OnUpdateValueImpl
-} from './interface'
 import style from './styles/index.cssr'
 
 export const dynamicTagsProps = {
@@ -77,9 +77,16 @@ export const dynamicTagsProps = {
 
 export type DynamicTagsProps = ExtractPublicPropTypes<typeof dynamicTagsProps>
 
+export interface DynamicTagsSlots {
+  input?: (props: DynamicTagsInputSlotProps) => VNode[]
+  trigger?: (props: DynamicTagsTriggerSlotProps) => VNode[]
+  default?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'DynamicTags',
   props: dynamicTagsProps,
+  slots: Object as SlotsType<DynamicTagsSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {

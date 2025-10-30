@@ -2,34 +2,29 @@
 # Basic
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      handleBack() {
-        message.info('[onBack]')
-      },
-      options: [
-        {
-          label: 'More episodes',
-          key: '1'
-        },
-        {
-          label: 'More episodes',
-          key: '2'
-        },
-        {
-          label: 'More episodes',
-          key: '3'
-        }
-      ]
-    }
+const message = useMessage()
+
+function handleBack() {
+  message.info('[onBack]')
+}
+
+const options = [
+  {
+    label: 'More episodes',
+    key: '1'
+  },
+  {
+    label: 'More episodes',
+    key: '2'
+  },
+  {
+    label: 'More episodes',
+    key: '3'
   }
-})
+]
 </script>
 
 <template>

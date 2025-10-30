@@ -1,7 +1,8 @@
-export { default as NAutoComplete, autoCompleteProps } from './src/AutoComplete'
-export type { AutoCompleteProps } from './src/AutoComplete'
+export { autoCompleteProps, default as NAutoComplete } from './src/AutoComplete'
+export type { AutoCompleteProps, AutoCompleteSlots } from './src/AutoComplete'
 export type {
-  AutoCompleteOption,
+  AutoCompleteDefaultSlotProps,
   AutoCompleteGroupOption,
-  AutoCompleteInst
+  AutoCompleteInst,
+  AutoCompleteOption
 } from './src/interface'

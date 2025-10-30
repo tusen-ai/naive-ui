@@ -1,44 +1,39 @@
-import {
-  type CSSProperties,
-  type PropType,
-  Transition,
-  computed,
-  defineComponent,
-  h,
-  nextTick,
-  ref,
-  toRef
-} from 'vue'
-import { type TreeNode, createTreeMate } from 'treemate'
-import {
-  type FollowerInst,
-  type FollowerPlacement,
-  VBinder,
-  VFollower,
-  VTarget
-} from 'vueuc'
-import { useIsMounted, useMergedState } from 'vooks'
-import type { FormValidationStatus } from '../../form/src/interface'
+import type { TreeNode } from 'treemate'
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { FollowerInst, FollowerPlacement } from 'vueuc'
+import type { InternalSelectMenuRef } from '../../_internal'
 import type { RenderLabel } from '../../_internal/select-menu/src/interface'
-import type { Size as InputSize } from '../../input/src/interface'
-import { NInput } from '../../input'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { FormValidationStatus } from '../../form/src/public-types'
 import type { InputInst } from '../../input'
+import type { Size as InputSize } from '../../input/src/interface'
 import type {
   SelectBaseOption,
   SelectGroupOption,
   SelectIgnoredOption
 } from '../../select/src/interface'
-import { NInternalSelectMenu } from '../../_internal'
-import type { InternalSelectMenuRef } from '../../_internal'
-import { call, useAdjustedTo, warn } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import { mentionLight } from '../styles'
 import type { MentionTheme } from '../styles'
-import { getRelativePosition } from './utils'
 import type { MentionOption } from './interface'
+import { createTreeMate } from 'treemate'
+import { useIsMounted, useMergedState } from 'vooks'
+import {
+  computed,
+  defineComponent,
+  h,
+  nextTick,
+  ref,
+  toRef,
+  Transition
+} from 'vue'
+import { VBinder, VFollower, VTarget } from 'vueuc'
+import { NInternalSelectMenu } from '../../_internal'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import { call, useAdjustedTo, warn } from '../../_utils'
+import { NInput } from '../../input'
+import { mentionLight } from '../styles'
 import style from './styles/index.cssr'
+import { getRelativePosition } from './utils'
 
 export const mentionProps = {
   ...(useTheme.props as ThemeProps<MentionTheme>),
@@ -131,9 +126,15 @@ export const mentionProps = {
 
 export type MentionProps = ExtractPublicPropTypes<typeof mentionProps>
 
+export interface MentionSlots {
+  default?: () => VNode[]
+  empty?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Mention',
   props: mentionProps,
+  slots: Object as SlotsType<MentionSlots>,
   setup(props) {
     const {
       namespaceRef,
@@ -396,8 +397,8 @@ export default defineComponent({
       props.onSelect?.(tmNode.rawNode as MentionOption, cachedPrefix)
       const nextSelectionEnd
         = cachedPartialPatternStart
-        + nextMiddlePart.length
-        + (alreadySeparated ? 1 : 0)
+          + nextMiddlePart.length
+          + (alreadySeparated ? 1 : 0)
       void nextTick().then(() => {
         // input value is updated
         inputEl.selectionStart = nextSelectionEnd

@@ -1,9 +1,5 @@
-import { type ComputedRef, computed, ref } from 'vue'
-import { useMemo, useMergedState } from 'vooks'
-import { createTreeMate } from 'treemate'
+import type { ComputedRef } from 'vue'
 import type { PaginationProps } from '../../pagination/src/Pagination'
-import { call, warn } from '../../_utils'
-import { getDefaultPageSize } from '../../pagination/src/utils'
 import type {
   ColumnKey,
   DataTableSetupProps,
@@ -17,8 +13,13 @@ import type {
   TableSelectionColumn,
   TmNode
 } from './interface'
-import { createShallowClonedObject } from './utils'
+import { createTreeMate } from 'treemate'
+import { useMemo, useMergedState } from 'vooks'
+import { computed, ref } from 'vue'
+import { call, warn } from '../../_utils'
+import { getDefaultPageSize } from '../../pagination/src/utils'
 import { useSorter } from './use-sorter'
+import { createShallowClonedObject } from './utils'
 
 // useTableData combines filter, sorter and pagination
 export function useTableData(
@@ -54,7 +55,7 @@ export function useTableData(
     return createTreeMate<InternalRowData>(props.data, {
       ignoreEmptyChildren: true,
       getKey: props.rowKey,
-      getChildren: rowData => rowData[childrenKey] as any,
+      getChildren: rowData => rowData[childrenKey],
       getDisabled: (rowData) => {
         if (selectionColumnRef.value?.disabled?.(rowData)) {
           return true
@@ -137,48 +138,48 @@ export function useTableData(
     })
     return data
       ? data.filter((tmNode) => {
-        const { rawNode: row } = tmNode
-        // traverse all filters
-        for (const [columnKey, column] of columnEntries) {
-          let activeFilterOptionValues = mergedFilterState[columnKey]
-          if (activeFilterOptionValues == null)
-            continue
-          if (!Array.isArray(activeFilterOptionValues)) {
-            activeFilterOptionValues = [activeFilterOptionValues]
-          }
-          if (!activeFilterOptionValues.length)
-            continue
-          // When async, filter won't be set, so data won't be filtered
-          const filter
+          const { rawNode: row } = tmNode
+          // traverse all filters
+          for (const [columnKey, column] of columnEntries) {
+            let activeFilterOptionValues = mergedFilterState[columnKey]
+            if (activeFilterOptionValues == null)
+              continue
+            if (!Array.isArray(activeFilterOptionValues)) {
+              activeFilterOptionValues = [activeFilterOptionValues]
+            }
+            if (!activeFilterOptionValues.length)
+              continue
+            // When async, filter won't be set, so data won't be filtered
+            const filter
               = column.filter === 'default'
                 ? createDefaultFilter(columnKey)
                 : column.filter
-          if (column && typeof filter === 'function') {
-            if (column.filterMode === 'and') {
-              if (
-                activeFilterOptionValues.some(
-                  filterOptionValue => !filter(filterOptionValue, row)
-                )
-              ) {
-                return false
-              }
-            }
-            else {
-              if (
-                activeFilterOptionValues.some(filterOptionValue =>
-                  filter(filterOptionValue, row)
-                )
-              ) {
-                continue
+            if (column && typeof filter === 'function') {
+              if (column.filterMode === 'and') {
+                if (
+                  activeFilterOptionValues.some(
+                    filterOptionValue => !filter(filterOptionValue, row)
+                  )
+                ) {
+                  return false
+                }
               }
               else {
-                return false
+                if (
+                  activeFilterOptionValues.some(filterOptionValue =>
+                    filter(filterOptionValue, row)
+                  )
+                ) {
+                  continue
+                }
+                else {
+                  return false
+                }
               }
             }
           }
-        }
-        return true
-      })
+          return true
+        })
       : []
   })
 
@@ -241,12 +242,12 @@ export function useTableData(
     return props.remote
       ? page
       : Math.max(
-        1,
-        Math.min(
-          Math.ceil(filteredDataRef.value.length / mergedPageSizeRef.value),
-          page
+          1,
+          Math.min(
+            Math.ceil(filteredDataRef.value.length / mergedPageSizeRef.value),
+            page
+          )
         )
-      )
   })
 
   const mergedPageCountRef = computed(() => {

@@ -1,17 +1,12 @@
-import {
-  type CSSProperties,
-  type PropType,
-  computed,
-  defineComponent,
-  h
-} from 'vue'
-import { useCompitable } from 'vooks'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import type { CSSProperties, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import { createKey, warn } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { typographyLight } from '../styles'
 import type { TypographyTheme } from '../styles'
+import { useCompitable } from 'vooks'
+import { computed, defineComponent, h } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { createKey, warn } from '../../_utils'
+import { typographyLight } from '../styles'
 import style from './styles/text.cssr'
 
 export const textProps = {
@@ -86,11 +81,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'text',
-        computed(() => `${props.type[0]}${props.depth || ''}`),
-        cssVarsRef,
-        props
-      )
+          'text',
+          computed(() => `${props.type[0]}${props.depth || ''}`),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,

@@ -1,10 +1,11 @@
+import type { SlotsType, VNode } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { StatisticTheme } from '../styles'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import { resolveWrappedSlot } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { statisticLight } from '../styles'
-import type { StatisticTheme } from '../styles'
 import style from './styles/index.cssr'
 
 export const statisticProps = {
@@ -16,9 +17,17 @@ export const statisticProps = {
 
 export type StatisticProps = ExtractPublicPropTypes<typeof statisticProps>
 
+export interface StatisticSlots {
+  default?: () => VNode[]
+  label?: () => VNode[]
+  prefix?: () => VNode[]
+  suffix?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Statistic',
   props: statisticProps,
+  slots: Object as SlotsType<StatisticSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
       = useConfig(props)

@@ -4,24 +4,18 @@
 Sometimes you may want to customize `action` and `content` .
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useDialog } from 'naive-ui'
 
-export default defineComponent({
-  setup() {
-    const dialog = useDialog()
-    return {
-      handleConfirm() {
-        dialog.warning({
-          title: 'Use Render Function',
-          content: () => 'Content',
-          action: () => 'Action'
-        })
-      }
-    }
-  }
-})
+const dialog = useDialog()
+
+function handleConfirm() {
+  dialog.warning({
+    title: 'Use Render Function',
+    content: () => 'Content',
+    action: () => 'Action'
+  })
+}
 </script>
 
 <template>

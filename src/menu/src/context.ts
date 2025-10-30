@@ -1,9 +1,9 @@
-import { createInjectionKey } from '../../_utils'
 import type {
   MenuInjection,
   MenuOptionGroupInjection,
   SubmenuInjection
 } from './use-menu-child'
+import { createInjectionKey } from '../../_utils'
 
 export const menuInjectionKey = createInjectionKey<MenuInjection>('n-menu')
 

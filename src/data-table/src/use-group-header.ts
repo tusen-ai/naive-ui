@@ -1,5 +1,4 @@
-import { type CSSProperties, type ComputedRef, computed } from 'vue'
-import { formatLength } from '../../_utils'
+import type { ComputedRef, CSSProperties } from 'vue'
 import type {
   ColumnKey,
   DataTableSetupProps,
@@ -9,6 +8,8 @@ import type {
   TableExpandColumn,
   TableSelectionColumn
 } from './interface'
+import { computed } from 'vue'
+import { formatLength } from '../../_utils'
 import { createCustomWidthStyle, getColKey } from './utils'
 
 export interface RowItem {
@@ -34,13 +35,13 @@ function getRowsAndCols(
   columns: TableColumns,
   getResizableWidth: (key: ColumnKey) => number | undefined
 ): {
-    hasEllipsis: boolean
-    rows: RowItem[][]
-    cols: ColItem[]
-    dataRelatedCols: Array<
+  hasEllipsis: boolean
+  rows: RowItem[][]
+  cols: ColItem[]
+  dataRelatedCols: Array<
     TableSelectionColumn | TableBaseColumn | TableExpandColumn
-    >
-  } {
+  >
+} {
   const rows: RowItem[][] = []
   const cols: ColItem[] = []
   const dataRelatedCols: Array<
@@ -50,12 +51,13 @@ function getRowsAndCols(
   let maxDepth = -1
   let totalRowSpan = 0
   let hasEllipsis = false
+  let currentLeafIndex = 0
   function ensureMaxDepth(columns: TableColumns, currentDepth: number): void {
     if (currentDepth > maxDepth) {
       rows[currentDepth] = []
       maxDepth = currentDepth
     }
-    columns.forEach((column, index) => {
+    columns.forEach((column) => {
       if ('children' in column) {
         ensureMaxDepth(column.children, currentDepth + 1)
       }
@@ -68,7 +70,7 @@ function getRowsAndCols(
             key !== undefined ? formatLength(getResizableWidth(key)) : undefined
           ),
           column,
-          index,
+          index: currentLeafIndex++,
           // The width property is only applied to horizontally virtual scroll table
           width: column.width === undefined ? 128 : Number(column.width)
         })
@@ -81,7 +83,7 @@ function getRowsAndCols(
     })
   }
   ensureMaxDepth(columns, 0)
-  let currentLeafIndex = 0
+  currentLeafIndex = 0
   function ensureColLayout(columns: TableColumns, currentDepth: number): void {
     let hideUntilIndex = 0
     columns.forEach((column) => {
@@ -146,13 +148,13 @@ export function useGroupHeader(
   props: DataTableSetupProps,
   getResizableWidth: (key: ColumnKey) => number | undefined
 ): {
-    rowsRef: ComputedRef<RowItem[][]>
-    colsRef: ComputedRef<ColItem[]>
-    hasEllipsisRef: ComputedRef<boolean>
-    dataRelatedColsRef: ComputedRef<
-      Array<TableSelectionColumn | TableBaseColumn | TableExpandColumn>
-    >
-  } {
+  rowsRef: ComputedRef<RowItem[][]>
+  colsRef: ComputedRef<ColItem[]>
+  hasEllipsisRef: ComputedRef<boolean>
+  dataRelatedColsRef: ComputedRef<
+    Array<TableSelectionColumn | TableBaseColumn | TableExpandColumn>
+  >
+} {
   const rowsAndCols = computed(() =>
     getRowsAndCols(props.columns, getResizableWidth)
   )

@@ -19,9 +19,13 @@ describe('n-rate', () => {
     const wrapper = mount(NRate)
 
     await wrapper.setProps({ value: 3, count: 10 })
-    expect(wrapper.findAll('.n-rate__item--active').length).toBe(3)
+    vi.waitFor(() => {
+      expect(wrapper.findAll('.n-rate__item--active').length).toBe(3)
+    })
     await wrapper.setProps({ value: 10 })
-    expect(wrapper.findAll('.n-rate__item--active').length).toBe(10)
+    vi.waitFor(() => {
+      expect(wrapper.findAll('.n-rate__item--active').length).toBe(10)
+    })
 
     wrapper.unmount()
   })
@@ -62,8 +66,8 @@ describe('n-rate', () => {
   })
 
   it('should work with `onUpdateValue` prop', async () => {
-    const onUpdateValue = jest.fn()
-    const onUpdateValue2 = jest.fn()
+    const onUpdateValue = vi.fn()
+    const onUpdateValue2 = vi.fn()
     const wrapper = mount(NRate)
 
     const testNumber = 2
@@ -105,15 +109,29 @@ describe('n-rate', () => {
   })
 
   it('should work with `allowHalf` prop', async () => {
-    const onUpdateValue = jest.fn()
-    const wrapper = mount(NRate)
-    await wrapper.setProps({ allowHalf: true })
+    const onUpdateValue = vi.fn()
+    const wrapper = mount(NRate, {
+      props: {
+        allowHalf: true,
+        onUpdateValue
+      }
+    })
 
-    const testNumber = 2
+    const rateIndex = 2
+    const offsetWidth = 20
+    const rateItems = wrapper.findAll('.n-rate__item')
+    expect(rateItems.length).toBeGreaterThan(rateIndex)
 
-    await wrapper.setProps({ onUpdateValue })
-    await wrapper.findAll('.n-rate__half')[testNumber].trigger('click')
-    expect(onUpdateValue).toHaveBeenCalledWith(testNumber + 0.5)
+    const targetRate = rateItems[rateIndex]
+    Object.defineProperty(targetRate.element, 'offsetWidth', {
+      value: offsetWidth,
+      configurable: true
+    })
+
+    await targetRate.trigger('click', { offsetX: offsetWidth / 3 })
+    expect(onUpdateValue).toHaveBeenNthCalledWith(1, rateIndex + 0.5)
+    expect(onUpdateValue).toHaveBeenCalledTimes(1)
+    expect(wrapper.findAll('.n-rate__item--active').length).toBe(2)
 
     wrapper.unmount()
   })
@@ -130,8 +148,9 @@ describe('n-rate', () => {
     )
 
     await wrapper.findAll('.n-rate__item')[testNumber].trigger('click')
-    expect(wrapper.findAll('.n-rate__item--active').length).toEqual(0)
-
+    vi.waitFor(() => {
+      expect(wrapper.findAll('.n-rate__item--active').length).toEqual(0)
+    })
     wrapper.unmount()
   })
 })

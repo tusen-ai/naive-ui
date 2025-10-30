@@ -1,36 +1,26 @@
-import {
-  type CSSProperties,
-  type PropType,
-  type VNode,
-  type VNodeChild,
-  computed,
-  defineComponent,
-  h,
-  provide,
-  ref,
-  toRef
-} from 'vue'
-import { useMergedState } from 'vooks'
-import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import type { CSSProperties, PropType, VNode, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import { call, createKey, flatten, getSlot, warn } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { radioLight } from '../styles'
 import type { RadioTheme } from '../styles'
-import { useRtl } from '../../_mixins/use-rtl'
-import type { RadioBaseProps } from './use-radio'
-import { radioGroupInjectionKey } from './use-radio'
-import style from './styles/radio-group.cssr'
 import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
+import type { RadioBaseProps } from './use-radio'
+import { useMergedState } from 'vooks'
+import { computed, defineComponent, h, provide, ref, toRef } from 'vue'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
+import { call, createKey, flatten, getSlot, warn } from '../../_utils'
+import { radioLight } from '../styles'
+import style from './styles/radio-group.cssr'
+import { radioGroupInjectionKey } from './use-radio'
 
 function mapSlot(
   defaultSlot: VNode[],
   value: string | number | boolean | null,
   clsPrefix: string
 ): {
-    children: VNodeChild[]
-    isButtonGroup: boolean
-  } {
+  children: VNodeChild[]
+  isButtonGroup: boolean
+} {
   const children: VNode[] = []
   let isButtonGroup = false
   for (let i = 0; i < defaultSlot.length; ++i) {
@@ -228,11 +218,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'radio-group',
-        computed(() => mergedSizeRef.value[0]),
-        cssVarsRef,
-        props
-      )
+          'radio-group',
+          computed(() => mergedSizeRef.value[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       selfElRef,

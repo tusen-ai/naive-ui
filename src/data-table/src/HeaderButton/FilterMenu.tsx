@@ -1,18 +1,19 @@
-import { type PropType, computed, defineComponent, h, inject, ref } from 'vue'
+import type { PropType } from 'vue'
+import type {
+  FilterOption,
+  FilterOptionValue,
+  OnFilterMenuChange,
+  OnFilterMenuChangeImpl,
+  TableBaseColumn
+} from '../interface'
+import { computed, defineComponent, h, inject, ref } from 'vue'
+import { NScrollbar } from '../../../_internal'
+import { useConfig, useRtl } from '../../../_mixins'
+import { NButton } from '../../../button'
 import { NCheckbox, NCheckboxGroup } from '../../../checkbox'
 import { NRadio, NRadioGroup } from '../../../radio'
-import { NButton } from '../../../button'
-import { NScrollbar } from '../../../_internal'
+import { dataTableInjectionKey } from '../interface'
 import { shouldUseArrayInSingleMode } from '../utils'
-import {
-  type FilterOption,
-  type FilterOptionValue,
-  type OnFilterMenuChange,
-  type OnFilterMenuChangeImpl,
-  type TableBaseColumn,
-  dataTableInjectionKey
-} from '../interface'
-import { useConfig, useRtl } from '../../../_mixins'
 
 export default defineComponent({
   name: 'DataTableFilterMenu',
@@ -80,7 +81,7 @@ export default defineComponent({
           (Array.isArray(temporalValue)
             && temporalValue.length
             && temporalValue[0])
-            || null
+          || null
         )
       }
       if (!Array.isArray(temporalValue))

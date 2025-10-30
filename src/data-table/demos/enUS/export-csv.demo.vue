@@ -1,11 +1,20 @@
 <markdown>
 # Export CSV
+
+You can use `downloadCsv` method to export data as CSV file.
+
+If default CSV generation logic can't fit your needs, for example, `title` uses render function, or you need to adjust data format for each cell, you can customize the exported header and cell data with `get-csv-header` and `get-csv-cell` props.
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import type { DataTableColumns, DataTableInst } from 'naive-ui'
-import type { RowData } from '../../src/interface'
+<script lang="ts" setup>
+import type {
+  DataTableColumns,
+  DataTableGetCsvCell,
+  DataTableGetCsvHeader,
+  DataTableInst,
+  DataTableRowData
+} from 'naive-ui'
+import { h, ref } from 'vue'
 
 interface Song {
   key: number
@@ -14,14 +23,17 @@ interface Song {
   address: string
 }
 
-const columns: DataTableColumns<RowData> = [
+const columns: DataTableColumns<DataTableRowData> = [
   {
     title: 'Name',
     key: 'name',
-    sorter: 'default'
+    sorter: 'default',
+    render(rowData) {
+      return h('span', { style: { color: 'blue' } }, rowData.name)
+    }
   },
   {
-    title: 'Age',
+    title: () => h('span', { style: { color: 'red' } }, 'Age'),
     key: 'age',
     sorter: (row1: object, row2: object) =>
       (row1 as Song).age - (row2 as Song).age
@@ -72,29 +84,36 @@ const data: Song[] = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    const tableRef = ref<DataTableInst>()
+const tableRef = ref<DataTableInst>()
 
-    const downloadCsv = () =>
-      tableRef.value?.downloadCsv({ fileName: 'data-table' })
+function downloadCsv() {
+  return tableRef.value?.downloadCsv({ fileName: 'data-table' })
+}
 
-    const exportSorterAndFilterCsv = () =>
-      tableRef.value?.downloadCsv({
-        fileName: 'sorter-filter',
-        keepOriginalData: false
-      })
+function exportSorterAndFilterCsv() {
+  return tableRef.value?.downloadCsv({
+    fileName: 'sorter-filter',
+    keepOriginalData: false
+  })
+}
 
-    return {
-      data,
-      tableRef,
-      downloadCsv,
-      exportSorterAndFilterCsv,
-      columns,
-      pagination: false as const
-    }
+const getCsvCell: DataTableGetCsvCell = (value, _, column) => {
+  if (column.key === 'age') {
+    return `${value} years old`
   }
-})
+  return value
+}
+
+const getCsvHeader: DataTableGetCsvHeader = (col) => {
+  if (typeof col.title === 'function') {
+    return col.key === 'age' ? 'Age' : 'Unknown'
+  }
+  else {
+    return col.title || 'Unknown'
+  }
+}
+
+const pagination = false as const
 </script>
 
 <template>
@@ -113,6 +132,8 @@ export default defineComponent({
       :data="data"
       :pagination="pagination"
       :bordered="false"
+      :get-csv-cell="getCsvCell"
+      :get-csv-header="getCsvHeader"
     />
   </n-space>
 </template>

@@ -1,19 +1,5 @@
-import {
-  type ComputedRef,
-  type ExtractPropTypes,
-  type PropType,
-  computed,
-  defineComponent,
-  h,
-  inject,
-  markRaw,
-  provide
-} from 'vue'
-import { useMemo } from 'vooks'
-import { merge } from 'lodash-es'
-import { hash } from 'css-render'
-import { warn } from '../../_utils'
-import { type Hljs, defaultClsPrefix } from '../../_mixins'
+import type { ComputedRef, ExtractPropTypes, PropType } from 'vue'
+import type { Hljs } from '../../_mixins'
 import type { NDateLocale, NLocale } from '../../locales'
 import type {
   GlobalComponentConfig,
@@ -26,8 +12,14 @@ import type {
   RtlEnabledState,
   RtlProp
 } from './internal-interface'
-import { configProviderInjectionKey } from './context'
 import type { Katex } from './katex'
+import { hash } from 'css-render'
+import { merge } from 'lodash-es'
+import { useMemo } from 'vooks'
+import { computed, defineComponent, h, inject, markRaw, provide } from 'vue'
+import { defaultClsPrefix } from '../../_mixins'
+import { warn } from '../../_utils'
+import { configProviderInjectionKey } from './context'
 
 export const configProviderProps = {
   abstract: Boolean,
@@ -241,12 +233,12 @@ export default defineComponent({
   render() {
     return !this.abstract
       ? h(
-        this.as || this.tag,
-        {
-          class: `${this.mergedClsPrefix || defaultClsPrefix}-config-provider`
-        },
-        this.$slots.default?.()
-      )
+          this.as || this.tag,
+          {
+            class: `${this.mergedClsPrefix || defaultClsPrefix}-config-provider`
+          },
+          this.$slots.default?.()
+        )
       : this.$slots.default?.()
   }
 })

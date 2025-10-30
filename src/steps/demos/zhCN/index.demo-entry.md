@@ -10,6 +10,7 @@
 basic.vue
 size.vue
 vertical.vue
+content-placement.vue
 content.vue
 custom-icon.vue
 click.vue
@@ -23,6 +24,7 @@ rtl-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| content-placement | `'right' \| 'bottom'` | `right` | 步骤条内容位置，仅在横向模式下生效 | NEXT_VERSION |
 | current | `number` | `undefined` | 当前选中在第几步 |  |
 | size | `'small' \| 'medium'` | `'medium'` | 步骤条大小 |  |
 | status | `'process' \| 'finish' \| 'error' \| 'wait'` | `'process'` | 步骤条状态 |  |

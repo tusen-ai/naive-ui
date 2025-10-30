@@ -1,12 +1,14 @@
-import { type CSSProperties, computed, defineComponent, h } from 'vue'
-import { useRtl } from '../../_mixins/use-rtl'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import type { CSSProperties } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import { createKey, resolveWrappedSlot } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { type RadioTheme, radioLight } from '../styles'
-import { radioBaseProps, setup } from './use-radio'
+import type { RadioTheme } from '../styles'
+import { computed, defineComponent, h } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
+import { createKey, resolveWrappedSlot } from '../../_utils'
+import { radioLight } from '../styles'
 import style from './styles/radio.cssr'
+import { radioBaseProps, setup } from './use-radio'
 
 export const radioProps = {
   ...(useTheme.props as ThemeProps<RadioTheme>),
@@ -80,11 +82,11 @@ export default defineComponent({
     const rtlEnabledRef = useRtl('Radio', mergedRtlRef, mergedClsPrefixRef)
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'radio',
-        computed(() => radio.mergedSize.value[0]),
-        cssVarsRef,
-        props
-      )
+          'radio',
+          computed(() => radio.mergedSize.value[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
     return Object.assign(radio, {
       rtlEnabled: rtlEnabledRef,
@@ -108,18 +110,6 @@ export default defineComponent({
         ]}
         style={this.cssVars as CSSProperties}
       >
-        <input
-          ref="inputRef"
-          type="radio"
-          class={`${mergedClsPrefix}-radio-input`}
-          value={this.value}
-          name={this.mergedName}
-          checked={this.renderSafeChecked}
-          disabled={this.mergedDisabled}
-          onChange={this.handleRadioInputChange}
-          onFocus={this.handleRadioInputFocus}
-          onBlur={this.handleRadioInputBlur}
-        />
         <div class={`${mergedClsPrefix}-radio__dot-wrapper`}>
           &nbsp;
           <div
@@ -127,6 +117,18 @@ export default defineComponent({
               `${mergedClsPrefix}-radio__dot`,
               this.renderSafeChecked && `${mergedClsPrefix}-radio__dot--checked`
             ]}
+          />
+          <input
+            ref="inputRef"
+            type="radio"
+            class={`${mergedClsPrefix}-radio-input`}
+            value={this.value}
+            name={this.mergedName}
+            checked={this.renderSafeChecked}
+            disabled={this.mergedDisabled}
+            onChange={this.handleRadioInputChange}
+            onFocus={this.handleRadioInputFocus}
+            onBlur={this.handleRadioInputBlur}
           />
         </div>
         {resolveWrappedSlot($slots.default, (children) => {

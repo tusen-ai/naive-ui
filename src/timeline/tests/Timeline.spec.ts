@@ -1,5 +1,5 @@
-import { h } from 'vue'
 import { mount } from '@vue/test-utils'
+import { h } from 'vue'
 import { NTimeline, NTimelineItem } from '../index'
 
 describe('n-timeline', () => {

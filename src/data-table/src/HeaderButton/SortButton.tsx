@@ -1,8 +1,10 @@
-import { type PropType, computed, defineComponent, h, inject } from 'vue'
-import { ArrowDownIcon } from '../../../_internal/icons'
+import type { PropType } from 'vue'
+import type { TableBaseColumn } from '../interface'
+import { computed, defineComponent, h, inject } from 'vue'
 import { NBaseIcon } from '../../../_internal'
-import { type TableBaseColumn, dataTableInjectionKey } from '../interface'
+import { ArrowDownIcon } from '../../../_internal/icons'
 import { useConfig } from '../../../_mixins'
+import { dataTableInjectionKey } from '../interface'
 import RenderSorter from './RenderSorter'
 
 export default defineComponent({

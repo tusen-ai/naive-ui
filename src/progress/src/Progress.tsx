@@ -1,20 +1,16 @@
-import {
-  type CSSProperties,
-  type PropType,
-  computed,
-  defineComponent,
-  h
-} from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import type { CSSProperties, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import { type ExtractPublicPropTypes, createKey } from '../../_utils'
-import { progressLight } from '../styles'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ProgressTheme } from '../styles'
-import style from './styles/index.cssr'
 import type { ProgressGradient, ProgressStatus } from './public-types'
-import Line from './Line'
+import { computed, defineComponent, h } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { createKey } from '../../_utils'
+import { progressLight } from '../styles'
 import Circle from './Circle'
+import Line from './Line'
 import MultipleCircle from './MultipleCircle'
+import style from './styles/index.cssr'
 
 export const progressProps = {
   ...(useTheme.props as ThemeProps<ProgressTheme>),
@@ -140,11 +136,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'progress',
-        computed(() => props.status[0]),
-        cssVarsRef,
-        props
-      )
+          'progress',
+          computed(() => props.status[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,

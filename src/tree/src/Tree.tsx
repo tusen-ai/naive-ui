@@ -1,53 +1,11 @@
-import {
-  type CSSProperties,
-  type PropType,
-  type VNode,
-  type VNodeChild,
-  computed,
-  defineComponent,
-  h,
-  inject,
-  nextTick,
-  provide,
-  ref,
-  toRef,
-  watch,
-  watchEffect
-} from 'vue'
-import {
-  type CheckStrategy,
-  type TreeMateOptions,
-  createIndexGetter,
-  createTreeMate,
-  flatten
-} from 'treemate'
-import { useMergedState } from 'vooks'
-import {
-  VVirtualList,
-  type VirtualListInst,
-  type VirtualListScrollToOptions
-} from 'vueuc'
-import { depx, getPadding, pxfy } from 'seemly'
-import { treeSelectInjectionKey } from '../../tree-select/src/interface'
-import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import { call, createDataKey, resolveSlot, warn, warnOnce } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { NxScrollbar } from '../../_internal'
+import type { CheckStrategy, TreeMateOptions } from 'treemate'
+import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type { VirtualListInst, VirtualListScrollToOptions } from 'vueuc'
 import type { ScrollbarInst } from '../../_internal'
-import { treeLight } from '../styles'
-import type { TreeTheme } from '../styles'
-import { NEmpty } from '../../empty'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { ScrollbarProps } from '../../scrollbar/src/Scrollbar'
-import NTreeNode from './TreeNode'
-import {
-  emptyImage,
-  filterTree,
-  isNodeDisabled,
-  keysWithFilter,
-  useMergedCheckStrategy
-} from './utils'
-import { useKeyboard } from './keyboard'
+import type { TreeTheme } from '../styles'
 import type {
   AllowDrop,
   CheckOnClick,
@@ -72,10 +30,41 @@ import type {
   TreeOptions,
   TreeOverrideNodeClickBehavior
 } from './interface'
-import { treeInjectionKey } from './interface'
-import MotionWrapper from './MotionWrapper'
+import { depx, getPadding, pxfy } from 'seemly'
+import { createIndexGetter, createTreeMate, flatten } from 'treemate'
+import { useMergedState } from 'vooks'
+import {
+  computed,
+  defineComponent,
+  h,
+  inject,
+  nextTick,
+  provide,
+  ref,
+  toRef,
+  watch,
+  watchEffect
+} from 'vue'
+import { VVirtualList } from 'vueuc'
+import { NxScrollbar } from '../../_internal'
+import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
+import { call, createDataKey, resolveSlot, warn, warnOnce } from '../../_utils'
+import { NEmpty } from '../../empty'
+import { treeSelectInjectionKey } from '../../tree-select/src/interface'
+import { treeLight } from '../styles'
 import { defaultAllowDrop } from './dnd'
+import { treeInjectionKey } from './interface'
+import { useKeyboard } from './keyboard'
+import MotionWrapper from './MotionWrapper'
 import style from './styles/index.cssr'
+import NTreeNode from './TreeNode'
+import {
+  emptyImage,
+  filterTree,
+  isNodeDisabled,
+  keysWithFilter,
+  useMergedCheckStrategy
+} from './utils'
 
 export function createTreeMateOptions<T>(
   keyField: string,
@@ -85,9 +74,9 @@ export function createTreeMateOptions<T>(
 ): TreeMateOptions<T, T, T> {
   const settledGetChildren: GetChildren
     = getChildren
-    || ((node: T) => {
-      return (node as any)[childrenField]
-    })
+      || ((node: T) => {
+        return (node as any)[childrenField]
+      })
   return {
     getIsGroup() {
       return false
@@ -194,6 +183,10 @@ export const treeSharedProps = {
     type: Array as PropType<Key[]>,
     default: () => []
   },
+  indent: {
+    type: Number,
+    default: 24
+  },
   indeterminateKeys: Array as PropType<Key[]>,
   renderSwitcherIcon: Function as PropType<RenderSwitcherIcon>,
   onUpdateIndeterminateKeys: [Function, Array] as PropType<
@@ -261,10 +254,6 @@ export const treeProps = {
     default: true
   },
   scrollbarProps: Object as PropType<ScrollbarProps>,
-  indent: {
-    type: Number,
-    default: 24
-  },
   allowDrop: {
     type: Function as PropType<AllowDrop>,
     default: defaultAllowDrop
@@ -273,6 +262,7 @@ export const treeProps = {
     type: Boolean,
     default: true
   },
+  ellipsis: Boolean,
   checkboxPlacement: {
     type: String as PropType<'left' | 'right'>,
     default: 'left'
@@ -348,9 +338,15 @@ export const treeProps = {
 
 export type TreeProps = ExtractPublicPropTypes<typeof treeProps>
 
+export interface TreeSlots {
+  default?: () => VNode[]
+  empty?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Tree',
   props: treeProps,
+  slots: Object as SlotsType<TreeSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {
@@ -446,18 +442,18 @@ export default defineComponent({
     const dataTreeMateRef = props.internalTreeSelect
       ? treeSelectInjection!.dataTreeMate
       : computed(() =>
-        props.showIrrelevantNodes
-          ? displayTreeMateRef.value
-          : createTreeMate(
-            props.data,
-            createTreeMateOptions(
-              props.keyField,
-              props.childrenField,
-              props.disabledField,
-              props.getChildren
-            )
-          )
-      )
+          props.showIrrelevantNodes
+            ? displayTreeMateRef.value
+            : createTreeMate(
+                props.data,
+                createTreeMateOptions(
+                  props.keyField,
+                  props.childrenField,
+                  props.disabledField,
+                  props.getChildren
+                )
+              )
+        )
     const { watchProps } = props
     const uncontrolledCheckedKeysRef = ref<Key[]>([])
     if (watchProps?.includes('defaultCheckedKeys')) {
@@ -1741,6 +1737,7 @@ export default defineComponent({
       blockLine,
       draggable,
       disabled,
+      ellipsis,
       internalFocusable,
       checkable,
       handleKeydown,
@@ -1755,7 +1752,8 @@ export default defineComponent({
       rtlEnabled && `${mergedClsPrefix}-tree--rtl`,
       checkable && `${mergedClsPrefix}-tree--checkable`,
       (blockLine || blockNode) && `${mergedClsPrefix}-tree--block-node`,
-      blockLine && `${mergedClsPrefix}-tree--block-line`
+      blockLine && `${mergedClsPrefix}-tree--block-line`,
+      ellipsis && `${mergedClsPrefix}-tree--ellipsis`
     ]
     const createNode = (tmNode: TmNode | MotionData): VNode => {
       return '__motion' in tmNode ? (
@@ -1874,12 +1872,12 @@ export default defineComponent({
         >
           {!fNodes.length
             ? resolveSlot(this.$slots.empty, () => [
-              <NEmpty
-                class={`${mergedClsPrefix}-tree__empty`}
-                theme={this.mergedTheme.peers.Empty}
-                themeOverrides={this.mergedTheme.peerOverrides.Empty}
-              />
-            ])
+                <NEmpty
+                  class={`${mergedClsPrefix}-tree__empty`}
+                  theme={this.mergedTheme.peers.Empty}
+                  themeOverrides={this.mergedTheme.peerOverrides.Empty}
+                />
+              ])
             : fNodes.map(createNode)}
         </div>
       )

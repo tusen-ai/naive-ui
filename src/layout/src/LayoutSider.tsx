@@ -1,32 +1,20 @@
-import {
-  type CSSProperties,
-  type PropType,
-  computed,
-  defineComponent,
-  h,
-  inject,
-  provide,
-  ref,
-  toRef
-} from 'vue'
-import { useMergedState } from 'vooks'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import { call, formatLength, useReactivated, warn } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { NScrollbar } from '../../_internal'
+import type { CSSProperties, PropType } from 'vue'
 import type { ScrollbarInst, ScrollbarProps } from '../../_internal'
-import { layoutLight } from '../styles'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { LayoutTheme } from '../styles'
-import style from './styles/layout-sider.cssr'
-import ToggleButton from './ToggleButton'
-import ToggleBar from './ToggleBar'
-import {
-  type LayoutSiderInst,
-  layoutSiderInjectionKey,
-  positionProp
-} from './interface'
+import type { LayoutSiderInst } from './interface'
+import { useMergedState } from 'vooks'
+import { computed, defineComponent, h, inject, provide, ref, toRef } from 'vue'
+import { NScrollbar } from '../../_internal'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { call, formatLength, useReactivated, warn } from '../../_utils'
+import { layoutLight } from '../styles'
+import { layoutSiderInjectionKey, positionProp } from './interface'
 import { layoutInjectionKey } from './Layout'
+import style from './styles/layout-sider.cssr'
+import ToggleBar from './ToggleBar'
+import ToggleButton from './ToggleButton'
 
 export const layoutSiderProps = {
   position: positionProp,
@@ -263,11 +251,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'layout-sider',
-        computed(() => (props.inverted ? 'a' : 'b')),
-        cssVarsRef,
-        props
-      )
+          'layout-sider',
+          computed(() => (props.inverted ? 'a' : 'b')),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       scrollableElRef,

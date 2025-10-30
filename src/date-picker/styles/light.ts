@@ -1,11 +1,11 @@
-import { changeColor } from 'seemly'
-import { inputLight } from '../../input/styles'
-import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
-import { buttonLight } from '../../button/styles'
-import { timePickerLight } from '../../time-picker/styles'
+import { changeColor } from 'seemly'
 import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import { createTheme } from '../../_mixins'
+import { commonLight } from '../../_styles/common'
+import { buttonLight } from '../../button/styles'
+import { inputLight } from '../../input/styles'
+import { timePickerLight } from '../../time-picker/styles'
 import commonVars from './_common'
 
 export function self(vars: ThemeCommonVars) {

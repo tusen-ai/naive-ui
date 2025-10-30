@@ -2,24 +2,18 @@
 # 手动 focus & blur
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
 import type { TimePickerInst } from 'naive-ui'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const timePickerInstRef = ref<TimePickerInst | null>(null)
-    return {
-      handleClick() {
-        timePickerInstRef.value?.focus()
-        setTimeout(() => {
-          timePickerInstRef.value?.blur()
-        }, 1000)
-      },
-      timePickerInstRef
-    }
-  }
-})
+const timePickerInstRef = ref<TimePickerInst | null>(null)
+
+function handleClick() {
+  timePickerInstRef.value?.focus()
+  setTimeout(() => {
+    timePickerInstRef.value?.blur()
+  }, 1000)
+}
 </script>
 
 <template>

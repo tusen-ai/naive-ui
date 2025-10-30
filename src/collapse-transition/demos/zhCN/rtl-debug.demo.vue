@@ -2,19 +2,13 @@
 # Rtl Debug
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
 import { unstableCollapseTransitionRtl } from 'naive-ui'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      rtlEnabled: ref(false),
-      rtlStyles: [unstableCollapseTransitionRtl],
-      show: ref(true)
-    }
-  }
-})
+const rtlEnabled = ref(false)
+const rtlStyles = [unstableCollapseTransitionRtl]
+const show = ref(true)
 </script>
 
 <template>

@@ -1,8 +1,8 @@
-import { h, nextTick } from 'vue'
-import { mount } from '@vue/test-utils'
-import { NColorPicker } from '../index'
 import type { ColorPickerMode } from '../src/utils'
+import { mount } from '@vue/test-utils'
+import { h, nextTick } from 'vue'
 import { NButton } from '../../button'
+import { NColorPicker } from '../index'
 
 describe('n-color-picker', () => {
   it('should work with import on demand', () => {
@@ -128,7 +128,7 @@ describe('n-color-picker', () => {
       wrapper.unmount()
     })
     it('output according to mode', async () => {
-      const onUpdateValue = jest.fn()
+      const onUpdateValue = vi.fn()
       const output = {
         RGBA: {
           mode: 'rgb',
@@ -215,14 +215,14 @@ describe('n-color-picker 2', () => {
       ] as const
     ).forEach((placement) => {
       const wrapper = mount(NColorPicker, { props: { placement } })
-      setTimeout(() => {
+      vi.waitFor(() => {
         expect(
           document
             .querySelector('.v-binder-follower-content')
             ?.getAttribute('v-placement')
         ).toBe(placement)
-        wrapper.unmount()
       })
+      wrapper.unmount()
     })
   })
 

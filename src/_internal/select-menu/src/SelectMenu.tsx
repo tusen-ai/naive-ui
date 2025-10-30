@@ -1,7 +1,26 @@
+import type { TreeNode } from 'treemate'
+import type { CSSProperties, PropType, WatchStopHandle } from 'vue'
+import type { VirtualListInst } from 'vueuc'
+import type { ThemeProps } from '../../../_mixins'
+import type {
+  SelectGroupOption,
+  SelectIgnoredOption,
+  SelectOption,
+  SelectTreeMate,
+  Value
+} from '../../../select/src/interface'
+import type { ScrollbarInst } from '../../scrollbar'
+import type { InternalSelectMenuTheme } from '../styles'
+import type {
+  InternalExposedProps,
+  NodeProps,
+  RenderLabel,
+  RenderOption,
+  Size
+} from './interface'
+import { depx, getPadding, happensIn } from 'seemly'
+import { createIndexGetter } from 'treemate'
 import {
-  type CSSProperties,
-  type PropType,
-  type WatchStopHandle,
   computed,
   defineComponent,
   h,
@@ -13,42 +32,21 @@ import {
   toRef,
   watch
 } from 'vue'
-import { type TreeNode, createIndexGetter } from 'treemate'
-import { VirtualList, type VirtualListInst } from 'vueuc'
-import { depx, getPadding, happensIn } from 'seemly'
-import { NEmpty } from '../../../empty'
-import { NScrollbar } from '../../scrollbar'
-import type { ScrollbarInst } from '../../scrollbar'
-import type {
-  SelectGroupOption,
-  SelectIgnoredOption,
-  SelectOption,
-  SelectTreeMate,
-  Value
-} from '../../../select/src/interface'
+import { VirtualList } from 'vueuc'
+import { useConfig, useRtl, useTheme, useThemeClass } from '../../../_mixins'
 import { resolveSlot, resolveWrappedSlot, useOnResize } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
-import { useConfig, useRtl, useTheme, useThemeClass } from '../../../_mixins'
-import type { ThemeProps } from '../../../_mixins'
-import NInternalLoading from '../../loading'
+import { NEmpty } from '../../../empty'
 import NFocusDetector from '../../focus-detector'
-import {
-  type InternalSelectMenuTheme,
-  internalSelectMenuLight
-} from '../styles'
-import NSelectOption from './SelectOption'
-import NSelectGroupHeader from './SelectGroupHeader'
-import type {
-  InternalExposedProps,
-  NodeProps,
-  RenderLabel,
-  RenderOption,
-  Size
-} from './interface'
+import NInternalLoading from '../../loading'
+import { NScrollbar } from '../../scrollbar'
+import { internalSelectMenuLight } from '../styles'
 import {
   internalSelectionMenuBodyInjectionKey,
   internalSelectionMenuInjectionKey
 } from './interface'
+import NSelectGroupHeader from './SelectGroupHeader'
+import NSelectOption from './SelectOption'
 import style from './styles/index.cssr'
 
 export default defineComponent({
@@ -411,11 +409,11 @@ export default defineComponent({
     const { inlineThemeDisabled } = props
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'internal-select-menu',
-        computed(() => props.size[0]),
-        cssVarsRef,
-        props
-      )
+          'internal-select-menu',
+          computed(() => props.size[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
     const exposedProps: InternalExposedProps = {
       selfRef,

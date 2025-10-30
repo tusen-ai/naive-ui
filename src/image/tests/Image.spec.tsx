@@ -1,5 +1,5 @@
-import { h, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
+import { h, nextTick } from 'vue'
 import { NImage, NImageGroup } from '../index'
 import NImagePreview from '../src/ImagePreview'
 
@@ -118,7 +118,7 @@ describe('n-image', () => {
   })
 
   it('should work with `onError` prop', async () => {
-    const onError = jest.fn()
+    const onError = vi.fn()
     const wrapper = mount(NImage, {
       props: {
         src: 'https:// 07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
@@ -161,7 +161,7 @@ describe('n-image', () => {
   })
 
   it('should work with `onLoad` prop', async () => {
-    const onLoad = jest.fn()
+    const onLoad = vi.fn()
     const wrapper = mount(NImage, {
       props: {
         src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',

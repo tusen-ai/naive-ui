@@ -1,16 +1,20 @@
-import { type App, type Component, type VNode, createApp, h, unref } from 'vue'
-import {
-  type ConfigProviderProps,
-  NConfigProvider
-} from '../../config-provider'
-import { type DialogApi, useDialog } from '../../dialog'
-import { type LoadingBarApi, useLoadingBar } from '../../loading-bar'
-import { type MessageApi, useMessage } from '../../message'
-import { type NotificationApi, useNotification } from '../../notification'
-import { type ModalApi, useModal } from '../../modal'
-import { isBrowser, warn } from '../../_utils'
-import { NInjectionExtractor } from './InjectionExtractor'
+import type { App, Component, VNode } from 'vue'
+import type { ConfigProviderProps } from '../../config-provider'
+import type { DialogApi } from '../../dialog'
+import type { LoadingBarApi } from '../../loading-bar'
+import type { MessageApi } from '../../message'
+import type { ModalApi } from '../../modal'
+import type { NotificationApi } from '../../notification'
 import type { DiscreteApiType, MaybeRef } from './interface'
+import { createApp, h, unref } from 'vue'
+import { isBrowser, warn } from '../../_utils'
+import { NConfigProvider } from '../../config-provider'
+import { useDialog } from '../../dialog'
+import { useLoadingBar } from '../../loading-bar'
+import { useMessage } from '../../message'
+import { useModal } from '../../modal'
+import { useNotification } from '../../notification'
+import { NInjectionExtractor } from './InjectionExtractor'
 
 export type Provider<P = any> = new (...args: any[]) => { $props: P }
 

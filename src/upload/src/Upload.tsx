@@ -1,26 +1,8 @@
-import {
-  type CSSProperties,
-  Fragment,
-  type InputHTMLAttributes,
-  type PropType,
-  Teleport,
-  computed,
-  defineComponent,
-  h,
-  nextTick,
-  provide,
-  ref,
-  toRef
-} from 'vue'
-import { createId } from 'seemly'
-import { useMergedState } from 'vooks'
-import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import type { CSSProperties, InputHTMLAttributes, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { call, throwError, warn } from '../../_utils'
 import type { ImageGroupProps } from '../../image'
-import { type UploadTheme, uploadLight } from '../styles'
-import { uploadDraggerKey } from './UploadDragger'
+import type { UploadTheme } from '../styles'
 import type {
   CreateThumbnailUrl,
   CustomRequest,
@@ -38,16 +20,6 @@ import type {
   UploadInternalInst,
   XhrHandlers
 } from './interface'
-import { uploadInjectionKey } from './interface'
-import {
-  createImageDataUrl,
-  createSettledFileInfo,
-  environmentSupportFile,
-  isImageFile,
-  matchType
-} from './utils'
-import NUploadTrigger from './UploadTrigger'
-import NUploadFileList from './UploadFileList'
 import type {
   UploadFileInfo,
   UploadInst,
@@ -57,7 +29,40 @@ import type {
   UploadOnRemove,
   UploadSettledFileInfo
 } from './public-types'
+import { createId } from 'seemly'
+import { useMergedState } from 'vooks'
+import {
+  computed,
+  defineComponent,
+  Fragment,
+  h,
+  nextTick,
+  provide,
+  ref,
+  Teleport,
+  toRef
+} from 'vue'
+import {
+  useConfig,
+  useFormItem,
+  useRtl,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
+import { call, throwError, warn } from '../../_utils'
+import { uploadLight } from '../styles'
+import { uploadInjectionKey } from './interface'
 import style from './styles/index.cssr'
+import { uploadDraggerKey } from './UploadDragger'
+import NUploadFileList from './UploadFileList'
+import NUploadTrigger from './UploadTrigger'
+import {
+  createImageDataUrl,
+  createSettledFileInfo,
+  environmentSupportFile,
+  isImageFile,
+  matchType
+} from './utils'
 
 /**
  * fils status ['pending', 'uploading', 'finished', 'removed', 'error']
@@ -332,6 +337,7 @@ export const uploadProps = {
   isErrorState: Function as PropType<(xhr: XMLHttpRequest) => boolean>,
   /** currently not used */
   onDownload: Function as PropType<UploadOnDownload>,
+  customDownload: Function as PropType<UploadOnDownload>,
   defaultUpload: {
     type: Boolean,
     default: true
@@ -403,7 +409,8 @@ export default defineComponent({
         'when the list-type is image-card, abstract is not supported.'
       )
     }
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
+      = useConfig(props)
     const themeRef = useTheme(
       'Upload',
       '-upload',
@@ -412,6 +419,9 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+
+    const rtlEnabledRef = useRtl('Upload', mergedRtlRef, mergedClsPrefixRef)
+
     const formItem = useFormItem(props)
     const uncontrolledFileListRef = ref(props.defaultFileList)
     const controlledFileListRef = toRef(props, 'fileList')
@@ -443,10 +453,10 @@ export default defineComponent({
       handleFileAddition(
         target.files
           ? Array.from(target.files).map(file => ({
-            file,
-            entry: null,
-            source: 'input'
-          }))
+              file,
+              entry: null,
+              source: 'input'
+            }))
           : null,
         e
       )
@@ -700,6 +710,7 @@ export default defineComponent({
       showRetryButtonRef: toRef(props, 'showRetryButton'),
       onRemoveRef: toRef(props, 'onRemove'),
       onDownloadRef: toRef(props, 'onDownload'),
+      customDownloadRef: toRef(props, 'customDownload'),
       mergedFileListRef,
       triggerClassRef: toRef(props, 'triggerClass'),
       triggerStyleRef: toRef(props, 'triggerStyle'),
@@ -744,6 +755,7 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       draggerInsideRef,
+      rtlEnabled: rtlEnabledRef,
       inputElRef,
       mergedTheme: themeRef,
       dragOver: dragOverRef,
@@ -794,6 +806,7 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-upload`,
+          this.rtlEnabled && `${mergedClsPrefix}-upload--rtl`,
           draggerInsideRef.value && `${mergedClsPrefix}-upload--dragger-inside`,
           this.dragOver && `${mergedClsPrefix}-upload--drag-over`,
           this.themeClass

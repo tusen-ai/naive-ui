@@ -1,15 +1,23 @@
+import type { CSSProperties, SlotsType } from 'vue'
+import type {
+  CsvOptionsType,
+  DataTableInst,
+  DataTableSlots,
+  MainTableRef,
+  RowKey
+} from './interface'
+import { createId } from 'seemly'
 import {
-  type CSSProperties,
-  Transition,
   computed,
   defineComponent,
   h,
   provide,
   ref,
   toRef,
+  Transition,
   watchEffect
 } from 'vue'
-import { createId } from 'seemly'
+import { NBaseLoading } from '../../_internal'
 import {
   useConfig,
   useLocale,
@@ -17,31 +25,25 @@ import {
   useTheme,
   useThemeClass
 } from '../../_mixins'
-import { NBaseLoading } from '../../_internal'
-import { NPagination } from '../../pagination'
 import { createKey, download, resolveSlot, warnOnce } from '../../_utils'
+import { NPagination } from '../../pagination'
 import { dataTableLight } from '../styles'
-import MainTable from './MainTable'
-import { useCheck } from './use-check'
-import { useTableData } from './use-table-data'
-import { useScroll } from './use-scroll'
-import { useResizable } from './use-resizable'
-import type {
-  CsvOptionsType,
-  DataTableInst,
-  MainTableRef,
-  RowKey
-} from './interface'
 import { dataTableInjectionKey, dataTableProps } from './interface'
-import { useGroupHeader } from './use-group-header'
-import { useExpand } from './use-expand'
+import MainTable from './MainTable'
 import style from './styles/index.cssr'
+import { useCheck } from './use-check'
+import { useExpand } from './use-expand'
+import { useGroupHeader } from './use-group-header'
+import { useResizable } from './use-resizable'
+import { useScroll } from './use-scroll'
+import { useTableData } from './use-table-data'
 import { generateCsv } from './utils'
 
 export default defineComponent({
   name: 'DataTable',
   alias: ['AdvancedTable'],
   props: dataTableProps,
+  slots: Object as SlotsType<DataTableSlots>,
   setup(props, { slots }) {
     if (__DEV__) {
       watchEffect(() => {
@@ -137,7 +139,12 @@ export default defineComponent({
     const downloadCsv = (options?: CsvOptionsType): void => {
       const { fileName = 'data.csv', keepOriginalData = false } = options || {}
       const data = keepOriginalData ? props.data : rawPaginatedDataRef.value
-      const csvData = generateCsv(props.columns, data)
+      const csvData = generateCsv(
+        props.columns,
+        data,
+        props.getCsvCell,
+        props.getCsvHeader
+      )
       const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8' })
       const downloadUrl = URL.createObjectURL(blob)
       download(
@@ -402,21 +409,21 @@ export default defineComponent({
         '--n-td-color-striped': tdColorStriped,
         '--n-td-color-striped-modal': tdColorStripedModal,
         '--n-td-color-striped-popover': tdColorStripedPopover,
-        'n-td-color-sorting': tdColorSorting,
-        'n-td-color-sorting-modal': tdColorSortingModal,
-        'n-td-color-sorting-popover': tdColorSortingPopover,
-        'n-th-color-sorting': thColorSorting,
-        'n-th-color-sorting-modal': thColorSortingModal,
-        'n-th-color-sorting-popover': thColorSortingPopover
+        '--n-td-color-sorting': tdColorSorting,
+        '--n-td-color-sorting-modal': tdColorSortingModal,
+        '--n-td-color-sorting-popover': tdColorSortingPopover,
+        '--n-th-color-sorting': thColorSorting,
+        '--n-th-color-sorting-modal': thColorSortingModal,
+        '--n-th-color-sorting-popover': thColorSortingPopover
       }
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'data-table',
-        computed(() => props.size[0]),
-        cssVarsRef,
-        props
-      )
+          'data-table',
+          computed(() => props.size[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
     const mergedShowPaginationRef = computed(() => {
       if (!props.pagination)

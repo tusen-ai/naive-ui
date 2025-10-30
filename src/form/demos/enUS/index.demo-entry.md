@@ -75,6 +75,8 @@ feedback-style.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| content-class | `string` | `undefined` | The class name of the content. | 2.43.0 |
+| content-style | `string \| object` | `undefined` | The style of the content. | 2.43.0 |
 | feedback | `string` | `undefined` | The feedback message of the form item. If set, it will replace any result of rule-based validation. |  |
 | feedback-class | `string` | `undefined` | Feedback check vertical display positioning | 2.38.2 |
 | feedback-style | `string \| object` | `undefined` | Feedback check horizontal display positioning | 2.38.2 |

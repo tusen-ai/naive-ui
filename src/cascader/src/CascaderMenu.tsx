@@ -1,27 +1,27 @@
-import {
-  type PropType,
-  Transition,
-  defineComponent,
-  h,
-  inject,
-  ref,
-  withDirectives
-} from 'vue'
+import type { PropType } from 'vue'
 import type { FollowerPlacement } from 'vueuc'
-import { clickoutside } from 'vdirs'
-import FocusDetector from '../../_internal/focus-detector'
 import type { MenuMaskRef } from '../../_internal/menu-mask'
-import { resolveSlot, resolveWrappedSlot, useOnResize } from '../../_utils'
-import { NEmpty } from '../../empty'
-import { NBaseMenuMask } from '../../_internal'
-import NCascaderSubmenu from './CascaderSubmenu'
-import { cascaderInjectionKey } from './interface'
 import type {
   CascaderMenuExposedMethods,
   CascaderSubmenuInstance,
   MenuModel,
   Value
 } from './interface'
+import { clickoutside } from 'vdirs'
+import {
+  defineComponent,
+  h,
+  inject,
+  ref,
+  Transition,
+  withDirectives
+} from 'vue'
+import { NBaseMenuMask } from '../../_internal'
+import FocusDetector from '../../_internal/focus-detector'
+import { resolveSlot, resolveWrappedSlot, useOnResize } from '../../_utils'
+import { NEmpty } from '../../empty'
+import NCascaderSubmenu from './CascaderSubmenu'
+import { cascaderInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'NCascaderMenu',

@@ -1,5 +1,5 @@
-import { c, cB, cE, cM } from '../../../_utils/cssr'
 import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
+import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 // vars:
 // --n-menu-border-radius

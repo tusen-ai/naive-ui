@@ -1,31 +1,24 @@
+import type { CSSProperties, PropType, VNodeChild } from 'vue'
 /* eslint-disable no-cond-assign */
-import {
-  type CSSProperties,
-  type PropType,
-  type VNodeChild,
-  computed,
-  defineComponent,
-  h,
-  inject
-} from 'vue'
-import {
-  ErrorIcon,
-  InfoIcon,
-  SuccessIcon,
-  WarningIcon
-} from '../../_internal/icons'
+import type { MessageRenderMessage, MessageType } from './types'
+import { computed, defineComponent, h, inject } from 'vue'
 import {
   NBaseClose,
   NBaseIcon,
   NBaseLoading,
   NIconSwitchTransition
 } from '../../_internal'
-import { createKey, render } from '../../_utils'
+import {
+  ErrorIcon,
+  InfoIcon,
+  SuccessIcon,
+  WarningIcon
+} from '../../_internal/icons'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
+import { createKey, render } from '../../_utils'
 import { messageLight } from '../styles'
-import { messageProps } from './message-props'
-import type { MessageRenderMessage, MessageType } from './types'
 import { messageProviderInjectionKey } from './context'
+import { messageProps } from './message-props'
 import style from './styles/index.cssr'
 
 const iconRenderMap = {
@@ -71,6 +64,7 @@ export default defineComponent({
           fontSize,
           lineHeight,
           borderRadius,
+          border,
           iconColorInfo,
           iconColorSuccess,
           iconColorWarning,
@@ -114,16 +108,17 @@ export default defineComponent({
         '--n-close-icon-color-pressed': closeIconColorPressed,
         '--n-close-icon-color-hover': closeIconColorHover,
         '--n-line-height': lineHeight,
-        '--n-border-radius': borderRadius
+        '--n-border-radius': borderRadius,
+        '--n-border': border
       }
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'message',
-        computed(() => props.type[0]),
-        cssVarsRef,
-        {}
-      )
+          'message',
+          computed(() => props.type[0]),
+          cssVarsRef,
+          {}
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
@@ -178,7 +173,7 @@ export default defineComponent({
             ]}
           >
             {(iconNode = createIconVNode(icon, type, mergedClsPrefix))
-            && showIcon ? (
+              && showIcon ? (
                   <div
                     class={`${mergedClsPrefix}-message__icon ${mergedClsPrefix}-message__icon--${type}-type`}
                   >

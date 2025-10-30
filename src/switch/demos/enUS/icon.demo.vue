@@ -2,19 +2,11 @@
 # Customizing Icon
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
 import { ArrowBackOutline, ArrowForwardOutline } from '@vicons/ionicons5'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      active: ref(false),
-      ArrowBackOutline,
-      ArrowForwardOutline
-    }
-  }
-})
+const active = ref(false)
 </script>
 
 <template>

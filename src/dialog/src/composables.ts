@@ -1,10 +1,11 @@
-import { type Ref, inject } from 'vue'
+import type { Ref } from 'vue'
+import type { DialogApiInjection, DialogReactive } from './DialogProvider'
+import { inject } from 'vue'
 import { throwError } from '../../_utils'
 import {
   dialogApiInjectionKey,
   dialogReactiveListInjectionKey
 } from './context'
-import type { DialogApiInjection, DialogReactive } from './DialogProvider'
 
 export function useDialog(): DialogApiInjection {
   const dialog = inject(dialogApiInjectionKey, null)

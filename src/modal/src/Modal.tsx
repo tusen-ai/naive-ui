@@ -1,7 +1,14 @@
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { CardSlots } from '../../card'
+import type { DialogSlots } from '../../dialog'
+import type { ModalTheme } from '../styles'
+import type { ModalDraggableOptions } from './interface'
+import { getPreciseEventTarget } from 'seemly'
+import { zindexable } from 'vdirs'
+import { useClicked, useClickPosition, useIsMounted } from 'vooks'
 import {
-  type CSSProperties,
-  type PropType,
-  Transition,
   computed,
   defineComponent,
   h,
@@ -9,15 +16,11 @@ import {
   provide,
   ref,
   toRef,
+  Transition,
   withDirectives
 } from 'vue'
-import { zindexable } from 'vdirs'
-import { useClickPosition, useClicked, useIsMounted } from 'vooks'
 import { VLazyTeleport } from 'vueuc'
-import { getPreciseEventTarget } from 'seemly'
-import { dialogProviderInjectionKey } from '../../dialog/src/context'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import {
   call,
   eventEffectNotPerformed,
@@ -25,18 +28,17 @@ import {
   useIsComposing,
   warnOnce
 } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import { dialogProviderInjectionKey } from '../../dialog/src/context'
 import { modalLight } from '../styles'
-import type { ModalTheme } from '../styles'
-import { presetProps, presetPropsKeys } from './presetProps'
 import NModalBodyWrapper from './BodyWrapper'
 import { modalInjectionKey, modalProviderInjectionKey } from './interface'
+import { presetProps, presetPropsKeys } from './presetProps'
 import style from './styles/index.cssr'
 
 export const modalProps = {
   ...(useTheme.props as ThemeProps<ModalTheme>),
   show: Boolean,
-  unstableShowMask: {
+  showMask: {
     type: Boolean,
     default: true
   },
@@ -69,6 +71,7 @@ export const modalProps = {
   },
   blockScroll: { type: Boolean, default: true },
   ...presetProps,
+  draggable: [Boolean, Object] as PropType<boolean | ModalDraggableOptions>,
   // events
   onEsc: Function as PropType<() => void>,
   'onUpdate:show': [Function, Array] as PropType<
@@ -95,15 +98,24 @@ export const modalProps = {
   overlayStyle: [String, Object] as PropType<string | CSSProperties>,
   onBeforeHide: Function as PropType<() => void>,
   onAfterHide: Function as PropType<() => void>,
-  onHide: Function as PropType<(value: false) => void>
+  onHide: Function as PropType<(value: false) => void>,
+  unstableShowMask: {
+    type: Boolean,
+    default: undefined
+  }
 }
 
 export type ModalProps = ExtractPublicPropTypes<typeof modalProps>
+
+export type ModalSlots = Omit<CardSlots & DialogSlots, 'default'> & {
+  default?: (props: { draggableClass: string }) => VNode[]
+}
 
 export default defineComponent({
   name: 'Modal',
   inheritAttrs: false,
   props: modalProps,
+  slots: Object as SlotsType<ModalSlots>,
   setup(props) {
     if (__DEV__) {
       if (props.onHide) {
@@ -127,6 +139,12 @@ export default defineComponent({
           '`overlay-style` is deprecated, please use `style` instead.'
         )
       }
+      if (props.unstableShowMask) {
+        warnOnce(
+          'modal',
+          '`unstable-show-mask` has been removed, please use `show-mask` instead.'
+        )
+      }
     }
     const containerRef = ref<HTMLElement | null>(null)
     const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled }
@@ -148,7 +166,6 @@ export default defineComponent({
     const NModalProvider = props.internalModal
       ? inject(modalProviderInjectionKey, null)
       : null
-
     const isComposingRef = useIsComposing()
 
     function doUpdateShow(show: boolean): void {
@@ -302,7 +319,7 @@ export default defineComponent({
         {{
           default: () => {
             this.onRender?.()
-            const { unstableShowMask } = this
+            const { showMask } = this
             return withDirectives(
               <div
                 role="none"
@@ -323,7 +340,9 @@ export default defineComponent({
                   preset={this.preset}
                   autoFocus={this.autoFocus}
                   trapFocus={this.trapFocus}
+                  draggable={this.draggable}
                   blockScroll={this.blockScroll}
+                  maskHidden={!showMask}
                   {...this.presetProps}
                   onEsc={this.handleEsc}
                   onClose={this.handleCloseClick}
@@ -333,10 +352,10 @@ export default defineComponent({
                   onAfterEnter={this.onAfterEnter}
                   onAfterLeave={this.handleAfterLeave}
                   onClickoutside={
-                    unstableShowMask ? undefined : this.handleClickoutside
+                    showMask ? undefined : this.handleClickoutside
                   }
                   renderMask={
-                    unstableShowMask
+                    showMask
                       ? () => (
                           <Transition
                             name="fade-in-transition"

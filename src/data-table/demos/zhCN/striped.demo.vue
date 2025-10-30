@@ -4,8 +4,7 @@
 使用 `striped` 属性渲染条纹，使得表格明暗交替。
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import type { DataTableColumns } from 'naive-ui'
 
 interface RowData {
@@ -58,14 +57,8 @@ function createData(): RowData[] {
   ]
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      data: createData(),
-      columns: createColumns()
-    }
-  }
-})
+const data = createData()
+const columns = createColumns()
 </script>
 
 <template>

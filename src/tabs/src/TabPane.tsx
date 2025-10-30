@@ -1,15 +1,13 @@
-import {
-  type HTMLAttributes,
-  type PropType,
-  type VNode,
-  type VNodeChild,
-  defineComponent,
-  h,
-  inject,
-  watchEffect
+import type {
+  HTMLAttributes,
+  PropType,
+  SlotsType,
+  VNode,
+  VNodeChild
 } from 'vue'
-import { throwError, warnOnce } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import { defineComponent, h, inject, watchEffect } from 'vue'
+import { throwError, warnOnce } from '../../_utils'
 import { tabsInjectionKey } from './interface'
 
 export const tabPaneProps = {
@@ -38,11 +36,19 @@ export const tabPaneProps = {
 
 export type TabPaneProps = ExtractPublicPropTypes<typeof tabPaneProps>
 
+export interface TabPaneSlots {
+  default?: () => VNode[]
+  tab?: () => VNode[]
+  prefix?: () => VNode[]
+  suffix?: () => VNode[]
+}
+
 export default defineComponent({
   __TAB_PANE__: true,
   name: 'TabPane',
   alias: ['TabPanel'],
   props: tabPaneProps,
+  slots: Object as SlotsType<TabPaneSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {

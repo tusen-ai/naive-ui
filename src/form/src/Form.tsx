@@ -1,18 +1,8 @@
-import {
-  type ExtractPropTypes,
-  type PropType,
-  defineComponent,
-  h,
-  provide,
-  ref
-} from 'vue'
 import type { ValidateError } from 'async-validator'
-import { useConfig, useTheme } from '../../_mixins'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import { formLight } from '../styles'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { FormTheme } from '../styles'
-import { type ExtractPublicPropTypes, keysOf } from '../../_utils'
-import style from './styles/form.cssr'
 import type {
   FormInst,
   FormItemInst,
@@ -25,7 +15,12 @@ import type {
   ShouldRuleBeApplied,
   Size
 } from './interface'
+import { defineComponent, h, provide, ref } from 'vue'
+import { useConfig, useTheme } from '../../_mixins'
+import { keysOf } from '../../_utils'
+import { formLight } from '../styles'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
+import style from './styles/form.cssr'
 
 export const formProps = {
   ...(useTheme.props as ThemeProps<FormTheme>),

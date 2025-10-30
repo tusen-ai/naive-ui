@@ -2,18 +2,12 @@
 # Rtl Debug
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
 import { unstableCardRtl } from 'naive-ui'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      rtlEnabled: ref(false),
-      rtlStyles: [unstableCardRtl]
-    }
-  }
-})
+const rtlEnabled = ref(false)
+const rtlStyles = [unstableCardRtl]
 </script>
 
 <template>

@@ -1,23 +1,16 @@
-import {
-  type PropType,
-  type VNode,
-  type VNodeChild,
-  computed,
-  defineComponent,
-  h,
-  provide,
-  ref
-} from 'vue'
+import type { PropType, VNode, VNodeChild } from 'vue'
+import type { MenuMixedOption, TmNode } from './interface'
 import { useMemo } from 'vooks'
+import { computed, defineComponent, h, provide, ref } from 'vue'
 import { NFadeInExpandTransition } from '../../_internal'
-import { NDropdown } from '../../dropdown'
-import NMenuOptionContent from './MenuOptionContent'
+import { keysOf } from '../../_utils'
 
-import { itemRenderer } from './utils'
+import { NDropdown } from '../../dropdown'
+import { menuItemGroupInjectionKey, submenuInjectionKey } from './context'
+import NMenuOptionContent from './MenuOptionContent'
 import { useMenuChild } from './use-menu-child'
 import { useMenuChildProps } from './use-menu-child-props'
-import type { MenuMixedOption, TmNode } from './interface'
-import { menuItemGroupInjectionKey, submenuInjectionKey } from './context'
+import { itemRenderer } from './utils'
 
 export const submenuProps = {
   ...useMenuChildProps,
@@ -43,6 +36,8 @@ export const submenuProps = {
   },
   isEllipsisPlaceholder: Boolean
 } as const
+
+export const submenuPropKeys = keysOf(submenuProps)
 
 export const NSubmenu = defineComponent({
   name: 'Submenu',

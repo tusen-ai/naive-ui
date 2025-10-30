@@ -1,28 +1,23 @@
-import {
-  type CSSProperties,
-  type PropType,
-  computed,
-  defineComponent,
-  h,
-  provide
-} from 'vue'
-import type { Size } from '../../avatar/src/interface'
-import { avatarGroupInjectionKey } from '../../avatar/src/context'
-import NAvatar from '../../avatar/src/Avatar'
-import { useConfig, useTheme } from '../../_mixins'
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { useRtl } from '../../_mixins/use-rtl'
-import { avatarGroupLight } from '../styles'
+import type { Size } from '../../avatar/src/interface'
 import type { AvatarGroupTheme } from '../styles'
+import type {
+  AvatarGroupAvatarSlotProps,
+  AvatarGroupOption,
+  AvatarGroupRestSlotProps
+} from './public-types'
+import { computed, defineComponent, h, provide } from 'vue'
+import { useConfig, useTheme } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
+import NAvatar from '../../avatar/src/Avatar'
+import { avatarGroupInjectionKey } from '../../avatar/src/context'
+import { avatarGroupLight } from '../styles'
 import style from './styles/avatar-group.cssr'
 
 export interface AvatarGroupInjection {
   size?: Size | undefined
-}
-
-export interface AvatarGroupOption {
-  src: string
 }
 
 export const avatarGroupProps = {
@@ -40,9 +35,16 @@ export const avatarGroupProps = {
 
 export type AvatarGroupProps = ExtractPublicPropTypes<typeof avatarGroupProps>
 
+export interface AvatarGroupSlots {
+  avatar?: (props: AvatarGroupAvatarSlotProps) => VNode[]
+  rest?: (props: AvatarGroupRestSlotProps) => VNode[]
+  default?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'AvatarGroup',
   props: avatarGroupProps,
+  slots: Object as SlotsType<AvatarGroupSlots>,
   setup(props) {
     const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
     const mergedThemeRef = useTheme(
@@ -123,20 +125,20 @@ export default defineComponent({
           )
         })}
         {restOptions !== undefined
-        && restOptions.length > 0
-        && ($slots.rest ? (
-          $slots.rest({ options: restOptions, rest: restOptions.length })
-        ) : (
-          <NAvatar
-            style={this.maxStyle}
-            theme={mergedTheme.peers.Avatar}
-            themeOverrides={mergedTheme.peerOverrides.Avatar}
-          >
-            {{
-              default: () => `+${restOptions.length}`
-            }}
-          </NAvatar>
-        ))}
+          && restOptions.length > 0
+          && ($slots.rest ? (
+            $slots.rest({ options: restOptions, rest: restOptions.length })
+          ) : (
+            <NAvatar
+              style={this.maxStyle}
+              theme={mergedTheme.peers.Avatar}
+              themeOverrides={mergedTheme.peerOverrides.Avatar}
+            >
+              {{
+                default: () => `+${restOptions.length}`
+              }}
+            </NAvatar>
+          ))}
       </div>
     )
   }

@@ -1,11 +1,5 @@
-import {
-  type PropType,
-  defineComponent,
-  h,
-  inject,
-  ref,
-  watchEffect
-} from 'vue'
+import type { PropType } from 'vue'
+import { defineComponent, h, inject, ref, watchEffect } from 'vue'
 import { NInput } from '../../input'
 import { colorPickerInjectionKey } from './context'
 

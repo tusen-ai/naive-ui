@@ -1,13 +1,13 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.vue"],
-  "exclude": ["./**/*.spec.*"],
   "compilerOptions": {
-    "composite": false,
     "incremental": false,
-    "noEmit": true,
-    "rootDir": ".",
-    "module": "CommonJS",
-    "target": "ES6"
-  }
+    "composite": false,
+    "target": "ES6",
+    "rootDirs": [".", "../generic"],
+    "module": "es6",
+    "noEmit": true
+  },
+  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.vue"],
+  "exclude": ["./**/*.spec.*"]
 }

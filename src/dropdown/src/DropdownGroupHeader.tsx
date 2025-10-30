@@ -1,7 +1,7 @@
+import type { DropdownMixedOption } from './interface'
 import { defineComponent, h, inject } from 'vue'
 import { render } from '../../_utils'
 import { dropdownInjectionKey, dropdownMenuInjectionKey } from './context'
-import type { DropdownMixedOption } from './interface'
 
 export default defineComponent({
   name: 'DropdownGroupHeader',

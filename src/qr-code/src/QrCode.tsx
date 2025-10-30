@@ -1,18 +1,12 @@
-import {
-  type PropType,
-  computed,
-  defineComponent,
-  h,
-  onMounted,
-  ref,
-  watchEffect
-} from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import type { PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { type QrCodeTheme, qrcodeLight } from '../styles'
-import style from './styles/index.cssr'
+import type { QrCodeTheme } from '../styles'
+import { computed, defineComponent, h, onMounted, ref, watchEffect } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { qrcodeLight } from '../styles'
 import qrcodegen from './qrcodegen'
+import style from './styles/index.cssr'
 
 type Modules = ReturnType<qrcodegen.QrCode['getModules']>
 
@@ -266,9 +260,9 @@ export default defineComponent({
         iconBackgroundColor: string
       } | null
     ): {
-        innerHtml: string
-        numCells: number
-      } {
+      innerHtml: string
+      numCells: number
+    } {
       const cells = qr.getModules()
       const numCells = cells.length
       const cellsToDraw = cells

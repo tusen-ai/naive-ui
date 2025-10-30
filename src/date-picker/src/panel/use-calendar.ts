@@ -1,11 +1,15 @@
-import {
-  type ExtractPropTypes,
-  type PropType,
-  computed,
-  inject,
-  ref,
-  watch
-} from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
+import type { VirtualListInst } from 'vueuc'
+import type { ScrollbarInst } from '../../../_internal'
+import type {
+  DatePickerGetDefaultTime,
+  FirstDayOfWeek,
+  IsSingleDateDisabled,
+  IsSingleDateDisabledDetail,
+  PanelChildComponentRefs,
+  Shortcuts
+} from '../interface'
+import type { DateItem, MonthItem, QuarterItem, YearItem } from '../utils'
 import {
   addMonths,
   addYears,
@@ -27,26 +31,18 @@ import {
   startOfWeek,
   startOfYear
 } from 'date-fns'
-import type { VirtualListInst } from 'vueuc'
-import type { ScrollbarInst } from '../../../_internal'
+import { computed, inject, ref, watch } from 'vue'
+import { MONTH_ITEM_HEIGHT } from '../config'
+import { datePickerInjectionKey } from '../interface'
 import {
   dateArray,
+  extractSingleDefaultTime,
   getDefaultTime,
   monthArray,
   quarterArray,
   strictParse,
   yearArray
 } from '../utils'
-import type {
-  FirstDayOfWeek,
-  IsSingleDateDisabled,
-  IsSingleDateDisabledDetail,
-  PanelChildComponentRefs,
-  Shortcuts
-} from '../interface'
-import { datePickerInjectionKey } from '../interface'
-import type { DateItem, MonthItem, QuarterItem, YearItem } from '../utils'
-import { MONTH_ITEM_HEIGHT } from '../config'
 import { usePanelCommon, usePanelCommonProps } from './use-panel-common'
 
 const useCalendarProps = {
@@ -92,6 +88,9 @@ function useCalendar(
   }
   const mergedDateFormatRef = computed(
     () => props.dateFormat || localeRef.value.dateFormat
+  )
+  const mergedDayFormatRef = computed(
+    () => props.calendarDayFormat || localeRef.value.dayFormat
   )
   const dateInputValueRef = ref(
     props.value === null || Array.isArray(props.value)
@@ -155,7 +154,7 @@ function useCalendar(
       const { ts } = dateItem
       return format(
         ts,
-        localeRef.value.dayFormat,
+        mergedDayFormatRef.value,
         panelCommon.dateFnsOptions.value
       )
     })
@@ -163,15 +162,20 @@ function useCalendar(
   const calendarMonthRef = computed(() => {
     return format(
       calendarValueRef.value,
-      localeRef.value.monthFormat,
+      props.calendarHeaderMonthFormat || localeRef.value.monthFormat,
       panelCommon.dateFnsOptions.value
     )
   })
   const calendarYearRef = computed(() => {
     return format(
       calendarValueRef.value,
-      localeRef.value.yearFormat,
+      props.calendarHeaderYearFormat || localeRef.value.yearFormat,
       panelCommon.dateFnsOptions.value
+    )
+  })
+  const calendarMonthBeforeYearRef = computed(() => {
+    return (
+      props.calendarHeaderMonthBeforeYear ?? localeRef.value.monthBeforeYear
     )
   })
   watch(calendarValueRef, (value, oldValue) => {
@@ -211,8 +215,8 @@ function useCalendar(
       // refer to makeWeekMatcher
       const weekStartsOn = (((firstDayOfWeekRef.value
         ?? localeRef.value.firstDayOfWeek)
-        + 1)
-        % 7) as FirstDayOfWeek
+      + 1)
+    % 7) as FirstDayOfWeek
       return getTime(
         startOfWeek(value, {
           weekStartsOn
@@ -366,7 +370,18 @@ function useCalendar(
       && props.defaultTime !== null
       && !Array.isArray(props.defaultTime)
     ) {
-      const time = getDefaultTime(props.defaultTime)
+      let time: { hours: number, minutes: number, seconds: number } | undefined
+
+      if (typeof props.defaultTime === 'function') {
+        time = extractSingleDefaultTime(
+          dateItem.ts,
+          props.defaultTime as DatePickerGetDefaultTime
+        )
+      }
+      else {
+        time = getDefaultTime(props.defaultTime)
+      }
+
       if (time) {
         newValue = getTime(set(newValue, time)) // setDate getTime(addMilliseconds(startOfDay(newValue), time))
       }
@@ -374,9 +389,9 @@ function useCalendar(
     newValue = getTime(
       dateItem.type === 'quarter' && dateItem.dateObject.quarter
         ? setQuarter(
-          setYear(newValue, dateItem.dateObject.year),
-          dateItem.dateObject.quarter
-        )
+            setYear(newValue, dateItem.dateObject.year),
+            dateItem.dateObject.quarter
+          )
         : set(newValue, dateItem.dateObject)
     )
     panelCommon.doUpdateValue(
@@ -541,6 +556,7 @@ function useCalendar(
     calendarYear: calendarYearRef,
     calendarMonth: calendarMonthRef,
     weekdays: weekdaysRef,
+    calendarMonthBeforeYear: calendarMonthBeforeYearRef,
     mergedIsDateDisabled,
     nextYear,
     prevYear,

@@ -125,6 +125,12 @@ const plPL: NLocale = {
     tipClose: 'Zamknij (Esc)',
     // TODO: translation
     tipOriginalSize: 'Zoom to original size'
+  },
+  Heatmap: {
+    less: 'mniej',
+    more: 'więcej',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

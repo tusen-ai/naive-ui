@@ -1,6 +1,5 @@
-import { type Ref, inject, ref } from 'vue'
 import type { TreeNode } from 'treemate'
-import { treeSelectInjectionKey } from '../../tree-select/src/interface'
+import type { Ref } from 'vue'
 import type {
   Key,
   TmNode,
@@ -8,6 +7,8 @@ import type {
   TreeOverrideNodeClickBehavior,
   TreeOverrideNodeClickBehaviorReturn
 } from './interface'
+import { inject, ref } from 'vue'
+import { treeSelectInjectionKey } from '../../tree-select/src/interface'
 
 export function useKeyboard({
   props,
@@ -31,11 +32,11 @@ export function useKeyboard({
   handleSwitcherClick: (node: TmNode) => void
   handleCheck: (node: TmNode, checked: boolean) => void
 }): {
-    pendingNodeKeyRef: Ref<null | Key>
-    handleKeydown: (e: KeyboardEvent) => {
-      enterBehavior: TreeOverrideNodeClickBehaviorReturn | null
-    }
-  } {
+  pendingNodeKeyRef: Ref<null | Key>
+  handleKeydown: (e: KeyboardEvent) => {
+    enterBehavior: TreeOverrideNodeClickBehaviorReturn | null
+  }
+} {
   const { value: mergedSelectedKeys } = mergedSelectedKeysRef
 
   // If it's used in tree-select, make it take over pending state
@@ -43,10 +44,10 @@ export function useKeyboard({
   const pendingNodeKeyRef = treeSelectInjection
     ? treeSelectInjection.pendingNodeKeyRef
     : ref<null | Key>(
-      mergedSelectedKeys.length
-        ? mergedSelectedKeys[mergedSelectedKeys.length - 1]
-        : null
-    )
+        mergedSelectedKeys.length
+          ? mergedSelectedKeys[mergedSelectedKeys.length - 1]
+          : null
+      )
   function handleKeydown(e: KeyboardEvent): {
     enterBehavior: TreeOverrideNodeClickBehaviorReturn | null
   } {

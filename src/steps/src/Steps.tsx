@@ -1,19 +1,17 @@
-import {
-  type ExtractPropTypes,
-  type PropType,
-  type Ref,
-  type Slots,
-  type VNode,
-  type VNodeChild,
-  defineComponent,
-  h,
-  provide
+import type {
+  ExtractPropTypes,
+  PropType,
+  Ref,
+  SlotsType,
+  VNode,
+  VNodeChild
 } from 'vue'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
-import { useConfig, useRtl, useTheme } from '../../_mixins'
-import { createInjectionKey, flatten, getSlot } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { StepsTheme } from '../styles'
+import { defineComponent, h, provide } from 'vue'
+import { useConfig, useRtl, useTheme } from '../../_mixins'
+import { createInjectionKey, flatten, getSlot } from '../../_utils'
 import { stepsLight } from '../styles'
 import style from './styles/index.cssr'
 
@@ -43,6 +41,10 @@ export const stepsProps = {
     default: 'medium'
   },
   vertical: Boolean,
+  contentPlacement: {
+    type: String as PropType<'right' | 'bottom'>,
+    default: 'right'
+  },
   'onUpdate:current': [Function, Array] as PropType<
     MaybeArray<(current: number) => void>
   >,
@@ -55,16 +57,23 @@ export interface StepsInjection {
   props: ExtractPropTypes<typeof stepsProps>
   mergedClsPrefixRef: Ref<string>
   mergedThemeRef: Ref<MergedTheme<StepsTheme>>
-  stepsSlots: Slots
+  stepsSlots: StepsSlots
 }
 
 export type StepsProps = ExtractPublicPropTypes<typeof stepsProps>
+
+export interface StepsSlots {
+  default?: () => VNode[]
+  'finish-icon'?: () => VNode[]
+  'error-icon'?: () => VNode[]
+}
 
 export const stepsInjectionKey = createInjectionKey<StepsInjection>('n-steps')
 
 export default defineComponent({
   name: 'Steps',
   props: stepsProps,
+  slots: Object as SlotsType<StepsSlots>,
   setup(props, { slots }) {
     const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
     const rtlEnabledRef = useRtl('Steps', mergedRtlRef, mergedClsPrefixRef)
@@ -94,7 +103,9 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-steps`,
           this.rtlEnabled && `${mergedClsPrefix}-steps--rtl`,
-          this.vertical && `${mergedClsPrefix}-steps--vertical`
+          this.vertical && `${mergedClsPrefix}-steps--vertical`,
+          this.contentPlacement === 'bottom'
+          && `${mergedClsPrefix}-steps--content-bottom`
         ]}
       >
         {stepsWithIndex(flatten(getSlot(this)))}

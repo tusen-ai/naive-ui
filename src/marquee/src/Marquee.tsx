@@ -1,10 +1,10 @@
+import { repeat } from 'seemly'
 import { computed, defineComponent, h, nextTick, ref } from 'vue'
 import { VResizeObserver } from 'vueuc'
-import { repeat } from 'seemly'
 import { useConfig, useTheme } from '../../_mixins'
 import { marqueeLight } from '../styles'
-import style from './styles/index.cssr'
 import { marqueeProps } from './props'
+import style from './styles/index.cssr'
 
 export default defineComponent({
   name: 'Marquee',
@@ -108,22 +108,26 @@ export default defineComponent({
     if (this.autoFill) {
       return (
         <VResizeObserver onResize={this.handleContainerResize}>
-          <div
-            class={`${mergedClsPrefix}-marquee ${mergedClsPrefix}-marquee--auto-fill`}
-            ref="containerElRef"
-            style={animationCssVars}
-          >
-            <div
-              class={`${mergedClsPrefix}-marquee__group`}
-              onAnimationiteration={handleAnimationIteration}
-            >
-              {originalNode}
-              {repeat(repeatCountInOneGroup - 1, mirrorNode)}
-            </div>
-            <div class={`${mergedClsPrefix}-marquee__group`}>
-              {repeat(repeatCountInOneGroup, mirrorNode)}
-            </div>
-          </div>
+          {{
+            default: () => (
+              <div
+                class={`${mergedClsPrefix}-marquee ${mergedClsPrefix}-marquee--auto-fill`}
+                ref="containerElRef"
+                style={animationCssVars}
+              >
+                <div
+                  class={`${mergedClsPrefix}-marquee__group`}
+                  onAnimationiteration={handleAnimationIteration}
+                >
+                  {originalNode}
+                  {repeat(repeatCountInOneGroup - 1, mirrorNode)}
+                </div>
+                <div class={`${mergedClsPrefix}-marquee__group`}>
+                  {repeat(repeatCountInOneGroup, mirrorNode)}
+                </div>
+              </div>
+            )
+          }}
         </VResizeObserver>
       )
     }

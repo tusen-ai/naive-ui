@@ -1,11 +1,5 @@
-import {
-  type PropType,
-  Transition,
-  TransitionGroup,
-  type TransitionProps,
-  defineComponent,
-  h
-} from 'vue'
+import type { PropType, TransitionProps } from 'vue'
+import { defineComponent, h, Transition, TransitionGroup } from 'vue'
 
 export default defineComponent({
   name: 'FadeInExpandTransition',

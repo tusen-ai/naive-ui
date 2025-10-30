@@ -1,5 +1,5 @@
-import { commonDark } from '../../_styles/common'
 import type { BadgeTheme } from './light'
+import { commonDark } from '../../_styles/common'
 
 const badgeDark: BadgeTheme = {
   name: 'Badge',

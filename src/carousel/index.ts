@@ -1,4 +1,8 @@
-export { default as NCarousel, carouselProps } from './src/Carousel'
+export { carouselProps, default as NCarousel } from './src/Carousel'
+export type { CarouselProps, CarouselSlots } from './src/Carousel'
 export { default as NCarouselItem } from './src/CarouselItem'
-export type { CarouselProps } from './src/Carousel'
-export type { CarouselInst } from './src/interface'
+export type {
+  CarouselArrowSlotProps,
+  CarouselDotSlotProps,
+  CarouselInst
+} from './src/interface'

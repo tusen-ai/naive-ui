@@ -1,15 +1,10 @@
-import {
-  type PropType,
-  computed,
-  createTextVNode,
-  defineComponent,
-  h
-} from 'vue'
-import { format, formatDistanceStrict, fromUnixTime } from 'date-fns'
 import type { Locale } from 'date-fns'
-import { formatInTimeZone } from 'date-fns-tz'
-import { useLocale } from '../../_mixins'
+import type { PropType } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import { format, formatDistanceStrict, fromUnixTime } from 'date-fns'
+import { formatInTimeZone } from 'date-fns-tz'
+import { computed, createTextVNode, defineComponent, h } from 'vue'
+import { useLocale } from '../../_mixins'
 
 export const timeProps = {
   time: {

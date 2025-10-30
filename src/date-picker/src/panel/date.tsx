@@ -1,19 +1,24 @@
-import { type PropType, defineComponent, h, watchEffect } from 'vue'
+import type { PropType } from 'vue'
+import type {
+  DatePickerClearSlotProps,
+  DatePickerNowSlotProps
+} from '../public-types'
+import { defineComponent, h, watchEffect } from 'vue'
+import { NBaseFocusDetector } from '../../../_internal'
 import {
   BackwardIcon,
   FastBackwardIcon,
   FastForwardIcon,
   ForwardIcon
 } from '../../../_internal/icons'
+import {
+  resolveSlot,
+  resolveSlotWithTypedProps,
+  warnOnce
+} from '../../../_utils'
 import { NButton, NxButton } from '../../../button'
-import { NBaseFocusDetector } from '../../../_internal'
-import { resolveSlot, resolveSlotWithProps, warnOnce } from '../../../_utils'
-import type {
-  DatePickerClearSlotProps,
-  DatePickerNowSlotProps
-} from '../public-types'
-import { useCalendar, useCalendarProps } from './use-calendar'
 import PanelHeader from './panelHeader'
+import { useCalendar, useCalendarProps } from './use-calendar'
 
 /**
  * Date Panel
@@ -44,8 +49,14 @@ export default defineComponent({
     return useCalendar(props, props.type)
   },
   render() {
-    const { mergedClsPrefix, mergedTheme, shortcuts, onRender, $slots, type }
-      = this
+    const {
+      mergedClsPrefix,
+      mergedTheme,
+      shortcuts,
+      onRender,
+      datePickerSlots,
+      type
+    } = this
     onRender?.()
     return (
       <div
@@ -66,16 +77,21 @@ export default defineComponent({
               class={`${mergedClsPrefix}-date-panel-month__fast-prev`}
               onClick={this.prevYear}
             >
-              {resolveSlot($slots['prev-year'], () => [<FastBackwardIcon />])}
+              {resolveSlot(datePickerSlots['prev-year'], () => [
+                <FastBackwardIcon />
+              ])}
             </div>
             <div
               class={`${mergedClsPrefix}-date-panel-month__prev`}
               onClick={this.prevMonth}
             >
-              {resolveSlot($slots['prev-month'], () => [<BackwardIcon />])}
+              {resolveSlot(datePickerSlots['prev-month'], () => [
+                <BackwardIcon />
+              ])}
             </div>
             <PanelHeader
-              monthBeforeYear={this.locale.monthBeforeYear}
+              monthYearSeparator={this.calendarHeaderMonthYearSeparator}
+              monthBeforeYear={this.calendarMonthBeforeYear}
               value={this.calendarValue}
               onUpdateValue={this.onUpdateCalendarValue}
               mergedClsPrefix={mergedClsPrefix}
@@ -86,13 +102,17 @@ export default defineComponent({
               class={`${mergedClsPrefix}-date-panel-month__next`}
               onClick={this.nextMonth}
             >
-              {resolveSlot($slots['next-month'], () => [<ForwardIcon />])}
+              {resolveSlot(datePickerSlots['next-month'], () => [
+                <ForwardIcon />
+              ])}
             </div>
             <div
               class={`${mergedClsPrefix}-date-panel-month__fast-next`}
               onClick={this.nextYear}
             >
-              {resolveSlot($slots['next-year'], () => [<FastForwardIcon />])}
+              {resolveSlot(datePickerSlots['next-year'], () => [
+                <FastForwardIcon />
+              ])}
             </div>
           </div>
           <div class={`${mergedClsPrefix}-date-panel-weekdays`}>
@@ -157,30 +177,30 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
               {shortcuts
-              && Object.keys(shortcuts).map((key) => {
-                const shortcut = shortcuts[key]
-                return Array.isArray(shortcut) ? null : (
-                  <NxButton
-                    size="tiny"
-                    onMouseenter={() => {
-                      this.handleSingleShortcutMouseenter(shortcut)
-                    }}
-                    onClick={() => {
-                      this.handleSingleShortcutClick(shortcut)
-                    }}
-                    onMouseleave={() => {
-                      this.handleShortcutMouseleave()
-                    }}
-                  >
-                    {{ default: () => key }}
-                  </NxButton>
-                )
-              })}
+                && Object.keys(shortcuts).map((key) => {
+                  const shortcut = shortcuts[key]
+                  return Array.isArray(shortcut) ? null : (
+                    <NxButton
+                      size="tiny"
+                      onMouseenter={() => {
+                        this.handleSingleShortcutMouseenter(shortcut)
+                      }}
+                      onClick={() => {
+                        this.handleSingleShortcutClick(shortcut)
+                      }}
+                      onMouseleave={() => {
+                        this.handleShortcutMouseleave()
+                      }}
+                    >
+                      {{ default: () => key }}
+                    </NxButton>
+                  )
+                })}
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
               {this.actions?.includes('clear')
-                ? resolveSlotWithProps(
-                  this.$slots.clear,
+                ? resolveSlotWithTypedProps(
+                    this.$slots.clear,
                     {
                       onClear: this.handleClearClick,
                       text: this.locale.clear
@@ -195,11 +215,11 @@ export default defineComponent({
                         {{ default: () => this.locale.clear }}
                       </NButton>
                     ]
-                )
+                  )
                 : null}
               {this.actions?.includes('now')
-                ? resolveSlotWithProps(
-                  this.$slots.now,
+                ? resolveSlotWithTypedProps(
+                    this.$slots.now,
                     {
                       onNow: this.handleNowClick,
                       text: this.locale.now
@@ -214,7 +234,7 @@ export default defineComponent({
                         {{ default: () => this.locale.now }}
                       </NButton>
                     ]
-                )
+                  )
                 : null}
               {/** we don't need a confirm button for date picking */}
             </div>

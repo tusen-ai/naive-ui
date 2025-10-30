@@ -1,9 +1,10 @@
-import { type VueWrapper, mount } from '@vue/test-utils'
-import { Fragment, createCommentVNode, h } from 'vue'
-import { NSpace } from '../index'
-import { NConfigProvider } from '../../config-provider'
+import type { VueWrapper } from '@vue/test-utils'
 import type { Justify } from '../src/Space'
+import { mount } from '@vue/test-utils'
+import { createCommentVNode, Fragment, h } from 'vue'
 import { c } from '../../_utils/cssr'
+import { NConfigProvider } from '../../config-provider'
+import { NSpace } from '../index'
 
 function getChildrenNode(wrapper: VueWrapper<any>): any[] {
   return (
@@ -24,7 +25,7 @@ describe('n-space', () => {
         return <NSpace />
       }
     })
-    expect(wrapper.find('.n-space')).not.toBe(null)
+    expect(wrapper.find('.n-space').exists()).toBeFalsy()
     expect(wrapper.html()).toMatchSnapshot()
     wrapper.unmount()
   })

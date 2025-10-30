@@ -1,7 +1,8 @@
+import type { VueWrapper } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { Fragment, h } from 'vue'
-import { type VueWrapper, mount } from '@vue/test-utils'
-import { NCheckbox, NCheckboxGroup } from '../index'
 import { NForm, NFormItem } from '../../form'
+import { NCheckbox, NCheckboxGroup } from '../index'
 
 function expectChecked(wrapper: VueWrapper<any>, value: boolean): void {
   expect(wrapper.classes().some(c => c.includes('checked'))).toEqual(value)
@@ -37,7 +38,7 @@ describe('n-checkbox', () => {
   })
 
   it('should work with `checked-value` prop', async () => {
-    const onUpdateChecked = jest.fn()
+    const onUpdateChecked = vi.fn()
     const wrapper = mount(NCheckbox, {
       props: {
         checkedValue: 'fooo',
@@ -136,7 +137,7 @@ describe('n-checkbox', () => {
   })
 
   it('should work with `on-update:checked` & `onUpdateChecked` prop', async () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
     const wrapper = mount(NCheckbox, {
       props: {
         'onUpdate:checked': onClick,
@@ -235,7 +236,7 @@ describe('n-checkbox-group', () => {
   })
 
   it('should work with `on-update:value` prop', async () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
     const wrapper = mount(NCheckboxGroup, {
       props: {
         'on-update:value': onClick
@@ -245,7 +246,7 @@ describe('n-checkbox-group', () => {
       }
     })
     await wrapper.findComponent(NCheckbox).trigger('click')
-    expect(onClick).toBeCalled()
+    expect(onClick).toHaveBeenCalled()
     wrapper.unmount()
   })
 

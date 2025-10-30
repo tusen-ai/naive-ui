@@ -1,42 +1,40 @@
+import type { TreeNode } from 'treemate'
+import type { HTMLAttributes, PropType, Ref, VNodeChild } from 'vue'
+import type { FollowerPlacement } from 'vueuc'
+import type {
+  MenuGroupOption,
+  MenuOptionSharedPart
+} from '../../menu/src/interface'
+import type {
+  DropdownGroupOption,
+  DropdownIgnoredOption,
+  DropdownOption
+} from './interface'
+import { happensIn } from 'seemly'
+import { useMemo } from 'vooks'
 import {
-  type HTMLAttributes,
-  type PropType,
-  type Ref,
-  Transition,
-  type VNodeChild,
   computed,
   defineComponent,
   h,
   inject,
   mergeProps,
   provide,
-  ref
+  ref,
+  Transition
 } from 'vue'
-import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc'
-import { useMemo } from 'vooks'
-import { happensIn } from 'seemly'
-import type { TreeNode } from 'treemate'
-import type {
-  MenuGroupOption,
-  MenuOptionSharedPart
-} from '../../menu/src/interface'
+import { VBinder, VFollower, VTarget } from 'vueuc'
 import { ChevronRightIcon } from '../../_internal/icons'
 import { render, useDeferredTrue } from '../../_utils'
-import { NIcon } from '../../icon'
 
+import { NIcon } from '../../icon'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
-import NDropdownMenu from './DropdownMenu'
 import {
   dropdownInjectionKey,
   dropdownMenuInjectionKey,
   dropdownOptionInjectionKey
 } from './context'
+import NDropdownMenu from './DropdownMenu'
 import { isSubmenuNode } from './utils'
-import type {
-  DropdownGroupOption,
-  DropdownIgnoredOption,
-  DropdownOption
-} from './interface'
 
 export interface NDropdownOptionInjection {
   enteringSubmenuRef: Ref<boolean>

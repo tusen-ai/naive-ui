@@ -4,10 +4,10 @@
 Various data would come from backend.
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { repeat } from 'seemly'
+<script lang="ts" setup>
 import type { TreeOption } from 'naive-ui'
+import { repeat } from 'seemly'
+import { ref } from 'vue'
 
 function createData(level = 4, baseKey = ''): TreeOption[] | undefined {
   if (!level)
@@ -34,14 +34,8 @@ function createLabel(level: number): string {
   return ''
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      data: createData(),
-      defaultExpandedKeys: ref(['40', '41'])
-    }
-  }
-})
+const data = createData()
+const defaultExpandedKeys = ref(['40', '41'])
 </script>
 
 <template>

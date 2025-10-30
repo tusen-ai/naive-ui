@@ -1,11 +1,6 @@
-import {
-  type CSSProperties,
-  type PropType,
-  computed,
-  defineComponent,
-  h
-} from 'vue'
-import { formatLength } from '../../_utils'
+import type { CSSProperties, PropType } from 'vue'
+import type { ProgressGradient, ProgressStatus } from './public-types'
+import { computed, defineComponent, h } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {
   ErrorIcon as ErrorCircleIcon,
@@ -13,7 +8,7 @@ import {
   SuccessIcon as SuccessCircleIcon,
   WarningIcon
 } from '../../_internal/icons'
-import type { ProgressGradient, ProgressStatus } from './public-types'
+import { formatLength } from '../../_utils'
 
 const iconMap = {
   success: <SuccessCircleIcon />,
@@ -111,8 +106,7 @@ export default defineComponent({
               class={[
                 `${clsPrefix}-progress-graph-line`,
                 {
-                  [`${clsPrefix}-progress-graph-line--indicator-${indicatorPlacement}`]:
-                    true
+                  [`${clsPrefix}-progress-graph-line--indicator-${indicatorPlacement}`]: true
                 }
               ]}
             >

@@ -3,8 +3,8 @@
 </markdown>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import type { TabsProps } from 'naive-ui'
+import { ref } from 'vue'
 
 const placement = ref<NonNullable<TabsProps['placement']>>('left')
 const type = ref<TabsProps['type']>('card')

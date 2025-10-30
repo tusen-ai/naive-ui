@@ -1,47 +1,13 @@
-import {
-  type CSSProperties,
-  Fragment,
-  type PropType,
-  type VNodeChild,
-  computed,
-  defineComponent,
-  h,
-  nextTick,
-  ref,
-  toRef,
-  watchEffect
-} from 'vue'
-import { useMergedState } from 'vooks'
-import { NPopselect } from '../../popselect'
-import { NSelect } from '../../select'
-import type { SelectProps } from '../../select'
-import { NInput } from '../../input'
-import { NBaseIcon } from '../../_internal'
-import {
-  BackwardIcon,
-  FastBackwardIcon,
-  FastForwardIcon,
-  ForwardIcon,
-  MoreIcon
-} from '../../_internal/icons'
+import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
-import type { PaginationTheme } from '../styles'
-import { paginationLight } from '../styles'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import {
-  call,
-  createKey,
-  resolveSlot,
-  smallerSize,
-  useAdjustedTo,
-  warn,
-  warnOnce
-} from '../../_utils'
 import type { Size as InputSize } from '../../input/src/interface'
+import type { SelectProps } from '../../select'
 import type { Size as SelectSize } from '../../select/src/interface'
-import { useRtl } from '../../_mixins/use-rtl'
+import type { PaginationTheme } from '../styles'
 import type {
+  PaginationInfo,
+  PaginationLabelInfo,
   PaginationRenderLabel,
   PaginationSizeOption,
   RenderGoto,
@@ -51,9 +17,43 @@ import type {
   RenderSuffix,
   Size
 } from './interface'
+import type { PageItem } from './utils'
+import { useMergedState } from 'vooks'
+import {
+  computed,
+  defineComponent,
+  Fragment,
+  h,
+  nextTick,
+  ref,
+  toRef,
+  watchEffect
+} from 'vue'
+import { NBaseIcon } from '../../_internal'
+import {
+  BackwardIcon,
+  FastBackwardIcon,
+  FastForwardIcon,
+  ForwardIcon,
+  MoreIcon
+} from '../../_internal/icons'
+import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
+import {
+  call,
+  createKey,
+  resolveSlot,
+  smallerSize,
+  useAdjustedTo,
+  warn,
+  warnOnce
+} from '../../_utils'
+import { NInput } from '../../input'
+import { NPopselect } from '../../popselect'
+import { NSelect } from '../../select'
+import { paginationLight } from '../styles'
 import style from './styles/index.cssr'
 import { createPageItemsInfo, getDefaultPageSize } from './utils'
-import type { PageItem } from './utils'
 
 export const paginationProps = {
   ...(useTheme.props as ThemeProps<PaginationTheme>),
@@ -123,9 +123,20 @@ export const paginationProps = {
 
 export type PaginationProps = ExtractPublicPropTypes<typeof paginationProps>
 
+export interface PaginationSlots {
+  default?: () => VNode[]
+  goto?: () => VNode[]
+  label?: (props: PaginationLabelInfo) => VNode[]
+  next?: (props: PaginationInfo) => VNode
+  prev?: (props: PaginationInfo) => VNode
+  prefix?: (props: PaginationInfo) => VNode
+  suffix?: (props: PaginationInfo) => VNode
+}
+
 export default defineComponent({
   name: 'Pagination',
   props: paginationProps,
+  slots: Object as SlotsType<PaginationSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {
@@ -501,16 +512,16 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'pagination',
-        computed(() => {
-          let hash = ''
-          const { size } = props
-          hash += size[0]
-          return hash
-        }),
-        cssVarsRef,
-        props
-      )
+          'pagination',
+          computed(() => {
+            let hash = ''
+            const { size } = props
+            hash += size[0]
+            return hash
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       rtlEnabled: rtlEnabledRef,
@@ -586,8 +597,8 @@ export default defineComponent({
       onRender
     } = this
     onRender?.()
-    const renderPrefix = ($slots.prefix as RenderPrefix | undefined) || prefix
-    const renderSuffix = ($slots.suffix as RenderSuffix | undefined) || suffix
+    const renderPrefix = prefix || $slots.prefix
+    const renderSuffix = suffix || $slots.suffix
     const renderPrev = prev || $slots.prev
     const renderNext = next || $slots.next
     const renderLabel = label || $slots.label
@@ -628,7 +639,7 @@ export default defineComponent({
                       (mergedPage <= 1
                         || mergedPage > mergedPageCount
                         || disabled)
-                        && `${mergedClsPrefix}-pagination-item--disabled`
+                      && `${mergedClsPrefix}-pagination-item--disabled`
                     ]}
                     onClick={handleBackwardClick}
                   >
@@ -766,9 +777,9 @@ export default defineComponent({
                             type !== 'page'
                             && ((type === 'fast-backward'
                               && this.showFastBackwardMenu)
-                              || (type === 'fast-forward'
-                                && this.showFastForwardMenu))
-                                && `${mergedClsPrefix}-pagination-item--hover`,
+                            || (type === 'fast-forward'
+                              && this.showFastForwardMenu))
+                            && `${mergedClsPrefix}-pagination-item--hover`,
                             disabled
                             && `${mergedClsPrefix}-pagination-item--disabled`,
                             type === 'page'

@@ -1,28 +1,30 @@
-import {
-  type ExtractPropTypes,
-  type PropType,
-  computed,
-  inject,
-  nextTick,
-  ref
-} from 'vue'
-import { useKeyboard } from 'vooks'
-import {
-  type DefaultTime,
-  type OnClose,
-  type OnPanelUpdateValue,
-  type OnPanelUpdateValueImpl,
-  type Shortcuts,
-  type Value,
-  datePickerInjectionKey
+import type { ExtractPropTypes, PropType } from 'vue'
+import type {
+  DefaultTime,
+  OnClose,
+  OnPanelUpdateValue,
+  OnPanelUpdateValueImpl,
+  Shortcuts,
+  Value
 } from '../interface'
+import { useKeyboard } from 'vooks'
+import { computed, inject, nextTick, ref } from 'vue'
+import { datePickerInjectionKey } from '../interface'
 
 const TIME_FORMAT = 'HH:mm:ss'
 
 const usePanelCommonProps = {
   active: Boolean,
   dateFormat: String,
-  timerPickerFormat: {
+  calendarDayFormat: String,
+  calendarHeaderYearFormat: String,
+  calendarHeaderMonthFormat: String,
+  calendarHeaderMonthYearSeparator: { type: String, required: true },
+  calendarHeaderMonthBeforeYear: {
+    type: Boolean,
+    default: undefined
+  },
+  timePickerFormat: {
     type: String,
     value: TIME_FORMAT
   },
@@ -31,7 +33,7 @@ const usePanelCommonProps = {
     default: null
   },
   shortcuts: Object as PropType<Shortcuts>,
-  defaultTime: [Number, String, Array] as PropType<DefaultTime>,
+  defaultTime: [Number, String, Array, Function] as PropType<DefaultTime>,
   inputReadonly: Boolean,
   onClear: Function,
   onConfirm: Function as PropType<(value: Value | null) => void>,

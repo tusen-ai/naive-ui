@@ -2,9 +2,9 @@
 # Rtl Debug
 </markdown>
 
-<script lang="ts">
-import { defineComponent, h, ref } from 'vue'
+<script lang="ts" setup>
 import { NButton, unstableDialogRtl, useDialog, useMessage } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
 
 const DialogButton = defineComponent({
   setup() {
@@ -39,17 +39,8 @@ const DialogButton = defineComponent({
   }
 })
 
-export default defineComponent({
-  components: {
-    DialogButton
-  },
-  setup() {
-    return {
-      rtlEnabled: ref(true),
-      rtlStyles: [unstableDialogRtl]
-    }
-  }
-})
+const rtlEnabled = ref(true)
+const rtlStyles = [unstableDialogRtl]
 </script>
 
 <template>

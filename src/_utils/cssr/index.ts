@@ -1,5 +1,6 @@
-import { type CNode, type CProperties, CssRender } from 'css-render'
+import type { CNode, CProperties } from 'css-render'
 import { plugin as BemPlugin } from '@css-render/plugin-bem'
+import { CssRender } from 'css-render'
 
 const namespace = 'n'
 const prefix = `.${namespace}-`
@@ -45,21 +46,21 @@ function createKey<P extends string, S extends string>(
     + (suffix === 'default'
       ? ''
       : suffix.replace(/^[a-z]/, startChar =>
-        startChar.toUpperCase()))) as any
+          startChar.toUpperCase()))) as any
 }
 
 export {
+  asModal,
   c,
   cB,
+  cCB,
   cE,
   cM,
   cNotM,
-  cCB,
+  createKey,
+  find,
   insideModal,
   insidePopover,
-  asModal,
-  prefix,
   namespace,
-  find,
-  createKey
+  prefix
 }

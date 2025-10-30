@@ -1,14 +1,9 @@
-import {
-  type CSSProperties,
-  type PropType,
-  defineComponent,
-  h,
-  inject
-} from 'vue'
-import { NBaseClose, NScrollbar } from '../../_internal'
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ScrollbarProps } from '../../_internal'
-import { throwError } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import { defineComponent, h, inject } from 'vue'
+import { NBaseClose, NScrollbar } from '../../_internal'
+import { throwError } from '../../_utils'
 import { drawerInjectionKey } from './interface'
 
 export const drawerContentProps = {
@@ -30,9 +25,16 @@ export type DrawerContentProps = ExtractPublicPropTypes<
   typeof drawerContentProps
 >
 
+export interface DrawerContentSlots {
+  default?: () => VNode[]
+  header?: () => VNode[]
+  footer?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'DrawerContent',
   props: drawerContentProps,
+  slots: Object as SlotsType<DrawerContentSlots>,
   setup() {
     const NDrawer = inject(drawerInjectionKey, null)
     if (!NDrawer) {

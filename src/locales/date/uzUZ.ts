@@ -1,5 +1,5 @@
-import { uz } from 'date-fns/locale'
 import type { NDateLocale } from './enUS'
+import { uz } from 'date-fns/locale'
 
 const dateUzUZ: NDateLocale = {
   name: 'uz-UZ',

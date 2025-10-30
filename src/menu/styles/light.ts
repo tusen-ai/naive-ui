@@ -1,9 +1,9 @@
-import { changeColor } from 'seemly'
-import { tooltipLight } from '../../tooltip/styles'
-import { dropdownLight } from '../../dropdown/styles'
-import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
+import { changeColor } from 'seemly'
 import { createTheme } from '../../_mixins/use-theme'
+import { commonLight } from '../../_styles/common'
+import { dropdownLight } from '../../dropdown/styles'
+import { tooltipLight } from '../../tooltip/styles'
 
 export function createPartialInvertedVars(
   color: string,

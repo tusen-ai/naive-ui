@@ -1,15 +1,11 @@
-import {
-  type CSSProperties,
-  type PropType,
-  type VNode,
-  computed,
-  defineComponent,
-  h
-} from 'vue'
-import { useCompitable } from 'vooks'
-import { repeat } from 'seemly'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { DescriptionsTheme } from '../styles'
+import { repeat } from 'seemly'
+import { useCompitable } from 'vooks'
+import { computed, defineComponent, h } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import {
   createKey,
   flatten,
@@ -17,11 +13,9 @@ import {
   getVNodeChildren,
   warn
 } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { descriptionsLight } from '../styles'
-import type { DescriptionsTheme } from '../styles'
-import { isDescriptionsItem } from './utils'
 import style from './styles/index.cssr'
+import { isDescriptionsItem } from './utils'
 
 export const descriptionsProps = {
   ...(useTheme.props as ThemeProps<DescriptionsTheme>),
@@ -58,9 +52,15 @@ export type DescriptionsProps = ExtractPublicPropTypes<typeof descriptionsProps>
 /** @deprecated You should use `DescriptionsProps` */
 export type DescriptionProps = DescriptionsProps
 
+export interface DescriptionsSlots {
+  default?: () => VNode[]
+  header?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Descriptions',
   props: descriptionsProps,
+  slots: Object as SlotsType<DescriptionsSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
@@ -122,18 +122,18 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'descriptions',
-        computed(() => {
-          let hash = ''
-          const { size, bordered } = props
-          if (bordered)
-            hash += 'a'
-          hash += size[0]
-          return hash
-        }),
-        cssVarsRef,
-        props
-      )
+          'descriptions',
+          computed(() => {
+            let hash = ''
+            const { size, bordered } = props
+            if (bordered)
+              hash += 'a'
+            hash += size[0]
+            return hash
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,

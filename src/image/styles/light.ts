@@ -1,6 +1,6 @@
-import { tooltipLight } from '../../tooltip/styles'
 import { createTheme } from '../../_mixins'
 import { commonLight } from '../../_styles/common'
+import { tooltipLight } from '../../tooltip/styles'
 
 function self() {
   return {

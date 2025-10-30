@@ -39,8 +39,13 @@ panel.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| calendar-day-format | `string` | `undefined` | Weekday format inside popup panel. | 2.40.2 |
+| calendar-header-year-format | `string` | `undefined` | Year format inside the header of popup panel's calendar. | 2.40.2 |
+| calendar-header-month-format | `string` | `undefined` | Month format inside the header of popup panel's calendar. | 2.40.2 |
+| calendar-header-month-before-year | `string` | `undefined` | Whether to show month before year inside the header of popup panel's calender. | 2.40.2 |
+| calendar-header-month-year-separator | `string` | `' '` | Separator between month and year inside the header of popup panel's calendar. | 2.40.2 |
 | clearable | `boolean` | `false` | Whether the date picker is clearable. |  |
-| date-format | `string` | `undefined` | Date input format inside popup panel. | NEXT_VERSION |
+| date-format | `string` | `undefined` | Date input format inside popup panel. | 2.40.2 |
 | default-value | `number \| [number, number] \| null` | `undefined` | Date picker's default value. |  |
 | default-formatted-value | `string \| [string, string] \| null` | `undefined` | Date picker's default formatted value. | 2.24.0 |
 | disabled | `boolean` | `false` | Whether the date picker is disabled. |  |
@@ -89,7 +94,7 @@ panel.vue
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` | Operations supported for the `datetime` type date picker. |  |
 | default-calendar-start-time | `number` | `undefined` | Default panel calendar start month timestamp. | 2.38.1 |
-| default-time | `string` | `undefined` | Default time of the selected date. It's format is `HH:mm:ss`. | 2.22.0 |
+| default-time | `string \| (timestamp: number) => string` | `undefined` | Default time of the selected date. Can accept a function with a timestamp argument that returns a formatted string. It's format is `HH:mm:ss`. | 2.22.0, functional since NEXT_VERSION |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `() => false` | Validator of the date. | `detail` 2.37.1 |
 | is-time-disabled | `(current: number) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | Validator of the time. |  |
@@ -126,7 +131,7 @@ panel.vue
 | bind-calendar-months | `boolean` | `false` | Whether months in panel calendar are consecutive. | 2.28.3 |
 | default-calendar-start-time | `number` | `undefined` | Default panel calendar start month timestamp. | 2.28.3 |
 | default-calendar-end-time | `number` | `undefined` | Default panel calendar end month timestamp. | 2.28.3 |
-| default-time | `string \| Array<string \| undefined>` | `undefined` | Default time of the selected date. It's format is `HH:mm:ss`. | 2.22.0 |
+| default-time | `string \| Array<string \| undefined> \| (timestamp: number, position: "start" \| "end", value: [number, number] \| null) => string` | `undefined` | Default time of the selected date. Can accept a function with timestamp, position and value arguments that returns a formatted string. It's format is `HH:mm:ss`. | 2.22.0, functional since NEXT_VERSION |
 | end-placeholder | `string` | `'End Date and Time'` | Placeholder at end part of the input. |  |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. |  |
@@ -215,9 +220,9 @@ panel.vue
 
 | 名称 | 参数 | 说明 | 版本 |
 | --- | --- | --- | --- |
-| now | `(props: { onNow: () => void, text: string })` | Now button of the panel. | 2.40.0 |
 | clear | `(props: { onClear: () => void, text: string })` | Clear button of the panel. | 2.40.0 |
 | confirm | `(props: { onConfirm: () => void, disabled: boolean, text: string })` | Confirm button of the panel. | 2.40.0 |
+| now | `(props: { onNow: () => void, text: string })` | Now button of the panel. | 2.40.0 |
 
 ### DatePicker Methods
 

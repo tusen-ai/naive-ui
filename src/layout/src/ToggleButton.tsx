@@ -1,4 +1,5 @@
-import { type PropType, defineComponent, h } from 'vue'
+import type { PropType } from 'vue'
+import { defineComponent, h } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import { ChevronRightIcon } from '../../_internal/icons'
 

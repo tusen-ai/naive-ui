@@ -1,22 +1,24 @@
-import {
-  type CSSProperties,
-  type PropType,
-  Transition,
-  computed,
-  defineComponent,
-  h,
-  nextTick,
-  provide,
-  ref,
-  toRef,
-  watch,
-  watchEffect,
-  withDirectives
-} from 'vue'
-import { useIsMounted, useKeyboard, useMergedState } from 'vooks'
-import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc'
-import { clickoutside } from 'vdirs'
-import { getPreciseEventTarget, happensIn } from 'seemly'
+import type { Locale } from 'date-fns'
+import type { CSSProperties, PropType, VNode } from 'vue'
+import type { FollowerPlacement } from 'vueuc'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { FormValidationStatus } from '../../form/src/public-types'
+import type { InputInst } from '../../input'
+import type { TimePickerTheme } from '../styles'
+import type {
+  IsHourDisabled,
+  IsMinuteDisabled,
+  IsSecondDisabled,
+  ItemValue,
+  OnUpdateFormattedValue,
+  OnUpdateFormattedValueImpl,
+  OnUpdateValue,
+  OnUpdateValueImpl,
+  PanelRef,
+  Size,
+  TimePickerInst
+} from './interface'
 import {
   format,
   getHours,
@@ -34,12 +36,25 @@ import {
   startOfSecond
 } from 'date-fns'
 import { formatInTimeZone } from 'date-fns-tz'
-import type { Locale } from 'date-fns'
-import type { FormValidationStatus } from '../../form/src/interface'
-import { strictParse } from '../../date-picker/src/utils'
-import { TimeIcon } from '../../_internal/icons'
-import { type InputInst, NInput } from '../../input'
+import { getPreciseEventTarget, happensIn } from 'seemly'
+import { clickoutside } from 'vdirs'
+import { useIsMounted, useKeyboard, useMergedState } from 'vooks'
+import {
+  computed,
+  defineComponent,
+  h,
+  nextTick,
+  provide,
+  ref,
+  toRef,
+  Transition,
+  watch,
+  watchEffect,
+  withDirectives
+} from 'vue'
+import { VBinder, VFollower, VTarget } from 'vueuc'
 import { NBaseIcon } from '../../_internal'
+import { TimeIcon } from '../../_internal/icons'
 import {
   useConfig,
   useFormItem,
@@ -47,33 +62,19 @@ import {
   useTheme,
   useThemeClass
 } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import {
   call,
   markEventEffectPerformed,
   useAdjustedTo,
   warnOnce
 } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import { strictParse } from '../../date-picker/src/utils'
+import { NInput } from '../../input'
 import { timePickerLight } from '../styles'
-import type { TimePickerTheme } from '../styles'
-import Panel from './Panel'
-import type {
-  IsHourDisabled,
-  IsMinuteDisabled,
-  IsSecondDisabled,
-  ItemValue,
-  OnUpdateFormattedValue,
-  OnUpdateFormattedValueImpl,
-  OnUpdateValue,
-  OnUpdateValueImpl,
-  PanelRef,
-  Size,
-  TimePickerInst
-} from './interface'
 import { timePickerInjectionKey } from './interface'
-import { findSimilarTime, isTimeInStep } from './utils'
+import Panel from './Panel'
 import style from './styles/index.cssr'
+import { findSimilarTime, isTimeInStep } from './utils'
 
 // validate hours, minutes, seconds prop
 function validateUnits(value: MaybeArray<number>, max: number): boolean {
@@ -177,6 +178,11 @@ export const timePickerProps = {
 }
 
 export type TimePickerProps = ExtractPublicPropTypes<typeof timePickerProps>
+
+export interface TimePickerSlots {
+  default?: () => VNode[]
+  icon?: () => VNode[]
+}
 
 export default defineComponent({
   name: 'TimePicker',
@@ -289,10 +295,10 @@ export default defineComponent({
           = mergedValue === null
             ? ''
             : mergedFormatRef.value(
-              mergedValue,
-              props.format,
-              dateFnsOptionsRef.value
-            )
+                mergedValue,
+                props.format,
+                dateFnsOptionsRef.value
+              )
       },
       {
         immediate: true
@@ -804,11 +810,11 @@ export default defineComponent({
     })
     const triggerThemeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'time-picker-trigger',
-        undefined,
-        triggerCssVarsRef,
-        props
-      )
+          'time-picker-trigger',
+          undefined,
+          triggerCssVarsRef,
+          props
+        )
       : undefined
     const cssVarsRef = computed(() => {
       const {

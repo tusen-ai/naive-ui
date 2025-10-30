@@ -1,5 +1,9 @@
-import { type CSSProperties, computed, defineComponent, h } from 'vue'
+import type { CSSProperties, SlotsType, VNode } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { DialogTheme } from '../styles'
 import { getMargin } from 'seemly'
+import { computed, defineComponent, h } from 'vue'
+import { NBaseClose, NBaseIcon } from '../../_internal'
 import {
   ErrorIcon,
   InfoIcon,
@@ -7,17 +11,14 @@ import {
   WarningIcon
 } from '../../_internal/icons'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import {
   createKey,
   render,
   resolveSlot,
   resolveWrappedSlot
 } from '../../_utils'
-import { NBaseClose, NBaseIcon } from '../../_internal'
 import { NButton } from '../../button'
 import { dialogLight } from '../styles'
-import type { DialogTheme } from '../styles'
 import { dialogProps } from './dialogProps'
 import style from './styles/index.cssr'
 
@@ -27,6 +28,14 @@ const iconRenderMap = {
   success: () => <SuccessIcon />,
   warning: () => <WarningIcon />,
   error: () => <ErrorIcon />
+}
+
+export interface DialogSlots {
+  action?: () => VNode[]
+  default?: () => VNode[]
+  header?: () => VNode[]
+  icon?: () => VNode[]
+  close?: () => VNode[]
 }
 
 export const NDialog = defineComponent({
@@ -39,6 +48,7 @@ export const NDialog = defineComponent({
     ...(useTheme.props as ThemeProps<DialogTheme>),
     ...dialogProps
   },
+  slots: Object as SlotsType<DialogSlots>,
   setup(props) {
     const {
       mergedComponentPropsRef,
@@ -146,11 +156,11 @@ export const NDialog = defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'dialog',
-        computed(() => `${props.type[0]}${mergedIconPlacementRef.value[0]}`),
-        cssVarsRef,
-        props
-      )
+          'dialog',
+          computed(() => `${props.type[0]}${mergedIconPlacementRef.value[0]}`),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
@@ -213,40 +223,40 @@ export const NDialog = defineComponent({
           style={this.actionStyle}
         >
           {children
-          || (action
-            ? [render(action)]
-            : [
-                this.negativeText && (
-                  <NButton
-                    theme={mergedTheme.peers.Button}
-                    themeOverrides={mergedTheme.peerOverrides.Button}
-                    ghost
-                    size="small"
-                    onClick={handleNegativeClick}
-                    {...negativeButtonProps}
-                  >
-                    {{
-                      default: () => render(this.negativeText)
-                    }}
-                  </NButton>
-                ),
-                this.positiveText && (
-                  <NButton
-                    theme={mergedTheme.peers.Button}
-                    themeOverrides={mergedTheme.peerOverrides.Button}
-                    size="small"
-                    type={type === 'default' ? 'primary' : type}
-                    disabled={loading}
-                    loading={loading}
-                    onClick={handlePositiveClick}
-                    {...positiveButtonProps}
-                  >
-                    {{
-                      default: () => render(this.positiveText)
-                    }}
-                  </NButton>
-                )
-              ])}
+            || (action
+              ? [render(action)]
+              : [
+                  this.negativeText && (
+                    <NButton
+                      theme={mergedTheme.peers.Button}
+                      themeOverrides={mergedTheme.peerOverrides.Button}
+                      ghost
+                      size="small"
+                      onClick={handleNegativeClick}
+                      {...negativeButtonProps}
+                    >
+                      {{
+                        default: () => render(this.negativeText)
+                      }}
+                    </NButton>
+                  ),
+                  this.positiveText && (
+                    <NButton
+                      theme={mergedTheme.peers.Button}
+                      themeOverrides={mergedTheme.peerOverrides.Button}
+                      size="small"
+                      type={type === 'default' ? 'primary' : type}
+                      disabled={loading}
+                      loading={loading}
+                      onClick={handlePositiveClick}
+                      {...positiveButtonProps}
+                    >
+                      {{
+                        default: () => render(this.positiveText)
+                      }}
+                    </NButton>
+                  )
+                ])}
         </div>
       ) : null)
 
@@ -265,20 +275,21 @@ export const NDialog = defineComponent({
       >
         {closable
           ? resolveWrappedSlot(this.$slots.close, (node) => {
-            const classNames = [
-              `${mergedClsPrefix}-dialog__close`,
-              this.rtlEnabled && `${mergedClsPrefix}-dialog--rtl`
-            ]
-            return node ? (
-              <div class={classNames}>{node}</div>
-            ) : (
-              <NBaseClose
-                clsPrefix={mergedClsPrefix}
-                class={classNames}
-                onClick={this.handleCloseClick}
-              />
-            )
-          })
+              const classNames = [
+                `${mergedClsPrefix}-dialog__close`,
+                this.rtlEnabled && `${mergedClsPrefix}-dialog--rtl`
+              ]
+              return node ? (
+                <div class={classNames}>{node}</div>
+              ) : (
+                <NBaseClose
+                  focusable={this.closeFocusable}
+                  clsPrefix={mergedClsPrefix}
+                  class={classNames}
+                  onClick={this.handleCloseClick}
+                />
+              )
+            })
           : null}
         {showIcon && mergedIconPlacement === 'top' ? (
           <div class={`${mergedClsPrefix}-dialog-icon-container`}>{icon}</div>

@@ -1,8 +1,10 @@
+import type { CSSProperties, PropType } from 'vue'
+import type { ModalDraggableOptions } from '../../modal/src/interface'
 // use absolute path to make sure no circular ref of style
 // this -> modal-index -> modal-style
-import { type CSSProperties, type PropType, defineComponent, h, ref } from 'vue'
-import NModal from '../../modal/src/Modal'
+import { defineComponent, h, normalizeClass, ref } from 'vue'
 import { keep } from '../../_utils'
+import NModal from '../../modal/src/Modal'
 import { NDialog } from './Dialog'
 import { dialogPropKeys, dialogProps } from './dialogProps'
 
@@ -23,6 +25,7 @@ export const exposedDialogEnvProps = {
     type: Boolean,
     default: true
   },
+  zIndex: Number,
   onPositiveClick: Function as PropType<
     (e: MouseEvent) => Promise<unknown> | unknown
   >,
@@ -30,7 +33,8 @@ export const exposedDialogEnvProps = {
     (e: MouseEvent) => Promise<unknown> | unknown
   >,
   onClose: Function as PropType<() => Promise<unknown> | unknown>,
-  onMaskClick: Function as PropType<(e: MouseEvent) => void>
+  onMaskClick: Function as PropType<(e: MouseEvent) => void>,
+  draggable: [Boolean, Object] as PropType<boolean | ModalDraggableOptions>
 } as const
 
 export const NDialogEnvironment = defineComponent({
@@ -139,6 +143,7 @@ export const NDialogEnvironment = defineComponent({
       handleMaskClick,
       handleEsc,
       to,
+      zIndex,
       maskClosable,
       show
     } = this
@@ -149,6 +154,7 @@ export const NDialogEnvironment = defineComponent({
         onMaskClick={handleMaskClick}
         onEsc={handleEsc}
         to={to}
+        zIndex={zIndex}
         maskClosable={maskClosable}
         onAfterEnter={this.onAfterEnter}
         onAfterLeave={handleAfterLeave}
@@ -156,13 +162,15 @@ export const NDialogEnvironment = defineComponent({
         blockScroll={this.blockScroll}
         autoFocus={this.autoFocus}
         transformOrigin={this.transformOrigin}
+        draggable={this.draggable}
         internalAppear
         internalDialog
       >
         {{
-          default: () => (
+          default: ({ draggableClass }: { draggableClass: string }) => (
             <NDialog
               {...keep(this.$props, dialogPropKeys)}
+              titleClass={normalizeClass([this.titleClass, draggableClass])}
               style={this.internalStyle}
               onClose={handleCloseClick}
               onNegativeClick={handleNegativeClick}

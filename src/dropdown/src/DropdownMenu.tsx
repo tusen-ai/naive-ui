@@ -1,24 +1,22 @@
-import {
-  type CSSProperties,
-  type PropType,
-  type Ref,
-  computed,
-  defineComponent,
-  h,
-  inject,
-  provide,
-  ref
-} from 'vue'
 import type { TreeNode } from 'treemate'
-import { renderArrow } from '../../popover/src/PopoverBody'
+import type { CSSProperties, PropType, Ref } from 'vue'
+import type {
+  DropdownGroupOption,
+  DropdownIgnoredOption,
+  DropdownOption,
+  DropdownRenderOption
+} from './interface'
+import { computed, defineComponent, h, inject, provide, ref } from 'vue'
 import { NxScrollbar } from '../../_internal/scrollbar'
-import { modalBodyInjectionKey } from '../../modal/src/interface'
 import { drawerBodyInjectionKey } from '../../drawer/src/interface'
+import { modalBodyInjectionKey } from '../../modal/src/interface'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
+import { renderArrow } from '../../popover/src/PopoverBody'
+
+import { dropdownInjectionKey, dropdownMenuInjectionKey } from './context'
+
 import NDropdownDivider from './DropdownDivider'
-
 import NDropdownGroup from './DropdownGroup'
-
 import NDropdownOption from './DropdownOption'
 import NDropdownRenderOption from './DropdownRenderOption'
 import {
@@ -27,13 +25,6 @@ import {
   isRenderNode,
   isSubmenuNode
 } from './utils'
-import { dropdownInjectionKey, dropdownMenuInjectionKey } from './context'
-import type {
-  DropdownGroupOption,
-  DropdownIgnoredOption,
-  DropdownOption,
-  DropdownRenderOption
-} from './interface'
 
 export interface NDropdownMenuInjection {
   showIconRef: Ref<boolean>
@@ -156,12 +147,12 @@ export default defineComponent({
         )}
         {this.showArrow
           ? renderArrow({
-            clsPrefix,
-            arrowStyle: this.arrowStyle,
-            arrowClass: undefined,
-            arrowWrapperClass: undefined,
-            arrowWrapperStyle: undefined
-          })
+              clsPrefix,
+              arrowStyle: this.arrowStyle,
+              arrowClass: undefined,
+              arrowWrapperClass: undefined,
+              arrowWrapperStyle: undefined
+            })
           : null}
       </div>
     )

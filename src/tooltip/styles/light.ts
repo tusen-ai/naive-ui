@@ -1,8 +1,8 @@
-import { composite } from 'seemly'
-import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
-import { popoverLight } from '../../popover/styles'
+import { composite } from 'seemly'
 import { createTheme } from '../../_mixins/use-theme'
+import { commonLight } from '../../_styles/common'
+import { popoverLight } from '../../popover/styles'
 import commonVars from './_common'
 
 function self(vars: ThemeCommonVars) {

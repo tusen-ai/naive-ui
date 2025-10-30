@@ -2,8 +2,7 @@
 # 尺寸
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
 
 const options = [
@@ -53,17 +52,10 @@ const options = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      options,
-      handleSelect(key: string | number) {
-        message.info(String(key))
-      }
-    }
-  }
-})
+const message = useMessage()
+function handleSelect(key: string | number) {
+  message.info(String(key))
+}
 </script>
 
 <template>

@@ -2,15 +2,8 @@
 # Customize icon
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
-
-export default defineComponent({
-  components: {
-    CashIcon
-  }
-})
 </script>
 
 <template>

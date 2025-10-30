@@ -2,22 +2,12 @@
 # 受控显示
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
 import { MdAdd, MdRemove } from '@vicons/ionicons4'
+import { ref } from 'vue'
 
-export default defineComponent({
-  components: {
-    MdAdd,
-    MdRemove
-  },
-  setup() {
-    return {
-      value: ref(5),
-      show: ref(true)
-    }
-  }
-})
+const value = ref(5)
+const show = ref(true)
 </script>
 
 <template>

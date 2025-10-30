@@ -1,10 +1,10 @@
-import { computed, defineComponent, h } from 'vue'
-import { kebabCase } from 'lodash-es'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { elementLight } from '../styles'
 import type { ElementTheme } from '../styles'
+import { kebabCase } from 'lodash-es'
+import { computed, defineComponent, h } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { elementLight } from '../styles'
 
 export const elementProps = {
   ...(useTheme.props as ThemeProps<ElementTheme>),

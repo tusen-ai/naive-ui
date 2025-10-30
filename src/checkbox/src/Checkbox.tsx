@@ -1,6 +1,16 @@
+import type { CSSProperties, PropType } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { CheckboxTheme } from '../styles'
+import type {
+  CheckboxInst,
+  OnUpdateChecked,
+  OnUpdateCheckedImpl
+} from './interface'
+import { on } from 'evtd'
+import { createId } from 'seemly'
+import { useMemo, useMergedState } from 'vooks'
 import {
-  type CSSProperties,
-  type PropType,
   computed,
   defineComponent,
   h,
@@ -9,31 +19,14 @@ import {
   toRef,
   watchEffect
 } from 'vue'
-import { useMemo, useMergedState } from 'vooks'
-import { createId } from 'seemly'
-import { on } from 'evtd'
-import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import { NIconSwitchTransition } from '../../_internal'
-import {
-  type ExtractPublicPropTypes,
-  type MaybeArray,
-  call,
-  createKey,
-  resolveWrappedSlot,
-  warnOnce
-} from '../../_utils'
-import { checkboxLight } from '../styles'
-import type { CheckboxTheme } from '../styles'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
-import CheckMark from './CheckMark'
-import LineMark from './LineMark'
+import { call, createKey, resolveWrappedSlot, warnOnce } from '../../_utils'
+import { checkboxLight } from '../styles'
 import { checkboxGroupInjectionKey } from './CheckboxGroup'
-import type {
-  CheckboxInst,
-  OnUpdateChecked,
-  OnUpdateCheckedImpl
-} from './interface'
+import renderCheckMark from './CheckMark'
+import renderLineMark from './LineMark'
 import style from './styles/index.cssr'
 
 export const checkboxProps = {
@@ -295,11 +288,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'checkbox',
-        computed(() => mergedSizeRef.value[0]),
-        cssVarsRef,
-        props
-      )
+          'checkbox',
+          computed(() => mergedSizeRef.value[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
     return Object.assign(formItem, exposedMethods, {
       rtlEnabled: rtlEnabledRef,
@@ -389,11 +382,11 @@ export default defineComponent({
                       key="indeterminate"
                       class={`${mergedClsPrefix}-checkbox-icon`}
                     >
-                      {LineMark}
+                      {renderLineMark()}
                     </div>
                   ) : (
                     <div key="check" class={`${mergedClsPrefix}-checkbox-icon`}>
-                      {CheckMark}
+                      {renderCheckMark()}
                     </div>
                   )
               }}

@@ -1,18 +1,10 @@
-import {
-  type ComputedRef,
-  type ExtractPropTypes,
-  type PropType,
-  type Ref,
-  inject,
-  ref,
-  toRef,
-  watchEffect
-} from 'vue'
-import { useMemo, useMergedState } from 'vooks'
-import { useConfig, useFormItem } from '../../_mixins'
-import { call, createInjectionKey, warnOnce } from '../../_utils'
+import type { ComputedRef, ExtractPropTypes, PropType, Ref } from 'vue'
 import type { MaybeArray } from '../../_utils'
 import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
+import { useMemo, useMergedState } from 'vooks'
+import { inject, ref, toRef, watchEffect } from 'vue'
+import { useConfig, useFormItem } from '../../_mixins'
+import { call, createInjectionKey, warnOnce } from '../../_utils'
 
 export const radioBaseProps = {
   name: String,

@@ -1,24 +1,19 @@
-import { type PropType, type VNode, defineComponent, h, onMounted } from 'vue'
-import { VirtualList } from 'vueuc'
-import { useLocale } from '../../../_mixins'
-import { NButton, NxButton } from '../../../button'
-import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
-import {
-  type MonthItem,
-  type QuarterItem,
-  type YearItem,
-  getMonthString,
-  getQuarterString,
-  getYearString
-} from '../utils'
-import { MONTH_ITEM_HEIGHT } from '../config'
+import type { PropType, VNode } from 'vue'
 import type { OnPanelUpdateValueImpl } from '../interface'
-import { resolveSlotWithProps } from '../../../_utils'
 import type {
   DatePickerClearSlotProps,
   DatePickerConfirmSlotProps,
   DatePickerNowSlotProps
 } from '../public-types'
+import type { MonthItem, QuarterItem, YearItem } from '../utils'
+import { defineComponent, h, onMounted } from 'vue'
+import { VirtualList } from 'vueuc'
+import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
+import { useLocale } from '../../../_mixins'
+import { resolveSlotWithTypedProps, resolveWrappedSlot } from '../../../_utils'
+import { NButton, NxButton } from '../../../button'
+import { MONTH_ITEM_HEIGHT } from '../config'
+import { getMonthString, getQuarterString, getYearString } from '../utils'
 import { useCalendar, useCalendarProps } from './use-calendar'
 
 /**
@@ -212,41 +207,39 @@ export default defineComponent({
             </div>
           ) : null}
         </div>
-        {this.datePickerSlots.footer ? (
-          <div class={`${mergedClsPrefix}-date-panel-footer`}>
-            {{
-              default: this.datePickerSlots.footer
-            }}
-          </div>
-        ) : null}
+        {resolveWrappedSlot(this.datePickerSlots.footer, (children) => {
+          return children ? (
+            <div class={`${mergedClsPrefix}-date-panel-footer`}>{children}</div>
+          ) : null
+        })}
         {actions?.length || shortcuts ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
               {shortcuts
-              && Object.keys(shortcuts).map((key) => {
-                const shortcut = shortcuts[key]
-                return Array.isArray(shortcut) ? null : (
-                  <NxButton
-                    size="tiny"
-                    onMouseenter={() => {
-                      this.handleSingleShortcutMouseenter(shortcut)
-                    }}
-                    onClick={() => {
-                      this.handleSingleShortcutClick(shortcut)
-                    }}
-                    onMouseleave={() => {
-                      this.handleShortcutMouseleave()
-                    }}
-                  >
-                    {{ default: () => key }}
-                  </NxButton>
-                )
-              })}
+                && Object.keys(shortcuts).map((key) => {
+                  const shortcut = shortcuts[key]
+                  return Array.isArray(shortcut) ? null : (
+                    <NxButton
+                      size="tiny"
+                      onMouseenter={() => {
+                        this.handleSingleShortcutMouseenter(shortcut)
+                      }}
+                      onClick={() => {
+                        this.handleSingleShortcutClick(shortcut)
+                      }}
+                      onMouseleave={() => {
+                        this.handleShortcutMouseleave()
+                      }}
+                    >
+                      {{ default: () => key }}
+                    </NxButton>
+                  )
+                })}
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
               {actions?.includes('clear')
-                ? resolveSlotWithProps(
-                  this.$slots.now,
+                ? resolveSlotWithTypedProps(
+                    this.datePickerSlots.clear,
                     {
                       onClear: this.handleClearClick,
                       text: this.locale.clear
@@ -261,11 +254,11 @@ export default defineComponent({
                         {{ default: () => this.locale.clear }}
                       </NButton>
                     ]
-                )
+                  )
                 : null}
               {actions?.includes('now')
-                ? resolveSlotWithProps(
-                  this.$slots.now,
+                ? resolveSlotWithTypedProps(
+                    this.datePickerSlots.now,
                     {
                       onNow: this.handleNowClick,
                       text: this.locale.now
@@ -280,11 +273,11 @@ export default defineComponent({
                         {{ default: () => this.locale.now }}
                       </NButton>
                     ]
-                )
+                  )
                 : null}
               {actions?.includes('confirm')
-                ? resolveSlotWithProps(
-                  this.$slots.confirm,
+                ? resolveSlotWithTypedProps(
+                    this.datePickerSlots.confirm,
                     {
                       onConfirm: this.handleConfirmClick,
                       disabled: this.isDateInvalid,
@@ -302,7 +295,7 @@ export default defineComponent({
                         {{ default: () => this.locale.confirm }}
                       </NButton>
                     ]
-                )
+                  )
                 : null}
             </div>
           </div>

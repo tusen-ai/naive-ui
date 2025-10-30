@@ -1,6 +1,6 @@
-import { tooltipDark } from '../../styles'
-import { commonDark } from '../../_styles/common'
 import type { ImageTheme } from './light'
+import { commonDark } from '../../_styles/common'
+import { tooltipDark } from '../../styles'
 
 export const imageDark: ImageTheme = {
   name: 'Image',

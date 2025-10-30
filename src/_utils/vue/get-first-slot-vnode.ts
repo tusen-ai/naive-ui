@@ -22,3 +22,22 @@ export function getFirstSlotVNode(
     return null
   }
 }
+
+export function getFirstSlotVNodeWithTypedProps<T>(
+  slotName: string,
+  slot: ((props: T) => VNode[]) | undefined,
+  props: T
+): VNode | null {
+  if (!slot) {
+    return null
+  }
+  const slotContent = flatten(slot(props))
+  // vue will normalize the slot, so slot must be an array
+  if (slotContent.length === 1) {
+    return slotContent[0]
+  }
+  else {
+    warn('getFirstSlotVNode', `slot[${slotName}] should have exactly one child`)
+    return null
+  }
+}

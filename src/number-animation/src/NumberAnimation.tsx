@@ -1,13 +1,7 @@
-import {
-  type PropType,
-  computed,
-  defineComponent,
-  onMounted,
-  ref,
-  watchEffect
-} from 'vue'
-import { round } from 'lodash-es'
+import type { PropType } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import { round } from 'lodash-es'
+import { computed, defineComponent, onMounted, ref, watchEffect } from 'vue'
 import { useLocale } from '../../_mixins'
 import { tween } from './utils'
 
@@ -89,7 +83,8 @@ export default defineComponent({
       const numberFormatter = new Intl.NumberFormat(mergedLocaleRef.value)
       const decimalSeparator = numberFormatter
         .formatToParts(0.5)
-        .find(part => part.type === 'decimal')?.value
+        .find(part => part.type === 'decimal')
+        ?.value
       const integer = props.showSeparator
         ? numberFormatter.format(Number(splitValue[0]))
         : splitValue[0]

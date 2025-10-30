@@ -2,18 +2,18 @@
 # 位置
 </markdown>
 
-<script lang="ts">
-import type { VNode } from 'vue'
-import { defineComponent, h, ref } from 'vue'
-import { NButton, useMessage } from 'naive-ui'
+<script lang="ts" setup>
 import type { MessageProviderProps } from 'naive-ui'
+import type { VNode } from 'vue'
+import { NButton, useMessage } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
 
 interface Item {
   placement: MessageProviderProps['placement']
   text: string
 }
 
-export const Buttons = defineComponent({
+const Buttons = defineComponent({
   emits: ['changePlacement'],
   setup() {
     const message = useMessage()
@@ -50,20 +50,13 @@ export const Buttons = defineComponent({
   }
 })
 
-export default defineComponent({
-  components: {
-    Buttons
-  },
-  setup() {
-    const placementRef = ref<MessageProviderProps['placement']>('top')
-    return {
-      placement: placementRef,
-      changePlacement(val: MessageProviderProps['placement']) {
-        placementRef.value = val
-      }
-    }
-  }
-})
+const placementRef = ref<MessageProviderProps['placement']>('top')
+
+function changePlacement(val: MessageProviderProps['placement']) {
+  placementRef.value = val
+}
+
+const placement = placementRef
 </script>
 
 <template>

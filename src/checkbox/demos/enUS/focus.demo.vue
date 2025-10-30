@@ -2,24 +2,18 @@
 # Focus & blur manually
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
 import type { CheckboxInst } from 'naive-ui'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const checkboxInstRef = ref<CheckboxInst | null>(null)
-    return {
-      handleClick() {
-        checkboxInstRef.value?.focus()
-        setTimeout(() => {
-          checkboxInstRef.value?.blur()
-        }, 1000)
-      },
-      checkboxInstRef
-    }
-  }
-})
+const checkboxInstRef = ref<CheckboxInst | null>(null)
+
+function handleClick() {
+  checkboxInstRef.value?.focus()
+  setTimeout(() => {
+    checkboxInstRef.value?.blur()
+  }, 1000)
+}
 </script>
 
 <template>

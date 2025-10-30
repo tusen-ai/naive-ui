@@ -1,7 +1,10 @@
-export { default as NBreadcrumb, breadcrumbProps } from './src/Breadcrumb'
-export {
-  default as NBreadcrumbItem,
-  breadcrumbItemProps
-} from './src/BreadcrumbItem'
+export { breadcrumbProps, default as NBreadcrumb } from './src/Breadcrumb'
 export type { BreadcrumbProps } from './src/Breadcrumb'
-export type { BreadcrumbItemProps } from './src/BreadcrumbItem'
+export {
+  breadcrumbItemProps,
+  default as NBreadcrumbItem
+} from './src/BreadcrumbItem'
+export type {
+  BreadcrumbItemProps,
+  BreadcrumbItemSlots
+} from './src/BreadcrumbItem'

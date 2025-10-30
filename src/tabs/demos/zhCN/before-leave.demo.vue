@@ -4,37 +4,32 @@
 你可以延迟或阻止 Tab 切换。
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      handleBeforeLeave: (tabName: string) => {
-        switch (tabName) {
-          case 'not-allowed':
-            message.error('不许进来')
-            return false
-          case 'wait':
-            return new Promise<boolean>((resolve) => {
-              const messageInstance = message.loading('Wait for 1s')
-              setTimeout(() => {
-                messageInstance.destroy()
-                resolve(true)
-              }, 1000)
-            })
-          default:
-            return true
-        }
-      },
-      handleUpdateValue: (value: string) => {
-        message.info(value)
-      }
-    }
+const message = useMessage()
+
+function handleBeforeLeave(tabName: string) {
+  switch (tabName) {
+    case 'not-allowed':
+      message.error('不许进来')
+      return false
+    case 'wait':
+      return new Promise<boolean>((resolve) => {
+        const messageInstance = message.loading('Wait for 1s')
+        setTimeout(() => {
+          messageInstance.destroy()
+          resolve(true)
+        }, 1000)
+      })
+    default:
+      return true
   }
-})
+}
+
+function handleUpdateValue(value: string) {
+  message.info(value)
+}
 </script>
 
 <template>

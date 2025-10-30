@@ -1,8 +1,10 @@
-import { type PropType, defineComponent, h, ref } from 'vue'
+import type { PropType } from 'vue'
+import type { ScrollbarInst } from '../../_internal'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { resolveSlot } from '../../_utils'
 import type { ScrollbarProps } from '../../scrollbar/src/Scrollbar'
-import { NxScrollbar, type ScrollbarInst } from '../../_internal'
+import { defineComponent, h, ref } from 'vue'
+import { NxScrollbar } from '../../_internal'
+import { resolveSlot } from '../../_utils'
 
 export const infiniteScrollProps = {
   distance: {

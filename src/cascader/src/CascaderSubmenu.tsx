@@ -1,14 +1,13 @@
-import { type PropType, computed, defineComponent, h, inject, ref } from 'vue'
-import { VirtualList, type VirtualListInst } from 'vueuc'
-import { depx } from 'seemly'
-import { NScrollbar } from '../../_internal'
+import type { PropType } from 'vue'
+import type { VirtualListInst } from 'vueuc'
 import type { ScrollbarInst } from '../../_internal'
+import type { CascaderSubmenuInstance, TmNode } from './interface'
+import { depx } from 'seemly'
+import { computed, defineComponent, h, inject, ref } from 'vue'
+import { VirtualList } from 'vueuc'
+import { NScrollbar } from '../../_internal'
 import NCascaderOption from './CascaderOption'
-import {
-  type CascaderSubmenuInstance,
-  type TmNode,
-  cascaderInjectionKey
-} from './interface'
+import { cascaderInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'CascaderSubmenu',

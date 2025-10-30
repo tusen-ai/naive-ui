@@ -1,6 +1,6 @@
+import type { TimelineTheme } from './light'
 import { commonDark } from '../../_styles/common'
 import sizeVariables from './_common'
-import type { TimelineTheme } from './light'
 
 const timelineDark: TimelineTheme = {
   name: 'Timeline',

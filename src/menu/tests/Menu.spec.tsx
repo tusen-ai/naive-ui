@@ -1,15 +1,11 @@
+import type { MenuDividerOption, MenuGroupOption, MenuOption } from '../index'
 /* eslint-disable unused-imports/no-unused-vars */
-import { mount } from '@vue/test-utils'
 import { HappyOutline } from '@vicons/ionicons5'
-import { Comment, h } from 'vue'
+import { mount } from '@vue/test-utils'
 import { sleep } from 'seemly'
-import {
-  type MenuDividerOption,
-  type MenuGroupOption,
-  type MenuOption,
-  NMenu
-} from '../index'
+import { Comment, h } from 'vue'
 import { NIcon } from '../../icon'
+import { NMenu } from '../index'
 
 describe('n-menu', () => {
   it('should work with import on demand', () => {

@@ -4,16 +4,16 @@
 You can specify `indent` & `root-indent` of the menu. `root-indent` only determines the first-leveled children.
 </markdown>
 
-<script lang="ts">
-import type { Component } from 'vue'
-import { defineComponent, h, ref } from 'vue'
-import { NIcon } from 'naive-ui'
+<script lang="ts" setup>
 import type { MenuOption } from 'naive-ui'
+import type { Component } from 'vue'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
+import { NIcon } from 'naive-ui'
+import { h, ref } from 'vue'
 
 function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
@@ -94,14 +94,7 @@ const menuOptions: MenuOption[] = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    return {
-      activeKey: ref(null),
-      menuOptions
-    }
-  }
-})
+const activeKey = ref(null)
 </script>
 
 <template>

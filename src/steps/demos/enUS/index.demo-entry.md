@@ -10,6 +10,7 @@
 basic.vue
 size.vue
 vertical.vue
+content-placement.vue
 content.vue
 custom-icon.vue
 click.vue
@@ -21,6 +22,7 @@ click.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| content-placement | `'right' \| 'bottom'` | `right` | Steps content placement, only can be used in horizontal mode. | NEXT_VERSION |
 | current | `number` | `undefined` | Currently active step index. |  |
 | size | `'small' \| 'medium'` | `'medium'` | Steps size. |  |
 | status | `'process' \| 'finish' \| 'error' \| 'wait'` | `'process'` | Steps status. |  |

@@ -1,9 +1,9 @@
+import type { TreeTheme } from './light'
 import { changeColor } from 'seemly'
-import { checkboxDark } from '../../checkbox/styles'
-import { emptyDark } from '../../empty/styles'
 import { scrollbarDark } from '../../_internal/scrollbar/styles'
 import { commonDark } from '../../_styles/common'
-import type { TreeTheme } from './light'
+import { checkboxDark } from '../../checkbox/styles'
+import { emptyDark } from '../../empty/styles'
 import { self } from './light'
 
 const treeDark: TreeTheme = {

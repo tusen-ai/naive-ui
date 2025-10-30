@@ -1,18 +1,13 @@
-import {
-  type CSSProperties,
-  type PropType,
-  computed,
-  defineComponent,
-  h,
-  ref,
-  toRef,
-  watchEffect
-} from 'vue'
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { SwitchTheme } from '../styles'
+import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
 import { depx, pxfy } from 'seemly'
 import { useMergedState } from 'vooks'
-import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import { computed, defineComponent, h, ref, toRef, watchEffect } from 'vue'
 import { NBaseLoading, NIconSwitchTransition } from '../../_internal'
-import type { ThemeProps } from '../../_mixins'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import {
   call,
   createKey,
@@ -20,10 +15,7 @@ import {
   resolveWrappedSlot,
   warnOnce
 } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { switchLight } from '../styles'
-import type { SwitchTheme } from '../styles'
-import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
 import style from './styles/index.cssr'
 
 export const switchProps = {
@@ -74,11 +66,21 @@ export const switchProps = {
 
 export type SwitchProps = ExtractPublicPropTypes<typeof switchProps>
 
+export interface SwitchSlots {
+  default?: () => VNode[]
+  checked?: () => VNode[]
+  'checked-icon'?: () => VNode[]
+  icon?: () => VNode[]
+  unchecked?: () => VNode[]
+  'unchecked-icon'?: () => VNode[]
+}
+
 let supportCssMax: boolean | undefined
 
 export default defineComponent({
   name: 'Switch',
   props: switchProps,
+  slots: Object as SlotsType<SwitchSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {
@@ -263,13 +265,13 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'switch',
-        computed(() => {
-          return mergedSizeRef.value[0]
-        }),
-        cssVarsRef,
-        props
-      )
+          'switch',
+          computed(() => {
+            return mergedSizeRef.value[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       handleClick,

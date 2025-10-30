@@ -1,9 +1,10 @@
-import { type PropType, defineComponent, h, toRef } from 'vue'
-import { resolveSlot } from '../../../_utils'
+import type { PropType } from 'vue'
+import { defineComponent, h, toRef } from 'vue'
 import { useStyle } from '../../../_mixins'
-import { ClearIcon } from '../../icons'
+import { resolveSlot } from '../../../_utils'
 import { NBaseIcon } from '../../icon'
 import NIconSwitchTransition from '../../icon-switch-transition'
+import { ClearIcon } from '../../icons'
 import style from './styles/index.cssr'
 
 export default defineComponent({

@@ -1,24 +1,18 @@
+import type { HSLA, HSVA, RGBA } from 'seemly'
+import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
+import type { FollowerPlacement } from 'vueuc'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { ColorPickerTheme } from '../styles'
+import type {
+  OnClear,
+  OnConfirmImpl,
+  OnUpdateValue,
+  OnUpdateValueImpl,
+  RenderLabel
+} from './interface'
+import type { ActionType, ColorPickerMode } from './utils'
 import {
-  type CSSProperties,
-  type PropType,
-  type Ref,
-  Transition,
-  type VNode,
-  computed,
-  defineComponent,
-  h,
-  nextTick,
-  provide,
-  ref,
-  toRef,
-  watch,
-  watchEffect,
-  withDirectives
-} from 'vue'
-import {
-  type HSLA,
-  type HSVA,
-  type RGBA,
   getPreciseEventTarget,
   hsl2hsv,
   hsl2rgb,
@@ -29,22 +23,32 @@ import {
   rgb2hsl,
   rgb2hsv,
   rgba,
-  toHexString,
   toHexaString,
-  toHslString,
+  toHexString,
   toHslaString,
-  toHsvString,
+  toHslString,
   toHsvaString,
-  toRgbString,
-  toRgbaString
+  toHsvString,
+  toRgbaString,
+  toRgbString
 } from 'seemly'
-import { useIsMounted, useMergedState } from 'vooks'
-import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc'
 import { clickoutside } from 'vdirs'
-import { colorPickerLight } from '../styles'
-import type { ColorPickerTheme } from '../styles'
+import { useIsMounted, useMergedState } from 'vooks'
 import {
-  type ThemeProps,
+  computed,
+  defineComponent,
+  h,
+  nextTick,
+  provide,
+  ref,
+  toRef,
+  Transition,
+  watch,
+  watchEffect,
+  withDirectives
+} from 'vue'
+import { VBinder, VFollower, VTarget } from 'vueuc'
+import {
   useConfig,
   useFormItem,
   useLocale,
@@ -52,26 +56,18 @@ import {
   useThemeClass
 } from '../../_mixins'
 import { call, createKey, useAdjustedTo } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { NButton } from '../../button'
-import HueSlider from './HueSlider'
+import { colorPickerLight } from '../styles'
 import AlphaSlider from './AlphaSlider'
-import Pallete from './Pallete'
 import ColorInput from './ColorInput'
-import ColorPickerTrigger from './ColorPickerTrigger'
-import { deriveDefaultValue, getModeFromValue } from './utils'
-import type { ActionType, ColorPickerMode } from './utils'
-import type {
-  OnClear,
-  OnConfirmImpl,
-  OnUpdateValue,
-  OnUpdateValueImpl,
-  RenderLabel
-} from './interface'
 import ColorPickerSwatches from './ColorPickerSwatches'
+import ColorPickerTrigger from './ColorPickerTrigger'
 import ColorPreview from './ColorPreview'
 import { colorPickerInjectionKey } from './context'
+import HueSlider from './HueSlider'
+import Pallete from './Pallete'
 import style from './styles/index.cssr'
+import { deriveDefaultValue, getModeFromValue } from './utils'
 
 export const colorPickerProps = {
   ...(useTheme.props as ThemeProps<ColorPickerTheme>),
@@ -124,9 +120,16 @@ export const colorPickerProps = {
 
 export type ColorPickerProps = ExtractPublicPropTypes<typeof colorPickerProps>
 
+export interface ColorPickerSlots {
+  default?: () => VNode[]
+  label?: (color: string | null) => VNode[]
+  action?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'ColorPicker',
   props: colorPickerProps,
+  slots: Object as SlotsType<ColorPickerSlots>,
   setup(props, { slots }) {
     const selfRef = ref<HTMLElement | null>(null)
     let upcomingValue: string | null = null
@@ -526,13 +529,13 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'color-picker',
-        computed(() => {
-          return mergedSizeRef.value[0]
-        }),
-        cssVarsRef,
-        props
-      )
+          'color-picker',
+          computed(() => {
+            return mergedSizeRef.value[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     function renderPanel(): VNode {
@@ -701,7 +704,7 @@ export default defineComponent({
     }
   },
   render() {
-    const { $slots, mergedClsPrefix, onRender } = this
+    const { mergedClsPrefix, onRender } = this
     onRender?.()
     return (
       <div
@@ -721,11 +724,7 @@ export default defineComponent({
                       hsla={this.hsla}
                       disabled={this.mergedDisabled}
                       onClick={this.handleTriggerClick}
-                    >
-                      {{
-                        label: $slots.label
-                      }}
-                    </ColorPickerTrigger>
+                    />
                   )
                 }}
               </VTarget>,
@@ -746,13 +745,13 @@ export default defineComponent({
                         default: () =>
                           this.mergedShow
                             ? withDirectives(this.renderPanel(), [
-                              [
-                                clickoutside,
-                                this.handleClickOutside,
-                                undefined as any as string,
-                                { capture: true }
-                              ]
-                            ])
+                                [
+                                  clickoutside,
+                                  this.handleClickOutside,
+                                  undefined as any as string,
+                                  { capture: true }
+                                ]
+                              ])
                             : null
                       }}
                     </Transition>

@@ -1,16 +1,10 @@
-import {
-  type CSSProperties,
-  Fragment,
-  type PropType,
-  computed,
-  defineComponent,
-  h
-} from 'vue'
-import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import { thingLight } from '../styles'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ThingTheme } from '../styles'
+import { computed, defineComponent, Fragment, h } from 'vue'
+import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
+import { thingLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const thingProps = {
@@ -28,9 +22,20 @@ export const thingProps = {
 
 export type ThingProps = ExtractPublicPropTypes<typeof thingProps>
 
+export interface ThingSlots {
+  action?: () => VNode[]
+  avatar?: () => VNode[]
+  default?: () => VNode[]
+  description?: () => VNode[]
+  footer?: () => VNode[]
+  'header-extra'?: () => VNode[]
+  header?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Thing',
   props: thingProps,
+  slots: Object as SlotsType<ThingSlots>,
   setup(props, { slots }) {
     const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
       = useConfig(props)
@@ -84,11 +89,11 @@ export default defineComponent({
           ) : null}
           <div class={`${mergedClsPrefix}-thing-main`}>
             {!props.contentIndented
-            && (slots.header
-              || props.title
-              || slots['header-extra']
-              || props.titleExtra
-              || slots.avatar) ? (
+              && (slots.header
+                || props.title
+                || slots['header-extra']
+                || props.titleExtra
+                || slots.avatar) ? (
                   <div class={`${mergedClsPrefix}-thing-avatar-header-wrapper`}>
                     {slots.avatar ? (
                       <div class={`${mergedClsPrefix}-thing-avatar`}>
@@ -96,9 +101,9 @@ export default defineComponent({
                       </div>
                     ) : null}
                     {slots.header
-                    || props.title
-                    || slots['header-extra']
-                    || props.titleExtra ? (
+                      || props.title
+                      || slots['header-extra']
+                      || props.titleExtra ? (
                           <div class={`${mergedClsPrefix}-thing-header-wrapper`}>
                             <div class={`${mergedClsPrefix}-thing-header`}>
                               {slots.header || props.title ? (
@@ -133,9 +138,9 @@ export default defineComponent({
                 ) : (
                   <>
                     {slots.header
-                    || props.title
-                    || slots['header-extra']
-                    || props.titleExtra ? (
+                      || props.title
+                      || slots['header-extra']
+                      || props.titleExtra ? (
                           <div class={`${mergedClsPrefix}-thing-header`}>
                             {slots.header || props.title ? (
                               <div class={`${mergedClsPrefix}-thing-header__title`}>

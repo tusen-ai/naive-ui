@@ -1,7 +1,7 @@
-import { h, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NPopconfirm } from '../index'
+import { h, nextTick } from 'vue'
 import { NButton } from '../../button'
+import { NPopconfirm } from '../index'
 
 describe('n-popconfirm', () => {
   it('should work with import on demand', () => {
@@ -53,7 +53,7 @@ describe('n-popconfirm', () => {
   })
 
   it('should work with `on-positive-click` prop', async () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
     const wrapper = mount(NPopconfirm, {
       attachTo: document.body,
       props: {
@@ -75,7 +75,7 @@ describe('n-popconfirm', () => {
   })
 
   it('should work with `on-negative-click` prop', async () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
     const wrapper = mount(NPopconfirm, {
       attachTo: document.body,
       props: {

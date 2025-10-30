@@ -1,8 +1,8 @@
-import { scrollbarLight } from '../../_internal/scrollbar/styles'
-import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
-import { buttonLight } from '../../button/styles'
+import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import { createTheme } from '../../_mixins'
+import { commonLight } from '../../_styles/common'
+import { buttonLight } from '../../button/styles'
 import { inputLight } from '../../input/styles'
 import commonVars from './_common'
 

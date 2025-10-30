@@ -2,34 +2,26 @@
 # Default file list
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import type { UploadFileInfo } from 'naive-ui'
 
-export default defineComponent({
-  setup() {
-    const defaultFileList: UploadFileInfo[] = [
-      {
-        id: 'the',
-        name: 'The',
-        status: 'finished'
-      },
-      {
-        id: 'razars',
-        name: 'Razars\'s',
-        status: 'finished'
-      },
-      {
-        id: 'edge',
-        name: 'Blade',
-        status: 'finished'
-      }
-    ]
-    return {
-      defaultFileList
-    }
+const defaultFileList: UploadFileInfo[] = [
+  {
+    id: 'the',
+    name: 'The',
+    status: 'finished'
+  },
+  {
+    id: 'razars',
+    name: 'Razars\'s',
+    status: 'finished'
+  },
+  {
+    id: 'edge',
+    name: 'Blade',
+    status: 'finished'
   }
-})
+]
 </script>
 
 <template>

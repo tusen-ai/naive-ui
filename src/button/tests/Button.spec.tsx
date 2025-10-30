@@ -1,15 +1,15 @@
-import { h } from 'vue'
-import { mount } from '@vue/test-utils'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
-import { NButton, NxButton } from '../index'
+import { mount } from '@vue/test-utils'
+import { h } from 'vue'
 import { NIcon } from '../../icon'
+import { NButton, NxButton } from '../index'
 
 describe('n-button', () => {
   it('should work with import on demand', () => {
     mount(NButton)
   })
   it('clickable', async () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
     const inst = mount(NButton, {
       props: {
         onClick
@@ -20,7 +20,7 @@ describe('n-button', () => {
     inst.unmount()
   })
   it('keyboard', async () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
     const inst = mount(NButton, {
       props: {
         keyboard: false,
@@ -28,15 +28,15 @@ describe('n-button', () => {
       }
     })
     await inst.trigger('click')
-    expect(onClick).toBeCalledTimes(1)
+    expect(onClick).toHaveBeenCalledTimes(1)
     await inst.trigger('keydown.space')
-    expect(onClick).toBeCalledTimes(1)
+    expect(onClick).toHaveBeenCalledTimes(1)
     await inst.trigger('keydown.enter')
-    expect(onClick).toBeCalledTimes(1)
+    expect(onClick).toHaveBeenCalledTimes(1)
     inst.unmount()
   })
   it('disabled', async () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
     const inst = mount(NButton, {
       props: {
         disabled: true,

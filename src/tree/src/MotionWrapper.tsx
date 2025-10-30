@@ -1,7 +1,8 @@
-import { type PropType, defineComponent, h } from 'vue'
-import { pxfy } from 'seemly'
-import FadeInExpandTransition from '../../_internal/fade-in-expand-transition'
+import type { PropType } from 'vue'
 import type { TmNode } from './interface'
+import { pxfy } from 'seemly'
+import { defineComponent, h } from 'vue'
+import FadeInExpandTransition from '../../_internal/fade-in-expand-transition'
 import TreeNode from './TreeNode'
 
 export default defineComponent({

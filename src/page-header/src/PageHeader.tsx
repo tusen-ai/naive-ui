@@ -1,12 +1,13 @@
-import { type PropType, computed, defineComponent, h } from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import type { PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import { pageHeaderLight } from '../styles/light'
-import type { PageHeaderTheme } from '../styles/light'
-import { ArrowBackIcon } from '../../_internal/icons'
-import { NBaseIcon } from '../../_internal'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type { PageHeaderTheme } from '../styles/light'
+import { computed, defineComponent, h } from 'vue'
+import { NBaseIcon } from '../../_internal'
+import { ArrowBackIcon } from '../../_internal/icons'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
+import { pageHeaderLight } from '../styles/light'
 import style from './styles/index.cssr'
 
 export const pageHeaderProps = {
@@ -19,9 +20,21 @@ export const pageHeaderProps = {
 
 export type PageHeaderProps = ExtractPublicPropTypes<typeof pageHeaderProps>
 
+export interface PageHeaderSlots {
+  avatar?: () => VNode[]
+  header?: () => VNode[]
+  default?: () => VNode[]
+  extra?: () => VNode[]
+  footer?: () => VNode[]
+  subtitle?: () => VNode[]
+  title?: () => VNode[]
+  back?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'PageHeader',
   props: pageHeaderProps,
+  slots: Object as SlotsType<PageHeaderSlots>,
   setup(props) {
     const { mergedClsPrefixRef, mergedRtlRef, inlineThemeDisabled }
       = useConfig(props)

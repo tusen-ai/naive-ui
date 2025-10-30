@@ -1,8 +1,8 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
 import { version } from 'naive-ui'
-import { i18n } from '../../utils/composables'
+import { defineComponent } from 'vue'
 import { push } from '../../store'
+import { i18n } from '../../utils/composables'
 import { repoUrl } from '../../utils/github-url'
 
 export default defineComponent({

@@ -1,5 +1,5 @@
-import { commonLight } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
+import { commonLight } from '../../_styles/common'
 import { avatarLight } from '../../avatar/styles'
 
 export type AvatarGroupThemeVars = Record<string, unknown>

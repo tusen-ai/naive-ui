@@ -4,19 +4,11 @@
 如果你觉得内置的颜色不行 🙅‍♂️。
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { changeColor } from 'seemly'
+<script lang="ts" setup>
 import { useThemeVars } from 'naive-ui'
+import { changeColor } from 'seemly'
 
-export default defineComponent({
-  setup() {
-    return {
-      changeColor,
-      themeVars: useThemeVars()
-    }
-  }
-})
+const themeVars = useThemeVars()
 </script>
 
 <template>

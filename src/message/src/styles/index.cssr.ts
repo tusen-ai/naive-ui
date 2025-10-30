@@ -1,6 +1,6 @@
-import { c, cB, cE, cM } from '../../../_utils/cssr'
-import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.cssr'
 import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-in-height-expand.cssr'
+import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.cssr'
+import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 // vars:
 // --n-margin
@@ -60,6 +60,7 @@ export default c([
       margin-bottom .3s var(--n-bezier);
     padding: var(--n-padding);
     border-radius: var(--n-border-radius);
+    border: var(--n-border);
     flex-wrap: nowrap;
     overflow: hidden;
     max-width: var(--n-max-width);

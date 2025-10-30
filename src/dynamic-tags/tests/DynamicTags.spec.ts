@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils'
 import { h } from 'vue'
-import { NDynamicTags } from '../index'
 import { NAutoComplete } from '../../auto-complete/index'
 import { NButton } from '../../button/index'
 import { NTag } from '../../tag'
+import { NDynamicTags } from '../index'
 
 describe('n-dynamic-tags', () => {
   it('should work with import on demand', () => {
@@ -46,7 +46,7 @@ describe('n-dynamic-tags', () => {
   })
 
   it('should work with `disabled` prop', async () => {
-    const onClose = jest.fn()
+    const onClose = vi.fn()
     const wrapper = mount(NDynamicTags, {
       props: {
         disabled: true,
@@ -58,7 +58,7 @@ describe('n-dynamic-tags', () => {
 
     expect(wrapper.find('.n-tag').classes()).toContain('n-tag--disabled')
     wrapper.find('.n-tag__close').trigger('click')
-    expect(onClose).not.toBeCalled()
+    expect(onClose).not.toHaveBeenCalled()
     expect(wrapper.find('.n-button').classes()).toContain('n-button--disabled')
     wrapper.unmount()
   })
@@ -150,7 +150,7 @@ describe('n-dynamic-tags', () => {
   })
 
   it('should work with `on-update:value` prop', () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = mount(NDynamicTags, {
       props: {
         value: ['教师', '程序员'],
@@ -158,7 +158,7 @@ describe('n-dynamic-tags', () => {
       }
     })
     wrapper.find('.n-tag__close').trigger('click')
-    expect(onUpdateValue).toBeCalled()
+    expect(onUpdateValue).toHaveBeenCalled()
     wrapper.unmount()
   })
 

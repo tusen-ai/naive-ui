@@ -2,15 +2,8 @@
 # Slot
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { SwapHorizontal as SwapHorizontalIcon } from '@vicons/ionicons5'
-
-export default defineComponent({
-  components: {
-    SwapHorizontalIcon
-  }
-})
 </script>
 
 <template>

@@ -1,10 +1,10 @@
-import type { Ref, VNodeChild } from 'vue'
 import type {
   RuleItem,
   ValidateError,
   ValidateMessages,
   ValidateOption
 } from 'async-validator'
+import type { Ref, VNodeChild } from 'vue'
 import type { FormSetupProps } from './Form'
 
 export interface FormRules {
@@ -58,8 +58,8 @@ export type FormItemInternalValidate = (
 
 export type FormItemValidate = ((options: FormItemValidateOptions) => Promise<{
   warnings: ValidateError[] | undefined
-}>) &
-((
+}>)
+& ((
   trigger?: string,
   callback?: ValidateCallback
 ) => Promise<{ warnings: ValidateError[] | undefined }>)
@@ -113,7 +113,5 @@ export interface FormInst {
   validate: FormValidate
   restoreValidation: () => void
 }
-
-export type FormValidationStatus = 'success' | 'error' | 'warning'
 
 export interface FormValidateMessages extends ValidateMessages {}

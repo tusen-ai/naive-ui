@@ -1,13 +1,21 @@
+import type {
+  CSSProperties,
+  DirectiveArguments,
+  PropType,
+  VNode,
+  VNodeChild
+} from 'vue'
+import type { FollowerInst, FollowerPlacement } from 'vueuc'
+import type { ThemeProps } from '../../_mixins'
+import type { PopoverTheme } from '../styles'
+import type { PopoverTrigger } from './interface'
+import type { PopoverInjection } from './Popover'
+import { getPreciseEventTarget } from 'seemly'
+import { clickoutside, mousemoveoutside } from 'vdirs'
 import {
-  type CSSProperties,
-  type DirectiveArguments,
-  Fragment,
-  type PropType,
-  Transition,
-  type VNode,
-  type VNodeChild,
   computed,
   defineComponent,
+  Fragment,
   h,
   inject,
   mergeProps,
@@ -15,24 +23,15 @@ import {
   provide,
   ref,
   toRef,
+  Transition,
   vShow,
   watch,
   watchEffect,
   withDirectives
 } from 'vue'
-import {
-  type FollowerInst,
-  type FollowerPlacement,
-  VFocusTrap,
-  VFollower
-} from 'vueuc'
-import { clickoutside, mousemoveoutside } from 'vdirs'
-import { getPreciseEventTarget } from 'seemly'
+import { VFocusTrap, VFollower } from 'vueuc'
 import { NxScrollbar } from '../../_internal/scrollbar'
-import { drawerBodyInjectionKey } from '../../drawer/src/interface'
-import { modalBodyInjectionKey } from '../../modal/src/interface'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
+import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import {
   formatLength,
   isJsdom,
@@ -40,10 +39,9 @@ import {
   resolveWrappedSlot,
   useAdjustedTo
 } from '../../_utils'
+import { drawerBodyInjectionKey } from '../../drawer/src/interface'
+import { modalBodyInjectionKey } from '../../modal/src/interface'
 import { popoverLight } from '../styles'
-import type { PopoverTheme } from '../styles'
-import type { PopoverInjection } from './Popover'
-import type { PopoverTrigger } from './interface'
 import { popoverBodyInjectionKey } from './interface'
 import style from './styles/index.cssr'
 
@@ -121,8 +119,12 @@ export default defineComponent({
   inheritAttrs: false,
   props: popoverBodyProps,
   setup(props, { slots, attrs }) {
-    const { namespaceRef, mergedClsPrefixRef, inlineThemeDisabled }
-      = useConfig(props)
+    const {
+      namespaceRef,
+      mergedClsPrefixRef,
+      inlineThemeDisabled,
+      mergedRtlRef
+    } = useConfig(props)
     const themeRef = useTheme(
       'Popover',
       '-popover',
@@ -131,6 +133,9 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+
+    const rtlEnabledRef = useRtl('Popover', mergedRtlRef, mergedClsPrefixRef)
+
     const followerRef = ref<FollowerInst | null>(null)
     const NPopover = inject<PopoverInjection>('NPopover') as PopoverInjection
     const bodyRef = ref<HTMLElement | null>(null)
@@ -298,8 +303,8 @@ export default defineComponent({
       themeClassHandle?.onRender()
       const shouldRenderDom
         = props.displayDirective === 'show'
-        || props.show
-        || (props.animated && displayedRef.value)
+          || props.show
+          || (props.animated && displayedRef.value)
       if (!shouldRenderDom) {
         return null
       }
@@ -369,6 +374,8 @@ export default defineComponent({
           )
           const maybeScrollableBody = props.scrollable ? (
             <NxScrollbar
+              themeOverrides={themeRef.value.peerOverrides.Scrollbar}
+              theme={themeRef.value.peers.Scrollbar}
               contentClass={
                 hasHeaderOrFooter
                   ? undefined
@@ -387,12 +394,12 @@ export default defineComponent({
           )
           const arrow = props.showArrow
             ? renderArrow({
-              arrowClass: props.arrowClass,
-              arrowStyle: props.arrowStyle,
-              arrowWrapperClass: props.arrowWrapperClass,
-              arrowWrapperStyle: props.arrowWrapperStyle,
-              clsPrefix: mergedClsPrefix
-            })
+                arrowClass: props.arrowClass,
+                arrowStyle: props.arrowStyle,
+                arrowWrapperClass: props.arrowWrapperClass,
+                arrowWrapperStyle: props.arrowWrapperStyle,
+                clsPrefix: mergedClsPrefix
+              })
             : null
           return [maybeScrollableBody, arrow]
         }
@@ -403,6 +410,7 @@ export default defineComponent({
               class: [
                 `${mergedClsPrefix}-popover`,
                 `${mergedClsPrefix}-popover-shared`,
+                rtlEnabledRef?.value && `${mergedClsPrefix}-popover--rtl`,
                 themeClassHandle?.themeClass.value,
                 extraClass.map(v => `${mergedClsPrefix}-${v}`),
                 {
@@ -441,6 +449,7 @@ export default defineComponent({
           // Shadow class exists for reuse box-shadow.
           [
             `${mergedClsPrefix}-popover-shared`,
+            rtlEnabledRef?.value && `${mergedClsPrefix}-popover--rtl`,
             themeClassHandle?.themeClass.value,
             props.overlap && `${mergedClsPrefix}-popover-shared--overlap`,
             props.showArrow && `${mergedClsPrefix}-popover-shared--show-arrow`,

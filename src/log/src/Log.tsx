@@ -1,35 +1,31 @@
+import type { PropType, Ref } from 'vue'
+import type { ScrollbarInst } from '../../_internal'
+import type { Hljs, ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { LogTheme } from '../styles'
+import { throttle as _throttle } from 'lodash-es'
 import {
-  type PropType,
-  type Ref,
-  Transition,
   computed,
   defineComponent,
   h,
   nextTick,
   provide,
   ref,
-  toRef
+  toRef,
+  Transition
 } from 'vue'
-import { throttle } from 'lodash-es'
-import {
-  type Hljs,
-  type ThemeProps,
-  useConfig,
-  useHljs,
-  useTheme,
-  useThemeClass
-} from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import { warn } from '../../_utils'
 import { NScrollbar } from '../../_internal'
-import type { ScrollbarInst } from '../../_internal'
+import { useConfig, useHljs, useTheme, useThemeClass } from '../../_mixins'
+import { warn } from '../../_utils'
 import { NCode } from '../../code'
-import type { LogTheme } from '../styles'
 import { logLight } from '../styles'
-import NLogLoader from './LogLoader'
-import NLogLine from './LogLine'
 import { logInjectionKey } from './context'
+import NLogLine from './LogLine'
+import NLogLoader from './LogLoader'
 import style from './styles/index.cssr'
+
+// Fix vue-tsc error
+const throttle: <T>(f: T, t: number) => T = _throttle
 
 export interface LogInjection {
   trimRef: Ref<boolean>
@@ -42,8 +38,8 @@ export interface LogInst {
   scrollTo: ((options: {
     silent?: boolean
     position: 'top' | 'bottom'
-  }) => void) &
-  ((options: { silent?: boolean, top: number }) => void)
+  }) => void)
+  & ((options: { silent?: boolean, top: number }) => void)
 }
 
 export const logProps = {
@@ -143,7 +139,7 @@ export default defineComponent({
           onReachBottom()
       }
     }
-    const handleWheel = throttle(_handleWheel, 300)
+    const handleWheel: (e: WheelEvent) => void = throttle(_handleWheel, 300)
     function _handleWheel(e: WheelEvent): void {
       if (silentRef.value) {
         void nextTick(() => {

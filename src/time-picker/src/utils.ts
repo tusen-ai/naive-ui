@@ -1,5 +1,6 @@
+import type { MaybeArray } from '../../_utils'
 import { getHours } from 'date-fns'
-import { type MaybeArray, throwError } from '../../_utils'
+import { throwError } from '../../_utils'
 
 export const time = {
   amHours: [
@@ -199,8 +200,8 @@ export function getTimeUnits(
         ? stepOrList.filter(v => v < 12)
         : isHourWithAmPm === 'pm'
           ? stepOrList
-            .filter(v => v >= 12)
-            .map(v => (v === 12 ? 12 : v - 12))
+              .filter(v => v >= 12)
+              .map(v => (v === 12 ? 12 : v - 12))
           : stepOrList
     ).map(v => getFixValue(v))
   }
@@ -231,9 +232,9 @@ export function getTimeUnits(
       ? defaultValue.filter(hour => Number(hour) < 12)
       : isHourWithAmPm === 'pm'
         ? defaultValue
-          .map(hour => Number(hour))
-          .filter(hour => Number(hour) >= 12)
-          .map(v => getFixValue(v === 12 ? 12 : v - 12))
+            .map(hour => Number(hour))
+            .filter(hour => Number(hour) >= 12)
+            .map(v => getFixValue(v === 12 ? 12 : v - 12))
         : defaultValue
   }
 }

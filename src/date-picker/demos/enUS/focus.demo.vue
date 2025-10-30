@@ -2,24 +2,18 @@
 # Focus & blur manually
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
 import type { DatePickerInst } from 'naive-ui'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const datePickerInstRef = ref<DatePickerInst | null>(null)
-    return {
-      handleClick() {
-        datePickerInstRef.value?.focus()
-        setTimeout(() => {
-          datePickerInstRef.value?.blur()
-        }, 1000)
-      },
-      datePickerInstRef
-    }
-  }
-})
+const datePickerInstRef = ref<DatePickerInst | null>(null)
+
+function handleClick() {
+  datePickerInstRef.value?.focus()
+  setTimeout(() => {
+    datePickerInstRef.value?.blur()
+  }, 1000)
+}
 </script>
 
 <template>

@@ -2,23 +2,16 @@
 # Closable
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      handleClose() {
-        message.info('tag close')
-      },
-      handleClick() {
-        message.info('tag click')
-      }
-    }
-  }
-})
+const message = useMessage()
+function handleClose() {
+  message.info('tag close')
+}
+function handleClick() {
+  message.info('tag click')
+}
 </script>
 
 <template>

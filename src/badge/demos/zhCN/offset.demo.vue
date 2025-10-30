@@ -2,17 +2,11 @@
 # 自定义位置偏移
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      value: ref(5),
-      offset: [-17, 17] as const
-    }
-  }
-})
+const value = ref(5)
+const offset = [-17, 17] as const
 </script>
 
 <template>

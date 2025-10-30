@@ -1,8 +1,9 @@
-import { type PropType, computed, defineComponent, h, inject } from 'vue'
 import type { KatexOptions } from 'katex'
-import type { Katex } from '../../config-provider/src/katex'
-import { configProviderInjectionKey } from '../../config-provider/src/context'
+import type { PropType } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type { Katex } from '../../config-provider/src/katex'
+import { computed, defineComponent, h, inject } from 'vue'
+import { configProviderInjectionKey } from '../../config-provider/src/context'
 
 export const equationProps = {
   value: String,

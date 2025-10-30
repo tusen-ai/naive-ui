@@ -1,25 +1,30 @@
-import type { Ref, Slots, UnwrapNestedRefs } from 'vue'
+import type { Ref, UnwrapNestedRefs } from 'vue'
 import type { VirtualListInst } from 'vueuc'
-import type { NDateLocale, NLocale } from '../../locales'
 import type { ScrollbarInst } from '../../_internal'
+import type { MergedTheme } from '../../_mixins'
+import type { ButtonProps } from '../../button'
+import type { NDateLocale, NLocale } from '../../locales'
 import type {
   IsHourDisabled,
   IsMinuteDisabled,
   IsSecondDisabled
 } from '../../time-picker/src/interface'
 import type { TimePickerProps } from '../../time-picker/src/TimePicker'
-import type { MergedTheme } from '../../_mixins'
-import { createInjectionKey } from '../../_utils'
 import type { DatePickerTheme } from '../styles/light'
-import type { ButtonProps } from '../../button'
+import type { DatePickerSlots } from './DatePicker'
 import type {
   dualCalendarValidation,
   uniCalendarValidation
 } from './validation-utils'
+import { createInjectionKey } from '../../_utils'
 
 export type Value = number | [number, number]
 
-export type DefaultTime = string | [string | undefined, string | undefined]
+export type DefaultTime
+  = | string
+    | [string | undefined, string | undefined]
+    | DatePickerGetDefaultTime
+    | DatePickerGetRangeDefaultTime
 
 export type FormattedValue = string | [string, string]
 
@@ -32,24 +37,24 @@ export type ConfirmButtonProps = Pick<
   'size' | 'onClick' | 'type' | 'disabled'
 >
 
-export type Shortcuts =
-  | Record<string, number | (() => number)>
-  | Record<
-    string,
-    | [number, number]
-    | readonly [number, number]
-    | (() => [number, number] | readonly [number, number])
-  >
+export type Shortcuts
+  = | Record<string, number | (() => number)>
+    | Record<
+      string,
+      | [number, number]
+      | readonly [number, number]
+      | (() => [number, number] | readonly [number, number])
+    >
 
 export type OnUpdateValue = (
-  value: number &
-    (number | null) &
-    [number, number] &
-    ([number, number] | null),
-  formattedValue: string &
-    (string | null) &
-    [string, string] &
-    ([string, string] | null)
+  value: number
+    & (number | null)
+    & [number, number]
+    & ([number, number] | null),
+  formattedValue: string
+    & (string | null)
+    & [string, string]
+    & ([string, string] | null)
 ) => void
 
 export type OnConfirm = OnUpdateValue
@@ -57,14 +62,14 @@ export type OnConfirm = OnUpdateValue
 export type OnConfirmImpl = OnUpdateValueImpl
 
 export type OnUpdateFormattedValue = (
-  value: string &
-    (string | null) &
-    [string, string] &
-    ([string, string] | null),
-  timestampValue: number &
-    (number | null) &
-    [number, number] &
-    ([number, number] | null)
+  value: string
+    & (string | null)
+    & [string, string]
+    & ([string, string] | null),
+  timestampValue: number
+    & (number | null)
+    & [number, number]
+    & ([number, number] | null)
 ) => void
 
 export type OnUpdateFormattedValueImpl = (
@@ -78,10 +83,10 @@ export type OnUpdateValueImpl = (
 ) => void
 
 export type OnPanelUpdateValue = (
-  value: number &
-    (number | null) &
-    [number, number] &
-    ([number, number] | null),
+  value: number
+    & (number | null)
+    & [number, number]
+    & ([number, number] | null),
   doUpdate: boolean
 ) => void
 
@@ -135,18 +140,18 @@ export type DatePickerInjection = {
   monthFormatRef: Ref<string>
   yearFormatRef: Ref<string>
   quarterFormatRef: Ref<string>
-  datePickerSlots: Slots
+  datePickerSlots: DatePickerSlots
   yearRangeRef: Ref<[number, number]>
-} & ReturnType<typeof uniCalendarValidation> &
-ReturnType<typeof dualCalendarValidation>
+} & ReturnType<typeof uniCalendarValidation>
+& ReturnType<typeof dualCalendarValidation>
 
 export const datePickerInjectionKey
   = createInjectionKey<DatePickerInjection>('n-date-picker')
 
 export type IsDateDisabled = IsSingleDateDisabled | IsRangeDateDisabled
 
-export type IsSingleDateDisabledDetail =
-  | {
+export type IsSingleDateDisabledDetail
+  = | {
     type: 'date'
     year: number
     month: number
@@ -193,3 +198,10 @@ export type IsRangeTimeDisabled = (
   position: 'start' | 'end',
   value: [number, number] // date must exist to have time validation
 ) => TimeValidator
+
+export type DatePickerGetDefaultTime = (timestamp: number) => string
+export type DatePickerGetRangeDefaultTime = (
+  timestamp: number,
+  position: 'start' | 'end',
+  value: [number, number] | null
+) => string

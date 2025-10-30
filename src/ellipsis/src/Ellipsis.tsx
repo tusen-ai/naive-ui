@@ -1,5 +1,10 @@
+import type { PropType, SlotsType, VNode } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { PopoverProps } from '../../popover/src/Popover'
+import type { TooltipInst } from '../../tooltip/src/Tooltip'
+import type { EllipsisTheme } from '../styles'
 import {
-  type PropType,
   computed,
   defineComponent,
   h,
@@ -7,15 +12,10 @@ import {
   onDeactivated,
   ref
 } from 'vue'
-import type { PopoverProps } from '../../popover/src/Popover'
-import type { TooltipInst } from '../../tooltip/src/Tooltip'
-import { NTooltip } from '../../tooltip'
-import { useMergedClsPrefix } from '../../_mixins/use-config'
 import { useTheme } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { useMergedClsPrefix } from '../../_mixins/use-config'
+import { NTooltip } from '../../tooltip'
 import { ellipsisLight } from '../styles'
-import type { EllipsisTheme } from '../styles'
 import style from './styles/index.cssr'
 
 export function createLineClampClass(clsPrefix: string): string {
@@ -38,10 +38,16 @@ export const ellipsisProps = {
 
 export type EllipsisProps = ExtractPublicPropTypes<typeof ellipsisProps>
 
+export interface EllipsisSlots {
+  default?: () => VNode[]
+  tooltip?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Ellipsis',
   inheritAttrs: false,
   props: ellipsisProps,
+  slots: Object as SlotsType<EllipsisSlots>,
   setup(props, { slots, attrs }) {
     const mergedClsPrefixRef = useMergedClsPrefix()
     const mergedTheme = useTheme(
@@ -91,7 +97,7 @@ export default defineComponent({
           if (triggerInner) {
             tooltipDisabled
               = triggerInner.getBoundingClientRect().width
-              <= trigger.getBoundingClientRect().width
+                <= trigger.getBoundingClientRect().width
           }
         }
         syncCursorStyle(trigger, tooltipDisabled)

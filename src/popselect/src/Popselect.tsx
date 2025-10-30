@@ -1,23 +1,18 @@
-import {
-  type ExtractPropTypes,
-  type PropType,
-  defineComponent,
-  h,
-  provide,
-  ref
-} from 'vue'
-import { popoverBaseProps } from '../../popover/src/Popover'
-import type { PopoverInternalProps } from '../../popover/src/Popover'
-import { NPopover } from '../../popover'
-import type { PopoverInst, PopoverTrigger } from '../../popover'
-import { createRefSetter, keep, mergeEventHandlers, omit } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import { useConfig, useTheme } from '../../_mixins'
+import type { ExtractPropTypes, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import { popselectLight } from '../styles'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { PopoverInst, PopoverTrigger } from '../../popover'
+import type { PopoverInternalProps } from '../../popover/src/Popover'
 import type { PopselectTheme } from '../styles'
+import type { PopselectInst } from './interface'
+import { defineComponent, h, provide, ref } from 'vue'
+import { useConfig, useTheme } from '../../_mixins'
+import { createRefSetter, keep, mergeEventHandlers, omit } from '../../_utils'
+import { NPopover } from '../../popover'
+import { popoverBaseProps } from '../../popover/src/Popover'
+import { popselectLight } from '../styles'
+import { popselectInjectionKey } from './interface'
 import NPopselectPanel, { panelPropKeys, panelProps } from './PopselectPanel'
-import { type PopselectInst, popselectInjectionKey } from './interface'
 
 export const popselectProps = {
   ...(useTheme.props as ThemeProps<PopselectTheme>),
@@ -36,9 +31,17 @@ export const popselectProps = {
 export type PopselectSetupProps = ExtractPropTypes<typeof popselectProps>
 export type PopselectProps = ExtractPublicPropTypes<typeof popselectProps>
 
+export interface PopselectSlots {
+  default?: () => VNode[]
+  header?: () => VNode[]
+  action?: () => VNode[]
+  empty?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Popselect',
   props: popselectProps,
+  slots: Object as SlotsType<PopselectSlots>,
   inheritAttrs: false,
   __popover__: true,
   setup(props) {

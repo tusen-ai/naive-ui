@@ -4,15 +4,8 @@
 使用 separator prop 自定义分隔符。
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { MdCash } from '@vicons/ionicons4'
-
-export default defineComponent({
-  components: {
-    MdCash
-  }
-})
 </script>
 
 <template>

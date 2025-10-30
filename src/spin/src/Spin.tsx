@@ -1,21 +1,14 @@
-import {
-  type CSSProperties,
-  type PropType,
-  Transition,
-  computed,
-  defineComponent,
-  h,
-  ref,
-  watchEffect
-} from 'vue'
-import { useCompitable } from 'vooks'
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { SpinTheme } from '../styles'
 import { pxfy } from 'seemly'
+import { useCompitable } from 'vooks'
+import { computed, defineComponent, h, ref, Transition, watchEffect } from 'vue'
 import { NBaseLoading } from '../../_internal'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import { type ExtractPublicPropTypes, createKey, warnOnce } from '../../_utils'
+import { createKey, warnOnce } from '../../_utils'
 import { spinLight } from '../styles'
-import type { SpinTheme } from '../styles'
 import style from './styles/index.cssr'
 
 const STROKE_WIDTH = {
@@ -55,9 +48,16 @@ export const spinProps = {
 
 export type SpinProps = ExtractPublicPropTypes<typeof spinProps>
 
+export interface SpinSlots {
+  default?: () => VNode[]
+  description?: () => VNode[]
+  icon?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Spin',
   props: spinProps,
+  slots: Object as SlotsType<SpinSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {
@@ -99,14 +99,14 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'spin',
-        computed(() => {
-          const { size } = props
-          return typeof size === 'number' ? String(size) : size[0]
-        }),
-        cssVarsRef,
-        props
-      )
+          'spin',
+          computed(() => {
+            const { size } = props
+            return typeof size === 'number' ? String(size) : size[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     const compitableShow = useCompitable(props, ['spinning', 'show'])

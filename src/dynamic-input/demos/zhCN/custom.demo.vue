@@ -2,29 +2,24 @@
 # 自定义内容
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      customValue: ref([
-        {
-          isCheck: true,
-          num: 1,
-          string: '一个字符串'
-        }
-      ]),
-      onCreate() {
-        return {
-          isCheck: false,
-          num: 1,
-          string: '一个字符串'
-        }
-      }
-    }
+const customValue = ref([
+  {
+    isCheck: true,
+    num: 1,
+    string: '一个字符串'
   }
-})
+])
+
+function onCreate() {
+  return {
+    isCheck: false,
+    num: 1,
+    string: '一个字符串'
+  }
+}
 </script>
 
 <template>

@@ -1,30 +1,19 @@
-import {
-  type CSSProperties,
-  type HTMLAttributes,
-  type PropType,
-  Transition,
-  type VNodeChild,
-  computed,
-  defineComponent,
-  h,
-  provide,
-  ref,
-  toRef,
-  watchEffect,
-  withDirectives
+import type { CheckStrategy } from 'treemate'
+import type {
+  CSSProperties,
+  HTMLAttributes,
+  PropType,
+  SlotsType,
+  VNode,
+  VNodeChild
 } from 'vue'
-import {
-  type FollowerInst,
-  type FollowerPlacement,
-  VBinder,
-  VFollower,
-  VTarget
-} from 'vueuc'
-import { useIsMounted, useMergedState } from 'vooks'
-import { clickoutside } from 'vdirs'
-import { type CheckStrategy, createTreeMate } from 'treemate'
-import { getPreciseEventTarget, happensIn } from 'seemly'
-import type { FormValidationStatus } from '../../form/src/interface'
+import type { FollowerInst, FollowerPlacement } from 'vueuc'
+import type { InternalSelectionInst } from '../../_internal'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { FormValidationStatus } from '../../form/src/public-types'
+import type { PopoverProps } from '../../popover'
+import type { SelectBaseOption, SelectOption } from '../../select/src/interface'
 import type {
   GetChildren,
   InternalTreeInst,
@@ -32,38 +21,8 @@ import type {
   TreeOption,
   TreeOverrideNodeClickBehaviorReturn
 } from '../../tree/src/interface'
-import type { SelectBaseOption, SelectOption } from '../../select/src/interface'
-import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
 import type { OnUpdateExpandedKeysImpl } from '../../tree/src/Tree'
-import {
-  type InternalSelectionInst,
-  NBaseFocusDetector,
-  NInternalSelection
-} from '../../_internal'
-import { NTree } from '../../tree'
-import { NEmpty } from '../../empty'
-import {
-  useConfig,
-  useFormItem,
-  useLocale,
-  useTheme,
-  useThemeClass
-} from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import {
-  type ExtractPublicPropTypes,
-  type MaybeArray,
-  call,
-  markEventEffectPerformed,
-  resolveSlot,
-  resolveWrappedSlot,
-  useAdjustedTo,
-  useOnResize,
-  warnOnce
-} from '../../_utils'
-import { type TreeSelectTheme, treeSelectLight } from '../styles'
-import { useMergedCheckStrategy } from '../../tree/src/utils'
-import type { PopoverProps } from '../../popover'
+import type { TreeSelectTheme } from '../styles'
 import type {
   OnUpdateIndeterminateKeysImpl,
   OnUpdateValue,
@@ -77,12 +36,50 @@ import type {
   TreeSelectRenderTag,
   Value
 } from './interface'
+import { getPreciseEventTarget, happensIn } from 'seemly'
+import { createTreeMate } from 'treemate'
+import { clickoutside } from 'vdirs'
+import { useIsMounted, useMergedState } from 'vooks'
+import {
+  computed,
+  defineComponent,
+  h,
+  provide,
+  ref,
+  toRef,
+  Transition,
+  watchEffect,
+  withDirectives
+} from 'vue'
+import { VBinder, VFollower, VTarget } from 'vueuc'
+import { NBaseFocusDetector, NInternalSelection } from '../../_internal'
+import {
+  useConfig,
+  useFormItem,
+  useLocale,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
+import {
+  call,
+  markEventEffectPerformed,
+  resolveSlot,
+  resolveWrappedSlot,
+  useAdjustedTo,
+  useOnResize,
+  warnOnce
+} from '../../_utils'
+import { NEmpty } from '../../empty'
+import { NTree } from '../../tree'
+import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
+import { useMergedCheckStrategy } from '../../tree/src/utils'
+import { treeSelectLight } from '../styles'
 import { treeSelectInjectionKey } from './interface'
+import style from './styles/index.cssr'
 import {
   treeOption2SelectOption,
   treeOption2SelectOptionWithPath
 } from './utils'
-import style from './styles/index.cssr'
 
 type OnLoad = (node: TreeSelectOption) => Promise<void>
 
@@ -181,9 +178,17 @@ export const treeSelectProps = {
 
 export type TreeSelectProps = ExtractPublicPropTypes<typeof treeSelectProps>
 
+export interface TreeSelectSlots {
+  header?: () => VNode[]
+  action?: () => VNode[]
+  arrow?: () => VNode[]
+  empty?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'TreeSelect',
   props: treeSelectProps,
+  slots: Object as SlotsType<TreeSelectSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {
@@ -305,11 +310,11 @@ export default defineComponent({
         if (tmNode !== null) {
           return showPath
             ? treeOption2SelectOptionWithPath(
-              tmNode,
-              treeMate.getPath(mergedValue).treeNodePath,
-              separator,
-              labelField
-            )
+                tmNode,
+                treeMate.getPath(mergedValue).treeNodePath,
+                separator,
+                labelField
+              )
             : treeOption2SelectOption(tmNode, labelField)
         }
       }
@@ -335,11 +340,11 @@ export default defineComponent({
             res.push(
               showPath
                 ? treeOption2SelectOptionWithPath(
-                  tmNode,
-                  treeMate.getPath(value).treeNodePath,
-                  separator,
-                  labelField
-                )
+                    tmNode,
+                    treeMate.getPath(value).treeNodePath,
+                    separator,
+                    labelField
+                  )
                 : treeOption2SelectOption(tmNode, labelField)
             )
           }
@@ -1006,6 +1011,7 @@ export default defineComponent({
                                 themeOverrides={mergedTheme.peerOverrides.Tree}
                                 defaultExpandAll={this.defaultExpandAll}
                                 defaultExpandedKeys={this.defaultExpandedKeys}
+                                indent={this.indent}
                                 expandedKeys={this.mergedExpandedKeys}
                                 checkedKeys={this.treeCheckedKeys}
                                 selectedKeys={this.treeSelectedKeys}

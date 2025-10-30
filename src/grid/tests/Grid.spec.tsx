@@ -1,5 +1,5 @@
-import { defineComponent, h } from 'vue'
 import { mount } from '@vue/test-utils'
+import { defineComponent, h } from 'vue'
 import { NGi, NGrid, NGridItem } from '../index'
 
 const renderNGi = Array.from({ length: 6 })
@@ -185,9 +185,11 @@ describe('n-grid', () => {
 
     await new Promise(resolve => requestAnimationFrame(resolve))
 
-    expect(wrapper.find('.n-gi-1').element.getAttribute('style')).toContain(
-      'grid-column: span 2 / span 2;'
-    )
+    vi.waitFor(() => {
+      expect(wrapper.find('.n-gi-1').element.getAttribute('style')).toContain(
+        'grid-column: span 2 / span 2;'
+      )
+    })
     wrapper.unmount()
   })
 })

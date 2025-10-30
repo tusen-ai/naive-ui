@@ -1,33 +1,25 @@
-import {
-  type HTMLAttributes,
-  type PropType,
-  computed,
-  defineComponent,
-  h,
-  mergeProps,
-  ref,
-  watchEffect
-} from 'vue'
+import type { HTMLAttributes, PropType, SlotsType, VNode } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { AlertTheme } from '../styles'
 import { getMargin } from 'seemly'
+import { computed, defineComponent, h, mergeProps, ref, watchEffect } from 'vue'
+import { NBaseClose, NBaseIcon, NFadeInExpandTransition } from '../../_internal'
 import {
   ErrorIcon,
   InfoIcon,
   SuccessIcon,
   WarningIcon
 } from '../../_internal/icons'
-import { NBaseClose, NBaseIcon, NFadeInExpandTransition } from '../../_internal'
-import { useRtl } from '../../_mixins/use-rtl'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
 import {
   createKey,
   resolveSlot,
   resolveWrappedSlot,
   warnOnce
 } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { alertLight } from '../styles'
-import type { AlertTheme } from '../styles'
 import style from './styles/index.cssr'
 
 export const alertProps = {
@@ -56,10 +48,17 @@ export const alertProps = {
 
 export type AlertProps = ExtractPublicPropTypes<typeof alertProps>
 
+export interface AlertSlots {
+  default?: () => VNode[]
+  icon?: () => VNode[]
+  header?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Alert',
   inheritAttrs: false,
   props: alertProps,
+  slots: Object as SlotsType<AlertSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {
@@ -141,13 +140,13 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'alert',
-        computed(() => {
-          return props.type[0]
-        }),
-        cssVarsRef,
-        props
-      )
+          'alert',
+          computed(() => {
+            return props.type[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     const visibleRef = ref(true)
     const doAfterLeave = (): void => {

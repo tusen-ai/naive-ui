@@ -2,15 +2,8 @@
 # 自定义图标
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { MdHand as HandIcon } from '@vicons/ionicons4'
-
-export default defineComponent({
-  components: {
-    HandIcon
-  }
-})
 </script>
 
 <template>

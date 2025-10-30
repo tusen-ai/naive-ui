@@ -1,7 +1,9 @@
-import { type PropType, defineComponent, h, inject } from 'vue'
-import { SwitcherIcon } from '../../_internal/icons'
+import type { PropType } from 'vue'
+import type { TmNode } from './interface'
+import { defineComponent, h, inject } from 'vue'
 import { NBaseIcon, NBaseLoading, NIconSwitchTransition } from '../../_internal'
-import { type TmNode, treeInjectionKey } from './interface'
+import { SwitcherIcon } from '../../_internal/icons'
+import { treeInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'NTreeSwitcher',

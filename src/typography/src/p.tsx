@@ -1,15 +1,10 @@
-import {
-  type CSSProperties,
-  type PropType,
-  computed,
-  defineComponent,
-  h
-} from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import type { CSSProperties, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import { typographyLight } from '../styles'
-import type { TypographyTheme } from '../styles'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type { TypographyTheme } from '../styles'
+import { computed, defineComponent, h } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { typographyLight } from '../styles'
 import style from './styles/p.cssr'
 
 export const pProps = {
@@ -55,11 +50,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'p',
-        computed(() => `${props.depth || ''}`),
-        cssVarsRef,
-        props
-      )
+          'p',
+          computed(() => `${props.depth || ''}`),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,

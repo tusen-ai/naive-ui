@@ -1,21 +1,24 @@
+import type { CSSProperties, PropType } from 'vue'
+import type { ScrollbarProps } from '../../_internal'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { DrawerTheme } from '../styles'
+import type { Placement } from './DrawerBodyWrapper'
+import { zindexable } from 'vdirs'
+import { useIsMounted, useMergedState } from 'vooks'
 import {
-  type CSSProperties,
-  type PropType,
-  Transition,
   computed,
   defineComponent,
   h,
   provide,
   ref,
   toRef,
+  Transition,
   watchEffect,
   withDirectives
 } from 'vue'
 import { VLazyTeleport } from 'vueuc'
-import { zindexable } from 'vdirs'
-import { useIsMounted, useMergedState } from 'vooks'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import {
   call,
   eventEffectNotPerformed,
@@ -23,11 +26,8 @@ import {
   useIsComposing,
   warnOnce
 } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { ScrollbarProps } from '../../_internal'
-import { type DrawerTheme, drawerLight } from '../styles'
+import { drawerLight } from '../styles'
 import NDrawerBodyWrapper from './DrawerBodyWrapper'
-import type { Placement } from './DrawerBodyWrapper'
 import { drawerInjectionKey } from './interface'
 import style from './styles/index.cssr'
 

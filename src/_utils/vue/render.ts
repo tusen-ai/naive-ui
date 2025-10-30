@@ -1,4 +1,5 @@
-import { type VNodeChild, createTextVNode } from 'vue'
+import type { VNodeChild } from 'vue'
+import { createTextVNode } from 'vue'
 
 export function render<T extends any[]>(
   r:

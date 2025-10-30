@@ -1,2 +1,2 @@
-export { default as NHighlight, highlightProps } from './src/Highlight'
+export { highlightProps, default as NHighlight } from './src/Highlight'
 export type * from './src/public-types'

@@ -1,2 +1,2 @@
-export { default as NColorPicker, colorPickerProps } from './src/ColorPicker'
-export type { ColorPickerProps } from './src/ColorPicker'
+export { colorPickerProps, default as NColorPicker } from './src/ColorPicker'
+export type { ColorPickerProps, ColorPickerSlots } from './src/ColorPicker'

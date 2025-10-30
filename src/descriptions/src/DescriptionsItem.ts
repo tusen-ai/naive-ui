@@ -1,5 +1,6 @@
-import { type CSSProperties, type PropType, defineComponent } from 'vue'
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import { defineComponent } from 'vue'
 import { DESCRIPTION_ITEM_FLAG } from './utils'
 
 export const descriptionsItemProps = {
@@ -18,10 +19,16 @@ export type DescriptionItemProps = ExtractPublicPropTypes<
   typeof descriptionsItemProps
 >
 
+export interface DescriptionItemSlots {
+  default?: () => VNode[]
+  label?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'DescriptionsItem',
   [DESCRIPTION_ITEM_FLAG]: true,
   props: descriptionsItemProps,
+  slots: Object as SlotsType<DescriptionItemSlots>,
   render() {
     return null
   }

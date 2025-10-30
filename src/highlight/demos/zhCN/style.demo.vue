@@ -4,20 +4,12 @@
   换个样式，让高亮更加醒目。
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useThemeVars } from 'naive-ui'
 
-export default defineComponent({
-  setup() {
-    const themeVars = useThemeVars()
-    return {
-      themeVars,
-      text: 'Naive UI 全量使用 TypeScript 编写，和你的 TypeScript 项目无缝衔接',
-      patterns: ['Naive UI', 'TypeScript']
-    }
-  }
-})
+const themeVars = useThemeVars()
+const text = 'Naive UI 全量使用 TypeScript 编写，和你的 TypeScript 项目无缝衔接'
+const patterns = ['Naive UI', 'TypeScript']
 </script>
 
 <template>

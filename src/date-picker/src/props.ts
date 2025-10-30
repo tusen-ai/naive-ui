@@ -1,12 +1,11 @@
 import type { PropType } from 'vue'
 import type { FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
-import { useTheme } from '../../_mixins'
 import type { MaybeArray } from '../../_utils'
-import { useAdjustedTo } from '../../_utils'
-import type { DatePickerTheme } from '../styles'
-import type { FormValidationStatus } from '../../form/src/interface'
+import type { FormValidationStatus } from '../../form/src/public-types'
 import type { TimePickerProps } from '../../time-picker'
+import type { DatePickerTheme } from '../styles'
+import type { DatePickerType } from './config'
 import type {
   DefaultTime,
   FirstDayOfWeek,
@@ -19,7 +18,8 @@ import type {
   Shortcuts,
   Value
 } from './interface'
-import type { DatePickerType } from './config'
+import { useTheme } from '../../_mixins'
+import { useAdjustedTo } from '../../_utils'
 
 export const datePickerProps = {
   ...(useTheme.props as ThemeProps<DatePickerTheme>),
@@ -30,9 +30,20 @@ export const datePickerProps = {
   },
   clearable: Boolean,
   updateValueOnClose: Boolean,
+  calendarDayFormat: String,
+  calendarHeaderYearFormat: String,
+  calendarHeaderMonthFormat: String,
+  calendarHeaderMonthYearSeparator: {
+    type: String,
+    default: ' '
+  },
+  calendarHeaderMonthBeforeYear: {
+    type: Boolean,
+    default: undefined
+  },
   defaultValue: [Number, Array] as PropType<Value | null>,
   defaultFormattedValue: [String, Array] as PropType<FormattedValue | null>,
-  defaultTime: [Number, String, Array] as PropType<DefaultTime>,
+  defaultTime: [Number, String, Array, Function] as PropType<DefaultTime>,
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -55,7 +66,7 @@ export const datePickerProps = {
   endPlaceholder: String,
   format: String,
   dateFormat: String,
-  timerPickerFormat: String,
+  timePickerFormat: String,
   actions: Array as PropType<Array<'clear' | 'confirm' | 'now'> | null>,
   shortcuts: Object as PropType<Shortcuts>,
   isDateDisabled: Function as PropType<IsDateDisabled>,

@@ -1,11 +1,12 @@
-import { type PropType, computed, defineComponent, h } from 'vue'
+import type { PropType } from 'vue'
+import type { TmNode } from './interface'
 import { useMemo } from 'vooks'
-import { render } from '../../_utils'
+import { computed, defineComponent, h } from 'vue'
+import { keysOf, render } from '../../_utils'
 import { NTooltip } from '../../tooltip'
 import NMenuOptionContent from './MenuOptionContent'
 import { useMenuChild } from './use-menu-child'
 import { useMenuChildProps } from './use-menu-child-props'
-import type { TmNode } from './interface'
 
 export const menuItemProps = {
   ...useMenuChildProps,
@@ -18,18 +19,22 @@ export const menuItemProps = {
   onClick: Function
 } as const
 
+export const menuItemPropKeys = keysOf(menuItemProps)
+
 export const NMenuOption = defineComponent({
   name: 'MenuOption',
   props: menuItemProps,
   setup(props) {
     const MenuChild = useMenuChild(props)
-    const { NSubmenu, NMenu } = MenuChild
+    const { NSubmenu, NMenu, NMenuOptionGroup } = MenuChild
     const { props: menuProps, mergedClsPrefixRef, mergedCollapsedRef } = NMenu
-    const submenuDisabledRef = NSubmenu
+    const parentDisabledRef = NSubmenu
       ? NSubmenu.mergedDisabledRef
-      : { value: false }
+      : NMenuOptionGroup
+        ? NMenuOptionGroup.mergedDisabledRef
+        : { value: false }
     const mergedDisabledRef = computed(() => {
-      return submenuDisabledRef.value || props.disabled
+      return parentDisabledRef.value || props.disabled
     })
     function doClick(e: MouseEvent): void {
       const { onClick } = props

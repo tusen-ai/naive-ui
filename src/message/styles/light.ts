@@ -1,6 +1,6 @@
-import { commonLight } from '../../_styles/common'
-import type { ThemeCommonVars } from '../../_styles/common'
 import type { Theme } from '../../_mixins/use-theme'
+import type { ThemeCommonVars } from '../../_styles/common'
+import { commonLight } from '../../_styles/common'
 import commonVariables from './_common'
 
 export function self(vars: ThemeCommonVars) {
@@ -80,7 +80,8 @@ export function self(vars: ThemeCommonVars) {
     closeIconColorPressedLoading: closeIconColorPressed,
     loadingColor: primaryColor,
     lineHeight,
-    borderRadius
+    borderRadius,
+    border: '0'
   }
 }
 

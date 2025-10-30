@@ -1,14 +1,14 @@
-import { h, toRaw } from 'vue'
 import { mount } from '@vue/test-utils'
 import hljs from 'highlight.js/lib/core'
 import javascript from 'highlight.js/lib/languages/javascript'
+import { h, toRaw } from 'vue'
 import { NCode } from '../index'
 
 hljs.registerLanguage('javascript', javascript)
 
 describe('n-code', () => {
   it('should warn when no hljs is set', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation()
+    const spy = vi.spyOn(console, 'error').mockImplementation(() => {})
     mount(NCode)
     expect(spy).toHaveBeenCalled()
   })

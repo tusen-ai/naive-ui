@@ -1,22 +1,17 @@
-import {
-  type CSSProperties,
-  type PropType,
-  computed,
-  defineComponent,
-  h,
-  ref,
-  toRef,
-  watchEffect
-} from 'vue'
-import { off, on } from 'evtd'
-import { useMergedState } from 'vooks'
-import { depx } from 'seemly'
-import { type ExtractPublicPropTypes, call, resolveSlot } from '../../_utils'
-import useConfig from '../../_mixins/use-config'
-import { type ThemeProps, useTheme, useThemeClass } from '../../_mixins'
-import { type SplitTheme, splitLight } from '../styles'
-import style from './styles/index.cssr'
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { SplitTheme } from '../styles'
 import type { SplitOnUpdateSize } from './types'
+import { off, on } from 'evtd'
+import { depx } from 'seemly'
+import { useMergedState } from 'vooks'
+import { computed, defineComponent, h, ref, toRef, watchEffect } from 'vue'
+import { useTheme, useThemeClass } from '../../_mixins'
+import useConfig from '../../_mixins/use-config'
+import { call, resolveSlot } from '../../_utils'
+import { splitLight } from '../styles'
+import style from './styles/index.cssr'
 
 export const splitProps = {
   ...(useTheme.props as ThemeProps<SplitTheme>),
@@ -60,9 +55,17 @@ export const splitProps = {
 
 export type SplitProps = ExtractPublicPropTypes<typeof splitProps>
 
+export interface SplitSlots {
+  default?: () => VNode[]
+  1?: () => VNode[]
+  2?: () => VNode[]
+  'resize-trigger'?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Split',
   props: splitProps,
+  slots: Object as SlotsType<SplitSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(

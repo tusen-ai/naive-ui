@@ -5,22 +5,23 @@ import type {
   HTMLAttributes,
   PropType,
   Ref,
-  Slots,
+  VNode,
   VNodeChild
 } from 'vue'
 import type { VirtualListInst } from 'vueuc'
-import type { ScrollTo, ScrollbarProps } from '../../scrollbar/src/Scrollbar'
-import type { EllipsisProps } from '../../ellipsis/src/Ellipsis'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { NLocale } from '../../locales'
+import type { BaseLoadingExposedProps } from '../../_internal'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { EllipsisProps } from '../../ellipsis/src/Ellipsis'
+import type { NLocale } from '../../locales'
+import type { PaginationProps } from '../../pagination'
+import type { PopoverProps } from '../../popover'
+import type { ScrollbarProps, ScrollTo } from '../../scrollbar/src/Scrollbar'
+import type { DataTableTheme } from '../styles'
+import type { DataTableGetCsvCell, DataTableGetCsvHeader } from './publicTypes'
+import type { ColItem, RowItem } from './use-group-header'
 import { useTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
-import type { PaginationProps } from '../../pagination'
-import type { DataTableTheme } from '../styles'
-import type { BaseLoadingExposedProps } from '../../_internal'
-import type { PopoverProps } from '../../popover'
-import type { ColItem, RowItem } from './use-group-header'
 
 export const dataTableProps = {
   ...(useTheme.props as ThemeProps<DataTableTheme>),
@@ -129,6 +130,8 @@ export const dataTableProps = {
   >,
   renderExpandIcon: Function as PropType<RenderExpandIcon>,
   spinProps: { type: Object as PropType<BaseLoadingExposedProps>, default: {} },
+  getCsvCell: Function as PropType<DataTableGetCsvCell>,
+  getCsvHeader: Function as PropType<DataTableGetCsvHeader>,
   onLoad: Function as PropType<DataTableOnLoad>,
   'onUpdate:page': [Function, Array] as PropType<
     PaginationProps['onUpdate:page']
@@ -174,6 +177,12 @@ export const dataTableProps = {
     MaybeArray<OnUpdateCheckedRowKeys> | undefined
   >
 } as const
+
+export interface DataTableSlots {
+  default?: () => VNode[]
+  empty?: () => VNode[]
+  loading?: () => VNode[]
+}
 
 export type FilterOptionValue = string | number
 export type ColumnKey = string | number
@@ -242,17 +251,17 @@ export type DataTableHeightForRow<T = RowData> = (
   rowIndex: number
 ) => number
 
-export type TableColumnTitle =
-  | string
-  | ((column: TableBaseColumn) => VNodeChild)
+export type TableColumnTitle
+  = | string
+    | ((column: TableBaseColumn) => VNodeChild)
 
-export type TableExpandColumnTitle =
-  | string
-  | ((column: TableExpandColumn) => VNodeChild)
+export type TableExpandColumnTitle
+  = | string
+    | ((column: TableExpandColumn) => VNodeChild)
 
-export type TableColumnGroupTitle =
-  | string
-  | ((column: TableColumnGroup) => VNodeChild)
+export type TableColumnGroupTitle
+  = | string
+    | ((column: TableColumnGroup) => VNodeChild)
 
 export type TableColumnGroup<T = InternalRowData> = {
   title?: TableColumnGroupTitle
@@ -277,6 +286,7 @@ export type TableBaseColumn<T = InternalRowData> = {
   sorter?: boolean | Sorter<T> | 'default'
   defaultSortOrder?: SortOrder
   sortOrder?: SortOrder // controlled
+  customNextSortOrder?: (order: SortOrder) => SortOrder
 
   resizable?: boolean
   minWidth?: string | number
@@ -341,11 +351,11 @@ export interface TableExpandColumn<T = InternalRowData>
   expandable?: Expandable<T>
 }
 
-export type TableColumn<T = InternalRowData> =
-  | TableColumnGroup<T>
-  | TableBaseColumn<T>
-  | TableSelectionColumn<T>
-  | TableExpandColumn<T>
+export type TableColumn<T = InternalRowData>
+  = | TableColumnGroup<T>
+    | TableBaseColumn<T>
+    | TableSelectionColumn<T>
+    | TableExpandColumn<T>
 export type TableColumns<T = InternalRowData> = Array<TableColumn<T>>
 
 export type DataTableSelectionOptions<T = InternalRowData> = Array<
@@ -354,7 +364,7 @@ export type DataTableSelectionOptions<T = InternalRowData> = Array<
 >
 export interface DataTableInjection {
   props: DataTableSetupProps
-  slots: Slots
+  slots: DataTableSlots
   indentRef: Ref<number>
   childTriggerColIndexRef: Ref<number>
   componentId: string

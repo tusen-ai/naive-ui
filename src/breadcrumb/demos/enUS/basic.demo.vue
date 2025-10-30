@@ -2,17 +2,8 @@
 # Basic
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { MdCash } from '@vicons/ionicons4'
-
-export default defineComponent({
-  setup() {
-    return {
-      MdCash
-    }
-  }
-})
 </script>
 
 <template>

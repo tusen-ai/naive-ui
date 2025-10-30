@@ -1,18 +1,12 @@
-import {
-  type PropType,
-  Transition,
-  type VNode,
-  computed,
-  defineComponent,
-  h,
-  inject
-} from 'vue'
-import { useMemo } from 'vooks'
+import type { PropType, VNode } from 'vue'
+import type { TmNode } from './interface'
 import { happensIn } from 'seemly'
-import { NCheckbox } from '../../checkbox'
+import { useMemo } from 'vooks'
+import { computed, defineComponent, h, inject, Transition } from 'vue'
 import { NBaseIcon, NBaseLoading } from '../../_internal'
 import { CheckmarkIcon, ChevronRightIcon } from '../../_internal/icons'
-import { type TmNode, cascaderInjectionKey } from './interface'
+import { NCheckbox } from '../../checkbox'
+import { cascaderInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'NCascaderOption',
@@ -214,10 +208,10 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-cascader-option__prefix`}>
           {renderPrefix
             ? renderPrefix({
-              option: this.tmNode.rawNode,
-              checked: this.checked,
-              node: originalNode
-            })
+                option: this.tmNode.rawNode,
+                checked: this.checked,
+                node: originalNode
+              })
             : originalNode}
         </div>
       )
@@ -269,10 +263,10 @@ export default defineComponent({
       <div class={`${mergedClsPrefix}-cascader-option__suffix`}>
         {renderSuffix
           ? renderSuffix({
-            option: this.tmNode.rawNode,
-            checked: this.checked,
-            node: originalSuffixChild
-          })
+              option: this.tmNode.rawNode,
+              checked: this.checked,
+              node: originalSuffixChild
+            })
           : originalSuffixChild}
       </div>
     )

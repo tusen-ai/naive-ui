@@ -1,5 +1,5 @@
-import commonVars from './_common'
 import type { FlexTheme } from './light'
+import commonVars from './_common'
 
 const flexDark: FlexTheme = {
   name: 'Flex',

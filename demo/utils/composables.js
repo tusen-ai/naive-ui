@@ -1,5 +1,5 @@
-import { inject, provide, reactive, toRef, watchEffect } from 'vue'
 import { useBreakpoint, useMemo } from 'vooks'
+import { inject, provide, reactive, toRef, watchEffect } from 'vue'
 
 export function useIsMobile() {
   const breakpointRef = useBreakpoint()
@@ -22,7 +22,7 @@ export function useIsSmallDesktop() {
   })
 }
 
-export const i18n = function (data) {
+export function i18n(data) {
   const localeReactive = inject('i18n', null)
   return {
     locale: toRef(localeReactive, 'locale'),

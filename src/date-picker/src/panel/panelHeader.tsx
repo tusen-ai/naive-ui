@@ -1,14 +1,8 @@
-import {
-  type PropType,
-  Transition,
-  defineComponent,
-  h,
-  ref,
-  withDirectives
-} from 'vue'
-import { VBinder, VFollower, VTarget } from 'vueuc'
-import { clickoutside } from 'vdirs'
+import type { PropType } from 'vue'
 import { getPreciseEventTarget } from 'seemly'
+import { clickoutside } from 'vdirs'
+import { defineComponent, h, ref, Transition, withDirectives } from 'vue'
+import { VBinder, VFollower, VTarget } from 'vueuc'
 import MonthPanel from './month'
 
 export default defineComponent({
@@ -20,6 +14,10 @@ export default defineComponent({
     value: Number,
     monthBeforeYear: {
       type: Boolean,
+      required: true
+    },
+    monthYearSeparator: {
+      type: String,
       required: true
     },
     calendarMonth: {
@@ -80,8 +78,16 @@ export default defineComponent({
                       onClick={this.handleHeaderClick}
                     >
                       {this.monthBeforeYear
-                        ? [this.calendarMonth, ' ', this.calendarYear]
-                        : [this.calendarYear, ' ', this.calendarMonth]}
+                        ? [
+                            this.calendarMonth,
+                            this.monthYearSeparator,
+                            this.calendarYear
+                          ]
+                        : [
+                            this.calendarYear,
+                            this.monthYearSeparator,
+                            this.calendarMonth
+                          ]}
                     </div>
                   )
                 }}
@@ -94,25 +100,28 @@ export default defineComponent({
                         default: () =>
                           this.show
                             ? withDirectives(
-                              <MonthPanel
-                                ref="monthPanelRef"
-                                onUpdateValue={this.onUpdateValue}
-                                actions={[]}
-                                // month and year click show month type
-                                type="month"
-                                key="month"
-                                useAsQuickJump
-                                value={this.value}
-                              />,
-                              [
+                                <MonthPanel
+                                  ref="monthPanelRef"
+                                  onUpdateValue={this.onUpdateValue}
+                                  actions={[]}
+                                  calendarHeaderMonthYearSeparator={
+                                    this.monthYearSeparator
+                                  }
+                                  // month and year click show month type
+                                  type="month"
+                                  key="month"
+                                  useAsQuickJump
+                                  value={this.value}
+                                />,
                                 [
-                                  clickoutside,
-                                  handleClickOutside,
-                                  undefined as unknown as string,
-                                  { capture: true }
+                                  [
+                                    clickoutside,
+                                    handleClickOutside,
+                                    undefined as unknown as string,
+                                    { capture: true }
+                                  ]
                                 ]
-                              ]
-                            )
+                              )
                             : null
                       }}
                     </Transition>

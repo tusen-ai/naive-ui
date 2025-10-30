@@ -1,15 +1,12 @@
-import {
-  type PropType,
-  type VNode,
-  computed,
-  defineComponent,
-  h,
-  inject,
-  ref,
-  watchEffect
-} from 'vue'
+import type { PropType, VNode } from 'vue'
+import type { ExtractThemeOverrides } from '../../_mixins/use-theme'
+import type { ButtonTheme } from '../../button/styles'
+import type { ImageInst } from '../../image'
+import type { ListType } from './interface'
+import type { UploadSettledFileInfo } from './public-types'
 import { useMemo } from 'vooks'
-import type { ImageInst } from '../../image/src/Image'
+import { computed, defineComponent, h, inject, ref, watchEffect } from 'vue'
+import { NBaseIcon, NIconSwitchTransition } from '../../_internal'
 import {
   AttachIcon,
   CancelIcon,
@@ -18,17 +15,12 @@ import {
   RetryIcon,
   TrashIcon
 } from '../../_internal/icons'
-import type { ExtractThemeOverrides } from '../../_mixins/use-theme'
-import type { ButtonTheme } from '../../button/styles'
-import { NImage } from '../../image'
-import { NButton } from '../../button'
-import { NBaseIcon, NIconSwitchTransition } from '../../_internal'
 import { download, warn } from '../../_utils'
-import NUploadProgress from './UploadProgress'
+import { NButton } from '../../button'
+import { NImage } from '../../image'
+import { renderDocumentIcon, renderImageIcon } from './icons'
 import { uploadInjectionKey } from './interface'
-import type { ListType } from './interface'
-import type { UploadSettledFileInfo } from './public-types'
-import { documentIcon, imageIcon } from './icons'
+import NUploadProgress from './UploadProgress'
 import { isImageFile } from './utils'
 
 const buttonThemeOverrides: ExtractThemeOverrides<ButtonTheme> = {
@@ -158,10 +150,10 @@ export default defineComponent({
       void Promise.resolve(
         onRemove
           ? onRemove({
-            file: Object.assign({}, file),
-            fileList: mergedFileList,
-            index: props.index
-          })
+              file: Object.assign({}, file),
+              fileList: mergedFileList,
+              index: props.index
+            })
           : true
       ).then((result) => {
         if (result === false)
@@ -177,13 +169,19 @@ export default defineComponent({
     }
     function handleDownload(file: UploadSettledFileInfo): void {
       const {
-        onDownloadRef: { value: onDownload }
+        onDownloadRef: { value: onDownload },
+        customDownloadRef: { value: customDownload }
       } = NUpload
       void Promise.resolve(
         onDownload ? onDownload(Object.assign({}, file)) : true
       ).then((res) => {
         if (res !== false) {
-          download(file.url, file.name)
+          if (customDownload) {
+            customDownload(Object.assign({}, file))
+          }
+          else {
+            download(file.url, file.name)
+          }
         }
       })
     }
@@ -207,7 +205,7 @@ export default defineComponent({
         const { value } = imageRef
         if (!value)
           return
-        value.click()
+        value.showPreview()
       }
     }
 
@@ -265,11 +263,11 @@ export default defineComponent({
               renderIcon(file)
             ) : isImageFile(file) ? (
               <NBaseIcon clsPrefix={clsPrefix}>
-                {{ default: () => imageIcon }}
+                {{ default: renderImageIcon }}
               </NBaseIcon>
             ) : (
               <NBaseIcon clsPrefix={clsPrefix}>
-                {{ default: () => documentIcon }}
+                {{ default: renderDocumentIcon }}
               </NBaseIcon>
             )}
           </span>
@@ -334,18 +332,18 @@ export default defineComponent({
           {icon}
           <div class={`${clsPrefix}-upload-file-info__name`}>
             {showName
-            && (file.url && file.status !== 'error' ? (
-              <a
-                rel="noopener noreferer"
-                target="_blank"
-                href={file.url || undefined}
-                onClick={this.handlePreviewClick}
-              >
-                {file.name}
-              </a>
-            ) : (
-              <span onClick={this.handlePreviewClick}>{file.name}</span>
-            ))}
+              && (file.url && file.status !== 'error' ? (
+                <a
+                  rel="noopener noreferer"
+                  target="_blank"
+                  href={file.url || undefined}
+                  onClick={this.handlePreviewClick}
+                >
+                  {file.name}
+                </a>
+              ) : (
+                <span onClick={this.handlePreviewClick}>{file.name}</span>
+              ))}
             {isImageType && progress}
           </div>
           <div
@@ -374,7 +372,7 @@ export default defineComponent({
               </NButton>
             ) : null}
             {(this.showRemoveButton || this.showCancelButton)
-            && !this.disabled && (
+              && !this.disabled && (
               <NButton
                 key="cancelOrTrash"
                 theme={mergedTheme.peers.Button}

@@ -1,9 +1,19 @@
+import type {
+  ComponentPublicInstance,
+  CSSProperties,
+  PropType,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
+import type { FollowerInst, FollowerPlacement } from 'vueuc'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { SliderTheme } from '../styles'
+import type { OnUpdateValueImpl } from './interface'
+import { off, on } from 'evtd'
+import { useIsMounted, useMergedState } from 'vooks'
 import {
-  type CSSProperties,
-  type ComponentPublicInstance,
-  type PropType,
-  Transition,
-  type VNodeChild,
   computed,
   defineComponent,
   h,
@@ -11,35 +21,15 @@ import {
   onBeforeUnmount,
   ref,
   toRef,
+  Transition,
   watch
 } from 'vue'
-import {
-  type FollowerInst,
-  type FollowerPlacement,
-  VBinder,
-  VFollower,
-  VTarget
-} from 'vueuc'
-import { useIsMounted, useMergedState } from 'vooks'
-import { off, on } from 'evtd'
-import {
-  type ThemeProps,
-  useConfig,
-  useFormItem,
-  useTheme,
-  useThemeClass
-} from '../../_mixins'
-import {
-  type ExtractPublicPropTypes,
-  type MaybeArray,
-  call,
-  resolveSlot,
-  useAdjustedTo
-} from '../../_utils'
-import { type SliderTheme, sliderLight } from '../styles'
-import type { OnUpdateValueImpl } from './interface'
-import { isTouchEvent, useRefs } from './utils'
+import { VBinder, VFollower, VTarget } from 'vueuc'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import { call, resolveSlot, useAdjustedTo } from '../../_utils'
+import { sliderLight } from '../styles'
 import style from './styles/index.cssr'
+import { isTouchEvent, useRefs } from './utils'
 
 export interface ClosestMark {
   value: number
@@ -104,9 +94,15 @@ export const sliderProps = {
 
 export type SliderProps = ExtractPublicPropTypes<typeof sliderProps>
 
+export interface SliderSlots {
+  thumb?: () => VNode[]
+  default?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Slider',
   props: sliderProps,
+  slots: Object as SlotsType<SliderSlots>,
   setup(props) {
     const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled }
       = useConfig(props)

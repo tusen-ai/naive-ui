@@ -1,5 +1,5 @@
-import { cB } from '../../../../_utils/cssr'
 import { fadeInTransition } from '../../../../_styles/transitions/fade-in.cssr'
+import { cB } from '../../../../_utils/cssr'
 
 export default cB('base-menu-mask', `
   position: absolute;

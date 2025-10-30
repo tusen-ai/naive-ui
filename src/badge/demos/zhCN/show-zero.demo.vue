@@ -4,21 +4,11 @@
 设定 `show-zero` 来显示 0。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
 import { MdAdd, MdRemove } from '@vicons/ionicons4'
+import { ref } from 'vue'
 
-export default defineComponent({
-  components: {
-    MdAdd,
-    MdRemove
-  },
-  setup() {
-    return {
-      value: ref(0)
-    }
-  }
-})
+const value = ref(0)
 </script>
 
 <template>

@@ -1,9 +1,10 @@
 import type { CNode } from 'css-render'
-import { type Ref, inject, onBeforeMount } from 'vue'
+import type { Ref } from 'vue'
 import { useSsrAdapter } from '@css-render/vue3-ssr'
-import { configProviderInjectionKey } from '../config-provider/src/context'
+import { inject, onBeforeMount } from 'vue'
 import globalStyle from '../_styles/global/index.cssr'
 import { throwError } from '../_utils'
+import { configProviderInjectionKey } from '../config-provider/src/context'
 import { cssrAnchorMetaName } from './common'
 
 export default function useStyle(

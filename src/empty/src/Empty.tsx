@@ -1,18 +1,13 @@
-import {
-  type PropType,
-  type VNodeChild,
-  computed,
-  defineComponent,
-  h
-} from 'vue'
+import type { PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { EmptyTheme } from '../styles'
+import { computed, defineComponent, h } from 'vue'
 import { NBaseIcon } from '../../_internal/icon'
 import { EmptyIcon } from '../../_internal/icons'
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import { createKey } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { emptyLight } from '../styles'
-import type { EmptyTheme } from '../styles'
 import style from './styles/index.cssr'
 
 export const emptyProps = {
@@ -35,9 +30,16 @@ export const emptyProps = {
 
 export type EmptyProps = ExtractPublicPropTypes<typeof emptyProps>
 
+export interface EmptySlots {
+  default?: () => VNode[]
+  extra?: () => VNode[]
+  icon?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Empty',
   props: emptyProps,
+  slots: Object as SlotsType<EmptySlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled, mergedComponentPropsRef }
       = useConfig(props)
@@ -83,16 +85,16 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'empty',
-        computed(() => {
-          let hash = ''
-          const { size } = props
-          hash += size[0]
-          return hash
-        }),
-        cssVarsRef,
-        props
-      )
+          'empty',
+          computed(() => {
+            let hash = ''
+            const { size } = props
+            hash += size[0]
+            return hash
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,

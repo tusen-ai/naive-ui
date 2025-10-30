@@ -1,7 +1,7 @@
 import type { ComponentPublicInstance, Ref } from 'vue'
 import type { MergedTheme } from '../../_mixins'
-import { createInjectionKey } from '../../_utils/vue/create-injection-key'
 import type { ModalTheme } from '../styles'
+import { createInjectionKey } from '../../_utils/vue/create-injection-key'
 
 export type ModalBodyInjection = Ref<
   HTMLElement | ComponentPublicInstance | null
@@ -31,3 +31,10 @@ export interface ModalInjection {
 }
 
 export const modalInjectionKey = createInjectionKey<ModalInjection>('n-modal')
+
+export interface ModalDraggableOptions {
+  /**
+   * If set to 'none', the modal's position will not be bounded to the window.
+   */
+  bounds?: 'none'
+}

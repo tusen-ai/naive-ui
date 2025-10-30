@@ -39,8 +39,13 @@ form-debug.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| calendar-day-format | `string` | `undefined` | 选择面板内部星期几的格式 | 2.40.2 |
+| calendar-header-year-format | `string` | `undefined` | 选择面板内部年的格式 | 2.40.2 |
+| calendar-header-month-format | `string` | `undefined` | 选择面板内部月的格式 | 2.40.2 |
+| calendar-header-month-before-year | `string` | `undefined` | 选择面板内部月是否显示在年的前面 | 2.40.2 |
+| calendar-header-month-year-separator | `string` | `' '` | 选择面板内部年和月的分隔字符 | 2.40.2 |
 | clearable | `boolean` | `false` | 是否支持清除 |  |
-| date-format | `string` | `undefined` | 选择面板内部日期输入框的日期格式 | NEXT_VERSION |
+| date-format | `string` | `undefined` | 选择面板内部日期输入框的日期格式 | 2.40.2 |
 | default-value | `number \| [number, number] \| null` | `undefined` | 默认被选中的日期的时间戳 |  |
 | default-formatted-value | `string \| [string, string] \| null` | `undefined` | Date Picker 格式化后的值 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
@@ -90,7 +95,7 @@ form-debug.vue
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` | DateTime 类型的 Date Picker 中支持的操作 |  |
 | default-calendar-start-time | `number` | `undefined` | 面板日历默认开始的月份时间戳 | 2.38.1 |
-| default-time | `string` | `undefined` | 默认时间，格式为 `HH:mm:ss` | 2.22.0 |
+| default-time | `string \| (timestamp: number) => string` | `undefined` | 默认时间，可以接受一个参数为时间戳的函数，返回格式化的字符串，格式为 `HH:mm:ss` | 2.22.0，从 NEXT_VERSION 支持函数 |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |  |
 | is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `undefined` | 日期禁用的校验函数 | `detail` 2.37.1 |
 | is-time-disabled | `(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }` | `undefined` | 时间禁用的校验函数 |  |
@@ -126,7 +131,7 @@ form-debug.vue
 | bind-calendar-months | `boolean` | `false` | 面板月份是否连续 | 2.28.3 |
 | default-calendar-start-time | `number` | `undefined` | 面板日历默认开始的月份时间戳 | 2.28.3 |
 | default-calendar-end-time | `number` | `undefined` | 面板日历默认结束的月份时间戳 | 2.28.3 |
-| default-time | `string \| Array<string \| undefined>` | `undefined` | 默认时间，格式为 `HH:mm:ss` | 2.22.0 |
+| default-time | `string \| Array<string \| undefined> \| (timestamp: number, position: "start" \| "end", value: [number, number] \| null) => string` | `undefined` | 默认时间，可以接受一个参数为时间戳、时间位置、和当前值的函数，返回一个格式化字符串，格式为 `HH:mm:ss` | 2.22.0，从 NEXT_VERSION 支持函数 |
 | end-placeholder | `string` | `'结束日期时间'` | DateTimeRange 中 end 选框的提示信息 |  |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |  |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | 日期禁用的校验函数 |  |
@@ -215,9 +220,9 @@ form-debug.vue
 
 | 名称 | 参数 | 说明 | 版本 |
 | --- | --- | --- | --- |
-| now | `(props: { onNow: () => void, text: string })` | 面板的此刻按钮 | 2.40.0 |
 | clear | `(props: { onClear: () => void, text: string })` | 面板的清除按钮 | 2.40.0 |
 | confirm | `(props: { onConfirm: () => void, disabled: boolean, text: string })` | 面板的确认按钮 | 2.40.0 |
+| now | `(props: { onNow: () => void, text: string })` | 面板的此刻按钮 | 2.40.0 |
 
 ### DatePicker Methods
 

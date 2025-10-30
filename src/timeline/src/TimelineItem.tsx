@@ -1,11 +1,7 @@
-import {
-  type CSSProperties,
-  type PropType,
-  computed,
-  defineComponent,
-  h,
-  inject
-} from 'vue'
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import { computed, defineComponent, h, inject } from 'vue'
+import { useConfig, useThemeClass } from '../../_mixins'
 import {
   createKey,
   formatLength,
@@ -14,8 +10,6 @@ import {
   throwError,
   useHoudini
 } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import { useConfig, useThemeClass } from '../../_mixins'
 import { timelineInjectionKey } from './Timeline'
 
 export const timelineItemProps = {
@@ -37,9 +31,17 @@ export const timelineItemProps = {
 
 export type TimelineItemProps = ExtractPublicPropTypes<typeof timelineItemProps>
 
+export interface TimelineItemSlots {
+  default?: () => VNode[]
+  icon?: () => VNode[]
+  footer?: () => VNode[]
+  header?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'TimelineItem',
   props: timelineItemProps,
+  slots: Object as SlotsType<TimelineItemSlots>,
   setup(props) {
     const NTimeline = inject(timelineInjectionKey)
     if (!NTimeline) {
@@ -89,17 +91,17 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'timeline-item',
-        computed(() => {
-          const {
-            props: { size, iconSize: iconSizeProp }
-          } = NTimeline
-          const { type } = props
-          return `${size[0]}${iconSizeProp || 'a'}${type[0]}`
-        }),
-        cssVarsRef,
-        NTimeline.props
-      )
+          'timeline-item',
+          computed(() => {
+            const {
+              props: { size, iconSize: iconSizeProp }
+            } = NTimeline
+            const { type } = props
+            return `${size[0]}${iconSizeProp || 'a'}${type[0]}`
+          }),
+          cssVarsRef,
+          NTimeline.props
+        )
       : undefined
     return {
       mergedClsPrefix: NTimeline.mergedClsPrefixRef,

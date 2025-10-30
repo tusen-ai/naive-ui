@@ -1,21 +1,15 @@
-import {
-  type CSSProperties,
-  type PropType,
-  type VNodeChild,
-  computed,
-  defineComponent,
-  h
-} from 'vue'
-import { getPadding } from 'seemly'
-import { useRtl } from '../../_mixins/use-rtl'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import { call, createKey, keysOf, resolveWrappedSlot } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { NBaseClose } from '../../_internal'
-import { cardLight } from '../styles'
 import type { CardTheme } from '../styles'
+import { getPadding } from 'seemly'
+import { computed, defineComponent, h } from 'vue'
+import { NBaseClose } from '../../_internal'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
+import { call, createKey, keysOf, resolveWrappedSlot } from '../../_utils'
 import { ensureValidVNode } from '../../_utils/vue/resolve-slot'
+import { cardLight } from '../styles'
 import style from './styles/index.cssr'
 
 export interface CardSegmented {
@@ -59,7 +53,8 @@ export const cardBaseProps = {
   content: [String, Function] as PropType<string | (() => VNodeChild)>,
   footer: Function as PropType<() => VNodeChild>,
   action: Function as PropType<() => VNodeChild>,
-  headerExtra: Function as PropType<() => VNodeChild>
+  headerExtra: Function as PropType<() => VNodeChild>,
+  closeFocusable: Boolean
 } as const
 
 export const cardBasePropKeys = keysOf(cardBaseProps)
@@ -71,9 +66,19 @@ export const cardProps = {
 
 export type CardProps = ExtractPublicPropTypes<typeof cardProps>
 
+export interface CardSlots {
+  default?: () => VNode[]
+  cover?: () => VNode[]
+  header?: () => VNode[]
+  'header-extra'?: () => VNode[]
+  footer?: () => VNode[]
+  action?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Card',
   props: cardProps,
+  slots: Object as SlotsType<CardSlots>,
   setup(props) {
     const handleCloseClick = (): void => {
       const { onClose } = props
@@ -164,13 +169,13 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'card',
-        computed(() => {
-          return props.size[0]
-        }),
-        cssVarsRef,
-        props
-      )
+          'card',
+          computed(() => {
+            return props.size[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       rtlEnabled: rtlEnabledRef,
@@ -240,8 +245,8 @@ export default defineComponent({
           const { title } = this
           const mergedChildren = title
             ? ensureValidVNode(
-              typeof title === 'function' ? [title()] : [title]
-            )
+                typeof title === 'function' ? [title()] : [title]
+              )
             : children
           return mergedChildren || this.closable ? (
             <div
@@ -278,6 +283,7 @@ export default defineComponent({
                   clsPrefix={mergedClsPrefix}
                   class={`${mergedClsPrefix}-card-header__close`}
                   onClick={this.handleCloseClick}
+                  focusable={this.closeFocusable}
                   absolute
                 />
               )}
@@ -288,8 +294,8 @@ export default defineComponent({
           const { content } = this
           const mergedChildren = content
             ? ensureValidVNode(
-              typeof content === 'function' ? [content()] : [content]
-            )
+                typeof content === 'function' ? [content()] : [content]
+              )
             : children
           return (
             mergedChildren && (

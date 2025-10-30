@@ -1,6 +1,10 @@
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { FloatButtonTheme } from '../styles'
+import { off, on } from 'evtd'
+import { useMergedState } from 'vooks'
 import {
-  type CSSProperties,
-  type PropType,
   computed,
   defineComponent,
   h,
@@ -10,22 +14,18 @@ import {
   ref,
   toRef
 } from 'vue'
-import { useMergedState } from 'vooks'
-import { off, on } from 'evtd'
-import { floatButtonGroupInjectionKey } from '../../float-button-group/src/FloatButtonGroup'
+import { NBaseIcon } from '../../_internal'
+import { CloseIcon } from '../../_internal/icons'
+import { useTheme, useThemeClass } from '../../_mixins'
+import useConfig from '../../_mixins/use-config'
 import {
-  type ExtractPublicPropTypes,
-  type MaybeArray,
   call,
   formatLength,
   resolveSlot,
   resolveWrappedSlot
 } from '../../_utils'
-import useConfig from '../../_mixins/use-config'
-import { type ThemeProps, useTheme, useThemeClass } from '../../_mixins'
-import { type FloatButtonTheme, floatButtonLight } from '../styles'
-import { NBaseIcon } from '../../_internal'
-import { CloseIcon } from '../../_internal/icons'
+import { floatButtonGroupInjectionKey } from '../../float-button-group/src/FloatButtonGroup'
+import { floatButtonLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const floatButtonProps = {
@@ -65,9 +65,16 @@ export const floatButtonProps = {
 
 export type FloatButtonProps = ExtractPublicPropTypes<typeof floatButtonProps>
 
+export interface FloatButtonSlots {
+  default?: () => VNode[]
+  description?: () => VNode[]
+  menu?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'FloatButton',
   props: floatButtonProps,
+  slots: Object as SlotsType<FloatButtonSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
 
@@ -177,11 +184,11 @@ export default defineComponent({
 
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'float-button',
-        computed(() => props.type[0]),
-        cssVarsRef,
-        props
-      )
+          'float-button',
+          computed(() => props.type[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     onMounted(() => {

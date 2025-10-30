@@ -1,2 +1,2 @@
-export { default as NCalendar, calendarProps } from './src/Calendar'
+export { calendarProps, default as NCalendar } from './src/Calendar'
 export type { CalendarProps } from './src/Calendar'

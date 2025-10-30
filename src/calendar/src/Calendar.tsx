@@ -1,13 +1,14 @@
-import {
-  type CSSProperties,
-  Fragment,
-  type PropType,
-  computed,
-  defineComponent,
-  h,
-  ref,
-  toRef
-} from 'vue'
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { CalendarTheme } from '../styles'
+import type {
+  CalendarDefaultSlotProps,
+  CalendarHeaderSlotProps,
+  DateItem,
+  OnPanelChange,
+  OnUpdateValue
+} from './interface'
 import {
   addMonths,
   format,
@@ -17,18 +18,15 @@ import {
   startOfMonth
 } from 'date-fns'
 import { useMergedState } from 'vooks'
-import { dateArray } from '../../date-picker/src/utils'
-import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
+import { computed, defineComponent, Fragment, h, ref, toRef } from 'vue'
 import { NBaseIcon } from '../../_internal'
-import { call, resolveSlotWithProps } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
+import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
+import { call, resolveSlotWithTypedProps } from '../../_utils'
 import { NButton } from '../../button'
 import { NButtonGroup } from '../../button-group'
-import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
+import { dateArray } from '../../date-picker/src/utils'
 import { calendarLight } from '../styles'
-import type { CalendarTheme } from '../styles'
-import type { DateItem, OnPanelChange, OnUpdateValue } from './interface'
 import style from './styles/index.cssr'
 
 export const calendarProps = {
@@ -46,9 +44,15 @@ export const calendarProps = {
 
 export type CalendarProps = ExtractPublicPropTypes<typeof calendarProps>
 
+export interface CalendarSlots {
+  default?: (props: CalendarDefaultSlotProps) => VNode[]
+  header?: (props: CalendarHeaderSlotProps) => VNode[]
+}
+
 export default defineComponent({
   name: 'Calendar',
   props: calendarProps,
+  slots: Object as SlotsType<CalendarSlots>,
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
@@ -217,7 +221,7 @@ export default defineComponent({
       >
         <div class={`${mergedClsPrefix}-calendar-header`}>
           <div class={`${mergedClsPrefix}-calendar-header__title`}>
-            {resolveSlotWithProps(
+            {resolveSlotWithTypedProps(
               $slots.header,
               { year, month: calendarMonth },
               () => {

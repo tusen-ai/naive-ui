@@ -1,8 +1,8 @@
+import type { InternalSelectionTheme } from './light'
 import { changeColor } from 'seemly'
 import { commonDark } from '../../../_styles/common'
 import { popoverDark } from '../../../popover/styles'
 import commonVars from './_common'
-import type { InternalSelectionTheme } from './light'
 
 const internalSelectionDark: InternalSelectionTheme = {
   name: 'InternalSelection',

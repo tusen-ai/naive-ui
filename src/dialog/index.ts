@@ -1,12 +1,13 @@
+export { useDialog, useDialogReactiveList } from './src/composables'
 export { NDialog } from './src/Dialog'
+export type { DialogSlots } from './src/Dialog'
 export { dialogProps } from './src/dialogProps'
 export type { DialogProps } from './src/dialogProps'
-export { NDialogProvider, dialogProviderProps } from './src/DialogProvider'
+export { dialogProviderProps, NDialogProvider } from './src/DialogProvider'
 export type {
-  DialogProviderProps,
-  DialogProviderInst,
+  DialogApiInjection as DialogApi,
   DialogOptions,
-  DialogReactive,
-  DialogApiInjection as DialogApi
+  DialogProviderInst,
+  DialogProviderProps,
+  DialogReactive
 } from './src/DialogProvider'
-export { useDialog, useDialogReactiveList } from './src/composables'

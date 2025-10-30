@@ -1,5 +1,5 @@
-import { inject, provide } from 'vue'
 import type { ComputedRef } from 'vue'
+import { inject, provide } from 'vue'
 import { createInjectionKey, throwError } from '../../_utils'
 
 export interface CarouselContextValue {

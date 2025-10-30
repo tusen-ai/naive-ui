@@ -1,4 +1,5 @@
-export { default as NAnchor, anchorProps } from './src/AnchorAdapter'
+export { anchorProps, default as NAnchor } from './src/AnchorAdapter'
 export type { AnchorInst, AnchorProps } from './src/AnchorAdapter'
-export { default as NAnchorLink, anchorLinkProps } from './src/Link'
+export { anchorLinkProps, default as NAnchorLink } from './src/Link'
 export type { AnchorLinkProps } from './src/Link'
+export type * from './src/public-types'

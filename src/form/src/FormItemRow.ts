@@ -1,12 +1,12 @@
-import { defineComponent, h, ref } from 'vue'
-import NRow, { rowPropKeys, rowProps } from '../../legacy-grid/src/Row'
-import { keep } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type { FormItemColRef } from './interface'
+import { defineComponent, h, ref } from 'vue'
+import { keep } from '../../_utils'
+import NRow, { rowPropKeys, rowProps } from '../../legacy-grid/src/Row'
 import NFormItemCol, {
   formItemColPropKeys,
   formItemColProps
 } from './FormItemCol'
-import type { FormItemColRef } from './interface'
 
 export const formItemRowProps = {
   ...rowProps,
@@ -20,12 +20,12 @@ export default defineComponent({
   props: formItemRowProps,
   setup() {
     const formItemColInstRef = ref<FormItemColRef | null>(null)
-    const validate: FormItemColRef['validate'] = ((...args: any[]) => {
+    const validate = ((...args: any[]) => {
       const { value } = formItemColInstRef
       if (value) {
-        return (value.validate as any)(...args)
+        return value.validate(...args)
       }
-    }) as any
+    }) as FormItemColRef['validate']
     const restoreValidation: FormItemColRef['restoreValidation'] = () => {
       const { value } = formItemColInstRef
       if (value) {

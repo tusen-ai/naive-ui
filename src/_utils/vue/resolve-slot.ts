@@ -1,11 +1,5 @@
-import {
-  Comment,
-  Fragment,
-  type Slot,
-  type VNodeArrayChildren,
-  type VNodeChild,
-  isVNode
-} from 'vue'
+import type { Slot, VNodeArrayChildren, VNodeChild } from 'vue'
+import { Comment, Fragment, isVNode } from 'vue'
 
 export function ensureValidVNode(
   vnodes: VNodeArrayChildren
@@ -39,8 +33,8 @@ export function resolveSlot(
   return (slot && ensureValidVNode(slot())) || fallback()
 }
 
-export function resolveSlotWithProps<T>(
-  slot: Slot | undefined,
+export function resolveSlotWithTypedProps<T>(
+  slot: Slot<T> | undefined,
   props: T,
   fallback: (props: T) => VNodeArrayChildren
 ): VNodeArrayChildren {

@@ -1,13 +1,13 @@
+import type { MenuMaskRef } from './interface'
 import {
-  Transition,
   defineComponent,
   h,
   onBeforeUnmount,
   ref,
-  toRef
+  toRef,
+  Transition
 } from 'vue'
 import { useStyle } from '../../../_mixins'
-import type { MenuMaskRef } from './interface'
 import style from './styles/index.cssr'
 
 export default defineComponent({

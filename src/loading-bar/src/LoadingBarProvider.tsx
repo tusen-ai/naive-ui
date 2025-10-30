@@ -1,25 +1,23 @@
-import {
-  type CSSProperties,
-  type ExtractPropTypes,
-  Fragment,
-  type PropType,
-  Teleport,
-  defineComponent,
-  h,
-  nextTick,
-  provide,
-  ref
-} from 'vue'
-import { useIsMounted } from 'vooks'
-import { useConfig, useTheme } from '../../_mixins'
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { LoadingBarTheme } from '../styles'
-import NLoadingBar from './LoadingBar'
+import { useIsMounted } from 'vooks'
+import {
+  defineComponent,
+  Fragment,
+  h,
+  nextTick,
+  provide,
+  ref,
+  Teleport
+} from 'vue'
+import { useConfig, useTheme } from '../../_mixins'
 import {
   loadingBarApiInjectionKey,
   loadingBarProviderInjectionKey
 } from './context'
+import NLoadingBar from './LoadingBar'
 
 export interface LoadingBarInst {
   start: () => void

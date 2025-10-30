@@ -2,34 +2,24 @@
 # Field search debug
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { NTreeSelect } from 'naive-ui'
 
-export default defineComponent({
-  name: 'App',
-  components: {
-    NTreeSelect
-  },
-  setup() {
-    return {
-      options1: [
-        {
-          name: 'label',
-          id: 'value',
-          subs: [{ name: 'child1', id: 'child1id' }]
-        }
-      ],
-      options2: [
-        {
-          label: 'label',
-          key: 'value',
-          children: [{ label: 'child1', key: 'child1id' }]
-        }
-      ]
-    }
+const options1 = [
+  {
+    name: 'label',
+    id: 'value',
+    subs: [{ name: 'child1', id: 'child1id' }]
   }
-})
+]
+
+const options2 = [
+  {
+    label: 'label',
+    key: 'value',
+    children: [{ label: 'child1', key: 'child1id' }]
+  }
+]
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 import { defineComponent, h, mergeProps, ref } from 'vue'
-import { useMergedClsPrefix } from '../../_mixins/use-config'
 import { useStyle } from '../../_mixins'
+import { useMergedClsPrefix } from '../../_mixins/use-config'
 import Ellipsis, {
   createCursorClass,
   createLineClampClass,

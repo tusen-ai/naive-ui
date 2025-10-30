@@ -1,12 +1,19 @@
-import { type PropType, defineComponent, h, onMounted, ref } from 'vue'
+import type { PropType } from 'vue'
+import type { NLocale } from './common/enUS'
+import type { NDateLocale } from './date/enUS'
 import { mount } from '@vue/test-utils'
+import { defineComponent, h, onMounted, ref } from 'vue'
+import { NConfigProvider } from '../config-provider/index'
+import { NDatePicker } from '../date-picker/index'
 import {
   arDZ,
   azAZ,
   csCZ,
+  daDK,
   dateArDZ,
   dateAzAZ,
   dateCsCZ,
+  dateDaDK,
   dateDeDE,
   dateEnGB,
   dateEnUS,
@@ -18,6 +25,7 @@ import {
   dateIdID,
   dateItIT,
   dateJaJP,
+  dateKmKH,
   dateKoKR,
   dateNbNO,
   dateNlNL,
@@ -28,6 +36,7 @@ import {
   dateSvSE,
   dateThTH,
   dateTrTR,
+  dateUgCN,
   dateUkUA,
   dateUzUZ,
   dateZhCN,
@@ -43,6 +52,7 @@ import {
   idID,
   itIT,
   jaJP,
+  kmKH,
   koKR,
   nbNO,
   nlNL,
@@ -58,11 +68,8 @@ import {
   zhCN,
   zhTW
 } from '../index'
-import { NDatePicker } from '../date-picker/index'
 import { NInput } from '../input/index'
-import { NConfigProvider } from '../config-provider/index'
-import type { NDateLocale } from './date/enUS'
-import type { NLocale } from './common/enUS'
+import ugCN from './common/ugCN'
 import { createLocale } from './utils/index'
 
 const Wrapper = defineComponent({
@@ -201,6 +208,18 @@ describe('locale', () => {
         props: {
           dateLocale: dateJaJP,
           locale: jaJP,
+          onMounted: (date: string) => {
+            expect(date).toMatchSnapshot()
+          }
+        }
+      }).html()
+    ).toMatchSnapshot()
+
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateKmKH,
+          locale: kmKH,
           onMounted: (date: string) => {
             expect(date).toMatchSnapshot()
           }
@@ -390,6 +409,22 @@ describe('locale', () => {
         props: {
           dateLocale: dateAzAZ,
           locale: azAZ
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateUgCN,
+          locale: ugCN
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateDaDK,
+          locale: daDK
         }
       }).html()
     ).toMatchSnapshot()

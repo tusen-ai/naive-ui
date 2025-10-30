@@ -1,6 +1,5 @@
+import type { InjectionKey, Ref } from 'vue'
 import {
-  type InjectionKey,
-  type Ref,
   getCurrentInstance,
   inject,
   onBeforeUnmount,

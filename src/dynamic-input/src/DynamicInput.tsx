@@ -1,6 +1,16 @@
+import type { CSSProperties, PropType, VNode } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { ButtonProps } from '../../button'
+import type { DynamicInputTheme } from '../styles'
+import type {
+  DynamicInputActionSlotProps,
+  DynamicInputDefaultSlotProps,
+  OnUpdateValue
+} from './interface'
+import { createId } from 'seemly'
+import { useMergedState } from 'vooks'
 import {
-  type CSSProperties,
-  type PropType,
   computed,
   defineComponent,
   h,
@@ -12,30 +22,28 @@ import {
   toRef,
   watchEffect
 } from 'vue'
-import { useMergedState } from 'vooks'
-import { createId } from 'seemly'
+import { NBaseIcon } from '../../_internal'
 import {
   AddIcon,
   ArrowDownIcon,
   ArrowUpIcon,
   RemoveIcon
 } from '../../_internal/icons'
+import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import { formItemInjectionKey } from '../../_mixins/use-form-item'
-import { NBaseIcon } from '../../_internal'
+import { useRtl } from '../../_mixins/use-rtl'
+import {
+  call,
+  resolveSlot,
+  resolveSlotWithTypedProps,
+  warnOnce
+} from '../../_utils'
 import { NButton } from '../../button'
 import { NButtonGroup } from '../../button-group'
-import type { ButtonProps } from '../../button'
-import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import { call, resolveSlot, resolveSlotWithProps, warnOnce } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { dynamicInputLight } from '../styles'
-import type { DynamicInputTheme } from '../styles'
-import { useRtl } from '../../_mixins/use-rtl'
 import NDynamicInputInputPreset from './InputPreset'
-import NDynamicInputPairPreset from './PairPreset'
 import { dynamicInputInjectionKey } from './interface'
-import type { OnUpdateValue } from './interface'
+import NDynamicInputPairPreset from './PairPreset'
 import style from './styles/index.cssr'
 
 const globalDataKeyMap = new WeakMap()
@@ -87,6 +95,13 @@ export const dynamicInputProps = {
 } as const
 
 export type DynamicInputProps = ExtractPublicPropTypes<typeof dynamicInputProps>
+
+export interface DynamicInputSlots {
+  action?: (props: DynamicInputActionSlotProps) => VNode[]
+  default?: (props: DynamicInputDefaultSlotProps) => VNode[]
+  'create-button-default'?: () => VNode[]
+  'create-button-icon'?: () => VNode[]
+}
 
 export default defineComponent({
   name: 'DynamicInput',
@@ -378,7 +393,7 @@ export default defineComponent({
               class={[`${mergedClsPrefix}-dynamic-input-item`, itemClass]}
               style={itemStyle}
             >
-              {resolveSlotWithProps(
+              {resolveSlotWithTypedProps(
                 $slots.default,
                 {
                   value: mergedValue[index],
@@ -424,7 +439,7 @@ export default defineComponent({
                   ]
                 }
               )}
-              {resolveSlotWithProps(
+              {resolveSlotWithTypedProps(
                 $slots.action,
                 {
                   value: mergedValue[index],

@@ -1,6 +1,7 @@
-import { type PropType, type VNodeChild, defineComponent, h, inject } from 'vue'
-import { NButton } from '../../button'
+import type { PropType, VNodeChild } from 'vue'
+import { defineComponent, h, inject } from 'vue'
 import { useLocale } from '../../_mixins'
+import { NButton } from '../../button'
 import { transferInjectionKey } from './interface'
 
 export default defineComponent({

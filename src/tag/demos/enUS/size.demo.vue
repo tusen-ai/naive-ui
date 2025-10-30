@@ -2,20 +2,13 @@
 # Size
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      handleClose() {
-        message.info('tag close')
-      }
-    }
-  }
-})
+const message = useMessage()
+function handleClose() {
+  message.info('tag close')
+}
 </script>
 
 <template>

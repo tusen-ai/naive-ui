@@ -1,12 +1,5 @@
-import { type VNode, type VNodeChild, h } from 'vue'
 import type { TreeNode } from 'treemate'
-import { keep, keysOf } from '../../_utils'
-
-import { NMenuOptionGroup, menuItemGroupProps } from './MenuOptionGroup'
-
-import { NSubmenu, submenuProps } from './Submenu'
-import { NMenuOption, menuItemProps } from './MenuOption'
-import NMenuDivider from './MenuDivider'
+import type { VNode, VNodeChild } from 'vue'
 import type {
   MenuGroupOption,
   MenuIgnoredOption,
@@ -14,10 +7,13 @@ import type {
   MenuOption
 } from './interface'
 import type { MenuSetupProps } from './Menu'
+import { h } from 'vue'
 
-const groupPropKeys = keysOf(menuItemGroupProps)
-const itemPropKeys = keysOf(menuItemProps)
-const submenuPropKeys = keysOf(submenuProps)
+import { keep } from '../../_utils'
+import NMenuDivider from './MenuDivider'
+import { menuItemPropKeys, NMenuOption } from './MenuOption'
+import { menuItemGroupPropKeys, NMenuOptionGroup } from './MenuOptionGroup'
+import { NSubmenu, submenuPropKeys } from './Submenu'
 
 export function isIgnoredNode(
   rawNode: MenuMixedOption
@@ -67,7 +63,11 @@ export function itemRenderer(
     if (tmNode.isGroup) {
       return h(
         NMenuOptionGroup,
-        keep(props, groupPropKeys, { tmNode, tmNodes: tmNode.children, key })
+        keep(props, menuItemGroupPropKeys, {
+          tmNode,
+          tmNodes: tmNode.children,
+          key
+        })
       )
     }
     return h(
@@ -83,7 +83,7 @@ export function itemRenderer(
   else {
     return h(
       NMenuOption,
-      keep(props, itemPropKeys, {
+      keep(props, menuItemPropKeys, {
         key,
         tmNode
       })

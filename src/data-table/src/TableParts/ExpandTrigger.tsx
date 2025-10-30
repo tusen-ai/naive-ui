@@ -1,11 +1,12 @@
-import { type PropType, defineComponent, h } from 'vue'
-import { ChevronRightIcon } from '../../../_internal/icons'
+import type { PropType } from 'vue'
+import type { RenderExpandIcon, RowData } from '../interface'
+import { defineComponent, h } from 'vue'
 import {
   NBaseIcon,
   NBaseLoading,
   NIconSwitchTransition
 } from '../../../_internal'
-import type { RenderExpandIcon, RowData } from '../interface'
+import { ChevronRightIcon } from '../../../_internal/icons'
 
 export default defineComponent({
   name: 'DataTableExpandTrigger',

@@ -1,8 +1,8 @@
+import { CashOutline as CashIcon } from '@vicons/ionicons5'
 import { mount } from '@vue/test-utils'
 import { h, nextTick } from 'vue'
-import { CashOutline as CashIcon } from '@vicons/ionicons5'
-import { NAvatar } from '../index'
 import { NIcon } from '../../icon'
+import { NAvatar } from '../index'
 
 // Please note that resize observer doesn't work in JSDOM, so text transfrom
 // can't be tested.
@@ -135,7 +135,7 @@ describe('n-avatar', () => {
   })
 
   it('image avatar error handle when load failed', async () => {
-    const onError = jest.fn()
+    const onError = vi.fn()
     const wrapper = mount(NAvatar, {
       props: {
         src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',

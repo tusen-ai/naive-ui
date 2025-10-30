@@ -2,8 +2,7 @@
 # Icon
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import {
   ChevronBackCircle,
   ChevronBackCircleOutline,
@@ -12,19 +11,6 @@ import {
   RocketOutline,
   TrendingUpSharp
 } from '@vicons/ionicons5'
-
-export default defineComponent({
-  setup() {
-    return {
-      TrendingUpSharp,
-      RocketOutline,
-      ChevronBackCircle,
-      ChevronBackCircleOutline,
-      ChevronForwardCircle,
-      ChevronForwardCircleOutline
-    }
-  }
-})
 </script>
 
 <template>

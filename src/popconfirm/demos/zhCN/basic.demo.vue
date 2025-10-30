@@ -2,23 +2,18 @@
 # 基础用法
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      handlePositiveClick() {
-        message.info('是的')
-      },
-      handleNegativeClick() {
-        message.info('并不')
-      }
-    }
-  }
-})
+const message = useMessage()
+
+function handlePositiveClick() {
+  message.info('是的')
+}
+
+function handleNegativeClick() {
+  message.info('并不')
+}
 </script>
 
 <template>

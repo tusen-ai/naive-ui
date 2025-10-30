@@ -27,6 +27,8 @@ preset-card.vue
 preset-confirm.vue
 preset-confirm-slot.vue
 transform-origin.vue
+draggable.vue
+mask-visible.vue
 ```
 
 ## API
@@ -58,9 +60,11 @@ Provided since `2.38.0`.
 | block-scroll | `boolean` | `true` | Whether to disabled body scrolling when it's active. | 2.28.3 |
 | close-on-esc | `boolean` | `true` | Whether to close modal on Esc is pressed. | 2.24.2 |
 | display-directive | `'if' \| 'show'` | `'if'` | Use which directive to control the rendering of modal body. |  |
+| draggable | `boolean \| { bounds?: 'window' }` | `false` | Whether the modal is draggable. Make its position not bound inside window using `bounds === 'none'`. | 2.41.0 |
 | mask-closable | `boolean` | `true` | Whether to emit `hide` event when click mask. |  |
 | preset | `'dialog' \| 'card'` | `undefined` | The preset of `n-modal`. |  |
 | show | `boolean` | `false` | Whether to show modal. |  |
+| show-mask | `boolean` | `true` | Whether to display the mask. If it's set to `false`, all mask-related APIs will be disabled, focus won't be limit inside modal (so keyboard event like Esc won't always work). | 2.43.0 |
 | to | `string \| HTMLElement` | `body` | Container node of the modal content. |  |
 | transform-origin | `'mouse' \| 'center'` | `'mouse'` | The transform origin of the modal's display animation. |  |
 | trap-focus | `boolean` | `true` | Whether to trap focus inside modal. | 2.24.2 |
@@ -97,6 +101,10 @@ See [Dialog props](dialog#Dialog-Props)
 
 See [Card slots](card#Card-Slots)
 
+`default` slot's parameter is different, which is `(props: { draggableClass: string })`.
+
 ### Modal with Preset Dialog Slots
 
 See [Dialog slots](dialog#Dialog-Slots)
+
+`default` slot's parameter is different, which is `(props: { draggableClass: string })`.

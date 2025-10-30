@@ -1,36 +1,11 @@
-import {
-  type PropType,
-  type Ref,
-  computed,
-  defineComponent,
-  h,
-  mergeProps,
-  provide,
-  ref,
-  toRef,
-  watch
-} from 'vue'
-import { type Key, type TreeNode, createTreeMate } from 'treemate'
-import { useKeyboard, useMemo, useMergedState } from 'vooks'
+import type { Key, TreeNode } from 'treemate'
+import type { PropType, Ref } from 'vue'
 import type { FollowerPlacement } from 'vueuc'
-import type { InternalRenderBody } from '../../popover/src/interface'
-import { popoverBaseProps } from '../../popover/src/Popover'
-import type { PopoverInternalProps } from '../../popover/src/Popover'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { NPopover } from '../../popover'
-import {
-  type ExtractPublicPropTypes,
-  type MaybeArray,
-  call,
-  createKey,
-  createRefSetter,
-  keep
-} from '../../_utils'
-import { dropdownLight } from '../styles'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { InternalRenderBody } from '../../popover/src/interface'
+import type { PopoverInternalProps } from '../../popover/src/Popover'
 import type { DropdownTheme } from '../styles'
-import NDropdownMenu from './DropdownMenu'
-import style from './styles/index.cssr'
 import type {
   DropdownGroupOption,
   DropdownIgnoredOption,
@@ -48,7 +23,26 @@ import type {
   RenderOption,
   RenderOptionImpl
 } from './interface'
+import { createTreeMate } from 'treemate'
+import { useKeyboard, useMemo, useMergedState } from 'vooks'
+import {
+  computed,
+  defineComponent,
+  h,
+  mergeProps,
+  provide,
+  ref,
+  toRef,
+  watch
+} from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { call, createKey, createRefSetter, keep } from '../../_utils'
+import { NPopover } from '../../popover'
+import { popoverBaseProps } from '../../popover/src/Popover'
+import { dropdownLight } from '../styles'
 import { dropdownInjectionKey } from './context'
+import NDropdownMenu from './DropdownMenu'
+import style from './styles/index.cssr'
 
 export interface DropdownInjection {
   renderLabelRef: Ref<RenderLabelImpl | undefined>
@@ -407,11 +401,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'dropdown',
-        computed(() => `${props.size[0]}${props.inverted ? 'i' : ''}`),
-        cssVarsRef,
-        props
-      )
+          'dropdown',
+          computed(() => `${props.size[0]}${props.inverted ? 'i' : ''}`),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,

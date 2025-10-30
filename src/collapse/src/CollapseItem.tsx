@@ -1,16 +1,22 @@
-import { type PropType, computed, defineComponent, h, inject, toRef } from 'vue'
+import type { PropType, VNode } from 'vue'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type {
+  CollapseItemArrowSlotProps,
+  CollapseItemHeaderExtraSlotProps,
+  CollapseItemHeaderSlotProps
+} from './interface'
 import { createId, happensIn } from 'seemly'
 import { useMemo } from 'vooks'
+import { computed, defineComponent, h, inject, toRef } from 'vue'
+import { NBaseIcon } from '../../_internal'
 import {
   ChevronLeftIcon as ArrowLeftIcon,
   ChevronRightIcon as ArrowRightIcon
 } from '../../_internal/icons'
-import { useRtl } from '../../_mixins/use-rtl'
 import { useConfig } from '../../_mixins'
-import { NBaseIcon } from '../../_internal'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { useRtl } from '../../_mixins/use-rtl'
 import {
-  resolveSlotWithProps,
+  resolveSlotWithTypedProps,
   resolveWrappedSlotWithProps,
   throwError
 } from '../../_utils'
@@ -25,6 +31,13 @@ export const collapseItemProps = {
 } as const
 
 export type CollapseItemProps = ExtractPublicPropTypes<typeof collapseItemProps>
+
+export interface CollapseItemSlots {
+  default?: () => VNode[]
+  header?: (props: CollapseItemHeaderSlotProps) => VNode[]
+  'header-extra'?: (props: CollapseItemHeaderExtraSlotProps) => VNode[]
+  arrow?: (props: CollapseItemArrowSlotProps) => VNode[]
+}
 
 export default defineComponent({
   name: 'CollapseItem',
@@ -109,7 +122,7 @@ export default defineComponent({
       disabled,
       triggerAreas
     } = this
-    const headerNode = resolveSlotWithProps(
+    const headerNode = resolveSlotWithTypedProps(
       $slots.header,
       { collapsed },
       () => [this.title]
@@ -145,17 +158,11 @@ export default defineComponent({
               key={this.rtlEnabled ? 0 : 1}
               data-arrow
             >
-              {resolveSlotWithProps(arrowSlot, { collapsed }, () => [
+              {resolveSlotWithTypedProps(arrowSlot, { collapsed }, () => [
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
                   {{
-                    default:
-                      collapseSlots.expandIcon
-                      ?? (() =>
-                        this.rtlEnabled ? (
-                          <ArrowLeftIcon />
-                        ) : (
-                          <ArrowRightIcon />
-                        ))
+                    default: () =>
+                      this.rtlEnabled ? <ArrowLeftIcon /> : <ArrowRightIcon />
                   }}
                 </NBaseIcon>
               ])}

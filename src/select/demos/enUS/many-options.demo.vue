@@ -4,22 +4,16 @@
 1000 times the answer to everything.
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
 import { repeat } from 'seemly'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      value: ref(null),
-      values: ref(null),
-      options: repeat(42000, undefined).map((_, i) => ({
-        label: String(i),
-        value: i
-      }))
-    }
-  }
-})
+const value = ref(null)
+const values = ref(null)
+const options = repeat(42000, undefined).map((_, i) => ({
+  label: String(i),
+  value: i
+}))
 </script>
 
 <template>

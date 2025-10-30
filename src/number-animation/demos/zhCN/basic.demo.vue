@@ -2,21 +2,14 @@
 # 基础用法
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
 import type { NumberAnimationInst } from 'naive-ui'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const numberAnimationInstRef = ref<NumberAnimationInst | null>(null)
-    return {
-      numberAnimationInstRef,
-      handleClick() {
-        numberAnimationInstRef.value?.play()
-      }
-    }
-  }
-})
+const numberAnimationInstRef = ref<NumberAnimationInst | null>(null)
+function handleClick() {
+  numberAnimationInstRef.value?.play()
+}
 </script>
 
 <template>

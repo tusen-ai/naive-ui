@@ -1,8 +1,8 @@
-import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins/use-theme'
-import { inputLight } from '../../input/styles'
+import { commonLight } from '../../_styles/common'
 import { buttonLight } from '../../button/styles'
+import { inputLight } from '../../input/styles'
 
 export function self(vars: ThemeCommonVars) {
   const {

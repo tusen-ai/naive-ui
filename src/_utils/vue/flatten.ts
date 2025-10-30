@@ -1,10 +1,5 @@
-import {
-  Comment,
-  Fragment,
-  type VNode,
-  type VNodeChild,
-  createTextVNode
-} from 'vue'
+import type { VNode, VNodeChild } from 'vue'
+import { Comment, createTextVNode, Fragment } from 'vue'
 
 // o(n) flatten
 export function flatten(

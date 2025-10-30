@@ -1,5 +1,6 @@
-import { type VNode, h } from 'vue'
+import type { VNode } from 'vue'
 import { mount } from '@vue/test-utils'
+import { h } from 'vue'
 import { NDescriptions, NDescriptionsItem } from '../index'
 
 function getDescriptionsItemList(): VNode[] {

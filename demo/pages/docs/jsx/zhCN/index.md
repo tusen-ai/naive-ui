@@ -11,8 +11,8 @@
 在 JSX 中，推荐以直接引入的形式使用组件。
 
 ```js
-import { defineComponent } from 'vue'
 import { NButton } from 'naive-ui'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   render() {

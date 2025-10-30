@@ -1,53 +1,30 @@
-import {
-  type CSSProperties,
-  type HTMLAttributes,
-  type InputHTMLAttributes,
-  type PropType,
-  Transition,
-  computed,
-  defineComponent,
-  h,
-  ref,
-  toRef,
-  watchEffect,
-  withDirectives
+import type { TreeNode } from 'treemate'
+import type {
+  CSSProperties,
+  HTMLAttributes,
+  InputHTMLAttributes,
+  PropType,
+  SlotsType,
+  VNode
 } from 'vue'
-import { type TreeNode, createTreeMate } from 'treemate'
-import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc'
-import { clickoutside } from 'vdirs'
-import { useIsMounted, useMergedState } from 'vooks'
-import { getPreciseEventTarget } from 'seemly'
+import type { FollowerPlacement } from 'vueuc'
+import type { InternalSelectMenuRef } from '../../_internal'
 import type {
   RenderLabel,
   RenderOption
 } from '../../_internal/select-menu/src/interface'
-import { createTmOptions } from '../../select/src/utils'
-import type { FormValidationStatus } from '../../form/src/interface'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { FormValidationStatus } from '../../form/src/public-types'
+import type { InputInst } from '../../input'
 import type {
   SelectBaseOption,
   SelectGroupOption,
   SelectIgnoredOption
 } from '../../select/src/interface'
-import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import {
-  type ExtractPublicPropTypes,
-  type MaybeArray,
-  call,
-  getFirstSlotVNode,
-  useAdjustedTo,
-  warnOnce
-} from '../../_utils'
-import {
-  type InternalSelectMenuRef,
-  NInternalSelectMenu
-} from '../../_internal'
-import type { InputInst } from '../../input'
-import { NInput } from '../../input'
-import { autoCompleteLight } from '../styles'
 import type { AutoCompleteTheme } from '../styles'
-import { mapAutoCompleteOptionsToSelectOptions } from './utils'
 import type {
+  AutoCompleteDefaultSlotProps,
   AutoCompleteInst,
   AutoCompleteOption,
   AutoCompleteOptions,
@@ -56,7 +33,34 @@ import type {
   OnUpdateImpl,
   OnUpdateValue
 } from './interface'
+import { getPreciseEventTarget } from 'seemly'
+import { createTreeMate } from 'treemate'
+import { clickoutside } from 'vdirs'
+import { useIsMounted, useMergedState } from 'vooks'
+import {
+  computed,
+  defineComponent,
+  h,
+  ref,
+  toRef,
+  Transition,
+  watchEffect,
+  withDirectives
+} from 'vue'
+import { VBinder, VFollower, VTarget } from 'vueuc'
+import { NInternalSelectMenu } from '../../_internal'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import {
+  call,
+  getFirstSlotVNodeWithTypedProps,
+  useAdjustedTo,
+  warnOnce
+} from '../../_utils'
+import { NInput } from '../../input'
+import { createTmOptions } from '../../select/src/utils'
+import { autoCompleteLight } from '../styles'
 import style from './styles/index.cssr'
+import { mapAutoCompleteOptionsToSelectOptions } from './utils'
 
 export const autoCompleteProps = {
   ...(useTheme.props as ThemeProps<AutoCompleteTheme>),
@@ -114,9 +118,17 @@ export const autoCompleteProps = {
 
 export type AutoCompleteProps = ExtractPublicPropTypes<typeof autoCompleteProps>
 
+export interface AutoCompleteSlots {
+  default?: (options: AutoCompleteDefaultSlotProps) => VNode[]
+  empty?: () => VNode[]
+  prefix?: () => VNode[]
+  suffix?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'AutoComplete',
   props: autoCompleteProps,
+  slots: Object as SlotsType<AutoCompleteSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {
@@ -363,12 +375,16 @@ export default defineComponent({
                   default: () => {
                     const defaultSlot = this.$slots.default
                     if (defaultSlot) {
-                      return getFirstSlotVNode(this.$slots, 'default', {
-                        handleInput: this.handleInput,
-                        handleFocus: this.handleFocus,
-                        handleBlur: this.handleBlur,
-                        value: this.mergedValue
-                      })
+                      return getFirstSlotVNodeWithTypedProps(
+                        'default',
+                        defaultSlot,
+                        {
+                          handleInput: this.handleInput,
+                          handleFocus: this.handleFocus,
+                          handleBlur: this.handleBlur,
+                          value: this.mergedValue
+                        }
+                      )
                     }
                     const { mergedTheme } = this
                     return (

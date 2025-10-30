@@ -4,17 +4,10 @@
 你可以使用 `useDialogReactiveList` 去访问当前 `n-dialog-provider` 下的所有对话框。
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useDialogReactiveList } from 'naive-ui'
 
-export default defineComponent({
-  setup() {
-    return {
-      dialogReactiveList: useDialogReactiveList()
-    }
-  }
-})
+const dialogReactiveList = useDialogReactiveList()
 </script>
 
 <template>

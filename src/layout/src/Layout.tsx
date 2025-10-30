@@ -1,22 +1,14 @@
-import {
-  type CSSProperties,
-  type ExtractPropTypes,
-  type PropType,
-  computed,
-  defineComponent,
-  h,
-  provide,
-  ref
-} from 'vue'
-import { NScrollbar } from '../../_internal'
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
 import type { ScrollbarInst, ScrollbarProps } from '../../_internal'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import { createInjectionKey, useReactivated } from '../../_utils'
 import type { ThemeProps } from '../../_mixins'
-import { layoutLight } from '../styles'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { LayoutTheme } from '../styles'
 import type { LayoutInst } from './interface'
+import { computed, defineComponent, h, provide, ref } from 'vue'
+import { NScrollbar } from '../../_internal'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { createInjectionKey, useReactivated } from '../../_utils'
+import { layoutLight } from '../styles'
 import { positionProp } from './interface'
 import style from './styles/layout.cssr'
 
@@ -126,13 +118,13 @@ export function createLayoutComponent(isContent: boolean) {
       })
       const themeClassHandle = inlineThemeDisabled
         ? useThemeClass(
-          'layout',
-          computed(() => {
-            return props.embedded ? 'e' : ''
-          }),
-          cssVarsRef,
-          props
-        )
+            'layout',
+            computed(() => {
+              return props.embedded ? 'e' : ''
+            }),
+            cssVarsRef,
+            props
+          )
         : undefined
       return {
         mergedClsPrefix: mergedClsPrefixRef,

@@ -1,10 +1,10 @@
 import type { TreeMate } from 'treemate'
 import type { CSSProperties, VNode, VNodeChild } from 'vue'
 
-export type SelectMixedOption =
-  | SelectBaseOption
-  | SelectGroupOption
-  | SelectIgnoredOption
+export type SelectMixedOption
+  = | SelectBaseOption
+    | SelectGroupOption
+    | SelectIgnoredOption
 
 export interface SelectBaseOption<
   V = string | number,
@@ -40,16 +40,16 @@ export interface SelectIgnoredOption {
 export type ValueAtom = string | number
 export type Value = ValueAtom | string[] | number[] | ValueAtom[]
 export type OnUpdateValue = (
-  value: string &
-    number &
-    ValueAtom &
-    string[] &
-    number[] &
-    ValueAtom[] &
-    (ValueAtom | null) &
-    (string[] | null) &
-    (number[] | null) &
-    (ValueAtom[] | null),
+  value: string
+    & number
+    & ValueAtom
+    & string[]
+    & number[]
+    & ValueAtom[]
+    & (ValueAtom | null)
+    & (string[] | null)
+    & (number[] | null)
+    & (ValueAtom[] | null),
   option: SelectBaseOption & null & SelectBaseOption[]
 ) => void
 export type OnUpdateValueImpl = (
@@ -74,8 +74,8 @@ export type Size = 'tiny' | 'small' | 'medium' | 'large'
 
 // Public interfaces
 export type SelectOption = SelectBaseOption<string | number>
-export type SelectGroupOption =
-  | (SelectGroupOptionBase & {
+export type SelectGroupOption
+  = | (SelectGroupOptionBase & {
     /** @deprecated should use key and label instead */
     name?: string
   })

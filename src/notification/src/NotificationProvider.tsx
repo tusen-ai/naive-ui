@@ -1,39 +1,33 @@
+import type { CSSProperties, ExtractPropTypes, PropType, Ref } from 'vue'
+import type { MergedTheme, ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, Mutable } from '../../_utils'
+import type { NotificationTheme } from '../styles'
+import type { NotificationOptions } from './NotificationEnvironment'
+import { createId } from 'seemly'
 import {
-  type CSSProperties,
-  type ExtractPropTypes,
-  Fragment,
-  type PropType,
-  type Ref,
-  Teleport,
   defineComponent,
+  Fragment,
   h,
   provide,
   reactive,
-  ref
+  ref,
+  Teleport
 } from 'vue'
-import { createId } from 'seemly'
 import { useConfig, useTheme } from '../../_mixins'
-import type { MergedTheme, ThemeProps } from '../../_mixins'
-import {
-  type ExtractPublicPropTypes,
-  type Mutable,
-  createInjectionKey,
-  omit
-} from '../../_utils'
-import { type NotificationTheme, notificationLight } from '../styles'
+import { createInjectionKey, omit } from '../../_utils'
+import { notificationLight } from '../styles'
+import { notificationProviderInjectionKey } from './context'
 import { NotificationContainer } from './NotificationContainer'
 import { NotificationEnvironment } from './NotificationEnvironment'
-import type { NotificationOptions } from './NotificationEnvironment'
-import { notificationProviderInjectionKey } from './context'
 import style from './styles/index.cssr'
 
-export type NotificationPlacement =
-  | 'top-left'
-  | 'top-right'
-  | 'bottom-left'
-  | 'bottom-right'
-  | 'top'
-  | 'bottom'
+export type NotificationPlacement
+  = | 'top-left'
+    | 'top-right'
+    | 'bottom-left'
+    | 'bottom-right'
+    | 'top'
+    | 'bottom'
 
 export interface NotificationProviderInjection {
   props: ExtractPropTypes<typeof notificationProviderProps>

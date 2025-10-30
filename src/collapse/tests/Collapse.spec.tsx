@@ -1,5 +1,5 @@
-import { h } from 'vue'
 import { mount } from '@vue/test-utils'
+import { h } from 'vue'
 import { NCollapse, NCollapseItem } from '../index'
 
 describe('n-collapse', () => {
@@ -152,7 +152,7 @@ describe('n-collapse', () => {
   })
 
   it('should work with `on-item-header-click` prop', async () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
     const wrapper = mount(NCollapse, {
       props: {
         onItemHeaderClick: onClick

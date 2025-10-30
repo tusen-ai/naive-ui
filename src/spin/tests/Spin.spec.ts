@@ -1,9 +1,9 @@
-import { h } from 'vue'
-import { mount } from '@vue/test-utils'
 import { Reload } from '@vicons/ionicons5'
+import { mount } from '@vue/test-utils'
 import { sleep } from 'seemly'
-import { NSpin } from '../index'
+import { h } from 'vue'
 import { NIcon } from '../../icon'
+import { NSpin } from '../index'
 
 describe('n-spin', () => {
   it('should work with import on demand', () => {
@@ -53,7 +53,7 @@ describe('n-spin', () => {
     await wrapper.setProps({
       rotate: false
     })
-    expect(wrapper.find('.n-spin--rotate').exists()).toBe(false)
+    expect(wrapper.find('.n-spin').classes()).not.toContain('n-spin--rotate')
     wrapper.unmount()
   })
 

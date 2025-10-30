@@ -2,34 +2,29 @@
 # 基础用法
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      handleBack() {
-        message.info('[onBack]')
-      },
-      options: [
-        {
-          label: '催更',
-          key: '1'
-        },
-        {
-          label: '催更',
-          key: '2'
-        },
-        {
-          label: '催更',
-          key: '3'
-        }
-      ]
-    }
+const message = useMessage()
+
+function handleBack() {
+  message.info('[onBack]')
+}
+
+const options = [
+  {
+    label: '催更',
+    key: '1'
+  },
+  {
+    label: '催更',
+    key: '2'
+  },
+  {
+    label: '催更',
+    key: '3'
   }
-})
+]
 </script>
 
 <template>

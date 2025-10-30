@@ -1,9 +1,11 @@
-import { type PropType, defineComponent, h, inject } from 'vue'
+import type { PropType } from 'vue'
+import type { Option } from './interface'
 import { useMemo } from 'vooks'
-import { NCheckbox } from '../../checkbox'
-import { getTitleAttribute } from '../../_utils'
+import { defineComponent, h, inject } from 'vue'
 import { NBaseClose } from '../../_internal'
-import { type Option, transferInjectionKey } from './interface'
+import { getTitleAttribute } from '../../_utils'
+import { NCheckbox } from '../../checkbox'
+import { transferInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'NTransferListItem',
@@ -89,13 +91,13 @@ export default defineComponent({
           {source
             ? renderSourceLabel
               ? renderSourceLabel({
-                option: this.option
-              })
+                  option: this.option
+                })
               : label
             : renderTargetLabel
               ? renderTargetLabel({
-                option: this.option
-              })
+                  option: this.option
+                })
               : label}
         </div>
         {!source && !disabled && (

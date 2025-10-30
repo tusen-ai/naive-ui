@@ -1,6 +1,5 @@
-import { type ComputedRef, computed, ref } from 'vue'
 import type { TreeMate } from 'treemate'
-import { call } from '../../_utils'
+import type { ComputedRef } from 'vue'
 import type {
   DataTableSetupProps,
   InternalRowData,
@@ -9,6 +8,8 @@ import type {
   TableSelectionColumn,
   TmNode
 } from './interface'
+import { computed, ref } from 'vue'
+import { call } from '../../_utils'
 
 export function useCheck(
   props: DataTableSetupProps,
@@ -67,9 +68,9 @@ export function useCheck(
       (countOfCurrentPageCheckedRowsRef.value > 0
         && countOfCurrentPageCheckedRowsRef.value
         < length - countOfCurrentPageDisabledRowsRef.value)
-        || paginatedDataRef.value.some(rowData =>
-          mergedInderminateRowKeySet.has(rowData.key)
-        )
+      || paginatedDataRef.value.some(rowData =>
+        mergedInderminateRowKeySet.has(rowData.key)
+      )
     )
   })
   const allRowsCheckedRef = computed(() => {

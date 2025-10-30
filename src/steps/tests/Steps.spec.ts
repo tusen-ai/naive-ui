@@ -1,8 +1,8 @@
-import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NStep, NSteps } from '../index'
-import { NIcon } from '../../icon'
+import { h } from 'vue'
 import { CloseIcon as ErrorIcon } from '../../_internal/icons'
+import { NIcon } from '../../icon'
+import { NStep, NSteps } from '../index'
 
 describe('n-steps', () => {
   it('should work with import on demand', () => {
@@ -98,6 +98,25 @@ describe('n-steps', () => {
     )
     await wrapper.setProps({ vertical: true })
     expect(wrapper.find('.n-steps').classes()).toContain('n-steps--vertical')
+  })
+
+  it('should work with `content-placement` prop', async () => {
+    const wrapper = mount(NSteps, {
+      props: {
+        current: 1
+      },
+      slots: {
+        default: () =>
+          h(NStep, { title: 'test1', description: 'test1', internalIndex: 1 })
+      }
+    })
+    expect(wrapper.find('.n-steps').classes()).not.toContain(
+      'n-steps--content-bottom'
+    )
+    await wrapper.setProps({ contentPlacement: 'bottom' })
+    expect(wrapper.find('.n-steps').classes()).toContain(
+      'n-steps--content-bottom'
+    )
   })
 
   it('should work with `finish-icon` and `error-icon` slots', async () => {

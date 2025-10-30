@@ -2,18 +2,8 @@
 # 密码
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { Glasses, GlassesOutline } from '@vicons/ionicons5'
-
-export default defineComponent({
-  setup() {
-    return {
-      GlassesOutline,
-      Glasses
-    }
-  }
-})
 </script>
 
 <template>

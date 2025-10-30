@@ -4,23 +4,18 @@
 `positive-click` & `negative-click`
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      handlePositiveClick() {
-        message.info('positive click')
-      },
-      handleNegativeClick() {
-        message.info('negative click')
-      }
-    }
-  }
-})
+const message = useMessage()
+
+function handlePositiveClick() {
+  message.info('positive click')
+}
+
+function handleNegativeClick() {
+  message.info('negative click')
+}
 </script>
 
 <template>
@@ -28,7 +23,7 @@ export default defineComponent({
     @positive-click="handlePositiveClick"
     @negative-click="handleNegativeClick"
   >
-    <template #activator>
+    <template #trigger>
       <n-button>Quit Game</n-button>
     </template>
     I heared that players will still be abused after purchasing in some games

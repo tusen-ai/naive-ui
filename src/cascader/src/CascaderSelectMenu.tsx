@@ -1,28 +1,11 @@
-import {
-  type PropType,
-  Transition,
-  computed,
-  defineComponent,
-  h,
-  inject,
-  ref,
-  withDirectives
-} from 'vue'
-import { clickoutside } from 'vdirs'
-import { type TreeNode, createTreeMate } from 'treemate'
+import type { TreeNode } from 'treemate'
+import type { PropType } from 'vue'
+import type { InternalSelectMenuRef } from '../../_internal'
 import type {
   SelectBaseOption,
   SelectGroupOption,
   SelectIgnoredOption
 } from '../../select/src/interface'
-import { createTmOptions } from '../../select/src/utils'
-import {
-  type InternalSelectMenuRef,
-  NInternalSelectMenu
-} from '../../_internal'
-import { resolveSlot } from '../../_utils'
-import { createSelectOptions } from './utils'
-import { cascaderInjectionKey } from './interface'
 import type {
   CascaderOption,
   Filter,
@@ -30,6 +13,22 @@ import type {
   TmNode,
   Value
 } from './interface'
+import { createTreeMate } from 'treemate'
+import { clickoutside } from 'vdirs'
+import {
+  computed,
+  defineComponent,
+  h,
+  inject,
+  ref,
+  Transition,
+  withDirectives
+} from 'vue'
+import { NInternalSelectMenu } from '../../_internal'
+import { resolveSlot } from '../../_utils'
+import { createTmOptions } from '../../select/src/utils'
+import { cascaderInjectionKey } from './interface'
+import { createSelectOptions } from './utils'
 
 export default defineComponent({
   name: 'NCascaderSelectMenu',
@@ -102,8 +101,8 @@ export default defineComponent({
       return (
         pattern
           ? selectOptionsRef.value.filter((option) => {
-            return mergedFilter(pattern, option.rawNode, option.path)
-          })
+              return mergedFilter(pattern, option.rawNode, option.path)
+            })
           : selectOptionsRef.value
       ).map(option => ({
         value: option.value,
@@ -192,35 +191,35 @@ export default defineComponent({
           default: () =>
             this.show
               ? withDirectives(
-                <NInternalSelectMenu
-                  ref="menuInstRef"
-                  onResize={this.handleResize}
-                  clsPrefix={mergedClsPrefix}
-                  class={`${mergedClsPrefix}-cascader-menu`}
-                  autoPending
-                  themeOverrides={
-                    mergedTheme.peerOverrides.InternalSelectMenu
-                  }
-                  theme={mergedTheme.peers.InternalSelectMenu}
-                  treeMate={this.selectTreeMate}
-                  multiple={this.multiple}
-                  value={this.value}
-                  onToggle={this.handleToggle}
-                >
-                  {{
-                    empty: () =>
-                      resolveSlot(cascaderSlots['not-found'], () => [])
-                  }}
-                </NInternalSelectMenu>,
-                [
+                  <NInternalSelectMenu
+                    ref="menuInstRef"
+                    onResize={this.handleResize}
+                    clsPrefix={mergedClsPrefix}
+                    class={`${mergedClsPrefix}-cascader-menu`}
+                    autoPending
+                    themeOverrides={
+                      mergedTheme.peerOverrides.InternalSelectMenu
+                    }
+                    theme={mergedTheme.peers.InternalSelectMenu}
+                    treeMate={this.selectTreeMate}
+                    multiple={this.multiple}
+                    value={this.value}
+                    onToggle={this.handleToggle}
+                  >
+                    {{
+                      empty: () =>
+                        resolveSlot(cascaderSlots['not-found'], () => [])
+                    }}
+                  </NInternalSelectMenu>,
                   [
-                    clickoutside,
-                    this.handleClickOutside,
-                    undefined as unknown as string,
-                    { capture: true }
+                    [
+                      clickoutside,
+                      this.handleClickOutside,
+                      undefined as unknown as string,
+                      { capture: true }
+                    ]
                   ]
-                ]
-              )
+                )
               : null
         }}
       </Transition>

@@ -1,6 +1,10 @@
+import type { PropType } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { BackTopTheme } from '../styles'
+import { getScrollParent, unwrapElement } from 'seemly'
+import { useIsMounted, useMergedState } from 'vooks'
 import {
-  type PropType,
-  Transition,
   computed,
   defineComponent,
   h,
@@ -10,15 +14,13 @@ import {
   onMounted,
   ref,
   toRef,
+  Transition,
   watch,
   watchEffect
 } from 'vue'
 import { VLazyTeleport } from 'vueuc'
-import { useIsMounted, useMergedState } from 'vooks'
-import { getScrollParent, unwrapElement } from 'seemly'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import { NBaseIcon } from '../../_internal'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import {
   formatLength,
   isDocument,
@@ -27,10 +29,8 @@ import {
   warn,
   warnOnce
 } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { backTopLight } from '../styles'
-import type { BackTopTheme } from '../styles'
-import BackTopIcon from './BackTopIcon'
+import renderBackTopIcon from './BackTopIcon'
 import style from './styles/index.cssr'
 
 export const backTopProps = {
@@ -158,8 +158,8 @@ export default defineComponent({
       scrollListenerRegistered = true
       const scrollEl
         = props.target?.()
-        || unwrapElement(props.listenTo)
-        || getScrollParent(placeholderRef.value)
+          || unwrapElement(props.listenTo)
+          || getScrollParent(placeholderRef.value)
       if (!scrollEl) {
         if (__DEV__) {
           warn(
@@ -288,23 +288,23 @@ export default defineComponent({
                     this.onRender?.()
                     return this.mergedShow
                       ? h(
-                        'div',
-                        mergeProps(this.$attrs, {
-                          class: [
-                            `${mergedClsPrefix}-back-top`,
-                            this.themeClass,
-                            this.transitionDisabled
-                            && `${mergedClsPrefix}-back-top--transition-disabled`
-                          ],
-                          style: [this.style, this.cssVars],
-                          onClick: this.handleClick
-                        }),
-                        resolveSlot(this.$slots.default, () => [
-                          <NBaseIcon clsPrefix={mergedClsPrefix}>
-                            {{ default: () => BackTopIcon }}
-                          </NBaseIcon>
-                        ])
-                      )
+                          'div',
+                          mergeProps(this.$attrs, {
+                            class: [
+                              `${mergedClsPrefix}-back-top`,
+                              this.themeClass,
+                              this.transitionDisabled
+                              && `${mergedClsPrefix}-back-top--transition-disabled`
+                            ],
+                            style: [this.style, this.cssVars],
+                            onClick: this.handleClick
+                          }),
+                          resolveSlot(this.$slots.default, () => [
+                            <NBaseIcon clsPrefix={mergedClsPrefix}>
+                              {{ default: renderBackTopIcon }}
+                            </NBaseIcon>
+                          ])
+                        )
                       : null
                   }
                 }}

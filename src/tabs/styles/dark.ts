@@ -1,5 +1,5 @@
-import { commonDark } from '../../_styles/common'
 import type { TabsTheme } from './light'
+import { commonDark } from '../../_styles/common'
 import { self } from './light'
 
 const tabsDark: TabsTheme = {

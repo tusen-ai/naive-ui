@@ -1,8 +1,7 @@
 import { h } from 'vue'
 import { replaceable } from './replaceable'
 
-export default replaceable(
-  'close',
+export default replaceable('close', () => (
   <svg
     viewBox="0 0 12 12"
     version="1.1"
@@ -15,4 +14,4 @@ export default replaceable(
       </g>
     </g>
   </svg>
-)
+))

@@ -4,18 +4,11 @@
 可以使用 `thumb` 插槽自定义滑块按钮。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
 import AnimalCat24Regular from '@vicons/fluent/AnimalCat24Regular'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      AnimalCat24Regular,
-      value: ref(50)
-    }
-  }
-})
+const value = ref(50)
 </script>
 
 <template>

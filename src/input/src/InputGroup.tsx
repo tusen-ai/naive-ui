@@ -1,6 +1,6 @@
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { defineComponent, h } from 'vue'
 import { useConfig, useStyle } from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import style from './styles/input-group.cssr'
 
 export const inputGroupProps: { [key in any]: never } = {}

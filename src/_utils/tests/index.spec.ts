@@ -1,4 +1,5 @@
-import { type VNode, h, isVNode } from 'vue'
+import type { VNode } from 'vue'
+import { h, isVNode } from 'vue'
 import { createHoverColor, createPressedColor } from '../color'
 import {
   call,

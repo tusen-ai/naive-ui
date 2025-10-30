@@ -1,41 +1,50 @@
+import type { CNode } from 'css-render'
 import type { CSSProperties, PropType, VNode, VNodeChild } from 'vue'
+import type { VirtualListInst } from 'vueuc'
+import type { ScrollbarInst } from '../../../_internal'
+import type {
+  ColumnKey,
+  MainTableBodyRef,
+  RowData,
+  RowKey,
+  SummaryRowData,
+  TmNode
+} from '../interface'
+import type { ColItem } from '../use-group-header'
+import { pxfy, repeat } from 'seemly'
+import { useMemo } from 'vooks'
 import {
-  Fragment,
   computed,
   defineComponent,
+  Fragment,
   h,
   inject,
   onUnmounted,
   ref,
   watchEffect
 } from 'vue'
-import { pxfy, repeat } from 'seemly'
-import { VResizeObserver, VirtualList } from 'vueuc'
-import type { VirtualListInst } from 'vueuc'
-import type { CNode } from 'css-render'
-import { useMemo } from 'vooks'
+import { VirtualList, VResizeObserver } from 'vueuc'
+import { NScrollbar } from '../../../_internal'
 import { cssrAnchorMetaName } from '../../../_mixins/common'
-import { c } from '../../../_utils/cssr'
-import { NScrollbar, type ScrollbarInst } from '../../../_internal'
 import { formatLength, resolveSlot, warn } from '../../../_utils'
-import { NEmpty } from '../../../empty'
-import {
-  type ColumnKey,
-  type MainTableBodyRef,
-  type RowData,
-  type RowKey,
-  type SummaryRowData,
-  type TmNode,
-  dataTableInjectionKey
-} from '../interface'
-import { createRowClassName, getColKey, isColumnSorting } from '../utils'
-import type { ColItem } from '../use-group-header'
+import { c } from '../../../_utils/cssr'
 import { configProviderInjectionKey } from '../../../config-provider/src/context'
-import Cell from './Cell'
-import ExpandTrigger from './ExpandTrigger'
+import { NEmpty } from '../../../empty'
+import { dataTableInjectionKey } from '../interface'
+import { createRowClassName, getColKey, isColumnSorting } from '../utils'
 import RenderSafeCheckbox from './BodyCheckbox'
 import RenderSafeRadio from './BodyRadio'
+import Cell from './Cell'
+import ExpandTrigger from './ExpandTrigger'
 import TableHeader from './Header'
+
+interface StyleCProps {
+  leftActiveFixedColKey: ColumnKey | null
+  leftActiveFixedChildrenColKeys: ColumnKey[]
+  rightActiveFixedColKey: ColumnKey | null
+  rightActiveFixedChildrenColKeys: ColumnKey[]
+  componentId: string
+}
 
 interface NormalRowRenderInfo {
   striped: boolean
@@ -44,8 +53,8 @@ interface NormalRowRenderInfo {
   index: number
 }
 
-type RowRenderInfo =
-  | {
+type RowRenderInfo
+  = | {
     isSummaryRow: true
     key: RowKey
     tmNode: {
@@ -358,14 +367,6 @@ export default defineComponent({
           scrollbarInstRef.value?.scrollTo(arg0, arg1)
         }
       }
-    }
-
-    interface StyleCProps {
-      leftActiveFixedColKey: ColumnKey | null
-      leftActiveFixedChildrenColKeys: ColumnKey[]
-      rightActiveFixedColKey: ColumnKey | null
-      rightActiveFixedChildrenColKeys: ColumnKey[]
-      componentId: string
     }
 
     // manually control shadow style to avoid rerender
@@ -774,13 +775,13 @@ export default defineComponent({
                   : createRowClassName(rowData, actualRowIndex, rowClassName)
               const iteratedCols = isVirtualX
                 ? cols.filter((col, index) => {
-                  if (startColIndex <= index && index <= endColIndex)
-                    return true
-                  if (col.column.fixed) {
-                    return true
-                  }
-                  return false
-                })
+                    if (startColIndex <= index && index <= endColIndex)
+                      return true
+                    if (col.column.fixed) {
+                      return true
+                    }
+                    return false
+                  })
                 : cols
               const virtualXRowHeight = isVirtualX
                 ? pxfy(heightForRow?.(rowData, actualRowIndex) || minRowHeight)

@@ -122,6 +122,12 @@ const csCZ: NLocale = {
     tipDownload: 'Stáhnout',
     tipClose: 'Zavřít (Esc)',
     tipOriginalSize: 'Přiblížit na původní velikost'
+  },
+  Heatmap: {
+    less: 'méně',
+    more: 'více',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

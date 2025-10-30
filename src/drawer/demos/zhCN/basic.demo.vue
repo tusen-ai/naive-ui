@@ -2,25 +2,16 @@
 # 基础用法
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
 import type { DrawerPlacement } from 'naive-ui'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const active = ref(false)
-    const placement = ref<DrawerPlacement>('right')
-    const activate = (place: DrawerPlacement) => {
-      active.value = true
-      placement.value = place
-    }
-    return {
-      active,
-      placement,
-      activate
-    }
-  }
-})
+const active = ref(false)
+const placement = ref<DrawerPlacement>('right')
+function activate(place: DrawerPlacement) {
+  active.value = true
+  placement.value = place
+}
 </script>
 
 <template>

@@ -1,40 +1,24 @@
-import {
-  type CSSProperties,
-  type PropType,
-  computed,
-  defineComponent,
-  h,
-  provide,
-  watchEffect
-} from 'vue'
-import { useIsMounted } from 'vooks'
-import { depx } from 'seemly'
-import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
-import { NBaseIcon } from '../../_internal'
-import { NButton } from '../../button'
-import { useConfig, useFormItem, useLocale, useTheme } from '../../_mixins'
+import type { CSSProperties, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import { createKey } from '../../_utils/cssr'
-import {
-  type ExtractPublicPropTypes,
-  type MaybeArray,
-  call,
-  warnOnce
-} from '../../_utils'
-import { legacyTransferLight } from '../styles'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { LegacyTransferTheme } from '../styles'
+import type { Filter, OnUpdateValue, Option, OptionValue } from './interface'
+import { depx } from 'seemly'
+import { useIsMounted } from 'vooks'
+import { computed, defineComponent, h, provide, watchEffect } from 'vue'
+import { NBaseIcon } from '../../_internal'
+import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
+import { useConfig, useFormItem, useLocale, useTheme } from '../../_mixins'
+import { call, warnOnce } from '../../_utils'
+import { createKey } from '../../_utils/cssr'
+import { NButton } from '../../button'
+import { legacyTransferLight } from '../styles'
+import { transferInjectionKey } from './interface'
+import style from './styles/index.cssr'
+import NTransferFilter from './TransferFilter'
 import NTransferHeader from './TransferHeader'
 import NTransferList from './TransferList'
-import NTransferFilter from './TransferFilter'
 import { useTransferData } from './use-transfer-data'
-import style from './styles/index.cssr'
-import {
-  type Filter,
-  type OnUpdateValue,
-  type Option,
-  type OptionValue,
-  transferInjectionKey
-} from './interface'
 
 export const transferProps = {
   ...(useTheme.props as ThemeProps<LegacyTransferTheme>),

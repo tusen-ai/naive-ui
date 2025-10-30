@@ -1,4 +1,5 @@
-import { type PageItem, createPageItemsInfo } from '../src/utils'
+import type { PageItem } from '../src/utils'
+import { createPageItemsInfo } from '../src/utils'
 
 function createFastBackwardItem(options: number[]): PageItem {
   return {
