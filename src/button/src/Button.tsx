@@ -52,6 +52,7 @@ export const buttonProps = {
   secondary: Boolean,
   tertiary: Boolean,
   quaternary: Boolean,
+  shine: Boolean,
   strong: Boolean,
   focusable: {
     type: Boolean,
@@ -454,6 +455,7 @@ const Button = defineComponent({
         [createKey('iconSize', size)]: iconSize,
         [createKey('borderRadius', size)]: borderRadius,
         [createKey('iconMargin', size)]: iconMargin,
+        shineOpacity,
         waveOpacity
       } = self
       const sizeProps = {
@@ -481,6 +483,7 @@ const Button = defineComponent({
         '--n-ripple-duration': rippleDuration,
         '--n-opacity-disabled': opacityDisabled,
         '--n-wave-opacity': waveOpacity,
+        '--n-shine-opacity': shineOpacity,
         ...fontProps,
         ...colorProps,
         ...borderProps,
@@ -504,6 +507,7 @@ const Button = defineComponent({
               secondary,
               tertiary,
               quaternary,
+              shine,
               strong
             } = props
             if (dashed)
@@ -524,13 +528,15 @@ const Button = defineComponent({
               hash += 'h'
             if (strong)
               hash += 'i'
+            if (shine)
+              hash += 'j'
             if (color)
-              hash += `j${color2Class(color)}`
+              hash += `k${color2Class(color)}`
             if (textColor)
-              hash += `k${color2Class(textColor)}`
+              hash += `l${color2Class(textColor)}`
             const { value: size } = mergedSizeRef
-            hash += `l${size[0]}`
-            hash += `m${type[0]}`
+            hash += `m${size[0]}`
+            hash += `n${type[0]}`
             return hash
           }),
           cssVarsRef,
@@ -590,6 +596,7 @@ const Button = defineComponent({
           `${mergedClsPrefix}-button--${this.mergedSize}-type`,
           this.rtlEnabled && `${mergedClsPrefix}-button--rtl`,
           this.disabled && `${mergedClsPrefix}-button--disabled`,
+          this.shine && `${mergedClsPrefix}-button--shine`,
           this.block && `${mergedClsPrefix}-button--block`,
           this.enterPressed && `${mergedClsPrefix}-button--pressed`,
           !this.text && this.dashed && `${mergedClsPrefix}-button--dashed`,
@@ -658,6 +665,19 @@ const Button = defineComponent({
             class={`${mergedClsPrefix}-button__border`}
             style={this.customColorCssVars as CSSProperties}
           />
+        ) : null}
+        {this.shine ? (
+          <div
+            aria-hidden
+            class={`${mergedClsPrefix}-button__shine`}
+            style={this.customColorCssVars as CSSProperties}
+          >
+            <div
+              aria-hidden
+              class={`${mergedClsPrefix}-button__shine-effect`}
+              style={this.customColorCssVars as CSSProperties}
+            />
+          </div>
         ) : null}
         {this.showBorder ? (
           <div

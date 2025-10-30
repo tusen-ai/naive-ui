@@ -52,6 +52,7 @@ debug.vue
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 按钮的尺寸 |  |
 | secondary | `boolean` | `false` | 是否是次要按钮 |  |
 | strong | `boolean` | `false` | 按钮文字是否加粗 |  |
+| shine | `boolean` | `false` | Enable shine effect in the button. |  |
 | tertiary | `boolean` | `false` | 是否是三级按钮 |  |
 | text | `boolean` | `false` | 是否显示为文本按钮 |  |
 | text-color | `string` | `undefined` | 按钮文字颜色（支持形如 `#FFF`， `#FFFFFF`， `yellow`，`rgb(0, 0, 0)` 的颜色） |  |

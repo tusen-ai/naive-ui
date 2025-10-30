@@ -32,6 +32,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // --n-icon-size
 // --n-icon-margin
 // --n-wave-opacity
+// --n-shine-opacity
 // --n-font-weight
 //
 // private-vars:
@@ -183,6 +184,28 @@ export default c([
       borderColor: '#0000',
       zIndex: 1
     }),
+    cE('shine', {
+      position: 'absolute',
+      top: '0',
+      right: '0',
+      bottom: '0',
+      left: '0',
+      overflow: 'hidden',
+    }),
+    cE('shine-effect', {
+      content: '',
+      position: 'absolute',
+      top: '0',
+      width: '100%',
+      height: '100%',
+      animation: 'shine 4s ease-out infinite',
+      background: `linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, var(--n-shine-opacity)),
+        transparent
+      )`,
+    }),
     cE('icon', `
       margin: var(--n-icon-margin);
       margin-left: 0;
@@ -238,6 +261,16 @@ export default c([
       opacity: 'var(--n-opacity-disabled)'
     })
   ]),
+  c('@keyframes shine', {
+    from: {
+      transform: 'translateX(-105%)',
+      transitionProperty: 'transform',
+    },
+    '15%, 100%': {
+      transform: 'translateX(105%)',
+      transitionProperty: 'transform'
+    },
+  }),
   c('@keyframes button-wave-spread', {
     from: {
       boxShadow: '0 0 0.5px 0 var(--n-ripple-color)'
