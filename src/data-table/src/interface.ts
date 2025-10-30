@@ -244,6 +244,7 @@ export interface CommonColumnInfo<T = InternalRowData> {
   ellipsisComponent?: 'ellipsis' | 'performant-ellipsis'
   allowExport?: boolean
   cellProps?: (rowData: T, rowIndex: number) => HTMLAttributes
+  headerCellProps?: (column: TableColumn, rowIndex: number) => HTMLAttributes
 }
 
 export type DataTableHeightForRow<T = RowData> = (

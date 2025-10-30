@@ -223,7 +223,7 @@ export default defineComponent({
       getLeft: ((index: number) => number) | null,
       headerHeightPx: string | undefined
     ) =>
-      row.map(({ column, colIndex, colSpan, rowSpan, isLast }) => {
+      row.map(({ column, colIndex, colSpan, rowSpan, isLast }, actualRowIndex) => {
         const key = getColKey(column)
         const { ellipsis } = column
         if (!hasEllipsis && ellipsis)
@@ -293,9 +293,12 @@ export default defineComponent({
         }
         const leftFixed = key in fixedColumnLeftMap
         const rightFixed = key in fixedColumnRightMap
+        const { headerCellProps } = column
+        const resolvedHeaderCellProps = headerCellProps?.(column, actualRowIndex)
         const CellComponent = (getLeft && !column.fixed ? 'div' : 'th') as 'th'
         return (
           <CellComponent
+            {...resolvedHeaderCellProps}
             ref={el => (cellElsRef[key] = el as HTMLTableCellElement)}
             key={key}
             style={[
