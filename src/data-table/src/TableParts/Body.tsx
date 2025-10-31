@@ -109,6 +109,7 @@ function flatten(
 
 const VirtualListItemWrapper = defineComponent({
   props: {
+    caption: String,
     clsPrefix: {
       type: String,
       required: true
@@ -125,7 +126,7 @@ const VirtualListItemWrapper = defineComponent({
     onMouseleave: Function as PropType<(e: MouseEvent) => void>
   },
   render() {
-    const { clsPrefix, id, cols, onMouseenter, onMouseleave } = this
+    const { caption, clsPrefix, id, cols, onMouseenter, onMouseleave } = this
     return (
       <table
         style={{ tableLayout: 'fixed' }}
@@ -133,6 +134,7 @@ const VirtualListItemWrapper = defineComponent({
         onMouseenter={onMouseenter}
         onMouseleave={onMouseleave}
       >
+        {caption ? <caption>{caption}</caption> : null}
         <colgroup>
           {cols.map(col => (
             <col key={col.key} style={col.style}></col>
@@ -202,6 +204,7 @@ export default defineComponent({
       handleTableBodyScroll,
       doCheck,
       doUncheck,
+      captionRef,
       renderCell
     } = inject(dataTableInjectionKey)!
     const NConfigProvider = inject(configProviderInjectionKey)
@@ -526,6 +529,7 @@ export default defineComponent({
       handleRadioUpdateChecked,
       handleUpdateExpanded,
       renderCell,
+      caption: captionRef,
       ...exposedMethods
     }
   },
@@ -584,6 +588,7 @@ export default defineComponent({
             // coordinate to related hover keys
             const cordKey: Record<number, Record<number, RowKey[]>> = {}
             const {
+              caption,
               cols,
               paginatedDataAndInfo,
               mergedTheme,
@@ -1043,6 +1048,7 @@ export default defineComponent({
                     tableLayout: this.mergedTableLayout
                   }}
                 >
+                  {caption ? <caption>{caption}</caption> : null}
                   <colgroup>
                     {cols.map(col => (
                       <col key={col.key} style={col.style}></col>
@@ -1080,6 +1086,7 @@ export default defineComponent({
                   itemSize={this.minRowHeight}
                   visibleItemsTag={VirtualListItemWrapper}
                   visibleItemsProps={{
+                    caption,
                     clsPrefix: mergedClsPrefix,
                     id: componentId,
                     cols,
