@@ -28,7 +28,7 @@ preset-confirm.vue
 preset-confirm-slot.vue
 transform-origin.vue
 draggable.vue
-mask-visible.vue
+show-mask.vue
 ```
 
 ## API
