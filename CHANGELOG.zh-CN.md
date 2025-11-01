@@ -52,7 +52,7 @@
 - `n-input-otp` 增加 `focusOnChar` 方法，关闭 [#7073](https://github.com/tusen-ai/naive-ui/issues/7073)
 - `n-form-item` 新增 `content-class`、`content-style` 属性
 - `n-message` 增加 `border` 主题变量，关闭 [#7105](https://github.com/tusen-ai/naive-ui/issues/7105)
-- `n-modal` 增加 `mask-visible` 属性
+- `n-modal` 增加 `show-mask` 属性
 - `useModal` 新增 `render` 函数，关闭 [#5857](https://github.com/tusen-ai/naive-ui/issues/5857)
 - `n-card` 新增 `close-focusable` 属性
 - `n-dialog` 新增 `close-focusable` 属性
