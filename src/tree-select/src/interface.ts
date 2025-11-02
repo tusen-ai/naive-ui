@@ -1,11 +1,11 @@
-import { TreeMate, TreeNode } from 'treemate'
-import { HTMLAttributes, Ref, VNodeChild } from 'vue'
-import type { TreeOptionBase, TreeOption } from '../../tree/src/interface'
+import type { TreeMate, TreeNode } from 'treemate'
+import type { HTMLAttributes, Ref, VNodeChild } from 'vue'
+import type { TreeOption, TreeOptionBase } from '../../tree/src/interface'
 import { createInjectionKey } from '../../_utils'
 
 export type TreeSelectOption = Omit<
-TreeOptionBase,
-'checkboxDisabled' | 'isLeaf' | 'children'
+  TreeOptionBase,
+  'checkboxDisabled' | 'isLeaf' | 'children'
 > & {
   children?: TreeSelectOption[]
   [k: string]: unknown
@@ -14,66 +14,66 @@ TreeOptionBase,
 export type TreeSelectTmNode = TreeNode<TreeSelectOption>
 
 export type OnUpdateValue = (
-  value: string &
-  number &
-  (string | number) &
-  string[] &
-  number[] &
-  Array<string | number> &
-  null,
-  option: TreeSelectOption &
-  null &
-  TreeSelectOption[] &
-  Array<TreeSelectOption | null>,
+  value: string
+    & number
+    & (string | number)
+    & string[]
+    & number[]
+    & Array<string | number>
+    & null,
+  option: TreeSelectOption
+    & null
+    & TreeSelectOption[]
+    & Array<TreeSelectOption | null>,
   meta:
-  | {
-    node: TreeSelectOption
-    action: 'select' | 'unselect'
-  }
-  | {
-    node: TreeSelectOption | null
-    action: 'delete'
-  }
-  | {
-    node: null
-    action: 'clear'
-  }
+    | {
+      node: TreeSelectOption
+      action: 'select' | 'unselect'
+    }
+    | {
+      node: TreeSelectOption | null
+      action: 'delete'
+    }
+    | {
+      node: null
+      action: 'clear'
+    }
 ) => void
 
 export type OnUpdateValueImpl = (
   value:
-  | string
-  | number
-  | (string | number)
-  | string[]
-  | number[]
-  | Array<string | number>
-  | null,
+    | string
+    | number
+    | (string | number)
+    | string[]
+    | number[]
+    | Array<string | number>
+    | null,
   option: TreeSelectOption | null | Array<TreeSelectOption | null>,
   meta:
-  | {
-    node: TreeSelectOption
-    action: 'select' | 'unselect'
-  }
-  | {
-    node: TreeSelectOption | null
-    action: 'delete'
-  }
-  | {
-    node: null
-    action: 'clear'
-  }
+    | {
+      node: TreeSelectOption
+      action: 'select' | 'unselect'
+    }
+    | {
+      node: TreeSelectOption | null
+      action: 'delete'
+    }
+    | {
+      node: null
+      action: 'clear'
+    }
 ) => void
 
 export type OnUpdateIndeterminateKeysImpl = (
   value:
-  | string
-  | number
-  | (string | number)
-  | string[]
-  | number[]
-  | Array<string | number>
-  | null,
+    | string
+    | number
+    | (string | number)
+    | string[]
+    | number[]
+    | Array<string | number>
+    | null,
   option: TreeSelectOption | null | Array<TreeSelectOption | null>
 ) => void
 
@@ -84,8 +84,8 @@ export interface TreeSelectInjection {
   dataTreeMate: Ref<TreeMate<TreeOption>>
 }
 
-export const treeSelectInjectionKey =
-  createInjectionKey<TreeSelectInjection>('n-tree-select')
+export const treeSelectInjectionKey
+  = createInjectionKey<TreeSelectInjection>('n-tree-select')
 
 export type TreeSelectRenderTag = (props: {
   option: TreeSelectOption
@@ -124,5 +124,7 @@ export interface TreeSelectInst {
     options: Array<TreeSelectOption | null>
   }
   focus: () => void
+  focusInput: () => void
   blur: () => void
+  blurInput: () => void
 }

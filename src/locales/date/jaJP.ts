@@ -1,5 +1,5 @@
-import ja from 'date-fns/esm/locale/ja'
-import { NDateLocale } from './enUS'
+import type { NDateLocale } from './enUS'
+import { ja } from 'date-fns/locale'
 
 const dateJaJP: NDateLocale = {
   name: 'ja-JP',

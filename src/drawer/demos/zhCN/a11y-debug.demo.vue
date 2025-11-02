@@ -2,6 +2,16 @@
 # A11y debug
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const active = ref(false)
+
+function handleClick() {
+  active.value = !active.value
+}
+</script>
+
 <template>
   <n-button @click="handleClick">
     Trigger
@@ -12,19 +22,3 @@
     <n-input />
   </n-drawer>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const activeRef = ref(false)
-    return {
-      active: activeRef,
-      handleClick () {
-        activeRef.value = !activeRef.value
-      }
-    }
-  }
-})
-</script>

@@ -1,5 +1,6 @@
+import type { CSSProperties } from 'vue'
 import { mount } from '@vue/test-utils'
-import { CSSProperties, h } from 'vue'
+import { Fragment, h } from 'vue'
 import { NSwitch } from '../index'
 
 describe('n-switch', () => {
@@ -16,7 +17,7 @@ describe('n-switch', () => {
   })
 
   it('should work with `checked-value` prop', async () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = mount(NSwitch, {
       props: {
         checkedValue: 'fooo',
@@ -36,24 +37,15 @@ describe('n-switch', () => {
     const onUpdateValue1: (value: string) => void = () => {}
     const onUpdateValue2: (value: number) => void = () => {}
     const onUpdateValue3: (value: boolean) => void = () => {}
-    let _ = (
-      <NSwitch
-        onUpdateValue={onUpdateValue1}
-        value={'123'}
-        defaultValue={'123'}
-      />
-    )
-    _ = (
+    <Fragment>
+      <NSwitch onUpdateValue={onUpdateValue1} value="123" defaultValue="123" />
       <NSwitch onUpdateValue={onUpdateValue2} value={123} defaultValue={123} />
-    )
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _ = (
       <NSwitch
         onUpdateValue={onUpdateValue3}
         value={true}
         defaultValue={false}
       />
-    )
+    </Fragment>
   })
 
   it('should work with `round` prop', async () => {
@@ -85,7 +77,7 @@ describe('n-switch', () => {
   })
 
   it('should work with `on-update:value` prop', async () => {
-    const onUpdate = jest.fn()
+    const onUpdate = vi.fn()
     const wrapper = mount(NSwitch, { props: { 'onUpdate:value': onUpdate } })
 
     await wrapper.trigger('click')

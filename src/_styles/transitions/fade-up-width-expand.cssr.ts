@@ -1,4 +1,4 @@
-import { CNode } from 'css-render'
+import type { CNode } from 'css-render'
 import { c } from '../../_utils/cssr'
 import commonVariables from '../common/_common'
 
@@ -8,7 +8,7 @@ interface FadeUpWidthExpandTransition {
   duration?: string
 }
 
-export function fadeUpWidthExpandTransition ({
+export function fadeUpWidthExpandTransition({
   duration = '.2s'
 }: FadeUpWidthExpandTransition = {}): CNode[] {
   return [

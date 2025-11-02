@@ -1,38 +1,38 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import {
-  h,
-  computed,
-  defineComponent,
-  inject,
-  PropType,
-  toRef,
-  watch,
-  nextTick,
-  watchEffect
-} from 'vue'
-import { createTreeMate, TreeNode } from 'treemate'
-import { happensIn } from 'seemly'
-import {
+import type { TreeNode } from 'treemate'
+import type { PropType } from 'vue'
+import type {
   NodeProps,
   RenderLabel
 } from '../../_internal/select-menu/src/interface'
-import { createTmOptions } from '../../select/src/utils'
-import {
+import type { MaybeArray } from '../../_utils'
+import type {
   OnUpdateValue,
   OnUpdateValueImpl,
-  Value,
-  SelectMixedOption,
   SelectBaseOption,
   SelectGroupOption,
   SelectIgnoredOption,
+  SelectMixedOption,
+  Value,
   ValueAtom
 } from '../../select/src/interface'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import { NInternalSelectMenu } from '../../_internal'
-import { call, keysOf, warn } from '../../_utils'
-import type { MaybeArray } from '../../_utils'
-import { popselectLight } from '../styles'
 import type { PopselectSize } from './interface'
+import { happensIn } from 'seemly'
+import { createTreeMate } from 'treemate'
+import {
+  computed,
+  defineComponent,
+  h,
+  inject,
+  nextTick,
+  toRef,
+  watch,
+  watchEffect
+} from 'vue'
+import { NInternalSelectMenu } from '../../_internal'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { call, keysOf, warn } from '../../_utils'
+import { createTmOptions } from '../../select/src/utils'
+import { popselectLight } from '../styles'
 import { popselectInjectionKey } from './interface'
 import style from './styles/index.cssr'
 
@@ -72,7 +72,7 @@ export const panelPropKeys = keysOf(panelProps)
 export default defineComponent({
   name: 'PopselectPanel',
   props: panelProps,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.onChange !== undefined) {
@@ -84,7 +84,6 @@ export default defineComponent({
       })
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NPopselect = inject(popselectInjectionKey)!
 
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
@@ -100,13 +99,13 @@ export default defineComponent({
 
     const treeMateRef = computed(() => {
       return createTreeMate<
-      SelectBaseOption,
-      SelectGroupOption,
-      SelectIgnoredOption
+        SelectBaseOption,
+        SelectGroupOption,
+        SelectIgnoredOption
       >(props.options, createTmOptions('value', 'children'))
     })
 
-    function doUpdateValue (
+    function doUpdateValue(
       value: Value | null,
       option: SelectBaseOption | null | SelectBaseOption[]
     ): void {
@@ -115,19 +114,27 @@ export default defineComponent({
         'onUpdate:value': _onUpdateValue,
         onChange
       } = props
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value, option)
+      if (onUpdateValue)
+        call(onUpdateValue as OnUpdateValueImpl, value, option)
       if (_onUpdateValue) {
         call(_onUpdateValue as OnUpdateValueImpl, value, option)
       }
-      if (onChange) call(onChange as OnUpdateValueImpl, value, option)
+      if (onChange)
+        call(onChange as OnUpdateValueImpl, value, option)
     }
-    function handleToggle (tmNode: TreeNode<SelectBaseOption>): void {
+    function handleToggle(tmNode: TreeNode<SelectBaseOption>): void {
       toggle(tmNode.key)
     }
-    function handleMenuMousedown (e: MouseEvent): void {
-      if (!happensIn(e, 'action')) e.preventDefault()
+    function handleMenuMousedown(e: MouseEvent): void {
+      if (
+        !happensIn(e, 'action')
+        && !happensIn(e, 'empty')
+        && !happensIn(e, 'header')
+      ) {
+        e.preventDefault()
+      }
     }
-    function toggle (value: ValueAtom): void {
+    function toggle(value: ValueAtom): void {
       const {
         value: { getNode }
       } = treeMateRef
@@ -152,24 +159,29 @@ export default defineComponent({
             newOptions.push(getNode(value)!.rawNode)
           }
           doUpdateValue(newValue, newOptions)
-        } else {
+        }
+        else {
           const tmNode = getNode(value)
           if (tmNode) {
             doUpdateValue([value], [tmNode.rawNode])
           }
         }
-      } else {
+      }
+      else {
         if (props.value === value && props.cancelable) {
           doUpdateValue(null, null)
-        } else {
+        }
+        else {
           const tmNode = getNode(value)
           if (tmNode) {
             doUpdateValue(value, tmNode.rawNode)
           }
-          const { 'onUpdate:show': _onUpdateShow, onUpdateShow } =
-            NPopselect.props
-          if (_onUpdateShow) call(_onUpdateShow, false)
-          if (onUpdateShow) call(onUpdateShow, false)
+          const { 'onUpdate:show': _onUpdateShow, onUpdateShow }
+            = NPopselect.props
+          if (_onUpdateShow)
+            call(_onUpdateShow, false)
+          if (onUpdateShow)
+            call(onUpdateShow, false)
           NPopselect.setShow(false)
         }
       }
@@ -204,7 +216,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     this.onRender?.()
     return (
       <NInternalSelectMenu
@@ -229,6 +241,7 @@ export default defineComponent({
         showCheckmark={this.showCheckmark}
       >
         {{
+          header: () => this.$slots.header?.() || [],
           action: () => this.$slots.action?.() || [],
           empty: () => this.$slots.empty?.() || []
         }}

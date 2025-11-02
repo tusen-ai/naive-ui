@@ -4,19 +4,8 @@
 It can show line numbers in the code block.
 </markdown>
 
-<template>
-  <div style="overflow: auto">
-    <n-code :code="code" language="cpp" show-line-numbers />
-  </div>
-</template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      code: `#include <bits/stdc++.h>
+<script lang="ts" setup>
+const code = `#include <bits/stdc++.h>
 using namespace std;
 
 int main() {
@@ -32,7 +21,10 @@ int main() {
   cout <<"\\n" <<endl;
   return 0;
 }`
-    }
-  }
-})
 </script>
+
+<template>
+  <div style="overflow: auto">
+    <n-code :code="code" language="cpp" show-line-numbers />
+  </div>
+</template>

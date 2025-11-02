@@ -1,4 +1,4 @@
-import { CNode } from 'css-render'
+import type { CNode } from 'css-render'
 import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 // vars:
@@ -217,18 +217,19 @@ export default c([
       padding-left: var(--n-padding-left);
       padding-right: var(--n-padding-right);
       width: var(--n-width);
+      max-width: calc(100vw - 16px - 16px);
       border-radius: var(--n-border-radius);
       box-shadow: var(--n-box-shadow);
       box-sizing: border-box;
       opacity: 1;
     `, [
       cE('avatar', [
-        cB('icon', {
-          color: 'var(--n-icon-color)'
-        }),
-        cB('base-icon', {
-          color: 'var(--n-icon-color)'
-        })
+        cB('icon', `
+          color: var(--n-icon-color);
+        `),
+        cB('base-icon', `
+          color: var(--n-icon-color);
+        `)
       ]),
       cM('show-avatar', [
         cB('notification-main', `
@@ -238,9 +239,9 @@ export default c([
       ]),
       cM('closable', [
         cB('notification-main', [
-          c('> *:first-child', {
-            paddingRight: '20px'
-          })
+          c('> *:first-child', `
+            padding-right: 20px;
+          `)
         ]),
         cE('close', `
           position: absolute;
@@ -300,6 +301,8 @@ export default c([
         cE('description', `
           margin-top: 8px;
           font-size: var(--n-description-font-size);
+          white-space: pre-wrap;
+          word-wrap: break-word;
           transition: color .3s var(--n-bezier-ease-out);
           color: var(--n-description-text-color);
         `),
@@ -312,16 +315,14 @@ export default c([
           transition: color .3s var(--n-bezier-ease-out);
           color: var(--n-text-color);
         `, [
-          c('&:first-child', {
-            margin: 0
-          })
+          c('&:first-child', 'margin: 0;')
         ])
       ])
     ])
   ])
 ])
 
-function placementTransformStyle (placement: string): CNode {
+function placementTransformStyle(placement: string): CNode {
   const direction = placement.split('-')[1]
   const transformXEnter = direction === 'left' ? 'calc(-100%)' : 'calc(100%)'
   const transformXLeave = '0'

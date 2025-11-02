@@ -1,6 +1,7 @@
-import { h } from 'vue'
+import type { PaginationInfo, PaginationRenderLabel } from '../index'
 import { mount } from '@vue/test-utils'
-import { NPagination, PaginationRenderLabel, PaginationInfo } from '../index'
+import { h } from 'vue'
+import { NPagination } from '../index'
 
 describe('n-pagination', () => {
   it('should work with import on demand', () => {
@@ -19,6 +20,7 @@ describe('n-pagination', () => {
 
     await wrapper.setProps({ size: 'large' })
     expect(wrapper.attributes('style')).toContain('--n-item-size: 34px;')
+    wrapper.unmount()
   })
   it('props.itemCount', async () => {
     const wrapper = mount(NPagination, {
@@ -32,6 +34,7 @@ describe('n-pagination', () => {
       itemCount: 11
     })
     expect(wrapper.findAll('.n-pagination-item').length).toEqual(4)
+    wrapper.unmount()
   })
   it('should work with corrent pagination info', async () => {
     let paginationInfo: PaginationInfo | undefined
@@ -62,6 +65,7 @@ describe('n-pagination', () => {
     expect(paginationInfo?.pageCount).toBe(3)
     expect(paginationInfo?.startIndex).toBe(10)
     expect(paginationInfo?.endIndex).toBe(11)
+    wrapper.unmount()
   })
   it('should work with prev slot', async () => {
     const wrapper = mount(NPagination, {
@@ -70,17 +74,20 @@ describe('n-pagination', () => {
       }
     })
     expect(wrapper.find('.n-pagination-item').text()).toContain('Prev')
+    wrapper.unmount()
   })
   it('page-sizes should has correct type', () => {
-    ;<NPagination
-      pageSizes={[
-        10,
-        {
-          label: '20',
-          value: 20
-        }
-      ]}
-    />
+    ;(() => (
+      <NPagination
+        pageSizes={[
+          10,
+          {
+            label: '20',
+            value: 20
+          }
+        ]}
+      />
+    ))()
   })
   it('has currect default page size', () => {
     const wrapper = mount(() => (
@@ -89,11 +96,13 @@ describe('n-pagination', () => {
     expect(wrapper.find('.n-base-selection-input__content').text()).toContain(
       '23'
     )
+    wrapper.unmount()
   })
 })
 it('should work with label slot', async () => {
   const labelSlot: PaginationRenderLabel = (props) => {
-    if (props.type === 'page') return `(${props.node})`
+    if (props.type === 'page')
+      return `(${props.node})`
     return props.node
   }
   const wrapper = mount(NPagination, {
@@ -105,4 +114,5 @@ it('should work with label slot', async () => {
     itemCount: 1
   })
   expect(wrapper.findAll('.n-pagination-item')[1].text()).toContain('(1)')
+  wrapper.unmount()
 })

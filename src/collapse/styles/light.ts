@@ -1,8 +1,8 @@
-import { commonLight } from '../../_styles/common'
+import type { Theme } from '../../_mixins/use-theme'
 import type { ThemeCommonVars } from '../../_styles/common'
-import { Theme } from '../../_mixins/use-theme'
+import { commonLight } from '../../_styles/common'
 
-export const self = (vars: ThemeCommonVars) => {
+export function self(vars: ThemeCommonVars) {
   const {
     fontWeight,
     textColor1,
@@ -21,7 +21,8 @@ export const self = (vars: ThemeCommonVars) => {
     textColor: textColor2,
     arrowColor: textColor2,
     arrowColorDisabled: textColorDisabled,
-    itemMargin: '16px 0 0 0'
+    itemMargin: '16px 0 0 0',
+    titlePadding: '16px 0 0 0'
   }
 }
 

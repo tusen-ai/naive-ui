@@ -1,34 +1,27 @@
-import {
-  h,
-  defineComponent,
-  PropType,
-  computed,
-  inject,
-  ref,
-  watchEffect,
-  VNode
-} from 'vue'
-import { useMemo } from 'vooks'
-import { ImageInst } from '../../image/src/Image'
-import {
-  CancelIcon,
-  TrashIcon,
-  AttachIcon,
-  RetryIcon,
-  DownloadIcon,
-  EyeIcon
-} from '../../_internal/icons'
+import type { PropType, VNode } from 'vue'
 import type { ExtractThemeOverrides } from '../../_mixins/use-theme'
-import { ButtonTheme } from '../../button/styles'
-import { NImage } from '../../image'
+import type { ButtonTheme } from '../../button/styles'
+import type { ImageInst } from '../../image'
+import type { ListType } from './interface'
+import type { UploadSettledFileInfo } from './public-types'
+import { useMemo } from 'vooks'
+import { computed, defineComponent, h, inject, ref, watchEffect } from 'vue'
+import { NBaseIcon, NIconSwitchTransition } from '../../_internal'
+import {
+  AttachIcon,
+  CancelIcon,
+  DownloadIcon,
+  EyeIcon,
+  RetryIcon,
+  TrashIcon
+} from '../../_internal/icons'
+import { download, warn } from '../../_utils'
 import { NButton } from '../../button'
-import { NIconSwitchTransition, NBaseIcon } from '../../_internal'
-import { warn } from '../../_utils'
-import NUploadProgress from './UploadProgress'
+import { NImage } from '../../image'
+import { renderDocumentIcon, renderImageIcon } from './icons'
 import { uploadInjectionKey } from './interface'
-import type { SettledFileInfo, ListType } from './interface'
-import { imageIcon, documentIcon } from './icons'
-import { download, isImageFile } from './utils'
+import NUploadProgress from './UploadProgress'
+import { isImageFile } from './utils'
 
 const buttonThemeOverrides: ExtractThemeOverrides<ButtonTheme> = {
   paddingMedium: '0 3px',
@@ -44,16 +37,19 @@ export default defineComponent({
       required: true
     },
     file: {
-      type: Object as PropType<SettledFileInfo>,
+      type: Object as PropType<UploadSettledFileInfo>,
       required: true
     },
     listType: {
       type: String as PropType<ListType>,
       required: true
+    },
+    index: {
+      type: Number,
+      required: true
     }
   },
-  setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  setup(props) {
     const NUpload = inject(uploadInjectionKey)!
 
     const imageRef = ref<ImageInst | null>(null)
@@ -61,13 +57,16 @@ export default defineComponent({
 
     const progressStatusRef = computed(() => {
       const { file } = props
-      if (file.status === 'finished') return 'success'
-      if (file.status === 'error') return 'error'
+      if (file.status === 'finished')
+        return 'success'
+      if (file.status === 'error')
+        return 'error'
       return 'info'
     })
     const buttonTypeRef = computed(() => {
       const { file } = props
-      if (file.status === 'error') return 'error'
+      if (file.status === 'error')
+        return 'error'
       return undefined
     })
     const showProgressRef = computed(() => {
@@ -75,22 +74,26 @@ export default defineComponent({
       return file.status === 'uploading'
     })
     const showCancelButtonRef = computed(() => {
-      if (!NUpload.showCancelButtonRef.value) return false
+      if (!NUpload.showCancelButtonRef.value)
+        return false
       const { file } = props
       return ['uploading', 'pending', 'error'].includes(file.status)
     })
     const showRemoveButtonRef = computed(() => {
-      if (!NUpload.showRemoveButtonRef.value) return false
+      if (!NUpload.showRemoveButtonRef.value)
+        return false
       const { file } = props
       return ['finished'].includes(file.status)
     })
     const showDownloadButtonRef = computed(() => {
-      if (!NUpload.showDownloadButtonRef.value) return false
+      if (!NUpload.showDownloadButtonRef.value)
+        return false
       const { file } = props
       return ['finished'].includes(file.status)
     })
     const showRetryButtonRef = computed(() => {
-      if (!NUpload.showRetryButtonRef.value) return false
+      if (!NUpload.showRetryButtonRef.value)
+        return false
       const { file } = props
       return ['error'].includes(file.status)
     })
@@ -98,36 +101,46 @@ export default defineComponent({
       return thumbnailUrlRef.value || props.file.thumbnailUrl || props.file.url
     })
     const showPreviewButtonRef = computed(() => {
-      if (!NUpload.showPreviewButtonRef.value) return false
+      if (!NUpload.showPreviewButtonRef.value)
+        return false
       const {
         file: { status },
         listType
       } = props
       return (
-        ['finished'].includes(status) &&
-        mergedThumbnailUrlRef.value &&
-        listType === 'image-card'
+        ['finished'].includes(status)
+        && mergedThumbnailUrlRef.value
+        && listType === 'image-card'
       )
     })
-    function handleRetryClick (): void {
+    async function handleRetryClick(): Promise<void> {
+      const onRetry = NUpload.onRetryRef.value
+      if (onRetry) {
+        const onRetryReturn = await onRetry({ file: props.file })
+        if (onRetryReturn === false) {
+          return
+        }
+      }
       NUpload.submit(props.file.id)
     }
-    function handleRemoveOrCancelClick (e: MouseEvent): void {
+    function handleRemoveOrCancelClick(e: MouseEvent): void {
       e.preventDefault()
       const { file } = props
       if (['finished', 'pending', 'error'].includes(file.status)) {
         handleRemove(file)
-      } else if (['uploading'].includes(file.status)) {
+      }
+      else if (['uploading'].includes(file.status)) {
         handleAbort(file)
-      } else {
+      }
+      else {
         warn('upload', 'The button clicked type is unknown.')
       }
     }
-    function handleDownloadClick (e: MouseEvent): void {
+    function handleDownloadClick(e: MouseEvent): void {
       e.preventDefault()
       handleDownload(props.file)
     }
-    function handleRemove (file: SettledFileInfo): void {
+    function handleRemove(file: UploadSettledFileInfo): void {
       const {
         xhrMap,
         doChange,
@@ -137,12 +150,14 @@ export default defineComponent({
       void Promise.resolve(
         onRemove
           ? onRemove({
-            file: Object.assign({}, file),
-            fileList: mergedFileList
-          })
+              file: Object.assign({}, file),
+              fileList: mergedFileList,
+              index: props.index
+            })
           : true
       ).then((result) => {
-        if (result === false) return
+        if (result === false)
+          return
         const fileAfterChange = Object.assign({}, file, {
           status: 'removed'
         })
@@ -152,35 +167,45 @@ export default defineComponent({
         })
       })
     }
-    function handleDownload (file: SettledFileInfo): void {
+    function handleDownload(file: UploadSettledFileInfo): void {
       const {
-        onDownloadRef: { value: onDownload }
+        onDownloadRef: { value: onDownload },
+        customDownloadRef: { value: customDownload }
       } = NUpload
       void Promise.resolve(
         onDownload ? onDownload(Object.assign({}, file)) : true
       ).then((res) => {
         if (res !== false) {
-          download(file.url, file.name)
+          if (customDownload) {
+            customDownload(Object.assign({}, file))
+          }
+          else {
+            download(file.url, file.name)
+          }
         }
       })
     }
-    function handleAbort (file: SettledFileInfo): void {
+    function handleAbort(file: UploadSettledFileInfo): void {
       const { xhrMap } = NUpload
       const xhr = xhrMap.get(file.id)
       xhr?.abort()
       handleRemove(Object.assign({}, file))
     }
-    function handlePreviewClick (): void {
+    function handlePreviewClick(e: MouseEvent): void {
       const {
         onPreviewRef: { value: onPreview }
       } = NUpload
 
       if (onPreview) {
-        onPreview(props.file)
-      } else if (props.listType === 'image-card') {
+        onPreview(props.file, {
+          event: e
+        })
+      }
+      else if (props.listType === 'image-card') {
         const { value } = imageRef
-        if (!value) return
-        value.click()
+        if (!value)
+          return
+        value.showPreview()
       }
     }
 
@@ -221,7 +246,7 @@ export default defineComponent({
       handlePreviewClick
     }
   },
-  render () {
+  render() {
     const { clsPrefix, mergedTheme, listType, file, renderIcon } = this
 
     // if there is text list type, show file icon
@@ -231,18 +256,18 @@ export default defineComponent({
     const isImageCardType = listType === 'image-card'
 
     if (isImageType || isImageCardType) {
-      icon =
-        !this.shouldUseThumbnailUrl(file) || !this.mergedThumbnailUrl ? (
+      icon
+        = !this.shouldUseThumbnailUrl(file) || !this.mergedThumbnailUrl ? (
           <span class={`${clsPrefix}-upload-file-info__thumbnail`}>
             {renderIcon ? (
               renderIcon(file)
             ) : isImageFile(file) ? (
               <NBaseIcon clsPrefix={clsPrefix}>
-                {{ default: () => imageIcon }}
+                {{ default: renderImageIcon }}
               </NBaseIcon>
             ) : (
               <NBaseIcon clsPrefix={clsPrefix}>
-                {{ default: () => documentIcon }}
+                {{ default: renderDocumentIcon }}
               </NBaseIcon>
             )}
           </span>
@@ -266,7 +291,8 @@ export default defineComponent({
             )}
           </a>
         )
-    } else {
+    }
+    else {
       icon = (
         <span class={`${clsPrefix}-upload-file-info__thumbnail`}>
           {renderIcon ? (
@@ -295,18 +321,18 @@ export default defineComponent({
         class={[
           `${clsPrefix}-upload-file`,
           `${clsPrefix}-upload-file--${this.progressStatus}-status`,
-          file.url &&
-            file.status !== 'error' &&
-            listType !== 'image-card' &&
-            `${clsPrefix}-upload-file--with-url`,
+          file.url
+          && file.status !== 'error'
+          && listType !== 'image-card'
+          && `${clsPrefix}-upload-file--with-url`,
           `${clsPrefix}-upload-file--${listType}-type`
         ]}
       >
         <div class={`${clsPrefix}-upload-file-info`}>
           {icon}
           <div class={`${clsPrefix}-upload-file-info__name`}>
-            {showName &&
-              (file.url && file.status !== 'error' ? (
+            {showName
+              && (file.url && file.status !== 'error' ? (
                 <a
                   rel="noopener noreferer"
                   target="_blank"
@@ -345,36 +371,36 @@ export default defineComponent({
                 }}
               </NButton>
             ) : null}
-            {(this.showRemoveButton || this.showCancelButton) &&
-              !this.disabled && (
-                <NButton
-                  key="cancelOrTrash"
-                  theme={mergedTheme.peers.Button}
-                  themeOverrides={mergedTheme.peerOverrides.Button}
-                  quaternary
-                  builtinThemeOverrides={buttonThemeOverrides}
-                  type={this.buttonType}
-                  onClick={this.handleRemoveOrCancelClick}
-                >
-                  {{
-                    icon: () => (
-                      <NIconSwitchTransition>
-                        {{
-                          default: () =>
-                            this.showRemoveButton ? (
-                              <NBaseIcon clsPrefix={clsPrefix} key="trash">
-                                {{ default: () => <TrashIcon /> }}
-                              </NBaseIcon>
-                            ) : (
-                              <NBaseIcon clsPrefix={clsPrefix} key="cancel">
-                                {{ default: () => <CancelIcon /> }}
-                              </NBaseIcon>
-                            )
-                        }}
-                      </NIconSwitchTransition>
-                    )
-                  }}
-                </NButton>
+            {(this.showRemoveButton || this.showCancelButton)
+              && !this.disabled && (
+              <NButton
+                key="cancelOrTrash"
+                theme={mergedTheme.peers.Button}
+                themeOverrides={mergedTheme.peerOverrides.Button}
+                quaternary
+                builtinThemeOverrides={buttonThemeOverrides}
+                type={this.buttonType}
+                onClick={this.handleRemoveOrCancelClick}
+              >
+                {{
+                  icon: () => (
+                    <NIconSwitchTransition>
+                      {{
+                        default: () =>
+                          this.showRemoveButton ? (
+                            <NBaseIcon clsPrefix={clsPrefix} key="trash">
+                              {{ default: () => <TrashIcon /> }}
+                            </NBaseIcon>
+                          ) : (
+                            <NBaseIcon clsPrefix={clsPrefix} key="cancel">
+                              {{ default: () => <CancelIcon /> }}
+                            </NBaseIcon>
+                          )
+                      }}
+                    </NIconSwitchTransition>
+                  )
+                }}
+              </NButton>
             )}
             {this.showRetryButton && !this.disabled && (
               <NButton

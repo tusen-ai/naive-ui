@@ -1,10 +1,18 @@
-import { h, defineComponent, inject } from 'vue'
+import type { SlotsType, VNode } from 'vue'
+import { defineComponent, h, inject } from 'vue'
 import { throwError } from '../../_utils'
 import { listInjectionKey } from './List'
 
+export interface ListItemSlots {
+  default?: () => VNode[]
+  prefix?: () => VNode[]
+  suffix?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'ListItem',
-  setup () {
+  slots: Object as SlotsType<ListItemSlots>,
+  setup() {
     const listInjection = inject(listInjectionKey, null)
     if (!listInjection) {
       throwError('list-item', '`n-list-item` must be placed in `n-list`.')
@@ -14,7 +22,7 @@ export default defineComponent({
       mergedClsPrefix: listInjection.mergedClsPrefixRef
     }
   },
-  render () {
+  render() {
     const { $slots, mergedClsPrefix } = this
     return (
       <li class={`${mergedClsPrefix}-list-item`}>

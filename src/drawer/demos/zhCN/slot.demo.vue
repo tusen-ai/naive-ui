@@ -2,6 +2,15 @@
 # 自定义头部和底部内容
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const active = ref(false)
+function activate() {
+  active.value = true
+}
+</script>
+
 <template>
   <n-button-group>
     <n-button @click="activate">
@@ -19,20 +28,3 @@
     </n-drawer-content>
   </n-drawer>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const active = ref(false)
-    const activate = () => {
-      active.value = true
-    }
-    return {
-      active,
-      activate
-    }
-  }
-})
-</script>

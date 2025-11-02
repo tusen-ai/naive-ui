@@ -1,9 +1,10 @@
-import { inject, computed, ComputedRef, Ref } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 import type {
-  RtlEnabledState,
+  Breakpoints,
   GlobalComponentConfig,
-  Breakpoints
+  RtlEnabledState
 } from '../config-provider/src/internal-interface'
+import { computed, inject, shallowRef } from 'vue'
 import { configProviderInjectionKey } from '../config-provider/src/context'
 
 type UseConfigProps = Readonly<{
@@ -13,7 +14,7 @@ type UseConfigProps = Readonly<{
 
 export const defaultClsPrefix = 'n'
 
-export default function useConfig (
+export default function useConfig(
   props: UseConfigProps = {},
   options: {
     defaultBordered?: boolean
@@ -21,14 +22,14 @@ export default function useConfig (
     defaultBordered: true
   }
 ): {
-    inlineThemeDisabled: boolean | undefined
-    mergedRtlRef: Ref<RtlEnabledState | undefined> | undefined
-    mergedBorderedRef: ComputedRef<boolean>
-    mergedClsPrefixRef: ComputedRef<string>
-    mergedBreakpointsRef: Ref<Breakpoints> | undefined
-    mergedComponentPropsRef: Ref<GlobalComponentConfig | undefined> | undefined
-    namespaceRef: ComputedRef<string | undefined>
-  } {
+  inlineThemeDisabled: boolean | undefined
+  mergedRtlRef: Ref<RtlEnabledState | undefined> | undefined
+  mergedBorderedRef: ComputedRef<boolean>
+  mergedClsPrefixRef: Ref<string>
+  mergedBreakpointsRef: Ref<Breakpoints> | undefined
+  mergedComponentPropsRef: Ref<GlobalComponentConfig | undefined> | undefined
+  namespaceRef: ComputedRef<string | undefined>
+} {
   const NConfigProvider = inject(configProviderInjectionKey, null)
   return {
     // NConfigProvider,
@@ -38,17 +39,24 @@ export default function useConfig (
     mergedBreakpointsRef: NConfigProvider?.mergedBreakpointsRef,
     mergedBorderedRef: computed(() => {
       const { bordered } = props
-      if (bordered !== undefined) return bordered
+      if (bordered !== undefined)
+        return bordered
       return (
-        NConfigProvider?.mergedBorderedRef.value ??
-        options.defaultBordered ??
-        true
+        NConfigProvider?.mergedBorderedRef.value
+        ?? options.defaultBordered
+        ?? true
       )
     }),
-    mergedClsPrefixRef: computed(() => {
-      const clsPrefix = NConfigProvider?.mergedClsPrefixRef.value
-      return clsPrefix || defaultClsPrefix
-    }),
+    mergedClsPrefixRef: NConfigProvider
+      ? NConfigProvider.mergedClsPrefixRef
+      : shallowRef(defaultClsPrefix),
     namespaceRef: computed(() => NConfigProvider?.mergedNamespaceRef.value)
   }
+}
+
+export function useMergedClsPrefix(): Ref<string> {
+  const NConfigProvider = inject(configProviderInjectionKey, null)
+  return NConfigProvider
+    ? NConfigProvider.mergedClsPrefixRef
+    : shallowRef(defaultClsPrefix)
 }

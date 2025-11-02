@@ -34,6 +34,13 @@ If `theme` is `undefined` it won't affect the theme of components inside.
   })
 </script>
 ```
+You may need to include `<n-global-style />` if you want to apply the dark theme globally, not just to the components.
+
+To learn more, see [n-global-style](../docs/customize-theme#Sync-style-of-the-body-element).
+
+## Get theme vars
+
+Whether it's the default light theme (`lightTheme`), the modified dark theme (`darkTheme`), or the custom theme we adjusted, you can get theme variables within the scope of the theme using [useThemeVars](./theme#use-theme-vars).
 
 ## Customizing theme vars (design tokens)
 

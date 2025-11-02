@@ -1,5 +1,5 @@
-import {
-  useDialog as _useDialog,
+import { useDialog as _useDialog } from 'naive-ui'
+import type {
   DialogOptions,
   DialogReactive,
   DialogApi

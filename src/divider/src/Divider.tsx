@@ -1,16 +1,10 @@
-import {
-  h,
-  computed,
-  defineComponent,
-  CSSProperties,
-  PropType,
-  Fragment
-} from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import type { CSSProperties, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { dividerLight } from '../styles'
 import type { DividerTheme } from '../styles'
+import { computed, defineComponent, Fragment, h } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { dividerLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const dividerProps = {
@@ -28,7 +22,7 @@ export type DividerProps = ExtractPublicPropTypes<typeof dividerProps>
 export default defineComponent({
   name: 'Divider',
   props: dividerProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Divider',
@@ -60,7 +54,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const {
       $slots,
       titlePlacement,

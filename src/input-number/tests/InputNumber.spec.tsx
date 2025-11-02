@@ -1,7 +1,7 @@
-import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NInputNumber } from '../index'
+import { h } from 'vue'
 import { NButton } from '../../button'
+import { NInputNumber } from '../index'
 
 describe('n-input-number', () => {
   it('should work with import on demand', () => {
@@ -41,7 +41,7 @@ describe('n-input-number', () => {
   })
 
   it('should not trigger update if value is same', async () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = mount(NInputNumber, {
       attachTo: document.body,
       props: {
@@ -56,8 +56,8 @@ describe('n-input-number', () => {
   })
 
   it('trigger focus & blur event', () => {
-    const onFocus = jest.fn()
-    const onBlur = jest.fn()
+    const onFocus = vi.fn()
+    const onBlur = vi.fn()
     const wrapper = mount(NInputNumber, {
       attachTo: document.body,
       props: {
@@ -81,6 +81,7 @@ describe('n-input-number', () => {
     expect(wrapper.find('.n-input__suffix').exists()).toBe(true)
     expect(wrapper.find('.n-input-number-suffix').exists()).toBe(true)
     expect(wrapper.find('.n-input-number-suffix').text()).toBe('%')
+    wrapper.unmount()
   })
   it('should work with decimal `step`', async () => {
     const wrapper = mount(NInputNumber, {
@@ -115,6 +116,7 @@ describe('n-input-number', () => {
       )
     }
     expect(addBtn.classes()).toContain('n-button--disabled')
+    wrapper.unmount()
   })
 
   it('should work with decimal value', async () => {
@@ -155,7 +157,7 @@ describe('n-input-number', () => {
   })
 
   it('should work with `updateValueOnInput` prop', async () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = mount(NInputNumber, {
       attachTo: document.body,
       props: {
@@ -190,7 +192,7 @@ describe('n-input-number', () => {
   })
 
   it('should work with negative decimal value', async () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = mount(NInputNumber, {
       attachTo: document.body,
       props: {
@@ -214,7 +216,7 @@ describe('n-input-number', () => {
   })
 
   it('should work with decimal value ends at 0', async () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = mount(NInputNumber, {
       attachTo: document.body,
       props: {
@@ -247,7 +249,7 @@ describe('n-input-number', () => {
   })
 
   it('should work with integer value ends with 0', async () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = mount(NInputNumber, {
       attachTo: document.body,
       props: {
@@ -272,5 +274,13 @@ describe('n-input-number', () => {
       )
       wrapper.unmount()
     })
+  })
+
+  it('should work with `input-props` prop', async () => {
+    const wrapper = mount(NInputNumber, {
+      props: { inputProps: { id: 'i am an id' } }
+    })
+    expect(wrapper.find('input').element.id).toEqual('i am an id')
+    wrapper.unmount()
   })
 })

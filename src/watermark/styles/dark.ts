@@ -1,10 +1,10 @@
-import { commonDark } from '../../_styles/common'
 import type { WatermarkTheme } from './light'
+import { commonDark } from '../../_styles/common'
 
 const watermarkDark: WatermarkTheme = {
   name: 'Watermark',
   common: commonDark,
-  self (vars) {
+  self(vars) {
     const { fontFamily } = vars
     return {
       fontFamily

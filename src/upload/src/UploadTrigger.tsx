@@ -1,17 +1,24 @@
-import { h, defineComponent, inject, computed } from 'vue'
-import { AddIcon } from '../../_internal/icons'
+import type { SlotsType, VNode } from 'vue'
+import type { UploadTriggerDefaultSlotOptions } from './interface'
+import { computed, defineComponent, h, inject } from 'vue'
 import { NBaseIcon } from '../../_internal'
+import { AddIcon } from '../../_internal/icons'
 import { resolveSlot, throwError } from '../../_utils'
 import { uploadInjectionKey } from './interface'
-import { getFilesFromEntries } from './utils'
 import NUploadDragger from './UploadDragger'
+import { getFilesFromEntries } from './utils'
+
+export interface UploadTriggerSlots {
+  default?: (options: UploadTriggerDefaultSlotOptions) => VNode[]
+}
 
 export default defineComponent({
   name: 'UploadTrigger',
   props: {
     abstract: Boolean
   },
-  setup (props, { slots }) {
+  slots: Object as SlotsType<UploadTriggerSlots>,
+  setup(props, { slots }) {
     const NUpload = inject(uploadInjectionKey, null)
     if (!NUpload) {
       throwError(
@@ -19,7 +26,6 @@ export default defineComponent({
         '`n-upload-trigger` must be placed inside `n-upload`.'
       )
     }
-
     const {
       mergedClsPrefixRef,
       mergedDisabledRef,
@@ -30,6 +36,7 @@ export default defineComponent({
       draggerInsideRef,
       handleFileAddition,
       mergedDirectoryDndRef,
+      triggerClassRef,
       triggerStyleRef
     } = NUpload
 
@@ -37,28 +44,29 @@ export default defineComponent({
       () => listTypeRef.value === 'image-card'
     )
 
-    function handleTriggerClick (): void {
-      if (mergedDisabledRef.value || maxReachedRef.value) return
+    function handleTriggerClick(): void {
+      if (mergedDisabledRef.value || maxReachedRef.value)
+        return
       openOpenFileDialog()
     }
-    function handleTriggerDragOver (e: DragEvent): void {
+    function handleTriggerDragOver(e: DragEvent): void {
       e.preventDefault()
       dragOverRef.value = true
     }
-    function handleTriggerDragEnter (e: DragEvent): void {
+    function handleTriggerDragEnter(e: DragEvent): void {
       e.preventDefault()
       dragOverRef.value = true
     }
-    function handleTriggerDragLeave (e: DragEvent): void {
+    function handleTriggerDragLeave(e: DragEvent): void {
       e.preventDefault()
       dragOverRef.value = false
     }
-    function handleTriggerDrop (e: DragEvent): void {
+    function handleTriggerDrop(e: DragEvent): void {
       e.preventDefault()
       if (
-        !draggerInsideRef.value ||
-        mergedDisabledRef.value ||
-        maxReachedRef.value
+        !draggerInsideRef.value
+        || mergedDisabledRef.value
+        || maxReachedRef.value
       ) {
         dragOverRef.value = false
         return
@@ -66,7 +74,7 @@ export default defineComponent({
       const dataTransferItems = e.dataTransfer?.items
       if (dataTransferItems?.length) {
         void getFilesFromEntries(
-          Array.from(dataTransferItems).map((item) => item.webkitGetAsEntry()),
+          Array.from(dataTransferItems).map(item => item.webkitGetAsEntry()),
           mergedDirectoryDndRef.value
         )
           .then((files) => {
@@ -75,7 +83,8 @@ export default defineComponent({
           .finally(() => {
             dragOverRef.value = false
           })
-      } else {
+      }
+      else {
         dragOverRef.value = false
       }
     }
@@ -94,10 +103,11 @@ export default defineComponent({
         <div
           class={[
             `${mergedClsPrefix}-upload-trigger`,
-            (mergedDisabledRef.value || maxReachedRef.value) &&
-              `${mergedClsPrefix}-upload-trigger--disabled`,
-            isImageCardTypeRef.value &&
-              `${mergedClsPrefix}-upload-trigger--image-card`
+            (mergedDisabledRef.value || maxReachedRef.value)
+            && `${mergedClsPrefix}-upload-trigger--disabled`,
+            isImageCardTypeRef.value
+            && `${mergedClsPrefix}-upload-trigger--image-card`,
+            triggerClassRef.value
           ]}
           style={triggerStyleRef.value}
           onClick={handleTriggerClick}

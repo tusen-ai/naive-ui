@@ -1,36 +1,26 @@
-import {
-  h,
-  defineComponent,
-  computed,
-  PropType,
-  VNode,
-  provide,
-  ref,
-  toRef,
-  VNodeChild,
-  CSSProperties
-} from 'vue'
-import { useMergedState } from 'vooks'
-import { useTheme, useFormItem, useConfig, useThemeClass } from '../../_mixins'
+import type { CSSProperties, PropType, VNode, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import { getSlot, warn, createKey, call, flatten } from '../../_utils'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { radioLight } from '../styles'
 import type { RadioTheme } from '../styles'
-import type { RadioProps } from './use-radio'
-import { radioGroupInjectionKey } from './use-radio'
-import style from './styles/radio-group.cssr'
-import { OnUpdateValue, OnUpdateValueImpl } from './interface'
+import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
+import type { RadioBaseProps } from './use-radio'
+import { useMergedState } from 'vooks'
+import { computed, defineComponent, h, provide, ref, toRef } from 'vue'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
+import { call, createKey, flatten, getSlot, warn } from '../../_utils'
+import { radioLight } from '../styles'
+import style from './styles/radio-group.cssr'
+import { radioGroupInjectionKey } from './use-radio'
 
-function mapSlot (
+function mapSlot(
   defaultSlot: VNode[],
   value: string | number | boolean | null,
   clsPrefix: string
 ): {
-    children: VNodeChild[]
-    isButtonGroup: boolean
-  } {
+  children: VNodeChild[]
+  isButtonGroup: boolean
+} {
   const children: VNode[] = []
   let isButtonGroup = false
   for (let i = 0; i < defaultSlot.length; ++i) {
@@ -46,19 +36,20 @@ function mapSlot (
       )
       continue
     }
-    const instanceProps: RadioProps = wrappedInstance.props as any
+    const instanceProps: RadioBaseProps = wrappedInstance.props as any
     if (name !== 'RadioButton') {
       children.push(wrappedInstance)
       continue
     }
     if (i === 0) {
       children.push(wrappedInstance)
-    } else {
-      const lastInstanceProps: RadioProps = children[children.length - 1]
+    }
+    else {
+      const lastInstanceProps: RadioBaseProps = children[children.length - 1]
         .props as any
       const lastInstanceChecked = value === lastInstanceProps.value
-      const lastInstanceDisabled: boolean | undefined =
-        lastInstanceProps.disabled
+      const lastInstanceDisabled: boolean | undefined
+        = lastInstanceProps.disabled
       const currentInstanceChecked = value === instanceProps.value
       const currentInstanceDisabled = instanceProps.disabled
       /**
@@ -68,10 +59,10 @@ function mapSlot (
        * !disabled !checked >
        *  disabled !checked
        */
-      const lastInstancePriority: number =
-        (lastInstanceChecked ? 2 : 0) + (!lastInstanceDisabled ? 1 : 0)
-      const currentInstancePriority =
-        (currentInstanceChecked ? 2 : 0) + (!currentInstanceDisabled ? 1 : 0)
+      const lastInstancePriority: number
+        = (lastInstanceChecked ? 2 : 0) + (!lastInstanceDisabled ? 1 : 0)
+      const currentInstancePriority
+        = (currentInstanceChecked ? 2 : 0) + (!currentInstanceDisabled ? 1 : 0)
       const lastInstanceClass = {
         [`${clsPrefix}-radio-group__splitor--disabled`]: lastInstanceDisabled,
         [`${clsPrefix}-radio-group__splitor--checked`]: lastInstanceChecked
@@ -81,8 +72,8 @@ function mapSlot (
           currentInstanceDisabled,
         [`${clsPrefix}-radio-group__splitor--checked`]: currentInstanceChecked
       }
-      const splitorClass =
-        lastInstancePriority < currentInstancePriority
+      const splitorClass
+        = lastInstancePriority < currentInstancePriority
           ? currentInstanceClass
           : lastInstanceClass
       children.push(
@@ -101,11 +92,11 @@ export const radioGroupProps = {
   ...(useTheme.props as ThemeProps<RadioTheme>),
   name: String,
   value: [String, Number, Boolean] as PropType<
-  string | number | boolean | null
+    string | number | boolean | null
   >,
   defaultValue: {
     type: [String, Number, Boolean] as PropType<
-    string | number | boolean | null
+      string | number | boolean | null
     >,
     default: null
   },
@@ -123,7 +114,7 @@ export type RadioGroupProps = ExtractPublicPropTypes<typeof radioGroupProps>
 export default defineComponent({
   name: 'RadioGroup',
   props: radioGroupProps,
-  setup (props) {
+  setup(props) {
     const selfElRef = ref<HTMLDivElement | null>(null)
     const {
       mergedSizeRef,
@@ -133,8 +124,8 @@ export default defineComponent({
       nTriggerFormBlur,
       nTriggerFormFocus
     } = useFormItem(props)
-    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
-      useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
+      = useConfig(props)
     const themeRef = useTheme(
       'Radio',
       '-radio-group',
@@ -149,7 +140,7 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
-    function doUpdateValue (value: string | number | boolean): void {
+    function doUpdateValue(value: string | number | boolean): void {
       const { onUpdateValue, 'onUpdate:value': _onUpdateValue } = props
       if (onUpdateValue) {
         call(onUpdateValue as OnUpdateValueImpl, value)
@@ -161,16 +152,20 @@ export default defineComponent({
       nTriggerFormChange()
       nTriggerFormInput()
     }
-    function handleFocusin (e: FocusEvent): void {
+    function handleFocusin(e: FocusEvent): void {
       const { value: selfEl } = selfElRef
-      if (!selfEl) return
-      if (selfEl.contains(e.relatedTarget as HTMLElement | null)) return
+      if (!selfEl)
+        return
+      if (selfEl.contains(e.relatedTarget as HTMLElement | null))
+        return
       nTriggerFormFocus()
     }
-    function handleFocusout (e: FocusEvent): void {
+    function handleFocusout(e: FocusEvent): void {
       const { value: selfEl } = selfElRef
-      if (!selfEl) return
-      if (selfEl.contains(e.relatedTarget as HTMLElement | null)) return
+      if (!selfEl)
+        return
+      if (selfEl.contains(e.relatedTarget as HTMLElement | null))
+        return
       nTriggerFormBlur()
     }
     provide(radioGroupInjectionKey, {
@@ -193,6 +188,7 @@ export default defineComponent({
           buttonBoxShadow,
           buttonBoxShadowFocus,
           buttonBoxShadowHover,
+          buttonColor,
           buttonColorActive,
           buttonTextColor,
           buttonTextColorActive,
@@ -211,6 +207,7 @@ export default defineComponent({
         '--n-button-box-shadow': buttonBoxShadow,
         '--n-button-box-shadow-focus': buttonBoxShadowFocus,
         '--n-button-box-shadow-hover': buttonBoxShadowHover,
+        '--n-button-color': buttonColor,
         '--n-button-color-active': buttonColorActive,
         '--n-button-text-color': buttonTextColor,
         '--n-button-text-color-hover': buttonTextColorHover,
@@ -221,11 +218,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'radio-group',
-        computed(() => mergedSizeRef.value[0]),
-        cssVarsRef,
-        props
-      )
+          'radio-group',
+          computed(() => mergedSizeRef.value[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       selfElRef,
@@ -239,7 +236,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedValue, mergedClsPrefix, handleFocusin, handleFocusout } = this
     const { children, isButtonGroup } = mapSlot(
       flatten(getSlot(this)),

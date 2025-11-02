@@ -1,6 +1,6 @@
-import { c, cM, cB, cE } from '../../../_utils/cssr'
 import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-in-height-expand.cssr'
 import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.cssr'
+import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 export default c([
   cB('upload', 'width: 100%;', [
@@ -321,7 +321,7 @@ export default c([
     ])
   ]),
   cB('upload-file-input', `
-    display: block;
+    display: none;
     width: 0;
     height: 0;
     opacity: 0;

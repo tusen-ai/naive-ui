@@ -1,13 +1,12 @@
+import type { PropType, VNodeChild } from 'vue'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import {
   defineComponent,
-  onMounted,
   onBeforeUnmount,
-  PropType,
-  watchEffect,
-  VNodeChild,
-  ref
+  onMounted,
+  ref,
+  watchEffect
 } from 'vue'
-import type { ExtractPublicPropTypes } from '../../_utils'
 
 export interface CountdownTimeInfo {
   hours: number
@@ -42,7 +41,7 @@ export type CountdownProps = ExtractPublicPropTypes<typeof countdownProps>
 export default defineComponent({
   name: 'Countdown',
   props: countdownProps,
-  setup (props) {
+  setup(props) {
     let timerId: number | null = null
     let elapsed = 0
     let finished = false
@@ -55,11 +54,11 @@ export default defineComponent({
 
     let pnow = -1
 
-    function getDistance (time: DOMHighResTimeStamp): number {
+    function getDistance(time: DOMHighResTimeStamp): number {
       return props.duration - elapsed + pnow - time
     }
 
-    function getTimeInfo (distance: number): CountdownTimeInfo {
+    function getTimeInfo(distance: number): CountdownTimeInfo {
       const hours = Math.floor(distance / 3600000)
       const minutes = Math.floor((distance % 3600000) / 60000)
       const seconds = Math.floor((distance % 60000) / 1000)
@@ -72,7 +71,7 @@ export default defineComponent({
       }
     }
 
-    function getDisplayValue (info: CountdownTimeInfo): string {
+    function getDisplayValue(info: CountdownTimeInfo): string {
       const { hours, minutes, seconds, milliseconds } = info
       const { precision } = props
       switch (precision) {
@@ -123,7 +122,7 @@ export default defineComponent({
       }, leftTime)
     }
 
-    const stopTimer = (): void => {
+    function stopTimer(): void {
       if (timerId !== null) {
         window.clearTimeout(timerId)
         timerId = null
@@ -134,7 +133,8 @@ export default defineComponent({
         if (props.active) {
           pnow = performance.now()
           frame()
-        } else {
+        }
+        else {
           const now = performance.now()
           if (pnow !== -1) {
             elapsed += now - pnow
@@ -147,7 +147,7 @@ export default defineComponent({
       stopTimer()
     })
 
-    function reset (): void {
+    function reset(): void {
       distanceRef.value = props.duration
       elapsed = 0
       pnow = performance.now()
@@ -166,7 +166,7 @@ export default defineComponent({
       getDisplayValue
     })
   },
-  render () {
+  render() {
     const { render, precision, distance, getTimeInfo, getDisplayValue } = this
     let timeInfo: CountdownTimeInfo
     switch (precision) {
@@ -187,7 +187,8 @@ export default defineComponent({
     }
     if (render) {
       return render(timeInfo)
-    } else {
+    }
+    else {
       return getDisplayValue(timeInfo)
     }
   }

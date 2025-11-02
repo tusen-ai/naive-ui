@@ -1,46 +1,40 @@
+import type { CSSProperties, PropType } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { CheckboxTheme } from '../styles'
+import type {
+  CheckboxInst,
+  OnUpdateChecked,
+  OnUpdateCheckedImpl
+} from './interface'
+import { on } from 'evtd'
+import { createId } from 'seemly'
+import { useMemo, useMergedState } from 'vooks'
 import {
-  h,
-  defineComponent,
   computed,
+  defineComponent,
+  h,
   inject,
   ref,
   toRef,
-  PropType,
-  CSSProperties,
   watchEffect
 } from 'vue'
-import { useMergedState, useMemo } from 'vooks'
-import { createId } from 'seemly'
-import { on } from 'evtd'
-import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import { NIconSwitchTransition } from '../../_internal'
-import {
-  call,
-  createKey,
-  MaybeArray,
-  ExtractPublicPropTypes,
-  warnOnce
-} from '../../_utils'
-import { checkboxLight } from '../styles'
-import type { CheckboxTheme } from '../styles'
-import CheckMark from './CheckMark'
-import LineMark from './LineMark'
-import { checkboxGroupInjectionKey } from './CheckboxGroup'
-import type {
-  OnUpdateChecked,
-  OnUpdateCheckedImpl,
-  CheckboxInst
-} from './interface'
-import style from './styles/index.cssr'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
+import { call, createKey, resolveWrappedSlot, warnOnce } from '../../_utils'
+import { checkboxLight } from '../styles'
+import { checkboxGroupInjectionKey } from './CheckboxGroup'
+import renderCheckMark from './CheckMark'
+import renderLineMark from './LineMark'
+import style from './styles/index.cssr'
 
 export const checkboxProps = {
   ...(useTheme.props as ThemeProps<CheckboxTheme>),
   size: String as PropType<'small' | 'medium' | 'large'>,
   checked: {
     type: [Boolean, String, Number] as PropType<
-    boolean | string | number | undefined
+      boolean | string | number | undefined
     >,
     default: undefined
   },
@@ -68,7 +62,7 @@ export const checkboxProps = {
     default: false
   },
   'onUpdate:checked': [Function, Array] as PropType<
-  MaybeArray<OnUpdateChecked>
+    MaybeArray<OnUpdateChecked>
   >,
   onUpdateChecked: [Function, Array] as PropType<MaybeArray<OnUpdateChecked>>,
   // private
@@ -82,7 +76,7 @@ export type CheckboxProps = ExtractPublicPropTypes<typeof checkboxProps>
 export default defineComponent({
   name: 'Checkbox',
   props: checkboxProps,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.onChange) {
@@ -93,60 +87,10 @@ export default defineComponent({
         }
       })
     }
-    const selfRef = ref<HTMLDivElement | null>(null)
-    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
-      useConfig(props)
-    const formItem = useFormItem(props, {
-      mergedSize (NFormItem) {
-        const { size } = props
-        if (size !== undefined) return size
-        if (NCheckboxGroup) {
-          const { value: mergedSize } = NCheckboxGroup.mergedSizeRef
-          if (mergedSize !== undefined) {
-            return mergedSize
-          }
-        }
-        if (NFormItem) {
-          const { mergedSize } = NFormItem
-          if (mergedSize !== undefined) return mergedSize.value
-        }
-        return 'medium'
-      },
-      mergedDisabled (NFormItem) {
-        const { disabled } = props
-        if (disabled !== undefined) return disabled
-        if (NCheckboxGroup) {
-          if (NCheckboxGroup.disabledRef.value) return true
-          const {
-            maxRef: { value: max },
-            checkedCountRef
-          } = NCheckboxGroup
-          if (
-            max !== undefined &&
-            checkedCountRef.value >= max &&
-            !renderedCheckedRef.value
-          ) {
-            return true
-          }
-          const {
-            minRef: { value: min }
-          } = NCheckboxGroup
-          if (
-            min !== undefined &&
-            checkedCountRef.value <= min &&
-            renderedCheckedRef.value
-          ) {
-            return true
-          }
-        }
-        if (NFormItem) {
-          return NFormItem.disabled.value
-        }
-        return false
-      }
-    })
-    const { mergedDisabledRef, mergedSizeRef } = formItem
     const NCheckboxGroup = inject(checkboxGroupInjectionKey, null)
+    const selfRef = ref<HTMLDivElement | null>(null)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
+      = useConfig(props)
     const uncontrolledCheckedRef = ref(props.defaultChecked)
     const controlledCheckedRef = toRef(props, 'checked')
     const mergedCheckedRef = useMergedState(
@@ -160,10 +104,65 @@ export default defineComponent({
           return groupValueSet.has(props.value)
         }
         return false
-      } else {
+      }
+      else {
         return mergedCheckedRef.value === props.checkedValue
       }
     })
+    const formItem = useFormItem(props, {
+      mergedSize(NFormItem) {
+        const { size } = props
+        if (size !== undefined)
+          return size
+        if (NCheckboxGroup) {
+          const { value: mergedSize } = NCheckboxGroup.mergedSizeRef
+          if (mergedSize !== undefined) {
+            return mergedSize
+          }
+        }
+        if (NFormItem) {
+          const { mergedSize } = NFormItem
+          if (mergedSize !== undefined)
+            return mergedSize.value
+        }
+        return 'medium'
+      },
+      mergedDisabled(NFormItem) {
+        const { disabled } = props
+        if (disabled !== undefined)
+          return disabled
+        if (NCheckboxGroup) {
+          if (NCheckboxGroup.disabledRef.value)
+            return true
+          const {
+            maxRef: { value: max },
+            checkedCountRef
+          } = NCheckboxGroup
+          if (
+            max !== undefined
+            && checkedCountRef.value >= max
+            && !renderedCheckedRef.value
+          ) {
+            return true
+          }
+          const {
+            minRef: { value: min }
+          } = NCheckboxGroup
+          if (
+            min !== undefined
+            && checkedCountRef.value <= min
+            && renderedCheckedRef.value
+          ) {
+            return true
+          }
+        }
+        if (NFormItem) {
+          return NFormItem.disabled.value
+        }
+        return false
+      }
+    })
+    const { mergedDisabledRef, mergedSizeRef } = formItem
     const themeRef = useTheme(
       'Checkbox',
       '-checkbox',
@@ -172,10 +171,11 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    function toggle (e: MouseEvent | KeyboardEvent): void {
+    function toggle(e: MouseEvent | KeyboardEvent): void {
       if (NCheckboxGroup && props.value !== undefined) {
         NCheckboxGroup.toggleCheckbox(!renderedCheckedRef.value, props.value)
-      } else {
+      }
+      else {
         const {
           onChange,
           'onUpdate:checked': _onUpdateCheck,
@@ -191,26 +191,28 @@ export default defineComponent({
         if (onUpdateChecked) {
           call(onUpdateChecked as OnUpdateCheckedImpl, nextChecked, e)
         }
-        if (onChange) call(onChange as OnUpdateCheckedImpl, nextChecked, e) // deprecated
+        if (onChange)
+          call(onChange as OnUpdateCheckedImpl, nextChecked, e) // deprecated
         nTriggerFormInput()
         nTriggerFormChange()
         uncontrolledCheckedRef.value = nextChecked
       }
     }
-    function handleClick (e: MouseEvent): void {
+    function handleClick(e: MouseEvent): void {
       if (!mergedDisabledRef.value) {
         toggle(e)
       }
     }
-    function handleKeyUp (e: KeyboardEvent): void {
-      if (mergedDisabledRef.value) return
+    function handleKeyUp(e: KeyboardEvent): void {
+      if (mergedDisabledRef.value)
+        return
       switch (e.key) {
         case ' ':
         case 'Enter':
           toggle(e)
       }
     }
-    function handleKeyDown (e: KeyboardEvent): void {
+    function handleKeyDown(e: KeyboardEvent): void {
       switch (e.key) {
         case ' ':
           e.preventDefault()
@@ -286,11 +288,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'checkbox',
-        computed(() => mergedSizeRef.value[0]),
-        cssVarsRef,
-        props
-      )
+          'checkbox',
+          computed(() => mergedSizeRef.value[0]),
+          cssVarsRef,
+          props
+        )
       : undefined
     return Object.assign(formItem, exposedMethods, {
       rtlEnabled: rtlEnabledRef,
@@ -308,7 +310,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     })
   },
-  render () {
+  render() {
     const {
       $slots,
       renderedChecked,
@@ -325,6 +327,16 @@ export default defineComponent({
       handleClick
     } = this
     this.onRender?.()
+    const labelNode = resolveWrappedSlot($slots.default, (children) => {
+      if (label || children) {
+        return (
+          <span class={`${mergedClsPrefix}-checkbox__label`} id={labelId}>
+            {label || children}
+          </span>
+        )
+      }
+      return null
+    })
     return (
       <div
         ref="selfRef"
@@ -335,7 +347,8 @@ export default defineComponent({
           renderedChecked && `${mergedClsPrefix}-checkbox--checked`,
           mergedDisabled && `${mergedClsPrefix}-checkbox--disabled`,
           indeterminate && `${mergedClsPrefix}-checkbox--indeterminate`,
-          privateInsideTable && `${mergedClsPrefix}-checkbox--inside-table`
+          privateInsideTable && `${mergedClsPrefix}-checkbox--inside-table`,
+          labelNode && `${mergedClsPrefix}-checkbox--show-label`
         ]}
         tabindex={mergedDisabled || !focusable ? undefined : 0}
         role="checkbox"
@@ -369,11 +382,11 @@ export default defineComponent({
                       key="indeterminate"
                       class={`${mergedClsPrefix}-checkbox-icon`}
                     >
-                      {LineMark}
+                      {renderLineMark()}
                     </div>
                   ) : (
                     <div key="check" class={`${mergedClsPrefix}-checkbox-icon`}>
-                      {CheckMark}
+                      {renderCheckMark()}
                     </div>
                   )
               }}
@@ -381,11 +394,7 @@ export default defineComponent({
             <div class={`${mergedClsPrefix}-checkbox-box__border`} />
           </div>
         </div>
-        {label !== null || $slots.default ? (
-          <span class={`${mergedClsPrefix}-checkbox__label`} id={labelId}>
-            {$slots.default ? $slots.default() : label}
-          </span>
-        ) : null}
+        {labelNode}
       </div>
     )
   }

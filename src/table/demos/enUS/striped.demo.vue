@@ -8,7 +8,7 @@
       <thead>
         <tr>
           <th>Abandon</th>
-          <th>Abormal</th>
+          <th>Abnormal</th>
           <th>Abolish</th>
           <th>...</th>
           <th>It's hard to learn words</th>

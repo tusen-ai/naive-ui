@@ -1,5 +1,5 @@
-import eo from 'date-fns/esm/locale/eo'
-import { NDateLocale } from './enUS'
+import type { NDateLocale } from './enUS'
+import { eo } from 'date-fns/locale'
 
 const dateEo: NDateLocale = {
   name: 'eo',

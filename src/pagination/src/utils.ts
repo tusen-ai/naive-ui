@@ -1,14 +1,31 @@
-function createPageItemsInfo (
+import type { PaginationProps } from './Pagination'
+
+export function getDefaultPageSize(
+  paginationProps: PaginationProps | false
+): number {
+  if (!paginationProps)
+    return 10
+  const { defaultPageSize } = paginationProps
+  if (defaultPageSize !== undefined)
+    return defaultPageSize
+  const pageSizeOption = paginationProps.pageSizes?.[0]
+  if (typeof pageSizeOption === 'number')
+    return pageSizeOption
+  return pageSizeOption?.value || 10
+}
+
+function createPageItemsInfo(
   currentPage: number,
   pageCount: number,
-  pageSlot: number
+  pageSlot: number,
+  showQuickJumpDropdown: boolean
 ): {
-    hasFastBackward: boolean
-    hasFastForward: boolean
-    fastBackwardTo: number
-    fastForwardTo: number
-    items: PageItem[]
-  } {
+  hasFastBackward: boolean
+  hasFastForward: boolean
+  fastBackwardTo: number
+  fastForwardTo: number
+  items: PageItem[]
+} {
   let hasFastBackward = false
   let hasFastForward = false
   let fastBackwardTo = 1
@@ -71,8 +88,10 @@ function createPageItemsInfo (
   )
   let leftSplit = false
   let rightSplit = false
-  if (middleStart > firstPage + 2) leftSplit = true
-  if (middleEnd < lastPage - 2) rightSplit = true
+  if (middleStart > firstPage + 2)
+    leftSplit = true
+  if (middleEnd < lastPage - 2)
+    rightSplit = true
   const items: PageItem[] = []
   items.push({
     type: 'page',
@@ -88,9 +107,12 @@ function createPageItemsInfo (
       type: 'fast-backward',
       active: false,
       label: undefined,
-      options: createRange(firstPage + 1, middleStart - 1)
+      options: showQuickJumpDropdown
+        ? createRange(firstPage + 1, middleStart - 1)
+        : null
     })
-  } else if (lastPage >= firstPage + 1) {
+  }
+  else if (lastPage >= firstPage + 1) {
     items.push({
       type: 'page',
       label: firstPage + 1,
@@ -115,11 +137,14 @@ function createPageItemsInfo (
       type: 'fast-forward',
       active: false,
       label: undefined,
-      options: createRange(middleEnd + 1, lastPage - 1)
+      options: showQuickJumpDropdown
+        ? createRange(middleEnd + 1, lastPage - 1)
+        : null
     })
-  } else if (
-    middleEnd === lastPage - 2 &&
-    items[items.length - 1].label !== lastPage - 1
+  }
+  else if (
+    middleEnd === lastPage - 2
+    && items[items.length - 1].label !== lastPage - 1
   ) {
     items.push({
       type: 'page',
@@ -147,12 +172,12 @@ function createPageItemsInfo (
   }
 }
 
-export type PageItem =
-  | {
+export type PageItem
+  = | {
     type: 'fast-backward' | 'fast-forward'
     label: undefined
     active: false
-    options: Array<{ label: string, value: number }>
+    options: Array<{ label: string, value: number }> | null
   }
   | {
     type: 'page'
@@ -162,7 +187,7 @@ export type PageItem =
     mayBeFastBackward: boolean
   }
 
-function createRange (
+function createRange(
   from: number,
   to: number
 ): Array<{ label: string, value: number }> {

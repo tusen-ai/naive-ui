@@ -1,4 +1,4 @@
-import { h, defineComponent } from 'vue'
+import { defineComponent, h } from 'vue'
 import { NBaseLoading } from '../../_internal'
 import { useLocale } from '../../_mixins'
 
@@ -10,12 +10,12 @@ export default defineComponent({
       required: true
     }
   },
-  setup () {
+  setup() {
     return {
       locale: useLocale('Log').localeRef
     }
   },
-  render () {
+  render() {
     const { clsPrefix } = this
     return (
       <div class={`${clsPrefix}-log-loader`}>

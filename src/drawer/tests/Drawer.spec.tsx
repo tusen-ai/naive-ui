@@ -1,26 +1,22 @@
+import type { DrawerContentProps, DrawerProps } from '../index'
 import { mount } from '@vue/test-utils'
 import { defineComponent, h, nextTick, ref } from 'vue'
 import { NButton } from '../../button'
-import {
-  DrawerContentProps,
-  DrawerProps,
-  NDrawer,
-  NDrawerContent
-} from '../index'
+import { NDrawer, NDrawerContent } from '../index'
 
 // It seems due to special handling of transition in naive-ui, the drawer's DOM
 // won't disappear even if its `show` prop is false. No time to find out the
 // exact reason, so I create a util here.
-function expectDrawerExists (): void {
+function expectDrawerExists(): void {
   const drawer = document.querySelector('.n-drawer')
-  if (drawer !== null) return
+  if (drawer !== null)
+    return
   expect(
     (document.querySelector('.n-drawer') as HTMLElement).style.display
   ).toEqual('none')
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function mountDrawer ({
+function mountDrawer({
   drawerProps,
   drawerContentProps,
   hasOnUpdateShow,
@@ -33,12 +29,12 @@ function mountDrawer ({
 }) {
   return mount(
     defineComponent({
-      setup () {
+      setup() {
         return {
           show: ref(!!show)
         }
       },
-      render () {
+      render() {
         return [
           <NButton
             onClick={() => {
@@ -126,12 +122,12 @@ describe('n-drawer', () => {
   })
 
   it('should work with `show` prop', async () => {
-    const wrapper1 = await mountDrawer({
+    const wrapper1 = mountDrawer({
       show: false
     })
     expect(document.querySelector('.n-drawer')).toEqual(null)
     wrapper1.unmount()
-    const wrapper2 = await mountDrawer({
+    const wrapper2 = mountDrawer({
       show: true
     })
     expect(document.querySelector('.n-drawer')).not.toEqual(null)
@@ -139,24 +135,24 @@ describe('n-drawer', () => {
   })
 
   it('should work with `on-update:show` prop', async () => {
-    const onUpdate = jest.fn()
+    const onUpdate = vi.fn()
     const wrapper = mountDrawer({
       hasOnUpdateShow: true,
       drawerProps: { onUpdateShow: onUpdate },
       drawerContentProps: { closable: true }
     })
     await wrapper.find('button').trigger('click')
-    setTimeout(() => {
+    vi.waitFor(() => {
       expect(onUpdate).toHaveBeenCalled()
-    }, 300)
+    })
     wrapper.unmount()
   })
 
   it('should work with `mask-closable` prop', async () => {
-    const onUpdate = jest.fn()
+    const onUpdate = vi.fn()
     const mousedownEvent = new MouseEvent('mousedown', { bubbles: true })
     const mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
-    const wrapper = await mountDrawer({
+    const wrapper = mountDrawer({
       show: true,
       hasOnUpdateShow: true,
       drawerProps: { onUpdateShow: onUpdate },
@@ -164,14 +160,14 @@ describe('n-drawer', () => {
     })
     document.querySelector('.n-drawer-mask')?.dispatchEvent(mousedownEvent)
     document.querySelector('.n-drawer-mask')?.dispatchEvent(mouseupEvent)
-    setTimeout(() => {
+    vi.waitFor(() => {
       expect(onUpdate).toHaveBeenCalled()
-    }, 300)
+    })
     wrapper.unmount()
   })
 
   it('should work with `header-style` prop', async () => {
-    const wrapper = await mountDrawer({
+    const wrapper = mountDrawer({
       drawerContentProps: {
         title: 'test',
         headerStyle: { backgroundColor: 'red' }
@@ -188,7 +184,7 @@ describe('n-drawer', () => {
   })
 
   it('should work with `body-style` prop', async () => {
-    const wrapper = await mountDrawer({
+    const wrapper = mountDrawer({
       drawerContentProps: {
         title: 'test',
         bodyStyle: { backgroundColor: 'red' }
@@ -223,7 +219,7 @@ describe('n-drawer', () => {
       value: 251
     })
     // placement top
-    let wrapper = await mountDrawer({
+    let wrapper = mountDrawer({
       show: true,
       drawerProps: { placement: 'top', resizable: true, defaultHeight: 251 }
     })
@@ -260,7 +256,7 @@ describe('n-drawer', () => {
     wrapper.unmount()
 
     // placement bottom
-    wrapper = await mountDrawer({
+    wrapper = mountDrawer({
       show: true,
       drawerProps: { placement: 'bottom', resizable: true, defaultHeight: 251 }
     })
@@ -297,7 +293,7 @@ describe('n-drawer', () => {
     wrapper.unmount()
 
     // placement left
-    wrapper = await mountDrawer({
+    wrapper = mountDrawer({
       show: true,
       drawerProps: { placement: 'left', resizable: true, defaultWidth: 251 }
     })
@@ -334,7 +330,7 @@ describe('n-drawer', () => {
     wrapper.unmount()
 
     // placement right
-    wrapper = await mountDrawer({
+    wrapper = mountDrawer({
       show: true,
       drawerProps: { placement: 'right', resizable: true, defaultWidth: 251 }
     })
@@ -373,13 +369,11 @@ describe('n-drawer', () => {
     Object.defineProperty(
       HTMLElement.prototype,
       'offsetHeight',
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       originalOffsetHeight!
     )
     Object.defineProperty(
       HTMLElement.prototype,
       'offsetWidth',
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       originalOffsetWidth!
     )
   })

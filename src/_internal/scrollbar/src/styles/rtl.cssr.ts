@@ -1,4 +1,4 @@
-import { cB, c, cM, cE } from '../../../../_utils/cssr'
+import { c, cB, cE, cM } from '../../../../_utils/cssr'
 
 export default cB('scrollbar', [
   cM('rtl', `
@@ -13,11 +13,7 @@ export default cB('scrollbar', [
               right: unset;
             `)
           ])
-        ]),
-        cM('vertical', `
-          left: 4px;
-          right: unset;
-        `)
+        ])
       ])
     ])
   ])

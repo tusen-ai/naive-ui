@@ -1,9 +1,9 @@
-import thTH from 'date-fns/esm/locale/th'
-import { NDateLocale } from './enUS'
+import type { NDateLocale } from './enUS'
+import { th } from 'date-fns/locale'
 
 const dateThTH: NDateLocale = {
-  name: 'thTH',
-  locale: thTH
+  name: 'th-TH',
+  locale: th
 }
 
 export default dateThTH

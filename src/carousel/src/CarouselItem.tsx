@@ -1,24 +1,25 @@
-import {
-  h,
-  defineComponent,
-  computed,
-  ref,
-  onMounted,
-  onBeforeUnmount
-} from 'vue'
 import type { VNode } from 'vue'
 import { camelCase } from 'lodash-es'
+import {
+  computed,
+  defineComponent,
+  h,
+  onBeforeUnmount,
+  onMounted,
+  ref
+} from 'vue'
 import { useConfig } from '../../_mixins'
 import { useCarouselContext } from './CarouselContext'
 
 const CarouselItemName = 'CarouselItem'
 
-export const isCarouselItem = (child: VNode): boolean =>
-  (child.type as any)?.name === CarouselItemName
+export function isCarouselItem(child: VNode): boolean {
+  return (child.type as any)?.name === CarouselItemName
+}
 
 export default defineComponent({
   name: CarouselItemName,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     const NCarousel = useCarouselContext(
       camelCase(CarouselItemName),
@@ -33,11 +34,13 @@ export default defineComponent({
     const isNextRef = computed(() => NCarousel.isNext(indexRef.value))
     const isActiveRef = computed(() => NCarousel.isActive(indexRef.value))
     const styleRef = computed(() => NCarousel.getSlideStyle(indexRef.value))
-    onMounted(() => NCarousel.addSlide(selfElRef.value))
+    onMounted(() => {
+      NCarousel.addSlide(selfElRef.value)
+    })
     onBeforeUnmount(() => {
       NCarousel.removeSlide(selfElRef.value)
     })
-    function handleClick (event: MouseEvent): void {
+    function handleClick(event: MouseEvent): void {
       const { value: index } = indexRef
       if (index !== undefined) {
         NCarousel?.onCarouselItemClick(index, event)
@@ -54,7 +57,7 @@ export default defineComponent({
       handleClick
     }
   },
-  render () {
+  render() {
     const {
       $slots: slots,
       mergedClsPrefix,
@@ -83,8 +86,7 @@ export default defineComponent({
         style={style}
         // We use ts-ignore for vue-tsc, since it seems to patch native event
         // for vue components
-        // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
-        // @ts-ignore
+        // @ts-expect-error vue's tsx has type for capture events
         onClickCapture={this.handleClick}
       >
         {slots.default?.({

@@ -1,4 +1,4 @@
-import { PropType, Ref } from 'vue'
+import type { PropType, Ref } from 'vue'
 import { createInjectionKey } from '../../_utils'
 
 export const layoutSiderInjectionKey = createInjectionKey<{
@@ -12,8 +12,8 @@ export const positionProp = {
 } as const
 
 export interface LayoutInst {
-  scrollTo: ((options: ScrollToOptions) => void) &
-  ((x: number, y: number) => void)
+  scrollTo: ((options: ScrollToOptions) => void)
+    & ((x: number, y: number) => void)
 }
 
 export type LayoutSiderInst = LayoutInst

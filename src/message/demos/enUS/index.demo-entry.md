@@ -23,10 +23,10 @@ import { defineComponent } from 'vue'
 
 // content
 export default defineComponent({
-  setup () {
+  setup() {
     const message = useMessage()
     return {
-      warning () {
+      warning() {
         message.warning('...')
       }
     }
@@ -59,6 +59,7 @@ no-icon.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | closable | `boolean` | `false` | Whether to show close icon on all messages. |  |
+| container-class | `string` | `undefined` | Message container class. | 2.36.0 |
 | container-style | `string \| CSSProperties` | `undefined` | Message container style. |  |
 | duration | `number` | `3000` | Default duration of on all messages. |  |
 | keep-alive-on-hover | `boolean` | `false` | Whether to destroy while hovering on all messages. |  |
@@ -168,7 +169,7 @@ Use [createDiscreteApi](discrete). If you want to use it, read its caveat carefu
 
 ```js
 // xxx.js
-export const handler = () => {
+export function handler() {
   // You need to ensure that window.$message = message has been executed in setup
   window.$message.success(
     'Cause you walked hand in hand With another man in my place'

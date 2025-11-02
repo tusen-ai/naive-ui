@@ -1,10 +1,11 @@
-import commonVariables from './_common'
-import { changeColor } from 'seemly'
-import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
-import type { Theme } from '../../_mixins'
+import { changeColor } from 'seemly'
+import { scrollbarLight } from '../../_internal/scrollbar/styles'
+import { createTheme } from '../../_mixins'
+import { commonLight } from '../../_styles/common'
+import commonVariables from './_common'
 
-const self = (vars: ThemeCommonVars) => {
+function self(vars: ThemeCommonVars) {
   const {
     textColor2,
     textColor3,
@@ -37,10 +38,12 @@ const self = (vars: ThemeCommonVars) => {
     iconColor,
     iconColorDisabled,
     iconColorHover,
-    iconColorPressed
+    iconColorPressed,
+    fontWeight
   } = vars
   return {
     ...commonVariables,
+    fontWeight,
     countTextColorDisabled: textColorDisabled,
     countTextColor: textColor3,
     heightTiny,
@@ -104,13 +107,15 @@ const self = (vars: ThemeCommonVars) => {
   }
 }
 
-export type InputThemeVars = ReturnType<typeof self>
-
-const inputLight: Theme<'Input', InputThemeVars> = {
+const inputLight = createTheme({
   name: 'Input',
   common: commonLight,
+  peers: {
+    Scrollbar: scrollbarLight
+  },
   self
-}
+})
 
-export default inputLight
+export type InputThemeVars = ReturnType<typeof self>
 export type InputTheme = typeof inputLight
+export default inputLight

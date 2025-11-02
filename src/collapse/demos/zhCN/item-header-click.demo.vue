@@ -2,6 +2,19 @@
 # 点击标题
 </markdown>
 
+<script lang="ts" setup>
+import type { CollapseProps } from 'naive-ui'
+import { useMessage } from 'naive-ui'
+
+const message = useMessage()
+const handleItemHeaderClick: CollapseProps['onItemHeaderClick'] = ({
+  name,
+  expanded
+}) => {
+  message.info(`Name: ${name}, Expanded: ${expanded}`)
+}
+</script>
+
 <template>
   <n-collapse @item-header-click="handleItemHeaderClick">
     <n-collapse-item name="1">
@@ -24,24 +37,3 @@
     </n-collapse-item>
   </n-collapse>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { useMessage } from 'naive-ui'
-import type { CollapseProps } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const message = useMessage()
-    const handleItemHeaderClick: CollapseProps['onItemHeaderClick'] = ({
-      name,
-      expanded
-    }) => {
-      message.info(`Name: ${name}, Expanded: ${expanded}`)
-    }
-    return {
-      handleItemHeaderClick
-    }
-  }
-})
-</script>

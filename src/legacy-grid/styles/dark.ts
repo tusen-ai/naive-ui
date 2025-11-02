@@ -1,5 +1,5 @@
-import { commonDark } from '../../_styles/common'
 import type { Theme } from '../../_mixins'
+import { commonDark } from '../../_styles/common'
 
 const rowDark: Theme<'Row'> = {
   name: 'Row',

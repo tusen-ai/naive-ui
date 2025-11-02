@@ -4,6 +4,10 @@
 你可以把 `directory-dnd` 设为 `true` 来允许拖拽上传文件夹。
 </markdown>
 
+<script lang="ts" setup>
+import { ArchiveOutline as ArchiveIcon } from '@vicons/ionicons5'
+</script>
+
 <template>
   <n-upload
     multiple
@@ -14,7 +18,7 @@
     <n-upload-dragger>
       <div style="margin-bottom: 12px">
         <n-icon size="48" :depth="3">
-          <archive-icon />
+          <ArchiveIcon />
         </n-icon>
       </div>
       <n-text style="font-size: 16px">
@@ -26,14 +30,3 @@
     </n-upload-dragger>
   </n-upload>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { ArchiveOutline as ArchiveIcon } from '@vicons/ionicons5'
-
-export default defineComponent({
-  components: {
-    ArchiveIcon
-  }
-})
-</script>

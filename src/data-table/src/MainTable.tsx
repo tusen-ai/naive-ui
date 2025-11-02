@@ -1,17 +1,17 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { h, ref, defineComponent, inject, computed, watchEffect } from 'vue'
-import { formatLength } from '../../_utils'
-import TableHeader from './TableParts/Header'
-import TableBody from './TableParts/Body'
 import type {
   MainTableBodyRef,
   MainTableHeaderRef,
   MainTableRef
 } from './interface'
+import { computed, defineComponent, h, inject, ref, watchEffect } from 'vue'
+import { formatLength } from '../../_utils'
 import { dataTableInjectionKey } from './interface'
+import TableBody from './TableParts/Body'
+import TableHeader from './TableParts/Header'
 
 export default defineComponent({
-  setup () {
+  name: 'MainTable',
+  setup() {
     const {
       mergedClsPrefixRef,
       rightFixedColumnsRef,
@@ -20,8 +20,8 @@ export default defineComponent({
       maxHeightRef,
       minHeightRef,
       flexHeightRef,
+      virtualScrollHeaderRef,
       syncScrollState
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(dataTableInjectionKey)!
 
     const headerInstRef = ref<MainTableHeaderRef | null>(null)
@@ -38,21 +38,26 @@ export default defineComponent({
         minHeight: formatLength(minHeightRef.value)
       }
     })
-    function handleBodyResize (entry: ResizeObserverEntry): void {
+    function handleBodyResize(entry: ResizeObserverEntry): void {
       bodyWidthRef.value = entry.contentRect.width
       syncScrollState()
       if (!fixedStateInitializedRef.value) {
         fixedStateInitializedRef.value = true
       }
     }
-    function getHeaderElement (): HTMLElement | null {
+    function getHeaderElement(): HTMLElement | null {
       const { value } = headerInstRef
       if (value) {
-        return value.$el
+        if (virtualScrollHeaderRef.value) {
+          return value.virtualListRef?.listElRef || null
+        }
+        else {
+          return value.$el
+        }
       }
       return null
     }
-    function getBodyElement (): HTMLElement | null {
+    function getBodyElement(): HTMLElement | null {
       const { value } = bodyInstRef
       if (value) {
         return value.getScrollContainer()
@@ -62,19 +67,21 @@ export default defineComponent({
     const exposedMethods: MainTableRef = {
       getBodyElement,
       getHeaderElement,
-      scrollTo (arg0: any, arg1?: any) {
+      scrollTo(arg0: any, arg1?: any) {
         bodyInstRef.value?.scrollTo(arg0, arg1)
       }
     }
     watchEffect(() => {
       const { value: selfEl } = selfElRef
-      if (!selfEl) return
+      if (!selfEl)
+        return
       const transitionDisabledClass = `${mergedClsPrefixRef.value}-data-table-base-table--transition-disabled`
       if (fixedStateInitializedRef.value) {
         setTimeout(() => {
           selfEl.classList.remove(transitionDisabledClass)
         }, 0)
-      } else {
+      }
+      else {
         selfEl.classList.add(transitionDisabledClass)
       }
     })
@@ -90,7 +97,7 @@ export default defineComponent({
       ...exposedMethods
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, maxHeight, flexHeight } = this
     const headerInBody = maxHeight === undefined && !flexHeight
     return (

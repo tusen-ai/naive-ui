@@ -4,6 +4,22 @@
 Note: `n-upload-trigger` and `n-upload-file-list` must be children of `<n-upload />`.
 </markdown>
 
+<script lang="ts" setup>
+import type { UploadFileInfo } from 'naive-ui'
+import { ref } from 'vue'
+
+const fileListRef = ref<UploadFileInfo[]>([
+  {
+    id: 'b',
+    name: 'file.doc',
+    status: 'finished',
+    type: 'text/plain'
+  }
+])
+
+const fileList = fileListRef
+</script>
+
 <template>
   <n-upload
     abstract
@@ -23,23 +39,3 @@ Note: `n-upload-trigger` and `n-upload-file-list` must be children of `<n-upload
     </n-card>
   </n-upload>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import type { UploadFileInfo } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const fileListRef = ref<UploadFileInfo[]>([
-      {
-        id: 'b',
-        name: 'file.doc',
-        status: 'finished',
-        type: 'text/plain'
-      }
-    ])
-
-    return { fileList: fileListRef }
-  }
-})
-</script>

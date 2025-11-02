@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils'
-import { h, defineComponent, ref, watch } from 'vue'
+import { defineComponent, h, ref, watch } from 'vue'
 import { NLog } from '../index'
 
 describe('n-log', () => {
   it('should warn with language setted & no hljs is set', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation()
+    const spy = vi.spyOn(console, 'error').mockImplementation(() => {})
     mount(NLog)
     expect(spy).not.toHaveBeenCalled()
     mount(NLog, {
@@ -22,6 +22,7 @@ describe('n-log', () => {
     expect(wrapper.find('.n-code').attributes('style')).toContain(
       `--n-font-size: ${fontSize}px`
     )
+    wrapper.unmount()
   })
 
   it('should work with `line-height` prop', async () => {
@@ -31,6 +32,7 @@ describe('n-log', () => {
     expect(wrapper.find('.n-log').attributes('style')).toContain(
       `line-height: ${lineHeight}`
     )
+    wrapper.unmount()
   })
 
   it('should work with `lines` `log` prop', async () => {
@@ -48,6 +50,7 @@ describe('n-log', () => {
     expect(wrapper.find('.n-code').element.children[0].textContent).toBe(
       'test3'
     )
+    wrapper.unmount()
   })
 
   it('should work with `loading` prop', async () => {
@@ -56,6 +59,7 @@ describe('n-log', () => {
 
     await wrapper.setProps({ loading: true })
     expect(wrapper.find('.n-log-loader').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `rows` prop', async () => {
@@ -66,6 +70,7 @@ describe('n-log', () => {
       expect(wrapper.find('.n-log').attributes('style')).toContain(
         `height: calc(${Math.floor(fontSize * lineHeight) * rows}px)`
       )
+      wrapper.unmount()
     })
   })
 
@@ -77,16 +82,17 @@ describe('n-log', () => {
 
     await wrapper.setProps({ trim: true, log: ' test2     ' })
     expect(wrapper.find('pre').element.innerHTML).toBe('test2')
+    wrapper.unmount()
   })
 
   it('should work with `scrollTo` `on-require-more` `on-reach-top` `on-reach-bottom` prop', async () => {
     const lines = ['test1', 'test2', 'test3', 'test4', 'test5', 'test6']
-    const onRequireMore = jest.fn()
-    const onReachTop = jest.fn()
-    const onReachBottom = jest.fn()
+    const onRequireMore = vi.fn()
+    const onReachTop = vi.fn()
+    const onReachBottom = vi.fn()
     const wrapper = mount(
       defineComponent({
-        setup () {
+        setup() {
           const logInstRef = ref<any>(null)
           watch(logInstRef, (value) => {
             if (value) {
@@ -111,11 +117,11 @@ describe('n-log', () => {
         attachTo: document.body
       }
     )
-    setTimeout(() => {
+    vi.waitFor(() => {
       expect(onRequireMore).toHaveBeenCalled()
       expect(onReachTop).toHaveBeenCalled()
       expect(onReachBottom).toHaveBeenCalled()
-      wrapper.unmount()
-    }, 0)
+    })
+    wrapper.unmount()
   })
 })

@@ -1,5 +1,6 @@
-import { h } from 'vue'
 import { mount } from '@vue/test-utils'
+import { h, ref } from 'vue'
+import * as useBrowserLocationModule from '../../_utils/composable/use-browser-location'
 import { NBreadcrumb, NBreadcrumbItem } from '../index'
 
 describe('n-breadcrumb', () => {
@@ -8,11 +9,13 @@ describe('n-breadcrumb', () => {
   })
 
   it('should raise an error if breadcrumbItem is not inside a BreadCrumb', () => {
-    const mockErrorLogger = jest.spyOn(console, 'error').mockImplementation()
+    const mockErrorLogger = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => {})
     const wrapper = mount(NBreadcrumbItem)
 
     expect(wrapper.isVisible()).toBe(false)
-    expect(mockErrorLogger).toBeCalledWith(
+    expect(mockErrorLogger).toHaveBeenCalledWith(
       '[naive/breadcrumb]: `n-breadcrumb-item` must be placed inside `n-breadcrumb`.'
     )
     wrapper.unmount()
@@ -38,7 +41,7 @@ describe('n-breadcrumb', () => {
     wrapper.unmount()
   })
 
-  it("should work with Breadcrumb's `separator` prop", async () => {
+  it('should work with Breadcrumb\'s `separator` prop', async () => {
     const wrapper = mount(NBreadcrumb, {
       props: { separator: '@' },
       slots: {
@@ -52,12 +55,12 @@ describe('n-breadcrumb', () => {
     expect(
       wrapper
         .findAll('.n-breadcrumb-item__separator')
-        .every((i) => i.text() === '@')
+        .every(i => i.text() === '@')
     ).toBe(true)
     wrapper.unmount()
   })
 
-  it("should work with BreadcrumbItem's `separator` prop", async () => {
+  it('should work with BreadcrumbItem\'s `separator` prop', async () => {
     const wrapper = mount(NBreadcrumb, {
       slots: {
         default: () => [
@@ -106,15 +109,14 @@ describe('n-breadcrumb', () => {
     })
 
     it('should add `aria-current` if the item is the current location', () => {
-      const originalWindow = window
-      globalThis.window = Object.create(window)
-      const currentUrl = 'http://some-domaine/path2'
-      const url = 'http://some-domaine/path1'
-      Object.defineProperty(window, 'location', {
-        value: {
-          href: currentUrl
-        }
-      })
+      const url = 'http://some-domain/path1'
+      const currentUrl = 'http://some-domain/path2'
+      // https://github.com/jsdom/jsdom/issues/3492
+      // https://jestjs.io/blog#known-issues
+      vi.spyOn(
+        useBrowserLocationModule,
+        'useBrowserLocation'
+      ).mockImplementation(() => ref({ href: currentUrl }))
 
       const wrapper = mount(NBreadcrumb, {
         slots: {
@@ -140,18 +142,17 @@ describe('n-breadcrumb', () => {
 
       expect(
         wrapper.find('span.n-breadcrumb-item__link').attributes('aria-current')
-      ).toBe(undefined)
+      ).toBeUndefined()
       expect(
         wrapper
           .find(`a.n-breadcrumb-item__link[href="${url}"]`)
           .attributes('aria-current')
-      ).toBe(undefined)
+      ).toBeUndefined()
       expect(
         wrapper
           .find(`a.n-breadcrumb-item__link[href="${currentUrl}"]`)
           .attributes('aria-current')
       ).toBe('location')
-      globalThis.window = originalWindow
       wrapper.unmount()
     })
 

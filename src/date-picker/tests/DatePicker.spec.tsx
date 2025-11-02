@@ -1,9 +1,9 @@
-import { ref } from 'vue'
+import type { Value } from '../src/interface'
 import { mount } from '@vue/test-utils'
-import { format } from 'date-fns/esm'
-import { NDatePicker } from '../index'
-import { Value } from '../src/interface'
+import { format } from 'date-fns'
+import { ref } from 'vue'
 import { dateEnUS } from '../../locales'
+import { NDatePicker } from '../index'
 
 describe('n-date-picker', () => {
   it('should work with import on demand', () => {
@@ -151,6 +151,18 @@ describe('n-date-picker', () => {
       inputReadonly: true
     })
     expect(wrapper.find('input').attributes('readonly')).toBe('')
+    await wrapper.setProps({
+      type: 'datetime',
+      panel: true,
+      inputReadonly: true
+    })
+    expect(wrapper.find('input').attributes('readonly')).toBe('')
+    await wrapper.setProps({
+      type: 'datetimerange',
+      panel: true,
+      inputReadonly: true
+    })
+    expect(wrapper.find('input').attributes('readonly')).toBe('')
     wrapper.unmount()
   })
 
@@ -205,7 +217,7 @@ describe('n-date-picker', () => {
       }
     })
 
-    const inputEl = await wrapper.find('.n-input__input').find('input')
+    const inputEl = wrapper.find('.n-input__input').find('input')
     expect(inputEl.element.value).toEqual(
       format(1183135260000, 'yyyy-MM-dd', {
         locale: dateEnUS.locale
@@ -261,7 +273,7 @@ describe('n-date-picker', () => {
   })
 
   it('should work with `onBlur` prop', async () => {
-    const onBlur = jest.fn()
+    const onBlur = vi.fn()
     const wrapper = mount(NDatePicker, {
       props: { onBlur }
     })
@@ -274,7 +286,7 @@ describe('n-date-picker', () => {
   })
 
   it('should work with `onFocus` prop', async () => {
-    const onFocus = jest.fn()
+    const onFocus = vi.fn()
     const wrapper = mount(NDatePicker, {
       props: { onFocus }
     })
@@ -305,5 +317,56 @@ describe('n-date-picker', () => {
       )
       wrapper.unmount()
     })
+  })
+
+  it('should work with `monthStringType` prop', async () => {
+    const wrapper = mount(NDatePicker, {
+      attachTo: document.body,
+      props: {
+        type: 'month',
+        monthFormat: 'M'
+      }
+    })
+
+    await wrapper.find('.n-input__input').trigger('click')
+    expect(
+      document.querySelectorAll(
+        '.n-date-panel-month-calendar__picker-col-item'
+      )[0].textContent
+    ).toBe('1')
+
+    await wrapper.setProps({ monthFormat: 'MM' })
+    await wrapper.find('.n-input__input').trigger('click')
+    expect(
+      document.querySelectorAll(
+        '.n-date-panel-month-calendar__picker-col-item'
+      )[0].textContent
+    ).toBe('01')
+
+    await wrapper.setProps({ monthFormat: 'MMMM' })
+    await wrapper.find('.n-input__input').trigger('click')
+    expect(
+      document.querySelectorAll(
+        '.n-date-panel-month-calendar__picker-col-item'
+      )[0].textContent
+    ).toBe('January')
+
+    await wrapper.setProps({ monthFormat: 'MMM' })
+    await wrapper.find('.n-input__input').trigger('click')
+    expect(
+      document.querySelectorAll(
+        '.n-date-panel-month-calendar__picker-col-item'
+      )[0].textContent
+    ).toBe('Jan')
+
+    await wrapper.setProps({ monthFormat: 'MMMMM' })
+    await wrapper.find('.n-input__input').trigger('click')
+    expect(
+      document.querySelectorAll(
+        '.n-date-panel-month-calendar__picker-col-item'
+      )[0].textContent
+    ).toBe('J')
+
+    wrapper.unmount()
   })
 })

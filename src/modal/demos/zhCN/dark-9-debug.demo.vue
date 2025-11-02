@@ -2,26 +2,10 @@
 # pop debug 4
 </markdown>
 
-<template>
-  <n-popover trigger="click" :width="600">
-    <template #trigger>
-      <n-button>Toggle</n-button>
-    </template>
-    <n-data-table
-      ref="table"
-      :columns="columns"
-      :data="data"
-      :pagination="pagination"
-      :max-height="250"
-      :scroll-x="1800"
-    />
-  </n-popover>
-</template>
-
-<script lang="ts">
-import { h, defineComponent } from 'vue'
-import { DataTableColumns } from 'naive-ui'
+<script lang="ts" setup>
+import type { DataTableColumns } from 'naive-ui'
 import { repeat } from 'seemly'
+import { computed, h } from 'vue'
 
 const columns: DataTableColumns<{
   key: number
@@ -31,7 +15,7 @@ const columns: DataTableColumns<{
 }> = [
   {
     type: 'selection',
-    disabled (row) {
+    disabled(row) {
       return row.name === 'Edward King 3'
     },
     fixed: 'left'
@@ -70,21 +54,21 @@ const columns: DataTableColumns<{
   {
     title: 'Row',
     key: 'row',
-    render (row, index) {
+    render(row, index) {
       return h('span', ['row ', index])
     }
   },
   {
     title: 'Row1',
     key: 'row1',
-    render (row, index) {
+    render(row, index) {
       return h('span', ['row ', index])
     }
   },
   {
     title: 'Row2',
     key: 'row2',
-    render (row, index) {
+    render(row, index) {
       return h('span', ['row ', index])
     }
   },
@@ -103,18 +87,22 @@ const data = repeat(46, undefined).map((_, index) => ({
   address: `London, Park Lane no. ${index}`
 }))
 
-export default defineComponent({
-  data () {
-    return {
-      showModal: false,
-      data,
-      columns
-    }
-  },
-  computed: {
-    pagination () {
-      return { pageSize: 10 }
-    }
-  }
+const pagination = computed(() => {
+  return { pageSize: 10 }
 })
 </script>
+
+<template>
+  <n-popover trigger="click" :width="600">
+    <template #trigger>
+      <n-button>Toggle</n-button>
+    </template>
+    <n-data-table
+      :columns="columns"
+      :data="data"
+      :pagination="pagination"
+      :max-height="250"
+      :scroll-x="1800"
+    />
+  </n-popover>
+</template>

@@ -1,46 +1,42 @@
-import {
-  computed,
-  h,
-  defineComponent,
-  PropType,
-  provide,
-  ref,
-  Ref,
-  ExtractPropTypes,
+import type {
   CSSProperties,
-  Slots
+  ExtractPropTypes,
+  PropType,
+  Ref,
+  SlotsType,
+  VNode
 } from 'vue'
-import { useMergedState } from 'vooks'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import {
-  call,
-  createInjectionKey,
-  ExtractPublicPropTypes,
-  warn
-} from '../../_utils'
-import type { MaybeArray } from '../../_utils'
-import { collapseLight, CollapseTheme } from '../styles'
-import style from './styles/index.cssr'
-import { useRtl } from '../../_mixins/use-rtl'
-import {
-  OnItemHeaderClick,
-  OnUpdateExpandedNames,
-  OnUpdateExpandedNamesImpl,
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { CollapseTheme } from '../styles'
+import type {
+  CollapseArrowSlotProps,
+  CollapseItemHeaderExtraSlotProps,
+  CollapseItemHeaderSlotProps,
   HeaderClickInfo,
-  OnItemHeaderClickImpl
+  OnItemHeaderClick,
+  OnItemHeaderClickImpl,
+  OnUpdateExpandedNames,
+  OnUpdateExpandedNamesImpl
 } from './interface'
+import { useMergedState } from 'vooks'
+import { computed, defineComponent, h, provide, ref } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
+import { call, createInjectionKey, warn } from '../../_utils'
+import { collapseLight } from '../styles'
+import style from './styles/index.cssr'
 
 export const collapseProps = {
   ...(useTheme.props as ThemeProps<CollapseTheme>),
   defaultExpandedNames: {
     type: [Array, String] as PropType<
-    string | number | Array<string | number> | null
+      string | number | Array<string | number> | null
     >,
     default: null
   },
   expandedNames: [Array, String] as PropType<
-  string | number | Array<string | number> | null
+    string | number | Array<string | number> | null
   >,
   arrowPlacement: {
     type: String as PropType<'left' | 'right'>,
@@ -54,19 +50,23 @@ export const collapseProps = {
     type: String as PropType<'if' | 'show'>,
     default: 'if'
   },
+  triggerAreas: {
+    type: Array as PropType<Array<'main' | 'extra' | 'arrow'>>,
+    default: () => ['main', 'extra', 'arrow']
+  },
   onItemHeaderClick: [Function, Array] as PropType<
-  MaybeArray<OnItemHeaderClick>
+    MaybeArray<OnItemHeaderClick>
   >,
   'onUpdate:expandedNames': [Function, Array] as PropType<
-  MaybeArray<OnUpdateExpandedNames>
+    MaybeArray<OnUpdateExpandedNames>
   >,
   onUpdateExpandedNames: [Function, Array] as PropType<
-  MaybeArray<OnUpdateExpandedNames>
+    MaybeArray<OnUpdateExpandedNames>
   >,
   // deprecated
   onExpandedNamesChange: {
     type: [Function, Array] as PropType<
-    MaybeArray<OnUpdateExpandedNames> | undefined
+      MaybeArray<OnUpdateExpandedNames> | undefined
     >,
     validator: () => {
       if (__DEV__) {
@@ -83,11 +83,18 @@ export const collapseProps = {
 
 export type CollapseProps = ExtractPublicPropTypes<typeof collapseProps>
 
+export interface CollapseSlots {
+  default?: () => VNode[]
+  arrow?: (props: CollapseArrowSlotProps) => VNode[]
+  header?: (props: CollapseItemHeaderSlotProps) => VNode[]
+  'header-extra'?: (props: CollapseItemHeaderExtraSlotProps) => VNode[]
+}
+
 export interface NCollapseInjection {
   props: ExtractPropTypes<typeof collapseProps>
   expandedNamesRef: Ref<string | number | Array<string | number> | null>
   mergedClsPrefixRef: Ref<string>
-  slots: Slots
+  slots: CollapseSlots
   toggleItem: (
     collapse: boolean,
     name: string | number,
@@ -95,17 +102,18 @@ export interface NCollapseInjection {
   ) => void
 }
 
-export const collapseInjectionKey =
-  createInjectionKey<NCollapseInjection>('n-collapse')
+export const collapseInjectionKey
+  = createInjectionKey<NCollapseInjection>('n-collapse')
 
 export default defineComponent({
   name: 'Collapse',
   props: collapseProps,
-  setup (props, { slots }) {
-    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
-      useConfig(props)
+  slots: Object as SlotsType<CollapseSlots>,
+  setup(props, { slots }) {
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
+      = useConfig(props)
     const uncontrolledExpandedNamesRef = ref<
-    string | number | Array<string | number> | null
+      string | number | Array<string | number> | null
     >(props.defaultExpandedNames)
     const controlledExpandedNamesRef = computed(() => props.expandedNames)
     const mergedExpandedNamesRef = useMergedState(
@@ -120,7 +128,7 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    function doUpdateExpandedNames (
+    function doUpdateExpandedNames(
       names: Array<string | number> | string | number
     ): void {
       const {
@@ -139,7 +147,7 @@ export default defineComponent({
       }
       uncontrolledExpandedNamesRef.value = names
     }
-    function doItemHeaderClick<T extends string | number> (
+    function doItemHeaderClick<T extends string | number>(
       info: HeaderClickInfo<T>
     ): void {
       const { onItemHeaderClick } = props
@@ -147,7 +155,7 @@ export default defineComponent({
         call(onItemHeaderClick as OnItemHeaderClickImpl, info)
       }
     }
-    function toggleItem (
+    function toggleItem(
       collapse: boolean,
       name: string | number,
       event: MouseEvent
@@ -158,24 +166,28 @@ export default defineComponent({
         if (collapse) {
           doUpdateExpandedNames([name])
           doItemHeaderClick({ name, expanded: true, event })
-        } else {
+        }
+        else {
           doUpdateExpandedNames([])
           doItemHeaderClick({ name, expanded: false, event })
         }
-      } else {
+      }
+      else {
         if (!Array.isArray(expandedNames)) {
           doUpdateExpandedNames([name])
           doItemHeaderClick({ name, expanded: true, event })
-        } else {
+        }
+        else {
           const activeNames = expandedNames.slice()
           const index = activeNames.findIndex(
-            (activeName) => name === activeName
+            activeName => name === activeName
           )
           if (~index) {
             activeNames.splice(index, 1)
             doUpdateExpandedNames(activeNames)
             doItemHeaderClick({ name, expanded: false, event })
-          } else {
+          }
+          else {
             activeNames.push(name)
             doUpdateExpandedNames(activeNames)
             doItemHeaderClick({ name, expanded: true, event })
@@ -197,6 +209,7 @@ export default defineComponent({
         self: {
           titleFontWeight,
           dividerColor,
+          titlePadding,
           titleTextColor,
           titleTextColorDisabled,
           textColor,
@@ -212,6 +225,7 @@ export default defineComponent({
         '--n-bezier': cubicBezierEaseInOut,
         '--n-text-color': textColor,
         '--n-divider-color': dividerColor,
+        '--n-title-padding': titlePadding,
         '--n-title-font-size': titleFontSize,
         '--n-title-text-color': titleTextColor,
         '--n-title-text-color-disabled': titleTextColorDisabled,
@@ -233,7 +247,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     this.onRender?.()
     return (
       <div

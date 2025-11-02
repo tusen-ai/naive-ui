@@ -4,6 +4,12 @@
 这是一个滚动内容的演示。
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const show = ref(false)
+</script>
+
 <template>
   <n-button @click="show = !show">
     打开
@@ -22,7 +28,7 @@
       while Finch sees action and becomes an officer. At a faculty party, Stoner
       meets and becomes infatuated with a young woman named Edith, who is
       staying with an aunt for a few weeks. Stoner woos Edith, and she agrees to
-      marry him. Stoner’s marriage to Edith is bad from the start. It gradually
+      marry him. Stoner's marriage to Edith is bad from the start. It gradually
       becomes clear that Edith has profound emotional problems. Significantly,
       she is bitter about having cancelled a trip to Europe with her aunt to
       marry Stoner. After three years of marriage, Edith suddenly informs Stoner
@@ -45,7 +51,7 @@
       department, Lomax takes every opportunity to exact revenge upon Stoner
       throughout the rest of his career. A collaboration between Stoner and a
       younger instructor in the department, Katherine Driscoll, develops into a
-      romantic love affair. Ironically, after the affair begins, Stoner’s
+      romantic love affair. Ironically, after the affair begins, Stoner's
       relationships with Edith and Grace also improve. At some point, Edith
       finds out about the affair, but does not seem to mind it. When Lomax
       learns about it, however, he begins to put pressure on Katherine, who also
@@ -57,11 +63,11 @@
       opposition. He begins to spend more time at home, ignoring Edith's signs
       of displeasure at his presence. Entering adulthood, Grace enrolls at the
       University of Missouri. The following year, Grace announces she is
-      pregnant and marries the father of her child. Grace’s husband enlists in
+      pregnant and marries the father of her child. Grace's husband enlists in
       the army and dies before the baby is born. Grace goes to St. Louis with
       the baby to live with her husband's parents. She visits Stoner and Edith
       occasionally, and Stoner realizes that Grace has developed a drinking
-      problem. As Stoner’s life is coming to an end, his daughter Grace comes to
+      problem. As Stoner's life is coming to an end, his daughter Grace comes to
       visit him. Deeply unhappy and addicted to alcohol, Grace halfheartedly
       tries to reconcile with Stoner, and he sees that his daughter, like her
       mother, will never be happy. When Grace leaves, Stoner feels as though the
@@ -76,15 +82,3 @@
     </n-drawer-content>
   </n-drawer>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      show: ref(false)
-    }
-  }
-})
-</script>

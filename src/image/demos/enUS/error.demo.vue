@@ -1,7 +1,7 @@
 <markdown>
 # Fail to load
 
-Use `fallback-src` to set an fallback image on error.
+Use `fallback-src` to set an fallback image on error, or you can use `error` slot in the next demo.
 </markdown>
 
 <template>

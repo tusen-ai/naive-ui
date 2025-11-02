@@ -14,6 +14,7 @@ filterable.vue
 action.vue
 async.vue
 status.vue
+file-picker.vue
 debug.vue
 ```
 
@@ -35,10 +36,13 @@ debug.vue
 | default-expand-all | `boolean` | `false` | Expand all nodes by default. |  |
 | default-expanded-keys | `Array<string \| number>` | `[]` | Expand specific keys by default. |  |
 | disabled | `boolean` | `false` | Disabled state. |  |
+| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | `popover` props of the preview ellipsis tag. | 2.37.0 |
 | expanded-keys | `Array<string \| number>` | `undefined` | Collection of expanded keys. |  |
+| indent | `number` | `24` | Indent of per level of the tree. | 2.41.1 |
 | indeterminate-keys | `Array<string \| number>` | `undefined` | Indeterminate keys of the tree. |  |
 | filterable | `boolean` | `false` | Whether to show a filter. |  |
 | filter | `(pattern: string, option: TreeSelectOption) => boolean` | - | Filter function. |  |
+| get-children | `(option: any) => unknown` | `undefined` | Get children of the option. | 2.38.1 |
 | key-field | `string` | `'key'` | The key field used for `TreeSelectOption`. |  |
 | label-field | `string` | `'label'` | The label field used for `TreeSelectOption`. |  |
 | disabled-field | `string` | `'disabled'` | The disabled field used for `TreeSelectOption`. | 2.32.2 |
@@ -48,6 +52,7 @@ debug.vue
 | multiple | `boolean` | `false` | Allow selecting multiple options. |  |
 | node-props | `(info: { option: TreeSelectOption }) => HTMLAttributes` | `undefined` | HTML attributes of node. | 2.30.7 |
 | options | `TreeSelectOption[]` | `[]` | Options. |  |
+| override-default-node-click-behavior | `(info: { option: TreeSelectOption }) => 'toggleExpand' \| 'toggleSelect' \| 'toggleCheck' \| 'default' \| 'none'` | `undefined` | Override default node click behavior. | 2.37.0 |
 | placeholder | `string` | `'Please Select'` | Placeholder. |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Tree select menu's placement. | 2.25.0 |
 | render-label | `(info: { option: TreeSelectOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | Render function of all the options' label. | 2.30.7 |
@@ -62,6 +67,7 @@ debug.vue
 | to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | Selected key (or keys when multiple). |  |
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. |  |
+| watch-props | `Array<'defaultCheckedKeys' \| 'defaultSelectedKeys' \|'defaultExpandedKeys'>` | `undefined` | Default prop names that needed to be watched. Components will be updated after the prop is changed. Note: the `watch-props` itself is not reactive. | 2.36.0 |
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Callback on blur. |  |
 | on-focus | `(e: FocusEvent) => void` | `undefined` | Callback on focus. |  |
 | on-load | `(node: TreeSelectOption) => Promise<void>` | `undefined` | Callback function for asynchronously loading data. | 2.27.0 |
@@ -83,6 +89,7 @@ debug.vue
 
 | Name   | Parameters | Description                            | Version |
 | ------ | ---------- | -------------------------------------- | ------- |
+| header | `()`       | Header menu slot.                      | 2.40.0  |
 | action | `()`       | Options menu slot.                     | 2.22.0  |
 | arrow  | `()`       | Arrow icon of trigger.                 | 2.30.4  |
 | empty  | `()`       | Empty state slot for the options menu. | 2.22.0  |
@@ -92,6 +99,8 @@ debug.vue
 | Name | Type | Description | Version |
 | --- | --- | --- | --- |
 | blur | `() => void` | Blur. | 2.34.0 |
+| blurInput | `() => void` | Input blur. | 2.35.0 |
 | focus | `() => void` | Focus. | 2.34.0s |
+| focusInput | `() => void` | Input focus. | 2.35.0 |
 | getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get checked data. | 2.34.0 |
 | getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get indeterminate data. | 2.34.0 |

@@ -1,9 +1,9 @@
-import plPL from 'date-fns/esm/locale/pl'
-import { NDateLocale } from './enUS'
+import type { NDateLocale } from './enUS'
+import { pl } from 'date-fns/locale'
 
 const datePlPL: NDateLocale = {
   name: 'pl-PL',
-  locale: plPL
+  locale: pl
 }
 
 export default datePlPL

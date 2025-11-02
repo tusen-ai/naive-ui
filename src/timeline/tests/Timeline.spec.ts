@@ -1,5 +1,5 @@
-import { h } from 'vue'
 import { mount } from '@vue/test-utils'
+import { h } from 'vue'
 import { NTimeline, NTimelineItem } from '../index'
 
 describe('n-timeline', () => {
@@ -12,7 +12,7 @@ describe('n-timeline', () => {
     expect(wrapper.find('.n-timeline').classes()).toContain(
       'n-timeline--left-placement'
     )
-    await wrapper.setProps({ 'item-placement': 'right' })
+    await wrapper.setProps({ itemPlacement: 'right' })
     expect(wrapper.find('.n-timeline').classes()).toContain(
       'n-timeline--right-placement'
     )

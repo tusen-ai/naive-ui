@@ -1,9 +1,15 @@
-import { defineComponent, PropType, VNodeChild, h } from 'vue'
-import { get } from 'lodash-es'
+import type { PropType, VNodeChild } from 'vue'
 import type { MergedTheme } from '../../../_mixins'
-import { NEllipsis } from '../../../ellipsis'
 import type { DataTableTheme } from '../../styles'
-import { TableBaseColumn, InternalRowData, SummaryCell } from '../interface'
+import type {
+  InternalRowData,
+  SummaryCell,
+  TableBaseColumn
+} from '../interface'
+import { get } from 'lodash-es'
+import { defineComponent, h } from 'vue'
+import NEllipsis from '../../../ellipsis/src/Ellipsis'
+import { NPerformantEllipsis } from '../../../ellipsis/src/PerformantEllipsis'
 
 export default defineComponent({
   name: 'DataTableCell',
@@ -30,19 +36,21 @@ export default defineComponent({
       required: true
     },
     renderCell: Function as PropType<
-    (value: any, rowData: object, column: any) => VNodeChild
+      (value: any, rowData: object, column: any) => VNodeChild
     >
   },
-  render () {
+  render() {
     const { isSummary, column, row, renderCell } = this
     let cell: VNodeChild
     const { render, key, ellipsis } = column
     if (render && !isSummary) {
       cell = render(row, this.index)
-    } else {
+    }
+    else {
       if (isSummary) {
-        cell = (row[key] as SummaryCell).value
-      } else {
+        cell = (row[key] as SummaryCell)?.value
+      }
+      else {
         cell = renderCell
           ? renderCell(get(row, key), row, column)
           : get(row, key)
@@ -51,6 +59,17 @@ export default defineComponent({
     if (ellipsis) {
       if (typeof ellipsis === 'object') {
         const { mergedTheme } = this
+        if (column.ellipsisComponent === 'performant-ellipsis') {
+          return (
+            <NPerformantEllipsis
+              {...ellipsis}
+              theme={mergedTheme.peers.Ellipsis}
+              themeOverrides={mergedTheme.peerOverrides.Ellipsis}
+            >
+              {{ default: () => cell }}
+            </NPerformantEllipsis>
+          )
+        }
         return (
           <NEllipsis
             {...ellipsis}
@@ -60,7 +79,8 @@ export default defineComponent({
             {{ default: () => cell }}
           </NEllipsis>
         )
-      } else {
+      }
+      else {
         return (
           <span class={`${this.clsPrefix}-data-table-td__ellipsis`}>
             {cell}

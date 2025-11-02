@@ -1,31 +1,24 @@
-import {
-  h,
-  defineComponent,
-  computed,
-  CSSProperties,
-  PropType,
-  provide,
-  toRef,
-  mergeProps,
-  ref,
-  VNode,
-  Ref,
-  cloneVNode,
-  vShow,
-  onMounted
-} from 'vue'
+import type { CSSProperties, PropType, Ref, VNode } from 'vue'
+import type { VResizeObserverOnResize } from 'vueuc'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import { beforeNextFrameOnce, parseResponsivePropValue, pxfy } from 'seemly'
 import { useBreakpoints, useMemo } from 'vooks'
-import { VResizeObserver, VResizeObserverOnResize } from 'vueuc'
-import { pxfy, parseResponsivePropValue, beforeNextFrameOnce } from 'seemly'
-import { defaultBreakpoints } from '../../config-provider/src/config'
-import { useConfig } from '../../_mixins'
 import {
-  getSlot,
-  flatten,
-  ExtractPublicPropTypes,
-  isBrowser,
-  isNodeVShowFalse
-} from '../../_utils'
+  cloneVNode,
+  computed,
+  defineComponent,
+  h,
+  mergeProps,
+  onMounted,
+  provide,
+  ref,
+  toRef,
+  vShow
+} from 'vue'
+import { VResizeObserver } from 'vueuc'
+import { useConfig } from '../../_mixins'
+import { flatten, getSlot, isBrowser, isNodeVShowFalse } from '../../_utils'
+import { defaultBreakpoints } from '../../config-provider/src/config'
 import { defaultSpan, gridInjectionKey } from './config'
 
 const defaultCols = 24
@@ -74,7 +67,7 @@ export default defineComponent({
   name: 'Grid',
   inheritAttrs: false,
   props: gridProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, mergedBreakpointsRef } = useConfig(props)
     const numRegex = /^\d+$/
     const widthRef = ref<number | undefined>(undefined)
@@ -82,14 +75,19 @@ export default defineComponent({
       mergedBreakpointsRef?.value || defaultBreakpoints
     )
     const isResponsiveRef = useMemo(() => {
-      if (props.itemResponsive) return true
-      if (!numRegex.test(props.cols.toString())) return true
-      if (!numRegex.test(props.xGap.toString())) return true
-      if (!numRegex.test(props.yGap.toString())) return true
+      if (props.itemResponsive)
+        return true
+      if (!numRegex.test(props.cols.toString()))
+        return true
+      if (!numRegex.test(props.xGap.toString()))
+        return true
+      if (!numRegex.test(props.yGap.toString()))
+        return true
       return false
     })
     const responsiveQueryRef = computed(() => {
-      if (!isResponsiveRef.value) return undefined
+      if (!isResponsiveRef.value)
+        return undefined
       return props.responsive === 'self' ? widthRef.value : breakpointsRef.value
     })
     const responsiveColsRef = useMemo(() => {
@@ -174,7 +172,7 @@ export default defineComponent({
       overflow: overflowRef
     }
   },
-  render () {
+  render() {
     if (this.layoutShiftDisabled) {
       return h(
         'div',
@@ -205,13 +203,15 @@ export default defineComponent({
       const { collapsed, collapsedRows, responsiveCols, responsiveQuery } = this
 
       rawChildren.forEach((child) => {
-        if ((child?.type as any)?.__GRID_ITEM__ !== true) return
+        if ((child?.type as any)?.__GRID_ITEM__ !== true)
+          return
 
         if (isNodeVShowFalse(child)) {
           const clonedNode = cloneVNode(child)
           if (clonedNode.props) {
             clonedNode.props.privateShow = false
-          } else {
+          }
+          else {
             clonedNode.props = { privateShow: false }
           }
           childrenAndRawSpan.push({
@@ -225,6 +225,9 @@ export default defineComponent({
         // here, nor it may mess child's style
         child.dirs = child.dirs?.filter(({ dir }) => dir !== vShow) || null
 
+        if (child.dirs?.length === 0) {
+          child.dirs = null
+        }
         const clonedChild = cloneVNode(child)
 
         const rawChildSpan = Number(
@@ -234,8 +237,8 @@ export default defineComponent({
           ) ?? defaultSpan
         )
 
-        if (rawChildSpan === 0) return
-
+        if (rawChildSpan === 0)
+          return
         childrenAndRawSpan.push({
           child: clonedChild,
           rawChildSpan
@@ -243,17 +246,22 @@ export default defineComponent({
       })
 
       let suffixSpan = 0
-      const maybeSuffixNode =
-        childrenAndRawSpan[childrenAndRawSpan.length - 1]?.child
+      const maybeSuffixNode
+        = childrenAndRawSpan[childrenAndRawSpan.length - 1]?.child
       if (maybeSuffixNode?.props) {
         const suffixPropValue = maybeSuffixNode.props?.suffix
         if (suffixPropValue !== undefined && suffixPropValue !== false) {
-          suffixSpan = maybeSuffixNode.props?.span ?? defaultSpan
+          suffixSpan = Number(
+            parseResponsivePropValue(
+              maybeSuffixNode.props?.span as string | number | null | undefined,
+              responsiveQuery
+            ) ?? defaultSpan
+          )
           maybeSuffixNode.props.privateSpan = suffixSpan
-          maybeSuffixNode.props.privateColStart =
-            responsiveCols + 1 - suffixSpan
-          maybeSuffixNode.props.privateShow =
-            maybeSuffixNode.props.privateShow ?? true
+          maybeSuffixNode.props.privateColStart
+            = responsiveCols + 1 - suffixSpan
+          maybeSuffixNode.props.privateShow
+            = maybeSuffixNode.props.privateShow ?? true
         }
       }
 
@@ -278,7 +286,8 @@ export default defineComponent({
               privateSpan: childSpan,
               privateOffset: childOffset
             }
-          } else {
+          }
+          else {
             child.props.privateSpan = childSpan
             child.props.privateOffset = childOffset
           }
@@ -288,11 +297,12 @@ export default defineComponent({
               spanCounter += responsiveCols - remainder
             }
             if (
-              childSpan + spanCounter + suffixSpan >
-              collapsedRows * responsiveCols
+              childSpan + spanCounter + suffixSpan
+              > collapsedRows * responsiveCols
             ) {
               done = true
-            } else {
+            }
+            else {
               spanCounter += childSpan
             }
           }
@@ -303,14 +313,14 @@ export default defineComponent({
             if (child.props.privateShow !== true) {
               child.props.privateShow = false
             }
-          } else {
+          }
+          else {
             child.props = {
               privateShow: false
             }
           }
         }
       }
-
       return h(
         'div',
         mergeProps(

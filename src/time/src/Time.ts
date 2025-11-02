@@ -1,9 +1,10 @@
-import { h, createTextVNode, PropType, defineComponent, computed } from 'vue'
-import { format, formatDistanceStrict, fromUnixTime } from 'date-fns/esm'
 import type { Locale } from 'date-fns'
-import formatInTimeZone from 'date-fns-tz/esm/formatInTimeZone'
+import type { PropType } from 'vue'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import { format, formatDistanceStrict, fromUnixTime } from 'date-fns'
+import { formatInTimeZone } from 'date-fns-tz'
+import { computed, createTextVNode, defineComponent, h } from 'vue'
 import { useLocale } from '../../_mixins'
-import { ExtractPublicPropTypes } from '../../_utils'
 
 export const timeProps = {
   time: {
@@ -29,7 +30,7 @@ export type TimeProps = ExtractPublicPropTypes<typeof timeProps>
 export default defineComponent({
   name: 'Time',
   props: timeProps,
-  setup (props) {
+  setup(props) {
     const now = Date.now()
     const { localeRef, dateLocaleRef } = useLocale('Time')
     const mergedFormatRef = computed(() => {
@@ -53,7 +54,8 @@ export default defineComponent({
     const mergedTimeRef = computed(() => {
       const { time } = props
       if (props.unix) {
-        if (time === undefined) return now
+        if (time === undefined)
+          return now
         return fromUnixTime(typeof time === 'number' ? time : time.valueOf())
       }
       return time ?? now
@@ -61,7 +63,8 @@ export default defineComponent({
     const mergedToRef = computed(() => {
       const { to } = props
       if (props.unix) {
-        if (to === undefined) return now
+        if (to === undefined)
+          return now
         return fromUnixTime(typeof to === 'number' ? to : to.valueOf())
       }
       return to ?? now
@@ -73,19 +76,22 @@ export default defineComponent({
           props.format,
           dateFnsOptionsRef.value
         )
-      } else if (props.type === 'date') {
+      }
+      else if (props.type === 'date') {
         return mergedFormatRef.value(
           mergedTimeRef.value,
           localeRef.value.dateFormat,
           dateFnsOptionsRef.value
         )
-      } else if (props.type === 'datetime') {
+      }
+      else if (props.type === 'datetime') {
         return mergedFormatRef.value(
           mergedTimeRef.value,
           localeRef.value.dateTimeFormat,
           dateFnsOptionsRef.value
         )
-      } else {
+      }
+      else {
         return formatDistanceStrict(mergedTimeRef.value, mergedToRef.value, {
           addSuffix: true,
           locale: dateLocaleRef.value.locale
@@ -96,7 +102,7 @@ export default defineComponent({
       renderedTime: renderedTimeRef
     }
   },
-  render () {
+  render() {
     return this.text
       ? createTextVNode(this.renderedTime)
       : h('time', [this.renderedTime])

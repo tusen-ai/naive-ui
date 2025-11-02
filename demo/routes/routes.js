@@ -53,6 +53,18 @@ export const enDocRoutes = [
     component: () => import('../pages/docs/ssr/enUS/index.md')
   },
   {
+    path: 'nuxtjs',
+    component: () => import('../pages/docs/nuxtjs/enUS/index.md')
+  },
+  {
+    path: 'vitepress',
+    component: () => import('../pages/docs/vitepress/enUS/index.md')
+  },
+  {
+    path: 'vite-ssge',
+    component: () => import('../pages/docs/vite-ssge/enUS/index.md')
+  },
+  {
     path: 'common-issues',
     component: () => import('../pages/docs/common-issues/enUS/index.md')
   },
@@ -134,6 +146,18 @@ export const zhDocRoutes = [
     component: () => import('../pages/docs/ssr/zhCN/index.md')
   },
   {
+    path: 'nuxtjs',
+    component: () => import('../pages/docs/nuxtjs/zhCN/index.md')
+  },
+  {
+    path: 'vitepress',
+    component: () => import('../pages/docs/vitepress/zhCN/index.md')
+  },
+  {
+    path: 'vite-ssge',
+    component: () => import('../pages/docs/vite-ssge/zhCN/index.md')
+  },
+  {
     path: 'common-issues',
     component: () => import('../pages/docs/common-issues/zhCN/index.md')
   },
@@ -195,6 +219,11 @@ export const enComponentRoutes = [
   {
     path: 'input',
     component: () => import('../../src/input/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'input-otp',
+    component: () =>
+      import('../../src/input-otp/demos/enUS/index.demo-entry.md')
   },
   {
     path: 'select',
@@ -450,6 +479,10 @@ export const enComponentRoutes = [
     component: () => import('../../src/space/demos/enUS/index.demo-entry.md')
   },
   {
+    path: 'flex',
+    component: () => import('../../src/flex/demos/enUS/index.demo-entry.md')
+  },
+  {
     path: 'rate',
     component: () => import('../../src/rate/demos/enUS/index.demo-entry.md')
   },
@@ -534,6 +567,42 @@ export const enComponentRoutes = [
   {
     path: 'equation',
     component: () => import('../../src/equation/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'qr-code',
+    component: () => import('../../src/qr-code/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'virtual-list',
+    component: () =>
+      import('../../src/virtual-list/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'split',
+    component: () => import('../../src/split/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'infinite-scroll',
+    component: () =>
+      import('../../src/infinite-scroll/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'float-button',
+    component: () =>
+      import('../../src/float-button/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'highlight',
+    component: () =>
+      import('../../src/highlight/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'marquee',
+    component: () => import('../../src/marquee/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'heatmap',
+    component: () => import('../../src/heatmap/demos/enUS/index.demo-entry.md')
   }
 ]
 
@@ -572,6 +641,11 @@ export const zhComponentRoutes = [
   {
     path: 'input',
     component: () => import('../../src/input/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'input-otp',
+    component: () =>
+      import('../../src/input-otp/demos/zhCN/index.demo-entry.md')
   },
   {
     path: 'select',
@@ -827,6 +901,10 @@ export const zhComponentRoutes = [
     component: () => import('../../src/space/demos/zhCN/index.demo-entry.md')
   },
   {
+    path: 'flex',
+    component: () => import('../../src/flex/demos/zhCN/index.demo-entry.md')
+  },
+  {
     path: 'rate',
     component: () => import('../../src/rate/demos/zhCN/index.demo-entry.md')
   },
@@ -911,6 +989,42 @@ export const zhComponentRoutes = [
   {
     path: 'equation',
     component: () => import('../../src/equation/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'qr-code',
+    component: () => import('../../src/qr-code/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'virtual-list',
+    component: () =>
+      import('../../src/virtual-list/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'split',
+    component: () => import('../../src/split/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'infinite-scroll',
+    component: () =>
+      import('../../src/infinite-scroll/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'float-button',
+    component: () =>
+      import('../../src/float-button/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'highlight',
+    component: () =>
+      import('../../src/highlight/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'marquee',
+    component: () => import('../../src/marquee/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'heatmap',
+    component: () => import('../../src/heatmap/demos/zhCN/index.demo-entry.md')
   }
 ]
 

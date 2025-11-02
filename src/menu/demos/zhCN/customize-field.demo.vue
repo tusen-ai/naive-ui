@@ -4,43 +4,18 @@
 后端会传来各种各样的数据，你可以自定义 `key`、`label` 和 `children` 的字段。
 </markdown>
 
-<template>
-  <n-layout has-sider>
-    <n-layout-sider
-      bordered
-      collapse-mode="width"
-      :collapsed-width="64"
-      :width="240"
-      :collapsed="collapsed"
-      show-trigger
-      @collapse="collapsed = true"
-      @expand="collapsed = false"
-    >
-      <n-menu
-        :collapsed="collapsed"
-        :collapsed-width="64"
-        :collapsed-icon-size="22"
-        :options="menuOptions"
-        key-field="whateverKey"
-        label-field="whateverLabel"
-        children-field="whateverChildren"
-      />
-    </n-layout-sider>
-    <n-layout />
-  </n-layout>
-</template>
-
-<script lang="ts">
-import { defineComponent, h, ref, Component } from 'vue'
-import { NIcon } from 'naive-ui'
+<script lang="ts" setup>
 import type { MenuOption } from 'naive-ui'
+import type { Component } from 'vue'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
+import { NIcon } from 'naive-ui'
+import { h, ref } from 'vue'
 
-function renderIcon (icon: Component) {
+function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -119,12 +94,31 @@ const menuOptions: MenuOption[] = [
   }
 ]
 
-export default defineComponent({
-  setup () {
-    return {
-      collapsed: ref(true),
-      menuOptions
-    }
-  }
-})
+const collapsed = ref(true)
 </script>
+
+<template>
+  <n-layout has-sider>
+    <n-layout-sider
+      bordered
+      collapse-mode="width"
+      :collapsed-width="64"
+      :width="240"
+      :collapsed="collapsed"
+      show-trigger
+      @collapse="collapsed = true"
+      @expand="collapsed = false"
+    >
+      <n-menu
+        :collapsed="collapsed"
+        :collapsed-width="64"
+        :collapsed-icon-size="22"
+        :options="menuOptions"
+        key-field="whateverKey"
+        label-field="whateverLabel"
+        children-field="whateverChildren"
+      />
+    </n-layout-sider>
+    <n-layout />
+  </n-layout>
+</template>

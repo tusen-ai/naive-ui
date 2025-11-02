@@ -1,30 +1,29 @@
+import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { TagTheme } from '../styles'
+import { getMargin } from 'seemly'
 import {
-  h,
-  defineComponent,
   computed,
-  PropType,
-  CSSProperties,
-  ref,
-  Ref,
+  defineComponent,
+  h,
   provide,
+  ref,
   toRef,
   watchEffect
 } from 'vue'
-import { useRtl } from '../../_mixins/use-rtl'
 import { NBaseClose } from '../../_internal/close'
-import { useConfig, useThemeClass, useTheme } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
 import {
-  createKey,
   call,
-  createInjectionKey,
   color2Class,
+  createInjectionKey,
+  createKey,
   resolveWrappedSlot,
   warnOnce
 } from '../../_utils'
-import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { tagLight } from '../styles'
-import type { TagTheme } from '../styles'
 import commonProps from './common-props'
 import style from './styles/index.cssr'
 
@@ -72,10 +71,17 @@ export const tagInjectionKey = createInjectionKey<TagInjection>('n-tag')
 
 export type TagProps = ExtractPublicPropTypes<typeof tagProps>
 
+export interface TagSlots {
+  default?: () => VNode[]
+  avatar?: () => VNode[]
+  icon?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Tag',
   props: tagProps,
-  setup (props) {
+  slots: Object as SlotsType<TagSlots>,
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.onCheckedChange !== undefined) {
@@ -104,7 +110,7 @@ export default defineComponent({
     provide(tagInjectionKey, {
       roundRef: toRef(props, 'round')
     })
-    function handleClick (e: MouseEvent): void {
+    function handleClick(): void {
       if (!props.disabled) {
         if (props.checkable) {
           const {
@@ -113,26 +119,31 @@ export default defineComponent({
             onUpdateChecked,
             'onUpdate:checked': _onUpdateChecked
           } = props
-          if (onUpdateChecked) onUpdateChecked(!checked)
-          if (_onUpdateChecked) _onUpdateChecked(!checked)
+          if (onUpdateChecked)
+            onUpdateChecked(!checked)
+          if (_onUpdateChecked)
+            _onUpdateChecked(!checked)
           // deprecated
-          if (onCheckedChange) onCheckedChange(!checked)
+          if (onCheckedChange)
+            onCheckedChange(!checked)
         }
       }
     }
-    function handleCloseClick (e: MouseEvent): void {
+    function handleCloseClick(e: MouseEvent): void {
       if (!props.triggerClickOnClose) {
         e.stopPropagation()
       }
       if (!props.disabled) {
         const { onClose } = props
-        if (onClose) call(onClose, e)
+        if (onClose)
+          call(onClose, e)
       }
     }
     const tagPublicMethods: TagPublicMethods = {
-      setTextContent (textContent: string) {
+      setTextContent(textContent: string) {
         const { value } = contentRef
-        if (value) value.textContent = textContent
+        if (value)
+          value.textContent = textContent
       }
     }
     const rtlEnabledRef = useRtl('Tag', mergedRtlRef, mergedClsPrefixRef)
@@ -143,7 +154,6 @@ export default defineComponent({
         self: {
           padding,
           closeMargin,
-          closeMarginRtl,
           borderRadius,
           opacityDisabled,
           textColorCheckable,
@@ -173,6 +183,7 @@ export default defineComponent({
           [createKey('closeColorPressed', type)]: closeColorPressed
         }
       } = themeRef.value
+      const closeMarginDiscrete = getMargin(closeMargin)
       return {
         '--n-font-weight-strong': fontWeightStrong,
         '--n-avatar-size-override': `calc(${height} - 8px)`,
@@ -187,8 +198,10 @@ export default defineComponent({
         '--n-close-icon-color-hover': closeIconColorHover,
         '--n-close-icon-color-pressed': closeIconColorPressed,
         '--n-close-icon-color-disabled': closeIconColor,
-        '--n-close-margin': closeMargin,
-        '--n-close-margin-rtl': closeMarginRtl,
+        '--n-close-margin-top': closeMarginDiscrete.top,
+        '--n-close-margin-right': closeMarginDiscrete.right,
+        '--n-close-margin-bottom': closeMarginDiscrete.bottom,
+        '--n-close-margin-left': closeMarginDiscrete.left,
         '--n-close-size': closeSize,
         '--n-color':
           color || (mergedBorderedRef.value ? colorBordered : typedColor),
@@ -211,26 +224,26 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'tag',
-        computed(() => {
-          let hash = ''
-          const { type, size, color: { color, textColor } = {} } = props
-          hash += type[0]
-          hash += size[0]
-          if (color) {
-            hash += `a${color2Class(color)}`
-          }
-          if (textColor) {
-            hash += `b${color2Class(textColor)}`
-          }
-          if (mergedBorderedRef.value) {
-            hash += 'c'
-          }
-          return hash
-        }),
-        cssVarsRef,
-        props
-      )
+          'tag',
+          computed(() => {
+            let hash = ''
+            const { type, size, color: { color, textColor } = {} } = props
+            hash += type[0]
+            hash += size[0]
+            if (color) {
+              hash += `a${color2Class(color)}`
+            }
+            if (textColor) {
+              hash += `b${color2Class(textColor)}`
+            }
+            if (mergedBorderedRef.value) {
+              hash += 'c'
+            }
+            return hash
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       ...tagPublicMethods,
@@ -245,7 +258,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       rtlEnabled,
@@ -258,14 +271,14 @@ export default defineComponent({
     onRender?.()
     const avatarNode = resolveWrappedSlot(
       $slots.avatar,
-      (children) =>
+      children =>
         children && (
           <div class={`${mergedClsPrefix}-tag__avatar`}>{children}</div>
         )
     )
     const iconNode = resolveWrappedSlot(
       $slots.icon,
-      (children) =>
+      children =>
         children && <div class={`${mergedClsPrefix}-tag__icon`}>{children}</div>
     )
     return (

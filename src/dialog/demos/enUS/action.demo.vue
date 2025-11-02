@@ -4,6 +4,20 @@
 Sometimes you may want to customize `action` and `content` .
 </markdown>
 
+<script lang="ts" setup>
+import { useDialog } from 'naive-ui'
+
+const dialog = useDialog()
+
+function handleConfirm() {
+  dialog.warning({
+    title: 'Use Render Function',
+    content: () => 'Content',
+    action: () => 'Action'
+  })
+}
+</script>
+
 <template>
   <n-space>
     <n-button @click="handleConfirm">
@@ -11,23 +25,3 @@ Sometimes you may want to customize `action` and `content` .
     </n-button>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { useDialog } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const dialog = useDialog()
-    return {
-      handleConfirm () {
-        dialog.warning({
-          title: 'Use Render Function',
-          content: () => 'Content',
-          action: () => 'Action'
-        })
-      }
-    }
-  }
-})
-</script>

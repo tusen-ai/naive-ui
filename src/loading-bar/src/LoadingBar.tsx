@@ -1,22 +1,21 @@
+import type { CSSProperties, PropType } from 'vue'
 import {
-  h,
-  Transition,
   computed,
   defineComponent,
+  h,
   inject,
-  withDirectives,
-  vShow,
-  ref,
   nextTick,
-  PropType,
-  CSSProperties
+  ref,
+  Transition,
+  vShow,
+  withDirectives
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { loadingBarLight } from '../styles'
 import { loadingBarProviderInjectionKey } from './context'
 import style from './styles/index.cssr'
 
-function createClassName (
+function createClassName(
   status: 'error' | 'finishing' | 'starting',
   clsPrefix: string
 ): string {
@@ -26,15 +25,14 @@ function createClassName (
 export default defineComponent({
   name: 'LoadingBar',
   props: {
+    containerClass: String,
     containerStyle: [String, Object] as PropType<string | CSSProperties>
   },
-  setup () {
+  setup() {
     const { inlineThemeDisabled } = useConfig()
-    const {
-      props: providerProps,
-      mergedClsPrefixRef
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    } = inject(loadingBarProviderInjectionKey)!
+    const { props: providerProps, mergedClsPrefixRef } = inject(
+      loadingBarProviderInjectionKey
+    )!
     const loadingBarRef = ref<HTMLElement | null>(null)
     const enteringRef = ref(false)
     const startedRef = ref(false)
@@ -44,10 +42,11 @@ export default defineComponent({
     const erroringRef = ref(false)
     const mergedLoadingBarStyle = computed(() => {
       const { loadingBarStyle } = providerProps
-      if (!loadingBarStyle) return ''
+      if (!loadingBarStyle)
+        return ''
       return loadingBarStyle[erroringRef.value ? 'error' : 'loading']
     })
-    async function init (): Promise<void> {
+    async function init(): Promise<void> {
       enteringRef.value = false
       loadingRef.value = false
       finishing = false
@@ -56,17 +55,20 @@ export default defineComponent({
       await nextTick()
       transitionDisabledRef.value = false
     }
-    async function start (
+    async function start(
       fromProgress = 0,
       toProgress = 80,
       status: 'starting' | 'error' = 'starting'
     ): Promise<void> {
-      await init()
-      loadingRef.value = true
       startedRef.value = true
+      await init()
+      if (finishing)
+        return
+      loadingRef.value = true
       await nextTick()
       const el = loadingBarRef.value
-      if (!el) return
+      if (!el)
+        return
       el.style.maxWidth = `${fromProgress}%`
       el.style.transition = 'none'
       void el.offsetWidth
@@ -74,44 +76,53 @@ export default defineComponent({
       el.style.transition = ''
       el.style.maxWidth = `${toProgress}%`
     }
-    function finish (): void {
-      if (finishing || erroringRef.value || !loadingRef.value) return
+    async function finish(): Promise<void> {
+      if (finishing || erroringRef.value)
+        return
+      if (startedRef.value) {
+        await nextTick()
+      }
       finishing = true
       const el = loadingBarRef.value
-      if (!el) return
+      if (!el)
+        return
       el.className = createClassName('finishing', mergedClsPrefixRef.value)
       el.style.maxWidth = '100%'
       void el.offsetWidth
       loadingRef.value = false
     }
-    function error (): void {
-      if (finishing || erroringRef.value) return
+    function error(): void {
+      if (finishing || erroringRef.value)
+        return
       if (!loadingRef.value) {
         void start(100, 100, 'error').then(() => {
           erroringRef.value = true
           const el = loadingBarRef.value
-          if (!el) return
+          if (!el)
+            return
           el.className = createClassName('error', mergedClsPrefixRef.value)
           void el.offsetWidth
           loadingRef.value = false
         })
-      } else {
+      }
+      else {
         erroringRef.value = true
         const el = loadingBarRef.value
-        if (!el) return
+        if (!el)
+          return
         el.className = createClassName('error', mergedClsPrefixRef.value)
         el.style.maxWidth = '100%'
         void el.offsetWidth
         loadingRef.value = false
       }
     }
-    function handleEnter (): void {
+    function handleEnter(): void {
       enteringRef.value = true
     }
-    function handleAfterEnter (): void {
+    function handleAfterEnter(): void {
       enteringRef.value = false
     }
-    async function handleAfterLeave (): Promise<void> {
+    async function handleAfterLeave(): Promise<void> {
       await init()
     }
     const themeRef = useTheme(
@@ -154,8 +165,9 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
-    if (!this.started) return null
+  render() {
+    if (!this.started)
+      return null
     const { mergedClsPrefix } = this
     return (
       <Transition
@@ -163,7 +175,6 @@ export default defineComponent({
         appear
         onEnter={this.handleEnter}
         onAfterEnter={this.handleAfterEnter}
-        // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onAfterLeave={this.handleAfterLeave}
         css={!this.transitionDisabled}
       >
@@ -179,7 +190,8 @@ export default defineComponent({
               <div
                 class={[
                   `${mergedClsPrefix}-loading-bar-container`,
-                  this.themeClass
+                  this.themeClass,
+                  this.containerClass
                 ]}
                 style={this.containerStyle}
               >

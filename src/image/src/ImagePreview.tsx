@@ -1,93 +1,108 @@
+import type { CSSProperties, PropType, VNode } from 'vue'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { MoveStrategy } from './interface'
+import type { ImagePreviewInst } from './public-types'
+import { off, on } from 'evtd'
+import { kebabCase } from 'lodash-es'
+import { beforeNextFrameOnce } from 'seemly'
+import { zindexable } from 'vdirs'
+import { useIsMounted, useMergedState } from 'vooks'
 import {
-  h,
+  computed,
   defineComponent,
   Fragment,
+  h,
+  inject,
+  normalizeStyle,
+  onBeforeUnmount,
   ref,
-  withDirectives,
+  toRef,
+  toRefs,
   Transition,
   vShow,
   watch,
-  computed,
-  CSSProperties,
-  PropType,
-  toRef,
-  onBeforeUnmount,
-  VNode,
-  inject,
-  normalizeStyle
+  withDirectives
 } from 'vue'
-import { zindexable } from 'vdirs'
-import { useIsMounted } from 'vooks'
 import { LazyTeleport } from 'vueuc'
-import { on, off } from 'evtd'
-import { beforeNextFrameOnce } from 'seemly'
-import { kebabCase } from 'lodash-es'
+import { NBaseIcon } from '../../_internal'
 import {
+  DownloadIcon,
+  ResizeSmallIcon,
   RotateClockwiseIcon,
   RotateCounterclockwiseIcon,
   ZoomInIcon,
-  ZoomOutIcon,
-  ResizeSmallIcon
+  ZoomOutIcon
 } from '../../_internal/icons'
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
-import { NBaseIcon } from '../../_internal'
+import { call, download } from '../../_utils'
 import { NTooltip } from '../../tooltip'
 import { imageLight } from '../styles'
-import { prevIcon, nextIcon, closeIcon } from './icons'
-import {
-  imageContextKey,
-  MoveStrategy,
-  imagePreviewSharedProps
-} from './interface'
+import { renderCloseIcon, renderNextIcon, renderPrevIcon } from './icons'
+import { imageContextKey, imagePreviewSharedProps } from './interface'
 import style from './styles/index.cssr'
 
 const BLEEDING = 32
 
-export interface ImagePreviewInst {
-  setThumbnailEl: (e: HTMLImageElement | null) => void
-  setPreviewSrc: (src?: string) => void
-  toggleShow: () => void
+export const imagePreviewProps = {
+  ...imagePreviewSharedProps,
+  src: String,
+  show: {
+    type: Boolean,
+    default: undefined
+  },
+  defaultShow: Boolean,
+  'onUpdate:show': [Function, Array] as PropType<
+    MaybeArray<(show: boolean) => void>
+  >,
+  onUpdateShow: [Function, Array] as PropType<
+    MaybeArray<(show: boolean) => void>
+  >,
+  onNext: Function as PropType<() => void>,
+  onPrev: Function as PropType<() => void>,
+  onClose: [Function, Array] as PropType<MaybeArray<() => void>>
 }
+
+export type ImagePreviewProps = ExtractPublicPropTypes<typeof imagePreviewProps>
 
 export default defineComponent({
   name: 'ImagePreview',
-  props: {
-    ...imagePreviewSharedProps,
-    onNext: Function as PropType<() => void>,
-    onPrev: Function as PropType<() => void>,
-    clsPrefix: {
-      type: String,
-      required: true
-    }
-  },
-  setup (props) {
+  props: imagePreviewProps,
+  setup(props) {
+    const { src } = toRefs(props)
+
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Image',
       '-image',
       style,
       imageLight,
       props,
-      toRef(props, 'clsPrefix')
+      mergedClsPrefixRef
     )
     let thumbnailEl: HTMLImageElement | null = null
     const previewRef = ref<HTMLImageElement | null>(null)
     const previewWrapperRef = ref<HTMLDivElement | null>(null)
-    const previewSrcRef = ref<string | undefined>(undefined)
-    const showRef = ref(false)
+
     const displayedRef = ref(false)
     const { localeRef } = useLocale('Image')
 
-    function syncTransformOrigin (): void {
+    const uncontrolledShowRef = ref(props.defaultShow)
+    const controlledShowRef = toRef(props, 'show')
+    const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
+
+    function syncTransformOrigin(): void {
       const { value: previewWrapper } = previewWrapperRef
-      if (!thumbnailEl || !previewWrapper) return
+      if (!thumbnailEl || !previewWrapper)
+        return
       const { style } = previewWrapper
       const tbox = thumbnailEl.getBoundingClientRect()
       const tx = tbox.left + tbox.width / 2
       const ty = tbox.top + tbox.height / 2
+
       style.transformOrigin = `${tx}px ${ty}px`
     }
 
-    function handleKeydown (e: KeyboardEvent): void {
+    function handleKeydown(e: KeyboardEvent): void {
       switch (e.key) {
         case ' ':
           e.preventDefault()
@@ -98,16 +113,39 @@ export default defineComponent({
         case 'ArrowRight':
           props.onNext?.()
           break
+        case 'ArrowUp':
+          e.preventDefault()
+          zoomIn()
+          break
+        case 'ArrowDown':
+          e.preventDefault()
+          zoomOut()
+          break
         case 'Escape':
-          toggleShow()
+          close()
           break
       }
     }
 
-    watch(showRef, (value) => {
+    function doUpdateShow(value: boolean): void {
+      const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
+      if (onUpdateShow) {
+        call(onUpdateShow, value)
+      }
+      if (_onUpdateShow) {
+        call(_onUpdateShow, value)
+      }
+      uncontrolledShowRef.value = value
+      displayedRef.value = true
+    }
+
+    watch(mergedShowRef, (value) => {
       if (value) {
         on('keydown', document, handleKeydown)
-      } else off('keydown', document, handleKeydown)
+      }
+      else {
+        off('keydown', document, handleKeydown)
+      }
     })
 
     onBeforeUnmount(() => {
@@ -124,13 +162,15 @@ export default defineComponent({
     let mouseDownClientY = 0
 
     let dragging = false
-    function handleMouseMove (e: MouseEvent): void {
+
+    function handleMouseMove(e: MouseEvent): void {
       const { clientX, clientY } = e
       offsetX = clientX - startX
       offsetY = clientY - startY
       beforeNextFrameOnce(derivePreviewStyle)
     }
-    function getMoveStrategy (opts: {
+
+    function getMoveStrategy(opts: {
       mouseUpClientX: number
       mouseUpClientY: number
       mouseDownClientX: number
@@ -144,14 +184,10 @@ export default defineComponent({
       } = opts
       const deltaHorizontal = mouseDownClientX - mouseUpClientX
       const deltaVertical = mouseDownClientY - mouseUpClientY
-      const moveVerticalDirection:
-      | 'verticalTop'
-      | 'verticalBottom' = `vertical${deltaVertical > 0 ? 'Top' : 'Bottom'}`
-      const moveHorizontalDirection:
-      | 'horizontalLeft'
-      | 'horizontalRight' = `horizontal${
-        deltaHorizontal > 0 ? 'Left' : 'Right'
-      }`
+      const moveVerticalDirection: 'verticalTop' | 'verticalBottom'
+        = `vertical${deltaVertical > 0 ? 'Top' : 'Bottom'}`
+      const moveHorizontalDirection: 'horizontalLeft' | 'horizontalRight'
+        = `horizontal${deltaHorizontal > 0 ? 'Left' : 'Right'}`
 
       return {
         moveVerticalDirection,
@@ -160,13 +196,15 @@ export default defineComponent({
         deltaVertical
       }
     }
+
     // avoid image move outside viewport
-    function getDerivedOffset (moveStrategy?: MoveStrategy): {
+    function getDerivedOffset(moveStrategy?: MoveStrategy): {
       offsetX: number
       offsetY: number
     } {
       const { value: preview } = previewRef
-      if (!preview) return { offsetX: 0, offsetY: 0 }
+      if (!preview)
+        return { offsetX: 0, offsetY: 0 }
       const pbox = preview.getBoundingClientRect()
       const {
         moveVerticalDirection,
@@ -179,16 +217,20 @@ export default defineComponent({
       let nextOffsetY = 0
       if (pbox.width <= window.innerWidth) {
         nextOffsetX = 0
-      } else if (pbox.left > 0) {
+      }
+      else if (pbox.left > 0) {
         nextOffsetX = (pbox.width - window.innerWidth) / 2
-      } else if (pbox.right < window.innerWidth) {
+      }
+      else if (pbox.right < window.innerWidth) {
         nextOffsetX = -(pbox.width - window.innerWidth) / 2
-      } else if (moveHorizontalDirection === 'horizontalRight') {
+      }
+      else if (moveHorizontalDirection === 'horizontalRight') {
         nextOffsetX = Math.min(
           (pbox.width - window.innerWidth) / 2,
           startOffsetX - (deltaHorizontal ?? 0)
         )
-      } else {
+      }
+      else {
         nextOffsetX = Math.max(
           -((pbox.width - window.innerWidth) / 2),
           startOffsetX - (deltaHorizontal ?? 0)
@@ -197,16 +239,20 @@ export default defineComponent({
 
       if (pbox.height <= window.innerHeight) {
         nextOffsetY = 0
-      } else if (pbox.top > 0) {
+      }
+      else if (pbox.top > 0) {
         nextOffsetY = (pbox.height - window.innerHeight) / 2
-      } else if (pbox.bottom < window.innerHeight) {
+      }
+      else if (pbox.bottom < window.innerHeight) {
         nextOffsetY = -(pbox.height - window.innerHeight) / 2
-      } else if (moveVerticalDirection === 'verticalBottom') {
+      }
+      else if (moveVerticalDirection === 'verticalBottom') {
         nextOffsetY = Math.min(
           (pbox.height - window.innerHeight) / 2,
           startOffsetY - (deltaVertical ?? 0)
         )
-      } else {
+      }
+      else {
         nextOffsetY = Math.max(
           -((pbox.height - window.innerHeight) / 2),
           startOffsetY - (deltaVertical ?? 0)
@@ -218,7 +264,7 @@ export default defineComponent({
         offsetY: nextOffsetY
       }
     }
-    function handleMouseUp (e: MouseEvent): void {
+    function handleMouseUp(e: MouseEvent): void {
       off('mousemove', document, handleMouseMove)
       off('mouseup', document, handleMouseUp)
       const { clientX: mouseUpClientX, clientY: mouseUpClientY } = e
@@ -236,9 +282,10 @@ export default defineComponent({
     }
     const imageContext = inject(imageContextKey, null)
 
-    function handlePreviewMousedown (e: MouseEvent): void {
+    function handlePreviewMousedown(e: MouseEvent): void {
       imageContext?.previewedImgPropsRef.value?.onMousedown?.(e)
-      if (e.button !== 0) return
+      if (e.button !== 0)
+        return
 
       const { clientX, clientY } = e
       dragging = true
@@ -254,42 +301,43 @@ export default defineComponent({
       on('mousemove', document, handleMouseMove)
       on('mouseup', document, handleMouseUp)
     }
-    function handlePreviewDblclick (e: MouseEvent): void {
-      imageContext?.previewedImgPropsRef.value?.onDblclick?.(e)
-      const originalImageSizeScale = getOrignalImageSizeScale()
-      scale = scale === originalImageSizeScale ? 1 : originalImageSizeScale
-      derivePreviewStyle()
-    }
 
     const scaleRadix = 1.5
     let scaleExp = 0
     let scale = 1
     let rotate = 0
-    function resetScale (): void {
+    function handlePreviewDblclick(e: MouseEvent): void {
+      imageContext?.previewedImgPropsRef.value?.onDblclick?.(e)
+      const originalImageSizeScale = getOrignalImageSizeScale()
+      scale = scale === originalImageSizeScale ? 1 : originalImageSizeScale
+      derivePreviewStyle()
+    }
+    function resetScale(): void {
       scale = 1
       scaleExp = 0
     }
-    function handleSwitchPrev (): void {
+    function handleSwitchPrev(): void {
       resetScale()
       rotate = 0
       props.onPrev?.()
     }
-    function handleSwitchNext (): void {
+    function handleSwitchNext(): void {
       resetScale()
       rotate = 0
       props.onNext?.()
     }
-    function rotateCounterclockwise (): void {
+    function rotateCounterclockwise(): void {
       rotate -= 90
       derivePreviewStyle()
     }
-    function rotateClockwise (): void {
+    function rotateClockwise(): void {
       rotate += 90
       derivePreviewStyle()
     }
-    function getMaxScale (): number {
+    function getMaxScale(): number {
       const { value: preview } = previewRef
-      if (!preview) return 1
+      if (!preview)
+        return 1
       const { innerWidth, innerHeight } = window
       const heightMaxScale = Math.max(
         1,
@@ -301,9 +349,10 @@ export default defineComponent({
       )
       return Math.max(3, heightMaxScale * 2, widthMaxScale * 2)
     }
-    function getOrignalImageSizeScale (): number {
+    function getOrignalImageSizeScale(): number {
       const { value: preview } = previewRef
-      if (!preview) return 1
+      if (!preview)
+        return 1
       const { innerWidth, innerHeight } = window
       const heightScale = preview.naturalHeight / (innerHeight - BLEEDING)
       const widthScale = preview.naturalWidth / (innerWidth - BLEEDING)
@@ -312,19 +361,20 @@ export default defineComponent({
       }
       return Math.max(heightScale, widthScale)
     }
-    function zoomIn (): void {
+
+    function zoomIn(): void {
       const maxScale = getMaxScale()
       if (scale < maxScale) {
         scaleExp += 1
-        scale = Math.min(maxScale, Math.pow(scaleRadix, scaleExp))
+        scale = Math.min(maxScale, scaleRadix ** scaleExp)
         derivePreviewStyle()
       }
     }
-    function zoomOut (): void {
+    function zoomOut(): void {
       if (scale > 0.5) {
         const originalScale = scale
         scaleExp -= 1
-        scale = Math.max(0.5, Math.pow(scaleRadix, scaleExp))
+        scale = Math.max(0.5, scaleRadix ** scaleExp)
         const diff = originalScale - scale
         derivePreviewStyle(false)
         const offset = getDerivedOffset()
@@ -337,44 +387,57 @@ export default defineComponent({
       }
     }
 
-    function derivePreviewStyle (transition: boolean = true): void {
+    function handleDownloadClick(): void {
+      const imgSrc = src.value
+      if (imgSrc) {
+        download(imgSrc, undefined)
+      }
+    }
+
+    function derivePreviewStyle(transition: boolean = true): void {
       const { value: preview } = previewRef
-      if (!preview) return
+      if (!preview)
+        return
       const { style } = preview
       const controlledStyle = normalizeStyle(
         imageContext?.previewedImgPropsRef.value?.style
       )
       let controlledStyleString = ''
       if (typeof controlledStyle === 'string') {
-        controlledStyleString = controlledStyle + ';'
-      } else {
+        controlledStyleString = `${controlledStyle};`
+      }
+      else {
         for (const key in controlledStyle) {
           controlledStyleString += `${kebabCase(key)}: ${controlledStyle[key]};`
         }
       }
       const transformStyle = `transform-origin: center; transform: translateX(${offsetX}px) translateY(${offsetY}px) rotate(${rotate}deg) scale(${scale});`
       if (dragging) {
-        style.cssText =
-          controlledStyleString +
-          'cursor: grabbing; transition: none;' +
+        style.cssText = `${
+          controlledStyleString
+        }cursor: grabbing; transition: none;${transformStyle}`
+      }
+      else {
+        style.cssText = `${controlledStyleString}cursor: grab;${
           transformStyle
-      } else {
-        style.cssText =
-          controlledStyleString +
-          'cursor: grab;' +
-          transformStyle +
-          (transition ? '' : 'transition: none;')
+        }${transition ? '' : 'transition: none;'}`
       }
       if (!transition) {
         void preview.offsetHeight
       }
     }
 
-    function toggleShow (): void {
-      showRef.value = !showRef.value
-      displayedRef.value = true
+    function close() {
+      if (mergedShowRef.value) {
+        const { onClose } = props
+        if (onClose)
+          call(onClose)
+        doUpdateShow(false)
+        uncontrolledShowRef.value = false
+      }
     }
-    function resizeToOrignalImageSize (): void {
+
+    function resizeToOrignalImageSize(): void {
       scale = getOrignalImageSizeScale()
       scaleExp = Math.ceil(Math.log(scale) / Math.log(scaleRadix))
       offsetX = 0
@@ -382,16 +445,12 @@ export default defineComponent({
       derivePreviewStyle()
     }
     const exposedMethods: ImagePreviewInst = {
-      setPreviewSrc: (src) => {
-        previewSrcRef.value = src
-      },
       setThumbnailEl: (el) => {
         thumbnailEl = el
-      },
-      toggleShow
+      }
     }
 
-    function withTooltip (
+    function withTooltip(
       node: VNode,
       tooltipKey: keyof typeof localeRef.value
     ): VNode {
@@ -412,7 +471,8 @@ export default defineComponent({
             }}
           </NTooltip>
         )
-      } else {
+      }
+      else {
         return node
       }
     }
@@ -442,17 +502,20 @@ export default defineComponent({
       ? useThemeClass('image-preview', undefined, cssVarsRef, props)
       : undefined
 
+    function handleWheel(event: WheelEvent) {
+      event.preventDefault()
+    }
+
     return {
+      clsPrefix: mergedClsPrefixRef,
       previewRef,
       previewWrapperRef,
-      previewSrc: previewSrcRef,
-      show: showRef,
+      previewSrc: src,
+      mergedShow: mergedShowRef,
       appear: useIsMounted(),
       displayed: displayedRef,
       previewedImgProps: imageContext?.previewedImgPropsRef,
-      handleWheel (e: WheelEvent) {
-        e.preventDefault()
-      },
+      handleWheel,
       handlePreviewMousedown,
       handlePreviewDblclick,
       syncTransformOrigin,
@@ -467,6 +530,7 @@ export default defineComponent({
       },
       zoomIn,
       zoomOut,
+      handleDownloadClick,
       rotateCounterclockwise,
       rotateClockwise,
       handleSwitchPrev,
@@ -476,23 +540,94 @@ export default defineComponent({
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
+      doUpdateShow,
+      close,
       ...exposedMethods
     }
   },
-  render () {
-    const { clsPrefix } = this
+  render() {
+    const { clsPrefix, renderToolbar, withTooltip } = this
+
+    const prevNode = withTooltip(
+      <NBaseIcon clsPrefix={clsPrefix} onClick={this.handleSwitchPrev}>
+        {{ default: renderPrevIcon }}
+      </NBaseIcon>,
+      'tipPrevious'
+    )
+    const nextNode = withTooltip(
+      <NBaseIcon clsPrefix={clsPrefix} onClick={this.handleSwitchNext}>
+        {{ default: renderNextIcon }}
+      </NBaseIcon>,
+      'tipNext'
+    )
+
+    const rotateCounterclockwiseNode = withTooltip(
+      <NBaseIcon clsPrefix={clsPrefix} onClick={this.rotateCounterclockwise}>
+        {{
+          default: () => <RotateCounterclockwiseIcon />
+        }}
+      </NBaseIcon>,
+      'tipCounterclockwise'
+    )
+    const rotateClockwiseNode = withTooltip(
+      <NBaseIcon clsPrefix={clsPrefix} onClick={this.rotateClockwise}>
+        {{
+          default: () => <RotateClockwiseIcon />
+        }}
+      </NBaseIcon>,
+      'tipClockwise'
+    )
+    const originalSizeNode = withTooltip(
+      <NBaseIcon clsPrefix={clsPrefix} onClick={this.resizeToOrignalImageSize}>
+        {{
+          default: () => {
+            return <ResizeSmallIcon />
+          }
+        }}
+      </NBaseIcon>,
+      'tipOriginalSize'
+    )
+    const zoomOutNode = withTooltip(
+      <NBaseIcon clsPrefix={clsPrefix} onClick={this.zoomOut}>
+        {{ default: () => <ZoomOutIcon /> }}
+      </NBaseIcon>,
+      'tipZoomOut'
+    )
+
+    const downloadNode = withTooltip(
+      <NBaseIcon clsPrefix={clsPrefix} onClick={this.handleDownloadClick}>
+        {{ default: () => <DownloadIcon /> }}
+      </NBaseIcon>,
+      'tipDownload'
+    )
+
+    const closeNode = withTooltip(
+      <NBaseIcon clsPrefix={clsPrefix} onClick={() => this.close()}>
+        {{ default: renderCloseIcon }}
+      </NBaseIcon>,
+      'tipClose'
+    )
+
+    const zoomInNode = withTooltip(
+      <NBaseIcon clsPrefix={clsPrefix} onClick={this.zoomIn}>
+        {{ default: () => <ZoomInIcon /> }}
+      </NBaseIcon>,
+      'tipZoomIn'
+    )
+
     return (
       <>
         {this.$slots.default?.()}
-        <LazyTeleport show={this.show}>
+        <LazyTeleport show={this.mergedShow}>
           {{
             default: () => {
-              if (!(this.show || this.displayed)) {
+              if (!(this.mergedShow || this.displayed)) {
                 return null
               }
               this.onRender?.()
               return withDirectives(
                 <div
+                  ref="containerRef"
                   class={[
                     `${clsPrefix}-image-preview-container`,
                     this.themeClass
@@ -503,10 +638,10 @@ export default defineComponent({
                   <Transition name="fade-in-transition" appear={this.appear}>
                     {{
                       default: () =>
-                        this.show ? (
+                        this.mergedShow ? (
                           <div
                             class={`${clsPrefix}-image-preview-overlay`}
-                            onClick={this.toggleShow}
+                            onClick={() => this.close()}
                           />
                         ) : null
                     }}
@@ -515,95 +650,41 @@ export default defineComponent({
                     <Transition name="fade-in-transition" appear={this.appear}>
                       {{
                         default: () => {
-                          if (!this.show) return null
-                          const { withTooltip } = this
+                          if (!this.mergedShow)
+                            return null
                           return (
                             <div class={`${clsPrefix}-image-preview-toolbar`}>
-                              {this.onPrev ? (
+                              {renderToolbar ? (
+                                renderToolbar({
+                                  nodes: {
+                                    prev: prevNode,
+                                    next: nextNode,
+                                    rotateCounterclockwise:
+                                      rotateCounterclockwiseNode,
+                                    rotateClockwise: rotateClockwiseNode,
+                                    resizeToOriginalSize: originalSizeNode,
+                                    zoomOut: zoomOutNode,
+                                    zoomIn: zoomInNode,
+                                    download: downloadNode,
+                                    close: closeNode
+                                  }
+                                })
+                              ) : (
                                 <>
-                                  {withTooltip(
-                                    <NBaseIcon
-                                      clsPrefix={clsPrefix}
-                                      onClick={this.handleSwitchPrev}
-                                    >
-                                      {{ default: () => prevIcon }}
-                                    </NBaseIcon>,
-                                    'tipPrevious'
-                                  )}
-                                  {withTooltip(
-                                    <NBaseIcon
-                                      clsPrefix={clsPrefix}
-                                      onClick={this.handleSwitchNext}
-                                    >
-                                      {{ default: () => nextIcon }}
-                                    </NBaseIcon>,
-                                    'tipNext'
-                                  )}
+                                  {this.onPrev ? (
+                                    <>
+                                      {prevNode}
+                                      {nextNode}
+                                    </>
+                                  ) : null}
+                                  {rotateCounterclockwiseNode}
+                                  {rotateClockwiseNode}
+                                  {originalSizeNode}
+                                  {zoomOutNode}
+                                  {zoomInNode}
+                                  {downloadNode}
+                                  {closeNode}
                                 </>
-                              ) : null}
-                              {withTooltip(
-                                <NBaseIcon
-                                  clsPrefix={clsPrefix}
-                                  onClick={this.rotateCounterclockwise}
-                                >
-                                  {{
-                                    default: () => (
-                                      <RotateCounterclockwiseIcon />
-                                    )
-                                  }}
-                                </NBaseIcon>,
-                                'tipCounterclockwise'
-                              )}
-                              {withTooltip(
-                                <NBaseIcon
-                                  clsPrefix={clsPrefix}
-                                  onClick={this.rotateClockwise}
-                                >
-                                  {{
-                                    default: () => <RotateClockwiseIcon />
-                                  }}
-                                </NBaseIcon>,
-                                'tipClockwise'
-                              )}
-                              {withTooltip(
-                                <NBaseIcon
-                                  clsPrefix={clsPrefix}
-                                  onClick={this.resizeToOrignalImageSize}
-                                >
-                                  {{
-                                    default: () => {
-                                      return <ResizeSmallIcon />
-                                    }
-                                  }}
-                                </NBaseIcon>,
-                                'tipOriginalSize'
-                              )}
-                              {withTooltip(
-                                <NBaseIcon
-                                  clsPrefix={clsPrefix}
-                                  onClick={this.zoomOut}
-                                >
-                                  {{ default: () => <ZoomOutIcon /> }}
-                                </NBaseIcon>,
-                                'tipZoomOut'
-                              )}
-                              {withTooltip(
-                                <NBaseIcon
-                                  clsPrefix={clsPrefix}
-                                  onClick={this.zoomIn}
-                                >
-                                  {{ default: () => <ZoomInIcon /> }}
-                                </NBaseIcon>,
-                                'tipZoomIn'
-                              )}
-                              {withTooltip(
-                                <NBaseIcon
-                                  clsPrefix={clsPrefix}
-                                  onClick={this.toggleShow}
-                                >
-                                  {{ default: () => closeIcon }}
-                                </NBaseIcon>,
-                                'tipClose'
                               )}
                             </div>
                           )
@@ -644,13 +725,13 @@ export default defineComponent({
                               onDragstart={this.handleDragStart}
                             />
                           </div>,
-                          [[vShow, this.show]]
+                          [[vShow, this.mergedShow]]
                         )
                       }
                     }}
                   </Transition>
                 </div>,
-                [[zindexable, { enabled: this.show }]]
+                [[zindexable, { enabled: this.mergedShow }]]
               )
             }
           }}

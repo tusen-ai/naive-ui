@@ -1,16 +1,10 @@
-import {
-  h,
-  defineComponent,
-  computed,
-  CSSProperties,
-  Fragment,
-  PropType
-} from 'vue'
-import { useConfig, useTheme, useThemeClass, useRtl } from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import { thingLight } from '../styles'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ThingTheme } from '../styles'
+import { computed, defineComponent, Fragment, h } from 'vue'
+import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
+import { thingLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const thingProps = {
@@ -18,20 +12,33 @@ export const thingProps = {
   title: String,
   titleExtra: String,
   description: String,
+  descriptionClass: String,
   descriptionStyle: [String, Object] as PropType<string | CSSProperties>,
   content: String,
+  contentClass: String,
   contentStyle: [String, Object] as PropType<string | CSSProperties>,
   contentIndented: Boolean
 }
 
 export type ThingProps = ExtractPublicPropTypes<typeof thingProps>
 
+export interface ThingSlots {
+  action?: () => VNode[]
+  avatar?: () => VNode[]
+  default?: () => VNode[]
+  description?: () => VNode[]
+  footer?: () => VNode[]
+  'header-extra'?: () => VNode[]
+  header?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Thing',
   props: thingProps,
-  setup (props, { slots }) {
-    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
-      useConfig(props)
+  slots: Object as SlotsType<ThingSlots>,
+  setup(props, { slots }) {
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
+      = useConfig(props)
     const themeRef = useTheme(
       'Thing',
       '-thing',
@@ -81,40 +88,80 @@ export default defineComponent({
             </div>
           ) : null}
           <div class={`${mergedClsPrefix}-thing-main`}>
-            {!props.contentIndented &&
-            (slots.header ||
-              props.title ||
-              slots['header-extra'] ||
-              props.titleExtra ||
-              slots.avatar) ? (
-              <div class={`${mergedClsPrefix}-thing-avatar-header-wrapper`}>
-                {slots.avatar ? (
-                  <div class={`${mergedClsPrefix}-thing-avatar`}>
-                    {slots.avatar()}
+            {!props.contentIndented
+              && (slots.header
+                || props.title
+                || slots['header-extra']
+                || props.titleExtra
+                || slots.avatar) ? (
+                  <div class={`${mergedClsPrefix}-thing-avatar-header-wrapper`}>
+                    {slots.avatar ? (
+                      <div class={`${mergedClsPrefix}-thing-avatar`}>
+                        {slots.avatar()}
+                      </div>
+                    ) : null}
+                    {slots.header
+                      || props.title
+                      || slots['header-extra']
+                      || props.titleExtra ? (
+                          <div class={`${mergedClsPrefix}-thing-header-wrapper`}>
+                            <div class={`${mergedClsPrefix}-thing-header`}>
+                              {slots.header || props.title ? (
+                                <div class={`${mergedClsPrefix}-thing-header__title`}>
+                                  {slots.header ? slots.header() : props.title}
+                                </div>
+                              ) : null}
+                              {slots['header-extra'] || props.titleExtra ? (
+                                <div class={`${mergedClsPrefix}-thing-header__extra`}>
+                                  {slots['header-extra']
+                                    ? slots['header-extra']()
+                                    : props.titleExtra}
+                                </div>
+                              ) : null}
+                            </div>
+                            {slots.description || props.description ? (
+                              <div
+                                class={[
+                                  `${mergedClsPrefix}-thing-main__description`,
+                                  props.descriptionClass
+                                ]}
+                                style={props.descriptionStyle}
+                              >
+                                {slots.description
+                                  ? slots.description()
+                                  : props.description}
+                              </div>
+                            ) : null}
+                          </div>
+                        ) : null}
                   </div>
-                ) : null}
-                {slots.header ||
-                props.title ||
-                slots['header-extra'] ||
-                props.titleExtra ? (
-                  <div class={`${mergedClsPrefix}-thing-header-wrapper`}>
-                    <div class={`${mergedClsPrefix}-thing-header`}>
-                      {slots.header || props.title ? (
-                        <div class={`${mergedClsPrefix}-thing-header__title`}>
-                          {slots.header ? slots.header() : props.title}
-                        </div>
-                      ) : null}
-                      {slots['header-extra'] || props.titleExtra ? (
-                        <div class={`${mergedClsPrefix}-thing-header__extra`}>
-                          {slots['header-extra']
-                            ? slots['header-extra']()
-                            : props.titleExtra}
-                        </div>
-                      ) : null}
-                    </div>
+                ) : (
+                  <>
+                    {slots.header
+                      || props.title
+                      || slots['header-extra']
+                      || props.titleExtra ? (
+                          <div class={`${mergedClsPrefix}-thing-header`}>
+                            {slots.header || props.title ? (
+                              <div class={`${mergedClsPrefix}-thing-header__title`}>
+                                {slots.header ? slots.header() : props.title}
+                              </div>
+                            ) : null}
+                            {slots['header-extra'] || props.titleExtra ? (
+                              <div class={`${mergedClsPrefix}-thing-header__extra`}>
+                                {slots['header-extra']
+                                  ? slots['header-extra']()
+                                  : props.titleExtra}
+                              </div>
+                            ) : null}
+                          </div>
+                        ) : null}
                     {slots.description || props.description ? (
                       <div
-                        class={`${mergedClsPrefix}-thing-main__description`}
+                        class={[
+                          `${mergedClsPrefix}-thing-main__description`,
+                          props.descriptionClass
+                        ]}
                         style={props.descriptionStyle}
                       >
                         {slots.description
@@ -122,45 +169,14 @@ export default defineComponent({
                           : props.description}
                       </div>
                     ) : null}
-                  </div>
-                    ) : null}
-              </div>
-                ) : (
-              <>
-                {slots.header ||
-                props.title ||
-                slots['header-extra'] ||
-                props.titleExtra ? (
-                  <div class={`${mergedClsPrefix}-thing-header`}>
-                    {slots.header || props.title ? (
-                      <div class={`${mergedClsPrefix}-thing-header__title`}>
-                        {slots.header ? slots.header() : props.title}
-                      </div>
-                    ) : null}
-                    {slots['header-extra'] || props.titleExtra ? (
-                      <div class={`${mergedClsPrefix}-thing-header__extra`}>
-                        {slots['header-extra']
-                          ? slots['header-extra']()
-                          : props.titleExtra}
-                      </div>
-                    ) : null}
-                  </div>
-                    ) : null}
-                {slots.description || props.description ? (
-                  <div
-                    class={`${mergedClsPrefix}-thing-main__description`}
-                    style={props.descriptionStyle}
-                  >
-                    {slots.description
-                      ? slots.description()
-                      : props.description}
-                  </div>
-                ) : null}
-              </>
+                  </>
                 )}
             {slots.default || props.content ? (
               <div
-                class={`${mergedClsPrefix}-thing-main__content`}
+                class={[
+                  `${mergedClsPrefix}-thing-main__content`,
+                  props.contentClass
+                ]}
                 style={props.contentStyle}
               >
                 {slots.default ? slots.default() : props.content}

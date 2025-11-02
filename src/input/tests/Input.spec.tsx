@@ -11,7 +11,7 @@ describe('n-input', () => {
   })
 
   it('should call input callbacks', async () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = mount(NInput, {
       props: {
         onUpdateValue
@@ -19,7 +19,7 @@ describe('n-input', () => {
     })
     wrapper.find('input').element.value = 'cool'
     await wrapper.find('input').trigger('input')
-    expect(onUpdateValue).toHaveBeenCalledWith('cool')
+    expect(onUpdateValue).toHaveBeenCalledWith('cool', { source: 0 })
     wrapper.unmount()
   })
 
@@ -176,7 +176,7 @@ describe('n-input', () => {
   })
 
   it('should work with `on-blur` prop', async () => {
-    const onBlur = jest.fn()
+    const onBlur = vi.fn()
     const wrapper = mount(NInput, {
       props: { onBlur }
     })
@@ -187,7 +187,7 @@ describe('n-input', () => {
   })
 
   it('should work with `on-change` prop', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const wrapper = mount(NInput, {
       props: { onChange }
     })
@@ -199,7 +199,7 @@ describe('n-input', () => {
   })
 
   it('should work with `on-focus` prop', async () => {
-    const onFocus = jest.fn()
+    const onFocus = vi.fn()
     const wrapper = mount(NInput, {
       props: { onFocus }
     })
@@ -209,7 +209,7 @@ describe('n-input', () => {
   })
 
   it('should work with `on-input` prop', async () => {
-    const onInput = jest.fn()
+    const onInput = vi.fn()
     const wrapper = mount(NInput, {
       props: { onInput }
     })
@@ -220,7 +220,7 @@ describe('n-input', () => {
   })
 
   it('should work with `on-update:value` prop', async () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = mount(NInput, {
       props: { onUpdateValue }
     })
@@ -291,11 +291,11 @@ describe('n-input', () => {
   })
 
   it('should work with `blur` `focus` `select` methods', async () => {
-    const onBlur = jest.fn()
-    const onFocus = jest.fn()
-    const onSelect = jest.fn()
+    const onBlur = vi.fn()
+    const onFocus = vi.fn()
+    const onSelect = vi.fn()
     const Mock = defineComponent({
-      setup () {
+      setup() {
         const inputInstRef: any = ref(null)
         onMounted(() => {
           inputInstRef.value?.focus()
@@ -303,22 +303,25 @@ describe('n-input', () => {
           inputInstRef.value?.select()
         })
         return () => {
-          ;<n-input
-            ref={inputInstRef}
-            onBlur={onBlur}
-            onFocus={onFocus}
-            onSelect={onSelect}
-          />
+          return (
+            <NInput
+              ref={inputInstRef}
+              onBlur={onBlur}
+              onFocus={onFocus}
+              // @ts-expect-error onSelect is not an exposed jsx prop
+              onSelect={onSelect}
+            />
+          )
         }
       }
     })
 
     const wrapper = mount(() => <Mock />)
-    setTimeout(() => {
+    vi.waitFor(() => {
       expect(onBlur).toHaveBeenCalled()
       expect(onFocus).toHaveBeenCalled()
       expect(onSelect).toHaveBeenCalled()
-    }, 0)
+    })
 
     wrapper.unmount()
   })

@@ -1,7 +1,6 @@
-import { onMounted, onUnmounted, Ref, ref } from 'vue'
+import type { Ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { isBrowser } from '../env/is-browser'
-
-const defaultWindow = isBrowser ? window : null
 
 export interface IWindowLocation {
   hash?: string
@@ -15,9 +14,9 @@ export interface IWindowLocation {
   search?: string
 }
 
-export const useBrowserLocation = (
-  customWindow = defaultWindow
-): Ref<IWindowLocation> => {
+export function useBrowserLocation(
+  customWindow = isBrowser ? window : null
+): Ref<IWindowLocation> {
   const getWindowLocation = (): IWindowLocation => {
     const {
       hash,
@@ -43,11 +42,12 @@ export const useBrowserLocation = (
       search
     }
   }
+
+  const locationState = ref(getWindowLocation())
+
   const updateLocation = (): void => {
     locationState.value = getWindowLocation()
   }
-
-  const locationState = ref(getWindowLocation())
 
   onMounted(() => {
     if (customWindow) {

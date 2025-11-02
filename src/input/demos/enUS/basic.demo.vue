@@ -4,6 +4,12 @@
 Basic use of `n-input`.
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const value = ref(null)
+</script>
+
 <template>
   <n-space vertical>
     <n-input v-model:value="value" type="text" placeholder="Basic Input" />
@@ -14,15 +20,3 @@ Basic use of `n-input`.
     />
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      value: ref(null)
-    }
-  }
-})
-</script>

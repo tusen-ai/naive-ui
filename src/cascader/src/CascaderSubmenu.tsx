@@ -1,14 +1,13 @@
-import { h, ref, defineComponent, inject, PropType, computed } from 'vue'
-import { VirtualList, VirtualListInst } from 'vueuc'
-import NCascaderOption from './CascaderOption'
-import { NScrollbar } from '../../_internal'
+import type { PropType } from 'vue'
+import type { VirtualListInst } from 'vueuc'
 import type { ScrollbarInst } from '../../_internal'
-import {
-  TmNode,
-  CascaderSubmenuInstance,
-  cascaderInjectionKey
-} from './interface'
+import type { CascaderSubmenuInstance, TmNode } from './interface'
 import { depx } from 'seemly'
+import { computed, defineComponent, h, inject, ref } from 'vue'
+import { VirtualList } from 'vueuc'
+import { NScrollbar } from '../../_internal'
+import NCascaderOption from './CascaderOption'
+import { cascaderInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'CascaderSubmenu',
@@ -22,23 +21,23 @@ export default defineComponent({
       required: true
     }
   },
-  setup () {
+  setup() {
     const {
       virtualScrollRef,
       mergedClsPrefixRef,
       mergedThemeRef,
       optionHeightRef
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(cascaderInjectionKey)!
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const vlInstRef = ref<VirtualListInst | null>(null)
     const inst: CascaderSubmenuInstance = {
-      scroll (index: number, elSize: number) {
+      scroll(index: number, elSize: number) {
         if (virtualScrollRef.value) {
           vlInstRef.value?.scrollTo({
             index
           })
-        } else {
+        }
+        else {
           scrollbarInstRef.value?.scrollTo({
             index,
             elSize
@@ -65,7 +64,7 @@ export default defineComponent({
       ...inst
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, mergedTheme, virtualScroll } = this
     return (
       <div
@@ -98,7 +97,7 @@ export default defineComponent({
                   }}
                 </VirtualList>
               ) : (
-                this.tmNodes.map((tmNode) => (
+                this.tmNodes.map(tmNode => (
                   <NCascaderOption key={tmNode.key} tmNode={tmNode} />
                 ))
               )

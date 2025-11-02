@@ -4,6 +4,12 @@
 It can be checkable.
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const checked = ref(false)
+</script>
+
 <template>
   <n-space>
     <n-tag v-model:checked="checked" checkable disabled>
@@ -23,15 +29,3 @@ It can be checkable.
     </n-tag>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      checked: ref(false)
-    }
-  }
-})
-</script>

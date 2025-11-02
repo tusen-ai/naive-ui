@@ -2,6 +2,12 @@
 # 触发方式
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const showPopover = ref(false)
+</script>
+
 <template>
   <n-space>
     <n-popover trigger="hover">
@@ -38,15 +44,3 @@
     </n-popover>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      showPopover: ref(false)
-    }
-  }
-})
-</script>

@@ -1,16 +1,18 @@
-import { defineComponent, h } from 'vue'
 import { mount } from '@vue/test-utils'
+import { defineComponent, h } from 'vue'
 import { NGi, NGrid, NGridItem } from '../index'
 
-const renderNGi = new Array(6).fill(1).map((v, i) => {
-  return h(NGi, null, { default: () => i })
-})
+const renderNGi = Array.from({ length: 6 })
+  .fill(1)
+  .map((v, i) => {
+    return h(NGi, null, { default: () => i })
+  })
 
 describe('n-grid', () => {
   it('should work with import on demand', () => {
     mount(
       defineComponent({
-        render () {
+        render() {
           return (
             <NGrid>
               {{
@@ -23,10 +25,10 @@ describe('n-grid', () => {
     )
   })
 
-  it('should work with import on demand', () => {
+  it('should work with import on demand 2', () => {
     mount(
       defineComponent({
-        render () {
+        render() {
           return (
             <NGrid>
               {{
@@ -55,6 +57,7 @@ describe('n-grid', () => {
     expect(wrapper.find('.n-grid').attributes('style')).toContain(
       'column-gap: 10px; row-gap: 20px;'
     )
+    wrapper.unmount()
   })
 
   it('should work with `offset` prop', async () => {
@@ -72,6 +75,7 @@ describe('n-grid', () => {
     expect(
       wrapper.find('.n-grid').element.children[1].getAttribute('style')
     ).toContain('grid-column: span 2 / span 2;')
+    wrapper.unmount()
   })
 
   it('should work with `collapsed` prop', async () => {
@@ -108,6 +112,7 @@ describe('n-grid', () => {
       }
     }
     expect(len1).toBe(2)
+    wrapper.unmount()
   })
 
   it('should work with `suffix` prop', async () => {
@@ -147,6 +152,7 @@ describe('n-grid', () => {
       }
     }
     expect(len1).toBe(3)
+    wrapper.unmount()
   })
 
   it('should work with `item-responsive` prop', async () => {
@@ -177,10 +183,13 @@ describe('n-grid', () => {
     const instance = wrapper.getCurrentComponent().proxy
     ;(instance as any).handleResize({ contentRect: { width: 500 } })
 
-    await new Promise((resolve) => requestAnimationFrame(resolve))
+    await new Promise(resolve => requestAnimationFrame(resolve))
 
-    expect(wrapper.find('.n-gi-1').element.getAttribute('style')).toContain(
-      'grid-column: span 2 / span 2;'
-    )
+    vi.waitFor(() => {
+      expect(wrapper.find('.n-gi-1').element.getAttribute('style')).toContain(
+        'grid-column: span 2 / span 2;'
+      )
+    })
+    wrapper.unmount()
   })
 })

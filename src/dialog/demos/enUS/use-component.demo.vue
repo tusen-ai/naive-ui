@@ -4,6 +4,20 @@
 Sometimes you may want to use a component.
 </markdown>
 
+<script lang="ts" setup>
+import { useMessage } from 'naive-ui'
+
+const message = useMessage()
+
+function handleNegativeClick() {
+  message.warning('Cancel')
+}
+
+function handlePositiveClick() {
+  message.success('Confirm')
+}
+</script>
+
 <template>
   <n-dialog
     title="Dialog"
@@ -14,22 +28,3 @@ Sometimes you may want to use a component.
     @negative-click="handleNegativeClick"
   />
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { useMessage } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const message = useMessage()
-    return {
-      handleNegativeClick () {
-        message.warning('Cancel')
-      },
-      handlePositiveClick () {
-        message.success('Confirm')
-      }
-    }
-  }
-})
-</script>

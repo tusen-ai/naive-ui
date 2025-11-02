@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { NTable, NTbody, NThead, NTd, NTh, NTr } from '../index'
+import { NTable, NTbody, NTd, NTh, NThead, NTr } from '../index'
 
 describe('n-table', () => {
   it('should work with import on demand', () => {
@@ -12,7 +12,7 @@ describe('n-table', () => {
       'n-table--bottom-bordered'
     )
 
-    await wrapper.setProps({ 'bottom-bordered': false })
+    await wrapper.setProps({ bottomBordered: false })
     expect(wrapper.find('.n-table').classes()).not.toContain(
       'n-table--bottom-bordered'
     )
@@ -34,7 +34,7 @@ describe('n-table', () => {
       'n-table--single-column'
     )
 
-    await wrapper.setProps({ 'single-column': true })
+    await wrapper.setProps({ singleColumn: true })
     expect(wrapper.find('.n-table').classes()).toContain(
       'n-table--single-column'
     )
@@ -44,7 +44,7 @@ describe('n-table', () => {
     const wrapper = mount(NTable)
     expect(wrapper.find('.n-table').classes()).toContain('n-table--single-line')
 
-    await wrapper.setProps({ 'single-line': false })
+    await wrapper.setProps({ singleLine: false })
     expect(wrapper.find('.n-table').classes()).not.toContain(
       'n-table--single-line'
     )

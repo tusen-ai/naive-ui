@@ -1,7 +1,7 @@
-import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 import { fadeInWidthExpandTransition } from '../../../_styles/transitions/fade-in-width-expand.cssr'
 import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.cssr'
 import { isBrowser } from '../../../_utils'
+import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
@@ -162,8 +162,8 @@ export default c([
     ]),
     (isBrowser && 'MozBoxSizing' in document.createElement('div').style)
       ? c('&::moz-focus-inner', {
-        border: 0
-      })
+          border: 0
+        })
       : null,
     cE('border, state-border', `
       position: absolute;

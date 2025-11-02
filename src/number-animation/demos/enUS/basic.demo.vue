@@ -2,6 +2,16 @@
 # Basic
 </markdown>
 
+<script lang="ts" setup>
+import type { NumberAnimationInst } from 'naive-ui'
+import { ref } from 'vue'
+
+const numberAnimationInstRef = ref<NumberAnimationInst | null>(null)
+function handleClick() {
+  numberAnimationInstRef.value?.play()
+}
+</script>
+
 <template>
   <n-statistic label="Well" tabular-nums>
     <n-number-animation
@@ -16,20 +26,3 @@
     Play
   </n-button>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { NumberAnimationInst } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const numberAnimationInstRef = ref<NumberAnimationInst | null>(null)
-    return {
-      numberAnimationInstRef,
-      handleClick () {
-        numberAnimationInstRef.value?.play()
-      }
-    }
-  }
-})
-</script>

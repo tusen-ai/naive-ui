@@ -1,10 +1,10 @@
-import { commonDark } from '../../_styles/common'
 import type { LoadingBarTheme } from './light'
+import { commonDark } from '../../_styles/common'
 
 const loadingBarDark: LoadingBarTheme = {
   name: 'LoadingBar',
   common: commonDark,
-  self (vars) {
+  self(vars) {
     const { primaryColor } = vars
     return {
       colorError: 'red',

@@ -1,26 +1,20 @@
-import {
-  h,
-  computed,
-  defineComponent,
-  CSSProperties,
-  provide,
-  Ref,
-  toRef
-} from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import type { CSSProperties, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import { breadcrumbLight } from '../styles'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { BreadcrumbTheme } from '../styles'
+import { computed, defineComponent, h, provide, toRef } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { createInjectionKey } from '../../_utils'
+import { breadcrumbLight } from '../styles'
 import style from './styles/index.cssr'
-import { createInjectionKey, ExtractPublicPropTypes } from '../../_utils'
 
 export interface BreadcrumbInjection {
   separatorRef: Ref<string>
   mergedClsPrefixRef: Ref<string>
 }
 
-export const breadcrumbInjectionKey =
-  createInjectionKey<BreadcrumbInjection>('n-breadcrumb')
+export const breadcrumbInjectionKey
+  = createInjectionKey<BreadcrumbInjection>('n-breadcrumb')
 
 export const breadcrumbProps = {
   ...(useTheme.props as ThemeProps<BreadcrumbTheme>),
@@ -35,7 +29,7 @@ export type BreadcrumbProps = ExtractPublicPropTypes<typeof breadcrumbProps>
 export default defineComponent({
   name: 'Breadcrumb',
   props: breadcrumbProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Breadcrumb',
@@ -91,7 +85,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     this.onRender?.()
     return (
       <nav

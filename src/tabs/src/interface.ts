@@ -1,4 +1,4 @@
-import { Ref, CSSProperties } from 'vue'
+import type { CSSProperties, Ref } from 'vue'
 import { createInjectionKey } from '../../_utils'
 
 export type TabsType = 'line' | 'card' | 'bar' | 'segment'
@@ -24,6 +24,9 @@ export interface TabsInjection {
   typeRef: Ref<TabsType>
   closableRef: Ref<boolean>
   tabStyleRef: Ref<string | CSSProperties | undefined>
+  tabClassRef: Ref<string | undefined>
+  addTabClassRef: Ref<string | undefined>
+  addTabStyleRef: Ref<string | CSSProperties | undefined>
   paneClassRef: Ref<string | undefined>
   paneStyleRef: Ref<string | CSSProperties | undefined>
   tabChangeIdRef: { id: number }
@@ -34,11 +37,11 @@ export interface TabsInjection {
   handleAdd: () => void
 }
 
-export type Addable =
-  | boolean
-  | {
-    disabled?: boolean
-  }
+export type Addable
+  = | boolean
+    | {
+      disabled?: boolean
+    }
 
 export const tabsInjectionKey = createInjectionKey<TabsInjection>('n-tabs')
 

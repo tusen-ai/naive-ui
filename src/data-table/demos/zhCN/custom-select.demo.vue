@@ -4,22 +4,12 @@
 在 `type='selection'` 的列设定 `options` 来在头部勾选框旁边创建下拉菜单。
 </markdown>
 
-<template>
-  <n-p>你选中了 {{ checkedRowKeys.length }} 行。</n-p>
-  <n-data-table
-    v-model:checked-row-keys="checkedRowKeys"
-    :columns="columns"
-    :data="data"
-    :pagination="pagination"
-  />
-</template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import type { DataTableColumns } from 'naive-ui'
 import { repeat } from 'seemly'
-import { DataTableColumns } from 'naive-ui'
+import { ref } from 'vue'
 
-type RowData = {
+interface RowData {
   name: string
   age: number
   address: string
@@ -33,50 +23,51 @@ const data = repeat(46, undefined).map<RowData>((_, index) => ({
   key: index
 }))
 
-export default defineComponent({
-  setup () {
-    const checkedRowKeysRef = ref<Array<string | number>>([])
-    const columns: DataTableColumns<RowData> = [
+const checkedRowKeysRef = ref<Array<string | number>>([])
+const columns: DataTableColumns<RowData> = [
+  {
+    type: 'selection',
+    options: [
+      'all',
+      'none',
       {
-        type: 'selection',
-        options: [
-          'all',
-          'none',
-          {
-            label: '选中前 2 行',
-            key: 'f2',
-            onSelect: (pageData) => {
-              checkedRowKeysRef.value = pageData
-                .map((row) => row.key)
-                .slice(0, 2)
-            }
-          }
-        ],
-        disabled (row) {
-          return row.name === 'Edward King 3'
+        label: '选中前 2 行',
+        key: 'f2',
+        onSelect: (pageData) => {
+          checkedRowKeysRef.value = pageData.map(row => row.key).slice(0, 2)
         }
-      },
-      {
-        title: 'Name',
-        key: 'name'
-      },
-      {
-        title: 'Age',
-        key: 'age'
-      },
-      {
-        title: 'Address',
-        key: 'address'
       }
-    ]
-    return {
-      checkedRowKeys: checkedRowKeysRef,
-      data,
-      pagination: {
-        pageSize: 6
-      },
-      columns
+    ],
+    disabled(row) {
+      return row.name === 'Edward King 3'
     }
+  },
+  {
+    title: 'Name',
+    key: 'name'
+  },
+  {
+    title: 'Age',
+    key: 'age'
+  },
+  {
+    title: 'Address',
+    key: 'address'
   }
-})
+]
+
+const checkedRowKeys = checkedRowKeysRef
+const pagination = {
+  pageSize: 6
+}
 </script>
+
+<template>
+  <n-p>你选中了 {{ checkedRowKeys.length }} 行。</n-p>
+  <n-data-table
+    v-model:checked-row-keys="checkedRowKeys"
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+  />
+</template>

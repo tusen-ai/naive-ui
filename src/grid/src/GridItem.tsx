@@ -1,14 +1,8 @@
-import {
-  h,
-  defineComponent,
-  inject,
-  getCurrentInstance,
-  PropType,
-  computed
-} from 'vue'
-import { pxfy } from 'seemly'
-import { keysOf } from '../../_utils'
+import type { PropType } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import { pxfy } from 'seemly'
+import { computed, defineComponent, getCurrentInstance, h, inject } from 'vue'
+import { keysOf } from '../../_utils'
 import { gridInjectionKey } from './config'
 
 export const defaultSpan = 1
@@ -49,14 +43,13 @@ export default defineComponent({
   name: 'GridItem',
   alias: ['Gi'],
   props: gridItemProps,
-  setup () {
+  setup() {
     const {
       isSsrRef,
       xGapRef,
       itemStyleRef,
       overflowRef,
       layoutShiftDisabledRef
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(gridInjectionKey)!
     const self = getCurrentInstance()
     return {
@@ -74,7 +67,6 @@ export default defineComponent({
           privateShow = true,
           privateColStart = undefined,
           privateOffset = 0
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         } = self!.vnode.props as GridItemVNodeProps
         const { value: xGap } = xGapRef
         const mergedXGap = pxfy(xGap || 0)
@@ -90,7 +82,7 @@ export default defineComponent({
       }
     }
   },
-  render () {
+  render() {
     if (this.layoutShiftDisabled) {
       const { span, offset, mergedXGap } = this
       return (

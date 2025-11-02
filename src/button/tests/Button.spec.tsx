@@ -1,15 +1,15 @@
-import { h } from 'vue'
-import { mount } from '@vue/test-utils'
-import { NButton, NxButton } from '../index'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
+import { mount } from '@vue/test-utils'
+import { h } from 'vue'
 import { NIcon } from '../../icon'
+import { NButton, NxButton } from '../index'
 
 describe('n-button', () => {
   it('should work with import on demand', () => {
     mount(NButton)
   })
   it('clickable', async () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
     const inst = mount(NButton, {
       props: {
         onClick
@@ -20,7 +20,7 @@ describe('n-button', () => {
     inst.unmount()
   })
   it('keyboard', async () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
     const inst = mount(NButton, {
       props: {
         keyboard: false,
@@ -28,15 +28,15 @@ describe('n-button', () => {
       }
     })
     await inst.trigger('click')
-    expect(onClick).toBeCalledTimes(1)
+    expect(onClick).toHaveBeenCalledTimes(1)
     await inst.trigger('keydown.space')
-    expect(onClick).toBeCalledTimes(1)
+    expect(onClick).toHaveBeenCalledTimes(1)
     await inst.trigger('keydown.enter')
-    expect(onClick).toBeCalledTimes(1)
+    expect(onClick).toHaveBeenCalledTimes(1)
     inst.unmount()
   })
   it('disabled', async () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
     const inst = mount(NButton, {
       props: {
         disabled: true,
@@ -48,10 +48,12 @@ describe('n-button', () => {
     inst.unmount()
   })
   it('passed native event & attr tsx type checking', () => {
-    ;<div>
-      <NxButton onMousedown={() => {}} />
-      <NxButton formaction="" />
-    </div>
+    ;(() => (
+      <div>
+        <NxButton onMousedown={() => {}} />
+        <NxButton formaction="" />
+      </div>
+    ))()
   })
 
   it('should work with `attr-type` prop', () => {
@@ -188,7 +190,7 @@ describe('n-button', () => {
       '--n-border-radius: 34px;'
     ]
     let buttonStyle = wrapper.find('button').attributes('style')
-    expect(circleStyle.every((i) => buttonStyle?.includes(i))).toBe(true)
+    expect(circleStyle.every(i => buttonStyle?.includes(i))).toBe(true)
 
     await wrapper.setProps({ circle: false, round: true })
     const roundStyle: string[] = [
@@ -197,7 +199,7 @@ describe('n-button', () => {
       '--n-border-radius: 34px;'
     ]
     buttonStyle = wrapper.find('button').attributes('style')
-    expect(roundStyle.every((i) => buttonStyle?.includes(i))).toBe(true)
+    expect(roundStyle.every(i => buttonStyle?.includes(i))).toBe(true)
 
     await wrapper.setProps({ circle: false, round: false })
     const defaultStyle: string[] = [
@@ -206,7 +208,7 @@ describe('n-button', () => {
       '--n-border-radius: 3px;'
     ]
     buttonStyle = wrapper.find('button').attributes('style')
-    expect(defaultStyle.every((i) => buttonStyle?.includes(i))).toBe(true)
+    expect(defaultStyle.every(i => buttonStyle?.includes(i))).toBe(true)
     wrapper.unmount()
   })
 
@@ -285,7 +287,7 @@ describe('n-button', () => {
       '--n-ripple-color: #8a2be2;'
     ]
     const buttonStyle = wrapper.find('button').attributes('style')
-    expect(colorStyle.every((i) => buttonStyle?.includes(i))).toBe(true)
+    expect(colorStyle.every(i => buttonStyle?.includes(i))).toBe(true)
     wrapper.unmount()
   })
 
@@ -306,7 +308,7 @@ describe('n-button', () => {
           '--n-text-color: #8a2be2;',
           '--n-text-color-disabled: #8a2be2;'
         ] as string[]
-      ).every((i) => buttonStyle?.includes(i))
+      ).every(i => buttonStyle?.includes(i))
     ).toBe(true)
     wrapper.unmount()
   })

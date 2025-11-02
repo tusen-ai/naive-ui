@@ -4,6 +4,34 @@
 You can set mount target of loading by `to` prop.
 </markdown>
 
+<script lang="ts" setup>
+import { NButton, NSpace, useLoadingBar } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
+
+// Define the LoadingBarTrigger component
+const LoadingBarTrigger = defineComponent(() => {
+  const loadingBar = useLoadingBar()
+  return () => {
+    return h(NSpace, null, {
+      default: () => [
+        h(
+          NButton,
+          { onClick: () => loadingBar.start() },
+          { default: () => 'Start' }
+        ),
+        h(
+          NButton,
+          { onClick: () => loadingBar.finish() },
+          { default: () => 'Finish' }
+        )
+      ]
+    })
+  }
+})
+
+const loadingBarTargetRef = ref<undefined | HTMLElement>(undefined)
+</script>
+
 <template>
   <n-loading-bar-provider
     :to="loadingBarTargetRef"
@@ -13,50 +41,15 @@ You can set mount target of loading by `to` prop.
       ref="loadingBarTargetRef"
       style="
         position: absolute;
-        inset: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
         border-radius: var(--n-border-radius);
         overflow: hidden;
         pointer-events: none;
       "
     />
-    <loading-bar-trigger />
+    <LoadingBarTrigger />
   </n-loading-bar-provider>
 </template>
-
-<script lang="ts">
-import { defineComponent, h, ref } from 'vue'
-import { NButton } from '../../../button'
-import { NSpace } from '../../../space'
-import { useLoadingBar } from '../../src/use-loading-bar'
-
-export default defineComponent({
-  components: {
-    LoadingBarTrigger: defineComponent({
-      setup () {
-        const loadingBar = useLoadingBar()
-        return () => {
-          return h(NSpace, null, {
-            default: () => [
-              h(
-                NButton,
-                { onClick: () => loadingBar.start() },
-                { default: () => 'Start' }
-              ),
-              h(
-                NButton,
-                { onClick: () => loadingBar.finish() },
-                { default: () => 'Finish' }
-              )
-            ]
-          })
-        }
-      }
-    })
-  },
-  setup () {
-    return {
-      loadingBarTargetRef: ref<undefined | HTMLElement>(undefined)
-    }
-  }
-})
-</script>

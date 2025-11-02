@@ -1,42 +1,50 @@
+import type { CSSProperties, PropType, VNode } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { ButtonProps } from '../../button'
+import type { DynamicInputTheme } from '../styles'
+import type {
+  DynamicInputActionSlotProps,
+  DynamicInputDefaultSlotProps,
+  OnUpdateValue
+} from './interface'
+import { createId } from 'seemly'
+import { useMergedState } from 'vooks'
 import {
-  h,
-  ref,
-  toRef,
-  isProxy,
-  toRaw,
   computed,
   defineComponent,
-  PropType,
+  h,
   inject,
-  CSSProperties,
+  isProxy,
   provide,
+  ref,
+  toRaw,
+  toRef,
   watchEffect
 } from 'vue'
-import { useMergedState } from 'vooks'
-import { createId } from 'seemly'
+import { NBaseIcon } from '../../_internal'
 import {
-  RemoveIcon,
   AddIcon,
   ArrowDownIcon,
-  ArrowUpIcon
+  ArrowUpIcon,
+  RemoveIcon
 } from '../../_internal/icons'
+import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import { formItemInjectionKey } from '../../_mixins/use-form-item'
-import { NBaseIcon } from '../../_internal'
+import { useRtl } from '../../_mixins/use-rtl'
+import {
+  call,
+  resolveSlot,
+  resolveSlotWithTypedProps,
+  warnOnce
+} from '../../_utils'
 import { NButton } from '../../button'
 import { NButtonGroup } from '../../button-group'
-import type { ButtonProps } from '../../button'
-import { useTheme, useLocale, useConfig, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import { call, warnOnce, resolveSlotWithProps, resolveSlot } from '../../_utils'
-import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
 import { dynamicInputLight } from '../styles'
-import type { DynamicInputTheme } from '../styles'
 import NDynamicInputInputPreset from './InputPreset'
-import NDynamicInputPairPreset from './PairPreset'
 import { dynamicInputInjectionKey } from './interface'
-import type { OnUpdateValue } from './interface'
+import NDynamicInputPairPreset from './PairPreset'
 import style from './styles/index.cssr'
-import { useRtl } from '../../_mixins/use-rtl'
 
 const globalDataKeyMap = new WeakMap()
 
@@ -58,6 +66,7 @@ export const dynamicInputProps = {
     default: 'input'
   },
   keyField: String,
+  itemClass: String,
   itemStyle: [String, Object] as PropType<string | CSSProperties>,
   // for preset pair
   keyPlaceholder: {
@@ -87,10 +96,17 @@ export const dynamicInputProps = {
 
 export type DynamicInputProps = ExtractPublicPropTypes<typeof dynamicInputProps>
 
+export interface DynamicInputSlots {
+  action?: (props: DynamicInputActionSlotProps) => VNode[]
+  default?: (props: DynamicInputDefaultSlotProps) => VNode[]
+  'create-button-default'?: () => VNode[]
+  'create-button-icon'?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'DynamicInput',
   props: dynamicInputProps,
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.onClear !== undefined) {
@@ -138,67 +154,75 @@ export default defineComponent({
     })
     const removeDisabledRef = computed(() => {
       const { value: mergedValue } = mergedValueRef
-      if (Array.isArray(mergedValue)) return mergedValue.length <= props.min
+      if (Array.isArray(mergedValue))
+        return mergedValue.length <= props.min
       return true
     })
     const buttonSizeRef = computed(() => {
       return mergedComponentPropsRef?.value?.DynamicInput?.buttonSize
     })
-    function doUpdateValue (value: any[]): void {
+    function doUpdateValue(value: any[]): void {
       const { onInput, 'onUpdate:value': _onUpdateValue, onUpdateValue } = props
-      if (onInput) call(onInput, value)
-      if (_onUpdateValue) call(_onUpdateValue, value)
-      if (onUpdateValue) call(onUpdateValue, value)
+      if (onInput)
+        call(onInput, value)
+      if (_onUpdateValue)
+        call(_onUpdateValue, value)
+      if (onUpdateValue)
+        call(onUpdateValue, value)
       uncontrolledValueRef.value = value
     }
-    function ensureKey (value: any, index: number): string | number {
-      if (value === undefined || value === null) return index
-      if (typeof value !== 'object') return index
+    function ensureKey(value: any, index: number): string | number {
+      if (value === undefined || value === null)
+        return index
+      if (typeof value !== 'object')
+        return index
       const rawValue = isProxy(value) ? toRaw(value) : value
-      let key = globalDataKeyMap.get(rawValue)
+      let key = globalDataKeyMap.get(rawValue as WeakKey)
       if (key === undefined) {
-        globalDataKeyMap.set(rawValue, (key = createId()))
+        globalDataKeyMap.set(rawValue as WeakKey, (key = createId()))
       }
       return key
     }
-    function handleValueChange (index: number, value: any): void {
+    function handleValueChange(index: number, value: any): void {
       const { value: mergedValue } = mergedValueRef
       const newValue = Array.from(mergedValue ?? [])
       const originalItem = newValue[index]
       newValue[index] = value
       // update dataKeyMap
       if (
-        originalItem &&
-        value &&
-        typeof originalItem === 'object' &&
-        typeof value === 'object'
+        originalItem
+        && value
+        && typeof originalItem === 'object'
+        && typeof value === 'object'
       ) {
         const rawOriginal = isProxy(originalItem)
           ? toRaw(originalItem)
           : originalItem
         const rawNew = isProxy(value) ? toRaw(value) : value
         // inherit key is value position is not change
-        const originalKey = globalDataKeyMap.get(rawOriginal)
+        const originalKey = globalDataKeyMap.get(rawOriginal as WeakKey)
         if (originalKey !== undefined) {
-          globalDataKeyMap.set(rawNew, originalKey)
+          globalDataKeyMap.set(rawNew as WeakKey, originalKey)
         }
       }
       doUpdateValue(newValue)
     }
-    function handleCreateClick (): void {
+    function handleCreateClick(): void {
       createItem(-1)
     }
-    function createItem (index: number): void {
+    function createItem(index: number): void {
       const { value: mergedValue } = mergedValueRef
       const { onCreate } = props
       const newValue = Array.from(mergedValue ?? [])
       if (onCreate) {
         newValue.splice(index + 1, 0, onCreate(index + 1))
         doUpdateValue(newValue)
-      } else if (slots.default) {
+      }
+      else if (slots.default) {
         newValue.splice(index + 1, 0, null)
         doUpdateValue(newValue)
-      } else {
+      }
+      else {
         switch (props.preset) {
           case 'input':
             newValue.splice(index + 1, 0, '')
@@ -211,11 +235,13 @@ export default defineComponent({
         }
       }
     }
-    function remove (index: number): void {
+    function remove(index: number): void {
       const { value: mergedValue } = mergedValueRef
-      if (!Array.isArray(mergedValue)) return
+      if (!Array.isArray(mergedValue))
+        return
       const { min } = props
-      if (mergedValue.length <= min) return
+      if (mergedValue.length <= min)
+        return
       const { onRemove } = props
       if (onRemove) {
         onRemove(index)
@@ -224,27 +250,29 @@ export default defineComponent({
       newValue.splice(index, 1)
       doUpdateValue(newValue)
     }
-    function swap (
+    function swap(
       array: any[],
       currentIndex: number,
       targetIndex: number
     ): void {
       if (
-        currentIndex < 0 ||
-        targetIndex < 0 ||
-        currentIndex >= array.length ||
-        targetIndex >= array.length
+        currentIndex < 0
+        || targetIndex < 0
+        || currentIndex >= array.length
+        || targetIndex >= array.length
       ) {
         return
       }
-      if (currentIndex === targetIndex) return
+      if (currentIndex === targetIndex)
+        return
       const currentItem = array[currentIndex]
       array[currentIndex] = array[targetIndex]
       array[targetIndex] = currentItem
     }
-    function move (type: 'up' | 'down', index: number): void {
+    function move(type: 'up' | 'down', index: number): void {
       const { value: mergedValue } = mergedValueRef
-      if (!Array.isArray(mergedValue)) return
+      if (!Array.isArray(mergedValue))
+        return
       const newValue = Array.from(mergedValue)
       if (type === 'up') {
         swap(newValue, index, index - 1)
@@ -300,9 +328,10 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const {
       $slots,
+      itemClass,
       buttonSize,
       mergedClsPrefix,
       mergedValue,
@@ -361,10 +390,10 @@ export default defineComponent({
             <div
               key={keyField ? _[keyField] : ensureKey(_, index)}
               data-key={keyField ? _[keyField] : ensureKey(_, index)}
-              class={`${mergedClsPrefix}-dynamic-input-item`}
+              class={[`${mergedClsPrefix}-dynamic-input-item`, itemClass]}
               style={itemStyle}
             >
-              {resolveSlotWithProps(
+              {resolveSlotWithTypedProps(
                 $slots.default,
                 {
                   value: mergedValue[index],
@@ -385,7 +414,9 @@ export default defineComponent({
                             ? `${NFormItem.path.value}[${index}]`
                             : undefined
                         }
-                        onUpdateValue={(v) => handleValueChange(index, v)}
+                        onUpdateValue={(v) => {
+                          handleValueChange(index, v)
+                        }}
                       />
                     ) : preset === 'pair' ? (
                       <NDynamicInputPairPreset
@@ -400,13 +431,15 @@ export default defineComponent({
                             ? `${NFormItem.path.value}[${index}]`
                             : undefined
                         }
-                        onUpdateValue={(v) => handleValueChange(index, v)}
+                        onUpdateValue={(v) => {
+                          handleValueChange(index, v)
+                        }}
                       />
                     ) : null
                   ]
                 }
               )}
-              {resolveSlotWithProps(
+              {resolveSlotWithTypedProps(
                 $slots.action,
                 {
                   value: mergedValue[index],
@@ -425,7 +458,9 @@ export default defineComponent({
                             theme={mergedTheme.peers.Button}
                             themeOverrides={mergedTheme.peerOverrides.Button}
                             circle
-                            onClick={() => remove(index)}
+                            onClick={() => {
+                              remove(index)
+                            }}
                           >
                             {{
                               icon: () => (
@@ -440,7 +475,9 @@ export default defineComponent({
                             circle
                             theme={mergedTheme.peers.Button}
                             themeOverrides={mergedTheme.peerOverrides.Button}
-                            onClick={() => createItem(index)}
+                            onClick={() => {
+                              createItem(index)
+                            }}
                           >
                             {{
                               icon: () => (
@@ -456,7 +493,9 @@ export default defineComponent({
                               circle
                               theme={mergedTheme.peers.Button}
                               themeOverrides={mergedTheme.peerOverrides.Button}
-                              onClick={() => move('up', index)}
+                              onClick={() => {
+                                move('up', index)
+                              }}
                             >
                               {{
                                 icon: () => (
@@ -471,11 +510,15 @@ export default defineComponent({
                           ) : null,
                           showSortButton ? (
                             <NButton
-                              disabled={index === mergedValue.length - 1 || disabled}
+                              disabled={
+                                index === mergedValue.length - 1 || disabled
+                              }
                               circle
                               theme={mergedTheme.peers.Button}
                               themeOverrides={mergedTheme.peerOverrides.Button}
-                              onClick={() => move('down', index)}
+                              onClick={() => {
+                                move('down', index)
+                              }}
                             >
                               {{
                                 icon: () => (

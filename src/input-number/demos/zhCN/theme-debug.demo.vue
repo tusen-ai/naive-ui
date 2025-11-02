@@ -7,9 +7,9 @@
     :theme-overrides="{
       peers: {
         Button: {
-          textColorText: 'green'
-        }
-      }
+          textColorText: 'green',
+        },
+      },
     }"
   />
 </template>

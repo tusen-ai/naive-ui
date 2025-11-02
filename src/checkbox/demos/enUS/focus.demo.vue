@@ -2,6 +2,20 @@
 # Focus & blur manually
 </markdown>
 
+<script lang="ts" setup>
+import type { CheckboxInst } from 'naive-ui'
+import { ref } from 'vue'
+
+const checkboxInstRef = ref<CheckboxInst | null>(null)
+
+function handleClick() {
+  checkboxInstRef.value?.focus()
+  setTimeout(() => {
+    checkboxInstRef.value?.blur()
+  }, 1000)
+}
+</script>
+
 <template>
   <n-space item-style="display: flex; align-items: center;">
     <n-button @click="handleClick">
@@ -10,23 +24,3 @@
     <n-checkbox ref="checkboxInstRef" />
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { CheckboxInst } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const checkboxInstRef = ref<CheckboxInst | null>(null)
-    return {
-      handleClick () {
-        checkboxInstRef.value?.focus()
-        setTimeout(() => {
-          checkboxInstRef.value?.blur()
-        }, 1000)
-      },
-      checkboxInstRef
-    }
-  }
-})
-</script>

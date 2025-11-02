@@ -1,22 +1,14 @@
-import {
-  h,
-  defineComponent,
-  computed,
-  PropType,
-  CSSProperties,
-  ref,
-  provide,
-  ExtractPropTypes
-} from 'vue'
-import { NScrollbar } from '../../_internal'
-import type { ScrollbarProps, ScrollbarInst } from '../../_internal'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import { createInjectionKey, useReactivated } from '../../_utils'
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { ScrollbarInst, ScrollbarProps } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
-import { layoutLight } from '../styles'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { LayoutTheme } from '../styles'
 import type { LayoutInst } from './interface'
+import { computed, defineComponent, h, provide, ref } from 'vue'
+import { NScrollbar } from '../../_internal'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { createInjectionKey, useReactivated } from '../../_utils'
+import { layoutLight } from '../styles'
 import { positionProp } from './interface'
 import style from './styles/layout.cssr'
 
@@ -29,6 +21,7 @@ export const layoutProps = {
   },
   scrollbarProps: Object as PropType<Partial<ScrollbarProps>>,
   onScroll: Function as PropType<(e: Event) => void>,
+  contentClass: String,
   contentStyle: {
     type: [String, Object] as PropType<string | CSSProperties>,
     default: ''
@@ -42,18 +35,17 @@ export const layoutProps = {
 
 export type LayoutProps = ExtractPublicPropTypes<typeof layoutProps>
 
-export const layoutInjectionKey =
-  createInjectionKey<ExtractPropTypes<typeof layoutProps>>('n-layout')
+export const layoutInjectionKey
+  = createInjectionKey<ExtractPropTypes<typeof layoutProps>>('n-layout')
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function createLayoutComponent (isContent: boolean) {
+export function createLayoutComponent(isContent: boolean) {
   return defineComponent({
     name: isContent ? 'LayoutContent' : 'Layout',
     props: {
       ...(useTheme.props as ThemeProps<LayoutTheme>),
       ...layoutProps
     },
-    setup (props) {
+    setup(props) {
       const scrollableElRef = ref<HTMLElement | null>(null)
       const scrollbarInstRef = ref<ScrollbarInst | null>(null)
       const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
@@ -65,19 +57,21 @@ export function createLayoutComponent (isContent: boolean) {
         props,
         mergedClsPrefixRef
       )
-      function scrollTo (options: ScrollToOptions): void
-      function scrollTo (x: number, y: number): void
-      function scrollTo (options: ScrollToOptions | number, y?: number): void {
+      function scrollTo(options: ScrollToOptions): void
+      function scrollTo(x: number, y: number): void
+      function scrollTo(options: ScrollToOptions | number, y?: number): void {
         if (props.nativeScrollbar) {
           const { value: scrollableEl } = scrollableElRef
           if (scrollableEl) {
             if (y === undefined) {
               scrollableEl.scrollTo(options as any)
-            } else {
+            }
+            else {
               scrollableEl.scrollTo(options as any, y as any)
             }
           }
-        } else {
+        }
+        else {
           const { value: scrollbarInst } = scrollbarInstRef
           if (scrollbarInst) {
             scrollbarInst.scrollTo(options as any, y as any)
@@ -124,13 +118,13 @@ export function createLayoutComponent (isContent: boolean) {
       })
       const themeClassHandle = inlineThemeDisabled
         ? useThemeClass(
-          'layout',
-          computed(() => {
-            return props.embedded ? 'e' : ''
-          }),
-          cssVarsRef,
-          props
-        )
+            'layout',
+            computed(() => {
+              return props.embedded ? 'e' : ''
+            }),
+            cssVarsRef,
+            props
+          )
         : undefined
       return {
         mergedClsPrefix: mergedClsPrefixRef,
@@ -145,7 +139,7 @@ export function createLayoutComponent (isContent: boolean) {
         ...exposedMethods
       }
     },
-    render () {
+    render() {
       const { mergedClsPrefix, hasSider } = this
       this.onRender?.()
       const hasSiderStyle = hasSider ? this.hasSiderStyle : undefined
@@ -160,7 +154,10 @@ export function createLayoutComponent (isContent: boolean) {
           {this.nativeScrollbar ? (
             <div
               ref="scrollableElRef"
-              class={`${mergedClsPrefix}-layout-scroll-container`}
+              class={[
+                `${mergedClsPrefix}-layout-scroll-container`,
+                this.contentClass
+              ]}
               style={[this.contentStyle, hasSiderStyle] as any}
               onScroll={this.handleNativeElScroll}
             >
@@ -173,6 +170,7 @@ export function createLayoutComponent (isContent: boolean) {
               ref="scrollbarInstRef"
               theme={this.mergedTheme.peers.Scrollbar}
               themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
+              contentClass={this.contentClass}
               contentStyle={[this.contentStyle, hasSiderStyle] as any}
             >
               {this.$slots}

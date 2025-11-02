@@ -1,6 +1,7 @@
-import { HSVA } from 'seemly'
-import { on, off } from 'evtd'
-import { computed, defineComponent, h, PropType, ref } from 'vue'
+import type { HSVA } from 'seemly'
+import type { PropType } from 'vue'
+import { off, on } from 'evtd'
+import { computed, defineComponent, h, ref } from 'vue'
 
 const HANDLE_SIZE = '12px'
 const RADIUS = '6px'
@@ -13,7 +14,7 @@ export default defineComponent({
       required: true
     },
     rgba: {
-      type: (Array as unknown) as PropType<HSVA | null>,
+      type: Array as unknown as PropType<HSVA | null>,
       default: null
     },
     // 0 - 360
@@ -22,7 +23,7 @@ export default defineComponent({
       required: true
     },
     displayedSv: {
-      type: (Array as unknown) as PropType<[number, number]>,
+      type: Array as unknown as PropType<[number, number]>,
       required: true
     },
     onUpdateSV: {
@@ -31,17 +32,19 @@ export default defineComponent({
     },
     onComplete: Function as PropType<() => void>
   },
-  setup (props) {
+  setup(props) {
     const palleteRef = ref<HTMLElement | null>(null)
-    function handleMouseDown (e: MouseEvent): void {
-      if (!palleteRef.value) return
+    function handleMouseDown(e: MouseEvent): void {
+      if (!palleteRef.value)
+        return
       on('mousemove', document, handleMouseMove)
       on('mouseup', document, handleMouseUp)
       handleMouseMove(e)
     }
-    function handleMouseMove (e: MouseEvent): void {
+    function handleMouseMove(e: MouseEvent): void {
       const { value: palleteEl } = palleteRef
-      if (!palleteEl) return
+      if (!palleteEl)
+        return
       const { width, height, left, bottom } = palleteEl.getBoundingClientRect()
       const newV = (bottom - e.clientY) / height
       const newS = (e.clientX - left) / width
@@ -49,7 +52,7 @@ export default defineComponent({
       const normalizedNewV = 100 * (newV > 1 ? 1 : newV < 0 ? 0 : newV)
       props.onUpdateSV(normalizedNewS, normalizedNewV)
     }
-    function handleMouseUp (): void {
+    function handleMouseUp(): void {
       off('mousemove', document, handleMouseMove)
       off('mouseup', document, handleMouseUp)
       props.onComplete?.()
@@ -58,13 +61,14 @@ export default defineComponent({
       palleteRef,
       handleColor: computed(() => {
         const { rgba } = props
-        if (!rgba) return ''
+        if (!rgba)
+          return ''
         return `rgb(${rgba[0]}, ${rgba[1]}, ${rgba[2]})`
       }),
       handleMouseDown
     }
   },
-  render () {
+  render() {
     const { clsPrefix } = this
     return (
       <div

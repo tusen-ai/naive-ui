@@ -8,7 +8,6 @@ export default c([
   cB('skeleton', `
     height: 1em;
     width: 100%;
-    transition: background-color .3s var(--n-bezier);
     transition:
       --n-color-start .3s var(--n-bezier),
       --n-color-end .3s var(--n-bezier),

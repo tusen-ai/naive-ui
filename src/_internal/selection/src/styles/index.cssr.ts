@@ -31,10 +31,13 @@ import {
 // --n-arrow-color
 // --n-arrow-size
 // --n-loading-color
+// --n-font-weight
 // ...clear vars
 // ...form item vars
 export default c([
   cB('base-selection', `
+    --n-padding-single: var(--n-padding-single-top) var(--n-padding-single-right) var(--n-padding-single-bottom) var(--n-padding-single-left);
+    --n-padding-multiple: var(--n-padding-multiple-top) var(--n-padding-multiple-right) var(--n-padding-multiple-bottom) var(--n-padding-multiple-left);
     position: relative;
     z-index: auto;
     box-shadow: none;

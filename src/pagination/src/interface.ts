@@ -1,5 +1,5 @@
-import { VNodeChild } from 'vue'
-import { SelectBaseOption } from '../../select/src/interface'
+import type { VNodeChild } from 'vue'
+import type { SelectBaseOption } from '../../select/src/interface'
 
 export type Size = 'small' | 'medium' | 'large'
 
@@ -22,14 +22,16 @@ export type RenderGoto = () => VNodeChild
 
 export type PaginationRenderLabel = (
   info:
-  | {
-    type: 'fast-backward' | 'fast-forward'
-    node: VNodeChild
-    active: boolean
-  }
-  | {
-    type: 'page'
-    node: number
-    active: boolean
-  }
+    | {
+      type: 'fast-backward' | 'fast-forward'
+      node: VNodeChild
+      active: boolean
+    }
+    | {
+      type: 'page'
+      node: number
+      active: boolean
+    }
 ) => VNodeChild
+
+export type PaginationLabelInfo = Parameters<PaginationRenderLabel>[0]

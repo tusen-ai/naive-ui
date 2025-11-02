@@ -1,5 +1,5 @@
-import { c, cB, cE, cM } from '../../../_utils/cssr'
 import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-in-height-expand.cssr'
+import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
@@ -64,8 +64,7 @@ export default cB('alert', `
     cE('content', {
       color: 'var(--n-content-text-color)'
     })
-  ]
-  ),
+  ]),
   fadeInHeightExpandTransition({
     originalTransition: 'transform .3s var(--n-bezier)',
     enterToProps: {
@@ -99,6 +98,12 @@ export default cB('alert', `
   cM('show-icon', [
     cB('alert-body', {
       paddingLeft: 'calc(var(--n-icon-margin-left) + var(--n-icon-size) + var(--n-icon-margin-right))'
+    })
+  ]),
+  // fix: https://github.com/tusen-ai/naive-ui/issues/4588
+  cM('right-adjust', [
+    cB('alert-body', {
+      paddingRight: 'calc(var(--n-close-size) + var(--n-padding) + 2px)'
     })
   ]),
   cB('alert-body', `

@@ -5,31 +5,28 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ main, feat, docs ]
+    branches: [main, feat, docs]
   pull_request:
-    branches: [ main, feat, docs ]
+    branches: [main, feat, docs]
 
 jobs:
-  build:
+  lint:
     environment: test
 
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [22]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v2.2.1
-        with:
-          version: latest
+        run: corepack enable
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -38,11 +35,39 @@ jobs:
       - name: Lint
         run: pnpm run lint
 
+  test:
+    environment: test
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22]
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install pnpm
+        run: corepack enable
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Setup timezone
+        uses: szenius/set-timezone@v2.0
+        with:
+          timezoneLinux: Asia/Shanghai
+          timezoneMacos: Asia/Shanghai
+          timezoneWindows: Asia/Shanghai
+
+      - run: pnpm install
+
       - name: Test
         run: pnpm run test:cov
 
       - name: Code coverage
-        uses: codecov/codecov-action@v2.1.0
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-
+          files: coverage/lcov.info

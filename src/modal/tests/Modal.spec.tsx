@@ -1,10 +1,10 @@
-import { defineComponent, h, ref } from 'vue'
+import type { ModalProps } from '../index'
 import { mount } from '@vue/test-utils'
-import { ModalProps, NModal } from '../index'
+import { defineComponent, h, ref } from 'vue'
 import { NButton } from '../../button'
+import { NModal } from '../index'
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function mountModal ({
+function mountModal({
   modalProps,
   show
 }: {
@@ -13,12 +13,12 @@ function mountModal ({
 }) {
   return mount(
     defineComponent({
-      setup () {
+      setup() {
         return {
           show: ref(!!show)
         }
       },
-      render () {
+      render() {
         return [
           <NButton
             onClick={() => {
@@ -61,11 +61,11 @@ describe('n-modal', () => {
     expect(document.querySelector('.n-modal-body-wrapper')).not.toEqual(null)
     document.querySelector('.n-modal-mask')?.dispatchEvent(mousedownEvent)
     document.querySelector('.n-modal-mask')?.dispatchEvent(mouseupEvent)
-    setTimeout(() => {
+    vi.waitFor(() => {
       expect(
         document.querySelector('.n-modal-body-wrapper')?.children.length
       ).toBe(0)
-    }, 300)
+    })
     wrapper.unmount()
     wrapper = mountModal({ modalProps: { displayDirective: 'show' } })
     expect(document.querySelector('.n-modal-body-wrapper')).toEqual(null)
@@ -73,14 +73,14 @@ describe('n-modal', () => {
     expect(document.querySelector('.n-modal-body-wrapper')).not.toEqual(null)
     document.querySelector('.n-modal-mask')?.dispatchEvent(mousedownEvent)
     document.querySelector('.n-modal-mask')?.dispatchEvent(mouseupEvent)
-    setTimeout(() => {
+    vi.waitFor(() => {
       expect(
         document.querySelector('.n-modal-body-wrapper')?.children.length
       ).not.toBe(0)
       expect(
         document.querySelector('.n-modal-body-wrapper')?.getAttribute('style')
       ).toContain('display: none')
-    }, 300)
+    })
     wrapper.unmount()
   })
 

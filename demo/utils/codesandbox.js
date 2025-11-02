@@ -20,9 +20,11 @@ const appVue = `<template>
 <n-loading-bar-provider>
   <n-message-provider>
     <n-notification-provider>
-      <n-dialog-provider>
-        <demo />
-      </n-dialog-provider>
+      <n-modal-provider>
+        <n-dialog-provider>
+          <demo />
+        </n-dialog-provider>
+      </n-modal-provider>
     </n-notification-provider>
   </n-message-provider>
 </n-loading-bar-provider>
@@ -50,24 +52,24 @@ app.use(naive);
 app.mount("#app");
 `
 
-function getDeps (code) {
+function getDeps(code) {
   return (code.match(/from '([^']+)'\n/g) || [])
-    .map((v) => v.slice(6, v.length - 2))
+    .map(v => v.slice(6, v.length - 2))
     .reduce((prevV, dep) => {
       prevV[dep] = 'latest'
       return prevV
     }, {})
 }
 
-export function getCodeSandboxParams (code) {
+export function getCodeSandboxParams(code) {
   return getParameters({
     files: {
       'package.json': {
         content: {
           dependencies: {
             ...getDeps(code),
-            vue: 'next',
-            'vue-router': 'next',
+            vue: 'latest',
+            'vue-router': 'latest',
             'naive-ui': 'latest'
           },
           devDependencies: {

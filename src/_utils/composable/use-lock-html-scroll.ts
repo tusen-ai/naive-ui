@@ -1,11 +1,5 @@
-import {
-  onBeforeUnmount,
-  onMounted,
-  WatchStopHandle,
-  Ref,
-  watch,
-  ref
-} from 'vue'
+import type { Ref, WatchStopHandle } from 'vue'
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 let lockCount = 0
 let originalMarginRight: string = ''
@@ -14,9 +8,10 @@ let originalOverflowX: string = ''
 let originalOverflowY: string = ''
 export const lockHtmlScrollRightCompensationRef = ref('0px')
 
-export function useLockHtmlScroll (lockRef: Ref<boolean>): void {
+export function useLockHtmlScroll(lockRef: Ref<boolean>): void {
   // not browser
-  if (typeof document === 'undefined') return
+  if (typeof document === 'undefined')
+    return
   const el = document.documentElement
   let watchStopHandle: WatchStopHandle | undefined
   let activated = false
@@ -48,7 +43,8 @@ export function useLockHtmlScroll (lockRef: Ref<boolean>): void {
           }
           activated = true
           lockCount++
-        } else {
+        }
+        else {
           lockCount--
           if (!lockCount) {
             unlock()

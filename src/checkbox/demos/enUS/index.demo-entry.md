@@ -23,12 +23,14 @@ focus.vue
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | checked | `boolean` | `false` | Whether the checkbox is being checked manually. |
+| checked-value | `string \| boolean \| number` | `true` | Value of checked state. |
 | default-checked | `boolean` | `false` | Whether the checkbox is checked by default. |
 | disabled | `boolean` | `false` | Whether the checkbox is disabled. |
 | focusable | `boolean` | `true` | Whether the checkbox gains focus after being checked. |
 | indeterminate | `boolean` | `false` | Whether the checkbox can have a third indeterminate state. |
 | label | `string` | `undefined` | Checkbox label. |
-| size | `'small' \| 'medium' \| 'large'`  | `'medium'`  | The size of the checkbox. |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | The size of the checkbox. |
+| unchecked-value | `string \| boolean \| number` | `false` | Value of unchecked state. |
 | value | `string \| number` | `undefined` | The value of the checkbox to be used in a checkbox group. |
 | on-update:checked | `(checked: boolean) => void` | `undefined` | Callback function triggered on a checked status change. |
 
@@ -41,7 +43,7 @@ focus.vue
 | max | `number` | `undefined` | The maximum number of checkboxes that can be checked. |  |
 | min | `number` | `undefined` | The minimum number of checkboxes that can be checked. |  |
 | value | `Array<string \| number> \| null` | `undefined` | Manually set values of a checkbox group. |  |
-| on-update:value | `(value: string \| number, meta: { actionType: 'check' \| 'uncheck', value: string \| number }) => void` | `undefined` | Callback when the checkbox group's value changes. | `meta` 2.32.0 |
+| on-update:value | `(value: (string \| number)[], meta: { actionType: 'check' \| 'uncheck', value: string \| number }) => void` | `undefined` | Callback when the checkbox group's value changes. | `meta` 2.32.0 |
 
 ### Checkbox Slots
 

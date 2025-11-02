@@ -1,4 +1,4 @@
-import { CNode } from 'css-render'
+import type { CNode } from 'css-render'
 import { c } from '../../_utils/cssr'
 import commonVariables from '../common/_common'
 
@@ -9,7 +9,7 @@ interface FadeInWidthExpandTransition {
   delay?: string
 }
 
-export function fadeInWidthExpandTransition ({
+export function fadeInWidthExpandTransition({
   duration = '.2s',
   delay = '.1s'
 }: FadeInWidthExpandTransition = {}): CNode[] {

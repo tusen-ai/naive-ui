@@ -1,5 +1,9 @@
 # 使用 UMD
 
+<n-alert title="警告" type="warning" :bordered="false">
+  目前 UMD 版本的 naive 标签自闭合存在问题。请显式进行标签闭合。如：<n-text code>&lt;n-input>&lt;/n-input></n-text>。
+</n-alert>
+
 在 `2.30.3` 版本后，你可以使用 UMD 版本的 naive。
 
 如果你要使用 minify 版本的包，将 `https://unpkg.com/naive-ui@version/dist/index.prod.js` 作为 `src`，`version` 是你期望使用的版本，如果不指定 `version` 则会使用最新的版本。

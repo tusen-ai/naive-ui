@@ -1,5 +1,5 @@
-import { cB, c, cM, cE } from '../../../../_utils/cssr'
 import { fadeInTransition } from '../../../../_styles/transitions/fade-in.cssr'
+import { c, cB, cE, cM } from '../../../../_utils/cssr'
 
 // vars:
 // --n-scrollbar-bezier
@@ -8,6 +8,9 @@ import { fadeInTransition } from '../../../../_styles/transitions/fade-in.cssr'
 // --n-scrollbar-width
 // --n-scrollbar-height
 // --n-scrollbar-border-radius
+// --n-scrollbar-rail-inset-horizontal
+// --n-scrollbar-rail-inset-vertical
+// --n-scrollbar-rail-color
 export default cB('scrollbar', `
   overflow: hidden;
   position: relative;
@@ -20,6 +23,7 @@ export default cB('scrollbar', `
       width: 100%;
       overflow: scroll;
       height: 100%;
+      min-height: inherit;
       max-height: inherit;
       scrollbar-width: none;
     `, [
@@ -29,6 +33,7 @@ export default cB('scrollbar', `
         display: none;
       `),
       c('>', [
+        // We can't set overflow hidden since it affects positioning.
         cB('scrollbar-content', `
           box-sizing: border-box;
           min-width: 100%;
@@ -41,12 +46,10 @@ export default cB('scrollbar', `
       position: absolute;
       pointer-events: none;
       user-select: none;
+      background: var(--n-scrollbar-rail-color);
       -webkit-user-select: none;
     `, [
       cM('horizontal', `
-        left: 2px;
-        right: 2px;
-        bottom: 4px;
         height: var(--n-scrollbar-height);
       `, [
         c('>', [
@@ -57,10 +60,19 @@ export default cB('scrollbar', `
           `)
         ])
       ]),
+      cM('horizontal--top', `
+        top: var(--n-scrollbar-rail-top-horizontal-top);  
+        right: var(--n-scrollbar-rail-right-horizontal-top);  
+        bottom: var(--n-scrollbar-rail-bottom-horizontal-top);  
+        left: var(--n-scrollbar-rail-left-horizontal-top);  
+      `),
+      cM('horizontal--bottom', `
+        top: var(--n-scrollbar-rail-top-horizontal-bottom);  
+        right: var(--n-scrollbar-rail-right-horizontal-bottom);  
+        bottom: var(--n-scrollbar-rail-bottom-horizontal-bottom);  
+        left: var(--n-scrollbar-rail-left-horizontal-bottom);  
+      `),
       cM('vertical', `
-        right: 4px;
-        top: 2px;
-        bottom: 2px;
         width: var(--n-scrollbar-width);
       `, [
         c('>', [
@@ -71,15 +83,26 @@ export default cB('scrollbar', `
           `)
         ])
       ]),
+      cM('vertical--left', `
+        top: var(--n-scrollbar-rail-top-vertical-left);  
+        right: var(--n-scrollbar-rail-right-vertical-left);  
+        bottom: var(--n-scrollbar-rail-bottom-vertical-left);  
+        left: var(--n-scrollbar-rail-left-vertical-left);  
+      `),
+      cM('vertical--right', `
+        top: var(--n-scrollbar-rail-top-vertical-right);  
+        right: var(--n-scrollbar-rail-right-vertical-right);  
+        bottom: var(--n-scrollbar-rail-bottom-vertical-right);  
+        left: var(--n-scrollbar-rail-left-vertical-right);  
+      `),
       cM('disabled', [
         c('>', [
-          cE('scrollbar', {
-            pointerEvents: 'none'
-          })
+          cE('scrollbar', 'pointer-events: none;')
         ])
       ]),
       c('>', [
         cE('scrollbar', `
+          z-index: 1;
           position: absolute;
           cursor: pointer;
           pointer-events: all;
@@ -87,9 +110,7 @@ export default cB('scrollbar', `
           transition: background-color .2s var(--n-scrollbar-bezier);
         `, [
           fadeInTransition(),
-          c('&:hover', {
-            backgroundColor: 'var(--n-scrollbar-color-hover)'
-          })
+          c('&:hover', 'background-color: var(--n-scrollbar-color-hover);')
         ])
       ])
     ])

@@ -1,8 +1,9 @@
-import { h } from 'vue'
-import { mount } from '@vue/test-utils'
-import { NSpin } from '../index'
 import { Reload } from '@vicons/ionicons5'
+import { mount } from '@vue/test-utils'
+import { sleep } from 'seemly'
+import { h } from 'vue'
 import { NIcon } from '../../icon'
+import { NSpin } from '../index'
 
 describe('n-spin', () => {
   it('should work with import on demand', () => {
@@ -21,6 +22,7 @@ describe('n-spin', () => {
     expect(wrapper.find('.n-spin-content').classes()).toContain(
       'n-spin-content--spinning'
     )
+    wrapper.unmount()
   })
 
   it('should work with icon slot', () => {
@@ -35,6 +37,7 @@ describe('n-spin', () => {
 
     expect(wrapper.findComponent(NIcon).exists()).toBe(true)
     expect(wrapper.findComponent(Reload).exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('rotate should work on icon slot', async () => {
@@ -50,7 +53,8 @@ describe('n-spin', () => {
     await wrapper.setProps({
       rotate: false
     })
-    expect(wrapper.find('.n-spin--rotate').exists()).toBe(false)
+    expect(wrapper.find('.n-spin').classes()).not.toContain('n-spin--rotate')
+    wrapper.unmount()
   })
 
   it('should work with `size` prop', async () => {
@@ -61,6 +65,7 @@ describe('n-spin', () => {
         }
       })
       expect(wrapper.find('.n-spin').attributes('style')).toMatchSnapshot()
+      wrapper.unmount()
     })
   })
 
@@ -72,6 +77,7 @@ describe('n-spin', () => {
     })
     expect(wrapper.find('.n-spin-container').exists()).toBe(true)
     expect(wrapper.find('.n-spin-content').text()).toBe('test')
+    wrapper.unmount()
   })
 
   it('should work with `strokeWidth` prop', () => {
@@ -83,5 +89,53 @@ describe('n-spin', () => {
     })
 
     expect(wrapper.find('circle').attributes('stroke-width')).toEqual('40')
+    wrapper.unmount()
+  })
+
+  it('should work with `delay` prop', async () => {
+    const wrapper = mount(NSpin, {
+      props: {
+        show: true,
+        delay: 1000
+      },
+      slots: {
+        default: () => 'test'
+      }
+    })
+    expect(wrapper.find('.n-spin-content').classes()).not.toContain(
+      'n-spin-content--spinning'
+    )
+    await sleep(1000)
+
+    expect(wrapper.find('.n-spin-content').classes()).toContain(
+      'n-spin-content--spinning'
+    )
+  })
+
+  it('should `delay` prop not delay close spin', async () => {
+    const wrapper = mount(NSpin, {
+      props: {
+        show: true,
+        delay: 1000
+      },
+      slots: {
+        default: () => 'test'
+      }
+    })
+    expect(wrapper.find('.n-spin-content').classes()).not.toContain(
+      'n-spin-content--spinning'
+    )
+    await sleep(1000)
+
+    expect(wrapper.find('.n-spin-content').classes()).toContain(
+      'n-spin-content--spinning'
+    )
+
+    await wrapper.setProps({
+      show: false
+    })
+    expect(wrapper.find('.n-spin-content').classes()).not.toContain(
+      'n-spin-content--spinning'
+    )
   })
 })

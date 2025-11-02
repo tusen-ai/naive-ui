@@ -1,40 +1,33 @@
+import type { InputHTMLAttributes, PropType, SlotsType, VNode } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { FormValidationStatus } from '../../form/src/public-types'
+import type { InputInst } from '../../input'
+import type { InputNumberTheme } from '../styles'
+import type { InputNumberInst, OnUpdateValue, Size } from './interface'
+import { on } from 'evtd'
+import { rgba } from 'seemly'
+import { useMemo, useMergedState } from 'vooks'
 import {
-  h,
+  computed,
   defineComponent,
+  h,
+  nextTick,
   ref,
   toRef,
   watch,
-  computed,
-  PropType,
-  watchEffect,
-  VNode,
-  nextTick
+  watchEffect
 } from 'vue'
-import { rgba } from 'seemly'
-import { useMemo, useMergedState } from 'vooks'
-import { on } from 'evtd'
-import type { FormValidationStatus } from '../../form/src/interface'
-import { RemoveIcon, AddIcon } from '../../_internal/icons'
-import { NInput } from '../../input'
-import type { InputInst } from '../../input'
 import { NBaseIcon } from '../../_internal'
-import { NxButton } from '../../button'
-import { useTheme, useFormItem, useLocale, useConfig } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import {
-  MaybeArray,
-  ExtractPublicPropTypes,
-  warnOnce,
-  call,
-  resolveSlot,
-  resolveWrappedSlot
-} from '../../_utils'
-import { inputNumberLight } from '../styles'
-import type { InputNumberTheme } from '../styles'
-import { parse, validator, format, parseNumber, isWipValue } from './utils'
-import type { OnUpdateValue, InputNumberInst, Size } from './interface'
-import style from './styles/input-number.cssr'
+import { AddIcon, RemoveIcon } from '../../_internal/icons'
+import { useConfig, useFormItem, useLocale, useTheme } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
+import { call, resolveSlot, resolveWrappedSlot, warnOnce } from '../../_utils'
+import { NxButton } from '../../button'
+import { NInput } from '../../input'
+import { inputNumberLight } from '../styles'
+import style from './styles/input-number.cssr'
+import { format, isWipValue, parse, parseNumber, validator } from './utils'
 
 const HOLDING_CHANGE_THRESHOLD = 800
 const HOLDING_CHANGE_INTERVAL = 100
@@ -76,6 +69,7 @@ export const inputNumberProps = {
     type: String as PropType<'right' | 'both'>,
     default: 'right'
   },
+  inputProps: Object as PropType<InputHTMLAttributes>,
   readonly: Boolean,
   clearable: Boolean,
   keyboard: {
@@ -88,6 +82,10 @@ export const inputNumberProps = {
   updateValueOnInput: {
     type: Boolean,
     default: true
+  },
+  round: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
   },
   parse: Function as PropType<(input: string) => number | null>,
   format: Function as PropType<(value: number | null) => string>,
@@ -104,10 +102,18 @@ export const inputNumberProps = {
 
 export type InputNumberProps = ExtractPublicPropTypes<typeof inputNumberProps>
 
+export interface InputNumberSlots {
+  'add-icon'?: () => VNode[]
+  'minus-icon'?: () => VNode[]
+  prefix?: () => VNode[]
+  suffix?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'InputNumber',
   props: inputNumberProps,
-  setup (props) {
+  slots: Object as SlotsType<InputNumberSlots>,
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.onChange !== undefined) {
@@ -118,8 +124,8 @@ export default defineComponent({
         }
       })
     }
-    const { mergedBorderedRef, mergedClsPrefixRef, mergedRtlRef } =
-      useConfig(props)
+    const { mergedBorderedRef, mergedClsPrefixRef, mergedRtlRef }
+      = useConfig(props)
     const themeRef = useTheme(
       'InputNumber',
       '-input-number',
@@ -150,7 +156,8 @@ export default defineComponent({
     const getMaxPrecision = (currentValue: number): number => {
       const precisions = [props.min, props.max, props.step, currentValue].map(
         (value): number => {
-          if (value === undefined) return 0
+          if (value === undefined)
+            return 0
           return getPrecision(value)
         }
       )
@@ -158,7 +165,8 @@ export default defineComponent({
     }
     const mergedPlaceholderRef = useMemo(() => {
       const { placeholder } = props
-      if (placeholder !== undefined) return placeholder
+      if (placeholder !== undefined)
+        return placeholder
       return localeRef.value.placeholder
     })
     const mergedStepRef = useMemo(() => {
@@ -170,14 +178,44 @@ export default defineComponent({
     })
     const mergedMinRef = useMemo(() => {
       const parsedNumber = parseNumber(props.min)
-      if (parsedNumber !== null) return parsedNumber
+      if (parsedNumber !== null)
+        return parsedNumber
       else return null
     })
     const mergedMaxRef = useMemo(() => {
       const parsedNumber = parseNumber(props.max)
-      if (parsedNumber !== null) return parsedNumber
+      if (parsedNumber !== null)
+        return parsedNumber
       else return null
     })
+    const deriveDisplayedValueFromValue = (): void => {
+      const { value: mergedValue } = mergedValueRef
+      if (validator(mergedValue)) {
+        const { format: formatProp, precision } = props
+        if (formatProp) {
+          displayedValueRef.value = formatProp(mergedValue)
+        }
+        else {
+          if (
+            mergedValue === null
+            || precision === undefined
+            // precision overflow
+            || getPrecision(mergedValue) > precision
+          ) {
+            displayedValueRef.value = format(mergedValue, undefined)
+          }
+          else {
+            displayedValueRef.value = format(mergedValue, precision)
+          }
+        }
+      }
+      else {
+        // null can pass the validator check
+        // so mergedValue is a number
+        displayedValueRef.value = String(mergedValue)
+      }
+    }
+    deriveDisplayedValueFromValue()
     const doUpdateValue = (value: number | null): void => {
       const { value: mergedValue } = mergedValueRef
       if (value === mergedValue) {
@@ -190,9 +228,12 @@ export default defineComponent({
         onChange
       } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (onChange) call(onChange, value)
-      if (onUpdateValue) call(onUpdateValue, value)
-      if (_onUpdateValue) call(_onUpdateValue, value)
+      if (onChange)
+        call(onChange, value)
+      if (onUpdateValue)
+        call(onUpdateValue, value)
+      if (_onUpdateValue)
+        call(_onUpdateValue, value)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()
@@ -214,20 +255,21 @@ export default defineComponent({
       }
       const parsedValue = (props.parse || parse)(displayedValue)
       if (parsedValue === null) {
-        if (doUpdateIfValid) doUpdateValue(null)
+        if (doUpdateIfValid)
+          doUpdateValue(null)
         return null
       }
       if (validator(parsedValue)) {
         const currentPrecision = getPrecision(parsedValue)
         const { precision } = props
         if (
-          precision !== undefined &&
-          precision < currentPrecision &&
-          !fixPrecision
+          precision !== undefined
+          && precision < currentPrecision
+          && !fixPrecision
         ) {
           return false
         }
-        let nextValue = parseFloat(
+        let nextValue = Number.parseFloat(
           (parsedValue + offset).toFixed(
             precision ?? getMaxPrecision(parsedValue)
           )
@@ -236,47 +278,26 @@ export default defineComponent({
           const { value: mergedMax } = mergedMaxRef
           const { value: mergedMin } = mergedMinRef
           if (mergedMax !== null && nextValue > mergedMax) {
-            if (!doUpdateIfValid || isInputing) return false
+            if (!doUpdateIfValid || isInputing)
+              return false
             // if doUpdateIfValid=true, we try to make it a valid value
             nextValue = mergedMax
           }
           if (mergedMin !== null && nextValue < mergedMin) {
-            if (!doUpdateIfValid || isInputing) return false
+            if (!doUpdateIfValid || isInputing)
+              return false
             // if doUpdateIfValid=true, we try to make it a valid value
             nextValue = mergedMin
           }
-          if (props.validator && !props.validator(nextValue)) return false
-          if (doUpdateIfValid) doUpdateValue(nextValue)
+          if (props.validator && !props.validator(nextValue))
+            return false
+          if (doUpdateIfValid)
+            doUpdateValue(nextValue)
           return nextValue
         }
       }
       return false
     }
-    const deriveDisplayedValueFromValue = (): void => {
-      const { value: mergedValue } = mergedValueRef
-      if (validator(mergedValue)) {
-        const { format: formatProp, precision } = props
-        if (formatProp) {
-          displayedValueRef.value = formatProp(mergedValue)
-        } else {
-          if (
-            mergedValue === null ||
-            precision === undefined ||
-            // precision overflow
-            getPrecision(mergedValue) > precision
-          ) {
-            displayedValueRef.value = format(mergedValue, undefined)
-          } else {
-            displayedValueRef.value = format(mergedValue, precision)
-          }
-        }
-      } else {
-        // null can pass the validator check
-        // so mergedValue is a number
-        displayedValueRef.value = String(mergedValue)
-      }
-    }
-    deriveDisplayedValueFromValue()
     const displayedValueInvalidRef = useMemo(() => {
       const derivedValue = deriveValueFromDisplayedValue({
         offset: 0,
@@ -314,13 +335,14 @@ export default defineComponent({
       })
       return derivedNextValue !== false
     })
-    function doFocus (e: FocusEvent): void {
+    function doFocus(e: FocusEvent): void {
       const { onFocus } = props
       const { nTriggerFormFocus } = formItem
-      if (onFocus) call(onFocus, e)
+      if (onFocus)
+        call(onFocus, e)
       nTriggerFormFocus()
     }
-    function doBlur (e: FocusEvent): void {
+    function doBlur(e: FocusEvent): void {
       if (e.target === inputInstRef.value?.wrapperElRef) {
         // hit input wrapper
         // which means not activated
@@ -345,14 +367,16 @@ export default defineComponent({
         if (mergedValueRef.value === value) {
           deriveDisplayedValueFromValue()
         }
-      } else {
+      }
+      else {
         // If not valid, nothing will be emitted, so derive displayed value from
         // origin value
         deriveDisplayedValueFromValue()
       }
       const { onBlur } = props
       const { nTriggerFormBlur } = formItem
-      if (onBlur) call(onBlur, e)
+      if (onBlur)
+        call(onBlur, e)
       nTriggerFormBlur()
       // User may change value in blur callback, we make sure it will be
       // displayed. Sometimes mergedValue won't be viewed as changed
@@ -360,11 +384,12 @@ export default defineComponent({
         deriveDisplayedValueFromValue()
       })
     }
-    function doClear (e: MouseEvent): void {
+    function doClear(e: MouseEvent): void {
       const { onClear } = props
-      if (onClear) call(onClear, e)
+      if (onClear)
+        call(onClear, e)
     }
-    function doAdd (): void {
+    function doAdd(): void {
       const { value: addable } = addableRef
       if (!addable) {
         clearAddHoldTimeout()
@@ -373,9 +398,10 @@ export default defineComponent({
       const { value: mergedValue } = mergedValueRef
       if (mergedValue === null) {
         if (!props.validator) {
-          doUpdateValue(createValidValue() as number)
+          doUpdateValue(createValidValue())
         }
-      } else {
+      }
+      else {
         const { value: mergedStep } = mergedStepRef
         deriveValueFromDisplayedValue({
           offset: mergedStep,
@@ -385,7 +411,7 @@ export default defineComponent({
         })
       }
     }
-    function doMinus (): void {
+    function doMinus(): void {
       const { value: minusable } = minusableRef
       if (!minusable) {
         clearMinusHoldTimeout()
@@ -394,9 +420,10 @@ export default defineComponent({
       const { value: mergedValue } = mergedValueRef
       if (mergedValue === null) {
         if (!props.validator) {
-          doUpdateValue(createValidValue() as number)
+          doUpdateValue(createValidValue())
         }
-      } else {
+      }
+      else {
         const { value: mergedStep } = mergedStepRef
         deriveValueFromDisplayedValue({
           offset: -mergedStep,
@@ -408,23 +435,26 @@ export default defineComponent({
     }
     const handleFocus = doFocus
     const handleBlur = doBlur
-    function createValidValue (): number | null {
-      if (props.validator) return null
+    function createValidValue(): number | null {
+      if (props.validator)
+        return null
       const { value: mergedMin } = mergedMinRef
       const { value: mergedMax } = mergedMaxRef
       if (mergedMin !== null) {
         return Math.max(0, mergedMin)
-      } else if (mergedMax !== null) {
+      }
+      else if (mergedMax !== null) {
         return Math.min(0, mergedMax)
-      } else {
+      }
+      else {
         return 0
       }
     }
-    function handleClear (e: MouseEvent): void {
+    function handleClear(e: MouseEvent): void {
       doClear(e)
       doUpdateValue(null)
     }
-    function handleMouseDown (e: MouseEvent): void {
+    function handleMouseDown(e: MouseEvent): void {
       if (addButtonInstRef.value?.$el.contains(e.target as Node)) {
         e.preventDefault()
       }
@@ -436,7 +466,7 @@ export default defineComponent({
     let minusHoldStateIntervalId: number | null = null
     let addHoldStateIntervalId: number | null = null
     let firstMinusMousedownId: number | null = null
-    function clearMinusHoldTimeout (): void {
+    function clearMinusHoldTimeout(): void {
       if (firstMinusMousedownId) {
         window.clearTimeout(firstMinusMousedownId)
         firstMinusMousedownId = null
@@ -446,7 +476,8 @@ export default defineComponent({
         minusHoldStateIntervalId = null
       }
     }
-    function clearAddHoldTimeout (): void {
+    let firstAddMousedownId: number | null = null
+    function clearAddHoldTimeout(): void {
       if (firstAddMousedownId) {
         window.clearTimeout(firstAddMousedownId)
         firstAddMousedownId = null
@@ -456,7 +487,7 @@ export default defineComponent({
         addHoldStateIntervalId = null
       }
     }
-    function handleMinusMousedown (): void {
+    function handleMinusMousedown(): void {
       clearMinusHoldTimeout()
       firstMinusMousedownId = window.setTimeout(() => {
         minusHoldStateIntervalId = window.setInterval(() => {
@@ -467,8 +498,7 @@ export default defineComponent({
         once: true
       })
     }
-    let firstAddMousedownId: number | null = null
-    function handleAddMousedown (): void {
+    function handleAddMousedown(): void {
       clearAddHoldTimeout()
       firstAddMousedownId = window.setTimeout(() => {
         addHoldStateIntervalId = window.setInterval(() => {
@@ -480,14 +510,16 @@ export default defineComponent({
       })
     }
     const handleAddClick = (): void => {
-      if (addHoldStateIntervalId) return
+      if (addHoldStateIntervalId)
+        return
       doAdd()
     }
     const handleMinusClick = (): void => {
-      if (minusHoldStateIntervalId) return
+      if (minusHoldStateIntervalId)
+        return
       doMinus()
     }
-    function handleKeyDown (e: KeyboardEvent): void {
+    function handleKeyDown(e: KeyboardEvent): void {
       if (e.key === 'Enter') {
         if (e.target === inputInstRef.value?.wrapperElRef) {
           // hit input wrapper
@@ -503,9 +535,12 @@ export default defineComponent({
         if (value !== false) {
           inputInstRef.value?.deactivate()
         }
-      } else if (e.key === 'ArrowUp') {
-        if (!addableRef.value) return
-        if (props.keyboard.ArrowUp === false) return
+      }
+      else if (e.key === 'ArrowUp') {
+        if (!addableRef.value)
+          return
+        if (props.keyboard.ArrowUp === false)
+          return
         e.preventDefault()
         const value = deriveValueFromDisplayedValue({
           offset: 0,
@@ -516,9 +551,12 @@ export default defineComponent({
         if (value !== false) {
           doAdd()
         }
-      } else if (e.key === 'ArrowDown') {
-        if (!minusableRef.value) return
-        if (props.keyboard.ArrowDown === false) return
+      }
+      else if (e.key === 'ArrowDown') {
+        if (!minusableRef.value)
+          return
+        if (props.keyboard.ArrowDown === false)
+          return
         e.preventDefault()
         const value = deriveValueFromDisplayedValue({
           offset: 0,
@@ -531,13 +569,13 @@ export default defineComponent({
         }
       }
     }
-    function handleUpdateDisplayedValue (value: string): void {
+    function handleUpdateDisplayedValue(value: string): void {
       displayedValueRef.value = value
       if (
-        props.updateValueOnInput &&
-        !props.format &&
-        !props.parse &&
-        props.precision === undefined
+        props.updateValueOnInput
+        && !props.format
+        && !props.parse
+        && props.precision === undefined
       ) {
         deriveValueFromDisplayedValue({
           offset: 0,
@@ -552,7 +590,8 @@ export default defineComponent({
     })
     const exposedMethods: InputNumberInst = {
       focus: () => inputInstRef.value?.focus(),
-      blur: () => inputInstRef.value?.blur()
+      blur: () => inputInstRef.value?.blur(),
+      select: () => inputInstRef.value?.select()
     }
     const rtlEnabledRef = useRtl(
       'InputNumber',
@@ -606,7 +645,7 @@ export default defineComponent({
       })
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, $slots } = this
     const renderMinusButton = (): VNode => {
       return (
@@ -682,6 +721,7 @@ export default defineComponent({
           placeholder={this.mergedPlaceholder}
           disabled={this.mergedDisabled}
           readonly={this.readonly as any}
+          round={this.round}
           textDecoration={
             this.displayedValueInvalid ? 'line-through' : undefined
           }
@@ -691,6 +731,7 @@ export default defineComponent({
           onMousedown={this.handleMouseDown}
           onClear={this.handleClear}
           clearable={this.clearable}
+          inputProps={this.inputProps}
           internalLoadingBeforeSuffix
         >
           {{

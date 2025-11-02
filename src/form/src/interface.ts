@@ -1,11 +1,11 @@
-import { Ref, VNodeChild } from 'vue'
-import {
-  ValidateError,
+import type {
   RuleItem,
-  ValidateOption,
-  ValidateMessages
+  ValidateError,
+  ValidateMessages,
+  ValidateOption
 } from 'async-validator'
-import { FormSetupProps } from './Form'
+import type { Ref, VNodeChild } from 'vue'
+import type { FormSetupProps } from './Form'
 
 export interface FormRules {
   [path: string]: FormRules | FormItemRule | FormItemRule[]
@@ -16,7 +16,7 @@ type SetRule<T, R> = T extends (rule: any, ...args: infer K) => infer P
   : never
 
 export type FormItemRuleValidatorParams = Parameters<
-SetRule<NonNullable<RuleItem['validator']>, FormItemRule>
+  SetRule<NonNullable<RuleItem['validator']>, FormItemRule>
 >
 
 export type FormItemRuleValidator = (
@@ -34,6 +34,7 @@ export type FormItemRule = Omit<RuleItem, 'validator' | 'asyncValidator'> & {
   validator?: FormItemRuleValidator
   asyncValidator?: FormItemRuleAsyncValidator
   renderMessage?: () => VNodeChild
+  level?: 'warning' | 'error'
 }
 
 export interface FormItemValidateOptions {
@@ -43,19 +44,25 @@ export interface FormItemValidateOptions {
   options?: ValidateOption
 }
 
+export interface FormItemInternalValidateResult {
+  valid: boolean
+  errors: ValidateError[] | undefined
+  warnings: ValidateError[] | undefined
+}
+
 export type FormItemInternalValidate = (
   trigger: ValidationTrigger | string | null | undefined,
   shouldRuleBeApplied?: ShouldRuleBeApplied,
   options?: ValidateOption
-) => Promise<{
-  valid: boolean
-  errors?: ValidateError[]
-}>
+) => Promise<FormItemInternalValidateResult>
 
-export type FormItemValidate = ((
-  options: FormItemValidateOptions
-) => Promise<void>) &
-((trigger?: string, callback?: ValidateCallback) => Promise<void>)
+export type FormItemValidate = ((options: FormItemValidateOptions) => Promise<{
+  warnings: ValidateError[] | undefined
+}>)
+& ((
+  trigger?: string,
+  callback?: ValidateCallback
+) => Promise<{ warnings: ValidateError[] | undefined }>)
 
 export interface FormItemInst {
   validate: FormItemValidate
@@ -80,13 +87,25 @@ export type Size = 'small' | 'medium' | 'large'
 export type ValidationTrigger = 'input' | 'change' | 'blur' | 'focus'
 
 export type ShouldRuleBeApplied = (rule: FormItemRule) => boolean
-export type ValidateCallback = (errors?: ValidateError[]) => void
+export type ValidateCallback = (
+  errors: ValidateError[] | undefined,
+  extra: {
+    warnings: ValidateError[] | undefined
+  }
+) => void
 
-export type FormValidateCallback = (errors?: ValidateError[][]) => void
+export type FormValidateCallback = (
+  errors: ValidateError[][] | undefined,
+  extra: {
+    warnings: ValidateError[][] | undefined
+  }
+) => void
 export type FormValidate = (
   callback?: FormValidateCallback,
   shouldRuleBeApplied?: ShouldRuleBeApplied
-) => Promise<void>
+) => Promise<{
+  warnings: ValidateError[][] | undefined
+}>
 
 export type FormValidationError = ValidateError[]
 
@@ -94,7 +113,5 @@ export interface FormInst {
   validate: FormValidate
   restoreValidation: () => void
 }
-
-export type FormValidationStatus = 'success' | 'error' | 'warning'
 
 export interface FormValidateMessages extends ValidateMessages {}

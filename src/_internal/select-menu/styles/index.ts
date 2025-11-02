@@ -1,6 +1,7 @@
-export { default as internalSelectMenuLight } from './light'
 export { default as internalSelectMenuDark } from './dark'
+export { default as internalSelectMenuLight } from './light'
 export type {
-  InternalSelectMenuThemeVars,
-  InternalSelectMenuTheme
+  InternalSelectMenuTheme,
+  InternalSelectMenuThemeVars
 } from './light'
+export { internalSelectMenuRtl } from './rtl'

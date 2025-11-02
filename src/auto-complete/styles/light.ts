@@ -1,10 +1,10 @@
-import { internalSelectMenuLight } from '../../_internal/select-menu/styles'
-import { inputLight } from '../../input/styles'
-import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
+import { internalSelectMenuLight } from '../../_internal/select-menu/styles'
 import { createTheme } from '../../_mixins'
+import { commonLight } from '../../_styles/common'
+import { inputLight } from '../../input/styles'
 
-export function self (vars: ThemeCommonVars) {
+export function self(vars: ThemeCommonVars) {
   const { boxShadow2 } = vars
   return {
     menuBoxShadow: boxShadow2
@@ -23,5 +23,4 @@ const autoCompleteLight = createTheme({
 
 export default autoCompleteLight
 export type AutoCompleteTheme = typeof autoCompleteLight
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export type AutoCompleteThemeVars = ReturnType<typeof self>

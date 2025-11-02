@@ -4,18 +4,10 @@
 可以变成通讯录、菜单等，应用场景挺多。
 </markdown>
 
-<template>
-  <n-transfer
-    ref="transfer"
-    v-model:value="value"
-    :options="options"
-    :render-target-label="renderLabel"
-  />
-</template>
-
-<script lang="ts">
-import { defineComponent, ref, h } from 'vue'
-import { NAvatar, TransferRenderTargetLabel } from 'naive-ui'
+<script lang="ts" setup>
+import type { TransferRenderTargetLabel } from 'naive-ui'
+import { NAvatar } from 'naive-ui'
+import { h, ref } from 'vue'
 
 const options = [
   {
@@ -40,46 +32,47 @@ const options = [
   }
 ]
 
-export default defineComponent({
-  setup () {
-    const renderLabel: TransferRenderTargetLabel = function ({ option }) {
-      return h(
-        'div',
-        {
-          style: {
-            display: 'flex',
-            margin: '6px 0'
-          }
-        },
-        {
-          default: () => [
-            h(NAvatar, {
-              round: true,
-              src: option.value as string,
-              size: 'small',
-              fallbackSrc:
-                'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
-            }),
-            h(
-              'div',
-              {
-                style: {
-                  display: 'flex',
-                  marginLeft: '6px',
-                  alignSelf: 'center'
-                }
-              },
-              { default: () => option.label }
-            )
-          ]
-        }
-      )
+const renderLabel: TransferRenderTargetLabel = function ({ option }) {
+  return h(
+    'div',
+    {
+      style: {
+        display: 'flex',
+        margin: '6px 0'
+      }
+    },
+    {
+      default: () => [
+        h(NAvatar, {
+          round: true,
+          src: option.value as string,
+          size: 'small',
+          fallbackSrc:
+            'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+        }),
+        h(
+          'div',
+          {
+            style: {
+              display: 'flex',
+              marginLeft: '6px',
+              alignSelf: 'center'
+            }
+          },
+          { default: () => option.label }
+        )
+      ]
     }
-    return {
-      options,
-      value: ref([options[0].value]),
-      renderLabel
-    }
-  }
-})
+  )
+}
+
+const value = ref([options[0].value])
 </script>
+
+<template>
+  <n-transfer
+    v-model:value="value"
+    :options="options"
+    :render-target-label="renderLabel"
+  />
+</template>

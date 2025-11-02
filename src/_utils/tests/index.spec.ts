@@ -1,4 +1,5 @@
-import { h, isVNode, VNode } from 'vue'
+import type { VNode } from 'vue'
+import { h, isVNode } from 'vue'
 import { createHoverColor, createPressedColor } from '../color'
 import {
   call,
@@ -70,13 +71,13 @@ describe('vue', () => {
   it('should work with call', () => {
     let testValue = 0
     let testValue2 = 0
-    function testFunction1 (): void {
+    function testFunction1(): void {
       testValue = testValue + 1
     }
-    function testFunction2 (v: number): void {
+    function testFunction2(v: number): void {
       testValue = testValue + v + 2
     }
-    function testFunction3 (v: number): void {
+    function testFunction3(v: number): void {
       testValue2 = testValue2 + v + 3
     }
     call(testFunction1)
@@ -130,7 +131,7 @@ describe('vue', () => {
   })
 
   it('should work with render', () => {
-    function testFunction (value: string): VNode {
+    function testFunction(value: string): VNode {
       return h(value, null, { default: () => 'test' })
     }
     expect(isVNode(render('test'))).toBe(true)

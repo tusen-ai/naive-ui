@@ -1,5 +1,5 @@
-import zhTW from 'date-fns/esm/locale/zh-TW'
-import { NDateLocale } from './enUS'
+import type { NDateLocale } from './enUS'
+import { zhTW } from 'date-fns/locale'
 
 const datezhTW: NDateLocale = {
   name: 'zh-TW',

@@ -2,40 +2,31 @@
 # Addable debug
 </markdown>
 
+<script lang="ts" setup>
+import { NTab, NTabs } from 'naive-ui'
+import { ref } from 'vue'
+
+const itemsRef = ref<{ id: string, name: string }[]>([])
+let i = 0
+
+function handleAdd() {
+  i += 1
+  itemsRef.value.push({
+    id: `${i}`,
+    name: `name-${i}`
+  })
+}
+
+const items = itemsRef.value
+</script>
+
 <template>
-  <n-tabs type="card" addable @add="handleAdd">
-    <n-tab
+  <NTabs type="card" addable @add="handleAdd">
+    <NTab
       v-for="item in items"
       :key="item.id"
       :name="item.name"
       :tab="item.name"
     />
-  </n-tabs>
+  </NTabs>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { NTabs, NTab } from 'naive-ui'
-
-export default defineComponent({
-  name: 'App',
-  components: {
-    NTabs,
-    NTab
-  },
-  setup () {
-    const itemsRef = ref<{ id: string; name: string }[]>([])
-    let i = 0
-    return {
-      handleAdd: () => {
-        i += 1
-        itemsRef.value.push({
-          id: `${i}`,
-          name: `name-${i}`
-        })
-      },
-      items: itemsRef.value
-    }
-  }
-})
-</script>

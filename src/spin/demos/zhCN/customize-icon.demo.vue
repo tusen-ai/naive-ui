@@ -2,6 +2,13 @@
 # 自定义图标
 </markdown>
 
+<script lang="ts" setup>
+import { Reload } from '@vicons/ionicons5'
+import { ref } from 'vue'
+
+const show = ref(false)
+</script>
+
 <template>
   <n-spin :show="show">
     <template #icon>
@@ -11,19 +18,3 @@
     </template>
   </n-spin>
 </template>
-
-<script lang="ts">
-import { ref, defineComponent } from 'vue'
-import { Reload } from '@vicons/ionicons5'
-
-export default defineComponent({
-  components: {
-    Reload
-  },
-  setup () {
-    return {
-      show: ref(false)
-    }
-  }
-})
-</script>

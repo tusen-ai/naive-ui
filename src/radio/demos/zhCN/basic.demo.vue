@@ -2,6 +2,18 @@
 # 基础用法
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const checkedValueRef = ref<string | null>(null)
+const disabled = ref(true)
+const checkedValue = checkedValueRef
+
+function handleChange(e: Event) {
+  checkedValueRef.value = (e.target as HTMLInputElement).value
+}
+</script>
+
 <template>
   <n-space>
     <n-radio
@@ -31,21 +43,3 @@
     <n-switch v-model:value="disabled" />
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const checkedValueRef = ref<string | null>(null)
-
-    return {
-      disabled: ref(true),
-      checkedValue: checkedValueRef,
-      handleChange (e: Event) {
-        checkedValueRef.value = (e.target as HTMLInputElement).value
-      }
-    }
-  }
-})
-</script>

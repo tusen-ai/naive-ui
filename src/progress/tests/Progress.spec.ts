@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
-import { NProgress } from '../index'
 import { SuccessIcon } from '../../_internal/icons'
+import { NProgress } from '../index'
 
 describe('n-progress', () => {
   it('should work with import on demand', () => {
@@ -13,6 +13,7 @@ describe('n-progress', () => {
       expect(wrapper.find('.n-progress').classes()).toContain(
         `n-progress--${item}`
       )
+      wrapper.unmount()
     })
   })
 
@@ -29,13 +30,14 @@ describe('n-progress', () => {
     })
     expect(
       wrapper.find('.n-progress-graph-line-fill').attributes('style')
-    ).toContain('background-color: rgb(51, 51, 51);')
+    ).toContain('max-width: 0%; background: rgb(51, 51, 51);')
     expect(
       wrapper.find('.n-progress-graph-line-rail').attributes('style')
     ).toContain('background-color: rgb(68, 68, 68);')
     expect(
       wrapper.find('.n-progress-custom-content').attributes('style')
     ).toContain('color: rgb(85, 85, 85);')
+    wrapper.unmount()
   })
 
   it('should work with `border-radius`, `fill-border-radius` prop', async () => {
@@ -54,6 +56,7 @@ describe('n-progress', () => {
     expect(
       wrapper.find('.n-progress-graph-line-fill').attributes('style')
     ).toContain('border-radius: 13px')
+    wrapper.unmount()
   })
 
   it('should work with `height` prop', async () => {
@@ -65,6 +68,7 @@ describe('n-progress', () => {
     expect(
       wrapper.find('.n-progress-graph-line-rail').attributes('style')
     ).toContain('height: 24')
+    wrapper.unmount()
   })
 
   it('should work with `processing` prop', async () => {
@@ -76,6 +80,7 @@ describe('n-progress', () => {
     expect(wrapper.find('.n-progress-graph-line-fill').classes()).toContain(
       'n-progress-graph-line-fill--processing'
     )
+    wrapper.unmount()
   })
 
   it('should work with slot', async () => {
@@ -92,6 +97,7 @@ describe('n-progress', () => {
 
     await wrapper.setProps({ showIndicator: true })
     expect(wrapper.find('.n-progress-custom-content').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should show icon with `circle` type', () => {
@@ -104,6 +110,7 @@ describe('n-progress', () => {
     })
 
     expect(wrapper.findComponent(SuccessIcon).exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should show icon with `line` type', () => {
@@ -117,6 +124,7 @@ describe('n-progress', () => {
     })
 
     expect(wrapper.findComponent(SuccessIcon).exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should show correct style with `line` type', async () => {
@@ -135,6 +143,7 @@ describe('n-progress', () => {
     await wrapper.setProps({ indicatorPlacement: 'inside' })
     expect(wrapper.find('.n-progress-graph-line-indicator').exists()).toBe(true)
     expect(wrapper.find('.n-progress-graph-line-indicator').text()).toBe('50%')
+    wrapper.unmount()
   })
 
   it('should show correct style with `multiple-circle` type', async () => {
@@ -148,5 +157,6 @@ describe('n-progress', () => {
     })
 
     expect(wrapper.find('.n-progress-text').exists()).toBe(true)
+    wrapper.unmount()
   })
 })

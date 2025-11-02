@@ -4,6 +4,23 @@
 Choose whether the element blurs after a selection is made with `blur-after-select`.
 </markdown>
 
+<script lang="ts" setup>
+import { computed, ref } from 'vue'
+
+const valueRef = ref('')
+const value = valueRef
+const options = computed(() => {
+  return ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {
+    const value = valueRef.value === null ? '' : valueRef.value
+    const prefix = value.split('@')[0]
+    return {
+      label: prefix + suffix,
+      value: prefix + suffix
+    }
+  })
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-auto-complete
@@ -20,26 +37,3 @@ Choose whether the element blurs after a selection is made with `blur-after-sele
     />
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref, computed } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const valueRef = ref('')
-    return {
-      value: valueRef,
-      options: computed(() => {
-        return ['@gmail.com', '@163.com', '@qq.com'].map((suffix) => {
-          const value = valueRef.value === null ? '' : valueRef.value
-          const prefix = value.split('@')[0]
-          return {
-            label: prefix + suffix,
-            value: prefix + suffix
-          }
-        })
-      })
-    }
-  }
-})
-</script>

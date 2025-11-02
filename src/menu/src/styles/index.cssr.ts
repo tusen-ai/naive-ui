@@ -1,4 +1,4 @@
-import { CNode, CNodeChildren, CProperties } from 'css-render'
+import type { CNode, CNodeChildren, CProperties } from 'css-render'
 import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-in-height-expand.cssr'
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
@@ -92,7 +92,10 @@ export default c([
     padding-bottom: 6px;
   `, [
     cM('horizontal', `
-      display: inline-flex;
+      max-width: 100%;
+      width: 100%;
+      display: flex;
+      overflow: hidden;
       padding-bottom: 0;
     `, [
       cB('submenu', 'margin: 0;'),
@@ -163,6 +166,12 @@ export default c([
           c('a', 'color: var(--n-item-text-color-horizontal);')
         ])
       ])
+    ]),
+    cNotM('responsive', [
+      cB('menu-item-content-header', `
+        overflow: hidden;
+        text-overflow: ellipsis;
+      `)
     ]),
     cM('collapsed', [
       cB('menu-item-content', [
@@ -312,8 +321,6 @@ export default c([
           opacity .3s var(--n-bezier);
         opacity: 1;
         white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
         color: var(--n-item-text-color);
       `, [
         c('a', `
@@ -384,6 +391,6 @@ export default c([
   `)
 ])
 
-function hoverStyle (props: CProperties, children: CNodeChildren): CNode[] {
+function hoverStyle(props: CProperties, children: CNodeChildren): CNode[] {
   return [cM('hover', props, children), c('&:hover', props, children)]
 }

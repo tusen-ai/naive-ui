@@ -1,5 +1,5 @@
-import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.cssr'
+import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
@@ -97,6 +97,7 @@ export default cB('steps', `
         position: absolute;
         left: 0;
         top: 0;
+        white-space: nowrap;
         font-size: var(--n-indicator-index-font-size);
         width: var(--n-indicator-icon-size);
         height: var(--n-indicator-icon-size);
@@ -148,5 +149,31 @@ export default cB('steps', `
         ])
       ])
     ])
-  ])
+  ]),
+  cM('content-bottom', [cNotM('vertical', [
+    c('>', [
+      cB('step', 'flex-direction: column', [
+        c('>', [
+          cB('step-line', 'display: flex;', [
+            c('>', [
+              cB('step-splitor', `
+                margin-top: 0;
+                align-self: center;
+              `)
+            ]),
+          ])
+        ]),
+        c('>', [
+          cB('step-content', 'margin-top: calc(var(--n-indicator-size) / 2 - var(--n-step-header-font-size) / 2);', [
+            cB('step-content-header', `
+                margin-left: 0;
+              `),
+            cB('step-content__description', `
+                margin-left: 0;
+            `)
+          ])
+        ])
+      ])
+    ])
+  ])])
 ])

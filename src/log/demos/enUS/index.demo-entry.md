@@ -74,4 +74,4 @@ auto-bottom.vue
 
 | Name | Parameters | Description |
 | --- | --- | --- |
-| scrollTo | `(options: { top?: number, position?: 'top' \| 'bottom', slient?: boolean })` | Callback function for scroll event. |
+| scrollTo | `(options: { top?: number, position?: 'top' \| 'bottom', silent?: boolean })` | Callback function for scroll event. |

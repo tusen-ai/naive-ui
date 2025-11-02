@@ -31,6 +31,7 @@ const itIT: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'YYYY-w',
     clear: 'Cancella',
     now: 'Adesso',
     confirm: 'Conferma',
@@ -41,13 +42,13 @@ const itIT: NLocale = {
     monthPlaceholder: 'Seleziona mese',
     yearPlaceholder: 'Seleziona anno',
     quarterPlaceholder: 'Seleziona trimestre',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Data inizio',
     endDatePlaceholder: 'Data fine',
     startDatetimePlaceholder: 'Data e ora di inizio',
     endDatetimePlaceholder: 'Data e ora di fine',
-    // FIXME: translation needed
-    startMonthPlaceholder: 'Start Month',
-    endMonthPlaceholder: 'End Month',
+    startMonthPlaceholder: 'Mese di inizio',
+    endMonthPlaceholder: 'Mese di fine',
     monthBeforeYear: true,
     firstDayOfWeek: 0 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
     today: 'Oggi'
@@ -62,13 +63,20 @@ const itIT: NLocale = {
     sourceTitle: 'Fonte',
     targetTitle: 'Destinazione'
   },
-  // TODO: translation
   Transfer: {
-    selectAll: 'Select all',
-    unselectAll: 'Unselect all',
-    clearAll: 'Clear',
-    total: (num: number): string => `Total ${num} items`,
-    selected: (num: number): string => `${num} items selected`
+    selectAll: 'Seleziona tutto',
+    unselectAll: 'Deseleziona tutto',
+    clearAll: 'Pulisci',
+    total: (num: number): string => {
+      if (num !== 1)
+        return `${num} elementi in totale`
+      return '1 elemento in totale'
+    },
+    selected: (num: number): string => {
+      if (num !== 1)
+        return `${num} elementi selezionati`
+      return '1 elemento selezionato'
+    }
   },
   Empty: {
     description: 'Nessun Dato'
@@ -80,7 +88,8 @@ const itIT: NLocale = {
     placeholder: 'Seleziona ora',
     positiveText: 'OK',
     negativeText: 'Annulla',
-    now: 'Ora'
+    now: 'Ora',
+    clear: 'Cancella'
   },
   Pagination: {
     goto: 'Vai a',
@@ -118,9 +127,15 @@ const itIT: NLocale = {
     tipClockwise: 'Ruota a destra',
     tipZoomOut: 'Ingrandisci',
     tipZoomIn: 'Riduci',
+    tipDownload: 'Download',
     tipClose: 'Chiudi (Esc)',
-    // TODO: translation
-    tipOriginalSize: 'Zoom to original size'
+    tipOriginalSize: 'Torna alla dimensione originale'
+  },
+  Heatmap: {
+    less: 'meno',
+    more: 'più',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

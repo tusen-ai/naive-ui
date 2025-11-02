@@ -1,4 +1,4 @@
-import { CNode } from 'css-render'
+import type { CNode } from 'css-render'
 import { c } from '../../_utils/cssr'
 import commonVariables from '../common/_common'
 
@@ -12,7 +12,7 @@ interface FadeInTransitionOptions {
   leaveCubicBezier?: string
 }
 
-export function fadeInTransition ({
+export function fadeInTransition({
   name = 'fade-in',
   enterDuration = '0.2s',
   leaveDuration = '0.2s',

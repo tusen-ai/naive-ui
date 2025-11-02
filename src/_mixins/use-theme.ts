@@ -1,22 +1,15 @@
-/* eslint-disable @typescript-eslint/consistent-type-assertions */
-import {
-  inject,
-  computed,
-  onBeforeMount,
-  ComputedRef,
-  Ref,
-  PropType
-} from 'vue'
-import { merge } from 'lodash-es'
-import { CNode } from 'css-render'
+import type { CNode } from 'css-render'
+import type { ComputedRef, PropType, Ref } from 'vue'
+import type { ThemeCommonVars } from '../_styles/common'
+import type { GlobalTheme } from '../config-provider'
 import { useSsrAdapter } from '@css-render/vue3-ssr'
+import { merge } from 'lodash-es'
+import { computed, inject, onBeforeMount } from 'vue'
 import globalStyle from '../_styles/global/index.cssr'
 import { configProviderInjectionKey } from '../config-provider/src/context'
-import type { GlobalTheme } from '../config-provider'
-import type { ThemeCommonVars } from '../_styles/common'
 import { cssrAnchorMetaName } from './common'
 
-export interface Theme<N, T = {}, R = any> {
+export interface Theme<N, T = Record<string, unknown>, R = any> {
   name: N
   common?: ThemeCommonVars
   peers?: R
@@ -35,35 +28,34 @@ export interface ThemePropsReactive<T> {
   builtinThemeOverrides?: ExtractThemeOverrides<T>
 }
 
-export type ExtractThemeVars<T> = T extends Theme<unknown, infer U, unknown>
-  ? unknown extends U // self is undefined, ThemeVars is unknown
-    ? {}
-    : U
-  : {}
+export type ExtractThemeVars<T>
+  = T extends Theme<unknown, infer U, unknown>
+    ? unknown extends U // self is undefined, ThemeVars is unknown
+      ? Record<string, unknown>
+      : U
+    : Record<string, unknown>
 
-export type ExtractPeerOverrides<T> = T extends Theme<unknown, unknown, infer V>
-  ? {
-      peers?: {
-        [k in keyof V]?: ExtractThemeOverrides<V[k]>
+export type ExtractPeerOverrides<T>
+  = T extends Theme<unknown, unknown, infer V>
+    ? {
+        peers?: {
+          [k in keyof V]?: ExtractThemeOverrides<V[k]>
+        }
       }
-    }
-  : T
+    : T
 
 // V is peers theme
-export type ExtractMergedPeerOverrides<T> = T extends Theme<
-unknown,
-unknown,
-infer V
->
-  ? {
-      [k in keyof V]?: ExtractPeerOverrides<V[k]>
-    }
-  : T
+export type ExtractMergedPeerOverrides<T>
+  = T extends Theme<unknown, unknown, infer V>
+    ? {
+        [k in keyof V]?: ExtractPeerOverrides<V[k]>
+      }
+    : T
 
-export type ExtractThemeOverrides<T> = Partial<ExtractThemeVars<T>> &
-ExtractPeerOverrides<T> & { common?: ThemeCommonVars }
+export type ExtractThemeOverrides<T> = Partial<ExtractThemeVars<T>>
+  & ExtractPeerOverrides<T> & { common?: Partial<ThemeCommonVars> }
 
-export function createTheme<N extends string, T, R> (
+export function createTheme<N extends string, T, R>(
   theme: Theme<N, T, R>
 ): Theme<N, T, R> {
   return theme
@@ -75,22 +67,23 @@ type UseThemeProps<T> = Readonly<{
   builtinThemeOverrides?: ExtractThemeOverrides<T>
 }>
 
-export type MergedTheme<T> = T extends Theme<unknown, infer V, infer W>
-  ? {
-      common: ThemeCommonVars
-      self: V
-      peers: W
-      peerOverrides: ExtractMergedPeerOverrides<T>
-    }
-  : T
+export type MergedTheme<T>
+  = T extends Theme<unknown, infer V, infer W>
+    ? {
+        common: ThemeCommonVars
+        self: V
+        peers: W
+        peerOverrides: ExtractMergedPeerOverrides<T>
+      }
+    : T
 
-function useTheme<N, T, R> (
+function useTheme<N, T, R>(
   resolveId: Exclude<keyof GlobalTheme, 'common' | 'name'>,
   mountId: string,
   style: CNode | undefined,
   defaultTheme: Theme<N, T, R>,
   props: UseThemeProps<Theme<N, T, R>>,
-  clsPrefixRef?: Ref<string | undefined>
+  clsPrefixRef: Ref<string | undefined> | undefined
 ): ComputedRef<MergedTheme<Theme<N, T, R>>> {
   const ssrAdapter = useSsrAdapter()
   const NConfigProvider = inject(configProviderInjectionKey, null)
@@ -104,20 +97,23 @@ function useTheme<N, T, R> (
           bPrefix: clsPrefix ? `.${clsPrefix}-` : undefined
         },
         anchorMetaName: cssrAnchorMetaName,
-        ssr: ssrAdapter
+        ssr: ssrAdapter,
+        parent: NConfigProvider?.styleMountTarget
       })
       if (!NConfigProvider?.preflightStyleDisabled) {
         globalStyle.mount({
           id: 'n-global',
           head: true,
           anchorMetaName: cssrAnchorMetaName,
-          ssr: ssrAdapter
+          ssr: ssrAdapter,
+          parent: NConfigProvider?.styleMountTarget
         })
       }
     }
     if (ssrAdapter) {
       mountStyle()
-    } else {
+    }
+    else {
       onBeforeMount(mountStyle)
     }
   }
@@ -126,10 +122,10 @@ function useTheme<N, T, R> (
     const {
       theme: { common: selfCommon, self, peers = {} } = {},
       themeOverrides: selfOverrides = {} as ExtractThemeOverrides<
-      Theme<N, T, R>
+        Theme<N, T, R>
       >,
       builtinThemeOverrides: builtinOverrides = {} as ExtractThemeOverrides<
-      Theme<N, T, R>
+        Theme<N, T, R>
       >
     } = props
     const { common: selfCommonOverrides, peers: peersOverrides } = selfOverrides

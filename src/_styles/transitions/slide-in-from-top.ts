@@ -1,4 +1,4 @@
-import { CNode } from 'css-render'
+import type { CNode } from 'css-render'
 import { c } from '../../_utils/cssr'
 import commonVariables from '../common/_common'
 
@@ -10,7 +10,7 @@ interface SlideInFromTopTransitionOptions {
   name?: string
 }
 
-export function slideInFromTopTransition ({
+export function slideInFromTopTransition({
   duration = '0.3s',
   leaveDuration = '0.2s',
   name = 'slide-in-from-top'

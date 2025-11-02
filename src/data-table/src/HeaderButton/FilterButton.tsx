@@ -1,20 +1,21 @@
-import { h, defineComponent, ref, computed, PropType, inject } from 'vue'
-import { FilterIcon } from '../../../_internal/icons'
-import { NBaseIcon } from '../../../_internal'
-import { NPopover } from '../../../popover'
-import RenderFilter from './RenderFilter'
-import NDataTableFilterMenu from './FilterMenu'
-import {
+import type { PropType } from 'vue'
+import type {
   ColumnKey,
-  dataTableInjectionKey,
   FilterOption,
   FilterOptionValue,
   FilterState,
   TableBaseColumn
 } from '../interface'
+import { computed, defineComponent, h, inject, ref } from 'vue'
+import { NBaseIcon } from '../../../_internal'
+import { FilterIcon } from '../../../_internal/icons'
 import { useConfig } from '../../../_mixins'
+import { NPopover } from '../../../popover'
+import { dataTableInjectionKey } from '../interface'
+import NDataTableFilterMenu from './FilterMenu'
+import RenderFilter from './RenderFilter'
 
-function createFilterState (
+function createFilterState(
   currentFilterState: FilterState,
   columnKey: ColumnKey,
   mergedFilterValue: FilterOptionValue | FilterOptionValue[] | null
@@ -36,7 +37,7 @@ export default defineComponent({
       default: () => []
     }
   },
-  setup (props) {
+  setup(props) {
     const { mergedComponentPropsRef } = useConfig()
     const {
       mergedThemeRef,
@@ -45,8 +46,8 @@ export default defineComponent({
       filterMenuCssVarsRef,
       paginationBehaviorOnFilterRef,
       doUpdatePage,
-      doUpdateFilters
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      doUpdateFilters,
+      filterIconPopoverPropsRef
     } = inject(dataTableInjectionKey)!
     const showPopoverRef = ref(false)
     const filterStateRef = mergedFilterStateRef
@@ -57,7 +58,8 @@ export default defineComponent({
       const filterValue = filterStateRef.value[props.column.key]
       if (filterValue === undefined) {
         const { value: multiple } = filterMultipleRef
-        if (multiple) return []
+        if (multiple)
+          return []
         else return null
       }
       return filterValue
@@ -71,11 +73,11 @@ export default defineComponent({
     })
     const mergedRenderFilterRef = computed(() => {
       return (
-        mergedComponentPropsRef?.value?.DataTable?.renderFilter ||
-        props.column.renderFilter
+        mergedComponentPropsRef?.value?.DataTable?.renderFilter
+        || props.column.renderFilter
       )
     })
-    function handleFilterChange (
+    function handleFilterChange(
       mergedFilterValue: FilterOptionValue | FilterOptionValue[] | null
     ): void {
       const nextFilterState = createFilterState(
@@ -88,10 +90,10 @@ export default defineComponent({
         doUpdatePage(1)
       }
     }
-    function handleFilterMenuCancel (): void {
+    function handleFilterMenuCancel(): void {
       showPopoverRef.value = false
     }
-    function handleFilterMenuConfirm (): void {
+    function handleFilterMenuConfirm(): void {
       showPopoverRef.value = false
     }
     return {
@@ -100,6 +102,7 @@ export default defineComponent({
       active: activeRef,
       showPopover: showPopoverRef,
       mergedRenderFilter: mergedRenderFilterRef,
+      filterIconPopoverProps: filterIconPopoverPropsRef,
       filterMultiple: filterMultipleRef,
       mergedFilterValue: mergedFilterValueRef,
       filterMenuCssVars: filterMenuCssVarsRef,
@@ -108,16 +111,22 @@ export default defineComponent({
       handleFilterMenuCancel
     }
   },
-  render () {
-    const { mergedTheme, mergedClsPrefix, handleFilterMenuCancel } = this
+  render() {
+    const {
+      mergedTheme,
+      mergedClsPrefix,
+      handleFilterMenuCancel,
+      filterIconPopoverProps
+    } = this
     return (
       <NPopover
         show={this.showPopover}
-        onUpdateShow={(v) => (this.showPopover = v)}
+        onUpdateShow={v => (this.showPopover = v)}
         trigger="click"
         theme={mergedTheme.peers.Popover}
         themeOverrides={mergedTheme.peerOverrides.Popover}
         placement="bottom"
+        {...filterIconPopoverProps}
         style={{ padding: 0 }}
       >
         {{

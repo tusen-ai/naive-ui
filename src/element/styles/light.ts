@@ -1,4 +1,4 @@
-import { Theme } from '../../_mixins'
+import type { Theme } from '../../_mixins'
 import { commonLight } from '../../_styles/common'
 
 const elementLight: Theme<'Element'> = {

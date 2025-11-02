@@ -1,5 +1,5 @@
-import { h, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
+import { h, nextTick } from 'vue'
 import { NImage, NImageGroup } from '../index'
 import NImagePreview from '../src/ImagePreview'
 
@@ -17,6 +17,7 @@ describe('n-image', () => {
     expect(wrapper.find('img').attributes('aria-label')).toBe(
       'This is just a picture'
     )
+    wrapper.unmount()
   })
 
   it('should work with `width` prop', async () => {
@@ -29,6 +30,7 @@ describe('n-image', () => {
     await wrapper.setProps({ width: 200 })
 
     expect(wrapper.find('img').attributes('width')).toBe('200')
+    wrapper.unmount()
   })
 
   it('should work with `height` prop', async () => {
@@ -41,6 +43,7 @@ describe('n-image', () => {
     await wrapper.setProps({ height: 300 })
 
     expect(wrapper.find('img').attributes('height')).toBe('300')
+    wrapper.unmount()
   })
 
   it('should work with `src` prop', async () => {
@@ -53,6 +56,7 @@ describe('n-image', () => {
     expect(wrapper.find('img').attributes('src')).toBe(
       'https://www.naiveui.com/assets/naivelogo.93278402.svg'
     )
+    wrapper.unmount()
   })
 
   it('should work with `previewSrc` prop', async () => {
@@ -65,6 +69,7 @@ describe('n-image', () => {
     expect(wrapper.find('img').attributes('data-preview-src')).toBe(
       'https://www.naiveui.com/assets/naivelogo.93278402.svg'
     )
+    wrapper.unmount()
   })
 
   it('should work with `showToolbar` prop', async () => {
@@ -109,10 +114,11 @@ describe('n-image', () => {
       }
     })
     expect(wrapper.find('[data-cool]').exists()).toEqual(true)
+    wrapper.unmount()
   })
 
   it('should work with `onError` prop', async () => {
-    const onError = jest.fn()
+    const onError = vi.fn()
     const wrapper = mount(NImage, {
       props: {
         src: 'https:// 07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
@@ -121,6 +127,7 @@ describe('n-image', () => {
     })
     await wrapper.find('img').trigger('error')
     expect(onError).toHaveBeenCalled()
+    wrapper.unmount()
   })
 
   it('should work with `objectFit` prop', () => {
@@ -133,6 +140,7 @@ describe('n-image', () => {
     expect(wrapper.find('img').attributes('style')).toContain(
       'object-fit: contain;'
     )
+    wrapper.unmount()
   })
   it('should work with `showToolbar close` prop', async () => {
     const wrapper = mount(NImage, {
@@ -149,10 +157,11 @@ describe('n-image', () => {
     )
     await nextTick()
     expect(document.querySelector('.n-image-preview-toolbar')).toEqual(null)
+    wrapper.unmount()
   })
 
   it('should work with `onLoad` prop', async () => {
-    const onLoad = jest.fn()
+    const onLoad = vi.fn()
     const wrapper = mount(NImage, {
       props: {
         src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',

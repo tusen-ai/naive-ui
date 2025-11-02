@@ -1,25 +1,11 @@
-import {
-  defineComponent,
-  h,
-  toRef,
-  watch,
-  onMounted,
-  ref,
-  computed,
-  PropType
-} from 'vue'
-import {
-  useTheme,
-  useHljs,
-  Hljs,
-  useConfig,
-  useThemeClass
-} from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import { codeLight } from '../styles'
-import type { CodeTheme } from '../styles'
-import style from './styles/index.cssr'
+import type { PropType } from 'vue'
+import type { Hljs, ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type { CodeTheme } from '../styles'
+import { computed, defineComponent, h, onMounted, ref, toRef, watch } from 'vue'
+import { useConfig, useHljs, useTheme, useThemeClass } from '../../_mixins'
+import { codeLight } from '../styles'
+import style from './styles/index.cssr'
 
 export const codeProps = {
   ...(useTheme.props as ThemeProps<CodeTheme>),
@@ -47,7 +33,7 @@ export type CodeProps = ExtractPublicPropTypes<typeof codeProps>
 export default defineComponent({
   name: 'Code',
   props: codeProps,
-  setup (props, { slots }) {
+  setup(props, { slots }) {
     const { internalNoHighlight } = props
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig()
     const codeRef = ref<HTMLElement | null>(null)
@@ -69,13 +55,16 @@ export default defineComponent({
       }).value
     }
     const mergedShowLineNumbersRef = computed(() => {
-      if (props.inline || props.wordWrap) return false
+      if (props.inline || props.wordWrap)
+        return false
       return props.showLineNumbers
     })
     const setCode = (): void => {
-      if (slots.default) return
+      if (slots.default)
+        return
       const { value: codeEl } = codeRef
-      if (!codeEl) return
+      if (!codeEl)
+        return
       const { language } = props
       const code = props.uri
         ? window.decodeURIComponent(props.code)
@@ -85,9 +74,11 @@ export default defineComponent({
         if (html !== null) {
           if (props.inline) {
             codeEl.innerHTML = html
-          } else {
+          }
+          else {
             const prevPreEl = codeEl.querySelector('.__code__')
-            if (prevPreEl) codeEl.removeChild(prevPreEl)
+            if (prevPreEl)
+              codeEl.removeChild(prevPreEl)
             const preEl = document.createElement('pre')
             preEl.className = '__code__'
             preEl.innerHTML = html
@@ -103,7 +94,8 @@ export default defineComponent({
       const maybePreEl = codeEl.querySelector('.__code__')
       if (maybePreEl) {
         maybePreEl.textContent = code
-      } else {
+      }
+      else {
         const wrap = document.createElement('pre')
         wrap.className = '__code__'
         wrap.textContent = code
@@ -114,7 +106,8 @@ export default defineComponent({
     onMounted(setCode)
     watch(toRef(props, 'language'), setCode)
     watch(toRef(props, 'code'), setCode)
-    if (!internalNoHighlight) watch(hljsRef, setCode)
+    if (!internalNoHighlight)
+      watch(hljsRef, setCode)
     const themeRef = useTheme(
       'Code',
       '-code',
@@ -164,13 +157,13 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'code',
-        computed(() => {
-          return `${props.internalFontSize || 'a'}`
-        }),
-        cssVarsRef,
-        props
-      )
+          'code',
+          computed(() => {
+            return `${props.internalFontSize || 'a'}`
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
@@ -184,7 +177,8 @@ export default defineComponent({
           if (char === '\n') {
             lastIsLineWrap = true
             numbers.push(number++)
-          } else {
+          }
+          else {
             lastIsLineWrap = false
           }
         }
@@ -198,7 +192,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, wordWrap, mergedShowLineNumbers, onRender } = this
     onRender?.()
     return (

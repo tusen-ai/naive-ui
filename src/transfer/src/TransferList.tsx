@@ -1,8 +1,12 @@
-import { h, defineComponent, ref, inject, PropType } from 'vue'
-import { VirtualList, VirtualListInst } from 'vueuc'
+import type { PropType } from 'vue'
+import type { VirtualListInst } from 'vueuc'
+import type { ScrollbarInst } from '../../_internal'
+import type { Option } from './interface'
+import { defineComponent, h, inject, ref } from 'vue'
+import { VirtualList } from 'vueuc'
+import { NScrollbar } from '../../_internal'
 import { NEmpty } from '../../empty'
-import { NScrollbar, ScrollbarInst } from '../../_internal'
-import { Option, transferInjectionKey } from './interface'
+import { transferInjectionKey } from './interface'
 import NTransferListItem from './TransferListItem'
 
 export default defineComponent({
@@ -26,23 +30,24 @@ export default defineComponent({
     },
     source: Boolean
   },
-  setup () {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  setup() {
     const { mergedThemeRef, mergedClsPrefixRef } = inject(transferInjectionKey)!
     const scrollerInstRef = ref<ScrollbarInst | null>(null)
     const vlInstRef = ref<VirtualListInst | null>(null)
-    function syncVLScroller (): void {
+    function syncVLScroller(): void {
       scrollerInstRef.value?.sync()
     }
-    function scrollContainer (): HTMLElement | null {
+    function scrollContainer(): HTMLElement | null {
       const { value } = vlInstRef
-      if (!value) return null
+      if (!value)
+        return null
       const { listElRef } = value
       return listElRef
     }
-    function scrollContent (): HTMLElement | null {
+    function scrollContent(): HTMLElement | null {
       const { value } = vlInstRef
-      if (!value) return null
+      if (!value)
+        return null
       const { itemsElRef } = value
       return itemsElRef
     }
@@ -56,7 +61,7 @@ export default defineComponent({
       scrollContent
     }
   },
-  render () {
+  render() {
     const { mergedTheme, options } = this
     if (options.length === 0) {
       return (
@@ -66,8 +71,8 @@ export default defineComponent({
         />
       )
     }
-    const { mergedClsPrefix, virtualScroll, source, disabled, syncVLScroller } =
-      this
+    const { mergedClsPrefix, virtualScroll, source, disabled, syncVLScroller }
+      = this
     return (
       <NScrollbar
         ref="scrollerInstRef"
@@ -108,7 +113,7 @@ export default defineComponent({
               </VirtualList>
             ) : (
               <div class={`${mergedClsPrefix}-transfer-list-content`}>
-                {options.map((option) => (
+                {options.map(option => (
                   <NTransferListItem
                     source={source}
                     key={option.value}

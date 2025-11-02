@@ -1,10 +1,10 @@
+import type { DatePickerTheme } from './light'
 import { changeColor, composite } from 'seemly'
-import { inputDark } from '../../input/styles'
+import { scrollbarDark } from '../../_internal/scrollbar/styles'
 import { commonDark } from '../../_styles/common'
 import { buttonDark } from '../../button/styles'
+import { inputDark } from '../../input/styles'
 import { timePickerDark } from '../../time-picker/styles'
-import { scrollbarDark } from '../../_internal/scrollbar/styles'
-import type { DatePickerTheme } from './light'
 import { self } from './light'
 
 const datePickerDark: DatePickerTheme = {
@@ -16,7 +16,7 @@ const datePickerDark: DatePickerTheme = {
     TimePicker: timePickerDark,
     Scrollbar: scrollbarDark
   },
-  self (vars) {
+  self(vars) {
     const { popoverColor, hoverColor, primaryColor } = vars
     const commonSelf = self(vars)
     commonSelf.itemColorDisabled = composite(popoverColor, hoverColor)

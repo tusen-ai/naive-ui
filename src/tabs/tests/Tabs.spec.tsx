@@ -1,8 +1,9 @@
+/* eslint-disable unused-imports/no-unused-vars */
 import { mount } from '@vue/test-utils'
-import { h } from 'vue'
-import { NTabPane, NTabs } from '../index'
-import { AddIcon } from '../../_internal/icons'
 import { sleep } from 'seemly'
+import { h } from 'vue'
+import { AddIcon } from '../../_internal/icons'
+import { NTabPane, NTabs } from '../index'
 
 describe('n-tabs', () => {
   it('should work with import on demand', () => {
@@ -10,9 +11,9 @@ describe('n-tabs', () => {
   })
 
   it('should work with callback types', () => {
-    function onUpdateValue1 (name: number): void {}
-    function onUpdateValue2 (name: string): void {}
-    function onUpdateValue3 (name: number | string): void {}
+    function onUpdateValue1(name: number): void {}
+    function onUpdateValue2(name: string): void {}
+    function onUpdateValue3(name: number | string): void {}
     mount(NTabs, {
       props: {
         onUpdateValue: onUpdateValue1
@@ -46,7 +47,7 @@ describe('n-tabs', () => {
   })
 
   it('should show AddIcon with `addable` `on-add` prop', async () => {
-    const onAdd = jest.fn()
+    const onAdd = vi.fn()
     const wrapper = mount(NTabs, {
       props: {
         type: 'card',
@@ -137,7 +138,7 @@ describe('n-tabs', () => {
       props: { value: 'show' },
       slots: {
         default: () =>
-          displayDirectives.map((directive) => (
+          displayDirectives.map(directive => (
             <NTabPane
               displayDirective={directive}
               tab={directive}
@@ -171,17 +172,16 @@ describe('n-tabs', () => {
       props: {
         type: 'card',
         defaultValue: '3',
-        onBeforeLeave: (name: string) => {
+        onBeforeLeave: async (name: string) => {
           switch (name) {
             case '1':
               return false
             case '2':
-              // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-              return new Promise((resolve) => {
+              return await new Promise<boolean>((resolve) => {
                 setTimeout(() => {
                   resolve(true)
                 }, 1000)
-              }) as Promise<boolean>
+              })
             default:
               return true
           }
@@ -295,7 +295,7 @@ describe('n-tabs', () => {
                 tab: 'Oasis',
                 name: 'oasis'
               },
-              'Wonderwall'
+              { default: () => 'Wonderwall' }
             )
         }
       })
@@ -308,7 +308,7 @@ describe('n-tabs', () => {
   })
 
   it('should work with `on-close` prop', async () => {
-    const onClose = jest.fn()
+    const onClose = vi.fn()
     const wrapper = mount(NTabs, {
       props: {
         type: 'card',
@@ -352,5 +352,75 @@ describe('n-tabs', () => {
     expect(wrapper.find('.n-tabs-nav__prefix').text()).toBe('test-prefix')
     expect(wrapper.find('.n-tabs-nav__suffix').exists()).toBe(true)
     expect(wrapper.find('.n-tabs-nav__suffix').text()).toBe('test-suffix')
+  })
+
+  it('should work with `tab-class` prop', () => {
+    const wrapper = mount(NTabs, {
+      props: {
+        defaultValue: '1',
+        tabClass: 'foo'
+      },
+      slots: {
+        default: () => [
+          h(NTabPane, {
+            tab: '1',
+            name: '1'
+          })
+        ]
+      }
+    })
+    expect(wrapper.find('.n-tabs-tab').classes()).toContain('foo')
+  })
+
+  it('should work with `add-tab-class` prop', () => {
+    const wrapper = mount(NTabs, {
+      props: {
+        defaultValue: '1',
+        type: 'card',
+        addTabClass: 'foo',
+        addable: true
+      },
+      slots: {
+        default: () => [
+          h(NTabPane, {
+            tab: '1',
+            name: '1'
+          })
+        ]
+      }
+    })
+    expect(wrapper.find('.n-tabs-tab.n-tabs-tab--addable').classes()).toContain(
+      'foo'
+    )
+    expect(
+      wrapper.find('.n-tabs-tab:not(.n-tabs-tab--addable)').classes()
+    ).not.toContain('foo')
+  })
+
+  it('should work with `add-tab-style` prop', () => {
+    const wrapper = mount(NTabs, {
+      props: {
+        defaultValue: '1',
+        type: 'card',
+        addTabStyle: {
+          fontSize: '64px'
+        },
+        addable: true
+      },
+      slots: {
+        default: () => [
+          h(NTabPane, {
+            tab: '1',
+            name: '1'
+          })
+        ]
+      }
+    })
+    expect(
+      wrapper.find('.n-tabs-tab.n-tabs-tab--addable').attributes('style')
+    ).toContain('64px')
+    expect(
+      wrapper.find('.n-tabs-tab:not(.n-tabs-tab--addable)').attributes('style')
+    ).toBe(undefined)
   })
 })

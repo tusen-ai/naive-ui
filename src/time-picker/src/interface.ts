@@ -1,8 +1,8 @@
-import { Ref } from 'vue'
-import { ScrollbarInst } from '../../_internal'
+import type { Ref } from 'vue'
+import type { ScrollbarInst } from '../../_internal'
 import type { MergedTheme } from '../../_mixins'
-import { createInjectionKey } from '../../_utils'
 import type { TimePickerTheme } from '../styles'
+import { createInjectionKey } from '../../_utils'
 
 export type ItemValue = number | 'am' | 'pm'
 
@@ -17,8 +17,8 @@ export interface TimePickerInjection {
   mergedClsPrefixRef: Ref<string>
 }
 
-export const timePickerInjectionKey =
-  createInjectionKey<TimePickerInjection>('n-time-picker')
+export const timePickerInjectionKey
+  = createInjectionKey<TimePickerInjection>('n-time-picker')
 
 export interface PanelRef {
   $el: HTMLElement
@@ -28,8 +28,8 @@ export interface PanelRef {
   amPmScrollRef?: ScrollbarInst
 }
 
-export type OnUpdateValue = ((value: number, formattedValue: string) => void) &
-((value: number | null, formattedValue: string | null) => void)
+export type OnUpdateValue = ((value: number, formattedValue: string) => void)
+  & ((value: number | null, formattedValue: string | null) => void)
 export type OnUpdateValueImpl = (
   value: number | null,
   formattedValue: string | null
@@ -38,8 +38,8 @@ export type OnUpdateValueImpl = (
 export type OnUpdateFormattedValue = ((
   value: string,
   timestampValue: number
-) => void) &
-((value: string | null, timestampValue: number | null) => void)
+) => void)
+& ((value: string | null, timestampValue: number | null) => void)
 export type OnUpdateFormattedValueImpl = (
   value: string | null,
   timestampValue: number | null

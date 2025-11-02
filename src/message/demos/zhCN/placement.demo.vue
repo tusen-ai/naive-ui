@@ -2,25 +2,20 @@
 # 位置
 </markdown>
 
-<template>
-  <n-message-provider :placement="placement">
-    <Buttons @change-placement="changePlacement" />
-  </n-message-provider>
-</template>
-
-<script lang="ts">
-import { defineComponent, h, ref, VNode } from 'vue'
-import { useMessage, NButton } from 'naive-ui'
+<script lang="ts" setup>
 import type { MessageProviderProps } from 'naive-ui'
+import type { VNode } from 'vue'
+import { NButton, useMessage } from 'naive-ui'
+import { defineComponent, h, ref } from 'vue'
 
 interface Item {
   placement: MessageProviderProps['placement']
   text: string
 }
 
-export const Buttons = defineComponent({
+const Buttons = defineComponent({
   emits: ['changePlacement'],
-  setup () {
+  setup() {
     const message = useMessage()
     const placementArray: Item[] = [
       { placement: 'top', text: '顶部' },
@@ -35,7 +30,7 @@ export const Buttons = defineComponent({
       placementArray
     }
   },
-  render (): VNode[] {
+  render(): VNode[] {
     const { message, placementArray, $emit } = this
     return placementArray.map((item: Item) =>
       h(
@@ -55,18 +50,17 @@ export const Buttons = defineComponent({
   }
 })
 
-export default defineComponent({
-  components: {
-    Buttons
-  },
-  setup () {
-    const placementRef = ref<MessageProviderProps['placement']>('top')
-    return {
-      placement: placementRef,
-      changePlacement (val: MessageProviderProps['placement']) {
-        placementRef.value = val
-      }
-    }
-  }
-})
+const placementRef = ref<MessageProviderProps['placement']>('top')
+
+function changePlacement(val: MessageProviderProps['placement']) {
+  placementRef.value = val
+}
+
+const placement = placementRef
 </script>
+
+<template>
+  <n-message-provider :placement="placement">
+    <Buttons @change-placement="changePlacement" />
+  </n-message-provider>
+</template>

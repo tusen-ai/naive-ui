@@ -1,6 +1,6 @@
-import { c, cB, cE, cM } from '../../../_utils/cssr'
-import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.cssr'
 import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-in-height-expand.cssr'
+import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.cssr'
+import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 // vars:
 // --n-margin
@@ -60,6 +60,7 @@ export default c([
       margin-bottom .3s var(--n-bezier);
     padding: var(--n-padding);
     border-radius: var(--n-border-radius);
+    border: var(--n-border);
     flex-wrap: nowrap;
     overflow: hidden;
     max-width: var(--n-max-width);
@@ -80,7 +81,7 @@ export default c([
       font-size: var(--n-icon-size);
       flex-shrink: 0;
     `, [
-      ['default', 'info', 'success', 'warning', 'error', 'loading'].map((type) =>
+      ['default', 'info', 'success', 'warning', 'error', 'loading'].map(type =>
         cM(`${type}-type`, [
           c('> *', `
             color: var(--n-icon-color-${type});
@@ -94,8 +95,7 @@ export default c([
         top: 0;
         right: 0;
         bottom: 0;
-      `,
-      [iconSwitchTransition()])
+      `, [iconSwitchTransition()])
     ]),
     cE('close', `
       margin: var(--n-close-margin);

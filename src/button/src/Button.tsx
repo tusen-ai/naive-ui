@@ -1,31 +1,28 @@
-import {
-  h,
-  ref,
-  computed,
-  inject,
-  defineComponent,
-  PropType,
-  CSSProperties,
+import type {
   ButtonHTMLAttributes,
-  watchEffect,
+  CSSProperties,
   ExtractPropTypes,
+  PropType,
+  SlotsType,
+  VNode,
   VNodeChild
 } from 'vue'
-import { useMemo } from 'vooks'
-import { changeColor } from 'seemly'
-import { createHoverColor, createPressedColor } from '../../_utils/color/index'
-import { buttonGroupInjectionKey } from '../../button-group/src/context'
-import { useRtl } from '../../_mixins/use-rtl'
-import { isSafari } from '../../_utils/env/browser'
-import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import {
-  NFadeInExpandTransition,
-  NIconSwitchTransition,
-  NBaseLoading,
-  NBaseWave
-} from '../../_internal'
 import type { BaseWaveRef } from '../../_internal'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { ButtonTheme } from '../styles'
+import type { Size, Type } from './interface'
+import { changeColor } from 'seemly'
+import { useMemo } from 'vooks'
+import { computed, defineComponent, h, inject, ref, watchEffect } from 'vue'
+import {
+  NBaseLoading,
+  NBaseWave,
+  NFadeInExpandTransition,
+  NIconSwitchTransition
+} from '../../_internal'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
 import {
   call,
   color2Class,
@@ -34,10 +31,10 @@ import {
   resolveWrappedSlot,
   warnOnce
 } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import { createHoverColor, createPressedColor } from '../../_utils/color/index'
+import { isSafari } from '../../_utils/env/browser'
+import { buttonGroupInjectionKey } from '../../button-group/src/context'
 import { buttonLight } from '../styles'
-import type { ButtonTheme } from '../styles'
-import type { Type, Size } from './interface'
 import style from './styles/index.cssr'
 
 export const buttonProps = {
@@ -95,20 +92,26 @@ export const buttonProps = {
 
 export type ButtonProps = ExtractPublicPropTypes<typeof buttonProps>
 
+export interface ButtonSlots {
+  default?: () => VNode[]
+  icon?: () => VNode[]
+}
+
 const Button = defineComponent({
   name: 'Button',
   props: buttonProps,
-  setup (props) {
+  slots: Object as SlotsType<ButtonSlots>,
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         const { dashed, ghost, text, secondary, tertiary, quaternary } = props
         if (
-          (dashed || ghost || text) &&
-          (secondary || tertiary || quaternary)
+          (dashed || ghost || text)
+          && (secondary || tertiary || quaternary)
         ) {
           warnOnce(
             'button',
-            "`dashed`, `ghost` and `text` props can't be used along with `secondary`, `tertiary` and `quaterary` props."
+            '`dashed`, `ghost` and `text` props can\'t be used along with `secondary`, `tertiary` and `quaternary` props.'
           )
         }
       })
@@ -118,12 +121,12 @@ const Button = defineComponent({
     const enterPressedRef = ref(false)
     const showBorderRef = useMemo(() => {
       return (
-        !props.quaternary &&
-        !props.tertiary &&
-        !props.secondary &&
-        !props.text &&
-        (!props.color || props.ghost || props.dashed) &&
-        props.bordered
+        !props.quaternary
+        && !props.tertiary
+        && !props.secondary
+        && !props.text
+        && (!props.color || props.ghost || props.dashed)
+        && props.bordered
       )
     })
     const NButtonGroup = inject(buttonGroupInjectionKey, {})
@@ -133,9 +136,11 @@ const Button = defineComponent({
         defaultSize: 'medium',
         mergedSize: (NFormItem) => {
           const { size } = props
-          if (size) return size
+          if (size)
+            return size
           const { size: buttonGroupSize } = NButtonGroup
-          if (buttonGroupSize) return buttonGroupSize
+          if (buttonGroupSize)
+            return buttonGroupSize
           const { mergedSize: formItemSize } = NFormItem || {}
           if (formItemSize) {
             return formItemSize.value
@@ -167,7 +172,8 @@ const Button = defineComponent({
     const handleClick = (e: MouseEvent): void => {
       if (!props.disabled && !props.loading) {
         const { onClick } = props
-        if (onClick) call(onClick, e)
+        if (onClick)
+          call(onClick, e)
         if (!props.text) {
           waveElRef.value?.play()
         }
@@ -195,8 +201,8 @@ const Button = defineComponent({
     const handleBlur = (): void => {
       enterPressedRef.value = false
     }
-    const { inlineThemeDisabled, mergedClsPrefixRef, mergedRtlRef } =
-      useConfig(props)
+    const { inlineThemeDisabled, mergedClsPrefixRef, mergedRtlRef }
+      = useConfig(props)
     const themeRef = useTheme(
       'Button',
       '-button',
@@ -212,8 +218,8 @@ const Button = defineComponent({
         common: { cubicBezierEaseInOut, cubicBezierEaseOut },
         self
       } = theme
-      const { rippleDuration, opacityDisabled, fontWeight, fontWeightStrong } =
-        self
+      const { rippleDuration, opacityDisabled, fontWeight, fontWeightStrong }
+        = self
       const size = mergedSizeRef.value
       const {
         dashed,
@@ -231,7 +237,7 @@ const Button = defineComponent({
       } = props
       // font
       const fontProps = {
-        'font-weight': strong ? fontWeightStrong : fontWeight
+        '--n-font-weight': strong ? fontWeightStrong : fontWeight
       }
       // color
       let colorProps = {
@@ -252,8 +258,8 @@ const Button = defineComponent({
       const mergedType = typeIsTertiary ? 'default' : type
       if (text) {
         const propTextColor = textColor || color
-        const mergedTextColor =
-          propTextColor || self[createKey('textColorText', mergedType)]
+        const mergedTextColor
+          = propTextColor || self[createKey('textColorText', mergedType)]
         colorProps = {
           '--n-color': '#0000',
           '--n-color-hover': '#0000',
@@ -272,10 +278,11 @@ const Button = defineComponent({
             ? createHoverColor(propTextColor)
             : self[createKey('textColorTextHover', mergedType)],
           '--n-text-color-disabled':
-            propTextColor ||
-            self[createKey('textColorTextDisabled', mergedType)]
+            propTextColor
+            || self[createKey('textColorTextDisabled', mergedType)]
         }
-      } else if (ghost || dashed) {
+      }
+      else if (ghost || dashed) {
         const mergedTextColor = textColor || color
         colorProps = {
           '--n-color': '#0000',
@@ -297,10 +304,11 @@ const Button = defineComponent({
             ? createHoverColor(mergedTextColor)
             : self[createKey('textColorGhostHover', mergedType)],
           '--n-text-color-disabled':
-            mergedTextColor ||
-            self[createKey('textColorGhostDisabled', mergedType)]
+            mergedTextColor
+            || self[createKey('textColorGhostDisabled', mergedType)]
         }
-      } else if (secondary) {
+      }
+      else if (secondary) {
         const typeTextColor = typeIsDefault
           ? self.textColor
           : typeIsTertiary
@@ -311,23 +319,23 @@ const Button = defineComponent({
         colorProps = {
           '--n-color': isColoredType
             ? changeColor(mergedTextColor, {
-              alpha: Number(self.colorOpacitySecondary)
-            })
+                alpha: Number(self.colorOpacitySecondary)
+              })
             : self.colorSecondary,
           '--n-color-hover': isColoredType
             ? changeColor(mergedTextColor, {
-              alpha: Number(self.colorOpacitySecondaryHover)
-            })
+                alpha: Number(self.colorOpacitySecondaryHover)
+              })
             : self.colorSecondaryHover,
           '--n-color-pressed': isColoredType
             ? changeColor(mergedTextColor, {
-              alpha: Number(self.colorOpacitySecondaryPressed)
-            })
+                alpha: Number(self.colorOpacitySecondaryPressed)
+              })
             : self.colorSecondaryPressed,
           '--n-color-focus': isColoredType
             ? changeColor(mergedTextColor, {
-              alpha: Number(self.colorOpacitySecondaryHover)
-            })
+                alpha: Number(self.colorOpacitySecondaryHover)
+              })
             : self.colorSecondaryHover,
           '--n-color-disabled': self.colorSecondary,
           '--n-ripple-color': '#0000',
@@ -337,7 +345,8 @@ const Button = defineComponent({
           '--n-text-color-focus': mergedTextColor,
           '--n-text-color-disabled': mergedTextColor
         }
-      } else if (tertiary || quaternary) {
+      }
+      else if (tertiary || quaternary) {
         const typeColor = typeIsDefault
           ? self.textColor
           : typeIsTertiary
@@ -350,7 +359,8 @@ const Button = defineComponent({
           colorProps['--n-color-pressed'] = self.colorTertiaryPressed
           colorProps['--n-color-focus'] = self.colorSecondaryHover
           colorProps['--n-color-disabled'] = self.colorTertiary
-        } else {
+        }
+        else {
           colorProps['--n-color'] = self.colorQuaternary
           colorProps['--n-color-hover'] = self.colorQuaternaryHover
           colorProps['--n-color-pressed'] = self.colorQuaternaryPressed
@@ -363,7 +373,8 @@ const Button = defineComponent({
         colorProps['--n-text-color-pressed'] = mergedColor
         colorProps['--n-text-color-focus'] = mergedColor
         colorProps['--n-text-color-disabled'] = mergedColor
-      } else {
+      }
+      else {
         colorProps = {
           '--n-color': color || self[createKey('color', mergedType)],
           '--n-color-hover': color
@@ -380,30 +391,30 @@ const Button = defineComponent({
           '--n-ripple-color':
             color || self[createKey('rippleColor', mergedType)],
           '--n-text-color':
-            textColor ||
-            (color
+            textColor
+            || (color
               ? self.textColorPrimary
               : typeIsTertiary
                 ? self.textColorTertiary
                 : self[createKey('textColor', mergedType)]),
           '--n-text-color-hover':
-            textColor ||
-            (color
+            textColor
+            || (color
               ? self.textColorHoverPrimary
               : self[createKey('textColorHover', mergedType)]),
           '--n-text-color-pressed':
-            textColor ||
-            (color
+            textColor
+            || (color
               ? self.textColorPressedPrimary
               : self[createKey('textColorPressed', mergedType)]),
           '--n-text-color-focus':
-            textColor ||
-            (color
+            textColor
+            || (color
               ? self.textColorFocusPrimary
               : self[createKey('textColorFocus', mergedType)]),
           '--n-text-color-disabled':
-            textColor ||
-            (color
+            textColor
+            || (color
               ? self.textColorDisabledPrimary
               : self[createKey('textColorDisabled', mergedType)])
         }
@@ -424,7 +435,8 @@ const Button = defineComponent({
           '--n-border-focus': 'none',
           '--n-border-disabled': 'none'
         }
-      } else {
+      }
+      else {
         borderProps = {
           '--n-border': self[createKey('border', mergedType)],
           '--n-border-hover': self[createKey('borderHover', mergedType)],
@@ -477,42 +489,53 @@ const Button = defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'button',
-        computed(() => {
-          let hash = ''
-          const {
-            dashed,
-            type,
-            ghost,
-            text,
-            color,
-            round,
-            circle,
-            textColor,
-            secondary,
-            tertiary,
-            quaternary,
-            strong
-          } = props
-          if (dashed) hash += 'a'
-          if (ghost) hash += 'b'
-          if (text) hash += 'c'
-          if (round) hash += 'd'
-          if (circle) hash += 'e'
-          if (secondary) hash += 'f'
-          if (tertiary) hash += 'g'
-          if (quaternary) hash += 'h'
-          if (strong) hash += 'i'
-          if (color) hash += 'j' + color2Class(color)
-          if (textColor) hash += 'k' + color2Class(textColor)
-          const { value: size } = mergedSizeRef
-          hash += 'l' + size[0]
-          hash += 'm' + type[0]
-          return hash
-        }),
-        cssVarsRef,
-        props
-      )
+          'button',
+          computed(() => {
+            let hash = ''
+            const {
+              dashed,
+              type,
+              ghost,
+              text,
+              color,
+              round,
+              circle,
+              textColor,
+              secondary,
+              tertiary,
+              quaternary,
+              strong
+            } = props
+            if (dashed)
+              hash += 'a'
+            if (ghost)
+              hash += 'b'
+            if (text)
+              hash += 'c'
+            if (round)
+              hash += 'd'
+            if (circle)
+              hash += 'e'
+            if (secondary)
+              hash += 'f'
+            if (tertiary)
+              hash += 'g'
+            if (quaternary)
+              hash += 'h'
+            if (strong)
+              hash += 'i'
+            if (color)
+              hash += `j${color2Class(color)}`
+            if (textColor)
+              hash += `k${color2Class(textColor)}`
+            const { value: size } = mergedSizeRef
+            hash += `l${size[0]}`
+            hash += `m${type[0]}`
+            return hash
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     return {
@@ -531,7 +554,8 @@ const Button = defineComponent({
       handleClick,
       customColorCssVars: computed(() => {
         const { color } = props
-        if (!color) return null
+        if (!color)
+          return null
         const hoverColor = createHoverColor(color)
         return {
           '--n-border-color': color,
@@ -546,12 +570,12 @@ const Button = defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, tag: Component, onRender } = this
     onRender?.()
     const children = resolveWrappedSlot(
       this.$slots.default,
-      (children) =>
+      children =>
         children && (
           <span class={`${mergedClsPrefix}-button__content`}>{children}</span>
         )
@@ -590,7 +614,7 @@ const Button = defineComponent({
             default: () =>
               resolveWrappedSlot(
                 this.$slots.icon,
-                (children) =>
+                children =>
                   (this.loading || this.renderIcon || children) && (
                     <span
                       class={`${mergedClsPrefix}-button__icon`}
@@ -654,7 +678,7 @@ type MergedProps = Partial<InternalButtonProps & NativeButtonProps>
 export default Button
 
 // XButton is for tsx type checking
-// It's not compitable with render function `h`
+// It's not compatible with render function `h`
 // Currently we don't expose it as public
 // If there's any issue about this, we may expose it
 // Since most people use template, the type checking phase doesn't work as tsx

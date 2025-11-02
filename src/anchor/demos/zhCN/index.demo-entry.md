@@ -28,6 +28,19 @@ max-height-debug.vue
 | show-background | `boolean` | `true` | 是否展示 link 的背景 |
 | type | `'rail' \| 'block'` | `'rail'` | Anchor 的风格，`'block'` 为块状风格，`'rail'` 为轨道风格 |
 
+### AnchorLink Props
+
+| 名称  | 类型     | 默认值      | 说明     |
+| ----- | -------- | ----------- | -------- |
+| href  | `string` | `undefined` | 锚点链接 |
+| title | `stirng` | `undefined` | 锚点标题 |
+
+### AnchorLink Slots
+
+| 名称  | 参数 | 说明     | 版本   |
+| ----- | ---- | -------- | ------ |
+| title | `()` | 锚点标题 | 2.42.0 |
+
 ### Anchor Methods
 
 | 名称     | 类型                     | 说明                   |

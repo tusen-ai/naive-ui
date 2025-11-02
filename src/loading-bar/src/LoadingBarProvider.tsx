@@ -1,25 +1,23 @@
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { LoadingBarTheme } from '../styles'
+import { useIsMounted } from 'vooks'
 import {
+  defineComponent,
   Fragment,
   h,
-  ref,
-  Teleport,
-  defineComponent,
-  provide,
   nextTick,
-  PropType,
-  ExtractPropTypes,
-  CSSProperties
+  provide,
+  ref,
+  Teleport
 } from 'vue'
-import { useIsMounted } from 'vooks'
 import { useConfig, useTheme } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import { ExtractPublicPropTypes } from '../../_utils'
-import type { LoadingBarTheme } from '../styles'
-import NLoadingBar from './LoadingBar'
 import {
   loadingBarApiInjectionKey,
   loadingBarProviderInjectionKey
 } from './context'
+import NLoadingBar from './LoadingBar'
 
 export interface LoadingBarInst {
   start: () => void
@@ -36,6 +34,7 @@ export const loadingBarProviderProps = {
     type: [String, Object, Boolean] as PropType<string | HTMLElement | false>,
     default: undefined
   },
+  containerClass: String,
   containerStyle: [String, Object] as PropType<string | CSSProperties>,
   loadingBarStyle: {
     type: Object as PropType<{
@@ -56,32 +55,35 @@ export type LoadingBarProviderSetupProps = ExtractPropTypes<
 export default defineComponent({
   name: 'LoadingBarProvider',
   props: loadingBarProviderProps,
-  setup (props) {
+  setup(props) {
     const isMountedRef = useIsMounted()
     const loadingBarRef = ref<LoadingBarInst | null>(null)
     const methods: LoadingBarProviderInst = {
-      start () {
+      start() {
         if (isMountedRef.value) {
           loadingBarRef.value?.start()
-        } else {
+        }
+        else {
           void nextTick(() => {
             loadingBarRef.value?.start()
           })
         }
       },
-      error () {
+      error() {
         if (isMountedRef.value) {
           loadingBarRef.value?.error()
-        } else {
+        }
+        else {
           void nextTick(() => {
             loadingBarRef.value?.error()
           })
         }
       },
-      finish () {
+      finish() {
         if (isMountedRef.value) {
           loadingBarRef.value?.finish()
-        } else {
+        }
+        else {
           void nextTick(() => {
             loadingBarRef.value?.finish()
           })
@@ -98,13 +100,14 @@ export default defineComponent({
       loadingBarRef
     })
   },
-  render () {
+  render() {
     return (
       <>
         <Teleport disabled={this.to === false} to={this.to || 'body'}>
           <NLoadingBar
             ref="loadingBarRef"
             containerStyle={this.containerStyle}
+            containerClass={this.containerClass}
           />
         </Teleport>
         {this.$slots.default?.()}

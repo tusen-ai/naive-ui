@@ -1,8 +1,8 @@
-import { inputDark } from '../../input/styles'
-import { buttonDark } from '../../button/styles'
+import type { DynamicInputTheme } from './light'
 import { commonDark } from '../../_styles/common'
+import { buttonDark } from '../../button/styles'
+import { inputDark } from '../../input/styles'
 import commonVariables from './_common'
-import { DynamicInputTheme } from './light'
 
 const dynamicInputDark: DynamicInputTheme = {
   name: 'DynamicInput',
@@ -11,7 +11,7 @@ const dynamicInputDark: DynamicInputTheme = {
     Input: inputDark,
     Button: buttonDark
   },
-  self () {
+  self() {
     return commonVariables
   }
 }

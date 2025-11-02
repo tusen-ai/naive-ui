@@ -3,6 +3,18 @@
 
 `#1224`
 </markdown>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const valueRef = ref(1)
+const panelsRef = ref([1, 2, 3])
+
+const value = valueRef
+const panels = panelsRef
+const getClass = ref('half')
+</script>
+
 <template>
   <div :class="getClass">
     <n-button @click="() => (getClass = 'half')">
@@ -24,22 +36,7 @@
     </n-tabs>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
 
-export default defineComponent({
-  setup () {
-    const valueRef = ref(1)
-    const panelsRef = ref([1, 2, 3])
-
-    return {
-      value: valueRef,
-      panels: panelsRef,
-      getClass: ref('half')
-    }
-  }
-})
-</script>
 <style>
 .half {
   width: 50%;

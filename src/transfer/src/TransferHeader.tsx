@@ -1,6 +1,7 @@
-import { h, defineComponent, inject, PropType } from 'vue'
-import { NButton } from '../../button'
+import type { PropType, VNodeChild } from 'vue'
+import { defineComponent, h, inject } from 'vue'
 import { useLocale } from '../../_mixins'
+import { NButton } from '../../button'
 import { transferInjectionKey } from './interface'
 
 export default defineComponent({
@@ -10,12 +11,14 @@ export default defineComponent({
       type: String as PropType<'small' | 'medium' | 'large'>,
       required: true
     },
+    selectAllText: String,
+    clearText: String,
     source: Boolean,
     onCheckedAll: Function as PropType<() => void>,
     onClearAll: Function as PropType<() => void>,
-    title: String
+    title: [String, Function] as PropType<string | (() => VNodeChild)>
   },
-  setup (props) {
+  setup(props) {
     const {
       targetOptionsRef,
       canNotSelectAnythingRef,
@@ -25,11 +28,11 @@ export default defineComponent({
       disabledRef,
       mergedClsPrefixRef,
       srcOptionsLengthRef
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(transferInjectionKey)!
     const { localeRef } = useLocale('Transfer')
     return () => {
-      const { source, onClearAll, onCheckedAll } = props
+      const { source, onClearAll, onCheckedAll, selectAllText, clearText }
+        = props
       const { value: mergedTheme } = mergedThemeRef
       const { value: mergedClsPrefix } = mergedClsPrefixRef
       const { value: locale } = localeRef
@@ -39,7 +42,7 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-transfer-list-header`}>
           {title && (
             <div class={`${mergedClsPrefix}-transfer-list-header__title`}>
-              {title}
+              {typeof title === 'function' ? title() : title}
             </div>
           )}
           {source && (
@@ -54,7 +57,9 @@ export default defineComponent({
             >
               {{
                 default: () =>
-                  allCheckedRef.value ? locale.unselectAll : locale.selectAll
+                  allCheckedRef.value
+                    ? clearText || locale.unselectAll
+                    : selectAllText || locale.selectAll
               }}
             </NButton>
           )}

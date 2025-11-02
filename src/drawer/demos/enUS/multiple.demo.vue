@@ -2,6 +2,21 @@
 # Multiple drawers
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const showOuter = ref(false)
+const showInner = ref(false)
+
+function doShowOuter() {
+  showOuter.value = true
+}
+
+function doShowInner() {
+  showInner.value = true
+}
+</script>
+
 <template>
   <n-button @click="doShowOuter">
     Come on!
@@ -22,24 +37,3 @@
     </n-drawer>
   </n-drawer>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const showOuterRef = ref(false)
-    const showInnerRef = ref(false)
-    return {
-      showOuter: showOuterRef,
-      showInner: showInnerRef,
-      doShowOuter () {
-        showOuterRef.value = true
-      },
-      doShowInner () {
-        showInnerRef.value = true
-      }
-    }
-  }
-})
-</script>

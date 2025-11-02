@@ -1,17 +1,10 @@
+import type { ComponentPublicInstance, ComputedRef, PropType } from 'vue'
+import { off, on } from 'evtd'
 import { useMemo } from 'vooks'
-import { on, off } from 'evtd'
-import {
-  ComponentPublicInstance,
-  ComputedRef,
-  inject,
-  onBeforeUnmount,
-  onMounted,
-  PropType,
-  ref
-} from 'vue'
+import { inject, onBeforeUnmount, onMounted, ref } from 'vue'
 import { internalSelectionMenuBodyInjectionKey } from '../../_internal/select-menu/src/interface'
-import { modalBodyInjectionKey } from '../../modal/src/interface'
 import { drawerBodyInjectionKey } from '../../drawer/src/interface'
+import { modalBodyInjectionKey } from '../../modal/src/interface'
 import { popoverBodyInjectionKey } from '../../popover/src/interface'
 
 interface UseAdjustedToProps {
@@ -20,7 +13,7 @@ interface UseAdjustedToProps {
 }
 
 const teleportDisabled = '__disabled__'
-function useAdjustedTo (
+function useAdjustedTo(
   props: UseAdjustedToProps
 ): ComputedRef<HTMLElement | string> {
   const modal = inject(modalBodyInjectionKey, null)
@@ -45,16 +38,21 @@ function useAdjustedTo (
   return useMemo(() => {
     const { to } = props
     if (to !== undefined) {
-      if (to === false) return teleportDisabled
-      if (to === true) return fullscreenElementRef.value || 'body'
+      if (to === false)
+        return teleportDisabled
+      if (to === true)
+        return fullscreenElementRef.value || 'body'
       return to
     }
     if (modal?.value) {
       return (modal.value as ComponentPublicInstance).$el ?? modal.value
     }
-    if (drawer?.value) return drawer.value
-    if (popover?.value) return popover.value
-    if (selectMenu?.value) return selectMenu.value
+    if (drawer?.value)
+      return drawer.value
+    if (popover?.value)
+      return popover.value
+    if (selectMenu?.value)
+      return selectMenu.value
     return to ?? (fullscreenElementRef.value || 'body')
   })
 }

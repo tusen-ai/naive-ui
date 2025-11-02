@@ -1,7 +1,8 @@
-import { VNodeChild } from 'vue'
+import type { VNodeChild } from 'vue'
 
 export type OnUpdateValue = (value: string & null) => void
 export type OnConfirm = OnUpdateValue
+export type OnClear = () => void
 export type OnUpdateValueImpl = (value: string | null) => void
 export type OnConfirmImpl = OnUpdateValueImpl
 

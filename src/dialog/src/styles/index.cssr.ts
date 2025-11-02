@@ -3,7 +3,10 @@ import { asModal, c, cB, cE, cM, insideModal } from '../../../_utils/cssr'
 // vars:
 // --n-icon-color
 // --n-bezier
-// --n-icon-margin
+// --n-icon-margin-top
+// --n-icon-margin-right
+// --n-icon-margin-bottom
+// --n-icon-margin-left
 // --n-icon-size
 // --n-close-border-radius
 // --n-close-margin
@@ -26,6 +29,7 @@ import { asModal, c, cB, cE, cM, insideModal } from '../../../_utils/cssr'
 // --n-action-space
 export default c([
   cB('dialog', `
+    --n-icon-margin: var(--n-icon-margin-top) var(--n-icon-margin-right) var(--n-icon-margin-bottom) var(--n-icon-margin-left);
     word-break: break-word;
     line-height: var(--n-line-height);
     position: relative;
@@ -95,14 +99,14 @@ export default c([
       display: flex;
       justify-content: flex-end;
     `, [
-      c('> *:not(:last-child)', {
-        marginRight: 'var(--n-action-space)'
-      })
+      c('> *:not(:last-child)', `
+        margin-right: var(--n-action-space);
+      `)
     ]),
-    cE('icon', {
-      fontSize: 'var(--n-icon-size)',
-      transition: 'color .3s var(--n-bezier)'
-    }),
+    cE('icon', `
+      font-size: var(--n-icon-size);
+      transition: color .3s var(--n-bezier);
+    `),
     cE('title', `
       transition: color .3s var(--n-bezier);
       display: flex;
@@ -111,10 +115,10 @@ export default c([
       font-weight: var(--n-title-font-weight);
       color: var(--n-title-text-color);
     `),
-    cB('dialog-icon-container', {
-      display: 'flex',
-      justifyContent: 'center'
-    })
+    cB('dialog-icon-container', `
+      display: flex;
+      justify-content: center;
+    `)
   ]),
   insideModal(
     cB('dialog', `

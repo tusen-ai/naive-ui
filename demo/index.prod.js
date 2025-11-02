@@ -1,9 +1,9 @@
-import { createApp } from 'vue'
 import naive, { NThemeEditor } from 'naive-ui'
+import { createApp } from 'vue'
+import createDemoRouter from './routes/router'
+import { routes } from './routes/routes'
 import { installDemoComponents } from './setup'
 import SiteRoot from './SiteRoot.vue'
-import { routes } from './routes/routes'
-import createDemoRouter from './routes/router'
 
 const app = createApp(SiteRoot)
 

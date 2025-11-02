@@ -1,9 +1,10 @@
-import { computed, defineComponent, h, inject, PropType } from 'vue'
+import type { PropType } from 'vue'
+import type { TmNode } from './interface'
+import { computed, defineComponent, h, inject } from 'vue'
+import { NBaseIcon } from '../../_internal'
 import { ChevronDownFilledIcon } from '../../_internal/icons'
 import { render } from '../../_utils'
-import { NBaseIcon } from '../../_internal'
 import { menuInjectionKey } from './context'
-import { TmNode } from './interface'
 
 export default defineComponent({
   name: 'MenuOptionContent',
@@ -38,10 +39,10 @@ export default defineComponent({
     tmNode: {
       type: Object as PropType<TmNode>,
       required: true
-    }
+    },
+    isEllipsisPlaceholder: Boolean
   },
-  setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  setup(props) {
     const { props: menuProps } = inject(menuInjectionKey)!
     return {
       menuProps,
@@ -60,7 +61,7 @@ export default defineComponent({
       })
     }
   },
-  render () {
+  render() {
     const {
       clsPrefix,
       tmNode,
@@ -95,7 +96,11 @@ export default defineComponent({
           </div>
         )}
         <div class={`${clsPrefix}-menu-item-content-header`} role="none">
-          {renderLabel ? renderLabel(tmNode.rawNode) : render(this.title)}
+          {this.isEllipsisPlaceholder
+            ? this.title
+            : renderLabel
+              ? renderLabel(tmNode.rawNode)
+              : render(this.title)}
           {this.extra || renderExtra ? (
             <span class={`${clsPrefix}-menu-item-content-header__extra`}>
               {' '}

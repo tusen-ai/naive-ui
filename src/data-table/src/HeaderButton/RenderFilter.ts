@@ -1,5 +1,6 @@
-import { defineComponent, PropType } from 'vue'
-import { RenderFilter } from '../interface'
+import type { PropType } from 'vue'
+import type { RenderFilter } from '../interface'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'DataTableRenderFilter',
@@ -17,7 +18,7 @@ export default defineComponent({
       default: false
     }
   },
-  render () {
+  render() {
     const { render, active, show } = this
     return render({
       active,

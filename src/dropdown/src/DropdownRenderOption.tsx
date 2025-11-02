@@ -1,6 +1,7 @@
-import { h, defineComponent, PropType } from 'vue'
-import { TreeNode } from 'treemate'
-import { DropdownRenderOption } from './interface'
+import type { TreeNode } from 'treemate'
+import type { PropType } from 'vue'
+import type { DropdownRenderOption } from './interface'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   name: 'DropdownRenderOption',
@@ -10,7 +11,7 @@ export default defineComponent({
       required: true
     }
   },
-  render () {
+  render() {
     const {
       rawNode: { render, props }
     } = this.tmNode

@@ -1,8 +1,9 @@
+import type { CascaderOption } from '../src/interface'
 import { mount } from '@vue/test-utils'
+import { nextTick } from 'vue'
 import { NCascader } from '../index'
-import { CascaderOption } from '../src/interface'
 
-function getOptions (depth = 3, iterator = 1, prefix = ''): CascaderOption[] {
+function getOptions(depth = 3, iterator = 1, prefix = ''): CascaderOption[] {
   const length = 12
   const options: CascaderOption[] = []
   for (let i = 1; i <= length; ++i) {
@@ -11,15 +12,17 @@ function getOptions (depth = 3, iterator = 1, prefix = ''): CascaderOption[] {
         value: `v-${i}`,
         label: `l-${i}`,
         disabled: i % 5 === 0,
-        children: getOptions(depth, iterator + 1, '' + String(i))
+        children: getOptions(depth, iterator + 1, `${String(i)}`)
       })
-    } else if (iterator === depth) {
+    }
+    else if (iterator === depth) {
       options.push({
         value: `v-${prefix}-${i}`,
         label: `l-${prefix}-${i}`,
         disabled: i % 5 === 0
       })
-    } else {
+    }
+    else {
       options.push({
         value: `v-${prefix}-${i}`,
         label: `l-${prefix}-${i}`,
@@ -80,32 +83,45 @@ describe('n-cascader', () => {
   })
 
   it('should work with `placement` prop', async () => {
-    ;(
-      [
-        'top-start',
-        'top',
-        'top-end',
-        'right-start',
-        'right',
-        'right-end',
-        'bottom-start',
-        'bottom',
-        'bottom-end',
-        'left-start',
-        'left',
-        'left-end'
-      ] as const
-    ).forEach((placement) => {
-      const wrapper = mount(NCascader, { props: { placement } })
-      setTimeout(() => {
-        expect(
-          document
-            .querySelector('.v-binder-follower-content')
-            ?.getAttribute('v-placement')
-        ).toBe(placement)
-        wrapper.unmount()
+    const placements = [
+      'top-start',
+      'top',
+      'top-end',
+      'right-start',
+      'right',
+      'right-end',
+      'bottom-start',
+      'bottom',
+      'bottom-end',
+      'left-start',
+      'left',
+      'left-end'
+    ] as const
+
+    for (const placement of placements) {
+      const wrapper = mount(NCascader, {
+        attachTo: document.body,
+        props: {
+          placement,
+          show: true
+        }
       })
-    })
+
+      await nextTick()
+
+      await vi.waitFor(() => {
+        const followerContents = document.querySelectorAll(
+          '.v-binder-follower-content'
+        )
+        const currentFollower = followerContents.item(
+          followerContents.length - 1
+        )
+
+        expect(currentFollower.getAttribute('v-placement')).toBe(placement)
+      })
+      wrapper.unmount()
+      await nextTick()
+    }
   })
 
   it('should work with `filterable` prop', async () => {
@@ -151,9 +167,9 @@ describe('n-cascader', () => {
             whateverChildren: [
               {
                 whateverLabel:
-                  "Everybody's Got Something to Hide Except Me and My Monkey",
+                  'Everybody\'s Got Something to Hide Except Me and My Monkey',
                 whateverValue:
-                  "Everybody's Got Something to Hide Except Me and My Monkey"
+                  'Everybody\'s Got Something to Hide Except Me and My Monkey'
               }
             ]
           }
@@ -162,11 +178,11 @@ describe('n-cascader', () => {
         'value-field': 'whateverValue',
         'children-field': 'whateverChildren',
         'default-value':
-          "Everybody's Got Something to Hide Except Me and My Monkey"
+          'Everybody\'s Got Something to Hide Except Me and My Monkey'
       }
     })
     expect(wrapper.find('.n-base-selection-label').text()).toBe(
-      "Rubber Soul / Everybody's Got Something to Hide Except Me and My Monkey"
+      'Rubber Soul / Everybody\'s Got Something to Hide Except Me and My Monkey'
     )
     wrapper.unmount()
   })
@@ -187,7 +203,7 @@ describe('n-cascader', () => {
   })
 
   it('should work with `on-blur` prop', async () => {
-    const onBlur = jest.fn()
+    const onBlur = vi.fn()
     const wrapper = mount(NCascader, {
       props: { options: getOptions(), onBlur }
     })
@@ -197,7 +213,7 @@ describe('n-cascader', () => {
   })
 
   it('should work with `on-focus` prop', async () => {
-    const onFocus = jest.fn()
+    const onFocus = vi.fn()
     const wrapper = mount(NCascader, {
       props: { options: getOptions(), onFocus }
     })
@@ -214,12 +230,15 @@ describe('n-cascader', () => {
       }
     })
 
-    await wrapper.find('.n-base-selection').trigger('click')
-    expect(wrapper.find('.n-base-selection--active').exists()).toBe(true)
+    const selection = wrapper.find('.n-base-selection')
+
+    await selection.trigger('click')
+    expect(selection.classes()).toContain('n-base-selection--active')
+
     expect(document.querySelector('.n-cascader-menu')).not.toEqual(null)
 
-    await wrapper.find('.n-base-selection').trigger('click')
-    expect(wrapper.find('.n-base-selection--active').exists()).toBe(false)
+    await selection.trigger('click')
+    expect(selection.classes()).not.toContain('n-base-selection--active')
     expect(document.querySelector('.n-cascader-menu')).toEqual(null)
     wrapper.unmount()
   })
@@ -236,11 +255,11 @@ describe('n-cascader', () => {
 
     await wrapper.find('.n-base-selection').trigger('click')
     expect(document.querySelector('.n-cascader-menu')).not.toEqual(null)
-    await document.body.click()
-    await document.body.dispatchEvent(mousedownEvent)
-    await document.body.dispatchEvent(mouseupEvent)
+    document.body.click()
+    document.body.dispatchEvent(mousedownEvent)
+    document.body.dispatchEvent(mouseupEvent)
+    await nextTick()
     expect(document.querySelector('.n-cascader-menu')).toEqual(null)
-
     wrapper.unmount()
   })
 })

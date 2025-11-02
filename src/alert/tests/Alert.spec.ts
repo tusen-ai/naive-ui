@@ -1,8 +1,8 @@
-import { h } from 'vue'
-import { NAlert } from '../index'
-import { mount } from '@vue/test-utils'
-import { NIcon } from '../../icon'
 import { IosAirplane } from '@vicons/ionicons4'
+import { mount } from '@vue/test-utils'
+import { h } from 'vue'
+import { NIcon } from '../../icon'
+import { NAlert } from '../index'
 
 describe('n-alert', () => {
   it('should work with import on demand', () => {
@@ -48,9 +48,10 @@ describe('n-alert', () => {
 
   it('should work with `bordered` prop', async () => {
     const wrapper = mount(NAlert)
-    expect(wrapper.find('.n-alert-body--bordered').exists()).toBe(true)
+    const body = wrapper.find('.n-alert-body')
+    expect(body.classes()).toContain('n-alert-body--bordered')
     await wrapper.setProps({ bordered: false })
-    expect(wrapper.find('.n-alert-body--bordered').exists()).toBe(false)
+    expect(body.classes()).not.toContain('n-alert-body--bordered')
     wrapper.unmount()
   })
 
@@ -115,7 +116,7 @@ describe('n-alert', () => {
     wrapper.unmount()
   })
 
-  it("shouldn't closed when on-close prop returns false", async () => {
+  it('shouldn\'t closed when on-close prop returns false', async () => {
     const wrapper = mount(NAlert, {
       props: { closable: true, onClose: () => false }
     })
@@ -127,8 +128,8 @@ describe('n-alert', () => {
   })
 
   it('should trigger callback when closed', async () => {
-    const handleCloseClick = jest.fn()
-    const handleOnAfterLeave = jest.fn()
+    const handleCloseClick = vi.fn()
+    const handleOnAfterLeave = vi.fn()
     const wrapper = mount(NAlert, {
       props: {
         closable: true,
@@ -144,9 +145,9 @@ describe('n-alert', () => {
 
     expect(handleCloseClick).toHaveBeenCalled()
 
-    setTimeout(() => {
+    vi.waitFor(() => {
       expect(handleOnAfterLeave).toHaveBeenCalled()
-      wrapper.unmount()
-    }, 0)
+    })
+    wrapper.unmount()
   })
 })

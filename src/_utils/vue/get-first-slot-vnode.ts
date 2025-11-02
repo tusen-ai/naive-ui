@@ -1,8 +1,8 @@
-import { Slots, VNode } from 'vue'
-import { flatten } from './flatten'
+import type { Slots, VNode } from 'vue'
 import { warn } from '../naive'
+import { flatten } from './flatten'
 
-export function getFirstSlotVNode (
+export function getFirstSlotVNode(
   slots: Slots,
   slotName = 'default',
   props: unknown = undefined
@@ -16,7 +16,27 @@ export function getFirstSlotVNode (
   // vue will normalize the slot, so slot must be an array
   if (slotContent.length === 1) {
     return slotContent[0]
-  } else {
+  }
+  else {
+    warn('getFirstSlotVNode', `slot[${slotName}] should have exactly one child`)
+    return null
+  }
+}
+
+export function getFirstSlotVNodeWithTypedProps<T>(
+  slotName: string,
+  slot: ((props: T) => VNode[]) | undefined,
+  props: T
+): VNode | null {
+  if (!slot) {
+    return null
+  }
+  const slotContent = flatten(slot(props))
+  // vue will normalize the slot, so slot must be an array
+  if (slotContent.length === 1) {
+    return slotContent[0]
+  }
+  else {
     warn('getFirstSlotVNode', `slot[${slotName}] should have exactly one child`)
     return null
   }

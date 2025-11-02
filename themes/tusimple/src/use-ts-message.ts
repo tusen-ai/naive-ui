@@ -1,5 +1,5 @@
-import {
-  useMessage as _useMessage,
+import { useMessage as _useMessage } from 'naive-ui'
+import type {
   MessageOptions,
   MessageReactive,
   MessageApi

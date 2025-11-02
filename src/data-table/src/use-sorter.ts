@@ -1,21 +1,22 @@
-import { computed, ref, ComputedRef } from 'vue'
-import { call } from '../../_utils'
+import type { ComputedRef } from 'vue'
 import type {
   ColumnKey,
+  CompareFn,
+  DataTableSetupProps,
   InternalRowData,
+  OnUpdateSorterImpl,
   SortOrder,
   SortState,
-  TmNode,
   TableBaseColumn,
   TableExpandColumn,
   TableSelectionColumn,
-  CompareFn,
-  OnUpdateSorterImpl,
-  DataTableSetupProps
+  TmNode
 } from './interface'
+import { computed, ref } from 'vue'
+import { call } from '../../_utils'
 import { getFlagOfOrder } from './utils'
 
-function getMultiplePriority (
+function getMultiplePriority(
   sorter: TableBaseColumn['sorter']
 ): number | false {
   if (typeof sorter === 'object' && typeof sorter.multiple === 'number') {
@@ -24,15 +25,15 @@ function getMultiplePriority (
   return false
 }
 
-function getSortFunction (
+function getSortFunction(
   sorter: TableBaseColumn['sorter'],
   columnKey: ColumnKey
 ): CompareFn | false {
   if (
-    columnKey &&
-    (sorter === undefined ||
-      sorter === 'default' ||
-      (typeof sorter === 'object' && sorter.compare === 'default'))
+    columnKey
+    && (sorter === undefined
+      || sorter === 'default'
+      || (typeof sorter === 'object' && sorter.compare === 'default'))
   ) {
     return getDefaultSorterFn(columnKey)
   }
@@ -40,41 +41,49 @@ function getSortFunction (
     return sorter
   }
   if (
-    sorter &&
-    typeof sorter === 'object' &&
-    sorter.compare &&
-    sorter.compare !== 'default'
+    sorter
+    && typeof sorter === 'object'
+    && sorter.compare
+    && sorter.compare !== 'default'
   ) {
     return sorter.compare
   }
   return false
 }
 
-function getDefaultSorterFn (
+function getDefaultSorterFn(
   columnKey: ColumnKey
 ): (row1: InternalRowData, row2: InternalRowData) => number {
   return (row1: InternalRowData, row2: InternalRowData) => {
     const value1 = row1[columnKey]
     const value2 = row2[columnKey]
 
-    if (typeof value1 === 'number' && typeof value2 === 'number') {
+    if (value1 === null || value1 === undefined) {
+      if (value2 === null || value2 === undefined)
+        return 0
+      return -1
+    }
+    else if (value2 === null || value2 === undefined) {
+      return 1
+    }
+    else if (typeof value1 === 'number' && typeof value2 === 'number') {
       return value1 - value2
-    } else if (typeof value1 === 'string' && typeof value2 === 'string') {
+    }
+    else if (typeof value1 === 'string' && typeof value2 === 'string') {
       return value1.localeCompare(value2)
     }
     return 0
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function useSorter (
+export function useSorter(
   props: DataTableSetupProps,
   {
     dataRelatedColsRef,
     filteredDataRef
   }: {
     dataRelatedColsRef: ComputedRef<
-    Array<TableSelectionColumn | TableBaseColumn | TableExpandColumn>
+      Array<TableSelectionColumn | TableBaseColumn | TableExpandColumn>
     >
     filteredDataRef: ComputedRef<TmNode[]>
   }
@@ -99,12 +108,12 @@ export function useSorter (
     // If one of the columns's sort order is false or 'ascend' or 'descend',
     // the table's controll functionality should work in controlled manner.
     const columnsWithControlledSortOrder = dataRelatedColsRef.value.filter(
-      (column) =>
-        column.type !== 'selection' &&
-        column.sorter !== undefined &&
-        (column.sortOrder === 'ascend' ||
-          column.sortOrder === 'descend' ||
-          column.sortOrder === false)
+      column =>
+        column.type !== 'selection'
+        && column.sorter !== undefined
+        && (column.sortOrder === 'ascend'
+          || column.sortOrder === 'descend'
+          || column.sortOrder === false)
     )
     // if multiple columns are controlled sortable, then we need to find columns with active sortOrder
     const columnToSort: TableBaseColumn[] | undefined = (
@@ -116,22 +125,23 @@ export function useSorter (
           columnKey: column.key,
           // column to sort has controlled sorter
           // sorter && sort order won't be undefined
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           order: column.sortOrder!,
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           sorter: column.sorter!
         }
       })
     }
     // If any column is in controlled mode, the sorting state of the table is
     // in controlled mode
-    if (columnsWithControlledSortOrder.length) return []
+    if (columnsWithControlledSortOrder.length)
+      return []
     const { value: uncontrolledSortState } = uncontrolledSortStateRef
     if (Array.isArray(uncontrolledSortState)) {
       return uncontrolledSortState
-    } else if (uncontrolledSortState) {
+    }
+    else if (uncontrolledSortState) {
       return [uncontrolledSortState]
-    } else {
+    }
+    else {
       return []
     }
   })
@@ -165,7 +175,7 @@ export function useSorter (
     return filteredDataRef.value
   })
 
-  function getUpdatedSorterState (
+  function getUpdatedSorterState(
     sortState: SortState | null
   ): SortState | SortState[] | null {
     let currentSortState = mergedSortStateRef.value.slice()
@@ -173,11 +183,12 @@ export function useSorter (
     if (sortState && getMultiplePriority(sortState.sorter) !== false) {
       // clear column is not multiple sort
       currentSortState = currentSortState.filter(
-        (sortState) => getMultiplePriority(sortState.sorter) !== false
+        sortState => getMultiplePriority(sortState.sorter) !== false
       )
       updateSortStatesByNewSortState(currentSortState, sortState)
       return currentSortState
-    } else if (sortState) {
+    }
+    else if (sortState) {
       // single sorter
       return sortState
     }
@@ -185,13 +196,13 @@ export function useSorter (
     return null
   }
 
-  function deriveNextSorter (sortState: SortState | null): void {
-    const nextSorterState: SortState | SortState[] | null =
-      getUpdatedSorterState(sortState)
+  function deriveNextSorter(sortState: SortState | null): void {
+    const nextSorterState: SortState | SortState[] | null
+      = getUpdatedSorterState(sortState)
     doUpdateSorter(nextSorterState)
   }
 
-  function doUpdateSorter (sortState: SortState | SortState[] | null): void {
+  function doUpdateSorter(sortState: SortState | SortState[] | null): void {
     const {
       'onUpdate:sorter': _onUpdateSorter,
       onUpdateSorter,
@@ -210,17 +221,19 @@ export function useSorter (
     uncontrolledSortStateRef.value = sortState
   }
 
-  function sort (columnKey: ColumnKey, order: SortOrder = 'ascend'): void {
+  function sort(columnKey: ColumnKey, order: SortOrder = 'ascend'): void {
     if (!columnKey) {
       clearSorter()
-    } else {
+    }
+    else {
       const columnToSort = dataRelatedColsRef.value.find(
-        (column) =>
-          column.type !== 'selection' &&
-          column.type !== 'expand' &&
-          column.key === columnKey
+        column =>
+          column.type !== 'selection'
+          && column.type !== 'expand'
+          && column.key === columnKey
       )
-      if (!columnToSort?.sorter) return
+      if (!columnToSort?.sorter)
+        return
       const sorter = columnToSort.sorter
       deriveNextSorter({
         columnKey,
@@ -230,20 +243,21 @@ export function useSorter (
     }
   }
 
-  function clearSorter (): void {
+  function clearSorter(): void {
     doUpdateSorter(null)
   }
 
-  function updateSortStatesByNewSortState (
+  function updateSortStatesByNewSortState(
     sortStates: SortState[],
     sortState: SortState
   ): void {
     const index = sortStates.findIndex(
-      (state) => sortState?.columnKey && state.columnKey === sortState.columnKey
+      state => sortState?.columnKey && state.columnKey === sortState.columnKey
     )
     if (index !== undefined && index >= 0) {
       sortStates[index] = sortState
-    } else {
+    }
+    else {
       sortStates.push(sortState)
     }
   }

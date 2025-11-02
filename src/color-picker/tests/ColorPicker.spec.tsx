@@ -1,8 +1,8 @@
-import { h, nextTick } from 'vue'
+import type { ColorPickerMode } from '../src/utils'
 import { mount } from '@vue/test-utils'
-import { NColorPicker } from '../index'
-import { ColorPickerMode } from '../src/utils'
+import { h, nextTick } from 'vue'
 import { NButton } from '../../button'
+import { NColorPicker } from '../index'
 
 describe('n-color-picker', () => {
   it('should work with import on demand', () => {
@@ -128,7 +128,7 @@ describe('n-color-picker', () => {
       wrapper.unmount()
     })
     it('output according to mode', async () => {
-      const onUpdateValue = jest.fn()
+      const onUpdateValue = vi.fn()
       const output = {
         RGBA: {
           mode: 'rgb',
@@ -148,7 +148,7 @@ describe('n-color-picker', () => {
         }
       }
       const modes = Object.values(output).map(
-        (v) => v.mode
+        v => v.mode
       ) as ColorPickerMode[]
       const wrapper = mount(NColorPicker, {
         attachTo: document.body,
@@ -163,6 +163,7 @@ describe('n-color-picker', () => {
       const modeDom = document.querySelector('.n-color-picker-input__mode')
       let length = modes.length
       let currentMode: string | null | undefined = null
+      // eslint-disable-next-line no-cond-assign
       while (length && (currentMode = modeDom?.textContent)) {
         ;(swatch as HTMLElement).click()
         await nextTick()
@@ -195,7 +196,7 @@ describe('props.label', () => {
   })
 })
 
-describe('n-color-picker', () => {
+describe('n-color-picker 2', () => {
   it('should work with `placement` prop', async () => {
     ;(
       [
@@ -214,14 +215,14 @@ describe('n-color-picker', () => {
       ] as const
     ).forEach((placement) => {
       const wrapper = mount(NColorPicker, { props: { placement } })
-      setTimeout(() => {
+      vi.waitFor(() => {
         expect(
           document
             .querySelector('.v-binder-follower-content')
             ?.getAttribute('v-placement')
         ).toBe(placement)
-        wrapper.unmount()
       })
+      wrapper.unmount()
     })
   })
 

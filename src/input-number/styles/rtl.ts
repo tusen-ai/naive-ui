@@ -1,7 +1,7 @@
 import type { RtlItem } from '../../config-provider/src/internal-interface'
-import rtlStyle from '../src/styles/rtl.cssr'
-import { inputRtl } from '../../input/styles/rtl'
 import { buttonRtl } from '../../button/styles/rtl'
+import { inputRtl } from '../../input/styles/rtl'
+import rtlStyle from '../src/styles/rtl.cssr'
 
 export const inputNumberRtl: RtlItem = {
   name: 'InputNumber',

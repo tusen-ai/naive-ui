@@ -1,10 +1,10 @@
+import type { SkeletonTheme } from './light'
 import { commonDark } from '../../_styles/common'
-import { SkeletonTheme } from './light'
 
 export const skeletonDark: SkeletonTheme = {
   name: 'Skeleton',
   common: commonDark,
-  self (vars) {
+  self(vars) {
     const { heightSmall, heightMedium, heightLarge, borderRadius } = vars
     return {
       color: 'rgba(255, 255, 255, 0.12)',

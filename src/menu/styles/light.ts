@@ -1,11 +1,11 @@
-import { changeColor } from 'seemly'
-import { tooltipLight } from '../../tooltip/styles'
-import { dropdownLight } from '../../dropdown/styles'
-import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
+import { changeColor } from 'seemly'
 import { createTheme } from '../../_mixins/use-theme'
+import { commonLight } from '../../_styles/common'
+import { dropdownLight } from '../../dropdown/styles'
+import { tooltipLight } from '../../tooltip/styles'
 
-export function createPartialInvertedVars (
+export function createPartialInvertedVars(
   color: string,
   activeItemColor: string,
   activeTextColor: string,
@@ -51,7 +51,7 @@ export function createPartialInvertedVars (
   }
 }
 
-export const self = (vars: ThemeCommonVars) => {
+export function self(vars: ThemeCommonVars) {
   const {
     borderRadius,
     textColor3,

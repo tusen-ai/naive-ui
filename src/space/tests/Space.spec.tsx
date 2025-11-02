@@ -1,11 +1,12 @@
-import { mount, VueWrapper } from '@vue/test-utils'
-import { h, Fragment, createCommentVNode } from 'vue'
-import { NSpace } from '../index'
-import { NConfigProvider } from '../../config-provider'
+import type { VueWrapper } from '@vue/test-utils'
 import type { Justify } from '../src/Space'
+import { mount } from '@vue/test-utils'
+import { createCommentVNode, Fragment, h } from 'vue'
 import { c } from '../../_utils/cssr'
+import { NConfigProvider } from '../../config-provider'
+import { NSpace } from '../index'
 
-const getChildrenNode = (wrapper: VueWrapper<any>): any[] => {
+function getChildrenNode(wrapper: VueWrapper<any>): any[] {
   return (
     wrapper.findAll('div').filter((v) => {
       return !v.classes().includes('n-space')
@@ -20,45 +21,45 @@ describe('n-space', () => {
 
   it('render empty children', () => {
     const wrapper = mount({
-      render () {
+      render() {
         return <NSpace />
       }
     })
-    expect(wrapper.find('.n-space')).not.toBe(null)
+    expect(wrapper.find('.n-space').exists()).toBeFalsy()
     expect(wrapper.html()).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('render space string size', () => {
     const wrapper = mount({
-      render () {
+      render() {
         return <NSpace size="large">{{ default: () => 'kirby' }}</NSpace>
       }
     })
     expect(wrapper.attributes('style')).toContain('margin')
     expect(wrapper.html()).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('render space number size', () => {
     const size = 20
     const wrapper = mount({
-      render () {
+      render() {
         return <NSpace size={size}>{{ default: () => 'kirby' }}</NSpace>
       }
     })
     expect(wrapper.attributes('style')).toContain(`margin-top: -${size / 2}px`)
     expect(wrapper.html()).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('render space array size', async () => {
-    const wrapper = mount({
-      render () {
-        return (
-          <NSpace size={[20, 30]}>
-            {{
-              default: () => [<div>1</div>, <div>2</div>]
-            }}
-          </NSpace>
-        )
+    const wrapper = mount(NSpace, {
+      props: {
+        size: [20, 30]
+      },
+      slots: {
+        default: () => [<div>1</div>, <div>2</div>]
       }
     })
 
@@ -67,11 +68,12 @@ describe('n-space', () => {
 
     await wrapper.setProps({ vertical: true })
     expect(childNodes[0].attributes('style')).toContain('margin-bottom: 30px;')
+    wrapper.unmount()
   })
 
   it('render vertical space', () => {
     const wrapper = mount({
-      render () {
+      render() {
         return (
           <NSpace vertical>
             {{
@@ -83,6 +85,7 @@ describe('n-space', () => {
     })
     expect(wrapper.attributes('style')).toContain('flex-direction: column;')
     expect(wrapper.html()).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('should work with `inline` prop', () => {
@@ -96,17 +99,19 @@ describe('n-space', () => {
     })
 
     expect(wrapper.attributes('style')).toContain('display: inline-flex;')
+    wrapper.unmount()
   })
 
   it('should render with invalidElement', () => {
     const wrapper = mount({
-      render () {
+      render() {
         return (
           <NSpace>
             {{
               default: () => (
                 <>
-                  text1<span>text1</span>
+                  text1
+                  <span>text1</span>
                   text1
                 </>
               )
@@ -119,6 +124,7 @@ describe('n-space', () => {
     const childNodes = getChildrenNode(wrapper)
     expect(childNodes.length).toBe(3)
     expect(wrapper.html()).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('render justify space', () => {
@@ -133,7 +139,7 @@ describe('n-space', () => {
 
     justifyList.forEach((pos) => {
       const wrapper = mount({
-        render () {
+        render() {
           return (
             <NSpace justify={pos}>
               {{
@@ -146,15 +152,16 @@ describe('n-space', () => {
 
       expect(wrapper.attributes('style')).toContain(
         `justify-content: ${
-          ['start', 'end'].includes(pos) ? 'flex-' + pos + ';' : pos
+          ['start', 'end'].includes(pos) ? `flex-${pos};` : pos
         }`
       )
       expect(wrapper.html()).toMatchSnapshot()
+      wrapper.unmount()
     })
 
     justifyList.forEach((pos) => {
       const wrapper = mount({
-        render () {
+        render() {
           return (
             <NConfigProvider rtl={[{ name: 'Space', style: c(null) }]}>
               {{
@@ -175,17 +182,18 @@ describe('n-space', () => {
 
       expect(wrapper.find('.n-space').attributes('style')).toContain(
         `justify-content: ${
-          ['start', 'end'].includes(pos) ? 'flex-' + pos + ';' : pos
+          ['start', 'end'].includes(pos) ? `flex-${pos};` : pos
         }`
       )
       expect(wrapper.html()).toMatchSnapshot()
+      wrapper.unmount()
     })
   })
 
   it('render custom style space', () => {
     const wrapper = mount(
       {
-        render () {
+        render() {
           return <NSpace>{{ default: () => 'div' }}</NSpace>
         }
       },
@@ -201,11 +209,12 @@ describe('n-space', () => {
       'background-color: red; color: yellow;'
     )
     expect(wrapper.html()).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('should not render while v-if is false', () => {
     const wrapper = mount({
-      render () {
+      render() {
         return <NSpace>{{ default: () => false && 'div' }}</NSpace>
       }
     })
@@ -215,12 +224,8 @@ describe('n-space', () => {
   })
 
   it('should work with `wrap` prop', async () => {
-    const wrapper = mount({
-      render () {
-        return (
-          <NSpace>{{ default: () => [<div>1</div>, <div>2</div>] }}</NSpace>
-        )
-      }
+    const wrapper = mount(NSpace, {
+      slots: { default: () => [<div>1</div>, <div>2</div>] }
     })
     expect(wrapper.find('.n-space').attributes('style')).toContain(
       'flex-wrap: wrap'
@@ -230,11 +235,12 @@ describe('n-space', () => {
     expect(wrapper.find('.n-space').attributes('style')).toContain(
       'flex-wrap: nowrap'
     )
+    wrapper.unmount()
   })
 
   it('should not render while slot is Comment', () => {
     const wrapper = mount({
-      render () {
+      render() {
         return (
           <NSpace>
             {{
@@ -247,12 +253,13 @@ describe('n-space', () => {
     const childNodes = getChildrenNode(wrapper)
     expect(childNodes.length).toEqual(0)
     expect(wrapper.html()).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('shound not render a container to wrap child elements', () => {
     const wrapper = mount(
       {
-        render () {
+        render() {
           return (
             <NSpace>
               {{
@@ -271,5 +278,6 @@ describe('n-space', () => {
     )
 
     expect(wrapper.html()).toMatchSnapshot()
+    wrapper.unmount()
   })
 })

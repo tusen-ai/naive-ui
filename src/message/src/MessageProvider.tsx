@@ -1,25 +1,22 @@
-import {
-  Fragment,
-  ref,
-  h,
-  reactive,
-  Teleport,
-  defineComponent,
-  provide,
-  VNodeChild,
-  ExtractPropTypes,
-  PropType,
-  CSSProperties
-} from 'vue'
-import { createId } from 'seemly'
-import { omit } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import { useConfig, useTheme } from '../../_mixins'
+import type { CSSProperties, ExtractPropTypes, PropType, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { MessageTheme } from '../styles'
 import type { MessageOptions, MessageType } from './types'
-import MessageEnvironment from './MessageEnvironment'
+import { createId } from 'seemly'
+import {
+  defineComponent,
+  Fragment,
+  h,
+  provide,
+  reactive,
+  ref,
+  Teleport
+} from 'vue'
+import { useConfig, useTheme } from '../../_mixins'
+import { omit } from '../../_utils'
 import { messageApiInjectionKey, messageProviderInjectionKey } from './context'
+import MessageEnvironment from './MessageEnvironment'
 
 type ContentType = string | (() => VNodeChild)
 
@@ -67,16 +64,17 @@ export const messageProviderProps = {
   max: Number,
   placement: {
     type: String as PropType<
-    | 'top'
-    | 'top-left'
-    | 'top-right'
-    | 'bottom'
-    | 'bottom-left'
-    | 'bottom-right'
+      | 'top'
+      | 'top-left'
+      | 'top-right'
+      | 'bottom'
+      | 'bottom-left'
+      | 'bottom-right'
     >,
     default: 'top'
   },
   closable: Boolean,
+  containerClass: String,
   containerStyle: [String, Object] as PropType<string | CSSProperties>
 }
 
@@ -91,27 +89,27 @@ export type MessageProviderSetupProps = ExtractPropTypes<
 export default defineComponent({
   name: 'MessageProvider',
   props: messageProviderProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     const messageListRef = ref<PrivateMessageReactive[]>([])
     const messageRefs = ref<Record<string, PrivateMessageRef>>({})
     const api: MessageApiInjection = {
-      create (content: ContentType, options?: MessageOptions) {
+      create(content: ContentType, options?: MessageOptions) {
         return create(content, { type: 'default', ...options })
       },
-      info (content: ContentType, options?: MessageOptions) {
+      info(content: ContentType, options?: MessageOptions) {
         return create(content, { ...options, type: 'info' })
       },
-      success (content: ContentType, options?: MessageOptions) {
+      success(content: ContentType, options?: MessageOptions) {
         return create(content, { ...options, type: 'success' })
       },
-      warning (content: ContentType, options?: MessageOptions) {
+      warning(content: ContentType, options?: MessageOptions) {
         return create(content, { ...options, type: 'warning' })
       },
-      error (content: ContentType, options?: MessageOptions) {
+      error(content: ContentType, options?: MessageOptions) {
         return create(content, { ...options, type: 'error' })
       },
-      loading (content: ContentType, options?: MessageOptions) {
+      loading(content: ContentType, options?: MessageOptions) {
         return create(content, { ...options, type: 'loading' })
       },
       destroyAll
@@ -121,7 +119,7 @@ export default defineComponent({
       mergedClsPrefixRef
     })
     provide(messageApiInjectionKey, api)
-    function create (
+    function create(
       content: ContentType,
       options: MessageOptions & { type: MessageType }
     ): MessageReactive {
@@ -141,15 +139,14 @@ export default defineComponent({
       messageListRef.value.push(messageReactive)
       return messageReactive
     }
-    function handleAfterLeave (key: string): void {
+    function handleAfterLeave(key: string): void {
       messageListRef.value.splice(
-        messageListRef.value.findIndex((message) => message.key === key),
+        messageListRef.value.findIndex(message => message.key === key),
         1
       )
-      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
       delete messageRefs.value[key]
     }
-    function destroyAll (): void {
+    function destroyAll(): void {
       Object.values(messageRefs.value).forEach((messageInstRef) => {
         messageInstRef.hide()
       })
@@ -164,7 +161,7 @@ export default defineComponent({
       api
     )
   },
-  render () {
+  render() {
     return (
       <>
         {this.$slots.default?.()}
@@ -173,7 +170,8 @@ export default defineComponent({
             <div
               class={[
                 `${this.mergedClsPrefix}-message-container`,
-                `${this.mergedClsPrefix}-message-container--${this.placement}`
+                `${this.mergedClsPrefix}-message-container--${this.placement}`,
+                this.containerClass
               ]}
               key="message-container"
               style={this.containerStyle}

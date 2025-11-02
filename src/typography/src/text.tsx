@@ -1,11 +1,12 @@
-import { h, defineComponent, computed, PropType, CSSProperties } from 'vue'
-import { useCompitable } from 'vooks'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import type { CSSProperties, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import { warn, createKey } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { typographyLight } from '../styles'
 import type { TypographyTheme } from '../styles'
+import { useCompitable } from 'vooks'
+import { computed, defineComponent, h } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { createKey, warn } from '../../_utils'
+import { typographyLight } from '../styles'
 import style from './styles/text.cssr'
 
 export const textProps = {
@@ -39,7 +40,7 @@ export type TextProps = ExtractPublicPropTypes<typeof textProps>
 export default defineComponent({
   name: 'Text',
   props: textProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Typography',
@@ -51,8 +52,8 @@ export default defineComponent({
     )
     const cssVarsRef = computed(() => {
       const { depth, type } = props
-      const textColorKey =
-        type === 'default'
+      const textColorKey
+        = type === 'default'
           ? depth === undefined
             ? 'textColor'
             : `textColor${depth}Depth`
@@ -80,11 +81,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'text',
-        computed(() => `${props.type[0]}${props.depth || ''}`),
-        cssVarsRef,
-        props
-      )
+          'text',
+          computed(() => `${props.type[0]}${props.depth || ''}`),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
@@ -94,7 +95,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     this.onRender?.()
     const textClass = [

@@ -1,6 +1,6 @@
-import { defineComponent, h, inject, ref, onBeforeUnmount } from 'vue'
 import type { PropType } from 'vue'
 import { off, on } from 'evtd'
+import { defineComponent, h, inject, onBeforeUnmount, ref } from 'vue'
 import { dataTableInjectionKey } from '../interface'
 
 export default defineComponent({
@@ -10,15 +10,15 @@ export default defineComponent({
     onResize: Function as PropType<(displacementX: number) => void>,
     onResizeEnd: Function
   },
-  setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  setup(props) {
     const { mergedClsPrefixRef } = inject(dataTableInjectionKey)!
     const activeRef = ref(false)
     let startX = 0
-    function getMouseX (e: MouseEvent): number {
+    function getMouseX(e: MouseEvent): number {
       return e.clientX
     }
-    function handleMousedown (e: MouseEvent): void {
+    function handleMousedown(e: MouseEvent): void {
+      e.preventDefault()
       const alreadyStarted = activeRef.value
       startX = getMouseX(e)
       activeRef.value = true
@@ -28,10 +28,10 @@ export default defineComponent({
         props.onResizeStart?.()
       }
     }
-    function handleMousemove (e: MouseEvent): void {
+    function handleMousemove(e: MouseEvent): void {
       props.onResize?.(getMouseX(e) - startX)
     }
-    function handleMouseup (): void {
+    function handleMouseup(): void {
       activeRef.value = false
       props.onResizeEnd?.()
       off('mousemove', window, handleMousemove)
@@ -47,7 +47,7 @@ export default defineComponent({
       handleMousedown
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     return (
       <span

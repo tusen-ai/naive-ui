@@ -4,9 +4,15 @@
 Use fixed position to set the position of the modal.
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const showModal = ref(false)
+</script>
+
 <template>
   <n-button @click="showModal = true">
-    Start Me up
+    Start me up
   </n-button>
   <n-modal v-model:show="showModal">
     <n-card
@@ -27,14 +33,3 @@ Use fixed position to set the position of the modal.
     </n-card>
   </n-modal>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      showModal: ref(false)
-    }
-  }
-})
-</script>

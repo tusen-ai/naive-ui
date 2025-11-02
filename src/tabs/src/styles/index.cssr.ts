@@ -1,4 +1,4 @@
-import { c, cM, cB, cE, cNotM } from '../../../_utils/cssr'
+import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
@@ -22,8 +22,12 @@ import { c, cM, cB, cE, cNotM } from '../../../_utils/cssr'
 // --n-tab-font-weight
 // --n-tab-font-weight-active
 // --n-tab-gap
+// --n-tab-gap-vertical
 // --n-tab-padding
-// --n-pane-padding
+// --n-pane-padding-left
+// --n-pane-padding-right
+// --n-pane-padding-top
+// --n-pane-padding-bottom
 // --n-color-segment
 // --n-font-weight-strong
 // --n-tab-color-segment
@@ -38,12 +42,22 @@ export default cB('tabs', `
 `, [
   cM('segment-type', [
     cB('tabs-rail', [
-      c('&.transition-disabled', 'color: red;', [
-        cB('tabs-tab', `
+      c('&.transition-disabled', [
+        cB('tabs-capsule', `
           transition: none;
         `)
       ])
     ])
+  ]),
+  cM('top', [
+    cB('tab-pane', `
+      padding: var(--n-pane-padding-top) var(--n-pane-padding-right) var(--n-pane-padding-bottom) var(--n-pane-padding-left);
+    `)
+  ]),
+  cM('left', [
+    cB('tab-pane', `
+      padding: var(--n-pane-padding-right) var(--n-pane-padding-bottom) var(--n-pane-padding-left) var(--n-pane-padding-top);
+    `)
   ]),
   cM('left, right', `
     flex-direction: row;
@@ -52,9 +66,9 @@ export default cB('tabs', `
       width: 2px;
       right: 0;
       transition:
-      top .2s var(--n-bezier),
-      max-height .2s var(--n-bezier),
-      background-color .3s var(--n-bezier);
+        top .2s var(--n-bezier),
+        max-height .2s var(--n-bezier),
+        background-color .3s var(--n-bezier);
     `),
     cB('tabs-tab', `
       padding: var(--n-tab-padding-vertical); 
@@ -63,6 +77,9 @@ export default cB('tabs', `
   cM('right', `
     flex-direction: row-reverse;
   `, [
+    cB('tab-pane', `
+      padding: var(--n-pane-padding-left) var(--n-pane-padding-top) var(--n-pane-padding-right) var(--n-pane-padding-bottom);
+    `),
     cB('tabs-bar', `
       left: 0;
     `)
@@ -71,11 +88,15 @@ export default cB('tabs', `
     flex-direction: column-reverse;
     justify-content: flex-end;
   `, [
+    cB('tab-pane', `
+      padding: var(--n-pane-padding-bottom) var(--n-pane-padding-right) var(--n-pane-padding-top) var(--n-pane-padding-left);
+    `),
     cB('tabs-bar', `
       top: 0;
     `)
   ]),
   cB('tabs-rail', `
+    position: relative;
     padding: 3px;
     border-radius: var(--n-tab-border-radius);
     width: 100%;
@@ -84,6 +105,14 @@ export default cB('tabs', `
     display: flex;
     align-items: center;
   `, [
+    cB('tabs-capsule', `
+      border-radius: var(--n-tab-border-radius);
+      position: absolute;
+      pointer-events: none;
+      background-color: var(--n-tab-color-segment);
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .08);
+      transition: transform 0.3s var(--n-bezier);
+    `),
     cB('tabs-tab-wrapper', `
       flex-basis: 0;
       flex-grow: 1;
@@ -102,8 +131,6 @@ export default cB('tabs', `
         cM('active', `
           font-weight: var(--n-font-weight-strong);
           color: var(--n-tab-text-color-active);
-          background-color: var(--n-tab-color-segment);
-          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .08);
         `),
         c('&:hover', `
           color: var(--n-tab-text-color-hover);
@@ -112,15 +139,16 @@ export default cB('tabs', `
     ])
   ]),
   cM('flex', [
-    cB('tabs-nav', {
-      width: '100%'
-    }, [
-      cB('tabs-wrapper', {
-        width: '100%'
-      }, [
-        cB('tabs-tab', {
-          marginRight: 0
-        })
+    cB('tabs-nav', `
+      width: 100%;
+      position: relative;
+    `, [
+      cB('tabs-wrapper', `
+        width: 100%;
+      `, [
+        cB('tabs-tab', `
+          margin-right: 0;
+        `)
       ])
     ])
   ]),
@@ -137,30 +165,84 @@ export default cB('tabs', `
     cE('prefix', 'padding-right: 16px;'),
     cE('suffix', 'padding-left: 16px;')
   ]),
+  cM('top, bottom', [
+    c('>', [
+      cB('tabs-nav', [
+        cB('tabs-nav-scroll-wrapper', [
+          c('&::before', `
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 20px;
+          `),
+          c('&::after', `
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 20px;
+          `),
+          cM('shadow-start', [
+            c('&::before', `
+              box-shadow: inset 10px 0 8px -8px rgba(0, 0, 0, .12);
+            `)
+          ]),
+          cM('shadow-end', [
+            c('&::after', `
+              box-shadow: inset -10px 0 8px -8px rgba(0, 0, 0, .12);
+            `)
+          ])
+        ])
+      ])
+    ])
+  ]),
+  cM('left, right', [
+    cB('tabs-nav-scroll-content', `
+      flex-direction: column;
+    `),
+    c('>', [
+      cB('tabs-nav', [
+        cB('tabs-nav-scroll-wrapper', [
+          c('&::before', `
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+          `),
+          c('&::after', `
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+          `),
+          cM('shadow-start', [
+            c('&::before', `
+              box-shadow: inset 0 10px 8px -8px rgba(0, 0, 0, .12);
+            `)
+          ]),
+          cM('shadow-end', [
+            c('&::after', `
+              box-shadow: inset 0 -10px 8px -8px rgba(0, 0, 0, .12);
+            `)
+          ])
+        ])
+      ])
+    ])
+  ]),
   cB('tabs-nav-scroll-wrapper', `
     flex: 1;
     position: relative;
     overflow: hidden;
   `, [
-    cM('shadow-before', [
-      c('&::before', `
-        box-shadow: inset 10px 0 8px -8px rgba(0, 0, 0, .12);
-      `)
-    ]),
-    cM('shadow-after', [
-      c('&::after', `
-        box-shadow: inset -10px 0 8px -8px rgba(0, 0, 0, .12);
-      `)
-    ]),
     cB('tabs-nav-y-scroll', `
       height: 100%;
       width: 100%;
       overflow-y: auto; 
       scrollbar-width: none;
     `, [
-      c('&::-webkit-scrollbar', `
+      c('&::-webkit-scrollbar, &::-webkit-scrollbar-track-piece, &::-webkit-scrollbar-thumb', `
         width: 0;
         height: 0;
+        display: none;
       `)
     ]),
     c('&::before, &::after', `
@@ -168,23 +250,16 @@ export default cB('tabs', `
       pointer-events: none;
       content: "";
       position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 20px;
       z-index: 1;
-    `),
-    c('&::before', `
-      left: 0;
-    `),
-    c('&::after', `
-      right: 0;
     `)
   ]),
   cB('tabs-nav-scroll-content', `
     display: flex;
     position: relative;
     min-width: 100%;
+    min-height: 100%;
     width: fit-content;
+    box-sizing: border-box;
   `),
   cB('tabs-wrapper', `
     display: inline-flex;
@@ -225,6 +300,7 @@ export default cB('tabs', `
     cE('label', `
       display: flex;
       align-items: center;
+      z-index: 1;
     `)
   ]),
   cB('tabs-bar', `
@@ -236,6 +312,7 @@ export default cB('tabs', `
     transition:
       left .2s var(--n-bezier),
       max-width .2s var(--n-bezier),
+      opacity .3s var(--n-bezier),
       background-color .3s var(--n-bezier);
   `, [
     c('&.transition-disabled', `
@@ -253,7 +330,6 @@ export default cB('tabs', `
   cB('tab-pane', `
     color: var(--n-pane-text-color);
     width: 100%;
-    padding: var(--n-pane-padding);
     transition:
       color .3s var(--n-bezier),
       background-color .3s var(--n-bezier),
@@ -286,6 +362,7 @@ export default cB('tabs', `
     `)
   ]),
   cB('tabs-tab-pad', `
+    box-sizing: border-box;
     width: var(--n-tab-gap);
     flex-grow: 0;
     flex-shrink: 0;
@@ -310,38 +387,74 @@ export default cB('tabs', `
   ]),
   cB('tabs-nav', [
     cM('line-type', [
+      cM('top', [
+        cE('prefix, suffix', `
+          border-bottom: 1px solid var(--n-tab-border-color);
+        `),
+        cB('tabs-nav-scroll-content', `
+          border-bottom: 1px solid var(--n-tab-border-color);
+        `),
+        cB('tabs-bar', `
+          bottom: -1px;
+        `)
+      ]),
+      cM('left', [
+        cE('prefix, suffix', `
+          border-right: 1px solid var(--n-tab-border-color);
+        `),
+        cB('tabs-nav-scroll-content', `
+          border-right: 1px solid var(--n-tab-border-color);
+        `),
+        cB('tabs-bar', `
+          right: -1px;
+        `)
+      ]),
+      cM('right', [
+        cE('prefix, suffix', `
+          border-left: 1px solid var(--n-tab-border-color);
+        `),
+        cB('tabs-nav-scroll-content', `
+          border-left: 1px solid var(--n-tab-border-color);
+        `),
+        cB('tabs-bar', `
+          left: -1px;
+        `)
+      ]),
+      cM('bottom', [
+        cE('prefix, suffix', `
+          border-top: 1px solid var(--n-tab-border-color);
+        `),
+        cB('tabs-nav-scroll-content', `
+          border-top: 1px solid var(--n-tab-border-color);
+        `),
+        cB('tabs-bar', `
+          top: -1px;
+        `)
+      ]),
       cE('prefix, suffix', `
         transition: border-color .3s var(--n-bezier);
-        border-bottom: 1px solid var(--n-tab-border-color);
       `),
       cB('tabs-nav-scroll-content', `
         transition: border-color .3s var(--n-bezier);
-        border-bottom: 1px solid var(--n-tab-border-color);
       `),
       cB('tabs-bar', `
         border-radius: 0;
-        bottom: -1px;
       `)
     ]),
     cM('card-type', [
       cE('prefix, suffix', `
         transition: border-color .3s var(--n-bezier);
-        border-bottom: 1px solid var(--n-tab-border-color);
       `),
       cB('tabs-pad', `
         flex-grow: 1;
         transition: border-color .3s var(--n-bezier);
-        border-bottom: 1px solid var(--n-tab-border-color);
       `),
       cB('tabs-tab-pad', `
         transition: border-color .3s var(--n-bezier);
-        border-bottom: 1px solid var(--n-tab-border-color);
       `),
       cB('tabs-tab', `
         font-weight: var(--n-tab-font-weight);
         border: 1px solid var(--n-tab-border-color);
-        border-top-left-radius: var(--n-tab-border-radius);
-        border-top-right-radius: var(--n-tab-border-radius);
         background-color: var(--n-tab-color);
         box-sizing: border-box;
         position: relative;
@@ -355,6 +468,7 @@ export default cB('tabs', `
           padding-left: 8px;
           padding-right: 8px;
           font-size: 16px;
+          justify-content: center;
         `, [
           cE('height-placeholder', `
             width: 0;
@@ -366,50 +480,120 @@ export default cB('tabs', `
             `)
           ])
         ]),
-        cM('closable', 'padding-right: 6px;'),
+        cM('closable', 'padding-right: 8px;'),
         cM('active', `
-          border-bottom: 1px solid #0000;
           background-color: #0000;
           font-weight: var(--n-tab-font-weight-active);
           color: var(--n-tab-text-color-active);
         `),
         cM('disabled', 'color: var(--n-tab-text-color-disabled);')
       ]),
-      cB('tabs-scroll-padding', 'border-bottom: 1px solid var(--n-tab-border-color);')
     ]),
-    cM('left, right', [
+    cM('left, right', `
+      flex-direction: column;  
+    `, [
+      cE('prefix, suffix', `
+        padding: var(--n-tab-padding-vertical);
+      `),
       cB('tabs-wrapper', `
         flex-direction: column;
+      `),
+      cB('tabs-tab-wrapper', `
+        flex-direction: column;
       `, [
-        cB('tabs-tab-wrapper', `
-          flex-direction: column;
+        cB('tabs-tab-pad', `
+          height: var(--n-tab-gap-vertical);
+          width: 100%;
+        `)
+      ])
+    ]),
+    cM('top', [
+      cM('card-type', [
+        cB('tabs-scroll-padding', 'border-bottom: 1px solid var(--n-tab-border-color);'),
+        cE('prefix, suffix', `
+          border-bottom: 1px solid var(--n-tab-border-color);
+        `),
+        cB('tabs-tab', `
+          border-top-left-radius: var(--n-tab-border-radius);
+          border-top-right-radius: var(--n-tab-border-radius);
         `, [
-          cB('tabs-tab-pad', `
-            height: var(--n-tab-gap);
-            width: 100%;
+          cM('active', `
+            border-bottom: 1px solid #0000;
           `)
-        ])
-      ]),
-      cB('tabs-nav-scroll-content', `
-        border-bottom: none;
-      `)
+        ]),
+        cB('tabs-tab-pad', `
+          border-bottom: 1px solid var(--n-tab-border-color);
+        `),
+        cB('tabs-pad', `
+          border-bottom: 1px solid var(--n-tab-border-color);
+        `)
+      ])
     ]),
     cM('left', [
-      cB('tabs-nav-scroll-content', `
-        box-sizing: border-box;
-        border-right: 1px solid var(--n-tab-border-color);
-      `)
+      cM('card-type', [
+        cB('tabs-scroll-padding', 'border-right: 1px solid var(--n-tab-border-color);'),
+        cE('prefix, suffix', `
+          border-right: 1px solid var(--n-tab-border-color);
+        `),
+        cB('tabs-tab', `
+          border-top-left-radius: var(--n-tab-border-radius);
+          border-bottom-left-radius: var(--n-tab-border-radius);
+        `, [
+          cM('active', `
+            border-right: 1px solid #0000;
+          `)
+        ]),
+        cB('tabs-tab-pad', `
+          border-right: 1px solid var(--n-tab-border-color);
+        `),
+        cB('tabs-pad', `
+          border-right: 1px solid var(--n-tab-border-color);
+        `)
+      ])
     ]),
     cM('right', [
-      cB('tabs-nav-scroll-content', `
-        border-left: 1px solid var(--n-tab-border-color);
-      `)
+      cM('card-type', [
+        cB('tabs-scroll-padding', 'border-left: 1px solid var(--n-tab-border-color);'),
+        cE('prefix, suffix', `
+          border-left: 1px solid var(--n-tab-border-color);
+        `),
+        cB('tabs-tab', `
+          border-top-right-radius: var(--n-tab-border-radius);
+          border-bottom-right-radius: var(--n-tab-border-radius);
+        `, [
+          cM('active', `
+            border-left: 1px solid #0000;
+          `)
+        ]),
+        cB('tabs-tab-pad', `
+          border-left: 1px solid var(--n-tab-border-color);
+        `),
+        cB('tabs-pad', `
+          border-left: 1px solid var(--n-tab-border-color);
+        `)
+      ])
     ]),
     cM('bottom', [
-      cB('tabs-nav-scroll-content', `
-        border-top: 1px solid var(--n-tab-border-color);
-        border-bottom: none;
-      `)
+      cM('card-type', [
+        cB('tabs-scroll-padding', 'border-top: 1px solid var(--n-tab-border-color);'),
+        cE('prefix, suffix', `
+          border-top: 1px solid var(--n-tab-border-color);
+        `),
+        cB('tabs-tab', `
+          border-bottom-left-radius: var(--n-tab-border-radius);
+          border-bottom-right-radius: var(--n-tab-border-radius);
+        `, [
+          cM('active', `
+            border-top: 1px solid #0000;
+          `)
+        ]),
+        cB('tabs-tab-pad', `
+          border-top: 1px solid var(--n-tab-border-color);
+        `),
+        cB('tabs-pad', `
+          border-top: 1px solid var(--n-tab-border-color);
+        `)
+      ])
     ])
   ])
 ])

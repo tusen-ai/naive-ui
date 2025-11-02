@@ -1,9 +1,11 @@
-import { h, nextTick, VNode } from 'vue'
+import type { VNode } from 'vue'
+import type { SelectGroupOption, SelectOption, SelectProps } from '../index'
+import type { SelectBaseOption } from '../src/interface'
 import { mount } from '@vue/test-utils'
-import { NSelect, SelectProps, SelectOption, SelectGroupOption } from '../index'
+import { h, nextTick } from 'vue'
 import { NInternalSelection, NInternalSelectMenu } from '../../_internal'
 import { NTag } from '../../tag'
-import { SelectBaseOption } from '../src/interface'
+import { NSelect } from '../index'
 
 describe('n-select', () => {
   it('should work with import on demand', () => {
@@ -78,7 +80,7 @@ describe('n-select', () => {
       })
       const menuWrapper = wrapper.findComponent(NInternalSelectMenu)
       expect(
-        ['cool1+1', 'cool1+2', 'cool1+3'].every((label) =>
+        ['cool1+1', 'cool1+2', 'cool1+3'].every(label =>
           menuWrapper.text().includes(label)
         )
       ).toEqual(true)
@@ -236,7 +238,7 @@ describe('n-select', () => {
         options,
         virtualScroll: false,
         renderLabel: (option: SelectOption) => {
-          return 'render-' + String(option.label)
+          return `render-${String(option.label)}`
         }
       }
     })

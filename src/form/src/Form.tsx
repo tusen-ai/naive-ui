@@ -1,30 +1,26 @@
-import {
-  h,
-  defineComponent,
-  PropType,
-  provide,
-  ExtractPropTypes,
-  ref
-} from 'vue'
-import { ValidateError } from 'async-validator'
-import { useConfig, useTheme } from '../../_mixins'
+import type { ValidateError } from 'async-validator'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import { formLight } from '../styles'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { FormTheme } from '../styles'
-import style from './styles/form.cssr'
 import type {
-  ShouldRuleBeApplied,
+  FormInst,
   FormItemInst,
+  FormItemInternalValidateResult,
   FormRules,
   FormValidateCallback,
+  FormValidateMessages,
   LabelAlign,
   LabelPlacement,
-  FormInst,
-  Size,
-  FormValidateMessages
+  ShouldRuleBeApplied,
+  Size
 } from './interface'
-import { ExtractPublicPropTypes, keysOf } from '../../_utils'
+import { defineComponent, h, provide, ref } from 'vue'
+import { useConfig, useTheme } from '../../_mixins'
+import { keysOf } from '../../_utils'
+import { formLight } from '../styles'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
+import style from './styles/form.cssr'
 
 export const formProps = {
   ...(useTheme.props as ThemeProps<FormTheme>),
@@ -53,7 +49,9 @@ export const formProps = {
   },
   onSubmit: {
     type: Function as PropType<(e: Event) => void>,
-    default: (e: Event) => e.preventDefault()
+    default: (e: Event) => {
+      e.preventDefault()
+    }
   },
   showLabel: {
     type: Boolean as PropType<boolean | undefined>,
@@ -68,7 +66,7 @@ export type FormProps = ExtractPublicPropTypes<typeof formProps>
 export default defineComponent({
   name: 'Form',
   props: formProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     useTheme('Form', '-form', style, formLight, props, mergedClsPrefixRef)
     // from path to form-item
@@ -78,50 +76,61 @@ export default defineComponent({
     const deriveMaxChildLabelWidth = (currentWidth: number): void => {
       const currentMaxChildLabelWidth = maxChildLabelWidthRef.value
       if (
-        currentMaxChildLabelWidth === undefined ||
-        currentWidth >= currentMaxChildLabelWidth
+        currentMaxChildLabelWidth === undefined
+        || currentWidth >= currentMaxChildLabelWidth
       ) {
         maxChildLabelWidthRef.value = currentWidth
       }
     }
-    async function validate (
+    async function validate(
       validateCallback?: FormValidateCallback,
       shouldRuleBeApplied: ShouldRuleBeApplied = () => true
-    ): Promise<void> {
-      return await new Promise((resolve, reject) => {
-        const formItemValidationPromises: Array<
-        Promise<{
-          valid: boolean
-          errors?: ValidateError[]
-        }>
-        > = []
-        for (const key of keysOf(formItems)) {
-          const formItemInstances = formItems[key]
-          for (const formItemInstance of formItemInstances) {
-            if (formItemInstance.path) {
-              formItemValidationPromises.push(
-                formItemInstance.internalValidate(null, shouldRuleBeApplied)
-              )
+    ): Promise<{ warnings: ValidateError[][] | undefined }> {
+      return await new Promise<{ warnings: ValidateError[][] | undefined }>(
+        (resolve, reject) => {
+          const formItemValidationPromises: Array<
+            Promise<FormItemInternalValidateResult>
+          > = []
+          for (const key of keysOf(formItems)) {
+            const formItemInstances = formItems[key]
+            for (const formItemInstance of formItemInstances) {
+              if (formItemInstance.path) {
+                formItemValidationPromises.push(
+                  formItemInstance.internalValidate(null, shouldRuleBeApplied)
+                )
+              }
             }
           }
-        }
-        void Promise.all(formItemValidationPromises).then((results) => {
-          if (results.some((result) => !result.valid)) {
-            const errors = results
-              .filter((result) => result.errors)
-              .map((result) => result.errors)
+          void Promise.all(formItemValidationPromises).then((results) => {
+            const formInvalid = results.some(result => !result.valid)
+            const errors: ValidateError[][] = []
+            const warnings: ValidateError[][] = []
+            results.forEach((result) => {
+              if (result.errors?.length) {
+                errors.push(result.errors)
+              }
+              if (result.warnings?.length) {
+                warnings.push(result.warnings)
+              }
+            })
             if (validateCallback) {
-              validateCallback(errors as ValidateError[][])
+              validateCallback(errors.length ? errors : undefined, {
+                warnings: warnings.length ? warnings : undefined
+              })
             }
-            reject(errors)
-          } else {
-            if (validateCallback) validateCallback()
-            resolve()
-          }
-        })
-      })
+            if (formInvalid) {
+              reject(errors.length ? errors : undefined)
+            }
+            else {
+              resolve({
+                warnings: warnings.length ? warnings : undefined
+              })
+            }
+          })
+        }
+      )
     }
-    function restoreValidation (): void {
+    function restoreValidation(): void {
       for (const key of keysOf(formItems)) {
         const formItemInstances = formItems[key]
         for (const formItemInstance of formItemInstances) {
@@ -143,7 +152,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef
     })
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     return (
       <form

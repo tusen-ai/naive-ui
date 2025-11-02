@@ -1,5 +1,5 @@
-import { c, cM, cB } from '../../../_utils/cssr'
 import { fadeInTransition } from '../../../_styles/transitions/fade-in.cssr'
+import { c, cB, cM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
@@ -17,9 +17,9 @@ export default c([
       transform: rotate(360deg);
     }
   `),
-  cB('spin-container', {
-    position: 'relative'
-  }, [
+  cB('spin-container', `
+    position: relative;
+  `, [
     cB('spin-body', `
       position: absolute;
       top: 50%;

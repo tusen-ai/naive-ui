@@ -1,9 +1,9 @@
+import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
 import { commonLight } from '../../_styles/common'
-import type { ThemeCommonVars } from '../../_styles/common'
 import common from './_common'
 
-export function self (vars: ThemeCommonVars) {
+export function self(vars: ThemeCommonVars) {
   const {
     textColor1,
     textColor2,

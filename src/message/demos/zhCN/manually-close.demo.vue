@@ -2,6 +2,32 @@
 # 手动关闭
 </markdown>
 
+<script lang="ts" setup>
+import type { MessageReactive } from 'naive-ui'
+import { useMessage } from 'naive-ui'
+import { onBeforeUnmount } from 'vue'
+
+const message = useMessage()
+let messageReactive: MessageReactive | null = null
+
+function removeMessage() {
+  if (messageReactive) {
+    messageReactive.destroy()
+    messageReactive = null
+  }
+}
+
+onBeforeUnmount(removeMessage)
+
+function createMessage() {
+  if (!messageReactive) {
+    messageReactive = message.info('3 * 3 * 4 * 4 * ?', {
+      duration: 0
+    })
+  }
+}
+</script>
+
 <template>
   <n-space>
     <n-button @click="createMessage">
@@ -12,36 +38,3 @@
     </n-button>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, onBeforeUnmount } from 'vue'
-import { useMessage } from 'naive-ui'
-import type { MessageReactive } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const message = useMessage()
-    let messageReactive: MessageReactive | null = null
-
-    const removeMessage = () => {
-      if (messageReactive) {
-        messageReactive.destroy()
-        messageReactive = null
-      }
-    }
-
-    onBeforeUnmount(removeMessage)
-
-    return {
-      removeMessage,
-      createMessage () {
-        if (!messageReactive) {
-          messageReactive = message.info('3 * 3 * 4 * 4 * ?', {
-            duration: 0
-          })
-        }
-      }
-    }
-  }
-})
-</script>

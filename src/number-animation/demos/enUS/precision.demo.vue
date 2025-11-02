@@ -4,6 +4,16 @@
 Use `precision` to set precision.
 </markdown>
 
+<script lang="ts" setup>
+import type { NumberAnimationInst } from 'naive-ui'
+import { ref } from 'vue'
+
+const numberAnimationInstRef = ref<NumberAnimationInst | null>(null)
+function handleClick() {
+  numberAnimationInstRef.value?.play()
+}
+</script>
+
 <template>
   <n-statistic label="JNM" tabular-nums>
     <n-number-animation
@@ -18,20 +28,3 @@ Use `precision` to set precision.
     Play
   </n-button>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { NumberAnimationInst } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const numberAnimationInstRef = ref<NumberAnimationInst | null>(null)
-    return {
-      numberAnimationInstRef,
-      handleClick () {
-        numberAnimationInstRef.value?.play()
-      }
-    }
-  }
-})
-</script>

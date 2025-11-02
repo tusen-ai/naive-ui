@@ -1,33 +1,25 @@
-import {
-  h,
-  ref,
-  computed,
-  defineComponent,
-  PropType,
-  mergeProps,
-  HTMLAttributes,
-  watchEffect
-} from 'vue'
+import type { HTMLAttributes, PropType, SlotsType, VNode } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { AlertTheme } from '../styles'
 import { getMargin } from 'seemly'
+import { computed, defineComponent, h, mergeProps, ref, watchEffect } from 'vue'
+import { NBaseClose, NBaseIcon, NFadeInExpandTransition } from '../../_internal'
 import {
+  ErrorIcon,
   InfoIcon,
   SuccessIcon,
-  WarningIcon,
-  ErrorIcon
+  WarningIcon
 } from '../../_internal/icons'
-import { NFadeInExpandTransition, NBaseClose, NBaseIcon } from '../../_internal'
-import { useRtl } from '../../_mixins/use-rtl'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
 import {
   createKey,
   resolveSlot,
   resolveWrappedSlot,
   warnOnce
 } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { alertLight } from '../styles'
-import type { AlertTheme } from '../styles'
 import style from './styles/index.cssr'
 
 export const alertProps = {
@@ -39,7 +31,7 @@ export const alertProps = {
   },
   type: {
     type: String as PropType<
-    'info' | 'warning' | 'error' | 'success' | 'default'
+      'info' | 'warning' | 'error' | 'success' | 'default'
     >,
     default: 'default'
   },
@@ -56,11 +48,18 @@ export const alertProps = {
 
 export type AlertProps = ExtractPublicPropTypes<typeof alertProps>
 
+export interface AlertSlots {
+  default?: () => VNode[]
+  icon?: () => VNode[]
+  header?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Alert',
   inheritAttrs: false,
   props: alertProps,
-  setup (props) {
+  slots: Object as SlotsType<AlertSlots>,
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.onAfterHide !== undefined) {
@@ -141,13 +140,13 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'alert',
-        computed(() => {
-          return props.type[0]
-        }),
-        cssVarsRef,
-        props
-      )
+          'alert',
+          computed(() => {
+            return props.type[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     const visibleRef = ref(true)
     const doAfterLeave = (): void => {
@@ -155,12 +154,15 @@ export default defineComponent({
         onAfterLeave,
         onAfterHide // deprecated
       } = props
-      if (onAfterLeave) onAfterLeave()
-      if (onAfterHide) onAfterHide()
+      if (onAfterLeave)
+        onAfterLeave()
+      if (onAfterHide)
+        onAfterHide()
     }
     const handleCloseClick = (): void => {
       void Promise.resolve(props.onClose?.()).then((result) => {
-        if (result === false) return
+        if (result === false)
+          return
         visibleRef.value = false
       })
     }
@@ -180,7 +182,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     this.onRender?.()
     return (
       <NFadeInExpandTransition onAfterLeave={this.handleAfterLeave}>
@@ -193,6 +195,10 @@ export default defineComponent({
                 this.themeClass,
                 this.closable && `${mergedClsPrefix}-alert--closable`,
                 this.showIcon && `${mergedClsPrefix}-alert--show-icon`,
+                // fix: https://github.com/tusen-ai/naive-ui/issues/4588
+                !this.title
+                && this.closable
+                && `${mergedClsPrefix}-alert--right-adjust`,
                 this.rtlEnabled && `${mergedClsPrefix}-alert--rtl`
               ],
               style: this.cssVars as any,
@@ -240,8 +246,8 @@ export default defineComponent({
                 <div
                   class={[
                     `${mergedClsPrefix}-alert-body`,
-                    this.mergedBordered &&
-                      `${mergedClsPrefix}-alert-body--bordered`
+                    this.mergedBordered
+                    && `${mergedClsPrefix}-alert-body--bordered`
                   ]}
                 >
                   {resolveWrappedSlot($slots.header, (children) => {

@@ -1,33 +1,33 @@
-import {
-  h,
-  ref,
-  PropType,
-  defineComponent,
-  computed,
-  provide,
-  CSSProperties,
-  withDirectives,
-  Transition,
-  watchEffect,
-  toRef
-} from 'vue'
-import { VLazyTeleport } from 'vueuc'
+import type { CSSProperties, PropType } from 'vue'
+import type { ScrollbarProps } from '../../_internal'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { DrawerTheme } from '../styles'
+import type { Placement } from './DrawerBodyWrapper'
 import { zindexable } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
-import { useTheme, useConfig, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import {
-  formatLength,
+  computed,
+  defineComponent,
+  h,
+  provide,
+  ref,
+  toRef,
+  Transition,
+  watchEffect,
+  withDirectives
+} from 'vue'
+import { VLazyTeleport } from 'vueuc'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import {
   call,
-  warnOnce,
+  eventEffectNotPerformed,
+  formatLength,
   useIsComposing,
-  eventEffectNotPerformed
+  warnOnce
 } from '../../_utils'
-import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import { ScrollbarProps } from '../../_internal'
-import { drawerLight, DrawerTheme } from '../styles'
+import { drawerLight } from '../styles'
 import NDrawerBodyWrapper from './DrawerBodyWrapper'
-import type { Placement } from './DrawerBodyWrapper'
 import { drawerInjectionKey } from './interface'
 import style from './styles/index.cssr'
 
@@ -60,6 +60,7 @@ export const drawerProps = {
   zIndex: Number,
   onMaskClick: Function as PropType<(e: MouseEvent) => void>,
   scrollbarProps: Object as PropType<ScrollbarProps>,
+  contentClass: String,
   contentStyle: [Object, String] as PropType<string | CSSProperties>,
   trapFocus: {
     type: Boolean,
@@ -78,6 +79,10 @@ export const drawerProps = {
     type: Boolean,
     default: true
   },
+  maxWidth: Number,
+  maxHeight: Number,
+  minWidth: Number,
+  minHeight: Number,
   resizable: Boolean,
   defaultWidth: {
     type: [Number, String] as PropType<string | number>,
@@ -88,22 +93,22 @@ export const drawerProps = {
     default: 251
   },
   onUpdateWidth: [Function, Array] as PropType<
-  MaybeArray<(value: number) => void>
+    MaybeArray<(value: number) => void>
   >,
   onUpdateHeight: [Function, Array] as PropType<
-  MaybeArray<(value: number) => void>
+    MaybeArray<(value: number) => void>
   >,
   'onUpdate:width': [Function, Array] as PropType<
-  MaybeArray<(value: number) => void>
+    MaybeArray<(value: number) => void>
   >,
   'onUpdate:height': [Function, Array] as PropType<
-  MaybeArray<(value: number) => void>
+    MaybeArray<(value: number) => void>
   >,
   'onUpdate:show': [Function, Array] as PropType<
-  MaybeArray<(value: boolean) => void>
+    MaybeArray<(value: boolean) => void>
   >,
   onUpdateShow: [Function, Array] as PropType<
-  MaybeArray<(value: boolean) => void>
+    MaybeArray<(value: boolean) => void>
   >,
   onAfterEnter: Function as PropType<() => void>,
   onAfterLeave: Function as PropType<() => void>,
@@ -121,7 +126,7 @@ export default defineComponent({
   name: 'Drawer',
   inheritAttrs: false,
   props: drawerProps,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.drawerStyle !== undefined) {
@@ -153,8 +158,8 @@ export default defineComponent({
         }
       })
     }
-    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled } =
-      useConfig(props)
+    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled }
+      = useConfig(props)
     const isMountedRef = useIsMounted()
     const themeRef = useTheme(
       'Drawer',
@@ -179,26 +184,32 @@ export default defineComponent({
 
     const styleWidthRef = computed(() => {
       const { placement } = props
-      if (placement === 'top' || placement === 'bottom') return ''
+      if (placement === 'top' || placement === 'bottom')
+        return ''
       return formatLength(mergedWidthRef.value)
     })
 
     const styleHeightRef = computed(() => {
       const { placement } = props
-      if (placement === 'left' || placement === 'right') return ''
+      if (placement === 'left' || placement === 'right')
+        return ''
       return formatLength(mergedHeightRef.value)
     })
 
     const doUpdateWidth = (value: number): void => {
       const { onUpdateWidth, 'onUpdate:width': _onUpdateWidth } = props
-      if (onUpdateWidth) call(onUpdateWidth, value)
-      if (_onUpdateWidth) call(_onUpdateWidth, value)
+      if (onUpdateWidth)
+        call(onUpdateWidth, value)
+      if (_onUpdateWidth)
+        call(_onUpdateWidth, value)
       uncontrolledWidthRef.value = value
     }
     const doUpdateHeight = (value: number): void => {
       const { onUpdateHeight, 'onUpdate:width': _onUpdateHeight } = props
-      if (onUpdateHeight) call(onUpdateHeight, value)
-      if (_onUpdateHeight) call(_onUpdateHeight, value)
+      if (onUpdateHeight)
+        call(onUpdateHeight, value)
+      if (_onUpdateHeight)
+        call(_onUpdateHeight, value)
       uncontrolledHeightRef.value = value
     }
 
@@ -212,28 +223,38 @@ export default defineComponent({
       ]
     })
 
-    function handleMaskClick (e: MouseEvent): void {
+    function handleMaskClick(e: MouseEvent): void {
       const { onMaskClick, maskClosable } = props
       if (maskClosable) {
         doUpdateShow(false)
       }
-      if (onMaskClick) onMaskClick(e)
+      if (onMaskClick)
+        onMaskClick(e)
+    }
+
+    function handleOutsideClick(e: MouseEvent): void {
+      handleMaskClick(e)
     }
 
     const isComposingRef = useIsComposing()
 
-    function handleEsc (e: KeyboardEvent): void {
+    function handleEsc(e: KeyboardEvent): void {
       props.onEsc?.()
       if (props.show && props.closeOnEsc && eventEffectNotPerformed(e)) {
-        !isComposingRef.value && doUpdateShow(false)
+        if (!isComposingRef.value) {
+          doUpdateShow(false)
+        }
       }
     }
-    function doUpdateShow (show: boolean): void {
+    function doUpdateShow(show: boolean): void {
       const { onHide, onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
-      if (onUpdateShow) call(onUpdateShow, show)
-      if (_onUpdateShow) call(_onUpdateShow, show)
+      if (onUpdateShow)
+        call(onUpdateShow, show)
+      if (_onUpdateShow)
+        call(_onUpdateShow, show)
       // deprecated
-      if (onHide && !show) call(onHide, show)
+      if (onHide && !show)
+        call(onHide, show)
     }
     provide(drawerInjectionKey, {
       isMountedRef,
@@ -253,6 +274,7 @@ export default defineComponent({
           lineHeight,
           headerPadding,
           footerPadding,
+          borderRadius,
           bodyPadding,
           titleFontSize,
           titleTextColor,
@@ -273,6 +295,7 @@ export default defineComponent({
       return {
         '--n-line-height': lineHeight,
         '--n-color': color,
+        '--n-border-radius': borderRadius,
         '--n-text-color': textColor,
         '--n-box-shadow': boxShadow,
         '--n-bezier': cubicBezierEaseInOut,
@@ -304,6 +327,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       namespace: namespaceRef,
       mergedBodyStyle: mergedBodyStyleRef,
+      handleOutsideClick,
       handleMaskClick,
       handleEsc,
       mergedTheme: themeRef,
@@ -313,7 +337,7 @@ export default defineComponent({
       isMounted: isMountedRef
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     return (
       <VLazyTeleport to={this.to} show={this.show}>
@@ -339,8 +363,8 @@ export default defineComponent({
                             aria-hidden
                             class={[
                               `${mergedClsPrefix}-drawer-mask`,
-                              this.showMask === 'transparent' &&
-                                `${mergedClsPrefix}-drawer-mask--invisible`
+                              this.showMask === 'transparent'
+                              && `${mergedClsPrefix}-drawer-mask--invisible`
                             ]}
                             onClick={this.handleMaskClick}
                           />
@@ -354,6 +378,7 @@ export default defineComponent({
                   style={[this.mergedBodyStyle, this.$attrs.style]}
                   blockScroll={this.blockScroll}
                   contentStyle={this.contentStyle}
+                  contentClass={this.contentClass}
                   placement={this.placement}
                   scrollbarProps={this.scrollbarProps}
                   show={this.show}
@@ -364,9 +389,13 @@ export default defineComponent({
                   trapFocus={this.trapFocus}
                   autoFocus={this.autoFocus}
                   resizable={this.resizable}
+                  maxHeight={this.maxHeight}
+                  minHeight={this.minHeight}
+                  maxWidth={this.maxWidth}
+                  minWidth={this.minWidth}
                   showMask={this.showMask}
                   onEsc={this.handleEsc}
-                  onClickoutside={this.handleMaskClick}
+                  onClickoutside={this.handleOutsideClick}
                 >
                   {this.$slots}
                 </NDrawerBodyWrapper>

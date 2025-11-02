@@ -1,16 +1,16 @@
-import { toRef, ref, Ref } from 'vue'
-import { useMemo, useMergedState } from 'vooks'
-import { TreeMate } from 'treemate'
+import type { TreeMate } from 'treemate'
+import type { Ref } from 'vue'
 import type {
+  DataTableSetupProps,
   Expandable,
   InternalRowData,
-  RowKey,
-  DataTableSetupProps
+  RowKey
 } from './interface'
+import { useMemo, useMergedState } from 'vooks'
+import { ref, toRef } from 'vue'
 import { call, warn } from '../../_utils'
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function useExpand (
+export function useExpand(
   props: DataTableSetupProps,
   treeMateRef: Ref<TreeMate<InternalRowData, InternalRowData, InternalRowData>>
 ) {
@@ -60,7 +60,7 @@ export function useExpand (
     controlledExpandedRowKeysRef,
     uncontrolledExpandedRowKeysRef
   )
-  function doUpdateExpandedRowKeys (expandedKeys: RowKey[]): void {
+  function doUpdateExpandedRowKeys(expandedKeys: RowKey[]): void {
     const {
       onUpdateExpandedRowKeys,
       'onUpdate:expandedRowKeys': _onUpdateExpandedRowKeys

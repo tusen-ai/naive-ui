@@ -18,6 +18,7 @@ describe('n-icon', () => {
     expect(wrapper.find('[role="img"]').attributes('style')).toContain(
       'font-size: 80px;'
     )
+    wrapper.unmount()
   })
 
   it('should work with `color` prop', async () => {
@@ -25,12 +26,14 @@ describe('n-icon', () => {
     expect(wrapper.find('[role="img"]').attributes('style')).toContain(
       'color: rgb(14, 122, 13);'
     )
+    wrapper.unmount()
   })
 
   it('should work with `depth` prop', async () => {
     const wrapper = mount(NIcon, { props: { depth: 5 } })
     expect(wrapper.find('[role="img"]').classes()).toContain('n-icon--depth')
     expect(wrapper.find('[role="img"]').attributes('style')).toMatchSnapshot()
+    wrapper.unmount()
   })
 
   it('should work with customize icon', async () => {
@@ -46,6 +49,7 @@ describe('n-icon', () => {
     )
     const wrapper = mount(NIcon, { slots: { default: () => customize } })
     expect(wrapper.find('svg').exists()).toBe(true)
+    wrapper.unmount()
   })
 
   it('should work with `component` prop', async () => {
@@ -59,5 +63,6 @@ describe('n-icon', () => {
       }
     })
     expect(wrapper.find('.test-component').exists()).toBe(true)
+    wrapper.unmount()
   })
 })

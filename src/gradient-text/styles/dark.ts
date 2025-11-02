@@ -1,10 +1,10 @@
+import type { GradientTextTheme } from './light'
 import { commonDark } from '../../_styles/common'
-import { GradientTextTheme } from './light'
 
 const gradientTextDark: GradientTextTheme = {
   name: 'GradientText',
   common: commonDark,
-  self (vars) {
+  self(vars) {
     const {
       primaryColor,
       successColor,

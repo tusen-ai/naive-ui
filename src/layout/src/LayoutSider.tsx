@@ -1,32 +1,20 @@
-import {
-  h,
-  defineComponent,
-  computed,
-  PropType,
-  ref,
-  CSSProperties,
-  toRef,
-  inject,
-  provide
-} from 'vue'
-import { useMergedState } from 'vooks'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import type { CSSProperties, PropType } from 'vue'
+import type { ScrollbarInst, ScrollbarProps } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
-import { formatLength, call, warn, useReactivated } from '../../_utils'
-import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
-import { NScrollbar } from '../../_internal'
-import type { ScrollbarProps, ScrollbarInst } from '../../_internal'
-import { layoutLight } from '../styles'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { LayoutTheme } from '../styles'
-import style from './styles/layout-sider.cssr'
-import ToggleButton from './ToggleButton'
-import ToggleBar from './ToggleBar'
-import {
-  layoutSiderInjectionKey,
-  LayoutSiderInst,
-  positionProp
-} from './interface'
+import type { LayoutSiderInst } from './interface'
+import { useMergedState } from 'vooks'
+import { computed, defineComponent, h, inject, provide, ref, toRef } from 'vue'
+import { NScrollbar } from '../../_internal'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { call, formatLength, useReactivated, warn } from '../../_utils'
+import { layoutLight } from '../styles'
+import { layoutSiderInjectionKey, positionProp } from './interface'
 import { layoutInjectionKey } from './Layout'
+import style from './styles/layout-sider.cssr'
+import ToggleBar from './ToggleBar'
+import ToggleButton from './ToggleButton'
 
 export const layoutSiderProps = {
   position: positionProp,
@@ -39,6 +27,7 @@ export const layoutSiderProps = {
     type: [Number, String] as PropType<string | number>,
     default: 272
   },
+  contentClass: String,
   contentStyle: {
     type: [String, Object] as PropType<string | CSSProperties>,
     default: ''
@@ -66,15 +55,17 @@ export const layoutSiderProps = {
   },
   inverted: Boolean,
   scrollbarProps: Object as PropType<
-  Partial<ScrollbarProps> & { style: CSSProperties }
+    Partial<ScrollbarProps> & { style: CSSProperties }
   >,
+  triggerClass: String,
   triggerStyle: [String, Object] as PropType<string | CSSProperties>,
+  collapsedTriggerClass: String,
   collapsedTriggerStyle: [String, Object] as PropType<string | CSSProperties>,
   'onUpdate:collapsed': [Function, Array] as PropType<
-  MaybeArray<(value: boolean) => void>
+    MaybeArray<(value: boolean) => void>
   >,
   onUpdateCollapsed: [Function, Array] as PropType<
-  MaybeArray<(value: boolean) => void>
+    MaybeArray<(value: boolean) => void>
   >,
   onAfterEnter: Function as PropType<() => void>,
   onAfterLeave: Function as PropType<() => void>,
@@ -92,7 +83,7 @@ export default defineComponent({
     ...(useTheme.props as ThemeProps<LayoutTheme>),
     ...layoutSiderProps
   },
-  setup (props) {
+  setup(props) {
     const layoutProps = inject(layoutInjectionKey)
     if (__DEV__) {
       if (!layoutProps) {
@@ -100,24 +91,31 @@ export default defineComponent({
           'layout-sider',
           'Layout sider is not allowed to be put outside layout.'
         )
-      } else {
+      }
+      else {
         if (!layoutProps.hasSider) {
           warn(
             'layout-sider',
-            "You are putting `n-layout-sider` in a `n-layout` but haven't set `has-sider` on the `n-layout`."
+            'You are putting `n-layout-sider` in a `n-layout` but haven\'t set `has-sider` on the `n-layout`.'
           )
         }
       }
     }
     const scrollableElRef = ref<HTMLElement | null>(null)
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
+    const uncontrolledCollapsedRef = ref(props.defaultCollapsed)
+    const mergedCollapsedRef = useMergedState(
+      toRef(props, 'collapsed'),
+      uncontrolledCollapsedRef
+    )
     const styleMaxWidthRef = computed(() => {
       return formatLength(
         mergedCollapsedRef.value ? props.collapsedWidth : props.width
       )
     })
     const scrollContainerStyleRef = computed<CSSProperties>(() => {
-      if (props.collapseMode !== 'transform') return {}
+      if (props.collapseMode !== 'transform')
+        return {}
       return {
         minWidth: formatLength(props.width)
       }
@@ -125,31 +123,28 @@ export default defineComponent({
     const siderPlacementRef = computed(() => {
       return layoutProps ? layoutProps.siderPlacement : 'left'
     })
-    const uncontrolledCollapsedRef = ref(props.defaultCollapsed)
-    const mergedCollapsedRef = useMergedState(
-      toRef(props, 'collapsed'),
-      uncontrolledCollapsedRef
-    )
-    function scrollTo (options: ScrollToOptions): void
-    function scrollTo (x: number, y: number): void
-    function scrollTo (options: ScrollToOptions | number, y?: number): void {
+    function scrollTo(options: ScrollToOptions): void
+    function scrollTo(x: number, y: number): void
+    function scrollTo(options: ScrollToOptions | number, y?: number): void {
       if (props.nativeScrollbar) {
         const { value: scrollableEl } = scrollableElRef
         if (scrollableEl) {
           if (y === undefined) {
             scrollableEl.scrollTo(options as any)
-          } else {
+          }
+          else {
             scrollableEl.scrollTo(options as any, y as any)
           }
         }
-      } else {
+      }
+      else {
         const { value: scrollbarInst } = scrollbarInstRef
         if (scrollbarInst) {
           scrollbarInst.scrollTo(options as any, y as any)
         }
       }
     }
-    function handleTriggerClick (): void {
+    function handleTriggerClick(): void {
       const {
         'onUpdate:collapsed': _onUpdateCollapsed,
         onUpdateCollapsed,
@@ -166,9 +161,12 @@ export default defineComponent({
       }
       uncontrolledCollapsedRef.value = !collapsed
       if (collapsed) {
-        if (onExpand) call(onExpand)
-      } else {
-        if (onCollapse) call(onCollapse)
+        if (onExpand)
+          call(onExpand)
+      }
+      else {
+        if (onCollapse)
+          call(onCollapse)
       }
     }
     let scrollX = 0
@@ -202,11 +200,12 @@ export default defineComponent({
       mergedClsPrefixRef
     )
 
-    function handleTransitionend (e: TransitionEvent): void {
+    function handleTransitionend(e: TransitionEvent): void {
       if (e.propertyName === 'max-width') {
         if (mergedCollapsedRef.value) {
           props.onAfterLeave?.()
-        } else {
+        }
+        else {
           props.onAfterEnter?.()
         }
       }
@@ -238,10 +237,11 @@ export default defineComponent({
         vars['--n-color'] = self.siderColorInverted
         vars['--n-text-color'] = self.textColorInverted
         vars['--n-border-color'] = self.siderBorderColorInverted
-        vars['--n-toggle-button-icon-color'] =
-          self.siderToggleButtonIconColorInverted
+        vars['--n-toggle-button-icon-color']
+          = self.siderToggleButtonIconColorInverted
         vars.__invertScrollbar = self.__invertScrollbar
-      } else {
+      }
+      else {
         vars['--n-color'] = self.siderColor
         vars['--n-text-color'] = self.textColor
         vars['--n-border-color'] = self.siderBorderColor
@@ -251,11 +251,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'layout-sider',
-        computed(() => (props.inverted ? 'a' : 'b')),
-        cssVarsRef,
-        props
-      )
+          'layout-sider',
+          computed(() => (props.inverted ? 'a' : 'b')),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       scrollableElRef,
@@ -276,7 +276,7 @@ export default defineComponent({
       ...exposedMethods
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, mergedCollapsed, showTrigger } = this
     this.onRender?.()
     return (
@@ -288,8 +288,8 @@ export default defineComponent({
           `${mergedClsPrefix}-layout-sider--${this.siderPlacement}-placement`,
           this.bordered && `${mergedClsPrefix}-layout-sider--bordered`,
           mergedCollapsed && `${mergedClsPrefix}-layout-sider--collapsed`,
-          (!mergedCollapsed || this.showCollapsedContent) &&
-            `${mergedClsPrefix}-layout-sider--show-content`
+          (!mergedCollapsed || this.showCollapsedContent)
+          && `${mergedClsPrefix}-layout-sider--show-content`
         ]}
         onTransitionend={this.handleTransitionend}
         style={[
@@ -307,6 +307,7 @@ export default defineComponent({
             ref="scrollbarInstRef"
             style={this.scrollContainerStyle}
             contentStyle={this.contentStyle}
+            contentClass={this.contentClass}
             theme={this.mergedTheme.peers.Scrollbar}
             themeOverrides={this.mergedTheme.peerOverrides.Scrollbar}
             // here is a hack, since in light theme the scrollbar color is dark,
@@ -324,7 +325,10 @@ export default defineComponent({
           </NScrollbar>
         ) : (
           <div
-            class={`${mergedClsPrefix}-layout-sider-scroll-container`}
+            class={[
+              `${mergedClsPrefix}-layout-sider-scroll-container`,
+              this.contentClass
+            ]}
             onScroll={this.handleNativeElScroll}
             style={[
               this.scrollContainerStyle,
@@ -342,6 +346,9 @@ export default defineComponent({
           showTrigger === 'bar' ? (
             <ToggleBar
               clsPrefix={mergedClsPrefix}
+              class={
+                mergedCollapsed ? this.collapsedTriggerClass : this.triggerClass
+              }
               style={
                 mergedCollapsed ? this.collapsedTriggerStyle : this.triggerStyle
               }
@@ -350,6 +357,9 @@ export default defineComponent({
           ) : (
             <ToggleButton
               clsPrefix={mergedClsPrefix}
+              class={
+                mergedCollapsed ? this.collapsedTriggerClass : this.triggerClass
+              }
               style={
                 mergedCollapsed ? this.collapsedTriggerStyle : this.triggerStyle
               }

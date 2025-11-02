@@ -1,8 +1,8 @@
-import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NStep, NSteps } from '../index'
-import { NIcon } from '../../icon'
+import { h } from 'vue'
 import { CloseIcon as ErrorIcon } from '../../_internal/icons'
+import { NIcon } from '../../icon'
+import { NStep, NSteps } from '../index'
 
 describe('n-steps', () => {
   it('should work with import on demand', () => {
@@ -10,12 +10,12 @@ describe('n-steps', () => {
   })
 
   it('should work with `current` prop', async () => {
-    const processStyle =
-      '--n-description-text-color: rgb(51, 54, 57); --n-header-text-color: rgb(31, 34, 37); --n-indicator-border-color: #18a058; --n-indicator-color: #18a058;'
-    const waitStyle =
-      '--n-description-text-color: rgba(194, 194, 194, 1); --n-header-text-color: rgba(194, 194, 194, 1); --n-indicator-border-color: rgba(194, 194, 194, 1); --n-indicator-color: #0000;'
-    const finishStyle =
-      ' --n-description-text-color: rgba(194, 194, 194, 1); --n-header-text-color: rgba(194, 194, 194, 1); --n-indicator-border-color: #18a058; --n-indicator-color: #0000;'
+    const processStyle
+      = '--n-description-text-color: rgb(51, 54, 57); --n-header-text-color: rgb(31, 34, 37); --n-indicator-border-color: #18a058; --n-indicator-color: #18a058;'
+    const waitStyle
+      = '--n-description-text-color: rgba(194, 194, 194, 1); --n-header-text-color: rgba(194, 194, 194, 1); --n-indicator-border-color: rgba(194, 194, 194, 1); --n-indicator-color: #0000;'
+    const finishStyle
+      = ' --n-description-text-color: rgba(194, 194, 194, 1); --n-header-text-color: rgba(194, 194, 194, 1); --n-indicator-border-color: #18a058; --n-indicator-color: #0000;'
     const wrapper = mount(NSteps, {
       slots: {
         default: () => [
@@ -26,9 +26,9 @@ describe('n-steps', () => {
       }
     })
 
-    wrapper
-      .findAll('.n-step')
-      .map((item) => expect(item.attributes('style')).toContain(processStyle))
+    wrapper.findAll('.n-step').forEach((item) => {
+      expect(item.attributes('style')).toContain(processStyle)
+    })
 
     await wrapper.setProps({ current: 1 })
     expect(wrapper.findAll('.n-step')[0].attributes('style')).toContain(
@@ -65,10 +65,10 @@ describe('n-steps', () => {
   })
 
   it('should work with `size` prop', async () => {
-    const mediumStyle =
-      '--n-indicator-icon-size: 18px; --n-indicator-index-font-size: 16px; --n-indicator-size: 28px;'
-    const smallStyle =
-      '--n-indicator-icon-size: 14px; --n-indicator-index-font-size: 14px; --n-indicator-size: 22px;'
+    const mediumStyle
+      = '--n-indicator-icon-size: 18px; --n-indicator-index-font-size: 16px; --n-indicator-size: 28px;'
+    const smallStyle
+      = '--n-indicator-icon-size: 14px; --n-indicator-index-font-size: 14px; --n-indicator-size: 22px;'
     const wrapper = mount(NSteps, {
       props: {
         current: 1
@@ -98,6 +98,25 @@ describe('n-steps', () => {
     )
     await wrapper.setProps({ vertical: true })
     expect(wrapper.find('.n-steps').classes()).toContain('n-steps--vertical')
+  })
+
+  it('should work with `content-placement` prop', async () => {
+    const wrapper = mount(NSteps, {
+      props: {
+        current: 1
+      },
+      slots: {
+        default: () =>
+          h(NStep, { title: 'test1', description: 'test1', internalIndex: 1 })
+      }
+    })
+    expect(wrapper.find('.n-steps').classes()).not.toContain(
+      'n-steps--content-bottom'
+    )
+    await wrapper.setProps({ contentPlacement: 'bottom' })
+    expect(wrapper.find('.n-steps').classes()).toContain(
+      'n-steps--content-bottom'
+    )
   })
 
   it('should work with `finish-icon` and `error-icon` slots', async () => {

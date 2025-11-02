@@ -4,6 +4,26 @@
 Progress can be a circle. It can be `default`, `info`, `success`, `warning` or `error` status.
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const percentage = ref(0)
+
+function add() {
+  percentage.value += 10
+  if (percentage.value > 100) {
+    percentage.value = 0
+  }
+}
+
+function minus() {
+  percentage.value -= 10
+  if (percentage.value < 0) {
+    percentage.value = 100
+  }
+}
+</script>
+
 <template>
   <n-space vertical>
     <n-space>
@@ -23,33 +43,3 @@ Progress can be a circle. It can be `default`, `info`, `success`, `warning` or `
     </n-space>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const percentageRef = ref(0)
-
-    const add = () => {
-      percentageRef.value += 10
-      if (percentageRef.value > 100) {
-        percentageRef.value = 0
-      }
-    }
-
-    const minus = () => {
-      percentageRef.value -= 10
-      if (percentageRef.value < 0) {
-        percentageRef.value = 100
-      }
-    }
-
-    return {
-      percentage: percentageRef,
-      add,
-      minus
-    }
-  }
-})
-</script>

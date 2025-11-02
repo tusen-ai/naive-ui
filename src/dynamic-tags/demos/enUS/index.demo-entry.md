@@ -25,11 +25,13 @@ on-create.vue
 | default-value | `string[]` | `[]` | Default value. |  |
 | disabled | `boolean` | `false` | Whether the tag is disabled. |  |
 | input-props | `InputProps` | `undefined` | Props of internal `n-input`. | 2.25.0 |
+| input-class | `string` | `undefined` | Customize the class of the input. | 2.36.0 |
 | input-style | `string \| Object` | `undefined` | Customize the style of the input. |  |
 | max | `number` | `undefined` | Maximum number of tags. |  |
 | round | `boolean` | `false` | Whether the tag has rounded corners. |  |
 | render-tag | `((tag: string, index: number) => VNodeChild) \| ((tag: { label: string, value: string }, index: number) => VNodeChild)` | `undefined` | custom render tag. | 2.27.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the tag. |  |
+| tag-class | `string` | `undefined` | Customize the class of the tag. | 2.36.0 |
 | tag-style | `string \| Object` | `undefined` | Customize the style of the tag. |  |
 | type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | Type of the tag. |  |
 | value | `string[]` | `undefined` | Value if manually set. |  |

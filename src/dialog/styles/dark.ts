@@ -1,6 +1,6 @@
-import { buttonDark } from '../../button/styles'
-import { commonDark } from '../../_styles/common'
 import type { DialogTheme } from './light'
+import { commonDark } from '../../_styles/common'
+import { buttonDark } from '../../button/styles'
 import { self } from './light'
 
 const dialogDark: DialogTheme = {

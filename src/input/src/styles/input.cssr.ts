@@ -1,4 +1,4 @@
-import { cB, c, cE, cM, cNotM } from '../../../_utils/cssr'
+import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
@@ -48,6 +48,7 @@ export default cB('input', `
   background-color: var(--n-color);
   transition: background-color .3s var(--n-bezier);
   font-size: var(--n-font-size);
+  font-weight: var(--n-font-weight);
   --n-padding-vertical: calc((var(--n-height) - 1.5 * var(--n-font-size)) / 2);
 `, [
   // common
@@ -148,6 +149,7 @@ export default cB('input', `
     height: var(--n-height);
     line-height: var(--n-height);
   `, [
+    c('&[type=password]::-ms-reveal', 'display: none;'),
     c('+', [
       cE('placeholder', `
         display: flex;
@@ -159,6 +161,9 @@ export default cB('input', `
     cE('placeholder', 'white-space: nowrap;')
   ]),
   cE('eye', `
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: color .3s var(--n-bezier);
   `),
   // textarea
@@ -188,6 +193,7 @@ export default cB('input', `
       margin: 0;
       resize: none;
       white-space: pre-wrap;
+      scroll-padding-block-end: var(--n-padding-vertical);
     `),
     cE('textarea-mirror', `
       width: 100%;
@@ -250,9 +256,6 @@ export default cB('input', `
   ]),
   cNotM('disabled', [
     cE('eye', `
-      display: flex;
-      align-items: center;
-      justify-content: center;
       color: var(--n-icon-color);
       cursor: pointer;
     `, [

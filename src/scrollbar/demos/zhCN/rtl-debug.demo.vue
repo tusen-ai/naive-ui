@@ -2,6 +2,14 @@
 # Rtl Debug
 </markdown>
 
+<script lang="ts" setup>
+import { unstableScrollbarRtl } from 'naive-ui'
+import { ref } from 'vue'
+
+const rtlEnabled = ref(true)
+const rtlStyles = [unstableScrollbarRtl]
+</script>
+
 <template>
   <n-config-provider :rtl="rtlEnabled ? rtlStyles : undefined">
     <div :dir="rtlEnabled ? 'rtl' : 'ltr'">
@@ -37,17 +45,3 @@
     </div>
   </n-config-provider>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { unstableScrollbarRtl } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    return {
-      rtlEnabled: ref(true),
-      rtlStyles: [unstableScrollbarRtl]
-    }
-  }
-})
-</script>

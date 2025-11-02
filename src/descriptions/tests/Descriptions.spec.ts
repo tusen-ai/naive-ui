@@ -1,8 +1,9 @@
-import { h, VNode } from 'vue'
+import type { VNode } from 'vue'
 import { mount } from '@vue/test-utils'
+import { h } from 'vue'
 import { NDescriptions, NDescriptionsItem } from '../index'
 
-function getDescriptionsItemList (): VNode[] {
+function getDescriptionsItemList(): VNode[] {
   return (['早餐', '午餐', '晚餐', '夜宵'] as const).map((item) => {
     return h(NDescriptionsItem, { label: item }, { default: () => item })
   })
@@ -61,12 +62,12 @@ describe('n-descriptions', () => {
     })
     expect(
       wrapper.find('.n-descriptions-table-row').element.childNodes.length
-    ).toBe(3)
+    ).toBe(6) // 3 * 2
 
     await wrapper.setProps({ column: 4 })
     expect(
       wrapper.find('.n-descriptions-table-row').element.childNodes.length
-    ).toBe(4)
+    ).toBe(8) // 4 * 2
     wrapper.unmount()
   })
 
@@ -78,12 +79,12 @@ describe('n-descriptions', () => {
       'n-descriptions--left-label-align'
     )
 
-    await wrapper.setProps({ 'label-align': 'center' })
+    await wrapper.setProps({ labelAlign: 'center' })
     expect(wrapper.find('.n-descriptions').classes()).toContain(
       'n-descriptions--center-label-align'
     )
 
-    await wrapper.setProps({ 'label-align': 'right' })
+    await wrapper.setProps({ labelAlign: 'right' })
     expect(wrapper.find('.n-descriptions').classes()).toContain(
       'n-descriptions--right-label-align'
     )
@@ -98,7 +99,7 @@ describe('n-descriptions', () => {
       'n-descriptions--top-label-placement'
     )
 
-    await wrapper.setProps({ 'label-placement': 'left' })
+    await wrapper.setProps({ labelPlacement: 'left' })
     expect(wrapper.find('.n-descriptions').classes()).toContain(
       'n-descriptions--left-label-placement'
     )

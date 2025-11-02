@@ -31,6 +31,7 @@ const esAR: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'YYYY-w',
     clear: 'Borrar',
     now: 'Ahora',
     confirm: 'Confirmar',
@@ -41,6 +42,7 @@ const esAR: NLocale = {
     monthPlaceholder: 'Seleccionar mes',
     yearPlaceholder: 'Seleccionar año',
     quarterPlaceholder: 'Seleccionar Trimestre',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Fecha de inicio',
     endDatePlaceholder: 'Fecha final',
     startDatetimePlaceholder: 'Fecha y hora de inicio',
@@ -81,7 +83,8 @@ const esAR: NLocale = {
     placeholder: 'Seleccionar hora',
     positiveText: 'OK',
     negativeText: 'Cancelar',
-    now: 'Ahora'
+    now: 'Ahora',
+    clear: 'Borrar'
   },
   Pagination: {
     goto: 'Ir a',
@@ -119,9 +122,16 @@ const esAR: NLocale = {
     tipClockwise: 'Sentido horario',
     tipZoomOut: 'Alejar',
     tipZoomIn: 'Acercar',
+    tipDownload: 'Descargar',
     tipClose: 'Cerrar (Esc)',
     // TODO: translation
     tipOriginalSize: 'Zoom to original size'
+  },
+  Heatmap: {
+    less: 'menos',
+    more: 'más',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

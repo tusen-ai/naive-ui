@@ -4,26 +4,18 @@
 你可以设定菜单的 `indent` & `root-indent`。`root-indent` 只决定第一层项目的缩进。
 </markdown>
 
-<template>
-  <n-menu
-    v-model:value="activeKey"
-    :root-indent="36"
-    :indent="12"
-    :options="menuOptions"
-  />
-</template>
-
-<script lang="ts">
-import { defineComponent, h, ref, Component } from 'vue'
-import { NIcon } from 'naive-ui'
+<script lang="ts" setup>
 import type { MenuOption } from 'naive-ui'
+import type { Component } from 'vue'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
+import { NIcon } from 'naive-ui'
+import { h, ref } from 'vue'
 
-function renderIcon (icon: Component) {
+function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -102,12 +94,14 @@ const menuOptions: MenuOption[] = [
   }
 ]
 
-export default defineComponent({
-  setup () {
-    return {
-      activeKey: ref<string | null>(null),
-      menuOptions
-    }
-  }
-})
+const activeKey = ref<string | null>(null)
 </script>
+
+<template>
+  <n-menu
+    v-model:value="activeKey"
+    :root-indent="36"
+    :indent="12"
+    :options="menuOptions"
+  />
+</template>

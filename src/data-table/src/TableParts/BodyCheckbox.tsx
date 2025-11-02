@@ -1,6 +1,8 @@
-import { defineComponent, h, PropType, inject } from 'vue'
+import type { PropType } from 'vue'
+import type { RowKey } from '../interface'
+import { defineComponent, h, inject } from 'vue'
 import { NCheckbox } from '../../../checkbox'
-import { dataTableInjectionKey, RowKey } from '../interface'
+import { dataTableInjectionKey } from '../interface'
 
 // Extract the checkbox to avoid useless rendering in table body
 export default defineComponent({
@@ -16,17 +18,15 @@ export default defineComponent({
     },
     onUpdateChecked: {
       type: Function as PropType<
-      (checked: boolean, e: MouseEvent | KeyboardEvent) => void
+        (checked: boolean, e: MouseEvent | KeyboardEvent) => void
       >,
       required: true
     }
   },
-  setup (props) {
-    const {
-      mergedCheckedRowKeySetRef,
-      mergedInderminateRowKeySetRef
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    } = inject(dataTableInjectionKey)!
+  setup(props) {
+    const { mergedCheckedRowKeySetRef, mergedInderminateRowKeySetRef } = inject(
+      dataTableInjectionKey
+    )!
     return () => {
       const { rowKey } = props
       return (

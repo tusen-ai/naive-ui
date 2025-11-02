@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils'
-import { defineComponent, h } from 'vue'
 import { sleep } from 'seemly'
+import { defineComponent, h } from 'vue'
 import { NLoadingBarProvider, useLoadingBar } from '../index'
 
 const Provider = defineComponent({
-  render () {
+  render() {
     return <NLoadingBarProvider>{this.$slots}</NLoadingBarProvider>
   }
 })
@@ -16,11 +16,11 @@ describe('n-loading-bar', () => {
 
   it('should have start type', async () => {
     const Test = defineComponent({
-      setup () {
+      setup() {
         const loadingBar = useLoadingBar()
         loadingBar.start()
       },
-      render () {
+      render() {
         return null
       }
     })
@@ -34,14 +34,14 @@ describe('n-loading-bar', () => {
 
   it('should have finish type', async () => {
     const Test = defineComponent({
-      setup () {
+      setup() {
         const loadingBar = useLoadingBar()
         loadingBar.start()
-        setTimeout(() => {
+        vi.waitFor(() => {
           loadingBar.finish()
-        }, 0)
+        })
       },
-      render () {
+      render() {
         return null
       }
     })
@@ -57,30 +57,30 @@ describe('n-loading-bar', () => {
 
   it('should have error type', () => {
     const Test = defineComponent({
-      setup () {
+      setup() {
         const loadingBar = useLoadingBar()
         loadingBar.error()
       },
-      render () {
+      render() {
         return null
       }
     })
     const wrapper = mount(() => (
       <Provider>{{ default: () => <Test /> }}</Provider>
     ))
-    setTimeout(() => {
+    vi.waitFor(() => {
       expect(document.querySelector('.n-loading-bar--error')).not.toEqual(null)
       wrapper.unmount()
-    }, 0)
+    })
   })
 
   it('should have loadingBarStyle prop', async () => {
     const Test = defineComponent({
-      setup () {
+      setup() {
         const loadingBar = useLoadingBar()
         loadingBar.error()
       },
-      render () {
+      render() {
         return null
       }
     })
@@ -97,10 +97,11 @@ describe('n-loading-bar', () => {
         default: () => <Test />
       }
     })
-    await sleep(0)
-    expect(
-      document.querySelector('.n-loading-bar--error')?.getAttribute('style')
-    ).toContain('height: 5px;')
+    vi.waitFor(() => {
+      expect(
+        document.querySelector('.n-loading-bar--error')?.getAttribute('style')
+      ).toContain('height: 5px;')
+    })
     wrapper.unmount()
   })
 })

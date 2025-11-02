@@ -4,6 +4,46 @@
 You can define custom messages that are used instead of the standard ones.
 </markdown>
 
+<script lang="ts" setup>
+import type { FormInst } from 'naive-ui'
+import { useMessage } from 'naive-ui'
+import { ref } from 'vue'
+
+const formRef = ref<FormInst | null>(null)
+const message = useMessage()
+const formValue = ref({
+  user: {
+    name: ''
+  }
+})
+
+const messages = {
+  required: '%s is really really required'
+}
+
+const rules = {
+  user: {
+    name: {
+      required: true,
+      trigger: 'blur'
+    }
+  }
+}
+
+function handleValidateClick(e: MouseEvent) {
+  e.preventDefault()
+  formRef.value?.validate((errors) => {
+    if (!errors) {
+      message.success('Valid')
+    }
+    else {
+      console.log(errors)
+      message.error('Invalid')
+    }
+  })
+}
+</script>
+
 <template>
   <n-form
     ref="formRef"
@@ -24,45 +64,3 @@ You can define custom messages that are used instead of the standard ones.
   <pre>{{ JSON.stringify(formValue, null, 2) }}
 </pre>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { FormInst, useMessage } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const formRef = ref<FormInst | null>(null)
-    const message = useMessage()
-    return {
-      formRef,
-      formValue: ref({
-        user: {
-          name: ''
-        }
-      }),
-      messages: {
-        required: '%s is really really required'
-      },
-      rules: {
-        user: {
-          name: {
-            required: true,
-            trigger: 'blur'
-          }
-        }
-      },
-      handleValidateClick (e: MouseEvent) {
-        e.preventDefault()
-        formRef.value?.validate((errors) => {
-          if (!errors) {
-            message.success('Valid')
-          } else {
-            console.log(errors)
-            message.error('Invalid')
-          }
-        })
-      }
-    }
-  }
-})
-</script>

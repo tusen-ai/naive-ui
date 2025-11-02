@@ -1,40 +1,33 @@
-/* eslint-disable @typescript-eslint/no-dynamic-delete */
+import type { CSSProperties, ExtractPropTypes, PropType, Ref } from 'vue'
+import type { MergedTheme, ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, Mutable } from '../../_utils'
+import type { NotificationTheme } from '../styles'
+import type { NotificationOptions } from './NotificationEnvironment'
+import { createId } from 'seemly'
 import {
+  defineComponent,
   Fragment,
   h,
+  provide,
   reactive,
   ref,
-  Teleport,
-  defineComponent,
-  PropType,
-  ExtractPropTypes,
-  provide,
-  Ref,
-  CSSProperties
+  Teleport
 } from 'vue'
-import { createId } from 'seemly'
 import { useConfig, useTheme } from '../../_mixins'
-import type { MergedTheme, ThemeProps } from '../../_mixins'
-import {
-  ExtractPublicPropTypes,
-  omit,
-  Mutable,
-  createInjectionKey
-} from '../../_utils'
-import { notificationLight, NotificationTheme } from '../styles'
+import { createInjectionKey, omit } from '../../_utils'
+import { notificationLight } from '../styles'
+import { notificationProviderInjectionKey } from './context'
 import { NotificationContainer } from './NotificationContainer'
 import { NotificationEnvironment } from './NotificationEnvironment'
-import type { NotificationOptions } from './NotificationEnvironment'
-import { notificationProviderInjectionKey } from './context'
 import style from './styles/index.cssr'
 
-export type NotificationPlacement =
-  | 'top-left'
-  | 'top-right'
-  | 'bottom-left'
-  | 'bottom-right'
-  | 'top'
-  | 'bottom'
+export type NotificationPlacement
+  = | 'top-left'
+    | 'top-right'
+    | 'bottom-left'
+    | 'bottom-right'
+    | 'top'
+    | 'bottom'
 
 export interface NotificationProviderInjection {
   props: ExtractPropTypes<typeof notificationProviderProps>
@@ -61,8 +54,8 @@ export interface NotificationApiInjection {
 
 export type NotificationProviderInst = NotificationApiInjection
 
-export const notificationApiInjectionKey =
-  createInjectionKey<NotificationApiInjection>('n-notification-api')
+export const notificationApiInjectionKey
+  = createInjectionKey<NotificationApiInjection>('n-notification-api')
 
 export type NotificationType = 'info' | 'success' | 'warning' | 'error'
 
@@ -81,6 +74,7 @@ interface NotificationRef {
 
 export const notificationProviderProps = {
   ...(useTheme.props as ThemeProps<NotificationTheme>),
+  containerClass: String,
   containerStyle: [String, Object] as PropType<string | CSSProperties>,
   to: [String, Object] as PropType<string | HTMLElement>,
   scrollable: {
@@ -102,12 +96,12 @@ export type NotificationProviderProps = ExtractPublicPropTypes<
 export default defineComponent({
   name: 'NotificationProvider',
   props: notificationProviderProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     const notificationListRef = ref<NotificationReactive[]>([])
     const notificationRefs: Record<string, NotificationRef> = {}
     const leavingKeySet = new Set<string>()
-    function create (options: NotificationOptions): NotificationReactive {
+    function create(options: NotificationOptions): NotificationReactive {
       const key = createId()
       const destroy = (): void => {
         leavingKeySet.add(key)
@@ -150,11 +144,11 @@ export default defineComponent({
           create({ ...options, type })
       }
     )
-    function handleAfterLeave (key: string): void {
+    function handleAfterLeave(key: string): void {
       leavingKeySet.delete(key)
       notificationListRef.value.splice(
         notificationListRef.value.findIndex(
-          (notification) => notification.key === key
+          notification => notification.key === key
         ),
         1
       )
@@ -185,10 +179,10 @@ export default defineComponent({
       wipTransitionCountRef
     })
     // deprecated
-    function open (options: NotificationOptions): NotificationReactive {
+    function open(options: NotificationOptions): NotificationReactive {
       return create(options)
     }
-    function destroyAll (): void {
+    function destroyAll(): void {
       Object.values(notificationListRef.value).forEach((notification) => {
         notification.hide()
       })
@@ -203,7 +197,7 @@ export default defineComponent({
       api
     )
   },
-  render () {
+  render() {
     const { placement } = this
     return (
       <>
@@ -211,6 +205,7 @@ export default defineComponent({
         {this.notificationList.length ? (
           <Teleport to={this.to ?? 'body'}>
             <NotificationContainer
+              class={this.containerClass}
               style={this.containerStyle}
               scrollable={
                 this.scrollable && placement !== 'top' && placement !== 'bottom'
@@ -227,7 +222,10 @@ export default defineComponent({
                             const refKey = notification.key
                             if (inst === null) {
                               delete this.notificationRefs[refKey]
-                            } else this.notificationRefs[refKey] = inst
+                            }
+                            else {
+                              this.notificationRefs[refKey] = inst
+                            }
                           }) as any
                         }
                         {...omit(notification, [

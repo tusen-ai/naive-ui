@@ -15,9 +15,11 @@ check-strategy-debug.vue
 action.vue
 async.vue
 status.vue
+file-picker.vue
 debug.vue
 field-search-debug.vue
 render-debug.vue
+rtl-debug.vue
 ```
 
 ## API
@@ -38,10 +40,13 @@ render-debug.vue
 | default-expand-all | `boolean` | `false` | 默认展开全部 |  |
 | default-expanded-keys | `Array<string \| number>` | `[]` | 默认展开节点的 key |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
+| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | 选中选项过多省略显示时，预览弹出 `popover` 的属性 | 2.37.0 |
 | expanded-keys | `Array<string \| number>` | `undefined` | 展开节点的 key |  |
+| indent | `number` | `24` | 树的每一级缩进的大小 | 2.41.1 |
 | indeterminate-keys | `string \| number` | `undefined` | 部分选中选项的 key |  |
 | filterable | `boolean` | `false` | 是否可过滤 |  |
 | filter | `(pattern: string, option: TreeSelectOption) => boolean` | - | 过滤器函数 |  |
+| get-children | `(option: any) => unknown` | `undefined` | 获取当前选项的子选项 | 2.38.1 |
 | key-field | `string` | `'key'` | 替代 `TreeSelectOption` 中的 key 字段名 |  |
 | label-field | `string` | `'label'` | 替代 `TreeSelectOption` 中的 label 字段名 |  |
 | disabled-field | `string` | `'disabled'` | 替代 `TreeSelectOption` 中的 disabled 字段名 | 2.32.2 |
@@ -51,6 +56,7 @@ render-debug.vue
 | multiple | `boolean` | `false` | 是否支持多选 |  |
 | node-props | `(info: { option: TreeSelectOption }) => HTMLAttributes` | `undefined` | 节点的 HTML 属性 | 2.30.7 |
 | options | `TreeSelectOption[]` | `[]` | 选项 |  |
+| override-default-node-click-behavior | `(info: { option: TreeSelectOption }) => 'toggleExpand' \| 'toggleSelect' \| 'toggleCheck' \| 'default' \| 'none'` | `undefined` | 覆盖默认的节点点击行为 | 2.37.0 |
 | placeholder | `string` | `'请选择'` | 占位信息 |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 选择器的弹出位置. | 2.25.0 |
 | render-label | `(info: { option: TreeSelectOption, checked: boolean, selected: boolean }) => VNodeChild` | `undefined` | 节点内容的渲染函数 | 2.30.7 |
@@ -65,6 +71,7 @@ render-debug.vue
 | to | `string \| HTMLElement \| false` | `body` | 菜单的容器节点，`false` 会待在原地 |  |
 | value | `string \| number \| Array<string \| number> \| null>` | `undefined` | 选中的 key |  |
 | virtual-scroll | `boolean` | `true` | 是否开启虚拟滚动 |  |
+| watch-props | `Array<'defaultCheckedKeys' \| 'defaultSelectedKeys' \|'defaultExpandedKeys'>` | `undefined` | 需要检测变更的默认属性，检测后组件状态会更新。注意：`watch-props` 本身不是响应式的 | 2.36.0 |
 | on-blur | `(e: FocusEvent) => void` | `undefined` | Blur 时的回调 |  |
 | on-focus | `(e: FocusEvent) => void` | `undefined` | Focus 时的回调 |  |
 | on-load | `(node: TreeSelectOption) => Promise<void>` | `undefined` | 异步加载数据的回调函数 | 2.27.0 |
@@ -86,6 +93,7 @@ render-debug.vue
 
 | 名称   | 参数 | 说明                | 版本   |
 | ------ | ---- | ------------------- | ------ |
+| header | `()` | 菜单头部区域的 slot | 2.40.0 |
 | action | `()` | 菜单操作区域的 slot | 2.22.0 |
 | arrow  | `()` | 选择箭头 slot       | 2.30.4 |
 | empty  | `()` | 菜单无数据时的 slot | 2.22.0 |
@@ -95,6 +103,8 @@ render-debug.vue
 | 名称 | 类型 | 说明 | 版本 |
 | --- | --- | --- | --- |
 | blur | `() => void` | 失焦 | 2.34.0 |
+| blurInput | `() => void` | 输入失焦 | 2.35.0 |
 | focus | `() => void` | 聚焦 | 2.34.0 |
+| focusInput | `() => void` | 输入聚焦 | 2.35.0 |
 | getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取选中的数据 | 2.34.0 |
 | getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取半选的数据 | 2.34.0 |

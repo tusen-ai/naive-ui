@@ -1,3 +1,4 @@
+import type { DropdownMixedOption } from './interface'
 import { defineComponent, h, inject } from 'vue'
 import { render } from '../../_utils'
 import { dropdownInjectionKey, dropdownMenuInjectionKey } from './context'
@@ -14,16 +15,11 @@ export default defineComponent({
       required: true
     }
   },
-  setup () {
-    const {
-      showIconRef,
-      hasSubmenuRef
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    } = inject(dropdownMenuInjectionKey)!
+  setup() {
+    const { showIconRef, hasSubmenuRef } = inject(dropdownMenuInjectionKey)!
 
-    const { renderLabelRef, labelFieldRef, nodePropsRef, renderOptionRef } =
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      inject(dropdownInjectionKey)!
+    const { renderLabelRef, labelFieldRef, nodePropsRef, renderOptionRef }
+      = inject(dropdownInjectionKey)!
 
     return {
       labelField: labelFieldRef,
@@ -34,7 +30,7 @@ export default defineComponent({
       renderOption: renderOptionRef
     }
   },
-  render () {
+  render() {
     const {
       clsPrefix,
       hasSubmenu,
@@ -45,7 +41,10 @@ export default defineComponent({
     } = this
     const { rawNode } = this.tmNode
     const node = (
-      <div class={`${clsPrefix}-dropdown-option`} {...nodeProps?.(rawNode)}>
+      <div
+        class={`${clsPrefix}-dropdown-option`}
+        {...nodeProps?.(rawNode as DropdownMixedOption)}
+      >
         <div
           class={`${clsPrefix}-dropdown-option-body ${clsPrefix}-dropdown-option-body--group`}
         >
@@ -63,14 +62,14 @@ export default defineComponent({
             data-dropdown-option
           >
             {renderLabel
-              ? renderLabel(rawNode)
+              ? renderLabel(rawNode as DropdownMixedOption)
               : render(rawNode.title ?? rawNode[this.labelField])}
           </div>
           <div
             class={[
               `${clsPrefix}-dropdown-option-body__suffix`,
-              hasSubmenu &&
-                `${clsPrefix}-dropdown-option-body__suffix--has-submenu`
+              hasSubmenu
+              && `${clsPrefix}-dropdown-option-body__suffix--has-submenu`
             ]}
             data-dropdown-option
           />
