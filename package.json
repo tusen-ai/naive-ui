@@ -149,6 +149,9 @@
     "vue-tsc": "^3.0.7"
   },
   "pnpm": {
+    "overrides": {
+      "parse5": "7.3.0"
+    },
     "peerDependencyRules": {
       "ignoreMissing": [
         "@babel/core",

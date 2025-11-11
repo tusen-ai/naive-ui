@@ -63,6 +63,7 @@
 - 新增 `n-image-preview` 组件
 - `n-image-group` 可以脱离 `n-image` 使用
 - `n-input-otp` 增加 `focusOnChar` 方法，关闭 [#7073](https://github.com/tusen-ai/naive-ui/issues/7073)
+- `n-data-table` 增加 `summary-sticky` ,使summary可以固定在table顶部或底部
 - `n-form-item` 新增 `content-class`、`content-style` 属性
 - `n-message` 增加 `border` 主题变量，关闭 [#7105](https://github.com/tusen-ai/naive-ui/issues/7105)
 - `n-modal` 增加 `mask-visible` 属性
@@ -807,7 +808,7 @@
 
 ### Fixes
 
-- 修复 `n-select` 菜单在 SSR 情况下缺少勾选图标，关闭 <https://github.com/07akioni/naive-ui-nuxt-demo/issues/4>
+- 修复 `n-select` 菜单在 SSR 情况下缺少勾选图标，关闭 [https://github.com/07akioni/naive-ui-nuxt-demo/issues/4](https://github.com/07akioni/naive-ui-nuxt-demo/issues/4)
 - 修复 `n-card` 的 `embedded` 属性在 `n-dialog` 中不生效，关闭 [#3592](https://github.com/tusen-ai/naive-ui/issues/3592)
 - 修复 `n-radio` 当 `value` 属性为布尔值时报警告，关闭 [#3540](https://github.com/tusen-ai/naive-ui/issues/3540)
 - 修复 `n-pagination` 被禁用时，快速跳转菜单还会触发并可进行分页跳转
@@ -3777,7 +3778,7 @@
 ### Fixes
 
 - 修正了 `n-radio` 无法聚焦的问题
-- 修正了 `n-data-table` 的 `max-height` 样式失效的问题 <https://bugs.chromium.org/p/chromium/issues/detail?id=1107223>
+- 修正了 `n-data-table` 的 `max-height` 样式失效的问题 [https://bugs.chromium.org/p/chromium/issues/detail?id=1107223](https://bugs.chromium.org/p/chromium/issues/detail?id=1107223)
 
 ### Refactors
 

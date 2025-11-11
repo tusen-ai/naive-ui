@@ -75,6 +75,10 @@ export interface ScrollbarInstMethods {
   sync: () => void
   handleMouseEnterWrapper: () => void
   handleMouseLeaveWrapper: () => void
+  getNeedBars: () => {
+    x: boolean
+    y: boolean
+  }
 }
 
 export interface ScrollbarInst extends ScrollbarInstMethods {
@@ -308,7 +312,12 @@ const Scrollbar = defineComponent({
         return content()
       return contentRef.value
     })
-
+    const getNeedBars = () => {
+      return {
+        x: needXBarRef.value,
+        y: needYBarRef.value
+      }
+    }
     const scrollTo: ScrollTo = (
       options: MergedScrollOptions | number,
       y?: number
@@ -775,7 +784,8 @@ const Scrollbar = defineComponent({
       sync,
       syncUnifiedContainer,
       handleMouseEnterWrapper,
-      handleMouseLeaveWrapper
+      handleMouseLeaveWrapper,
+      getNeedBars
     }
     return {
       ...exposedMethods,
