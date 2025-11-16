@@ -2,13 +2,7 @@ import type { PropType, VNode } from 'vue'
 import type { TmNode } from './interface'
 import { happensIn } from 'seemly'
 import { useMemo } from 'vooks'
-import {
-  computed,
-  defineComponent,
-  h,
-  inject,
-  Transition
-} from 'vue'
+import { computed, defineComponent, h, inject, Transition } from 'vue'
 import { NBaseIcon, NBaseLoading } from '../../_internal'
 import { CheckmarkIcon, ChevronRightIcon } from '../../_internal/icons'
 import { NCheckbox } from '../../checkbox'

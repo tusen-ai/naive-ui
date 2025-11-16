@@ -15,12 +15,7 @@ import type {
   ShouldRuleBeApplied,
   Size
 } from './interface'
-import {
-  defineComponent,
-  h,
-  provide,
-  ref
-} from 'vue'
+import { defineComponent, h, provide, ref } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { keysOf } from '../../_utils'
 import { formLight } from '../styles'

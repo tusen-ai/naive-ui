@@ -1,11 +1,6 @@
 import type { CSSProperties, PropType, VNodeChild } from 'vue'
 import { getPadding } from 'seemly'
-import {
-  computed,
-  defineComponent,
-  h,
-  inject
-} from 'vue'
+import { computed, defineComponent, h, inject } from 'vue'
 import { NBaseClose, NBaseIcon } from '../../_internal'
 import {
   ErrorIcon,

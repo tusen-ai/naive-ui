@@ -4,14 +4,7 @@ import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { RateTheme } from '../styles'
 import type { RateOnUpdateValue, RateOnUpdateValueImpl } from './interface'
 import { useMergedState } from 'vooks'
-import {
-  computed,
-  defineComponent,
-  h,
-  ref,
-  renderList,
-  toRef
-} from 'vue'
+import { computed, defineComponent, h, ref, renderList, toRef } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import { call, color2Class, createKey } from '../../_utils'

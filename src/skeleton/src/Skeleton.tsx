@@ -3,13 +3,7 @@ import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { SkeletonTheme } from '../styles'
 import { pxfy, repeat } from 'seemly'
-import {
-  computed,
-  defineComponent,
-  Fragment,
-  h,
-  mergeProps
-} from 'vue'
+import { computed, defineComponent, Fragment, h, mergeProps } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { createKey, useHoudini } from '../../_utils'
 import { skeletonLight } from '../styles'

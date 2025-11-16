@@ -2,10 +2,18 @@ import dns from 'node:dns'
 import path from 'node:path'
 import process from 'node:process'
 import { babel } from '@rollup/plugin-babel'
-import { defineConfig } from 'vite'
+import { configDefaults, defineConfig } from 'vitest/config'
 import { createDemoPlugin } from './build/vite-plugin-demo'
 
 dns.setDefaultResultOrder('verbatim')
+
+const isBuildTimeTest = process.argv.some(arg =>
+  /(?:^|[\\/])(umd-test|esm-test)/.test(arg)
+)
+
+const testExclude = isBuildTimeTest
+  ? configDefaults.exclude
+  : [...configDefaults.exclude, 'umd-test/**/*', 'esm-test/**/*']
 
 export default defineConfig({
   root: __dirname,
@@ -83,5 +91,22 @@ export default defineConfig({
     jsx: 'transform',
     jsxFactory: 'h',
     jsxFragment: 'Fragment'
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['src/vitest-setup.ts'],
+    exclude: testExclude,
+    coverage: {
+      provider: 'v8',
+      reportsDirectory: path.resolve(__dirname, 'coverage'),
+      reporter: ['text', 'lcov', 'json', 'json-summary', 'html'],
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: [
+        '**/*.d.ts',
+        'src/**/__tests__/**/*.[jt][sx]',
+        'src/**/tests/**/*.[jt][sx]'
+      ]
+    }
   }
 })

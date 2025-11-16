@@ -5,14 +5,7 @@ import type { ImageInst } from '../../image'
 import type { ListType } from './interface'
 import type { UploadSettledFileInfo } from './public-types'
 import { useMemo } from 'vooks'
-import {
-  computed,
-  defineComponent,
-  h,
-  inject,
-  ref,
-  watchEffect
-} from 'vue'
+import { computed, defineComponent, h, inject, ref, watchEffect } from 'vue'
 import { NBaseIcon, NIconSwitchTransition } from '../../_internal'
 import {
   AttachIcon,

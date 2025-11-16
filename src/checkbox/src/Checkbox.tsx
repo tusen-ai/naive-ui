@@ -22,12 +22,7 @@ import {
 import { NIconSwitchTransition } from '../../_internal'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
-import {
-  call,
-  createKey,
-  resolveWrappedSlot,
-  warnOnce
-} from '../../_utils'
+import { call, createKey, resolveWrappedSlot, warnOnce } from '../../_utils'
 import { checkboxLight } from '../styles'
 import { checkboxGroupInjectionKey } from './CheckboxGroup'
 import renderCheckMark from './CheckMark'

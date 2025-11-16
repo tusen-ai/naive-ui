@@ -4,14 +4,7 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import type { SpinTheme } from '../styles'
 import { pxfy } from 'seemly'
 import { useCompitable } from 'vooks'
-import {
-  computed,
-  defineComponent,
-  h,
-  ref,
-  Transition,
-  watchEffect
-} from 'vue'
+import { computed, defineComponent, h, ref, Transition, watchEffect } from 'vue'
 import { NBaseLoading } from '../../_internal'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { createKey, warnOnce } from '../../_utils'

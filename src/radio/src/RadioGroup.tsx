@@ -5,14 +5,7 @@ import type { RadioTheme } from '../styles'
 import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
 import type { RadioBaseProps } from './use-radio'
 import { useMergedState } from 'vooks'
-import {
-  computed,
-  defineComponent,
-  h,
-  provide,
-  ref,
-  toRef
-} from 'vue'
+import { computed, defineComponent, h, provide, ref, toRef } from 'vue'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
 import { call, createKey, flatten, getSlot, warn } from '../../_utils'

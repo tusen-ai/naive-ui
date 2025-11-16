@@ -2,12 +2,7 @@ import type { ComputedRef, ExtractPropTypes, PropType, Ref } from 'vue'
 import type { MaybeArray } from '../../_utils'
 import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
 import { useMemo, useMergedState } from 'vooks'
-import {
-  inject,
-  ref,
-  toRef,
-  watchEffect
-} from 'vue'
+import { inject, ref, toRef, watchEffect } from 'vue'
 import { useConfig, useFormItem } from '../../_mixins'
 import { call, createInjectionKey, warnOnce } from '../../_utils'
 
