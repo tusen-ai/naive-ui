@@ -977,6 +977,7 @@ export default defineComponent({
       defaultTime: this.defaultTime,
       themeClass: this.themeClass,
       panel: this.panel,
+      singlePanel: this.singlePanel,
       inputReadonly: this.inputReadonly || this.mergedDisabled,
       onRender: this.onRender,
       onNextMonth: this.onNextMonth,

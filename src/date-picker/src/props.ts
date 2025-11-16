@@ -76,6 +76,7 @@ export const datePickerProps = {
     default: undefined
   },
   panel: Boolean,
+  singlePanel: Boolean,
   ranges: Object as PropType<Record<string, [number, number]>>,
   firstDayOfWeek: Number as PropType<FirstDayOfWeek>,
   inputReadonly: Boolean,

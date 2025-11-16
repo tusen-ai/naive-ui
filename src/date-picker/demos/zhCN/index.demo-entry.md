@@ -29,6 +29,7 @@ footerslot.vue
 status.vue
 icon.vue
 panel.vue
+single-panel.vue
 panel-debug.vue
 form-debug.vue
 ```
@@ -113,6 +114,7 @@ form-debug.vue
 | bind-calendar-months | `boolean` | `false` | 面板月份是否连续 | 2.28.3 |
 | default-calendar-start-time | `number` | `undefined` | 面板日历默认开始的月份时间戳 | 2.28.3 |
 | default-calendar-end-time | `number` | `undefined` | 面板日历默认结束的月份时间戳 | 2.28.3 |
+| single-panel | `boolean` | `false` | 是否使用单面板 | NEXT_VERSION |
 | format | `string` | `'yyyy-MM-dd'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |  |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | 日期禁用的校验函数 |  |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: (hour: number) => boolean, isMinuteDisabled?: (minute: number, hour: number \| null) => boolean, isSecondDisabled?: (second: number, minute: number \| null, hour: number \| null) => boolean }` | `undefined` | 时间禁用的校验函数，校验函数中的 `null` 表示当前没有选中值 |  |
