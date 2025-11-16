@@ -44,33 +44,33 @@ export default c([
       background-color .3s var(--n-bezier),
       color .3s var(--n-bezier);
   `, [
-    cE('icon', {
-      color: 'var(--n-icon-color)'
-    }),
-    cM('bordered', {
-      border: 'var(--n-border)'
-    }),
+    cE('icon', `
+      color: var(--n-icon-color);
+    `),
+    cM('bordered', `
+      border: var(--n-border);
+    `),
     cM('icon-top', [
-      cE('close', {
-        margin: 'var(--n-close-margin)'
-      }),
-      cE('icon', {
-        margin: 'var(--n-icon-margin)'
-      }),
-      cE('content', {
-        textAlign: 'center'
-      }),
-      cE('title', {
-        justifyContent: 'center'
-      }),
-      cE('action', {
-        justifyContent: 'center'
-      })
+      cE('close', `
+        margin: var(--n-close-margin);
+      `),
+      cE('icon', `
+        margin: var(--n-icon-margin);
+      `),
+      cE('content', `
+        text-align: center;
+      `),
+      cE('title', `
+        justify-content: center;
+      `),
+      cE('action', `
+        justify-content: center;
+      `)
     ]),
     cM('icon-left', [
-      cE('icon', {
-        margin: 'var(--n-icon-margin)'
-      }),
+      cE('icon', `
+        margin: var(--n-icon-margin);
+      `),
       cM('closable', [
         cE('title', `
           padding-right: calc(var(--n-close-size) + 6px);
