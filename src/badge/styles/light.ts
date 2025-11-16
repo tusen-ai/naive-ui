@@ -10,6 +10,7 @@ function self(vars: ThemeCommonVars) {
     colorSuccess: successColor,
     colorError: errorColor,
     colorWarning: warningColor,
+    textColor: '#FFF',
     fontSize: '12px',
     fontFamily
   }
