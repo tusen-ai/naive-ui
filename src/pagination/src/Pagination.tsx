@@ -41,6 +41,7 @@ import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
 import {
   call,
+  clampValue,
   createKey,
   resolveSlot,
   smallerSize,
@@ -384,7 +385,7 @@ export default defineComponent({
       const page = Number.parseInt(jumperValueRef.value)
       if (Number.isNaN(page))
         return
-      doUpdatePage(Math.max(1, Math.min(page, mergedPageCountRef.value)))
+      doUpdatePage(clampValue(page, 1, mergedPageCountRef.value))
       if (!props.simple) {
         jumperValueRef.value = ''
       }

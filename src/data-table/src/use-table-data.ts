@@ -16,7 +16,7 @@ import type {
 import { createTreeMate } from 'treemate'
 import { useMemo, useMergedState } from 'vooks'
 import { computed, ref } from 'vue'
-import { call, warn } from '../../_utils'
+import { call, clampValue, warn } from '../../_utils'
 import { getDefaultPageSize } from '../../pagination/src/utils'
 import { useSorter } from './use-sorter'
 import { createShallowClonedObject } from './utils'
@@ -241,12 +241,10 @@ export function useTableData(
     const page = _mergedCurrentPageRef.value
     return props.remote
       ? page
-      : Math.max(
+      : clampValue(
+          Math.ceil(filteredDataRef.value.length / mergedPageSizeRef.value),
           1,
-          Math.min(
-            Math.ceil(filteredDataRef.value.length / mergedPageSizeRef.value),
-            page
-          )
+          page
         )
   })
 
