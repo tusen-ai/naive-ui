@@ -8,7 +8,7 @@ import type {
   Value
 } from '../interface'
 import { useKeyboard } from 'vooks'
-import { computed, inject, nextTick, ref } from 'vue'
+import { computed, inject, nextTick, ref, watch } from 'vue'
 import { datePickerInjectionKey } from '../interface'
 
 const TIME_FORMAT = 'HH:mm:ss'
@@ -165,6 +165,17 @@ function usePanelCommon(props: UsePanelCommonProps) {
   function handleOpenQuickSelectMonthPanel(): void {
     showMonthYearPanel.value = !showMonthYearPanel.value
   }
+
+  const isShortcutClickInProgressRef = ref(false)
+  watch(
+    () => props.active,
+    (show) => {
+      if (!show) {
+        isShortcutClickInProgressRef.value = false
+      }
+    }
+  )
+
   return {
     mergedTheme: mergedThemeRef,
     mergedClsPrefix: mergedClsPrefixRef,
@@ -188,7 +199,8 @@ function usePanelCommon(props: UsePanelCommonProps) {
     getShortcutValue,
     handleShortcutMouseleave: restorePendingValue,
     showMonthYearPanel,
-    handleOpenQuickSelectMonthPanel
+    handleOpenQuickSelectMonthPanel,
+    isShortcutClickInProgressRef
   }
 }
 

@@ -506,6 +506,8 @@ function useCalendar(
     panelCommon.doUpdateValue(value, props.panel)
   }
   function handleSingleShortcutMouseenter(shortcut: Shortcuts[string]): void {
+    if (panelCommon.isShortcutClickInProgressRef.value)
+      return
     panelCommon.cachePendingValue()
     const shortcutValue = panelCommon.getShortcutValue(shortcut)
     if (typeof shortcutValue !== 'number')
@@ -513,9 +515,12 @@ function useCalendar(
     panelCommon.doUpdateValue(shortcutValue, false)
   }
   function handleSingleShortcutClick(shortcut: Shortcuts[string]): void {
+    panelCommon.isShortcutClickInProgressRef.value = true
     const shortcutValue = panelCommon.getShortcutValue(shortcut)
-    if (typeof shortcutValue !== 'number')
+    if (typeof shortcutValue !== 'number') {
+      panelCommon.isShortcutClickInProgressRef.value = false
       return
+    }
     panelCommon.doUpdateValue(shortcutValue, props.panel)
     panelCommon.clearPendingValue()
     handleConfirmClick()
