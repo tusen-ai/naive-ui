@@ -13,7 +13,13 @@ export function tsToJs(content: string | null): string {
     loader: 'ts',
     minify: false,
     minifyWhitespace: false,
-    charset: 'utf8'
+    charset: 'utf8',
+    // to keep the icon `import` statement in script setup
+    tsconfigRaw: `{
+      "compilerOptions": {
+        "verbatimModuleSyntax": true
+      }
+    }`
   })
   return code.trim().replace(/__blankline;/g, '')
 }
