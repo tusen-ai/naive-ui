@@ -24,7 +24,7 @@ const fileList = fileListRef
   <n-upload
     abstract
     :default-file-list="fileList"
-    action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
+    action="https://m1.apifoxmock.com/m1/7208154-6934252-default/api/upload"
   >
     <n-button-group>
       <n-button>Useless</n-button>

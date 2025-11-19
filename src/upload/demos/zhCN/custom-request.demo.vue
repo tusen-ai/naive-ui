@@ -52,7 +52,7 @@ function customRequest({
 
 <template>
   <n-upload
-    action="__HTTP__://naive-upload.free.beeceptor.com/"
+    action="https://m1.apifoxmock.com/m1/7208154-6934252-default/api/upload"
     :headers="{
       'naive-info': 'hello!',
     }"
