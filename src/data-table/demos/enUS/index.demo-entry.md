@@ -60,6 +60,7 @@ switchable-editable.vue
 context-menu.vue
 async-expand.vue
 render-cell.vue
+cell-slot.vue
 export-csv.vue
 ```
 
@@ -228,7 +229,8 @@ These methods can help you control table in an uncontrolled manner. However, it'
 
 ### DataTable Slots
 
-| Name    | Type | Description                                       | Version |
-| ------- | ---- | ------------------------------------------------- | ------- |
-| empty   | `()` | Custom description when data of table is empty.   |         |
-| loading | `()` | Custom description when data of table is loading. | 2.34.0  |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| empty | `()` | Custom description when data of table is empty. |  |
+| loading | `()` | Custom description when data of table is loading. | 2.34.0 |
+| cell- | `(data: { row: RowData, column: DataTableBaseColumn}) => VNode[]` | Custom slot for each cell. | NEXT_VERSION |
