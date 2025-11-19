@@ -27,6 +27,7 @@ export default defineComponent({
       valueRef,
       typeRef,
       closableRef,
+      closeTriggerRef,
       tabStyleRef,
       addTabStyleRef,
       tabClassRef,
@@ -47,6 +48,12 @@ export default defineComponent({
         if (closable === undefined)
           return closableRef.value
         return closable
+      }),
+      mergedCloseTrigger: computed(() => {
+        const { closeTrigger } = props
+        if (closeTrigger === undefined)
+          return closeTriggerRef.value
+        return closeTrigger
       }),
       style: tabStyleRef,
       addStyle: addTabStyleRef,
@@ -96,8 +103,10 @@ export default defineComponent({
       disabled,
       label,
       tab,
+      type,
       value,
       mergedClosable,
+      mergedCloseTrigger,
       trigger,
       $slots: { default: defaultSlot }
     } = this
@@ -117,7 +126,13 @@ export default defineComponent({
                 `${clsPrefix}-tabs-tab`,
                 value === name && `${clsPrefix}-tabs-tab--active`,
                 disabled && `${clsPrefix}-tabs-tab--disabled`,
-                mergedClosable && `${clsPrefix}-tabs-tab--closable`,
+                type === 'card'
+                && mergedClosable
+                && `${clsPrefix}-tabs-tab--closable`,
+                type === 'card'
+                && mergedClosable
+                && mergedCloseTrigger === 'hover'
+                && `${clsPrefix}-tabs-tab--hover`,
                 internalAddable && `${clsPrefix}-tabs-tab--addable`,
                 internalAddable ? this.addTabClass : this.tabClass
               ],
