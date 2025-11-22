@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+- Fix missing translations, date formats and `firstDayOfWeek` for plPL locale
+
 ## 2.43.2
 
 ### Fixes
