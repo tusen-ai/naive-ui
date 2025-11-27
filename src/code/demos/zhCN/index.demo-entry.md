@@ -40,6 +40,7 @@ inline.vue
 softwrap.vue
 loop-debug.vue
 line-numbers.vue
+shiki.vue
 ```
 
 ## API

@@ -47,6 +47,7 @@ size.vue
 event.vue
 scroll.vue
 highlight.vue
+shiki.vue
 loading.vue
 auto-bottom.vue
 ```

@@ -1,6 +1,6 @@
 import type { PropType, Ref } from 'vue'
 import type { ScrollbarInst } from '../../_internal'
-import type { Hljs, ThemeProps } from '../../_mixins'
+import type { Hljs, Shiki, ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { LogTheme } from '../styles'
 import { throttle as _throttle } from 'lodash-es'
@@ -15,7 +15,13 @@ import {
   Transition
 } from 'vue'
 import { NScrollbar } from '../../_internal'
-import { useConfig, useHljs, useTheme, useThemeClass } from '../../_mixins'
+import {
+  useConfig,
+  useHljs,
+  useShiki,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
 import { warn } from '../../_utils'
 import { NCode } from '../../code'
 import { logLight } from '../styles'
@@ -32,6 +38,7 @@ export interface LogInjection {
   languageRef: Ref<string | undefined>
   highlightRef: Ref<boolean>
   mergedHljsRef: Ref<Hljs | undefined>
+  mergedShikiRef: Ref<Shiki | undefined>
 }
 
 export interface LogInst {
@@ -73,6 +80,7 @@ export const logProps = {
     default: 0
   },
   hljs: Object,
+  shiki: Object,
   onReachTop: Function as PropType<() => void>,
   onReachBottom: Function as PropType<() => void>,
   onRequireMore: Function as PropType<(from: 'top' | 'bottom') => void>
@@ -218,6 +226,7 @@ export default defineComponent({
     provide(logInjectionKey, {
       languageRef: toRef(props, 'language'),
       mergedHljsRef: useHljs(props, highlightRef),
+      mergedShikiRef: useShiki(props),
       trimRef: toRef(props, 'trim'),
       highlightRef
     })

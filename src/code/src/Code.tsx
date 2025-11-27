@@ -1,9 +1,15 @@
 import type { PropType } from 'vue'
-import type { Hljs, ThemeProps } from '../../_mixins'
+import type { Hljs, Shiki, ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { CodeTheme } from '../styles'
 import { computed, defineComponent, h, onMounted, ref, toRef, watch } from 'vue'
-import { useConfig, useHljs, useTheme, useThemeClass } from '../../_mixins'
+import {
+  useConfig,
+  useHljs,
+  useShiki,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
 import { codeLight } from '../styles'
 import style from './styles/index.cssr'
 
@@ -19,6 +25,7 @@ export const codeProps = {
     default: true
   },
   hljs: Object as PropType<Hljs>,
+  shiki: Object as PropType<Shiki>,
   uri: Boolean,
   inline: Boolean,
   wordWrap: Boolean,
@@ -38,12 +45,19 @@ export default defineComponent({
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig()
     const codeRef = ref<HTMLElement | null>(null)
     const hljsRef = internalNoHighlight ? { value: undefined } : useHljs(props)
+    const shikiRef = internalNoHighlight
+      ? { value: undefined }
+      : useShiki(props)
     const createCodeHtml = (
       language: string,
       code: string,
       trim: boolean
     ): string | null => {
       const { value: hljs } = hljsRef
+      const { value: shiki } = shikiRef
+      if (shiki) {
+        return shiki.codeToHtml(trim ? code.trim() : code, { lang: language })
+      }
       if (!hljs) {
         return null
       }
@@ -81,7 +95,20 @@ export default defineComponent({
               codeEl.removeChild(prevPreEl)
             const preEl = document.createElement('pre')
             preEl.className = '__code__'
-            preEl.innerHTML = html
+            if (shikiRef.value) {
+              const match = html.match(
+                /<pre[^>]*><code[^>]*>([\s\S]*?)<\/code><\/pre>/
+              )
+              if (match) {
+                preEl.innerHTML = match[1]
+              }
+              else {
+                preEl.innerHTML = html
+              }
+            }
+            else {
+              preEl.innerHTML = html
+            }
             codeEl.appendChild(preEl)
           }
           return
@@ -106,8 +133,10 @@ export default defineComponent({
     onMounted(setCode)
     watch(toRef(props, 'language'), setCode)
     watch(toRef(props, 'code'), setCode)
-    if (!internalNoHighlight)
+    if (!internalNoHighlight) {
       watch(hljsRef, setCode)
+      watch(shikiRef, setCode)
+    }
     const themeRef = useTheme(
       'Code',
       '-code',

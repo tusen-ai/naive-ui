@@ -18,8 +18,13 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const { trimRef, highlightRef, languageRef, mergedHljsRef }
-      = inject(logInjectionKey)!
+    const {
+      trimRef,
+      highlightRef,
+      languageRef,
+      mergedHljsRef,
+      mergedShikiRef
+    } = inject(logInjectionKey)!
     const selfRef = ref<HTMLElement | null>(null)
     const maybeTrimmedLinesRef = computed(() => {
       return trimRef.value ? props.line.trim() : props.line
@@ -36,6 +41,17 @@ export default defineComponent({
       language: string | undefined,
       code: string
     ): string {
+      const { value: shiki } = mergedShikiRef
+      if (shiki) {
+        const html = shiki.codeToHtml(code, { lang: language })
+        const match = html.match(
+          /<pre[^>]*><code[^>]*>([\s\S]*?)<\/code><\/pre>/
+        )
+        if (match) {
+          return match[1]
+        }
+        return html
+      }
       const { value: hljs } = mergedHljsRef
       if (hljs) {
         if (language && hljs.getLanguage(language)) {
