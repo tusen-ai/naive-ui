@@ -39,6 +39,7 @@ show.vue
 | disabled-field | `string` | `'disabled'` | Field name of disabled. | 2.33.0 |
 | dropdown-placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'top'` | Only effective in horizontal mode. |  |
 | dropdown-props | `DropdownProps` | `undefined` | The dropdown's props when menu is collapsed or horizontal mode，please see [Dropdown Props](dropdown#Dropdown-Props) |  |
+| elipsis | `string \| (() => VNodeChild)` | `undefined` | Custom content of ellipsis area when `mode='horizontal'` `responsive=true`. | NEXT_VERSION |
 | expanded-keys | `Array<string>` | `undefined` | The expanded submenu keys. If set, menu will work in controlled manner and `default-expanded-names` won't work. |  |
 | expand-icon | `(option: MenuOption) => VNodeChild` | `undefined` | Render function that renders all expand icon. |  |
 | icon-size | `number` | `20` | The icon size when menu is not collapsed. |  |
@@ -49,6 +50,7 @@ show.vue
 | options | `Array<MenuOption \| MenuDividerOption \| MenuGroupOption>` | `[]` | Items data of menu. |  |
 | node-props | `(option: MenuOption \| MenuGroupOption) => object` | `undefined` | Node's DOM attrs generator. | 2.28.3 |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` | Menu layout. |  |
+| render-elipsis | `(options: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | Custom render function of ellipsis area when `mode='horizontal'` `responsive=true`. | NEXT_VERSION |
 | render-extra | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | Render function that renders all extras. |  |
 | render-icon | `(option: MenuOption) => VNodeChild` | `undefined` | Render function that renders all icons. |  |
 | render-label | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | Render function that renders all labels. |  |

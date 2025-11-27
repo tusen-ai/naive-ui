@@ -103,18 +103,53 @@ const menuOptions: MenuOption[] = [
   }
 ]
 
+function renderElipsis(option: MenuOption) {
+  const count = option?.children?.length ?? 0
+  return h('span', { style: { color: 'green' } }, `+${count}`)
+}
+
 const activeKey = ref<string | null>(null)
 </script>
 
 <template>
-  <n-split :default-size="0.8">
-    <template #1>
-      <n-menu
-        v-model:value="activeKey"
-        mode="horizontal"
-        :options="menuOptions"
-        responsive
-      />
-    </template>
-  </n-split>
+  <n-flex vertical>
+    <n-split :default-size="0.8">
+      <template #1>
+        <n-menu
+          v-model:value="activeKey"
+          mode="horizontal"
+          :options="menuOptions"
+          responsive
+        />
+      </template>
+    </n-split>
+    <n-text strong>
+      elipsis
+    </n-text>
+    <n-split :default-size="0.8">
+      <template #1>
+        <n-menu
+          v-model:value="activeKey"
+          elipsis="->"
+          mode="horizontal"
+          :options="menuOptions"
+          responsive
+        />
+      </template>
+    </n-split>
+    <n-text strong>
+      render-elipsis
+    </n-text>
+    <n-split :default-size="0.8">
+      <template #1>
+        <n-menu
+          v-model:value="activeKey"
+          mode="horizontal"
+          :options="menuOptions"
+          :render-elipsis="renderElipsis"
+          responsive
+        />
+      </template>
+    </n-split>
+  </n-flex>
 </template>

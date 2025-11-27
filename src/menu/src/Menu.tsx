@@ -64,6 +64,7 @@ export const menuProps = {
     type: Number,
     default: 24
   },
+  elipsis: [String, Function] as PropType<string | (() => VNodeChild)>,
   rootIndent: Number,
   indent: {
     type: Number,
@@ -116,6 +117,9 @@ export const menuProps = {
   expandIcon: Function as PropType<(option: MenuOption) => VNodeChild>,
   renderIcon: Function as PropType<(option: MenuOption) => VNodeChild>,
   renderLabel: Function as PropType<
+    (option: MenuOption | MenuGroupOption) => VNodeChild
+  >,
+  renderElipsis: Function as PropType<
     (option: MenuOption | MenuGroupOption) => VNodeChild
   >,
   renderExtra: Function as PropType<
@@ -552,6 +556,7 @@ export default defineComponent({
       ]).treeNodes[0]
     })
     function renderCounter(): VNodeChild {
+      const { elipsis = '...' } = props
       if (ellipsisFromIndexRef.value === -1) {
         // Only a placeholder
         return (
@@ -560,7 +565,7 @@ export default defineComponent({
             level={0}
             key="__ellpisisGroupPlaceholder__"
             internalKey="__ellpisisGroupPlaceholder__"
-            title="···"
+            title={elipsis}
             tmNode={emptyTmNodeRef.value}
             domId={ellipsisNodeId}
             isEllipsisPlaceholder
@@ -578,7 +583,7 @@ export default defineComponent({
           root
           key="__ellpisisGroup__"
           internalKey="__ellpisisGroup__"
-          title="···"
+          title={elipsis}
           virtualChildActive={childActive}
           tmNode={tmNode}
           domId={ellipsisNodeId}

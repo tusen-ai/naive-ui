@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-menu` 新增 `elipsis` 属性与 `render-elipsis` 函数，用于 `mode='horizontal'` `responsive=true` 自定省略区域的展示内容
+
 ## 2.43.2
 
 ### Fixes

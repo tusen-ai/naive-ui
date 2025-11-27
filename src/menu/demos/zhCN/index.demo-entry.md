@@ -41,6 +41,7 @@ show-debug.vue
 | disabled-field | `string` | `'disabled'` | disabled 的字段名 | 2.33.0 |
 | dropdown-placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end' \| ` | `'top'` | 仅在 `mode='horizontal'` 模式下生效 |  |
 | dropdown-props | `DropdownProps` | `undefined` | 菜单折叠或 `mode='horizontal'` 模式时 Dropdown 的 props，请参考 [Dropdown Props](dropdown#Dropdown-Props) |  |
+| elipsis | `string \| (() => VNodeChild)` | `undefined` | `mode='horizontal'` `responsive=true` 模式时自定义省略区域内容 | NEXT_VERSION |
 | expanded-keys | `Array<string>` | `undefined` | 展开的子菜单标识符数组，如果设定了，菜单的展开将会进入受控状态，`default-expanded-keys` 不会生效 |  |
 | expand-icon | `(option: MenuOption) => VNodeChild` | `undefined` | 批量处理菜单展开图标的渲染 |  |
 | icon-size | `number` | `20` | 菜单未折叠时图标的大小 |  |
@@ -51,6 +52,7 @@ show-debug.vue
 | options | `Array<MenuOption \| MenuDividerOption \| MenuGroupOption>` | `[]` | 菜单的数据 |  |
 | node-props | `(option: MenuOption \| MenuGroupOption) => object` | `undefined` | 节点的 DOM 属性生成函数 | 2.28.3 |
 | mode | `'vertical' \| 'horizontal'` | `'vertical'` | 菜单的布局方式 |  |
+| render-elipsis | `(options: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | 自定义 `mode='horizontal'` `responsive=true` 时溢出指示的展示内容 | NEXT_VERSION |
 | render-extra | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | 批量处理菜单额外部分渲染 |  |
 | render-icon | `(option: MenuOption) => VNodeChild` | `undefined` | 批量处理菜单图标渲染 |  |
 | render-label | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | 批量处理菜单标签渲染 |  |
