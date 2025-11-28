@@ -80,7 +80,7 @@ export const logProps = {
     default: 0
   },
   hljs: Object,
-  shiki: Object,
+  shiki: Object as PropType<Shiki>,
   onReachTop: Function as PropType<() => void>,
   onReachBottom: Function as PropType<() => void>,
   onRequireMore: Function as PropType<(from: 'top' | 'bottom') => void>

@@ -62,6 +62,22 @@ body {
   }
 }
 
+/*
+ * Keep Shiki code blocks in sync with the current site theme.
+ * Reference: https://shiki.style/guide/dual-themes
+ */
+.demo[data-theme='dark'] .shiki,
+.demo[data-theme='dark'] .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style, inherit) !important;
+  font-weight: var(--shiki-dark-font-weight, inherit) !important;
+  text-decoration: var(
+    --shiki-dark-text-decoration,
+    var(--shiki-light-text-decoration, none)
+  ) !important;
+}
+
 @media only screen and (max-width: 639px) {
   body {
     overflow: visible;

@@ -1,7 +1,7 @@
 <markdown>
-# 使用 Shiki
+# Use Shiki
 
-使用 `Shiki` 来高亮代码。
+Highlight code with `Shiki`.
 </markdown>
 
 <script lang="ts" setup>
@@ -36,3 +36,4 @@ onMounted(async () => {
 <template>
   <n-code :shiki="shiki" :code="code" show-line-numbers />
 </template>
+```

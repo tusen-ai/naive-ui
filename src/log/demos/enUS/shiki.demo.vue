@@ -1,7 +1,7 @@
 <markdown>
-# 使用 Shiki
+# Use Shiki
 
-使用 `shiki` 自定义一门 `naive-shiki-log` 语言，并让 `n-log` 高亮数字与日志级别。
+Use `shiki` to define a custom `naive-shiki-log` language so that `n-log` can highlight numbers and log levels.
 </markdown>
 
 <script lang="ts" setup>
