@@ -4,37 +4,32 @@
 使用 `shiki` 来高亮代码。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { createHighlighter } from 'shiki'
-import { defineComponent, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const shikiRef = ref<any>(null)
-    const code = `function sayHello() {
+const shiki = ref()
+const code = `function sayHello() {
   console.log('Hello Shiki')
 }`
 
-    onMounted(async () => {
-      const highlighter = await createHighlighter({
-        themes: ['nord'],
-        langs: ['javascript']
-      })
-      shikiRef.value = {
-        codeToHtml: (code: string, options: any) => {
-          return highlighter.codeToHtml(code, { ...options, theme: 'nord' })
-        }
-      }
-    })
+onMounted(async () => {
+  const highlighter = await createHighlighter({
+    themes: ['nord'],
+    langs: ['javascript']
+  })
 
-    return {
-      shiki: shikiRef,
-      code
+  shiki.value = {
+    codeToHtml(code: string) {
+      return highlighter.codeToHtml(code, {
+        lang: 'javascript',
+        theme: 'nord'
+      })
     }
   }
 })
 </script>
 
 <template>
-  <n-code :shiki="shiki" :code="code" language="javascript" />
+  <n-code :shiki="shiki" :code="code" language="javascript" show-line-numbers />
 </template>

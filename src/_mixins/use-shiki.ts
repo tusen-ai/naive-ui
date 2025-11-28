@@ -2,13 +2,17 @@ import type { ComputedRef } from 'vue'
 import { computed, inject } from 'vue'
 import { configProviderInjectionKey } from '../config-provider/src/context'
 
-interface UseShikiProps {
-  shiki?: unknown
-  [key: string]: unknown
+export interface Shiki {
+  /**
+   * The consumer (e.g. n-code / n-log) only cares about the rendered HTML string.
+   * Users may configure languages, themes or hooks when constructing the Shiki
+   * instance, but all those details should be hidden behind this single method.
+   */
+  codeToHtml: (code: string) => string
 }
 
-export interface Shiki {
-  codeToHtml: (code: string, options: any) => string
+interface UseShikiProps {
+  shiki?: Shiki
 }
 
 export default function useShiki(

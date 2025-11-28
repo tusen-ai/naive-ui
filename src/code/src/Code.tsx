@@ -15,6 +15,9 @@ import style from './styles/index.cssr'
 
 export const codeProps = {
   ...(useTheme.props as ThemeProps<CodeTheme>),
+  /**
+   * should be specified when `hljs` is provided
+   */
   language: String,
   code: {
     type: String,
@@ -48,23 +51,36 @@ export default defineComponent({
     const shikiRef = internalNoHighlight
       ? { value: undefined }
       : useShiki(props)
-    const createCodeHtml = (
-      language: string,
-      code: string,
-      trim: boolean
-    ): string | null => {
-      const { value: hljs } = hljsRef
+    const shikiHtml = (code: string): string | null => {
       const { value: shiki } = shikiRef
-      if (shiki) {
-        return shiki.codeToHtml(trim ? code.trim() : code, { lang: language })
+      if (!shiki)
+        return null
+      return shiki.codeToHtml(code)
+    }
+    const createCodeHtml = ({
+      language,
+      code,
+      trim
+    }: {
+      language?: string
+      code: string
+      trim: boolean
+    }): string | null => {
+      const processedCode = trim ? code.trim() : code
+
+      const shikiResult = shikiHtml(processedCode)
+      if (shikiResult !== null) {
+        return shikiResult
       }
-      if (!hljs) {
+
+      const { value: hljs } = hljsRef
+      if (!hljs || !language) {
         return null
       }
       if (!(language && hljs.getLanguage(language))) {
         return null
       }
-      return hljs.highlight(trim ? code.trim() : code, {
+      return hljs.highlight(processedCode, {
         language
       }).value
     }
@@ -79,40 +95,28 @@ export default defineComponent({
       const { value: codeEl } = codeRef
       if (!codeEl)
         return
-      const { language } = props
       const code = props.uri
         ? window.decodeURIComponent(props.code)
         : props.code
-      if (language) {
-        const html = createCodeHtml(language, code, props.trim)
-        if (html !== null) {
-          if (props.inline) {
-            codeEl.innerHTML = html
-          }
-          else {
-            const prevPreEl = codeEl.querySelector('.__code__')
-            if (prevPreEl)
-              codeEl.removeChild(prevPreEl)
-            const preEl = document.createElement('pre')
-            preEl.className = '__code__'
-            if (shikiRef.value) {
-              const match = html.match(
-                /<pre[^>]*><code[^>]*>([\s\S]*?)<\/code><\/pre>/
-              )
-              if (match) {
-                preEl.innerHTML = match[1]
-              }
-              else {
-                preEl.innerHTML = html
-              }
-            }
-            else {
-              preEl.innerHTML = html
-            }
-            codeEl.appendChild(preEl)
-          }
-          return
+      const html = createCodeHtml({
+        language: props.language,
+        code,
+        trim: props.trim
+      })
+      if (html !== null) {
+        if (props.inline) {
+          codeEl.innerHTML = html
         }
+        else {
+          const prevPreEl = codeEl.querySelector('.__code__')
+          if (prevPreEl)
+            codeEl.removeChild(prevPreEl)
+          const preEl = document.createElement('pre')
+          preEl.className = '__code__'
+          preEl.innerHTML = html
+          codeEl.appendChild(preEl)
+        }
+        return
       }
       if (props.inline) {
         codeEl.textContent = code
