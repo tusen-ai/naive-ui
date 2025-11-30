@@ -49,6 +49,7 @@ import { VVirtualList } from 'vueuc'
 import { NxScrollbar } from '../../_internal'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import { call, createDataKey, resolveSlot, warn, warnOnce } from '../../_utils'
+import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { NEmpty } from '../../empty'
 import { treeSelectInjectionKey } from '../../tree-select/src/interface'
 import { treeLight } from '../styles'
@@ -360,6 +361,7 @@ export default defineComponent({
     }
     const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
       = useConfig(props)
+    const NConfigProvider = inject(configProviderInjectionKey, null)
     const rtlEnabledRef = useRtl('Tree', mergedRtlRef, mergedClsPrefixRef)
     const themeRef = useTheme(
       'Tree',
@@ -1708,6 +1710,7 @@ export default defineComponent({
       ...exposedMethods,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
+      mergedRenderEmpty: NConfigProvider?.mergedRenderEmptyRef.value,
       rtlEnabled: rtlEnabledRef,
       fNodes: mergedFNodesRef,
       aip: aipRef,
@@ -1793,13 +1796,17 @@ export default defineComponent({
             default: () => {
               this.onRender?.()
               return !fNodes.length ? (
-                resolveSlot(this.$slots.empty, () => [
-                  <NEmpty
-                    class={`${mergedClsPrefix}-tree__empty`}
-                    theme={this.mergedTheme.peers.Empty}
-                    themeOverrides={this.mergedTheme.peerOverrides.Empty}
-                  />
-                ])
+                resolveSlot(this.$slots.empty, () => {
+                  return [
+                    this.mergedRenderEmpty?.('Tree') || (
+                      <NEmpty
+                        class={`${mergedClsPrefix}-tree__empty`}
+                        theme={this.mergedTheme.peers.Empty}
+                        themeOverrides={this.mergedTheme.peerOverrides.Empty}
+                      />
+                    )
+                  ]
+                })
               ) : (
                 <VVirtualList
                   ref="virtualListInstRef"
@@ -1871,13 +1878,17 @@ export default defineComponent({
           onDragleave={draggable ? this.handleDragLeaveTree : undefined}
         >
           {!fNodes.length
-            ? resolveSlot(this.$slots.empty, () => [
-                <NEmpty
-                  class={`${mergedClsPrefix}-tree__empty`}
-                  theme={this.mergedTheme.peers.Empty}
-                  themeOverrides={this.mergedTheme.peerOverrides.Empty}
-                />
-              ])
+            ? resolveSlot(this.$slots.empty, () => {
+                return [
+                  this.mergedRenderEmpty?.('Tree') || (
+                    <NEmpty
+                      class={`${mergedClsPrefix}-tree__empty`}
+                      theme={this.mergedTheme.peers.Empty}
+                      themeOverrides={this.mergedTheme.peerOverrides.Empty}
+                    />
+                  )
+                ]
+              })
             : fNodes.map(createNode)}
         </div>
       )

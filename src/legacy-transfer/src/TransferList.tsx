@@ -13,6 +13,7 @@ import {
 } from 'vue'
 import { VirtualList } from 'vueuc'
 import { NScrollbar } from '../../_internal'
+import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { NEmpty } from '../../empty'
 import { transferInjectionKey } from './interface'
 import NTransferListItem from './TransferListItem'
@@ -51,6 +52,7 @@ export default defineComponent({
   },
   setup() {
     const { mergedThemeRef, mergedClsPrefixRef } = inject(transferInjectionKey)!
+    const NConfigProvider = inject(configProviderInjectionKey, null)
     const scrollerInstRef = ref<ScrollbarInst | null>(null)
     const vlInstRef = ref<VirtualListInst | null>(null)
     function syncVLScroller(): void {
@@ -73,6 +75,7 @@ export default defineComponent({
     return {
       mergedTheme: mergedThemeRef,
       mergedClsPrefix: mergedClsPrefixRef,
+      mergedRenderEmpty: NConfigProvider?.mergedRenderEmptyRef.value,
       scrollerInstRef,
       vlInstRef,
       syncVLScroller,
@@ -152,13 +155,18 @@ export default defineComponent({
           css={!this.isInputing}
         >
           {{
-            default: () =>
-              this.options.length ? null : (
-                <NEmpty
-                  theme={mergedTheme.peers.Empty}
-                  themeOverrides={mergedTheme.peerOverrides.Empty}
-                />
+            default: () => {
+              if (this.options.length)
+                return null
+              return (
+                this.mergedRenderEmpty?.('Transfer') || (
+                  <NEmpty
+                    theme={mergedTheme.peers.Empty}
+                    themeOverrides={mergedTheme.peerOverrides.Empty}
+                  />
+                )
               )
+            }
           }}
         </Transition>
       </>

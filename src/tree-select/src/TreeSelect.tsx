@@ -44,6 +44,7 @@ import {
   computed,
   defineComponent,
   h,
+  inject,
   provide,
   ref,
   toRef,
@@ -69,6 +70,7 @@ import {
   useOnResize,
   warnOnce
 } from '../../_utils'
+import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { NEmpty } from '../../empty'
 import { NTree } from '../../tree'
 import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
@@ -206,6 +208,7 @@ export default defineComponent({
     const menuElRef = ref<HTMLDivElement | null>(null)
     const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled }
       = useConfig(props)
+    const NConfigProvider = inject(configProviderInjectionKey, null)
     const { localeRef } = useLocale('Select')
     const {
       mergedSizeRef,
@@ -840,6 +843,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
       mergedShow: mergedShowRef,
+      mergedRenderEmpty: NConfigProvider?.mergedRenderEmptyRef.value,
       namespace: namespaceRef,
       adjustedTo: useAdjustedTo(props),
       isMounted: useIsMounted(),
@@ -1042,14 +1046,20 @@ export default defineComponent({
                                   <div
                                     class={`${mergedClsPrefix}-tree-select-menu__empty`}
                                   >
-                                    {resolveSlot($slots.empty, () => [
-                                      <NEmpty
-                                        theme={mergedTheme.peers.Empty}
-                                        themeOverrides={
-                                          mergedTheme.peerOverrides.Empty
-                                        }
-                                      />
-                                    ])}
+                                    {resolveSlot($slots.empty, () => {
+                                      return [
+                                        this.mergedRenderEmpty?.(
+                                          'TreeSelect'
+                                        ) || (
+                                          <NEmpty
+                                            theme={mergedTheme.peers.Empty}
+                                            themeOverrides={
+                                              mergedTheme.peerOverrides.Empty
+                                            }
+                                          />
+                                        )
+                                      ]
+                                    })}
                                   </div>
                                 )}
                                 onLoad={this.onLoad}

@@ -1,6 +1,16 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-config-provider` 新增 `render-empty` 属性，用于全局自定义空状态的渲染
+
 ## 2.43.2
+
+`2025-11-16`
 
 ### Fixes
 
@@ -8,7 +18,7 @@
 - 修复 `n-progress` 使用仪表盘模式超过 100% 之后样式不正确，关闭 [#6627](https://github.com/tusen-ai/naive-ui/issues/6627)
 - 修复 `n-modal` 在 `show-mask` 为 `false` 的情况下，外部内容不能被操作
 
-### Feats
+### Features
 
 - `n-date-picker` 的 `defaultTime` 属性可以接受返回格式化字符串的函数
 - `n-steps` 增加 `content-placement` 属性，关闭 [#7044](https://github.com/tusen-ai/naive-ui/issues/7044)

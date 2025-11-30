@@ -19,6 +19,7 @@ import {
 import { NBaseMenuMask } from '../../_internal'
 import FocusDetector from '../../_internal/focus-detector'
 import { resolveSlot, resolveWrappedSlot, useOnResize } from '../../_utils'
+import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { NEmpty } from '../../empty'
 import NCascaderSubmenu from './CascaderSubmenu'
 import { cascaderInjectionKey } from './interface'
@@ -68,6 +69,7 @@ export default defineComponent({
       mergedThemeRef,
       getColumnStyleRef
     } = inject(cascaderInjectionKey)!
+    const NConfigProvider = inject(configProviderInjectionKey, null)
     const submenuInstRefs: CascaderSubmenuInstance[] = []
     const maskInstRef = ref<MenuMaskRef | null>(null)
     const selfElRef = ref<HTMLElement | null>(null)
@@ -112,6 +114,7 @@ export default defineComponent({
     return {
       isMounted: isMountedRef,
       mergedClsPrefix: mergedClsPrefixRef,
+      mergedRenderEmpty: NConfigProvider?.mergedRenderEmptyRef.value,
       selfElRef,
       submenuInstRefs,
       maskInstRef,
@@ -165,12 +168,16 @@ export default defineComponent({
                   </div>
                 ) : (
                   <div class={`${mergedClsPrefix}-cascader-menu__empty`}>
-                    {resolveSlot(this.$slots.empty, () => [
-                      <NEmpty
-                        theme={mergedTheme.peers.Empty}
-                        themeOverrides={mergedTheme.peerOverrides.Empty}
-                      />
-                    ])}
+                    {resolveSlot(this.$slots.empty, () => {
+                      return [
+                        this.mergedRenderEmpty?.('Cascader') || (
+                          <NEmpty
+                            theme={mergedTheme.peers.Empty}
+                            themeOverrides={mergedTheme.peerOverrides.Empty}
+                          />
+                        )
+                      ]
+                    })}
                   </div>
                 )}
                 {resolveWrappedSlot(
