@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- 修复 `n-modal` 监听事件未移除，关闭 [#7341](https://github.com/tusen-ai/naive-ui/issues/7341)
+
 ## 2.43.2
 
 ### Fixes

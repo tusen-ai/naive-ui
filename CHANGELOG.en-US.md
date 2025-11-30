@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix `n-modal` event listeners not removed, closes [#7341](https://github.com/tusen-ai/naive-ui/issues/7341) by [@lu-han](https://github.com/lu-han)
+
 ## 2.43.2
 
 ### Fixes
