@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- 修复 `n-input` 在 `type="text"` 且设置 `autosize` 时，外部修改值后宽度不更新的问题，关闭 [#7269](https://github.com/tusen-ai/naive-ui/issues/7269) by [@pstrh](https://github.com/pstrh)
+
 ## 2.43.2
 
 ### Fixes
