@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- 修复 `n-data-table` 使用 `ellipsis.lineClamp` 时单元格错位的问题，关闭 [#7345](https://github.com/tusen-ai/naive-ui/issues/7345) by [@pstrh](https://github.com/pstrh)
+
 ## 2.43.2
 
 ### Fixes

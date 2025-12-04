@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix `n-data-table` cell misalignment when using `ellipsis.lineClamp`, closes [#7345](https://github.com/tusen-ai/naive-ui/issues/7345) by [@pstrh](https://github.com/pstrh).
+
 ## 2.43.2
 
 ### Fixes
