@@ -12,13 +12,16 @@ import {
   defineComponent,
   h,
   inject,
+  onBeforeUnmount,
   ref,
   Transition,
+  watch,
   withDirectives
 } from 'vue'
+import { resizeObserverManager } from 'vueuc'
 import { NBaseMenuMask } from '../../_internal'
 import FocusDetector from '../../_internal/focus-detector'
-import { resolveSlot, resolveWrappedSlot, useOnResize } from '../../_utils'
+import { resolveSlot, resolveWrappedSlot } from '../../_utils'
 import { NEmpty } from '../../empty'
 import NCascaderSubmenu from './CascaderSubmenu'
 import { cascaderInjectionKey } from './interface'
@@ -74,7 +77,22 @@ export default defineComponent({
     function handleResize(): void {
       syncCascaderMenuPosition()
     }
-    useOnResize(selfElRef, handleResize)
+    // Watch selfElRef to re-register resize handler when DOM is recreated
+    // This is needed because the menu DOM is destroyed when show=false
+    watch(selfElRef, (el, oldEl) => {
+      if (oldEl) {
+        resizeObserverManager.unregisterHandler(oldEl)
+      }
+      if (el) {
+        resizeObserverManager.registerHandler(el, handleResize)
+      }
+    })
+    onBeforeUnmount(() => {
+      const { value: el } = selfElRef
+      if (el) {
+        resizeObserverManager.unregisterHandler(el)
+      }
+    })
     function showErrorMessage(label: string): void {
       const {
         value: { loadingRequiredMessage }

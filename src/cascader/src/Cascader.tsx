@@ -896,7 +896,17 @@ export default defineComponent({
       selectMenuFollowerRef.value?.syncPosition()
     }
     function syncCascaderMenuPosition(): void {
-      cascaderMenuFollowerRef.value?.syncPosition()
+      const followerInst = cascaderMenuFollowerRef.value
+      if (followerInst) {
+        // Reset transform before syncPosition to ensure getBoundingClientRect
+        // returns correct values for position calculation.
+        const followerEl = (followerInst as any)
+          .followerRef as HTMLElement | null
+        if (followerEl) {
+          followerEl.style.transform = ''
+        }
+        followerInst.syncPosition()
+      }
     }
     function handleTriggerResize(): void {
       if (mergedShowRef.value) {
