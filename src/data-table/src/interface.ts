@@ -343,10 +343,8 @@ export type RenderExpandIcon = ({
 
 // TODO: we should deprecate `index` since it would change after row is expanded
 export type Expandable<T = InternalRowData> = (row: T) => boolean
-export interface TableExpandColumn<T = InternalRowData> extends Omit<
-  TableSelectionColumn<T>,
-  'type'
-> {
+export interface TableExpandColumn<T = InternalRowData>
+  extends Omit<TableSelectionColumn<T>, 'type'> {
   type: 'expand'
   title?: TableExpandColumnTitle
   renderExpand: RenderExpand<T>
