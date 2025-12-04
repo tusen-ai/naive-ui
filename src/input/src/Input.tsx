@@ -844,8 +844,8 @@ export default defineComponent({
 
     let stopWatchMergedValue1: WatchStopHandle | null = null
     watchEffect(() => {
-      const { autosize, type } = props
-      if (autosize && type === 'textarea') {
+      const { autosize } = props
+      if (autosize) {
         stopWatchMergedValue1 = watch(mergedValueRef, (value) => {
           if (!Array.isArray(value) && value !== syncSource) {
             syncMirror(value)
