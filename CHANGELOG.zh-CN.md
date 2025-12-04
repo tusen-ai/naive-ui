@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- 修复 `n-input` 在浅色模式下 placeholder 文本遮挡光标的问题，关闭 [#7267](https://github.com/tusen-ai/naive-ui/issues/7267) by [@pstrh](https://github.com/pstrh)
+
 ## 2.43.2
 
 ### Fixes
