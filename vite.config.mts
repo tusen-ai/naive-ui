@@ -17,7 +17,9 @@ const testExclude = isBuildTimeTest
 
 export default defineConfig({
   root: __dirname,
-  plugins: createDemoPlugin(),
+  plugins: [
+    ...createDemoPlugin()
+  ],
   resolve: {
     // In production site build, we want to import naive-ui from node_modules
     alias:
@@ -73,11 +75,19 @@ export default defineConfig({
   },
   build: {
     outDir: 'site',
-    rollupOptions: {
+    rolldownOptions: {
       output: {
-        manualChunks: {
-          'grapheme-splitter': ['grapheme-splitter'],
-          katex: ['katex']
+        advancedChunks: {
+          groups: [
+            {
+              name: 'grapheme-splitter',
+              test: /grapheme-splitter/
+            },
+            {
+              name: 'katex',
+              test: /katex/
+            }
+          ]
         }
       },
       plugins: [
@@ -87,10 +97,14 @@ export default defineConfig({
       ]
     }
   },
-  esbuild: {
-    jsx: 'transform',
-    jsxFactory: 'h',
-    jsxFragment: 'Fragment'
+  oxc: {
+    jsx: {
+      runtime: 'classic',
+      pragma: 'h',
+      pragmaFrag: 'Fragment',
+      // Disable React-specific development features that add __source and __self props
+      development: false
+    }
   },
   test: {
     globals: true,
