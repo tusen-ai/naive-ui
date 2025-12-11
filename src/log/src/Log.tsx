@@ -3,7 +3,7 @@ import type { ScrollbarInst } from '../../_internal'
 import type { Hljs, ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { LogTheme } from '../styles'
-import { throttle as _throttle } from 'lodash-es'
+import { throttle as _throttle } from 'es-toolkit/compat'
 import {
   computed,
   defineComponent,

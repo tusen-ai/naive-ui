@@ -1,7 +1,7 @@
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ElementTheme } from '../styles'
-import { kebabCase } from 'lodash-es'
+import { kebabCase } from 'es-toolkit/string'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { elementLight } from '../styles'

@@ -1,6 +1,6 @@
 import type { CNode } from 'css-render'
 import type { FollowerPlacement } from 'vueuc'
-import { map } from 'lodash-es'
+import { map } from 'es-toolkit/compat'
 import { c, cB, cCB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 const oppositePlacement = {

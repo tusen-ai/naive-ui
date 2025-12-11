@@ -1,6 +1,6 @@
 import type { PropType } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { round } from 'lodash-es'
+import { round } from 'es-toolkit/compat'
 import { computed, defineComponent, onMounted, ref, watchEffect } from 'vue'
 import { useLocale } from '../../_mixins'
 import { tween } from './utils'

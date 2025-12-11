@@ -1,5 +1,5 @@
 import type { NLocale } from '../common/enUS'
-import { merge } from 'lodash-es'
+import { merge } from 'es-toolkit/compat'
 
 export type NPartialLocale = {
   [key in keyof NLocale]+?: {

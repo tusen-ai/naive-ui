@@ -22,7 +22,7 @@ import type {
   TabsType
 } from './interface'
 import type { tabPaneProps } from './TabPane'
-import { throttle as _throttle } from 'lodash-es'
+import { throttle as _throttle } from 'es-toolkit/compat'
 import { depx, getPadding } from 'seemly'
 import { onFontsReady, useCompitable, useMergedState } from 'vooks'
 import {

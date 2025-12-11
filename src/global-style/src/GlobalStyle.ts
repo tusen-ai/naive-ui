@@ -1,4 +1,4 @@
-import { merge } from 'lodash-es'
+import { merge } from 'es-toolkit/compat'
 import {
   defineComponent,
   inject,

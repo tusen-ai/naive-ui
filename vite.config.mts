@@ -48,7 +48,7 @@ export default defineConfig({
       'date-fns-tz/getTimezoneOffset',
       'evtd',
       'highlight.js',
-      'lodash-es',
+      'es-toolkit',
       'seemly',
       'treemate',
       'vdirs',

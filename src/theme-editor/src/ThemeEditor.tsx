@@ -1,5 +1,7 @@
 import type { GlobalTheme, GlobalThemeOverrides } from '../../config-provider'
-import { cloneDeep, merge } from 'lodash-es'
+import { merge } from 'es-toolkit/compat'
+import { cloneDeep } from 'es-toolkit/object'
+
 import {
   computed,
   defineComponent,
