@@ -1,4 +1,5 @@
 import type { PropType } from 'vue'
+import type { BaseLoadingExposedProps } from '../../_internal'
 import type { TmNode } from './interface'
 import { defineComponent, h, inject } from 'vue'
 import { NBaseIcon, NBaseLoading, NIconSwitchTransition } from '../../_internal'
@@ -24,7 +25,10 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const { renderSwitcherIconRef } = inject(treeInjectionKey, null)!
+    const { renderSwitcherIconRef, spinPropsRef } = inject(
+      treeInjectionKey,
+      null
+    )!
     return () => {
       const { clsPrefix, expanded, hide, indent, onClick } = props
       return (
@@ -49,6 +53,7 @@ export default defineComponent({
                         key="loading"
                         radius={85}
                         strokeWidth={20}
+                        {...spinPropsRef?.value}
                       />
                     )
                   }
