@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-button` adds `spin-props` prop.
+- `n-cascader` adds `spin-props` prop.
+- `n-log` adds `spin-props` prop.
+- `n-message` adds `spin-props` prop.
+- `n-switch` adds `spin-props` prop.
+- `n-tree` adds `spin-props` prop.
+
 ## 2.43.2
 
 ### Fixes

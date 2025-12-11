@@ -56,7 +56,7 @@ auto-bottom.vue
 ### Log Props
 
 | Name | Type | Default | Description |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | font-size | `number` | `14` | Font size. |
 | hljs | `Object` | `undefined` | If you want to set `hljs` locally, pass it using this prop. |
 | language | `string` | `undefined` | The language of the log in `highlightjs`. |
@@ -65,6 +65,7 @@ auto-bottom.vue
 | loading | `boolean` | `false` | Whether to show loading. |
 | log | `string` | `undefined` | The content of the log. |
 | rows | `number` | `15` | Log size. |
+| spin-props | `{ strokeWidth?: number, stroke?: string, scale?: number, radius?: number }` | `undefined` | Loading icon properties | NEXT_VERSION |
 | trim | `boolean` | `false` | Whether to display the log after `trim`. |
 | on-require-more | `(from: 'top' \| 'bottom') => void` | `undefined` | Callback function for scroll loading log. |
 | on-reach-top | `() => void` | `undefined` | Scroll to the top callback function. |

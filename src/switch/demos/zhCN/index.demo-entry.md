@@ -30,6 +30,7 @@ icon.vue
 | round | `boolean` | `true` | 是否为圆形按钮 |  |
 | rubber-band | `boolean` | `true` | 按钮是否有橡皮筋效果 | 2.28.3 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 开关大小 |  |
+| spin-props | `{ strokeWidth?: number, stroke?: string, scale?: number, radius?: number }` | `undefined` | 加载图标的属性 | NEXT_VERSION |
 | unchecked-value | `string \| boolean \| number` | `false` | 未选中时对应的值 |  |
 | value | `string \| number \| boolean \| undefined` | `undefined` | 受控模式下的值 |  |
 | on-update:value | `(value: boolean) => void` | `undefined` | 组件值发生变化的回调 |  |
