@@ -1,4 +1,5 @@
 import type { VNodeChild } from 'vue'
+import type { BaseLoadingExposedProps } from '../../_internal'
 import type { MessageSetupProps } from './message-props'
 
 export type MessageType
@@ -25,6 +26,7 @@ export interface MessageOptions {
   keepAliveOnHover?: boolean
   icon?: () => VNodeChild
   showIcon?: boolean
+  spinProps?: BaseLoadingExposedProps
   onClose?: () => void
   onLeave?: () => void
   onAfterLeave?: () => void
