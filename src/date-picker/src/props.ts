@@ -79,6 +79,7 @@ export const datePickerProps = {
   ranges: Object as PropType<Record<string, [number, number]>>,
   firstDayOfWeek: Number as PropType<FirstDayOfWeek>,
   inputReadonly: Boolean,
+  inputProps: Object as PropType<InputHTMLAttributes>,
   closeOnSelect: Boolean,
   status: String as PropType<FormValidationStatus>,
   timePickerProps: [Object, Array] as PropType<
