@@ -108,10 +108,10 @@ export default defineComponent({
           e.preventDefault()
           break
         case 'ArrowLeft':
-          props.onPrev?.()
+          handleSwitchPrev()
           break
         case 'ArrowRight':
-          props.onNext?.()
+          handleSwitchNext()
           break
         case 'ArrowUp':
           e.preventDefault()

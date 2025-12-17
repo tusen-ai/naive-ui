@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- 修复 `n-image` 的预览控件通过键盘左右键切换图片时，上一张图片的旋转状态没有被重置，导致下一张图片追加了上一张图片的旋转角度，关闭 [#7370](https://github.com/tusen-ai/naive-ui/issues/7370)
+
 ## 2.43.2
 
 ### Fixes
