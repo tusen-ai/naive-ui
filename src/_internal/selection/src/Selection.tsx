@@ -1,4 +1,10 @@
-import type { CSSProperties, InputHTMLAttributes, PropType, VNode } from 'vue'
+import type {
+  CSSProperties,
+  HTMLAttributes,
+  InputHTMLAttributes,
+  PropType,
+  VNode
+} from 'vue'
 import type { VOverflowInst } from 'vueuc'
 import type { ThemeProps } from '../../../_mixins'
 import type { FormValidationStatus } from '../../../form/src/public-types'
@@ -88,6 +94,7 @@ export default defineComponent({
       default: 'medium'
     },
     loading: Boolean,
+    loadingProps: Object as PropType<HTMLAttributes>,
     autofocus: Boolean,
     showArrow: {
       type: Boolean,
@@ -625,6 +632,7 @@ export default defineComponent({
             <Suffix
               clsPrefix={clsPrefix}
               loading={this.loading}
+              loadingProps={this.loadingProps}
               showArrow={this.showArrow}
               showClear={this.mergedClearable && this.selected}
               onClear={this.handleClear}

@@ -1,4 +1,4 @@
-import type { PropType } from 'vue'
+import type { InputHTMLAttributes, PropType } from 'vue'
 import type { FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type { MaybeArray } from '../../_utils'

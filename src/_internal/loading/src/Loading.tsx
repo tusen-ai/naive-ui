@@ -1,3 +1,4 @@
+import type { HTMLAttributes, PropType } from 'vue'
 import type { ExtractPublicPropTypes } from '../../../_utils'
 import { defineComponent, h, toRef } from 'vue'
 import { useStyle } from '../../../_mixins'
@@ -32,6 +33,7 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
+    htmlProps: Object as PropType<HTMLAttributes>,
     scale: {
       type: Number,
       default: 1
@@ -49,7 +51,12 @@ export default defineComponent({
     const { clsPrefix, radius, strokeWidth, stroke, scale } = this
     const scaledRadius = radius / scale
     return (
-      <div class={`${clsPrefix}-base-loading`} role="img" aria-label="loading">
+      <div
+        class={`${clsPrefix}-base-loading`}
+        role="button"
+        aria-label="loading"
+        {...this.htmlProps}
+      >
         <NIconSwitchTransition>
           {{
             default: () =>
