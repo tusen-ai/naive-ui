@@ -213,9 +213,9 @@ describe('n-color-picker 2', () => {
         'left',
         'left-end'
       ] as const
-    ).forEach((placement) => {
+    ).forEach(async (placement) => {
       const wrapper = mount(NColorPicker, { props: { placement } })
-      vi.waitFor(() => {
+      await vi.waitFor(() => {
         expect(
           document
             .querySelector('.v-binder-follower-content')
