@@ -68,16 +68,10 @@ const data = [
   }
 ]
 
-const dataTableRef = ref(null)
 const columns = createColumns()
 const pagination = ref({ pageSize: 10 })
 </script>
 
 <template>
-  <NDataTable
-    ref="dataTableRef"
-    :columns="columns"
-    :data="data"
-    :pagination="pagination"
-  />
+  <NDataTable :columns="columns" :data="data" :pagination="pagination" />
 </template>
