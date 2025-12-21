@@ -4,7 +4,7 @@ export type { UploadProps } from './Upload'
 
 export interface UploadInst {
   openOpenFileDialog: () => void
-  submit: (fileId?: string) => void
+  submit: (options?: { fileId?: string, reUpload?: boolean }) => void
   clear: () => void
 }
 

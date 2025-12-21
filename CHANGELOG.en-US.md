@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-upload`'s `submit` method adds `reUpload` option.
+
 ## 2.43.2
 
 ### Fixes

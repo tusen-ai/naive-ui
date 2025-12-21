@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-upload` 的 `submit` 方法新增 `reUpload` 属性。
+
 ## 2.43.2
 
 ### Fixes
