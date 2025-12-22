@@ -30,6 +30,7 @@ update-on-close.vue
 focus.vue
 status.vue
 icon.vue
+prefix.vue
 panel.vue
 ```
 
@@ -192,15 +193,16 @@ panel.vue
 
 ### DatePicker Slots
 
-| Name       | Parameters | Description                       | Version |
-| ---------- | ---------- | --------------------------------- | ------- |
-| date-icon  | `()`       | Date icon of the input box.       | 2.29.0  |
-| footer     | `()`       | Extra Footer.                     |         |
-| next-month | `()`       | Next icon of the date panel.      | 2.33.4  |
-| next-year  | `()`       | Fast next icon of the date panel. | 2.33.4  |
-| prev-month | `()`       | Prev icon of the date panel.      | 2.33.4  |
-| prev-year  | `()`       | Fast prev icon of the date panel. | 2.33.4  |
-| separator  | `()`       | Separator of range picker.        | 2.29.0  |
+| Name       | Parameters | Description                       | Version      |
+| ---------- | ---------- | --------------------------------- | ------------ |
+| date-icon  | `()`       | Date icon of the input box.       | 2.29.0       |
+| footer     | `()`       | Extra Footer.                     |              |
+| next-month | `()`       | Next icon of the date panel.      | 2.33.4       |
+| next-year  | `()`       | Fast next icon of the date panel. | 2.33.4       |
+| prefix     | `()`       | Prefix content of the input box.  | NEXT_VERSION |
+| prev-month | `()`       | Prev icon of the date panel.      | 2.33.4       |
+| prev-year  | `()`       | Fast prev icon of the date panel. | 2.33.4       |
+| separator  | `()`       | Separator of range picker.        | 2.29.0       |
 
 ### Date, Year, QuarterRange, Week Slots
 

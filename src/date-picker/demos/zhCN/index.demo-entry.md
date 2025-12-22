@@ -28,6 +28,7 @@ format.vue
 footerslot.vue
 status.vue
 icon.vue
+prefix.vue
 panel.vue
 panel-debug.vue
 form-debug.vue
@@ -192,15 +193,16 @@ form-debug.vue
 
 ### DatePicker Slots
 
-| 名称       | 参数 | 说明                         | 版本   |
-| ---------- | ---- | ---------------------------- | ------ |
-| date-icon  | `()` | 日期输入框的图标             | 2.29.0 |
-| footer     | `()` | 添加额外的页脚               |        |
-| next-month | `()` | 日期面板的 `下一个` 图标     | 2.33.4 |
-| next-year  | `()` | 日期面板的 `快速下一个` 图标 | 2.33.4 |
-| prev-month | `()` | 日期面板的 `上一个` 图标     | 2.33.4 |
-| prev-year  | `()` | 日期面板的 `快速上一个` 图标 | 2.33.4 |
-| separator  | `()` | 日期范围分隔符号             | 2.29.0 |
+| 名称       | 参数 | 说明                         | 版本         |
+| ---------- | ---- | ---------------------------- | ------------ |
+| date-icon  | `()` | 日期输入框的图标             | 2.29.0       |
+| footer     | `()` | 添加额外的页脚               |              |
+| next-month | `()` | 日期面板的 `下一个` 图标     | 2.33.4       |
+| next-year  | `()` | 日期面板的 `快速下一个` 图标 | 2.33.4       |
+| prefix     | `()` | 输入框的前缀内容             | NEXT_VERSION |
+| prev-month | `()` | 日期面板的 `上一个` 图标     | 2.33.4       |
+| prev-year  | `()` | 日期面板的 `快速上一个` 图标 | 2.33.4       |
+| separator  | `()` | 日期范围分隔符号             | 2.29.0       |
 
 ### Date, Year, QuarterRange, Week Slots
 
