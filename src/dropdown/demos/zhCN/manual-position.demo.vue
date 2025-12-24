@@ -1,7 +1,6 @@
 <markdown>
 # 手动定位
 
-ual'`
 注意：手动定位时，`trigger` 属性必须为 `'manual'`。此外，你需要监听 `update:show` 回调来更新 `show` 值，以确保 `Esc` 键等快捷操作能正常关闭菜单。
 </markdown>
 
