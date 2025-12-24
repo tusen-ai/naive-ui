@@ -1,7 +1,7 @@
 <markdown>
 # Manual Position
 
-Note: When using manual position, `trigger` must be set to `'manual'`.
+Note: When using manual position, `trigger` must be set to `'manual'`. In addition, you need to listen to the update:show callback to update the value of show, ensuring that shortcut operations such as the Esc key can close the menu normally.
 </markdown>
 
 <script lang="ts" setup>
