@@ -97,6 +97,7 @@ function onClickoutside() {
     :options="options"
     :show="showDropdown"
     :on-clickoutside="onClickoutside"
+    @update:show="(v) => (showDropdown = v)"
     @select="handleSelect"
   />
 </template>
