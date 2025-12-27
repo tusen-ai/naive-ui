@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-select`, `n-auto-complete`, `n-mention`, `n-popselect`, `n-cascader`, `n-pagination` add `scrollbar-props` prop.
+
 ## 2.43.2
 
 ### Fixes

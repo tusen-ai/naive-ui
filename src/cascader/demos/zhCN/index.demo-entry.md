@@ -27,6 +27,7 @@ default-value-debug.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | allow-checking-not-loaded | `boolean` | `false` | 是否允许级联勾选还没有完全加载的节点。如果你要用这个属性，请记住 `value` 可能是不完整的，并且请注意勾选行为和后端计算逻辑的一致性，尤其是有禁用节点的情况下 | 2.28.1 |
+| bordered | `boolean` | `undefined` | 是否显示输入框边框 |  |
 | cascade | `boolean` | `true` | 在多选时是否关联选项 |  |
 | check-strategy | `string` | `'all'` | 设置勾选策略来指定显示的勾选节点，`all` 表示显示全部选中节点；`parent` 表示只显示父节点（当父节点下所有子节点都选中时，对于单选无效）；`child` 表示只显示子节点 |  |
 | children-field | `string` | `'children'` | 替代 `CascaderOption` 中的 children 字段名 |  |
@@ -53,6 +54,7 @@ default-value-debug.vue
 | render-prefix | `(info: { option: CascaderOption, node: VNode \| null, checked: boolean }) => VNodeChild` | `undefined` | 节点前缀的渲染函数 | 2.38.2 |
 | render-label | `(option: CascaderOption, checked: boolean) => VNodeChild` | `undefined` | Cascader 菜单选项标签渲染函数 | 2.24.0 |
 | render-suffix | `(info: { option: CascaderOption, checked: boolean }) => VNodeChild` | `undefined` | 节点后缀的渲染函数 | 2.38.2 |
+| scrollbar-props | `ScrollbarProps` | `undefined` | 滚动条属性 |  |
 | separator | `string` | `' / '` | 数据分隔符 |  |
 | show | `boolean` | `undefined` | 是否打开菜单 |  |
 | show-path | `boolean` | `true` | 是否在选择器中显示选项路径 |  |

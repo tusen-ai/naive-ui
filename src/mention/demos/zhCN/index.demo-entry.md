@@ -37,6 +37,7 @@ Mention 在 `v2.2.0` 及以后可用。
 | placeholder | `string` | `''` | 输入框的占位符 |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 选择面板的弹出位置. | 2.25.0 |
 | render-label | `(option: MentionOption) => VNodeChild` | `undefined` | 选项标签渲染函数 |  |
+| scrollbar-props | `ScrollbarProps` | `undefined` | 滚动条属性 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 输入框的大小 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | to | `string \| HTMLElement \| false` | `body` | 菜单的容器节点，`false` 会待在原地 |  |
