@@ -90,6 +90,7 @@ export const inputNumberProps = {
   parse: Function as PropType<(input: string) => number | null>,
   format: Function as PropType<(value: number | null) => string>,
   precision: Number,
+  valueOnClear: [Number, String] as PropType<number | 'min' | 'max'>,
   status: String as PropType<FormValidationStatus>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -190,29 +191,42 @@ export default defineComponent({
     })
     const deriveDisplayedValueFromValue = (): void => {
       const { value: mergedValue } = mergedValueRef
-      if (validator(mergedValue)) {
+      const { valueOnClear } = props
+      let displayValue = mergedValue
+      if (mergedValue === null && valueOnClear !== undefined) {
+        if (valueOnClear === 'min') {
+          const { value: mergedMin } = mergedMinRef
+          displayValue = mergedMin !== null ? mergedMin : null
+        }
+        else if (valueOnClear === 'max') {
+          const { value: mergedMax } = mergedMaxRef
+          displayValue = mergedMax !== null ? mergedMax : null
+        }
+        else {
+          displayValue = valueOnClear
+        }
+      }
+      if (validator(displayValue)) {
         const { format: formatProp, precision } = props
         if (formatProp) {
-          displayedValueRef.value = formatProp(mergedValue)
+          displayedValueRef.value = formatProp(displayValue)
         }
         else {
           if (
-            mergedValue === null
+            displayValue === null
             || precision === undefined
             // precision overflow
-            || getPrecision(mergedValue) > precision
+            || getPrecision(displayValue) > precision
           ) {
-            displayedValueRef.value = format(mergedValue, undefined)
+            displayedValueRef.value = format(displayValue, undefined)
           }
           else {
-            displayedValueRef.value = format(mergedValue, precision)
+            displayedValueRef.value = format(displayValue, precision)
           }
         }
       }
       else {
-        // null can pass the validator check
-        // so mergedValue is a number
-        displayedValueRef.value = String(mergedValue)
+        displayedValueRef.value = String(displayValue)
       }
     }
     deriveDisplayedValueFromValue()

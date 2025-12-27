@@ -22,6 +22,7 @@ disable-keyboard.vue
 change-timing.vue
 status.vue
 custom-icon.vue
+value-on-clear.vue
 ```
 
 ## API
@@ -54,6 +55,7 @@ custom-icon.vue
 | update-value-on-input | `boolean` | `true` | Whether to change the value on input if the input value is valid. |  |
 | validator | `(value) => boolean` | `undefined` | Setup custom validation. |  |
 | value | `number \| null` | `undefined` | Manually set the input value. |  |
+| value-on-clear | `number \| 'min' \| 'max' \| null` | `null` | The value displayed when the input is cleared. | NEXT_VERSION |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | Callback triggered when the input is blurred. |  |
 | on-clear | `() => void` | `undefined` | Callback triggered when the input is cleared. |  |
 | on-focus | `(event: FocusEvent) => void` | `undefined` | Callback triggered when the input is focussed on. |  |
