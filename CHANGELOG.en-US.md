@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix the issue where `n-data-table` right fixed column shadow is missing when `scroll-x` is a string.
+
 ## 2.43.2
 
 ### Fixes
