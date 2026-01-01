@@ -17,18 +17,19 @@ const ckb = {
       `تکایە هەموو نەوەکانی ${label} باربکە پێشئەوەی بیناپشکنیت.`
   },
   Time: {
-    dateFormat: 'yyyy-MM-dd',
-    dateTimeFormat: 'yyyy-MM-dd HH:mm:ss'
+    dateFormat: 'yyyy/MM/dd',
+    dateTimeFormat: 'yyyy/MM/dd HH:mm:ss'
   },
   DatePicker: {
     yearFormat: 'yyyy',
     monthFormat: 'MMM',
     dayFormat: 'eeeeee',
     yearTypeFormat: 'yyyy',
-    monthTypeFormat: 'yyyy-MM',
-    dateFormat: 'yyyy-MM-dd',
-    dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
+    monthTypeFormat: 'yyyy/MM',
+    dateFormat: 'yyyy/MM/dd',
+    dateTimeFormat: 'yyyy/MM/dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'YYYY-w',
     clear: 'پاککردنەوە',
     now: 'ئێستا',
     confirm: 'پشتڕاستکردنەوە',
@@ -39,10 +40,11 @@ const ckb = {
     monthPlaceholder: 'هەڵبژاردنی مانگ',
     yearPlaceholder: 'هەڵبژاردنی ساڵ',
     quarterPlaceholder: 'هەڵبژاردنی چارەک',
+    weekPlaceholder: 'هەفتە هەڵبژێرە',
     startDatePlaceholder: 'بەرواری دەستپێک',
     endDatePlaceholder: 'بەرواری کۆتایی',
     startDatetimePlaceholder: 'کات و بەرواری دەستپێک',
-    endDatetimePlaceholder: 'کات و بەرواری کۆتایی,
+    endDatetimePlaceholder: 'کات و بەرواری کۆتایی',
     startMonthPlaceholder: 'مانگی دەستپێک',
     endMonthPlaceholder: 'مانگی کۆتایی',
     monthBeforeYear: true,
@@ -76,7 +78,8 @@ const ckb = {
     placeholder: 'کات هەڵبژێرە',
     positiveText: 'باشە',
     negativeText: 'پەشیمانبوونەوە',
-    now: 'ئێستا'
+    now: 'ئێستا',
+    clear: 'پاککردنەوە'
   },
   Pagination: {
     goto: 'بڕۆ بۆ',
@@ -118,6 +121,12 @@ const ckb = {
     tipClose: 'داخستن (Esc)',
     // TODO: translation
     tipOriginalSize: 'نزیکردنەوە وەک قەبارەی بنەڕەت'
+  },
+  Heatmap: {
+    less: 'کەم',
+    more: 'زیاتر',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eee'
   }
 }
 
