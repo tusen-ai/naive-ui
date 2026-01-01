@@ -12,4 +12,4 @@ const dateCkb: NDateLocale = {
 }
 
 export type { NDateLocale }
-export default dateEnUs
+export default dateCkb
