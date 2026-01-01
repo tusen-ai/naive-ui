@@ -12,6 +12,7 @@ bordered.vue
 closable.vue
 icon.vue
 no-icon.vue
+marquee.vue
 rtl-debug.vue
 empty-debug.vue
 ```

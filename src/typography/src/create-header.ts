@@ -1,16 +1,18 @@
-import { h, defineComponent, computed, type PropType } from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import type { PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import { createKey, type ExtractPublicPropTypes } from '../../_utils'
-import { typographyLight } from '../styles'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { TypographyTheme } from '../styles'
+import { computed, defineComponent, h } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { createKey } from '../../_utils'
+import { typographyLight } from '../styles'
 import style from './styles/header.cssr'
 
 export const headerProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme>),
   type: {
     type: String as PropType<
-    'info' | 'success' | 'warning' | 'error' | 'default'
+      'info' | 'success' | 'warning' | 'error' | 'default'
     >,
     default: 'default'
   },
@@ -20,12 +22,11 @@ export const headerProps = {
 
 export type HeaderProps = ExtractPublicPropTypes<typeof headerProps>
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export default (level: '1' | '2' | '3' | '4' | '5' | '6') =>
   defineComponent({
     name: `H${level}`,
     props: headerProps,
-    setup (props) {
+    setup(props) {
       const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
       const themeRef = useTheme(
         'Typography',
@@ -66,7 +67,7 @@ export default (level: '1' | '2' | '3' | '4' | '5' | '6') =>
             computed(() => props.type[0]),
             cssVarsRef,
             props
-        )
+          )
         : undefined
       return {
         mergedClsPrefix: mergedClsPrefixRef,
@@ -75,7 +76,7 @@ export default (level: '1' | '2' | '3' | '4' | '5' | '6') =>
         onRender: themeClassHandle?.onRender
       }
     },
-    render () {
+    render() {
       const { prefix, alignText, mergedClsPrefix, cssVars, $slots } = this
       this.onRender?.()
       return h(

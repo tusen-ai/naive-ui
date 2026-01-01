@@ -1,54 +1,48 @@
-import {
-  defineComponent,
-  h,
-  computed,
-  ref,
-  toRef,
-  type PropType,
-  watch,
-  provide,
-  type Ref,
-  mergeProps
-} from 'vue'
-import { createTreeMate, type Key, type TreeNode } from 'treemate'
-import { useMergedState, useKeyboard, useMemo } from 'vooks'
-import { type FollowerPlacement } from 'vueuc'
-import type { InternalRenderBody } from '../../popover/src/interface'
-import { popoverBaseProps } from '../../popover/src/Popover'
-import type { PopoverInternalProps } from '../../popover/src/Popover'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import type { Key, TreeNode } from 'treemate'
+import type { PropType, Ref } from 'vue'
+import type { FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
-import { NPopover } from '../../popover'
-import {
-  keep,
-  call,
-  createKey,
-  type MaybeArray,
-  type ExtractPublicPropTypes,
-  createRefSetter
-} from '../../_utils'
-import { dropdownLight } from '../styles'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { InternalRenderBody } from '../../popover/src/interface'
+import type { PopoverInternalProps } from '../../popover/src/Popover'
 import type { DropdownTheme } from '../styles'
-import NDropdownMenu from './DropdownMenu'
-import style from './styles/index.cssr'
 import type {
+  DropdownGroupOption,
+  DropdownIgnoredOption,
+  DropdownMenuProps,
+  DropdownMixedOption,
   DropdownOption,
   DropdownRenderOption,
-  DropdownGroupOption,
-  DropdownMixedOption,
-  DropdownIgnoredOption,
+  NodeProps,
   OnUpdateValue,
   OnUpdateValueImpl,
-  RenderLabel,
   RenderIcon,
-  RenderLabelImpl,
   RenderIconImpl,
+  RenderLabel,
+  RenderLabelImpl,
   RenderOption,
-  NodeProps,
-  RenderOptionImpl,
-  DropdownMenuProps
+  RenderOptionImpl
 } from './interface'
+import { createTreeMate } from 'treemate'
+import { useKeyboard, useMemo, useMergedState } from 'vooks'
+import {
+  computed,
+  defineComponent,
+  h,
+  mergeProps,
+  provide,
+  ref,
+  toRef,
+  watch
+} from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { call, createKey, createRefSetter, keep } from '../../_utils'
+import { NPopover } from '../../popover'
+import { popoverBaseProps } from '../../popover/src/Popover'
+import { dropdownLight } from '../styles'
 import { dropdownInjectionKey } from './context'
+import NDropdownMenu from './DropdownMenu'
+import style from './styles/index.cssr'
 
 export interface DropdownInjection {
   renderLabelRef: Ref<RenderLabelImpl | undefined>
@@ -115,7 +109,7 @@ const dropdownBaseProps = {
 } as const
 
 const popoverPropKeys = Object.keys(popoverBaseProps) as Array<
-keyof typeof popoverBaseProps
+  keyof typeof popoverBaseProps
 >
 
 export const dropdownProps = {
@@ -130,7 +124,7 @@ export default defineComponent({
   name: 'Dropdown',
   inheritAttrs: false,
   props: dropdownProps,
-  setup (props) {
+  setup(props) {
     const uncontrolledShowRef = ref(false)
     const mergedShowRef = useMergedState(
       toRef(props, 'show'),
@@ -139,20 +133,20 @@ export default defineComponent({
     const treemateRef = computed(() => {
       const { keyField, childrenField } = props
       return createTreeMate<
-      DropdownOption | DropdownRenderOption,
-      DropdownGroupOption,
-      DropdownIgnoredOption
+        DropdownOption | DropdownRenderOption,
+        DropdownGroupOption,
+        DropdownIgnoredOption
       >(props.options, {
-        getKey (node) {
+        getKey(node) {
           return node[keyField] as any
         },
-        getDisabled (node) {
+        getDisabled(node) {
           return node.disabled === true
         },
-        getIgnored (node) {
+        getIgnored(node) {
           return node.type === 'divider' || node.type === 'render'
         },
-        getChildren (node) {
+        getChildren(node) {
           return node[childrenField] as any
         }
       })
@@ -166,10 +160,10 @@ export default defineComponent({
     const lastToggledSubmenuKeyRef = ref<Key | null>(null)
     const pendingKeyRef = computed(() => {
       return (
-        hoverKeyRef.value ??
-        keyboardKeyRef.value ??
-        lastToggledSubmenuKeyRef.value ??
-        null
+        hoverKeyRef.value
+        ?? keyboardKeyRef.value
+        ?? lastToggledSubmenuKeyRef.value
+        ?? null
       )
     })
 
@@ -229,10 +223,10 @@ export default defineComponent({
       labelFieldRef: toRef(props, 'labelField'),
       childrenFieldRef: toRef(props, 'childrenField'),
       renderLabelRef: toRef(props, 'renderLabel') as Ref<
-      RenderLabelImpl | undefined
+        RenderLabelImpl | undefined
       >,
       renderIconRef: toRef(props, 'renderIcon') as Ref<
-      RenderIconImpl | undefined
+        RenderIconImpl | undefined
       >,
       hoverKeyRef,
       keyboardKeyRef,
@@ -243,7 +237,7 @@ export default defineComponent({
       mergedShowRef,
       nodePropsRef: toRef(props, 'nodeProps'),
       renderOptionRef: toRef(props, 'renderOption') as Ref<
-      RenderOptionImpl | undefined
+        RenderOptionImpl | undefined
       >,
       menuPropsRef: toRef(props, 'menuProps'),
       doSelect,
@@ -256,50 +250,54 @@ export default defineComponent({
       }
     })
     // methods
-    function doSelect (key: Key, node: DropdownOption): void {
+    function doSelect(key: Key, node: DropdownOption): void {
       const { onSelect } = props
-      if (onSelect) call(onSelect as OnUpdateValueImpl, key, node)
+      if (onSelect)
+        call(onSelect as OnUpdateValueImpl, key, node)
     }
-    function doUpdateShow (value: boolean): void {
+    function doUpdateShow(value: boolean): void {
       const { 'onUpdate:show': _onUpdateShow, onUpdateShow } = props
-      if (_onUpdateShow) call(_onUpdateShow, value)
-      if (onUpdateShow) call(onUpdateShow, value)
+      if (_onUpdateShow)
+        call(_onUpdateShow, value)
+      if (onUpdateShow)
+        call(onUpdateShow, value)
       uncontrolledShowRef.value = value
     }
-    function clearPendingState (): void {
+    function clearPendingState(): void {
       hoverKeyRef.value = null
       keyboardKeyRef.value = null
       lastToggledSubmenuKeyRef.value = null
     }
-    function handleKeydownEsc (): void {
+    function handleKeydownEsc(): void {
       doUpdateShow(false)
     }
-    function handleKeydownLeft (): void {
+    function handleKeydownLeft(): void {
       handleKeydown('left')
     }
-    function handleKeydownRight (): void {
+    function handleKeydownRight(): void {
       handleKeydown('right')
     }
-    function handleKeydownUp (): void {
+    function handleKeydownUp(): void {
       handleKeydown('up')
     }
-    function handleKeydownDown (): void {
+    function handleKeydownDown(): void {
       handleKeydown('down')
     }
-    function handleKeydownEnter (): void {
+    function handleKeydownEnter(): void {
       const pendingNode = getPendingNode()
       if (pendingNode?.isLeaf && mergedShowRef.value) {
         doSelect(pendingNode.key, pendingNode.rawNode)
         doUpdateShow(false)
       }
     }
-    function getPendingNode (): TreeNode<DropdownOption> | null {
+    function getPendingNode(): TreeNode<DropdownOption> | null {
       const { value: treeMate } = treemateRef
       const { value: pendingKey } = pendingKeyRef
-      if (!treeMate || pendingKey === null) return null
+      if (!treeMate || pendingKey === null)
+        return null
       return treeMate.getNode(pendingKey) ?? null
     }
-    function handleKeydown (direction: 'up' | 'right' | 'down' | 'left'): void {
+    function handleKeydown(direction: 'up' | 'right' | 'down' | 'left'): void {
       const { value: pendingKey } = pendingKeyRef
       const {
         value: { getFirstAvailableNode }
@@ -310,7 +308,8 @@ export default defineComponent({
         if (firstNode !== null) {
           nextKeyboardKey = firstNode.key
         }
-      } else {
+      }
+      else {
         const currentNode = getPendingNode()
         if (currentNode) {
           let nextNode
@@ -328,7 +327,8 @@ export default defineComponent({
               nextNode = currentNode.getParent()
               break
           }
-          if (nextNode) nextKeyboardKey = nextNode.key
+          if (nextNode)
+            nextKeyboardKey = nextNode.key
         }
       }
       if (nextKeyboardKey !== null) {
@@ -376,22 +376,23 @@ export default defineComponent({
         vars['--n-option-color-active'] = self.optionColorActiveInverted
         vars['--n-option-text-color'] = self.optionTextColorInverted
         vars['--n-option-text-color-hover'] = self.optionTextColorHoverInverted
-        vars['--n-option-text-color-active'] =
-          self.optionTextColorActiveInverted
-        vars['--n-option-text-color-child-active'] =
-          self.optionTextColorChildActiveInverted
+        vars['--n-option-text-color-active']
+          = self.optionTextColorActiveInverted
+        vars['--n-option-text-color-child-active']
+          = self.optionTextColorChildActiveInverted
         vars['--n-prefix-color'] = self.prefixColorInverted
         vars['--n-suffix-color'] = self.suffixColorInverted
         vars['--n-group-header-text-color'] = self.groupHeaderTextColorInverted
-      } else {
+      }
+      else {
         vars['--n-color'] = self.color
         vars['--n-option-color-hover'] = self.optionColorHover
         vars['--n-option-color-active'] = self.optionColorActive
         vars['--n-option-text-color'] = self.optionTextColor
         vars['--n-option-text-color-hover'] = self.optionTextColorHover
         vars['--n-option-text-color-active'] = self.optionTextColorActive
-        vars['--n-option-text-color-child-active'] =
-          self.optionTextColorChildActive
+        vars['--n-option-text-color-child-active']
+          = self.optionTextColorChildActive
         vars['--n-prefix-color'] = self.prefixColor
         vars['--n-suffix-color'] = self.suffixColor
         vars['--n-group-header-text-color'] = self.groupHeaderTextColor
@@ -400,11 +401,11 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'dropdown',
-        computed(() => `${props.size[0]}${props.inverted ? 'i' : ''}`),
-        cssVarsRef,
-        props
-      )
+          'dropdown',
+          computed(() => `${props.size[0]}${props.inverted ? 'i' : ''}`),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
@@ -415,7 +416,8 @@ export default defineComponent({
       mergedShow: mergedShowRef,
       // methods
       handleAfterLeave: () => {
-        if (!props.animated) return
+        if (!props.animated)
+          return
         clearPendingState()
       },
       doUpdateShow,
@@ -424,7 +426,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const renderPopoverBody: InternalRenderBody = (
       className,
       ref,
@@ -434,17 +436,17 @@ export default defineComponent({
     ) => {
       const { mergedClsPrefix, menuProps } = this
       this.onRender?.()
-      const menuNodeProps =
-        menuProps?.(
+      const menuNodeProps
+        = menuProps?.(
           undefined,
-          this.tmNodes.map((v) => v.rawNode)
+          this.tmNodes.map(v => v.rawNode)
         ) || {}
       const dropdownProps = {
         ref: createRefSetter(ref),
         class: [className, `${mergedClsPrefix}-dropdown`, this.themeClass],
         clsPrefix: mergedClsPrefix,
         tmNodes: this.tmNodes,
-        style: [style, this.cssVars as any],
+        style: [...style, this.cssVars],
         showArrow: this.showArrow,
         arrowStyle: this.arrowStyle,
         scrollable: this.scrollable,

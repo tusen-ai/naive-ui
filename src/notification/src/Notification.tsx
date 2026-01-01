@@ -1,22 +1,15 @@
-import {
-  h,
-  defineComponent,
-  computed,
-  inject,
-  type PropType,
-  type VNodeChild,
-  type CSSProperties
-} from 'vue'
+import type { CSSProperties, PropType, VNodeChild } from 'vue'
 import { getPadding } from 'seemly'
+import { computed, defineComponent, h, inject } from 'vue'
+import { NBaseClose, NBaseIcon } from '../../_internal'
 import {
+  ErrorIcon,
   InfoIcon,
   SuccessIcon,
-  WarningIcon,
-  ErrorIcon
+  WarningIcon
 } from '../../_internal/icons'
+import { useConfig, useRtl, useThemeClass } from '../../_mixins'
 import { createKey, keysOf, render } from '../../_utils'
-import { NBaseIcon, NBaseClose } from '../../_internal'
-import { useConfig, useThemeClass, useRtl } from '../../_mixins'
 import { notificationProviderInjectionKey } from './context'
 
 const iconRenderMap = {
@@ -34,7 +27,7 @@ export const notificationProps = {
   },
   type: {
     type: String as PropType<
-    'info' | 'success' | 'warning' | 'error' | 'default'
+      'info' | 'success' | 'warning' | 'error' | 'default'
     >,
     default: 'default'
   },
@@ -58,12 +51,11 @@ export const notificationPropKeys = keysOf(notificationProps)
 export const Notification = defineComponent({
   name: 'Notification',
   props: notificationProps,
-  setup (props) {
+  setup(props) {
     const {
       mergedClsPrefixRef,
       mergedThemeRef,
       props: providerProps
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(notificationProviderInjectionKey)!
     const { inlineThemeDisabled, mergedRtlRef } = useConfig()
     const rtlEnabledRef = useRtl(
@@ -140,18 +132,18 @@ export const Notification = defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'notification',
-        computed(() => props.type[0]),
-        cssVarsRef,
-        providerProps
-      )
+          'notification',
+          computed(() => props.type[0]),
+          cssVarsRef,
+          providerProps
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       showAvatar: computed(() => {
         return props.avatar || props.type !== 'default'
       }),
-      handleCloseClick () {
+      handleCloseClick() {
         props.onClose()
       },
       rtlEnabled: rtlEnabledRef,
@@ -160,7 +152,7 @@ export const Notification = defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     this.onRender?.()
     return (

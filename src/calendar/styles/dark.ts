@@ -1,7 +1,7 @@
-import { commonDark } from '../../_styles/common'
 import type { CalendarTheme } from './light'
-import { self } from './light'
+import { commonDark } from '../../_styles/common'
 import { buttonDark } from '../../button/styles'
+import { self } from './light'
 
 const calendarDark: CalendarTheme = {
   name: 'Calendar',

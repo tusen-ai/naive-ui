@@ -1,58 +1,65 @@
-import {
-  h,
-  defineComponent,
-  ref,
-  cloneVNode,
-  computed,
-  onBeforeUnmount,
-  watch,
-  withDirectives,
-  vShow,
-  Transition,
-  toRef,
-  nextTick,
-  onMounted,
-  watchEffect,
-  normalizeStyle,
-  onUpdated
+import type {
+  CSSProperties,
+  PropType,
+  Ref,
+  SlotsType,
+  TransitionProps,
+  VNode
 } from 'vue'
-import type { CSSProperties, PropType, Ref, TransitionProps, VNode } from 'vue'
-import { VResizeObserver } from 'vueuc'
-import { useMergedState } from 'vooks'
-import { on, off } from 'evtd'
-import { getPreciseEventTarget } from 'seemly'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import type { ThemeProps } from '../../_mixins'
-import { flatten, keep, resolveSlotWithProps } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { carouselLight } from '../styles'
 import type { CarouselTheme } from '../styles'
-import {
-  calculateSize,
-  clampValue,
-  resolveSpeed,
-  isTouchEvent,
-  getNextIndex,
-  getPrevIndex,
-  getDisplayIndex,
-  getRealIndex,
-  getDisplayTotalView,
-  addDuplicateSlides
-} from './utils'
-import {
-  provideCarouselContext,
-  type CarouselContextValue
-} from './CarouselContext'
-import NCarouselDots from './CarouselDots'
-import NCarouselArrow from './CarouselArrow'
-import NCarouselItem, { isCarouselItem } from './CarouselItem'
+import type { CarouselContextValue } from './CarouselContext'
 import type {
   ArrowScopedSlotProps,
+  CarouselArrowSlotProps,
+  CarouselDotSlotProps,
   CarouselInst,
   DotScopedSlotProps,
   Size
 } from './interface'
+import { off, on } from 'evtd'
+import { getPreciseEventTarget } from 'seemly'
+import { useMergedState } from 'vooks'
+import {
+  cloneVNode,
+  computed,
+  defineComponent,
+  h,
+  nextTick,
+  normalizeStyle,
+  onBeforeUnmount,
+  onMounted,
+  onUpdated,
+  ref,
+  toRef,
+  Transition,
+  vShow,
+  watch,
+  watchEffect,
+  withDirectives
+} from 'vue'
+import { VResizeObserver } from 'vueuc'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { flatten, keep, resolveSlotWithTypedProps } from '../../_utils'
+import { carouselLight } from '../styles'
+import NCarouselArrow from './CarouselArrow'
+import { provideCarouselContext } from './CarouselContext'
+import NCarouselDots from './CarouselDots'
+import NCarouselItem, { isCarouselItem } from './CarouselItem'
 import style from './styles/index.cssr'
+import {
+  addDuplicateSlides,
+  calculateSize,
+  clampValue,
+  getDisplayIndex,
+  getDisplayTotalView,
+  getNextIndex,
+  getPrevIndex,
+  getRealIndex,
+  isTouchEvent,
+  resolveSpeed
+} from './utils'
 
 const transitionProperties = [
   'transitionDuration',
@@ -60,7 +67,7 @@ const transitionProperties = [
 ] as const
 
 type TransitionStyle = Partial<
-Pick<CSSProperties, typeof transitionProperties[number]>
+  Pick<CSSProperties, (typeof transitionProperties)[number]>
 >
 
 export const carouselProps = {
@@ -130,14 +137,20 @@ export const carouselProps = {
   mousewheel: Boolean,
   keyboard: Boolean,
   'onUpdate:currentIndex': Function as PropType<
-  (currentIndex: number, lastIndex: number) => void
+    (currentIndex: number, lastIndex: number) => void
   >,
   onUpdateCurrentIndex: Function as PropType<
-  (currentIndex: number, lastIndex: number) => void
+    (currentIndex: number, lastIndex: number) => void
   >
 }
 
 export type CarouselProps = ExtractPublicPropTypes<typeof carouselProps>
+
+export interface CarouselSlots {
+  default?: () => VNode[]
+  arrow?: (props: CarouselArrowSlotProps) => VNode[]
+  dots?: (props: CarouselDotSlotProps) => VNode[]
+}
 
 // only one carousel is allowed to trigger touch globally
 let globalDragging = false
@@ -145,7 +158,8 @@ let globalDragging = false
 export default defineComponent({
   name: 'Carousel',
   props: carouselProps,
-  setup (props) {
+  slots: Object as SlotsType<CarouselSlots>,
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     // Dom
     const selfElRef = ref<HTMLDivElement | null>(null)
@@ -179,18 +193,22 @@ export default defineComponent({
     // we automatically calculate total view for special slides per view
     const autoSlideSizeRef = computed(
       () =>
-        displaySlidesPerViewRef.value === 'auto' ||
-        (props.slidesPerView === 'auto' && props.centeredSlides)
+        displaySlidesPerViewRef.value === 'auto'
+        || (props.slidesPerView === 'auto' && props.centeredSlides)
     )
 
     // Carousel size
     const perViewSizeRef = ref({ width: 0, height: 0 })
+    const slideSizesTrigger = ref(0)
     const slideSizesRef = computed(() => {
       const { value: slidesEls } = slideElsRef
-      if (!slidesEls.length) return []
+      if (!slidesEls.length)
+        return []
+      // eslint-disable-next-line ts/no-unused-expressions
+      slideSizesTrigger.value
       const { value: autoSlideSize } = autoSlideSizeRef
       if (autoSlideSize) {
-        return slidesEls.map((slide) => calculateSize(slide))
+        return slidesEls.map(slide => calculateSize(slide))
       }
       const { value: slidesPerView } = realSlidesPerViewRef
       const { value: perViewSize } = perViewSizeRef
@@ -209,7 +227,8 @@ export default defineComponent({
     // The translate required to reach each slide
     const slideTranlatesRef = computed(() => {
       const { value: slideSizes } = slideSizesRef
-      if (!slideSizes.length) return []
+      if (!slideSizes.length)
+        return []
       const { centeredSlides, spaceBetween } = props
       const { value: axis } = sizeAxisRef
       const { [axis]: perViewSize } = perViewSizeRef.value
@@ -239,7 +258,8 @@ export default defineComponent({
     )
     const slideStylesRef = computed(() => {
       const { value: slidesEls } = slideElsRef
-      if (!slidesEls.length) return []
+      if (!slidesEls.length)
+        return []
       const useComputedSize = !(
         autoSlideSizeRef.value || realSlidesPerViewRef.value === 1
       )
@@ -277,10 +297,12 @@ export default defineComponent({
       const { length: totalSlides } = slideElsRef.value
       if (slidesPerView !== 'auto') {
         return Math.max(totalSlides - slidesPerView, 0) + 1
-      } else {
+      }
+      else {
         const { value: slideSizes } = slideSizesRef
         const { length } = slideSizes
-        if (!length) return totalSlides
+        if (!length)
+          return totalSlides
         const { value: translates } = slideTranlatesRef
         const { value: axis } = sizeAxisRef
         const perViewSize = perViewSizeRef.value[axis]
@@ -318,7 +340,7 @@ export default defineComponent({
     )
 
     // Reality methods
-    function toRealIndex (index: number): void {
+    function toRealIndex(index: number): void {
       index = clampValue(index, 0, totalViewRef.value - 1)
       const displayIndex = getDisplayIndex(
         index,
@@ -332,75 +354,90 @@ export default defineComponent({
         props.onUpdateCurrentIndex?.(displayIndex, lastDisplayIndex)
       }
     }
-    function getRealPrevIndex (
+    function getRealPrevIndex(
       index: number = realIndexRef.value
     ): number | null {
       return getPrevIndex(index, totalViewRef.value, props.loop)
     }
-    function getRealNextIndex (
+    function getRealNextIndex(
       index: number = realIndexRef.value
     ): number | null {
       return getNextIndex(index, totalViewRef.value, props.loop)
     }
-    function isRealPrev (slideOrIndex: HTMLElement | number): boolean {
+    function isRealPrev(slideOrIndex: HTMLElement | number): boolean {
       const index = getSlideIndex(slideOrIndex)
-      return index !== null && getRealPrevIndex() === index
+      return (
+        index !== null && getRealPrevIndex() === index && totalViewRef.value > 1
+      )
     }
-    function isRealNext (slideOrIndex: HTMLElement | number): boolean {
+    function isRealNext(slideOrIndex: HTMLElement | number): boolean {
       const index = getSlideIndex(slideOrIndex)
-      return index !== null && getRealNextIndex() === index
+      return (
+        index !== null && getRealNextIndex() === index && totalViewRef.value > 1
+      )
     }
-    function isRealActive (slideOrIndex: HTMLElement | number): boolean {
+    function isRealActive(slideOrIndex: HTMLElement | number): boolean {
       return realIndexRef.value === getSlideIndex(slideOrIndex)
     }
 
     // Display methods
     // They are used to deal with the actual values displayed on the UI
-    function isDisplayActive (index: number): boolean {
+    function isDisplayActive(index: number): boolean {
       return mergedDisplayIndexRef.value === index
     }
-    function isPrevDisabled (): boolean {
+    function isPrevDisabled(): boolean {
       return getRealPrevIndex() === null
     }
-    function isNextDisabled (): boolean {
+    function isNextDisabled(): boolean {
       return getRealNextIndex() === null
     }
 
     // To
-    function to (index: number): void {
+    let expectedTransitionDirection = 0
+    function to(index: number): void {
       const realIndex = clampValue(
         getRealIndex(index, duplicatedableRef.value),
         0,
         totalViewRef.value
       )
       if (
-        index !== mergedDisplayIndexRef.value ||
-        realIndex !== realIndexRef.value
+        index !== mergedDisplayIndexRef.value
+        || realIndex !== realIndexRef.value
       ) {
         toRealIndex(realIndex)
       }
     }
-    function prev (): void {
+    function prev(): void {
       const prevIndex = getRealPrevIndex()
-      if (prevIndex !== null) toRealIndex(prevIndex)
+      if (prevIndex !== null) {
+        expectedTransitionDirection = -1
+        toRealIndex(prevIndex)
+      }
     }
-    function next (): void {
+    function next(): void {
       const nextIndex = getRealNextIndex()
-      if (nextIndex !== null) toRealIndex(nextIndex)
-    }
-    function prevIfSlideTransitionEnd (): void {
-      if (!inTransition || !duplicatedableRef.value) prev()
-    }
-    function nextIfSlideTransitionEnd (): void {
-      if (!inTransition || !duplicatedableRef.value) next()
+      if (nextIndex !== null) {
+        expectedTransitionDirection = 1
+        toRealIndex(nextIndex)
+      }
     }
 
     // Translate to
     let inTransition = false
+
+    function prevIfSlideTransitionEnd(): void {
+      if (!inTransition || !duplicatedableRef.value)
+        prev()
+    }
+    function nextIfSlideTransitionEnd(): void {
+      if (!inTransition || !duplicatedableRef.value)
+        next()
+    }
+
     // record the translate of each slide, so that it can be restored at touch
     let previousTranslate = 0
     const translateStyleRef = ref({}) as Ref<CSSProperties>
-    function updateTranslate (translate: number, speed = 0): void {
+    function updateTranslate(translate: number, speed = 0): void {
       translateStyleRef.value = Object.assign({}, transitionStyleRef.value, {
         transform: verticalRef.value
           ? `translateY(${-translate}px)`
@@ -408,17 +445,18 @@ export default defineComponent({
         transitionDuration: `${speed}ms`
       })
     }
-    function fixTranslate (speed = 0): void {
+    function fixTranslate(speed = 0): void {
       if (sequenceLayoutRef.value) {
         translateTo(realIndexRef.value, speed)
-      } else if (previousTranslate !== 0) {
+      }
+      else if (previousTranslate !== 0) {
         if (!inTransition && speed > 0) {
           inTransition = true
         }
         updateTranslate((previousTranslate = 0), speed)
       }
     }
-    function translateTo (index: number, speed: number): void {
+    function translateTo(index: number, speed: number): void {
       const translate = getTranslate(index)
       if (translate !== previousTranslate && speed > 0) {
         inTransition = true
@@ -426,17 +464,18 @@ export default defineComponent({
       previousTranslate = getTranslate(realIndexRef.value)
       updateTranslate(translate, speed)
     }
-    function getTranslate (index: number): number {
+    function getTranslate(index: number): number {
       let translate
       // Deal with auto slides pre view
       if (index >= totalViewRef.value - 1) {
         translate = getLastViewTranslate()
-      } else {
+      }
+      else {
         translate = slideTranlatesRef.value[index] || 0
       }
       return translate
     }
-    function getLastViewTranslate (): number {
+    function getLastViewTranslate(): number {
       if (displaySlidesPerViewRef.value === 'auto') {
         const { value: axis } = sizeAxisRef
         const { [axis]: perViewSize } = perViewSizeRef.value
@@ -445,13 +484,15 @@ export default defineComponent({
         let overallSize
         if (lastTranslate === undefined) {
           overallSize = perViewSize
-        } else {
+        }
+        else {
           const { value: slideSizes } = slideSizesRef
           overallSize = lastTranslate + slideSizes[slideSizes.length - 1][axis]
         }
         // Bring the last slide to the edge
         return overallSize - perViewSize
-      } else {
+      }
+      else {
         const { value: translates } = slideTranlatesRef
         return translates[totalViewRef.value - 1] || 0
       }
@@ -477,25 +518,27 @@ export default defineComponent({
       onCarouselItemClick
     }
     provideCarouselContext(carouselContext)
-    function addSlide (slide?: HTMLElement): void {
-      if (!slide) return
+    function addSlide(slide?: HTMLElement): void {
+      if (!slide)
+        return
       slideElsRef.value.push(slide)
     }
-    function removeSlide (slide?: HTMLElement): void {
-      if (!slide) return
+    function removeSlide(slide?: HTMLElement): void {
+      if (!slide)
+        return
       const index = getSlideIndex(slide)
       if (index !== -1) {
         slideElsRef.value.splice(index, 1)
       }
     }
-    function getSlideIndex (slideOrIndex?: HTMLElement | number): number {
+    function getSlideIndex(slideOrIndex?: HTMLElement | number): number {
       return typeof slideOrIndex === 'number'
         ? slideOrIndex
         : slideOrIndex
           ? slideElsRef.value.indexOf(slideOrIndex)
           : -1
     }
-    function getSlideStyle (
+    function getSlideStyle(
       slide: HTMLElement | number
     ): string | Record<string, string | number> | undefined {
       const index = getSlideIndex(slide)
@@ -512,7 +555,14 @@ export default defineComponent({
         return normalizeStyle(styles)
       }
     }
-    function onCarouselItemClick (index: number, event: MouseEvent): void {
+    // Drag
+    let dragStartX = 0
+    let dragStartY = 0
+    let dragOffset = 0
+    let dragStartTime = 0
+    let dragging = false
+    let isEffectiveDrag = false
+    function onCarouselItemClick(index: number, event: MouseEvent): void {
       let allowClick = !inTransition && !dragging && !isEffectiveDrag
       if (props.effect === 'card' && allowClick && !isRealActive(index)) {
         to(index)
@@ -526,13 +576,13 @@ export default defineComponent({
 
     // Autoplay
     let autoplayTimer: number | null = null
-    function stopAutoplay (): void {
+    function stopAutoplay(): void {
       if (autoplayTimer) {
         clearInterval(autoplayTimer)
         autoplayTimer = null
       }
     }
-    function resetAutoplay (): void {
+    function resetAutoplay(): void {
       stopAutoplay()
       const disabled = !props.autoplay || displayTotalViewRef.value < 2
       if (!disabled) {
@@ -540,15 +590,9 @@ export default defineComponent({
       }
     }
 
-    // Drag
-    let dragStartX = 0
-    let dragStartY = 0
-    let dragOffset = 0
-    let dragStartTime = 0
-    let dragging = false
-    let isEffectiveDrag = false
-    function handleTouchstart (event: MouseEvent | TouchEvent): void {
-      if (globalDragging) return
+    function handleTouchstart(event: MouseEvent | TouchEvent): void {
+      if (globalDragging)
+        return
       if (
         !slidesElRef.value?.contains(
           getPreciseEventTarget(event) as Node | null
@@ -562,19 +606,20 @@ export default defineComponent({
       dragStartTime = Date.now()
       stopAutoplay()
       if (
-        event.type !== 'touchstart' &&
-        !(event.target as HTMLElement).isContentEditable
+        event.type !== 'touchstart'
+        && !(event.target as HTMLElement).isContentEditable
       ) {
         event.preventDefault()
       }
       const touchEvent = isTouchEvent(event) ? event.touches[0] : event
       if (verticalRef.value) {
         dragStartY = touchEvent.clientY
-      } else {
+      }
+      else {
         dragStartX = touchEvent.clientX
       }
       if (props.touchable) {
-        on('touchmove', document, handleTouchmove, { passive: true } as any)
+        on('touchmove', document, handleTouchmove)
         on('touchend', document, handleTouchend)
         on('touchcancel', document, handleTouchend)
       }
@@ -583,7 +628,7 @@ export default defineComponent({
         on('mouseup', document, handleTouchend)
       }
     }
-    function handleTouchmove (event: MouseEvent | TouchEvent): void {
+    function handleTouchmove(event: MouseEvent | TouchEvent): void {
       const { value: vertical } = verticalRef
       const { value: axis } = sizeAxisRef
       const touchEvent = isTouchEvent(event) ? event.touches[0] : event
@@ -599,7 +644,7 @@ export default defineComponent({
         updateTranslate(previousTranslate - dragOffset, 0)
       }
     }
-    function handleTouchend (): void {
+    function handleTouchend(): void {
       const { value: realIndex } = realIndexRef
       let currentIndex: number | null = realIndex
       if (!inTransition && dragOffset !== 0 && sequenceLayoutRef.value) {
@@ -624,12 +669,13 @@ export default defineComponent({
         const perViewSize = perViewSizeRef.value[axis]
         // more than 50% width or faster than 0.4px per ms
         if (dragOffset > perViewSize / 2 || dragOffset / timeElapsed > 0.4) {
-          currentIndex = getRealPrevIndex(realIndex)
-        } else if (
-          dragOffset < -perViewSize / 2 ||
-          dragOffset / timeElapsed < -0.4
+          prev()
+        }
+        else if (
+          dragOffset < -perViewSize / 2
+          || dragOffset / timeElapsed < -0.4
         ) {
-          currentIndex = getRealNextIndex(realIndex)
+          next()
         }
       }
       if (currentIndex !== null && currentIndex !== realIndex) {
@@ -637,19 +683,20 @@ export default defineComponent({
         toRealIndex(currentIndex)
         void nextTick(() => {
           if (
-            !duplicatedableRef.value ||
-            uncontrolledDisplayIndexRef.value !== mergedDisplayIndexRef.value
+            !duplicatedableRef.value
+            || uncontrolledDisplayIndexRef.value !== mergedDisplayIndexRef.value
           ) {
             fixTranslate(speedRef.value)
           }
         })
-      } else {
+      }
+      else {
         fixTranslate(speedRef.value)
       }
       resetDragStatus()
       resetAutoplay()
     }
-    function resetDragStatus (): void {
+    function resetDragStatus(): void {
       if (dragging) {
         globalDragging = false
       }
@@ -665,11 +712,12 @@ export default defineComponent({
       off('mouseup', document, handleTouchend)
     }
 
-    function handleTransitionEnd (): void {
+    function handleTransitionEnd(): void {
       if (sequenceLayoutRef.value && inTransition) {
         const { value: realIndex } = realIndexRef
         translateTo(realIndex, 0)
-      } else {
+      }
+      else {
         resetAutoplay()
       }
       if (sequenceLayoutRef.value) {
@@ -677,9 +725,10 @@ export default defineComponent({
       }
       inTransition = false
     }
-    function handleMousewheel (event: WheelEvent): void {
+    function handleMousewheel(event: WheelEvent): void {
       event.preventDefault()
-      if (inTransition) return
+      if (inTransition)
+        return
       let { deltaX, deltaY } = event
       if (event.shiftKey && !deltaX) {
         deltaX = deltaY
@@ -691,34 +740,35 @@ export default defineComponent({
       let ry = 0
       if (verticalRef.value) {
         ry = m
-      } else {
+      }
+      else {
         rx = m
       }
       const responseStep = 10
       if (ry * deltaY >= responseStep || rx * deltaX >= responseStep) {
         if (m === nextMultiplier && !isNextDisabled()) {
           next()
-        } else if (m === prevMultiplier && !isPrevDisabled()) {
+        }
+        else if (m === prevMultiplier && !isPrevDisabled()) {
           prev()
         }
       }
     }
-    function handleResize (): void {
+    function handleResize(): void {
       perViewSizeRef.value = calculateSize(selfElRef.value as HTMLElement, true)
       resetAutoplay()
     }
-    function handleSlideResize (): void {
+    function handleSlideResize(): void {
       if (autoSlideSizeRef.value) {
-        slideSizesRef.effect.scheduler?.()
-        slideSizesRef.effect.run()
+        slideSizesTrigger.value++
       }
     }
-    function handleMouseenter (): void {
+    function handleMouseenter(): void {
       if (props.autoplay) {
         stopAutoplay()
       }
     }
-    function handleMouseleave (): void {
+    function handleMouseleave(): void {
       if (props.autoplay) {
         resetAutoplay()
       }
@@ -737,11 +787,10 @@ export default defineComponent({
       const { value: slideVNodes } = slideVNodesRef
       const indexMap = new Map<HTMLElement, number>()
       const getDisplayIndex = (el: HTMLElement): number =>
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         indexMap.has(el) ? indexMap.get(el)! : -1
       let isChanged = false
       for (let i = 0; i < slidesEls.length; i++) {
-        const index = slideVNodes.findIndex((v) => v.el === slidesEls[i])
+        const index = slideVNodes.findIndex(v => v.el === slidesEls[i])
         if (index !== i) {
           isChanged = true
         }
@@ -753,22 +802,36 @@ export default defineComponent({
     })
     watch(
       realIndexRef,
-      (realIndex, lastRealIndex) => {
-        if (realIndex === lastRealIndex) return
+      (nextRealIndex, lastRealIndex) => {
+        if (nextRealIndex === lastRealIndex) {
+          expectedTransitionDirection = 0
+          return
+        }
         resetAutoplay()
         if (sequenceLayoutRef.value) {
-          if (duplicatedableRef.value && displayTotalViewRef.value > 2) {
+          if (duplicatedableRef.value) {
             const { value: length } = totalViewRef
-            if (realIndex === length - 2 && lastRealIndex === 1) {
-              realIndex = 0
-            } else if (realIndex === 1 && lastRealIndex === length - 2) {
-              realIndex = length - 1
+            if (
+              expectedTransitionDirection === -1
+              && lastRealIndex === 1
+              && nextRealIndex === length - 2
+            ) {
+              nextRealIndex = 0
+            }
+            else if (
+              expectedTransitionDirection === 1
+              && lastRealIndex === length - 2
+              && nextRealIndex === 1
+            ) {
+              nextRealIndex = length - 1
             }
           }
-          translateTo(realIndex, speedRef.value)
-        } else {
+          translateTo(nextRealIndex, speedRef.value)
+        }
+        else {
           fixTranslate()
         }
+        expectedTransitionDirection = 0
       },
       { immediate: true }
     )
@@ -782,7 +845,9 @@ export default defineComponent({
     watch(
       slideTranlatesRef,
       () => {
-        sequenceLayoutRef.value && fixTranslate()
+        if (sequenceLayoutRef.value) {
+          fixTranslate()
+        }
       },
       {
         deep: true
@@ -793,7 +858,8 @@ export default defineComponent({
         inTransition = false
         // if the current mode does not support translate, reset the position of the wrapper
         updateTranslate((previousTranslate = 0))
-      } else {
+      }
+      else {
         fixTranslate()
       }
     })
@@ -869,7 +935,6 @@ export default defineComponent({
       duplicatedable: duplicatedableRef,
       userWantsControl: userWantsControlRef,
       autoSlideSize: autoSlideSizeRef,
-      displayIndex: mergedDisplayIndexRef,
       realIndex: realIndexRef,
       slideStyles: slideStylesRef,
       translateStyle: translateStyleRef,
@@ -888,7 +953,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       showArrow,
@@ -905,7 +970,7 @@ export default defineComponent({
     const children = (defaultSlot && flatten(defaultSlot())) || []
     let slides = filterCarouselItem(children)
     if (!slides.length) {
-      slides = children.map((ch) => (
+      slides = children.map(ch => (
         <NCarouselItem>
           {{
             default: () => cloneVNode(ch)
@@ -920,7 +985,7 @@ export default defineComponent({
     // When users need to customize the size of the slide,
     // we listen to them to fix the current translate
     if (this.autoSlideSize) {
-      slides = slides.map((slide) => (
+      slides = slides.map(slide => (
         <VResizeObserver onResize={this.handleSlideResize}>
           {{
             default: () => slide
@@ -935,8 +1000,8 @@ export default defineComponent({
         class={[
           this.themeClass,
           `${mergedClsPrefix}-carousel`,
-          this.direction === 'vertical' &&
-            `${mergedClsPrefix}-carousel--vertical`,
+          this.direction === 'vertical'
+          && `${mergedClsPrefix}-carousel--vertical`,
           this.showArrow && `${mergedClsPrefix}-carousel--show-arrow`,
           `${mergedClsPrefix}-carousel--${dotPlacement}`,
           `${mergedClsPrefix}-carousel--${this.direction}`,
@@ -970,15 +1035,15 @@ export default defineComponent({
                           [[vShow, this.isActive(i)]]
                         )}
                       </div>
-                  ))
+                    ))
                   : slides}
               </div>
             )
           }}
         </VResizeObserver>
-        {this.showDots &&
-          dotSlotProps.total > 1 &&
-          resolveSlotWithProps(dotsSlot, dotSlotProps, () => [
+        {this.showDots
+          && dotSlotProps.total > 1
+          && resolveSlotWithTypedProps(dotsSlot, dotSlotProps, () => [
             <NCarouselDots
               key={dotType + dotPlacement}
               total={dotSlotProps.total}
@@ -988,8 +1053,8 @@ export default defineComponent({
               keyboard={this.keyboard}
             />
           ])}
-        {showArrow &&
-          resolveSlotWithProps(arrowSlot, arrowSlotProps, () => [
+        {showArrow
+          && resolveSlotWithTypedProps(arrowSlot, arrowSlotProps, () => [
             <NCarouselArrow />
           ])}
       </div>
@@ -997,7 +1062,7 @@ export default defineComponent({
   }
 })
 
-function filterCarouselItem (vnodes: VNode[]): VNode[] {
+function filterCarouselItem(vnodes: VNode[]): VNode[] {
   return vnodes.reduce<VNode[]>((carouselItems, vnode) => {
     if (isCarouselItem(vnode)) {
       carouselItems.push(vnode)

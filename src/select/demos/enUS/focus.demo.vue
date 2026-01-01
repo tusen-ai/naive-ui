@@ -2,6 +2,20 @@
 # Focus & blur manually
 </markdown>
 
+<script lang="ts" setup>
+import type { SelectInst } from 'naive-ui'
+import { ref } from 'vue'
+
+const selectInstRef = ref<SelectInst | null>(null)
+
+function handleClick() {
+  selectInstRef.value?.focus()
+  setTimeout(() => {
+    selectInstRef.value?.blur()
+  }, 1000)
+}
+</script>
+
 <template>
   <n-space item-style="display: flex; align-item: center;">
     <n-button @click="handleClick">
@@ -10,23 +24,3 @@
     <n-select ref="selectInstRef" style="width: 200px" />
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { SelectInst } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const selectInstRef = ref<SelectInst | null>(null)
-    return {
-      handleClick () {
-        selectInstRef.value?.focus()
-        setTimeout(() => {
-          selectInstRef.value?.blur()
-        }, 1000)
-      },
-      selectInstRef
-    }
-  }
-})
-</script>

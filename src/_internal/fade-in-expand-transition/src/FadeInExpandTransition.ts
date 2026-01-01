@@ -1,11 +1,5 @@
-import {
-  h,
-  Transition,
-  TransitionGroup,
-  type TransitionProps,
-  defineComponent,
-  type PropType
-} from 'vue'
+import type { PropType, TransitionProps } from 'vue'
+import { defineComponent, h, Transition, TransitionGroup } from 'vue'
 
 export default defineComponent({
   name: 'FadeInExpandTransition',
@@ -21,35 +15,40 @@ export default defineComponent({
     // it make it from expanded to collapsed after mounted
     reverse: Boolean
   },
-  setup (props, { slots }) {
-    function handleBeforeLeave (el: HTMLElement): void {
+  setup(props, { slots }) {
+    function handleBeforeLeave(el: HTMLElement): void {
       if (props.width) {
         el.style.maxWidth = `${el.offsetWidth}px`
-      } else {
+      }
+      else {
         el.style.maxHeight = `${el.offsetHeight}px`
       }
       void el.offsetWidth
     }
-    function handleLeave (el: HTMLElement): void {
+    function handleLeave(el: HTMLElement): void {
       if (props.width) {
         el.style.maxWidth = '0'
-      } else {
+      }
+      else {
         el.style.maxHeight = '0'
       }
       void el.offsetWidth
       const { onLeave } = props
-      if (onLeave) onLeave()
+      if (onLeave)
+        onLeave()
     }
-    function handleAfterLeave (el: HTMLElement): void {
+    function handleAfterLeave(el: HTMLElement): void {
       if (props.width) {
         el.style.maxWidth = ''
-      } else {
+      }
+      else {
         el.style.maxHeight = ''
       }
       const { onAfterLeave } = props
-      if (onAfterLeave) onAfterLeave()
+      if (onAfterLeave)
+        onAfterLeave()
     }
-    function handleEnter (el: HTMLElement): void {
+    function handleEnter(el: HTMLElement): void {
       el.style.transition = 'none'
       if (props.width) {
         const memorizedWidth = el.offsetWidth
@@ -57,13 +56,15 @@ export default defineComponent({
         void el.offsetWidth
         el.style.transition = ''
         el.style.maxWidth = `${memorizedWidth}px`
-      } else {
+      }
+      else {
         if (props.reverse) {
           el.style.maxHeight = `${el.offsetHeight}px`
           void el.offsetHeight
           el.style.transition = ''
           el.style.maxHeight = '0'
-        } else {
+        }
+        else {
           const memorizedHeight = el.offsetHeight
           el.style.maxHeight = '0'
           void el.offsetWidth
@@ -73,10 +74,11 @@ export default defineComponent({
       }
       void el.offsetWidth
     }
-    function handleAfterEnter (el: HTMLElement): void {
+    function handleAfterEnter(el: HTMLElement): void {
       if (props.width) {
         el.style.maxWidth = ''
-      } else {
+      }
+      else {
         if (!props.reverse) {
           el.style.maxHeight = ''
         }

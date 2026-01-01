@@ -1,67 +1,72 @@
-import {
-  h,
-  ref,
-  toRef,
-  computed,
-  defineComponent,
-  Transition,
-  type PropType,
-  withDirectives,
-  type CSSProperties,
-  type InputHTMLAttributes,
-  watchEffect,
-  type HTMLAttributes
-} from 'vue'
-import { createTreeMate, type TreeNode } from 'treemate'
-import { VBinder, VTarget, VFollower, type FollowerPlacement } from 'vueuc'
-import { clickoutside } from 'vdirs'
-import { useIsMounted, useMergedState } from 'vooks'
-import { getPreciseEventTarget } from 'seemly'
+import type { TreeNode } from 'treemate'
 import type {
-  RenderOption,
-  RenderLabel
+  CSSProperties,
+  HTMLAttributes,
+  InputHTMLAttributes,
+  PropType,
+  SlotsType,
+  VNode
+} from 'vue'
+import type { FollowerPlacement } from 'vueuc'
+import type { InternalSelectMenuRef } from '../../_internal'
+import type {
+  RenderLabel,
+  RenderOption
 } from '../../_internal/select-menu/src/interface'
-import { createTmOptions } from '../../select/src/utils'
-import type { FormValidationStatus } from '../../form/src/interface'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { FormValidationStatus } from '../../form/src/public-types'
+import type { InputInst } from '../../input'
 import type {
   SelectBaseOption,
   SelectGroupOption,
   SelectIgnoredOption
 } from '../../select/src/interface'
-import { useFormItem, useTheme, useConfig, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
-import {
-  call,
-  useAdjustedTo,
-  type MaybeArray,
-  getFirstSlotVNode,
-  warnOnce,
-  type ExtractPublicPropTypes
-} from '../../_utils'
-import {
-  NInternalSelectMenu,
-  type InternalSelectMenuRef
-} from '../../_internal'
-import type { InputInst } from '../../input'
-import { NInput } from '../../input'
-import { autoCompleteLight } from '../styles'
 import type { AutoCompleteTheme } from '../styles'
-import { mapAutoCompleteOptionsToSelectOptions } from './utils'
 import type {
+  AutoCompleteDefaultSlotProps,
+  AutoCompleteInst,
+  AutoCompleteOption,
   AutoCompleteOptions,
-  OnUpdateValue,
   OnSelect,
   OnSelectImpl,
   OnUpdateImpl,
-  AutoCompleteOption,
-  AutoCompleteInst
+  OnUpdateValue
 } from './interface'
+import { getPreciseEventTarget } from 'seemly'
+import { createTreeMate } from 'treemate'
+import { clickoutside } from 'vdirs'
+import { useIsMounted, useMergedState } from 'vooks'
+import {
+  computed,
+  defineComponent,
+  h,
+  ref,
+  toRef,
+  Transition,
+  watchEffect,
+  withDirectives
+} from 'vue'
+import { VBinder, VFollower, VTarget } from 'vueuc'
+import { NInternalSelectMenu } from '../../_internal'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import {
+  call,
+  getFirstSlotVNodeWithTypedProps,
+  useAdjustedTo,
+  warnOnce
+} from '../../_utils'
+import { NInput } from '../../input'
+import { createTmOptions } from '../../select/src/utils'
+import { autoCompleteLight } from '../styles'
 import style from './styles/index.cssr'
+import { mapAutoCompleteOptionsToSelectOptions } from './utils'
 
 export const autoCompleteProps = {
   ...(useTheme.props as ThemeProps<AutoCompleteTheme>),
   to: useAdjustedTo.propTo,
   menuProps: Object as PropType<HTMLAttributes>,
+  append: Boolean,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -91,6 +96,7 @@ export const autoCompleteProps = {
   blurAfterSelect: Boolean,
   clearAfterSelect: Boolean,
   getShow: Function as PropType<(inputValue: string) => boolean>,
+  showEmpty: Boolean,
   inputProps: Object as PropType<InputHTMLAttributes>,
   renderOption: Function as PropType<RenderOption>,
   renderLabel: Function as PropType<RenderLabel>,
@@ -112,10 +118,18 @@ export const autoCompleteProps = {
 
 export type AutoCompleteProps = ExtractPublicPropTypes<typeof autoCompleteProps>
 
+export interface AutoCompleteSlots {
+  default?: (options: AutoCompleteDefaultSlotProps) => VNode[]
+  empty?: () => VNode[]
+  prefix?: () => VNode[]
+  suffix?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'AutoComplete',
   props: autoCompleteProps,
-  setup (props) {
+  slots: Object as SlotsType<AutoCompleteSlots>,
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.onInput !== undefined) {
@@ -166,9 +180,9 @@ export default defineComponent({
     })
     const activeRef = computed(() => {
       return (
-        mergedShowOptionsRef.value &&
-        canBeActivatedRef.value &&
-        !!selectOptionsRef.value.length
+        mergedShowOptionsRef.value
+        && canBeActivatedRef.value
+        && (props.showEmpty ? true : !!selectOptionsRef.value.length)
       )
     })
     const treeMateRef = computed(() =>
@@ -177,44 +191,50 @@ export default defineComponent({
         createTmOptions('value', 'children')
       )
     )
-    function doUpdateValue (value: string | null): void {
+    function doUpdateValue(value: string | null): void {
       const { 'onUpdate:value': _onUpdateValue, onUpdateValue, onInput } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (onUpdateValue) call(onUpdateValue as OnUpdateImpl, value)
-      if (_onUpdateValue) call(_onUpdateValue as OnUpdateImpl, value)
-      if (onInput) call(onInput as OnUpdateImpl, value)
+      if (onUpdateValue)
+        call(onUpdateValue as OnUpdateImpl, value)
+      if (_onUpdateValue)
+        call(_onUpdateValue as OnUpdateImpl, value)
+      if (onInput)
+        call(onInput as OnUpdateImpl, value)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()
     }
-    function doSelect (value: string | number): void {
+    function doSelect(value: string | number): void {
       const { onSelect } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (onSelect) call(onSelect as OnSelectImpl, value)
+      if (onSelect)
+        call(onSelect as OnSelectImpl, value)
       nTriggerFormInput()
       nTriggerFormChange()
     }
-    function doBlur (e: FocusEvent): void {
+    function doBlur(e: FocusEvent): void {
       const { onBlur } = props
       const { nTriggerFormBlur } = formItem
-      if (onBlur) call(onBlur, e)
+      if (onBlur)
+        call(onBlur, e)
       nTriggerFormBlur()
     }
-    function doFocus (e: FocusEvent): void {
+    function doFocus(e: FocusEvent): void {
       const { onFocus } = props
       const { nTriggerFormFocus } = formItem
-      if (onFocus) call(onFocus, e)
+      if (onFocus)
+        call(onFocus, e)
       nTriggerFormFocus()
     }
-    function handleCompositionStart (): void {
+    function handleCompositionStart(): void {
       isComposingRef.value = true
     }
-    function handleCompositionEnd (): void {
+    function handleCompositionEnd(): void {
       window.setTimeout(() => {
         isComposingRef.value = false
       }, 0)
     }
-    function handleKeyDown (e: KeyboardEvent): void {
+    function handleKeyDown(e: KeyboardEvent): void {
       switch (e.key) {
         case 'Enter':
           if (!isComposingRef.value) {
@@ -233,13 +253,18 @@ export default defineComponent({
           break
       }
     }
-    function select (option: AutoCompleteOption): void {
+    function select(option: AutoCompleteOption): void {
       if (option?.value !== undefined) {
         doSelect(option.value)
         if (props.clearAfterSelect) {
           doUpdateValue(null)
-        } else if (option.label !== undefined) {
-          doUpdateValue(option.label)
+        }
+        else if (option.label !== undefined) {
+          doUpdateValue(
+            props.append
+              ? `${mergedValueRef.value}${option.label}`
+              : option.label
+          )
         }
         canBeActivatedRef.value = false
         if (props.blurAfterSelect) {
@@ -247,32 +272,32 @@ export default defineComponent({
         }
       }
     }
-    function handleClear (): void {
+    function handleClear(): void {
       doUpdateValue(null)
     }
-    function handleFocus (e: FocusEvent): void {
+    function handleFocus(e: FocusEvent): void {
       canBeActivatedRef.value = true
       doFocus(e)
     }
-    function handleBlur (e: FocusEvent): void {
+    function handleBlur(e: FocusEvent): void {
       canBeActivatedRef.value = false
       doBlur(e)
     }
-    function handleInput (value: string): void {
+    function handleInput(value: string): void {
       canBeActivatedRef.value = true
       doUpdateValue(value)
     }
-    function handleToggle (option: TreeNode<SelectBaseOption>): void {
+    function handleToggle(option: TreeNode<SelectBaseOption>): void {
       select(option.rawNode as AutoCompleteOption)
     }
-    function handleClickOutsideMenu (e: MouseEvent): void {
+    function handleClickOutsideMenu(e: MouseEvent): void {
       if (
         !triggerElRef.value?.contains(getPreciseEventTarget(e) as Node | null)
       ) {
         canBeActivatedRef.value = false
       }
     }
-    function blur (): void {
+    function blur(): void {
       if (triggerElRef.value?.contains(document.activeElement)) {
         ;(document.activeElement as HTMLElement)?.blur()
       }
@@ -332,7 +357,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     return (
       <div
@@ -350,12 +375,16 @@ export default defineComponent({
                   default: () => {
                     const defaultSlot = this.$slots.default
                     if (defaultSlot) {
-                      return getFirstSlotVNode(this.$slots, 'default', {
-                        handleInput: this.handleInput,
-                        handleFocus: this.handleFocus,
-                        handleBlur: this.handleBlur,
-                        value: this.mergedValue
-                      })
+                      return getFirstSlotVNodeWithTypedProps(
+                        'default',
+                        defaultSlot,
+                        {
+                          handleInput: this.handleInput,
+                          handleFocus: this.handleFocus,
+                          handleBlur: this.handleBlur,
+                          value: this.mergedValue
+                        }
+                      )
                     }
                     const { mergedTheme } = this
                     return (
@@ -404,7 +433,8 @@ export default defineComponent({
                       {{
                         default: () => {
                           this.onRender?.()
-                          if (!this.active) return null
+                          if (!this.active)
+                            return null
                           const { menuProps } = this
                           return withDirectives(
                             <NInternalSelectMenu
@@ -432,7 +462,9 @@ export default defineComponent({
                               renderOption={this.renderOption}
                               size="medium"
                               onToggle={this.handleToggle}
-                            />,
+                            >
+                              {{ empty: () => this.$slots.empty?.() }}
+                            </NInternalSelectMenu>,
                             [
                               [
                                 clickoutside,

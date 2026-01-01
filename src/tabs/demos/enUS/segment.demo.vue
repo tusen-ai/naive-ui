@@ -5,7 +5,7 @@ Tabs of segment type.
 </markdown>
 
 <template>
-  <n-tabs type="segment">
+  <n-tabs type="segment" animated>
     <n-tab-pane name="oasis" tab="Oasis">
       Wonderwall
     </n-tab-pane>

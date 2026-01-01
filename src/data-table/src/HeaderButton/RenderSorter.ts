@@ -1,5 +1,6 @@
-import { defineComponent, type PropType } from 'vue'
+import type { PropType } from 'vue'
 import type { RenderSorter, SortOrder } from '../interface'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'DataTableRenderSorter',
@@ -14,7 +15,7 @@ export default defineComponent({
       default: false
     }
   },
-  render () {
+  render() {
     const { render, order } = this
     return render({
       order

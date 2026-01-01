@@ -3,8 +3,14 @@ import { createInjectionKey } from '../../_utils'
 
 export type Size = 'tiny' | 'small' | 'medium' | 'large'
 
-export type OnUpdateValue = (value: string & [string, string]) => void
-export type OnUpdateValueImpl = (value: string | [string, string]) => void
+export type OnUpdateValue = (
+  value: string & [string, string],
+  meta: { source: 0 | 1 | 'clear' }
+) => void
+export type OnUpdateValueImpl = (
+  value: string | [string, string],
+  meta: { source: 0 | 1 | 'clear' }
+) => void
 
 export interface InputWrappedRef {
   wrapperElRef: Ref<HTMLElement | null>
@@ -12,6 +18,7 @@ export interface InputWrappedRef {
   inputElRef: Ref<HTMLInputElement | null>
   isCompositing: Ref<boolean>
   blur: () => void
+  clear: () => void
   focus: () => void
   select: () => void
   activate: () => void

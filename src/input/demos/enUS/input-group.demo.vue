@@ -1,7 +1,30 @@
 <markdown>
 # Input group
-
 </markdown>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const selectOptions = ref([
+  {
+    label: 'option',
+    value: 'option'
+  }
+])
+
+const cascaderOptions = ref([
+  {
+    label: 'option-1',
+    value: 'option-1',
+    children: [
+      {
+        label: 'option-1-1',
+        value: 'option-1-1'
+      }
+    ]
+  }
+])
+</script>
 
 <template>
   <n-space vertical>
@@ -35,32 +58,3 @@
     </n-input-group>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      selectOptions: ref([
-        {
-          label: 'option',
-          value: 'option'
-        }
-      ]),
-      cascaderOptions: ref([
-        {
-          label: 'option-1',
-          value: 'option-1',
-          children: [
-            {
-              label: 'option-1-1',
-              value: 'option-1-1'
-            }
-          ]
-        }
-      ])
-    }
-  }
-})
-</script>

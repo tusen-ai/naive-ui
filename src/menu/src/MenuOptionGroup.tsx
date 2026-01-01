@@ -1,22 +1,12 @@
-import {
-  h,
-  defineComponent,
-  provide,
-  type PropType,
-  Fragment,
-  inject
-} from 'vue'
-import { render } from '../../_utils'
+import type { PropType } from 'vue'
+import type { TmNode } from './interface'
+import { computed, defineComponent, Fragment, h, inject, provide } from 'vue'
+import { keysOf, render } from '../../_utils'
+import { menuInjectionKey, menuItemGroupInjectionKey } from './context'
+
 import { useMenuChild } from './use-menu-child'
 import { useMenuChildProps } from './use-menu-child-props'
-// eslint-disable-next-line import/no-cycle
 import { itemRenderer } from './utils'
-import type { TmNode } from './interface'
-import {
-  submenuInjectionKey,
-  menuInjectionKey,
-  menuItemGroupInjectionKey
-} from './context'
 
 export const menuItemGroupProps = {
   ...useMenuChildProps,
@@ -30,16 +20,23 @@ export const menuItemGroupProps = {
   }
 } as const
 
+export const menuItemGroupPropKeys = keysOf(menuItemGroupProps)
+
 export const NMenuOptionGroup = defineComponent({
   name: 'MenuOptionGroup',
   props: menuItemGroupProps,
-  setup (props) {
-    provide(submenuInjectionKey, null)
+  setup(props) {
     const MenuChild = useMenuChild(props)
-    provide(menuItemGroupInjectionKey, {
-      paddingLeftRef: MenuChild.paddingLeft
+    const { NSubmenu } = MenuChild
+    const mergedDisabledRef = computed(() => {
+      if (NSubmenu?.mergedDisabledRef.value)
+        return true
+      return props.tmNode.disabled
     })
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    provide(menuItemGroupInjectionKey, {
+      paddingLeftRef: MenuChild.paddingLeft,
+      mergedDisabledRef
+    })
     const { mergedClsPrefixRef, props: menuProps } = inject(menuInjectionKey)!
     return function () {
       const { value: mergedClsPrefix } = mergedClsPrefixRef
@@ -57,10 +54,15 @@ export const NMenuOptionGroup = defineComponent({
             ]}
           >
             {render(props.title)}
-            {props.extra ? <> {render(props.extra)}</> : null}
+            {props.extra ? (
+              <>
+                {' '}
+                {render(props.extra)}
+              </>
+            ) : null}
           </div>
           <div>
-            {props.tmNodes.map((tmNode) => itemRenderer(tmNode, menuProps))}
+            {props.tmNodes.map(tmNode => itemRenderer(tmNode, menuProps))}
           </div>
         </div>
       )

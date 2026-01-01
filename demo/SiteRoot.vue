@@ -1,3 +1,21 @@
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import Site from './Site.vue'
+import { initRouter, siteSetup } from './store'
+
+export default defineComponent({
+  name: 'SiteProvider',
+  components: {
+    Site
+  },
+  setup() {
+    initRouter(useRouter(), useRoute())
+    return siteSetup()
+  }
+})
+</script>
+
 <template>
   <component
     :is="configProvider"
@@ -14,9 +32,11 @@
       <n-loading-bar-provider>
         <n-message-provider>
           <n-notification-provider>
-            <n-dialog-provider>
-              <Site />
-            </n-dialog-provider>
+            <n-modal-provider>
+              <n-dialog-provider>
+                <Site />
+              </n-dialog-provider>
+            </n-modal-provider>
           </n-notification-provider>
         </n-message-provider>
       </n-loading-bar-provider>
@@ -24,21 +44,3 @@
     </n-theme-editor>
   </component>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-import { initRouter, siteSetup } from './store'
-import Site from './Site.vue'
-
-export default defineComponent({
-  name: 'SiteProvider',
-  components: {
-    Site
-  },
-  setup () {
-    initRouter(useRouter(), useRoute())
-    return siteSetup()
-  }
-})
-</script>

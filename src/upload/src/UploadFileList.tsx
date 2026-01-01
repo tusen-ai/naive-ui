@@ -1,21 +1,15 @@
-import {
-  h,
-  defineComponent,
-  inject,
-  type VNode,
-  type CSSProperties,
-  computed
-} from 'vue'
+import type { CSSProperties, VNode } from 'vue'
+import { computed, defineComponent, h, inject } from 'vue'
+import { NFadeInExpandTransition } from '../../_internal'
 import { throwError } from '../../_utils'
+import { NImageGroup } from '../../image'
 import { uploadInjectionKey } from './interface'
 import NUploadFile from './UploadFile'
-import { NImageGroup } from '../../image'
-import { NFadeInExpandTransition } from '../../_internal'
 import NUploadTrigger from './UploadTrigger'
 
 export default defineComponent({
   name: 'UploadFileList',
-  setup (_, { slots }) {
+  setup(_, { slots }) {
     const NUpload = inject(uploadInjectionKey, null)
     if (!NUpload) {
       throwError(
@@ -43,11 +37,12 @@ export default defineComponent({
     )
 
     const renderFileList = (): VNode[] =>
-      mergedFileListRef.value.map((file) => (
+      mergedFileListRef.value.map((file, index) => (
         <NUploadFile
           clsPrefix={mergedClsPrefixRef.value}
           key={file.id}
           file={file}
+          index={index}
           listType={listTypeRef.value}
         />
       ))
@@ -72,8 +67,8 @@ export default defineComponent({
         <div
           class={[
             `${mergedClsPrefix}-upload-file-list`,
-            isImageCardTypeRef.value &&
-              `${mergedClsPrefix}-upload-file-list--grid`,
+            isImageCardTypeRef.value
+            && `${mergedClsPrefix}-upload-file-list--grid`,
             abstract ? themeClassRef?.value : undefined,
             fileListClassRef.value
           ]}
@@ -83,10 +78,10 @@ export default defineComponent({
           ]}
         >
           {renderUploadFileList()}
-          {showTriggerRef.value &&
-            !maxReachedRef.value &&
-            isImageCardTypeRef.value && (
-              <NUploadTrigger>{slots}</NUploadTrigger>
+          {showTriggerRef.value
+            && !maxReachedRef.value
+            && isImageCardTypeRef.value && (
+            <NUploadTrigger>{slots}</NUploadTrigger>
           )}
         </div>
       )

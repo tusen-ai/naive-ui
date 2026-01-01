@@ -1,3 +1,7 @@
+import type { PropType } from 'vue'
+import type { OffsetTarget } from './utils'
+import { unwrapElement } from 'seemly'
+import { onFontsReady } from 'vooks'
 import {
   computed,
   defineComponent,
@@ -5,20 +9,21 @@ import {
   nextTick,
   onBeforeUnmount,
   onMounted,
-  type PropType,
   provide,
   ref,
   toRef,
   watch
 } from 'vue'
-import { throttle } from 'lodash-es'
-import { unwrapElement } from 'seemly'
-import { onFontsReady } from 'vooks'
 import { NScrollbar } from '../../_internal'
 import { keysOf } from '../../_utils'
 import { anchorInjectionKey } from './Link'
-import type { OffsetTarget } from './utils'
 import { getOffset } from './utils'
+
+interface LinkInfo {
+  top: number
+  height: number
+  href: string
+}
 
 export interface BaseAnchorInst {
   setActiveHref: (href: string) => void
@@ -44,7 +49,7 @@ export const baseAnchorProps = {
   internalScrollable: Boolean,
   ignoreGap: Boolean,
   offsetTarget: [String, Object, Function] as PropType<
-  string | OffsetTarget | (() => HTMLElement)
+    string | OffsetTarget | (() => HTMLElement)
   >
 } as const
 
@@ -59,20 +64,21 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
+  setup(props) {
     const collectedLinkHrefs: string[] = []
     const titleEls: HTMLElement[] = []
     const activeHrefRef = ref<string | null>(null)
     const slotRef = ref<HTMLElement | null>(null)
     const barRef = ref<HTMLElement | null>(null)
     const selfRef = ref<HTMLElement | null>(null)
+    let skipScrollHandling = false
     const isBlockTypeRef = computed(() => {
       return props.type === 'block'
     })
     const mergedShowRailRef = computed(() => {
       return !isBlockTypeRef.value && props.showRail
     })
-    function disableTransitionOneTick (): void {
+    function disableTransitionOneTick(): void {
       const { value: barEl } = barRef
       const { value: slotEl } = slotRef
       if (barEl) {
@@ -105,23 +111,25 @@ export default defineComponent({
         }
       })
     }
-    function updateBarPosition (
+    function updateBarPosition(
       linkTitleEl: HTMLElement,
       transition = true
     ): void {
       const { value: barEl } = barRef
       const { value: slotEl } = slotRef
       const { value: selfEl } = selfRef
-      if (!selfEl || !barEl) return
+      if (!selfEl || !barEl)
+        return
       if (!transition) {
         barEl.style.transition = 'none'
-        if (slotEl) slotEl.style.transition = 'none'
+        if (slotEl)
+          slotEl.style.transition = 'none'
       }
       const { offsetHeight, offsetWidth } = linkTitleEl
-      const { top: linkTitleClientTop, left: linkTitleClientLeft } =
-        linkTitleEl.getBoundingClientRect()
-      const { top: anchorClientTop, left: anchorClientLeft } =
-        selfEl.getBoundingClientRect()
+      const { top: linkTitleClientTop, left: linkTitleClientLeft }
+        = linkTitleEl.getBoundingClientRect()
+      const { top: anchorClientTop, left: anchorClientLeft }
+        = selfEl.getBoundingClientRect()
       const offsetTop = linkTitleClientTop - anchorClientTop
       const offsetLeft = linkTitleClientLeft - anchorClientLeft
       barEl.style.top = `${offsetTop}px`
@@ -132,39 +140,65 @@ export default defineComponent({
         slotEl.style.maxWidth = `${offsetWidth + offsetLeft}px`
       }
       void barEl.offsetHeight
-      if (slotEl) void slotEl.offsetHeight
+      if (slotEl)
+        void slotEl.offsetHeight
 
       if (!transition) {
         barEl.style.transition = ''
-        if (slotEl) slotEl.style.transition = ''
+        if (slotEl)
+          slotEl.style.transition = ''
       }
     }
-    function setActiveHref (href: string, transition = true): void {
+
+    let currentThrottleTimerId: ReturnType<typeof setTimeout> | undefined
+    let hasTrailingThrottledTask = false
+    let isInThrottledPeriod = false
+    const handleScroll = () => {
+      if (isInThrottledPeriod) {
+        hasTrailingThrottledTask = true
+      }
+      else {
+        if (skipScrollHandling) {
+          return
+        }
+        _handleScroll(true)
+        isInThrottledPeriod = true
+        clearTimeout(currentThrottleTimerId)
+        currentThrottleTimerId = setTimeout(() => {
+          isInThrottledPeriod = false
+          if (hasTrailingThrottledTask) {
+            hasTrailingThrottledTask = false
+            handleScroll()
+          }
+        }, 128)
+      }
+    }
+    function setActiveHref(href: string, transition = true): void {
       const idMatchResult = /^#([^#]+)$/.exec(href)
-      if (!idMatchResult) return
+      if (!idMatchResult)
+        return
       const linkEl = document.getElementById(idMatchResult[1])
-      if (!linkEl) return
+      if (!linkEl)
+        return
+      skipScrollHandling = true
       activeHrefRef.value = href
       linkEl.scrollIntoView()
       if (!transition) {
         disableTransitionOneTick()
       }
-      handleScroll()
+      hasTrailingThrottledTask = false
+      setTimeout(() => {
+        skipScrollHandling = false
+      }, 0)
     }
-    const handleScroll = throttle(() => {
-      _handleScroll(true)
-    }, 128)
-    function _handleScroll (transition = true): void {
-      interface LinkInfo {
-        top: number
-        height: number
-        href: string
-      }
+
+    function _handleScroll(transition = true): void {
       const links: LinkInfo[] = []
       const offsetTarget = unwrapElement(props.offsetTarget ?? document)
       collectedLinkHrefs.forEach((href) => {
         const idMatchResult = /#([^#]+)$/.exec(href)
-        if (!idMatchResult) return
+        if (!idMatchResult)
+          return
         const linkEl = document.getElementById(idMatchResult[1])
         if (linkEl && offsetTarget) {
           const { top, height } = getOffset(linkEl, offsetTarget)
@@ -180,7 +214,8 @@ export default defineComponent({
         if (a.top > b.top) {
           return 1
           // descend height
-        } else if (a.top === b.top && a.height < b.height) {
+        }
+        else if (a.top === b.top && a.height < b.height) {
           return -1
         }
         return -1
@@ -191,29 +226,38 @@ export default defineComponent({
         if (link.top + link.height < 0) {
           if (ignoreGap) {
             return link
-          } else {
+          }
+          else {
             return prevLink
           }
         }
         if (link.top <= bound) {
           if (prevLink === null) {
             return link
-          } else if (link.top === prevLink.top) {
+          }
+          else if (link.top === prevLink.top) {
             if (link.href === currentActiveHref) {
               return link
-            } else return prevLink
-          } else if (link.top > prevLink.top) {
+            }
+            else {
+              return prevLink
+            }
+          }
+          else if (link.top > prevLink.top) {
             return link
-          } else {
+          }
+          else {
             return prevLink
           }
         }
         return prevLink
       }, null)
-      if (!transition) disableTransitionOneTick()
+      if (!transition)
+        disableTransitionOneTick()
       if (activeLink) {
         activeHrefRef.value = activeLink.href
-      } else {
+      }
+      else {
         activeHrefRef.value = null
       }
     }
@@ -235,6 +279,7 @@ export default defineComponent({
       _handleScroll(false)
     })
     onBeforeUnmount(() => {
+      clearTimeout(currentThrottleTimerId)
       document.removeEventListener('scroll', handleScroll, true)
     })
     watch(activeHrefRef, (value) => {
@@ -255,7 +300,7 @@ export default defineComponent({
       mergedShowRail: mergedShowRailRef
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, mergedShowRail, isBlockType, $slots } = this
 
     const Anchor = (
@@ -279,8 +324,8 @@ export default defineComponent({
               ref="barRef"
               class={[
                 `${mergedClsPrefix}-anchor-rail__bar`,
-                this.activeHref !== null &&
-                  `${mergedClsPrefix}-anchor-rail__bar--active`
+                this.activeHref !== null
+                && `${mergedClsPrefix}-anchor-rail__bar--active`
               ]}
             />
           </div>

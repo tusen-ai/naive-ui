@@ -2,34 +2,15 @@
 # 受控的过滤器
 </markdown>
 
-<template>
-  <n-space vertical :size="12">
-    <n-space>
-      <n-button @click="filterAddress">
-        Filter Address(Use Value 'London')
-      </n-button>
-      <n-button @click="unfilterAddress">
-        Clear Address Filters
-      </n-button>
-    </n-space>
-    <n-data-table
-      :columns="columns"
-      :data="data"
-      :pagination="pagination"
-      @update:filters="handleUpdateFilter"
-    />
-  </n-space>
-</template>
-
-<script lang="ts">
-import { defineComponent, reactive } from 'vue'
-import {
-  DataTableColumns,
+<script lang="ts" setup>
+import type {
   DataTableBaseColumn,
+  DataTableColumns,
   DataTableFilterState
 } from 'naive-ui'
+import { reactive } from 'vue'
 
-type Row = {
+interface Row {
   key: number
   name: string
   age: number
@@ -63,63 +44,78 @@ const data = [
   }
 ]
 
-export default defineComponent({
-  setup () {
-    const addressColumn = reactive<DataTableBaseColumn<Row>>({
-      title: 'Address',
-      key: 'address',
-      filterMultiple: false,
-      filterOptionValue: null,
-      sorter: 'default',
-      filterOptions: [
-        {
-          label: 'London',
-          value: 'London'
-        },
-        {
-          label: 'New York',
-          value: 'New York'
-        }
-      ],
-      filter (value, row) {
-        return !!~row.address.indexOf(value.toString())
-      }
-    })
-
-    const columns = reactive<DataTableColumns<Row>>([
-      {
-        title: 'Name',
-        key: 'name',
-        sorter (rowA, rowB) {
-          return rowA.name.length - rowB.name.length
-        }
-      },
-      {
-        title: 'Age',
-        key: 'age',
-        sorter (rowA, rowB) {
-          return rowA.age - rowB.age
-        }
-      },
-      addressColumn
-    ])
-    return {
-      data,
-      columns,
-      pagination: { pageSize: 5 },
-      filterAddress () {
-        addressColumn.filterOptionValue = 'London'
-      },
-      unfilterAddress () {
-        addressColumn.filterOptionValue = null
-      },
-      handleUpdateFilter (
-        filters: DataTableFilterState,
-        sourceColumn: DataTableBaseColumn
-      ) {
-        addressColumn.filterOptionValue = filters[sourceColumn.key] as string
-      }
+const addressColumn = reactive<DataTableBaseColumn<Row>>({
+  title: 'Address',
+  key: 'address',
+  filterMultiple: false,
+  filterOptionValue: null,
+  sorter: 'default',
+  filterOptions: [
+    {
+      label: 'London',
+      value: 'London'
+    },
+    {
+      label: 'New York',
+      value: 'New York'
     }
+  ],
+  filter(value, row) {
+    return !!~row.address.indexOf(value.toString())
   }
 })
+
+const columns = reactive<DataTableColumns<Row>>([
+  {
+    title: 'Name',
+    key: 'name',
+    sorter(rowA, rowB) {
+      return rowA.name.length - rowB.name.length
+    }
+  },
+  {
+    title: 'Age',
+    key: 'age',
+    sorter(rowA, rowB) {
+      return rowA.age - rowB.age
+    }
+  },
+  addressColumn
+])
+
+const pagination = { pageSize: 5 }
+
+function filterAddress() {
+  addressColumn.filterOptionValue = 'London'
+}
+
+function unfilterAddress() {
+  addressColumn.filterOptionValue = null
+}
+
+function handleUpdateFilter(
+  filters: DataTableFilterState,
+  sourceColumn: DataTableBaseColumn
+) {
+  addressColumn.filterOptionValue = filters[sourceColumn.key] as string
+}
 </script>
+
+<template>
+  <n-space vertical :size="12">
+    <n-space>
+      <n-button @click="filterAddress">
+        Filter Address(Use Value 'London')
+      </n-button>
+      <n-button @click="unfilterAddress">
+        Clear Address Filters
+      </n-button>
+    </n-space>
+    <n-data-table
+      :columns="columns"
+      :data="data"
+      :pagination="pagination"
+      @update:filters="handleUpdateFilter"
+    />
+  </n-space>
+</template>

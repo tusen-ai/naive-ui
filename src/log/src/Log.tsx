@@ -1,35 +1,31 @@
+import type { PropType, Ref } from 'vue'
+import type { ScrollbarInst } from '../../_internal'
+import type { Hljs, ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { LogTheme } from '../styles'
+import { throttle as _throttle } from 'lodash-es'
 import {
-  h,
-  Transition,
-  defineComponent,
   computed,
-  provide,
-  type PropType,
+  defineComponent,
+  h,
   nextTick,
+  provide,
   ref,
   toRef,
-  type Ref
+  Transition
 } from 'vue'
-import { throttle } from 'lodash-es'
-import {
-  useTheme,
-  useHljs,
-  type ThemeProps,
-  useConfig,
-  useThemeClass,
-  type Hljs
-} from '../../_mixins'
-import type { ExtractPublicPropTypes } from '../../_utils'
-import { warn } from '../../_utils'
 import { NScrollbar } from '../../_internal'
-import type { ScrollbarInst } from '../../_internal'
+import { useConfig, useHljs, useTheme, useThemeClass } from '../../_mixins'
+import { warn } from '../../_utils'
 import { NCode } from '../../code'
-import type { LogTheme } from '../styles'
 import { logLight } from '../styles'
-import NLogLoader from './LogLoader'
-import NLogLine from './LogLine'
 import { logInjectionKey } from './context'
+import NLogLine from './LogLine'
+import NLogLoader from './LogLoader'
 import style from './styles/index.cssr'
+
+// Fix vue-tsc error
+const throttle: <T>(f: T, t: number) => T = _throttle
 
 export interface LogInjection {
   trimRef: Ref<boolean>
@@ -42,8 +38,8 @@ export interface LogInst {
   scrollTo: ((options: {
     silent?: boolean
     position: 'top' | 'bottom'
-  }) => void) &
-  ((options: { silent?: boolean, top: number }) => void)
+  }) => void)
+  & ((options: { silent?: boolean, top: number }) => void)
 }
 
 export const logProps = {
@@ -87,7 +83,7 @@ export type LogProps = ExtractPublicPropTypes<typeof logProps>
 export default defineComponent({
   name: 'Log',
   props: logProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const silentRef = ref(false)
     const highlightRef = computed(() => {
@@ -114,7 +110,7 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    function handleScroll (e: Event): void {
+    function handleScroll(e: Event): void {
       const container = e.target as HTMLElement
       const content = container.firstElementChild as HTMLElement
       if (silentRef.value) {
@@ -130,17 +126,21 @@ export default defineComponent({
       const scrollBottom = contentHeight - containerScrollTop - containerHeight
       if (scrollTop <= props.offsetTop) {
         const { onReachTop, onRequireMore } = props
-        if (onRequireMore) onRequireMore('top')
-        if (onReachTop) onReachTop()
+        if (onRequireMore)
+          onRequireMore('top')
+        if (onReachTop)
+          onReachTop()
       }
       if (scrollBottom <= props.offsetBottom) {
         const { onReachBottom, onRequireMore } = props
-        if (onRequireMore) onRequireMore('bottom')
-        if (onReachBottom) onReachBottom()
+        if (onRequireMore)
+          onRequireMore('bottom')
+        if (onReachBottom)
+          onReachBottom()
       }
     }
-    const handleWheel = throttle(_handleWheel, 300)
-    function _handleWheel (e: WheelEvent): void {
+    const handleWheel: (e: WheelEvent) => void = throttle(_handleWheel, 300)
+    function _handleWheel(e: WheelEvent): void {
       if (silentRef.value) {
         void nextTick(() => {
           silentRef.value = false
@@ -154,57 +154,61 @@ export default defineComponent({
           const containerScrollTop = containerRef.scrollTop
           const contentHeight = contentRef.offsetHeight
           const scrollTop = containerScrollTop
-          const scrollBottom =
-            contentHeight - containerScrollTop - containerHeight
+          const scrollBottom
+            = contentHeight - containerScrollTop - containerHeight
           const deltaY = e.deltaY
           if (scrollTop === 0 && deltaY < 0) {
             const { onRequireMore } = props
-            if (onRequireMore) onRequireMore('top')
+            if (onRequireMore)
+              onRequireMore('top')
           }
           if (scrollBottom <= 0 && deltaY > 0) {
             const { onRequireMore } = props
-            if (onRequireMore) onRequireMore('bottom')
+            if (onRequireMore)
+              onRequireMore('bottom')
           }
         }
       }
     }
-    function scrollTo (options: {
+    function scrollTo(options: {
       silent?: boolean
       position: 'top' | 'bottom'
     }): void
-    function scrollTo (options: { silent?: boolean, top: number }): void
-    function scrollTo (options: {
+    function scrollTo(options: { silent?: boolean, top: number }): void
+    function scrollTo(options: {
       silent?: boolean
       top?: number
       position?: 'top' | 'bottom'
     }): void {
       const { value: scrollbarInst } = scrollbarRef
-      if (!scrollbarInst) return
+      if (!scrollbarInst)
+        return
       const { silent, top, position } = options
       if (silent) {
         silentRef.value = true
       }
       if (top !== undefined) {
         scrollbarInst.scrollTo({ left: 0, top })
-      } else if (position === 'bottom' || position === 'top') {
+      }
+      else if (position === 'bottom' || position === 'top') {
         scrollbarInst.scrollTo({ position })
       }
     }
     // deprecated
-    function scrollToTop (silent = false): void {
+    function scrollToTop(silent = false): void {
       warn(
         'log',
-        "`scrollToTop` is deprecated, please use `scrollTo({ position: 'top'})` instead."
+        '`scrollToTop` is deprecated, please use `scrollTo({ position: \'top\'})` instead.'
       )
       scrollTo({
         position: 'top',
         silent
       })
     }
-    function scrollToBottom (silent = false): void {
+    function scrollToBottom(silent = false): void {
       warn(
         'log',
-        "`scrollToTop` is deprecated, please use `scrollTo({ position: 'bottom'})` instead."
+        '`scrollToTop` is deprecated, please use `scrollTo({ position: \'bottom\'})` instead.'
       )
       scrollTo({
         position: 'bottom',
@@ -262,7 +266,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, mergedTheme, onRender } = this
     onRender?.()
     return h(

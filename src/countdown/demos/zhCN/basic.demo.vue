@@ -4,6 +4,12 @@
 一个字符串而已。
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const active = ref(false)
+</script>
+
 <template>
   <n-space>
     <span style="font-variant-numeric: tabular-nums">
@@ -12,15 +18,3 @@
     <n-switch v-model:value="active" />
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      active: ref(false)
-    }
-  }
-})
-</script>

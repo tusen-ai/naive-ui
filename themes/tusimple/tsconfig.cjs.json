@@ -1,11 +1,12 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "rootDir": "./src",
-    "outDir": "./lib",
-    "module": "CommonJS",
     "target": "ES6",
-    "jsx": "react"
+    "jsx": "react",
+    "rootDir": "./src",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "outDir": "./lib"
   },
   "references": [{ "path": "../../src/tsconfig.cjs.json" }]
 }

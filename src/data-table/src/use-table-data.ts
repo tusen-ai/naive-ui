@@ -1,33 +1,34 @@
-import { computed, ref, type ComputedRef } from 'vue'
-import { useMemo, useMergedState } from 'vooks'
-import { createTreeMate } from 'treemate'
+import type { ComputedRef } from 'vue'
 import type { PaginationProps } from '../../pagination/src/Pagination'
-import { call, warn } from '../../_utils'
 import type {
   ColumnKey,
+  DataTableSetupProps,
   Filter,
   FilterOptionValue,
   FilterState,
-  TableBaseColumn,
-  TableSelectionColumn,
   InternalRowData,
-  TmNode,
-  TableExpandColumn,
   RowKey,
-  DataTableSetupProps
+  TableBaseColumn,
+  TableExpandColumn,
+  TableSelectionColumn,
+  TmNode
 } from './interface'
-import { createShallowClonedObject } from './utils'
+import { createTreeMate } from 'treemate'
+import { useMemo, useMergedState } from 'vooks'
+import { computed, ref } from 'vue'
+import { call, warn } from '../../_utils'
+import { getDefaultPageSize } from '../../pagination/src/utils'
 import { useSorter } from './use-sorter'
+import { createShallowClonedObject } from './utils'
 
 // useTableData combines filter, sorter and pagination
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function useTableData (
+export function useTableData(
   props: DataTableSetupProps,
   {
     dataRelatedColsRef
   }: {
     dataRelatedColsRef: ComputedRef<
-    Array<TableSelectionColumn | TableBaseColumn | TableExpandColumn>
+      Array<TableSelectionColumn | TableBaseColumn | TableExpandColumn>
     >
   }
 ) {
@@ -39,7 +40,8 @@ export function useTableData (
         const col = cols[i]
         if ('children' in col) {
           return getSelectionColumn(col.children)
-        } else if (col.type === 'selection') {
+        }
+        else if (col.type === 'selection') {
           return col
         }
       }
@@ -53,7 +55,7 @@ export function useTableData (
     return createTreeMate<InternalRowData>(props.data, {
       ignoreEmptyChildren: true,
       getKey: props.rowKey,
-      getChildren: (rowData) => rowData[childrenKey] as any,
+      getChildren: rowData => rowData[childrenKey],
       getDisabled: (rowData) => {
         if (selectionColumnRef.value?.disabled?.(rowData)) {
           return true
@@ -80,24 +82,29 @@ export function useTableData (
   })
 
   const uncontrolledFilterStateRef = ref<FilterState>({})
-  const uncontrolledCurrentPageRef = ref(1)
-  const uncontrolledPageSizeRef = ref(10)
+  const { pagination } = props
+  const uncontrolledCurrentPageRef = ref(
+    pagination ? pagination.defaultPage || 1 : 1
+  )
+  const uncontrolledPageSizeRef = ref(getDefaultPageSize(pagination))
 
   const mergedFilterStateRef = computed<FilterState>(() => {
     const columnsWithControlledFilter = dataRelatedColsRef.value.filter(
       (column) => {
         return (
-          column.filterOptionValues !== undefined ||
-          column.filterOptionValue !== undefined
+          column.filterOptionValues !== undefined
+          || column.filterOptionValue !== undefined
         )
       }
     )
     const controlledFilterState: FilterState = {}
     columnsWithControlledFilter.forEach((column) => {
-      if (column.type === 'selection' || column.type === 'expand') return
+      if (column.type === 'selection' || column.type === 'expand')
+        return
       if (column.filterOptionValues === undefined) {
         controlledFilterState[column.key] = column.filterOptionValue ?? null
-      } else {
+      }
+      else {
         controlledFilterState[column.key] = column.filterOptionValues
       }
     })
@@ -111,7 +118,7 @@ export function useTableData (
   const filteredDataRef = computed<TmNode[]>(() => {
     const mergedFilterState = mergedFilterStateRef.value
     const { columns } = props
-    function createDefaultFilter (columnKey: ColumnKey): Filter {
+    function createDefaultFilter(columnKey: ColumnKey): Filter {
       return (filterOptionValue: FilterOptionValue, row: InternalRowData) =>
         !!~String(row[columnKey]).indexOf(String(filterOptionValue))
     }
@@ -121,9 +128,9 @@ export function useTableData (
     const columnEntries: Array<[ColumnKey, TableBaseColumn]> = []
     columns.forEach((column) => {
       if (
-        column.type === 'selection' ||
-        column.type === 'expand' ||
-        'children' in column
+        column.type === 'selection'
+        || column.type === 'expand'
+        || 'children' in column
       ) {
         return
       }
@@ -131,44 +138,48 @@ export function useTableData (
     })
     return data
       ? data.filter((tmNode) => {
-        const { rawNode: row } = tmNode
-        // traverse all filters
-        for (const [columnKey, column] of columnEntries) {
-          let activeFilterOptionValues = mergedFilterState[columnKey]
-          if (activeFilterOptionValues == null) continue
-          if (!Array.isArray(activeFilterOptionValues)) {
-            activeFilterOptionValues = [activeFilterOptionValues]
-          }
-          if (!activeFilterOptionValues.length) continue
-          // When async, filter won't be set, so data won't be filtered
-          const filter =
-              column.filter === 'default'
+          const { rawNode: row } = tmNode
+          // traverse all filters
+          for (const [columnKey, column] of columnEntries) {
+            let activeFilterOptionValues = mergedFilterState[columnKey]
+            if (activeFilterOptionValues == null)
+              continue
+            if (!Array.isArray(activeFilterOptionValues)) {
+              activeFilterOptionValues = [activeFilterOptionValues]
+            }
+            if (!activeFilterOptionValues.length)
+              continue
+            // When async, filter won't be set, so data won't be filtered
+            const filter
+              = column.filter === 'default'
                 ? createDefaultFilter(columnKey)
                 : column.filter
-          if (column && typeof filter === 'function') {
-            if (column.filterMode === 'and') {
-              if (
-                activeFilterOptionValues.some(
-                  (filterOptionValue) => !filter(filterOptionValue, row)
-                )
-              ) {
-                return false
+            if (column && typeof filter === 'function') {
+              if (column.filterMode === 'and') {
+                if (
+                  activeFilterOptionValues.some(
+                    filterOptionValue => !filter(filterOptionValue, row)
+                  )
+                ) {
+                  return false
+                }
               }
-            } else {
-              if (
-                activeFilterOptionValues.some((filterOptionValue) =>
-                  filter(filterOptionValue, row)
-                )
-              ) {
-                continue
-              } else {
-                return false
+              else {
+                if (
+                  activeFilterOptionValues.some(filterOptionValue =>
+                    filter(filterOptionValue, row)
+                  )
+                ) {
+                  continue
+                }
+                else {
+                  return false
+                }
               }
             }
           }
-        }
-        return true
-      })
+          return true
+        })
       : []
   })
 
@@ -188,27 +199,31 @@ export function useTableData (
     if (column.filter) {
       const defaultFilterOptionValues = column.defaultFilterOptionValues
       if (column.filterMultiple) {
-        uncontrolledFilterStateRef.value[column.key] =
-          defaultFilterOptionValues || []
-      } else if (defaultFilterOptionValues !== undefined) {
+        uncontrolledFilterStateRef.value[column.key]
+          = defaultFilterOptionValues || []
+      }
+      else if (defaultFilterOptionValues !== undefined) {
         // this branch is for compatibility, someone may use `values` in single filter mode
-        uncontrolledFilterStateRef.value[column.key] =
-          defaultFilterOptionValues === null ? [] : defaultFilterOptionValues
-      } else {
-        uncontrolledFilterStateRef.value[column.key] =
-          column.defaultFilterOptionValue ?? null
+        uncontrolledFilterStateRef.value[column.key]
+          = defaultFilterOptionValues === null ? [] : defaultFilterOptionValues
+      }
+      else {
+        uncontrolledFilterStateRef.value[column.key]
+          = column.defaultFilterOptionValue ?? null
       }
     }
   })
 
   const controlledCurrentPageRef = computed(() => {
     const { pagination } = props
-    if (pagination === false) return undefined
+    if (pagination === false)
+      return undefined
     return pagination.page
   })
   const controlledPageSizeRef = computed(() => {
     const { pagination } = props
-    if (pagination === false) return undefined
+    if (pagination === false)
+      return undefined
     return pagination.pageSize
   })
 
@@ -227,36 +242,39 @@ export function useTableData (
     return props.remote
       ? page
       : Math.max(
-        1,
-        Math.min(
-          Math.ceil(filteredDataRef.value.length / mergedPageSizeRef.value),
-          page
+          1,
+          Math.min(
+            Math.ceil(filteredDataRef.value.length / mergedPageSizeRef.value),
+            page
+          )
         )
-      )
   })
 
   const mergedPageCountRef = computed(() => {
     const { pagination } = props
     if (pagination) {
       const { pageCount } = pagination
-      if (pageCount !== undefined) return pageCount
+      if (pageCount !== undefined)
+        return pageCount
     }
     return undefined
   })
 
   const paginatedDataRef = computed<TmNode[]>(() => {
-    if (props.remote) return treeMateRef.value.treeNodes
-    if (!props.pagination) return sortedDataRef.value
+    if (props.remote)
+      return treeMateRef.value.treeNodes
+    if (!props.pagination)
+      return sortedDataRef.value
     const pageSize = mergedPageSizeRef.value
     const startIndex = (boundedMergedCurrentPageRef.value - 1) * pageSize
     return sortedDataRef.value.slice(startIndex, startIndex + pageSize)
   })
 
   const rawPaginatedDataRef = computed<InternalRowData[]>(() => {
-    return paginatedDataRef.value.map((tmNode) => tmNode.rawNode)
+    return paginatedDataRef.value.map(tmNode => tmNode.rawNode)
   })
 
-  function mergedOnUpdatePage (page: number): void {
+  function mergedOnUpdatePage(page: number): void {
     const { pagination } = props
     if (pagination) {
       const {
@@ -264,13 +282,16 @@ export function useTableData (
         'onUpdate:page': _onUpdatePage,
         onUpdatePage
       } = pagination
-      if (onChange) call(onChange, page)
-      if (onUpdatePage) call(onUpdatePage, page)
-      if (_onUpdatePage) call(_onUpdatePage, page)
+      if (onChange)
+        call(onChange, page)
+      if (onUpdatePage)
+        call(onUpdatePage, page)
+      if (_onUpdatePage)
+        call(_onUpdatePage, page)
       doUpdatePage(page)
     }
   }
-  function mergedOnUpdatePageSize (pageSize: number): void {
+  function mergedOnUpdatePageSize(pageSize: number): void {
     const { pagination } = props
     if (pagination) {
       const {
@@ -278,9 +299,12 @@ export function useTableData (
         'onUpdate:pageSize': _onUpdatePageSize,
         onUpdatePageSize
       } = pagination
-      if (onPageSizeChange) call(onPageSizeChange, pageSize)
-      if (onUpdatePageSize) call(onUpdatePageSize, pageSize)
-      if (_onUpdatePageSize) call(_onUpdatePageSize, pageSize)
+      if (onPageSizeChange)
+        call(onPageSizeChange, pageSize)
+      if (onUpdatePageSize)
+        call(onUpdatePageSize, pageSize)
+      if (_onUpdatePageSize)
+        call(_onUpdatePageSize, pageSize)
       doUpdatePageSize(pageSize)
     }
   }
@@ -289,7 +313,8 @@ export function useTableData (
       const { pagination } = props
       if (pagination) {
         const { itemCount } = pagination
-        if (itemCount !== undefined) return itemCount
+        if (itemCount !== undefined)
+          return itemCount
       }
       return undefined
     }
@@ -318,26 +343,32 @@ export function useTableData (
     }
   })
 
-  function doUpdatePage (page: number): void {
+  function doUpdatePage(page: number): void {
     const { 'onUpdate:page': _onUpdatePage, onPageChange, onUpdatePage } = props
-    if (onUpdatePage) call(onUpdatePage, page)
-    if (_onUpdatePage) call(_onUpdatePage, page)
-    if (onPageChange) call(onPageChange, page)
+    if (onUpdatePage)
+      call(onUpdatePage, page)
+    if (_onUpdatePage)
+      call(_onUpdatePage, page)
+    if (onPageChange)
+      call(onPageChange, page)
     uncontrolledCurrentPageRef.value = page
   }
-  function doUpdatePageSize (pageSize: number): void {
+  function doUpdatePageSize(pageSize: number): void {
     const {
       'onUpdate:pageSize': _onUpdatePageSize,
       onPageSizeChange,
       onUpdatePageSize
     } = props
-    if (onPageSizeChange) call(onPageSizeChange, pageSize)
-    if (onUpdatePageSize) call(onUpdatePageSize, pageSize)
-    if (_onUpdatePageSize) call(_onUpdatePageSize, pageSize)
+    if (onPageSizeChange)
+      call(onPageSizeChange, pageSize)
+    if (onUpdatePageSize)
+      call(onUpdatePageSize, pageSize)
+    if (_onUpdatePageSize)
+      call(_onUpdatePageSize, pageSize)
     uncontrolledPageSizeRef.value = pageSize
   }
 
-  function doUpdateFilters (
+  function doUpdateFilters(
     filters: FilterState,
     sourceColumn: TableBaseColumn
   ): void {
@@ -346,13 +377,16 @@ export function useTableData (
       'onUpdate:filters': _onUpdateFilters,
       onFiltersChange
     } = props
-    if (onUpdateFilters) call(onUpdateFilters, filters, sourceColumn)
-    if (_onUpdateFilters) call(_onUpdateFilters, filters, sourceColumn)
-    if (onFiltersChange) call(onFiltersChange, filters, sourceColumn)
+    if (onUpdateFilters)
+      call(onUpdateFilters, filters, sourceColumn)
+    if (_onUpdateFilters)
+      call(_onUpdateFilters, filters, sourceColumn)
+    if (onFiltersChange)
+      call(onFiltersChange, filters, sourceColumn)
     uncontrolledFilterStateRef.value = filters
   }
 
-  function onUnstableColumnResize (
+  function onUnstableColumnResize(
     resizedWidth: number,
     limitedWidth: number,
     column: TableBaseColumn,
@@ -366,24 +400,26 @@ export function useTableData (
     )
   }
 
-  function page (page: number): void {
+  function page(page: number): void {
     doUpdatePage(page)
   }
-  function clearFilter (): void {
+  function clearFilter(): void {
     clearFilters()
   }
-  function clearFilters (): void {
+  function clearFilters(): void {
     filters({})
   }
-  function filters (filters: FilterState | null): void {
+  function filters(filters: FilterState | null): void {
     filter(filters)
   }
-  function filter (filters: FilterState | null): void {
+  function filter(filters: FilterState | null): void {
     if (!filters) {
       uncontrolledFilterStateRef.value = {}
-    } else if (filters) {
+    }
+    else if (filters) {
       uncontrolledFilterStateRef.value = createShallowClonedObject(filters)
-    } else if (__DEV__) {
+    }
+    else if (__DEV__) {
       warn('data-table', '`filters` is not an object')
     }
   }

@@ -1,4 +1,5 @@
-import { h, computed, defineComponent, inject, type PropType } from 'vue'
+import type { PropType } from 'vue'
+import { computed, defineComponent, h, inject } from 'vue'
 import { NCheckbox } from '../../checkbox'
 import { transferInjectionKey } from './interface'
 
@@ -15,7 +16,7 @@ export default defineComponent({
     },
     title: String
   },
-  setup (props) {
+  setup(props) {
     const {
       srcOptsRef,
       tgtOptsRef,
@@ -26,13 +27,13 @@ export default defineComponent({
       mergedThemeRef,
       disabledRef,
       mergedClsPrefixRef
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     } = inject(transferInjectionKey)!
     const checkboxPropsRef = computed(() => {
       const { source } = props
       if (source) {
         return srcCheckedStatusRef.value
-      } else {
+      }
+      else {
         return tgtCheckedStatusRef.value
       }
     })
@@ -62,7 +63,8 @@ export default defineComponent({
             {source
               ? srcCheckedValuesRef.value.length
               : tgtCheckedValuesRef.value.length}
-            /{source ? srcOptsRef.value.length : tgtOptsRef.value.length}
+            /
+            {source ? srcOptsRef.value.length : tgtOptsRef.value.length}
           </div>
         </div>
       )

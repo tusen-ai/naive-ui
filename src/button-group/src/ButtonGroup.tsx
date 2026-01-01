@@ -1,8 +1,9 @@
-import { h, type PropType, defineComponent, provide } from 'vue'
-import type { Size } from '../../button/src/interface'
-import { useRtl } from '../../_mixins/use-rtl'
-import { useConfig, useStyle } from '../../_mixins'
+import type { PropType } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type { Size } from '../../button/src/interface'
+import { defineComponent, h, provide } from 'vue'
+import { useConfig, useStyle } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
 import { buttonGroupInjectionKey } from './context'
 import style from './styles/index.cssr'
 
@@ -23,7 +24,7 @@ export type ButtonGroupProps = ExtractPublicPropTypes<typeof buttonGroupProps>
 export default defineComponent({
   name: 'ButtonGroup',
   props: buttonGroupProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
     useStyle('-button-group', style, mergedClsPrefixRef)
     provide(buttonGroupInjectionKey, props)
@@ -37,7 +38,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     return (
       <div

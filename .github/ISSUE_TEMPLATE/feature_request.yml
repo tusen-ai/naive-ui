@@ -1,0 +1,45 @@
+name: 🚀 New feature request
+description: Propose a new feature to be added to Naive UI
+labels: [feature request]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your interest in the project and taking the time to fill out this feature request!
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Clear and concise description of the problem
+      description: 'As a developer using Naive UI I want [goal / wish] so that [benefit]. If you intend to submit a PR for this issue, tell us in the description. Thanks!'
+    validations:
+      required: true
+  - type: textarea
+    id: suggested-solution
+    attributes:
+      label: Suggested solution
+      description: 'In module [xy] we could provide following implementation...'
+    validations:
+      required: true
+  - type: textarea
+    id: alternative
+    attributes:
+      label: Alternative
+      description: Clear and concise description of any alternative solutions or features you've considered.
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Any other context or screenshots about the feature request here.
+  - type: checkboxes
+    id: checkboxes
+    attributes:
+      label: Validations
+      description: Before submitting the issue, please make sure you do the following
+      options:
+        - label: Read the [Contributing Guidelines](https://github.com/tusen-ai/naive-ui/blob/main/CONTRIBUTING.md).
+          required: true
+        - label: Read the [docs](https://www.naiveui.com/en-US).
+          required: true
+        - label: Check that there isn't already an issue that request the same feature to avoid creating a duplicate.
+          required: true

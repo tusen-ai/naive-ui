@@ -1,10 +1,11 @@
+import type { LogInst } from '../index'
 import { mount } from '@vue/test-utils'
-import { h, defineComponent, ref, watch } from 'vue'
+import { defineComponent, h, nextTick, ref, watch } from 'vue'
 import { NLog } from '../index'
 
 describe('n-log', () => {
   it('should warn with language setted & no hljs is set', () => {
-    const spy = jest.spyOn(console, 'error').mockImplementation()
+    const spy = vi.spyOn(console, 'error').mockImplementation(() => {})
     mount(NLog)
     expect(spy).not.toHaveBeenCalled()
     mount(NLog, {
@@ -87,18 +88,18 @@ describe('n-log', () => {
 
   it('should work with `scrollTo` `on-require-more` `on-reach-top` `on-reach-bottom` prop', async () => {
     const lines = ['test1', 'test2', 'test3', 'test4', 'test5', 'test6']
-    const onRequireMore = jest.fn()
-    const onReachTop = jest.fn()
-    const onReachBottom = jest.fn()
+    const onRequireMore = vi.fn()
+    const onReachTop = vi.fn()
+    const onReachBottom = vi.fn()
     const wrapper = mount(
       defineComponent({
-        setup () {
-          const logInstRef = ref<any>(null)
+        setup() {
+          const logInstRef = ref<LogInst | null>(null)
           watch(logInstRef, (value) => {
             if (value) {
-              value.scrollTo(0)
-              value.scrollTo(1)
-              value.scrollTo(999)
+              value.scrollTo({ top: 0 })
+              value.scrollTo({ top: 1 })
+              value.scrollTo({ top: 999 })
             }
           })
 
@@ -117,11 +118,15 @@ describe('n-log', () => {
         attachTo: document.body
       }
     )
-    setTimeout(() => {
-      expect(onRequireMore).toHaveBeenCalled()
-      expect(onReachTop).toHaveBeenCalled()
-      expect(onReachBottom).toHaveBeenCalled()
-      wrapper.unmount()
-    }, 0)
+    await nextTick()
+    // https://github.com/jsdom/jsdom/issues/1422
+    wrapper
+      .find('.n-scrollbar-container')
+      .element
+      .dispatchEvent(new Event('scroll'))
+    expect(onRequireMore).toHaveBeenCalled()
+    expect(onReachTop).toHaveBeenCalled()
+    expect(onReachBottom).toHaveBeenCalled()
+    wrapper.unmount()
   })
 })

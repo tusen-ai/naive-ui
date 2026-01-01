@@ -1,8 +1,11 @@
-import { h, type HTMLAttributes, nextTick, ref } from 'vue'
+import type { HTMLAttributes } from 'vue'
+/* eslint-disable unused-imports/no-unused-vars */
+import type { DataTableColumns, DataTableInst } from '../index'
 import { mount } from '@vue/test-utils'
-import { type DataTableInst, NDataTable, type DataTableColumns } from '../index'
+import { h, nextTick, ref } from 'vue'
 import { NButton } from '../../button'
 import { NButtonGroup } from '../../button-group'
+import { NDataTable } from '../index'
 
 describe('n-data-table', () => {
   it('should work with import on demand', () => {
@@ -32,17 +35,19 @@ describe('n-data-table', () => {
         key: 'name'
       }
     ]
-    const data = new Array(978).fill(0).map((_, index) => {
-      return {
-        name: index
-      }
-    })
+    const data = Array.from({ length: 978 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index
+        }
+      })
     const pagination = {
       page: 1,
       pageCount: 1,
       pageSize: 10,
       itemCount: 0,
-      prefix ({ itemCount }: { itemCount: number | undefined }) {
+      prefix({ itemCount }: { itemCount: number | undefined }) {
         return itemCount
       }
     }
@@ -54,15 +59,30 @@ describe('n-data-table', () => {
   })
 
   it('should work with `itemCount` with `remote`', async () => {
-    const onPageChange = jest.fn((page: number): void => {
-      setTimeout(() => {
+    const pagination = {
+      page: 1,
+      pageSize: 10,
+      itemCount: 978,
+      prefix({ itemCount }: { itemCount: number | undefined }) {
+        return itemCount
+      }
+    }
+    let data = Array.from({ length: 978 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index
+        }
+      })
+    const onPageChange = vi.fn(async (page: number): Promise<void> => {
+      await vi.waitFor(() => {
         pagination.page = page
         pagination.itemCount = data.length
         data = data.slice(
           (page - 1) * pagination.pageSize,
           page * pagination.pageSize
         )
-      }, 1000)
+      })
     })
     const columns = [
       {
@@ -70,19 +90,6 @@ describe('n-data-table', () => {
         key: 'name'
       }
     ]
-    let data = new Array(978).fill(0).map((_, index) => {
-      return {
-        name: index
-      }
-    })
-    const pagination = {
-      page: 1,
-      pageSize: 10,
-      itemCount: 978,
-      prefix ({ itemCount }: { itemCount: number | undefined }) {
-        return itemCount
-      }
-    }
     const wrapper = mount(() => (
       <NDataTable
         columns={columns}
@@ -106,11 +113,13 @@ describe('n-data-table', () => {
         key: 'name'
       }
     ]
-    const data = new Array(978).fill(0).map((_, index) => {
-      return {
-        name: index
-      }
-    })
+    const data = Array.from({ length: 978 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index
+        }
+      })
     let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
     expect(wrapper.find('.n-data-table').classes()).toContain(
       'n-data-table--bordered'
@@ -132,11 +141,13 @@ describe('n-data-table', () => {
         key: 'name'
       }
     ]
-    const data = new Array(978).fill(0).map((_, index) => {
-      return {
-        name: index
-      }
-    })
+    const data = Array.from({ length: 978 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index
+        }
+      })
     let wrapper = mount(() => (
       <NDataTable columns={columns} data={data} bordered={false} />
     ))
@@ -165,11 +176,13 @@ describe('n-data-table', () => {
         key: 'name'
       }
     ]
-    const data = new Array(978).fill(0).map((_, index) => {
-      return {
-        name: index
-      }
-    })
+    const data = Array.from({ length: 978 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index
+        }
+      })
     let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
     expect(wrapper.find('.n-base-loading').exists()).not.toBe(true)
 
@@ -187,11 +200,13 @@ describe('n-data-table', () => {
         key: 'name'
       }
     ]
-    const data = new Array(978).fill(0).map((_, index) => {
-      return {
-        name: index
-      }
-    })
+    const data = Array.from({ length: 978 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index
+        }
+      })
     let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
     expect(wrapper.find('.n-data-table').classes()).not.toContain(
       'n-data-table--flex-height'
@@ -213,11 +228,13 @@ describe('n-data-table', () => {
         key: 'name'
       }
     ]
-    const data = new Array(978).fill(0).map((_, index) => {
-      return {
-        name: index
-      }
-    })
+    const data = Array.from({ length: 978 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index
+        }
+      })
     const getRowClassName = (rowData: any, index: number): string => {
       return `${index}-test`
     }
@@ -309,8 +326,8 @@ describe('n-data-table', () => {
             value: 'Sidney'
           }
         ],
-        filter (value: any, row) {
-          return row.address.includes(value)
+        filter(value: any, row) {
+          return row.address.includes(value as string)
         }
       }
     ]
@@ -361,28 +378,28 @@ describe('n-data-table', () => {
       target: number[]
     ): Promise<boolean> => {
       const cols = wrapper.findAll(colClassName)
-      const colNums = cols.slice(1).map((item) => Number(item.text()))
+      const colNums = cols.slice(1).map(item => Number(item.text()))
       const matchResult = String(colNums) === String(target)
       if (!matchResult) {
-        console.log(colClassName, String(colNums), String(target))
+        // console.log(colClassName, String(colNums), String(target))
       }
       return String(colNums) === String(target)
     }
     const checkScoreIsMatched = async (
       targets: [number[], number[], number[]]
     ): Promise<boolean> => {
-      const matchResult =
-        (await checkIsMatched('.chinese-col', targets[0])) &&
-        (await checkIsMatched('.math-col', targets[1])) &&
-        (await checkIsMatched('.english-col', targets[2]))
+      const matchResult
+        = (await checkIsMatched('.chinese-col', targets[0]))
+          && (await checkIsMatched('.math-col', targets[1]))
+          && (await checkIsMatched('.english-col', targets[2]))
 
       return matchResult
     }
-    const chineseDom: HTMLElement | null =
-      document.querySelector('#chinese-title')
+    const chineseDom: HTMLElement | null
+      = document.querySelector('#chinese-title')
     const mathDom: HTMLElement | null = document.querySelector('#math-title')
-    const englishDom: HTMLElement | null =
-      document.querySelector('#english-title')
+    const englishDom: HTMLElement | null
+      = document.querySelector('#english-title')
     const ageDom: HTMLElement | null = document.querySelector('#age-title')
 
     it('chinese: descend, math: false, english: false', async () => {
@@ -500,13 +517,13 @@ describe('n-data-table', () => {
     it('age: descend', async () => {
       ageDom?.click()
       await nextTick()
-      const result =
-        (await checkIsMatched('.age-col', [42, 32, 32, 32])) &&
-        (await checkScoreIsMatched([
-          [98, 98, 98, 88],
-          [66, 60, 66, 99],
-          [89, 70, 89, 89]
-        ]))
+      const result
+        = (await checkIsMatched('.age-col', [42, 32, 32, 32]))
+          && (await checkScoreIsMatched([
+            [98, 98, 98, 88],
+            [66, 60, 66, 99],
+            [89, 70, 89, 89]
+          ]))
       expect(result).toEqual(true)
     })
   })
@@ -579,11 +596,13 @@ describe('n-data-table', () => {
         key: 'name'
       }
     ]
-    const data = new Array(978).fill(0).map((_, index) => {
-      return {
-        name: index
-      }
-    })
+    const data = Array.from({ length: 978 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index
+        }
+      })
     const rowProps = (): any => ({
       style: 'cursor: pointer;'
     })
@@ -608,11 +627,13 @@ describe('n-data-table', () => {
         key: 'name'
       }
     ]
-    const data = new Array(978).fill(0).map((_, index) => {
-      return {
-        name: index
-      }
-    })
+    const data = Array.from({ length: 978 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index
+        }
+      })
     let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
     expect(
       wrapper.find('.n-scrollbar-content').attributes('style')
@@ -634,11 +655,13 @@ describe('n-data-table', () => {
         key: 'name'
       }
     ]
-    const data = new Array(978).fill(0).map((_, index) => {
-      return {
-        name: index
-      }
-    })
+    const data = Array.from({ length: 978 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index
+        }
+      })
     let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
     expect(wrapper.find('.n-data-table').classes()).not.toContain(
       'n-data-table--single-column'
@@ -659,11 +682,13 @@ describe('n-data-table', () => {
         key: 'name'
       }
     ]
-    const data = new Array(978).fill(0).map((_, index) => {
-      return {
-        name: index
-      }
-    })
+    const data = Array.from({ length: 978 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index
+        }
+      })
     let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
     expect(wrapper.find('.n-data-table').classes()).toContain(
       'n-data-table--single-line'
@@ -684,11 +709,13 @@ describe('n-data-table', () => {
         key: 'name'
       }
     ]
-    const data = new Array(978).fill(0).map((_, index) => {
-      return {
-        name: index
-      }
-    })
+    const data = Array.from({ length: 978 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index
+        }
+      })
     ;(['small', 'medium', 'large'] as const).forEach((size) => {
       const wrapper = mount(() => (
         <NDataTable columns={columns} data={data} size={size} />
@@ -715,13 +742,14 @@ describe('n-data-table', () => {
         key: 'age'
       }
     ]
-    const data = new Array(10).fill(0).map((_, index) => {
-      return {
-        name: index,
-        age: index
-      }
-    })
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    const data = Array.from({ length: 10 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index,
+          age: index
+        }
+      })
     const summary = (pageData: Data[]) => {
       return {
         name: {
@@ -770,11 +798,13 @@ describe('n-data-table', () => {
         key: 'name'
       }
     ]
-    const data = new Array(978).fill(0).map((_, index) => {
-      return {
-        name: index
-      }
-    })
+    const data = Array.from({ length: 978 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index
+        }
+      })
     let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
     expect(wrapper.find('table').attributes('style')).toContain(
       'table-layout: auto'
@@ -795,11 +825,13 @@ describe('n-data-table', () => {
         key: 'name'
       }
     ]
-    const data = new Array(978).fill(0).map((_, index) => {
-      return {
-        name: index
-      }
-    })
+    const data = Array.from({ length: 978 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index
+        }
+      })
     let wrapper = mount(() => <NDataTable columns={columns} data={data} />)
     expect(wrapper.find('tbody').element.children.length).not.toBe(0)
     wrapper = mount(() => (
@@ -810,7 +842,7 @@ describe('n-data-table', () => {
   })
 
   it('should work with `on-update:checked-row-keys` prop', async () => {
-    const handleCheck = jest.fn()
+    const handleCheck = vi.fn()
     const columns: DataTableColumns = [
       {
         type: 'selection'
@@ -820,11 +852,13 @@ describe('n-data-table', () => {
         key: 'name'
       }
     ]
-    const data = new Array(2).fill(0).map((_, index) => {
-      return {
-        name: index
-      }
-    })
+    const data = Array.from({ length: 2 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index
+        }
+      })
     const rowKey = (row: any): number => row.name
     const wrapper = mount(() => (
       <NDataTable
@@ -857,7 +891,6 @@ describe('props.columns', () => {
     const createRowProps = (row: Data): HTMLAttributes => ({
       style: { color: 'red' }
     })
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     const createSummary = (pageData: Data[]) => {
       return {
         collegeID: {
@@ -885,7 +918,7 @@ describe('props.columns', () => {
       {
         title: '操作',
         key: 'actions',
-        render (row) {
+        render(row) {
           return (
             <NButtonGroup>
               {{
@@ -926,12 +959,14 @@ describe('props.columns', () => {
   })
 
   it('should work with `align` prop', async () => {
-    const data = new Array(5).fill(0).map((_, index) => {
-      return {
-        name: index,
-        age: index + 1
-      }
-    })
+    const data = Array.from({ length: 5 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index,
+          age: index + 1
+        }
+      })
     const rowKey = (row: any): number => row.name
     ;(['left', 'right', 'center'] as const).forEach((align) => {
       const columns: DataTableColumns = [
@@ -971,12 +1006,14 @@ describe('props.columns', () => {
         key: 'age'
       }
     ]
-    const data = new Array(5).fill(0).map((_, index) => {
-      return {
-        name: index,
-        age: index + 1
-      }
-    })
+    const data = Array.from({ length: 5 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index,
+          age: index + 1
+        }
+      })
     const rowKey = (row: any): number => row.name
     const wrapper = mount(() => (
       <NDataTable columns={columns} data={data} row-key={rowKey} />
@@ -1007,12 +1044,14 @@ describe('props.columns', () => {
         }
       }
     ]
-    const data = new Array(5).fill(0).map((_, index) => {
-      return {
-        name: `testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest${index}`,
-        age: `testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest${index}`
-      }
-    })
+    const data = Array.from({ length: 5 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: `testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest${index}`,
+          age: `testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest${index}`
+        }
+      })
     const rowKey = (row: any): number => row.name
     const wrapper = mount(() => (
       <NDataTable columns={columns} data={data} row-key={rowKey} />
@@ -1048,14 +1087,16 @@ describe('props.columns', () => {
         ]
       }
     ]
-    const data = new Array(5).fill(0).map((_, index) => {
-      return {
-        name: index,
-        age: index,
-        test1: index,
-        test2: index
-      }
-    })
+    const data = Array.from({ length: 5 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index,
+          age: index,
+          test1: index,
+          test2: index
+        }
+      })
     const rowKey = (row: any): number => row.name
     const wrapper = mount(() => (
       <NDataTable columns={columns} data={data} row-key={rowKey} />
@@ -1100,12 +1141,14 @@ describe('props.columns', () => {
         className: 'test-age'
       }
     ]
-    const data = new Array(5).fill(0).map((_, index) => {
-      return {
-        name: index,
-        age: index
-      }
-    })
+    const data = Array.from({ length: 5 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index,
+          age: index
+        }
+      })
     const rowKey = (row: any): number => row.name
     const wrapper = mount(() => (
       <NDataTable columns={columns} data={data} row-key={rowKey} />
@@ -1124,16 +1167,18 @@ describe('props.columns', () => {
       {
         title: 'Name',
         key: 'name',
-        render (rowData: any, rowIndex: number) {
+        render(rowData: any, rowIndex: number) {
           return `${String(rowData.name)}-${rowIndex}`
         }
       }
     ]
-    const data = new Array(5).fill(0).map((_, index) => {
-      return {
-        name: index
-      }
-    })
+    const data = Array.from({ length: 5 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index
+        }
+      })
     const rowKey = (row: any): number => row.name
     const wrapper = mount(() => (
       <NDataTable columns={columns} data={data} row-key={rowKey} />
@@ -1146,7 +1191,7 @@ describe('props.columns', () => {
     const columns: DataTableColumns = [
       {
         type: 'expand',
-        expandable: (rowData) => rowData.name === 0,
+        expandable: rowData => rowData.name === 0,
         renderExpand: (rowData: any) => {
           return `${String(rowData.name)} is a good guy.`
         }
@@ -1154,16 +1199,18 @@ describe('props.columns', () => {
       {
         title: 'Name',
         key: 'name',
-        render (rowData: any, rowIndex: number) {
+        render(rowData: any, rowIndex: number) {
           return `${String(rowData.name)}-${rowIndex}`
         }
       }
     ]
-    const data = new Array(5).fill(0).map((_, index) => {
-      return {
-        name: index
-      }
-    })
+    const data = Array.from({ length: 5 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index
+        }
+      })
     const rowKey = (row: any): number => row.name
     const wrapper = mount(() => (
       <NDataTable columns={columns} data={data} row-key={rowKey} />
@@ -1186,7 +1233,7 @@ describe('props.columns', () => {
     wrapper.unmount()
   })
 
-  it('should work with `children` prop', async () => {
+  it('should work with `children` prop 2', async () => {
     const columns: DataTableColumns = [
       {
         title: 'Name',
@@ -1199,12 +1246,14 @@ describe('props.columns', () => {
         width: 200
       }
     ]
-    const data = new Array(5).fill(0).map((_, index) => {
-      return {
-        name: index,
-        age: index
-      }
-    })
+    const data = Array.from({ length: 5 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index,
+          age: index
+        }
+      })
     const rowKey = (row: any): number => row.name
     const wrapper = mount(() => (
       <NDataTable columns={columns} data={data} row-key={rowKey} />
@@ -1231,12 +1280,14 @@ describe('props.columns', () => {
         width: 200
       }
     ]
-    const data = new Array(5).fill(0).map((_, index) => {
-      return {
-        name: index,
-        age: index
-      }
-    })
+    const data = Array.from({ length: 5 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index,
+          age: index
+        }
+      })
     const wrapper = mount(() => (
       <NDataTable columns={columns} data={data} striped />
     ))
@@ -1263,12 +1314,14 @@ describe('props.columns', () => {
         key: 'name'
       }
     ]
-    const data = new Array(5).fill(0).map((_, index) => {
-      return {
-        name: index,
-        key: index
-      }
-    })
+    const data = Array.from({ length: 5 })
+      .fill(0)
+      .map((_, index) => {
+        return {
+          name: index,
+          key: index
+        }
+      })
 
     const checkedRowKeys = ref([4, 1])
 
@@ -1276,14 +1329,19 @@ describe('props.columns', () => {
       checkedRowKeys.value = e
     }
 
-    const wrapper = mount(() => (
-      <NDataTable
-        columns={columns}
-        data={data}
-        onUpdateCheckedRowKeys={handleCheck}
-        checked-row-keys={checkedRowKeys.value}
-      />
-    ))
+    const wrapper = mount(
+      () => (
+        <NDataTable
+          columns={columns}
+          data={data}
+          onUpdateCheckedRowKeys={handleCheck}
+          checked-row-keys={checkedRowKeys.value}
+        />
+      ),
+      {
+        attachTo: document.body
+      }
+    )
 
     const radios = wrapper.findAll('.n-radio')
 
@@ -1292,10 +1350,9 @@ describe('props.columns', () => {
 
     await radios[1].trigger('click')
 
-    setTimeout(() => {
-      expect(radios[1].classes()).toContain('n-radio--checked')
-      expect(radios[4].classes()).not.toContain('n-radio--checked')
-    }, 0)
+    expect(radios[1].classes()).toContain('n-radio--checked')
+    expect(radios[4].classes()).not.toContain('n-radio--checked')
+
     wrapper.unmount()
   })
 })

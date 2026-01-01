@@ -1,36 +1,36 @@
+import type { PropType } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { BackTopTheme } from '../styles'
+import { getScrollParent, unwrapElement } from 'seemly'
+import { useIsMounted, useMergedState } from 'vooks'
 import {
-  h,
-  ref,
   computed,
-  toRef,
-  watch,
-  nextTick,
   defineComponent,
+  h,
   mergeProps,
-  Transition,
-  type PropType,
-  onMounted,
+  nextTick,
   onBeforeUnmount,
+  onMounted,
+  ref,
+  toRef,
+  Transition,
+  watch,
   watchEffect
 } from 'vue'
 import { VLazyTeleport } from 'vueuc'
-import { useIsMounted, useMergedState } from 'vooks'
-import { getScrollParent, unwrapElement } from 'seemly'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import { NBaseIcon } from '../../_internal'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import {
-  lockHtmlScrollRightCompensationRef,
   formatLength,
-  resolveSlot,
   isDocument,
+  lockHtmlScrollRightCompensationRef,
+  resolveSlot,
   warn,
   warnOnce
 } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { backTopLight } from '../styles'
-import type { BackTopTheme } from '../styles'
-import BackTopIcon from './BackTopIcon'
+import renderBackTopIcon from './BackTopIcon'
 import style from './styles/index.cssr'
 
 export const backTopProps = {
@@ -56,7 +56,7 @@ export const backTopProps = {
     default: 180
   },
   listenTo: [String, Object, Function] as PropType<
-  string | HTMLElement | Document | (() => HTMLElement | Document)
+    string | HTMLElement | Document | (() => HTMLElement | Document)
   >,
   'onUpdate:show': {
     type: Function,
@@ -75,7 +75,7 @@ export default defineComponent({
   // make style applied to back-top button
   inheritAttrs: false,
   props: backTopProps,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.target !== undefined) {
@@ -152,13 +152,14 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    function init (): void {
-      if (scrollListenerRegistered) return
+    function init(): void {
+      if (scrollListenerRegistered)
+        return
       scrollListenerRegistered = true
-      const scrollEl =
-        props.target?.() ||
-        unwrapElement(props.listenTo) ||
-        getScrollParent(placeholderRef.value)
+      const scrollEl
+        = props.target?.()
+          || unwrapElement(props.listenTo)
+          || getScrollParent(placeholderRef.value)
       if (!scrollEl) {
         if (__DEV__) {
           warn(
@@ -168,8 +169,8 @@ export default defineComponent({
         }
         return
       }
-      scrollElement =
-        scrollEl === document.documentElement ? document : scrollEl
+      scrollElement
+        = scrollEl === document.documentElement ? document : scrollEl
       const { to } = props
       const target = typeof to === 'string' ? document.querySelector(to) : to
       if (__DEV__ && !target) {
@@ -178,7 +179,7 @@ export default defineComponent({
       scrollElement.addEventListener('scroll', handleScroll)
       handleScroll()
     }
-    function handleClick (): void {
+    function handleClick(): void {
       ;(isDocument(scrollElement)
         ? document.documentElement
         : scrollElement
@@ -187,7 +188,7 @@ export default defineComponent({
         behavior: 'smooth'
       })
     }
-    function handleScroll (): void {
+    function handleScroll(): void {
       scrollTopRef.value = (
         isDocument(scrollElement) ? document.documentElement : scrollElement
       ).scrollTop
@@ -197,7 +198,7 @@ export default defineComponent({
         })
       }
     }
-    function handleAfterEnter (): void {
+    function handleAfterEnter(): void {
       transitionDisabledRef.value = false
     }
     onMounted(() => {
@@ -265,7 +266,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     return (
       <div
@@ -287,23 +288,23 @@ export default defineComponent({
                     this.onRender?.()
                     return this.mergedShow
                       ? h(
-                        'div',
-                        mergeProps(this.$attrs, {
-                          class: [
+                          'div',
+                          mergeProps(this.$attrs, {
+                            class: [
                               `${mergedClsPrefix}-back-top`,
                               this.themeClass,
-                              this.transitionDisabled &&
-                                `${mergedClsPrefix}-back-top--transition-disabled`
-                          ],
-                          style: [this.style, this.cssVars],
-                          onClick: this.handleClick
-                        }),
-                        resolveSlot(this.$slots.default, () => [
+                              this.transitionDisabled
+                              && `${mergedClsPrefix}-back-top--transition-disabled`
+                            ],
+                            style: [this.style, this.cssVars],
+                            onClick: this.handleClick
+                          }),
+                          resolveSlot(this.$slots.default, () => [
                             <NBaseIcon clsPrefix={mergedClsPrefix}>
-                              {{ default: () => BackTopIcon }}
+                              {{ default: renderBackTopIcon }}
                             </NBaseIcon>
-                        ])
-                      )
+                          ])
+                        )
                       : null
                   }
                 }}

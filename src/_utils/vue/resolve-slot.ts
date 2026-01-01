@@ -1,13 +1,7 @@
-import {
-  Fragment,
-  isVNode,
-  type Slot,
-  Comment,
-  type VNodeArrayChildren,
-  type VNodeChild
-} from 'vue'
+import type { Slot, VNodeArrayChildren, VNodeChild } from 'vue'
+import { Comment, Fragment, isVNode } from 'vue'
 
-function ensureValidVNode (
+export function ensureValidVNode(
   vnodes: VNodeArrayChildren
 ): VNodeArrayChildren | null {
   return vnodes.some((child) => {
@@ -18,8 +12,8 @@ function ensureValidVNode (
       return false
     }
     if (
-      child.type === Fragment &&
-      !ensureValidVNode(child.children as VNodeArrayChildren)
+      child.type === Fragment
+      && !ensureValidVNode(child.children as VNodeArrayChildren)
     ) {
       return false
     }
@@ -32,15 +26,15 @@ function ensureValidVNode (
 /**
  * We shouldn't use the following functions with slot flags `_: 1, 2, 3`
  */
-export function resolveSlot (
+export function resolveSlot(
   slot: Slot | undefined,
   fallback: () => VNodeArrayChildren
 ): VNodeArrayChildren {
   return (slot && ensureValidVNode(slot())) || fallback()
 }
 
-export function resolveSlotWithProps<T> (
-  slot: Slot | undefined,
+export function resolveSlotWithTypedProps<T>(
+  slot: Slot<T> | undefined,
   props: T,
   fallback: (props: T) => VNodeArrayChildren
 ): VNodeArrayChildren {
@@ -50,7 +44,7 @@ export function resolveSlotWithProps<T> (
 /**
  * Resolve slot with wrapper if content exists, no fallback
  */
-export function resolveWrappedSlot (
+export function resolveWrappedSlot(
   slot: Slot | undefined,
   wrapper: (children: VNodeArrayChildren | null) => VNodeChild
 ): VNodeChild {
@@ -61,7 +55,7 @@ export function resolveWrappedSlot (
 /*
  * Resolve slot with wrapper if content exists, no fallback
  */
-export function resolveWrappedSlotWithProps (
+export function resolveWrappedSlotWithProps(
   slot: Slot | undefined,
   props: any,
   wrapper: (children: VNodeArrayChildren | null) => VNodeChild
@@ -70,6 +64,6 @@ export function resolveWrappedSlotWithProps (
   return wrapper(children || null)
 }
 
-export function isSlotEmpty (slot: Slot | undefined): boolean {
+export function isSlotEmpty(slot: Slot | undefined): boolean {
   return !(slot && ensureValidVNode(slot()))
 }

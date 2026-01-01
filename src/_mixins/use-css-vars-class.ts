@@ -1,25 +1,27 @@
-import { type ComputedRef, type Ref, ref, inject, watchEffect } from 'vue'
-import { hash } from 'css-render'
+import type { ComputedRef, Ref } from 'vue'
 import { useSsrAdapter } from '@css-render/vue3-ssr'
-import { configProviderInjectionKey } from '../config-provider/src/context'
+import { hash } from 'css-render'
+import { inject, ref, watchEffect } from 'vue'
 import { throwError } from '../_utils'
 import { c } from '../_utils/cssr'
+import { configProviderInjectionKey } from '../config-provider/src/context'
 
-export function useThemeClass (
+export function useThemeClass(
   componentName: string,
   hashRef: Ref<string> | undefined,
   cssVarsRef: ComputedRef<Record<string, string>> | undefined,
   props: { themeOverrides?: unknown, builtinThemeOverrides?: unknown }
 ): {
-    themeClass: Ref<string>
-    onRender: () => void
-  } {
-  if (!cssVarsRef) throwError('useThemeClass', 'cssVarsRef is not passed')
+  themeClass: Ref<string>
+  onRender: () => void
+} {
+  if (!cssVarsRef)
+    throwError('useThemeClass', 'cssVarsRef is not passed')
 
-  const mergedThemeHashRef = inject(
-    configProviderInjectionKey,
-    null
-  )?.mergedThemeHashRef
+  const NConfigProvider = inject(configProviderInjectionKey, null)
+
+  const mergedThemeHashRef = NConfigProvider?.mergedThemeHashRef
+  const styleMountTarget = NConfigProvider?.styleMountTarget
 
   const themeClassRef = ref('')
 
@@ -32,14 +34,16 @@ export function useThemeClass (
     let finalThemeHash = hashClassPrefix
     const hashValue = hashRef ? hashRef.value : undefined
     const themeHash = mergedThemeHashRef?.value
-    if (themeHash) finalThemeHash += '-' + themeHash
-    if (hashValue) finalThemeHash += '-' + hashValue
+    if (themeHash)
+      finalThemeHash += `-${themeHash}`
+    if (hashValue)
+      finalThemeHash += `-${hashValue}`
     const { themeOverrides, builtinThemeOverrides } = props
     if (themeOverrides) {
-      finalThemeHash += '-' + hash(JSON.stringify(themeOverrides))
+      finalThemeHash += `-${hash(JSON.stringify(themeOverrides))}`
     }
     if (builtinThemeOverrides) {
-      finalThemeHash += '-' + hash(JSON.stringify(builtinThemeOverrides))
+      finalThemeHash += `-${hash(JSON.stringify(builtinThemeOverrides))}`
     }
     themeClassRef.value = finalThemeHash
     renderCallback = () => {
@@ -50,7 +54,8 @@ export function useThemeClass (
       }
       c(`.${finalThemeHash}`, style).mount({
         id: finalThemeHash,
-        ssr: ssrAdapter
+        ssr: ssrAdapter,
+        parent: styleMountTarget
       })
       renderCallback = undefined
     }

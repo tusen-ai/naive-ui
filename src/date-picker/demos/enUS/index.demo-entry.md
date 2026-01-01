@@ -16,6 +16,7 @@ year.vue
 yearrange.vue
 quarter.vue
 quarterrange.vue
+week.vue
 size.vue
 default-time.vue
 disabled.vue
@@ -38,26 +39,41 @@ panel.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
+| calendar-day-format | `string` | `undefined` | Weekday format inside popup panel. | 2.40.2 |
+| calendar-header-year-format | `string` | `undefined` | Year format inside the header of popup panel's calendar. | 2.40.2 |
+| calendar-header-month-format | `string` | `undefined` | Month format inside the header of popup panel's calendar. | 2.40.2 |
+| calendar-header-month-before-year | `string` | `undefined` | Whether to show month before year inside the header of popup panel's calender. | 2.40.2 |
+| calendar-header-month-year-separator | `string` | `' '` | Separator between month and year inside the header of popup panel's calendar. | 2.40.2 |
 | clearable | `boolean` | `false` | Whether the date picker is clearable. |  |
+| date-format | `string` | `undefined` | Date input format inside popup panel. | 2.40.2 |
 | default-value | `number \| [number, number] \| null` | `undefined` | Date picker's default value. |  |
 | default-formatted-value | `string \| [string, string] \| null` | `undefined` | Date picker's default formatted value. | 2.24.0 |
 | disabled | `boolean` | `false` | Whether the date picker is disabled. |  |
 | first-day-of-week | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | `undefined` | The first day of a week on calendar, 0 means Monday. |  |
 | input-readonly | `boolean` | `false` | Set the `readonly` attribute of the input (avoids virtual keyboard on touch devices). |  |
+| month-format | `string` | `'M'` | Format of month item in the panel. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.37.0 |
 | panel | `boolean` | `false` | Whether to use date-picker as panel. | 2.29.1 |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Panel's placement. | 2.25.0 |
+| quarter-format | `string` | `'Q'Q` | Format of quarter item in the panel. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.37.0 |
 | shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| (() => [number, number])>` | `undefined` | Shortcut button customizations. |  |
 | show | `boolean` | `undefined` | Whether to show panel. | 2.28.3 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validation status. | 2.27.0 |
+| time-picker-format | `string \| undefined` | `undefined` | Format of the binding value in time picker inside date picker of type `'datetime'` and `'datetimerange'`. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.38.2 |
 | to | `string \| HTMLElement \| false` | `body` | Container node of the panel. `false` will keep it not detached. |  |
-| type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'monthrange' \| 'year' \| 'quarter'` | `'date'` | Date picker type. | `'quarter'` v2.22.0, `'monthrange'` 2.28.3 |
+| type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'monthrange' \| 'year' \| 'yearrange' \| 'quarter' \| 'quarterrange' \| 'week'` | `'date'` | Date picker type. | `'quarter'` v2.22.0, `'monthrange'` 2.28.3 |
 | value | `number \| [number, number] \| null` | `undefined` | Value of the date picker when being manually set. |  |
-| value-format | `string` | Follow `format` prop | Format of the binding value. see [format](https://date-fns.org/v2.23.0/docs/format). | 2.24.0 |
+| value-format | `string` | Follow `format` prop | Format of the binding value. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.24.0 |
+| year-format | `string` | `'y'` | Format of year item in the panel. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.37.0 |
+| year-range | `[number, number]` | `[1901, 2100]` | Year range in month picker in panel. | 2.40.0 |
 | on-clear | `() => void` | `undefined` | On clear callback. | 2.28.3 |
 | on-confirm | `(value: number \| [number, number] \| null, formattedValue: string \| [string, string] \| null) => void` | `undefined` | On confirm callback. | 2.28.3 |
 | on-blur | `() => void` | `undefined` | On blur callback. |  |
 | on-focus | `() => void` | `undefined` | On focus callback. |  |
+| on-next-month | `() => void` | `undefined` | Callback when click next month button. | 2.37.0 |
+| on-next-year | `() => void` | `undefined` | Callback when click next year button. | 2.37.0 |
+| on-prev-month | `() => void` | `undefined` | Callback when click previous month button. | 2.37.0 |
+| on-prev-year | `() => void` | `undefined` | Callback when click previous year button. | 2.37.0 |
 | on-update:show | `(show: boolean) => void` | `undefined` | Callback when panel shows & hides. | 2.28.3 |
 
 ### Date Type Props
@@ -65,8 +81,9 @@ panel.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now'> \| null` | `['clear', 'now']` | Operations supported for the `date` type date picker. |  |
+| default-calendar-start-time | `number` | `undefined` | Default panel calendar start month timestamp. | 2.38.1 |
 | format | `string` | `'yyyy-MM-dd'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
-| is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the date. |  |
+| is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `() => false` | Validator of the date. | `detail` 2.37.1 |
 | placeholder | `string` | `'Select Date'` | Placeholder. |  |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | Date selected callback. | 2.24.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Date selected callback. | `formattedValue` 2.24.0 |
@@ -76,9 +93,10 @@ panel.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` | Operations supported for the `datetime` type date picker. |  |
-| default-time | `string` | `undefined` | Default time of the selected date. It's format is `HH:mm:ss`. | 2.22.0 |
+| default-calendar-start-time | `number` | `undefined` | Default panel calendar start month timestamp. | 2.38.1 |
+| default-time | `string \| (timestamp: number) => string` | `undefined` | Default time of the selected date. Can accept a function with a timestamp argument that returns a formatted string. It's format is `HH:mm:ss`. | 2.22.0, functional since 2.43.2 |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
-| is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the date. |  |
+| is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `() => false` | Validator of the date. | `detail` 2.37.1 |
 | is-time-disabled | `(current: number) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | Validator of the time. |  |
 | placeholder | `string` | `'Select Date and Time'` | Placeholder. |  |
 | time-picker-props | `TimePickerProps` | `undefined` | Time picker props in the panel. | 2.27.0 |
@@ -96,10 +114,10 @@ panel.vue
 | default-calendar-end-time | `number` | `undefined` | Default panel calendar end month timestamp. | 2.28.3 |
 | end-placeholder | `string` | `'End Date'` | Placeholder at end part of the input. |  |
 | format | `string` | `'yyyy-MM-dd'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
-| is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. |  |
+| is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. | `detail` 2.37.1 |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: (hour: number) => boolean, isMinuteDisabled?: (minute: number, hour: number \| null) => boolean, isSecondDisabled?: (second: number, minute: number \| null, hour: number \| null) => boolean }` | `undefined` | Validator of the time. `null` in validators means value of picker is empty. |  |
 | close-on-select | `boolean` | `false` | Whether to close the panel after the user has selected a time range. |  |
-| separator | `string` | `'to'` | The separator between the start input and the end input. |  |
+| separator | `string` | internal icon | The separator between the start input and the end input. |  |
 | start-placeholder | `string` | `'Start Date'` | The prompt information at the beginning of the input. |  |
 | update-value-on-close | `boolean` | `false` | Whether to update the value on close. |  |
 | on-update:formatted-value | `(value: [string, string] \| null, timestampValue: [number, number] \| null) => void` | `undefined` | Formatted range changed callback. | 2.24.0 |
@@ -113,12 +131,12 @@ panel.vue
 | bind-calendar-months | `boolean` | `false` | Whether months in panel calendar are consecutive. | 2.28.3 |
 | default-calendar-start-time | `number` | `undefined` | Default panel calendar start month timestamp. | 2.28.3 |
 | default-calendar-end-time | `number` | `undefined` | Default panel calendar end month timestamp. | 2.28.3 |
-| default-time | `string \| Array<string \| undefined>` | `undefined` | Default time of the selected date. It's format is `HH:mm:ss`. | 2.22.0 |
+| default-time | `string \| Array<string \| undefined> \| (timestamp: number, position: "start" \| "end", value: [number, number] \| null) => string` | `undefined` | Default time of the selected date. Can accept a function with timestamp, position and value arguments that returns a formatted string. It's format is `HH:mm:ss`. | 2.22.0, functional since 2.43.2 |
 | end-placeholder | `string` | `'End Date and Time'` | Placeholder at end part of the input. |  |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. |  |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: (hour: number) => boolean, isMinuteDisabled?: (minute: number, hour: number \| null) => boolean, isSecondDisabled?: (second: number, minute: number \| null, hour: number \| null) => boolean }` | `undefined` | Validator of the time. `null` in validators means value of picker is empty. |  |
-| separator | `string` | `'to'` | The separator between the start input and the end input. |  |
+| separator | `string` | internal icon | The separator between the start input and the end input. |  |
 | start-placeholder | `string` | `'Start Date and Time'` | The prompt information at the beginning of the input. |  |
 | time-picker-props | `TimePickerProps \| [TimePickerProps, TimePickerProps]` | `undefined` | Time picker props in the panel. | 2.27.0 |
 | update-value-on-close | `boolean` | `false` | Whether to update value on close. |  |
@@ -131,7 +149,7 @@ panel.vue
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now']` | Operations supported for the `month` type date picker. |  |
 | format | `string` | `'yyyy-MM'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
-| is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the month. |  |
+| is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `() => false` | Validator of the month. | `detail` 2.37.1 |
 | placeholder | `string` | `'Select Month'` | Placeholder. |  |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | Formatted value changed callback. | 2.24.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Value changed callback. | `formattedValue` 2.24.0 |
@@ -144,7 +162,7 @@ panel.vue
 | end-placeholder | `string` | `'End Month'` | Placeholder at end part of the input. | 2.28.3 |
 | format | `string` | `'yyyy-MM-dd'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). | 2.28.3 |
 | close-on-select | `boolean` | `false` | Whether to close the panel after the user has selected a time range. | 2.28.3 |
-| separator | `string` | `'to'` | The separator between the start input and the end input. | 2.28.3 |
+| separator | `string` | internal icon | The separator between the start input and the end input. | 2.28.3 |
 | start-placeholder | `string` | `'Start Month'` | The prompt information at the beginning of the input. | 2.28.3 |
 | update-value-on-close | `boolean` | `false` | Whether to update the value on close. | 2.28.3 |
 | on-update:formatted-value | `(value: [string, string] \| null, timestampValue: [number, number] \| null) => void` | `undefined` | Formatted range changed callback. | 2.28.3 |
@@ -156,10 +174,21 @@ panel.vue
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now'> \| null` | `['clear', 'now']` | Operations supported for the `year` type date picker. |  |
 | format | `string` | `'yyyy'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
-| is-date-disabled | `(current: number) => boolean` | `() => false` | Validator of the year. |  |
+| is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `() => false` | Validator of the year. | `detail` 2.37.1 |
 | placeholder | `string` | `'Select Year'` | Placeholder. |  |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | Formatted value changed callback. | 2.24.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Value changed callback. | `formattedValue` 2.24.0 |
+
+### Week Type Props
+
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| actions | `Array<'clear' \| 'now'> \| null` | `['clear', 'now']` | Operations supported for the `week` type date picker. | 2.37.0 |
+| default-calendar-start-time | `number` | `undefined` | Default panel calendar start month timestamp. | 2.38.1 |
+| format | `string` | `'YYYY-w'` for en-US, Locale specific. | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). | 2.37.0 |
+| placeholder | `string` | `'Select Week'` for en-US, Locale specific. | Placeholder. | 2.37.0 |
+| on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | Formatted value changed callback. | 2.37.0 |
+| on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | Value changed callback. | 2.37.0 |
 
 ### DatePicker Slots
 
@@ -172,6 +201,28 @@ panel.vue
 | prev-month | `()`       | Prev icon of the date panel.      | 2.33.4  |
 | prev-year  | `()`       | Fast prev icon of the date panel. | 2.33.4  |
 | separator  | `()`       | Separator of range picker.        | 2.29.0  |
+
+### Date, Year, QuarterRange, Week Slots
+
+| 名称 | 参数 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| clear | `(props: { onClear: () => void, text: string })` | Clear button of the panel. | 2.40.0 |
+| now | `(props: { onNow: () => void, text: string })` | Now button of the panel. | 2.40.0 |
+
+### DateRange, DateTimeRange, MonthRange, YearRange Slots
+
+| 名称 | 参数 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| clear | `(props: { onClear: () => void, text: string })` | Clear button of the panel. | 2.40.0 |
+| confirm | `(props: { onConfirm: () => void, disabled: boolean, text: string })` | Confirm button of the panel. | 2.40.0 |
+
+### DateTime, Month, Quarter Slots
+
+| 名称 | 参数 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| clear | `(props: { onClear: () => void, text: string })` | Clear button of the panel. | 2.40.0 |
+| confirm | `(props: { onConfirm: () => void, disabled: boolean, text: string })` | Confirm button of the panel. | 2.40.0 |
+| now | `(props: { onNow: () => void, text: string })` | Now button of the panel. | 2.40.0 |
 
 ### DatePicker Methods
 

@@ -1,7 +1,7 @@
+import type { TooltipTheme } from './light'
 import { commonDark } from '../../_styles/common'
 import { popoverDark } from '../../popover/styles'
 import commonVars from './_common'
-import type { TooltipTheme } from './light'
 
 const tooltipDark: TooltipTheme = {
   name: 'Tooltip',
@@ -9,7 +9,7 @@ const tooltipDark: TooltipTheme = {
   peers: {
     Popover: popoverDark
   },
-  self (vars) {
+  self(vars) {
     const { borderRadius, boxShadow2, popoverColor, textColor2 } = vars
     return {
       ...commonVars,

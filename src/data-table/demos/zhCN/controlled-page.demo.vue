@@ -2,12 +2,8 @@
 # 受控的分页
 </markdown>
 
-<template>
-  <n-data-table :columns="columns" :data="data" :pagination="pagination" />
-</template>
-
-<script lang="ts">
-import { defineComponent, reactive } from 'vue'
+<script lang="ts" setup>
+import { reactive } from 'vue'
 
 const columns = [
   {
@@ -31,27 +27,21 @@ const data = Array.from({ length: 46 }).map((_, index) => ({
   address: `London, Park Lane no. ${index}`
 }))
 
-export default defineComponent({
-  setup () {
-    const paginationReactive = reactive({
-      page: 2,
-      pageSize: 5,
-      showSizePicker: true,
-      pageSizes: [3, 5, 7],
-      onChange: (page: number) => {
-        paginationReactive.page = page
-      },
-      onUpdatePageSize: (pageSize: number) => {
-        paginationReactive.pageSize = pageSize
-        paginationReactive.page = 1
-      }
-    })
-
-    return {
-      data,
-      columns,
-      pagination: paginationReactive
-    }
+const pagination = reactive({
+  page: 2,
+  pageSize: 5,
+  showSizePicker: true,
+  pageSizes: [3, 5, 7],
+  onChange: (page: number) => {
+    pagination.page = page
+  },
+  onUpdatePageSize: (pageSize: number) => {
+    pagination.pageSize = pageSize
+    pagination.page = 1
   }
 })
 </script>
+
+<template>
+  <n-data-table :columns="columns" :data="data" :pagination="pagination" />
+</template>

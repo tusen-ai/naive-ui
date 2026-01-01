@@ -31,6 +31,7 @@ const svSE: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'YYYY-w',
     clear: 'Rensa',
     now: 'Nu',
     confirm: 'Bekräfta',
@@ -41,6 +42,7 @@ const svSE: NLocale = {
     monthPlaceholder: 'Välj månad',
     yearPlaceholder: 'Välj år',
     quarterPlaceholder: 'Välj kvartal',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Startdatum',
     endDatePlaceholder: 'Slutdatum',
     startDatetimePlaceholder: 'Startdatum och -tid',
@@ -78,7 +80,8 @@ const svSE: NLocale = {
     placeholder: 'Välj tid',
     positiveText: 'OK',
     negativeText: 'Avbryt',
-    now: 'Nu'
+    now: 'Nu',
+    clear: 'Rensa'
   },
   Pagination: {
     goto: 'Gå till',
@@ -114,11 +117,17 @@ const svSE: NLocale = {
     tipNext: 'Nästa bild (→)',
     tipCounterclockwise: 'Moturs',
     tipClockwise: 'Medurs',
-    tipZoomOut: 'Zooma in',
-    tipZoomIn: 'Zooma ut',
+    tipZoomOut: 'Zooma ut',
+    tipZoomIn: 'Zooma in',
     tipDownload: 'Ladda ned',
     tipClose: 'Stäng (Esc)',
     tipOriginalSize: 'Zooma till ursprunglig storlek'
+  },
+  Heatmap: {
+    less: 'mindre',
+    more: 'mer',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

@@ -1,19 +1,18 @@
-import { computed, defineComponent, h, type PropType } from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import type { PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import { createKey } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { inputLight } from '../styles'
 import type { InputTheme } from '../styles'
-import style from './styles/input-group-label.cssr'
 import type { Size } from './interface'
+import { computed, defineComponent, h } from 'vue'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import { createKey } from '../../_utils'
+import { inputLight } from '../styles'
+
+import style from './styles/input-group-label.cssr'
 
 export const inputGroupLabelProps = {
   ...(useTheme.props as ThemeProps<InputTheme>),
-  size: {
-    type: String as PropType<Size>,
-    default: 'medium'
-  },
+  size: String as PropType<Size>,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -27,9 +26,11 @@ export type InputGroupLabelProps = ExtractPublicPropTypes<
 export default defineComponent({
   name: 'InputGroupLabel',
   props: inputGroupLabelProps,
-  setup (props) {
-    const { mergedBorderedRef, mergedClsPrefixRef, inlineThemeDisabled } =
-      useConfig(props)
+  setup(props) {
+    const { mergedBorderedRef, mergedClsPrefixRef, inlineThemeDisabled }
+      = useConfig(props)
+    const formItem = useFormItem(props)
+    const { mergedSizeRef } = formItem
     const themeRef = useTheme(
       'Input',
       '-input-group-label',
@@ -39,7 +40,7 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const cssVarsRef = computed(() => {
-      const { size } = props
+      const { value: size } = mergedSizeRef
       const {
         common: { cubicBezierEaseInOut },
         self: {
@@ -65,11 +66,14 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'input-group-label',
-        computed(() => props.size[0]),
-        cssVarsRef,
-        props
-      )
+          'input-group-label',
+          computed(() => {
+            const { value: size } = mergedSizeRef
+            return size[0]
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
@@ -79,7 +83,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     this.onRender?.()
     return (

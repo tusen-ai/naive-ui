@@ -1,17 +1,17 @@
-import { computed, type ComputedRef, ref } from 'vue'
+import type { TreeMate } from 'treemate'
+import type { ComputedRef } from 'vue'
 import type {
   DataTableSetupProps,
-  RowKey,
-  RowData,
-  TableSelectionColumn,
   InternalRowData,
+  RowData,
+  RowKey,
+  TableSelectionColumn,
   TmNode
 } from './interface'
+import { computed, ref } from 'vue'
 import { call } from '../../_utils'
-import type { TreeMate } from 'treemate'
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function useCheck (
+export function useCheck(
   props: DataTableSetupProps,
   data: {
     selectionColumnRef: ComputedRef<TableSelectionColumn | null>
@@ -23,8 +23,8 @@ export function useCheck (
   const uncontrolledCheckedRowKeysRef = ref(props.defaultCheckedRowKeys)
   const mergedCheckState = computed(() => {
     const { checkedRowKeys } = props
-    const sourceKeys =
-      checkedRowKeys === undefined
+    const sourceKeys
+      = checkedRowKeys === undefined
         ? uncontrolledCheckedRowKeysRef.value
         : checkedRowKeys
     if (selectionColumnRef.value?.multiple === false) {
@@ -59,16 +59,16 @@ export function useCheck (
     }, 0)
   })
   const countOfCurrentPageDisabledRowsRef = computed(() => {
-    return paginatedDataRef.value.filter((item) => item.disabled).length
+    return paginatedDataRef.value.filter(item => item.disabled).length
   })
   const someRowsCheckedRef = computed(() => {
     const { length } = paginatedDataRef.value
     const { value: mergedInderminateRowKeySet } = mergedInderminateRowKeySetRef
     return (
-      (countOfCurrentPageCheckedRowsRef.value > 0 &&
-        countOfCurrentPageCheckedRowsRef.value <
-          length - countOfCurrentPageDisabledRowsRef.value) ||
-      paginatedDataRef.value.some((rowData) =>
+      (countOfCurrentPageCheckedRowsRef.value > 0
+        && countOfCurrentPageCheckedRowsRef.value
+        < length - countOfCurrentPageDisabledRowsRef.value)
+      || paginatedDataRef.value.some(rowData =>
         mergedInderminateRowKeySet.has(rowData.key)
       )
     )
@@ -76,15 +76,15 @@ export function useCheck (
   const allRowsCheckedRef = computed(() => {
     const { length } = paginatedDataRef.value
     return (
-      countOfCurrentPageCheckedRowsRef.value !== 0 &&
-      countOfCurrentPageCheckedRowsRef.value ===
-        length - countOfCurrentPageDisabledRowsRef.value
+      countOfCurrentPageCheckedRowsRef.value !== 0
+      && countOfCurrentPageCheckedRowsRef.value
+      === length - countOfCurrentPageDisabledRowsRef.value
     )
   })
   const headerCheckboxDisabledRef = computed(() => {
     return paginatedDataRef.value.length === 0
   })
-  function doUpdateCheckedRowKeys (
+  function doUpdateCheckedRowKeys(
     keys: RowKey[],
     row: RowData | undefined,
     action: 'check' | 'uncheck' | 'checkAll' | 'uncheckAll'
@@ -100,7 +100,6 @@ export function useCheck (
     } = treeMateRef
     keys.forEach((key) => {
       const row = getNode(key)?.rawNode
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       rows.push(row!)
     })
     if (_onUpdateCheckedRowKeys) {
@@ -114,12 +113,13 @@ export function useCheck (
     }
     uncontrolledCheckedRowKeysRef.value = keys
   }
-  function doCheck (
+  function doCheck(
     rowKey: RowKey | RowKey[],
     single: boolean = false,
     rowInfo: RowData
   ): void {
-    if (props.loading) return
+    if (props.loading)
+      return
     if (single) {
       doUpdateCheckedRowKeys(
         Array.isArray(rowKey) ? rowKey.slice(0, 1) : [rowKey],
@@ -137,8 +137,9 @@ export function useCheck (
       'check'
     )
   }
-  function doUncheck (rowKey: RowKey | RowKey[], rowInfo: RowData): void {
-    if (props.loading) return
+  function doUncheck(rowKey: RowKey | RowKey[], rowInfo: RowData): void {
+    if (props.loading)
+      return
     doUpdateCheckedRowKeys(
       treeMateRef.value.uncheck(rowKey, mergedCheckedRowKeysRef.value, {
         cascade: props.cascade,
@@ -148,9 +149,10 @@ export function useCheck (
       'uncheck'
     )
   }
-  function doCheckAll (checkWholeTable: boolean = false): void {
+  function doCheckAll(checkWholeTable: boolean = false): void {
     const { value: column } = selectionColumnRef
-    if (!column || props.loading) return
+    if (!column || props.loading)
+      return
     const rowKeysToCheck: RowKey[] = []
     ;(checkWholeTable
       ? treeMateRef.value.treeNodes
@@ -170,9 +172,10 @@ export function useCheck (
       'checkAll'
     )
   }
-  function doUncheckAll (checkWholeTable: boolean = false): void {
+  function doUncheckAll(checkWholeTable: boolean = false): void {
     const { value: column } = selectionColumnRef
-    if (!column || props.loading) return
+    if (!column || props.loading)
+      return
     const rowKeysToUncheck: RowKey[] = []
     ;(checkWholeTable
       ? treeMateRef.value.treeNodes

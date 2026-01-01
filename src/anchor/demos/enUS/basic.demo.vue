@@ -2,6 +2,13 @@
 # Basic
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const showRail = ref(true)
+const showBackground = ref(true)
+</script>
+
 <template>
   <n-space style="margin-bottom: 12px">
     <n-switch v-model:value="showRail" /> Show Rail
@@ -17,16 +24,3 @@
     <n-anchor-link title="API" href="#API" />
   </n-anchor>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      showRail: ref(true),
-      showBackground: ref(true)
-    }
-  }
-})
-</script>

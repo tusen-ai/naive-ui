@@ -2,6 +2,20 @@
 # 加载中
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const active = ref(false)
+const loading = ref(false)
+function handleUpdateValue(value: boolean) {
+  loading.value = true
+  setTimeout(() => {
+    active.value = value
+    loading.value = false
+  }, 2000)
+}
+</script>
+
 <template>
   <n-space>
     <n-switch :rubber-band="false" loading />
@@ -13,25 +27,3 @@
     />
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const activeRef = ref(false)
-    const loadingRef = ref(false)
-    return {
-      active: activeRef,
-      loading: loadingRef,
-      handleUpdateValue (value: boolean) {
-        loadingRef.value = true
-        setTimeout(() => {
-          activeRef.value = value
-          loadingRef.value = false
-        }, 2000)
-      }
-    }
-  }
-})
-</script>

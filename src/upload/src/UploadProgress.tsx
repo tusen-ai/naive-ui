@@ -1,4 +1,5 @@
-import { h, defineComponent, inject, type PropType } from 'vue'
+import type { PropType } from 'vue'
+import { defineComponent, h, inject } from 'vue'
 import { NFadeInExpandTransition } from '../../_internal'
 import { NProgress } from '../../progress'
 import { uploadInjectionKey } from './interface'
@@ -16,14 +17,13 @@ export default defineComponent({
       required: true
     }
   },
-  setup () {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  setup() {
     const NUpload = inject(uploadInjectionKey)!
     return {
       mergedTheme: NUpload.mergedThemeRef
     }
   },
-  render () {
+  render() {
     return (
       <NFadeInExpandTransition>
         {{

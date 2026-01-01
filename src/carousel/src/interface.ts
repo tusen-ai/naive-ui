@@ -9,8 +9,8 @@ export interface CarouselInst {
 
 export interface ArrowScopedSlotProps
   extends Pick<
-  CarouselContextValue,
-  'to' | 'prev' | 'next' | 'isPrevDisabled' | 'isNextDisabled'
+    CarouselContextValue,
+    'to' | 'prev' | 'next' | 'isPrevDisabled' | 'isNextDisabled'
   > {
   total: number
   currentIndex: number
@@ -24,4 +24,18 @@ export interface DotScopedSlotProps extends Pick<CarouselContextValue, 'to'> {
 export interface Size {
   width: number
   height: number
+}
+
+export interface CarouselArrowSlotProps {
+  total: number
+  currentIndex: number
+  to: (index: number) => void
+  prev: () => void
+  next: () => void
+}
+
+export interface CarouselDotSlotProps {
+  total: number
+  currentIndex: number
+  to: (index: number) => void
 }

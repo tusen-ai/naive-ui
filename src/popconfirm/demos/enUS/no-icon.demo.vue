@@ -4,7 +4,7 @@
 
 <template>
   <n-popconfirm :show-icon="false">
-    <template #activator>
+    <template #trigger>
       <n-button>No icon</n-button>
     </template>
     As is

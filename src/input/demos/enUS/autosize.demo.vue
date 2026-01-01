@@ -13,14 +13,14 @@ Autosize the input.
       size="small"
       :autosize="{
         minRows: 3,
-        maxRows: 5
+        maxRows: 5,
       }"
     />
     <n-input
       type="textarea"
       placeholder="Autosizable"
       :autosize="{
-        minRows: 3
+        minRows: 3,
       }"
     />
   </n-space>

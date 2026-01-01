@@ -1,7 +1,38 @@
 <markdown>
 # Rtl Debug
-
 </markdown>
+
+<script lang="ts" setup>
+import { unstableAvatarGroupRtl, unstableSpaceRtl } from 'naive-ui'
+import { ref } from 'vue'
+
+const rtlEnabled = ref(false)
+
+const rtlStyles = [unstableAvatarGroupRtl, unstableSpaceRtl]
+
+const options = [
+  {
+    name: 'Leonardo DiCaprio',
+    src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+  },
+  {
+    name: 'Jennifer Lawrence',
+    src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+  },
+  {
+    name: 'Audrey Hepburn',
+    src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+  },
+  {
+    name: 'Anne Hathaway',
+    src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+  },
+  {
+    name: 'Taylor Swift',
+    src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
+  }
+]
+</script>
 
 <template>
   <n-space vertical>
@@ -28,39 +59,3 @@
     </n-config-provider>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { unstableAvatarGroupRtl, unstableSpaceRtl } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    return {
-      rtlEnabled: ref(false),
-      rtlStyles: [unstableAvatarGroupRtl, unstableSpaceRtl],
-      options: [
-        {
-          name: 'Leonardo DiCaprio',
-          src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
-        },
-        {
-          name: 'Jennifer Lawrence',
-          src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
-        },
-        {
-          name: 'Audrey Hepburn',
-          src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
-        },
-        {
-          name: 'Anne Hathaway',
-          src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
-        },
-        {
-          name: 'Taylor Swift',
-          src: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg'
-        }
-      ]
-    }
-  }
-})
-</script>

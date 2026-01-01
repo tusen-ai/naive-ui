@@ -1,11 +1,11 @@
-import { commonDark } from '../../_styles/common'
 import type { CheckboxTheme } from './light'
+import { commonDark } from '../../_styles/common'
 import { self } from './light'
 
 const checkboxDark: CheckboxTheme = {
   name: 'Checkbox',
   common: commonDark,
-  self (vars) {
+  self(vars) {
     const { cardColor } = vars
     const commonSelf = self(vars)
     commonSelf.color = '#0000'

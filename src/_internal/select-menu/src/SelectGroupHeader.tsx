@@ -1,12 +1,10 @@
-import { h, defineComponent, type PropType, inject, type Ref } from 'vue'
 import type { TreeNode } from 'treemate'
+import type { PropType, Ref } from 'vue'
 import type { SelectGroupOption } from '../../../select/src/interface'
+import type { RenderLabelImpl, RenderOptionImpl } from './interface'
+import { defineComponent, h, inject } from 'vue'
 import { render } from '../../../_utils'
-import {
-  internalSelectionMenuInjectionKey,
-  type RenderLabelImpl,
-  type RenderOptionImpl
-} from './interface'
+import { internalSelectionMenuInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'NBaseSelectGroupHeader',
@@ -20,14 +18,9 @@ export default defineComponent({
       required: true
     }
   },
-  setup () {
-    const {
-      renderLabelRef,
-      renderOptionRef,
-      labelFieldRef,
-      nodePropsRef
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    } = inject(internalSelectionMenuInjectionKey)!
+  setup() {
+    const { renderLabelRef, renderOptionRef, labelFieldRef, nodePropsRef }
+      = inject(internalSelectionMenuInjectionKey)!
     return {
       labelField: labelFieldRef,
       nodeProps: nodePropsRef,
@@ -35,7 +28,7 @@ export default defineComponent({
       renderOption: renderOptionRef as Ref<RenderOptionImpl | undefined>
     }
   },
-  render () {
+  render() {
     const {
       clsPrefix,
       renderLabel,

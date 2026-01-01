@@ -4,18 +4,7 @@
 Display large amounts of data in scrollable view by set `max-height`.
 </markdown>
 
-<template>
-  <n-data-table
-    :columns="columns"
-    :data="data"
-    :pagination="pagination"
-    :max-height="250"
-  />
-</template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-
+<script lang="ts" setup>
 const columns = [
   {
     title: 'Name',
@@ -31,20 +20,23 @@ const columns = [
   }
 ]
 
-export default defineComponent({
-  data () {
-    return {
-      data: Array.from({ length: 46 }).map((_, index) => ({
-        key: index,
-        name: `Edward King ${index}`,
-        age: 32,
-        address: `London, Park Lane no. ${index}`
-      })),
-      columns,
-      pagination: {
-        pageSize: 15
-      }
-    }
-  }
-})
+const data = Array.from({ length: 46 }).map((_, index) => ({
+  key: index,
+  name: `Edward King ${index}`,
+  age: 32,
+  address: `London, Park Lane no. ${index}`
+}))
+
+const pagination = {
+  pageSize: 15
+}
 </script>
+
+<template>
+  <n-data-table
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+    :max-height="250"
+  />
+</template>

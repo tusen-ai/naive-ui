@@ -1,28 +1,23 @@
-import {
-  h,
-  defineComponent,
-  type PropType,
-  type CSSProperties,
-  provide,
-  computed
-} from 'vue'
-import type { Size } from '../../avatar/src/interface'
-import { avatarGroupInjectionKey } from '../../avatar/src/context'
-import NAvatar from '../../avatar/src/Avatar'
-import { useConfig, useTheme } from '../../_mixins'
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import style from './styles/avatar-group.cssr'
-import { useRtl } from '../../_mixins/use-rtl'
-import { avatarGroupLight } from '../styles'
+import type { Size } from '../../avatar/src/interface'
 import type { AvatarGroupTheme } from '../styles'
+import type {
+  AvatarGroupAvatarSlotProps,
+  AvatarGroupOption,
+  AvatarGroupRestSlotProps
+} from './public-types'
+import { computed, defineComponent, h, provide } from 'vue'
+import { useConfig, useTheme } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
+import NAvatar from '../../avatar/src/Avatar'
+import { avatarGroupInjectionKey } from '../../avatar/src/context'
+import { avatarGroupLight } from '../styles'
+import style from './styles/avatar-group.cssr'
 
 export interface AvatarGroupInjection {
   size?: Size | undefined
-}
-
-export interface AvatarGroupOption {
-  src: string
 }
 
 export const avatarGroupProps = {
@@ -34,15 +29,23 @@ export const avatarGroupProps = {
     default: () => []
   },
   vertical: Boolean,
+  expandOnHover: Boolean,
   size: [String, Number] as PropType<Size | undefined>
 } as const
 
 export type AvatarGroupProps = ExtractPublicPropTypes<typeof avatarGroupProps>
 
+export interface AvatarGroupSlots {
+  avatar?: (props: AvatarGroupAvatarSlotProps) => VNode[]
+  rest?: (props: AvatarGroupRestSlotProps) => VNode[]
+  default?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'AvatarGroup',
   props: avatarGroupProps,
-  setup (props) {
+  slots: Object as SlotsType<AvatarGroupSlots>,
+  setup(props) {
     const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
     const mergedThemeRef = useTheme(
       'AvatarGroup',
@@ -60,16 +63,21 @@ export default defineComponent({
     )
     const restOptionsRef = computed(() => {
       const { max } = props
-      if (max === undefined) return undefined
+      if (max === undefined)
+        return undefined
       const { options } = props
-      if (options.length > max) return options.slice(max - 1, options.length)
+      if (options.length > max)
+        return options.slice(max - 1, options.length)
       return []
     })
     const displayedOptionsRef = computed(() => {
       const { options, max } = props
-      if (max === undefined) return options
-      if (options.length > max) return options.slice(0, max - 1)
-      if (options.length === max) return options.slice(0, max)
+      if (max === undefined)
+        return options
+      if (options.length > max)
+        return options.slice(0, max - 1)
+      if (options.length === max)
+        return options.slice(0, max)
       return options
     })
     return {
@@ -85,7 +93,7 @@ export default defineComponent({
       })
     }
   },
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       displayedOptions,
@@ -98,7 +106,9 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-avatar-group`,
           this.rtlEnabled && `${mergedClsPrefix}-avatar-group--rtl`,
-          this.vertical && `${mergedClsPrefix}-avatar-group--vertical`
+          this.vertical && `${mergedClsPrefix}-avatar-group--vertical`,
+          this.expandOnHover
+          && `${mergedClsPrefix}-avatar-group--expand-on-hover`
         ]}
         style={this.cssVars}
         role="group"
@@ -114,9 +124,9 @@ export default defineComponent({
             />
           )
         })}
-        {restOptions !== undefined &&
-          restOptions.length > 0 &&
-          ($slots.rest ? (
+        {restOptions !== undefined
+          && restOptions.length > 0
+          && ($slots.rest ? (
             $slots.rest({ options: restOptions, rest: restOptions.length })
           ) : (
             <NAvatar

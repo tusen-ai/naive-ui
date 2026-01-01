@@ -1,38 +1,40 @@
-import {
-  h,
-  computed,
-  inject,
-  ref,
-  Transition,
-  defineComponent,
-  provide,
-  type PropType,
-  type Ref,
-  mergeProps,
-  type HTMLAttributes,
-  type VNodeChild
-} from 'vue'
-import { VBinder, VTarget, VFollower, type FollowerPlacement } from 'vueuc'
-import { useMemo } from 'vooks'
-import { ChevronRightIcon } from '../../_internal/icons'
-import { render, useDeferredTrue } from '../../_utils'
-import { NIcon } from '../../icon'
-// eslint-disable-next-line import/no-cycle
-import NDropdownMenu from './DropdownMenu'
-import {
-  dropdownMenuInjectionKey,
-  dropdownInjectionKey,
-  dropdownOptionInjectionKey
-} from './context'
-import { popoverBodyInjectionKey } from '../../popover/src/interface'
-import { isSubmenuNode } from './utils'
 import type { TreeNode } from 'treemate'
+import type { HTMLAttributes, PropType, Ref, VNodeChild } from 'vue'
+import type { FollowerPlacement } from 'vueuc'
+import type {
+  MenuGroupOption,
+  MenuOptionSharedPart
+} from '../../menu/src/interface'
 import type {
   DropdownGroupOption,
   DropdownIgnoredOption,
   DropdownOption
 } from './interface'
 import { happensIn } from 'seemly'
+import { useMemo } from 'vooks'
+import {
+  computed,
+  defineComponent,
+  h,
+  inject,
+  mergeProps,
+  provide,
+  ref,
+  Transition
+} from 'vue'
+import { VBinder, VFollower, VTarget } from 'vueuc'
+import { ChevronRightIcon } from '../../_internal/icons'
+import { render, useDeferredTrue } from '../../_utils'
+
+import { NIcon } from '../../icon'
+import { popoverBodyInjectionKey } from '../../popover/src/interface'
+import {
+  dropdownInjectionKey,
+  dropdownMenuInjectionKey,
+  dropdownOptionInjectionKey
+} from './context'
+import NDropdownMenu from './DropdownMenu'
+import { isSubmenuNode } from './utils'
 
 export interface NDropdownOptionInjection {
   enteringSubmenuRef: Ref<boolean>
@@ -47,7 +49,7 @@ export default defineComponent({
     },
     tmNode: {
       type: Object as PropType<
-      TreeNode<DropdownOption, DropdownGroupOption, DropdownIgnoredOption>
+        TreeNode<DropdownOption, DropdownGroupOption, DropdownIgnoredOption>
       >,
       required: true
     },
@@ -62,8 +64,7 @@ export default defineComponent({
     props: Object as PropType<HTMLAttributes>,
     scrollable: Boolean
   },
-  setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  setup(props) {
     const NDropdown = inject(dropdownInjectionKey)!
     const {
       hoverKeyRef,
@@ -82,9 +83,7 @@ export default defineComponent({
       menuPropsRef
     } = NDropdown
     const NDropdownOption = inject(dropdownOptionInjectionKey, null)
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NDropdownMenu = inject(dropdownMenuInjectionKey)!
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NPopoverBody = inject(popoverBodyInjectionKey)!
     const rawNodeRef = computed(() => props.tmNode.rawNode)
     const hasSubmenuRef = computed(() => {
@@ -96,21 +95,25 @@ export default defineComponent({
       return disabled
     })
     const showSubmenuRef = computed(() => {
-      if (!hasSubmenuRef.value) return false
+      if (!hasSubmenuRef.value)
+        return false
       const { key, disabled } = props.tmNode
-      if (disabled) return false
+      if (disabled)
+        return false
       const { value: hoverKey } = hoverKeyRef
       const { value: keyboardKey } = keyboardKeyRef
       const { value: lastToggledSubmenuKey } = lastToggledSubmenuKeyRef
       const { value: pendingKeyPath } = pendingKeyPathRef
-      if (hoverKey !== null) return pendingKeyPath.includes(key)
+      if (hoverKey !== null)
+        return pendingKeyPath.includes(key)
       if (keyboardKey !== null) {
         return (
-          pendingKeyPath.includes(key) &&
-          pendingKeyPath[pendingKeyPath.length - 1] !== key
+          pendingKeyPath.includes(key)
+          && pendingKeyPath[pendingKeyPath.length - 1] !== key
         )
       }
-      if (lastToggledSubmenuKey !== null) return pendingKeyPath.includes(key)
+      if (lastToggledSubmenuKey !== null)
+        return pendingKeyPath.includes(key)
       return false
     })
     const shouldDelayRef = computed(() => {
@@ -129,43 +132,51 @@ export default defineComponent({
       enteringSubmenuRef
     })
     // methods
-    function handleSubmenuBeforeEnter (): void {
+    function handleSubmenuBeforeEnter(): void {
       enteringSubmenuRef.value = true
     }
-    function handleSubmenuAfterEnter (): void {
+    function handleSubmenuAfterEnter(): void {
       enteringSubmenuRef.value = false
     }
-    function handleMouseEnter (): void {
+    function handleMouseEnter(): void {
       const { parentKey, tmNode } = props
-      if (tmNode.disabled) return
-      if (!mergedShowRef.value) return
+      if (tmNode.disabled)
+        return
+      if (!mergedShowRef.value)
+        return
       lastToggledSubmenuKeyRef.value = parentKey
       keyboardKeyRef.value = null
       hoverKeyRef.value = tmNode.key
     }
-    function handleMouseMove (): void {
+    function handleMouseMove(): void {
       const { tmNode } = props
-      if (tmNode.disabled) return
-      if (!mergedShowRef.value) return
-      if (hoverKeyRef.value === tmNode.key) return
+      if (tmNode.disabled)
+        return
+      if (!mergedShowRef.value)
+        return
+      if (hoverKeyRef.value === tmNode.key)
+        return
       handleMouseEnter()
     }
-    function handleMouseLeave (e: MouseEvent): void {
-      if (props.tmNode.disabled) return
-      if (!mergedShowRef.value) return
+    function handleMouseLeave(e: MouseEvent): void {
+      if (props.tmNode.disabled)
+        return
+      if (!mergedShowRef.value)
+        return
       const { relatedTarget } = e
       if (
-        relatedTarget &&
-        !happensIn({ target: relatedTarget }, 'dropdownOption') &&
-        !happensIn({ target: relatedTarget }, 'scrollbarRail')
+        relatedTarget
+        && !happensIn({ target: relatedTarget }, 'dropdownOption')
+        && !happensIn({ target: relatedTarget }, 'scrollbarRail')
       ) {
         hoverKeyRef.value = null
       }
     }
-    function handleClick (): void {
+    function handleClick(): void {
       const { value: hasSubmenu } = hasSubmenuRef
       const { tmNode } = props
-      if (!mergedShowRef.value) return
+      if (!mergedShowRef.value)
+        return
       if (!hasSubmenu && !tmNode.disabled) {
         NDropdown.doSelect(
           tmNode.key,
@@ -197,15 +208,17 @@ export default defineComponent({
       childActive: useMemo(() => {
         const { value: activeKeyPath } = activeKeyPathRef
         const { key } = props.tmNode
-        const index = activeKeyPath.findIndex((k) => key === k)
-        if (index === -1) return false
+        const index = activeKeyPath.findIndex(k => key === k)
+        if (index === -1)
+          return false
         return index < activeKeyPath.length - 1
       }),
       active: useMemo(() => {
         const { value: activeKeyPath } = activeKeyPathRef
         const { key } = props.tmNode
-        const index = activeKeyPath.findIndex((k) => key === k)
-        if (index === -1) return false
+        const index = activeKeyPath.findIndex(k => key === k)
+        if (index === -1)
+          return false
         return index === activeKeyPath.length - 1
       }),
       mergedDisabled: mergedDisabledRef,
@@ -219,7 +232,7 @@ export default defineComponent({
       handleSubmenuAfterEnter
     }
   },
-  render () {
+  render() {
     const {
       animated,
       rawNode,
@@ -238,8 +251,7 @@ export default defineComponent({
     if (mergedShowSubmenu) {
       const submenuNodeProps = this.menuProps?.(
         rawNode,
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        rawNode.children as any
+        rawNode.children as Array<MenuOptionSharedPart | MenuGroupOption>
       )
       submenuVNode = (
         <NDropdownMenu
@@ -272,42 +284,49 @@ export default defineComponent({
         data-dropdown-option
         {...optionNodeProps}
       >
-        {h('div', mergeProps(builtinProps as any, props as any), [
-          <div
-            class={[
-              `${clsPrefix}-dropdown-option-body__prefix`,
-              siblingHasIcon &&
-                `${clsPrefix}-dropdown-option-body__prefix--show-icon`
-            ]}
-          >
-            {[renderIcon ? renderIcon(rawNode) : render(rawNode.icon)]}
-          </div>,
-          <div
-            data-dropdown-option
-            class={`${clsPrefix}-dropdown-option-body__label`}
-          >
-            {/* TODO: Workaround, menu compatible */}
-            {renderLabel
-              ? renderLabel(rawNode)
-              : render(rawNode[this.labelField] ?? rawNode.title)}
-          </div>,
-          <div
-            data-dropdown-option
-            class={[
-              `${clsPrefix}-dropdown-option-body__suffix`,
-              siblingHasSubmenu &&
-                `${clsPrefix}-dropdown-option-body__suffix--has-submenu`
-            ]}
-          >
-            {this.hasSubmenu ? (
-              <NIcon>
-                {{
-                  default: () => <ChevronRightIcon />
-                }}
-              </NIcon>
-            ) : null}
-          </div>
-        ])}
+        {h(
+          'div',
+          mergeProps(
+            builtinProps as Record<string, any>,
+            props as Record<string, any>
+          ),
+          [
+            <div
+              class={[
+                `${clsPrefix}-dropdown-option-body__prefix`,
+                siblingHasIcon
+                && `${clsPrefix}-dropdown-option-body__prefix--show-icon`
+              ]}
+            >
+              {[renderIcon ? renderIcon(rawNode) : render(rawNode.icon)]}
+            </div>,
+            <div
+              data-dropdown-option
+              class={`${clsPrefix}-dropdown-option-body__label`}
+            >
+              {/* TODO: Workaround, menu compatible */}
+              {renderLabel
+                ? renderLabel(rawNode)
+                : render(rawNode[this.labelField] ?? rawNode.title)}
+            </div>,
+            <div
+              data-dropdown-option
+              class={[
+                `${clsPrefix}-dropdown-option-body__suffix`,
+                siblingHasSubmenu
+                && `${clsPrefix}-dropdown-option-body__suffix--has-submenu`
+              ]}
+            >
+              {this.hasSubmenu ? (
+                <NIcon>
+                  {{
+                    default: () => <ChevronRightIcon />
+                  }}
+                </NIcon>
+              ) : null}
+            </div>
+          ]
+        )}
         {this.hasSubmenu ? (
           <VBinder>
             {{

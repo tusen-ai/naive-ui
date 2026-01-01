@@ -4,6 +4,12 @@
 Although the emerging animation from your click position is cool, sometimes we need a plain animation which occurs from the center of the screen. You can set `transfrom-origin` to `'center'` to achieve it.
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const showModal = ref(false)
+</script>
+
 <template>
   <n-button @click="showModal = true">
     Nothing
@@ -27,14 +33,3 @@ Although the emerging animation from your click position is cool, sometimes we n
     </n-card>
   </n-modal>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      showModal: ref(false)
-    }
-  }
-})
-</script>

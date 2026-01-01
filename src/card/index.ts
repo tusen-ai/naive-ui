@@ -1,2 +1,2 @@
-export { default as NCard, cardProps } from './src/Card'
-export type { CardProps, CardSegmented } from './src/Card'
+export { cardProps, default as NCard } from './src/Card'
+export type { CardProps, CardSegmented, CardSlots } from './src/Card'

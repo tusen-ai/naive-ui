@@ -1,17 +1,19 @@
-import { h, defineComponent, type PropType, ref, computed, inject } from 'vue'
+import type { PropType } from 'vue'
+import type {
+  FilterOption,
+  FilterOptionValue,
+  OnFilterMenuChange,
+  OnFilterMenuChangeImpl,
+  TableBaseColumn
+} from '../interface'
+import { computed, defineComponent, h, inject, ref } from 'vue'
+import { NScrollbar } from '../../../_internal'
+import { useConfig, useRtl } from '../../../_mixins'
+import { NButton } from '../../../button'
 import { NCheckbox, NCheckboxGroup } from '../../../checkbox'
 import { NRadio, NRadioGroup } from '../../../radio'
-import { NButton } from '../../../button'
-import { NScrollbar } from '../../../_internal'
+import { dataTableInjectionKey } from '../interface'
 import { shouldUseArrayInSingleMode } from '../utils'
-import {
-  dataTableInjectionKey,
-  type FilterOption,
-  type FilterOptionValue,
-  type OnFilterMenuChange,
-  type OnFilterMenuChangeImpl,
-  type TableBaseColumn
-} from '../interface'
 
 export default defineComponent({
   name: 'DataTableFilterMenu',
@@ -30,7 +32,7 @@ export default defineComponent({
     },
     value: {
       type: [Array, String, Number] as PropType<
-      FilterOptionValue | FilterOptionValue[] | null
+        FilterOptionValue | FilterOptionValue[] | null
       >,
       default: null
     },
@@ -51,69 +53,80 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
-    const {
-      mergedClsPrefixRef,
-      mergedThemeRef,
-      localeRef
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    } = inject(dataTableInjectionKey)!
+  setup(props) {
+    const { mergedClsPrefixRef: mergedClsPrefixRefRtl, mergedRtlRef }
+      = useConfig(props)
+    const rtlEnabledRef = useRtl(
+      'DataTable',
+      mergedRtlRef,
+      mergedClsPrefixRefRtl
+    )
+
+    const { mergedClsPrefixRef, mergedThemeRef, localeRef } = inject(
+      dataTableInjectionKey
+    )!
     // to be compared with changed value
     // const initialValueRef = ref(props.value)
     const temporalValueRef = ref(props.value)
     const checkboxGroupValueRef = computed(() => {
       const { value: temporalValue } = temporalValueRef
-      if (!Array.isArray(temporalValue)) return null
+      if (!Array.isArray(temporalValue))
+        return null
       return temporalValue
     })
     const radioGroupValueRef = computed(() => {
       const { value: temporalValue } = temporalValueRef
       if (shouldUseArrayInSingleMode(props.column)) {
         return (
-          (Array.isArray(temporalValue) &&
-            temporalValue.length &&
-            temporalValue[0]) ||
-          null
+          (Array.isArray(temporalValue)
+            && temporalValue.length
+            && temporalValue[0])
+          || null
         )
       }
-      if (!Array.isArray(temporalValue)) return temporalValue
+      if (!Array.isArray(temporalValue))
+        return temporalValue
       return null
     })
-    function doChange (
+    function doChange(
       value: FilterOptionValue | FilterOptionValue[] | null
     ): void {
       // May need to check if equal
       ;(props.onChange as OnFilterMenuChangeImpl)(value)
     }
-    function handleChange (
+    function handleChange(
       value: FilterOptionValue | FilterOptionValue[]
     ): void {
       if (props.multiple && Array.isArray(value)) {
         temporalValueRef.value = value
-      } else if (
-        shouldUseArrayInSingleMode(props.column) &&
-        !Array.isArray(value)
+      }
+      else if (
+        shouldUseArrayInSingleMode(props.column)
+        && !Array.isArray(value)
       ) {
         /** this branch is for compatibility */
         temporalValueRef.value = [value]
-      } else {
+      }
+      else {
         temporalValueRef.value = value
       }
     }
-    function handleConfirmClick (): void {
+    function handleConfirmClick(): void {
       doChange(temporalValueRef.value)
       props.onConfirm()
     }
-    function handleClearClick (): void {
+    function handleClearClick(): void {
       if (props.multiple || shouldUseArrayInSingleMode(props.column)) {
         doChange([])
-      } else {
+      }
+      else {
         doChange(null)
       }
       props.onClear()
     }
     return {
       mergedClsPrefix: mergedClsPrefixRef,
+      rtlEnabled: rtlEnabledRef,
       mergedTheme: mergedThemeRef,
       locale: localeRef,
       checkboxGroupValue: checkboxGroupValueRef,
@@ -123,10 +136,15 @@ export default defineComponent({
       handleClearClick
     }
   },
-  render () {
+  render() {
     const { mergedTheme, locale, mergedClsPrefix } = this
     return (
-      <div class={`${mergedClsPrefix}-data-table-filter-menu`}>
+      <div
+        class={[
+          `${mergedClsPrefix}-data-table-filter-menu`,
+          this.rtlEnabled && `${mergedClsPrefix}-data-table-filter-menu--rtl`
+        ]}
+      >
         <NScrollbar>
           {{
             default: () => {
@@ -162,7 +180,7 @@ export default defineComponent({
                 >
                   {{
                     default: () =>
-                      this.options.map((option) => (
+                      this.options.map(option => (
                         <NRadio
                           key={option.value}
                           value={option.value}

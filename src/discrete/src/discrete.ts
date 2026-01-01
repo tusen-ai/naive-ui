@@ -1,23 +1,25 @@
 import type { Component } from 'vue'
-import { NMessageProvider } from '../../message'
-import { NDialogProvider } from '../../dialog'
-import { NNotificationProvider } from '../../notification'
-import { NLoadingBarProvider } from '../../loading-bar'
-import { createDiscreteApp } from './discreteApp'
 import type {
   DiscreteApi,
   DiscreteApiOptions,
   DiscreteApiType
 } from './interface'
+import { NDialogProvider } from '../../dialog'
+import { NLoadingBarProvider } from '../../loading-bar'
+import { NMessageProvider } from '../../message'
+import { NModalProvider } from '../../modal/src/ModalProvider'
+import { NNotificationProvider } from '../../notification'
+import { createDiscreteApp } from './discreteApp'
 
-export function createDiscreteApi<T extends DiscreteApiType> (
+export function createDiscreteApi<T extends DiscreteApiType>(
   includes: T[],
   {
     configProviderProps,
     messageProviderProps,
     dialogProviderProps,
     notificationProviderProps,
-    loadingBarProviderProps
+    loadingBarProviderProps,
+    modalProviderProps
   }: DiscreteApiOptions = {}
 ): DiscreteApi<T> {
   const providersAndProps: Array<{
@@ -56,6 +58,12 @@ export function createDiscreteApi<T extends DiscreteApiType> (
           props: loadingBarProviderProps
         })
         break
+      case 'modal':
+        providersAndProps.push({
+          type,
+          Provider: NModalProvider,
+          props: modalProviderProps
+        })
     }
   })
 

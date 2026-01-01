@@ -17,6 +17,7 @@ vertical.vue
 show-tooltip.vue
 multiple-debug.vue
 custom-thumb.vue
+custom-marks.vue
 keyboard-debug.vue
 ```
 
@@ -30,7 +31,7 @@ keyboard-debug.vue
 | disabled | `boolean` | `false` | 是否禁用 |  |
 | format-tooltip | `(value: number) => string \| number` | `undefined` | 格式化 tooltip |  |
 | keyboard | `boolean` | `true` | 是否可键盘控制 | 2.33.0 |
-| marks | `{ [markValue: number]: string }` | `undefined` | Slider 上的标记 |  |
+| marks | `{ [markValue: number]: string \| (() => VNodeChild) }` | `undefined` | Slider 上的标记 | 2.40.0 支持 render 函数 |
 | max | `number` | `100` | 最大值 |  |
 | min | `number` | `0` | 最小值 |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `undefined` | Tooltip 的弹出位置 | 2.25.0 |
@@ -42,6 +43,8 @@ keyboard-debug.vue
 | vertical | `boolean` | `false` | 是否启用垂直模式 |  |
 | value | `number \| [number, number] \| null` | `undefined` | 值 |  |
 | on-update:value | `(value: number \| [number, number]) => void` | `undefined` | 值更新的回调 |  |
+| on-dragstart | `() => void` | `undefined` | 开始拖拽的回调函数 | 2.36.0 |
+| on-dragend | `() => void` | `undefined` | 拖拽结束的回调函数 | 2.36.0 |
 
 ### Slider Slots
 

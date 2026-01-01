@@ -2,29 +2,16 @@
 # 基础用法
 </markdown>
 
+<script lang="ts" setup>
+import { GameController, GameControllerOutline } from '@vicons/ionicons5'
+</script>
+
 <template>
   <n-icon size="40">
-    <game-controller-outline />
+    <GameControllerOutline />
   </n-icon>
   <n-icon size="40" color="#0e7a0d">
-    <game-controller />
+    <GameController />
   </n-icon>
   <n-icon size="40" :component="GameController" />
 </template>
-
-<script lang="ts">
-import { GameControllerOutline, GameController } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    GameController,
-    GameControllerOutline
-  },
-  setup () {
-    return {
-      GameController
-    }
-  }
-})
-</script>

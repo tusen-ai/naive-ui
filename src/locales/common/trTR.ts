@@ -1,4 +1,5 @@
 import type { NLocale } from './enUS'
+
 const trTR: NLocale = {
   name: 'tr-TR',
   global: {
@@ -30,6 +31,7 @@ const trTR: NLocale = {
     dateFormat: 'yyyy-MM-dd',
     dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'YYYY-w',
     clear: 'Temizle',
     now: 'Şimdi',
     confirm: 'Onayla',
@@ -40,6 +42,7 @@ const trTR: NLocale = {
     monthPlaceholder: 'Ay Seçin',
     yearPlaceholder: 'Yıl Seçin',
     quarterPlaceholder: 'Mevsim Seçin',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Başlangıç Tarihi',
     endDatePlaceholder: 'Bitiş Tarihi',
     startDatetimePlaceholder: 'Başlangıç Tarih ve Saati',
@@ -77,7 +80,8 @@ const trTR: NLocale = {
     placeholder: 'Saat Seç',
     positiveText: 'Tamam',
     negativeText: 'İptal',
-    now: 'Şimdi'
+    now: 'Şimdi',
+    clear: 'Temizle'
   },
   Pagination: {
     goto: 'git',
@@ -119,6 +123,12 @@ const trTR: NLocale = {
     tipClose: 'Kapat (Esc)',
     // TODO: translation
     tipOriginalSize: 'Orijinal boyuta yakınlaştır'
+  },
+  Heatmap: {
+    less: 'az',
+    more: 'çok',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

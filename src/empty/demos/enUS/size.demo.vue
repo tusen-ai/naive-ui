@@ -1,7 +1,7 @@
 <markdown>
 # Size
 
-Empty can be `small`, `medium`, `large` and `huge` size.
+Empty can be `tiny`, `small`, `medium`, `large` and `huge` size.
 </markdown>
 
 <template>

@@ -1,18 +1,24 @@
-import { h, defineComponent, type PropType, inject, computed } from 'vue'
-import { createId } from 'seemly'
-import { useMemo } from 'vooks'
-import {
-  ChevronRightIcon as ArrowRightIcon,
-  ChevronLeftIcon as ArrowLeftIcon
-} from '../../_internal/icons'
-import { useRtl } from '../../_mixins/use-rtl'
-import { useConfig } from '../../_mixins'
-import { NBaseIcon } from '../../_internal'
+import type { PropType, VNode } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type {
+  CollapseItemArrowSlotProps,
+  CollapseItemHeaderExtraSlotProps,
+  CollapseItemHeaderSlotProps
+} from './interface'
+import { createId, happensIn } from 'seemly'
+import { useMemo } from 'vooks'
+import { computed, defineComponent, h, inject, toRef } from 'vue'
+import { NBaseIcon } from '../../_internal'
 import {
-  throwError,
-  resolveSlotWithProps,
-  resolveWrappedSlotWithProps
+  ChevronLeftIcon as ArrowLeftIcon,
+  ChevronRightIcon as ArrowRightIcon
+} from '../../_internal/icons'
+import { useConfig } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
+import {
+  resolveSlotWithTypedProps,
+  resolveWrappedSlotWithProps,
+  throwError
 } from '../../_utils'
 import { collapseInjectionKey } from './Collapse'
 import NCollapseItemContent from './CollapseItemContent'
@@ -26,10 +32,17 @@ export const collapseItemProps = {
 
 export type CollapseItemProps = ExtractPublicPropTypes<typeof collapseItemProps>
 
+export interface CollapseItemSlots {
+  default?: () => VNode[]
+  header?: (props: CollapseItemHeaderSlotProps) => VNode[]
+  'header-extra'?: (props: CollapseItemHeaderExtraSlotProps) => VNode[]
+  arrow?: (props: CollapseItemArrowSlotProps) => VNode[]
+}
+
 export default defineComponent({
   name: 'CollapseItem',
   props: collapseItemProps,
-  setup (props) {
+  setup(props) {
     const { mergedRtlRef } = useConfig(props)
     const randomName = createId()
     const mergedNameRef = useMemo(() => {
@@ -54,9 +67,10 @@ export default defineComponent({
       if (Array.isArray(expandedNames)) {
         const { value: name } = mergedNameRef
         return !~expandedNames.findIndex(
-          (expandedName) => expandedName === name
+          expandedName => expandedName === name
         )
-      } else if (expandedNames) {
+      }
+      else if (expandedNames) {
         const { value: name } = mergedNameRef
         return name !== expandedNames
       }
@@ -69,25 +83,35 @@ export default defineComponent({
       randomName,
       mergedClsPrefix: mergedClsPrefixRef,
       collapsed: collapsedRef,
+      triggerAreas: toRef(collapseProps, 'triggerAreas'),
       mergedDisplayDirective: computed<'if' | 'show'>(() => {
         const { displayDirective } = props
         if (displayDirective) {
           return displayDirective
-        } else {
+        }
+        else {
           return collapseProps.displayDirective
         }
       }),
       arrowPlacement: computed<'left' | 'right'>(() => {
         return collapseProps.arrowPlacement
       }),
-      handleClick (e: MouseEvent) {
+      handleClick(e: MouseEvent) {
+        let happensInArea: 'arrow' | 'main' | 'extra' = 'main'
+        if (happensIn(e, 'arrow'))
+          happensInArea = 'arrow'
+        if (happensIn(e, 'extra'))
+          happensInArea = 'extra'
+        if (!collapseProps.triggerAreas.includes(happensInArea)) {
+          return
+        }
         if (NCollapse && !props.disabled) {
           NCollapse.toggleItem(collapsedRef.value, mergedNameRef.value, e)
         }
       }
     }
   },
-  render () {
+  render() {
     const {
       collapseSlots,
       $slots,
@@ -95,15 +119,16 @@ export default defineComponent({
       collapsed,
       mergedDisplayDirective,
       mergedClsPrefix,
-      disabled
+      disabled,
+      triggerAreas
     } = this
-    const headerNode = resolveSlotWithProps(
+    const headerNode = resolveSlotWithTypedProps(
       $slots.header,
       { collapsed },
       () => [this.title]
     )
-    const headerExtraSlot =
-      $slots['header-extra'] || collapseSlots['header-extra']
+    const headerExtraSlot
+      = $slots['header-extra'] || collapseSlots['header-extra']
     const arrowSlot = $slots.arrow || collapseSlots.arrow
     return (
       <div
@@ -111,7 +136,10 @@ export default defineComponent({
           `${mergedClsPrefix}-collapse-item`,
           `${mergedClsPrefix}-collapse-item--${arrowPlacement}-arrow-placement`,
           disabled && `${mergedClsPrefix}-collapse-item--disabled`,
-          !collapsed && `${mergedClsPrefix}-collapse-item--active`
+          !collapsed && `${mergedClsPrefix}-collapse-item--active`,
+          triggerAreas.map((area) => {
+            return `${mergedClsPrefix}-collapse-item--trigger-area-${area}`
+          })
         ]}
       >
         <div
@@ -128,18 +156,13 @@ export default defineComponent({
             <div
               class={`${mergedClsPrefix}-collapse-item-arrow`}
               key={this.rtlEnabled ? 0 : 1}
+              data-arrow
             >
-              {resolveSlotWithProps(arrowSlot, { collapsed }, () => [
+              {resolveSlotWithTypedProps(arrowSlot, { collapsed }, () => [
                 <NBaseIcon clsPrefix={mergedClsPrefix}>
                   {{
-                    default:
-                      collapseSlots.expandIcon ??
-                      (() =>
-                        this.rtlEnabled ? (
-                          <ArrowLeftIcon />
-                        ) : (
-                          <ArrowRightIcon />
-                        ))
+                    default: () =>
+                      this.rtlEnabled ? <ArrowLeftIcon /> : <ArrowRightIcon />
                   }}
                 </NBaseIcon>
               ])}
@@ -149,10 +172,11 @@ export default defineComponent({
           {resolveWrappedSlotWithProps(
             headerExtraSlot,
             { collapsed },
-            (children) => (
+            children => (
               <div
                 class={`${mergedClsPrefix}-collapse-item__header-extra`}
                 onClick={this.handleClick}
+                data-extra
               >
                 {children}
               </div>

@@ -1,11 +1,12 @@
-import { h, computed, defineComponent, type PropType } from 'vue'
+import type { PropType } from 'vue'
+import type { TmNode } from './interface'
 import { useMemo } from 'vooks'
-import { render } from '../../_utils'
+import { computed, defineComponent, h } from 'vue'
+import { keysOf, render } from '../../_utils'
 import { NTooltip } from '../../tooltip'
 import NMenuOptionContent from './MenuOptionContent'
 import { useMenuChild } from './use-menu-child'
 import { useMenuChildProps } from './use-menu-child-props'
-import type { TmNode } from './interface'
 
 export const menuItemProps = {
   ...useMenuChildProps,
@@ -18,24 +19,29 @@ export const menuItemProps = {
   onClick: Function
 } as const
 
+export const menuItemPropKeys = keysOf(menuItemProps)
+
 export const NMenuOption = defineComponent({
   name: 'MenuOption',
   props: menuItemProps,
-  setup (props) {
+  setup(props) {
     const MenuChild = useMenuChild(props)
-    const { NSubmenu, NMenu } = MenuChild
+    const { NSubmenu, NMenu, NMenuOptionGroup } = MenuChild
     const { props: menuProps, mergedClsPrefixRef, mergedCollapsedRef } = NMenu
-    const submenuDisabledRef = NSubmenu
+    const parentDisabledRef = NSubmenu
       ? NSubmenu.mergedDisabledRef
-      : { value: false }
+      : NMenuOptionGroup
+        ? NMenuOptionGroup.mergedDisabledRef
+        : { value: false }
     const mergedDisabledRef = computed(() => {
-      return submenuDisabledRef.value || props.disabled
+      return parentDisabledRef.value || props.disabled
     })
-    function doClick (e: MouseEvent): void {
+    function doClick(e: MouseEvent): void {
       const { onClick } = props
-      if (onClick) onClick(e)
+      if (onClick)
+        onClick(e)
     }
-    function handleClick (e: MouseEvent): void {
+    function handleClick(e: MouseEvent): void {
       if (!mergedDisabledRef.value) {
         NMenu.doSelect(props.internalKey, props.tmNode.rawNode)
         doClick(e)
@@ -52,21 +58,22 @@ export const NMenuOption = defineComponent({
       menuProps,
       dropdownEnabled: useMemo(() => {
         return (
-          props.root &&
-          mergedCollapsedRef.value &&
-          menuProps.mode !== 'horizontal' &&
-          !mergedDisabledRef.value
+          props.root
+          && mergedCollapsedRef.value
+          && menuProps.mode !== 'horizontal'
+          && !mergedDisabledRef.value
         )
       }),
       selected: useMemo(() => {
-        if (NMenu.mergedValueRef.value === props.internalKey) return true
+        if (NMenu.mergedValueRef.value === props.internalKey)
+          return true
         return false
       }),
       mergedDisabled: mergedDisabledRef,
       handleClick
     }
   },
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       mergedTheme,

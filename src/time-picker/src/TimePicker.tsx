@@ -1,62 +1,11 @@
-import {
-  h,
-  ref,
-  toRef,
-  defineComponent,
-  computed,
-  withDirectives,
-  type PropType,
-  Transition,
-  provide,
-  nextTick,
-  watch,
-  type CSSProperties,
-  watchEffect
-} from 'vue'
-import { useIsMounted, useKeyboard, useMergedState } from 'vooks'
-import { VBinder, VTarget, VFollower, type FollowerPlacement } from 'vueuc'
-import { clickoutside } from 'vdirs'
-import { getPreciseEventTarget, happensIn } from 'seemly'
-import {
-  isValid,
-  startOfSecond,
-  startOfMinute,
-  startOfHour,
-  format,
-  set,
-  setHours,
-  setMinutes,
-  setSeconds,
-  getTime,
-  getMinutes,
-  getHours,
-  getSeconds
-} from 'date-fns/esm'
-import formatInTimeZone from 'date-fns-tz/formatInTimeZone'
 import type { Locale } from 'date-fns'
-import type { FormValidationStatus } from '../../form/src/interface'
-import { strictParse } from '../../date-picker/src/utils'
-import { TimeIcon } from '../../_internal/icons'
-import { type InputInst, NInput } from '../../input'
-import { NBaseIcon } from '../../_internal'
-import {
-  useConfig,
-  useTheme,
-  useLocale,
-  useFormItem,
-  useThemeClass
-} from '../../_mixins'
+import type { CSSProperties, PropType, VNode } from 'vue'
+import type { FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
-import {
-  call,
-  markEventEffectPerformed,
-  useAdjustedTo,
-  warnOnce
-} from '../../_utils'
-import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
-import { timePickerLight } from '../styles'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { FormValidationStatus } from '../../form/src/public-types'
+import type { InputInst } from '../../input'
 import type { TimePickerTheme } from '../styles'
-import Panel from './Panel'
 import type {
   IsHourDisabled,
   IsMinuteDisabled,
@@ -70,18 +19,72 @@ import type {
   Size,
   TimePickerInst
 } from './interface'
+import {
+  format,
+  getHours,
+  getMilliseconds,
+  getMinutes,
+  getSeconds,
+  getTime,
+  isValid,
+  set,
+  setHours,
+  setMinutes,
+  setSeconds,
+  startOfHour,
+  startOfMinute,
+  startOfSecond
+} from 'date-fns'
+import { formatInTimeZone } from 'date-fns-tz'
+import { getPreciseEventTarget, happensIn } from 'seemly'
+import { clickoutside } from 'vdirs'
+import { useIsMounted, useKeyboard, useMergedState } from 'vooks'
+import {
+  computed,
+  defineComponent,
+  h,
+  nextTick,
+  provide,
+  ref,
+  toRef,
+  Transition,
+  watch,
+  watchEffect,
+  withDirectives
+} from 'vue'
+import { VBinder, VFollower, VTarget } from 'vueuc'
+import { NBaseIcon } from '../../_internal'
+import { TimeIcon } from '../../_internal/icons'
+import {
+  useConfig,
+  useFormItem,
+  useLocale,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
+import {
+  call,
+  markEventEffectPerformed,
+  useAdjustedTo,
+  warnOnce
+} from '../../_utils'
+import { strictParse } from '../../date-picker/src/utils'
+import { NInput } from '../../input'
+import { timePickerLight } from '../styles'
 import { timePickerInjectionKey } from './interface'
-import { findSimilarTime, isTimeInStep } from './utils'
+import Panel from './Panel'
 import style from './styles/index.cssr'
+import { findSimilarTime, isTimeInStep } from './utils'
 
 // validate hours, minutes, seconds prop
-function validateUnits (value: MaybeArray<number>, max: number): boolean {
+function validateUnits(value: MaybeArray<number>, max: number): boolean {
   if (value === undefined) {
     return true
   }
   if (Array.isArray(value)) {
-    return value.every((v) => v >= 0 && v <= max)
-  } else {
+    return value.every(v => v >= 0 && v <= max)
+  }
+  else {
     return value >= 0 && value <= max
   }
 }
@@ -93,7 +96,7 @@ export const timePickerProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  actions: Array as PropType<Array<'now' | 'confirm'> | null>,
+  actions: Array as PropType<Array<'clear' | 'now' | 'confirm'> | null>,
   defaultValue: {
     type: Number as PropType<number | null>,
     default: null
@@ -121,20 +124,20 @@ export const timePickerProps = {
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   'onUpdate:show': [Function, Array] as PropType<
-  MaybeArray<(show: boolean) => void>
+    MaybeArray<(show: boolean) => void>
   >,
   onUpdateShow: [Function, Array] as PropType<
-  MaybeArray<(show: boolean) => void>
+    MaybeArray<(show: boolean) => void>
   >,
   onUpdateFormattedValue: [Function, Array] as PropType<
-  MaybeArray<OnUpdateFormattedValue>
+    MaybeArray<OnUpdateFormattedValue>
   >,
   'onUpdate:formattedValue': [Function, Array] as PropType<
-  MaybeArray<OnUpdateFormattedValue>
+    MaybeArray<OnUpdateFormattedValue>
   >,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onConfirm: [Function, Array] as PropType<
-  MaybeArray<(value: number & null, formattedValue: string & null) => void>
+    MaybeArray<(value: number & null, formattedValue: string & null) => void>
   >,
   onClear: Function as PropType<() => void>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
@@ -176,10 +179,15 @@ export const timePickerProps = {
 
 export type TimePickerProps = ExtractPublicPropTypes<typeof timePickerProps>
 
+export interface TimePickerSlots {
+  default?: () => VNode[]
+  icon?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'TimePicker',
   props: timePickerProps,
-  setup (props) {
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.onChange !== undefined) {
@@ -220,10 +228,11 @@ export default defineComponent({
       }
     })
 
-    function getTimestampFromFormattedValue (
+    function getTimestampFromFormattedValue(
       value: string | null
     ): number | null {
-      if (value === null) return null
+      if (value === null)
+        return null
       return strictParse(
         value,
         props.valueFormat || props.format,
@@ -263,7 +272,8 @@ export default defineComponent({
         ) => {
           return formatInTimeZone(date, timeZone, format, options)
         }
-      } else {
+      }
+      else {
         return (
           date: Date | number,
           _format: string,
@@ -281,14 +291,14 @@ export default defineComponent({
       () => props.timeZone,
       () => {
         const mergedValue = mergedValueRef.value
-        displayTimeStringRef.value =
-          mergedValue === null
+        displayTimeStringRef.value
+          = mergedValue === null
             ? ''
             : mergedFormatRef.value(
-              mergedValue,
-              props.format,
-              dateFnsOptionsRef.value
-            )
+                mergedValue,
+                props.format,
+                dateFnsOptionsRef.value
+              )
       },
       {
         immediate: true
@@ -300,11 +310,15 @@ export default defineComponent({
     const memorizedValueRef = ref(mergedValueRef.value)
     const transitionDisabledRef = ref(false)
 
+    const localizedClearRef = computed(() => {
+      return localeRef.value.clear
+    })
     const localizedNowRef = computed(() => {
       return localeRef.value.now
     })
     const localizedPlaceholderRef = computed(() => {
-      if (props.placeholder !== undefined) return props.placeholder
+      if (props.placeholder !== undefined)
+        return props.placeholder
       return localeRef.value.placeholder
     })
     const localizedNegativeTextRef = computed(() => {
@@ -322,20 +336,44 @@ export default defineComponent({
     const secondInFormatRef = computed(() => {
       return props.format.includes('s')
     })
+    const hourValueRef = computed(() => {
+      const { value } = mergedValueRef
+      if (value === null)
+        return null
+      return Number(mergedFormatRef.value(value, 'HH', dateFnsOptionsRef.value))
+    })
+    const minuteValueRef = computed(() => {
+      const { value } = mergedValueRef
+      if (value === null)
+        return null
+      return Number(mergedFormatRef.value(value, 'mm', dateFnsOptionsRef.value))
+    })
+    const secondValueRef = computed(() => {
+      const { value } = mergedValueRef
+      if (value === null)
+        return null
+      return Number(mergedFormatRef.value(value, 'ss', dateFnsOptionsRef.value))
+    })
     const isHourInvalidRef = computed(() => {
       const { isHourDisabled } = props
-      if (hourValueRef.value === null) return false
-      if (!isTimeInStep(hourValueRef.value, 'hours', props.hours)) return true
-      if (!isHourDisabled) return false
+      if (hourValueRef.value === null)
+        return false
+      if (!isTimeInStep(hourValueRef.value, 'hours', props.hours))
+        return true
+      if (!isHourDisabled)
+        return false
       return isHourDisabled(hourValueRef.value)
     })
     const isMinuteInvalidRef = computed(() => {
       const { value: minuteValue } = minuteValueRef
       const { value: hourValue } = hourValueRef
-      if (minuteValue === null || hourValue === null) return false
-      if (!isTimeInStep(minuteValue, 'minutes', props.minutes)) return true
+      if (minuteValue === null || hourValue === null)
+        return false
+      if (!isTimeInStep(minuteValue, 'minutes', props.minutes))
+        return true
       const { isMinuteDisabled } = props
-      if (!isMinuteDisabled) return false
+      if (!isMinuteDisabled)
+        return false
       return isMinuteDisabled(minuteValue, hourValue)
     })
     const isSecondInvalidRef = computed(() => {
@@ -345,16 +383,18 @@ export default defineComponent({
       if (secondValue === null || minuteValue === null || hourValue === null) {
         return false
       }
-      if (!isTimeInStep(secondValue, 'seconds', props.seconds)) return true
+      if (!isTimeInStep(secondValue, 'seconds', props.seconds))
+        return true
       const { isSecondDisabled } = props
-      if (!isSecondDisabled) return false
+      if (!isSecondDisabled)
+        return false
       return isSecondDisabled(secondValue, minuteValue, hourValue)
     })
     const isValueInvalidRef = computed(() => {
       return (
-        isHourInvalidRef.value ||
-        isMinuteInvalidRef.value ||
-        isSecondInvalidRef.value
+        isHourInvalidRef.value
+        || isMinuteInvalidRef.value
+        || isSecondInvalidRef.value
       )
     })
     const mergedAttrSizeRef = computed(() => {
@@ -362,25 +402,11 @@ export default defineComponent({
     })
     const amPmValueRef = computed(() => {
       const { value } = mergedValueRef
-      if (value === null) return null
+      if (value === null)
+        return null
       return getHours(value) < 12 ? 'am' : 'pm'
     })
-    const hourValueRef = computed(() => {
-      const { value } = mergedValueRef
-      if (value === null) return null
-      return Number(mergedFormatRef.value(value, 'HH', dateFnsOptionsRef.value))
-    })
-    const minuteValueRef = computed(() => {
-      const { value } = mergedValueRef
-      if (value === null) return null
-      return Number(mergedFormatRef.value(value, 'mm', dateFnsOptionsRef.value))
-    })
-    const secondValueRef = computed(() => {
-      const { value } = mergedValueRef
-      if (value === null) return null
-      return Number(mergedFormatRef.value(value, 'ss', dateFnsOptionsRef.value))
-    })
-    function doUpdateFormattedValue (
+    function doUpdateFormattedValue(
       value: string | null,
       timestampValue: number | null
     ): void {
@@ -403,12 +429,12 @@ export default defineComponent({
         )
       }
     }
-    function createFormattedValue (value: number | null): string | null {
+    function createFormattedValue(value: number | null): string | null {
       return value === null
         ? null
         : mergedFormatRef.value(value, props.valueFormat || props.format)
     }
-    function doUpdateValue (value: number | null): void {
+    function doUpdateValue(value: number | null): void {
       const {
         onUpdateValue,
         'onUpdate:value': _onUpdateValue,
@@ -422,25 +448,28 @@ export default defineComponent({
       if (_onUpdateValue) {
         call(_onUpdateValue as OnUpdateValueImpl, value, formattedValue)
       }
-      if (onChange) call(onChange as OnUpdateValueImpl, value, formattedValue)
+      if (onChange)
+        call(onChange as OnUpdateValueImpl, value, formattedValue)
       doUpdateFormattedValue(formattedValue, value)
       uncontrolledValueRef.value = value
       nTriggerFormChange()
       nTriggerFormInput()
     }
-    function doFocus (e: FocusEvent): void {
+    function doFocus(e: FocusEvent): void {
       const { onFocus } = props
       const { nTriggerFormFocus } = formItem
-      if (onFocus) call(onFocus, e)
+      if (onFocus)
+        call(onFocus, e)
       nTriggerFormFocus()
     }
-    function doBlur (e: FocusEvent): void {
+    function doBlur(e: FocusEvent): void {
       const { onBlur } = props
       const { nTriggerFormBlur } = formItem
-      if (onBlur) call(onBlur, e)
+      if (onBlur)
+        call(onBlur, e)
       nTriggerFormBlur()
     }
-    function doConfirm (): void {
+    function doConfirm(): void {
       const { onConfirm } = props
       if (onConfirm) {
         call(
@@ -450,24 +479,32 @@ export default defineComponent({
         )
       }
     }
-    function handleTimeInputClear (e: MouseEvent): void {
+    function handleTimeInputClear(e: MouseEvent): void {
       e.stopPropagation()
       doUpdateValue(null)
       deriveInputValue(null)
       props.onClear?.()
     }
-    function handleFocusDetectorFocus (): void {
+    function handleFocusDetectorFocus(): void {
       closePanel({
         returnFocus: true
       })
     }
-    function handleInputKeydown (e: KeyboardEvent): void {
+    // clear selected time
+    function clearSelectedValue(): void {
+      doUpdateValue(null)
+      deriveInputValue(null)
+      closePanel({
+        returnFocus: true
+      })
+    }
+    function handleInputKeydown(e: KeyboardEvent): void {
       if (e.key === 'Escape' && mergedShowRef.value) {
         markEventEffectPerformed(e)
         // closePanel will be called in onDeactivated
       }
     }
-    function handleMenuKeydown (e: KeyboardEvent): void {
+    function handleMenuKeydown(e: KeyboardEvent): void {
       switch (e.key) {
         case 'Escape':
           if (mergedShowRef.value) {
@@ -487,65 +524,78 @@ export default defineComponent({
           break
       }
     }
-    function disableTransitionOneTick (): void {
+    function disableTransitionOneTick(): void {
       transitionDisabledRef.value = true
       void nextTick(() => {
         transitionDisabledRef.value = false
       })
     }
-    function handleTriggerClick (e: MouseEvent): void {
-      if (mergedDisabledRef.value || happensIn(e, 'clear')) return
+    function handleTriggerClick(e: MouseEvent): void {
+      if (mergedDisabledRef.value || happensIn(e, 'clear'))
+        return
       if (!mergedShowRef.value) {
         openPanel()
       }
     }
-    function handleHourClick (hour: ItemValue): void {
-      if (typeof hour === 'string') return
+    function handleHourClick(hour: ItemValue): void {
+      if (typeof hour === 'string')
+        return
       if (mergedValueRef.value === null) {
         doUpdateValue(getTime(setHours(startOfHour(new Date()), hour)))
-      } else {
+      }
+      else {
         doUpdateValue(getTime(setHours(mergedValueRef.value, hour)))
       }
     }
-    function handleMinuteClick (minute: ItemValue): void {
-      if (typeof minute === 'string') return
+    function handleMinuteClick(minute: ItemValue): void {
+      if (typeof minute === 'string')
+        return
       if (mergedValueRef.value === null) {
         doUpdateValue(getTime(setMinutes(startOfMinute(new Date()), minute)))
-      } else {
+      }
+      else {
         doUpdateValue(getTime(setMinutes(mergedValueRef.value, minute)))
       }
     }
-    function handleSecondClick (second: ItemValue): void {
-      if (typeof second === 'string') return
+    function handleSecondClick(second: ItemValue): void {
+      if (typeof second === 'string')
+        return
       if (mergedValueRef.value === null) {
         doUpdateValue(getTime(setSeconds(startOfSecond(new Date()), second)))
-      } else {
+      }
+      else {
         doUpdateValue(getTime(setSeconds(mergedValueRef.value, second)))
       }
     }
-    function handleAmPmClick (amPm: ItemValue): void {
+    function handleAmPmClick(amPm: ItemValue): void {
       const { value: mergedValue } = mergedValueRef
       if (mergedValue === null) {
         const now = new Date()
         const hours = getHours(now)
         if (amPm === 'pm' && hours < 12) {
           doUpdateValue(getTime(setHours(now, hours + 12)))
-        } else if (amPm === 'am' && hours >= 12) {
+        }
+        else if (amPm === 'am' && hours >= 12) {
           doUpdateValue(getTime(setHours(now, hours - 12)))
         }
         doUpdateValue(getTime(now))
-      } else {
+      }
+      else {
         const hours = getHours(mergedValue)
         if (amPm === 'pm' && hours < 12) {
           doUpdateValue(getTime(setHours(mergedValue, hours + 12)))
-        } else if (amPm === 'am' && hours >= 12) {
+        }
+        else if (amPm === 'am' && hours >= 12) {
           doUpdateValue(getTime(setHours(mergedValue, hours - 12)))
         }
       }
     }
-    function deriveInputValue (time?: null | number): void {
-      if (time === undefined) time = mergedValueRef.value
-      if (time === null) displayTimeStringRef.value = ''
+    function deriveInputValue(time?: null | number): void {
+      if (time === undefined)
+        time = mergedValueRef.value
+      if (time === null) {
+        displayTimeStringRef.value = ''
+      }
       else {
         displayTimeStringRef.value = mergedFormatRef.value(
           time,
@@ -554,12 +604,14 @@ export default defineComponent({
         )
       }
     }
-    function handleTimeInputFocus (e: FocusEvent): void {
-      if (isInternalFocusSwitch(e)) return
+    function handleTimeInputFocus(e: FocusEvent): void {
+      if (isInternalFocusSwitch(e))
+        return
       doFocus(e)
     }
-    function handleTimeInputBlur (e: FocusEvent): void {
-      if (isInternalFocusSwitch(e)) return
+    function handleTimeInputBlur(e: FocusEvent): void {
+      if (isInternalFocusSwitch(e))
+        return
       if (mergedShowRef.value) {
         const panelEl = panelInstRef.value?.$el
         if (!panelEl?.contains(e.relatedTarget as Node)) {
@@ -569,34 +621,39 @@ export default defineComponent({
             returnFocus: false
           })
         }
-      } else {
+      }
+      else {
         deriveInputValue()
         doBlur(e)
       }
     }
 
-    function handleTimeInputActivate (): void {
-      if (mergedDisabledRef.value) return
+    function handleTimeInputActivate(): void {
+      if (mergedDisabledRef.value)
+        return
       if (!mergedShowRef.value) {
         openPanel()
       }
     }
-    function handleTimeInputDeactivate (): void {
-      if (mergedDisabledRef.value) return
+    function handleTimeInputDeactivate(): void {
+      if (mergedDisabledRef.value)
+        return
       deriveInputValue()
       closePanel({
         returnFocus: false
       })
     }
-    function scrollTimer (): void {
-      if (!panelInstRef.value) return
-      const { hourScrollRef, minuteScrollRef, secondScrollRef, amPmScrollRef } =
-        panelInstRef.value
+    function scrollTimer(): void {
+      if (!panelInstRef.value)
+        return
+      const { hourScrollRef, minuteScrollRef, secondScrollRef, amPmScrollRef }
+        = panelInstRef.value
       ;[hourScrollRef, minuteScrollRef, secondScrollRef, amPmScrollRef].forEach(
         (itemScrollRef) => {
-          if (!itemScrollRef) return
-          const activeItemEl =
-            itemScrollRef.contentRef?.querySelector('[data-active]')
+          if (!itemScrollRef)
+            return
+          const activeItemEl
+            = itemScrollRef.contentRef?.querySelector('[data-active]')
           if (activeItemEl) {
             itemScrollRef.scrollTo({
               top: (activeItemEl as HTMLElement).offsetTop
@@ -605,27 +662,29 @@ export default defineComponent({
         }
       )
     }
-    function doUpdateShow (value: boolean): void {
+    function doUpdateShow(value: boolean): void {
       uncontrolledShowRef.value = value
       const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
-      if (onUpdateShow) call(onUpdateShow, value)
-      if (_onUpdateShow) call(_onUpdateShow, value)
+      if (onUpdateShow)
+        call(onUpdateShow, value)
+      if (_onUpdateShow)
+        call(_onUpdateShow, value)
     }
-    function isInternalFocusSwitch (e: FocusEvent): boolean {
+    function isInternalFocusSwitch(e: FocusEvent): boolean {
       return !!(
-        inputInstRef.value?.wrapperElRef?.contains(e.relatedTarget as Node) ||
-        panelInstRef.value?.$el.contains(e.relatedTarget as Node)
+        inputInstRef.value?.wrapperElRef?.contains(e.relatedTarget as Node)
+        || panelInstRef.value?.$el.contains(e.relatedTarget as Node)
       )
     }
-    function openPanel (): void {
+    function openPanel(): void {
       memorizedValueRef.value = mergedValueRef.value
       doUpdateShow(true)
       void nextTick(scrollTimer)
     }
-    function handleClickOutside (e: MouseEvent): void {
+    function handleClickOutside(e: MouseEvent): void {
       if (
-        mergedShowRef.value &&
-        !inputInstRef.value?.wrapperElRef?.contains(
+        mergedShowRef.value
+        && !inputInstRef.value?.wrapperElRef?.contains(
           getPreciseEventTarget(e) as Node | null
         )
       ) {
@@ -634,7 +693,7 @@ export default defineComponent({
         })
       }
     }
-    function closePanel ({ returnFocus }: { returnFocus: boolean }): void {
+    function closePanel({ returnFocus }: { returnFocus: boolean }): void {
       if (mergedShowRef.value) {
         doUpdateShow(false)
         if (returnFocus) {
@@ -642,7 +701,7 @@ export default defineComponent({
         }
       }
     }
-    function handleTimeInputUpdateValue (v: string): void {
+    function handleTimeInputUpdateValue(v: string): void {
       if (v === '') {
         doUpdateValue(null)
         return
@@ -660,19 +719,21 @@ export default defineComponent({
           const newTime = set(mergedValue, {
             hours: getHours(time),
             minutes: getMinutes(time),
-            seconds: getSeconds(time)
+            seconds: getSeconds(time),
+            milliseconds: getMilliseconds(time)
           })
           doUpdateValue(getTime(newTime))
-        } else {
+        }
+        else {
           doUpdateValue(getTime(time))
         }
       }
     }
-    function handleCancelClick (): void {
+    function handleCancelClick(): void {
       doUpdateValue(memorizedValueRef.value)
       doUpdateShow(false)
     }
-    function handleNowClick (): void {
+    function handleNowClick(): void {
       const now = new Date()
       const getNowTime = {
         hours: getHours,
@@ -681,7 +742,7 @@ export default defineComponent({
       }
       const [mergeHours, mergeMinutes, mergeSeconds] = (
         ['hours', 'minutes', 'seconds'] as const
-      ).map((i) =>
+      ).map(i =>
         !props[i] || isTimeInStep(getNowTime[i](now), i, props[i])
           ? getNowTime[i](now)
           : findSimilarTime(getNowTime[i](now), i, props[i])
@@ -698,15 +759,16 @@ export default defineComponent({
       )
       doUpdateValue(getTime(newValue))
     }
-    function handleConfirmClick (): void {
+    function handleConfirmClick(): void {
       deriveInputValue()
       doConfirm()
       closePanel({
         returnFocus: true
       })
     }
-    function handleMenuFocusOut (e: FocusEvent): void {
-      if (isInternalFocusSwitch(e)) return
+    function handleMenuFocusOut(e: FocusEvent): void {
+      if (isInternalFocusSwitch(e))
+        return
       deriveInputValue()
       doBlur(e)
       closePanel({
@@ -748,11 +810,11 @@ export default defineComponent({
     })
     const triggerThemeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'time-picker-trigger',
-        undefined,
-        triggerCssVarsRef,
-        props
-      )
+          'time-picker-trigger',
+          undefined,
+          triggerCssVarsRef,
+          props
+        )
       : undefined
     const cssVarsRef = computed(() => {
       const {
@@ -807,6 +869,7 @@ export default defineComponent({
       panelInstRef,
       adjustedTo: useAdjustedTo(props),
       mergedShow: mergedShowRef,
+      localizedClear: localizedClearRef,
       localizedNow: localizedNowRef,
       localizedPlaceholder: localizedPlaceholderRef,
       localizedNegativeText: localizedNegativeTextRef,
@@ -852,10 +915,11 @@ export default defineComponent({
       triggerOnRender: triggerThemeClassHandle?.onRender,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
-      onRender: themeClassHandle?.onRender
+      onRender: themeClassHandle?.onRender,
+      clearSelectedValue
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, $slots, triggerOnRender } = this
     triggerOnRender?.()
     return (
@@ -960,6 +1024,7 @@ export default defineComponent({
                                 isSecondInvalid={this.isSecondInvalid}
                                 isSecondDisabled={this.isSecondDisabled}
                                 isValueInvalid={this.isValueInvalid}
+                                clearText={this.localizedClear}
                                 nowText={this.localizedNow}
                                 confirmText={this.localizedPositiveText}
                                 use12Hours={this.use12Hours}
@@ -971,6 +1036,7 @@ export default defineComponent({
                                 onAmPmClick={this.handleAmPmClick}
                                 onNowClick={this.handleNowClick}
                                 onConfirmClick={this.handleConfirmClick}
+                                onClearClick={this.clearSelectedValue}
                                 onFocusDetectorFocus={
                                   this.handleFocusDetectorFocus
                                 }

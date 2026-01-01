@@ -4,6 +4,12 @@
 使用 `n-skeleton` 模拟加载效果。
 </markdown>
 
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const loading = ref(true)
+</script>
+
 <template>
   <n-space vertical>
     <n-switch v-model:value="loading" />
@@ -26,15 +32,3 @@
     </n-card>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      loading: ref(true)
-    }
-  }
-})
-</script>

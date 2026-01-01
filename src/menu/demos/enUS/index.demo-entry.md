@@ -52,6 +52,7 @@ show.vue
 | render-extra | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | Render function that renders all extras. |  |
 | render-icon | `(option: MenuOption) => VNodeChild` | `undefined` | Render function that renders all icons. |  |
 | render-label | `(option: MenuOption \| MenuGroupOption) => VNodeChild` | `undefined` | Render function that renders all labels. |  |
+| responsive | `boolean` | `false` | Whether to collapsed menu items that overflows menu. Only work for menu with `mode='horizontal'`. | 2.36.0 |
 | root-indent | `number` | `undefined` | The indent of menu's first level children. If not set, menu will use `indent` in place of it. |  |
 | value | `string \| null` | `undefined` | The selected item key of the menu. |  |
 | watch-props | `Array<'defaultValue' \| 'defaultExpandedKeys'>` | `undefined` | Default prop names that needed to be watched. Components will be updated after the prop is changed. Note: the `watch-props` itself is not reactive. |  |
@@ -66,7 +67,7 @@ show.vue
 | disabled? | `boolean` | Whether to disable the menu item. |  |
 | extra? | `string \| (() => VNodeChild)` | The extra parts of the menu item. |  |
 | icon? | `() => VNodeChild` | The icon for the menu item. |  |
-| key | `string` | The indentifier of the menu item. |  |
+| key | `string` | The identifier of the menu item. |  |
 | label | `string \| (() => VNodeChild)` | The label of the menu item. |  |
 | show? | `boolean` | Whether to show the menu item. | 2.32.2 |
 
@@ -75,7 +76,7 @@ show.vue
 | Name | Type | Description | Version |
 | --- | --- | --- | --- |
 | children | `Array<MenuOption \| MenuGroupOption>` | Group items, **required!** |  |
-| key | `string` | The indentifier of the menu group. |  |
+| key | `string` | The identifier of the menu group. |  |
 | label | `string \| (() => VNodeChild)` | The label of the menu item. |  |
 | show? | `boolean` | Whether to show the menu item. | 2.32.2 |
 | type | `'group'` | The type of the menu item, **required!** |  |
@@ -84,7 +85,7 @@ show.vue
 
 | Name | Type | Description | Version |
 | --- | --- | --- | --- |
-| key | `string` | The indentifier of the menu group. |  |
+| key | `string` | The identifier of the menu group. |  |
 | props | `HTMLAttributes` | Attributes of the divider. |  |
 | show? | `boolean` | Whether to show the menu item. | 2.32.2 |
 | type | `'divider'` | The type of the menu item, **required!** |  |
@@ -93,4 +94,5 @@ show.vue
 
 | Name | Type | Description | Version |
 | --- | --- | --- | --- |
+| deriveResponsiveState | `() => void` | Recalculate the collapsed state of the responsive menu content. When the width of the menu container is not solely determined by the external width, in the `responsive` mode, the menu content cannot automatically expand after being collapsed. You can call this method to ensure that the menu can be expanded again. | 2.36.0 |
 | showOption | `(key: string \| number) => void` | Expand menu to show option with specified `key`. If `key` is not specified, selected option will be displayed. | 2.27.0 |

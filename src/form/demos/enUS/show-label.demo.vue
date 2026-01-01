@@ -4,11 +4,25 @@
 If `show-label` will default to `true` if not set and inherit `n-form`'s `show-label`.
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const formShowLabel = ref(true)
+const formItemShowLabel = ref(true)
+const formValue = ref({
+  user: {
+    name: '',
+    age: ''
+  },
+  phone: ''
+})
+</script>
+
 <template>
   <n-space vertical>
     <n-space>Form:<n-switch v-model:value="formShowLabel" /></n-space>
     <n-space>Form Item:<n-switch v-model:value="formItemShowLabel" /></n-space>
-    <n-form ref="formRef" :model="formValue" :show-label="formShowLabel">
+    <n-form :model="formValue" :show-label="formShowLabel">
       <n-form-item
         label="Name"
         path="user.name"
@@ -25,30 +39,3 @@ If `show-label` will default to `true` if not set and inherit `n-form`'s `show-l
     </n-form>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    const formRef = ref(null)
-    const formShowLabel = ref(true)
-    const formItemShowLabel = ref(true)
-    return {
-      formRef,
-      formValue: ref({
-        user: {
-          name: '',
-          age: ''
-        },
-        phone: ''
-      }),
-      formShowLabel,
-      formItemShowLabel,
-      switchStyle: {
-        marginBottom: '12px'
-      }
-    }
-  }
-})
-</script>

@@ -1,9 +1,9 @@
-import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import { createTheme } from '../../_mixins'
+import { commonLight } from '../../_styles/common'
 
-export const self = (vars: ThemeCommonVars) => {
+export function self(vars: ThemeCommonVars) {
   const {
     modalColor,
     textColor1,
@@ -22,6 +22,7 @@ export const self = (vars: ThemeCommonVars) => {
   } = vars
   return {
     bodyPadding: '16px 24px',
+    borderRadius,
     headerPadding: '16px 24px',
     footerPadding: '16px 24px',
     color: modalColor,

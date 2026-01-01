@@ -1,25 +1,23 @@
-import {
-  Fragment,
-  h,
-  ref,
-  Teleport,
-  defineComponent,
-  provide,
-  nextTick,
-  type PropType,
-  type ExtractPropTypes,
-  type CSSProperties
-} from 'vue'
-import { useIsMounted } from 'vooks'
-import { useConfig, useTheme } from '../../_mixins'
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { LoadingBarTheme } from '../styles'
-import NLoadingBar from './LoadingBar'
+import { useIsMounted } from 'vooks'
+import {
+  defineComponent,
+  Fragment,
+  h,
+  nextTick,
+  provide,
+  ref,
+  Teleport
+} from 'vue'
+import { useConfig, useTheme } from '../../_mixins'
 import {
   loadingBarApiInjectionKey,
   loadingBarProviderInjectionKey
 } from './context'
+import NLoadingBar from './LoadingBar'
 
 export interface LoadingBarInst {
   start: () => void
@@ -57,32 +55,35 @@ export type LoadingBarProviderSetupProps = ExtractPropTypes<
 export default defineComponent({
   name: 'LoadingBarProvider',
   props: loadingBarProviderProps,
-  setup (props) {
+  setup(props) {
     const isMountedRef = useIsMounted()
     const loadingBarRef = ref<LoadingBarInst | null>(null)
     const methods: LoadingBarProviderInst = {
-      start () {
+      start() {
         if (isMountedRef.value) {
           loadingBarRef.value?.start()
-        } else {
+        }
+        else {
           void nextTick(() => {
             loadingBarRef.value?.start()
           })
         }
       },
-      error () {
+      error() {
         if (isMountedRef.value) {
           loadingBarRef.value?.error()
-        } else {
+        }
+        else {
           void nextTick(() => {
             loadingBarRef.value?.error()
           })
         }
       },
-      finish () {
+      finish() {
         if (isMountedRef.value) {
           loadingBarRef.value?.finish()
-        } else {
+        }
+        else {
           void nextTick(() => {
             loadingBarRef.value?.finish()
           })
@@ -99,7 +100,7 @@ export default defineComponent({
       loadingBarRef
     })
   },
-  render () {
+  render() {
     return (
       <>
         <Teleport disabled={this.to === false} to={this.to || 'body'}>

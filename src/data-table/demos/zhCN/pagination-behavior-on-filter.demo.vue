@@ -6,20 +6,10 @@
 如果设置停留在当前页，过滤后的数据总数达不到当前页时，会展示最后一页的数据。
 </markdown>
 
-<template>
-  <n-data-table
-    pagination-behavior-on-filter="first"
-    :columns="columns"
-    :data="data"
-    :pagination="pagination"
-  />
-</template>
+<script lang="ts" setup>
+import type { DataTableColumns } from 'naive-ui'
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { DataTableColumns } from 'naive-ui'
-
-type RowData = {
+interface RowData {
   key: number
   name: string
   age: number
@@ -49,7 +39,7 @@ const columns: DataTableColumns<RowData> = [
         value: 'New York'
       }
     ],
-    filter (value, row) {
+    filter(value, row) {
       return !!~row.address.indexOf(String(value))
     }
   }
@@ -82,13 +72,14 @@ const data: RowData[] = [
   }
 ]
 
-export default defineComponent({
-  setup () {
-    return {
-      data,
-      columns,
-      pagination: { pageSize: 3 }
-    }
-  }
-})
+const pagination = { pageSize: 3 }
 </script>
+
+<template>
+  <n-data-table
+    pagination-behavior-on-filter="first"
+    :columns="columns"
+    :data="data"
+    :pagination="pagination"
+  />
+</template>

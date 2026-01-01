@@ -4,21 +4,17 @@
 You may use `render-cell` to customize empty state.
 </markdown>
 
-<template>
-  <n-data-table :columns="columns" :data="data" :render-cell="renderCell" />
-</template>
-
-<script lang="ts">
-import { defineComponent, h } from 'vue'
-import { NText } from 'naive-ui'
+<script lang="ts" setup>
 import type { DataTableColumns } from 'naive-ui'
+import { NText } from 'naive-ui'
+import { h } from 'vue'
 
-type Song = {
+interface Song {
   no: number
   note: string
 }
 
-const createColumns = (): DataTableColumns<Song> => {
+function createColumns(): DataTableColumns<Song> {
   return [
     {
       title: 'Date',
@@ -43,19 +39,16 @@ const data: Song[] = [
   { no: 19, note: '' }
 ]
 
-export default defineComponent({
-  setup () {
-    return {
-      data,
-      columns: createColumns(),
-      pagination: false as const,
-      renderCell: (value: string | number) => {
-        if (!value) {
-          return h(NText, { depth: 3 }, { default: () => 'Empty' })
-        }
-        return value
-      }
-    }
+const columns = createColumns()
+
+function renderCell(value: string | number) {
+  if (!value) {
+    return h(NText, { depth: 3 }, { default: () => 'Empty' })
   }
-})
+  return value
+}
 </script>
+
+<template>
+  <n-data-table :columns="columns" :data="data" :render-cell="renderCell" />
+</template>

@@ -1,7 +1,12 @@
 <markdown>
 # A11y debug
-
 </markdown>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const show = ref(false)
+</script>
 
 <template>
   <n-button @click="show = !show">
@@ -14,15 +19,3 @@
     </template>
   </n-modal>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      show: ref(false)
-    }
-  }
-})
-</script>

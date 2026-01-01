@@ -1,7 +1,15 @@
 <markdown>
 # Rtl Debug
-
 </markdown>
+
+<script lang="ts" setup>
+import { unstableInputRtl } from 'naive-ui'
+import { ref } from 'vue'
+
+const value = ref(null)
+const rtlEnabled = ref(false)
+const rtlStyles = [unstableInputRtl]
+</script>
 
 <template>
   <n-space vertical>
@@ -18,18 +26,3 @@
     </n-config-provider>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { unstableInputRtl } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    return {
-      value: ref(null),
-      rtlEnabled: ref(false),
-      rtlStyles: [unstableInputRtl]
-    }
-  }
-})
-</script>

@@ -4,13 +4,7 @@
 通过设定 `column.ellipsis.tooltip` 使得省略内容有弹出提示。`column.ellipsis` 接受的属性和 `n-ellipsis` 相同。
 </markdown>
 
-<template>
-  <n-data-table :columns="columns" :data="data" :pagination="pagination" />
-</template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-
+<script lang="ts" setup>
 const columns = [
   {
     title: 'Name',
@@ -62,13 +56,9 @@ const data = [
   }
 ]
 
-export default defineComponent({
-  setup () {
-    return {
-      data,
-      columns,
-      pagination: { pageSize: 10 }
-    }
-  }
-})
+const pagination = { pageSize: 10 }
 </script>
+
+<template>
+  <n-data-table :columns="columns" :data="data" :pagination="pagination" />
+</template>

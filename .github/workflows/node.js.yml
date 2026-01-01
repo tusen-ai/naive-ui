@@ -5,9 +5,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ main, feat, docs ]
+    branches: [main, feat, docs]
   pull_request:
-    branches: [ main, feat, docs ]
+    branches: [main, feat, docs]
 
 jobs:
   lint:
@@ -17,7 +17,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18]
+        node-version: [22]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
       - uses: actions/checkout@v3
@@ -42,7 +42,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18]
+        node-version: [22]
     steps:
       - uses: actions/checkout@v3
 
@@ -54,6 +54,13 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Setup timezone
+        uses: szenius/set-timezone@v2.0
+        with:
+          timezoneLinux: Asia/Shanghai
+          timezoneMacos: Asia/Shanghai
+          timezoneWindows: Asia/Shanghai
+
       - run: pnpm install
 
       - name: Test
@@ -63,3 +70,4 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage/lcov.info

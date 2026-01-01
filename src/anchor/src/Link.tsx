@@ -1,14 +1,17 @@
-import { h, toRef, ref, inject, defineComponent, watch, type Ref } from 'vue'
+import type { Ref, SlotsType } from 'vue'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { AnchorLinkSlots } from './public-types'
 import { useMemo } from 'vooks'
+import { defineComponent, h, inject, ref, toRef, watch } from 'vue'
+import {
+  createInjectionKey,
+  getTitleAttribute,
+  resolveSlot
+} from '../../_utils'
 import {
   useInjectionCollection,
   useInjectionElementCollection
 } from '../../_utils/composable'
-import {
-  createInjectionKey,
-  type ExtractPublicPropTypes,
-  getTitleAttribute
-} from '../../_utils'
 
 export interface AnchorInjection {
   activeHref: Ref<string | null>
@@ -19,8 +22,8 @@ export interface AnchorInjection {
   titleEls: HTMLElement[]
 }
 
-export const anchorInjectionKey =
-  createInjectionKey<AnchorInjection>('n-anchor')
+export const anchorInjectionKey
+  = createInjectionKey<AnchorInjection>('n-anchor')
 
 export const anchorLinkProps = {
   title: String,
@@ -32,9 +35,9 @@ export type AnchorLinkProps = ExtractPublicPropTypes<typeof anchorLinkProps>
 export default defineComponent({
   name: 'AnchorLink',
   props: anchorLinkProps,
-  setup (props, { slots }) {
+  slots: Object as SlotsType<AnchorLinkSlots>,
+  setup(props, { slots }) {
     const titleRef = ref<HTMLElement | null>(null)
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const NAnchor = inject(anchorInjectionKey)!
     const hrefRef = toRef(props, 'href')
     const activeRef = useMemo(() => {
@@ -51,7 +54,7 @@ export default defineComponent({
         NAnchor.updateBarPosition(titleRef.value)
       }
     })
-    function handleClick (): void {
+    function handleClick(): void {
       if (props.href !== undefined) {
         NAnchor.setActiveHref(props.href)
       }
@@ -72,7 +75,9 @@ export default defineComponent({
             title={getTitleAttribute(props.title)}
             onClick={handleClick}
           >
-            {props.title}
+            {{
+              default: () => resolveSlot(slots.title, () => [props.title])
+            }}
           </a>
           {slots.default?.()}
         </div>

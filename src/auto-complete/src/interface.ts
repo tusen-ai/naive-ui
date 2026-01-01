@@ -1,6 +1,6 @@
 import type {
-  SelectGroupOption,
-  SelectBaseOption
+  SelectBaseOption,
+  SelectGroupOption
 } from '../../select/src/interface'
 
 export type AutoCompleteOption = SelectBaseOption<string, string>
@@ -10,7 +10,7 @@ export interface AutoCompleteGroupOption
 }
 
 export type AutoCompleteOptions = Array<
-AutoCompleteOption | AutoCompleteGroupOption | string
+  AutoCompleteOption | AutoCompleteGroupOption | string
 >
 
 export type OnUpdateValue = (value: string & (string | null)) => void
@@ -21,4 +21,11 @@ export type OnSelectImpl = (value: string | number) => void
 export interface AutoCompleteInst {
   focus: () => void
   blur: () => void
+}
+
+export interface AutoCompleteDefaultSlotProps {
+  handleInput: (value: string) => void
+  handleFocus: (e: FocusEvent) => void
+  handleBlur: (e: FocusEvent) => void
+  value: string | null
 }

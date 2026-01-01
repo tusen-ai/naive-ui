@@ -1,14 +1,12 @@
+import type { Ref } from 'vue'
+import type { NotificationReactive } from '../index'
 import { mount } from '@vue/test-utils'
 import { sleep } from 'seemly'
-import { defineComponent, h, ref, type Ref, nextTick, onMounted } from 'vue'
-import {
-  NNotificationProvider,
-  useNotification,
-  type NotificationReactive
-} from '../index'
+import { defineComponent, h, nextTick, onMounted, ref } from 'vue'
+import { NNotificationProvider, useNotification } from '../index'
 
 const Provider = defineComponent({
-  render () {
+  render() {
     return <NNotificationProvider>{this.$slots}</NNotificationProvider>
   }
 })
@@ -19,7 +17,7 @@ describe('n-notification', () => {
   })
   it('should have correct type', () => {
     const Test = defineComponent({
-      setup () {
+      setup() {
         const notification = useNotification()
         notification.info({
           title: 'info'
@@ -29,7 +27,7 @@ describe('n-notification', () => {
         })
         notificationReactive.title = 'cool'
       },
-      render () {
+      render() {
         return null
       }
     })
@@ -40,11 +38,11 @@ describe('n-notification', () => {
   })
 
   it('can change content', async () => {
-    const changeContent = jest.fn((nRef: Ref) => {
+    const changeContent = vi.fn((nRef: Ref) => {
       nRef.value.content = 'change info'
     })
     const Test = defineComponent({
-      setup () {
+      setup() {
         const nRef = ref<NotificationReactive | null>(null)
         const notification = useNotification()
         nRef.value = notification.info({
@@ -52,10 +50,12 @@ describe('n-notification', () => {
           content: 'info'
         })
         setTimeout(() => {
-          nRef.value && changeContent(nRef)
+          if (nRef.value) {
+            changeContent(nRef)
+          }
         })
       },
-      render () {
+      render() {
         return null
       }
     })
@@ -76,7 +76,7 @@ describe('n-notification', () => {
 
   it('should work with duration', async () => {
     const Test = defineComponent({
-      setup () {
+      setup() {
         const notification = useNotification()
         notification.info({
           title: 'info',
@@ -84,7 +84,7 @@ describe('n-notification', () => {
           duration: 1000
         })
       },
-      render () {
+      render() {
         return null
       }
     })
@@ -103,7 +103,7 @@ describe('n-notification', () => {
 describe('notification-provider', () => {
   it('props.max', async () => {
     const Test = defineComponent({
-      setup () {
+      setup() {
         const notification = useNotification()
         onMounted(() => {
           notification.info({
@@ -120,7 +120,7 @@ describe('notification-provider', () => {
           })
         })
       },
-      render () {
+      render() {
         return null
       }
     })
@@ -138,14 +138,14 @@ describe('notification-provider', () => {
   })
   it('should work with `placement` prop', async () => {
     const Test = defineComponent({
-      setup () {
+      setup() {
         const notification = useNotification()
         notification.info({
           title: 'info',
           content: 'info'
         })
       },
-      render () {
+      render() {
         return null
       }
     })
@@ -155,7 +155,6 @@ describe('notification-provider', () => {
       }
     })
     await nextTick()
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const container = document.querySelector('.n-notification-container')!
     expect(container).not.toBeFalsy()
     expect(
@@ -177,7 +176,7 @@ describe('notification-provider', () => {
   })
   it('should work with `destroyAll` method', async () => {
     const Test = defineComponent({
-      setup () {
+      setup() {
         const notification = useNotification()
         onMounted(() => {
           notification.info({
@@ -191,7 +190,7 @@ describe('notification-provider', () => {
           notification.destroyAll()
         })
       },
-      render () {
+      render() {
         return null
       }
     })

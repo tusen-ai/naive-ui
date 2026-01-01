@@ -4,6 +4,13 @@
 你可以使用上面的 CSS 变量。如果你需要在 JS 中使用这些变量，请使用 [useThemeVars](../docs/theme#use-theme-vars)。
 </markdown>
 
+<script lang="ts" setup>
+import { darkTheme } from 'naive-ui'
+import { ref } from 'vue'
+
+const theme = ref<typeof darkTheme | null>(null)
+</script>
+
 <template>
   <n-space vertical>
     <n-space>
@@ -29,17 +36,3 @@
     </n-config-provider>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { darkTheme } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    return {
-      darkTheme,
-      theme: ref<typeof darkTheme | null>(null)
-    }
-  }
-})
-</script>

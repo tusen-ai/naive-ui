@@ -1,6 +1,6 @@
 # 头像 Avatar
 
-在互联网上，没有人知道你是一条狗。
+在互联网上，没有人知道你是 \*\*\* 。
 
 ## 演示
 
@@ -28,9 +28,9 @@ rtl-debug.vue
 | bordered | `boolean` | `false` | 头像是否带边框 |  |
 | color | `string` | `undefined` | 头像的背景色 |  |
 | fallback-src | `string` | `undefined` | 头像加载失败时显示的图片的地址 |  |
-| img-props | `object` | `undefined` | 组件中 img 元素的属性 | 2.34.0 |
+| img-props | `ImgHTMLAttributes` | `undefined` | 组件中 img 元素的属性 | 2.34.0 |
 | intersection-observer-options | `{ root?: Element \| Document \| string \| null, rootMargin?: string, threshold?: number \| number[]; }` | `undefined` | `lazy=true` 时 intersection observer 观测的配置 | 2.31.0 |
-| lazy | `boolean` | `false` | 是否在进入 `intersection-observer-options` 配置的视口之后再开始加载 | 2.31.0 |
+| lazy | `boolean` | `false` | 是否让图片进入视口再加载，单独使用将设置为[HTMLImageElement.loading](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading) 的属性值；也可配合 `intersection-observer-options` 配置实现懒加载 | 2.31.0 |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `'fill'` | 头像的图片在容器内的的适应类型 |  |
 | render-fallback | `() => VNodeChild` | `undefined` | 加载失败的渲染函数 | 2.33.4 |
 | render-placeholder | `() => VNodeChild` | `undefined` | 占位的渲染函数 | 2.33.4 |
@@ -41,14 +41,24 @@ rtl-debug.vue
 
 ### AvatarGroup Props
 
-| 名称      | 类型                  | 默认值      | 说明                   |
-| --------- | --------------------- | ----------- | ---------------------- |
-| max       | `number`              | `undefined` | 组内头像显示的最大个数 |
-| max-style | `Object \| string`    | `undefined` | 溢出标识的样式         |
-| options   | `Array<AvatarOption>` | `[]`        | 头像组的选项           |
-| vertical  | `boolean`             | `false`     | 组内头像是否垂直排列   |
+泛型 `<T extends AvatarGroupOption = AvatarGroupOption>`，自 `2.43.0` 可用。
 
-参考 [Avatar Props](avatar#Props)
+泛型能力仅在 `.vue` 文件中，`Vue >= 3.3`，通过 `import { NGAvatarGroup } from 'naive-ui/generic'` 可用，否则请使用普通的 `n-avatar-group`。
+
+```ts
+interface AvatarGroupOption {
+  src: string
+}
+```
+
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| expand-on-hover | `boolean` | `false` | 悬停时展开 | 2.37.0 |
+| max | `number` | `undefined` | 组内头像显示的最大个数 |  |
+| max-style | `Object \| string` | `undefined` | 溢出标识的样式 |  |
+| options | `Array<T extends AvatarGroupOption = AvatarGroupOption>` | `[]` | 头像组的选项 |  |
+| size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | 头像的尺寸 | 2.43.0 |
+| vertical | `boolean` | `false` | 组内头像是否垂直排列 |  |
 
 ### Avatar Slots
 

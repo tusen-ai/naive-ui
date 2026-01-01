@@ -1,6 +1,6 @@
-import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
-import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.cssr'
 import { fadeInHeightExpandTransition } from '../../../_styles/transitions/fade-in-height-expand.cssr'
+import { iconSwitchTransition } from '../../../_styles/transitions/icon-switch.cssr'
+import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 const iconSwitchTransitionNode = iconSwitchTransition()
 
@@ -52,7 +52,6 @@ export default cB('tree', `
     padding: var(--n-node-wrapper-padding);
   `),
   cB('tree-node', `
-    transform: translate3d(0,0,0);
     position: relative;
     display: flex;
     border-radius: var(--n-node-border-radius);
@@ -98,6 +97,9 @@ export default cB('tree', `
           cB('tree-node-content', `
             background: var(--n-node-color-hover);
           `)
+        ]),
+        cM('selected', [
+          cB('tree-node-content', 'background: var(--n-node-color-active);')
         ])
       ]),
       cM('selected', [
@@ -116,12 +118,26 @@ export default cB('tree', `
           cNotM('selected', [
             c('&:active', 'background: var(--n-node-color-pressed);')
           ])
-        ])
+        ]),
+        cM('selected', 'background: var(--n-node-color-active);')
       ]),
       cM('selected', 'background: var(--n-node-color-active);'),
       cM('disabled', `
         cursor: not-allowed;
       `)
+    ])
+  ]),
+  cM('ellipsis', [
+    cB('tree-node', [
+      cB('tree-node-content', `
+        overflow: hidden;
+      `, [
+        cE('text', `
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+        `)
+      ])
     ])
   ]),
   cB('tree-node-indent', `
@@ -152,7 +168,7 @@ export default cB('tree', `
           right: 0;
           bottom: 50%;
           transition: border-color .3s var(--n-bezier);
-          border-bottom: 1px solid var(--n-border-color);
+          border-bottom: 1px solid var(--n-line-color);
         `)
       ])
     ]),

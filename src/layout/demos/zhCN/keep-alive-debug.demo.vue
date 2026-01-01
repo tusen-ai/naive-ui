@@ -2,6 +2,12 @@
 # Keep alive debug
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const showLayout = ref(true)
+</script>
+
 <template>
   <n-button @click="showLayout = !showLayout">
     xxx
@@ -41,15 +47,3 @@
     <n-empty v-else />
   </keep-alive>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      showLayout: ref(true)
-    }
-  }
-})
-</script>

@@ -1,7 +1,15 @@
 <markdown>
 # Hoist Debug
-
 </markdown>
+
+<script lang="ts" setup>
+const options = [
+  {
+    label: '123',
+    value: '123'
+  }
+]
+</script>
 
 <template>
   Style is the only prop of button and it's static, so the props of button vNode
@@ -12,20 +20,3 @@
     </button>
   </n-popselect>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      options: [
-        {
-          label: '123',
-          value: '123'
-        }
-      ]
-    }
-  }
-})
-</script>

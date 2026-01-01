@@ -1,11 +1,11 @@
-import { commonDark } from '../../_styles/common'
 import type { TabsTheme } from './light'
+import { commonDark } from '../../_styles/common'
 import { self } from './light'
 
 const tabsDark: TabsTheme = {
   name: 'Tabs',
   common: commonDark,
-  self (vars) {
+  self(vars) {
     const commonSelf = self(vars)
     const { inputColor } = vars
     commonSelf.colorSegment = inputColor

@@ -4,21 +4,14 @@
 我喜欢用图标当头像。
 </markdown>
 
+<script lang="ts" setup>
+import { MdCash } from '@vicons/ionicons4'
+</script>
+
 <template>
   <n-avatar>
     <n-icon>
-      <md-cash />
+      <MdCash />
     </n-icon>
   </n-avatar>
 </template>
-
-<script lang="ts">
-import { MdCash } from '@vicons/ionicons4'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    MdCash
-  }
-})
-</script>

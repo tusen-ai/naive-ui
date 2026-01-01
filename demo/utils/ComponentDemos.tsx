@@ -1,5 +1,5 @@
-import { defineComponent, Fragment, h, computed } from 'vue'
-import { useIsMobile, useIsTablet, useIsSmallDesktop } from './composables'
+import { computed, defineComponent, Fragment, h } from 'vue'
+import { useIsMobile, useIsSmallDesktop, useIsTablet } from './composables'
 
 export default defineComponent({
   name: 'ComponentDemos',
@@ -9,7 +9,7 @@ export default defineComponent({
       default: 2
     }
   },
-  setup (props) {
+  setup(props) {
     const isMobileRef = useIsMobile()
     const isTabletRef = useIsTablet()
     const isSmallDesktop = useIsSmallDesktop()
@@ -22,7 +22,7 @@ export default defineComponent({
       mergedCols: mergedColsRef
     }
   },
-  render () {
+  render() {
     const children = this.$slots.default?.() ?? []
     const { mergedCols } = this
     return (

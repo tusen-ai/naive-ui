@@ -31,16 +31,18 @@ const frFR: NLocale = {
     dateFormat: 'dd/MM/yyyy',
     dateTimeFormat: 'dd/MM/yyyy HH:mm:ss',
     quarterFormat: 'qqq yyyy',
+    weekFormat: 'YYYY-w',
     clear: 'Effacer',
     now: 'Maintenant',
     confirm: 'Confirmer',
-    selectTime: "Sélectionner l'heure",
+    selectTime: 'Sélectionner l\'heure',
     selectDate: 'Sélectionner la date',
     datePlaceholder: 'Sélectionner la date',
-    datetimePlaceholder: "Sélectionner la date et l'heure",
+    datetimePlaceholder: 'Sélectionner la date et l\'heure',
     monthPlaceholder: 'Sélectionner le mois',
-    yearPlaceholder: "Sélectionner l'année",
+    yearPlaceholder: 'Sélectionner l\'année',
     quarterPlaceholder: 'Sélectionner le trimestre',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Date de début',
     endDatePlaceholder: 'Date de fin',
     startDatetimePlaceholder: 'Date et heure de début',
@@ -48,8 +50,8 @@ const frFR: NLocale = {
     startMonthPlaceholder: 'Mois de début',
     endMonthPlaceholder: 'Mois de fin',
     monthBeforeYear: true,
-    firstDayOfWeek: 1,
-    today: "Aujourd'hui"
+    firstDayOfWeek: 0,
+    today: 'Aujourd\'hui'
   },
   DataTable: {
     checkTableAll: 'Sélectionner tout',
@@ -75,10 +77,11 @@ const frFR: NLocale = {
     placeholder: 'Sélectionner'
   },
   TimePicker: {
-    placeholder: "Sélectionner l'heure",
+    placeholder: 'Sélectionner l\'heure',
     positiveText: 'OK',
     negativeText: 'Annuler',
-    now: 'Maintenant'
+    now: 'Maintenant',
+    clear: 'Effacer'
   },
   Pagination: {
     goto: 'Aller à',
@@ -119,6 +122,12 @@ const frFR: NLocale = {
     tipDownload: 'Descargar',
     tipClose: 'Fermer (Échap.)',
     tipOriginalSize: 'Zoom à la taille originale'
+  },
+  Heatmap: {
+    less: 'moins',
+    more: 'plus',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

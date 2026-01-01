@@ -1,5 +1,5 @@
-import sv from 'date-fns/esm/locale/sv'
-import { type NDateLocale } from './enUS'
+import type { NDateLocale } from './enUS'
+import { sv } from 'date-fns/locale'
 
 const dateSvSE: NDateLocale = {
   name: 'sv-SE',

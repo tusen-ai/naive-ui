@@ -29,6 +29,7 @@ focus.vue
 render-person.vue
 tag-input.vue
 status.vue
+rtl-debug.vue
 placeholder-debug.vue
 menu-debug.vue
 render-debug.vue
@@ -53,16 +54,18 @@ create-debug.vue
 | clear-filter-after-select | `boolean` | `true` | 是否在可过滤和多选的情况下选中一个选项后保留当前的搜索关键词 | 2.25.2 |
 | default-value | `Array<string \| number> \| string \| number \| null` | `null` | 非受控模式下的默认值 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
+| ellipsis-tag-popover-props | `PopoverProps` | `undefined` | 选中选项过多省略显示时，预览弹出 `popover` 的属性 | 2.37.0 |
 | fallback-option | `false \| (value: string \| number) => SelectOption` | `value => ({ label: '' + value, value })` | 在传入的选项中没有对应当前值的选项时，这个值应该对应的选项。如果设为 `false`，不会为找不到对应选项的值生成回退选项也不会显示它，未在选项中的值会被视为不合法，操作过程中会被组件清除掉 |  |
 | filterable | `boolean` | `false` | 是否可以过滤 |  |
 | filter | `(pattern: string, option: object) => boolean` | 一个简单的字符串搜索算法 | 过滤器函数 |  |
 | ignore-composition | `boolean` | `true` | 忽略输入法 Composition 状态，默认情况下 `filter` 在输入法输入的过程中不会触发 | 2.33.4 |
-| input-props | `HTMLInputAttributes` | `undefined` | 触发器中 input 元素的属性，只在可过滤时有意义 |  |
+| input-props | `InputHTMLAttributes` | `undefined` | 触发器中 input 元素的属性，只在可过滤时有意义 |  |
 | keyboard | `boolean` | `true` | 是否支持键盘操作 | 2.34.4 |
 | label-field | `string` | `'label'` | 选项 label 的字段名 | 2.29.1 |
 | loading | `boolean` | `false` | 是否为加载状态 |  |
 | max-tag-count | `number \| 'responsive'` | `undefined` | 多选标签的最大显示数量，`responsive` 会将所有标签保持在一行 |  |
 | menu-props | `HTMLAttributes` | `undefined` | 菜单的 DOM 属性 |  |
+| menu-size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 菜单的尺寸 | 2.40.0 |
 | multiple | `boolean` | `false` | 是否为多选 |  |
 | node-props | `(option: SelectOption \| SelectGroupOption) => object` | `undefined` | 选项的 DOM 属性生成函数 | 2.32.2 |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` | 配置选项内容，详情见 SelectOption Properties |  |
@@ -75,7 +78,7 @@ create-debug.vue
 | reset-menu-on-options-change | `boolean` | `true` | 是否在选项变化时重置菜单状态，例如滚动状态 | 2.24.2 |
 | show | `boolean` | `undefined` | 是否展示菜单 |  |
 | show-arrow | `boolean` | `true` | 是否展示箭头 |  |
-| show-checkmark | `boolean` | `true` | 多选情况下是否展示对勾 | 2.33.4 |
+| show-checkmark | `boolean` | `true` | 是否展示对勾 | 2.33.4 |
 | show-on-focus | `boolean` | `false` | 聚焦时是否展示菜单 | 2.34.3 |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
@@ -118,6 +121,7 @@ create-debug.vue
 
 | 名称   | 参数 | 说明                | 版本   |
 | ------ | ---- | ------------------- | ------ |
+| header | `()` | 菜单头部区域的 slot | 2.37.0 |
 | action | `()` | 菜单操作区域的 slot |        |
 | empty  | `()` | 菜单无数据时的 slot |        |
 | arrow  | `()` | 箭头的 slot         | 2.24.2 |

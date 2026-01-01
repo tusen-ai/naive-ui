@@ -1,11 +1,11 @@
-import { h, defineComponent, type PropType, ref } from 'vue'
-import {
-  NScrollbar,
-  type ScrollbarInst as InternalScrollbarInst
-} from '../../_internal'
-import { type ScrollbarTheme } from '../../_internal/scrollbar/styles'
-import { useTheme, type ThemeProps } from '../../_mixins'
+import type { PropType } from 'vue'
+import type { ScrollbarInst as InternalScrollbarInst } from '../../_internal'
+import type { ScrollbarTheme } from '../../_internal/scrollbar/styles'
+import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import { defineComponent, h, ref } from 'vue'
+import { NScrollbar } from '../../_internal'
+import { useTheme } from '../../_mixins'
 
 export interface ScrollTo {
   (x: number, y: number): void
@@ -24,7 +24,17 @@ export const scrollbarProps = {
   trigger: String as PropType<'none' | 'hover'>,
   xScrollable: Boolean,
   onScroll: Function as PropType<(e: Event) => void>,
-  size: Number
+  contentClass: String,
+  contentStyle: [Object, String] as PropType<string | Record<string, any>>,
+  size: Number,
+  yPlacement: {
+    type: String as PropType<'left' | 'right'>,
+    default: 'right'
+  },
+  xPlacement: {
+    type: String as PropType<'top' | 'bottom'>,
+    default: 'bottom'
+  }
 } as const
 
 export type ScrollbarProps = ExtractPublicPropTypes<typeof scrollbarProps>
@@ -32,7 +42,7 @@ export type ScrollbarProps = ExtractPublicPropTypes<typeof scrollbarProps>
 const Scrollbar = defineComponent({
   name: 'Scrollbar',
   props: scrollbarProps,
-  setup () {
+  setup() {
     const scrollbarInstRef = ref<InternalScrollbarInst | null>(null)
     const exposedMethods: ScrollbarInst = {
       scrollTo: (...args: any[]) => {
@@ -47,7 +57,7 @@ const Scrollbar = defineComponent({
       scrollbarInstRef
     }
   },
-  render () {
+  render() {
     return (
       <NScrollbar ref="scrollbarInstRef" {...this.$props}>
         {this.$slots}

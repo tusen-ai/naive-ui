@@ -1,8 +1,8 @@
+import type { DropdownTheme } from './light'
+import { changeColor } from 'seemly'
 import { commonDark } from '../../_styles/common'
 import { popoverDark } from '../../popover/styles'
-import type { DropdownTheme } from './light'
 import { self } from './light'
-import { changeColor } from 'seemly'
 
 const dropdownDark: DropdownTheme = {
   name: 'Dropdown',
@@ -10,7 +10,7 @@ const dropdownDark: DropdownTheme = {
   peers: {
     Popover: popoverDark
   },
-  self (vars) {
+  self(vars) {
     const { primaryColorSuppl, primaryColor, popoverColor } = vars
     const commonSelf = self(vars)
     commonSelf.colorInverted = popoverColor

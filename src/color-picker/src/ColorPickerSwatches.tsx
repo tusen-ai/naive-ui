@@ -1,10 +1,12 @@
-import { defineComponent, h, type PropType, computed } from 'vue'
+import type { PropType } from 'vue'
+import type { ColorPickerMode } from './utils'
 import { hsv2rgb, hsva, toRgbaString } from 'seemly'
-import { type ColorPickerMode, convertColor, getModeFromValue } from './utils'
+import { computed, defineComponent, h } from 'vue'
 import { warn } from '../../_utils'
+import { convertColor, getModeFromValue } from './utils'
 
 // Try to normalize the color values to ensure that they are valid CSS colors
-function normalizeColor (color: string, mode: ColorPickerMode | null): string {
+function normalizeColor(color: string, mode: ColorPickerMode | null): string {
   if (mode === 'hsv') {
     const [h, s, v, a] = hsva(color)
     return toRgbaString([...hsv2rgb(h, s, v), a])
@@ -15,10 +17,11 @@ function normalizeColor (color: string, mode: ColorPickerMode | null): string {
   return color
 }
 
-function getHexFromName (color: string): string {
-  const ctx = document
-    .createElement('canvas')
-    .getContext('2d') as CanvasRenderingContext2D
+function getHexFromName(color: string): string {
+  const ctx = document.createElement('canvas').getContext('2d')
+  if (!ctx) {
+    return '#000000'
+  }
   ctx.fillStyle = color
   return ctx.fillStyle
 }
@@ -49,7 +52,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
+  setup(props) {
     const parsedSwatchesRef = computed<ParsedColor[]>(() =>
       props.swatches.map((value) => {
         const mode = getModeFromValue(value)
@@ -61,7 +64,7 @@ export default defineComponent({
       })
     )
 
-    function normalizeOutput (parsed: ParsedColor): string {
+    function normalizeOutput(parsed: ParsedColor): string {
       const { mode: modeProp } = props
       let { value, mode: swatchColorMode } = parsed
       // color name is converted to hex
@@ -69,25 +72,28 @@ export default defineComponent({
         swatchColorMode = 'hex'
         if (/^[a-zA-Z]+$/.test(value)) {
           value = getHexFromName(value)
-        } else {
+        }
+        else {
           // for invalid color, we make it black
           warn('color-picker', `color ${value} in swatches is invalid.`)
           value = '#000000'
         }
       }
 
-      if (swatchColorMode === modeProp) return value
+      if (swatchColorMode === modeProp)
+        return value
 
       // swatch value to current mode value
       return convertColor(value, modeProp, swatchColorMode)
     }
 
-    function handleSwatchSelect (parsed: ParsedColor): void {
+    function handleSwatchSelect(parsed: ParsedColor): void {
       props.onUpdateColor(normalizeOutput(parsed))
     }
 
-    function handleSwatchKeyDown (e: KeyboardEvent, parsed: ParsedColor): void {
-      if (e.key === 'Enter') handleSwatchSelect(parsed)
+    function handleSwatchKeyDown(e: KeyboardEvent, parsed: ParsedColor): void {
+      if (e.key === 'Enter')
+        handleSwatchSelect(parsed)
     }
 
     return {
@@ -96,11 +102,11 @@ export default defineComponent({
       handleSwatchKeyDown
     }
   },
-  render () {
+  render() {
     const { clsPrefix } = this
     return (
       <div class={`${clsPrefix}-color-picker-swatches`}>
-        {this.parsedSwatchesRef.map((swatch) => (
+        {this.parsedSwatchesRef.map(swatch => (
           <div
             class={`${clsPrefix}-color-picker-swatch`}
             tabindex={0}

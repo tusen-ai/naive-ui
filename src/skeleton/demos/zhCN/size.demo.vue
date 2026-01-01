@@ -4,6 +4,12 @@
 使用 `size` 装成其他组件。
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const loading = ref(true)
+</script>
+
 <template>
   <n-space vertical>
     <n-space><n-switch v-model:value="loading" />加载</n-space>
@@ -23,15 +29,3 @@
     </n-space>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      loading: ref(true)
-    }
-  }
-})
-</script>

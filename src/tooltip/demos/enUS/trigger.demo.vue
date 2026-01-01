@@ -2,6 +2,12 @@
 # Trigger
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const showPopover = ref(false)
+</script>
+
 <template>
   <n-space>
     <n-tooltip placement="bottom" trigger="hover">
@@ -26,15 +32,3 @@
     </n-tooltip>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      showPopover: ref(false)
-    }
-  }
-})
-</script>

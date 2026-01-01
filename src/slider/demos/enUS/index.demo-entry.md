@@ -17,6 +17,7 @@ vertical.vue
 show-tooltip.vue
 multiple-debug.vue
 custom-thumb.vue
+custom-marks.vue
 ```
 
 ## API
@@ -29,7 +30,7 @@ custom-thumb.vue
 | disabled | `boolean` | `false` | Whether the slider is disabled. |  |
 | format-tooltip | `(value: number) => string \| number` | `undefined` | Format tooltip. |  |
 | keyboard | `boolean` | `true` | Whether the slider can be controlled keyboard. | 2.33.0 |
-| marks | `{ [markValue: number]: string }` | `undefined` | Marks of the slider. |  |
+| marks | `{ [markValue: number]: string \| (() => VNodeChild) }` | `undefined` | Marks of the slider | Render function since 2.40.0 |
 | max | `number` | `100` | Max value of the slider. |  |
 | min | `number` | `0` | Min value of the slider. |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `undefined` | Tooltip's placement | 2.25.0 |
@@ -41,6 +42,8 @@ custom-thumb.vue
 | vertical | `boolean` | `false` | Whether to enable vertical mode. |  |
 | value | `number \| [number, number] \| null` | `undefined` | Value of the slider. |  |
 | on-update:value | `(value: number \| [number, number]) => void` | `undefined` | Callback on value update. |  |
+| on-dragstart | `() => void` | `undefined` | Callback function of dragging start. | 2.36.0 |
+| on-dragend | `() => void` | `undefined` | Callback function of dragging end. | 2.36.0 |
 
 ### Slider Slots
 

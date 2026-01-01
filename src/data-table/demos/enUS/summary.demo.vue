@@ -4,22 +4,18 @@
 Use `summary` prop to render summary.
 </markdown>
 
-<template>
-  <n-data-table :columns="columns" :data="data" :summary="summary" />
-</template>
-
-<script lang="ts">
-import { defineComponent, h } from 'vue'
+<script lang="ts" setup>
 import type { DataTableColumns, DataTableCreateSummary } from 'naive-ui'
+import { h } from 'vue'
 
-type RowData = {
+interface RowData {
   key: number
   name: string
   age: number
   address: string
 }
 
-const createColumns = (): DataTableColumns<RowData> => {
+function createColumns(): DataTableColumns<RowData> {
   return [
     {
       type: 'selection'
@@ -39,26 +35,28 @@ const createColumns = (): DataTableColumns<RowData> => {
   ]
 }
 
-const createData = (): RowData[] => [
-  {
-    key: 0,
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park'
-  },
-  {
-    key: 1,
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park'
-  },
-  {
-    key: 2,
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park'
-  }
-]
+function createData(): RowData[] {
+  return [
+    {
+      key: 0,
+      name: 'John Brown',
+      age: 32,
+      address: 'New York No. 1 Lake Park'
+    },
+    {
+      key: 1,
+      name: 'Jim Green',
+      age: 42,
+      address: 'London No. 1 Lake Park'
+    },
+    {
+      key: 2,
+      name: 'Joe Black',
+      age: 32,
+      address: 'Sidney No. 1 Lake Park'
+    }
+  ]
+}
 
 const createSummary: DataTableCreateSummary = (pageData) => {
   return {
@@ -66,7 +64,7 @@ const createSummary: DataTableCreateSummary = (pageData) => {
       value: h(
         'span',
         { style: { color: 'red' } },
-        (pageData as RowData[]).reduce(
+        (pageData as unknown as RowData[]).reduce(
           (prevValue, row) => prevValue + row.age,
           0
         )
@@ -76,13 +74,11 @@ const createSummary: DataTableCreateSummary = (pageData) => {
   }
 }
 
-export default defineComponent({
-  setup () {
-    return {
-      summary: createSummary,
-      data: createData(),
-      columns: createColumns()
-    }
-  }
-})
+const summary = createSummary
+const data = createData()
+const columns = createColumns()
 </script>
+
+<template>
+  <n-data-table :columns="columns" :data="data" :summary="summary" />
+</template>

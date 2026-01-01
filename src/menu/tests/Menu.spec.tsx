@@ -1,14 +1,11 @@
-import { mount } from '@vue/test-utils'
+import type { MenuDividerOption, MenuGroupOption, MenuOption } from '../index'
+/* eslint-disable unused-imports/no-unused-vars */
 import { HappyOutline } from '@vicons/ionicons5'
-import { h, Comment } from 'vue'
+import { mount } from '@vue/test-utils'
 import { sleep } from 'seemly'
-import {
-  NMenu,
-  type MenuOption,
-  type MenuGroupOption,
-  type MenuDividerOption
-} from '../index'
+import { Comment, h } from 'vue'
 import { NIcon } from '../../icon'
+import { NMenu } from '../index'
 
 describe('n-menu', () => {
   it('should work with import on demand', () => {
@@ -23,6 +20,7 @@ describe('n-menu', () => {
       },
       {
         type: 'group',
+        key: 'group',
         children: [
           {
             label: 'l',
@@ -80,11 +78,13 @@ describe('n-menu', () => {
         key: 'initialj'
       }
     ]
-    function renderMenuIcon (option: any): any {
+    function renderMenuIcon(option: any): any {
       // return comment vnode, render placeholder for indent
-      if (option.key === 'mojito') return h(Comment)
+      if (option.key === 'mojito')
+        return h(Comment)
       // return falsy, don't render icon placeholder
-      if (option.key === 'initialj') return null
+      if (option.key === 'initialj')
+        return null
       // otherwise, render returns vnode
       return h(NIcon, null, { default: () => h(HappyOutline) })
     }
@@ -231,7 +231,7 @@ describe('n-menu', () => {
         ]
       }
     ]
-    function renderMenuIcon (): any {
+    function renderMenuIcon(): any {
       return h(NIcon, null, { default: () => h(HappyOutline) })
     }
     const wrapper = mount(NMenu, {
@@ -278,7 +278,7 @@ describe('n-menu', () => {
         ]
       }
     ]
-    function renderExpandIcon (): any {
+    function renderExpandIcon(): any {
       return h('span', { class: 'expand-icon' }, '1')
     }
     const wrapper = mount(NMenu, {
@@ -319,7 +319,7 @@ describe('n-menu', () => {
         ]
       }
     ]
-    function renderMenuExtra (): any {
+    function renderMenuExtra(): any {
       return 'test'
     }
     const wrapper = mount(NMenu, {
@@ -336,8 +336,7 @@ describe('n-menu', () => {
   })
 
   it('should accept empty object in type-checking phase', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const menu = <NMenu options={[{}]} />
+    ;<NMenu options={[{}]} />
   })
 
   it('should work with `defaultExpandedKeys` props', async () => {
@@ -383,8 +382,7 @@ describe('n-menu', () => {
   })
 
   it('accepts proper options', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const menu = (
+    ;(() => (
       <NMenu
         options={[
           {
@@ -416,7 +414,7 @@ describe('n-menu', () => {
           }
         ]}
       />
-    )
+    ))()
   })
 
   it('should work with `hidden` prop', async () => {

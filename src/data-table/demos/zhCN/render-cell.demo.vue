@@ -4,21 +4,17 @@
 你可以使用 `render-cell` 去渲染空状态。
 </markdown>
 
-<template>
-  <n-data-table :columns="columns" :data="data" :render-cell="renderCell" />
-</template>
-
-<script lang="ts">
-import { defineComponent, h } from 'vue'
-import { NText } from 'naive-ui'
+<script lang="ts" setup>
 import type { DataTableColumns } from 'naive-ui'
+import { NText } from 'naive-ui'
+import { h } from 'vue'
 
-type Song = {
+interface Song {
   no: number
   note: string
 }
 
-const createColumns = (): DataTableColumns<Song> => {
+function createColumns(): DataTableColumns<Song> {
   return [
     {
       title: '日期',
@@ -43,19 +39,16 @@ const data: Song[] = [
   { no: 19, note: '' }
 ]
 
-export default defineComponent({
-  setup () {
-    return {
-      data,
-      columns: createColumns(),
-      pagination: false as const,
-      renderCell: (value: string | number) => {
-        if (!value) {
-          return h(NText, { depth: 3 }, { default: () => '未填写' })
-        }
-        return value
-      }
-    }
+const columns = createColumns()
+
+function renderCell(value: string | number) {
+  if (!value) {
+    return h(NText, { depth: 3 }, { default: () => '未填写' })
   }
-})
+  return value
+}
 </script>
+
+<template>
+  <n-data-table :columns="columns" :data="data" :render-cell="renderCell" />
+</template>

@@ -2,7 +2,7 @@
 
 # Usage in SFC
 
-You can directly import components from Naive UI or install it globally to a Vue app.
+If you want to use the Single File Component(SFC) style, you can directly import components from Naive UI or install it globally to a Vue app.
 
 ## Import Directly (Recommended)
 
@@ -48,8 +48,8 @@ No tree-shaking. Bundle will have redundant codes.
 If you want to install globally but don't want all components, please see [Import on Demand](import-on-demand).
 
 ```js
-import { createApp } from 'vue'
 import naive from 'naive-ui'
+import { createApp } from 'vue'
 
 const app = createApp(App)
 app.use(naive)

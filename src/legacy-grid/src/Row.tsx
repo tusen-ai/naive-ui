@@ -1,19 +1,9 @@
-import {
-  defineComponent,
-  h,
-  type PropType,
-  provide,
-  type Ref,
-  toRef
-} from 'vue'
+import type { PropType, Ref } from 'vue'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { useMemo } from 'vooks'
-import {
-  createInjectionKey,
-  type ExtractPublicPropTypes,
-  formatLength,
-  keysOf
-} from '../../_utils'
-import { useConfig, useStyle, useRtl } from '../../_mixins'
+import { defineComponent, h, provide, toRef } from 'vue'
+import { useConfig, useRtl, useStyle } from '../../_mixins'
+import { createInjectionKey, formatLength, keysOf } from '../../_utils'
 import style from './styles/index.cssr'
 
 export interface RowInjection {
@@ -28,7 +18,7 @@ export const rowInjectionKey = createInjectionKey<RowInjection>('n-row')
 export const rowProps = {
   gutter: {
     type: [Array, Number, String] as PropType<
-    string | number | [number, number]
+      string | number | [number, number]
     >,
     default: 0
   },
@@ -43,7 +33,7 @@ export type RowProps = ExtractPublicPropTypes<typeof rowProps>
 export default defineComponent({
   name: 'Row',
   props: rowProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
     useStyle('-legacy-grid', style, mergedClsPrefixRef)
     const rtlEnabledRef = useRtl('Row', mergedRtlRef, mergedClsPrefixRef)
@@ -81,7 +71,7 @@ export default defineComponent({
       )
     }
   },
-  render () {
+  render() {
     return (
       <div
         class={[

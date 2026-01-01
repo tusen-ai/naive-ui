@@ -2,6 +2,12 @@
 # Basic
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const show = ref(true)
+</script>
+
 <template>
   <n-space vertical>
     <n-switch v-model:value="show">
@@ -20,15 +26,3 @@
     </n-collapse-transition>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      show: ref(true)
-    }
-  }
-})
-</script>

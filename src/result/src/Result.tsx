@@ -1,38 +1,33 @@
-import {
-  h,
-  defineComponent,
-  computed,
-  type PropType,
-  type CSSProperties
-} from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import { createKey } from '../../_utils'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type { ResultTheme } from '../styles'
+import { computed, defineComponent, h } from 'vue'
+import { NBaseIcon } from '../../_internal'
 import {
+  ErrorIcon,
   InfoIcon,
   SuccessIcon,
-  WarningIcon,
-  ErrorIcon
+  WarningIcon
 } from '../../_internal/icons'
-import { NBaseIcon } from '../../_internal'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { createKey } from '../../_utils'
 import { resultLight } from '../styles'
-import type { ResultTheme } from '../styles'
-import image404 from './404'
-import image500 from './500'
-import image418 from './418'
-import image403 from './403'
+import { render403 } from './403'
+import { render404 } from './404'
+import { render418 } from './418'
+import { render500 } from './500'
 import style from './styles/index.cssr'
 
-const iconMap = {
-  403: image403,
-  404: image404,
-  418: image418,
-  500: image500,
-  info: <InfoIcon />,
-  success: <SuccessIcon />,
-  warning: <WarningIcon />,
-  error: <ErrorIcon />
+const iconRenderMap = {
+  403: render403,
+  404: render404,
+  418: render418,
+  500: render500,
+  info: () => <InfoIcon />,
+  success: () => <SuccessIcon />,
+  warning: () => <WarningIcon />,
+  error: () => <ErrorIcon />
 }
 
 export const resultProps = {
@@ -43,7 +38,7 @@ export const resultProps = {
   },
   status: {
     type: String as PropType<
-    'info' | 'success' | 'warning' | 'error' | '404' | '403' | '500' | '418'
+      'info' | 'success' | 'warning' | 'error' | '404' | '403' | '500' | '418'
     >,
     default: 'info'
   },
@@ -53,10 +48,17 @@ export const resultProps = {
 
 export type ResultProps = ExtractPublicPropTypes<typeof resultProps>
 
+export interface ResultSlots {
+  default?: () => VNode[]
+  footer?: () => VNode[]
+  icon?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Result',
   props: resultProps,
-  setup (props) {
+  slots: Object as SlotsType<ResultSlots>,
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Result',
@@ -95,21 +97,21 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'result',
-        computed(() => {
-          const { size, status } = props
-          let hash = ''
-          if (size) {
-            hash += size[0]
-          }
-          if (status) {
-            hash += status[0]
-          }
-          return hash
-        }),
-        cssVarsRef,
-        props
-      )
+          'result',
+          computed(() => {
+            const { size, status } = props
+            let hash = ''
+            if (size) {
+              hash += size[0]
+            }
+            if (status) {
+              hash += status[0]
+            }
+            return hash
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     return {
@@ -119,7 +121,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { status, $slots, mergedClsPrefix, onRender } = this
     onRender?.()
     return (
@@ -130,7 +132,7 @@ export default defineComponent({
         <div class={`${mergedClsPrefix}-result-icon`}>
           {$slots.icon?.() || (
             <NBaseIcon clsPrefix={mergedClsPrefix}>
-              {{ default: () => iconMap[status] }}
+              {{ default: () => iconRenderMap[status]() }}
             </NBaseIcon>
           )}
         </div>

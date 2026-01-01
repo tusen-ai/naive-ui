@@ -1,3 +1,5 @@
+<!--single-column-->
+
 # 水印 Watermark
 
 出现在钱上的时候比较可爱。
@@ -8,6 +10,8 @@
 basic.vue
 fullscreen.vue
 image.vue
+multiline.vue
+custom.vue
 ```
 
 ## API
@@ -16,12 +20,12 @@ image.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
-| content | `string` | `undefined` | 水印文本 | 2.25.3 |
+| content | `string` | `undefined` | 水印文本 | 2.25.3，自 2.38.2 支持多行文本 |
 | cross | `boolean` | `false` | 是否跨越边界显示 | 2.25.3 |
 | debug | `boolean` | `false` | 是否显示调试信息 | 2.25.3 |
 | font-size | `number` | `14` | 字体大小 | 2.25.3 |
 | font-family | `string` | `undefined` | 字体族 | 2.25.3 |
-| font-style | `` 'normal' \| 'italic' \| `oblique ${number}deg`  `` | `normal` | 字体风格 | 2.25.3 |
+| font-style | ``'normal' \| 'italic' \| `oblique ${number}deg` `` | `normal` | 字体风格 | 2.25.3 |
 | font-variant | `string` | `''` | 字型 | 2.25.3 |
 | font-weight | `number` | `400` | 字重 | 2.25.3 |
 | font-color | `string` | `rgba(128, 128, 128, .3)` | 字体颜色 | 2.25.3 |
@@ -35,6 +39,7 @@ image.vue
 | image-width | `number` | `undefined` | 图片宽度 | 2.25.3 |
 | rotate | `number` | `0` | 旋转角度 | 2.25.3 |
 | selectable | `boolean` | `true` | 被水印覆盖的内容是否可选中 | 2.25.3 |
+| text-align | `'left' \| 'center' \| 'right'` | `'left'` | 在文本有多行的情况下，多行文本的对齐方式 | 2.38.2 |
 | width | `number` | `32` | 宽度 | 2.25.3 |
 | x-gap | `number` | `0` | x 轴间隔 | 2.25.3 |
 | x-offset | `number` | `0` | x 轴偏移 | 2.25.3 |

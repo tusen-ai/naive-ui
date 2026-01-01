@@ -1,9 +1,13 @@
-import { type HSLA, toHslaString } from 'seemly'
-import { defineComponent, type PropType, h, inject } from 'vue'
+import type { HSLA } from 'seemly'
+import type { PropType, SlotsType } from 'vue'
+import { toHslaString } from 'seemly'
+import { defineComponent, h, inject } from 'vue'
 import { colorPickerInjectionKey } from './context'
+import { getWCAGContrast } from './utils'
 
 export default defineComponent({
   name: 'ColorPickerTrigger',
+  slots: Object as SlotsType<Record<string, never>>,
   props: {
     clsPrefix: {
       type: String,
@@ -20,8 +24,7 @@ export default defineComponent({
     disabled: Boolean,
     onClick: Function as PropType<() => void>
   },
-  setup (props) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  setup(props) {
     const { colorPickerSlots, renderLabelRef } = inject(
       colorPickerInjectionKey,
       null
@@ -53,7 +56,7 @@ export default defineComponent({
               <div
                 class={`${clsPrefix}-color-picker-trigger__value`}
                 style={{
-                  color: hsla[2] > 50 || hsla[3] < 0.5 ? 'black' : 'white'
+                  color: getWCAGContrast(hsla) ? 'white' : 'black'
                 }}
               >
                 {renderLabel ? renderLabel(value) : value}

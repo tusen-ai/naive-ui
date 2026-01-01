@@ -2,6 +2,13 @@
 # 每页条数
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const page = ref(2)
+const pageSize = ref(20)
+</script>
+
 <template>
   <n-pagination
     v-model:page="page"
@@ -11,16 +18,3 @@
     :page-sizes="[10, 20, 30, 40]"
   />
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      page: ref(2),
-      pageSize: ref(20)
-    }
-  }
-})
-</script>

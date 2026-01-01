@@ -1,11 +1,20 @@
-import { h, defineComponent, type VNode, type PropType, onMounted } from 'vue'
-import { VirtualList } from 'vueuc'
-import { NButton, NxButton } from '../../../button'
-import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
-import type { MonthItem, YearItem, QuarterItem } from '../utils'
-import { MONTH_ITEM_HEIGHT } from '../config'
-import { useCalendar, useCalendarProps } from './use-calendar'
+import type { PropType, VNode } from 'vue'
 import type { OnPanelUpdateValueImpl } from '../interface'
+import type {
+  DatePickerClearSlotProps,
+  DatePickerConfirmSlotProps,
+  DatePickerNowSlotProps
+} from '../public-types'
+import type { MonthItem, QuarterItem, YearItem } from '../utils'
+import { defineComponent, h, onMounted } from 'vue'
+import { VirtualList } from 'vueuc'
+import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
+import { useLocale } from '../../../_mixins'
+import { resolveSlotWithTypedProps, resolveWrappedSlot } from '../../../_utils'
+import { NButton, NxButton } from '../../../button'
+import { MONTH_ITEM_HEIGHT } from '../config'
+import { getMonthString, getQuarterString, getYearString } from '../utils'
+import { useCalendar, useCalendarProps } from './use-calendar'
 
 /**
  * Month Panel
@@ -24,18 +33,31 @@ export default defineComponent({
     // panelHeader prop
     useAsQuickJump: Boolean
   },
-  setup (props) {
+  setup(props) {
     const useCalendarRef = useCalendar(props, props.type)
+    const { dateLocaleRef } = useLocale('DatePicker')
     const getRenderContent = (
       item: YearItem | MonthItem | QuarterItem
     ): number | string => {
       switch (item.type) {
         case 'year':
-          return item.dateObject.year
+          return getYearString(
+            item.dateObject.year,
+            item.yearFormat,
+            dateLocaleRef.value.locale
+          )
         case 'month':
-          return item.dateObject.month + 1
+          return getMonthString(
+            item.dateObject.month,
+            item.monthFormat,
+            dateLocaleRef.value.locale
+          )
         case 'quarter':
-          return `Q${item.dateObject.quarter}`
+          return getQuarterString(
+            item.dateObject.quarter,
+            item.quarterFormat,
+            dateLocaleRef.value.locale
+          )
       }
     }
     const { useAsQuickJump } = props
@@ -44,29 +66,51 @@ export default defineComponent({
       i: number,
       mergedClsPrefix: string
     ): VNode => {
-      const { mergedIsDateDisabled, handleDateClick, handleQuickMonthClick } =
-        useCalendarRef
+      const { mergedIsDateDisabled, handleDateClick, handleQuickMonthClick }
+        = useCalendarRef
       return (
         <div
           data-n-date
           key={i}
           class={[
             `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item`,
-            {
-              [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`]:
-                item.isCurrent,
-              [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`]:
-                item.selected,
-              [`${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`]:
-                !useAsQuickJump && mergedIsDateDisabled(item.ts)
-            }
+            item.isCurrent
+            && `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--current`,
+            item.selected
+            && `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--selected`,
+            !useAsQuickJump
+            && mergedIsDateDisabled(
+              item.ts,
+              item.type === 'year'
+                ? {
+                    type: 'year',
+                    year: item.dateObject.year
+                  }
+                : item.type === 'month'
+                  ? {
+                      type: 'month',
+                      year: item.dateObject.year,
+                      month: item.dateObject.month
+                    }
+                  : item.type === 'quarter'
+                    ? {
+                        type: 'month',
+                        year: item.dateObject.year,
+                        month: item.dateObject.quarter
+                      }
+                    : (null as never)
+            )
+            && `${mergedClsPrefix}-date-panel-month-calendar__picker-col-item--disabled`
           ]}
           onClick={() => {
-            useAsQuickJump
-              ? handleQuickMonthClick(item, (value) => {
+            if (useAsQuickJump) {
+              handleQuickMonthClick(item, (value) => {
                 ;(props.onUpdateValue as OnPanelUpdateValueImpl)(value, false)
               })
-              : handleDateClick(item)
+            }
+            else {
+              handleDateClick(item)
+            }
           }}
         >
           {getRenderContent(item)}
@@ -78,7 +122,7 @@ export default defineComponent({
     })
     return { ...useCalendarRef, renderItem }
   },
-  render () {
+  render() {
     const {
       mergedClsPrefix,
       mergedTheme,
@@ -163,18 +207,16 @@ export default defineComponent({
             </div>
           ) : null}
         </div>
-        {this.datePickerSlots.footer ? (
-          <div class={`${mergedClsPrefix}-date-panel-footer`}>
-            {{
-              default: this.datePickerSlots.footer
-            }}
-          </div>
-        ) : null}
+        {resolveWrappedSlot(this.datePickerSlots.footer, (children) => {
+          return children ? (
+            <div class={`${mergedClsPrefix}-date-panel-footer`}>{children}</div>
+          ) : null
+        })}
         {actions?.length || shortcuts ? (
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
-              {shortcuts &&
-                Object.keys(shortcuts).map((key) => {
+              {shortcuts
+                && Object.keys(shortcuts).map((key) => {
                   const shortcut = shortcuts[key]
                   return Array.isArray(shortcut) ? null : (
                     <NxButton
@@ -195,38 +237,66 @@ export default defineComponent({
                 })}
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
-              {actions?.includes('clear') ? (
-                <NButton
-                  theme={mergedTheme.peers.Button}
-                  themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  onClick={this.handleClearClick}
-                >
-                  {{ default: () => this.locale.clear }}
-                </NButton>
-              ) : null}
-              {actions?.includes('now') ? (
-                <NButton
-                  theme={mergedTheme.peers.Button}
-                  themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  onClick={this.handleNowClick}
-                >
-                  {{ default: () => this.locale.now }}
-                </NButton>
-              ) : null}
-              {actions?.includes('confirm') ? (
-                <NButton
-                  theme={mergedTheme.peers.Button}
-                  themeOverrides={mergedTheme.peerOverrides.Button}
-                  size="tiny"
-                  type="primary"
-                  disabled={this.isDateInvalid}
-                  onClick={this.handleConfirmClick}
-                >
-                  {{ default: () => this.locale.confirm }}
-                </NButton>
-              ) : null}
+              {actions?.includes('clear')
+                ? resolveSlotWithTypedProps(
+                    this.datePickerSlots.clear,
+                    {
+                      onClear: this.handleClearClick,
+                      text: this.locale.clear
+                    } satisfies DatePickerClearSlotProps,
+                    () => [
+                      <NButton
+                        theme={mergedTheme.peers.Button}
+                        themeOverrides={mergedTheme.peerOverrides.Button}
+                        size="tiny"
+                        onClick={this.handleClearClick}
+                      >
+                        {{ default: () => this.locale.clear }}
+                      </NButton>
+                    ]
+                  )
+                : null}
+              {actions?.includes('now')
+                ? resolveSlotWithTypedProps(
+                    this.datePickerSlots.now,
+                    {
+                      onNow: this.handleNowClick,
+                      text: this.locale.now
+                    } satisfies DatePickerNowSlotProps,
+                    () => [
+                      <NButton
+                        theme={mergedTheme.peers.Button}
+                        themeOverrides={mergedTheme.peerOverrides.Button}
+                        size="tiny"
+                        onClick={this.handleNowClick}
+                      >
+                        {{ default: () => this.locale.now }}
+                      </NButton>
+                    ]
+                  )
+                : null}
+              {actions?.includes('confirm')
+                ? resolveSlotWithTypedProps(
+                    this.datePickerSlots.confirm,
+                    {
+                      onConfirm: this.handleConfirmClick,
+                      disabled: this.isDateInvalid,
+                      text: this.locale.confirm
+                    } satisfies DatePickerConfirmSlotProps,
+                    () => [
+                      <NButton
+                        theme={mergedTheme.peers.Button}
+                        themeOverrides={mergedTheme.peerOverrides.Button}
+                        size="tiny"
+                        type="primary"
+                        disabled={this.isDateInvalid}
+                        onClick={this.handleConfirmClick}
+                      >
+                        {{ default: () => this.locale.confirm }}
+                      </NButton>
+                    ]
+                  )
+                : null}
             </div>
           </div>
         ) : null}

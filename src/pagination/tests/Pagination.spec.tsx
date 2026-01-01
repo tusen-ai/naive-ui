@@ -1,10 +1,7 @@
-import { h } from 'vue'
+import type { PaginationInfo, PaginationRenderLabel } from '../index'
 import { mount } from '@vue/test-utils'
-import {
-  NPagination,
-  type PaginationRenderLabel,
-  type PaginationInfo
-} from '../index'
+import { h } from 'vue'
+import { NPagination } from '../index'
 
 describe('n-pagination', () => {
   it('should work with import on demand', () => {
@@ -80,15 +77,17 @@ describe('n-pagination', () => {
     wrapper.unmount()
   })
   it('page-sizes should has correct type', () => {
-    ;<NPagination
-      pageSizes={[
-        10,
-        {
-          label: '20',
-          value: 20
-        }
-      ]}
-    />
+    ;(() => (
+      <NPagination
+        pageSizes={[
+          10,
+          {
+            label: '20',
+            value: 20
+          }
+        ]}
+      />
+    ))()
   })
   it('has currect default page size', () => {
     const wrapper = mount(() => (
@@ -102,7 +101,8 @@ describe('n-pagination', () => {
 })
 it('should work with label slot', async () => {
   const labelSlot: PaginationRenderLabel = (props) => {
-    if (props.type === 'page') return `(${props.node})`
+    if (props.type === 'page')
+      return `(${props.node})`
     return props.node
   }
   const wrapper = mount(NPagination, {

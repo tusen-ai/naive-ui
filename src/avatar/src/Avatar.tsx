@@ -1,37 +1,39 @@
+import type {
+  ImgHTMLAttributes,
+  PropType,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { IntersectionObserverOptions } from '../../image/src/utils'
+import type { AvatarTheme } from '../styles'
+import type { ObjectFit, Size } from './interface'
 import {
-  h,
-  ref,
   computed,
   defineComponent,
-  type PropType,
+  h,
   inject,
-  watch,
-  type VNodeChild,
-  watchEffect,
-  onMounted,
   onBeforeUnmount,
-  type ImgHTMLAttributes
+  onMounted,
+  ref,
+  watch,
+  watchEffect
 } from 'vue'
 import { VResizeObserver } from 'vueuc'
-import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
-import {
-  type IntersectionObserverOptions,
-  observeIntersection
-} from '../../image/src/utils'
-import { tagInjectionKey } from '../../tag/src/Tag'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import type { ThemeProps } from '../../_mixins'
 import {
-  createKey,
   color2Class,
-  resolveWrappedSlot,
-  resolveSlot
+  createKey,
+  resolveSlot,
+  resolveWrappedSlot
 } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
+import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
+import { observeIntersection } from '../../image/src/utils'
+import { tagInjectionKey } from '../../tag/src/Tag'
 import { avatarLight } from '../styles'
-import type { AvatarTheme } from '../styles'
 import { avatarGroupInjectionKey } from './context'
-import type { Size, ObjectFit } from './interface'
 import style from './styles/index.cssr'
 
 export const avatarProps = {
@@ -65,10 +67,17 @@ export const avatarProps = {
 
 export type AvatarProps = ExtractPublicPropTypes<typeof avatarProps>
 
+export interface AvatarSlots {
+  default?: () => VNode[]
+  placeholder?: () => VNode[]
+  fallback?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Avatar',
   props: avatarProps,
-  setup (props) {
+  slots: Object as SlotsType<AvatarSlots>,
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const hasLoadErrorRef = ref(false)
     let memoedTextHtml: string | null = null
@@ -97,9 +106,11 @@ export default defineComponent({
     const NAvatarGroup = inject(avatarGroupInjectionKey, null)
     const mergedSizeRef = computed(() => {
       const { size } = props
-      if (size) return size
+      if (size)
+        return size
       const { size: avatarGroupSize } = NAvatarGroup || {}
-      if (avatarGroupSize) return avatarGroupSize
+      if (avatarGroupSize)
+        return avatarGroupSize
       return 'medium'
     })
     const themeRef = useTheme(
@@ -112,31 +123,21 @@ export default defineComponent({
     )
     const TagInjection = inject(tagInjectionKey, null)
     const mergedRoundRef = computed(() => {
-      if (NAvatarGroup) return true
+      if (NAvatarGroup)
+        return true
       const { round, circle } = props
-      if (round !== undefined || circle !== undefined) return round || circle
+      if (round !== undefined || circle !== undefined)
+        return round || circle
       if (TagInjection) {
         return TagInjection.roundRef.value
       }
       return false
     })
     const mergedBorderedRef = computed(() => {
-      if (NAvatarGroup) return true
+      if (NAvatarGroup)
+        return true
       return props.bordered || false
     })
-    const handleError = (e: Event): void => {
-      if (!shouldStartLoadingRef.value) return
-      hasLoadErrorRef.value = true
-      const { onError, imgProps } = props
-      imgProps?.onError?.(e)
-      if (onError) {
-        onError(e)
-      }
-    }
-    watch(
-      () => props.src,
-      () => (hasLoadErrorRef.value = false)
-    )
     const cssVarsRef = computed(() => {
       const size = mergedSizeRef.value
       const round = mergedRoundRef.value
@@ -156,7 +157,8 @@ export default defineComponent({
       let height: string
       if (typeof size === 'number') {
         height = `${size}px`
-      } else {
+      }
+      else {
         height = themeRef.value.self[createKey('height', size)]
       }
       return {
@@ -172,59 +174,68 @@ export default defineComponent({
     })
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'avatar',
-        computed(() => {
-          const size = mergedSizeRef.value
-          const round = mergedRoundRef.value
-          const bordered = mergedBorderedRef.value
-          const { color } = props
-          let hash = ''
-          if (size) {
-            if (typeof size === 'number') {
-              hash += `a${size}`
-            } else {
-              hash += size[0]
+          'avatar',
+          computed(() => {
+            const size = mergedSizeRef.value
+            const round = mergedRoundRef.value
+            const bordered = mergedBorderedRef.value
+            const { color } = props
+            let hash = ''
+            if (size) {
+              if (typeof size === 'number') {
+                hash += `a${size}`
+              }
+              else {
+                hash += size[0]
+              }
             }
-          }
-          if (round) {
-            hash += 'b'
-          }
-          if (bordered) {
-            hash += 'c'
-          }
-          if (color) {
-            hash += color2Class(color)
-          }
-          return hash
-        }),
-        cssVarsRef,
-        props
-      )
+            if (round) {
+              hash += 'b'
+            }
+            if (bordered) {
+              hash += 'c'
+            }
+            if (color) {
+              hash += color2Class(color)
+            }
+            return hash
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     const shouldStartLoadingRef = ref(!props.lazy)
 
     onMounted(() => {
-      if (isImageSupportNativeLazy) {
-        return
+      // Use IntersectionObserver if lazy and intersectionObserverOptions is set
+      if (props.lazy && props.intersectionObserverOptions) {
+        let unobserve: (() => void) | undefined
+        const stopWatchHandle = watchEffect(() => {
+          unobserve?.()
+          unobserve = undefined
+          if (props.lazy) {
+            unobserve = observeIntersection(
+              selfRef.value,
+              props.intersectionObserverOptions,
+              shouldStartLoadingRef
+            )
+          }
+        })
+        onBeforeUnmount(() => {
+          stopWatchHandle()
+          unobserve?.()
+        })
       }
-      let unobserve: (() => void) | undefined
-      const stopWatchHandle = watchEffect(() => {
-        unobserve?.()
-        unobserve = undefined
-        if (props.lazy) {
-          unobserve = observeIntersection(
-            selfRef.value,
-            props.intersectionObserverOptions,
-            shouldStartLoadingRef
-          )
-        }
-      })
-      onBeforeUnmount(() => {
-        stopWatchHandle()
-        unobserve?.()
-      })
     })
+
+    watch(
+      () => props.src || props.imgProps?.src,
+      () => {
+        hasLoadErrorRef.value = false
+      }
+    )
+
     const loadedRef = ref(!props.lazy)
 
     return {
@@ -237,44 +248,52 @@ export default defineComponent({
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       hasLoadError: hasLoadErrorRef,
-      handleError,
       shouldStartLoading: shouldStartLoadingRef,
       loaded: loadedRef,
+      mergedOnError: (e: Event) => {
+        if (!shouldStartLoadingRef.value)
+          return
+        hasLoadErrorRef.value = true
+        const { onError, imgProps: { onError: imgPropsOnError } = {} } = props
+        onError?.(e)
+        imgPropsOnError?.(e)
+      },
       mergedOnLoad: (e: Event) => {
-        const { onLoad, imgProps } = props
+        const { onLoad, imgProps: { onLoad: imgPropsOnLoad } = {} } = props
         onLoad?.(e)
-        imgProps?.onLoad?.(e)
+        imgPropsOnLoad?.(e)
         loadedRef.value = true
       }
     }
   },
-  render () {
+  render() {
     const {
       $slots,
       src,
       mergedClsPrefix,
       lazy,
       onRender,
-      mergedOnLoad,
-      shouldStartLoading,
       loaded,
-      hasLoadError
+      hasLoadError,
+      imgProps = {}
     } = this
     onRender?.()
     let img: VNodeChild
-    const placeholderNode =
-      !loaded &&
-      !hasLoadError &&
-      (this.renderPlaceholder
-        ? this.renderPlaceholder()
-        : this.$slots.placeholder?.())
+    const placeholderNode
+      = !loaded
+        && !hasLoadError
+        && (this.renderPlaceholder
+          ? this.renderPlaceholder()
+          : this.$slots.placeholder?.())
+
     if (this.hasLoadError) {
       img = this.renderFallback
         ? this.renderFallback()
         : resolveSlot($slots.fallback, () => [
             <img src={this.fallbackSrc} style={{ objectFit: this.objectFit }} />
-        ])
-    } else {
+          ])
+    }
+    else {
       img = resolveWrappedSlot($slots.default, (children) => {
         if (children) {
           return (
@@ -288,27 +307,29 @@ export default defineComponent({
               }}
             </VResizeObserver>
           )
-        } else if (src) {
-          const { imgProps } = this
+        }
+        else if (src || imgProps.src) {
+          const loadSrc = this.src || imgProps.src
           return h('img', {
             ...imgProps,
             loading:
               // If interseciton observer options is set, do not use native lazy
-              isImageSupportNativeLazy &&
-              !this.intersectionObserverOptions &&
-              lazy
+              isImageSupportNativeLazy
+              && !this.intersectionObserverOptions
+              && lazy
                 ? 'lazy'
                 : 'eager',
-            src: isImageSupportNativeLazy
-              ? src
-              : shouldStartLoading || loaded
-                ? src
-                : undefined,
-            onLoad: mergedOnLoad,
-            'data-image-src': src,
-            onError: this.handleError,
+            src:
+              lazy && this.intersectionObserverOptions
+                ? this.shouldStartLoading
+                  ? loadSrc
+                  : undefined
+                : loadSrc,
+            'data-image-src': loadSrc,
+            onLoad: this.mergedOnLoad,
+            onError: this.mergedOnError,
             style: [
-              imgProps?.style,
+              imgProps.style || '',
               { objectFit: this.objectFit },
               placeholderNode
                 ? {

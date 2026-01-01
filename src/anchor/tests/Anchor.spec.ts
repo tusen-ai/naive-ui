@@ -81,7 +81,7 @@ describe('n-anchor', () => {
         }
       },
       slots: {
-        default () {
+        default() {
           return h(NAnchorLink, {
             title: 'testTitle',
             href: '#testHref'

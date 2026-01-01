@@ -1,20 +1,19 @@
+import type { HSL, HSLA, HSV, HSVA, RGB, RGBA } from 'seemly'
+import type { PropType } from 'vue'
+import type { ColorPickerMode } from './utils'
 import {
-  type HSVA,
-  type HSLA,
-  type RGBA,
-  toHsvaString,
-  toRgbaString,
-  toHslaString,
   toHexaString,
   toHexString,
+  toHslaString,
+  toHslString,
+  toHsvaString,
   toHsvString,
-  toRgbString,
-  toHslString
+  toRgbaString,
+  toRgbString
 } from 'seemly'
-import { h, defineComponent, type PropType } from 'vue'
+import { defineComponent, h } from 'vue'
 import { NInputGroup } from '../../input'
 import ColorInputUnit from './ColorInputUnit'
-import type { ColorPickerMode } from './utils'
 
 export default defineComponent({
   name: 'ColorInput',
@@ -53,9 +52,9 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
+  setup(props) {
     return {
-      handleUnitUpdateValue (index: number, value: number | string) {
+      handleUnitUpdateValue(index: number, value: number | string) {
         const { showAlpha } = props
         if (props.mode === 'hex') {
           props.onUpdateValue(
@@ -66,33 +65,40 @@ export default defineComponent({
         let nextValueArr: any
         if (props.valueArr === null) {
           nextValueArr = [0, 0, 0, 0]
-        } else {
+        }
+        else {
           nextValueArr = Array.from(props.valueArr) as typeof props.valueArr
         }
         switch (props.mode) {
           case 'hsv':
             nextValueArr[index] = value
             props.onUpdateValue(
-              (showAlpha ? toHsvaString : toHsvString)(nextValueArr)
+              (showAlpha ? toHsvaString : toHsvString)(
+                nextValueArr as HSVA | HSV
+              )
             )
             break
           case 'rgb':
             nextValueArr[index] = value
             props.onUpdateValue(
-              (showAlpha ? toRgbaString : toRgbString)(nextValueArr)
+              (showAlpha ? toRgbaString : toRgbString)(
+                nextValueArr as RGBA | RGB
+              )
             )
             break
           case 'hsl':
             nextValueArr[index] = value
             props.onUpdateValue(
-              (showAlpha ? toHslaString : toHslString)(nextValueArr)
+              (showAlpha ? toHslaString : toHslString)(
+                nextValueArr as HSLA | HSL
+              )
             )
             break
         }
       }
     }
   },
-  render () {
+  render() {
     const { clsPrefix, modes } = this
     return (
       <div class={`${clsPrefix}-color-picker-input`}>
@@ -113,16 +119,17 @@ export default defineComponent({
                 // hex and rgba shares the same value arr
                 let hexValue: string | null = null
                 try {
-                  hexValue =
-                    valueArr === null
+                  hexValue
+                    = valueArr === null
                       ? null
                       : (showAlpha ? toHexaString : toHexString)(
                           valueArr as RGBA
                         )
-                } catch {}
+                }
+                catch {}
                 return (
                   <ColorInputUnit
-                    label={'HEX'}
+                    label="HEX"
                     showAlpha={showAlpha}
                     value={hexValue}
                     onUpdateValue={(unitValue) => {

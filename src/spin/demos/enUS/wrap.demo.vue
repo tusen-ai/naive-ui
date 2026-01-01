@@ -4,6 +4,12 @@
 You can wrap a component inside spin.
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const show = ref(false)
+</script>
+
 <template>
   <n-space vertical>
     <n-spin :show="show">
@@ -16,15 +22,3 @@ You can wrap a component inside spin.
     </n-button>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      show: ref(false)
-    }
-  }
-})
-</script>

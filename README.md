@@ -7,6 +7,15 @@
 <p align="center"><b>Fairly Complete, Theme Customizable, Uses TypeScript, Fast</b></p>
 <p align="center">Kinda Interesting</p>
 
+<p align="center">
+  <a href="https://npmjs.com/package/naive-ui">
+    <img src="https://img.shields.io/npm/v/naive-ui.svg" alt="npm">
+  </a>
+  <a href="https://pkg.pr.new/~/tusen-ai/naive-ui">
+    <img src="https://pkg.pr.new/badge/tusen-ai/naive-ui" alt="pkg.pr.new">
+  </a>
+</p>
+
 <p align="center">English | <a href="README.zh-CN.md">中文</a></p>
 
 ## Documentation
@@ -20,14 +29,16 @@
 - DingTalk Group 2 (Member limit reached) 35886835
 - DingTalk Group 3 (Member limit reached) 32377370
 - DingTalk Group 4 (Member limit reached) 8165002788
-- DingTalk Group 5 31205022250
+- DingTalk Group 5 (Member limit reached) 31205022250
+- DingTalk Group 6 62720001971
+
 - [Awesome Naive UI](https://github.com/naive-ui/awesome-naive)
 
 ## Features
 
 ### Fairly Complete
 
-There are more than 80 components. Hope they can help you write less code.
+There are more than 90 components. Hope they can help you write less code.
 
 What's more, they are all treeshakable.
 
@@ -45,7 +56,7 @@ What's more, you don't need to import any CSS to use the components.
 
 ### Fast
 
-I try to make it not rather slow. At least select, tree, transfer, table and cascader work with virtual list.
+I try to make it not rather slow. All data components works with virtual list by default.
 
 What's more, ..., no more. Just enjoy it.
 
@@ -81,4 +92,4 @@ Please see [CONTRIBUTING.md](https://github.com/tusen-ai/naive-ui/blob/main/CONT
 
 Naive UI is licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-Graphics resouces of `result` component is licensed under the [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). The graphics resources come from [Twemoji](https://github.com/twitter/twemoji).
+Graphics resources of `result` component is licensed under the [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). The graphics resources come from [Twemoji](https://github.com/twitter/twemoji).

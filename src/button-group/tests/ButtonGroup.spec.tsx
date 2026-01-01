@@ -1,7 +1,7 @@
-import { h } from 'vue'
 import { mount } from '@vue/test-utils'
-import { NButtonGroup } from '../index'
+import { h } from 'vue'
 import { NButton } from '../../button/index'
+import { NButtonGroup } from '../index'
 
 describe('n-button-group', () => {
   it('should work with import on demand', () => {

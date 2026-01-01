@@ -1,0 +1,100 @@
+import type { CSSProperties, PropType, Ref } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { FloatButtonGroupTheme } from '../styles/light'
+import { computed, defineComponent, h, provide, toRef } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { createInjectionKey, formatLength } from '../../_utils'
+import floatButtonGroupLight from '../styles/light'
+import style from './styles/index.cssr'
+
+export interface ButtonGroupInjection {
+  shapeRef: Ref<'circle' | 'square'>
+}
+
+export const floatButtonGroupProps = {
+  ...(useTheme.props as ThemeProps<FloatButtonGroupTheme>),
+  left: [Number, String] as PropType<string | number>,
+  right: [Number, String] as PropType<string | number>,
+  top: [Number, String] as PropType<string | number>,
+  bottom: [Number, String] as PropType<string | number>,
+  shape: {
+    type: String as PropType<'square' | 'circle'>,
+    default: 'circle'
+  },
+  position: {
+    type: String as PropType<'relative' | 'absolute' | 'fixed'>,
+    default: 'fixed'
+  }
+} as const
+
+export type FloatButtonGroupProps = ExtractPublicPropTypes<
+  typeof floatButtonGroupProps
+>
+
+export const floatButtonGroupInjectionKey
+  = createInjectionKey<ButtonGroupInjection>('n-float-button-group')
+
+export default defineComponent({
+  name: 'FloatButtonGroup',
+  props: floatButtonGroupProps,
+  setup(props) {
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const themeRef = useTheme(
+      'FloatButtonGroup',
+      '-float-button-group',
+      style,
+      floatButtonGroupLight,
+      props,
+      mergedClsPrefixRef
+    )
+    const cssVarsRef = computed<Record<string, string>>(() => {
+      const {
+        self: { color, boxShadow, buttonBorderColor, borderRadiusSquare },
+        common: { cubicBezierEaseInOut }
+      } = themeRef.value
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-box-shadow': boxShadow,
+        '--n-color': color,
+        '--n-button-border-color': buttonBorderColor,
+        '--n-border-radius-square': borderRadiusSquare,
+        position: props.position,
+        left: formatLength(props.left) || '',
+        right: formatLength(props.right) || '',
+        top: formatLength(props.top) || '',
+        bottom: formatLength(props.bottom) || ''
+      }
+    })
+
+    provide(floatButtonGroupInjectionKey, {
+      shapeRef: toRef(props, 'shape')
+    })
+
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass('float-button', undefined, cssVarsRef, props)
+      : undefined
+
+    return {
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      mergedClsPrefix: mergedClsPrefixRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
+    }
+  },
+  render() {
+    const { mergedClsPrefix, cssVars, shape } = this
+    return (
+      <div
+        class={[
+          `${mergedClsPrefix}-float-button-group`,
+          `${mergedClsPrefix}-float-button-group--${shape}-shape`
+        ]}
+        style={cssVars as CSSProperties}
+        role="group"
+      >
+        {this.$slots}
+      </div>
+    )
+  }
+})

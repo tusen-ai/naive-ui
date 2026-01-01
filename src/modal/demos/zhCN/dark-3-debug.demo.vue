@@ -2,31 +2,12 @@
 # Dark Debug 3
 </markdown>
 
-<template>
-  <n-button @click="showModal = !showModal">
-    Toggle
-  </n-button>
-  <n-modal
-    v-model:show="showModal"
-    title="Dark Modal Debug"
-    preset="card"
-    :style="{ marginTop: '24px', marginBottom: '24px', width: '800px' }"
-  >
-    <n-data-table
-      ref="table"
-      :columns="columns"
-      :data="data"
-      :pagination="pagination"
-      :max-height="250"
-      :scroll-x="1800"
-    />
-  </n-modal>
-</template>
-
-<script lang="ts">
-import { h, defineComponent } from 'vue'
-import { DataTableColumns } from 'naive-ui'
+<script lang="ts" setup>
+import type { DataTableColumns } from 'naive-ui'
 import { repeat } from 'seemly'
+import { computed, h, ref } from 'vue'
+
+const showModal = ref(false)
 
 const columns: DataTableColumns<{
   key: number
@@ -36,7 +17,7 @@ const columns: DataTableColumns<{
 }> = [
   {
     type: 'selection',
-    disabled (row) {
+    disabled(row) {
       return row.name === 'Edward King 3'
     },
     fixed: 'left'
@@ -75,21 +56,21 @@ const columns: DataTableColumns<{
   {
     title: 'Row',
     key: 'row',
-    render (row, index) {
+    render(row, index) {
       return h('span', ['row ', index])
     }
   },
   {
     title: 'Row1',
     key: 'row1',
-    render (row, index) {
+    render(row, index) {
       return h('span', ['row ', index])
     }
   },
   {
     title: 'Row2',
     key: 'row2',
-    render (row, index) {
+    render(row, index) {
       return h('span', ['row ', index])
     }
   },
@@ -108,18 +89,27 @@ const data = repeat(46, undefined).map((_, index) => ({
   address: `London, Park Lane no. ${index}`
 }))
 
-export default defineComponent({
-  data () {
-    return {
-      showModal: false,
-      data,
-      columns
-    }
-  },
-  computed: {
-    pagination () {
-      return { pageSize: 10 }
-    }
-  }
+const pagination = computed(() => {
+  return { pageSize: 10 }
 })
 </script>
+
+<template>
+  <n-button @click="showModal = !showModal">
+    Toggle
+  </n-button>
+  <n-modal
+    v-model:show="showModal"
+    title="Dark Modal Debug"
+    preset="card"
+    :style="{ marginTop: '24px', marginBottom: '24px', width: '800px' }"
+  >
+    <n-data-table
+      :columns="columns"
+      :data="data"
+      :pagination="pagination"
+      :max-height="250"
+      :scroll-x="1800"
+    />
+  </n-modal>
+</template>

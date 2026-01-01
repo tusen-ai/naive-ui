@@ -1,10 +1,10 @@
-import { commonLight } from '../../_styles/common'
 import type { ThemeCommonVars } from '../../_styles/common'
-import { createTheme } from '../../_mixins'
 import { internalSelectMenuLight } from '../../_internal/select-menu/styles'
+import { createTheme } from '../../_mixins'
+import { commonLight } from '../../_styles/common'
 import { inputLight } from '../../input/styles'
 
-const self = (vars: ThemeCommonVars) => {
+function self(vars: ThemeCommonVars) {
   const { boxShadow2 } = vars
   return {
     menuBoxShadow: boxShadow2

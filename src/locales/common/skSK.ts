@@ -31,6 +31,7 @@ const skSK: NLocale = {
     dateFormat: 'd-M-yyyy',
     dateTimeFormat: 'd-M-yyyy HH:mm:ss',
     quarterFormat: 'qqq-yyyy',
+    weekFormat: 'YYYY-w',
     clear: 'Vyčistiť',
     now: 'Teraz',
     confirm: 'Potvrdiť',
@@ -41,13 +42,13 @@ const skSK: NLocale = {
     monthPlaceholder: 'Vyberte mesiac',
     yearPlaceholder: 'Vyberte rok',
     quarterPlaceholder: 'Vyberte štvrťrok',
+    weekPlaceholder: 'Vyberte týždeň',
     startDatePlaceholder: 'Dátum začiatku',
     endDatePlaceholder: 'Dátum ukončenia',
     startDatetimePlaceholder: 'Dátum a čas začiatku',
     endDatetimePlaceholder: 'Dátum a čas ukončenia ',
-    // FIXME: translation needed
-    startMonthPlaceholder: 'Start Month',
-    endMonthPlaceholder: 'End Month',
+    startMonthPlaceholder: 'Začiatok mesiaca',
+    endMonthPlaceholder: 'Koniec mesiaca',
     monthBeforeYear: true,
     firstDayOfWeek: 6 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
     today: 'Dnes'
@@ -62,13 +63,12 @@ const skSK: NLocale = {
     sourceTitle: 'Zdroj',
     targetTitle: 'Cieľ'
   },
-  // TODO: translation
   Transfer: {
-    selectAll: 'Select all',
-    unselectAll: 'Unselect all',
-    clearAll: 'Clear',
-    total: (num: number): string => `Total ${num} items`,
-    selected: (num: number): string => `${num} items selected`
+    selectAll: 'Vybrať všetko',
+    unselectAll: 'odznačiť všetko',
+    clearAll: 'Vyčistiť',
+    total: (num: number): string => `Celkom ${num} položiek`,
+    selected: (num: number): string => `Vybratých ${num} položiek`
   },
   Empty: {
     description: 'Žiadne dáta'
@@ -80,10 +80,11 @@ const skSK: NLocale = {
     placeholder: 'Vybrať čas',
     positiveText: 'OK',
     negativeText: 'Zrušiť',
-    now: 'Teraz'
+    now: 'Teraz',
+    clear: 'Vyčistiť'
   },
   Pagination: {
-    goto: 'Ísť',
+    goto: 'Ísť na',
     selectionSuffix: 'Strana'
   },
   DynamicTags: {
@@ -105,13 +106,12 @@ const skSK: NLocale = {
     title: 'Editor tém',
     clearAllVars: 'Vymazať všetky premenné',
     clearSearch: 'Vymazať vyhľadávanie',
-    filterCompName: 'Názov komponentu filtra',
-    filterVarName: 'Názov premennej filtra',
+    filterCompName: 'Filtrovať názov komponentu',
+    filterVarName: 'Filtrovať názov premennej',
     import: 'Importovať',
     export: 'Exportovať',
     restore: 'Obnoviť pôvodné nastavenia'
   },
-  // TODO: translation
   Image: {
     tipPrevious: 'Predchádzajúci obrázok (←)',
     tipNext: 'Ďalší obrázok (→)',
@@ -121,8 +121,13 @@ const skSK: NLocale = {
     tipZoomIn: 'Priblížiť',
     tipDownload: 'Sťahovať',
     tipClose: 'Zavrieť (Esc)',
-    // TODO: translation
-    tipOriginalSize: 'Zoom to original size'
+    tipOriginalSize: 'Priblížiť na pôvodnú veľkosť'
+  },
+  Heatmap: {
+    less: 'menej',
+    more: 'viac',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

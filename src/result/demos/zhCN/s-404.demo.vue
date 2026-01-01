@@ -1,6 +1,5 @@
 <markdown>
 # 404
-
 </markdown>
 
 <template>

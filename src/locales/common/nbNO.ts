@@ -31,6 +31,7 @@ const nbNO: NLocale = {
     dateFormat: 'dd.MM.yyyy',
     dateTimeFormat: 'dd.MM.yyyy HH:mm:ss',
     quarterFormat: 'yyyy-qqq',
+    weekFormat: 'YYYY-w',
     clear: 'Tøm',
     now: 'Nå',
     confirm: 'Bekreft',
@@ -42,6 +43,7 @@ const nbNO: NLocale = {
     // FIXME: translation needed
     yearPlaceholder: 'Select Year',
     quarterPlaceholder: 'Select Quarter',
+    weekPlaceholder: 'Select Week',
     startDatePlaceholder: 'Startdato',
     endDatePlaceholder: 'Sluttdato',
     startDatetimePlaceholder: 'Startdato og -tid',
@@ -81,7 +83,8 @@ const nbNO: NLocale = {
     placeholder: 'Velg tid',
     positiveText: 'OK',
     negativeText: 'Avbryt',
-    now: 'Nå'
+    now: 'Nå',
+    clear: 'Tøm'
   },
   Pagination: {
     goto: 'Gå til',
@@ -123,6 +126,12 @@ const nbNO: NLocale = {
     tipClose: 'Close (Esc)',
     // TODO: translation
     tipOriginalSize: 'Zoom to original size'
+  },
+  Heatmap: {
+    less: 'mindre',
+    more: 'mer',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

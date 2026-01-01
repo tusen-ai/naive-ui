@@ -1,10 +1,11 @@
-import { h, defineComponent, computed, type CSSProperties } from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import type { CSSProperties } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import style from './styles/blockquote.cssr'
-import { typographyLight } from '../styles'
-import type { TypographyTheme } from '../styles'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type { TypographyTheme } from '../styles'
+import { computed, defineComponent, h } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { typographyLight } from '../styles'
+import style from './styles/blockquote.cssr'
 
 export const blockquoteProps = {
   ...(useTheme.props as ThemeProps<TypographyTheme>),
@@ -16,7 +17,7 @@ export type BlockquoteProps = ExtractPublicPropTypes<typeof blockquoteProps>
 export default defineComponent({
   name: 'Blockquote',
   props: blockquoteProps,
-  setup (props) {
+  setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const themeRef = useTheme(
       'Typography',
@@ -54,7 +55,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix } = this
     this.onRender?.()
     return (

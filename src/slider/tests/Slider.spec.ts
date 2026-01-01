@@ -1,6 +1,7 @@
+/* eslint-disable unused-imports/no-unused-vars */
 import { mount } from '@vue/test-utils'
-import { NSlider } from '../index'
 import { nextTick } from 'vue'
+import { NSlider } from '../index'
 
 describe('n-slider', () => {
   it('should work with import on demand', () => {
@@ -46,8 +47,8 @@ describe('n-slider', () => {
   })
 
   it('accept correct callback types', () => {
-    function onUpdateValue1 (value: number): void {}
-    function onUpdateValue2 (value: number[]): void {}
+    function onUpdateValue1(value: number): void {}
+    function onUpdateValue2(value: number[]): void {}
     mount(NSlider, {
       props: {
         onUpdateValue: onUpdateValue1
@@ -209,6 +210,30 @@ describe('n-slider', () => {
     ;(slider.element as HTMLElement).dispatchEvent(mouseDown)
     await nextTick()
     expect((handle.element as HTMLElement).style.left).toEqual('30%')
+    wrapper.unmount()
+  })
+
+  it('should have the aria role of "slider"', () => {
+    const wrapper = mount(NSlider)
+    expect(wrapper.find('.n-slider-handle-wrapper').attributes('role')).toBe(
+      'slider'
+    )
+    wrapper.unmount()
+  })
+
+  it('should be some aria properties for "slider"', () => {
+    const wrapper = mount(NSlider, {
+      props: {
+        defaultValue: 50,
+        disabled: true
+      }
+    })
+    const handle = wrapper.find('.n-slider-handle-wrapper')
+    expect(handle.attributes('aria-valuenow')).toBe('50')
+    expect(handle.attributes('aria-valuemin')).toBe('0')
+    expect(handle.attributes('aria-valuemax')).toBe('100')
+    expect(handle.attributes('aria-orientation')).toBe('horizontal')
+    expect(handle.attributes('aria-disabled')).toBe('true')
     wrapper.unmount()
   })
 })

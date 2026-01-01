@@ -1,10 +1,10 @@
 export type OnUpdateExpandedNames = <
-  T extends string[] &
-  number[] &
-  Array<string | number> &
-  (string | number | null) &
-  (string | null) &
-  (number | null)
+  T extends string[]
+  & number[]
+  & Array<string | number>
+  & (string | number | null)
+  & (string | null)
+  & (number | null)
 >(
   value: T
 ) => void
@@ -35,4 +35,20 @@ export interface HeaderClickInfo<T> {
   name: T
   expanded: boolean
   event: MouseEvent
+}
+
+export interface CollapseArrowSlotProps {
+  collapsed: boolean
+}
+
+export interface CollapseItemHeaderSlotProps {
+  collapsed: boolean
+}
+
+export interface CollapseItemHeaderExtraSlotProps {
+  collapsed: boolean
+}
+
+export interface CollapseItemArrowSlotProps {
+  collapsed: boolean
 }

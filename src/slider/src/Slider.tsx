@@ -1,44 +1,35 @@
+import type {
+  ComponentPublicInstance,
+  CSSProperties,
+  PropType,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
+import type { FollowerInst, FollowerPlacement } from 'vueuc'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { SliderTheme } from '../styles'
+import type { OnUpdateValueImpl } from './interface'
+import { off, on } from 'evtd'
+import { useIsMounted, useMergedState } from 'vooks'
 import {
+  computed,
+  defineComponent,
   h,
+  nextTick,
+  onBeforeUnmount,
   ref,
   toRef,
-  computed,
-  watch,
-  nextTick,
-  defineComponent,
   Transition,
-  type PropType,
-  type CSSProperties,
-  type ComponentPublicInstance,
-  onBeforeUnmount
+  watch
 } from 'vue'
-import {
-  VBinder,
-  VTarget,
-  VFollower,
-  type FollowerPlacement,
-  type FollowerInst
-} from 'vueuc'
-import { useIsMounted, useMergedState } from 'vooks'
-import { on, off } from 'evtd'
-import {
-  useTheme,
-  useFormItem,
-  useConfig,
-  type ThemeProps,
-  useThemeClass
-} from '../../_mixins'
-import {
-  call,
-  useAdjustedTo,
-  type MaybeArray,
-  type ExtractPublicPropTypes,
-  resolveSlot
-} from '../../_utils'
-import { sliderLight, type SliderTheme } from '../styles'
-import { type OnUpdateValueImpl } from './interface'
-import { isTouchEvent, useRefs } from './utils'
+import { VBinder, VFollower, VTarget } from 'vueuc'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import { call, resolveSlot, useAdjustedTo } from '../../_utils'
+import { sliderLight } from '../styles'
 import style from './styles/index.cssr'
+import { isTouchEvent, useRefs } from './utils'
 
 export interface ClosestMark {
   value: number
@@ -56,7 +47,7 @@ export const sliderProps = {
     type: [Number, Array] as PropType<number | number[]>,
     default: 0
   },
-  marks: Object as PropType<Record<string, string>>,
+  marks: Object as PropType<Record<string, string | (() => VNodeChild)>>,
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -92,21 +83,29 @@ export const sliderProps = {
   vertical: Boolean,
   reverse: Boolean,
   'onUpdate:value': [Function, Array] as PropType<
-  MaybeArray<(value: number & number[]) => void>
+    MaybeArray<(value: number & number[]) => void>
   >,
   onUpdateValue: [Function, Array] as PropType<
-  MaybeArray<(value: number & number[]) => void>
-  >
+    MaybeArray<(value: number & number[]) => void>
+  >,
+  onDragstart: [Function] as PropType<() => void>,
+  onDragend: [Function] as PropType<() => void>
 } as const
 
 export type SliderProps = ExtractPublicPropTypes<typeof sliderProps>
 
+export interface SliderSlots {
+  thumb?: () => VNode[]
+  default?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Slider',
   props: sliderProps,
-  setup (props) {
-    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled } =
-      useConfig(props)
+  slots: Object as SlotsType<SliderSlots>,
+  setup(props) {
+    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled }
+      = useConfig(props)
     const themeRef = useTheme(
       'Slider',
       '-slider',
@@ -120,7 +119,7 @@ export default defineComponent({
     const handleRailRef = ref<HTMLElement | null>(null)
     const [handleRefs, setHandleRefs] = useRefs<HTMLElement>()
     const [followerRefs, setFollowerRefs] = useRefs<
-    FollowerInst & ComponentPublicInstance
+      FollowerInst & ComponentPublicInstance
     >()
     const followerEnabledIndexSetRef = ref<Set<number>>(new Set())
 
@@ -129,7 +128,8 @@ export default defineComponent({
     const { mergedDisabledRef } = formItem
     const precisionRef = computed(() => {
       const { step } = props
-      if (Number(step) <= 0 || step === 'mark') return 0
+      if (Number(step) <= 0 || step === 'mark')
+        return 0
       const stepString = step.toString()
       let precision = 0
       if (stepString.includes('.')) {
@@ -161,7 +161,7 @@ export default defineComponent({
     })
     const markValuesRef = computed(() => {
       const { marks } = props
-      return marks ? Object.keys(marks).map(parseFloat) : null
+      return marks ? Object.keys(marks).map(Number.parseFloat) : null
     })
 
     // status ref
@@ -179,7 +179,8 @@ export default defineComponent({
       return vertical ? bottom : left
     })
     const fillStyleRef = computed(() => {
-      if (handleCountExceeds2Ref.value) return
+      if (handleCountExceeds2Ref.value)
+        return
       const values = arrifiedValueRef.value
       const start = valueToPercentage(
         props.range ? Math.min(...values) : props.min
@@ -201,7 +202,8 @@ export default defineComponent({
     const markInfosRef = computed(() => {
       const mergedMarks: Array<{
         active: boolean
-        label: string
+        label: string | (() => VNodeChild)
+        key: number
         style: CSSProperties
       }> = []
       const { marks } = props
@@ -215,13 +217,14 @@ export default defineComponent({
           ? () => false
           : (num: number): boolean =>
               range
-                ? num >= orderValues[0] &&
-                  num <= orderValues[orderValues.length - 1]
+                ? num >= orderValues[0]
+                && num <= orderValues[orderValues.length - 1]
                 : num <= orderValues[0]
         for (const key of Object.keys(marks)) {
           const num = Number(key)
           mergedMarks.push({
             active: isActive(num),
+            key: num,
             label: marks[key],
             style: {
               [styleDirection]: `${valueToPercentage(num)}%`
@@ -232,7 +235,7 @@ export default defineComponent({
       return mergedMarks
     })
 
-    function getHandleStyle (value: number, index: number): Record<string, any> {
+    function getHandleStyle(value: number, index: number): Record<string, any> {
       const percentage = valueToPercentage(value)
       const { value: styleDirection } = styleDirectionRef
       return {
@@ -240,40 +243,44 @@ export default defineComponent({
         zIndex: index === activeIndexRef.value ? 1 : 0
       }
     }
-    function isShowTooltip (index: number): boolean {
+    function isShowTooltip(index: number): boolean {
       return (
-        props.showTooltip ||
-        hoverIndexRef.value === index ||
-        (activeIndexRef.value === index && draggingRef.value)
+        props.showTooltip
+        || hoverIndexRef.value === index
+        || (activeIndexRef.value === index && draggingRef.value)
       )
     }
-    function shouldKeepTooltipTransition (index: number): boolean {
-      if (!draggingRef.value) return true
+    function shouldKeepTooltipTransition(index: number): boolean {
+      if (!draggingRef.value)
+        return true
       return !(
         activeIndexRef.value === index && previousIndexRef.value === index
       )
     }
-    function focusActiveHandle (index: number): void {
+    function focusActiveHandle(index: number): void {
       if (~index) {
         activeIndexRef.value = index
-        handleRefs.value.get(index)?.focus()
+        handleRefs.get(index)?.focus()
       }
     }
-    function syncPosition (): void {
-      followerRefs.value.forEach((inst, index) => {
-        if (isShowTooltip(index)) inst.syncPosition()
+    function syncPosition(): void {
+      followerRefs.forEach((inst, index) => {
+        if (isShowTooltip(index))
+          inst.syncPosition()
       })
     }
-    function doUpdateValue (value: number | number[]): void {
+    function doUpdateValue(value: number | number[]): void {
       const { 'onUpdate:value': _onUpdateValue, onUpdateValue } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
-      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
+      if (onUpdateValue)
+        call(onUpdateValue as OnUpdateValueImpl, value)
+      if (_onUpdateValue)
+        call(_onUpdateValue as OnUpdateValueImpl, value)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()
     }
-    function dispatchValueUpdate (value: number | number[]): void {
+    function dispatchValueUpdate(value: number | number[]): void {
       const { range } = props
       if (range) {
         if (Array.isArray(value)) {
@@ -282,25 +289,27 @@ export default defineComponent({
             doUpdateValue(value)
           }
         }
-      } else if (!Array.isArray(value)) {
+      }
+      else if (!Array.isArray(value)) {
         const oldValue = arrifiedValueRef.value[0]
         if (oldValue !== value) {
           doUpdateValue(value)
         }
       }
     }
-    function doDispatchValue (value: number, index: number): void {
+    function doDispatchValue(value: number, index: number): void {
       if (props.range) {
         const values = arrifiedValueRef.value.slice()
         values.splice(index, 1, value)
         dispatchValueUpdate(values)
-      } else {
+      }
+      else {
         dispatchValueUpdate(value)
       }
     }
 
     // value conversion
-    function sanitizeValue (
+    function sanitizeValue(
       value: number,
       currentValue: number,
       stepBuffer?: number
@@ -319,7 +328,8 @@ export default defineComponent({
         )
         return closestMark ? closestMark.value : currentValue
       }
-      if (step <= 0) return currentValue
+      if (step <= 0)
+        return currentValue
       const { value: precision } = precisionRef
       let closestMark
       // if it is a stepping, priority will be given to the marks
@@ -338,35 +348,38 @@ export default defineComponent({
           ],
           stepBuffer
         )
-      } else {
+      }
+      else {
         const roundValue = getRoundValue(value)
         closestMark = getClosestMark(value, [...markValues, roundValue])
       }
       return closestMark ? clampValue(closestMark.value) : currentValue
     }
-    function clampValue (value: number): number {
+    function clampValue(value: number): number {
       return Math.min(props.max, Math.max(props.min, value))
     }
-    function valueToPercentage (value: number): number {
+    function valueToPercentage(value: number): number {
       const { max, min } = props
       return ((value - min) / (max - min)) * 100
     }
-    function percentageToValue (percentage: number): number {
+    function percentageToValue(percentage: number): number {
       const { max, min } = props
       return min + (max - min) * percentage
     }
-    function getRoundValue (value: number): number {
+    function getRoundValue(value: number): number {
       const { step, min } = props
-      if (Number(step) <= 0 || step === 'mark') return value
+      if (Number(step) <= 0 || step === 'mark')
+        return value
       const newValue = Math.round((value - min) / step) * step + min
       return Number(newValue.toFixed(precisionRef.value))
     }
-    function getClosestMark (
+    function getClosestMark(
       currentValue: number,
       markValues = markValuesRef.value,
       buffer?: number
     ): ClosestMark | null {
-      if (!markValues?.length) return null
+      if (!markValues?.length)
+        return null
       let closestMark: ClosestMark | null = null
       let index = -1
       while (++index < markValues.length) {
@@ -374,8 +387,8 @@ export default defineComponent({
         const distance = Math.abs(diff)
         if (
           // find marks in the same direction
-          (buffer === undefined || diff * buffer > 0) &&
-          (closestMark === null || distance < closestMark.distance)
+          (buffer === undefined || diff * buffer > 0)
+          && (closestMark === null || distance < closestMark.distance)
         ) {
           closestMark = {
             index,
@@ -386,15 +399,17 @@ export default defineComponent({
       }
       return closestMark
     }
-    function getPointValue (event: MouseEvent | TouchEvent): number | undefined {
+    function getPointValue(event: MouseEvent | TouchEvent): number | undefined {
       const railEl = handleRailRef.value
-      if (!railEl) return
+      if (!railEl)
+        return
       const touchEvent = isTouchEvent(event) ? event.touches[0] : event
       const railRect = railEl.getBoundingClientRect()
       let percentage: number
       if (props.vertical) {
         percentage = (railRect.bottom - touchEvent.clientY) / railRect.height
-      } else {
+      }
+      else {
         percentage = (touchEvent.clientX - railRect.left) / railRect.width
       }
       if (props.reverse) {
@@ -404,8 +419,9 @@ export default defineComponent({
     }
 
     // dom event handle
-    function handleRailKeyDown (e: KeyboardEvent): void {
-      if (mergedDisabledRef.value || !props.keyboard) return
+    function handleRailKeyDown(e: KeyboardEvent): void {
+      if (mergedDisabledRef.value || !props.keyboard)
+        return
       const { vertical, reverse } = props
       switch (e.key) {
         case 'ArrowUp':
@@ -426,13 +442,14 @@ export default defineComponent({
           break
       }
     }
-    function handleStepValue (ratio: number): void {
+    function handleStepValue(ratio: number): void {
       const activeIndex = activeIndexRef.value
-      if (activeIndex === -1) return
+      if (activeIndex === -1)
+        return
       const { step } = props
       const currentValue = arrifiedValueRef.value[activeIndex]
-      const nextValue =
-        Number(step) <= 0 || step === 'mark'
+      const nextValue
+        = Number(step) <= 0 || step === 'mark'
           ? currentValue
           : currentValue + step * ratio
       doDispatchValue(
@@ -441,16 +458,18 @@ export default defineComponent({
         activeIndex
       )
     }
-    function handleRailMouseDown (event: MouseEvent | TouchEvent): void {
-      if (mergedDisabledRef.value) return
+    function handleRailMouseDown(event: MouseEvent | TouchEvent): void {
+      if (mergedDisabledRef.value)
+        return
       if (!isTouchEvent(event) && event.button !== eventButtonLeft) {
         return
       }
       const pointValue = getPointValue(event)
-      if (pointValue === undefined) return
+      if (pointValue === undefined)
+        return
       const values = arrifiedValueRef.value.slice()
       const activeIndex = props.range
-        ? getClosestMark(pointValue, values)?.index ?? -1
+        ? (getClosestMark(pointValue, values)?.index ?? -1)
         : 0
       if (activeIndex !== -1) {
         // avoid triggering scrolling on touch
@@ -463,47 +482,53 @@ export default defineComponent({
         )
       }
     }
-    function startDragging (): void {
+    function startDragging(): void {
       if (!draggingRef.value) {
         draggingRef.value = true
+        if (props.onDragstart)
+          call(props.onDragstart)
         on('touchend', document, handleMouseUp)
         on('mouseup', document, handleMouseUp)
         on('touchmove', document, handleMouseMove)
         on('mousemove', document, handleMouseMove)
       }
     }
-    function stopDragging (): void {
+    function stopDragging(): void {
       if (draggingRef.value) {
         draggingRef.value = false
+        if (props.onDragend)
+          call(props.onDragend)
         off('touchend', document, handleMouseUp)
         off('mouseup', document, handleMouseUp)
         off('touchmove', document, handleMouseMove)
         off('mousemove', document, handleMouseMove)
       }
     }
-    function handleMouseMove (event: MouseEvent | TouchEvent): void {
+    function handleMouseMove(event: MouseEvent | TouchEvent): void {
       const { value: activeIndex } = activeIndexRef
       if (!draggingRef.value || activeIndex === -1) {
         stopDragging()
         return
       }
-      const pointValue = getPointValue(event) as number
+      const pointValue = getPointValue(event)
+      if (pointValue === undefined)
+        return
       doDispatchValue(
         sanitizeValue(pointValue, arrifiedValueRef.value[activeIndex]),
         activeIndex
       )
     }
-    function handleMouseUp (): void {
+    function handleMouseUp(): void {
       stopDragging()
     }
-    function handleHandleFocus (index: number): void {
+    function handleHandleFocus(index: number): void {
       activeIndexRef.value = index
       // Wake focus style
       if (!mergedDisabledRef.value) {
         hoverIndexRef.value = index
       }
     }
-    function handleHandleBlur (index: number): void {
+    function handleHandleBlur(index: number): void {
       if (activeIndexRef.value === index) {
         activeIndexRef.value = -1
         stopDragging()
@@ -512,10 +537,10 @@ export default defineComponent({
         hoverIndexRef.value = -1
       }
     }
-    function handleHandleMouseEnter (index: number): void {
+    function handleHandleMouseEnter(index: number): void {
       hoverIndexRef.value = index
     }
-    function handleHandleMouseLeave (index: number): void {
+    function handleHandleMouseLeave(index: number): void {
       if (hoverIndexRef.value === index) {
         hoverIndexRef.value = -1
       }
@@ -526,7 +551,8 @@ export default defineComponent({
     )
     watch(mergedValueRef, () => {
       if (props.marks) {
-        if (dotTransitionDisabledRef.value) return
+        if (dotTransitionDisabledRef.value)
+          return
         dotTransitionDisabledRef.value = true
         void nextTick(() => {
           dotTransitionDisabledRef.value = false
@@ -655,7 +681,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, themeClass, formatTooltip } = this
     this.onRender?.()
     return (
@@ -685,13 +711,13 @@ export default defineComponent({
             <div
               class={[
                 `${mergedClsPrefix}-slider-dots`,
-                this.dotTransitionDisabled &&
-                  `${mergedClsPrefix}-slider-dots--transition-disabled`
+                this.dotTransitionDisabled
+                && `${mergedClsPrefix}-slider-dots--transition-disabled`
               ]}
             >
-              {this.markInfos.map((mark) => (
+              {this.markInfos.map(mark => (
                 <div
-                  key={mark.label}
+                  key={mark.key}
                   class={[
                     `${mergedClsPrefix}-slider-dot`,
                     {
@@ -717,6 +743,14 @@ export default defineComponent({
                               ref={this.setHandleRefs(index)}
                               class={`${mergedClsPrefix}-slider-handle-wrapper`}
                               tabindex={this.mergedDisabled ? -1 : 0}
+                              role="slider"
+                              aria-valuenow={value}
+                              aria-valuemin={this.min}
+                              aria-valuemax={this.max}
+                              aria-orientation={
+                                this.vertical ? 'vertical' : 'horizontal'
+                              }
+                              aria-disabled={this.disabled}
                               style={this.getHandleStyle(value, index)}
                               onFocus={() => {
                                 this.handleHandleFocus(index)
@@ -746,8 +780,8 @@ export default defineComponent({
                           show={showTooltip}
                           to={this.adjustedTo}
                           enabled={
-                            (this.showTooltip && !this.range) ||
-                            this.followerEnabledIndexSet.has(index)
+                            (this.showTooltip && !this.range)
+                            || this.followerEnabledIndexSet.has(index)
                           }
                           teleportDisabled={
                             this.adjustedTo === useAdjustedTo.tdkey
@@ -806,13 +840,13 @@ export default defineComponent({
           </div>
           {this.marks ? (
             <div class={`${mergedClsPrefix}-slider-marks`}>
-              {this.markInfos.map((mark) => (
+              {this.markInfos.map(mark => (
                 <div
-                  key={mark.label}
+                  key={mark.key}
                   class={`${mergedClsPrefix}-slider-mark`}
                   style={mark.style}
                 >
-                  {mark.label}
+                  {typeof mark.label === 'function' ? mark.label() : mark.label}
                 </div>
               ))}
             </div>

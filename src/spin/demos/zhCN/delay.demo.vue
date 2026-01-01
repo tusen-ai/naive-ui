@@ -4,6 +4,12 @@
 你可以设置一个显示延迟时间。在延迟时间到达前结束，Spin 将不会显示
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const show = ref(false)
+</script>
+
 <template>
   <n-space vertical>
     <n-spin :show="show" :delay="1000">
@@ -16,15 +22,3 @@
     </n-button>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      show: ref(false)
-    }
-  }
-})
-</script>

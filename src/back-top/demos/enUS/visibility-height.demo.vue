@@ -9,7 +9,7 @@ You can change visibility height of backtop.
     :bottom="100"
     :visibility-height="300"
     :style="{
-      transition: 'all .3s cubic-bezier(.4, 0, .2, 1)'
+      transition: 'all .3s cubic-bezier(.4, 0, .2, 1)',
     }"
   >
     <div

@@ -2,6 +2,20 @@
 # Debug
 </markdown>
 
+<script lang="ts" setup>
+import { ArchiveOutline as ArchiveIcon } from '@vicons/ionicons5'
+import { ref } from 'vue'
+
+function handleUpdateList(...args: unknown[]) {
+  console.log(...args)
+}
+
+const multiple = ref(false)
+const directory = ref(false)
+const directoryDnd = ref(false)
+const directoryDndUndefined = ref(true)
+</script>
+
 <template>
   Retry
   <n-upload action="http://fake-api">
@@ -30,7 +44,7 @@
     <n-upload-dragger>
       <div style="margin-bottom: 12px">
         <n-icon size="48" :depth="3">
-          <archive-icon />
+          <ArchiveIcon />
         </n-icon>
       </div>
       <n-text style="font-size: 16px">
@@ -42,25 +56,3 @@
     </n-upload-dragger>
   </n-upload>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { ArchiveOutline as ArchiveIcon } from '@vicons/ionicons5'
-
-export default defineComponent({
-  components: {
-    ArchiveIcon
-  },
-  setup () {
-    return {
-      handleUpdateList (...args: unknown[]) {
-        console.log(...args)
-      },
-      multiple: ref(false),
-      directory: ref(false),
-      directoryDnd: ref(false),
-      directoryDndUndefined: ref(true)
-    }
-  }
-})
-</script>

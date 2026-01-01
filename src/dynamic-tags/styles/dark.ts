@@ -1,9 +1,9 @@
-import { tagDark } from '../../tag/styles'
-import { inputDark } from '../../input/styles'
-import { buttonDark } from '../../button/styles'
-import { spaceDark } from '../../space/styles'
-import { commonDark } from '../../_styles/common'
 import type { DynamicTagsTheme } from './light'
+import { commonDark } from '../../_styles/common'
+import { buttonDark } from '../../button/styles'
+import { inputDark } from '../../input/styles'
+import { spaceDark } from '../../space/styles'
+import { tagDark } from '../../tag/styles'
 
 const dynamicTagsDark: DynamicTagsTheme = {
   name: 'DynamicTags',
@@ -14,7 +14,7 @@ const dynamicTagsDark: DynamicTagsTheme = {
     Tag: tagDark,
     Space: spaceDark
   },
-  self () {
+  self() {
     return {
       inputWidth: '64px'
     }

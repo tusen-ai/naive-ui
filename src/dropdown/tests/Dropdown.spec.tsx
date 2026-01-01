@@ -1,13 +1,15 @@
-import type { VueWrapper } from '@vue/test-utils/dist/vueWrapper'
-import { mount } from '@vue/test-utils'
-import { type ComponentPublicInstance, h, nextTick, type VNodeChild } from 'vue'
-import { NIcon } from '../../icon'
+import type { VueWrapper } from '@vue/test-utils'
+import type { ComponentPublicInstance, VNodeChild } from 'vue'
+import type { DropdownProps } from '../index'
 import type { DropdownMixedOption } from '../src/interface'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
-import { NDropdown, type DropdownProps } from '../index'
+import { mount } from '@vue/test-utils'
+import { h, nextTick } from 'vue'
+import { NIcon } from '../../icon'
+import { NDropdown } from '../index'
 
-const pendingOptionClassName =
-  'n-dropdown-option-body n-dropdown-option-body--pending'
+const pendingOptionClassName
+  = 'n-dropdown-option-body n-dropdown-option-body--pending'
 const optionBodySelector = '.n-dropdown-option-body'
 const options = [
   {
@@ -25,7 +27,7 @@ const options = [
       },
       {
         label: '黛西·布坎南',
-        icon () {
+        icon() {
           return h(NIcon, null, {
             default: () => h(CashIcon)
           })
@@ -51,7 +53,7 @@ const options = [
   }
 ]
 
-const mountDropdown = ({
+function mountDropdown({
   onSelect,
   inverted = false,
   onClickoutside = undefined,
@@ -59,7 +61,7 @@ const mountDropdown = ({
   show = undefined,
   renderLabel = undefined,
   renderIcon = undefined
-}: DropdownProps = {}): VueWrapper<ComponentPublicInstance> => {
+}: DropdownProps = {}): VueWrapper<ComponentPublicInstance> {
   return mount(NDropdown, {
     attachTo: document.body,
     props: {
@@ -122,7 +124,7 @@ describe('n-dropdown', () => {
   })
 
   it('keyboard event', async () => {
-    const onSelect = jest.fn()
+    const onSelect = vi.fn()
     let wrapper = mountDropdown({ onSelect })
 
     let triggerNodeWrapper = wrapper.find('span')
@@ -177,7 +179,7 @@ describe('n-dropdown', () => {
   })
 
   it('option mouse event', async () => {
-    const onSelect = jest.fn()
+    const onSelect = vi.fn()
     const wrapper = mountDropdown({ onSelect })
 
     const triggerNodeWrapper = wrapper.find('span')
@@ -215,7 +217,7 @@ describe('n-dropdown', () => {
   })
 
   it('dropdown disabled', async () => {
-    const onSelect = jest.fn()
+    const onSelect = vi.fn()
     const wrapper = mountDropdown({ onSelect })
 
     const triggerNodeWrapper = wrapper.find('span')
@@ -239,7 +241,7 @@ describe('n-dropdown', () => {
     const mousedownEvent = new MouseEvent('mousedown', { bubbles: true })
     const mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
 
-    const onClickoutside = jest.fn()
+    const onClickoutside = vi.fn()
     const wrapper = mountDropdown({ onClickoutside })
 
     const triggerNodeWrapper = wrapper.find('span')
@@ -278,7 +280,7 @@ describe('n-dropdown', () => {
   })
 
   it('should work with `render-icon` props', async () => {
-    const renderDropdownIcon = (option: DropdownMixedOption): VNodeChild => {
+    const renderDropdownIcon = (): VNodeChild => {
       return h(NIcon, null, {
         default: () => h(CashIcon)
       })
@@ -296,7 +298,6 @@ describe('n-dropdown', () => {
   })
 
   it('should accept empty object in type-checking phase', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const dropdown = <NDropdown options={[{}]} />
+    ;<NDropdown options={[{}]} />
   })
 })

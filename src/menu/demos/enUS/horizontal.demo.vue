@@ -1,24 +1,21 @@
 <markdown>
 # Horizontal
 
-A horiziontal menu.
+A horiziontal menu which can automatically collapse its items.
 </markdown>
 
-<template>
-  <n-menu v-model:value="activeKey" mode="horizontal" :options="menuOptions" />
-</template>
-
-<script lang="ts">
-import { defineComponent, h, ref, Component } from 'vue'
-import { NIcon } from 'naive-ui'
+<script lang="ts" setup>
 import type { MenuOption } from 'naive-ui'
+import type { Component } from 'vue'
 import {
   BookOutline as BookIcon,
   PersonOutline as PersonIcon,
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
+import { NIcon } from 'naive-ui'
+import { h, ref } from 'vue'
 
-function renderIcon (icon: Component) {
+function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
 }
 
@@ -106,12 +103,18 @@ const menuOptions: MenuOption[] = [
   }
 ]
 
-export default defineComponent({
-  setup () {
-    return {
-      activeKey: ref<string | null>(null),
-      menuOptions
-    }
-  }
-})
+const activeKey = ref<string | null>(null)
 </script>
+
+<template>
+  <n-split :default-size="0.8">
+    <template #1>
+      <n-menu
+        v-model:value="activeKey"
+        mode="horizontal"
+        :options="menuOptions"
+        responsive
+      />
+    </template>
+  </n-split>
+</template>

@@ -5,7 +5,7 @@
 收集、验证信息。
 
 <n-alert type="warning" title="注意" :bordered="false">
-  如果你需要为一个值为 number 类型的表项设定 required，你需要在 rule 对象中设定 <n-text code>`type: number`</n-text>。
+  如果你需要为一个值为 number 类型的表项设定 required，你需要在 rule 对象中设定 <n-text code>`type: 'number'`</n-text>。
 </n-alert>
 
 ## 演示
@@ -13,6 +13,7 @@
 ```demo
 inline.vue
 custom-rule.vue
+abnormal-warning.vue
 custom-validation.vue
 i18n.vue
 top.vue
@@ -24,6 +25,7 @@ show-label.vue
 partially-apply-rules.vue
 custom-messages.vue
 dynamic.vue
+feedback-style.vue
 ```
 
 ## API
@@ -52,20 +54,26 @@ dynamic.vue
   以下并不是规则的全部用法，如果你想了解更多的用法，请参考 <n-a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</n-a>。
 </n-alert>
 
-| 属性 | 类型 | 说明 | 版本 |
-| --- | --- | --- | --- |
-| asyncValidator | `(rule: FormItemRule, value: any, callback: (error?: Error) => void) => void` | 异步校验，支持定义回调函数 |  |
-| message | `string` | 校验失败时展示的信息 |  |
-| renderMessage | `() => VNodeChild` | 信息的渲染函数 | 2.29.1 |
-| required | `boolean` | 是否必填 |  |
-| trigger | `string \| Array<string>` | 触发方式 |  |
-| validator | `(rule: FormItemRule, value: any) => boolean \| Error` | 校验规则 |  |
+| 属性 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| asyncValidator | `(rule: FormItemRule, value: any, callback: (error?: Error) => void) => void` | `undefined` | 异步校验，支持定义回调函数 |  |
+| key | `string` | `undefined` | 规则的唯一 key，可用于只执行部分规则验证。参考示例 [只执行部分规则](form#partially-apply-rules.vue) |  |
+| level | `'error'` \| `'warning'` | `undefined` | 验证级别。如果存在 `error` 级别错误，则会跳过 `warning` 级别验证 |  |
+| message | `string` | `undefined` | 校验失败时展示的信息 |  |
+| renderMessage | `() => VNodeChild` | `undefined` | 信息的渲染函数 | 2.29.1 |
+| required | `boolean` | `undefined` | 是否必填 |  |
+| trigger | `string \| Array<string>` | `undefined` | 触发方式 |  |
+| validator | `(rule: FormItemRule, value: any) => boolean \| Error` | `undefined` | 校验规则 |  |
 
 ### FormItem Props
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| content-class | `string` | `undefined` | 内容的类名 | 2.43.0 |
+| content-style | `string \| object` | `undefined` | 内容的样式 | 2.43.0 |
 | feedback | `string` | `undefined` | 表项的反馈信息。不设为 `undefined` 时，会覆盖规则验证的结果 |  |
+| feedback-class | `string` | `undefined` | 反馈校验竖向展示定位 | 2.38.2 |
+| feedback-style | `string \| object` | `undefined` | 反馈校验横向展示定位 | 2.38.2 |
 | first | `boolean` | `false` | 是否只展示首个出错信息 |  |
 | ignore-path-change | `boolean` | `false` | 通常 `path` 的改变会导致数据来源的变化，所以 naive-ui 会清空验证信息。如果不期望这个行为，可以将其置为 `true` |  |
 | label | `string` | `undefined` | 标签信息 |  |
@@ -94,17 +102,17 @@ dynamic.vue
   默认情况下，验证将会在合法表项的所有规则上进行，不管规则的 trigger 是什么
 </n-alert>
 
-| 名称 | 类型 | 说明 |
-| --- | --- | --- |
-| validate | `(validateCallback?: (errors?: Array<FormValidationError>) => void, shouldRuleBeApplied?: FormItemRule => boolean) => Promise<void>` | 验证表单，Promise rejection 的返回值类型是 `Array<FormValidationError>` |
-| restoreValidation | `() => void` | 还原到未校验的状态 |
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| validate | `(validateCallback?: (errors: Array<FormValidationError> \| undefined, extra: { warnings: Array<FormValidationError> \| undefined }) => void, shouldRuleBeApplied?: FormItemRule => boolean) => Promise<{ warnings: Array<FormValidationError> \| undefined }>` | 验证表单，Promise rejection 的返回值类型是 `Array<FormValidationError>` | `warnings` `2.37.1` |
+| restoreValidation | `() => void` | 还原到未校验的状态 |  |
 
 ### FormItem, FormItemGi Methods
 
-| 名称 | 类型 | 说明 |
-| --- | --- | --- |
-| validate | `(options: { trigger?: string, callback?: (errors?: Array<FormValidationError>) => void, shouldRuleBeApplied?: FormItemRule => boolean, options?: AsyncValidatorOptions }) => Promise<void>` | 验证表项，Promise rejection 的返回值类型是 `Array<FormValidationError>`。如果不设定 `trigger`，这一个表项全部的规则都会被使用。`shouldRuleBeApplied` 可以用来进一步过滤已经经过 `trigger` 筛选的规则 |
-| restoreValidation | `() => void` | 还原到未校验的状态 |
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| validate | `(options: { trigger?: string, callback?: (errors: FormValidationError \| undefined, extra: { warnings: FormValidationError \| undefined }) => void, shouldRuleBeApplied?: FormItemRule => boolean, options?: AsyncValidatorOptions }) => Promise<{ warnings: FormValidationError \| undefined }>` | 验证表项，Promise rejection 的返回值类型是 `FormValidationError`。如果不设定 `trigger`，这一个表项全部的规则都会被使用。`shouldRuleBeApplied` 可以用来进一步过滤已经经过 `trigger` 筛选的规则 | `warnings` `2.37.1` |
+| restoreValidation | `() => void` | 还原到未校验的状态 |  |
 
 关于 AsyncValidatorOptions，参考 <n-a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</n-a>。
 

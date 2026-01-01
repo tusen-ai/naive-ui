@@ -1,16 +1,11 @@
-import {
-  h,
-  computed,
-  onMounted,
-  ref,
-  type PropType,
-  defineComponent,
-  Transition,
-  type CSSProperties
-} from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import type { CSSProperties, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { BadgeTheme } from '../styles'
+import { computed, defineComponent, h, onMounted, ref, Transition } from 'vue'
 import { NBaseSlotMachine, NBaseWave } from '../../_internal'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
 import {
   color2Class,
   createKey,
@@ -18,11 +13,8 @@ import {
   isSlotEmpty,
   resolveSlot
 } from '../../_utils'
-import type { ExtractPublicPropTypes } from '../../_utils'
 import { badgeLight } from '../styles'
-import type { BadgeTheme } from '../styles'
 import style from './styles/index.cssr'
-import { useRtl } from '../../_mixins/use-rtl'
 
 export const badgeProps = {
   ...(useTheme.props as ThemeProps<BadgeTheme>),
@@ -31,7 +23,7 @@ export const badgeProps = {
   dot: Boolean,
   type: {
     type: String as PropType<
-    'success' | 'error' | 'warning' | 'info' | 'default'
+      'success' | 'error' | 'warning' | 'info' | 'default'
     >,
     default: 'default'
   },
@@ -43,7 +35,7 @@ export const badgeProps = {
   processing: Boolean,
   color: String,
   offset: Array as unknown as PropType<
-  readonly [number | string, number | string]
+    readonly [number | string, number | string]
   >
 } as const
 
@@ -52,9 +44,9 @@ export type BadgeProps = ExtractPublicPropTypes<typeof badgeProps>
 export default defineComponent({
   name: 'Badge',
   props: badgeProps,
-  setup (props, { slots }) {
-    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef } =
-      useConfig(props)
+  setup(props, { slots }) {
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
+      = useConfig(props)
     const themeRef = useTheme(
       'Badge',
       '-badge',
@@ -72,15 +64,16 @@ export default defineComponent({
     }
     const showBadgeRef = computed(() => {
       return (
-        props.show &&
-        (props.dot ||
-          (props.value !== undefined &&
-            !(!props.showZero && Number(props.value) <= 0)) ||
-          !isSlotEmpty(slots.value))
+        props.show
+        && (props.dot
+          || (props.value !== undefined
+            && !(!props.showZero && Number(props.value) <= 0))
+          || !isSlotEmpty(slots.value))
       )
     })
     onMounted(() => {
-      if (showBadgeRef.value) appearedRef.value = true
+      if (showBadgeRef.value)
+        appearedRef.value = true
     })
 
     const rtlEnabledRef = useRtl('Badge', mergedRtlRef, mergedClsPrefixRef)
@@ -102,26 +95,27 @@ export default defineComponent({
 
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
-        'badge',
-        computed(() => {
-          let hash = ''
-          const { type, color } = props
-          if (type) {
-            hash += type[0]
-          }
-          if (color) {
-            hash += color2Class(color)
-          }
-          return hash
-        }),
-        cssVarsRef,
-        props
-      )
+          'badge',
+          computed(() => {
+            let hash = ''
+            const { type, color } = props
+            if (type) {
+              hash += type[0]
+            }
+            if (color) {
+              hash += color2Class(color)
+            }
+            return hash
+          }),
+          cssVarsRef,
+          props
+        )
       : undefined
 
     const offsetStyleRef = computed(() => {
       const { offset } = props
-      if (!offset) return undefined
+      if (!offset)
+        return undefined
       const [x, y] = offset
       const reslovedOffsetX = typeof x === 'number' ? `${x}px` : x
       const reslovedOffsetY = typeof y === 'number' ? `${y}px` : y
@@ -145,7 +139,7 @@ export default defineComponent({
       offsetStyle: offsetStyleRef
     }
   },
-  render () {
+  render() {
     const { mergedClsPrefix, onRender, themeClass, $slots } = this
     onRender?.()
     const children = $slots.default?.()

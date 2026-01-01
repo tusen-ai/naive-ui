@@ -1,10 +1,10 @@
-import { inputLight } from '../../input/styles'
-import { buttonLight } from '../../button/styles'
-import { commonLight } from '../../_styles/common'
-import commonVariables from './_common'
 import { createTheme } from '../../_mixins'
+import { commonLight } from '../../_styles/common'
+import { buttonLight } from '../../button/styles'
+import { inputLight } from '../../input/styles'
+import commonVariables from './_common'
 
-const self = () => {
+function self() {
   return commonVariables
 }
 

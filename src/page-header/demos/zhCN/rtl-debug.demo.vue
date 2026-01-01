@@ -2,6 +2,34 @@
 # Rtl Debug
 </markdown>
 
+<script lang="ts" setup>
+import { unstablePageHeaderRtl, useMessage } from 'naive-ui'
+import { ref } from 'vue'
+
+const message = useMessage()
+const rtlEnabled = ref(false)
+const rtlStyles = [unstablePageHeaderRtl]
+
+function handleBack() {
+  message.info('[onBack]')
+}
+
+const options = [
+  {
+    label: '催更',
+    key: '1'
+  },
+  {
+    label: '催更',
+    key: '2'
+  },
+  {
+    label: '催更',
+    key: '3'
+  }
+]
+</script>
+
 <template>
   <n-space vertical>
     <n-space><n-switch v-model:value="rtlEnabled" />Rtl</n-space>
@@ -60,35 +88,3 @@
     </n-config-provider>
   </n-space>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { unstablePageHeaderRtl, useMessage } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const message = useMessage()
-    return {
-      rtlEnabled: ref(false),
-      rtlStyles: [unstablePageHeaderRtl],
-      handleBack () {
-        message.info('[onBack]')
-      },
-      options: [
-        {
-          label: '催更',
-          key: '1'
-        },
-        {
-          label: '催更',
-          key: '2'
-        },
-        {
-          label: '催更',
-          key: '3'
-        }
-      ]
-    }
-  }
-})
-</script>

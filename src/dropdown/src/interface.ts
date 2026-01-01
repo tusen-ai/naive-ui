@@ -1,12 +1,12 @@
 import type { TreeNode } from 'treemate'
 import type { HTMLAttributes, VNode, VNodeChild } from 'vue'
 import type {
-  MenuOption,
-  MenuGroupOption,
   MenuDividerOption,
+  MenuGroupOption,
   MenuIgnoredOption,
-  MenuRenderOption,
-  MenuNodeProps
+  MenuNodeProps,
+  MenuOption,
+  MenuRenderOption
 } from '../../menu/src/interface'
 
 export type Key = string | number
@@ -16,20 +16,20 @@ export type DropdownOption = MenuOption
 export type DropdownGroupOption = MenuGroupOption
 export type DropdownDividerOption = MenuDividerOption
 export type DropdownRenderOption = MenuRenderOption
-export type DropdownMixedOption =
-  | DropdownOption
-  | DropdownGroupOption
-  | DropdownDividerOption
-  | DropdownRenderOption
+export type DropdownMixedOption
+  = | DropdownOption
+    | DropdownGroupOption
+    | DropdownDividerOption
+    | DropdownRenderOption
 
 export type DropdownIgnoredOption = MenuIgnoredOption
 
 export type DropdownIntersectionOption = DropdownOption & DropdownGroupOption
 
 export type TmNode = TreeNode<
-DropdownOption,
-DropdownGroupOption,
-DropdownIgnoredOption
+  DropdownOption,
+  DropdownGroupOption,
+  DropdownIgnoredOption
 >
 
 export type OnUpdateValue = <T extends string & number & (string | number)>(

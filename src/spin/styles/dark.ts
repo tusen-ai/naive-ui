@@ -1,5 +1,5 @@
-import { commonDark } from '../../_styles/common'
 import type { SpinTheme } from './light'
+import { commonDark } from '../../_styles/common'
 import { self } from './light'
 
 const spinDark: SpinTheme = {

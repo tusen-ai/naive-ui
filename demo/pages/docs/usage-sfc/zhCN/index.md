@@ -2,7 +2,7 @@
 
 # 在 SFC 中使用
 
-你可以选择直接引入或全局安装在 Vue App 中。
+如果你想使用单文件组件风格（SFC - Single File Component），可以选择直接引入或全局安装在 Vue App 中。
 
 ## 直接引入（推荐）
 
@@ -48,8 +48,8 @@
 如果你想全局安装但是不想安装全部组件，请参考[按需引入](import-on-demand)。
 
 ```js
-import { createApp } from 'vue'
 import naive from 'naive-ui'
+import { createApp } from 'vue'
 
 const app = createApp(App)
 app.use(naive)

@@ -11,6 +11,7 @@ event.vue
 placement.vue
 body-style.vue
 arrow.vue
+rtl-debug.vue
 ```
 
 ## API

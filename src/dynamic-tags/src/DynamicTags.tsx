@@ -1,42 +1,42 @@
-import {
-  h,
-  defineComponent,
-  ref,
-  type PropType,
-  type CSSProperties,
-  computed,
-  nextTick,
-  toRef,
-  watchEffect,
-  type VNodeChild
-} from 'vue'
-import { useMergedState } from 'vooks'
-import commonProps from '../../tag/src/common-props'
-import { AddIcon } from '../../_internal/icons'
-import { NButton } from '../../button'
-import { NSpace } from '../../space'
-import type { InputInst, InputProps } from '../../input'
-import { NInput } from '../../input'
-import { NTag } from '../../tag'
-import { NBaseIcon } from '../../_internal'
-import {
-  useTheme,
-  useFormItem,
-  useLocale,
-  useConfig,
-  useThemeClass
-} from '../../_mixins'
+import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import { call, smallerSize, warnOnce } from '../../_utils'
-import type { MaybeArray, ExtractPublicPropTypes } from '../../_utils'
-import { dynamicTagsLight } from '../styles'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { InputInst, InputProps } from '../../input'
 import type { DynamicTagsTheme } from '../styles'
 import type {
-  OnUpdateValue,
+  DynamicTagsInputSlotProps,
   DynamicTagsOption,
+  DynamicTagsTriggerSlotProps,
   OnCreate,
+  OnUpdateValue,
   OnUpdateValueImpl
 } from './interface'
+import { useMergedState } from 'vooks'
+import {
+  computed,
+  defineComponent,
+  h,
+  nextTick,
+  ref,
+  toRef,
+  watchEffect
+} from 'vue'
+import { NBaseIcon } from '../../_internal'
+import { AddIcon } from '../../_internal/icons'
+import {
+  useConfig,
+  useFormItem,
+  useLocale,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
+import { call, smallerSize, warnOnce } from '../../_utils'
+import { NButton } from '../../button'
+import { NInput } from '../../input'
+import { NSpace } from '../../space'
+import { NTag } from '../../tag'
+import commonProps from '../../tag/src/common-props'
+import { dynamicTagsLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const dynamicTagsProps = {
@@ -62,8 +62,8 @@ export const dynamicTagsProps = {
   tagClass: String,
   tagStyle: [String, Object] as PropType<string | CSSProperties>,
   renderTag: Function as PropType<
-  | ((tag: string, index: number) => VNodeChild)
-  | ((tag: DynamicTagsOption, index: number) => VNodeChild)
+    | ((tag: string, index: number) => VNodeChild)
+    | ((tag: DynamicTagsOption, index: number) => VNodeChild)
   >,
   onCreate: {
     type: Function as PropType<OnCreate>,
@@ -77,10 +77,17 @@ export const dynamicTagsProps = {
 
 export type DynamicTagsProps = ExtractPublicPropTypes<typeof dynamicTagsProps>
 
+export interface DynamicTagsSlots {
+  input?: (props: DynamicTagsInputSlotProps) => VNode[]
+  trigger?: (props: DynamicTagsTriggerSlotProps) => VNode[]
+  default?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'DynamicTags',
   props: dynamicTagsProps,
-  setup (props) {
+  slots: Object as SlotsType<DynamicTagsSlots>,
+  setup(props) {
     if (__DEV__) {
       watchEffect(() => {
         if (props.onChange !== undefined) {
@@ -121,36 +128,39 @@ export default defineComponent({
     })
     const triggerDisabledRef = computed(() => {
       return (
-        mergedDisabledRef.value ||
-        (!!props.max && mergedValueRef.value.length >= props.max)
+        mergedDisabledRef.value
+        || (!!props.max && mergedValueRef.value.length >= props.max)
       )
     })
-    function doChange (value: Array<string | DynamicTagsOption>): void {
+    function doChange(value: Array<string | DynamicTagsOption>): void {
       const {
         onChange,
         'onUpdate:value': _onUpdateValue,
         onUpdateValue
       } = props
       const { nTriggerFormInput, nTriggerFormChange } = formItem
-      if (onChange) call(onChange as OnUpdateValueImpl, value)
-      if (onUpdateValue) call(onUpdateValue as OnUpdateValueImpl, value)
-      if (_onUpdateValue) call(_onUpdateValue as OnUpdateValueImpl, value)
+      if (onChange)
+        call(onChange as OnUpdateValueImpl, value)
+      if (onUpdateValue)
+        call(onUpdateValue as OnUpdateValueImpl, value)
+      if (_onUpdateValue)
+        call(_onUpdateValue as OnUpdateValueImpl, value)
       uncontrolledValueRef.value = value
       nTriggerFormInput()
       nTriggerFormChange()
     }
-    function handleCloseClick (index: number): void {
+    function handleCloseClick(index: number): void {
       const tags = mergedValueRef.value.slice(0)
       tags.splice(index, 1)
       doChange(tags)
     }
-    function handleInputKeyUp (e: KeyboardEvent): void {
+    function handleInputKeyDown(e: KeyboardEvent): void {
       switch (e.key) {
         case 'Enter':
           handleInputConfirm()
       }
     }
-    function handleInputConfirm (externalValue?: string): void {
+    function handleInputConfirm(externalValue?: string): void {
       const nextValue = externalValue ?? inputValueRef.value
       if (nextValue) {
         const tags = mergedValueRef.value.slice(0)
@@ -161,10 +171,10 @@ export default defineComponent({
       inputForceFocusedRef.value = true
       inputValueRef.value = ''
     }
-    function handleInputBlur (): void {
+    function handleInputBlur(): void {
       handleInputConfirm()
     }
-    function handleAddClick (): void {
+    function handleAddClick(): void {
       showInputRef.value = true
       void nextTick(() => {
         inputInstRef.value?.focus()
@@ -193,7 +203,7 @@ export default defineComponent({
       mergedValue: mergedValueRef,
       mergedDisabled: mergedDisabledRef,
       triggerDisabled: triggerDisabledRef,
-      handleInputKeyUp,
+      handleInputKeyDown,
       handleAddClick,
       handleInputBlur,
       handleCloseClick,
@@ -204,7 +214,7 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender
     }
   },
-  render () {
+  render() {
     const { mergedTheme, cssVars, mergedClsPrefix, onRender, renderTag } = this
     onRender?.()
     return (
@@ -235,7 +245,7 @@ export default defineComponent({
               inputSize,
               inputForceFocused,
               triggerDisabled,
-              handleInputKeyUp,
+              handleInputKeyDown,
               handleInputBlur,
               handleAddClick,
               handleCloseClick,
@@ -291,7 +301,7 @@ export default defineComponent({
                       }}
                       theme={mergedTheme.peers.Input}
                       themeOverrides={mergedTheme.peerOverrides.Input}
-                      onKeyup={handleInputKeyUp}
+                      onKeydown={handleInputKeyDown}
                       onBlur={handleInputBlur}
                       internalForceFocus={inputForceFocused}
                     />

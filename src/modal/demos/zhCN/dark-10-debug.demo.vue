@@ -2,6 +2,12 @@
 # pop debug 5
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const modalActive = ref(false)
+</script>
+
 <template>
   <n-popover trigger="click">
     <template #trigger>
@@ -252,14 +258,3 @@
     </n-descriptions>
   </n-popover>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  data () {
-    return {
-      modalActive: false
-    }
-  }
-})
-</script>

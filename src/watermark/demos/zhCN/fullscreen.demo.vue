@@ -4,6 +4,12 @@
 可以打开全屏，这样显得很专业。
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const show = ref(false)
+</script>
+
 <template>
   <n-watermark
     v-if="show"
@@ -20,15 +26,3 @@
   />
   <n-switch v-model:value="show" />
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      show: ref(false)
-    }
-  }
-})
-</script>

@@ -2,11 +2,15 @@
 # 图标
 </markdown>
 
+<script lang="ts" setup>
+import { IosAirplane } from '@vicons/ionicons4'
+</script>
+
 <template>
   <n-alert title="Back in the U.S.S.R.">
     <template #icon>
       <n-icon>
-        <ios-airplane />
+        <IosAirplane />
       </n-icon>
     </template>
     Well the Ukraine girls really knock me out<br>
@@ -16,14 +20,3 @@
     Aw come on!
   </n-alert>
 </template>
-
-<script lang="ts">
-import { IosAirplane } from '@vicons/ionicons4'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    IosAirplane
-  }
-})
-</script>

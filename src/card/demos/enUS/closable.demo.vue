@@ -4,27 +4,20 @@
 You may need this when using it in a modal.
 </markdown>
 
+<script setup lang="ts">
+import { useMessage } from 'naive-ui'
+
+const message = useMessage()
+function handleClose() {
+  message.info('Card Close')
+}
+</script>
+
 <template>
   <n-card title="Card" closable @close="handleClose">
     Card Content
   </n-card>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { useMessage } from 'naive-ui'
-
-export default defineComponent({
-  setup () {
-    const message = useMessage()
-    return {
-      handleClose () {
-        message.info('Card Close')
-      }
-    }
-  }
-})
-</script>
 
 <style>
 .n-card {

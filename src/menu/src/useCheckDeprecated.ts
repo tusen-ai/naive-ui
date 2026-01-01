@@ -1,8 +1,8 @@
+import type { MenuSetupProps } from './Menu'
 import { watchEffect } from 'vue'
 import { warnOnce } from '../../_utils'
-import type { MenuSetupProps } from './Menu'
 
-export function useCheckDeprecated (props: MenuSetupProps): void {
+export function useCheckDeprecated(props: MenuSetupProps): void {
   watchEffect(() => {
     if (props.items) {
       warnOnce('menu', '`items` is deprecated, please use `options` instead.')

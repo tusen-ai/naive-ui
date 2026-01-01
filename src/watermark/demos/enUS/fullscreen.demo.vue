@@ -4,6 +4,12 @@
 You can make it displayed in fullscreen mode.
 </markdown>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const show = ref(false)
+</script>
+
 <template>
   <n-watermark
     v-if="show"
@@ -20,15 +26,3 @@ You can make it displayed in fullscreen mode.
   />
   <n-switch v-model:value="show" />
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  setup () {
-    return {
-      show: ref(false)
-    }
-  }
-})
-</script>

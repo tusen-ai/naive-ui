@@ -1,15 +1,8 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import {
-  h,
-  defineComponent,
-  inject,
-  type PropType,
-  ref,
-  watchEffect
-} from 'vue'
+import type { PropType } from 'vue'
+import type { NotificationPlacement } from './NotificationProvider'
+import { defineComponent, h, inject, ref, watchEffect } from 'vue'
 import { NScrollbar } from '../../_internal'
 import { notificationProviderInjectionKey } from './context'
-import type { NotificationPlacement } from './NotificationProvider'
 
 export const NotificationContainer = defineComponent({
   name: 'NotificationContainer',
@@ -23,14 +16,15 @@ export const NotificationContainer = defineComponent({
       required: true
     }
   },
-  setup () {
-    const { mergedThemeRef, mergedClsPrefixRef, wipTransitionCountRef } =
-      inject(notificationProviderInjectionKey)!
+  setup() {
+    const { mergedThemeRef, mergedClsPrefixRef, wipTransitionCountRef }
+      = inject(notificationProviderInjectionKey)!
     const selfRef = ref<HTMLElement | null>(null)
     watchEffect(() => {
       if (wipTransitionCountRef.value > 0) {
         selfRef?.value?.classList.add('transitioning')
-      } else {
+      }
+      else {
         selfRef?.value?.classList.remove('transitioning')
       }
     })
@@ -41,7 +35,7 @@ export const NotificationContainer = defineComponent({
       transitioning: wipTransitionCountRef
     }
   },
-  render () {
+  render() {
     const { $slots, scrollable, mergedClsPrefix, mergedTheme, placement } = this
     return (
       <div

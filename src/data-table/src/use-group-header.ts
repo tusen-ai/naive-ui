@@ -1,58 +1,67 @@
-import { type CSSProperties, type ComputedRef, computed } from 'vue'
-import { formatLength } from '../../_utils'
+import type { ComputedRef, CSSProperties } from 'vue'
 import type {
-  TableExpandColumn,
-  TableSelectionColumn,
-  TableColumn,
-  TableBaseColumn,
-  TableColumns,
   ColumnKey,
-  DataTableSetupProps
+  DataTableSetupProps,
+  TableBaseColumn,
+  TableColumn,
+  TableColumns,
+  TableExpandColumn,
+  TableSelectionColumn
 } from './interface'
-import { getColKey, createCustomWidthStyle } from './utils'
+import { computed } from 'vue'
+import { formatLength } from '../../_utils'
+import { createCustomWidthStyle, getColKey } from './utils'
 
 export interface RowItem {
   colSpan: number
   rowSpan: number
   column: TableColumn
+  colIndex: number
   isLast: boolean
 }
 export interface ColItem {
   key: string | number
   style: CSSProperties
   column: TableSelectionColumn | TableExpandColumn | TableBaseColumn
+  index: number
+  /**
+   * The width property is only applied to horizontally virtual scroll table
+   */
+  width: number
 }
 
 type RowItemMap = WeakMap<TableColumn, RowItem>
-function getRowsAndCols (
+function getRowsAndCols(
   columns: TableColumns,
   getResizableWidth: (key: ColumnKey) => number | undefined
 ): {
-    hasEllipsis: boolean
-    rows: RowItem[][]
-    cols: ColItem[]
-    dataRelatedCols: Array<
+  hasEllipsis: boolean
+  rows: RowItem[][]
+  cols: ColItem[]
+  dataRelatedCols: Array<
     TableSelectionColumn | TableBaseColumn | TableExpandColumn
-    >
-  } {
+  >
+} {
   const rows: RowItem[][] = []
   const cols: ColItem[] = []
   const dataRelatedCols: Array<
-  TableSelectionColumn | TableBaseColumn | TableExpandColumn
+    TableSelectionColumn | TableBaseColumn | TableExpandColumn
   > = []
   const rowItemMap: RowItemMap = new WeakMap()
   let maxDepth = -1
   let totalRowSpan = 0
   let hasEllipsis = false
-  function ensureMaxDepth (columns: TableColumns, currentDepth: number): void {
+  let currentLeafIndex = 0
+  function ensureMaxDepth(columns: TableColumns, currentDepth: number): void {
     if (currentDepth > maxDepth) {
       rows[currentDepth] = []
       maxDepth = currentDepth
     }
-    for (const column of columns) {
+    columns.forEach((column) => {
       if ('children' in column) {
         ensureMaxDepth(column.children, currentDepth + 1)
-      } else {
+      }
+      else {
         const key = 'key' in column ? column.key : undefined
         cols.push({
           key: getColKey(column),
@@ -60,7 +69,10 @@ function getRowsAndCols (
             column,
             key !== undefined ? formatLength(getResizableWidth(key)) : undefined
           ),
-          column
+          column,
+          index: currentLeafIndex++,
+          // The width property is only applied to horizontally virtual scroll table
+          width: column.width === undefined ? 128 : Number(column.width)
         })
         totalRowSpan += 1
         if (!hasEllipsis) {
@@ -68,19 +80,20 @@ function getRowsAndCols (
         }
         dataRelatedCols.push(column)
       }
-    }
+    })
   }
   ensureMaxDepth(columns, 0)
-  let currentLeafIndex = 0
-  function ensureColLayout (columns: TableColumns, currentDepth: number): void {
+  currentLeafIndex = 0
+  function ensureColLayout(columns: TableColumns, currentDepth: number): void {
     let hideUntilIndex = 0
-    columns.forEach((column, index) => {
+    columns.forEach((column) => {
       if ('children' in column) {
         // do not allow colSpan > 1 for non-leaf th
         // we will execute the calculation logic
         const cachedCurrentLeafIndex = currentLeafIndex
         const rowItem: RowItem = {
           column,
+          colIndex: currentLeafIndex,
           colSpan: 0,
           rowSpan: 1,
           isLast: false
@@ -94,7 +107,8 @@ function getRowsAndCols (
         }
         rowItemMap.set(column, rowItem)
         rows[currentDepth].push(rowItem)
-      } else {
+      }
+      else {
         if (currentLeafIndex < hideUntilIndex) {
           currentLeafIndex += 1
           return
@@ -110,6 +124,7 @@ function getRowsAndCols (
         const rowItem: RowItem = {
           column,
           colSpan,
+          colIndex: currentLeafIndex,
           rowSpan: maxDepth - currentDepth + 1,
           isLast
         }
@@ -129,17 +144,17 @@ function getRowsAndCols (
   }
 }
 
-export function useGroupHeader (
+export function useGroupHeader(
   props: DataTableSetupProps,
   getResizableWidth: (key: ColumnKey) => number | undefined
 ): {
-    rowsRef: ComputedRef<RowItem[][]>
-    colsRef: ComputedRef<ColItem[]>
-    hasEllipsisRef: ComputedRef<boolean>
-    dataRelatedColsRef: ComputedRef<
+  rowsRef: ComputedRef<RowItem[][]>
+  colsRef: ComputedRef<ColItem[]>
+  hasEllipsisRef: ComputedRef<boolean>
+  dataRelatedColsRef: ComputedRef<
     Array<TableSelectionColumn | TableBaseColumn | TableExpandColumn>
-    >
-  } {
+  >
+} {
   const rowsAndCols = computed(() =>
     getRowsAndCols(props.columns, getResizableWidth)
   )
