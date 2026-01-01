@@ -1,5 +1,6 @@
 export { default as arDZ } from './common/arDZ'
 export { default as azAZ } from './common/azAZ'
+export { default as ckb } from './common/ckb'
 export { default as csCZ } from './common/csCZ'
 export { default as daDK } from './common/daDK'
 export { default as deDE } from './common/deDE'
