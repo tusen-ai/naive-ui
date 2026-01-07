@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-tag` icon slot doesn't inherit checked text color when used with `checkable`, closes [#7407](https://github.com/tusen-ai/naive-ui/issues/7407).
+
 ## 2.43.2
 
 ### Fixes

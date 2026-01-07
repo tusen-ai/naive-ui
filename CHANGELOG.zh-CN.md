@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-tag` 在 `checkable` 且使用 `#icon` 插槽时，checked 状态下图标不继承文字颜色，关闭 [#7407](https://github.com/tusen-ai/naive-ui/issues/7407)
+
 ## 2.43.2
 
 ### Fixes
