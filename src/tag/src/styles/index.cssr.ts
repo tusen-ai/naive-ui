@@ -66,7 +66,7 @@ export default cB('tag', `
   cE('icon', `
     display: flex;
     margin: 0 4px 0 0;
-    color: var(--n-text-color);
+    color: inherit;
     transition: color .3s var(--n-bezier);
     font-size: var(--n-avatar-size-override);
   `),
