@@ -137,13 +137,18 @@ export default defineComponent({
     } = useTableData(props, { dataRelatedColsRef })
 
     const downloadCsv = (options?: CsvOptionsType): void => {
-      const { fileName = 'data.csv', keepOriginalData = false } = options || {}
+      const {
+        fileName = 'data.csv',
+        keepOriginalData = false,
+        columnKeys
+      } = options || {}
       const data = keepOriginalData ? props.data : rawPaginatedDataRef.value
       const csvData = generateCsv(
         props.columns,
         data,
         props.getCsvCell,
-        props.getCsvHeader
+        props.getCsvHeader,
+        columnKeys
       )
       const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8' })
       const downloadUrl = URL.createObjectURL(blob)

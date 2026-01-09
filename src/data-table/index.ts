@@ -10,6 +10,7 @@ export type {
   CreateRowKey as DataTableCreateRowKey,
   CreateRowProps as DataTableCreateRowProps,
   CreateSummary as DataTableCreateSummary,
+  CsvOptionsType as DataTableCsvOptions,
   TableExpandColumn as DataTableExpandColumn,
   FilterState as DataTableFilterState,
   DataTableInst,

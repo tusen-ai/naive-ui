@@ -4,6 +4,8 @@
 You can use `downloadCsv` method to export data as CSV file.
 
 If default CSV generation logic can't fit your needs, for example, `title` uses render function, or you need to adjust data format for each cell, you can customize the exported header and cell data with `get-csv-header` and `get-csv-cell` props.
+
+You can specify which columns to export using the `columnKeys` option.
 </markdown>
 
 <script lang="ts" setup>
@@ -97,6 +99,13 @@ function exportSorterAndFilterCsv() {
   })
 }
 
+function exportSelectedColumnsCsv() {
+  return tableRef.value?.downloadCsv({
+    fileName: 'selected-columns',
+    columnKeys: ['name', 'age']
+  })
+}
+
 const getCsvCell: DataTableGetCsvCell = (value, _, column) => {
   if (column.key === 'age') {
     return `${value} years old`
@@ -124,6 +133,9 @@ const pagination = false as const
       </n-button>
       <n-button @click="exportSorterAndFilterCsv">
         Export CSV (displayed data)
+      </n-button>
+      <n-button @click="exportSelectedColumnsCsv">
+        Export CSV (selected columns)
       </n-button>
     </n-space>
     <n-data-table
