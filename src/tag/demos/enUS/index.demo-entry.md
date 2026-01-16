@@ -30,7 +30,7 @@ icon.vue
 | color | `{ color?: string, borderColor?: string, textColor?: string }` | `undefined` | Color of the tag. Note: this will override the type property's color. |  |
 | disabled | `boolean` | `false` | Whether the tag is disabled. |  |
 | round | `boolean` | `false` | Whether the tag has rounded corners. |  |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the tag. |  |
+| size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | Size of the tag. |  |
 | strong | `boolean` | `false` | Whether to use strong text | 2.30.0 |
 | trigger-click-on-close | `boolean` | `false` | Whether the tag triggers click on close. | 2.32.2 |
 | type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | Type of the tag. |  |

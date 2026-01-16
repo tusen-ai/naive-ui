@@ -13,14 +13,17 @@ function handleClose() {
 
 <template>
   <n-space>
-    <n-tag size="small" closable @close="handleClose">
+    <n-tag size="tiny" closable @close="handleClose">
       Real Love
     </n-tag>
-    <n-tag closable @close="handleClose">
-      Real Love
-    </n-tag>
-    <n-tag type="success" size="large" closable @close="handleClose">
+    <n-tag type="success" size="small" closable @close="handleClose">
       Yes It Is
+    </n-tag>
+    <n-tag type="warning" closable @close="handleClose">
+      I'm Down
+    </n-tag>
+    <n-tag type="error" size="large" closable @close="handleClose">
+      Yesterday
     </n-tag>
   </n-space>
 </template>

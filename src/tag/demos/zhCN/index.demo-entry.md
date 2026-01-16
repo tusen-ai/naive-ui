@@ -31,7 +31,7 @@ rtl-debug.vue
 | color | `{ color?: string, borderColor?: string, textColor?: string }` | `undefined` | 标签颜色，设置该项后 `type` 无效 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
 | round | `boolean` | `false` | 是否圆角 |  |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
+| size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
 | strong | `boolean` | `false` | 文字是否加粗 | 2.30.0 |
 | trigger-click-on-close | `boolean` | `false` | 关闭时是否触发点击事件 | 2.32.2 |
 | type | `'default' \| 'primary' \| 'info' \| 'success' \| 'warning' \| 'error'` | `'default'` | 类型 |
