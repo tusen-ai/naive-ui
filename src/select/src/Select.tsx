@@ -407,7 +407,8 @@ export default defineComponent({
     const selectedOptionRef = computed<SelectOption | null>(() => {
       const { value: mergedValue } = mergedValueRef
       if (!props.multiple && !Array.isArray(mergedValue)) {
-        if (mergedValue === null)
+        // Treat empty string as no selection so placeholder can show
+        if (mergedValue === null || mergedValue === '')
           return null
         return getMergedOptions([mergedValue])[0] || null
       }
