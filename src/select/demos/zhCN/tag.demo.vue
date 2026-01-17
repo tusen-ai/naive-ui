@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-const multipleSelectValue = ref(null)
+const multipleSelectValue = ref(['song0'])
 const selectValue = ref(null)
 const options = [
   {

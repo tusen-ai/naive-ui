@@ -6,6 +6,7 @@ import type {
   SelectMixedOption,
   SelectOption
 } from './interface'
+import { escapeRegExp } from 'lodash-es'
 
 export function getIsGroup(option: SelectMixedOption): boolean {
   return option.type === 'group'
@@ -24,6 +25,23 @@ export function patternMatched(pattern: string, value: string): boolean {
   catch {
     return false
   }
+}
+
+export function doPatternSplit(
+  pattern: string,
+  separators: string[]
+): string[] | null {
+  const escapedSeparators = separators.map(escapeRegExp).join('|')
+  const re = new RegExp(escapedSeparators)
+  const patterns = pattern
+    .split(re)
+    .map(s => s.trim())
+    .filter(Boolean)
+
+  if (patterns.length > 1 || patterns[0] !== pattern) {
+    return patterns
+  }
+  return null
 }
 
 export function createTmOptions(

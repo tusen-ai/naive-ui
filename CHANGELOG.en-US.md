@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-select` adds `separators` prop to split input in multiple mode, closes [#2368](https://github.com/tusen-ai/naive-ui/issues/2368).
+
+### Fixes
+
+- Fix `n-select` may delete disabled selected options.
+
 ## 2.43.2
 
 ### Fixes
