@@ -6,7 +6,7 @@
 
 ### Feats
 
-- `n-upload`'s `submit` method adds `reUpload` option.
+- `n-upload`'s `submit` method adds `retry` option.
 
 ## 2.43.2
 

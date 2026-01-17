@@ -586,8 +586,8 @@ export default defineComponent({
     }
     function submit({
       fileId,
-      reUpload = false
-    }: { fileId?: string, reUpload?: boolean } = {}): void {
+      retry = false
+    }: { fileId?: string, retry?: boolean } = {}): void {
       const {
         method,
         action,
@@ -600,7 +600,7 @@ export default defineComponent({
         = fileId !== undefined
           ? mergedFileListRef.value.filter(file => file.id === fileId)
           : mergedFileListRef.value
-      const shouldReupload = reUpload || fileId !== undefined
+      const shouldReupload = retry || fileId !== undefined
       filesToUpload.forEach((file) => {
         const { status } = file
         if (status === 'pending' || (status === 'error' && shouldReupload)) {
