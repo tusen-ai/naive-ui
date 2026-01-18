@@ -109,8 +109,8 @@
     "@vicons/fluent": "^0.13.0",
     "@vicons/ionicons4": "^0.13.0",
     "@vicons/ionicons5": "^0.13.0",
-    "@vitejs/plugin-vue": "^6.0.2",
-    "@vitest/coverage-v8": "^4.0.15",
+    "@vitejs/plugin-vue": "^6.0.3",
+    "@vitest/coverage-v8": "^4.0.17",
     "@vue/compiler-sfc": "^3.5.21",
     "@vue/server-renderer": "^3.5.21",
     "@vue/test-utils": "^2.4.6",
@@ -130,22 +130,22 @@
     "katex": "^0.16.22",
     "lint-staged": "^16.1.6",
     "marked": "^12.0.2",
-    "oxc-transform": "^0.101.0",
+    "oxc-transform": "^0.108.0",
     "prettier": "^3.6.2",
     "rimraf": "^6.0.1",
     "superagent": "^10.2.2",
     "tsx": "^4.20.3",
     "typescript": "^5.9.2",
     "vfonts": "^0.0.3",
-    "vite": "8.0.0-beta.0",
-    "vitest": "^4.0.15",
+    "vite": "8.0.0-beta.8",
+    "vitest": "^4.0.17",
     "vue": "^3.5.21",
     "vue-router": "^4.5.1",
     "vue-tsc": "^3.0.7"
   },
   "pnpm": {
     "overrides": {
-      "vite": "8.0.0-beta.0",
+      "vite": "8.0.0-beta.8",
       "cssstyle": "5.2.1"
     },
     "peerDependencyRules": {
