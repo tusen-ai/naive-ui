@@ -105,16 +105,16 @@ export default c([
         box-shadow var(--n-duration) var(--n-bezier),
         background-color var(--n-duration) var(--n-bezier),
         color var(--n-duration) var(--n-bezier),
-        opacity var(--n-duration-fast) var(--n-bezier-ease-out),
-        transform var(--n-duration-fast) var(--n-bezier-ease-out);
+        opacity .15s var(--n-bezier-ease-out),
+        transform .15s var(--n-bezier-ease-out);
     `),
     c('&.popover-transition-leave-active', `
       transition:
         box-shadow var(--n-duration) var(--n-bezier),
         background-color var(--n-duration) var(--n-bezier),
         color var(--n-duration) var(--n-bezier),
-        opacity var(--n-duration-fast) var(--n-bezier-ease-in),
-        transform var(--n-duration-fast) var(--n-bezier-ease-in);
+        opacity .15s var(--n-bezier-ease-in),
+        transform .15s var(--n-bezier-ease-in);
     `)
   ]),
   placementStyle('top-start', `

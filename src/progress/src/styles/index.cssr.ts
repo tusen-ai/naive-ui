@@ -3,6 +3,7 @@ import { c, cB, cM } from '../../../_utils/cssr'
 // vars
 // --n-bezier
 // --n-duration
+// --n-duration-fast
 // --n-fill-color
 // --n-font-size
 // --n-font-size-circle
@@ -184,7 +185,7 @@ export default c([
             white-space: nowrap;
             color: var(--n-text-color-line-inner);
             transition:
-              right var(--n-duration) var(--n-bezier),
+              right var(--n-duration-fast) var(--n-bezier),
               color var(--n-duration) var(--n-bezier),
               background-color var(--n-duration) var(--n-bezier);
           `)
@@ -206,7 +207,7 @@ export default c([
             max-width: 0%;
             transition:
               background-color var(--n-duration) var(--n-bezier),
-              max-width var(--n-duration) var(--n-bezier);
+              max-width var(--n-duration-fast) var(--n-bezier);
           `, [
             cM('processing', [
               c('&::after', `

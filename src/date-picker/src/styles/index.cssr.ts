@@ -4,7 +4,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // vars:
 // --n-bezier
 // --n-duration
-
+// --n-duration-fast
 // --n-icon-color-override
 // --n-icon-color-disabled-override
 
@@ -341,7 +341,7 @@ export default c([
         z-index: 0;
         cursor: pointer;
         transition:
-          background-color var(--n-duration) var(--n-bezier),
+          background-color var(--n-duration-fast) var(--n-bezier),
           color var(--n-duration) var(--n-bezier);
       `, [
         cE('trigger', `
@@ -362,7 +362,7 @@ export default c([
             border-radius: 2px;
             background-color: var(--n-item-color-active);
             transition:
-              background-color var(--n-duration) var(--n-bezier);
+              background-color var(--n-duration-fast) var(--n-bezier);
           `)
         ]),
         c('&::after', `

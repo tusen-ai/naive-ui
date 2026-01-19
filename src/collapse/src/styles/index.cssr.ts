@@ -51,7 +51,7 @@ export default cB('collapse', 'width: 100%;', [
     ]),
     cE('content-wrapper', [
       cE('content-inner', 'padding-top: 16px;'),
-      fadeInHeightExpandTransition({ duration: 'var(--n-duration)' })
+      fadeInHeightExpandTransition({ duration: '0.15s' })
     ]),
     cM('active', [
       cE('header', [
@@ -107,7 +107,7 @@ export default cB('collapse', 'width: 100%;', [
       cB('collapse-item-arrow', `
         display: flex;
         transition:
-          transform var(--n-duration) var(--n-bezier),
+          transform .15s var(--n-bezier),
           color var(--n-duration) var(--n-bezier);
         font-size: 18px;
         color: var(--n-arrow-color);

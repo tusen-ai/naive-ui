@@ -13,7 +13,7 @@ export default cB('rate', {
   c('&:hover', [
     cE('item', `
       transition:
-        transform var(--n-duration-fast) var(--n-bezier),
+        transform .1s var(--n-bezier),
         color var(--n-duration) var(--n-bezier);
     `)
   ]),
@@ -21,7 +21,7 @@ export default cB('rate', {
     position: relative;
     display: flex;
     transition:
-      transform var(--n-duration-fast) var(--n-bezier),
+      transform .1s var(--n-bezier),
       color var(--n-duration) var(--n-bezier);
     transform: scale(1);
     font-size: var(--n-item-size);

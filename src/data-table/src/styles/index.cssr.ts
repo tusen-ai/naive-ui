@@ -607,7 +607,7 @@ function createFixedColumnStyle(): CNode[] {
         position: absolute;
         top: 0;
         bottom: -1px;
-        transition: box-shadow var(--n-duration) var(--n-bezier);
+        transition: box-shadow var(--n-duration-fast) var(--n-bezier);
         right: -36px;
       `)
     ]),
@@ -624,7 +624,7 @@ function createFixedColumnStyle(): CNode[] {
         position: absolute;
         top: 0;
         bottom: -1px;
-        transition: box-shadow var(--n-duration) var(--n-bezier);
+        transition: box-shadow var(--n-duration-fast) var(--n-bezier);
         left: -36px;
       `)
     ])

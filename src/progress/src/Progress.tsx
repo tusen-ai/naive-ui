@@ -100,7 +100,7 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const { status } = props
       const {
-        common: { cubicBezierEaseInOut, duration },
+        common: { cubicBezierEaseInOut, duration, durationFast },
         self: {
           fontSize,
           fontSizeCircle,
@@ -120,6 +120,7 @@ export default defineComponent({
       return {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-duration': duration,
+        '--n-duration-fast': durationFast,
         '--n-fill-color': fillColor,
         '--n-font-size': fontSize,
         '--n-font-size-circle': fontSizeCircle,

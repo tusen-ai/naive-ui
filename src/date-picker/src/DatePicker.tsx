@@ -782,7 +782,7 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const { type } = props
       const {
-        common: { cubicBezierEaseInOut, duration },
+        common: { cubicBezierEaseInOut, duration, durationFast },
         self: {
           calendarTitleFontSize,
           calendarDaysFontSize,
@@ -831,7 +831,7 @@ export default defineComponent({
       return {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-duration': duration,
-
+        '--n-duration-fast': durationFast,
         '--n-panel-border-radius': panelBorderRadius,
         '--n-panel-color': panelColor,
         '--n-panel-box-shadow': panelBoxShadow,

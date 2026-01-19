@@ -270,7 +270,8 @@ export default defineComponent({
           cubicBezierEaseInOut,
           cubicBezierEaseIn,
           cubicBezierEaseOut,
-          duration
+          duration,
+          durationFast
         },
         self: {
           color,
@@ -307,6 +308,7 @@ export default defineComponent({
         '--n-bezier-out': cubicBezierEaseOut,
         '--n-bezier-in': cubicBezierEaseIn,
         '--n-duration': duration,
+        '--n-duration-fast': durationFast,
         '--n-header-padding': headerPadding,
         '--n-body-padding': bodyPadding,
         '--n-footer-padding': footerPadding,

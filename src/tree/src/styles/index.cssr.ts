@@ -38,12 +38,12 @@ export default cB('tree', `
   cB('tree-motion-wrapper', [
     cM('expand', [
       fadeInHeightExpandTransition({
-        duration: 'var(--n-duration)'
+        duration: 'var(--n-duration-fast)'
       })
     ]),
     cM('collapse', [
       fadeInHeightExpandTransition({
-        duration: 'var(--n-duration)',
+        duration: 'var(--n-duration-fast)',
         reverse: true
       })
     ])
@@ -182,7 +182,7 @@ export default cB('tree', `
     height: var(--n-node-content-height);
     align-items: center;
     justify-content: center;
-    transition: transform var(--n-duration) var(--n-bezier);
+    transition: transform .15s var(--n-bezier);
     vertical-align: bottom;
   `, [
     cE('icon', `

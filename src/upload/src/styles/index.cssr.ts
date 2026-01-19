@@ -200,7 +200,7 @@ export default c([
           bottom: 0;
           border-radius: inherit;
           opacity: 0;
-          transition: opacity var(--n-duration) var(--n-bezier);
+          transition: opacity var(--n-duration-fast) var(--n-bezier);
           content: "";
         `),
         c('&:hover', [
@@ -246,7 +246,7 @@ export default c([
         cE('thumbnail', `
           font-size: 18px;
           opacity: 1;
-          transition: opacity var(--n-duration) var(--n-bezier);
+          transition: opacity var(--n-duration-fast) var(--n-bezier);
           color: var(--n-item-icon-color);
         `, [
           cB('base-icon', `
@@ -265,7 +265,7 @@ export default c([
           width: 80px;
           display: flex;
           align-items: center;
-          transition: opacity var(--n-duration) var(--n-bezier);
+          transition: opacity var(--n-duration-fast) var(--n-bezier);
           justify-content: flex-end;
           opacity: 0;
         `, [

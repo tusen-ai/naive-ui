@@ -312,8 +312,8 @@ export default c([
         opacity: 1;
         transition:
           color var(--n-duration) var(--n-bezier),
-          transform var(--n-duration) var(--n-bezier),
-          opacity var(--n-duration) var(--n-bezier);
+          transform var(--n-duration-fast) var(--n-bezier),
+          opacity var(--n-duration-fast) var(--n-bezier);
       `),
       cB('menu-item-content-header', `
         grid-area: content;
@@ -359,7 +359,7 @@ export default c([
         padding: 0;
       `, [
         fadeInHeightExpandTransition({
-          duration: 'var(--n-duration)'
+          duration: 'var(--n-duration-fast)'
         })
       ])
     ]),

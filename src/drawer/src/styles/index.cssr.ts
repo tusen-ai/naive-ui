@@ -15,6 +15,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --n-bezier-out
 // --n-bezier-in
 // --n-duration
+// --n-duration-fast
 // --n-body-padding
 // --n-header-padding
 // --n-footer-padding
@@ -218,8 +219,8 @@ export default c([
       background-color: rgba(0, 0, 0, 0)
     `),
     fadeInTransition({
-      enterDuration: 'var(--n-duration)',
-      leaveDuration: 'var(--n-duration)',
+      enterDuration: 'var(--n-duration-fast)',
+      leaveDuration: 'var(--n-duration-fast)',
       enterCubicBezier: 'var(--n-bezier-in)',
       leaveCubicBezier: 'var(--n-bezier-out)'
     })

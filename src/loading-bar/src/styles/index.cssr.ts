@@ -17,13 +17,13 @@ export default cB('loading-bar-container', `
 `, [
   fadeInTransition({
     enterDuration: 'var(--n-duration)',
-    leaveDuration: 'var(--n-duration)'
+    leaveDuration: '0.8s'
   }),
   cB('loading-bar', `
     width: 100%;
     transition:
       max-width 4s linear,
-      background var(--n-duration) linear;
+      background var(--n-duration-fast) linear;
     height: var(--n-height);
   `, [
     cM('starting', `
@@ -32,14 +32,14 @@ export default cB('loading-bar-container', `
     cM('finishing', `
       background: var(--n-color-loading);
       transition:
-        max-width var(--n-duration) linear,
-        background var(--n-duration) linear;
+        max-width var(--n-duration-fast) linear,
+        background var(--n-duration-fast) linear;
     `),
     cM('error', `
       background: var(--n-color-error);
       transition:
-        max-width var(--n-duration) linear,
-        background var(--n-duration) linear;
+        max-width var(--n-duration-fast) linear,
+        background var(--n-duration-fast) linear;
     `)
   ])
 ])
