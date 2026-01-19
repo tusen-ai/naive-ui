@@ -212,7 +212,7 @@ export default c([
           width: var(--n-handle-size);
           border-radius: 50%;
           overflow: hidden;
-          transition: box-shadow var(--n-duration-fast, .2s) var(--n-bezier), background-color var(--n-duration) var(--n-bezier);
+          transition: box-shadow var(--n-duration-fast) var(--n-bezier), background-color var(--n-duration) var(--n-bezier);
           background-color: var(--n-handle-color);
           box-shadow: var(--n-handle-box-shadow);
         `, [

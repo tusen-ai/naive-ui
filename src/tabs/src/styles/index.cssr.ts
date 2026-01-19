@@ -327,7 +327,7 @@ export default cB('tabs', `
   cB('tabs-pane-wrapper', `
     position: relative;
     overflow: hidden;
-    transition: max-height var(--n-duration-fast, .2s) var(--n-bezier);
+    transition: max-height var(--n-duration-fast) var(--n-bezier);
   `),
   cB('tab-pane', `
     color: var(--n-pane-text-color);
