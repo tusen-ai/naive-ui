@@ -4,7 +4,7 @@ import { cB } from '../../../_utils/cssr'
 // --n-color
 export default cB('hr', `
   margin: 12px 0;
-  transition: border-color .3s var(--n-bezier);
+  transition: border-color var(--n-duration) var(--n-bezier);
   border-left: none;
   border-right: none;
   border-bottom: none;

@@ -4,14 +4,15 @@ import { c, cB } from '../../../_utils/cssr'
 // --n-color-start
 // --n-color-end
 // --n-bezier
+// --n-duration
 export default c([
   cB('skeleton', `
     height: 1em;
     width: 100%;
     transition:
-      --n-color-start .3s var(--n-bezier),
-      --n-color-end .3s var(--n-bezier),
-      background-color .3s var(--n-bezier);
+      --n-color-start var(--n-duration) var(--n-bezier),
+      --n-color-end var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier);
     animation: 2s skeleton-loading infinite cubic-bezier(0.36, 0, 0.64, 1);
     background-color: var(--n-color-start);
   `),

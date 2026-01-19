@@ -38,11 +38,12 @@ export const NIconWrapper = defineComponent({
     )
     const cssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: { color, iconColor }
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-color': color,
         '--n-icon-color': iconColor
       }

@@ -31,7 +31,7 @@ export default defineComponent({
       const { depth } = props
       const typeSafeDepth = depth || '1'
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           pFontSize,
           pLineHeight,
@@ -42,6 +42,7 @@ export default defineComponent({
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-font-size': pFontSize,
         '--n-line-height': pLineHeight,
         '--n-margin': pMargin,

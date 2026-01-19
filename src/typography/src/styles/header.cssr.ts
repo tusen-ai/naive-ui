@@ -13,7 +13,7 @@ export default cB('h', `
   font-size: var(--n-font-size);
   font-weight: var(--n-font-weight);
   margin: var(--n-margin);
-  transition: color .3s var(--n-bezier);
+  transition: color var(--n-duration) var(--n-bezier);
   color: var(--n-text-color);
 `, [
   c('&:first-child', {
@@ -34,7 +34,7 @@ export default cB('h', `
       content: "";
       width: var(--n-bar-width);
       border-radius: calc(var(--n-bar-width) / 2);
-      transition: background-color .3s var(--n-bezier);
+      transition: background-color var(--n-duration) var(--n-bezier);
       left: 0;
       top: 0;
       bottom: 0;

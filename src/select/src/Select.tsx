@@ -880,9 +880,12 @@ export default defineComponent({
     }
     const cssVarsRef = computed(() => {
       const {
+        common: { cubicBezierEaseInOut, duration },
         self: { menuBoxShadow }
       } = themeRef.value
       return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-menu-box-shadow': menuBoxShadow
       }
     })

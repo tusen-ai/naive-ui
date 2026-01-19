@@ -73,10 +73,11 @@ export default defineComponent({
           [createKey('tdPadding', size)]: tdPadding,
           [createKey('thPadding', size)]: thPadding
         },
-        common: { cubicBezierEaseInOut }
+        common: { cubicBezierEaseInOut, duration }
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-td-color': tdColor,
         '--n-td-color-modal': tdColorModal,
         '--n-td-color-popover': tdColorPopover,

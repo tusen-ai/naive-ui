@@ -1,7 +1,7 @@
 import { c, cB, cM } from '../../../_utils/cssr'
 
 const liStyle = c('li', {
-  transition: 'color .3s var(--n-bezier)',
+  transition: 'color var(--n-duration) var(--n-bezier)',
   lineHeight: 'var(--n-line-height)',
   margin: 'var(--n-li-margin)',
   marginBottom: 0,

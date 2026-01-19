@@ -4,6 +4,7 @@ import { c, cB, cE } from '../../../_utils/cssr'
 // --n-font-size
 // --n-icon-size
 // --n-bezier
+// --n-duration
 // --n-icon-color
 export default cB('popconfirm', [
   cE('body', `
@@ -17,7 +18,7 @@ export default cB('popconfirm', [
       display: flex;
       font-size: var(--n-icon-size);
       color: var(--n-icon-color);
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
       margin: 0 8px 0 0;
     `)
   ]),

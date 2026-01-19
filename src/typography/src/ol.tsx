@@ -29,7 +29,7 @@ export default defineComponent({
     )
     const cssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           olPadding,
           ulPadding,
@@ -41,6 +41,7 @@ export default defineComponent({
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-font-size': liFontSize,
         '--n-line-height': liLineHeight,
         '--n-text-color': liTextColor,

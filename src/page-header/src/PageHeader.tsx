@@ -60,7 +60,7 @@ export default defineComponent({
           backColorHover,
           backColorPressed
         },
-        common: { cubicBezierEaseInOut }
+        common: { cubicBezierEaseInOut, duration }
       } = themeRef.value
       return {
         '--n-title-text-color': titleTextColor,
@@ -72,7 +72,8 @@ export default defineComponent({
         '--n-back-color': backColor,
         '--n-back-color-hover': backColorHover,
         '--n-back-color-pressed': backColorPressed,
-        '--n-bezier': cubicBezierEaseInOut
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration
       }
     })
     const themeClassHandle = inlineThemeDisabled

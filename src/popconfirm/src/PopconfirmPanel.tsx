@@ -39,11 +39,12 @@ export default defineComponent({
     } = inject(popconfirmInjectionKey)!
     const cssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: { fontSize, iconSize, iconColor }
       } = mergedThemeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-font-size': fontSize,
         '--n-icon-size': iconSize,
         '--n-icon-color': iconColor

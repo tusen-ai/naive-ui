@@ -902,7 +902,7 @@ export default defineComponent({
     )
     const cssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           dotSize,
           dotColor,
@@ -915,6 +915,7 @@ export default defineComponent({
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-dot-color': dotColor,
         '--n-dot-color-focus': dotColorFocus,
         '--n-dot-color-active': dotColorActive,

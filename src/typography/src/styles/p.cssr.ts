@@ -8,7 +8,7 @@ import { c, cB } from '../../../_utils/cssr'
 // --n-text-color
 export default cB('p', `
   box-sizing: border-box;
-  transition: color .3s var(--n-bezier);
+  transition: color var(--n-duration) var(--n-bezier);
   margin: var(--n-margin);
   font-size:  var(--n-font-size);
   line-height: var(--n-line-height);

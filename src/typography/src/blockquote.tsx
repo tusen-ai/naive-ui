@@ -29,7 +29,7 @@ export default defineComponent({
     )
     const cssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           blockquoteTextColor,
           blockquotePrefixColor,
@@ -39,6 +39,7 @@ export default defineComponent({
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-font-size': blockquoteFontSize,
         '--n-line-height': blockquoteLineHeight,
         '--n-prefix-color': blockquotePrefixColor,

@@ -52,6 +52,9 @@ const animation = c([
   `)
 ])
 
+// vars:
+// --n-bezier
+// --n-duration
 export default c([
   cB('legacy-transfer', `
     display: flex;
@@ -63,7 +66,7 @@ export default c([
   `, [
     cB('legacy-transfer-icon', `
       color: var(--n-icon-color);
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
     `),
     cM('disabled', [
       cB('legacy-transfer-icon', {
@@ -77,13 +80,13 @@ export default c([
       background-clip: padding-box;
       width: calc(50% - 36px);
       position: relative;
-      transition: background-color .3s var(--n-bezier);
+      transition: background-color var(--n-duration) var(--n-bezier);
       border-radius: var(--n-border-radius);
       background-color: var(--n-list-color);
     `, [
       cE('border', `
         border: 1px solid var(--n-border-color);
-        transition: border-color .3s var(--n-bezier);
+        transition: border-color var(--n-duration) var(--n-bezier);
         pointer-events: none;
         border-radius: inherit;
         position: absolute;
@@ -103,8 +106,8 @@ export default c([
         border-bottom-right-radius: 0;
         background-color: var(--n-header-color);
         transition:
-          border-color .3s var(--n-bezier),
-          background-color .3s var(--n-bezier);
+          border-color var(--n-duration) var(--n-bezier),
+          background-color var(--n-duration) var(--n-bezier);
       `, [
         cE('checkbox', `
           display: flex;
@@ -116,7 +119,7 @@ export default c([
           flex: 1;
           line-height: 1;
           font-weight: var(--n-header-font-weight);
-          transition: color .3s var(--n-bezier);
+          transition: color var(--n-duration) var(--n-bezier);
           color: var(--n-header-text-color);
         `, [
           cM('disabled', {
@@ -124,7 +127,7 @@ export default c([
           })
         ]),
         cE('extra', `
-          transition: color .3s var(--n-bezier);
+          transition: color var(--n-duration) var(--n-bezier);
           font-size: var(--n-extra-font-size);
           justify-self: flex-end;
           margin-right: 14px;
@@ -190,8 +193,8 @@ export default c([
               height: var(--n-item-height);
               max-height: var(--n-item-height);
                 transition:
-                  background-color .3s var(--n-bezier),
-                  color .3s var(--n-bezier);
+                  background-color var(--n-duration) var(--n-bezier),
+                  color var(--n-duration) var(--n-bezier);
               position: relative;
               cursor: pointer;
               display: flex;

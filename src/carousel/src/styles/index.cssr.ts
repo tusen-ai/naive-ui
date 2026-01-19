@@ -2,6 +2,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-dot-color
 // --n-dot-color-focus
 // --n-dot-color-active
@@ -49,8 +50,8 @@ export default cB('carousel', `
         border-radius: 50%;
         cursor: pointer;
         transition:
-          box-shadow .3s var(--n-bezier),
-          background-color .3s var(--n-bezier);
+          box-shadow var(--n-duration) var(--n-bezier),
+          background-color var(--n-duration) var(--n-bezier);
         outline: none;
       `, [
         c('&:focus', `
@@ -69,9 +70,9 @@ export default cB('carousel', `
         background-color: var(--n-dot-color);
         cursor: pointer;
         transition:
-          width .3s var(--n-bezier),
-          box-shadow .3s var(--n-bezier),
-          background-color .3s var(--n-bezier);
+          width var(--n-duration) var(--n-bezier),
+          box-shadow var(--n-duration) var(--n-bezier),
+          background-color var(--n-duration) var(--n-bezier);
         outline: none;
       `, [
         c('&:focus', `
@@ -85,7 +86,7 @@ export default cB('carousel', `
     ])
   ]),
   cE('arrow', `
-    transition: background-color .3s var(--n-bezier);
+    transition: background-color var(--n-duration) var(--n-bezier);
     cursor: pointer;
     height: 28px;
     width: 28px;
@@ -165,9 +166,9 @@ export default cB('carousel', `
           height: var(--n-dot-line-width);
           margin: 4px 0;
           transition:
-            height .3s var(--n-bezier),
-            box-shadow .3s var(--n-bezier),
-            background-color .3s var(--n-bezier);
+            height var(--n-duration) var(--n-bezier),
+            box-shadow var(--n-duration) var(--n-bezier),
+            background-color var(--n-duration) var(--n-bezier);
           outline: none;
         `, [
           cM('active', `
@@ -244,9 +245,9 @@ export default cB('carousel', `
           height: var(--n-dot-line-width);
           margin: 4px 0;
           transition:
-            height .3s var(--n-bezier),
-            box-shadow .3s var(--n-bezier),
-            background-color .3s var(--n-bezier);
+            height var(--n-duration) var(--n-bezier),
+            box-shadow var(--n-duration) var(--n-bezier),
+            background-color var(--n-duration) var(--n-bezier);
           outline: none;
         `, [
           cM('active', `

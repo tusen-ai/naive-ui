@@ -39,7 +39,7 @@ export default (level: '1' | '2' | '3' | '4' | '5' | '6') =>
       const cssVarsRef = computed(() => {
         const { type } = props
         const {
-          common: { cubicBezierEaseInOut },
+          common: { cubicBezierEaseInOut, duration },
           self: {
             headerFontWeight,
             headerTextColor,
@@ -52,6 +52,7 @@ export default (level: '1' | '2' | '3' | '4' | '5' | '6') =>
         } = themeRef.value
         return {
           '--n-bezier': cubicBezierEaseInOut,
+          '--n-duration': duration,
           '--n-font-size': fontSize,
           '--n-margin': margin,
           '--n-bar-color': barColor,

@@ -241,7 +241,8 @@ export default defineComponent({
           common: {
             cubicBezierEaseInOut,
             cubicBezierEaseIn,
-            cubicBezierEaseOut
+            cubicBezierEaseOut,
+            duration
           },
           self: {
             width,
@@ -268,6 +269,7 @@ export default defineComponent({
           '--n-bezier': cubicBezierEaseInOut,
           '--n-bezier-ease-in': cubicBezierEaseIn,
           '--n-bezier-ease-out': cubicBezierEaseOut,
+          '--n-duration': duration,
           '--n-border-color': borderColor,
           '--n-border-radius': borderRadius,
           '--n-extra-font-size': extraFontSize,

@@ -3,6 +3,7 @@ import { c, cB, cE } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-menu-height
 // --n-menu-border-radius
 // --n-menu-box-shadow
@@ -24,7 +25,7 @@ export default c([
     position: relative;
     overflow: hidden;
     margin: 4px 0;
-    transition: box-shadow .3s var(--n-bezier), background-color .3s var(--n-bezier);
+    transition: box-shadow var(--n-duration) var(--n-bezier), background-color var(--n-duration) var(--n-bezier);
     border-radius: var(--n-menu-border-radius);
     box-shadow: var(--n-menu-box-shadow);
     background-color: var(--n-menu-color);
@@ -40,16 +41,16 @@ export default c([
     cE('header', `
       padding: var(--n-header-padding);
       transition: 
-        color .3s var(--n-bezier);
-        border-color .3s var(--n-bezier);
+        color var(--n-duration) var(--n-bezier);
+        border-color var(--n-duration) var(--n-bezier);
       border-bottom: 1px solid var(--n-header-divider-color);
       color: var(--n-header-text-color);
     `),
     cE('action', `
       padding: var(--n-action-padding);
       transition: 
-        color .3s var(--n-bezier);
-        border-color .3s var(--n-bezier);
+        color var(--n-duration) var(--n-bezier);
+        border-color var(--n-duration) var(--n-bezier);
       border-top: 1px solid var(--n-action-divider-color);
       color: var(--n-action-text-color);
     `),

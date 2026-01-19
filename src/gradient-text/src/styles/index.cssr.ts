@@ -4,6 +4,7 @@ import { cB } from '../../../_utils/cssr'
 // --n-font-weight
 // --n-rotate
 // --n-bezier
+// --n-duration
 // --n-color-start
 // --n-color-end
 export default cB('gradient-text', `
@@ -15,6 +16,6 @@ export default cB('gradient-text', `
   white-space: nowrap;
   background-image: linear-gradient(var(--n-rotate), var(--n-color-start) 0%, var(--n-color-end) 100%);
   transition:
-    --n-color-start .3s var(--n-bezier),
-    --n-color-end .3s var(--n-bezier);
+    --n-color-start var(--n-duration) var(--n-bezier),
+    --n-color-end var(--n-duration) var(--n-bezier);
 `)
