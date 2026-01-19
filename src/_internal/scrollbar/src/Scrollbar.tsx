@@ -741,7 +741,7 @@ const Scrollbar = defineComponent({
 
       return {
         '--n-scrollbar-bezier': cubicBezierEaseInOut,
-        '--n-scrollbar-duration': durationFast,
+        '--n-duration-fast': durationFast,
         '--n-scrollbar-color': color,
         '--n-scrollbar-color-hover': colorHover,
         '--n-scrollbar-border-radius': borderRadius,
