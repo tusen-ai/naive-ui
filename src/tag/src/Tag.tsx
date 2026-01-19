@@ -189,7 +189,6 @@ export default defineComponent({
         '--n-duration': duration,
         '--n-font-weight-strong': fontWeightStrong,
         '--n-avatar-size-override': `calc(${height} - 8px)`,
-        '--n-bezier': cubicBezierEaseInOut,
         '--n-border-radius': borderRadius,
         '--n-border': border,
         '--n-close-icon-size': closeIconSize,

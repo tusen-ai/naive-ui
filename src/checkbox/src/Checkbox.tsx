@@ -264,7 +264,6 @@ export default defineComponent({
         '--n-label-line-height': labelLineHeight,
         '--n-label-font-weight': labelFontWeight,
         '--n-size': size,
-        '--n-bezier': cubicBezierEaseInOut,
         '--n-border-radius': borderRadius,
         '--n-border': border,
         '--n-border-checked': borderChecked,

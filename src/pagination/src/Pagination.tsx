@@ -494,7 +494,6 @@ export default defineComponent({
         '--n-item-border-pressed': itemBorderPressed,
         '--n-item-padding': itemPadding,
         '--n-item-border-radius': itemBorderRadius,
-        '--n-bezier': cubicBezierEaseInOut,
         '--n-jumper-font-size': jumperFontSize,
         '--n-jumper-text-color': jumperTextColor,
         '--n-jumper-text-color-disabled': jumperTextColorDisabled,
