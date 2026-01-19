@@ -5,6 +5,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // --n-icon-color-override
 // --n-icon-color-disabled-override
 // --n-bezier
+// --n-duration
 // --n-border-radius
 // --n-item-color-hover
 // --n-item-font-size
@@ -35,8 +36,8 @@ export default c([
   ]),
   cB('time-picker-panel', `
     transition:
-      box-shadow .3s var(--n-bezier),
-      background-color .3s var(--n-bezier);
+      box-shadow var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier);
     outline: none;
     font-size: var(--n-item-font-size);
     border-radius: var(--n-border-radius);
@@ -87,10 +88,10 @@ export default c([
         align-items: center;
         justify-content: center;
         transition: 
-          color .3s var(--n-bezier),
-          background-color .3s var(--n-bezier),
-          opacity .3s var(--n-bezier),
-          text-decoration-color .3s var(--n-bezier);
+          color var(--n-duration) var(--n-bezier),
+          background-color var(--n-duration) var(--n-bezier),
+          opacity var(--n-duration) var(--n-bezier),
+          text-decoration-color var(--n-duration) var(--n-bezier);
         background: #0000;
         text-decoration-color: #0000;
         color: var(--n-item-text-color);

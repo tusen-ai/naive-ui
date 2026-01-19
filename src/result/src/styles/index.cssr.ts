@@ -1,6 +1,7 @@
 import { cB, cE } from '../../../_utils/cssr'
 
 // --n-bezier
+// --n-duration
 // --n-font-size
 // --n-icon-size
 // --n-line-height
@@ -13,7 +14,7 @@ export default cB('result', `
   line-height: var(--n-line-height);
   font-size: var(--n-font-size);
   transition:
-    color .3s var(--n-bezier);
+    color var(--n-duration) var(--n-bezier);
 `, [
   cB('result-icon', `
     display: flex;

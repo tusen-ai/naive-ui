@@ -6,6 +6,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // vars:
 // --n-bezier
 // --n-bezier-ease-out
+// --n-duration
 // --n-ripple-duration
 // --n-opacity-disabled
 // --n-text-color
@@ -65,10 +66,10 @@ export default c([
     cursor: pointer;
     text-decoration: none;
     transition:
-      color .3s var(--n-bezier),
-      background-color .3s var(--n-bezier),
-      opacity .3s var(--n-bezier),
-      border-color .3s var(--n-bezier);
+      color var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier),
+      opacity var(--n-duration) var(--n-bezier),
+      border-color var(--n-duration) var(--n-bezier);
   `, [
     cM('color', [
       cE('border', {

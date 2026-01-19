@@ -16,8 +16,8 @@ export default cB('loading-bar-container', `
   height: 2px;
 `, [
   fadeInTransition({
-    enterDuration: '0.3s',
-    leaveDuration: '0.8s'
+    enterDuration: 'var(--n-duration)',
+    leaveDuration: 'var(--n-duration)'
   }),
   cB('loading-bar', `
     width: 100%;

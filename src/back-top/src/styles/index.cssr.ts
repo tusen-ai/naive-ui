@@ -3,6 +3,7 @@ import { c, cB, cM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-border-radius
 // --n-height
 // --n-width
@@ -25,9 +26,9 @@ export default cB('back-top', `
   justify-content: center;
   color: var(--n-text-color);
   transition:
-    color .3s var(--n-bezier),
-    box-shadow .3s var(--n-bezier),
-    background-color .3s var(--n-bezier);
+    color var(--n-duration) var(--n-bezier),
+    box-shadow var(--n-duration) var(--n-bezier),
+    background-color var(--n-duration) var(--n-bezier);
   border-radius: var(--n-border-radius);
   height: var(--n-height);
   min-width: var(--n-width);

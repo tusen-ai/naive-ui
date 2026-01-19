@@ -8,6 +8,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // --n-link-text-color-active
 // --n-link-text-color-pressed
 // --n-bezier
+// --n-duration
 // --n-rail-color
 // --n-rail-color-active
 // --n-rail-width
@@ -56,9 +57,9 @@ export default cB('anchor', `
     width: 100%;
     background-color: var(--n-link-color);
     transition:
-      top .15s var(--n-bezier),
-      max-width .15s var(--n-bezier),
-      background-color .3s var(--n-bezier);
+      top var(--n-duration) var(--n-bezier),
+      max-width var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier);
   `),
   cB('anchor-rail', `
     position: absolute;
@@ -78,8 +79,8 @@ export default cB('anchor', `
       height: 21px;
       background-color: #0000;
       transition: 
-        top .15s var(--n-bezier),
-        background-color .3s var(--n-bezier);
+        top var(--n-duration) var(--n-bezier),
+        background-color var(--n-duration) var(--n-bezier);
     `, [
       cM('active', {
         backgroundColor: 'var(--n-rail-color-active)'

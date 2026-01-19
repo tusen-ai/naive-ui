@@ -2,6 +2,8 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
+// --n-duration-fast
 // --n-close-size
 // --n-close-color-hover
 // --n-close-color-pressed
@@ -37,8 +39,8 @@ export default cB('tabs', `
   display: flex;
   flex-direction: column;
   transition:
-    background-color .3s var(--n-bezier),
-    border-color .3s var(--n-bezier);
+    background-color var(--n-duration) var(--n-bezier),
+    border-color var(--n-duration) var(--n-bezier);
 `, [
   cM('segment-type', [
     cB('tabs-rail', [
@@ -66,9 +68,9 @@ export default cB('tabs', `
       width: 2px;
       right: 0;
       transition:
-        top .2s var(--n-bezier),
-        max-height .2s var(--n-bezier),
-        background-color .3s var(--n-bezier);
+        top var(--n-duration-fast) var(--n-bezier),
+        max-height var(--n-duration-fast) var(--n-bezier),
+        background-color var(--n-duration) var(--n-bezier);
     `),
     cB('tabs-tab', `
       padding: var(--n-tab-padding-vertical); 
@@ -283,10 +285,10 @@ export default cB('tabs', `
     background-clip: padding-box;
     padding: var(--n-tab-padding);
     transition:
-      box-shadow .3s var(--n-bezier),
-      color .3s var(--n-bezier),
-      background-color .3s var(--n-bezier),
-      border-color .3s var(--n-bezier);
+      box-shadow var(--n-duration) var(--n-bezier),
+      color var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier),
+      border-color var(--n-duration) var(--n-bezier);
   `, [
     cM('disabled', {
       cursor: 'not-allowed'
@@ -294,8 +296,8 @@ export default cB('tabs', `
     cE('close', `
       margin-left: 6px;
       transition:
-        background-color .3s var(--n-bezier),
-        color .3s var(--n-bezier);
+        background-color var(--n-duration) var(--n-bezier),
+        color var(--n-duration) var(--n-bezier);
     `),
     cE('label', `
       display: flex;
@@ -310,10 +312,10 @@ export default cB('tabs', `
     border-radius: 1px;
     background-color: var(--n-bar-color);
     transition:
-      left .2s var(--n-bezier),
-      max-width .2s var(--n-bezier),
-      opacity .3s var(--n-bezier),
-      background-color .3s var(--n-bezier);
+      left var(--n-duration-fast) var(--n-bezier),
+      max-width var(--n-duration-fast) var(--n-bezier),
+      opacity var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier);
   `, [
     c('&.transition-disabled', `
       transition: none;
@@ -331,19 +333,19 @@ export default cB('tabs', `
     color: var(--n-pane-text-color);
     width: 100%;
     transition:
-      color .3s var(--n-bezier),
-      background-color .3s var(--n-bezier),
-      opacity .2s var(--n-bezier);
+      color var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier),
+      opacity var(--n-duration-fast) var(--n-bezier);
     left: 0;
     right: 0;
     top: 0;
   `, [
     c('&.next-transition-leave-active, &.prev-transition-leave-active, &.next-transition-enter-active, &.prev-transition-enter-active', `
       transition:
-      color .3s var(--n-bezier),
-      background-color .3s var(--n-bezier),
-      transform .2s var(--n-bezier),
-      opacity .2s var(--n-bezier);
+      color var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier),
+      transform var(--n-duration-fast) var(--n-bezier),
+      opacity var(--n-duration-fast) var(--n-bezier);
     `),
     c('&.next-transition-leave-active, &.prev-transition-leave-active', `
       position: absolute;

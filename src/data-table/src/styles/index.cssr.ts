@@ -10,6 +10,7 @@ const fixedColumnStyle = createFixedColumnStyle()
 // --n-th-padding
 // --n-td-padding
 // --n-bezier
+// --n-duration
 // --n-border-radius
 // --n-line-height
 // --n-border-color
@@ -136,7 +137,7 @@ export default c([
       width: 16px;
       height: 16px;
       color: var(--n-td-text-color);
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
     `, [
       cM('expanded', [
         cB('icon', 'transform: rotate(90deg);', [
@@ -219,9 +220,9 @@ export default c([
       border-bottom: 1px solid var(--n-merged-border-color);
       color: var(--n-th-text-color);
       transition:
-        border-color .3s var(--n-bezier),
-        color .3s var(--n-bezier),
-        background-color .3s var(--n-bezier);
+        border-color var(--n-duration) var(--n-bezier),
+        color var(--n-duration) var(--n-bezier),
+        background-color var(--n-duration) var(--n-bezier);
       font-weight: var(--n-th-font-weight);
     `, [
       cM('filterable', `
@@ -285,7 +286,7 @@ export default c([
         color: var(--n-th-icon-color);
         transition: color var(--n-duration) var(--n-bezier);
       `, [
-        cB('base-icon', 'transition: transform .3s var(--n-bezier)'),
+        cB('base-icon', 'transition: transform var(--n-duration) var(--n-bezier)'),
         cM('desc', [
           cB('base-icon', `
             transform: rotate(0deg);
@@ -343,8 +344,8 @@ export default c([
         justify-content: center;
         align-items: center;
         transition:
-          background-color .3s var(--n-bezier),
-          color .3s var(--n-bezier);
+          background-color var(--n-duration) var(--n-bezier),
+          color var(--n-duration) var(--n-bezier);
         font-size: var(--n-filter-size);
         color: var(--n-th-icon-color);
       `, [
@@ -369,10 +370,10 @@ export default c([
       color: var(--n-td-text-color);
       border-bottom: 1px solid var(--n-merged-border-color);
       transition:
-        box-shadow .3s var(--n-bezier),
-        background-color .3s var(--n-bezier),
-        border-color .3s var(--n-bezier),
-        color .3s var(--n-bezier);
+        box-shadow var(--n-duration) var(--n-bezier),
+        background-color var(--n-duration) var(--n-bezier),
+        border-color var(--n-duration) var(--n-bezier),
+        color var(--n-duration) var(--n-bezier);
     `, [
       cM('expand', [
         cB('data-table-expand-trigger', `
@@ -425,7 +426,7 @@ export default c([
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: opacity .3s var(--n-bezier);
+      transition: opacity var(--n-duration) var(--n-bezier);
     `, [
       cM('hide', `
         opacity: 0;
@@ -439,7 +440,7 @@ export default c([
     cB('data-table-wrapper', `
       position: relative;
       opacity: 1;
-      transition: opacity .3s var(--n-bezier), border-color .3s var(--n-bezier);
+      transition: opacity var(--n-duration) var(--n-bezier), border-color var(--n-duration) var(--n-bezier);
       border-top-left-radius: var(--n-border-radius);
       border-top-right-radius: var(--n-border-radius);
       line-height: var(--n-line-height);
@@ -511,7 +512,7 @@ export default c([
       z-index: 3;
       overflow: scroll;
       flex-shrink: 0;
-      transition: border-color .3s var(--n-bezier);
+      transition: border-color var(--n-duration) var(--n-bezier);
       scrollbar-width: none;
     `, [
       c('&::-webkit-scrollbar, &::-webkit-scrollbar-track-piece, &::-webkit-scrollbar-thumb', `
@@ -521,7 +522,7 @@ export default c([
       `)
     ]),
     cB('data-table-check-extra', `
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
       color: var(--n-th-icon-color);
       position: absolute;
       font-size: 14px;
@@ -606,7 +607,7 @@ function createFixedColumnStyle(): CNode[] {
         position: absolute;
         top: 0;
         bottom: -1px;
-        transition: box-shadow .2s var(--n-bezier);
+        transition: box-shadow var(--n-duration) var(--n-bezier);
         right: -36px;
       `)
     ]),
@@ -623,7 +624,7 @@ function createFixedColumnStyle(): CNode[] {
         position: absolute;
         top: 0;
         bottom: -1px;
-        transition: box-shadow .2s var(--n-bezier);
+        transition: box-shadow var(--n-duration) var(--n-bezier);
         left: -36px;
       `)
     ])

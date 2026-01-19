@@ -3,6 +3,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 
 // --n-icon-color-override
 // --n-icon-color-disabled-override
@@ -138,8 +139,8 @@ export default c([
         justify-content: center;
         position: relative;
         transition: 
-          color .3s var(--n-bezier),
-          background-color .3s var(--n-bezier);
+          color var(--n-duration) var(--n-bezier),
+          background-color var(--n-duration) var(--n-bezier);
         background: #0000;
         color: var(--n-item-text-color);
       `, [
@@ -153,7 +154,7 @@ export default c([
           bottom: 0;
           border-radius: var(--n-scroll-item-border-radius);
           transition: 
-            background-color .3s var(--n-bezier);
+            background-color var(--n-duration) var(--n-bezier);
         `),
         cNotM('disabled', [
           c('&:hover::before', `
@@ -340,8 +341,8 @@ export default c([
         z-index: 0;
         cursor: pointer;
         transition:
-          background-color .2s var(--n-bezier),
-          color .2s var(--n-bezier);
+          background-color var(--n-duration) var(--n-bezier),
+          color var(--n-duration) var(--n-bezier);
       `, [
         cE('trigger', `
           position: absolute;
@@ -361,7 +362,7 @@ export default c([
             border-radius: 2px;
             background-color: var(--n-item-color-active);
             transition:
-              background-color .2s var(--n-bezier);
+              background-color var(--n-duration) var(--n-bezier);
           `)
         ]),
         c('&::after', `

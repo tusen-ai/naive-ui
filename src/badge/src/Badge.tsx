@@ -86,6 +86,8 @@ export default defineComponent({
       return {
         '--n-font-size': fontSize,
         '--n-font-family': fontFamily,
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-color': propColor || color,
         '--n-ripple-color': propColor || color,
         '--n-bezier': cubicBezierEaseInOut,

@@ -4,6 +4,8 @@ import { c, cB, cE, cM, cNotM } from '../../../../_utils/cssr'
 // --n-loading-color
 // --n-loading-size
 // --n-option-padding-right
+// --n-bezier
+// --n-duration
 export default cB('base-select-menu', `
   line-height: 1.5;
   outline: none;
@@ -11,8 +13,8 @@ export default cB('base-select-menu', `
   position: relative;
   border-radius: var(--n-border-radius);
   transition:
-    background-color .3s var(--n-bezier),
-    box-shadow .3s var(--n-bezier);
+    background-color var(--n-duration) var(--n-bezier),
+    box-shadow var(--n-duration) var(--n-bezier);
   background-color: var(--n-color);
 `, [
   cB('scrollbar', `
@@ -58,8 +60,8 @@ export default cB('base-select-menu', `
     padding: 8px var(--n-option-padding-left);
     font-size: var(--n-option-font-size);
     transition: 
-      color .3s var(--n-bezier),
-      border-color .3s var(--n-bezier);
+      color var(--n-duration) var(--n-bezier),
+      border-color var(--n-duration) var(--n-bezier);
     border-bottom: 1px solid var(--n-action-divider-color);
     color: var(--n-action-text-color);
   `),
@@ -67,8 +69,8 @@ export default cB('base-select-menu', `
     padding: 8px var(--n-option-padding-left);
     font-size: var(--n-option-font-size);
     transition: 
-      color .3s var(--n-bezier),
-      border-color .3s var(--n-bezier);
+      color var(--n-duration) var(--n-bezier),
+      border-color var(--n-duration) var(--n-bezier);
     border-top: 1px solid var(--n-action-divider-color);
     color: var(--n-action-text-color);
   `),
@@ -83,8 +85,8 @@ export default cB('base-select-menu', `
     position: relative;
     padding: var(--n-option-padding);
     transition:
-      color .3s var(--n-bezier),
-      opacity .3s var(--n-bezier);
+      color var(--n-duration) var(--n-bezier),
+      opacity var(--n-duration) var(--n-bezier);
     box-sizing: border-box;
     color: var(--n-option-text-color);
     opacity: 1;

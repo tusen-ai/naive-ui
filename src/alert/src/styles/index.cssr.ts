@@ -3,6 +3,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-color
 // --n-close-color-hover
 // --n-close-color-pressed
@@ -66,7 +67,7 @@ export default cB('alert', `
     })
   ]),
   fadeInHeightExpandTransition({
-    originalTransition: 'transform .3s var(--n-bezier)',
+    originalTransition: 'transform var(--n-duration) var(--n-bezier)',
     enterToProps: {
       transform: 'scale(1)'
     },
@@ -88,8 +89,8 @@ export default cB('alert', `
   `),
   cE('close', `
     transition:
-      color .3s var(--n-bezier),
-      background-color .3s var(--n-bezier);
+      color var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier);
     position: absolute;
     right: 0;
     top: 0;

@@ -1008,10 +1008,12 @@ export default defineComponent({
           loadingColor,
           columnWidth
         },
-        common: { cubicBezierEaseInOut, duration }
+        common: { cubicBezierEaseInOut, duration, durationFast }
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
+        '--n-duration-fast': durationFast,
         '--n-duration': duration,
         '--n-menu-border-radius': menuBorderRadius,
         '--n-menu-box-shadow': menuBoxShadow,

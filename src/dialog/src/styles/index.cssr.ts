@@ -3,6 +3,7 @@ import { asModal, c, cB, cE, cM, insideModal } from '../../../_utils/cssr'
 // vars:
 // --n-icon-color
 // --n-bezier
+// --n-duration
 // --n-icon-margin-top
 // --n-icon-margin-right
 // --n-icon-margin-bottom
@@ -40,9 +41,9 @@ export default c([
     border-radius: var(--n-border-radius);
     padding: var(--n-padding);
     transition: 
-      border-color .3s var(--n-bezier),
-      background-color .3s var(--n-bezier),
-      color .3s var(--n-bezier);
+      border-color var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier),
+      color var(--n-duration) var(--n-bezier);
   `, [
     cE('icon', `
       color: var(--n-icon-color);
@@ -83,8 +84,8 @@ export default c([
       top: 0;
       margin: var(--n-close-margin);
       transition:
-        background-color .3s var(--n-bezier),
-        color .3s var(--n-bezier);
+        background-color var(--n-duration) var(--n-bezier),
+        color var(--n-duration) var(--n-bezier);
       z-index: 1;
     `),
     cE('content', `

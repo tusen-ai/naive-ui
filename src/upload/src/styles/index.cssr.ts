@@ -24,9 +24,9 @@ export default c([
     padding: 24px;
     opacity: 1;
     transition:
-      opacity .3s var(--n-bezier),
-      border-color .3s var(--n-bezier),
-      background-color .3s var(--n-bezier);
+      opacity var(--n-duration) var(--n-bezier),
+      border-color var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier);
     background-color: var(--n-dragger-color);
     border: var(--n-dragger-border);
   `, [
@@ -200,7 +200,7 @@ export default c([
           bottom: 0;
           border-radius: inherit;
           opacity: 0;
-          transition: opacity .2s var(--n-bezier);
+          transition: opacity var(--n-duration) var(--n-bezier);
           content: "";
         `),
         c('&:hover', [
@@ -246,13 +246,13 @@ export default c([
         cE('thumbnail', `
           font-size: 18px;
           opacity: 1;
-          transition: opacity .2s var(--n-bezier);
+          transition: opacity var(--n-duration) var(--n-bezier);
           color: var(--n-item-icon-color);
         `, [
           cB('base-icon', `
             margin-right: 2px;
             vertical-align: middle;
-            transition: color .3s var(--n-bezier);
+            transition: color var(--n-duration) var(--n-bezier);
           `)
         ]),
         cE('action', `
@@ -265,7 +265,7 @@ export default c([
           width: 80px;
           display: flex;
           align-items: center;
-          transition: opacity .2s var(--n-bezier);
+          transition: opacity var(--n-duration) var(--n-bezier);
           justify-content: flex-end;
           opacity: 0;
         `, [
@@ -309,8 +309,8 @@ export default c([
           text-decoration-color: #0000;
           font-size: var(--n-font-size);
           transition:
-            color .3s var(--n-bezier),
-            text-decoration-color .3s var(--n-bezier); 
+            color var(--n-duration) var(--n-bezier),
+            text-decoration-color var(--n-duration) var(--n-bezier); 
         `, [
           c('a', `
             color: inherit;

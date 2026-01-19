@@ -2,6 +2,7 @@ import { cB, cE } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-label-font-size
 // --n-label-font-weight
 // --n-label-text-color
@@ -13,7 +14,7 @@ import { cB, cE } from '../../../_utils/cssr'
 export default cB('statistic', [
   cE('label', `
     font-weight: var(--n-label-font-weight);
-    transition: .3s color var(--n-bezier);
+    transition: var(--n-duration) color var(--n-bezier);
     font-size: var(--n-label-font-size);
     color: var(--n-label-text-color);
   `),

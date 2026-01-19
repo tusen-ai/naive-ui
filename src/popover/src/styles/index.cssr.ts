@@ -16,6 +16,8 @@ const arrowSize = 'var(--n-arrow-height) * 1.414'
 // --n-bezier
 // --n-bezier-ease-in
 // --n-bezier-ease-out
+// --n-duration
+// --n-duration-fast
 // --n-font-size
 // --n-text-color
 // --n-color
@@ -30,9 +32,9 @@ const arrowSize = 'var(--n-arrow-height) * 1.414'
 export default c([
   cB('popover', `
     transition:
-      box-shadow .3s var(--n-bezier),
-      background-color .3s var(--n-bezier),
-      color .3s var(--n-bezier);
+      box-shadow var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier),
+      color var(--n-duration) var(--n-bezier);
     position: relative;
     font-size: var(--n-font-size);
     color: var(--n-text-color);
@@ -100,19 +102,19 @@ export default c([
     `),
     c('&.popover-transition-enter-active', `
       transition:
-        box-shadow .3s var(--n-bezier),
-        background-color .3s var(--n-bezier),
-        color .3s var(--n-bezier),
-        opacity .15s var(--n-bezier-ease-out),
-        transform .15s var(--n-bezier-ease-out);
+        box-shadow var(--n-duration) var(--n-bezier),
+        background-color var(--n-duration) var(--n-bezier),
+        color var(--n-duration) var(--n-bezier),
+        opacity var(--n-duration-fast) var(--n-bezier-ease-out),
+        transform var(--n-duration-fast) var(--n-bezier-ease-out);
     `),
     c('&.popover-transition-leave-active', `
       transition:
-        box-shadow .3s var(--n-bezier),
-        background-color .3s var(--n-bezier),
-        color .3s var(--n-bezier),
-        opacity .15s var(--n-bezier-ease-in),
-        transform .15s var(--n-bezier-ease-in);
+        box-shadow var(--n-duration) var(--n-bezier),
+        background-color var(--n-duration) var(--n-bezier),
+        color var(--n-duration) var(--n-bezier),
+        opacity var(--n-duration-fast) var(--n-bezier-ease-in),
+        transform var(--n-duration-fast) var(--n-bezier-ease-in);
     `)
   ]),
   placementStyle('top-start', `

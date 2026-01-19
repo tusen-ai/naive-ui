@@ -421,7 +421,7 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const { size } = props
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           fontWeight,
           borderRadius,
@@ -480,6 +480,7 @@ export default defineComponent({
 
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-border': border,
         '--n-border-active': borderActive,
         '--n-border-focus': borderFocus,

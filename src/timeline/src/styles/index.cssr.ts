@@ -4,6 +4,7 @@ const lineHeight = 1.25
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-circle-border
 // --n-content-font-size
 // --n-content-text-color
@@ -144,8 +145,8 @@ export default cB('timeline', `
       cE('circle', `
         border: var(--n-circle-border);
         transition:
-          background-color .3s var(--n-bezier),
-          border-color .3s var(--n-bezier);
+          background-color var(--n-duration) var(--n-bezier),
+          border-color var(--n-duration) var(--n-bezier);
         width: var(--n-icon-size);
         height: var(--n-icon-size);
         border-radius: var(--n-icon-size);

@@ -14,6 +14,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --n-bezier
 // --n-bezier-out
 // --n-bezier-in
+// --n-duration
 // --n-body-padding
 // --n-header-padding
 // --n-footer-padding
@@ -38,8 +39,8 @@ export default c([
     pointer-events: all;
     box-shadow: var(--n-box-shadow);
     transition:
-      background-color .3s var(--n-bezier),
-      color .3s var(--n-bezier);
+      background-color var(--n-duration) var(--n-bezier),
+      color var(--n-duration) var(--n-bezier);
     background-color: var(--n-color);
     color: var(--n-text-color);
     box-sizing: border-box;
@@ -217,8 +218,8 @@ export default c([
       background-color: rgba(0, 0, 0, 0)
     `),
     fadeInTransition({
-      enterDuration: '0.2s',
-      leaveDuration: '0.2s',
+      enterDuration: 'var(--n-duration)',
+      leaveDuration: 'var(--n-duration)',
       enterCubicBezier: 'var(--n-bezier-in)',
       leaveCubicBezier: 'var(--n-bezier-out)'
     })

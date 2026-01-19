@@ -189,7 +189,8 @@ export default defineComponent({
           cubicBezierEaseInOut,
           cubicBezierEaseIn,
           cubicBezierEaseOut,
-          duration
+          duration,
+          durationFast
         },
         self: {
           space,
@@ -213,6 +214,7 @@ export default defineComponent({
         '--n-bezier-ease-in': cubicBezierEaseIn,
         '--n-bezier-ease-out': cubicBezierEaseOut,
         '--n-duration': duration,
+        '--n-duration-fast': durationFast,
         '--n-font-size': fontSize,
         '--n-text-color': textColor,
         '--n-color': color,

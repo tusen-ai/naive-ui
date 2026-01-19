@@ -13,6 +13,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --n-asterisk-color
 // --n-label-text-color
 // --n-bezier
+// --n-duration
 // --n-feedback-text-color
 // --n-feedback-text-color-warning
 // --n-feedback-text-color-error
@@ -31,7 +32,7 @@ export default cB('form-item', `
     min-height: var(--n-label-height);
     padding: var(--n-label-padding);
     color: var(--n-label-text-color);
-    transition: color .3s var(--n-bezier);
+    transition: color var(--n-duration) var(--n-bezier);
     box-sizing: border-box;
     font-weight: var(--n-label-font-weight);
   `, [
@@ -149,8 +150,8 @@ export default cB('form-item', `
       }),
       fadeDownTransition({
         fromOffset: '-3px',
-        enterDuration: '.3s',
-        leaveDuration: '.2s'
+        enterDuration: 'var(--n-duration)',
+        leaveDuration: 'var(--n-duration)'
       })
     ])
   ])

@@ -2,6 +2,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-box-shadow
 // --n-box-shadow-active
 // --n-box-shadow-disabled
@@ -60,8 +61,8 @@ export default cB('radio', `
     box-shadow: var(--n-box-shadow);
     border-radius: 50%;
     transition:
-      background-color .3s var(--n-bezier),
-      box-shadow .3s var(--n-bezier);
+      background-color var(--n-duration) var(--n-bezier),
+      box-shadow var(--n-duration) var(--n-bezier);
   `, [
     c('&::before', `
       content: "";
@@ -75,9 +76,9 @@ export default cB('radio', `
       transform: scale(.8);
       background: var(--n-dot-color-active);
       transition: 
-        opacity .3s var(--n-bezier),
-        background-color .3s var(--n-bezier),
-        transform .3s var(--n-bezier);
+        opacity var(--n-duration) var(--n-bezier),
+        background-color var(--n-duration) var(--n-bezier),
+        transform var(--n-duration) var(--n-bezier);
     `),
     cM('checked', {
       boxShadow: 'var(--n-box-shadow-active)'

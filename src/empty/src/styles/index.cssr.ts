@@ -5,6 +5,7 @@ import { c, cB, cE } from '../../../_utils/cssr'
 // --n-icon-size
 // --n-icon-color
 // --n-bezier
+// --n-duration
 // --n-text-color
 // --n-extra-text-color
 export default cB('empty', `
@@ -20,7 +21,7 @@ export default cB('empty', `
     line-height: var(--n-icon-size);
     color: var(--n-icon-color);
     transition:
-      color .3s var(--n-bezier);
+      color var(--n-duration) var(--n-bezier);
   `, [
     c('+', [
       cE('description', `

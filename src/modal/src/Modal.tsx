@@ -282,6 +282,7 @@ export default defineComponent({
       return {
         '--n-bezier-ease-out': cubicBezierEaseOut,
         '--n-duration': duration,
+        '--n-duration': duration,
         '--n-box-shadow': boxShadow,
         '--n-color': color,
         '--n-text-color': textColor

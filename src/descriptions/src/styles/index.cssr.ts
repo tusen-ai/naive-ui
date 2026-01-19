@@ -5,6 +5,8 @@ import { c, cB, cE, cM, cNotM, insideModal, insidePopover } from '../../../_util
 // --n-td-padding
 // --n-font-size
 // --n-bezier
+// --n-duration
+// --n-bezier
 // --n-th-font-weight
 // --n-line-height
 // --n-th-text-color
@@ -120,8 +122,8 @@ export default c([
     `),
     cB('descriptions-table-wrapper', `
       transition:
-        background-color .3s var(--n-bezier),
-        border-color .3s var(--n-bezier);
+        background-color var(--n-duration) var(--n-bezier),
+        border-color var(--n-duration) var(--n-bezier);
     `, [
       cB('descriptions-table', `
         width: 100%;
@@ -140,9 +142,9 @@ export default c([
             box-sizing: border-box;
             color: var(--n-th-text-color);
             transition:
-              color .3s var(--n-bezier),
-              background-color .3s var(--n-bezier),
-              border-color .3s var(--n-bezier);
+              color var(--n-duration) var(--n-bezier),
+              background-color var(--n-duration) var(--n-bezier),
+              border-color var(--n-duration) var(--n-bezier);
           `),
           cB('descriptions-table-content', `
             vertical-align: top;
@@ -151,9 +153,9 @@ export default c([
             box-sizing: border-box;
             color: var(--n-td-text-color);
             transition:
-              color .3s var(--n-bezier),
-              background-color .3s var(--n-bezier),
-              border-color .3s var(--n-bezier);
+              color var(--n-duration) var(--n-bezier),
+              background-color var(--n-duration) var(--n-bezier),
+              border-color var(--n-duration) var(--n-bezier);
           `, [
             cE('content', `
               transition: color var(--n-duration) var(--n-bezier);

@@ -117,8 +117,8 @@ export default cB('transfer', `
         padding: 4px 12px 8px 12px;
         box-sizing: border-box;
         transition:
-          border-color .3s var(--n-bezier),
-          background-color .3s var(--n-bezier);
+          border-color var(--n-duration) var(--n-bezier),
+          background-color var(--n-duration) var(--n-bezier);
       `),
       cB('transfer-list-flex-container', `
         flex: 1;

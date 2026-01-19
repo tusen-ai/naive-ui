@@ -3,6 +3,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-button-border-radius
 // --n-button-box-shadow
 // --n-button-color
@@ -134,9 +135,9 @@ export default cB('switch', `
     cursor: pointer;
     position: relative;
     transition:
-      opacity .3s var(--n-bezier),
-      background .3s var(--n-bezier),
-      box-shadow .3s var(--n-bezier);
+      opacity var(--n-duration) var(--n-bezier),
+      background var(--n-duration) var(--n-bezier),
+      box-shadow var(--n-duration) var(--n-bezier);
     background-color: var(--n-rail-color);
   `, [
     cE('button-icon', `
@@ -170,11 +171,11 @@ export default cB('switch', `
       content: "";
       position: absolute;
       transition:
-        background-color .3s var(--n-bezier),
-        left .3s var(--n-bezier),
-        opacity .3s var(--n-bezier),
-        max-width .3s var(--n-bezier),
-        box-shadow .3s var(--n-bezier);
+        background-color var(--n-duration) var(--n-bezier),
+        left var(--n-duration) var(--n-bezier),
+        opacity var(--n-duration) var(--n-bezier),
+        max-width var(--n-duration) var(--n-bezier),
+        box-shadow var(--n-duration) var(--n-bezier);
     `)
   ]),
   cM('active', [

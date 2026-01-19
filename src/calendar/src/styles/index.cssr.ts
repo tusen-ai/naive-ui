@@ -2,6 +2,7 @@ import { c, cB, cE, cM, insideModal, insidePopover } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-border-color
 // --n-border-color-modal
 // --n-border-color-popover
@@ -72,9 +73,9 @@ export default c([
       cursor: pointer;
       position: relative;
       transition:
-        color .3s var(--n-bezier),
-        border-color .3s var(--n-bezier),
-        background-color .3s var(--n-bezier);
+        color var(--n-duration) var(--n-bezier),
+        border-color var(--n-duration) var(--n-bezier),
+        background-color var(--n-duration) var(--n-bezier);
     `, [
       c('&:nth-child(7)', `
         border-top-right-radius: var(--n-border-radius);
@@ -104,9 +105,9 @@ export default c([
       ]),
       cB('calendar-date', `
         transition:
-          color .3s var(--n-bezier),
-          border-color .3s var(--n-bezier),
-          background-color .3s var(--n-bezier);
+          color var(--n-duration) var(--n-bezier),
+          border-color var(--n-duration) var(--n-bezier),
+          background-color var(--n-duration) var(--n-bezier);
         color: var(--n-text-color);
       `, [
         cE('date', `
@@ -151,8 +152,8 @@ export default c([
           width: 1.8em;
           height: 1.8em;
           transition:
-            color .3s var(--n-bezier),
-            background-color .3s var(--n-bezier);
+            color var(--n-duration) var(--n-bezier),
+            background-color var(--n-duration) var(--n-bezier);
         `),
         cE('day', `
           color: var(--n-day-text-color);

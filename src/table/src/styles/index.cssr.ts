@@ -42,9 +42,9 @@ export default c([
     c('th', `
       white-space: nowrap;
       transition:
-        background-color .3s var(--n-bezier),
-        border-color .3s var(--n-bezier),
-        color .3s var(--n-bezier);
+        background-color var(--n-duration) var(--n-bezier),
+        border-color var(--n-duration) var(--n-bezier),
+        color var(--n-duration) var(--n-bezier);
       text-align: inherit;
       padding: var(--n-th-padding);
       vertical-align: inherit;
@@ -62,9 +62,9 @@ export default c([
     ]),
     c('td', `
       transition:
-        background-color .3s var(--n-bezier),
-        border-color .3s var(--n-bezier),
-        color .3s var(--n-bezier);
+        background-color var(--n-duration) var(--n-bezier),
+        border-color var(--n-duration) var(--n-bezier),
+        color var(--n-duration) var(--n-bezier);
       padding: var(--n-td-padding);
       color: var(--n-td-text-color);
       background-color: var(--n-td-color);

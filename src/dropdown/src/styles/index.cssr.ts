@@ -3,6 +3,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-font-size
 // --n-padding
 // --n-border-radius
@@ -34,8 +35,8 @@ export default cB('dropdown-menu', `
   box-shadow: var(--n-box-shadow);
   position: relative;
   transition:
-    background-color .3s var(--n-bezier),
-    box-shadow .3s var(--n-bezier);
+    background-color var(--n-duration) var(--n-bezier),
+    box-shadow var(--n-duration) var(--n-bezier);
 `, [
   fadeInScaleUpTransition(),
   cB('dropdown-option', `
@@ -72,7 +73,7 @@ export default cB('dropdown-menu', `
         bottom: 0;
         left: 4px;
         right: 4px;
-        transition: background-color .3s var(--n-bezier);
+        transition: background-color var(--n-duration) var(--n-bezier);
         border-radius: var(--n-border-radius);
       `),
       cNotM('disabled', [
@@ -169,7 +170,7 @@ export default cB('dropdown-menu', `
     `)
   ]),
   cB('dropdown-divider', `
-    transition: background-color .3s var(--n-bezier);
+    transition: background-color var(--n-duration) var(--n-bezier);
     background-color: var(--n-divider-color);
     height: 1px;
     margin: 4px 0;

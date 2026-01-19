@@ -3,6 +3,8 @@ import { c, cB, cE, cM, insideModal, insidePopover } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
+// --n-duration-fast
 // --n-dot-border
 // --n-dot-border-active
 // --n-dot-border-radius
@@ -240,9 +242,9 @@ export default c([
       ]),
       cB('slider-dot', `
         transition:
-          border-color .3s var(--n-bezier),
-          box-shadow .3s var(--n-bezier),
-          background-color .3s var(--n-bezier);
+          border-color var(--n-duration) var(--n-bezier),
+          box-shadow var(--n-duration) var(--n-bezier),
+          background-color var(--n-duration) var(--n-bezier);
         position: absolute;
         transform: translate(-50%, -50%);
         height: var(--n-dot-height);

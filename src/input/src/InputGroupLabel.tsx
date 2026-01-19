@@ -42,7 +42,7 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const { value: size } = mergedSizeRef
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           groupLabelColor,
           borderRadius,
@@ -55,6 +55,7 @@ export default defineComponent({
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-group-label-color': groupLabelColor,
         '--n-group-label-border': groupLabelBorder,
         '--n-border-radius': borderRadius,

@@ -180,7 +180,7 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const { value: size } = mergedSizeRef
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           buttonBorderColor,
           buttonBorderColorActive,
@@ -201,6 +201,7 @@ export default defineComponent({
       return {
         '--n-font-size': fontSize,
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-button-border-color': buttonBorderColor,
         '--n-button-border-color-active': buttonBorderColorActive,
         '--n-button-border-radius': buttonBorderRadius,

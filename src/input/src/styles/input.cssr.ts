@@ -2,6 +2,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-color
 // --n-font-size
 // --n-border-radius
@@ -67,10 +68,10 @@ export default cB('input', `
     background-color: #0000;
     text-align: inherit;
     transition:
-      -webkit-text-fill-color .3s var(--n-bezier),
-      caret-color .3s var(--n-bezier),
-      color .3s var(--n-bezier),
-      text-decoration-color .3s var(--n-bezier);
+      -webkit-text-fill-color var(--n-duration) var(--n-bezier),
+      caret-color var(--n-duration) var(--n-bezier),
+      color var(--n-duration) var(--n-bezier),
+      text-decoration-color var(--n-duration) var(--n-bezier);
   `),
   cE('input-el, textarea-el', `
     -webkit-appearance: none;
@@ -287,8 +288,8 @@ export default cB('input', `
     border-radius: inherit;
     border: var(--n-border);
     transition:
-      box-shadow .3s var(--n-bezier),
-      border-color .3s var(--n-bezier);
+      box-shadow var(--n-duration) var(--n-bezier),
+      border-color var(--n-duration) var(--n-bezier);
   `),
   cE('state-border', `
     border-color: #0000;

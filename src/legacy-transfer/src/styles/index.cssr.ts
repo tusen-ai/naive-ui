@@ -151,8 +151,8 @@ export default c([
           box-sizing: border-box;
           background-color: var(--n-header-color);
           transition:
-            border-color .3s var(--n-bezier),
-            background-color .3s var(--n-bezier);
+            border-color var(--n-duration) var(--n-bezier),
+            background-color var(--n-duration) var(--n-bezier);
           border-bottom: 1px solid var(--n-filter-divider-color);
         `),
         cB('legacy-transfer-list-flex-container', `
@@ -228,16 +228,16 @@ export default c([
               }, [
                 c('&.item-enter-active', `
                   transform: translateX(150%);
-                  animation-duration: .25s, .25s;
+                  animation-duration: var(--n-duration), var(--n-duration);
                   animation-timing-function: var(--n-bezier), var(--n-bezier-ease-out);
-                  animation-delay: 0s, .25s;
+                  animation-delay: 0s, var(--n-duration);
                   animation-name: legacy-transfer-height-expand, legacy-transfer-slide-in-from-right;
                 `),
                 c('&.item-leave-active', `
                   transform: translateX(-150%);
-                  animation-duration: .25s, .25s;
+                  animation-duration: var(--n-duration), var(--n-duration);
                   animation-timing-function: var(--n-bezier), var(--n-bezier-ease-in);
-                  animation-delay: .25s, 0s;
+                  animation-delay: var(--n-duration), 0s;
                   animation-name: legacy-transfer-height-collapse, legacy-transfer-slide-out-to-right;
                 `)
               ]),

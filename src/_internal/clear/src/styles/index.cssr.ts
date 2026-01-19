@@ -3,6 +3,7 @@ import { c, cB, cE } from '../../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-clear-color
 // --n-clear-size
 // --n-clear-color-hover
@@ -20,7 +21,7 @@ export default cB('base-clear', `
       width: 1em;
       cursor: pointer;
       color: var(--n-clear-color);
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
       display: flex;
     `, [
       c('&:hover', `

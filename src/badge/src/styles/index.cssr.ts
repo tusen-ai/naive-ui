@@ -5,6 +5,7 @@ import { c, cB, cM } from '../../../_utils/cssr'
 // --n-color
 // --n-ripple-color
 // --n-bezier
+// --n-duration
 // --n-ripple-bezier
 // --n-font-size
 // --n-font-family
@@ -52,8 +53,8 @@ export default c([
     cB('badge-sup', `
       background: var(--n-color);
       transition:
-        background-color .3s var(--n-bezier),
-        color .3s var(--n-bezier);
+        background-color var(--n-duration) var(--n-bezier),
+        color var(--n-duration) var(--n-bezier);
       color: #FFF;
       position: absolute;
       height: 18px;

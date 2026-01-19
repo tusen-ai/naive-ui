@@ -3,6 +3,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-description-text-color
 // --n-header-text-color
 // --n-indicator-border-color
@@ -40,8 +41,8 @@ export default cB('steps', `
     margin-left: 12px;
     margin-right: 12px;
     transition:
-      color .3s var(--n-bezier),
-      background-color .3s var(--n-bezier);
+      color var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier);
   `),
   cB('step-content', 'flex: 1;', [
     cB('step-content-header', `
@@ -54,8 +55,8 @@ export default cB('steps', `
       font-weight: var(--n-step-header-font-weight);
       margin-left: 9px;
       transition:
-        color .3s var(--n-bezier),
-        background-color .3s var(--n-bezier);
+        color var(--n-duration) var(--n-bezier),
+        background-color var(--n-duration) var(--n-bezier);
     `, [
       cE('title', `
         white-space: nowrap;
@@ -67,8 +68,8 @@ export default cB('steps', `
       margin-top: 12px;
       margin-left: 9px;
       transition:
-        color .3s var(--n-bezier),
-        background-color .3s var(--n-bezier);
+        color var(--n-duration) var(--n-bezier),
+        background-color var(--n-duration) var(--n-bezier);
     `)
   ]),
   cB('step-indicator', `
@@ -81,8 +82,8 @@ export default cB('steps', `
     align-items: center;
     justify-content: center;
     transition:
-      background-color .3s var(--n-bezier),
-      box-shadow .3s var(--n-bezier);
+      background-color var(--n-duration) var(--n-bezier),
+      box-shadow var(--n-duration) var(--n-bezier);
   `, [
     cB('step-indicator-slot', `
       position: relative;

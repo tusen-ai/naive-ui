@@ -8,6 +8,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --n-panel-font-size
 // --n-font-size
 // --n-bezier
+// --n-duration
 // --n-height
 // --n-box-shadow
 // --n-divider-color
@@ -27,9 +28,9 @@ export default c([
     color: var(--n-text-color);
     background-color: var(--n-color);
     transition:
-      box-shadow .3s var(--n-bezier),
-      color .3s var(--n-bezier),
-      background-color .3s var(--n-bezier);
+      box-shadow var(--n-duration) var(--n-bezier),
+      color var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier);
     border-radius: var(--n-border-radius);
     box-shadow: var(--n-box-shadow);
   `, [

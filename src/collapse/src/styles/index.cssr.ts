@@ -4,6 +4,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // vars:
 // --n-font-size
 // --n-bezier
+// --n-duration
 // --n-text-color
 // --n-divider-color
 // --n-title-padding
@@ -19,8 +20,8 @@ export default cB('collapse', 'width: 100%;', [
     font-size: var(--n-font-size);
     color: var(--n-text-color);
     transition:
-      color .3s var(--n-bezier),
-      border-color .3s var(--n-bezier);
+      color var(--n-duration) var(--n-bezier),
+      border-color var(--n-duration) var(--n-bezier);
     margin: var(--n-item-margin);
   `, [
     cM('disabled', [
@@ -50,7 +51,7 @@ export default cB('collapse', 'width: 100%;', [
     ]),
     cE('content-wrapper', [
       cE('content-inner', 'padding-top: 16px;'),
-      fadeInHeightExpandTransition({ duration: '0.15s' })
+      fadeInHeightExpandTransition({ duration: 'var(--n-duration)' })
     ]),
     cM('active', [
       cE('header', [
@@ -106,8 +107,8 @@ export default cB('collapse', 'width: 100%;', [
       cB('collapse-item-arrow', `
         display: flex;
         transition:
-          transform .15s var(--n-bezier),
-          color .3s var(--n-bezier);
+          transform var(--n-duration) var(--n-bezier),
+          color var(--n-duration) var(--n-bezier);
         font-size: 18px;
         color: var(--n-arrow-color);
       `)
