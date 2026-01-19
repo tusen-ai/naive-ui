@@ -30,8 +30,6 @@ import {
 // --n-text-color-disabled
 // --n-bezier
 // --n-duration
-// --n-bezier
-// --n-duration
 // --n-arrow-color
 // --n-arrow-size
 // --n-loading-color

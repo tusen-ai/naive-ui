@@ -6,7 +6,6 @@ import { c, cB, cE, cM, cNotM, insideModal, insidePopover } from '../../../_util
 // --n-font-size
 // --n-bezier
 // --n-duration
-// --n-bezier
 // --n-th-font-weight
 // --n-line-height
 // --n-th-text-color
