@@ -103,19 +103,19 @@ export default cB('steps', `
         height: var(--n-indicator-icon-size);
         line-height: var(--n-indicator-icon-size);
         color: var(--n-indicator-text-color);
-        transition: color .3s var(--n-bezier);
+        transition: color var(--n-duration) var(--n-bezier);
       `, [
         iconSwitchTransition()
       ]),
       cB('icon', `
         color: var(--n-indicator-text-color);
-        transition: color .3s var(--n-bezier);
+        transition: color var(--n-duration) var(--n-bezier);
       `, [
         iconSwitchTransition()
       ]),
       cB('base-icon', `
         color: var(--n-indicator-text-color);
-        transition: color .3s var(--n-bezier);
+        transition: color var(--n-duration) var(--n-bezier);
       `, [
         iconSwitchTransition()
       ])

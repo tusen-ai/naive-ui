@@ -51,10 +51,11 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const {
         self: { titleTextColor, textColor, titleFontWeight, fontSize },
-        common: { cubicBezierEaseInOut }
+        common: { cubicBezierEaseInOut, duration }
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-font-size': fontSize,
         '--n-text-color': textColor,
         '--n-title-font-weight': titleFontWeight,

@@ -54,7 +54,7 @@ export default cB('switch', `
     transform: translateX(-50%) translateY(-50%);
     font-size: calc(var(--n-button-width) - 4px);
     color: var(--n-loading-color);
-    transition: color .3s var(--n-bezier);
+    transition: color var(--n-duration) var(--n-bezier);
   `, [
     iconSwitchTransition({
       left: '50%',
@@ -63,7 +63,7 @@ export default cB('switch', `
     })
   ]),
   cE('checked, unchecked', `
-    transition: color .3s var(--n-bezier);
+    transition: color var(--n-duration) var(--n-bezier);
     color: var(--n-text-color);
     box-sizing: border-box;
     position: absolute;
@@ -141,7 +141,7 @@ export default cB('switch', `
   `, [
     cE('button-icon', `
       color: var(--n-icon-color);
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
       font-size: calc(var(--n-button-height) - 4px);
       position: absolute;
       left: 0;

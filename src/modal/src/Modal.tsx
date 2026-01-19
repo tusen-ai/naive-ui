@@ -276,11 +276,12 @@ export default defineComponent({
     })
     const cssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseOut },
+        common: { cubicBezierEaseOut, duration },
         self: { boxShadow, color, textColor }
       } = themeRef.value
       return {
         '--n-bezier-ease-out': cubicBezierEaseOut,
+        '--n-duration': duration,
         '--n-box-shadow': boxShadow,
         '--n-color': color,
         '--n-text-color': textColor

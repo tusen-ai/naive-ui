@@ -45,7 +45,7 @@ export default c([
       cE('title', `
         color: var(--n-title-text-color);
         font-weight: var(--n-title-font-weight);
-        transition: color .3s var(--n-bezier);
+        transition: color var(--n-duration) var(--n-bezier);
       `),
       cE('extra', `
         display: flex;
@@ -61,7 +61,7 @@ export default c([
       border-top: 1px solid;
       border-left: 1px solid;
       border-color: var(--n-border-color);
-      transition: border-color .3s var(--n-bezier);
+      transition: border-color var(--n-duration) var(--n-bezier);
     `),
     cB('calendar-cell', `
       box-sizing: border-box;
@@ -95,7 +95,7 @@ export default c([
         bottom: -1px;
         height: 3px;
         background-color: #0000;
-        transition: background-color .3s var(--n-bezier);
+        transition: background-color var(--n-duration) var(--n-bezier);
       `),
       cM('selected', [
         cE('bar', `
@@ -156,7 +156,7 @@ export default c([
         `),
         cE('day', `
           color: var(--n-day-text-color);
-          transition: color .3s var(--n-bezier);
+          transition: color var(--n-duration) var(--n-bezier);
         `)
       ])
     ])

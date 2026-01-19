@@ -172,7 +172,7 @@ export default c([
       right: 0;
       bottom: 0;
       border-radius: inherit;
-      transition: border-color .3s var(--n-bezier);
+      transition: border-color var(--n-duration) var(--n-bezier);
       pointer-events: none;
     `),
     cE('border', `

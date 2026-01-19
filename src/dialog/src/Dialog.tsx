@@ -92,7 +92,7 @@ export const NDialog = defineComponent({
       const { type } = props
       const iconPlacement = mergedIconPlacementRef.value
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           fontSize,
           lineHeight,
@@ -127,6 +127,7 @@ export const NDialog = defineComponent({
         '--n-font-size': fontSize,
         '--n-icon-color': iconColor,
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-close-margin': closeMargin,
         '--n-icon-margin-top': iconMarginDiscrete.top,
         '--n-icon-margin-right': iconMarginDiscrete.right,

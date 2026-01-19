@@ -65,7 +65,7 @@ export default cB('divider', `
   `),
   cE('line', `
     border: none;
-    transition: background-color .3s var(--n-bezier), border-color .3s var(--n-bezier);
+    transition: background-color var(--n-duration) var(--n-bezier), border-color var(--n-duration) var(--n-bezier);
     height: 1px;
     width: 100%;
     margin: 0;

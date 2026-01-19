@@ -230,7 +230,7 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const { value: mergedSize } = mergedSizeRef
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           borderRadius,
           color,
@@ -259,6 +259,8 @@ export default defineComponent({
         }
       } = themeRef.value
       return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-label-line-height': labelLineHeight,
         '--n-label-font-weight': labelFontWeight,
         '--n-size': size,

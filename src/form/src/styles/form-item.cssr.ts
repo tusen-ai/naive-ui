@@ -40,7 +40,7 @@ export default cB('form-item', `
       user-select: none;
       -webkit-user-select: none;
       color: var(--n-asterisk-color);
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
     `),
     cE('asterisk-placeholder', `
       grid-area: mark;
@@ -138,7 +138,7 @@ export default cB('form-item', `
       padding: var(--n-feedback-padding);
     `),
     cB('form-item-feedback', {
-      transition: 'color .3s var(--n-bezier)',
+      transition: 'color var(--n-duration) var(--n-bezier)',
       color: 'var(--n-feedback-text-color)'
     }, [
       cM('warning', {

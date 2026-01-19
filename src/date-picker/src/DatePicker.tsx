@@ -760,11 +760,12 @@ export default defineComponent({
 
     const triggerCssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: { iconColor, iconColorDisabled }
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-icon-color-override': iconColor,
         '--n-icon-color-disabled-override': iconColorDisabled
       }
@@ -781,7 +782,7 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const { type } = props
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           calendarTitleFontSize,
           calendarDaysFontSize,
@@ -829,6 +830,7 @@ export default defineComponent({
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
 
         '--n-panel-border-radius': panelBorderRadius,
         '--n-panel-color': panelColor,

@@ -4,7 +4,8 @@ import commonVariables from '../common/_common'
 
 const {
   cubicBezierEaseIn,
-  cubicBezierEaseOut
+  cubicBezierEaseOut,
+  durationFast
 } = commonVariables
 
 interface FadeInScaleUpTransitionOptions {
@@ -17,7 +18,7 @@ interface FadeInScaleUpTransitionOptions {
 
 export function fadeInScaleUpTransition({
   transformOrigin = 'inherit',
-  duration = '.2s',
+  duration = durationFast,
   enterScale = '.9',
   originalTransform = '',
   originalTransition = ''

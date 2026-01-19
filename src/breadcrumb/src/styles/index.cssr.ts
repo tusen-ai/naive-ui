@@ -29,14 +29,14 @@ export default cB('breadcrumb', `
   `),
   cB('breadcrumb-item', `
     font-size: var(--n-font-size);
-    transition: color .3s var(--n-bezier);
+    transition: color var(--n-duration) var(--n-bezier);
     display: inline-flex;
     align-items: center;
   `, [
     cB('icon', `
       font-size: 18px;
       vertical-align: -.2em;
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
       color: var(--n-item-text-color);
     `),
     c('&:not(:last-child)', [
@@ -57,8 +57,8 @@ export default cB('breadcrumb', `
       padding: 4px;
       border-radius: var(--n-item-border-radius);
       transition:
-        background-color .3s var(--n-bezier),
-        color .3s var(--n-bezier);
+        background-color var(--n-duration) var(--n-bezier),
+        color var(--n-duration) var(--n-bezier);
       color: var(--n-item-text-color);
       position: relative;
     `, [
@@ -80,7 +80,7 @@ export default cB('breadcrumb', `
     cE('separator', `
       margin: 0 8px;
       color: var(--n-separator-color);
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
       user-select: none;
       -webkit-user-select: none;
     `),

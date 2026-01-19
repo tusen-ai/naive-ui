@@ -12,7 +12,7 @@ import { c, cB, cE } from '../../../_utils/cssr'
 export default cB('log', `
   position: relative;
   box-sizing: border-box;
-  transition: border-color .3s var(--n-bezier);
+  transition: border-color var(--n-duration) var(--n-bezier);
 `, [
   c('pre', `
     white-space: pre-wrap;

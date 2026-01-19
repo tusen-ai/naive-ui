@@ -87,7 +87,7 @@ export default defineComponent({
     const rtlEnabledRef = useRtl('Alert', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self
       } = themeRef.value
       const {
@@ -109,6 +109,7 @@ export default defineComponent({
       const { left, right } = getMargin(iconMargin)
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-color': self[createKey('color', type)],
         '--n-close-icon-size': closeIconSize,
         '--n-close-border-radius': closeBorderRadius,

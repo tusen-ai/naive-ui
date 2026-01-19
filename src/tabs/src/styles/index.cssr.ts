@@ -101,7 +101,7 @@ export default cB('tabs', `
     border-radius: var(--n-tab-border-radius);
     width: 100%;
     background-color: var(--n-color-segment);
-    transition: background-color .3s var(--n-bezier);
+    transition: background-color var(--n-duration) var(--n-bezier);
     display: flex;
     align-items: center;
   `, [
@@ -111,7 +111,7 @@ export default cB('tabs', `
       pointer-events: none;
       background-color: var(--n-tab-color-segment);
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .08);
-      transition: transform 0.3s var(--n-bezier);
+      transition: transform var(--n-duration) var(--n-bezier);
     `),
     cB('tabs-tab-wrapper', `
       flex-basis: 0;
@@ -156,7 +156,7 @@ export default cB('tabs', `
     box-sizing: border-box;
     line-height: 1.5;
     display: flex;
-    transition: border-color .3s var(--n-bezier);
+    transition: border-color var(--n-duration) var(--n-bezier);
   `, [
     cE('prefix, suffix', `
       display: flex;
@@ -246,7 +246,7 @@ export default cB('tabs', `
       `)
     ]),
     c('&::before, &::after', `
-      transition: box-shadow .3s var(--n-bezier);
+      transition: box-shadow var(--n-duration) var(--n-bezier);
       pointer-events: none;
       content: "";
       position: absolute;
@@ -325,7 +325,7 @@ export default cB('tabs', `
   cB('tabs-pane-wrapper', `
     position: relative;
     overflow: hidden;
-    transition: max-height .2s var(--n-bezier);
+    transition: max-height var(--n-duration-fast, .2s) var(--n-bezier);
   `),
   cB('tab-pane', `
     color: var(--n-pane-text-color);
@@ -432,10 +432,10 @@ export default cB('tabs', `
         `)
       ]),
       cE('prefix, suffix', `
-        transition: border-color .3s var(--n-bezier);
+        transition: border-color var(--n-duration) var(--n-bezier);
       `),
       cB('tabs-nav-scroll-content', `
-        transition: border-color .3s var(--n-bezier);
+        transition: border-color var(--n-duration) var(--n-bezier);
       `),
       cB('tabs-bar', `
         border-radius: 0;
@@ -443,14 +443,14 @@ export default cB('tabs', `
     ]),
     cM('card-type', [
       cE('prefix, suffix', `
-        transition: border-color .3s var(--n-bezier);
+        transition: border-color var(--n-duration) var(--n-bezier);
       `),
       cB('tabs-pad', `
         flex-grow: 1;
-        transition: border-color .3s var(--n-bezier);
+        transition: border-color var(--n-duration) var(--n-bezier);
       `),
       cB('tabs-tab-pad', `
-        transition: border-color .3s var(--n-bezier);
+        transition: border-color var(--n-duration) var(--n-bezier);
       `),
       cB('tabs-tab', `
         font-weight: var(--n-tab-font-weight);

@@ -29,7 +29,7 @@ export default c([
       user-select: none;
       padding-right: 12px;
       text-align: right;
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
       color: var(--n-line-number-text-color);
     `),
     cM('word-wrap', [

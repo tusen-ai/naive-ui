@@ -72,7 +72,7 @@ export default c([
     cE('header, footer', `
       padding: 12px 0;
       box-sizing: border-box;
-      transition: border-color .3s var(--n-bezier);
+      transition: border-color var(--n-duration) var(--n-bezier);
     `, [
       c('&:not(:last-child)', `
         border-bottom: 1px solid var(--n-merged-border-color);
@@ -107,7 +107,7 @@ export default c([
         left: 0;
         right: 0;
         background-color: transparent;
-        transition: background-color .3s var(--n-bezier);
+        transition: background-color var(--n-duration) var(--n-bezier);
         pointer-events: none;
       `)
     ])

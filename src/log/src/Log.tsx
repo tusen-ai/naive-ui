@@ -235,10 +235,11 @@ export default defineComponent({
           loaderBorder,
           loadingColor
         },
-        common: { cubicBezierEaseInOut }
+        common: { cubicBezierEaseInOut, duration }
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-loader-font-size': loaderFontSize,
         '--n-loader-border': loaderBorder,
         '--n-loader-color': loaderColor,

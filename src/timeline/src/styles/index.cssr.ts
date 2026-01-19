@@ -107,17 +107,17 @@ export default cB('timeline', `
       cE('title', `
         margin: var(--n-title-margin);
         font-size: var(--n-title-font-size);
-        transition: color .3s var(--n-bezier);
+        transition: color var(--n-duration) var(--n-bezier);
         font-weight: var(--n-title-font-weight);
         color: var(--n-title-text-color);
       `),
       cE('content', `
-        transition: color .3s var(--n-bezier);
+        transition: color var(--n-duration) var(--n-bezier);
         font-size: var(--n-content-font-size);
         color: var(--n-content-text-color);
       `),
       cE('meta', `
-        transition: color .3s var(--n-bezier);
+        transition: color var(--n-duration) var(--n-bezier);
         font-size: 12px;
         margin-top: 6px;
         margin-bottom: 20px;
@@ -128,7 +128,7 @@ export default cB('timeline', `
       cB('timeline-item-timeline', [
         cE('line', `
           --n-color-start: var(--n-line-color);
-          transition: --n-color-start .3s var(--n-bezier);
+          transition: --n-color-start var(--n-duration) var(--n-bezier);
           background-color: transparent;
           background-image: linear-gradient(180deg, var(--n-color-start), var(--n-color-start) 50%, transparent 50%, transparent 100%);
           background-size: 1px 10px;
@@ -161,7 +161,7 @@ export default cB('timeline', `
         justify-content: center;
       `),
       cE('line', `
-        transition: background-color .3s var(--n-bezier);
+        transition: background-color var(--n-duration) var(--n-bezier);
         position: absolute;
         top: var(--n-icon-size);
         left: calc(var(--n-icon-size) / 2 - 1px);

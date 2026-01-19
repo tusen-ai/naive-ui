@@ -215,7 +215,7 @@ const Button = defineComponent({
     const cssVarsRef = computed(() => {
       const theme = themeRef.value
       const {
-        common: { cubicBezierEaseInOut, cubicBezierEaseOut },
+        common: { cubicBezierEaseInOut, cubicBezierEaseOut, duration },
         self
       } = theme
       const { rippleDuration, opacityDisabled, fontWeight, fontWeightStrong }
@@ -481,6 +481,7 @@ const Button = defineComponent({
         '--n-ripple-duration': rippleDuration,
         '--n-opacity-disabled': opacityDisabled,
         '--n-wave-opacity': waveOpacity,
+        '--n-duration': duration,
         ...fontProps,
         ...colorProps,
         ...borderProps,

@@ -56,12 +56,12 @@ export default c([
     cE('header', `
       padding: var(--n-padding);
       border-bottom: 1px solid var(--n-divider-color);
-      transition: border-color .3s var(--n-bezier);
+      transition: border-color var(--n-duration) var(--n-bezier);
     `),
     cE('footer', `
       padding: var(--n-padding);
       border-top: 1px solid var(--n-divider-color);
-      transition: border-color .3s var(--n-bezier);
+      transition: border-color var(--n-duration) var(--n-bezier);
     `),
     cM('scrollable, show-header-or-footer', [
       cE('content', `
@@ -78,7 +78,7 @@ export default c([
       pointer-events: none;
     `, [
       cB('popover-arrow', `
-        transition: background-color .3s var(--n-bezier);
+        transition: background-color var(--n-duration) var(--n-bezier);
         position: absolute;
         display: block;
         width: calc(${arrowSize});

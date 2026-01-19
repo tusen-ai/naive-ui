@@ -65,11 +65,11 @@ export default c([
   `, [
     cB('date-picker-icon', `
       color: var(--n-icon-color-override);
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
     `),
     cB('icon', `
       color: var(--n-icon-color-override);
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
     `),
     cM('disabled', [
       cB('date-picker-icon', `
@@ -282,7 +282,7 @@ export default c([
           text-align: center;
           color: var(--n-calendar-title-text-color);
           cursor: pointer;
-          transition: background-color .3s var(--n-bezier);
+          transition: background-color var(--n-duration) var(--n-bezier);
           border-radius: var(--n-panel-border-radius);
         `, [
           cM('active', `
@@ -373,7 +373,7 @@ export default c([
           top: 0;
           bottom: 0;
           border-radius: inherit;
-          transition: background-color .3s var(--n-bezier);
+          transition: background-color var(--n-duration) var(--n-bezier);
         `),
         cM('covered, start, end', [
           cNotM('excluded', [
@@ -498,7 +498,7 @@ export default c([
             right: calc((var(--n-item-size) - var(--n-item-cell-width)) / 2);
             top: 0;
             bottom: 0;
-            transition: background-color .3s var(--n-bezier);
+            transition: background-color var(--n-duration) var(--n-bezier);
           `)
         ])
       ])

@@ -41,7 +41,7 @@ export default c([
     display: inline-block;
     box-sizing: border-box;
     opacity: 1;
-    transition: opacity .3s var(--n-bezier);
+    transition: opacity var(--n-duration) var(--n-bezier);
   `, [
     c('+', [
       cB('upload-file-list', 'margin-top: 8px;')
@@ -70,7 +70,7 @@ export default c([
   cB('upload-file-list', `
     line-height: var(--n-line-height);
     opacity: 1;
-    transition: opacity .3s var(--n-bezier);
+    transition: opacity var(--n-duration) var(--n-bezier);
   `, [
     c('a, img', 'outline: none;'),
     cM('disabled', `
@@ -90,7 +90,7 @@ export default c([
       box-sizing: border-box;
       cursor: default;
       padding: 0px 12px 0 6px;
-      transition: background-color .3s  var(--n-bezier);
+      transition: background-color var(--n-duration)  var(--n-bezier);
       border-radius: var(--n-border-radius);
     `, [
       fadeInHeightExpandTransition(),
@@ -161,7 +161,7 @@ export default c([
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: border-color .3s var(--n-bezier), background-color .3s var(--n-bezier);
+        transition: border-color var(--n-duration) var(--n-bezier), background-color var(--n-duration) var(--n-bezier);
         border-radius: var(--n-border-radius);
         overflow: hidden;
       `, [

@@ -462,9 +462,11 @@ export default defineComponent({
           [`${createKey('itemMargin', size)}Rtl` as const]: itemMarginRtl,
           [`${createKey('inputMargin', size)}Rtl` as const]: inputMarginRtl
         },
-        common: { cubicBezierEaseInOut }
+        common: { cubicBezierEaseInOut, duration }
       } = themeRef.value
       return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-prefix-margin': prefixMargin,
         '--n-suffix-margin': suffixMargin,
         '--n-item-font-size': itemFontSize,

@@ -447,7 +447,7 @@ export default defineComponent({
       const direction: 'vertical' | 'horizontal'
         = labelPlacement === 'top' ? 'vertical' : 'horizontal'
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           labelTextColor,
           asteriskColor,
@@ -476,6 +476,7 @@ export default defineComponent({
 
       const cssVars = {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-line-height': lineHeight,
         '--n-blank-height': blankHeight,
         '--n-label-font-size': labelFontSize,

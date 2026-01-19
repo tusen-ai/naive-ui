@@ -25,7 +25,7 @@ export default c([
   `, [
     cB('time-picker-icon', `
       color: var(--n-icon-color-override);
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
     `),
     cM('disabled', [
       cB('time-picker-icon', `
@@ -57,7 +57,7 @@ export default c([
       height: calc(var(--n-item-height) * 6);
       display: flex;
       position: relative;
-      transition: border-color .3s var(--n-bezier);
+      transition: border-color var(--n-duration) var(--n-bezier);
       border-bottom: 1px solid var(--n-panel-divider-color);
     `),
     cB('time-picker-col', `
@@ -65,7 +65,7 @@ export default c([
       min-width: var(--n-item-width);
       height: calc(var(--n-item-height) * 6);
       flex-direction: column;
-      transition: box-shadow .3s var(--n-bezier);
+      transition: box-shadow var(--n-duration) var(--n-bezier);
     `, [
       cM('transition-disabled', [
         cE('item', 'transition: none;', [
@@ -101,7 +101,7 @@ export default c([
       `, [
         c('&::before', `
           content: "";
-          transition: background-color .3s var(--n-bezier);
+          transition: background-color var(--n-duration) var(--n-bezier);
           z-index: -1;
           position: absolute;
           left: 0;

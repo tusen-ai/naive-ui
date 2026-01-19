@@ -24,7 +24,7 @@ export default cB('statistic', [
     cE('prefix', `
       margin: 0 4px 0 0;
       font-size: var(--n-value-font-size);
-      transition: .3s color var(--n-bezier);
+      transition: var(--n-duration) color var(--n-bezier);
       color: var(--n-value-prefix-text-color);
     `, [
       cB('icon', {
@@ -33,13 +33,13 @@ export default cB('statistic', [
     ]),
     cE('content', `
       font-size: var(--n-value-font-size);
-      transition: .3s color var(--n-bezier);
+      transition: var(--n-duration) color var(--n-bezier);
       color: var(--n-value-text-color);
     `),
     cE('suffix', `
       margin: 0 0 0 4px;
       font-size: var(--n-value-font-size);
-      transition: .3s color var(--n-bezier);
+      transition: var(--n-duration) color var(--n-bezier);
       color: var(--n-value-suffix-text-color);
     `, [
       cB('icon', {

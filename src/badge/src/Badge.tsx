@@ -80,7 +80,7 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const { type, color: propColor } = props
       const {
-        common: { cubicBezierEaseInOut, cubicBezierEaseOut },
+        common: { cubicBezierEaseInOut, cubicBezierEaseOut, duration },
         self: { [createKey('color', type)]: color, fontFamily, fontSize }
       } = themeRef.value
       return {
@@ -89,6 +89,7 @@ export default defineComponent({
         '--n-color': propColor || color,
         '--n-ripple-color': propColor || color,
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-ripple-bezier': cubicBezierEaseOut
       }
     })

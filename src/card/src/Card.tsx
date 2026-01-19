@@ -127,7 +127,7 @@ export default defineComponent({
           [createKey('fontSize', size)]: fontSize,
           [createKey('titleFontSize', size)]: titleFontSize
         },
-        common: { cubicBezierEaseInOut }
+        common: { cubicBezierEaseInOut, duration }
       } = themeRef.value
       const {
         top: paddingTop,
@@ -136,6 +136,7 @@ export default defineComponent({
       } = getPadding(padding)
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-border-radius': borderRadius,
         '--n-color': color,
         '--n-color-modal': colorModal,

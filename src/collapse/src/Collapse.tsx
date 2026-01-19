@@ -205,7 +205,7 @@ export default defineComponent({
     const rtlEnabledRef = useRtl('Collapse', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           titleFontWeight,
           dividerColor,
@@ -223,6 +223,7 @@ export default defineComponent({
       return {
         '--n-font-size': fontSize,
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-text-color': textColor,
         '--n-divider-color': dividerColor,
         '--n-title-padding': titlePadding,

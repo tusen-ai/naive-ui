@@ -65,7 +65,7 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const { size } = props
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           [createKey('iconSize', size)]: iconSize,
           [createKey('fontSize', size)]: fontSize,
@@ -78,6 +78,7 @@ export default defineComponent({
         '--n-icon-size': iconSize,
         '--n-font-size': fontSize,
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-text-color': textColor,
         '--n-icon-color': iconColor,
         '--n-extra-text-color': extraTextColor

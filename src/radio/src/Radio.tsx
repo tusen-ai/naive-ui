@@ -35,7 +35,7 @@ export default defineComponent({
         mergedSize: { value: size }
       } = radio
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           boxShadow,
           boxShadowActive,
@@ -58,6 +58,7 @@ export default defineComponent({
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-label-line-height': labelLineHeight,
         '--n-label-font-weight': labelFontWeight,
         '--n-box-shadow': boxShadow,

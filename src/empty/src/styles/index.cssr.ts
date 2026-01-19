@@ -29,12 +29,12 @@ export default cB('empty', `
     ])
   ]),
   cE('description', `
-    transition: color .3s var(--n-bezier);
+    transition: color var(--n-duration) var(--n-bezier);
     color: var(--n-text-color);
   `),
   cE('extra', `
     text-align: center;
-    transition: color .3s var(--n-bezier);
+    transition: color var(--n-duration) var(--n-bezier);
     margin-top: 12px;
     color: var(--n-extra-text-color);
   `)

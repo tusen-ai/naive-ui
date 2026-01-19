@@ -41,7 +41,7 @@ export default cB('anchor', `
     cB('anchor-link', `
       margin-bottom: 4px;
       padding: 2px 8px;
-      transition: background-color .3s var(--n-bezier);
+      transition: background-color var(--n-duration) var(--n-bezier);
       background-color: transparent;
       border-radius: var(--n-link-border-radius);
     `, [
@@ -68,7 +68,7 @@ export default cB('anchor', `
     width: var(--n-rail-width);
     border-radius: calc(var(--n-rail-width) / 2);
     overflow: hidden;
-    transition: background-color .3s var(--n-bezier);
+    transition: background-color var(--n-duration) var(--n-bezier);
     background-color: var(--n-rail-color);
   `, [
     cE('bar', `
@@ -112,7 +112,7 @@ export default cB('anchor', `
       cursor: pointer;
       display: inline-block;
       padding-right: 16px;
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
       color: var(--n-link-text-color);
     `, [
       c('&:hover, &:focus', `

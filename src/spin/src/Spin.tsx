@@ -81,7 +81,7 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const { size: spinSize } = props
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self
       } = themeRef.value
       const { opacitySpinning, color, textColor } = self
@@ -91,6 +91,7 @@ export default defineComponent({
           : self[createKey('size', spinSize)]
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-opacity-spinning': opacitySpinning,
         '--n-size': size,
         '--n-color': color,

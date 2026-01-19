@@ -106,7 +106,7 @@ export default c([
         left: 50%;
         top: 50%;
         transform: translateX(-50%) translateY(-50%);
-        transition: color .3s var(--n-bezier);
+        transition: color var(--n-duration) var(--n-bezier);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -152,7 +152,7 @@ export default c([
       ]),
       cB('base-loading', `
         color: var(--n-loading-color);
-        transition: color .3s var(--n-bezier);
+        transition: color var(--n-duration) var(--n-bezier);
         position: absolute;
         left: 0;
         right: 0;
@@ -181,14 +181,14 @@ export default c([
       ])
     ]),
     cB('data-table-thead', `
-      transition: background-color .3s var(--n-bezier);
+      transition: background-color var(--n-duration) var(--n-bezier);
       background-color: var(--n-merged-th-color);
     `),
     cB('data-table-tr', `
       position: relative;
       box-sizing: border-box;
       background-clip: padding-box;
-      transition: background-color .3s var(--n-bezier);
+      transition: background-color var(--n-duration) var(--n-bezier);
     `, [
       cB('data-table-expand', `
         position: sticky;
@@ -283,7 +283,7 @@ export default c([
         justify-content: center;
         vertical-align: -0.2em;
         color: var(--n-th-icon-color);
-        transition: color .3s var(--n-bezier);
+        transition: color var(--n-duration) var(--n-bezier);
       `, [
         cB('base-icon', 'transition: transform .3s var(--n-bezier)'),
         cM('desc', [
@@ -318,7 +318,7 @@ export default c([
           bottom: 0;
           background-color: var(--n-merged-border-color);
           transform: translateY(-50%);
-          transition: background-color .3s var(--n-bezier);
+          transition: background-color var(--n-duration) var(--n-bezier);
           z-index: 1;
           content: '';
         `),
@@ -500,7 +500,7 @@ export default c([
       font-variant-numeric: tabular-nums;
       width: 100%;
       word-break: break-word;
-      transition: background-color .3s var(--n-bezier);
+      transition: background-color var(--n-duration) var(--n-bezier);
       border-collapse: separate;
       border-spacing: 0;
       background-color: var(--n-merged-td-color);

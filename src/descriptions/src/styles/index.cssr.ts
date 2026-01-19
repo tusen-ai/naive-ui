@@ -113,7 +113,7 @@ export default c([
     cB('descriptions-header', `
       font-weight: var(--n-th-font-weight);
       font-size: 18px;
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
       line-height: var(--n-line-height);
       margin-bottom: 16px;
       color: var(--n-title-text-color);
@@ -131,7 +131,7 @@ export default c([
       `, [
         cB('descriptions-table-row', `
           box-sizing: border-box;
-          transition: border-color .3s var(--n-bezier);
+          transition: border-color var(--n-duration) var(--n-bezier);
         `, [
           cB('descriptions-table-header', `
             font-weight: var(--n-th-font-weight);
@@ -156,14 +156,14 @@ export default c([
               border-color .3s var(--n-bezier);
           `, [
             cE('content', `
-              transition: color .3s var(--n-bezier);
+              transition: color var(--n-duration) var(--n-bezier);
               display: inline-block;
               color: var(--n-td-text-color);
             `)
           ]),
           cE('label', `
             font-weight: var(--n-th-font-weight);
-            transition: color .3s var(--n-bezier);
+            transition: color var(--n-duration) var(--n-bezier);
             display: inline-block;
             margin-right: 14px;
             color: var(--n-th-text-color);

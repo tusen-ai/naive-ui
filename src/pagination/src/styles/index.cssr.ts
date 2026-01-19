@@ -79,7 +79,7 @@ export default cB('pagination', `
     white-space: nowrap;
     display: flex;
     color: var(--n-jumper-text-color);
-    transition: color .3s var(--n-bezier);
+    transition: color var(--n-duration) var(--n-bezier);
     align-items: center;
     font-size: var(--n-jumper-font-size);
   `, [

@@ -41,7 +41,7 @@ export default cB('back-top', `
   cB('base-icon', `
     font-size: var(--n-icon-size);
     color: var(--n-icon-color);
-    transition: color .3s var(--n-bezier);
+    transition: color var(--n-duration) var(--n-bezier);
   `),
   c('svg', {
     pointerEvents: 'none'

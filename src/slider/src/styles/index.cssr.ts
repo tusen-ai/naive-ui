@@ -178,7 +178,7 @@ export default c([
       position: relative;
       height: var(--n-rail-height);
       background-color: var(--n-rail-color);
-      transition: background-color .3s var(--n-bezier);
+      transition: background-color var(--n-duration) var(--n-bezier);
       border-radius: calc(var(--n-rail-height) / 2);
     `, [
       cE('fill', `
@@ -186,7 +186,7 @@ export default c([
         top: 0;
         bottom: 0;
         border-radius: calc(var(--n-rail-height) / 2);
-        transition: background-color .3s var(--n-bezier);
+        transition: background-color var(--n-duration) var(--n-bezier);
         background-color: var(--n-fill-color);
       `)
     ]),
@@ -210,7 +210,7 @@ export default c([
           width: var(--n-handle-size);
           border-radius: 50%;
           overflow: hidden;
-          transition: box-shadow .2s var(--n-bezier), background-color .3s var(--n-bezier);
+          transition: box-shadow var(--n-duration-fast, .2s) var(--n-bezier), background-color var(--n-duration) var(--n-bezier);
           background-color: var(--n-handle-color);
           box-shadow: var(--n-handle-box-shadow);
         `, [

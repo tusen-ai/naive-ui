@@ -118,7 +118,7 @@ export default defineComponent({
     )
     const cssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseInOut, fontFamilyMono },
+        common: { cubicBezierEaseInOut, fontFamilyMono, duration },
         self: {
           textColor,
           fontSize,
@@ -142,6 +142,7 @@ export default defineComponent({
         '--n-font-family': fontFamilyMono,
         '--n-font-weight-strong': fontWeightStrong,
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-text-color': textColor,
         '--n-mono-3': $1,
         '--n-hue-1': $2,

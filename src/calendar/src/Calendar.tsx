@@ -117,7 +117,7 @@ export default defineComponent({
     }
     const cssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           borderColor,
           borderColorModal,
@@ -143,6 +143,7 @@ export default defineComponent({
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-border-color': borderColor,
         '--n-border-color-modal': borderColorModal,
         '--n-border-color-popover': borderColorPopover,

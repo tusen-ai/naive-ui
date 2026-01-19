@@ -97,7 +97,7 @@ export default c([
       `, [
         cE('main', `
           font-weight: var(--n-title-font-weight);
-          transition: color .3s var(--n-bezier);
+          transition: color var(--n-duration) var(--n-bezier);
           flex: 1;
           min-width: 0;
           color: var(--n-title-text-color);
@@ -107,7 +107,7 @@ export default c([
           align-items: center;
           font-size: var(--n-font-size);
           font-weight: 400;
-          transition: color .3s var(--n-bezier);
+          transition: color var(--n-duration) var(--n-bezier);
           color: var(--n-text-color);
         `),
         cE('close', `

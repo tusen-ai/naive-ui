@@ -72,10 +72,11 @@ export default defineComponent({
           [createKey('circleBorder', type)]: circleBorder,
           [createKey('iconColor', type)]: iconColor
         },
-        common: { cubicBezierEaseInOut }
+        common: { cubicBezierEaseInOut, duration }
       } = mergedThemeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-circle-border': circleBorder,
         '--n-icon-color': iconColor,
         '--n-content-font-size': contentFontSize,

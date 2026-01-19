@@ -45,7 +45,7 @@ export default defineComponent({
     })
     const cssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           separatorColor,
           itemTextColor,
@@ -63,6 +63,7 @@ export default defineComponent({
       return {
         '--n-font-size': fontSize,
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-item-text-color': itemTextColor,
         '--n-item-text-color-hover': itemTextColorHover,
         '--n-item-text-color-pressed': itemTextColorPressed,

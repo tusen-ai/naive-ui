@@ -18,7 +18,7 @@ export default cB('result', `
   cB('result-icon', `
     display: flex;
     justify-content: center;
-    transition: color .3s var(--n-bezier);
+    transition: color var(--n-duration) var(--n-bezier);
   `, [
     cE('status-image', `
       font-size: var(--n-icon-size);
@@ -41,7 +41,7 @@ export default cB('result', `
     cE('title', `
       margin-top: 16px;
       font-weight: var(--n-title-font-weight);
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
       text-align: center;
       color: var(--n-title-text-color);
       font-size: var(--n-title-font-size);

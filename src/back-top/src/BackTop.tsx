@@ -227,10 +227,11 @@ export default defineComponent({
           borderRadius,
           textColor
         },
-        common: { cubicBezierEaseInOut }
+        common: { cubicBezierEaseInOut, duration }
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-border-radius': borderRadius,
         '--n-height': height,
         '--n-width': width,

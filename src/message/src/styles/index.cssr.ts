@@ -85,7 +85,7 @@ export default c([
         cM(`${type}-type`, [
           c('> *', `
             color: var(--n-icon-color-${type});
-            transition: color .3s var(--n-bezier);
+            transition: color var(--n-duration) var(--n-bezier);
           `)
         ])
       ),

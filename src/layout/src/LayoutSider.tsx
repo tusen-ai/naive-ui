@@ -217,7 +217,7 @@ export default defineComponent({
 
     const cssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self
       } = themeRef.value
       const {
@@ -228,6 +228,7 @@ export default defineComponent({
       } = self
       const vars: any = {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-toggle-button-color': siderToggleButtonColor,
         '--n-toggle-button-border': siderToggleButtonBorder,
         '--n-toggle-bar-color': siderToggleBarColor,

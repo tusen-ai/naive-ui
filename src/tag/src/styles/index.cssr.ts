@@ -61,13 +61,13 @@ export default cB('tag', `
     bottom: 0;
     border-radius: inherit;
     border: var(--n-border);
-    transition: border-color .3s var(--n-bezier);
+    transition: border-color var(--n-duration) var(--n-bezier);
   `),
   cE('icon', `
     display: flex;
     margin: 0 4px 0 0;
     color: var(--n-text-color);
-    transition: color .3s var(--n-bezier);
+    transition: color var(--n-duration) var(--n-bezier);
     font-size: var(--n-avatar-size-override);
   `),
   cE('avatar', `

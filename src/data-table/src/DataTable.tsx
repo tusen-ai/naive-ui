@@ -317,7 +317,7 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const { size } = props
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           borderColor,
           tdColorHover,
@@ -372,6 +372,7 @@ export default defineComponent({
         '--n-th-padding': thPadding,
         '--n-td-padding': tdPadding,
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-border-radius': borderRadius,
         '--n-line-height': lineHeight,
         '--n-border-color': borderColor,

@@ -54,7 +54,7 @@ export default defineComponent({
           linkPadding,
           borderRadius
         },
-        common: { cubicBezierEaseInOut }
+        common: { cubicBezierEaseInOut, duration }
       } = themeRef.value
       return {
         '--n-link-border-radius': borderRadius,
@@ -66,6 +66,7 @@ export default defineComponent({
         '--n-link-text-color-pressed': linkTextColorPressed,
         '--n-link-padding': linkPadding,
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-rail-color': railColor,
         '--n-rail-color-active': railColorActive,
         '--n-rail-width': railWidth

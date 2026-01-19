@@ -173,7 +173,7 @@ export default c([
     height: 100%;
     box-sizing: border-box;
     border-radius: var(--n-border-radius);
-    transition: border-color .3s var(--n-bezier);
+    transition: border-color var(--n-duration) var(--n-bezier);
     cursor: pointer;
   `, [
     cE('value', `

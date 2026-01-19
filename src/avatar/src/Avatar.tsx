@@ -152,7 +152,7 @@ export default defineComponent({
           colorModal,
           colorPopover
         },
-        common: { cubicBezierEaseInOut }
+        common: { cubicBezierEaseInOut, duration }
       } = themeRef.value
       let height: string
       if (typeof size === 'number') {
@@ -169,6 +169,7 @@ export default defineComponent({
         '--n-color-modal': propColor || colorModal,
         '--n-color-popover': propColor || colorPopover,
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-merged-size': `var(--n-avatar-size-override, ${height})`
       }
     })

@@ -304,12 +304,13 @@ export default defineComponent({
     }
     const cssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: { menuBoxShadow }
       } = themeRef.value
       return {
         '--n-menu-box-shadow': menuBoxShadow,
-        '--n-bezier': cubicBezierEaseInOut
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration
       }
     })
     const themeClassHandle = inlineThemeDisabled

@@ -61,7 +61,7 @@ export default c([
     cE('resize-trigger', `
       position: absolute;
       background-color: #0000;
-      transition: background-color .3s var(--n-bezier);
+      transition: background-color var(--n-duration) var(--n-bezier);
     `, [
       cM('hover', `
         background-color: var(--n-resize-trigger-color-hover);
@@ -95,7 +95,7 @@ export default c([
         font-size: var(--n-title-font-size);
         color: var(--n-title-text-color);
         padding: var(--n-header-padding);
-        transition: border .3s var(--n-bezier);
+        transition: border var(--n-duration) var(--n-bezier);
         border-bottom: 1px solid var(--n-divider-color);
         border-bottom: var(--n-header-border-bottom);
         display: flex;
@@ -108,15 +108,15 @@ export default c([
         cE('close', `
           margin-left: 6px;
           transition:
-            background-color .3s var(--n-bezier),
-            color .3s var(--n-bezier);
+            background-color var(--n-duration) var(--n-bezier),
+            color var(--n-duration) var(--n-bezier);
         `)
       ]),
       cB('drawer-footer', `
         display: flex;
         justify-content: flex-end;
         border-top: var(--n-footer-border-top);
-        transition: border .3s var(--n-bezier);
+        transition: border var(--n-duration) var(--n-bezier);
         padding: var(--n-footer-padding);
       `)
     ]),

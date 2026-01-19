@@ -105,10 +105,10 @@ export default c([
     ]),
     cE('icon', `
       font-size: var(--n-icon-size);
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
     `),
     cE('title', `
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
       display: flex;
       align-items: center;
       font-size: var(--n-title-font-size);

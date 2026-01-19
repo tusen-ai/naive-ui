@@ -33,7 +33,7 @@ export default cB('layout-sider', `
       bottom: 0;
       width: 1px;
       background-color: var(--n-border-color);
-      transition: background-color .3s var(--n-bezier);
+      transition: background-color var(--n-duration) var(--n-bezier);
     `)
   ]),
   cE('left-placement', [
@@ -133,7 +133,7 @@ export default cB('layout-sider', `
     z-index: 1;
   `, [
     cB('base-icon', `
-      transition: transform .3s var(--n-bezier);
+      transition: transform var(--n-duration) var(--n-bezier);
       transform: rotate(180deg);
     `)
   ]),
@@ -182,7 +182,7 @@ export default cB('layout-sider', `
     right: 0;
     bottom: 0;
     width: 1px;
-    transition: background-color .3s var(--n-bezier);
+    transition: background-color var(--n-duration) var(--n-bezier);
   `),
   cB('layout-sider-scroll-container', `
     flex-grow: 1;
@@ -190,7 +190,7 @@ export default cB('layout-sider', `
     box-sizing: border-box;
     height: 100%;
     opacity: 0;
-    transition: opacity .3s var(--n-bezier);
+    transition: opacity var(--n-duration) var(--n-bezier);
     max-width: 100%;
   `),
   cM('show-content', [

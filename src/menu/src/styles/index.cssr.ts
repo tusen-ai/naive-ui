@@ -86,7 +86,7 @@ export default c([
     background-color: var(--n-color);
     color: var(--n-item-text-color);
     overflow: hidden;
-    transition: background-color .3s var(--n-bezier);
+    transition: background-color var(--n-duration) var(--n-bezier);
     box-sizing: border-box;
     font-size: var(--n-font-size);
     padding-bottom: 6px;
@@ -218,7 +218,7 @@ export default c([
         bottom: 0;
         pointer-events: none;
         border-radius: var(--n-border-radius);
-        transition: background-color .3s var(--n-bezier);
+        transition: background-color var(--n-duration) var(--n-bezier);
       `),
       cM('disabled', `
         opacity: .45;
@@ -326,7 +326,7 @@ export default c([
         c('a', `
           outline: none;
           text-decoration: none;
-          transition: color .3s var(--n-bezier);
+          transition: color var(--n-duration) var(--n-bezier);
           color: var(--n-item-text-color);
         `, [
           c('&::before', `
@@ -341,7 +341,7 @@ export default c([
         cE('extra', `
           font-size: .93em;
           color: var(--n-group-text-color);
-          transition: color .3s var(--n-bezier);
+          transition: color var(--n-duration) var(--n-bezier);
         `)
       ])
     ]),
@@ -384,7 +384,7 @@ export default c([
     `)
   ]),
   cB('menu-divider', `
-    transition: background-color .3s var(--n-bezier);
+    transition: background-color var(--n-duration) var(--n-bezier);
     background-color: var(--n-divider-color);
     height: 1px;
     margin: 6px 18px;

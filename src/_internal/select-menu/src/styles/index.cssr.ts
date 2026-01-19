@@ -100,7 +100,7 @@ export default cB('base-select-menu', `
       top: 0;
       bottom: 0;
       border-radius: var(--n-border-radius);
-      transition: background-color .3s var(--n-bezier);
+      transition: background-color var(--n-duration) var(--n-bezier);
     `),
     c('&:active', `
       color: var(--n-option-text-color-pressed);
@@ -141,7 +141,7 @@ export default cB('base-select-menu', `
       right: calc(var(--n-option-padding-right) - 4px);
       top: calc(50% - 7px);
       color: var(--n-option-check-color);
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
     `, [
       fadeInScaleUpTransition({
         enterScale: '0.5'

@@ -154,7 +154,7 @@ export default c([
       box-sizing: border-box;
       border-radius: var(--n-border-radius);
       background-color: var(--n-color);
-      transition: background-color 0.3s var(--n-bezier);
+      transition: background-color var(--n-duration) var(--n-bezier);
     `, [
       cE('border', `
         transition:
@@ -198,7 +198,7 @@ export default c([
     ]),
     cE('label', `
       color: var(--n-text-color);
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
       user-select: none;
       -webkit-user-select: none;
       padding: var(--n-label-padding);

@@ -52,7 +52,7 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const { type } = props
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           padding,
           margin,
@@ -84,6 +84,7 @@ export default defineComponent({
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-margin': margin,
         '--n-padding': padding,
         '--n-max-width': maxWidth,

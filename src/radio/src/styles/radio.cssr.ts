@@ -93,7 +93,7 @@ export default cB('radio', `
     padding: var(--n-label-padding);
     font-weight: var(--n-label-font-weight);
     display: inline-block;
-    transition: color .3s var(--n-bezier);
+    transition: color var(--n-duration) var(--n-bezier);
   `),
   cNotM('disabled', `
     cursor: pointer;

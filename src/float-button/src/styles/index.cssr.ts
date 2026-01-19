@@ -38,7 +38,7 @@ export default cB('float-button', `
     right: 0;
     bottom: 0
     left: 0;
-    transition: background-color .3s var(--n-bezier);
+    transition: background-color var(--n-duration) var(--n-bezier);
     border-radius: inherit;
   `),
   cE('body', `
@@ -47,7 +47,7 @@ export default cB('float-button', `
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform .3s var(--n-bezier), opacity .3s var(--n-bezier);
+    transition: transform var(--n-duration) var(--n-bezier), opacity var(--n-duration) var(--n-bezier);
     border-radius: inherit;
     flex-direction: column;
     box-sizing: border-box;
@@ -103,7 +103,7 @@ export default cB('float-button', `
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform .3s var(--n-bezier), opacity .3s var(--n-bezier);
+    transition: transform var(--n-duration) var(--n-bezier), opacity var(--n-duration) var(--n-bezier);
   `),
   cE('menu', `
     position: absolute;

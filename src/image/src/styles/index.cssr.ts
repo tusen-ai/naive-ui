@@ -43,7 +43,7 @@ export default c([
     background: var(--n-toolbar-color);
     box-shadow: var(--n-toolbar-box-shadow);
     color: var(--n-toolbar-icon-color);
-    transition: color .3s var(--n-bezier);
+    transition: color var(--n-duration) var(--n-bezier);
     display: flex;
     align-items: center;
   `, [
@@ -72,7 +72,7 @@ export default c([
     margin: auto;
     max-height: calc(100vh - 32px);
     max-width: calc(100vw - 32px);
-    transition: transform .3s var(--n-bezier);
+    transition: transform var(--n-duration) var(--n-bezier);
   `),
   cB('image', `
     display: inline-flex;

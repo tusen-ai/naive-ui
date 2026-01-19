@@ -349,7 +349,7 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const { inverted } = props
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self
       } = themeRef.value
       const {
@@ -362,6 +362,7 @@ export default defineComponent({
       const vars: any = {
         '--n-divider-color': dividerColor,
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-font-size': fontSize,
         '--n-border-color-horizontal': borderColorHorizontal,
         '--n-border-radius': borderRadius,

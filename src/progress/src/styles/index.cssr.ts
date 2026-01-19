@@ -21,7 +21,7 @@ export default c([
   }, [
     cB('progress-icon', `
       color: var(--n-icon-color);
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
     `),
     cM('line', `
       width: 100%;
@@ -51,7 +51,7 @@ export default c([
           width: 40px;
           font-size: var(--n-font-size);
           padding-left: 4px;
-          transition: color .3s var(--n-bezier);
+          transition: color var(--n-duration) var(--n-bezier);
         `)
       ])
     ]),
@@ -78,7 +78,7 @@ export default c([
         font-size: var(--n-font-size-circle);
         color: var(--n-text-color-circle);
         font-weight: var(--n-font-weight-circle);
-        transition: color .3s var(--n-bezier);
+        transition: color var(--n-duration) var(--n-bezier);
         white-space: nowrap;
       `),
       cB('progress-icon', `
@@ -106,7 +106,7 @@ export default c([
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: color .3s var(--n-bezier);
+        transition: color var(--n-duration) var(--n-bezier);
       `)
     ]),
     cB('progress-content', {
@@ -131,7 +131,7 @@ export default c([
           })
         ]),
         cB('progress-graph-circle-rail', `
-          transition: stroke .3s var(--n-bezier);
+          transition: stroke var(--n-duration) var(--n-bezier);
           overflow: hidden;
           stroke: var(--n-rail-color);
         `)
@@ -156,7 +156,7 @@ export default c([
               height: inherit;
               font-size: 12px;
               color: var(--n-text-color-line-inner);
-              transition: color .3s var(--n-bezier);
+              transition: color var(--n-duration) var(--n-bezier);
             `)
           ])
         ]),

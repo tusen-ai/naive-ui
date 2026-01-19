@@ -46,7 +46,7 @@ export default cB('input', `
   display: inline-flex;
   border-radius: var(--n-border-radius);
   background-color: var(--n-color);
-  transition: background-color .3s var(--n-bezier);
+  transition: background-color var(--n-duration) var(--n-bezier);
   font-size: var(--n-font-size);
   font-weight: var(--n-font-weight);
   --n-padding-vertical: calc((var(--n-height) - 1.5 * var(--n-font-size)) / 2);
@@ -164,7 +164,7 @@ export default cB('input', `
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: color .3s var(--n-bezier);
+    transition: color var(--n-duration) var(--n-bezier);
   `),
   // textarea
   cM('textarea', 'width: 100%;', [
@@ -211,7 +211,7 @@ export default cB('input', `
     cE('separator', `
       display: flex;
       align-items: center;
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
       color: var(--n-text-color);
       white-space: nowrap;
     `, [
@@ -299,7 +299,7 @@ export default cB('input', `
     margin-left: 4px;
   `),
   cE('suffix, prefix', `
-    transition: color .3s var(--n-bezier);
+    transition: color var(--n-duration) var(--n-bezier);
     flex-wrap: nowrap;
     flex-shrink: 0;
     line-height: var(--n-height);
@@ -319,7 +319,7 @@ export default cB('input', `
     `, [
       cE('placeholder', [
         cB('base-icon', `
-          transition: color .3s var(--n-bezier);
+          transition: color var(--n-duration) var(--n-bezier);
           color: var(--n-icon-color);
           font-size: var(--n-icon-size);
         `)
@@ -327,7 +327,7 @@ export default cB('input', `
     ]),
     c('>', [
       cB('icon', `
-        transition: color .3s var(--n-bezier);
+        transition: color var(--n-duration) var(--n-bezier);
         color: var(--n-icon-color);
         font-size: var(--n-icon-size);
       `)
@@ -341,7 +341,7 @@ export default cB('input', `
     line-height: 1.5;
     font-size: .85em;
     color: var(--n-count-text-color);
-    transition: color .3s var(--n-bezier);
+    transition: color var(--n-duration) var(--n-bezier);
     margin-left: 4px;
     font-variant: tabular-nums;
   `),
