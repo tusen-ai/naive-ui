@@ -2,15 +2,16 @@ import { cB, cM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-color
 // --n-border-color
 // --n-text-color
 export default cB('layout-footer', `
   transition:
-    box-shadow .3s var(--n-bezier),
-    color .3s var(--n-bezier),
-    background-color .3s var(--n-bezier),
-    border-color .3s var(--n-bezier);
+    box-shadow var(--n-duration) var(--n-bezier),
+    color var(--n-duration) var(--n-bezier),
+    background-color var(--n-duration) var(--n-bezier),
+    border-color var(--n-duration) var(--n-bezier);
   color: var(--n-text-color);
   background-color: var(--n-color);
   box-sizing: border-box;

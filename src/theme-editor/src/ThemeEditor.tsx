@@ -186,10 +186,14 @@ export default defineComponent({
     watch(overridesRef, (value) => {
       localStorage['naive-ui-theme-overrides'] = JSON.stringify(value)
     })
+    const durationRef = computed(() => {
+      return theme.value.common?.duration || lightTheme.common.duration
+    })
     return {
       locale: useLocale('ThemeEditor').localeRef,
       themeCommonDefault: themeCommonDefaultRef,
       theme,
+      duration: durationRef,
       showPanel: showPanelRef,
       tempOverrides: tempOverridesRef,
       overrides: overridesRef,
@@ -244,8 +248,7 @@ export default defineComponent({
                         borderRadius: '50%',
                         backgroundColor: 'var(--popover-color)',
                         color: 'var(--text-color-2)',
-                        transition:
-                          'color .3s var(--cubic-bezier-ease-in-out), background-color .3s var(--cubic-bezier-ease-in-out), box-shadow .3s var(--cubic-bezier-ease-in-out)',
+                        transition: `color ${this.duration} var(--cubic-bezier-ease-in-out), background-color ${this.duration} var(--cubic-bezier-ease-in-out), box-shadow ${this.duration} var(--cubic-bezier-ease-in-out)`,
                         boxShadow: '0 2px 8px 0px rgba(0, 0, 0, .12)',
                         cursor: 'pointer'
                       },

@@ -2,6 +2,7 @@ import { cB, cM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-color
 // --n-text-color
 export default cB('layout', `
@@ -13,9 +14,9 @@ export default cB('layout', `
   flex: auto;
   overflow: hidden;
   transition:
-    box-shadow .3s var(--n-bezier),
-    background-color .3s var(--n-bezier),
-    color .3s var(--n-bezier);
+    box-shadow var(--n-duration) var(--n-bezier),
+    background-color var(--n-duration) var(--n-bezier),
+    color var(--n-duration) var(--n-bezier);
 `, [
   cB('layout-scroll-container', `
     overflow-x: hidden;

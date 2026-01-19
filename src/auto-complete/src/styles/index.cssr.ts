@@ -3,6 +3,7 @@ import { c, cB } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-menu-box-shadow
 export default c([
   cB('auto-complete', `
@@ -16,7 +17,7 @@ export default c([
     box-shadow: var(--n-menu-box-shadow);
   `, [
     fadeInScaleUpTransition({
-      originalTransition: 'background-color .3s var(--n-bezier), box-shadow .3s var(--n-bezier)'
+      originalTransition: 'background-color var(--n-duration) var(--n-bezier), box-shadow var(--n-duration) var(--n-bezier)'
     })
   ])
 ])
