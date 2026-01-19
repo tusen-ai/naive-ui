@@ -1014,7 +1014,6 @@ export default defineComponent({
         '--n-bezier': cubicBezierEaseInOut,
         '--n-duration': duration,
         '--n-duration-fast': durationFast,
-        '--n-duration': duration,
         '--n-menu-border-radius': menuBorderRadius,
         '--n-menu-box-shadow': menuBoxShadow,
         '--n-menu-height': menuHeight,
