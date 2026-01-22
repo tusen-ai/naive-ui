@@ -2,7 +2,7 @@ import type { CNode } from 'css-render'
 import { c } from '../../_utils/cssr'
 import commonVariables from '../common/_common'
 
-const { cubicBezierEaseInOut } = commonVariables
+const { cubicBezierEaseInOut, durationFast } = commonVariables
 
 interface FadeInTransitionOptions {
   name?: string
@@ -14,8 +14,8 @@ interface FadeInTransitionOptions {
 
 export function fadeInTransition({
   name = 'fade-in',
-  enterDuration = '0.2s',
-  leaveDuration = '0.2s',
+  enterDuration = durationFast,
+  leaveDuration = durationFast,
   enterCubicBezier = cubicBezierEaseInOut,
   leaveCubicBezier = cubicBezierEaseInOut
 }: FadeInTransitionOptions = {}): CNode[] {

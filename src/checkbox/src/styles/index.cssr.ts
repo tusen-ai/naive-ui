@@ -4,6 +4,7 @@ import { c, cB, cE, cM, insideModal, insidePopover } from '../../../_utils/cssr'
 // vars:
 // --n-label-line-height
 // --n-bezier
+// --n-duration
 // --n-size
 // --n-border
 // --n-border-focus
@@ -154,12 +155,12 @@ export default c([
       box-sizing: border-box;
       border-radius: var(--n-border-radius);
       background-color: var(--n-color);
-      transition: background-color 0.3s var(--n-bezier);
+      transition: background-color var(--n-duration) var(--n-bezier);
     `, [
       cE('border', `
         transition:
-          border-color .3s var(--n-bezier),
-          box-shadow .3s var(--n-bezier);
+          border-color var(--n-duration) var(--n-bezier),
+          box-shadow var(--n-duration) var(--n-bezier);
         border-radius: inherit;
         position: absolute;
         left: 0;
@@ -185,10 +186,10 @@ export default c([
           transform: scale(0.5);
           transform-origin: center;
           transition:
-            fill 0.3s var(--n-bezier),
-            transform 0.3s var(--n-bezier),
-            opacity 0.3s var(--n-bezier),
-            border-color 0.3s var(--n-bezier);
+            fill var(--n-duration) var(--n-bezier),
+            transform var(--n-duration) var(--n-bezier),
+            opacity var(--n-duration) var(--n-bezier),
+            border-color var(--n-duration) var(--n-bezier);
         `),
         iconSwitchTransition({
           left: '1px',
@@ -198,7 +199,7 @@ export default c([
     ]),
     cE('label', `
       color: var(--n-text-color);
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
       user-select: none;
       -webkit-user-select: none;
       padding: var(--n-label-padding);

@@ -730,10 +730,12 @@ export default defineComponent({
           [createKey('tabTextColorDisabled', type)]: tabTextColorDisabled,
           [createKey('tabFontSize', size)]: tabFontSize
         },
-        common: { cubicBezierEaseInOut }
+        common: { cubicBezierEaseInOut, duration, durationFast }
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
+        '--n-duration-fast': durationFast,
         '--n-color-segment': colorSegment,
         '--n-bar-color': barColor,
         '--n-tab-font-size': tabFontSize,

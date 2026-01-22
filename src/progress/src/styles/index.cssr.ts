@@ -2,6 +2,8 @@ import { c, cB, cM } from '../../../_utils/cssr'
 
 // vars
 // --n-bezier
+// --n-duration
+// --n-duration-fast
 // --n-fill-color
 // --n-font-size
 // --n-font-size-circle
@@ -21,7 +23,7 @@ export default c([
   }, [
     cB('progress-icon', `
       color: var(--n-icon-color);
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
     `),
     cM('line', `
       width: 100%;
@@ -51,7 +53,7 @@ export default c([
           width: 40px;
           font-size: var(--n-font-size);
           padding-left: 4px;
-          transition: color .3s var(--n-bezier);
+          transition: color var(--n-duration) var(--n-bezier);
         `)
       ])
     ]),
@@ -78,7 +80,7 @@ export default c([
         font-size: var(--n-font-size-circle);
         color: var(--n-text-color-circle);
         font-weight: var(--n-font-weight-circle);
-        transition: color .3s var(--n-bezier);
+        transition: color var(--n-duration) var(--n-bezier);
         white-space: nowrap;
       `),
       cB('progress-icon', `
@@ -106,7 +108,7 @@ export default c([
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: color .3s var(--n-bezier);
+        transition: color var(--n-duration) var(--n-bezier);
       `)
     ]),
     cB('progress-content', {
@@ -122,16 +124,16 @@ export default c([
         cB('progress-graph-circle-fill', `
           stroke: var(--n-fill-color);
           transition:
-            opacity .3s var(--n-bezier),
-            stroke .3s var(--n-bezier),
-            stroke-dasharray .3s var(--n-bezier);
+            opacity var(--n-duration) var(--n-bezier),
+            stroke var(--n-duration) var(--n-bezier),
+            stroke-dasharray var(--n-duration) var(--n-bezier);
         `, [
           cM('empty', {
             opacity: 0
           })
         ]),
         cB('progress-graph-circle-rail', `
-          transition: stroke .3s var(--n-bezier);
+          transition: stroke var(--n-duration) var(--n-bezier);
           overflow: hidden;
           stroke: var(--n-rail-color);
         `)
@@ -156,7 +158,7 @@ export default c([
               height: inherit;
               font-size: 12px;
               color: var(--n-text-color-line-inner);
-              transition: color .3s var(--n-bezier);
+              transition: color var(--n-duration) var(--n-bezier);
             `)
           ])
         ]),
@@ -167,7 +169,7 @@ export default c([
         `, [
           cB('progress-graph-line-rail', `
             flex: 1;
-            transition: background-color .3s var(--n-bezier);
+            transition: background-color var(--n-duration) var(--n-bezier);
           `),
           cB('progress-graph-line-indicator', `
             background: var(--n-fill-color);
@@ -183,9 +185,9 @@ export default c([
             white-space: nowrap;
             color: var(--n-text-color-line-inner);
             transition:
-              right .2s var(--n-bezier),
-              color .3s var(--n-bezier),
-              background-color .3s var(--n-bezier);
+              right var(--n-duration-fast) var(--n-bezier),
+              color var(--n-duration) var(--n-bezier),
+              background-color var(--n-duration) var(--n-bezier);
           `)
         ]),
         cB('progress-graph-line-rail', `
@@ -194,7 +196,7 @@ export default c([
           height: var(--n-rail-height);
           border-radius: 5px;
           background-color: var(--n-rail-color);
-          transition: background-color .3s var(--n-bezier);
+          transition: background-color var(--n-duration) var(--n-bezier);
         `, [
           cB('progress-graph-line-fill', `
             background: var(--n-fill-color);
@@ -204,8 +206,8 @@ export default c([
             width: 100%;
             max-width: 0%;
             transition:
-              background-color .3s var(--n-bezier),
-              max-width .2s var(--n-bezier);
+              background-color var(--n-duration) var(--n-bezier),
+              max-width var(--n-duration-fast) var(--n-bezier);
           `, [
             cM('processing', [
               c('&::after', `

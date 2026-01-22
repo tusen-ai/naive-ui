@@ -9,7 +9,7 @@ import { cB, cM } from '../../../_utils/cssr'
 // --n-code-color
 // --n-code-border
 export default cB('text', `
-  transition: color .3s var(--n-bezier);
+  transition: color var(--n-duration) var(--n-bezier);
   color: var(--n-text-color);
 `, [
   cM('strong', `
@@ -26,9 +26,9 @@ export default cB('text', `
     display: inline-block;
     font-family: var(--n-font-famliy-mono);
     transition: 
-      color .3s var(--n-bezier),
-      border-color .3s var(--n-bezier),
-      background-color .3s var(--n-bezier);
+      color var(--n-duration) var(--n-bezier),
+      border-color var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier);
     box-sizing: border-box;
     padding: .05em .35em 0 .35em;
     border-radius: var(--n-code-border-radius);

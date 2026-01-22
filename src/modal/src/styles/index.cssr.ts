@@ -5,6 +5,7 @@ import { DRAGGABLE_CLASS } from '../composables'
 
 // vars:
 // --n-bezier-ease-out
+// --n-duration
 // --n-box-shadow
 // --n-color
 // --n-text-color
@@ -26,8 +27,8 @@ export default c([
     background-color: rgba(0, 0, 0, .4);
   `, [
     fadeInTransition({
-      enterDuration: '.25s',
-      leaveDuration: '.25s',
+      enterDuration: 'var(--n-duration-fast)',
+      leaveDuration: 'var(--n-duration-fast)',
       enterCubicBezier: 'var(--n-bezier-ease-out)',
       leaveCubicBezier: 'var(--n-bezier-ease-out)'
     })
@@ -61,7 +62,7 @@ export default c([
     box-shadow: var(--n-box-shadow);
   `, [
     fadeInScaleUpTransition({
-      duration: '.25s',
+      duration: 'var(--n-duration-fast)',
       enterScale: '.5'
     }),
     c(`.${DRAGGABLE_CLASS}`, `

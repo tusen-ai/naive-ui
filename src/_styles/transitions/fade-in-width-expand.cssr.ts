@@ -2,7 +2,7 @@ import type { CNode } from 'css-render'
 import { c } from '../../_utils/cssr'
 import commonVariables from '../common/_common'
 
-const { cubicBezierEaseInOut } = commonVariables
+const { cubicBezierEaseInOut, durationFast } = commonVariables
 
 interface FadeInWidthExpandTransition {
   duration?: string
@@ -10,7 +10,7 @@ interface FadeInWidthExpandTransition {
 }
 
 export function fadeInWidthExpandTransition({
-  duration = '.2s',
+  duration = durationFast,
   delay = '.1s'
 }: FadeInWidthExpandTransition = {}): CNode[] {
   return [

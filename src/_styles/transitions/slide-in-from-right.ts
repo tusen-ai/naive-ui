@@ -2,7 +2,8 @@ import type { CNode } from 'css-render'
 import { c } from '../../_utils/cssr'
 import commonVariables from '../common/_common'
 
-const { cubicBezierEaseIn, cubicBezierEaseOut } = commonVariables
+const { cubicBezierEaseIn, cubicBezierEaseOut, duration, durationFast }
+  = commonVariables
 
 interface SlideInFromRightTransitionOptions {
   duration?: string
@@ -11,8 +12,8 @@ interface SlideInFromRightTransitionOptions {
 }
 
 export function slideInFromRightTransition({
-  duration = '0.3s',
-  leaveDuration = '0.2s',
+  duration: durationParam = duration,
+  leaveDuration = durationFast,
   name = 'slide-in-from-right'
 }: SlideInFromRightTransitionOptions = {}): CNode[] {
   return [
@@ -20,7 +21,7 @@ export function slideInFromRightTransition({
       transition: `transform ${leaveDuration} ${cubicBezierEaseIn}`
     }),
     c(`&.${name}-transition-enter-active`, {
-      transition: `transform ${duration} ${cubicBezierEaseOut}`
+      transition: `transform ${durationParam} ${cubicBezierEaseOut}`
     }),
     c(`&.${name}-transition-enter-to`, {
       transform: 'translateX(0)'

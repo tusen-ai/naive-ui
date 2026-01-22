@@ -896,7 +896,7 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const { value: size } = mergedSizeRef
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           color,
           borderRadius,
@@ -950,6 +950,7 @@ export default defineComponent({
       const { left: paddingLeft, right: paddingRight } = getPadding(padding)
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-count-text-color': countTextColor,
         '--n-count-text-color-disabled': countTextColorDisabled,
         '--n-color': color,

@@ -87,7 +87,7 @@ export default defineComponent({
       const { value: status } = mergedStatusRef
       const { size } = stepsProps
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           stepHeaderFontWeight,
           [createKey('stepHeaderFontSize', size)]: stepHeaderFontSize,
@@ -104,6 +104,7 @@ export default defineComponent({
       } = mergedThemeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-description-text-color': descriptionTextColor,
         '--n-header-text-color': headerTextColor,
         '--n-indicator-border-color': indicatorBorderColor,

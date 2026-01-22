@@ -28,6 +28,8 @@ import {
 // --n-placeholder-color-disabled
 // --n-text-color
 // --n-text-color-disabled
+// --n-bezier
+// --n-duration
 // --n-arrow-color
 // --n-arrow-size
 // --n-loading-color
@@ -64,8 +66,8 @@ export default c([
       border: var(--n-border);
       border-radius: inherit;
       transition:
-        box-shadow .3s var(--n-bezier),
-        border-color .3s var(--n-bezier);
+        box-shadow var(--n-duration) var(--n-bezier),
+        border-color var(--n-duration) var(--n-bezier);
     `),
     cE('state-border', `
       z-index: 1;
@@ -81,7 +83,7 @@ export default c([
       cE('arrow', `
         font-size: var(--n-arrow-size);
         color: var(--n-arrow-color);
-        transition: color .3s var(--n-bezier);
+        transition: color var(--n-duration) var(--n-bezier);
       `)
     ]),
     cB('base-selection-overlay', `
@@ -95,7 +97,7 @@ export default c([
       bottom: 0;
       left: 0;
       padding: var(--n-padding-single);
-      transition: color .3s var(--n-bezier);
+        transition: color var(--n-duration) var(--n-bezier);
     `, [
       cE('wrapper', `
         flex-basis: 0;
@@ -127,9 +129,9 @@ export default c([
       background-color: var(--n-color);
       border-radius: inherit;
       transition:
-        color .3s var(--n-bezier),
-        box-shadow .3s var(--n-bezier),
-        background-color .3s var(--n-bezier);
+        color var(--n-duration) var(--n-bezier),
+        box-shadow var(--n-duration) var(--n-bezier),
+        background-color var(--n-duration) var(--n-bezier);
     `),
     cB('base-selection-label', `
       height: var(--n-height);
@@ -142,9 +144,9 @@ export default c([
       box-sizing: border-box;
       position: relative;
       transition:
-      color .3s var(--n-bezier),
-      box-shadow .3s var(--n-bezier),
-      background-color .3s var(--n-bezier);
+      color var(--n-duration) var(--n-bezier),
+      box-shadow var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier);
       border-radius: inherit;
       background-color: var(--n-color);
       align-items: center;
@@ -160,7 +162,7 @@ export default c([
         padding: var(--n-padding-single);
         background-color: #0000;
         color: var(--n-text-color);
-        transition: color .3s var(--n-bezier);
+        transition: color var(--n-duration) var(--n-bezier);
         caret-color: var(--n-caret-color);
       `, [
         cE('content', `

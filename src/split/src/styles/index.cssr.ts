@@ -4,6 +4,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --n-resize-trigger-color
 // --n-resize-trigger-color-hover
 // --n-bezier
+// --n-duration
 export default cB('split', `
   display: flex;
   width: 100%;
@@ -24,7 +25,7 @@ export default cB('split', `
   `),
   cE('resize-trigger', `
     background-color: var(--n-resize-trigger-color);
-    transition: background-color .3s var(--n-bezier);
+    transition: background-color var(--n-duration) var(--n-bezier);
   `, [
     cM('hover', `
       background-color: var(--n-resize-trigger-color-hover);

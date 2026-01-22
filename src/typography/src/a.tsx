@@ -28,12 +28,13 @@ export default defineComponent({
     )
     const cssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: { aTextColor }
       } = themeRef.value
       return {
         '--n-text-color': aTextColor,
-        '--n-bezier': cubicBezierEaseInOut
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration
       }
     })
     const themeClassHandle = inlineThemeDisabled

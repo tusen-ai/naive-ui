@@ -3,6 +3,7 @@ import { c, cB, cE } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-loading-color
 // --n-loader-border
 // --n-loader-color
@@ -12,7 +13,7 @@ import { c, cB, cE } from '../../../_utils/cssr'
 export default cB('log', `
   position: relative;
   box-sizing: border-box;
-  transition: border-color .3s var(--n-bezier);
+  transition: border-color var(--n-duration) var(--n-bezier);
 `, [
   c('pre', `
     white-space: pre-wrap;
@@ -21,9 +22,9 @@ export default cB('log', `
   `),
   cB('log-loader', `
     transition:
-      color .3s var(--n-bezier),
-      background-color .3s var(--n-bezier),
-      border-color .3s var(--n-bezier);
+      color var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier),
+      border-color var(--n-duration) var(--n-bezier);
     box-sizing: border-box;
     position: absolute;
     right: 16px;

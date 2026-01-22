@@ -3,6 +3,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-color
 // --n-close-color-hover
 // --n-close-color-pressed
@@ -29,7 +30,7 @@ export default cB('alert', `
   line-height: var(--n-line-height);
   border-radius: var(--n-border-radius);
   position: relative;
-  transition: background-color .3s var(--n-bezier);
+  transition: background-color var(--n-duration) var(--n-bezier);
   background-color: var(--n-color);
   text-align: start;
   word-break: break-word;
@@ -41,7 +42,7 @@ export default cB('alert', `
     right: 0;
     top: 0;
     bottom: 0;
-    transition: border-color .3s var(--n-bezier);
+    transition: border-color var(--n-duration) var(--n-bezier);
     border: var(--n-border);
     pointer-events: none;
   `),
@@ -66,7 +67,7 @@ export default cB('alert', `
     })
   ]),
   fadeInHeightExpandTransition({
-    originalTransition: 'transform .3s var(--n-bezier)',
+    originalTransition: 'transform var(--n-duration) var(--n-bezier)',
     enterToProps: {
       transform: 'scale(1)'
     },
@@ -88,8 +89,8 @@ export default cB('alert', `
   `),
   cE('close', `
     transition:
-      color .3s var(--n-bezier),
-      background-color .3s var(--n-bezier);
+      color var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier);
     position: absolute;
     right: 0;
     top: 0;
@@ -108,10 +109,10 @@ export default cB('alert', `
   ]),
   cB('alert-body', `
     border-radius: var(--n-border-radius);
-    transition: border-color .3s var(--n-bezier);
+    transition: border-color var(--n-duration) var(--n-bezier);
   `, [
     cE('title', `
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
       font-size: 16px;
       line-height: 19px;
       font-weight: var(--n-title-font-weight);
@@ -123,11 +124,11 @@ export default cB('alert', `
       ])
     ]),
     cE('content', {
-      transition: 'color .3s var(--n-bezier)',
+      transition: 'color var(--n-duration) var(--n-bezier)',
       fontSize: 'var(--n-font-size)'
     })
   ]),
   cE('icon', {
-    transition: 'color .3s var(--n-bezier)'
+    transition: 'color var(--n-duration) var(--n-bezier)'
   })
 ])

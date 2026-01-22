@@ -2,6 +2,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-button-border-color
 // --n-button-border-color-active
 // --n-height
@@ -16,8 +17,8 @@ export default cB('radio-group', `
     vertical-align: bottom;
     width: 1px;
     transition:
-      background-color .3s var(--n-bezier),
-      opacity .3s var(--n-bezier);
+      background-color var(--n-duration) var(--n-bezier),
+      opacity var(--n-duration) var(--n-bezier);
     background: var(--n-button-border-color);
   `, [
     cM('checked', {
@@ -52,10 +53,10 @@ export default cB('radio-group', `
     padding-right: 14px;
     white-space: nowrap;
     transition:
-      background-color .3s var(--n-bezier),
-      opacity .3s var(--n-bezier),
-      border-color .3s var(--n-bezier),
-      color .3s var(--n-bezier);
+      background-color var(--n-duration) var(--n-bezier),
+      opacity var(--n-duration) var(--n-bezier),
+      border-color var(--n-duration) var(--n-bezier),
+      color var(--n-duration) var(--n-bezier);
     background: var(--n-button-color);
     color: var(--n-button-text-color);
     border-top: 1px solid var(--n-button-border-color);
@@ -78,7 +79,7 @@ export default cB('radio-group', `
       pointer-events: none;
       position: absolute;
       box-shadow: var(--n-button-box-shadow);
-      transition: box-shadow .3s var(--n-bezier);
+      transition: box-shadow var(--n-duration) var(--n-bezier);
       left: -1px;
       bottom: -1px;
       right: -1px;
@@ -109,7 +110,7 @@ export default cB('radio-group', `
     `, [
       c('&:hover', [
         cE('state-border', `
-          transition: box-shadow .3s var(--n-bezier);
+          transition: box-shadow var(--n-duration) var(--n-bezier);
           box-shadow: var(--n-button-box-shadow-hover);
         `),
         cNotM('checked', {

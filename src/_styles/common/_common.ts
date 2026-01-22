@@ -10,6 +10,9 @@ export default {
   cubicBezierEaseOut: 'cubic-bezier(0, 0, .2, 1)',
   cubicBezierEaseIn: 'cubic-bezier(.4, 0, 1, 1)',
 
+  duration: '0.3s',
+  durationFast: '0.2s',
+
   borderRadius: '3px',
   borderRadiusSmall: '2px',
 

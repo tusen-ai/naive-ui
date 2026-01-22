@@ -799,13 +799,14 @@ export default defineComponent({
     }
     const triggerCssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: { iconColor, iconColorDisabled }
       } = themeRef.value
       return {
         '--n-icon-color-override': iconColor,
         '--n-icon-color-disabled-override': iconColorDisabled,
-        '--n-bezier': cubicBezierEaseInOut
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration
       }
     })
     const triggerThemeClassHandle = inlineThemeDisabled
@@ -833,10 +834,11 @@ export default defineComponent({
           panelActionPadding,
           itemBorderRadius
         },
-        common: { cubicBezierEaseInOut }
+        common: { cubicBezierEaseInOut, duration }
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-border-radius': borderRadius,
         '--n-item-color-hover': itemColorHover,
         '--n-item-font-size': itemFontSize,

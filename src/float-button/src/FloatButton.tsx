@@ -125,11 +125,12 @@ export default defineComponent({
           colorPressed,
           colorPrimaryPressed
         },
-        common: { cubicBezierEaseInOut }
+        common: { cubicBezierEaseInOut, duration }
       } = themeRef.value
       const { type } = props
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-box-shadow': boxShadow,
         '--n-box-shadow-hover': boxShadowHover,
         '--n-box-shadow-pressed': boxShadowPressed,

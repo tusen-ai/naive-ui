@@ -3,6 +3,7 @@ import { c, cB, cE, cM, insideModal, insidePopover } from '../../../_utils/cssr'
 // vars:
 // --n-font-size
 // --n-bezier
+// --n-duration
 // --n-text-color
 // --n-color
 // --n-color-hover
@@ -22,9 +23,9 @@ export default c([
     margin: 0;
     font-size: var(--n-font-size);
     transition:
-      background-color .3s var(--n-bezier),
-      color .3s var(--n-bezier),
-      border-color .3s var(--n-bezier);
+      background-color var(--n-duration) var(--n-bezier),
+      color var(--n-duration) var(--n-bezier),
+      border-color var(--n-duration) var(--n-bezier);
     padding: 0;
     list-style-type: none;
     color: var(--n-text-color);
@@ -72,7 +73,7 @@ export default c([
     cE('header, footer', `
       padding: 12px 0;
       box-sizing: border-box;
-      transition: border-color .3s var(--n-bezier);
+      transition: border-color var(--n-duration) var(--n-bezier);
     `, [
       c('&:not(:last-child)', `
         border-bottom: 1px solid var(--n-merged-border-color);
@@ -86,8 +87,8 @@ export default c([
       flex-wrap: nowrap;
       align-items: center;
       transition:
-        background-color .3s var(--n-bezier),
-        border-color .3s var(--n-bezier);
+        background-color var(--n-duration) var(--n-bezier),
+        border-color var(--n-duration) var(--n-bezier);
     `, [
       cE('prefix', `
         margin-right: 20px;
@@ -107,7 +108,7 @@ export default c([
         left: 0;
         right: 0;
         background-color: transparent;
-        transition: background-color .3s var(--n-bezier);
+        transition: background-color var(--n-duration) var(--n-bezier);
         pointer-events: none;
       `)
     ])

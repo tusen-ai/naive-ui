@@ -8,6 +8,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // --n-link-text-color-active
 // --n-link-text-color-pressed
 // --n-bezier
+// --n-duration
 // --n-rail-color
 // --n-rail-color-active
 // --n-rail-width
@@ -41,7 +42,7 @@ export default cB('anchor', `
     cB('anchor-link', `
       margin-bottom: 4px;
       padding: 2px 8px;
-      transition: background-color .3s var(--n-bezier);
+      transition: background-color var(--n-duration) var(--n-bezier);
       background-color: transparent;
       border-radius: var(--n-link-border-radius);
     `, [
@@ -56,9 +57,9 @@ export default cB('anchor', `
     width: 100%;
     background-color: var(--n-link-color);
     transition:
-      top .15s var(--n-bezier),
-      max-width .15s var(--n-bezier),
-      background-color .3s var(--n-bezier);
+      top var(--n-duration) var(--n-bezier),
+      max-width var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier);
   `),
   cB('anchor-rail', `
     position: absolute;
@@ -68,7 +69,7 @@ export default cB('anchor', `
     width: var(--n-rail-width);
     border-radius: calc(var(--n-rail-width) / 2);
     overflow: hidden;
-    transition: background-color .3s var(--n-bezier);
+    transition: background-color var(--n-duration) var(--n-bezier);
     background-color: var(--n-rail-color);
   `, [
     cE('bar', `
@@ -78,8 +79,8 @@ export default cB('anchor', `
       height: 21px;
       background-color: #0000;
       transition: 
-        top .15s var(--n-bezier),
-        background-color .3s var(--n-bezier);
+        top var(--n-duration) var(--n-bezier),
+        background-color var(--n-duration) var(--n-bezier);
     `, [
       cM('active', {
         backgroundColor: 'var(--n-rail-color-active)'
@@ -112,7 +113,7 @@ export default cB('anchor', `
       cursor: pointer;
       display: inline-block;
       padding-right: 16px;
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
       color: var(--n-link-text-color);
     `, [
       c('&:hover, &:focus', `

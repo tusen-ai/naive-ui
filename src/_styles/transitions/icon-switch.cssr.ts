@@ -3,7 +3,8 @@ import { c } from '../../_utils/cssr'
 import commonVariables from '../common/_common'
 
 const {
-  cubicBezierEaseInOut
+  cubicBezierEaseInOut,
+  duration
 } = commonVariables
 
 interface IconSwitchTransitionOptions {
@@ -17,7 +18,7 @@ export function iconSwitchTransition({
   originalTransform = '',
   left = 0,
   top = 0,
-  transition = `all .3s ${cubicBezierEaseInOut} !important`
+  transition = `all ${duration} ${cubicBezierEaseInOut} !important`
 }: IconSwitchTransitionOptions = {}): CNode[] {
   return [
     c('&.icon-switch-transition-enter-from, &.icon-switch-transition-leave-to', {

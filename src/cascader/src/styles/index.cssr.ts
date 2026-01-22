@@ -7,6 +7,9 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --n-menu-height
 // --n-menu-color
 // --n-menu-divider-color
+// --n-bezier
+// --n-duration
+// --n-duration-fast
 // --n-option-height
 // --n-option-font-size
 // --n-option-text-color
@@ -30,7 +33,7 @@ export default c([
     color: var(--n-option-text-color);
     background-color: var(--n-menu-color);
   `, [
-    fadeInScaleUpTransition({ transformOrigin: 'inherit', duration: '0.2s' }),
+    fadeInScaleUpTransition({ transformOrigin: 'inherit', duration: 'var(--n-duration-fast)' }),
     cE('empty', `
       display: flex;
       padding: 12px 32px;
@@ -95,8 +98,8 @@ export default c([
       position: relative;
       cursor: pointer;
       transition:
-        background-color .2s var(--n-bezier),
-        color 0.2s var(--n-bezier);
+        background-color var(--n-duration-fast) var(--n-bezier),
+        color var(--n-duration-fast) var(--n-bezier);
     `, [
       cM('show-prefix', `
         padding-left: 0;
@@ -130,7 +133,7 @@ export default c([
             color: var(--n-option-check-mark-color);
           `, [
             fadeInScaleUpTransition({
-              originalTransition: 'background-color .3s var(--n-bezier), box-shadow .3s var(--n-bezier)'
+              originalTransition: 'background-color var(--n-duration) var(--n-bezier), box-shadow var(--n-duration) var(--n-bezier)'
             })
           ]),
           cM('arrow', `

@@ -2,6 +2,7 @@ import { c, cB, cM, cNotM, insideModal, insidePopover } from '../../../_utils/cs
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-td-color
 // --n-td-color-modal
 // --n-td-color-popover
@@ -33,17 +34,17 @@ export default c([
     background-color: var(--n-td-color);
     border-color: var(--n-merged-border-color);
     transition:
-      background-color .3s var(--n-bezier),
-      border-color .3s var(--n-bezier),
-      color .3s var(--n-bezier);
+      background-color var(--n-duration) var(--n-bezier),
+      border-color var(--n-duration) var(--n-bezier),
+      color var(--n-duration) var(--n-bezier);
     --n-merged-border-color: var(--n-border-color);
   `, [
     c('th', `
       white-space: nowrap;
       transition:
-        background-color .3s var(--n-bezier),
-        border-color .3s var(--n-bezier),
-        color .3s var(--n-bezier);
+        background-color var(--n-duration) var(--n-bezier),
+        border-color var(--n-duration) var(--n-bezier),
+        color var(--n-duration) var(--n-bezier);
       text-align: inherit;
       padding: var(--n-th-padding);
       vertical-align: inherit;
@@ -61,9 +62,9 @@ export default c([
     ]),
     c('td', `
       transition:
-        background-color .3s var(--n-bezier),
-        border-color .3s var(--n-bezier),
-        color .3s var(--n-bezier);
+        background-color var(--n-duration) var(--n-bezier),
+        border-color var(--n-duration) var(--n-bezier),
+        color var(--n-duration) var(--n-bezier);
       padding: var(--n-td-padding);
       color: var(--n-td-text-color);
       background-color: var(--n-td-color);

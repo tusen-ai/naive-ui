@@ -11,6 +11,7 @@ import { c, cB, cE } from '../../../_utils/cssr'
 // --n-back-size
 // --n-title-font-weight
 // --n-bezier
+// --n-duration
 export default c([
   cB('page-header-header', `
     margin-bottom: 20px;
@@ -33,7 +34,7 @@ export default c([
       font-size: var(--n-back-size);
       cursor: pointer;
       color: var(--n-back-color);
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
     `, [
       c('&:hover', 'color: var(--n-back-color-hover);'),
       c('&:active', 'color: var(--n-back-color-pressed);')
@@ -44,14 +45,14 @@ export default c([
     `),
     cE('title', `
       margin-right: 16px;
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
       font-size: var(--n-title-font-size);
       font-weight: var(--n-title-font-weight);
       color: var(--n-title-text-color);
     `),
     cE('subtitle', `
       font-size: 14px;
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
       color: var(--n-subtitle-text-color);
     `)
   ]),

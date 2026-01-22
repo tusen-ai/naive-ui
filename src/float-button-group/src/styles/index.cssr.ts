@@ -1,5 +1,7 @@
 import { c, cB, cE, cM } from '../../../_utils/cssr/index'
 
+// --n-bezier
+// --n-duration
 // --n-border-radius-square
 export default cB('float-button-group', [
   cB('float-button', `
@@ -16,9 +18,9 @@ export default cB('float-button-group', [
     flex-direction: column;
     box-shadow: var(--n-box-shadow);
     transition:
-      color .3s var(--n-bezier),
-      box-shadow .3s var(--n-bezier),
-      background-color .3s var(--n-bezier);
+      color var(--n-duration) var(--n-bezier),
+      box-shadow var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier);
   `, [
     cB('float-button', `
       background-color: unset;

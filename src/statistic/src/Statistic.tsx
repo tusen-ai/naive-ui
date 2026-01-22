@@ -52,10 +52,11 @@ export default defineComponent({
           valueTextColor,
           labelFontSize
         },
-        common: { cubicBezierEaseInOut }
+        common: { cubicBezierEaseInOut, duration }
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-label-font-size': labelFontSize,
         '--n-label-font-weight': labelFontWeight,
         '--n-label-text-color': labelTextColor,

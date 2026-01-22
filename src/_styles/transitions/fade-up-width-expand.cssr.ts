@@ -2,14 +2,14 @@ import type { CNode } from 'css-render'
 import { c } from '../../_utils/cssr'
 import commonVariables from '../common/_common'
 
-const { cubicBezierEaseOut } = commonVariables
+const { cubicBezierEaseOut, durationFast } = commonVariables
 
 interface FadeUpWidthExpandTransition {
   duration?: string
 }
 
 export function fadeUpWidthExpandTransition({
-  duration = '.2s'
+  duration = durationFast
 }: FadeUpWidthExpandTransition = {}): CNode[] {
   return [
     c('&.fade-up-width-expand-transition-leave-active', {

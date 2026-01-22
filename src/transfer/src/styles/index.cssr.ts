@@ -7,6 +7,8 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // --n-close-icon-color
 // --n-close-icon-color-hover
 // --n-close-icon-color-pressed
+// --n-bezier
+// --n-duration
 export default cB('transfer', `
   width: 100%;
   font-size: var(--n-font-size);
@@ -35,7 +37,7 @@ export default cB('transfer', `
     flex-direction: column;
     background-clip: padding-box;
     position: relative;
-    transition: background-color .3s var(--n-bezier);
+    transition: background-color var(--n-duration) var(--n-bezier);
     background-color: var(--n-list-color);
   `, [
     cM('source', `
@@ -53,7 +55,7 @@ export default cB('transfer', `
     cE('border', `
       padding: 0 12px;
       border: 1px solid var(--n-border-color);
-      transition: border-color .3s var(--n-bezier);
+      transition: border-color var(--n-duration) var(--n-bezier);
       pointer-events: none;
       border-radius: inherit;
       position: absolute;
@@ -74,8 +76,8 @@ export default cB('transfer', `
       border-bottom-right-radius: 0;
       line-height: 1.5;
       transition:
-        border-color .3s var(--n-bezier),
-        background-color .3s var(--n-bezier);
+        border-color var(--n-duration) var(--n-bezier),
+        background-color var(--n-duration) var(--n-bezier);
     `, [
       c('> *:not(:first-child)', `
         margin-left: 8px;
@@ -86,14 +88,14 @@ export default cB('transfer', `
         line-height: 1.5;
         font-size: var(--n-header-font-size);
         font-weight: var(--n-header-font-weight);
-        transition: color .3s var(--n-bezier);
+        transition: color var(--n-duration) var(--n-bezier);
         color: var(--n-header-text-color);
       `),
       cE('button', `
         position: relative;
       `),
       cE('extra', `
-        transition: color .3s var(--n-bezier);
+        transition: color var(--n-duration) var(--n-bezier);
         font-size: var(--n-extra-font-size);
         margin-right: 0;
         white-space: nowrap;
@@ -115,8 +117,8 @@ export default cB('transfer', `
         padding: 4px 12px 8px 12px;
         box-sizing: border-box;
         transition:
-          border-color .3s var(--n-bezier),
-          background-color .3s var(--n-bezier);
+          border-color var(--n-duration) var(--n-bezier),
+          background-color var(--n-duration) var(--n-bezier);
       `),
       cB('transfer-list-flex-container', `
         flex: 1;
@@ -148,7 +150,7 @@ export default cB('transfer', `
             align-items: center;
             color: var(--n-item-text-color);
             position: relative;
-            transition: color .3s var(--n-bezier);
+            transition: color var(--n-duration) var(--n-bezier);
           `, [
             cE('background', `
               position: absolute;
@@ -157,7 +159,7 @@ export default cB('transfer', `
               top: 0;
               bottom: 0;
               border-radius: var(--n-border-radius);
-              transition: background-color .3s var(--n-bezier);
+              transition: background-color var(--n-duration) var(--n-bezier);
             `),
             cE('checkbox', `
               position: relative;
@@ -168,9 +170,9 @@ export default cB('transfer', `
               pointer-events: none;
               position: relative;
               transition:
-                opacity .3s var(--n-bezier),
-                background-color .3s var(--n-bezier),
-                color .3s var(--n-bezier);
+                opacity var(--n-duration) var(--n-bezier),
+                background-color var(--n-duration) var(--n-bezier),
+                color var(--n-duration) var(--n-bezier);
             `),
             cE('label', `
               position: relative;

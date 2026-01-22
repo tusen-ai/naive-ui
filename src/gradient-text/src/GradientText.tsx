@@ -76,7 +76,7 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const { value: type } = compatibleTypeRef
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           rotate,
           [createKey('colorStart', type)]: colorStart,
@@ -86,6 +86,7 @@ export default defineComponent({
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-rotate': rotate,
         '--n-color-start': colorStart,
         '--n-color-end': colorEnd,

@@ -150,7 +150,7 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const { type, size, color: { color, textColor } = {} } = props
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           padding,
           closeMargin,
@@ -185,9 +185,10 @@ export default defineComponent({
       } = themeRef.value
       const closeMarginDiscrete = getMargin(closeMargin)
       return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-font-weight-strong': fontWeightStrong,
         '--n-avatar-size-override': `calc(${height} - 8px)`,
-        '--n-bezier': cubicBezierEaseInOut,
         '--n-border-radius': borderRadius,
         '--n-border': border,
         '--n-close-icon-size': closeIconSize,

@@ -53,7 +53,7 @@ export default defineComponent({
       style: computed(() => {
         const theme = themeRef.value
         const {
-          common: { cubicBezierEaseInOut }
+          common: { cubicBezierEaseInOut, duration }
         } = theme
         const selfThemeVars = theme.self
         const { color, colorEnd, borderRadius } = selfThemeVars
@@ -83,6 +83,7 @@ export default defineComponent({
               : mergedHeight,
           animation: !animated ? 'none' : '',
           '--n-bezier': cubicBezierEaseInOut,
+          '--n-duration': duration,
           '--n-color-start': color,
           '--n-color-end': colorEnd
         }

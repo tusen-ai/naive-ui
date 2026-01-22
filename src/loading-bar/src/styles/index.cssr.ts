@@ -5,6 +5,8 @@ import { cB, cM } from '../../../_utils/cssr'
 // --n-height
 // --n-color-loading
 // --n-color-error
+// --n-bezier
+// --n-duration
 export default cB('loading-bar-container', `
   z-index: 5999;
   position: fixed;
@@ -14,14 +16,14 @@ export default cB('loading-bar-container', `
   height: 2px;
 `, [
   fadeInTransition({
-    enterDuration: '0.3s',
+    enterDuration: 'var(--n-duration)',
     leaveDuration: '0.8s'
   }),
   cB('loading-bar', `
     width: 100%;
     transition:
       max-width 4s linear,
-      background .2s linear;
+      background var(--n-duration-fast) linear;
     height: var(--n-height);
   `, [
     cM('starting', `
@@ -30,14 +32,14 @@ export default cB('loading-bar-container', `
     cM('finishing', `
       background: var(--n-color-loading);
       transition:
-        max-width .2s linear,
-        background .2s linear;
+        max-width var(--n-duration-fast) linear,
+        background var(--n-duration-fast) linear;
     `),
     cM('error', `
       background: var(--n-color-error);
       transition:
-        max-width .2s linear,
-        background .2s linear;
+        max-width var(--n-duration-fast) linear,
+        background var(--n-duration-fast) linear;
     `)
   ])
 ])

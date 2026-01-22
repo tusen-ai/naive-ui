@@ -660,7 +660,7 @@ export default defineComponent({
     }
     const cssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration, durationFast },
         self: {
           draggerColor,
           draggerBorder,
@@ -681,6 +681,8 @@ export default defineComponent({
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
+        '--n-duration-fast': durationFast,
         '--n-border-radius': borderRadius,
         '--n-dragger-border': draggerBorder,
         '--n-dragger-border-hover': draggerBorderHover,

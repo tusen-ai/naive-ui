@@ -9,7 +9,7 @@ export default cB('avatar-group', `
   cM('expand-on-hover', [
     cB('avatar', [
       c('&:not(:first-child)', `
-         transition: margin .3s var(--n-bezier);
+         transition: margin var(--n-duration) var(--n-bezier);
       `)
     ]),
     c('&:hover', [

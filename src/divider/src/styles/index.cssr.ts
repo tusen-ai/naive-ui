@@ -2,6 +2,7 @@ import { cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-color
 // --n-text-color
 // --n-font-weight
@@ -13,8 +14,8 @@ export default cB('divider', `
   font-size: 16px;
   color: var(--n-text-color);
   transition:
-    color .3s var(--n-bezier),
-    background-color .3s var(--n-bezier);
+    color var(--n-duration) var(--n-bezier),
+    background-color var(--n-duration) var(--n-bezier);
 `, [
   cNotM('vertical', `
     margin-top: 24px;
@@ -65,7 +66,7 @@ export default cB('divider', `
   `),
   cE('line', `
     border: none;
-    transition: background-color .3s var(--n-bezier), border-color .3s var(--n-bezier);
+    transition: background-color var(--n-duration) var(--n-bezier), border-color var(--n-duration) var(--n-bezier);
     height: 1px;
     width: 100%;
     margin: 0;

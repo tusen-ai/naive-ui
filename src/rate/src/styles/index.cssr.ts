@@ -2,6 +2,8 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
+// --n-duration-fast
 // --n-item-color
 // --n-item-color-active
 export default cB('rate', {
@@ -12,7 +14,7 @@ export default cB('rate', {
     cE('item', `
       transition:
         transform .1s var(--n-bezier),
-        color .3s var(--n-bezier);
+        color var(--n-duration) var(--n-bezier);
     `)
   ]),
   cE('item', `
@@ -20,7 +22,7 @@ export default cB('rate', {
     display: flex;
     transition:
       transform .1s var(--n-bezier),
-      color .3s var(--n-bezier);
+      color var(--n-duration) var(--n-bezier);
     transform: scale(1);
     font-size: var(--n-item-size);
     color: var(--n-item-color);

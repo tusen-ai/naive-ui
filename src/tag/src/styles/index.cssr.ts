@@ -2,6 +2,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-border-radius
 // --n-border
 // --n-close-icon-color
@@ -40,11 +41,11 @@ export default cB('tag', `
   color: var(--n-text-color);
   background-color: var(--n-color);
   transition: 
-    border-color .3s var(--n-bezier),
-    background-color .3s var(--n-bezier),
-    color .3s var(--n-bezier),
-    box-shadow .3s var(--n-bezier),
-    opacity .3s var(--n-bezier);
+    border-color var(--n-duration) var(--n-bezier),
+    background-color var(--n-duration) var(--n-bezier),
+    color var(--n-duration) var(--n-bezier),
+    box-shadow var(--n-duration) var(--n-bezier),
+    opacity var(--n-duration) var(--n-bezier);
   line-height: 1;
   height: var(--n-height);
   font-size: var(--n-font-size);
@@ -61,13 +62,13 @@ export default cB('tag', `
     bottom: 0;
     border-radius: inherit;
     border: var(--n-border);
-    transition: border-color .3s var(--n-bezier);
+    transition: border-color var(--n-duration) var(--n-bezier);
   `),
   cE('icon', `
     display: flex;
     margin: 0 4px 0 0;
     color: var(--n-text-color);
-    transition: color .3s var(--n-bezier);
+    transition: color var(--n-duration) var(--n-bezier);
     font-size: var(--n-avatar-size-override);
   `),
   cE('avatar', `
@@ -77,8 +78,8 @@ export default cB('tag', `
   cE('close', `
     margin: var(--n-close-margin);
     transition:
-      background-color .3s var(--n-bezier),
-      color .3s var(--n-bezier);
+      background-color var(--n-duration) var(--n-bezier),
+      color var(--n-duration) var(--n-bezier);
   `),
   cM('round', `
     padding: 0 calc(var(--n-height) / 3);

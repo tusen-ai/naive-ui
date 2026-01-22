@@ -50,12 +50,12 @@ export default c([
     display: inline-block;
     font-size: var(--n-font-size);
     color: var(--n-text-color);
-    transition: color .3s var(--n-bezier);
+    transition: color var(--n-duration) var(--n-bezier);
     margin-top: 8px;
   `),
   cB('spin-content', `
     opacity: 1;
-    transition: opacity .3s var(--n-bezier);
+    transition: opacity var(--n-duration) var(--n-bezier);
     pointer-events: all;
   `, [
     cM('spinning', `

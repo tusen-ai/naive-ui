@@ -93,10 +93,16 @@ export const Notification = defineComponent({
           descriptionFontSize,
           [createKey('iconColor', type)]: iconColor
         },
-        common: { cubicBezierEaseOut, cubicBezierEaseIn, cubicBezierEaseInOut }
+        common: {
+          cubicBezierEaseOut,
+          cubicBezierEaseIn,
+          cubicBezierEaseInOut,
+          duration
+        }
       } = mergedThemeRef.value
       const { left, right, top, bottom } = getPadding(padding)
       return {
+        '--n-duration': duration,
         '--n-color': color,
         '--n-font-size': fontSize,
         '--n-text-color': textColor,

@@ -3,7 +3,8 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
-
+// --n-duration
+// --n-duration-fast
 // --n-icon-color-override
 // --n-icon-color-disabled-override
 
@@ -65,11 +66,11 @@ export default c([
   `, [
     cB('date-picker-icon', `
       color: var(--n-icon-color-override);
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
     `),
     cB('icon', `
       color: var(--n-icon-color-override);
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
     `),
     cM('disabled', [
       cB('date-picker-icon', `
@@ -138,8 +139,8 @@ export default c([
         justify-content: center;
         position: relative;
         transition: 
-          color .3s var(--n-bezier),
-          background-color .3s var(--n-bezier);
+          color var(--n-duration) var(--n-bezier),
+          background-color var(--n-duration) var(--n-bezier);
         background: #0000;
         color: var(--n-item-text-color);
       `, [
@@ -153,7 +154,7 @@ export default c([
           bottom: 0;
           border-radius: var(--n-scroll-item-border-radius);
           transition: 
-            background-color .3s var(--n-bezier);
+            background-color var(--n-duration) var(--n-bezier);
         `),
         cNotM('disabled', [
           c('&:hover::before', `
@@ -282,7 +283,7 @@ export default c([
           text-align: center;
           color: var(--n-calendar-title-text-color);
           cursor: pointer;
-          transition: background-color .3s var(--n-bezier);
+          transition: background-color var(--n-duration) var(--n-bezier);
           border-radius: var(--n-panel-border-radius);
         `, [
           cM('active', `
@@ -340,8 +341,8 @@ export default c([
         z-index: 0;
         cursor: pointer;
         transition:
-          background-color .2s var(--n-bezier),
-          color .2s var(--n-bezier);
+          background-color var(--n-duration-fast) var(--n-bezier),
+          color var(--n-duration) var(--n-bezier);
       `, [
         cE('trigger', `
           position: absolute;
@@ -361,7 +362,7 @@ export default c([
             border-radius: 2px;
             background-color: var(--n-item-color-active);
             transition:
-              background-color .2s var(--n-bezier);
+              background-color var(--n-duration-fast) var(--n-bezier);
           `)
         ]),
         c('&::after', `
@@ -373,7 +374,7 @@ export default c([
           top: 0;
           bottom: 0;
           border-radius: inherit;
-          transition: background-color .3s var(--n-bezier);
+          transition: background-color var(--n-duration) var(--n-bezier);
         `),
         cM('covered, start, end', [
           cNotM('excluded', [
@@ -498,7 +499,7 @@ export default c([
             right: calc((var(--n-item-size) - var(--n-item-cell-width)) / 2);
             top: 0;
             bottom: 0;
-            transition: background-color .3s var(--n-bezier);
+            transition: background-color var(--n-duration) var(--n-bezier);
           `)
         ])
       ])

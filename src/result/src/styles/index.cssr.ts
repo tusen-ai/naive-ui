@@ -1,6 +1,7 @@
 import { cB, cE } from '../../../_utils/cssr'
 
 // --n-bezier
+// --n-duration
 // --n-font-size
 // --n-icon-size
 // --n-line-height
@@ -13,12 +14,12 @@ export default cB('result', `
   line-height: var(--n-line-height);
   font-size: var(--n-font-size);
   transition:
-    color .3s var(--n-bezier);
+    color var(--n-duration) var(--n-bezier);
 `, [
   cB('result-icon', `
     display: flex;
     justify-content: center;
-    transition: color .3s var(--n-bezier);
+    transition: color var(--n-duration) var(--n-bezier);
   `, [
     cE('status-image', `
       font-size: var(--n-icon-size);
@@ -41,7 +42,7 @@ export default cB('result', `
     cE('title', `
       margin-top: 16px;
       font-weight: var(--n-title-font-weight);
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
       text-align: center;
       color: var(--n-title-text-color);
       font-size: var(--n-title-font-size);

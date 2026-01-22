@@ -71,7 +71,7 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const { size, status } = props
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           textColor,
           lineHeight,
@@ -85,6 +85,7 @@ export default defineComponent({
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-font-size': fontSize,
         '--n-icon-size': iconSize,
         '--n-line-height': lineHeight,

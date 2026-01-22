@@ -107,11 +107,12 @@ export function createLayoutComponent(isContent: boolean) {
       }
       const cssVarsRef = computed(() => {
         const {
-          common: { cubicBezierEaseInOut },
+          common: { cubicBezierEaseInOut, duration },
           self
         } = themeRef.value
         return {
           '--n-bezier': cubicBezierEaseInOut,
+          '--n-duration': duration,
           '--n-color': props.embedded ? self.colorEmbedded : self.color,
           '--n-text-color': self.textColor
         }

@@ -2,6 +2,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-color
 // --n-font-size
 // --n-border-radius
@@ -46,7 +47,7 @@ export default cB('input', `
   display: inline-flex;
   border-radius: var(--n-border-radius);
   background-color: var(--n-color);
-  transition: background-color .3s var(--n-bezier);
+  transition: background-color var(--n-duration) var(--n-bezier);
   font-size: var(--n-font-size);
   font-weight: var(--n-font-weight);
   --n-padding-vertical: calc((var(--n-height) - 1.5 * var(--n-font-size)) / 2);
@@ -67,10 +68,10 @@ export default cB('input', `
     background-color: #0000;
     text-align: inherit;
     transition:
-      -webkit-text-fill-color .3s var(--n-bezier),
-      caret-color .3s var(--n-bezier),
-      color .3s var(--n-bezier),
-      text-decoration-color .3s var(--n-bezier);
+      -webkit-text-fill-color var(--n-duration) var(--n-bezier),
+      caret-color var(--n-duration) var(--n-bezier),
+      color var(--n-duration) var(--n-bezier),
+      text-decoration-color var(--n-duration) var(--n-bezier);
   `),
   cE('input-el, textarea-el', `
     -webkit-appearance: none;
@@ -164,7 +165,7 @@ export default cB('input', `
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: color .3s var(--n-bezier);
+    transition: color var(--n-duration) var(--n-bezier);
   `),
   // textarea
   cM('textarea', 'width: 100%;', [
@@ -211,7 +212,7 @@ export default cB('input', `
     cE('separator', `
       display: flex;
       align-items: center;
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
       color: var(--n-text-color);
       white-space: nowrap;
     `, [
@@ -287,8 +288,8 @@ export default cB('input', `
     border-radius: inherit;
     border: var(--n-border);
     transition:
-      box-shadow .3s var(--n-bezier),
-      border-color .3s var(--n-bezier);
+      box-shadow var(--n-duration) var(--n-bezier),
+      border-color var(--n-duration) var(--n-bezier);
   `),
   cE('state-border', `
     border-color: #0000;
@@ -299,7 +300,7 @@ export default cB('input', `
     margin-left: 4px;
   `),
   cE('suffix, prefix', `
-    transition: color .3s var(--n-bezier);
+    transition: color var(--n-duration) var(--n-bezier);
     flex-wrap: nowrap;
     flex-shrink: 0;
     line-height: var(--n-height);
@@ -319,7 +320,7 @@ export default cB('input', `
     `, [
       cE('placeholder', [
         cB('base-icon', `
-          transition: color .3s var(--n-bezier);
+          transition: color var(--n-duration) var(--n-bezier);
           color: var(--n-icon-color);
           font-size: var(--n-icon-size);
         `)
@@ -327,7 +328,7 @@ export default cB('input', `
     ]),
     c('>', [
       cB('icon', `
-        transition: color .3s var(--n-bezier);
+        transition: color var(--n-duration) var(--n-bezier);
         color: var(--n-icon-color);
         font-size: var(--n-icon-size);
       `)
@@ -341,7 +342,7 @@ export default cB('input', `
     line-height: 1.5;
     font-size: .85em;
     color: var(--n-count-text-color);
-    transition: color .3s var(--n-bezier);
+    transition: color var(--n-duration) var(--n-bezier);
     margin-left: 4px;
     font-variant: tabular-nums;
   `),

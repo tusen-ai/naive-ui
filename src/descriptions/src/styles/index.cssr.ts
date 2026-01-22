@@ -5,6 +5,7 @@ import { c, cB, cE, cM, cNotM, insideModal, insidePopover } from '../../../_util
 // --n-td-padding
 // --n-font-size
 // --n-bezier
+// --n-duration
 // --n-th-font-weight
 // --n-line-height
 // --n-th-text-color
@@ -113,15 +114,15 @@ export default c([
     cB('descriptions-header', `
       font-weight: var(--n-th-font-weight);
       font-size: 18px;
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
       line-height: var(--n-line-height);
       margin-bottom: 16px;
       color: var(--n-title-text-color);
     `),
     cB('descriptions-table-wrapper', `
       transition:
-        background-color .3s var(--n-bezier),
-        border-color .3s var(--n-bezier);
+        background-color var(--n-duration) var(--n-bezier),
+        border-color var(--n-duration) var(--n-bezier);
     `, [
       cB('descriptions-table', `
         width: 100%;
@@ -131,7 +132,7 @@ export default c([
       `, [
         cB('descriptions-table-row', `
           box-sizing: border-box;
-          transition: border-color .3s var(--n-bezier);
+          transition: border-color var(--n-duration) var(--n-bezier);
         `, [
           cB('descriptions-table-header', `
             font-weight: var(--n-th-font-weight);
@@ -140,9 +141,9 @@ export default c([
             box-sizing: border-box;
             color: var(--n-th-text-color);
             transition:
-              color .3s var(--n-bezier),
-              background-color .3s var(--n-bezier),
-              border-color .3s var(--n-bezier);
+              color var(--n-duration) var(--n-bezier),
+              background-color var(--n-duration) var(--n-bezier),
+              border-color var(--n-duration) var(--n-bezier);
           `),
           cB('descriptions-table-content', `
             vertical-align: top;
@@ -151,19 +152,19 @@ export default c([
             box-sizing: border-box;
             color: var(--n-td-text-color);
             transition:
-              color .3s var(--n-bezier),
-              background-color .3s var(--n-bezier),
-              border-color .3s var(--n-bezier);
+              color var(--n-duration) var(--n-bezier),
+              background-color var(--n-duration) var(--n-bezier),
+              border-color var(--n-duration) var(--n-bezier);
           `, [
             cE('content', `
-              transition: color .3s var(--n-bezier);
+              transition: color var(--n-duration) var(--n-bezier);
               display: inline-block;
               color: var(--n-td-text-color);
             `)
           ]),
           cE('label', `
             font-weight: var(--n-th-font-weight);
-            transition: color .3s var(--n-bezier);
+            transition: color var(--n-duration) var(--n-bezier);
             display: inline-block;
             margin-right: 14px;
             color: var(--n-th-text-color);

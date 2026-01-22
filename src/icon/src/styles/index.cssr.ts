@@ -2,6 +2,7 @@ import { c, cB, cM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-color
 // --n-opacity
 export default cB('icon', `
@@ -14,14 +15,14 @@ export default cB('icon', `
   fill: currentColor;
 `, [
   cM('color-transition', {
-    transition: 'color .3s var(--n-bezier)'
+    transition: 'color var(--n-duration) var(--n-bezier)'
   }),
   cM('depth', {
     color: 'var(--n-color)'
   }, [
     c('svg', {
       opacity: 'var(--n-opacity)',
-      transition: 'opacity .3s var(--n-bezier)'
+      transition: 'opacity var(--n-duration) var(--n-bezier)'
     })
   ]),
   c('svg', {

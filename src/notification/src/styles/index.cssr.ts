@@ -14,6 +14,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --n-bezier
 // --n-bezier-ease-out
 // --n-bezier-ease-in
+// --n-duration
 // --n-border-radius
 // --n-box-shadow
 // --n-close-margin
@@ -178,35 +179,35 @@ export default c([
       `),
       c('&.notification-transition-leave-active', `
         transition:
-          background-color .3s var(--n-bezier),
-          color .3s var(--n-bezier),
-          opacity .3s var(--n-bezier),
-          transform .3s var(--n-bezier-ease-in),
-          max-height .3s var(--n-bezier),
-          margin-top .3s linear,
-          margin-bottom .3s linear,
-          box-shadow .3s var(--n-bezier);
+          background-color var(--n-duration) var(--n-bezier),
+          color var(--n-duration) var(--n-bezier),
+          opacity var(--n-duration) var(--n-bezier),
+          transform var(--n-duration) var(--n-bezier-ease-in),
+          max-height var(--n-duration) var(--n-bezier),
+          margin-top var(--n-duration) linear,
+          margin-bottom var(--n-duration) linear,
+          box-shadow var(--n-duration) var(--n-bezier);
       `),
       c('&.notification-transition-enter-active', `
         transition:
-          background-color .3s var(--n-bezier),
-          color .3s var(--n-bezier),
-          opacity .3s var(--n-bezier),
-          transform .3s var(--n-bezier-ease-out),
-          max-height .3s var(--n-bezier),
-          margin-top .3s linear,
-          margin-bottom .3s linear,
-          box-shadow .3s var(--n-bezier);
+          background-color var(--n-duration) var(--n-bezier),
+          color var(--n-duration) var(--n-bezier),
+          opacity var(--n-duration) var(--n-bezier),
+          transform var(--n-duration) var(--n-bezier-ease-out),
+          max-height var(--n-duration) var(--n-bezier),
+          margin-top var(--n-duration) linear,
+          margin-bottom var(--n-duration) linear,
+          box-shadow var(--n-duration) var(--n-bezier);
       `)
     ]),
     cB('notification', `
       background-color: var(--n-color);
       color: var(--n-text-color);
       transition:
-        background-color .3s var(--n-bezier),
-        color .3s var(--n-bezier),
-        opacity .3s var(--n-bezier),
-        box-shadow .3s var(--n-bezier);
+        background-color var(--n-duration) var(--n-bezier),
+        color var(--n-duration) var(--n-bezier),
+        opacity var(--n-duration) var(--n-bezier),
+        box-shadow var(--n-duration) var(--n-bezier);
       font-family: inherit;
       font-size: var(--n-font-size);
       font-weight: 400;
@@ -249,8 +250,8 @@ export default c([
           right: 0;
           margin: var(--n-close-margin);
           transition:
-            background-color .3s var(--n-bezier),
-            color .3s var(--n-bezier);
+            background-color var(--n-duration) var(--n-bezier),
+            color var(--n-duration) var(--n-bezier);
         `)
       ]),
       cE('avatar', `
@@ -264,7 +265,7 @@ export default c([
         align-items: center;
         justify-content: center;
       `, [
-        cB('icon', 'transition: color .3s var(--n-bezier);')
+        cB('icon', 'transition: color var(--n-duration) var(--n-bezier);')
       ]),
       cB('notification-main', `
         padding-top: var(--n-padding-top);
@@ -283,19 +284,19 @@ export default c([
         `, [
           cE('meta', `
             font-size: var(--n-meta-font-size);
-            transition: color .3s var(--n-bezier-ease-out);
+            transition: color var(--n-duration) var(--n-bezier-ease-out);
             color: var(--n-description-text-color);
           `),
           cE('action', `
             cursor: pointer;
-            transition: color .3s var(--n-bezier-ease-out);
+            transition: color var(--n-duration) var(--n-bezier-ease-out);
             color: var(--n-action-text-color);
           `)
         ]),
         cE('header', `
           font-weight: var(--n-title-font-weight);
           font-size: var(--n-title-font-size);
-          transition: color .3s var(--n-bezier-ease-out);
+            transition: color var(--n-duration) var(--n-bezier-ease-out);
           color: var(--n-title-text-color);
         `),
         cE('description', `
@@ -303,7 +304,7 @@ export default c([
           font-size: var(--n-description-font-size);
           white-space: pre-wrap;
           word-wrap: break-word;
-          transition: color .3s var(--n-bezier-ease-out);
+            transition: color var(--n-duration) var(--n-bezier-ease-out);
           color: var(--n-description-text-color);
         `),
         cE('content', `
@@ -312,7 +313,7 @@ export default c([
           font-family: inherit;
           white-space: pre-wrap;
           word-wrap: break-word;
-          transition: color .3s var(--n-bezier-ease-out);
+            transition: color var(--n-duration) var(--n-bezier-ease-out);
           color: var(--n-text-color);
         `, [
           c('&:first-child', 'margin: 0;')

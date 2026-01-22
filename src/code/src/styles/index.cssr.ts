@@ -5,6 +5,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --n-font-family
 // --n-font-weight-strong
 // --n-bezier
+// --n-duration
 // --n-text-color
 // --n-mono-3
 // --n-hue-1
@@ -29,7 +30,7 @@ export default c([
       user-select: none;
       padding-right: 12px;
       text-align: right;
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
       color: var(--n-line-number-text-color);
     `),
     cM('word-wrap', [
@@ -47,8 +48,8 @@ export default c([
     c('[class^=hljs]', `
       color: var(--n-text-color);
       transition: 
-        color .3s var(--n-bezier),
-        background-color .3s var(--n-bezier);
+        color var(--n-duration) var(--n-bezier),
+        background-color var(--n-duration) var(--n-bezier);
     `)
   ]),
   ({ props }) => {

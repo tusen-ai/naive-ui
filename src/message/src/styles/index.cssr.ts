@@ -5,6 +5,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // vars:
 // --n-margin
 // --n-bezier
+// --n-duration
 // --n-padding
 // --n-max-width
 // --n-font-size
@@ -38,7 +39,7 @@ export default c([
   `, [
     fadeInHeightExpandTransition({
       overflow: 'visible',
-      originalTransition: 'transform .3s var(--n-bezier)',
+      originalTransition: 'transform var(--n-duration) var(--n-bezier)',
       enterToProps: {
         transform: 'scale(1)'
       },
@@ -52,12 +53,12 @@ export default c([
     display: flex;
     align-items: center;
     transition:
-      color .3s var(--n-bezier),
-      box-shadow .3s var(--n-bezier),
-      background-color .3s var(--n-bezier),
-      opacity .3s var(--n-bezier),
-      transform .3s var(--n-bezier),
-      margin-bottom .3s var(--n-bezier);
+      color var(--n-duration) var(--n-bezier),
+      box-shadow var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier),
+      opacity var(--n-duration) var(--n-bezier),
+      transform var(--n-duration) var(--n-bezier),
+      margin-bottom var(--n-duration) var(--n-bezier);
     padding: var(--n-padding);
     border-radius: var(--n-border-radius);
     border: var(--n-border);
@@ -85,7 +86,7 @@ export default c([
         cM(`${type}-type`, [
           c('> *', `
             color: var(--n-icon-color-${type});
-            transition: color .3s var(--n-bezier);
+            transition: color var(--n-duration) var(--n-bezier);
           `)
         ])
       ),
@@ -100,8 +101,8 @@ export default c([
     cE('close', `
       margin: var(--n-close-margin);
       transition:
-        background-color .3s var(--n-bezier),
-        color .3s var(--n-bezier);
+        background-color var(--n-duration) var(--n-bezier),
+        color var(--n-duration) var(--n-bezier);
       flex-shrink: 0;
     `, [
       c('&:hover', `

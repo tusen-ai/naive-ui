@@ -479,7 +479,7 @@ export default defineComponent({
 
     const cssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           toolbarIconColor,
           toolbarBorderRadius,
@@ -489,6 +489,7 @@ export default defineComponent({
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-toolbar-icon-color': toolbarIconColor,
         '--n-toolbar-color': toolbarColor,
         '--n-toolbar-border-radius': toolbarBorderRadius,

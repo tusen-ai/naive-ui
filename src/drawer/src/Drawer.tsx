@@ -266,7 +266,13 @@ export default defineComponent({
     })
     const cssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseInOut, cubicBezierEaseIn, cubicBezierEaseOut },
+        common: {
+          cubicBezierEaseInOut,
+          cubicBezierEaseIn,
+          cubicBezierEaseOut,
+          duration,
+          durationFast
+        },
         self: {
           color,
           textColor,
@@ -301,6 +307,8 @@ export default defineComponent({
         '--n-bezier': cubicBezierEaseInOut,
         '--n-bezier-out': cubicBezierEaseOut,
         '--n-bezier-in': cubicBezierEaseIn,
+        '--n-duration': duration,
+        '--n-duration-fast': durationFast,
         '--n-header-padding': headerPadding,
         '--n-body-padding': bodyPadding,
         '--n-footer-padding': footerPadding,

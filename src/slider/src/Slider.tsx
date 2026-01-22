@@ -591,10 +591,12 @@ export default defineComponent({
           dotBorderActive,
           dotColorPopover
         },
-        common: { cubicBezierEaseInOut }
+        common: { cubicBezierEaseInOut, duration, durationFast }
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
+        '--n-duration-fast': durationFast,
         '--n-dot-border': dotBorder,
         '--n-dot-border-active': dotBorderActive,
         '--n-dot-border-radius': dotBorderRadius,

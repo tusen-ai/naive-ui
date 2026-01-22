@@ -135,9 +135,13 @@ export default defineComponent({
     )
     const cssVarsRef = computed(() => {
       const {
+        common: { cubicBezierEaseInOut, duration, durationFast },
         self: { height, colorError, colorLoading }
       } = themeRef.value
       return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
+        '--n-duration-fast': durationFast,
         '--n-height': height,
         '--n-color-loading': colorLoading,
         '--n-color-error': colorError

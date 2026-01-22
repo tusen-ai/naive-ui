@@ -2,6 +2,7 @@ import { c, cB, cE, cM, insideModal, insidePopover } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-border-color
 // --n-border-color-modal
 // --n-border-color-popover
@@ -45,7 +46,7 @@ export default c([
       cE('title', `
         color: var(--n-title-text-color);
         font-weight: var(--n-title-font-weight);
-        transition: color .3s var(--n-bezier);
+        transition: color var(--n-duration) var(--n-bezier);
       `),
       cE('extra', `
         display: flex;
@@ -61,7 +62,7 @@ export default c([
       border-top: 1px solid;
       border-left: 1px solid;
       border-color: var(--n-border-color);
-      transition: border-color .3s var(--n-bezier);
+      transition: border-color var(--n-duration) var(--n-bezier);
     `),
     cB('calendar-cell', `
       box-sizing: border-box;
@@ -72,9 +73,9 @@ export default c([
       cursor: pointer;
       position: relative;
       transition:
-        color .3s var(--n-bezier),
-        border-color .3s var(--n-bezier),
-        background-color .3s var(--n-bezier);
+        color var(--n-duration) var(--n-bezier),
+        border-color var(--n-duration) var(--n-bezier),
+        background-color var(--n-duration) var(--n-bezier);
     `, [
       c('&:nth-child(7)', `
         border-top-right-radius: var(--n-border-radius);
@@ -95,7 +96,7 @@ export default c([
         bottom: -1px;
         height: 3px;
         background-color: #0000;
-        transition: background-color .3s var(--n-bezier);
+        transition: background-color var(--n-duration) var(--n-bezier);
       `),
       cM('selected', [
         cE('bar', `
@@ -104,9 +105,9 @@ export default c([
       ]),
       cB('calendar-date', `
         transition:
-          color .3s var(--n-bezier),
-          border-color .3s var(--n-bezier),
-          background-color .3s var(--n-bezier);
+          color var(--n-duration) var(--n-bezier),
+          border-color var(--n-duration) var(--n-bezier),
+          background-color var(--n-duration) var(--n-bezier);
         color: var(--n-text-color);
       `, [
         cE('date', `
@@ -151,12 +152,12 @@ export default c([
           width: 1.8em;
           height: 1.8em;
           transition:
-            color .3s var(--n-bezier),
-            background-color .3s var(--n-bezier);
+            color var(--n-duration) var(--n-bezier),
+            background-color var(--n-duration) var(--n-bezier);
         `),
         cE('day', `
           color: var(--n-day-text-color);
-          transition: color .3s var(--n-bezier);
+          transition: color var(--n-duration) var(--n-bezier);
         `)
       ])
     ])

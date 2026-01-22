@@ -38,19 +38,21 @@ export const NIcon = defineComponent({
     const cssVarsRef = computed(() => {
       const { depth } = props
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self
       } = themeRef.value
       if (depth !== undefined) {
         const { color, [`opacity${depth}Depth` as const]: opacity } = self
         return {
           '--n-bezier': cubicBezierEaseInOut,
+          '--n-duration': duration,
           '--n-color': color,
           '--n-opacity': opacity
         }
       }
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-color': '',
         '--n-opacity': ''
       }

@@ -2,6 +2,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-box-shadow
 // --n-box-shadow-hover
 // --n-box-shadow-pressed
@@ -17,10 +18,10 @@ export default cB('float-button', `
   background-color: var(--n-color);
   font-size: 18px;
   transition:
-    color .3s var(--n-bezier),
-    border-color .3s var(--n-bezier),
-    box-shadow .3s var(--n-bezier),
-    background-color .3s var(--n-bezier);
+    color var(--n-duration) var(--n-bezier),
+    border-color var(--n-duration) var(--n-bezier),
+    box-shadow var(--n-duration) var(--n-bezier),
+    background-color var(--n-duration) var(--n-bezier);
   box-shadow: var(--n-box-shadow);
   display: flex;
   align-items: stretch;
@@ -38,7 +39,7 @@ export default cB('float-button', `
     right: 0;
     bottom: 0
     left: 0;
-    transition: background-color .3s var(--n-bezier);
+    transition: background-color var(--n-duration) var(--n-bezier);
     border-radius: inherit;
   `),
   cE('body', `
@@ -47,7 +48,7 @@ export default cB('float-button', `
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform .3s var(--n-bezier), opacity .3s var(--n-bezier);
+    transition: transform var(--n-duration) var(--n-bezier), opacity var(--n-duration) var(--n-bezier);
     border-radius: inherit;
     flex-direction: column;
     box-sizing: border-box;
@@ -103,7 +104,7 @@ export default cB('float-button', `
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform .3s var(--n-bezier), opacity .3s var(--n-bezier);
+    transition: transform var(--n-duration) var(--n-bezier), opacity var(--n-duration) var(--n-bezier);
   `),
   cE('menu', `
     position: absolute;
@@ -113,8 +114,8 @@ export default cB('float-button', `
     opacity: 0;
     pointer-events: none;
     transition:
-      opacity .3s var(--n-bezier),
-      bottom .3s var(--n-bezier); 
+      opacity var(--n-duration) var(--n-bezier),
+      bottom var(--n-duration) var(--n-bezier); 
   `, [
     c('> *', `
       margin-bottom: 16px;

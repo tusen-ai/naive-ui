@@ -221,7 +221,7 @@ export default defineComponent({
           [createKey('railBorderRadius', size)]: railBorderRadius,
           [createKey('buttonBorderRadius', size)]: buttonBorderRadius
         },
-        common: { cubicBezierEaseInOut }
+        common: { cubicBezierEaseInOut, duration }
       } = themeRef.value
 
       let offset: string
@@ -242,6 +242,7 @@ export default defineComponent({
       }
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-button-border-radius': buttonBorderRadius,
         '--n-button-box-shadow': buttonBoxShadow,
         '--n-button-color': buttonColor,

@@ -15,6 +15,8 @@ const hoverStyleChildren = [
 ]
 
 // vars:
+// --n-bezier
+// --n-duration
 // --n-item-font-size
 // --n-select-width
 // --n-input-width
@@ -79,7 +81,7 @@ export default cB('pagination', `
     white-space: nowrap;
     display: flex;
     color: var(--n-jumper-text-color);
-    transition: color .3s var(--n-bezier);
+    transition: color var(--n-duration) var(--n-bezier);
     align-items: center;
     font-size: var(--n-jumper-font-size);
   `, [
@@ -106,10 +108,10 @@ export default cB('pagination', `
     border: var(--n-item-border);
     fill: var(--n-button-icon-color);
     transition:
-      color .3s var(--n-bezier),
-      border-color .3s var(--n-bezier),
-      background-color .3s var(--n-bezier),
-      fill .3s var(--n-bezier);
+      color var(--n-duration) var(--n-bezier),
+      border-color var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier),
+      fill var(--n-duration) var(--n-bezier);
   `, [
     cM('button', `
       background: var(--n-button-color);

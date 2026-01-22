@@ -5,6 +5,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // --n-icon-color-override
 // --n-icon-color-disabled-override
 // --n-bezier
+// --n-duration
 // --n-border-radius
 // --n-item-color-hover
 // --n-item-font-size
@@ -25,7 +26,7 @@ export default c([
   `, [
     cB('time-picker-icon', `
       color: var(--n-icon-color-override);
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
     `),
     cM('disabled', [
       cB('time-picker-icon', `
@@ -35,8 +36,8 @@ export default c([
   ]),
   cB('time-picker-panel', `
     transition:
-      box-shadow .3s var(--n-bezier),
-      background-color .3s var(--n-bezier);
+      box-shadow var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier);
     outline: none;
     font-size: var(--n-item-font-size);
     border-radius: var(--n-border-radius);
@@ -57,7 +58,7 @@ export default c([
       height: calc(var(--n-item-height) * 6);
       display: flex;
       position: relative;
-      transition: border-color .3s var(--n-bezier);
+      transition: border-color var(--n-duration) var(--n-bezier);
       border-bottom: 1px solid var(--n-panel-divider-color);
     `),
     cB('time-picker-col', `
@@ -65,7 +66,7 @@ export default c([
       min-width: var(--n-item-width);
       height: calc(var(--n-item-height) * 6);
       flex-direction: column;
-      transition: box-shadow .3s var(--n-bezier);
+      transition: box-shadow var(--n-duration) var(--n-bezier);
     `, [
       cM('transition-disabled', [
         cE('item', 'transition: none;', [
@@ -87,10 +88,10 @@ export default c([
         align-items: center;
         justify-content: center;
         transition: 
-          color .3s var(--n-bezier),
-          background-color .3s var(--n-bezier),
-          opacity .3s var(--n-bezier),
-          text-decoration-color .3s var(--n-bezier);
+          color var(--n-duration) var(--n-bezier),
+          background-color var(--n-duration) var(--n-bezier),
+          opacity var(--n-duration) var(--n-bezier),
+          text-decoration-color var(--n-duration) var(--n-bezier);
         background: #0000;
         text-decoration-color: #0000;
         color: var(--n-item-text-color);
@@ -101,7 +102,7 @@ export default c([
       `, [
         c('&::before', `
           content: "";
-          transition: background-color .3s var(--n-bezier);
+          transition: background-color var(--n-duration) var(--n-bezier);
           z-index: -1;
           position: absolute;
           left: 0;

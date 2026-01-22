@@ -31,11 +31,12 @@ export default defineComponent({
     )
     const cssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self
       } = themeRef.value
       const vars: any = {
-        '--n-bezier': cubicBezierEaseInOut
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration
       }
       if (props.inverted) {
         vars['--n-color'] = self.footerColorInverted

@@ -7,6 +7,7 @@ const iconSwitchTransitionNode = iconSwitchTransition()
 // vars:
 // --n-arrow-color
 // --n-bezier
+// --n-duration
 // --n-font-size
 // --n-node-border-radius
 // --n-node-color-active
@@ -37,12 +38,12 @@ export default cB('tree', `
   cB('tree-motion-wrapper', [
     cM('expand', [
       fadeInHeightExpandTransition({
-        duration: '0.2s'
+        duration: 'var(--n-duration-fast)'
       })
     ]),
     cM('collapse', [
       fadeInHeightExpandTransition({
-        duration: '0.2s',
+        duration: 'var(--n-duration-fast)',
         reverse: true
       })
     ])
@@ -55,7 +56,7 @@ export default cB('tree', `
     position: relative;
     display: flex;
     border-radius: var(--n-node-border-radius);
-    transition: background-color .3s var(--n-bezier);
+    transition: background-color var(--n-duration) var(--n-bezier);
   `, [
     cM('highlight', [
       cB('tree-node-content', [
@@ -149,7 +150,7 @@ export default cB('tree', `
         position: absolute;
         left: 50%;
         border-left: 1px solid var(--n-line-color);
-        transition: border-color .3s var(--n-bezier);
+        transition: border-color var(--n-duration) var(--n-bezier);
         transform: translate(-50%);
         content: "";
         top: var(--n-line-offset-top);
@@ -167,7 +168,7 @@ export default cB('tree', `
           left: calc(50% + 0.5px);
           right: 0;
           bottom: 50%;
-          transition: border-color .3s var(--n-bezier);
+          transition: border-color var(--n-duration) var(--n-bezier);
           border-bottom: 1px solid var(--n-line-color);
         `)
       ])
@@ -190,7 +191,7 @@ export default cB('tree', `
       width: 14px;
       display: flex;
       color: var(--n-arrow-color);
-      transition: color .3s var(--n-bezier);
+      transition: color var(--n-duration) var(--n-bezier);
       font-size: 14px;
     `, [
       cB('icon', [
@@ -234,9 +235,9 @@ export default cB('tree', `
     border-radius: var(--n-node-border-radius);
     color: var(--n-node-text-color);
     transition:
-      color .3s var(--n-bezier),
-      background-color .3s var(--n-bezier),
-      border-color .3s var(--n-bezier);
+      color var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier),
+      border-color var(--n-duration) var(--n-bezier);
   `, [
     c('&:last-child', 'margin-bottom: 0;'),
     cE('prefix', `
@@ -245,7 +246,7 @@ export default cB('tree', `
     `),
     cE('text', `
       border-bottom: 1px solid #0000;
-      transition: border-color .3s var(--n-bezier);
+      transition: border-color var(--n-duration) var(--n-bezier);
       flex-grow: 1;
       max-width: 100%;
     `),

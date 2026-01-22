@@ -688,7 +688,7 @@ const Scrollbar = defineComponent({
     })
     const cssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, durationFast },
         self: {
           color,
           colorHover,
@@ -741,6 +741,7 @@ const Scrollbar = defineComponent({
 
       return {
         '--n-scrollbar-bezier': cubicBezierEaseInOut,
+        '--n-duration-fast': durationFast,
         '--n-scrollbar-color': color,
         '--n-scrollbar-color-hover': colorHover,
         '--n-scrollbar-border-radius': borderRadius,

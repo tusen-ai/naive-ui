@@ -74,7 +74,7 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const { size, bordered } = props
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           titleTextColor,
           thColor,
@@ -104,6 +104,7 @@ export default defineComponent({
         '--n-td-padding': tdPadding,
         '--n-font-size': fontSize,
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-th-font-weight': thFontWeight,
         '--n-line-height': lineHeight,
         '--n-th-text-color': thTextColor,

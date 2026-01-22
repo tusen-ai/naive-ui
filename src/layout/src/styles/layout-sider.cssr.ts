@@ -2,6 +2,7 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-color
 // --n-text-color
 // --n-border-color
@@ -15,12 +16,12 @@ export default cB('layout-sider', `
   z-index: 1;
   color: var(--n-text-color);
   transition:
-    color .3s var(--n-bezier),
-    border-color .3s var(--n-bezier),
-    min-width .3s var(--n-bezier),
-    max-width .3s var(--n-bezier),
-    transform .3s var(--n-bezier),
-    background-color .3s var(--n-bezier);
+    color var(--n-duration) var(--n-bezier),
+    border-color var(--n-duration) var(--n-bezier),
+    min-width var(--n-duration) var(--n-bezier),
+    max-width var(--n-duration) var(--n-bezier),
+    transform var(--n-duration) var(--n-bezier),
+    background-color var(--n-duration) var(--n-bezier);
   background-color: var(--n-color);
   display: flex;
   justify-content: flex-end;
@@ -33,7 +34,7 @@ export default cB('layout-sider', `
       bottom: 0;
       width: 1px;
       background-color: var(--n-border-color);
-      transition: background-color .3s var(--n-bezier);
+      transition: background-color var(--n-duration) var(--n-bezier);
     `)
   ]),
   cE('left-placement', [
@@ -109,11 +110,11 @@ export default cB('layout-sider', `
   ]),
   cB('layout-toggle-button', `
     transition:
-      color .3s var(--n-bezier),
-      right .3s var(--n-bezier),
-      left .3s var(--n-bezier),
-      border-color .3s var(--n-bezier),
-      background-color .3s var(--n-bezier);
+      color var(--n-duration) var(--n-bezier),
+      right var(--n-duration) var(--n-bezier),
+      left var(--n-duration) var(--n-bezier),
+      border-color var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier);
     cursor: pointer;
     width: 24px;
     height: 24px;
@@ -133,7 +134,7 @@ export default cB('layout-sider', `
     z-index: 1;
   `, [
     cB('base-icon', `
-      transition: transform .3s var(--n-bezier);
+      transition: transform var(--n-duration) var(--n-bezier);
       transform: rotate(180deg);
     `)
   ]),
@@ -152,8 +153,8 @@ export default cB('layout-sider', `
       height: 38px;
       left: 14px;
       transition: 
-        background-color .3s var(--n-bezier),
-        transform .3s var(--n-bezier);
+        background-color var(--n-duration) var(--n-bezier),
+        transform var(--n-duration) var(--n-bezier);
     `),
     cE('bottom', `
       position: absolute;
@@ -182,7 +183,7 @@ export default cB('layout-sider', `
     right: 0;
     bottom: 0;
     width: 1px;
-    transition: background-color .3s var(--n-bezier);
+    transition: background-color var(--n-duration) var(--n-bezier);
   `),
   cB('layout-sider-scroll-container', `
     flex-grow: 1;
@@ -190,7 +191,7 @@ export default cB('layout-sider', `
     box-sizing: border-box;
     height: 100%;
     opacity: 0;
-    transition: opacity .3s var(--n-bezier);
+    transition: opacity var(--n-duration) var(--n-bezier);
     max-width: 100%;
   `),
   cM('show-content', [

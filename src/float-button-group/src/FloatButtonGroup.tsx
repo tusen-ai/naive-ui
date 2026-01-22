@@ -51,10 +51,11 @@ export default defineComponent({
     const cssVarsRef = computed<Record<string, string>>(() => {
       const {
         self: { color, boxShadow, buttonBorderColor, borderRadiusSquare },
-        common: { cubicBezierEaseInOut }
+        common: { cubicBezierEaseInOut, duration }
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-box-shadow': boxShadow,
         '--n-color': color,
         '--n-button-border-color': buttonBorderColor,

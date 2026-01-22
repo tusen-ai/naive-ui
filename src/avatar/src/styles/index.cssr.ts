@@ -7,6 +7,7 @@ import { c, cB, cE, insideModal, insidePopover } from '../../../_utils/cssr'
 // --n-color-modal
 // --n-color-popover
 // --n-bezier
+// --n-duration
 // --n-merged-size
 export default cB('avatar', `
   width: var(--n-merged-size);
@@ -22,9 +23,9 @@ export default cB('avatar', `
   --n-merged-color: var(--n-color);
   background-color: var(--n-merged-color);
   transition:
-    border-color .3s var(--n-bezier),
-    background-color .3s var(--n-bezier),
-    color .3s var(--n-bezier);
+    border-color var(--n-duration) var(--n-bezier),
+    background-color var(--n-duration) var(--n-bezier),
+    color var(--n-duration) var(--n-bezier);
 `, [
   insideModal(c('&', '--n-merged-color: var(--n-color-modal);')),
   insidePopover(c('&', '--n-merged-color: var(--n-color-popover);')),

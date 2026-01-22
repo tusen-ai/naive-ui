@@ -14,6 +14,8 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --n-bezier
 // --n-bezier-out
 // --n-bezier-in
+// --n-duration
+// --n-duration-fast
 // --n-body-padding
 // --n-header-padding
 // --n-footer-padding
@@ -38,8 +40,8 @@ export default c([
     pointer-events: all;
     box-shadow: var(--n-box-shadow);
     transition:
-      background-color .3s var(--n-bezier),
-      color .3s var(--n-bezier);
+      background-color var(--n-duration) var(--n-bezier),
+      color var(--n-duration) var(--n-bezier);
     background-color: var(--n-color);
     color: var(--n-text-color);
     box-sizing: border-box;
@@ -61,7 +63,7 @@ export default c([
     cE('resize-trigger', `
       position: absolute;
       background-color: #0000;
-      transition: background-color .3s var(--n-bezier);
+      transition: background-color var(--n-duration) var(--n-bezier);
     `, [
       cM('hover', `
         background-color: var(--n-resize-trigger-color-hover);
@@ -95,7 +97,7 @@ export default c([
         font-size: var(--n-title-font-size);
         color: var(--n-title-text-color);
         padding: var(--n-header-padding);
-        transition: border .3s var(--n-bezier);
+        transition: border var(--n-duration) var(--n-bezier);
         border-bottom: 1px solid var(--n-divider-color);
         border-bottom: var(--n-header-border-bottom);
         display: flex;
@@ -108,15 +110,15 @@ export default c([
         cE('close', `
           margin-left: 6px;
           transition:
-            background-color .3s var(--n-bezier),
-            color .3s var(--n-bezier);
+            background-color var(--n-duration) var(--n-bezier),
+            color var(--n-duration) var(--n-bezier);
         `)
       ]),
       cB('drawer-footer', `
         display: flex;
         justify-content: flex-end;
         border-top: var(--n-footer-border-top);
-        transition: border .3s var(--n-bezier);
+        transition: border var(--n-duration) var(--n-bezier);
         padding: var(--n-footer-padding);
       `)
     ]),
@@ -217,8 +219,8 @@ export default c([
       background-color: rgba(0, 0, 0, 0)
     `),
     fadeInTransition({
-      enterDuration: '0.2s',
-      leaveDuration: '0.2s',
+      enterDuration: 'var(--n-duration-fast)',
+      leaveDuration: 'var(--n-duration-fast)',
       enterCubicBezier: 'var(--n-bezier-in)',
       leaveCubicBezier: 'var(--n-bezier-out)'
     })

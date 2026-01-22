@@ -87,8 +87,14 @@ export default defineComponent({
       restOptions: restOptionsRef,
       displayedOptions: displayedOptionsRef,
       cssVars: computed(() => {
+        const {
+          common: { cubicBezierEaseInOut, duration },
+          self: { gap }
+        } = mergedThemeRef.value
         return {
-          '--n-gap': mergedThemeRef.value.self.gap
+          '--n-bezier': cubicBezierEaseInOut,
+          '--n-duration': duration,
+          '--n-gap': gap
         }
       })
     }

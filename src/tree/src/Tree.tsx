@@ -1658,7 +1658,7 @@ export default defineComponent({
     }
     const cssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration, durationFast },
         self: {
           fontSize,
           nodeBorderRadius,
@@ -1685,6 +1685,8 @@ export default defineComponent({
         '--n-arrow-color': arrowColor,
         '--n-loading-color': loadingColor,
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
+        '--n-duration-fast': durationFast,
         '--n-font-size': fontSize,
         '--n-node-border-radius': nodeBorderRadius,
         '--n-node-color-active': nodeColorActive,

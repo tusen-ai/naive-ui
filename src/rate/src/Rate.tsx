@@ -124,13 +124,15 @@ export default defineComponent({
     })
     const cssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration, durationFast },
         self
       } = themeRef.value
       const { itemColor, itemColorActive } = self
       const { color } = props
       return {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
+        '--n-duration-fast': durationFast,
         '--n-item-color': itemColor,
         '--n-item-color-active': color || itemColorActive,
         '--n-item-size': mergedSizeRef.value

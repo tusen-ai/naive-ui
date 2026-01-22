@@ -100,7 +100,7 @@ export default defineComponent({
     const cssVarsRef = computed(() => {
       const { xGap, yGap, size } = props
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           fontWeight,
           textColor,
@@ -115,6 +115,7 @@ export default defineComponent({
       } = themeRef.value
       const cssVars = {
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-font-size': fontSize,
         '--n-font-weight': fontWeight,
         '--n-text-color': textColor,

@@ -2,6 +2,7 @@ import { cB, cE } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-group-label-color
 // --n-border-radius
 // --n-group-label-text-color
@@ -24,9 +25,9 @@ export default cB('input-group-label', `
   flex-shrink: 0;
   white-space: nowrap;
   transition: 
-    color .3s var(--n-bezier),
-    background-color .3s var(--n-bezier),
-    box-shadow .3s var(--n-bezier);
+    color var(--n-duration) var(--n-bezier),
+    background-color var(--n-duration) var(--n-bezier),
+    box-shadow var(--n-duration) var(--n-bezier);
 `, [
   cE('border', `
     position: absolute;
@@ -36,6 +37,6 @@ export default cB('input-group-label', `
     bottom: 0;
     border-radius: inherit;
     border: var(--n-group-label-border);
-    transition: border-color .3s var(--n-bezier);
+    transition: border-color var(--n-duration) var(--n-bezier);
   `)
 ])

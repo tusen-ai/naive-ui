@@ -792,7 +792,7 @@ export default defineComponent({
 
     const cssVarsRef = computed(() => {
       const {
-        common: { cubicBezierEaseInOut },
+        common: { cubicBezierEaseInOut, duration },
         self: {
           menuBoxShadow,
           menuBorderRadius,
@@ -812,6 +812,7 @@ export default defineComponent({
         '--n-menu-color': menuColor,
         '--n-menu-height': menuHeight,
         '--n-bezier': cubicBezierEaseInOut,
+        '--n-duration': duration,
         '--n-action-padding': actionPadding,
         '--n-action-text-color': actionTextColor,
         '--n-action-divider-color': actionDividerColor,

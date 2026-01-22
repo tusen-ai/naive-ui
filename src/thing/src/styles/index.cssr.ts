@@ -8,7 +8,7 @@ import { c, cB, cE } from '../../../_utils/cssr'
 // --n-title-text-color
 export default cB('thing', `
   display: flex;
-  transition: color .3s var(--n-bezier);
+  transition: color var(--n-duration) var(--n-bezier);
   font-size: var(--n-font-size);
   color: var(--n-text-color);
 `, [
@@ -36,7 +36,7 @@ export default cB('thing', `
       cE('title', `
         font-size: 16px;
         font-weight: var(--n-title-font-weight);
-        transition: color .3s var(--n-bezier);
+        transition: color var(--n-duration) var(--n-bezier);
         color: var(--n-title-text-color);
       `)
     ]),

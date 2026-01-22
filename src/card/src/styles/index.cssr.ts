@@ -2,6 +2,7 @@ import { asModal, c, cB, cE, cM, insideModal, insidePopover } from '../../../_ut
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-border-radius
 // --n-color
 // --n-color-modal
@@ -42,10 +43,10 @@ export default c([
     color: var(--n-text-color);
     word-break: break-word;
     transition: 
-      color .3s var(--n-bezier),
-      background-color .3s var(--n-bezier),
-      box-shadow .3s var(--n-bezier),
-      border-color .3s var(--n-bezier);
+      color var(--n-duration) var(--n-bezier),
+      background-color var(--n-duration) var(--n-bezier),
+      box-shadow var(--n-duration) var(--n-bezier),
+      border-color var(--n-duration) var(--n-bezier);
   `, [
     asModal({
       background: 'var(--n-color-modal)'
@@ -97,7 +98,7 @@ export default c([
       `, [
         cE('main', `
           font-weight: var(--n-title-font-weight);
-          transition: color .3s var(--n-bezier);
+          transition: color var(--n-duration) var(--n-bezier);
           flex: 1;
           min-width: 0;
           color: var(--n-title-text-color);
@@ -107,21 +108,21 @@ export default c([
           align-items: center;
           font-size: var(--n-font-size);
           font-weight: 400;
-          transition: color .3s var(--n-bezier);
+          transition: color var(--n-duration) var(--n-bezier);
           color: var(--n-text-color);
         `),
         cE('close', `
           margin: 0 0 0 8px;
           transition:
-            background-color .3s var(--n-bezier),
-            color .3s var(--n-bezier);
+            background-color var(--n-duration) var(--n-bezier),
+            color var(--n-duration) var(--n-bezier);
         `)
       ]),
       cE('action', `
         box-sizing: border-box;
         transition:
-          background-color .3s var(--n-bezier),
-          border-color .3s var(--n-bezier);
+          background-color var(--n-duration) var(--n-bezier),
+          border-color var(--n-duration) var(--n-bezier);
         background-clip: padding-box;
         background-color: var(--n-action-color);
       `),
@@ -169,7 +170,7 @@ export default c([
     cM('content-segmented, content-soft-segmented', [
       c('>', [
         cE('content', {
-          transition: 'border-color 0.3s var(--n-bezier)'
+          transition: 'border-color var(--n-duration) var(--n-bezier)'
         }, [
           c('&:not(:first-child)', {
             borderTop: '1px solid var(--n-border-color)'
@@ -180,7 +181,7 @@ export default c([
     cM('footer-segmented, footer-soft-segmented', [
       c('>', [
         cE('footer', {
-          transition: 'border-color 0.3s var(--n-bezier)'
+          transition: 'border-color var(--n-duration) var(--n-bezier)'
         }, [
           c('&:not(:first-child)', {
             borderTop: '1px solid var(--n-border-color)'

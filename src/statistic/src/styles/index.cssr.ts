@@ -2,6 +2,7 @@ import { cB, cE } from '../../../_utils/cssr'
 
 // vars:
 // --n-bezier
+// --n-duration
 // --n-label-font-size
 // --n-label-font-weight
 // --n-label-text-color
@@ -13,7 +14,7 @@ import { cB, cE } from '../../../_utils/cssr'
 export default cB('statistic', [
   cE('label', `
     font-weight: var(--n-label-font-weight);
-    transition: .3s color var(--n-bezier);
+    transition: var(--n-duration) color var(--n-bezier);
     font-size: var(--n-label-font-size);
     color: var(--n-label-text-color);
   `),
@@ -24,7 +25,7 @@ export default cB('statistic', [
     cE('prefix', `
       margin: 0 4px 0 0;
       font-size: var(--n-value-font-size);
-      transition: .3s color var(--n-bezier);
+      transition: var(--n-duration) color var(--n-bezier);
       color: var(--n-value-prefix-text-color);
     `, [
       cB('icon', {
@@ -33,13 +34,13 @@ export default cB('statistic', [
     ]),
     cE('content', `
       font-size: var(--n-value-font-size);
-      transition: .3s color var(--n-bezier);
+      transition: var(--n-duration) color var(--n-bezier);
       color: var(--n-value-text-color);
     `),
     cE('suffix', `
       margin: 0 0 0 4px;
       font-size: var(--n-value-font-size);
-      transition: .3s color var(--n-bezier);
+      transition: var(--n-duration) color var(--n-bezier);
       color: var(--n-value-suffix-text-color);
     `, [
       cB('icon', {

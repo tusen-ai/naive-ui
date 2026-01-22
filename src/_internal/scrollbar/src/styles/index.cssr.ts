@@ -3,6 +3,7 @@ import { c, cB, cE, cM } from '../../../../_utils/cssr'
 
 // vars:
 // --n-scrollbar-bezier
+// --n-duration-fast
 // --n-scrollbar-color
 // --n-scrollbar-color-hover
 // --n-scrollbar-width
@@ -107,7 +108,7 @@ export default cB('scrollbar', `
           cursor: pointer;
           pointer-events: all;
           background-color: var(--n-scrollbar-color);
-          transition: background-color .2s var(--n-scrollbar-bezier);
+          transition: background-color var(--n-duration-fast) var(--n-scrollbar-bezier);
         `, [
           fadeInTransition(),
           c('&:hover', 'background-color: var(--n-scrollbar-color-hover);')

@@ -42,6 +42,7 @@ const horizontalHoverStyleChildren = [
 // --n-color
 // --n-group-text-color
 // --n-bezier
+// --n-duration
 // --n-font-size
 // --n-border-color-horizontal
 // --n-border-radius
@@ -86,7 +87,7 @@ export default c([
     background-color: var(--n-color);
     color: var(--n-item-text-color);
     overflow: hidden;
-    transition: background-color .3s var(--n-bezier);
+    transition: background-color var(--n-duration) var(--n-bezier);
     box-sizing: border-box;
     font-size: var(--n-font-size);
     padding-bottom: 6px;
@@ -202,9 +203,9 @@ export default c([
       position: relative;
       padding-right: 18px;
       transition:
-        background-color .3s var(--n-bezier),
-        padding-left .3s var(--n-bezier),
-        border-color .3s var(--n-bezier);
+        background-color var(--n-duration) var(--n-bezier),
+        padding-left var(--n-duration) var(--n-bezier),
+        border-color var(--n-duration) var(--n-bezier);
     `, [
       c('> *', 'z-index: 1;'),
       c('&::before', `
@@ -218,7 +219,7 @@ export default c([
         bottom: 0;
         pointer-events: none;
         border-radius: var(--n-border-radius);
-        transition: background-color .3s var(--n-bezier);
+        transition: background-color var(--n-duration) var(--n-bezier);
       `),
       cM('disabled', `
         opacity: .45;
@@ -295,9 +296,9 @@ export default c([
         grid-area: icon;
         color: var(--n-item-icon-color);
         transition:
-          color .3s var(--n-bezier),
-          font-size .3s var(--n-bezier),
-          margin-right .3s var(--n-bezier);
+          color var(--n-duration) var(--n-bezier),
+          font-size var(--n-duration) var(--n-bezier),
+          margin-right var(--n-duration) var(--n-bezier);
         box-sizing: content-box;
         display: inline-flex;
         align-items: center;
@@ -310,15 +311,15 @@ export default c([
         transform: rotate(180deg);
         opacity: 1;
         transition:
-          color .3s var(--n-bezier),
-          transform 0.2s var(--n-bezier),
-          opacity 0.2s var(--n-bezier);
+          color var(--n-duration) var(--n-bezier),
+          transform var(--n-duration-fast) var(--n-bezier),
+          opacity var(--n-duration-fast) var(--n-bezier);
       `),
       cB('menu-item-content-header', `
         grid-area: content;
         transition:
-          color .3s var(--n-bezier),
-          opacity .3s var(--n-bezier);
+          color var(--n-duration) var(--n-bezier),
+          opacity var(--n-duration) var(--n-bezier);
         opacity: 1;
         white-space: nowrap;
         color: var(--n-item-text-color);
@@ -326,7 +327,7 @@ export default c([
         c('a', `
           outline: none;
           text-decoration: none;
-          transition: color .3s var(--n-bezier);
+          transition: color var(--n-duration) var(--n-bezier);
           color: var(--n-item-text-color);
         `, [
           c('&::before', `
@@ -341,7 +342,7 @@ export default c([
         cE('extra', `
           font-size: .93em;
           color: var(--n-group-text-color);
-          transition: color .3s var(--n-bezier);
+          transition: color var(--n-duration) var(--n-bezier);
         `)
       ])
     ]),
@@ -358,7 +359,7 @@ export default c([
         padding: 0;
       `, [
         fadeInHeightExpandTransition({
-          duration: '.2s'
+          duration: 'var(--n-duration-fast)'
         })
       ])
     ]),
@@ -372,8 +373,8 @@ export default c([
         display: flex;
         align-items: center;
         transition:
-          padding-left .3s var(--n-bezier),
-          color .3s var(--n-bezier);
+          padding-left var(--n-duration) var(--n-bezier),
+          color var(--n-duration) var(--n-bezier);
       `)
     ])
   ]),
@@ -384,7 +385,7 @@ export default c([
     `)
   ]),
   cB('menu-divider', `
-    transition: background-color .3s var(--n-bezier);
+    transition: background-color var(--n-duration) var(--n-bezier);
     background-color: var(--n-divider-color);
     height: 1px;
     margin: 6px 18px;
