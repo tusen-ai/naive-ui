@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.43.3
+
+`2026-01-22`
+
+- 修复在 `n-tabs` 在 `#Suffix` 宽度变化的情况下，动画效果丢失的问题，关闭[#7406](https://github.com/tusen-ai/naive-ui/issues/7406)
+
 ## 2.43.2
 
 ### Fixes
