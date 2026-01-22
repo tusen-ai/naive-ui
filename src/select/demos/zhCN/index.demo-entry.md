@@ -11,6 +11,7 @@ multiple.vue
 events.vue
 filterable.vue
 tag.vue
+separators.vue
 menu-width.vue
 remote.vue
 remote-multiple.vue
@@ -80,6 +81,7 @@ create-debug.vue
 | show-arrow | `boolean` | `true` | 是否展示箭头 |  |
 | show-checkmark | `boolean` | `true` | 是否展示对勾 | 2.33.4 |
 | show-on-focus | `boolean` | `false` | 聚焦时是否展示菜单 | 2.34.3 |
+| separators | `string[]` | `undefined` | 多选模式下的分隔符，输入或粘贴包含分隔符时会按分隔符拆分并尝试选中（`tag` 模式会创建） | NEXT_VERSION |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | 组件尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | tag | `boolean` | `false` | 是否可以创建新的选项，需要和 `filterable` 一起使用 |  |

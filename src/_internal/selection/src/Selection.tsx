@@ -105,6 +105,7 @@ export default defineComponent({
     ellipsisTagPopoverProps: Object as PropType<PopoverProps>,
     onClear: Function as PropType<(e: MouseEvent) => void>,
     onPatternInput: Function as PropType<(e: InputEvent) => void>,
+    onPatternInputPaste: Function as PropType<(e: ClipboardEvent) => void>,
     onPatternFocus: Function as PropType<(e: FocusEvent) => void>,
     onPatternBlur: Function as PropType<(e: FocusEvent) => void>,
     renderLabel: Function as PropType<RenderLabel>,
@@ -275,7 +276,14 @@ export default defineComponent({
         if (!props.pattern.length) {
           const { selectedOptions } = props
           if (selectedOptions?.length) {
-            handleDeleteOption(selectedOptions[selectedOptions.length - 1])
+            // Find the last non-disabled option to delete
+            for (let i = selectedOptions.length - 1; i >= 0; i--) {
+              const option = selectedOptions[i]
+              if (!option.disabled) {
+                handleDeleteOption(option)
+                return
+              }
+            }
           }
         }
       }
@@ -397,6 +405,9 @@ export default defineComponent({
         clearEnterTimer()
         showTagsPopoverRef.value = false
       }
+    }
+    function handlePatternInputPaste(e: ClipboardEvent): void {
+      props.onPatternInputPaste?.(e)
     }
     watch(selectedRef, (value) => {
       if (!value) {
@@ -578,6 +589,7 @@ export default defineComponent({
       handleDeleteOption,
       handlePatternKeyDown,
       handlePatternInputInput,
+      handlePatternInputPaste,
       handlePatternInputBlur,
       handlePatternInputFocus,
       handleMouseEnterCounter,
@@ -696,6 +708,7 @@ export default defineComponent({
             onFocus={this.handlePatternInputFocus}
             onKeydown={this.handlePatternKeyDown}
             onInput={this.handlePatternInputInput as any}
+            onPaste={this.handlePatternInputPaste}
             onCompositionstart={this.handleCompositionStart}
             onCompositionend={this.handleCompositionEnd}
           />
@@ -893,6 +906,7 @@ export default defineComponent({
               onInput={this.handlePatternInputInput as any}
               onCompositionstart={this.handleCompositionStart}
               onCompositionend={this.handleCompositionEnd}
+              onPaste={this.handlePatternInputPaste}
             />
             {showSelectedLabel ? (
               <div

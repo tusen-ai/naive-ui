@@ -11,6 +11,7 @@ multiple.vue
 events.vue
 filterable.vue
 tag.vue
+separators.vue
 menu-width.vue
 remote.vue
 remote-multiple.vue
@@ -69,6 +70,7 @@ custom-field.vue
 | show-arrow | `boolean` | `true` | Whether to show the dropdown arrow. |  |
 | show-checkmark | `boolean` | `true` | Whether to show checkmark. | 2.33.4 |
 | show-on-focus | `boolean` | `false` | Whether to show menu on focus. | 2.34.3 |
+| separators | `string[]` | `undefined` | Separators in `multiple` mode. When input (or pasted text) contains a separator, it will be split and Naive UI will try to select options (`tag` mode will create). | NEXT_VERSION |
 | size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | Size of the select input. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validation status. | 2.27.0 |
 | tag | `boolean` | `false` | Whether users can create new options. This should be used with `filterable`. |  |

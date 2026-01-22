@@ -74,6 +74,7 @@ import style from './styles/index.cssr'
 import {
   createTmOptions,
   createValOptMap,
+  doPatternSplit,
   filterOptions,
   patternMatched
 } from './utils'
@@ -106,6 +107,7 @@ export const selectProps = {
   placeholder: String,
   menuProps: Object as PropType<HTMLAttributes>,
   multiple: Boolean,
+  separators: Array as PropType<string[]>,
   size: String as PropType<Size>,
   menuSize: {
     type: String as PropType<Size>
@@ -269,6 +271,7 @@ export default defineComponent({
     )
     const focusedRef = ref(false)
     const patternRef = ref('')
+    const pastedTextRef = ref<string | null>(null)
     const compitableOptionsRef = useCompitable(props, ['items', 'options'])
     const createdOptionsRef = ref<SelectOption[]>([])
     const beingCreatedOptionsRef = ref<SelectOption[]>([])
@@ -503,6 +506,21 @@ export default defineComponent({
         call(_onUpdateShow, value)
       uncontrolledShowRef.value = value
     }
+    // Transfer the option being created to createdOptionsRef and clear beingCreatedOptionsRef
+    function commitBeingCreatedOption(): void {
+      const { value: beingCreatedOptions } = beingCreatedOptionsRef
+      const beingCreatedOption = beingCreatedOptions[0] || null
+      if (beingCreatedOption) {
+        const createdOptions = createdOptionsRef.value
+        if (!createdOptions.length) {
+          createdOptionsRef.value = [beingCreatedOption]
+        }
+        else {
+          createdOptions.push(beingCreatedOption)
+        }
+        beingCreatedOptionsRef.value = emptyArray
+      }
+    }
     function openMenu(): void {
       if (!mergedDisabledRef.value) {
         doUpdateShow(true)
@@ -619,18 +637,7 @@ export default defineComponent({
         return
       const { tag, remote, clearFilterAfterSelect, valueField } = props
       if (tag && !remote) {
-        const { value: beingCreatedOptions } = beingCreatedOptionsRef
-        const beingCreatedOption = beingCreatedOptions[0] || null
-        if (beingCreatedOption) {
-          const createdOptions = createdOptionsRef.value
-          if (!createdOptions.length) {
-            createdOptionsRef.value = [beingCreatedOption]
-          }
-          else {
-            createdOptions.push(beingCreatedOption)
-          }
-          beingCreatedOptionsRef.value = emptyArray
-        }
+        commitBeingCreatedOption()
       }
       if (remote) {
         memoValOptMapRef.value.set(
@@ -699,38 +706,162 @@ export default defineComponent({
           >) === optionValue
       )
     }
+    // separators relateds
+    const mergedSeparatorsRef = computed(() => {
+      const { separators } = props
+      return (separators ?? [])
+        .sort((a, b) => b.length - a.length) // longer first
+        .filter(Boolean)
+    })
+
+    const tokenWithEnterRef = computed(() =>
+      mergedSeparatorsRef.value.some(sep => ['\n', '\r\n'].includes(sep))
+    )
+
+    const createOption = (label: string): SelectOption => {
+      const { onCreate, labelField, valueField } = props
+      const option = {
+        [labelField]: label,
+        [valueField]: label
+      } as SelectOption
+      return onCreate?.(label) ?? option
+    }
+
+    function optionExists(optionBeingCreated: SelectOption) {
+      const { valueField, labelField } = props
+      return (
+        compitableOptionsRef.value.some((option) => {
+          return (
+            option[valueField] === optionBeingCreated[valueField]
+            || option[labelField] === optionBeingCreated[labelField]
+          )
+        })
+        || createdOptionsRef.value.some((option) => {
+          return (
+            option[valueField] === optionBeingCreated[valueField]
+            || option[labelField] === optionBeingCreated[labelField]
+          )
+        })
+      )
+    }
+
+    function findOptionByLabel(label: string): SelectOption | null {
+      const { labelField } = props
+      const { value: valOptMap } = valOptMapRef
+      for (const [, opt] of valOptMap) {
+        if (opt[labelField] === label) {
+          return opt
+        }
+      }
+      return null
+    }
+
+    function handleSeparatorPatterns(patterns: string[]): void {
+      const { tag, remote, labelField, valueField } = props
+
+      if (tag && !remote) {
+        commitBeingCreatedOption()
+      }
+
+      const changedValue = createClearedMultipleSelectValue(
+        mergedValueRef.value
+      )
+      const pendingCreatedOptions: SelectOption[] = []
+
+      for (const p of patterns) {
+        const matchedOption = findOptionByLabel(p)
+        if (matchedOption) {
+          // Select existing option if not already selected
+          const optValue = matchedOption[valueField] as ValueAtom
+          if (!changedValue.includes(optValue)) {
+            changedValue.push(optValue)
+          }
+        }
+        else if (tag && !remote) {
+          const optionToCreate = createOption(p)
+          const existsInPending = pendingCreatedOptions.some(
+            o =>
+              o[valueField] === optionToCreate[valueField]
+              || o[labelField] === optionToCreate[labelField]
+          )
+          if (!existsInPending) {
+            pendingCreatedOptions.push(optionToCreate)
+          }
+          const optValue = optionToCreate[valueField] as ValueAtom
+          if (!changedValue.includes(optValue)) {
+            changedValue.push(optValue)
+          }
+        }
+      }
+
+      if (pendingCreatedOptions.length) {
+        createdOptionsRef.value.push(...pendingCreatedOptions)
+      }
+
+      patternRef.value = ''
+      beingCreatedOptionsRef.value = emptyArray
+      doSearch('')
+
+      const originalValue = Array.isArray(mergedValueRef.value)
+        ? mergedValueRef.value
+        : []
+      const hasChanged
+        = originalValue.length !== changedValue.length
+          || changedValue.some(v => !originalValue.includes(v as never))
+
+      if (hasChanged) {
+        doUpdateValue(changedValue, getMergedOptions(changedValue))
+      }
+    }
+
     function handlePatternInput(e: InputEvent): void {
       if (!mergedShowRef.value) {
         openMenu()
       }
-      const { value } = e.target as unknown as HTMLInputElement
+      const { value } = e.target as HTMLInputElement
+      const { tag, remote, multiple } = props
       patternRef.value = value
-      const { tag, remote } = props
+      // separator related
+      const separators = mergedSeparatorsRef.value
+      if (multiple && separators?.length && !triggerRef.value?.isComposing) {
+        let patternToSplit = value
+
+        // https://html.spec.whatwg.org/multipage/input.html#text-(type=text)-state-and-search-state-(type=search)
+        // will strip newlines with space
+        if (
+          pastedTextRef.value
+          && tokenWithEnterRef.value
+          && /[\r\n]/.test(pastedTextRef.value)
+        ) {
+          const browserTransformed = pastedTextRef.value
+            .replace(/[\r\n]+$/, '')
+            .replace(/\r\n/g, ' ')
+            .replace(/[\r\n]/g, ' ')
+          patternToSplit = value.replace(
+            browserTransformed,
+            pastedTextRef.value
+          )
+        }
+
+        // Reset paste state
+        pastedTextRef.value = null
+
+        const patterns = doPatternSplit(patternToSplit, separators)
+        if (patterns) {
+          handleSeparatorPatterns(patterns)
+          return
+        }
+      }
+      // normal input
       doSearch(value)
       if (tag && !remote) {
         if (!value) {
           beingCreatedOptionsRef.value = emptyArray
           return
         }
-        const { onCreate } = props
-        const optionBeingCreated = onCreate
-          ? onCreate(value)
-          : { [props.labelField]: value, [props.valueField]: value }
-        const { valueField, labelField } = props
-        if (
-          compitableOptionsRef.value.some((option) => {
-            return (
-              option[valueField] === optionBeingCreated[valueField]
-              || option[labelField] === optionBeingCreated[labelField]
-            )
-          })
-          || createdOptionsRef.value.some((option) => {
-            return (
-              option[valueField] === optionBeingCreated[valueField]
-              || option[labelField] === optionBeingCreated[labelField]
-            )
-          })
-        ) {
+        const optionBeingCreated = createOption(value)
+
+        if (optionExists(optionBeingCreated)) {
           beingCreatedOptionsRef.value = emptyArray
         }
         else {
@@ -738,6 +869,11 @@ export default defineComponent({
         }
       }
     }
+
+    function handlePatternInputPaste(e: ClipboardEvent): void {
+      pastedTextRef.value = e.clipboardData?.getData('text') ?? null
+    }
+
     function handleClear(e: MouseEvent): void {
       e.stopPropagation()
       const { multiple } = props
@@ -924,6 +1060,7 @@ export default defineComponent({
       handleToggle: handleToggleByTmNode,
       handleDeleteOption: handleToggleByOption,
       handlePatternInput,
+      handlePatternInputPaste,
       handleClear,
       handleTriggerBlur,
       handleTriggerFocus,
@@ -981,6 +1118,7 @@ export default defineComponent({
                       onClick={this.handleTriggerClick}
                       onDeleteOption={this.handleDeleteOption}
                       onPatternInput={this.handlePatternInput}
+                      onPatternInputPaste={this.handlePatternInputPaste}
                       onClear={this.handleClear}
                       onBlur={this.handleTriggerBlur}
                       onFocus={this.handleTriggerFocus}

@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-select` 增加 `separators` 属性，用于多选模式下按分隔符拆分输入并选中/创建，关闭 [#2368](https://github.com/tusen-ai/naive-ui/issues/2368)
+
+### Fixes
+
+- 修复 `n-select` 可能删除已选中的禁用选项
+
 ## 2.43.2
 
 ### Fixes
