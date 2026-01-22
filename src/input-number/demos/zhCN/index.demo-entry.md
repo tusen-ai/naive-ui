@@ -22,6 +22,7 @@ disable-keyboard.vue
 change-timing.vue
 status.vue
 custom-icon.vue
+value-on-clear.vue
 debug.vue
 rtl-debug.vue
 theme-debug.vue
@@ -58,6 +59,7 @@ precision-debug.vue
 | update-value-on-input | `boolean` | `true` | 在输入的过程中，在输入值合法的情况下，是否改变值 |  |
 | validator | `(value) => boolean` | `undefined` | 设置自定义验证 |  |
 | value | `number \| null` | `undefined` | 受控模式下的值 |  |
+| value-on-clear | `number \| 'min' \| 'max' \| null` | `null` | 当输入框被清空时显示的值 | NEXT_VERSION |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | 移除焦点的回调 |  |
 | on-clear | `() => void` | `undefined` | 点击清空按钮时的回调 |  |
 | on-focus | `(event: FocusEvent) => void` | `undefined` | 获取焦点的回调 |  |

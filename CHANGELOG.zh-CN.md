@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-input-number` 新增 `value-on-clear` 属性，关闭 [#7375](https://github.com/tusen-ai/naive-ui/issues/7375)
+
 ## 2.43.2
 
 ### Fixes

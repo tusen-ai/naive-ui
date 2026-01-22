@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+``
+
+### Feats
+
+- `n-input-number` adds `value-on-clear` prop, closes [#7375](https://github.com/tusen-ai/naive-ui/issues/7375)
+
 ## 2.43.2
 
 ### Fixes
