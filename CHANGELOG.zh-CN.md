@@ -1,11 +1,5 @@
 # CHANGELOG
 
-## NEXT_VERSION
-
-### Fixes
-
-- 修复 `n-equation` 在使用 katex v0.16.18+ 时出现类型冲突，关闭 [#7423](https://github.com/tusen-ai/naive-ui/issues/7423)
-
 ## 2.43.2
 
 ### Fixes
