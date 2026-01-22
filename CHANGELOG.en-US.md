@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-menu` adds `elipsis` prop and `render-elipsis` function for customizing elipsis when `mode='horizontal'` `responsive=true`.
+
 ## 2.43.2
 
 ### Fixes

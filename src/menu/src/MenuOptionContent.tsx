@@ -65,7 +65,13 @@ export default defineComponent({
     const {
       clsPrefix,
       tmNode,
-      menuProps: { renderIcon, renderLabel, renderExtra, expandIcon }
+      menuProps: {
+        renderIcon,
+        renderLabel,
+        renderElipsis,
+        renderExtra,
+        expandIcon
+      }
     } = this
     const icon = renderIcon ? renderIcon(tmNode.rawNode) : render(this.icon)
     return (
@@ -97,7 +103,9 @@ export default defineComponent({
         )}
         <div class={`${clsPrefix}-menu-item-content-header`} role="none">
           {this.isEllipsisPlaceholder
-            ? this.title
+            ? renderElipsis
+              ? renderElipsis(tmNode.rawNode)
+              : this.title
             : renderLabel
               ? renderLabel(tmNode.rawNode)
               : render(this.title)}
