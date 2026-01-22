@@ -128,7 +128,7 @@ describe('n-color-picker', () => {
       wrapper.unmount()
     })
     it('output according to mode', async () => {
-      const onUpdateValue = jest.fn()
+      const onUpdateValue = vi.fn()
       const output = {
         RGBA: {
           mode: 'rgb',
@@ -213,16 +213,16 @@ describe('n-color-picker 2', () => {
         'left',
         'left-end'
       ] as const
-    ).forEach((placement) => {
+    ).forEach(async (placement) => {
       const wrapper = mount(NColorPicker, { props: { placement } })
-      setTimeout(() => {
+      await vi.waitFor(() => {
         expect(
           document
             .querySelector('.v-binder-follower-content')
             ?.getAttribute('v-placement')
         ).toBe(placement)
-        wrapper.unmount()
       })
+      wrapper.unmount()
     })
   })
 

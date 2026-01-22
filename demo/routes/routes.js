@@ -221,6 +221,11 @@ export const enComponentRoutes = [
     component: () => import('../../src/input/demos/enUS/index.demo-entry.md')
   },
   {
+    path: 'input-otp',
+    component: () =>
+      import('../../src/input-otp/demos/enUS/index.demo-entry.md')
+  },
+  {
     path: 'select',
     component: () => import('../../src/select/demos/enUS/index.demo-entry.md')
   },
@@ -594,6 +599,10 @@ export const enComponentRoutes = [
   {
     path: 'marquee',
     component: () => import('../../src/marquee/demos/enUS/index.demo-entry.md')
+  },
+  {
+    path: 'heatmap',
+    component: () => import('../../src/heatmap/demos/enUS/index.demo-entry.md')
   }
 ]
 
@@ -632,6 +641,11 @@ export const zhComponentRoutes = [
   {
     path: 'input',
     component: () => import('../../src/input/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'input-otp',
+    component: () =>
+      import('../../src/input-otp/demos/zhCN/index.demo-entry.md')
   },
   {
     path: 'select',
@@ -1007,6 +1021,10 @@ export const zhComponentRoutes = [
   {
     path: 'marquee',
     component: () => import('../../src/marquee/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'heatmap',
+    component: () => import('../../src/heatmap/demos/zhCN/index.demo-entry.md')
   }
 ]
 

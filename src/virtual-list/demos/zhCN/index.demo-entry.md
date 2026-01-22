@@ -1,10 +1,10 @@
-# 虚拟列表
+# 虚拟列表 Virtual List
 
 当谈到虚拟列表时，能让你感觉列表像是无限长的，但实际上它只是在偷偷隐藏那些不可见的元素。
 
 就像是个懒惰的程序员拿着一个空白纸条说：“你看不见我，我也不会加载自己！”
 
-`2.36.0` 版本开始提供该组件。
+自 `2.36.0` 开始提供。
 
 ## 演示
 
@@ -25,7 +25,7 @@ keep-alive.vue
 | default-scroll-index | `number` | `undefined` | 默认滚动的 Index | 2.36.0 |
 | ignore-item-resize | `boolean` | `false` | 忽略内容尺寸变化，可以让运行快一些（尽管应该很难感受到） | 2.36.0 |
 | items | `Array<object>` | `[]` | 需要展示的数据 | 2.36.0 |
-| item-resizable | `number` | `false` | 是否启用动态尺寸，你不必关心项目大小，它会自动计算 | 2.36.0 |
+| item-resizable | `boolean` | `false` | 是否启用动态尺寸，你不必关心项目大小，它会自动计算 | 2.36.0 |
 | item-size | `number` | required | 以像素为单位显示项目的最小高度，用于计算滚动大小和位置 | 2.36.0 |
 | items-style | `string \| CSSProperties` | `undefined` | 全部内容的容器样式 | 2.36.0 |
 | key-field | `string` | `'key'` | 选项 key 的字段名 | 2.36.0 |

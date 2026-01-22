@@ -1,3 +1,7 @@
+import type { HSLA, HSVA, RGBA } from 'seemly'
+import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
+import type { FollowerPlacement } from 'vueuc'
+import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { ColorPickerTheme } from '../styles'
 import type {
@@ -12,15 +16,12 @@ import {
   getPreciseEventTarget,
   hsl2hsv,
   hsl2rgb,
-  type HSLA,
   hsla,
   hsv2hsl,
   hsv2rgb,
-  type HSVA,
   hsva,
   rgb2hsl,
   rgb2hsv,
-  type RGBA,
   rgba,
   toHexaString,
   toHexString,
@@ -35,25 +36,19 @@ import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   nextTick,
-  type PropType,
   provide,
-  type Ref,
   ref,
-  type SlotsType,
   toRef,
   Transition,
-  type VNode,
   watch,
   watchEffect,
   withDirectives
 } from 'vue'
-import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc'
+import { VBinder, VFollower, VTarget } from 'vueuc'
 import {
-  type ThemeProps,
   useConfig,
   useFormItem,
   useLocale,

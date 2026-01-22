@@ -20,7 +20,13 @@ export function renderMenuLabel(option) {
 function renderNewTag(isZh) {
   return h(
     NTag,
-    { type: 'success', size: 'small', round: true, bordered: false },
+    {
+      type: 'success',
+      size: 'small',
+      round: true,
+      bordered: false,
+      style: { pointerEvents: 'none' }
+    },
     { default: isZh ? () => '新' : () => 'New' }
   )
 }
@@ -382,6 +388,13 @@ export function createComponentMenuOptions({ lang, theme }) {
           path: '/input-number'
         },
         {
+          en: 'Input OTP',
+          zh: '验证码',
+          enSuffix: true,
+          path: '/input-otp',
+          isNew: true
+        },
+        {
           en: 'Mention',
           zh: '提及',
           enSuffix: true,
@@ -569,6 +582,13 @@ export function createComponentMenuOptions({ lang, theme }) {
           zh: '高亮文本',
           enSuffix: true,
           path: '/highlight',
+          isNew: true
+        },
+        {
+          en: 'Heatmap',
+          zh: '热力图',
+          enSuffix: true,
+          path: '/heatmap',
           isNew: true
         }
       ]

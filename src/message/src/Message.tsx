@@ -1,14 +1,7 @@
-import type { MessageRenderMessage, MessageType } from './types'
+import type { CSSProperties, PropType, VNodeChild } from 'vue'
 /* eslint-disable no-cond-assign */
-import {
-  computed,
-  type CSSProperties,
-  defineComponent,
-  h,
-  inject,
-  type PropType,
-  type VNodeChild
-} from 'vue'
+import type { MessageRenderMessage, MessageType } from './types'
+import { computed, defineComponent, h, inject } from 'vue'
 import {
   NBaseClose,
   NBaseIcon,
@@ -71,6 +64,7 @@ export default defineComponent({
           fontSize,
           lineHeight,
           borderRadius,
+          border,
           iconColorInfo,
           iconColorSuccess,
           iconColorWarning,
@@ -114,7 +108,8 @@ export default defineComponent({
         '--n-close-icon-color-pressed': closeIconColorPressed,
         '--n-close-icon-color-hover': closeIconColorHover,
         '--n-line-height': lineHeight,
-        '--n-border-radius': borderRadius
+        '--n-border-radius': borderRadius,
+        '--n-border': border
       }
     })
     const themeClassHandle = inlineThemeDisabled
@@ -178,7 +173,7 @@ export default defineComponent({
             ]}
           >
             {(iconNode = createIconVNode(icon, type, mergedClsPrefix))
-            && showIcon ? (
+              && showIcon ? (
                   <div
                     class={`${mergedClsPrefix}-message__icon ${mergedClsPrefix}-message__icon--${type}-type`}
                   >

@@ -28,6 +28,7 @@ embedded.vue
 | action | `() => VNodeChild` | `undefined` | Operating area content, must be a render function. | 2.38.2 |
 | bordered | `boolean` | `true` | Whether to show the card border. |  |
 | closable | `boolean` | `false` | Is it allowed to close. |  |
+| close-focusable | `boolean` | `false` | Whether the close button can be focused. | 2.43.0 |
 | content | `string \| (() => VNodeChild)` | `undefined` | Card content, can be a render function. | 2.38.2 |
 | content-class | `string` | `undefined` | The class of the card content area. | 2.36.0 |
 | content-style | `Object \| string` | `undefined` | The style of the card content area. |  |

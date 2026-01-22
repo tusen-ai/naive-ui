@@ -1,22 +1,24 @@
+import type { CSSProperties, PropType, VNode } from 'vue'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { MoveStrategy } from './interface'
+import type { ImagePreviewInst } from './public-types'
 import { off, on } from 'evtd'
 import { kebabCase } from 'lodash-es'
 import { beforeNextFrameOnce } from 'seemly'
 import { zindexable } from 'vdirs'
-import { useIsMounted } from 'vooks'
+import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   Fragment,
   h,
   inject,
   normalizeStyle,
   onBeforeUnmount,
-  type PropType,
   ref,
   toRef,
+  toRefs,
   Transition,
-  type VNode,
   vShow,
   watch,
   withDirectives
@@ -32,52 +34,61 @@ import {
   ZoomOutIcon
 } from '../../_internal/icons'
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
-import { download } from '../../_utils'
+import { call, download } from '../../_utils'
 import { NTooltip } from '../../tooltip'
 import { imageLight } from '../styles'
 import { renderCloseIcon, renderNextIcon, renderPrevIcon } from './icons'
-import {
-  imageContextKey,
-  imagePreviewSharedProps,
-  type MoveStrategy
-} from './interface'
+import { imageContextKey, imagePreviewSharedProps } from './interface'
 import style from './styles/index.cssr'
 
 const BLEEDING = 32
 
-export interface ImagePreviewInst {
-  setThumbnailEl: (e: HTMLImageElement | null) => void
-  setPreviewSrc: (src?: string) => void
-  toggleShow: () => void
+export const imagePreviewProps = {
+  ...imagePreviewSharedProps,
+  src: String,
+  show: {
+    type: Boolean,
+    default: undefined
+  },
+  defaultShow: Boolean,
+  'onUpdate:show': [Function, Array] as PropType<
+    MaybeArray<(show: boolean) => void>
+  >,
+  onUpdateShow: [Function, Array] as PropType<
+    MaybeArray<(show: boolean) => void>
+  >,
+  onNext: Function as PropType<() => void>,
+  onPrev: Function as PropType<() => void>,
+  onClose: [Function, Array] as PropType<MaybeArray<() => void>>
 }
+
+export type ImagePreviewProps = ExtractPublicPropTypes<typeof imagePreviewProps>
 
 export default defineComponent({
   name: 'ImagePreview',
-  props: {
-    ...imagePreviewSharedProps,
-    onNext: Function as PropType<() => void>,
-    onPrev: Function as PropType<() => void>,
-    clsPrefix: {
-      type: String,
-      required: true
-    }
-  },
+  props: imagePreviewProps,
   setup(props) {
+    const { src } = toRefs(props)
+
+    const { mergedClsPrefixRef } = useConfig(props)
     const themeRef = useTheme(
       'Image',
       '-image',
       style,
       imageLight,
       props,
-      toRef(props, 'clsPrefix')
+      mergedClsPrefixRef
     )
     let thumbnailEl: HTMLImageElement | null = null
     const previewRef = ref<HTMLImageElement | null>(null)
     const previewWrapperRef = ref<HTMLDivElement | null>(null)
-    const previewSrcRef = ref<string | undefined>(undefined)
-    const showRef = ref(false)
+
     const displayedRef = ref(false)
     const { localeRef } = useLocale('Image')
+
+    const uncontrolledShowRef = ref(props.defaultShow)
+    const controlledShowRef = toRef(props, 'show')
+    const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
 
     function syncTransformOrigin(): void {
       const { value: previewWrapper } = previewWrapperRef
@@ -87,6 +98,7 @@ export default defineComponent({
       const tbox = thumbnailEl.getBoundingClientRect()
       const tx = tbox.left + tbox.width / 2
       const ty = tbox.top + tbox.height / 2
+
       style.transformOrigin = `${tx}px ${ty}px`
     }
 
@@ -101,13 +113,33 @@ export default defineComponent({
         case 'ArrowRight':
           props.onNext?.()
           break
+        case 'ArrowUp':
+          e.preventDefault()
+          zoomIn()
+          break
+        case 'ArrowDown':
+          e.preventDefault()
+          zoomOut()
+          break
         case 'Escape':
-          toggleShow()
+          close()
           break
       }
     }
 
-    watch(showRef, (value) => {
+    function doUpdateShow(value: boolean): void {
+      const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
+      if (onUpdateShow) {
+        call(onUpdateShow, value)
+      }
+      if (_onUpdateShow) {
+        call(_onUpdateShow, value)
+      }
+      uncontrolledShowRef.value = value
+      displayedRef.value = true
+    }
+
+    watch(mergedShowRef, (value) => {
       if (value) {
         on('keydown', document, handleKeydown)
       }
@@ -130,12 +162,14 @@ export default defineComponent({
     let mouseDownClientY = 0
 
     let dragging = false
+
     function handleMouseMove(e: MouseEvent): void {
       const { clientX, clientY } = e
       offsetX = clientX - startX
       offsetY = clientY - startY
       beforeNextFrameOnce(derivePreviewStyle)
     }
+
     function getMoveStrategy(opts: {
       mouseUpClientX: number
       mouseUpClientY: number
@@ -162,6 +196,7 @@ export default defineComponent({
         deltaVertical
       }
     }
+
     // avoid image move outside viewport
     function getDerivedOffset(moveStrategy?: MoveStrategy): {
       offsetX: number
@@ -326,6 +361,7 @@ export default defineComponent({
       }
       return Math.max(heightScale, widthScale)
     }
+
     function zoomIn(): void {
       const maxScale = getMaxScale()
       if (scale < maxScale) {
@@ -352,9 +388,9 @@ export default defineComponent({
     }
 
     function handleDownloadClick(): void {
-      const src = previewSrcRef.value
-      if (src) {
-        download(src, undefined)
+      const imgSrc = src.value
+      if (imgSrc) {
+        download(imgSrc, undefined)
       }
     }
 
@@ -391,10 +427,16 @@ export default defineComponent({
       }
     }
 
-    function toggleShow(): void {
-      showRef.value = !showRef.value
-      displayedRef.value = true
+    function close() {
+      if (mergedShowRef.value) {
+        const { onClose } = props
+        if (onClose)
+          call(onClose)
+        doUpdateShow(false)
+        uncontrolledShowRef.value = false
+      }
     }
+
     function resizeToOrignalImageSize(): void {
       scale = getOrignalImageSizeScale()
       scaleExp = Math.ceil(Math.log(scale) / Math.log(scaleRadix))
@@ -403,13 +445,9 @@ export default defineComponent({
       derivePreviewStyle()
     }
     const exposedMethods: ImagePreviewInst = {
-      setPreviewSrc: (src) => {
-        previewSrcRef.value = src
-      },
       setThumbnailEl: (el) => {
         thumbnailEl = el
-      },
-      toggleShow
+      }
     }
 
     function withTooltip(
@@ -464,17 +502,20 @@ export default defineComponent({
       ? useThemeClass('image-preview', undefined, cssVarsRef, props)
       : undefined
 
+    function handleWheel(event: WheelEvent) {
+      event.preventDefault()
+    }
+
     return {
+      clsPrefix: mergedClsPrefixRef,
       previewRef,
       previewWrapperRef,
-      previewSrc: previewSrcRef,
-      show: showRef,
+      previewSrc: src,
+      mergedShow: mergedShowRef,
       appear: useIsMounted(),
       displayed: displayedRef,
       previewedImgProps: imageContext?.previewedImgPropsRef,
-      handleWheel(e: WheelEvent) {
-        e.preventDefault()
-      },
+      handleWheel,
       handlePreviewMousedown,
       handlePreviewDblclick,
       syncTransformOrigin,
@@ -499,6 +540,8 @@ export default defineComponent({
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
+      doUpdateShow,
+      close,
       ...exposedMethods
     }
   },
@@ -559,7 +602,7 @@ export default defineComponent({
     )
 
     const closeNode = withTooltip(
-      <NBaseIcon clsPrefix={clsPrefix} onClick={this.toggleShow}>
+      <NBaseIcon clsPrefix={clsPrefix} onClick={() => this.close()}>
         {{ default: renderCloseIcon }}
       </NBaseIcon>,
       'tipClose'
@@ -575,15 +618,16 @@ export default defineComponent({
     return (
       <>
         {this.$slots.default?.()}
-        <LazyTeleport show={this.show}>
+        <LazyTeleport show={this.mergedShow}>
           {{
             default: () => {
-              if (!(this.show || this.displayed)) {
+              if (!(this.mergedShow || this.displayed)) {
                 return null
               }
               this.onRender?.()
               return withDirectives(
                 <div
+                  ref="containerRef"
                   class={[
                     `${clsPrefix}-image-preview-container`,
                     this.themeClass
@@ -594,10 +638,10 @@ export default defineComponent({
                   <Transition name="fade-in-transition" appear={this.appear}>
                     {{
                       default: () =>
-                        this.show ? (
+                        this.mergedShow ? (
                           <div
                             class={`${clsPrefix}-image-preview-overlay`}
-                            onClick={this.toggleShow}
+                            onClick={() => this.close()}
                           />
                         ) : null
                     }}
@@ -606,7 +650,7 @@ export default defineComponent({
                     <Transition name="fade-in-transition" appear={this.appear}>
                       {{
                         default: () => {
-                          if (!this.show)
+                          if (!this.mergedShow)
                             return null
                           return (
                             <div class={`${clsPrefix}-image-preview-toolbar`}>
@@ -681,13 +725,13 @@ export default defineComponent({
                               onDragstart={this.handleDragStart}
                             />
                           </div>,
-                          [[vShow, this.show]]
+                          [[vShow, this.mergedShow]]
                         )
                       }
                     }}
                   </Transition>
                 </div>,
-                [[zindexable, { enabled: this.show }]]
+                [[zindexable, { enabled: this.mergedShow }]]
               )
             }
           }}

@@ -38,7 +38,8 @@ const dialogProps = {
   actionStyle: [String, Object] as PropType<string | CSSProperties>,
   onPositiveClick: Function as PropType<(e: MouseEvent) => void>,
   onNegativeClick: Function as PropType<(e: MouseEvent) => void>,
-  onClose: Function as PropType<() => void>
+  onClose: Function as PropType<() => void>,
+  closeFocusable: Boolean
 } as const
 
 export type DialogProps = ExtractPublicPropTypes<typeof dialogProps>

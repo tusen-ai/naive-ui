@@ -126,6 +126,12 @@ const nbNO: NLocale = {
     tipClose: 'Close (Esc)',
     // TODO: translation
     tipOriginalSize: 'Zoom to original size'
+  },
+  Heatmap: {
+    less: 'mindre',
+    more: 'mer',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

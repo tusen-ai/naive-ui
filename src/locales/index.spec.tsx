@@ -1,16 +1,19 @@
+import type { PropType } from 'vue'
 import type { NLocale } from './common/enUS'
 import type { NDateLocale } from './date/enUS'
 import { mount } from '@vue/test-utils'
-import { defineComponent, h, onMounted, type PropType, ref } from 'vue'
+import { defineComponent, h, onMounted, ref } from 'vue'
 import { NConfigProvider } from '../config-provider/index'
 import { NDatePicker } from '../date-picker/index'
 import {
   arDZ,
   azAZ,
   csCZ,
+  daDK,
   dateArDZ,
   dateAzAZ,
   dateCsCZ,
+  dateDaDK,
   dateDeDE,
   dateEnGB,
   dateEnUS,
@@ -414,6 +417,14 @@ describe('locale', () => {
         props: {
           dateLocale: dateUgCN,
           locale: ugCN
+        }
+      }).html()
+    ).toMatchSnapshot()
+    expect(
+      mount(Wrapper, {
+        props: {
+          dateLocale: dateDaDK,
+          locale: daDK
         }
       }).html()
     ).toMatchSnapshot()

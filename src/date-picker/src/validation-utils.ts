@@ -1,3 +1,4 @@
+import type { Ref } from 'vue'
 import type { DatePickerSetupProps } from './DatePicker'
 import type {
   IsRangeDateDisabled,
@@ -6,7 +7,7 @@ import type {
   IsSingleTimeDisabled
 } from './interface'
 import { getHours, getMinutes, getSeconds } from 'date-fns'
-import { computed, type Ref } from 'vue'
+import { computed } from 'vue'
 
 export function uniCalendarValidation(
   props: DatePickerSetupProps,

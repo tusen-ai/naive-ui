@@ -72,6 +72,7 @@ use-dialog-reactive-list.vue
 | bordered | `boolean` | `false` | Whether to show `border`. |  |
 | class | `any` | `undefined` | Class name of the dialog. | 2.33.0 |
 | closable | `boolean` | `true` | Whether to show `close` icon. |  |
+| closeFocusable | `boolean` | `false` | Whether the close button is focusable. | 2.43.0 |
 | closeOnEsc | `boolean` | `true` | Whether to close the dialog when the Esc key is pressed | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | `undefined` | Content, can be a render function. |  |
 | contentClass | `string` | `undefined` | The class name of the content. | 2.38.2 |
@@ -92,6 +93,7 @@ use-dialog-reactive-list.vue
 | titleStyle | `Object \| string` | `undefined` | The style of the content. | 2.38.2 |
 | transformOrigin | `'mouse' \| 'center'` | `'mouse'` | The transform origin of the dialog's display animation. | 2.34.0 |
 | type | `'error \| 'success' \| 'warning'` | `'warning'` | Dialog type. |  |
+| zIndex | `number` | `undefined` | Z index of the dialog. | 2.43.0 |
 | onAfterEnter | `() => void` | `undefined` | Callback on enter animation ends. | 2.33.0 |
 | onAfterLeave | `() => void` | `undefined` | Callback on leave animation ends. | 2.33.3 |
 | onClose | `() => boolean \| Promise<boolean> \| any` | `undefined` | The default behavior is closing the confirm. Return `false` or resolve `false` or `Promise rejected` will prevent the default behavior. |  |
@@ -112,6 +114,7 @@ All the properties can be modified dynamically.
 | bordered | `boolean` | Whether to show `border`. |  |
 | class | `any` | Class name of the dialog. | 2.33.0 |
 | closable | `boolean` | Whether to show `close` icon. |  |
+| closeFocusable | `boolean` | Whether the close button is focusable. | 2.43.0 |
 | closeOnEsc | `boolean` | Whether to close dialog on Esc is pressed. | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | Content, can be a render function. |  |
 | contentClass | `string` | The class name of the content. | 2.38.2 |
@@ -152,6 +155,7 @@ All the properties can be modified dynamically.
 | action-style | `Object \| string` | `undefined` | The style of the action area. | 2.38.2 |
 | bordered | `boolean` | `false` | Whether to show `border`. |  |
 | closable | `boolean` | `true` | Whether to show `close` icon. |  |
+| close-focusable | `boolean` | `false` | Whether the close button is focusable. | 2.43.0 |
 | content | `string \| (() => VNodeChild)` | `undefined` | Can be a render function. |  |
 | content-class | `string` | `undefined` | The class name of the content. | 2.38.2 |
 | content-style | `Object \| string` | `undefined` | The style of the content. | 2.38.2 |

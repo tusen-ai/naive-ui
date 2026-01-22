@@ -30,6 +30,7 @@ embedded-debug.vue
 | action | `() => VNodeChild` | `undefined` | 操作区域内容，需要是 render 函数 | 2.38.2 |
 | bordered | `boolean` | `true` | 是否显示卡片边框 |  |
 | closable | `boolean` | `false` | 是否允许关闭 |  |
+| close-focusable | `boolean` | `false` | 关闭按钮是否可以聚焦 | 2.43.0 |
 | content | `string \| (() => VNodeChild)` | `undefined` | 卡片内容，可以是 render 函数 | 2.38.2 |
 | content-class | `string` | `undefined` | 卡片内容区域的类名 | 2.36.0 |
 | content-style | `Object \| string` | `undefined` | 卡片内容区域的样式 |  |

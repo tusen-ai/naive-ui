@@ -4,24 +4,16 @@
 青春是挽不回的水，转眼消失在指尖。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { CountdownInst } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const activeRef = ref(true)
-    const countdownRef = ref<CountdownInst | null>()
-    function handleReset() {
-      countdownRef.value?.reset()
-    }
-    return {
-      active: activeRef,
-      countdown: countdownRef,
-      handleReset
-    }
-  }
-})
+const active = ref(true)
+const countdown = ref<CountdownInst | null>(null)
+
+function handleReset() {
+  countdown.value?.reset()
+}
 </script>
 
 <template>

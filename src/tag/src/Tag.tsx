@@ -1,19 +1,15 @@
+import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { TagTheme } from '../styles'
 import { getMargin } from 'seemly'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
-  type PropType,
   provide,
-  type Ref,
   ref,
-  type SlotsType,
   toRef,
-  type VNode,
   watchEffect
 } from 'vue'
 import { NBaseClose } from '../../_internal/close'

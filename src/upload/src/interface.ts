@@ -14,10 +14,10 @@ import { createInjectionKey } from '../../_utils'
 
 export type ShouldUseThumbnailUrl = (file: UploadSettledFileInfo) => boolean
 
-export type FuncOrRecordOrUndef<T = string> =
-  | Record<string, T>
-  | (({ file }: { file: UploadSettledFileInfo }) => Record<string, T>)
-  | undefined
+export type FuncOrRecordOrUndef<T = string>
+  = | Record<string, T>
+    | (({ file }: { file: UploadSettledFileInfo }) => Record<string, T>)
+    | undefined
 
 export interface UploadInternalInst {
   doChange: DoChange
@@ -51,6 +51,7 @@ export interface UploadInjection {
   mergedFileListRef: Ref<UploadSettledFileInfo[]>
   onRemoveRef: Ref<UploadOnRemove | undefined>
   onDownloadRef: Ref<UploadOnDownload | undefined>
+  customDownloadRef: Ref<UploadOnDownload | undefined>
   xhrMap: Map<string, XMLHttpRequest>
   showPreviewButtonRef: Ref<boolean>
   onPreviewRef: Ref<OnPreview | undefined>

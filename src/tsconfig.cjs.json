@@ -1,11 +1,12 @@
 {
   "extends": "../tsconfig.json",
-  "exclude": ["./**/*.spec.*"],
   "compilerOptions": {
-    "rootDir": ".",
-    "outDir": "../lib",
-    "module": "CommonJS",
     "target": "ES6",
-    "jsx": "react"
-  }
+    "jsx": "react",
+    "rootDir": ".",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "outDir": "../lib"
+  },
+  "exclude": ["./**/*.spec.*"]
 }

@@ -49,6 +49,7 @@ Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有�
 | 阿拉伯语           | arDZ | dateArDZ | 2.34.0 |
 | 阿塞拜疆语         | azAZ | dateAzAZ | 2.39.0 |
 | 捷克语（捷克）     | csCZ | dateCsCz | 2.38.2 |
+| 丹麦               | daDK | dateDaDK | 2.43.0 |
 | 德语               | deDE | dateDeDE |        |
 | 英国英语           | enGB | dateEnGB | 2.25.1 |
 | 英语               | enUS | dateEnUS |        |

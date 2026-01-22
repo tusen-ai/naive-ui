@@ -4,16 +4,10 @@
 Use `size` to make its height the same as other components.
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      loading: ref(true)
-    }
-  }
-})
+const loading = ref(true)
 </script>
 
 <template>

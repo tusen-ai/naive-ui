@@ -1,7 +1,17 @@
+import type { CheckStrategy } from 'treemate'
+import type {
+  CSSProperties,
+  HTMLAttributes,
+  PropType,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
+import type { FollowerInst, FollowerPlacement } from 'vueuc'
 import type { InternalSelectionInst } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { FormValidationStatus } from '../../form/src/interface'
+import type { FormValidationStatus } from '../../form/src/public-types'
 import type { PopoverProps } from '../../popover'
 import type { SelectBaseOption } from '../../select/src/interface'
 import type { CascaderTheme } from '../styles'
@@ -19,37 +29,21 @@ import type {
   Value
 } from './interface'
 import { changeColor, depx, getPreciseEventTarget, happensIn } from 'seemly'
-import {
-  type CheckStrategy,
-  createTreeMate,
-  SubtreeNotLoadedError
-} from 'treemate'
+import { createTreeMate, SubtreeNotLoadedError } from 'treemate'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
-  type HTMLAttributes,
   isReactive,
   nextTick,
-  type PropType,
   provide,
   ref,
-  type SlotsType,
   toRef,
-  type VNode,
-  type VNodeChild,
   watch,
   watchEffect
 } from 'vue'
-import {
-  type FollowerInst,
-  type FollowerPlacement,
-  VBinder,
-  VFollower,
-  VTarget
-} from 'vueuc'
+import { VBinder, VFollower, VTarget } from 'vueuc'
 import { NInternalSelection } from '../../_internal'
 import {
   useConfig,

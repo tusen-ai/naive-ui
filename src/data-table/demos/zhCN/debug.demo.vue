@@ -2,10 +2,10 @@
 # Debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DataTableColumns, PaginationProps } from 'naive-ui'
 import { NButton, useMessage } from 'naive-ui'
-import { defineComponent, h, ref } from 'vue'
+import { h, ref } from 'vue'
 
 interface Song {
   no: number
@@ -58,26 +58,18 @@ const data: Song[] = [
   { no: 12, title: 'Champagne Supernova', length: '7:27' }
 ]
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    const pagination: PaginationProps = {
-      prefix: ({ startIndex, endIndex }) => {
-        return ['startIndex', startIndex, 'endIndex', endIndex]
-      }
-    }
-    return {
-      data,
-      columns: createColumns({
-        play(row: Song) {
-          message.info(`Play ${row.title}`)
-        }
-      }),
-      loading: ref(false),
-      pagination
-    }
+const message = useMessage()
+const pagination: PaginationProps = {
+  prefix: ({ startIndex, endIndex }) => {
+    return ['startIndex', startIndex, 'endIndex', endIndex]
+  }
+}
+const columns = createColumns({
+  play(row: Song) {
+    message.info(`Play ${row.title}`)
   }
 })
+const loading = ref(false)
 </script>
 
 <template>

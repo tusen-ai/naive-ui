@@ -58,8 +58,8 @@ export type FormItemInternalValidate = (
 
 export type FormItemValidate = ((options: FormItemValidateOptions) => Promise<{
   warnings: ValidateError[] | undefined
-}>) &
-((
+}>)
+& ((
   trigger?: string,
   callback?: ValidateCallback
 ) => Promise<{ warnings: ValidateError[] | undefined }>)
@@ -113,7 +113,5 @@ export interface FormInst {
   validate: FormValidate
   restoreValidation: () => void
 }
-
-export type FormValidationStatus = 'success' | 'error' | 'warning'
 
 export interface FormValidateMessages extends ValidateMessages {}

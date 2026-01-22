@@ -1,11 +1,12 @@
 import type { Key } from 'treemate'
+import type { ComputedRef, Ref } from 'vue'
 import type { FollowerPlacement } from 'vueuc'
 import type { MergedTheme } from '../../_mixins/use-theme'
 import type { MenuTheme } from '../styles'
 import type { OnUpdateValueImpl } from './interface'
 import type { MenuSetupProps } from './Menu'
 import type { UseMenuChildProps } from './use-menu-child-props'
-import { computed, type ComputedRef, inject, type Ref } from 'vue'
+import { computed, inject } from 'vue'
 import {
   menuInjectionKey,
   menuItemGroupInjectionKey,
@@ -35,6 +36,7 @@ export interface SubmenuInjection {
 
 export interface MenuOptionGroupInjection {
   paddingLeftRef: Ref<number | undefined>
+  mergedDisabledRef: Ref<boolean>
 }
 
 export interface UseMenuChild {
@@ -45,6 +47,7 @@ export interface UseMenuChild {
   iconMarginRight: ComputedRef<number>
   NMenu: MenuInjection
   NSubmenu: SubmenuInjection | null
+  NMenuOptionGroup: MenuOptionGroupInjection | null
 }
 
 export function useMenuChild(props: UseMenuChildProps): UseMenuChild {
@@ -129,6 +132,7 @@ export function useMenuChild(props: UseMenuChildProps): UseMenuChild {
     paddingLeft: paddingLeftRef,
     iconMarginRight: iconMarginRightRef,
     NMenu,
-    NSubmenu
+    NSubmenu,
+    NMenuOptionGroup
   }
 }

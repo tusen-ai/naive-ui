@@ -1,15 +1,13 @@
+import type { CSSProperties, DirectiveArguments, PropType } from 'vue'
 import type { ScrollbarProps } from '../../_internal'
 import { clickoutside } from 'vdirs'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
-  type DirectiveArguments,
   h,
   inject,
   mergeProps,
   onBeforeUnmount,
-  type PropType,
   provide,
   ref,
   Transition,

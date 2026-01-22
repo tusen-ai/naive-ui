@@ -1,3 +1,10 @@
+import type {
+  CSSProperties,
+  ExtractPropTypes,
+  Ref,
+  SlotsType,
+  VNode
+} from 'vue'
 import type { InputInst, InputProps } from '../../input'
 import type { Size as TimePickerSize } from '../../time-picker/src/interface'
 import type {
@@ -16,17 +23,12 @@ import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
-  type ExtractPropTypes,
   h,
   provide,
-  type Ref,
   ref,
-  type SlotsType,
   toRef,
   Transition,
-  type VNode,
   watch,
   watchEffect,
   withDirectives
@@ -981,7 +983,7 @@ export default defineComponent({
       onPrevMonth: this.onPrevMonth,
       onNextYear: this.onNextYear,
       onPrevYear: this.onPrevYear,
-      timerPickerFormat: this.timerPickerFormat,
+      timePickerFormat: this.timePickerFormat,
       dateFormat: this.dateFormat,
       calendarDayFormat: this.calendarDayFormat,
       calendarHeaderYearFormat: this.calendarHeaderYearFormat,

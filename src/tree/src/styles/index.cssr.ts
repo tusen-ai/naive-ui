@@ -52,7 +52,6 @@ export default cB('tree', `
     padding: var(--n-node-wrapper-padding);
   `),
   cB('tree-node', `
-    transform: translate3d(0,0,0);
     position: relative;
     display: flex;
     border-radius: var(--n-node-border-radius);
@@ -126,6 +125,19 @@ export default cB('tree', `
       cM('disabled', `
         cursor: not-allowed;
       `)
+    ])
+  ]),
+  cM('ellipsis', [
+    cB('tree-node', [
+      cB('tree-node-content', `
+        overflow: hidden;
+      `, [
+        cE('text', `
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+        `)
+      ])
     ])
   ]),
   cB('tree-node-indent', `

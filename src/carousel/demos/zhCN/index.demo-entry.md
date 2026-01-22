@@ -1,4 +1,4 @@
-# Carousel 轮播图
+# 轮播图 Carousel
 
 一般用来播放一些好消息。
 
@@ -22,6 +22,7 @@ mousewheel.vue
 simulate-drag.vue
 custom-arrow-and-dots.vue
 custom-card.vue
+custom-dots.vue
 ```
 
 ## API
