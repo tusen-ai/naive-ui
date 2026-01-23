@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-data-table` 的 `scroll-x` 属性为字符串时，右侧固定列阴影丢失的问题
+
 ## 2.43.2
 
 ### Fixes

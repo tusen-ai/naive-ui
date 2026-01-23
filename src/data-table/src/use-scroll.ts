@@ -122,10 +122,17 @@ export function useScroll(
   function deriveActiveRightFixedColumn(): void {
     // target is header element
     const { value: rightFixedColumns } = rightFixedColumnsRef
-    const scrollWidth = Number(props.scrollX)
     const { value: tableWidth } = bodyWidthRef
-    if (tableWidth === null)
+
+    const { body, header } = getScrollElements()
+    const scrollElement = body || header
+    if (tableWidth === null || !scrollElement)
       return
+    let scrollWidth = Number(props.scrollX)
+    if (Number.isNaN(scrollWidth)) {
+      scrollWidth = scrollElement.scrollWidth
+    }
+
     let rightWidth = 0
     let rightActiveFixedColKey: string | number | null = null
     const { value: fixedColumnRightMap } = fixedColumnRightMapRef
