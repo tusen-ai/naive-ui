@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-checkbox` 点击后导致 `contenteditable` 元素需要点击两次才能聚焦，关闭 [#7420](https://github.com/tusen-ai/naive-ui/issues/7420)
+
 ## 2.43.2
 
 ### Fixes

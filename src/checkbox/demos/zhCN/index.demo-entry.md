@@ -15,6 +15,7 @@ event.vue
 customize-value.vue
 focus.vue
 rtl-debug.vue
+contenteditable-debug.vue
 ```
 
 ## API
