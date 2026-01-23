@@ -98,12 +98,12 @@ export default defineComponent({
         <div
           class={`${mergedClsPrefix}-marquee__item ${mergedClsPrefix}-marquee__original-item`}
         >
-          {$slots}
+          {$slots.default?.()}
         </div>
       </VResizeObserver>
     )
     const mirrorNode = (
-      <div class={`${mergedClsPrefix}-marquee__item`}>{$slots}</div>
+      <div class={`${mergedClsPrefix}-marquee__item`}>{$slots.default?.()}</div>
     )
     if (this.autoFill) {
       return (
