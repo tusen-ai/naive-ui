@@ -7,6 +7,7 @@
 - 修复 seemly 依赖的版本未更新到最新
 - 修复 `n-progress` 使用仪表盘模式超过 100% 之后样式不正确，关闭 [#6627](https://github.com/tusen-ai/naive-ui/issues/6627)
 - 修复 `n-modal` 在 `show-mask` 为 `false` 的情况下，外部内容不能被操作
+- 修复 `n-date-picker` 的快捷按钮在点击后误触发的问题，关闭 [#7315](https://github.com/tusen-ai/naive-ui/issues/7315)
 
 ### Feats
 

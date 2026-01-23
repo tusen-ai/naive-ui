@@ -733,6 +733,8 @@ function useDualCalendar(
     changeEndDateTime(value)
   }
   function handleRangeShortcutMouseenter(shortcut: Shortcuts[string]): void {
+    if (panelCommon.isShortcutClickInProgressRef.value)
+      return
     panelCommon.cachePendingValue()
     const shortcutValue = panelCommon.getShortcutValue(shortcut)
     if (!Array.isArray(shortcutValue))
@@ -740,9 +742,12 @@ function useDualCalendar(
     changeStartEndTime(shortcutValue[0], shortcutValue[1], 'shortcutPreview')
   }
   function handleRangeShortcutClick(shortcut: Shortcuts[string]): void {
+    panelCommon.isShortcutClickInProgressRef.value = true
     const shortcutValue = panelCommon.getShortcutValue(shortcut)
-    if (!Array.isArray(shortcutValue))
+    if (!Array.isArray(shortcutValue)) {
+      panelCommon.isShortcutClickInProgressRef.value = false
       return
+    }
     changeStartEndTime(shortcutValue[0], shortcutValue[1], 'shortcutDone')
     panelCommon.clearPendingValue()
     handleConfirmClick()
