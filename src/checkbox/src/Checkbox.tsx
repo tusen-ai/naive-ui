@@ -7,7 +7,6 @@ import type {
   OnUpdateChecked,
   OnUpdateCheckedImpl
 } from './interface'
-import { on } from 'evtd'
 import { createId } from 'seemly'
 import { useMemo, useMergedState } from 'vooks'
 import {
@@ -218,6 +217,15 @@ export default defineComponent({
           e.preventDefault()
       }
     }
+    function handleMousedown(): void {
+      const handleSelectStart = (e: Event): void => {
+        e.preventDefault()
+      }
+      window.addEventListener('selectstart', handleSelectStart)
+      setTimeout(() => {
+        window.removeEventListener('selectstart', handleSelectStart)
+      }, 0)
+    }
     const exposedMethods: CheckboxInst = {
       focus: () => {
         selfRef.value?.focus()
@@ -305,6 +313,7 @@ export default defineComponent({
       handleClick,
       handleKeyUp,
       handleKeyDown,
+      handleMousedown,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
@@ -324,7 +333,8 @@ export default defineComponent({
       focusable,
       handleKeyUp,
       handleKeyDown,
-      handleClick
+      handleClick,
+      handleMousedown
     } = this
     this.onRender?.()
     const labelNode = resolveWrappedSlot($slots.default, (children) => {
@@ -358,18 +368,7 @@ export default defineComponent({
         onKeyup={handleKeyUp}
         onKeydown={handleKeyDown}
         onClick={handleClick}
-        onMousedown={() => {
-          on(
-            'selectstart',
-            window,
-            (e: Event): void => {
-              e.preventDefault()
-            },
-            {
-              once: true
-            }
-          )
-        }}
+        onMousedown={handleMousedown}
       >
         <div class={`${mergedClsPrefix}-checkbox-box-wrapper`}>
           &nbsp;

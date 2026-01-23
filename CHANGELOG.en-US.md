@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-checkbox` click causing `contenteditable` elements to require two clicks to focus, closes [#7420](https://github.com/tusen-ai/naive-ui/issues/7420).
+
 ## 2.43.2
 
 ### Fixes
