@@ -325,8 +325,8 @@ export type TableSelectionColumn<T = InternalRowData> = {
   filterOptions?: never
   filterOptionValues?: never
   filterOptionValue?: never
-  colSpan?: never
-  rowSpan?: never
+  colSpan?: (rowData: T, rowIndex: number) => number
+  rowSpan?: (rowData: T, rowIndex: number) => number
 } & CommonColumnInfo<T>
 
 export type RenderExpand<T = InternalRowData> = (

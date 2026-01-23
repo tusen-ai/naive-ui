@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix `n-data-table` `TableSelectionColumn` type definition not allowing `rowSpan` and `colSpan` properties, closes [#7347](https://github.com/tusen-ai/naive-ui/issues/7347) by [@pstrh](https://github.com/pstrh).
+
 ## 2.43.2
 
 ### Fixes

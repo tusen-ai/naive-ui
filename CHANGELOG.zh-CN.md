@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- 修复 `n-data-table` 的 `TableSelectionColumn` 类型定义不允许 `rowSpan` 和 `colSpan` 属性的问题，关闭 [#7347](https://github.com/tusen-ai/naive-ui/issues/7347) by [@pstrh](https://github.com/pstrh)
+
 ## 2.43.2
 
 ### Fixes
