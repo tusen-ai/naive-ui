@@ -19,18 +19,18 @@ const plPL: NLocale = {
       `Proszę załadować wszystkie ${label}'s elementy przed sprawdzeniem.`
   },
   Time: {
-    dateFormat: 'yyyy-MM-dd',
-    dateTimeFormat: 'yyyy-MM-dd HH:mm:ss'
+    dateFormat: 'dd.MM.yyyy',
+    dateTimeFormat: 'dd.MM.yyyy HH:mm:ss'
   },
   DatePicker: {
     yearFormat: 'yyyy',
     monthFormat: 'MMM',
     dayFormat: 'eeeeee',
     yearTypeFormat: 'yyyy',
-    monthTypeFormat: 'yyyy-MM',
-    dateFormat: 'yyyy-MM-dd',
-    dateTimeFormat: 'yyyy-MM-dd HH:mm:ss',
-    quarterFormat: 'yyyy-qqq',
+    monthTypeFormat: 'MM.yyyy',
+    dateFormat: 'dd.MM.yyyy',
+    dateTimeFormat: 'dd.MM.yyyy HH:mm:ss',
+    quarterFormat: 'qqq yyyy',
     weekFormat: 'YYYY-w',
     clear: 'Wyczyść',
     now: 'Teraz',
@@ -42,16 +42,15 @@ const plPL: NLocale = {
     monthPlaceholder: 'Wybierz miesiąc',
     yearPlaceholder: 'Wybierz rok',
     quarterPlaceholder: 'Wybierz kwartał',
-    weekPlaceholder: 'Select Week',
+    weekPlaceholder: 'Wybierz tydzień',
     startDatePlaceholder: 'Data rozpoczęcia',
     endDatePlaceholder: 'Data zakończenia',
     startDatetimePlaceholder: 'Data i godzina rozpoczęcia',
     endDatetimePlaceholder: 'Data i godzina zakończenia',
-    // FIXME: translation needed
-    startMonthPlaceholder: 'Start Month',
-    endMonthPlaceholder: 'End Month',
+    startMonthPlaceholder: 'Miesiąc rozpoczęcia',
+    endMonthPlaceholder: 'Miesiąc zakończenia',
     monthBeforeYear: true,
-    firstDayOfWeek: 6,
+    firstDayOfWeek: 0,
     today: 'Dziś'
   },
   DataTable: {
@@ -64,13 +63,12 @@ const plPL: NLocale = {
     sourceTitle: 'Źródło',
     targetTitle: 'Cel'
   },
-  // TODO: translation
   Transfer: {
-    selectAll: 'Select all',
-    unselectAll: 'Unselect all',
-    clearAll: 'Clear',
-    total: (num: number): string => `Total ${num} items`,
-    selected: (num: number): string => `${num} items selected`
+    selectAll: 'Zaznacz wszystko',
+    unselectAll: 'Odznacz wszystko',
+    clearAll: 'Wyczyść',
+    total: (num: number): string => `Razem ${num} elementów`,
+    selected: (num: number): string => `Zaznaczono ${num} elementów`
   },
   Empty: {
     description: 'Brak danych'
@@ -123,8 +121,7 @@ const plPL: NLocale = {
     tipZoomIn: 'Pomniejsz',
     tipDownload: 'Pobierz',
     tipClose: 'Zamknij (Esc)',
-    // TODO: translation
-    tipOriginalSize: 'Zoom to original size'
+    tipOriginalSize: 'Oryginalny rozmiar'
   },
   Heatmap: {
     less: 'mniej',
