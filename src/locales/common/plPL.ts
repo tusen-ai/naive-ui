@@ -83,7 +83,9 @@ const plPL: NLocale = {
     positiveText: 'Potwierdź',
     negativeText: 'Anuluj',
     now: 'Teraz',
-    clear: 'Wyczyść'
+    clear: 'Wyczyść',
+    am: 'AM',
+    pm: 'PM'
   },
   Pagination: {
     goto: 'Idź do',
