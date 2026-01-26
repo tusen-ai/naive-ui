@@ -25,7 +25,7 @@ import type {
   ValidationTrigger
 } from './interface'
 import Schema from 'async-validator'
-import { get } from 'lodash-es'
+import { get } from 'es-toolkit/compat'
 import { createId } from 'seemly'
 import {
   computed,

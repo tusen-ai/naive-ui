@@ -11,7 +11,10 @@ import type {
 } from './public-types'
 import type { HeatmapColorTheme } from './theme'
 import { addDays, format, parseISO, startOfWeek } from 'date-fns'
-import { groupBy, mapValues, maxBy } from 'lodash-es'
+import { maxBy } from 'es-toolkit/array'
+import { groupBy } from 'es-toolkit/compat'
+import { mapValues } from 'es-toolkit/object'
+
 import { pxfy } from 'seemly'
 import { computed, defineComponent, h } from 'vue'
 import {

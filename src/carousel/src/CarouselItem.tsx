@@ -1,5 +1,5 @@
 import type { VNode } from 'vue'
-import { camelCase } from 'lodash-es'
+import { camelCase } from 'es-toolkit'
 import {
   computed,
   defineComponent,

@@ -16,7 +16,7 @@ import {
   startOfYear,
   subYears
 } from 'date-fns'
-import { groupBy } from 'lodash-es'
+import { groupBy } from 'es-toolkit/array'
 
 /** get color by value/maxValue */
 export function calcColorByValue(

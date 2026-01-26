@@ -1,4 +1,4 @@
-import { outDirs, replaceDefine, srcDir } from '../utils'
+import { outDirs, replaceDefine } from '../utils'
 import { completePath } from './complete-path'
 import { genWebTypes } from './gen-web-types'
 import { terseCssr } from './terse-cssr'
@@ -9,10 +9,6 @@ import { terseCssr } from './terse-cssr'
   await terseCssr()
   await replaceDefine(outDirs, {
     __DEV__: 'process.env.NODE_ENV !== \'production\''
-  })
-  await replaceDefine([srcDir], {
-    // the sequence is crucial
-    '\'lodash\'': '\'lodash-es\''
   })
 
   // complete require and import source path

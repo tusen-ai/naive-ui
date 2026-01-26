@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import process, { argv } from 'node:process'
-import { kebabCase } from 'lodash'
+import { kebabCase } from 'es-toolkit/string'
 import * as components from '../../src/components'
 import version from '../../src/version'
 

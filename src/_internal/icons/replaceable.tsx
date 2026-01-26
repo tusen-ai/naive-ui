@@ -1,6 +1,6 @@
 import type { VNode } from 'vue'
 import type { GlobalIconConfig } from '../../config-provider/src/internal-interface'
-import { upperFirst } from 'lodash-es'
+import { upperFirst } from 'es-toolkit/string'
 import { defineComponent, h, inject } from 'vue'
 import { configProviderInjectionKey } from '../../config-provider/src/context'
 

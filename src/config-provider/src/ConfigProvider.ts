@@ -14,7 +14,7 @@ import type {
 } from './internal-interface'
 import type { Katex } from './katex'
 import { hash } from 'css-render'
-import { merge } from 'lodash-es'
+import { merge } from 'es-toolkit/compat'
 import { useMemo } from 'vooks'
 import { computed, defineComponent, h, inject, markRaw, provide } from 'vue'
 import { defaultClsPrefix } from '../../_mixins'

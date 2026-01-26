@@ -6,7 +6,7 @@ import type {
   SummaryCell,
   TableBaseColumn
 } from '../interface'
-import { get } from 'lodash-es'
+import { get } from 'es-toolkit/compat'
 import { defineComponent, h } from 'vue'
 import NEllipsis from '../../../ellipsis/src/Ellipsis'
 import { NPerformantEllipsis } from '../../../ellipsis/src/PerformantEllipsis'

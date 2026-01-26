@@ -1,7 +1,7 @@
 import type { Token, Tokens } from 'marked'
 import path from 'node:path'
+import { camelCase } from 'es-toolkit/string'
 import fse from 'fs-extra'
-import camelCase from 'lodash/camelCase'
 import { marked } from 'marked'
 import { createRenderer } from './md-renderer'
 import projectPath from './project-path'
