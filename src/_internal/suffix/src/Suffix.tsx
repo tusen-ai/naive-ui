@@ -1,4 +1,4 @@
-import type { PropType } from 'vue'
+import type { HTMLAttributes, PropType } from 'vue'
 import { defineComponent, h } from 'vue'
 import { resolveSlot } from '../../../_utils/vue'
 import NBaseClear from '../../clear'
@@ -25,6 +25,7 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
+    loadingProps: Object as PropType<HTMLAttributes>,
     onClear: Function as PropType<(e: MouseEvent) => void>
   },
   setup(props, { slots }) {
@@ -37,6 +38,7 @@ export default defineComponent({
           strokeWidth={24}
           scale={0.85}
           show={props.loading}
+          htmlProps={props.loadingProps}
         >
           {{
             default: () =>

@@ -122,6 +122,7 @@ export default defineComponent({
             ref="inputRef"
             type="radio"
             class={`${mergedClsPrefix}-radio-input`}
+            {...this.inputProps}
             value={this.value}
             name={this.mergedName}
             checked={this.renderSafeChecked}

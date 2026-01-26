@@ -225,6 +225,7 @@ export default defineComponent({
       scrollXRef: computed(() => props.scrollX),
       rowsRef,
       colsRef,
+      captionRef: toRef(props, 'caption'),
       paginatedDataRef,
       leftActiveFixedColKeyRef,
       leftActiveFixedChildrenColKeysRef,
