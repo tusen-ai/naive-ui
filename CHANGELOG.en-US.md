@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix `n-cascader` position calculation error when reopening the dropdown menu, closes [#7321](https://github.com/tusen-ai/naive-ui/issues/7321) by [@pstrh](https://github.com/pstrh).
+
 ## 2.43.2
 
 ### Fixes

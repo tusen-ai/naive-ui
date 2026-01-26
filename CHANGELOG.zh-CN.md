@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- 修复 `n-cascader` 第二次打开下拉菜单时位置计算错误的问题，关闭 [#7321](https://github.com/tusen-ai/naive-ui/issues/7321) by [@pstrh](https://github.com/pstrh)
+
 ## 2.43.2
 
 ### Fixes
