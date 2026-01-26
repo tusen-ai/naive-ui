@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- data-table: Add HTMLAttributes type support for CommonColumnInfo.ellipsis (#7266)
+
 ## 2.43.2
 
 ### Fixes

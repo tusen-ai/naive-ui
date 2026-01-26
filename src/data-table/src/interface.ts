@@ -240,7 +240,7 @@ export interface CommonColumnInfo<T = InternalRowData> {
   className?: string
   align?: 'left' | 'center' | 'right'
   titleAlign?: 'left' | 'center' | 'right'
-  ellipsis?: Ellipsis
+  ellipsis?: Ellipsis | HTMLAttributes
   ellipsisComponent?: 'ellipsis' | 'performant-ellipsis'
   allowExport?: boolean
   cellProps?: (rowData: T, rowIndex: number) => HTMLAttributes
