@@ -81,6 +81,8 @@ export default cB('input', `
     color: var(--n-text-color);
     caret-color: var(--n-caret-color);
     background-color: transparent;
+    position: relative;
+    z-index: 1;
   `, [
     c('&::-webkit-scrollbar, &::-webkit-scrollbar-track-piece, &::-webkit-scrollbar-thumb', `
       width: 0;

@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix `n-input` placeholder text covering the cursor in light mode, closes [#7267](https://github.com/tusen-ai/naive-ui/issues/7267) by [@pstrh](https://github.com/pstrh).
+
 ## 2.43.2
 
 ### Fixes
