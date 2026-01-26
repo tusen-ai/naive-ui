@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-dynamic-input` 新增 `on-sort` 事件回调，关闭 [#7442](https://github.com/tusen-ai/naive-ui/issues/7442)
+
 ## 2.43.2
 
 ### Fixes
