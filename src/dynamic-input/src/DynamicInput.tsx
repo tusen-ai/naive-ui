@@ -6,6 +6,7 @@ import type { DynamicInputTheme } from '../styles'
 import type {
   DynamicInputActionSlotProps,
   DynamicInputDefaultSlotProps,
+  OnSort,
   OnUpdateValue
 } from './interface'
 import { createId } from 'seemly'
@@ -87,6 +88,7 @@ export const dynamicInputProps = {
   createButtonProps: Object as PropType<ButtonProps>,
   onCreate: Function as PropType<(index: number) => any>,
   onRemove: Function as PropType<(index: number) => void>,
+  onSort: [Function, Array] as PropType<MaybeArray<OnSort>>,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   // deprecated
@@ -274,13 +276,21 @@ export default defineComponent({
       if (!Array.isArray(mergedValue))
         return
       const newValue = Array.from(mergedValue)
+      const from = index
+      let to = index
       if (type === 'up') {
-        swap(newValue, index, index - 1)
+        to = index - 1
+        swap(newValue, index, to)
       }
       if (type === 'down') {
-        swap(newValue, index, index + 1)
+        to = index + 1
+        swap(newValue, index, to)
       }
       doUpdateValue(newValue)
+      const { onSort } = props
+      if (onSort && from !== to) {
+        call(onSort, from, to)
+      }
     }
     provide(dynamicInputInjectionKey, {
       mergedThemeRef: themeRef,

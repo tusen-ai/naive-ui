@@ -14,6 +14,7 @@ export const dynamicInputInjectionKey
   = createInjectionKey<DynamicInputInjection>('n-dynamic-input')
 
 export type OnUpdateValue = <T>(value: T[]) => void
+export type OnSort = (from: number, to: number) => void
 
 export interface DynamicInputDefaultSlotProps {
   value: any

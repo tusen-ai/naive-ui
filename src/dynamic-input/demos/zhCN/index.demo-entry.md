@@ -16,6 +16,7 @@ pair.vue
 custom.vue
 form.vue
 move.vue
+sort-event.vue
 custom-action.vue
 rtl-debug.vue
 create-debug.vue
@@ -40,6 +41,7 @@ create-debug.vue
 | value | `unknown[]` | `undefined` | 受控模式下的值 |  |
 | on-create | `(index: number) => void` | `undefined` | 点击添加按钮时的回调，如果设定则返回值会被用作新添加的初始值。其中 `index` 是创建内容将要被放置到的位置对应的数组索引，从 1（第二项）开始计算 |  |
 | on-remove | `(index: number) => void` | `undefined` | 点击第 index 项删除按钮的回调 |  |
+| on-sort | `(from: number, to: number) => void` | `undefined` | 排序的回调 | NEXT_VERSION |
 | on-update:value | `(value: any) => void` | `undefined` | 组件值发生变化的回调 |  |
 
 ### DynamicInput Props(Input Preset)

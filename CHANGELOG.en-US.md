@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-dynamic-input` adds `on-sort` event callback, closes [#7442](https://github.com/tusen-ai/naive-ui/issues/7442)
+
 ## 2.43.2
 
 ### Fixes
