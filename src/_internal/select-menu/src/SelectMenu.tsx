@@ -24,6 +24,7 @@ import {
   computed,
   defineComponent,
   h,
+  inject,
   nextTick,
   onBeforeUnmount,
   onMounted,
@@ -36,6 +37,7 @@ import { VirtualList } from 'vueuc'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../../_mixins'
 import { resolveSlot, resolveWrappedSlot, useOnResize } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
+import { configProviderInjectionKey } from '../../../config-provider/src/context'
 import { NEmpty } from '../../../empty'
 import NFocusDetector from '../../focus-detector'
 import NInternalLoading from '../../loading'
@@ -118,6 +120,7 @@ export default defineComponent({
   },
   setup(props) {
     const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
+    const NConfigProvider = inject(configProviderInjectionKey, null)
     const rtlEnabledRef = useRtl(
       'InternalSelectMenu',
       mergedRtlRef,
@@ -425,6 +428,7 @@ export default defineComponent({
     return {
       mergedTheme: themeRef,
       mergedClsPrefix: mergedClsPrefixRef,
+      mergedRenderEmpty: NConfigProvider?.mergedRenderEmptyRef.value,
       rtlEnabled: rtlEnabledRef,
       virtualListRef,
       scrollbarRef,
@@ -583,13 +587,17 @@ export default defineComponent({
           </NScrollbar>
         ) : (
           <div class={`${clsPrefix}-base-select-menu__empty`} data-empty>
-            {resolveSlot($slots.empty, () => [
-              <NEmpty
-                theme={mergedTheme.peers.Empty}
-                themeOverrides={mergedTheme.peerOverrides.Empty}
-                size={this.size}
-              />
-            ])}
+            {resolveSlot($slots.empty, () => {
+              return [
+                this.mergedRenderEmpty?.('Select') || (
+                  <NEmpty
+                    theme={mergedTheme.peers.Empty}
+                    themeOverrides={mergedTheme.peerOverrides.Empty}
+                    size={this.size}
+                  />
+                )
+              ]
+            })}
           </div>
         )}
         {resolveWrappedSlot(

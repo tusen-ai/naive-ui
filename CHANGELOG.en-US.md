@@ -1,6 +1,16 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-config-provider` adds `render-empty` prop to globally customize the rendering of empty state
+
 ## 2.43.2
+
+`2025-11-16`
 
 ### Fixes
 
@@ -8,7 +18,7 @@
 - Fix `n-progress` style is incorrect after using the dashboard mode exceeding 100%, closes [#6627](https://github.com/tusen-ai/naive-ui/issues/6627)
 - Fix `n-modal`'s outside content can't be interacted with `show-mask` is set to `false`.
 
-### Feats
+### Features
 
 - `n-date-picker` prop `defaultTime` can also accept a function that will return a formatted string
 - `n-steps` adds `content-placement` prop, closes [#7044](https://github.com/tusen-ai/naive-ui/issues/7044).

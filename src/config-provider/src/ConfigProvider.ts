@@ -1,4 +1,4 @@
-import type { ComputedRef, ExtractPropTypes, PropType } from 'vue'
+import type { ComputedRef, ExtractPropTypes, PropType, VNodeChild } from 'vue'
 import type { Hljs } from '../../_mixins'
 import type { NDateLocale, NLocale } from '../../locales'
 import type {
@@ -9,6 +9,7 @@ import type {
 } from './interface'
 import type {
   Breakpoints,
+  RenderEmptyComponentName,
   RtlEnabledState,
   RtlProp
 } from './internal-interface'
@@ -49,6 +50,9 @@ export const configProviderProps = {
     type: Boolean,
     default: undefined
   },
+  renderEmpty: Function as PropType<
+    (componentName: RenderEmptyComponentName) => VNodeChild
+  >,
   // deprecated
   as: {
     type: String as PropType<string | undefined>,
@@ -125,6 +129,12 @@ export default defineComponent({
         return componentOptions
       return NConfigProvider?.mergedComponentPropsRef.value
     })
+    const mergedRenderEmptyRef = computed(() => {
+      const { renderEmpty } = props
+      return renderEmpty === undefined
+        ? NConfigProvider?.mergedRenderEmptyRef.value
+        : renderEmpty
+    })
     const mergedClsPrefixRef = computed(() => {
       const { clsPrefix } = props
       if (clsPrefix !== undefined)
@@ -187,6 +197,7 @@ export default defineComponent({
       mergedRtlRef,
       mergedIconsRef,
       mergedComponentPropsRef,
+      mergedRenderEmptyRef,
       mergedBorderedRef,
       mergedNamespaceRef,
       mergedClsPrefixRef,

@@ -455,6 +455,7 @@ export default defineComponent({
       summary: summaryRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: mergedThemeRef,
+      mergedRenderEmpty: NConfigProvider?.mergedRenderEmptyRef.value,
       scrollX: scrollXRef,
       cols: colsRef,
       loading: loadingRef,
@@ -1156,12 +1157,16 @@ export default defineComponent({
           style={this.bodyStyle}
           ref="emptyElRef"
         >
-          {resolveSlot(this.dataTableSlots.empty, () => [
-            <NEmpty
-              theme={this.mergedTheme.peers.Empty}
-              themeOverrides={this.mergedTheme.peerOverrides.Empty}
-            />
-          ])}
+          {resolveSlot(this.dataTableSlots.empty, () => {
+            return [
+              this.mergedRenderEmpty?.('DataTable') || (
+                <NEmpty
+                  theme={this.mergedTheme.peers.Empty}
+                  themeOverrides={this.mergedTheme.peerOverrides.Empty}
+                />
+              )
+            ]
+          })}
         </div>
       )
       if (this.shouldDisplaySomeTablePart) {

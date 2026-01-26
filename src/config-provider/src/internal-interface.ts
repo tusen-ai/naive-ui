@@ -201,6 +201,14 @@ export interface GlobalThemeWithoutCommon {
   InputOtp?: InputOtpTheme
 }
 
+export type RenderEmptyComponentName
+  = | 'Cascader'
+    | 'DataTable'
+    | 'Select'
+    | 'Transfer'
+    | 'Tree'
+    | 'TreeSelect'
+
 export interface GlobalComponentConfig {
   Pagination?: {
     inputSize?: InputSize
@@ -220,6 +228,7 @@ export interface GlobalComponentConfig {
     buttonSize?: ButtonSize
   }
   Empty?: Pick<EmptyProps, 'description' | 'renderIcon'>
+  renderEmpty?: (componentName: RenderEmptyComponentName) => VNodeChild
 }
 
 export interface GlobalIconConfig {
@@ -267,6 +276,9 @@ export interface ConfigProviderInjection {
   mergedKatexRef: Ref<Katex | undefined>
   mergedComponentPropsRef: Ref<GlobalComponentConfig | undefined>
   mergedIconsRef: Ref<GlobalIconConfig | undefined>
+  mergedRenderEmptyRef: Ref<
+    ((componentName: RenderEmptyComponentName) => VNodeChild) | undefined
+  >
   mergedThemeRef: Ref<GlobalTheme | undefined>
   mergedThemeOverridesRef: Ref<GlobalThemeOverrides | undefined>
   mergedRtlRef: Ref<RtlEnabledState | undefined>
