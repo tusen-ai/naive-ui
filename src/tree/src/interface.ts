@@ -1,6 +1,7 @@
 import type { CheckStrategy, TreeNode } from 'treemate'
 import type { HTMLAttributes, Ref, VNodeChild } from 'vue'
 import type { VirtualListScrollTo } from 'vueuc'
+import type { BaseLoadingExposedProps } from '../../_internal'
 import type { MergedTheme } from '../../_mixins'
 import type { TreeTheme } from '../styles'
 import { createInjectionKey } from '../../_utils'
@@ -138,6 +139,7 @@ export interface TreeInjection {
   overrideDefaultNodeClickBehaviorRef: Ref<
     TreeOverrideNodeClickBehavior | undefined
   >
+  spinPropsRef: Ref<BaseLoadingExposedProps | undefined>
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void
   handleCheck: (node: TreeNode<TreeOption>, checked: boolean) => void

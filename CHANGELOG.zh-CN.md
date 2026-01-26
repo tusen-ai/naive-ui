@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-button` 增加 `spin-props` 属性
+- `n-cascader` 增加 `spin-props` 属性
+- `n-log` 增加 `spin-props` 属性
+- `n-message` 增加 `spin-props` 属性
+- `n-switch` 增加 `spin-props` 属性
+- `n-tree` 增加 `spin-props` 属性
+
 ## 2.43.2
 
 ### Fixes

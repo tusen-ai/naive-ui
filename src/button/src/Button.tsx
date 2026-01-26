@@ -7,7 +7,7 @@ import type {
   VNode,
   VNodeChild
 } from 'vue'
-import type { BaseWaveRef } from '../../_internal'
+import type { BaseLoadingExposedProps, BaseWaveRef } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { ButtonTheme } from '../styles'
@@ -87,7 +87,8 @@ export const buttonProps = {
   nativeFocusBehavior: {
     type: Boolean,
     default: !isSafari
-  }
+  },
+  spinProps: { type: Object as PropType<BaseLoadingExposedProps> }
 } as const
 
 export type ButtonProps = ExtractPublicPropTypes<typeof buttonProps>
@@ -631,6 +632,7 @@ const Button = defineComponent({
                                 key="loading"
                                 class={`${mergedClsPrefix}-icon-slot`}
                                 strokeWidth={20}
+                                {...this.spinProps}
                               />
                             ) : (
                               <div

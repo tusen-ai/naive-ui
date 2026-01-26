@@ -92,6 +92,7 @@ rtl-debug.vue
 | keepAliveOnHover | `boolean` | Hover 到信息上是否不销毁 |  |
 | render | `MessageRenderMessage` | 消息的渲染函数 | 2.24.0 |
 | showIcon | `boolean` | 是否展示图标 | 2.25.7 |
+| spin-props | `{ strokeWidth?: number, stroke?: string, scale?: number, radius?: number }` | 加载图标的属性 | NEXT_VERSION |
 | type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading' \| 'default'` | 信息类型 | `'default'` 2.25.7 |
 | onAfterLeave | `() => void` | 信息消失动画结束的回调 |  |
 | onClose | `() => void` | 点击关闭图标的回调 |  |
