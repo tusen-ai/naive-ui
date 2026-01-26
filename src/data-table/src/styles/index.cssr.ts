@@ -257,6 +257,11 @@ export default c([
         white-space: nowrap;
         max-width: 100%;
       `),
+      cB('ellipsis', [
+        cM('line-clamp', `
+          vertical-align: middle;
+        `)
+      ]),
       cM('hover', `
         background-color: var(--n-merged-th-color-hover);
       `),
@@ -409,6 +414,11 @@ export default c([
         vertical-align: bottom;
         max-width: calc(100% - var(--indent-offset, -1.5) * 16px - 24px);
       `),
+      cB('ellipsis', [
+        cM('line-clamp', `
+          vertical-align: middle;
+        `)
+      ]),
       cM('selection, expand', `
         text-align: center;
         padding: 0;
