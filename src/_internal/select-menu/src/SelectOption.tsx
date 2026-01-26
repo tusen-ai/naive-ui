@@ -5,6 +5,7 @@ import type { RenderLabelImpl, RenderOptionImpl } from './interface'
 import { useMemo } from 'vooks'
 import { defineComponent, h, inject, Transition } from 'vue'
 import { mergeEventHandlers, render } from '../../../_utils'
+import { NEllipsis } from '../../../ellipsis'
 import { NBaseIcon } from '../../icon'
 import { CheckmarkIcon } from '../../icons'
 import { internalSelectionMenuInjectionKey } from './interface'
@@ -39,6 +40,10 @@ export default defineComponent({
     tmNode: {
       type: Object as PropType<TreeNode<SelectOption>>,
       required: true
+    },
+    showEllipse: {
+      type: Boolean as PropType<boolean | undefined>,
+      default: false
     }
   },
   setup(props) {
@@ -88,6 +93,7 @@ export default defineComponent({
         const { parent } = tmNode
         return parent && parent.rawNode.type === 'group'
       }),
+      showEllipse: props.showEllipse,
       showCheckmark: showCheckmarkRef,
       nodeProps: nodePropsRef,
       isPending: isPendingRef,
@@ -165,7 +171,13 @@ export default defineComponent({
         ])}
         onMousemove={mergeEventHandlers([handleMouseMove, attrs?.onMousemove])}
       >
-        <div class={`${clsPrefix}-base-select-option__content`}>{children}</div>
+        <div class={`${clsPrefix}-base-select-option__content`}>
+          {this.showEllipse ? (
+            <NEllipsis tooltip={{ to: 'body' }}>{children}</NEllipsis>
+          ) : (
+            children
+          )}
+        </div>
       </div>
     )
     return rawNode.render
