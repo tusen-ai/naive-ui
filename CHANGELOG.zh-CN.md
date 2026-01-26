@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## `NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-data-table` 的 `downloadCsv` 方法支持 `columnKeys` 参数
+
 ## 2.43.2
 
 ### Fixes

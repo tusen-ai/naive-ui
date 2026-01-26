@@ -4,6 +4,8 @@
 你可以用 `downloadCsv` 方法导出表格数据为 CSV 文件。
 
 如果默认的 CSV 生成逻辑不能满足你的需求，例如 `title` 使用了渲染函数，或者需要调整每个单元格的数据格式，你可以用 `get-csv-header` 和 `get-csv-cell` 属性自定义导出的表头和单元格。
+
+你可以通过 `columnKeys` 选项指定要导出的列。
 </markdown>
 
 <script lang="ts" setup>
@@ -97,6 +99,13 @@ function exportSorterAndFilterCsv() {
   })
 }
 
+function exportSelectedColumnsCsv() {
+  return tableRef.value?.downloadCsv({
+    fileName: 'selected-columns',
+    columnKeys: ['name', 'age']
+  })
+}
+
 const getCsvCell: DataTableGetCsvCell = (value, _, column) => {
   if (column.key === 'age') {
     return `${value} years old`
@@ -124,6 +133,9 @@ const pagination = false as const
       </n-button>
       <n-button @click="exportSorterAndFilterCsv">
         导出 CSV（展示的数据）
+      </n-button>
+      <n-button @click="exportSelectedColumnsCsv">
+        导出 CSV（指定列）
       </n-button>
     </n-space>
     <n-data-table

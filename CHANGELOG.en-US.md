@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## `NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-data-table`'s `downloadCsv` method supports `columnKeys` parameter
+
 ## 2.43.2
 
 ### Fixes

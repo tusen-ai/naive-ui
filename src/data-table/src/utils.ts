@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'vue'
 import type {
+  ColumnKey,
   CreateRowClassName,
   InternalRowData,
   RowData,
@@ -209,18 +210,45 @@ function formatCsvCell(value: unknown): string {
   }
 }
 
+function extractExportableColumns(
+  columns: TableColumn[],
+  columnKeys: ColumnKey[]
+): TableColumn[] {
+  const result: TableColumn[] = []
+  function traverse(cols: TableColumn[]): void {
+    cols.forEach((column) => {
+      if ('children' in column) {
+        traverse(column.children)
+      }
+      else if (
+        column.type !== 'expand'
+        && column.type !== 'selection'
+        && column.allowExport !== false
+        && columnKeys.includes(column.key)
+      ) {
+        result.push(column)
+      }
+    })
+  }
+  traverse(columns)
+  return result
+}
+
 export function generateCsv(
   columns: TableColumn[],
   data: RowData[],
   getCsvCell: DataTableGetCsvCell | undefined,
-  getCsvHeader: DataTableGetCsvHeader | undefined
+  getCsvHeader: DataTableGetCsvHeader | undefined,
+  columnKeys?: ColumnKey[]
 ): string {
-  const exportableColumns = columns.filter(
-    column =>
-      column.type !== 'expand'
-      && column.type !== 'selection'
-      && column.allowExport !== false
-  )
+  const exportableColumns = columnKeys
+    ? extractExportableColumns(columns, columnKeys)
+    : (columns.filter(
+        column =>
+          column.type !== 'expand'
+          && column.type !== 'selection'
+          && column.allowExport !== false
+      ) as TableBaseColumn[])
   const header = exportableColumns
     .map((col: any) => {
       return getCsvHeader ? getCsvHeader(col) : col.title
