@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-select` adds `ellipsis` prop.
+
 ## 2.43.2
 
 ### Fixes

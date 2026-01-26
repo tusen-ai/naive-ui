@@ -1,5 +1,6 @@
 import type { TreeMate } from 'treemate'
 import type { CSSProperties, VNode, VNodeChild } from 'vue'
+import type { Ellipsis } from '../../data-table/src/interface'
 
 export type SelectMixedOption
   = | SelectBaseOption
@@ -15,6 +16,7 @@ export interface SelectBaseOption<
   class?: string
   style?: string | CSSProperties
   disabled?: boolean
+  ellipsis?: Ellipsis
   render?: (info: {
     node: VNode
     option: SelectBaseOption<V>

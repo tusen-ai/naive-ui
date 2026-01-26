@@ -43,6 +43,7 @@ custom-field.vue
 | clear-filter-after-select | `boolean` | `true` | When multiple and filter is true, whether to clear filter keyword after select an option. | 2.25.2 |
 | default-value | `Array<string \| number> \| string \| number \| null` | `null` | Default value. |  |
 | disabled | `boolean` | `false` | Whether to disable the select. |  |
+| ellipsis | `boolean \| EllipsisProps` | `undefined` | Text overflow settings. | NEXT_VERSION |
 | ellipsis-tag-popover-props | `PopoverProps` | `undefined` | `popover` props of the preview ellipsis tag. | 2.37.0 |
 | fallback-option | `false \| (value: string \| number) => SelectOption` | `value => ({ label: '' + value, value })` | The option to be created using the value which has no corresponding option value. If set to `false`, the fallback option won't be created and displayed. |  |
 | filterable | `boolean` | `false` | Whether options can be filtered. |  |
@@ -87,14 +88,15 @@ custom-field.vue
 
 #### SelectOption Properties
 
-| Name | Type | Description |
-| --- | --- | --- |
-| class | `string` | Customize the option's class. |
-| disabled | `boolean` | Whether to disable the option. |
-| label | `string \| ((option: SelectOption, selected: boolean) => VNodeChild)` | Label of the option. Note that if you are using the `render` function, the default filter will filter the option. |
-| render | `(info: { node: VNode, option: SelectOption, selected: boolean }) => VNodeChild` | Render the entire option. |
-| style | `string \| CSSProperties` | Customize the option's style. |
-| value | `string \| number` | Should be unique for each option. |
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| class | `string` | Customize the option's class. |  |
+| disabled | `boolean` | Whether to disable the option. |  |
+| ellipsis | `boolean \| EllipsisProps` | Text overflow settings. | NEXT_VERSION |
+| label | `string \| ((option: SelectOption, selected: boolean) => VNodeChild)` | Label of the option. Note that if you are using the `render` function, the default filter will filter the option. |  |
+| render | `(info: { node: VNode, option: SelectOption, selected: boolean }) => VNodeChild` | Render the entire option. |  |
+| style | `string \| CSSProperties` | Customize the option's style. |  |
+| value | `string \| number` | Should be unique for each option. |  |
 
 #### SelectGroupOption Properties
 

@@ -19,6 +19,7 @@ import type {
 import type { RenderTag } from '../../_internal/selection/src/interface'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { Ellipsis } from '../../data-table/src/interface'
 import type { FormValidationStatus } from '../../form/src/public-types'
 import type { PopoverProps } from '../../popover'
 import type { SelectTheme } from '../styles'
@@ -167,6 +168,7 @@ export const selectProps = {
   renderLabel: Function as PropType<RenderLabel>,
   renderOption: Function as PropType<RenderOption>,
   renderTag: Function as PropType<RenderTag>,
+  ellipsis: [Boolean, Object] as PropType<Ellipsis>,
   'onUpdate:value': [Function, Array] as PropType<
     MaybeArray<OnUpdateValue> | undefined
   >,
@@ -1055,6 +1057,7 @@ export default defineComponent({
                               size={this.menuSize}
                               renderOption={this.renderOption}
                               renderLabel={this.renderLabel}
+                              ellipsis={this.ellipsis}
                               value={this.mergedValue}
                               style={[this.menuProps?.style, this.cssVars]}
                               onToggle={this.handleToggle}

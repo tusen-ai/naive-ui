@@ -1,5 +1,6 @@
 import type { TreeNode } from 'treemate'
 import type { HTMLAttributes, Ref, UnwrapRef, VNode, VNodeChild } from 'vue'
+import type { Ellipsis } from '../../../data-table/src/interface'
 import type {
   SelectBaseOption,
   SelectGroupOption,
@@ -51,6 +52,7 @@ export interface InternalSelectMenuInjection {
   labelFieldRef: Ref<string>
   valueFieldRef: Ref<string>
   nodePropsRef: Ref<NodeProps | undefined>
+  ellipsisRef: Ref<Ellipsis | undefined>
 }
 
 export interface InternalExposedProps {
