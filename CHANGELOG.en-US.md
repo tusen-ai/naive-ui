@@ -4,7 +4,7 @@
 
 `NEXT_VERSION`
 
-### Feats
+### Features
 
 - `n-dynamic-input` adds `on-sort` event callback, closes [#7442](https://github.com/tusen-ai/naive-ui/issues/7442)
 
