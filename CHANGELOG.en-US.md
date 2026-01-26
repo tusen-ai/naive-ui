@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix `n-image`'s preview control switching images using keyboard left and right keys, the rotation state of the previous image is not reset, causing the next image to inherit the rotation angle of the previous image, closes [#7370](https://github.com/tusen-ai/naive-ui/issues/7370)
+
 ## 2.43.2
 
 ### Fixes
