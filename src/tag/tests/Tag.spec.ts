@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils'
 import { h } from 'vue'
 import { NAvatar } from '../../avatar'
 import { NTag } from '../index'
+import tagStyle from '../src/styles/index.cssr'
 
 describe('n-tag', () => {
   it('should work with import on demand', () => {
@@ -42,6 +43,12 @@ describe('n-tag', () => {
 
     await wrapper.setProps({ checked: false })
     expect(wrapper.find('.n-tag').classes()).not.toContain('n-tag--checked')
+  })
+
+  it('icon should inherit tag text color', () => {
+    const css = tagStyle.render()
+    expect(css).toContain('.n-tag .n-tag__icon')
+    expect(css).toContain('color: inherit;')
   })
 
   it('should work with `on-update:checked` prop', () => {

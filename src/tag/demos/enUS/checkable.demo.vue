@@ -5,6 +5,7 @@ It can be checkable.
 </markdown>
 
 <script lang="ts" setup>
+import { CheckmarkCircle } from '@vicons/ionicons5'
 import { ref } from 'vue'
 
 const checked = ref(false)
@@ -26,6 +27,9 @@ const checked = ref(false)
     </n-tag>
     <n-tag v-model:checked="checked" checkable>
       I'm Looking Through You
+      <template #icon>
+        <n-icon :component="CheckmarkCircle" />
+      </template>
     </n-tag>
   </n-space>
 </template>
