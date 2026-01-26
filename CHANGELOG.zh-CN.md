@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Features
+
+- `n-select` 新增 `ellipsis` 属性
+
 ## 2.43.2
 
 ### Fixes

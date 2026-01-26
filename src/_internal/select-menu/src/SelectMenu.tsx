@@ -2,6 +2,7 @@ import type { TreeNode } from 'treemate'
 import type { CSSProperties, PropType, WatchStopHandle } from 'vue'
 import type { VirtualListInst } from 'vueuc'
 import type { ThemeProps } from '../../../_mixins'
+import type { Ellipsis } from '../../../data-table/src/interface'
 import type {
   SelectGroupOption,
   SelectIgnoredOption,
@@ -98,6 +99,7 @@ export default defineComponent({
     renderOption: Function as PropType<RenderOption>,
     nodeProps: Function as PropType<NodeProps>,
     showCheckmark: { type: Boolean, default: true },
+    ellipsis: [Boolean, Object] as PropType<Ellipsis>,
     onMousedown: Function as PropType<(e: MouseEvent) => void>,
     onScroll: Function as PropType<(e: Event) => void>,
     onFocus: Function as PropType<(e: FocusEvent) => void>,
@@ -345,7 +347,8 @@ export default defineComponent({
       renderLabelRef: toRef(props, 'renderLabel'),
       renderOptionRef: toRef(props, 'renderOption'),
       labelFieldRef: toRef(props, 'labelField'),
-      valueFieldRef: toRef(props, 'valueField')
+      valueFieldRef: toRef(props, 'valueField'),
+      ellipsisRef: toRef(props, 'ellipsis')
     })
     provide(internalSelectionMenuBodyInjectionKey, selfRef)
     onMounted(() => {

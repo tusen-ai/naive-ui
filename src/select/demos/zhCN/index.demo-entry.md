@@ -54,6 +54,7 @@ create-debug.vue
 | clear-filter-after-select | `boolean` | `true` | 是否在可过滤和多选的情况下选中一个选项后保留当前的搜索关键词 | 2.25.2 |
 | default-value | `Array<string \| number> \| string \| number \| null` | `null` | 非受控模式下的默认值 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
+| ellipsis | `boolean \| EllipsisProps` | `undefined` | 文本溢出的设置 | NEXT_VERSION |
 | ellipsis-tag-popover-props | `PopoverProps` | `undefined` | 选中选项过多省略显示时，预览弹出 `popover` 的属性 | 2.37.0 |
 | fallback-option | `false \| (value: string \| number) => SelectOption` | `value => ({ label: '' + value, value })` | 在传入的选项中没有对应当前值的选项时，这个值应该对应的选项。如果设为 `false`，不会为找不到对应选项的值生成回退选项也不会显示它，未在选项中的值会被视为不合法，操作过程中会被组件清除掉 |  |
 | filterable | `boolean` | `false` | 是否可以过滤 |  |
@@ -98,14 +99,15 @@ create-debug.vue
 
 #### SelectOption Properties
 
-| 名称 | 类型 | 说明 |
-| --- | --- | --- |
-| class | `string` | 自定义一个选项的类名 |
-| disabled | `boolean` | 是否禁用一个选项 |
-| label | `string \| ((option: SelectOption, selected: boolean) => VNodeChild)` | 选项的标签，注意如果你使用了渲染函数，默认的过滤器将会过滤该选项 |
-| render | `(info: { node: VNode, option: SelectOption, selected: boolean }) => VNodeChild` | 渲染整个选项 |
-| style | `string \| CSSProperties` | 自定义一个选项的样式 |
-| value | `string \| number` | 在选项中应该是唯一的 |
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| class | `string` | 自定义一个选项的类名 |  |
+| disabled | `boolean` | 是否禁用一个选项 |  |
+| ellipsis | `boolean \| EllipsisProps` | 文本溢出的设置 | NEXT_VERSION |
+| label | `string \| ((option: SelectOption, selected: boolean) => VNodeChild)` | 选项的标签，注意如果你使用了渲染函数，默认的过滤器将会过滤该选项 |  |
+| render | `(info: { node: VNode, option: SelectOption, selected: boolean }) => VNodeChild` | 渲染整个选项 |  |
+| style | `string \| CSSProperties` | 自定义一个选项的样式 |  |
+| value | `string \| number` | 在选项中应该是唯一的 |  |
 
 #### SelectGroupOption Properties
 

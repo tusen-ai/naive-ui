@@ -1,10 +1,12 @@
 import type { TreeNode } from 'treemate'
-import type { PropType, Ref, VNode } from 'vue'
+import type { PropType, Ref, VNode, VNodeChild } from 'vue'
+import type { Ellipsis } from '../../../data-table/src/interface'
 import type { SelectOption } from '../../../select/src/interface'
 import type { RenderLabelImpl, RenderOptionImpl } from './interface'
 import { useMemo } from 'vooks'
-import { defineComponent, h, inject, Transition } from 'vue'
+import { computed, defineComponent, h, inject, Transition } from 'vue'
 import { mergeEventHandlers, render } from '../../../_utils'
+import { NEllipsis } from '../../../ellipsis'
 import { NBaseIcon } from '../../icon'
 import { CheckmarkIcon } from '../../icons'
 import { internalSelectionMenuInjectionKey } from './interface'
@@ -53,6 +55,7 @@ export default defineComponent({
       valueFieldRef,
       showCheckmarkRef,
       nodePropsRef,
+      ellipsisRef,
       handleOptionClick,
       handleOptionMouseEnter
     } = inject(internalSelectionMenuInjectionKey)!
@@ -81,6 +84,13 @@ export default defineComponent({
         return
       handleOptionMouseEnter(e, tmNode)
     }
+    const mergedEllipsisRef = computed<Ellipsis | undefined>(() => {
+      const { rawNode } = props.tmNode
+      if (rawNode.ellipsis !== undefined) {
+        return rawNode.ellipsis
+      }
+      return ellipsisRef.value
+    })
     return {
       multiple: multipleRef,
       isGrouped: useMemo(() => {
@@ -107,6 +117,7 @@ export default defineComponent({
           return value === optionValue
         }
       }),
+      mergedEllipsis: mergedEllipsisRef,
       labelField: labelFieldRef,
       renderLabel: renderLabelRef as Ref<RenderLabelImpl | undefined>,
       renderOption: renderOptionRef as Ref<RenderOptionImpl | undefined>,
@@ -126,21 +137,35 @@ export default defineComponent({
       nodeProps,
       renderOption,
       renderLabel,
+      mergedEllipsis,
       handleClick,
       handleMouseEnter,
       handleMouseMove
     } = this
     const checkmark = renderCheckMark(isSelected, clsPrefix)
-    const children = renderLabel
-      ? [renderLabel(rawNode, isSelected), showCheckmark && checkmark]
-      : [
-          render(
+
+    const renderContent = (): VNodeChild => {
+      return renderLabel
+        ? renderLabel(rawNode, isSelected)
+        : render(
             rawNode[this.labelField] as SelectOption['label'],
             rawNode,
             isSelected
-          ),
-          showCheckmark && checkmark
-        ]
+          )
+    }
+
+    let contentNode: VNodeChild
+    if (mergedEllipsis && typeof mergedEllipsis === 'object') {
+      contentNode = (
+        <NEllipsis {...mergedEllipsis}>{{ default: renderContent }}</NEllipsis>
+      )
+    }
+    else {
+      contentNode = renderContent()
+    }
+
+    const children = [contentNode, showCheckmark && checkmark]
+
     const attrs = nodeProps?.(rawNode)
     const node = (
       <div
