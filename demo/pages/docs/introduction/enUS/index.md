@@ -28,7 +28,7 @@ What's more, you don't need to import any CSS to use the components.
 
 ## Fast
 
-I try to make it not rather slow. At least select, tree, transfer, table and cascader work with virtual list.
+I try to make it faster. At least select, tree, transfer, table and cascader work with virtual list.
 
 What's more, ..., no more. Just enjoy it.
 
