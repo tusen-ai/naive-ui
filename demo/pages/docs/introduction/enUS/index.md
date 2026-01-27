@@ -38,7 +38,10 @@ What's more, ..., no more. Just enjoy it.
 - DingTalk Group 1 (Member limit reached) 33482509
 - DingTalk Group 2 (Member limit reached) 35886835
 - DingTalk Group 3 (Member limit reached) 32377370
-- DingTalk Group 4 8165002788
+- DingTalk Group 4 (Member limit reached) 8165002788
+- DingTalk Group 5 (Member limit reached) 31205022250
+- DingTalk Group 6 62720001971
+- DingTalk Group 7 172000005810
 
 ## Contributing
 

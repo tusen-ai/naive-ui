@@ -31,6 +31,7 @@
 - 钉钉四群 8165002788 (已满)
 - 钉钉五群 31205022250 (已满)
 - 钉钉六群 62720001971
+- 钉钉七群 172000005810
 
 - [Awesome Naive UI](https://github.com/naive-ui/awesome-naive)
 

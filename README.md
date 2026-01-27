@@ -31,6 +31,7 @@
 - DingTalk Group 4 (Member limit reached) 8165002788
 - DingTalk Group 5 (Member limit reached) 31205022250
 - DingTalk Group 6 62720001971
+- DingTalk Group 7 172000005810
 
 - [Awesome Naive UI](https://github.com/naive-ui/awesome-naive)
 
