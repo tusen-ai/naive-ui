@@ -1,11 +1,12 @@
-import type { Token, Tokens } from 'marked'
 import type { PropType, VNodeChild } from 'vue'
 import type { Hljs } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import { marked } from 'marked'
-import { computed, defineComponent, h } from 'vue'
+import type { MarkdownProcessor } from '../../config-provider/src/markdown'
+import { computed, defineComponent, h, inject, watchEffect } from 'vue'
 import { useConfig, useHljs } from '../../_mixins'
+import { warnOnce } from '../../_utils'
 import { NCode } from '../../code'
+import { configProviderInjectionKey } from '../../config-provider/src/context'
 import {
   NA,
   NBlockquote,
@@ -33,10 +34,172 @@ export const markdownProps = {
     default: true
   },
   sanitizeHtml: Function as PropType<(html: string) => string>,
-  hljs: Object as PropType<Hljs>
+  hljs: Object as PropType<Hljs>,
+  markdown: [Object, Function] as PropType<MarkdownProcessor>
 } as const
 
 export type MarkdownProps = ExtractPublicPropTypes<typeof markdownProps>
+
+interface MarkdownNodeBase {
+  type: string
+}
+
+interface MarkdownParent extends MarkdownNodeBase {
+  children: MarkdownNode[]
+}
+
+interface MarkdownRoot extends MarkdownParent {
+  type: 'root'
+}
+
+interface MarkdownHeading extends MarkdownParent {
+  type: 'heading'
+  depth: number
+}
+
+interface MarkdownParagraph extends MarkdownParent {
+  type: 'paragraph'
+}
+
+interface MarkdownText extends MarkdownNodeBase {
+  type: 'text'
+  value?: string
+}
+
+interface MarkdownEmphasis extends MarkdownParent {
+  type: 'emphasis'
+}
+
+interface MarkdownStrong extends MarkdownParent {
+  type: 'strong'
+}
+
+interface MarkdownDelete extends MarkdownParent {
+  type: 'delete'
+}
+
+interface MarkdownInlineCode extends MarkdownNodeBase {
+  type: 'inlineCode'
+  value?: string
+}
+
+interface MarkdownBreak extends MarkdownNodeBase {
+  type: 'break'
+}
+
+interface MarkdownLink extends MarkdownParent {
+  type: 'link'
+  url?: string
+  title?: string
+}
+
+interface MarkdownReferenceBase extends MarkdownNodeBase {
+  identifier?: string
+  label?: string
+  referenceType?: 'full' | 'collapsed' | 'shortcut'
+}
+
+interface MarkdownLinkReference extends MarkdownParent, MarkdownReferenceBase {
+  type: 'linkReference'
+}
+
+interface MarkdownImage extends MarkdownNodeBase {
+  type: 'image'
+  url?: string
+  alt?: string
+  title?: string
+}
+
+interface MarkdownImageReference
+  extends MarkdownNodeBase, MarkdownReferenceBase {
+  type: 'imageReference'
+  alt?: string
+}
+
+interface MarkdownHtml extends MarkdownNodeBase {
+  type: 'html'
+  value?: string
+}
+
+interface MarkdownCode extends MarkdownNodeBase {
+  type: 'code'
+  value?: string
+  lang?: string | null
+}
+
+interface MarkdownList extends MarkdownParent {
+  type: 'list'
+  ordered?: boolean
+  start?: number | null
+  spread?: boolean
+}
+
+interface MarkdownListItem extends MarkdownParent {
+  type: 'listItem'
+  checked?: boolean | null
+  spread?: boolean
+}
+
+interface MarkdownBlockquote extends MarkdownParent {
+  type: 'blockquote'
+}
+
+interface MarkdownThematicBreak extends MarkdownNodeBase {
+  type: 'thematicBreak'
+}
+
+interface MarkdownDefinition extends MarkdownNodeBase {
+  type: 'definition'
+  identifier?: string
+  url?: string
+  title?: string
+}
+
+interface MarkdownUnknown extends MarkdownNodeBase {
+  value?: string
+  children?: MarkdownNode[]
+}
+
+type MarkdownNode
+  = | MarkdownRoot
+    | MarkdownHeading
+    | MarkdownParagraph
+    | MarkdownText
+    | MarkdownEmphasis
+    | MarkdownStrong
+    | MarkdownDelete
+    | MarkdownInlineCode
+    | MarkdownBreak
+    | MarkdownLink
+    | MarkdownLinkReference
+    | MarkdownImage
+    | MarkdownImageReference
+    | MarkdownHtml
+    | MarkdownCode
+    | MarkdownList
+    | MarkdownListItem
+    | MarkdownBlockquote
+    | MarkdownThematicBreak
+    | MarkdownDefinition
+    | MarkdownUnknown
+
+interface DefinitionInfo {
+  url: string
+  title?: string
+}
+
+type DefinitionMap = Record<string, DefinitionInfo>
+
+function isMarkdownRoot(value: unknown): value is MarkdownRoot {
+  if (!value || typeof value !== 'object')
+    return false
+  const maybeRoot = value as MarkdownRoot
+  return maybeRoot.type === 'root' && Array.isArray(maybeRoot.children)
+}
+
+function isMarkdownParent(node: MarkdownNode): node is MarkdownParent {
+  return Array.isArray((node as MarkdownParent).children)
+}
 
 function slugifyHeadingId(text: string): string {
   return text
@@ -75,22 +238,109 @@ function getInlineChildrenFromText(text: string): VNodeChild[] {
   return text ? [text] : []
 }
 
+function escapeHtml(text: string): string {
+  return text.replace(/[&<>"']/g, (match) => {
+    switch (match) {
+      case '&':
+        return '&amp;'
+      case '<':
+        return '&lt;'
+      case '>':
+        return '&gt;'
+      case '"':
+        return '&quot;'
+      default:
+        return '&#39;'
+    }
+  })
+}
+
+function normalizeDefinitionId(id: string | undefined): string {
+  return (id || '').trim().toLowerCase()
+}
+
+function collectDefinitions(root: MarkdownRoot | null): DefinitionMap {
+  const definitions: DefinitionMap = {}
+  if (!root)
+    return definitions
+  const stack: MarkdownNode[] = [root]
+  while (stack.length) {
+    const node = stack.pop() as MarkdownNode
+    if (node.type === 'definition') {
+      const definition = node as MarkdownDefinition
+      const identifier = normalizeDefinitionId(definition.identifier)
+      if (identifier && definition.url) {
+        definitions[identifier] = {
+          url: definition.url,
+          title: definition.title
+        }
+      }
+    }
+    if (isMarkdownParent(node)) {
+      stack.push(...node.children)
+    }
+  }
+  return definitions
+}
+
+function resolveDefinition(
+  definitions: DefinitionMap,
+  identifier: string | undefined
+): DefinitionInfo | undefined {
+  const normalized = normalizeDefinitionId(identifier)
+  return normalized ? definitions[normalized] : undefined
+}
+
+function extractTextFromNode(node: MarkdownNode | undefined): string {
+  if (!node)
+    return ''
+  switch (node.type) {
+    case 'text':
+      return (node as MarkdownText).value || ''
+    case 'inlineCode':
+      return (node as MarkdownInlineCode).value || ''
+    case 'image':
+      return (node as MarkdownImage).alt || ''
+    case 'imageReference':
+      return (node as MarkdownImageReference).alt || ''
+    case 'break':
+      return ' '
+    case 'html':
+      return (node as MarkdownHtml).value || ''
+    default:
+      if (isMarkdownParent(node))
+        return extractTextFromNodes(node.children)
+      return (node as MarkdownUnknown).value || ''
+  }
+}
+
+function extractTextFromNodes(nodes: MarkdownNode[] | undefined): string {
+  if (!nodes?.length)
+    return ''
+  return nodes.map(node => extractTextFromNode(node)).join('')
+}
+
 interface RenderContext {
   hljs: Hljs | undefined
   sanitize: boolean
   sanitizeHtml: ((html: string) => string) | undefined
+  definitions: DefinitionMap
 }
 
-function renderInlineTokens(
-  tokens: Token[] | undefined,
+function renderInlineNodes(
+  nodes: MarkdownNode[] | undefined,
   ctx: RenderContext
 ): VNodeChild[] {
-  if (!tokens?.length)
+  if (!nodes?.length)
     return []
 
   const result: VNodeChild[] = []
-
   let rawHtmlBuffer: string | null = null
+  const canUseRawHtml = !ctx.sanitize || !!ctx.sanitizeHtml
+  const appendRawHtml = (value: string): void => {
+    rawHtmlBuffer ??= ''
+    rawHtmlBuffer += value
+  }
   const flushRawHtmlBuffer = (): void => {
     if (rawHtmlBuffer === null)
       return
@@ -106,78 +356,59 @@ function renderInlineTokens(
     rawHtmlBuffer = null
   }
 
-  for (const token of tokens) {
-    switch ((token as any).type) {
+  for (const node of nodes) {
+    switch (node.type) {
       case 'text': {
+        const textNode = node as MarkdownText
         if (rawHtmlBuffer !== null) {
-          const raw = (token as any).raw ?? (token as any).text ?? ''
-          const hasNestedTokens = !!(token as any).tokens?.length
-          if (hasNestedTokens) {
-            flushRawHtmlBuffer()
-          }
-          else {
-            rawHtmlBuffer += raw
-            break
-          }
+          appendRawHtml(escapeHtml(textNode.value || ''))
         }
-        const textToken = token as Tokens.Text
-        if ((textToken as any).tokens?.length) {
-          result.push(...renderInlineTokens((textToken as any).tokens, ctx))
-          break
+        else {
+          result.push(...getInlineChildrenFromText(textNode.value || ''))
         }
-        result.push(...getInlineChildrenFromText(textToken.text))
         break
       }
       case 'strong': {
         flushRawHtmlBuffer()
-        const strongToken = token as Tokens.Strong
-        const strongChildren = (strongToken as any).tokens?.length
-          ? renderInlineTokens((strongToken as any).tokens, ctx)
-          : getInlineChildrenFromText((strongToken as any).text || '')
+        const strongNode = node as MarkdownStrong
+        const strongChildren = renderInlineNodes(strongNode.children, ctx)
         result.push(
           h(NText, { strong: true }, { default: () => strongChildren })
         )
         break
       }
-      case 'em': {
+      case 'emphasis': {
         flushRawHtmlBuffer()
-        const emToken = token as Tokens.Em
-        const emChildren = (emToken as any).tokens?.length
-          ? renderInlineTokens((emToken as any).tokens, ctx)
-          : getInlineChildrenFromText((emToken as any).text || '')
+        const emNode = node as MarkdownEmphasis
+        const emChildren = renderInlineNodes(emNode.children, ctx)
         result.push(h(NText, { italic: true }, { default: () => emChildren }))
         break
       }
-      case 'del': {
+      case 'delete': {
         flushRawHtmlBuffer()
-        const delToken = token as Tokens.Del
-        const delChildren = (delToken as any).tokens?.length
-          ? renderInlineTokens((delToken as any).tokens, ctx)
-          : getInlineChildrenFromText((delToken as any).text || '')
+        const delNode = node as MarkdownDelete
+        const delChildren = renderInlineNodes(delNode.children, ctx)
         result.push(h(NText, { delete: true }, { default: () => delChildren }))
         break
       }
-      case 'codespan': {
+      case 'inlineCode': {
         flushRawHtmlBuffer()
-        const codespanToken = token as Tokens.Codespan
+        const codespanNode = node as MarkdownInlineCode
         result.push(
-          h(NText, { code: true }, { default: () => codespanToken.text })
+          h(NText, { code: true }, { default: () => codespanNode.value || '' })
         )
         break
       }
-      case 'br':
+      case 'break':
         flushRawHtmlBuffer()
         result.push(h('br'))
         break
       case 'link': {
         flushRawHtmlBuffer()
-        const linkToken = token as Tokens.Link
-        const href = ctx.sanitize
-          ? sanitizeLinkHref(linkToken.href)
-          : linkToken.href
-        const linkChildren = (linkToken as any).tokens?.length
-          ? renderInlineTokens((linkToken as any).tokens, ctx)
-          : getInlineChildrenFromText(linkToken.text)
+        const linkNode = node as MarkdownLink
+        const rawHref = linkNode.url || ''
+        const href = ctx.sanitize ? sanitizeLinkHref(rawHref) : rawHref
+        const linkChildren = renderInlineNodes(linkNode.children, ctx)
         if (!href) {
           result.push(...linkChildren)
           break
@@ -190,7 +421,36 @@ function renderInlineTokens(
               href,
               target: isExternal ? '_blank' : undefined,
               rel: isExternal ? 'noopener noreferrer' : undefined,
-              title: linkToken.title || undefined
+              title: linkNode.title || undefined
+            },
+            { default: () => linkChildren }
+          )
+        )
+        break
+      }
+      case 'linkReference': {
+        flushRawHtmlBuffer()
+        const linkNode = node as MarkdownLinkReference
+        const definition = resolveDefinition(
+          ctx.definitions,
+          linkNode.identifier || linkNode.label
+        )
+        const rawHref = definition?.url || ''
+        const href = ctx.sanitize ? sanitizeLinkHref(rawHref) : rawHref
+        const linkChildren = renderInlineNodes(linkNode.children, ctx)
+        if (!href) {
+          result.push(...linkChildren)
+          break
+        }
+        const isExternal = /^(https?:)?\/\//.test(href)
+        result.push(
+          h(
+            NA,
+            {
+              href,
+              target: isExternal ? '_blank' : undefined,
+              rel: isExternal ? 'noopener noreferrer' : undefined,
+              title: definition?.title || undefined
             },
             { default: () => linkChildren }
           )
@@ -199,39 +459,68 @@ function renderInlineTokens(
       }
       case 'image': {
         flushRawHtmlBuffer()
-        const imageToken = token as Tokens.Image
-        const src = ctx.sanitize
-          ? sanitizeImageSrc(imageToken.href)
-          : imageToken.href
+        const imageNode = node as MarkdownImage
+        const rawSrc = imageNode.url || ''
+        const src = ctx.sanitize ? sanitizeImageSrc(rawSrc) : rawSrc
         if (!src) {
-          result.push(imageToken.text || '')
+          result.push(imageNode.alt || '')
         }
         else {
           result.push(
             h('img', {
               src,
-              alt: imageToken.text || undefined,
-              title: imageToken.title || undefined
+              alt: imageNode.alt || undefined,
+              title: imageNode.title || undefined
+            })
+          )
+        }
+        break
+      }
+      case 'imageReference': {
+        flushRawHtmlBuffer()
+        const imageNode = node as MarkdownImageReference
+        const definition = resolveDefinition(
+          ctx.definitions,
+          imageNode.identifier || imageNode.label
+        )
+        const rawSrc = definition?.url || ''
+        const src = ctx.sanitize ? sanitizeImageSrc(rawSrc) : rawSrc
+        if (!src) {
+          result.push(imageNode.alt || '')
+        }
+        else {
+          result.push(
+            h('img', {
+              src,
+              alt: imageNode.alt || undefined,
+              title: definition?.title || undefined
             })
           )
         }
         break
       }
       case 'html': {
-        const htmlToken = token as Tokens.HTML
-        const html = htmlToken.raw || htmlToken.text || ''
-        if (ctx.sanitize && !ctx.sanitizeHtml) {
+        const htmlNode = node as MarkdownHtml
+        const html = htmlNode.value || ''
+        if (!html)
+          break
+        if (!canUseRawHtml) {
+          flushRawHtmlBuffer()
           result.push(html)
+          break
         }
-        else {
-          rawHtmlBuffer ??= ''
-          rawHtmlBuffer += html
-        }
+        appendRawHtml(html)
         break
       }
       default: {
         flushRawHtmlBuffer()
-        result.push((token as any).raw || (token as any).text || '')
+        if (isMarkdownParent(node)) {
+          result.push(...renderInlineNodes(node.children, ctx))
+        }
+        else {
+          const value = (node as MarkdownUnknown).value || ''
+          result.push(...getInlineChildrenFromText(value))
+        }
         break
       }
     }
@@ -258,72 +547,52 @@ function highlightCode(
   }
 }
 
-function hasHighlightableCode(tokens: Token[] | undefined): boolean {
-  if (!tokens?.length)
+function hasHighlightableCode(tree: MarkdownRoot | null): boolean {
+  if (!tree)
     return false
-  for (const token of tokens) {
-    switch ((token as any).type) {
-      case 'code': {
-        const codeToken = token as Tokens.Code
-        if (codeToken.lang)
-          return true
-        break
-      }
-      case 'blockquote': {
-        if (hasHighlightableCode((token as any).tokens))
-          return true
-        break
-      }
-      case 'list': {
-        const listToken = token as Tokens.List
-        for (const item of listToken.items) {
-          if (hasHighlightableCode((item as any).tokens))
-            return true
-        }
-        break
-      }
+  const stack: MarkdownNode[] = [tree]
+  while (stack.length) {
+    const node = stack.pop() as MarkdownNode
+    if (node.type === 'code') {
+      const codeNode = node as MarkdownCode
+      if (codeNode.lang)
+        return true
+    }
+    if (isMarkdownParent(node)) {
+      stack.push(...node.children)
     }
   }
   return false
 }
 
 function renderListItem(
-  item: Tokens.ListItem,
+  item: MarkdownListItem,
   ctx: RenderContext
 ): VNodeChild[] {
-  const tokens = (item as any).tokens as Token[] | undefined
-  if (!tokens?.length)
-    return getInlineChildrenFromText((item as any).text || '')
+  const children = item.children || []
+  if (!children.length)
+    return []
 
-  const children: VNodeChild[] = []
-  for (const token of tokens) {
-    if ((token as any).type === 'text') {
-      const textToken = token as Tokens.Text
-      if ((textToken as any).tokens?.length) {
-        children.push(...renderInlineTokens((textToken as any).tokens, ctx))
-      }
-      else {
-        children.push(...getInlineChildrenFromText(textToken.text))
-      }
+  const result: VNodeChild[] = []
+  for (const child of children) {
+    if (child.type === 'paragraph') {
+      const paragraphNode = child as MarkdownParagraph
+      result.push(...renderInlineNodes(paragraphNode.children, ctx))
     }
     else {
-      children.push(...renderBlockToken(token, ctx))
+      result.push(...renderBlockNode(child, ctx))
     }
   }
-  return children
+  return result
 }
 
-function renderBlockToken(token: Token, ctx: RenderContext): VNodeChild[] {
-  switch ((token as any).type) {
-    case 'space':
-      return []
+function renderBlockNode(node: MarkdownNode, ctx: RenderContext): VNodeChild[] {
+  switch (node.type) {
     case 'heading': {
-      const headingToken = token as Tokens.Heading
-      const depth = headingToken.depth
-      const children = (headingToken as any).tokens?.length
-        ? renderInlineTokens((headingToken as any).tokens, ctx)
-        : getInlineChildrenFromText(headingToken.text)
-      const id = slugifyHeadingId(headingToken.text)
+      const headingNode = node as MarkdownHeading
+      const depth = headingNode.depth
+      const children = renderInlineNodes(headingNode.children, ctx)
+      const id = slugifyHeadingId(extractTextFromNodes(headingNode.children))
       const component = (() => {
         switch (depth) {
           case 1:
@@ -345,51 +614,43 @@ function renderBlockToken(token: Token, ctx: RenderContext): VNodeChild[] {
       ]
     }
     case 'paragraph': {
-      const paragraphToken = token as Tokens.Paragraph
-      const children = (paragraphToken as any).tokens?.length
-        ? renderInlineTokens((paragraphToken as any).tokens, ctx)
-        : getInlineChildrenFromText(paragraphToken.text)
+      const paragraphNode = node as MarkdownParagraph
+      const children = renderInlineNodes(paragraphNode.children, ctx)
       return [h(NP, null, { default: () => children })]
     }
-    case 'text': {
-      const textToken = token as Tokens.Text
-      const children = (textToken as any).tokens?.length
-        ? renderInlineTokens((textToken as any).tokens, ctx)
-        : getInlineChildrenFromText(textToken.text)
-      return [h(NP, null, { default: () => children })]
-    }
-    case 'hr':
+    case 'thematicBreak':
       return [h(NHr)]
     case 'blockquote': {
-      const blockquoteToken = token as Tokens.Blockquote
-      const children = (blockquoteToken as any).tokens?.length
-        ? renderBlockTokens((blockquoteToken as any).tokens, ctx)
-        : getInlineChildrenFromText((blockquoteToken as any).text || '')
+      const blockquoteNode = node as MarkdownBlockquote
+      const children = renderBlockNodes(blockquoteNode.children, ctx)
       return [h(NBlockquote, null, { default: () => children })]
     }
     case 'list': {
-      const listToken = token as Tokens.List
-      const listComponent = listToken.ordered ? NOl : NUl
+      const listNode = node as MarkdownList
+      const listComponent = listNode.ordered ? NOl : NUl
       return [
         h(listComponent, null, {
           default: () =>
-            listToken.items.map((item, index) =>
+            listNode.children.map((item, index) =>
               h(
                 NLi,
                 { key: index },
-                { default: () => renderListItem(item, ctx) }
+                {
+                  default: () => renderListItem(item as MarkdownListItem, ctx)
+                }
               )
             )
         })
       ]
     }
     case 'code': {
-      const codeToken = token as Tokens.Code
-      const rawLanguage = codeToken.lang || ''
+      const codeNode = node as MarkdownCode
+      const rawLanguage = codeNode.lang || ''
       const language = rawLanguage.startsWith('__')
         ? rawLanguage.slice(2)
         : rawLanguage
-      const highlighted = highlightCode(codeToken.text, language, ctx)
+      const code = codeNode.value || ''
+      const highlighted = highlightCode(code, language, ctx)
       return [
         h(
           NCode,
@@ -398,15 +659,15 @@ function renderBlockToken(token: Token, ctx: RenderContext): VNodeChild[] {
             default: () => [
               highlighted !== null
                 ? h('pre', { innerHTML: highlighted })
-                : h('pre', null, codeToken.text)
+                : h('pre', null, code)
             ]
           }
         )
       ]
     }
     case 'html': {
-      const htmlToken = token as Tokens.HTML
-      const html = htmlToken.raw || htmlToken.text || ''
+      const htmlNode = node as MarkdownHtml
+      const html = htmlNode.value || ''
       if (!html)
         return []
       if (ctx.sanitize) {
@@ -420,20 +681,27 @@ function renderBlockToken(token: Token, ctx: RenderContext): VNodeChild[] {
       }
       return [h('div', { innerHTML: html })]
     }
-    default:
-      return (token as any).raw
-        ? [h(NP, null, { default: () => (token as any).raw })]
-        : []
+    case 'definition':
+      return []
+    default: {
+      if (isMarkdownParent(node)) {
+        const children = renderBlockNodes(node.children, ctx)
+        if (children.length)
+          return children
+      }
+      const value = (node as MarkdownUnknown).value || ''
+      return value ? [h(NP, null, { default: () => value })] : []
+    }
   }
 }
 
-function renderBlockTokens(
-  tokens: Token[] | undefined,
+function renderBlockNodes(
+  nodes: MarkdownNode[] | undefined,
   ctx: RenderContext
 ): VNodeChild[] {
-  if (!tokens?.length)
+  if (!nodes?.length)
     return []
-  return tokens.flatMap(token => renderBlockToken(token, ctx))
+  return nodes.flatMap(node => renderBlockNode(node, ctx))
 }
 
 export default defineComponent({
@@ -441,18 +709,55 @@ export default defineComponent({
   props: markdownProps,
   setup(props) {
     const { mergedClsPrefixRef } = useConfig()
-    const tokensRef = computed(() => marked.lexer(props.source))
+    const configProviderContext = inject(configProviderInjectionKey, null)
+    const markdownProcessorRef = computed(() => {
+      return props.markdown || configProviderContext?.mergedMarkdownRef.value
+    })
+
+    if (__DEV__) {
+      watchEffect(() => {
+        if (!markdownProcessorRef.value && props.source) {
+          warnOnce('markdown', 'markdown processor is not set.')
+        }
+      })
+    }
+
+    const treeRef = computed(() => {
+      const processor = markdownProcessorRef.value
+      if (!processor)
+        return null
+      try {
+        const parsed = processor.parse(props.source)
+        const processed = processor.runSync ? processor.runSync(parsed) : parsed
+        const root = processed ?? parsed
+        return isMarkdownRoot(root) ? root : null
+      }
+      catch {
+        if (__DEV__)
+          warnOnce('markdown', 'failed to parse markdown source.')
+        return null
+      }
+    })
+
+    const definitionsRef = computed(() => collectDefinitions(treeRef.value))
     const shouldHighlightRef = computed(() =>
-      hasHighlightableCode(tokensRef.value)
+      hasHighlightableCode(treeRef.value)
     )
     const hljsRef = useHljs(props, shouldHighlightRef)
-    const childrenRef = computed(() =>
-      renderBlockTokens(tokensRef.value, {
+    const childrenRef = computed(() => {
+      const tree = treeRef.value
+      if (!tree) {
+        return props.source
+          ? [h(NP, null, { default: () => props.source })]
+          : []
+      }
+      return renderBlockNodes(tree.children, {
         hljs: hljsRef.value,
         sanitize: props.sanitize,
-        sanitizeHtml: props.sanitizeHtml
+        sanitizeHtml: props.sanitizeHtml,
+        definitions: definitionsRef.value
       })
-    )
+    })
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       children: childrenRef

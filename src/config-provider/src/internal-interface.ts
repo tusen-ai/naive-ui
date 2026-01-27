@@ -105,6 +105,7 @@ import type { UploadTheme } from '../../upload/styles'
 import type { WatermarkTheme } from '../../watermark/styles'
 import type { GlobalTheme, GlobalThemeOverrides } from './interface'
 import type { Katex } from './katex'
+import type { MarkdownProcessor } from './markdown'
 
 export interface GlobalThemeWithoutCommon {
   Alert?: AlertTheme
@@ -265,6 +266,7 @@ export interface ConfigProviderInjection {
   mergedDateLocaleRef: Ref<NDateLocale | undefined>
   mergedHljsRef: Ref<Hljs | undefined>
   mergedKatexRef: Ref<Katex | undefined>
+  mergedMarkdownRef: Ref<MarkdownProcessor | undefined>
   mergedComponentPropsRef: Ref<GlobalComponentConfig | undefined>
   mergedIconsRef: Ref<GlobalIconConfig | undefined>
   mergedThemeRef: Ref<GlobalTheme | undefined>

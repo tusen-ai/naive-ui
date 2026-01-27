@@ -7,6 +7,11 @@
 </markdown>
 
 <script lang="ts" setup>
+import remarkParse from 'remark-parse'
+import { unified } from 'unified'
+
+const markdown = unified().use(remarkParse)
+
 const source = `# NMarkdown
 
 将 **Markdown** 渲染为 Naive UI 的排印组件。
@@ -25,5 +30,7 @@ function add (a: number, b: number): number {
 </script>
 
 <template>
-  <n-markdown :source="source" />
+  <n-config-provider :markdown="markdown">
+    <n-markdown :source="source" />
+  </n-config-provider>
 </template>
