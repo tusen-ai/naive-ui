@@ -2,6 +2,12 @@
 
 ## NEXT_VERSION
 
+`NEXT_VERSION`
+
+### Feats
+
+- `n-color-picker` adds `trigger` slot, closes [#7192](https://github.com/tusen-ai/naive-ui/issues/7192)
+
 ### Fixes
 
 - Fix `katex` type compatibility by upgrading to `0.16.28` and removing `@types/katex` dependency, closes [#7423](https://github.com/tusen-ai/naive-ui/issues/7423).

@@ -13,6 +13,7 @@ modes.vue
 actions.vue
 form.vue
 swatches.vue
+trigger.vue
 native.vue
 ```
 
@@ -48,6 +49,7 @@ native.vue
 | --- | --- | --- | --- |
 | label | `(color: string \| null)` | Label of the color picker trigger. | 2.24.0 |
 | action | `()` | Custom action. | 2.24.0 |
+| trigger | `(props: { value: string \| null })` | Custom trigger element. | NEXT_VERSION |
 
 ## Q & A
 
