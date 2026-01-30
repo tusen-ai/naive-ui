@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-collapse-transition` adds `display-directive` prop, closes [#6453](https://github.com/tusen-ai/naive-ui/issues/6453).
+
 ## 2.43.2
 
 ### Fixes
