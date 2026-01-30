@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-color-picker` 新增 `trigger` 插槽，关闭 [#7192](https://github.com/tusen-ai/naive-ui/issues/7192)
+
 ## 2.43.2
 
 ### Fixes
