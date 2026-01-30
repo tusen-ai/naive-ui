@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-collapse-transition` 新增 `display-directive` 属性，关闭 [#6453](https://github.com/tusen-ai/naive-ui/issues/6453)
+
 ## 2.43.2
 
 ### Fixes
