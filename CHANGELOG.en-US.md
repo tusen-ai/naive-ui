@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix `n-select`'s created option is not cleared when clearing dynamic options while `tag` and `clearable` are enabled, closes [#7405](https://github.com/tusen-ai/naive-ui/issues/7405)
+
 ## 2.43.2
 
 ### Fixes

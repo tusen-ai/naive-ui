@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- 修复 `n-select` 清除动态创建的选项时，同时启用 `tag` 和 `clearable` 属性时清除不生效的问题，关闭 [#7405](https://github.com/tusen-ai/naive-ui/issues/7405)
+
 ## 2.43.2
 
 ### Fixes
