@@ -2,8 +2,16 @@
 
 It just pops and shows you something.
 
-<n-alert title="Prerequisite" type="warning" :bordered="false">
-  If you want to create modal using <n-text code>useModal</n-text>, you need to wrap the component where you call related methods inside <n-text code>n-modal-provider</n-text> and use <n-text code>useModal</n-text> to get the API.
+<n-space vertical size="large">
+<n-alert type="warning" title="Notice" :bordered="false">
+  <n-ul align-text>
+    <li>
+      If you want to use <n-text code>useModal</n-text> to create modal, you need to put the component that calls its method inside <n-text code>n-modal-provider</n-text> and use <n-text code>useModal</n-text> to get the API.
+    </li>
+    <li>
+      If you want to know how to use it outside of <n-text code>setup</n-text>, please refer to Q & A at the bottom of this page.
+    </li>
+  </n-ul>
 </n-alert>
 
 For example:
@@ -14,6 +22,28 @@ For example:
   <content />
 </n-modal-provider>
 ```
+
+```js
+import { useModal } from 'naive-ui'
+import { defineComponent } from 'vue'
+
+// content
+export default defineComponent({
+  setup() {
+    const modal = useModal()
+    return {
+      showModal() {
+        modal.create({
+          title: 'Title',
+          content: 'Content'
+        })
+      }
+    }
+  }
+})
+```
+
+</n-space>
 
 ## Demos
 
@@ -108,3 +138,55 @@ See [Card slots](card#Card-Slots)
 See [Dialog slots](dialog#Dialog-Slots)
 
 `default` slot's parameter is different, which is `(props: { draggableClass: string })`.
+
+## Q & A
+
+### Use Modal Outside Setup
+
+#### Option 1
+
+Use [createDiscreteApi](discrete). If you want to use it, read its caveat carefully. You'd better not use `useModal` and it together in a same app.
+
+#### Option 2
+
+<n-space vertical size="large">
+<n-alert type="warning" :bordered="false">
+  You need to mount the return value of <n-text code>useModal</n-text> to the window in the top-level setup and then call it. Before calling it, you need to make sure that modal has been mounted successfully.
+</n-alert>
+
+```html
+<!-- App.vue -->
+<n-modal-provider>
+  <content />
+</n-modal-provider>
+```
+
+```html
+<!-- content.vue -->
+<template>...</template>
+
+<script>
+  import { useModal } from 'naive-ui'
+  import { defineComponent } from 'vue'
+
+  // content
+  export default defineComponent({
+    setup() {
+      window.$modal = useModal()
+    }
+  })
+</script>
+```
+
+```js
+// xxx.js
+export function handler() {
+  // You need to ensure that window.$modal = modal has been executed in setup
+  window.$modal.create({
+    title: 'Title',
+    content: 'Content'
+  })
+}
+```
+
+</n-space>
