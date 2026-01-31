@@ -2,6 +2,7 @@
 
 I think it is similar with modal, with a bit difference on placement.
 
+<n-space vertical size="large">
 <n-alert type="warning" title="Notice"  :bordered="false">
   <n-ul align-text>
     <li>
@@ -15,6 +16,17 @@ I think it is similar with modal, with a bit difference on placement.
     </li>
   </n-ul>
 </n-alert>
+
+For example:
+
+```html
+<!-- App.vue -->
+<n-drawer-provider>
+  <content />
+</n-drawer-provider>
+```
+
+</n-space>
 
 ## Demos
 

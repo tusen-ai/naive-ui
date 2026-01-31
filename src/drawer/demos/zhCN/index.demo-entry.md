@@ -2,6 +2,7 @@
 
 我感觉和 Modal 功能差不太多，位置有点差别。
 
+<n-space vertical size="large">
 <n-alert type="warning" title="提示"  :bordered="false">
   <n-ul align-text>
     <li>
@@ -15,6 +16,16 @@
     </li>
   </n-ul>
 </n-alert>
+例如：
+
+```html
+<!-- App.vue -->
+<n-drawer-provider>
+  <content />
+</n-drawer-provider>
+```
+
+</n-space>
 
 ## 演示
 
