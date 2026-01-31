@@ -50,7 +50,19 @@ export default defineComponent({
           highlightStyle
         } = props
 
-        const pattern = patterns
+        const validPatterns = patterns.filter(pattern => pattern.length > 0)
+
+        if (validPatterns.length === 0) {
+          return h(
+            'span',
+            {
+              class: `${mergedClsPrefix}-highlight`
+            },
+            [text]
+          )
+        }
+
+        const pattern = validPatterns
           .map(word => (autoEscape ? escapeRegExp(word) : word))
           .join('|')
         const regex = new RegExp(`(${pattern})`, caseSensitive ? 'g' : 'gi')

@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix `n-highlight` highlights all content when `patterns` contains empty string, closes [#6405](https://github.com/tusen-ai/naive-ui/issues/6405).
+
 ## 2.43.2
 
 ### Fixes

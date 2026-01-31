@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- 修复 `n-highlight` 当 `patterns` 包含空字符串时会高亮所有内容的问题，关闭 [#6405](https://github.com/tusen-ai/naive-ui/issues/6405)
+
 ## 2.43.2
 
 ### Fixes
