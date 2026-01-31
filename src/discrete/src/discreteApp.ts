@@ -1,6 +1,7 @@
 import type { App, Component, VNode } from 'vue'
 import type { ConfigProviderProps } from '../../config-provider'
 import type { DialogApi } from '../../dialog'
+import type { DrawerApi } from '../../drawer'
 import type { LoadingBarApi } from '../../loading-bar'
 import type { MessageApi } from '../../message'
 import type { ModalApi } from '../../modal'
@@ -10,6 +11,7 @@ import { createApp, h, unref } from 'vue'
 import { isBrowser, warn } from '../../_utils'
 import { NConfigProvider } from '../../config-provider'
 import { useDialog } from '../../dialog'
+import { useDrawer } from '../../drawer'
 import { useLoadingBar } from '../../loading-bar'
 import { useMessage } from '../../message'
 import { useModal } from '../../modal'
@@ -37,6 +39,7 @@ export interface DiscreteApp {
   dialog?: DialogApi
   loadingBar?: LoadingBarApi
   modal?: ModalApi
+  drawer?: DrawerApi
 }
 
 const injectionFactoryMap: Record<DiscreteApiType, any> = {
@@ -44,7 +47,8 @@ const injectionFactoryMap: Record<DiscreteApiType, any> = {
   notification: useNotification,
   loadingBar: useLoadingBar,
   dialog: useDialog,
-  modal: useModal
+  modal: useModal,
+  drawer: useDrawer
 }
 
 export function createDiscreteApp({

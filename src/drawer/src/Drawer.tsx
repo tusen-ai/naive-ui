@@ -112,6 +112,11 @@ export const drawerProps = {
   >,
   onAfterEnter: Function as PropType<() => void>,
   onAfterLeave: Function as PropType<() => void>,
+  // private
+  internalAppear: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
   /** @deprecated */
   drawerStyle: [String, Object] as PropType<string | CSSProperties>,
   drawerClass: String,
@@ -323,6 +328,7 @@ export default defineComponent({
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass('drawer', undefined, cssVarsRef, props)
       : undefined
+
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       namespace: namespaceRef,
@@ -355,7 +361,10 @@ export default defineComponent({
                 role="none"
               >
                 {this.showMask ? (
-                  <Transition name="fade-in-transition" appear={this.isMounted}>
+                  <Transition
+                    name="fade-in-transition"
+                    appear={this.internalAppear ?? this.isMounted}
+                  >
                     {{
                       default: () =>
                         this.show ? (
@@ -394,6 +403,7 @@ export default defineComponent({
                   maxWidth={this.maxWidth}
                   minWidth={this.minWidth}
                   showMask={this.showMask}
+                  appear={this.internalAppear}
                   onEsc={this.handleEsc}
                   onClickoutside={this.handleOutsideClick}
                 >

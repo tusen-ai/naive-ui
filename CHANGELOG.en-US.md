@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSOIN
+
+`NEXT_VERSOIN`
+
+### Feats
+
+- 🌟 adds `n-drawer-provider` component and `useDrawer` method, closes [#6267](https://github.com/tusen-ai/naive-ui/issues/6267)
+
 ## 2.43.2
 
 ### Fixes

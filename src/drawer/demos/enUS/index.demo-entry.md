@@ -2,14 +2,25 @@
 
 I think it is similar with modal, with a bit difference on placement.
 
-<n-alert title="Caveat" type="warning" :bordered="false">
-  If you need to use <n-text code>n-drawer-content</n-text>, you should keep <n-text code>n-drawer</n-text>'s <n-text code>native-scrollbar</n-text> prop as <n-text code>true</n-text>.
+<n-alert type="warning" title="Notice"  :bordered="false">
+  <n-ul align-text>
+    <li>
+      If you need to use <n-text code>n-drawer-content</n-text>, you should keep <n-text code>n-drawer</n-text>'s <n-text code>native-scrollbar</n-text> prop as <n-text code>true</n-text>.
+    </li>
+    <li>
+      If you want to use <n-text code>useDrawer</n-text> to use drawer, you need to put the component that calls its method inside <n-text code>n-drawer-provider</n-text> and use <n-text code>useDrawer</n-text> to get the API.
+    </li>
+    <li>
+      If you want to know how to use it outside of <n-text code>setup</n-text>, please refer to Q & A at the bottom of this page.
+    </li>
+  </n-ul>
 </n-alert>
 
 ## Demos
 
 ```demo
 basic.vue
+reactive.vue
 multiple.vue
 closable.vue
 target.vue
@@ -19,6 +30,36 @@ resizable.vue
 ```
 
 ## API
+
+### DrawerProvider Props
+
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| to | `string \| HTMLElement` | `body` | Where the drawer should mount. |  |
+
+### useDrawer API
+
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| create | `(options: DrawerOptions) => DrawerReactive` | Create drawer |  |
+| destroyAll | `() => void` | Destroy all popup drawers |  |
+
+Properties of `DrawerOptions` and `DrawerReactive` are the same as `DrawerProps` (use camelCase, e.g. `mask-closable` should be `maskClosable`). In addition, the following properties are supported:
+
+| Name | Type | Description |
+| --- | --- | --- |
+| title | `string` | Drawer title |
+| closable | `boolean` | Whether to show close button |
+| render | `() => VNodeChild` | Render function for drawer content |
+| footer | `() => VNodeChild` | Render function for drawer footer |
+| headerClass | `string` | Class of header |
+| headerStyle | `string \| CSSProperties` | Style of header |
+| footerClass | `string` | Class of footer |
+| footerStyle | `string \| CSSProperties` | Style of footer |
+| bodyClass | `string` | Class of body |
+| bodyStyle | `string \| CSSProperties` | Style of body |
+| bodyContentClass | `string` | Class of body's scrollable content node |
+| bodyContentStyle | `string \| CSSProperties` | Style of body's scrollable content node |
 
 ### Drawer Props
 
@@ -86,3 +127,56 @@ resizable.vue
 | default | `()`       | The content of the drawer content. |
 | footer  | `()`       | The footer of the drawer content.  |
 | header  | `()`       | The header of the drawer content.  |
+
+## Q & A
+
+### Use outside of setup
+
+#### Option 1
+
+Use [createDiscreteApi](discrete). If you want to use it, please read its caveats carefully. It's better not to mix it with `useDrawer` in the same App.
+
+#### Option 2
+
+<n-space vertical size="large">
+<n-alert type="warning" :bordered="false">
+  If you want to use drawer outside of setup, you need to mount the drawer returned by <n-text code>useDrawer</n-text> to window in the top-level setup, and then call it. Before calling, you need to make sure that drawer has been mounted successfully.
+</n-alert>
+
+```html
+<!-- App.vue -->
+<n-drawer-provider>
+  <content />
+</n-drawer-provider>
+```
+
+```html
+<!-- content.vue -->
+<template>...</template>
+
+<script>
+  import { useDrawer } from 'naive-ui'
+  import { defineComponent } from 'vue'
+
+  // content
+  export default defineComponent({
+    setup() {
+      window.$drawer = useDrawer()
+    }
+  })
+</script>
+```
+
+```js
+// xxx.js
+export function handler() {
+  // Make sure window.$drawer = useDrawer() has been executed in setup
+  window.$drawer.create({
+    title: 'Title',
+    closable: true,
+    render: () => 'Content'
+  })
+}
+```
+
+</n-space>

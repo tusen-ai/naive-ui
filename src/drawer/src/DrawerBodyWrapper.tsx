@@ -70,7 +70,8 @@ export default defineComponent({
     onClickoutside: Function as PropType<(e: MouseEvent) => void>,
     onAfterLeave: Function as PropType<() => void>,
     onAfterEnter: Function as PropType<() => void>,
-    onEsc: Function as PropType<(e: KeyboardEvent) => void>
+    onEsc: Function as PropType<(e: KeyboardEvent) => void>,
+    appear: Boolean
   },
   setup(props) {
     const displayedRef = ref(!!props.show)
@@ -256,7 +257,7 @@ export default defineComponent({
                 default: () => (
                   <Transition
                     name={this.transitionName}
-                    appear={this.isMounted}
+                    appear={this.appear ?? this.isMounted}
                     onAfterEnter={this.onAfterEnter}
                     onAfterLeave={this.handleAfterLeave}
                   >

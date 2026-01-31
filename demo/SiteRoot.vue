@@ -33,9 +33,11 @@ export default defineComponent({
         <n-message-provider>
           <n-notification-provider>
             <n-modal-provider>
-              <n-dialog-provider>
-                <Site />
-              </n-dialog-provider>
+              <n-drawer-provider>
+                <n-dialog-provider>
+                  <Site />
+                </n-dialog-provider>
+              </n-drawer-provider>
             </n-modal-provider>
           </n-notification-provider>
         </n-message-provider>
