@@ -2,14 +2,36 @@
 
 我感觉和 Modal 功能差不太多，位置有点差别。
 
-<n-alert title="提示" type="warning" :bordered="false">
-  如果你需要使用 <n-text code>n-drawer-content</n-text>，<n-text code>n-drawer</n-text> 的 <n-text code>native-scrollbar</n-text> 需要保持为 <n-text code>true</n-text>。
+<n-space vertical size="large">
+<n-alert type="warning" title="提示"  :bordered="false">
+  <n-ul align-text>
+    <li>
+      如果你需要使用 <n-text code>n-drawer-content</n-text>，<n-text code>n-drawer</n-text> 的 <n-text code>native-scrollbar</n-text> 需要保持为 <n-text code>true</n-text>。
+    </li>
+    <li>
+      如果你想通过 <n-text code>useDrawer</n-text> 使用抽屉，你需要把调用其方法的组件放在 <n-text code>n-drawer-provider</n-text> 内部并且使用 <n-text code>useDrawer</n-text> 去获取 API。
+    </li>
+    <li>
+      如果你想知道如何在  <n-text code>setup</n-text> 外使用，请参考页面最下方的 Q & A。
+    </li>
+  </n-ul>
 </n-alert>
+例如：
+
+```html
+<!-- App.vue -->
+<n-drawer-provider>
+  <content />
+</n-drawer-provider>
+```
+
+</n-space>
 
 ## 演示
 
 ```demo
 basic.vue
+reactive.vue
 multiple.vue
 closable.vue
 target.vue
@@ -26,6 +48,36 @@ rtl-debug.vue
 ```
 
 ## API
+
+### DrawerProvider Props
+
+| 名称 | 类型                    | 默认值 | 说明           | 版本 |
+| ---- | ----------------------- | ------ | -------------- | ---- |
+| to   | `string \| HTMLElement` | `body` | 抽屉的挂载位置 |      |
+
+### useDrawer API
+
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| create | `(options: DrawerOptions) => DrawerReactive` | 创建抽屉 |  |
+| destroyAll | `() => void` | 销毁所有弹出的抽屉 |  |
+
+`DrawerOptions` 的属性和 `DrawerReactive` 属性同 `DrawerProps`（属性应使用 camelCase，例如 `mask-closable` 对应 `maskClosable`）。此外还支持以下属性：
+
+| 名称             | 类型                      | 说明                     |
+| ---------------- | ------------------------- | ------------------------ |
+| title            | `string`                  | 抽屉标题                 |
+| closable         | `boolean`                 | 是否显示关闭按钮         |
+| render           | `() => VNodeChild`        | 抽屉内容的渲染函数       |
+| footer           | `() => VNodeChild`        | 抽屉底部的渲染函数       |
+| headerClass      | `string`                  | 头部的类名               |
+| headerStyle      | `string \| CSSProperties` | 头部的样式               |
+| footerClass      | `string`                  | 底部的类名               |
+| footerStyle      | `string \| CSSProperties` | 底部的样式               |
+| bodyClass        | `string`                  | 主体的类名               |
+| bodyStyle        | `string \| CSSProperties` | 主体的样式               |
+| bodyContentClass | `string`                  | 主体可滚动内容节点的类名 |
+| bodyContentStyle | `string \| CSSProperties` | 主体可滚动内容节点的样式 |
 
 ### Drawer Props
 
@@ -93,3 +145,56 @@ rtl-debug.vue
 | default | `()` | 抽屉主体的内容         |
 | footer  | `()` | 抽屉主体 footer 的内容 |
 | header  | `()` | 抽屉主体 header 的内容 |
+
+## Q & A
+
+### 在 setup 外使用
+
+#### 选择 1
+
+使用 [createDiscreteApi](discrete)。如果你想使用它，请认真阅读它的注意事项。你最好不要把它和 `useDrawer` 在同一 App 中混用。
+
+#### 选择 2
+
+<n-space vertical size="large">
+<n-alert type="warning" :bordered="false">
+  如果你想在 setup 外使用抽屉，你需要在顶层 setup 中把 <n-text code>useDrawer</n-text> 返回的 drawer 值挂载到 window 下然后再调用，调用前需要确保 drawer 已经挂载成功。
+</n-alert>
+
+```html
+<!-- App.vue -->
+<n-drawer-provider>
+  <content />
+</n-drawer-provider>
+```
+
+```html
+<!-- content.vue -->
+<template>...</template>
+
+<script>
+  import { useDrawer } from 'naive-ui'
+  import { defineComponent } from 'vue'
+
+  // content
+  export default defineComponent({
+    setup() {
+      window.$drawer = useDrawer()
+    }
+  })
+</script>
+```
+
+```js
+// xxx.js
+export function handler() {
+  // 需要确保已经在 setup 中执行了 window.$drawer = useDrawer()
+  window.$drawer.create({
+    title: '标题',
+    closable: true,
+    render: () => '内容'
+  })
+}
+```
+
+</n-space>

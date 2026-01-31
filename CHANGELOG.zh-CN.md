@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSOIN
+
+`NEXT_VERSOIN`
+
+### Feats
+
+- 🌟 新增 `n-drawer-provider` 组件和 `useDrawer` 方法，关闭 [#6267](https://github.com/tusen-ai/naive-ui/issues/6267)
+
 ## 2.43.2
 
 ### Fixes

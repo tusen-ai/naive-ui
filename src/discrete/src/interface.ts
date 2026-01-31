@@ -1,6 +1,8 @@
 import type { App, Ref } from 'vue'
 import type { ConfigProviderProps } from '../../config-provider'
 import type { DialogApi, DialogProviderProps } from '../../dialog'
+import type { DrawerApi } from '../../drawer'
+import type { DrawerProviderProps } from '../../drawer/src/DrawerProvider.ts'
 import type { LoadingBarApi, LoadingBarProviderProps } from '../../loading-bar'
 import type { MessageApi, MessageProviderProps } from '../../message'
 import type { ModalApi } from '../../modal'
@@ -19,6 +21,7 @@ export interface DiscreteApiOptions {
   notificationProviderProps?: MaybeRef<NotificationProviderProps>
   loadingBarProviderProps?: MaybeRef<LoadingBarProviderProps>
   modalProviderProps?: MaybeRef<ModalProviderProps>
+  drawerProviderProps?: MaybeRef<DrawerProviderProps>
 }
 
 export type DiscreteApiType
@@ -27,6 +30,7 @@ export type DiscreteApiType
     | 'loadingBar'
     | 'dialog'
     | 'modal'
+    | 'drawer'
 
 export type DiscreteApi<T extends DiscreteApiType = DiscreteApiType> = {
   unmount: () => void
@@ -40,3 +44,4 @@ export type DiscreteApi<T extends DiscreteApiType = DiscreteApiType> = {
   ? { loadingBar: LoadingBarApi }
   : Record<string, unknown>)
 & ('modal' extends T ? { modal: ModalApi } : Record<string, unknown>)
+& ('drawer' extends T ? { drawer: DrawerApi } : Record<string, unknown>)
