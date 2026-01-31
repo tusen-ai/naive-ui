@@ -2,8 +2,16 @@
 
 它会弹出来，然后给你看点东西。
 
-<n-alert title="使用前提" type="warning" :bordered="false">
-  如果你想通过 <n-text code>useModal</n-text> 使用对话框，你需要把调用其方法的组件放在 <n-text code>n-modal-provider</n-text> 内部并且使用 <n-text code>useModal</n-text> 去获取 API。
+<n-space vertical size="large">
+<n-alert type="warning" title="提示" :bordered="false">
+  <n-ul align-text>
+    <li>
+      如果你想通过 <n-text code>useModal</n-text> 使用模态框，你需要把调用其方法的组件放在 <n-text code>n-modal-provider</n-text> 内部并且使用 <n-text code>useModal</n-text> 去获取 API。
+    </li>
+    <li>
+      如果你想知道如何在 <n-text code>setup</n-text> 外使用，请参考页面最下方的 Q & A。
+    </li>
+  </n-ul>
 </n-alert>
 
 例如：
@@ -14,6 +22,28 @@
   <content />
 </n-modal-provider>
 ```
+
+```js
+import { useModal } from 'naive-ui'
+import { defineComponent } from 'vue'
+
+// content
+export default defineComponent({
+  setup() {
+    const modal = useModal()
+    return {
+      showModal() {
+        modal.create({
+          title: '标题',
+          content: '内容'
+        })
+      }
+    }
+  }
+})
+```
+
+</n-space>
 
 ## 演示
 
@@ -115,3 +145,55 @@ mask-click-debug.vue
 参考 [Dialog slots](dialog#Dialog-Slots)
 
 注意，`default` slot 参数类型为 `(props: { draggableClass: string })`
+
+## Q & A
+
+### 在 setup 外使用
+
+#### 选择 1
+
+使用 [createDiscreteApi](discrete)。如果你想使用它，请认真阅读它的注意事项。你最好不要把它和 `useModal` 在同一 App 中混用。
+
+#### 选择 2
+
+<n-space vertical size="large">
+<n-alert type="warning" :bordered="false">
+  如果你想在 setup 外使用模态框，你需要在顶层 setup 中把 <n-text code>useModal</n-text> 返回的 modal 值挂载到 window 下然后再调用，调用前需要确保 modal 已经挂载成功。
+</n-alert>
+
+```html
+<!-- App.vue -->
+<n-modal-provider>
+  <content />
+</n-modal-provider>
+```
+
+```html
+<!-- content.vue -->
+<template>...</template>
+
+<script>
+  import { useModal } from 'naive-ui'
+  import { defineComponent } from 'vue'
+
+  // content
+  export default defineComponent({
+    setup() {
+      window.$modal = useModal()
+    }
+  })
+</script>
+```
+
+```js
+// xxx.js
+export function handler() {
+  // 需要确保已经在 setup 中执行了 window.$modal = modal
+  window.$modal.create({
+    title: '标题',
+    content: '内容'
+  })
+}
+```
+
+</n-space>

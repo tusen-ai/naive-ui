@@ -3,11 +3,16 @@
 （一般是）从浏览器顶部降下来的神谕。
 
 <n-space vertical size="large">
-<n-alert title="使用前提" type="warning" :bordered="false">
-  如果你想使用信息，你需要把调用其方法的组件放在 <n-text code>n-message-provider</n-text> 内部并且使用 <n-text code>useMessage</n-text> 去获取 API。
-  <br/>
-  如果你想知道如何在 setup 外使用，请参考页面最下方的 Q & A。
+<n-alert type="warning" title="提示"  :bordered="false">
+  <n-ul align-text>
+    <li>
+      如果你想通过 <n-text code>useMessage</n-text> 使用信息，你需要把调用其方法的组件放在 <n-text code>n-message-provider</n-text> 内部并且使用 <n-text code>useMessage</n-text> 去获取 API。    </li>
+    <li>
+      如果你想知道如何在 <n-text code>setup</n-text> 外使用，请参考页面最下方的 Q & A。
+    </li>
+  </n-ul>
 </n-alert>
+
 例如：
 
 ```html
