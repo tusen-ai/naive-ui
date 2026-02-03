@@ -308,7 +308,7 @@ export default defineComponent({
       else {
         const { value: localOptions } = localOptionsRef
         const { value: pattern } = patternRef
-        if (!pattern.length || !props.filterable) {
+        if ((!pattern.length && !props.filter) || !props.filterable) {
           return localOptions
         }
         else {

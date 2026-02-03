@@ -408,7 +408,7 @@ export default defineComponent({
           expandedKeys: undefined
         }
       }
-      if (!pattern.length || !mergedFilterRef.value) {
+      if ((!pattern.length && !props.filter) || !mergedFilterRef.value) {
         return {
           filteredTree: props.data,
           highlightKeySet: null,

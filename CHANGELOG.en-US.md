@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix `n-select` and `n-tree-select` components' custom `filter` method not being called when deleting the last character, closes [#7034](https://github.com/tusen-ai/naive-ui/issues/7034)
+
 ## 2.43.2
 
 ### Fixes
