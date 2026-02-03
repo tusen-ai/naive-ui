@@ -122,7 +122,7 @@ export default defineComponent({
     })
 
     watchEffect(() => {
-      const src = props.src ?? props.imgProps?.src
+      const src = props.src || props.imgProps?.src
       showErrorRef.value = !src
     })
 
