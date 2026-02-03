@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- 修复 `n-modal` 嵌套 `n-select` 时，打开 modal 或 select 下拉菜单出现抖动的问题，关闭 [#4862](https://github.com/tusen-ai/naive-ui/issues/4862)，关闭 [#6355](https://github.com/tusen-ai/naive-ui/issues/6355)
+
 ## 2.43.2
 
 ### Fixes

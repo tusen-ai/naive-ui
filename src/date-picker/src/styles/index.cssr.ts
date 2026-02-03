@@ -90,8 +90,11 @@ export default c([
     background-color: var(--n-panel-color);
     color: var(--n-panel-text-color);
     user-select: none;
+    transform: translateZ(0);
   `, [
-    fadeInScaleUpTransition(),
+    fadeInScaleUpTransition({
+      originalTransform: 'translateZ(0)'
+    }),
     cM('shadow', `
       box-shadow: var(--n-panel-box-shadow);
     `),

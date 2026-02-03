@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix `n-modal` nested component jitter when opening modal, closes [#4862](https://github.com/tusen-ai/naive-ui/issues/4862), closes [#6355](https://github.com/tusen-ai/naive-ui/issues/6355).
+
 ## 2.43.2
 
 ### Fixes
