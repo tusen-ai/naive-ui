@@ -45,8 +45,11 @@ export default c([
     overflow: hidden;
     background-color: var(--n-panel-color);
     box-shadow: var(--n-panel-box-shadow);
+    transform: translateZ(0);
   `, [
-    fadeInScaleUpTransition(),
+    fadeInScaleUpTransition({
+      originalTransform: 'translateZ(0)'
+    }),
     cB('time-picker-actions', `
       padding: var(--n-panel-action-padding);
       align-items: center;

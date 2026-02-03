@@ -30,6 +30,7 @@ transform-origin.vue
 draggable.vue
 mask-visible.vue
 nested-debug.vue
+select-jitter-debug.vue
 a11y-debug.vue
 raw-debug.vue
 dark-1-debug.vue

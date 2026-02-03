@@ -37,11 +37,11 @@ export function fadeInScaleUpTransition({
     }),
     c('&.fade-in-scale-up-transition-enter-from, &.fade-in-scale-up-transition-leave-to', {
       opacity: 0,
-      transform: `${originalTransform} scale(${enterScale})`
+      transform: `${originalTransform} scale3d(${enterScale}, ${enterScale}, 1)`
     }),
     c('&.fade-in-scale-up-transition-leave-from, &.fade-in-scale-up-transition-enter-to', {
       opacity: 1,
-      transform: `${originalTransform} scale(1)`
+      transform: `${originalTransform} scale3d(1, 1, 1)`
     })
   ]
 }
