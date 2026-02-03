@@ -11,7 +11,7 @@ export type OnLoad = (node: TreeOption) => Promise<unknown>
 
 export interface TreeOptionBase {
   key?: Key
-  label?: string
+  label?: string | (() => VNodeChild)
   checkboxDisabled?: boolean
   disabled?: boolean
   isLeaf?: boolean

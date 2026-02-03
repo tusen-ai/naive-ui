@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-tree` 和 `n-tree-select` 的 `TreeOption` 的 `label` 属性支持 `() => VNodeChild` 类型，关闭 [#7392](https://github.com/tusen-ai/naive-ui/issues/7392)
+
 ## 2.43.2
 
 ### Fixes
