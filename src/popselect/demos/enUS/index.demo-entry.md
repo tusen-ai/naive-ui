@@ -21,7 +21,7 @@ slot.vue
 | multiple | `boolean` | `false` | Whether to select multiple values. |  |
 | node-props | `(option: SelectOption \| SelectGroupOption) => object` | `undefined` | Option's DOM attrs generator. | 2.30.4 |
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` | For details of configuration options, see [Select](select#SelectOption-Properties) |  |
-| render-label | `(option: SelectOption \| SelectGroupOption) => VNodeChild` | `undefined` | Render function of all the options. |  |
+| render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | Render function of all the options. |  |
 | scrollable | `boolean` | `false` | Whether the select menu is scrollable. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the Popselect. |  |
 | value | `string \| number \| Array<string \| number> \| null` | `null` | Value in controlled mode. |  |
