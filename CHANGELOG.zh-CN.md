@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- 修复 `n-input-otp` 组件卸载时可能出现的 TypeError，关闭 [#7453](https://github.com/tusen-ai/naive-ui/issues/7453)
+
 ## 2.43.2
 
 ### Fixes

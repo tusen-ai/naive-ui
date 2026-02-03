@@ -134,7 +134,7 @@ export default defineComponent({
       // If it's focused from other input element inside the component, returns
       if (
         inputRefList?.value.some(
-          inputInst => inputInst.inputElRef === e.relatedTarget
+          inputInst => inputInst?.inputElRef === e.relatedTarget
         )
       ) {
         return
@@ -151,7 +151,7 @@ export default defineComponent({
       // If it's blured to other input element inside the component, returns
       if (
         inputRefList?.value.some(
-          inputInst => inputInst.inputElRef === e.relatedTarget
+          inputInst => inputInst?.inputElRef === e.relatedTarget
         )
       ) {
         return

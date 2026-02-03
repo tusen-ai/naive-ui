@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix `n-input-otp` TypeError when component is unmounted during blur, closes [#7453](https://github.com/tusen-ai/naive-ui/issues/7453).
+
 ## 2.43.2
 
 ### Fixes
