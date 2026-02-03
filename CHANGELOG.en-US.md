@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-tree` and `n-tree-select`'s `TreeOption`'s `label` prop supports `() => VNodeChild` type, closes [#7392](https://github.com/tusen-ai/naive-ui/issues/7392)
+
 ## 2.43.2
 
 ### Fixes
