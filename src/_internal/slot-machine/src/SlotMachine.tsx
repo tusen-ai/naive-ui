@@ -39,11 +39,11 @@ export default defineComponent({
     const numbersRef = computed(() => {
       if (typeof props.value === 'string')
         return []
-      if (props.value < 1)
+      if (props.value === 0)
         return [0]
       const numbers: number[] = []
-      let value = props.value
-      if (props.max !== undefined) {
+      let value = Math.abs(props.value)
+      if (props.max !== undefined && props.value > 0) {
         value = Math.min(props.max, value)
       }
       while (value >= 1) {
@@ -74,6 +74,14 @@ export default defineComponent({
       const { value, clsPrefix } = props
       return typeof value === 'number' ? (
         <span class={`${clsPrefix}-base-slot-machine`}>
+          <NFadeInExpandTransition key="-" width>
+            {{
+              default: () =>
+                typeof props.value === 'number' && props.value < 0 ? (
+                  <SlotMachineNumber clsPrefix={clsPrefix} value="-" />
+                ) : null
+            }}
+          </NFadeInExpandTransition>
           <TransitionGroup name="fade-up-width-expand-transition" tag="span">
             {{
               default: () =>
