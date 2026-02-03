@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- 修复 `n-select` 和 `n-tree-select` 组件的自定义 `filter` 方法在删除最后一个字符时未被调用的问题，关闭 [#7034](https://github.com/tusen-ai/naive-ui/issues/7034)
+
 ## 2.43.2
 
 ### Fixes
