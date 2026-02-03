@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-image` shows error placeholder when `src` is empty string, closes [#7452](https://github.com/tusen-ai/naive-ui/issues/7452).
+
 ## 2.43.2
 
 ### Fixes

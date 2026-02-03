@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-image` 当 `src` 为空字符串时显示错误占位图，关闭 [#7452](https://github.com/tusen-ai/naive-ui/issues/7452)
+
 ## 2.43.2
 
 ### Fixes

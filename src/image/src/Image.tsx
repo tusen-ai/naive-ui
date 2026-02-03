@@ -122,8 +122,8 @@ export default defineComponent({
     })
 
     watchEffect(() => {
-      void (props.src || props.imgProps?.src)
-      showErrorRef.value = false
+      const src = props.src ?? props.imgProps?.src
+      showErrorRef.value = !src
     })
 
     watchEffect((onInvalidate) => {
