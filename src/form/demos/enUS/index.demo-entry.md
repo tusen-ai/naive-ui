@@ -78,8 +78,8 @@ feedback-style.vue
 | content-class | `string` | `undefined` | The class name of the content. | 2.43.0 |
 | content-style | `string \| object` | `undefined` | The style of the content. | 2.43.0 |
 | feedback | `string` | `undefined` | The feedback message of the form item. If set, it will replace any result of rule-based validation. |  |
-| feedback-class | `string` | `undefined` | Feedback check vertical display positioning | 2.38.2 |
-| feedback-style | `string \| object` | `undefined` | Feedback check horizontal display positioning | 2.38.2 |
+| feedback-class | `string` | `undefined` | The class name of the feedback. | 2.38.2 |
+| feedback-style | `string \| object` | `undefined` | The style of the feedback. | 2.38.2 |
 | first | `boolean` | `false` | Whether to only show the first validation error message. |  |
 | ignore-path-change | `boolean` | `false` | Usually, changing `path` will cause a re-render and naive-ui will clear the validation result. Setting `ignore-path-change` to `true` will disable that behavior. |  |
 | label | `string` | `undefined` | Label. |  |
