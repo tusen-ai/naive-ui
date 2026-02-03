@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-badge` 支持负数值，关闭 [#6869](https://github.com/tusen-ai/naive-ui/issues/6869)
+
 ## 2.43.2
 
 ### Fixes

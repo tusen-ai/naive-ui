@@ -67,7 +67,7 @@ export default defineComponent({
         props.show
         && (props.dot
           || (props.value !== undefined
-            && !(!props.showZero && Number(props.value) <= 0))
+            && !(!props.showZero && Number(props.value) === 0))
           || !isSlotEmpty(slots.value))
       )
     })
