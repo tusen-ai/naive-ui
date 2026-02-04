@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-tree` 新增 `getNode`、`remove`、`append`、`insertBefore`、`insertAfter` 方法，关闭 [#4591](https://github.com/tusen-ai/naive-ui/issues/4591)
+
 ## 2.43.2
 
 ### Fixes

@@ -24,6 +24,7 @@ node-props.vue
 show-line.vue
 checkbox-placement.vue
 override-click-behavior.vue
+node-operations.vue
 ```
 
 ## API
@@ -118,6 +119,11 @@ override-click-behavior.vue
 | scrollTo | `ScrollTo` | Scroll to some node in virtual scroll mode. | 2.32.2, `ScrollTo` 2.37.0 |
 | getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get checked data. | 2.34.1 |
 | getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get indeterminate data. | 2.34.1 |
+| getNode | `(key: string \| number) => TreeOption \| null` | Get tree node by key. | NEXT_VERSION |
+| remove | `(key: string \| number) => void` | Remove tree node by key. | NEXT_VERSION |
+| append | `(data: TreeOption, parentKey?: string \| number) => void` | Append a node. Appends to root if parentKey is not provided. | NEXT_VERSION |
+| insertBefore | `(data: TreeOption, referenceKey: string \| number) => void` | Insert a node before reference node. | NEXT_VERSION |
+| insertAfter | `(data: TreeOption, referenceKey: string \| number) => void` | Insert a node after reference node. | NEXT_VERSION |
 
 #### ScrollTo Type
 

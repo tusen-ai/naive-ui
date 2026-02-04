@@ -1634,6 +1634,74 @@ export default defineComponent({
         virtualListInstRef.value?.scrollTo(options)
       }
     }
+    function getNode(key: Key): TreeOption | null {
+      return dataTreeMateRef.value.getNode(key)?.rawNode || null
+    }
+
+    function findSiblingsAndIndex(
+      key: Key,
+      tree: TreeOption[]
+    ): { siblings: TreeOption[], index: number } | null {
+      const { childrenField, keyField } = props
+      for (let i = 0; i < tree.length; ++i) {
+        const node = tree[i]
+        if (node[keyField] === key) {
+          return { siblings: tree, index: i }
+        }
+        const children = node[childrenField] as TreeOption[] | undefined
+        if (children) {
+          const result = findSiblingsAndIndex(key, children)
+          if (result)
+            return result
+        }
+      }
+      return null
+    }
+
+    function remove(key: Key): void {
+      const result = findSiblingsAndIndex(key, props.data)
+      if (result) {
+        const { siblings, index } = result
+        siblings.splice(index, 1)
+      }
+    }
+
+    function append(data: TreeOption, parentKey?: Key): void {
+      const { childrenField } = props
+      if (parentKey === undefined) {
+        // Append to root
+        props.data.push(data)
+      }
+      else {
+        const parentNode = getNode(parentKey)
+        if (parentNode) {
+          const children = parentNode[childrenField] as TreeOption[] | undefined
+          if (children) {
+            children.push(data)
+          }
+          else {
+            parentNode[childrenField] = [data]
+          }
+        }
+      }
+    }
+
+    function insertBefore(data: TreeOption, referenceKey: Key): void {
+      const result = findSiblingsAndIndex(referenceKey, props.data)
+      if (result) {
+        const { siblings, index } = result
+        siblings.splice(index, 0, data)
+      }
+    }
+
+    function insertAfter(data: TreeOption, referenceKey: Key): void {
+      const result = findSiblingsAndIndex(referenceKey, props.data)
+      if (result) {
+        const { siblings, index } = result
+        siblings.splice(index + 1, 0, data)
+      }
+    }
+
     const exposedMethods: InternalTreeInst & TreeInst = {
       handleKeydown,
       scrollTo,
@@ -1654,7 +1722,12 @@ export default defineComponent({
           keys: indeterminateKeys,
           options: getOptionsByKeys(indeterminateKeys)
         }
-      }
+      },
+      getNode,
+      remove,
+      append,
+      insertBefore,
+      insertAfter
     }
     const cssVarsRef = computed(() => {
       const {
