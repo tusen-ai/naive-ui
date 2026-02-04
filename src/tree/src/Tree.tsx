@@ -1669,7 +1669,6 @@ export default defineComponent({
     function append(data: TreeOption, parentKey?: Key): void {
       const { childrenField } = props
       if (parentKey === undefined) {
-        // Append to root
         props.data.push(data)
       }
       else {
