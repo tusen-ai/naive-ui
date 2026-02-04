@@ -94,7 +94,6 @@ function handleAppendToSelected() {
     label: `New Node ${id}`
   }
   treeRef.value?.append(newNode, selectedKey)
-  // Expand the parent node
   if (!expandedKeysRef.value.includes(selectedKey)) {
     expandedKeysRef.value = [...expandedKeysRef.value, selectedKey]
   }

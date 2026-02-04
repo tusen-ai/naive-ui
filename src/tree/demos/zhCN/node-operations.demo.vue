@@ -94,7 +94,6 @@ function handleAppendToSelected() {
     label: `新节点 ${id}`
   }
   treeRef.value?.append(newNode, selectedKey)
-  // 展开父节点
   if (!expandedKeysRef.value.includes(selectedKey)) {
     expandedKeysRef.value = [...expandedKeysRef.value, selectedKey]
   }
