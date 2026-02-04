@@ -1,4 +1,4 @@
-import type { PropType, Ref } from 'vue'
+import type { ImgHTMLAttributes, PropType, Ref } from 'vue'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { ImagePreviewInst, ImageRenderToolbar } from './public-types'
 import { createId } from 'seemly'
@@ -8,7 +8,7 @@ import { useConfig } from '../../_mixins'
 import { call, createInjectionKey, throwError } from '../../_utils'
 
 import NImagePreview from './ImagePreview'
-import { imagePreviewSharedProps } from './interface'
+import { imageContextKey, imagePreviewSharedProps } from './interface'
 
 export const imageGroupInjectionKey = createInjectionKey<
   ImagePreviewInst & {
@@ -16,6 +16,7 @@ export const imageGroupInjectionKey = createInjectionKey<
     mergedClsPrefixRef: Ref<string>
     renderToolbarRef: Ref<ImageRenderToolbar | undefined>
     registerImageUrl: (id: number, url: string) => () => void
+    setPreviewedImgPropsRef: (previewedImgProps?: ImgHTMLAttributes) => void
     toggleShow: (imageId: string) => void
   }
 >('n-image-group')
@@ -62,6 +63,7 @@ export default defineComponent({
     const mergedShowRef = useMergedState(controlledShowRef, uncontrolledShowRef)
 
     const registeredImageUrlMap = ref(new Map<string, string>())
+    const previewedImgPropsRef = ref<ImgHTMLAttributes | undefined>()
 
     const mergedImageUrlMap = computed(() => {
       if (props.srcList) {
@@ -197,12 +199,18 @@ export default defineComponent({
       setThumbnailEl: (el) => {
         previewInstRef.value?.setThumbnailEl(el)
       },
+      setPreviewedImgPropsRef: (previewedImgProps?: ImgHTMLAttributes) => {
+        previewedImgPropsRef.value = previewedImgProps
+      },
       toggleShow: (imageId: string) => {
         doUpdateShow(true)
         setCurrentId(imageId)
       },
       groupId,
       renderToolbarRef: toRef(props, 'renderToolbar')
+    })
+    provide(imageContextKey, {
+      previewedImgPropsRef
     })
 
     return {

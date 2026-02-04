@@ -16,6 +16,7 @@ tooltip.vue
 full-debug.vue
 lazy.vue
 previewed-img-props.vue
+preview-debug.vue
 manually-open-preview.vue
 component-preview.vue
 component-preview-group.vue
