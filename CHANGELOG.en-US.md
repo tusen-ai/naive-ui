@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix `previewed-img-props` not taking effect on `n-image` inside `n-image-group`, closes [#6101](https://github.com/tusen-ai/naive-ui/issues/6101).
+
 ## 2.43.2
 
 ### Fixes

@@ -69,12 +69,14 @@ export default defineComponent({
     const previewShowRef = ref(false)
 
     const imageId = uuid++
+    const previewedImgPropsRef = toRef(props, 'previewedImgProps')
 
     const showPreview = () => {
       if (props.previewDisabled || showErrorRef.value)
         return
       if (imageGroupHandle) {
         imageGroupHandle.setThumbnailEl(imageRef.value)
+        imageGroupHandle.setPreviewedImgPropsRef(previewedImgPropsRef.value)
         imageGroupHandle.toggleShow(`r${imageId}`)
         return
       }
@@ -148,7 +150,7 @@ export default defineComponent({
     const loadedRef = ref(false)
 
     provide(imageContextKey, {
-      previewedImgPropsRef: toRef(props, 'previewedImgProps')
+      previewedImgPropsRef
     })
     return {
       mergedClsPrefix: mergedClsPrefixRef,

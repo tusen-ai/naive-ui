@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- 修复 `n-image-group` 中 `n-image` 的 `previewed-img-props` 属性不生效，关闭 [#6101](https://github.com/tusen-ai/naive-ui/issues/6101)
+
 ## 2.43.2
 
 ### Fixes
