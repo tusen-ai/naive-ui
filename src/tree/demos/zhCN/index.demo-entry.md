@@ -24,6 +24,7 @@ node-props.vue
 show-line.vue
 checkbox-placement.vue
 override-click-behavior.vue
+node-operations.vue
 check-strategy-debug.vue
 change-debug.vue
 scrollbar-debug.vue
@@ -122,6 +123,11 @@ expand-debug.vue
 | scrollTo | `ScrollTo` | 在虚拟滚动模式下滚动到某个节点 | 2.32.2 |
 | getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取选中的数据 | 2.34.1 |
 | getIndeterminateData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | 获取半选的数据 | 2.34.1 |
+| getNode | `(key: string \| number) => TreeOption \| null` | 根据 key 获取节点 | NEXT_VERSION |
+| remove | `(key: string \| number) => void` | 根据 key 删除节点 | NEXT_VERSION |
+| append | `(data: TreeOption, parentKey?: string \| number) => void` | 添加节点，如果不传 parentKey 则添加到根节点 | NEXT_VERSION |
+| insertBefore | `(data: TreeOption, referenceKey: string \| number) => void` | 在参考节点前插入节点 | NEXT_VERSION |
+| insertAfter | `(data: TreeOption, referenceKey: string \| number) => void` | 在参考节点后插入节点 | NEXT_VERSION |
 
 #### ScrollTo Type
 
