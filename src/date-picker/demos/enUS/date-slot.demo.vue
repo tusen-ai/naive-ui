@@ -4,28 +4,18 @@
 Use the `date` slot to customize the content of date cells, such as adding lunar calendar dates or holidays.
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+// Simple holiday mapping example (for demonstration only)
+const holidays: Record<string, string> = {
+  '2024-1-1': 'NY',
+  '2024-12-25': 'Xmas',
+  '2024-7-4': 'July 4'
+}
 
-export default defineComponent({
-  setup() {
-    // Simple holiday mapping example (for demonstration only)
-    const holidays: Record<string, string> = {
-      '2024-1-1': 'NY',
-      '2024-12-25': 'Xmas',
-      '2024-7-4': 'July 4'
-    }
-
-    const getHoliday = (year: number, month: number, date: number) => {
-      const key = `${year}-${month + 1}-${date}`
-      return holidays[key]
-    }
-
-    return {
-      getHoliday
-    }
-  }
-})
+function getHoliday(year: number, month: number, date: number) {
+  const key = `${year}-${month + 1}-${date}`
+  return holidays[key]
+}
 </script>
 
 <template>
