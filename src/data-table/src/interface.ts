@@ -33,6 +33,13 @@ export const dataTableProps = {
       getColumnWidth: (key: ColumnKey) => number | undefined
     ) => void
   >,
+  onResizeStart: Function as PropType<(column: TableBaseColumn) => void>,
+  onResize: Function as PropType<
+    (column: TableBaseColumn, width: number) => void
+  >,
+  onResizeEnd: Function as PropType<
+    (column: TableBaseColumn, width: number) => void
+  >,
   pagination: {
     type: [Object, Boolean] as PropType<false | PaginationProps>,
     default: false
@@ -308,6 +315,7 @@ export type TableBaseColumn<T = InternalRowData> = {
   renderSorter?: RenderSorter
   renderSorterIcon?: RenderSorterIcon
   renderFilterMenu?: RenderFilterMenu
+  renderResizeIcon?: RenderResizeIcon
   colSpan?: (rowData: T, rowIndex: number) => number
   rowSpan?: (rowData: T, rowIndex: number) => number
 } & CommonColumnInfo<T>
@@ -437,6 +445,9 @@ export interface DataTableInjection {
     column: TableBaseColumn,
     getColumnWidth: (key: ColumnKey) => number | undefined
   ) => void
+  onResizeStart: ((column: TableBaseColumn) => void) | undefined
+  onResize: ((column: TableBaseColumn, width: number) => void) | undefined
+  onResizeEnd: ((column: TableBaseColumn, width: number) => void) | undefined
   getResizableWidth: (key: ColumnKey) => number | undefined
   clearResizableWidth: () => void
   doUpdateResizableWidth: (column: TableColumn, width: number) => void
