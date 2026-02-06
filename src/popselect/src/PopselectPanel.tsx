@@ -1,8 +1,9 @@
 import type { TreeNode } from 'treemate'
-import type { PropType } from 'vue'
+import type { HTMLAttributes, PropType } from 'vue'
 import type {
   NodeProps,
-  RenderLabel
+  RenderLabel,
+  RenderOption
 } from '../../_internal/select-menu/src/interface'
 import type { MaybeArray } from '../../_utils'
 import type {
@@ -63,6 +64,25 @@ export const panelProps = {
   },
   nodeProps: Function as PropType<NodeProps>,
   virtualScroll: Boolean,
+  childrenField: {
+    type: String,
+    default: 'children'
+  },
+  valueField: {
+    type: String,
+    default: 'value'
+  },
+  labelField: {
+    type: String,
+    default: 'label'
+  },
+  renderOption: Function as PropType<RenderOption>,
+  resetMenuOnOptionsChange: {
+    type: Boolean,
+    default: true
+  },
+  menuProps: Object as PropType<HTMLAttributes>,
+  onScroll: Function as PropType<(e: Event) => void>,
   // deprecated
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
@@ -102,7 +122,7 @@ export default defineComponent({
         SelectBaseOption,
         SelectGroupOption,
         SelectIgnoredOption
-      >(props.options, createTmOptions('value', 'children'))
+      >(props.options, createTmOptions(props.valueField, props.childrenField))
     })
 
     function doUpdateValue(
@@ -220,11 +240,16 @@ export default defineComponent({
     this.onRender?.()
     return (
       <NInternalSelectMenu
+        {...this.menuProps}
         clsPrefix={this.mergedClsPrefix}
         focusable
         nodeProps={this.nodeProps}
-        class={[`${this.mergedClsPrefix}-popselect-menu`, this.themeClass]}
-        style={this.cssVars}
+        class={[
+          `${this.mergedClsPrefix}-popselect-menu`,
+          this.themeClass,
+          this.menuProps?.class
+        ]}
+        style={[this.cssVars, this.menuProps?.style]}
         theme={this.mergedTheme.peers.InternalSelectMenu}
         themeOverrides={this.mergedTheme.peerOverrides.InternalSelectMenu}
         multiple={this.multiple}
@@ -234,9 +259,14 @@ export default defineComponent({
         virtualScroll={this.virtualScroll}
         scrollable={this.scrollable}
         renderLabel={this.renderLabel}
+        renderOption={this.renderOption}
+        labelField={this.labelField}
+        valueField={this.valueField}
+        resetMenuOnOptionsChange={this.resetMenuOnOptionsChange}
         onToggle={this.handleToggle}
+        onScroll={this.onScroll}
         onMouseenter={this.onMouseenter}
-        onMouseleave={this.onMouseenter}
+        onMouseleave={this.onMouseleave}
         onMousedown={this.handleMenuMousedown}
         showCheckmark={this.showCheckmark}
       >

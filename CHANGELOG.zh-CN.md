@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-popselect` 新增 `children-field`，`label-field`，`value-field`，`render-option`，`reset-menu-on-options-change`，`menu-props`，`on-scroll` 属性，关闭 [#7231](https://github.com/tusen-ai/naive-ui/issues/7231)
+
 ## 2.43.2
 
 ### Fixes
