@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-data-table` adds `toggleAllSelection`, `clearSelection`, `toggleRowSelection`, `toggleRowExpansion`, `getSelectionRows`, `setCurrentRow` instance methods, closes [#3704](https://github.com/tusen-ai/naive-ui/issues/3704).
+
 ## 2.43.2
 
 ### Fixes

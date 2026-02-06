@@ -63,6 +63,7 @@ context-menu.vue
 async-expand.vue
 render-cell.vue
 export-csv.vue
+instance-methods.vue
 fixed-column-debug.vue
 fixed-column2-debug.vue
 scroll-debug.vue
@@ -230,12 +231,18 @@ type DataTableCreateSummary = (pageData: RowData[]) =>
 | 名称 | 类型 | 说明 | 版本 |
 | --- | --- | --- | --- |
 | clearFilters | `() => void` | 清空所有的 filter 状态 |  |
+| clearSelection | `() => void` | 清除所有选中行 | NEXT_VERSION |
 | clearSorter | `() => void` | 清空所有的 sort 状态 |  |
 | downloadCsv | `(options?: { fileName?: string, keepOriginalData?: boolean }) => void` | 下载 CSV | 2.37.0 |
 | filters | `(filters: DataTableFilterState \| null) => void` | 设定表格当前的过滤器 |  |
+| getSelectionRows | `() => RowData[]` | 获取当前选中行的数据 | NEXT_VERSION |
 | page | `(page: number) => void` | 手动设置 page |  |
 | scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | 滚动内容 | 2.30.4 |
+| setCurrentRow | `(rowKey: RowKey \| null) => void` | 设置当前选中行（单选模式），传 `null` 清除选择 | NEXT_VERSION |
 | sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | 设定表格的过滤状态 |  |
+| toggleAllSelection | `(checkWholeTable?: boolean) => void` | 切换全选/全不选状态 | NEXT_VERSION |
+| toggleRowExpansion | `(rowKey: RowKey, expanded?: boolean) => void` | 切换指定行的展开状态，可选第二个参数直接设置展开或折叠 | NEXT_VERSION |
+| toggleRowSelection | `(rowKey: RowKey, selected?: boolean) => void` | 切换指定行的选中状态，可选第二个参数直接设置选中或取消 | NEXT_VERSION |
 
 ### DataTable Slots
 
