@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feat
+
+- `n-data-table` 新增 `on-resize-start`、`on-resize`、`on-resize-end` 事件和 `render-resize-icon`，关闭 [#3827](https://github.com/tusen-ai/naive-ui/issues/3827)
+
 ## 2.43.2
 
 ### Fixes

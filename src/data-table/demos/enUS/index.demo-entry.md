@@ -98,6 +98,7 @@ export-csv.vue
 | remote | `boolean` | `false` | If data-table do automatic paging. You may set it to `true` in async usage. |  |
 | render-cell | `(value: any, rowData: object, column: DataTableBaseColumn) => VNodeChild` | `undefined` | Render function of cell, it will be overwritten by columns' `render`. | 2.30.5 |
 | render-expand-icon | `({ expanded, rowData }: { expanded: boolean, rowData: object }) => VNodeChild` | `undefined` | Render function of expand icon. | 2.32.2, `expanded`: 2.34.4, `rowData`: `2.40.0` |
+| render-resize-icon | `(options: { active: boolean }) => VNodeChild` | `undefined` | Render function of resize handle icon. | NEXT_VERSION |
 | row-class-name | `string \| (rowData: object, rowIndex : number) => string` | `undefined` | Class name of each row. |  |
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |  |
 | row-props | `(rowData: object, rowIndex : number) => HTMLAttributes` | `undefined` | Customize row attributes. |  |
@@ -116,6 +117,9 @@ export-csv.vue
 | virtual-scroll-header | `boolean` | `false` | Whether to use virtual scrolling in table header. If there are too many columns, you can enable the prop. You must configure `header-height` at the same time. Enabling the prop will disable header cells that cross columns & rows. | 2.40.0 |
 | virtual-scroll-x | `boolean` | `false` | Whether to use horizontal virtual scrolling in table body. If there are too many columns, you can enable the prop. Enabling the prop will disable body cells that cross columns & rows. If the prop is enabled, every column should have `width` prop configured and `virtual-scroll`, `scroll-x`, `min-row-height`, `height-for-row`, `virtual-scroll-header` (optional), `header-height` (optional) props should be configured at the same time. You can refer to <n-a href="#virtual-x.vue">the example</n-a>. | 2.40.0 |
 | on-load | `(rowData: object) => Promise<void>` | `undefined` | Callback of async tree data expanding. | 2.27.0 |
+| on-resize-start | `(column: DataTableBaseColumn) => void` | `undefined` | Callback when resize dragging starts. | NEXT_VERSION |
+| on-resize | `(column: DataTableBaseColumn, width: number) => void` | `undefined` | Callback when resize dragging. | NEXT_VERSION |
+| on-resize-end | `(column: DataTableBaseColumn, width: number) => void` | `undefined` | Callback when column resize dragging ends. | NEXT_VERSION |
 | on-scroll | `(e: Event) => void` | `undefined` | Callback of table body scrolling. | 2.29.1 |
 | on-update:checked-row-keys | `(keys: Array<string \| number>, rows: object[], meta: { row: object \| undefined, action: 'check' \| 'uncheck' \| 'checkAll' \| 'uncheckAll' }) => void` | `undefined` | The callback function triggered when the checked-row-keys value changes. | `rows` 2.30.5, `meta` 2.33.4 |
 | on-update:expanded-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | The callback function triggered when the expanded-row-keys value changes. |  |
@@ -160,6 +164,7 @@ export-csv.vue
 | renderFilterIcon | `(options: { active: boolean, show: boolean }) => VNodeChild` | `undefined` | Render function of column filter icon. |  |
 | renderFilterMenu | `(actions: { hide: () => void }) => VNodeChild` | `undefined` | Render function of column filter menu. |  |
 | renderSorter | `(options: { order: 'descend' \| 'ascend' \| false }) => VNodeChild` | `undefined` | Render function of column sorter trigger. | 2.24.2 |
+| renderResizeIcon | `(options: { active: boolean }) => VNodeChild` | `undefined` | Render function of column resize handle icon. | NEXT_VERSION |
 | renderSorterIcon | `(options: { order: 'descend' \| 'ascend' \| false }) => VNodeChild` | `undefined` | Render function of column sorter icon. | 2.24.2 |
 | resizable | `boolean` | `undefined` | Whethe the column width can be dragged. | 2.33.4 |
 | rowSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | The row span of the cell. |  |

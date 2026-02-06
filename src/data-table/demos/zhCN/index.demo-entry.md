@@ -109,6 +109,7 @@ rtl-debug.vue
 | remote | `boolean` | `false` | 表格是否自动分页数据，在异步的状况下你可能需要把它设为 `true` |  |
 | render-cell | `(value: any, rowData: object, column: DataTableBaseColumn) => VNodeChild` | `undefined` | 自定义单元格渲染，优先级低于列的 `render` | 2.30.5 |
 | render-expand-icon | `({ expanded, rowData }: { expanded: boolean, rowData: object }) => VNodeChild` | `undefined` | 自定义渲染展开图标 | 2.32.2, `expanded`: 2.34.4, `rowData`: `2.40.0` |
+| render-resize-icon | `(options: { active: boolean }) => VNodeChild` | `undefined` | 自定义拖拽手柄图标 | NEXT_VERSION |
 | row-class-name | `string \| (rowData: object, index : number) => string` | `undefined` | 每一行上的类名 |  |
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | 通过行数据创建行的 key（如果你不想给每一行加上 key） |  |
 | row-props | `(rowData: object, rowIndex : number) => HTMLAttributes` | `undefined` | 自定义行属性 |  |
@@ -127,6 +128,9 @@ rtl-debug.vue
 | virtual-scroll-header | `boolean` | `false` | 是否打开表头的虚拟滚动，如果横向列太多，可以考虑打开此属性，打开此属性会导致表头单元格跨行列的功能不可用，同时必须要配置 `header-height` | 2.40.0 |
 | virtual-scroll-x | `boolean` | `false` | 是否打开表主体的横向虚拟滚动，如果横向列太多，可以考虑打开此属性，打开此属性会导致单元格跨行列的功能不可用，此属性开启时，必须要和 `virtual-scroll`、`scroll-x`、`min-row-height`、`height-for-row`、`virtual-scroll-header`、`header-height` 属性配合使用，同时每一列必须都配置 `width` 属性，你可以参考 <n-a href="#virtual-x.vue">完整的例子</n-a> | 2.40.0 |
 | on-load | `(rowData: object) => Promise<void>` | `undefined` | 异步展开树形数据的回调 | 2.27.0 |
+| on-resize-start | `(column: DataTableBaseColumn) => void` | `undefined` | 开始拖拽的回调 | NEXT_VERSION |
+| on-resize | `(column: DataTableBaseColumn, width: number) => void` | `undefined` | 拖拽过程中的回调 | NEXT_VERSION |
+| on-resize-end | `(column: DataTableBaseColumn, width: number) => void` | `undefined` | 拖拽结束后的回调 | NEXT_VERSION |
 | on-scroll | `(e: Event) => void` | `undefined` | 表格主体滚动的回调 | 2.29.1 |
 | on-update:checked-row-keys | `(keys: Array<string \| number>, rows: object[], meta: { row: object \| undefined, action: 'check' \| 'uncheck' \| 'checkAll' \| 'uncheckAll' }) => void` | `undefined` | checked-row-keys 值改变时触发的回调函数 | `rows` 2.30.5, `meta` 2.33.4 |
 | on-update:expanded-row-keys | `(keys: Array<string \| number>) => void` | `undefined` | expanded-row-keys 值改变时触发的回调函数 |  |
@@ -171,6 +175,7 @@ rtl-debug.vue
 | renderFilterIcon | `(options: { active: boolean, show: boolean }) => VNodeChild` | `undefined` | 渲染函数，渲染过滤器图标 |  |
 | renderFilterMenu | `(actions: { hide: () => void }) => VNodeChild` | `undefined` | 渲染函数，渲染这一列的过滤器菜单 |  |
 | renderSorter | `(options: { order: 'descend' \| 'ascend' \| false }) => VNodeChild` | `undefined` | 渲染函数，渲染排序触发 | 2.24.2 |
+| renderResizeIcon | `(options: { active: boolean }) => VNodeChild` | `undefined` | 渲染函数，渲染拖拽手柄图标 | NEXT_VERSION |
 | renderSorterIcon | `(options: { order: 'descend' \| 'ascend' \| false }) => VNodeChild` | `undefined` | 渲染函数，渲染排序图标 | 2.24.2 |
 | resizable | `boolean` | `undefined` | 列宽是否可以拖动 | 2.33.4 |
 | rowSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | 该列单元格的 row span |  |
