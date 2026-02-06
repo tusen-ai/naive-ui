@@ -551,6 +551,12 @@ export interface DataTableInst {
   downloadCsv: (options?: CsvOptionsType) => void
   /** @deprecated it but just leave it here, it does no harm */
   clearFilter: () => void
+  toggleAllSelection: (checkWholeTable?: boolean) => void
+  clearSelection: () => void
+  toggleRowSelection: (rowKey: RowKey, selected?: boolean) => void
+  toggleRowExpansion: (rowKey: RowKey, expanded?: boolean) => void
+  getSelectionRows: () => InternalRowData[]
+  setCurrentRow: (rowKey: RowKey | null) => void
 }
 
 export type CreateSummary<T = InternalRowData> = (

@@ -61,6 +61,7 @@ context-menu.vue
 async-expand.vue
 render-cell.vue
 export-csv.vue
+instance-methods.vue
 ```
 
 ## API
@@ -219,12 +220,18 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | Name | Type | Description | Version |
 | --- | --- | --- | --- |
 | clearFilters | `() => void` | Clear all filter state. |  |
+| clearSelection | `() => void` | Clear all checked rows. | NEXT_VERSION |
 | clearSorter | `() => void` | Clear all sort state. |  |
 | downloadCsv | `(options?: { fileName?: string, keepOriginalData?: boolean }) => void` | Download CSV. | 2.37.0 |
 | filters | `(filters: DataTableFilterState \| null) => void` | Set the active filters of the table. |  |
+| getSelectionRows | `() => RowData[]` | Get the data of currently checked rows. | NEXT_VERSION |
 | page | `(page: number) => void` | Manually set the page. |  |
 | scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | Scroll content. | 2.30.4 |
+| setCurrentRow | `(rowKey: RowKey \| null) => void` | Set the current row (single selection mode). Pass `null` to clear. | NEXT_VERSION |
 | sort | `(columnKey: string \| number, order: 'ascend' \| 'descend' \| false) => void` | Set the sort state of the table. |  |
+| toggleAllSelection | `(checkWholeTable?: boolean) => void` | Toggle select all / deselect all. | NEXT_VERSION |
+| toggleRowExpansion | `(rowKey: RowKey, expanded?: boolean) => void` | Toggle the expansion state of a row. Optional second parameter to set directly. | NEXT_VERSION |
+| toggleRowSelection | `(rowKey: RowKey, selected?: boolean) => void` | Toggle the checked state of a row. Optional second parameter to set directly. | NEXT_VERSION |
 
 ### DataTable Slots
 

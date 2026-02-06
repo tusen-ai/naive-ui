@@ -3,6 +3,7 @@ import type {
   CsvOptionsType,
   DataTableInst,
   DataTableSlots,
+  InternalRowData,
   MainTableRef,
   RowKey
 } from './interface'
@@ -159,10 +160,12 @@ export default defineComponent({
       doUncheckAll,
       doCheck,
       doUncheck,
+      doUpdateCheckedRowKeys,
       headerCheckboxDisabledRef,
       someRowsCheckedRef,
       allRowsCheckedRef,
       mergedCheckedRowKeySetRef,
+      mergedCheckedRowKeysRef,
       mergedInderminateRowKeySetRef
     } = useCheck(props, {
       selectionColumnRef,
@@ -312,6 +315,76 @@ export default defineComponent({
       downloadCsv,
       scrollTo: (arg0: any, arg1?: any) => {
         mainTableInstRef.value?.scrollTo(arg0, arg1)
+      },
+      toggleAllSelection: (checkWholeTable?: boolean) =>
+        allRowsCheckedRef.value
+          ? doUncheckAll(checkWholeTable)
+          : doCheckAll(checkWholeTable),
+      clearSelection: () => doUncheckAll(true),
+      toggleRowSelection(rowKey: RowKey, selected?: boolean) {
+        const row = treeMateRef.value.getNode(rowKey)?.rawNode
+        if (!row)
+          return
+        if (selected === undefined) {
+          if (mergedCheckedRowKeySetRef.value.has(rowKey)) {
+            doUncheck(rowKey, row)
+          }
+          else {
+            doCheck(rowKey, false, row)
+          }
+        }
+        else if (selected) {
+          doCheck(rowKey, false, row)
+        }
+        else {
+          doUncheck(rowKey, row)
+        }
+      },
+      toggleRowExpansion(rowKey: RowKey, expanded?: boolean) {
+        const keys = Array.from(mergedExpandedRowKeysRef.value)
+        const index = keys.indexOf(rowKey)
+        const isExpanded = ~index
+        if (expanded === undefined) {
+          if (isExpanded) {
+            keys.splice(index, 1)
+          }
+          else {
+            keys.push(rowKey)
+          }
+        }
+        else if (expanded) {
+          if (!isExpanded) {
+            keys.push(rowKey)
+          }
+        }
+        else {
+          if (isExpanded) {
+            keys.splice(index, 1)
+          }
+        }
+        doUpdateExpandedRowKeys(keys)
+      },
+      getSelectionRows() {
+        const rows: InternalRowData[] = []
+        const { getNode } = treeMateRef.value
+        mergedCheckedRowKeysRef.value.forEach((key) => {
+          const row = getNode(key)?.rawNode
+          if (row) {
+            rows.push(row)
+          }
+        })
+        return rows
+      },
+      setCurrentRow(rowKey: RowKey | null) {
+        if (rowKey === null) {
+          doUpdateCheckedRowKeys([], undefined, 'uncheckAll')
+        }
+        else {
+          const row = treeMateRef.value.getNode(rowKey)?.rawNode
+          if (row) {
+            doCheck(rowKey, true, row)
+          }
+        }
       }
     }
     const cssVarsRef = computed(() => {
