@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-breadcrumb-item` 新增 `show-separator` 属性，用于配合 `transition-group` 使用时手动控制分隔符显隐，关闭 [#3614](https://github.com/tusen-ai/naive-ui/issues/3614)
+
 ## 2.43.2
 
 ### Fixes

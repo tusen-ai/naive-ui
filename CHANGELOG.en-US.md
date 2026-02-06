@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-breadcrumb-item` adds `show-separator` prop for controlling separator visibility when used with `transition-group`, closes [#3614](https://github.com/tusen-ai/naive-ui/issues/3614).
+
 ## 2.43.2
 
 ### Fixes
