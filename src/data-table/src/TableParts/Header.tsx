@@ -100,6 +100,10 @@ export default defineComponent({
       virtualScrollHeaderRef,
       headerHeightRef,
       onUnstableColumnResize,
+      onResizeStart,
+      onResize,
+      onResizeEnd,
+      renderResizeIconRef,
       doUpdateResizableWidth,
       handleTableHeaderScroll,
       deriveNextSorter,
@@ -142,6 +146,7 @@ export default defineComponent({
     const resizeStartWidthMap = new Map<ColumnKey, number | undefined>()
     function handleColumnResizeStart(column: TableBaseColumn): void {
       resizeStartWidthMap.set(column.key, getCellActualWidth(column.key))
+      onResizeStart?.(column)
     }
     function handleColumnResize(
       column: TableBaseColumn,
@@ -164,6 +169,13 @@ export default defineComponent({
         getCellActualWidth
       )
       doUpdateResizableWidth(column, limitWidth)
+      onResize?.(column, limitWidth)
+    }
+    function handleColumnResizeEnd(column: TableBaseColumn): void {
+      const width = getCellActualWidth(column.key)
+      if (width !== undefined) {
+        onResizeEnd?.(column, width)
+      }
     }
     return {
       cellElsRef,
@@ -184,12 +196,14 @@ export default defineComponent({
       headerCheckboxDisabled: headerCheckboxDisabledRef,
       headerHeight: headerHeightRef,
       virtualScrollHeader: virtualScrollHeaderRef,
+      renderResizeIcon: renderResizeIconRef,
       virtualListRef,
       handleCheckboxUpdateChecked,
       handleColHeaderClick,
       handleTableHeaderScroll,
       handleColumnResizeStart,
-      handleColumnResize
+      handleColumnResize,
+      handleColumnResizeEnd
     }
   },
   render() {
@@ -211,10 +225,12 @@ export default defineComponent({
       headerCheckboxDisabled,
       mergedSortState,
       virtualScrollHeader,
+      renderResizeIcon,
       handleColHeaderClick,
       handleCheckboxUpdateChecked,
       handleColumnResizeStart,
-      handleColumnResize
+      handleColumnResize,
+      handleColumnResizeEnd
     } = this
     let hasEllipsis = false
 
@@ -286,6 +302,13 @@ export default defineComponent({
                   onResize={(displacementX) => {
                     handleColumnResize(column as TableBaseColumn, displacementX)
                   }}
+                  onResizeEnd={() => {
+                    handleColumnResizeEnd(column as TableBaseColumn)
+                  }}
+                  renderResizeIcon={
+                    (column as TableBaseColumn).renderResizeIcon
+                    || renderResizeIcon
+                  }
                 />
               ) : null}
             </>

@@ -329,7 +329,16 @@ export default c([
         ]),
         c('&:hover::after', `
           background-color: var(--n-th-icon-color-active);
-        `)
+        `),
+        cM('custom-icon', `
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        `, [
+          c('&::after', `
+            display: none;
+          `)
+        ])
       ]),
       cB('data-table-filter', `
         position: absolute;

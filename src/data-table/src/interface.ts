@@ -33,6 +33,13 @@ export const dataTableProps = {
       getColumnWidth: (key: ColumnKey) => number | undefined
     ) => void
   >,
+  onResizeStart: Function as PropType<(column: TableBaseColumn) => void>,
+  onResize: Function as PropType<
+    (column: TableBaseColumn, width: number) => void
+  >,
+  onResizeEnd: Function as PropType<
+    (column: TableBaseColumn, width: number) => void
+  >,
   pagination: {
     type: [Object, Boolean] as PropType<false | PaginationProps>,
     default: false
@@ -129,6 +136,7 @@ export const dataTableProps = {
     (value: any, rowData: object, column: TableBaseColumn) => VNodeChild
   >,
   renderExpandIcon: Function as PropType<RenderExpandIcon>,
+  renderResizeIcon: Function as PropType<RenderResizeIcon>,
   spinProps: { type: Object as PropType<BaseLoadingExposedProps>, default: {} },
   getCsvCell: Function as PropType<DataTableGetCsvCell>,
   getCsvHeader: Function as PropType<DataTableGetCsvHeader>,
@@ -308,6 +316,7 @@ export type TableBaseColumn<T = InternalRowData> = {
   renderSorter?: RenderSorter
   renderSorterIcon?: RenderSorterIcon
   renderFilterMenu?: RenderFilterMenu
+  renderResizeIcon?: RenderResizeIcon
   colSpan?: (rowData: T, rowIndex: number) => number
   rowSpan?: (rowData: T, rowIndex: number) => number
 } & CommonColumnInfo<T>
@@ -424,6 +433,7 @@ export interface DataTableInjection {
   expandableRef: Ref<Expandable<any> | undefined>
   stickyExpandedRowsRef: Ref<boolean>
   renderExpandIconRef: Ref<undefined | RenderExpandIcon>
+  renderResizeIconRef: Ref<undefined | RenderResizeIcon>
   summaryPlacementRef: Ref<'top' | 'bottom'>
   filterIconPopoverPropsRef: Ref<PopoverProps | undefined>
   treeMateRef: Ref<TreeMate<InternalRowData, InternalRowData, InternalRowData>>
@@ -437,6 +447,9 @@ export interface DataTableInjection {
     column: TableBaseColumn,
     getColumnWidth: (key: ColumnKey) => number | undefined
   ) => void
+  onResizeStart: ((column: TableBaseColumn) => void) | undefined
+  onResize: ((column: TableBaseColumn, width: number) => void) | undefined
+  onResizeEnd: ((column: TableBaseColumn, width: number) => void) | undefined
   getResizableWidth: (key: ColumnKey) => number | undefined
   clearResizableWidth: () => void
   doUpdateResizableWidth: (column: TableColumn, width: number) => void
@@ -477,6 +490,8 @@ export type RenderFilterIcon = RenderFilter
 export type RenderSorter = (props: { order: SortOrder }) => VNodeChild
 
 export type RenderSorterIcon = RenderSorter
+
+export type RenderResizeIcon = (props: { active: boolean }) => VNodeChild
 
 export type RenderFilterMenu = (actions: { hide: () => void }) => VNodeChild
 
