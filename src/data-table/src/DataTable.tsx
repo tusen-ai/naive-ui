@@ -213,6 +213,7 @@ export default defineComponent({
       props,
       treeMateRef,
       renderExpandIconRef: toRef(props, 'renderExpandIcon'),
+      renderResizeIconRef: toRef(props, 'renderResizeIcon'),
       loadingKeySetRef: ref(new Set<RowKey>()),
       slots,
       indentRef: toRef(props, 'indent'),

@@ -103,6 +103,7 @@ export default defineComponent({
       onResizeStart,
       onResize,
       onResizeEnd,
+      renderResizeIconRef,
       doUpdateResizableWidth,
       handleTableHeaderScroll,
       deriveNextSorter,
@@ -195,6 +196,7 @@ export default defineComponent({
       headerCheckboxDisabled: headerCheckboxDisabledRef,
       headerHeight: headerHeightRef,
       virtualScrollHeader: virtualScrollHeaderRef,
+      renderResizeIcon: renderResizeIconRef,
       virtualListRef,
       handleCheckboxUpdateChecked,
       handleColHeaderClick,
@@ -223,6 +225,7 @@ export default defineComponent({
       headerCheckboxDisabled,
       mergedSortState,
       virtualScrollHeader,
+      renderResizeIcon,
       handleColHeaderClick,
       handleCheckboxUpdateChecked,
       handleColumnResizeStart,
@@ -302,6 +305,10 @@ export default defineComponent({
                   onResizeEnd={() => {
                     handleColumnResizeEnd(column as TableBaseColumn)
                   }}
+                  renderResizeIcon={
+                    (column as TableBaseColumn).renderResizeIcon
+                    || renderResizeIcon
+                  }
                 />
               ) : null}
             </>

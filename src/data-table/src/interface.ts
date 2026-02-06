@@ -136,6 +136,7 @@ export const dataTableProps = {
     (value: any, rowData: object, column: TableBaseColumn) => VNodeChild
   >,
   renderExpandIcon: Function as PropType<RenderExpandIcon>,
+  renderResizeIcon: Function as PropType<RenderResizeIcon>,
   spinProps: { type: Object as PropType<BaseLoadingExposedProps>, default: {} },
   getCsvCell: Function as PropType<DataTableGetCsvCell>,
   getCsvHeader: Function as PropType<DataTableGetCsvHeader>,
@@ -432,6 +433,7 @@ export interface DataTableInjection {
   expandableRef: Ref<Expandable<any> | undefined>
   stickyExpandedRowsRef: Ref<boolean>
   renderExpandIconRef: Ref<undefined | RenderExpandIcon>
+  renderResizeIconRef: Ref<undefined | RenderResizeIcon>
   summaryPlacementRef: Ref<'top' | 'bottom'>
   filterIconPopoverPropsRef: Ref<PopoverProps | undefined>
   treeMateRef: Ref<TreeMate<InternalRowData, InternalRowData, InternalRowData>>
@@ -488,6 +490,8 @@ export type RenderFilterIcon = RenderFilter
 export type RenderSorter = (props: { order: SortOrder }) => VNodeChild
 
 export type RenderSorterIcon = RenderSorter
+
+export type RenderResizeIcon = (props: { active: boolean }) => VNodeChild
 
 export type RenderFilterMenu = (actions: { hide: () => void }) => VNodeChild
 

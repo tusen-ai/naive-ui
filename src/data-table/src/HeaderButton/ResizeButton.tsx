@@ -1,4 +1,4 @@
-import type { PropType } from 'vue'
+import type { PropType, VNodeChild } from 'vue'
 import { off, on } from 'evtd'
 import { defineComponent, h, inject, onBeforeUnmount, ref } from 'vue'
 import { dataTableInjectionKey } from '../interface'
@@ -8,7 +8,10 @@ export default defineComponent({
   props: {
     onResizeStart: Function,
     onResize: Function as PropType<(displacementX: number) => void>,
-    onResizeEnd: Function
+    onResizeEnd: Function,
+    renderResizeIcon: Function as PropType<
+      (props: { active: boolean }) => VNodeChild
+    >
   },
   setup(props) {
     const { mergedClsPrefixRef } = inject(dataTableInjectionKey)!
@@ -48,16 +51,20 @@ export default defineComponent({
     }
   },
   render() {
-    const { mergedClsPrefix } = this
+    const { mergedClsPrefix, active, renderResizeIcon } = this
     return (
       <span
         data-data-table-resizable
         class={[
           `${mergedClsPrefix}-data-table-resize-button`,
-          this.active && `${mergedClsPrefix}-data-table-resize-button--active`
+          active && `${mergedClsPrefix}-data-table-resize-button--active`,
+          renderResizeIcon
+          && `${mergedClsPrefix}-data-table-resize-button--custom-icon`
         ]}
         onMousedown={this.handleMousedown}
-      />
+      >
+        {renderResizeIcon && renderResizeIcon({ active })}
+      </span>
     )
   }
 })
