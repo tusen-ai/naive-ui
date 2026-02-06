@@ -7,6 +7,7 @@
 ```demo
 basic.vue
 group.vue
+loop.vue
 error.vue
 custom-error.vue
 preview-disabled.vue
@@ -53,6 +54,7 @@ component-preview-group-debug.vue
 | current | `number` | `undefined` | 当前展示的图片的下标 | 2.43.0 |
 | default-current | `number` | `0` | 默认展示的图片的下标 | 2.43.0 |
 | default-show | `boolean` | `false` | 默认展示大图预览 | 2.43.0 |
+| loop | `boolean` | `true` | 是否循环播放 | NEXT_VERSION |
 | render-toolbar | `(props: { nodes: { prev: VNode, next: VNode, rotateCounterclockwise: VNode, rotateClockwise: VNode, resizeToOriginalSize: VNode, zoomOut: VNode, zoomIn: VNode, download: VNode, close: VNode } }) => VNodeChild` | `undefined` | 工具栏的渲染函数 | `2.38.2` |
 | show | `boolean` | `undefined` | 是否展示大图预览 | 2.43.0 |
 | show-toolbar | `boolean` | `true` | 图片放大后是否展示底部工具栏 |  |

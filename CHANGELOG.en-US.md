@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-image-group` adds `loop` prop, closes [#6842](https://github.com/tusen-ai/naive-ui/issues/6842)
+
 ## 2.43.2
 
 ### Fixes

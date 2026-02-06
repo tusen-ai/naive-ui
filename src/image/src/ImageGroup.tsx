@@ -28,6 +28,10 @@ export const imageGroupProps = {
     type: Number,
     default: 0
   },
+  loop: {
+    type: Boolean,
+    default: true
+  },
   show: {
     type: Boolean,
     default: undefined
@@ -161,7 +165,9 @@ export default defineComponent({
       }
 
       const next = findNext(mergedCurrentRef.value + 1, imageCountGetter() - 1)
-      return next === undefined ? findNext(0, mergedCurrentRef.value - 1) : next
+      if (next !== undefined)
+        return next
+      return props.loop ? findNext(0, mergedCurrentRef.value - 1) : undefined
     })
 
     const prevIndex = computed(() => {
@@ -176,18 +182,24 @@ export default defineComponent({
       }
 
       const prev = findPrev(mergedCurrentRef.value - 1, 0)
-      return prev === undefined
+      if (prev !== undefined)
+        return prev
+      return props.loop
         ? findPrev(imageCountGetter() - 1, mergedCurrentRef.value + 1)
-        : prev
+        : undefined
     })
 
     function go(step: 1 | -1): void {
       if (step === 1) {
-        prevIndex.value !== undefined && setCurrentIndex(nextIndex.value!)
+        if (nextIndex.value !== undefined) {
+          setCurrentIndex(nextIndex.value)
+        }
         props.onPreviewNext?.()
       }
       else {
-        nextIndex.value !== undefined && setCurrentIndex(prevIndex.value!)
+        if (prevIndex.value !== undefined) {
+          setCurrentIndex(prevIndex.value)
+        }
         props.onPreviewPrev?.()
       }
     }
@@ -211,6 +223,8 @@ export default defineComponent({
       mergedShow: mergedShowRef,
       src: currentUrl,
       onClose,
+      prevIndex,
+      nextIndex,
       next: () => {
         go(1)
       },
@@ -227,6 +241,8 @@ export default defineComponent({
         ref="previewInstRef"
         onPrev={this.prev}
         onNext={this.next}
+        prevDisabled={this.prevIndex === undefined}
+        nextDisabled={this.nextIndex === undefined}
         src={this.src}
         show={this.mergedShow}
         showToolbar={this.showToolbar}

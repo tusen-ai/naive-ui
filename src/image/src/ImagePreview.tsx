@@ -59,6 +59,8 @@ export const imagePreviewProps = {
   >,
   onNext: Function as PropType<() => void>,
   onPrev: Function as PropType<() => void>,
+  prevDisabled: Boolean,
+  nextDisabled: Boolean,
   onClose: [Function, Array] as PropType<MaybeArray<() => void>>
 }
 
@@ -108,10 +110,14 @@ export default defineComponent({
           e.preventDefault()
           break
         case 'ArrowLeft':
-          props.onPrev?.()
+          if (!props.prevDisabled) {
+            props.onPrev?.()
+          }
           break
         case 'ArrowRight':
-          props.onNext?.()
+          if (!props.nextDisabled) {
+            props.onNext?.()
+          }
           break
         case 'ArrowUp':
           e.preventDefault()
@@ -317,11 +323,15 @@ export default defineComponent({
       scaleExp = 0
     }
     function handleSwitchPrev(): void {
+      if (props.prevDisabled)
+        return
       resetScale()
       rotate = 0
       props.onPrev?.()
     }
     function handleSwitchNext(): void {
+      if (props.nextDisabled)
+        return
       resetScale()
       rotate = 0
       props.onNext?.()
@@ -482,6 +492,7 @@ export default defineComponent({
         common: { cubicBezierEaseInOut },
         self: {
           toolbarIconColor,
+          toolbarIconColorDisabled,
           toolbarBorderRadius,
           toolbarBoxShadow,
           toolbarColor
@@ -490,6 +501,7 @@ export default defineComponent({
       return {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-toolbar-icon-color': toolbarIconColor,
+        '--n-toolbar-icon-color-disabled': toolbarIconColorDisabled,
         '--n-toolbar-color': toolbarColor,
         '--n-toolbar-border-radius': toolbarBorderRadius,
         '--n-toolbar-box-shadow': toolbarBoxShadow
@@ -549,13 +561,29 @@ export default defineComponent({
     const { clsPrefix, renderToolbar, withTooltip } = this
 
     const prevNode = withTooltip(
-      <NBaseIcon clsPrefix={clsPrefix} onClick={this.handleSwitchPrev}>
+      <NBaseIcon
+        clsPrefix={clsPrefix}
+        onClick={this.handleSwitchPrev}
+        class={[
+          `${clsPrefix}-image-preview-toolbar__icon`,
+          this.prevDisabled
+          && `${clsPrefix}-image-preview-toolbar__icon--disabled`
+        ]}
+      >
         {{ default: renderPrevIcon }}
       </NBaseIcon>,
       'tipPrevious'
     )
     const nextNode = withTooltip(
-      <NBaseIcon clsPrefix={clsPrefix} onClick={this.handleSwitchNext}>
+      <NBaseIcon
+        clsPrefix={clsPrefix}
+        onClick={this.handleSwitchNext}
+        class={[
+          `${clsPrefix}-image-preview-toolbar__icon`,
+          this.nextDisabled
+          && `${clsPrefix}-image-preview-toolbar__icon--disabled`
+        ]}
+      >
         {{ default: renderNextIcon }}
       </NBaseIcon>,
       'tipNext'
@@ -671,7 +699,7 @@ export default defineComponent({
                                 })
                               ) : (
                                 <>
-                                  {this.onPrev ? (
+                                  {this.onPrev || this.onNext ? (
                                     <>
                                       {prevNode}
                                       {nextNode}

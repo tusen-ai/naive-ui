@@ -7,6 +7,7 @@ Preview it.
 ```demo
 basic.vue
 group.vue
+loop.vue
 error.vue
 custom-error.vue
 preview-disabled.vue
@@ -51,6 +52,7 @@ component-preview-group.vue
 | current | `number` | `undefined` | The subscript of the currently displayed image. | 2.43.0 |
 | default-current | `number` | `0` | The subscript of the default displayed image. | 2.43.0 |
 | default-show | `boolean` | `false` | Whether to show the preview big image by default. | 2.43.0 |
+| loop | `boolean` | `true` | Whether to loop. | NEXT_VERSION |
 | render-toolbar | `(props: { nodes: { prev: VNode, next: VNode, rotateCounterclockwise: VNode, rotateClockwise: VNode, resizeToOriginalSize: VNode, zoomOut: VNode, zoomIn: VNode, download: VNode, close: VNode } }) => VNodeChild` | `undefined` | Toolbar rendering function. | `2.38.2` |
 | show | `boolean` | `undefined` | Whether to the show preview big image. | 2.43.0 |
 | show-toolbar | `boolean` | `true` | Whether to show the bottom toolbar when the image enlarge. |  |
