@@ -1,9 +1,10 @@
 import { fadeInScaleUpTransition } from '../../../_styles/transitions/fade-in-scale-up.cssr'
 import { fadeInTransition } from '../../../_styles/transitions/fade-in.cssr'
-import { c, cB, cNotM } from '../../../_utils/cssr'
+import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 
 // vars:
 // --n-toolbar-icon-color
+// --n-toolbar-icon-color-disabled
 // --n-toolbar-color
 // --n-toolbar-border-radius
 // --n-toolbar-box-shadow
@@ -52,6 +53,12 @@ export default c([
       font-size: 28px;
       cursor: pointer;
     `),
+    cE('icon', [
+      cM('disabled', `
+        color: var(--n-toolbar-icon-color-disabled);
+        cursor: not-allowed;
+      `)
+    ]),
     fadeInTransition()
   ]),
   cB('image-preview-wrapper', `
