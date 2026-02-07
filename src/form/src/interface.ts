@@ -109,8 +109,17 @@ export type FormValidate = (
 
 export type FormValidationError = ValidateError[]
 
+export type FormValidateFields = (
+  fields: string | string[],
+  validateCallback?: FormValidateCallback,
+  shouldRuleBeApplied?: ShouldRuleBeApplied
+) => Promise<{
+  warnings: ValidateError[][] | undefined
+}>
+
 export interface FormInst {
   validate: FormValidate
+  validateFields: FormValidateFields
   restoreValidation: () => void
 }
 

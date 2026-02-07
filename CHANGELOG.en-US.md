@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-form` adds `validateFields` method to validate specific form items by field paths, closes [#7475](https://github.com/tusen-ai/naive-ui/issues/7475).
+
 ## 2.43.2
 
 ### Fixes

@@ -23,6 +23,7 @@ export type {
   FormItemInst,
   FormItemRule,
   FormRules,
+  FormValidateFields,
   FormValidationError
 } from './src/interface'
 

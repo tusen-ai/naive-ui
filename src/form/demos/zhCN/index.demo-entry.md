@@ -26,6 +26,7 @@ partially-apply-rules.vue
 custom-messages.vue
 dynamic.vue
 feedback-style.vue
+validate-fields.vue
 ```
 
 ## API
@@ -105,6 +106,7 @@ feedback-style.vue
 | 名称 | 类型 | 说明 | 版本 |
 | --- | --- | --- | --- |
 | validate | `(validateCallback?: (errors: Array<FormValidationError> \| undefined, extra: { warnings: Array<FormValidationError> \| undefined }) => void, shouldRuleBeApplied?: FormItemRule => boolean) => Promise<{ warnings: Array<FormValidationError> \| undefined }>` | 验证表单，Promise rejection 的返回值类型是 `Array<FormValidationError>` | `warnings` `2.37.1` |
+| validateFields | `(fields: string \| string[], validateCallback?: (errors: Array<FormValidationError> \| undefined, extra: { warnings: Array<FormValidationError> \| undefined }) => void, shouldRuleBeApplied?: FormItemRule => boolean) => Promise<{ warnings: Array<FormValidationError> \| undefined }>` | 验证指定字段，`fields` 可以是单个字段路径或字段路径数组。Promise rejection 的返回值类型是 `Array<FormValidationError>` | NEXT_VERSION |
 | restoreValidation | `() => void` | 还原到未校验的状态 |  |
 
 ### FormItem, FormItemGi Methods

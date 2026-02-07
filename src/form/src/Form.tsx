@@ -82,9 +82,10 @@ export default defineComponent({
         maxChildLabelWidthRef.value = currentWidth
       }
     }
-    async function validate(
+    async function doValidate(
       validateCallback?: FormValidateCallback,
-      shouldRuleBeApplied: ShouldRuleBeApplied = () => true
+      shouldRuleBeApplied: ShouldRuleBeApplied = () => true,
+      paths: string[] | null = null
     ): Promise<{ warnings: ValidateError[][] | undefined }> {
       return await new Promise<{ warnings: ValidateError[][] | undefined }>(
         (resolve, reject) => {
@@ -92,6 +93,8 @@ export default defineComponent({
             Promise<FormItemInternalValidateResult>
           > = []
           for (const key of keysOf(formItems)) {
+            if (paths && !paths.includes(key))
+              continue
             const formItemInstances = formItems[key]
             for (const formItemInstance of formItemInstances) {
               if (formItemInstance.path) {
@@ -130,6 +133,20 @@ export default defineComponent({
         }
       )
     }
+    async function validate(
+      validateCallback?: FormValidateCallback,
+      shouldRuleBeApplied: ShouldRuleBeApplied = () => true
+    ): Promise<{ warnings: ValidateError[][] | undefined }> {
+      return await doValidate(validateCallback, shouldRuleBeApplied)
+    }
+    async function validateFields(
+      fields: string | string[],
+      validateCallback?: FormValidateCallback,
+      shouldRuleBeApplied: ShouldRuleBeApplied = () => true
+    ): Promise<{ warnings: ValidateError[][] | undefined }> {
+      const paths = typeof fields === 'string' ? [fields] : fields
+      return await doValidate(validateCallback, shouldRuleBeApplied, paths)
+    }
     function restoreValidation(): void {
       for (const key of keysOf(formItems)) {
         const formItemInstances = formItems[key]
@@ -146,6 +163,7 @@ export default defineComponent({
     provide(formItemInstsInjectionKey, { formItems })
     const formExposedMethod: FormInst = {
       validate,
+      validateFields,
       restoreValidation
     }
     return Object.assign(formExposedMethod, {

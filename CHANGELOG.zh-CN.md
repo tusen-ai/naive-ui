@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-form` 新增 `validateFields` 方法，支持通过字段路径校验指定的表单项，关闭 [#7475](https://github.com/tusen-ai/naive-ui/issues/7475)
+
 ## 2.43.2
 
 ### Fixes

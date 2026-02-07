@@ -23,6 +23,7 @@ async.vue
 disabled.vue
 show-label.vue
 partially-apply-rules.vue
+validate-fields.vue
 custom-messages.vue
 dynamic.vue
 feedback-style.vue
@@ -112,6 +113,7 @@ Accept all props from FormItem & [GridItem](grid#GridItem-Props)
 | Name | Type | Description | Version |
 | --- | --- | --- | --- |
 | validate | `(validateCallback?: (errors: Array<FormValidationError> \| undefined, extra: { warnings: Array<FormValidationError> \| undefined }) => void, shouldRuleBeApplied?: FormItemRule => boolean) => Promise<{ warnings: Array<FormValidationError> \| undefined }>` | Validate the form. The rejection value type of returned promise is `Array<FormValidationError>`. | `warnings` `2.37.1` |
+| validateFields | `(fields: string \| string[], validateCallback?: (errors: Array<FormValidationError> \| undefined, extra: { warnings: Array<FormValidationError> \| undefined }) => void, shouldRuleBeApplied?: FormItemRule => boolean) => Promise<{ warnings: Array<FormValidationError> \| undefined }>` | Validate specific fields. `fields` can be a single field path or an array of field paths. The rejection value type of returned promise is `Array<FormValidationError>`. | NEXT_VERSION |
 | restoreValidation | `() => void` | Restore validate. |  |
 
 ### FormItem, FormItemGi Methods
