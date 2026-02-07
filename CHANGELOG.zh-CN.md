@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-form-item` 新增 `tooltip` 和 `tooltip-icon` 属性，关闭 [#2927](https://github.com/tusen-ai/naive-ui/issues/2927)
+
 ## 2.43.2
 
 ### Fixes

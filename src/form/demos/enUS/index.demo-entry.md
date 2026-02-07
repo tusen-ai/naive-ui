@@ -97,6 +97,8 @@ feedback-style.vue
 | show-require-mark | `boolean` | `-` | Whether to show required symbol. If not set, it will use `show-require-mark` from the parent form. |
 | require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | Require mark placement. If not set, it will use `require-mark-placement` from the parent form. | `'right-hanging'` 2.24.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size. |  |
+| tooltip | `string \| (() => VNodeChild) \| PopoverProps` | `undefined` | Tooltip info next to the label. Pass an object to use as `NTooltip` props. | NEXT_VERSION |
+| tooltip-icon | `() => VNodeChild` | `undefined` | Render function to customize the tooltip icon. |  |
 | validation-status | `'error' \| 'success' \| 'warning'` | `undefined` | The validation status of the form item. If set, it will replace the result of the rule-based validation. |  |
 
 ### FormItemGi Props
@@ -131,7 +133,9 @@ To find out more about AsyncValidatorOptions, see <n-a href="https://github.com/
 
 ### FormItem, FormItemGi Slots
 
-| Name     | Parameters | Description    | Version |
-| -------- | ---------- | -------------- | ------- |
-| feedback | `()`       | Feedback.      | 2.24.0  |
-| label    | `()`       | Label content. |         |
+| Name         | Parameters | Description          | Version      |
+| ------------ | ---------- | -------------------- | ------------ |
+| feedback     | `()`       | Feedback.            | 2.24.0       |
+| label        | `()`       | Label content.       |              |
+| tooltip      | `()`       | Tooltip content.     | NEXT_VERSION |
+| tooltip-icon | `()`       | Custom tooltip icon. | NEXT_VERSION |

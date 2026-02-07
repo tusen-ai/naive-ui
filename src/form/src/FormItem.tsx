@@ -9,6 +9,7 @@ import type {
 } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type { PopoverProps } from '../../popover/src/Popover'
 import type { FormTheme } from '../styles'
 import type {
   FormItemInst,
@@ -39,6 +40,7 @@ import {
   Transition,
   watch
 } from 'vue'
+import { QuestionIcon } from '../../_internal/icons'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { formItemInjectionKey } from '../../_mixins/use-form-item'
 import {
@@ -48,6 +50,7 @@ import {
   useInjectionInstanceCollection,
   warn
 } from '../../_utils'
+import { NTooltip } from '../../tooltip'
 import { formLight } from '../styles'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
 import style from './styles/form-item.cssr'
@@ -85,6 +88,10 @@ export const formItemProps = {
     default: undefined
   },
   labelProps: Object as PropType<LabelHTMLAttributes>,
+  tooltip: [String, Function, Object] as PropType<
+    string | (() => VNodeChild) | PopoverProps
+  >,
+  tooltipIcon: Function as PropType<() => VNodeChild>,
   contentClass: String,
   contentStyle: [String, Object] as PropType<string | CSSProperties>
 } as const
@@ -573,6 +580,38 @@ export default defineComponent({
           </span>
         )
       )
+      const tooltipContent = $slots.tooltip
+        ? $slots.tooltip()
+        : typeof this.tooltip === 'function'
+          ? this.tooltip()
+          : typeof this.tooltip === 'string'
+            ? this.tooltip
+            : null
+
+      const tooltipPopoverProps
+        = typeof this.tooltip === 'object'
+          && this.tooltip !== null
+          && typeof this.tooltip !== 'function'
+          ? (this.tooltip as PopoverProps)
+          : {}
+
+      const tooltipNode = tooltipContent ? (
+        <NTooltip placement="top" {...tooltipPopoverProps}>
+          {{
+            trigger: () =>
+              $slots['tooltip-icon'] ? (
+                $slots['tooltip-icon']()
+              ) : this.tooltipIcon ? (
+                this.tooltipIcon()
+              ) : (
+                <QuestionIcon
+                  class={`${mergedClsPrefix}-form-item-label__tooltip`}
+                />
+              ),
+            default: () => tooltipContent
+          }}
+        </NTooltip>
+      ) : null
       const { labelProps } = this
       return (
         <label
@@ -582,14 +621,15 @@ export default defineComponent({
             `${mergedClsPrefix}-form-item-label`,
             `${mergedClsPrefix}-form-item-label--${mergedRequireMarkPlacement}-mark`,
             this.reverseColSpace
-            && `${mergedClsPrefix}-form-item-label--reverse-columns-space`
+            && `${mergedClsPrefix}-form-item-label--reverse-columns-space`,
+            tooltipNode && `${mergedClsPrefix}-form-item-label--has-tooltip`
           ]}
           style={this.mergedLabelStyle as any}
           ref="labelElementRef"
         >
           {mergedRequireMarkPlacement === 'left'
-            ? [markNode, textNode]
-            : [textNode, markNode]}
+            ? [markNode, textNode, tooltipNode]
+            : [textNode, tooltipNode, markNode]}
         </label>
       )
     }
