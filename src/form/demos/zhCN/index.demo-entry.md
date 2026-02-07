@@ -90,6 +90,8 @@ feedback-style.vue
 | show-require-mark | `boolean` | `-` | 是否展示必填的星号。如果没有被设定，使用外层 `n-form` 的 `show-require-mark` |  |
 | require-mark-placement | `'left' \| 'right' \| 'right-hanging'` | `'right'` | 必填的星号的位置。如果没有被设定，使用外层 `n-form` 的 `require-mark-placement` | `'right-hanging'` 2.24.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
+| tooltip | `string \| (() => VNodeChild) \| PopoverProps` | `undefined` | 标签旁的提示信息。传入对象时将作为 `NTooltip` 的 props | NEXT_VERSION |
+| tooltip-icon | `() => VNodeChild` | `undefined` | 自定义提示图标的渲染函数 | NEXT_VERSION |
 | validation-status | `'error' \| 'success' \| 'warning'` | `undefined` | 表单的验证状态。不设为 `undefined`时，会覆盖规则验证的结果 |  |
 
 ### FormItemGi Props
@@ -124,7 +126,9 @@ feedback-style.vue
 
 ### FormItem, FormItemGi Slots
 
-| 名称     | 参数 | 说明           | 版本   |
-| -------- | ---- | -------------- | ------ |
-| feedback | `()` | 表项的反馈信息 | 2.24.0 |
-| label    | `()` | 标签内容       |        |
+| 名称         | 参数 | 说明           | 版本         |
+| ------------ | ---- | -------------- | ------------ |
+| feedback     | `()` | 表项的反馈信息 | 2.24.0       |
+| label        | `()` | 标签内容       |              |
+| tooltip      | `()` | 提示信息内容   | NEXT_VERSION |
+| tooltip-icon | `()` | 自定义提示图标 | NEXT_VERSION |

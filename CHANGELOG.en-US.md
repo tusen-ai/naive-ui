@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- `n-form-item` adds `tooltip` and `tooltip-icon` prop, closes [#2927](https://github.com/tusen-ai/naive-ui/issues/2927).
+
 ## 2.43.2
 
 ### Fixes
