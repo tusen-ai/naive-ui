@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- 修复 `n-input` 和 `n-input-number` 绑定响应式对象字段值时，删除对象属性无法清除输入框，关闭 [#7467](https://github.com/tusen-ai/naive-ui/issues/7467)
+
 ## 2.43.2
 
 ### Fixes

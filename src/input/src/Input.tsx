@@ -214,6 +214,11 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
+    watch(controlledValueRef, (newVal, oldVal) => {
+      if (newVal === undefined && oldVal !== undefined) {
+        uncontrolledValueRef.value = props.defaultValue
+      }
+    })
     // form-item
     const formItem = useFormItem(props)
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
