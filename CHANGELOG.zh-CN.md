@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- 修复 `n-data-table` 在没有数据且设置了 `flex-height` 或 `max-height` 和 `scroll-x` 时，水平滚动条消失的问题，关闭 [#5052](https://github.com/tusen-ai/naive-ui/issues/5052)
+
 ## 2.43.2
 
 ### Fixes

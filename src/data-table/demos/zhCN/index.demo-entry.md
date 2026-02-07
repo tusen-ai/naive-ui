@@ -24,7 +24,6 @@
 summary-debug.vue
 debug.vue
 basic.vue
-empty.vue
 border.vue
 size.vue
 row-props.vue
@@ -72,6 +71,7 @@ ellipsis-debug.vue
 custom-expand-icon-debug.vue
 expandable-debug.vue
 rtl-debug.vue
+empty-scroll.vue
 ```
 
 ## API

@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix `n-data-table` horizontal scrollbar disappearing when data is empty with `flex-height` or `max-height` and `scroll-x` set, closes [#5052](https://github.com/tusen-ai/naive-ui/issues/5052).
+
 ## 2.43.2
 
 ### Fixes

@@ -90,7 +90,11 @@ export default c([
                 cB('data-table-base-table-body', 'flex-basis: 0;', [
                   // last-child means there is no empty icon
                   // body is a scrollbar, we need to override height 100%
-                  c('&:last-child', 'flex-grow: 1;')
+                  c('&:last-child', 'flex-grow: 1;'),
+                  c('&:not(:last-child)', `
+                    flex-basis: auto;
+                    flex-shrink: 0;
+                  `)
                 ])
               ])
             ])

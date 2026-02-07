@@ -21,6 +21,7 @@ export default defineComponent({
       minHeightRef,
       flexHeightRef,
       virtualScrollHeaderRef,
+      paginatedDataRef,
       syncScrollState
     } = inject(dataTableInjectionKey)!
 
@@ -85,6 +86,7 @@ export default defineComponent({
         selfEl.classList.add(transitionDisabledClass)
       }
     })
+    const isEmptyRef = computed(() => paginatedDataRef.value.length === 0)
     return {
       maxHeight: maxHeightRef,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -93,13 +95,14 @@ export default defineComponent({
       bodyInstRef,
       bodyStyle: bodyStyleRef,
       flexHeight: flexHeightRef,
+      isEmpty: isEmptyRef,
       handleBodyResize,
       ...exposedMethods
     }
   },
   render() {
-    const { mergedClsPrefix, maxHeight, flexHeight } = this
-    const headerInBody = maxHeight === undefined && !flexHeight
+    const { mergedClsPrefix, maxHeight, flexHeight, isEmpty } = this
+    const headerInBody = (maxHeight === undefined && !flexHeight) || isEmpty
     return (
       <div class={`${mergedClsPrefix}-data-table-base-table`} ref="selfElRef">
         {headerInBody ? null : <TableHeader ref="headerInstRef" />}
