@@ -148,6 +148,11 @@ export default defineComponent({
       controlledValueRef,
       uncontrolledValueRef
     )
+    watch(controlledValueRef, (newVal, oldVal) => {
+      if (newVal === undefined && oldVal !== undefined) {
+        uncontrolledValueRef.value = props.defaultValue
+      }
+    })
     const displayedValueRef = ref('')
     const getPrecision = (value: string | number): number => {
       const fraction = String(value).split('.')[1]

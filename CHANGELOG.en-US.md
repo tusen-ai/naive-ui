@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix `n-input` and `n-input-number` not clearing when the bound reactive object property is deleted, closes [#7467](https://github.com/tusen-ai/naive-ui/issues/7467)
+
 ## 2.43.2
 
 ### Fixes
