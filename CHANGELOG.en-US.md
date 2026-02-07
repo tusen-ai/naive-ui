@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `katex` type compatibility by upgrading to `0.16.28` and removing `@types/katex` dependency, closes [#7423](https://github.com/tusen-ai/naive-ui/issues/7423).
+
 ## 2.43.2
 
 ### Fixes
