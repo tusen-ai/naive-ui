@@ -110,7 +110,11 @@ const zhCN: NLocale = {
     filterVarName: '过滤变量名',
     import: '导入',
     export: '导出',
-    restore: '恢复默认'
+    restore: '恢复默认',
+    themeStore: '主题商店',
+    apply: '应用',
+    currentTheme: '当前主题',
+    resetTheme: '重置主题'
   },
   Image: {
     tipPrevious: '上一张（←）',
