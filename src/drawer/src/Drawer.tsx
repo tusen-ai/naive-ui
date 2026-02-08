@@ -1,15 +1,15 @@
+import type { CSSProperties, PropType } from 'vue'
 import type { ScrollbarProps } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { DrawerTheme } from '../styles'
 import type { Placement } from './DrawerBodyWrapper'
 import { zindexable } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
-  type PropType,
   provide,
   ref,
   toRef,
@@ -26,7 +26,7 @@ import {
   useIsComposing,
   warnOnce
 } from '../../_utils'
-import { drawerLight, type DrawerTheme } from '../styles'
+import { drawerLight } from '../styles'
 import NDrawerBodyWrapper from './DrawerBodyWrapper'
 import { drawerInjectionKey } from './interface'
 import style from './styles/index.cssr'

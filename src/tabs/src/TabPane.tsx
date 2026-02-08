@@ -1,15 +1,12 @@
-import type { ExtractPublicPropTypes } from '../../_utils'
-import {
-  defineComponent,
-  h,
-  type HTMLAttributes,
-  inject,
-  type PropType,
-  type SlotsType,
-  type VNode,
-  type VNodeChild,
-  watchEffect
+import type {
+  HTMLAttributes,
+  PropType,
+  SlotsType,
+  VNode,
+  VNodeChild
 } from 'vue'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import { defineComponent, h, inject, watchEffect } from 'vue'
 import { throwError, warnOnce } from '../../_utils'
 import { tabsInjectionKey } from './interface'
 
@@ -41,6 +38,7 @@ export type TabPaneProps = ExtractPublicPropTypes<typeof tabPaneProps>
 
 export interface TabPaneSlots {
   default?: () => VNode[]
+  tab?: () => VNode[]
   prefix?: () => VNode[]
   suffix?: () => VNode[]
 }

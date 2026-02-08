@@ -1,3 +1,6 @@
+import type { TreeNode } from 'treemate'
+import type { PropType } from 'vue'
+import type { InternalSelectMenuRef } from '../../_internal'
 import type {
   SelectBaseOption,
   SelectGroupOption,
@@ -10,22 +13,18 @@ import type {
   TmNode,
   Value
 } from './interface'
-import { createTreeMate, type TreeNode } from 'treemate'
+import { createTreeMate } from 'treemate'
 import { clickoutside } from 'vdirs'
 import {
   computed,
   defineComponent,
   h,
   inject,
-  type PropType,
   ref,
   Transition,
   withDirectives
 } from 'vue'
-import {
-  type InternalSelectMenuRef,
-  NInternalSelectMenu
-} from '../../_internal'
+import { NInternalSelectMenu } from '../../_internal'
 import { resolveSlot } from '../../_utils'
 import { createTmOptions } from '../../select/src/utils'
 import { cascaderInjectionKey } from './interface'

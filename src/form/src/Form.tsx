@@ -1,5 +1,7 @@
 import type { ValidateError } from 'async-validator'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { FormTheme } from '../styles'
 import type {
   FormInst,
@@ -13,16 +15,9 @@ import type {
   ShouldRuleBeApplied,
   Size
 } from './interface'
-import {
-  defineComponent,
-  type ExtractPropTypes,
-  h,
-  type PropType,
-  provide,
-  ref
-} from 'vue'
+import { defineComponent, h, provide, ref } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
-import { type ExtractPublicPropTypes, keysOf } from '../../_utils'
+import { keysOf } from '../../_utils'
 import { formLight } from '../styles'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
 import style from './styles/form.cssr'
@@ -85,6 +80,14 @@ export default defineComponent({
         || currentWidth >= currentMaxChildLabelWidth
       ) {
         maxChildLabelWidthRef.value = currentWidth
+      }
+    }
+    function calcChildLabelWidths(): void {
+      for (const key of keysOf(formItems)) {
+        const formItemInstances = formItems[key]
+        for (const formItemInstance of formItemInstances) {
+          formItemInstance.calcLabelWidth?.()
+        }
       }
     }
     async function validate(
@@ -151,7 +154,8 @@ export default defineComponent({
     provide(formItemInstsInjectionKey, { formItems })
     const formExposedMethod: FormInst = {
       validate,
-      restoreValidation
+      restoreValidation,
+      calcChildLabelWidths
     }
     return Object.assign(formExposedMethod, {
       mergedClsPrefix: mergedClsPrefixRef

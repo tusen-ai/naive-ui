@@ -1,4 +1,5 @@
 import type { TreeMate } from 'treemate'
+import type { Ref } from 'vue'
 import type {
   DataTableSetupProps,
   Expandable,
@@ -6,7 +7,7 @@ import type {
   RowKey
 } from './interface'
 import { useMemo, useMergedState } from 'vooks'
-import { type Ref, ref, toRef } from 'vue'
+import { ref, toRef } from 'vue'
 import { call, warn } from '../../_utils'
 
 export function useExpand(

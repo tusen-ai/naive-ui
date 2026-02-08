@@ -4,23 +4,13 @@
 `Debug` 用的。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { CashOutline, LogInOutline } from '@vicons/ionicons5'
 import { unstableButtonGroupRtl, unstableButtonRtl } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  components: {
-    CashOutline,
-    LogInOutline
-  },
-  setup() {
-    return {
-      rtlEnabled: ref(false),
-      rtlStyles: [unstableButtonGroupRtl, unstableButtonRtl]
-    }
-  }
-})
+const rtlEnabled = ref(false)
+const rtlStyles = [unstableButtonGroupRtl, unstableButtonRtl]
 </script>
 
 <template>

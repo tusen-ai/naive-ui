@@ -1,3 +1,4 @@
+import type { CSSProperties, SlotsType } from 'vue'
 import type {
   CsvOptionsType,
   DataTableInst,
@@ -8,12 +9,10 @@ import type {
 import { createId } from 'seemly'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   provide,
   ref,
-  type SlotsType,
   toRef,
   Transition,
   watchEffect
@@ -410,12 +409,12 @@ export default defineComponent({
         '--n-td-color-striped': tdColorStriped,
         '--n-td-color-striped-modal': tdColorStripedModal,
         '--n-td-color-striped-popover': tdColorStripedPopover,
-        'n-td-color-sorting': tdColorSorting,
-        'n-td-color-sorting-modal': tdColorSortingModal,
-        'n-td-color-sorting-popover': tdColorSortingPopover,
-        'n-th-color-sorting': thColorSorting,
-        'n-th-color-sorting-modal': thColorSortingModal,
-        'n-th-color-sorting-popover': thColorSortingPopover
+        '--n-td-color-sorting': tdColorSorting,
+        '--n-td-color-sorting-modal': tdColorSortingModal,
+        '--n-td-color-sorting-popover': tdColorSortingPopover,
+        '--n-th-color-sorting': thColorSorting,
+        '--n-th-color-sorting-modal': thColorSortingModal,
+        '--n-th-color-sorting-popover': thColorSortingPopover
       }
     })
     const themeClassHandle = inlineThemeDisabled

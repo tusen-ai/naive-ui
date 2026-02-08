@@ -4,15 +4,8 @@
   Elements can be arbitrarily combined to achieve more functionality.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    CashIcon
-  }
-})
 </script>
 
 <template>
@@ -45,5 +38,6 @@ export default defineComponent({
         <n-icon><CashIcon /></n-icon>
       </n-float-button>
     </n-float-button-group>
+    <n-float-button-group />
   </n-flex>
 </template>

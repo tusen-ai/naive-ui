@@ -16,7 +16,7 @@ describe('n-color-picker', () => {
           modes: ['hex', 'hsl']
         }
       })
-      await wrapper.find('.n-color-picker-trigger').trigger('click')
+      await wrapper.find('.n-color-picker').trigger('click')
       expect(document.querySelector('.n-color-picker-panel')).not.toEqual(null)
       const modeDom = document.querySelector('.n-color-picker-input__mode')
       expect(modeDom?.textContent).toEqual('HEXA')
@@ -35,7 +35,7 @@ describe('n-color-picker', () => {
           modes: ['hsl']
         }
       })
-      await wrapper.find('.n-color-picker-trigger').trigger('click')
+      await wrapper.find('.n-color-picker').trigger('click')
       expect(document.querySelector('.n-color-picker-panel')).not.toEqual(null)
       const modeDom = document.querySelector('.n-color-picker-input__mode')
       expect(modeDom?.textContent).toEqual('HSLA')
@@ -52,7 +52,7 @@ describe('n-color-picker', () => {
           modes: ['hsl']
         }
       })
-      await wrapper.find('.n-color-picker-trigger').trigger('click')
+      await wrapper.find('.n-color-picker').trigger('click')
       expect(document.querySelector('.n-color-picker-panel')).not.toEqual(null)
       const modeDom = document.querySelector('.n-color-picker-input__mode')
       expect(modeDom?.textContent).toEqual('HSLA')
@@ -99,7 +99,7 @@ describe('n-color-picker', () => {
           actions: ['confirm']
         }
       })
-      await wrapper.find('.n-color-picker-trigger').trigger('click')
+      await wrapper.find('.n-color-picker').trigger('click')
       expect(document.querySelector('.n-color-picker-panel')).not.toEqual(null)
       expect(document.querySelector('.n-color-picker-pallete')).not.toEqual(
         null
@@ -119,7 +119,7 @@ describe('n-color-picker', () => {
           swatches: ['hsva(0, 0%, 0%, 1)']
         }
       })
-      await wrapper.find('.n-color-picker-trigger').trigger('click')
+      await wrapper.find('.n-color-picker').trigger('click')
       expect(
         document
           .querySelector('.n-color-picker-swatch__fill')
@@ -128,7 +128,7 @@ describe('n-color-picker', () => {
       wrapper.unmount()
     })
     it('output according to mode', async () => {
-      const onUpdateValue = jest.fn()
+      const onUpdateValue = vi.fn()
       const output = {
         RGBA: {
           mode: 'rgb',
@@ -158,7 +158,7 @@ describe('n-color-picker', () => {
           onUpdateValue
         }
       })
-      await wrapper.find('.n-color-picker-trigger').trigger('click')
+      await wrapper.find('.n-color-picker').trigger('click')
       const swatch = document.querySelector('.n-color-picker-swatch')
       const modeDom = document.querySelector('.n-color-picker-input__mode')
       let length = modes.length
@@ -190,7 +190,7 @@ describe('props.label', () => {
     })
     await nextTick()
     expect(
-      document.querySelector('.n-color-picker-trigger__value')?.textContent
+      document.querySelector('.n-color-picker__value')?.textContent
     ).toEqual('custom')
     wrapper.unmount()
   })
@@ -213,42 +213,38 @@ describe('n-color-picker 2', () => {
         'left',
         'left-end'
       ] as const
-    ).forEach((placement) => {
+    ).forEach(async (placement) => {
       const wrapper = mount(NColorPicker, { props: { placement } })
-      setTimeout(() => {
+      await vi.waitFor(() => {
         expect(
           document
             .querySelector('.v-binder-follower-content')
             ?.getAttribute('v-placement')
         ).toBe(placement)
-        wrapper.unmount()
       })
+      wrapper.unmount()
     })
   })
 
   it('should work with `disabled` prop', async () => {
     const wrapper = mount(NColorPicker)
-    expect(wrapper.find('.n-color-picker-trigger').classes()).not.toContain(
-      'n-color-picker-trigger--disabled'
+    expect(wrapper.find('.n-color-picker').classes()).not.toContain(
+      'n-color-picker--disabled'
     )
 
     await wrapper.setProps({ disabled: true })
-    expect(wrapper.find('.n-color-picker-trigger').classes()).toContain(
-      'n-color-picker-trigger--disabled'
+    expect(wrapper.find('.n-color-picker').classes()).toContain(
+      'n-color-picker--disabled'
     )
     wrapper.unmount()
   })
 
   it('should work with `render-label` prop', async () => {
     const wrapper = mount(NColorPicker)
-    expect(wrapper.find('.n-color-picker-trigger__value').text()).not.toBe(
-      'test-label'
-    )
+    expect(wrapper.find('.n-color-picker__value').text()).not.toBe('test-label')
 
     await wrapper.setProps({ renderLabel: () => 'test-label' })
-    expect(wrapper.find('.n-color-picker-trigger__value').text()).toBe(
-      'test-label'
-    )
+    expect(wrapper.find('.n-color-picker__value').text()).toBe('test-label')
     wrapper.unmount()
   })
 })

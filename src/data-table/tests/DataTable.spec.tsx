@@ -1,9 +1,11 @@
-import { mount } from '@vue/test-utils'
+import type { HTMLAttributes } from 'vue'
 /* eslint-disable unused-imports/no-unused-vars */
-import { h, type HTMLAttributes, nextTick, ref } from 'vue'
+import type { DataTableColumns, DataTableInst } from '../index'
+import { mount } from '@vue/test-utils'
+import { h, nextTick, ref } from 'vue'
 import { NButton } from '../../button'
 import { NButtonGroup } from '../../button-group'
-import { type DataTableColumns, type DataTableInst, NDataTable } from '../index'
+import { NDataTable } from '../index'
 
 describe('n-data-table', () => {
   it('should work with import on demand', () => {
@@ -72,15 +74,15 @@ describe('n-data-table', () => {
           name: index
         }
       })
-    const onPageChange = jest.fn((page: number): void => {
-      setTimeout(() => {
+    const onPageChange = vi.fn(async (page: number): Promise<void> => {
+      await vi.waitFor(() => {
         pagination.page = page
         pagination.itemCount = data.length
         data = data.slice(
           (page - 1) * pagination.pageSize,
           page * pagination.pageSize
         )
-      }, 1000)
+      })
     })
     const columns = [
       {
@@ -388,8 +390,8 @@ describe('n-data-table', () => {
     ): Promise<boolean> => {
       const matchResult
         = (await checkIsMatched('.chinese-col', targets[0]))
-        && (await checkIsMatched('.math-col', targets[1]))
-        && (await checkIsMatched('.english-col', targets[2]))
+          && (await checkIsMatched('.math-col', targets[1]))
+          && (await checkIsMatched('.english-col', targets[2]))
 
       return matchResult
     }
@@ -517,11 +519,11 @@ describe('n-data-table', () => {
       await nextTick()
       const result
         = (await checkIsMatched('.age-col', [42, 32, 32, 32]))
-        && (await checkScoreIsMatched([
-          [98, 98, 98, 88],
-          [66, 60, 66, 99],
-          [89, 70, 89, 89]
-        ]))
+          && (await checkScoreIsMatched([
+            [98, 98, 98, 88],
+            [66, 60, 66, 99],
+            [89, 70, 89, 89]
+          ]))
       expect(result).toEqual(true)
     })
   })
@@ -840,7 +842,7 @@ describe('n-data-table', () => {
   })
 
   it('should work with `on-update:checked-row-keys` prop', async () => {
-    const handleCheck = jest.fn()
+    const handleCheck = vi.fn()
     const columns: DataTableColumns = [
       {
         type: 'selection'
@@ -1327,14 +1329,19 @@ describe('props.columns', () => {
       checkedRowKeys.value = e
     }
 
-    const wrapper = mount(() => (
-      <NDataTable
-        columns={columns}
-        data={data}
-        onUpdateCheckedRowKeys={handleCheck}
-        checked-row-keys={checkedRowKeys.value}
-      />
-    ))
+    const wrapper = mount(
+      () => (
+        <NDataTable
+          columns={columns}
+          data={data}
+          onUpdateCheckedRowKeys={handleCheck}
+          checked-row-keys={checkedRowKeys.value}
+        />
+      ),
+      {
+        attachTo: document.body
+      }
+    )
 
     const radios = wrapper.findAll('.n-radio')
 
@@ -1343,10 +1350,9 @@ describe('props.columns', () => {
 
     await radios[1].trigger('click')
 
-    setTimeout(() => {
-      expect(radios[1].classes()).toContain('n-radio--checked')
-      expect(radios[4].classes()).not.toContain('n-radio--checked')
-    }, 0)
+    expect(radios[1].classes()).toContain('n-radio--checked')
+    expect(radios[4].classes()).not.toContain('n-radio--checked')
+
     wrapper.unmount()
   })
 })

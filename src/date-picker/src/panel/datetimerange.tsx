@@ -77,7 +77,7 @@ export default defineComponent({
           />
           <NTimePicker
             placeholder={this.locale.selectTime}
-            format={this.timerPickerFormat}
+            format={this.timePickerFormat}
             size={this.timePickerSize}
             {...(Array.isArray(timePickerProps)
               ? timePickerProps[0]
@@ -109,7 +109,7 @@ export default defineComponent({
           />
           <NTimePicker
             placeholder={this.locale.selectTime}
-            format={this.timerPickerFormat}
+            format={this.timePickerFormat}
             size={this.timePickerSize}
             {...(Array.isArray(timePickerProps)
               ? timePickerProps[1]
@@ -359,26 +359,26 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
               {shortcuts
-              && Object.keys(shortcuts).map((key) => {
-                const shortcut = shortcuts[key]
-                return Array.isArray(shortcut)
-                  || typeof shortcut === 'function' ? (
-                      <NxButton
-                        size="tiny"
-                        onMouseenter={() => {
-                          this.handleRangeShortcutMouseenter(shortcut)
-                        }}
-                        onClick={() => {
-                          this.handleRangeShortcutClick(shortcut)
-                        }}
-                        onMouseleave={() => {
-                          this.handleShortcutMouseleave()
-                        }}
-                      >
-                        {{ default: () => key }}
-                      </NxButton>
-                    ) : null
-              })}
+                && Object.keys(shortcuts).map((key) => {
+                  const shortcut = shortcuts[key]
+                  return Array.isArray(shortcut)
+                    || typeof shortcut === 'function' ? (
+                        <NxButton
+                          size="tiny"
+                          onMouseenter={() => {
+                            this.handleRangeShortcutMouseenter(shortcut)
+                          }}
+                          onClick={() => {
+                            this.handleRangeShortcutClick(shortcut)
+                          }}
+                          onMouseleave={() => {
+                            this.handleShortcutMouseleave()
+                          }}
+                        >
+                          {{ default: () => key }}
+                        </NxButton>
+                      ) : null
+                })}
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
               {this.actions?.includes('clear')

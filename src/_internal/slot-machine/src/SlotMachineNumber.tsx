@@ -1,13 +1,5 @@
-import {
-  computed,
-  defineComponent,
-  h,
-  nextTick,
-  type PropType,
-  ref,
-  toRef,
-  watch
-} from 'vue'
+import type { PropType } from 'vue'
+import { computed, defineComponent, h, nextTick, ref, toRef, watch } from 'vue'
 
 export default defineComponent({
   name: 'SlotMachineNumber',

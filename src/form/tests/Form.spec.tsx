@@ -1,9 +1,10 @@
-import type { FormValidateCallback } from '../src/interface'
+import type { FormInst } from '../index'
 /* eslint-disable unused-imports/no-unused-vars */
+import type { FormValidateCallback } from '../src/interface'
 import { mount } from '@vue/test-utils'
 import { defineComponent, h, ref } from 'vue'
 import { NInput } from '../../input'
-import { type FormInst, NForm, NFormItem } from '../index'
+import { NForm, NFormItem } from '../index'
 
 describe('n-form', () => {
   it('should work with import on demand', () => {
@@ -184,7 +185,10 @@ describe('n-form', () => {
 
     await wrapper.setProps({ showLabel: false })
     expect(wrapper.findAll('.n-form-item-label').length).toBe(0)
-    expect(wrapper.findAll('.n-form-item--no-label').length).toBe(3)
+    const noLabelItem = wrapper
+      .findAll('.n-form-item')
+      .filter(w => w.classes().includes('n-form-item--no-label'))
+    expect(noLabelItem).toHaveLength(3)
 
     // The NFormItem show-label has a higher weight than the NForm
     wrapper = mount(NForm, {

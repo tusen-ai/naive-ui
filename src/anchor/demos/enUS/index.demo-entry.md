@@ -32,7 +32,13 @@ scrollto.vue
 | Name  | Type     | Default     | Description         |
 | ----- | -------- | ----------- | ------------------- |
 | href  | `string` | `undefined` | The target of link  |
-| title | `stirng` | `undefined` | The content of link |
+| title | `string` | `undefined` | The content of link |
+
+### AnchorLink Slots
+
+| Name  | Parameters | Description            | Version |
+| ----- | ---------- | ---------------------- | ------- |
+| title | `()`       | The title of the link. | 2.42.0  |
 
 ### Anchor Methods
 

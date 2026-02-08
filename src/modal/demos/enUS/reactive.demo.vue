@@ -6,57 +6,68 @@ Provided since `2.38.0`.
 You can use `useModal.create` to create a modal. (Please make sure this API is called inside `n-modal-provider`.)
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { NButton, useMessage, useModal } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const modal = useModal()
-    const message = useMessage()
+const modal = useModal()
+const message = useMessage()
 
-    const showDialogPreset = () => {
-      const m = modal.create({
-        title: 'Dialog perset',
-        preset: 'dialog',
-        content: 'Content'
-      })
-      message.info('Shut down in three seconds')
-      setTimeout(() => {
-        m.destroy()
-      }, 3000)
+function showDialogPreset() {
+  const m = modal.create({
+    title: 'Dialog perset',
+    preset: 'dialog',
+    content: 'Content'
+  })
+  message.info('Shut down in three seconds')
+  setTimeout(() => {
+    m.destroy()
+  }, 3000)
+}
+
+function showCardPreset() {
+  const m = modal.create({
+    title: 'Card preset',
+    preset: 'card',
+    style: {
+      width: '400px'
+    },
+    content: 'Content',
+    footer: () =>
+      h(NButton, { type: 'primary', onClick: () => m.destroy() }, () => 'Close')
+  })
+}
+
+function showAny() {
+  const m = modal.create({
+    style: {
+      width: '400px',
+      background: '#fff'
+    },
+    render() {
+      return h('div', [
+        'Content',
+        h(
+          NButton,
+          { type: 'primary', onClick: () => m.destroy() },
+          () => 'Close'
+        )
+      ])
     }
-    const showCardPreset = () => {
-      const m = modal.create({
-        title: 'Card preset',
-        preset: 'card',
-        style: {
-          width: '400px'
-        },
-        content: 'Content',
-        footer: () =>
-          h(
-            NButton,
-            { type: 'primary', onClick: () => m.destroy() },
-            () => 'Close'
-          )
-      })
-    }
-    return {
-      showDialogPreset,
-      showCardPreset
-    }
-  }
-})
+  })
+}
 </script>
 
 <template>
   <n-flex>
-    <n-button @click="showDialogPreset">
+    <NButton @click="showDialogPreset">
       Start me up Dialog
-    </n-button>
-    <n-button @click="showCardPreset">
+    </NButton>
+    <NButton @click="showCardPreset">
       Start me up Card
-    </n-button>
+    </NButton>
+    <NButton @click="showAny">
+      Start me every thing
+    </NButton>
   </n-flex>
 </template>

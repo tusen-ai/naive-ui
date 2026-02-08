@@ -1,5 +1,15 @@
 import type { RuleItem, ValidateError, ValidateOption } from 'async-validator'
+import type {
+  CSSProperties,
+  ExtractPropTypes,
+  LabelHTMLAttributes,
+  PropType,
+  Slot,
+  VNodeChild
+} from 'vue'
+import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type { FormTheme } from '../styles'
 import type {
   FormItemInst,
   FormItemInternalValidate,
@@ -19,28 +29,17 @@ import { get } from 'lodash-es'
 import { createId } from 'seemly'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
-  type ExtractPropTypes,
   h,
   inject,
-  type LabelHTMLAttributes,
   onMounted,
-  type PropType,
   provide,
   ref,
-  type Slot,
   toRef,
   Transition,
-  type VNodeChild,
   watch
 } from 'vue'
-import {
-  type ThemeProps,
-  useConfig,
-  useTheme,
-  useThemeClass
-} from '../../_mixins'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { formItemInjectionKey } from '../../_mixins/use-form-item'
 import {
   createKey,
@@ -49,7 +48,7 @@ import {
   useInjectionInstanceCollection,
   warn
 } from '../../_utils'
-import { formLight, type FormTheme } from '../styles'
+import { formLight } from '../styles'
 import { formInjectionKey, formItemInstsInjectionKey } from './context'
 import style from './styles/form-item.cssr'
 import { formItemMisc, formItemRule, formItemSize } from './utils'
@@ -85,7 +84,9 @@ export const formItemProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  labelProps: Object as PropType<LabelHTMLAttributes>
+  labelProps: Object as PropType<LabelHTMLAttributes>,
+  contentClass: String,
+  contentStyle: [String, Object] as PropType<string | CSSProperties>
 } as const
 
 export type FormItemSetupProps = ExtractPropTypes<typeof formItemProps>
@@ -178,6 +179,7 @@ export default defineComponent({
       }>
     >([])
     const feedbackIdRef = ref(createId())
+    const labelElementRef = ref<null | HTMLLabelElement>(null)
     const mergedDisabledRef = NForm
       ? toRef(NForm.props, 'disabled')
       : ref(false)
@@ -194,6 +196,20 @@ export default defineComponent({
         return
       restoreValidation()
     })
+    function calcLabelWidth(): void {
+      if (!formItemMiscRefs.isAutoLabelWidth.value)
+        return
+      const labelElement = labelElementRef.value
+      if (labelElement !== null) {
+        const memoizedWhitespace = labelElement.style.whiteSpace
+        labelElement.style.whiteSpace = 'nowrap'
+        labelElement.style.width = ''
+        NForm?.deriveMaxChildLabelWidth(
+          Number(getComputedStyle(labelElement).width.slice(0, -2))
+        )
+        labelElement.style.whiteSpace = memoizedWhitespace
+      }
+    }
     function restoreValidation(): void {
       renderExplainsRef.value = []
       validationErroredRef.value = false
@@ -368,8 +384,8 @@ export default defineComponent({
       options?: string | null | FormItemValidateOptions,
       callback?: ValidateCallback
     ): Promise<{
-        warnings: ValidateError[] | undefined
-      }> {
+      warnings: ValidateError[] | undefined
+    }> {
       /** the following code is for compatibility */
       let trigger: ValidationTrigger | string | undefined
       let validateCallback: ValidateCallback | undefined
@@ -423,23 +439,10 @@ export default defineComponent({
     const exposedRef: FormItemInst = {
       validate,
       restoreValidation,
-      internalValidate
+      internalValidate,
+      calcLabelWidth
     }
-    const labelElementRef = ref<null | HTMLLabelElement>(null)
-    onMounted((): void => {
-      if (!formItemMiscRefs.isAutoLabelWidth.value)
-        return
-      const labelElement = labelElementRef.value
-      if (labelElement !== null) {
-        const memoizedWhitespace = labelElement.style.whiteSpace
-        labelElement.style.whiteSpace = 'nowrap'
-        labelElement.style.width = ''
-        NForm?.deriveMaxChildLabelWidth(
-          Number(getComputedStyle(labelElement).width.slice(0, -2))
-        )
-        labelElement.style.whiteSpace = memoizedWhitespace
-      }
-    })
+    onMounted(calcLabelWidth)
     const cssVarsRef = computed(() => {
       const { value: size } = mergedSizeRef
       const { value: labelPlacement } = labelPlacementRef
@@ -610,9 +613,11 @@ export default defineComponent({
         <div
           class={[
             `${mergedClsPrefix}-form-item-blank`,
+            this.contentClass,
             this.mergedValidationStatus
             && `${mergedClsPrefix}-form-item-blank--${this.mergedValidationStatus}`
           ]}
+          style={this.contentStyle}
         >
           {$slots}
         </div>

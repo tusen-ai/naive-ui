@@ -4,16 +4,10 @@
 使用 `size` 装成其他组件。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      loading: ref(true)
-    }
-  }
-})
+const loading = ref(true)
 </script>
 
 <template>

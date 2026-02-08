@@ -2,16 +2,10 @@
 # Basic
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      show: ref(true)
-    }
-  }
-})
+const show = ref(true)
 </script>
 
 <template>

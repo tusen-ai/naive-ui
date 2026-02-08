@@ -7,6 +7,7 @@ export { isJsdom } from './env/is-jsdom'
 export { eventEffectNotPerformed, markEventEffectPerformed } from './event'
 export {
   getTitleAttribute,
+  isArrayShallowEqual,
   largerSize,
   smallerSize,
   throwError,
@@ -18,6 +19,7 @@ export type {
   ExtractPublicPropTypes,
   Mutable
 } from './naive'
+export type * from './ts/ts'
 export {
   call,
   createDataKey,

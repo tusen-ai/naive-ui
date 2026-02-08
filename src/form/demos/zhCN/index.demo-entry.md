@@ -69,6 +69,8 @@ feedback-style.vue
 
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
+| content-class | `string` | `undefined` | 内容的类名 | 2.43.0 |
+| content-style | `string \| object` | `undefined` | 内容的样式 | 2.43.0 |
 | feedback | `string` | `undefined` | 表项的反馈信息。不设为 `undefined` 时，会覆盖规则验证的结果 |  |
 | feedback-class | `string` | `undefined` | 反馈校验竖向展示定位 | 2.38.2 |
 | feedback-style | `string \| object` | `undefined` | 反馈校验横向展示定位 | 2.38.2 |

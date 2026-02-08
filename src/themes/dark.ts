@@ -37,6 +37,7 @@ import { floatButtonGroupDark } from '../float-button-group/styles'
 import { floatButtonDark } from '../float-button/styles'
 import { formDark } from '../form/styles'
 import { gradientTextDark } from '../gradient-text/styles'
+import { heatmapDark } from '../heatmap/styles'
 import { iconWrapperDark } from '../icon-wrapper/styles'
 import { iconDark } from '../icon/styles'
 import { imageDark } from '../image/styles'
@@ -72,7 +73,7 @@ import { spinDark } from '../spin/styles'
 import { splitDark } from '../split/styles'
 import { statisticDark } from '../statistic/styles'
 import { stepsDark } from '../steps/styles'
-import { flexDark } from '../styles'
+import { flexDark, inputOtpDark } from '../styles'
 import { switchDark } from '../switch/styles'
 import { tableDark } from '../table/styles'
 import { tabsDark } from '../tabs/styles'
@@ -126,11 +127,13 @@ export const darkTheme: BuiltInGlobalTheme = {
   Flex: flexDark,
   Form: formDark,
   GradientText: gradientTextDark,
+  Heatmap: heatmapDark,
   Icon: iconDark,
   IconWrapper: iconWrapperDark,
   Image: imageDark,
   Input: inputDark,
   InputNumber: inputNumberDark,
+  InputOtp: inputOtpDark,
   LegacyTransfer: legacyTransferDark,
   Layout: layoutDark,
   List: listDark,

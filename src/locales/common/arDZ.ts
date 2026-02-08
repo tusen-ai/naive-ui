@@ -122,6 +122,12 @@ const arDZ: NLocale = {
     tipDownload: 'للتحميل',
     tipClose: 'إغلاق (Esc زر)',
     tipOriginalSize: 'تكبير إلى الحجم الأصلي'
+  },
+  Heatmap: {
+    less: 'less',
+    more: 'more',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 
