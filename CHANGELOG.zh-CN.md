@@ -11,6 +11,9 @@
 ### Feats
 
 - `n-color-picker` 新增 `trigger` slot，关闭 [#7192](https://github.com/tusen-ai/naive-ui/issues/7192)
+- `n-date-picker` 新增 `close-panel-on-select-date` 参数
+- `n-date-picker` 新增 `close-panel-on-select-year` 参数
+- `n-date-picker` 新增 `close-panel-on-select-month` 参数
 
 ### Fixes
 

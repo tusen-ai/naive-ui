@@ -11,6 +11,9 @@
 ### Feats
 
 - `n-color-picker` adds `trigger` slot, closes [#7192](https://github.com/tusen-ai/naive-ui/issues/7192).
+- `n-date-picker` adds `close-panel-on-select-date` prop.
+- `n-date-picker` adds `close-panel-on-select-year` prop.
+- `n-date-picker` adds `close-panel-on-select-month` prop.
 
 ### Fixes
 
