@@ -8,7 +8,7 @@ import type {
   VNode
 } from 'vue'
 import type { FollowerPlacement } from 'vueuc'
-import type { InternalSelectMenuRef } from '../../_internal'
+import type { InternalSelectMenuRef, ScrollbarProps } from '../../_internal'
 import type {
   RenderLabel,
   RenderOption
@@ -112,6 +112,7 @@ export const autoCompleteProps = {
   onSelect: [Function, Array] as PropType<MaybeArray<OnSelect>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
+  scrollbarProps: Object as PropType<ScrollbarProps>,
   // deprecated
   onInput: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
@@ -462,6 +463,7 @@ export default defineComponent({
                               renderOption={this.renderOption}
                               size="medium"
                               onToggle={this.handleToggle}
+                              scrollbarProps={this.scrollbarProps}
                             >
                               {{ empty: () => this.$slots.empty?.() }}
                             </NInternalSelectMenu>,

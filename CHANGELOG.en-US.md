@@ -11,6 +11,7 @@
 ### Feats
 
 - `n-color-picker` adds `trigger` slot, closes [#7192](https://github.com/tusen-ai/naive-ui/issues/7192).
+- `n-select`, `n-auto-complete`, `n-mention`, `n-popselect`, `n-cascader`, `n-pagination` add `scrollbar-props` prop.
 
 ### Fixes
 

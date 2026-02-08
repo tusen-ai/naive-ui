@@ -1,4 +1,5 @@
 import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type { ScrollbarProps } from '../../_internal/scrollbar/src/Scrollbar'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { Size as InputSize } from '../../input/src/interface'
@@ -101,6 +102,7 @@ export const paginationProps = {
   },
   to: useAdjustedTo.propTo,
   showQuickJumpDropdown: { type: Boolean, default: true },
+  scrollbarProps: Object as PropType<ScrollbarProps>,
   'onUpdate:page': [Function, Array] as PropType<
     MaybeArray<(page: number) => void>
   >,
@@ -863,6 +865,7 @@ export default defineComponent({
                             }
                             onUpdateValue={this.handleMenuSelect}
                             scrollable
+                            scrollbarProps={this.scrollbarProps}
                             showCheckmark={false}
                           >
                             {{ default: () => itemNode }}
@@ -917,6 +920,7 @@ export default defineComponent({
                   options={pageSizeOptions}
                   value={mergedPageSize}
                   disabled={disabled}
+                  scrollbarProps={this.scrollbarProps}
                   theme={mergedTheme.peers.Select}
                   themeOverrides={mergedTheme.peerOverrides.Select}
                   onUpdateValue={handleSizePickerChange}

@@ -70,6 +70,7 @@ export default defineComponent({
       handleSelectMenuClickOutside,
       doUncheck: cascaderDoUncheck,
       doCheck: cascaderDoCheck,
+      scrollbarPropsRef,
       clearPattern
     } = inject(cascaderInjectionKey)!
     const menuInstRef = ref<InternalSelectMenuRef | null>(null)
@@ -180,6 +181,7 @@ export default defineComponent({
       handleToggle,
       handleClickOutside,
       cascaderSlots,
+      scrollbarProps: scrollbarPropsRef,
       ...exposedRef
     }
   },
@@ -205,6 +207,7 @@ export default defineComponent({
                     multiple={this.multiple}
                     value={this.value}
                     onToggle={this.handleToggle}
+                    scrollbarProps={this.scrollbarProps}
                   >
                     {{
                       empty: () =>

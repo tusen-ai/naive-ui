@@ -9,7 +9,8 @@ import type {
 import type { FollowerInst, FollowerPlacement } from 'vueuc'
 import type {
   InternalSelectionInst,
-  InternalSelectMenuRef
+  InternalSelectMenuRef,
+  ScrollbarProps
 } from '../../_internal'
 import type {
   NodeProps,
@@ -210,6 +211,7 @@ export const selectProps = {
     type: Boolean,
     default: true
   },
+  scrollbarProps: Object as PropType<ScrollbarProps>,
   /** deprecated */
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   items: Array as PropType<SelectMixedOption[]>
@@ -1072,6 +1074,7 @@ export default defineComponent({
                               resetMenuOnOptionsChange={
                                 this.resetMenuOnOptionsChange
                               }
+                              scrollbarProps={this.scrollbarProps}
                             >
                               {{
                                 empty: () => [this.$slots.empty?.()],
