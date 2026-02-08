@@ -5,6 +5,7 @@ import type {
   LabelHTMLAttributes,
   PropType,
   Slot,
+  SlotsType,
   VNodeChild
 } from 'vue'
 import type { ThemeProps } from '../../_mixins'
@@ -17,6 +18,7 @@ import type {
   FormItemRule,
   FormItemRuleValidator,
   FormItemRuleValidatorParams,
+  FormItemSlots,
   FormItemValidateOptions,
   LabelAlign,
   LabelPlacement,
@@ -150,6 +152,7 @@ function wrapValidator(
 export default defineComponent({
   name: 'FormItem',
   props: formItemProps,
+  slots: Object as SlotsType<FormItemSlots>,
   setup(props) {
     useInjectionInstanceCollection(
       formItemInstsInjectionKey,

@@ -116,7 +116,7 @@ feedback-style.vue
 
 关于 AsyncValidatorOptions，参考 <n-a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</n-a>。
 
-### Form, FormItem, FormItemGi Slots
+### Form Slots
 
 | 名称    | 参数 | 说明 |
 | ------- | ---- | ---- |
@@ -126,5 +126,6 @@ feedback-style.vue
 
 | 名称     | 参数 | 说明           | 版本   |
 | -------- | ---- | -------------- | ------ |
+| default  | `()` | 内容           |
 | feedback | `()` | 表项的反馈信息 | 2.24.0 |
 | label    | `()` | 标签内容       |        |

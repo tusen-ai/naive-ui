@@ -4,7 +4,7 @@ import type {
   ValidateMessages,
   ValidateOption
 } from 'async-validator'
-import type { Ref, VNodeChild } from 'vue'
+import type { Ref, VNode, VNodeChild } from 'vue'
 import type { FormSetupProps } from './Form'
 
 export interface FormRules {
@@ -117,3 +117,9 @@ export interface FormInst {
 }
 
 export interface FormValidateMessages extends ValidateMessages {}
+
+export interface FormItemSlots {
+  default?: () => VNode[]
+  feedback?: () => VNode[]
+  label?: () => VNode[]
+}

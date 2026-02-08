@@ -123,7 +123,7 @@ Accept all props from FormItem & [GridItem](grid#GridItem-Props)
 
 To find out more about AsyncValidatorOptions, see <n-a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</n-a>.
 
-### Form, FormItem, FormItemGi Slots
+### Form Slots
 
 | Name    | Parameters | Description |
 | ------- | ---------- | ----------- |
@@ -133,5 +133,6 @@ To find out more about AsyncValidatorOptions, see <n-a href="https://github.com/
 
 | Name     | Parameters | Description    | Version |
 | -------- | ---------- | -------------- | ------- |
+| default  | `()`       | Content.       |
 | feedback | `()`       | Feedback.      | 2.24.0  |
 | label    | `()`       | Label content. |         |
