@@ -71,7 +71,6 @@
   "dependencies": {
     "@css-render/plugin-bem": "^0.15.14",
     "@css-render/vue3-ssr": "^0.15.14",
-    "@types/katex": "^0.16.2",
     "@types/lodash": "^4.17.20",
     "@types/lodash-es": "^4.17.12",
     "async-validator": "^4.2.5",
@@ -131,7 +130,7 @@
     "husky": "^9.1.7",
     "inquirer": "^12.7.0",
     "jsdom": "^27.0.0",
-    "katex": "^0.16.22",
+    "katex": "^0.16.28",
     "lint-staged": "^16.1.6",
     "marked": "^12.0.2",
     "prettier": "^3.6.2",

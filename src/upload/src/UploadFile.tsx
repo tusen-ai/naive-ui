@@ -121,7 +121,7 @@ export default defineComponent({
           return
         }
       }
-      NUpload.submit(props.file.id)
+      NUpload.submit({ fileId: props.file.id })
     }
     function handleRemoveOrCancelClick(e: MouseEvent): void {
       e.preventDefault()

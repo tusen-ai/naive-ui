@@ -205,6 +205,7 @@ export default defineComponent({
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass('select', undefined, cssVarsRef, NPopselect.props)
       : undefined
+
     return {
       mergedTheme: NPopselect.mergedThemeRef,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -213,7 +214,8 @@ export default defineComponent({
       handleMenuMousedown,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
-      onRender: themeClassHandle?.onRender
+      onRender: themeClassHandle?.onRender,
+      scrollbarProps: NPopselect.props.scrollbarProps
     }
   },
   render() {
@@ -233,6 +235,7 @@ export default defineComponent({
         value={this.value}
         virtualScroll={this.virtualScroll}
         scrollable={this.scrollable}
+        scrollbarProps={this.scrollbarProps}
         renderLabel={this.renderLabel}
         onToggle={this.handleToggle}
         onMouseenter={this.onMouseenter}

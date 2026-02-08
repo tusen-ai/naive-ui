@@ -9,7 +9,8 @@ import type {
 import type { FollowerInst, FollowerPlacement } from 'vueuc'
 import type {
   InternalSelectionInst,
-  InternalSelectMenuRef
+  InternalSelectMenuRef,
+  ScrollbarProps
 } from '../../_internal'
 import type {
   NodeProps,
@@ -210,6 +211,7 @@ export const selectProps = {
     type: Boolean,
     default: true
   },
+  scrollbarProps: Object as PropType<ScrollbarProps>,
   /** deprecated */
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   items: Array as PropType<SelectMixedOption[]>
@@ -740,9 +742,12 @@ export default defineComponent({
     }
     function handleClear(e: MouseEvent): void {
       e.stopPropagation()
-      const { multiple } = props
+      const { multiple, tag, remote } = props
       if (!multiple && props.filterable) {
         closeMenu()
+      }
+      if (tag && !remote) {
+        createdOptionsRef.value = emptyArray
       }
       doClear()
       if (multiple) {
@@ -1069,6 +1074,7 @@ export default defineComponent({
                               resetMenuOnOptionsChange={
                                 this.resetMenuOnOptionsChange
                               }
+                              scrollbarProps={this.scrollbarProps}
                             >
                               {{
                                 empty: () => [this.$slots.empty?.()],

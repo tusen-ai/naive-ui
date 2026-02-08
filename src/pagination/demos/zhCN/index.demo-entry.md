@@ -43,6 +43,7 @@ rtl-debug.vue
 | page-slot | `number` | `9` | 页码显示的个数 |  |
 | page | `number` | `undefined` | 受控模式下的当前页 |  |
 | prefix | `(info: PaginationInfo) => VNodeChild` | `undefined` | 分页前缀 |  |
+| scrollbar-props | `ScrollbarProps` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props) | NEXT_VERSION |
 | select-props | `SelectProps` | `undefined` | 分页大小选择器的属性 | 2.34.3 |
 | show-quick-jumper | `boolean` | `false` | 是否显示快速跳转 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 分页按钮的大小 | 2.29.0 |

@@ -24,6 +24,7 @@ append.vue
 | --- | --- | --- | --- | --- |
 | append | `boolean` | `false` | 选中后是否追加 | 2.38.0 |
 | blur-after-select | `boolean` | `false` | 选中后是否 blur |  |
+| bordered | `boolean` | `undefined` | 是否显示输入框边框 |  |
 | clear-after-select | `boolean` | `false` | 选中后是否清空 |  |
 | clearable | `boolean` | `false` | 自动填充是否支持可清除 |  |
 | default-value | `string` | `null` | 自动填充的默认值 |  |
@@ -37,11 +38,13 @@ append.vue
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 自动填充的弹出位置 | 2.25.0 |
 | render-label | `(option: SelectOption \| SelectGroupOption, selected: boolean) => VNodeChild` | `undefined` | 选项标签渲染函数 | 2.24.0 |
 | render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean }) => VNodeChild` | `undefined` | 选项的渲染函数 | 2.24.0 |
+| scrollbar-props | `ScrollbarProps` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props) | NEXT_VERSION |
 | show-empty | `boolean` | `false` | 在没有选项的时候是否展示菜单 | 2.37.1 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 自动填充的尺寸大小 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | to | `string \| HTMLElement \| false` | `body` | 菜单的容器节点，`false` 会待在原地 |  |
 | value | `string` | `undefined` | 自动填充的数据用户可控 |  |
+| z-index | `number` | `undefined` | 菜单的 z-index |  |
 | on-blur | `(event: FocusEvent) => void` | `undefined` | blur 时触发的回调函数 |  |
 | on-focus | `(event: FocusEvent) => void` | `undefined` | focus 时触发的回调函数 |  |
 | on-select | `(value: string) => void` | `undefined` | select 选中时触发的回调函数 |  |

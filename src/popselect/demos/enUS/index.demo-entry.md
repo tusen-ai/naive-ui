@@ -23,6 +23,7 @@ slot.vue
 | options | `Array<SelectOption \| SelectGroupOption>` | `[]` | For details of configuration options, see [Select](select#SelectOption-Properties) |  |
 | render-label | `(option: SelectOption \| SelectGroupOption) => VNodeChild` | `undefined` | Render function of all the options. |  |
 | scrollable | `boolean` | `false` | Whether the select menu is scrollable. |  |
+| scrollbar-props | `ScrollbarProps` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props) | NEXT_VERSION |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the Popselect. |  |
 | value | `string \| number \| Array<string \| number> \| null` | `null` | Value in controlled mode. |  |
 | virtual-scroll | `boolean` | `false` | Whether to enable virtual scrolling. | 2.30.4 |

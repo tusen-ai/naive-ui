@@ -82,6 +82,14 @@ export default defineComponent({
         maxChildLabelWidthRef.value = currentWidth
       }
     }
+    function invalidateLabelWidth(): void {
+      for (const key of keysOf(formItems)) {
+        const formItemInstances = formItems[key]
+        for (const formItemInstance of formItemInstances) {
+          formItemInstance.invalidateLabelWidth?.()
+        }
+      }
+    }
     async function validate(
       validateCallback?: FormValidateCallback,
       shouldRuleBeApplied: ShouldRuleBeApplied = () => true
@@ -146,7 +154,8 @@ export default defineComponent({
     provide(formItemInstsInjectionKey, { formItems })
     const formExposedMethod: FormInst = {
       validate,
-      restoreValidation
+      restoreValidation,
+      invalidateLabelWidth
     }
     return Object.assign(formExposedMethod, {
       mergedClsPrefix: mergedClsPrefixRef
