@@ -13,6 +13,7 @@ modes.vue
 actions.vue
 form.vue
 swatches.vue
+trigger.vue
 native.vue
 close-debug.vue
 ```
@@ -45,10 +46,11 @@ close-debug.vue
 
 ### ColorPicker Slots
 
-| 名称   | 参数                      | 说明                | 版本   |
-| ------ | ------------------------- | ------------------- | ------ |
-| label  | `(color: string \| null)` | 触发器的内容        | 2.24.0 |
-| action | `()`                      | 菜单操作区域的 slot | 2.24.0 |
+| 名称 | 参数 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| action | `()` | 菜单操作区域的 slot | 2.24.0 |
+| label | `(color: string \| null)` | 触发器的内容 | 2.24.0 |
+| trigger | `(props: { value: string \| null , onClick: () => void, ref: (ref: Element \| ComponentPublicInstance \| null }) => void })` | 自定义触发器，只允许一个元素，不可以是纯文本 | NEXT_VERSION |
 
 ## Q & A
 

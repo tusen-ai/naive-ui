@@ -4,9 +4,21 @@
 
 `NEXT_VERSION`
 
+### Breaking Changes
+
+- `n-color-picker` refactor DOM structure & trigger class names.
+
 ### Feats
 
+- `n-color-picker` adds `trigger` slot, closes [#7192](https://github.com/tusen-ai/naive-ui/issues/7192).
 - `n-select`, `n-auto-complete`, `n-mention`, `n-popselect`, `n-cascader`, `n-pagination` add `scrollbar-props` prop.
+
+### Fixes
+
+- Fix `katex` type compatibility by upgrading to `0.16.28` and removing `@types/katex` dependency, closes [#7423](https://github.com/tusen-ai/naive-ui/issues/7423).
+- Fix `n-select`'s created option is not cleared when clearing dynamic options while `tag` and `clearable` are enabled, closes [#7405](https://github.com/tusen-ai/naive-ui/issues/7405)
+- Fix `n-modal` event listeners not removed, closes [#7341](https://github.com/tusen-ai/naive-ui/issues/7341) by [@lu-han](https://github.com/lu-han)
+- Fix `n-marquee` component Non-function value encountered for default slot warning.
 
 ## 2.43.2
 
@@ -78,6 +90,7 @@
 - `useModal` add `render` function, closes [#5857](https://github.com/tusen-ai/naive-ui/issues/5857).
 - `n-card` add `close-focusable` prop.
 - `n-dialog` add `close-focusable` prop.
+- `n-form-item` adds `invalidateLabelWidth` method，`n-form` adds `invalidateLabelWidths` method，closes [#5939](https://github.com/tusen-ai/naive-ui/issues/5939)
 
 ## 2.42.0
 

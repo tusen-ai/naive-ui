@@ -742,9 +742,12 @@ export default defineComponent({
     }
     function handleClear(e: MouseEvent): void {
       e.stopPropagation()
-      const { multiple } = props
+      const { multiple, tag, remote } = props
       if (!multiple && props.filterable) {
         closeMenu()
+      }
+      if (tag && !remote) {
+        createdOptionsRef.value = emptyArray
       }
       doClear()
       if (multiple) {
