@@ -21,11 +21,12 @@ separator-per-item.vue
 
 ### BreadcrumbItem Props
 
-| Name      | Type      | Default     | Description               | Version |
-| --------- | --------- | ----------- | ------------------------- | ------- |
-| clickable | `boolean` | `true`      | Whether it's clickable.   | 2.30.0  |
-| separator | `string`  | `undefined` | BreadcrumbItem separator. |         |
-| href      | `string`  | `undefined` | BreadcrumbItem link.      |         |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| clickable | `boolean` | `true` | Whether it's clickable. | 2.30.0 |
+| href | `string` | `undefined` | BreadcrumbItem link. |  |
+| separator | `string` | `undefined` | BreadcrumbItem separator. |  |
+| show-separator | `boolean` | `true` | Whether to show the separator. | NEXT_VERSION |
 
 ### Breadcrumb Slots
 
