@@ -89,7 +89,7 @@
 - `useModal` add `render` function, closes [#5857](https://github.com/tusen-ai/naive-ui/issues/5857).
 - `n-card` add `close-focusable` prop.
 - `n-dialog` add `close-focusable` prop.
-- `n-form-item` adds `calcLabelWidth` method，`n-form` adds `calcLabelWidths` method，closes [#5939](https://github.com/tusen-ai/naive-ui/issues/5939)
+- `n-form-item` adds `invalidateLabelWidth` method，`n-form` adds `invalidateLabelWidths` method，closes [#5939](https://github.com/tusen-ai/naive-ui/issues/5939)
 
 ## 2.42.0
 

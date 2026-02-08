@@ -67,7 +67,7 @@ export type FormItemValidate = ((options: FormItemValidateOptions) => Promise<{
 export interface FormItemInst {
   validate: FormItemValidate
   restoreValidation: () => void
-  calcLabelWidth: () => void
+  invalidateLabelWidth: () => void
   path?: string
   internalValidate: FormItemInternalValidate
 }
@@ -113,7 +113,7 @@ export type FormValidationError = ValidateError[]
 export interface FormInst {
   validate: FormValidate
   restoreValidation: () => void
-  calcChildLabelWidths: () => void
+  invalidateLabelWidth: () => void
 }
 
 export interface FormValidateMessages extends ValidateMessages {}

@@ -106,6 +106,7 @@ feedback-style.vue
 | --- | --- | --- | --- |
 | validate | `(validateCallback?: (errors: Array<FormValidationError> \| undefined, extra: { warnings: Array<FormValidationError> \| undefined }) => void, shouldRuleBeApplied?: FormItemRule => boolean) => Promise<{ warnings: Array<FormValidationError> \| undefined }>` | 验证表单，Promise rejection 的返回值类型是 `Array<FormValidationError>` | `warnings` `2.37.1` |
 | restoreValidation | `() => void` | 还原到未校验的状态 |  |
+| invalidateLabelWidth | `() => void` | 重新计算所有表项的标签宽度。在使用 `label-width="auto"` 且标签内容动态变化时有用 | NEXT_VESION |
 
 ### FormItem, FormItemGi Methods
 
@@ -113,6 +114,7 @@ feedback-style.vue
 | --- | --- | --- | --- |
 | validate | `(options: { trigger?: string, callback?: (errors: FormValidationError \| undefined, extra: { warnings: FormValidationError \| undefined }) => void, shouldRuleBeApplied?: FormItemRule => boolean, options?: AsyncValidatorOptions }) => Promise<{ warnings: FormValidationError \| undefined }>` | 验证表项，Promise rejection 的返回值类型是 `FormValidationError`。如果不设定 `trigger`，这一个表项全部的规则都会被使用。`shouldRuleBeApplied` 可以用来进一步过滤已经经过 `trigger` 筛选的规则 | `warnings` `2.37.1` |
 | restoreValidation | `() => void` | 还原到未校验的状态 |  |
+| invalidateLabelWidth | `() => void` | 重新计算该表项的标签宽度。在使用 `label-width="auto"` 且标签内容动态变化时有用 | NEXT_VESION |
 
 关于 AsyncValidatorOptions，参考 <n-a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</n-a>。
 

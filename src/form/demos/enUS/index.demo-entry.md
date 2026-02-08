@@ -113,6 +113,7 @@ Accept all props from FormItem & [GridItem](grid#GridItem-Props)
 | --- | --- | --- | --- |
 | validate | `(validateCallback?: (errors: Array<FormValidationError> \| undefined, extra: { warnings: Array<FormValidationError> \| undefined }) => void, shouldRuleBeApplied?: FormItemRule => boolean) => Promise<{ warnings: Array<FormValidationError> \| undefined }>` | Validate the form. The rejection value type of returned promise is `Array<FormValidationError>`. | `warnings` `2.37.1` |
 | restoreValidation | `() => void` | Restore validate. |  |
+| invalidateLabelWidth | `() => void` | Recalculate label widths of all form items. Useful when using `label-width="auto"` and the label content changes dynamically. | NEXT_VESION |
 
 ### FormItem, FormItemGi Methods
 
@@ -120,6 +121,7 @@ Accept all props from FormItem & [GridItem](grid#GridItem-Props)
 | --- | --- | --- | --- |
 | validate | `(options: { trigger?: string, callback?: (errors: FormValidationError \| undefined, extra: { warnings: FormValidationError \| undefined }) => void, shouldRuleBeApplied?: FormItemRule => boolean, options?: AsyncValidatorOptions }) => Promise<{ warnings: FormValidationError \| undefined }>` | Validate the form item. The rejection value type of returned promise is `FormValidationError`. If trigger is not set, all rules of the item will be applied. `shouldRuleBeApplied` can filter rules after they are filtered by the trigger. | `warnings` `2.37.1` |
 | restoreValidation | `() => void` | Restore validate. |  |
+| invalidateLabelWidth | `() => void` | Recalculate the label width of this form item. Useful when using `label-width="auto"` and the label content changes dynamically. | NEXT_VESION |
 
 To find out more about AsyncValidatorOptions, see <n-a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</n-a>.
 
