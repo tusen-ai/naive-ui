@@ -88,6 +88,7 @@
 - `useModal` 新增 `render` 函数，关闭 [#5857](https://github.com/tusen-ai/naive-ui/issues/5857)
 - `n-card` 新增 `close-focusable` 属性
 - `n-dialog` 新增 `close-focusable` 属性
+- `n-form-item` 增加 `calcLabelWidth` 方法，`n-form` 增加 `calcLabelWidths` 方法，关闭 [#5939](https://github.com/tusen-ai/naive-ui/issues/5939)
 
 ## 2.42.0
 
