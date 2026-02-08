@@ -15,6 +15,7 @@
 ### Fixes
 
 - 修复 `katex` 类型兼容问题，升级到 `0.16.28` 并移除 `@types/katex` 依赖，关闭 [#7423](https://github.com/tusen-ai/naive-ui/issues/7423)
+- 修复 `n-select` 清除动态创建的选项时，同时启用 `tag` 和 `clearable` 属性时清除不生效的问题，关闭 [#7405](https://github.com/tusen-ai/naive-ui/issues/7405)
 
 ## 2.43.2
 
