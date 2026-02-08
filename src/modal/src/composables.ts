@@ -70,6 +70,8 @@ export function useDragModal(
     let prevMoveY = 0
     let prevMoveX = 0
     let mousedownEvent: MouseEvent | undefined
+    let rafId: number | null = null
+    let pendingPosition: { x: number, y: number } | null = null
 
     function handleMouseDown(event: MouseEvent) {
       event.preventDefault()
@@ -84,6 +86,15 @@ export function useDragModal(
       const { left, top } = modal.style
       prevMoveY = +top.slice(0, -2)
       prevMoveX = +left.slice(0, -2)
+    }
+
+    function updatePosition() {
+      if (pendingPosition) {
+        modal.style.top = `${pendingPosition.y}px`
+        modal.style.left = `${pendingPosition.x}px`
+        pendingPosition = null
+      }
+      rafId = null
     }
 
     function handleMouseMove(event: MouseEvent) {
@@ -111,12 +122,25 @@ export function useDragModal(
       }
       const x = moveX + prevMoveX
       const y = moveY + prevMoveY
-      modal.style.top = `${y}px`
-      modal.style.left = `${x}px`
+
+      pendingPosition = { x, y }
+
+      if (!rafId) {
+        rafId = requestAnimationFrame(updatePosition)
+      }
     }
 
     function handleMouseUp() {
       mousedownEvent = undefined
+      if (rafId) {
+        cancelAnimationFrame(rafId)
+        rafId = null
+      }
+      if (pendingPosition) {
+        modal.style.top = `${pendingPosition.y}px`
+        modal.style.left = `${pendingPosition.x}px`
+        pendingPosition = null
+      }
       options.onEnd(modal)
     }
 
@@ -125,9 +149,12 @@ export function useDragModal(
     on('mouseup', window, handleMouseUp)
 
     cleanup = () => {
+      if (rafId) {
+        cancelAnimationFrame(rafId)
+      }
       off('mousedown', header, handleMouseDown)
-      on('mousemove', window, handleMouseMove)
-      on('mouseup', window, handleMouseUp)
+      off('mousemove', window, handleMouseMove)
+      off('mouseup', window, handleMouseUp)
     }
   }
 

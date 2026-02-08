@@ -4,9 +4,22 @@
 
 `NEXT_VERSION`
 
+### Breaking Changes
+
+- `n-color-picker` 重构 DOM 结构和 trigger 相关的类名
+
 ### Feats
 
+- `n-color-picker` 新增 `trigger` slot，关闭 [#7192](https://github.com/tusen-ai/naive-ui/issues/7192)
+- `n-select` `n-auto-complete` `n-mention` `n-popselect` `n-cascader` `n-pagination` 新增 `scrollbar-props` 属性
 - `n-upload` 的 `submit` 方法新增 `retry` 属性。
+
+### Fixes
+
+- 修复 `katex` 类型兼容问题，升级到 `0.16.28` 并移除 `@types/katex` 依赖，关闭 [#7423](https://github.com/tusen-ai/naive-ui/issues/7423)
+- 修复 `n-select` 清除动态创建的选项时，同时启用 `tag` 和 `clearable` 属性时清除不生效的问题，关闭 [#7405](https://github.com/tusen-ai/naive-ui/issues/7405)
+- 修复 `n-modal` 监听事件未移除，关闭 [#7341](https://github.com/tusen-ai/naive-ui/issues/7341)
+- 修复 `n-marquee` 组件 Non-function value encountered for default slot 警告
 
 ## 2.43.2
 
@@ -77,6 +90,7 @@
 - `useModal` 新增 `render` 函数，关闭 [#5857](https://github.com/tusen-ai/naive-ui/issues/5857)
 - `n-card` 新增 `close-focusable` 属性
 - `n-dialog` 新增 `close-focusable` 属性
+- `n-form-item` 增加 `invalidateLabelWidth` 方法，`n-form` 增加 `invalidateLabelWidths` 方法，关闭 [#5939](https://github.com/tusen-ai/naive-ui/issues/5939)
 
 ## 2.42.0
 
