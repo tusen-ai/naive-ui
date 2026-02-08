@@ -7,7 +7,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-const formRef = ref(null)
 const formShowLabel = ref(true)
 const formItemShowLabel = ref(true)
 const formValue = ref({
@@ -23,7 +22,7 @@ const formValue = ref({
   <n-space vertical>
     <n-space>Form:<n-switch v-model:value="formShowLabel" /></n-space>
     <n-space>Form Item:<n-switch v-model:value="formItemShowLabel" /></n-space>
-    <n-form ref="formRef" :model="formValue" :show-label="formShowLabel">
+    <n-form :model="formValue" :show-label="formShowLabel">
       <n-form-item
         label="姓名"
         path="user.name"

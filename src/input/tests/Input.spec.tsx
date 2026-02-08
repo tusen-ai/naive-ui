@@ -1,3 +1,4 @@
+import type { InputInst } from '../index'
 import { mount } from '@vue/test-utils'
 import { defineComponent, h, onMounted, ref } from 'vue'
 import { NInput } from '../index'
@@ -296,7 +297,7 @@ describe('n-input', () => {
     const onSelect = vi.fn()
     const Mock = defineComponent({
       setup() {
-        const inputInstRef: any = ref(null)
+        const inputInstRef = ref<InputInst | null>(null)
         onMounted(() => {
           inputInstRef.value?.focus()
           inputInstRef.value?.blur()
@@ -316,13 +317,13 @@ describe('n-input', () => {
       }
     })
 
-    const wrapper = mount(() => <Mock />)
-    vi.waitFor(() => {
-      expect(onBlur).toHaveBeenCalled()
-      expect(onFocus).toHaveBeenCalled()
-      expect(onSelect).toHaveBeenCalled()
+    const wrapper = mount(() => <Mock />, {
+      attachTo: document.body
     })
-
+    expect(onBlur).toHaveBeenCalled()
+    expect(onFocus).toHaveBeenCalled()
+    // won't call onSelect because it not a NInput prop
+    expect(onSelect).not.toHaveBeenCalled()
     wrapper.unmount()
   })
 })

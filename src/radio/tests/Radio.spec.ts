@@ -94,14 +94,15 @@ describe('n-radio', () => {
     const onUpdate1 = vi.fn()
     const onUpdate2 = vi.fn()
     const wrapper = mount(NRadio, {
-      props: { 'onUpdate:checked': onUpdate1, onUpdateChecked: onUpdate2 }
+      props: { 'onUpdate:checked': onUpdate1, onUpdateChecked: onUpdate2 },
+      // special case for trigger click with radio input need `attachTo`
+      // https://github.com/vuejs/test-utils/issues/1470
+      attachTo: document.body
     })
 
     await wrapper.find('.n-radio').trigger('click')
-    vi.waitFor(() => {
-      expect(onUpdate1).toHaveBeenCalled()
-      expect(onUpdate2).toHaveBeenCalled()
-    })
+    expect(onUpdate1).toHaveBeenCalled()
+    expect(onUpdate2).toHaveBeenCalled()
     wrapper.unmount()
   })
 })
@@ -217,6 +218,7 @@ describe('n-radio-group', () => {
   it('should work with `on-update:value` prop', async () => {
     const onUpdate = vi.fn()
     const wrapper = mount(NRadioGroup, {
+      attachTo: document.body,
       props: {
         onUpdateValue: onUpdate
       },
@@ -229,9 +231,7 @@ describe('n-radio-group', () => {
     })
 
     await wrapper.findAll('.n-radio')[1].trigger('click')
-    vi.waitFor(() => {
-      expect(onUpdate).toHaveBeenCalled()
-      wrapper.unmount()
-    })
+    expect(onUpdate).toHaveBeenCalled()
+    wrapper.unmount()
   })
 })

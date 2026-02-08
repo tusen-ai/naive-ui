@@ -182,14 +182,11 @@ describe('n-grid', () => {
 
     const instance = wrapper.getCurrentComponent().proxy
     ;(instance as any).handleResize({ contentRect: { width: 500 } })
-
     await new Promise(resolve => requestAnimationFrame(resolve))
 
-    vi.waitFor(() => {
-      expect(wrapper.find('.n-gi-1').element.getAttribute('style')).toContain(
-        'grid-column: span 2 / span 2;'
-      )
-    })
+    expect(wrapper.find('.n-gi-1').element.getAttribute('style')).toContain(
+      'grid-column: span 2 / span 2;'
+    )
     wrapper.unmount()
   })
 })

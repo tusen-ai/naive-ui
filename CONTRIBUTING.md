@@ -30,7 +30,7 @@ pnpm run lint:type
 # lint code & type
 pnpm run lint
 
-# build site (if vercel preview failed, you might need to run `git clean -fdx` first)
+# build site (if site build failed, you might need to run `git clean -fdx` first)
 pnpm run build:site
 ```
 
