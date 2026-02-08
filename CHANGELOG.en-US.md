@@ -4,9 +4,13 @@
 
 `NEXT_VERSION`
 
+### Breaking Changes
+
+- `n-color-picker` refactor DOM structure & trigger class names.
+
 ### Feats
 
-- `n-color-picker` adds `trigger` slot, closes [#7192](https://github.com/tusen-ai/naive-ui/issues/7192)
+- `n-color-picker` adds `trigger` slot, closes [#7192](https://github.com/tusen-ai/naive-ui/issues/7192).
 
 ### Fixes
 

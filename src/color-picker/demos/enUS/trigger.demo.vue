@@ -1,8 +1,8 @@
 <markdown>
-  # Custom Trigger
+# Custom Trigger
 
-  Use the `trigger` slot to customize the trigger.
-  </markdown>
+Use the `trigger` slot to customize the trigger.
+</markdown>
 
 <script lang="ts">
 import { ColorWand as PaletteIcon } from '@vicons/ionicons5'
@@ -23,10 +23,10 @@ export default defineComponent({
 </script>
 
 <template>
-  <n-flex :wrap="false">
+  <n-flex :wrap="false" align="center">
     <n-color-picker v-model:value="color1">
-      <template #trigger="{ value }">
-        <n-button circle quaternary>
+      <template #trigger="{ value, onClick, ref: triggerRef }">
+        <n-button :ref="triggerRef" circle quaternary @click="onClick">
           <template #icon>
             <n-icon :color="value || '#000'">
               <PaletteIcon />
@@ -37,8 +37,9 @@ export default defineComponent({
     </n-color-picker>
 
     <n-color-picker v-model:value="color2">
-      <template #trigger="{ value }">
+      <template #trigger="{ value, onClick, ref: triggerRef }">
         <div
+          :ref="triggerRef"
           :style="{
             width: '22px',
             height: '22px',
@@ -48,13 +49,19 @@ export default defineComponent({
             border: '2px solid #fff',
             boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
           }"
+          @click="onClick"
         />
       </template>
     </n-color-picker>
 
     <n-color-picker v-model:value="color3">
-      <template #trigger="{ value }">
-        <n-text :style="{ color: value }" style="cursor: pointer">
+      <template #trigger="{ value, onClick, ref: triggerRef }">
+        <n-text
+          :ref="triggerRef"
+          :style="{ color: value }"
+          style="cursor: pointer"
+          @click="onClick"
+        >
           {{ value }}
         </n-text>
       </template>
