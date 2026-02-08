@@ -1,3 +1,4 @@
+import type { ComputedRef } from 'vue'
 import type {
   ColumnKey,
   CompareFn,
@@ -11,7 +12,7 @@ import type {
   TableSelectionColumn,
   TmNode
 } from './interface'
-import { computed, type ComputedRef, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { call } from '../../_utils'
 import { getFlagOfOrder } from './utils'
 

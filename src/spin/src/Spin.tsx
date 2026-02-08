@@ -1,22 +1,13 @@
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { SpinTheme } from '../styles'
 import { pxfy } from 'seemly'
 import { useCompitable } from 'vooks'
-import {
-  computed,
-  type CSSProperties,
-  defineComponent,
-  h,
-  type PropType,
-  ref,
-  type SlotsType,
-  Transition,
-  type VNode,
-  watchEffect
-} from 'vue'
+import { computed, defineComponent, h, ref, Transition, watchEffect } from 'vue'
 import { NBaseLoading } from '../../_internal'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import { createKey, type ExtractPublicPropTypes, warnOnce } from '../../_utils'
+import { createKey, warnOnce } from '../../_utils'
 import { spinLight } from '../styles'
 import style from './styles/index.cssr'
 

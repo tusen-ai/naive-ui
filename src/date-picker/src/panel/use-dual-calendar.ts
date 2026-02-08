@@ -1,6 +1,12 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import type { VirtualListInst } from 'vueuc'
 import type { ScrollbarInst } from '../../../_internal'
+import type {
+  IsRangeDateDisabled,
+  RangePanelChildComponentRefs,
+  Shortcuts
+} from '../interface'
+import type { DateItem, MonthItem, QuarterItem, YearItem } from '../utils'
 import {
   addMonths,
   format,
@@ -17,24 +23,16 @@ import {
 } from 'date-fns'
 import { computed, inject, ref, watch } from 'vue'
 import { MONTH_ITEM_HEIGHT } from '../config'
-import {
-  datePickerInjectionKey,
-  type IsRangeDateDisabled,
-  type RangePanelChildComponentRefs,
-  type Shortcuts
-} from '../interface'
+import { datePickerInjectionKey } from '../interface'
 import {
   dateArray,
-  type DateItem,
+  extractRangeDefaultTime,
   getDefaultTime,
   monthArray,
-  type MonthItem,
   pluckValueFromRange,
   quarterArray,
-  type QuarterItem,
   strictParse,
-  yearArray,
-  type YearItem
+  yearArray
 } from '../utils'
 import { usePanelCommon, usePanelCommonProps } from './use-panel-common'
 
@@ -112,9 +110,9 @@ function useDualCalendar(
   const { value } = props
   const defaultCalendarStartTime
     = props.defaultCalendarStartTime
-    ?? (Array.isArray(value) && typeof value[0] === 'number'
-      ? value[0]
-      : Date.now())
+      ?? (Array.isArray(value) && typeof value[0] === 'number'
+        ? value[0]
+        : Date.now())
   const startCalendarDateTimeRef = ref(defaultCalendarStartTime)
   const endCalendarDateTimeRef = ref(
     props.defaultCalendarEndTime
@@ -519,13 +517,13 @@ function useDualCalendar(
   function changeStartEndTime(
     startTime: number,
     endTime: number,
-    source: 'shortcutPreview' | 'wipPreview' | 'done'
+    source: 'shortcutPreview' | 'wipPreview' | 'done' | 'shortcutDone'
   ): void {
     if (typeof startTime !== 'number') {
       startTime = getTime(startTime)
     }
 
-    if (source !== 'shortcutPreview') {
+    if (source !== 'shortcutPreview' && source !== 'shortcutDone') {
       let startDefaultTime:
         | { hours: number, minutes: number, seconds: number }
         | undefined
@@ -534,7 +532,21 @@ function useDualCalendar(
         | undefined
       if (type === 'datetimerange') {
         const { defaultTime } = props
-        if (Array.isArray(defaultTime)) {
+        if (typeof defaultTime === 'function') {
+          startDefaultTime = extractRangeDefaultTime(
+            startTime,
+            defaultTime,
+            'start',
+            [startTime, endTime]
+          )
+          endDefaultTime = extractRangeDefaultTime(
+            endTime,
+            defaultTime,
+            'end',
+            [startTime, endTime]
+          )
+        }
+        else if (Array.isArray(defaultTime)) {
           startDefaultTime = getDefaultTime(defaultTime[0])
           endDefaultTime = getDefaultTime(defaultTime[1])
         }
@@ -553,7 +565,7 @@ function useDualCalendar(
 
     panelCommon.doUpdateValue(
       [startTime, endTime],
-      props.panel && source === 'done'
+      props.panel && (source === 'done' || source === 'shortcutDone')
     )
   }
   function sanitizeValue(datetime: number): number {
@@ -731,7 +743,7 @@ function useDualCalendar(
     const shortcutValue = panelCommon.getShortcutValue(shortcut)
     if (!Array.isArray(shortcutValue))
       return
-    changeStartEndTime(shortcutValue[0], shortcutValue[1], 'done')
+    changeStartEndTime(shortcutValue[0], shortcutValue[1], 'shortcutDone')
     panelCommon.clearPendingValue()
     handleConfirmClick()
   }

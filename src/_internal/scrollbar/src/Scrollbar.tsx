@@ -26,6 +26,17 @@ import { rtlInset, useReactivated, Wrapper } from '../../../_utils'
 import { scrollbarLight } from '../styles'
 import style from './styles/index.cssr'
 
+interface MergedScrollOptions {
+  left?: number
+  top?: number
+  el?: HTMLElement
+  position?: 'top' | 'bottom'
+  behavior?: ScrollBehavior
+  debounce?: boolean
+  index?: number
+  elSize?: number
+}
+
 export interface ScrollTo {
   (x: number, y: number): void
   (options: {
@@ -359,16 +370,6 @@ const Scrollbar = defineComponent({
       if (onResize)
         onResize(e)
       sync()
-    }
-    interface MergedScrollOptions {
-      left?: number
-      top?: number
-      el?: HTMLElement
-      position?: 'top' | 'bottom'
-      behavior?: ScrollBehavior
-      debounce?: boolean
-      index?: number
-      elSize?: number
     }
     const scrollBy: ScrollBy = (
       options: ScrollOptions | number,

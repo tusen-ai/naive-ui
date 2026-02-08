@@ -2,16 +2,10 @@
 # pop debug 5
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  data() {
-    return {
-      modalActive: false
-    }
-  }
-})
+const modalActive = ref(false)
 </script>
 
 <template>

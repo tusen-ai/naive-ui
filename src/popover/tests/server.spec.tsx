@@ -1,12 +1,12 @@
 import { setup } from '@css-render/vue3-ssr'
 import { renderToString } from '@vue/server-renderer'
 /**
- * @jest-environment node
+ * @vitest-environment node
  */
 import { createSSRApp, h } from 'vue'
 import { NPopover } from '../..'
 
-describe('sSR', () => {
+describe('server side rendering', () => {
   it('works', async () => {
     const app = createSSRApp(() => (
       <NPopover>

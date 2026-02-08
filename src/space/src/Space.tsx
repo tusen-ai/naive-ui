@@ -1,37 +1,31 @@
+import type { CSSProperties, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { SpaceTheme } from '../styles'
 import { depx, getGap } from 'seemly'
-import {
-  Comment,
-  computed,
-  type CSSProperties,
-  defineComponent,
-  h,
-  type PropType
-} from 'vue'
+import { Comment, computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
 import { createKey, flatten, getSlot } from '../../_utils'
 import { spaceLight } from '../styles'
 import { ensureSupportFlexGap } from './utils'
 
-type Align =
-  | 'stretch'
-  | 'baseline'
-  | 'start'
-  | 'end'
-  | 'center'
-  | 'flex-end'
-  | 'flex-start'
+type Align
+  = | 'stretch'
+    | 'baseline'
+    | 'start'
+    | 'end'
+    | 'center'
+    | 'flex-end'
+    | 'flex-start'
 
-export type Justify =
-  | 'start'
-  | 'end'
-  | 'center'
-  | 'space-around'
-  | 'space-between'
-  | 'space-evenly'
+export type Justify
+  = | 'start'
+    | 'end'
+    | 'center'
+    | 'space-around'
+    | 'space-between'
+    | 'space-evenly'
 
 export const spaceProps = {
   ...(useTheme.props as ThemeProps<SpaceTheme>),

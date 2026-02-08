@@ -1,6 +1,7 @@
+import type { ComputedRef, Ref } from 'vue'
 import { useSsrAdapter } from '@css-render/vue3-ssr'
 import { hash } from 'css-render'
-import { type ComputedRef, inject, type Ref, ref, watchEffect } from 'vue'
+import { inject, ref, watchEffect } from 'vue'
 import { throwError } from '../_utils'
 import { c } from '../_utils/cssr'
 import { configProviderInjectionKey } from '../config-provider/src/context'
@@ -11,9 +12,9 @@ export function useThemeClass(
   cssVarsRef: ComputedRef<Record<string, string>> | undefined,
   props: { themeOverrides?: unknown, builtinThemeOverrides?: unknown }
 ): {
-    themeClass: Ref<string>
-    onRender: () => void
-  } {
+  themeClass: Ref<string>
+  onRender: () => void
+} {
   if (!cssVarsRef)
     throwError('useThemeClass', 'cssVarsRef is not passed')
 

@@ -7,6 +7,15 @@
 <p align="center"><b>比较完整，主题可调，使用 TypeScript，快</b></p>
 <p align="center">有点意思</p>
 
+<p align="center">
+  <a href="https://npmjs.com/package/naive-ui">
+    <img src="https://img.shields.io/npm/v/naive-ui.svg" alt="npm">
+  </a>
+  <a href="https://pkg.pr.new/~/tusen-ai/naive-ui">
+    <img src="https://pkg.pr.new/badge/tusen-ai/naive-ui" alt="pkg.pr.new">
+  </a>
+</p>
+
 <p align="center"><a href="README.md">English</a> | 中文</p>
 
 ## 文档
@@ -49,7 +58,7 @@ Naive UI 全量使用 TypeScript 编写，和你的 TypeScript 项目无缝衔�
 
 ### 快
 
-我尽力让它不要太慢。至少 select、tree、transfer、table、cascader 都可以用虚拟列表。
+我尽力让它不要太慢。任何数据组件均可使用虚拟列表。
 
 顺便一提，...，没有顺便了。祝你使用愉快。
 

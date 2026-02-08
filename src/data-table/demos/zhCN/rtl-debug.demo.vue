@@ -2,14 +2,14 @@
 # Rtl Debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type {
   DataTableBaseColumn,
   DataTableColumns,
   DataTableFilterState
 } from 'naive-ui'
 import { unstableDataTableRtl } from 'naive-ui'
-import { defineComponent, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 
 interface Row {
   key: number
@@ -87,81 +87,77 @@ const data = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    const addressColumn = reactive<DataTableBaseColumn<Row>>({
-      title: 'Address',
-      key: 'address',
-      filterMultiple: false,
-      filterOptionValue: null,
-      sorter: 'default',
-      filterOptions: [
-        {
-          label: 'London',
-          value: 'London'
-        },
-        {
-          label: 'New York',
-          value: 'New York'
-        }
-      ],
-      filter(value, row) {
-        return !!~row.address.indexOf(value.toString())
-      }
-    })
-
-    const columns = reactive<DataTableColumns<Row>>([
-      {
-        title: 'Name',
-        key: 'name',
-        sorter(rowA, rowB) {
-          return rowA.name.length - rowB.name.length
-        }
-      },
-      {
-        title: 'Age',
-        key: 'age',
-        sorter(rowA, rowB) {
-          return rowA.age - rowB.age
-        }
-      },
-      addressColumn
-    ])
-    const paginationReactive = reactive({
-      page: 1,
-      pageSize: 5,
-      showSizePicker: true,
-      pageSizes: [3, 5, 7],
-      onChange: (page: number) => {
-        paginationReactive.page = page
-      },
-      onUpdatePageSize: (pageSize: number) => {
-        paginationReactive.pageSize = pageSize
-        paginationReactive.page = 1
-      }
-    })
-
-    return {
-      rtlEnabled: ref(true),
-      rtlStyles: [unstableDataTableRtl],
-      data,
-      columns,
-      pagination: paginationReactive,
-      filterAddress() {
-        addressColumn.filterOptionValue = 'London'
-      },
-      unfilterAddress() {
-        addressColumn.filterOptionValue = null
-      },
-      handleUpdateFilter(
-        filters: DataTableFilterState,
-        sourceColumn: DataTableBaseColumn
-      ) {
-        addressColumn.filterOptionValue = filters[sourceColumn.key] as string
-      }
+const addressColumn = reactive<DataTableBaseColumn<Row>>({
+  title: 'Address',
+  key: 'address',
+  filterMultiple: false,
+  filterOptionValue: null,
+  sorter: 'default',
+  filterOptions: [
+    {
+      label: 'London',
+      value: 'London'
+    },
+    {
+      label: 'New York',
+      value: 'New York'
     }
+  ],
+  filter(value, row) {
+    return !!~row.address.indexOf(value.toString())
   }
 })
+
+const columns = reactive<DataTableColumns<Row>>([
+  {
+    title: 'Name',
+    key: 'name',
+    sorter(rowA, rowB) {
+      return rowA.name.length - rowB.name.length
+    }
+  },
+  {
+    title: 'Age',
+    key: 'age',
+    sorter(rowA, rowB) {
+      return rowA.age - rowB.age
+    }
+  },
+  addressColumn
+])
+
+const paginationReactive = reactive({
+  page: 1,
+  pageSize: 5,
+  showSizePicker: true,
+  pageSizes: [3, 5, 7],
+  onChange: (page: number) => {
+    paginationReactive.page = page
+  },
+  onUpdatePageSize: (pageSize: number) => {
+    paginationReactive.pageSize = pageSize
+    paginationReactive.page = 1
+  }
+})
+
+const rtlEnabled = ref(true)
+const rtlStyles = [unstableDataTableRtl]
+const pagination = paginationReactive
+
+function filterAddress() {
+  addressColumn.filterOptionValue = 'London'
+}
+
+function unfilterAddress() {
+  addressColumn.filterOptionValue = null
+}
+
+function handleUpdateFilter(
+  filters: DataTableFilterState,
+  sourceColumn: DataTableBaseColumn
+) {
+  addressColumn.filterOptionValue = filters[sourceColumn.key] as string
+}
 </script>
 
 <template>

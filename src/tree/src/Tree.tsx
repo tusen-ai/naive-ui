@@ -1,3 +1,6 @@
+import type { CheckStrategy, TreeMateOptions } from 'treemate'
+import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type { VirtualListInst, VirtualListScrollToOptions } from 'vueuc'
 import type { ScrollbarInst } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
@@ -28,36 +31,21 @@ import type {
   TreeOverrideNodeClickBehavior
 } from './interface'
 import { depx, getPadding, pxfy } from 'seemly'
-import {
-  type CheckStrategy,
-  createIndexGetter,
-  createTreeMate,
-  flatten,
-  type TreeMateOptions
-} from 'treemate'
+import { createIndexGetter, createTreeMate, flatten } from 'treemate'
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   inject,
   nextTick,
-  type PropType,
   provide,
   ref,
-  type SlotsType,
   toRef,
-  type VNode,
-  type VNodeChild,
   watch,
   watchEffect
 } from 'vue'
-import {
-  type VirtualListInst,
-  type VirtualListScrollToOptions,
-  VVirtualList
-} from 'vueuc'
+import { VVirtualList } from 'vueuc'
 import { NxScrollbar } from '../../_internal'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import { call, createDataKey, resolveSlot, warn, warnOnce } from '../../_utils'
@@ -86,9 +74,9 @@ export function createTreeMateOptions<T>(
 ): TreeMateOptions<T, T, T> {
   const settledGetChildren: GetChildren
     = getChildren
-    || ((node: T) => {
-      return (node as any)[childrenField]
-    })
+      || ((node: T) => {
+        return (node as any)[childrenField]
+      })
   return {
     getIsGroup() {
       return false
@@ -195,6 +183,10 @@ export const treeSharedProps = {
     type: Array as PropType<Key[]>,
     default: () => []
   },
+  indent: {
+    type: Number,
+    default: 24
+  },
   indeterminateKeys: Array as PropType<Key[]>,
   renderSwitcherIcon: Function as PropType<RenderSwitcherIcon>,
   onUpdateIndeterminateKeys: [Function, Array] as PropType<
@@ -262,10 +254,6 @@ export const treeProps = {
     default: true
   },
   scrollbarProps: Object as PropType<ScrollbarProps>,
-  indent: {
-    type: Number,
-    default: 24
-  },
   allowDrop: {
     type: Function as PropType<AllowDrop>,
     default: defaultAllowDrop
@@ -274,6 +262,7 @@ export const treeProps = {
     type: Boolean,
     default: true
   },
+  ellipsis: Boolean,
   checkboxPlacement: {
     type: String as PropType<'left' | 'right'>,
     default: 'left'
@@ -1748,6 +1737,7 @@ export default defineComponent({
       blockLine,
       draggable,
       disabled,
+      ellipsis,
       internalFocusable,
       checkable,
       handleKeydown,
@@ -1762,7 +1752,8 @@ export default defineComponent({
       rtlEnabled && `${mergedClsPrefix}-tree--rtl`,
       checkable && `${mergedClsPrefix}-tree--checkable`,
       (blockLine || blockNode) && `${mergedClsPrefix}-tree--block-node`,
-      blockLine && `${mergedClsPrefix}-tree--block-line`
+      blockLine && `${mergedClsPrefix}-tree--block-line`,
+      ellipsis && `${mergedClsPrefix}-tree--ellipsis`
     ]
     const createNode = (tmNode: TmNode | MotionData): VNode => {
       return '__motion' in tmNode ? (

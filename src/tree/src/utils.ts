@@ -1,7 +1,8 @@
 import type { CheckStrategy } from 'treemate'
+import type { ComputedRef } from 'vue'
 import type { Key, TmNode, TreeOption } from './interface'
 import { happensIn } from 'seemly'
-import { computed, type ComputedRef } from 'vue'
+import { computed } from 'vue'
 import { isBrowser } from '../../_utils'
 
 export function useMergedCheckStrategy(props: {
@@ -24,7 +25,7 @@ function traverse(
   nodes?.forEach((node) => {
     callback(node)
     traverse(
-      (node as any)[childrenField] as TreeOption[] | undefined,
+      node[childrenField] as TreeOption[] | undefined,
       childrenField,
       callback,
       callbackAfter
@@ -40,9 +41,9 @@ export function keysWithFilter(
   childrenField: string,
   filter: (pattern: string, node: TreeOption) => boolean
 ): {
-    expandedKeys: Key[]
-    highlightKeySet: Set<Key>
-  } {
+  expandedKeys: Key[]
+  highlightKeySet: Set<Key>
+} {
   const keys = new Set<Key>()
   const highlightKeySet = new Set<Key>()
   const path: TreeOption[] = []
@@ -52,10 +53,10 @@ export function keysWithFilter(
     (node) => {
       path.push(node)
       if (filter(pattern, node)) {
-        highlightKeySet.add((node as any)[keyField] as Key)
+        highlightKeySet.add(node[keyField] as Key)
         for (let i = path.length - 2; i >= 0; --i) {
-          if (!keys.has((path[i] as any)[keyField] as Key)) {
-            keys.add((path[i] as any)[keyField] as Key)
+          if (!keys.has(path[i][keyField] as Key)) {
+            keys.add(path[i][keyField] as Key)
           }
           else {
             return
@@ -89,10 +90,10 @@ export function filterTree(
   keyField: string,
   childrenField: string
 ): {
-    filteredTree: TreeOption[]
-    expandedKeys: Key[]
-    highlightKeySet: Set<Key>
-  } {
+  filteredTree: TreeOption[]
+  expandedKeys: Key[]
+  highlightKeySet: Set<Key>
+} {
   const visitedTailKeys = new Set<Key>()
   const visitedNonTailKeys = new Set<Key>()
   const highlightKeySet = new Set<Key>()
@@ -103,10 +104,10 @@ export function filterTree(
     t.forEach((n) => {
       path.push(n)
       if (filter(pattern, n)) {
-        visitedTailKeys.add((n as any)[keyField] as Key)
-        highlightKeySet.add((n as any)[keyField] as Key)
+        visitedTailKeys.add(n[keyField] as Key)
+        highlightKeySet.add(n[keyField] as Key)
         for (let i = path.length - 2; i >= 0; --i) {
-          const key: Key = (path[i] as any)[keyField]
+          const key = path[i][keyField] as Key
           if (!visitedNonTailKeys.has(key)) {
             visitedNonTailKeys.add(key)
             if (visitedTailKeys.has(key)) {
@@ -128,7 +129,7 @@ export function filterTree(
   visit(tree)
   function build(t: TreeOption[], sibs: TreeOption[]): void {
     t.forEach((n) => {
-      const key = (n as any)[keyField] as Key
+      const key = n[keyField] as Key
       const isVisitedTail = visitedTailKeys.has(key)
       const isVisitedNonTail = visitedNonTailKeys.has(key)
       if (!isVisitedTail && !isVisitedNonTail)

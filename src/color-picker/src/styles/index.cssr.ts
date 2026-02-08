@@ -12,14 +12,6 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --n-box-shadow
 // --n-divider-color
 export default c([
-  cB('color-picker', `
-    display: inline-block;
-    box-sizing: border-box;
-    height: var(--n-height);
-    font-size: var(--n-font-size);
-    width: 100%;
-    position: relative;
-  `),
   cB('color-picker-panel', `
     margin: 4px 0;
     width: 240px;
@@ -168,14 +160,19 @@ export default c([
   `, [
     cB('button', 'margin-left: 8px;')
   ]),
-  cB('color-picker-trigger', `
-    border: var(--n-border);
-    height: 100%;
+  cB('color-picker', `
+    display: inline-block;
     box-sizing: border-box;
+    height: var(--n-height);
+    font-size: var(--n-font-size);
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+    border: var(--n-border);
     border-radius: var(--n-border-radius);
     transition: border-color .3s var(--n-bezier);
-    cursor: pointer;
   `, [
+    cM('disabled', 'cursor: not-allowed'),
     cE('value', `
       white-space: nowrap;
       position: relative;
@@ -191,7 +188,6 @@ export default c([
       top: 4px;
       bottom: 4px;
     `),
-    cM('disabled', 'cursor: not-allowed'),
     cB('color-picker-checkboard', `
       border-radius: var(--n-border-radius);
     `, [

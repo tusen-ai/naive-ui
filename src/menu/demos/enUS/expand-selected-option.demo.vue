@@ -4,59 +4,51 @@
 In some scenes, menu's value is passed from outside. The component is hard to understand what behavior is expected. You can use `showOption` method to make specified option displayed.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { MenuInst } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const accordionRef = ref(false)
-    const selectedKeyRef = ref('1')
-    const menuInstRef = ref<MenuInst | null>(null)
-    const selectAndExpand = (key: string) => {
-      selectedKeyRef.value = key
-      menuInstRef.value?.showOption(key)
-    }
-    return {
-      menuInstRef,
-      selectAndExpand,
-      accordion: accordionRef,
-      selectedKey: selectedKeyRef,
-      options: [
-        {
-          label: '1 parent',
-          key: '1 parent',
-          children: [
-            {
-              label: '1',
-              key: '1'
-            }
-          ]
-        },
-        {
-          label: '2 parent',
-          key: '2 parent',
-          children: [
-            {
-              label: '2',
-              key: '2'
-            }
-          ]
-        },
-        {
-          label: '3 parent',
-          key: '3 parent',
-          children: [
-            {
-              label: '3',
-              key: '3'
-            }
-          ]
-        }
-      ]
-    }
+const accordion = ref(false)
+const selectedKey = ref('1')
+const menuInstRef = ref<MenuInst | null>(null)
+
+function selectAndExpand(key: string) {
+  selectedKey.value = key
+  menuInstRef.value?.showOption(key)
+}
+
+const options = [
+  {
+    label: '1 parent',
+    key: '1 parent',
+    children: [
+      {
+        label: '1',
+        key: '1'
+      }
+    ]
+  },
+  {
+    label: '2 parent',
+    key: '2 parent',
+    children: [
+      {
+        label: '2',
+        key: '2'
+      }
+    ]
+  },
+  {
+    label: '3 parent',
+    key: '3 parent',
+    children: [
+      {
+        label: '3',
+        key: '3'
+      }
+    ]
   }
-})
+]
 </script>
 
 <template>

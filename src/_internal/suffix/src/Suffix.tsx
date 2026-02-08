@@ -1,4 +1,5 @@
-import { defineComponent, h, type PropType } from 'vue'
+import type { PropType } from 'vue'
+import { defineComponent, h } from 'vue'
 import { resolveSlot } from '../../../_utils/vue'
 import NBaseClear from '../../clear'
 import { NBaseIcon } from '../../icon'

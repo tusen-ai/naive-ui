@@ -2,22 +2,16 @@
 # 基础用法
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const checkedValueRef = ref<string | null>(null)
+const checkedValueRef = ref<string | null>(null)
+const disabled = ref(true)
+const checkedValue = checkedValueRef
 
-    return {
-      disabled: ref(true),
-      checkedValue: checkedValueRef,
-      handleChange(e: Event) {
-        checkedValueRef.value = (e.target as HTMLInputElement).value
-      }
-    }
-  }
-})
+function handleChange(e: Event) {
+  checkedValueRef.value = (e.target as HTMLInputElement).value
+}
 </script>
 
 <template>

@@ -4,59 +4,53 @@
 在某些场景下，菜单的值是由外部传入的，组件很难理解用户展开的意图。你可以使用 `showOption` 的方法来让选中的值展开。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { MenuInst } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const accordionRef = ref(false)
-    const selectedKeyRef = ref('难吃')
-    const menuInstRef = ref<MenuInst | null>(null)
-    const selectAndExpand = (key: string) => {
-      selectedKeyRef.value = key
-      menuInstRef.value?.showOption(key)
-    }
-    return {
-      menuInstRef,
-      selectAndExpand,
-      accordion: accordionRef,
-      selectedKey: selectedKeyRef,
-      options: [
-        {
-          label: '学五',
-          key: '学五',
-          children: [
-            {
-              label: '难吃',
-              key: '难吃'
-            }
-          ]
-        },
-        {
-          label: '学一',
-          key: '学一',
-          children: [
-            {
-              label: '也难吃',
-              key: '也难吃'
-            }
-          ]
-        },
-        {
-          label: '燕南',
-          key: '燕南',
-          children: [
-            {
-              label: '依然难吃',
-              key: '依然难吃'
-            }
-          ]
-        }
-      ]
-    }
+const accordionRef = ref(false)
+const selectedKeyRef = ref('难吃')
+const menuInstRef = ref<MenuInst | null>(null)
+
+function selectAndExpand(key: string) {
+  selectedKeyRef.value = key
+  menuInstRef.value?.showOption(key)
+}
+
+const accordion = accordionRef
+const selectedKey = selectedKeyRef
+const options = [
+  {
+    label: '学五',
+    key: '学五',
+    children: [
+      {
+        label: '难吃',
+        key: '难吃'
+      }
+    ]
+  },
+  {
+    label: '学一',
+    key: '学一',
+    children: [
+      {
+        label: '也难吃',
+        key: '也难吃'
+      }
+    ]
+  },
+  {
+    label: '燕南',
+    key: '燕南',
+    children: [
+      {
+        label: '依然难吃',
+        key: '依然难吃'
+      }
+    ]
   }
-})
+]
 </script>
 
 <template>

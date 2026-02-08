@@ -130,6 +130,12 @@ const itIT: NLocale = {
     tipDownload: 'Download',
     tipClose: 'Chiudi (Esc)',
     tipOriginalSize: 'Torna alla dimensione originale'
+  },
+  Heatmap: {
+    less: 'meno',
+    more: 'più',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

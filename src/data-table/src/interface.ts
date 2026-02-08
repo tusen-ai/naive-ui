@@ -251,17 +251,17 @@ export type DataTableHeightForRow<T = RowData> = (
   rowIndex: number
 ) => number
 
-export type TableColumnTitle =
-  | string
-  | ((column: TableBaseColumn) => VNodeChild)
+export type TableColumnTitle
+  = | string
+    | ((column: TableBaseColumn) => VNodeChild)
 
-export type TableExpandColumnTitle =
-  | string
-  | ((column: TableExpandColumn) => VNodeChild)
+export type TableExpandColumnTitle
+  = | string
+    | ((column: TableExpandColumn) => VNodeChild)
 
-export type TableColumnGroupTitle =
-  | string
-  | ((column: TableColumnGroup) => VNodeChild)
+export type TableColumnGroupTitle
+  = | string
+    | ((column: TableColumnGroup) => VNodeChild)
 
 export type TableColumnGroup<T = InternalRowData> = {
   title?: TableColumnGroupTitle
@@ -286,6 +286,7 @@ export type TableBaseColumn<T = InternalRowData> = {
   sorter?: boolean | Sorter<T> | 'default'
   defaultSortOrder?: SortOrder
   sortOrder?: SortOrder // controlled
+  customNextSortOrder?: (order: SortOrder) => SortOrder
 
   resizable?: boolean
   minWidth?: string | number
@@ -350,11 +351,11 @@ export interface TableExpandColumn<T = InternalRowData>
   expandable?: Expandable<T>
 }
 
-export type TableColumn<T = InternalRowData> =
-  | TableColumnGroup<T>
-  | TableBaseColumn<T>
-  | TableSelectionColumn<T>
-  | TableExpandColumn<T>
+export type TableColumn<T = InternalRowData>
+  = | TableColumnGroup<T>
+    | TableBaseColumn<T>
+    | TableSelectionColumn<T>
+    | TableExpandColumn<T>
 export type TableColumns<T = InternalRowData> = Array<TableColumn<T>>
 
 export type DataTableSelectionOptions<T = InternalRowData> = Array<

@@ -149,5 +149,31 @@ export default cB('steps', `
         ])
       ])
     ])
-  ])
+  ]),
+  cM('content-bottom', [cNotM('vertical', [
+    c('>', [
+      cB('step', 'flex-direction: column', [
+        c('>', [
+          cB('step-line', 'display: flex;', [
+            c('>', [
+              cB('step-splitor', `
+                margin-top: 0;
+                align-self: center;
+              `)
+            ]),
+          ])
+        ]),
+        c('>', [
+          cB('step-content', 'margin-top: calc(var(--n-indicator-size) / 2 - var(--n-step-header-font-size) / 2);', [
+            cB('step-content-header', `
+                margin-left: 0;
+              `),
+            cB('step-content__description', `
+                margin-left: 0;
+            `)
+          ])
+        ])
+      ])
+    ])
+  ])])
 ])

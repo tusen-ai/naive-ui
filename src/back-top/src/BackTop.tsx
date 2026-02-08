@@ -1,3 +1,4 @@
+import type { PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { BackTopTheme } from '../styles'
@@ -11,7 +12,6 @@ import {
   nextTick,
   onBeforeUnmount,
   onMounted,
-  type PropType,
   ref,
   toRef,
   Transition,
@@ -158,8 +158,8 @@ export default defineComponent({
       scrollListenerRegistered = true
       const scrollEl
         = props.target?.()
-        || unwrapElement(props.listenTo)
-        || getScrollParent(placeholderRef.value)
+          || unwrapElement(props.listenTo)
+          || getScrollParent(placeholderRef.value)
       if (!scrollEl) {
         if (__DEV__) {
           warn(
