@@ -119,7 +119,7 @@ interface UploadCustomRequestOptions {
 | --- | --- | --- | --- |
 | clear | `() => void` | Clear current upload list. | 2.24.2 |
 | openOpenFileDialog | `() => void` | Open the file dialog window. |  |
-| submit | `(fileId?: string)` | Submit all files with pending status. |  |
+| submit | `(options?: { fileId?: string, retry?: boolean })` | Submit all files with pending status. | `retry`: `NEXT_VERSION` |
 
 ### Upload Slots
 
