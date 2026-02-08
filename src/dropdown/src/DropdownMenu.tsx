@@ -6,14 +6,7 @@ import type {
   DropdownOption,
   DropdownRenderOption
 } from './interface'
-import {
-  computed,
-  defineComponent,
-  h,
-  inject,
-  provide,
-  ref
-} from 'vue'
+import { computed, defineComponent, h, inject, provide, ref } from 'vue'
 import { NxScrollbar } from '../../_internal/scrollbar'
 import { drawerBodyInjectionKey } from '../../drawer/src/interface'
 import { modalBodyInjectionKey } from '../../modal/src/interface'

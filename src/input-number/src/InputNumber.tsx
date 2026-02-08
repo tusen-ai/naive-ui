@@ -22,12 +22,7 @@ import { NBaseIcon } from '../../_internal'
 import { AddIcon, RemoveIcon } from '../../_internal/icons'
 import { useConfig, useFormItem, useLocale, useTheme } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
-import {
-  call,
-  resolveSlot,
-  resolveWrappedSlot,
-  warnOnce
-} from '../../_utils'
+import { call, resolveSlot, resolveWrappedSlot, warnOnce } from '../../_utils'
 import { NxButton } from '../../button'
 import { NInput } from '../../input'
 import { inputNumberLight } from '../styles'

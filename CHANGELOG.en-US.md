@@ -1,8 +1,40 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Breaking Changes
+
+- `n-color-picker` refactor DOM structure & trigger class names.
+
+### Feats
+
+- `n-color-picker` adds `trigger` slot, closes [#7192](https://github.com/tusen-ai/naive-ui/issues/7192).
+
+### Fixes
+
+- Fix `katex` type compatibility by upgrading to `0.16.28` and removing `@types/katex` dependency, closes [#7423](https://github.com/tusen-ai/naive-ui/issues/7423).
+- Fix `n-select`'s created option is not cleared when clearing dynamic options while `tag` and `clearable` are enabled, closes [#7405](https://github.com/tusen-ai/naive-ui/issues/7405)
+- Fix `n-modal` event listeners not removed, closes [#7341](https://github.com/tusen-ai/naive-ui/issues/7341) by [@lu-han](https://github.com/lu-han)
+- Fix `n-marquee` component Non-function value encountered for default slot warning.
+
+## 2.43.2
+
+### Fixes
+
+- Fix seemly dependency version range allows incompatible versions.
+- Fix `n-progress` style is incorrect after using the dashboard mode exceeding 100%, closes [#6627](https://github.com/tusen-ai/naive-ui/issues/6627)
+- Fix `n-modal`'s outside content can't be interacted with `show-mask` is set to `false`.
+
+### Feats
+
+- `n-date-picker` prop `defaultTime` can also accept a function that will return a formatted string
+- `n-steps` adds `content-placement` prop, closes [#7044](https://github.com/tusen-ai/naive-ui/issues/7044).
+
 ## 2.43.1
 
-`2025-09-15`
+`2025-09-14`
 
 ### Fixes
 
@@ -10,7 +42,7 @@
 
 ## 2.43.0
 
-`2025-09-14`
+`2025-09-13`
 
 ### Breaking Changes
 
@@ -57,6 +89,7 @@
 - `useModal` add `render` function, closes [#5857](https://github.com/tusen-ai/naive-ui/issues/5857).
 - `n-card` add `close-focusable` prop.
 - `n-dialog` add `close-focusable` prop.
+- `n-form-item` adds `calcLabelWidth` method，`n-form` adds `calcLabelWidths` method，closes [#5939](https://github.com/tusen-ai/naive-ui/issues/5939)
 
 ## 2.42.0
 

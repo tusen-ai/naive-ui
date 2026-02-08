@@ -1,4 +1,11 @@
-import type { ComponentPublicInstance, CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type {
+  ComponentPublicInstance,
+  CSSProperties,
+  PropType,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
 import type { FollowerInst, FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
@@ -17,22 +24,9 @@ import {
   Transition,
   watch
 } from 'vue'
-import {
-  VBinder,
-  VFollower,
-  VTarget
-} from 'vueuc'
-import {
-  useConfig,
-  useFormItem,
-  useTheme,
-  useThemeClass
-} from '../../_mixins'
-import {
-  call,
-  resolveSlot,
-  useAdjustedTo
-} from '../../_utils'
+import { VBinder, VFollower, VTarget } from 'vueuc'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import { call, resolveSlot, useAdjustedTo } from '../../_utils'
 import { sliderLight } from '../styles'
 import style from './styles/index.cssr'
 import { isTouchEvent, useRefs } from './utils'

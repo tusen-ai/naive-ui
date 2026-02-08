@@ -1,14 +1,46 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Breaking Changes
+
+- `n-color-picker` 重构 DOM 结构和 trigger 相关的类名
+
+### Feats
+
+- `n-color-picker` 新增 `trigger` slot，关闭 [#7192](https://github.com/tusen-ai/naive-ui/issues/7192)
+
+### Fixes
+
+- 修复 `katex` 类型兼容问题，升级到 `0.16.28` 并移除 `@types/katex` 依赖，关闭 [#7423](https://github.com/tusen-ai/naive-ui/issues/7423)
+- 修复 `n-select` 清除动态创建的选项时，同时启用 `tag` 和 `clearable` 属性时清除不生效的问题，关闭 [#7405](https://github.com/tusen-ai/naive-ui/issues/7405)
+- 修复 `n-modal` 监听事件未移除，关闭 [#7341](https://github.com/tusen-ai/naive-ui/issues/7341)
+- 修复 `n-marquee` 组件 Non-function value encountered for default slot 警告
+
+## 2.43.2
+
+### Fixes
+
+- 修复 seemly 依赖的版本未更新到最新
+- 修复 `n-progress` 使用仪表盘模式超过 100% 之后样式不正确，关闭 [#6627](https://github.com/tusen-ai/naive-ui/issues/6627)
+- 修复 `n-modal` 在 `show-mask` 为 `false` 的情况下，外部内容不能被操作
+
+### Feats
+
+- `n-date-picker` 的 `defaultTime` 属性可以接受返回格式化字符串的函数
+- `n-steps` 增加 `content-placement` 属性，关闭 [#7044](https://github.com/tusen-ai/naive-ui/issues/7044)
+
 ## 2.43.1
 
-`2025-09-15`
+`2025-09-14`
 
 - 修复 esm 格式的产物使用 `lodash` 而非 `lodash-es`
 
 ## 2.43.0
 
-`2025-09-14`
+`2025-09-13`
 
 ### Breaking Changes
 
@@ -56,6 +88,7 @@
 - `useModal` 新增 `render` 函数，关闭 [#5857](https://github.com/tusen-ai/naive-ui/issues/5857)
 - `n-card` 新增 `close-focusable` 属性
 - `n-dialog` 新增 `close-focusable` 属性
+- `n-form-item` 增加 `calcLabelWidth` 方法，`n-form` 增加 `calcLabelWidths` 方法，关闭 [#5939](https://github.com/tusen-ai/naive-ui/issues/5939)
 
 ## 2.42.0
 

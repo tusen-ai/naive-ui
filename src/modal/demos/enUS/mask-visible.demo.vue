@@ -22,7 +22,7 @@ const showModal = ref(false)
     preset="card"
     draggable
     title="Floating Panel"
-    :mask-visible="false"
+    :show-mask="false"
   >
     Floating Panel
   </n-modal>

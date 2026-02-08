@@ -36,12 +36,7 @@ import {
   watch
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import {
-  call,
-  createKey,
-  createRefSetter,
-  keep
-} from '../../_utils'
+import { call, createKey, createRefSetter, keep } from '../../_utils'
 import { NPopover } from '../../popover'
 import { popoverBaseProps } from '../../popover/src/Popover'
 import { dropdownLight } from '../styles'

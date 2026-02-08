@@ -30,7 +30,7 @@ pnpm run lint:type
 # 上面俩个都检查
 pnpm run lint
 
-# 构建文档网站（如果 vercel 的预览挂掉了，你可能需要先运行一下 `git clean -fdx`）
+# 构建文档网站（如果网站构建失败了，你可能需要先运行一下 `git clean -fdx`）
 pnpm run build:site
 ```
 

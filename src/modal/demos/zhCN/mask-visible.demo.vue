@@ -22,7 +22,7 @@ const showModal = ref(false)
     preset="card"
     draggable
     title="悬浮窗"
-    :mask-visible="false"
+    :show-mask="false"
   >
     悬浮窗
   </n-modal>

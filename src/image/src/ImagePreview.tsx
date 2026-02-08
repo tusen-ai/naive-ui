@@ -38,10 +38,7 @@ import { call, download } from '../../_utils'
 import { NTooltip } from '../../tooltip'
 import { imageLight } from '../styles'
 import { renderCloseIcon, renderNextIcon, renderPrevIcon } from './icons'
-import {
-  imageContextKey,
-  imagePreviewSharedProps
-} from './interface'
+import { imageContextKey, imagePreviewSharedProps } from './interface'
 import style from './styles/index.cssr'
 
 const BLEEDING = 32

@@ -1,4 +1,10 @@
-import type { CSSProperties, DirectiveArguments, PropType, VNode, VNodeChild } from 'vue'
+import type {
+  CSSProperties,
+  DirectiveArguments,
+  PropType,
+  VNode,
+  VNodeChild
+} from 'vue'
 import type { FollowerInst, FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type { PopoverTheme } from '../styles'
@@ -23,10 +29,7 @@ import {
   watchEffect,
   withDirectives
 } from 'vue'
-import {
-  VFocusTrap,
-  VFollower
-} from 'vueuc'
+import { VFocusTrap, VFollower } from 'vueuc'
 import { NxScrollbar } from '../../_internal/scrollbar'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import {

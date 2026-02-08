@@ -1,4 +1,10 @@
-import type { CSSProperties, ExtractPropTypes, Ref, SlotsType, VNode } from 'vue'
+import type {
+  CSSProperties,
+  ExtractPropTypes,
+  Ref,
+  SlotsType,
+  VNode
+} from 'vue'
 import type { InputInst, InputProps } from '../../input'
 import type { Size as TimePickerSize } from '../../time-picker/src/interface'
 import type {

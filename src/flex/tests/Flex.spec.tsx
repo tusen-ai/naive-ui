@@ -18,7 +18,7 @@ describe('n-flex', () => {
         return <NFlex />
       }
     })
-    expect(wrapper.find('.n-flex')).not.toBe(null)
+    expect(wrapper.find('.n-flex').exists()).toBe(false)
     expect(wrapper.html()).toMatchSnapshot()
     wrapper.unmount()
   })

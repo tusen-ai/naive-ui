@@ -23,7 +23,7 @@ inline-theme-disabled.vue
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
 | abstract | `boolean` | `false` | If `n-config-provider` has no wrapper DOM |  |
-| breakpoints | `{ [k: string]: number }` | `{ xs: 0, s: 640, m: 1024, l: 1280, xl: 1536, xxl: 1920 }` | Responsive breakpoints, it will be used in `n-grid`. The prop is not responsive, you need to set it on its first mount. |  |
+| breakpoints | `{ [k: string]: number }` | `{ xs: <640, s: ≥640, m: ≥1024, l: ≥1280, xl: ≥1536, xxl: ≥1920 }` | Responsive breakpoints, it will be used in `n-grid`. The prop is not responsive, you need to set it on its first mount. |  |
 | cls-prefix | `string` | `undefined` | The class prefix of all inner components. (Since `2.40.0`) If you don't set the `cls-prefix` prop of `n-config-provider`, it will inherit the class prefix from its parent by default. Note that this prop is not reactive. |  |
 | date-locale | `DateLocale \| null` | `undefined` | The date locale object to be consumed by its child. If set to `null` it will use the default `dateEnUS` locale. If set to `undefined` it will inherit its parent `n-config-provider`. |  |
 | inline-theme-disabled | `boolean` | `false` | Whether to disabled inline theme CSS variables. If you won't change theme overrides frequently in client side, and need SSR or make devtools looks clear. You can enable the prop. Note that the prop is not responsive. | 2.26.0 |

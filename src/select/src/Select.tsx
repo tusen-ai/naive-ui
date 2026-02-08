@@ -1,7 +1,16 @@
 import type { TreeNode } from 'treemate'
-import type { HTMLAttributes, InputHTMLAttributes, PropType, SlotsType, VNode } from 'vue'
+import type {
+  HTMLAttributes,
+  InputHTMLAttributes,
+  PropType,
+  SlotsType,
+  VNode
+} from 'vue'
 import type { FollowerInst, FollowerPlacement } from 'vueuc'
-import type { InternalSelectionInst, InternalSelectMenuRef } from '../../_internal'
+import type {
+  InternalSelectionInst,
+  InternalSelectMenuRef
+} from '../../_internal'
 import type {
   NodeProps,
   RenderLabel,
@@ -45,15 +54,8 @@ import {
   watchEffect,
   withDirectives
 } from 'vue'
-import {
-  VBinder,
-  VFollower,
-  VTarget
-} from 'vueuc'
-import {
-  NInternalSelection,
-  NInternalSelectMenu
-} from '../../_internal'
+import { VBinder, VFollower, VTarget } from 'vueuc'
+import { NInternalSelection, NInternalSelectMenu } from '../../_internal'
 import {
   useConfig,
   useFormItem,
@@ -738,9 +740,12 @@ export default defineComponent({
     }
     function handleClear(e: MouseEvent): void {
       e.stopPropagation()
-      const { multiple } = props
+      const { multiple, tag, remote } = props
       if (!multiple && props.filterable) {
         closeMenu()
+      }
+      if (tag && !remote) {
+        createdOptionsRef.value = emptyArray
       }
       doClear()
       if (multiple) {

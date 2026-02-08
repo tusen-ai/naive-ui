@@ -2,7 +2,14 @@ import type { CNode } from 'css-render'
 import type { CSSProperties, PropType, VNode, VNodeChild } from 'vue'
 import type { VirtualListInst } from 'vueuc'
 import type { ScrollbarInst } from '../../../_internal'
-import type { ColumnKey, MainTableBodyRef, RowData, RowKey, SummaryRowData, TmNode } from '../interface'
+import type {
+  ColumnKey,
+  MainTableBodyRef,
+  RowData,
+  RowKey,
+  SummaryRowData,
+  TmNode
+} from '../interface'
 import type { ColItem } from '../use-group-header'
 import { pxfy, repeat } from 'seemly'
 import { useMemo } from 'vooks'
@@ -23,9 +30,7 @@ import { formatLength, resolveSlot, warn } from '../../../_utils'
 import { c } from '../../../_utils/cssr'
 import { configProviderInjectionKey } from '../../../config-provider/src/context'
 import { NEmpty } from '../../../empty'
-import {
-  dataTableInjectionKey
-} from '../interface'
+import { dataTableInjectionKey } from '../interface'
 import { createRowClassName, getColKey, isColumnSorting } from '../utils'
 import RenderSafeCheckbox from './BodyCheckbox'
 import RenderSafeRadio from './BodyRadio'
