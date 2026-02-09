@@ -1,11 +1,12 @@
 import type { PropType } from 'vue'
 import type { GlobalThemeOverrides } from '../../config-provider'
 import type { ThemePreset } from './themePresets'
-import { computed, defineComponent, Fragment, h, ref } from 'vue'
+import { computed, defineComponent, Fragment, h, inject, ref } from 'vue'
 import { useLocale } from '../../_mixins'
 import { NButton } from '../../button'
 import { NCard } from '../../card'
 import { useThemeVars } from '../../composables'
+import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { NModal } from '../../modal'
 import { NPagination } from '../../pagination'
 import { themePresets } from './themePresets'
@@ -17,6 +18,16 @@ function isOverridesEqual(
   b: GlobalThemeOverrides
 ): boolean {
   return JSON.stringify(a) === JSON.stringify(b)
+}
+
+function getPresetOverrides(
+  preset: ThemePreset,
+  isDark: boolean
+): GlobalThemeOverrides {
+  if (isDark && preset.darkOverrides) {
+    return preset.darkOverrides
+  }
+  return preset.overrides
 }
 
 export default defineComponent({
@@ -36,6 +47,10 @@ export default defineComponent({
     const currentPageRef = ref(1)
     const { localeRef } = useLocale('ThemeEditor')
     const themeVarsRef = useThemeVars()
+    const NConfigProvider = inject(configProviderInjectionKey, null)
+    const isDarkRef = computed(
+      () => NConfigProvider?.mergedThemeRef.value?.name === 'dark'
+    )
 
     const pagedPresets = computed(() => {
       const start = (currentPageRef.value - 1) * PAGE_SIZE
@@ -43,11 +58,12 @@ export default defineComponent({
     })
 
     function isCurrentTheme(preset: ThemePreset): boolean {
-      return isOverridesEqual(preset.overrides, props.currentOverrides)
+      const overrides = getPresetOverrides(preset, isDarkRef.value)
+      return isOverridesEqual(overrides, props.currentOverrides)
     }
 
     function handleApply(preset: ThemePreset): void {
-      emit('apply', preset.overrides)
+      emit('apply', preset.overrides, preset.darkOverrides)
     }
 
     function handleClose(): void {

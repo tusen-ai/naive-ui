@@ -1,6 +1,7 @@
 import type { GlobalThemeOverrides } from '../../config-provider'
-import { defineComponent, Fragment, h, ref, watch } from 'vue'
+import { computed, defineComponent, Fragment, h, inject, ref, watch } from 'vue'
 import { NConfigProvider } from '../../config-provider'
+import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { NFloatButton } from '../../float-button'
 import { NIcon } from '../../icon'
 import ThemeEditor from './ThemeEditor'
@@ -71,23 +72,46 @@ export default defineComponent({
     const showThemeEditorRef = ref(false)
     const showThemeStoreRef = ref(false)
     const showMenuRef = ref(false)
+    const configProviderInjection = inject(configProviderInjectionKey, null)
+    const isDarkRef = computed(
+      () => configProviderInjection?.mergedThemeRef.value?.name === 'dark'
+    )
     const overridesRef = ref<any>(
       JSON.parse((localStorage['naive-ui-theme-overrides'] as string) || '{}')
     )
+    const darkOverridesRef = ref<any>(
+      JSON.parse(
+        (localStorage['naive-ui-dark-theme-overrides'] as string) || '{}'
+      )
+    )
+    const mergedOverridesRef = computed(() => {
+      return isDarkRef.value ? darkOverridesRef.value : overridesRef.value
+    })
     watch(overridesRef, (value) => {
       localStorage['naive-ui-theme-overrides'] = JSON.stringify(value)
     })
-    function handleApplyTheme(themeOverrides: GlobalThemeOverrides): void {
-      overridesRef.value = themeOverrides
+    watch(darkOverridesRef, (value) => {
+      localStorage['naive-ui-dark-theme-overrides'] = JSON.stringify(value)
+    })
+    function handleApplyTheme(
+      overrides: GlobalThemeOverrides,
+      darkOverrides?: GlobalThemeOverrides
+    ): void {
+      overridesRef.value = overrides
+      darkOverridesRef.value = darkOverrides || {}
     }
     function handleResetTheme(): void {
       overridesRef.value = {}
+      darkOverridesRef.value = {}
     }
     return {
       showThemeEditor: showThemeEditorRef,
       showThemeStore: showThemeStoreRef,
       showMenu: showMenuRef,
+      isDark: isDarkRef,
       overrides: overridesRef,
+      darkOverrides: darkOverridesRef,
+      mergedOverrides: mergedOverridesRef,
       handleApplyTheme,
       handleResetTheme
     }
@@ -97,16 +121,21 @@ export default defineComponent({
       <>
         <ThemeEditor
           show={this.showThemeEditor}
-          overrides={this.overrides}
+          overrides={this.mergedOverrides}
           {...{
             'onUpdate:overrides': (v: any) => {
-              this.overrides = v
+              if (this.isDark) {
+                this.darkOverrides = v
+              }
+              else {
+                this.overrides = v
+              }
             }
           }}
         />
         <ThemeStore
           show={this.showThemeStore}
-          currentOverrides={this.overrides}
+          currentOverrides={this.mergedOverrides}
           {...{
             'onUpdate:show': (v: boolean) => {
               this.showThemeStore = v
@@ -115,7 +144,7 @@ export default defineComponent({
             onReset: this.handleResetTheme
           }}
         />
-        <NConfigProvider themeOverrides={this.overrides}>
+        <NConfigProvider themeOverrides={this.mergedOverrides}>
           {{
             default: () => [
               this.$slots.default?.(),
