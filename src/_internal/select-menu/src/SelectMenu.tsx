@@ -10,6 +10,7 @@ import type {
   Value
 } from '../../../select/src/interface'
 import type { ScrollbarInst } from '../../scrollbar'
+import type { ScrollbarProps } from '../../scrollbar/src/Scrollbar'
 import type { InternalSelectMenuTheme } from '../styles'
 import type {
   InternalExposedProps,
@@ -113,6 +114,7 @@ export default defineComponent({
       default: true
     },
     inlineThemeDisabled: Boolean,
+    scrollbarProps: Object as PropType<ScrollbarProps>,
     // deprecated
     onToggle: Function as PropType<(tmNode: TreeNode<SelectOption>) => void>
   },
@@ -509,6 +511,7 @@ export default defineComponent({
             container={virtualScroll ? this.virtualListContainer : undefined}
             content={virtualScroll ? this.virtualListContent : undefined}
             onScroll={virtualScroll ? undefined : this.doScroll}
+            {...this.scrollbarProps}
           >
             {{
               default: () => {
