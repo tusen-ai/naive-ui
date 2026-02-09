@@ -2,49 +2,56 @@
 
 ## Project Structure & Module Organization
 
-- `src/`: core Vue 3 components, composables, and styles for the library.
-- `src/**/demos/`: component-level demo files, usually `*.demo.vue`.
-- `demo/`: documentation site source and assets (see `demo/pages/docs/**/index.md`).
-- `themes/`: theme packages (e.g. `themes/tusimple`).
-- `build/` and `scripts/`: build tooling, doc transforms, and release utilities.
-- `esm-test/` and `umd-test/`: compatibility test suites.
-- `playground/`: local experimentation sandbox for quick checks.
+- `src/`: components, usually `src/<component>/` with `src/`, `styles/`, `demos/enUS|zhCN`, `tests/`
+- `demo/`: docs/site source
+- `build/` and `scripts/`: build/release/docs tooling
+- `themes/tusimple/`: theme package
+- `esm-test/` and `umd-test/`: compatibility smoke tests
+- `playground/`: local experiments
 
 ## Build, Test, and Development Commands
 
-- `pnpm run dev`: start the Vite dev server for local docs.
-- `pnpm run build:site`: build the documentation site to `site/`.
-- `pnpm run build:package`: build library bundles (ESM/CJS/Rollup) and run compat tests.
-- `pnpm run transpile-docs`: convert markdown docs to Vue for the docs build.
-- `pnpm run test`: run the main Vitest suite.
-- `pnpm run test:cov`: run tests with coverage.
-- `pnpm run lint`: run ESLint and TypeScript demo/type checks.
-- `pnpm run format`: format source and markdown with Prettier + ESLint.
+- `pnpm run dev`: start local Vite docs/dev server.
+- `pnpm run lint`: run ESLint + type checks.
+- `pnpm run test`: run Vitest.
+- `pnpm run test -- src/button/tests/Button.spec.tsx`: run one test file.
+- `pnpm run test:cov`: run with coverage.
+- `pnpm run test:update`: update snapshots intentionally.
+- `pnpm run format`: apply Prettier + ESLint fixes.
+- `pnpm run build:package`: build `es`, `lib`, `dist`.
+- `pnpm run build:site`: production docs/site build.
 
 ## Coding Style & Naming Conventions
 
-- Use TypeScript and Vue SFC conventions already present in `src/` and `demo/`.
-- Match existing indentation and formatting; rely on `pnpm run format` to normalize.
-- Prefer kebab-case demo filenames (e.g. `size.demo.vue`) and consistent prop casing.
-- Keep CSS variables and class names aligned with existing component patterns.
+Use TypeScript-first patterns and existing component structure.
+
+- Prettier: single quotes, no semicolons, width 80 (`.prettierrc`)
+- ESLint: `@antfu/eslint-config` (`eslint.config.mjs`)
+- Components/classes: PascalCase
+- Folders and feature modules: kebab-case (`button-group`, `dynamic-input`)
+- Demo files: `*.demo.vue`
+- Tests: `*.spec.ts(x)` and `server.spec.tsx`
 
 ## Testing Guidelines
 
-- Tests use Vitest; target a specific file with `pnpm run test -- src/xxx`.
-- Compatibility tests are in `umd-test/` and `esm-test/` and run in `build:package`.
-- Name tests after the component/feature they cover to ease discovery.
+Use Vitest with `@vue/test-utils` and jsdom. Keep tests in `src/<component>/tests/`. For rendering-sensitive changes, cover browser (`*.spec.ts(x)`) and SSR (`server.spec.tsx`). Review snapshot diffs before commit.
 
 ## Commit & Pull Request Guidelines
 
-- Follow Conventional Commit-style prefixes (e.g. `docs(tag): ...`, `fix: ...`).
-- Target `main` for features/bugs and `docs` for documentation-only changes.
-- For docs, follow punctuation rules in `CONTRIBUTING.md`:
-  - English API table descriptions end with `.`.
-  - Chinese API table descriptions do not end with `。`.
-  - Add a space between Chinese and Latin characters.
-  - Use `NEXT_VERSION` in API tables and changelog entries.
-- Include concise PR descriptions and screenshots for docs/visual changes.
+Follow Conventional Commits used in history:
 
-## Local Setup Notes
+- `feat(scope): ...`
+- `fix(scope): ...`
+- `refactor(scope): ...`
+- `chore: ...`
 
-- Use `pnpm` (see `package.json` for the required version); install with `pnpm install`.
+Reference PR numbers when possible (example: `fix(select): ... (#7483)`). Open feature/bugfix PRs to `main`; docs-only PRs to `docs` (`CONTRIBUTING.md`). Include summary, tests for behavior changes, and docs/changelog updates when needed.
+
+## Documentation & Changelog Conventions
+
+For docs/changelog edits, follow `CONTRIBUTING.md`:
+
+- English API/changelog text should end with a period `.`
+- Chinese API/changelog text should not end with `。`
+- Add a space between Chinese and Latin characters
+- Use `NEXT_VERSION` in API table version cells and changelog entries
