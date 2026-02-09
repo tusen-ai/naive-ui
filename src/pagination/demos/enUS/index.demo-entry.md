@@ -41,6 +41,7 @@ page-size-option.vue
 | page-slot | `number` | `9` | The number of pages displayed. |  |
 | page | `number` | `undefined` | Current page in controlled mode. |  |
 | prefix | `(info: PaginationInfo) => VNodeChild` | `undefined` | Paging prefix. |  |
+| scrollbar-props | `ScrollbarProps` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props) | NEXT_VERSION |
 | select-props | `SelectProps` | `undefined` | Page size select's props. | 2.34.3 |
 | show-quick-jumper | `boolean` | `false` | Whether to show quick jump input. |  |
 | show-quick-jump-dropdown | `boolean` | `true` | Whether to show quick jump dropdown. If you have too many pages, it could cause performance issue to create quick jump dropdown data. You can set it to `false` to enhance render performance. | 2.37.0 |

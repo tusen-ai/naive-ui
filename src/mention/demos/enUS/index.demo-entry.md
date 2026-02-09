@@ -37,6 +37,7 @@ Mention requires `v2.2.0` and above.
 | placeholder | `string` | `''` | Placeholder. |  |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | Selection panel's placement . | 2.25.0 |
 | render-label | `(option: MentionOption) => VNodeChild` | `undefined` | Options' labels render function. |  |
+| scrollbar-props | `ScrollbarProps` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props) | NEXT_VERSION |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Input size. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validation status. | 2.27.0 |
 | to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
