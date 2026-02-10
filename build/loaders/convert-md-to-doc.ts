@@ -1,12 +1,22 @@
-import type { Token, Tokens } from 'marked'
+import type { Code, Heading, RootContent } from 'mdast'
 import path from 'node:path'
 import fse from 'fs-extra'
+import { toHtml } from 'hast-util-to-html'
 import camelCase from 'lodash/camelCase'
-import { marked } from 'marked'
-import { createRenderer } from './md-renderer'
+import { fromMarkdown } from 'mdast-util-from-markdown'
+import { gfmFromMarkdown } from 'mdast-util-gfm'
+import { toHast } from 'mdast-util-to-hast'
+import { toString } from 'mdast-util-to-string'
+import { gfm } from 'micromark-extension-gfm'
+import { createMdHandlers } from './md-renderer'
 import projectPath from './project-path'
 
-const mdRenderer = createRenderer()
+const mdHandlers = createMdHandlers()
+
+const gfmParseOptions = {
+  extensions: [gfm()],
+  mdastExtensions: [gfmFromMarkdown()]
+}
 
 interface DemoInfo {
   id: string
@@ -98,7 +108,7 @@ function genAnchorTemplate(
 }
 
 function genDemosApiAnchorTemplate(
-  tokens: Token[]
+  nodes: RootContent[]
 ): (DemoInfo | { id: string, title: string, debug: boolean })[] {
   const api: DemoInfo[] = [
     {
@@ -108,27 +118,25 @@ function genDemosApiAnchorTemplate(
     }
   ]
   return api.concat(
-    tokens
+    nodes
       .filter(
-        (token): token is Tokens.Heading =>
-          token.type === 'heading' && token.depth === 3
+        (node): node is Heading => node.type === 'heading' && node.depth === 3
       )
-      .map(token => ({
-        id: token.text.replace(/ /g, '-'),
-        title: token.text,
-        debug: false
-      }))
+      .map((node) => {
+        const title = toString(node)
+        return { id: title.replace(/ /g, '-'), title, debug: false }
+      })
   )
 }
 
 function genDemosAnchorTemplate(
   demoInfos: DemoInfo[],
   hasApi: boolean,
-  tokens: Token[]
+  nodes: RootContent[]
 ): string {
   const links = (
     hasApi
-      ? demoInfos.concat(genDemosApiAnchorTemplate(tokens) as DemoInfo[])
+      ? demoInfos.concat(genDemosApiAnchorTemplate(nodes) as DemoInfo[])
       : demoInfos
   ).map(
     ({ id, title, debug }) => `<n-anchor-link
@@ -142,13 +150,12 @@ function genDemosAnchorTemplate(
   })
 }
 
-function genPageAnchorTemplate(tokens: Token[]): string {
-  const titles = tokens
+function genPageAnchorTemplate(nodes: RootContent[]): string {
+  const titles = nodes
     .filter(
-      (token): token is Tokens.Heading =>
-        token.type === 'heading' && token.depth === 2
+      (node): node is Heading => node.type === 'heading' && node.depth === 2
     )
-    .map(token => token.text)
+    .map(node => toString(node))
   const links = titles.map((title) => {
     const href = title.replace(/ /g, '-')
     return `<n-anchor-link title="${title}" href="#${href}"/>`
@@ -218,16 +225,16 @@ export async function convertMd2ComponentDocumentation(
   const forceShowAnchor = !!~text.search('<!--anchor:on-->')
   const colSpan = ~text.search('<!--single-column-->') ? 1 : 2
   const hasApi = !!~text.search('## API')
-  const tokens = marked.lexer(text)
+  const tree = fromMarkdown(text, gfmParseOptions)
+  const nodes = tree.children
   // resolve external components
-  const componentsIndex = tokens.findIndex(
-    token =>
-      token.type === 'code' && (token as Tokens.Code).lang === 'component'
+  const componentsIndex = nodes.findIndex(
+    node => node.type === 'code' && node.lang === 'component'
   )
   let components: ComponentInfo[] = []
   if (~componentsIndex) {
-    const token = tokens[componentsIndex] as Tokens.Code
-    components = token.text
+    const node = nodes[componentsIndex] as Code
+    components = node.value
       .split('\n')
       .map((component) => {
         const [ids, importStmt] = component.split(':')
@@ -241,44 +248,38 @@ export async function convertMd2ComponentDocumentation(
         }
       })
       .filter(({ ids, importStmt }) => ids && importStmt)
-    tokens.splice(componentsIndex, 1)
+    nodes.splice(componentsIndex, 1)
   }
   // add edit on github button on title
-  const titleIndex = tokens.findIndex(
-    token => token.type === 'heading' && token.depth === 1
+  const titleIndex = nodes.findIndex(
+    node => node.type === 'heading' && node.depth === 1
   )
   if (titleIndex > -1) {
-    const titleText = JSON.stringify(
-      (tokens[titleIndex] as Tokens.Heading).text
-    )
+    const titleText = JSON.stringify(toString(nodes[titleIndex]))
     const btnTemplate = `<edit-on-github-header relative-url="${url}" text=${titleText}><\/edit-on-github-header>`
-    tokens.splice(titleIndex, 1, {
+    nodes.splice(titleIndex, 1, {
       type: 'html',
-      pre: false,
-      text: btnTemplate
-    } as Tokens.HTML)
+      value: btnTemplate
+    })
   }
   // resolve demos, debug demos are removed from production build
-  const demosIndex = tokens.findIndex(
-    token => token.type === 'code' && (token as Tokens.Code).lang === 'demo'
+  const demosIndex = nodes.findIndex(
+    node => node.type === 'code' && node.lang === 'demo'
   )
   let demoInfos: DemoInfo[] = []
   if (~demosIndex) {
     demoInfos = await resolveDemoInfos(
-      (tokens[demosIndex] as Tokens.Code).text,
+      (nodes[demosIndex] as Code).value,
       url,
       env
     )
-    tokens.splice(demosIndex, 1, {
+    nodes.splice(demosIndex, 1, {
       type: 'html',
-      pre: false,
-      text: genDemosTemplate(demoInfos, colSpan)
-    } as any)
+      value: genDemosTemplate(demoInfos, colSpan)
+    })
   }
-  const docMainTemplate = marked.parser(tokens, {
-    gfm: true,
-    renderer: mdRenderer
-  })
+  const hast = toHast(tree, { handlers: mdHandlers, allowDangerousHtml: true })!
+  const docMainTemplate = toHtml(hast, { allowDangerousHtml: true })
   // generate page
   const docTemplate = `
 <template>
@@ -292,8 +293,8 @@ export async function convertMd2ComponentDocumentation(
     <div style="width: 192px;" v-if="showAnchor">
       ${
         demoInfos.length
-          ? genDemosAnchorTemplate(demoInfos, hasApi, tokens)
-          : genPageAnchorTemplate(tokens)
+          ? genDemosAnchorTemplate(demoInfos, hasApi, nodes)
+          : genPageAnchorTemplate(nodes)
       }
     </div>
   </div>

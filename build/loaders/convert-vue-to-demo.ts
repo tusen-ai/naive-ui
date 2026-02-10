@@ -1,11 +1,14 @@
-import type { Token } from 'marked'
+import type { RootContent } from 'mdast'
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
-import { marked } from 'marked'
+import { toHtml } from 'hast-util-to-html'
+import { fromMarkdown } from 'mdast-util-from-markdown'
+import { toHast } from 'mdast-util-to-hast'
+import { toString } from 'mdast-util-to-string'
 import { handleMergeCode } from '../utils/handle-merge-code'
-import { createRenderer } from './md-renderer'
+import { createMdHandlers } from './md-renderer'
 
 interface Parts {
   template?: string
@@ -37,7 +40,7 @@ interface ConvertVue2DemoOptions {
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const mdRenderer = createRenderer()
+const mdHandlers = createMdHandlers()
 
 const __HTTP__ = process.env.NODE_ENV !== 'production' ? 'http' : 'https'
 
@@ -161,15 +164,15 @@ function getPartsOfDemo(text: string): Parts {
   const style = text.match(/<style>([\s\S]*?)<\/style>/)?.[1]
   const markdownText
     = text.match(/<markdown>([\s\S]*?)<\/markdown>/)?.[1]?.trim() ?? ''
-  const tokens = marked.lexer(markdownText)
-  const contentTokens: Token[] = []
+  const tree = fromMarkdown(markdownText)
+  const contentNodes: RootContent[] = []
   let title = ''
-  for (const token of tokens) {
-    if (token.type === 'heading' && token.depth === 1) {
-      title = token.text
+  for (const node of tree.children) {
+    if (node.type === 'heading' && node.depth === 1) {
+      title = toString(node)
     }
     else {
-      contentTokens.push(token)
+      contentNodes.push(node)
     }
   }
   const scriptAttributes
@@ -178,14 +181,17 @@ function getPartsOfDemo(text: string): Parts {
   const apiType = scriptAttributes?.includes('setup')
     ? 'composition'
     : 'options'
+  const contentTree = { type: 'root' as const, children: contentNodes }
+  const hast = toHast(contentTree, {
+    handlers: mdHandlers,
+    allowDangerousHtml: true
+  })!
   return {
     template,
     script,
     style,
     title,
-    content: marked.parser(contentTokens, {
-      renderer: mdRenderer
-    }),
+    content: toHtml(hast, { allowDangerousHtml: true }),
     language: languageType,
     api: apiType
   }
