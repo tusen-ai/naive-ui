@@ -1,7 +1,7 @@
 {
   "name": "naive-ui",
   "version": "2.43.2",
-  "packageManager": "pnpm@9.5.0",
+  "packageManager": "pnpm@10.29.2",
   "description": "A Vue 3 Component Library. Fairly Complete, Theme Customizable, Uses TypeScript, Fast",
   "author": "07akioni",
   "license": "MIT",
@@ -63,6 +63,9 @@
     "prepare": "husky",
     "transpile-docs": "tsx scripts/md-to-vue.ts",
     "release:site": "TUSIMPLE=true pnpm run build:site && node build-doc/generate-deploy-sh.js && sudo bash build-doc/deploy-doc.sh"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "web-types": "./web-types.json",
   "peerDependencies": {
