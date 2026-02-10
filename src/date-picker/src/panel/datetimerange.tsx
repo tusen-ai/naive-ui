@@ -19,6 +19,7 @@ import { NButton, NxButton } from '../../../button'
 import { NInput } from '../../../input'
 import { NTimePicker } from '../../../time-picker'
 import PanelHeader from './panelHeader'
+import { renderDate } from './renderDate'
 import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
 
 export default defineComponent({
@@ -224,13 +225,13 @@ export default defineComponent({
                           this.handleDateMouseEnter(dateItem)
                         }
                   }
-                >
-                  <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
-                  {dateItem.dateObject.date}
-                  {dateItem.isCurrentDate ? (
-                    <div class={`${mergedClsPrefix}-date-panel-date__sup`} />
-                  ) : null}
-                </div>
+	                >
+	                  <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
+	                  {renderDate(datePickerSlots.date, dateItem.dateObject)}
+	                  {dateItem.isCurrentDate ? (
+	                    <div class={`${mergedClsPrefix}-date-panel-date__sup`} />
+	                  ) : null}
+	                </div>
               )
             })}
           </div>
@@ -333,13 +334,13 @@ export default defineComponent({
                           this.handleDateMouseEnter(dateItem)
                         }
                   }
-                >
-                  <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
-                  {dateItem.dateObject.date}
-                  {dateItem.isCurrentDate ? (
-                    <div class={`${mergedClsPrefix}-date-panel-date__sup`} />
-                  ) : null}
-                </div>
+	                >
+	                  <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
+	                  {renderDate(datePickerSlots.date, dateItem.dateObject)}
+	                  {dateItem.isCurrentDate ? (
+	                    <div class={`${mergedClsPrefix}-date-panel-date__sup`} />
+	                  ) : null}
+	                </div>
               )
             })}
           </div>
