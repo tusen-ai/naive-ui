@@ -1,1 +1,1 @@
-export type { MarqueeProps } from './props'
+export type { MarqueeProps, marqueeProps } from './props'
