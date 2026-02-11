@@ -480,6 +480,13 @@ export function createComponentMenuOptions({ lang, theme }) {
           path: '/code'
         },
         {
+          en: 'Markdown',
+          zh: 'Markdown',
+          enSuffix: true,
+          path: '/markdown',
+          isNew: true
+        },
+        {
           en: 'Data Table',
           zh: '数据表格',
           enSuffix: true,
