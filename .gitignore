@@ -21,6 +21,8 @@ coverage
 /package
 /public/llms.txt
 /public/llms-full.txt
+/public/en-US/os-theme/docs/*.md
+/public/en-US/os-theme/components/*.md
 lib
 es
 *.tsbuildinfo

@@ -55,8 +55,9 @@ async function loadRoutesModule(): Promise<RoutesModule> {
   return (await import(pathToFileURL(ROUTES_FILE).href)) as RoutesModule
 }
 
-function createUrl(section: Section, path: string): string {
-  return `/${DEFAULT_LOCALE}/${DEFAULT_THEME}/${section}/${path}`
+function createUrl(section: Section, path: string, markdown = false): string {
+  const url = `/${DEFAULT_LOCALE}/${DEFAULT_THEME}/${section}/${path}`
+  return markdown ? `${url}.md` : url
 }
 
 async function readMarkdownFromVueFile(filePath: string): Promise<string> {
@@ -148,7 +149,7 @@ async function createIndexLines(
   return await Promise.all(
     entries.map(async (entry) => {
       const title = await resolveEntryTitle(entry, section)
-      const url = createUrl(section, entry.path)
+      const url = createUrl(section, entry.path, true)
       return `- [${title}](${url})`
     })
   )
@@ -231,6 +232,30 @@ async function main(): Promise<void> {
   await mkdir(resolve(cwd(), 'public'), { recursive: true })
   await writeFile(OUTPUT_FILE, llmsContent, 'utf-8')
   await writeFile(FULL_OUTPUT_FILE, llmsFullContent, 'utf-8')
+
+  for (const [section, entries] of [
+    ['docs', docEntries],
+    ['components', componentEntries]
+  ] as const) {
+    for (const entry of entries) {
+      const sourcePath = resolve(ROUTES_DIR, entry.importPath)
+      const content = await getNormalizedRouteContent(sourcePath)
+      const routeMarkdownFile = resolve(
+        cwd(),
+        'public',
+        DEFAULT_LOCALE,
+        DEFAULT_THEME,
+        section,
+        `${entry.path}.md`
+      )
+      await mkdir(dirname(routeMarkdownFile), { recursive: true })
+      await writeFile(
+        routeMarkdownFile,
+        content || '_No markdown content extracted from source file._',
+        'utf-8'
+      )
+    }
+  }
 
   console.log(`Generated ${OUTPUT_FILE}`)
   console.log(`Generated ${FULL_OUTPUT_FILE}`)
