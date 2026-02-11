@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2.43.3
+
+`2026-01-22`
+
+- tab-bar: Fix no transition animation when switching [#7406](https://github.com/tusen-ai/naive-ui/issues/7406)
 ## NEXT_VERSION
 
 `NEXT_VERSION`
