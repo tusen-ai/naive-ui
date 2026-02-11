@@ -19,6 +19,8 @@ coverage
 /fonts
 /site
 /package
+/public/llms.txt
+/public/llms-full.txt
 lib
 es
 *.tsbuildinfo
