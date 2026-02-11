@@ -1,4 +1,10 @@
-# CHANGELOG
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Fixes
+
+- Fix `n-card`'s `title` slot not working, closes [#5987](https://github.com/tusen-ai/naive-ui/issues/5987)
 
 ## NEXT_VERSION
 

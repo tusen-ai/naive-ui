@@ -243,11 +243,9 @@ export default defineComponent({
         })}
         {resolveWrappedSlot($slots.header, (children) => {
           const { title } = this
-          const mergedChildren = title
-            ? ensureValidVNode(
-                typeof title === 'function' ? [title()] : [title]
-              )
-            : children
+          const mergedChildren
+            = children
+              || ensureValidVNode(typeof title === 'function' ? [title()] : [title])
           return mergedChildren || this.closable ? (
             <div
               class={[`${mergedClsPrefix}-card-header`, this.headerClass]}
