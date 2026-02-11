@@ -5,7 +5,14 @@ If you want to use `useDialog`, `useMessage`, `useNotification`, `useLoadingBar`
 Available since `2.29.0`.
 
 <n-alert title="Caveat" type="warning" :bordered="false">
-1. Discrete API won't be affected by <n-text code>n-xxx-provider</n-text> in current app. If you need to share config, you should sync them manually. Also, you'd better not using discrete API and normal API together. 2. Do not call <n-text code>createDiscreteApi</n-text> in <n-text code>setup</n-text> since it may cause some unexpected behaviors.
+  <n-ul align-text>
+    <li>
+      Discrete API won't be affected by <n-text code>n-xxx-provider</n-text> in current app. If you need to share config, you should sync them manually. Also, you'd better not using discrete API and normal API together.
+    </li>
+    <li>
+      Do not call <n-text code>createDiscreteApi</n-text> in <n-text code>setup</n-text> since it may cause some unexpected behaviors.
+    </li>
+  </n-ul>
 </n-alert>
 
 ## Demo
