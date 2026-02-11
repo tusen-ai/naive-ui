@@ -11,6 +11,7 @@ multiple.vue
 checkbox.vue
 check-strategy.vue
 filterable.vue
+node-display-mode.vue
 check-strategy-debug.vue
 action.vue
 async.vue
