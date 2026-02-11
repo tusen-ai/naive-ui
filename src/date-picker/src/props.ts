@@ -54,7 +54,7 @@ export const datePickerProps = {
   },
   value: [Number, Array] as PropType<Value | null>,
   formattedValue: [String, Array] as PropType<FormattedValue | null>,
-  size: String as PropType<'small' | 'medium' | 'large'>,
+  size: String as PropType<'tiny' | 'small' | 'medium' | 'large'>,
   type: {
     type: String as PropType<DatePickerType>,
     default: 'date'
