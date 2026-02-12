@@ -31,6 +31,7 @@ focus.vue
 status.vue
 icon.vue
 panel.vue
+single-panel.vue
 ```
 
 ## API
@@ -113,6 +114,7 @@ panel.vue
 | default-calendar-start-time | `number` | `undefined` | Default panel calendar start month timestamp. | 2.28.3 |
 | default-calendar-end-time | `number` | `undefined` | Default panel calendar end month timestamp. | 2.28.3 |
 | end-placeholder | `string` | `'End Date'` | Placeholder at end part of the input. |  |
+| single-panel | `boolean` | `false` | Whether to use a single panel | NEXT_VERSION |
 | format | `string` | `'yyyy-MM-dd'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. | `detail` 2.37.1 |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: (hour: number) => boolean, isMinuteDisabled?: (minute: number, hour: number \| null) => boolean, isSecondDisabled?: (second: number, minute: number \| null, hour: number \| null) => boolean }` | `undefined` | Validator of the time. `null` in validators means value of picker is empty. |  |

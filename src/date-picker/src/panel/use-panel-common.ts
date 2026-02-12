@@ -48,6 +48,7 @@ const usePanelCommonProps = {
   themeClass: String,
   onRender: Function as PropType<(() => void) | undefined>,
   panel: Boolean,
+  singlePanel: Boolean,
   onNextMonth: Function as PropType<() => void>,
   onPrevMonth: Function as PropType<() => void>,
   onNextYear: Function as PropType<() => void>,
