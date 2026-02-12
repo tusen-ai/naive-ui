@@ -133,24 +133,26 @@ export default defineComponent({
             }
           }}
         />
-        <ThemeStore
-          show={this.showThemeStore}
-          currentOverrides={this.mergedOverrides}
-          {...{
-            'onUpdate:show': (v: boolean) => {
-              this.showThemeStore = v
-            },
-            onApply: this.handleApplyTheme,
-            onReset: this.handleResetTheme
-          }}
-        />
         <NConfigProvider themeOverrides={this.mergedOverrides}>
           {{
             default: () => [
+              <ThemeStore
+                show={this.showThemeStore}
+                currentOverrides={this.mergedOverrides}
+                {...{
+                  'onUpdate:show': (v: boolean) => {
+                    this.showThemeStore = v
+                  },
+                  onApply: this.handleApplyTheme,
+                  onReset: this.handleResetTheme
+                }}
+              />,
               this.$slots.default?.(),
               <NFloatButton
                 right={40}
                 bottom={40}
+                width={44}
+                height={44}
                 menuTrigger="click"
                 showMenu={this.showMenu}
                 {...{
@@ -164,13 +166,15 @@ export default defineComponent({
               >
                 {{
                   default: () => (
-                    <NIcon>{{ default: renderColorWandIcon }}</NIcon>
+                    <NIcon size={20}>{{ default: renderColorWandIcon }}</NIcon>
                   ),
                   menu: () => [
                     <NFloatButton
+                      shape="circle"
                       right={0}
                       bottom={0}
-                      shape="square"
+                      width={44}
+                      height={44}
                       {...{
                         onClick: () => {
                           this.showThemeEditor = !this.showThemeEditor
@@ -179,12 +183,16 @@ export default defineComponent({
                     >
                       {{
                         default: () => (
-                          <NIcon>{{ default: renderPaletteIcon }}</NIcon>
+                          <NIcon size={20}>
+                            {{ default: renderPaletteIcon }}
+                          </NIcon>
                         )
                       }}
                     </NFloatButton>,
                     <NFloatButton
-                      shape="square"
+                      shape="circle"
+                      width={44}
+                      height={44}
                       {...{
                         onClick: () => {
                           this.showThemeStore = !this.showThemeStore
@@ -197,7 +205,9 @@ export default defineComponent({
                     >
                       {{
                         default: () => (
-                          <NIcon>{{ default: renderStoreIcon }}</NIcon>
+                          <NIcon size={20}>
+                            {{ default: renderStoreIcon }}
+                          </NIcon>
                         )
                       }}
                     </NFloatButton>

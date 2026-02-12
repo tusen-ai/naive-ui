@@ -179,7 +179,7 @@ export default defineComponent({
                                 style={{
                                   marginTop: '22px'
                                 }}
-                                type={isCurrent ? 'success' : 'primary'}
+                                type="primary"
                                 disabled={isCurrent}
                                 onClick={() => handleApply(preset)}
                               >
@@ -205,7 +205,7 @@ export default defineComponent({
                   alignItems: 'center'
                 }}
               >
-                <NButton type="error" secondary round onClick={handleReset}>
+                <NButton secondary onClick={handleReset}>
                   {{
                     default: () => locale.resetTheme
                   }}
