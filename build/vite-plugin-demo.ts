@@ -6,11 +6,11 @@ import { demoIndexTransFormPlugin } from './vite-plugin-index-tranform'
 
 const fileRegex = /\.(md|vue)$/
 
-const vuePlugin = vue({
-  include: [/\.vue$/, /\.md$/]
-})
-
 export function createDemoPlugin(): Plugin[] {
+  const vuePlugin = vue({
+    include: [/\.vue$/, /\.md$/]
+  })
+
   const naiveDemoVitePlugin: Plugin = {
     name: 'demo-vite',
     async transform(_, id) {
@@ -23,22 +23,8 @@ export function createDemoPlugin(): Plugin[] {
       if (fileRegex.test(file)) {
         const code = await getTransformedVueSrc(file)
         if (code === undefined)
-          return []
-
-        const { handleHotUpdate } = vuePlugin
-        if (typeof handleHotUpdate === 'function') {
-          return handleHotUpdate({
-            ...ctx,
-            read: () => code
-          })
-        }
-        else if (handleHotUpdate?.handler) {
-          return handleHotUpdate.handler({
-            ...ctx,
-            read: () => code
-          })
-        }
-        return []
+          return
+        ctx.read = () => code
       }
     }
   }
