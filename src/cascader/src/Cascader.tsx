@@ -16,6 +16,8 @@ import type { PopoverProps } from '../../popover'
 import type { SelectBaseOption } from '../../select/src/interface'
 import type { CascaderTheme } from '../styles'
 import type {
+  CascaderFallbackOption,
+  CascaderFallbackOptionImpl,
   CascaderInst,
   CascaderMenuInstance,
   CascaderOption,
@@ -125,6 +127,12 @@ export const cascaderProps = {
   },
   show: {
     type: Boolean as PropType<boolean | undefined>,
+    default: undefined
+  },
+  fallbackOption: {
+    type: [Function, Boolean] as PropType<
+      CascaderFallbackOption | false | undefined
+    >,
     default: undefined
   },
   maxTagCount: [String, Number] as PropType<number | 'responsive'>,
@@ -293,6 +301,24 @@ export default defineComponent({
     const indeterminateKeysRef = computed(
       () => mergedKeysRef.value.indeterminateKeys
     )
+    const wrappedFallbackOptionRef = computed(() => {
+      const { fallbackOption } = props
+      if (fallbackOption === undefined) {
+        const { labelField, valueField } = props
+        return (value: string | number) => ({
+          [labelField]: String(value),
+          [valueField]: value
+        })
+      }
+      if (fallbackOption === false)
+        return false
+      return (value: string | number) => {
+        return Object.assign(
+          (fallbackOption as CascaderFallbackOptionImpl)(value),
+          { [props.valueField]: value }
+        ) as CascaderOption
+      }
+    })
     const menuModelRef = computed(() => {
       const { treeNodePath, treeNode } = treeMateRef.value.getPath(
         hoverKeyRef.value
@@ -466,28 +492,35 @@ export default defineComponent({
       if (props.multiple) {
         const { showPath, separator, labelField, cascade } = props
         const { getCheckedKeys, getNode } = treeMateRef.value
+        const { value: wrappedFallbackOption } = wrappedFallbackOptionRef
         const value = getCheckedKeys(checkedKeysRef.value, {
           cascade,
           checkStrategy: mergedCheckStrategyRef.value,
           allowNotLoaded: props.allowCheckingNotLoaded
         }).checkedKeys
-        return value.map((key) => {
+        const result: { label: string, value: Key }[] = []
+        value.forEach((key) => {
           const node = getNode(key)
           if (node === null) {
-            return {
-              label: String(key),
-              value: key
+            if (wrappedFallbackOption) {
+              const fallbackOption = wrappedFallbackOption(key)
+              result.push({
+                label: (fallbackOption as any)[labelField] as string,
+                value: key
+              })
             }
+            // when wrappedFallbackOption is false, skip this key
           }
           else {
-            return {
+            result.push({
               label: showPath
                 ? getPathLabel(node, separator, labelField)
                 : (node.rawNode as any)[labelField],
               value: node.key
-            }
+            })
           }
         })
+        return result
       }
       else {
         return []
@@ -496,6 +529,7 @@ export default defineComponent({
     const selectedOptionRef = computed(() => {
       const { multiple, showPath, separator, labelField } = props
       const { value } = mergedValueRef
+      const { value: wrappedFallbackOption } = wrappedFallbackOptionRef
       if (!multiple && !Array.isArray(value)) {
         const { getNode } = treeMateRef.value
         if (value === null) {
@@ -503,10 +537,15 @@ export default defineComponent({
         }
         const node = getNode(value)
         if (node === null) {
-          return {
-            label: String(value),
-            value
+          if (wrappedFallbackOption) {
+            const fallbackOption = wrappedFallbackOption(value)
+            return {
+              label: (fallbackOption as any)[labelField] as string,
+              value
+            }
           }
+          // when wrappedFallbackOption is false, return null
+          return null
         }
         else {
           return {

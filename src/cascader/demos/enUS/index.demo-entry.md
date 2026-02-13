@@ -15,6 +15,7 @@ virtual.vue
 check-strategy.vue
 custom-field.vue
 custom-render.vue
+fallback-option.vue
 focus.vue
 status.vue
 ```
@@ -36,6 +37,7 @@ status.vue
 | disabled-field | `string` | `'disabled'` | The disabled field in `CascaderOption`. | 2.32.2 |
 | ellipsis-tag-popover-props | `PopoverProps` | `undefined` | `popover` props of the preview ellipsis tag. | 2.37.0 |
 | expand-trigger | `'click' \| 'hover'` | `'click'` | If `remote` is set, `'hover'` won't work. |  |
+| fallback-option | `false \| (value: string \| number) => CascaderOption` | `value => ({ label: '' + value, value })` | The option to be used when the value doesn't have a corresponding option in the options. If set to `false`, the unmatched value will not be displayed. The unmatched value will be considered invalid and will be cleared during operations. | NEXT_VERSION |
 | filterable | `boolean` | `false` | Note: If `remote` is set, this won't have any effect. |  |
 | filter | `(pattern: string, option: CascaderOption, path: CascaderOption[]) => boolean` | A string based filter algorithm. | Filter function of the cascader. |  |
 | filter-menu-props | `HTMLAttributes` | `undefined` | The filter menu's dom props. | 2.27.0 |
