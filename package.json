@@ -62,7 +62,6 @@
     "build:site:ts": "bash ./scripts/pre-build-site/pre-build-site.sh && TUSIMPLE=true NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && bash ./scripts/post-build-site/post-build-site.sh",
     "prepare": "husky",
     "transpile-docs": "tsx scripts/md-to-vue.ts",
-    "gen:llms": "tsx scripts/gen-llms-txt.ts",
     "release:site": "TUSIMPLE=true pnpm run build:site && node build-doc/generate-deploy-sh.js && sudo bash build-doc/deploy-doc.sh"
   },
   "web-types": "./web-types.json",
@@ -139,6 +138,7 @@
     "mdast-util-from-markdown": "^2.0.2",
     "mdast-util-gfm": "^3.1.0",
     "mdast-util-to-hast": "^13.2.1",
+    "mdast-util-to-markdown": "^2.1.2",
     "mdast-util-to-string": "^4.0.0",
     "micromark-extension-gfm": "^3.0.0",
     "prettier": "^3.6.2",
