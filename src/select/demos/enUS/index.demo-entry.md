@@ -74,6 +74,7 @@ custom-field.vue
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validation status. | 2.27.0 |
 | tag | `boolean` | `false` | Whether users can create new options. This should be used with `filterable`. |  |
 | to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
+| update-on-same-value | `boolean` | `true` | Whether to trigger `update:value` event when selecting the same value. | NEXT_VERSION |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` | Value when being manually set. |  |
 | value-field | `string` | `'value'` | Field name of option value. | 2.29.1 |
 | virtual-scroll | `boolean` | `true` | Whether to enable virtual scrolling. |  |

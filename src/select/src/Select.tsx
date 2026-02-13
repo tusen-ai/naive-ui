@@ -212,6 +212,7 @@ export const selectProps = {
     default: true
   },
   scrollbarProps: Object as PropType<ScrollbarProps>,
+  updateOnSameValue: Boolean,
   /** deprecated */
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   items: Array as PropType<SelectMixedOption[]>
@@ -686,10 +687,12 @@ export default defineComponent({
         }
         focusSelection()
         closeMenu()
-        doUpdateValue(
-          option[valueField] as NonNullable<SelectOption['value']>,
-          option
-        )
+        const newValue = option[valueField] as NonNullable<
+          SelectOption['value']
+        >
+        if (props.updateOnSameValue || newValue !== mergedValueRef.value) {
+          doUpdateValue(newValue, option)
+        }
       }
     }
     function getCreatedOptionIndex(optionValue: string | number): number {

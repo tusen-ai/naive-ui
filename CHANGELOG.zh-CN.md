@@ -10,6 +10,7 @@
 
 ### Feats
 
+- `n-select` 新增 `update-on-same-value` 属性，用于控制选择相同值时是否触发 `update:value` 事件，关闭 [#4326](https://github.com/tusen-ai/naive-ui/issues/3614)
 - `n-color-picker` 新增 `trigger` slot，关闭 [#7192](https://github.com/tusen-ai/naive-ui/issues/7192)
 - `n-select` `n-auto-complete` `n-mention` `n-popselect` `n-cascader` `n-pagination` 新增 `scrollbar-props` 属性
 - `n-upload` 的 `submit` 方法新增 `retry` 属性。

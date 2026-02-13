@@ -85,6 +85,7 @@ create-debug.vue
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
 | tag | `boolean` | `false` | 是否可以创建新的选项，需要和 `filterable` 一起使用 |  |
 | to | `string \| HTMLElement \| false` | `body` | 菜单的容器节点，`false` 会待在原地 |  |
+| update-on-same-value | `boolean` | `true` | 选择相同值时是否触发 `update:value` 事件 | NEXT_VERSION |
 | value | `Array<string \| number> \| string \| number \| null` | `undefined` | 受控模式下的值 |  |
 | value-field | `string` | `'value'` | 选项 value 的字段名 | 2.29.1 |
 | virtual-scroll | `boolean` | `true` | 是否启用虚拟滚动 |  |
