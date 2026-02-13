@@ -44,7 +44,7 @@ export default defineComponent({
   <n-h1 :id="id" class="naive-doc-title">
     <span>{{ text }}</span>
     <span class="edit-button">
-      <CopyDocActions :text="text" />
+      <CopyDocActions />
       <n-tooltip placement="right" :show-arrow="false">
         <template #trigger>
           <EditOnGithubButton

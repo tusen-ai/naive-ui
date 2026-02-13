@@ -256,7 +256,7 @@ export async function convertMd2ComponentDocumentation(
   )
   if (titleIndex > -1) {
     const titleText = JSON.stringify(toString(nodes[titleIndex]))
-    const btnTemplate = `<edit-on-github-header relative-url="${url}" text=${titleText}><\/edit-on-github-header>`
+    const btnTemplate = `<doc-header relative-url="${url}" text=${titleText}><\/doc-header>`
     nodes.splice(titleIndex, 1, {
       type: 'html',
       value: btnTemplate
