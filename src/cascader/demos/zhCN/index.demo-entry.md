@@ -15,6 +15,7 @@ virtual.vue
 check-strategy.vue
 custom-field.vue
 custom-render.vue
+fallback-option.vue
 focus.vue
 status.vue
 default-value-debug.vue
@@ -38,6 +39,7 @@ default-value-debug.vue
 | disabled-field | `string` | `'disabled'` | 替代 `CascaderOption` 中的 disabled 字段名 | 2.32.2 |
 | ellipsis-tag-popover-props | `PopoverProps` | `undefined` | 选中选项过多省略显示时，预览弹出 `popover` 的属性 | 2.37.0 |
 | expand-trigger | `'click' \| 'hover'` | `'click'` | 在 `remote` 被设定时 `'hover'` 不生效 |  |
+| fallback-option | `false \| (value: string \| number) => CascaderOption` | `value => ({ label: '' + value, value })` | 在传入的选项中没有对应当前值的选项时，这个值应该对应的选项。如果设为 false，不会为找不到对应选项的值生成回退选项也不会显示它，未在选项中的值会被视为不合法，操作过程中会被组件清除掉 | NEXT_VERSION |
 | filterable | `boolean` | `false` | `remote` 被设定时不生效 |  |
 | filter | `(pattern: string, option: CascaderOption, path: CascaderOption[]) => boolean` | 一个基于字符串的过滤算法 | 过滤选项的函数 |  |
 | filter-menu-props | `HTMLAttributes` | `undefined` | 可过滤菜单的 DOM 属性 | 2.27.0 |

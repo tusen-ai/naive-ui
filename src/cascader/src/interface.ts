@@ -148,3 +148,8 @@ export interface CascaderInst {
     options: Array<CascaderOption | null>
   }
 }
+
+export type CascaderFallbackOption = (value: string & number) => CascaderOption
+export type CascaderFallbackOptionImpl = (
+  value: string | number
+) => CascaderOption

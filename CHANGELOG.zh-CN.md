@@ -10,6 +10,7 @@
 
 ### Feats
 
+- `n-cascader` 新增 `fallback-option` 属性，关闭 [#7490](https://github.com/tusen-ai/naive-ui/issues/7490)
 - `n-color-picker` 新增 `trigger` slot，关闭 [#7192](https://github.com/tusen-ai/naive-ui/issues/7192)
 - `n-select` `n-auto-complete` `n-mention` `n-popselect` `n-cascader` `n-pagination` 新增 `scrollbar-props` 属性
 - `n-upload` 的 `submit` 方法新增 `retry` 属性。
