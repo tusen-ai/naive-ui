@@ -1,4 +1,5 @@
 import type { Code, RootContent } from 'mdast'
+import type { ServerResponse } from 'node:http'
 import type { Plugin, ResolvedConfig } from 'vite'
 import fs from 'node:fs'
 import path from 'node:path'
@@ -8,14 +9,27 @@ import { toMarkdown } from 'mdast-util-to-markdown'
 import { gfm } from 'micromark-extension-gfm'
 import { visit } from 'unist-util-visit'
 
-/**
- * Vite plugin that serves LLM-friendly .md files, llms.txt, and
- * llms-full.txt.
- *
- * - During development these are served on-the-fly via middleware.
- * - During production build they are written to the output directory
- *   via the closeBundle hook.
- */
+type Category = 'docs' | 'components'
+type Locale = 'en-US' | 'zh-CN'
+
+type LlmsAction
+  = | { type: 'llms-txt', locale: Locale }
+    | { type: 'llms-full-txt', locale: Locale }
+    | { type: 'md', locale: Locale, category: Category, slug: string }
+
+interface RouteEntry {
+  routePath: string
+  filePath: string
+  category: Category
+  locale: Locale
+}
+
+interface RouteEntries {
+  name: string
+  category: Category
+  locale: Locale
+}
+
 export function llmsTxtPlugin(): Plugin {
   let projectRoot: string
   let resolvedConfig: ResolvedConfig
@@ -28,83 +42,107 @@ export function llmsTxtPlugin(): Plugin {
     },
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
-        const url = req.url || ''
+        const url = req.url?.split('?')[0] || ''
+        const action = resolveUrl(url)
 
-        // Handle llms.txt — optionally locale-prefixed
-        const llmsTxtMatch = url.match(/^(?:\/(en-US|zh-CN))?\/llms\.txt$/)
-        if (llmsTxtMatch) {
-          const locale: Locale = (llmsTxtMatch[1] as Locale) || 'en-US'
-          const content = genLlmsTxt(projectRoot, locale)
+        if (!action) {
+          next()
+          return
+        }
+
+        if (action.type === 'llms-txt') {
+          const content = genLlmsTxt(projectRoot, action.locale)
           res.setHeader('Content-Type', 'text/plain; charset=utf-8')
           res.end(content)
           return
         }
 
-        // Handle llms-full.txt — optionally locale-prefixed
-        const llmsFullMatch = url.match(
-          /^(?:\/(en-US|zh-CN))?\/llms-full\.txt$/
-        )
-        if (llmsFullMatch) {
-          const locale: Locale = (llmsFullMatch[1] as Locale) || 'en-US'
-          const content = genLlmsFullTxt(projectRoot, locale)
+        if (action.type === 'llms-full-txt') {
+          const content = genLlmsFullTxt(projectRoot, action.locale)
           res.setHeader('Content-Type', 'text/plain; charset=utf-8')
           res.end(content)
           return
         }
 
-        // Handle /{locale}?/{category}/{slug}.md
-        // e.g. /zh-CN/components/button.md, /en-US/docs/introduction.md, /docs/introduction.md
-        const mdMatch = url.match(
-          /^(?:\/(en-US|zh-CN))?\/(docs|components)\/([a-z0-9-]+)\.md$/
-        )
-        if (mdMatch) {
-          const [, locale, category, slug] = mdMatch
-          return serveMd(
+        if (action.type === 'md') {
+          serveMd(
             res,
             projectRoot,
-            (locale as Locale) || 'en-US',
-            category as Category,
-            slug,
+            action.locale,
+            action.category,
+            action.slug,
             url
           )
         }
-
-        // Handle SPA-style paths with theme: /{locale}/{theme}/{category}/{slug}.md
-        // e.g. /zh-CN/os-theme/components/button.md
-        const spaMatch = url.match(
-          /^\/(en-US|zh-CN)\/[^/]+\/(docs|components)\/([a-z0-9-]+)\.md$/
-        )
-        if (spaMatch) {
-          const [, locale, category, slug] = spaMatch
-          return serveMd(
-            res,
-            projectRoot,
-            locale as Locale,
-            category as Category,
-            slug,
-            url
-          )
-        }
-
-        next()
       })
     },
     closeBundle() {
       if (resolvedConfig.command !== 'build')
         return
 
-      const outDir = path.resolve(
-        projectRoot,
-        resolvedConfig.build.outDir || 'site'
-      )
+      const outDir = path.resolve(projectRoot, resolvedConfig.build.outDir)
 
-      writeStaticLlmsFiles(projectRoot, outDir)
+      emitLlmsFiles(projectRoot, outDir)
     }
   }
 }
 
+function resolveUrl(url: string): LlmsAction | null {
+  const parts = url.split('/').filter(Boolean)
+  let locale: Locale = 'en-US'
+  let hasLocalePrefix = false
+
+  if (parts[0] === 'en-US' || parts[0] === 'zh-CN') {
+    locale = parts.shift() as Locale
+    hasLocalePrefix = true
+  }
+
+  if (parts.length === 0)
+    return null
+
+  const lastPart = parts[parts.length - 1]
+  if (
+    parts.length <= 2
+    && (lastPart === 'llms.txt' || lastPart === 'llms-full.txt')
+  ) {
+    return {
+      type: lastPart === 'llms.txt' ? 'llms-txt' : 'llms-full-txt',
+      locale
+    }
+  }
+
+  let category: string
+  let filename: string
+
+  if (parts.length === 2) {
+    category = parts[0]
+    filename = parts[1]
+  }
+  else if (parts.length === 3 && hasLocalePrefix) {
+    category = parts[1]
+    filename = parts[2]
+  }
+  else {
+    return null
+  }
+
+  if (
+    (category === 'docs' || category === 'components')
+    && filename.endsWith('.md')
+  ) {
+    return {
+      type: 'md',
+      locale,
+      category: category as Category,
+      slug: filename.slice(0, -3)
+    }
+  }
+
+  return null
+}
+
 function serveMd(
-  res: import('node:http').ServerResponse,
+  res: ServerResponse,
   projectRoot: string,
   locale: Locale,
   category: Category,
@@ -125,21 +163,6 @@ function serveMd(
   res.end(`Not found: ${url}`)
 }
 
-type Category = 'docs' | 'components'
-type Locale = 'en-US' | 'zh-CN'
-interface RouteEntry {
-  routePath: string
-  filePath: string
-  category: Category
-  locale: Locale
-}
-
-interface RouteBlock {
-  name: string
-  category: Category
-  locale: Locale
-}
-
 let routeCache: RouteEntry[] | null = null
 
 const SKIP_ROUTES = new Set(['from-v1'])
@@ -154,25 +177,25 @@ function getRoutes(projectRoot: string): RouteEntry[] {
   )
 
   const routes: RouteEntry[] = []
-  const blocks: RouteBlock[] = [
+  const routeEntries: RouteEntries[] = [
     { name: 'enDocRoutes', category: 'docs', locale: 'en-US' },
     { name: 'zhDocRoutes', category: 'docs', locale: 'zh-CN' },
     { name: 'enComponentRoutes', category: 'components', locale: 'en-US' },
     { name: 'zhComponentRoutes', category: 'components', locale: 'zh-CN' }
   ]
 
-  for (const block of blocks) {
-    const blockRegex = new RegExp(
-      `export const ${block.name}\\s*=\\s*\\[([\\s\\S]*?)\\n\\]`,
+  for (const routeEntry of routeEntries) {
+    const routeEntryRegex = new RegExp(
+      `export const ${routeEntry.name}\\s*=\\s*\\[([\\s\\S]*?)\\n\\]`,
       'm'
     )
-    const blockMatch = routesFile.match(blockRegex)
-    if (!blockMatch)
+    const routeEntryMatch = routesFile.match(routeEntryRegex)
+    if (!routeEntryMatch)
       continue
 
     const importRegex = /path:\s*'([^']+)'[\s\S]*?import\(\s*'([^']+)'\s*\)/g
 
-    for (const match of blockMatch[1].matchAll(importRegex)) {
+    for (const match of routeEntryMatch[1].matchAll(importRegex)) {
       const routePath = match[1]
       const importPath = match[2]
 
@@ -187,13 +210,13 @@ function getRoutes(projectRoot: string): RouteEntry[] {
 
       if (importPath.endsWith('.vue')) {
         // .vue wrappers may import a .md file — extract it
-        const mdPath = extractMdFromVue(resolvedImport)
+        const mdPath = extractMdPath(resolvedImport)
         if (mdPath) {
           routes.push({
             routePath,
             filePath: mdPath,
-            category: block.category,
-            locale: block.locale
+            category: routeEntry.category,
+            locale: routeEntry.locale
           })
         }
         continue
@@ -202,8 +225,8 @@ function getRoutes(projectRoot: string): RouteEntry[] {
       routes.push({
         routePath,
         filePath: resolvedImport,
-        category: block.category,
-        locale: block.locale
+        category: routeEntry.category,
+        locale: routeEntry.locale
       })
     }
   }
@@ -212,11 +235,7 @@ function getRoutes(projectRoot: string): RouteEntry[] {
   return routes
 }
 
-/**
- * Read a .vue wrapper file and extract the first `.md` import path.
- * e.g. `import Changelog from '../../../../../CHANGELOG.en-US.md'`
- */
-function extractMdFromVue(vuePath: string): string | null {
+function extractMdPath(vuePath: string): string | null {
   if (!fs.existsSync(vuePath))
     return null
   const content = fs.readFileSync(vuePath, 'utf-8')
@@ -249,7 +268,6 @@ const gfmParseOptions = {
 function cleanMarkdown(content: string, sourceFilePath: string): string {
   const tree = fromMarkdown(content, gfmParseOptions)
 
-  // Expand ```demo blocks by inlining .demo.vue file contents
   expandDemoNodes(tree.children, sourceFilePath)
 
   // Remove ```component blocks and all HTML nodes (comments, Vue components)
@@ -273,9 +291,6 @@ function cleanMarkdown(content: string, sourceFilePath: string): string {
   })
 }
 
-/**
- * Walk the node list and replace ```demo code blocks with expanded content.
- */
 function expandDemoNodes(
   children: RootContent[],
   sourceFilePath: string
@@ -377,7 +392,7 @@ function genLlmsFullTxt(projectRoot: string, locale: Locale = 'en-US'): string {
   return parts.join('\n')
 }
 
-function writeStaticLlmsFiles(projectRoot: string, outDir: string): void {
+function emitLlmsFiles(projectRoot: string, outDir: string): void {
   const routes = getRoutes(projectRoot)
 
   for (const route of routes) {
