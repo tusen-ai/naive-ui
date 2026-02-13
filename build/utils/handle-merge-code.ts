@@ -1,25 +1,7 @@
+import type { MergePartsWithBuildOptions } from '../types/vue-to-demo'
 import { tsToJs } from './tsToJs'
 
-interface Parts {
-  api?: 'composition' | 'options'
-  language?: 'ts' | 'js'
-  template?: string
-  script?: string
-  style?: string
-}
-
-interface MergedParts {
-  tsCode: string
-  jsCode: string
-}
-
-interface MergeCodeOptions {
-  parts: Parts
-  mergedParts: MergedParts
-  isVue: boolean
-}
-
-export function handleMergeCode(options: MergeCodeOptions): void {
+export function handleMergeCode(options: MergePartsWithBuildOptions): void {
   const { parts, mergedParts, isVue } = options
   const isCompositionApi = parts.api === 'composition'
   if (isVue && parts.language === 'ts') {
