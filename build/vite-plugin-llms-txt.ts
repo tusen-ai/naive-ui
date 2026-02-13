@@ -11,6 +11,7 @@ import { visit } from 'unist-util-visit'
 
 type Category = 'docs' | 'components'
 type Locale = 'en-US' | 'zh-CN'
+type Theme = 'light' | 'dark' | 'os-theme'
 
 type LlmsAction
   = | { type: 'llms-txt', locale: Locale }
@@ -29,6 +30,11 @@ interface RouteEntries {
   category: Category
   locale: Locale
 }
+
+const categories: Category[] = ['docs', 'components']
+const locales: Locale[] = ['en-US', 'zh-CN']
+const themes: Theme[] = ['light', 'dark', 'os-theme']
+const llmsFiles: string[] = ['llms.txt', 'llms-full.txt']
 
 export function llmsTxtPlugin(): Plugin {
   let projectRoot: string
@@ -88,25 +94,24 @@ export function llmsTxtPlugin(): Plugin {
 }
 
 function resolveUrl(url: string): LlmsAction | null {
+  // Normalize parts and extract optional locale prefix
+  // URL sheme: /{locale?}/{theme?}/{category?}/{filename?}
   const parts = url.split('/').filter(Boolean)
   let locale: Locale = 'en-US'
-  let hasLocalePrefix = false
+  const hasLocalePrefix = locales.includes(parts[0] as Locale)
+  const hasThemePrefix = themes.includes(parts[1] as Theme)
 
-  if (parts[0] === 'en-US' || parts[0] === 'zh-CN') {
+  if (hasLocalePrefix)
     locale = parts.shift() as Locale
-    hasLocalePrefix = true
-  }
 
   if (parts.length === 0)
     return null
 
-  const lastPart = parts[parts.length - 1]
-  if (
-    parts.length <= 2
-    && (lastPart === 'llms.txt' || lastPart === 'llms-full.txt')
-  ) {
+  const last = parts[parts.length - 1]
+  // Handle top-level llms files like `/llms.txt`, `/en-US/llms.txt` or `/docs/llms.txt`
+  if (parts.length <= 2 && llmsFiles.includes(last)) {
     return {
-      type: lastPart === 'llms.txt' ? 'llms-txt' : 'llms-full-txt',
+      type: last === 'llms.txt' ? 'llms-txt' : 'llms-full-txt',
       locale
     }
   }
@@ -118,7 +123,7 @@ function resolveUrl(url: string): LlmsAction | null {
     category = parts[0]
     filename = parts[1]
   }
-  else if (parts.length === 3 && hasLocalePrefix) {
+  else if (hasThemePrefix && hasLocalePrefix) {
     category = parts[1]
     filename = parts[2]
   }
@@ -126,10 +131,7 @@ function resolveUrl(url: string): LlmsAction | null {
     return null
   }
 
-  if (
-    (category === 'docs' || category === 'components')
-    && filename.endsWith('.md')
-  ) {
+  if (categories.includes(category as Category) && filename.endsWith('.md')) {
     return {
       type: 'md',
       locale,
@@ -260,6 +262,14 @@ function resolveSourceMd(
   return entry?.filePath ?? null
 }
 
+function extractTitle(filePath: string): string | null {
+  if (!fs.existsSync(filePath))
+    return null
+  const content = fs.readFileSync(filePath, 'utf-8')
+  const match = content.match(/^#\s+(.+)$/m)
+  return match ? match[1].trim() : null
+}
+
 const gfmParseOptions = {
   extensions: [gfm()],
   mdastExtensions: [gfmFromMarkdown()]
@@ -341,31 +351,54 @@ function expandDemoNodes(
   }
 }
 
+const i18n: Record<
+  Locale,
+  {
+    description: string
+    docs: string
+    components: string
+  }
+> = {
+  'en-US': {
+    description:
+      '> A Vue 3 Component Library. Fairly Complete, Theme Customizable, Uses TypeScript, Fast.',
+    docs: 'Docs',
+    components: 'Components'
+  },
+  'zh-CN': {
+    description:
+      '> 一个 Vue 3 组件库。比较完整，主题可调，使用 TypeScript，快。',
+    docs: '文档',
+    components: '组件'
+  }
+}
+
 function genLlmsTxt(projectRoot: string, locale: Locale = 'en-US'): string {
   const routes = getRoutes(projectRoot)
   const localeRoutes = routes.filter(r => r.locale === locale)
+  const t = i18n[locale]
   const lines: string[] = []
 
   lines.push('# Naive UI')
   lines.push('')
-  lines.push(
-    '> A Vue 3 Component Library. Fairly Complete, Theme Customizable, Uses TypeScript, Fast.'
-  )
+  lines.push(t.description)
   lines.push('')
 
-  for (const category of ['docs', 'components']) {
+  for (const category of ['docs', 'components'] as Category[]) {
     const group = localeRoutes.filter(r => r.category === category)
     if (group.length === 0)
       continue
 
-    lines.push(`## ${category === 'docs' ? 'Docs' : 'Components'}`)
+    lines.push(`## ${category === 'docs' ? t.docs : t.components}`)
     lines.push('')
 
     for (const route of group) {
-      const title = route.routePath
-        .split('-')
-        .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-        .join(' ')
+      const title
+        = extractTitle(route.filePath)
+          ?? route.routePath
+            .split('-')
+            .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+            .join(' ')
       lines.push(`- [${title}](/${locale}/${category}/${route.routePath}.md)`)
     }
     lines.push('')
