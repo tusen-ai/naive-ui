@@ -4,6 +4,7 @@ import process from 'node:process'
 import { babel } from '@rollup/plugin-babel'
 import { configDefaults, defineConfig } from 'vitest/config'
 import { createDemoPlugin } from './build/vite-plugin-demo'
+import { llmsTxtPlugin } from './build/vite-plugin-llms-txt'
 
 dns.setDefaultResultOrder('verbatim')
 
@@ -17,7 +18,7 @@ const testExclude = isBuildTimeTest
 
 export default defineConfig({
   root: __dirname,
-  plugins: createDemoPlugin(),
+  plugins: [...createDemoPlugin(), llmsTxtPlugin()],
   resolve: {
     // In production site build, we want to import naive-ui from node_modules
     alias:
