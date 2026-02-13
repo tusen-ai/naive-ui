@@ -1,14 +1,23 @@
 import type { PropType } from 'vue'
-import type { Hljs, ThemeProps } from '../../_mixins'
+import type { Hljs, Shiki, ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { CodeTheme } from '../styles'
 import { computed, defineComponent, h, onMounted, ref, toRef, watch } from 'vue'
-import { useConfig, useHljs, useTheme, useThemeClass } from '../../_mixins'
+import {
+  useConfig,
+  useHljs,
+  useShiki,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
 import { codeLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const codeProps = {
   ...(useTheme.props as ThemeProps<CodeTheme>),
+  /**
+   * should be specified when `hljs` is provided
+   */
   language: String,
   code: {
     type: String,
@@ -19,6 +28,7 @@ export const codeProps = {
     default: true
   },
   hljs: Object as PropType<Hljs>,
+  shiki: Object as PropType<Shiki>,
   uri: Boolean,
   inline: Boolean,
   wordWrap: Boolean,
@@ -38,19 +48,39 @@ export default defineComponent({
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig()
     const codeRef = ref<HTMLElement | null>(null)
     const hljsRef = internalNoHighlight ? { value: undefined } : useHljs(props)
-    const createCodeHtml = (
-      language: string,
-      code: string,
+    const shikiRef = internalNoHighlight
+      ? { value: undefined }
+      : useShiki(props)
+    const shikiHtml = (code: string): string | null => {
+      const { value: shiki } = shikiRef
+      if (!shiki)
+        return null
+      return shiki.codeToHtml(code)
+    }
+    const createCodeHtml = ({
+      language,
+      code,
+      trim
+    }: {
+      language?: string
+      code: string
       trim: boolean
-    ): string | null => {
+    }): string | null => {
+      const processedCode = trim ? code.trim() : code
+
+      const shikiResult = shikiHtml(processedCode)
+      if (shikiResult !== null) {
+        return shikiResult
+      }
+
       const { value: hljs } = hljsRef
-      if (!hljs) {
+      if (!hljs || !language) {
         return null
       }
       if (!(language && hljs.getLanguage(language))) {
         return null
       }
-      return hljs.highlight(trim ? code.trim() : code, {
+      return hljs.highlight(processedCode, {
         language
       }).value
     }
@@ -65,27 +95,28 @@ export default defineComponent({
       const { value: codeEl } = codeRef
       if (!codeEl)
         return
-      const { language } = props
       const code = props.uri
         ? window.decodeURIComponent(props.code)
         : props.code
-      if (language) {
-        const html = createCodeHtml(language, code, props.trim)
-        if (html !== null) {
-          if (props.inline) {
-            codeEl.innerHTML = html
-          }
-          else {
-            const prevPreEl = codeEl.querySelector('.__code__')
-            if (prevPreEl)
-              codeEl.removeChild(prevPreEl)
-            const preEl = document.createElement('pre')
-            preEl.className = '__code__'
-            preEl.innerHTML = html
-            codeEl.appendChild(preEl)
-          }
-          return
+      const html = createCodeHtml({
+        language: props.language,
+        code,
+        trim: props.trim
+      })
+      if (html !== null) {
+        if (props.inline) {
+          codeEl.innerHTML = html
         }
+        else {
+          const prevPreEl = codeEl.querySelector('.__code__')
+          if (prevPreEl)
+            codeEl.removeChild(prevPreEl)
+          const preEl = document.createElement('pre')
+          preEl.className = '__code__'
+          preEl.innerHTML = html
+          codeEl.appendChild(preEl)
+        }
+        return
       }
       if (props.inline) {
         codeEl.textContent = code
@@ -106,8 +137,10 @@ export default defineComponent({
     onMounted(setCode)
     watch(toRef(props, 'language'), setCode)
     watch(toRef(props, 'code'), setCode)
-    if (!internalNoHighlight)
+    if (!internalNoHighlight) {
       watch(hljsRef, setCode)
+      watch(shikiRef, setCode)
+    }
     const themeRef = useTheme(
       'Code',
       '-code',

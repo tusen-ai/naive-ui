@@ -3,7 +3,7 @@ import type { Ref, VNodeChild } from 'vue'
 import type { ScrollbarTheme } from '../../_internal/scrollbar/styles'
 import type { InternalSelectMenuTheme } from '../../_internal/select-menu/styles'
 import type { InternalSelectionTheme } from '../../_internal/selection/styles'
-import type { Hljs } from '../../_mixins'
+import type { Hljs, Shiki } from '../../_mixins'
 import type { AlertTheme } from '../../alert/styles'
 import type { AnchorTheme } from '../../anchor/styles'
 import type { AutoCompleteTheme } from '../../auto-complete/styles'
@@ -264,6 +264,7 @@ export interface ConfigProviderInjection {
   mergedLocaleRef: Ref<NLocale | undefined>
   mergedDateLocaleRef: Ref<NDateLocale | undefined>
   mergedHljsRef: Ref<Hljs | undefined>
+  mergedShikiRef: Ref<Shiki | undefined>
   mergedKatexRef: Ref<Katex | undefined>
   mergedComponentPropsRef: Ref<GlobalComponentConfig | undefined>
   mergedIconsRef: Ref<GlobalIconConfig | undefined>

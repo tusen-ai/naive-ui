@@ -5,6 +5,8 @@ export { default as useHljs } from './use-hljs'
 export type { Hljs } from './use-hljs'
 export { default as useLocale } from './use-locale'
 export { useRtl } from './use-rtl'
+export { default as useShiki } from './use-shiki'
+export type { Shiki } from './use-shiki'
 export { default as useStyle } from './use-style'
 export { createTheme, default as useTheme } from './use-theme'
 export type {

@@ -1,13 +1,4 @@
-import {
-  computed,
-  defineComponent,
-  h,
-  inject,
-  onMounted,
-  ref,
-  toRef,
-  watch
-} from 'vue'
+import { computed, defineComponent, h, inject, ref, watchEffect } from 'vue'
 import { logInjectionKey } from './context'
 
 export default defineComponent({
@@ -18,8 +9,13 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const { trimRef, highlightRef, languageRef, mergedHljsRef }
-      = inject(logInjectionKey)!
+    const {
+      trimRef,
+      highlightRef,
+      languageRef,
+      mergedHljsRef,
+      mergedShikiRef
+    } = inject(logInjectionKey)!
     const selfRef = ref<HTMLElement | null>(null)
     const maybeTrimmedLinesRef = computed(() => {
       return trimRef.value ? props.line.trim() : props.line
@@ -36,24 +32,27 @@ export default defineComponent({
       language: string | undefined,
       code: string
     ): string {
+      const { value: shiki } = mergedShikiRef
+      if (shiki) {
+        if (language) {
+          return shiki.codeToHtml(code)
+        }
+      }
       const { value: hljs } = mergedHljsRef
       if (hljs) {
         if (language && hljs.getLanguage(language)) {
           return hljs.highlight(code, { language }).value
         }
       }
+
       return code
     }
-    onMounted(() => {
-      if (highlightRef.value) {
-        setInnerHTML()
-      }
+    watchEffect(() => {
+      if (!highlightRef.value)
+        return
+      setInnerHTML()
     })
-    watch(toRef(props, 'line'), () => {
-      if (highlightRef.value) {
-        setInnerHTML()
-      }
-    })
+
     return {
       highlight: highlightRef,
       selfRef,

@@ -20,6 +20,7 @@ export default defineComponent({
   <component
     :is="configProvider"
     class="demo"
+    :data-theme="themeName"
     namespace="naive-ui-doc"
     preflight-style-disabled
     :theme-name="themeName"
