@@ -33,7 +33,7 @@ export function llmsTxtPlugin(): Plugin {
         // Handle llms.txt — optionally locale-prefixed
         const llmsTxtMatch = url.match(/^(?:\/(en-US|zh-CN))?\/llms\.txt$/)
         if (llmsTxtMatch) {
-          const locale = llmsTxtMatch[1] === 'zh-CN' ? 'zh' : 'en'
+          const locale: Locale = (llmsTxtMatch[1] as Locale) || 'en-US'
           const content = genLlmsTxt(projectRoot, locale)
           res.setHeader('Content-Type', 'text/plain; charset=utf-8')
           res.end(content)
@@ -45,39 +45,45 @@ export function llmsTxtPlugin(): Plugin {
           /^(?:\/(en-US|zh-CN))?\/llms-full\.txt$/
         )
         if (llmsFullMatch) {
-          const locale = llmsFullMatch[1] === 'zh-CN' ? 'zh' : 'en'
+          const locale: Locale = (llmsFullMatch[1] as Locale) || 'en-US'
           const content = genLlmsFullTxt(projectRoot, locale)
           res.setHeader('Content-Type', 'text/plain; charset=utf-8')
           res.end(content)
           return
         }
 
-        // Handle flat paths: /docs/*.md, /components/*.md, /zh-docs/*.md, /zh-components/*.md
-        const flatMatch = url.match(
-          /^\/(docs|components|zh-docs|zh-components)\/([a-z0-9-]+)\.md$/
+        // Handle /{locale}?/{category}/{slug}.md
+        // e.g. /zh-CN/components/button.md, /en-US/docs/introduction.md, /docs/introduction.md
+        const mdMatch = url.match(
+          /^(?:\/(en-US|zh-CN))?\/(docs|components)\/([a-z0-9-]+)\.md$/
         )
-        if (flatMatch) {
-          const [, dir, slug] = flatMatch
-          return serveMd(res, projectRoot, dir, slug, url)
+        if (mdMatch) {
+          const [, locale, category, slug] = mdMatch
+          return serveMd(
+            res,
+            projectRoot,
+            (locale as Locale) || 'en-US',
+            category as Category,
+            slug,
+            url
+          )
         }
 
-        // Handle SPA-style paths: /{lang}/{theme}/(docs|components)/{slug}.md
+        // Handle SPA-style paths with theme: /{locale}/{theme}/{category}/{slug}.md
         // e.g. /zh-CN/os-theme/components/button.md
-        //      /en-US/os-theme/docs/introduction.md
         const spaMatch = url.match(
           /^\/(en-US|zh-CN)\/[^/]+\/(docs|components)\/([a-z0-9-]+)\.md$/
         )
         if (spaMatch) {
-          const [, lang, category, slug] = spaMatch
-          const dir
-            = lang === 'zh-CN'
-              ? category === 'components'
-                ? 'zh-components'
-                : 'zh-docs'
-              : category === 'components'
-                ? 'components'
-                : 'docs'
-          return serveMd(res, projectRoot, dir, slug, url)
+          const [, locale, category, slug] = spaMatch
+          return serveMd(
+            res,
+            projectRoot,
+            locale as Locale,
+            category as Category,
+            slug,
+            url
+          )
         }
 
         next()
@@ -100,11 +106,12 @@ export function llmsTxtPlugin(): Plugin {
 function serveMd(
   res: import('node:http').ServerResponse,
   projectRoot: string,
-  dir: string,
+  locale: Locale,
+  category: Category,
   slug: string,
   url: string
 ): void {
-  const filePath = resolveSourceMd(projectRoot, dir, slug)
+  const filePath = resolveSourceMd(projectRoot, locale, category, slug)
 
   if (filePath && fs.existsSync(filePath)) {
     const raw = fs.readFileSync(filePath, 'utf-8')
@@ -119,7 +126,7 @@ function serveMd(
 }
 
 type Category = 'docs' | 'components'
-type Locale = 'en' | 'zh'
+type Locale = 'en-US' | 'zh-CN'
 interface RouteEntry {
   routePath: string
   filePath: string
@@ -148,10 +155,10 @@ function getRoutes(projectRoot: string): RouteEntry[] {
 
   const routes: RouteEntry[] = []
   const blocks: RouteBlock[] = [
-    { name: 'enDocRoutes', category: 'docs', locale: 'en' },
-    { name: 'zhDocRoutes', category: 'docs', locale: 'zh' },
-    { name: 'enComponentRoutes', category: 'components', locale: 'en' },
-    { name: 'zhComponentRoutes', category: 'components', locale: 'zh' }
+    { name: 'enDocRoutes', category: 'docs', locale: 'en-US' },
+    { name: 'zhDocRoutes', category: 'docs', locale: 'zh-CN' },
+    { name: 'enComponentRoutes', category: 'components', locale: 'en-US' },
+    { name: 'zhComponentRoutes', category: 'components', locale: 'zh-CN' }
   ]
 
   for (const block of blocks) {
@@ -221,13 +228,11 @@ function extractMdFromVue(vuePath: string): string | null {
 
 function resolveSourceMd(
   projectRoot: string,
-  dir: string,
+  locale: Locale,
+  category: Category,
   slug: string
 ): string | null {
   const routes = getRoutes(projectRoot)
-
-  const locale = dir.startsWith('zh') ? 'zh' : 'en'
-  const category = dir.includes('component') ? 'components' : 'docs'
 
   const entry = routes.find(
     r =>
@@ -321,14 +326,9 @@ function expandDemoNodes(
   }
 }
 
-// ---------------------------------------------------------------------------
-// llms.txt / llms-full.txt generation
-// ---------------------------------------------------------------------------
-
-function genLlmsTxt(projectRoot: string, locale: Locale = 'en'): string {
+function genLlmsTxt(projectRoot: string, locale: Locale = 'en-US'): string {
   const routes = getRoutes(projectRoot)
   const localeRoutes = routes.filter(r => r.locale === locale)
-  const lang = locale === 'en' ? 'en-US' : 'zh-CN'
   const lines: string[] = []
 
   lines.push('# Naive UI')
@@ -351,9 +351,7 @@ function genLlmsTxt(projectRoot: string, locale: Locale = 'en'): string {
         .split('-')
         .map(w => w.charAt(0).toUpperCase() + w.slice(1))
         .join(' ')
-      lines.push(
-        `- [${title}](/${lang}/os-theme/${category}/${route.routePath}.md)`
-      )
+      lines.push(`- [${title}](/${locale}/${category}/${route.routePath}.md)`)
     }
     lines.push('')
   }
@@ -361,10 +359,9 @@ function genLlmsTxt(projectRoot: string, locale: Locale = 'en'): string {
   return lines.join('\n')
 }
 
-function genLlmsFullTxt(projectRoot: string, locale: Locale = 'en'): string {
+function genLlmsFullTxt(projectRoot: string, locale: Locale = 'en-US'): string {
   const routes = getRoutes(projectRoot)
   const localeRoutes = routes.filter(r => r.locale === locale)
-  const lang = locale === 'en' ? 'en-US' : 'zh-CN'
   const parts: string[] = []
 
   for (const route of localeRoutes) {
@@ -373,21 +370,16 @@ function genLlmsFullTxt(projectRoot: string, locale: Locale = 'en'): string {
     const raw = fs.readFileSync(route.filePath, 'utf-8')
     const cleaned = cleanMarkdown(raw, route.filePath)
     parts.push(
-      `---\nurl: /${lang}/os-theme/${route.category}/${route.routePath}.md\n---\n\n${cleaned}`
+      `---\nurl: /${locale}/${route.category}/${route.routePath}.md\n---\n\n${cleaned}`
     )
   }
 
   return parts.join('\n')
 }
 
-// ---------------------------------------------------------------------------
-// Static file writing (production build)
-// ---------------------------------------------------------------------------
-
 function writeStaticLlmsFiles(projectRoot: string, outDir: string): void {
   const routes = getRoutes(projectRoot)
 
-  // Write per-page .md files (en + zh)
   for (const route of routes) {
     if (!fs.existsSync(route.filePath))
       continue
@@ -395,19 +387,16 @@ function writeStaticLlmsFiles(projectRoot: string, outDir: string): void {
     const rawContent = fs.readFileSync(route.filePath, 'utf-8')
     const cleanedContent = cleanMarkdown(rawContent, route.filePath)
 
-    const lang = route.locale === 'en' ? 'en-US' : 'zh-CN'
     const category = route.category
-    const mdOutDir = path.join(outDir, lang, 'os-theme', category)
+    const mdOutDir = path.join(outDir, route.locale, category)
     const mdOutFile = path.join(mdOutDir, `${route.routePath}.md`)
 
     fs.mkdirSync(mdOutDir, { recursive: true })
     fs.writeFileSync(mdOutFile, cleanedContent, 'utf-8')
   }
 
-  // Write locale-specific llms.txt and llms-full.txt
-  for (const locale of ['en', 'zh'] as const) {
-    const lang = locale === 'en' ? 'en-US' : 'zh-CN'
-    const langDir = path.join(outDir, lang)
+  for (const locale of ['en-US', 'zh-CN'] as Locale[]) {
+    const langDir = path.join(outDir, locale)
     fs.mkdirSync(langDir, { recursive: true })
 
     const llmsTxt = genLlmsTxt(projectRoot, locale)
@@ -417,20 +406,19 @@ function writeStaticLlmsFiles(projectRoot: string, outDir: string): void {
     fs.writeFileSync(path.join(langDir, 'llms-full.txt'), llmsFullTxt, 'utf-8')
   }
 
-  // Root-level defaults (English)
   fs.writeFileSync(
     path.join(outDir, 'llms.txt'),
-    genLlmsTxt(projectRoot, 'en'),
+    genLlmsTxt(projectRoot, 'en-US'),
     'utf-8'
   )
   fs.writeFileSync(
     path.join(outDir, 'llms-full.txt'),
-    genLlmsFullTxt(projectRoot, 'en'),
+    genLlmsFullTxt(projectRoot, 'en-US'),
     'utf-8'
   )
 
-  const enCount = routes.filter(r => r.locale === 'en').length
-  const zhCount = routes.filter(r => r.locale === 'zh').length
+  const enCount = routes.filter(r => r.locale === 'en-US').length
+  const zhCount = routes.filter(r => r.locale === 'zh-CN').length
   // eslint-disable-next-line no-console
   console.log(
     `[naive-ui-llms-txt] Generated ${enCount} en + ${zhCount} zh .md files, llms.txt, llms-full.txt`
