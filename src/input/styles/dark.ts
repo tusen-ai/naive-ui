@@ -67,6 +67,7 @@ function self(vars: ThemeCommonVars) {
     color: inputColor,
     colorDisabled: inputColorDisabled,
     colorFocus: changeColor(primaryColor, { alpha: 0.1 }),
+    colorHover: inputColor,
     groupLabelBorder: '1px solid #0000',
     border: '1px solid #0000',
     borderHover: `1px solid ${primaryColorHover}`,
@@ -79,6 +80,7 @@ function self(vars: ThemeCommonVars) {
     borderWarning: `1px solid ${warningColor}`,
     borderHoverWarning: `1px solid ${warningColorHover}`,
     colorFocusWarning: changeColor(warningColor, { alpha: 0.1 }),
+    colorHoverWarning: inputColor,
     borderFocusWarning: `1px solid ${warningColorHover}`,
     boxShadowFocusWarning: `0 0 8px 0 ${changeColor(warningColor, {
       alpha: 0.3
@@ -89,6 +91,7 @@ function self(vars: ThemeCommonVars) {
     borderError: `1px solid ${errorColor}`,
     borderHoverError: `1px solid ${errorColorHover}`,
     colorFocusError: changeColor(errorColor, { alpha: 0.1 }),
+    colorHoverError: inputColor,
     borderFocusError: `1px solid ${errorColorHover}`,
     boxShadowFocusError: `0 0 8px 0 ${changeColor(errorColor, {
       alpha: 0.3
