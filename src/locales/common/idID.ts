@@ -81,6 +81,8 @@ const idID: NLocale = {
   },
   TimePicker: {
     placeholder: 'Pilih Waktu',
+    startPlaceholder: 'Waktu mulai',
+    endPlaceholder: 'Waktu selesai',
     positiveText: 'OK',
     negativeText: 'Batalkan',
     now: 'Sekarang',

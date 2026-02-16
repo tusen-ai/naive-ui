@@ -1,4 +1,4 @@
-import type { Ref } from 'vue'
+import type { Ref, UnwrapNestedRefs } from 'vue'
 import type { ScrollbarInst } from '../../_internal'
 import type { MergedTheme } from '../../_mixins'
 import type { TimePickerTheme } from '../styles'
@@ -20,19 +20,54 @@ export interface TimePickerInjection {
 export const timePickerInjectionKey
   = createInjectionKey<TimePickerInjection>('n-time-picker')
 
-export interface PanelRef {
-  $el: HTMLElement
-  hourScrollRef?: ScrollbarInst
-  minuteScrollRef?: ScrollbarInst
-  secondScrollRef?: ScrollbarInst
-  amPmScrollRef?: ScrollbarInst
+export type TimePickerType = 'time' | 'timerange'
+
+export interface PanelChildComponentRefs {
+  hourScrollRef: Ref<ScrollbarInst | null>
+  minuteScrollRef: Ref<ScrollbarInst | null>
+  secondScrollRef: Ref<ScrollbarInst | null>
+  amPmScrollRef: Ref<ScrollbarInst | null>
 }
+
+export interface RangePanelChildComponentRefs {
+  startHourScrollRef: Ref<ScrollbarInst | null>
+  startMinuteScrollRef: Ref<ScrollbarInst | null>
+  startSecondScrollRef: Ref<ScrollbarInst | null>
+  startAmPmScrollRef: Ref<ScrollbarInst | null>
+  endHourScrollRef: Ref<ScrollbarInst | null>
+  endMinuteScrollRef: Ref<ScrollbarInst | null>
+  endSecondScrollRef: Ref<ScrollbarInst | null>
+  endAmPmScrollRef: Ref<ScrollbarInst | null>
+}
+
+export interface PanelRef
+  extends Partial<
+    UnwrapNestedRefs<PanelChildComponentRefs & RangePanelChildComponentRefs>
+  > {
+  $el: HTMLElement
+}
+
+export type Value = number | null
+export type RangeValue = [number, number] | null
 
 export type OnUpdateValue = ((value: number, formattedValue: string) => void)
   & ((value: number | null, formattedValue: string | null) => void)
 export type OnUpdateValueImpl = (
   value: number | null,
   formattedValue: string | null
+) => void
+
+export type OnUpdateRangeValue = ((
+  value: [number, number],
+  formattedValue: [string, string]
+) => void)
+& ((
+  value: [number, number] | null,
+  formattedValue: [string, string] | null
+) => void)
+export type OnUpdateRangeValueImpl = (
+  value: [number, number] | null,
+  formattedValue: [string, string] | null
 ) => void
 
 export type OnUpdateFormattedValue = ((
@@ -43,6 +78,19 @@ export type OnUpdateFormattedValue = ((
 export type OnUpdateFormattedValueImpl = (
   value: string | null,
   timestampValue: number | null
+) => void
+
+export type OnUpdateRangeFormattedValue = ((
+  value: [string, string],
+  timestampValue: [number, number]
+) => void)
+& ((
+  value: [string, string] | null,
+  timestampValue: [number, number] | null
+) => void)
+export type OnUpdateRangeFormattedValueImpl = (
+  value: [string, string] | null,
+  timestampValue: [number, number] | null
 ) => void
 
 export type IsHourDisabled = (hour: number) => boolean

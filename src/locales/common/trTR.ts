@@ -78,6 +78,8 @@ const trTR: NLocale = {
   },
   TimePicker: {
     placeholder: 'Saat Seç',
+    startPlaceholder: 'Başlangıç saati',
+    endPlaceholder: 'Bitiş saati',
     positiveText: 'Tamam',
     negativeText: 'İptal',
     now: 'Şimdi',

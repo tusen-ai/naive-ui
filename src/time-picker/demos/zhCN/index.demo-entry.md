@@ -6,6 +6,7 @@
 
 ```demo
 basic.vue
+range.vue
 confirm.vue
 size.vue
 disabled-time.vue

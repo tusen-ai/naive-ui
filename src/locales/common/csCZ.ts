@@ -78,6 +78,8 @@ const csCZ: NLocale = {
   },
   TimePicker: {
     placeholder: 'Vybrat čas',
+    startPlaceholder: 'Čas zahájení',
+    endPlaceholder: 'Čas ukončení',
     positiveText: 'OK',
     negativeText: 'Zrušit',
     now: 'Teď',

@@ -79,6 +79,8 @@ const ukUA: NLocale = {
   },
   TimePicker: {
     placeholder: 'Обрати час',
+    startPlaceholder: 'Час початку',
+    endPlaceholder: 'Час закінчення',
     positiveText: 'OK',
     negativeText: 'Скасувати',
     now: 'Зараз',

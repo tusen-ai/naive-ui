@@ -47,6 +47,20 @@ export default c([
     box-shadow: var(--n-panel-box-shadow);
   `, [
     fadeInScaleUpTransition(),
+    cM('range', [
+      cB('time-picker-range-cols', `
+        display: flex;
+        border-bottom: 1px solid var(--n-panel-divider-color);
+      `),
+      cB('time-picker-range-cols__vertical-divider', `
+        width: 1px;
+        background-color: var(--n-panel-divider-color);
+        flex-shrink: 0;
+      `),
+      cB('time-picker-cols', `
+        border-bottom: none;
+      `)
+    ]),
     cB('time-picker-actions', `
       padding: var(--n-panel-action-padding);
       align-items: center;

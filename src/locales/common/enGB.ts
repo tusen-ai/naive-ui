@@ -78,6 +78,8 @@ const enGB: NLocale = {
   },
   TimePicker: {
     placeholder: 'Select Time',
+    startPlaceholder: 'Start Time',
+    endPlaceholder: 'End Time',
     positiveText: 'OK',
     negativeText: 'Cancel',
     now: 'Now',

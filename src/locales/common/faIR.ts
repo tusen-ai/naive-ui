@@ -78,6 +78,8 @@ const faIR: NLocale = {
   },
   TimePicker: {
     placeholder: 'لطفاً زمان مورد نظر را انتخاب کنید',
+    startPlaceholder: 'زمان شروع',
+    endPlaceholder: 'زمان پایان',
     positiveText: 'تأیید',
     negativeText: 'لغو',
     now: 'همین الان',

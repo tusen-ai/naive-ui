@@ -78,6 +78,8 @@ const ruRu: NLocale = {
   },
   TimePicker: {
     placeholder: 'Выбрать время',
+    startPlaceholder: 'Время начала',
+    endPlaceholder: 'Время окончания',
     positiveText: 'OK',
     negativeText: 'Отменить',
     now: 'Сейчас',

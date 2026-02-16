@@ -78,6 +78,8 @@ const arDZ: NLocale = {
   },
   TimePicker: {
     placeholder: 'إختيار الوقت',
+    startPlaceholder: 'وقت البدء',
+    endPlaceholder: 'وقت الانتهاء',
     positiveText: 'تأكيد',
     negativeText: 'إلغاء',
     now: 'الآن',

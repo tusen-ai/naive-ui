@@ -78,6 +78,8 @@ const ptBR: NLocale = {
   },
   TimePicker: {
     placeholder: 'Selecione a hora',
+    startPlaceholder: 'Hora de início',
+    endPlaceholder: 'Hora de fim',
     positiveText: 'OK',
     negativeText: 'Cancelar',
     now: 'Agora',

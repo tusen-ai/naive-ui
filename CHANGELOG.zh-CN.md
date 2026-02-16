@@ -10,6 +10,7 @@
 
 ### Feats
 
+- `n-time-picker` 新增 `type` 属性，支持 `timerange` 时间范围选择模式，关闭 [#5090](https://github.com/tusen-ai/naive-ui/issues/5090)
 - `n-color-picker` 新增 `trigger` slot，关闭 [#7192](https://github.com/tusen-ai/naive-ui/issues/7192)
 - `n-select` `n-auto-complete` `n-mention` `n-popselect` `n-cascader` `n-pagination` 新增 `scrollbar-props` 属性
 - `n-upload` 的 `submit` 方法新增 `retry` 属性。

@@ -78,6 +78,8 @@ const svSE: NLocale = {
   },
   TimePicker: {
     placeholder: 'Välj tid',
+    startPlaceholder: 'Starttid',
+    endPlaceholder: 'Sluttid',
     positiveText: 'OK',
     negativeText: 'Avbryt',
     now: 'Nu',

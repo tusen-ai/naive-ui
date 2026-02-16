@@ -78,6 +78,8 @@ const azAZ: NLocale = {
   },
   TimePicker: {
     placeholder: 'Vaxtı seçin',
+    startPlaceholder: 'Başlanğıc vaxtı',
+    endPlaceholder: 'Bitmə vaxtı',
     positiveText: 'Təsdiqlə',
     negativeText: 'İmtina et',
     now: 'İndi',

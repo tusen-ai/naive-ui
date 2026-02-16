@@ -86,6 +86,8 @@ const itIT: NLocale = {
   },
   TimePicker: {
     placeholder: 'Seleziona ora',
+    startPlaceholder: 'Ora di inizio',
+    endPlaceholder: 'Ora di fine',
     positiveText: 'OK',
     negativeText: 'Annulla',
     now: 'Ora',

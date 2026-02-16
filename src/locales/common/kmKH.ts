@@ -78,6 +78,8 @@ const kmKH: NLocale = {
   },
   TimePicker: {
     placeholder: 'សូមជ្រើសរើសពេលវេលាមួយ។',
+    startPlaceholder: 'ម៉ោងចាប់ផ្តើម',
+    endPlaceholder: 'ម៉ោងបញ្ចប់',
     positiveText: 'បញ្ជាក់',
     negativeText: 'បោះបង់',
     now: 'ឥឡូវនេះ',

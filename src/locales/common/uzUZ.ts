@@ -78,6 +78,8 @@ const uzUZ: NLocale = {
   },
   TimePicker: {
     placeholder: 'Vaqtni tanlash',
+    startPlaceholder: 'Boshlanish vaqti',
+    endPlaceholder: 'Tugash vaqti',
     positiveText: 'OK',
     negativeText: 'Bekor qilish',
     now: 'Hozir',

@@ -78,6 +78,8 @@ const zhCN: NLocale = {
   },
   TimePicker: {
     placeholder: '请选择时间',
+    startPlaceholder: '开始时间',
+    endPlaceholder: '结束时间',
     positiveText: '确认',
     negativeText: '取消',
     now: '此刻',

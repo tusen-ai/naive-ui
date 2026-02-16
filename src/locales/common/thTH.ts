@@ -80,6 +80,8 @@ const thTH: NLocale = {
   },
   TimePicker: {
     placeholder: 'เวลา',
+    startPlaceholder: 'เวลาเริ่มต้น',
+    endPlaceholder: 'เวลาสิ้นสุด',
     positiveText: 'ตกลง',
     negativeText: 'ยกเลิก',
     now: 'วันนี้',

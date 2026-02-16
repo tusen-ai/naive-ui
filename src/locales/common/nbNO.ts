@@ -81,6 +81,8 @@ const nbNO: NLocale = {
   },
   TimePicker: {
     placeholder: 'Velg tid',
+    startPlaceholder: 'Starttid',
+    endPlaceholder: 'Sluttid',
     positiveText: 'OK',
     negativeText: 'Avbryt',
     now: 'Nå',

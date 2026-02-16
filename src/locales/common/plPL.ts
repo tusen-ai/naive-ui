@@ -80,6 +80,8 @@ const plPL: NLocale = {
   },
   TimePicker: {
     placeholder: 'Wybierz czas',
+    startPlaceholder: 'Czas rozpoczęcia',
+    endPlaceholder: 'Czas zakończenia',
     positiveText: 'Potwierdź',
     negativeText: 'Anuluj',
     now: 'Teraz',

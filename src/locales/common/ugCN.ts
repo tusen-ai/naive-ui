@@ -78,6 +78,8 @@ const ugCN: NLocale = {
   },
   TimePicker: {
     placeholder: 'ۋاقىت تاللاڭ',
+    startPlaceholder: 'باشلىنىش ۋاقتى',
+    endPlaceholder: 'ئاخىرلىشىش ۋاقتى',
     positiveText: 'جەزملەش',
     negativeText: 'بىكار قىلىش',
     now: 'مۇشۇ ۋاقىت',

@@ -79,6 +79,8 @@ const nlNL: NLocale = {
   },
   TimePicker: {
     placeholder: 'Selecteer Uur',
+    startPlaceholder: 'Starttijd',
+    endPlaceholder: 'Eindtijd',
     positiveText: 'OK',
     negativeText: 'Annuleer',
     now: 'Nu',
