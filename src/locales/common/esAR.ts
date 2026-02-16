@@ -81,6 +81,8 @@ const esAR: NLocale = {
   },
   TimePicker: {
     placeholder: 'Seleccionar hora',
+    startPlaceholder: 'Hora de inicio',
+    endPlaceholder: 'Hora de fin',
     positiveText: 'OK',
     negativeText: 'Cancelar',
     now: 'Ahora',

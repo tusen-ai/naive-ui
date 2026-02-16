@@ -78,6 +78,8 @@ const skSK: NLocale = {
   },
   TimePicker: {
     placeholder: 'Vybrať čas',
+    startPlaceholder: 'Čas začiatku',
+    endPlaceholder: 'Čas ukončenia',
     positiveText: 'OK',
     negativeText: 'Zrušiť',
     now: 'Teraz',

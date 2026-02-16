@@ -78,6 +78,8 @@ const viVN: NLocale = {
   },
   TimePicker: {
     placeholder: 'Chọn thời gian',
+    startPlaceholder: 'Thời gian bắt đầu',
+    endPlaceholder: 'Thời gian kết thúc',
     positiveText: 'OK',
     negativeText: 'Hủy',
     now: 'Hiện tại',

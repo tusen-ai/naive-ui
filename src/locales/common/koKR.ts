@@ -80,6 +80,8 @@ const koKR: NLocale = {
   },
   TimePicker: {
     placeholder: '시간 선택',
+    startPlaceholder: '시작 시간',
+    endPlaceholder: '종료 시간',
     positiveText: '확인',
     negativeText: '취소',
     now: '현재 시간',

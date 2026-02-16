@@ -78,6 +78,8 @@ const frFR: NLocale = {
   },
   TimePicker: {
     placeholder: 'Sélectionner l\'heure',
+    startPlaceholder: 'Heure de début',
+    endPlaceholder: 'Heure de fin',
     positiveText: 'OK',
     negativeText: 'Annuler',
     now: 'Maintenant',

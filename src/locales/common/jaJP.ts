@@ -78,6 +78,8 @@ const jaJP: NLocale = {
   },
   TimePicker: {
     placeholder: '選択してください',
+    startPlaceholder: '開始時間',
+    endPlaceholder: '終了時間',
     positiveText: 'OK',
     negativeText: 'キャンセル',
     now: '現在',

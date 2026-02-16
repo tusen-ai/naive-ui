@@ -80,6 +80,8 @@ const eo: NLocale = {
   },
   TimePicker: {
     placeholder: 'Elekti tempon',
+    startPlaceholder: 'Komenco-tempo',
+    endPlaceholder: 'Fino-tempo',
     positiveText: 'Bone',
     negativeText: 'Nuligi',
     now: 'Nun',

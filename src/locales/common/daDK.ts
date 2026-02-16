@@ -78,6 +78,8 @@ const daDK: NLocale = {
   },
   TimePicker: {
     placeholder: 'Vælg tid',
+    startPlaceholder: 'Starttid',
+    endPlaceholder: 'Sluttid',
     positiveText: 'OK',
     negativeText: 'Annuller',
     now: 'Nu',

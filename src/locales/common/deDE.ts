@@ -78,6 +78,8 @@ const deDE: NLocale = {
   },
   TimePicker: {
     placeholder: 'Uhrzeit auswählen',
+    startPlaceholder: 'Startzeit',
+    endPlaceholder: 'Endzeit',
     positiveText: 'OK',
     negativeText: 'Abbrechen',
     now: 'Jetzt',

@@ -78,6 +78,8 @@ const etEE: NLocale = {
   },
   TimePicker: {
     placeholder: 'Vali aeg',
+    startPlaceholder: 'Algusaeg',
+    endPlaceholder: 'Lõpuaeg',
     positiveText: 'OK',
     negativeText: 'Katkesta',
     now: 'Nüüd',

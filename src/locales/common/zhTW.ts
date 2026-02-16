@@ -78,6 +78,8 @@ const zhTW: NLocale = {
   },
   TimePicker: {
     placeholder: '請選擇時間',
+    startPlaceholder: '開始時間',
+    endPlaceholder: '結束時間',
     positiveText: '確定',
     negativeText: '取消',
     now: '現在',

@@ -76,6 +76,8 @@ const enUS = {
   },
   TimePicker: {
     placeholder: 'Select Time',
+    startPlaceholder: 'Start Time',
+    endPlaceholder: 'End Time',
     positiveText: 'OK',
     negativeText: 'Cancel',
     now: 'Now',
