@@ -14,6 +14,7 @@
 - `n-select` `n-auto-complete` `n-mention` `n-popselect` `n-cascader` `n-pagination` 新增 `scrollbar-props` 属性
 - `n-upload` 的 `submit` 方法新增 `retry` 属性。
 - `n-breadcrumb-item` 新增 `show-separator` 属性，用于配合 `transition-group` 使用时手动控制分隔符显隐，关闭 [#3614](https://github.com/tusen-ai/naive-ui/issues/3614)
+- `n-input` 新增 `colorHover`、`colorHoverWarning`、`colorHoverError` 主题变量，用于自定义悬浮时的背景颜色，关闭 [#7498](https://github.com/tusen-ai/naive-ui/issues/7498)
 
 ### Fixes
 

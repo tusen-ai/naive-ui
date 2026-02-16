@@ -21,6 +21,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // --n-line-height-textarea
 // --n-color-disabled
 // --n-color-focus
+// --n-color-hover
 // --n-box-shadow-focus
 // --n-clear-color
 // --n-clear-size
@@ -266,7 +267,7 @@ export default cB('input', `
         color: var(--n-icon-color-pressed);
       `)
     ]),
-    c('&:hover', [
+    c('&:hover', 'background-color: var(--n-color-hover);', [
       cE('state-border', 'border: var(--n-border-hover);')
     ]),
     cM('focus', 'background-color: var(--n-color-focus);', [
@@ -356,7 +357,9 @@ export default cB('input', `
       cE('state-border', `
         border: var(--n-border-${status});
       `),
-      c('&:hover', [
+      c('&:hover', `
+        background-color: var(--n-color-hover-${status});
+      `, [
         cE('state-border', `
           border: var(--n-border-hover-${status});
         `)
