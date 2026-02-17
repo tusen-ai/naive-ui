@@ -14,6 +14,7 @@ border.vue
 segment.vue
 closable.vue
 no-title.vue
+content-scrollable.vue
 loading.vue
 custom-style.vue
 embedded.vue
@@ -33,6 +34,7 @@ embedded-debug.vue
 | close-focusable | `boolean` | `false` | 关闭按钮是否可以聚焦 | 2.43.0 |
 | content | `string \| (() => VNodeChild)` | `undefined` | 卡片内容，可以是 render 函数 | 2.38.2 |
 | content-class | `string` | `undefined` | 卡片内容区域的类名 | 2.36.0 |
+| content-scrollable | `boolean` | `false` | 是否仅让卡片内容区域可滚动（建议配合固定高度） | NEXT_VERSION |
 | content-style | `Object \| string` | `undefined` | 卡片内容区域的样式 |  |
 | cover | `() => VNodeChild` | `undefined` | 覆盖内容，需要是 render 函数 | 2.38.2 |
 | embedded | `boolean` | `false` | 使用更深的背景色展现嵌入效果，只对亮色主题生效 |  |

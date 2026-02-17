@@ -71,7 +71,7 @@ resizable.vue
 | header-style | `string \| Object` | `undefined` | Drawer content's header style. |  |
 | native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on body part. |  |
 | title | `string` | `undefined` | Drawer content title. |  |
-| scrollbar-props | `ScrollbarProps` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props) |  |
+| scrollbar-props | `ScrollbarProps` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props). |  |
 
 ### Drawer Slots
 

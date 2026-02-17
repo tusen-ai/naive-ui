@@ -14,6 +14,7 @@ border.vue
 segment.vue
 closable.vue
 no-title.vue
+content-scrollable.vue
 loading.vue
 custom-style.vue
 embedded.vue
@@ -31,6 +32,7 @@ embedded.vue
 | close-focusable | `boolean` | `false` | Whether the close button can be focused. | 2.43.0 |
 | content | `string \| (() => VNodeChild)` | `undefined` | Card content, can be a render function. | 2.38.2 |
 | content-class | `string` | `undefined` | The class of the card content area. | 2.36.0 |
+| content-scrollable | `boolean` | `false` | Whether only the card content area is scrollable (recommended with fixed height). | NEXT_VERSION |
 | content-style | `Object \| string` | `undefined` | The style of the card content area. |  |
 | cover | `() => VNodeChild` | `undefined` | Cover content, must be a render function. | 2.38.2 |
 | embedded | `boolean` | `false` | Use a darker background color to show the embedding effect (only for bright themes) |  |

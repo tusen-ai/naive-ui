@@ -82,11 +82,11 @@ export default defineComponent({
         maxChildLabelWidthRef.value = currentWidth
       }
     }
-    function calcChildLabelWidths(): void {
+    function invalidateLabelWidth(): void {
       for (const key of keysOf(formItems)) {
         const formItemInstances = formItems[key]
         for (const formItemInstance of formItemInstances) {
-          formItemInstance.calcLabelWidth?.()
+          formItemInstance.invalidateLabelWidth?.()
         }
       }
     }
@@ -155,7 +155,7 @@ export default defineComponent({
     const formExposedMethod: FormInst = {
       validate,
       restoreValidation,
-      calcChildLabelWidths
+      invalidateLabelWidth
     }
     return Object.assign(formExposedMethod, {
       mergedClsPrefix: mergedClsPrefixRef

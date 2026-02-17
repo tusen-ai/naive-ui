@@ -5,6 +5,7 @@ import type {
   LabelHTMLAttributes,
   PropType,
   Slot,
+  SlotsType,
   VNodeChild
 } from 'vue'
 import type { ThemeProps } from '../../_mixins'
@@ -17,6 +18,7 @@ import type {
   FormItemRule,
   FormItemRuleValidator,
   FormItemRuleValidatorParams,
+  FormItemSlots,
   FormItemValidateOptions,
   LabelAlign,
   LabelPlacement,
@@ -150,6 +152,7 @@ function wrapValidator(
 export default defineComponent({
   name: 'FormItem',
   props: formItemProps,
+  slots: Object as SlotsType<FormItemSlots>,
   setup(props) {
     useInjectionInstanceCollection(
       formItemInstsInjectionKey,
@@ -196,7 +199,7 @@ export default defineComponent({
         return
       restoreValidation()
     })
-    function calcLabelWidth(): void {
+    function invalidateLabelWidth(): void {
       if (!formItemMiscRefs.isAutoLabelWidth.value)
         return
       const labelElement = labelElementRef.value
@@ -440,9 +443,9 @@ export default defineComponent({
       validate,
       restoreValidation,
       internalValidate,
-      calcLabelWidth
+      invalidateLabelWidth
     }
-    onMounted(calcLabelWidth)
+    onMounted(invalidateLabelWidth)
     const cssVarsRef = computed(() => {
       const { value: size } = mergedSizeRef
       const { value: labelPlacement } = labelPlacementRef

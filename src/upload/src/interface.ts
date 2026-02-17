@@ -72,7 +72,7 @@ export interface UploadInjection {
   triggerStyleRef: Ref<CSSProperties | string | undefined>
   doChange: DoChange
   onRender: undefined | (() => void)
-  submit: (fileId?: string) => void
+  submit: (options?: { fileId?: string, retry?: boolean }) => void
   onRetryRef: Ref<undefined | OnRetry>
   shouldUseThumbnailUrlRef: Ref<ShouldUseThumbnailUrl>
   getFileThumbnailUrlResolver: (

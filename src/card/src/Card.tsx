@@ -4,7 +4,7 @@ import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CardTheme } from '../styles'
 import { getPadding } from 'seemly'
 import { computed, defineComponent, h } from 'vue'
-import { NBaseClose } from '../../_internal'
+import { NBaseClose, NScrollbar } from '../../_internal'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
 import { call, createKey, keysOf, resolveWrappedSlot } from '../../_utils'
@@ -22,6 +22,7 @@ export const cardBaseProps = {
   title: [String, Function] as PropType<string | (() => VNodeChild)>,
   contentClass: String,
   contentStyle: [Object, String] as PropType<CSSProperties | string>,
+  contentScrollable: Boolean,
   headerClass: String,
   headerStyle: [Object, String] as PropType<CSSProperties | string>,
   headerExtraClass: String,
@@ -82,8 +83,9 @@ export default defineComponent({
   setup(props) {
     const handleCloseClick = (): void => {
       const { onClose } = props
-      if (onClose)
+      if (onClose) {
         call(onClose)
+      }
     }
     const { inlineThemeDisabled, mergedClsPrefixRef, mergedRtlRef }
       = useConfig(props)
@@ -208,6 +210,8 @@ export default defineComponent({
           embedded && `${mergedClsPrefix}-card--embedded`,
           {
             [`${mergedClsPrefix}-card--rtl`]: rtlEnabled,
+            [`${mergedClsPrefix}-card--content-scrollable`]:
+              this.contentScrollable,
             [`${mergedClsPrefix}-card--content${
               typeof segmented !== 'boolean' && segmented.content === 'soft'
                 ? '-soft'
@@ -297,17 +301,28 @@ export default defineComponent({
                 typeof content === 'function' ? [content()] : [content]
               )
             : children
-          return (
-            mergedChildren && (
+          return mergedChildren ? (
+            this.contentScrollable ? (
+              <NScrollbar
+                class={`${mergedClsPrefix}-card__content-scrollbar`}
+                contentClass={[
+                  `${mergedClsPrefix}-card-content`,
+                  this.contentClass
+                ]}
+                contentStyle={this.contentStyle}
+              >
+                {mergedChildren}
+              </NScrollbar>
+            ) : (
               <div
-                class={[`${mergedClsPrefix}-card__content`, this.contentClass]}
+                class={[`${mergedClsPrefix}-card-content`, this.contentClass]}
                 style={this.contentStyle}
                 role="none"
               >
                 {mergedChildren}
               </div>
             )
-          )
+          ) : null
         })}
         {resolveWrappedSlot($slots.footer, (children) => {
           const mergedChildren = this.footer
