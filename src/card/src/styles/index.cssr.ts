@@ -1,5 +1,13 @@
 import { asModal, c, cB, cE, cM, insideModal, insidePopover } from '../../../_utils/cssr'
 
+const contentBaseStyle = cB('card-content', `
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 0 var(--n-padding-left) var(--n-padding-bottom) var(--n-padding-left);
+  font-size: var(--n-font-size);
+`)
+
 // vars:
 // --n-bezier
 // --n-border-radius
@@ -55,24 +63,47 @@ export default c([
     ]),
     cM('content-segmented', [
       c('>', [
-        cE('content', {
-          paddingTop: 'var(--n-padding-bottom)'
-        })
+        cB('card-content', `
+          padding-top: var(--n-padding-bottom);
+        `),
+        cE('content-scrollbar', [
+          c('>', [
+            cB('scrollbar-container', [
+              c('>', [
+                cB('card-content', `
+                  padding-top: var(--n-padding-bottom);
+                `)
+              ])
+            ])
+          ])
+        ])
       ])
     ]),
     cM('content-soft-segmented', [
       c('>', [
-        cE('content', `
+        cB('card-content', `
           margin: 0 var(--n-padding-left);
           padding: var(--n-padding-bottom) 0;
-        `)
+        `),
+        cE('content-scrollbar', [
+          c('>', [
+            cB('scrollbar-container', [
+              c('>', [
+                cB('card-content', `
+                  margin: 0 var(--n-padding-left);
+                  padding: var(--n-padding-bottom) 0;
+                `)
+              ])
+            ])
+          ])
+        ])
       ])
     ]),
     cM('footer-segmented', [
       c('>', [
-        cE('footer', {
-          paddingTop: 'var(--n-padding-bottom)'
-        })
+        cE('footer', `
+          padding-top: var(--n-padding-bottom);
+        `)
       ])
     ]),
     cM('footer-soft-segmented', [
@@ -125,15 +156,38 @@ export default c([
         background-clip: padding-box;
         background-color: var(--n-action-color);
       `),
-      cE('content', 'flex: 1; min-width: 0;'),
-      cE('content, footer', `
+      contentBaseStyle,
+      cB('card-content', [
+        c('&:first-child', `
+          padding-top: var(--n-padding-bottom);
+        `)
+      ]),
+      cE('content-scrollbar', [
+        c('>', [
+          cB('scrollbar-container', [
+            c('>', [
+              contentBaseStyle
+            ])
+          ])
+        ]),
+        c('&:first-child >', [
+          cB('scrollbar-container', [
+            c('>', [
+              cB('card-content', `
+                padding-top: var(--n-padding-bottom);
+              `)
+            ])
+          ])
+        ])
+      ]),
+      cE('footer', `
         box-sizing: border-box;
         padding: 0 var(--n-padding-left) var(--n-padding-bottom) var(--n-padding-left);
         font-size: var(--n-font-size);
       `, [
-        c('&:first-child', {
-          paddingTop: 'var(--n-padding-bottom)'
-        })
+        c('&:first-child', `
+          padding-top: var(--n-padding-bottom);
+        `)
       ]),
       cE('action', `
         background-color: var(--n-action-color);
@@ -160,31 +214,38 @@ export default c([
     cM('action-segmented', [
       c('>', [
         cE('action', [
-          c('&:not(:first-child)', {
-            borderTop: '1px solid var(--n-border-color)'
-          })
+          c('&:not(:first-child)', `
+            border-top: 1px solid var(--n-border-color);
+          `)
         ])
       ])
     ]),
     cM('content-segmented, content-soft-segmented', [
       c('>', [
-        cE('content', {
-          transition: 'border-color 0.3s var(--n-bezier)'
-        }, [
-          c('&:not(:first-child)', {
-            borderTop: '1px solid var(--n-border-color)'
-          })
+        cB('card-content', `
+          transition: border-color 0.3s var(--n-bezier);
+        `, [
+          c('&:not(:first-child)', `
+            border-top: 1px solid var(--n-border-color);
+          `)
+        ]),
+        cE('content-scrollbar', `
+          transition: border-color 0.3s var(--n-bezier);
+        `, [
+          c('&:not(:first-child)', `
+            border-top: 1px solid var(--n-border-color);
+          `)
         ])
       ])
     ]),
     cM('footer-segmented, footer-soft-segmented', [
       c('>', [
-        cE('footer', {
-          transition: 'border-color 0.3s var(--n-bezier)'
-        }, [
-          c('&:not(:first-child)', {
-            borderTop: '1px solid var(--n-border-color)'
-          })
+        cE('footer', `
+          transition: border-color 0.3s var(--n-bezier);
+        `, [
+          c('&:not(:first-child)', `
+            border-top: 1px solid var(--n-border-color);
+          `)
         ])
       ])
     ]),

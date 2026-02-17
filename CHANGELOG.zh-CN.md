@@ -7,6 +7,7 @@
 ### Breaking Changes
 
 - `n-color-picker` 重构 DOM 结构和 trigger 相关的类名
+- `n-card` 中 `n-card__content` 类名改为 `n-card-content`
 
 ### Feats
 
@@ -14,6 +15,7 @@
 - `n-select` `n-auto-complete` `n-mention` `n-popselect` `n-cascader` `n-pagination` 新增 `scrollbar-props` 属性
 - `n-upload` 的 `submit` 方法新增 `retry` 属性。
 - `n-breadcrumb-item` 新增 `show-separator` 属性，用于配合 `transition-group` 使用时手动控制分隔符显隐，关闭 [#3614](https://github.com/tusen-ai/naive-ui/issues/3614)
+- `n-card` 新增 `content-scrollable` 属性，关闭 [#4848](https://github.com/tusen-ai/naive-ui/issues/4848)、[#6759](https://github.com/tusen-ai/naive-ui/pull/6759)
 
 ### Fixes
 

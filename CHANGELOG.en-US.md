@@ -7,6 +7,7 @@
 ### Breaking Changes
 
 - `n-color-picker` refactor DOM structure & trigger class names.
+- `n-card`'s `n-card__content` is renamed to `n-card-content`.
 
 ### Feats
 
@@ -14,6 +15,7 @@
 - `n-select`, `n-auto-complete`, `n-mention`, `n-popselect`, `n-cascader`, `n-pagination` add `scrollbar-props` prop.
 - `n-upload`'s `submit` method adds `retry` option.
 - `n-breadcrumb-item` adds `show-separator` prop for controlling separator visibility when used with `transition-group`, closes [#3614](https://github.com/tusen-ai/naive-ui/issues/3614).
+- `n-card` adds `content-scrollable` prop, closes [#4848](https://github.com/tusen-ai/naive-ui/issues/4848), [#6759](https://github.com/tusen-ai/naive-ui/pull/6759).
 
 ### Fixes
 
