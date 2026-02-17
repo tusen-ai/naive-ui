@@ -1,5 +1,5 @@
 import type { ComputedRef, ExtractPropTypes, PropType } from 'vue'
-import type { Hljs } from '../../_mixins'
+import type { Hljs, Shiki } from '../../_mixins'
 import type { NDateLocale, NLocale } from '../../locales'
 import type {
   GlobalComponentConfig,
@@ -37,6 +37,7 @@ export const configProviderProps = {
     default: 'div'
   },
   hljs: Object as PropType<Hljs>,
+  shiki: Object as PropType<Shiki>,
   katex: Object as PropType<Katex>,
   theme: Object as PropType<GlobalTheme | null>,
   themeOverrides: Object as PropType<GlobalThemeOverrides | null>,
@@ -209,6 +210,12 @@ export default defineComponent({
       mergedHljsRef: computed(() => {
         const { hljs } = props
         return hljs === undefined ? NConfigProvider?.mergedHljsRef.value : hljs
+      }),
+      mergedShikiRef: computed(() => {
+        const { shiki } = props
+        return shiki === undefined
+          ? NConfigProvider?.mergedShikiRef?.value
+          : shiki
       }),
       mergedKatexRef: computed(() => {
         const { katex } = props
