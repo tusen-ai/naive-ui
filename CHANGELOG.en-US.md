@@ -16,9 +16,8 @@
 - `n-upload`'s `submit` method adds `retry` option.
 - `n-breadcrumb-item` adds `show-separator` prop for controlling separator visibility when used with `transition-group`, closes [#3614](https://github.com/tusen-ai/naive-ui/issues/3614).
 - `n-card` adds `content-scrollable` prop, closes [#4848](https://github.com/tusen-ai/naive-ui/issues/4848), [#6759](https://github.com/tusen-ai/naive-ui/pull/6759).
-- `n-date-picker` adds `close-panel-on-select-date` prop.
-- `n-date-picker` adds `close-panel-on-select-year` prop.
-- `n-date-picker` adds `close-panel-on-select-month` prop.
+- `n-date-picker` adds `fast-year-select` prop.
+- `n-date-picker` adds `fast-month-select` prop.
 
 ### Fixes
 

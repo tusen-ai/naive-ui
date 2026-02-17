@@ -1,5 +1,7 @@
 <markdown>
-  # Close panel after selecting year or month.
+  # Close panel on select year or month
+
+  By using the `fast-year-select` and `fast-month-select` properties, you can implement the closing of the year and month panel after selecting the year or month.
 </markdown>
 
 <script lang="ts">
@@ -16,65 +18,31 @@ export default defineComponent({
 </script>
 
 <template>
-  <NSpace vertical>
-    <div>
-      <div>Close panel after selecting year.</div>
-      <n-date-picker
-        v-model:value="timestamp"
-        type="date"
-        close-panel-on-select-year
-      />
-      <n-date-picker
-        v-model:value="range"
-        type="daterange"
-        close-panel-on-select-year
-      />
-      <n-date-picker
-        v-model:value="range"
-        type="datetimerange"
-        close-panel-on-select-year
-      />
-      <pre>{{ JSON.stringify(timestamp) }}</pre>
-    </div>
-
-    <div>
-      <div>Close panel after selecting month.</div>
-      <n-date-picker
-        v-model:value="timestamp"
-        type="date"
-        close-panel-on-select-month
-      />
-      <n-date-picker
-        v-model:value="range"
-        type="daterange"
-        close-panel-on-select-month
-      />
-      <n-date-picker
-        v-model:value="range"
-        type="datetimerange"
-        close-panel-on-select-month
-      />
-      <pre>{{ JSON.stringify(timestamp) }}</pre>
-    </div>
-
-    <div>
-      <div>Close panel after selecting year or month.</div>
-      <n-date-picker
-        v-model:value="timestamp"
-        type="date"
-        close-panel-on-select-date
-      />
-      <n-date-picker
-        v-model:value="range"
-        type="daterange"
-        close-panel-on-select-date
-      />
-      <n-date-picker
-        v-model:value="range"
-        type="datetimerange"
-        close-panel-on-select-date
-      />
-      <pre>{{ JSON.stringify(timestamp) }}</pre>
-    </div>
-  </NSpace>
+  <NFlex vertical>
+    <n-date-picker
+      v-model:value="timestamp"
+      type="date"
+      fast-year-select
+      fast-month-select
+    />
+    <n-date-picker
+      v-model:value="timestamp"
+      type="datetime"
+      fast-year-select
+      fast-month-select
+    />
+    <n-date-picker
+      v-model:value="range"
+      type="daterange"
+      fast-year-select
+      fast-month-select
+    />
+    <n-date-picker
+      v-model:value="range"
+      type="datetimerange"
+      fast-year-select
+      fast-month-select
+    />
+    <pre>{{ JSON.stringify(timestamp) }}</pre>
+  </NFlex>
 </template>

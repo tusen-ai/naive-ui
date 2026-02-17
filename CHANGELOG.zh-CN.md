@@ -16,9 +16,8 @@
 - `n-upload` 的 `submit` 方法新增 `retry` 属性。
 - `n-breadcrumb-item` 新增 `show-separator` 属性，用于配合 `transition-group` 使用时手动控制分隔符显隐，关闭 [#3614](https://github.com/tusen-ai/naive-ui/issues/3614)
 - `n-card` 新增 `content-scrollable` 属性，关闭 [#4848](https://github.com/tusen-ai/naive-ui/issues/4848)、[#6759](https://github.com/tusen-ai/naive-ui/pull/6759)
-- `n-date-picker` 新增 `close-panel-on-select-date` 参数
-- `n-date-picker` 新增 `close-panel-on-select-year` 参数
-- `n-date-picker` 新增 `close-panel-on-select-month` 参数
+- `n-date-picker` 新增 `fast-year-select` 参数
+- `n-date-picker` 新增 `fast-month-select` 参数
 
 ### Fixes
 

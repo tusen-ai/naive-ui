@@ -84,12 +84,11 @@ form-debug.vue
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now'> \| null` | `['clear', 'now']` | Date 类型的 Date Picker 中支持的操作 |  |
 | default-calendar-start-time | `number` | `undefined` | 面板日历默认开始的月份时间戳 | 2.38.1 |
+| fast-year-select | `boolean` | `false` | 为 `true` 时，选择年份后，关闭年月面板 | NEXT_VERSION |
+| fast-month-select | `boolean` | `false` | 为 `true` 时，选择月份后，关闭年月面板 | NEXT_VERSION |
 | format | `string` | `'yyyy-MM-dd'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |  |
 | is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `undefined` | 日期禁用的校验函数 | `detail` 2.37.1 |
 | placeholder | `string` | `'选择日期'` | 没有值时的占位信息 |  |
-| close-panel-on-select-date | `boolean` | `undefined` | 为 `true` 时，选择年、月后，关闭年月面板 | NEXT_VERSION |
-| close-panel-on-select-year | `boolean` | `undefined` | 为 `true` 时，选择年份后，关闭年月面板 | NEXT_VERSION |
-| close-panel-on-select-month | `boolean` | `undefined` | 为 `true` 时，选择月份后，关闭年月面板 | NEXT_VERSION |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | 受控数据更新时触发的回调函数 | 2.24.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | 受控数据更新时触发的回调函数 | `formattedValue` 2.24.0 |
 
@@ -100,13 +99,12 @@ form-debug.vue
 | actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` | DateTime 类型的 Date Picker 中支持的操作 |  |
 | default-calendar-start-time | `number` | `undefined` | 面板日历默认开始的月份时间戳 | 2.38.1 |
 | default-time | `string \| (timestamp: number) => string` | `undefined` | 默认时间，可以接受一个参数为时间戳的函数，返回格式化的字符串，格式为 `HH:mm:ss` | 2.22.0，从 2.43.2 支持函数 |
+| fast-year-select | `boolean` | `false` | 为 `true` 时，选择年份后，关闭年月面板 | NEXT_VERSION |
+| fast-month-select | `boolean` | `false` | 为 `true` 时，选择月份后，关闭年月面板 | NEXT_VERSION |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |  |
 | is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `undefined` | 日期禁用的校验函数 | `detail` 2.37.1 |
 | is-time-disabled | `(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }` | `undefined` | 时间禁用的校验函数 |  |
 | placeholder | `string` | `'选择日期时间'` | 提示信息 |  |
-| close-panel-on-select-date | `boolean` | `undefined` | 为 `true` 时，选择年、月后，关闭年月面板 | NEXT_VERSION |
-| close-panel-on-select-year | `boolean` | `undefined` | 为 `true` 时，选择年份后，关闭年月面板 | NEXT_VERSION |
-| close-panel-on-select-month | `boolean` | `undefined` | 为 `true` 时，选择月份后，关闭年月面板 | NEXT_VERSION |
 | time-picker-props | `TimePickerProps` | `undefined` | 面板中时间选择器的属性 | 2.27.0 |
 | update-value-on-close | `boolean` | `false` | 关闭面板时更新值 |  |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | 数据更新时触发的回调函数 | 2.24.0 |
@@ -120,10 +118,9 @@ form-debug.vue
 | bind-calendar-months | `boolean` | `false` | 面板月份是否连续 | 2.28.3 |
 | default-calendar-start-time | `number` | `undefined` | 面板日历默认开始的月份时间戳 | 2.28.3 |
 | default-calendar-end-time | `number` | `undefined` | 面板日历默认结束的月份时间戳 | 2.28.3 |
+| fast-year-select | `boolean` | `false` | 为 `true` 时，选择年份后，关闭年月面板 | NEXT_VERSION |
+| fast-month-select | `boolean` | `false` | 为 `true` 时，选择月份后，关闭年月面板 | NEXT_VERSION |
 | format | `string` | `'yyyy-MM-dd'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |  |
-| close-panel-on-select-date | `boolean` | `undefined` | 为 `true` 时，选择年、月后，关闭年月面板 | NEXT_VERSION |
-| close-panel-on-select-year | `boolean` | `undefined` | 为 `true` 时，选择年份后，关闭年月面板 | NEXT_VERSION |
-| close-panel-on-select-month | `boolean` | `undefined` | 为 `true` 时，选择月份后，关闭年月面板 | NEXT_VERSION |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | 日期禁用的校验函数 |  |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: (hour: number) => boolean, isMinuteDisabled?: (minute: number, hour: number \| null) => boolean, isSecondDisabled?: (second: number, minute: number \| null, hour: number \| null) => boolean }` | `undefined` | 时间禁用的校验函数，校验函数中的 `null` 表示当前没有选中值 |  |
 | close-on-select | `boolean` | `false` | 用户选择时间范围后是否自动关闭面板 |  |
@@ -143,10 +140,9 @@ form-debug.vue
 | default-calendar-end-time | `number` | `undefined` | 面板日历默认结束的月份时间戳 | 2.28.3 |
 | default-time | `string \| Array<string \| undefined> \| (timestamp: number, position: "start" \| "end", value: [number, number] \| null) => string` | `undefined` | 默认时间，可以接受一个参数为时间戳、时间位置、和当前值的函数，返回一个格式化字符串，格式为 `HH:mm:ss` | 2.22.0，从 2.43.2 支持函数 |
 | end-placeholder | `string` | `'结束日期时间'` | DateTimeRange 中 end 选框的提示信息 |  |
+| fast-year-select | `boolean` | `false` | 为 `true` 时，选择年份后，关闭年月面板 | NEXT_VERSION |
+| fast-month-select | `boolean` | `false` | 为 `true` 时，选择月份后，关闭年月面板 | NEXT_VERSION |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |  |
-| close-panel-on-select-date | `boolean` | `undefined` | 为 `true` 时，选择年、月后，关闭年月面板 | NEXT_VERSION |
-| close-panel-on-select-year | `boolean` | `undefined` | 为 `true` 时，选择年份后，关闭年月面板 | NEXT_VERSION |
-| close-panel-on-select-month | `boolean` | `undefined` | 为 `true` 时，选择月份后，关闭年月面板 | NEXT_VERSION |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | 日期禁用的校验函数 |  |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: (hour: number) => boolean, isMinuteDisabled?: (minute: number, hour: number \| null) => boolean, isSecondDisabled?: (second: number, minute: number \| null, hour: number \| null) => boolean }` | `undefined` | 时间禁用的校验函数，校验函数中的 `null` 表示当前没有选中值 |  |
 | separator | `string` | 内置图标 | start 选框与 end 选框之间的分隔符 |  |

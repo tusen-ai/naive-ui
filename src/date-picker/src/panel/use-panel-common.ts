@@ -16,9 +16,8 @@ const TIME_FORMAT = 'HH:mm:ss'
 const usePanelCommonProps = {
   active: Boolean,
   dateFormat: String,
-  closePanelOnSelectDate: Boolean,
-  closePanelOnSelectYear: Boolean,
-  closePanelOnSelectMonth: Boolean,
+  fastYearSelect: Boolean,
+  fastMonthSelect: Boolean,
   calendarDayFormat: String,
   calendarHeaderYearFormat: String,
   calendarHeaderMonthFormat: String,

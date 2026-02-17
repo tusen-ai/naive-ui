@@ -20,18 +20,8 @@ export default defineComponent({
       type: String,
       required: true
     },
-    closePanelOnSelectDate: {
-      type: Boolean,
-      required: false
-    },
-    closePanelOnSelectYear: {
-      type: Boolean,
-      required: false
-    },
-    closePanelOnSelectMonth: {
-      type: Boolean,
-      required: false
-    },
+    fastYearSelect: Boolean,
+    fastMonthSelect: Boolean,
     calendarMonth: {
       type: String,
       required: true
@@ -49,14 +39,17 @@ export default defineComponent({
     const triggerRef = ref<HTMLElement | null>(null)
     const monthPanelRef = ref<InstanceType<typeof MonthPanel> | null>(null)
     const showRef = ref(false)
+    function toggleShow(): void {
+      showRef.value = !showRef.value
+    }
     function handleSelectYear(): void {
-      if (props.closePanelOnSelectDate || props.closePanelOnSelectYear) {
-        handleHeaderClick()
+      if (props.fastYearSelect) {
+        toggleShow()
       }
     }
     function handleSelectMonth(): void {
-      if (props.closePanelOnSelectDate || props.closePanelOnSelectMonth) {
-        handleHeaderClick()
+      if (props.fastMonthSelect) {
+        toggleShow()
       }
     }
     function handleClickOutside(e: MouseEvent): void {
@@ -68,7 +61,7 @@ export default defineComponent({
       }
     }
     function handleHeaderClick(): void {
-      showRef.value = !showRef.value
+      toggleShow()
     }
     return {
       show: showRef,

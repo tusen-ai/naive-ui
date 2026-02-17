@@ -149,9 +149,8 @@ export default defineComponent({
               ])}
             </div>
             <PanelHeader
-              closePanelOnSelectDate={this.closePanelOnSelectDate}
-              closePanelOnSelectYear={this.closePanelOnSelectYear}
-              closePanelOnSelectMonth={this.closePanelOnSelectMonth}
+              fastYearSelect={this.fastYearSelect}
+              fastMonthSelect={this.fastMonthSelect}
               monthYearSeparator={this.calendarHeaderMonthYearSeparator}
               monthBeforeYear={this.calendarMonthBeforeYear}
               value={this.startCalendarDateTime}
@@ -261,9 +260,8 @@ export default defineComponent({
               ])}
             </div>
             <PanelHeader
-              closePanelOnSelectDate={this.closePanelOnSelectDate}
-              closePanelOnSelectYear={this.closePanelOnSelectYear}
-              closePanelOnSelectMonth={this.closePanelOnSelectMonth}
+              fastYearSelect={this.fastYearSelect}
+              fastMonthSelect={this.fastMonthSelect}
               monthBeforeYear={this.calendarMonthBeforeYear}
               value={this.endCalendarDateTime}
               onUpdateValue={this.onUpdateEndCalendarValue}
