@@ -2,6 +2,9 @@ import antfu from '@antfu/eslint-config'
 
 export default antfu(
   {
+    languageOptions: {
+      ecmaVersion: 'latest',
+    },
     regexp: false,
     ignores: [
       'node_modules',
