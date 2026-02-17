@@ -13,6 +13,7 @@
 
 - `n-color-picker` adds `trigger` slot, closes [#7192](https://github.com/tusen-ai/naive-ui/issues/7192).
 - `n-select`, `n-auto-complete`, `n-mention`, `n-popselect`, `n-cascader`, `n-pagination` add `scrollbar-props` prop.
+- `n-config-provider` adds component-level `renderEmpty` options (`Cascader`, `DataTable`, `Select`, `Transfer`, `Tree`, `TreeSelect`).
 - `n-upload`'s `submit` method adds `retry` option.
 - `n-breadcrumb-item` adds `show-separator` prop for controlling separator visibility when used with `transition-group`, closes [#3614](https://github.com/tusen-ai/naive-ui/issues/3614).
 - `n-card` adds `content-scrollable` prop, closes [#4848](https://github.com/tusen-ai/naive-ui/issues/4848), [#6759](https://github.com/tusen-ai/naive-ui/pull/6759).
@@ -25,7 +26,6 @@
 - Fix `n-select`'s created option is not cleared when clearing dynamic options while `tag` and `clearable` are enabled, closes [#7405](https://github.com/tusen-ai/naive-ui/issues/7405)
 - Fix `n-modal` event listeners not removed, closes [#7341](https://github.com/tusen-ai/naive-ui/issues/7341) by [@lu-han](https://github.com/lu-han)
 - Fix `n-marquee` component Non-function value encountered for default slot warning.
-
 
 ## 2.43.2
 

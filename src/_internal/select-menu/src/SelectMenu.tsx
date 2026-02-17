@@ -119,7 +119,8 @@ export default defineComponent({
     onToggle: Function as PropType<(tmNode: TreeNode<SelectOption>) => void>
   },
   setup(props) {
-    const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
+    const { mergedClsPrefixRef, mergedRtlRef, mergedComponentPropsRef }
+      = useConfig(props)
     const rtlEnabledRef = useRtl(
       'InternalSelectMenu',
       mergedRtlRef,
@@ -230,6 +231,9 @@ export default defineComponent({
     const emptyRef = computed(() => {
       const tmNodes = flattenedNodesRef.value
       return tmNodes && tmNodes.length === 0
+    })
+    const mergedRenderEmptyRef = computed(() => {
+      return mergedComponentPropsRef?.value?.Select?.renderEmpty
     })
     function doToggle(tmNode: TreeNode<SelectOption>): void {
       const { onToggle } = props
@@ -434,6 +438,7 @@ export default defineComponent({
       padding: paddingRef,
       flattenedNodes: flattenedNodesRef,
       empty: emptyRef,
+      mergedRenderEmpty: mergedRenderEmptyRef,
       virtualListContainer() {
         const { value } = virtualListRef
         return value?.listElRef
@@ -586,13 +591,17 @@ export default defineComponent({
           </NScrollbar>
         ) : (
           <div class={`${clsPrefix}-base-select-menu__empty`} data-empty>
-            {resolveSlot($slots.empty, () => [
-              <NEmpty
-                theme={mergedTheme.peers.Empty}
-                themeOverrides={mergedTheme.peerOverrides.Empty}
-                size={this.size}
-              />
-            ])}
+            {resolveSlot($slots.empty, () => {
+              return [
+                this.mergedRenderEmpty?.() || (
+                  <NEmpty
+                    theme={mergedTheme.peers.Empty}
+                    themeOverrides={mergedTheme.peerOverrides.Empty}
+                    size={this.size}
+                  />
+                )
+              ]
+            })}
           </div>
         )}
         {resolveWrappedSlot(

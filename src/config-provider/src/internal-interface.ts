@@ -202,6 +202,9 @@ export interface GlobalThemeWithoutCommon {
 }
 
 export interface GlobalComponentConfig {
+  Cascader?: {
+    renderEmpty?: () => VNodeChild
+  }
   Pagination?: {
     inputSize?: InputSize
     selectSize?: SelectSize
@@ -215,6 +218,19 @@ export interface GlobalComponentConfig {
   DataTable?: {
     renderFilter?: DataTableRenderFilter
     renderSorter?: DataTableRenderSorter
+    renderEmpty?: () => VNodeChild
+  }
+  Select?: {
+    renderEmpty?: () => VNodeChild
+  }
+  Transfer?: {
+    renderEmpty?: () => VNodeChild
+  }
+  Tree?: {
+    renderEmpty?: () => VNodeChild
+  }
+  TreeSelect?: {
+    renderEmpty?: () => VNodeChild
   }
   DynamicInput?: {
     buttonSize?: ButtonSize
