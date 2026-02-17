@@ -569,7 +569,7 @@ export default defineComponent({
         ref="scrollbarInstRef"
         scrollable={scrollable || isBasicAutoLayout}
         class={`${mergedClsPrefix}-data-table-base-table-body`}
-        style={!this.empty ? this.bodyStyle : undefined}
+        style={!this.empty ? this.bodyStyle : 'height: initial;'}
         theme={mergedTheme.peers.Scrollbar}
         themeOverrides={mergedTheme.peerOverrides.Scrollbar}
         contentStyle={contentStyle}

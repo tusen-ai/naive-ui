@@ -26,6 +26,7 @@
 - Fix `n-select`'s created option is not cleared when clearing dynamic options while `tag` and `clearable` are enabled, closes [#7405](https://github.com/tusen-ai/naive-ui/issues/7405)
 - Fix `n-modal` event listeners not removed, closes [#7341](https://github.com/tusen-ai/naive-ui/issues/7341) by [@lu-han](https://github.com/lu-han)
 - Fix `n-marquee` component Non-function value encountered for default slot warning.
+- Fix `n-data-table`'s empty slot is not shown in a `display: flex` container.
 
 ## 2.43.2
 

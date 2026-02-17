@@ -26,6 +26,7 @@
 - 修复 `n-select` 清除动态创建的选项时，同时启用 `tag` 和 `clearable` 属性时清除不生效的问题，关闭 [#7405](https://github.com/tusen-ai/naive-ui/issues/7405)
 - 修复 `n-modal` 监听事件未移除，关闭 [#7341](https://github.com/tusen-ai/naive-ui/issues/7341)
 - 修复 `n-marquee` 组件 Non-function value encountered for default slot 警告
+- 修复 `n-data-table` 的 empty 状态在 `display: flex` 的容器中不展示
 
 ## 2.43.2
 
