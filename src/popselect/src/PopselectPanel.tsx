@@ -47,10 +47,7 @@ export const panelProps = {
     type: Array as PropType<SelectMixedOption[]>,
     default: () => []
   },
-  size: {
-    type: String as PropType<PopselectSize>,
-    default: 'medium'
-  },
+  size: String as PropType<PopselectSize>,
   scrollable: Boolean,
   'onUpdate:value': [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
@@ -86,7 +83,15 @@ export default defineComponent({
 
     const NPopselect = inject(popselectInjectionKey)!
 
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedComponentPropsRef }
+      = useConfig(props)
+    const mergedSizeRef = computed<PopselectSize>(() => {
+      return (
+        props.size
+        || mergedComponentPropsRef?.value?.Popselect?.size
+        || 'medium'
+      )
+    })
 
     const themeRef = useTheme(
       'Popselect',
@@ -205,6 +210,7 @@ export default defineComponent({
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass('select', undefined, cssVarsRef, NPopselect.props)
       : undefined
+
     return {
       mergedTheme: NPopselect.mergedThemeRef,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -213,7 +219,9 @@ export default defineComponent({
       handleMenuMousedown,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
-      onRender: themeClassHandle?.onRender
+      onRender: themeClassHandle?.onRender,
+      mergedSize: mergedSizeRef,
+      scrollbarProps: NPopselect.props.scrollbarProps
     }
   },
   render() {
@@ -229,10 +237,11 @@ export default defineComponent({
         themeOverrides={this.mergedTheme.peerOverrides.InternalSelectMenu}
         multiple={this.multiple}
         treeMate={this.treeMate}
-        size={this.size}
+        size={this.mergedSize}
         value={this.value}
         virtualScroll={this.virtualScroll}
         scrollable={this.scrollable}
+        scrollbarProps={this.scrollbarProps}
         renderLabel={this.renderLabel}
         onToggle={this.handleToggle}
         onMouseenter={this.onMouseenter}

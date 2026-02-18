@@ -2,6 +2,7 @@ import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { DescriptionsTheme } from '../styles'
+import type { DescriptionsSize } from './public-types'
 import { repeat } from 'seemly'
 import { useCompitable } from 'vooks'
 import { computed, defineComponent, h } from 'vue'
@@ -37,10 +38,7 @@ export const descriptionsProps = {
     type: String,
     default: ':'
   },
-  size: {
-    type: String as PropType<'small' | 'medium' | 'large'>,
-    default: 'medium'
-  },
+  size: String as PropType<DescriptionsSize>,
   bordered: Boolean,
   labelClass: String,
   labelStyle: [Object, String] as PropType<string | CSSProperties>,
@@ -62,7 +60,15 @@ export default defineComponent({
   props: descriptionsProps,
   slots: Object as SlotsType<DescriptionsSlots>,
   setup(props) {
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedComponentPropsRef }
+      = useConfig(props)
+    const mergedSizeRef = computed(() => {
+      return (
+        props.size
+        || mergedComponentPropsRef?.value?.Descriptions?.size
+        || 'medium'
+      )
+    })
     const themeRef = useTheme(
       'Descriptions',
       '-descriptions',
@@ -72,7 +78,8 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const cssVarsRef = computed(() => {
-      const { size, bordered } = props
+      const { bordered } = props
+      const mergedSize = mergedSizeRef.value
       const {
         common: { cubicBezierEaseInOut },
         self: {
@@ -91,10 +98,10 @@ export default defineComponent({
           borderColorPopover,
           borderRadius,
           lineHeight,
-          [createKey('fontSize', size)]: fontSize,
-          [createKey(bordered ? 'thPaddingBordered' : 'thPadding', size)]:
+          [createKey('fontSize', mergedSize)]: fontSize,
+          [createKey(bordered ? 'thPaddingBordered' : 'thPadding', mergedSize)]:
             thPadding,
-          [createKey(bordered ? 'tdPaddingBordered' : 'tdPadding', size)]:
+          [createKey(bordered ? 'tdPaddingBordered' : 'tdPadding', mergedSize)]:
             tdPadding
         }
       } = themeRef.value
@@ -125,10 +132,10 @@ export default defineComponent({
           'descriptions',
           computed(() => {
             let hash = ''
-            const { size, bordered } = props
+            const { bordered } = props
             if (bordered)
               hash += 'a'
-            hash += size[0]
+            hash += mergedSizeRef.value[0]
             return hash
           }),
           cssVarsRef,
@@ -141,7 +148,8 @@ export default defineComponent({
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       compitableColumn: useCompitable(props, ['columns', 'column']),
-      inlineThemeDisabled
+      inlineThemeDisabled,
+      mergedSize: mergedSizeRef
     }
   },
   render() {
@@ -154,7 +162,7 @@ export default defineComponent({
       compitableColumn,
       labelPlacement,
       labelAlign,
-      size,
+      mergedSize,
       bordered,
       title,
       cssVars,
@@ -317,7 +325,7 @@ export default defineComponent({
           this.themeClass,
           `${mergedClsPrefix}-descriptions--${labelPlacement}-label-placement`,
           `${mergedClsPrefix}-descriptions--${labelAlign}-label-align`,
-          `${mergedClsPrefix}-descriptions--${size}-size`,
+          `${mergedClsPrefix}-descriptions--${mergedSize}-size`,
           bordered && `${mergedClsPrefix}-descriptions--bordered`
         ]}
       >

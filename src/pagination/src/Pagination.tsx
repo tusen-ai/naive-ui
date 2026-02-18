@@ -1,4 +1,5 @@
 import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type { ScrollbarProps } from '../../_internal/scrollbar/src/Scrollbar'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { Size as InputSize } from '../../input/src/interface'
@@ -79,10 +80,7 @@ export const paginationProps = {
     }
   },
   showQuickJumper: Boolean,
-  size: {
-    type: String as PropType<Size>,
-    default: 'medium'
-  },
+  size: String as PropType<Size>,
   disabled: Boolean,
   pageSlot: {
     type: Number,
@@ -101,6 +99,7 @@ export const paginationProps = {
   },
   to: useAdjustedTo.propTo,
   showQuickJumpDropdown: { type: Boolean, default: true },
+  scrollbarProps: Object as PropType<ScrollbarProps>,
   'onUpdate:page': [Function, Array] as PropType<
     MaybeArray<(page: number) => void>
   >,
@@ -166,6 +165,13 @@ export default defineComponent({
       inlineThemeDisabled,
       mergedRtlRef
     } = useConfig(props)
+    const mergedSizeRef = computed<Size>(() => {
+      return (
+        props.size
+        || mergedComponentPropsRef?.value?.Pagination?.size
+        || 'medium'
+      )
+    })
     const themeRef = useTheme(
       'Pagination',
       '-pagination',
@@ -269,13 +275,13 @@ export default defineComponent({
     const inputSizeRef = computed<InputSize>(() => {
       return (
         mergedComponentPropsRef?.value?.Pagination?.inputSize
-        || smallerSize(props.size)
+        || smallerSize(mergedSizeRef.value)
       )
     })
     const selectSizeRef = computed<SelectSize>(() => {
       return (
         mergedComponentPropsRef?.value?.Pagination?.selectSize
-        || smallerSize(props.size)
+        || smallerSize(mergedSizeRef.value)
       )
     })
     const startIndexRef = computed(() => {
@@ -416,7 +422,7 @@ export default defineComponent({
       disableTransitionOneTick()
     })
     const cssVarsRef = computed(() => {
-      const { size } = props
+      const size = mergedSizeRef.value
       const {
         self: {
           buttonBorder,
@@ -515,8 +521,7 @@ export default defineComponent({
           'pagination',
           computed(() => {
             let hash = ''
-            const { size } = props
-            hash += size[0]
+            hash += mergedSizeRef.value[0]
             return hash
           }),
           cssVarsRef,
@@ -863,6 +868,7 @@ export default defineComponent({
                             }
                             onUpdateValue={this.handleMenuSelect}
                             scrollable
+                            scrollbarProps={this.scrollbarProps}
                             showCheckmark={false}
                           >
                             {{ default: () => itemNode }}
@@ -917,6 +923,7 @@ export default defineComponent({
                   options={pageSizeOptions}
                   value={mergedPageSize}
                   disabled={disabled}
+                  scrollbarProps={this.scrollbarProps}
                   theme={mergedTheme.peers.Select}
                   themeOverrides={mergedTheme.peerOverrides.Select}
                   onUpdateValue={handleSizePickerChange}

@@ -29,6 +29,8 @@ export const datePickerProps = {
     default: undefined
   },
   clearable: Boolean,
+  fastYearSelect: Boolean,
+  fastMonthSelect: Boolean,
   updateValueOnClose: Boolean,
   calendarDayFormat: String,
   calendarHeaderYearFormat: String,

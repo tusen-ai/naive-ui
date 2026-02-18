@@ -18,7 +18,11 @@ import type { PaginationProps } from '../../pagination'
 import type { PopoverProps } from '../../popover'
 import type { ScrollbarProps, ScrollTo } from '../../scrollbar/src/Scrollbar'
 import type { DataTableTheme } from '../styles'
-import type { DataTableGetCsvCell, DataTableGetCsvHeader } from './publicTypes'
+import type {
+  DataTableGetCsvCell,
+  DataTableGetCsvHeader,
+  DataTableSize
+} from './public-types'
 import type { ColItem, RowItem } from './use-group-header'
 import { useTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
@@ -80,7 +84,7 @@ export const dataTableProps = {
   },
   singleColumn: Boolean,
   size: {
-    type: String as PropType<'small' | 'medium' | 'large'>,
+    type: String as PropType<DataTableSize>,
     default: 'medium'
   },
   remote: Boolean,
@@ -343,8 +347,10 @@ export type RenderExpandIcon = ({
 
 // TODO: we should deprecate `index` since it would change after row is expanded
 export type Expandable<T = InternalRowData> = (row: T) => boolean
-export interface TableExpandColumn<T = InternalRowData>
-  extends Omit<TableSelectionColumn<T>, 'type'> {
+export interface TableExpandColumn<T = InternalRowData> extends Omit<
+  TableSelectionColumn<T>,
+  'type'
+> {
   type: 'expand'
   title?: TableExpandColumnTitle
   renderExpand: RenderExpand<T>

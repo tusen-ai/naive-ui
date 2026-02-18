@@ -985,6 +985,8 @@ export default defineComponent({
       onPrevYear: this.onPrevYear,
       timePickerFormat: this.timePickerFormat,
       dateFormat: this.dateFormat,
+      fastYearSelect: this.fastYearSelect,
+      fastMonthSelect: this.fastMonthSelect,
       calendarDayFormat: this.calendarDayFormat,
       calendarHeaderYearFormat: this.calendarHeaderYearFormat,
       calendarHeaderMonthFormat: this.calendarHeaderMonthFormat,

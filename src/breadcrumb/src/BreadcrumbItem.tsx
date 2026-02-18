@@ -11,6 +11,10 @@ export const breadcrumbItemProps = {
     type: Boolean,
     default: true
   },
+  showSeparator: {
+    type: Boolean,
+    default: true
+  },
   onClick: Function as PropType<(e: MouseEvent) => void>
 } as const
 
@@ -66,14 +70,16 @@ export default defineComponent({
             },
             slots
           )}
-          <span
-            class={`${mergedClsPrefix}-breadcrumb-item__separator`}
-            aria-hidden="true"
-          >
-            {resolveSlot(slots.separator, () => [
-              props.separator ?? separatorRef.value
-            ])}
-          </span>
+          {props.showSeparator && (
+            <span
+              class={`${mergedClsPrefix}-breadcrumb-item__separator`}
+              aria-hidden="true"
+            >
+              {resolveSlot(slots.separator, () => [
+                props.separator ?? separatorRef.value
+              ])}
+            </span>
+          )}
         </li>
       )
     }

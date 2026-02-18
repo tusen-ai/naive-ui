@@ -208,6 +208,10 @@ export default defineComponent({
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const virtualListRef = ref<VirtualListInst | null>(null)
     const emptyElRef = ref<HTMLElement | null>(null)
+    const mergedRenderEmptyRef = computed(() => {
+      return NConfigProvider?.mergedComponentPropsRef.value?.DataTable
+        ?.renderEmpty
+    })
     const emptyRef = useMemo(() => paginatedDataRef.value.length === 0)
     // If header is not inside & empty is displayed, no table part would be
     // shown. So to collect a body width, we need to put a ref on empty element
@@ -455,6 +459,7 @@ export default defineComponent({
       summary: summaryRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: mergedThemeRef,
+      mergedRenderEmpty: mergedRenderEmptyRef,
       scrollX: scrollXRef,
       cols: colsRef,
       loading: loadingRef,
@@ -564,7 +569,7 @@ export default defineComponent({
         ref="scrollbarInstRef"
         scrollable={scrollable || isBasicAutoLayout}
         class={`${mergedClsPrefix}-data-table-base-table-body`}
-        style={!this.empty ? this.bodyStyle : undefined}
+        style={!this.empty ? this.bodyStyle : 'height: initial;'}
         theme={mergedTheme.peers.Scrollbar}
         themeOverrides={mergedTheme.peerOverrides.Scrollbar}
         contentStyle={contentStyle}
@@ -1156,12 +1161,16 @@ export default defineComponent({
           style={this.bodyStyle}
           ref="emptyElRef"
         >
-          {resolveSlot(this.dataTableSlots.empty, () => [
-            <NEmpty
-              theme={this.mergedTheme.peers.Empty}
-              themeOverrides={this.mergedTheme.peerOverrides.Empty}
-            />
-          ])}
+          {resolveSlot(this.dataTableSlots.empty, () => {
+            return [
+              this.mergedRenderEmpty?.() || (
+                <NEmpty
+                  theme={this.mergedTheme.peers.Empty}
+                  themeOverrides={this.mergedTheme.peerOverrides.Empty}
+                />
+              )
+            ]
+          })}
         </div>
       )
       if (this.shouldDisplaySomeTablePart) {

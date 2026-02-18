@@ -4,14 +4,36 @@
 
 `NEXT_VERSION`
 
+### Breaking Changes
+
+- `n-color-picker` refactor DOM structure & trigger class names.
+- `n-card`'s `n-card__content` is renamed to `n-card-content`.
+
 ### Feats
 
+- `n-color-picker` adds `trigger` slot, closes [#7192](https://github.com/tusen-ai/naive-ui/issues/7192).
+- `n-select`, `n-auto-complete`, `n-mention`, `n-popselect`, `n-cascader`, `n-pagination` add `scrollbar-props` prop.
+- `n-config-provider` adds component-level `renderEmpty` options (`Cascader`, `DataTable`, `Select`, `Transfer`, `Tree`, `TreeSelect`).
+- `n-config-provider` adds per-component `size` options in `component-options` (`Button`, `Card`, `Checkbox`, `DataTable`, `Descriptions`, `Dropdown`, `DynamicTags`, `Form`, `Input`, `Pagination`, `Popselect`, `Radio`, `Rate`, `Result`, `Skeleton`, `Space`, `Switch`, `Table`, `Tabs`, `Tag`), closes [#356](https://github.com/tusen-ai/naive-ui/issues/356).
+- `n-upload`'s `submit` method adds `retry` option.
+- `n-breadcrumb-item` adds `show-separator` prop for controlling separator visibility when used with `transition-group`, closes [#3614](https://github.com/tusen-ai/naive-ui/issues/3614).
+- `n-card` adds `content-scrollable` prop, closes [#4848](https://github.com/tusen-ai/naive-ui/issues/4848), [#6759](https://github.com/tusen-ai/naive-ui/pull/6759).
+- `n-date-picker` adds `fast-year-select` prop.
+- `n-date-picker` adds `fast-month-select` prop.
 - `n-button` adds `spin-props` prop.
 - `n-cascader` adds `spin-props` prop.
 - `n-log` adds `spin-props` prop.
 - `n-message` adds `spin-props` prop.
 - `n-switch` adds `spin-props` prop.
 - `n-tree` adds `spin-props` prop.
+
+### Fixes
+
+- Fix `katex` type compatibility by upgrading to `0.16.28` and removing `@types/katex` dependency, closes [#7423](https://github.com/tusen-ai/naive-ui/issues/7423).
+- Fix `n-select`'s created option is not cleared when clearing dynamic options while `tag` and `clearable` are enabled, closes [#7405](https://github.com/tusen-ai/naive-ui/issues/7405)
+- Fix `n-modal` event listeners not removed, closes [#7341](https://github.com/tusen-ai/naive-ui/issues/7341) by [@lu-han](https://github.com/lu-han)
+- Fix `n-marquee` component Non-function value encountered for default slot warning.
+- Fix `n-data-table`'s empty slot is not shown in a `display: flex` container.
 
 ## 2.43.2
 
@@ -83,6 +105,7 @@
 - `useModal` add `render` function, closes [#5857](https://github.com/tusen-ai/naive-ui/issues/5857).
 - `n-card` add `close-focusable` prop.
 - `n-dialog` add `close-focusable` prop.
+- `n-form-item` adds `invalidateLabelWidth` method，`n-form` adds `invalidateLabelWidths` method，closes [#5939](https://github.com/tusen-ai/naive-ui/issues/5939)
 
 ## 2.42.0
 

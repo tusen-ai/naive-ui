@@ -16,9 +16,11 @@ import type { ButtonGroupTheme } from '../../button-group/styles/light'
 import type { Size as ButtonSize } from '../../button/src/interface'
 import type { ButtonTheme } from '../../button/styles'
 import type { CalendarTheme } from '../../calendar/styles'
+import type { CardSize } from '../../card/src/public-types'
 import type { CardTheme } from '../../card/styles'
 import type { CarouselTheme } from '../../carousel/styles'
 import type { CascaderTheme } from '../../cascader/styles'
+import type { CheckboxSize } from '../../checkbox/src/public-types'
 import type { CheckboxTheme } from '../../checkbox/styles'
 import type { CodeTheme } from '../../code/styles'
 import type { CollapseTransitionTheme } from '../../collapse-transition/styles'
@@ -28,15 +30,19 @@ import type {
   DataTableRenderFilter,
   DataTableRenderSorter
 } from '../../data-table'
+import type { DataTableSize } from '../../data-table/src/public-types'
 import type { DataTableTheme } from '../../data-table/styles'
 import type { DatePickerTheme } from '../../date-picker/styles'
+import type { DescriptionsSize } from '../../descriptions/src/public-types'
 import type { DescriptionsTheme } from '../../descriptions/styles'
 import type { IconPlacement } from '../../dialog/src/interface'
 import type { DialogTheme } from '../../dialog/styles'
 import type { DividerTheme } from '../../divider/styles'
 import type { DrawerTheme } from '../../drawer/styles'
+import type { DropdownSize } from '../../dropdown/src/public-types'
 import type { DropdownTheme } from '../../dropdown/styles'
 import type { DynamicInputTheme } from '../../dynamic-input/styles'
+import type { DynamicTagsSize } from '../../dynamic-tags/src/public-types'
 import type { DynamicTagsTheme } from '../../dynamic-tags/styles'
 import type { ElementTheme } from '../../element/styles'
 import type { EllipsisTheme } from '../../ellipsis/styles'
@@ -46,6 +52,7 @@ import type { EquationTheme } from '../../equation/styles'
 import type { FlexTheme } from '../../flex/styles'
 import type { FloatButtonGroupTheme } from '../../float-button-group/styles'
 import type { FloatButtonTheme } from '../../float-button/styles'
+import type { Size as FormSize } from '../../form/src/interface'
 import type { FormTheme } from '../../form/styles'
 import type { GradientTextTheme } from '../../gradient-text/styles'
 import type { HeatmapTheme } from '../../heatmap/styles'
@@ -70,27 +77,38 @@ import type { MessageTheme } from '../../message/styles'
 import type { ModalTheme } from '../../modal/styles'
 import type { NotificationTheme } from '../../notification/styles'
 import type { PageHeaderTheme } from '../../page-header/styles'
+import type { Size as PaginationSize } from '../../pagination/src/interface'
 import type { PaginationTheme } from '../../pagination/styles'
 import type { PopconfirmTheme } from '../../popconfirm/styles'
 import type { PopoverTheme } from '../../popover/styles'
+import type { PopselectSize } from '../../popselect/src/interface'
 import type { PopselectTheme } from '../../popselect/styles'
 import type { ProgressTheme } from '../../progress/styles'
 import type { QrCodeTheme } from '../../qr-code/styles'
+import type { RadioSize } from '../../radio/src/public-types'
 import type { RadioTheme } from '../../radio/styles'
+import type { RateSize } from '../../rate/src/public-types'
 import type { RateTheme } from '../../rate/styles'
+import type { ResultSize } from '../../result/src/public-types'
 import type { ResultTheme } from '../../result/styles'
 import type { Size as SelectSize } from '../../select/src/interface'
 import type { SelectTheme } from '../../select/styles'
+import type { SkeletonSize } from '../../skeleton/src/public-types'
 import type { SkeletonTheme } from '../../skeleton/styles'
 import type { SliderTheme } from '../../slider/styles'
+import type { SpaceSize } from '../../space/src/public-types'
 import type { SpaceTheme } from '../../space/styles'
 import type { SpinTheme } from '../../spin/styles'
 import type { SplitTheme } from '../../split/styles'
 import type { StatisticTheme } from '../../statistic/styles'
 import type { StepsTheme } from '../../steps/styles'
+import type { SwitchSize } from '../../switch/src/public-types'
 import type { SwitchTheme } from '../../switch/styles'
+import type { TableSize } from '../../table/src/public-types'
 import type { TableTheme } from '../../table/styles'
+import type { TabsSize } from '../../tabs/src/public-types'
 import type { TabsTheme } from '../../tabs/styles'
+import type { TagSize } from '../../tag/src/public-types'
 import type { TagTheme } from '../../tag/styles'
 import type { ThingTheme } from '../../thing/styles'
 import type { Size as TimePickerSize } from '../../time-picker/src/interface'
@@ -149,6 +167,7 @@ export interface GlobalThemeWithoutCommon {
   Image?: ImageTheme
   Input?: InputTheme
   InputNumber?: InputNumberTheme
+  InputOtp?: InputOtpTheme
   Layout?: LayoutTheme
   LegacyTransfer?: LegacyTransferTheme
   List?: ListTheme
@@ -198,11 +217,23 @@ export interface GlobalThemeWithoutCommon {
   // internal
   InternalSelectMenu?: InternalSelectMenuTheme
   InternalSelection?: InternalSelectionTheme
-  InputOtp?: InputOtpTheme
 }
 
 export interface GlobalComponentConfig {
+  Cascader?: {
+    renderEmpty?: () => VNodeChild
+  }
+  Button?: {
+    size?: ButtonSize
+  }
+  Card?: {
+    size?: CardSize
+  }
+  Checkbox?: {
+    size?: CheckboxSize
+  }
   Pagination?: {
+    size?: PaginationSize
     inputSize?: InputSize
     selectSize?: SelectSize
   }
@@ -213,13 +244,72 @@ export interface GlobalComponentConfig {
     iconPlacement?: IconPlacement
   }
   DataTable?: {
+    size?: DataTableSize
     renderFilter?: DataTableRenderFilter
     renderSorter?: DataTableRenderSorter
+    renderEmpty?: () => VNodeChild
+  }
+  Descriptions?: {
+    size?: DescriptionsSize
+  }
+  Dropdown?: {
+    size?: DropdownSize
   }
   DynamicInput?: {
     buttonSize?: ButtonSize
   }
+  DynamicTags?: {
+    size?: DynamicTagsSize
+  }
   Empty?: Pick<EmptyProps, 'description' | 'renderIcon'>
+  Form?: {
+    size?: FormSize
+  }
+  Input?: {
+    size?: InputSize
+  }
+  Select?: {
+    renderEmpty?: () => VNodeChild
+  }
+  Popselect?: {
+    size?: PopselectSize
+  }
+  Radio?: {
+    size?: RadioSize
+  }
+  Rate?: {
+    size?: RateSize
+  }
+  Result?: {
+    size?: ResultSize
+  }
+  Skeleton?: {
+    size?: SkeletonSize
+  }
+  Space?: {
+    size?: SpaceSize
+  }
+  Switch?: {
+    size?: SwitchSize
+  }
+  Table?: {
+    size?: TableSize
+  }
+  Tabs?: {
+    size?: TabsSize
+  }
+  Tag?: {
+    size?: TagSize
+  }
+  Transfer?: {
+    renderEmpty?: () => VNodeChild
+  }
+  Tree?: {
+    renderEmpty?: () => VNodeChild
+  }
+  TreeSelect?: {
+    renderEmpty?: () => VNodeChild
+  }
 }
 
 export interface GlobalIconConfig {

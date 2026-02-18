@@ -361,8 +361,12 @@ export default defineComponent({
         }
       })
     }
-    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
-      = useConfig(props)
+    const {
+      mergedClsPrefixRef,
+      inlineThemeDisabled,
+      mergedRtlRef,
+      mergedComponentPropsRef
+    } = useConfig(props)
     const rtlEnabledRef = useRtl('Tree', mergedRtlRef, mergedClsPrefixRef)
     const themeRef = useTheme(
       'Tree',
@@ -372,6 +376,9 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const mergedRenderEmptyRef = computed(() => {
+      return mergedComponentPropsRef?.value?.Tree?.renderEmpty
+    })
     const selfElRef = ref<HTMLDivElement | null>(null)
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const virtualListInstRef = ref<VirtualListInst | null>(null)
@@ -1712,6 +1719,7 @@ export default defineComponent({
       ...exposedMethods,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
+      mergedRenderEmpty: mergedRenderEmptyRef,
       rtlEnabled: rtlEnabledRef,
       fNodes: mergedFNodesRef,
       aip: aipRef,
@@ -1797,13 +1805,17 @@ export default defineComponent({
             default: () => {
               this.onRender?.()
               return !fNodes.length ? (
-                resolveSlot(this.$slots.empty, () => [
-                  <NEmpty
-                    class={`${mergedClsPrefix}-tree__empty`}
-                    theme={this.mergedTheme.peers.Empty}
-                    themeOverrides={this.mergedTheme.peerOverrides.Empty}
-                  />
-                ])
+                resolveSlot(this.$slots.empty, () => {
+                  return [
+                    this.mergedRenderEmpty?.() || (
+                      <NEmpty
+                        class={`${mergedClsPrefix}-tree__empty`}
+                        theme={this.mergedTheme.peers.Empty}
+                        themeOverrides={this.mergedTheme.peerOverrides.Empty}
+                      />
+                    )
+                  ]
+                })
               ) : (
                 <VVirtualList
                   ref="virtualListInstRef"
@@ -1875,13 +1887,17 @@ export default defineComponent({
           onDragleave={draggable ? this.handleDragLeaveTree : undefined}
         >
           {!fNodes.length
-            ? resolveSlot(this.$slots.empty, () => [
-                <NEmpty
-                  class={`${mergedClsPrefix}-tree__empty`}
-                  theme={this.mergedTheme.peers.Empty}
-                  themeOverrides={this.mergedTheme.peerOverrides.Empty}
-                />
-              ])
+            ? resolveSlot(this.$slots.empty, () => {
+                return [
+                  this.mergedRenderEmpty?.() || (
+                    <NEmpty
+                      class={`${mergedClsPrefix}-tree__empty`}
+                      theme={this.mergedTheme.peers.Empty}
+                      themeOverrides={this.mergedTheme.peerOverrides.Empty}
+                    />
+                  )
+                ]
+              })
             : fNodes.map(createNode)}
         </div>
       )

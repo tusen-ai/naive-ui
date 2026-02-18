@@ -31,6 +31,7 @@ focus.vue
 status.vue
 icon.vue
 panel.vue
+close-panel-on-select.vue
 ```
 
 ## API
@@ -82,6 +83,8 @@ panel.vue
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now'> \| null` | `['clear', 'now']` | Operations supported for the `date` type date picker. |  |
 | default-calendar-start-time | `number` | `undefined` | Default panel calendar start month timestamp. | 2.38.1 |
+| fast-year-select | `boolean` | `false` | Close year and month panel after selecting year. | NEXT_VERSION |
+| fast-month-select | `boolean` | `false` | Close year and month panel after selecting month. | NEXT_VERSION |
 | format | `string` | `'yyyy-MM-dd'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `() => false` | Validator of the date. | `detail` 2.37.1 |
 | placeholder | `string` | `'Select Date'` | Placeholder. |  |
@@ -95,6 +98,8 @@ panel.vue
 | actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now', 'confirm']` | Operations supported for the `datetime` type date picker. |  |
 | default-calendar-start-time | `number` | `undefined` | Default panel calendar start month timestamp. | 2.38.1 |
 | default-time | `string \| (timestamp: number) => string` | `undefined` | Default time of the selected date. Can accept a function with a timestamp argument that returns a formatted string. It's format is `HH:mm:ss`. | 2.22.0, functional since 2.43.2 |
+| fast-year-select | `boolean` | `false` | Close year and month panel after selecting year. | NEXT_VERSION |
+| fast-month-select | `boolean` | `false` | Close year and month panel after selecting month. | NEXT_VERSION |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `() => false` | Validator of the date. | `detail` 2.37.1 |
 | is-time-disabled | `(current: number) => { isHourDisabled?: () => boolean, isMinuteDisabled?: () => boolean, isSecondDisabled?: () => boolean }` | `undefined` | Validator of the time. |  |
@@ -113,6 +118,8 @@ panel.vue
 | default-calendar-start-time | `number` | `undefined` | Default panel calendar start month timestamp. | 2.28.3 |
 | default-calendar-end-time | `number` | `undefined` | Default panel calendar end month timestamp. | 2.28.3 |
 | end-placeholder | `string` | `'End Date'` | Placeholder at end part of the input. |  |
+| fast-year-select | `boolean` | `false` | Close year and month panel after selecting year. | NEXT_VERSION |
+| fast-month-select | `boolean` | `false` | Close year and month panel after selecting month. | NEXT_VERSION |
 | format | `string` | `'yyyy-MM-dd'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. | `detail` 2.37.1 |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: (hour: number) => boolean, isMinuteDisabled?: (minute: number, hour: number \| null) => boolean, isSecondDisabled?: (second: number, minute: number \| null, hour: number \| null) => boolean }` | `undefined` | Validator of the time. `null` in validators means value of picker is empty. |  |
@@ -133,6 +140,8 @@ panel.vue
 | default-calendar-end-time | `number` | `undefined` | Default panel calendar end month timestamp. | 2.28.3 |
 | default-time | `string \| Array<string \| undefined> \| (timestamp: number, position: "start" \| "end", value: [number, number] \| null) => string` | `undefined` | Default time of the selected date. Can accept a function with timestamp, position and value arguments that returns a formatted string. It's format is `HH:mm:ss`. | 2.22.0, functional since 2.43.2 |
 | end-placeholder | `string` | `'End Date and Time'` | Placeholder at end part of the input. |  |
+| fast-year-select | `boolean` | `false` | Close year and month panel after selecting year. | NEXT_VERSION |
+| fast-month-select | `boolean` | `false` | Close year and month panel after selecting month. | NEXT_VERSION |
 | format | `string` | `'yyyy-MM-dd HH:mm:ss'` | Format of the input. For detail please see [format](https://date-fns.org/v2.23.0/docs/format). |  |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | Validator of the date. |  |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: (hour: number) => boolean, isMinuteDisabled?: (minute: number, hour: number \| null) => boolean, isSecondDisabled?: (second: number, minute: number \| null, hour: number \| null) => boolean }` | `undefined` | Validator of the time. `null` in validators means value of picker is empty. |  |

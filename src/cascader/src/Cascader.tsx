@@ -8,10 +8,7 @@ import type {
   VNodeChild
 } from 'vue'
 import type { FollowerInst, FollowerPlacement } from 'vueuc'
-import type {
-  BaseLoadingExposedProps,
-  InternalSelectionInst
-} from '../../_internal'
+import type { BaseLoadingExposedProps, InternalSelectionInst, ScrollbarProps } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/public-types'
@@ -188,6 +185,7 @@ export const cascaderProps = {
       node: VNode | null
     }) => VNodeChild
   >,
+  scrollbarProps: Object as PropType<ScrollbarProps>,
   // deprecated
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
@@ -960,6 +958,7 @@ export default defineComponent({
       closeMenu,
       handleSelectMenuClickOutside,
       handleCascaderMenuClickOutside,
+      scrollbarPropsRef: toRef(props, 'scrollbarProps'),
       clearPattern
     })
     const exposedMethods: CascaderInst = {

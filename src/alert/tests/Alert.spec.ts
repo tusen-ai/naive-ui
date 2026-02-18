@@ -130,11 +130,24 @@ describe('n-alert', () => {
   it('should trigger callback when closed', async () => {
     const handleCloseClick = vi.fn()
     const handleOnAfterLeave = vi.fn()
+    // https://github.com/vuejs/test-utils/issues/1912#issuecomment-1351054542
+    const rafSpy = vi
+      .spyOn(window, 'requestAnimationFrame')
+      .mockImplementation((cb: FrameRequestCallback): number => {
+        cb(0)
+        return 0
+      })
     const wrapper = mount(NAlert, {
       props: {
         closable: true,
         onClose: handleCloseClick,
         onAfterLeave: handleOnAfterLeave
+      },
+      global: {
+        stubs: {
+          Transition: false,
+          TransitionGroup: false
+        }
       }
     })
     const closeBtn = wrapper.find('.n-base-close.n-alert__close')
@@ -144,10 +157,9 @@ describe('n-alert', () => {
     expect(wrapper.emitted()).toHaveProperty('click')
 
     expect(handleCloseClick).toHaveBeenCalled()
+    expect(handleOnAfterLeave).toHaveBeenCalled()
 
-    vi.waitFor(() => {
-      expect(handleOnAfterLeave).toHaveBeenCalled()
-    })
     wrapper.unmount()
+    rafSpy.mockRestore()
   })
 })

@@ -1,6 +1,6 @@
 import type { CheckStrategy, TreeNode } from 'treemate'
 import type { CSSProperties, Ref, Slots, VNode, VNodeChild } from 'vue'
-import type { BaseLoadingExposedProps } from '../../_internal'
+import type { BaseLoadingExposedProps, ScrollbarProps } from '../../_internal'
 import type { MergedTheme } from '../../_mixins'
 import type { NLocale } from '../../locales'
 import type { CascaderTheme } from '../styles'
@@ -114,6 +114,7 @@ export interface CascaderInjection {
     ((option: CascaderOption, checked: boolean) => VNodeChild) | undefined
   >
   spinPropsRef: Ref<BaseLoadingExposedProps | undefined>
+  scrollbarPropsRef: Ref<ScrollbarProps | undefined>
   clearPattern: () => void
 }
 
