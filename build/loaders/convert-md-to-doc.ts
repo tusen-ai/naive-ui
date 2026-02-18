@@ -1,80 +1,50 @@
-import type { Token, Tokens } from 'marked'
-import path from 'node:path'
-import fse from 'fs-extra'
-import camelCase from 'lodash/camelCase'
-import { marked } from 'marked'
-import { createRenderer } from './md-renderer'
-import projectPath from './project-path'
+import type { Heading, Root } from 'mdast'
+import type { ComponentInfo } from '../markdown/plugins/remark-extract-components'
+import type { DemoInfo } from '../markdown/plugins/remark-extract-demos'
+import { toString } from 'mdast-util-to-string'
+import rehypeStringify from 'rehype-stringify'
+import remarkRehype from 'remark-rehype'
+import { createHandlers } from '../markdown/handlers'
+import { createBaseProcessor } from '../markdown/parser'
+import { remarkDocHeader } from '../markdown/plugins/remark-doc-header'
+import { remarkExtractComponents } from '../markdown/plugins/remark-extract-components'
+import { remarkExtractDemos } from '../markdown/plugins/remark-extract-demos'
 
-const mdRenderer = createRenderer()
-
-interface DemoInfo {
+export interface AnchorInfo {
   id: string
   title: string
   debug: boolean
-  variable?: string
-  fileName?: string
-  tag?: string
 }
 
-interface ComponentInfo {
-  ids: string[]
-  importStmt: string
-}
+/**
+ * Inline remark plugin that captures heading data from the mdast tree
+ * before remarkRehype converts it to hast. This data is needed for
+ * generating anchor navigation in the final Vue SFC.
+ */
+function remarkCaptureAnchors() {
+  return (tree: Root, file: any) => {
+    const nodes = tree.children
+    const h2Anchors: AnchorInfo[] = nodes
+      .filter(
+        (node): node is Heading => node.type === 'heading' && node.depth === 2
+      )
+      .map((node) => {
+        const title = toString(node)
+        return { id: title.replace(/ /g, '-'), title, debug: false }
+      })
 
-async function resolveDemoTitle(
-  fileName: string,
-  demoEntryPath: string
-): Promise<string> {
-  const demoStr = await fse.readFile(
-    path.resolve(projectPath, demoEntryPath, '..', fileName),
-    'utf-8'
-  )
-  const match = demoStr.match(/# ([^\n]+)/)
-  if (!match)
-    throw new Error('No demo title found')
-  return match[1]
-}
+    const h3Anchors: AnchorInfo[] = nodes
+      .filter(
+        (node): node is Heading => node.type === 'heading' && node.depth === 3
+      )
+      .map((node) => {
+        const title = toString(node)
+        return { id: title.replace(/ /g, '-'), title, debug: false }
+      })
 
-async function resolveDemoInfos(
-  literal: string,
-  url: string,
-  env: string
-): Promise<DemoInfo[]> {
-  const ids = literal
-    .split('\n')
-    .map(line => line.trim())
-    .filter(id => id.length)
-  const infos: DemoInfo[] = []
-  for (const id of ids) {
-    const debug = id.includes('debug') || id.includes('Debug')
-    if (env === 'production' && debug) {
-      continue
-    }
-    let fileName
-    if (id.includes('.vue')) {
-      fileName = `${id.slice(0, -4)}.demo.vue`
-    }
-    else {
-      fileName = `${id}.demo.md`
-    }
-    const variable = `${camelCase(id)}Demo`
-    infos.push({
-      id,
-      variable,
-      fileName,
-      title: await resolveDemoTitle(fileName, url),
-      tag: `<${variable} />`,
-      debug
-    })
+    file.data.h2Anchors = h2Anchors
+    file.data.h3Anchors = h3Anchors
   }
-  return infos
-}
-
-function genDemosTemplate(demoInfos: DemoInfo[], colSpan: number): string {
-  return `<component-demos :span="${colSpan}">${demoInfos
-    .map(({ tag }) => tag)
-    .join('\n')}</component-demos>`
 }
 
 function genAnchorTemplate(
@@ -97,39 +67,17 @@ function genAnchorTemplate(
   `
 }
 
-function genDemosApiAnchorTemplate(
-  tokens: Token[]
-): (DemoInfo | { id: string, title: string, debug: boolean })[] {
-  const api: DemoInfo[] = [
-    {
-      id: 'API',
-      title: 'API',
-      debug: false
-    }
-  ]
-  return api.concat(
-    tokens
-      .filter(
-        (token): token is Tokens.Heading =>
-          token.type === 'heading' && token.depth === 3
-      )
-      .map(token => ({
-        id: token.text.replace(/ /g, '-'),
-        title: token.text,
-        debug: false
-      }))
-  )
-}
-
 function genDemosAnchorTemplate(
   demoInfos: DemoInfo[],
   hasApi: boolean,
-  tokens: Token[]
+  h3Anchors: AnchorInfo[]
 ): string {
+  const apiAnchors: AnchorInfo[] = [
+    { id: 'API', title: 'API', debug: false },
+    ...h3Anchors
+  ]
   const links = (
-    hasApi
-      ? demoInfos.concat(genDemosApiAnchorTemplate(tokens) as DemoInfo[])
-      : demoInfos
+    hasApi ? demoInfos.concat(apiAnchors as DemoInfo[]) : demoInfos
   ).map(
     ({ id, title, debug }) => `<n-anchor-link
       v-if="(displayMode === 'debug') || ${!debug}"
@@ -142,16 +90,9 @@ function genDemosAnchorTemplate(
   })
 }
 
-function genPageAnchorTemplate(tokens: Token[]): string {
-  const titles = tokens
-    .filter(
-      (token): token is Tokens.Heading =>
-        token.type === 'heading' && token.depth === 2
-    )
-    .map(token => token.text)
-  const links = titles.map((title) => {
-    const href = title.replace(/ /g, '-')
-    return `<n-anchor-link title="${title}" href="#${href}"/>`
+function genPageAnchorTemplate(h2Anchors: AnchorInfo[]): string {
+  const links = h2Anchors.map(({ id, title }) => {
+    return `<n-anchor-link title="${title}" href="#${id}"/>`
   })
   return genAnchorTemplate(links.join('\n'), { ignoreGap: true })
 }
@@ -218,68 +159,28 @@ export async function convertMd2ComponentDocumentation(
   const forceShowAnchor = !!~text.search('<!--anchor:on-->')
   const colSpan = ~text.search('<!--single-column-->') ? 1 : 2
   const hasApi = !!~text.search('## API')
-  const tokens = marked.lexer(text)
-  // resolve external components
-  const componentsIndex = tokens.findIndex(
-    token =>
-      token.type === 'code' && (token as Tokens.Code).lang === 'component'
-  )
-  let components: ComponentInfo[] = []
-  if (~componentsIndex) {
-    const token = tokens[componentsIndex] as Tokens.Code
-    components = token.text
-      .split('\n')
-      .map((component) => {
-        const [ids, importStmt] = component.split(':')
-        if (!ids.trim())
-          throw new Error('No component id')
-        if (!importStmt.trim())
-          throw new Error('No component source url')
-        return {
-          ids: ids.split(',').map(id => id.trim()),
-          importStmt: importStmt.trim()
-        }
-      })
-      .filter(({ ids, importStmt }) => ids && importStmt)
-    tokens.splice(componentsIndex, 1)
-  }
-  // add edit on github button on title
-  const titleIndex = tokens.findIndex(
-    token => token.type === 'heading' && token.depth === 1
-  )
-  if (titleIndex > -1) {
-    const titleText = JSON.stringify(
-      (tokens[titleIndex] as Tokens.Heading).text
-    )
-    const btnTemplate = `<edit-on-github-header relative-url="${url}" text=${titleText}><\/edit-on-github-header>`
-    tokens.splice(titleIndex, 1, {
-      type: 'html',
-      pre: false,
-      text: btnTemplate
-    } as Tokens.HTML)
-  }
-  // resolve demos, debug demos are removed from production build
-  const demosIndex = tokens.findIndex(
-    token => token.type === 'code' && (token as Tokens.Code).lang === 'demo'
-  )
-  let demoInfos: DemoInfo[] = []
-  if (~demosIndex) {
-    demoInfos = await resolveDemoInfos(
-      (tokens[demosIndex] as Tokens.Code).text,
-      url,
-      env
-    )
-    tokens.splice(demosIndex, 1, {
-      type: 'html',
-      pre: false,
-      text: genDemosTemplate(demoInfos, colSpan)
-    } as any)
-  }
-  const docMainTemplate = marked.parser(tokens, {
-    gfm: true,
-    renderer: mdRenderer
-  })
-  // generate page
+
+  // Build the full unified pipeline
+  const processor = createBaseProcessor()
+    .use(remarkExtractComponents)
+    .use(remarkDocHeader)
+    .use(remarkExtractDemos, { env, colSpan })
+    .use(remarkCaptureAnchors)
+    .use(remarkRehype, { handlers: createHandlers(), allowDangerousHtml: true })
+    .use(rehypeStringify, { allowDangerousHtml: true })
+
+  const file = await processor.process({ value: text, data: { url } })
+
+  // Extract plugin data from vfile
+  const demoInfos: DemoInfo[] = (file.data.demoInfos as DemoInfo[]) || []
+  const components: ComponentInfo[]
+    = (file.data.components as ComponentInfo[]) || []
+  const h2Anchors: AnchorInfo[] = (file.data.h2Anchors as AnchorInfo[]) || []
+  const h3Anchors: AnchorInfo[] = (file.data.h3Anchors as AnchorInfo[]) || []
+
+  const docMainTemplate = String(file)
+
+  // Generate page template
   const docTemplate = `
 <template>
   <div
@@ -292,12 +193,12 @@ export async function convertMd2ComponentDocumentation(
     <div style="width: 192px;" v-if="showAnchor">
       ${
         demoInfos.length
-          ? genDemosAnchorTemplate(demoInfos, hasApi, tokens)
-          : genPageAnchorTemplate(tokens)
+          ? genDemosAnchorTemplate(demoInfos, hasApi, h3Anchors)
+          : genPageAnchorTemplate(h2Anchors)
       }
     </div>
   </div>
 </template>`
-  const docScript = await genScript(demoInfos, components, url, forceShowAnchor)
+  const docScript = genScript(demoInfos, components, url, forceShowAnchor)
   return `${docTemplate}\n\n${docScript}`
 }

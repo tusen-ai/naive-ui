@@ -1,11 +1,14 @@
-import type { Token } from 'marked'
+import type { Heading, Root } from 'mdast'
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
-import { marked } from 'marked'
+import { toString } from 'mdast-util-to-string'
+import rehypeStringify from 'rehype-stringify'
+import remarkRehype from 'remark-rehype'
+import { createHandlers } from '../markdown/handlers'
+import { createBaseProcessor } from '../markdown/parser'
 import { handleMergeCode } from '../utils/handle-merge-code'
-import { createRenderer } from './md-renderer'
 
 interface Parts {
   template?: string
@@ -36,8 +39,6 @@ interface ConvertVue2DemoOptions {
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-
-const mdRenderer = createRenderer()
 
 const __HTTP__ = process.env.NODE_ENV !== 'production' ? 'http' : 'https'
 
@@ -161,17 +162,28 @@ function getPartsOfDemo(text: string): Parts {
   const style = text.match(/<style>([\s\S]*?)<\/style>/)?.[1]
   const markdownText
     = text.match(/<markdown>([\s\S]*?)<\/markdown>/)?.[1]?.trim() ?? ''
-  const tokens = marked.lexer(markdownText)
-  const contentTokens: Token[] = []
+
+  // Extract title via remark plugin, then convert remaining content to HTML
   let title = ''
-  for (const token of tokens) {
-    if (token.type === 'heading' && token.depth === 1) {
-      title = token.text
-    }
-    else {
-      contentTokens.push(token)
+  function remarkExtractTitle() {
+    return (tree: Root) => {
+      tree.children = tree.children.filter((node) => {
+        if (node.type === 'heading' && (node as Heading).depth === 1) {
+          title = toString(node)
+          return false
+        }
+        return true
+      })
     }
   }
+
+  const processor = createBaseProcessor()
+    .use(remarkExtractTitle)
+    .use(remarkRehype, { handlers: createHandlers(), allowDangerousHtml: true })
+    .use(rehypeStringify, { allowDangerousHtml: true })
+
+  const content = String(processor.processSync(markdownText))
+
   const scriptAttributes
     = text.match(/<script([\s\S]*?)>[\s\S]*?<\/script>/)?.[1].trim() ?? ''
   const languageType = scriptAttributes?.includes('lang="ts"') ? 'ts' : 'js'
@@ -183,9 +195,7 @@ function getPartsOfDemo(text: string): Parts {
     script,
     style,
     title,
-    content: marked.parser(contentTokens, {
-      renderer: mdRenderer
-    }),
+    content,
     language: languageType,
     api: apiType
   }
