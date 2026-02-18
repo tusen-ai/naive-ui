@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, PropType, VNodeChild } from 'vue'
-import type { BaseLoadingExposedProps } from '../../_internal'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type { MessageSpinProps } from './public-types'
 import type { MessageType } from './types'
 
 export const messageProps = {
@@ -18,7 +18,7 @@ export const messageProps = {
   },
   closable: Boolean,
   keepAliveOnHover: Boolean,
-  spinProps: { type: Object as PropType<BaseLoadingExposedProps> },
+  spinProps: Object as PropType<MessageSpinProps>,
   onClose: Function as PropType<() => void>,
   onMouseenter: Function as PropType<(e: MouseEvent) => void>,
   onMouseleave: Function as PropType<(e: MouseEvent) => void>

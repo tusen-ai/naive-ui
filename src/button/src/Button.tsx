@@ -7,11 +7,12 @@ import type {
   VNode,
   VNodeChild
 } from 'vue'
-import type { BaseLoadingExposedProps, BaseWaveRef } from '../../_internal'
+import type { BaseWaveRef } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { ButtonTheme } from '../styles'
 import type { Size, Type } from './interface'
+import type { ButtonSpinProps } from './public-types'
 import { changeColor } from 'seemly'
 import { useMemo } from 'vooks'
 import { computed, defineComponent, h, inject, ref, watchEffect } from 'vue'
@@ -88,7 +89,7 @@ export const buttonProps = {
     type: Boolean,
     default: !isSafari
   },
-  spinProps: { type: Object as PropType<BaseLoadingExposedProps> }
+  spinProps: Object as PropType<ButtonSpinProps>
 } as const
 
 export type ButtonProps = ExtractPublicPropTypes<typeof buttonProps>

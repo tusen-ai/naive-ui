@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import type { BaseLoadingExposedProps } from '../../_internal'
+import type { LogSpinProps } from './public-types'
 import { defineComponent, h } from 'vue'
 import { NBaseLoading } from '../../_internal'
 import { useLocale } from '../../_mixins'
@@ -11,7 +11,7 @@ export default defineComponent({
       type: String,
       required: true
     },
-    spinProps: { type: Object as PropType<BaseLoadingExposedProps> }
+    spinProps: Object as PropType<LogSpinProps>
   },
   setup() {
     return {

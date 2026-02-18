@@ -9,7 +9,6 @@ import type {
   VNodeChild
 } from 'vue'
 import type { VirtualListInst } from 'vueuc'
-import type { BaseLoadingExposedProps } from '../../_internal'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { EllipsisProps } from '../../ellipsis/src/Ellipsis'
@@ -21,7 +20,8 @@ import type { DataTableTheme } from '../styles'
 import type {
   DataTableGetCsvCell,
   DataTableGetCsvHeader,
-  DataTableSize
+  DataTableSize,
+  DataTableSpinProps
 } from './public-types'
 import type { ColItem, RowItem } from './use-group-header'
 import { useTheme } from '../../_mixins'
@@ -133,7 +133,7 @@ export const dataTableProps = {
     (value: any, rowData: object, column: TableBaseColumn) => VNodeChild
   >,
   renderExpandIcon: Function as PropType<RenderExpandIcon>,
-  spinProps: { type: Object as PropType<BaseLoadingExposedProps>, default: {} },
+  spinProps: Object as PropType<DataTableSpinProps>,
   getCsvCell: Function as PropType<DataTableGetCsvCell>,
   getCsvHeader: Function as PropType<DataTableGetCsvHeader>,
   onLoad: Function as PropType<DataTableOnLoad>,

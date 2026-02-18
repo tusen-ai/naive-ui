@@ -1,2 +1,2 @@
 export { default } from './src/Loading'
-export type { BaseLoadingExposedProps } from './src/Loading'
+export type { SharedSpinProps } from './src/Loading'

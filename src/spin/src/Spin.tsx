@@ -6,6 +6,7 @@ import { pxfy } from 'seemly'
 import { useCompitable } from 'vooks'
 import { computed, defineComponent, h, ref, Transition, watchEffect } from 'vue'
 import { NBaseLoading } from '../../_internal'
+import { exposedLoadingProps } from '../../_internal/loading/src/Loading'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { createKey, warnOnce } from '../../_utils'
 import { spinLight } from '../styles'
@@ -22,7 +23,6 @@ export const spinProps = {
   contentClass: String,
   contentStyle: [Object, String] as PropType<CSSProperties | string>,
   description: String,
-  stroke: String,
   size: {
     type: [String, Number] as PropType<'small' | 'medium' | 'large' | number>,
     default: 'medium'
@@ -31,7 +31,6 @@ export const spinProps = {
     type: Boolean,
     default: true
   },
-  strokeWidth: Number,
   rotate: {
     type: Boolean,
     default: true
@@ -43,7 +42,8 @@ export const spinProps = {
     },
     default: undefined
   },
-  delay: Number
+  delay: Number,
+  ...exposedLoadingProps
 }
 
 export type SpinProps = ExtractPublicPropTypes<typeof spinProps>
@@ -172,6 +172,8 @@ export default defineComponent({
           style={$slots.default ? '' : (this.cssVars as CSSProperties)}
           stroke={this.stroke}
           stroke-width={this.mergedStrokeWidth}
+          radius={this.radius}
+          scale={this.scale}
           class={`${mergedClsPrefix}-spin`}
         />
         {descriptionNode}

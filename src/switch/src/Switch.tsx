@@ -1,10 +1,9 @@
 import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
-import type { BaseLoadingExposedProps } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { SwitchTheme } from '../styles'
 import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
-import type { SwitchSize } from './public-types'
+import type { SwitchSize, SwitchSpinProps } from './public-types'
 import { depx, pxfy } from 'seemly'
 import { useMergedState } from 'vooks'
 import { computed, defineComponent, h, ref, toRef, watchEffect } from 'vue'
@@ -59,7 +58,7 @@ export const switchProps = {
     type: Boolean,
     default: true
   },
-  spinProps: { type: Object as PropType<BaseLoadingExposedProps> },
+  spinProps: Object as PropType<SwitchSpinProps>,
   /** @deprecated */
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const

@@ -1,3 +1,4 @@
+import type { SharedSpinProps } from '../../_internal'
 import type { TableBaseColumn } from './interface'
 
 export type DataTableGetCsvCell = (
@@ -7,3 +8,4 @@ export type DataTableGetCsvCell = (
 ) => string
 export type DataTableGetCsvHeader = (column: TableBaseColumn) => string
 export type DataTableSize = 'small' | 'medium' | 'large'
+export type DataTableSpinProps = SharedSpinProps

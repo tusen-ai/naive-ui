@@ -26,6 +26,8 @@ blocking-debug.vue
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Spin 的尺寸 |
 | show | `boolean` | `true` | 在填入内容的情况下 Spin 是否激活，直接使用 Spin 时不生效 |
 | stroke-width | `number` | `undefined` | Spin 边缘的相对宽度，假定 Spin 的外侧半径是 100 |
+| radius | `number` | `100` | Spin 图标的外侧半径 | NEXT_VERSION |
+| scale | `number` | `1` | Spin 图标的缩放比例 | NEXT_VERSION |
 | stroke | `string` | `undefined` | Spin 的颜色 |
 | delay | `number` | `undefined` | 延迟显示加载效果的时间, 单位为毫秒（避免闪烁） |
 

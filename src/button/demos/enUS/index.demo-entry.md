@@ -45,7 +45,7 @@ popover.vue
 | keyboard | `boolean` | `true` | Whether is supports keyboard operation. |  |
 | quaternary | `boolean` | `false` | Whether the button is quaternary button. |  |
 | loading | `boolean` | `false` | Whether the button shows the loading status. |  |
-| spin-props | `{ strokeWidth?: number, stroke?: string, scale?: number, radius?: number }` | `undefined` | Loading icon properties | NEXT_VERSION |
+| spin-props | `{ strokeWidth?: number, stroke?: string, scale?: number, radius?: number }` | `undefined` | Loading icon properties. | NEXT_VERSION |
 | render-icon | `() => VNodeChild` | `undefined` | Render function that renders button icon. | 2.34.0 |
 | round | `boolean` | `false` | Whether the button shows rounded corners. |  |
 | secondary | `boolean` | `false` | Whether the button is secondary button. |  |

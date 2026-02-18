@@ -25,6 +25,8 @@ delay.vue
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Size of the spin. |
 | show | `boolean` | `true` | Specify whether spin is active when spin has content inside. It won't work if you just use spin itself. |
 | stroke-width | `number` | `undefined` | Relative width of spin's stroke, assuming the outer radius of spin is 100. |
+| radius | `number` | `100` | Outer radius of the spin icon. | NEXT_VERSION |
+| scale | `number` | `1` | Scale factor of the spin icon. | NEXT_VERSION |
 | stroke | `string` | `undefined` | Color of the spin. |
 | delay | `number` | `undefined` | Specifies a delay in milliseconds for loading state (prevent flush). |
 

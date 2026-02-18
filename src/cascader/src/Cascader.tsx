@@ -8,7 +8,7 @@ import type {
   VNodeChild
 } from 'vue'
 import type { FollowerInst, FollowerPlacement } from 'vueuc'
-import type { BaseLoadingExposedProps, InternalSelectionInst, ScrollbarProps } from '../../_internal'
+import type { InternalSelectionInst, ScrollbarProps } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/public-types'
@@ -28,6 +28,7 @@ import type {
   SelectMenuInstance,
   Value
 } from './interface'
+import type { CascaderSpinProps } from './public-types'
 import { changeColor, depx, getPreciseEventTarget, happensIn } from 'seemly'
 import { createTreeMate, SubtreeNotLoadedError } from 'treemate'
 import { useIsMounted, useMergedState } from 'vooks'
@@ -168,9 +169,7 @@ export const cascaderProps = {
   getColumnStyle: Function as PropType<
     (detail: { level: number }) => string | CSSProperties
   >,
-  spinProps: {
-    type: Object as PropType<BaseLoadingExposedProps>
-  },
+  spinProps: Object as PropType<CascaderSpinProps>,
   renderPrefix: Function as PropType<
     (props: {
       option: CascaderOption

@@ -8,6 +8,7 @@ export type {
   MessageProviderProps,
   MessageReactive
 } from './src/MessageProvider'
+export type * from './src/public-types'
 export type {
   MessageOptions,
   MessageRenderMessage,

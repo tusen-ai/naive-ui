@@ -26,6 +26,7 @@
 - `n-message` 增加 `spin-props` 属性
 - `n-switch` 增加 `spin-props` 属性
 - `n-tree` 增加 `spin-props` 属性
+- `n-spin` 增加 `radius` 和 `scale` 属性
 
 ### Fixes
 

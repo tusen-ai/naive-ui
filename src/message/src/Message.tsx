@@ -1,6 +1,6 @@
 import type { CSSProperties, PropType, VNodeChild } from 'vue'
 /* eslint-disable no-cond-assign */
-import type { BaseLoadingExposedProps } from '../../_internal'
+import type { MessageSpinProps } from './public-types'
 import type { MessageRenderMessage, MessageType } from './types'
 import { computed, defineComponent, h, inject } from 'vue'
 import {
@@ -211,7 +211,7 @@ function createIconVNode(
   icon: undefined | (() => VNodeChild),
   type: MessageType,
   clsPrefix: string,
-  spinProps?: BaseLoadingExposedProps
+  spinProps: MessageSpinProps | undefined
 ): VNodeChild {
   if (typeof icon === 'function') {
     return icon()
