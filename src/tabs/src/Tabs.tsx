@@ -76,6 +76,10 @@ export const tabsProps = {
     default: 'bar'
   },
   closable: Boolean,
+  closeTrigger: {
+    type: String as PropType<'hover' | 'none'>,
+    default: 'none'
+  },
   justifyContent: String as PropType<
     | 'space-between'
     | 'space-around'
@@ -650,6 +654,7 @@ export default defineComponent({
       mergedClsPrefixRef,
       typeRef: toRef(props, 'type'),
       closableRef: toRef(props, 'closable'),
+      closeTriggerRef: toRef(props, 'closeTrigger'),
       valueRef: mergedValueRef,
       tabChangeIdRef,
       onBeforeLeaveRef: toRef(props, 'onBeforeLeave'),
@@ -733,6 +738,7 @@ export default defineComponent({
           [createKey('tabPaddingVertical', sizeType)]: tabPaddingVertical,
           [createKey('tabGap', sizeType)]: tabGap,
           [createKey('tabGap', `${sizeType}Vertical`)]: tabGapVertical,
+          [createKey('tabLabelOffset', `${size}Card`)]: tabCardLabelOffset,
           [createKey('tabTextColor', type)]: tabTextColor,
           [createKey('tabTextColorActive', type)]: tabTextColorActive,
           [createKey('tabTextColorHover', type)]: tabTextColorHover,
@@ -773,7 +779,8 @@ export default defineComponent({
         '--n-pane-padding-top': getPadding(panePadding, 'top'),
         '--n-pane-padding-bottom': getPadding(panePadding, 'bottom'),
         '--n-font-weight-strong': fontWeightStrong,
-        '--n-tab-color-segment': tabColorSegment
+        '--n-tab-color-segment': tabColorSegment,
+        '--n-tab-label-offset': tabCardLabelOffset
       }
     })
 
