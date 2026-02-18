@@ -1,5 +1,6 @@
 import type { CSSProperties, PropType, VNodeChild } from 'vue'
 /* eslint-disable no-cond-assign */
+import type { BaseLoadingExposedProps } from '../../_internal'
 import type { MessageRenderMessage, MessageType } from './types'
 import { computed, defineComponent, h, inject } from 'vue'
 import {
@@ -172,8 +173,12 @@ export default defineComponent({
               this.rtlEnabled && `${mergedClsPrefix}-message--rtl`
             ]}
           >
-            {(iconNode = createIconVNode(icon, type, mergedClsPrefix))
-              && showIcon ? (
+            {(iconNode = createIconVNode(
+              icon,
+              type,
+              mergedClsPrefix,
+              this.spinProps
+            )) && showIcon ? (
                   <div
                     class={`${mergedClsPrefix}-message__icon ${mergedClsPrefix}-message__icon--${type}-type`}
                   >
@@ -205,7 +210,8 @@ export default defineComponent({
 function createIconVNode(
   icon: undefined | (() => VNodeChild),
   type: MessageType,
-  clsPrefix: string
+  clsPrefix: string,
+  spinProps?: BaseLoadingExposedProps
 ): VNodeChild {
   if (typeof icon === 'function') {
     return icon()
@@ -213,7 +219,12 @@ function createIconVNode(
   else {
     const innerIcon
       = type === 'loading' ? (
-        <NBaseLoading clsPrefix={clsPrefix} strokeWidth={24} scale={0.85} />
+        <NBaseLoading
+          clsPrefix={clsPrefix}
+          strokeWidth={24}
+          scale={0.85}
+          {...spinProps}
+        />
       ) : (
         iconRenderMap[type]()
       )

@@ -14,6 +14,14 @@ const exposedLoadingProps = {
   stroke: {
     type: String,
     default: undefined
+  },
+  scale: {
+    type: Number,
+    default: 1
+  },
+  radius: {
+    type: Number,
+    default: 100
   }
 }
 
@@ -31,14 +39,6 @@ export default defineComponent({
     show: {
       type: Boolean,
       default: true
-    },
-    scale: {
-      type: Number,
-      default: 1
-    },
-    radius: {
-      type: Number,
-      default: 100
     },
     ...exposedLoadingProps
   },

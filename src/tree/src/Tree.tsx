@@ -1,7 +1,7 @@
 import type { CheckStrategy, TreeMateOptions } from 'treemate'
 import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
 import type { VirtualListInst, VirtualListScrollToOptions } from 'vueuc'
-import type { ScrollbarInst } from '../../_internal'
+import type { BaseLoadingExposedProps, ScrollbarInst } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { ScrollbarProps } from '../../scrollbar/src/Scrollbar'
@@ -329,6 +329,9 @@ export const treeProps = {
   checkStrategy: {
     type: String as PropType<CheckStrategy>,
     default: 'all'
+  },
+  spinProps: {
+    type: Object as PropType<BaseLoadingExposedProps>
   },
   /**
    * @deprecated
@@ -1620,6 +1623,7 @@ export default defineComponent({
         props,
         'overrideDefaultNodeClickBehavior'
       ),
+      spinPropsRef: toRef(props, 'spinProps'),
       handleSwitcherClick,
       handleDragEnd,
       handleDragEnter,

@@ -20,6 +20,12 @@
 - `n-card` adds `content-scrollable` prop, closes [#4848](https://github.com/tusen-ai/naive-ui/issues/4848), [#6759](https://github.com/tusen-ai/naive-ui/pull/6759).
 - `n-date-picker` adds `fast-year-select` prop.
 - `n-date-picker` adds `fast-month-select` prop.
+- `n-button` adds `spin-props` prop.
+- `n-cascader` adds `spin-props` prop.
+- `n-log` adds `spin-props` prop.
+- `n-message` adds `spin-props` prop.
+- `n-switch` adds `spin-props` prop.
+- `n-tree` adds `spin-props` prop.
 
 ### Fixes
 

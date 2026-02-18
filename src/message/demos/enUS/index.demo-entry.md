@@ -91,6 +91,7 @@ no-icon.vue
 | keepAliveOnHover | `boolean` | Messages whether to destroy while hover. |  |
 | render | `MessageRenderMessage` | Render function of the entire message. | 2.24.0 |
 | showIcon | `boolean` | Whether to show icon. | 2.25.7 |
+| spin-props | `{ strokeWidth?: number, stroke?: string, scale?: number, radius?: number }` | Loading icon properties | NEXT_VERSION |
 | type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading' \| 'default'` | Message type. | `'default'` 2.25.7 |
 | onAfterLeave | `() => void` | Callback after message disappeared. |  |
 | onClose | `() => void` | Callback when close icon is clicked. |  |

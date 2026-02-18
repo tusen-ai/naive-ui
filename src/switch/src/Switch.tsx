@@ -1,4 +1,5 @@
 import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { BaseLoadingExposedProps } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { SwitchTheme } from '../styles'
@@ -58,6 +59,7 @@ export const switchProps = {
     type: Boolean,
     default: true
   },
+  spinProps: { type: Object as PropType<BaseLoadingExposedProps> },
   /** @deprecated */
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
@@ -388,6 +390,7 @@ export default defineComponent({
                               key="loading"
                               clsPrefix={mergedClsPrefix}
                               strokeWidth={20}
+                              {...this.spinProps}
                             />
                           ) : this.checked && (checkedIcon || icon) ? (
                             <div

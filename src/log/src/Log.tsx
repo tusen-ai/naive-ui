@@ -1,5 +1,5 @@
 import type { PropType, Ref } from 'vue'
-import type { ScrollbarInst } from '../../_internal'
+import type { BaseLoadingExposedProps, ScrollbarInst } from '../../_internal'
 import type { Hljs, ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { LogTheme } from '../styles'
@@ -73,6 +73,7 @@ export const logProps = {
     default: 0
   },
   hljs: Object,
+  spinProps: { type: Object as PropType<BaseLoadingExposedProps> },
   onReachTop: Function as PropType<() => void>,
   onReachBottom: Function as PropType<() => void>,
   onRequireMore: Function as PropType<(from: 'top' | 'bottom') => void>
@@ -310,7 +311,12 @@ export default defineComponent({
         <Transition name="fade-in-scale-up-transition">
           {{
             default: () =>
-              this.loading ? <NLogLoader clsPrefix={mergedClsPrefix} /> : null
+              this.loading ? (
+                <NLogLoader
+                  clsPrefix={mergedClsPrefix}
+                  spinProps={this.spinProps}
+                />
+              ) : null
           }}
         </Transition>
       ]

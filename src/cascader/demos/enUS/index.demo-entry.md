@@ -57,6 +57,7 @@ status.vue
 | show | `boolean` | `undefined` | Whether to show the menu. |  |
 | show-path | `boolean` | `true` | Whether to show the selected options as a path. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Cascader size. |  |
+| spin-props | `{ strokeWidth?: number, stroke?: string, scale?: number, radius?: number }` | `undefined` | Loading icon properties | NEXT_VERSION |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validation status. | 2.27.0 |
 | to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
 | value | `string \| number \| Array<number \| string> \| null` | `undefined` | Value of the cascader (if being set manually). |  |

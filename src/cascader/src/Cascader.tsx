@@ -8,7 +8,7 @@ import type {
   VNodeChild
 } from 'vue'
 import type { FollowerInst, FollowerPlacement } from 'vueuc'
-import type { InternalSelectionInst, ScrollbarProps } from '../../_internal'
+import type { BaseLoadingExposedProps, InternalSelectionInst, ScrollbarProps } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/public-types'
@@ -168,6 +168,9 @@ export const cascaderProps = {
   getColumnStyle: Function as PropType<
     (detail: { level: number }) => string | CSSProperties
   >,
+  spinProps: {
+    type: Object as PropType<BaseLoadingExposedProps>
+  },
   renderPrefix: Function as PropType<
     (props: {
       option: CascaderOption
@@ -943,6 +946,7 @@ export default defineComponent({
       getColumnStyleRef: toRef(props, 'getColumnStyle'),
       renderPrefixRef: toRef(props, 'renderPrefix'),
       renderSuffixRef: toRef(props, 'renderSuffix'),
+      spinPropsRef: toRef(props, 'spinProps'),
       syncCascaderMenuPosition,
       syncSelectMenuPosition,
       updateKeyboardKey,
