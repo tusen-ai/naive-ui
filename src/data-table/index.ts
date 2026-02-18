@@ -25,4 +25,4 @@ export type {
   SortOrder as DataTableSortOrder,
   SortState as DataTableSortState
 } from './src/interface'
-export * from './src/publicTypes'
+export type * from './src/public-types'

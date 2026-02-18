@@ -2,6 +2,7 @@ import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CardTheme } from '../styles'
+import type { CardSize } from './public-types'
 import { getPadding } from 'seemly'
 import { computed, defineComponent, h } from 'vue'
 import { NBaseClose, NScrollbar } from '../../_internal'
@@ -34,10 +35,7 @@ export const cardBaseProps = {
     type: [Boolean, Object] as PropType<boolean | CardSegmented>,
     default: false
   },
-  size: {
-    type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
-    default: 'medium'
-  },
+  size: String as PropType<CardSize>,
   bordered: {
     type: Boolean,
     default: true
@@ -87,8 +85,12 @@ export default defineComponent({
         call(onClose)
       }
     }
-    const { inlineThemeDisabled, mergedClsPrefixRef, mergedRtlRef }
-      = useConfig(props)
+    const {
+      inlineThemeDisabled,
+      mergedClsPrefixRef,
+      mergedRtlRef,
+      mergedComponentPropsRef
+    } = useConfig(props)
     const themeRef = useTheme(
       'Card',
       '-card',
@@ -98,8 +100,13 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const rtlEnabledRef = useRtl('Card', mergedRtlRef, mergedClsPrefixRef)
+    const mergedSizeRef = computed(() => {
+      return (
+        props.size || mergedComponentPropsRef?.value?.Card?.size || 'medium'
+      )
+    })
     const cssVarsRef = computed(() => {
-      const { size } = props
+      const mergedSize = mergedSizeRef.value
       const {
         self: {
           color,
@@ -125,9 +132,9 @@ export default defineComponent({
           colorEmbedded,
           colorEmbeddedModal,
           colorEmbeddedPopover,
-          [createKey('padding', size)]: padding,
-          [createKey('fontSize', size)]: fontSize,
-          [createKey('titleFontSize', size)]: titleFontSize
+          [createKey('padding', mergedSize)]: padding,
+          [createKey('fontSize', mergedSize)]: fontSize,
+          [createKey('titleFontSize', mergedSize)]: titleFontSize
         },
         common: { cubicBezierEaseInOut }
       } = themeRef.value
@@ -173,7 +180,7 @@ export default defineComponent({
       ? useThemeClass(
           'card',
           computed(() => {
-            return props.size[0]
+            return mergedSizeRef.value[0]
           }),
           cssVarsRef,
           props

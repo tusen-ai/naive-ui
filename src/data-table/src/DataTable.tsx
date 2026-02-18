@@ -84,9 +84,17 @@ export default defineComponent({
       mergedBorderedRef,
       mergedClsPrefixRef,
       inlineThemeDisabled,
-      mergedRtlRef
+      mergedRtlRef,
+      mergedComponentPropsRef
     } = useConfig(props)
     const rtlEnabledRef = useRtl('DataTable', mergedRtlRef, mergedClsPrefixRef)
+    const mergedSizeRef = computed(() => {
+      return (
+        props.size
+        || mergedComponentPropsRef?.value?.DataTable?.size
+        || 'medium'
+      )
+    })
     const mergedBottomBorderedRef = computed(() => {
       const { bottomBordered } = props
       // do not add bottom bordered class if bordered is true
@@ -315,7 +323,7 @@ export default defineComponent({
       }
     }
     const cssVarsRef = computed(() => {
-      const { size } = props
+      const mergedSize = mergedSizeRef.value
       const {
         common: { cubicBezierEaseInOut },
         self: {
@@ -362,9 +370,9 @@ export default defineComponent({
           tdColorStriped,
           tdColorStripedModal,
           tdColorStripedPopover,
-          [createKey('fontSize', size)]: fontSize,
-          [createKey('thPadding', size)]: thPadding,
-          [createKey('tdPadding', size)]: tdPadding
+          [createKey('fontSize', mergedSize)]: fontSize,
+          [createKey('thPadding', mergedSize)]: thPadding,
+          [createKey('tdPadding', mergedSize)]: tdPadding
         }
       } = themeRef.value
       return {
@@ -420,7 +428,7 @@ export default defineComponent({
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
           'data-table',
-          computed(() => props.size[0]),
+          computed(() => mergedSizeRef.value[0]),
           cssVarsRef,
           props
         )

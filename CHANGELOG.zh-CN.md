@@ -14,6 +14,7 @@
 - `n-color-picker` 新增 `trigger` slot，关闭 [#7192](https://github.com/tusen-ai/naive-ui/issues/7192)
 - `n-select` `n-auto-complete` `n-mention` `n-popselect` `n-cascader` `n-pagination` 新增 `scrollbar-props` 属性
 - `n-config-provider` 新增组件级 `renderEmpty` 配置（`Cascader`、`DataTable`、`Select`、`Transfer`、`Tree`、`TreeSelect`）
+- `n-config-provider` 在 `component-options` 中新增按组件配置 `size`（`Button`、`Card`、`Checkbox`、`DataTable`、`Descriptions`、`Dropdown`、`DynamicTags`、`Form`、`Input`、`Pagination`、`Popselect`、`Radio`、`Rate`、`Result`、`Skeleton`、`Space`、`Switch`、`Table`、`Tabs`、`Tag`），关闭 [#356](https://github.com/tusen-ai/naive-ui/issues/356)
 - `n-upload` 的 `submit` 方法新增 `retry` 属性。
 - `n-breadcrumb-item` 新增 `show-separator` 属性，用于配合 `transition-group` 使用时手动控制分隔符显隐，关闭 [#3614](https://github.com/tusen-ai/naive-ui/issues/3614)
 - `n-card` 新增 `content-scrollable` 属性，关闭 [#4848](https://github.com/tusen-ai/naive-ui/issues/4848)、[#6759](https://github.com/tusen-ai/naive-ui/pull/6759)

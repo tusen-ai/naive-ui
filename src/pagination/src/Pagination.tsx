@@ -80,10 +80,7 @@ export const paginationProps = {
     }
   },
   showQuickJumper: Boolean,
-  size: {
-    type: String as PropType<Size>,
-    default: 'medium'
-  },
+  size: String as PropType<Size>,
   disabled: Boolean,
   pageSlot: {
     type: Number,
@@ -168,6 +165,13 @@ export default defineComponent({
       inlineThemeDisabled,
       mergedRtlRef
     } = useConfig(props)
+    const mergedSizeRef = computed<Size>(() => {
+      return (
+        props.size
+        || mergedComponentPropsRef?.value?.Pagination?.size
+        || 'medium'
+      )
+    })
     const themeRef = useTheme(
       'Pagination',
       '-pagination',
@@ -271,13 +275,13 @@ export default defineComponent({
     const inputSizeRef = computed<InputSize>(() => {
       return (
         mergedComponentPropsRef?.value?.Pagination?.inputSize
-        || smallerSize(props.size)
+        || smallerSize(mergedSizeRef.value)
       )
     })
     const selectSizeRef = computed<SelectSize>(() => {
       return (
         mergedComponentPropsRef?.value?.Pagination?.selectSize
-        || smallerSize(props.size)
+        || smallerSize(mergedSizeRef.value)
       )
     })
     const startIndexRef = computed(() => {
@@ -418,7 +422,7 @@ export default defineComponent({
       disableTransitionOneTick()
     })
     const cssVarsRef = computed(() => {
-      const { size } = props
+      const size = mergedSizeRef.value
       const {
         self: {
           buttonBorder,
@@ -517,8 +521,7 @@ export default defineComponent({
           'pagination',
           computed(() => {
             let hash = ''
-            const { size } = props
-            hash += size[0]
+            hash += mergedSizeRef.value[0]
             return hash
           }),
           cssVarsRef,

@@ -14,6 +14,7 @@ os-theme.vue
 language.vue
 transparent.vue
 inline-theme-disabled.vue
+size.vue
 ```
 
 ## API
