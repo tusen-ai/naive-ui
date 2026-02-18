@@ -15,13 +15,33 @@ export function useScroll(
   {
     mainTableInstRef,
     mergedCurrentPageRef,
-    bodyWidthRef
+    bodyWidthRef,
+    maxHeightRef,
+    mergedTableLayoutRef
   }: {
+    maxHeightRef: Ref<string | number | undefined>
     bodyWidthRef: Ref<null | number>
     mainTableInstRef: Ref<MainTableRef | null>
     mergedCurrentPageRef: ComputedRef<number>
+    mergedTableLayoutRef: Ref<'auto' | 'fixed'>
   }
 ) {
+  const explicitlyScrollableRef = computed(
+    () =>
+      props.scrollX !== undefined
+      || maxHeightRef.value !== undefined
+      || props.flexHeight
+  )
+  const xScrollableRef = computed(() => {
+    // For a basic table with auto layout whose content may overflow we will
+    // make it scrollable, which differs from browser's native behavior.
+    // For native behavior, see
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout
+    const isBasicAutoLayout
+      = !explicitlyScrollableRef.value && mergedTableLayoutRef.value === 'auto'
+    return props.scrollX !== undefined || isBasicAutoLayout
+  })
+
   let lastScrollLeft = 0
   const scrollPartRef = ref<'head' | 'body' | undefined>()
   const leftActiveFixedColKeyRef = ref<ColumnKey | null>(null)
@@ -214,9 +234,7 @@ export function useScroll(
     const { value: tableWidth } = bodyWidthRef
     if (tableWidth === null)
       return
-    if (props.maxHeight || props.flexHeight) {
-      if (!header)
-        return
+    if (header) {
       // we need to deal with overscroll
       const directionHead = lastScrollLeft - header.scrollLeft
       scrollPartRef.value = directionHead !== 0 ? 'head' : 'body'
@@ -260,6 +278,8 @@ export function useScroll(
     syncScrollState,
     handleTableBodyScroll,
     handleTableHeaderScroll,
-    setHeaderScrollLeft
+    setHeaderScrollLeft,
+    explicitlyScrollableRef,
+    xScrollableRef
   }
 }

@@ -420,6 +420,8 @@ export interface DataTableInjection {
   mergedTableLayoutRef: Ref<'auto' | 'fixed'>
   maxHeightRef: Ref<string | number | undefined>
   minHeightRef: Ref<string | number | undefined>
+  xScrollableRef: Ref<boolean>
+  explicitlyScrollableRef: Ref<boolean>
   rowPropsRef: Ref<CreateRowProps | undefined>
   flexHeightRef: Ref<boolean>
   headerCheckboxDisabledRef: Ref<boolean>

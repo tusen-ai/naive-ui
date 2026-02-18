@@ -184,25 +184,7 @@ export default defineComponent({
       expandableRef,
       doUpdateExpandedRowKeys
     } = useExpand(props, treeMateRef)
-    const {
-      handleTableBodyScroll,
-      handleTableHeaderScroll,
-      syncScrollState,
-      setHeaderScrollLeft,
-      leftActiveFixedColKeyRef,
-      leftActiveFixedChildrenColKeysRef,
-      rightActiveFixedColKeyRef,
-      rightActiveFixedChildrenColKeysRef,
-      leftFixedColumnsRef,
-      rightFixedColumnsRef,
-      fixedColumnLeftMapRef,
-      fixedColumnRightMapRef
-    } = useScroll(props, {
-      bodyWidthRef,
-      mainTableInstRef,
-      mergedCurrentPageRef
-    })
-    const { localeRef } = useLocale('DataTable')
+    const maxHeightRef = toRef(props, 'maxHeight')
     const mergedTableLayoutRef = computed(() => {
       // Layout
       // virtual |descrete header | ellpisis => fixed
@@ -217,7 +199,33 @@ export default defineComponent({
       }
       return props.tableLayout
     })
+    const {
+      handleTableBodyScroll,
+      handleTableHeaderScroll,
+      syncScrollState,
+      setHeaderScrollLeft,
+      leftActiveFixedColKeyRef,
+      leftActiveFixedChildrenColKeysRef,
+      rightActiveFixedColKeyRef,
+      rightActiveFixedChildrenColKeysRef,
+      leftFixedColumnsRef,
+      rightFixedColumnsRef,
+      fixedColumnLeftMapRef,
+      fixedColumnRightMapRef,
+      xScrollableRef,
+      explicitlyScrollableRef
+    } = useScroll(props, {
+      bodyWidthRef,
+      mainTableInstRef,
+      mergedCurrentPageRef,
+      maxHeightRef,
+      mergedTableLayoutRef
+    })
+    const { localeRef } = useLocale('DataTable')
+
     provide(dataTableInjectionKey, {
+      xScrollableRef,
+      explicitlyScrollableRef,
       props,
       treeMateRef,
       renderExpandIconRef: toRef(props, 'renderExpandIcon'),
@@ -283,7 +291,7 @@ export default defineComponent({
       }),
       onLoadRef: toRef(props, 'onLoad'),
       mergedTableLayoutRef,
-      maxHeightRef: toRef(props, 'maxHeight'),
+      maxHeightRef,
       minHeightRef: toRef(props, 'minHeight'),
       flexHeightRef: toRef(props, 'flexHeight'),
       headerCheckboxDisabledRef,

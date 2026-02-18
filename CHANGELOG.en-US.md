@@ -35,6 +35,7 @@
 - Fix `n-modal` event listeners not removed, closes [#7341](https://github.com/tusen-ai/naive-ui/issues/7341) by [@lu-han](https://github.com/lu-han)
 - Fix `n-marquee` component Non-function value encountered for default slot warning.
 - Fix `n-data-table`'s empty slot is not shown in a `display: flex` container.
+- Fix `n-data-table` missing header scrollbar in `n-data-table` when in empty state with `max-height` or `flex-height`, closes [#7479](https://github.com/tusen-ai/naive-ui/pull/7479).
 
 ## 2.43.2
 
