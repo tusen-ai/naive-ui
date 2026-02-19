@@ -271,7 +271,7 @@ export type TableColumnGroup<T = InternalRowData> = {
   title?: TableColumnGroupTitle
   type?: never
   key: ColumnKey
-  children: Array<TableBaseColumn<T>>
+  children: Array<TableColumn<T>>
 
   // to suppress type error in table header
   resizable?: boolean
