@@ -266,6 +266,24 @@ describe('n-input-number', () => {
     wrapper.unmount()
   })
 
+  it('should work with decimal value with leading 0', async () => {
+    const onUpdateValue = jest.fn()
+    const wrapper = mount(NInputNumber, {
+      attachTo: document.body,
+      props: {
+        defaultValue: 0,
+        onUpdateValue
+      }
+    })
+    wrapper.find('input').element.value = '0.000001'
+    await wrapper.find('input').trigger('input')
+    expect(onUpdateValue).toHaveBeenCalledWith(0.000001)
+    wrapper.find('input').element.value = '0.00000001'
+    await wrapper.find('input').trigger('input')
+    expect(onUpdateValue).toHaveBeenCalledWith(0.00000001)
+    wrapper.unmount()
+  })
+
   it('should work with `status` prop', async () => {
     ;(['success', 'warning', 'error'] as const).forEach((status) => {
       const wrapper = mount(NInputNumber, { props: { status } })
