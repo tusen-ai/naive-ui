@@ -273,6 +273,9 @@ export function genWebTypes(): void {
       case 'tab':
         componentPath = 'tabs'
         break
+      case 'performant-ellipsis':
+        componentPath = 'ellipsis'
+        break
     }
     let docsPath: string | undefined
     do {
