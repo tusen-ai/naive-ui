@@ -62,6 +62,7 @@ import DatetimerangePanel from './panel/datetimerange'
 import MonthPanel from './panel/month'
 import MonthRangePanel from './panel/monthrange'
 import { datePickerProps } from './props'
+import type { DatePickerDateSlotProps } from './public-types'
 import style from './styles/index.cssr'
 import { strictParse } from './utils'
 import {
@@ -73,6 +74,7 @@ export type DatePickerSetupProps = ExtractPropTypes<typeof datePickerProps>
 
 export interface DatePickerSlots {
   'date-icon'?: () => VNode[]
+  date?: (props: DatePickerDateSlotProps) => VNode[]
   footer?: () => VNode[]
   'next-month'?: () => VNode[]
   'next-year'?: () => VNode[]

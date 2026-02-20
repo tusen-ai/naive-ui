@@ -26,3 +26,9 @@ export interface DatePickerConfirmSlotProps {
   disabled: boolean
   text: string
 }
+
+export interface DatePickerDateSlotProps {
+  year: number
+  month: number
+  date: number
+}
