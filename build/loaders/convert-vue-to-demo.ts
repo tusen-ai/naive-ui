@@ -6,8 +6,8 @@ import { fileURLToPath } from 'node:url'
 import { toString } from 'mdast-util-to-string'
 import rehypeStringify from 'rehype-stringify'
 import remarkRehype from 'remark-rehype'
-import { createHandlers } from '../markdown/handlers'
 import { createBaseProcessor } from '../markdown/parser'
+import { renderToNaive } from '../markdown/remark-naive'
 import { handleMergeCode } from '../utils/handle-merge-code'
 
 interface Parts {
@@ -179,7 +179,7 @@ function getPartsOfDemo(text: string): Parts {
 
   const processor = createBaseProcessor()
     .use(remarkExtractTitle)
-    .use(remarkRehype, { handlers: createHandlers(), allowDangerousHtml: true })
+    .use(remarkRehype, { handlers: renderToNaive(), allowDangerousHtml: true })
     .use(rehypeStringify, { allowDangerousHtml: true })
 
   const content = String(processor.processSync(markdownText))

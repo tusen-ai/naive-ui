@@ -42,7 +42,7 @@ function hasLanguage(lang: string): boolean {
   return !!hljs.getLanguage(lang)
 }
 
-export function createHandlers(options: CreateHandlersOptions = {}): Handlers {
+export function renderToNaive(options: CreateHandlersOptions = {}): Handlers {
   const { wrapCodeWithCard = true } = options
 
   return {

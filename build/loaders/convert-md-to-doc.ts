@@ -4,11 +4,11 @@ import type { DemoInfo } from '../markdown/plugins/remark-extract-demos'
 import { toString } from 'mdast-util-to-string'
 import rehypeStringify from 'rehype-stringify'
 import remarkRehype from 'remark-rehype'
-import { createHandlers } from '../markdown/handlers'
 import { createBaseProcessor } from '../markdown/parser'
 import { remarkDocHeader } from '../markdown/plugins/remark-doc-header'
 import { remarkExtractComponents } from '../markdown/plugins/remark-extract-components'
 import { remarkExtractDemos } from '../markdown/plugins/remark-extract-demos'
+import { renderToNaive } from '../markdown/remark-naive'
 
 export interface AnchorInfo {
   id: string
@@ -160,13 +160,12 @@ export async function convertMd2ComponentDocumentation(
   const colSpan = ~text.search('<!--single-column-->') ? 1 : 2
   const hasApi = !!~text.search('## API')
 
-  // Build the full unified pipeline
   const processor = createBaseProcessor()
     .use(remarkExtractComponents)
     .use(remarkDocHeader)
     .use(remarkExtractDemos, { env, colSpan })
     .use(remarkCaptureAnchors)
-    .use(remarkRehype, { handlers: createHandlers(), allowDangerousHtml: true })
+    .use(remarkRehype, { handlers: renderToNaive(), allowDangerousHtml: true })
     .use(rehypeStringify, { allowDangerousHtml: true })
 
   const file = await processor.process({ value: text, data: { url } })

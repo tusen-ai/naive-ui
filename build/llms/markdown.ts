@@ -2,7 +2,7 @@ import type { ProcessedDoc, RouteEntry } from './types'
 import fs from 'node:fs'
 import remarkStringify from 'remark-stringify'
 import { createBaseProcessor } from '../markdown/parser'
-import { remarkCleanForLlms } from '../markdown/plugins/remark-clean-for-llms'
+import { remarkCleanMdForLlms } from '../markdown/plugins/remark-clean-md-for-llms'
 import { remarkExpandDemos } from '../markdown/plugins/remark-expand-demos'
 import { getRoutes } from './routes'
 
@@ -51,7 +51,7 @@ export async function cleanMarkdown(
 ): Promise<string> {
   const processor = createBaseProcessor()
     .use(remarkExpandDemos)
-    .use(remarkCleanForLlms)
+    .use(remarkCleanMdForLlms)
     .use(remarkStringify)
 
   const file = await processor.process({

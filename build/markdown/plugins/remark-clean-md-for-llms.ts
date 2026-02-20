@@ -1,7 +1,7 @@
 import type { Code, Root } from 'mdast'
 import { visit } from 'unist-util-visit'
 
-export function remarkCleanForLlms() {
+export function remarkCleanMdForLlms() {
   return (tree: Root) => {
     visit(tree, (node, index, parent) => {
       if (index == null || !parent)

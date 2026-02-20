@@ -11,7 +11,7 @@ export function remarkExpandDemos(): Transformer<Root, Root> {
     const sourceFilePath = (file.data.sourceFilePath as string) || ''
     const sourceDir = path.dirname(sourceFilePath)
     const children = tree.children
-    const tasks: Promise<void>[] = []
+    const pending: Promise<{ index: number, replacement: RootContent[] }>[] = []
 
     for (let i = children.length - 1; i >= 0; i--) {
       const node = children[i]
@@ -31,17 +31,14 @@ export function remarkExpandDemos(): Transformer<Root, Root> {
           const demoFilePath = path.join(sourceDir, demoFileName)
 
           try {
-            await fs.promises.access(demoFilePath)
             const demoContent = await fs.promises.readFile(
               demoFilePath,
               'utf-8'
             )
 
-            const mdMatch = demoContent.match(
-              /<markdown>([\s\S]*?)<\/markdown>/
-            )
-            if (mdMatch) {
-              const mdTree = mdParser.parse(mdMatch[1].trim())
+            const mdPart = demoContent.match(/<markdown>([\s\S]*?)<\/markdown>/)
+            if (mdPart) {
+              const mdTree = mdParser.parse(mdPart[1].trim())
               replacement.push(...mdTree.children)
             }
 
@@ -64,10 +61,16 @@ export function remarkExpandDemos(): Transformer<Root, Root> {
             )
           }
         }
-        children.splice(i, 1, ...replacement)
+        return { index: i, replacement }
       }
-      tasks.push(task())
+      pending.push(task())
     }
-    await Promise.all(tasks)
+
+    const results = await Promise.all(pending)
+    results
+      .sort((a, b) => b.index - a.index)
+      .forEach((r) => {
+        children.splice(r.index, 1, ...r.replacement)
+      })
   }
 }
