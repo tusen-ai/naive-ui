@@ -4200,3 +4200,7 @@
 ### Feats
 
 - `n-data-table` 增加了 empty 插槽 [#86](https://github.com/tusen-ai/naive-ui/issues/86)
+
+### Feats
+
+- `n-data-table` 增加了`on-update:resized-column`拖动列宽后的回调函数 [#6343](https://github.com/tusen-ai/naive-ui/issues/6343)
