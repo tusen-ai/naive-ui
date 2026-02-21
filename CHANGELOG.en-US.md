@@ -44,6 +44,7 @@
 - Fix seemly dependency version range allows incompatible versions.
 - Fix `n-progress` style is incorrect after using the dashboard mode exceeding 100%, closes [#6627](https://github.com/tusen-ai/naive-ui/issues/6627)
 - Fix `n-modal`'s outside content can't be interacted with `show-mask` is set to `false`.
+- Fix `n-date-picker` month panel handles quarter quick jump and disabled state incorrectly.
 
 ### Feats
 

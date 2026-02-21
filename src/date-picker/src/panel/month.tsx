@@ -154,65 +154,133 @@ export default defineComponent({
         onKeydown={this.handlePanelKeyDown}
       >
         <div class={`${mergedClsPrefix}-date-panel-month-calendar`}>
-          <NScrollbar
-            ref="yearScrollbarRef"
-            class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
-            theme={mergedTheme.peers.Scrollbar}
-            themeOverrides={mergedTheme.peerOverrides.Scrollbar}
-            container={this.virtualListContainer}
-            content={this.virtualListContent}
-            horizontalRailStyle={{ zIndex: 1 }}
-            verticalRailStyle={{ zIndex: 1 }}
-          >
-            {{
-              default: () => (
-                <VirtualList
-                  ref="yearVlRef"
-                  items={this.yearArray}
-                  itemSize={MONTH_ITEM_HEIGHT}
-                  showScrollbar={false}
-                  keyField="ts"
-                  onScroll={this.handleVirtualListScroll}
-                  paddingBottom={4}
+          {this.calendarMonthBeforeYear
+            ? [
+                type === 'month' || type === 'quarter' ? (
+                  <div
+                    class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
+                  >
+                    <NScrollbar
+                      ref="monthScrollbarRef"
+                      theme={mergedTheme.peers.Scrollbar}
+                      themeOverrides={mergedTheme.peerOverrides.Scrollbar}
+                    >
+                      {{
+                        default: () => [
+                          (type === 'month'
+                            ? this.monthArray
+                            : this.quarterArray
+                          ).map((item, i) =>
+                            renderItem(item, i, mergedClsPrefix)
+                          ),
+                          <div
+                            class={`${mergedClsPrefix}-date-panel-${type}-calendar__padding`}
+                          />
+                        ]
+                      }}
+                    </NScrollbar>
+                  </div>
+                ) : null,
+                <NScrollbar
+                  ref="yearScrollbarRef"
+                  class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
+                  theme={mergedTheme.peers.Scrollbar}
+                  themeOverrides={mergedTheme.peerOverrides.Scrollbar}
+                  container={this.virtualListContainer}
+                  content={this.virtualListContent}
+                  horizontalRailStyle={{ zIndex: 1 }}
+                  verticalRailStyle={{ zIndex: 1 }}
                 >
                   {{
-                    default: ({
-                      item,
-                      index
-                    }: {
-                      item: YearItem
-                      index: number
-                    }) => {
-                      return renderItem(item, index, mergedClsPrefix)
-                    }
+                    default: () => (
+                      <VirtualList
+                        ref="yearVlRef"
+                        items={this.yearArray}
+                        itemSize={MONTH_ITEM_HEIGHT}
+                        showScrollbar={false}
+                        keyField="ts"
+                        onScroll={this.handleVirtualListScroll}
+                        paddingBottom={4}
+                      >
+                        {{
+                          default: ({
+                            item,
+                            index
+                          }: {
+                            item: YearItem
+                            index: number
+                          }) => {
+                            return renderItem(item, index, mergedClsPrefix)
+                          }
+                        }}
+                      </VirtualList>
+                    )
                   }}
-                </VirtualList>
-              )
-            }}
-          </NScrollbar>
-          {type === 'month' || type === 'quarter' ? (
-            <div
-              class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
-            >
-              <NScrollbar
-                ref="monthScrollbarRef"
-                theme={mergedTheme.peers.Scrollbar}
-                themeOverrides={mergedTheme.peerOverrides.Scrollbar}
-              >
-                {{
-                  default: () => [
-                    (type === 'month'
-                      ? this.monthArray
-                      : this.quarterArray
-                    ).map((item, i) => renderItem(item, i, mergedClsPrefix)),
-                    <div
-                      class={`${mergedClsPrefix}-date-panel-${type}-calendar__padding`}
-                    />
-                  ]
-                }}
-              </NScrollbar>
-            </div>
-          ) : null}
+                </NScrollbar>
+              ]
+            : [
+                <NScrollbar
+                  ref="yearScrollbarRef"
+                  class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
+                  theme={mergedTheme.peers.Scrollbar}
+                  themeOverrides={mergedTheme.peerOverrides.Scrollbar}
+                  container={this.virtualListContainer}
+                  content={this.virtualListContent}
+                  horizontalRailStyle={{ zIndex: 1 }}
+                  verticalRailStyle={{ zIndex: 1 }}
+                >
+                  {{
+                    default: () => (
+                      <VirtualList
+                        ref="yearVlRef"
+                        items={this.yearArray}
+                        itemSize={MONTH_ITEM_HEIGHT}
+                        showScrollbar={false}
+                        keyField="ts"
+                        onScroll={this.handleVirtualListScroll}
+                        paddingBottom={4}
+                      >
+                        {{
+                          default: ({
+                            item,
+                            index
+                          }: {
+                            item: YearItem
+                            index: number
+                          }) => {
+                            return renderItem(item, index, mergedClsPrefix)
+                          }
+                        }}
+                      </VirtualList>
+                    )
+                  }}
+                </NScrollbar>,
+                type === 'month' || type === 'quarter' ? (
+                  <div
+                    class={`${mergedClsPrefix}-date-panel-month-calendar__picker-col`}
+                  >
+                    <NScrollbar
+                      ref="monthScrollbarRef"
+                      theme={mergedTheme.peers.Scrollbar}
+                      themeOverrides={mergedTheme.peerOverrides.Scrollbar}
+                    >
+                      {{
+                        default: () => [
+                          (type === 'month'
+                            ? this.monthArray
+                            : this.quarterArray
+                          ).map((item, i) =>
+                            renderItem(item, i, mergedClsPrefix)
+                          ),
+                          <div
+                            class={`${mergedClsPrefix}-date-panel-${type}-calendar__padding`}
+                          />
+                        ]
+                      }}
+                    </NScrollbar>
+                  </div>
+                ) : null
+              ]}
         </div>
         {resolveWrappedSlot(this.datePickerSlots.footer, (children) => {
           return children ? (
