@@ -128,6 +128,10 @@ export const cascaderProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
+  showEllipse: {
+    type: Boolean as PropType<boolean | undefined>,
+    default: false
+  },
   maxTagCount: [String, Number] as PropType<number | 'responsive'>,
   ellipsisTagPopoverProps: Object as PropType<PopoverProps>,
   menuProps: Object as PropType<HTMLAttributes>,
@@ -928,6 +932,7 @@ export default defineComponent({
       hoverKeyPathRef,
       mergedCheckStrategyRef,
       showCheckboxRef,
+      showEllipseRef: toRef(props, 'showEllipse'),
       cascadeRef: toRef(props, 'cascade'),
       multipleRef: toRef(props, 'multiple'),
       keyboardKeyRef,

@@ -6,6 +6,7 @@ import { computed, defineComponent, h, inject, Transition } from 'vue'
 import { NBaseIcon, NBaseLoading } from '../../_internal'
 import { CheckmarkIcon, ChevronRightIcon } from '../../_internal/icons'
 import { NCheckbox } from '../../checkbox'
+import { NEllipsis } from '../../ellipsis'
 import { cascaderInjectionKey } from './interface'
 
 export default defineComponent({
@@ -34,6 +35,7 @@ export default defineComponent({
       mergedThemeRef,
       labelFieldRef,
       showCheckboxRef,
+      showEllipseRef,
       renderPrefixRef,
       renderSuffixRef,
       spinPropsRef,
@@ -168,6 +170,7 @@ export default defineComponent({
       keyboardPending: keyboardPendingRef,
       isLoading: isLoadingRef,
       showCheckbox: showCheckboxRef,
+      showEllipse: showEllipseRef,
       isLeaf: isLeafRef,
       disabled: disabledRef,
       label: labelRef,
@@ -289,9 +292,13 @@ export default defineComponent({
       >
         {prefixNode}
         <span class={`${mergedClsPrefix}-cascader-option__label`}>
-          {renderLabel
-            ? renderLabel(this.tmNode.rawNode, this.checked)
-            : this.label}
+          {renderLabel ? (
+            renderLabel(this.tmNode.rawNode, this.checked)
+          ) : this.showEllipse ? (
+            <NEllipsis>{this.label}</NEllipsis>
+          ) : (
+            this.label
+          )}
         </span>
         {suffixNode}
       </div>
