@@ -58,7 +58,7 @@ preset-confirm.vue
 preset-confirm-slot.vue
 transform-origin.vue
 draggable.vue
-mask-visible.vue
+show-mask.vue
 nested-debug.vue
 a11y-debug.vue
 raw-debug.vue
