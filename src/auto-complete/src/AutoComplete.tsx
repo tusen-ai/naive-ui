@@ -248,9 +248,11 @@ export default defineComponent({
           break
         case 'ArrowDown':
           menuInstRef.value?.next()
+          e.preventDefault()
           break
         case 'ArrowUp':
           menuInstRef.value?.prev()
+          e.preventDefault()
           break
       }
     }
