@@ -212,6 +212,10 @@
 
 `2024-09-26`
 
+### Features
+
+- `n-image` `download` 方法支持本地文件，关闭 [#6394](https://github.com/tusen-ai/naive-ui/issues/6394)
+
 ### Fixes
 
 - 修复 `n-data-table` 在设定 `virtual-x`，且所有的 column 对象均没有配置 `fixed` 属性的时候无法正常显示
