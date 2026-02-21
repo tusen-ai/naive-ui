@@ -168,6 +168,7 @@
 - Fix `n-data-table` may have multiple expand trigger with tree data.
 - Fix `n-date-picker`'s `confirm`, `now`, `clear` slots doesn't work with `'month'`, `'monthrange'`, `'quarter'`, `'quarterrange'`, `'year'` and `'yearrange'` type.
 - Fix `n-input`'s `render-count` prop doesn't work when type is not `'textarea'`.
+- Fix `n-tree`'s `on-scroll` prop doesn't work when `virtual-scroll` prop is enabled.
 
 ## 2.40.4
 
