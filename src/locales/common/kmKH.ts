@@ -81,7 +81,9 @@ const kmKH: NLocale = {
     positiveText: 'បញ្ជាក់',
     negativeText: 'បោះបង់',
     now: 'ឥឡូវនេះ',
-    clear: 'ច្បាស់'
+    clear: 'ច្បាស់',
+    am: 'ព្រឹក',
+    pm: 'ល្ងាច'
   },
   Pagination: {
     goto: 'លោតទៅ',
