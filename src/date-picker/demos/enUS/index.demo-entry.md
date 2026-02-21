@@ -58,7 +58,7 @@ close-panel-on-select.vue
 | quarter-format | `string` | `'Q'Q` | Format of quarter item in the panel. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.37.0 |
 | shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| (() => [number, number])>` | `undefined` | Shortcut button customizations. |  |
 | show | `boolean` | `undefined` | Whether to show panel. | 2.28.3 |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |  |
+| size | `'tiny' \| 'small' \| 'medium' \| 'large'` | `'medium'` | Date picker size. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validation status. | 2.27.0 |
 | time-picker-format | `string \| undefined` | `undefined` | Format of the binding value in time picker inside date picker of type `'datetime'` and `'datetimerange'`. See [format](https://date-fns.org/v2.23.0/docs/format). | 2.38.2 |
 | to | `string \| HTMLElement \| false` | `body` | Container node of the panel. `false` will keep it not detached. |  |

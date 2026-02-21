@@ -1,7 +1,7 @@
 <markdown>
 # Size
 
-Date Picker can be `small`, `medium` or `large` sized.
+Date Picker can be `tiny`, `small`, `medium` or `large` sized.
 </markdown>
 
 <script lang="ts" setup>
@@ -12,6 +12,7 @@ const timestamp = ref(null)
 
 <template>
   <n-space vertical>
+    <n-date-picker v-model:value="timestamp" size="tiny" type="date" />
     <n-date-picker v-model:value="timestamp" size="small" type="date" />
     <n-date-picker v-model:value="timestamp" size="medium" type="date" />
     <n-date-picker v-model:value="timestamp" size="large" type="date" />
