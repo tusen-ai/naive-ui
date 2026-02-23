@@ -231,14 +231,16 @@ export default defineComponent({
       nTriggerFormChange()
       uncontrolledValueRef.value = value
     }
-    function getInputEl(): HTMLInputElement | HTMLTextAreaElement {
+    function getInputEl(): HTMLInputElement | HTMLTextAreaElement | null {
+      if (!inputInstRef.value)
+        return null
       return props.type === 'text'
-        ? inputInstRef.value!.inputElRef!
-        : inputInstRef.value!.textareaElRef!
+        ? inputInstRef.value.inputElRef
+        : inputInstRef.value.textareaElRef
     }
     function deriveShowMenu(): void {
       const inputEl = getInputEl()
-      if (document.activeElement !== inputEl) {
+      if (!inputEl || document.activeElement !== inputEl) {
         doUpdateShowMenu(false)
         return
       }
@@ -275,6 +277,8 @@ export default defineComponent({
       if (!cursorAnchor)
         return
       const inputEl = getInputEl()
+      if (!inputEl)
+        return
       const cursorPos: {
         left: number
         top: number
@@ -385,6 +389,8 @@ export default defineComponent({
         rawNode: { value = '' }
       } = tmNode
       const inputEl = getInputEl()
+      if (!inputEl)
+        return
       const inputValue = inputEl.value
       const { separator } = props
       const nextEndPart = inputValue.slice(cachedPartialPatternEnd)
