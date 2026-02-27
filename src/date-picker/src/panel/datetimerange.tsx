@@ -227,13 +227,13 @@ export default defineComponent({
                           this.handleDateMouseEnter(dateItem)
                         }
                   }
-	                >
-	                  <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
-	                  {renderDate(datePickerSlots.date, dateItem.dateObject)}
-	                  {dateItem.isCurrentDate ? (
-	                    <div class={`${mergedClsPrefix}-date-panel-date__sup`} />
-	                  ) : null}
-	                </div>
+                >
+                  <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
+                  {renderDate(datePickerSlots.date, dateItem.dateObject)}
+                  {dateItem.isCurrentDate ? (
+                    <div class={`${mergedClsPrefix}-date-panel-date__sup`} />
+                  ) : null}
+                </div>
               )
             })}
           </div>
@@ -338,13 +338,13 @@ export default defineComponent({
                           this.handleDateMouseEnter(dateItem)
                         }
                   }
-	                >
-	                  <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
-	                  {renderDate(datePickerSlots.date, dateItem.dateObject)}
-	                  {dateItem.isCurrentDate ? (
-	                    <div class={`${mergedClsPrefix}-date-panel-date__sup`} />
-	                  ) : null}
-	                </div>
+                >
+                  <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
+                  {renderDate(datePickerSlots.date, dateItem.dateObject)}
+                  {dateItem.isCurrentDate ? (
+                    <div class={`${mergedClsPrefix}-date-panel-date__sup`} />
+                  ) : null}
+                </div>
               )
             })}
           </div>
