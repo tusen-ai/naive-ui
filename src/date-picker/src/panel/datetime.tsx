@@ -40,7 +40,6 @@ export default defineComponent({
       datePickerSlots,
       onRender
     } = this
-    const dateCellSlot = datePickerSlots['date-cell']
     onRender?.()
 
     return (
@@ -171,7 +170,10 @@ export default defineComponent({
                 }}
               >
                 <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
-                {renderDateCell(dateCellSlot, dateItem.dateObject)}
+                {renderDateCell(
+                  datePickerSlots['date-cell'],
+                  dateItem.dateObject
+                )}
                 {dateItem.isCurrentDate ? (
                   <div class={`${mergedClsPrefix}-date-panel-date__sup`} />
                 ) : null}
