@@ -34,7 +34,7 @@ function isSalaryDate(date: number) {
   </n-space>
 </template>
 
-<style scoped>
+<style>
 .date-cell {
   display: flex;
   flex-direction: column;
