@@ -27,7 +27,7 @@ export interface DatePickerConfirmSlotProps {
   text: string
 }
 
-export interface DatePickerDateSlotProps {
+export interface DatePickerDateCellSlotProps {
   year: number
   month: number
   date: number

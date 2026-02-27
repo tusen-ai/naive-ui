@@ -26,7 +26,7 @@ shortcuts.vue
 events.vue
 format.vue
 footerslot.vue
-date-slot.vue
+date-cell-slot.vue
 status.vue
 icon.vue
 panel.vue
@@ -204,7 +204,7 @@ form-debug.vue
 
 | 名称 | 参数 | 说明 | 版本 |
 | --- | --- | --- | --- |
-| date | `(props: { year: number, month: number, date: number })` | 自定义日期单元格内容 | NEXT_VERSION |
+| date-cell | `(props: { year: number, month: number, date: number })` | 日期单元格的内容 | NEXT_VERSION |
 | date-icon | `()` | 日期输入框的图标 | 2.29.0 |
 | footer | `()` | 添加额外的页脚 |  |
 | next-month | `()` | 日期面板的 `下一个` 图标 | 2.33.4 |
