@@ -16,7 +16,7 @@ import type {
   Value
 } from './interface'
 import type { UsePanelCommonProps } from './panel/use-panel-common'
-import type { DatePickerInst } from './public-types'
+import type { DatePickerDateSlotProps, DatePickerInst } from './public-types'
 import { format, getTime, isValid } from 'date-fns'
 import { getPreciseEventTarget, happensIn } from 'seemly'
 import { clickoutside } from 'vdirs'
@@ -62,7 +62,6 @@ import DatetimerangePanel from './panel/datetimerange'
 import MonthPanel from './panel/month'
 import MonthRangePanel from './panel/monthrange'
 import { datePickerProps } from './props'
-import type { DatePickerDateSlotProps } from './public-types'
 import style from './styles/index.cssr'
 import { strictParse } from './utils'
 import {

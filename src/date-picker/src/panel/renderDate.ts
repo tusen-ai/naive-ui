@@ -9,4 +9,3 @@ export function renderDate(
 ): VNodeChild {
   return dateSlot ? dateSlot(dateObject) : dateObject.date
 }
-
