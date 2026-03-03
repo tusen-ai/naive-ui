@@ -16,7 +16,7 @@ import type {
   Value
 } from './interface'
 import type { UsePanelCommonProps } from './panel/use-panel-common'
-import type { DatePickerInst } from './public-types'
+import type { DatePickerDateSlotProps, DatePickerInst } from './public-types'
 import { format, getTime, isValid } from 'date-fns'
 import { getPreciseEventTarget, happensIn } from 'seemly'
 import { clickoutside } from 'vdirs'
@@ -73,6 +73,7 @@ export type DatePickerSetupProps = ExtractPropTypes<typeof datePickerProps>
 
 export interface DatePickerSlots {
   'date-icon'?: () => VNode[]
+  date?: (props: DatePickerDateSlotProps) => VNode[]
   footer?: () => VNode[]
   'next-month'?: () => VNode[]
   'next-year'?: () => VNode[]
