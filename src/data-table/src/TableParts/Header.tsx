@@ -235,6 +235,8 @@ export default defineComponent({
                 <NCheckbox
                   key={currentPage}
                   privateInsideTable
+                  theme={mergedTheme.peers.Checkbox}
+                  themeOverrides={mergedTheme.peerOverrides.Checkbox}
                   checked={allRowsChecked}
                   indeterminate={someRowsChecked}
                   disabled={headerCheckboxDisabled}

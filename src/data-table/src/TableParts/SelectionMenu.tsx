@@ -89,9 +89,9 @@ export default defineComponent({
   },
   setup(props) {
     const {
-      props: dataTableProps,
       localeRef,
       checkOptionsRef,
+      mergedThemeRef,
       rawPaginatedDataRef,
       doCheckAll,
       doUncheckAll
@@ -111,8 +111,8 @@ export default defineComponent({
       const { clsPrefix } = props
       return (
         <NDropdown
-          theme={dataTableProps.theme?.peers?.Dropdown}
-          themeOverrides={dataTableProps.themeOverrides?.peers?.Dropdown}
+          theme={mergedThemeRef.value.peers.Dropdown}
+          themeOverrides={mergedThemeRef.value.peerOverrides.Dropdown}
           options={optionsRef.value}
           onSelect={handleSelectRef.value}
         >

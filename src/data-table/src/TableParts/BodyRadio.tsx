@@ -22,7 +22,7 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const { mergedCheckedRowKeySetRef, componentId } = inject(
+    const { mergedCheckedRowKeySetRef, componentId, mergedThemeRef } = inject(
       dataTableInjectionKey
     )!
     return () => {
@@ -30,6 +30,8 @@ export default defineComponent({
       return (
         <NRadio
           name={componentId}
+          theme={mergedThemeRef.value.peers.Radio}
+          themeOverrides={mergedThemeRef.value.peerOverrides.Radio}
           disabled={props.disabled}
           checked={mergedCheckedRowKeySetRef.value.has(rowKey)}
           onUpdateChecked={props.onUpdateChecked}
