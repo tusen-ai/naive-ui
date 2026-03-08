@@ -36,6 +36,7 @@
 - 修复 `n-marquee` 组件 Non-function value encountered for default slot 警告
 - 修复 `n-data-table` 的 empty 状态在 `display: flex` 的容器中不展示
 - 修复 `n-data-table` 的在 empty 状态下，配合 `max-height` 或者 `flex-height`，header 部分没有滚动条，关闭 [#7479](https://github.com/tusen-ai/naive-ui/pull/7479)
+- 修复 `n-data-table` 的 `theme-overrides` 属性中的 `Checkbox` 和 `Radio` 的样式没有继承主题变量
 
 ## 2.43.2
 

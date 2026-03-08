@@ -24,14 +24,18 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const { mergedCheckedRowKeySetRef, mergedInderminateRowKeySetRef } = inject(
-      dataTableInjectionKey
-    )!
+    const {
+      mergedCheckedRowKeySetRef,
+      mergedInderminateRowKeySetRef,
+      mergedThemeRef
+    } = inject(dataTableInjectionKey)!
     return () => {
       const { rowKey } = props
       return (
         <NCheckbox
           privateInsideTable
+          theme={mergedThemeRef.value.peers.Checkbox}
+          themeOverrides={mergedThemeRef.value.peerOverrides.Checkbox}
           disabled={props.disabled}
           indeterminate={mergedInderminateRowKeySetRef.value.has(rowKey)}
           checked={mergedCheckedRowKeySetRef.value.has(rowKey)}

@@ -36,6 +36,7 @@
 - Fix `n-marquee` component Non-function value encountered for default slot warning.
 - Fix `n-data-table`'s empty slot is not shown in a `display: flex` container.
 - Fix `n-data-table` missing header scrollbar in `n-data-table` when in empty state with `max-height` or `flex-height`, closes [#7479](https://github.com/tusen-ai/naive-ui/pull/7479).
+- Fix `n-data-table`'s `theme-overrides` prop does not inherit theme variables for `Checkbox` and `Radio`.
 
 ## 2.43.2
 
