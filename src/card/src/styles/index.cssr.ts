@@ -162,7 +162,10 @@ export default c([
           padding-top: var(--n-padding-bottom);
         `)
       ]),
-      cE('content-scrollbar', [
+      cE('content-scrollbar', `
+        display: flex;
+        flex-direction: column;
+      `, [
         c('>', [
           cB('scrollbar-container', [
             c('>', [

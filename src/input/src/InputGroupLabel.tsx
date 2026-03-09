@@ -2,7 +2,7 @@ import type { PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { InputTheme } from '../styles'
-import type { Size } from './interface'
+import type { InputSize } from './public-types'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import { createKey } from '../../_utils'
@@ -11,7 +11,7 @@ import style from './styles/input-group-label.cssr'
 
 export const inputGroupLabelProps = {
   ...(useTheme.props as ThemeProps<InputTheme>),
-  size: String as PropType<Size>,
+  size: String as PropType<InputSize>,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -45,7 +45,7 @@ export default defineComponent({
         if (props.size !== undefined)
           return props.size
         if (NFormItem) {
-          return NFormItem.mergedSize.value as Size
+          return NFormItem.mergedSize.value as InputSize
         }
         const configSize = mergedComponentPropsRef?.value?.Input?.size
         if (configSize)

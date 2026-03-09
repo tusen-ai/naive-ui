@@ -16,10 +16,7 @@ export default {
     default: 'default'
   },
   round: Boolean,
-  size: {
-    type: String as PropType<TagSize>,
-    default: 'medium'
-  },
+  size: String as PropType<TagSize>,
   closable: Boolean,
   disabled: {
     type: Boolean as PropType<boolean | undefined>,

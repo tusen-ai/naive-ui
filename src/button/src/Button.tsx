@@ -11,8 +11,7 @@ import type { BaseWaveRef } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { ButtonTheme } from '../styles'
-import type { Size, Type } from './interface'
-import type { ButtonSpinProps } from './public-types'
+import type { ButtonSize, ButtonSpinProps, ButtonType } from './public-types'
 import { changeColor } from 'seemly'
 import { useMemo } from 'vooks'
 import { computed, defineComponent, h, inject, ref, watchEffect } from 'vue'
@@ -47,7 +46,7 @@ export const buttonProps = {
   loading: Boolean,
   disabled: Boolean,
   circle: Boolean,
-  size: String as PropType<Size>,
+  size: String as PropType<ButtonSize>,
   ghost: Boolean,
   round: Boolean,
   secondary: Boolean,
@@ -67,7 +66,7 @@ export const buttonProps = {
     default: 'button'
   },
   type: {
-    type: String as PropType<Type>,
+    type: String as PropType<ButtonType>,
     default: 'default'
   },
   dashed: Boolean,

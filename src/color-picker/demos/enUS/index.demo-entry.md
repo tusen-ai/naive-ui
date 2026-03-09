@@ -49,7 +49,7 @@ native.vue
 | --- | --- | --- | --- |
 | action | `()` | Custom action. | 2.24.0 |
 | label | `(color: string \| null)` | Label of the color picker trigger. | 2.24.0 |
-| trigger | `(props: { value: string \| null , onClick: () => void, ref: (ref: Element \| ComponentPublicInstance \| null }) => void })` | Custom trigger element. Only one element is allowed & it can't be pure text. | NEXT_VERSION |
+| trigger | `(props: { value: string \| null , onClick: () => void, ref: (ref: Element \| ComponentPublicInstance \| null }) => void })` | Custom trigger element. Only one element is allowed & it can't be pure text. | 2.44.0 |
 
 ## Q & A
 

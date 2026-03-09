@@ -83,7 +83,6 @@ export interface FormInjection {
 
 export type LabelAlign = 'left' | 'center' | 'right'
 export type LabelPlacement = 'left' | 'top'
-export type Size = 'small' | 'medium' | 'large'
 
 export type ValidationTrigger = 'input' | 'change' | 'blur' | 'focus'
 

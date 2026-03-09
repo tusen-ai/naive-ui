@@ -26,7 +26,7 @@ size.vue
 | abstract | `boolean` | `false` | 是否不存在 DOM 包裹 |  |
 | breakpoints | `{ [k: string]: number }` | `{ xs: <640, s: ≥640, m: ≥1024, l: ≥1280, xl: ≥1536, xxl: ≥1920 }` | 屏幕响应式断点，对 `n-grid` 生效。这个属性不是响应式的，你需要在组件第一次挂载时就设定好 |  |
 | cls-prefix | `string` | `undefined` | 内部所有组件的类的前缀。（从 `2.40.0` 开始）如果不设置 `n-config-provider` 的类前缀 `cls-prefix`，则默认继承父级的类前缀。注意，该属性不是响应式的。 |  |
-| component-options | `GlobalComponentConfig` | `undefined` | 全局组件配置项。`renderEmpty` 按组件维度分别配置。为 `undefined` 时会继承上级 `n-config-provider` |  |
+| component-options | `GlobalComponentConfig` | `undefined` | 全局组件配置项。一些属性可以按组件维度分别配置。为 `undefined` 时会继承上级 `n-config-provider` |  |
 | date-locale | `DateLocale \| null` | `undefined` | 对后代组件生效的日期语言对象，为 `null` 时会使用默认 `dateEnUS`，为 `undefined` 时会继承上级 `n-config-provider` |  |
 | inline-theme-disabled | `boolean` | `false` | 是否禁用 inline css 主题变量，如果你不会频繁调整主题变量，并且需要 SSR 或者想让 devtools 看起来更干净，可以打开这个选项。注意，这个属性不是响应式的 | 2.26.0 |
 | katex | `object` | `undefined` | 公式组件需要的 katex 对象 | 2.34.0 |
@@ -42,24 +42,117 @@ size.vue
 
 ```ts
 interface GlobalComponentConfig {
+  AutoComplete?: {
+    size?: AutoCompleteSize
+  }
+  Button?: {
+    size?: ButtonSize
+  }
+  Card?: {
+    size?: CardSize
+  }
   Cascader?: {
+    size?: CascaderSize
     renderEmpty?: () => VNodeChild
   }
+  Checkbox?: {
+    size?: CheckboxSize
+  }
+  ColorPicker?: {
+    size?: ColorPickerSize
+  }
   DataTable?: {
+    size?: DataTableSize
     renderFilter?: DataTableRenderFilter
     renderSorter?: DataTableRenderSorter
     renderEmpty?: () => VNodeChild
   }
+  DatePicker?: {
+    size?: DatePickerSize
+    timePickerSize?: TimePickerSize
+  }
+  Descriptions?: {
+    size?: DescriptionsSize
+  }
+  Dialog?: {
+    iconPlacement?: IconPlacement
+  }
+  Dropdown?: {
+    size?: DropdownSize
+  }
+  DynamicInput?: {
+    buttonSize?: ButtonSize
+  }
+  DynamicTags?: {
+    size?: DynamicTagsSize
+  }
+  Empty?: Pick<EmptyProps, 'description' | 'renderIcon'>
+  Form?: {
+    size?: FormSize
+  }
+  Input?: {
+    size?: InputSize
+  }
+  InputNumber?: {
+    size?: InputNumberSize
+  }
+  InputOtp?: {
+    size?: InputOtpSize
+  }
+  Mention?: {
+    size?: MentionSize
+  }
+  Pagination?: {
+    size?: PaginationSize
+    inputSize?: InputSize
+    selectSize?: SelectSize
+  }
+  Popselect?: {
+    size?: PopselectSize
+  }
+  Radio?: {
+    size?: RadioSize
+  }
+  Rate?: {
+    size?: RateSize
+  }
+  Result?: {
+    size?: ResultSize
+  }
   Select?: {
+    size?: SelectSize
     renderEmpty?: () => VNodeChild
   }
+  Skeleton?: {
+    size?: SkeletonSize
+  }
+  Space?: {
+    size?: SpaceSize
+  }
+  Switch?: {
+    size?: SwitchSize
+  }
+  Table?: {
+    size?: TableSize
+  }
+  Tabs?: {
+    size?: TabsSize
+  }
+  Tag?: {
+    size?: TagSize
+  }
+  TimePicker?: {
+    size?: TimePickerSize
+  }
   Transfer?: {
+    size?: TransferSize
     renderEmpty?: () => VNodeChild
   }
   Tree?: {
     renderEmpty?: () => VNodeChild
   }
   TreeSelect?: {
+    size?: TreeSelectSize
     renderEmpty?: () => VNodeChild
   }
 }

@@ -35,10 +35,10 @@ import type {
   SelectInst,
   SelectMixedOption,
   SelectOption,
-  Size,
   Value,
   ValueAtom
 } from './interface'
+import type { SelectSize } from './public-types'
 import { getPreciseEventTarget, happensIn } from 'seemly'
 import { createTreeMate } from 'treemate'
 import { clickoutside } from 'vdirs'
@@ -87,6 +87,10 @@ export const selectProps = {
     default: undefined
   },
   clearable: Boolean,
+  clearCreatedOptionsOnClear: {
+    type: Boolean,
+    default: true
+  },
   clearFilterAfterSelect: {
     type: Boolean,
     default: true
@@ -107,9 +111,9 @@ export const selectProps = {
   placeholder: String,
   menuProps: Object as PropType<HTMLAttributes>,
   multiple: Boolean,
-  size: String as PropType<Size>,
+  size: String as PropType<SelectSize>,
   menuSize: {
-    type: String as PropType<Size>
+    type: String as PropType<SelectSize>
   },
   filterable: Boolean,
   disabled: {
@@ -253,7 +257,8 @@ export default defineComponent({
       mergedClsPrefixRef,
       mergedBorderedRef,
       namespaceRef,
-      inlineThemeDisabled
+      inlineThemeDisabled,
+      mergedComponentPropsRef
     } = useConfig(props)
     const themeRef = useTheme(
       'Select',
@@ -416,7 +421,20 @@ export default defineComponent({
       return null
     })
 
-    const formItem = useFormItem(props)
+    const formItem = useFormItem(props, {
+      mergedSize: (NFormItem) => {
+        const { size } = props
+        if (size)
+          return size
+        const { mergedSize: formItemSize } = NFormItem || {}
+        if (formItemSize?.value)
+          return formItemSize.value as SelectSize
+        const configSize = mergedComponentPropsRef?.value?.Select?.size
+        if (configSize)
+          return configSize
+        return 'medium'
+      }
+    })
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     function doUpdateValue(
       value: string | number | Array<string | number> | null,
@@ -742,11 +760,11 @@ export default defineComponent({
     }
     function handleClear(e: MouseEvent): void {
       e.stopPropagation()
-      const { multiple, tag, remote } = props
+      const { multiple, tag, remote, clearCreatedOptionsOnClear } = props
       if (!multiple && props.filterable) {
         closeMenu()
       }
-      if (tag && !remote) {
+      if (tag && !remote && clearCreatedOptionsOnClear) {
         createdOptionsRef.value = emptyArray
       }
       doClear()

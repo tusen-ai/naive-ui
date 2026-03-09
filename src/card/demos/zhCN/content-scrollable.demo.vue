@@ -11,7 +11,7 @@
     style="max-height: 280px"
     segmented
   >
-    <p v-for="i in 20" :key="i" style="margin: 0 0 8px 0;">
+    <p v-for="i in 20" :key="i" style="margin: 0 0 8px 0">
       第 {{ i }} 条任务：只滚动内容区域。
     </p>
     <template #footer>

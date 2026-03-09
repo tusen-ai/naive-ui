@@ -3,11 +3,17 @@
 Oracle from the top(always) of the browser.
 
 <n-space vertical size="large">
-<n-alert title="Prerequisite" type="warning" :bordered="false">
-  If you want to use message, you need to wrap the component where you call related methods inside <n-text code>n-message-provider</n-text> and use <n-text code>useMessage</n-text> to get the API.
-  <br/>
-  If you want to use it outside setup, please refer to Q & A part at the bottom of the page.
+<n-alert type="warning" title="Notice"  :bordered="false">
+  <n-ul align-text>
+    <li>
+      If you want to use <n-text code>useMessage</n-text> to use message, you need to put the component that calls its method inside <n-text code>n-message-provider</n-text> and use <n-text code>useMessage</n-text> to get the API.
+    </li>
+    <li>
+      If you want to know how to use it outside of <n-text code>setup</n-text>, please refer to Q & A at the bottom of this page.
+    </li>
+  </n-ul>
 </n-alert>
+
 For example:
 
 ```html
@@ -91,7 +97,7 @@ no-icon.vue
 | keepAliveOnHover | `boolean` | Messages whether to destroy while hover. |  |
 | render | `MessageRenderMessage` | Render function of the entire message. | 2.24.0 |
 | showIcon | `boolean` | Whether to show icon. | 2.25.7 |
-| spinProps | `{ strokeWidth?: number, stroke?: string, scale?: number, radius?: number }` | Loading icon properties. | NEXT_VERSION |
+| spinProps | `{ strokeWidth?: number, stroke?: string, scale?: number, radius?: number }` | Loading icon properties. | 2.44.0 |
 | type | `'info' \| 'success' \| 'warning' \| 'error' \| 'loading' \| 'default'` | Message type. | `'default'` 2.25.7 |
 | onAfterLeave | `() => void` | Callback after message disappeared. |  |
 | onClose | `() => void` | Callback when close icon is clicked. |  |

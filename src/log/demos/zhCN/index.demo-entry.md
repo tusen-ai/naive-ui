@@ -65,7 +65,7 @@ auto-bottom.vue
 | loading | `boolean` | `false` | 是否显示加载中 |
 | log | `string` | `undefined` | 日志的内容 |
 | rows | `number` | `15` | 日志的尺寸 |
-| spin-props | `{ strokeWidth?: number, stroke?: string, scale?: number, radius?: number }` | `undefined` | 加载图标的属性 | NEXT_VERSION |
+| spin-props | `{ strokeWidth?: number, stroke?: string, scale?: number, radius?: number }` | `undefined` | 加载图标的属性 | 2.44.0 |
 | trim | `boolean` | `false` | 是否显示 `trim` 后的日志 |
 | on-require-more | `(from: 'top' \| 'bottom') => void` | `undefined` | 滚动加载日志的回调函数 |
 | on-reach-top | `() => void` | `undefined` | 滚动到顶部的回调函数 |

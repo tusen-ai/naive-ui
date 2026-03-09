@@ -70,8 +70,6 @@ export type SelectTreeMate = TreeMate<
   SelectIgnoredOption
 >
 
-export type Size = 'tiny' | 'small' | 'medium' | 'large'
-
 // Public interfaces
 export type SelectOption = SelectBaseOption<string | number>
 export type SelectGroupOption

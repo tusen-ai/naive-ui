@@ -51,6 +51,7 @@ create-debug.vue
 | consistent-menu-width | `boolean` | `true` | 菜单宽度是否和选择触发器一致，设为 `false` 会使 `virtual-scroll` 失效 |  |
 | children-field | `string` | `'children'` | 选项组 children 的字段名 | 2.29.1 |
 | clearable | `boolean` | `false` | 是否可清空 |  |
+| clear-created-options-on-clear | `boolean` | `true` | 在开启 `tag` 且可清空时，点击清空是否同时清空通过 tag 创建的选项 | 2.44.0 |
 | clear-filter-after-select | `boolean` | `true` | 是否在可过滤和多选的情况下选中一个选项后保留当前的搜索关键词 | 2.25.2 |
 | default-value | `Array<string \| number> \| string \| number \| null` | `null` | 非受控模式下的默认值 |  |
 | disabled | `boolean` | `false` | 是否禁用 |  |
@@ -76,7 +77,7 @@ create-debug.vue
 | render-option | `(info: { node: VNode, option: SelectOption \| SelectGroupOption, selected: boolean }) => VNodeChild` | `undefined` | 选项的渲染函数 |  |
 | render-tag | `(props: { option: SelectBaseOption, handleClose: () => void }) => VNodeChild` | `undefined` | 控制标签的渲染 |  |
 | reset-menu-on-options-change | `boolean` | `true` | 是否在选项变化时重置菜单状态，例如滚动状态 | 2.24.2 |
-| scrollbar-props | `ScrollbarProps` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props) | NEXT_VERSION |
+| scrollbar-props | `ScrollbarProps` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props) | 2.44.0 |
 | show | `boolean` | `undefined` | 是否展示菜单 |  |
 | show-arrow | `boolean` | `true` | 是否展示箭头 |  |
 | show-checkmark | `boolean` | `true` | 是否展示对勾 | 2.33.4 |

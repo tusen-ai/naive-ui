@@ -26,7 +26,7 @@ separator-per-item.vue
 | clickable | `boolean` | `true` | Whether it's clickable. | 2.30.0 |
 | href | `string` | `undefined` | BreadcrumbItem link. |  |
 | separator | `string` | `undefined` | BreadcrumbItem separator. |  |
-| show-separator | `boolean` | `true` | Whether to show the separator. | NEXT_VERSION |
+| show-separator | `boolean` | `true` | Whether to show the separator. | 2.44.0 |
 
 ### Breadcrumb Slots
 

@@ -50,7 +50,7 @@ close-debug.vue
 | --- | --- | --- | --- |
 | action | `()` | 菜单操作区域的 slot | 2.24.0 |
 | label | `(color: string \| null)` | 触发器的内容 | 2.24.0 |
-| trigger | `(props: { value: string \| null , onClick: () => void, ref: (ref: Element \| ComponentPublicInstance \| null }) => void })` | 自定义触发器，只允许一个元素，不可以是纯文本 | NEXT_VERSION |
+| trigger | `(props: { value: string \| null , onClick: () => void, ref: (ref: Element \| ComponentPublicInstance \| null }) => void })` | 自定义触发器，只允许一个元素，不可以是纯文本 | 2.44.0 |
 
 ## Q & A
 

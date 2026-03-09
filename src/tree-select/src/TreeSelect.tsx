@@ -36,6 +36,7 @@ import type {
   TreeSelectRenderTag,
   Value
 } from './interface'
+import type { TreeSelectSize } from './public-types'
 import { getPreciseEventTarget, happensIn } from 'seemly'
 import { createTreeMate } from 'treemate'
 import { clickoutside } from 'vdirs'
@@ -119,6 +120,7 @@ export const treeSelectProps = {
   loading: Boolean,
   maxTagCount: [String, Number] as PropType<number | 'responsive'>,
   multiple: Boolean,
+  showLine: Boolean,
   showPath: Boolean,
   separator: {
     type: String,
@@ -137,7 +139,7 @@ export const treeSelectProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  size: String as PropType<'small' | 'medium' | 'large'>,
+  size: String as PropType<TreeSelectSize>,
   value: [String, Number, Array] as PropType<
     string | number | Array<string | number> | null
   >,
@@ -219,7 +221,20 @@ export default defineComponent({
       nTriggerFormChange,
       nTriggerFormFocus,
       nTriggerFormInput
-    } = useFormItem(props)
+    } = useFormItem(props, {
+      mergedSize: (NFormItem) => {
+        const { size } = props
+        if (size)
+          return size
+        const { mergedSize: formItemSize } = NFormItem || {}
+        if (formItemSize?.value)
+          return formItemSize.value as TreeSelectSize
+        const configSize = mergedComponentPropsRef?.value?.TreeSelect?.size
+        if (configSize)
+          return configSize
+        return 'medium'
+      }
+    })
     const uncontrolledValueRef = ref<Value>(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
@@ -1028,6 +1043,7 @@ export default defineComponent({
                                 cascade={this.mergedCascade}
                                 leafOnly={this.leafOnly}
                                 multiple={this.multiple}
+                                showLine={this.showLine}
                                 renderLabel={this.renderLabel}
                                 renderPrefix={this.renderPrefix}
                                 renderSuffix={this.renderSuffix}

@@ -417,6 +417,7 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
+      mergedSize: mergedSizeRef,
       // data
       tmNodes: tmNodesRef,
       // show
@@ -450,7 +451,12 @@ export default defineComponent({
         ) || {}
       const dropdownProps = {
         ref: createRefSetter(ref),
-        class: [className, `${mergedClsPrefix}-dropdown`, this.themeClass],
+        class: [
+          className,
+          `${mergedClsPrefix}-dropdown`,
+          `${mergedClsPrefix}-dropdown--${this.mergedSize}-size`,
+          this.themeClass
+        ],
         clsPrefix: mergedClsPrefix,
         tmNodes: this.tmNodes,
         style: [...style, this.cssVars],

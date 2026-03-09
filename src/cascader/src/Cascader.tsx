@@ -28,7 +28,7 @@ import type {
   SelectMenuInstance,
   Value
 } from './interface'
-import type { CascaderSpinProps } from './public-types'
+import type { CascaderSize, CascaderSpinProps } from './public-types'
 import { changeColor, depx, getPreciseEventTarget, happensIn } from 'seemly'
 import { createTreeMate, SubtreeNotLoadedError } from 'treemate'
 import { useIsMounted, useMergedState } from 'vooks'
@@ -85,7 +85,7 @@ export const cascaderProps = {
   },
   placeholder: String,
   multiple: Boolean,
-  size: String as PropType<'small' | 'medium' | 'large'>,
+  size: String as PropType<CascaderSize>,
   filterable: Boolean,
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
@@ -223,7 +223,8 @@ export default defineComponent({
       mergedBorderedRef,
       mergedClsPrefixRef,
       namespaceRef,
-      inlineThemeDisabled
+      inlineThemeDisabled,
+      mergedComponentPropsRef
     } = useConfig(props)
     const themeRef = useTheme(
       'Cascader',
@@ -244,7 +245,20 @@ export default defineComponent({
       return props.leafOnly ? 'child' : props.checkStrategy
     })
     const patternRef = ref('')
-    const formItem = useFormItem(props)
+    const formItem = useFormItem(props, {
+      mergedSize: (NFormItem) => {
+        const { size } = props
+        if (size)
+          return size
+        const { mergedSize: formItemSize } = NFormItem || {}
+        if (formItemSize?.value)
+          return formItemSize.value as CascaderSize
+        const configSize = mergedComponentPropsRef?.value?.Cascader?.size
+        if (configSize)
+          return configSize
+        return 'medium'
+      }
+    })
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     const cascaderMenuInstRef = ref<CascaderMenuInstance | null>(null)
     const selectMenuInstRef = ref<SelectMenuInstance | null>(null)

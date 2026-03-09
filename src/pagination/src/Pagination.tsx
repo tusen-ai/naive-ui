@@ -2,9 +2,9 @@ import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
 import type { ScrollbarProps } from '../../_internal/scrollbar/src/Scrollbar'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { Size as InputSize } from '../../input/src/interface'
+import type { InputSize } from '../../input/src/public-types'
 import type { SelectProps } from '../../select'
-import type { Size as SelectSize } from '../../select/src/interface'
+import type { SelectSize } from '../../select/src/public-types'
 import type { PaginationTheme } from '../styles'
 import type {
   PaginationInfo,
@@ -15,9 +15,9 @@ import type {
   RenderNext,
   RenderPrefix,
   RenderPrev,
-  RenderSuffix,
-  Size
+  RenderSuffix
 } from './interface'
+import type { PaginationSize } from './public-types'
 import type { PageItem } from './utils'
 import { useMergedState } from 'vooks'
 import {
@@ -80,7 +80,7 @@ export const paginationProps = {
     }
   },
   showQuickJumper: Boolean,
-  size: String as PropType<Size>,
+  size: String as PropType<PaginationSize>,
   disabled: Boolean,
   pageSlot: {
     type: Number,
@@ -165,7 +165,7 @@ export default defineComponent({
       inlineThemeDisabled,
       mergedRtlRef
     } = useConfig(props)
-    const mergedSizeRef = computed<Size>(() => {
+    const mergedSizeRef = computed<PaginationSize>(() => {
       return (
         props.size
         || mergedComponentPropsRef?.value?.Pagination?.size

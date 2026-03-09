@@ -83,10 +83,7 @@ export const dataTableProps = {
     default: true
   },
   singleColumn: Boolean,
-  size: {
-    type: String as PropType<DataTableSize>,
-    default: 'medium'
-  },
+  size: String as PropType<DataTableSize>,
   remote: Boolean,
   defaultExpandedRowKeys: {
     type: Array as PropType<RowKey[]>,

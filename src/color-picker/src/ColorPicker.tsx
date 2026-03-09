@@ -18,6 +18,7 @@ import type {
   OnUpdateValueImpl,
   RenderLabel
 } from './interface'
+import type { ColorPickerSize } from './public-types'
 import type { ActionType, ColorPickerMode } from './utils'
 import {
   getPreciseEventTarget,
@@ -115,7 +116,7 @@ export const colorPickerProps = {
     default: null
   },
   internalActions: Array as PropType<ReadonlyArray<'redo' | 'undo'>>,
-  size: String as PropType<'small' | 'medium' | 'large'>,
+  size: String as PropType<ColorPickerSize>,
   renderLabel: Function as PropType<RenderLabel>,
   onComplete: Function as PropType<OnUpdateValue>,
   onConfirm: Function as PropType<OnUpdateValue>,
@@ -154,11 +155,28 @@ export default defineComponent({
     }
     let upcomingValue: string | null = null
 
-    const formItem = useFormItem(props)
+    const {
+      mergedClsPrefixRef,
+      namespaceRef,
+      inlineThemeDisabled,
+      mergedComponentPropsRef
+    } = useConfig(props)
+    const formItem = useFormItem(props, {
+      mergedSize: (NFormItem) => {
+        const { size } = props
+        if (size)
+          return size
+        const { mergedSize: formItemSize } = NFormItem || {}
+        if (formItemSize?.value)
+          return formItemSize.value as ColorPickerSize
+        const configSize = mergedComponentPropsRef?.value?.ColorPicker?.size
+        if (configSize)
+          return configSize
+        return 'medium'
+      }
+    })
     const { mergedSizeRef, mergedDisabledRef } = formItem
     const { localeRef } = useLocale('global')
-    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled }
-      = useConfig(props)
 
     const themeRef = useTheme(
       'ColorPicker',

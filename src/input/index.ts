@@ -8,3 +8,4 @@ export {
 } from './src/InputGroupLabel'
 export type { InputGroupLabelProps } from './src/InputGroupLabel'
 export type { InputInst } from './src/interface'
+export type * from './src/public-types'

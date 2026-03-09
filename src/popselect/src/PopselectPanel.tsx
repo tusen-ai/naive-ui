@@ -15,7 +15,7 @@ import type {
   Value,
   ValueAtom
 } from '../../select/src/interface'
-import type { PopselectSize } from './interface'
+import type { PopselectSize } from './public-types'
 import { happensIn } from 'seemly'
 import { createTreeMate } from 'treemate'
 import {

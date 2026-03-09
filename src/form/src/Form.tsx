@@ -12,9 +12,9 @@ import type {
   FormValidateMessages,
   LabelAlign,
   LabelPlacement,
-  ShouldRuleBeApplied,
-  Size
+  ShouldRuleBeApplied
 } from './interface'
+import type { FormSize } from './public-types'
 import { defineComponent, h, provide, ref } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { keysOf } from '../../_utils'
@@ -37,7 +37,7 @@ export const formProps = {
   },
   rules: Object as PropType<FormRules>,
   disabled: Boolean,
-  size: String as PropType<Size>,
+  size: String as PropType<FormSize>,
   showRequireMark: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined

@@ -477,6 +477,7 @@ export default defineComponent({
         tabindex={this.focusable ? 0 : -1}
         class={[
           `${clsPrefix}-base-select-menu`,
+          `${clsPrefix}-base-select-menu--${this.size}-size`,
           this.rtlEnabled && `${clsPrefix}-base-select-menu--rtl`,
           themeClass,
           this.multiple && `${clsPrefix}-base-select-menu--multiple`

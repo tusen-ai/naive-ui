@@ -6,6 +6,7 @@ import type { InternalSelectionTheme } from '../../_internal/selection/styles'
 import type { Hljs } from '../../_mixins'
 import type { AlertTheme } from '../../alert/styles'
 import type { AnchorTheme } from '../../anchor/styles'
+import type { AutoCompleteSize } from '../../auto-complete/src/public-types'
 import type { AutoCompleteTheme } from '../../auto-complete/styles'
 import type { AvatarGroupTheme } from '../../avatar-group/styles'
 import type { AvatarTheme } from '../../avatar/styles'
@@ -13,18 +14,20 @@ import type { BackTopTheme } from '../../back-top/styles'
 import type { BadgeTheme } from '../../badge/styles'
 import type { BreadcrumbTheme } from '../../breadcrumb/styles'
 import type { ButtonGroupTheme } from '../../button-group/styles/light'
-import type { Size as ButtonSize } from '../../button/src/interface'
+import type { ButtonSize } from '../../button/src/public-types'
 import type { ButtonTheme } from '../../button/styles'
 import type { CalendarTheme } from '../../calendar/styles'
 import type { CardSize } from '../../card/src/public-types'
 import type { CardTheme } from '../../card/styles'
 import type { CarouselTheme } from '../../carousel/styles'
+import type { CascaderSize } from '../../cascader/src/public-types'
 import type { CascaderTheme } from '../../cascader/styles'
 import type { CheckboxSize } from '../../checkbox/src/public-types'
 import type { CheckboxTheme } from '../../checkbox/styles'
 import type { CodeTheme } from '../../code/styles'
 import type { CollapseTransitionTheme } from '../../collapse-transition/styles'
 import type { CollapseTheme } from '../../collapse/styles'
+import type { ColorPickerSize } from '../../color-picker/src/public-types'
 import type { ColorPickerTheme } from '../../color-picker/styles'
 import type {
   DataTableRenderFilter,
@@ -32,6 +35,7 @@ import type {
 } from '../../data-table'
 import type { DataTableSize } from '../../data-table/src/public-types'
 import type { DataTableTheme } from '../../data-table/styles'
+import type { DatePickerSize } from '../../date-picker/src/public-types'
 import type { DatePickerTheme } from '../../date-picker/styles'
 import type { DescriptionsSize } from '../../descriptions/src/public-types'
 import type { DescriptionsTheme } from '../../descriptions/styles'
@@ -52,16 +56,18 @@ import type { EquationTheme } from '../../equation/styles'
 import type { FlexTheme } from '../../flex/styles'
 import type { FloatButtonGroupTheme } from '../../float-button-group/styles'
 import type { FloatButtonTheme } from '../../float-button/styles'
-import type { Size as FormSize } from '../../form/src/interface'
+import type { FormSize } from '../../form/src/public-types'
 import type { FormTheme } from '../../form/styles'
 import type { GradientTextTheme } from '../../gradient-text/styles'
 import type { HeatmapTheme } from '../../heatmap/styles'
 import type { IconWrapperTheme } from '../../icon-wrapper/styles'
 import type { IconTheme } from '../../icon/styles'
 import type { ImageTheme } from '../../image/styles'
+import type { InputNumberSize } from '../../input-number/src/public-types'
 import type { InputNumberTheme } from '../../input-number/styles'
+import type { InputOtpSize } from '../../input-otp/src/public-types'
 import type { InputOtpTheme } from '../../input-otp/styles'
-import type { Size as InputSize } from '../../input/src/interface'
+import type { InputSize } from '../../input/src/public-types'
 import type { InputTheme } from '../../input/styles'
 import type { LayoutTheme } from '../../layout/styles'
 import type { RowTheme } from '../../legacy-grid/styles'
@@ -71,17 +77,18 @@ import type { LoadingBarTheme } from '../../loading-bar/styles'
 import type { NDateLocale, NLocale } from '../../locales'
 import type { LogTheme } from '../../log/styles'
 import type { MarqueeTheme } from '../../marquee/styles'
+import type { MentionSize } from '../../mention/src/public-types'
 import type { MentionTheme } from '../../mention/styles'
 import type { MenuTheme } from '../../menu/styles'
 import type { MessageTheme } from '../../message/styles'
 import type { ModalTheme } from '../../modal/styles'
 import type { NotificationTheme } from '../../notification/styles'
 import type { PageHeaderTheme } from '../../page-header/styles'
-import type { Size as PaginationSize } from '../../pagination/src/interface'
+import type { PaginationSize } from '../../pagination/src/public-types'
 import type { PaginationTheme } from '../../pagination/styles'
 import type { PopconfirmTheme } from '../../popconfirm/styles'
 import type { PopoverTheme } from '../../popover/styles'
-import type { PopselectSize } from '../../popselect/src/interface'
+import type { PopselectSize } from '../../popselect/src/public-types'
 import type { PopselectTheme } from '../../popselect/styles'
 import type { ProgressTheme } from '../../progress/styles'
 import type { QrCodeTheme } from '../../qr-code/styles'
@@ -91,7 +98,7 @@ import type { RateSize } from '../../rate/src/public-types'
 import type { RateTheme } from '../../rate/styles'
 import type { ResultSize } from '../../result/src/public-types'
 import type { ResultTheme } from '../../result/styles'
-import type { Size as SelectSize } from '../../select/src/interface'
+import type { SelectSize } from '../../select/src/public-types'
 import type { SelectTheme } from '../../select/styles'
 import type { SkeletonSize } from '../../skeleton/src/public-types'
 import type { SkeletonTheme } from '../../skeleton/styles'
@@ -111,11 +118,13 @@ import type { TabsTheme } from '../../tabs/styles'
 import type { TagSize } from '../../tag/src/public-types'
 import type { TagTheme } from '../../tag/styles'
 import type { ThingTheme } from '../../thing/styles'
-import type { Size as TimePickerSize } from '../../time-picker/src/interface'
+import type { TimePickerSize } from '../../time-picker/src/public-types'
 import type { TimePickerTheme } from '../../time-picker/styles'
 import type { TimelineTheme } from '../../timeline/styles'
 import type { TooltipTheme } from '../../tooltip/styles'
+import type { TransferSize } from '../../transfer/src/public-types'
 import type { TransferTheme } from '../../transfer/styles'
+import type { TreeSelectSize } from '../../tree-select/src/public-types'
 import type { TreeSelectTheme } from '../../tree-select/styles'
 import type { TreeTheme } from '../../tree/styles'
 import type { TypographyTheme } from '../../typography/styles'
@@ -220,7 +229,11 @@ export interface GlobalThemeWithoutCommon {
 }
 
 export interface GlobalComponentConfig {
+  AutoComplete?: {
+    size?: AutoCompleteSize
+  }
   Cascader?: {
+    size?: CascaderSize
     renderEmpty?: () => VNodeChild
   }
   Button?: {
@@ -237,7 +250,11 @@ export interface GlobalComponentConfig {
     inputSize?: InputSize
     selectSize?: SelectSize
   }
+  ColorPicker?: {
+    size?: ColorPickerSize
+  }
   DatePicker?: {
+    size?: DatePickerSize
     timePickerSize?: TimePickerSize
   }
   Dialog?: {
@@ -268,7 +285,17 @@ export interface GlobalComponentConfig {
   Input?: {
     size?: InputSize
   }
+  InputNumber?: {
+    size?: InputNumberSize
+  }
+  InputOtp?: {
+    size?: InputOtpSize
+  }
+  Mention?: {
+    size?: MentionSize
+  }
   Select?: {
+    size?: SelectSize
     renderEmpty?: () => VNodeChild
   }
   Popselect?: {
@@ -301,13 +328,18 @@ export interface GlobalComponentConfig {
   Tag?: {
     size?: TagSize
   }
+  TimePicker?: {
+    size?: TimePickerSize
+  }
   Transfer?: {
+    size?: TransferSize
     renderEmpty?: () => VNodeChild
   }
   Tree?: {
     renderEmpty?: () => VNodeChild
   }
   TreeSelect?: {
+    size?: TreeSelectSize
     renderEmpty?: () => VNodeChild
   }
 }
