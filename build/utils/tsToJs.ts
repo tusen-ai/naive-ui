@@ -1,19 +1,29 @@
-import { transformSync } from 'esbuild'
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
+import { format } from 'prettier'
+import { ModuleKind, ScriptTarget, transpileModule } from 'typescript'
 
-export function tsToJs(content: string | null): string {
-  if (!content) {
-    return ''
-  }
-  // esbuild will remove blank line
+const prettierOptions = JSON.parse(
+  readFileSync(resolve(__dirname, '../../.prettierrc'), 'utf-8')
+)
+
+export async function tsToJs(content: string): Promise<string> {
   const beforeTransformContent = content.replace(
     /\n(\s)*\n/g,
     '\n__blankline\n'
   )
-  const { code } = transformSync(beforeTransformContent, {
-    loader: 'ts',
-    minify: false,
-    minifyWhitespace: false,
-    charset: 'utf8'
+  const result = transpileModule(beforeTransformContent, {
+    compilerOptions: {
+      module: ModuleKind.ESNext,
+      target: ScriptTarget.ESNext,
+      // Ensures the import is not removed or changed
+      verbatimModuleSyntax: true
+    }
   })
-  return code.trim().replace(/__blankline;/g, '')
+  const formatted = await format(result.outputText, {
+    ...prettierOptions,
+    parser: 'babel'
+  })
+
+  return formatted.trim().replace(/(__blankline(\n)?)+/g, '\n')
 }

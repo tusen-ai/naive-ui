@@ -1,7 +1,7 @@
 import { convertVue2Demo } from './convert-vue-to-demo'
 import projectPath from './project-path'
 
-export default function (content: string, path: string): string {
+export default async function (content: string, path: string): Promise<string> {
   const relativeUrl = path.replace(`${projectPath}/`, '')
   return convertVue2Demo({
     content,

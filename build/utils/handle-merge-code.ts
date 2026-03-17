@@ -19,7 +19,9 @@ interface MergeCodeOptions {
   isVue: boolean
 }
 
-export function handleMergeCode(options: MergeCodeOptions): void {
+export async function handleMergeCode(
+  options: MergeCodeOptions
+): Promise<void> {
   const { parts, mergedParts, isVue } = options
   const isCompositionApi = parts.api === 'composition'
   if (isVue && parts.language === 'ts') {
@@ -39,7 +41,7 @@ export function handleMergeCode(options: MergeCodeOptions): void {
 ${parts.script}
 </script>`
       mergedParts.jsCode += `<script${isCompositionApi ? ' setup' : ''}>
-${tsToJs(parts.script)}
+${await tsToJs(parts.script)}
 </script>`
     }
     if (parts.style) {
