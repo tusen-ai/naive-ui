@@ -1,6 +1,7 @@
 import type { ModalProps } from '../index'
 import { mount } from '@vue/test-utils'
-import { defineComponent, h, ref } from 'vue'
+import { vi } from 'vitest'
+import { defineComponent, h, nextTick, ref, unref } from 'vue'
 import { NButton } from '../../button'
 import { NModal } from '../index'
 
@@ -14,35 +15,38 @@ function mountModal({
   return mount(
     defineComponent({
       setup() {
-        return {
-          show: ref(!!show)
+        const showRef = ref(!!show)
+        const handleUpdateShow = (value: boolean) => {
+          showRef.value = value
         }
-      },
-      render() {
-        return [
+        return () => [
           <NButton
             onClick={() => {
-              this.show = true
+              showRef.value = true
             }}
           >
             {{ default: () => 'Show' }}
           </NButton>,
           <NModal
-            show={this.show}
-            onUpdateShow={(show) => {
-              this.show = show
-            }}
+            show={unref(showRef)}
+            onUpdateShow={handleUpdateShow}
             {...modalProps}
           >
             {{
-              default: () => 'test'
+              default: () => <div>test</div>
             }}
           </NModal>
         ]
       }
     }),
     {
-      attachTo: document.body
+      attachTo: document.body,
+      global: {
+        stubs: {
+          teleport: false,
+          transition: false
+        }
+      }
     }
   )
 }
@@ -53,35 +57,41 @@ describe('n-modal', () => {
   })
 
   it('should work with `display-directive` prop', async () => {
-    const mousedownEvent = new MouseEvent('mousedown', { bubbles: true })
-    const mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
     let wrapper = mountModal({})
     expect(document.querySelector('.n-modal-body-wrapper')).toEqual(null)
     await wrapper.find('button').trigger('click')
     expect(document.querySelector('.n-modal-body-wrapper')).not.toEqual(null)
-    document.querySelector('.n-modal-mask')?.dispatchEvent(mousedownEvent)
-    document.querySelector('.n-modal-mask')?.dispatchEvent(mouseupEvent)
-    vi.waitFor(() => {
-      expect(
-        document.querySelector('.n-modal-body-wrapper')?.children.length
-      ).toBe(0)
-    })
+    const rafSpy = vi
+      .spyOn(window, 'requestAnimationFrame')
+      .mockImplementation((cb: FrameRequestCallback): number => {
+        cb(0)
+        return 0
+      })
+
+    document
+      .querySelector('.n-modal-mask')
+      ?.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    await nextTick()
+    expect(document.querySelector('.n-modal-body-wrapper')).toEqual(null)
     wrapper.unmount()
     wrapper = mountModal({ modalProps: { displayDirective: 'show' } })
     expect(document.querySelector('.n-modal-body-wrapper')).toEqual(null)
     await wrapper.find('button').trigger('click')
     expect(document.querySelector('.n-modal-body-wrapper')).not.toEqual(null)
-    document.querySelector('.n-modal-mask')?.dispatchEvent(mousedownEvent)
-    document.querySelector('.n-modal-mask')?.dispatchEvent(mouseupEvent)
-    vi.waitFor(() => {
-      expect(
-        document.querySelector('.n-modal-body-wrapper')?.children.length
-      ).not.toBe(0)
-      expect(
-        document.querySelector('.n-modal-body-wrapper')?.getAttribute('style')
-      ).toContain('display: none')
-    })
+
+    document
+      .querySelector('.n-modal-mask')
+      ?.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    await nextTick()
+    expect(
+      document.querySelector('.n-modal-body-wrapper')?.children.length
+    ).not.toBe(0)
+    expect(
+      document.querySelector('.n-modal-body-wrapper')?.getAttribute('style')
+    ).toContain('display: none')
+
     wrapper.unmount()
+    rafSpy.mockRestore()
   })
 
   it('should work with `preset` prop', async () => {

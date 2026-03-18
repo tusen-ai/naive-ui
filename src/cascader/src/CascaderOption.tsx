@@ -36,6 +36,7 @@ export default defineComponent({
       showCheckboxRef,
       renderPrefixRef,
       renderSuffixRef,
+      spinPropsRef,
       updateHoverKey,
       updateKeyboardKey,
       addLoadingKey,
@@ -172,6 +173,7 @@ export default defineComponent({
       label: labelRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: mergedThemeRef,
+      spinProps: spinPropsRef,
       handleClick,
       handleCheckboxUpdateValue,
       mergedHandleMouseEnter: mergedHandleMouseEnterRef,
@@ -226,6 +228,7 @@ export default defineComponent({
             strokeWidth={24}
             show={this.isLoading}
             class={`${mergedClsPrefix}-cascader-option-icon`}
+            {...this.spinProps}
           >
             {{
               default: () => (

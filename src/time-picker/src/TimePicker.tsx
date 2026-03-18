@@ -16,9 +16,9 @@ import type {
   OnUpdateValue,
   OnUpdateValueImpl,
   PanelRef,
-  Size,
   TimePickerInst
 } from './interface'
+import type { TimePickerSize } from './public-types'
 import {
   format,
   getHours,
@@ -115,7 +115,7 @@ export const timePickerProps = {
   valueFormat: String,
   formattedValue: String as PropType<string | null>,
   isHourDisabled: Function as PropType<IsHourDisabled>,
-  size: String as PropType<Size>,
+  size: String as PropType<TimePickerSize>,
   isMinuteDisabled: Function as PropType<IsMinuteDisabled>,
   isSecondDisabled: Function as PropType<IsSecondDisabled>,
   inputReadonly: Boolean,
@@ -203,10 +203,24 @@ export default defineComponent({
       mergedBorderedRef,
       mergedClsPrefixRef,
       namespaceRef,
-      inlineThemeDisabled
+      inlineThemeDisabled,
+      mergedComponentPropsRef
     } = useConfig(props)
     const { localeRef, dateLocaleRef } = useLocale('TimePicker')
-    const formItem = useFormItem(props)
+    const formItem = useFormItem(props, {
+      mergedSize: (NFormItem) => {
+        const { size } = props
+        if (size)
+          return size
+        const { mergedSize: formItemSize } = NFormItem || {}
+        if (formItemSize?.value)
+          return formItemSize.value as TimePickerSize
+        const configSize = mergedComponentPropsRef?.value?.TimePicker?.size
+        if (configSize)
+          return configSize
+        return 'medium'
+      }
+    })
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     const themeRef = useTheme(
       'TimePicker',

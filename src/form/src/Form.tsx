@@ -12,9 +12,9 @@ import type {
   FormValidateMessages,
   LabelAlign,
   LabelPlacement,
-  ShouldRuleBeApplied,
-  Size
+  ShouldRuleBeApplied
 } from './interface'
+import type { FormSize } from './public-types'
 import { defineComponent, h, provide, ref } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { keysOf } from '../../_utils'
@@ -37,7 +37,7 @@ export const formProps = {
   },
   rules: Object as PropType<FormRules>,
   disabled: Boolean,
-  size: String as PropType<Size>,
+  size: String as PropType<FormSize>,
   showRequireMark: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -80,6 +80,14 @@ export default defineComponent({
         || currentWidth >= currentMaxChildLabelWidth
       ) {
         maxChildLabelWidthRef.value = currentWidth
+      }
+    }
+    function invalidateLabelWidth(): void {
+      for (const key of keysOf(formItems)) {
+        const formItemInstances = formItems[key]
+        for (const formItemInstance of formItemInstances) {
+          formItemInstance.invalidateLabelWidth?.()
+        }
       }
     }
     async function validate(
@@ -146,7 +154,8 @@ export default defineComponent({
     provide(formItemInstsInjectionKey, { formItems })
     const formExposedMethod: FormInst = {
       validate,
-      restoreValidation
+      restoreValidation,
+      invalidateLabelWidth
     }
     return Object.assign(formExposedMethod, {
       mergedClsPrefix: mergedClsPrefixRef

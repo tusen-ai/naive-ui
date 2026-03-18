@@ -1,6 +1,6 @@
 import type { PropType } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { Size } from '../../button/src/interface'
+import type { ButtonSize } from '../../button/src/public-types'
 import { defineComponent, h, provide } from 'vue'
 import { useConfig, useStyle } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
@@ -8,14 +8,11 @@ import { buttonGroupInjectionKey } from './context'
 import style from './styles/index.cssr'
 
 export interface ButtonGroupInjection {
-  size?: Size | undefined
+  size?: ButtonSize | undefined
 }
 
 export const buttonGroupProps = {
-  size: {
-    type: String as PropType<Size | undefined>,
-    default: undefined
-  },
+  size: String as PropType<ButtonSize | undefined>,
   vertical: Boolean
 } as const
 

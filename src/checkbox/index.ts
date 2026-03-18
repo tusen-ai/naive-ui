@@ -6,3 +6,4 @@ export {
 } from './src/CheckboxGroup'
 export type { CheckboxGroupProps } from './src/CheckboxGroup'
 export type { CheckboxInst } from './src/interface'
+export type * from './src/public-types'

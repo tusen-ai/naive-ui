@@ -2,6 +2,7 @@ import type { PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { SkeletonTheme } from '../styles'
+import type { SkeletonSize } from './public-types'
 import { pxfy, repeat } from 'seemly'
 import { computed, defineComponent, Fragment, h, mergeProps } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
@@ -16,7 +17,7 @@ export const skeletonProps = {
   circle: Boolean,
   height: [String, Number] as PropType<string | number>,
   width: [String, Number] as PropType<string | number>,
-  size: String as PropType<'small' | 'medium' | 'large'>,
+  size: String as PropType<SkeletonSize>,
   repeat: {
     type: Number,
     default: 1
@@ -39,7 +40,10 @@ export default defineComponent({
   props: skeletonProps,
   setup(props) {
     useHoudini()
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, mergedComponentPropsRef } = useConfig(props)
+    const mergedSizeRef = computed(() => {
+      return props.size || mergedComponentPropsRef?.value?.Skeleton?.size
+    })
     const themeRef = useTheme(
       'Skeleton',
       '-skeleton',
@@ -58,10 +62,10 @@ export default defineComponent({
         const selfThemeVars = theme.self
         const { color, colorEnd, borderRadius } = selfThemeVars
         let sizeHeight: string | undefined
-        const { circle, sharp, round, width, height, size, text, animated }
-          = props
-        if (size !== undefined) {
-          sizeHeight = selfThemeVars[createKey('height', size)]
+        const { circle, sharp, round, width, height, text, animated } = props
+        const mergedSize = mergedSizeRef.value
+        if (mergedSize !== undefined) {
+          sizeHeight = selfThemeVars[createKey('height', mergedSize)]
         }
         const mergedWidth = circle ? (width ?? height ?? sizeHeight) : width
         const mergedHeight = (circle ? (width ?? height) : height) ?? sizeHeight

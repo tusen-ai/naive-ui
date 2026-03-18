@@ -1,3 +1,4 @@
+export type * from './src/public-types'
 export { default as NRadio, radioProps } from './src/Radio'
 export type { RadioProps } from './src/Radio'
 export { default as NRadioButton, radioButtonProps } from './src/RadioButton'
