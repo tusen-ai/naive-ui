@@ -102,7 +102,6 @@ export default defineConfig({
       runtime: 'classic',
       pragma: 'h',
       pragmaFrag: 'Fragment',
-      // Disable React-specific development features that add __source and __self props
       development: false
     }
   },
