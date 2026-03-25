@@ -42,6 +42,8 @@
 
 ## 2.43.2
 
+`2025-11-16`
+
 ### Fixes
 
 - Fix seemly dependency version range allows incompatible versions.
