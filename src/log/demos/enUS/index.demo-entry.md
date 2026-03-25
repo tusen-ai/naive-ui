@@ -56,7 +56,7 @@ auto-bottom.vue
 ### Log Props
 
 | Name | Type | Default | Description |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | 
 | font-size | `number` | `14` | Font size. |
 | hljs | `Object` | `undefined` | If you want to set `hljs` locally, pass it using this prop. |
 | language | `string` | `undefined` | The language of the log in `highlightjs`. |
