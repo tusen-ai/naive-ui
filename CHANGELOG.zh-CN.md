@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-color-picker` 传入的 style、click 事件不生效，关闭 [#7528](https://github.com/tusen-ai/naive-ui/issues/7528)
+- 修复 `n-upload` 在 `n-form-item` 里未触发 change 校验问题。
 
 ## 2.44.1
 

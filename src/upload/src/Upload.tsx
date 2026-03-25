@@ -465,11 +465,13 @@ export default defineComponent({
     }
     function doUpdateFileList(files: UploadSettledFileInfo[]): void {
       const { 'onUpdate:fileList': _onUpdateFileList, onUpdateFileList } = props
+      const { nTriggerFormChange } = formItem
       if (_onUpdateFileList)
         call(_onUpdateFileList, files)
       if (onUpdateFileList)
         call(onUpdateFileList, files)
       uncontrolledFileListRef.value = files
+      nTriggerFormChange()
     }
     const mergedMultipleRef = computed(() => props.multiple || props.directory)
     const doChange: DoChange = (
