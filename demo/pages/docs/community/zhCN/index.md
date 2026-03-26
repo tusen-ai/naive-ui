@@ -24,3 +24,4 @@ Naive UI 是统一设计规范的高质量 Vue 组件库，我们倾向于只提
 | [it-tools](https://github.com/CorentinTh/it-tools) | 基于 Vue3 和 Naive UI 组件库开发，汇集了多种实用的在线工具 |
 | [Lithe Admin](https://github.com/tenianon/lithe-admin) | 一个轻盈而优雅的后台管理模板，基于 Vue3 + Naive UI + Vite + TypeScript + Pinia 构建，采用 Tailwind CSS Color 配色方案和磨砂纹理质感的设计 |
 | [DVHA Pro](https://github.com/duxweb/dvha) | 一款基于 Vue 3 的无头（Headless）中后台前端开发框架，搭配了 Naive UI 封装了开箱即用的异步能力，同时增加了异步渲染基座模式，无需编译即可集成到任何后端使用。 |
+| [Vue Simple Template](https://github.com/gitboyzcf/vue3-simple-template) | 一款基于Vue 3.5 + Vite 8 + Naive UI + TypeScript + Pinia + Vue Router + Tailwind CSS 4 + Pnpm 最新最简单的万能通用模板 |

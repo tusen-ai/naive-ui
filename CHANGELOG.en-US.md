@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-color-picker` passed `style` and `click` (onClick) not applied to trigger, closes [#7528](https://github.com/tusen-ai/naive-ui/issues/7528).
+
 ## 2.44.1
 
 `2026-03-08`
