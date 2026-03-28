@@ -15,10 +15,12 @@
         <div style="width: 160px">
           <n-anchor
             affix
+            listen-to=".document-scroll-container"
             :trigger-top="24"
             :top="88"
-            style="z-index: 1"
+            offset-target=".document-scroll-container"
             ignore-gap
+            style="z-index: 1"
           >
             <n-anchor-link title="Demos" href="#Demos">
               <n-anchor-link title="Basic" href="#basic.vue" />
@@ -32,7 +34,14 @@
       </n-col>
       <n-col :span="6">
         <div style="width: 160px">
-          <n-anchor affix :trigger-top="24" :top="88" style="z-index: 1">
+          <n-anchor
+            affix
+            listen-to=".document-scroll-container"
+            :trigger-top="24"
+            :top="88"
+            offset-target=".document-scroll-container"
+            style="z-index: 1"
+          >
             <n-anchor-link title="Demos" href="#Demos">
               <n-anchor-link title="Basic" href="#basic.vue" />
               <n-anchor-link title="Ignore-Gap" href="#ignore-gap.vue" />
