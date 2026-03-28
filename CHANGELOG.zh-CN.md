@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-color-picker` 传入的 style、click 事件不生效，关闭 [#7528](https://github.com/tusen-ai/naive-ui/issues/7528)
+- 修复 `n-data-table` 的 `scrollTo` 方法类型缺失，关闭 [#7554](https://github.com/tusen-ai/naive-ui/issues/7530)
 
 ## 2.44.1
 
