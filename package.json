@@ -147,7 +147,7 @@
     "vite": "^7.0.4",
     "vitest": "^3.2.4",
     "vue": "^3.5.21",
-    "vue-jsx-vapor": "^3.2.6",
+    "vue-jsx-vapor": "^3.2.7",
     "vue-router": "^4.5.1",
     "vue-tsc": "^3.0.7"
   },
