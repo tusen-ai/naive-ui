@@ -5,6 +5,7 @@
 ### Features
 
 - `n-tabs` 新增 `show-scroll-button`，`center-active-tab` 属性，关闭 [#5846](https://github.com/tusen-ai/naive-ui/issues/5846)、[#2128](https://github.com/tusen-ai/naive-ui/issues/2128)
+- `n-tabs` 新增 `scrollToCurrentTab` 方法，用于滚动到当前激活的标签页, 关闭 [#7548](https://github.com/tusen-ai/naive-ui/issues/7548)
 
 ## 2.42.0
 

@@ -5,6 +5,7 @@
 ### Features
 
 - `n-tabs` adds `show-scroll-button`，`center-active-tab` prop，closes [#5846](https://github.com/tusen-ai/naive-ui/issues/5846)、[#2128](https://github.com/tusen-ai/naive-ui/issues/2128)
+- `n-tabs` adds `scrollToCurrentTab` method, for scrolling to the current active tab, closes [#7548](https://github.com/tusen-ai/naive-ui/issues/7548)
 
 ## 2.42.0
 

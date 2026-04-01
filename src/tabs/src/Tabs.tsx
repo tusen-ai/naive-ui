@@ -211,7 +211,9 @@ export default defineComponent({
     watch(mergedValueRef, () => {
       tabChangeIdRef.id = 0
       updateCurrentBarStyle()
-      updateCurrentScrollPosition()
+      void nextTick(() => {
+        updateCurrentScrollPosition()
+      })
     })
 
     function getCurrentEl(): HTMLElement | null {
@@ -374,13 +376,13 @@ export default defineComponent({
 
     function updateCurrentScrollPosition(): void {
       const isHorizontal = ['top', 'bottom'].includes(props.placement)
+      const tabEl = getCurrentEl()
+      if (!tabEl)
+        return
       if (isHorizontal) {
         const scrollWrapperEl: HTMLElement | undefined
           = xScrollInstRef.value?.$el
         if (!scrollWrapperEl)
-          return
-        const tabEl = getCurrentEl()
-        if (!tabEl)
           return
         scrollToElement(
           scrollWrapperEl,
@@ -392,9 +394,6 @@ export default defineComponent({
       else {
         const { value: yScrollInst } = yScrollElRef
         if (!yScrollInst)
-          return
-        const tabEl = getCurrentEl()
-        if (!tabEl)
           return
         scrollToElement(yScrollInst, tabEl, isHorizontal, props.centerActiveTab)
       }
@@ -685,35 +684,28 @@ export default defineComponent({
       const { onAdd } = props
       if (onAdd)
         onAdd()
-      void nextTick(() => {
-        const currentEl = getCurrentEl()
-        const { value: xScrollInst } = xScrollInstRef
-        if (!currentEl || !xScrollInst)
-          return
-        xScrollInst.scrollTo({
-          left: currentEl.offsetLeft,
-          top: 0,
-          behavior: 'smooth'
-        })
-      })
     }
 
     const isScroll = ref(false)
     function deriveScrollShadow(el: HTMLElement | null): void {
       if (!el)
         return
+      // prevent scroll position from being 0
+      const SCROLL_POSITION_EPSILON = 1
       const { placement } = props
       if (placement === 'top' || placement === 'bottom') {
         const { scrollLeft, scrollWidth, offsetWidth } = el
-        startReachedRef.value = scrollLeft <= 0
-        endReachedRef.value = scrollLeft + offsetWidth >= scrollWidth
-        isScroll.value = offsetWidth < scrollWidth
+        startReachedRef.value = scrollLeft <= SCROLL_POSITION_EPSILON
+        endReachedRef.value
+          = scrollLeft + offsetWidth >= scrollWidth - SCROLL_POSITION_EPSILON
+        isScroll.value = offsetWidth < scrollWidth - SCROLL_POSITION_EPSILON
       }
       else {
         const { scrollTop, scrollHeight, offsetHeight } = el
-        startReachedRef.value = scrollTop <= 0
-        endReachedRef.value = scrollTop + offsetHeight >= scrollHeight
-        isScroll.value = offsetHeight < scrollHeight
+        startReachedRef.value = scrollTop <= SCROLL_POSITION_EPSILON
+        endReachedRef.value
+          = scrollTop + offsetHeight >= scrollHeight - SCROLL_POSITION_EPSILON
+        isScroll.value = offsetHeight < scrollHeight - SCROLL_POSITION_EPSILON
       }
     }
 
@@ -768,6 +760,9 @@ export default defineComponent({
     const exposedMethods: TabsInst = {
       syncBarPosition: () => {
         updateCurrentBarStyle()
+      },
+      scrollToCurrentTab: () => {
+        updateCurrentScrollPosition()
       }
     }
 

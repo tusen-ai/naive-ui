@@ -102,6 +102,7 @@ center-active-tab.vue
 
 ### Tabs Methods
 
-| Name            | Type         | Description              | Version |
-| --------------- | ------------ | ------------------------ | ------- |
-| syncBarPosition | `() => void` | Sync tab bar's position. | 2.24.0  |
+| Name               | Type         | Description              | Version      |
+| ------------------ | ------------ | ------------------------ | ------------ |
+| syncBarPosition    | `() => void` | Sync tab bar's position. | 2.24.0       |
+| scrollToCurrentTab | `() => void` | Scroll to current tab.   | NEXT_VERSION |
