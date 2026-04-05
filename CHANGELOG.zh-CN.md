@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-color-picker` 传入的 style、click 事件不生效，关闭 [#7528](https://github.com/tusen-ai/naive-ui/issues/7528)
+
+## 2.44.1
+
+`2026-03-08`
+
+### Feats
+
+- `n-config-provider` 在 `component-options` 中新增按组件配置 `size`（`AutoComplete`、`Cascader`、`ColorPicker`、`DatePicker`、`InputNumber`、`InputOtp`、`Mention`、`Select`、`TimePicker`、`Transfer`、`TreeSelect`）
+
+### Fixes
+
+- 修复 `n-config-provider` 部分组件的 `size` 全局配置不生效
+
 ## 2.44.0
 
 `2026-03-08`
@@ -39,6 +57,8 @@
 - 修复 `n-marquee` 组件 Non-function value encountered for default slot 警告
 - 修复 `n-data-table` 的 empty 状态在 `display: flex` 的容器中不展示
 - 修复 `n-data-table` 的在 empty 状态下，配合 `max-height` 或者 `flex-height`，header 部分没有滚动条，关闭 [#7479](https://github.com/tusen-ai/naive-ui/pull/7479)
+- 修复 `n-input`、`n-select`、`n-date-picker`、`n-auto-complete`、`n-cascader`、`n-color-picker`、`n-input-number`、`n-input-otp`、`n-mention`、`n-time-picker`、`n-transfer`、`n-tree-select` 未读取 `n-config-provider` 的全局 `size` 配置
+- 修复 `n-data-table`、`n-tag` 的 `size` 属性默认值导致全局配置无法生效
 
 ## 2.43.2
 

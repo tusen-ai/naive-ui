@@ -257,7 +257,8 @@ export default defineComponent({
       mergedClsPrefixRef,
       mergedBorderedRef,
       namespaceRef,
-      inlineThemeDisabled
+      inlineThemeDisabled,
+      mergedComponentPropsRef
     } = useConfig(props)
     const themeRef = useTheme(
       'Select',
@@ -420,7 +421,20 @@ export default defineComponent({
       return null
     })
 
-    const formItem = useFormItem(props)
+    const formItem = useFormItem(props, {
+      mergedSize: (NFormItem) => {
+        const { size } = props
+        if (size)
+          return size
+        const { mergedSize: formItemSize } = NFormItem || {}
+        if (formItemSize?.value)
+          return formItemSize.value as SelectSize
+        const configSize = mergedComponentPropsRef?.value?.Select?.size
+        if (configSize)
+          return configSize
+        return 'medium'
+      }
+    })
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     function doUpdateValue(
       value: string | number | Array<string | number> | null,

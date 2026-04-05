@@ -7,7 +7,6 @@ import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/public-types'
 import type { InputInst } from '../../input'
-import type { InputSize } from '../../input/src/public-types'
 import type {
   SelectBaseOption,
   SelectGroupOption,
@@ -15,6 +14,7 @@ import type {
 } from '../../select/src/interface'
 import type { MentionTheme } from '../styles'
 import type { MentionOption } from './interface'
+import type { MentionSize } from './public-types'
 import { createTreeMate } from 'treemate'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
@@ -99,7 +99,7 @@ export const mentionProps = {
     type: String as PropType<FollowerPlacement>,
     default: 'bottom-start'
   },
-  size: String as PropType<InputSize>,
+  size: String as PropType<MentionSize>,
   renderLabel: Function as PropType<RenderLabel>,
   status: String as PropType<FormValidationStatus>,
   'onUpdate:show': [Array, Function] as PropType<
@@ -141,7 +141,8 @@ export default defineComponent({
       namespaceRef,
       mergedClsPrefixRef,
       mergedBorderedRef,
-      inlineThemeDisabled
+      inlineThemeDisabled,
+      mergedComponentPropsRef
     } = useConfig(props)
     const themeRef = useTheme(
       'Mention',
@@ -151,7 +152,20 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    const formItem = useFormItem(props)
+    const formItem = useFormItem(props, {
+      mergedSize: (NFormItem) => {
+        const { size } = props
+        if (size)
+          return size
+        const { mergedSize: formItemSize } = NFormItem || {}
+        if (formItemSize?.value)
+          return formItemSize.value as MentionSize
+        const configSize = mergedComponentPropsRef?.value?.Mention?.size
+        if (configSize)
+          return configSize
+        return 'medium'
+      }
+    })
     const inputInstRef = ref<InputInst | null>(null)
     const cursorRef = ref<HTMLElement | null>(null)
     const followerRef = ref<FollowerInst | null>(null)

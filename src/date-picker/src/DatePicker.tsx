@@ -16,7 +16,7 @@ import type {
   Value
 } from './interface'
 import type { UsePanelCommonProps } from './panel/use-panel-common'
-import type { DatePickerInst } from './public-types'
+import type { DatePickerInst, DatePickerSize } from './public-types'
 import { format, getTime, isValid } from 'date-fns'
 import { getPreciseEventTarget, happensIn } from 'seemly'
 import { clickoutside } from 'vdirs'
@@ -104,8 +104,6 @@ export default defineComponent({
       })
     }
     const { localeRef, dateLocaleRef } = useLocale('DatePicker')
-    const formItem = useFormItem(props)
-    const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     const {
       mergedComponentPropsRef,
       mergedClsPrefixRef,
@@ -113,6 +111,21 @@ export default defineComponent({
       namespaceRef,
       inlineThemeDisabled
     } = useConfig(props)
+    const formItem = useFormItem(props, {
+      mergedSize: (NFormItem) => {
+        const { size } = props
+        if (size)
+          return size
+        const { mergedSize: formItemSize } = NFormItem || {}
+        if (formItemSize?.value)
+          return formItemSize.value as DatePickerSize
+        const configSize = mergedComponentPropsRef?.value?.DatePicker?.size
+        if (configSize)
+          return configSize
+        return 'medium'
+      }
+    })
+    const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     const panelInstRef = ref<PanelRef | null>(null)
     const triggerElRef = ref<HTMLElement | null>(null)
     const inputInstRef = ref<InputInst | null>(null)

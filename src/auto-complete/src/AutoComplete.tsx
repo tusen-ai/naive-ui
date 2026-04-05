@@ -33,6 +33,7 @@ import type {
   OnUpdateImpl,
   OnUpdateValue
 } from './interface'
+import type { AutoCompleteSize } from './public-types'
 import { getPreciseEventTarget } from 'seemly'
 import { createTreeMate } from 'treemate'
 import { clickoutside } from 'vdirs'
@@ -100,7 +101,7 @@ export const autoCompleteProps = {
   inputProps: Object as PropType<InputHTMLAttributes>,
   renderOption: Function as PropType<RenderOption>,
   renderLabel: Function as PropType<RenderLabel>,
-  size: String as PropType<'small' | 'medium' | 'large'>,
+  size: String as PropType<AutoCompleteSize>,
   options: {
     type: Array as PropType<AutoCompleteOptions>,
     default: () => []
@@ -145,9 +146,23 @@ export default defineComponent({
       mergedBorderedRef,
       namespaceRef,
       mergedClsPrefixRef,
-      inlineThemeDisabled
+      inlineThemeDisabled,
+      mergedComponentPropsRef
     } = useConfig(props)
-    const formItem = useFormItem(props)
+    const formItem = useFormItem(props, {
+      mergedSize: (NFormItem) => {
+        const { size } = props
+        if (size)
+          return size
+        const { mergedSize: formItemSize } = NFormItem || {}
+        if (formItemSize?.value)
+          return formItemSize.value as AutoCompleteSize
+        const configSize = mergedComponentPropsRef?.value?.AutoComplete?.size
+        if (configSize)
+          return configSize
+        return 'medium'
+      }
+    })
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     const triggerElRef = ref<HTMLElement | null>(null)
     const menuInstRef = ref<InternalSelectMenuRef | null>(null)

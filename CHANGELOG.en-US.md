@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-color-picker` passed `style` and `click` (onClick) not applied to trigger, closes [#7528](https://github.com/tusen-ai/naive-ui/issues/7528).
+
+## 2.44.1
+
+`2026-03-08`
+
+### Feats
+
+- `n-config-provider` adds per-component `size` options in `component-options` (`AutoComplete`, `Cascader`, `ColorPicker`, `DatePicker`, `InputNumber`, `InputOtp`, `Mention`, `Select`, `TimePicker`, `Transfer`, `TreeSelect`).
+
+### Fixes
+
+- `n-config-provider` fixes `size` prop doesn't work for some components.
+
 ## 2.44.0
 
 `2026-03-08`
@@ -39,6 +57,8 @@
 - Fix `n-marquee` component Non-function value encountered for default slot warning.
 - Fix `n-data-table`'s empty slot is not shown in a `display: flex` container.
 - Fix `n-data-table` missing header scrollbar in `n-data-table` when in empty state with `max-height` or `flex-height`, closes [#7479](https://github.com/tusen-ai/naive-ui/pull/7479).
+- Fix `n-input`, `n-select`, `n-date-picker`, `n-auto-complete`, `n-cascader`, `n-color-picker`, `n-input-number`, `n-input-otp`, `n-mention`, `n-time-picker`, `n-transfer`, `n-tree-select` not reading global `size` config from `n-config-provider`.
+- Fix `n-data-table` and `n-tag` `size` prop default value preventing global config from taking effect.
 
 ## 2.43.2
 

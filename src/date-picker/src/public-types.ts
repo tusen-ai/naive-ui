@@ -1,6 +1,8 @@
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { datePickerProps } from './props'
 
+export type DatePickerSize = 'small' | 'medium' | 'large'
+
 export interface DatePickerInst {
   focus: () => void
   blur: () => void

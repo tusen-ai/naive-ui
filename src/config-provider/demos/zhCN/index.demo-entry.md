@@ -42,6 +42,9 @@ size.vue
 
 ```ts
 interface GlobalComponentConfig {
+  AutoComplete?: {
+    size?: AutoCompleteSize
+  }
   Button?: {
     size?: ButtonSize
   }
@@ -49,10 +52,14 @@ interface GlobalComponentConfig {
     size?: CardSize
   }
   Cascader?: {
+    size?: CascaderSize
     renderEmpty?: () => VNodeChild
   }
   Checkbox?: {
     size?: CheckboxSize
+  }
+  ColorPicker?: {
+    size?: ColorPickerSize
   }
   DataTable?: {
     size?: DataTableSize
@@ -61,6 +68,7 @@ interface GlobalComponentConfig {
     renderEmpty?: () => VNodeChild
   }
   DatePicker?: {
+    size?: DatePickerSize
     timePickerSize?: TimePickerSize
   }
   Descriptions?: {
@@ -85,6 +93,15 @@ interface GlobalComponentConfig {
   Input?: {
     size?: InputSize
   }
+  InputNumber?: {
+    size?: InputNumberSize
+  }
+  InputOtp?: {
+    size?: InputOtpSize
+  }
+  Mention?: {
+    size?: MentionSize
+  }
   Pagination?: {
     size?: PaginationSize
     inputSize?: InputSize
@@ -103,6 +120,7 @@ interface GlobalComponentConfig {
     size?: ResultSize
   }
   Select?: {
+    size?: SelectSize
     renderEmpty?: () => VNodeChild
   }
   Skeleton?: {
@@ -123,13 +141,18 @@ interface GlobalComponentConfig {
   Tag?: {
     size?: TagSize
   }
+  TimePicker?: {
+    size?: TimePickerSize
+  }
   Transfer?: {
+    size?: TransferSize
     renderEmpty?: () => VNodeChild
   }
   Tree?: {
     renderEmpty?: () => VNodeChild
   }
   TreeSelect?: {
+    size?: TreeSelectSize
     renderEmpty?: () => VNodeChild
   }
 }
