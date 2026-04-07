@@ -110,4 +110,10 @@ const CompSwitch = defineComponent({
     :scroll-x="1800"
     :virtual-list="true"
   />
+  Empty Slot <CompSwitch v-model:value="loadData" />
+  <n-data-table :columns="columns" :data="emptyData" min-height="400">
+    <template #empty>
+      <div>Empty Slot</div>
+    </template>
+  </n-data-table>
 </template>
