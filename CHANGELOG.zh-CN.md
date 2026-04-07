@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-color-picker` 传入的 style、click 事件不生效，关闭 [#7528](https://github.com/tusen-ai/naive-ui/issues/7528)
+- 修复 `n-data-table` 的 empty 状态在设定高度后没有垂直居中显示，关闭 [#7546](https://github.com/tusen-ai/naive-ui/issues/7546)
 
 ## 2.44.1
 

@@ -17,6 +17,7 @@ export default defineComponent({
       rightFixedColumnsRef,
       leftFixedColumnsRef,
       bodyWidthRef,
+      paginatedDataRef,
       maxHeightRef,
       minHeightRef,
       flexHeightRef,
@@ -39,6 +40,7 @@ export default defineComponent({
         minHeight: formatLength(minHeightRef.value)
       }
     })
+    const emptyRef = computed(() => paginatedDataRef.value.length === 0)
     function handleBodyResize(entry: ResizeObserverEntry): void {
       bodyWidthRef.value = entry.contentRect.width
       syncScrollState()
@@ -93,6 +95,7 @@ export default defineComponent({
       headerInstRef,
       bodyInstRef,
       bodyStyle: bodyStyleRef,
+      empty: emptyRef,
       flexHeight: flexHeightRef,
       handleBodyResize,
       scrollX: scrollXRef,
@@ -103,7 +106,17 @@ export default defineComponent({
     const { mergedClsPrefix, maxHeight, flexHeight } = this
     const headerInBody = maxHeight === undefined && !flexHeight
     return (
-      <div class={`${mergedClsPrefix}-data-table-base-table`} ref="selfElRef">
+      <div
+        class={`${mergedClsPrefix}-data-table-base-table`}
+        style={
+          this.empty && {
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column'
+          }
+        }
+        ref="selfElRef"
+      >
         {headerInBody ? null : <TableHeader ref="headerInstRef" />}
         <TableBody
           ref="bodyInstRef"
