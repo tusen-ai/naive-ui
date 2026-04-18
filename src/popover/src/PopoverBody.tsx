@@ -341,7 +341,7 @@ export default defineComponent({
                     ]}
                     style={props.contentStyle}
                   >
-                    {slots}
+                    {slots.default?.()}
                   </div>
                 ) : null
               })}
@@ -369,7 +369,7 @@ export default defineComponent({
               ]}
               style={props.contentStyle}
             >
-              {slots}
+              {slots.default?.()}
             </div>
           )
           const maybeScrollableBody = props.scrollable ? (

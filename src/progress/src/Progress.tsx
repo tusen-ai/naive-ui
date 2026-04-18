@@ -217,7 +217,7 @@ export default defineComponent({
             gapOffsetDegree={gapOffsetDegree}
             unit={unit}
           >
-            {$slots}
+            {{ ...$slots }}
           </Circle>
         ) : type === 'line' ? (
           <Line
@@ -236,7 +236,7 @@ export default defineComponent({
             railBorderRadius={borderRadius}
             height={height}
           >
-            {$slots}
+            {{ ...$slots }}
           </Line>
         ) : type === 'multiple-circle' ? (
           <MultipleCircle
@@ -250,7 +250,7 @@ export default defineComponent({
             showIndicator={showIndicator}
             circleGap={circleGap}
           >
-            {$slots}
+            {{ ...$slots }}
           </MultipleCircle>
         ) : null}
       </div>

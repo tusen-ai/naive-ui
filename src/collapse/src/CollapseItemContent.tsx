@@ -32,7 +32,7 @@ export default defineComponent({
             const contentNode = (
               <div class={`${clsPrefix}-collapse-item__content-wrapper`}>
                 <div class={`${clsPrefix}-collapse-item__content-inner`}>
-                  {this.$slots}
+                  {this.$slots.default?.()}
                 </div>
               </div>
             )

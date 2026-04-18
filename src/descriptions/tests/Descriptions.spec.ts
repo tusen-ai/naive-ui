@@ -62,12 +62,12 @@ describe('n-descriptions', () => {
     })
     expect(
       wrapper.find('.n-descriptions-table-row').element.childNodes.length
-    ).toBe(6) // 3 * 2
+    ).toBe(8) // 3 * 2 + 2
 
     await wrapper.setProps({ column: 4 })
     expect(
       wrapper.find('.n-descriptions-table-row').element.childNodes.length
-    ).toBe(8) // 4 * 2
+    ).toBe(10) // 4 * 2 + 2
     wrapper.unmount()
   })
 

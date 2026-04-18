@@ -3,6 +3,7 @@ import path from 'node:path'
 import process from 'node:process'
 import { babel } from '@rollup/plugin-babel'
 import { configDefaults, defineConfig } from 'vitest/config'
+import vueJsxVapor from 'vue-jsx-vapor/vite'
 import { createDemoPlugin } from './build/vite-plugin-demo'
 
 dns.setDefaultResultOrder('verbatim')
@@ -17,7 +18,12 @@ const testExclude = isBuildTimeTest
 
 export default defineConfig({
   root: __dirname,
-  plugins: createDemoPlugin(),
+  plugins: [
+    vueJsxVapor({
+      interop: true
+    }),
+    ...createDemoPlugin()
+  ],
   resolve: {
     // In production site build, we want to import naive-ui from node_modules
     alias:

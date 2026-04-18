@@ -883,11 +883,11 @@ export default defineComponent({
                         || mergedJustifyContent === 'end')
                     }
                   >
-                    {tabPaneVNode.children
-                      ? {
-                          default: tabPaneVNode.children.tab
-                        }
-                      : undefined}
+                    {{
+                      default: tabPaneVNode.props.tab
+                        ? () => tabPaneVNode.props.tab
+                        : undefined
+                    }}
                   </Tab>
                 )
               })
@@ -997,11 +997,11 @@ export default defineComponent({
                                 internalCreatedByPane={true}
                                 internalLeftPadded={index !== 0}
                               >
-                                {tabPaneVNode.children
-                                  ? {
-                                      default: tabPaneVNode.children.tab
-                                    }
-                                  : undefined}
+                                {{
+                                  default: tabPaneVNode.props.tab
+                                    ? () => tabPaneVNode.props.tab
+                                    : undefined
+                                }}
                               </Tab>
                             )
                           }
@@ -1141,7 +1141,7 @@ function filterMapTabPanes(
       onEnter={onEnter as (el: Element) => void}
       onAfterEnter={onAfterEnter}
     >
-      {{ default: () => children }}
+      {children}
     </TransitionGroup>
   )
 }

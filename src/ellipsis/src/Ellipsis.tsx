@@ -141,7 +141,11 @@ export default defineComponent({
           props.expandTrigger === 'click' ? getTooltipDisabled : undefined
         }
       >
-        {props.lineClamp ? slots : <span ref="triggerInnerRef">{slots}</span>}
+        {props.lineClamp ? (
+          slots.default?.()
+        ) : (
+          <span ref="triggerInnerRef">{slots.default?.()}</span>
+        )}
       </span>
     )
     function syncEllipsisStyle(trigger: HTMLElement): void {

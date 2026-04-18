@@ -128,7 +128,7 @@ export default defineComponent({
               }}
             </NUploadDragger>
           ) : (
-            slots
+            slots.default?.({} as any)
           )}
         </div>
       )

@@ -234,7 +234,7 @@ export default defineComponent({
         renderToolbar={this.renderToolbar}
         onClose={this.onClose}
       >
-        {this.$slots}
+        {{ ...this.$slots }}
       </NImagePreview>
     )
   }

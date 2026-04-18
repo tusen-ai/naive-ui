@@ -8,6 +8,7 @@ import terser from '@rollup/plugin-terser'
 import merge from 'deepmerge'
 import { defineConfig } from 'rollup'
 import esbuild from 'rollup-plugin-esbuild'
+import vueJsxVapor from 'vue-jsx-vapor/rollup'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -19,6 +20,9 @@ const baseConfig = defineConfig({
   external: ['vue'],
   plugins: [
     nodeResolve({ extensions }),
+    vueJsxVapor({
+      interop: true
+    }),
     esbuild({
       tsconfig: path.resolve(__dirname, 'tsconfig.esbuild.json'),
       target: 'esnext',

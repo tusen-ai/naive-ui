@@ -260,7 +260,7 @@ export default defineComponent({
                   })}
                   {$slots.default && (
                     <div class={`${mergedClsPrefix}-alert-body__content`}>
-                      {$slots}
+                      {$slots.default()}
                     </div>
                   )}
                 </div>
