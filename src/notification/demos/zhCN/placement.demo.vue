@@ -40,7 +40,7 @@ const PlacementButtons = defineComponent({
                   props.onPlacementChange?.(item.placement)
                   notification.info({
                     title: item.placement,
-                    content: 'You can change the placement'
+                    content: '你可以切换弹出位置'
                   })
                 }
               },
