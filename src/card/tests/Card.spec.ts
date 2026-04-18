@@ -88,8 +88,8 @@ describe('n-card', () => {
     expect(wrapper.find('.n-card-header__extra').exists()).toBe(true)
     expect(wrapper.find('.n-card-header__extra').text()).toBe('header-extra')
 
-    expect(wrapper.find('.n-card__content').exists()).toBe(true)
-    expect(wrapper.find('.n-card__content').text()).toBe('content')
+    expect(wrapper.find('.n-card-content').exists()).toBe(true)
+    expect(wrapper.find('.n-card-content').text()).toBe('content')
 
     expect(wrapper.find('.n-card__footer').exists()).toBe(true)
     expect(wrapper.find('.n-card__footer').text()).toBe('footer')
@@ -154,7 +154,7 @@ describe('n-card', () => {
       }
     })
 
-    expect(wrapper.find('.n-card__content').attributes('style')).toContain(
+    expect(wrapper.find('.n-card-content').attributes('style')).toContain(
       testStyle
     )
     wrapper.unmount()

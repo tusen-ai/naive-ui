@@ -6,7 +6,7 @@ import type {
 } from '../../../_utils'
 import type { ScrollbarTheme } from '../styles'
 import { off, on } from 'evtd'
-import { depx, getPadding, getPreciseEventTarget } from 'seemly'
+import { depx, getPadding, getPreciseEventTarget, pxfy } from 'seemly'
 import { useIsIos } from 'vooks'
 import {
   computed,
@@ -117,6 +117,7 @@ const scrollbarProps = {
     (scrollLeft: number) => void
   >,
   internalHoistYRail: Boolean,
+  internalExposeWidthCssVar: Boolean,
   yPlacement: {
     type: String as PropType<'left' | 'right'>,
     default: 'right'
@@ -801,6 +802,7 @@ const Scrollbar = defineComponent({
       handleContainerResize,
       handleYScrollMouseDown,
       handleXScrollMouseDown,
+      containerWidth: containerWidthRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
@@ -888,7 +890,12 @@ const Scrollbar = defineComponent({
                 `${mergedClsPrefix}-scrollbar-container`,
                 this.containerClass
               ]}
-              style={this.containerStyle}
+              style={[
+                this.containerStyle,
+                this.internalExposeWidthCssVar
+                  ? { '--n-scrollbar-current-width': pxfy(this.containerWidth) }
+                  : undefined
+              ]}
               onScroll={this.handleScroll}
               onWheel={this.onWheel}
             >

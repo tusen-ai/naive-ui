@@ -2,6 +2,7 @@ import type { CSSProperties, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { SpaceTheme } from '../styles'
+import type { SpaceSize } from './public-types'
 import { depx, getGap } from 'seemly'
 import { Comment, computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
@@ -37,12 +38,7 @@ export const spaceProps = {
   inline: Boolean,
   vertical: Boolean,
   reverse: Boolean,
-  size: {
-    type: [String, Number, Array] as PropType<
-      'small' | 'medium' | 'large' | number | [number, number]
-    >,
-    default: 'medium'
-  },
+  size: [String, Number, Array] as PropType<SpaceSize>,
   wrapItem: {
     type: Boolean,
     default: true
@@ -66,7 +62,13 @@ export default defineComponent({
   name: 'Space',
   props: spaceProps,
   setup(props) {
-    const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
+    const { mergedClsPrefixRef, mergedRtlRef, mergedComponentPropsRef }
+      = useConfig(props)
+    const mergedSizeRef = computed<SpaceSize>(() => {
+      return (
+        props.size || mergedComponentPropsRef?.value?.Space?.size || 'medium'
+      )
+    })
     const themeRef = useTheme(
       'Space',
       '-space',
@@ -81,7 +83,7 @@ export default defineComponent({
       rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
       margin: computed<{ horizontal: number, vertical: number }>(() => {
-        const { size } = props
+        const size = mergedSizeRef.value
         if (Array.isArray(size)) {
           return {
             horizontal: size[0],

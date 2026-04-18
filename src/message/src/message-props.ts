@@ -1,5 +1,6 @@
 import type { ExtractPropTypes, PropType, VNodeChild } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type { MessageSpinProps } from './public-types'
 import type { MessageType } from './types'
 
 export const messageProps = {
@@ -17,6 +18,7 @@ export const messageProps = {
   },
   closable: Boolean,
   keepAliveOnHover: Boolean,
+  spinProps: Object as PropType<MessageSpinProps>,
   onClose: Function as PropType<() => void>,
   onMouseenter: Function as PropType<(e: MouseEvent) => void>,
   onMouseleave: Function as PropType<(e: MouseEvent) => void>

@@ -12,3 +12,4 @@ export type {
   DescriptionItemProps,
   DescriptionItemSlots
 } from './src/DescriptionsItem'
+export type * from './src/public-types'
