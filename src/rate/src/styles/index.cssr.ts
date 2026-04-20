@@ -24,9 +24,13 @@ export default cB('rate', {
     transform: scale(1);
     font-size: var(--n-item-size);
     color: var(--n-item-color);
+    padding: 0 3px;
   `, [
-    c('&:not(:first-child)', `
-      margin-left: 6px;
+    c('&:first-child', `
+      padding-left: 0;
+    `),
+    c('&:last-child', `
+      padding-right: 0;
     `),
     cM('active', `
       color: var(--n-item-color-active);
