@@ -81,7 +81,9 @@ const arDZ: NLocale = {
     positiveText: 'تأكيد',
     negativeText: 'إلغاء',
     now: 'الآن',
-    clear: 'مسح'
+    clear: 'مسح',
+    am: 'ص',
+    pm: 'م'
   },
   Pagination: {
     goto: 'إذهب إلى',

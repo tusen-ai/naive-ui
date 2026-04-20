@@ -81,7 +81,9 @@ const azAZ: NLocale = {
     positiveText: 'Təsdiqlə',
     negativeText: 'İmtina et',
     now: 'İndi',
-    clear: 'Təmizlə'
+    clear: 'Təmizlə',
+    am: 'a.m.',
+    pm: 'p.m.'
   },
   Pagination: {
     goto: 'Get',
