@@ -4,6 +4,7 @@ import { useMessage, version } from 'naive-ui'
 import { computed, defineComponent, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import {
+  push,
   useComponentOptions,
   useConfigProviderName,
   useDisplayMode,
@@ -289,6 +290,10 @@ export default defineComponent({
       lastWindowInnerWidth = window.innerWidth
     })
 
+    function handleVersionClick() {
+      push('/docs/changelog')
+    }
+
     return {
       menuInstRef,
       renderMenuLabel,
@@ -330,6 +335,7 @@ export default defineComponent({
       mobileMenuValue: mobileMenuValueRef,
       // common
       handleLogoClick,
+      handleVersionClick,
       style: computed(() => {
         return isMobileRef.value
           ? {
@@ -436,9 +442,14 @@ export default defineComponent({
       >
         GitHub
       </n-button>
-      <n-text class="nav-picker padded">
+      <n-button
+        size="small"
+        quaternary
+        class="nav-picker padded"
+        @click="handleVersionClick"
+      >
         {{ version }}
-      </n-text>
+      </n-button>
       <n-button
         v-if="dev"
         size="small"
