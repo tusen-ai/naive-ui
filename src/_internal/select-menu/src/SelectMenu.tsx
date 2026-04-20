@@ -85,6 +85,10 @@ export default defineComponent({
       type: Boolean,
       default: true
     },
+    showEllipse: {
+      type: Boolean as PropType<boolean | undefined>,
+      default: false
+    },
     labelField: {
       type: String,
       default: 'label'
@@ -429,6 +433,7 @@ export default defineComponent({
     }
     useOnResize(selfRef, props.onResize)
     return {
+      showEllipse: props.showEllipse,
       mergedTheme: themeRef,
       mergedClsPrefix: mergedClsPrefixRef,
       rtlEnabled: rtlEnabledRef,
@@ -552,6 +557,7 @@ export default defineComponent({
                           />
                         ) : tmNode.ignored ? null : (
                           <NSelectOption
+                            showEllipse={this.showEllipse}
                             clsPrefix={clsPrefix}
                             key={tmNode.key}
                             tmNode={tmNode as unknown as TreeNode<SelectOption>}
@@ -579,6 +585,7 @@ export default defineComponent({
                         />
                       ) : (
                         <NSelectOption
+                          showEllipse={this.showEllipse}
                           clsPrefix={clsPrefix}
                           key={tmNode.key}
                           tmNode={tmNode as unknown as TreeNode<SelectOption>}
