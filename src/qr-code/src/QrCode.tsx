@@ -2,14 +2,7 @@ import type { PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { QrCodeTheme } from '../styles'
-import {
-  computed,
-  defineComponent,
-  h,
-  onMounted,
-  ref,
-  watchEffect
-} from 'vue'
+import { computed, defineComponent, h, onMounted, ref, watchEffect } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { qrcodeLight } from '../styles'
 import qrcodegen from './qrcodegen'

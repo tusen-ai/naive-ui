@@ -1,4 +1,11 @@
-import type { ComponentPublicInstance, DirectiveArguments, PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type {
+  ComponentPublicInstance,
+  DirectiveArguments,
+  PropType,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
 import type { ScrollbarInst } from '../../_internal'
 import type { ModalDraggableOptions } from './interface'
 import type { ModalSlots } from './Modal'

@@ -4,9 +4,7 @@ import type { SelectGroupOption } from '../../../select/src/interface'
 import type { RenderLabelImpl, RenderOptionImpl } from './interface'
 import { defineComponent, h, inject } from 'vue'
 import { render } from '../../../_utils'
-import {
-  internalSelectionMenuInjectionKey
-} from './interface'
+import { internalSelectionMenuInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'NBaseSelectGroupHeader',

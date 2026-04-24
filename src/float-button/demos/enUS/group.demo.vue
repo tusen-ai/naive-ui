@@ -38,5 +38,6 @@ import { CashOutline as CashIcon } from '@vicons/ionicons5'
         <n-icon><CashIcon /></n-icon>
       </n-float-button>
     </n-float-button-group>
+    <n-float-button-group />
   </n-flex>
 </template>

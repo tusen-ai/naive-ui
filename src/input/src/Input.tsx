@@ -1,4 +1,13 @@
-import type { CSSProperties, InputHTMLAttributes, PropType, SlotsType, TextareaHTMLAttributes, VNode, VNodeChild, WatchStopHandle } from 'vue'
+import type {
+  CSSProperties,
+  InputHTMLAttributes,
+  PropType,
+  SlotsType,
+  TextareaHTMLAttributes,
+  VNode,
+  VNodeChild,
+  WatchStopHandle
+} from 'vue'
 import type { ScrollbarInst } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
@@ -7,9 +16,9 @@ import type { InputTheme } from '../styles'
 import type {
   InputWrappedRef,
   OnUpdateValue,
-  OnUpdateValueImpl,
-  Size
+  OnUpdateValueImpl
 } from './interface'
+import type { InputSize } from './public-types'
 import { off, on } from 'evtd'
 import { getPadding } from 'seemly'
 import { useMemo, useMergedState } from 'vooks'
@@ -28,12 +37,7 @@ import {
   watchEffect
 } from 'vue'
 import { VResizeObserver } from 'vueuc'
-import {
-  NBaseClear,
-  NBaseIcon,
-  NBaseSuffix,
-  NScrollbar
-} from '../../_internal'
+import { NBaseClear, NBaseIcon, NBaseSuffix, NScrollbar } from '../../_internal'
 import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
 import {
   useConfig,
@@ -44,12 +48,7 @@ import {
   useThemeClass
 } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
-import {
-  call,
-  createKey,
-  resolveSlot,
-  resolveWrappedSlot
-} from '../../_utils'
+import { call, createKey, resolveSlot, resolveWrappedSlot } from '../../_utils'
 import { isSafari } from '../../_utils/env/browser'
 import { inputLight } from '../styles'
 import { inputInjectionKey } from './interface'
@@ -77,7 +76,7 @@ export const inputProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  size: String as PropType<Size>,
+  size: String as PropType<InputSize>,
   rows: {
     type: [Number, String] as PropType<number | string>,
     default: 3
@@ -181,7 +180,8 @@ export default defineComponent({
       mergedClsPrefixRef,
       mergedBorderedRef,
       inlineThemeDisabled,
-      mergedRtlRef
+      mergedRtlRef,
+      mergedComponentPropsRef
     } = useConfig(props)
     const themeRef = useTheme(
       'Input',
@@ -216,7 +216,20 @@ export default defineComponent({
       uncontrolledValueRef
     )
     // form-item
-    const formItem = useFormItem(props)
+    const formItem = useFormItem(props, {
+      mergedSize: (NFormItem) => {
+        const { size } = props
+        if (size)
+          return size
+        const { mergedSize: formItemSize } = NFormItem || {}
+        if (formItemSize?.value)
+          return formItemSize.value as InputSize
+        const configSize = mergedComponentPropsRef?.value?.Input?.size
+        if (configSize)
+          return configSize
+        return 'medium'
+      }
+    })
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     // states
     const focusedRef = ref(false)
@@ -1102,6 +1115,7 @@ export default defineComponent({
         ref="wrapperElRef"
         class={[
           `${mergedClsPrefix}-input`,
+          `${mergedClsPrefix}-input--${this.mergedSize}-size`,
           themeClass,
           mergedStatus && `${mergedClsPrefix}-input--${mergedStatus}-status`,
           {

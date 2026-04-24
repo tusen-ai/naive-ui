@@ -1,12 +1,12 @@
 import type { Plugin } from 'vite'
-import createVuePlugin from '@vitejs/plugin-vue'
+import vue from '@vitejs/plugin-vue'
 import { getTransformedVueSrc } from './utils/get-demo-by-path'
 import { cssRenderPlugin } from './vite-plugin-css-render'
 import { demoIndexTransFormPlugin } from './vite-plugin-index-tranform'
 
 const fileRegex = /\.(md|vue)$/
 
-const vuePlugin = createVuePlugin({
+const vuePlugin = vue({
   include: [/\.vue$/, /\.md$/]
 })
 

@@ -1,7 +1,14 @@
 import type { CheckStrategy } from 'treemate'
-import type { CSSProperties, HTMLAttributes, PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type {
+  CSSProperties,
+  HTMLAttributes,
+  PropType,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
 import type { FollowerInst, FollowerPlacement } from 'vueuc'
-import type { InternalSelectionInst } from '../../_internal'
+import type { InternalSelectionInst, ScrollbarProps } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/public-types'
@@ -21,11 +28,9 @@ import type {
   SelectMenuInstance,
   Value
 } from './interface'
+import type { CascaderSize, CascaderSpinProps } from './public-types'
 import { changeColor, depx, getPreciseEventTarget, happensIn } from 'seemly'
-import {
-  createTreeMate,
-  SubtreeNotLoadedError
-} from 'treemate'
+import { createTreeMate, SubtreeNotLoadedError } from 'treemate'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
@@ -39,11 +44,7 @@ import {
   watch,
   watchEffect
 } from 'vue'
-import {
-  VBinder,
-  VFollower,
-  VTarget
-} from 'vueuc'
+import { VBinder, VFollower, VTarget } from 'vueuc'
 import { NInternalSelection } from '../../_internal'
 import {
   useConfig,
@@ -84,7 +85,7 @@ export const cascaderProps = {
   },
   placeholder: String,
   multiple: Boolean,
-  size: String as PropType<'small' | 'medium' | 'large'>,
+  size: String as PropType<CascaderSize>,
   filterable: Boolean,
   disabled: {
     type: Boolean as PropType<boolean | undefined>,
@@ -168,6 +169,7 @@ export const cascaderProps = {
   getColumnStyle: Function as PropType<
     (detail: { level: number }) => string | CSSProperties
   >,
+  spinProps: Object as PropType<CascaderSpinProps>,
   renderPrefix: Function as PropType<
     (props: {
       option: CascaderOption
@@ -182,6 +184,7 @@ export const cascaderProps = {
       node: VNode | null
     }) => VNodeChild
   >,
+  scrollbarProps: Object as PropType<ScrollbarProps>,
   // deprecated
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
@@ -220,7 +223,8 @@ export default defineComponent({
       mergedBorderedRef,
       mergedClsPrefixRef,
       namespaceRef,
-      inlineThemeDisabled
+      inlineThemeDisabled,
+      mergedComponentPropsRef
     } = useConfig(props)
     const themeRef = useTheme(
       'Cascader',
@@ -241,7 +245,20 @@ export default defineComponent({
       return props.leafOnly ? 'child' : props.checkStrategy
     })
     const patternRef = ref('')
-    const formItem = useFormItem(props)
+    const formItem = useFormItem(props, {
+      mergedSize: (NFormItem) => {
+        const { size } = props
+        if (size)
+          return size
+        const { mergedSize: formItemSize } = NFormItem || {}
+        if (formItemSize?.value)
+          return formItemSize.value as CascaderSize
+        const configSize = mergedComponentPropsRef?.value?.Cascader?.size
+        if (configSize)
+          return configSize
+        return 'medium'
+      }
+    })
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     const cascaderMenuInstRef = ref<CascaderMenuInstance | null>(null)
     const selectMenuInstRef = ref<SelectMenuInstance | null>(null)
@@ -942,6 +959,7 @@ export default defineComponent({
       getColumnStyleRef: toRef(props, 'getColumnStyle'),
       renderPrefixRef: toRef(props, 'renderPrefix'),
       renderSuffixRef: toRef(props, 'renderSuffix'),
+      spinPropsRef: toRef(props, 'spinProps'),
       syncCascaderMenuPosition,
       syncSelectMenuPosition,
       updateKeyboardKey,
@@ -953,6 +971,7 @@ export default defineComponent({
       closeMenu,
       handleSelectMenuClickOutside,
       handleCascaderMenuClickOutside,
+      scrollbarPropsRef: toRef(props, 'scrollbarProps'),
       clearPattern
     })
     const exposedMethods: CascaderInst = {

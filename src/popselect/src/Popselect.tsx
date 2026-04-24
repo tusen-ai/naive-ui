@@ -1,16 +1,12 @@
 import type { ExtractPropTypes, PropType, SlotsType, VNode } from 'vue'
+import type { ScrollbarProps } from '../../_internal/scrollbar/src/Scrollbar'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { PopoverInst, PopoverTrigger } from '../../popover'
 import type { PopoverInternalProps } from '../../popover/src/Popover'
 import type { PopselectTheme } from '../styles'
 import type { PopselectInst } from './interface'
-import {
-  defineComponent,
-  h,
-  provide,
-  ref
-} from 'vue'
+import { defineComponent, h, provide, ref } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { createRefSetter, keep, mergeEventHandlers, omit } from '../../_utils'
 import { NPopover } from '../../popover'
@@ -30,7 +26,8 @@ export const popselectProps = {
     type: String as PropType<PopoverTrigger>,
     default: 'hover'
   },
-  ...panelProps
+  ...panelProps,
+  scrollbarProps: Object as PropType<ScrollbarProps>
 }
 
 export type PopselectSetupProps = ExtractPropTypes<typeof popselectProps>

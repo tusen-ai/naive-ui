@@ -7,9 +7,7 @@ import { computed, defineComponent, h, inject, ref } from 'vue'
 import { VirtualList } from 'vueuc'
 import { NScrollbar } from '../../_internal'
 import NCascaderOption from './CascaderOption'
-import {
-  cascaderInjectionKey
-} from './interface'
+import { cascaderInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'CascaderSubmenu',

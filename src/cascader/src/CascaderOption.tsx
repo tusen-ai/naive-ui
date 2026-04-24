@@ -2,13 +2,7 @@ import type { PropType, VNode } from 'vue'
 import type { TmNode } from './interface'
 import { happensIn } from 'seemly'
 import { useMemo } from 'vooks'
-import {
-  computed,
-  defineComponent,
-  h,
-  inject,
-  Transition
-} from 'vue'
+import { computed, defineComponent, h, inject, Transition } from 'vue'
 import { NBaseIcon, NBaseLoading } from '../../_internal'
 import { CheckmarkIcon, ChevronRightIcon } from '../../_internal/icons'
 import { NCheckbox } from '../../checkbox'
@@ -42,6 +36,7 @@ export default defineComponent({
       showCheckboxRef,
       renderPrefixRef,
       renderSuffixRef,
+      spinPropsRef,
       updateHoverKey,
       updateKeyboardKey,
       addLoadingKey,
@@ -178,6 +173,7 @@ export default defineComponent({
       label: labelRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: mergedThemeRef,
+      spinProps: spinPropsRef,
       handleClick,
       handleCheckboxUpdateValue,
       mergedHandleMouseEnter: mergedHandleMouseEnterRef,
@@ -232,6 +228,7 @@ export default defineComponent({
             strokeWidth={24}
             show={this.isLoading}
             class={`${mergedClsPrefix}-cascader-option-icon`}
+            {...this.spinProps}
           >
             {{
               default: () => (

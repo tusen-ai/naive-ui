@@ -5,14 +5,13 @@ Use `n-grid` and `n-form-item-gi` (grid item) to style the form more exactly.
 </markdown>
 
 <script lang="ts" setup>
-import type { FormInst, FormItemRule, FormRules } from 'naive-ui'
-import type { Size } from '../../src/interface'
+import type { FormInst, FormItemRule, FormRules, FormSize } from 'naive-ui'
 import { useMessage } from 'naive-ui'
 import { ref } from 'vue'
 
 const formRef = ref<FormInst | null>(null)
 const message = useMessage()
-const size = ref<Size>('medium')
+const size = ref<FormSize>('medium')
 const model = ref({
   inputValue: null,
   textareaValue: null,

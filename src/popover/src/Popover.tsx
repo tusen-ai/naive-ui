@@ -1,4 +1,11 @@
-import type { ComputedRef, CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
+import type {
+  ComputedRef,
+  CSSProperties,
+  PropType,
+  Ref,
+  SlotsType,
+  VNode
+} from 'vue'
 import type { BinderInst, FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type {
@@ -26,10 +33,7 @@ import {
   watchEffect,
   withDirectives
 } from 'vue'
-import {
-  VBinder,
-  VTarget
-} from 'vueuc'
+import { VBinder, VTarget } from 'vueuc'
 import { useTheme } from '../../_mixins'
 import {
   call,

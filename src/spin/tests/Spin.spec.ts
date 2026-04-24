@@ -53,7 +53,7 @@ describe('n-spin', () => {
     await wrapper.setProps({
       rotate: false
     })
-    expect(wrapper.find('.n-spin--rotate').exists()).toBe(false)
+    expect(wrapper.find('.n-spin').classes()).not.toContain('n-spin--rotate')
     wrapper.unmount()
   })
 

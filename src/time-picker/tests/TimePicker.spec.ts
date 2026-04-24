@@ -104,7 +104,7 @@ describe('n-time-picker', () => {
   })
 
   it('should work with `on-blur` prop', async () => {
-    const onBlur = jest.fn()
+    const onBlur = vi.fn()
     const wrapper = mount(NTimePicker, {
       props: { onBlur }
     })
@@ -114,7 +114,7 @@ describe('n-time-picker', () => {
     wrapper.unmount()
   })
   it('should work with `on-blur` prop when use `ok` button', async () => {
-    const onBlur = jest.fn()
+    const onBlur = vi.fn()
     const Render = () => {
       return h('div', null, [
         h(NTimePicker, {
@@ -145,7 +145,7 @@ describe('n-time-picker', () => {
   })
 
   it('should work with `on-focus` prop', async () => {
-    const onFocus = jest.fn()
+    const onFocus = vi.fn()
     const wrapper = mount(NTimePicker, {
       props: { onFocus }
     })

@@ -185,7 +185,10 @@ describe('n-form', () => {
 
     await wrapper.setProps({ showLabel: false })
     expect(wrapper.findAll('.n-form-item-label').length).toBe(0)
-    expect(wrapper.findAll('.n-form-item--no-label').length).toBe(3)
+    const noLabelItem = wrapper
+      .findAll('.n-form-item')
+      .filter(w => w.classes().includes('n-form-item--no-label'))
+    expect(noLabelItem).toHaveLength(3)
 
     // The NFormItem show-label has a higher weight than the NForm
     wrapper = mount(NForm, {

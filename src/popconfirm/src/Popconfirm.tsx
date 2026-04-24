@@ -6,12 +6,7 @@ import type { PopoverTrigger } from '../../popover'
 import type { InternalPopoverInst } from '../../popover/src/interface'
 import type { PopconfirmTheme } from '../styles'
 import type { PopconfirmInst } from './interface'
-import {
-  defineComponent,
-  h,
-  provide,
-  ref
-} from 'vue'
+import { defineComponent, h, provide, ref } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { call, keep, omit } from '../../_utils'
 import { NPopover } from '../../popover'

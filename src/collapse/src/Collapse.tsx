@@ -1,4 +1,11 @@
-import type { CSSProperties, ExtractPropTypes, PropType, Ref, SlotsType, VNode } from 'vue'
+import type {
+  CSSProperties,
+  ExtractPropTypes,
+  PropType,
+  Ref,
+  SlotsType,
+  VNode
+} from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CollapseTheme } from '../styles'
@@ -13,13 +20,7 @@ import type {
   OnUpdateExpandedNamesImpl
 } from './interface'
 import { useMergedState } from 'vooks'
-import {
-  computed,
-  defineComponent,
-  h,
-  provide,
-  ref
-} from 'vue'
+import { computed, defineComponent, h, provide, ref } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
 import { call, createInjectionKey, warn } from '../../_utils'

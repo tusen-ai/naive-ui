@@ -14,10 +14,7 @@ import {
   Teleport
 } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
-import {
-  createInjectionKey,
-  omit
-} from '../../_utils'
+import { createInjectionKey, omit } from '../../_utils'
 import { notificationLight } from '../styles'
 import { notificationProviderInjectionKey } from './context'
 import { NotificationContainer } from './NotificationContainer'

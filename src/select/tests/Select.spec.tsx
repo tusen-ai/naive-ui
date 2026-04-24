@@ -5,9 +5,7 @@ import { mount } from '@vue/test-utils'
 import { h, nextTick } from 'vue'
 import { NInternalSelection, NInternalSelectMenu } from '../../_internal'
 import { NTag } from '../../tag'
-import {
-  NSelect
-} from '../index'
+import { NSelect } from '../index'
 
 describe('n-select', () => {
   it('should work with import on demand', () => {

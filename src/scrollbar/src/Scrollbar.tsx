@@ -4,9 +4,7 @@ import type { ScrollbarTheme } from '../../_internal/scrollbar/styles'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { defineComponent, h, ref } from 'vue'
-import {
-  NScrollbar
-} from '../../_internal'
+import { NScrollbar } from '../../_internal'
 import { useTheme } from '../../_mixins'
 
 export interface ScrollTo {

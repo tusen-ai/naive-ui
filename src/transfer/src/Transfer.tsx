@@ -2,28 +2,25 @@ import type { CSSProperties, PropType, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { TransferTheme } from '../styles'
-import type { Filter, OnUpdateValue, Option, OptionValue, TransferRenderSourceLabel, TransferRenderSourceList, TransferRenderTargetLabel } from './interface'
+import type {
+  Filter,
+  OnUpdateValue,
+  Option,
+  OptionValue,
+  TransferRenderSourceLabel,
+  TransferRenderSourceList,
+  TransferRenderTargetLabel
+} from './interface'
+import type { TransferSize } from './public-types'
 import { depx } from 'seemly'
 import { useIsMounted } from 'vooks'
-import {
-  computed,
-  defineComponent,
-  h,
-  provide,
-  toRef,
-  watchEffect
-} from 'vue'
+import { computed, defineComponent, h, provide, toRef, watchEffect } from 'vue'
 import { NScrollbar } from '../../_internal'
 import { useConfig, useFormItem, useTheme } from '../../_mixins'
-import {
-  call,
-  warnOnce
-} from '../../_utils'
+import { call, warnOnce } from '../../_utils'
 import { createKey } from '../../_utils/cssr'
 import { transferLight } from '../styles'
-import {
-  transferInjectionKey
-} from './interface'
+import { transferInjectionKey } from './interface'
 import style from './styles/index.cssr'
 import NTransferFilter from './TransferFilter'
 import NTransferHeader from './TransferHeader'
@@ -72,7 +69,7 @@ export const transferProps = {
         .indexOf(`${pattern}`.toLowerCase())
     }
   },
-  size: String as PropType<'small' | 'medium' | 'large'>,
+  size: String as PropType<TransferSize>,
   renderSourceLabel: Function as PropType<TransferRenderSourceLabel>,
   renderTargetLabel: Function as PropType<TransferRenderTargetLabel>,
   renderSourceList: Function as PropType<TransferRenderSourceList>,
@@ -104,7 +101,7 @@ export default defineComponent({
         }
       })
     }
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, mergedComponentPropsRef } = useConfig(props)
     const themeRef = useTheme(
       'Transfer',
       '-transfer',
@@ -113,7 +110,20 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    const formItem = useFormItem(props)
+    const formItem = useFormItem(props, {
+      mergedSize: (NFormItem) => {
+        const { size } = props
+        if (size)
+          return size
+        const { mergedSize: formItemSize } = NFormItem || {}
+        if (formItemSize?.value)
+          return formItemSize.value as TransferSize
+        const configSize = mergedComponentPropsRef?.value?.Transfer?.size
+        if (configSize)
+          return configSize
+        return 'medium'
+      }
+    })
     const { mergedSizeRef, mergedDisabledRef } = formItem
     const itemSizeRef = computed(() => {
       const { value: size } = mergedSizeRef

@@ -273,7 +273,7 @@ describe('n-date-picker', () => {
   })
 
   it('should work with `onBlur` prop', async () => {
-    const onBlur = jest.fn()
+    const onBlur = vi.fn()
     const wrapper = mount(NDatePicker, {
       props: { onBlur }
     })
@@ -286,7 +286,7 @@ describe('n-date-picker', () => {
   })
 
   it('should work with `onFocus` prop', async () => {
-    const onFocus = jest.fn()
+    const onFocus = vi.fn()
     const wrapper = mount(NDatePicker, {
       props: { onFocus }
     })

@@ -17,12 +17,7 @@ import {
 } from 'vue'
 import { VResizeObserver } from 'vueuc'
 import { useConfig } from '../../_mixins'
-import {
-  flatten,
-  getSlot,
-  isBrowser,
-  isNodeVShowFalse
-} from '../../_utils'
+import { flatten, getSlot, isBrowser, isNodeVShowFalse } from '../../_utils'
 import { defaultBreakpoints } from '../../config-provider/src/config'
 import { defaultSpan, gridInjectionKey } from './config'
 

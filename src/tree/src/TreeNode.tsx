@@ -2,14 +2,7 @@ import type { ComponentPublicInstance, PropType, VNode } from 'vue'
 import type { TmNode } from './interface'
 import { happensIn, repeat } from 'seemly'
 import { useMemo } from 'vooks'
-import {
-  computed,
-  defineComponent,
-  h,
-  inject,
-  onMounted,
-  ref
-} from 'vue'
+import { computed, defineComponent, h, inject, onMounted, ref } from 'vue'
 import { createDataKey } from '../../_utils'
 import { renderDropMark } from './dnd'
 import { treeInjectionKey } from './interface'

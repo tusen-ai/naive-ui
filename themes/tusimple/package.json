@@ -1,15 +1,15 @@
 {
   "name": "@naive-ui/tusimple-theme",
-  "main": "lib/index.js",
-  "module": "es/index.js",
   "version": "0.2.0",
-  "peerDependencies": {
-    "naive-ui": "^2.24.6"
-  },
   "author": "07akioni",
   "license": "MIT",
+  "main": "lib/index.js",
+  "module": "es/index.js",
   "files": [
     "es",
     "lib"
-  ]
+  ],
+  "peerDependencies": {
+    "naive-ui": "^2.24.6"
+  }
 }

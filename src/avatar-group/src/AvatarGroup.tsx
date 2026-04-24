@@ -8,12 +8,7 @@ import type {
   AvatarGroupOption,
   AvatarGroupRestSlotProps
 } from './public-types'
-import {
-  computed,
-  defineComponent,
-  h,
-  provide
-} from 'vue'
+import { computed, defineComponent, h, provide } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
 import NAvatar from '../../avatar/src/Avatar'

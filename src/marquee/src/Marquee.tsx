@@ -95,11 +95,15 @@ export default defineComponent({
     } = this
     const originalNode = (
       <VResizeObserver onResize={this.handleContentResize}>
-        <div
-          class={`${mergedClsPrefix}-marquee__item ${mergedClsPrefix}-marquee__original-item`}
-        >
-          {$slots}
-        </div>
+        {{
+          default: () => (
+            <div
+              class={`${mergedClsPrefix}-marquee__item ${mergedClsPrefix}-marquee__original-item`}
+            >
+              {$slots}
+            </div>
+          )
+        }}
       </VResizeObserver>
     )
     const mirrorNode = (

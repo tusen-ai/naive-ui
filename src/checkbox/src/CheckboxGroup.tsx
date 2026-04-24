@@ -11,11 +11,7 @@ import {
   watchEffect
 } from 'vue'
 import { useConfig, useFormItem } from '../../_mixins'
-import {
-  call,
-  createInjectionKey,
-  warnOnce
-} from '../../_utils'
+import { call, createInjectionKey, warnOnce } from '../../_utils'
 
 export interface CheckboxGroupInjection {
   checkedCountRef: ComputedRef<number>

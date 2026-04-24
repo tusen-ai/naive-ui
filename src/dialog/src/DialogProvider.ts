@@ -3,23 +3,14 @@ import type { ExtractPublicPropTypes, Mutable } from '../../_utils'
 import type { exposedDialogEnvProps } from './DialogEnvironment'
 import { createId } from 'seemly'
 import { useClicked, useClickPosition } from 'vooks'
-import {
-  defineComponent,
-  Fragment,
-  h,
-  provide,
-  reactive,
-  ref
-} from 'vue'
+import { defineComponent, Fragment, h, provide, reactive, ref } from 'vue'
 import { omit } from '../../_utils'
 import {
   dialogApiInjectionKey,
   dialogProviderInjectionKey,
   dialogReactiveListInjectionKey
 } from './context'
-import {
-  NDialogEnvironment
-} from './DialogEnvironment'
+import { NDialogEnvironment } from './DialogEnvironment'
 
 export type DialogOptions = Mutable<
   Omit<

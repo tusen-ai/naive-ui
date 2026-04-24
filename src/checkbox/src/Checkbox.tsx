@@ -7,6 +7,7 @@ import type {
   OnUpdateChecked,
   OnUpdateCheckedImpl
 } from './interface'
+import type { CheckboxSize } from './public-types'
 import { on } from 'evtd'
 import { createId } from 'seemly'
 import { useMemo, useMergedState } from 'vooks'
@@ -22,12 +23,7 @@ import {
 import { NIconSwitchTransition } from '../../_internal'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
-import {
-  call,
-  createKey,
-  resolveWrappedSlot,
-  warnOnce
-} from '../../_utils'
+import { call, createKey, resolveWrappedSlot, warnOnce } from '../../_utils'
 import { checkboxLight } from '../styles'
 import { checkboxGroupInjectionKey } from './CheckboxGroup'
 import renderCheckMark from './CheckMark'
@@ -36,7 +32,7 @@ import style from './styles/index.cssr'
 
 export const checkboxProps = {
   ...(useTheme.props as ThemeProps<CheckboxTheme>),
-  size: String as PropType<'small' | 'medium' | 'large'>,
+  size: String as PropType<CheckboxSize>,
   checked: {
     type: [Boolean, String, Number] as PropType<
       boolean | string | number | undefined
@@ -94,8 +90,12 @@ export default defineComponent({
     }
     const NCheckboxGroup = inject(checkboxGroupInjectionKey, null)
     const selfRef = ref<HTMLDivElement | null>(null)
-    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
-      = useConfig(props)
+    const {
+      mergedClsPrefixRef,
+      inlineThemeDisabled,
+      mergedRtlRef,
+      mergedComponentPropsRef
+    } = useConfig(props)
     const uncontrolledCheckedRef = ref(props.defaultChecked)
     const controlledCheckedRef = toRef(props, 'checked')
     const mergedCheckedRef = useMergedState(
@@ -130,6 +130,9 @@ export default defineComponent({
           if (mergedSize !== undefined)
             return mergedSize.value
         }
+        const configSize = mergedComponentPropsRef?.value?.Checkbox?.size
+        if (configSize)
+          return configSize
         return 'medium'
       },
       mergedDisabled(NFormItem) {

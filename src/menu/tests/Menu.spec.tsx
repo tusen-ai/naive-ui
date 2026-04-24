@@ -5,9 +5,7 @@ import { mount } from '@vue/test-utils'
 import { sleep } from 'seemly'
 import { Comment, h } from 'vue'
 import { NIcon } from '../../icon'
-import {
-  NMenu
-} from '../index'
+import { NMenu } from '../index'
 
 describe('n-menu', () => {
   it('should work with import on demand', () => {

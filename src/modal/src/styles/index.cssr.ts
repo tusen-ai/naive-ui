@@ -46,9 +46,11 @@ export default c([
       position: relative;
     `),
     cM('mask-hidden', `pointer-events: none;`, [
-      c('> *', `
-        pointer-events: all;
-      `)
+      cB('modal-scroll-content', [
+        c('> *', `
+          pointer-events: all;
+        `)
+      ])
     ])
   ]),
   cB('modal', `

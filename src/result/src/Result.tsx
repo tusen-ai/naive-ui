@@ -2,11 +2,8 @@ import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ResultTheme } from '../styles'
-import {
-  computed,
-  defineComponent,
-  h
-} from 'vue'
+import type { ResultSize } from './public-types'
+import { computed, defineComponent, h } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {
   ErrorIcon,
@@ -36,10 +33,7 @@ const iconRenderMap = {
 
 export const resultProps = {
   ...(useTheme.props as ThemeProps<ResultTheme>),
-  size: {
-    type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
-    default: 'medium'
-  },
+  size: String as PropType<ResultSize>,
   status: {
     type: String as PropType<
       'info' | 'success' | 'warning' | 'error' | '404' | '403' | '500' | '418'
@@ -63,7 +57,13 @@ export default defineComponent({
   props: resultProps,
   slots: Object as SlotsType<ResultSlots>,
   setup(props) {
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedComponentPropsRef }
+      = useConfig(props)
+    const mergedSizeRef = computed(() => {
+      return (
+        props.size || mergedComponentPropsRef?.value?.Result?.size || 'medium'
+      )
+    })
     const themeRef = useTheme(
       'Result',
       '-result',
@@ -73,7 +73,8 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const cssVarsRef = computed(() => {
-      const { size, status } = props
+      const { status } = props
+      const size = mergedSizeRef.value
       const {
         common: { cubicBezierEaseInOut },
         self: {
@@ -103,7 +104,8 @@ export default defineComponent({
       ? useThemeClass(
           'result',
           computed(() => {
-            const { size, status } = props
+            const { status } = props
+            const size = mergedSizeRef.value
             let hash = ''
             if (size) {
               hash += size[0]

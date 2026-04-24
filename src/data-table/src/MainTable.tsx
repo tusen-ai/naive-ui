@@ -21,7 +21,8 @@ export default defineComponent({
       minHeightRef,
       flexHeightRef,
       virtualScrollHeaderRef,
-      syncScrollState
+      syncScrollState,
+      scrollXRef
     } = inject(dataTableInjectionKey)!
 
     const headerInstRef = ref<MainTableHeaderRef | null>(null)
@@ -94,6 +95,7 @@ export default defineComponent({
       bodyStyle: bodyStyleRef,
       flexHeight: flexHeightRef,
       handleBodyResize,
+      scrollX: scrollXRef,
       ...exposedMethods
     }
   },

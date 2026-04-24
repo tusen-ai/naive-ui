@@ -15,9 +15,7 @@ import { download, lockHtmlScrollRightCompensationRef } from '../../_utils'
 import { NButton } from '../../button'
 import { NCollapse, NCollapseItem } from '../../collapse'
 import { NColorPicker } from '../../color-picker'
-import {
-  NConfigProvider
-} from '../../config-provider'
+import { NConfigProvider } from '../../config-provider'
 import { configProviderInjectionKey } from '../../config-provider/src/context'
 import { NDivider } from '../../divider'
 import { NElement } from '../../element'

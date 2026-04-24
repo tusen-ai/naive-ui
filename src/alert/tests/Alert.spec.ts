@@ -48,9 +48,10 @@ describe('n-alert', () => {
 
   it('should work with `bordered` prop', async () => {
     const wrapper = mount(NAlert)
-    expect(wrapper.find('.n-alert-body--bordered').exists()).toBe(true)
+    const body = wrapper.find('.n-alert-body')
+    expect(body.classes()).toContain('n-alert-body--bordered')
     await wrapper.setProps({ bordered: false })
-    expect(wrapper.find('.n-alert-body--bordered').exists()).toBe(false)
+    expect(body.classes()).not.toContain('n-alert-body--bordered')
     wrapper.unmount()
   })
 
@@ -127,13 +128,26 @@ describe('n-alert', () => {
   })
 
   it('should trigger callback when closed', async () => {
-    const handleCloseClick = jest.fn()
-    const handleOnAfterLeave = jest.fn()
+    const handleCloseClick = vi.fn()
+    const handleOnAfterLeave = vi.fn()
+    // https://github.com/vuejs/test-utils/issues/1912#issuecomment-1351054542
+    const rafSpy = vi
+      .spyOn(window, 'requestAnimationFrame')
+      .mockImplementation((cb: FrameRequestCallback): number => {
+        cb(0)
+        return 0
+      })
     const wrapper = mount(NAlert, {
       props: {
         closable: true,
         onClose: handleCloseClick,
         onAfterLeave: handleOnAfterLeave
+      },
+      global: {
+        stubs: {
+          Transition: false,
+          TransitionGroup: false
+        }
       }
     })
     const closeBtn = wrapper.find('.n-base-close.n-alert__close')
@@ -143,10 +157,9 @@ describe('n-alert', () => {
     expect(wrapper.emitted()).toHaveProperty('click')
 
     expect(handleCloseClick).toHaveBeenCalled()
+    expect(handleOnAfterLeave).toHaveBeenCalled()
 
-    setTimeout(() => {
-      expect(handleOnAfterLeave).toHaveBeenCalled()
-      wrapper.unmount()
-    }, 0)
+    wrapper.unmount()
+    rafSpy.mockRestore()
   })
 })

@@ -4,11 +4,7 @@ import type { ThemeCommonVars } from '../_styles/common'
 import type { GlobalTheme } from '../config-provider'
 import { useSsrAdapter } from '@css-render/vue3-ssr'
 import { merge } from 'lodash-es'
-import {
-  computed,
-  inject,
-  onBeforeMount
-} from 'vue'
+import { computed, inject, onBeforeMount } from 'vue'
 import globalStyle from '../_styles/global/index.cssr'
 import { configProviderInjectionKey } from '../config-provider/src/context'
 import { cssrAnchorMetaName } from './common'

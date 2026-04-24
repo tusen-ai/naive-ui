@@ -140,7 +140,7 @@ describe('n-auto-complete', () => {
   })
 
   it('should work with `on-blur` prop', async () => {
-    const onBlur = jest.fn()
+    const onBlur = vi.fn()
     const wrapper = mount(NAutoComplete, {
       props: { onBlur }
     })
@@ -151,7 +151,7 @@ describe('n-auto-complete', () => {
   })
 
   it('should work with `on-focus` prop', async () => {
-    const onFocus = jest.fn()
+    const onFocus = vi.fn()
     const wrapper = mount(NAutoComplete, {
       props: { onFocus }
     })
@@ -187,16 +187,16 @@ describe('n-auto-complete', () => {
         'left',
         'left-end'
       ] as const
-    ).forEach((placement) => {
+    ).forEach(async (placement) => {
       const wrapper = mount(NAutoComplete, { props: { placement } })
-      setTimeout(() => {
+      await vi.waitFor(() => {
         expect(
           document
             .querySelector('.v-binder-follower-content')
             ?.getAttribute('v-placement')
         ).toBe(placement)
-        wrapper.unmount()
       })
+      wrapper.unmount()
     })
   })
 })

@@ -3,10 +3,7 @@ import type { NotificationReactive } from '../index'
 import { mount } from '@vue/test-utils'
 import { sleep } from 'seemly'
 import { defineComponent, h, nextTick, onMounted, ref } from 'vue'
-import {
-  NNotificationProvider,
-  useNotification
-} from '../index'
+import { NNotificationProvider, useNotification } from '../index'
 
 const Provider = defineComponent({
   render() {
@@ -41,7 +38,7 @@ describe('n-notification', () => {
   })
 
   it('can change content', async () => {
-    const changeContent = jest.fn((nRef: Ref) => {
+    const changeContent = vi.fn((nRef: Ref) => {
       nRef.value.content = 'change info'
     })
     const Test = defineComponent({

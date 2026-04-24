@@ -5,14 +5,7 @@ import type { ImageInst } from '../../image'
 import type { ListType } from './interface'
 import type { UploadSettledFileInfo } from './public-types'
 import { useMemo } from 'vooks'
-import {
-  computed,
-  defineComponent,
-  h,
-  inject,
-  ref,
-  watchEffect
-} from 'vue'
+import { computed, defineComponent, h, inject, ref, watchEffect } from 'vue'
 import { NBaseIcon, NIconSwitchTransition } from '../../_internal'
 import {
   AttachIcon,
@@ -128,7 +121,7 @@ export default defineComponent({
           return
         }
       }
-      NUpload.submit(props.file.id)
+      NUpload.submit({ fileId: props.file.id })
     }
     function handleRemoveOrCancelClick(e: MouseEvent): void {
       e.preventDefault()

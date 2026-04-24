@@ -1,13 +1,7 @@
 import type { PropType, VNode, VNodeChild } from 'vue'
 import type { MenuMixedOption, TmNode } from './interface'
 import { useMemo } from 'vooks'
-import {
-  computed,
-  defineComponent,
-  h,
-  provide,
-  ref
-} from 'vue'
+import { computed, defineComponent, h, provide, ref } from 'vue'
 import { NFadeInExpandTransition } from '../../_internal'
 import { keysOf } from '../../_utils'
 

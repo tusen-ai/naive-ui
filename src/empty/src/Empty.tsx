@@ -2,11 +2,7 @@ import type { PropType, SlotsType, VNode, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { EmptyTheme } from '../styles'
-import {
-  computed,
-  defineComponent,
-  h
-} from 'vue'
+import { computed, defineComponent, h } from 'vue'
 import { NBaseIcon } from '../../_internal/icon'
 import { EmptyIcon } from '../../_internal/icons'
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'

@@ -31,10 +31,7 @@ import {
   toRef,
   watchEffect
 } from 'vue'
-import {
-  VOverflow,
-  VResizeObserver
-} from 'vueuc'
+import { VOverflow, VResizeObserver } from 'vueuc'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { call } from '../../_utils'
 import { layoutSiderInjectionKey } from '../../layout/src/interface'

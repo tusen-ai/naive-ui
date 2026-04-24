@@ -3,6 +3,7 @@ import type { ScrollbarInst } from '../../_internal'
 import type { Hljs, ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { LogTheme } from '../styles'
+import type { LogSpinProps } from './public-types'
 import { throttle as _throttle } from 'lodash-es'
 import {
   computed,
@@ -73,6 +74,7 @@ export const logProps = {
     default: 0
   },
   hljs: Object,
+  spinProps: Object as PropType<LogSpinProps>,
   onReachTop: Function as PropType<() => void>,
   onReachBottom: Function as PropType<() => void>,
   onRequireMore: Function as PropType<(from: 'top' | 'bottom') => void>
@@ -139,7 +141,7 @@ export default defineComponent({
           onReachBottom()
       }
     }
-    const handleWheel = throttle(_handleWheel, 300)
+    const handleWheel: (e: WheelEvent) => void = throttle(_handleWheel, 300)
     function _handleWheel(e: WheelEvent): void {
       if (silentRef.value) {
         void nextTick(() => {
@@ -310,7 +312,12 @@ export default defineComponent({
         <Transition name="fade-in-scale-up-transition">
           {{
             default: () =>
-              this.loading ? <NLogLoader clsPrefix={mergedClsPrefix} /> : null
+              this.loading ? (
+                <NLogLoader
+                  clsPrefix={mergedClsPrefix}
+                  spinProps={this.spinProps}
+                />
+              ) : null
           }}
         </Transition>
       ]

@@ -7,13 +7,7 @@ import type {
 } from './interface'
 import { createId, happensIn } from 'seemly'
 import { useMemo } from 'vooks'
-import {
-  computed,
-  defineComponent,
-  h,
-  inject,
-  toRef
-} from 'vue'
+import { computed, defineComponent, h, inject, toRef } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {
   ChevronLeftIcon as ArrowLeftIcon,

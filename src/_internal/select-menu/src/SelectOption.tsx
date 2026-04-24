@@ -3,18 +3,11 @@ import type { PropType, Ref, VNode } from 'vue'
 import type { SelectOption } from '../../../select/src/interface'
 import type { RenderLabelImpl, RenderOptionImpl } from './interface'
 import { useMemo } from 'vooks'
-import {
-  defineComponent,
-  h,
-  inject,
-  Transition
-} from 'vue'
+import { defineComponent, h, inject, Transition } from 'vue'
 import { mergeEventHandlers, render } from '../../../_utils'
 import { NBaseIcon } from '../../icon'
 import { CheckmarkIcon } from '../../icons'
-import {
-  internalSelectionMenuInjectionKey
-} from './interface'
+import { internalSelectionMenuInjectionKey } from './interface'
 
 function renderCheckMark(show: boolean, clsPrefix: string): VNode {
   return (
