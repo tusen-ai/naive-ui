@@ -52,10 +52,12 @@ status.vue
 | render-prefix | `(info: { option: CascaderOption, node: VNode \| null, checked: boolean }) => VNodeChild` | `undefined` | Render function of all the options' prefix. | 2.38.2 |
 | render-label | `(option: CascaderOption, checked: boolean) => VNodeChild` | `undefined` | Render function for cascader menu option label. | 2.24.0 |
 | render-suffix | `(info: { option: CascaderOption, node: VNode \| null, checked: boolean }) => VNodeChild` | `undefined` | Render function of all the options' suffix. | 2.38.2 |
+| scrollbar-props | `ScrollbarProps` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props) | 2.44.0 |
 | separator | `string` | `' / '` | Selected option path value separator (used with `show-path`). |  |
 | show | `boolean` | `undefined` | Whether to show the menu. |  |
 | show-path | `boolean` | `true` | Whether to show the selected options as a path. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Cascader size. |  |
+| spin-props | `{ strokeWidth?: number, stroke?: string, scale?: number, radius?: number }` | `undefined` | Loading icon properties. | 2.44.0 |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validation status. | 2.27.0 |
 | to | `string \| HTMLElement \| false` | `body` | Container node of the menu. `false` will keep it not detached. |  |
 | value | `string \| number \| Array<number \| string> \| null` | `undefined` | Value of the cascader (if being set manually). |  |
