@@ -142,27 +142,28 @@ describe('n-drawer', () => {
       drawerContentProps: { closable: true }
     })
     await wrapper.find('button').trigger('click')
-    vi.waitFor(() => {
-      expect(onUpdate).toHaveBeenCalled()
-    })
+    expect(onUpdate).not.toHaveBeenCalled()
+    document
+      .querySelector('.n-base-close')
+      ?.dispatchEvent(new MouseEvent('click'))
+    await nextTick()
+    expect(onUpdate).toHaveBeenCalledWith(false)
     wrapper.unmount()
   })
 
   it('should work with `mask-closable` prop', async () => {
     const onUpdate = vi.fn()
-    const mousedownEvent = new MouseEvent('mousedown', { bubbles: true })
-    const mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
     const wrapper = mountDrawer({
       show: true,
       hasOnUpdateShow: true,
       drawerProps: { onUpdateShow: onUpdate },
       drawerContentProps: { closable: true }
     })
-    document.querySelector('.n-drawer-mask')?.dispatchEvent(mousedownEvent)
-    document.querySelector('.n-drawer-mask')?.dispatchEvent(mouseupEvent)
-    vi.waitFor(() => {
-      expect(onUpdate).toHaveBeenCalled()
-    })
+    document
+      .querySelector('.n-drawer-mask')
+      ?.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    await nextTick()
+    expect(onUpdate).toHaveBeenCalledWith(false)
     wrapper.unmount()
   })
 

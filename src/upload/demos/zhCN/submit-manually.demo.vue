@@ -12,7 +12,6 @@ const fileListLengthRef = ref(0)
 const uploadRef = ref<UploadInst | null>(null)
 
 const fileListLength = fileListLengthRef
-const upload = uploadRef
 
 function handleChange(options: { fileList: UploadFileInfo[] }) {
   fileListLengthRef.value = options.fileList.length
@@ -32,7 +31,7 @@ function handleClick() {
     上传文件
   </n-button>
   <n-upload
-    ref="upload"
+    ref="uploadRef"
     action="__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f"
     :default-upload="false"
     multiple

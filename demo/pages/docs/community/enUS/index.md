@@ -4,7 +4,7 @@
 
 Naive UI is a high-quality Vue component library of unified design specifications. We prefer to provide only UI components with a unified specification and visual presentation. So we recommend the following great resources from the community that complement Naive UI.
 
-If you want to contribute excellent resources, please contact 07akioni or amadeus711 in the community of `Discord` or `DingTalk`.
+If you want to contribute excellent resources, you can create a pull request of this page in naive-ui's github repo.
 
 | Resources | Descriptions |
 | --- | --- |

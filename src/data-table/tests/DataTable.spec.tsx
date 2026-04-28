@@ -74,8 +74,8 @@ describe('n-data-table', () => {
           name: index
         }
       })
-    const onPageChange = vi.fn((page: number): void => {
-      vi.waitFor(() => {
+    const onPageChange = vi.fn(async (page: number): Promise<void> => {
+      await vi.waitFor(() => {
         pagination.page = page
         pagination.itemCount = data.length
         data = data.slice(
@@ -1329,14 +1329,19 @@ describe('props.columns', () => {
       checkedRowKeys.value = e
     }
 
-    const wrapper = mount(() => (
-      <NDataTable
-        columns={columns}
-        data={data}
-        onUpdateCheckedRowKeys={handleCheck}
-        checked-row-keys={checkedRowKeys.value}
-      />
-    ))
+    const wrapper = mount(
+      () => (
+        <NDataTable
+          columns={columns}
+          data={data}
+          onUpdateCheckedRowKeys={handleCheck}
+          checked-row-keys={checkedRowKeys.value}
+        />
+      ),
+      {
+        attachTo: document.body
+      }
+    )
 
     const radios = wrapper.findAll('.n-radio')
 
@@ -1345,10 +1350,9 @@ describe('props.columns', () => {
 
     await radios[1].trigger('click')
 
-    vi.waitFor(() => {
-      expect(radios[1].classes()).toContain('n-radio--checked')
-      expect(radios[4].classes()).not.toContain('n-radio--checked')
-    })
+    expect(radios[1].classes()).toContain('n-radio--checked')
+    expect(radios[4].classes()).not.toContain('n-radio--checked')
+
     wrapper.unmount()
   })
 })

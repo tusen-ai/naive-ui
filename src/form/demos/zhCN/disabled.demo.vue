@@ -36,7 +36,6 @@ function genOptions(depth = 2, iterator = 1, prefix = ''): any {
   return options
 }
 
-const formRef = ref(null)
 const model = ref({
   inputValue: null,
   selectValue: null,
@@ -100,7 +99,6 @@ const autoCompleteOptions = computed(() => {
   <n-space vertical>
     <n-switch v-model:value="updateDisabled" />
     <n-form
-      ref="formRef"
       :model="model"
       label-placement="left"
       :label-width="160"
