@@ -1071,7 +1071,7 @@ export default defineComponent({
                       tableLayout: this.mergedTableLayout
                     }}
                   >
-                  	{caption ? <caption>{caption}</caption> : null}
+                    {caption ? <caption>{caption}</caption> : null}
                     <colgroup>
                       {cols.map(col => (
                         <col key={col.key} style={col.style}></col>
