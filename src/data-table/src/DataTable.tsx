@@ -84,9 +84,17 @@ export default defineComponent({
       mergedBorderedRef,
       mergedClsPrefixRef,
       inlineThemeDisabled,
-      mergedRtlRef
+      mergedRtlRef,
+      mergedComponentPropsRef
     } = useConfig(props)
     const rtlEnabledRef = useRtl('DataTable', mergedRtlRef, mergedClsPrefixRef)
+    const mergedSizeRef = computed(() => {
+      return (
+        props.size
+        || mergedComponentPropsRef?.value?.DataTable?.size
+        || 'medium'
+      )
+    })
     const mergedBottomBorderedRef = computed(() => {
       const { bottomBordered } = props
       // do not add bottom bordered class if bordered is true
@@ -176,25 +184,7 @@ export default defineComponent({
       expandableRef,
       doUpdateExpandedRowKeys
     } = useExpand(props, treeMateRef)
-    const {
-      handleTableBodyScroll,
-      handleTableHeaderScroll,
-      syncScrollState,
-      setHeaderScrollLeft,
-      leftActiveFixedColKeyRef,
-      leftActiveFixedChildrenColKeysRef,
-      rightActiveFixedColKeyRef,
-      rightActiveFixedChildrenColKeysRef,
-      leftFixedColumnsRef,
-      rightFixedColumnsRef,
-      fixedColumnLeftMapRef,
-      fixedColumnRightMapRef
-    } = useScroll(props, {
-      bodyWidthRef,
-      mainTableInstRef,
-      mergedCurrentPageRef
-    })
-    const { localeRef } = useLocale('DataTable')
+    const maxHeightRef = toRef(props, 'maxHeight')
     const mergedTableLayoutRef = computed(() => {
       // Layout
       // virtual |descrete header | ellpisis => fixed
@@ -209,7 +199,33 @@ export default defineComponent({
       }
       return props.tableLayout
     })
+    const {
+      handleTableBodyScroll,
+      handleTableHeaderScroll,
+      syncScrollState,
+      setHeaderScrollLeft,
+      leftActiveFixedColKeyRef,
+      leftActiveFixedChildrenColKeysRef,
+      rightActiveFixedColKeyRef,
+      rightActiveFixedChildrenColKeysRef,
+      leftFixedColumnsRef,
+      rightFixedColumnsRef,
+      fixedColumnLeftMapRef,
+      fixedColumnRightMapRef,
+      xScrollableRef,
+      explicitlyScrollableRef
+    } = useScroll(props, {
+      bodyWidthRef,
+      mainTableInstRef,
+      mergedCurrentPageRef,
+      maxHeightRef,
+      mergedTableLayoutRef
+    })
+    const { localeRef } = useLocale('DataTable')
+
     provide(dataTableInjectionKey, {
+      xScrollableRef,
+      explicitlyScrollableRef,
       props,
       treeMateRef,
       renderExpandIconRef: toRef(props, 'renderExpandIcon'),
@@ -276,7 +292,7 @@ export default defineComponent({
       }),
       onLoadRef: toRef(props, 'onLoad'),
       mergedTableLayoutRef,
-      maxHeightRef: toRef(props, 'maxHeight'),
+      maxHeightRef,
       minHeightRef: toRef(props, 'minHeight'),
       flexHeightRef: toRef(props, 'flexHeight'),
       headerCheckboxDisabledRef,
@@ -316,7 +332,7 @@ export default defineComponent({
       }
     }
     const cssVarsRef = computed(() => {
-      const { size } = props
+      const mergedSize = mergedSizeRef.value
       const {
         common: { cubicBezierEaseInOut },
         self: {
@@ -363,9 +379,9 @@ export default defineComponent({
           tdColorStriped,
           tdColorStripedModal,
           tdColorStripedPopover,
-          [createKey('fontSize', size)]: fontSize,
-          [createKey('thPadding', size)]: thPadding,
-          [createKey('tdPadding', size)]: tdPadding
+          [createKey('fontSize', mergedSize)]: fontSize,
+          [createKey('thPadding', mergedSize)]: thPadding,
+          [createKey('tdPadding', mergedSize)]: tdPadding
         }
       } = themeRef.value
       return {
@@ -421,7 +437,7 @@ export default defineComponent({
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
           'data-table',
-          computed(() => props.size[0]),
+          computed(() => mergedSizeRef.value[0]),
           cssVarsRef,
           props
         )

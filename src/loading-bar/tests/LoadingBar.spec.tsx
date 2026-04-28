@@ -34,10 +34,10 @@ describe('n-loading-bar', () => {
 
   it('should have finish type', async () => {
     const Test = defineComponent({
-      setup() {
+      async setup() {
         const loadingBar = useLoadingBar()
         loadingBar.start()
-        vi.waitFor(() => {
+        await vi.waitFor(() => {
           loadingBar.finish()
         })
       },
@@ -55,7 +55,7 @@ describe('n-loading-bar', () => {
     wrapper.unmount()
   })
 
-  it('should have error type', () => {
+  it('should have error type', async () => {
     const Test = defineComponent({
       setup() {
         const loadingBar = useLoadingBar()
@@ -68,7 +68,7 @@ describe('n-loading-bar', () => {
     const wrapper = mount(() => (
       <Provider>{{ default: () => <Test /> }}</Provider>
     ))
-    vi.waitFor(() => {
+    await vi.waitFor(() => {
       expect(document.querySelector('.n-loading-bar--error')).not.toEqual(null)
       wrapper.unmount()
     })
@@ -97,7 +97,7 @@ describe('n-loading-bar', () => {
         default: () => <Test />
       }
     })
-    vi.waitFor(() => {
+    await vi.waitFor(() => {
       expect(
         document.querySelector('.n-loading-bar--error')?.getAttribute('style')
       ).toContain('height: 5px;')

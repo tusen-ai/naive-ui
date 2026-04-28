@@ -7,7 +7,7 @@ import style from './styles/index.cssr'
 
 const duration = '1.6s'
 
-const exposedLoadingProps = {
+export const exposedLoadingProps = {
   strokeWidth: {
     type: Number,
     default: 28
@@ -15,12 +15,18 @@ const exposedLoadingProps = {
   stroke: {
     type: String,
     default: undefined
+  },
+  scale: {
+    type: Number,
+    default: 1
+  },
+  radius: {
+    type: Number,
+    default: 100
   }
 }
 
-export type BaseLoadingExposedProps = ExtractPublicPropTypes<
-  typeof exposedLoadingProps
->
+export type SharedSpinProps = ExtractPublicPropTypes<typeof exposedLoadingProps>
 
 export default defineComponent({
   name: 'BaseLoading',
@@ -34,14 +40,6 @@ export default defineComponent({
       default: true
     },
     htmlProps: Object as PropType<HTMLAttributes>,
-    scale: {
-      type: Number,
-      default: 1
-    },
-    radius: {
-      type: Number,
-      default: 100
-    },
     ...exposedLoadingProps
   },
   setup(props) {

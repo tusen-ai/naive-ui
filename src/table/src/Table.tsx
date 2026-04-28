@@ -2,6 +2,7 @@ import type { CSSProperties, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { TableTheme } from '../styles'
+import type { TableSize } from './public-types'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
@@ -25,10 +26,7 @@ export const tableProps = {
   },
   striped: Boolean,
   singleColumn: Boolean,
-  size: {
-    type: String as PropType<'small' | 'medium' | 'large'>,
-    default: 'medium'
-  }
+  size: String as PropType<TableSize>
 }
 
 export type TableProps = ExtractPublicPropTypes<typeof tableProps>
@@ -37,8 +35,17 @@ export default defineComponent({
   name: 'Table',
   props: tableProps,
   setup(props) {
-    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
-      = useConfig(props)
+    const {
+      mergedClsPrefixRef,
+      inlineThemeDisabled,
+      mergedRtlRef,
+      mergedComponentPropsRef
+    } = useConfig(props)
+    const mergedSizeRef = computed(() => {
+      return (
+        props.size || mergedComponentPropsRef?.value?.Table?.size || 'medium'
+      )
+    })
     const themeRef = useTheme(
       'Table',
       '-table',
@@ -49,7 +56,7 @@ export default defineComponent({
     )
     const rtlEnabledRef = useRtl('Table', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
-      const { size } = props
+      const size = mergedSizeRef.value
       const {
         self: {
           borderColor,
@@ -103,7 +110,7 @@ export default defineComponent({
       ? useThemeClass(
           'table',
           computed(() => {
-            return props.size[0]
+            return mergedSizeRef.value[0]
           }),
           cssVarsRef,
           props

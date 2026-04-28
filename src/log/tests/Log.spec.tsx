@@ -1,5 +1,6 @@
+import type { LogInst } from '../index'
 import { mount } from '@vue/test-utils'
-import { defineComponent, h, ref, watch } from 'vue'
+import { defineComponent, h, nextTick, ref, watch } from 'vue'
 import { NLog } from '../index'
 
 describe('n-log', () => {
@@ -93,12 +94,12 @@ describe('n-log', () => {
     const wrapper = mount(
       defineComponent({
         setup() {
-          const logInstRef = ref<any>(null)
+          const logInstRef = ref<LogInst | null>(null)
           watch(logInstRef, (value) => {
             if (value) {
-              value.scrollTo(0)
-              value.scrollTo(1)
-              value.scrollTo(999)
+              value.scrollTo({ top: 0 })
+              value.scrollTo({ top: 1 })
+              value.scrollTo({ top: 999 })
             }
           })
 
@@ -117,11 +118,15 @@ describe('n-log', () => {
         attachTo: document.body
       }
     )
-    vi.waitFor(() => {
-      expect(onRequireMore).toHaveBeenCalled()
-      expect(onReachTop).toHaveBeenCalled()
-      expect(onReachBottom).toHaveBeenCalled()
-    })
+    await nextTick()
+    // https://github.com/jsdom/jsdom/issues/1422
+    wrapper
+      .find('.n-scrollbar-container')
+      .element
+      .dispatchEvent(new Event('scroll'))
+    expect(onRequireMore).toHaveBeenCalled()
+    expect(onReachTop).toHaveBeenCalled()
+    expect(onReachBottom).toHaveBeenCalled()
     wrapper.unmount()
   })
 })

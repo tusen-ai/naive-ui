@@ -187,9 +187,9 @@ describe('n-auto-complete', () => {
         'left',
         'left-end'
       ] as const
-    ).forEach((placement) => {
+    ).forEach(async (placement) => {
       const wrapper = mount(NAutoComplete, { props: { placement } })
-      vi.waitFor(() => {
+      await vi.waitFor(() => {
         expect(
           document
             .querySelector('.v-binder-follower-content')

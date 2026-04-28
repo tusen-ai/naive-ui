@@ -22,7 +22,7 @@ click.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| content-placement | `'right' \| 'bottom'` | `right` | Steps content placement, only can be used in horizontal mode. | NEXT_VERSION |
+| content-placement | `'right' \| 'bottom'` | `right` | Steps content placement, only can be used in horizontal mode. | 2.43.2 |
 | current | `number` | `undefined` | Currently active step index. |  |
 | size | `'small' \| 'medium'` | `'medium'` | Steps size. |  |
 | status | `'process' \| 'finish' \| 'error' \| 'wait'` | `'process'` | Steps status. |  |

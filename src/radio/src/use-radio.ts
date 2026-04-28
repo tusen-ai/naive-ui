@@ -7,6 +7,7 @@ import type {
 } from 'vue'
 import type { MaybeArray } from '../../_utils'
 import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
+import type { RadioSize } from './public-types'
 import { useMemo, useMergedState } from 'vooks'
 import { inject, ref, toRef, watchEffect } from 'vue'
 import { useConfig, useFormItem } from '../../_mixins'
@@ -29,7 +30,7 @@ export const radioBaseProps = {
   },
   label: String,
   inputProps: Object as PropType<InputHTMLAttributes>,
-  size: String as PropType<'small' | 'medium' | 'large'>,
+  size: String as PropType<RadioSize>,
   onUpdateChecked: [Function, Array] as PropType<
     undefined | MaybeArray<(value: boolean) => void>
   >,
@@ -47,7 +48,7 @@ export interface RadioGroupInjection {
   mergedClsPrefixRef: Ref<string>
   nameRef: Ref<string | undefined>
   valueRef: Ref<string | number | boolean | null>
-  mergedSizeRef: Ref<'small' | 'medium' | 'large'>
+  mergedSizeRef: Ref<RadioSize>
   disabledRef: Ref<boolean>
   doUpdateValue: OnUpdateValue
 }
@@ -63,7 +64,7 @@ export interface UseRadio {
   mergedDisabled: Ref<boolean>
   renderSafeChecked: Ref<boolean>
   focus: Ref<boolean>
-  mergedSize: ComputedRef<'small' | 'medium' | 'large'>
+  mergedSize: ComputedRef<RadioSize>
   handleRadioInputChange: () => void
   handleRadioInputBlur: () => void
   handleRadioInputFocus: () => void
@@ -81,6 +82,7 @@ function setup(props: ExtractPropTypes<typeof radioBaseProps>): UseRadio {
     })
   }
   const NRadioGroup = inject(radioGroupInjectionKey, null)
+  const { mergedClsPrefixRef, mergedComponentPropsRef } = useConfig(props)
   const formItem = useFormItem(props, {
     mergedSize(NFormItem) {
       const { size } = props
@@ -97,6 +99,9 @@ function setup(props: ExtractPropTypes<typeof radioBaseProps>): UseRadio {
       if (NFormItem) {
         return NFormItem.mergedSize.value
       }
+      const configSize = mergedComponentPropsRef?.value?.Radio?.size
+      if (configSize)
+        return configSize
       return 'medium'
     },
     mergedDisabled(NFormItem) {
@@ -174,7 +179,7 @@ function setup(props: ExtractPropTypes<typeof radioBaseProps>): UseRadio {
   return {
     mergedClsPrefix: NRadioGroup
       ? NRadioGroup.mergedClsPrefixRef
-      : useConfig(props).mergedClsPrefixRef,
+      : mergedClsPrefixRef,
     inputRef,
     labelRef,
     mergedName: mergedNameRef,

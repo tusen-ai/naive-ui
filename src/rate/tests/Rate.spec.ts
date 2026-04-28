@@ -19,13 +19,9 @@ describe('n-rate', () => {
     const wrapper = mount(NRate)
 
     await wrapper.setProps({ value: 3, count: 10 })
-    vi.waitFor(() => {
-      expect(wrapper.findAll('.n-rate__item--active').length).toBe(3)
-    })
+    expect(wrapper.findAll('.n-rate__item--active').length).toBe(3)
     await wrapper.setProps({ value: 10 })
-    vi.waitFor(() => {
-      expect(wrapper.findAll('.n-rate__item--active').length).toBe(10)
-    })
+    expect(wrapper.findAll('.n-rate__item--active').length).toBe(10)
 
     wrapper.unmount()
   })

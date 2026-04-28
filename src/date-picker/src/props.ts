@@ -18,6 +18,7 @@ import type {
   Shortcuts,
   Value
 } from './interface'
+import type { DatePickerSize } from './public-types'
 import { useTheme } from '../../_mixins'
 import { useAdjustedTo } from '../../_utils'
 
@@ -29,6 +30,8 @@ export const datePickerProps = {
     default: undefined
   },
   clearable: Boolean,
+  fastYearSelect: Boolean,
+  fastMonthSelect: Boolean,
   updateValueOnClose: Boolean,
   calendarDayFormat: String,
   calendarHeaderYearFormat: String,
@@ -54,7 +57,7 @@ export const datePickerProps = {
   },
   value: [Number, Array] as PropType<Value | null>,
   formattedValue: [String, Array] as PropType<FormattedValue | null>,
-  size: String as PropType<'small' | 'medium' | 'large'>,
+  size: String as PropType<DatePickerSize>,
   type: {
     type: String as PropType<DatePickerType>,
     default: 'date'
