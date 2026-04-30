@@ -45,7 +45,10 @@ const demoBlock = fs
   .readFileSync(path.resolve(__dirname, 'ComponentDemoTemplate.vue'))
   .toString()
 
-function mergeParts({ parts, isVue }: MergePartsOptions): MergedParts {
+async function mergeParts({
+  parts,
+  isVue
+}: MergePartsOptions): Promise<MergedParts> {
   const mergedParts: Partial<MergedParts> = {
     ...parts,
     title: parts.title,
@@ -53,7 +56,11 @@ function mergeParts({ parts, isVue }: MergePartsOptions): MergedParts {
     tsCode: '',
     jsCode: ''
   }
-  handleMergeCode({ parts, mergedParts: mergedParts as MergedParts, isVue })
+  await handleMergeCode({
+    parts,
+    mergedParts: mergedParts as MergedParts,
+    isVue
+  })
   mergedParts.tsCode = encodeURIComponent(mergedParts.tsCode!)
   mergedParts.jsCode = encodeURIComponent(mergedParts.jsCode!)
   return mergedParts as MergedParts
@@ -191,10 +198,12 @@ function getPartsOfDemo(text: string): Parts {
   }
 }
 
-export function convertVue2Demo(options: ConvertVue2DemoOptions): string {
+export async function convertVue2Demo(
+  options: ConvertVue2DemoOptions
+): Promise<string> {
   const { content, resourcePath, relativeUrl, isVue = true } = options
   const parts = getPartsOfDemo(content)
-  const mergedParts = mergeParts({ parts, isVue })
+  const mergedParts = await mergeParts({ parts, isVue })
   const [fileName] = getFileName(resourcePath)
   const vueComponent = genVueComponent(
     mergedParts,
