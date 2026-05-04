@@ -77,7 +77,7 @@ export default defineConfig({
     outDir: 'site',
     rolldownOptions: {
       output: {
-        advancedChunks: {
+        codeSplitting: {
           groups: [
             {
               name: 'grapheme-splitter',
