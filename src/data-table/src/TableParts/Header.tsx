@@ -38,6 +38,7 @@ function renderTitle(
 
 const VirtualListItemWrapper = defineComponent({
   props: {
+    caption: String,
     clsPrefix: {
       type: String,
       required: true
@@ -59,6 +60,7 @@ const VirtualListItemWrapper = defineComponent({
         style={{ tableLayout: 'fixed', width }}
         class={`${clsPrefix}-data-table-table`}
       >
+        {this.caption ? <caption>{this.caption}</caption> : null}
         <colgroup>
           {cols.map(col => (
             <col key={col.key} style={col.style}></col>
@@ -91,6 +93,7 @@ export default defineComponent({
       someRowsCheckedRef,
       rowsRef,
       colsRef,
+      captionRef,
       mergedThemeRef,
       checkOptionsRef,
       mergedSortStateRef,
@@ -178,6 +181,7 @@ export default defineComponent({
       someRowsChecked: someRowsCheckedRef,
       rows: rowsRef,
       cols: colsRef,
+      caption: captionRef,
       mergedTheme: mergedThemeRef,
       checkOptions: checkOptionsRef,
       mergedTableLayout: mergedTableLayoutRef,
@@ -203,6 +207,7 @@ export default defineComponent({
       someRowsChecked,
       rows,
       cols,
+      caption,
       mergedTheme,
       checkOptions,
       componentId,
@@ -223,137 +228,148 @@ export default defineComponent({
       getLeft: ((index: number) => number) | null,
       headerHeightPx: string | undefined
     ) =>
-      row.map(({ column, colIndex, colSpan, rowSpan, isLast }) => {
-        const key = getColKey(column)
-        const { ellipsis } = column
-        if (!hasEllipsis && ellipsis)
-          hasEllipsis = true
-        const createColumnVNode = (): VNode | null => {
-          if (column.type === 'selection') {
-            return column.multiple !== false ? (
+      row.map(
+        ({ column, colIndex, colSpan, rowSpan, isLast }, actualRowIndex) => {
+          const key = getColKey(column)
+          const { ellipsis } = column
+          if (!hasEllipsis && ellipsis)
+            hasEllipsis = true
+          const createColumnVNode = (): VNode | null => {
+            if (column.type === 'selection') {
+              return column.multiple !== false ? (
+                <>
+                  <NCheckbox
+                    key={currentPage}
+                    privateInsideTable
+                    checked={allRowsChecked}
+                    indeterminate={someRowsChecked}
+                    disabled={headerCheckboxDisabled}
+                    onUpdateChecked={handleCheckboxUpdateChecked}
+                  />
+                  {checkOptions ? (
+                    <SelectionMenu clsPrefix={mergedClsPrefix} />
+                  ) : null}
+                </>
+              ) : null
+            }
+            return (
               <>
-                <NCheckbox
-                  key={currentPage}
-                  privateInsideTable
-                  checked={allRowsChecked}
-                  indeterminate={someRowsChecked}
-                  disabled={headerCheckboxDisabled}
-                  onUpdateChecked={handleCheckboxUpdateChecked}
-                />
-                {checkOptions ? (
-                  <SelectionMenu clsPrefix={mergedClsPrefix} />
+                <div class={`${mergedClsPrefix}-data-table-th__title-wrapper`}>
+                  <div class={`${mergedClsPrefix}-data-table-th__title`}>
+                    {ellipsis === true || (ellipsis && !ellipsis.tooltip) ? (
+                      <div class={`${mergedClsPrefix}-data-table-th__ellipsis`}>
+                        {renderTitle(column)}
+                      </div>
+                    ) : ellipsis && typeof ellipsis === 'object' ? (
+                      <NEllipsis
+                        {...ellipsis}
+                        theme={mergedTheme.peers.Ellipsis}
+                        themeOverrides={mergedTheme.peerOverrides.Ellipsis}
+                      >
+                        {{
+                          default: () => renderTitle(column)
+                        }}
+                      </NEllipsis>
+                    ) : (
+                      renderTitle(column)
+                    )}
+                  </div>
+                  {isColumnSortable(column) ? (
+                    <SortButton column={column as TableBaseColumn} />
+                  ) : null}
+                </div>
+                {isColumnFilterable(column) ? (
+                  <FilterButton
+                    column={column as TableBaseColumn}
+                    options={column.filterOptions}
+                  />
+                ) : null}
+                {isColumnResizable(column) ? (
+                  <ResizeButton
+                    onResizeStart={() => {
+                      handleColumnResizeStart(column as TableBaseColumn)
+                    }}
+                    onResize={(displacementX) => {
+                      handleColumnResize(
+                        column as TableBaseColumn,
+                        displacementX
+                      )
+                    }}
+                  />
                 ) : null}
               </>
-            ) : null
+            )
           }
+          const leftFixed = key in fixedColumnLeftMap
+          const rightFixed = key in fixedColumnRightMap
+          const { headerCellProps } = column
+          const resolvedHeaderCellProps = headerCellProps?.(
+            column,
+            actualRowIndex
+          )
+          const CellComponent = (
+            getLeft && !column.fixed ? 'div' : 'th'
+          ) as 'th'
           return (
-            <>
-              <div class={`${mergedClsPrefix}-data-table-th__title-wrapper`}>
-                <div class={`${mergedClsPrefix}-data-table-th__title`}>
-                  {ellipsis === true || (ellipsis && !ellipsis.tooltip) ? (
-                    <div class={`${mergedClsPrefix}-data-table-th__ellipsis`}>
-                      {renderTitle(column)}
-                    </div>
-                  ) : ellipsis && typeof ellipsis === 'object' ? (
-                    <NEllipsis
-                      {...ellipsis}
-                      theme={mergedTheme.peers.Ellipsis}
-                      themeOverrides={mergedTheme.peerOverrides.Ellipsis}
-                    >
-                      {{
-                        default: () => renderTitle(column)
-                      }}
-                    </NEllipsis>
-                  ) : (
-                    renderTitle(column)
-                  )}
-                </div>
-                {isColumnSortable(column) ? (
-                  <SortButton column={column as TableBaseColumn} />
-                ) : null}
-              </div>
-              {isColumnFilterable(column) ? (
-                <FilterButton
-                  column={column as TableBaseColumn}
-                  options={column.filterOptions}
-                />
-              ) : null}
-              {isColumnResizable(column) ? (
-                <ResizeButton
-                  onResizeStart={() => {
-                    handleColumnResizeStart(column as TableBaseColumn)
-                  }}
-                  onResize={(displacementX) => {
-                    handleColumnResize(column as TableBaseColumn, displacementX)
-                  }}
-                />
-              ) : null}
-            </>
+            <CellComponent
+              {...resolvedHeaderCellProps}
+              ref={el => (cellElsRef[key] = el as HTMLTableCellElement)}
+              key={key}
+              style={[
+                getLeft && !column.fixed
+                  ? {
+                      position: 'absolute',
+                      left: pxfy(getLeft(colIndex)),
+                      top: 0,
+                      bottom: 0
+                    }
+                  : {
+                      left: pxfy(fixedColumnLeftMap[key]?.start),
+                      right: pxfy(fixedColumnRightMap[key]?.start)
+                    },
+                {
+                  width: pxfy(column.width),
+                  textAlign: column.titleAlign || column.align,
+                  height: headerHeightPx
+                }
+              ]}
+              colspan={colSpan}
+              rowspan={rowSpan}
+              data-col-key={key}
+              class={[
+                `${mergedClsPrefix}-data-table-th`,
+                (leftFixed || rightFixed)
+                && `${mergedClsPrefix}-data-table-th--fixed-${
+                  leftFixed ? 'left' : 'right'
+                }`,
+                {
+                  [`${mergedClsPrefix}-data-table-th--sorting`]:
+                    isColumnSorting(column, mergedSortState),
+                  [`${mergedClsPrefix}-data-table-th--filterable`]:
+                    isColumnFilterable(column),
+                  [`${mergedClsPrefix}-data-table-th--sortable`]:
+                    isColumnSortable(column),
+                  [`${mergedClsPrefix}-data-table-th--selection`]:
+                    column.type === 'selection',
+                  [`${mergedClsPrefix}-data-table-th--last`]: isLast
+                },
+                column.className
+              ]}
+              onClick={
+                column.type !== 'selection'
+                && column.type !== 'expand'
+                && !('children' in column)
+                  ? (e) => {
+                      handleColHeaderClick(e, column)
+                    }
+                  : undefined
+              }
+            >
+              {createColumnVNode()}
+            </CellComponent>
           )
         }
-        const leftFixed = key in fixedColumnLeftMap
-        const rightFixed = key in fixedColumnRightMap
-        const CellComponent = (getLeft && !column.fixed ? 'div' : 'th') as 'th'
-        return (
-          <CellComponent
-            ref={el => (cellElsRef[key] = el as HTMLTableCellElement)}
-            key={key}
-            style={[
-              getLeft && !column.fixed
-                ? {
-                    position: 'absolute',
-                    left: pxfy(getLeft(colIndex)),
-                    top: 0,
-                    bottom: 0
-                  }
-                : {
-                    left: pxfy(fixedColumnLeftMap[key]?.start),
-                    right: pxfy(fixedColumnRightMap[key]?.start)
-                  },
-              {
-                width: pxfy(column.width),
-                textAlign: column.titleAlign || column.align,
-                height: headerHeightPx
-              }
-            ]}
-            colspan={colSpan}
-            rowspan={rowSpan}
-            data-col-key={key}
-            class={[
-              `${mergedClsPrefix}-data-table-th`,
-              (leftFixed || rightFixed)
-              && `${mergedClsPrefix}-data-table-th--fixed-${
-                leftFixed ? 'left' : 'right'
-              }`,
-              {
-                [`${mergedClsPrefix}-data-table-th--sorting`]: isColumnSorting(
-                  column,
-                  mergedSortState
-                ),
-                [`${mergedClsPrefix}-data-table-th--filterable`]:
-                  isColumnFilterable(column),
-                [`${mergedClsPrefix}-data-table-th--sortable`]:
-                  isColumnSortable(column),
-                [`${mergedClsPrefix}-data-table-th--selection`]:
-                  column.type === 'selection',
-                [`${mergedClsPrefix}-data-table-th--last`]: isLast
-              },
-              column.className
-            ]}
-            onClick={
-              column.type !== 'selection'
-              && column.type !== 'expand'
-              && !('children' in column)
-                ? (e) => {
-                    handleColHeaderClick(e, column)
-                  }
-                : undefined
-            }
-          >
-            {createColumnVNode()}
-          </CellComponent>
-        )
-      })
+      )
 
     if (virtualScrollHeader) {
       const { headerHeight } = this
@@ -383,6 +399,7 @@ export default defineComponent({
           itemResizable={false}
           visibleItemsTag={VirtualListItemWrapper}
           visibleItemsProps={{
+            caption,
             clsPrefix: mergedClsPrefix,
             id: componentId,
             cols,
@@ -467,6 +484,7 @@ export default defineComponent({
             tableLayout: mergedTableLayout
           }}
         >
+          {caption ? <caption>{caption}</caption> : null}
           <colgroup>
             {cols.map(col => (
               <col key={col.key} style={col.style} />
