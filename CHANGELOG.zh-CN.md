@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Feats
+
+- `n-upload` 新增 `always-show-actions` 属性，关闭 [#8073](https://github.com/tusen-ai/naive-ui/issues/8073)
+
 ### Fixes
 
 - 修复 `n-color-picker` 传入的 style、click 事件不生效，关闭 [#7528](https://github.com/tusen-ai/naive-ui/issues/7528)

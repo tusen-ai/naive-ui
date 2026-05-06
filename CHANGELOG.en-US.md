@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Feats
+
+- `n-upload` adds `always-show-actions` prop, closes [#8073](https://github.com/tusen-ai/naive-ui/issues/8073).
+
 ### Fixes
 
 - Fix `n-color-picker` passed `style` and `click` (onClick) not applied to trigger, closes [#7528](https://github.com/tusen-ai/naive-ui/issues/7528).
