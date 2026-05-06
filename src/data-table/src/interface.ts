@@ -8,14 +8,15 @@ import type {
   VNode,
   VNodeChild
 } from 'vue'
-import type { VirtualListInst } from 'vueuc'
+import type { VirtualListInst, VirtualListScrollTo } from 'vueuc'
+import type { ScrollTo as InternalScrollbarScrollTo } from '../../_internal/scrollbar/src/Scrollbar'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { EllipsisProps } from '../../ellipsis/src/Ellipsis'
 import type { NLocale } from '../../locales'
 import type { PaginationProps } from '../../pagination'
 import type { PopoverProps } from '../../popover'
-import type { ScrollbarProps, ScrollTo } from '../../scrollbar/src/Scrollbar'
+import type { ScrollbarProps } from '../../scrollbar/src/Scrollbar'
 import type { DataTableTheme } from '../styles'
 import type {
   DataTableGetCsvCell,
@@ -344,8 +345,10 @@ export type RenderExpandIcon = ({
 
 // TODO: we should deprecate `index` since it would change after row is expanded
 export type Expandable<T = InternalRowData> = (row: T) => boolean
-export interface TableExpandColumn<T = InternalRowData>
-  extends Omit<TableSelectionColumn<T>, 'type'> {
+export interface TableExpandColumn<T = InternalRowData> extends Omit<
+  TableSelectionColumn<T>,
+  'type'
+> {
   type: 'expand'
   title?: TableExpandColumnTitle
   renderExpand: RenderExpand<T>
@@ -518,15 +521,17 @@ export type FilterState = Record<
   FilterOptionValue[] | FilterOptionValue | null | undefined
 >
 
+export type DataTableScrollTo = InternalScrollbarScrollTo & VirtualListScrollTo
+
 export interface MainTableRef {
   getHeaderElement: () => HTMLElement | null
   getBodyElement: () => HTMLElement | null
-  scrollTo: ScrollTo
+  scrollTo: DataTableScrollTo
 }
 
 export interface MainTableBodyRef {
   getScrollContainer: () => HTMLElement | null
-  scrollTo: ScrollTo
+  scrollTo: DataTableScrollTo
 }
 
 export interface MainTableHeaderRef {
@@ -550,7 +555,7 @@ export interface DataTableInst {
   clearSorter: () => void
   page: (page: number) => void
   sort: (columnKey: ColumnKey, order: SortOrder) => void
-  scrollTo: ScrollTo
+  scrollTo: DataTableScrollTo
   downloadCsv: (options?: CsvOptionsType) => void
   /** @deprecated it but just leave it here, it does no harm */
   clearFilter: () => void

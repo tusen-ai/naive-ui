@@ -223,8 +223,43 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | downloadCsv | `(options?: { fileName?: string, keepOriginalData?: boolean }) => void` | Download CSV. | 2.37.0 |
 | filters | `(filters: DataTableFilterState \| null) => void` | Set the active filters of the table. |  |
 | page | `(page: number) => void` | Manually set the page. |  |
-| scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | Scroll content. | 2.30.4 |
+| scrollTo | `DataTableScrollTo` | Scroll content. See <n-a href="#DataTableScrollTo-Type">DataTableScrollTo Type</n-a>. | NEXT_VERSION |
 | sort | `(columnKey: string \| number, order: 'ascend' \| 'descend' \| false) => void` | Set the sort state of the table. |  |
+
+#### DataTableScrollTo Type
+
+```ts
+interface DataTableScrollTo {
+  (x: number, y: number): void
+  (options: {
+    left?: number
+    top?: number
+    behavior?: ScrollBehavior
+    debounce?: boolean
+  }): void
+  (options: {
+    el: HTMLElement
+    behavior?: ScrollBehavior
+    debounce?: boolean
+  }): void
+  (options: {
+    index: number
+    elSize?: number
+    behavior?: ScrollBehavior
+    debounce?: boolean
+  }): void
+  (options: {
+    key: string | number
+    behavior?: ScrollBehavior
+    debounce?: boolean
+  }): void
+  (options: {
+    position: 'top' | 'bottom'
+    behavior?: ScrollBehavior
+    debounce?: boolean
+  }): void
+}
+```
 
 ### DataTable Slots
 
