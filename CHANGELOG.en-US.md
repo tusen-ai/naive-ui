@@ -30,6 +30,8 @@
 
 ### Feats
 
+- `n-checkbox-group` adds `options`, `label-field`, `value-field` props, closes [#7505](https://github.com/tusen-ai/naive-ui/issues/7505).
+- `n-radio-group` adds `options`, `label-field`, `value-field` props, closes [#7505](https://github.com/tusen-ai/naive-ui/issues/7505).
 - `n-color-picker` adds `trigger` slot, closes [#7192](https://github.com/tusen-ai/naive-ui/issues/7192).
 - `n-select` adds `clear-created-options-on-clear` prop to control whether created options are cleared when clearing while `tag` and clearable are enabled.
 - `n-select`, `n-auto-complete`, `n-mention`, `n-popselect`, `n-cascader`, `n-pagination` add `scrollbar-props` prop.
