@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Feats
+
+- 新增 `n-guide` 组件
+
 ### Fixes
 
 - 修复 `n-color-picker` 传入的 style、click 事件不生效，关闭 [#7528](https://github.com/tusen-ai/naive-ui/issues/7528)

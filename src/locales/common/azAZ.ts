@@ -12,6 +12,12 @@ const azAZ: NLocale = {
     positiveText: 'Təsdiqlə',
     negativeText: 'İmtina et'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'Zəhmət olmasa, seçin',
     loading: 'Yüklənir',

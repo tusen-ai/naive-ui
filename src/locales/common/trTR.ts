@@ -12,6 +12,12 @@ const trTR: NLocale = {
     positiveText: 'Kabul Et',
     negativeText: 'İptal'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'Lütfen Seçin',
     loading: 'Yükleniyor',

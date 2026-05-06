@@ -12,6 +12,12 @@ const idID: NLocale = {
     positiveText: 'Setuju',
     negativeText: 'Batalkan'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'Mohon Pilih',
     loading: 'Memuat',

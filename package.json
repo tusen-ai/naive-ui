@@ -157,7 +157,10 @@
         "rollup",
         "webpack"
       ]
-    }
+    },
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   },
   "lint-staged": {
     "*.js": [

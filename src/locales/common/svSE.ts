@@ -12,6 +12,12 @@ const svSE: NLocale = {
     positiveText: 'Bekräfta',
     negativeText: 'Avbryt'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'Vänligen välj',
     loading: 'Laddar',

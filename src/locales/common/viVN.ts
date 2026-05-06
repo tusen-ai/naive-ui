@@ -12,6 +12,12 @@ const viVN: NLocale = {
     positiveText: 'Xác nhận',
     negativeText: 'Hủy'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'Vui lòng chọn',
     loading: 'Đang tải',

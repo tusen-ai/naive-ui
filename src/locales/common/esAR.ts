@@ -12,6 +12,12 @@ const esAR: NLocale = {
     positiveText: 'Confirmar',
     negativeText: 'Cancelar'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'Seleccionar por favor',
     loading: 'Cargando',

@@ -43,7 +43,7 @@ function handleUpdateValue(value: string) {
       +1s
     </n-tab-pane>
     <n-tab-pane name="not-allowed" tab="不许进来">
-      ???
+      禁止进入
     </n-tab-pane>
     <n-tab-pane name="okay" tab="可以">
       就那么回事吧

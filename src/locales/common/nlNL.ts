@@ -12,6 +12,12 @@ const nlNL: NLocale = {
     positiveText: 'Bevestig',
     negativeText: 'Annuleer'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'Selecteer a.u.b.',
     loading: 'Laden',

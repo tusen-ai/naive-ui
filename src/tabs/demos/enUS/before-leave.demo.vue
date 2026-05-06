@@ -43,7 +43,7 @@ function handleUpdateValue(value: string) {
       +1s
     </n-tab-pane>
     <n-tab-pane name="not-allowed" tab="Not allowed">
-      ???
+      Access denied
     </n-tab-pane>
     <n-tab-pane name="okay" tab="Okay">
       Just so so

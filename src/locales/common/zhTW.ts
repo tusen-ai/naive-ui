@@ -12,6 +12,12 @@ const zhTW: NLocale = {
     positiveText: '確定',
     negativeText: '取消'
   },
+  Guide: {
+    prevText: '上一步',
+    nextText: '下一步',
+    finishText: '完成',
+    skipText: '跳過'
+  },
   Cascader: {
     placeholder: '請選擇',
     loading: '載入中',

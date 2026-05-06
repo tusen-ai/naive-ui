@@ -12,6 +12,12 @@ const csCZ: NLocale = {
     positiveText: 'Potvrdit',
     negativeText: 'Zrušit'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'Prosím vyberte',
     loading: 'Načítání',
