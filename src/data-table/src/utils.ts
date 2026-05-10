@@ -11,7 +11,7 @@ import type {
   TableExpandColumn,
   TableSelectionColumn
 } from './interface'
-import type { DataTableGetCsvCell, DataTableGetCsvHeader } from './publicTypes'
+import type { DataTableGetCsvCell, DataTableGetCsvHeader } from './public-types'
 import { depx } from 'seemly'
 import { formatLength } from '../../_utils'
 

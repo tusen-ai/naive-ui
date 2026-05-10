@@ -70,8 +70,12 @@ export default defineComponent({
   props: inputOtpProps,
   slots: Object as SlotsType<InputOtpSlots>,
   setup(props) {
-    const { mergedClsPrefixRef, mergedRtlRef, inlineThemeDisabled }
-      = useConfig(props)
+    const {
+      mergedClsPrefixRef,
+      mergedRtlRef,
+      inlineThemeDisabled,
+      mergedComponentPropsRef
+    } = useConfig(props)
     const themeRef = useTheme(
       'InputOtp',
       '-input-otp',
@@ -83,7 +87,20 @@ export default defineComponent({
     const rtlEnabledRef = useRtl('InputOtp', mergedRtlRef, mergedClsPrefixRef)
 
     // form-item
-    const formItem = useFormItem(props)
+    const formItem = useFormItem(props, {
+      mergedSize: (NFormItem) => {
+        const { size } = props
+        if (size)
+          return size
+        const { mergedSize: formItemSize } = NFormItem || {}
+        if (formItemSize?.value)
+          return formItemSize.value as InputOtpSize
+        const configSize = mergedComponentPropsRef?.value?.InputOtp?.size
+        if (configSize)
+          return configSize
+        return 'medium'
+      }
+    })
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
 
     const cssVarsRef = computed(() => {

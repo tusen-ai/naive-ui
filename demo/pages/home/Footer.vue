@@ -133,7 +133,9 @@ export default defineComponent({
           {{ t('memberLimitReached') }} 8165002788<br>
           {{ t('dingTalkGroupChat') }} 5
           {{ t('memberLimitReached') }} 31205022250<br>
-          {{ t('dingTalkGroupChat') }} 6 62720001971
+          {{ t('dingTalkGroupChat') }} 6
+          {{ t('memberLimitReached') }} 62720001971<br>
+          {{ t('dingTalkGroupChat') }} 7 172000005810
         </n-tooltip>
       </div>
       <div class="footer-links-col footer-links-col--last">

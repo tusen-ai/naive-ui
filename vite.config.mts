@@ -8,7 +8,7 @@ import { llmsTxtPlugin } from './build/vite-plugin-llms-txt'
 
 dns.setDefaultResultOrder('verbatim')
 
-const isBuildTimeTest = process.argv.some(arg =>
+const isBuildTimeTest = process.argv.some((arg) =>
   /(?:^|[\\/])(umd-test|esm-test)/.test(arg)
 )
 
@@ -74,11 +74,19 @@ export default defineConfig({
   },
   build: {
     outDir: 'site',
-    rollupOptions: {
+    rolldownOptions: {
       output: {
-        manualChunks: {
-          'grapheme-splitter': ['grapheme-splitter'],
-          katex: ['katex']
+        codeSplitting: {
+          groups: [
+            {
+              name: 'grapheme-splitter',
+              test: /grapheme-splitter/
+            },
+            {
+              name: 'katex',
+              test: /katex/
+            }
+          ]
         }
       },
       plugins: [
@@ -88,10 +96,13 @@ export default defineConfig({
       ]
     }
   },
-  esbuild: {
-    jsx: 'transform',
-    jsxFactory: 'h',
-    jsxFragment: 'Fragment'
+  oxc: {
+    jsx: {
+      runtime: 'classic',
+      pragma: 'h',
+      pragmaFrag: 'Fragment',
+      development: false
+    }
   },
   test: {
     globals: true,

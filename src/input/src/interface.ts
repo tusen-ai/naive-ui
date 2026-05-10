@@ -1,7 +1,5 @@
-import type { Ref, UnwrapRef } from 'vue'
+import type { Ref } from 'vue'
 import { createInjectionKey } from '../../_utils'
-
-export type Size = 'tiny' | 'small' | 'medium' | 'large'
 
 export type OnUpdateValue = (
   value: string & [string, string],
@@ -25,8 +23,6 @@ export interface InputWrappedRef {
   deactivate: () => void
   scrollTo: (options: ScrollToOptions) => void
 }
-
-export type InputInst = UnwrapRef<InputWrappedRef>
 
 export const inputInjectionKey = createInjectionKey<{
   countGraphemesRef: Ref<((input: string) => number) | undefined>
