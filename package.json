@@ -147,8 +147,8 @@
   },
   "pnpm": {
     "overrides": {
-      "vite": "^8.0.10",
-      "cssstyle": "5.2.1"
+      "cssstyle": "5.2.1",
+      "vite": "^8.0.10"
     },
     "peerDependencyRules": {
       "ignoreMissing": [
@@ -157,7 +157,10 @@
         "rollup",
         "webpack"
       ]
-    }
+    },
+    "ignoredBuiltDependencies": [
+      "esbuild"
+    ]
   },
   "lint-staged": {
     "*.js": [

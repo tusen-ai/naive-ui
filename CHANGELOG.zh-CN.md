@@ -5,7 +5,7 @@
 ### Fixes
 
 - 修复 `n-color-picker` 传入的 style、click 事件不生效，关闭 [#7528](https://github.com/tusen-ai/naive-ui/issues/7528)
-- fix(spin): preserve size-based strokeWidth defaults in NSpin, closes [#8061](https://github.com/tusen-ai/naive-ui/issues/8061)
+- 修复 `n-spin` 未传入 `strokeWidth` 时无法按 `size` 使用内置线宽（被 Loading 的默认值覆盖）的问题，关闭 [#8061](https://github.com/tusen-ai/naive-ui/issues/8061)
 
 ## 2.44.1
 
