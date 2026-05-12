@@ -24,6 +24,7 @@ render-source-list.vue
 | default-value | `Array<string \| number> \| null` | `null` | Default value. | 2.32.0 |
 | disabled | `boolean` | `true` | Disabled state. | 2.32.0 |
 | filter | `(pattern: string, option: TransferOption, from: 'source' \| 'target') => boolean` | A basic label string match function. | 2.32.0, `from` 2.32.2 |
+| label-field | `string` | `undefined` | The field name of the option `label`. | NEXT_VERSION |
 | options | `TransferOption[]` | `[]` | For configuration options, see the TransferOption Type below. | 2.32.0 |
 | render-source-label | `(props: { option: TransferOption }) => VNodeChild` | `undefined` | Customize source label rendering. | 2.32.0 |
 | render-target-label | `(props: { option: TransferOption }) => VNodeChild` | `undefined` | Customize target label rendering. | 2.32.0 |
@@ -39,6 +40,7 @@ render-source-list.vue
 | target-filter-placeholder | `string` | `undefined` | Placeholder for the target items search box. | 2.32.0 |
 | target-title | `string \| (() => VNodeChild)` | `undefined` | Target items title. | 2.32.0, Render function since 2.40.0 |
 | value | `Array<string \| number> \| null` | `undefined` | Value when being set manually. | 2.32.0 |
+| value-field | `string` | `undefined` | The field name of the option `value`. | NEXT_VERSION |
 | on-update:value | `(value: Array<string \| number>) => void` | `undefined` | Callback when the value changes. | 2.32.0 |
 | virtual-scroll | `boolean` | `false` | Enable virtual scrolling. | 2.32.0 |
 
