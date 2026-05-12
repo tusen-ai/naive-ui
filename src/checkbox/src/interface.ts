@@ -1,3 +1,5 @@
+import type { VNode } from 'vue'
+
 export type OnUpdateChecked = (
   value: string & number & boolean,
   e: MouseEvent | KeyboardEvent
@@ -10,4 +12,8 @@ export type OnUpdateCheckedImpl = (
 export interface CheckboxInst {
   focus: () => void
   blur: () => void
+}
+
+export interface CheckboxSlots {
+  default?: () => VNode[]
 }
