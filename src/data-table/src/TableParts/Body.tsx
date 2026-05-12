@@ -573,10 +573,17 @@ export default defineComponent({
         ref="scrollbarInstRef"
         scrollable={explicitlyScrollable || xScrollable}
         class={`${mergedClsPrefix}-data-table-base-table-body`}
-        style={!empty ? this.bodyStyle : 'height: initial;'}
+        style={!empty ? this.bodyStyle : 'height: 100%;'}
         theme={mergedTheme.peers.Scrollbar}
         themeOverrides={mergedTheme.peerOverrides.Scrollbar}
-        contentStyle={contentStyle}
+        contentStyle={{
+          ...contentStyle,
+          ...(empty && {
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column'
+          })
+        }}
         container={
           shouldDisplayVirtualList ? this.virtualListContainer : undefined
         }
