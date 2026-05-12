@@ -245,6 +245,7 @@ export default defineComponent({
             showToolbar={this.showToolbar}
             showToolbarTooltip={this.showToolbarTooltip}
             renderToolbar={this.renderToolbar}
+            keepDragOffset={this.keepDragOffset}
             src={this.mergedPreviewSrc}
             show={!this.previewDisabled && this.previewShow}
             onClose={this.onPreviewClose}

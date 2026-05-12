@@ -92,6 +92,25 @@ describe('n-spin', () => {
     wrapper.unmount()
   })
 
+  it('should use size-based default strokeWidth when `strokeWidth` is not set', () => {
+    const cases: Array<{ size: 'small' | 'medium' | 'large', width: string }>
+      = [
+        { size: 'small', width: '20' },
+        { size: 'medium', width: '18' },
+        { size: 'large', width: '16' }
+      ]
+    cases.forEach(({ size, width }) => {
+      const wrapper = mount(NSpin, { props: { size } })
+      expect(wrapper.find('circle').attributes('stroke-width')).toEqual(width)
+      wrapper.unmount()
+    })
+    const numericWrapper = mount(NSpin, { props: { size: 71 } })
+    expect(numericWrapper.find('circle').attributes('stroke-width')).toEqual(
+      '18'
+    )
+    numericWrapper.unmount()
+  })
+
   it('should work with `delay` prop', async () => {
     const wrapper = mount(NSpin, {
       props: {
