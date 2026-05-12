@@ -34,6 +34,7 @@ export const badgeProps = {
   showZero: Boolean,
   processing: Boolean,
   color: String,
+  textColor: String,
   offset: Array as unknown as PropType<
     readonly [number | string, number | string]
   >
@@ -78,10 +79,15 @@ export default defineComponent({
 
     const rtlEnabledRef = useRtl('Badge', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
-      const { type, color: propColor } = props
+      const { type, color: propColor, textColor: propsTextColor } = props
       const {
         common: { cubicBezierEaseInOut, cubicBezierEaseOut },
-        self: { [createKey('color', type)]: color, fontFamily, fontSize }
+        self: {
+          [createKey('color', type)]: color,
+          fontFamily,
+          fontSize,
+          textColor
+        }
       } = themeRef.value
       return {
         '--n-font-size': fontSize,
@@ -89,7 +95,8 @@ export default defineComponent({
         '--n-color': propColor || color,
         '--n-ripple-color': propColor || color,
         '--n-bezier': cubicBezierEaseInOut,
-        '--n-ripple-bezier': cubicBezierEaseOut
+        '--n-ripple-bezier': cubicBezierEaseOut,
+        '--n-text-color': propsTextColor || textColor
       }
     })
 
