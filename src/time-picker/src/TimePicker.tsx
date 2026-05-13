@@ -1,7 +1,10 @@
 import type { Locale } from 'date-fns'
+import type { CSSProperties, PropType, VNode } from 'vue'
+import type { FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/public-types'
+import type { InputInst } from '../../input'
 import type { TimePickerTheme } from '../styles'
 import type {
   IsHourDisabled,
@@ -13,9 +16,9 @@ import type {
   OnUpdateValue,
   OnUpdateValueImpl,
   PanelRef,
-  Size,
   TimePickerInst
 } from './interface'
+import type { TimePickerSize } from './public-types'
 import {
   format,
   getHours,
@@ -38,21 +41,18 @@ import { clickoutside } from 'vdirs'
 import { useIsMounted, useKeyboard, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   nextTick,
-  type PropType,
   provide,
   ref,
   toRef,
   Transition,
-  type VNode,
   watch,
   watchEffect,
   withDirectives
 } from 'vue'
-import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc'
+import { VBinder, VFollower, VTarget } from 'vueuc'
 import { NBaseIcon } from '../../_internal'
 import { TimeIcon } from '../../_internal/icons'
 import {
@@ -69,7 +69,7 @@ import {
   warnOnce
 } from '../../_utils'
 import { strictParse } from '../../date-picker/src/utils'
-import { type InputInst, NInput } from '../../input'
+import { NInput } from '../../input'
 import { timePickerLight } from '../styles'
 import { timePickerInjectionKey } from './interface'
 import Panel from './Panel'
@@ -115,7 +115,7 @@ export const timePickerProps = {
   valueFormat: String,
   formattedValue: String as PropType<string | null>,
   isHourDisabled: Function as PropType<IsHourDisabled>,
-  size: String as PropType<Size>,
+  size: String as PropType<TimePickerSize>,
   isMinuteDisabled: Function as PropType<IsMinuteDisabled>,
   isSecondDisabled: Function as PropType<IsSecondDisabled>,
   inputReadonly: Boolean,
@@ -203,10 +203,24 @@ export default defineComponent({
       mergedBorderedRef,
       mergedClsPrefixRef,
       namespaceRef,
-      inlineThemeDisabled
+      inlineThemeDisabled,
+      mergedComponentPropsRef
     } = useConfig(props)
     const { localeRef, dateLocaleRef } = useLocale('TimePicker')
-    const formItem = useFormItem(props)
+    const formItem = useFormItem(props, {
+      mergedSize: (NFormItem) => {
+        const { size } = props
+        if (size)
+          return size
+        const { mergedSize: formItemSize } = NFormItem || {}
+        if (formItemSize?.value)
+          return formItemSize.value as TimePickerSize
+        const configSize = mergedComponentPropsRef?.value?.TimePicker?.size
+        if (configSize)
+          return configSize
+        return 'medium'
+      }
+    })
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     const themeRef = useTheme(
       'TimePicker',

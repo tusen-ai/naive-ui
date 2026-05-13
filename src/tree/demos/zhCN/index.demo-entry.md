@@ -58,7 +58,7 @@ expand-debug.vue
 | default-expanded-keys | `Array<string \| number>` | `[]` | 默认展开项 |  |
 | default-selected-keys | `Array<string \| number>` | `[]` | 默认选中的节点 |  |
 | draggable | `boolean` | `false` | 是否可拖拽 |  |
-| ellipsis | `boolean` | `false` | 是否省略超出宽度的文本 | NEXT_VERSION |
+| ellipsis | `boolean` | `false` | 是否省略超出宽度的文本 | 2.43.0 |
 | expand-on-dragenter | `boolean` | `true` | 是否在拖入后展开节点 |  |
 | expand-on-click | `boolean` | `false` | 是否在点击节点后展开或收缩节点 | 2.29.1 |
 | expanded-keys | `Array<string \| number>` | `undefined` | 如果设定则展开受控 |  |
@@ -84,6 +84,7 @@ expand-debug.vue
 | selected-keys | `Array<string \| number>` | `undefined` | 如果设定则 `selected` 状态受控 |  |
 | show-irrelevant-nodes | `boolean` | `true` | 是否在搜索状态显示和搜索无关的节点 | 2.28.1 |
 | show-line | `boolean` | `false` | 是否显示连接线 | 2.35.0 |
+| spin-props | `{ strokeWidth?: number, stroke?: string, scale?: number, radius?: number }` | `undefined` | 加载图标的属性 | 2.44.0 |
 | virtual-scroll | `boolean` | `false` | 是否启用虚拟滚动，启用前你需要设定好树的高度样式 |  |
 | watch-props | `Array<'defaultCheckedKeys' \| 'defaultSelectedKeys' \|'defaultExpandedKeys'>` | `undefined` | 需要检测变更的默认属性，检测后组件状态会更新。注意：`watch-props` 本身不是响应式的 |  |
 | on-dragend | `(data: { node: TreeOption, event: DragEvent }) => void` | `undefined` | 节点完成拖拽动作后的回调函数 |  |

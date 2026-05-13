@@ -1,5 +1,6 @@
+import type { PropType } from 'vue'
 import type { Item } from './interface'
-import { defineComponent, h, type PropType } from 'vue'
+import { defineComponent, h } from 'vue'
 
 export default defineComponent({
   name: 'TimePickerPanelCol',

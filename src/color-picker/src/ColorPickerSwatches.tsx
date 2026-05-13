@@ -1,7 +1,9 @@
+import type { PropType } from 'vue'
+import type { ColorPickerMode } from './utils'
 import { hsv2rgb, hsva, toRgbaString } from 'seemly'
-import { computed, defineComponent, h, type PropType } from 'vue'
+import { computed, defineComponent, h } from 'vue'
 import { warn } from '../../_utils'
-import { type ColorPickerMode, convertColor, getModeFromValue } from './utils'
+import { convertColor, getModeFromValue } from './utils'
 
 // Try to normalize the color values to ensure that they are valid CSS colors
 function normalizeColor(color: string, mode: ColorPickerMode | null): string {

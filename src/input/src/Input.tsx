@@ -1,45 +1,43 @@
+import type {
+  CSSProperties,
+  InputHTMLAttributes,
+  PropType,
+  SlotsType,
+  TextareaHTMLAttributes,
+  VNode,
+  VNodeChild,
+  WatchStopHandle
+} from 'vue'
+import type { ScrollbarInst } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/public-types'
 import type { InputTheme } from '../styles'
 import type {
   InputWrappedRef,
   OnUpdateValue,
-  OnUpdateValueImpl,
-  Size
+  OnUpdateValueImpl
 } from './interface'
+import type { InputSize } from './public-types'
 import { off, on } from 'evtd'
 import { getPadding } from 'seemly'
 import { useMemo, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   Fragment,
   getCurrentInstance,
   h,
-  type InputHTMLAttributes,
   nextTick,
   onMounted,
-  type PropType,
   provide,
   ref,
-  type SlotsType,
-  type TextareaHTMLAttributes,
   toRef,
-  type VNode,
-  type VNodeChild,
   watch,
-  watchEffect,
-  type WatchStopHandle
+  watchEffect
 } from 'vue'
 import { VResizeObserver } from 'vueuc'
-import {
-  NBaseClear,
-  NBaseIcon,
-  NBaseSuffix,
-  NScrollbar,
-  type ScrollbarInst
-} from '../../_internal'
+import { NBaseClear, NBaseIcon, NBaseSuffix, NScrollbar } from '../../_internal'
 import { EyeIcon, EyeOffIcon } from '../../_internal/icons'
 import {
   useConfig,
@@ -50,14 +48,7 @@ import {
   useThemeClass
 } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
-import {
-  call,
-  createKey,
-  type ExtractPublicPropTypes,
-  type MaybeArray,
-  resolveSlot,
-  resolveWrappedSlot
-} from '../../_utils'
+import { call, createKey, resolveSlot, resolveWrappedSlot } from '../../_utils'
 import { isSafari } from '../../_utils/env/browser'
 import { inputLight } from '../styles'
 import { inputInjectionKey } from './interface'
@@ -85,7 +76,7 @@ export const inputProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  size: String as PropType<Size>,
+  size: String as PropType<InputSize>,
   rows: {
     type: [Number, String] as PropType<number | string>,
     default: 3
@@ -189,7 +180,8 @@ export default defineComponent({
       mergedClsPrefixRef,
       mergedBorderedRef,
       inlineThemeDisabled,
-      mergedRtlRef
+      mergedRtlRef,
+      mergedComponentPropsRef
     } = useConfig(props)
     const themeRef = useTheme(
       'Input',
@@ -224,7 +216,20 @@ export default defineComponent({
       uncontrolledValueRef
     )
     // form-item
-    const formItem = useFormItem(props)
+    const formItem = useFormItem(props, {
+      mergedSize: (NFormItem) => {
+        const { size } = props
+        if (size)
+          return size
+        const { mergedSize: formItemSize } = NFormItem || {}
+        if (formItemSize?.value)
+          return formItemSize.value as InputSize
+        const configSize = mergedComponentPropsRef?.value?.Input?.size
+        if (configSize)
+          return configSize
+        return 'medium'
+      }
+    })
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     // states
     const focusedRef = ref(false)
@@ -1110,6 +1115,7 @@ export default defineComponent({
         ref="wrapperElRef"
         class={[
           `${mergedClsPrefix}-input`,
+          `${mergedClsPrefix}-input--${this.mergedSize}-size`,
           themeClass,
           mergedStatus && `${mergedClsPrefix}-input--${mergedStatus}-status`,
           {
@@ -1304,83 +1310,83 @@ export default defineComponent({
             </div>
           )}
           {!this.pair
-          && resolveWrappedSlot($slots.suffix, (children) => {
-            return children
-              || this.clearable
-              || this.showCount
-              || this.mergedShowPasswordOn
-              || this.loading !== undefined ? (
-                  <div class={`${mergedClsPrefix}-input__suffix`}>
-                    {[
-                      resolveWrappedSlot(
-                        $slots['clear-icon-placeholder'],
-                        (children) => {
-                          return (
-                            (this.clearable || children) && (
-                              <NBaseClear
-                                clsPrefix={mergedClsPrefix}
-                                show={this.showClearButton}
-                                onClear={this.handleClear}
-                              >
-                                {{
-                                  placeholder: () => children,
-                                  icon: () => this.$slots['clear-icon']?.()
-                                }}
-                              </NBaseClear>
+            && resolveWrappedSlot($slots.suffix, (children) => {
+              return children
+                || this.clearable
+                || this.showCount
+                || this.mergedShowPasswordOn
+                || this.loading !== undefined ? (
+                    <div class={`${mergedClsPrefix}-input__suffix`}>
+                      {[
+                        resolveWrappedSlot(
+                          $slots['clear-icon-placeholder'],
+                          (children) => {
+                            return (
+                              (this.clearable || children) && (
+                                <NBaseClear
+                                  clsPrefix={mergedClsPrefix}
+                                  show={this.showClearButton}
+                                  onClear={this.handleClear}
+                                >
+                                  {{
+                                    placeholder: () => children,
+                                    icon: () => this.$slots['clear-icon']?.()
+                                  }}
+                                </NBaseClear>
+                              )
                             )
-                          )
-                        }
-                      ),
-                      !this.internalLoadingBeforeSuffix ? children : null,
-                      this.loading !== undefined ? (
-                        <NBaseSuffix
-                          clsPrefix={mergedClsPrefix}
-                          loading={this.loading}
-                          showArrow={false}
-                          showClear={false}
-                          style={this.cssVars as CSSProperties}
-                        />
-                      ) : null,
-                      this.internalLoadingBeforeSuffix ? children : null,
-                      this.showCount && this.type !== 'textarea' ? (
-                        <WordCount>
-                          {{
-                            default: (props: unknown) => {
-                              const { renderCount } = this
-                              if (renderCount) {
-                                return renderCount(props as { value: string })
+                          }
+                        ),
+                        !this.internalLoadingBeforeSuffix ? children : null,
+                        this.loading !== undefined ? (
+                          <NBaseSuffix
+                            clsPrefix={mergedClsPrefix}
+                            loading={this.loading}
+                            showArrow={false}
+                            showClear={false}
+                            style={this.cssVars as CSSProperties}
+                          />
+                        ) : null,
+                        this.internalLoadingBeforeSuffix ? children : null,
+                        this.showCount && this.type !== 'textarea' ? (
+                          <WordCount>
+                            {{
+                              default: (props: unknown) => {
+                                const { renderCount } = this
+                                if (renderCount) {
+                                  return renderCount(props as { value: string })
+                                }
+                                return $slots.count?.(props)
                               }
-                              return $slots.count?.(props)
-                            }
-                          }}
-                        </WordCount>
-                      ) : null,
-                      this.mergedShowPasswordOn && this.type === 'password' ? (
-                        <div
-                          class={`${mergedClsPrefix}-input__eye`}
-                          onMousedown={this.handlePasswordToggleMousedown}
-                          onClick={this.handlePasswordToggleClick}
-                        >
-                          {this.passwordVisible
-                            ? resolveSlot($slots['password-visible-icon'], () => [
-                                <NBaseIcon clsPrefix={mergedClsPrefix}>
-                                  {{ default: () => <EyeIcon /> }}
-                                </NBaseIcon>
-                              ])
-                            : resolveSlot(
-                                $slots['password-invisible-icon'],
-                                () => [
+                            }}
+                          </WordCount>
+                        ) : null,
+                        this.mergedShowPasswordOn && this.type === 'password' ? (
+                          <div
+                            class={`${mergedClsPrefix}-input__eye`}
+                            onMousedown={this.handlePasswordToggleMousedown}
+                            onClick={this.handlePasswordToggleClick}
+                          >
+                            {this.passwordVisible
+                              ? resolveSlot($slots['password-visible-icon'], () => [
                                   <NBaseIcon clsPrefix={mergedClsPrefix}>
-                                    {{ default: () => <EyeOffIcon /> }}
+                                    {{ default: () => <EyeIcon /> }}
                                   </NBaseIcon>
-                                ]
-                              )}
-                        </div>
-                      ) : null
-                    ]}
-                  </div>
-                ) : null
-          })}
+                                ])
+                              : resolveSlot(
+                                  $slots['password-invisible-icon'],
+                                  () => [
+                                    <NBaseIcon clsPrefix={mergedClsPrefix}>
+                                      {{ default: () => <EyeOffIcon /> }}
+                                    </NBaseIcon>
+                                  ]
+                                )}
+                          </div>
+                        ) : null
+                      ]}
+                    </div>
+                  ) : null
+            })}
         </div>
         {/* pair input */}
         {this.pair ? (

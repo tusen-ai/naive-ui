@@ -2,9 +2,9 @@ export function splitAndMarkByRegex(
   str: string,
   regex: RegExp
 ): Array<{
-    text: string
-    isMatch: boolean
-  }> {
+  text: string
+  isMatch: boolean
+}> {
   if (!regex.global) {
     throw new Error(
       'splitAndMarkByRegex requires a global regex (with "g" flag)'

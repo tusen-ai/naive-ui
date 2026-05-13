@@ -41,15 +41,15 @@ export interface MenuGroupOptionBase extends MenuOptionSharedPart {
   children: Array<MenuOption | MenuDividerOption>
 }
 
-export type MenuOption =
-  | (MenuOptionSharedPart & {
+export type MenuOption
+  = | (MenuOptionSharedPart & {
     /** @deprecated */
     title?: string | (() => VNodeChild)
   })
   | (MenuOptionSharedPart & { label?: string | (() => VNodeChild) })
 
-export type MenuGroupOption =
-  | (MenuGroupOptionBase & {
+export type MenuGroupOption
+  = | (MenuGroupOptionBase & {
     /** @deprecated */
     title?: string | (() => VNodeChild)
   })

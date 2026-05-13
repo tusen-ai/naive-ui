@@ -25,7 +25,7 @@ keep-alive.vue
 | default-scroll-index | `number` | `undefined` | Default scroll index. | 2.36.0 |
 | ignore-item-resize | `boolean` | `false` | Ignore item resize. It can make runtime slightly faster, although it's hard to feel. | 2.36.0 |
 | items | `Array<object>` | `[]` | Data to display. | 2.36.0 |
-| item-resizable | `number` | `false` | Whether dynamic sizing is enabled, you don't have to care about the size of the item, it will be calculated automatically. | 2.36.0 |
+| item-resizable | `boolean` | `false` | Whether dynamic sizing is enabled, you don't have to care about the size of the item, it will be calculated automatically. | 2.36.0 |
 | item-size | `number` | required | Displays the minimum height of the item in pixels to calculate scroll size and position. | 2.36.0 |
 | items-style | `string \| CSSProperties` | `undefined` | Items container style. | 2.36.0 |
 | key-field | `string` | `'key'` | Field name of option key. | 2.36.0 |

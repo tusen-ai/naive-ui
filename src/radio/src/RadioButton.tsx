@@ -1,5 +1,6 @@
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { defineComponent, h } from 'vue'
-import { type ExtractPublicPropTypes, resolveWrappedSlot } from '../../_utils'
+import { resolveWrappedSlot } from '../../_utils'
 import { radioBaseProps, setup } from './use-radio'
 
 export const radioButtonProps = radioBaseProps

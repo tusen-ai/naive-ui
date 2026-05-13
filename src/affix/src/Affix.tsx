@@ -1,14 +1,13 @@
+import type { CSSProperties, PropType } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ScrollTarget } from './utils'
 import { beforeNextFrameOnce, unwrapElement } from 'seemly'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   onBeforeUnmount,
   onMounted,
-  type PropType,
   ref
 } from 'vue'
 import { useConfig, useStyle } from '../../_mixins'

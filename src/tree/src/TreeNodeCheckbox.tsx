@@ -1,4 +1,5 @@
-import { defineComponent, h, inject, type PropType } from 'vue'
+import type { PropType } from 'vue'
+import { defineComponent, h, inject } from 'vue'
 import { NCheckbox } from '../../checkbox'
 import { treeInjectionKey } from './interface'
 

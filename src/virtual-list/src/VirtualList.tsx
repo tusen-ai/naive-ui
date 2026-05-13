@@ -1,13 +1,15 @@
+import type { CSSProperties, PropType } from 'vue'
+import type {
+  VirtualListInst,
+  VirtualListItemData,
+  VirtualListScrollToOptions
+} from 'vueuc'
+import type { ScrollbarInst } from '../../_internal'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ScrollbarProps } from '../../scrollbar/src/Scrollbar'
-import { type CSSProperties, defineComponent, h, type PropType, ref } from 'vue'
-import {
-  type VirtualListInst,
-  type VirtualListItemData,
-  type VirtualListScrollToOptions,
-  VVirtualList
-} from 'vueuc'
-import { NxScrollbar, type ScrollbarInst } from '../../_internal'
+import { defineComponent, h, ref } from 'vue'
+import { VVirtualList } from 'vueuc'
+import { NxScrollbar } from '../../_internal'
 
 export { type VirtualListInst } from 'vueuc'
 

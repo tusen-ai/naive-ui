@@ -4,6 +4,10 @@ import { h, nextTick } from 'vue'
 import { NCarousel, NCarouselItem } from '../index'
 
 describe('n-carousel', () => {
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
   it('should work with import on demand', () => {
     const wrapper = mount(NCarousel)
     wrapper.unmount()
@@ -210,9 +214,12 @@ describe('n-carousel', () => {
   })
 
   it('should work with `current-index` prop', async () => {
+    vi.useFakeTimers()
     const wrapper = mount(NCarousel, {
       props: {
-        currentIndex: 0
+        currentIndex: 0,
+        transitionStyle: { transitionDuration: '0ms' },
+        loop: false
       },
       slots: {
         default: () => {
@@ -230,7 +237,7 @@ describe('n-carousel', () => {
       }
     })
 
-    await sleep(100)
+    await nextTick()
     expect(
       wrapper
         .find('.n-carousel__slide--current')
@@ -238,13 +245,18 @@ describe('n-carousel', () => {
     ).toBe(
       'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg'
     )
+
     await wrapper.setProps({ currentIndex: 1 })
-    await sleep(100)
-    expect(
-      wrapper
-        .find('.n-carousel__slide--current')
-        .element.children[0].getAttribute('src')
-    ).toBe(
+
+    expect(wrapper.vm.getCurrentIndex()).toBe(1)
+    const actives = wrapper
+      .findAll('.n-carousel__slide')
+      .filter(s => s.attributes('aria-hidden') === 'false')
+    expect(actives.length).toBe(1)
+    const currentSlide = actives[0]
+    expect(currentSlide.attributes('data-index')).toBe('1')
+    expect(currentSlide.classes()).toContain('n-carousel__slide--current')
+    expect(currentSlide.element.children[0].getAttribute('src')).toBe(
       'https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg'
     )
     wrapper.unmount()
@@ -396,7 +408,7 @@ describe('n-carousel', () => {
   })
 
   it('should work with `on-update:current-index` prop', async () => {
-    const onUpdate = jest.fn()
+    const onUpdate = vi.fn()
     const wrapper = mount(NCarousel, {
       props: {
         onUpdateCurrentIndex: onUpdate

@@ -28,8 +28,8 @@ export interface PanelRef {
   amPmScrollRef?: ScrollbarInst
 }
 
-export type OnUpdateValue = ((value: number, formattedValue: string) => void) &
-  ((value: number | null, formattedValue: string | null) => void)
+export type OnUpdateValue = ((value: number, formattedValue: string) => void)
+  & ((value: number | null, formattedValue: string | null) => void)
 export type OnUpdateValueImpl = (
   value: number | null,
   formattedValue: string | null
@@ -38,8 +38,8 @@ export type OnUpdateValueImpl = (
 export type OnUpdateFormattedValue = ((
   value: string,
   timestampValue: number
-) => void) &
-((value: string | null, timestampValue: number | null) => void)
+) => void)
+& ((value: string | null, timestampValue: number | null) => void)
 export type OnUpdateFormattedValueImpl = (
   value: string | null,
   timestampValue: number | null
@@ -52,8 +52,6 @@ export type IsSecondDisabled = (
   minute: number | null,
   hour: number | null
 ) => boolean
-
-export type Size = 'small' | 'medium' | 'large'
 
 export interface TimePickerInst {
   focus: () => void

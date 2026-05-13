@@ -1,6 +1,7 @@
 import type { HSVA } from 'seemly'
+import type { PropType } from 'vue'
 import { off, on } from 'evtd'
-import { computed, defineComponent, h, type PropType, ref } from 'vue'
+import { computed, defineComponent, h, ref } from 'vue'
 
 const HANDLE_SIZE = '12px'
 const RADIUS = '6px'

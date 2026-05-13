@@ -1,4 +1,5 @@
 import type { TreeNode } from 'treemate'
+import type { VNode, VNodeChild } from 'vue'
 import type {
   MenuGroupOption,
   MenuIgnoredOption,
@@ -6,8 +7,7 @@ import type {
   MenuOption
 } from './interface'
 import type { MenuSetupProps } from './Menu'
-
-import { h, type VNode, type VNodeChild } from 'vue'
+import { h } from 'vue'
 
 import { keep } from '../../_utils'
 import NMenuDivider from './MenuDivider'

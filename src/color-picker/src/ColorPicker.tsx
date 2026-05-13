@@ -1,3 +1,14 @@
+import type { HSLA, HSVA, RGBA } from 'seemly'
+import type {
+  ComponentPublicInstance,
+  CSSProperties,
+  PropType,
+  Ref,
+  SlotsType,
+  VNode
+} from 'vue'
+import type { FollowerPlacement } from 'vueuc'
+import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { ColorPickerTheme } from '../styles'
 import type {
@@ -7,20 +18,18 @@ import type {
   OnUpdateValueImpl,
   RenderLabel
 } from './interface'
+import type { ColorPickerSize } from './public-types'
 import type { ActionType, ColorPickerMode } from './utils'
 import {
   getPreciseEventTarget,
   hsl2hsv,
   hsl2rgb,
-  type HSLA,
   hsla,
   hsv2hsl,
   hsv2rgb,
-  type HSVA,
   hsva,
   rgb2hsl,
   rgb2hsv,
-  type RGBA,
   rgba,
   toHexaString,
   toHexString,
@@ -35,32 +44,34 @@ import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
+  mergeProps,
   nextTick,
-  type PropType,
   provide,
-  type Ref,
   ref,
-  type SlotsType,
   toRef,
   Transition,
-  type VNode,
   watch,
   watchEffect,
   withDirectives
 } from 'vue'
-import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc'
+import { VBinder, VFollower, VTarget } from 'vueuc'
 import {
-  type ThemeProps,
   useConfig,
   useFormItem,
   useLocale,
   useTheme,
   useThemeClass
 } from '../../_mixins'
-import { call, createKey, useAdjustedTo } from '../../_utils'
+import {
+  call,
+  createKey,
+  keep,
+  mergeEventHandlers,
+  resolveWrappedSlotWithProps,
+  useAdjustedTo
+} from '../../_utils'
 import { NButton } from '../../button'
 import { colorPickerLight } from '../styles'
 import AlphaSlider from './AlphaSlider'
@@ -108,7 +119,7 @@ export const colorPickerProps = {
     default: null
   },
   internalActions: Array as PropType<ReadonlyArray<'redo' | 'undo'>>,
-  size: String as PropType<'small' | 'medium' | 'large'>,
+  size: String as PropType<ColorPickerSize>,
   renderLabel: Function as PropType<RenderLabel>,
   onComplete: Function as PropType<OnUpdateValue>,
   onConfirm: Function as PropType<OnUpdateValue>,
@@ -129,21 +140,47 @@ export interface ColorPickerSlots {
   default?: () => VNode[]
   label?: (color: string | null) => VNode[]
   action?: () => VNode[]
+  trigger?: (props: {
+    value: string | null
+    onClick: (() => void) | undefined
+    ref: (el: any) => void
+  }) => VNode[]
 }
 
 export default defineComponent({
   name: 'ColorPicker',
+  inheritAttrs: false,
   props: colorPickerProps,
   slots: Object as SlotsType<ColorPickerSlots>,
   setup(props, { slots }) {
-    const selfRef = ref<HTMLElement | null>(null)
+    let triggerRef: Element | ComponentPublicInstance | null = null
+    function setTriggerRef(el: Element | ComponentPublicInstance | null): void {
+      triggerRef = el
+    }
     let upcomingValue: string | null = null
 
-    const formItem = useFormItem(props)
+    const {
+      mergedClsPrefixRef,
+      namespaceRef,
+      inlineThemeDisabled,
+      mergedComponentPropsRef
+    } = useConfig(props)
+    const formItem = useFormItem(props, {
+      mergedSize: (NFormItem) => {
+        const { size } = props
+        if (size)
+          return size
+        const { mergedSize: formItemSize } = NFormItem || {}
+        if (formItemSize?.value)
+          return formItemSize.value as ColorPickerSize
+        const configSize = mergedComponentPropsRef?.value?.ColorPicker?.size
+        if (configSize)
+          return configSize
+        return 'medium'
+      }
+    })
     const { mergedSizeRef, mergedDisabledRef } = formItem
     const { localeRef } = useLocale('global')
-    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled }
-      = useConfig(props)
 
     const themeRef = useTheme(
       'ColorPicker',
@@ -685,7 +722,6 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       namespace: namespaceRef,
-      selfRef,
       hsla: hslaRef,
       rgba: rgbaRef,
       mergedShow: mergedShowRef,
@@ -694,11 +730,24 @@ export default defineComponent({
       adjustedTo: useAdjustedTo(props),
       mergedValue: mergedValueRef,
       handleTriggerClick() {
+        if (mergedDisabledRef.value) {
+          return
+        }
         doUpdateShow(true)
       },
+      setTriggerRef,
       handleClickOutside(e: MouseEvent) {
-        if (selfRef.value?.contains(getPreciseEventTarget(e) as Node | null)) {
-          return
+        if (triggerRef instanceof Element) {
+          if (triggerRef.contains(getPreciseEventTarget(e) as Node | null)) {
+            return
+          }
+        }
+        else if (triggerRef) {
+          if (
+            triggerRef.$el.contains(getPreciseEventTarget(e) as Node | null)
+          ) {
+            return
+          }
         }
         doUpdateShow(false)
       },
@@ -712,61 +761,74 @@ export default defineComponent({
     const { mergedClsPrefix, onRender } = this
     onRender?.()
     return (
-      <div
-        class={[this.themeClass, `${mergedClsPrefix}-color-picker`]}
-        ref="selfRef"
-        style={this.cssVars as CSSProperties}
-      >
-        <VBinder>
-          {{
-            default: () => [
-              <VTarget>
-                {{
-                  default: () => (
-                    <ColorPickerTrigger
-                      clsPrefix={mergedClsPrefix}
-                      value={this.mergedValue}
-                      hsla={this.hsla}
-                      disabled={this.mergedDisabled}
-                      onClick={this.handleTriggerClick}
-                    />
+      <VBinder>
+        {{
+          default: () => [
+            <VTarget>
+              {{
+                default: () => {
+                  const triggerProps = mergeProps(this.$attrs, {
+                    ref: this.setTriggerRef,
+                    value: this.mergedValue,
+                    style: this.cssVars,
+                    class: this.themeClass
+                  })
+                  const onClick = mergeEventHandlers([
+                    this.mergedDisabled ? undefined : this.handleTriggerClick,
+                    this.$attrs.onClick as ((e: MouseEvent) => void) | undefined
+                  ])
+                  triggerProps.onClick = onClick
+                  return resolveWrappedSlotWithProps(
+                    this.$slots.trigger,
+                    keep(triggerProps, ['value', 'onClick', 'ref']),
+                    (children) => {
+                      const triggerNode = children || (
+                        <ColorPickerTrigger
+                          {...triggerProps}
+                          clsPrefix={mergedClsPrefix}
+                          hsla={this.hsla}
+                          disabled={this.mergedDisabled}
+                        />
+                      )
+                      return triggerNode
+                    }
                   )
-                }}
-              </VTarget>,
-              <VFollower
-                placement={this.placement}
-                show={this.mergedShow}
-                containerClass={this.namespace}
-                teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
-                to={this.adjustedTo}
-              >
-                {{
-                  default: () => (
-                    <Transition
-                      name="fade-in-scale-up-transition"
-                      appear={this.isMounted}
-                    >
-                      {{
-                        default: () =>
-                          this.mergedShow
-                            ? withDirectives(this.renderPanel(), [
-                                [
-                                  clickoutside,
-                                  this.handleClickOutside,
-                                  undefined,
-                                  { capture: true }
-                                ]
-                              ])
-                            : null
-                      }}
-                    </Transition>
-                  )
-                }}
-              </VFollower>
-            ]
-          }}
-        </VBinder>
-      </div>
+                }
+              }}
+            </VTarget>,
+            <VFollower
+              placement={this.placement}
+              show={this.mergedShow}
+              containerClass={this.namespace}
+              teleportDisabled={this.adjustedTo === useAdjustedTo.tdkey}
+              to={this.adjustedTo}
+            >
+              {{
+                default: () => (
+                  <Transition
+                    name="fade-in-scale-up-transition"
+                    appear={this.isMounted}
+                  >
+                    {{
+                      default: () =>
+                        this.mergedShow
+                          ? withDirectives(this.renderPanel(), [
+                              [
+                                clickoutside,
+                                this.handleClickOutside,
+                                undefined,
+                                { capture: true }
+                              ]
+                            ])
+                          : null
+                    }}
+                  </Transition>
+                )
+              }}
+            </VFollower>
+          ]
+        }}
+      </VBinder>
     )
   }
 })

@@ -1,9 +1,10 @@
 import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ListTheme } from '../styles'
 import { computed, defineComponent, h, provide, toRef } from 'vue'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
-import { createInjectionKey, type ExtractPublicPropTypes } from '../../_utils'
+import { createInjectionKey } from '../../_utils'
 import { listLight } from '../styles'
 import style from './styles/index.cssr'
 

@@ -1,3 +1,4 @@
+import type { ComputedRef } from 'vue'
 import type { PaginationProps } from '../../pagination/src/Pagination'
 import type {
   ColumnKey,
@@ -14,7 +15,7 @@ import type {
 } from './interface'
 import { createTreeMate } from 'treemate'
 import { useMemo, useMergedState } from 'vooks'
-import { computed, type ComputedRef, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { call, warn } from '../../_utils'
 import { getDefaultPageSize } from '../../pagination/src/utils'
 import { useSorter } from './use-sorter'

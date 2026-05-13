@@ -1,20 +1,23 @@
+import type {
+  ImgHTMLAttributes,
+  PropType,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type { IntersectionObserverOptions } from '../../image/src/utils'
 import type { AvatarTheme } from '../styles'
 import type { ObjectFit, Size } from './interface'
 import {
   computed,
   defineComponent,
   h,
-  type ImgHTMLAttributes,
   inject,
   onBeforeUnmount,
   onMounted,
-  type PropType,
   ref,
-  type SlotsType,
-  type VNode,
-  type VNodeChild,
   watch,
   watchEffect
 } from 'vue'
@@ -27,10 +30,7 @@ import {
   resolveWrappedSlot
 } from '../../_utils'
 import { isImageSupportNativeLazy } from '../../_utils/env/is-native-lazy-load'
-import {
-  type IntersectionObserverOptions,
-  observeIntersection
-} from '../../image/src/utils'
+import { observeIntersection } from '../../image/src/utils'
 import { tagInjectionKey } from '../../tag/src/Tag'
 import { avatarLight } from '../styles'
 import { avatarGroupInjectionKey } from './context'

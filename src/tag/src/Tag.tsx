@@ -1,19 +1,15 @@
+import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { TagTheme } from '../styles'
 import { getMargin } from 'seemly'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
-  type PropType,
   provide,
-  type Ref,
   ref,
-  type SlotsType,
   toRef,
-  type VNode,
   watchEffect
 } from 'vue'
 import { NBaseClose } from '../../_internal/close'
@@ -101,8 +97,12 @@ export default defineComponent({
       mergedBorderedRef,
       mergedClsPrefixRef,
       inlineThemeDisabled,
-      mergedRtlRef
+      mergedRtlRef,
+      mergedComponentPropsRef
     } = useConfig(props)
+    const mergedSizeRef = computed(() => {
+      return props.size || mergedComponentPropsRef?.value?.Tag?.size || 'medium'
+    })
     const themeRef = useTheme(
       'Tag',
       '-tag',
@@ -152,7 +152,8 @@ export default defineComponent({
     }
     const rtlEnabledRef = useRtl('Tag', mergedRtlRef, mergedClsPrefixRef)
     const cssVarsRef = computed(() => {
-      const { type, size, color: { color, textColor } = {} } = props
+      const { type, color: { color, textColor } = {} } = props
+      const size = mergedSizeRef.value
       const {
         common: { cubicBezierEaseInOut },
         self: {
@@ -231,9 +232,9 @@ export default defineComponent({
           'tag',
           computed(() => {
             let hash = ''
-            const { type, size, color: { color, textColor } = {} } = props
+            const { type, color: { color, textColor } = {} } = props
             hash += type[0]
-            hash += size[0]
+            hash += mergedSizeRef.value[0]
             if (color) {
               hash += `a${color2Class(color)}`
             }

@@ -1,3 +1,4 @@
+import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { InputInst, InputProps } from '../../input'
@@ -10,19 +11,15 @@ import type {
   OnUpdateValue,
   OnUpdateValueImpl
 } from './interface'
+import type { DynamicTagsSize } from './public-types'
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   nextTick,
-  type PropType,
   ref,
-  type SlotsType,
   toRef,
-  type VNode,
-  type VNodeChild,
   watchEffect
 } from 'vue'
 import { NBaseIcon } from '../../_internal'
@@ -46,10 +43,7 @@ import style from './styles/index.cssr'
 export const dynamicTagsProps = {
   ...(useTheme.props as ThemeProps<DynamicTagsTheme>),
   ...commonProps,
-  size: {
-    type: String as PropType<'small' | 'medium' | 'large'>,
-    default: 'medium'
-  },
+  size: String as PropType<DynamicTagsSize>,
   closable: {
     type: Boolean,
     default: true
@@ -102,7 +96,15 @@ export default defineComponent({
         }
       })
     }
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedComponentPropsRef }
+      = useConfig(props)
+    const mergedSizeRef = computed(() => {
+      return (
+        props.size
+        || mergedComponentPropsRef?.value?.DynamicTags?.size
+        || 'medium'
+      )
+    })
     const { localeRef } = useLocale('DynamicTags')
     const formItem = useFormItem(props)
     const { mergedDisabledRef } = formItem
@@ -128,7 +130,7 @@ export default defineComponent({
       return localeRef.value.add
     })
     const inputSizeRef = computed(() => {
-      return smallerSize(props.size)
+      return smallerSize(mergedSizeRef.value)
     })
     const triggerDisabledRef = computed(() => {
       return (
@@ -201,6 +203,7 @@ export default defineComponent({
       inputInstRef,
       localizedAdd: localizedAddRef,
       inputSize: inputSizeRef,
+      mergedSize: mergedSizeRef,
       inputValue: inputValueRef,
       showInput: showInputRef,
       inputForceFocused: inputForceFocusedRef,
@@ -238,7 +241,7 @@ export default defineComponent({
               tagStyle,
               type,
               round,
-              size,
+              mergedSize,
               color,
               closable,
               mergedDisabled,
@@ -269,7 +272,7 @@ export default defineComponent({
                     style={tagStyle}
                     type={type}
                     round={round}
-                    size={size}
+                    size={mergedSize}
                     color={color}
                     closable={closable}
                     disabled={mergedDisabled}

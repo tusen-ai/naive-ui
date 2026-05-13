@@ -1,7 +1,7 @@
 <markdown>
 # 内置主题
 
-使用 `color-theme` 属性应用内置的颜色主题。可用主题：`github`（默认）、`green`、`blue`、`orange`、`purple`、`red`。
+使用 `color-theme` 属性应用内置的颜色主题。可用主题：`green`、`blue`、`orange`、`purple`、`red`。
 </markdown>
 
 <script setup lang="ts">
@@ -10,7 +10,6 @@ import { heatmapMockData } from 'naive-ui'
 const data = heatmapMockData()
 
 const themes = [
-  { name: 'GitHub（默认）', value: 'github' },
   { name: '绿色', value: 'green' },
   { name: '蓝色', value: 'blue' },
   { name: '橙色', value: 'orange' },

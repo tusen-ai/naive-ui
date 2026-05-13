@@ -13,12 +13,12 @@ export function formatLength<
   length: T,
   { c = 1, offset = 0, attachPx = true }: FormatLengthOptions = {}
 ): T extends null
-    ? null
-    : T extends undefined
-      ? undefined
-      : T extends string | number
-        ? string
-        : T {
+  ? null
+  : T extends undefined
+    ? undefined
+    : T extends string | number
+      ? string
+      : T {
   if (typeof length === 'number') {
     const result = (length + offset) * c
     if (result === 0)

@@ -1,3 +1,6 @@
+import type { TreeNode } from 'treemate'
+import type { CSSProperties, PropType, WatchStopHandle } from 'vue'
+import type { VirtualListInst } from 'vueuc'
 import type { ThemeProps } from '../../../_mixins'
 import type {
   SelectGroupOption,
@@ -7,6 +10,8 @@ import type {
   Value
 } from '../../../select/src/interface'
 import type { ScrollbarInst } from '../../scrollbar'
+import type { ScrollbarProps } from '../../scrollbar/src/Scrollbar'
+import type { InternalSelectMenuTheme } from '../styles'
 import type {
   InternalExposedProps,
   NodeProps,
@@ -15,23 +20,20 @@ import type {
   Size
 } from './interface'
 import { depx, getPadding, happensIn } from 'seemly'
-import { createIndexGetter, type TreeNode } from 'treemate'
+import { createIndexGetter } from 'treemate'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   nextTick,
   onBeforeUnmount,
   onMounted,
-  type PropType,
   provide,
   ref,
   toRef,
-  watch,
-  type WatchStopHandle
+  watch
 } from 'vue'
-import { VirtualList, type VirtualListInst } from 'vueuc'
+import { VirtualList } from 'vueuc'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../../_mixins'
 import { resolveSlot, resolveWrappedSlot, useOnResize } from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
@@ -39,10 +41,7 @@ import { NEmpty } from '../../../empty'
 import NFocusDetector from '../../focus-detector'
 import NInternalLoading from '../../loading'
 import { NScrollbar } from '../../scrollbar'
-import {
-  internalSelectMenuLight,
-  type InternalSelectMenuTheme
-} from '../styles'
+import { internalSelectMenuLight } from '../styles'
 import {
   internalSelectionMenuBodyInjectionKey,
   internalSelectionMenuInjectionKey
@@ -115,11 +114,13 @@ export default defineComponent({
       default: true
     },
     inlineThemeDisabled: Boolean,
+    scrollbarProps: Object as PropType<ScrollbarProps>,
     // deprecated
     onToggle: Function as PropType<(tmNode: TreeNode<SelectOption>) => void>
   },
   setup(props) {
-    const { mergedClsPrefixRef, mergedRtlRef } = useConfig(props)
+    const { mergedClsPrefixRef, mergedRtlRef, mergedComponentPropsRef }
+      = useConfig(props)
     const rtlEnabledRef = useRtl(
       'InternalSelectMenu',
       mergedRtlRef,
@@ -230,6 +231,9 @@ export default defineComponent({
     const emptyRef = computed(() => {
       const tmNodes = flattenedNodesRef.value
       return tmNodes && tmNodes.length === 0
+    })
+    const mergedRenderEmptyRef = computed(() => {
+      return mergedComponentPropsRef?.value?.Select?.renderEmpty
     })
     function doToggle(tmNode: TreeNode<SelectOption>): void {
       const { onToggle } = props
@@ -434,6 +438,7 @@ export default defineComponent({
       padding: paddingRef,
       flattenedNodes: flattenedNodesRef,
       empty: emptyRef,
+      mergedRenderEmpty: mergedRenderEmptyRef,
       virtualListContainer() {
         const { value } = virtualListRef
         return value?.listElRef
@@ -472,6 +477,7 @@ export default defineComponent({
         tabindex={this.focusable ? 0 : -1}
         class={[
           `${clsPrefix}-base-select-menu`,
+          `${clsPrefix}-base-select-menu--${this.size}-size`,
           this.rtlEnabled && `${clsPrefix}-base-select-menu--rtl`,
           themeClass,
           this.multiple && `${clsPrefix}-base-select-menu--multiple`
@@ -511,6 +517,7 @@ export default defineComponent({
             container={virtualScroll ? this.virtualListContainer : undefined}
             content={virtualScroll ? this.virtualListContent : undefined}
             onScroll={virtualScroll ? undefined : this.doScroll}
+            {...this.scrollbarProps}
           >
             {{
               default: () => {
@@ -585,13 +592,17 @@ export default defineComponent({
           </NScrollbar>
         ) : (
           <div class={`${clsPrefix}-base-select-menu__empty`} data-empty>
-            {resolveSlot($slots.empty, () => [
-              <NEmpty
-                theme={mergedTheme.peers.Empty}
-                themeOverrides={mergedTheme.peerOverrides.Empty}
-                size={this.size}
-              />
-            ])}
+            {resolveSlot($slots.empty, () => {
+              return [
+                this.mergedRenderEmpty?.() || (
+                  <NEmpty
+                    theme={mergedTheme.peers.Empty}
+                    themeOverrides={mergedTheme.peerOverrides.Empty}
+                    size={this.size}
+                  />
+                )
+              ]
+            })}
           </div>
         )}
         {resolveWrappedSlot(

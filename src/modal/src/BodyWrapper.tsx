@@ -1,31 +1,34 @@
+import type {
+  ComponentPublicInstance,
+  DirectiveArguments,
+  PropType,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
+import type { ScrollbarInst } from '../../_internal'
 import type { ModalDraggableOptions } from './interface'
 import type { ModalSlots } from './Modal'
 import { clickoutside } from 'vdirs'
 import {
   cloneVNode,
-  type ComponentPublicInstance,
   computed,
   defineComponent,
-  type DirectiveArguments,
   h,
   inject,
   mergeProps,
   nextTick,
   normalizeClass,
-  type PropType,
   provide,
   ref,
-  type SlotsType,
   toRef,
   Transition,
-  type VNode,
-  type VNodeChild,
   vShow,
   watch,
   withDirectives
 } from 'vue'
 import { VFocusTrap } from 'vueuc'
-import { NScrollbar, type ScrollbarInst } from '../../_internal'
+import { NScrollbar } from '../../_internal'
 import {
   getFirstSlotVNodeWithTypedProps,
   keep,
@@ -69,6 +72,7 @@ export default defineComponent({
       type: [Boolean, Object] as PropType<boolean | ModalDraggableOptions>,
       default: false
     },
+    maskHidden: Boolean,
     ...presetProps,
     renderMask: Function as PropType<() => VNodeChild>,
     // events
@@ -271,7 +275,14 @@ export default defineComponent({
     }
     return this.displayDirective === 'show' || this.displayed || this.show
       ? withDirectives(
-          <div role="none" class={`${mergedClsPrefix}-modal-body-wrapper`}>
+          <div
+            role="none"
+            class={[
+              `${mergedClsPrefix}-modal-body-wrapper`,
+              this.maskHidden
+              && `${mergedClsPrefix}-modal-body-wrapper--mask-hidden`
+            ]}
+          >
             <NScrollbar
               ref="scrollbarRef"
               theme={this.mergedTheme.peers.Scrollbar}
@@ -282,7 +293,7 @@ export default defineComponent({
                 default: () => [
                   this.renderMask?.(),
                   <VFocusTrap
-                    disabled={!this.trapFocus}
+                    disabled={!this.trapFocus || this.maskHidden}
                     active={this.show}
                     onEsc={this.onEsc}
                     autoFocus={this.autoFocus}

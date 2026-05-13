@@ -1,13 +1,14 @@
 import type { VNodeChild } from 'vue'
 import type { MessageSetupProps } from './message-props'
+import type { MessageSpinProps } from './public-types'
 
-export type MessageType =
-  | 'info'
-  | 'success'
-  | 'warning'
-  | 'error'
-  | 'loading'
-  | 'default'
+export type MessageType
+  = | 'info'
+    | 'success'
+    | 'warning'
+    | 'error'
+    | 'loading'
+    | 'default'
 
 // We should export keepAliveOnHover since it's not managed by users
 export type RenderMessageProps = Pick<
@@ -25,6 +26,7 @@ export interface MessageOptions {
   keepAliveOnHover?: boolean
   icon?: () => VNodeChild
   showIcon?: boolean
+  spinProps?: MessageSpinProps
   onClose?: () => void
   onLeave?: () => void
   onAfterLeave?: () => void

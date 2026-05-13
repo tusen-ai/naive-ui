@@ -1,3 +1,11 @@
+import type {
+  CSSProperties,
+  DirectiveArguments,
+  PropType,
+  VNode,
+  VNodeChild
+} from 'vue'
+import type { FollowerInst, FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type { PopoverTheme } from '../styles'
 import type { PopoverTrigger } from './interface'
@@ -6,32 +14,22 @@ import { getPreciseEventTarget } from 'seemly'
 import { clickoutside, mousemoveoutside } from 'vdirs'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
-  type DirectiveArguments,
   Fragment,
   h,
   inject,
   mergeProps,
   onBeforeUnmount,
-  type PropType,
   provide,
   ref,
   toRef,
   Transition,
-  type VNode,
-  type VNodeChild,
   vShow,
   watch,
   watchEffect,
   withDirectives
 } from 'vue'
-import {
-  type FollowerInst,
-  type FollowerPlacement,
-  VFocusTrap,
-  VFollower
-} from 'vueuc'
+import { VFocusTrap, VFollower } from 'vueuc'
 import { NxScrollbar } from '../../_internal/scrollbar'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import {

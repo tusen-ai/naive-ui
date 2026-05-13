@@ -1,12 +1,5 @@
-import {
-  computed,
-  type CSSProperties,
-  defineComponent,
-  h,
-  inject,
-  type PropType,
-  toRef
-} from 'vue'
+import type { CSSProperties, PropType } from 'vue'
+import { computed, defineComponent, h, inject, toRef } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import { WarningIcon } from '../../_internal/icons'
 import { useConfig, useLocale, useThemeClass } from '../../_mixins'

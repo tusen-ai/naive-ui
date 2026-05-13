@@ -1,3 +1,4 @@
+import type { PropType } from 'vue'
 import type { FollowerPlacement } from 'vueuc'
 import type { MenuMaskRef } from '../../_internal/menu-mask'
 import type {
@@ -8,16 +9,17 @@ import type {
 } from './interface'
 import { clickoutside } from 'vdirs'
 import {
+  computed,
   defineComponent,
   h,
   inject,
-  type PropType,
   ref,
   Transition,
   withDirectives
 } from 'vue'
 import { NBaseMenuMask } from '../../_internal'
 import FocusDetector from '../../_internal/focus-detector'
+import { useConfig } from '../../_mixins'
 import { resolveSlot, resolveWrappedSlot, useOnResize } from '../../_utils'
 import { NEmpty } from '../../empty'
 import NCascaderSubmenu from './CascaderSubmenu'
@@ -68,6 +70,7 @@ export default defineComponent({
       mergedThemeRef,
       getColumnStyleRef
     } = inject(cascaderInjectionKey)!
+    const { mergedComponentPropsRef } = useConfig()
     const submenuInstRefs: CascaderSubmenuInstance[] = []
     const maskInstRef = ref<MenuMaskRef | null>(null)
     const selfElRef = ref<HTMLElement | null>(null)
@@ -116,6 +119,9 @@ export default defineComponent({
       submenuInstRefs,
       maskInstRef,
       mergedTheme: mergedThemeRef,
+      mergedRenderEmpty: computed(() => {
+        return mergedComponentPropsRef?.value?.Cascader?.renderEmpty
+      }),
       getColumnStyle: getColumnStyleRef,
       handleFocusin,
       handleFocusout,
@@ -165,12 +171,16 @@ export default defineComponent({
                   </div>
                 ) : (
                   <div class={`${mergedClsPrefix}-cascader-menu__empty`}>
-                    {resolveSlot(this.$slots.empty, () => [
-                      <NEmpty
-                        theme={mergedTheme.peers.Empty}
-                        themeOverrides={mergedTheme.peerOverrides.Empty}
-                      />
-                    ])}
+                    {resolveSlot(this.$slots.empty, () => {
+                      return [
+                        this.mergedRenderEmpty?.() || (
+                          <NEmpty
+                            theme={mergedTheme.peers.Empty}
+                            themeOverrides={mergedTheme.peerOverrides.Empty}
+                          />
+                        )
+                      ]
+                    })}
                   </div>
                 )}
                 {resolveWrappedSlot(

@@ -51,8 +51,8 @@ describe('n-upload', () => {
   })
 
   it('should work with `on-before-upload` prop', async () => {
-    const onBeforeUpload = jest.fn(async () => true)
-    const onChange = jest.fn()
+    const onBeforeUpload = vi.fn(async () => true)
+    const onChange = vi.fn()
     const wrapper = mount(NUpload, {
       props: {
         onBeforeUpload,
@@ -122,7 +122,7 @@ describe('n-upload', () => {
   })
 
   it('should work with `on-preview` prop', async () => {
-    const onPreview = jest.fn()
+    const onPreview = vi.fn()
     const wrapper = mount(NUpload, {
       props: {
         defaultFileList: [
@@ -145,7 +145,7 @@ describe('n-upload', () => {
   })
 
   it('should work with `show-remove-button` and `on-remove` prop', async () => {
-    const onRemove = jest.fn()
+    const onRemove = vi.fn()
     const wrapper = mount(NUpload, {
       props: {
         defaultFileList: [
@@ -177,7 +177,7 @@ describe('n-upload', () => {
   })
 
   it('should work with `show-cancel-button` and `on-remove` prop', async () => {
-    const onRemove = jest.fn()
+    const onRemove = vi.fn()
     const wrapper = mount(NUpload, {
       props: {
         defaultFileList: [

@@ -60,6 +60,7 @@ export default c([
       margin-bottom .3s var(--n-bezier);
     padding: var(--n-padding);
     border-radius: var(--n-border-radius);
+    border: var(--n-border);
     flex-wrap: nowrap;
     overflow: hidden;
     max-width: var(--n-max-width);

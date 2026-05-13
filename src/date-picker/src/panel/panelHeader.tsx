@@ -1,13 +1,7 @@
+import type { PropType } from 'vue'
 import { getPreciseEventTarget } from 'seemly'
 import { clickoutside } from 'vdirs'
-import {
-  defineComponent,
-  h,
-  type PropType,
-  ref,
-  Transition,
-  withDirectives
-} from 'vue'
+import { defineComponent, h, ref, Transition, withDirectives } from 'vue'
 import { VBinder, VFollower, VTarget } from 'vueuc'
 import MonthPanel from './month'
 
@@ -26,6 +20,8 @@ export default defineComponent({
       type: String,
       required: true
     },
+    fastYearSelect: Boolean,
+    fastMonthSelect: Boolean,
     calendarMonth: {
       type: String,
       required: true
@@ -39,10 +35,23 @@ export default defineComponent({
       required: true
     }
   },
-  setup() {
+  setup(props) {
     const triggerRef = ref<HTMLElement | null>(null)
     const monthPanelRef = ref<InstanceType<typeof MonthPanel> | null>(null)
     const showRef = ref(false)
+    function toggleShow(): void {
+      showRef.value = !showRef.value
+    }
+    function handleSelectYear(): void {
+      if (props.fastYearSelect) {
+        toggleShow()
+      }
+    }
+    function handleSelectMonth(): void {
+      if (props.fastMonthSelect) {
+        toggleShow()
+      }
+    }
     function handleClickOutside(e: MouseEvent): void {
       if (
         showRef.value
@@ -52,12 +61,14 @@ export default defineComponent({
       }
     }
     function handleHeaderClick(): void {
-      showRef.value = !showRef.value
+      toggleShow()
     }
     return {
       show: showRef,
       triggerRef,
       monthPanelRef,
+      handleSelectYear,
+      handleSelectMonth,
       handleHeaderClick,
       handleClickOutside
     }
@@ -109,6 +120,8 @@ export default defineComponent({
                                 <MonthPanel
                                   ref="monthPanelRef"
                                   onUpdateValue={this.onUpdateValue}
+                                  onSelectYear={this.handleSelectYear}
+                                  onSelectMonth={this.handleSelectMonth}
                                   actions={[]}
                                   calendarHeaderMonthYearSeparator={
                                     this.monthYearSeparator

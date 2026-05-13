@@ -1,5 +1,6 @@
+import type { Ref } from 'vue'
 import type { DialogApiInjection, DialogReactive } from './DialogProvider'
-import { inject, type Ref } from 'vue'
+import { inject } from 'vue'
 import { throwError } from '../../_utils'
 import {
   dialogApiInjectionKey,

@@ -1,12 +1,6 @@
+import type { PropType } from 'vue'
 import type { NotificationPlacement } from './NotificationProvider'
-import {
-  defineComponent,
-  h,
-  inject,
-  type PropType,
-  ref,
-  watchEffect
-} from 'vue'
+import { defineComponent, h, inject, ref, watchEffect } from 'vue'
 import { NScrollbar } from '../../_internal'
 import { notificationProviderInjectionKey } from './context'
 

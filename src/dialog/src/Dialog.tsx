@@ -1,14 +1,8 @@
+import type { CSSProperties, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { DialogTheme } from '../styles'
 import { getMargin } from 'seemly'
-import {
-  computed,
-  type CSSProperties,
-  defineComponent,
-  h,
-  type SlotsType,
-  type VNode
-} from 'vue'
+import { computed, defineComponent, h } from 'vue'
 import { NBaseClose, NBaseIcon } from '../../_internal'
 import {
   ErrorIcon,
@@ -229,40 +223,40 @@ export const NDialog = defineComponent({
           style={this.actionStyle}
         >
           {children
-          || (action
-            ? [render(action)]
-            : [
-                this.negativeText && (
-                  <NButton
-                    theme={mergedTheme.peers.Button}
-                    themeOverrides={mergedTheme.peerOverrides.Button}
-                    ghost
-                    size="small"
-                    onClick={handleNegativeClick}
-                    {...negativeButtonProps}
-                  >
-                    {{
-                      default: () => render(this.negativeText)
-                    }}
-                  </NButton>
-                ),
-                this.positiveText && (
-                  <NButton
-                    theme={mergedTheme.peers.Button}
-                    themeOverrides={mergedTheme.peerOverrides.Button}
-                    size="small"
-                    type={type === 'default' ? 'primary' : type}
-                    disabled={loading}
-                    loading={loading}
-                    onClick={handlePositiveClick}
-                    {...positiveButtonProps}
-                  >
-                    {{
-                      default: () => render(this.positiveText)
-                    }}
-                  </NButton>
-                )
-              ])}
+            || (action
+              ? [render(action)]
+              : [
+                  this.negativeText && (
+                    <NButton
+                      theme={mergedTheme.peers.Button}
+                      themeOverrides={mergedTheme.peerOverrides.Button}
+                      ghost
+                      size="small"
+                      onClick={handleNegativeClick}
+                      {...negativeButtonProps}
+                    >
+                      {{
+                        default: () => render(this.negativeText)
+                      }}
+                    </NButton>
+                  ),
+                  this.positiveText && (
+                    <NButton
+                      theme={mergedTheme.peers.Button}
+                      themeOverrides={mergedTheme.peerOverrides.Button}
+                      size="small"
+                      type={type === 'default' ? 'primary' : type}
+                      disabled={loading}
+                      loading={loading}
+                      onClick={handlePositiveClick}
+                      {...positiveButtonProps}
+                    >
+                      {{
+                        default: () => render(this.positiveText)
+                      }}
+                    </NButton>
+                  )
+                ])}
         </div>
       ) : null)
 
@@ -289,6 +283,7 @@ export const NDialog = defineComponent({
                 <div class={classNames}>{node}</div>
               ) : (
                 <NBaseClose
+                  focusable={this.closeFocusable}
                   clsPrefix={mergedClsPrefix}
                   class={classNames}
                   onClick={this.handleCloseClick}

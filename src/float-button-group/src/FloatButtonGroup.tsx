@@ -1,27 +1,11 @@
-import {
-  computed,
-  type CSSProperties,
-  defineComponent,
-  h,
-  type PropType,
-  provide,
-  type Ref,
-  toRef
-} from 'vue'
-import {
-  type ThemeProps,
-  useConfig,
-  useTheme,
-  useThemeClass
-} from '../../_mixins'
-import {
-  createInjectionKey,
-  type ExtractPublicPropTypes,
-  formatLength
-} from '../../_utils'
-import floatButtonGroupLight, {
-  type FloatButtonGroupTheme
-} from '../styles/light'
+import type { CSSProperties, PropType, Ref } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
+import type { FloatButtonGroupTheme } from '../styles/light'
+import { computed, defineComponent, h, provide, toRef } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { createInjectionKey, formatLength } from '../../_utils'
+import floatButtonGroupLight from '../styles/light'
 import style from './styles/index.cssr'
 
 export interface ButtonGroupInjection {

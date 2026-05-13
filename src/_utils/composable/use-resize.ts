@@ -1,4 +1,5 @@
-import { onBeforeUnmount, onMounted, type Ref, watch } from 'vue'
+import type { Ref } from 'vue'
+import { onBeforeUnmount, onMounted, watch } from 'vue'
 import { resizeObserverManager } from 'vueuc'
 
 export function useOnResize(

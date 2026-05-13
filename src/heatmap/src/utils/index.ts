@@ -38,13 +38,16 @@ export function calcColorByValue(
 /**
  * fill gaps for the given data
  *
- * fill gaps [firstDate,lastDate] with value 0
+ * fill gaps `[firstDate,lastDate]` with value `0`
  *
- * [firstCalendarDate,firstDate] and [lastDate,lastCalendarDate] with value null
+ * fill `[firstCalendarDate,firstDate]` and `[lastDate,lastCalendarDate]` with value `null` by default
+ *
+ * fill `[firstCalendarDate,firstDate]` with value `0` when `fillCalendarLeading` is `true`
  */
 export function completeDataGaps(
   data: HeatmapData,
-  firstDayOfWeek: HeatmapFirstDayOfWeek
+  firstDayOfWeek: HeatmapFirstDayOfWeek,
+  fillCalendarLeading: boolean
 ): HeatmapData {
   const sortedData = [...data].sort((a, b) => a.timestamp - b.timestamp)
   const firstDate = sortedData[0].timestamp
@@ -65,6 +68,8 @@ export function completeDataGaps(
     start: firstCalendarDate,
     end: lastCalendarEndDate
   })
+
+  const startDate = fillCalendarLeading ? firstCalendarDate : firstDate
   return allCalendarDates.map((date) => {
     const key = startOfDay(date).getTime()
     const dateValue = dataMap.get(key)
@@ -73,9 +78,10 @@ export function completeDataGaps(
       return dateValue
     }
 
-    const value = isWithinInterval(date, { start: firstDate, end: lastDate })
+    const value = isWithinInterval(date, { start: startDate, end: lastDate })
       ? 0
       : null
+
     return { timestamp: date.getTime(), value }
   })
 }

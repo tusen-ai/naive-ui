@@ -1,17 +1,22 @@
+import type { PropType } from 'vue'
+import type { VirtualListInst } from 'vueuc'
+import type { ScrollbarInst } from '../../_internal'
+import type { Option } from './interface'
 import {
+  computed,
   defineComponent,
   Fragment,
   h,
   inject,
-  type PropType,
   ref,
   Transition,
   TransitionGroup
 } from 'vue'
-import { VirtualList, type VirtualListInst } from 'vueuc'
-import { NScrollbar, type ScrollbarInst } from '../../_internal'
+import { VirtualList } from 'vueuc'
+import { NScrollbar } from '../../_internal'
+import { useConfig } from '../../_mixins'
 import { NEmpty } from '../../empty'
-import { type Option, transferInjectionKey } from './interface'
+import { transferInjectionKey } from './interface'
 import NTransferListItem from './TransferListItem'
 
 export default defineComponent({
@@ -48,8 +53,12 @@ export default defineComponent({
   },
   setup() {
     const { mergedThemeRef, mergedClsPrefixRef } = inject(transferInjectionKey)!
+    const { mergedComponentPropsRef } = useConfig()
     const scrollerInstRef = ref<ScrollbarInst | null>(null)
     const vlInstRef = ref<VirtualListInst | null>(null)
+    const mergedRenderEmptyRef = computed(() => {
+      return mergedComponentPropsRef?.value?.Transfer?.renderEmpty
+    })
     function syncVLScroller(): void {
       scrollerInstRef.value?.sync()
     }
@@ -70,6 +79,7 @@ export default defineComponent({
     return {
       mergedTheme: mergedThemeRef,
       mergedClsPrefix: mergedClsPrefixRef,
+      mergedRenderEmpty: mergedRenderEmptyRef,
       scrollerInstRef,
       vlInstRef,
       syncVLScroller,
@@ -150,12 +160,14 @@ export default defineComponent({
         >
           {{
             default: () =>
-              this.options.length ? null : (
-                <NEmpty
-                  theme={mergedTheme.peers.Empty}
-                  themeOverrides={mergedTheme.peerOverrides.Empty}
-                />
-              )
+              this.options.length
+                ? null
+                : this.mergedRenderEmpty?.() || (
+                  <NEmpty
+                    theme={mergedTheme.peers.Empty}
+                    themeOverrides={mergedTheme.peerOverrides.Empty}
+                  />
+                )
           }}
         </Transition>
       </>

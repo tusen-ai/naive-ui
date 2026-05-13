@@ -9,7 +9,6 @@ import type {
   VNodeChild
 } from 'vue'
 import type { VirtualListInst } from 'vueuc'
-import type { BaseLoadingExposedProps } from '../../_internal'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { EllipsisProps } from '../../ellipsis/src/Ellipsis'
@@ -18,7 +17,12 @@ import type { PaginationProps } from '../../pagination'
 import type { PopoverProps } from '../../popover'
 import type { ScrollbarProps, ScrollTo } from '../../scrollbar/src/Scrollbar'
 import type { DataTableTheme } from '../styles'
-import type { DataTableGetCsvCell, DataTableGetCsvHeader } from './publicTypes'
+import type {
+  DataTableGetCsvCell,
+  DataTableGetCsvHeader,
+  DataTableSize,
+  DataTableSpinProps
+} from './public-types'
 import type { ColItem, RowItem } from './use-group-header'
 import { useTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
@@ -79,10 +83,7 @@ export const dataTableProps = {
     default: true
   },
   singleColumn: Boolean,
-  size: {
-    type: String as PropType<'small' | 'medium' | 'large'>,
-    default: 'medium'
-  },
+  size: String as PropType<DataTableSize>,
   remote: Boolean,
   defaultExpandedRowKeys: {
     type: Array as PropType<RowKey[]>,
@@ -129,7 +130,7 @@ export const dataTableProps = {
     (value: any, rowData: object, column: TableBaseColumn) => VNodeChild
   >,
   renderExpandIcon: Function as PropType<RenderExpandIcon>,
-  spinProps: { type: Object as PropType<BaseLoadingExposedProps>, default: {} },
+  spinProps: Object as PropType<DataTableSpinProps>,
   getCsvCell: Function as PropType<DataTableGetCsvCell>,
   getCsvHeader: Function as PropType<DataTableGetCsvHeader>,
   onLoad: Function as PropType<DataTableOnLoad>,
@@ -251,17 +252,17 @@ export type DataTableHeightForRow<T = RowData> = (
   rowIndex: number
 ) => number
 
-export type TableColumnTitle =
-  | string
-  | ((column: TableBaseColumn) => VNodeChild)
+export type TableColumnTitle
+  = | string
+    | ((column: TableBaseColumn) => VNodeChild)
 
-export type TableExpandColumnTitle =
-  | string
-  | ((column: TableExpandColumn) => VNodeChild)
+export type TableExpandColumnTitle
+  = | string
+    | ((column: TableExpandColumn) => VNodeChild)
 
-export type TableColumnGroupTitle =
-  | string
-  | ((column: TableColumnGroup) => VNodeChild)
+export type TableColumnGroupTitle
+  = | string
+    | ((column: TableColumnGroup) => VNodeChild)
 
 export type TableColumnGroup<T = InternalRowData> = {
   title?: TableColumnGroupTitle
@@ -351,11 +352,11 @@ export interface TableExpandColumn<T = InternalRowData>
   expandable?: Expandable<T>
 }
 
-export type TableColumn<T = InternalRowData> =
-  | TableColumnGroup<T>
-  | TableBaseColumn<T>
-  | TableSelectionColumn<T>
-  | TableExpandColumn<T>
+export type TableColumn<T = InternalRowData>
+  = | TableColumnGroup<T>
+    | TableBaseColumn<T>
+    | TableSelectionColumn<T>
+    | TableExpandColumn<T>
 export type TableColumns<T = InternalRowData> = Array<TableColumn<T>>
 
 export type DataTableSelectionOptions<T = InternalRowData> = Array<
@@ -414,6 +415,8 @@ export interface DataTableInjection {
   mergedTableLayoutRef: Ref<'auto' | 'fixed'>
   maxHeightRef: Ref<string | number | undefined>
   minHeightRef: Ref<string | number | undefined>
+  xScrollableRef: Ref<boolean>
+  explicitlyScrollableRef: Ref<boolean>
   rowPropsRef: Ref<CreateRowProps | undefined>
   flexHeightRef: Ref<boolean>
   headerCheckboxDisabledRef: Ref<boolean>

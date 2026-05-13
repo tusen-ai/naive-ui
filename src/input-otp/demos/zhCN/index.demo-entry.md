@@ -49,6 +49,6 @@ rtl-debug.vue
 
 ### InputOTP Methods
 
-| 名称 | 类型 | 说明 | 版本 |
-| --- | --- | --- | --- |
-| focusOnChar | `(charIndex: number) => void` | 聚焦到某个输入框 | NEXT_VERSION |
+| 名称        | 类型                          | 说明             | 版本   |
+| ----------- | ----------------------------- | ---------------- | ------ |
+| focusOnChar | `(charIndex: number) => void` | 聚焦到某个输入框 | 2.43.0 |

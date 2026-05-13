@@ -1,24 +1,17 @@
+import type { ComputedRef, PropType, Ref } from 'vue'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type ComputedRef,
   defineComponent,
   h,
-  type PropType,
   provide,
-  type Ref,
   ref,
   toRef,
   watchEffect
 } from 'vue'
 import { useConfig, useFormItem } from '../../_mixins'
-import {
-  call,
-  createInjectionKey,
-  type ExtractPublicPropTypes,
-  type MaybeArray,
-  warnOnce
-} from '../../_utils'
+import { call, createInjectionKey, warnOnce } from '../../_utils'
 
 export interface CheckboxGroupInjection {
   checkedCountRef: ComputedRef<number>

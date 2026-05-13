@@ -1,3 +1,4 @@
+import type { PropType } from 'vue'
 import type {
   ColumnKey,
   FilterOption,
@@ -5,7 +6,7 @@ import type {
   FilterState,
   TableBaseColumn
 } from '../interface'
-import { computed, defineComponent, h, inject, type PropType, ref } from 'vue'
+import { computed, defineComponent, h, inject, ref } from 'vue'
 import { NBaseIcon } from '../../../_internal'
 import { FilterIcon } from '../../../_internal/icons'
 import { useConfig } from '../../../_mixins'

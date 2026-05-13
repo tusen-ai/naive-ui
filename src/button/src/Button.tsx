@@ -1,25 +1,20 @@
+import type {
+  ButtonHTMLAttributes,
+  CSSProperties,
+  ExtractPropTypes,
+  PropType,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
 import type { BaseWaveRef } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { ButtonTheme } from '../styles'
-import type { Size, Type } from './interface'
+import type { ButtonSize, ButtonSpinProps, ButtonType } from './public-types'
 import { changeColor } from 'seemly'
 import { useMemo } from 'vooks'
-import {
-  type ButtonHTMLAttributes,
-  computed,
-  type CSSProperties,
-  defineComponent,
-  type ExtractPropTypes,
-  h,
-  inject,
-  type PropType,
-  ref,
-  type SlotsType,
-  type VNode,
-  type VNodeChild,
-  watchEffect
-} from 'vue'
+import { computed, defineComponent, h, inject, ref, watchEffect } from 'vue'
 import {
   NBaseLoading,
   NBaseWave,
@@ -51,7 +46,7 @@ export const buttonProps = {
   loading: Boolean,
   disabled: Boolean,
   circle: Boolean,
-  size: String as PropType<Size>,
+  size: String as PropType<ButtonSize>,
   ghost: Boolean,
   round: Boolean,
   secondary: Boolean,
@@ -71,7 +66,7 @@ export const buttonProps = {
     default: 'button'
   },
   type: {
-    type: String as PropType<Type>,
+    type: String as PropType<ButtonType>,
     default: 'default'
   },
   dashed: Boolean,
@@ -92,7 +87,8 @@ export const buttonProps = {
   nativeFocusBehavior: {
     type: Boolean,
     default: !isSafari
-  }
+  },
+  spinProps: Object as PropType<ButtonSpinProps>
 } as const
 
 export type ButtonProps = ExtractPublicPropTypes<typeof buttonProps>
@@ -135,6 +131,12 @@ const Button = defineComponent({
       )
     })
     const NButtonGroup = inject(buttonGroupInjectionKey, {})
+    const {
+      inlineThemeDisabled,
+      mergedClsPrefixRef,
+      mergedRtlRef,
+      mergedComponentPropsRef
+    } = useConfig(props)
     const { mergedSizeRef } = useFormItem(
       {},
       {
@@ -146,10 +148,15 @@ const Button = defineComponent({
           const { size: buttonGroupSize } = NButtonGroup
           if (buttonGroupSize)
             return buttonGroupSize
+
           const { mergedSize: formItemSize } = NFormItem || {}
-          if (formItemSize) {
+          if (formItemSize)
             return formItemSize.value
-          }
+
+          const configSize = mergedComponentPropsRef?.value?.Button?.size
+          if (configSize)
+            return configSize
+
           return 'medium'
         }
       }
@@ -206,8 +213,6 @@ const Button = defineComponent({
     const handleBlur = (): void => {
       enterPressedRef.value = false
     }
-    const { inlineThemeDisabled, mergedClsPrefixRef, mergedRtlRef }
-      = useConfig(props)
     const themeRef = useTheme(
       'Button',
       '-button',
@@ -636,6 +641,7 @@ const Button = defineComponent({
                                 key="loading"
                                 class={`${mergedClsPrefix}-icon-slot`}
                                 strokeWidth={20}
+                                {...this.spinProps}
                               />
                             ) : (
                               <div

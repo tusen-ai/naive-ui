@@ -1,5 +1,8 @@
+import type { CSSProperties, InputHTMLAttributes, PropType, VNode } from 'vue'
+import type { VOverflowInst } from 'vueuc'
 import type { ThemeProps } from '../../../_mixins'
 import type { FormValidationStatus } from '../../../form/src/public-types'
+import type { PopoverProps } from '../../../popover'
 import type { SelectBaseOption } from '../../../select/src/interface'
 import type { TagRef } from '../../../tag/src/Tag'
 import type {
@@ -11,21 +14,17 @@ import type { RenderTag } from './interface'
 import { getPadding } from 'seemly'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   Fragment,
   h,
-  type InputHTMLAttributes,
   nextTick,
   onMounted,
-  type PropType,
   ref,
   toRef,
-  type VNode,
   watch,
   watchEffect
 } from 'vue'
-import { VOverflow, type VOverflowInst } from 'vueuc'
+import { VOverflow } from 'vueuc'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../../_mixins'
 import {
   createKey,
@@ -34,7 +33,7 @@ import {
   useOnResize,
   Wrapper
 } from '../../../_utils'
-import { NPopover, type PopoverProps } from '../../../popover'
+import { NPopover } from '../../../popover'
 import { NTag } from '../../../tag'
 import Suffix from '../../suffix'
 import { internalSelectionLight } from '../styles'
