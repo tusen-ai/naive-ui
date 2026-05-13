@@ -1,50 +1,31 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import { computed } from 'vue'
 import { i18n } from '../utils/composables'
 import CopyDocActions from './CopyDocActions.vue'
 import EditOnGithubButton from './EditOnGithubButton.vue'
 
-export default defineComponent({
-  name: 'DocHeader',
-  components: {
-    CopyDocActions,
-    EditOnGithubButton
+const props = defineProps<{
+  relativeUrl: string
+  text: string
+}>()
+
+const { t } = i18n({
+  'zh-CN': {
+    editOnGithub: '在 GitHub 上编辑'
   },
-  props: {
-    relativeUrl: {
-      type: String,
-      required: true
-    },
-    text: {
-      type: String,
-      required: true
-    }
-  },
-  setup() {
-    return {
-      ...i18n({
-        'zh-CN': {
-          editOnGithub: '在 GitHub 上编辑'
-        },
-        'en-US': {
-          editOnGithub: 'Edit on GitHub'
-        }
-      })
-    }
-  },
-  computed: {
-    id() {
-      return this.text.replace(/ /g, '-')
-    }
+  'en-US': {
+    editOnGithub: 'Edit on GitHub'
   }
 })
+
+const id = computed(() => props.text.replace(/ /g, '-'))
 </script>
 
 <template>
   <n-h1 :id="id" class="naive-doc-title">
     <span>{{ text }}</span>
     <span class="edit-button">
-      <CopyDocActions :text="text" />
+      <CopyDocActions />
       <n-tooltip placement="right" :show-arrow="false">
         <template #trigger>
           <EditOnGithubButton

@@ -1,8 +1,9 @@
-import type { TokensList } from 'marked'
+import type { RootContent } from 'mdast'
 import path from 'node:path'
 import process from 'node:process'
 import fs from 'fs-extra'
-import { marked } from 'marked'
+import { toString } from 'mdast-util-to-string'
+import { createBaseProcessor } from '../../build/markdown/parser'
 
 const fileRegex = /\.demo\.md$/
 
@@ -21,36 +22,36 @@ interface FileInfo {
   name: string
 }
 
-function getPartsOfMdDemo(tokens: TokensList): DemoParts {
+function getPartsOfMdDemo(nodes: RootContent[]): DemoParts {
   let template = null
   let script = null
   let style = null
   let title = null
   let content = null
-  for (const token of tokens) {
-    if (token.type === 'heading' && token.depth === 1) {
-      title = token.text
-    }
-    else if (
-      token.type === 'code'
-      && (token.lang === 'template' || token.lang === 'html')
-    ) {
-      template = token.text
-    }
-    else if (
-      token.type === 'code'
-      && (token.lang === 'script' || token.lang === 'js' || token.lang === 'ts')
-    ) {
-      script = token.text
-    }
-    else if (
-      token.type === 'code'
-      && (token.lang === 'style' || token.lang === 'css')
-    ) {
-      style = token.text
-    }
-    else if (token.type === 'paragraph') {
-      content = token.text
+  for (const node of nodes) {
+    switch (node.type) {
+      case 'heading':
+        if (node.depth === 1)
+          title = toString(node)
+        break
+      case 'code':
+        if (node.lang === 'template' || node.lang === 'html') {
+          template = node.value
+        }
+        else if (
+          node.lang === 'script'
+          || node.lang === 'js'
+          || node.lang === 'ts'
+        ) {
+          script = node.value
+        }
+        else if (node.lang === 'style' || node.lang === 'css') {
+          style = node.value
+        }
+        break
+      case 'paragraph':
+        content = toString(node)
+        break
     }
   }
   return {
@@ -127,8 +128,8 @@ async function transformMdToVueAndUpdateEntryFile(
   for (const file of files) {
     const fileString = await loadFile(file.path)
     if (fileString) {
-      const tokens = marked.lexer(fileString)
-      const parts = getPartsOfMdDemo(tokens)
+      const tree = createBaseProcessor().parse(fileString)
+      const parts = getPartsOfMdDemo(tree.children)
       const vueDemoBlocks: string[] = []
       if (parts.title || parts.content) {
         vueDemoBlocks.push(
