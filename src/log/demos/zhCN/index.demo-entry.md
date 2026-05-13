@@ -55,7 +55,7 @@ auto-bottom.vue
 
 ### Log Props
 
-| 名称 | 类型 | 默认值 | 说明 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | font-size | `number` | `14` | 文字大小 |
 | hljs | `Object` | `undefined` | 如果你想局部设定 `hljs` ，可以通过这个属性传给组件 |
