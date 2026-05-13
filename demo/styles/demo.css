@@ -21,11 +21,6 @@ body {
   white-space: nowrap;
 }
 
-.doc .n-p,
-.n-blockquote {
-  max-width: 680px;
-}
-
 .md-table-wrapper {
   margin-bottom: 16px;
 }

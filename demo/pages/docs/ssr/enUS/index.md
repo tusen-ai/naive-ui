@@ -1,4 +1,4 @@
-# Server-Sider Rendering
+# Server-Side Rendering
 
 Since naive-ui is using CSS in JS, in SSR mode it needs some extra configuration.
 
@@ -19,9 +19,9 @@ If you encounter issues due to this, you can resolve the problem by directing al
 
 See [Nuxt.js](nuxtjs).
 
-## Vitepress
+## VitePress
 
-See [Vitepress](vitepress).
+See [VitePress](vitepress).
 
 ## Vite SSG/SSE
 
