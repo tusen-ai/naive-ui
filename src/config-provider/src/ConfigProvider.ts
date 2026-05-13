@@ -13,6 +13,7 @@ import type {
   RtlProp
 } from './internal-interface'
 import type { Katex } from './katex'
+import type { MarkdownProcessor } from './markdown'
 import { hash } from 'css-render'
 import { merge } from 'lodash-es'
 import { useMemo } from 'vooks'
@@ -38,6 +39,7 @@ export const configProviderProps = {
   },
   hljs: Object as PropType<Hljs>,
   katex: Object as PropType<Katex>,
+  markdown: [Object, Function] as PropType<MarkdownProcessor>,
   theme: Object as PropType<GlobalTheme | null>,
   themeOverrides: Object as PropType<GlobalThemeOverrides | null>,
   componentOptions: Object as PropType<GlobalComponentConfig>,
@@ -215,6 +217,12 @@ export default defineComponent({
         return katex === undefined
           ? NConfigProvider?.mergedKatexRef.value
           : katex
+      }),
+      mergedMarkdownRef: computed(() => {
+        const { markdown } = props
+        return markdown === undefined
+          ? NConfigProvider?.mergedMarkdownRef.value
+          : markdown
       }),
       mergedThemeRef,
       mergedThemeOverridesRef,
