@@ -251,8 +251,14 @@ export default defineComponent({
             barEl.style.maxWidth = `${barWidth}px`
           }
           else {
-            barEl.style.left = `${tabEl.offsetLeft}px`
-            barEl.style.maxWidth = `${tabEl.offsetWidth}px`
+            void nextTick(() => {
+              requestAnimationFrame(() =>
+                requestAnimationFrame(() => {
+                  barEl.style.left = `${tabEl.offsetLeft}px`
+                  barEl.style.maxWidth = `${tabEl.offsetWidth}px`
+                })
+              )
+            })
           }
           barEl.style.width = '8192px'
           if (barIsHide) {
