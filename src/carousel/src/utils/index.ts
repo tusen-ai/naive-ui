@@ -19,10 +19,6 @@ export function calculateSize(element: HTMLElement, innerOnly?: boolean): Size {
   return { width, height }
 }
 
-export function clampValue(value: number, min: number, max: number): number {
-  return value < min ? min : value > max ? max : value
-}
-
 export function resolveSpeed(value?: string | number): number {
   if (value === undefined)
     return 0

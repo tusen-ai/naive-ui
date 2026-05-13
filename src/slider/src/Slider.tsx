@@ -26,7 +26,7 @@ import {
 } from 'vue'
 import { VBinder, VFollower, VTarget } from 'vueuc'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
-import { call, resolveSlot, useAdjustedTo } from '../../_utils'
+import { call, clampValue, resolveSlot, useAdjustedTo } from '../../_utils'
 import { sliderLight } from '../styles'
 import style from './styles/index.cssr'
 import { isTouchEvent, useRefs } from './utils'
@@ -146,7 +146,7 @@ export default defineComponent({
     const arrifiedValueRef = computed(() => {
       const { value: mergedValue } = mergedValueRef
       return ((props.range ? mergedValue : [mergedValue]) as number[]).map(
-        clampValue
+        v => clampValue(v, props.min, props.max)
       )
     })
     const handleCountExceeds2Ref = computed(
@@ -353,10 +353,9 @@ export default defineComponent({
         const roundValue = getRoundValue(value)
         closestMark = getClosestMark(value, [...markValues, roundValue])
       }
-      return closestMark ? clampValue(closestMark.value) : currentValue
-    }
-    function clampValue(value: number): number {
-      return Math.min(props.max, Math.max(props.min, value))
+      return closestMark
+        ? clampValue(closestMark.value, props.min, props.max)
+        : currentValue
     }
     function valueToPercentage(value: number): number {
       const { max, min } = props
