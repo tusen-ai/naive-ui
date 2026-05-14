@@ -47,6 +47,7 @@
 - `n-card` 新增 `content-scrollable` 属性，关闭 [#4848](https://github.com/tusen-ai/naive-ui/issues/4848)、[#6759](https://github.com/tusen-ai/naive-ui/pull/6759)
 - `n-date-picker` 新增 `fast-year-select` 参数
 - `n-date-picker` 新增 `fast-month-select` 参数
+- `n-date-picker` 新增 `date-cell` 插槽，关闭 [#6614](https://github.com/tusen-ai/naive-ui/issues/6614)、[#6751](https://github.com/tusen-ai/naive-ui/issues/6751)、[#7237](https://github.com/tusen-ai/naive-ui/issues/7237)
 - `n-button` 增加 `spin-props` 属性
 - `n-cascader` 增加 `spin-props` 属性
 - `n-log` 增加 `spin-props` 属性

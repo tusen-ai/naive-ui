@@ -47,6 +47,7 @@
 - `n-card` adds `content-scrollable` prop, closes [#4848](https://github.com/tusen-ai/naive-ui/issues/4848), [#6759](https://github.com/tusen-ai/naive-ui/pull/6759).
 - `n-date-picker` adds `fast-year-select` prop.
 - `n-date-picker` adds `fast-month-select` prop.
+- `n-date-picker` adds `date-cell` slot, closes [#6614](https://github.com/tusen-ai/naive-ui/issues/6614), [#6751](https://github.com/tusen-ai/naive-ui/issues/6751), [#7237](https://github.com/tusen-ai/naive-ui/issues/7237).
 - `n-button` adds `spin-props` prop.
 - `n-cascader` adds `spin-props` prop.
 - `n-log` adds `spin-props` prop.
