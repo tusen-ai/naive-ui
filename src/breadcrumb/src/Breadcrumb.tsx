@@ -1,8 +1,10 @@
+import type { Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { BreadcrumbTheme } from '../styles'
-import { computed, defineComponent, h, provide, type Ref, toRef } from 'vue'
+import { computed, defineComponent, h, provide, toRef } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import { createInjectionKey, type ExtractPublicPropTypes } from '../../_utils'
+import { createInjectionKey } from '../../_utils'
 import { breadcrumbLight } from '../styles'
 import style from './styles/index.cssr'
 

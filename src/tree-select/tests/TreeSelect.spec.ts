@@ -1,5 +1,6 @@
+import type { TreeSelectOption } from '../index'
 import { mount } from '@vue/test-utils'
-import { NTreeSelect, type TreeSelectOption } from '../index'
+import { NTreeSelect } from '../index'
 
 describe('n-tree-select', () => {
   it('should work with import on demand', () => {

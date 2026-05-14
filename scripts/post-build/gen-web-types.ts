@@ -1,13 +1,10 @@
 import fs from 'node:fs'
-import path, { dirname } from 'node:path'
+import path from 'node:path'
 import process, { argv } from 'node:process'
-import { fileURLToPath } from 'node:url'
 import { kebabCase } from 'lodash'
 import * as components from '../../src/components'
 import version from '../../src/version'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
 const baseDir = path.resolve(process.cwd())
 
 interface WebTypesScaffold {
@@ -275,6 +272,9 @@ export function genWebTypes(): void {
       case 'tab-pane':
       case 'tab':
         componentPath = 'tabs'
+        break
+      case 'performant-ellipsis':
+        componentPath = 'ellipsis'
         break
     }
     let docsPath: string | undefined

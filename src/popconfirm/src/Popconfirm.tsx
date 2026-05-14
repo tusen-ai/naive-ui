@@ -1,3 +1,4 @@
+import type { ExtractPropTypes, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ButtonProps } from '../../button'
@@ -5,16 +6,7 @@ import type { PopoverTrigger } from '../../popover'
 import type { InternalPopoverInst } from '../../popover/src/interface'
 import type { PopconfirmTheme } from '../styles'
 import type { PopconfirmInst } from './interface'
-import {
-  defineComponent,
-  type ExtractPropTypes,
-  h,
-  type PropType,
-  provide,
-  ref,
-  type SlotsType,
-  type VNode
-} from 'vue'
+import { defineComponent, h, provide, ref } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { call, keep, omit } from '../../_utils'
 import { NPopover } from '../../popover'

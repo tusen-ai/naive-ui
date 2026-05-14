@@ -1,4 +1,15 @@
+import type { CheckStrategy } from 'treemate'
+import type {
+  HTMLAttributes,
+  PropType,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
+import type { FollowerInst, FollowerPlacement } from 'vueuc'
+import type { InternalSelectionInst } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/public-types'
 import type { PopoverProps } from '../../popover'
 import type { SelectBaseOption, SelectOption } from '../../select/src/interface'
@@ -10,6 +21,7 @@ import type {
   TreeOverrideNodeClickBehaviorReturn
 } from '../../tree/src/interface'
 import type { OnUpdateExpandedKeysImpl } from '../../tree/src/Tree'
+import type { TreeSelectTheme } from '../styles'
 import type {
   OnUpdateIndeterminateKeysImpl,
   OnUpdateValue,
@@ -23,38 +35,24 @@ import type {
   TreeSelectRenderTag,
   Value
 } from './interface'
+import type { TreeSelectSize } from './public-types'
 import { getPreciseEventTarget, happensIn } from 'seemly'
-import { type CheckStrategy, createTreeMate } from 'treemate'
+import { createTreeMate } from 'treemate'
 import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
   defineComponent,
   h,
-  type HTMLAttributes,
-  type PropType,
   provide,
   ref,
-  type SlotsType,
   toRef,
   Transition,
-  type VNode,
-  type VNodeChild,
   watchEffect,
   withDirectives
 } from 'vue'
-import {
-  type FollowerInst,
-  type FollowerPlacement,
-  VBinder,
-  VFollower,
-  VTarget
-} from 'vueuc'
-import {
-  type InternalSelectionInst,
-  NBaseFocusDetector,
-  NInternalSelection
-} from '../../_internal'
+import { VBinder, VFollower, VTarget } from 'vueuc'
+import { NBaseFocusDetector, NInternalSelection } from '../../_internal'
 import {
   useConfig,
   useFormItem,
@@ -64,9 +62,7 @@ import {
 } from '../../_mixins'
 import {
   call,
-  type ExtractPublicPropTypes,
   markEventEffectPerformed,
-  type MaybeArray,
   resolveSlot,
   resolveWrappedSlot,
   useAdjustedTo,
@@ -77,7 +73,7 @@ import { NEmpty } from '../../empty'
 import { NTree } from '../../tree'
 import { createTreeMateOptions, treeSharedProps } from '../../tree/src/Tree'
 import { useMergedCheckStrategy } from '../../tree/src/utils'
-import { treeSelectLight, type TreeSelectTheme } from '../styles'
+import { treeSelectLight } from '../styles'
 import { treeSelectInjectionKey } from './interface'
 import style from './styles/index.cssr'
 import {
@@ -123,6 +119,7 @@ export const treeSelectProps = {
   loading: Boolean,
   maxTagCount: [String, Number] as PropType<number | 'responsive'>,
   multiple: Boolean,
+  showLine: Boolean,
   showPath: Boolean,
   separator: {
     type: String,
@@ -141,7 +138,7 @@ export const treeSelectProps = {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
   },
-  size: String as PropType<'small' | 'medium' | 'large'>,
+  size: String as PropType<TreeSelectSize>,
   value: [String, Number, Array] as PropType<
     string | number | Array<string | number> | null
   >,
@@ -208,8 +205,12 @@ export default defineComponent({
     const triggerInstRef = ref<InternalSelectionInst | null>(null)
     const treeInstRef = ref<InternalTreeInst | null>(null)
     const menuElRef = ref<HTMLDivElement | null>(null)
-    const { mergedClsPrefixRef, namespaceRef, inlineThemeDisabled }
-      = useConfig(props)
+    const {
+      mergedClsPrefixRef,
+      namespaceRef,
+      inlineThemeDisabled,
+      mergedComponentPropsRef
+    } = useConfig(props)
     const { localeRef } = useLocale('Select')
     const {
       mergedSizeRef,
@@ -219,7 +220,20 @@ export default defineComponent({
       nTriggerFormChange,
       nTriggerFormFocus,
       nTriggerFormInput
-    } = useFormItem(props)
+    } = useFormItem(props, {
+      mergedSize: (NFormItem) => {
+        const { size } = props
+        if (size)
+          return size
+        const { mergedSize: formItemSize } = NFormItem || {}
+        if (formItemSize?.value)
+          return formItemSize.value as TreeSelectSize
+        const configSize = mergedComponentPropsRef?.value?.TreeSelect?.size
+        if (configSize)
+          return configSize
+        return 'medium'
+      }
+    })
     const uncontrolledValueRef = ref<Value>(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
     const mergedValueRef = useMergedState(
@@ -793,6 +807,9 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const mergedRenderEmptyRef = computed(() => {
+      return mergedComponentPropsRef?.value?.TreeSelect?.renderEmpty
+    })
 
     const cssVarsRef = computed(() => {
       const {
@@ -880,6 +897,7 @@ export default defineComponent({
       handleTabOut,
       handleMenuMousedown,
       mergedTheme: themeRef,
+      mergedRenderEmpty: mergedRenderEmptyRef,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
@@ -1021,6 +1039,7 @@ export default defineComponent({
                                 cascade={this.mergedCascade}
                                 leafOnly={this.leafOnly}
                                 multiple={this.multiple}
+                                showLine={this.showLine}
                                 renderLabel={this.renderLabel}
                                 renderPrefix={this.renderPrefix}
                                 renderSuffix={this.renderSuffix}
@@ -1043,14 +1062,18 @@ export default defineComponent({
                                   <div
                                     class={`${mergedClsPrefix}-tree-select-menu__empty`}
                                   >
-                                    {resolveSlot($slots.empty, () => [
-                                      <NEmpty
-                                        theme={mergedTheme.peers.Empty}
-                                        themeOverrides={
-                                          mergedTheme.peerOverrides.Empty
-                                        }
-                                      />
-                                    ])}
+                                    {resolveSlot($slots.empty, () => {
+                                      return [
+                                        this.mergedRenderEmpty?.() || (
+                                          <NEmpty
+                                            theme={mergedTheme.peers.Empty}
+                                            themeOverrides={
+                                              mergedTheme.peerOverrides.Empty
+                                            }
+                                          />
+                                        )
+                                      ]
+                                    })}
                                   </div>
                                 )}
                                 onLoad={this.onLoad}
@@ -1078,7 +1101,7 @@ export default defineComponent({
                               [
                                 clickoutside,
                                 this.handleMenuClickoutside,
-                                undefined as unknown as string,
+                                undefined,
                                 { capture: true }
                               ]
                             ]

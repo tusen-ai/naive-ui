@@ -1,5 +1,6 @@
+import type { VueWrapper } from '@vue/test-utils'
 import type { Justify } from '../src/Space'
-import { mount, type VueWrapper } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { createCommentVNode, Fragment, h } from 'vue'
 import { c } from '../../_utils/cssr'
 import { NConfigProvider } from '../../config-provider'
@@ -24,7 +25,7 @@ describe('n-space', () => {
         return <NSpace />
       }
     })
-    expect(wrapper.find('.n-space')).not.toBe(null)
+    expect(wrapper.find('.n-space').exists()).toBeFalsy()
     expect(wrapper.html()).toMatchSnapshot()
     wrapper.unmount()
   })

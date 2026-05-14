@@ -19,6 +19,7 @@ export type ImageGroupRenderToolbarProps = ImageRenderToolbarProps
 export type ImageGroupRenderToolbar = ImageRenderToolbar
 
 export interface ImageInst {
+  /** @deprecated Use `showPreview` instead */
   click: () => void
   showPreview: () => void
 }

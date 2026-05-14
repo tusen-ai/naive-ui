@@ -37,6 +37,25 @@ function showCardPreset() {
       h(NButton, { type: 'primary', onClick: () => m.destroy() }, () => '关闭')
   })
 }
+
+function showAny() {
+  const m = modal.create({
+    style: {
+      width: '400px',
+      background: '#fff'
+    },
+    render() {
+      return h('div', [
+        '随便啥',
+        h(
+          NButton,
+          { type: 'primary', onClick: () => m.destroy() },
+          () => '关闭'
+        )
+      ])
+    }
+  })
+}
 </script>
 
 <template>
@@ -46,6 +65,9 @@ function showCardPreset() {
     </NButton>
     <NButton @click="showCardPreset">
       来吧 Card
+    </NButton>
+    <NButton @click="showAny">
+      来吧 随便啥
     </NButton>
   </n-flex>
 </template>

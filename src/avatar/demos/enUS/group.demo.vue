@@ -5,7 +5,7 @@ Crowded people.
 
 ---
 
-Please note that the demo uses `NGAvatarGroup` which is available since naive-ui `NEXT_VERSION`.
+Please note that the demo uses `NGAvatarGroup` which is available since naive-ui `2.43.0`.
 
 The `NGAvatarGroup` is the same as `NAvatarGroup` except with a generic `options` prop which can make slots & props types more accurate in Vue files.
 
@@ -13,7 +13,7 @@ The component is only available in Vue >= `3.3` and in `.vue` files.
 
 If your environment doesn't support [Vue Generic Components](https://blog.vuejs.org/posts/vue-3-3#generic-components), please use `NAvatarGroup` instead.
 
-The `NGAvatarGroup` should be imported from 'naive-ui/generic'.
+The `NGAvatarGroup` should be imported from `'naive-ui/generic'`.
 </markdown>
 
 <script lang="ts" setup>

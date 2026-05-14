@@ -26,7 +26,7 @@ function handleClose() {
 
 <template>
   <n-button type="primary" @click="onClick">
-    Click me to preview image
+    点击预览图片
   </n-button>
   <n-image-preview
     v-model:show="showRef"

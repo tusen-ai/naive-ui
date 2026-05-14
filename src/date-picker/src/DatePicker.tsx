@@ -1,5 +1,6 @@
+import type { ExtractPropTypes, Ref, SlotsType, StyleValue, VNode } from 'vue'
 import type { InputInst, InputProps } from '../../input'
-import type { Size as TimePickerSize } from '../../time-picker/src/interface'
+import type { TimePickerSize } from '../../time-picker/src/public-types'
 import type {
   FormattedValue,
   OnConfirmImpl,
@@ -9,7 +10,7 @@ import type {
   Value
 } from './interface'
 import type { UsePanelCommonProps } from './panel/use-panel-common'
-import type { DatePickerInst } from './public-types'
+import type { DatePickerInst, DatePickerSize } from './public-types'
 import { format, getTime, isValid } from 'date-fns'
 import { getPreciseEventTarget, happensIn } from 'seemly'
 import { clickoutside } from 'vdirs'
@@ -17,16 +18,11 @@ import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
   defineComponent,
-  type ExtractPropTypes,
   h,
   provide,
-  type Ref,
   ref,
-  type SlotsType,
-  type StyleValue,
   toRef,
   Transition,
-  type VNode,
   watch,
   watchEffect,
   withDirectives
@@ -102,8 +98,6 @@ export default defineComponent({
       })
     }
     const { localeRef, dateLocaleRef } = useLocale('DatePicker')
-    const formItem = useFormItem(props)
-    const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     const {
       mergedComponentPropsRef,
       mergedClsPrefixRef,
@@ -111,6 +105,21 @@ export default defineComponent({
       namespaceRef,
       inlineThemeDisabled
     } = useConfig(props)
+    const formItem = useFormItem(props, {
+      mergedSize: (NFormItem) => {
+        const { size } = props
+        if (size)
+          return size
+        const { mergedSize: formItemSize } = NFormItem || {}
+        if (formItemSize?.value)
+          return formItemSize.value as DatePickerSize
+        const configSize = mergedComponentPropsRef?.value?.DatePicker?.size
+        if (configSize)
+          return configSize
+        return 'medium'
+      }
+    })
+    const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     const panelInstRef = ref<PanelRef | null>(null)
     const triggerElRef = ref<HTMLElement | null>(null)
     const inputInstRef = ref<InputInst | null>(null)
@@ -983,6 +992,8 @@ export default defineComponent({
       onPrevYear: this.onPrevYear,
       timePickerFormat: this.timePickerFormat,
       dateFormat: this.dateFormat,
+      fastYearSelect: this.fastYearSelect,
+      fastMonthSelect: this.fastMonthSelect,
       calendarDayFormat: this.calendarDayFormat,
       calendarHeaderYearFormat: this.calendarHeaderYearFormat,
       calendarHeaderMonthFormat: this.calendarHeaderMonthFormat,
@@ -1177,7 +1188,7 @@ export default defineComponent({
                             [
                               clickoutside,
                               this.handleClickOutside,
-                              undefined as unknown as string,
+                              undefined,
                               { capture: true }
                             ]
                           ])

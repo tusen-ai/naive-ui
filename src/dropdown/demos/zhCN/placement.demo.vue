@@ -19,7 +19,7 @@ const options = [
   },
   {
     label: '亚特兰蒂斯巴哈马，拿骚',
-    key: 'atlantis nahamas, nassau'
+    key: 'atlantis bahamas, nassau'
   },
   {
     label: '比佛利山庄酒店，洛杉矶',

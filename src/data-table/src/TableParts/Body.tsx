@@ -1,6 +1,15 @@
 import type { CNode } from 'css-render'
 import type { CSSProperties, PropType, VNode, VNodeChild } from 'vue'
 import type { VirtualListInst } from 'vueuc'
+import type { ScrollbarInst } from '../../../_internal'
+import type {
+  ColumnKey,
+  MainTableBodyRef,
+  RowData,
+  RowKey,
+  SummaryRowData,
+  TmNode
+} from '../interface'
 import type { ColItem } from '../use-group-header'
 import { pxfy, repeat } from 'seemly'
 import { useMemo } from 'vooks'
@@ -15,21 +24,13 @@ import {
   watchEffect
 } from 'vue'
 import { VirtualList, VResizeObserver } from 'vueuc'
-import { NScrollbar, type ScrollbarInst } from '../../../_internal'
+import { NScrollbar } from '../../../_internal'
 import { cssrAnchorMetaName } from '../../../_mixins/common'
 import { formatLength, resolveSlot, warn } from '../../../_utils'
 import { c } from '../../../_utils/cssr'
 import { configProviderInjectionKey } from '../../../config-provider/src/context'
 import { NEmpty } from '../../../empty'
-import {
-  type ColumnKey,
-  dataTableInjectionKey,
-  type MainTableBodyRef,
-  type RowData,
-  type RowKey,
-  type SummaryRowData,
-  type TmNode
-} from '../interface'
+import { dataTableInjectionKey } from '../interface'
 import { createRowClassName, getColKey, isColumnSorting } from '../utils'
 import RenderSafeCheckbox from './BodyCheckbox'
 import RenderSafeRadio from './BodyRadio'
@@ -52,8 +53,8 @@ interface NormalRowRenderInfo {
   index: number
 }
 
-type RowRenderInfo =
-  | {
+type RowRenderInfo
+  = | {
     isSummaryRow: true
     key: RowKey
     tmNode: {
@@ -185,7 +186,6 @@ export default defineComponent({
       childTriggerColIndexRef,
       indentRef,
       rowPropsRef,
-      maxHeightRef,
       stripedRef,
       loadingRef,
       onLoadRef,
@@ -201,22 +201,22 @@ export default defineComponent({
       handleTableBodyScroll,
       doCheck,
       doUncheck,
-      renderCell
+      renderCell,
+      xScrollableRef,
+      explicitlyScrollableRef
     } = inject(dataTableInjectionKey)!
     const NConfigProvider = inject(configProviderInjectionKey)
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const virtualListRef = ref<VirtualListInst | null>(null)
     const emptyElRef = ref<HTMLElement | null>(null)
-    const emptyRef = useMemo(() => paginatedDataRef.value.length === 0)
-    // If header is not inside & empty is displayed, no table part would be
-    // shown. So to collect a body width, we need to put a ref on empty element
-    const shouldDisplaySomeTablePartRef = useMemo(
-      () => props.showHeader || !emptyRef.value
-    )
-    // If no body is shown, we shouldn't show scrollbar
-    const bodyShowHeaderOnlyRef = useMemo(() => {
-      return props.showHeader || emptyRef.value
+    const mergedRenderEmptyRef = computed(() => {
+      return NConfigProvider?.mergedComponentPropsRef.value?.DataTable
+        ?.renderEmpty
     })
+    const emptyRef = useMemo(() => paginatedDataRef.value.length === 0)
+    const shouldDisplayVirtualListRef = useMemo(
+      () => virtualScrollRef.value && !emptyRef.value
+    )
     let lastSelectedKey: string | number = ''
     const mergedExpandedRowKeySetRef = computed(() => {
       return new Set(mergedExpandedRowKeysRef.value)
@@ -279,16 +279,7 @@ export default defineComponent({
     }
 
     function getScrollContainer(): HTMLElement | null {
-      if (!shouldDisplaySomeTablePartRef.value) {
-        const { value: emptyEl } = emptyElRef
-        if (emptyEl) {
-          return emptyEl
-        }
-        else {
-          return null
-        }
-      }
-      if (virtualScrollRef.value) {
+      if (shouldDisplayVirtualListRef.value) {
         return virtualListContainer()
       }
       const { value } = scrollbarInstRef
@@ -454,11 +445,11 @@ export default defineComponent({
       summary: summaryRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: mergedThemeRef,
+      mergedRenderEmpty: mergedRenderEmptyRef,
       scrollX: scrollXRef,
       cols: colsRef,
       loading: loadingRef,
-      bodyShowHeaderOnly: bodyShowHeaderOnlyRef,
-      shouldDisplaySomeTablePart: shouldDisplaySomeTablePartRef,
+      shouldDisplayVirtualList: shouldDisplayVirtualListRef,
       empty: emptyRef,
       paginatedDataAndInfo: computed(() => {
         const { value: striped } = stripedRef
@@ -508,7 +499,6 @@ export default defineComponent({
       childTriggerColIndex: childTriggerColIndexRef,
       indent: indentRef,
       rowProps: rowPropsRef,
-      maxHeight: maxHeightRef,
       loadingKeySet: loadingKeySetRef,
       expandable: expandableRef,
       stickyExpandedRows: stickyExpandedRowsRef,
@@ -525,6 +515,8 @@ export default defineComponent({
       handleRadioUpdateChecked,
       handleUpdateExpanded,
       renderCell,
+      explicitlyScrollable: explicitlyScrollableRef,
+      xScrollable: xScrollableRef,
       ...exposedMethods
     }
   },
@@ -533,23 +525,14 @@ export default defineComponent({
       mergedTheme,
       scrollX,
       mergedClsPrefix,
-      virtualScroll,
-      maxHeight,
-      mergedTableLayout,
-      flexHeight,
+      explicitlyScrollable,
+      xScrollable,
       loadingKeySet,
       onResize,
-      setHeaderScrollLeft
+      setHeaderScrollLeft,
+      empty,
+      shouldDisplayVirtualList
     } = this
-    const scrollable
-      = scrollX !== undefined || maxHeight !== undefined || flexHeight
-
-    // For a basic table with auto layout whose content may overflow we will
-    // make it scrollable, which differs from browser's native behavior.
-    // For native behavior, see
-    // https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout
-    const isBasicAutoLayout = !scrollable && mergedTableLayout === 'auto'
-    const xScrollable = scrollX !== undefined || isBasicAutoLayout
 
     const contentStyle: CSSProperties = {
       minWidth: formatLength(scrollX) || '100%'
@@ -557,27 +540,67 @@ export default defineComponent({
     if (scrollX)
       contentStyle.width = '100%'
 
+    const createEmptyNode = (): VNode => (
+      <div
+        class={[
+          `${mergedClsPrefix}-data-table-empty`,
+          this.loading && `${mergedClsPrefix}-data-table-empty--hide`
+        ]}
+        style={[
+          this.bodyStyle,
+          xScrollable
+            ? 'position: sticky; left: 0; width: var(--n-scrollbar-current-width);'
+            : undefined
+        ]}
+        ref="emptyElRef"
+      >
+        {resolveSlot(this.dataTableSlots.empty, () => {
+          return [
+            this.mergedRenderEmpty?.() || (
+              <NEmpty
+                theme={this.mergedTheme.peers.Empty}
+                themeOverrides={this.mergedTheme.peerOverrides.Empty}
+              />
+            )
+          ]
+        })}
+      </div>
+    )
+
     const tableNode = (
       <NScrollbar
         {...this.scrollbarProps}
         ref="scrollbarInstRef"
-        scrollable={scrollable || isBasicAutoLayout}
+        scrollable={explicitlyScrollable || xScrollable}
         class={`${mergedClsPrefix}-data-table-base-table-body`}
-        style={!this.empty ? this.bodyStyle : undefined}
+        style={!empty ? this.bodyStyle : undefined}
         theme={mergedTheme.peers.Scrollbar}
         themeOverrides={mergedTheme.peerOverrides.Scrollbar}
         contentStyle={contentStyle}
-        container={virtualScroll ? this.virtualListContainer : undefined}
-        content={virtualScroll ? this.virtualListContent : undefined}
+        container={
+          shouldDisplayVirtualList ? this.virtualListContainer : undefined
+        }
+        content={shouldDisplayVirtualList ? this.virtualListContent : undefined}
         horizontalRailStyle={{ zIndex: 3 }}
         verticalRailStyle={{ zIndex: 3 }}
+        internalExposeWidthCssVar={xScrollable && empty}
         xScrollable={xScrollable}
-        onScroll={virtualScroll ? undefined : this.handleTableBodyScroll}
+        onScroll={
+          shouldDisplayVirtualList ? undefined : this.handleTableBodyScroll
+        }
         internalOnUpdateScrollLeft={setHeaderScrollLeft}
         onResize={onResize}
       >
         {{
           default: () => {
+            if (
+              this.empty
+              && !this.showHeader
+              && (this.explicitlyScrollable || this.xScrollable)
+            ) {
+              // Placeholder for outer header to sync scroll state
+              return createEmptyNode()
+            }
             // coordinate to pass if there are cells that cross row & col
             const cordToPass: Record<number, number[]> = {}
             // coordinate to related hover keys
@@ -1033,42 +1056,45 @@ export default defineComponent({
               return row
             }
 
-            if (!virtualScroll) {
+            if (!this.shouldDisplayVirtualList) {
               return (
-                <table
-                  class={`${mergedClsPrefix}-data-table-table`}
-                  onMouseleave={handleMouseleaveTable}
-                  style={{
-                    tableLayout: this.mergedTableLayout
-                  }}
-                >
-                  <colgroup>
-                    {cols.map(col => (
-                      <col key={col.key} style={col.style}></col>
-                    ))}
-                  </colgroup>
-                  {this.showHeader ? <TableHeader discrete={false} /> : null}
-                  {!this.empty ? (
-                    <tbody
-                      data-n-id={componentId}
-                      class={`${mergedClsPrefix}-data-table-tbody`}
-                    >
-                      {displayedData.map((rowInfo, displayedRowIndex) => {
-                        return renderRow({
-                          rowInfo,
-                          displayedRowIndex,
-                          isVirtual: false,
-                          isVirtualX: false,
-                          startColIndex: -1,
-                          endColIndex: -1,
-                          getLeft(_index) {
-                            return -1
-                          }
-                        })
-                      })}
-                    </tbody>
-                  ) : null}
-                </table>
+                <>
+                  <table
+                    class={`${mergedClsPrefix}-data-table-table`}
+                    onMouseleave={handleMouseleaveTable}
+                    style={{
+                      tableLayout: this.mergedTableLayout
+                    }}
+                  >
+                    <colgroup>
+                      {cols.map(col => (
+                        <col key={col.key} style={col.style}></col>
+                      ))}
+                    </colgroup>
+                    {this.showHeader ? <TableHeader discrete={false} /> : null}
+                    {!this.empty ? (
+                      <tbody
+                        data-n-id={componentId}
+                        class={`${mergedClsPrefix}-data-table-tbody`}
+                      >
+                        {displayedData.map((rowInfo, displayedRowIndex) => {
+                          return renderRow({
+                            rowInfo,
+                            displayedRowIndex,
+                            isVirtual: false,
+                            isVirtualX: false,
+                            startColIndex: -1,
+                            endColIndex: -1,
+                            getLeft(_index) {
+                              return -1
+                            }
+                          })
+                        })}
+                      </tbody>
+                    ) : null}
+                  </table>
+                  {this.empty && this.xScrollable ? createEmptyNode() : null}
+                </>
               )
             }
             else {
@@ -1146,30 +1172,9 @@ export default defineComponent({
     )
 
     if (this.empty) {
-      const createEmptyNode = (): VNode => (
-        <div
-          class={[
-            `${mergedClsPrefix}-data-table-empty`,
-            this.loading && `${mergedClsPrefix}-data-table-empty--hide`
-          ]}
-          style={this.bodyStyle}
-          ref="emptyElRef"
-        >
-          {resolveSlot(this.dataTableSlots.empty, () => [
-            <NEmpty
-              theme={this.mergedTheme.peers.Empty}
-              themeOverrides={this.mergedTheme.peerOverrides.Empty}
-            />
-          ])}
-        </div>
-      )
-      if (this.shouldDisplaySomeTablePart) {
-        return (
-          <>
-            {tableNode}
-            {createEmptyNode()}
-          </>
-        )
+      if (this.explicitlyScrollable || this.xScrollable) {
+        // empty node is integrated into table node
+        return tableNode
       }
       else {
         return (

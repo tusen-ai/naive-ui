@@ -1,33 +1,31 @@
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { FloatButtonTheme } from '../styles'
 import { off, on } from 'evtd'
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   inject,
   onBeforeUnmount,
   onMounted,
-  type PropType,
   ref,
-  type SlotsType,
-  toRef,
-  type VNode
+  toRef
 } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import { CloseIcon } from '../../_internal/icons'
-import { type ThemeProps, useTheme, useThemeClass } from '../../_mixins'
+import { useTheme, useThemeClass } from '../../_mixins'
 import useConfig from '../../_mixins/use-config'
 import {
   call,
-  type ExtractPublicPropTypes,
   formatLength,
-  type MaybeArray,
   resolveSlot,
   resolveWrappedSlot
 } from '../../_utils'
 import { floatButtonGroupInjectionKey } from '../../float-button-group/src/FloatButtonGroup'
-import { floatButtonLight, type FloatButtonTheme } from '../styles'
+import { floatButtonLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const floatButtonProps = {

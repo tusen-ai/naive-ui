@@ -20,7 +20,7 @@ function createSelectOptions(
   separator: string
 ): Array<
   SelectBaseOption & { rawNode: CascaderOption, path: CascaderOption[] }
-  > {
+> {
   const selectOptions: Array<
     SelectBaseOption & { rawNode: CascaderOption, path: CascaderOption[] }
   > = []

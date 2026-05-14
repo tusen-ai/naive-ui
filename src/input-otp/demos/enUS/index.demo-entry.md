@@ -50,4 +50,4 @@ pattern.vue
 
 | 名称 | 类型 | 说明 | 版本 |
 | --- | --- | --- | --- |
-| focusOnChar | `(charIndex: number) => void` | Focus on a certain input box. | NEXT_VERSION |
+| focusOnChar | `(charIndex: number) => void` | Focus on a certain input box. | 2.43.0 |

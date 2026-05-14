@@ -1,8 +1,19 @@
+import type { TreeNode } from 'treemate'
+import type {
+  HTMLAttributes,
+  InputHTMLAttributes,
+  PropType,
+  SlotsType,
+  VNode
+} from 'vue'
+import type { FollowerPlacement } from 'vueuc'
+import type { InternalSelectMenuRef, ScrollbarProps } from '../../_internal'
 import type {
   RenderLabel,
   RenderOption
 } from '../../_internal/select-menu/src/interface'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/public-types'
 import type { InputInst } from '../../input'
 import type {
@@ -21,36 +32,27 @@ import type {
   OnUpdateImpl,
   OnUpdateValue
 } from './interface'
+import type { AutoCompleteSize } from './public-types'
 import { getPreciseEventTarget } from 'seemly'
-import { createTreeMate, type TreeNode } from 'treemate'
+import { createTreeMate } from 'treemate'
 import { clickoutside } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
   computed,
   defineComponent,
   h,
-  type HTMLAttributes,
-  type InputHTMLAttributes,
-  type PropType,
   ref,
-  type SlotsType,
   toRef,
   Transition,
-  type VNode,
   watchEffect,
   withDirectives
 } from 'vue'
-import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc'
-import {
-  type InternalSelectMenuRef,
-  NInternalSelectMenu
-} from '../../_internal'
+import { VBinder, VFollower, VTarget } from 'vueuc'
+import { NInternalSelectMenu } from '../../_internal'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import {
   call,
-  type ExtractPublicPropTypes,
   getFirstSlotVNodeWithTypedProps,
-  type MaybeArray,
   useAdjustedTo,
   warnOnce
 } from '../../_utils'
@@ -98,7 +100,7 @@ export const autoCompleteProps = {
   inputProps: Object as PropType<InputHTMLAttributes>,
   renderOption: Function as PropType<RenderOption>,
   renderLabel: Function as PropType<RenderLabel>,
-  size: String as PropType<'small' | 'medium' | 'large'>,
+  size: String as PropType<AutoCompleteSize>,
   options: {
     type: Array as PropType<AutoCompleteOptions>,
     default: () => []
@@ -110,6 +112,7 @@ export const autoCompleteProps = {
   onSelect: [Function, Array] as PropType<MaybeArray<OnSelect>>,
   onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
   onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
+  scrollbarProps: Object as PropType<ScrollbarProps>,
   // deprecated
   onInput: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
@@ -142,9 +145,23 @@ export default defineComponent({
       mergedBorderedRef,
       namespaceRef,
       mergedClsPrefixRef,
-      inlineThemeDisabled
+      inlineThemeDisabled,
+      mergedComponentPropsRef
     } = useConfig(props)
-    const formItem = useFormItem(props)
+    const formItem = useFormItem(props, {
+      mergedSize: (NFormItem) => {
+        const { size } = props
+        if (size)
+          return size
+        const { mergedSize: formItemSize } = NFormItem || {}
+        if (formItemSize?.value)
+          return formItemSize.value as AutoCompleteSize
+        const configSize = mergedComponentPropsRef?.value?.AutoComplete?.size
+        if (configSize)
+          return configSize
+        return 'medium'
+      }
+    })
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     const triggerElRef = ref<HTMLElement | null>(null)
     const menuInstRef = ref<InternalSelectMenuRef | null>(null)
@@ -457,6 +474,7 @@ export default defineComponent({
                               renderOption={this.renderOption}
                               size="medium"
                               onToggle={this.handleToggle}
+                              scrollbarProps={this.scrollbarProps}
                             >
                               {{ empty: () => this.$slots.empty?.() }}
                             </NInternalSelectMenu>,
@@ -464,7 +482,7 @@ export default defineComponent({
                               [
                                 clickoutside,
                                 this.handleClickOutsideMenu,
-                                undefined as unknown as string,
+                                undefined,
                                 { capture: true }
                               ]
                             ]

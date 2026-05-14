@@ -1,13 +1,6 @@
+import type { PropType, SlotsType, VNode } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import {
-  computed,
-  defineComponent,
-  h,
-  inject,
-  type PropType,
-  type SlotsType,
-  type VNode
-} from 'vue'
+import { computed, defineComponent, h, inject } from 'vue'
 import { useConfig, useThemeClass } from '../../_mixins'
 import {
   createKey,

@@ -1,16 +1,10 @@
 import type { CNode } from 'css-render'
+import type { ComputedRef, PropType, Ref } from 'vue'
 import type { ThemeCommonVars } from '../_styles/common'
 import type { GlobalTheme } from '../config-provider'
 import { useSsrAdapter } from '@css-render/vue3-ssr'
 import { merge } from 'lodash-es'
-import {
-  computed,
-  type ComputedRef,
-  inject,
-  onBeforeMount,
-  type PropType,
-  type Ref
-} from 'vue'
+import { computed, inject, onBeforeMount } from 'vue'
 import globalStyle from '../_styles/global/index.cssr'
 import { configProviderInjectionKey } from '../config-provider/src/context'
 import { cssrAnchorMetaName } from './common'
@@ -34,15 +28,15 @@ export interface ThemePropsReactive<T> {
   builtinThemeOverrides?: ExtractThemeOverrides<T>
 }
 
-export type ExtractThemeVars<T> =
-  T extends Theme<unknown, infer U, unknown>
+export type ExtractThemeVars<T>
+  = T extends Theme<unknown, infer U, unknown>
     ? unknown extends U // self is undefined, ThemeVars is unknown
       ? Record<string, unknown>
       : U
     : Record<string, unknown>
 
-export type ExtractPeerOverrides<T> =
-  T extends Theme<unknown, unknown, infer V>
+export type ExtractPeerOverrides<T>
+  = T extends Theme<unknown, unknown, infer V>
     ? {
         peers?: {
           [k in keyof V]?: ExtractThemeOverrides<V[k]>
@@ -51,15 +45,15 @@ export type ExtractPeerOverrides<T> =
     : T
 
 // V is peers theme
-export type ExtractMergedPeerOverrides<T> =
-  T extends Theme<unknown, unknown, infer V>
+export type ExtractMergedPeerOverrides<T>
+  = T extends Theme<unknown, unknown, infer V>
     ? {
         [k in keyof V]?: ExtractPeerOverrides<V[k]>
       }
     : T
 
-export type ExtractThemeOverrides<T> = Partial<ExtractThemeVars<T>> &
-  ExtractPeerOverrides<T> & { common?: Partial<ThemeCommonVars> }
+export type ExtractThemeOverrides<T> = Partial<ExtractThemeVars<T>>
+  & ExtractPeerOverrides<T> & { common?: Partial<ThemeCommonVars> }
 
 export function createTheme<N extends string, T, R>(
   theme: Theme<N, T, R>
@@ -73,8 +67,8 @@ type UseThemeProps<T> = Readonly<{
   builtinThemeOverrides?: ExtractThemeOverrides<T>
 }>
 
-export type MergedTheme<T> =
-  T extends Theme<unknown, infer V, infer W>
+export type MergedTheme<T>
+  = T extends Theme<unknown, infer V, infer W>
     ? {
         common: ThemeCommonVars
         self: V

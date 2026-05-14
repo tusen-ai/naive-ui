@@ -1,19 +1,11 @@
+import type { ComponentPublicInstance, PropType, VNode } from 'vue'
+import type { TmNode } from './interface'
 import { happensIn, repeat } from 'seemly'
 import { useMemo } from 'vooks'
-import {
-  type ComponentPublicInstance,
-  computed,
-  defineComponent,
-  h,
-  inject,
-  onMounted,
-  type PropType,
-  ref,
-  type VNode
-} from 'vue'
+import { computed, defineComponent, h, inject, onMounted, ref } from 'vue'
 import { createDataKey } from '../../_utils'
 import { renderDropMark } from './dnd'
-import { type TmNode, treeInjectionKey } from './interface'
+import { treeInjectionKey } from './interface'
 import NTreeNodeCheckbox from './TreeNodeCheckbox'
 import NTreeNodeContent from './TreeNodeContent'
 import NTreeNodeSwitcher from './TreeNodeSwitcher'
@@ -174,7 +166,7 @@ const TreeNode = defineComponent({
       }
     }
 
-    function handleNodeClick(e: MouseEvent): void {
+    function handleNodeClick(e: PointerEvent): void {
       if (happensIn(e, 'checkbox') || happensIn(e, 'switcher'))
         return
       if (!disabledRef.value) {
@@ -214,13 +206,13 @@ const TreeNode = defineComponent({
       resolvedNodePropsRef.value?.onClick?.(e)
     }
 
-    function handleContentClick(e: MouseEvent): void {
+    function handleContentClick(e: PointerEvent): void {
       if (blockLineRef.value)
         return
       handleNodeClick(e)
     }
 
-    function handleLineClick(e: MouseEvent): void {
+    function handleLineClick(e: PointerEvent): void {
       if (!blockLineRef.value)
         return
       handleNodeClick(e)

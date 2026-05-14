@@ -1,18 +1,11 @@
+import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CardTheme } from '../styles'
+import type { CardSize } from './public-types'
 import { getPadding } from 'seemly'
-import {
-  computed,
-  type CSSProperties,
-  defineComponent,
-  h,
-  type PropType,
-  type SlotsType,
-  type VNode,
-  type VNodeChild
-} from 'vue'
-import { NBaseClose } from '../../_internal'
+import { computed, defineComponent, h } from 'vue'
+import { NBaseClose, NScrollbar } from '../../_internal'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
 import { call, createKey, keysOf, resolveWrappedSlot } from '../../_utils'
@@ -30,6 +23,7 @@ export const cardBaseProps = {
   title: [String, Function] as PropType<string | (() => VNodeChild)>,
   contentClass: String,
   contentStyle: [Object, String] as PropType<CSSProperties | string>,
+  contentScrollable: Boolean,
   headerClass: String,
   headerStyle: [Object, String] as PropType<CSSProperties | string>,
   headerExtraClass: String,
@@ -41,10 +35,7 @@ export const cardBaseProps = {
     type: [Boolean, Object] as PropType<boolean | CardSegmented>,
     default: false
   },
-  size: {
-    type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
-    default: 'medium'
-  },
+  size: String as PropType<CardSize>,
   bordered: {
     type: Boolean,
     default: true
@@ -61,7 +52,8 @@ export const cardBaseProps = {
   content: [String, Function] as PropType<string | (() => VNodeChild)>,
   footer: Function as PropType<() => VNodeChild>,
   action: Function as PropType<() => VNodeChild>,
-  headerExtra: Function as PropType<() => VNodeChild>
+  headerExtra: Function as PropType<() => VNodeChild>,
+  closeFocusable: Boolean
 } as const
 
 export const cardBasePropKeys = keysOf(cardBaseProps)
@@ -89,11 +81,16 @@ export default defineComponent({
   setup(props) {
     const handleCloseClick = (): void => {
       const { onClose } = props
-      if (onClose)
+      if (onClose) {
         call(onClose)
+      }
     }
-    const { inlineThemeDisabled, mergedClsPrefixRef, mergedRtlRef }
-      = useConfig(props)
+    const {
+      inlineThemeDisabled,
+      mergedClsPrefixRef,
+      mergedRtlRef,
+      mergedComponentPropsRef
+    } = useConfig(props)
     const themeRef = useTheme(
       'Card',
       '-card',
@@ -103,8 +100,13 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const rtlEnabledRef = useRtl('Card', mergedRtlRef, mergedClsPrefixRef)
+    const mergedSizeRef = computed(() => {
+      return (
+        props.size || mergedComponentPropsRef?.value?.Card?.size || 'medium'
+      )
+    })
     const cssVarsRef = computed(() => {
-      const { size } = props
+      const mergedSize = mergedSizeRef.value
       const {
         self: {
           color,
@@ -130,9 +132,9 @@ export default defineComponent({
           colorEmbedded,
           colorEmbeddedModal,
           colorEmbeddedPopover,
-          [createKey('padding', size)]: padding,
-          [createKey('fontSize', size)]: fontSize,
-          [createKey('titleFontSize', size)]: titleFontSize
+          [createKey('padding', mergedSize)]: padding,
+          [createKey('fontSize', mergedSize)]: fontSize,
+          [createKey('titleFontSize', mergedSize)]: titleFontSize
         },
         common: { cubicBezierEaseInOut }
       } = themeRef.value
@@ -178,7 +180,7 @@ export default defineComponent({
       ? useThemeClass(
           'card',
           computed(() => {
-            return props.size[0]
+            return mergedSizeRef.value[0]
           }),
           cssVarsRef,
           props
@@ -215,6 +217,8 @@ export default defineComponent({
           embedded && `${mergedClsPrefix}-card--embedded`,
           {
             [`${mergedClsPrefix}-card--rtl`]: rtlEnabled,
+            [`${mergedClsPrefix}-card--content-scrollable`]:
+              this.contentScrollable,
             [`${mergedClsPrefix}-card--content${
               typeof segmented !== 'boolean' && segmented.content === 'soft'
                 ? '-soft'
@@ -290,6 +294,7 @@ export default defineComponent({
                   clsPrefix={mergedClsPrefix}
                   class={`${mergedClsPrefix}-card-header__close`}
                   onClick={this.handleCloseClick}
+                  focusable={this.closeFocusable}
                   absolute
                 />
               )}
@@ -303,17 +308,28 @@ export default defineComponent({
                 typeof content === 'function' ? [content()] : [content]
               )
             : children
-          return (
-            mergedChildren && (
+          return mergedChildren ? (
+            this.contentScrollable ? (
+              <NScrollbar
+                class={`${mergedClsPrefix}-card__content-scrollbar`}
+                contentClass={[
+                  `${mergedClsPrefix}-card-content`,
+                  this.contentClass
+                ]}
+                contentStyle={this.contentStyle}
+              >
+                {mergedChildren}
+              </NScrollbar>
+            ) : (
               <div
-                class={[`${mergedClsPrefix}-card__content`, this.contentClass]}
+                class={[`${mergedClsPrefix}-card-content`, this.contentClass]}
                 style={this.contentStyle}
                 role="none"
               >
                 {mergedChildren}
               </div>
             )
-          )
+          ) : null
         })}
         {resolveWrappedSlot($slots.footer, (children) => {
           const mergedChildren = this.footer

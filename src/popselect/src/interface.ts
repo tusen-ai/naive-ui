@@ -5,8 +5,6 @@ import type { PopselectTheme } from '../styles'
 import type { PopselectSetupProps } from './Popselect'
 import { createInjectionKey } from '../../_utils'
 
-export type PopselectSize = 'small' | 'medium' | 'large' | 'huge'
-
 export interface PopselectInjection {
   props: PopselectSetupProps
   mergedThemeRef: Ref<MergedTheme<PopselectTheme>>

@@ -1,4 +1,6 @@
+import type { PropType, VNode } from 'vue'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { MoveStrategy } from './interface'
 import type { ImagePreviewInst } from './public-types'
 import { off, on } from 'evtd'
 import { kebabCase } from 'lodash-es'
@@ -13,12 +15,10 @@ import {
   inject,
   normalizeStyle,
   onBeforeUnmount,
-  type PropType,
   ref,
   toRef,
   toRefs,
   Transition,
-  type VNode,
   vShow,
   watch,
   withDirectives
@@ -38,30 +38,21 @@ import { call, download } from '../../_utils'
 import { NTooltip } from '../../tooltip'
 import { imageLight } from '../styles'
 import { renderCloseIcon, renderNextIcon, renderPrevIcon } from './icons'
-import {
-  imageContextKey,
-  imagePreviewSharedProps,
-  type MoveStrategy
-} from './interface'
+import { imageContextKey, imagePreviewSharedProps } from './interface'
 import style from './styles/index.cssr'
 
 const BLEEDING = 32
 
 export const imagePreviewProps = {
   ...imagePreviewSharedProps,
-  src: {
-    type: String
-  },
+  src: String,
   show: {
     type: Boolean,
     default: undefined
   },
-  defaultShow: {
-    type: Boolean,
-    default: false
-  },
+  defaultShow: Boolean,
   'onUpdate:show': [Function, Array] as PropType<
-    MaybeArray<(value: boolean) => void>
+    MaybeArray<(show: boolean) => void>
   >,
   onUpdateShow: [Function, Array] as PropType<
     MaybeArray<(show: boolean) => void>
@@ -150,7 +141,6 @@ export default defineComponent({
 
     watch(mergedShowRef, (value) => {
       if (value) {
-        doUpdateShow(true)
         on('keydown', document, handleKeydown)
       }
       else {
@@ -277,17 +267,19 @@ export default defineComponent({
     function handleMouseUp(e: MouseEvent): void {
       off('mousemove', document, handleMouseMove)
       off('mouseup', document, handleMouseUp)
-      const { clientX: mouseUpClientX, clientY: mouseUpClientY } = e
       dragging = false
-      const moveStrategy = getMoveStrategy({
-        mouseUpClientX,
-        mouseUpClientY,
-        mouseDownClientX,
-        mouseDownClientY
-      })
-      const offset = getDerivedOffset(moveStrategy)
-      offsetX = offset.offsetX
-      offsetY = offset.offsetY
+      if (!props.keepDragOffset) {
+        const { clientX: mouseUpClientX, clientY: mouseUpClientY } = e
+        const moveStrategy = getMoveStrategy({
+          mouseUpClientX,
+          mouseUpClientY,
+          mouseDownClientX,
+          mouseDownClientY
+        })
+        const offset = getDerivedOffset(moveStrategy)
+        offsetX = offset.offsetX
+        offsetY = offset.offsetY
+      }
       derivePreviewStyle()
     }
     const imageContext = inject(imageContextKey, null)
@@ -326,13 +318,19 @@ export default defineComponent({
       scale = 1
       scaleExp = 0
     }
+    function resetOffset(): void {
+      offsetX = 0
+      offsetY = 0
+    }
     function handleSwitchPrev(): void {
       resetScale()
+      resetOffset()
       rotate = 0
       props.onPrev?.()
     }
     function handleSwitchNext(): void {
       resetScale()
+      resetOffset()
       rotate = 0
       props.onNext?.()
     }
@@ -531,6 +529,7 @@ export default defineComponent({
       syncTransformOrigin,
       handleAfterLeave: () => {
         resetScale()
+        resetOffset()
         rotate = 0
         displayedRef.value = false
       },

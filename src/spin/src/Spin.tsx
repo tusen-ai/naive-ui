@@ -1,22 +1,14 @@
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { SpinTheme } from '../styles'
 import { pxfy } from 'seemly'
 import { useCompitable } from 'vooks'
-import {
-  computed,
-  type CSSProperties,
-  defineComponent,
-  h,
-  type PropType,
-  ref,
-  type SlotsType,
-  Transition,
-  type VNode,
-  watchEffect
-} from 'vue'
+import { computed, defineComponent, h, ref, Transition, watchEffect } from 'vue'
 import { NBaseLoading } from '../../_internal'
+import { exposedLoadingProps } from '../../_internal/loading/src/Loading'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import { createKey, type ExtractPublicPropTypes, warnOnce } from '../../_utils'
+import { createKey, warnOnce } from '../../_utils'
 import { spinLight } from '../styles'
 import style from './styles/index.cssr'
 
@@ -31,7 +23,6 @@ export const spinProps = {
   contentClass: String,
   contentStyle: [Object, String] as PropType<CSSProperties | string>,
   description: String,
-  stroke: String,
   size: {
     type: [String, Number] as PropType<'small' | 'medium' | 'large' | number>,
     default: 'medium'
@@ -40,7 +31,6 @@ export const spinProps = {
     type: Boolean,
     default: true
   },
-  strokeWidth: Number,
   rotate: {
     type: Boolean,
     default: true
@@ -52,7 +42,9 @@ export const spinProps = {
     },
     default: undefined
   },
-  delay: Number
+  delay: Number,
+  ...exposedLoadingProps,
+  strokeWidth: Number
 }
 
 export type SpinProps = ExtractPublicPropTypes<typeof spinProps>
@@ -181,6 +173,8 @@ export default defineComponent({
           style={$slots.default ? '' : this.cssVars}
           stroke={this.stroke}
           stroke-width={this.mergedStrokeWidth}
+          radius={this.radius}
+          scale={this.scale}
           class={`${mergedClsPrefix}-spin`}
         />
         {descriptionNode}

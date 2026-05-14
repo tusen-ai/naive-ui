@@ -1,20 +1,17 @@
+import type { CSSProperties, ExtractPropTypes, PropType, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { MessageTheme } from '../styles'
 import type { MessageOptions, MessageType } from './types'
 import { createId } from 'seemly'
 import {
-  type CSSProperties,
   defineComponent,
-  type ExtractPropTypes,
   Fragment,
   h,
-  type PropType,
   provide,
   reactive,
   ref,
-  Teleport,
-  type VNodeChild
+  Teleport
 } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { omit } from '../../_utils'

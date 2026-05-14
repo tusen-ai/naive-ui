@@ -1,14 +1,8 @@
+import type { CSSProperties, PropType } from 'vue'
 import type { ModalDraggableOptions } from '../../modal/src/interface'
 // use absolute path to make sure no circular ref of style
 // this -> modal-index -> modal-style
-import {
-  type CSSProperties,
-  defineComponent,
-  h,
-  normalizeClass,
-  type PropType,
-  ref
-} from 'vue'
+import { defineComponent, h, normalizeClass, ref } from 'vue'
 import { keep } from '../../_utils'
 import NModal from '../../modal/src/Modal'
 import { NDialog } from './Dialog'

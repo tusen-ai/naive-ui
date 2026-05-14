@@ -8,26 +8,10 @@ import { c, cB, cE, cM } from '../../../_utils/cssr'
 // --n-x-gap
 // --n-y-gap
 // --n-rect-size
-// --n-loading-color-start
-// --n-loading-color-end
 // --n-rect-color (for individual rect background color)
 // --n-bezier
 
 export default c([
-  c('@keyframes heatmap-loading', `
-    0% {
-      background: var(--n-loading-color-start);
-    }
-    40% {
-      background: var(--n-loading-color-end);
-    }
-    80% {
-      background: var(--n-loading-color-start);
-    }
-    100% {
-      background: var(--n-loading-color-start);
-    }
-  `),
   cB('heatmap', `
     display: flex;
     flex-direction: column;
@@ -82,32 +66,21 @@ export default c([
       transition: color .3s var(--n-bezier);
     `),
     cE('empty-cell', `
-      width: calc(var(--n-rect-size) + 1px);
-      height: calc(var(--n-rect-size) + 1px);
-    `),
-    cE('loading-cell', `
-      width: calc(var(--n-rect-size) + 1px);
-      height: calc(var(--n-rect-size) + 1px);
+      width: var(--n-rect-size);
+      height: var(--n-rect-size);
       border-radius: var(--n-border-radius);
-      animation: 2s heatmap-loading infinite cubic-bezier(0.36, 0, 0.64, 1);
-      background: var(--n-loading-color-start);
     `),
     cE('footer', `
       display: flex;
       justify-content: space-between;
+      margin-left: 17px;
       align-items: center;
       margin-top: 8px;
       &:has(> :only-child) {
         justify-content: flex-end;
       }
     `),
-    cE('footer__info', `
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      margin-left: 27px;
-    `),
-    cE('footer__indicator', `
+    cE('indicator', `
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -117,13 +90,12 @@ export default c([
     width: var(--n-rect-size);
     height: var(--n-rect-size);
     border-radius: var(--n-border-radius);
-    transition: all 0.1s ease-in-out;
     background-color: var(--n-rect-color);
+    transition: background-color .3s var(--n-bezier);
   `, [
     cM('loading', `
       cursor: default;
-      animation: 2s heatmap-loading infinite cubic-bezier(0.36, 0, 0.64, 1);
-      background: var(--n-loading-color-start) !important;
+      background: var(--n-loading-color-start);
     `)
   ]),
   cB('heatmap-color-indicator', `
@@ -135,12 +107,13 @@ export default c([
   `, [
     cE('cells', `
       display: flex;
-      gap: 2px;
+      gap: var(--n-x-gap);
     `),
     cE('cell', `
       width: var(--n-rect-size);
       height: var(--n-rect-size);
       border-radius: var(--n-border-radius);
+      transition: background-color .3s var(--n-bezier);
     `),
     cE('label', `
       font-size: var(--n-font-size);

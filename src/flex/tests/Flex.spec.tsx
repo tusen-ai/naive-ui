@@ -1,4 +1,5 @@
-import { mount, type VueWrapper } from '@vue/test-utils'
+import type { VueWrapper } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { createCommentVNode, Fragment, h } from 'vue'
 import { NFlex } from '../index'
 
@@ -17,7 +18,7 @@ describe('n-flex', () => {
         return <NFlex />
       }
     })
-    expect(wrapper.find('.n-flex')).not.toBe(null)
+    expect(wrapper.find('.n-flex').exists()).toBe(false)
     expect(wrapper.html()).toMatchSnapshot()
     wrapper.unmount()
   })

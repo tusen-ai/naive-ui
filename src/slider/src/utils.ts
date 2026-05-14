@@ -1,4 +1,5 @@
-import { type ComponentPublicInstance, onBeforeUpdate } from 'vue'
+import type { ComponentPublicInstance } from 'vue'
+import { onBeforeUpdate } from 'vue'
 
 export function isTouchEvent(e: MouseEvent | TouchEvent): e is TouchEvent {
   return window.TouchEvent && e instanceof window.TouchEvent

@@ -1,3 +1,4 @@
+import type { PropType } from 'vue'
 import type { OffsetTarget } from './utils'
 import { unwrapElement } from 'seemly'
 import { onFontsReady } from 'vooks'
@@ -8,7 +9,6 @@ import {
   nextTick,
   onBeforeUnmount,
   onMounted,
-  type PropType,
   provide,
   ref,
   toRef,

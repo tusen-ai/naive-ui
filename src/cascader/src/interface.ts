@@ -1,8 +1,10 @@
 import type { CheckStrategy, TreeNode } from 'treemate'
 import type { CSSProperties, Ref, Slots, VNode, VNodeChild } from 'vue'
+import type { ScrollbarProps } from '../../_internal'
 import type { MergedTheme } from '../../_mixins'
 import type { NLocale } from '../../locales'
 import type { CascaderTheme } from '../styles'
+import type { CascaderSpinProps } from './public-types'
 import { createInjectionKey } from '../../_utils'
 
 export type ValueAtom = string | number
@@ -31,20 +33,20 @@ export type Filter = (
 export type OnLoad = (option: CascaderOption) => Promise<void>
 
 export type OnUpdateValue = (
-  value: string &
-    number &
-    string[] &
-    number[] &
-    Array<string | number> &
-    (string | null) &
-    (number | null) &
-    (string[] | null) &
-    (number[] | null) &
-    (Array<string | number> | null),
-  option: null &
-    CascaderOption &
-    CascaderOption[] &
-    Array<CascaderOption | null>,
+  value: string
+    & number
+    & string[]
+    & number[]
+    & Array<string | number>
+    & (string | null)
+    & (number | null)
+    & (string[] | null)
+    & (number[] | null)
+    & (Array<string | number> | null),
+  option: null
+    & CascaderOption
+    & CascaderOption[]
+    & Array<CascaderOption | null>,
   path: null & CascaderOption[] & Array<CascaderOption[] | null>
 ) => void
 
@@ -112,6 +114,8 @@ export interface CascaderInjection {
   renderLabelRef: Ref<
     ((option: CascaderOption, checked: boolean) => VNodeChild) | undefined
   >
+  spinPropsRef: Ref<CascaderSpinProps | undefined>
+  scrollbarPropsRef: Ref<ScrollbarProps | undefined>
   clearPattern: () => void
 }
 

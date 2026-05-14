@@ -1,5 +1,7 @@
+import type { CSSProperties, PropType } from 'vue'
 import type { ProgressGradient, ProgressStatus } from './public-types'
-import { type CSSProperties, defineComponent, h, type PropType } from 'vue'
+import { hash } from 'css-render'
+import { computed, defineComponent, h } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import {
   ErrorIcon,
@@ -61,6 +63,14 @@ export default defineComponent({
     }
   },
   setup(props, { slots }) {
+    const gradientIdRef = computed(() => {
+      const base = 'gradient'
+      const { fillColor } = props
+      if (typeof fillColor === 'object') {
+        return `${base}-${hash(JSON.stringify(fillColor))}`
+      }
+      return base
+    })
     function getPathStyles(
       percent: number,
       offsetDegree: number,
@@ -83,9 +93,9 @@ export default defineComponent({
           type === 'rail'
             ? (strokeColor as string)
             : typeof props.fillColor === 'object'
-              ? 'url(#gradient)'
+              ? `url(#${gradientIdRef.value})`
               : (strokeColor as string),
-        strokeDasharray: `${(percent / 100) * (len - gapDegree)}px ${
+        strokeDasharray: `${(Math.min(percent, 100) / 100) * (len - gapDegree)}px ${
           viewBoxWidth * 8
         }px`,
         strokeDashoffset: `-${gapDegree / 2}px`,
@@ -105,7 +115,13 @@ export default defineComponent({
       return (
         isGradient && (
           <defs>
-            <linearGradient id="gradient" x1="0%" y1="100%" x2="100%" y2="0%">
+            <linearGradient
+              id={gradientIdRef.value}
+              x1="0%"
+              y1="100%"
+              x2="100%"
+              y2="0%"
+            >
               <stop offset="0%" stop-color={from} />
               <stop offset="100%" stop-color={to} />
             </linearGradient>

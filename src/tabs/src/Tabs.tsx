@@ -1,3 +1,13 @@
+import type {
+  ComponentPublicInstance,
+  CSSProperties,
+  ExtractPropTypes,
+  PropType,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
+import type { VXScrollInst } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { TabsTheme } from '../styles'
@@ -11,34 +21,28 @@ import type {
   TabsInst,
   TabsType
 } from './interface'
+import type { TabsSize } from './public-types'
 import type { tabPaneProps } from './TabPane'
-import { throttle } from 'lodash-es'
+import { throttle as _throttle } from 'lodash-es'
 import { depx, getPadding } from 'seemly'
 import { onFontsReady, useCompitable, useMergedState } from 'vooks'
 import {
   cloneVNode,
-  type ComponentPublicInstance,
   computed,
-  type CSSProperties,
   defineComponent,
-  type ExtractPropTypes,
   h,
   nextTick,
   onMounted,
-  type PropType,
   provide,
   ref,
-  type SlotsType,
   toRef,
   TransitionGroup,
-  type VNode,
-  type VNodeChild,
   vShow,
   watch,
   watchEffect,
   withDirectives
 } from 'vue'
-import { VResizeObserver, VXScroll, type VXScrollInst } from 'vueuc'
+import { VResizeObserver, VXScroll } from 'vueuc'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import {
   call,
@@ -51,6 +55,9 @@ import { tabsLight } from '../styles'
 import { tabsInjectionKey } from './interface'
 import style from './styles/index.cssr'
 import Tab from './Tab'
+
+// Fix vue-tsc error
+const throttle: <T>(f: T, t: number) => T = _throttle
 
 type TabPaneProps = ExtractPropTypes<typeof tabPaneProps> & {
   'display-directive': 'if' | 'show' | 'show:lazy'
@@ -77,10 +84,7 @@ export const tabsProps = {
     | 'start'
     | 'end'
   >,
-  size: {
-    type: String as PropType<'small' | 'medium' | 'large'>,
-    default: 'medium'
-  },
+  size: String as PropType<TabsSize>,
   placement: {
     type: String as PropType<'top' | 'left' | 'right' | 'bottom'>,
     default: 'top'
@@ -106,7 +110,7 @@ export const tabsProps = {
   onUpdateValue: [Function, Array] as PropType<MaybeArray<OnUpdateValue>>,
   onClose: [Function, Array] as PropType<MaybeArray<OnClose>>,
   // deprecated
-  labelSize: String as PropType<'small' | 'medium' | 'large'>,
+  labelSize: String as PropType<TabsSize>,
   activeName: [String, Number] as PropType<string | number>,
   onActiveNameChange: [Function, Array] as PropType<
     MaybeArray<(value: string & number) => void>
@@ -149,7 +153,8 @@ export default defineComponent({
       })
     }
 
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedComponentPropsRef }
+      = useConfig(props)
     const themeRef = useTheme(
       'Tabs',
       '-tabs',
@@ -172,6 +177,16 @@ export default defineComponent({
     const endReachedRef = ref(true)
 
     const compitableSizeRef = useCompitable(props, ['labelSize', 'size'])
+    const mergedSizeRef = computed(() => {
+      if (compitableSizeRef.value)
+        return compitableSizeRef.value
+
+      const configSize = mergedComponentPropsRef?.value?.Tabs?.size
+      if (configSize)
+        return configSize
+
+      return 'medium'
+    })
     const compitableValueRef = useCompitable(props, ['activeName', 'value'])
     const uncontrolledValueRef = ref(
       compitableValueRef.value
@@ -524,7 +539,10 @@ export default defineComponent({
         )
       }
     }
-    const handleNavResize = throttle(_handleNavResize, 64)
+    const handleNavResize: (entry: ResizeObserverEntry) => void = throttle(
+      _handleNavResize,
+      64
+    )
     watch([() => props.justifyContent, () => props.size], () => {
       void nextTick(() => {
         const { type } = props
@@ -580,7 +598,10 @@ export default defineComponent({
         (xScrollInstRef.value?.$el as undefined | HTMLElement) || null
       )
     }
-    const handleTabsResize = throttle(_handleTabsResize, 64)
+    const handleTabsResize: (entry: ResizeObserverEntry) => void = throttle(
+      _handleTabsResize,
+      64
+    )
 
     function handleAdd(): void {
       const { onAdd } = props
@@ -615,7 +636,7 @@ export default defineComponent({
       }
     }
 
-    const handleScroll = throttle((e: Event) => {
+    const handleScroll: (e: Event) => void = throttle((e: Event) => {
       deriveScrollShadow(e.target as HTMLElement)
     }, 64)
     provide(tabsInjectionKey, {
@@ -676,7 +697,7 @@ export default defineComponent({
     }
 
     const cssVarsRef = computed(() => {
-      const { value: size } = compitableSizeRef
+      const { value: size } = mergedSizeRef
       const { type } = props
       const typeSuffix = (
         {
@@ -760,7 +781,7 @@ export default defineComponent({
       ? useThemeClass(
           'tabs',
           computed(() => {
-            return `${compitableSizeRef.value[0]}${props.type[0]}`
+            return `${mergedSizeRef.value[0]}${props.type[0]}`
           }),
           cssVarsRef,
           props
@@ -781,7 +802,7 @@ export default defineComponent({
       addTabFixed: addTabFixedRef,
       tabWrapperStyle: tabWrapperStyleRef,
       handleNavResize,
-      mergedSize: compitableSizeRef,
+      mergedSize: mergedSizeRef,
       handleScroll,
       handleTabsResize,
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
@@ -1045,30 +1066,30 @@ export default defineComponent({
           )}
         </div>
         {showPane
-        && (this.animated
-          && (resolvedPlacement === 'top' || resolvedPlacement === 'bottom') ? (
-              <div
-                ref="tabsPaneWrapperRef"
-                style={paneWrapperStyle}
-                class={[`${mergedClsPrefix}-tabs-pane-wrapper`, paneWrapperClass]}
-              >
-                {filterMapTabPanes(
+          && (this.animated
+            && (resolvedPlacement === 'top' || resolvedPlacement === 'bottom') ? (
+                <div
+                  ref="tabsPaneWrapperRef"
+                  style={paneWrapperStyle}
+                  class={[`${mergedClsPrefix}-tabs-pane-wrapper`, paneWrapperClass]}
+                >
+                  {filterMapTabPanes(
+                    tabPaneChildren,
+                    this.mergedValue,
+                    this.renderedNames,
+                    this.onAnimationBeforeLeave,
+                    this.onAnimationEnter,
+                    this.onAnimationAfterEnter,
+                    this.animationDirection
+                  )}
+                </div>
+              ) : (
+                filterMapTabPanes(
                   tabPaneChildren,
                   this.mergedValue,
-                  this.renderedNames,
-                  this.onAnimationBeforeLeave,
-                  this.onAnimationEnter,
-                  this.onAnimationAfterEnter,
-                  this.animationDirection
-                )}
-              </div>
-            ) : (
-              filterMapTabPanes(
-                tabPaneChildren,
-                this.mergedValue,
-                this.renderedNames
-              )
-            ))}
+                  this.renderedNames
+                )
+              ))}
       </div>
     )
   }

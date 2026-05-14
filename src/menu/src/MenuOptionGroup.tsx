@@ -1,13 +1,6 @@
+import type { PropType } from 'vue'
 import type { TmNode } from './interface'
-import {
-  computed,
-  defineComponent,
-  Fragment,
-  h,
-  inject,
-  type PropType,
-  provide
-} from 'vue'
+import { computed, defineComponent, Fragment, h, inject, provide } from 'vue'
 import { keysOf, render } from '../../_utils'
 import { menuInjectionKey, menuItemGroupInjectionKey } from './context'
 

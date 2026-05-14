@@ -1,5 +1,11 @@
 import type { PropType, VNode, VNodeChild } from 'vue'
 import type { VirtualListInst } from 'vueuc'
+import type {
+  ColumnKey,
+  TableBaseColumn,
+  TableColumnGroup,
+  TableExpandColumn
+} from '../interface'
 import type { ColItem, RowItem } from '../use-group-header'
 import { happensIn, pxfy } from 'seemly'
 import { defineComponent, Fragment, h, inject, ref } from 'vue'
@@ -10,13 +16,7 @@ import { NEllipsis } from '../../../ellipsis'
 import FilterButton from '../HeaderButton/FilterButton'
 import ResizeButton from '../HeaderButton/ResizeButton'
 import SortButton from '../HeaderButton/SortButton'
-import {
-  type ColumnKey,
-  dataTableInjectionKey,
-  type TableBaseColumn,
-  type TableColumnGroup,
-  type TableExpandColumn
-} from '../interface'
+import { dataTableInjectionKey } from '../interface'
 import {
   clampValueFollowCSSRules,
   createNextSorter,

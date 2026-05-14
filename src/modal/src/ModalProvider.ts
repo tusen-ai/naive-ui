@@ -3,7 +3,8 @@ import type {
   DefineComponent,
   ExtractPropTypes,
   PropType,
-  Ref
+  Ref,
+  VNodeChild
 } from 'vue'
 import type { ExtractPublicPropTypes, Mutable } from '../../_utils'
 import type { modalProps } from './Modal'
@@ -22,6 +23,7 @@ export type ModalOptions = Mutable<
   Omit<Partial<ExtractPropTypes<typeof modalProps>>, 'internalStyle'> & {
     class?: any
     style?: string | CSSProperties
+    render?: () => VNodeChild
   }
 >
 
@@ -121,7 +123,7 @@ export const NModalProvider: DefineComponent<{ to?: string | HTMLElement }>
         this.modalList.map(modal =>
           h(
             NModalEnvironment,
-            omit(modal, ['destroy'], {
+            omit(modal, ['destroy', 'render'], {
               to: modal.to ?? this.to,
               ref: ((inst: ModalInst | null) => {
                 if (inst === null) {
@@ -133,7 +135,10 @@ export const NModalProvider: DefineComponent<{ to?: string | HTMLElement }>
               }) as any,
               internalKey: modal.key,
               onInternalAfterLeave: this.handleAfterLeave
-            })
+            }),
+            {
+              default: modal.render
+            }
           )
         ),
         this.$slots.default?.()

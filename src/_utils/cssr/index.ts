@@ -1,5 +1,6 @@
+import type { CNode, CProperties } from 'css-render'
 import { plugin as BemPlugin } from '@css-render/plugin-bem'
-import { type CNode, type CProperties, CssRender } from 'css-render'
+import { CssRender } from 'css-render'
 
 const namespace = 'n'
 const prefix = `.${namespace}-`
