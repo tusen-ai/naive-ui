@@ -318,7 +318,7 @@ export default defineComponent({
                 ]}
                 contentStyle={this.contentStyle}
               >
-                {mergedChildren}
+                {{ default: () => mergedChildren }}
               </NScrollbar>
             ) : (
               <div

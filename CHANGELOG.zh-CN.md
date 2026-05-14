@@ -24,6 +24,7 @@
 ### Fixes
 
 - 修复 `n-config-provider` 部分组件的 `size` 全局配置不生效
+- 修复 `n-card` 开启 `content-scrollable` 时内部 scrollbar 触发 Non-function value encountered for default slot 的vue警告，关闭 [#7556](https://github.com/tusen-ai/naive-ui/issues/7556)
 
 ## 2.44.0
 
