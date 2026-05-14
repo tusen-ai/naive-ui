@@ -1,5 +1,5 @@
 import type { TreeNode } from 'treemate'
-import type { CSSProperties, PropType, WatchStopHandle } from 'vue'
+import type { PropType, WatchStopHandle } from 'vue'
 import type { VirtualListInst } from 'vueuc'
 import type { ThemeProps } from '../../../_mixins'
 import type {
@@ -482,7 +482,7 @@ export default defineComponent({
           themeClass,
           this.multiple && `${clsPrefix}-base-select-menu--multiple`
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
         onFocusin={this.handleFocusin}
         onFocusout={this.handleFocusout}
         onKeyup={this.handleKeyUp}

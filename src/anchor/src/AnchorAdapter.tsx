@@ -1,4 +1,3 @@
-import type { CSSProperties } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { AnchorTheme } from '../styles'
@@ -83,11 +82,7 @@ export default defineComponent({
         return (
           <NBaseAnchor
             ref={anchorRef}
-            style={
-              inlineThemeDisabled
-                ? undefined
-                : (cssVarsRef.value as CSSProperties)
-            }
+            style={inlineThemeDisabled ? undefined : cssVarsRef.value}
             class={themeClassHandle?.themeClass.value}
             {...keep(props, baseAnchorPropKeys)}
             mergedClsPrefix={mergedClsPrefixRef.value}

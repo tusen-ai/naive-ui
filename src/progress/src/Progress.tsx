@@ -188,7 +188,7 @@ export default defineComponent({
           `${mergedClsPrefix}-progress--${type}`,
           `${mergedClsPrefix}-progress--${status}`
         ]}
-        style={cssVars as CSSProperties}
+        style={cssVars}
         aria-valuemax={100}
         aria-valuemin={0}
         aria-valuenow={percentage as number}

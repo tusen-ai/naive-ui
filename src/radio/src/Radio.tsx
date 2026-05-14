@@ -1,4 +1,3 @@
-import type { CSSProperties } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { RadioTheme } from '../styles'
@@ -108,7 +107,7 @@ export default defineComponent({
           this.renderSafeChecked && `${mergedClsPrefix}-radio--checked`,
           this.focus && `${mergedClsPrefix}-radio--focus`
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         <div class={`${mergedClsPrefix}-radio__dot-wrapper`}>
           &nbsp;

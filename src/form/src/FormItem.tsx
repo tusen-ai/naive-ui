@@ -610,7 +610,7 @@ export default defineComponent({
           && `${mergedClsPrefix}-form-item--auto-label-width`,
           !mergedShowLabel && `${mergedClsPrefix}-form-item--no-label`
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         {mergedShowLabel && renderLabel()}
         <div

@@ -950,7 +950,7 @@ export default defineComponent({
           mergedJustifyContent && `${mergedClsPrefix}-tabs--flex`,
           `${mergedClsPrefix}-tabs--${resolvedPlacement}`
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         <div
           class={[

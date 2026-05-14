@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType } from 'vue'
+import type { PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { TypographyTheme } from '../styles'
@@ -111,11 +111,11 @@ export default defineComponent({
     ]
     const children = this.$slots.default?.()
     return this.code ? (
-      <code class={textClass} style={this.cssVars as CSSProperties}>
+      <code class={textClass} style={this.cssVars}>
         {this.delete ? <del>{children}</del> : children}
       </code>
     ) : this.delete ? (
-      <del class={textClass} style={this.cssVars as CSSProperties}>
+      <del class={textClass} style={this.cssVars}>
         {children}
       </del>
     ) : (

@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ResultTheme } from '../styles'
@@ -133,7 +133,7 @@ export default defineComponent({
     return (
       <div
         class={[`${mergedClsPrefix}-result`, this.themeClass]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         <div class={`${mergedClsPrefix}-result-icon`}>
           {$slots.icon?.() || (

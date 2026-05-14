@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType } from 'vue'
+import type { PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { LegacyTransferTheme } from '../styles'
@@ -299,7 +299,7 @@ export default defineComponent({
           this.mergedDisabled && `${mergedClsPrefix}-legacy-transfer--disabled`,
           this.filterable && `${mergedClsPrefix}-legacy-transfer--filterable`
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         <div class={`${mergedClsPrefix}-legacy-transfer-list`}>
           <NTransferHeader

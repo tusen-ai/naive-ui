@@ -1,6 +1,5 @@
 import type {
   ButtonHTMLAttributes,
-  CSSProperties,
   ExtractPropTypes,
   PropType,
   SlotsType,
@@ -610,7 +609,7 @@ const Button = defineComponent({
         ]}
         tabindex={this.mergedFocusable ? 0 : -1}
         type={this.attrType}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
         disabled={this.disabled}
         onClick={this.handleClick}
         onBlur={this.handleBlur}
@@ -667,14 +666,14 @@ const Button = defineComponent({
           <div
             aria-hidden
             class={`${mergedClsPrefix}-button__border`}
-            style={this.customColorCssVars as CSSProperties}
+            style={this.customColorCssVars}
           />
         ) : null}
         {this.showBorder ? (
           <div
             aria-hidden
             class={`${mergedClsPrefix}-button__state-border`}
-            style={this.customColorCssVars as CSSProperties}
+            style={this.customColorCssVars}
           />
         ) : null}
       </Component>

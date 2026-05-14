@@ -1,6 +1,5 @@
 import type { CheckStrategy } from 'treemate'
 import type {
-  CSSProperties,
   HTMLAttributes,
   PropType,
   SlotsType,
@@ -993,10 +992,7 @@ export default defineComponent({
                                 this.themeClass
                               ]}
                               ref="menuElRef"
-                              style={[
-                                menuProps?.style || '',
-                                this.cssVars as CSSProperties
-                              ]}
+                              style={[menuProps?.style || '', this.cssVars]}
                               tabindex={0}
                               onMousedown={this.handleMenuMousedown}
                               onKeydown={this.handleKeydown}

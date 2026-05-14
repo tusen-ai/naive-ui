@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType, VNodeChild } from 'vue'
+import type { PropType, VNodeChild } from 'vue'
 import { getPadding } from 'seemly'
 import { computed, defineComponent, h, inject } from 'vue'
 import { NBaseClose, NBaseIcon } from '../../_internal'
@@ -160,7 +160,7 @@ export const Notification = defineComponent({
         class={[`${mergedClsPrefix}-notification-wrapper`, this.themeClass]}
         onMouseenter={this.onMouseenter}
         onMouseleave={this.onMouseleave}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         <div
           class={[
@@ -172,7 +172,7 @@ export const Notification = defineComponent({
               [`${mergedClsPrefix}-notification--show-avatar`]: this.showAvatar
             }
           ]}
-          style={this.cssVars as CSSProperties}
+          style={this.cssVars}
         >
           {this.showAvatar ? (
             <div class={`${mergedClsPrefix}-notification__avatar`}>

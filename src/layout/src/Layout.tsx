@@ -150,7 +150,7 @@ export function createLayoutComponent(isContent: boolean) {
         `${mergedClsPrefix}-layout--${this.position}-positioned`
       ]
       return (
-        <div class={layoutClass} style={this.cssVars as CSSProperties}>
+        <div class={layoutClass} style={this.cssVars}>
           {this.nativeScrollbar ? (
             <div
               ref="scrollableElRef"

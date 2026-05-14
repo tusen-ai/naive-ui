@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type { PropType, SlotsType, VNode, VNodeChild } from 'vue'
 import type { ScrollbarProps } from '../../_internal/scrollbar/src/Scrollbar'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
@@ -617,7 +617,7 @@ export default defineComponent({
           disabled && `${mergedClsPrefix}-pagination--disabled`,
           simple && `${mergedClsPrefix}-pagination--simple`
         ]}
-        style={cssVars as CSSProperties}
+        style={cssVars}
       >
         {renderPrefix ? (
           <div class={`${mergedClsPrefix}-pagination-prefix`}>

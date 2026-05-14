@@ -1,4 +1,4 @@
-import type { CSSProperties, SlotsType, VNode } from 'vue'
+import type { SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { DialogTheme } from '../styles'
 import { getMargin } from 'seemly'
@@ -270,7 +270,7 @@ export const NDialog = defineComponent({
           bordered && `${mergedClsPrefix}-dialog--bordered`,
           this.rtlEnabled && `${mergedClsPrefix}-dialog--rtl`
         ]}
-        style={cssVars as CSSProperties}
+        style={cssVars}
         role="dialog"
       >
         {closable

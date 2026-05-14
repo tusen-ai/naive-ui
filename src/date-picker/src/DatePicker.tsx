@@ -1,10 +1,4 @@
-import type {
-  CSSProperties,
-  ExtractPropTypes,
-  Ref,
-  SlotsType,
-  VNode
-} from 'vue'
+import type { ExtractPropTypes, Ref, SlotsType, StyleValue, VNode } from 'vue'
 import type { InputInst, InputProps } from '../../input'
 import type { TimePickerSize } from '../../time-picker/src/public-types'
 import type {
@@ -973,7 +967,7 @@ export default defineComponent({
     const { clearable, triggerOnRender, mergedClsPrefix, $slots } = this
     const commonPanelProps: UsePanelCommonProps & {
       ref: string
-      style: CSSProperties
+      style: StyleValue
     } = {
       onUpdateValue: this.handlePanelUpdateValue,
       onTabOut: this.handlePanelTabOut,
@@ -986,7 +980,7 @@ export default defineComponent({
       active: this.mergedShow,
       actions: this.actions,
       shortcuts: this.shortcuts,
-      style: this.cssVars as CSSProperties,
+      style: this.cssVars,
       defaultTime: this.defaultTime,
       themeClass: this.themeClass,
       panel: this.panel,
@@ -1077,7 +1071,7 @@ export default defineComponent({
           this.isRange && `${mergedClsPrefix}-date-picker--range`,
           this.triggerThemeClass
         ]}
-        style={this.triggerCssVars as CSSProperties}
+        style={this.triggerCssVars}
         onKeydown={this.handleKeydown}
       >
         <VBinder>

@@ -160,7 +160,7 @@ export default defineComponent({
             `${mergedClsPrefix}-spin`,
             rotate && `${mergedClsPrefix}-spin--rotate`
           ]}
-          style={$slots.default ? '' : (this.cssVars as CSSProperties)}
+          style={$slots.default ? '' : this.cssVars}
         >
           {$slots.icon()}
         </div>
@@ -170,7 +170,7 @@ export default defineComponent({
       <div class={[`${mergedClsPrefix}-spin-body`, this.themeClass]}>
         <NBaseLoading
           clsPrefix={mergedClsPrefix}
-          style={$slots.default ? '' : (this.cssVars as CSSProperties)}
+          style={$slots.default ? '' : this.cssVars}
           stroke={this.stroke}
           stroke-width={this.mergedStrokeWidth}
           radius={this.radius}
@@ -184,7 +184,7 @@ export default defineComponent({
     return $slots.default ? (
       <div
         class={[`${mergedClsPrefix}-spin-container`, this.themeClass]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         <div
           class={[

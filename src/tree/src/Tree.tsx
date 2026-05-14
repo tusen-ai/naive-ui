@@ -1,5 +1,5 @@
 import type { CheckStrategy, TreeMateOptions } from 'treemate'
-import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type { PropType, SlotsType, VNode, VNodeChild } from 'vue'
 import type { VirtualListInst, VirtualListScrollToOptions } from 'vueuc'
 import type { ScrollbarInst } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
@@ -1825,7 +1825,7 @@ export default defineComponent({
                   paddingBottom={padding.bottom}
                   class={this.themeClass}
                   style={[
-                    this.cssVars as CSSProperties,
+                    this.cssVars,
                     {
                       paddingLeft: padding.left,
                       paddingRight: padding.right
@@ -1858,7 +1858,7 @@ export default defineComponent({
           tabindex={tabindex}
           onKeydown={mergedFocusable ? handleKeydown : undefined}
           onFocusout={mergedFocusable ? handleFocusout : undefined}
-          style={this.cssVars as CSSProperties}
+          style={this.cssVars}
           contentStyle={{ padding: this.internalScrollablePadding }}
         >
           {{
@@ -1880,7 +1880,7 @@ export default defineComponent({
           class={treeClass}
           tabindex={tabindex}
           ref="selfElRef"
-          style={this.cssVars as CSSProperties}
+          style={this.cssVars}
           onKeydown={mergedFocusable ? handleKeydown : undefined}
           onFocusout={mergedFocusable ? handleFocusout : undefined}
           onDragleave={draggable ? this.handleDragLeaveTree : undefined}

@@ -21,7 +21,10 @@ function getSingleDefaultTime(timestamp: number): string {
   }
 }
 
-function getRangeDefaultTime(timestamp: number, position: 'start' | 'end'): string {
+function getRangeDefaultTime(
+  timestamp: number,
+  position: 'start' | 'end'
+): string {
   const now = new Date()
 
   if (position === 'start') {

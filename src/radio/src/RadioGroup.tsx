@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType, VNode, VNodeChild } from 'vue'
+import type { PropType, VNode, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { RadioTheme } from '../styles'
@@ -255,7 +255,7 @@ export default defineComponent({
           this.themeClass,
           isButtonGroup && `${mergedClsPrefix}-radio-group--button-group`
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         {children}
       </div>

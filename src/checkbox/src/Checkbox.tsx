@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType } from 'vue'
+import type { PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CheckboxTheme } from '../styles'
@@ -362,7 +362,7 @@ export default defineComponent({
         role="checkbox"
         aria-checked={indeterminate ? 'mixed' : renderedChecked}
         aria-labelledby={labelId}
-        style={cssVars as CSSProperties}
+        style={cssVars}
         onKeyup={handleKeyUp}
         onKeydown={handleKeyDown}
         onClick={handleClick}

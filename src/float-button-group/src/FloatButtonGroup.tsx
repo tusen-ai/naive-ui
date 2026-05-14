@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType, Ref } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { FloatButtonGroupTheme } from '../styles/light'
@@ -90,7 +90,7 @@ export default defineComponent({
           `${mergedClsPrefix}-float-button-group`,
           `${mergedClsPrefix}-float-button-group--${shape}-shape`
         ]}
-        style={cssVars as CSSProperties}
+        style={cssVars}
         role="group"
       >
         {this.$slots}

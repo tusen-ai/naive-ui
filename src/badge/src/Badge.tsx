@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType } from 'vue'
+import type { PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { BadgeTheme } from '../styles'
@@ -154,7 +154,7 @@ export default defineComponent({
             [`${mergedClsPrefix}-badge--as-is`]: !children
           }
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         {children}
         <Transition

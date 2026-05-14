@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType, VNodeChild } from 'vue'
+import type { PropType, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { TransferTheme } from '../styles'
@@ -306,7 +306,7 @@ export default defineComponent({
           `${mergedClsPrefix}-transfer`,
           this.mergedDisabled && `${mergedClsPrefix}-transfer--disabled`
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         <div
           class={`${mergedClsPrefix}-transfer-list ${mergedClsPrefix}-transfer-list--source`}

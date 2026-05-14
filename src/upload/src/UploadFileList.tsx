@@ -1,4 +1,4 @@
-import type { CSSProperties, VNode } from 'vue'
+import type { VNode } from 'vue'
 import { computed, defineComponent, h, inject } from 'vue'
 import { NFadeInExpandTransition } from '../../_internal'
 import { throwError } from '../../_utils'
@@ -74,7 +74,7 @@ export default defineComponent({
           ]}
           style={[
             abstract && cssVarsRef ? cssVarsRef.value : '',
-            fileListStyleRef.value as CSSProperties
+            fileListStyleRef.value
           ]}
         >
           {renderUploadFileList()}

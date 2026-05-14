@@ -1,4 +1,4 @@
-import type { CSSProperties, InputHTMLAttributes, PropType, VNode } from 'vue'
+import type { InputHTMLAttributes, PropType, VNode } from 'vue'
 import type { VOverflowInst } from 'vueuc'
 import type { ThemeProps } from '../../../_mixins'
 import type { FormValidationStatus } from '../../../form/src/public-types'
@@ -984,7 +984,7 @@ export default defineComponent({
             [`${clsPrefix}-base-selection--focus`]: this.focused
           }
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
         onClick={this.onClick}
         onMouseenter={this.handleMouseEnter}
         onMouseleave={this.handleMouseLeave}

@@ -1,6 +1,5 @@
 import type { TreeNode } from 'treemate'
 import type {
-  CSSProperties,
   HTMLAttributes,
   InputHTMLAttributes,
   PropType,
@@ -468,10 +467,7 @@ export default defineComponent({
                                 this.themeClass,
                                 menuProps?.class
                               ]}
-                              style={[
-                                menuProps?.style,
-                                this.cssVars as CSSProperties
-                              ]}
+                              style={[menuProps?.style, this.cssVars]}
                               treeMate={this.treeMate}
                               multiple={false}
                               renderLabel={this.renderLabel}

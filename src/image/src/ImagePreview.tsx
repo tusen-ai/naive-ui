@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType, VNode } from 'vue'
+import type { PropType, VNode } from 'vue'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { MoveStrategy } from './interface'
 import type { ImagePreviewInst } from './public-types'
@@ -641,7 +641,7 @@ export default defineComponent({
                     `${clsPrefix}-image-preview-container`,
                     this.themeClass
                   ]}
-                  style={this.cssVars as CSSProperties}
+                  style={this.cssVars}
                   onWheel={this.handleWheel}
                 >
                   <Transition name="fade-in-transition" appear={this.appear}>

@@ -249,7 +249,7 @@ export default defineComponent({
           `${this.mergedClsPrefix}-split--${this.direction}`,
           this.themeClass
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         <div
           class={[`${this.mergedClsPrefix}-split-pane-1`, this.pane1Class]}

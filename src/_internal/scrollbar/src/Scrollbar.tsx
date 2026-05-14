@@ -1,4 +1,10 @@
-import type { CSSProperties, HTMLAttributes, PropType, VNode } from 'vue'
+import type {
+  CSSProperties,
+  HTMLAttributes,
+  PropType,
+  StyleValue,
+  VNode
+} from 'vue'
 import type { ThemeProps } from '../../../_mixins'
 import type {
   ExtractInternalPropTypes,
@@ -824,7 +830,7 @@ const Scrollbar = defineComponent({
     const triggerIsNone = this.trigger === 'none'
     const createYRail = (
       className: string | undefined,
-      style: CSSProperties | undefined
+      style?: StyleValue
     ): VNode => {
       return (
         <div
@@ -836,7 +842,7 @@ const Scrollbar = defineComponent({
             className
           ]}
           data-scrollbar-rail
-          style={[style || '', this.verticalRailStyle as CSSProperties]}
+          style={[style, this.verticalRailStyle]}
           aria-hidden
         >
           {h(

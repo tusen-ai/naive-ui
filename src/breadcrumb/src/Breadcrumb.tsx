@@ -1,4 +1,4 @@
-import type { CSSProperties, Ref } from 'vue'
+import type { Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { BreadcrumbTheme } from '../styles'
@@ -90,7 +90,7 @@ export default defineComponent({
     return (
       <nav
         class={[`${this.mergedClsPrefix}-breadcrumb`, this.themeClass]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
         aria-label="Breadcrumb"
       >
         <ul>{this.$slots}</ul>

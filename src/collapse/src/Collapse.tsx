@@ -1,11 +1,4 @@
-import type {
-  CSSProperties,
-  ExtractPropTypes,
-  PropType,
-  Ref,
-  SlotsType,
-  VNode
-} from 'vue'
+import type { ExtractPropTypes, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CollapseTheme } from '../styles'
@@ -256,7 +249,7 @@ export default defineComponent({
           this.rtlEnabled && `${this.mergedClsPrefix}-collapse--rtl`,
           this.themeClass
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         {this.$slots}
       </div>

@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { PropType, SlotsType, VNode } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { computed, defineComponent, h, inject } from 'vue'
 import { useConfig, useThemeClass } from '../../_mixins'
@@ -121,7 +121,7 @@ export default defineComponent({
           `${mergedClsPrefix}-timeline-item--${this.type}-type`,
           `${mergedClsPrefix}-timeline-item--${this.lineType}-line-type`
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         <div class={`${mergedClsPrefix}-timeline-item-timeline`}>
           <div class={`${mergedClsPrefix}-timeline-item-timeline__line`} />

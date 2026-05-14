@@ -1,7 +1,6 @@
 import type { HSLA, HSVA, RGBA } from 'seemly'
 import type {
   ComponentPublicInstance,
-  CSSProperties,
   PropType,
   Ref,
   SlotsType,
@@ -595,11 +594,7 @@ export default defineComponent({
           onDragstart={(e) => {
             e.preventDefault()
           }}
-          style={
-            inlineThemeDisabled
-              ? undefined
-              : (cssVarsRef.value as CSSProperties)
-          }
+          style={inlineThemeDisabled ? undefined : cssVarsRef.value}
         >
           <div class={`${mergedClsPrefix}-color-picker-control`}>
             <Pallete

@@ -1,4 +1,3 @@
-import type { CSSProperties } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { TypographyTheme } from '../styles'
@@ -69,7 +68,7 @@ export default defineComponent({
           this.themeClass,
           this.alignText && `${mergedClsPrefix}-ol--align-text`
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         {this.$slots}
       </ol>

@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CalendarTheme } from '../styles'
@@ -217,7 +217,7 @@ export default defineComponent({
     return (
       <div
         class={[`${mergedClsPrefix}-calendar`, this.themeClass]}
-        style={cssVars as CSSProperties}
+        style={cssVars}
       >
         <div class={`${mergedClsPrefix}-calendar-header`}>
           <div class={`${mergedClsPrefix}-calendar-header__title`}>

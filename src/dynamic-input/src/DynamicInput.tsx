@@ -358,7 +358,7 @@ export default defineComponent({
           this.rtlEnabled && `${mergedClsPrefix}-dynamic-input--rtl`,
           this.themeClass
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
       >
         {!Array.isArray(mergedValue) || mergedValue.length === 0 ? (
           <NButton

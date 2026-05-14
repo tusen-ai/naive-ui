@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { PropType, SlotsType, VNode } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { computed, defineComponent, Fragment, h, inject, toRef } from 'vue'
 import { NBaseIcon, NIconSwitchTransition } from '../../_internal'
@@ -275,7 +275,7 @@ export default defineComponent({
           descriptionNode && `${mergedClsPrefix}-step--show-description`,
           `${mergedClsPrefix}-step--${this.mergedStatus}-status`
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
         onClick={handleStepClick}
       >
         {stepNode}

@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
+import type { PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { TagTheme } from '../styles'
@@ -303,7 +303,7 @@ export default defineComponent({
             [`${mergedClsPrefix}-tag--closable`]: closable
           }
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
         onClick={this.handleClick}
         onMouseenter={this.onMouseenter}
         onMouseleave={this.onMouseleave}

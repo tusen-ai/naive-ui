@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType } from 'vue'
+import type { PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { DividerTheme } from '../styles'
@@ -78,7 +78,7 @@ export default defineComponent({
               $slots.default && titlePlacement
           }
         ]}
-        style={cssVars as CSSProperties}
+        style={cssVars}
       >
         {!vertical ? (
           <div

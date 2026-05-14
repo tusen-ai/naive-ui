@@ -237,7 +237,7 @@ export default defineComponent({
             [`${mergedClsPrefix}-card--hoverable`]: hoverable
           }
         ]}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
         role={this.role}
       >
         {resolveWrappedSlot($slots.cover, (children) => {
