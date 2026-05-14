@@ -37,6 +37,7 @@
 
 ### Feats
 
+- `n-dialog` 的 `useDialog` 新增 `default` 方法
 - `n-color-picker` 新增 `trigger` slot，关闭 [#7192](https://github.com/tusen-ai/naive-ui/issues/7192)
 - `n-select` 新增 `clear-created-options-on-clear` 属性，用于在开启 `tag` 且可清空时控制点击清空是否同时清空通过 tag 创建的选项
 - `n-select` `n-auto-complete` `n-mention` `n-popselect` `n-cascader` `n-pagination` 新增 `scrollbar-props` 属性

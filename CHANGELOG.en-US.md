@@ -37,6 +37,7 @@
 
 ### Feats
 
+- `n-dialog`'s `useDialog` adds `default` method.
 - `n-color-picker` adds `trigger` slot, closes [#7192](https://github.com/tusen-ai/naive-ui/issues/7192).
 - `n-select` adds `clear-created-options-on-clear` prop to control whether created options are cleared when clearing while `tag` and clearable are enabled.
 - `n-select`, `n-auto-complete`, `n-mention`, `n-popselect`, `n-cascader`, `n-pagination` add `scrollbar-props` prop.
