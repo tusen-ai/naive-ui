@@ -294,9 +294,7 @@ function useCalendar(
     }
   }
   function clearSelectedDateTime(): void {
-    panelCommon.doUpdateValue(null, true)
     dateInputValueRef.value = ''
-    panelCommon.doClose(true)
     panelCommon.handleClearClick()
   }
   function handleNowClick(): void {
