@@ -158,7 +158,7 @@ export default defineComponent({
           directives.push([
             clickoutside,
             handleClickOutside,
-            undefined as unknown as string,
+            undefined,
             { capture: true }
           ])
         }
@@ -170,7 +170,7 @@ export default defineComponent({
         directives.push([
           clickoutside,
           handleClickOutside,
-          undefined as unknown as string,
+          undefined,
           { capture: true }
         ])
       }

@@ -43,7 +43,8 @@ export const spinProps = {
     default: undefined
   },
   delay: Number,
-  ...exposedLoadingProps
+  ...exposedLoadingProps,
+  strokeWidth: Number
 }
 
 export type SpinProps = ExtractPublicPropTypes<typeof spinProps>
