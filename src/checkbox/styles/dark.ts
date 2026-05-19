@@ -10,6 +10,7 @@ const checkboxDark: CheckboxTheme = {
     const commonSelf = self(vars)
     commonSelf.color = '#0000'
     commonSelf.checkMarkColor = cardColor
+    commonSelf.buttonColor = cardColor
     return commonSelf
   }
 }

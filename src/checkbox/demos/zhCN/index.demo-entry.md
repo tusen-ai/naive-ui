@@ -15,6 +15,7 @@ event.vue
 customize-value.vue
 focus.vue
 rtl-debug.vue
+button-group.vue
 ```
 
 ## API
@@ -57,6 +58,16 @@ rtl-debug.vue
 | 名称    | 参数 | 说明                 |
 | ------- | ---- | -------------------- |
 | default | `()` | CheckboxGroup 的内容 |
+
+### CheckboxButton Props
+
+同 [Checkbox Props](#Checkbox Props)。
+
+### CheckboxButton Slots
+
+| 名称    | 参数 | 说明                  | 版本         |
+| ------- | ---- | --------------------- | ------------ |
+| default | `()` | CheckboxButton 的内容 | NEXT_VERSION |
 
 ### Checkbox Methods
 
