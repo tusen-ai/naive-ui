@@ -19,7 +19,8 @@ export function self(vars: ThemeCommonVars) {
     fontSizeMedium,
     fontSizeLarge,
     borderRadiusSmall,
-    lineHeight
+    lineHeight,
+    opacityDisabled
   } = vars
   return {
     ...commonVariables,
@@ -45,7 +46,24 @@ export function self(vars: ThemeCommonVars) {
     borderFocus: `1px solid ${primaryColor}`,
     boxShadowFocus: `0 0 0 2px ${changeColor(primaryColor, { alpha: 0.3 })}`,
     textColor: textColor2,
-    textColorDisabled
+    textColorDisabled,
+    // button vars
+    buttonColor: baseColor,
+    buttonColorActive: '#0000',
+    buttonColorHover: '#0000',
+    buttonColorPressed: '#0000',
+    buttonTextColor: textColor2,
+    buttonTextColorActive: primaryColor,
+    buttonTextColorHover: primaryColor,
+    buttonTextColorPressed: primaryColor,
+    buttonBorderColor: borderColor,
+    buttonBorderColorActive: primaryColor,
+    buttonBorderColorHover: borderColor,
+    buttonBoxShadow: 'inset 0 0 0 1px #0000',
+    buttonBoxShadowHover: 'inset 0 0 0 1px #0000',
+    buttonBoxShadowFocus: `0 0 0 2px ${changeColor(primaryColor, { alpha: 0.3 })}`,
+    buttonBorderRadius: borderRadiusSmall,
+    opacityDisabled
   }
 }
 

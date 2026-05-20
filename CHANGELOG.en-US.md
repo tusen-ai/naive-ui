@@ -6,6 +6,7 @@
 
 - `n-upload` adds `always-show-actions` prop, closes [#8073](https://github.com/tusen-ai/naive-ui/issues/8073).
 - `n-image` adds `keep-drag-offset` prop, closes [#7544](https://github.com/tusen-ai/naive-ui/issues/7544).
+- `n-checkbox` adds button-group variant (`n-checkbox-button`), closes [#7326](https://github.com/tusen-ai/naive-ui/issues/7326).
 
 ### Fixes
 

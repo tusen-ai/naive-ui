@@ -1,5 +1,15 @@
-import type { ComputedRef, PropType, Ref } from 'vue'
+import type {
+  ComputedRef,
+  CSSProperties,
+  PropType,
+  Ref,
+  VNode,
+  VNodeChild
+} from 'vue'
+import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { CheckboxTheme } from '../styles'
+import type { CheckboxBaseProps } from './use-checkbox'
 import { useMergedState } from 'vooks'
 import {
   computed,
@@ -10,8 +20,11 @@ import {
   toRef,
   watchEffect
 } from 'vue'
-import { useConfig, useFormItem } from '../../_mixins'
-import { call, createInjectionKey, warnOnce } from '../../_utils'
+import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import { call, createKey, flatten, getSlot, warn, warnOnce } from '../../_utils'
+import { checkboxLight } from '../styles'
+import groupStyle from './styles/checkbox-group.cssr'
+import { checkboxGroupInjectionKey } from './use-checkbox'
 
 export interface CheckboxGroupInjection {
   checkedCountRef: ComputedRef<number>
@@ -23,10 +36,83 @@ export interface CheckboxGroupInjection {
   toggleCheckbox: (checked: boolean, checkboxValue: string | number) => void
 }
 
-export const checkboxGroupInjectionKey
-  = createInjectionKey<CheckboxGroupInjection>('n-checkbox-group')
+function mapSlot(
+  defaultSlot: VNode[],
+  valueSet: Set<string | number>,
+  clsPrefix: string
+): {
+  children: VNodeChild[]
+  isButtonGroup: boolean
+} {
+  const children: VNode[] = []
+  let isButtonGroup = false
+  for (let i = 0; i < defaultSlot.length; ++i) {
+    const wrappedInstance = defaultSlot[i]
+    const name = (wrappedInstance.type as any)?.name
+    if (name === 'CheckboxButton') {
+      isButtonGroup = true
+    }
+    if (__DEV__ && isButtonGroup && name !== 'CheckboxButton') {
+      warn(
+        'checkbox-group',
+        '`n-checkbox-group` in button mode only takes `n-checkbox-button` as children.'
+      )
+      continue
+    }
+    const instanceProps: CheckboxBaseProps = wrappedInstance.props as any
+    if (name !== 'CheckboxButton') {
+      children.push(wrappedInstance)
+      continue
+    }
+    if (i === 0) {
+      children.push(wrappedInstance)
+    }
+    else {
+      const lastInstanceProps: CheckboxBaseProps = children[children.length - 1]
+        .props as any
+      const lastInstanceChecked
+        = lastInstanceProps.value !== undefined
+          ? valueSet.has(lastInstanceProps.value)
+          : false
+      const lastInstanceDisabled: boolean | undefined
+        = lastInstanceProps.disabled
+      const currentInstanceChecked
+        = instanceProps.value !== undefined
+          ? valueSet.has(instanceProps.value)
+          : false
+      const currentInstanceDisabled = instanceProps.disabled
+      const lastInstancePriority
+        = (lastInstanceChecked ? 2 : 0) + (!lastInstanceDisabled ? 1 : 0)
+      const currentInstancePriority
+        = (currentInstanceChecked ? 2 : 0) + (!currentInstanceDisabled ? 1 : 0)
+      const splitorClass
+        = lastInstancePriority < currentInstancePriority
+          ? {
+              [`${clsPrefix}-checkbox-group__splitor--checked`]:
+                currentInstanceChecked,
+              [`${clsPrefix}-checkbox-group__splitor--disabled`]:
+                currentInstanceDisabled
+            }
+          : {
+              [`${clsPrefix}-checkbox-group__splitor--checked`]:
+                lastInstanceChecked,
+              [`${clsPrefix}-checkbox-group__splitor--disabled`]:
+                lastInstanceDisabled
+            }
+      children.push(
+        <div class={[`${clsPrefix}-checkbox-group__splitor`, splitorClass]} />,
+        wrappedInstance
+      )
+    }
+  }
+  return {
+    children,
+    isButtonGroup
+  }
+}
 
 export const checkboxGroupProps = {
+  ...(useTheme.props as ThemeProps<CheckboxTheme>),
   min: Number,
   max: Number,
   size: String as PropType<'small' | 'medium' | 'large'>,
@@ -85,9 +171,17 @@ export default defineComponent({
         }
       })
     }
-    const { mergedClsPrefixRef } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
     const formItem = useFormItem(props)
     const { mergedSizeRef, mergedDisabledRef } = formItem
+    const themeRef = useTheme(
+      'Checkbox',
+      '-checkbox-group',
+      groupStyle,
+      checkboxLight,
+      props,
+      mergedClsPrefixRef
+    )
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = computed(() => props.value)
     const mergedValueRef = useMergedState(
@@ -214,14 +308,80 @@ export default defineComponent({
       mergedSizeRef,
       toggleCheckbox
     })
+    const cssVarsRef = computed(() => {
+      const { value: size } = mergedSizeRef
+      const {
+        common: { cubicBezierEaseInOut },
+        self: {
+          buttonColor,
+          buttonColorActive,
+          buttonTextColor,
+          buttonTextColorActive,
+          buttonTextColorHover,
+          buttonBorderColor,
+          buttonBorderColorActive,
+          buttonBoxShadow,
+          buttonBoxShadowHover,
+          buttonBoxShadowFocus,
+          buttonBorderRadius,
+          opacityDisabled,
+          [createKey('fontSize', size)]: fontSize,
+          [createKey('buttonHeight', size)]: height
+        }
+      } = themeRef.value
+      return {
+        '--n-bezier': cubicBezierEaseInOut,
+        '--n-button-color': buttonColor,
+        '--n-button-color-active': buttonColorActive,
+        '--n-button-text-color': buttonTextColor,
+        '--n-button-text-color-active': buttonTextColorActive,
+        '--n-button-text-color-hover': buttonTextColorHover,
+        '--n-button-border-color': buttonBorderColor,
+        '--n-button-border-color-active': buttonBorderColorActive,
+        '--n-button-box-shadow': buttonBoxShadow,
+        '--n-button-box-shadow-hover': buttonBoxShadowHover,
+        '--n-button-box-shadow-focus': buttonBoxShadowFocus,
+        '--n-button-border-radius': buttonBorderRadius,
+        '--n-button-height': height,
+        '--n-font-size': fontSize,
+        '--n-opacity-disabled': opacityDisabled
+      }
+    })
+    const themeClassHandle = inlineThemeDisabled
+      ? useThemeClass(
+          'checkbox-group',
+          computed(() => mergedSizeRef.value[0]),
+          cssVarsRef,
+          props
+        )
+      : undefined
     return {
-      mergedClsPrefix: mergedClsPrefixRef
+      mergedClsPrefix: mergedClsPrefixRef,
+      valueSet: valueSetRef,
+      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      themeClass: themeClassHandle?.themeClass,
+      onRender: themeClassHandle?.onRender
     }
   },
   render() {
+    const { mergedClsPrefix, valueSet, cssVars, themeClass } = this
+    const { children, isButtonGroup } = mapSlot(
+      flatten(getSlot(this)),
+      valueSet,
+      mergedClsPrefix
+    )
+    this.onRender?.()
     return (
-      <div class={`${this.mergedClsPrefix}-checkbox-group`} role="group">
-        {this.$slots}
+      <div
+        class={[
+          `${mergedClsPrefix}-checkbox-group`,
+          themeClass,
+          isButtonGroup && `${mergedClsPrefix}-checkbox-group--button-group`
+        ]}
+        style={cssVars as CSSProperties}
+        role="group"
+      >
+        {children}
       </div>
     )
   }
