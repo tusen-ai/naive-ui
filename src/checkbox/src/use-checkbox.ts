@@ -69,7 +69,7 @@ export interface UseCheckbox {
   handleClick: (e: MouseEvent) => void
   handleKeyUp: (e: KeyboardEvent) => void
   handleKeyDown: (e: KeyboardEvent) => void
-  focus: () => void
+  focus: Ref<boolean>
   blur: () => void
   labelId: string
 }
@@ -87,6 +87,7 @@ function setup(props: ExtractPropTypes<typeof checkboxBaseProps>): UseCheckbox {
   }
   const NCheckboxGroup = inject(checkboxGroupInjectionKey, null)
   const selfRef = ref<HTMLDivElement | null>(null)
+  const focusRef = ref(false)
   const { mergedClsPrefixRef, mergedComponentPropsRef } = useConfig(props)
   const uncontrolledCheckedRef = ref(props.defaultChecked)
   const controlledCheckedRef = toRef(props, 'checked')
@@ -192,6 +193,7 @@ function setup(props: ExtractPropTypes<typeof checkboxBaseProps>): UseCheckbox {
   }
   function handleClick(e: MouseEvent): void {
     if (!mergedDisabledRef.value) {
+      e.preventDefault()
       toggle(e)
     }
   }
@@ -220,9 +222,7 @@ function setup(props: ExtractPropTypes<typeof checkboxBaseProps>): UseCheckbox {
     handleClick,
     handleKeyUp,
     handleKeyDown,
-    focus: () => {
-      selfRef.value?.focus()
-    },
+    focus: focusRef,
     blur: () => {
       selfRef.value?.blur()
     },

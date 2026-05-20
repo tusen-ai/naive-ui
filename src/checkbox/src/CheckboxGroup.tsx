@@ -314,30 +314,36 @@ export default defineComponent({
         common: { cubicBezierEaseInOut },
         self: {
           buttonColor,
-          buttonColorChecked,
+          buttonColorActive,
           buttonTextColor,
-          buttonTextColorChecked,
+          buttonTextColorActive,
           buttonTextColorHover,
-          buttonBorder,
-          buttonBorderChecked,
+          buttonBorderColor,
+          buttonBorderColorActive,
+          buttonBoxShadow,
+          buttonBoxShadowHover,
           buttonBoxShadowFocus,
           buttonBorderRadius,
           opacityDisabled,
+          [createKey('fontSize', size)]: fontSize,
           [createKey('buttonHeight', size)]: height
         }
       } = themeRef.value
       return {
         '--n-bezier': cubicBezierEaseInOut,
         '--n-button-color': buttonColor,
-        '--n-button-color-checked': buttonColorChecked,
+        '--n-button-color-active': buttonColorActive,
         '--n-button-text-color': buttonTextColor,
-        '--n-button-text-color-checked': buttonTextColorChecked,
+        '--n-button-text-color-active': buttonTextColorActive,
         '--n-button-text-color-hover': buttonTextColorHover,
-        '--n-button-border': buttonBorder,
-        '--n-button-border-checked': buttonBorderChecked,
+        '--n-button-border-color': buttonBorderColor,
+        '--n-button-border-color-active': buttonBorderColorActive,
+        '--n-button-box-shadow': buttonBoxShadow,
+        '--n-button-box-shadow-hover': buttonBoxShadowHover,
         '--n-button-box-shadow-focus': buttonBoxShadowFocus,
         '--n-button-border-radius': buttonBorderRadius,
         '--n-button-height': height,
+        '--n-font-size': fontSize,
         '--n-opacity-disabled': opacityDisabled
       }
     })
