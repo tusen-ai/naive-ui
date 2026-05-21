@@ -1,3 +1,7 @@
+import type {
+  UploadCustomRequestOptions,
+  UploadFileInfo
+} from '../src/public-types'
 import { mount } from '@vue/test-utils'
 import { sleep } from 'seemly'
 import { h } from 'vue'
@@ -295,6 +299,35 @@ describe('n-upload', () => {
     const triggerDisabledElement = wrapper.find('.n-upload-trigger--disabled')
 
     expect(triggerDisabledElement.exists()).toBe(true)
+  })
+  it('should work with custom-request sync onError for multiple files', async () => {
+    // Regression test for issue #7366:
+    // custom-request synchronous onError should mark ALL files as error,
+    // not just the last one.
+    const onUpdateFileList = vi.fn()
+    const wrapper = mount(NUpload, {
+      props: {
+        multiple: true,
+        customRequest: ({ onError }: UploadCustomRequestOptions) => {
+          onError()
+        },
+        'onUpdate:fileList': onUpdateFileList
+      }
+    })
+    const input = wrapper.find('input')
+    getMockFile(input.element, [
+      new File(['index'], 'file1.txt'),
+      new File(['index'], 'file2.txt'),
+      new File(['index'], 'file3.txt')
+    ])
+    await input.trigger('change')
+    await sleep(0)
+    expect(wrapper.findAll('.n-upload-file').length).toBe(3)
+    const lastCallArgs
+      = onUpdateFileList.mock.calls[onUpdateFileList.mock.calls.length - 1]
+    const files = lastCallArgs[0] as UploadFileInfo[]
+    expect(files.length).toBe(3)
+    expect(files.every(f => f.status === 'error')).toBe(true)
   })
 })
 
