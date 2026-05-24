@@ -10,6 +10,7 @@ import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
 import { call, createKey, flatten, getSlot, warn } from '../../_utils'
 import { radioLight } from '../styles'
+import NRadio from './Radio'
 import style from './styles/radio-group.cssr'
 import { radioGroupInjectionKey } from './use-radio'
 
@@ -88,9 +89,25 @@ function mapSlot(
   }
 }
 
+export interface RadioGroupOption {
+  label?: string
+  value: string | number | boolean
+  disabled?: boolean
+  [key: string]: unknown
+}
+
 export const radioGroupProps = {
   ...(useTheme.props as ThemeProps<RadioTheme>),
   name: String,
+  options: Array as PropType<RadioGroupOption[]>,
+  labelField: {
+    type: String,
+    default: 'label'
+  },
+  valueField: {
+    type: String,
+    default: 'value'
+  },
   value: [String, Number, Boolean] as PropType<
     string | number | boolean | null
   >,
@@ -238,8 +255,19 @@ export default defineComponent({
   },
   render() {
     const { mergedValue, mergedClsPrefix, handleFocusin, handleFocusout } = this
+    const { options, labelField, valueField } = this.$props
+    const slotChildren = options
+      ? options.map(option => (
+          <NRadio
+            key={option[valueField] as string | number}
+            value={option[valueField] as string | number | boolean}
+            disabled={option.disabled}
+            label={option[labelField] as string | undefined}
+          />
+        ))
+      : flatten(getSlot(this))
     const { children, isButtonGroup } = mapSlot(
-      flatten(getSlot(this)),
+      slotChildren,
       mergedValue,
       mergedClsPrefix
     )

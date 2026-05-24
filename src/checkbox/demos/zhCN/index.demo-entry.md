@@ -8,6 +8,7 @@
 basic.vue
 size.vue
 group.vue
+options.vue
 grid.vue
 indeterminate.vue
 controlled.vue
@@ -41,9 +42,12 @@ rtl-debug.vue
 | --- | --- | --- | --- | --- |
 | disabled | `boolean` | `false` | 选项组是否禁用 |  |
 | default-value | `Array<string \| number>` | `null` | 选项组非受控模式下的默认值 |  |
+| label-field | `string` | `'label'` | `options` 中选项 label 的字段名 | NEXT_VERSION |
 | max | `number` | `undefined` | 可被勾选的 checkbox 的最大数量 |  |
 | min | `number` | `undefined` | 可被勾选的 checkbox 的最小数量 |  |
+| options | `Array<{ label?: string, value: string \| number, disabled?: boolean }>` | `undefined` | 配置选项内容，会使默认插槽失效 | NEXT_VERSION |
 | value | `Array<string \| number> \| null` | `undefined` | 选项组受控模式下的值 |  |
+| value-field | `string` | `'value'` | `options` 中选项 value 的字段名 | NEXT_VERSION |
 | on-update:value | `(value: (string \| number)[], meta: { actionType: 'check' \| 'uncheck', value: string \| number }) => void` | `undefined` | 选项组的值改变时的回调 | `meta` 2.32.0 |
 
 ### Checkbox Slots

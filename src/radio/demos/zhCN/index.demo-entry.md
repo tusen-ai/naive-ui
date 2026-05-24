@@ -9,6 +9,7 @@
 ```demo
 basic.vue
 group.vue
+options.vue
 button-group.vue
 size.vue
 radio-focus-debug.vue
@@ -34,11 +35,14 @@ tooltip-debug.vue
 
 ### RadioGroup Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| disabled | `boolean` | `false` | 禁用状态 |
-| name | `string` | `undefined` | 选项组内部 radio 元素的 name 属性 |
-| size | `'small' \| 'medium' \| 'large'` | `'medium'` | 大小 |
-| value | `string \| number \| boolean \| null` | `null` | 选中的值 |
-| default-value | `string \| number \| boolean \| null` | `null` | 默认选中的值 |
-| on-update:value | `(value: string \| number \| boolean) => void` | `undefined` | 发生变化时触发的回调方法 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| disabled | `boolean` | `false` | 禁用状态 |  |
+| default-value | `string \| number \| boolean \| null` | `null` | 默认选中的值 |  |
+| label-field | `string` | `'label'` | `options` 中选项 label 的字段名 | NEXT_VERSION |
+| name | `string` | `undefined` | 选项组内部 radio 元素的 name 属性 |  |
+| options | `Array<{ label?: string, value: string \| number \| boolean, disabled?: boolean }>` | `undefined` | 配置选项内容，会使默认插槽失效 | NEXT_VERSION |
+| size | `'small' \| 'medium' \| 'large'` | `'medium'` | 大小 |  |
+| value | `string \| number \| boolean \| null` | `null` | 选中的值 |  |
+| value-field | `string` | `'value'` | `options` 中选项 value 的字段名 | NEXT_VERSION |
+| on-update:value | `(value: string \| number \| boolean) => void` | `undefined` | 发生变化时触发的回调方法 |  |
