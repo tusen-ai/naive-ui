@@ -13,13 +13,7 @@
       </n-col>
       <n-col :span="6">
         <div style="width: 160px">
-          <n-anchor
-            affix
-            :trigger-top="24"
-            :top="88"
-            style="z-index: 1"
-            ignore-gap
-          >
+          <n-anchor style="z-index: 1" ignore-gap>
             <n-anchor-link title="Demos" href="#Demos">
               <n-anchor-link title="Basic" href="#basic.vue" />
               <n-anchor-link title="Ignore-Gap" href="#ignore-gap.vue" />
@@ -32,7 +26,7 @@
       </n-col>
       <n-col :span="6">
         <div style="width: 160px">
-          <n-anchor affix :trigger-top="24" :top="88" style="z-index: 1">
+          <n-anchor style="z-index: 1">
             <n-anchor-link title="Demos" href="#Demos">
               <n-anchor-link title="Basic" href="#basic.vue" />
               <n-anchor-link title="Ignore-Gap" href="#ignore-gap.vue" />
