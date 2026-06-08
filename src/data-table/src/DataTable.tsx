@@ -144,6 +144,8 @@ export default defineComponent({
       sort
     } = useTableData(props, { dataRelatedColsRef })
 
+    const mergedEmptyRef = computed(() => paginatedDataRef.value.length === 0)
+
     const downloadCsv = (options?: CsvOptionsType): void => {
       const { fileName = 'data.csv', keepOriginalData = false } = options || {}
       const data = keepOriginalData ? props.data : rawPaginatedDataRef.value
@@ -469,6 +471,7 @@ export default defineComponent({
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
+      mergedEmpty: mergedEmptyRef,
       ...exposedMethods
     }
   },
@@ -488,7 +491,8 @@ export default defineComponent({
             [`${mergedClsPrefix}-data-table--single-line`]: this.singleLine,
             [`${mergedClsPrefix}-data-table--single-column`]: this.singleColumn,
             [`${mergedClsPrefix}-data-table--loading`]: this.loading,
-            [`${mergedClsPrefix}-data-table--flex-height`]: this.flexHeight
+            [`${mergedClsPrefix}-data-table--flex-height`]: this.flexHeight,
+            [`${mergedClsPrefix}-data-table--empty`]: this.mergedEmpty
           }
         ]}
         style={this.cssVars as CSSProperties}

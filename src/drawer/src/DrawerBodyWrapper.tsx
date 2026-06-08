@@ -201,7 +201,7 @@ export default defineComponent({
         directives.push([
           clickoutside,
           props.onClickoutside,
-          undefined as unknown as string,
+          undefined,
           { capture: true }
         ])
       }

@@ -1,19 +1,16 @@
-import { transformSync } from 'esbuild'
+import { transformSync } from 'oxc-transform'
 
 export function tsToJs(content: string | null): string {
   if (!content) {
     return ''
   }
-  // esbuild will remove blank line
-  const beforeTransformContent = content.replace(
-    /\n(\s)*\n/g,
-    '\n__blankline\n'
-  )
-  const { code } = transformSync(beforeTransformContent, {
-    loader: 'ts',
-    minify: false,
-    minifyWhitespace: false,
-    charset: 'utf8'
+  const { code, errors } = transformSync('file.ts', content, {
+    typescript: {
+      onlyRemoveTypeImports: true
+    }
   })
-  return code.trim().replace(/__blankline;/g, '')
+  if (errors.length > 0) {
+    console.error('oxc-transform errors:', errors)
+  }
+  return code.trim()
 }
