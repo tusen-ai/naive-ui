@@ -164,7 +164,7 @@ export default defineComponent({
       },
       onPreviewClose,
       mergedOnError: (e: Event) => {
-        if (!shouldStartLoadingRef.value)
+        if (props.intersectionObserverOptions && !shouldStartLoadingRef.value)
           return
         showErrorRef.value = true
         const { onError, imgProps: { onError: imgPropsOnError } = {} } = props
