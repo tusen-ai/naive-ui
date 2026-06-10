@@ -12,6 +12,7 @@
 - Fix `n-color-picker` passed `style` and `click` (onClick) not applied to trigger, closes [#7528](https://github.com/tusen-ai/naive-ui/issues/7528).
 - Fix `n-data-table`'s empty state not vertically centered when height is set, closes [#7546](https://github.com/tusen-ai/naive-ui/issues/7546).
 - fix(spin): preserve size-based strokeWidth defaults in NSpin, closes [#8061](https://github.com/tusen-ai/naive-ui/issues/8061)
+- Fix where the drag position of `n-modal` was reset during rendering.
 
 ## 2.44.1
 

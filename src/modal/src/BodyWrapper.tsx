@@ -120,12 +120,18 @@ export default defineComponent({
       }
     )
 
-    const { stopDrag, startDrag, draggableRef, draggableClassRef }
-      = useDragModal(toRef(props, 'draggable'), {
-        onEnd: (el) => {
-          syncTransformOrigin(el)
-        }
-      })
+    const {
+      stopDrag,
+      startDrag,
+      draggableRef,
+      draggableClassRef,
+      dragX,
+      dragY
+    } = useDragModal(toRef(props, 'draggable'), {
+      onEnd: (el) => {
+        syncTransformOrigin(el)
+      }
+    })
 
     const dialogTitleClassRef = computed(() => {
       return normalizeClass([props.titleClass, draggableClassRef.value])
@@ -241,7 +247,9 @@ export default defineComponent({
       handleAfterEnter,
       handleAfterLeave,
       handleBeforeLeave,
-      handleEnter
+      handleEnter,
+      dragX,
+      dragY
     }
   },
   render() {
@@ -253,8 +261,24 @@ export default defineComponent({
       handleAfterLeave,
       handleBeforeLeave,
       preset,
-      mergedClsPrefix
+      mergedClsPrefix,
+      dragX: dragXRef,
+      dragY: dragYRef
     } = this
+    const effectiveAttrs = { ...($attrs as any) }
+    if (dragXRef !== null && dragYRef !== null) {
+      const baseStyle = effectiveAttrs.style
+      if (typeof baseStyle === 'string') {
+        effectiveAttrs.style = `${baseStyle};left:${dragXRef}px;top:${dragYRef}px`
+      }
+      else {
+        effectiveAttrs.style = {
+          ...(baseStyle || {}),
+          left: `${dragXRef}px`,
+          top: `${dragYRef}px`
+        }
+      }
+    }
     let childNode: VNode | null = null
     if (!preset) {
       childNode = getFirstSlotVNodeWithTypedProps('default', $slots.default, {
@@ -269,7 +293,7 @@ export default defineComponent({
         {
           class: `${mergedClsPrefix}-modal`
         },
-        $attrs,
+        effectiveAttrs,
         childNode.props || {}
       )
     }
@@ -326,10 +350,10 @@ export default defineComponent({
                                 (this.preset === 'confirm'
                                   || this.preset === 'dialog' ? (
                                       <NDialog
-                                        {...this.$attrs}
+                                        {...effectiveAttrs}
                                         class={[
                                           `${mergedClsPrefix}-modal`,
-                                          this.$attrs.class
+                                          effectiveAttrs.class
                                         ]}
                                         ref="bodyRef"
                                         theme={this.mergedTheme.peers.Dialog}
@@ -344,11 +368,11 @@ export default defineComponent({
                                       </NDialog>
                                     ) : this.preset === 'card' ? (
                                       <NCard
-                                        {...this.$attrs}
+                                        {...effectiveAttrs}
                                         ref="bodyRef"
                                         class={[
                                           `${mergedClsPrefix}-modal`,
-                                          this.$attrs.class
+                                          effectiveAttrs.class
                                         ]}
                                         theme={this.mergedTheme.peers.Card}
                                         themeOverrides={
