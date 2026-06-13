@@ -22,12 +22,15 @@ export default cB('carousel', `
     height: 100%;
     transition-timing-function: var(--n-bezier);
     transition-property: transform;
+    align-items: stretch;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    -webkit-align-items: stretch;
   `, [
     cE('slide', `
       flex-shrink: 0;
       position: relative;
       width: 100%;
-      height: 100%;
       outline: none;
       overflow: hidden;
     `, [
