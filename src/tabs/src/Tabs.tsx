@@ -872,23 +872,24 @@ export default defineComponent({
                   tabPaneVNode.props.name as string | number
                 )
                 return justifyTabDynamicProps(
-                  <Tab
-                    {...tabPaneVNode.props}
-                    internalCreatedByPane={true}
-                    internalLeftPadded={
-                      index !== 0
-                      && (!mergedJustifyContent
-                        || mergedJustifyContent === 'center'
-                        || mergedJustifyContent === 'start'
-                        || mergedJustifyContent === 'end')
-                    }
-                  >
-                    {tabPaneVNode.children
+                  h(
+                    Tab,
+                    {
+                      ...tabPaneVNode.props,
+                      internalCreatedByPane: true,
+                      internalLeftPadded:
+                        index !== 0
+                        && (!mergedJustifyContent
+                          || mergedJustifyContent === 'center'
+                          || mergedJustifyContent === 'start'
+                          || mergedJustifyContent === 'end')
+                    },
+                    tabPaneVNode.children
                       ? {
                           default: tabPaneVNode.children.tab
                         }
-                      : undefined}
-                  </Tab>
+                      : undefined
+                  )
                 )
               })
             : tabChildren.map((tabVNode: any, index: number) => {
@@ -991,18 +992,18 @@ export default defineComponent({
                             renderNameListRef.value.push(
                               tabPaneVNode.props.name as string | number
                             )
-                            return (
-                              <Tab
-                                {...tabPaneVNode.props}
-                                internalCreatedByPane={true}
-                                internalLeftPadded={index !== 0}
-                              >
-                                {tabPaneVNode.children
-                                  ? {
-                                      default: tabPaneVNode.children.tab
-                                    }
-                                  : undefined}
-                              </Tab>
+                            return h(
+                              Tab,
+                              {
+                                ...tabPaneVNode.props,
+                                internalCreatedByPane: true,
+                                internalLeftPadded: index !== 0
+                              },
+                              tabPaneVNode.children
+                                ? {
+                                    default: tabPaneVNode.children.tab
+                                  }
+                                : undefined
                             )
                           }
                         )

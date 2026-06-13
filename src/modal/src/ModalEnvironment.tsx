@@ -118,7 +118,7 @@ export const NModalEnvironment = defineComponent({
         internalAppear
         internalModal
       >
-        {this.$slots}
+        {{ ...this.$slots }}
       </NModal>
     )
   }

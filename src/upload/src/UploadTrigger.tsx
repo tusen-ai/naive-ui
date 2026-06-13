@@ -3,7 +3,7 @@ import type { UploadTriggerDefaultSlotOptions } from './interface'
 import { computed, defineComponent, h, inject } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import { AddIcon } from '../../_internal/icons'
-import { resolveSlot, throwError } from '../../_utils'
+import { resolveSlotWithTypedProps, throwError } from '../../_utils'
 import { uploadInjectionKey } from './interface'
 import NUploadDragger from './UploadDragger'
 import { getFilesFromEntries } from './utils'
@@ -91,14 +91,15 @@ export default defineComponent({
 
     return () => {
       const { value: mergedClsPrefix } = mergedClsPrefixRef
+      const options = {
+        handleClick: handleTriggerClick,
+        handleDrop: handleTriggerDrop,
+        handleDragOver: handleTriggerDragOver,
+        handleDragEnter: handleTriggerDragEnter,
+        handleDragLeave: handleTriggerDragLeave
+      }
       return props.abstract ? (
-        slots.default?.({
-          handleClick: handleTriggerClick,
-          handleDrop: handleTriggerDrop,
-          handleDragOver: handleTriggerDragOver,
-          handleDragEnter: handleTriggerDragEnter,
-          handleDragLeave: handleTriggerDragLeave
-        })
+        slots.default?.(options)
       ) : (
         <div
           class={[
@@ -120,7 +121,7 @@ export default defineComponent({
             <NUploadDragger>
               {{
                 default: () =>
-                  resolveSlot(slots.default, () => [
+                  resolveSlotWithTypedProps(slots.default, options, () => [
                     <NBaseIcon clsPrefix={mergedClsPrefix}>
                       {{ default: () => <AddIcon /> }}
                     </NBaseIcon>
@@ -128,7 +129,7 @@ export default defineComponent({
               }}
             </NUploadDragger>
           ) : (
-            slots
+            slots.default?.(options)
           )}
         </div>
       )

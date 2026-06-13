@@ -7,7 +7,7 @@ import { NNotificationProvider, useNotification } from '../index'
 
 const Provider = defineComponent({
   render() {
-    return <NNotificationProvider>{this.$slots}</NNotificationProvider>
+    return <NNotificationProvider>{{ ...this.$slots }}</NNotificationProvider>
   }
 })
 

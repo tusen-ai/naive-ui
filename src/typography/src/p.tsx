@@ -70,7 +70,7 @@ export default defineComponent({
         class={[`${this.mergedClsPrefix}-p`, this.themeClass]}
         style={this.cssVars as CSSProperties}
       >
-        {this.$slots}
+        {this.$slots.default?.()}
       </p>
     )
   }
