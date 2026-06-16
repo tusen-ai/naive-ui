@@ -462,6 +462,10 @@ export const enComponentRoutes = [
     component: () => import('../../src/code/demos/enUS/index.demo-entry.md')
   },
   {
+    path: 'markdown',
+    component: () => import('../../src/markdown/demos/enUS/index.demo-entry.md')
+  },
+  {
     path: 'typography',
     component: () =>
       import('../../src/typography/demos/enUS/index.demo-entry.md')
@@ -882,6 +886,10 @@ export const zhComponentRoutes = [
   {
     path: 'code',
     component: () => import('../../src/code/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'markdown',
+    component: () => import('../../src/markdown/demos/zhCN/index.demo-entry.md')
   },
   {
     path: 'typography',
