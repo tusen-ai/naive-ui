@@ -455,7 +455,7 @@ export default defineComponent({
       const { value: barEl } = barElRef
       if (!barEl)
         return
-      if (!firstTimeUpdatePosition)
+      if (firstTimeUpdatePosition)
         firstTimeUpdatePosition = false
       const disableTransitionClassName = 'transition-disabled'
       barEl.classList.add(disableTransitionClassName)

@@ -354,6 +354,48 @@ describe('n-tabs', () => {
     expect(wrapper.find('.n-tabs-nav__suffix').text()).toBe('test-suffix')
   })
 
+  it('should only disable bar transition for the first nav resize', async () => {
+    const wrapper = mount(NTabs, {
+      props: {
+        defaultValue: '1'
+      },
+      slots: {
+        default: () => [
+          h(NTabPane, {
+            tab: '1',
+            name: '1'
+          }),
+          h(NTabPane, {
+            tab: '2',
+            name: '2'
+          })
+        ]
+      }
+    })
+    const barEl = wrapper.find('.n-tabs-bar').element as HTMLElement
+    const addSpy = vi.spyOn(barEl.classList, 'add')
+
+    ;(wrapper.vm as any).handleNavResize({
+      contentRect: {
+        width: 100,
+        height: 20
+      }
+    })
+    await sleep(80)
+    ;(wrapper.vm as any).handleNavResize({
+      contentRect: {
+        width: 120,
+        height: 20
+      }
+    })
+
+    expect(
+      addSpy.mock.calls.filter(([className]) => {
+        return className === 'transition-disabled'
+      })
+    ).toHaveLength(1)
+  })
+
   it('should work with `tab-class` prop', () => {
     const wrapper = mount(NTabs, {
       props: {
