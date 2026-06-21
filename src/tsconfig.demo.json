@@ -5,6 +5,7 @@
     "composite": false,
     "target": "ES6",
     "rootDirs": [".", "../generic"],
+    "rootDir": "..",
     "module": "es6",
     "noEmit": true
   },
