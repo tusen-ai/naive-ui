@@ -75,9 +75,7 @@ export default defineComponent({
             title={getTitleAttribute(props.title)}
             onClick={handleClick}
           >
-            {{
-              default: () => resolveSlot(slots.title, () => [props.title])
-            }}
+            {resolveSlot(slots.title, () => [props.title])}
           </a>
           {slots.default?.()}
         </div>

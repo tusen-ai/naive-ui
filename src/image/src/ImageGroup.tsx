@@ -232,9 +232,10 @@ export default defineComponent({
         showToolbar={this.showToolbar}
         showToolbarTooltip={this.showToolbarTooltip}
         renderToolbar={this.renderToolbar}
+        keepDragOffset={this.keepDragOffset}
         onClose={this.onClose}
       >
-        {this.$slots}
+        {{ ...this.$slots }}
       </NImagePreview>
     )
   }

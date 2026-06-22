@@ -3,6 +3,7 @@ import type { HTMLAttributes, Ref, VNodeChild } from 'vue'
 import type { VirtualListScrollTo } from 'vueuc'
 import type { MergedTheme } from '../../_mixins'
 import type { TreeTheme } from '../styles'
+import type { TreeSpinProps } from './public-types'
 import { createInjectionKey } from '../../_utils'
 
 export type Key = string | number
@@ -138,6 +139,7 @@ export interface TreeInjection {
   overrideDefaultNodeClickBehaviorRef: Ref<
     TreeOverrideNodeClickBehavior | undefined
   >
+  spinPropsRef: Ref<TreeSpinProps | undefined>
   handleSwitcherClick: (node: TreeNode<TreeOption>) => void
   handleSelect: (node: TreeNode<TreeOption>) => void
   handleCheck: (node: TreeNode<TreeOption>, checked: boolean) => void

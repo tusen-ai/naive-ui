@@ -158,7 +158,7 @@ export default defineComponent({
           directives.push([
             clickoutside,
             handleClickOutside,
-            undefined as unknown as string,
+            undefined,
             { capture: true }
           ])
         }
@@ -170,7 +170,7 @@ export default defineComponent({
         directives.push([
           clickoutside,
           handleClickOutside,
-          undefined as unknown as string,
+          undefined,
           { capture: true }
         ])
       }
@@ -341,7 +341,7 @@ export default defineComponent({
                     ]}
                     style={props.contentStyle}
                   >
-                    {slots}
+                    {slots.default?.()}
                   </div>
                 ) : null
               })}
@@ -369,7 +369,7 @@ export default defineComponent({
               ]}
               style={props.contentStyle}
             >
-              {slots}
+              {slots.default?.()}
             </div>
           )
           const maybeScrollableBody = props.scrollable ? (

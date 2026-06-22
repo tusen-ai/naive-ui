@@ -201,7 +201,7 @@ export default defineComponent({
         directives.push([
           clickoutside,
           props.onClickoutside,
-          undefined as unknown as string,
+          undefined,
           { capture: true }
         ])
       }
@@ -313,7 +313,7 @@ export default defineComponent({
                                   style={this.contentStyle}
                                   role="none"
                                 >
-                                  {$slots}
+                                  {$slots.default?.()}
                                 </div>
                               ) : (
                                 <NScrollbar
@@ -328,7 +328,7 @@ export default defineComponent({
                                     this.mergedTheme.peerOverrides.Scrollbar
                                   }
                                 >
-                                  {$slots}
+                                  {{ ...$slots }}
                                 </NScrollbar>
                               )
                             ]

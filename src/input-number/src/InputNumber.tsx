@@ -124,8 +124,12 @@ export default defineComponent({
         }
       })
     }
-    const { mergedBorderedRef, mergedClsPrefixRef, mergedRtlRef }
-      = useConfig(props)
+    const {
+      mergedBorderedRef,
+      mergedClsPrefixRef,
+      mergedRtlRef,
+      mergedComponentPropsRef
+    } = useConfig(props)
     const themeRef = useTheme(
       'InputNumber',
       '-input-number',
@@ -135,7 +139,20 @@ export default defineComponent({
       mergedClsPrefixRef
     )
     const { localeRef } = useLocale('InputNumber')
-    const formItem = useFormItem(props)
+    const formItem = useFormItem(props, {
+      mergedSize: (NFormItem) => {
+        const { size } = props
+        if (size)
+          return size
+        const { mergedSize: formItemSize } = NFormItem || {}
+        if (formItemSize?.value)
+          return formItemSize.value as Size
+        const configSize = mergedComponentPropsRef?.value?.InputNumber?.size
+        if (configSize)
+          return configSize
+        return 'medium'
+      }
+    })
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
     // dom ref
     const inputInstRef = ref<InputInst | null>(null)

@@ -121,7 +121,7 @@ export default defineComponent({
           return
         }
       }
-      NUpload.submit(props.file.id)
+      NUpload.submit({ fileId: props.file.id })
     }
     function handleRemoveOrCancelClick(e: MouseEvent): void {
       e.preventDefault()
@@ -236,6 +236,7 @@ export default defineComponent({
       showDownloadButton: showDownloadButtonRef,
       showRetryButton: showRetryButtonRef,
       showPreviewButton: showPreviewButtonRef,
+      alwaysShowActions: NUpload.alwaysShowActionsRef,
       mergedThumbnailUrl: mergedThumbnailUrlRef,
       shouldUseThumbnailUrl: NUpload.shouldUseThumbnailUrlRef,
       renderIcon: NUpload.renderIconRef,
@@ -349,7 +350,9 @@ export default defineComponent({
           <div
             class={[
               `${clsPrefix}-upload-file-info__action`,
-              `${clsPrefix}-upload-file-info__action--${listType}-type`
+              `${clsPrefix}-upload-file-info__action--${listType}-type`,
+              this.alwaysShowActions
+              && `${clsPrefix}-upload-file-info__action--always-show`
             ]}
           >
             {this.showPreviewButton ? (

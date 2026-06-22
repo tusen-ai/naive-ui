@@ -218,7 +218,7 @@ export default defineComponent({
         ]}
         style={this.mergedstyle}
       >
-        {this.$slots}
+        {this.$slots.default?.()}
       </div>
     )
   }
