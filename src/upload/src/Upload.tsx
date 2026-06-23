@@ -482,7 +482,9 @@ export default defineComponent({
       }
     ) => {
       const { append, remove } = options
-      const fileListAfterChange = Array.from(mergedFileListRef.value)
+      const fileListAfterChange = Array.from(
+        uncontrolledFileListRef.value.map(createSettledFileInfo)
+      )
       const fileIndex = fileListAfterChange.findIndex(
         file => file.id === fileAfterChange.id
       )
