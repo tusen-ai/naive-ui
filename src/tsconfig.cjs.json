@@ -4,8 +4,8 @@
     "target": "ES6",
     "jsx": "react",
     "rootDir": ".",
-    "module": "CommonJS",
-    "moduleResolution": "node",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "outDir": "../lib"
   },
   "exclude": ["./**/*.spec.*"]
