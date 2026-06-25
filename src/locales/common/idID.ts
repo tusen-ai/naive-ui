@@ -84,7 +84,9 @@ const idID: NLocale = {
     positiveText: 'OK',
     negativeText: 'Batalkan',
     now: 'Sekarang',
-    clear: 'Bersihkan'
+    clear: 'Bersihkan',
+    am: 'AM',
+    pm: 'PM'
   },
   Pagination: {
     goto: 'Ke',
