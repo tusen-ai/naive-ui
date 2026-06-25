@@ -33,6 +33,7 @@ export default cB('alert', `
   background-color: var(--n-color);
   text-align: start;
   word-break: break-word;
+  min-height: var(--n-icon-size);
 `, [
   cE('border', `
     border-radius: inherit;
