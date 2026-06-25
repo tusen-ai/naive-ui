@@ -1,9 +1,10 @@
-import type { CSSProperties, PropType } from 'vue'
+import type { CSSProperties, PropType, SlotsType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CheckboxTheme } from '../styles'
 import type {
   CheckboxInst,
+  CheckboxSlots,
   OnUpdateChecked,
   OnUpdateCheckedImpl
 } from './interface'
@@ -77,6 +78,7 @@ export type CheckboxProps = ExtractPublicPropTypes<typeof checkboxProps>
 export default defineComponent({
   name: 'Checkbox',
   props: checkboxProps,
+  slots: Object as SlotsType<CheckboxSlots>,
   setup(props) {
     if (__DEV__) {
       watchEffect(() => {
