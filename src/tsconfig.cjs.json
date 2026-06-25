@@ -8,5 +8,5 @@
     "moduleResolution": "nodenext",
     "outDir": "../lib"
   },
-  "exclude": ["./**/*.spec.*"]
+  "exclude": ["./**/*.spec.*", "./vitest-setup.ts"]
 }
