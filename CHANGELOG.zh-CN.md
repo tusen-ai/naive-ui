@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### i18n
+
+- 新增 nnNO locale
+
 ### Feats
 
 - `n-upload` 新增 `always-show-actions` 属性，关闭 [#8073](https://github.com/tusen-ai/naive-ui/issues/8073)

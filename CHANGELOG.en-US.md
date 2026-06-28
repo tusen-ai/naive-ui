@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### i18n
+
+- Add nnNO locale.
+
 ### Feats
 
 - `n-upload` adds `always-show-actions` prop, closes [#8073](https://github.com/tusen-ai/naive-ui/issues/8073).
