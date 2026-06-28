@@ -40,17 +40,15 @@ const nbNO: NLocale = {
     datePlaceholder: 'Velg dato',
     datetimePlaceholder: 'Velg dato og tid',
     monthPlaceholder: 'Velg måned',
-    // FIXME: translation needed
-    yearPlaceholder: 'Select Year',
-    quarterPlaceholder: 'Select Quarter',
-    weekPlaceholder: 'Select Week',
+    yearPlaceholder: 'Velg år',
+    quarterPlaceholder: 'Velg kvartal',
+    weekPlaceholder: 'Velg uke',
     startDatePlaceholder: 'Startdato',
     endDatePlaceholder: 'Sluttdato',
     startDatetimePlaceholder: 'Startdato og -tid',
     endDatetimePlaceholder: 'Sluttdato og -tid',
-    // FIXME: translation needed
-    startMonthPlaceholder: 'Start Month',
-    endMonthPlaceholder: 'End Month',
+    startMonthPlaceholder: 'Startmåned',
+    endMonthPlaceholder: 'Sluttmåned',
     monthBeforeYear: true,
     firstDayOfWeek: 0 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
     today: 'I dag'
@@ -65,13 +63,12 @@ const nbNO: NLocale = {
     sourceTitle: 'Kilde',
     targetTitle: 'Mål'
   },
-  // TODO: translation
   Transfer: {
-    selectAll: 'Select all',
-    unselectAll: 'Unselect all',
-    clearAll: 'Clear',
-    total: (num: number): string => `Total ${num} items`,
-    selected: (num: number): string => `${num} items selected`
+    selectAll: 'Velg alle',
+    unselectAll: 'Fjern alle',
+    clearAll: 'Tøm',
+    total: (num: number): string => `Totalt ${num} elementer`,
+    selected: (num: number): string => `${num} elementer valgt`
   },
   Empty: {
     description: 'Ingen data'
@@ -116,16 +113,15 @@ const nbNO: NLocale = {
     restore: 'Nullstill til standardvalg'
   },
   Image: {
-    tipPrevious: 'Previous picture (←)',
-    tipNext: 'Next picture (→)',
-    tipCounterclockwise: 'Counterclockwise',
-    tipClockwise: 'Clockwise',
-    tipZoomOut: 'Zoom out',
-    tipZoomIn: 'Zoom in',
-    tipDownload: 'Download',
-    tipClose: 'Close (Esc)',
-    // TODO: translation
-    tipOriginalSize: 'Zoom to original size'
+    tipPrevious: 'Forrige bilde (←)',
+    tipNext: 'Neste bilde (→)',
+    tipCounterclockwise: 'Mot klokken',
+    tipClockwise: 'Med klokken',
+    tipZoomOut: 'Zoom ut',
+    tipZoomIn: 'Zoom inn',
+    tipDownload: 'Last ned',
+    tipClose: 'Lukk (Esc)',
+    tipOriginalSize: 'Zoom til opprinnelig størrelse'
   },
   Heatmap: {
     less: 'mindre',
