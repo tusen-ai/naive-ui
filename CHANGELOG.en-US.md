@@ -5,6 +5,7 @@
 ### i18n
 
 - Add nnNO locale.
+- Update nbNO locale.
 
 ### Feats
 

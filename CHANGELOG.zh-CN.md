@@ -5,6 +5,7 @@
 ### i18n
 
 - 新增 nnNO locale
+- 更新 nbNO locale
 
 ### Feats
 
