@@ -46,7 +46,7 @@ export default defineComponent({
         ]}
         role="group"
       >
-        {this.$slots}
+        {this.$slots.default?.()}
       </div>
     )
   }

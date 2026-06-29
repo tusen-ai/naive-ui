@@ -114,7 +114,7 @@ export default defineComponent({
                   key="placeholder"
                   class={`${clsPrefix}-base-loading__placeholder`}
                 >
-                  {this.$slots}
+                  {this.$slots.default?.()}
                 </div>
               )
           }}

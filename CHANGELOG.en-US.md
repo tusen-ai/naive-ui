@@ -2,6 +2,11 @@
 
 ## NEXT_VERSION
 
+### i18n
+
+- Add nnNO locale.
+- Update nbNO locale.
+
 ### Feats
 
 - `n-upload` adds `always-show-actions` prop, closes [#8073](https://github.com/tusen-ai/naive-ui/issues/8073).
@@ -13,6 +18,10 @@
 - Fix `n-data-table`'s empty state not vertically centered when height is set, closes [#7546](https://github.com/tusen-ai/naive-ui/issues/7546).
 - fix(spin): preserve size-based strokeWidth defaults in NSpin, closes [#8061](https://github.com/tusen-ai/naive-ui/issues/8061)
 - Fix where the drag position of `n-modal` was reset during rendering.
+- Fix `n-tabs` bar transition disabled after nav resize, closes [#7406](https://github.com/tusen-ai/naive-ui/issues/7406).
+- Fix `vitest-setup.ts` being emitted into build outputs.
+- Fix `n-dynamic-tags` committing a tag when Enter is pressed to confirm an IME composition.
+
 
 ## 2.44.1
 

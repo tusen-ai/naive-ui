@@ -2,6 +2,11 @@
 
 ## NEXT_VERSION
 
+### i18n
+
+- 新增 nnNO locale
+- 更新 nbNO locale
+
 ### Feats
 
 - `n-upload` 新增 `always-show-actions` 属性，关闭 [#8073](https://github.com/tusen-ai/naive-ui/issues/8073)
@@ -13,6 +18,9 @@
 - 修复 `n-data-table` 的 empty 状态在设定高度后没有垂直居中显示，关闭 [#7546](https://github.com/tusen-ai/naive-ui/issues/7546)
 - 修复 `n-spin` 未传入 `strokeWidth` 时无法按 `size` 使用内置线宽（被 Loading 的默认值覆盖）的问题，关闭 [#8061](https://github.com/tusen-ai/naive-ui/issues/8061)
 - 修复 `n-modal` 拖拽位置在渲染被重置的问题
+- 修复 `n-tabs` 导航尺寸变化后标签栏过渡动画被禁用的问题，关闭 [#7406](https://github.com/tusen-ai/naive-ui/issues/7406)
+- 修复 `vitest-setup.ts` 被输出到构建产物的问题
+- 修复 `n-dynamic-tags` 在输入法合成（IME composition）期间按 Enter 确认候选词时会误提交标签的问题
 
 ## 2.44.1
 

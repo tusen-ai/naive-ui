@@ -60,7 +60,7 @@ const Scrollbar = defineComponent({
   render() {
     return (
       <NScrollbar ref="scrollbarInstRef" {...this.$props}>
-        {this.$slots}
+        {{ ...this.$slots }}
       </NScrollbar>
     )
   }

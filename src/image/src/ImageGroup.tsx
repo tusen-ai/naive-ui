@@ -235,7 +235,7 @@ export default defineComponent({
         keepDragOffset={this.keepDragOffset}
         onClose={this.onClose}
       >
-        {this.$slots}
+        {{ ...this.$slots }}
       </NImagePreview>
     )
   }

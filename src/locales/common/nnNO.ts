@@ -1,22 +1,22 @@
 import type { NLocale } from './enUS'
 
-const nbNO: NLocale = {
-  name: 'nb-NO',
+const nnNO: NLocale = {
+  name: 'nn-NO',
   global: {
     undo: 'Angre',
     redo: 'Utfør likevel',
-    confirm: 'Bekreft',
+    confirm: 'Stadfest',
     clear: 'Tøm'
   },
   Popconfirm: {
-    positiveText: 'Bekreft',
+    positiveText: 'Stadfest',
     negativeText: 'Avbryt'
   },
   Cascader: {
-    placeholder: 'Vennligst velg',
-    loading: 'Laster',
+    placeholder: 'Vel',
+    loading: 'Lastar',
     loadingRequiredMessage: (label: string): string =>
-      `Vennligst last alle underpunkter av ${label} før du velger oppføringen.`
+      `Last alle underpunkt av ${label} før du vel oppføringa.`
   },
   Time: {
     dateFormat: 'dd.MM.yyyy',
@@ -33,54 +33,54 @@ const nbNO: NLocale = {
     quarterFormat: 'yyyy-qqq',
     weekFormat: 'YYYY-w',
     clear: 'Tøm',
-    now: 'Nå',
-    confirm: 'Bekreft',
-    selectTime: 'Velg tid',
-    selectDate: 'Velg dato',
-    datePlaceholder: 'Velg dato',
-    datetimePlaceholder: 'Velg dato og tid',
-    monthPlaceholder: 'Velg måned',
-    yearPlaceholder: 'Velg år',
-    quarterPlaceholder: 'Velg kvartal',
-    weekPlaceholder: 'Velg uke',
+    now: 'No',
+    confirm: 'Stadfest',
+    selectTime: 'Vel tid',
+    selectDate: 'Vel dato',
+    datePlaceholder: 'Vel dato',
+    datetimePlaceholder: 'Vel dato og tid',
+    monthPlaceholder: 'Vel månad',
+    yearPlaceholder: 'Vel år',
+    quarterPlaceholder: 'Vel kvartal',
+    weekPlaceholder: 'Vel veke',
     startDatePlaceholder: 'Startdato',
     endDatePlaceholder: 'Sluttdato',
     startDatetimePlaceholder: 'Startdato og -tid',
     endDatetimePlaceholder: 'Sluttdato og -tid',
-    startMonthPlaceholder: 'Startmåned',
-    endMonthPlaceholder: 'Sluttmåned',
+    startMonthPlaceholder: 'Startmånad',
+    endMonthPlaceholder: 'Sluttmånad',
     monthBeforeYear: true,
     firstDayOfWeek: 0 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
     today: 'I dag'
   },
   DataTable: {
-    checkTableAll: 'Velg alt',
-    uncheckTableAll: 'Velg ingenting',
-    confirm: 'Bekreft',
+    checkTableAll: 'Vel alt',
+    uncheckTableAll: 'Vel ingenting',
+    confirm: 'Stadfest',
     clear: 'Tøm'
   },
   LegacyTransfer: {
-    sourceTitle: 'Kilde',
+    sourceTitle: 'Kjelde',
     targetTitle: 'Mål'
   },
   Transfer: {
-    selectAll: 'Velg alle',
+    selectAll: 'Vel alle',
     unselectAll: 'Fjern alle',
     clearAll: 'Tøm',
-    total: (num: number): string => `Totalt ${num} elementer`,
-    selected: (num: number): string => `${num} elementer valgt`
+    total: (num: number): string => `Totalt ${num} element`,
+    selected: (num: number): string => `${num} element valt`
   },
   Empty: {
     description: 'Ingen data'
   },
   Select: {
-    placeholder: 'Vennligst velg'
+    placeholder: 'Vel'
   },
   TimePicker: {
-    placeholder: 'Velg tid',
+    placeholder: 'Vel tid',
     positiveText: 'OK',
     negativeText: 'Avbryt',
-    now: 'Nå',
+    now: 'No',
     clear: 'Tøm'
   },
   Pagination: {
@@ -91,44 +91,44 @@ const nbNO: NLocale = {
     add: 'Legg til'
   },
   Log: {
-    loading: 'Laster'
+    loading: 'Lastar'
   },
   Input: {
-    placeholder: 'Vennligst fyll ut'
+    placeholder: 'Fyll ut'
   },
   InputNumber: {
-    placeholder: 'Vennligst fyll ut'
+    placeholder: 'Fyll ut'
   },
   DynamicInput: {
     create: 'Opprett'
   },
   ThemeEditor: {
-    title: 'Temaredigerer',
-    clearAllVars: 'Nullstill alle variabler',
+    title: 'Temaredigerar',
+    clearAllVars: 'Nullstill alle variablar',
     clearSearch: 'Tøm søk',
-    filterCompName: 'Filtrer etter komponentnavn',
-    filterVarName: 'Filtrer etter variabelnavn',
+    filterCompName: 'Filtrer etter komponentnamn',
+    filterVarName: 'Filtrer etter variabelnamn',
     import: 'Importer',
     export: 'Eksporter',
-    restore: 'Nullstill til standardvalg'
+    restore: 'Nullstill til standardval'
   },
   Image: {
-    tipPrevious: 'Forrige bilde (←)',
-    tipNext: 'Neste bilde (→)',
-    tipCounterclockwise: 'Mot klokken',
-    tipClockwise: 'Med klokken',
+    tipPrevious: 'Førre bilete (←)',
+    tipNext: 'Neste bilete (→)',
+    tipCounterclockwise: 'Mot klokka',
+    tipClockwise: 'Med klokka',
     tipZoomOut: 'Zoom ut',
     tipZoomIn: 'Zoom inn',
     tipDownload: 'Last ned',
     tipClose: 'Lukk (Esc)',
-    tipOriginalSize: 'Zoom til opprinnelig størrelse'
+    tipOriginalSize: 'Zoom til opphavleg storleik'
   },
   Heatmap: {
     less: 'mindre',
-    more: 'mer',
+    more: 'meir',
     monthFormat: 'MMM',
     weekdayFormat: 'eeeeee'
   }
 }
 
-export default nbNO
+export default nnNO

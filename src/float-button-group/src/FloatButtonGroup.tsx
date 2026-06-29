@@ -93,7 +93,7 @@ export default defineComponent({
         style={cssVars as CSSProperties}
         role="group"
       >
-        {this.$slots}
+        {this.$slots.default?.()}
       </div>
     )
   }

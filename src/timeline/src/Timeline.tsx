@@ -62,7 +62,7 @@ export default defineComponent({
             && `${mergedClsPrefix}-timeline--${props.itemPlacement}-placement`
           ]}
         >
-          {slots}
+          {slots.default?.()}
         </div>
       )
     }

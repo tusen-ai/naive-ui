@@ -94,7 +94,7 @@ export default defineComponent({
               : ''
           }}
         >
-          {this.$slots}
+          {this.$slots.default?.()}
         </div>
       )
     }

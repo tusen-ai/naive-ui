@@ -39,7 +39,7 @@ export default defineComponent({
         aria-hidden={this.ariaHidden}
         aria-disabled={this.ariaDisabled}
       >
-        {this.$slots}
+        {this.$slots.default?.()}
       </i>
     )
   }
