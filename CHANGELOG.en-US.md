@@ -19,6 +19,7 @@
 - fix(spin): preserve size-based strokeWidth defaults in NSpin, closes [#8061](https://github.com/tusen-ai/naive-ui/issues/8061)
 - Fix `n-tabs` bar transition disabled after nav resize, closes [#7406](https://github.com/tusen-ai/naive-ui/issues/7406).
 - Fix `vitest-setup.ts` being emitted into build outputs.
+- Fix `n-dynamic-tags` committing a tag when Enter is pressed to confirm an IME composition.
 
 
 ## 2.44.1
