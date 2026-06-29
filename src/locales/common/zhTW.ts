@@ -42,7 +42,7 @@ const zhTW: NLocale = {
     monthPlaceholder: '選擇月份',
     yearPlaceholder: '選擇年份',
     quarterPlaceholder: '選擇季度',
-    weekPlaceholder: 'Select Week',
+    weekPlaceholder: '選擇週',
     startDatePlaceholder: '開始日期',
     endDatePlaceholder: '結束日期',
     startDatetimePlaceholder: '開始日期時間',
