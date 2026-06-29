@@ -6,6 +6,7 @@
 
 - 新增 nnNO locale
 - 更新 nbNO locale
+- 翻译日文 locale 中的 `DatePicker.weekPlaceholder`
 
 ### Feats
 
