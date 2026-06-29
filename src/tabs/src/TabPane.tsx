@@ -76,7 +76,7 @@ export default defineComponent({
         class={[`${this.mergedClsPrefix}-tab-pane`, this.class]}
         style={this.style}
       >
-        {this.$slots}
+        {this.$slots.default?.()}
       </div>
     )
   }

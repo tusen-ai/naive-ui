@@ -622,7 +622,7 @@ export default defineComponent({
           ]}
           style={this.contentStyle}
         >
-          {$slots}
+          {$slots.default?.()}
         </div>
         {this.mergedShowFeedback ? (
           <div

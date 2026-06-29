@@ -70,7 +70,7 @@ export const NIconWrapper = defineComponent({
             }
           ]}
         >
-          {slots}
+          {slots.default?.()}
         </div>
       )
     }

@@ -2,6 +2,7 @@ import path from 'node:path'
 import process from 'node:process'
 import { babel } from '@rollup/plugin-babel'
 import { defineConfig } from 'vite'
+import vueJsxVapor from 'vue-jsx-vapor/vite'
 
 const extensions = ['.mjs', '.js', '.json', '.ts', '.tsx']
 
@@ -33,6 +34,9 @@ export default defineConfig({
         exports: 'named'
       },
       plugins: [
+        vueJsxVapor({
+          interop: true
+        }),
         babel({
           extensions,
           babelHelpers: 'bundled'

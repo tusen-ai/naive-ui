@@ -161,6 +161,8 @@ export default defineComponent({
       doChange(tags)
     }
     function handleInputKeyDown(e: KeyboardEvent): void {
+      if (inputInstRef.value?.isCompositing)
+        return
       switch (e.key) {
         case 'Enter':
           handleInputConfirm()
