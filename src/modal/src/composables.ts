@@ -2,7 +2,7 @@ import type { Ref } from 'vue'
 import type { ModalDraggableOptions } from './interface'
 import type { ModalApiInjection, ModalReactive } from './ModalProvider'
 import { off, on } from 'evtd'
-import { computed, inject, onUnmounted, ref } from 'vue'
+import { computed, inject, nextTick, onUnmounted, ref } from 'vue'
 import { throwError } from '../../_utils'
 import { modalApiInjectionKey, modalReactiveListInjectionKey } from './context'
 
@@ -150,7 +150,9 @@ export function useDragModal(
         dragYRef.value = pendingPosition.y
         pendingPosition = null
       }
-      options.onEnd(modal)
+      void nextTick(() => {
+        options.onEnd(modal)
+      })
     }
 
     on('mousedown', header, handleMouseDown)

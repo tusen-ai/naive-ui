@@ -19,6 +19,7 @@ import {
   mergeProps,
   nextTick,
   normalizeClass,
+  normalizeStyle,
   provide,
   ref,
   toRef,
@@ -262,22 +263,18 @@ export default defineComponent({
       handleBeforeLeave,
       preset,
       mergedClsPrefix,
-      dragX: dragXRef,
-      dragY: dragYRef
+      dragX,
+      dragY
     } = this
-    const effectiveAttrs = { ...($attrs as any) }
-    if (dragXRef !== null && dragYRef !== null) {
-      const baseStyle = effectiveAttrs.style
-      if (typeof baseStyle === 'string') {
-        effectiveAttrs.style = `${baseStyle};left:${dragXRef}px;top:${dragYRef}px`
-      }
-      else {
-        effectiveAttrs.style = {
-          ...(baseStyle || {}),
-          left: `${dragXRef}px`,
-          top: `${dragYRef}px`
+    const effectiveAttrs = { ...$attrs }
+    if (dragX !== null && dragY !== null) {
+      effectiveAttrs.style = normalizeStyle([
+        effectiveAttrs.style,
+        {
+          left: `${dragX}px`,
+          top: `${dragY}px`
         }
-      }
+      ])
     }
     let childNode: VNode | null = null
     if (!preset) {
