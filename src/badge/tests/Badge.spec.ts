@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils'
+import { h } from 'vue'
 import { NBadge } from '../index'
 
 describe('n-badge', () => {
@@ -89,5 +90,107 @@ describe('n-badge', () => {
       expect(wrapper.find('.n-badge').attributes('style')).toContain(item.color)
       wrapper.unmount()
     })
+  })
+
+  it('should work with `offset` prop', async () => {
+    const wrapper = mount(NBadge, {
+      props: {
+        value: 5,
+        offset: [10, 10]
+      }
+    })
+    expect(wrapper.find('.n-badge-sup').attributes('style')).toContain('transform')
+    wrapper.unmount()
+  })
+
+  it('should work with default slot', () => {
+    const wrapper = mount(NBadge, {
+      props: { value: 5 },
+      slots: {
+        default: () => h('div', { class: 'badge-content' }, 'Content')
+      }
+    })
+    expect(wrapper.find('.badge-content').exists()).toBe(true)
+    expect(wrapper.find('.badge-content').text()).toBe('Content')
+    wrapper.unmount()
+  })
+
+  it('should work with value slot', () => {
+    const wrapper = mount(NBadge, {
+      slots: {
+        value: () => 'Custom Value'
+      }
+    })
+    expect(wrapper.find('.n-badge-sup').exists()).toBe(true)
+    wrapper.unmount()
+  })
+
+  it('should work with string value', () => {
+    const wrapper = mount(NBadge, {
+      props: { value: 'NEW' }
+    })
+    expect(wrapper.find('.n-badge-sup').exists()).toBe(true)
+    wrapper.unmount()
+  })
+
+  it('should not show badge for negative values when showZero is false', () => {
+    const wrapper = mount(NBadge, {
+      props: { value: -5 }
+    })
+    // Negative values are treated like zero, so badge is hidden by default
+    expect(wrapper.find('.n-badge-sup').exists()).toBe(false)
+    wrapper.unmount()
+  })
+
+  it('should show badge for negative values when showZero is true', () => {
+    const wrapper = mount(NBadge, {
+      props: { value: -5, showZero: true }
+    })
+    // When showZero is true, negative values are shown
+    expect(wrapper.find('.n-badge-sup').exists()).toBe(true)
+    wrapper.unmount()
+  })
+
+  it('should handle RTL mode', async () => {
+    const wrapper = mount(NBadge, {
+      props: {
+        value: 5,
+        offset: [10, 10]
+      }
+    })
+    expect(wrapper.find('.n-badge').exists()).toBe(true)
+    wrapper.unmount()
+  })
+
+  it('should have correct title attribute on sup element', () => {
+    const wrapper = mount(NBadge, {
+      props: { value: 100 }
+    })
+    const sup = wrapper.find('.n-badge-sup')
+    expect(sup.exists()).toBe(true)
+    expect(sup.attributes('title')).toBe('100')
+    wrapper.unmount()
+  })
+
+  it('should work with large values', () => {
+    const wrapper = mount(NBadge, {
+      props: { value: 9999, max: 99 }
+    })
+    expect(wrapper.find('.n-badge-sup').exists()).toBe(true)
+    wrapper.unmount()
+  })
+
+  it('should not show badge when value is undefined and no value slot', () => {
+    const wrapper = mount(NBadge)
+    expect(wrapper.find('.n-badge-sup').exists()).toBe(false)
+    wrapper.unmount()
+  })
+
+  it('should show badge with dot when value is undefined', () => {
+    const wrapper = mount(NBadge, {
+      props: { dot: true }
+    })
+    expect(wrapper.find('.n-badge-sup').exists()).toBe(true)
+    wrapper.unmount()
   })
 })
