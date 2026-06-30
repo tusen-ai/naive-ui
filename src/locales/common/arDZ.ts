@@ -12,6 +12,12 @@ const arDZ: NLocale = {
     positiveText: 'تأكيد',
     negativeText: 'إلغاء'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'يرجى التحديد',
     loading: 'جاري التحميل',

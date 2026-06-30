@@ -12,6 +12,12 @@ const ruRu: NLocale = {
     positiveText: 'Подтвердить',
     negativeText: 'Отмена'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'Выбрать',
     loading: 'Загрузка',

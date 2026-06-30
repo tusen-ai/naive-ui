@@ -16,7 +16,7 @@ function createLabel(level: number): string {
   if (level === 2)
     return 'Baz'
   if (level === 1)
-    return '???'
+    return 'Qux'
   return ''
 }
 

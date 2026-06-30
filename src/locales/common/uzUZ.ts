@@ -12,6 +12,12 @@ const uzUZ: NLocale = {
     positiveText: 'Tasdiqlash',
     negativeText: 'Bekor qilish'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'Tanlash',
     loading: 'Yuklanmoqda',

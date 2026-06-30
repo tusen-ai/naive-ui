@@ -12,6 +12,12 @@ const daDK: NLocale = {
     positiveText: 'Bekræft',
     negativeText: 'Annuller'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'Vælg venligst',
     loading: 'Indlæser',

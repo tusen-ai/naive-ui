@@ -59,6 +59,7 @@ import type { FloatButtonTheme } from '../../float-button/styles'
 import type { FormSize } from '../../form/src/public-types'
 import type { FormTheme } from '../../form/styles'
 import type { GradientTextTheme } from '../../gradient-text/styles'
+import type { GuideTheme } from '../../guide/styles'
 import type { HeatmapTheme } from '../../heatmap/styles'
 import type { IconWrapperTheme } from '../../icon-wrapper/styles'
 import type { IconTheme } from '../../icon/styles'
@@ -171,6 +172,7 @@ export interface GlobalThemeWithoutCommon {
   FloatButton?: FloatButtonTheme
   FloatButtonGroup?: FloatButtonGroupTheme
   GradientText?: GradientTextTheme
+  Guide?: GuideTheme
   Icon?: IconTheme
   IconWrapper?: IconWrapperTheme
   Image?: ImageTheme
