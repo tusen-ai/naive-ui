@@ -35,6 +35,7 @@
 ### Fixes
 
 - `n-config-provider` fixes `size` prop doesn't work for some components.
+- Fix `n-card` internal scrollbar emits Non-function value encountered for default slot warning when `content-scrollable` is enabled, closes [#7556](https://github.com/tusen-ai/naive-ui/issues/7556).
 
 ## 2.44.0
 
