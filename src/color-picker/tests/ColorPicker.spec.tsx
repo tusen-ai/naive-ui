@@ -247,4 +247,40 @@ describe('n-color-picker 2', () => {
     expect(wrapper.find('.n-color-picker__value').text()).toBe('test-label')
     wrapper.unmount()
   })
+
+  describe('attrs (style & click)', () => {
+    it('applies passed style to trigger', () => {
+      const wrapper = mount(NColorPicker, {
+        attrs: {
+          style: 'margin-top: 12px; padding-left: 8px;'
+        }
+      })
+      const trigger = wrapper.find('.n-color-picker').element as HTMLElement
+      expect(trigger.style.marginTop).toBe('12px')
+      expect(trigger.style.paddingLeft).toBe('8px')
+      wrapper.unmount()
+    })
+
+    it('calls passed onClick when trigger is clicked', async () => {
+      const onClick = vi.fn()
+      const wrapper = mount(NColorPicker, {
+        attrs: { onClick }
+      })
+      await wrapper.find('.n-color-picker').trigger('click')
+      expect(onClick).toHaveBeenCalledTimes(1)
+      wrapper.unmount()
+    })
+
+    it('merges internal trigger click with passed onClick (both run)', async () => {
+      const onClick = vi.fn()
+      const wrapper = mount(NColorPicker, {
+        attachTo: document.body,
+        attrs: { onClick }
+      })
+      await wrapper.find('.n-color-picker').trigger('click')
+      expect(onClick).toHaveBeenCalledTimes(1)
+      expect(document.querySelector('.n-color-picker-panel')).not.toEqual(null)
+      wrapper.unmount()
+    })
+  })
 })
