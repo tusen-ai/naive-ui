@@ -330,6 +330,12 @@ export default defineComponent({
       downloadCsv,
       scrollTo: (arg0: any, arg1?: any) => {
         mainTableInstRef.value?.scrollTo(arg0, arg1)
+      },
+      getFilteredData: () => {
+        return rawPaginatedDataRef.value
+      },
+      getCurrentPageData: () => {
+        return paginatedDataRef.value.map(t => t.rawNode)
       }
     }
     const cssVarsRef = computed(() => {
