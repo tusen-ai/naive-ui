@@ -38,6 +38,7 @@ type TypeSafeDialogReactive = DialogReactive & {
 export interface DialogApiInjection {
   destroyAll: () => void
   create: (options: DialogOptions) => DialogReactive
+  default: (options: DialogOptions) => DialogReactive
   success: (options: DialogOptions) => DialogReactive
   warning: (options: DialogOptions) => DialogReactive
   error: (options: DialogOptions) => DialogReactive
@@ -85,8 +86,8 @@ export const NDialogProvider = defineComponent({
       return dialogReactive
     }
     const typedApi = (
-      ['info', 'success', 'warning', 'error'] as Array<
-        'info' | 'success' | 'warning' | 'error'
+      ['default', 'info', 'success', 'warning', 'error'] as Array<
+        'default' | 'info' | 'success' | 'warning' | 'error'
       >
     ).map(type => (options: DialogOptions): DialogReactive => {
       return create({ ...options, type })
@@ -109,10 +110,11 @@ export const NDialogProvider = defineComponent({
     const api = {
       create,
       destroyAll,
-      info: typedApi[0],
-      success: typedApi[1],
-      warning: typedApi[2],
-      error: typedApi[3]
+      default: typedApi[0],
+      info: typedApi[1],
+      success: typedApi[2],
+      warning: typedApi[3],
+      error: typedApi[4]
     }
     provide(dialogApiInjectionKey, api)
     provide(dialogProviderInjectionKey, {
