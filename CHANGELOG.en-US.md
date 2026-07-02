@@ -23,6 +23,7 @@
 - Fix `n-tabs` bar transition disabled after nav resize, closes [#7406](https://github.com/tusen-ai/naive-ui/issues/7406).
 - Fix `vitest-setup.ts` being emitted into build outputs.
 - Fix `n-dynamic-tags` committing a tag when Enter is pressed to confirm an IME composition.
+- Fix `n-space` `size` prop not taking effect when set to `0`, closes [#7530](https://github.com/tusen-ai/naive-ui/issues/7530).
 
 ## 2.44.1
 
