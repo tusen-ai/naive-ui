@@ -31,7 +31,7 @@ import {
   startOfWeek,
   startOfYear
 } from 'date-fns'
-import { computed, inject, ref, watch } from 'vue'
+import { computed, inject, ref, unref, watch } from 'vue'
 import { MONTH_ITEM_HEIGHT } from '../config'
 import { datePickerInjectionKey } from '../interface'
 import {
@@ -51,6 +51,10 @@ const useCalendarProps = {
   actions: {
     type: Array as PropType<string[]>,
     default: () => ['now', 'clear', 'confirm']
+  },
+  showWeekPrefix: {
+    type: Boolean,
+    default: undefined
   }
 } as const
 
@@ -106,6 +110,9 @@ function useCalendar(
   const yearScrollbarRef = ref<ScrollbarInst | null>(null)
   const monthScrollbarRef = ref<ScrollbarInst | null>(null)
   const nowRef = ref(Date.now())
+  const mergedShowWeekPrefixRef = computed(() => {
+    return type === 'week' && (props.showWeekPrefix ?? true)
+  })
   const dateArrayRef = computed(() => {
     return dateArray(
       calendarValueRef.value,
@@ -113,7 +120,8 @@ function useCalendar(
       nowRef.value,
       firstDayOfWeekRef.value ?? localeRef.value.firstDayOfWeek,
       false,
-      type === 'week'
+      type === 'week',
+      unref(mergedShowWeekPrefixRef)
     )
   })
   const monthArrayRef = computed(() => {
@@ -150,14 +158,22 @@ function useCalendar(
     )
   })
   const weekdaysRef = computed(() => {
-    return dateArrayRef.value.slice(0, 7).map((dateItem) => {
-      const { ts } = dateItem
-      return format(
-        ts,
-        mergedDayFormatRef.value,
-        panelCommon.dateFnsOptions.value
-      )
-    })
+    const mergedShowWeekPrefix = unref(mergedShowWeekPrefixRef)
+    const range = mergedShowWeekPrefix ? [0, 8] : [0, 7]
+    const weekDays = dateArrayRef.value
+      .slice(...range)
+      .map((dateItem, index) => {
+        if (mergedShowWeekPrefix && index === 0) {
+          return ''
+        }
+        const { ts } = dateItem
+        return format(
+          ts,
+          mergedDayFormatRef.value,
+          panelCommon.dateFnsOptions.value
+        )
+      })
+    return weekDays
   })
   const calendarMonthRef = computed(() => {
     return format(
@@ -553,6 +569,7 @@ function useCalendar(
     monthArray: monthArrayRef,
     yearArray: yearArrayRef,
     quarterArray: quarterArrayRef,
+    mergedShowWeekPrefix: mergedShowWeekPrefixRef,
     calendarYear: calendarYearRef,
     calendarMonth: calendarMonthRef,
     weekdays: weekdaysRef,

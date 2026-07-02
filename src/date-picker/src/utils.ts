@@ -17,6 +17,7 @@ import {
   getMonth,
   getQuarter,
   getTime,
+  getWeek,
   getYear,
   isSameDay,
   isSameMonth,
@@ -109,6 +110,11 @@ export interface DateItem {
   selected: boolean
   inSelectedWeek: boolean
   ts: number
+  weekNumber?: number // only for week mode
+}
+
+export function formatWeekNumber(weekNumber: number): string {
+  return `${weekNumber}.`
 }
 
 export interface MonthItem {
@@ -354,7 +360,8 @@ function dateArray(
   currentTs: number,
   startDay: 0 | 1 | 2 | 3 | 4 | 5 | 6,
   strip: boolean = false,
-  weekMode: boolean = false
+  weekMode: boolean = false,
+  showWeekPrefix: boolean = false
 ): DateItem[] {
   const granularity = weekMode ? 'week' : 'date'
   const displayMonth = getMonth(monthTs)
@@ -414,6 +421,30 @@ function dateArray(
     )
     displayMonthIterator = getTime(addDays(displayMonthIterator, 1))
   }
+
+  if (weekMode && showWeekPrefix) {
+    const calendarDaysWithWeekNumber: DateItem[] = []
+    for (let i = 0; i < calendarDays.length; i += 7) {
+      const firstDayOfWeek = calendarDays[i]
+      const weekNumberItem: DateItem = {
+        type: 'date',
+        dateObject: firstDayOfWeek.dateObject,
+        inCurrentMonth: true,
+        isCurrentDate: false,
+        inSpan: false,
+        startOfSpan: false,
+        endOfSpan: false,
+        selected: false,
+        inSelectedWeek: firstDayOfWeek.inSelectedWeek,
+        ts: firstDayOfWeek.ts,
+        weekNumber: getWeek(firstDayOfWeek.ts, { weekStartsOn: startDay })
+      }
+      calendarDaysWithWeekNumber.push(weekNumberItem)
+      calendarDaysWithWeekNumber.push(...calendarDays.slice(i, i + 7))
+    }
+    return calendarDaysWithWeekNumber
+  }
+
   return calendarDays
 }
 

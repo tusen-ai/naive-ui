@@ -17,6 +17,7 @@ import {
   warnOnce
 } from '../../../_utils'
 import { NButton, NxButton } from '../../../button'
+import { formatWeekNumber } from '../utils'
 import PanelHeader from './panelHeader'
 import { useCalendar, useCalendarProps } from './use-calendar'
 
@@ -46,7 +47,9 @@ export default defineComponent({
         }
       })
     }
-    return useCalendar(props, props.type)
+    return {
+      ...useCalendar(props, props.type)
+    }
   },
   render() {
     const {
@@ -55,7 +58,8 @@ export default defineComponent({
       shortcuts,
       onRender,
       datePickerSlots,
-      type
+      type,
+      mergedShowWeekPrefix
     } = this
     onRender?.()
     return (
@@ -117,17 +121,38 @@ export default defineComponent({
               ])}
             </div>
           </div>
-          <div class={`${mergedClsPrefix}-date-panel-weekdays`}>
-            {this.weekdays.map(weekday => (
+          <div
+            class={[
+              `${mergedClsPrefix}-date-panel-weekdays`,
+              {
+                [`${mergedClsPrefix}-date-panel-weekdays--has-prefix`]:
+                  mergedShowWeekPrefix
+              }
+            ]}
+          >
+            {this.weekdays.map((weekday, index) => (
               <div
-                key={weekday}
-                class={`${mergedClsPrefix}-date-panel-weekdays__day`}
+                key={index}
+                class={[
+                  `${mergedClsPrefix}-date-panel-weekdays__day`,
+                  weekday === ''
+                    ? `${mergedClsPrefix}-date-panel-weekdays__day--prefix`
+                    : undefined
+                ]}
               >
                 {weekday}
               </div>
             ))}
           </div>
-          <div class={`${mergedClsPrefix}-date-panel-dates`}>
+          <div
+            class={[
+              `${mergedClsPrefix}-date-panel-dates`,
+              {
+                [`${mergedClsPrefix}-date-panel-dates--has-prefix`]:
+                  mergedShowWeekPrefix
+              }
+            ]}
+          >
             {this.dateArray.map((dateItem, i) => (
               <div
                 data-n-date
@@ -151,7 +176,11 @@ export default defineComponent({
                     [`${mergedClsPrefix}-date-panel-date--week-hovered`]:
                       this.isWeekHovered(dateItem),
                     [`${mergedClsPrefix}-date-panel-date--week-selected`]:
-                      dateItem.inSelectedWeek
+                      dateItem.inSelectedWeek,
+                    [`${mergedClsPrefix}-date-panel-date--has-prefix`]:
+                      mergedShowWeekPrefix,
+                    [`${mergedClsPrefix}-date-panel-date--week-number`]:
+                      dateItem.weekNumber !== undefined
                   }
                 ]}
                 onClick={() => {
@@ -162,7 +191,9 @@ export default defineComponent({
                 }}
               >
                 <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
-                {dateItem.dateObject.date}
+                {dateItem.weekNumber !== undefined
+                  ? formatWeekNumber(dateItem.weekNumber)
+                  : dateItem.dateObject.date}
                 {dateItem.isCurrentDate ? (
                   <div class={`${mergedClsPrefix}-date-panel-date__sup`} />
                 ) : null}

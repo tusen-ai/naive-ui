@@ -304,6 +304,9 @@ export default c([
       margin-bottom: 4px;
       border-bottom: 1px solid var(--n-calendar-days-divider-color);
     `, [
+      cM('has-prefix', `
+        grid-template-columns: repeat(8, var(--n-item-cell-width));
+      `),
       cE('day', `
         white-space: nowrap;
         user-select: none;
@@ -327,6 +330,9 @@ export default c([
       justify-items: center;
       flex-wrap: wrap;
     `, [
+      cM('has-prefix', `
+        grid-template-columns: repeat(8, var(--n-item-cell-width));
+      `),
       cB('date-panel-date', `
         user-select: none;
         -webkit-user-select: none;
@@ -448,14 +454,26 @@ export default c([
           c('&::before', `
             background-color: var(--n-item-color-included);
           `),
-          c('&:nth-child(7n + 1)::before', `
-            border-top-left-radius: var(--n-item-border-radius);
-            border-bottom-left-radius: var(--n-item-border-radius);
-          `),
-          c('&:nth-child(7n + 7)::before', `
-            border-top-right-radius: var(--n-item-border-radius);
-            border-bottom-right-radius: var(--n-item-border-radius);
-          `)
+          cNotM('has-prefix', [
+            c('&:nth-child(7n + 1)::before', `
+              border-top-left-radius: var(--n-item-border-radius);
+              border-bottom-left-radius: var(--n-item-border-radius);
+            `),
+            c('&:nth-child(7n + 7)::before', `
+              border-top-right-radius: var(--n-item-border-radius);
+              border-bottom-right-radius: var(--n-item-border-radius);
+            `)
+          ]),
+          cM('has-prefix', [
+            c('&:nth-child(8n + 1)::before', `
+              border-top-left-radius: var(--n-item-border-radius);
+              border-bottom-left-radius: var(--n-item-border-radius);
+            `),
+            c('&:nth-child(8n + 8)::before', `
+              border-top-right-radius: var(--n-item-border-radius);
+              border-bottom-right-radius: var(--n-item-border-radius);
+            `)
+          ])
         ]),
         cM('week-selected', `
           color: var(--n-item-text-color-active)
@@ -463,13 +481,36 @@ export default c([
           c('&::before', `
             background-color: var(--n-item-color-active);
           `),
-          c('&:nth-child(7n + 1)::before', `
-            border-top-left-radius: var(--n-item-border-radius);
-            border-bottom-left-radius: var(--n-item-border-radius);
+          cNotM('has-prefix', [
+            c('&:nth-child(7n + 1)::before', `
+              border-top-left-radius: var(--n-item-border-radius);
+              border-bottom-left-radius: var(--n-item-border-radius);
+            `),
+            c('&:nth-child(7n + 7)::before', `
+              border-top-right-radius: var(--n-item-border-radius);
+              border-bottom-right-radius: var(--n-item-border-radius);
+            `)
+          ]),
+          cM('has-prefix', [
+            c('&:nth-child(8n + 1)::before', `
+              border-top-left-radius: var(--n-item-border-radius);
+              border-bottom-left-radius: var(--n-item-border-radius);
+            `),
+            c('&:nth-child(8n + 8)::before', `
+              border-top-right-radius: var(--n-item-border-radius);
+              border-bottom-right-radius: var(--n-item-border-radius);
+            `)
+          ])
+        ]),
+        cM('week-number', `
+          cursor: default;
+          color: var(--n-item-text-color-disabled);
+        `, [
+          cM('week-selected', `
+            color: var(--n-item-text-color-active);
           `),
-          c('&:nth-child(7n + 7)::before', `
-            border-top-right-radius: var(--n-item-border-radius);
-            border-bottom-right-radius: var(--n-item-border-radius);
+          c('&:hover', `
+            background-color: transparent;
           `)
         ])
       ])
