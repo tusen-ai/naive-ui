@@ -66,7 +66,7 @@ export default defineComponent({
       = useConfig(props)
     const mergedSizeRef = computed<SpaceSize>(() => {
       return (
-        props.size || mergedComponentPropsRef?.value?.Space?.size || 'medium'
+        props.size ?? mergedComponentPropsRef?.value?.Space?.size ?? 'medium'
       )
     })
     const themeRef = useTheme(
