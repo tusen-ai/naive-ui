@@ -31,7 +31,7 @@ import {
   startOfWeek,
   startOfYear
 } from 'date-fns'
-import { computed, inject, ref, watch } from 'vue'
+import { computed, inject, ref, unref, watch } from 'vue'
 import { MONTH_ITEM_HEIGHT } from '../config'
 import { datePickerInjectionKey } from '../interface'
 import {
@@ -51,13 +51,16 @@ const useCalendarProps = {
   actions: {
     type: Array as PropType<string[]>,
     default: () => ['now', 'clear', 'confirm']
+  },
+  showWeekPrefix: {
+    type: Boolean,
+    default: undefined
   }
 } as const
 
 function useCalendar(
   props: ExtractPropTypes<typeof useCalendarProps>,
-  type: 'date' | 'datetime' | 'month' | 'year' | 'quarter' | 'week',
-  showWeekPrefix?: boolean
+  type: 'date' | 'datetime' | 'month' | 'year' | 'quarter' | 'week'
 ) {
   const panelCommon = usePanelCommon(props)
   const {
@@ -107,6 +110,9 @@ function useCalendar(
   const yearScrollbarRef = ref<ScrollbarInst | null>(null)
   const monthScrollbarRef = ref<ScrollbarInst | null>(null)
   const nowRef = ref(Date.now())
+  const mergedShowWeekPrefixRef = computed(() => {
+    return type === 'week' && (props.showWeekPrefix ?? true)
+  })
   const dateArrayRef = computed(() => {
     return dateArray(
       calendarValueRef.value,
@@ -115,7 +121,7 @@ function useCalendar(
       firstDayOfWeekRef.value ?? localeRef.value.firstDayOfWeek,
       false,
       type === 'week',
-      showWeekPrefix
+      unref(mergedShowWeekPrefixRef)
     )
   })
   const monthArrayRef = computed(() => {
@@ -152,12 +158,13 @@ function useCalendar(
     )
   })
   const weekdaysRef = computed(() => {
-    const range = showWeekPrefix ? [0, 8] : [0, 7]
+    const mergedShowWeekPrefix = unref(mergedShowWeekPrefixRef)
+    const range = mergedShowWeekPrefix ? [0, 8] : [0, 7]
     const weekDays = dateArrayRef.value
       .slice(...range)
       .map((dateItem, index) => {
-        if (showWeekPrefix && index === 0) {
-          return ' '
+        if (mergedShowWeekPrefix && index === 0) {
+          return ''
         }
         const { ts } = dateItem
         return format(
@@ -562,6 +569,7 @@ function useCalendar(
     monthArray: monthArrayRef,
     yearArray: yearArrayRef,
     quarterArray: quarterArrayRef,
+    mergedShowWeekPrefix: mergedShowWeekPrefixRef,
     calendarYear: calendarYearRef,
     calendarMonth: calendarMonthRef,
     weekdays: weekdaysRef,

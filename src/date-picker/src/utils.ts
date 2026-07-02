@@ -113,6 +113,10 @@ export interface DateItem {
   weekNumber?: number // only for week mode
 }
 
+export function formatWeekNumber(weekNumber: number): string {
+  return `${weekNumber}.`
+}
+
 export interface MonthItem {
   type: 'month'
   monthFormat: string
@@ -419,17 +423,26 @@ function dateArray(
   }
 
   if (weekMode && showWeekPrefix) {
-    const calendarDaysWithPrefix: DateItem[] = []
+    const calendarDaysWithWeekNumber: DateItem[] = []
     for (let i = 0; i < calendarDays.length; i += 7) {
       const firstDayOfWeek = calendarDays[i]
-      const prefixItem: DateItem = {
-        ...firstDayOfWeek,
+      const weekNumberItem: DateItem = {
+        type: 'date',
+        dateObject: firstDayOfWeek.dateObject,
+        inCurrentMonth: true,
+        isCurrentDate: false,
+        inSpan: false,
+        startOfSpan: false,
+        endOfSpan: false,
+        selected: false,
+        inSelectedWeek: firstDayOfWeek.inSelectedWeek,
+        ts: firstDayOfWeek.ts,
         weekNumber: getWeek(firstDayOfWeek.ts, { weekStartsOn: startDay })
       }
-      calendarDaysWithPrefix.push(prefixItem)
-      calendarDaysWithPrefix.push(...calendarDays.slice(i, i + 7))
+      calendarDaysWithWeekNumber.push(weekNumberItem)
+      calendarDaysWithWeekNumber.push(...calendarDays.slice(i, i + 7))
     }
-    return calendarDaysWithPrefix
+    return calendarDaysWithWeekNumber
   }
 
   return calendarDays

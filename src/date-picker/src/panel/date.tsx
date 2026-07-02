@@ -3,7 +3,7 @@ import type {
   DatePickerClearSlotProps,
   DatePickerNowSlotProps
 } from '../public-types'
-import { computed, defineComponent, h, watchEffect } from 'vue'
+import { defineComponent, h, watchEffect } from 'vue'
 import { NBaseFocusDetector } from '../../../_internal'
 import {
   BackwardIcon,
@@ -17,6 +17,7 @@ import {
   warnOnce
 } from '../../../_utils'
 import { NButton, NxButton } from '../../../button'
+import { formatWeekNumber } from '../utils'
 import PanelHeader from './panelHeader'
 import { useCalendar, useCalendarProps } from './use-calendar'
 
@@ -30,19 +31,12 @@ export default defineComponent({
   name: 'DatePanel',
   props: {
     ...useCalendarProps,
-    showWeekPrefix: {
-      type: Boolean,
-      default: undefined
-    },
     type: {
       type: String as PropType<'date' | 'week'>,
       required: true
     }
   },
   setup(props) {
-    const mergedShowWeekPrefix = computed(() => {
-      return props.type === 'week' && (props.showWeekPrefix ?? true)
-    })
     if (__DEV__) {
       watchEffect(() => {
         if (props.actions?.includes('confirm')) {
@@ -54,8 +48,7 @@ export default defineComponent({
       })
     }
     return {
-      ...useCalendar(props, props.type, mergedShowWeekPrefix.value),
-      mergedShowWeekPrefix
+      ...useCalendar(props, props.type)
     }
   },
   render() {
@@ -137,10 +130,15 @@ export default defineComponent({
               }
             ]}
           >
-            {this.weekdays.map(weekday => (
+            {this.weekdays.map((weekday, index) => (
               <div
-                key={weekday}
-                class={`${mergedClsPrefix}-date-panel-weekdays__day`}
+                key={index}
+                class={[
+                  `${mergedClsPrefix}-date-panel-weekdays__day`,
+                  weekday === ''
+                    ? `${mergedClsPrefix}-date-panel-weekdays__day--prefix`
+                    : undefined
+                ]}
               >
                 {weekday}
               </div>
@@ -194,7 +192,7 @@ export default defineComponent({
               >
                 <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
                 {dateItem.weekNumber !== undefined
-                  ? `${dateItem.weekNumber}.`
+                  ? formatWeekNumber(dateItem.weekNumber)
                   : dateItem.dateObject.date}
                 {dateItem.isCurrentDate ? (
                   <div class={`${mergedClsPrefix}-date-panel-date__sup`} />
