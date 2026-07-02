@@ -9,5 +9,10 @@ const value = ref(0)
 </script>
 
 <template>
-  <n-input-number v-model:value="value" clearable />
+  <n-space vertical>
+    <n-input-number v-model:value="value" clearable />
+    <n-tag type="success" size="small" round>
+      当前值：{{ JSON.stringify(value) }}
+    </n-tag>
+  </n-space>
 </template>

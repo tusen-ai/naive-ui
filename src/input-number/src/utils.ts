@@ -43,7 +43,19 @@ export function format(
 ): string {
   if (typeof value !== 'number')
     return ''
-  return precision === undefined ? String(value) : value.toFixed(precision)
+  if (precision === undefined) {
+    const valueStr = String(value)
+    if (isExponentialNotation(valueStr)) {
+      const exponent = valueStr.toLowerCase().split('e')[1]
+      return value.toFixed(Math.abs(Number(exponent)))
+    }
+    return valueStr
+  }
+  return value.toFixed(precision)
+}
+
+export function isExponentialNotation(value: string): boolean {
+  return value.toLowerCase().includes('e')
 }
 
 export function parseNumber(
