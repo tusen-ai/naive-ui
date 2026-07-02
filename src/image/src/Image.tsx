@@ -167,6 +167,7 @@ export default defineComponent({
         if (props.intersectionObserverOptions && !shouldStartLoadingRef.value)
           return
         showErrorRef.value = true
+        loadedRef.value = true
         const { onError, imgProps: { onError: imgPropsOnError } = {} } = props
         onError?.(e)
         imgPropsOnError?.(e)

@@ -23,6 +23,7 @@
 - 修复 `n-tabs` 导航尺寸变化后标签栏过渡动画被禁用的问题，关闭 [#7406](https://github.com/tusen-ai/naive-ui/issues/7406)
 - 修复 `vitest-setup.ts` 被输出到构建产物的问题
 - 修复 `n-dynamic-tags` 在输入法合成（IME composition）期间按 Enter 确认候选词时会误提交标签的问题
+- 修复 `n-image` 图片加载失败时 `placeholder` 插槽与 `error` 插槽同时显示的问题，关闭 [#7526](https://github.com/tusen-ai/naive-ui/issues/7526)
 
 ## 2.44.1
 
