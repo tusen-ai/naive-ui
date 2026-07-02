@@ -148,6 +148,24 @@ describe('n-image', () => {
     wrapper.unmount()
   })
 
+  it('should not show placeholder slot when image fails to load', async () => {
+    const wrapper = mount(NImage, {
+      props: {
+        src: 'https:// 07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+      },
+      slots: {
+        error: () => 'Load failed',
+        placeholder: () => 'Placeholder'
+      }
+    })
+
+    await wrapper.find('img').trigger('error')
+
+    expect(wrapper.text()).toContain('Load failed')
+    expect(wrapper.text()).not.toContain('Placeholder')
+    wrapper.unmount()
+  })
+
   it('should show fallback src when native lazy image fails to load', async () => {
     const fallbackSrc = 'https://www.naiveui.com/assets/naivelogo.93278402.svg'
     const wrapper = mount(NImage, {
