@@ -5,6 +5,7 @@ export * from './dom'
 export { isBrowser } from './env/is-browser'
 export { isJsdom } from './env/is-jsdom'
 export { eventEffectNotPerformed, markEventEffectPerformed } from './event'
+export { clampValue } from './format'
 export {
   getTitleAttribute,
   isArrayShallowEqual,
