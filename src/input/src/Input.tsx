@@ -510,8 +510,35 @@ export default defineComponent({
         }
       }
       syncSource = targetValue
-      if (isComposingRef.value)
+      if (isComposingRef.value) {
+        // Update model during composition to keep it in sync with visible input
+        // Skip validation, cursor control, and forceUpdate to avoid interfering with IME
+        if (!props.pair) {
+          if (event === 'input') {
+            doUpdateValue(targetValue, { source: index })
+          }
+          else {
+            doChange(targetValue, { source: index })
+          }
+        }
+        else {
+          let { value } = mergedValueRef
+          if (!Array.isArray(value)) {
+            value = ['', '']
+          }
+          else {
+            value = [value[0], value[1]]
+          }
+          value[index] = targetValue
+          if (event === 'input') {
+            doUpdateValue(value, { source: index })
+          }
+          else {
+            doChange(value, { source: index })
+          }
+        }
         return
+      }
       focusedInputCursorControl.recordCursor()
       const isIncomingValueValid = allowInput(targetValue)
       if (isIncomingValueValid) {
