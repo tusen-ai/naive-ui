@@ -131,7 +131,7 @@ describe('n-alert', () => {
     const handleCloseClick = vi.fn()
     const handleOnAfterLeave = vi.fn()
     // https://github.com/vuejs/test-utils/issues/1912#issuecomment-1351054542
-    const rafSpy = vi
+    using _rafSpy = vi
       .spyOn(window, 'requestAnimationFrame')
       .mockImplementation((cb: FrameRequestCallback): number => {
         cb(0)
@@ -160,6 +160,5 @@ describe('n-alert', () => {
     expect(handleOnAfterLeave).toHaveBeenCalled()
 
     wrapper.unmount()
-    rafSpy.mockRestore()
   })
 })
