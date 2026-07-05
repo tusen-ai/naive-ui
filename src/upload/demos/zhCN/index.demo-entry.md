@@ -31,6 +31,7 @@ rtl-debug.vue
 | abstract | `boolean` | `false` | 是否不存在 DOM 包裹，不支持 `image-card` 类型的 Upload |  |
 | accept | `string` | `undefined` | 接受的文件类型，参考 <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept" target="_blank">accept</n-a> |  |
 | action | `string` | `undefined` | 请求提交的地址 |  |
+| always-show-actions | `boolean` | `false` | 是否始终展示文件项的操作按钮（删除、下载、重试、预览），关闭时仅在悬停文件项时展示 | NEXT_VERSION |
 | create-thumbnail-url | `(file: File \| null, fileInfo: UploadSettledFileInfo) => (Promise<string> \| string \| undefined)` | `undefined` | 自定义文件缩略图，如果返回了 `undefined`，会使用默认的缩略图展示逻辑 | `fileInfo` 2.34.0 |
 | custom-request | `(options: UploadCustomRequestOptions) => void` | `undefined` | 自定义上传方法，类型参考 <n-a href="#UploadCustomRequestOptions-Type">UploadCustomRequestOptions</n-a> |  |
 | custom-download | `(file: FileInfo) => void` | `undefined` | 自定义下载方法 | 2.41.1 |

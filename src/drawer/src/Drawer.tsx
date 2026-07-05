@@ -397,7 +397,7 @@ export default defineComponent({
                   onEsc={this.handleEsc}
                   onClickoutside={this.handleOutsideClick}
                 >
-                  {this.$slots}
+                  {{ ...this.$slots }}
                 </NDrawerBodyWrapper>
               </div>,
               [[zindexable, { zIndex: this.zIndex, enabled: this.show }]]

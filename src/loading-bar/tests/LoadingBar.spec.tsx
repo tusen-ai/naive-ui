@@ -5,7 +5,7 @@ import { NLoadingBarProvider, useLoadingBar } from '../index'
 
 const Provider = defineComponent({
   render() {
-    return <NLoadingBarProvider>{this.$slots}</NLoadingBarProvider>
+    return <NLoadingBarProvider>{{ ...this.$slots }}</NLoadingBarProvider>
   }
 })
 

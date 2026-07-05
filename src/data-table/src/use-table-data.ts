@@ -274,6 +274,10 @@ export function useTableData(
     return paginatedDataRef.value.map(tmNode => tmNode.rawNode)
   })
 
+  const rawSortedDataRef = computed<InternalRowData[]>(() => {
+    return sortedDataRef.value.map(tmNode => tmNode.rawNode)
+  })
+
   function mergedOnUpdatePage(page: number): void {
     const { pagination } = props
     if (pagination) {
@@ -429,6 +433,7 @@ export function useTableData(
     mergedPaginationRef,
     paginatedDataRef,
     rawPaginatedDataRef,
+    rawSortedDataRef,
     mergedFilterStateRef,
     mergedSortStateRef,
     hoverKeyRef: ref<RowKey | null>(null),

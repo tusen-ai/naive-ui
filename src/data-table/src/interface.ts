@@ -557,6 +557,8 @@ export interface DataTableInst {
   sort: (columnKey: ColumnKey, order: SortOrder) => void
   scrollTo: DataTableScrollTo
   downloadCsv: (options?: CsvOptionsType) => void
+  getFilteredAndSortedData: () => InternalRowData[]
+  getCurrentPageData: () => InternalRowData[]
   /** @deprecated it but just leave it here, it does no harm */
   clearFilter: () => void
 }

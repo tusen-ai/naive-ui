@@ -918,7 +918,7 @@ const Scrollbar = defineComponent({
                         this.contentClass
                       ]}
                     >
-                      {$slots}
+                      {$slots.default?.()}
                     </div>
                   )
                 }}

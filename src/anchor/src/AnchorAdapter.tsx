@@ -92,7 +92,7 @@ export default defineComponent({
             {...keep(props, baseAnchorPropKeys)}
             mergedClsPrefix={mergedClsPrefixRef.value}
           >
-            {slots}
+            {{ ...slots }}
           </NBaseAnchor>
         )
       }

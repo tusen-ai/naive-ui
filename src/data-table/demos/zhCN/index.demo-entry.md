@@ -72,6 +72,7 @@ ellipsis-debug.vue
 custom-expand-icon-debug.vue
 expandable-debug.vue
 rtl-debug.vue
+empty-debug.vue
 ```
 
 ## API
@@ -232,6 +233,8 @@ type DataTableCreateSummary = (pageData: RowData[]) =>
 | clearFilters | `() => void` | 清空所有的 filter 状态 |  |
 | clearSorter | `() => void` | 清空所有的 sort 状态 |  |
 | downloadCsv | `(options?: { fileName?: string, keepOriginalData?: boolean }) => void` | 下载 CSV | 2.37.0 |
+| getCurrentPageData | `() => RowData[]` | 获取 filter、sorter 和 pagination 应用后的当前页行数据 | NEXT_VERSION |
+| getFilteredAndSortedData | `() => RowData[]` | 获取 filter 和 sorter 应用后的全部行数据，不含 pagination；`remote` 模式下仅基于当前 `data` 属性 | NEXT_VERSION |
 | filters | `(filters: DataTableFilterState \| null) => void` | 设定表格当前的过滤器 |  |
 | page | `(page: number) => void` | 手动设置 page |  |
 | scrollTo | `DataTableScrollTo` | 滚动内容，类型见 <n-a href="#DataTableScrollTo-Type">DataTableScrollTo Type</n-a> | NEXT_VERSION |

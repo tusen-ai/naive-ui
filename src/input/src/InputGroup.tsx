@@ -19,6 +19,10 @@ export default defineComponent({
   },
   render() {
     const { mergedClsPrefix } = this
-    return <div class={`${mergedClsPrefix}-input-group`}>{this.$slots}</div>
+    return (
+      <div class={`${mergedClsPrefix}-input-group`}>
+        {this.$slots.default?.()}
+      </div>
+    )
   }
 })

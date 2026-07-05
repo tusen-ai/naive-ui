@@ -34,6 +34,7 @@ component-preview-group-debug.vue
 | img-props | `ImgHTMLAttributes` | `undefined` | 组件中 img 元素的属性 |  |
 | lazy | `boolean` | `false` | 是否让图片进入视口再加载，单独使用将设置为[HTMLImageElement.loading](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading) 的属性值；也可配合 `intersection-observer-options` 配置实现懒加载 | 2.30.5 |
 | intersection-observer-options | `{ root?: Element \| Document \| string \| null, rootMargin?: string, threshold?: number \| number[]; }` | `undefined` | `lazy=true` 时 intersection observer 观测的配置 | 2.30.5 |
+| keep-drag-offset | `boolean` | `false` | 拖拽预览图片释放鼠标后是否保留当前位置（默认会自动回到中心或限制在视口内） | NEXT_VERSION |
 | object-fit | `'fill' \| 'contain' \| 'cover' \| 'none' \| 'scale-down'` | `'fill'` | 图片在容器内的的适应类型 |  |
 | preview-src | `string` | `undefined` | 预览图片的图片地址 |  |
 | preview-disabled | `boolean` | `false` | 是否禁用单击图像预览 |  |
@@ -53,6 +54,7 @@ component-preview-group-debug.vue
 | current | `number` | `undefined` | 当前展示的图片的下标 | 2.43.0 |
 | default-current | `number` | `0` | 默认展示的图片的下标 | 2.43.0 |
 | default-show | `boolean` | `false` | 默认展示大图预览 | 2.43.0 |
+| keep-drag-offset | `boolean` | `false` | 拖拽预览图片释放鼠标后是否保留当前位置（默认会自动回到中心或限制在视口内） | NEXT_VERSION |
 | render-toolbar | `(props: { nodes: { prev: VNode, next: VNode, rotateCounterclockwise: VNode, rotateClockwise: VNode, resizeToOriginalSize: VNode, zoomOut: VNode, zoomIn: VNode, download: VNode, close: VNode } }) => VNodeChild` | `undefined` | 工具栏的渲染函数 | `2.38.2` |
 | show | `boolean` | `undefined` | 是否展示大图预览 | 2.43.0 |
 | show-toolbar | `boolean` | `true` | 图片放大后是否展示底部工具栏 |  |
@@ -68,6 +70,7 @@ component-preview-group-debug.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | default-show | `boolean` | `false` | 默认展示大图预览 | 2.43.0 |
+| keep-drag-offset | `boolean` | `false` | 拖拽预览图片释放鼠标后是否保留当前位置（默认会自动回到中心或限制在视口内） | NEXT_VERSION |
 | render-toolbar | `(props: { nodes: { prev: VNode, next: VNode, rotateCounterclockwise: VNode, rotateClockwise: VNode, resizeToOriginalSize: VNode, zoomOut: VNode, zoomIn: VNode, download: VNode, close: VNode } }) => VNodeChild` | `undefined` | 工具栏的渲染函数 | 2.43.0 |
 | show | `boolean` | `undefined` | 是否展示大图预览 | 2.43.0 |
 | show-toolbar | `boolean` | `true` | 图片放大后是否展示底部工具栏 | 2.43.0 |

@@ -687,7 +687,7 @@ export default defineComponent({
           ) : null}
           {slots.action ? (
             <div class={`${mergedClsPrefix}-color-picker-action`}>
-              {{ default: slots.action }}
+              {slots.action?.()}
             </div>
           ) : internalActions ? (
             <div class={`${mergedClsPrefix}-color-picker-action`}>
@@ -816,7 +816,7 @@ export default defineComponent({
                               [
                                 clickoutside,
                                 this.handleClickOutside,
-                                undefined as any as string,
+                                undefined,
                                 { capture: true }
                               ]
                             ])

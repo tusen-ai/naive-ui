@@ -98,7 +98,7 @@ export const NIcon = defineComponent({
         ],
         style: [this.cssVars, this.mergedStyle]
       }),
-      component ? h(component) : this.$slots
+      component ? h(component) : this.$slots.default?.()
     )
   }
 })

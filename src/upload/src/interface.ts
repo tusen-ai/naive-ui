@@ -54,6 +54,7 @@ export interface UploadInjection {
   customDownloadRef: Ref<UploadOnDownload | undefined>
   xhrMap: Map<string, XMLHttpRequest>
   showPreviewButtonRef: Ref<boolean>
+  alwaysShowActionsRef: Ref<boolean>
   onPreviewRef: Ref<OnPreview | undefined>
   listTypeRef: Ref<ListType>
   dragOverRef: Ref<boolean>

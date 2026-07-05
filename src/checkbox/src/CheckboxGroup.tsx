@@ -221,7 +221,7 @@ export default defineComponent({
   render() {
     return (
       <div class={`${this.mergedClsPrefix}-checkbox-group`} role="group">
-        {this.$slots}
+        {this.$slots.default?.()}
       </div>
     )
   }

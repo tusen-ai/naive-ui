@@ -161,7 +161,7 @@ export function createLayoutComponent(isContent: boolean) {
               style={[this.contentStyle, hasSiderStyle] as any}
               onScroll={this.handleNativeElScroll}
             >
-              {this.$slots}
+              {this.$slots.default?.()}
             </div>
           ) : (
             <NScrollbar
@@ -173,7 +173,7 @@ export function createLayoutComponent(isContent: boolean) {
               contentClass={this.contentClass}
               contentStyle={[this.contentStyle, hasSiderStyle] as any}
             >
-              {this.$slots}
+              {{ ...this.$slots }}
             </NScrollbar>
           )}
         </div>

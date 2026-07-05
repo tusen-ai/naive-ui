@@ -267,17 +267,19 @@ export default defineComponent({
     function handleMouseUp(e: MouseEvent): void {
       off('mousemove', document, handleMouseMove)
       off('mouseup', document, handleMouseUp)
-      const { clientX: mouseUpClientX, clientY: mouseUpClientY } = e
       dragging = false
-      const moveStrategy = getMoveStrategy({
-        mouseUpClientX,
-        mouseUpClientY,
-        mouseDownClientX,
-        mouseDownClientY
-      })
-      const offset = getDerivedOffset(moveStrategy)
-      offsetX = offset.offsetX
-      offsetY = offset.offsetY
+      if (!props.keepDragOffset) {
+        const { clientX: mouseUpClientX, clientY: mouseUpClientY } = e
+        const moveStrategy = getMoveStrategy({
+          mouseUpClientX,
+          mouseUpClientY,
+          mouseDownClientX,
+          mouseDownClientY
+        })
+        const offset = getDerivedOffset(moveStrategy)
+        offsetX = offset.offsetX
+        offsetY = offset.offsetY
+      }
       derivePreviewStyle()
     }
     const imageContext = inject(imageContextKey, null)
@@ -316,13 +318,19 @@ export default defineComponent({
       scale = 1
       scaleExp = 0
     }
+    function resetOffset(): void {
+      offsetX = 0
+      offsetY = 0
+    }
     function handleSwitchPrev(): void {
       resetScale()
+      resetOffset()
       rotate = 0
       props.onPrev?.()
     }
     function handleSwitchNext(): void {
       resetScale()
+      resetOffset()
       rotate = 0
       props.onNext?.()
     }
@@ -521,6 +529,7 @@ export default defineComponent({
       syncTransformOrigin,
       handleAfterLeave: () => {
         resetScale()
+        resetOffset()
         rotate = 0
         displayedRef.value = false
       },

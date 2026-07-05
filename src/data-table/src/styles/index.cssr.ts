@@ -77,6 +77,21 @@ export default c([
       display: flex;
       flex-direction: column;
     `),
+    cM('empty', [
+      cB('data-table-base-table', `
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      `),
+      cB('data-table-base-table-body', [
+        `height: 100%;`,
+        cB('scrollbar-content', `
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+        `)
+      ])
+    ]),
     cM('flex-height', [
       c('>', [
         cB('data-table-wrapper', [

@@ -136,7 +136,7 @@ export default defineComponent({
                                   [
                                     clickoutside,
                                     handleClickOutside,
-                                    undefined as unknown as string,
+                                    undefined,
                                     { capture: true }
                                   ]
                                 ]

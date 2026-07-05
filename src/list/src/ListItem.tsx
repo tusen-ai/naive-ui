@@ -32,7 +32,9 @@ export default defineComponent({
           </div>
         ) : null}
         {$slots.default ? (
-          <div class={`${mergedClsPrefix}-list-item__main`}>{$slots}</div>
+          <div class={`${mergedClsPrefix}-list-item__main`}>
+            {$slots.default()}
+          </div>
         ) : null}
         {$slots.suffix ? (
           <div class={`${mergedClsPrefix}-list-item__suffix`}>
