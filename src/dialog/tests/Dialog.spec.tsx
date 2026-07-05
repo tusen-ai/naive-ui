@@ -5,7 +5,7 @@ import { NDialog, NDialogProvider, useDialog } from '../index'
 
 const Provider = defineComponent({
   render() {
-    return <NDialogProvider>{this.$slots}</NDialogProvider>
+    return <NDialogProvider>{{ ...this.$slots }}</NDialogProvider>
   }
 })
 

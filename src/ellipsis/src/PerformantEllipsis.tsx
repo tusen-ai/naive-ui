@@ -45,7 +45,7 @@ export const NPerformantEllipsis = defineComponent({
             mouseEnteredRef.value = true
           }}
         >
-          {lineClamp ? slots : <span>{slots}</span>}
+          {lineClamp ? slots.default?.() : <span>{slots.default?.()}</span>}
         </span>
       )
     }

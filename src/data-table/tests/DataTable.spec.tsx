@@ -259,6 +259,107 @@ describe('n-data-table', () => {
     wrapper.unmount()
   })
 
+  describe('getFilteredAndSortedData and getCurrentPageData', () => {
+    interface Row {
+      name: string
+      age: number
+      address: string
+    }
+    const columns: DataTableColumns<Row> = [
+      {
+        title: 'Name',
+        key: 'name'
+      },
+      {
+        title: 'Age',
+        key: 'age',
+        sorter: (a, b) => a.age - b.age
+      },
+      {
+        title: 'Address',
+        key: 'address',
+        filter(value: any, row) {
+          return row.address.includes(value as string)
+        }
+      }
+    ]
+    const data: Row[] = [
+      {
+        name: 'John Brown',
+        age: 32,
+        address: 'New York No. 1 Lake Park'
+      },
+      {
+        name: 'Jim Green',
+        age: 42,
+        address: 'London No. 1 Lake Park'
+      },
+      {
+        name: 'Joe Black',
+        age: 32,
+        address: 'London No. 2 Lake Park'
+      },
+      {
+        name: 'Jim Red',
+        age: 32,
+        address: 'Sidney No. 1 Lake Park'
+      }
+    ]
+    const tableRef = ref<DataTableInst | null>(null)
+    let wrapper: ReturnType<typeof mount>
+
+    beforeEach(() => {
+      wrapper = mount(
+        () => (
+          <NDataTable
+            ref={tableRef}
+            columns={columns}
+            data={data}
+            pagination={{ pageSize: 1 }}
+          />
+        ),
+        {
+          attachTo: document.body
+        }
+      )
+    })
+
+    afterEach(() => {
+      wrapper.unmount()
+    })
+
+    it('should return filtered full data and current page data separately', async () => {
+      expect(tableRef.value).not.toEqual(null)
+      tableRef.value!.filter({
+        address: 'London'
+      })
+      await nextTick()
+      expect(
+        tableRef.value!.getFilteredAndSortedData().map(row => row.name)
+      ).toEqual(['Jim Green', 'Joe Black'])
+      expect(
+        tableRef.value!.getCurrentPageData().map(row => row.name)
+      ).toEqual(['Jim Green'])
+      expect(tableRef.value!.getFilteredAndSortedData().length).toEqual(2)
+      expect(tableRef.value!.getCurrentPageData().length).toEqual(1)
+    })
+
+    it('should reflect sort order in filtered data and current page data', async () => {
+      expect(tableRef.value).not.toEqual(null)
+      tableRef.value!.filter({
+        address: 'London'
+      })
+      tableRef.value!.sort('age', 'descend')
+      await nextTick()
+      expect(
+        tableRef.value!.getFilteredAndSortedData().map(row => row.name)
+      ).toEqual(['Jim Green', 'Joe Black'])
+      expect(
+        tableRef.value!.getCurrentPageData().map(row => row.name)
+      ).toEqual(['Jim Green'])
+    })
+  })
+
   describe('should work with multiple sorter', () => {
     interface UserData {
       name: string

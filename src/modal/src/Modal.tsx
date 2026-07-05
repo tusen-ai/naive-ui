@@ -331,6 +331,25 @@ export default defineComponent({
                 ]}
                 style={this.cssVars as CSSProperties}
               >
+                {showMask ? (
+                  <Transition
+                    name="fade-in-transition"
+                    key="mask"
+                    appear={this.internalAppear ?? this.isMounted}
+                  >
+                    {{
+                      default: () => {
+                        return this.show ? (
+                          <div
+                            aria-hidden
+                            class={`${mergedClsPrefix}-modal-mask`}
+                            onClick={this.handleClickoutside}
+                          />
+                        ) : null
+                      }
+                    }}
+                  </Transition>
+                ) : null}
                 <NModalBodyWrapper
                   style={this.overlayStyle}
                   {...this.$attrs}
@@ -354,32 +373,8 @@ export default defineComponent({
                   onClickoutside={
                     showMask ? undefined : this.handleClickoutside
                   }
-                  renderMask={
-                    showMask
-                      ? () => (
-                          <Transition
-                            name="fade-in-transition"
-                            key="mask"
-                            appear={this.internalAppear ?? this.isMounted}
-                          >
-                            {{
-                              default: () => {
-                                return this.show ? (
-                                  <div
-                                    aria-hidden
-                                    ref="containerRef"
-                                    class={`${mergedClsPrefix}-modal-mask`}
-                                    onClick={this.handleClickoutside}
-                                  />
-                                ) : null
-                              }
-                            }}
-                          </Transition>
-                        )
-                      : undefined
-                  }
                 >
-                  {this.$slots}
+                  {{ ...this.$slots }}
                 </NModalBodyWrapper>
               </div>,
               [

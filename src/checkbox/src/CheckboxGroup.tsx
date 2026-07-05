@@ -21,7 +21,7 @@ import {
   watchEffect
 } from 'vue'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
-import { call, createKey, flatten, getSlot, warn, warnOnce } from '../../_utils'
+import { call, createKey, flatten, warn, warnOnce } from '../../_utils'
 import { checkboxLight } from '../styles'
 import groupStyle from './styles/checkbox-group.cssr'
 import { checkboxGroupInjectionKey } from './use-checkbox'
@@ -365,8 +365,9 @@ export default defineComponent({
   },
   render() {
     const { mergedClsPrefix, valueSet, cssVars, themeClass } = this
+    const defaultSlot = flatten(this.$slots.default?.() ?? [])
     const { children, isButtonGroup } = mapSlot(
-      flatten(getSlot(this)),
+      defaultSlot,
       valueSet,
       mergedClsPrefix
     )

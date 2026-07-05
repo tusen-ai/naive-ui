@@ -2,7 +2,7 @@ import type { Ref } from 'vue'
 import type { ModalDraggableOptions } from './interface'
 import type { ModalApiInjection, ModalReactive } from './ModalProvider'
 import { off, on } from 'evtd'
-import { computed, inject, onUnmounted } from 'vue'
+import { computed, inject, nextTick, onUnmounted, ref } from 'vue'
 import { throwError } from '../../_utils'
 import { modalApiInjectionKey, modalReactiveListInjectionKey } from './context'
 
@@ -35,6 +35,9 @@ export function useDragModal(
   options: UseDragModalOptions
 ) {
   let cleanup: undefined | (() => void)
+
+  const dragXRef = ref<number | null>(null)
+  const dragYRef = ref<number | null>(null)
 
   const draggableRef = computed(() => {
     return draggablePropsRef.value !== false
@@ -83,15 +86,21 @@ export function useDragModal(
       maxMoveX = window.innerWidth - right
       maxMoveY = window.innerHeight - bottom
 
-      const { left, top } = modal.style
-      prevMoveY = +top.slice(0, -2)
-      prevMoveX = +left.slice(0, -2)
+      if (dragXRef.value !== null && dragYRef.value !== null) {
+        prevMoveX = dragXRef.value
+        prevMoveY = dragYRef.value
+      }
+      else {
+        const { left, top } = modal.style
+        prevMoveY = +top.slice(0, -2)
+        prevMoveX = +left.slice(0, -2)
+      }
     }
 
     function updatePosition() {
       if (pendingPosition) {
-        modal.style.top = `${pendingPosition.y}px`
-        modal.style.left = `${pendingPosition.x}px`
+        dragXRef.value = pendingPosition.x
+        dragYRef.value = pendingPosition.y
         pendingPosition = null
       }
       rafId = null
@@ -137,11 +146,13 @@ export function useDragModal(
         rafId = null
       }
       if (pendingPosition) {
-        modal.style.top = `${pendingPosition.y}px`
-        modal.style.left = `${pendingPosition.x}px`
+        dragXRef.value = pendingPosition.x
+        dragYRef.value = pendingPosition.y
         pendingPosition = null
       }
-      options.onEnd(modal)
+      void nextTick(() => {
+        options.onEnd(modal)
+      })
     }
 
     on('mousedown', header, handleMouseDown)
@@ -163,6 +174,8 @@ export function useDragModal(
       cleanup()
       cleanup = undefined
     }
+    dragXRef.value = null
+    dragYRef.value = null
   }
 
   onUnmounted(stopDrag)
@@ -170,6 +183,8 @@ export function useDragModal(
     stopDrag,
     startDrag,
     draggableRef,
-    draggableClassRef
+    draggableClassRef,
+    dragX: dragXRef,
+    dragY: dragYRef
   }
 }

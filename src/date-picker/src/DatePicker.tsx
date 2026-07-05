@@ -1013,7 +1013,7 @@ export default defineComponent({
           {...commonPanelProps}
           defaultCalendarStartTime={this.defaultCalendarStartTime}
         >
-          {$slots}
+          {{ ...$slots }}
         </DatetimePanel>
       ) : type === 'daterange' ? (
         <DaterangePanel
@@ -1022,7 +1022,7 @@ export default defineComponent({
           defaultCalendarEndTime={this.defaultCalendarEndTime}
           bindCalendarMonths={this.bindCalendarMonths}
         >
-          {$slots}
+          {{ ...$slots }}
         </DaterangePanel>
       ) : type === 'datetimerange' ? (
         <DatetimerangePanel
@@ -1031,7 +1031,7 @@ export default defineComponent({
           defaultCalendarEndTime={this.defaultCalendarEndTime}
           bindCalendarMonths={this.bindCalendarMonths}
         >
-          {$slots}
+          {{ ...$slots }}
         </DatetimerangePanel>
       ) : type === 'month' || type === 'year' || type === 'quarter' ? (
         <MonthPanel {...commonPanelProps} type={type} key={type} />
@@ -1045,7 +1045,7 @@ export default defineComponent({
               type={type}
               defaultCalendarStartTime={this.defaultCalendarStartTime}
             >
-              {$slots}
+              {{ ...$slots }}
             </DatePanel>
           )
     }

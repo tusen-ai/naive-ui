@@ -139,7 +139,7 @@ const VirtualListItemWrapper = defineComponent({
           ))}
         </colgroup>
         <tbody data-n-id={id} class={`${clsPrefix}-data-table-tbody`}>
-          {this.$slots}
+          {this.$slots.default?.()}
         </tbody>
       </table>
     )

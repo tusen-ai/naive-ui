@@ -72,7 +72,7 @@ export default defineComponent({
           padding: stylePadding
         }}
       >
-        {gutter ? <div>{$slots}</div> : $slots}
+        {gutter ? <div>{$slots.default?.()}</div> : $slots.default?.()}
       </div>
     )
   }
