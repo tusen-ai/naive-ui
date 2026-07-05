@@ -81,7 +81,7 @@ export default defineComponent({
           {showTriggerRef.value
             && !maxReachedRef.value
             && isImageCardTypeRef.value && (
-            <NUploadTrigger>{slots}</NUploadTrigger>
+            <NUploadTrigger>{{ ...slots }}</NUploadTrigger>
           )}
         </div>
       )

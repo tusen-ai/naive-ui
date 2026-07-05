@@ -3,6 +3,7 @@ import path from 'node:path'
 import process from 'node:process'
 import { babel } from '@rollup/plugin-babel'
 import { configDefaults, defineConfig } from 'vitest/config'
+import vueJsxVapor from 'vue-jsx-vapor/vite'
 import { createDemoPlugin } from './build/vite-plugin-demo'
 
 dns.setDefaultResultOrder('verbatim')
@@ -18,6 +19,9 @@ const testExclude = isBuildTimeTest
 export default defineConfig({
   root: __dirname,
   plugins: [
+    vueJsxVapor({
+      interop: true
+    }),
     ...createDemoPlugin()
   ],
   resolve: {
@@ -47,7 +51,9 @@ export default defineConfig({
       'async-validator',
       'css-render',
       'date-fns',
+      'date-fns/locale',
       'date-fns-tz/getTimezoneOffset',
+      'fflate',
       'evtd',
       'highlight.js',
       'lodash-es',

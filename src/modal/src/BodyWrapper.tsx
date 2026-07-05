@@ -19,6 +19,7 @@ import {
   mergeProps,
   nextTick,
   normalizeClass,
+  normalizeStyle,
   provide,
   ref,
   toRef,
@@ -120,12 +121,18 @@ export default defineComponent({
       }
     )
 
-    const { stopDrag, startDrag, draggableRef, draggableClassRef }
-      = useDragModal(toRef(props, 'draggable'), {
-        onEnd: (el) => {
-          syncTransformOrigin(el)
-        }
-      })
+    const {
+      stopDrag,
+      startDrag,
+      draggableRef,
+      draggableClassRef,
+      dragX,
+      dragY
+    } = useDragModal(toRef(props, 'draggable'), {
+      onEnd: (el) => {
+        syncTransformOrigin(el)
+      }
+    })
 
     const dialogTitleClassRef = computed(() => {
       return normalizeClass([props.titleClass, draggableClassRef.value])
@@ -241,7 +248,9 @@ export default defineComponent({
       handleAfterEnter,
       handleAfterLeave,
       handleBeforeLeave,
-      handleEnter
+      handleEnter,
+      dragX,
+      dragY
     }
   },
   render() {
@@ -253,8 +262,20 @@ export default defineComponent({
       handleAfterLeave,
       handleBeforeLeave,
       preset,
-      mergedClsPrefix
+      mergedClsPrefix,
+      dragX,
+      dragY
     } = this
+    const effectiveAttrs = { ...$attrs }
+    if (dragX !== null && dragY !== null) {
+      effectiveAttrs.style = normalizeStyle([
+        effectiveAttrs.style,
+        {
+          left: `${dragX}px`,
+          top: `${dragY}px`
+        }
+      ])
+    }
     let childNode: VNode | null = null
     if (!preset) {
       childNode = getFirstSlotVNodeWithTypedProps('default', $slots.default, {
@@ -269,7 +290,7 @@ export default defineComponent({
         {
           class: `${mergedClsPrefix}-modal`
         },
-        $attrs,
+        effectiveAttrs,
         childNode.props || {}
       )
     }
@@ -326,10 +347,10 @@ export default defineComponent({
                                 (this.preset === 'confirm'
                                   || this.preset === 'dialog' ? (
                                       <NDialog
-                                        {...this.$attrs}
+                                        {...effectiveAttrs}
                                         class={[
                                           `${mergedClsPrefix}-modal`,
-                                          this.$attrs.class
+                                          effectiveAttrs.class
                                         ]}
                                         ref="bodyRef"
                                         theme={this.mergedTheme.peers.Dialog}
@@ -340,15 +361,15 @@ export default defineComponent({
                                         titleClass={this.dialogTitleClass}
                                         aria-modal="true"
                                       >
-                                        {$slots}
+                                        {{ ...$slots }}
                                       </NDialog>
                                     ) : this.preset === 'card' ? (
                                       <NCard
-                                        {...this.$attrs}
+                                        {...effectiveAttrs}
                                         ref="bodyRef"
                                         class={[
                                           `${mergedClsPrefix}-modal`,
-                                          this.$attrs.class
+                                          effectiveAttrs.class
                                         ]}
                                         theme={this.mergedTheme.peers.Card}
                                         themeOverrides={
@@ -359,7 +380,7 @@ export default defineComponent({
                                         aria-modal="true"
                                         role="dialog"
                                       >
-                                        {$slots}
+                                        {{ ...$slots }}
                                       </NCard>
                                     ) : (
                                       (this.childNodeRef = childNode)

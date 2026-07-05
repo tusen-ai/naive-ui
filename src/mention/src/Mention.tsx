@@ -535,7 +535,7 @@ export default defineComponent({
                               renderLabel={this.renderLabel}
                               scrollbarProps={this.scrollbarProps}
                             >
-                              {$slots}
+                              {{ ...$slots }}
                             </NInternalSelectMenu>
                           ) : null
                         }

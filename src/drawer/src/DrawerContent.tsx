@@ -117,7 +117,7 @@ export default defineComponent({
               style={bodyContentStyle}
               role="none"
             >
-              {$slots}
+              {$slots.default?.()}
             </div>
           </div>
         ) : (
@@ -132,7 +132,7 @@ export default defineComponent({
             ]}
             contentStyle={bodyContentStyle}
           >
-            {$slots}
+            {{ ...$slots }}
           </NScrollbar>
         )}
         {$slots.footer ? (

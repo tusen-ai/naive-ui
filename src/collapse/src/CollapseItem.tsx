@@ -188,7 +188,7 @@ export default defineComponent({
           displayDirective={mergedDisplayDirective}
           show={!collapsed}
         >
-          {$slots}
+          {{ ...$slots }}
         </NCollapseItemContent>
       </div>
     )

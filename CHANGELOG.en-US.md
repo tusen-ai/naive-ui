@@ -2,10 +2,17 @@
 
 ## NEXT_VERSION
 
+### i18n
+
+- Add nnNO locale.
+- Update nbNO locale.
+- Translate `DatePicker.weekPlaceholder` in the Japanese locale.
+
 ### Feats
 
 - `n-upload` adds `always-show-actions` prop, closes [#8073](https://github.com/tusen-ai/naive-ui/issues/8073).
 - `n-image` adds `keep-drag-offset` prop, closes [#7544](https://github.com/tusen-ai/naive-ui/issues/7544).
+- `n-data-table` adds `getFilteredAndSortedData` and `getCurrentPageData` methods, closes [#8088](https://github.com/tusen-ai/naive-ui/issues/8088).
 
 ### Fixes
 
@@ -13,6 +20,13 @@
 - Fix `n-data-table`'s empty state not vertically centered when height is set, closes [#7546](https://github.com/tusen-ai/naive-ui/issues/7546).
 - fix(spin): preserve size-based strokeWidth defaults in NSpin, closes [#8061](https://github.com/tusen-ai/naive-ui/issues/8061)
 - Fix `n-upload` file status loss in controlled mode when calling `onError` synchronously in `custom-request` for multiple files, closes [#7366](https://github.com/tusen-ai/naive-ui/issues/7366)
+- Fix `n-image` error slot and fallbackSrc not working when `lazy` is enabled
+- Fix where the drag position of `n-modal` was reset during rendering.
+- Fix `n-tabs` bar transition disabled after nav resize, closes [#7406](https://github.com/tusen-ai/naive-ui/issues/7406).
+- Fix `vitest-setup.ts` being emitted into build outputs.
+- Fix `n-dynamic-tags` committing a tag when Enter is pressed to confirm an IME composition.
+- Fix `n-image` rendering the `placeholder` slot together with the `error` slot when the image fails to load, closes [#7526](https://github.com/tusen-ai/naive-ui/issues/7526).
+- Fix `n-space` `size` prop not taking effect when set to `0`, closes [#7530](https://github.com/tusen-ai/naive-ui/issues/7530).
 
 ## 2.44.1
 

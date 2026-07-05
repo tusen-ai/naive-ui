@@ -78,7 +78,7 @@ export default defineComponent({
         ]}
         style={this.cssVars}
       >
-        {this.$slots}
+        {this.$slots.default?.()}
       </div>
     )
   }

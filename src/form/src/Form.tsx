@@ -171,7 +171,7 @@ export default defineComponent({
         ]}
         onSubmit={this.onSubmit}
       >
-        {this.$slots}
+        {this.$slots.default?.()}
       </form>
     )
   }

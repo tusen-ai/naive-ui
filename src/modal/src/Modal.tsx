@@ -379,7 +379,7 @@ export default defineComponent({
                       : undefined
                   }
                 >
-                  {this.$slots}
+                  {{ ...this.$slots }}
                 </NModalBodyWrapper>
               </div>,
               [

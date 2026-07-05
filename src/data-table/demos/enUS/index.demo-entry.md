@@ -221,6 +221,8 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | clearFilters | `() => void` | Clear all filter state. |  |
 | clearSorter | `() => void` | Clear all sort state. |  |
 | downloadCsv | `(options?: { fileName?: string, keepOriginalData?: boolean }) => void` | Download CSV. | 2.37.0 |
+| getCurrentPageData | `() => RowData[]` | Get row data of the current page after filters, sorters and pagination are applied. | NEXT_VERSION |
+| getFilteredAndSortedData | `() => RowData[]` | Get all row data after filters and sorters are applied, excluding pagination. In `remote` mode, it is based on the current `data` prop only. | NEXT_VERSION |
 | filters | `(filters: DataTableFilterState \| null) => void` | Set the active filters of the table. |  |
 | page | `(page: number) => void` | Manually set the page. |  |
 | scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | Scroll content. | 2.30.4 |

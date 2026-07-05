@@ -258,7 +258,7 @@ export default defineComponent({
         ]}
         style={this.cssVars as CSSProperties}
       >
-        {this.$slots}
+        {this.$slots.default?.()}
       </div>
     )
   }

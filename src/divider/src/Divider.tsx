@@ -87,7 +87,9 @@ export default defineComponent({
         ) : null}
         {!vertical && $slots.default ? (
           <>
-            <div class={`${mergedClsPrefix}-divider__title`}>{this.$slots}</div>
+            <div class={`${mergedClsPrefix}-divider__title`}>
+              {this.$slots.default?.()}
+            </div>
             <div
               class={`${mergedClsPrefix}-divider__line ${mergedClsPrefix}-divider__line--right`}
             />

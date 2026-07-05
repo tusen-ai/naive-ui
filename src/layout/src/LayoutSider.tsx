@@ -321,7 +321,7 @@ export default defineComponent({
                 : undefined
             }
           >
-            {this.$slots}
+            {{ ...this.$slots }}
           </NScrollbar>
         ) : (
           <div
@@ -339,7 +339,7 @@ export default defineComponent({
             ]}
             ref="scrollableElRef"
           >
-            {this.$slots}
+            {this.$slots.default?.()}
           </div>
         )}
         {showTrigger ? (
