@@ -442,6 +442,39 @@ describe('n-menu', () => {
     wrapper.unmount()
   })
 
+  it('should center collapsed item icons when options contain a group', () => {
+    const options = [
+      {
+        label: 'fantasy',
+        key: 'fantasy'
+      },
+      {
+        type: 'group',
+        label: 'song-group',
+        key: 'group',
+        children: [
+          {
+            label: 'mojito',
+            key: 'mojito'
+          }
+        ]
+      }
+    ]
+    const wrapper = mount(NMenu, {
+      props: {
+        options,
+        collapsed: true,
+        renderIcon: () => h(NIcon, null, { default: () => h(HappyOutline) })
+      }
+    })
+    const contents = wrapper.findAll('.n-menu-item-content')
+    // [0] is the root item, [1] is the item nested inside the group
+    const rootPaddingLeft = (contents[0].element as HTMLElement).style.paddingLeft
+    const groupItemPaddingLeft = (contents[1].element as HTMLElement).style.paddingLeft
+    expect(groupItemPaddingLeft).toEqual(rootPaddingLeft)
+    wrapper.unmount()
+  })
+
   it('should work submenu extra', async () => {
     const options: MenuOption[] = [
       {
