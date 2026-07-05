@@ -1,4 +1,4 @@
-# Vitepress
+# VitePress
 
 ## Caveat
 

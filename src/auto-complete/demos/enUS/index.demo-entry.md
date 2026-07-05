@@ -1,4 +1,4 @@
-# AutoComplete
+# Auto Complete
 
 Offer a search hint or maybe guess some likely options?
 
