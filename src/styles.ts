@@ -47,6 +47,7 @@ export { emptyDark } from './empty/styles'
 export { flexDark, flexRtl as unstableFlexRtl } from './flex/styles'
 export { formDark } from './form/styles'
 export { gradientTextDark } from './gradient-text/styles'
+export { guideDark } from './guide/styles'
 export { iconDark } from './icon/styles'
 export {
   inputNumberDark,

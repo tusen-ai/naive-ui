@@ -12,6 +12,12 @@ const etEE: NLocale = {
     positiveText: 'Kinnita',
     negativeText: 'Katkesta'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'Vali',
     loading: 'Laeb',

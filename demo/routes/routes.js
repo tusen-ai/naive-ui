@@ -196,6 +196,10 @@ export const enComponentRoutes = [
       import('../../src/gradient-text/demos/enUS/index.demo-entry.md')
   },
   {
+    path: 'guide',
+    component: () => import('../../src/guide/demos/enUS/index.demo-entry.md')
+  },
+  {
     path: 'icon',
     component: () => import('../../src/icon/demos/enUS/index.demo-entry.md')
   },
@@ -616,6 +620,10 @@ export const zhComponentRoutes = [
     path: 'gradient-text',
     component: () =>
       import('../../src/gradient-text/demos/zhCN/index.demo-entry.md')
+  },
+  {
+    path: 'guide',
+    component: () => import('../../src/guide/demos/zhCN/index.demo-entry.md')
   },
   {
     path: 'icon',

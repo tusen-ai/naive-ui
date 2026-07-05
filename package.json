@@ -161,7 +161,7 @@
         "webpack"
       ]
     },
-    "ignoredBuiltDependencies": [
+    "onlyBuiltDependencies": [
       "esbuild"
     ]
   },

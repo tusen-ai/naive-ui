@@ -12,6 +12,12 @@ const skSK: NLocale = {
     positiveText: 'Potvrdiť',
     negativeText: 'Zrušiť'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'Prosím vyberte',
     loading: 'Načítavanie',

@@ -12,6 +12,12 @@ const itIT: NLocale = {
     positiveText: 'Conferma',
     negativeText: 'Annulla'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'Si prega di selezionare',
     loading: 'Caricamento',

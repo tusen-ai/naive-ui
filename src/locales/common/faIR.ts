@@ -12,6 +12,12 @@ const faIR: NLocale = {
     positiveText: 'تأیید',
     negativeText: 'لغو'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'لطفا انتخاب کنید',
     loading: 'بارگذاری',

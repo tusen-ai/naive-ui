@@ -12,6 +12,12 @@ const ugCN: NLocale = {
     positiveText: 'جەزملەش',
     negativeText: 'بىكار قىلىش'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'تاللاڭ',
     loading: 'يۈكلەۋاتىدۇ',

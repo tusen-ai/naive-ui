@@ -12,6 +12,12 @@ const deDE: NLocale = {
     positiveText: 'Bestätigen',
     negativeText: 'Abbrechen'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'Bitte auswählen',
     loading: 'Wird geladen',

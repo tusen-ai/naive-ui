@@ -12,6 +12,12 @@ const kmKH: NLocale = {
     positiveText: 'បញ្ជាក់',
     negativeText: 'បោះបង់'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'សូមជ្រើសរើស',
     loading: 'ការផ្ទុក',

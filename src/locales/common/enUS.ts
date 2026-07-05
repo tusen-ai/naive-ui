@@ -10,6 +10,12 @@ const enUS = {
     positiveText: 'Confirm',
     negativeText: 'Cancel'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'Please Select',
     loading: 'Loading',

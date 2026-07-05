@@ -12,6 +12,12 @@ const thTH: NLocale = {
     positiveText: 'ยืนยัน',
     negativeText: 'ยกเลิก'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'กรุณาเลือก',
     loading: 'กำลังโหลด',

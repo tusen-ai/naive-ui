@@ -12,6 +12,12 @@ const ptBR: NLocale = {
     positiveText: 'Confirmar',
     negativeText: 'Cancelar'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'Por favor selecione',
     loading: 'Carregando',

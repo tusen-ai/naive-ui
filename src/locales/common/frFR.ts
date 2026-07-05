@@ -12,6 +12,12 @@ const frFR: NLocale = {
     positiveText: 'Confirmer',
     negativeText: 'Annuler'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'Sélectionner',
     loading: 'Chargement',

@@ -12,6 +12,12 @@ const zhCN: NLocale = {
     positiveText: '确认',
     negativeText: '取消'
   },
+  Guide: {
+    prevText: '上一步',
+    nextText: '下一步',
+    finishText: '完成',
+    skipText: '跳过'
+  },
   Cascader: {
     placeholder: '请选择',
     loading: '加载中',

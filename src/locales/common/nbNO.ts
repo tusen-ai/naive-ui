@@ -12,6 +12,12 @@ const nbNO: NLocale = {
     positiveText: 'Bekreft',
     negativeText: 'Avbryt'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'Vennligst velg',
     loading: 'Laster',

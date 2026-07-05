@@ -12,6 +12,12 @@ const koKR: NLocale = {
     positiveText: '확인',
     negativeText: '취소'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: '선택해 주세요',
     loading: '불러오는 중',

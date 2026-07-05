@@ -12,6 +12,12 @@ const eo: NLocale = {
     positiveText: 'Konfirmi',
     negativeText: 'Nuligi'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'Bonvolu elekti',
     loading: 'Ŝargiĝo',

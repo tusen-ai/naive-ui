@@ -12,6 +12,12 @@ const jaJP: NLocale = {
     positiveText: 'OK',
     negativeText: 'キャンセル'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: '選択してください',
     loading: 'ロード中',

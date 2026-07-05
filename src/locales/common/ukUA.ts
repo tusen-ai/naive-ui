@@ -12,6 +12,12 @@ const ukUA: NLocale = {
     positiveText: 'Підтвердити',
     negativeText: 'Скасувати'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'Обрати',
     loading: 'Завантаження',

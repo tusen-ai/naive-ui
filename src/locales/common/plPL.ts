@@ -12,6 +12,12 @@ const plPL: NLocale = {
     positiveText: 'Potwierdź',
     negativeText: 'Anuluj'
   },
+  Guide: {
+    prevText: 'Previous',
+    nextText: 'Next',
+    finishText: 'Finish',
+    skipText: 'Skip'
+  },
   Cascader: {
     placeholder: 'Wybierz',
     loading: 'Ładowanie',
