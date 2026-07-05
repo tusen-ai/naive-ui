@@ -306,7 +306,39 @@ export default defineComponent({
       const currentValue = justifyValue(mergedValueRef.value)
       const currentValueAtIndex = currentValue[index]
       const diff = value.replace(currentValueAtIndex, '')
-      const char = diff[diff.length - 1] || value[value.length - 1] || ''
+      const text = diff || value
+
+      // Multi-character input (e.g. browser extension autofill)
+      if (text.length > 1) {
+        let startIndex = index
+        const allowInput = props.allowInput
+        let pasteApplied = false
+        let appendedText = ''
+        for (let i = 0; i < text.length; ++i) {
+          if (allowInput && !allowInput(text[i], startIndex, currentValue)) {
+            continue
+          }
+          pasteApplied = true
+          currentValue[startIndex] = text[i]
+          appendedText += text[i]
+          startIndex++
+          if (startIndex >= currentValue.length) {
+            break
+          }
+        }
+        if (pasteApplied) {
+          focusOnChar(Math.min(startIndex, props.length - 1))
+          doUpdateValue(currentValue, {
+            diff: appendedText,
+            index: startIndex,
+            source: 'input'
+          })
+        }
+        return
+      }
+
+      // Single character — original behavior
+      const char = text[text.length - 1] || ''
       const allowInput = props.allowInput
       if (allowInput && !allowInput(char, index, currentValue)) {
         return

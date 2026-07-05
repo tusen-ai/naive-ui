@@ -221,9 +221,11 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | clearFilters | `() => void` | Clear all filter state. |  |
 | clearSorter | `() => void` | Clear all sort state. |  |
 | downloadCsv | `(options?: { fileName?: string, keepOriginalData?: boolean }) => void` | Download CSV. | 2.37.0 |
+| getCurrentPageData | `() => RowData[]` | Get row data of the current page after filters, sorters and pagination are applied. | NEXT_VERSION |
+| getFilteredAndSortedData | `() => RowData[]` | Get all row data after filters and sorters are applied, excluding pagination. In `remote` mode, it is based on the current `data` prop only. | NEXT_VERSION |
 | filters | `(filters: DataTableFilterState \| null) => void` | Set the active filters of the table. |  |
 | page | `(page: number) => void` | Manually set the page. |  |
-| scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | Scroll content. | 2.30.4 |
+| scrollTo | `DataTableScrollTo` | Scroll content. See <n-a href="#DataTableScrollTo-Type">DataTableScrollTo Type</n-a>. | NEXT_VERSION |
 | sort | `(columnKey: string \| number, order: 'ascend' \| 'descend' \| false) => void` | Set the sort state of the table. |  |
 
 ### DataTable Slots
@@ -232,3 +234,19 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | ------- | ---- | ------------------------------------------------- | ------- |
 | empty   | `()` | Custom description when data of table is empty.   |         |
 | loading | `()` | Custom description when data of table is loading. | 2.34.0  |
+
+#### DataTableScrollTo Type
+
+`scrollTo` delegates to virtual list when `virtual-scroll` is enabled, otherwise to the internal scrollbar. Available signatures by mode:
+
+| Signature | Virtual scroll | Non-virtual scroll |
+| --- | --- | --- |
+| `(x: number, y: number)` | Yes | Yes |
+| `{ left?, top?, behavior?, debounce? }` | Yes | Yes |
+| `{ position: 'top' \| 'bottom', behavior?, debounce? }` | Yes | Yes |
+| `{ index, behavior?, debounce? }` | Yes | No |
+| `{ key, behavior?, debounce? }` | Yes | No |
+| `{ el, behavior?, debounce? }` | No | Yes |
+| `{ index, elSize, behavior?, debounce? }` | No | Yes |
+
+When `virtual-scroll` is enabled, `scrollTo` still has some edge cases that are not fully handled. For example, using `behavior: 'smooth'` may have some issues; please refer to actual usage.

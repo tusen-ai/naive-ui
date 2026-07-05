@@ -71,6 +71,21 @@ describe('n-space', () => {
     wrapper.unmount()
   })
 
+  it('render space number size 0', () => {
+    const wrapper = mount(NSpace, {
+      props: {
+        size: 0
+      },
+      slots: {
+        default: () => [<div>1</div>, <div>2</div>]
+      }
+    })
+
+    const childNodes = getChildrenNode(wrapper)
+    expect(childNodes[0].attributes('style')).toContain('margin-right: 0px;')
+    wrapper.unmount()
+  })
+
   it('render vertical space', () => {
     const wrapper = mount({
       render() {

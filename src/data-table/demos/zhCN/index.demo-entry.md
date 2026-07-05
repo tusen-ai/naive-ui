@@ -233,10 +233,12 @@ type DataTableCreateSummary = (pageData: RowData[]) =>
 | clearFilters | `() => void` | 清空所有的 filter 状态 |  |
 | clearSorter | `() => void` | 清空所有的 sort 状态 |  |
 | downloadCsv | `(options?: { fileName?: string, keepOriginalData?: boolean }) => void` | 下载 CSV | 2.37.0 |
+| getCurrentPageData | `() => RowData[]` | 获取 filter、sorter 和 pagination 应用后的当前页行数据 | NEXT_VERSION |
+| getFilteredAndSortedData | `() => RowData[]` | 获取 filter 和 sorter 应用后的全部行数据，不含 pagination；`remote` 模式下仅基于当前 `data` 属性 | NEXT_VERSION |
 | filters | `(filters: DataTableFilterState \| null) => void` | 设定表格当前的过滤器 |  |
 | page | `(page: number) => void` | 手动设置 page |  |
-| scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | 滚动内容 | 2.30.4 |
-| sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | 设定表格的过滤状态 |  |
+| scrollTo | `DataTableScrollTo` | 滚动内容，类型见 <n-a href="#DataTableScrollTo-Type">DataTableScrollTo Type</n-a> | NEXT_VERSION |
+| sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | 设定表格的排序状态 |  |
 
 ### DataTable Slots
 
@@ -244,3 +246,19 @@ type DataTableCreateSummary = (pageData: RowData[]) =>
 | ------- | ---- | --------------------- | ------ |
 | empty   | `()` | 表格数据为空时的展示  |        |
 | loading | `()` | 表格 loading 时的展示 | 2.34.0 |
+
+#### DataTableScrollTo Type
+
+`scrollTo` 在开启 `virtual-scroll` 时会转发到虚拟列表，否则转发到内部滚动条。不同模式下可用的签名如下：
+
+| 签名 | 虚拟滚动 | 非虚拟滚动 |
+| --- | --- | --- |
+| `(x: number, y: number)` | 是 | 是 |
+| `{ left?, top?, behavior?, debounce? }` | 是 | 是 |
+| `{ position: 'top' \| 'bottom', behavior?, debounce? }` | 是 | 是 |
+| `{ index, behavior?, debounce? }` | 是 | 否 |
+| `{ key, behavior?, debounce? }` | 是 | 否 |
+| `{ el, behavior?, debounce? }` | 否 | 是 |
+| `{ index, elSize, behavior?, debounce? }` | 否 | 是 |
+
+开启 `virtual-scroll` 时，`scrollTo` 仍存在一些尚未完全处理好的边界情况。例如使用 `behavior: 'smooth'` 时，滚动效果可能存在一些问题，效果以实际情况为准。
