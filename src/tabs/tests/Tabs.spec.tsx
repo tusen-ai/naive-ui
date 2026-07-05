@@ -373,7 +373,7 @@ describe('n-tabs', () => {
       }
     })
     const barEl = wrapper.find('.n-tabs-bar').element as HTMLElement
-    const addSpy = vi.spyOn(barEl.classList, 'add')
+    using addSpy = vi.spyOn(barEl.classList, 'add')
 
     ;(wrapper.vm as any).handleNavResize({
       contentRect: {

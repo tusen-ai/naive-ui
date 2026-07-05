@@ -5,7 +5,7 @@ import { NLog } from '../index'
 
 describe('n-log', () => {
   it('should warn with language setted & no hljs is set', () => {
-    const spy = vi.spyOn(console, 'error').mockImplementation(() => {})
+    using spy = vi.spyOn(console, 'error').mockImplementation(() => {})
     mount(NLog)
     expect(spy).not.toHaveBeenCalled()
     mount(NLog, {

@@ -8,7 +8,7 @@ hljs.registerLanguage('javascript', javascript)
 
 describe('n-code', () => {
   it('should warn when no hljs is set', () => {
-    const spy = vi.spyOn(console, 'error').mockImplementation(() => {})
+    using spy = vi.spyOn(console, 'error').mockImplementation(() => {})
     mount(NCode)
     expect(spy).toHaveBeenCalled()
   })

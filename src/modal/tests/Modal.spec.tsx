@@ -61,7 +61,7 @@ describe('n-modal', () => {
     expect(document.querySelector('.n-modal-body-wrapper')).toEqual(null)
     await wrapper.find('button').trigger('click')
     expect(document.querySelector('.n-modal-body-wrapper')).not.toEqual(null)
-    const rafSpy = vi
+    using _rafSpy = vi
       .spyOn(window, 'requestAnimationFrame')
       .mockImplementation((cb: FrameRequestCallback): number => {
         cb(0)
@@ -91,7 +91,6 @@ describe('n-modal', () => {
     ).toContain('display: none')
 
     wrapper.unmount()
-    rafSpy.mockRestore()
   })
 
   it('should work with `preset` prop', async () => {

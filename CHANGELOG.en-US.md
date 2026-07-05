@@ -24,6 +24,7 @@
 - Fix `vitest-setup.ts` being emitted into build outputs.
 - Fix `n-dynamic-tags` committing a tag when Enter is pressed to confirm an IME composition.
 - Fix `n-image` rendering the `placeholder` slot together with the `error` slot when the image fails to load, closes [#7526](https://github.com/tusen-ai/naive-ui/issues/7526).
+- Fix `n-space` `size` prop not taking effect when set to `0`, closes [#7530](https://github.com/tusen-ai/naive-ui/issues/7530).
 
 ## 2.44.1
 
