@@ -374,7 +374,7 @@ export default defineComponent({
                     showMask ? undefined : this.handleClickoutside
                   }
                 >
-                  {{ ...this.$slots }}
+                  {this.$slots}
                 </NModalBodyWrapper>
               </div>,
               [
