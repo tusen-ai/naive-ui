@@ -4,39 +4,33 @@
 下拉菜单的基础用法。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      options: [
-        {
-          label: '滨海湾金沙，新加坡',
-          key: 'marina bay sands',
-          disabled: true
-        },
-        {
-          label: '布朗酒店，伦敦',
-          key: 'brown\'s hotel, london'
-        },
-        {
-          label: '亚特兰蒂斯巴哈马，拿骚',
-          key: 'atlantis nahamas, nassau'
-        },
-        {
-          label: '比佛利山庄酒店，洛杉矶',
-          key: 'the beverly hills hotel, los angeles'
-        }
-      ],
-      handleSelect(key: string | number) {
-        message.info(String(key))
-      }
-    }
+const message = useMessage()
+const options = [
+  {
+    label: '滨海湾金沙，新加坡',
+    key: 'marina bay sands',
+    disabled: true
+  },
+  {
+    label: '布朗酒店，伦敦',
+    key: 'brown\'s hotel, london'
+  },
+  {
+    label: '亚特兰蒂斯巴哈马，拿骚',
+    key: 'atlantis nahamas, nassau'
+  },
+  {
+    label: '比佛利山庄酒店，洛杉矶',
+    key: 'the beverly hills hotel, los angeles'
   }
-})
+]
+
+function handleSelect(key: string | number) {
+  message.info(String(key))
+}
 </script>
 
 <template>

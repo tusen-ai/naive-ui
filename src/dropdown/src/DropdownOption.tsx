@@ -1,4 +1,6 @@
 import type { TreeNode } from 'treemate'
+import type { HTMLAttributes, PropType, Ref, VNodeChild } from 'vue'
+import type { FollowerPlacement } from 'vueuc'
 import type {
   MenuGroupOption,
   MenuOptionSharedPart
@@ -14,17 +16,13 @@ import {
   computed,
   defineComponent,
   h,
-  type HTMLAttributes,
   inject,
   mergeProps,
-  type PropType,
   provide,
-  type Ref,
   ref,
-  Transition,
-  type VNodeChild
+  Transition
 } from 'vue'
-import { type FollowerPlacement, VBinder, VFollower, VTarget } from 'vueuc'
+import { VBinder, VFollower, VTarget } from 'vueuc'
 import { ChevronRightIcon } from '../../_internal/icons'
 import { render, useDeferredTrue } from '../../_utils'
 

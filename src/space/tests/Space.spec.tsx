@@ -1,5 +1,6 @@
+import type { VueWrapper } from '@vue/test-utils'
 import type { Justify } from '../src/Space'
-import { mount, type VueWrapper } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { createCommentVNode, Fragment, h } from 'vue'
 import { c } from '../../_utils/cssr'
 import { NConfigProvider } from '../../config-provider'
@@ -24,7 +25,7 @@ describe('n-space', () => {
         return <NSpace />
       }
     })
-    expect(wrapper.find('.n-space')).not.toBe(null)
+    expect(wrapper.find('.n-space').exists()).toBeFalsy()
     expect(wrapper.html()).toMatchSnapshot()
     wrapper.unmount()
   })
@@ -67,6 +68,21 @@ describe('n-space', () => {
 
     await wrapper.setProps({ vertical: true })
     expect(childNodes[0].attributes('style')).toContain('margin-bottom: 30px;')
+    wrapper.unmount()
+  })
+
+  it('render space number size 0', () => {
+    const wrapper = mount(NSpace, {
+      props: {
+        size: 0
+      },
+      slots: {
+        default: () => [<div>1</div>, <div>2</div>]
+      }
+    })
+
+    const childNodes = getChildrenNode(wrapper)
+    expect(childNodes[0].attributes('style')).toContain('margin-right: 0px;')
     wrapper.unmount()
   })
 

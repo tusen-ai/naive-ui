@@ -4,16 +4,8 @@
 JavaScript 的例子。
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup() {
-    return {
-      code: 'console.log("工具人的日子不好过")'
-    }
-  }
-})
+<script lang="ts" setup>
+const code = 'console.log("工具人的日子不好过")'
 </script>
 
 <template>

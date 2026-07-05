@@ -4,28 +4,22 @@
 使用 `mask-closable=false` 使点击遮罩层不发出关闭事件。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    const showModalRef = ref(false)
+const message = useMessage()
+const showModal = ref(false)
 
-    return {
-      showModal: showModalRef,
-      onNegativeClick() {
-        message.success('Cancel')
-        showModalRef.value = false
-      },
-      onPositiveClick() {
-        message.success('Submit')
-        showModalRef.value = false
-      }
-    }
-  }
-})
+function onNegativeClick() {
+  message.success('Cancel')
+  showModal.value = false
+}
+
+function onPositiveClick() {
+  message.success('Submit')
+  showModal.value = false
+}
 </script>
 
 <template>

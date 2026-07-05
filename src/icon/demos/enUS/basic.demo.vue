@@ -2,21 +2,8 @@
 # Basic
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { GameController, GameControllerOutline } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    GameController,
-    GameControllerOutline
-  },
-  setup() {
-    return {
-      GameController
-    }
-  }
-})
 </script>
 
 <template>

@@ -1,14 +1,8 @@
+import type { CSSProperties, PropType } from 'vue'
 import type { ModalDraggableOptions } from '../../modal/src/interface'
 // use absolute path to make sure no circular ref of style
 // this -> modal-index -> modal-style
-import {
-  type CSSProperties,
-  defineComponent,
-  h,
-  normalizeClass,
-  type PropType,
-  ref
-} from 'vue'
+import { defineComponent, h, normalizeClass, ref } from 'vue'
 import { keep } from '../../_utils'
 import NModal from '../../modal/src/Modal'
 import { NDialog } from './Dialog'
@@ -31,6 +25,7 @@ export const exposedDialogEnvProps = {
     type: Boolean,
     default: true
   },
+  zIndex: Number,
   onPositiveClick: Function as PropType<
     (e: MouseEvent) => Promise<unknown> | unknown
   >,
@@ -148,6 +143,7 @@ export const NDialogEnvironment = defineComponent({
       handleMaskClick,
       handleEsc,
       to,
+      zIndex,
       maskClosable,
       show
     } = this
@@ -158,6 +154,7 @@ export const NDialogEnvironment = defineComponent({
         onMaskClick={handleMaskClick}
         onEsc={handleEsc}
         to={to}
+        zIndex={zIndex}
         maskClosable={maskClosable}
         onAfterEnter={this.onAfterEnter}
         onAfterLeave={handleAfterLeave}

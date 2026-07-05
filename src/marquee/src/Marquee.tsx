@@ -95,35 +95,43 @@ export default defineComponent({
     } = this
     const originalNode = (
       <VResizeObserver onResize={this.handleContentResize}>
-        <div
-          class={`${mergedClsPrefix}-marquee__item ${mergedClsPrefix}-marquee__original-item`}
-        >
-          {$slots}
-        </div>
+        {{
+          default: () => (
+            <div
+              class={`${mergedClsPrefix}-marquee__item ${mergedClsPrefix}-marquee__original-item`}
+            >
+              {$slots.default?.()}
+            </div>
+          )
+        }}
       </VResizeObserver>
     )
     const mirrorNode = (
-      <div class={`${mergedClsPrefix}-marquee__item`}>{$slots}</div>
+      <div class={`${mergedClsPrefix}-marquee__item`}>{$slots.default?.()}</div>
     )
     if (this.autoFill) {
       return (
         <VResizeObserver onResize={this.handleContainerResize}>
-          <div
-            class={`${mergedClsPrefix}-marquee ${mergedClsPrefix}-marquee--auto-fill`}
-            ref="containerElRef"
-            style={animationCssVars}
-          >
-            <div
-              class={`${mergedClsPrefix}-marquee__group`}
-              onAnimationiteration={handleAnimationIteration}
-            >
-              {originalNode}
-              {repeat(repeatCountInOneGroup - 1, mirrorNode)}
-            </div>
-            <div class={`${mergedClsPrefix}-marquee__group`}>
-              {repeat(repeatCountInOneGroup, mirrorNode)}
-            </div>
-          </div>
+          {{
+            default: () => (
+              <div
+                class={`${mergedClsPrefix}-marquee ${mergedClsPrefix}-marquee--auto-fill`}
+                ref="containerElRef"
+                style={animationCssVars}
+              >
+                <div
+                  class={`${mergedClsPrefix}-marquee__group`}
+                  onAnimationiteration={handleAnimationIteration}
+                >
+                  {originalNode}
+                  {repeat(repeatCountInOneGroup - 1, mirrorNode)}
+                </div>
+                <div class={`${mergedClsPrefix}-marquee__group`}>
+                  {repeat(repeatCountInOneGroup, mirrorNode)}
+                </div>
+              </div>
+            )
+          }}
         </VResizeObserver>
       )
     }

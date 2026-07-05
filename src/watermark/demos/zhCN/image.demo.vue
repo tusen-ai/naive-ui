@@ -6,16 +6,10 @@
 记得注意图像 URL 的跨域设置，这会影响图片是否能正常显示。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      show: ref(false)
-    }
-  }
-})
+const show = ref(false)
 </script>
 
 <template>

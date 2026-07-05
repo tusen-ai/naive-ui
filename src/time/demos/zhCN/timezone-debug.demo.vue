@@ -2,25 +2,18 @@
 # Timezone debug
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const tz = ref('Asia/Shanghai')
-    return {
-      tz,
-      toggle: () => {
-        if (tz.value === 'Asia/Shanghai') {
-          tz.value = 'America/New_York'
-        }
-        else {
-          tz.value = 'Asia/Shanghai'
-        }
-      }
-    }
+const tz = ref('Asia/Shanghai')
+function toggle() {
+  if (tz.value === 'Asia/Shanghai') {
+    tz.value = 'America/New_York'
   }
-})
+  else {
+    tz.value = 'Asia/Shanghai'
+  }
+}
 </script>
 
 <template>

@@ -1,18 +1,10 @@
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
 import type { ScrollbarInst, ScrollbarProps } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { LayoutTheme } from '../styles'
 import type { LayoutInst } from './interface'
-import {
-  computed,
-  type CSSProperties,
-  defineComponent,
-  type ExtractPropTypes,
-  h,
-  type PropType,
-  provide,
-  ref
-} from 'vue'
+import { computed, defineComponent, h, provide, ref } from 'vue'
 import { NScrollbar } from '../../_internal'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { createInjectionKey, useReactivated } from '../../_utils'
@@ -169,7 +161,7 @@ export function createLayoutComponent(isContent: boolean) {
               style={[this.contentStyle, hasSiderStyle] as any}
               onScroll={this.handleNativeElScroll}
             >
-              {this.$slots}
+              {this.$slots.default?.()}
             </div>
           ) : (
             <NScrollbar
@@ -181,7 +173,7 @@ export function createLayoutComponent(isContent: boolean) {
               contentClass={this.contentClass}
               contentStyle={[this.contentStyle, hasSiderStyle] as any}
             >
-              {this.$slots}
+              {{ ...this.$slots }}
             </NScrollbar>
           )}
         </div>

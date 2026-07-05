@@ -2,27 +2,21 @@
 # None debug
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const valueRef = ref('a')
-    const switchTabs = () => {
-      if (valueRef.value === 'a') {
-        valueRef.value = 'c'
-      }
-      else {
-        valueRef.value = 'a'
-      }
-    }
-    return {
-      tabs: ['c', 'd'],
-      switchTabs,
-      value: valueRef
-    }
+const valueRef = ref('a')
+const tabs = ['c', 'd']
+const value = valueRef
+
+function switchTabs() {
+  if (valueRef.value === 'a') {
+    valueRef.value = 'c'
   }
-})
+  else {
+    valueRef.value = 'a'
+  }
+}
 </script>
 
 <template>

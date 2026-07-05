@@ -1,10 +1,11 @@
+import type { DialogProps } from '../index'
 import { mount } from '@vue/test-utils'
 import { defineComponent, h, nextTick } from 'vue'
-import { type DialogProps, NDialog, NDialogProvider, useDialog } from '../index'
+import { NDialog, NDialogProvider, useDialog } from '../index'
 
 const Provider = defineComponent({
   render() {
-    return <NDialogProvider>{this.$slots}</NDialogProvider>
+    return <NDialogProvider>{{ ...this.$slots }}</NDialogProvider>
   }
 })
 
@@ -120,7 +121,7 @@ describe('n-dialog', () => {
   })
 
   it('onMaskClick', async () => {
-    const onMaskClick = jest.fn()
+    const onMaskClick = vi.fn()
     const Test = defineComponent({
       setup() {
         const dialog = useDialog()

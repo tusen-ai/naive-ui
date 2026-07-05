@@ -126,6 +126,12 @@ const idID: NLocale = {
     tipClose: 'Tutup (Esc)',
     // TODO: translation
     tipOriginalSize: 'Zoom ke ukuran asli'
+  },
+  Heatmap: {
+    less: 'less',
+    more: 'more',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

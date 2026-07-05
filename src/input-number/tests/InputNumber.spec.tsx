@@ -41,7 +41,7 @@ describe('n-input-number', () => {
   })
 
   it('should not trigger update if value is same', async () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = mount(NInputNumber, {
       attachTo: document.body,
       props: {
@@ -56,8 +56,8 @@ describe('n-input-number', () => {
   })
 
   it('trigger focus & blur event', () => {
-    const onFocus = jest.fn()
-    const onBlur = jest.fn()
+    const onFocus = vi.fn()
+    const onBlur = vi.fn()
     const wrapper = mount(NInputNumber, {
       attachTo: document.body,
       props: {
@@ -157,7 +157,7 @@ describe('n-input-number', () => {
   })
 
   it('should work with `updateValueOnInput` prop', async () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = mount(NInputNumber, {
       attachTo: document.body,
       props: {
@@ -192,7 +192,7 @@ describe('n-input-number', () => {
   })
 
   it('should work with negative decimal value', async () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = mount(NInputNumber, {
       attachTo: document.body,
       props: {
@@ -216,7 +216,7 @@ describe('n-input-number', () => {
   })
 
   it('should work with decimal value ends at 0', async () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = mount(NInputNumber, {
       attachTo: document.body,
       props: {
@@ -249,7 +249,7 @@ describe('n-input-number', () => {
   })
 
   it('should work with integer value ends with 0', async () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = mount(NInputNumber, {
       attachTo: document.body,
       props: {

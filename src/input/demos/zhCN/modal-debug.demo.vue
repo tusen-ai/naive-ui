@@ -2,28 +2,22 @@
  # Modal debug
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
+import { onMounted, ref } from 'vue'
 
-export default defineComponent({
-  data() {
-    return {
-      name: '',
-      value: '',
-      showModal: false
-    }
-  },
-  mounted() {
-    setInterval(() => {
-      this.name = Math.random().toString()
-    }, 100)
-  },
-  methods: {
-    renderCount() {
-      return `${this.value.length} / Max`
-    }
-  }
+const name = ref('')
+const value = ref('')
+const showModal = ref(false)
+
+onMounted(() => {
+  setInterval(() => {
+    name.value = Math.random().toString()
+  }, 100)
 })
+
+function renderCount() {
+  return `${value.value.length} / Max`
+}
 </script>
 
 <template>

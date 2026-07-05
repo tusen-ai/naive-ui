@@ -4,25 +4,16 @@
 Thing provides many slots to custom.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  components: {
-    CashIcon
-  },
-  setup() {
-    return {
-      avatar: ref(true),
-      header: ref(true),
-      headerExtra: ref(true),
-      description: ref(true),
-      footer: ref(true),
-      action: ref(true)
-    }
-  }
-})
+const avatar = ref(true)
+const header = ref(true)
+const headerExtra = ref(true)
+const description = ref(true)
+const footer = ref(true)
+const action = ref(true)
 </script>
 
 <template>

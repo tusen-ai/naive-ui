@@ -175,14 +175,14 @@ export default c([
       transition: border-color .3s var(--n-bezier);
       pointer-events: none;
     `),
-    cE('border', {
-      border: 'var(--n-border)'
-    }),
-    cE('state-border', {
-      border: 'var(--n-border)',
-      borderColor: '#0000',
-      zIndex: 1
-    }),
+    cE('border', `
+      border: var(--n-border);
+    `),
+    cE('state-border', `
+      border: var(--n-border);
+      border-color: #0000;
+      z-index: 1;
+    `),
     cE('icon', `
       margin: var(--n-icon-margin);
       margin-left: 0;

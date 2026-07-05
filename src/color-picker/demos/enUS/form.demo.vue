@@ -4,26 +4,20 @@
 It seems this example is useless, but it's a data input component so I just left it here.
 </markdown>
 
-<script lang="ts">
-import { defineComponent, reactive } from 'vue'
+<script lang="ts" setup>
+import { reactive } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const model = reactive({
-      color: '#18A058'
-    })
-    return {
-      model,
-      colorRule: {
-        trigger: 'change',
-        validator(_: unknown, value: string) {
-          if (value !== '#18A058')
-            return new Error('Don\'t change the color')
-        }
-      }
-    }
-  }
+const model = reactive({
+  color: '#18A058'
 })
+
+const colorRule = {
+  trigger: 'change',
+  validator(_: unknown, value: string) {
+    if (value !== '#18A058')
+      return new Error('Don\'t change the color')
+  }
+}
 </script>
 
 <template>

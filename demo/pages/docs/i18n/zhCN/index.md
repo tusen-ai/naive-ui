@@ -49,6 +49,7 @@ Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有�
 | 阿拉伯语           | arDZ | dateArDZ | 2.34.0 |
 | 阿塞拜疆语         | azAZ | dateAzAZ | 2.39.0 |
 | 捷克语（捷克）     | csCZ | dateCsCz | 2.38.2 |
+| 丹麦               | daDK | dateDaDK | 2.43.0 |
 | 德语               | deDE | dateDeDE |        |
 | 英国英语           | enGB | dateEnGB | 2.25.1 |
 | 英语               | enUS | dateEnUS |        |
@@ -63,6 +64,7 @@ Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有�
 | 高棉语（柬埔寨）   | kmKH | dateKmKH | 2.41.0 |
 | 韩语               | koKR | dateKoKR | 2.28.1 |
 | 书面挪威语         | nbNO | dateNbNO |        |
+| 新挪威语           | nnNO | dateNnNO |        |
 | 荷兰语（荷兰）     | nlNL | dateNlNL | 2.29.0 |
 | 波兰语（波兰）     | plPL | datePlPL | 2.25.2 |
 | 葡萄牙语 (巴西)    | ptBR | datePtBR | 2.28.1 |

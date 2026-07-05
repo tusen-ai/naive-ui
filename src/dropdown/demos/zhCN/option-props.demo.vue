@@ -4,60 +4,54 @@
 爱绑啥绑啥。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      options: [
-        {
-          label: '滨海湾金沙，新加坡',
-          key: 'marina bay sands',
-          props: {
-            onClick: () => {
-              message.success('Good!')
-            }
-          }
-        },
-        {
-          label: '布朗酒店，伦敦',
-          key: 'brown\'s hotel, london',
-          children: [
-            {
-              label: '鸡肉',
-              key: 'chicken',
-              disabled: true,
-              props: {
-                onClick: () => {
-                  message.info('Okay')
-                }
-              }
-            },
-            {
-              label: '牛肉',
-              key: 'beef'
-            }
-          ]
-        },
-        {
-          label: '亚特兰蒂斯巴哈马，拿骚',
-          key: 'atlantis nahamas, nassau',
-          props: {
-            onMousedown: () => {
-              message.warning('Key down')
-            }
+const message = useMessage()
+const options = [
+  {
+    label: '滨海湾金沙，新加坡',
+    key: 'marina bay sands',
+    props: {
+      onClick: () => {
+        message.success('Good!')
+      }
+    }
+  },
+  {
+    label: '布朗酒店，伦敦',
+    key: 'brown\'s hotel, london',
+    children: [
+      {
+        label: '鸡肉',
+        key: 'chicken',
+        disabled: true,
+        props: {
+          onClick: () => {
+            message.info('Okay')
           }
         }
-      ],
-      handleSelect(key: string | number) {
-        message.info(String(key))
+      },
+      {
+        label: '牛肉',
+        key: 'beef'
+      }
+    ]
+  },
+  {
+    label: '亚特兰蒂斯巴哈马，拿骚',
+    key: 'atlantis nahamas, nassau',
+    props: {
+      onMousedown: () => {
+        message.warning('Key down')
       }
     }
   }
-})
+]
+
+function handleSelect(key: string | number) {
+  message.info(String(key))
+}
 </script>
 
 <template>

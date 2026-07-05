@@ -4,13 +4,13 @@
 If one of the column objects' `sortOrder` is set to `'ascend'`, `'descend'` or `false`. The sorting behavior the table will be in a controlled manner. If multiple columns' `sortOrder` are set to `'ascend'` or `'descend'`, only first column of them will be applied.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type {
   DataTableBaseColumn,
   DataTableSortOrder,
   DataTableSortState
 } from 'naive-ui'
-import { defineComponent, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 
 interface RowData {
   key: number
@@ -85,44 +85,34 @@ const data = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    const nameColumnReactive = reactive(nameColumn)
-    const ageColumnReactive = reactive(ageColumn)
-    const columnsRef = ref<DataTableBaseColumn<RowData>[]>(columns)
+const nameColumnReactive = reactive(nameColumn)
+const ageColumnReactive = reactive(ageColumn)
+const columnsRef = ref<DataTableBaseColumn<RowData>[]>(columns)
+const pagination = { pageSize: 5 }
 
-    function handleSorterChange(sorter: DataTableSortState) {
-      columnsRef.value.forEach((column: DataTableBaseColumn<RowData>) => {
-        /** column.sortOrder !== undefined means it is uncontrolled */
-        if (column.sortOrder === undefined)
-          return
-        if (!sorter) {
-          column.sortOrder = false
-          return
-        }
-        if (column.key === sorter.columnKey)
-          column.sortOrder = sorter.order
-        else column.sortOrder = false
-      })
+function handleSorterChange(sorter: DataTableSortState) {
+  columnsRef.value.forEach((column: DataTableBaseColumn<RowData>) => {
+    /** column.sortOrder !== undefined means it is uncontrolled */
+    if (column.sortOrder === undefined)
+      return
+    if (!sorter) {
+      column.sortOrder = false
+      return
     }
+    if (column.key === sorter.columnKey)
+      column.sortOrder = sorter.order
+    else column.sortOrder = false
+  })
+}
 
-    return {
-      data,
-      columns: columnsRef,
-      nameColumn: nameColumnReactive,
-      ageColumn: ageColumnReactive,
-      pagination: { pageSize: 5 },
-      sortName(order: DataTableSortOrder) {
-        nameColumnReactive.sortOrder = order
-      },
-      clearSorter() {
-        nameColumnReactive.sortOrder = false
-        ageColumnReactive.sortOrder = false
-      },
-      handleSorterChange
-    }
-  }
-})
+function sortName(order: DataTableSortOrder) {
+  nameColumnReactive.sortOrder = order
+}
+
+function clearSorter() {
+  nameColumnReactive.sortOrder = false
+  ageColumnReactive.sortOrder = false
+}
 </script>
 
 <template>

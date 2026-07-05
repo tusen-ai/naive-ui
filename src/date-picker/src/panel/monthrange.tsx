@@ -1,15 +1,10 @@
+import type { PropType, VNode } from 'vue'
 import type {
   DatePickerClearSlotProps,
   DatePickerConfirmSlotProps
 } from '../public-types'
-import {
-  defineComponent,
-  h,
-  onMounted,
-  type PropType,
-  type VNode,
-  watchEffect
-} from 'vue'
+import type { MonthItem, QuarterItem, YearItem } from '../utils'
+import { defineComponent, h, onMounted, watchEffect } from 'vue'
 import { VirtualList } from 'vueuc'
 import { NBaseFocusDetector, NScrollbar } from '../../../_internal'
 import { useLocale } from '../../../_mixins'
@@ -20,14 +15,7 @@ import {
 } from '../../../_utils'
 import { NxButton } from '../../../button'
 import { MONTH_ITEM_HEIGHT } from '../config'
-import {
-  getMonthString,
-  getQuarterString,
-  getYearString,
-  type MonthItem,
-  type QuarterItem,
-  type YearItem
-} from '../utils'
+import { getMonthString, getQuarterString, getYearString } from '../utils'
 import { useDualCalendar, useDualCalendarProps } from './use-dual-calendar'
 
 export default defineComponent({
@@ -282,26 +270,26 @@ export default defineComponent({
           <div class={`${mergedClsPrefix}-date-panel-actions`}>
             <div class={`${mergedClsPrefix}-date-panel-actions__prefix`}>
               {shortcuts
-              && Object.keys(shortcuts).map((key) => {
-                const shortcut = shortcuts[key]
-                return Array.isArray(shortcut)
-                  || typeof shortcut === 'function' ? (
-                      <NxButton
-                        size="tiny"
-                        onMouseenter={() => {
-                          this.handleRangeShortcutMouseenter(shortcut)
-                        }}
-                        onClick={() => {
-                          this.handleRangeShortcutClick(shortcut)
-                        }}
-                        onMouseleave={() => {
-                          this.handleShortcutMouseleave()
-                        }}
-                      >
-                        {{ default: () => key }}
-                      </NxButton>
-                    ) : null
-              })}
+                && Object.keys(shortcuts).map((key) => {
+                  const shortcut = shortcuts[key]
+                  return Array.isArray(shortcut)
+                    || typeof shortcut === 'function' ? (
+                        <NxButton
+                          size="tiny"
+                          onMouseenter={() => {
+                            this.handleRangeShortcutMouseenter(shortcut)
+                          }}
+                          onClick={() => {
+                            this.handleRangeShortcutClick(shortcut)
+                          }}
+                          onMouseleave={() => {
+                            this.handleShortcutMouseleave()
+                          }}
+                        >
+                          {{ default: () => key }}
+                        </NxButton>
+                      ) : null
+                })}
             </div>
             <div class={`${mergedClsPrefix}-date-panel-actions__suffix`}>
               {this.actions?.includes('clear')

@@ -4,20 +4,14 @@
 如果你想要自定义过渡效果，可以使用 `transition-props`，并把 `effect` 设置为 `custom`。
 </markdown>
 
-<script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { computed, ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const effectRef = ref<'slide' | 'fade' | 'card'>('slide')
-    const isCardRef = computed(() => effectRef.value === 'card')
-    return {
-      isCard: isCardRef,
-      myEffect: effectRef,
-      effects: ['slide', 'fade', 'card']
-    }
-  }
-})
+const effectRef = ref<'slide' | 'fade' | 'card'>('slide')
+const isCardRef = computed(() => effectRef.value === 'card')
+const isCard = isCardRef
+const myEffect = effectRef
+const effects = ['slide', 'fade', 'card']
 </script>
 
 <template>

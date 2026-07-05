@@ -1,5 +1,6 @@
+import type { PropType } from 'vue'
 import type { RenderExpandIcon, RowData } from '../interface'
-import { defineComponent, h, type PropType } from 'vue'
+import { defineComponent, h } from 'vue'
 import {
   NBaseIcon,
   NBaseLoading,

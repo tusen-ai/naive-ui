@@ -2,17 +2,10 @@
 # Grid Basic
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const collapsedRef = ref(true)
-    return {
-      collapsed: collapsedRef
-    }
-  }
-})
+const collapsed = ref(true)
 </script>
 
 <template>

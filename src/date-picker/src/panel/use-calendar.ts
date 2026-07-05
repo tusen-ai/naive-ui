@@ -1,6 +1,8 @@
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { VirtualListInst } from 'vueuc'
 import type { ScrollbarInst } from '../../../_internal'
 import type {
+  DatePickerGetDefaultTime,
   FirstDayOfWeek,
   IsSingleDateDisabled,
   IsSingleDateDisabledDetail,
@@ -29,18 +31,12 @@ import {
   startOfWeek,
   startOfYear
 } from 'date-fns'
-import {
-  computed,
-  type ExtractPropTypes,
-  inject,
-  type PropType,
-  ref,
-  watch
-} from 'vue'
+import { computed, inject, ref, watch } from 'vue'
 import { MONTH_ITEM_HEIGHT } from '../config'
 import { datePickerInjectionKey } from '../interface'
 import {
   dateArray,
+  extractSingleDefaultTime,
   getDefaultTime,
   monthArray,
   quarterArray,
@@ -298,9 +294,7 @@ function useCalendar(
     }
   }
   function clearSelectedDateTime(): void {
-    panelCommon.doUpdateValue(null, true)
     dateInputValueRef.value = ''
-    panelCommon.doClose(true)
     panelCommon.handleClearClick()
   }
   function handleNowClick(): void {
@@ -374,7 +368,18 @@ function useCalendar(
       && props.defaultTime !== null
       && !Array.isArray(props.defaultTime)
     ) {
-      const time = getDefaultTime(props.defaultTime)
+      let time: { hours: number, minutes: number, seconds: number } | undefined
+
+      if (typeof props.defaultTime === 'function') {
+        time = extractSingleDefaultTime(
+          dateItem.ts,
+          props.defaultTime as DatePickerGetDefaultTime
+        )
+      }
+      else {
+        time = getDefaultTime(props.defaultTime)
+      }
+
       if (time) {
         newValue = getTime(set(newValue, time)) // setDate getTime(addMilliseconds(startOfDay(newValue), time))
       }

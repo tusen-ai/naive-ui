@@ -1,13 +1,5 @@
-import {
-  computed,
-  defineComponent,
-  type ExtractPropTypes,
-  h,
-  inject,
-  type PropType,
-  type SlotsType,
-  type VNode
-} from 'vue'
+import type { ExtractPropTypes, PropType, SlotsType, VNode } from 'vue'
+import { computed, defineComponent, h, inject } from 'vue'
 import { resolveSlot, warn } from '../../_utils'
 import { useBrowserLocation } from '../../_utils/composable/use-browser-location'
 import { breadcrumbInjectionKey } from './Breadcrumb'
@@ -16,6 +8,10 @@ export const breadcrumbItemProps = {
   separator: String,
   href: String,
   clickable: {
+    type: Boolean,
+    default: true
+  },
+  showSeparator: {
     type: Boolean,
     default: true
   },
@@ -74,14 +70,16 @@ export default defineComponent({
             },
             slots
           )}
-          <span
-            class={`${mergedClsPrefix}-breadcrumb-item__separator`}
-            aria-hidden="true"
-          >
-            {resolveSlot(slots.separator, () => [
-              props.separator ?? separatorRef.value
-            ])}
-          </span>
+          {props.showSeparator && (
+            <span
+              class={`${mergedClsPrefix}-breadcrumb-item__separator`}
+              aria-hidden="true"
+            >
+              {resolveSlot(slots.separator, () => [
+                props.separator ?? separatorRef.value
+              ])}
+            </span>
+          )}
         </li>
       )
     }

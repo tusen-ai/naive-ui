@@ -296,6 +296,9 @@ export default c([
             display: flex;
             justify-content: center;
             align-items: center;
+          `),
+          cM('always-show', `
+            opacity: 1;
           `)
         ]),
         cE('name', `

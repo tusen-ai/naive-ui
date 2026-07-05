@@ -2,36 +2,30 @@
 # 自定义 PageSizes 选项
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const pageSizes = [
-      {
-        label: '10 每页',
-        value: 10
-      },
-      {
-        label: '20 每页',
-        value: 20
-      },
-      {
-        label: '30 每页',
-        value: 30
-      },
-      {
-        label: '40 每页',
-        value: 40
-      }
-    ]
-    return {
-      page: ref(2),
-      pageSize: ref(20),
-      pageSizes
-    }
+const pageSizes = [
+  {
+    label: '10 每页',
+    value: 10
+  },
+  {
+    label: '20 每页',
+    value: 20
+  },
+  {
+    label: '30 每页',
+    value: 30
+  },
+  {
+    label: '40 每页',
+    value: 40
   }
-})
+]
+
+const page = ref(2)
+const pageSize = ref(20)
 </script>
 
 <template>

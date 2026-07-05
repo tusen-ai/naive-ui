@@ -2,21 +2,13 @@
 # Locale
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { NDateLocale, NLocale } from 'naive-ui'
 import { dateZhCN, zhCN } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      zhCN,
-      dateZhCN,
-      locale: ref<NLocale | null>(null),
-      dateLocale: ref<NDateLocale | null>(null)
-    }
-  }
-})
+const locale = ref<NLocale | null>(null)
+const dateLocale = ref<NDateLocale | null>(null)
 </script>
 
 <template>

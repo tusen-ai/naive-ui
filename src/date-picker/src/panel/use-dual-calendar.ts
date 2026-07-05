@@ -1,6 +1,12 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import type { VirtualListInst } from 'vueuc'
 import type { ScrollbarInst } from '../../../_internal'
+import type {
+  IsRangeDateDisabled,
+  RangePanelChildComponentRefs,
+  Shortcuts
+} from '../interface'
+import type { DateItem, MonthItem, QuarterItem, YearItem } from '../utils'
 import {
   addMonths,
   format,
@@ -17,24 +23,16 @@ import {
 } from 'date-fns'
 import { computed, inject, ref, watch } from 'vue'
 import { MONTH_ITEM_HEIGHT } from '../config'
-import {
-  datePickerInjectionKey,
-  type IsRangeDateDisabled,
-  type RangePanelChildComponentRefs,
-  type Shortcuts
-} from '../interface'
+import { datePickerInjectionKey } from '../interface'
 import {
   dateArray,
-  type DateItem,
+  extractRangeDefaultTime,
   getDefaultTime,
   monthArray,
-  type MonthItem,
   pluckValueFromRange,
   quarterArray,
-  type QuarterItem,
   strictParse,
-  yearArray,
-  type YearItem
+  yearArray
 } from '../utils'
 import { usePanelCommon, usePanelCommonProps } from './use-panel-common'
 
@@ -534,7 +532,21 @@ function useDualCalendar(
         | undefined
       if (type === 'datetimerange') {
         const { defaultTime } = props
-        if (Array.isArray(defaultTime)) {
+        if (typeof defaultTime === 'function') {
+          startDefaultTime = extractRangeDefaultTime(
+            startTime,
+            defaultTime,
+            'start',
+            [startTime, endTime]
+          )
+          endDefaultTime = extractRangeDefaultTime(
+            endTime,
+            defaultTime,
+            'end',
+            [startTime, endTime]
+          )
+        }
+        else if (Array.isArray(defaultTime)) {
           startDefaultTime = getDefaultTime(defaultTime[0])
           endDefaultTime = getDefaultTime(defaultTime[1])
         }

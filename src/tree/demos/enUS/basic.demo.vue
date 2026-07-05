@@ -4,10 +4,10 @@
 Fortunately, the tree is now alive and it's not balanced.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { TreeOption } from 'naive-ui'
 import { repeat } from 'seemly'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 function createData(level = 4, baseKey = ''): TreeOption[] | undefined {
   if (!level)
@@ -34,14 +34,8 @@ function createLabel(level: number): string {
   return ''
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      data: createData(),
-      defaultExpandedKeys: ref(['40', '41'])
-    }
-  }
-})
+const data = createData()
+const defaultExpandedKeys = ref(['40', '41'])
 </script>
 
 <template>

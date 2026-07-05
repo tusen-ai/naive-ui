@@ -4,19 +4,13 @@
 折叠在响应式布局下依然生效。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      gridCollapsed: ref(false),
-      gridCollapsedRows: ref(1),
-      gridItemCount: ref(4),
-      showSuffix: ref(true)
-    }
-  }
-})
+const gridCollapsed = ref(false)
+const gridCollapsedRows = ref(1)
+const gridItemCount = ref(4)
+const showSuffix = ref(true)
 </script>
 
 <template>

@@ -2,21 +2,13 @@
 # Nested Debug
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup() {
-    return {
-      dataList: [
-        'Lorem',
-        'Lorem',
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero eveniet exercitationem quasi. Sequi quia natus quam ipsa sit autem eveniet harum tempore, eius placeat temporibus nobis veritatis vero totam possimus.',
-        'jflakjdflksjflkajdlkfjaslkfjklasjdflkasjflkjsadlkf'
-      ]
-    }
-  }
-})
+<script lang="ts" setup>
+const dataList = [
+  'Lorem',
+  'Lorem',
+  'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero eveniet exercitationem quasi. Sequi quia natus quam ipsa sit autem eveniet harum tempore, eius placeat temporibus nobis veritatis vero totam possimus.',
+  'jflakjdflksjflkajdlkfjaslkfjklasjdflkasjflkjsadlkf'
+]
 </script>
 
 <template>

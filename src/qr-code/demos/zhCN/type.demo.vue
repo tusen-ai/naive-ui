@@ -4,17 +4,10 @@
 通过设置 `type` 自定义渲染结果，提供 `canvas` 和 `svg` 两个选项。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const text = ref('雨淋湿了天空')
-    return {
-      text
-    }
-  }
-})
+const text = ref('雨淋湿了天空')
 </script>
 
 <template>

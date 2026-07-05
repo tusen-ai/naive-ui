@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils'
 import { h } from 'vue'
 import { NFloatButton } from '../index'
 
-describe('n-flex', () => {
+describe('n-float-button', () => {
   it('should work with import on demand', () => {
     mount(NFloatButton)
   })
@@ -13,7 +13,6 @@ describe('n-flex', () => {
         return <NFloatButton />
       }
     })
-    expect(wrapper.find('.n-flex')).not.toBe(null)
     expect(wrapper.html()).toMatchSnapshot()
     wrapper.unmount()
   })

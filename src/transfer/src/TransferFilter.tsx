@@ -1,4 +1,5 @@
-import { defineComponent, h, inject, type PropType } from 'vue'
+import type { PropType } from 'vue'
+import { defineComponent, h, inject } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import { SearchIcon } from '../../_internal/icons'
 import { NInput } from '../../input'

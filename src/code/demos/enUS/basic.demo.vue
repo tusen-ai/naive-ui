@@ -4,19 +4,11 @@
 For example, JavaScript, Python and C++.
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup() {
-    return {
-      cppCode: `int main () {
+<script lang="ts" setup>
+const cppCode = `int main () {
   std::cout << "Hello Naive UI";
   return 0;
 }`
-    }
-  }
-})
 </script>
 
 <template>

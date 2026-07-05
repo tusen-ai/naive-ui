@@ -4,9 +4,9 @@
 使用 `render-label` 可以批量控制 cascader 菜单的选项渲染。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { CascaderOption } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 function getOptions(depth = 3, iterator = 1, prefix = '') {
   const length = 12
@@ -39,20 +39,16 @@ function getOptions(depth = 3, iterator = 1, prefix = '') {
   return options
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      value: ref(null),
-      options: getOptions(),
-      handleUpdateValue(...args: unknown[]) {
-        console.log(...args)
-      },
-      renderLabel(option: { value?: string | number, label?: string }) {
-        return `prefix ${option.label}`
-      }
-    }
-  }
-})
+const value = ref(null)
+const options = getOptions()
+
+function handleUpdateValue(...args: unknown[]) {
+  console.log(...args)
+}
+
+function renderLabel(option: { value?: string | number, label?: string }) {
+  return `prefix ${option.label}`
+}
 </script>
 
 <template>

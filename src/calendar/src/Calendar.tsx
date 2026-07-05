@@ -1,3 +1,4 @@
+import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CalendarTheme } from '../styles'
@@ -17,18 +18,7 @@ import {
   startOfMonth
 } from 'date-fns'
 import { useMergedState } from 'vooks'
-import {
-  computed,
-  type CSSProperties,
-  defineComponent,
-  Fragment,
-  h,
-  type PropType,
-  ref,
-  type SlotsType,
-  toRef,
-  type VNode
-} from 'vue'
+import { computed, defineComponent, Fragment, h, ref, toRef } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import { ChevronLeftIcon, ChevronRightIcon } from '../../_internal/icons'
 import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'

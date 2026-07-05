@@ -1,5 +1,6 @@
+import type { PropType } from 'vue'
 import type { TmNode } from './interface'
-import { computed, defineComponent, h, inject, type PropType } from 'vue'
+import { computed, defineComponent, h, inject } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import { ChevronDownFilledIcon } from '../../_internal/icons'
 import { render } from '../../_utils'

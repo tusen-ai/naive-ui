@@ -2,26 +2,19 @@
   # 事件
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      handleOnDragStart: () => {
-        message.info('开始滚动')
-      },
-      handleOnDragMove: () => {
-        message.info('滚动中')
-      },
-      handleOnDragEnd: () => {
-        message.info('滚动结束')
-      }
-    }
-  }
-})
+const message = useMessage()
+function handleOnDragStart() {
+  message.info('开始滚动')
+}
+function handleOnDragMove() {
+  message.info('滚动中')
+}
+function handleOnDragEnd() {
+  message.info('滚动结束')
+}
 </script>
 
 <template>

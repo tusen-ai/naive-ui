@@ -4,11 +4,11 @@
 如你所想，前缀、标签、后缀都可以批量渲染
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { TreeOption } from 'naive-ui'
 import { NButton } from 'naive-ui'
 import { repeat } from 'seemly'
-import { defineComponent, h, ref } from 'vue'
+import { h, ref } from 'vue'
 
 function createData(level = 4, baseKey = ''): TreeOption[] | undefined {
   if (!level)
@@ -56,17 +56,8 @@ function renderSuffix({ option }: { option: TreeOption }) {
   )
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      data: createData(),
-      defaultExpandedKeys: ref(['40', '41']),
-      renderPrefix,
-      renderLabel,
-      renderSuffix
-    }
-  }
-})
+const data = createData()
+const defaultExpandedKeys = ref(['40', '41'])
 </script>
 
 <template>

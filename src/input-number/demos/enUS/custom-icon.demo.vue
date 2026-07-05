@@ -2,19 +2,11 @@
 # Custom Icon
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { ArrowDownCircleOutline, ArrowUpCircleOutline } from '@vicons/ionicons5'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      value: ref(0),
-      ArrowUpCircleOutline,
-      ArrowDownCircleOutline
-    }
-  }
-})
+const value = ref(0)
 </script>
 
 <template>

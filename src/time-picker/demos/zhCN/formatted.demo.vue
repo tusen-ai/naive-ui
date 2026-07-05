@@ -4,16 +4,10 @@
 你可以使用 `formatted-value` 控制格式化后的值。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      formattedValue: ref('4~1~8')
-    }
-  }
-})
+const formattedValue = ref('4~1~8')
 </script>
 
 <template>

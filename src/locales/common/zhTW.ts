@@ -122,6 +122,12 @@ const zhTW: NLocale = {
     tipDownload: '下載',
     tipClose: '關閉（Esc）',
     tipOriginalSize: '縮放到原始尺寸'
+  },
+  Heatmap: {
+    less: '少',
+    more: '多',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

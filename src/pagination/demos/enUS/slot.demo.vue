@@ -4,16 +4,10 @@
 The pagination has a property `page-slot`, try it and you will understand. It aims to solving misclicks caused by the length changing of pagination.
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      page: ref(2)
-    }
-  }
-})
+const page = ref(2)
 </script>
 
 <template>

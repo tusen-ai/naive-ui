@@ -13,20 +13,20 @@ jobs:
   lint:
     environment: test
 
-    runs-on: macos-14
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [22]
+        node-version: [24]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
 
       - name: Install pnpm
         run: corepack enable
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -38,28 +38,24 @@ jobs:
   test:
     environment: test
 
-    runs-on: macos-14
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [22]
+        node-version: [24]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
 
       - name: Install pnpm
         run: corepack enable
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
 
       - name: Setup timezone
-        uses: szenius/set-timezone@v2.0
-        with:
-          timezoneLinux: Asia/Shanghai
-          timezoneMacos: Asia/Shanghai
-          timezoneWindows: Asia/Shanghai
+        run: sudo timedatectl set-timezone Asia/Shanghai
 
       - run: pnpm install
 
@@ -67,6 +63,7 @@ jobs:
         run: pnpm run test:cov
 
       - name: Code coverage
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v6
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage/lcov.info

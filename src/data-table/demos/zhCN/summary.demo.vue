@@ -4,9 +4,9 @@
 使用 `summary` 属性渲染总结栏。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DataTableColumns, DataTableCreateSummary } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 
 interface RowData {
   key: number
@@ -74,15 +74,9 @@ const createSummary: DataTableCreateSummary = (pageData) => {
   }
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      summary: createSummary,
-      data: createData(),
-      columns: createColumns()
-    }
-  }
-})
+const summary = createSummary
+const data = createData()
+const columns = createColumns()
 </script>
 
 <template>

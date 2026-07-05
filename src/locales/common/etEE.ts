@@ -122,6 +122,12 @@ const etEE: NLocale = {
     tipDownload: 'Lae alla',
     tipClose: 'Sulge (Esc)',
     tipOriginalSize: 'Algsuurus'
+  },
+  Heatmap: {
+    less: 'less',
+    more: 'more',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

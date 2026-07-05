@@ -42,7 +42,7 @@ const jaJP: NLocale = {
     monthPlaceholder: '月を選択',
     yearPlaceholder: '年を選択',
     quarterPlaceholder: '四半期を選択',
-    weekPlaceholder: 'Select Week',
+    weekPlaceholder: '週を選択',
     startDatePlaceholder: '開始日',
     endDatePlaceholder: '終了日',
     startDatetimePlaceholder: '開始時間',
@@ -122,6 +122,12 @@ const jaJP: NLocale = {
     tipDownload: 'ダウンロード',
     tipClose: '閉じる (Esc)',
     tipOriginalSize: '元のサイズに戻す'
+  },
+  Heatmap: {
+    less: '少',
+    more: '多',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

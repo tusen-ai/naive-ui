@@ -2,28 +2,23 @@
 # Use in form
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      model: ref({
-        tags: ['teacher', 'programmer']
-      }),
-      rules: {
-        tags: {
-          trigger: ['change'],
-          validator(rule: unknown, value: string[]) {
-            if (value.length >= 5)
-              return new Error('Up to 4 tags')
-            return true
-          }
-        }
-      }
+const model = ref({
+  tags: ['teacher', 'programmer']
+})
+
+const rules = {
+  tags: {
+    trigger: ['change'],
+    validator(rule: unknown, value: string[]) {
+      if (value.length >= 5)
+        return new Error('Up to 4 tags')
+      return true
     }
   }
-})
+}
 </script>
 
 <template>

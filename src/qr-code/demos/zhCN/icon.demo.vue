@@ -4,15 +4,7 @@
 可以放一些代表性的图标。
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup() {
-    return {}
-  }
-})
-</script>
+<script lang="ts" setup></script>
 
 <template>
   <n-space>

@@ -4,7 +4,7 @@
 You can set tab-panel's display directive to `if` or `show`. When use `show`, the tab-panel's content won't be reset after tab changes. When use `show:lazy`, the display effect is the same as `show`, but the content will be lazily loaded.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { NInput } from 'naive-ui'
 import { defineComponent, h } from 'vue'
 
@@ -33,13 +33,9 @@ const showLazyInput = defineComponent({
   }
 })
 
-export default defineComponent({
-  components: {
-    ShowInput: showInput,
-    IfInput: ifInput,
-    ShowLazyInput: showLazyInput
-  }
-})
+const ShowInput = showInput
+const IfInput = ifInput
+const ShowLazyInput = showLazyInput
 </script>
 
 <template>

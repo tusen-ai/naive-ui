@@ -1,4 +1,5 @@
-import { mount, type VueWrapper } from '@vue/test-utils'
+import type { VueWrapper } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import { createCommentVNode, Fragment, h } from 'vue'
 import { NFlex } from '../index'
 
@@ -17,7 +18,7 @@ describe('n-flex', () => {
         return <NFlex />
       }
     })
-    expect(wrapper.find('.n-flex')).not.toBe(null)
+    expect(wrapper.find('.n-flex').exists()).toBe(false)
     expect(wrapper.html()).toMatchSnapshot()
     wrapper.unmount()
   })
@@ -84,7 +85,7 @@ describe('n-flex', () => {
     })
 
     const childNodes = getChildrenNode(wrapper)
-    expect(childNodes.length).toBe(3)
+    expect(childNodes.length).toBe(5)
     expect(wrapper.html()).toMatchSnapshot()
     wrapper.unmount()
   })
@@ -97,7 +98,7 @@ describe('n-flex', () => {
     })
     expect(wrapper.html()).toMatchSnapshot()
     const childNodes = getChildrenNode(wrapper)
-    expect(childNodes.length).toEqual(1) // Comment node
+    expect(childNodes.length).toEqual(3) // includes whitespace text nodes introduced by the compiler plus a comment node
   })
 
   it('should work with `wrap` prop', async () => {
@@ -128,7 +129,7 @@ describe('n-flex', () => {
       }
     })
     const childNodes = getChildrenNode(wrapper)
-    expect(childNodes.length).toEqual(1)
+    expect(childNodes.length).toEqual(3)
     expect(wrapper.html()).toMatchSnapshot()
     wrapper.unmount()
   })

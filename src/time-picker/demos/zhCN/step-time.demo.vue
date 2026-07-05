@@ -4,16 +4,10 @@
 传递单独的数字来定义时间步进或用数组指定你需要显示的内容，输入超出设定范围的值将将显示无效样式。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      time: ref(1183135260000)
-    }
-  }
-})
+const time = ref(1183135260000)
 </script>
 
 <template>

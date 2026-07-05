@@ -118,7 +118,7 @@ describe('n-image', () => {
   })
 
   it('should work with `onError` prop', async () => {
-    const onError = jest.fn()
+    const onError = vi.fn()
     const wrapper = mount(NImage, {
       props: {
         src: 'https:// 07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
@@ -127,6 +127,59 @@ describe('n-image', () => {
     })
     await wrapper.find('img').trigger('error')
     expect(onError).toHaveBeenCalled()
+    wrapper.unmount()
+  })
+
+  it('should show error slot when native lazy image fails to load', async () => {
+    const wrapper = mount(NImage, {
+      props: {
+        lazy: true,
+        src: 'https:// 07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+      },
+      slots: {
+        error: () => 'Load failed'
+      }
+    })
+
+    await wrapper.find('img').trigger('error')
+
+    expect(wrapper.text()).toContain('Load failed')
+    expect(wrapper.find('img').exists()).toBe(false)
+    wrapper.unmount()
+  })
+
+  it('should not show placeholder slot when image fails to load', async () => {
+    const wrapper = mount(NImage, {
+      props: {
+        src: 'https:// 07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+      },
+      slots: {
+        error: () => 'Load failed',
+        placeholder: () => 'Placeholder'
+      }
+    })
+
+    await wrapper.find('img').trigger('error')
+
+    expect(wrapper.text()).toContain('Load failed')
+    expect(wrapper.text()).not.toContain('Placeholder')
+    wrapper.unmount()
+  })
+
+  it('should show fallback src when native lazy image fails to load', async () => {
+    const fallbackSrc = 'https://www.naiveui.com/assets/naivelogo.93278402.svg'
+    const wrapper = mount(NImage, {
+      props: {
+        lazy: true,
+        src: 'https:// 07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
+        fallbackSrc
+      }
+    })
+
+    await wrapper.find('img').trigger('error')
+
+    expect(wrapper.find('img').attributes('src')).toBe(fallbackSrc)
+    expect(wrapper.find('img').attributes('data-error')).toBe('true')
     wrapper.unmount()
   })
 
@@ -161,7 +214,7 @@ describe('n-image', () => {
   })
 
   it('should work with `onLoad` prop', async () => {
-    const onLoad = jest.fn()
+    const onLoad = vi.fn()
     const wrapper = mount(NImage, {
       props: {
         src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',

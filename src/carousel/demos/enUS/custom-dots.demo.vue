@@ -3,7 +3,7 @@
 </markdown>
 
 <template>
-  <n-carousel>
+  <n-carousel autoplay>
     <img
       class="carousel-img"
       src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
@@ -20,8 +20,8 @@
       class="carousel-img"
       src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
     >
-    <template #dots="{ total, current }">
-      <span class="custom-dots"> {{ current + 1 }} / {{ total }} </span>
+    <template #dots="{ total, currentIndex }">
+      <span class="custom-dots"> {{ currentIndex + 1 }} / {{ total }} </span>
     </template>
   </n-carousel>
 </template>
@@ -34,7 +34,6 @@
 }
 
 .custom-dots {
-  color: rgba(255, 255, 255, 0.7);
   font-size: 12px;
   transform: translateY(5px);
 }

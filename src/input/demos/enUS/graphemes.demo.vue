@@ -4,18 +4,11 @@
 Browser's default `maxlength` and `minlength` and naive-ui's builtin character count method can't split all string correctly. You can use `count-graphemes` count to count graphemes correctly.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import GraphemeSplitter from 'grapheme-splitter'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const splitter = new GraphemeSplitter()
-    return {
-      countGraphemes: (value: string) => splitter.countGraphemes(value)
-    }
-  }
-})
+const splitter = new GraphemeSplitter()
+const countGraphemes = (value: string) => splitter.countGraphemes(value)
 </script>
 
 <template>

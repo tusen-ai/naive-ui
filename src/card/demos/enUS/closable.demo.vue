@@ -4,20 +4,13 @@
 You may need this when using it in a modal.
 </markdown>
 
-<script lang="ts">
+<script setup lang="ts">
 import { useMessage } from 'naive-ui'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      handleClose() {
-        message.info('Card Close')
-      }
-    }
-  }
-})
+const message = useMessage()
+function handleClose() {
+  message.info('Card Close')
+}
 </script>
 
 <template>

@@ -2,16 +2,10 @@
 # Dark Debug 4
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  data() {
-    return {
-      showModal: false
-    }
-  }
-})
+const showModal = ref(false)
 </script>
 
 <template>

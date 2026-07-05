@@ -2,31 +2,27 @@
 # 基础用法
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useLoadingBar } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const loadingBar = useLoadingBar()
-    const disabledRef = ref(true)
-    return {
-      disabled: disabledRef,
-      handleStart() {
-        loadingBar.start()
-        disabledRef.value = false
-      },
-      handleFinish() {
-        loadingBar.finish()
-        disabledRef.value = true
-      },
-      handleError() {
-        disabledRef.value = true
-        loadingBar.error()
-      }
-    }
-  }
-})
+const loadingBar = useLoadingBar()
+const disabled = ref(true)
+
+function handleStart() {
+  loadingBar.start()
+  disabled.value = false
+}
+
+function handleFinish() {
+  loadingBar.finish()
+  disabled.value = true
+}
+
+function handleError() {
+  disabled.value = true
+  loadingBar.error()
+}
 </script>
 
 <template>

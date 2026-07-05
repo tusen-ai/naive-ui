@@ -2,25 +2,17 @@
 # 点击标题
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { CollapseProps } from 'naive-ui'
 import { useMessage } from 'naive-ui'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    const handleItemHeaderClick: CollapseProps['onItemHeaderClick'] = ({
-      name,
-      expanded
-    }) => {
-      message.info(`Name: ${name}, Expanded: ${expanded}`)
-    }
-    return {
-      handleItemHeaderClick
-    }
-  }
-})
+const message = useMessage()
+const handleItemHeaderClick: CollapseProps['onItemHeaderClick'] = ({
+  name,
+  expanded
+}) => {
+  message.info(`Name: ${name}, Expanded: ${expanded}`)
+}
 </script>
 
 <template>

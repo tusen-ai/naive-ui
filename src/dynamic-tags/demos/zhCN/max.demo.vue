@@ -2,16 +2,10 @@
 # 最大标签数量
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      tags: ref(['教师', '程序员'])
-    }
-  }
-})
+const tags = ref(['教师', '程序员'])
 </script>
 
 <template>

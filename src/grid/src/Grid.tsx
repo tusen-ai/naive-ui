@@ -1,30 +1,23 @@
+import type { CSSProperties, PropType, Ref, VNode } from 'vue'
+import type { VResizeObserverOnResize } from 'vueuc'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import { beforeNextFrameOnce, parseResponsivePropValue, pxfy } from 'seemly'
 import { useBreakpoints, useMemo } from 'vooks'
 import {
   cloneVNode,
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   mergeProps,
   onMounted,
-  type PropType,
   provide,
-  type Ref,
   ref,
   toRef,
-  type VNode,
   vShow
 } from 'vue'
-import { VResizeObserver, type VResizeObserverOnResize } from 'vueuc'
+import { VResizeObserver } from 'vueuc'
 import { useConfig } from '../../_mixins'
-import {
-  type ExtractPublicPropTypes,
-  flatten,
-  getSlot,
-  isBrowser,
-  isNodeVShowFalse
-} from '../../_utils'
+import { flatten, getSlot, isBrowser, isNodeVShowFalse } from '../../_utils'
 import { defaultBreakpoints } from '../../config-provider/src/config'
 import { defaultSpan, gridInjectionKey } from './config'
 

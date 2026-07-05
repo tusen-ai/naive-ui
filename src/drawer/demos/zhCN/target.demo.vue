@@ -4,25 +4,16 @@
 你可以通过设定 `to` 属性来自定义显示区域。记得要设定 `:trap-focus="false"` 和 `:block-scroll="false"`，否则 drawer 外的内容将无法被聚焦，body 也将无法滚动。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DrawerPlacement } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const active = ref(false)
-    const placement = ref<DrawerPlacement>('right')
-    const activate = (place: DrawerPlacement) => {
-      active.value = true
-      placement.value = place
-    }
-    return {
-      active,
-      placement,
-      activate
-    }
-  }
-})
+const active = ref(false)
+const placement = ref<DrawerPlacement>('right')
+function activate(place: DrawerPlacement) {
+  active.value = true
+  placement.value = place
+}
 </script>
 
 <template>

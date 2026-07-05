@@ -1,3 +1,4 @@
+import type { ComputedRef } from 'vue'
 import type { PaginationProps } from '../../pagination/src/Pagination'
 import type {
   ColumnKey,
@@ -14,7 +15,7 @@ import type {
 } from './interface'
 import { createTreeMate } from 'treemate'
 import { useMemo, useMergedState } from 'vooks'
-import { computed, type ComputedRef, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { call, warn } from '../../_utils'
 import { getDefaultPageSize } from '../../pagination/src/utils'
 import { useSorter } from './use-sorter'
@@ -54,7 +55,7 @@ export function useTableData(
     return createTreeMate<InternalRowData>(props.data, {
       ignoreEmptyChildren: true,
       getKey: props.rowKey,
-      getChildren: rowData => rowData[childrenKey] as any,
+      getChildren: rowData => rowData[childrenKey],
       getDisabled: (rowData) => {
         if (selectionColumnRef.value?.disabled?.(rowData)) {
           return true
@@ -273,6 +274,10 @@ export function useTableData(
     return paginatedDataRef.value.map(tmNode => tmNode.rawNode)
   })
 
+  const rawSortedDataRef = computed<InternalRowData[]>(() => {
+    return sortedDataRef.value.map(tmNode => tmNode.rawNode)
+  })
+
   function mergedOnUpdatePage(page: number): void {
     const { pagination } = props
     if (pagination) {
@@ -428,6 +433,7 @@ export function useTableData(
     mergedPaginationRef,
     paginatedDataRef,
     rawPaginatedDataRef,
+    rawSortedDataRef,
     mergedFilterStateRef,
     mergedSortStateRef,
     hoverKeyRef: ref<RowKey | null>(null),

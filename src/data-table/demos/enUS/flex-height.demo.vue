@@ -4,9 +4,9 @@
 If you want to set the overall height of the table, you can set the `flex-height` property.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DataTableColumns } from 'naive-ui'
-import { defineComponent, h, ref } from 'vue'
+import { h, ref } from 'vue'
 
 interface RowData {
   key: number
@@ -66,21 +66,15 @@ function createColumns(): DataTableColumns<RowData> {
   ]
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      data: Array.from({ length: 46 }).map((_, index) => ({
-        key: index,
-        name: `Edward King ${index}`,
-        age: 32,
-        address: `London, Park Lane no. ${index}`
-      })),
-      columns: createColumns(),
-      pagination: { pageSize: 10 },
-      height: ref(200)
-    }
-  }
-})
+const data = Array.from({ length: 46 }).map((_, index) => ({
+  key: index,
+  name: `Edward King ${index}`,
+  age: 32,
+  address: `London, Park Lane no. ${index}`
+}))
+const columns = createColumns()
+const pagination = { pageSize: 10 }
+const height = ref(200)
 </script>
 
 <template>

@@ -2,9 +2,9 @@
 # Default value debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { CascaderOption } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 function getOptions(depth = 3, iterator = 1, prefix = '') {
   const length = 12
@@ -37,22 +37,17 @@ function getOptions(depth = 3, iterator = 1, prefix = '') {
   return options
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      checkStrategyIsChild: ref(true),
-      showPath: ref(true),
-      hoverTrigger: ref(false),
-      filterable: ref(false),
-      singleValue: ref('v-1-1-11'),
-      multipleValue: ref<string[]>(['v-2-1-11', 'v-3-1-11']),
-      options: getOptions(),
-      handleUpdateValue(value: string, option: CascaderOption) {
-        console.log(value, option)
-      }
-    }
-  }
-})
+const checkStrategyIsChild = ref(true)
+const showPath = ref(true)
+const hoverTrigger = ref(false)
+const filterable = ref(false)
+const singleValue = ref('v-1-1-11')
+const multipleValue = ref<string[]>(['v-2-1-11', 'v-3-1-11'])
+const options = getOptions()
+
+function handleUpdateValue(value: string, option: CascaderOption) {
+  console.log(value, option)
+}
 </script>
 
 <template>
@@ -75,7 +70,7 @@ export default defineComponent({
       :filterable="filterable"
       @update:value="handleUpdateValue"
     />
-    <!-- <n-cascader
+    <n-cascader
       v-model:value="multipleValue"
       placeholder="没啥用的值"
       multiple
@@ -85,6 +80,6 @@ export default defineComponent({
       :show-path="showPath"
       :filterable="filterable"
       @update:value="handleUpdateValue"
-    /> -->
+    />
   </n-space>
 </template>

@@ -2,18 +2,12 @@
 # Rtl Debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { unstableScrollbarRtl } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      rtlEnabled: ref(true),
-      rtlStyles: [unstableScrollbarRtl]
-    }
-  }
-})
+const rtlEnabled = ref(true)
+const rtlStyles = [unstableScrollbarRtl]
 </script>
 
 <template>

@@ -49,6 +49,7 @@ The following list is sorted by 'Config' column.
 | Arabic (العربية)           | arDZ   | dateArDZ    | 2.34.0  |
 | Azerbaijani (Azərbaycanca) | azAZ   | dateAzAZ    | 2.39.0  |
 | Czech (Czechia)            | csCZ   | dateCsCz    | 2.38.2  |
+| Danish (Denmark)           | daDK   | dateDaDK    | 2.43.0  |
 | German (Germany)           | deDE   | dateDeDE    |         |
 | English (British)          | enGB   | dateEnGB    | 2.25.1  |
 | English                    | enUS   | dateEnUS    |         |
@@ -63,6 +64,7 @@ The following list is sorted by 'Config' column.
 | Khmer (Cambodia)           | kmKH   | dateKmKH    | 2.41.0  |
 | Korean (South Korea)       | koKR   | dateKoKR    | 2.28.1  |
 | Norwegian Bokmål (Norway)  | nbNO   | dateNbNO    |         |
+| Norwegian Nynorsk (Norway) | nnNO   | dateNnNO    |         |
 | Dutch (Netherlands)        | nlNL   | dateNlNL    | 2.29.0  |
 | Polish (Poland)            | plPL   | datePlPL    | 2.25.2  |
 | Portuguese (Brazil)        | ptBR   | datePtBR    | 2.28.1  |

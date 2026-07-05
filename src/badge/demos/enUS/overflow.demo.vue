@@ -4,21 +4,11 @@
 Set `max` prop to handle overflow situation.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { MdAdd, MdRemove } from '@vicons/ionicons4'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  components: {
-    MdAdd,
-    MdRemove
-  },
-  setup() {
-    return {
-      value: ref(101)
-    }
-  }
-})
+const value = ref(101)
 </script>
 
 <template>

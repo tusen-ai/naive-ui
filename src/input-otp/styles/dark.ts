@@ -1,6 +1,6 @@
 import type { InputOtpTheme } from './light'
 import { commonDark } from '../../_styles/common'
-import { inputDark } from '../../styles'
+import { inputDark } from '../../input/styles'
 import { self } from './light'
 
 const inputOtpDark: InputOtpTheme = {

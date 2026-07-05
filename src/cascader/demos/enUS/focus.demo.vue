@@ -2,24 +2,18 @@
 # Focus & blur manually
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { CascaderInst } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const cascaderInstRef = ref<CascaderInst | null>(null)
-    return {
-      handleClick() {
-        cascaderInstRef.value?.focus()
-        setTimeout(() => {
-          cascaderInstRef.value?.blur()
-        }, 1000)
-      },
-      cascaderInstRef
-    }
-  }
-})
+const cascaderInstRef = ref<CascaderInst | null>(null)
+
+function handleClick() {
+  cascaderInstRef.value?.focus()
+  setTimeout(() => {
+    cascaderInstRef.value?.blur()
+  }, 1000)
+}
 </script>
 
 <template>

@@ -4,11 +4,11 @@
 Use `node-props` to bind HTML attributes to node. For example click or contextmenu event listener.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DropdownOption, TreeOption } from 'naive-ui'
 import { useMessage } from 'naive-ui'
 import { repeat } from 'seemly'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 function createData(level = 4, baseKey = ''): TreeOption[] | undefined {
   if (!level)
@@ -35,44 +35,37 @@ function createLabel(level: number): string {
   return ''
 }
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    const showDropdownRef = ref(false)
-    const optionsRef = ref<DropdownOption[]>([])
-    const xRef = ref(0)
-    const yRef = ref(0)
-    return {
-      data: createData(),
-      defaultExpandedKeys: ref(['40', '41']),
-      showDropdown: showDropdownRef,
-      x: xRef,
-      y: yRef,
-      options: optionsRef,
-      handleSelect: () => {
-        showDropdownRef.value = false
-      },
-      handleClickoutside: () => {
-        showDropdownRef.value = false
-      },
-      nodeProps: ({ option }: { option: TreeOption }) => {
-        return {
-          onClick() {
-            message.info(`[Click] ${option.label}`)
-          },
-          onContextmenu(e: MouseEvent): void {
-            optionsRef.value = [option]
-            showDropdownRef.value = true
-            xRef.value = e.clientX
-            yRef.value = e.clientY
-            console.log(e.clientX, e.clientY)
-            e.preventDefault()
-          }
-        }
-      }
+const message = useMessage()
+const showDropdownRef = ref(false)
+const optionsRef = ref<DropdownOption[]>([])
+const xRef = ref(0)
+const yRef = ref(0)
+const data = createData()
+const defaultExpandedKeys = ref(['40', '41'])
+
+function handleSelect() {
+  showDropdownRef.value = false
+}
+
+function handleClickoutside() {
+  showDropdownRef.value = false
+}
+
+function nodeProps({ option }: { option: TreeOption }) {
+  return {
+    onClick() {
+      message.info(`[Click] ${option.label}`)
+    },
+    onContextmenu(e: MouseEvent): void {
+      optionsRef.value = [option]
+      showDropdownRef.value = true
+      xRef.value = e.clientX
+      yRef.value = e.clientY
+      console.log(e.clientX, e.clientY)
+      e.preventDefault()
     }
   }
-})
+}
 </script>
 
 <template>
@@ -85,10 +78,10 @@ export default defineComponent({
   <n-dropdown
     trigger="manual"
     placement="bottom-start"
-    :show="showDropdown"
-    :options="options as any"
-    :x="x"
-    :y="y"
+    :show="showDropdownRef"
+    :options="optionsRef as any"
+    :x="xRef"
+    :y="yRef"
     @select="handleSelect"
     @clickoutside="handleClickoutside"
   />

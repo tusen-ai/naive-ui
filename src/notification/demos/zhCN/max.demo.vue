@@ -2,41 +2,28 @@
 # 限制数量
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { NButton, useNotification } from 'naive-ui'
-import { defineComponent, h, ref } from 'vue'
+import { h, ref } from 'vue'
 
-const NotificationButton = defineComponent({
-  setup() {
-    const notification = useNotification()
-    const index = ref(0)
-    return {
-      notification,
-      index
-    }
-  },
-  render() {
-    return h(
-      NButton,
-      {
-        onClick: () => {
-          this.index++
-          this.notification.info({
-            title: `通知框序号: ${this.index}`,
-            content: '你可以限制通知框的数量'
-          })
-        }
-      },
-      { default: () => '最多允许 3 个通知' }
-    )
-  }
-})
+function NotificationButton() {
+  const notification = useNotification()
+  const index = ref(0)
 
-export default defineComponent({
-  components: {
-    NotificationButton
-  }
-})
+  return h(
+    NButton,
+    {
+      onClick: () => {
+        index.value++
+        notification.info({
+          title: `通知框序号: ${index.value}`,
+          content: '你可以限制通知框的数量'
+        })
+      }
+    },
+    { default: () => '最多允许 3 个通知' }
+  )
+}
 </script>
 
 <template>

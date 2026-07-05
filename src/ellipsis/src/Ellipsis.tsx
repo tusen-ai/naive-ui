@@ -1,3 +1,4 @@
+import type { PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { PopoverProps } from '../../popover/src/Popover'
@@ -9,10 +10,7 @@ import {
   h,
   mergeProps,
   onDeactivated,
-  type PropType,
-  ref,
-  type SlotsType,
-  type VNode
+  ref
 } from 'vue'
 import { useTheme } from '../../_mixins'
 import { useMergedClsPrefix } from '../../_mixins/use-config'
@@ -143,7 +141,11 @@ export default defineComponent({
           props.expandTrigger === 'click' ? getTooltipDisabled : undefined
         }
       >
-        {props.lineClamp ? slots : <span ref="triggerInnerRef">{slots}</span>}
+        {props.lineClamp ? (
+          slots.default?.()
+        ) : (
+          <span ref="triggerInnerRef">{slots.default?.()}</span>
+        )}
       </span>
     )
     function syncEllipsisStyle(trigger: HTMLElement): void {

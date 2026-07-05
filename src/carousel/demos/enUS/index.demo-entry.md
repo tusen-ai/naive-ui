@@ -22,6 +22,7 @@ mousewheel.vue
 simulate-drag.vue
 custom-arrow-and-dots.vue
 custom-card.vue
+custom-dots.vue
 ```
 
 ## API

@@ -2,23 +2,18 @@
 # Basic
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      handlePositiveClick() {
-        message.info('Yes')
-      },
-      handleNegativeClick() {
-        message.info('No')
-      }
-    }
-  }
-})
+const message = useMessage()
+
+function handlePositiveClick() {
+  message.info('Yes')
+}
+
+function handleNegativeClick() {
+  message.info('No')
+}
 </script>
 
 <template>

@@ -1,11 +1,10 @@
+import type { ExtractPropTypes, PropType } from 'vue'
 import {
   defineComponent,
-  type ExtractPropTypes,
   h,
   inject,
   nextTick,
   onMounted,
-  type PropType,
   ref,
   Transition
 } from 'vue'

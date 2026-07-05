@@ -122,6 +122,12 @@ const ruRu: NLocale = {
     tipDownload: 'Скачать',
     tipClose: 'Закрыть (Esc)',
     tipOriginalSize: 'Вернуть исходный размер'
+  },
+  Heatmap: {
+    less: 'меньше',
+    more: 'больше',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

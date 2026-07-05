@@ -9,6 +9,7 @@ import type {
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { CarouselTheme } from '../styles'
+import type { CarouselContextValue } from './CarouselContext'
 import type {
   ArrowScopedSlotProps,
   CarouselArrowSlotProps,
@@ -43,10 +44,7 @@ import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { flatten, keep, resolveSlotWithTypedProps } from '../../_utils'
 import { carouselLight } from '../styles'
 import NCarouselArrow from './CarouselArrow'
-import {
-  type CarouselContextValue,
-  provideCarouselContext
-} from './CarouselContext'
+import { provideCarouselContext } from './CarouselContext'
 import NCarouselDots from './CarouselDots'
 import NCarouselItem, { isCarouselItem } from './CarouselItem'
 import style from './styles/index.cssr'
@@ -368,11 +366,15 @@ export default defineComponent({
     }
     function isRealPrev(slideOrIndex: HTMLElement | number): boolean {
       const index = getSlideIndex(slideOrIndex)
-      return index !== null && getRealPrevIndex() === index
+      return (
+        index !== null && getRealPrevIndex() === index && totalViewRef.value > 1
+      )
     }
     function isRealNext(slideOrIndex: HTMLElement | number): boolean {
       const index = getSlideIndex(slideOrIndex)
-      return index !== null && getRealNextIndex() === index
+      return (
+        index !== null && getRealNextIndex() === index && totalViewRef.value > 1
+      )
     }
     function isRealActive(slideOrIndex: HTMLElement | number): boolean {
       return realIndexRef.value === getSlideIndex(slideOrIndex)
@@ -1040,21 +1042,21 @@ export default defineComponent({
           }}
         </VResizeObserver>
         {this.showDots
-        && dotSlotProps.total > 1
-        && resolveSlotWithTypedProps(dotsSlot, dotSlotProps, () => [
-          <NCarouselDots
-            key={dotType + dotPlacement}
-            total={dotSlotProps.total}
-            currentIndex={dotSlotProps.currentIndex}
-            dotType={dotType}
-            trigger={this.trigger}
-            keyboard={this.keyboard}
-          />
-        ])}
+          && dotSlotProps.total > 1
+          && resolveSlotWithTypedProps(dotsSlot, dotSlotProps, () => [
+            <NCarouselDots
+              key={dotType + dotPlacement}
+              total={dotSlotProps.total}
+              currentIndex={dotSlotProps.currentIndex}
+              dotType={dotType}
+              trigger={this.trigger}
+              keyboard={this.keyboard}
+            />
+          ])}
         {showArrow
-        && resolveSlotWithTypedProps(arrowSlot, arrowSlotProps, () => [
-          <NCarouselArrow />
-        ])}
+          && resolveSlotWithTypedProps(arrowSlot, arrowSlotProps, () => [
+            <NCarouselArrow />
+          ])}
       </div>
     )
   }

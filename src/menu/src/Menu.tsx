@@ -1,3 +1,6 @@
+import type { Key } from 'treemate'
+import type { ExtractPropTypes, PropType, VNode, VNodeChild } from 'vue'
+import type { FollowerPlacement, VOverflowInst } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type { MaybeArray } from '../../_utils'
 import type { DropdownProps } from '../../dropdown'
@@ -15,29 +18,20 @@ import type {
   OnUpdateValueImpl
 } from './interface'
 import { createId } from 'seemly'
-import { createTreeMate, type Key } from 'treemate'
+import { createTreeMate } from 'treemate'
 import { useCompitable, useMergedState } from 'vooks'
 import {
   computed,
   defineComponent,
-  type ExtractPropTypes,
   h,
   inject,
   mergeProps,
-  type PropType,
   provide,
   ref,
   toRef,
-  type VNode,
-  type VNodeChild,
   watchEffect
 } from 'vue'
-import {
-  type FollowerPlacement,
-  VOverflow,
-  type VOverflowInst,
-  VResizeObserver
-} from 'vueuc'
+import { VOverflow, VResizeObserver } from 'vueuc'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { call } from '../../_utils'
 import { layoutSiderInjectionKey } from '../../layout/src/interface'

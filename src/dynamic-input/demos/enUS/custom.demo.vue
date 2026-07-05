@@ -2,29 +2,24 @@
 # Customizing input content
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      customValue: ref([
-        {
-          isCheck: true,
-          num: 1,
-          string: 'A String'
-        }
-      ]),
-      onCreate() {
-        return {
-          isCheck: false,
-          num: 1,
-          string: 'A String'
-        }
-      }
-    }
+const customValue = ref([
+  {
+    isCheck: true,
+    num: 1,
+    string: 'A String'
   }
-})
+])
+
+function onCreate() {
+  return {
+    isCheck: false,
+    num: 1,
+    string: 'A String'
+  }
+}
 </script>
 
 <template>

@@ -4,7 +4,7 @@
 Use collapsable vertical menu with layout sider. Use `collapsed` to control collapse status of menu. You must set `collapsed-width` to make it collapse in a right manner. There are still some other collapse related props you can modify: `icon-size`, `collapsed-icon-size`. For details see API table at the bottom of the page.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { MenuOption } from 'naive-ui'
 import type { Component } from 'vue'
 import {
@@ -13,7 +13,7 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
 import { NIcon } from 'naive-ui'
-import { defineComponent, h, ref } from 'vue'
+import { h, ref } from 'vue'
 
 function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
@@ -94,15 +94,8 @@ const menuOptions: MenuOption[] = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    return {
-      activeKey: ref<string | null>(null),
-      collapsed: ref(true),
-      menuOptions
-    }
-  }
-})
+const activeKey = ref<string | null>(null)
+const collapsed = ref(true)
 </script>
 
 <template>

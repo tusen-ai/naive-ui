@@ -2,19 +2,13 @@
 # Finish debug
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      active: ref(false),
-      handleFinish: () => {
-        console.log('finish')
-      }
-    }
-  }
-})
+const active = ref(false)
+function handleFinish() {
+  console.log('finish')
+}
 </script>
 
 <template>

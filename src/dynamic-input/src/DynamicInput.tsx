@@ -1,3 +1,4 @@
+import type { CSSProperties, PropType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { ButtonProps } from '../../button'
@@ -11,17 +12,14 @@ import { createId } from 'seemly'
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   inject,
   isProxy,
-  type PropType,
   provide,
   ref,
   toRaw,
   toRef,
-  type VNode,
   watchEffect
 } from 'vue'
 import { NBaseIcon } from '../../_internal'

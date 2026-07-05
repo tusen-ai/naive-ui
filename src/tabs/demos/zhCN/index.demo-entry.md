@@ -28,6 +28,7 @@ style-inherit-debug.vue
 shadow-debug.vue
 unkeyed-debug.vue
 addable-debug.vue
+suffix-width-debug.vue
 animation-debug.vue
 animationx-debug.vue
 none-debug.vue

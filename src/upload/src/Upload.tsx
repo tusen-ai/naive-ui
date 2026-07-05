@@ -1,6 +1,8 @@
+import type { CSSProperties, InputHTMLAttributes, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { ImageGroupProps } from '../../image'
+import type { UploadTheme } from '../styles'
 import type {
   CreateThumbnailUrl,
   CustomRequest,
@@ -31,21 +33,24 @@ import { createId } from 'seemly'
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   Fragment,
   h,
-  type InputHTMLAttributes,
   nextTick,
-  type PropType,
   provide,
   ref,
   Teleport,
   toRef
 } from 'vue'
-import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
+import {
+  useConfig,
+  useFormItem,
+  useRtl,
+  useTheme,
+  useThemeClass
+} from '../../_mixins'
 import { call, throwError, warn } from '../../_utils'
-import { uploadLight, type UploadTheme } from '../styles'
+import { uploadLight } from '../styles'
 import { uploadInjectionKey } from './interface'
 import style from './styles/index.cssr'
 import { uploadDraggerKey } from './UploadDragger'
@@ -365,6 +370,7 @@ export const uploadProps = {
     type: Boolean,
     default: true
   },
+  alwaysShowActions: Boolean,
   listType: {
     type: String as PropType<ListType>,
     default: 'text'
@@ -404,7 +410,8 @@ export default defineComponent({
         'when the list-type is image-card, abstract is not supported.'
       )
     }
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
+      = useConfig(props)
     const themeRef = useTheme(
       'Upload',
       '-upload',
@@ -413,6 +420,9 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+
+    const rtlEnabledRef = useRtl('Upload', mergedRtlRef, mergedClsPrefixRef)
+
     const formItem = useFormItem(props)
     const uncontrolledFileListRef = ref(props.defaultFileList)
     const controlledFileListRef = toRef(props, 'fileList')
@@ -500,6 +510,13 @@ export default defineComponent({
         warn('upload', 'File has no corresponding id in current file list.')
       }
     }
+    let customRequestDoChangeChain = Promise.resolve()
+    const scheduleDoChange: DoChange = (file, event, options) => {
+      customRequestDoChangeChain = customRequestDoChangeChain.then(async () => {
+        await nextTick()
+        doChange(file, event, options)
+      })
+    }
     function handleFileAddition(
       fileAndEntries: FileAndEntry[] | null,
       e?: Event
@@ -575,7 +592,10 @@ export default defineComponent({
           }
         })
     }
-    function submit(fileId?: string): void {
+    function submit({
+      fileId,
+      retry = false
+    }: { fileId?: string, retry?: boolean } = {}): void {
       const {
         method,
         action,
@@ -588,14 +608,14 @@ export default defineComponent({
         = fileId !== undefined
           ? mergedFileListRef.value.filter(file => file.id === fileId)
           : mergedFileListRef.value
-      const shouldReupload = fileId !== undefined
+      const shouldReupload = retry || fileId !== undefined
       filesToUpload.forEach((file) => {
         const { status } = file
         if (status === 'pending' || (status === 'error' && shouldReupload)) {
           if (props.customRequest) {
             customSubmitImpl({
               inst: {
-                doChange,
+                doChange: scheduleDoChange,
                 xhrMap,
                 onFinish: props.onFinish,
                 onError: props.onError
@@ -711,6 +731,7 @@ export default defineComponent({
       submit,
       doChange,
       showPreviewButtonRef: toRef(props, 'showPreviewButton'),
+      alwaysShowActionsRef: toRef(props, 'alwaysShowActions'),
       onPreviewRef: toRef(props, 'onPreview'),
       getFileThumbnailUrlResolver,
       listTypeRef: toRef(props, 'listType'),
@@ -746,6 +767,7 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       draggerInsideRef,
+      rtlEnabled: rtlEnabledRef,
       inputElRef,
       mergedTheme: themeRef,
       dragOver: dragOverRef,
@@ -796,6 +818,7 @@ export default defineComponent({
       <div
         class={[
           `${mergedClsPrefix}-upload`,
+          this.rtlEnabled && `${mergedClsPrefix}-upload--rtl`,
           draggerInsideRef.value && `${mergedClsPrefix}-upload--dragger-inside`,
           this.dragOver && `${mergedClsPrefix}-upload--drag-over`,
           this.themeClass
@@ -804,9 +827,11 @@ export default defineComponent({
       >
         {inputNode}
         {this.showTrigger && this.listType !== 'image-card' && (
-          <NUploadTrigger>{$slots}</NUploadTrigger>
+          <NUploadTrigger>{{ ...$slots }}</NUploadTrigger>
         )}
-        {this.showFileList && <NUploadFileList>{$slots}</NUploadFileList>}
+        {this.showFileList && (
+          <NUploadFileList>{{ ...$slots }}</NUploadFileList>
+        )}
       </div>
     )
   }

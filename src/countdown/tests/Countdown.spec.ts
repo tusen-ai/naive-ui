@@ -1,6 +1,7 @@
+import type { CountdownProps } from '../index'
 import { mount } from '@vue/test-utils'
 import { sleep } from 'seemly'
-import { type CountdownProps, NCountdown } from '../index'
+import { NCountdown } from '../index'
 
 describe('n-countdown', () => {
   it('should work with import on demand', () => {
@@ -51,7 +52,7 @@ describe('n-countdown', () => {
     wrapper.unmount()
   })
   it('should work with `on-finish` prop', async () => {
-    const onFinish = jest.fn()
+    const onFinish = vi.fn()
     const wrapper = mount(NCountdown, {
       props: {
         duration: 1,

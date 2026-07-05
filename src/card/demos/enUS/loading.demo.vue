@@ -4,16 +4,10 @@
 Use `n-skeleton` to simulate loading effect.
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      loading: ref(true)
-    }
-  }
-})
+const loading = ref(true)
 </script>
 
 <template>

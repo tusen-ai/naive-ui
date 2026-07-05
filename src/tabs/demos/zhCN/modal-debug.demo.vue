@@ -2,18 +2,12 @@
 # Modal debug
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const showRef = ref(false)
-    return {
-      tabs: ['ccccc', 'dddddd'],
-      show: showRef
-    }
-  }
-})
+const showRef = ref(false)
+const tabs = ['ccccc', 'dddddd']
+const show = showRef
 </script>
 
 <template>

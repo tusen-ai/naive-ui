@@ -1,5 +1,8 @@
+import type { Key, TreeNode } from 'treemate'
+import type { PropType, Ref } from 'vue'
 import type { FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { InternalRenderBody } from '../../popover/src/interface'
 import type { PopoverInternalProps } from '../../popover/src/Popover'
 import type { DropdownTheme } from '../styles'
@@ -20,29 +23,21 @@ import type {
   RenderOption,
   RenderOptionImpl
 } from './interface'
-import { createTreeMate, type Key, type TreeNode } from 'treemate'
+import type { DropdownSize } from './public-types'
+import { createTreeMate } from 'treemate'
 import { useKeyboard, useMemo, useMergedState } from 'vooks'
 import {
   computed,
   defineComponent,
   h,
   mergeProps,
-  type PropType,
   provide,
-  type Ref,
   ref,
   toRef,
   watch
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import {
-  call,
-  createKey,
-  createRefSetter,
-  type ExtractPublicPropTypes,
-  keep,
-  type MaybeArray
-} from '../../_utils'
+import { call, createKey, createRefSetter, keep } from '../../_utils'
 import { NPopover } from '../../popover'
 import { popoverBaseProps } from '../../popover/src/Popover'
 import { dropdownLight } from '../styles'
@@ -78,10 +73,7 @@ const dropdownBaseProps = {
     type: Boolean,
     default: true
   },
-  size: {
-    type: String as PropType<'small' | 'medium' | 'large' | 'huge'>,
-    default: 'medium'
-  },
+  size: String as PropType<DropdownSize>,
   inverted: Boolean,
   placement: {
     type: String as PropType<FollowerPlacement>,
@@ -214,7 +206,13 @@ export default defineComponent({
       keyboardEnabledRef
     )
 
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedComponentPropsRef }
+      = useConfig(props)
+    const mergedSizeRef = computed(() => {
+      return (
+        props.size || mergedComponentPropsRef?.value?.Dropdown?.size || 'medium'
+      )
+    })
 
     const themeRef = useTheme(
       'Dropdown',
@@ -343,7 +341,8 @@ export default defineComponent({
       }
     }
     const cssVarsRef = computed(() => {
-      const { size, inverted } = props
+      const { inverted } = props
+      const size = mergedSizeRef.value
       const {
         common: { cubicBezierEaseInOut },
         self
@@ -408,7 +407,9 @@ export default defineComponent({
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
           'dropdown',
-          computed(() => `${props.size[0]}${props.inverted ? 'i' : ''}`),
+          computed(
+            () => `${mergedSizeRef.value[0]}${props.inverted ? 'i' : ''}`
+          ),
           cssVarsRef,
           props
         )
@@ -416,6 +417,7 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
+      mergedSize: mergedSizeRef,
       // data
       tmNodes: tmNodesRef,
       // show
@@ -449,7 +451,12 @@ export default defineComponent({
         ) || {}
       const dropdownProps = {
         ref: createRefSetter(ref),
-        class: [className, `${mergedClsPrefix}-dropdown`, this.themeClass],
+        class: [
+          className,
+          `${mergedClsPrefix}-dropdown`,
+          `${mergedClsPrefix}-dropdown--${this.mergedSize}-size`,
+          this.themeClass
+        ],
         clsPrefix: mergedClsPrefix,
         tmNodes: this.tmNodes,
         style: [...style, this.cssVars],

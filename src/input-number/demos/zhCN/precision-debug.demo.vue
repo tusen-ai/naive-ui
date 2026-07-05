@@ -2,23 +2,16 @@
 # precision debug
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const v = ref(1)
-    function check() {
-      if (v.value === null) {
-        v.value = 1
-      }
-    }
-    return {
-      v,
-      check
-    }
+const v = ref(1)
+
+function check() {
+  if (v.value === null) {
+    v.value = 1
   }
-})
+}
 </script>
 
 <template>

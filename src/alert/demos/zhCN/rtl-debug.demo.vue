@@ -2,21 +2,13 @@
 # Rtl Debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { IosAirplane } from '@vicons/ionicons4'
 import { unstableAlertRtl } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  components: { IosAirplane },
-  setup() {
-    return {
-      value: ref(false),
-      rtlEnabled: ref(false),
-      rtlStyles: [unstableAlertRtl]
-    }
-  }
-})
+const rtlEnabled = ref(false)
+const rtlStyles = [unstableAlertRtl]
 </script>
 
 <template>

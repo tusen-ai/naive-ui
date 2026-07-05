@@ -35,7 +35,7 @@ export default defineComponent({
       round
     />
     <n-input pair separator="to" clearable :disabled="!active">
-      <template #affix>
+      <template #suffix>
         <n-icon :component="FlashOutline" />
       </template>
     </n-input>

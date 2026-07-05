@@ -7,6 +7,15 @@
 <p align="center"><b>Fairly Complete, Theme Customizable, Uses TypeScript, Fast</b></p>
 <p align="center">Kinda Interesting</p>
 
+<p align="center">
+  <a href="https://npmjs.com/package/naive-ui">
+    <img src="https://img.shields.io/npm/v/naive-ui.svg" alt="npm">
+  </a>
+  <a href="https://pkg.pr.new/~/tusen-ai/naive-ui">
+    <img src="https://pkg.pr.new/badge/tusen-ai/naive-ui" alt="pkg.pr.new">
+  </a>
+</p>
+
 <p align="center">English | <a href="README.zh-CN.md">中文</a></p>
 
 ## Documentation
@@ -21,7 +30,8 @@
 - DingTalk Group 3 (Member limit reached) 32377370
 - DingTalk Group 4 (Member limit reached) 8165002788
 - DingTalk Group 5 (Member limit reached) 31205022250
-- DingTalk Group 6 62720001971
+- DingTalk Group 6 (Member limit reached) 62720001971
+- DingTalk Group 7 172000005810
 
 - [Awesome Naive UI](https://github.com/naive-ui/awesome-naive)
 
@@ -47,7 +57,7 @@ What's more, you don't need to import any CSS to use the components.
 
 ### Fast
 
-I try to make it not rather slow. At least select, tree, transfer, table and cascader work with virtual list.
+I try to make it not rather slow. All data components works with virtual list by default.
 
 What's more, ..., no more. Just enjoy it.
 

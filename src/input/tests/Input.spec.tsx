@@ -1,3 +1,4 @@
+import type { InputInst } from '../index'
 import { mount } from '@vue/test-utils'
 import { defineComponent, h, onMounted, ref } from 'vue'
 import { NInput } from '../index'
@@ -11,7 +12,7 @@ describe('n-input', () => {
   })
 
   it('should call input callbacks', async () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = mount(NInput, {
       props: {
         onUpdateValue
@@ -176,7 +177,7 @@ describe('n-input', () => {
   })
 
   it('should work with `on-blur` prop', async () => {
-    const onBlur = jest.fn()
+    const onBlur = vi.fn()
     const wrapper = mount(NInput, {
       props: { onBlur }
     })
@@ -187,7 +188,7 @@ describe('n-input', () => {
   })
 
   it('should work with `on-change` prop', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const wrapper = mount(NInput, {
       props: { onChange }
     })
@@ -199,7 +200,7 @@ describe('n-input', () => {
   })
 
   it('should work with `on-focus` prop', async () => {
-    const onFocus = jest.fn()
+    const onFocus = vi.fn()
     const wrapper = mount(NInput, {
       props: { onFocus }
     })
@@ -209,7 +210,7 @@ describe('n-input', () => {
   })
 
   it('should work with `on-input` prop', async () => {
-    const onInput = jest.fn()
+    const onInput = vi.fn()
     const wrapper = mount(NInput, {
       props: { onInput }
     })
@@ -220,7 +221,7 @@ describe('n-input', () => {
   })
 
   it('should work with `on-update:value` prop', async () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = mount(NInput, {
       props: { onUpdateValue }
     })
@@ -291,12 +292,12 @@ describe('n-input', () => {
   })
 
   it('should work with `blur` `focus` `select` methods', async () => {
-    const onBlur = jest.fn()
-    const onFocus = jest.fn()
-    const onSelect = jest.fn()
+    const onBlur = vi.fn()
+    const onFocus = vi.fn()
+    const onSelect = vi.fn()
     const Mock = defineComponent({
       setup() {
-        const inputInstRef: any = ref(null)
+        const inputInstRef = ref<InputInst | null>(null)
         onMounted(() => {
           inputInstRef.value?.focus()
           inputInstRef.value?.blur()
@@ -316,13 +317,13 @@ describe('n-input', () => {
       }
     })
 
-    const wrapper = mount(() => <Mock />)
-    setTimeout(() => {
-      expect(onBlur).toHaveBeenCalled()
-      expect(onFocus).toHaveBeenCalled()
-      expect(onSelect).toHaveBeenCalled()
-    }, 0)
-
+    const wrapper = mount(() => <Mock />, {
+      attachTo: document.body
+    })
+    expect(onBlur).toHaveBeenCalled()
+    expect(onFocus).toHaveBeenCalled()
+    // won't call onSelect because it not a NInput prop
+    expect(onSelect).not.toHaveBeenCalled()
     wrapper.unmount()
   })
 })

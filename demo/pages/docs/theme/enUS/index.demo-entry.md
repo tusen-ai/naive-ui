@@ -7,7 +7,7 @@ Naive UI provides some tools for developers to create themed components easier.
 ## Demos
 
 ```demo
-provide-theme
-element
-use-theme-vars
+provide-theme.vue
+element.vue
+use-theme-vars.vue
 ```

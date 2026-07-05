@@ -6,18 +6,22 @@
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
     "lib": ["ESNext", "DOM"],
-    "module": "ES6",
-    "moduleResolution": "Node",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "paths": {
-      "naive-ui": ["./src"]
+      "naive-ui": ["./src"],
+      "naive-ui/generic": ["./generic"]
     },
-    "types": ["vue/jsx", "jest"],
+    "resolveJsonModule": true,
+    "types": ["vue/jsx", "vitest/globals"],
     "strict": true,
     "strictNullChecks": true,
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "declaration": true,
+    "outDir": "./build/dist",
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
   }
 }

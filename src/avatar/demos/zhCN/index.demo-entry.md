@@ -41,15 +41,24 @@ rtl-debug.vue
 
 ### AvatarGroup Props
 
+泛型 `<T extends AvatarGroupOption = AvatarGroupOption>`，自 `2.43.0` 可用。
+
+泛型能力仅在 `.vue` 文件中，`Vue >= 3.3`，通过 `import { NGAvatarGroup } from 'naive-ui/generic'` 可用，否则请使用普通的 `n-avatar-group`。
+
+```ts
+interface AvatarGroupOption {
+  src: string
+}
+```
+
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | expand-on-hover | `boolean` | `false` | 悬停时展开 | 2.37.0 |
 | max | `number` | `undefined` | 组内头像显示的最大个数 |  |
 | max-style | `Object \| string` | `undefined` | 溢出标识的样式 |  |
-| options | `Array<AvatarOption>` | `[]` | 头像组的选项 |  |
+| options | `Array<T extends AvatarGroupOption = AvatarGroupOption>` | `[]` | 头像组的选项 |  |
+| size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | 头像的尺寸 | 2.43.0 |
 | vertical | `boolean` | `false` | 组内头像是否垂直排列 |  |
-
-参考 [Avatar Props](#Avatar-Props)
 
 ### Avatar Slots
 

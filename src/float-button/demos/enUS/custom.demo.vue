@@ -4,15 +4,8 @@
 Show description on float button.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { Document as DocumentIcon } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    DocumentIcon
-  }
-})
 </script>
 
 <template>

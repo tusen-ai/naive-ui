@@ -26,10 +26,11 @@ empty.vue
 border.vue
 size.vue
 row-props.vue
-merge-cell
-filter-and-sorter
+merge-cell.vue
+filter-and-sorter.vue
 pagination-behavior-on-filter.vue
-multiple-sorter
+multiple-sorter.vue
+custom-sorter.vue
 column-draggable.vue
 select.vue
 select-single.vue
@@ -38,16 +39,16 @@ group-header.vue
 controlled-page.vue
 controlled-filter.vue
 controlled-sorter.vue
-controlled-multiple-sorter
+controlled-multiple-sorter.vue
 fixed-header.vue
 fixed-header-column.vue
 summary.vue
 ellipsis.vue
 ellipsis-tooltip.vue
 expand.vue
-render-header
+render-header.vue
 custom-style.vue
-ajax-usage
+ajax-usage.vue
 virtual.vue
 virtual-x.vue
 custom-filter-menu.vue
@@ -55,7 +56,7 @@ tree.vue
 flex-height.vue
 striped.vue
 simple-editable.vue
-switchable-editable
+switchable-editable.vue
 context-menu.vue
 async-expand.vue
 render-cell.vue
@@ -105,7 +106,7 @@ export-csv.vue
 | single-column | `boolean` | `false` | Whether rows are not divided. If the prop is `true`, table cell has no `border-bottom`. |  |
 | single-line | `boolean` | `true` | Whether columns are not divided. If the prop is `true`, table cell has no `border-right`. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Table size. |  |
-| spin-props | `{ strokeWidth?: number, stroke?: string }` | `undefined` | Table spin's props. | 2.34.0 |
+| spin-props | `{ strokeWidth?: number, stroke?: string, scale?: number, radius?: number }` | `undefined` | Table spin's props. | 2.34.0 |
 | sticky-expanded-rows | `boolean` | `false` | Expanded row content remains sticky. | 2.32.2 |
 | striped | `boolean` | `false` | Whether to show zebra stripes on rows. |  |
 | summary | `DataTableCreateSummary` | `undefined` | Data of table summary row. For types, see <n-a href="#DataTableCreateSummary-Type">DataTableCreateSummary Type</n-a>. |  |
@@ -129,11 +130,11 @@ export-csv.vue
 | --- | --- | --- | --- | --- |
 | align | `'left' \| 'right' \| 'center'` | `'left'` | Text align in column. |  |
 | allowExport | `boolean` | `true` | Can the column exported | 2.40.0 |
-| titleAlign | `'left' \| 'right' \| 'center'` | `null` | alignment of the table header. If omitted, the value of the above align attribute will be applied | 2.34.4 |
 | cellProps | `(rowData: object, rowIndex: number) => object` | `undefined` | HTML attributes of the column's cell. | 2.27.0 |
 | children | `DataTableColumn[]` | `undefined` | Child nodes of a grouped column. |  |
 | className | `string` | `undefined` | Class name of the column. |  |
 | colSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | The col span of the column cell. |  |
+| customNextSortOrder | `(order: 'descend' \| 'ascend' \| false) => 'descend' \| 'ascend' \| false` | `undefined` | A function for custom next sorting status. | 2.43.0 |
 | defaultFilterOptionValue | `string \| number \| null` | `null` | The default active filter option value in uncontrolled manner. (works when not using multiple filters). |  |
 | defaultFilterOptionValues | `Array<string \| number>` | `[]` | The default active filter option values in uncontrolled manner. (works when there are multiple filters). |  |
 | defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | The default sort order of the table in uncontrolled manner. |  |
@@ -147,11 +148,10 @@ export-csv.vue
 | filterOptionValue | `string \| number \| null` | `undefined` | The active filter option value in controlled manner. If not set, the filter of the column works in an uncontrolled manner. (works when not using multiple filters). |  |
 | filterOptionValues | `Array<string \| number> \| null` | `undefined` | The active filter option values in controlled manner. If not set, the filter of the column works in an uncontrolled manner. (works when there are multiple filters). |  |
 | filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | Filter options. |  |
-| resizable | `boolean` | `undefined` | Whethe the column width can be dragged. | 2.33.4 |
 | fixed | `'left \| 'right' \| false` | `false` | Whether the column needs to be fixed. |  |
 | key | `string \| number` | `undefined` | Unique key of this column, this is not repeatable. |  |
-| minWidth | `number \| string` | `undefined` | Min width of the column. | 2.28.3 |
 | maxWidth | `number \| string` | `undefined` | Max width of the column. Only works when `resizable` is `true`. | 2.33.4 |
+| minWidth | `number \| string` | `undefined` | Min width of the column. | 2.28.3 |
 | multiple | `boolean` | `true` | Whether to enable multiple selection mode. Only works when `type` is `'selection'`. | 2.31.0 |
 | options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData[]) => void }>` | `undefined` | Options of custom selection. Only work with `type='selection'`. |  |
 | render | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | Render function of column row cell. |  |
@@ -161,12 +161,14 @@ export-csv.vue
 | renderFilterMenu | `(actions: { hide: () => void }) => VNodeChild` | `undefined` | Render function of column filter menu. |  |
 | renderSorter | `(options: { order: 'descend' \| 'ascend' \| false }) => VNodeChild` | `undefined` | Render function of column sorter trigger. | 2.24.2 |
 | renderSorterIcon | `(options: { order: 'descend' \| 'ascend' \| false }) => VNodeChild` | `undefined` | Render function of column sorter icon. | 2.24.2 |
+| resizable | `boolean` | `undefined` | Whethe the column width can be dragged. | 2.33.4 |
 | rowSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | The row span of the cell. |  |
 | sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | The controlled sort order of the column. If multiple columns' sortOrder is set, the first one will affect. |  |
 | sorter | `boolean \| function \| 'default'` | `false` | The sorter of the column. If set `'default'`, it will use a basic builtin compare function. If set to `true`, it will only display sort icon on the column, which can be used in async status. Otherwise it works like `Array.sort`'s compare function. |  |
-| tree | `boolean` | `false` | Whether to show tree data expand trigger in the column. | 2.28.3 |
 | title | `string \| (() => VNodeChild)` | `undefined` | Column title, Can be a render function. |  |
+| titleAlign | `'left' \| 'right' \| 'center'` | `null` | alignment of the table header. If omitted, the value of the above align attribute will be applied | 2.34.4 |
 | titleColSpan | `number` | `undefined` | The number of cells occupied by the title col. |  |
+| tree | `boolean` | `false` | Whether to show tree data expand trigger in the column. | 2.28.3 |
 | type | `'selection' \| 'expand'` | `undefined` | Column type. |  |
 | width | `number \| string` | `undefined` | Width of the column (**required and should be number** when fixed). | 2.24.0 (`string` type) |
 
@@ -219,9 +221,11 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | clearFilters | `() => void` | Clear all filter state. |  |
 | clearSorter | `() => void` | Clear all sort state. |  |
 | downloadCsv | `(options?: { fileName?: string, keepOriginalData?: boolean }) => void` | Download CSV. | 2.37.0 |
+| getCurrentPageData | `() => RowData[]` | Get row data of the current page after filters, sorters and pagination are applied. | NEXT_VERSION |
+| getFilteredAndSortedData | `() => RowData[]` | Get all row data after filters and sorters are applied, excluding pagination. In `remote` mode, it is based on the current `data` prop only. | NEXT_VERSION |
 | filters | `(filters: DataTableFilterState \| null) => void` | Set the active filters of the table. |  |
 | page | `(page: number) => void` | Manually set the page. |  |
-| scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | Scroll content. | 2.30.4 |
+| scrollTo | `DataTableScrollTo` | Scroll content. See <n-a href="#DataTableScrollTo-Type">DataTableScrollTo Type</n-a>. | NEXT_VERSION |
 | sort | `(columnKey: string \| number, order: 'ascend' \| 'descend' \| false) => void` | Set the sort state of the table. |  |
 
 ### DataTable Slots
@@ -230,3 +234,19 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | ------- | ---- | ------------------------------------------------- | ------- |
 | empty   | `()` | Custom description when data of table is empty.   |         |
 | loading | `()` | Custom description when data of table is loading. | 2.34.0  |
+
+#### DataTableScrollTo Type
+
+`scrollTo` delegates to virtual list when `virtual-scroll` is enabled, otherwise to the internal scrollbar. Available signatures by mode:
+
+| Signature | Virtual scroll | Non-virtual scroll |
+| --- | --- | --- |
+| `(x: number, y: number)` | Yes | Yes |
+| `{ left?, top?, behavior?, debounce? }` | Yes | Yes |
+| `{ position: 'top' \| 'bottom', behavior?, debounce? }` | Yes | Yes |
+| `{ index, behavior?, debounce? }` | Yes | No |
+| `{ key, behavior?, debounce? }` | Yes | No |
+| `{ el, behavior?, debounce? }` | No | Yes |
+| `{ index, elSize, behavior?, debounce? }` | No | Yes |
+
+When `virtual-scroll` is enabled, `scrollTo` still has some edge cases that are not fully handled. For example, using `behavior: 'smooth'` may have some issues; please refer to actual usage.

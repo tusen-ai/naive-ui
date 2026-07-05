@@ -1,3 +1,6 @@
+import type { CheckStrategy, TreeMateOptions } from 'treemate'
+import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type { VirtualListInst, VirtualListScrollToOptions } from 'vueuc'
 import type { ScrollbarInst } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
@@ -27,37 +30,23 @@ import type {
   TreeOptions,
   TreeOverrideNodeClickBehavior
 } from './interface'
+import type { TreeSpinProps } from './public-types'
 import { depx, getPadding, pxfy } from 'seemly'
-import {
-  type CheckStrategy,
-  createIndexGetter,
-  createTreeMate,
-  flatten,
-  type TreeMateOptions
-} from 'treemate'
+import { createIndexGetter, createTreeMate, flatten } from 'treemate'
 import { useMergedState } from 'vooks'
 import {
   computed,
-  type CSSProperties,
   defineComponent,
   h,
   inject,
   nextTick,
-  type PropType,
   provide,
   ref,
-  type SlotsType,
   toRef,
-  type VNode,
-  type VNodeChild,
   watch,
   watchEffect
 } from 'vue'
-import {
-  type VirtualListInst,
-  type VirtualListScrollToOptions,
-  VVirtualList
-} from 'vueuc'
+import { VVirtualList } from 'vueuc'
 import { NxScrollbar } from '../../_internal'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import { call, createDataKey, resolveSlot, warn, warnOnce } from '../../_utils'
@@ -274,6 +263,7 @@ export const treeProps = {
     type: Boolean,
     default: true
   },
+  ellipsis: Boolean,
   checkboxPlacement: {
     type: String as PropType<'left' | 'right'>,
     default: 'left'
@@ -341,6 +331,7 @@ export const treeProps = {
     type: String as PropType<CheckStrategy>,
     default: 'all'
   },
+  spinProps: Object as PropType<TreeSpinProps>,
   /**
    * @deprecated
    */
@@ -369,8 +360,12 @@ export default defineComponent({
         }
       })
     }
-    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
-      = useConfig(props)
+    const {
+      mergedClsPrefixRef,
+      inlineThemeDisabled,
+      mergedRtlRef,
+      mergedComponentPropsRef
+    } = useConfig(props)
     const rtlEnabledRef = useRtl('Tree', mergedRtlRef, mergedClsPrefixRef)
     const themeRef = useTheme(
       'Tree',
@@ -380,6 +375,9 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const mergedRenderEmptyRef = computed(() => {
+      return mergedComponentPropsRef?.value?.Tree?.renderEmpty
+    })
     const selfElRef = ref<HTMLDivElement | null>(null)
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const virtualListInstRef = ref<VirtualListInst | null>(null)
@@ -1624,6 +1622,7 @@ export default defineComponent({
         props,
         'overrideDefaultNodeClickBehavior'
       ),
+      spinPropsRef: toRef(props, 'spinProps'),
       handleSwitcherClick,
       handleDragEnd,
       handleDragEnter,
@@ -1719,6 +1718,7 @@ export default defineComponent({
       ...exposedMethods,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
+      mergedRenderEmpty: mergedRenderEmptyRef,
       rtlEnabled: rtlEnabledRef,
       fNodes: mergedFNodesRef,
       aip: aipRef,
@@ -1748,6 +1748,7 @@ export default defineComponent({
       blockLine,
       draggable,
       disabled,
+      ellipsis,
       internalFocusable,
       checkable,
       handleKeydown,
@@ -1762,7 +1763,8 @@ export default defineComponent({
       rtlEnabled && `${mergedClsPrefix}-tree--rtl`,
       checkable && `${mergedClsPrefix}-tree--checkable`,
       (blockLine || blockNode) && `${mergedClsPrefix}-tree--block-node`,
-      blockLine && `${mergedClsPrefix}-tree--block-line`
+      blockLine && `${mergedClsPrefix}-tree--block-line`,
+      ellipsis && `${mergedClsPrefix}-tree--ellipsis`
     ]
     const createNode = (tmNode: TmNode | MotionData): VNode => {
       return '__motion' in tmNode ? (
@@ -1802,13 +1804,17 @@ export default defineComponent({
             default: () => {
               this.onRender?.()
               return !fNodes.length ? (
-                resolveSlot(this.$slots.empty, () => [
-                  <NEmpty
-                    class={`${mergedClsPrefix}-tree__empty`}
-                    theme={this.mergedTheme.peers.Empty}
-                    themeOverrides={this.mergedTheme.peerOverrides.Empty}
-                  />
-                ])
+                resolveSlot(this.$slots.empty, () => {
+                  return [
+                    this.mergedRenderEmpty?.() || (
+                      <NEmpty
+                        class={`${mergedClsPrefix}-tree__empty`}
+                        theme={this.mergedTheme.peers.Empty}
+                        themeOverrides={this.mergedTheme.peerOverrides.Empty}
+                      />
+                    )
+                  ]
+                })
               ) : (
                 <VVirtualList
                   ref="virtualListInstRef"
@@ -1880,13 +1886,17 @@ export default defineComponent({
           onDragleave={draggable ? this.handleDragLeaveTree : undefined}
         >
           {!fNodes.length
-            ? resolveSlot(this.$slots.empty, () => [
-                <NEmpty
-                  class={`${mergedClsPrefix}-tree__empty`}
-                  theme={this.mergedTheme.peers.Empty}
-                  themeOverrides={this.mergedTheme.peerOverrides.Empty}
-                />
-              ])
+            ? resolveSlot(this.$slots.empty, () => {
+                return [
+                  this.mergedRenderEmpty?.() || (
+                    <NEmpty
+                      class={`${mergedClsPrefix}-tree__empty`}
+                      theme={this.mergedTheme.peers.Empty}
+                      themeOverrides={this.mergedTheme.peerOverrides.Empty}
+                    />
+                  )
+                ]
+              })
             : fNodes.map(createNode)}
         </div>
       )

@@ -2,26 +2,21 @@
 # Finish callback
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { NumberAnimationInst } from 'naive-ui'
 import { useMessage } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const numberAnimationInstRef = ref<NumberAnimationInst | null>(null)
-    const message = useMessage()
-    return {
-      numberAnimationInstRef,
-      handleClick() {
-        numberAnimationInstRef.value?.play()
-      },
-      handleFinish() {
-        message.success('Finished')
-      }
-    }
-  }
-})
+const numberAnimationInstRef = ref<NumberAnimationInst | null>(null)
+const message = useMessage()
+
+function handleClick() {
+  numberAnimationInstRef.value?.play()
+}
+
+function handleFinish() {
+  message.success('Finished')
+}
 </script>
 
 <template>

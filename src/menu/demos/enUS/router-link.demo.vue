@@ -4,7 +4,7 @@
 Usually you can use vue-router here to accomplish routing. You can render `label` as `<router-link />` to set route.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { MenuOption } from 'naive-ui'
 import type { Component } from 'vue'
 import {
@@ -12,7 +12,7 @@ import {
   LaptopOutline as WorkIcon
 } from '@vicons/ionicons5'
 import { NIcon } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 import { RouterLink } from 'vue-router'
 
 function renderIcon(icon: Component) {
@@ -52,14 +52,6 @@ const menuOptions: MenuOption[] = [
     icon: renderIcon(WorkIcon)
   }
 ]
-
-export default defineComponent({
-  setup() {
-    return {
-      menuOptions
-    }
-  }
-})
 </script>
 
 <template>

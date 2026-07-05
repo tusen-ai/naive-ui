@@ -4,17 +4,8 @@
 Insert some custom content in it.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { LockClosedOutline } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup() {
-    return {
-      LockClosedOutline
-    }
-  }
-})
 </script>
 
 <template>

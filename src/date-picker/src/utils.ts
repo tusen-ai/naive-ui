@@ -1,6 +1,11 @@
 import type { Ref } from 'vue'
 import type { NDateLocale } from '../../locales'
-import type { FirstDayOfWeek, Value } from './interface'
+import type {
+  DatePickerGetDefaultTime,
+  DatePickerGetRangeDefaultTime,
+  FirstDayOfWeek,
+  Value
+} from './interface'
 import {
   addDays,
   addMonths,
@@ -56,9 +61,15 @@ function makeWeekMatcher(firstDayOfWeek: FirstDayOfWeek) {
   return (sourceTime: number, patternTime: number | Date) => {
     // date-fns: 0 - Sunday
     // naive-ui: 0 - Monday
-    const weekStartsOn = ((firstDayOfWeek + 1) % 7) as FirstDayOfWeek
+    const weekStartsOn = transformNaiveFirstDayOfWeekToDateFns(firstDayOfWeek)
     return isSameWeek(sourceTime, patternTime, { weekStartsOn })
   }
+}
+
+export function transformNaiveFirstDayOfWeekToDateFns(
+  firstDayOfWeek: FirstDayOfWeek
+): FirstDayOfWeek {
+  return ((firstDayOfWeek + 1) % 7) as FirstDayOfWeek
 }
 
 function matchDate(
@@ -482,6 +493,38 @@ function strictParse(
   else return new Date(Number.NaN)
 }
 
+function extractSingleDefaultTime(
+  timestamp: number,
+  defaultTimeExtractor: DatePickerGetDefaultTime
+):
+  | {
+    hours: number
+    minutes: number
+    seconds: number
+  }
+  | undefined {
+  const extractedTime = defaultTimeExtractor(timestamp)
+
+  return getDefaultTime(extractedTime as string)
+}
+
+function extractRangeDefaultTime(
+  timestamp: number,
+  defaultTimeExtractor: DatePickerGetRangeDefaultTime,
+  position: 'start' | 'end',
+  value: [number, number] | null
+):
+  | {
+    hours: number
+    minutes: number
+    seconds: number
+  }
+  | undefined {
+  const extractedTime = defaultTimeExtractor(timestamp, position, value)
+
+  return getDefaultTime(extractedTime as string)
+}
+
 function getDefaultTime(timeValue: string | undefined):
   | {
     hours: number
@@ -512,6 +555,8 @@ function pluckValueFromRange(
 
 export {
   dateArray,
+  extractRangeDefaultTime,
+  extractSingleDefaultTime,
   getDefaultTime,
   getDerivedTimeFromKeyboardEvent,
   getMonthString,

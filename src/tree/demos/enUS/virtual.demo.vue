@@ -4,10 +4,10 @@
 Set `virtual-scroll` to use virtual scroll. Note that you should set the height of the tree.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { TreeInst, TreeOption } from 'naive-ui'
 import { repeat } from 'seemly'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 function createData(level = 4, baseKey = ''): TreeOption[] | undefined {
   if (!level)
@@ -34,27 +34,24 @@ function createLabel(level: number): string {
   return ''
 }
 
-export default defineComponent({
-  setup() {
-    const treeInstRef = ref<TreeInst | null>(null)
-    return {
-      treeInstRef,
-      data: createData(),
-      handleScrollToKey: () => {
-        treeInstRef.value?.scrollTo({ key: '45362710' })
-      },
-      handleScrollToPosition: () => {
-        treeInstRef.value?.scrollTo({ position: 'bottom' })
-      },
-      handleScrollToIndex: () => {
-        treeInstRef.value?.scrollTo({ index: 100 })
-      },
-      handleScrollToDistance: () => {
-        treeInstRef.value?.scrollTo({ top: 400 })
-      }
-    }
-  }
-})
+const treeInstRef = ref<TreeInst | null>(null)
+const data = createData()
+
+function handleScrollToKey() {
+  treeInstRef.value?.scrollTo({ key: '45362710' })
+}
+
+function handleScrollToPosition() {
+  treeInstRef.value?.scrollTo({ position: 'bottom' })
+}
+
+function handleScrollToIndex() {
+  treeInstRef.value?.scrollTo({ index: 100 })
+}
+
+function handleScrollToDistance() {
+  treeInstRef.value?.scrollTo({ top: 400 })
+}
 </script>
 
 <template>

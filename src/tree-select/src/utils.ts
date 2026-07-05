@@ -23,6 +23,6 @@ export function treeOption2SelectOptionWithPath(
   return {
     ...rawNode,
     value: tmNode.key,
-    label: path.map(v => (v.rawNode as any)[labelField]).join(separator)
+    label: path.map(v => v.rawNode[labelField]).join(separator)
   }
 }

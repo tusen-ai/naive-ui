@@ -4,10 +4,10 @@
 仅支持叶子结点。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DataTableColumns } from 'naive-ui'
 import { NButton, useMessage } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 
 interface Song {
   no: number
@@ -63,20 +63,13 @@ const data: Song[] = [
   { no: 12, title: 'Champagne Supernova', length: '7:27' }
 ]
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      data,
-      columns: createColumns({
-        play(row: Song) {
-          message.info(`Play ${row.title}`)
-        }
-      }),
-      pagination: false as const
-    }
+const message = useMessage()
+const columns = createColumns({
+  play(row: Song) {
+    message.info(`Play ${row.title}`)
   }
 })
+const pagination = false as const
 </script>
 
 <template>

@@ -4,15 +4,8 @@
 Customize icon in empty.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { IosAirplane } from '@vicons/ionicons4'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    IosAirplane
-  }
-})
 </script>
 
 <template>

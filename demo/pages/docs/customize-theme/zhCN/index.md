@@ -35,6 +35,8 @@ Naive UI 通过使用 `n-config-provider` 调整主题。
 </script>
 ```
 
+如果你需要给 body 元素也应用 dark theme，而不仅仅是组件，你可能需要使用 `<n-global-style />`。更多细节请参考 [n-global-style](../docs/customize-theme#Sync-style-of-the-body-element)。
+
 ## 获取主题变量
 
 无论是默认的亮色主题(`lightTheme`)，还是修改后的暗色主题(`darkTheme`)，亦或我们通过调整得到的自定义主题，在该主题生效范围内的组件中都可以通过 [useThemeVars](./theme#use-theme-vars) 来获取主题变量。

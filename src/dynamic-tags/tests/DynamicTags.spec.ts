@@ -46,7 +46,7 @@ describe('n-dynamic-tags', () => {
   })
 
   it('should work with `disabled` prop', async () => {
-    const onClose = jest.fn()
+    const onClose = vi.fn()
     const wrapper = mount(NDynamicTags, {
       props: {
         disabled: true,
@@ -58,7 +58,7 @@ describe('n-dynamic-tags', () => {
 
     expect(wrapper.find('.n-tag').classes()).toContain('n-tag--disabled')
     wrapper.find('.n-tag__close').trigger('click')
-    expect(onClose).not.toBeCalled()
+    expect(onClose).not.toHaveBeenCalled()
     expect(wrapper.find('.n-button').classes()).toContain('n-button--disabled')
     wrapper.unmount()
   })
@@ -150,7 +150,7 @@ describe('n-dynamic-tags', () => {
   })
 
   it('should work with `on-update:value` prop', () => {
-    const onUpdateValue = jest.fn()
+    const onUpdateValue = vi.fn()
     const wrapper = mount(NDynamicTags, {
       props: {
         value: ['教师', '程序员'],
@@ -158,7 +158,7 @@ describe('n-dynamic-tags', () => {
       }
     })
     wrapper.find('.n-tag__close').trigger('click')
-    expect(onUpdateValue).toBeCalled()
+    expect(onUpdateValue).toHaveBeenCalled()
     wrapper.unmount()
   })
 
@@ -236,6 +236,31 @@ describe('n-dynamic-tags', () => {
       }
     })
     expect(wrapper.find('.n-button__content').text()).toEqual('添加')
+    wrapper.unmount()
+  })
+
+  it('should not commit a tag when Enter is pressed during IME composition', async () => {
+    const onUpdateValue = vi.fn()
+    const wrapper = mount(NDynamicTags, {
+      props: {
+        defaultValue: ['教师'],
+        onUpdateValue
+      }
+    })
+    await wrapper.find('.n-button').trigger('click')
+    const input = wrapper.find('input')
+    await input.setValue('程序员')
+    // Pressing Enter to confirm an IME conversion fires keydown while
+    // composition is still active; it must not commit the tag.
+    await input.trigger('compositionstart')
+    await input.trigger('keydown', { key: 'Enter' })
+    expect(onUpdateValue).not.toHaveBeenCalled()
+    expect(wrapper.findAll('.n-tag').length).toBe(1)
+    // After composition ends, Enter commits the tag as usual.
+    await input.trigger('compositionend')
+    await input.trigger('keydown', { key: 'Enter' })
+    expect(onUpdateValue).toHaveBeenCalledWith(['教师', '程序员'])
+    expect(wrapper.findAll('.n-tag').length).toBe(2)
     wrapper.unmount()
   })
 })

@@ -75,7 +75,7 @@ export {
   paginationRtl as unstablePaginationRtl
 } from './pagination/styles'
 export { popconfirmDark } from './popconfirm/styles'
-export { popoverDark } from './popover/styles'
+export { popoverDark, popoverRtl as unstablePopoverRtl } from './popover/styles'
 export { popselectDark } from './popselect/styles'
 export { progressDark } from './progress/styles'
 export { radioDark, radioRtl as unstableRadioRtl } from './radio/styles'
@@ -99,9 +99,12 @@ export { timePickerDark } from './time-picker/styles'
 export { timelineDark } from './timeline/styles'
 export { tooltipDark } from './tooltip/styles'
 export { transferDark } from './transfer/styles'
-export { treeSelectDark } from './tree-select/styles'
+export {
+  treeSelectDark,
+  treeSelectRtl as unstableTreeSelectRtl
+} from './tree-select/styles'
 
 export { treeDark, treeRtl as unstableTreeRtl } from './tree/styles'
 export { typographyDark } from './typography/styles'
-export { uploadDark } from './upload/styles'
+export { uploadRtl as unstableUploadsRtl, uploadDark } from './upload/styles'
 export { watermarkDark } from './watermark/styles'

@@ -1,9 +1,11 @@
-import { mount } from '@vue/test-utils'
+import type { HTMLAttributes } from 'vue'
 /* eslint-disable unused-imports/no-unused-vars */
-import { h, type HTMLAttributes, nextTick, ref } from 'vue'
+import type { DataTableColumns, DataTableInst } from '../index'
+import { mount } from '@vue/test-utils'
+import { h, nextTick, ref } from 'vue'
 import { NButton } from '../../button'
 import { NButtonGroup } from '../../button-group'
-import { type DataTableColumns, type DataTableInst, NDataTable } from '../index'
+import { NDataTable } from '../index'
 
 describe('n-data-table', () => {
   it('should work with import on demand', () => {
@@ -72,15 +74,15 @@ describe('n-data-table', () => {
           name: index
         }
       })
-    const onPageChange = jest.fn((page: number): void => {
-      setTimeout(() => {
+    const onPageChange = vi.fn(async (page: number): Promise<void> => {
+      await vi.waitFor(() => {
         pagination.page = page
         pagination.itemCount = data.length
         data = data.slice(
           (page - 1) * pagination.pageSize,
           page * pagination.pageSize
         )
-      }, 1000)
+      })
     })
     const columns = [
       {
@@ -255,6 +257,107 @@ describe('n-data-table', () => {
     ))
     expect(wrapper.find('tbody .n-data-table-tr').classes()).toContain('0-test')
     wrapper.unmount()
+  })
+
+  describe('getFilteredAndSortedData and getCurrentPageData', () => {
+    interface Row {
+      name: string
+      age: number
+      address: string
+    }
+    const columns: DataTableColumns<Row> = [
+      {
+        title: 'Name',
+        key: 'name'
+      },
+      {
+        title: 'Age',
+        key: 'age',
+        sorter: (a, b) => a.age - b.age
+      },
+      {
+        title: 'Address',
+        key: 'address',
+        filter(value: any, row) {
+          return row.address.includes(value as string)
+        }
+      }
+    ]
+    const data: Row[] = [
+      {
+        name: 'John Brown',
+        age: 32,
+        address: 'New York No. 1 Lake Park'
+      },
+      {
+        name: 'Jim Green',
+        age: 42,
+        address: 'London No. 1 Lake Park'
+      },
+      {
+        name: 'Joe Black',
+        age: 32,
+        address: 'London No. 2 Lake Park'
+      },
+      {
+        name: 'Jim Red',
+        age: 32,
+        address: 'Sidney No. 1 Lake Park'
+      }
+    ]
+    const tableRef = ref<DataTableInst | null>(null)
+    let wrapper: ReturnType<typeof mount>
+
+    beforeEach(() => {
+      wrapper = mount(
+        () => (
+          <NDataTable
+            ref={tableRef}
+            columns={columns}
+            data={data}
+            pagination={{ pageSize: 1 }}
+          />
+        ),
+        {
+          attachTo: document.body
+        }
+      )
+    })
+
+    afterEach(() => {
+      wrapper.unmount()
+    })
+
+    it('should return filtered full data and current page data separately', async () => {
+      expect(tableRef.value).not.toEqual(null)
+      tableRef.value!.filter({
+        address: 'London'
+      })
+      await nextTick()
+      expect(
+        tableRef.value!.getFilteredAndSortedData().map(row => row.name)
+      ).toEqual(['Jim Green', 'Joe Black'])
+      expect(
+        tableRef.value!.getCurrentPageData().map(row => row.name)
+      ).toEqual(['Jim Green'])
+      expect(tableRef.value!.getFilteredAndSortedData().length).toEqual(2)
+      expect(tableRef.value!.getCurrentPageData().length).toEqual(1)
+    })
+
+    it('should reflect sort order in filtered data and current page data', async () => {
+      expect(tableRef.value).not.toEqual(null)
+      tableRef.value!.filter({
+        address: 'London'
+      })
+      tableRef.value!.sort('age', 'descend')
+      await nextTick()
+      expect(
+        tableRef.value!.getFilteredAndSortedData().map(row => row.name)
+      ).toEqual(['Jim Green', 'Joe Black'])
+      expect(
+        tableRef.value!.getCurrentPageData().map(row => row.name)
+      ).toEqual(['Jim Green'])
+    })
   })
 
   describe('should work with multiple sorter', () => {
@@ -840,7 +943,7 @@ describe('n-data-table', () => {
   })
 
   it('should work with `on-update:checked-row-keys` prop', async () => {
-    const handleCheck = jest.fn()
+    const handleCheck = vi.fn()
     const columns: DataTableColumns = [
       {
         type: 'selection'
@@ -1327,14 +1430,19 @@ describe('props.columns', () => {
       checkedRowKeys.value = e
     }
 
-    const wrapper = mount(() => (
-      <NDataTable
-        columns={columns}
-        data={data}
-        onUpdateCheckedRowKeys={handleCheck}
-        checked-row-keys={checkedRowKeys.value}
-      />
-    ))
+    const wrapper = mount(
+      () => (
+        <NDataTable
+          columns={columns}
+          data={data}
+          onUpdateCheckedRowKeys={handleCheck}
+          checked-row-keys={checkedRowKeys.value}
+        />
+      ),
+      {
+        attachTo: document.body
+      }
+    )
 
     const radios = wrapper.findAll('.n-radio')
 
@@ -1343,10 +1451,9 @@ describe('props.columns', () => {
 
     await radios[1].trigger('click')
 
-    setTimeout(() => {
-      expect(radios[1].classes()).toContain('n-radio--checked')
-      expect(radios[4].classes()).not.toContain('n-radio--checked')
-    }, 0)
+    expect(radios[1].classes()).toContain('n-radio--checked')
+    expect(radios[4].classes()).not.toContain('n-radio--checked')
+
     wrapper.unmount()
   })
 })

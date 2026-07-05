@@ -1,12 +1,8 @@
+import type { DrawerContentProps, DrawerProps } from '../index'
 import { mount } from '@vue/test-utils'
 import { defineComponent, h, nextTick, ref } from 'vue'
 import { NButton } from '../../button'
-import {
-  type DrawerContentProps,
-  type DrawerProps,
-  NDrawer,
-  NDrawerContent
-} from '../index'
+import { NDrawer, NDrawerContent } from '../index'
 
 // It seems due to special handling of transition in naive-ui, the drawer's DOM
 // won't disappear even if its `show` prop is false. No time to find out the
@@ -139,34 +135,35 @@ describe('n-drawer', () => {
   })
 
   it('should work with `on-update:show` prop', async () => {
-    const onUpdate = jest.fn()
+    const onUpdate = vi.fn()
     const wrapper = mountDrawer({
       hasOnUpdateShow: true,
       drawerProps: { onUpdateShow: onUpdate },
       drawerContentProps: { closable: true }
     })
     await wrapper.find('button').trigger('click')
-    setTimeout(() => {
-      expect(onUpdate).toHaveBeenCalled()
-    }, 300)
+    expect(onUpdate).not.toHaveBeenCalled()
+    document
+      .querySelector('.n-base-close')
+      ?.dispatchEvent(new MouseEvent('click'))
+    await nextTick()
+    expect(onUpdate).toHaveBeenCalledWith(false)
     wrapper.unmount()
   })
 
   it('should work with `mask-closable` prop', async () => {
-    const onUpdate = jest.fn()
-    const mousedownEvent = new MouseEvent('mousedown', { bubbles: true })
-    const mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
+    const onUpdate = vi.fn()
     const wrapper = mountDrawer({
       show: true,
       hasOnUpdateShow: true,
       drawerProps: { onUpdateShow: onUpdate },
       drawerContentProps: { closable: true }
     })
-    document.querySelector('.n-drawer-mask')?.dispatchEvent(mousedownEvent)
-    document.querySelector('.n-drawer-mask')?.dispatchEvent(mouseupEvent)
-    setTimeout(() => {
-      expect(onUpdate).toHaveBeenCalled()
-    }, 300)
+    document
+      .querySelector('.n-drawer-mask')
+      ?.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    await nextTick()
+    expect(onUpdate).toHaveBeenCalledWith(false)
     wrapper.unmount()
   })
 

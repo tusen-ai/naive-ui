@@ -4,21 +4,13 @@
 You may want to use color combinations.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useThemeVars } from 'naive-ui'
 import { changeColor } from 'seemly'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const percentageRef = ref(80)
-    return {
-      percentage: percentageRef,
-      themeVars: useThemeVars(),
-      changeColor
-    }
-  }
-})
+const percentage = ref(80)
+const themeVars = useThemeVars()
 </script>
 
 <template>

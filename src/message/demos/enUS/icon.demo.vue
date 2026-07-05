@@ -2,23 +2,18 @@
 # Icon
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { MdHourglass } from '@vicons/ionicons4'
 import { NIcon, useMessage } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      createMessage() {
-        message.warning('I never needed anybody\'s help in any way', {
-          icon: () => h(NIcon, null, { default: () => h(MdHourglass) })
-        })
-      }
-    }
-  }
-})
+const message = useMessage()
+
+function createMessage() {
+  message.warning('I never needed anybody\'s help in any way', {
+    icon: () => h(NIcon, null, { default: () => h(MdHourglass) })
+  })
+}
 </script>
 
 <template>

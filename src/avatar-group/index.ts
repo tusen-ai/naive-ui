@@ -1,10 +1,4 @@
 export { avatarGroupProps, default as NAvatarGroup } from './src/AvatarGroup'
-export type {
-  AvatarGroupOption,
-  AvatarGroupProps,
-  AvatarGroupSlots
-} from './src/AvatarGroup'
-export type {
-  AvatarGroupAvatarSlotProps,
-  AvatarGroupRestSlotProps
-} from './src/interface'
+export type { AvatarGroupProps, AvatarGroupSlots } from './src/AvatarGroup'
+export type * from './src/generic-public-types'
+export type * from './src/public-types'

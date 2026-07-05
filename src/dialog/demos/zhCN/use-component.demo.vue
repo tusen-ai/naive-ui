@@ -4,23 +4,18 @@
 有的时候你可能想把它用作一个组件。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      handleNegativeClick() {
-        message.warning('取消')
-      },
-      handlePositiveClick() {
-        message.success('确认')
-      }
-    }
-  }
-})
+const message = useMessage()
+
+function handleNegativeClick() {
+  message.warning('取消')
+}
+
+function handlePositiveClick() {
+  message.success('确认')
+}
 </script>
 
 <template>

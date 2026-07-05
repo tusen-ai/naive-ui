@@ -2,19 +2,11 @@
 # 自定义图标
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { ArrowBackOutline, ArrowForwardOutline } from '@vicons/ionicons5'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      active: ref(false),
-      ArrowBackOutline,
-      ArrowForwardOutline
-    }
-  }
-})
+const active = ref(false)
 </script>
 
 <template>

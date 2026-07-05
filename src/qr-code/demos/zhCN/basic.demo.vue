@@ -4,17 +4,10 @@
 基础二维码。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const text = ref('雨淋湿了天空')
-    return {
-      text
-    }
-  }
-})
+const text = ref('雨淋湿了天空')
 </script>
 
 <template>

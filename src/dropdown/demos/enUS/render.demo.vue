@@ -1,12 +1,12 @@
 <markdown>
-# Pure rendering content
+# Pure Render Content
 
-You can just render something which is not related to options data by setting `type='render'` on option.
+You can simply render some content unrelated to option data. In this case, you can add an option with `type='render'`.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { NAvatar, NText, useMessage } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 
 function renderCustomHeader() {
   return h(
@@ -22,53 +22,55 @@ function renderCustomHeader() {
       }),
       h('div', null, [
         h('div', null, [
-          h(NText, { depth: 2 }, { default: () => 'A worker at Hangzhou' })
+          h(NText, { depth: 2 }, { default: () => 'Office Worker' })
         ]),
         h('div', { style: 'font-size: 12px;' }, [
-          h(NText, { depth: 3 }, { default: () => '<???>' })
+          h(
+            NText,
+            { depth: 3 },
+            {
+              default: () =>
+                'No doubt, you are the brightest star in the office'
+            }
+          )
         ])
       ])
     ]
   )
 }
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      options: [
-        {
-          key: 'header',
-          type: 'render',
-          render: renderCustomHeader
-        },
-        {
-          key: 'header-divider',
-          type: 'divider'
-        },
-        {
-          label: 'lpsum1',
-          key: 'stmt1'
-        },
-        {
-          label: 'lpsum2',
-          key: 'stmt2'
-        },
-        {
-          label: 'lpsum3',
-          key: 'stmt3'
-        }
-      ],
-      handleSelect(key: string | number) {
-        message.info(String(key))
-      }
-    }
+const message = useMessage()
+const options = [
+  {
+    key: 'header',
+    type: 'render',
+    render: renderCustomHeader
+  },
+  {
+    key: 'header-divider',
+    type: 'divider'
+  },
+  {
+    label: 'Processed 342 group messages',
+    key: 'stmt1'
+  },
+  {
+    label: 'Mentioned 58 times',
+    key: 'stmt2'
+  },
+  {
+    label: 'Joined 17 groups',
+    key: 'stmt3'
   }
-})
+]
+
+function handleSelect(key: string | number) {
+  message.info(String(key))
+}
 </script>
 
 <template>
   <n-dropdown trigger="hover" :options="options" @select="handleSelect">
-    <n-button>Just some text</n-button>
+    <n-button>2021 Week 36</n-button>
   </n-dropdown>
 </template>

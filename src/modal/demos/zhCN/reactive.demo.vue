@@ -6,57 +6,68 @@
 你可以使用 `useModal.create` 来打开一个模态框。（请确保使用此 API 的组件被 `n-modal-provider` 包含。）
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { NButton, useMessage, useModal } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const modal = useModal()
-    const message = useMessage()
+const modal = useModal()
+const message = useMessage()
 
-    const showDialogPreset = () => {
-      const m = modal.create({
-        title: 'Dialog 预设',
-        preset: 'dialog',
-        content: '内容'
-      })
-      message.info('三秒钟后关闭')
-      setTimeout(() => {
-        m.destroy()
-      }, 3000)
+function showDialogPreset() {
+  const m = modal.create({
+    title: 'Dialog 预设',
+    preset: 'dialog',
+    content: '内容'
+  })
+  message.info('三秒钟后关闭')
+  setTimeout(() => {
+    m.destroy()
+  }, 3000)
+}
+
+function showCardPreset() {
+  const m = modal.create({
+    title: 'Card 预设',
+    preset: 'card',
+    style: {
+      width: '400px'
+    },
+    content: '内容',
+    footer: () =>
+      h(NButton, { type: 'primary', onClick: () => m.destroy() }, () => '关闭')
+  })
+}
+
+function showAny() {
+  const m = modal.create({
+    style: {
+      width: '400px',
+      background: '#fff'
+    },
+    render() {
+      return h('div', [
+        '随便啥',
+        h(
+          NButton,
+          { type: 'primary', onClick: () => m.destroy() },
+          () => '关闭'
+        )
+      ])
     }
-    const showCardPreset = () => {
-      const m = modal.create({
-        title: 'Card 预设',
-        preset: 'card',
-        style: {
-          width: '400px'
-        },
-        content: '内容',
-        footer: () =>
-          h(
-            NButton,
-            { type: 'primary', onClick: () => m.destroy() },
-            () => '关闭'
-          )
-      })
-    }
-    return {
-      showDialogPreset,
-      showCardPreset
-    }
-  }
-})
+  })
+}
 </script>
 
 <template>
   <n-flex>
-    <n-button @click="showDialogPreset">
+    <NButton @click="showDialogPreset">
       来吧 Dialog
-    </n-button>
-    <n-button @click="showCardPreset">
+    </NButton>
+    <NButton @click="showCardPreset">
       来吧 Card
-    </n-button>
+    </NButton>
+    <NButton @click="showAny">
+      来吧 随便啥
+    </NButton>
   </n-flex>
 </template>

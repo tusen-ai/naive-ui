@@ -4,10 +4,10 @@
 配合 `n-dropdown` 实现右键菜单。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DataTableColumns, DropdownOption } from 'naive-ui'
 import { useMessage } from 'naive-ui'
-import { defineComponent, h, nextTick, ref } from 'vue'
+import { h, nextTick, ref } from 'vue'
 
 interface Song {
   no: number
@@ -41,57 +41,52 @@ const options: DropdownOption[] = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    const showDropdownRef = ref(false)
-    const xRef = ref(0)
-    const yRef = ref(0)
-    const colsReactive: DataTableColumns<Song> = [
-      {
-        title: 'No.',
-        key: 'no'
-      },
-      {
-        title: 'Title',
-        key: 'title'
-      },
-      {
-        title: 'Length',
-        key: 'length'
-      }
-    ]
+const message = useMessage()
+const showDropdownRef = ref(false)
+const xRef = ref(0)
+const yRef = ref(0)
+const colsReactive: DataTableColumns<Song> = [
+  {
+    title: 'No.',
+    key: 'no'
+  },
+  {
+    title: 'Title',
+    key: 'title'
+  },
+  {
+    title: 'Length',
+    key: 'length'
+  }
+]
 
-    return {
-      cols: colsReactive,
-      data,
-      options,
-      showDropdown: showDropdownRef,
-      x: xRef,
-      y: yRef,
-      handleSelect() {
-        showDropdownRef.value = false
-      },
-      onClickoutside() {
-        showDropdownRef.value = false
-      },
-      rowProps: (row: Song) => {
-        return {
-          onContextmenu: (e: MouseEvent) => {
-            message.info(JSON.stringify(row, null, 2))
-            e.preventDefault()
-            showDropdownRef.value = false
-            nextTick().then(() => {
-              showDropdownRef.value = true
-              xRef.value = e.clientX
-              yRef.value = e.clientY
-            })
-          }
-        }
-      }
+const cols = colsReactive
+const showDropdown = showDropdownRef
+const x = xRef
+const y = yRef
+
+function handleSelect() {
+  showDropdownRef.value = false
+}
+
+function onClickoutside() {
+  showDropdownRef.value = false
+}
+
+function rowProps(row: Song) {
+  return {
+    onContextmenu: (e: MouseEvent) => {
+      message.info(JSON.stringify(row, null, 2))
+      e.preventDefault()
+      showDropdownRef.value = false
+      nextTick().then(() => {
+        showDropdownRef.value = true
+        xRef.value = e.clientX
+        yRef.value = e.clientY
+      })
     }
   }
-})
+}
 </script>
 
 <template>

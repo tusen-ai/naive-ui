@@ -2,21 +2,16 @@
 # Event
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      showPopover: ref(false),
-      handleUpdateShow(show: boolean) {
-        message.success(`${show}`)
-      }
-    }
-  }
-})
+const message = useMessage()
+const showPopover = ref(false)
+
+function handleUpdateShow(show: boolean) {
+  message.success(`${show}`)
+}
 </script>
 
 <template>

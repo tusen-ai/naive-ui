@@ -2,55 +2,56 @@
 # 事件
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      datetime: ref(1183135260000),
-      date: ref(null),
-      datetimerange: ref(null),
-      daterange: ref(null),
-      disabled: ref(false),
-      onBlur1() {
-        message.info('Blur-1')
-      },
-      onChange1(v: number) {
-        message.info(`Change-1 ${v}`)
-      },
-      onBlur2() {
-        message.error('Blur-2')
-      },
-      onChange2(v: number) {
-        message.error(`Change-2 ${v}`)
-      },
-      onBlur3() {
-        message.warning('Blur-3')
-      },
-      onChange3(v: number) {
-        message.warning(`Change-3 ${v}`)
-      },
-      onBlur4() {
-        message.success('Blur-4')
-      },
-      onChange4(v: number) {
-        message.success(`Change-4 ${v}`)
-      },
-      onChange5(v: number) {
-        message.success(`Change-5 ${v}`)
-      },
-      onClear() {
-        message.info('Clear-5')
-      },
-      onConfirm(v: number | number[] | null) {
-        message.info(`Confirm-5 ${v}`)
-      }
-    }
-  }
-})
+const message = useMessage()
+const datetime = ref(1183135260000)
+const date = ref(null)
+const datetimerange = ref(null)
+const daterange = ref(null)
+const disabled = ref(false)
+
+function onBlur1() {
+  message.info('Blur-1')
+}
+
+function onChange1(v: number) {
+  message.info(`Change-1 ${v}`)
+}
+
+function onBlur2() {
+  message.error('Blur-2')
+}
+
+function onChange2(v: number) {
+  message.error(`Change-2 ${v}`)
+}
+
+function onBlur3() {
+  message.warning('Blur-3')
+}
+
+function onChange3(v: number) {
+  message.warning(`Change-3 ${v}`)
+}
+
+function onBlur4() {
+  message.success('Blur-4')
+}
+
+function onChange4(v: number) {
+  message.success(`Change-4 ${v}`)
+}
+
+function onClear() {
+  message.info('Clear-5')
+}
+
+function onConfirm(v: number | number[] | null) {
+  message.info(`Confirm-5 ${v}`)
+}
 </script>
 
 <template>

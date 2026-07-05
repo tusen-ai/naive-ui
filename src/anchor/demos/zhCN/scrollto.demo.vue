@@ -2,22 +2,14 @@
 # 滚动到
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { AnchorInst } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const anchorRef = ref<AnchorInst | null>(null)
-    const scrollTo = (href: string) => {
-      anchorRef.value?.scrollTo(href)
-    }
-    return {
-      anchorRef,
-      scrollTo
-    }
-  }
-})
+const anchorRef = ref<AnchorInst | null>(null)
+function scrollTo(href: string) {
+  anchorRef.value?.scrollTo(href)
+}
 </script>
 
 <template>

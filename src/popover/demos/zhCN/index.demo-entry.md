@@ -25,6 +25,7 @@ nested2-debug.vue
 nested3-debug.vue
 zindex-debug.vue
 center-arrow-debug.vue
+rtl-debug.vue
 ```
 
 ## API

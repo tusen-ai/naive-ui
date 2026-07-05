@@ -1,10 +1,9 @@
+import type { InjectionKey, Ref } from 'vue'
 import {
   getCurrentInstance,
   inject,
-  type InjectionKey,
   onBeforeUnmount,
   onMounted,
-  type Ref,
   watch
 } from 'vue'
 

@@ -2,8 +2,8 @@
   # Summary debug
 </markdown>
 
-<script lang="ts">
-import { defineComponent, h } from 'vue'
+<script lang="ts" setup>
+import { h } from 'vue'
 
 function createColumns() {
   return [
@@ -66,15 +66,9 @@ function createSummary() {
   ]
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      summary: createSummary,
-      data: createData(),
-      columns: createColumns()
-    }
-  }
-})
+const summary = createSummary
+const data = createData()
+const columns = createColumns()
 </script>
 
 <template>

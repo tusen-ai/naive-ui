@@ -1,9 +1,10 @@
+import type { ComputedRef, Ref } from 'vue'
 import type {
   Breakpoints,
   GlobalComponentConfig,
   RtlEnabledState
 } from '../config-provider/src/internal-interface'
-import { computed, type ComputedRef, inject, type Ref, shallowRef } from 'vue'
+import { computed, inject, shallowRef } from 'vue'
 import { configProviderInjectionKey } from '../config-provider/src/context'
 
 type UseConfigProps = Readonly<{
@@ -21,14 +22,14 @@ export default function useConfig(
     defaultBordered: true
   }
 ): {
-    inlineThemeDisabled: boolean | undefined
-    mergedRtlRef: Ref<RtlEnabledState | undefined> | undefined
-    mergedBorderedRef: ComputedRef<boolean>
-    mergedClsPrefixRef: Ref<string>
-    mergedBreakpointsRef: Ref<Breakpoints> | undefined
-    mergedComponentPropsRef: Ref<GlobalComponentConfig | undefined> | undefined
-    namespaceRef: ComputedRef<string | undefined>
-  } {
+  inlineThemeDisabled: boolean | undefined
+  mergedRtlRef: Ref<RtlEnabledState | undefined> | undefined
+  mergedBorderedRef: ComputedRef<boolean>
+  mergedClsPrefixRef: Ref<string>
+  mergedBreakpointsRef: Ref<Breakpoints> | undefined
+  mergedComponentPropsRef: Ref<GlobalComponentConfig | undefined> | undefined
+  namespaceRef: ComputedRef<string | undefined>
+} {
   const NConfigProvider = inject(configProviderInjectionKey, null)
   return {
     // NConfigProvider,

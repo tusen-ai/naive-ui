@@ -1,20 +1,20 @@
 <markdown>
-# Batch rendering
+# Batch Render
 
-Note: the `render-label` will take effect for group type labels, which can be set through `option.type`.
+Note: `render-label` works for group type label, which can be set in `option.type`.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DropdownOption } from 'naive-ui'
 import type { VNodeChild } from 'vue'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 import { NIcon } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 
 const options = [
   {
     type: 'group',
-    label: 'People and Some Food to Eat',
+    label: 'People & Food',
     key: 'main',
     children: [
       {
@@ -30,15 +30,15 @@ const options = [
         key: 'nick carraway'
       },
       {
-        label: 'food',
+        label: 'Food',
         key: 'food',
         children: [
           {
-            label: 'chicken',
+            label: 'Chicken',
             key: 'chicken'
           },
           {
-            label: 'beef',
+            label: 'Beef',
             key: 'beef'
           }
         ]
@@ -47,33 +47,27 @@ const options = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    return {
-      options,
-      renderDropdownLabel(option: DropdownOption) {
-        if (option.type === 'group') {
-          return option.label as VNodeChild
-        }
-        return h(
-          'a',
-          {
-            href: '',
-            target: '_blank'
-          },
-          {
-            default: () => option.label as VNodeChild
-          }
-        )
-      },
-      renderDropdownIcon() {
-        return h(NIcon, null, {
-          default: () => h(CashIcon)
-        })
-      }
-    }
+function renderDropdownLabel(option: DropdownOption) {
+  if (option.type === 'group') {
+    return option.label as VNodeChild
   }
-})
+  return h(
+    'a',
+    {
+      href: '',
+      target: '_blank'
+    },
+    {
+      default: () => option.label as VNodeChild
+    }
+  )
+}
+
+function renderDropdownIcon() {
+  return h(NIcon, null, {
+    default: () => h(CashIcon)
+  })
+}
 </script>
 
 <template>
@@ -84,6 +78,6 @@ export default defineComponent({
     :render-label="renderDropdownLabel"
     :render-icon="renderDropdownIcon"
   >
-    <n-button>Batch Render</n-button>
+    <n-button>Batch Rendered</n-button>
   </n-dropdown>
 </template>

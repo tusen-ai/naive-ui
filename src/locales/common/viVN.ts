@@ -122,6 +122,12 @@ const viVN: NLocale = {
     tipDownload: 'Tải về',
     tipClose: 'Đóng (Esc)',
     tipOriginalSize: 'Xem kích thước gốc'
+  },
+  Heatmap: {
+    less: 'ít',
+    more: 'nhiều',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

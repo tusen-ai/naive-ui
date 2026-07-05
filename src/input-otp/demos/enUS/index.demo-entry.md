@@ -45,3 +45,9 @@ pattern.vue
 | Name | Parameters | Type Alias | Description | Version |
 | --- | --- | --- | --- | --- |
 | default | `(props: InputProps & { index: number, ref: (inst: InputInst) => void })` | `InputOtpDefaultSlot` | Input area. | 2.41.1 |
+
+### InputOTP Methods
+
+| 名称 | 类型 | 说明 | 版本 |
+| --- | --- | --- | --- |
+| focusOnChar | `(charIndex: number) => void` | Focus on a certain input box. | 2.43.0 |

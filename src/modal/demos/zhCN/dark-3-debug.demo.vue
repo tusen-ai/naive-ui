@@ -2,10 +2,12 @@
 # Dark Debug 3
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DataTableColumns } from 'naive-ui'
 import { repeat } from 'seemly'
-import { defineComponent, h } from 'vue'
+import { computed, h, ref } from 'vue'
+
+const showModal = ref(false)
 
 const columns: DataTableColumns<{
   key: number
@@ -87,19 +89,8 @@ const data = repeat(46, undefined).map((_, index) => ({
   address: `London, Park Lane no. ${index}`
 }))
 
-export default defineComponent({
-  data() {
-    return {
-      showModal: false,
-      data,
-      columns
-    }
-  },
-  computed: {
-    pagination() {
-      return { pageSize: 10 }
-    }
-  }
+const pagination = computed(() => {
+  return { pageSize: 10 }
 })
 </script>
 

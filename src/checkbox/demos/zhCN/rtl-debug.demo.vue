@@ -2,19 +2,13 @@
 # Rtl Debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { unstableCheckboxRtl } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      value: ref(false),
-      rtlEnabled: ref(false),
-      rtlStyles: [unstableCheckboxRtl]
-    }
-  }
-})
+const value = ref(false)
+const rtlEnabled = ref(false)
+const rtlStyles = [unstableCheckboxRtl]
 </script>
 
 <template>

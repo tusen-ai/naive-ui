@@ -1,5 +1,6 @@
+import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
-import { commonLight, type ThemeCommonVars } from '../../_styles/common'
+import { commonLight } from '../../_styles/common'
 import { buttonLight } from '../../button/styles'
 import { popoverLight } from '../../popover/styles'
 

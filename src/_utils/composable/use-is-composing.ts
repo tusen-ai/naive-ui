@@ -1,4 +1,5 @@
-import { onBeforeMount, onBeforeUnmount, type Ref, ref } from 'vue'
+import type { Ref } from 'vue'
+import { onBeforeMount, onBeforeUnmount, ref } from 'vue'
 import { isBrowser } from '../env/is-browser'
 
 const isComposingRef = ref(false)

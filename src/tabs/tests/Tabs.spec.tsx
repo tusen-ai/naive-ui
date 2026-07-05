@@ -47,7 +47,7 @@ describe('n-tabs', () => {
   })
 
   it('should show AddIcon with `addable` `on-add` prop', async () => {
-    const onAdd = jest.fn()
+    const onAdd = vi.fn()
     const wrapper = mount(NTabs, {
       props: {
         type: 'card',
@@ -308,7 +308,7 @@ describe('n-tabs', () => {
   })
 
   it('should work with `on-close` prop', async () => {
-    const onClose = jest.fn()
+    const onClose = vi.fn()
     const wrapper = mount(NTabs, {
       props: {
         type: 'card',
@@ -352,6 +352,48 @@ describe('n-tabs', () => {
     expect(wrapper.find('.n-tabs-nav__prefix').text()).toBe('test-prefix')
     expect(wrapper.find('.n-tabs-nav__suffix').exists()).toBe(true)
     expect(wrapper.find('.n-tabs-nav__suffix').text()).toBe('test-suffix')
+  })
+
+  it('should only disable bar transition for the first nav resize', async () => {
+    const wrapper = mount(NTabs, {
+      props: {
+        defaultValue: '1'
+      },
+      slots: {
+        default: () => [
+          h(NTabPane, {
+            tab: '1',
+            name: '1'
+          }),
+          h(NTabPane, {
+            tab: '2',
+            name: '2'
+          })
+        ]
+      }
+    })
+    const barEl = wrapper.find('.n-tabs-bar').element as HTMLElement
+    using addSpy = vi.spyOn(barEl.classList, 'add')
+
+    ;(wrapper.vm as any).handleNavResize({
+      contentRect: {
+        width: 100,
+        height: 20
+      }
+    })
+    await sleep(80)
+    ;(wrapper.vm as any).handleNavResize({
+      contentRect: {
+        width: 120,
+        height: 20
+      }
+    })
+
+    expect(
+      addSpy.mock.calls.filter(([className]) => {
+        return className === 'transition-disabled'
+      })
+    ).toHaveLength(1)
   })
 
   it('should work with `tab-class` prop', () => {

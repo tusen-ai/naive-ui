@@ -1,12 +1,10 @@
 import type { TreeNode } from 'treemate'
+import type { PropType, Ref } from 'vue'
 import type { SelectGroupOption } from '../../../select/src/interface'
-import { defineComponent, h, inject, type PropType, type Ref } from 'vue'
+import type { RenderLabelImpl, RenderOptionImpl } from './interface'
+import { defineComponent, h, inject } from 'vue'
 import { render } from '../../../_utils'
-import {
-  internalSelectionMenuInjectionKey,
-  type RenderLabelImpl,
-  type RenderOptionImpl
-} from './interface'
+import { internalSelectionMenuInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'NBaseSelectGroupHeader',

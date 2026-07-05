@@ -124,6 +124,12 @@ const nlNL: NLocale = {
     tipClose: 'Sluiten (Esc)',
     // TODO: translation
     tipOriginalSize: 'Zoom to original size'
+  },
+  Heatmap: {
+    less: 'minder',
+    more: 'meer',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

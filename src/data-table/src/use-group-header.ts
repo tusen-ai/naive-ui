@@ -1,3 +1,4 @@
+import type { ComputedRef, CSSProperties } from 'vue'
 import type {
   ColumnKey,
   DataTableSetupProps,
@@ -7,7 +8,7 @@ import type {
   TableExpandColumn,
   TableSelectionColumn
 } from './interface'
-import { computed, type ComputedRef, type CSSProperties } from 'vue'
+import { computed } from 'vue'
 import { formatLength } from '../../_utils'
 import { createCustomWidthStyle, getColKey } from './utils'
 
@@ -34,13 +35,13 @@ function getRowsAndCols(
   columns: TableColumns,
   getResizableWidth: (key: ColumnKey) => number | undefined
 ): {
-    hasEllipsis: boolean
-    rows: RowItem[][]
-    cols: ColItem[]
-    dataRelatedCols: Array<
+  hasEllipsis: boolean
+  rows: RowItem[][]
+  cols: ColItem[]
+  dataRelatedCols: Array<
     TableSelectionColumn | TableBaseColumn | TableExpandColumn
-    >
-  } {
+  >
+} {
   const rows: RowItem[][] = []
   const cols: ColItem[] = []
   const dataRelatedCols: Array<
@@ -147,13 +148,13 @@ export function useGroupHeader(
   props: DataTableSetupProps,
   getResizableWidth: (key: ColumnKey) => number | undefined
 ): {
-    rowsRef: ComputedRef<RowItem[][]>
-    colsRef: ComputedRef<ColItem[]>
-    hasEllipsisRef: ComputedRef<boolean>
-    dataRelatedColsRef: ComputedRef<
-      Array<TableSelectionColumn | TableBaseColumn | TableExpandColumn>
-    >
-  } {
+  rowsRef: ComputedRef<RowItem[][]>
+  colsRef: ComputedRef<ColItem[]>
+  hasEllipsisRef: ComputedRef<boolean>
+  dataRelatedColsRef: ComputedRef<
+    Array<TableSelectionColumn | TableBaseColumn | TableExpandColumn>
+  >
+} {
   const rowsAndCols = computed(() =>
     getRowsAndCols(props.columns, getResizableWidth)
   )

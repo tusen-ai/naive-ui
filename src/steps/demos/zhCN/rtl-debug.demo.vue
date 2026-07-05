@@ -2,38 +2,33 @@
 # Rtl Debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { StepsProps } from 'naive-ui'
 import { MdArrowRoundBack, MdArrowRoundForward } from '@vicons/ionicons4'
 import { unstableStepsRtl } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  components: { MdArrowRoundBack, MdArrowRoundForward },
-  setup() {
-    const currentRef = ref<number | null>(1)
-    return {
-      rtlEnabled: ref(false),
-      rtlStyles: [unstableStepsRtl],
-      currentStatus: ref<StepsProps['status']>('process'),
-      current: currentRef,
-      next() {
-        if (currentRef.value === null)
-          currentRef.value = 1
-        else if (currentRef.value >= 4)
-          currentRef.value = null
-        else currentRef.value++
-      },
-      prev() {
-        if (currentRef.value === 0)
-          currentRef.value = null
-        else if (currentRef.value === null)
-          currentRef.value = 4
-        else currentRef.value--
-      }
-    }
-  }
-})
+const currentRef = ref<number | null>(1)
+const rtlEnabled = ref(false)
+const rtlStyles = [unstableStepsRtl]
+const currentStatus = ref<StepsProps['status']>('process')
+const current = currentRef
+
+function next() {
+  if (currentRef.value === null)
+    currentRef.value = 1
+  else if (currentRef.value >= 4)
+    currentRef.value = null
+  else currentRef.value++
+}
+
+function prev() {
+  if (currentRef.value === 0)
+    currentRef.value = null
+  else if (currentRef.value === null)
+    currentRef.value = 4
+  else currentRef.value--
+}
 </script>
 
 <template>

@@ -4,25 +4,16 @@
 Remeber to use `default-width` or `default-height` with `resizable`.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DrawerPlacement } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const activeRef = ref(false)
-    const placementRef = ref<DrawerPlacement>('right')
-    const activate = (place: DrawerPlacement) => {
-      activeRef.value = true
-      placementRef.value = place
-    }
-    return {
-      active: activeRef,
-      placement: placementRef,
-      activate
-    }
-  }
-})
+const active = ref(false)
+const placement = ref<DrawerPlacement>('right')
+function activate(place: DrawerPlacement) {
+  active.value = true
+  placement.value = place
+}
 </script>
 
 <template>

@@ -2,52 +2,41 @@
 # 稍微复杂的例子
 </markdown>
 
-<script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { computed, ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const loading = ref(false)
+const loading = ref(false)
 
-    const avatars = [
-      'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
-      'https://avatars.githubusercontent.com/u/20943608?s=60&v=4',
-      'https://avatars.githubusercontent.com/u/46394163?s=60&v=4',
-      'https://avatars.githubusercontent.com/u/39197136?s=60&v=4',
-      'https://avatars.githubusercontent.com/u/19239641?s=60&v=4'
-    ]
+const avatars = [
+  'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
+  'https://avatars.githubusercontent.com/u/20943608?s=60&v=4',
+  'https://avatars.githubusercontent.com/u/46394163?s=60&v=4',
+  'https://avatars.githubusercontent.com/u/39197136?s=60&v=4',
+  'https://avatars.githubusercontent.com/u/19239641?s=60&v=4'
+]
 
-    const messages = ['星期一', '星期二', '星期三', '星期四', '星期五']
+const messages = ['星期一', '星期二', '星期三', '星期四', '星期五']
 
-    const mock = (i: number) => ({
-      key: `${i}`,
-      value: i,
-      avatar: avatars[i % avatars.length],
-      message: messages[Math.floor(Math.random() * messages.length)]
-    })
-
-    const items = ref(Array.from({ length: 10 }, (_, i) => mock(i)))
-    const noMore = computed(() => items.value.length > 16)
-
-    const handleLoad = async () => {
-      if (loading.value || noMore.value)
-        return
-      loading.value = true
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      items.value.push(
-        ...[mock(items.value.length), mock(items.value.length + 1)]
-      )
-      loading.value = false
-    }
-
-    return {
-      items,
-      noMore,
-      loading,
-      handleLoad
-    }
+function mock(i: number) {
+  return {
+    key: `${i}`,
+    value: i,
+    avatar: avatars[i % avatars.length],
+    message: messages[Math.floor(Math.random() * messages.length)]
   }
-})
+}
+
+const items = ref(Array.from({ length: 10 }, (_, i) => mock(i)))
+const noMore = computed(() => items.value.length > 16)
+
+async function handleLoad() {
+  if (loading.value || noMore.value)
+    return
+  loading.value = true
+  await new Promise(resolve => setTimeout(resolve, 1000))
+  items.value.push(...[mock(items.value.length), mock(items.value.length + 1)])
+  loading.value = false
+}
 </script>
 
 <template>

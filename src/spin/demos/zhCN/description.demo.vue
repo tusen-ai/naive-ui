@@ -4,16 +4,10 @@
 你可以在圈圈的下面放一点文字信息。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      show: ref(false)
-    }
-  }
-})
+const show = ref(false)
 </script>
 
 <template>

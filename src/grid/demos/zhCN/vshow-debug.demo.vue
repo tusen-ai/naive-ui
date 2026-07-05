@@ -2,30 +2,22 @@
 # Vshow debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { reactive } from 'vue'
 
-export default {
-  setup() {
-    // 表单值，默认选择框的值为null
-    const formValue = reactive({ select: null })
-    // 选择框选项
-    const selectOptions = [
-      {
-        label: '值为1',
-        value: 1
-      },
-      {
-        label: '值为2',
-        value: 2
-      }
-    ]
-    return {
-      formValue,
-      selectOptions
-    }
+// 表单值，默认选择框的值为null
+const formValue = reactive({ select: null })
+// 选择框选项
+const selectOptions = [
+  {
+    label: '值为1',
+    value: 1
+  },
+  {
+    label: '值为2',
+    value: 2
   }
-}
+]
 </script>
 
 <template>

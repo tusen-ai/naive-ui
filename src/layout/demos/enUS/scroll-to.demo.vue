@@ -2,20 +2,12 @@
 # Scroll to
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { LayoutInst, LayoutSiderInst } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const siderRef = ref<LayoutSiderInst | null>(null)
-    const contentRef = ref<LayoutInst | null>(null)
-    return {
-      siderRef,
-      contentRef
-    }
-  }
-})
+const siderRef = ref<LayoutSiderInst | null>(null)
+const contentRef = ref<LayoutInst | null>(null)
 </script>
 
 <template>

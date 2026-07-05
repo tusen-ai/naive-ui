@@ -6,3 +6,4 @@ export type {
   AutoCompleteInst,
   AutoCompleteOption
 } from './src/interface'
+export type * from './src/public-types'

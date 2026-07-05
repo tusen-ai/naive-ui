@@ -2,32 +2,30 @@
 # 事件
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    return {
-      handleFocus() {
-        message.info('[Event focus]')
-      },
-      handleBlur() {
-        message.info('[Event blur]')
-      },
-      handleChange(v: string) {
-        message.info(`[Event change]: ${v}`)
-      },
-      handleKeyUp() {
-        message.info('[Event keyup]')
-      },
-      handleInput(v: string) {
-        message.info(`[Event input]: ${v}`)
-      }
-    }
-  }
-})
+const message = useMessage()
+
+function handleFocus() {
+  message.info('[Event focus]')
+}
+
+function handleBlur() {
+  message.info('[Event blur]')
+}
+
+function handleChange(v: string) {
+  message.info(`[Event change]: ${v}`)
+}
+
+function handleKeyUp() {
+  message.info('[Event keyup]')
+}
+
+function handleInput(v: string) {
+  message.info(`[Event input]: ${v}`)
+}
 </script>
 
 <template>

@@ -2,18 +2,12 @@
 # Rtl Debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { unstableSpaceRtl } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      rtlEnabled: ref(false),
-      rtlStyles: [unstableSpaceRtl]
-    }
-  }
-})
+const rtlEnabled = ref(false)
+const rtlStyles = [unstableSpaceRtl]
 </script>
 
 <template>

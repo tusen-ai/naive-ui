@@ -1,7 +1,7 @@
 <markdown>
 # 配合 Popover 的特殊情况
 
-原生的 disabled 的 button 不会触发鼠标，因此 `n-popover` 无法监听到相关的事件。如果你需要在这种情况下使用，可以使用 `tag` 属性来调整 button 的行为。
+disabled 的原生 button 不会触发部分鼠标事件，因此 `n-popover` 无法监听到相关的事件。如果你需要在这种情况下使用，可以使用 `tag` 属性来调整 button 的行为。
 </markdown>
 
 <template>

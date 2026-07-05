@@ -1,7 +1,7 @@
 <markdown>
 # Better render performance
 
-In most case, normal ellipsis is fast enough. However, if you have a huge amount ellipsis to render, you may use `n-performant-ellipsis` in place of `n-ellpisis`. It has better render performance with some caveats: Inner component may be unmounted and remouted again. Use it carefully.
+In most case, normal ellipsis is fast enough. However, if you have a huge amount ellipsis to render, you may use `n-performant-ellipsis` in place of `n-ellipsis`. It has better render performance with some caveats: Inner component may be unmounted and remouted again. Use it carefully.
 </markdown>
 
 <template>

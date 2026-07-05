@@ -1,10 +1,10 @@
 import type { Ref, SlotsType } from 'vue'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { AnchorLinkSlots } from './public-types'
 import { useMemo } from 'vooks'
 import { defineComponent, h, inject, ref, toRef, watch } from 'vue'
 import {
   createInjectionKey,
-  type ExtractPublicPropTypes,
   getTitleAttribute,
   resolveSlot
 } from '../../_utils'
@@ -75,9 +75,7 @@ export default defineComponent({
             title={getTitleAttribute(props.title)}
             onClick={handleClick}
           >
-            {{
-              default: () => resolveSlot(slots.title, () => [props.title])
-            }}
+            {resolveSlot(slots.title, () => [props.title])}
           </a>
           {slots.default?.()}
         </div>

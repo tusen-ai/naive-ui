@@ -1,12 +1,6 @@
+import type { PropType } from 'vue'
 import { useFalseUntilTruthy } from 'vooks'
-import {
-  defineComponent,
-  h,
-  type PropType,
-  toRef,
-  vShow,
-  withDirectives
-} from 'vue'
+import { defineComponent, h, toRef, vShow, withDirectives } from 'vue'
 import { NFadeInExpandTransition } from '../../_internal'
 
 export default defineComponent({
@@ -38,7 +32,7 @@ export default defineComponent({
             const contentNode = (
               <div class={`${clsPrefix}-collapse-item__content-wrapper`}>
                 <div class={`${clsPrefix}-collapse-item__content-inner`}>
-                  {this.$slots}
+                  {this.$slots.default?.()}
                 </div>
               </div>
             )

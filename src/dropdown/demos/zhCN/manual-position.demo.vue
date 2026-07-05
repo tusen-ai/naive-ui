@@ -1,12 +1,12 @@
 <markdown>
 # 手动定位
 
-注意：手动定位时，`trigger` 属性必须为 `'manual'`
+注意：手动定位时，`trigger` 属性必须为 `'manual'`。此外，你需要监听 `update:show` 回调来更新 `show` 值，以确保 `Esc` 键等快捷操作能正常关闭菜单。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import { defineComponent, nextTick, ref } from 'vue'
+import { nextTick, ref } from 'vue'
 
 const options = [
   {
@@ -55,39 +55,35 @@ const options = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
+const message = useMessage()
 
-    const showDropdownRef = ref(false)
-    const xRef = ref(0)
-    const yRef = ref(0)
+const showDropdown = ref(false)
+const x = ref(0)
+const y = ref(0)
 
-    return {
-      options,
-      showDropdown: showDropdownRef,
-      x: xRef,
-      y: yRef,
-      handleSelect(key: string | number) {
-        showDropdownRef.value = false
-        message.info(String(key))
-      },
-      handleContextMenu(e: MouseEvent) {
-        e.preventDefault()
-        showDropdownRef.value = false
-        nextTick().then(() => {
-          showDropdownRef.value = true
-          xRef.value = e.clientX
-          yRef.value = e.clientY
-        })
-      },
-      onClickoutside() {
-        message.info('clickoutside')
-        showDropdownRef.value = false
-      }
-    }
-  }
-})
+function handleSelect(key: string | number) {
+  showDropdown.value = false
+  message.info(String(key))
+}
+
+function handleContextMenu(e: MouseEvent) {
+  e.preventDefault()
+  showDropdown.value = false
+  nextTick().then(() => {
+    showDropdown.value = true
+    x.value = e.clientX
+    y.value = e.clientY
+  })
+}
+
+function onClickoutside() {
+  message.info('clickoutside')
+  showDropdown.value = false
+}
+
+function handleUpdateShow(show: boolean) {
+  showDropdown.value = show
+}
 </script>
 
 <template>
@@ -105,6 +101,7 @@ export default defineComponent({
     :options="options"
     :show="showDropdown"
     :on-clickoutside="onClickoutside"
+    @update:show="handleUpdateShow"
     @select="handleSelect"
   />
 </template>

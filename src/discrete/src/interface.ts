@@ -21,22 +21,22 @@ export interface DiscreteApiOptions {
   modalProviderProps?: MaybeRef<ModalProviderProps>
 }
 
-export type DiscreteApiType =
-  | 'message'
-  | 'notification'
-  | 'loadingBar'
-  | 'dialog'
-  | 'modal'
+export type DiscreteApiType
+  = | 'message'
+    | 'notification'
+    | 'loadingBar'
+    | 'dialog'
+    | 'modal'
 
 export type DiscreteApi<T extends DiscreteApiType = DiscreteApiType> = {
   unmount: () => void
   app: App
-} & ('message' extends T ? { message: MessageApi } : Record<string, unknown>) &
-('notification' extends T
+} & ('message' extends T ? { message: MessageApi } : Record<string, unknown>)
+& ('notification' extends T
   ? { notification: NotificationApi }
-  : Record<string, unknown>) &
-  ('dialog' extends T ? { dialog: DialogApi } : Record<string, unknown>) &
-  ('loadingBar' extends T
-    ? { loadingBar: LoadingBarApi }
-    : Record<string, unknown>) &
-    ('modal' extends T ? { modal: ModalApi } : Record<string, unknown>)
+  : Record<string, unknown>)
+& ('dialog' extends T ? { dialog: DialogApi } : Record<string, unknown>)
+& ('loadingBar' extends T
+  ? { loadingBar: LoadingBarApi }
+  : Record<string, unknown>)
+& ('modal' extends T ? { modal: ModalApi } : Record<string, unknown>)

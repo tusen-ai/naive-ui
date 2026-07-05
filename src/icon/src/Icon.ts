@@ -1,19 +1,9 @@
+import type { Component, PropType } from 'vue'
+import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { IconTheme } from '../styles'
-import {
-  type Component,
-  computed,
-  defineComponent,
-  h,
-  mergeProps,
-  type PropType
-} from 'vue'
-import {
-  type ThemeProps,
-  useConfig,
-  useTheme,
-  useThemeClass
-} from '../../_mixins'
+import { computed, defineComponent, h, mergeProps } from 'vue'
+import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { formatLength, warn } from '../../_utils'
 import { iconLight } from '../styles'
 import style from './styles/index.cssr'
@@ -108,7 +98,7 @@ export const NIcon = defineComponent({
         ],
         style: [this.cssVars, this.mergedStyle]
       }),
-      component ? h(component) : this.$slots
+      component ? h(component) : this.$slots.default?.()
     )
   }
 })

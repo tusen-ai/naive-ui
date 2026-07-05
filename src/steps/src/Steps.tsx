@@ -1,17 +1,15 @@
+import type {
+  ExtractPropTypes,
+  PropType,
+  Ref,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { StepsTheme } from '../styles'
-import {
-  defineComponent,
-  type ExtractPropTypes,
-  h,
-  type PropType,
-  provide,
-  type Ref,
-  type SlotsType,
-  type VNode,
-  type VNodeChild
-} from 'vue'
+import { defineComponent, h, provide } from 'vue'
 import { useConfig, useRtl, useTheme } from '../../_mixins'
 import { createInjectionKey, flatten, getSlot } from '../../_utils'
 import { stepsLight } from '../styles'
@@ -43,6 +41,10 @@ export const stepsProps = {
     default: 'medium'
   },
   vertical: Boolean,
+  contentPlacement: {
+    type: String as PropType<'right' | 'bottom'>,
+    default: 'right'
+  },
   'onUpdate:current': [Function, Array] as PropType<
     MaybeArray<(current: number) => void>
   >,
@@ -101,7 +103,9 @@ export default defineComponent({
         class={[
           `${mergedClsPrefix}-steps`,
           this.rtlEnabled && `${mergedClsPrefix}-steps--rtl`,
-          this.vertical && `${mergedClsPrefix}-steps--vertical`
+          this.vertical && `${mergedClsPrefix}-steps--vertical`,
+          this.contentPlacement === 'bottom'
+          && `${mergedClsPrefix}-steps--content-bottom`
         ]}
       >
         {stepsWithIndex(flatten(getSlot(this)))}

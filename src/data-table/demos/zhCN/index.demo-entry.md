@@ -28,10 +28,11 @@ empty.vue
 border.vue
 size.vue
 row-props.vue
-merge-cell
-filter-and-sorter
+merge-cell.vue
+filter-and-sorter.vue
 pagination-behavior-on-filter.vue
-multiple-sorter
+multiple-sorter.vue
+custom-sorter.vue
 column-draggable.vue
 select.vue
 select-single.vue
@@ -40,16 +41,16 @@ group-header.vue
 controlled-page.vue
 controlled-filter.vue
 controlled-sorter.vue
-controlled-multiple-sorter
+controlled-multiple-sorter.vue
 fixed-header.vue
 fixed-header-column.vue
 summary.vue
 ellipsis.vue
 ellipsis-tooltip.vue
 expand.vue
-render-header
+render-header.vue
 custom-style.vue
-ajax-usage
+ajax-usage.vue
 virtual.vue
 virtual-x.vue
 custom-filter-menu.vue
@@ -57,20 +58,21 @@ tree.vue
 flex-height.vue
 striped.vue
 simple-editable.vue
-switchable-editable
+switchable-editable.vue
 context-menu.vue
 async-expand.vue
 render-cell.vue
 export-csv.vue
-fixed-column-debug
-fixed-column2-debug
-scroll-debug
-height-debug
+fixed-column-debug.vue
+fixed-column2-debug.vue
+scroll-debug.vue
+height-debug.vue
 keep-alive-debug.vue
 ellipsis-debug.vue
 custom-expand-icon-debug.vue
 expandable-debug.vue
 rtl-debug.vue
+empty-debug.vue
 ```
 
 ## API
@@ -116,7 +118,7 @@ rtl-debug.vue
 | single-column | `boolean` | `false` | 是否不设定行的分割线，当参数为`true`时，则单元格没有下边线 |  |
 | single-line | `boolean` | `true` | 是否不设定列的分割线，当参数值为 `true` 时，则单元格没有右边线 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 表格的尺寸 |  |
-| spin-props | `{ strokeWidth?: number, stroke?: string }` | `undefined` | 表格 spin 的属性 | 2.34.0 |
+| spin-props | `{ strokeWidth?: number, stroke?: string, scale?: number, radius?: number }` | `undefined` | 表格 spin 的属性 | 2.34.0 |
 | sticky-expanded-rows | `boolean` | `false` | 展开行是否不随表格横向滚动 | 2.32.2 |
 | striped | `boolean` | `false` | 是否使用斑马线条纹 |  |
 | summary | `DataTableCreateSummary` | `undefined` | 表格总结栏的数据，类型见 <n-a href="#DataTableCreateSummary-Type">DataTableCreateSummary Type</n-a> |  |
@@ -140,11 +142,11 @@ rtl-debug.vue
 | --- | --- | --- | --- | --- |
 | align | `'left' \| 'right' \| 'center'` | `'left'` | 列内的文本排列 |  |
 | allowExport | `boolean` | `true` | 这一列是否可以导出 | 2.40.0 |
-| titleAlign | `'left' \| 'right' \| 'center'` | `'null'` | 表头列对齐方式，若不设置该项，则使用列内的文本排列 | 2.34.4 |
 | cellProps | `(rowData: object, rowIndex: number) => object` | `undefined` | 该列单元格的 HTML 属性 | 2.27.0 |
 | children | `DataTableColumn[]` | `undefined` | 成组列头的子节点 |  |
 | className | `string` | `undefined` | 列的类名 |  |
 | colSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | 该列单元格的的 col span |  |
+| customNextSortOrder | `(order: 'descend' \| 'ascend' \| false) => 'descend' \| 'ascend' \| false` | `undefined` | 使用这个函数自定义下一个排序的状态 | 2.43.0 |
 | defaultFilterOptionValue | `string \| number \| null` | `null` | 非受控状态下默认的过滤器选项值（过滤器单选时生效） |  |
 | defaultFilterOptionValues | `Array<string \| number>` | `[]` | 非受控状态下默认的过滤器选项值（过滤器多选时生效） |  |
 | defaultSortOrder | `'descend' \| 'ascend' \| false` | `false` | 非受控状态下表格默认的排序方式 |  |
@@ -158,11 +160,10 @@ rtl-debug.vue
 | filterOptionValue | `string \| number \| null` | `undefined` | 受控状态下，当前激活的过滤器选项值。如果不做设定，这一列的过滤行为将是非受控的（过滤器单选时生效） |  |
 | filterOptionValues | `Array<string \| number> \| null` | `undefined` | 受控状态下，当前激活的过滤器选项值数组。如果不做设定，这一列的过滤行为将是非受控的（过滤器多选时生效） |  |
 | filterOptions | `Array<{ label: string, value: string \| number}>` | `undefined` | filter 的 options 数据 |  |
-| resizable | `boolean` | `undefined` | 列宽是否可以拖动 | 2.33.4 |
 | fixed | `'left \| 'right' \| false` | `false` | 该列是否需要 fixed |  |
 | key | `string \| number` | `undefined` | 这一列的 key，不可重复。 |  |
-| minWidth | `number \| string` | `undefined` | 列的最小宽度 | 2.28.3 |
 | maxWidth | `number \| string` | `undefined` | 列的最大宽度，仅在 `resizable` 为 `true` 的时候生效 | 2.33.4 |
+| minWidth | `number \| string` | `undefined` | 列的最小宽度 | 2.28.3 |
 | multiple | `boolean` | `true` | 是否开启多选，仅在 `type` 为 `'selection'` 的时候生效 | 2.31.0 |
 | options | `Array<'all' \| 'none' \| { label: string, key: string \| number, onSelect: (pageData: RowData[]) => void }>` | `undefined` | 自定义选择项的选项，只对 `type='selection'` 生效 |  |
 | render | `(rowData: object, rowIndex: number) => VNodeChild` | `undefined` | 渲染函数，渲染这一列的每一行的单元格 |  |
@@ -172,12 +173,14 @@ rtl-debug.vue
 | renderFilterMenu | `(actions: { hide: () => void }) => VNodeChild` | `undefined` | 渲染函数，渲染这一列的过滤器菜单 |  |
 | renderSorter | `(options: { order: 'descend' \| 'ascend' \| false }) => VNodeChild` | `undefined` | 渲染函数，渲染排序触发 | 2.24.2 |
 | renderSorterIcon | `(options: { order: 'descend' \| 'ascend' \| false }) => VNodeChild` | `undefined` | 渲染函数，渲染排序图标 | 2.24.2 |
+| resizable | `boolean` | `undefined` | 列宽是否可以拖动 | 2.33.4 |
 | rowSpan | `(rowData: object, rowIndex: number) => number` | `undefined` | 该列单元格的 row span |  |
 | sortOrder | `'descend' \| 'ascend' \| false` | `undefined` | 受控状态下表格的排序方式。如果多列都设定了有效值，那么只有第一个会生效 |  |
 | sorter | `boolean \| function \| 'default'` | `undefined` | 这一列的排序方法。如果设为 `'default'` 表格将会使用一个内置的排序函数；如果设为 `true`，表格将只会在这列展示一个排序图标，在异步的时候可能有用。其他情况下它工作的方式类似 `Array.sort` 的对比函数 |  |
-| tree | `boolean` | `false` | 是否在这一列展示树形数据的展开按钮 | 2.28.3 |
 | title | `string \| (() => VNodeChild)` | `undefined` | 列的 title 信息，可以是渲染函数 |  |
+| titleAlign | `'left' \| 'right' \| 'center'` | `'null'` | 表头列对齐方式，若不设置该项，则使用列内的文本排列 | 2.34.4 |
 | titleColSpan | `number` | `undefined` | title 列占据的列数 |  |
+| tree | `boolean` | `false` | 是否在这一列展示树形数据的展开按钮 | 2.28.3 |
 | type | `'selection' \| 'expand'` | `undefined` | 列的类型 |  |
 | width | `number \| string` | `undefined` | 列的宽度（在列固定时是**必需**的，并且需要为 `number` 类型） | 2.24.0（`string` 类型） |
 
@@ -230,10 +233,12 @@ type DataTableCreateSummary = (pageData: RowData[]) =>
 | clearFilters | `() => void` | 清空所有的 filter 状态 |  |
 | clearSorter | `() => void` | 清空所有的 sort 状态 |  |
 | downloadCsv | `(options?: { fileName?: string, keepOriginalData?: boolean }) => void` | 下载 CSV | 2.37.0 |
+| getCurrentPageData | `() => RowData[]` | 获取 filter、sorter 和 pagination 应用后的当前页行数据 | NEXT_VERSION |
+| getFilteredAndSortedData | `() => RowData[]` | 获取 filter 和 sorter 应用后的全部行数据，不含 pagination；`remote` 模式下仅基于当前 `data` 属性 | NEXT_VERSION |
 | filters | `(filters: DataTableFilterState \| null) => void` | 设定表格当前的过滤器 |  |
 | page | `(page: number) => void` | 手动设置 page |  |
-| scrollTo | `(options: { left?: number, top?: number, behavior?: ScrollBehavior }): void & (x: number, y: number) => void` | 滚动内容 | 2.30.4 |
-| sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | 设定表格的过滤状态 |  |
+| scrollTo | `DataTableScrollTo` | 滚动内容，类型见 <n-a href="#DataTableScrollTo-Type">DataTableScrollTo Type</n-a> | NEXT_VERSION |
+| sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | 设定表格的排序状态 |  |
 
 ### DataTable Slots
 
@@ -241,3 +246,19 @@ type DataTableCreateSummary = (pageData: RowData[]) =>
 | ------- | ---- | --------------------- | ------ |
 | empty   | `()` | 表格数据为空时的展示  |        |
 | loading | `()` | 表格 loading 时的展示 | 2.34.0 |
+
+#### DataTableScrollTo Type
+
+`scrollTo` 在开启 `virtual-scroll` 时会转发到虚拟列表，否则转发到内部滚动条。不同模式下可用的签名如下：
+
+| 签名 | 虚拟滚动 | 非虚拟滚动 |
+| --- | --- | --- |
+| `(x: number, y: number)` | 是 | 是 |
+| `{ left?, top?, behavior?, debounce? }` | 是 | 是 |
+| `{ position: 'top' \| 'bottom', behavior?, debounce? }` | 是 | 是 |
+| `{ index, behavior?, debounce? }` | 是 | 否 |
+| `{ key, behavior?, debounce? }` | 是 | 否 |
+| `{ el, behavior?, debounce? }` | 否 | 是 |
+| `{ index, elSize, behavior?, debounce? }` | 否 | 是 |
+
+开启 `virtual-scroll` 时，`scrollTo` 仍存在一些尚未完全处理好的边界情况。例如使用 `behavior: 'smooth'` 时，滚动效果可能存在一些问题，效果以实际情况为准。

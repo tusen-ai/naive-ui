@@ -4,7 +4,7 @@
 Use `inverted` to add contrast. You can set the prop on header, footer and sider. Usually used with menu.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { Component } from 'vue'
 import {
   BookOutline as BookIcon,
@@ -12,7 +12,7 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
 import { NIcon } from 'naive-ui'
-import { defineComponent, h, ref } from 'vue'
+import { h, ref } from 'vue'
 
 function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
@@ -93,14 +93,7 @@ const menuOptions = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    return {
-      inverted: ref(false),
-      menuOptions
-    }
-  }
-})
+const inverted = ref(false)
 </script>
 
 <template>

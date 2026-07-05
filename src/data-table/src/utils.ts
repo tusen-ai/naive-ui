@@ -11,7 +11,7 @@ import type {
   TableExpandColumn,
   TableSelectionColumn
 } from './interface'
-import type { DataTableGetCsvCell, DataTableGetCsvHeader } from './publicTypes'
+import type { DataTableGetCsvCell, DataTableGetCsvHeader } from './public-types'
 import { depx } from 'seemly'
 import { formatLength } from '../../_utils'
 
@@ -167,6 +167,9 @@ export function createNextSorter(
 ): SortState | null {
   if (column.sorter === undefined)
     return null
+
+  const { customNextSortOrder } = column
+
   if (currentSortState === null || currentSortState.columnKey !== column.key) {
     return {
       columnKey: column.key,
@@ -177,7 +180,7 @@ export function createNextSorter(
   else {
     return {
       ...currentSortState,
-      order: getNextOrderOf(currentSortState.order)
+      order: (customNextSortOrder || getNextOrderOf)(currentSortState.order)
     }
   }
 }

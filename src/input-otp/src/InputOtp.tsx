@@ -6,6 +6,7 @@ import type { FormValidationStatus } from '../../form/src/public-types'
 import type { InputOtpTheme } from '../styles/light'
 import type {
   InputOtpAllowInput,
+  InputOtpInst,
   InputOtpOnBlur,
   InputOtpOnFinish,
   InputOtpOnFocus,
@@ -69,8 +70,12 @@ export default defineComponent({
   props: inputOtpProps,
   slots: Object as SlotsType<InputOtpSlots>,
   setup(props) {
-    const { mergedClsPrefixRef, mergedRtlRef, inlineThemeDisabled }
-      = useConfig(props)
+    const {
+      mergedClsPrefixRef,
+      mergedRtlRef,
+      inlineThemeDisabled,
+      mergedComponentPropsRef
+    } = useConfig(props)
     const themeRef = useTheme(
       'InputOtp',
       '-input-otp',
@@ -82,7 +87,20 @@ export default defineComponent({
     const rtlEnabledRef = useRtl('InputOtp', mergedRtlRef, mergedClsPrefixRef)
 
     // form-item
-    const formItem = useFormItem(props)
+    const formItem = useFormItem(props, {
+      mergedSize: (NFormItem) => {
+        const { size } = props
+        if (size)
+          return size
+        const { mergedSize: formItemSize } = NFormItem || {}
+        if (formItemSize?.value)
+          return formItemSize.value as InputOtpSize
+        const configSize = mergedComponentPropsRef?.value?.InputOtp?.size
+        if (configSize)
+          return configSize
+        return 'medium'
+      }
+    })
     const { mergedSizeRef, mergedDisabledRef, mergedStatusRef } = formItem
 
     const cssVarsRef = computed(() => {
@@ -288,7 +306,39 @@ export default defineComponent({
       const currentValue = justifyValue(mergedValueRef.value)
       const currentValueAtIndex = currentValue[index]
       const diff = value.replace(currentValueAtIndex, '')
-      const char = diff[diff.length - 1] || value[value.length - 1] || ''
+      const text = diff || value
+
+      // Multi-character input (e.g. browser extension autofill)
+      if (text.length > 1) {
+        let startIndex = index
+        const allowInput = props.allowInput
+        let pasteApplied = false
+        let appendedText = ''
+        for (let i = 0; i < text.length; ++i) {
+          if (allowInput && !allowInput(text[i], startIndex, currentValue)) {
+            continue
+          }
+          pasteApplied = true
+          currentValue[startIndex] = text[i]
+          appendedText += text[i]
+          startIndex++
+          if (startIndex >= currentValue.length) {
+            break
+          }
+        }
+        if (pasteApplied) {
+          focusOnChar(Math.min(startIndex, props.length - 1))
+          doUpdateValue(currentValue, {
+            diff: appendedText,
+            index: startIndex,
+            source: 'input'
+          })
+        }
+        return
+      }
+
+      // Single character — original behavior
+      const char = text[text.length - 1] || ''
       const allowInput = props.allowInput
       if (allowInput && !allowInput(char, index, currentValue)) {
         return
@@ -308,6 +358,10 @@ export default defineComponent({
       }
     }
 
+    const exposedMethods: InputOtpInst = {
+      focusOnChar
+    }
+
     return {
       mergedTheme: themeRef,
       perItemValueArray: computed(() => justifyValue(mergedValueRef.value)),
@@ -320,7 +374,8 @@ export default defineComponent({
       cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
       themeClass: themeClassHandle?.themeClass,
       getTemplateEvents,
-      onRender: themeClassHandle?.onRender
+      onRender: themeClassHandle?.onRender,
+      ...exposedMethods
     }
   },
   render() {

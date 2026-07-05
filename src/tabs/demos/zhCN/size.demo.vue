@@ -4,16 +4,10 @@
 Tabs 可以有不同的尺寸。
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      size: ref<'small' | 'medium' | 'large'>('medium')
-    }
-  }
-})
+const size = ref<'small' | 'medium' | 'large'>('medium')
 </script>
 
 <template>

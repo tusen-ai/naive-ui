@@ -2,11 +2,16 @@
 # Placement
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { NotificationPlacement } from 'naive-ui'
-import type { PropType } from 'vue'
+import type { PropType, VNode } from 'vue'
 import { NButton, NSpace, useNotification } from 'naive-ui'
 import { defineComponent, h, ref } from 'vue'
+
+interface Item {
+  placement: NotificationPlacement
+  text: string
+}
 
 const PlacementButtons = defineComponent({
   props: {
@@ -14,61 +19,47 @@ const PlacementButtons = defineComponent({
       (placement: NotificationPlacement) => void
     >
   },
-  setup() {
+  setup(props) {
     const notification = useNotification()
-    const placementList = [
+    const placementList: Item[] = [
       { placement: 'top-left', text: 'Top left' },
       { placement: 'top-right', text: 'Top right' },
       { placement: 'bottom-left', text: 'Bottom left' },
       { placement: 'bottom-right', text: 'Bottom right' },
       { placement: 'bottom', text: 'Bottom' },
       { placement: 'top', text: 'Top' }
-    ] as const
-    return {
-      notification,
-      placementList
-    }
-  },
-  render() {
-    return h(NSpace, null, {
-      default: () =>
-        this.placementList.map(item =>
-          h(
-            NButton,
-            {
-              onClick: () => {
-                this.onPlacementChange?.(item.placement)
-                this.notification.info({
-                  title: item.placement,
-                  content: 'You can change the placement'
-                })
-              }
-            },
-            { default: () => item.text }
+    ]
+    return (): VNode =>
+      h(NSpace, null, {
+        default: () =>
+          placementList.map((item: Item) =>
+            h(
+              NButton,
+              {
+                onClick: () => {
+                  props.onPlacementChange?.(item.placement)
+                  notification.info({
+                    title: item.placement,
+                    content: 'You can change the placement'
+                  })
+                }
+              },
+              { default: () => item.text }
+            )
           )
-        )
-    })
+      })
   }
 })
 
-export default defineComponent({
-  components: {
-    PlacementButtons
-  },
-  setup() {
-    const placementRef = ref<NotificationPlacement>('top-right')
-    return {
-      placement: placementRef,
-      handlePlacementChange(val: NotificationPlacement) {
-        placementRef.value = val
-      }
-    }
-  }
-})
+const placementRef = ref<NotificationPlacement>('top-right')
+
+function handlePlacementChange(placement: NotificationPlacement) {
+  placementRef.value = placement
+}
 </script>
 
 <template>
-  <n-notification-provider :placement="placement">
-    <PlacementButtons @placement-change="handlePlacementChange" />
+  <n-notification-provider :placement="placementRef">
+    <PlacementButtons :on-placement-change="handlePlacementChange" />
   </n-notification-provider>
 </template>

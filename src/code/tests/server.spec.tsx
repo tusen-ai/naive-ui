@@ -3,7 +3,7 @@ import { renderToString } from '@vue/server-renderer'
 import hljs from 'highlight.js/lib/core'
 import javascript from 'highlight.js/lib/languages/javascript'
 /**
- * @jest-environment node
+ * @vitest-environment node
  */
 import { createSSRApp, h } from 'vue'
 import { NCode } from '../..'

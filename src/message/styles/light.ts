@@ -80,7 +80,8 @@ export function self(vars: ThemeCommonVars) {
     closeIconColorPressedLoading: closeIconColorPressed,
     loadingColor: primaryColor,
     lineHeight,
-    borderRadius
+    borderRadius,
+    border: '0'
   }
 }
 

@@ -4,20 +4,14 @@
 If you want to customize the transition effect, you can use `transition-props` and set `effect` to `custom`.
 </markdown>
 
-<script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { computed, ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const effectRef = ref<'slide' | 'fade' | 'card'>('slide')
-    const isCardRef = computed(() => effectRef.value === 'card')
-    return {
-      isCard: isCardRef,
-      myEffect: effectRef,
-      effects: ['slide', 'fade', 'card']
-    }
-  }
-})
+const effectRef = ref<'slide' | 'fade' | 'card'>('slide')
+const isCardRef = computed(() => effectRef.value === 'card')
+const isCard = isCardRef
+const myEffect = effectRef
+const effects = ['slide', 'fade', 'card']
 </script>
 
 <template>

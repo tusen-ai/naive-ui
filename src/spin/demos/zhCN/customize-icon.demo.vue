@@ -2,20 +2,11 @@
 # 自定义图标
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { Reload } from '@vicons/ionicons5'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  components: {
-    Reload
-  },
-  setup() {
-    return {
-      show: ref(false)
-    }
-  }
-})
+const show = ref(false)
 </script>
 
 <template>

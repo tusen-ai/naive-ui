@@ -2,23 +2,19 @@
 # Debug
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      handleUpdateValue1(v: number | null) {
-        console.log(v)
-      },
-      handleUpdateValue2(v: number | null) {
-        console.log(v)
-      },
-      value1: ref(null),
-      value2: ref(null)
-    }
-  }
-})
+function handleUpdateValue1(v: number | null) {
+  console.log(v)
+}
+
+function handleUpdateValue2(v: number | null) {
+  console.log(v)
+}
+
+const value1 = ref(null)
+const value2 = ref(null)
 </script>
 
 <template>

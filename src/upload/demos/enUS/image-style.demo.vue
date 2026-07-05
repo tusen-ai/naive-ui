@@ -4,62 +4,56 @@
 Thumbnails can be created using your own custom method via the `create-thumbnail-url` property.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { UploadFileInfo } from 'naive-ui'
 import { useMessage } from 'naive-ui'
-import { defineComponent, h, ref } from 'vue'
+import { h, ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    const fileListRef = ref<UploadFileInfo[]>([
-      {
-        id: 'a',
-        name: 'My Fault.png',
-        status: 'error'
-      },
-      {
-        id: 'b',
-        name: 'regular text.doc',
-        status: 'finished',
-        type: 'text/plain'
-      },
-      {
-        id: 'c',
-        name: 'image.png',
-        status: 'finished',
-        url: '__HTTP__://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
-      },
-      {
-        id: 'd',
-        name: 'Not Finished Yet.doc',
-        status: 'uploading',
-        percentage: 50
-      }
-    ])
-    return {
-      fileList: fileListRef,
-      createThumbnailUrl(file: File | null): Promise<string> | undefined {
-        if (!file)
-          return undefined
-        message.info(() => [
-          '`createThumbnailUrl` changes the thumbnail image of the uploaded file.',
-          h('br'),
-          'It will be 07akioni whatever you upload.',
-          file.name
-        ])
-        message.info(`${file.name}`)
-        return new Promise((resolve) => {
-          setTimeout(() => {
-            resolve(
-              '__HTTP__://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
-            )
-          }, 1000)
-        })
-      }
-    }
+const message = useMessage()
+const fileListRef = ref<UploadFileInfo[]>([
+  {
+    id: 'a',
+    name: 'My Fault.png',
+    status: 'error'
+  },
+  {
+    id: 'b',
+    name: 'regular text.doc',
+    status: 'finished',
+    type: 'text/plain'
+  },
+  {
+    id: 'c',
+    name: 'image.png',
+    status: 'finished',
+    url: '__HTTP__://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+  },
+  {
+    id: 'd',
+    name: 'Not Finished Yet.doc',
+    status: 'uploading',
+    percentage: 50
   }
-})
+])
+
+const fileList = fileListRef
+
+function createThumbnailUrl(file: File | null): Promise<string> | undefined {
+  if (!file)
+    return undefined
+  message.info(() => [
+    '`createThumbnailUrl` changes the thumbnail image of the uploaded file.',
+    h('br'),
+    'It will be 07akioni whatever you upload.',
+    file.name
+  ])
+  message.info(`${file.name}`)
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve('__HTTP__://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg')
+    }, 1000)
+  })
+}
 </script>
 
 <template>

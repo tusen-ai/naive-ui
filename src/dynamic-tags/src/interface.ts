@@ -1,6 +1,6 @@
-export type OnUpdateValue =
-  | ((value: string[]) => void)
-  | ((value: DynamicTagsOption[]) => void)
+export type OnUpdateValue
+  = | ((value: string[]) => void)
+    | ((value: DynamicTagsOption[]) => void)
 
 export type OnUpdateValueImpl = (
   value: Array<string | DynamicTagsOption>

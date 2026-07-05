@@ -4,16 +4,10 @@
 You can customize the content to jump to (press `Enter` to jump quickly).
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      page: ref(2)
-    }
-  }
-})
+const page = ref(2)
 </script>
 
 <template>

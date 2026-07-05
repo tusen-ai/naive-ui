@@ -4,75 +4,64 @@
 Make arrow a bit different.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import Flash16Regular from '@vicons/fluent/Flash16Regular'
 import FlashCheckmark16Regular from '@vicons/fluent/FlashCheckmark16Regular'
-import MdSearch from '@vicons/ionicons4/MdSearch'
-import { defineComponent, ref } from 'vue'
+import { MdSearch } from '@vicons/ionicons4'
+import { ref } from 'vue'
 
-export default defineComponent({
-  components: {
-    MdSearch,
-    Flash16Regular,
-    FlashCheckmark16Regular
+const show1 = ref(false)
+const show2 = ref(false)
+const options = [
+  {
+    label: 'Drive My Car',
+    value: 'song1'
   },
-  setup() {
-    return {
-      show1: ref(false),
-      show2: ref(false),
-      options: [
-        {
-          label: 'Drive My Car',
-          value: 'song1'
-        },
-        {
-          label: 'Norwegian Wood',
-          value: 'song2'
-        },
-        {
-          label: 'You Won\'t See',
-          value: 'song3'
-        },
-        {
-          label: 'Nowhere Man',
-          value: 'song4'
-        },
-        {
-          label: 'Think For Yourself',
-          value: 'song5'
-        },
-        {
-          label: 'The Word',
-          value: 'song6'
-        },
-        {
-          label: 'Michelle',
-          value: 'song7'
-        },
-        {
-          label: 'What goes on',
-          value: 'song8'
-        },
-        {
-          label: 'Girl',
-          value: 'song9'
-        },
-        {
-          label: 'I\'m looking through you',
-          value: 'song10'
-        },
-        {
-          label: 'In My Life',
-          value: 'song11'
-        },
-        {
-          label: 'Wait',
-          value: 'song12'
-        }
-      ]
-    }
+  {
+    label: 'Norwegian Wood',
+    value: 'song2'
+  },
+  {
+    label: 'You Won\'t See',
+    value: 'song3'
+  },
+  {
+    label: 'Nowhere Man',
+    value: 'song4'
+  },
+  {
+    label: 'Think For Yourself',
+    value: 'song5'
+  },
+  {
+    label: 'The Word',
+    value: 'song6'
+  },
+  {
+    label: 'Michelle',
+    value: 'song7'
+  },
+  {
+    label: 'What goes on',
+    value: 'song8'
+  },
+  {
+    label: 'Girl',
+    value: 'song9'
+  },
+  {
+    label: 'I\'m looking through you',
+    value: 'song10'
+  },
+  {
+    label: 'In My Life',
+    value: 'song11'
+  },
+  {
+    label: 'Wait',
+    value: 'song12'
   }
-})
+]
 </script>
 
 <template>

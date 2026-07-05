@@ -1,4 +1,5 @@
-import { onMounted, onUnmounted, type Ref, ref } from 'vue'
+import type { Ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { isBrowser } from '../env/is-browser'
 
 export interface IWindowLocation {

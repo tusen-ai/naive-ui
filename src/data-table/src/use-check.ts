@@ -1,4 +1,5 @@
 import type { TreeMate } from 'treemate'
+import type { ComputedRef } from 'vue'
 import type {
   DataTableSetupProps,
   InternalRowData,
@@ -7,7 +8,7 @@ import type {
   TableSelectionColumn,
   TmNode
 } from './interface'
-import { computed, type ComputedRef, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { call } from '../../_utils'
 
 export function useCheck(

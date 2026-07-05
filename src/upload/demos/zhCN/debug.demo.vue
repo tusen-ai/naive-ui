@@ -2,29 +2,40 @@
 # Debug
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
+import type { UploadCustomRequestOptions, UploadFileInfo } from 'naive-ui'
 import { ArchiveOutline as ArchiveIcon } from '@vicons/ionicons5'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  components: {
-    ArchiveIcon
-  },
-  setup() {
-    return {
-      handleUpdateList(...args: unknown[]) {
-        console.log(...args)
-      },
-      multiple: ref(false),
-      directory: ref(false),
-      directoryDnd: ref(false),
-      directoryDndUndefined: ref(true)
-    }
-  }
-})
+const files = ref<UploadFileInfo[]>([])
+
+async function customRequest(uploadFile: UploadCustomRequestOptions) {
+  // 去掉注释可以正常显示所有文件 error 状态
+  // await new Promise((resolve) => setTimeout(() => { resolve(1) }, 3000))
+  uploadFile.onError()
+}
+
+function handleUpdateList(...args: unknown[]): void {
+  console.log(...args)
+}
+
+const multiple = ref(false)
+const directory = ref(false)
+const directoryDnd = ref(false)
+const directoryDndUndefined = ref(true)
 </script>
 
 <template>
+  <n-p> Issue #7366 复现：多文件同步 onError 只有最后一个文件显示红色 </n-p>
+  <n-upload v-model:file-list="files" multiple :custom-request="customRequest">
+    <n-button>上传文件（多选）</n-button>
+  </n-upload>
+  <n-p depth="3" style="margin-top: 12px">
+    files: {{ files }}
+  </n-p>
+
+  <n-divider />
+
   Retry
   <n-upload action="http://fake-api">
     <n-button>Upload</n-button>

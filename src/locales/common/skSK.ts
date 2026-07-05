@@ -122,6 +122,12 @@ const skSK: NLocale = {
     tipDownload: 'Sťahovať',
     tipClose: 'Zavrieť (Esc)',
     tipOriginalSize: 'Priblížiť na pôvodnú veľkosť'
+  },
+  Heatmap: {
+    less: 'menej',
+    more: 'viac',
+    monthFormat: 'MMM',
+    weekdayFormat: 'eeeeee'
   }
 }
 

@@ -4,12 +4,12 @@
 注意：`render-label` 会对 group 类型的标签生效，可通过 `option.type` 进行设置。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DropdownOption } from 'naive-ui'
 import type { VNodeChild } from 'vue'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 import { NIcon } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 
 const options = [
   {
@@ -47,33 +47,27 @@ const options = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    return {
-      options,
-      renderDropdownLabel(option: DropdownOption) {
-        if (option.type === 'group') {
-          return option.label as VNodeChild
-        }
-        return h(
-          'a',
-          {
-            href: '',
-            target: '_blank'
-          },
-          {
-            default: () => option.label as VNodeChild
-          }
-        )
-      },
-      renderDropdownIcon() {
-        return h(NIcon, null, {
-          default: () => h(CashIcon)
-        })
-      }
-    }
+function renderDropdownLabel(option: DropdownOption) {
+  if (option.type === 'group') {
+    return option.label as VNodeChild
   }
-})
+  return h(
+    'a',
+    {
+      href: '',
+      target: '_blank'
+    },
+    {
+      default: () => option.label as VNodeChild
+    }
+  )
+}
+
+function renderDropdownIcon() {
+  return h(NIcon, null, {
+    default: () => h(CashIcon)
+  })
+}
 </script>
 
 <template>

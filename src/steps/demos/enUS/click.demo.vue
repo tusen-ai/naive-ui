@@ -4,17 +4,11 @@
 If `@update:current` is set, you can switch step by click.
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const currentRef = ref<number | undefined>(1)
-    return {
-      current: currentRef
-    }
-  }
-})
+const currentRef = ref<number | undefined>(1)
+const current = currentRef
 </script>
 
 <template>

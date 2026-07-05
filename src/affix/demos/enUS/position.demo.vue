@@ -4,17 +4,10 @@
 Affix can be `absolute` or `fixed` positioned. You may need some css tricks to make it works as following. By default position is set to `fixed`, because in most cases scrolled element is `document`.
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const containerRef = ref<HTMLElement | undefined>(undefined)
-    return {
-      containerRef
-    }
-  }
-})
+const containerRef = ref<HTMLElement | undefined>(undefined)
 </script>
 
 <template>

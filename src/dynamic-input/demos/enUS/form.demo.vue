@@ -4,32 +4,28 @@
 `n-dynamic-input` itself cannot be verified. If you need to verify the input of `n-dynamic-input`, you can pass `n-form-item` in the custom content to complete the verification. Here is a complete example.
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      dynamicInputRule: {
-        trigger: 'input',
-        validator(rule: unknown, value: string) {
-          if (value.length >= 5)
-            return new Error('Input up to 4 characters')
-          return true
-        }
-      },
-      model: ref({
-        dynamicInputValue: [{ value: '', name: '' }]
-      }),
-      onCreate() {
-        return {
-          name: '',
-          value: ''
-        }
-      }
-    }
+const dynamicInputRule = {
+  trigger: 'input',
+  validator(rule: unknown, value: string) {
+    if (value.length >= 5)
+      return new Error('Input up to 4 characters')
+    return true
   }
+}
+
+const model = ref({
+  dynamicInputValue: [{ value: '', name: '' }]
 })
+
+function onCreate() {
+  return {
+    name: '',
+    value: ''
+  }
+}
 </script>
 
 <template>

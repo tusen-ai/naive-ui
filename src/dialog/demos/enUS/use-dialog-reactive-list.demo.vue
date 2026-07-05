@@ -4,17 +4,10 @@
 You can use `useDialogReactiveList` to access all dialog reactive inside `n-dialog-provider`.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { useDialogReactiveList } from 'naive-ui'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      dialogReactiveList: useDialogReactiveList()
-    }
-  }
-})
+const dialogReactiveList = useDialogReactiveList()
 </script>
 
 <template>

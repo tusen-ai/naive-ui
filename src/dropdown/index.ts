@@ -8,3 +8,4 @@ export type {
   DropdownOption,
   DropdownRenderOption
 } from './src/interface'
+export type * from './src/public-types'

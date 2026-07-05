@@ -1,13 +1,8 @@
-import {
-  defineComponent,
-  h,
-  type HTMLAttributes,
-  inject,
-  type PropType,
-  ref
-} from 'vue'
+import type { HTMLAttributes, PropType } from 'vue'
+import type { TmNode } from './interface'
+import { defineComponent, h, inject, ref } from 'vue'
 import { render } from '../../_utils'
-import { type TmNode, treeInjectionKey } from './interface'
+import { treeInjectionKey } from './interface'
 
 export default defineComponent({
   name: 'TreeNodeContent',
@@ -19,7 +14,7 @@ export default defineComponent({
     disabled: Boolean,
     checked: Boolean,
     selected: Boolean,
-    onClick: Function as PropType<(e: MouseEvent) => void>,
+    onClick: Function as PropType<(e: PointerEvent) => void>,
     onDragstart: Function as PropType<(e: DragEvent) => void>,
     tmNode: {
       type: Object as PropType<TmNode>,
@@ -31,12 +26,12 @@ export default defineComponent({
     const { renderLabelRef, renderPrefixRef, renderSuffixRef, labelFieldRef }
       = inject(treeInjectionKey)!
     const selfRef = ref<HTMLElement | null>(null)
-    function doClick(e: MouseEvent): void {
+    function doClick(e: PointerEvent): void {
       const { onClick } = props
       if (onClick)
         onClick(e)
     }
-    function handleClick(e: MouseEvent): void {
+    function handleClick(e: PointerEvent): void {
       doClick(e)
     }
     return {

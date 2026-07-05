@@ -1,11 +1,8 @@
+import type { PropType } from 'vue'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { Span } from './interface'
-import { computed, defineComponent, h, inject, type PropType } from 'vue'
-import {
-  type ExtractPublicPropTypes,
-  formatLength,
-  keysOf,
-  throwError
-} from '../../_utils'
+import { computed, defineComponent, h, inject } from 'vue'
+import { formatLength, keysOf, throwError } from '../../_utils'
 import { rowInjectionKey } from './Row'
 
 export const colProps = {
@@ -75,7 +72,7 @@ export default defineComponent({
           padding: stylePadding
         }}
       >
-        {gutter ? <div>{$slots}</div> : $slots}
+        {gutter ? <div>{$slots.default?.()}</div> : $slots.default?.()}
       </div>
     )
   }

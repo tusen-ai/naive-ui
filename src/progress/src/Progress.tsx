@@ -1,15 +1,11 @@
+import type { CSSProperties, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
+import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ProgressTheme } from '../styles'
 import type { ProgressGradient, ProgressStatus } from './public-types'
-import {
-  computed,
-  type CSSProperties,
-  defineComponent,
-  h,
-  type PropType
-} from 'vue'
+import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import { createKey, type ExtractPublicPropTypes } from '../../_utils'
+import { createKey } from '../../_utils'
 import { progressLight } from '../styles'
 import Circle from './Circle'
 import Line from './Line'
@@ -221,7 +217,7 @@ export default defineComponent({
             gapOffsetDegree={gapOffsetDegree}
             unit={unit}
           >
-            {$slots}
+            {{ ...$slots }}
           </Circle>
         ) : type === 'line' ? (
           <Line
@@ -240,7 +236,7 @@ export default defineComponent({
             railBorderRadius={borderRadius}
             height={height}
           >
-            {$slots}
+            {{ ...$slots }}
           </Line>
         ) : type === 'multiple-circle' ? (
           <MultipleCircle
@@ -254,7 +250,7 @@ export default defineComponent({
             showIndicator={showIndicator}
             circleGap={circleGap}
           >
-            {$slots}
+            {{ ...$slots }}
           </MultipleCircle>
         ) : null}
       </div>

@@ -1,10 +1,12 @@
-import type { VueWrapper } from '@vue/test-utils/dist/vueWrapper'
+import type { VueWrapper } from '@vue/test-utils'
+import type { ComponentPublicInstance, VNodeChild } from 'vue'
+import type { DropdownProps } from '../index'
 import type { DropdownMixedOption } from '../src/interface'
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 import { mount } from '@vue/test-utils'
-import { type ComponentPublicInstance, h, nextTick, type VNodeChild } from 'vue'
+import { h, nextTick } from 'vue'
 import { NIcon } from '../../icon'
-import { type DropdownProps, NDropdown } from '../index'
+import { NDropdown } from '../index'
 
 const pendingOptionClassName
   = 'n-dropdown-option-body n-dropdown-option-body--pending'
@@ -122,7 +124,7 @@ describe('n-dropdown', () => {
   })
 
   it('keyboard event', async () => {
-    const onSelect = jest.fn()
+    const onSelect = vi.fn()
     let wrapper = mountDropdown({ onSelect })
 
     let triggerNodeWrapper = wrapper.find('span')
@@ -177,7 +179,7 @@ describe('n-dropdown', () => {
   })
 
   it('option mouse event', async () => {
-    const onSelect = jest.fn()
+    const onSelect = vi.fn()
     const wrapper = mountDropdown({ onSelect })
 
     const triggerNodeWrapper = wrapper.find('span')
@@ -215,7 +217,7 @@ describe('n-dropdown', () => {
   })
 
   it('dropdown disabled', async () => {
-    const onSelect = jest.fn()
+    const onSelect = vi.fn()
     const wrapper = mountDropdown({ onSelect })
 
     const triggerNodeWrapper = wrapper.find('span')
@@ -239,7 +241,7 @@ describe('n-dropdown', () => {
     const mousedownEvent = new MouseEvent('mousedown', { bubbles: true })
     const mouseupEvent = new MouseEvent('mouseup', { bubbles: true })
 
-    const onClickoutside = jest.fn()
+    const onClickoutside = vi.fn()
     const wrapper = mountDropdown({ onClickoutside })
 
     const triggerNodeWrapper = wrapper.find('span')

@@ -4,71 +4,72 @@
 This example is just a joke.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { UploadFileInfo } from 'naive-ui'
 import { useMessage } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const message = useMessage()
-    const fileListRef = ref<UploadFileInfo[]>([
-      {
-        id: 'url-test',
-        name: 'URL Test',
-        url: '__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f',
-        status: 'finished'
-      },
-      {
-        id: 'text-message',
-        name: 'Your text messages',
-        status: 'error'
-      },
-      {
-        id: 'notification',
-        name: 'You notifications',
-        status: 'finished'
-      },
-      {
-        id: 'contact',
-        name: 'You contact info',
-        status: 'finished'
-      }
-    ])
-    return {
-      fileList: fileListRef,
-      handleUploadChange(data: { fileList: UploadFileInfo[] }) {
-        fileListRef.value = data.fileList
-      },
-      handleRemove(data: { file: UploadFileInfo, fileList: UploadFileInfo[] }) {
-        if (data.file.id === 'text-message') {
-          message.info('Oops... It\'s now uploaded. Okay, delete it.')
-        }
-        else if (data.file.id === 'notification') {
-          message.error('No, this is useful for us. Removal not allowed.')
-          return false
-        }
-        else if (data.file.id === 'contact') {
-          message.loading(
-            'Don\' know whether it is useful for us, let me ask the server',
-            {
-              duration: 4000
-            }
-          )
-          return new Promise((resolve) => {
-            setTimeout(() => {
-              message.error('Oh no, they said you can\'t delete it too!')
-              resolve(false)
-            }, 4000)
-          })
-        }
-      },
-      handleFileListChange() {
-        message.info('Yes, file-list changed.')
-      }
-    }
+const message = useMessage()
+const fileListRef = ref<UploadFileInfo[]>([
+  {
+    id: 'url-test',
+    name: 'URL Test',
+    url: '__HTTP__://www.mocky.io/v2/5e4bafc63100007100d8b70f',
+    status: 'finished'
+  },
+  {
+    id: 'text-message',
+    name: 'Your text messages',
+    status: 'error'
+  },
+  {
+    id: 'notification',
+    name: 'You notifications',
+    status: 'finished'
+  },
+  {
+    id: 'contact',
+    name: 'You contact info',
+    status: 'finished'
   }
-})
+])
+
+const fileList = fileListRef
+
+function handleUploadChange(data: { fileList: UploadFileInfo[] }) {
+  fileListRef.value = data.fileList
+}
+
+function handleRemove(data: {
+  file: UploadFileInfo
+  fileList: UploadFileInfo[]
+}) {
+  if (data.file.id === 'text-message') {
+    message.info('Oops... It\'s now uploaded. Okay, delete it.')
+  }
+  else if (data.file.id === 'notification') {
+    message.error('No, this is useful for us. Removal not allowed.')
+    return false
+  }
+  else if (data.file.id === 'contact') {
+    message.loading(
+      'Don\' know whether it is useful for us, let me ask the server',
+      {
+        duration: 4000
+      }
+    )
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        message.error('Oh no, they said you can\'t delete it too!')
+        resolve(false)
+      }, 4000)
+    })
+  }
+}
+
+function handleFileListChange() {
+  message.info('Yes, file-list changed.')
+}
 </script>
 
 <template>

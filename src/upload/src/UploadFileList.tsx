@@ -1,11 +1,5 @@
-import {
-  computed,
-  type CSSProperties,
-  defineComponent,
-  h,
-  inject,
-  type VNode
-} from 'vue'
+import type { CSSProperties, VNode } from 'vue'
+import { computed, defineComponent, h, inject } from 'vue'
 import { NFadeInExpandTransition } from '../../_internal'
 import { throwError } from '../../_utils'
 import { NImageGroup } from '../../image'
@@ -85,9 +79,9 @@ export default defineComponent({
         >
           {renderUploadFileList()}
           {showTriggerRef.value
-          && !maxReachedRef.value
-          && isImageCardTypeRef.value && (
-            <NUploadTrigger>{slots}</NUploadTrigger>
+            && !maxReachedRef.value
+            && isImageCardTypeRef.value && (
+            <NUploadTrigger>{{ ...slots }}</NUploadTrigger>
           )}
         </div>
       )

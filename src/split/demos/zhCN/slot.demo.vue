@@ -2,15 +2,8 @@
 # 插槽
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { SwapHorizontal as SwapHorizontalIcon } from '@vicons/ionicons5'
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  components: {
-    SwapHorizontalIcon
-  }
-})
 </script>
 
 <template>

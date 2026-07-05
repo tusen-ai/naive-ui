@@ -1,9 +1,10 @@
 import type { ExtractPublicPropTypes } from '../../_utils'
+import type { OnBeforeLeaveImpl } from './interface'
 import { computed, defineComponent, Fragment, h, inject, mergeProps } from 'vue'
 import { NBaseClose, NBaseIcon } from '../../_internal'
 import { AddIcon } from '../../_internal/icons'
 import { omit, render } from '../../_utils'
-import { type OnBeforeLeaveImpl, tabsInjectionKey } from './interface'
+import { tabsInjectionKey } from './interface'
 import { tabPaneProps } from './TabPane'
 
 export const tabProps = {

@@ -4,18 +4,12 @@
 Whether to switch the carousel by pressing the key, it is only valid when the focus is on Dots.
 </markdown>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const directionRef = ref<'horizontal' | 'vertical'>('horizontal')
-    return {
-      direction: directionRef,
-      directions: ['horizontal', 'vertical']
-    }
-  }
-})
+const directionRef = ref<'horizontal' | 'vertical'>('horizontal')
+const direction = directionRef
+const directions = ['horizontal', 'vertical']
 </script>
 
 <template>

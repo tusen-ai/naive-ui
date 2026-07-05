@@ -29,7 +29,7 @@ export default defineComponent({
             && `${mergedClsPrefix}-upload-dragger--disabled`
           ]}
         >
-          {slots}
+          {slots.default?.()}
         </div>
       )
     }

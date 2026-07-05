@@ -2,28 +2,20 @@
 # Using katex options
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import katex from 'katex'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const equation = `\\f\\relax{x} = \\int_{-\\infty}^\\infty
+const equation = `\\f\\relax{x} = \\int_{-\\infty}^\\infty
     \\f\\hat\\xi\\,e^{2 \\pi i \\xi x}
     \\,d\\xi`
-    return {
-      katex,
-      katexOptions: {
-        displayMode: true,
-        fleqn: true,
-        macros: {
-          '\\f': '#1f(#2)'
-        }
-      },
-      equation
-    }
+
+const katexOptions = {
+  displayMode: true,
+  fleqn: true,
+  macros: {
+    '\\f': '#1f(#2)'
   }
-})
+}
 </script>
 
 <template>

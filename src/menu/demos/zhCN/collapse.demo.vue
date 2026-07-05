@@ -4,7 +4,7 @@
 可以让垂直菜单随着边栏压缩。使用 `collapsed` 属性控制菜单状态。必需设定 `collapsed-width` 来确保菜单正常显示。除此之外还有一些其他和压缩有关的属性：`icon-size`、`collapsed-icon-size`。详细信息参考页面底下的 API 文档。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { MenuOption } from 'naive-ui'
 import type { Component } from 'vue'
 import {
@@ -13,7 +13,7 @@ import {
   WineOutline as WineIcon
 } from '@vicons/ionicons5'
 import { NIcon } from 'naive-ui'
-import { defineComponent, h, ref } from 'vue'
+import { h, ref } from 'vue'
 
 function renderIcon(icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })
@@ -94,15 +94,8 @@ const menuOptions: MenuOption[] = [
   }
 ]
 
-export default defineComponent({
-  setup() {
-    return {
-      activeKey: ref<string | null>(null),
-      collapsed: ref(true),
-      menuOptions
-    }
-  }
-})
+const activeKey = ref<string | null>(null)
+const collapsed = ref(true)
 </script>
 
 <template>

@@ -1,4 +1,5 @@
-import { defineComponent, h, type PropType, toRef } from 'vue'
+import type { PropType } from 'vue'
+import { defineComponent, h, toRef } from 'vue'
 import { useStyle } from '../../../_mixins'
 import { NBaseIcon } from '../../icon'
 import { CloseIcon } from '../../icons'

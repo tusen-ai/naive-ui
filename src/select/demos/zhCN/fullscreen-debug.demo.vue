@@ -2,18 +2,10 @@
 # Fullscreen debug
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup() {
-    return {
-      fullscreen: () => {
-        document.getElementById('fs')?.requestFullscreen()
-      }
-    }
-  }
-})
+<script lang="ts" setup>
+function fullscreen() {
+  document.getElementById('fs')?.requestFullscreen()
+}
 </script>
 
 <template>

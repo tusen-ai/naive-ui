@@ -4,21 +4,14 @@
 欢乐豆太多的时候容易数不清有几位。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { NumberAnimationInst } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    const numberAnimationInstRef = ref<NumberAnimationInst | null>(null)
-    return {
-      numberAnimationInstRef,
-      handleClick() {
-        numberAnimationInstRef.value?.play()
-      }
-    }
-  }
-})
+const numberAnimationInstRef = ref<NumberAnimationInst | null>(null)
+function handleClick() {
+  numberAnimationInstRef.value?.play()
+}
 </script>
 
 <template>

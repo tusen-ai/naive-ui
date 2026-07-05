@@ -19,7 +19,7 @@ describe('n-tag', () => {
   })
 
   it('should be clickable', () => {
-    const onClick = jest.fn()
+    const onClick = vi.fn()
     const wrapper = mount(NTag, {
       props: {
         onClick
@@ -27,7 +27,7 @@ describe('n-tag', () => {
     })
 
     wrapper.trigger('click')
-    expect(onClick).toBeCalled()
+    expect(onClick).toHaveBeenCalled()
   })
 
   it('should be `checkable` prop', async () => {
@@ -45,7 +45,7 @@ describe('n-tag', () => {
   })
 
   it('should work with `on-update:checked` prop', () => {
-    const onChecked = jest.fn()
+    const onChecked = vi.fn()
     const wrapper = mount(NTag, {
       props: {
         checkable: true,
@@ -55,12 +55,12 @@ describe('n-tag', () => {
     })
 
     wrapper.trigger('click')
-    expect(onChecked).toBeCalled()
-    expect(onChecked).toBeCalledTimes(2)
+    expect(onChecked).toHaveBeenCalled()
+    expect(onChecked).toHaveBeenCalledTimes(2)
   })
 
   it('should work with `closable` `on-close` prop', () => {
-    const onClose = jest.fn()
+    const onClose = vi.fn()
     const wrapper = mount(NTag, {
       props: {
         closable: true,
@@ -70,11 +70,11 @@ describe('n-tag', () => {
 
     expect(wrapper.find('.n-tag__close').exists()).toBe(true)
     wrapper.find('.n-tag__close').trigger('click')
-    expect(onClose).toBeCalled()
+    expect(onClose).toHaveBeenCalled()
   })
 
   it('should work with `disabled` prop', async () => {
-    const onClose = jest.fn()
+    const onClose = vi.fn()
     const wrapper = mount(NTag, {
       props: {
         disabled: true,
@@ -85,7 +85,7 @@ describe('n-tag', () => {
 
     expect(wrapper.find('.n-tag').classes()).toContain('n-tag--disabled')
     wrapper.find('.n-tag__close').trigger('click')
-    expect(onClose).not.toBeCalled()
+    expect(onClose).not.toHaveBeenCalled()
   })
 
   it('should work with `round` prop', () => {

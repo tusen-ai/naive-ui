@@ -4,19 +4,12 @@
 设置 `n-config-provider` 内部组件的主题。
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { GlobalTheme } from 'naive-ui'
 import { darkTheme } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  setup() {
-    return {
-      darkTheme,
-      theme: ref<GlobalTheme | null>(null)
-    }
-  }
-})
+const theme = ref<GlobalTheme | null>(null)
 </script>
 
 <template>

@@ -4,9 +4,9 @@
 Rows can be selectable by making first column's type as `selection`.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { DataTableColumns, DataTableRowKey } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 interface RowData {
   key: number
@@ -44,30 +44,25 @@ const data = Array.from({ length: 46 }).map((_, index) => ({
   address: `London, Park Lane no. ${index}`
 }))
 
-export default defineComponent({
-  setup() {
-    const checkedRowKeysRef = ref<DataTableRowKey[]>([])
+const checkedRowKeysRef = ref<DataTableRowKey[]>([])
+const columns = createColumns()
+const pagination = {
+  pageSize: 5
+}
 
-    return {
-      data,
-      columns: createColumns(),
-      checkedRowKeys: checkedRowKeysRef,
-      pagination: {
-        pageSize: 5
-      },
-      rowKey: (row: RowData) => row.address,
-      handleCheck(rowKeys: DataTableRowKey[]) {
-        checkedRowKeysRef.value = rowKeys
-      }
-    }
-  }
-})
+function rowKey(row: RowData) {
+  return row.address
+}
+
+function handleCheck(rowKeys: DataTableRowKey[]) {
+  checkedRowKeysRef.value = rowKeys
+}
 </script>
 
 <template>
   <n-p>
-    You have selected {{ checkedRowKeys.length }} row{{
-      checkedRowKeys.length < 2 ? '' : 's'
+    You have selected {{ checkedRowKeysRef.length }} row{{
+      checkedRowKeysRef.length < 2 ? '' : 's'
     }}.
   </n-p>
 

@@ -4,21 +4,13 @@
 code 可以在溢出时自动换行。
 </markdown>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  setup() {
-    return {
-      code: `
+<script lang="ts" setup>
+const code = `
 function padEnd(string, length, chars) {
   const strLength = length ? stringSize(string) : 0
   return (length && strLength < length)? (string + createPadding(length - strLength, chars)): (string || '')
 }
       `
-    }
-  }
-})
 </script>
 
 <template>

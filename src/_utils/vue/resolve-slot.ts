@@ -1,11 +1,5 @@
-import {
-  Comment,
-  Fragment,
-  isVNode,
-  type Slot,
-  type VNodeArrayChildren,
-  type VNodeChild
-} from 'vue'
+import type { Slot, VNodeArrayChildren, VNodeChild } from 'vue'
+import { Comment, Fragment, isVNode } from 'vue'
 
 export function ensureValidVNode(
   vnodes: VNodeArrayChildren

@@ -1,10 +1,16 @@
 import { mount } from '@vue/test-utils'
-import { sleep } from 'seemly'
 import { h, nextTick } from 'vue'
 import { NIcon } from '../../icon'
 import { NMention } from '../index'
 
 describe('n-mention', () => {
+  beforeEach(() => {
+    vi.useFakeTimers()
+  })
+  afterEach(() => {
+    vi.clearAllTimers()
+    vi.useRealTimers()
+  })
   const options = [
     {
       label: '07akioni',
@@ -39,7 +45,7 @@ describe('n-mention', () => {
 
     wrapper.find('input').element.focus()
     await wrapper.find('input').setValue('@')
-    await sleep(150)
+    await vi.advanceTimersByTimeAsync(150)
     expect(document.querySelector('.n-mention-menu')).not.toEqual(null)
     expect(document.querySelectorAll('.n-base-select-option').length).toBe(4)
     wrapper.unmount()
@@ -113,7 +119,7 @@ describe('n-mention', () => {
 
     wrapper.find('input').element.focus()
     await wrapper.find('input').setValue('@')
-    await sleep(150)
+    await vi.advanceTimersByTimeAsync(150)
     expect(document.querySelector('.n-base-select-menu__loading')).not.toEqual(
       null
     )
@@ -128,7 +134,7 @@ describe('n-mention', () => {
 
     wrapper.find('input').element.focus()
     await wrapper.find('input').setValue('@')
-    await sleep(150)
+    await vi.advanceTimersByTimeAsync(150)
     expect(document.querySelector('.n-base-select-menu__loading')).not.toEqual(
       null
     )
@@ -143,14 +149,14 @@ describe('n-mention', () => {
 
     wrapper.find('input').element.focus()
     await wrapper.find('input').setValue('#')
-    await sleep(150)
+    await vi.advanceTimersByTimeAsync(150)
     expect(document.querySelector('.n-mention-menu')).not.toEqual(null)
     expect(document.querySelectorAll('.n-base-select-option').length).toBe(4)
     wrapper.unmount()
   })
 
   it('should work with `on-update:value` prop', async () => {
-    const onUpdate = jest.fn()
+    const onUpdate = vi.fn()
     const wrapper = mount(NMention, {
       attachTo: document.body,
       props: { options, 'on-update:value': onUpdate }
@@ -158,13 +164,13 @@ describe('n-mention', () => {
 
     wrapper.find('input').element.focus()
     await wrapper.find('input').setValue('@')
-    await sleep(150)
+    await vi.advanceTimersByTimeAsync(150)
     expect(onUpdate).toHaveBeenCalled()
     wrapper.unmount()
   })
 
   it('should work with `on-focus` prop', async () => {
-    const onFocus = jest.fn()
+    const onFocus = vi.fn()
     const wrapper = mount(NMention, {
       attachTo: document.body,
       props: { options, 'on-focus': onFocus }
@@ -177,7 +183,7 @@ describe('n-mention', () => {
 
   // Test with problems
   // it('should work with `on-search` prop', async () => {
-  //   const onSearch = jest.fn()
+  //   const onSearch = vi.fn()
   //   const wrapper = mount(NMention, {
   //     attachTo: document.body,
   //     props: { options, 'on-search': onSearch, type: 'text' }
@@ -190,7 +196,7 @@ describe('n-mention', () => {
   // })
 
   it('should work with `on-blur` prop', async () => {
-    const onBlur = jest.fn()
+    const onBlur = vi.fn()
     const wrapper = mount(NMention, {
       attachTo: document.body,
       props: { options, 'on-blur': onBlur }

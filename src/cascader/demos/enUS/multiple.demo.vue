@@ -2,9 +2,9 @@
 # Multiple
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import type { CascaderOption } from 'naive-ui'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 
 function getOptions(depth = 3, iterator = 1, prefix = '') {
   const length = 12
@@ -37,24 +37,19 @@ function getOptions(depth = 3, iterator = 1, prefix = '') {
   return options
 }
 
-export default defineComponent({
-  setup() {
-    return {
-      checkStrategyIsChild: ref(true),
-      cascade: ref(true),
-      showPath: ref(true),
-      hoverTrigger: ref(false),
-      value: ref(null),
-      filterable: ref(false),
-      responsiveMaxTagCount: ref(true),
-      clearFilterAfterSelect: ref(true),
-      options: getOptions(),
-      handleUpdateValue(value: string[], options: CascaderOption[]) {
-        console.log(value, options)
-      }
-    }
-  }
-})
+const checkStrategyIsChild = ref(true)
+const cascade = ref(true)
+const showPath = ref(true)
+const hoverTrigger = ref(false)
+const value = ref(null)
+const filterable = ref(false)
+const responsiveMaxTagCount = ref(true)
+const clearFilterAfterSelect = ref(true)
+const options = getOptions()
+
+function handleUpdateValue(value: string[], options: CascaderOption[]) {
+  console.log(value, options)
+}
 </script>
 
 <template>

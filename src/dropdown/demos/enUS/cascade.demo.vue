@@ -1,13 +1,13 @@
 <markdown>
 # Cascade
 
-Dropdown options can be cascaded.
+Dropdown can be cascaded.
 </markdown>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 import { NIcon, useMessage } from 'naive-ui'
-import { defineComponent, h } from 'vue'
+import { h } from 'vue'
 
 const options = [
   {
@@ -62,17 +62,10 @@ const options = [
   }
 ]
 
-export default defineComponent({
-  data() {
-    const message = useMessage()
-    return {
-      options,
-      handleSelect(key: string | number) {
-        message.info(String(key))
-      }
-    }
-  }
-})
+const message = useMessage()
+function handleSelect(key: string | number) {
+  message.info(String(key))
+}
 </script>
 
 <template>
@@ -82,6 +75,6 @@ export default defineComponent({
     trigger="click"
     @select="handleSelect"
   >
-    <n-button>The Great Gatsby characters</n-button>
+    <n-button>People & Food</n-button>
   </n-dropdown>
 </template>
