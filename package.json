@@ -1,7 +1,7 @@
 {
   "name": "naive-ui",
   "version": "2.44.1",
-  "packageManager": "pnpm@10.29.2",
+  "packageManager": "pnpm@11.10.0",
   "description": "A Vue 3 Component Library. Fairly Complete, Theme Customizable, Uses TypeScript, Fast",
   "author": "07akioni",
   "license": "MIT",
@@ -147,23 +147,6 @@
     "vue-jsx-vapor": "^3.2.9",
     "vue-router": "^4.5.1",
     "vue-tsc": "^3.0.7"
-  },
-  "pnpm": {
-    "overrides": {
-      "cssstyle": "5.2.1",
-      "vite": "^8.0.10"
-    },
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "@babel/core",
-        "postcss",
-        "rollup",
-        "webpack"
-      ]
-    },
-    "ignoredBuiltDependencies": [
-      "esbuild"
-    ]
   },
   "lint-staged": {
     "*.js": [
