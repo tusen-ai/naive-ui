@@ -48,9 +48,8 @@ export default defineComponent({
       mergedClsPrefix: string,
       type: 'start' | 'end'
     ): VNode => {
-      const { handleColItemClick } = useCalendarRef
-      // TODO
-      const disabled = false
+      const { mergedIsDateDisabled, handleColItemClick } = useCalendarRef
+      const disabled = mergedIsDateDisabled(item.ts)
       return (
         <div
           data-n-date
