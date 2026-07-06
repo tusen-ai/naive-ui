@@ -1,12 +1,36 @@
-import type { Code, Root, RootContent } from 'mdast'
+import type { Code, Heading, Root, RootContent } from 'mdast'
 import type { Transformer } from 'unified'
 import fs from 'node:fs'
 import path from 'node:path'
+import { visit } from 'unist-util-visit'
 import { createBaseProcessor } from '../parser'
 
 const mdParser = createBaseProcessor()
 
-export function remarkExpandDemos(): Transformer<Root, Root> {
+export interface RemarkExpandDemosOptions {
+  onWarn?: (message: string, error?: unknown) => void
+  strict?: boolean
+}
+
+function resolveDemoFileName(filename: string): string {
+  if (filename.endsWith('.demo.vue'))
+    return filename
+  if (filename.endsWith('.vue'))
+    return filename.replace(/\.vue$/, '.demo.vue')
+  return `${filename}.demo.vue`
+}
+
+function shiftHeadings(tree: Root, depthOffset: number): void {
+  visit(tree, 'heading', (node: Heading) => {
+    node.depth = Math.min(6, node.depth + depthOffset) as Heading['depth']
+  })
+}
+
+export function remarkExpandDemos(
+  options: RemarkExpandDemosOptions = {}
+): Transformer<Root, Root> {
+  const { onWarn, strict = false } = options
+
   return async (tree, file) => {
     const sourceFilePath = (file.data.sourceFilePath as string) || ''
     const sourceDir = path.dirname(sourceFilePath)
@@ -27,7 +51,7 @@ export function remarkExpandDemos(): Transformer<Root, Root> {
           if (filename.includes('debug'))
             continue
 
-          const demoFileName = filename.replace(/\.vue$/, '.demo.vue')
+          const demoFileName = resolveDemoFileName(filename)
           const demoFilePath = path.join(sourceDir, demoFileName)
 
           try {
@@ -39,6 +63,7 @@ export function remarkExpandDemos(): Transformer<Root, Root> {
             const mdPart = demoContent.match(/<markdown>([\s\S]*?)<\/markdown>/)
             if (mdPart) {
               const mdTree = mdParser.parse(mdPart[1].trim())
+              shiftHeadings(mdTree, 2)
               replacement.push(...mdTree.children)
             }
 
@@ -55,10 +80,10 @@ export function remarkExpandDemos(): Transformer<Root, Root> {
             }
           }
           catch (e) {
-            console.warn(
-              `[remark-expand-demos] Failed to read ${demoFilePath}`,
-              e
-            )
+            const message = `[remark-expand-demos] Failed to read ${demoFilePath}`
+            if (strict)
+              throw new Error(message, { cause: e })
+            onWarn?.(message, e)
           }
         }
         return { index: i, replacement }

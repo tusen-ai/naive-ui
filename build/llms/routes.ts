@@ -1,14 +1,22 @@
 import type { SgNode } from '@ast-grep/napi'
-import type { Category, Locale, RouteEntries, RouteEntry } from './types'
+import type {
+  Category,
+  Locale,
+  RouteEntries,
+  RouteEntry,
+  RouteManifest,
+  SkippedRouteEntry
+} from './types'
 import fs from 'node:fs'
 import path from 'node:path'
-import { Lang, parse } from '@ast-grep/napi'
+import { Lang, parse as parseAst } from '@ast-grep/napi'
+import { parse as parseSfc } from '@vue/compiler-sfc'
 import { SKIP_ROUTES } from './constants'
 
-async function getRoutes(projectRoot: string): Promise<RouteEntry[]> {
+async function getRouteManifest(projectRoot: string): Promise<RouteManifest> {
   const routesPath = path.resolve(projectRoot, 'demo/routes/routes.js')
   const code = await fs.promises.readFile(routesPath, 'utf-8')
-  const root = parse(Lang.JavaScript, code).root()
+  const root = parseAst(Lang.JavaScript, code).root()
 
   const routeArrays: RouteEntries[] = [
     { name: 'enDocRoutes', category: 'docs', locale: 'en-US' },
@@ -18,6 +26,7 @@ async function getRoutes(projectRoot: string): Promise<RouteEntry[]> {
   ]
 
   const entries: RouteEntry[] = []
+  const skippedRoutes: SkippedRouteEntry[] = []
 
   for (const { name, category, locale } of routeArrays) {
     const exportNode = root.find({
@@ -32,8 +41,9 @@ async function getRoutes(projectRoot: string): Promise<RouteEntry[]> {
 
     for (const match of matches) {
       const entry = parseRouteNode(match, projectRoot, category, locale)
-      if (entry)
+      if (entry) {
         entries.push(entry)
+      }
     }
   }
 
@@ -42,11 +52,21 @@ async function getRoutes(projectRoot: string): Promise<RouteEntry[]> {
       if (!route.filePath.endsWith('.vue'))
         return route
       const mdPath = await extractMdPath(route.filePath)
-      return mdPath ? { ...route, filePath: mdPath } : null
+      if (mdPath)
+        return { ...route, filePath: mdPath }
+      skippedRoutes.push({
+        ...route,
+        reason: 'Vue route does not import a markdown file'
+      })
+      return null
     })
   ).then(results => results.filter((r): r is RouteEntry => r !== null))
 
-  return routes
+  return { routes, skippedRoutes }
+}
+
+async function getRoutes(projectRoot: string): Promise<RouteEntry[]> {
+  return (await getRouteManifest(projectRoot)).routes
 }
 
 function parseRouteNode(
@@ -76,23 +96,68 @@ async function extractMdPath(vuePath: string): Promise<string | null> {
   try {
     await fs.promises.access(vuePath)
     const content = await fs.promises.readFile(vuePath, 'utf-8')
+    const { descriptor } = parseSfc(content, { filename: vuePath })
+    const scripts = [
+      descriptor.script?.content,
+      descriptor.scriptSetup?.content
+    ].filter((code): code is string => Boolean(code))
 
-    const root = parse(Lang.JavaScript, content).root()
-    const importNode = root.find({
-      rule: { pattern: 'import $NAME from $SOURCE' }
-    })
-    if (!importNode)
-      return null
+    for (const script of scripts) {
+      const source = extractMarkdownImportSource(script)
+      if (source)
+        return path.resolve(path.dirname(vuePath), source)
+    }
 
-    const source = importNode.getMatch('SOURCE')?.text().slice(1, -1)
-    if (!source?.endsWith('.md'))
-      return null
-
-    return path.resolve(path.dirname(vuePath), source)
+    return null
   }
   catch {
     return null
   }
+}
+
+function extractMarkdownImportSource(code: string): string | null {
+  try {
+    const root = parseAst(Lang.JavaScript, code).root()
+    const importNodes = root.findAll({
+      rule: { pattern: 'import $NAME from $SOURCE' }
+    })
+
+    for (const importNode of importNodes) {
+      const source = importNode.getMatch('SOURCE')?.text().slice(1, -1)
+      if (source?.endsWith('.md'))
+        return source
+    }
+  }
+  catch {
+    // Vue SFCs in the docs are expected to use simple static imports. If the
+    // parser rejects future script syntax, fall through to the conservative
+    // import-source scan below instead of dropping the whole route.
+  }
+
+  const match = code.match(/\bimport\s+[^'"]+\s+from\s+['"]([^'"]+\.md)['"]/)
+  return match?.[1] ?? null
+}
+
+function findRoute(
+  routes: RouteEntry[],
+  locale: Locale,
+  category: Category,
+  slug: string
+): RouteEntry | null {
+  const entry = routes.find(
+    r =>
+      r.routePath === slug && r.locale === locale && r.category === category
+  )
+  return entry ?? null
+}
+
+async function resolveRoute(
+  projectRoot: string,
+  locale: Locale,
+  category: Category,
+  slug: string
+): Promise<RouteEntry | null> {
+  return findRoute(await getRoutes(projectRoot), locale, category, slug)
 }
 
 async function resolveSourceMd(
@@ -101,13 +166,18 @@ async function resolveSourceMd(
   category: Category,
   slug: string
 ): Promise<string | null> {
-  const routes = await getRoutes(projectRoot)
-
-  const entry = routes.find(
-    r =>
-      r.routePath === slug && r.locale === locale && r.category === category
+  return (
+    (await resolveRoute(projectRoot, locale, category, slug))?.filePath ?? null
   )
-  return entry?.filePath ?? null
 }
 
-export { extractMdPath, getRoutes, parseRouteNode, resolveSourceMd }
+export {
+  extractMarkdownImportSource,
+  extractMdPath,
+  findRoute,
+  getRouteManifest,
+  getRoutes,
+  parseRouteNode,
+  resolveRoute,
+  resolveSourceMd
+}

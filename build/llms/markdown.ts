@@ -4,7 +4,15 @@ import remarkStringify from 'remark-stringify'
 import { createBaseProcessor } from '../markdown/parser'
 import { remarkCleanMdForLlms } from '../markdown/plugins/remark-clean-md-for-llms'
 import { remarkExpandDemos } from '../markdown/plugins/remark-expand-demos'
+import { remarkNormalizeLlmsLinks } from '../markdown/plugins/remark-normalize-llms-links'
 import { getRoutes } from './routes'
+
+export interface CleanMarkdownOptions {
+  route: RouteEntry
+  routes: RouteEntry[]
+  onWarn?: (message: string, error?: unknown) => void
+  strict?: boolean
+}
 
 export function formatRouteTitle(routePath: string): string {
   return routePath
@@ -30,7 +38,12 @@ export async function buildProcessedDocs(
       sourceRoutes.map(async (route) => {
         try {
           const rawContent = await fs.promises.readFile(route.filePath, 'utf-8')
-          const content = await cleanMarkdown(rawContent, route.filePath)
+          const content = await cleanMarkdown(rawContent, {
+            route,
+            routes: sourceRoutes,
+            onWarn,
+            strict: true
+          })
           const title
             = extractTitleFromMarkdown(rawContent)
               ?? formatRouteTitle(route.routePath)
@@ -47,16 +60,22 @@ export async function buildProcessedDocs(
 
 export async function cleanMarkdown(
   content: string,
-  sourceFilePath: string
+  options: CleanMarkdownOptions
 ): Promise<string> {
+  const { route, routes, onWarn, strict = false } = options
   const processor = createBaseProcessor()
-    .use(remarkExpandDemos)
+    .use(remarkExpandDemos, { onWarn, strict })
     .use(remarkCleanMdForLlms)
+    .use(remarkNormalizeLlmsLinks, {
+      route,
+      routes,
+      onWarn: message => onWarn?.(message)
+    })
     .use(remarkStringify)
 
   const file = await processor.process({
     value: content,
-    data: { sourceFilePath }
+    data: { sourceFilePath: route.filePath }
   })
   return String(file)
 }

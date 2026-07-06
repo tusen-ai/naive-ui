@@ -2,7 +2,7 @@ import type { ServerResponse } from 'node:http'
 import type { Category, LlmsAction, Locale } from './types'
 import fs from 'node:fs'
 import { cleanMarkdown } from './markdown'
-import { resolveSourceMd } from './routes'
+import { findRoute, getRoutes } from './routes'
 
 export function matchLlmsAction(url: string): LlmsAction | null {
   const [path] = url.split('?')
@@ -49,11 +49,16 @@ export async function serveMd(
   slug: string,
   url: string
 ): Promise<void> {
-  const filePath = await resolveSourceMd(projectRoot, locale, category, slug)
+  const routes = await getRoutes(projectRoot)
+  const route = findRoute(routes, locale, category, slug)
 
-  if (filePath && fs.existsSync(filePath)) {
-    const raw = await fs.promises.readFile(filePath, 'utf-8')
-    const cleaned = await cleanMarkdown(raw, filePath)
+  if (route && fs.existsSync(route.filePath)) {
+    const raw = await fs.promises.readFile(route.filePath, 'utf-8')
+    const cleaned = await cleanMarkdown(raw, {
+      route,
+      routes,
+      strict: true
+    })
     res.setHeader('Content-Type', 'text/markdown; charset=utf-8')
     res.end(cleaned)
     return

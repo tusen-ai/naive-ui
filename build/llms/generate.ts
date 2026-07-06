@@ -1,7 +1,7 @@
 import type { Category, LlmsLogger, Locale, ProcessedDoc } from './types'
 import { i18n, locales } from './constants'
 import { buildProcessedDocs } from './markdown'
-import { getRoutes } from './routes'
+import { getRouteManifest } from './routes'
 
 export async function genLlmsTxt(
   projectRoot: string,
@@ -60,7 +60,13 @@ export async function emitLlmsFiles(
   emitAsset: (fileName: string, source: string) => void,
   logger: LlmsLogger
 ): Promise<void> {
-  const routes = await getRoutes(projectRoot)
+  const { routes, skippedRoutes } = await getRouteManifest(projectRoot)
+  for (const route of skippedRoutes) {
+    logger.warn(
+      `[naive-ui-llms-txt] Skipped ${route.locale}/${route.category}/${route.routePath}: ${route.reason}`
+    )
+  }
+
   const processedDocs = await buildProcessedDocs(
     projectRoot,
     routes,
