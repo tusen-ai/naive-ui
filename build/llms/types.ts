@@ -14,19 +14,6 @@ export interface RouteEntry {
   locale: Locale
 }
 
-export interface SkippedRouteEntry {
-  routePath: string
-  filePath: string
-  category: Category
-  locale: Locale
-  reason: string
-}
-
-export interface RouteManifest {
-  routes: RouteEntry[]
-  skippedRoutes: SkippedRouteEntry[]
-}
-
 export interface RouteEntries {
   name: string
   category: Category

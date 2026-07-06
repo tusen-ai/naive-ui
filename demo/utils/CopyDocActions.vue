@@ -77,47 +77,25 @@ async function fetchMarkdown(): Promise<string | null> {
   }
 }
 
-async function writeClipboard(text: string | null): Promise<boolean> {
-  if (!text)
-    return false
-  try {
-    await navigator.clipboard.writeText(text)
-    return true
-  }
-  catch {
-    return false
-  }
-}
-
 async function handleSelect(key: string) {
   switch (key) {
     case 'copy-md': {
       const markdown = await fetchMarkdown()
-      if (!markdown) {
-        message.error(t('fetchFailed'))
-      }
-      else if (await writeClipboard(markdown)) {
+      if (markdown) {
+        await navigator.clipboard.writeText(markdown)
         message.success(t('copySuccess'))
       }
       else {
-        message.error(t('copyFailed'))
+        message.error(t('fetchFailed'))
       }
       break
     }
     case 'copy-link': {
-      if (await writeClipboard(fullMdUrl.value)) {
-        message.success(t('copySuccess'))
-      }
-      else {
-        message.error(t('copyFailed'))
-      }
+      await navigator.clipboard.writeText(fullMdUrl.value ?? '')
+      message.success(t('copySuccess'))
       break
     }
     case 'open-chatgpt': {
-      if (!fullMdUrl.value) {
-        message.error(t('copyFailed'))
-        break
-      }
       const prompt = encodeURIComponent(
         `Please read the following documentation and answer my questions:\n${fullMdUrl.value}`
       )
