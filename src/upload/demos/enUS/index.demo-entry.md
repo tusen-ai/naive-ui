@@ -29,6 +29,7 @@ download.vue
 | abstract | `boolean` | `false` | Whether or not DOM wrapping does not exist. Not supported for `image-card` type. |  |
 | accept | `string` | `undefined` | The accept type of upload. See <n-a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept" target="_blank">accept</n-a>. |  |
 | action | `string` | `undefined` | The URL to submit data to. |  |
+| always-show-actions | `boolean` | `false` | Always show the action buttons (remove, download, retry, preview) on each file item. When `false`, they only appear on hover. | NEXT_VERSION |
 | create-thumbnail-url | `(file: File \| null, fileInfo: UploadSettledFileInfo) => (Promise<string> \| string \| undefined)` | `undefined` | Customize file thumbnails. If `undefined` is returned, the file would use default thumbnail display logic. | `fileInfo` 2.34.0 |
 | custom-request | `(options: UploadCustomRequestOptions) => void` | `undefined` | Customize upload request. For types, see <n-a href="#UploadCustomRequestOptions-Type">UploadCustomRequestOptions</n-a> |  |
 | custom-download | `(file: FileInfo) => void` | `undefined` | Customize download request | 2.41.1 |

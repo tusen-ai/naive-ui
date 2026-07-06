@@ -7,7 +7,7 @@ export default defineComponent({
     const isMountedRef = useIsMounted()
     return () => (
       <Transition name="icon-switch-transition" appear={isMountedRef.value}>
-        {slots}
+        {{ ...slots }}
       </Transition>
     )
   }

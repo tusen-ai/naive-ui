@@ -61,7 +61,7 @@ describe('n-modal', () => {
     expect(document.querySelector('.n-modal-body-wrapper')).toEqual(null)
     await wrapper.find('button').trigger('click')
     expect(document.querySelector('.n-modal-body-wrapper')).not.toEqual(null)
-    const rafSpy = vi
+    using _rafSpy = vi
       .spyOn(window, 'requestAnimationFrame')
       .mockImplementation((cb: FrameRequestCallback): number => {
         cb(0)
@@ -91,7 +91,6 @@ describe('n-modal', () => {
     ).toContain('display: none')
 
     wrapper.unmount()
-    rafSpy.mockRestore()
   })
 
   it('should work with `preset` prop', async () => {
@@ -107,6 +106,23 @@ describe('n-modal', () => {
     await wrapper.find('button').trigger('click')
     expect(document.querySelector('.n-modal-body-wrapper')).not.toEqual(null)
     expect(document.querySelector('.n-dialog')).not.toEqual(null)
+    wrapper.unmount()
+  })
+
+  it('should work with `content-scrollable` prop on card preset', async () => {
+    const wrapper = mountModal({
+      modalProps: {
+        preset: 'card',
+        contentScrollable: true
+      }
+    })
+    await wrapper.find('button').trigger('click')
+    expect(document.querySelector('.n-card--content-scrollable')).not.toEqual(
+      null
+    )
+    expect(document.querySelector('.n-card__content-scrollbar')).not.toEqual(
+      null
+    )
     wrapper.unmount()
   })
 })

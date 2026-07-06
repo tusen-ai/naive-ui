@@ -3,6 +3,7 @@ import path from 'node:path'
 import process from 'node:process'
 import { babel } from '@rollup/plugin-babel'
 import { configDefaults, defineConfig } from 'vitest/config'
+import vueJsxVapor from 'vue-jsx-vapor/vite'
 import { createDemoPlugin } from './build/vite-plugin-demo'
 import { llmsTxtPlugin } from './build/vite-plugin-llms-txt'
 
@@ -18,7 +19,13 @@ const testExclude = isBuildTimeTest
 
 export default defineConfig({
   root: __dirname,
-  plugins: [...createDemoPlugin(), llmsTxtPlugin()],
+  plugins: [
+    vueJsxVapor({
+      interop: true
+    }),
+    ...createDemoPlugin(),
+    llmsTxtPlugin()
+  ],
   resolve: {
     // In production site build, we want to import naive-ui from node_modules
     alias:
@@ -46,7 +53,9 @@ export default defineConfig({
       'async-validator',
       'css-render',
       'date-fns',
+      'date-fns/locale',
       'date-fns-tz/getTimezoneOffset',
+      'fflate',
       'evtd',
       'highlight.js',
       'lodash-es',
