@@ -122,6 +122,7 @@ export const selectProps = {
   },
   remote: Boolean,
   loading: Boolean,
+  loadingProps: Object as PropType<HTMLAttributes>,
   filter: Function as PropType<SelectFilter>,
   placement: {
     type: String as PropType<FollowerPlacement>,
@@ -1000,6 +1001,7 @@ export default defineComponent({
                         this.mergedTheme.peerOverrides.InternalSelection
                       }
                       loading={this.loading}
+                      loadingProps={this.loadingProps}
                       focused={this.focused}
                       onClick={this.handleTriggerClick}
                       onDeleteOption={this.handleDeleteOption}

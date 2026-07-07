@@ -130,6 +130,10 @@ export const dataTableProps = {
   renderCell: Function as PropType<
     (value: any, rowData: object, column: TableBaseColumn) => VNodeChild
   >,
+  caption: {
+    type: String,
+    default: ''
+  },
   renderExpandIcon: Function as PropType<RenderExpandIcon>,
   spinProps: Object as PropType<DataTableSpinProps>,
   getCsvCell: Function as PropType<DataTableGetCsvCell>,
@@ -246,6 +250,7 @@ export interface CommonColumnInfo<T = InternalRowData> {
   ellipsisComponent?: 'ellipsis' | 'performant-ellipsis'
   allowExport?: boolean
   cellProps?: (rowData: T, rowIndex: number) => HTMLAttributes
+  headerCellProps?: (column: TableColumn, rowIndex: number) => HTMLAttributes
 }
 
 export type DataTableHeightForRow<T = RowData> = (
@@ -463,6 +468,7 @@ export interface DataTableInjection {
     | undefined
     | ((value: any, rowData: object, column: TableBaseColumn) => VNodeChild)
   >
+  captionRef: Ref<string>
 }
 
 export const dataTableInjectionKey

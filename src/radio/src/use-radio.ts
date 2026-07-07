@@ -1,4 +1,10 @@
-import type { ComputedRef, ExtractPropTypes, PropType, Ref } from 'vue'
+import type {
+  ComputedRef,
+  ExtractPropTypes,
+  InputHTMLAttributes,
+  PropType,
+  Ref
+} from 'vue'
 import type { MaybeArray } from '../../_utils'
 import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
 import type { RadioSize } from './public-types'
@@ -23,6 +29,7 @@ export const radioBaseProps = {
     default: undefined
   },
   label: String,
+  inputProps: Object as PropType<InputHTMLAttributes>,
   size: String as PropType<RadioSize>,
   onUpdateChecked: [Function, Array] as PropType<
     undefined | MaybeArray<(value: boolean) => void>

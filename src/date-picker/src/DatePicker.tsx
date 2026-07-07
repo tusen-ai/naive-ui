@@ -966,7 +966,8 @@ export default defineComponent({
       onNextMonth: props.onNextMonth,
       onPrevMonth: props.onPrevMonth,
       onNextYear: props.onNextYear,
-      onPrevYear: props.onPrevYear
+      onPrevYear: props.onPrevYear,
+      inputProps: props.inputProps
     }
   },
   render() {
@@ -1054,6 +1055,7 @@ export default defineComponent({
     }
     triggerOnRender?.()
     const commonInputProps: InputProps = {
+      inputProps: this.inputProps,
       bordered: this.mergedBordered,
       size: this.mergedSize,
       passivelyActivated: true,
