@@ -1165,6 +1165,23 @@ describe('props.columns', () => {
     wrapper.unmount()
   })
 
+  it('should show header with empty data when `ellipsis` is set', () => {
+    const columns: DataTableColumns = [
+      {
+        title: 'Name',
+        key: 'name',
+        width: 100,
+        ellipsis: {
+          tooltip: true
+        }
+      }
+    ]
+    const wrapper = mount(() => <NDataTable columns={columns} data={[]} />)
+    expect(wrapper.find('thead').exists()).toBe(true)
+    expect(wrapper.find('thead [data-col-key="name"]').exists()).toBe(true)
+    wrapper.unmount()
+  })
+
   it('should work with `children` prop', async () => {
     const columns: DataTableColumns = [
       {
