@@ -85,6 +85,29 @@ describe('n-rate', () => {
     wrapper.unmount()
   })
 
+  it('should work with `onHoverChange` prop', async () => {
+    const onHoverChange = vi.fn()
+    const wrapper = mount(NRate, {
+      props: { onHoverChange }
+    })
+
+    const testNumber = 2
+    const rateItems = wrapper.findAll('.n-rate__item')
+
+    await rateItems[testNumber].trigger('mousemove')
+    expect(onHoverChange).toHaveBeenCalledWith(testNumber + 1)
+    expect(onHoverChange).toHaveBeenCalledTimes(1)
+
+    await rateItems[testNumber].trigger('mousemove')
+    expect(onHoverChange).toHaveBeenCalledTimes(1)
+
+    await wrapper.find('.n-rate').trigger('mouseleave')
+    expect(onHoverChange).toHaveBeenCalledWith(null)
+    expect(onHoverChange).toHaveBeenCalledTimes(2)
+
+    wrapper.unmount()
+  })
+
   it('should work with `readonly` prop', async () => {
     const wrapper = mount(NRate)
 
