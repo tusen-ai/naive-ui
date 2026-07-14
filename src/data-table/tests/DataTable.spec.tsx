@@ -1229,6 +1229,134 @@ describe('props.columns', () => {
     wrapper.unmount()
   })
 
+  it('should work with `expand-on-click` prop', async () => {
+    interface RowData {
+      name: string
+      index: string
+      children?: RowData[]
+    }
+
+    const columns: DataTableColumns<RowData> = [
+      {
+        title: 'Name',
+        key: 'name',
+        render(rowData) {
+          if (rowData.index === '07') {
+            return h(
+              'button',
+              {
+                class: 'prevent-expand',
+                onClick(e: MouseEvent) {
+                  e.preventDefault()
+                }
+              },
+              rowData.name
+            )
+          }
+          return rowData.name
+        }
+      },
+      {
+        title: 'Index',
+        key: 'index'
+      }
+    ]
+    const data: RowData[] = [
+      {
+        name: '07akioni',
+        index: '07',
+        children: [
+          {
+            name: '08akioni',
+            index: '08'
+          }
+        ]
+      },
+      {
+        name: '11akioni',
+        index: '11'
+      }
+    ]
+    const rowKey = (row: RowData): string => row.index
+    const onUpdateExpandedRowKeys = vi.fn()
+    const onRowClick = vi.fn()
+    const rowProps = vi.fn(() => ({
+      onClick: onRowClick
+    }))
+    const onPreventedRowClick = vi.fn((e: MouseEvent) => {
+      e.preventDefault()
+    })
+
+    let wrapper = mount(() => (
+      <NDataTable
+        columns={columns}
+        data={data}
+        row-key={rowKey}
+        onUpdateExpandedRowKeys={onUpdateExpandedRowKeys}
+      />
+    ))
+    await wrapper.findAll('tbody .n-data-table-tr')[0].trigger('click')
+    await nextTick()
+    expect(wrapper.findAll('tbody .n-data-table-tr').length).toBe(2)
+    expect(onUpdateExpandedRowKeys).not.toHaveBeenCalled()
+    wrapper.unmount()
+
+    wrapper = mount(() => (
+      <NDataTable
+        columns={columns}
+        data={data}
+        row-key={rowKey}
+        rowProps={() => ({ onClick: onPreventedRowClick })}
+        expand-on-click
+        onUpdateExpandedRowKeys={onUpdateExpandedRowKeys}
+      />
+    ))
+    await wrapper.findAll('tbody .n-data-table-tr')[0].trigger('click')
+    await nextTick()
+    expect(wrapper.findAll('tbody .n-data-table-tr').length).toBe(2)
+    expect(onPreventedRowClick).toHaveBeenCalled()
+    expect(onUpdateExpandedRowKeys).not.toHaveBeenCalled()
+    wrapper.unmount()
+
+    wrapper = mount(() => (
+      <NDataTable
+        columns={columns}
+        data={data}
+        row-key={rowKey}
+        rowProps={rowProps}
+        expand-on-click
+        onUpdateExpandedRowKeys={onUpdateExpandedRowKeys}
+      />
+    ))
+    await wrapper.find('.prevent-expand').trigger('click')
+    await nextTick()
+    expect(wrapper.findAll('tbody .n-data-table-tr').length).toBe(2)
+    expect(onUpdateExpandedRowKeys).not.toHaveBeenCalled()
+
+    await wrapper.findAll('tbody .n-data-table-tr')[0].trigger('click')
+    await nextTick()
+    expect(wrapper.findAll('tbody .n-data-table-tr').length).toBe(3)
+    expect(wrapper.text()).toContain('08akioni')
+    expect(onUpdateExpandedRowKeys).toHaveBeenLastCalledWith(['07'])
+    expect(onRowClick).toHaveBeenCalled()
+
+    await wrapper.findAll('tbody .n-data-table-tr')[0].trigger('click')
+    await nextTick()
+    expect(wrapper.findAll('tbody .n-data-table-tr').length).toBe(2)
+    expect(onUpdateExpandedRowKeys).toHaveBeenLastCalledWith([])
+
+    await wrapper.findAll('tbody .n-data-table-tr')[1].trigger('click')
+    await nextTick()
+    expect(onUpdateExpandedRowKeys).toHaveBeenCalledTimes(2)
+
+    await wrapper.find('tbody .n-data-table-expand-trigger').trigger('click')
+    await nextTick()
+    expect(wrapper.findAll('tbody .n-data-table-tr').length).toBe(3)
+    expect(onUpdateExpandedRowKeys).toHaveBeenCalledTimes(3)
+    expect(onUpdateExpandedRowKeys).toHaveBeenLastCalledWith(['07'])
+    wrapper.unmount()
+  })
+
   it('should work with `className` prop', async () => {
     const columns: DataTableColumns = [
       {

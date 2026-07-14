@@ -262,6 +262,7 @@ export default defineComponent({
       rowClassNameRef: toRef(props, 'rowClassName'),
       mergedCheckedRowKeySetRef,
       mergedExpandedRowKeysRef,
+      expandOnClickRef: toRef(props, 'expandOnClick'),
       mergedInderminateRowKeySetRef,
       localeRef,
       expandableRef,

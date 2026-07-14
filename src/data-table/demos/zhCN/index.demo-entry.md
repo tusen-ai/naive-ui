@@ -93,6 +93,7 @@ empty-debug.vue
 | default-expanded-row-keys | `Array<string \| number>` | `[]` | 默认展开行的 key 值 |  |
 | default-expand-all | `boolean` | `false` | 是否默认展开全部可展开的行，不可在异步展开行时使用 | 2.30.4 |
 | expanded-row-keys | `Array<string \| number>` | `undefined` | 展开行的 key 值 |  |
+| expand-on-click | `boolean` | `false` | 是否在点击树形数据行后展开或收缩该行 | 2.44.0 |
 | filter-icon-popover-props | `PopoverProps` | `{ trigger: click, placement: bottom }` | 过滤按钮的 Popover 属性，属性参考 [Popover props](popover#Popover-Props) | 2.39.0 |
 | flex-height | `boolean` | `false` | 是否让表格主体的高度自动适应整个表格区域的高度，打开这个选项会让 `table-layout` 始终为 `'fixed'` |  |
 | get-csv-cell | `(value: any, row: object, col: DataTableBaseColumn) => string` | `undefined` | 获取 CSV 的单元格数据 | 2.40.2 |
