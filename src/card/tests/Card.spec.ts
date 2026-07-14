@@ -299,7 +299,7 @@ describe('n-card', () => {
     wrapper.unmount()
   })
 
-  it('should work with `content-scrollable` prop', async () => {
+  it('should work with `content-scrollable` prop and default slot', async () => {
     const wrapper = mount(NCard, {
       props: {
         contentScrollable: true

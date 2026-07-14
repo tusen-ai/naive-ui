@@ -5,10 +5,11 @@ import { babel } from '@rollup/plugin-babel'
 import { configDefaults, defineConfig } from 'vitest/config'
 import vueJsxVapor from 'vue-jsx-vapor/vite'
 import { createDemoPlugin } from './build/vite-plugin-demo'
+import { llmsTxtPlugin } from './build/vite-plugin-llms-txt'
 
 dns.setDefaultResultOrder('verbatim')
 
-const isBuildTimeTest = process.argv.some(arg =>
+const isBuildTimeTest = process.argv.some((arg) =>
   /(?:^|[\\/])(umd-test|esm-test)/.test(arg)
 )
 
@@ -22,7 +23,8 @@ export default defineConfig({
     vueJsxVapor({
       interop: true
     }),
-    ...createDemoPlugin()
+    ...createDemoPlugin(),
+    llmsTxtPlugin()
   ],
   resolve: {
     // In production site build, we want to import naive-ui from node_modules
