@@ -622,10 +622,11 @@ export default defineComponent({
       this.tmNodes.map(tmNode => itemRenderer(tmNode, this.$props))
     const horizontal = mode === 'horizontal'
     const finalResponsive = horizontal && this.responsive
+    const { style: attrStyle, ...attrs } = this.$attrs
     const renderMainNode = (): VNode =>
       h(
         'div',
-        mergeProps(this.$attrs, {
+        mergeProps(attrs, {
           role: mode === 'horizontal' ? 'menubar' : 'menu',
           class: [
             `${mergedClsPrefix}-menu`,
@@ -634,7 +635,7 @@ export default defineComponent({
             finalResponsive && `${mergedClsPrefix}-menu--responsive`,
             this.mergedCollapsed && `${mergedClsPrefix}-menu--collapsed`
           ],
-          style: this.cssVars
+          style: [this.cssVars, attrStyle]
         }),
         finalResponsive ? (
           <VOverflow
