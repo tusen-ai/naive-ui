@@ -33,6 +33,7 @@
 - Fix `n-image` rendering the `placeholder` slot together with the `error` slot when the image fails to load, closes [#7526](https://github.com/tusen-ai/naive-ui/issues/7526).
 - Fix `n-space` `size` prop not taking effect when set to `0`, closes [#7530](https://github.com/tusen-ai/naive-ui/issues/7530).
 - Fix `n-date-picker` with `type="datetime"` emitting `update:value` twice when clearing from panel, closes [#8070](https://github.com/tusen-ai/naive-ui/issues/8070).
+- Fix `n-config-provider`'s `component-options` not controlling the `size` of `n-empty`, closes [#8139](https://github.com/tusen-ai/naive-ui/issues/8139).
 - Fix `n-input-otp` only keeping the last character when browser extension autofill sets the full OTP value on a single input, closes [#7540](https://github.com/tusen-ai/naive-ui/pull/7540).
 - Fix `n-menu` item icons not centered in collapsed mode when the options contain a `type="group"` group, closes [#8105](https://github.com/tusen-ai/naive-ui/issues/8105).
 

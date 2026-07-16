@@ -22,8 +22,10 @@ export const emptyProps = {
     default: true
   },
   size: {
-    type: String as PropType<'tiny' | 'small' | 'medium' | 'large' | 'huge'>,
-    default: 'medium'
+    type: String as PropType<
+      'tiny' | 'small' | 'medium' | 'large' | 'huge' | undefined
+    >,
+    default: undefined
   },
   renderIcon: Function as PropType<() => VNodeChild>
 }
@@ -62,8 +64,19 @@ export default defineComponent({
         mergedComponentPropsRef?.value?.Empty?.renderIcon
         || (() => <EmptyIcon />)
     )
-    const cssVarsRef = computed(() => {
+    const mergedSizeRef = computed<
+      'tiny' | 'small' | 'medium' | 'large' | 'huge'
+    >(() => {
       const { size } = props
+      const configSize = mergedComponentPropsRef?.value?.Empty?.size
+      if (size !== undefined)
+        return size
+      if (configSize !== undefined)
+        return configSize
+      return 'medium'
+    })
+    const cssVarsRef = computed(() => {
+      const size = mergedSizeRef.value
       const {
         common: { cubicBezierEaseInOut },
         self: {
@@ -88,7 +101,7 @@ export default defineComponent({
           'empty',
           computed(() => {
             let hash = ''
-            const { size } = props
+            const { value: size } = mergedSizeRef
             hash += size[0]
             return hash
           }),
@@ -99,6 +112,7 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedRenderIcon: mergedRenderIconRef,
+      mergedSize: mergedSizeRef,
       localizedDescription: computed(() => {
         return mergedDescriptionRef.value || localeRef.value.description
       }),

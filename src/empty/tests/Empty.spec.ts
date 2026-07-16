@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
-import { h } from 'vue'
+import { h, nextTick } from 'vue'
+import { NConfigProvider } from '../../config-provider'
 import { NEmpty } from '../index'
 
 describe('n-empty', () => {
@@ -110,7 +111,9 @@ describe('n-empty', () => {
       }
     })
 
-    expect(wrapper.find('.n-empty__description').text()).toContain('Custom Description')
+    expect(wrapper.find('.n-empty__description').text()).toContain(
+      'Custom Description'
+    )
     wrapper.unmount()
   })
 
@@ -168,6 +171,54 @@ describe('n-empty', () => {
     })
 
     expect(wrapper.find('.n-empty__description').exists()).toBe(true)
+    wrapper.unmount()
+  })
+
+  it('should respect size from n-config-provider component-options', async () => {
+    const wrapper = mount(NConfigProvider, {
+      props: {
+        componentOptions: {
+          Empty: { size: 'large' }
+        }
+      },
+      slots: {
+        default: () => h(NEmpty)
+      }
+    })
+
+    await nextTick()
+    expect(
+      wrapper.findComponent(NEmpty).find('.n-empty').attributes('style')
+    ).toMatchSnapshot()
+
+    await wrapper.setProps({
+      componentOptions: {
+        Empty: { size: 'tiny' }
+      }
+    })
+    await nextTick()
+    expect(
+      wrapper.findComponent(NEmpty).find('.n-empty').attributes('style')
+    ).toMatchSnapshot()
+    wrapper.unmount()
+  })
+
+  it('should prioritize prop size over config-provider size', async () => {
+    const wrapper = mount(NConfigProvider, {
+      props: {
+        componentOptions: {
+          Empty: { size: 'large' }
+        }
+      },
+      slots: {
+        default: () => h(NEmpty, { size: 'tiny' })
+      }
+    })
+
+    await nextTick()
+    expect(
+      wrapper.findComponent(NEmpty).find('.n-empty').attributes('style')
+    ).toMatchSnapshot()
     wrapper.unmount()
   })
 })
