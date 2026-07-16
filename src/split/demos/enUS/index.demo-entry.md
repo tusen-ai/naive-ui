@@ -13,6 +13,7 @@ nest.vue
 event.vue
 slot.vue
 controlled.vue
+draggable.vue
 ```
 
 ## API
@@ -24,6 +25,7 @@ controlled.vue
 | default-size | `number` | `0.5` | Default split size, when it's `number` it should in 0 ~ 1, when it's `string` it should be formatted in `${number}px`. | 2.36.0, `string` 2.38.2 |
 | direction | `'horizontal' \| 'vertical'` | `'horizontal'` | The direction of the split. | 2.36.0 |
 | disabled | `boolean` | `false` | Whether to disable the split. | 2.36.0 |
+| draggable | `boolean` | `true` | Whether the resize trigger is draggable. When `false`, the trigger is still visible but cannot be dragged. | NEXT_VERSION |
 | max | `string \| number` | `1` | The maximum split threshold, when it's `number` it should in 0 ~ 1, when it's `string` it should be formatted in `${number}px`. | 2.36.0, `string` 2.38.2 |
 | min | `string \| number` | `0` | The minimum threshold for splitting, when it's `number` it should in 0 ~ 1, when it's `string` it should be formatted in `${number}px`. | 2.36.0, `string` 2.38.2 |
 | pane1-class | `string` | `undefined` | The class name of the first pane. | 2.38.2 |

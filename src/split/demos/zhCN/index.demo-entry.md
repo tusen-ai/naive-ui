@@ -14,6 +14,7 @@ event.vue
 slot.vue
 controlled.vue
 pixel-value.vue
+draggable.vue
 ```
 
 ## API
@@ -25,6 +26,7 @@ pixel-value.vue
 | default-size | `string \| number` | `0.5` | Split 的默认分割大小，为 `number` 类型时应该为 0 ~ 1 之间的值，为 `string` 类型时应该为 `${number}px` 格式 | 2.36.0, `string` 2.38.2 |
 | direction | `'horizontal' \| 'vertical'` | `'horizontal'` | Split 的分割方向 | 2.36.0 |
 | disabled | `boolean` | `false` | 是否禁用 | 2.36.0 |
+| draggable | `boolean` | `true` | 是否可拖拽分割条，设为 `false` 时分割条仍可见但不可拖拽 | NEXT_VERSION |
 | max | `string \| number` | `1` | Split 的分割最大阈值，为 `number` 类型时应该为 0 ~ 1 之间的值，为 `string` 类型时应该为 `${number}px` 格式 | 2.36.0, `string` 2.38.2 |
 | min | `string \| number` | `0` | Split 的分割最小阈值，为 `number` 类型时应该为 0 ~ 1 之间的值，为 `string` 类型时应该为 `${number}px` 格式 | 2.36.0, `string` 2.38.2 |
 | pane1-class | `string` | `undefined` | 第一个面板的类名 | 2.38.2 |

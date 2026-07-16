@@ -24,6 +24,10 @@ export const splitProps = {
     default: 3
   },
   disabled: Boolean,
+  draggable: {
+    type: Boolean,
+    default: true
+  },
   defaultSize: {
     type: [String, Number] as PropType<string | number>,
     default: 0.5
@@ -137,12 +141,19 @@ export default defineComponent({
 
     const resizeTriggerWrapperStyle = computed(() => {
       const horizontal = props.direction === 'horizontal'
+      const cursor = props.draggable
+        ? props.direction === 'horizontal'
+          ? 'col-resize'
+          : 'row-resize'
+        : 'default'
       return {
         width: horizontal ? `${props.resizeTriggerSize}px` : '',
         height: horizontal ? '' : `${props.resizeTriggerSize}px`,
-        cursor: props.direction === 'horizontal' ? 'col-resize' : 'row-resize'
+        cursor
       }
     })
+
+    const resizableRef = computed(() => !props.disabled && props.draggable)
 
     let offset = 0
     const handleMouseDown = (e: MouseEvent): void => {
@@ -236,6 +247,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       resizeTriggerWrapperStyle,
       resizeTriggerStyle,
+      resizable: resizableRef,
       handleMouseDown,
       firstPaneStyle
     }
@@ -260,9 +272,13 @@ export default defineComponent({
         {!this.disabled && (
           <div
             ref="resizeTriggerElRef"
-            class={`${this.mergedClsPrefix}-split__resize-trigger-wrapper`}
+            class={[
+              `${this.mergedClsPrefix}-split__resize-trigger-wrapper`,
+              !this.resizable
+              && `${this.mergedClsPrefix}-split__resize-trigger-wrapper--disabled`
+            ]}
             style={this.resizeTriggerWrapperStyle}
-            onMousedown={this.handleMouseDown}
+            onMousedown={this.resizable ? this.handleMouseDown : undefined}
           >
             {resolveSlot(this.$slots['resize-trigger'], () => [
               <div
