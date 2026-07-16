@@ -28,12 +28,9 @@ export default defineComponent({
       return findMenuValue(optionsRef.value, route.path)
     })
     watch(toRef(route, 'path'), (value, oldValue) => {
-      const langAndThemeReg = /\/(zh-CN|en-US)\/(light|dark|os-theme)/g
-      // only theme & lang change do not restore the scroll status
-      if (
-        value.replace(langAndThemeReg, '')
-        !== oldValue.replace(langAndThemeReg, '')
-      ) {
+      const langReg = /^\/(zh-CN|en-US)/g
+      // only lang change does not restore the scroll status
+      if (value.replace(langReg, '') !== oldValue.replace(langReg, '')) {
         layoutInstRef.value.scrollTo(0, 0)
       }
     })

@@ -68,7 +68,7 @@ function appendCounts(item) {
   }
 }
 
-function createItems(lang, theme, prefix, items) {
+function createItems(lang, prefix, items) {
   const isZh = lang === 'zh-CN'
   const langKey = isZh ? 'zh' : 'en'
   return items.map((rawItem) => {
@@ -78,19 +78,17 @@ function createItems(lang, theme, prefix, items) {
       label: rawItem[langKey] || rawItem.en,
       extra: renderItemExtra(rawItem, isZh),
       extraString: getItemExtraString(rawItem, isZh),
-      path: rawItem.path
-        ? `/${lang}/${theme}${prefix}${rawItem.path}`
-        : undefined
+      path: rawItem.path ? `/${lang}${prefix}${rawItem.path}` : undefined
     }
     if (rawItem.children) {
-      item.children = createItems(lang, theme, prefix, rawItem.children)
+      item.children = createItems(lang, prefix, rawItem.children)
     }
     return item
   })
 }
 
-export function createDocumentationMenuOptions({ lang, theme }) {
-  return createItems(lang, theme, '/docs', [
+export function createDocumentationMenuOptions({ lang }) {
+  return createItems(lang, '/docs', [
     {
       en: 'Introduction',
       zh: '介绍',
@@ -222,8 +220,8 @@ export function createDocumentationMenuOptions({ lang, theme }) {
   ])
 }
 
-export function createComponentMenuOptions({ lang, theme }) {
-  return createItems(lang, theme, '/components', [
+export function createComponentMenuOptions({ lang }) {
+  return createItems(lang, '/components', [
     appendCounts({
       zh: '通用组件',
       en: 'Common Components',
