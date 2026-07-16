@@ -170,14 +170,26 @@ export function renderToNaive(options: CreateHandlersOptions = {}): Handlers {
         )
       }
       const highlighted = highlight(node.value, lang)
-      const content = `<n-code><pre v-pre>${highlighted}</pre></n-code>`
-      return raw(
-        wrapCodeWithCard
-          ? `<n-card embedded :bordered="false" class="md-card" content-style="padding: 0;">`
-          + `<n-scrollbar x-scrollable content-style="padding: 16px;">${
-            content
-          }</n-scrollbar></n-card>`
-          : content
+      const codeEl = el('n-code', [
+        el('pre', [raw(highlighted)], { 'v-pre': true })
+      ])
+      if (!wrapCodeWithCard) {
+        return codeEl
+      }
+      return el(
+        'n-card',
+        [
+          el('n-scrollbar', [codeEl], {
+            'x-scrollable': true,
+            'content-style': 'padding: 16px;'
+          })
+        ],
+        {
+          embedded: true,
+          ':bordered': 'false',
+          className: ['md-card'],
+          'content-style': 'padding: 0;'
+        }
       )
     },
 

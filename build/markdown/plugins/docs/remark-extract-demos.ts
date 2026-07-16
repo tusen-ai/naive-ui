@@ -3,7 +3,7 @@ import type { Transformer } from 'unified'
 import path from 'node:path'
 import fse from 'fs-extra'
 import camelCase from 'lodash/camelCase'
-import projectPath from '../../loaders/project-path'
+import projectPath from '../../../loaders/project-path'
 
 export interface DemoInfo {
   id: string

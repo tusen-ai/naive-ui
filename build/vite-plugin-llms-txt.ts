@@ -1,7 +1,14 @@
 import type { Plugin, ResolvedConfig } from 'vite'
 import { emitLlmsFiles, genLlmsFullTxt, genLlmsTxt } from './llms/generate'
 import { matchLlmsAction, serveMd } from './llms/serve'
-import { formatLogMessage } from './llms/utils'
+
+function formatLogMessage(message: string, error?: unknown): string {
+  if (!error)
+    return message
+  if (error instanceof Error)
+    return `${message}: ${error.stack ?? error.message}`
+  return `${message}: ${String(error)}`
+}
 
 export function llmsTxtPlugin(): Plugin {
   let projectRoot: string

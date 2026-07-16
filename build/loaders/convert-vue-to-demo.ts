@@ -3,11 +3,12 @@ import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
+import { parse } from '@vue/compiler-sfc'
 import { toString } from 'mdast-util-to-string'
 import rehypeStringify from 'rehype-stringify'
 import remarkRehype from 'remark-rehype'
 import { createBaseProcessor } from '../markdown/parser'
-import { renderToNaive } from '../markdown/remark-naive'
+import { renderToNaive } from '../markdown/renderers/render-to-naive'
 import { handleMergeCode } from '../utils/handle-merge-code'
 
 interface Parts {
@@ -153,15 +154,16 @@ function getFileName(resourcePath: string): [string, string] {
 }
 
 function getPartsOfDemo(text: string): Parts {
-  // slot template
-  const firstIndex = text.indexOf('<template>')
-  let template = text.slice(firstIndex + 10)
-  const lastIndex = template.lastIndexOf('</template>')
-  template = template.slice(0, lastIndex)
-  const script = text.match(/<script[\s\S]*?>([\s\S]*?)<\/script>/)?.[1]?.trim()
-  const style = text.match(/<style>([\s\S]*?)<\/style>/)?.[1]
-  const markdownText
-    = text.match(/<markdown>([\s\S]*?)<\/markdown>/)?.[1]?.trim() ?? ''
+  const { descriptor } = parse(text)
+
+  const template = descriptor.template?.content
+  const script
+    = descriptor.script?.content.trim() ?? descriptor.scriptSetup?.content.trim()
+  const style = descriptor.styles[0]?.content
+  const markdownBlock = descriptor.customBlocks.find(
+    block => block.type === 'markdown'
+  )
+  const markdownText = markdownBlock?.content.trim() ?? ''
 
   // Extract title via remark plugin, then convert remaining content to HTML
   let title = ''
@@ -184,12 +186,11 @@ function getPartsOfDemo(text: string): Parts {
 
   const content = String(processor.processSync(markdownText))
 
-  const scriptAttributes
-    = text.match(/<script([\s\S]*?)>[\s\S]*?<\/script>/)?.[1].trim() ?? ''
-  const languageType = scriptAttributes?.includes('lang="ts"') ? 'ts' : 'js'
-  const apiType = scriptAttributes?.includes('setup')
-    ? 'composition'
-    : 'options'
+  const scriptBlock = descriptor.script ?? descriptor.scriptSetup
+  const languageType = scriptBlock?.lang === 'ts' ? 'ts' : 'js'
+  const apiType
+    = descriptor.scriptSetup || scriptBlock?.setup ? 'composition' : 'options'
+
   return {
     template,
     script,

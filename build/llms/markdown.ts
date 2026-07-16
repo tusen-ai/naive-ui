@@ -2,8 +2,8 @@ import type { ProcessedDoc, RouteEntry } from './types'
 import fs from 'node:fs'
 import remarkStringify from 'remark-stringify'
 import { createBaseProcessor } from '../markdown/parser'
-import { remarkCleanMdForLlms } from '../markdown/plugins/remark-clean-md-for-llms'
-import { remarkExpandDemos } from '../markdown/plugins/remark-expand-demos'
+import { remarkExpandDemos } from '../markdown/plugins/llm/remark-expand-demos'
+import { remarkNaiveToMarkdown } from '../markdown/plugins/llm/remark-naive-to-markdown'
 import { getRoutes } from './routes'
 
 export function formatRouteTitle(routePath: string): string {
@@ -51,7 +51,7 @@ export async function cleanMarkdown(
 ): Promise<string> {
   const processor = createBaseProcessor()
     .use(remarkExpandDemos)
-    .use(remarkCleanMdForLlms)
+    .use(remarkNaiveToMarkdown)
     .use(remarkStringify)
 
   const file = await processor.process({

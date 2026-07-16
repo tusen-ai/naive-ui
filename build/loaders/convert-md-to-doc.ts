@@ -1,14 +1,14 @@
 import type { Heading, Root } from 'mdast'
-import type { ComponentInfo } from '../markdown/plugins/remark-extract-components'
-import type { DemoInfo } from '../markdown/plugins/remark-extract-demos'
+import type { ComponentInfo } from '../markdown/plugins/docs/remark-extract-components'
+import type { DemoInfo } from '../markdown/plugins/docs/remark-extract-demos'
 import { toString } from 'mdast-util-to-string'
 import rehypeStringify from 'rehype-stringify'
 import remarkRehype from 'remark-rehype'
 import { createBaseProcessor } from '../markdown/parser'
-import { remarkDocHeader } from '../markdown/plugins/remark-doc-header'
-import { remarkExtractComponents } from '../markdown/plugins/remark-extract-components'
-import { remarkExtractDemos } from '../markdown/plugins/remark-extract-demos'
-import { renderToNaive } from '../markdown/remark-naive'
+import { remarkDocHeader } from '../markdown/plugins/docs/remark-doc-header'
+import { remarkExtractComponents } from '../markdown/plugins/docs/remark-extract-components'
+import { remarkExtractDemos } from '../markdown/plugins/docs/remark-extract-demos'
+import { renderToNaive } from '../markdown/renderers/render-to-naive'
 
 export interface AnchorInfo {
   id: string
