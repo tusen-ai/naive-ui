@@ -40,6 +40,17 @@ export default cB('tabs', `
     background-color .3s var(--n-bezier),
     border-color .3s var(--n-bezier);
 `, [
+  c('&.transition-disabled', [
+    cB('tabs-tab', `
+      transition: none !important;
+    `),
+    cB('tabs-nav-scroll-content', `
+      transition: none !important;
+    `),
+    cB('tabs-tab-pad', `
+      transition: none !important;
+    `)
+  ]),
   cM('segment-type', [
     cB('tabs-rail', [
       c('&.transition-disabled', [
@@ -596,35 +607,20 @@ export default cB('tabs', `
       ])
     ])
   ]),
-  cB('tabs-nav-button', `
-    font-size: 16px;
-    user-select: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  `, [
-    cM('disabled', `
-      cursor: not-allowed;
-      color: var(--n-icon-color-disabled);
+  cB('tabs-scroll-button', [
+    cM('start', `
+      padding-left: 10px;
+      padding-right: 6px;
     `),
-    cM('left', `
-      margin-left: 10px;
-      margin-right: 6px;`),
-    cM('right', `
-      margin-right: 10px;
-      margin-left: 6px;
+    cM('end', `
+      padding-right: 10px;
+      padding-left: 6px;
     `),
     cM('up', `
-      margin-bottom: 10px;
+      padding-bottom: 10px;
     `),
     cM('down', `
-      margin-top: 10px;
-    `),
-    cNotM('disabled', [
-      c('&:hover', `
-        color: var(--n-nav-button-color-hover);
-      `)
-    ])
+      padding-top: 10px;
+    `)
   ])
 ])

@@ -3,6 +3,8 @@ import { mount } from '@vue/test-utils'
 import { sleep } from 'seemly'
 import { h } from 'vue'
 import { AddIcon } from '../../_internal/icons'
+import { c } from '../../_utils/cssr'
+import { NConfigProvider } from '../../config-provider'
 import { NTabPane, NTabs } from '../index'
 
 describe('n-tabs', () => {
@@ -464,5 +466,112 @@ describe('n-tabs', () => {
     expect(
       wrapper.find('.n-tabs-tab:not(.n-tabs-tab--addable)').attributes('style')
     ).toBe(undefined)
+  })
+
+  it('should work with `placement` prop', async () => {
+    const wrapper = mount(NTabs, {
+      props: {
+        defaultValue: '1'
+      },
+      slots: {
+        default: () => [
+          h(NTabPane, {
+            tab: '1',
+            name: '1'
+          })
+        ]
+      }
+    })
+
+    for (const placement of ['top', 'right', 'bottom', 'left'] as const) {
+      await wrapper.setProps({ placement })
+      expect(wrapper.find('.n-tabs').classes()).toContain(
+        `n-tabs--${placement}`
+      )
+      expect(wrapper.find('.n-tabs-nav').classes()).toContain(
+        `n-tabs-nav--${placement}`
+      )
+    }
+  })
+
+  it('should map `placement` start/end to left/right', async () => {
+    const wrapper = mount(NTabs, {
+      props: {
+        defaultValue: '1',
+        placement: 'start'
+      },
+      slots: {
+        default: () => [
+          h(NTabPane, {
+            tab: '1',
+            name: '1'
+          })
+        ]
+      }
+    })
+
+    expect(wrapper.find('.n-tabs').classes()).toContain('n-tabs--left')
+    expect(wrapper.find('.n-tabs').classes()).not.toContain('n-tabs--start')
+
+    await wrapper.setProps({ placement: 'end' })
+    expect(wrapper.find('.n-tabs').classes()).toContain('n-tabs--right')
+    expect(wrapper.find('.n-tabs').classes()).not.toContain('n-tabs--end')
+  })
+
+  it('should work with RTL', () => {
+    const wrapper = mount({
+      render() {
+        return (
+          <NConfigProvider rtl={[{ name: 'Tabs', style: c(null) }]}>
+            {{
+              default: () => (
+                <NTabs defaultValue="1" placement="start">
+                  {{
+                    default: () => [
+                      h(NTabPane, {
+                        tab: '1',
+                        name: '1'
+                      })
+                    ]
+                  }}
+                </NTabs>
+              )
+            }}
+          </NConfigProvider>
+        )
+      }
+    })
+
+    expect(wrapper.find('.n-tabs').classes()).toContain('n-tabs--rtl')
+    expect(wrapper.find('.n-tabs').classes()).toContain('n-tabs--right')
+
+    wrapper.unmount()
+
+    const endWrapper = mount({
+      render() {
+        return (
+          <NConfigProvider rtl={[{ name: 'Tabs', style: c(null) }]}>
+            {{
+              default: () => (
+                <NTabs defaultValue="1" placement="end">
+                  {{
+                    default: () => [
+                      h(NTabPane, {
+                        tab: '1',
+                        name: '1'
+                      })
+                    ]
+                  }}
+                </NTabs>
+              )
+            }}
+          </NConfigProvider>
+        )
+      }
+    })
+
+    expect(endWrapper.find('.n-tabs').classes()).toContain('n-tabs--rtl')
+    expect(endWrapper.find('.n-tabs').classes()).toContain('n-tabs--left')
+    endWrapper.unmount()
   })
 })

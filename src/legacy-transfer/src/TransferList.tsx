@@ -46,10 +46,7 @@ export default defineComponent({
       type: Boolean,
       required: true
     },
-    source: {
-      type: Boolean,
-      default: false
-    }
+    source: Boolean
   },
   setup() {
     const { mergedThemeRef, mergedClsPrefixRef } = inject(transferInjectionKey)!

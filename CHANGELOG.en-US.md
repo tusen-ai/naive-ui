@@ -15,6 +15,7 @@
 - `n-data-table` adds `getFilteredAndSortedData` and `getCurrentPageData` methods, closes [#8088](https://github.com/tusen-ai/naive-ui/issues/8088).
 - `n-tabs` adds `show-scroll-button` and `center-active-tab` props, closes [#5846](https://github.com/tusen-ai/naive-ui/issues/5846), [#2128](https://github.com/tusen-ai/naive-ui/issues/2128).
 - `n-tabs` adds `scrollToCurrentTab` method, closes [#7548](https://github.com/tusen-ai/naive-ui/issues/7548).
+- `n-tabs` supports RTL, `placement` adds `'start'` and `'end'`.
 
 ### Fixes
 
