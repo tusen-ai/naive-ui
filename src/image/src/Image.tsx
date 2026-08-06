@@ -126,14 +126,15 @@ export default defineComponent({
       showErrorRef.value = false
     })
 
-    watchEffect((onInvalidate) => {
-      const unregister = imageGroupHandle?.registerImageUrl?.(
+    let unregisterImageUrl: (() => void) | undefined
+    watchEffect(() => {
+      unregisterImageUrl = imageGroupHandle?.registerImageUrl?.(
         imageId,
         mergedPreviewSrcRef.value || ''
       )
-      onInvalidate(() => {
-        unregister?.()
-      })
+    })
+    onBeforeUnmount(() => {
+      unregisterImageUrl?.()
     })
 
     function onImgClick(e: PointerEvent) {

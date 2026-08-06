@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { h, nextTick } from 'vue'
+import { h, nextTick, ref } from 'vue'
 import { NImage, NImageGroup } from '../index'
 import NImagePreview from '../src/ImagePreview'
 
@@ -107,6 +107,50 @@ describe('n-image', () => {
     expect(wrapper.findComponent(NImagePreview).exists()).toBe(true)
     wrapper.unmount()
   })
+
+  it('should not preview removed images in `image group`', async () => {
+    const srcList = ref(['image-1.png', 'image-2.png'])
+    const wrapper = mount(() =>
+      h(NImageGroup, null, {
+        default: () => srcList.value.map(src => h(NImage, { key: src, src }))
+      })
+    )
+
+    srcList.value = ['image-1.png']
+    await nextTick()
+
+    await wrapper.find('img').trigger('click')
+    wrapper.findComponent(NImageGroup).vm.next()
+    await nextTick()
+
+    expect(wrapper.findComponent(NImagePreview).props('src')).toBe(
+      'image-1.png'
+    )
+    wrapper.unmount()
+  })
+
+  it('should keep image order in `image group` when `src` changes', async () => {
+    const srcList = ref(['image-1.png', 'image-2.png', 'image-3.png'])
+    const wrapper = mount(() =>
+      h(NImageGroup, null, {
+        default: () =>
+          srcList.value.map((src, index) => h(NImage, { key: index, src }))
+      })
+    )
+
+    srcList.value = ['image-1.png', 'image-2-updated.png', 'image-3.png']
+    await nextTick()
+
+    await wrapper.findAll('img')[0].trigger('click')
+    wrapper.findComponent(NImageGroup).vm.next()
+    await nextTick()
+
+    expect(wrapper.findComponent(NImagePreview).props('src')).toBe(
+      'image-2-updated.png'
+    )
+    wrapper.unmount()
+  })
+
   it('should inherit attrs', () => {
     const wrapper = mount(NImage, {
       attrs: {

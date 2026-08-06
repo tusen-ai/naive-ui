@@ -94,7 +94,7 @@ export default defineComponent({
       }
 
       return function unregisterPreviewUrl() {
-        if (!registeredImageUrlMap.value.has(sid)) {
+        if (registeredImageUrlMap.value.has(sid)) {
           registeredImageUrlMap.value.delete(sid)
         }
       }
