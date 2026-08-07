@@ -201,7 +201,7 @@ function formatCsvCell(value: unknown): string {
   if (value === null || value === undefined) {
     return ''
   }
-  const cell = typeof value === 'string' ? value : `${value}`
+  const cell = `${value}`
   if (/[",\r\n]/.test(cell)) {
     return `"${cell.replace(/"/g, '""')}"`
   }
@@ -222,7 +222,7 @@ export function generateCsv(
   )
   const header = exportableColumns
     .map((col: any) => {
-      return getCsvHeader ? getCsvHeader(col) : col.title
+      return getCsvHeader ? getCsvHeader(col) : formatCsvCell(col.title)
     })
     .join(',')
   const rows = data.map((row) => {

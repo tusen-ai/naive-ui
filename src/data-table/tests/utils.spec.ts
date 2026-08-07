@@ -51,15 +51,18 @@ describe('generateCsv', () => {
     expect(csv).toBe('Name,Address\nJim Green,"The ""Old"" House"')
   })
 
-  it('should quote non string cells containing a comma', () => {
+  it('should quote headers containing a comma', () => {
     const csv = generateCsv(
-      columns,
-      [{ name: 'Jim Green', address: { toString: () => 'a,b' } }],
+      [
+        { title: 'Name', key: 'name' },
+        { title: 'Address, City', key: 'address' }
+      ] as TableColumn[],
+      [{ name: 'Jim Green', address: 'London' }],
       undefined,
       undefined
     )
 
-    expect(csv).toBe('Name,Address\nJim Green,"a,b"')
+    expect(csv).toBe('Name,"Address, City"\nJim Green,London')
   })
 
   it('should keep empty cells for null and undefined', () => {
