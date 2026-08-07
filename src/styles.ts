@@ -92,7 +92,7 @@ export {
 export { stepsDark, stepsRtl as unstableStepsRtl } from './steps/styles'
 export { switchDark } from './switch/styles'
 export { tableDark, tableRtl as unstableTableRtl } from './table/styles'
-export { tabsDark } from './tabs/styles'
+export { tabsDark, tabsRtl as unstableTabsRtl } from './tabs/styles'
 export { tagDark, tagRtl as unstableTagRtl } from './tag/styles'
 export { thingDark, thingRtl as unstableThingRtl } from './thing/styles'
 export { timePickerDark } from './time-picker/styles'

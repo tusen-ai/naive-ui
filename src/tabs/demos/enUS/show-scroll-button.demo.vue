@@ -22,6 +22,8 @@ const type = ref<TabsProps['type']>('card')
       <n-radio label="bottom" value="bottom" />
       <n-radio label="left" value="left" />
       <n-radio label="right" value="right" />
+      <n-radio label="start" value="start" />
+      <n-radio label="end" value="end" />
     </n-radio-group>
 
     <n-radio-group v-model:value="type">
@@ -39,7 +41,10 @@ const type = ref<TabsProps['type']>('card')
       animated
       :placement="placement"
       :style="
-        placement === 'left' || placement === 'right'
+        placement === 'left'
+          || placement === 'right'
+          || placement === 'start'
+          || placement === 'end'
           ? { height: '240px' }
           : undefined
       "
@@ -56,7 +61,10 @@ const type = ref<TabsProps['type']>('card')
       animated
       :placement="placement"
       :style="
-        placement === 'left' || placement === 'right'
+        placement === 'left'
+          || placement === 'right'
+          || placement === 'start'
+          || placement === 'end'
           ? { height: '240px' }
           : undefined
       "

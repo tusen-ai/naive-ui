@@ -21,10 +21,7 @@ export default defineComponent({
       type: Boolean,
       default: undefined
     },
-    loading: {
-      type: Boolean,
-      default: false
-    },
+    loading: Boolean,
     onClear: Function as PropType<(e: MouseEvent) => void>
   },
   setup(props, { slots }) {

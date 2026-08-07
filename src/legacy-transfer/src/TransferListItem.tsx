@@ -7,10 +7,7 @@ import { transferInjectionKey } from './interface'
 export default defineComponent({
   name: 'NTransferListItem',
   props: {
-    source: {
-      type: Boolean,
-      default: false
-    },
+    source: Boolean,
     label: {
       type: String,
       required: true
@@ -19,10 +16,7 @@ export default defineComponent({
       type: [String, Number],
       required: true
     },
-    disabled: {
-      type: Boolean,
-      default: false
-    }
+    disabled: Boolean
   },
   setup(props) {
     const { source } = props

@@ -15,6 +15,7 @@
 - `n-data-table` 新增 `getFilteredAndSortedData` 和 `getCurrentPageData` 方法，关闭 [#8088](https://github.com/tusen-ai/naive-ui/issues/8088)
 - `n-tabs` 新增 `show-scroll-button` 和 `center-active-tab` 属性，关闭 [#5846](https://github.com/tusen-ai/naive-ui/issues/5846)、[#2128](https://github.com/tusen-ai/naive-ui/issues/2128)
 - `n-tabs` 新增 `scrollToCurrentTab` 方法，关闭 [#7548](https://github.com/tusen-ai/naive-ui/issues/7548)
+- `n-tabs` 支持 RTL，`placement` 新增 `'start'`、`'end'`
 
 ### Fixes
 
@@ -33,6 +34,7 @@
 - 修复 `n-space` `size` 属性设置为 `0` 时不生效的问题，关闭 [#7530](https://github.com/tusen-ai/naive-ui/issues/7530)
 - 修复 `n-date-picker` 在 `type="datetime"` 时点击面板清空按钮会连续触发两次 `update:value` 的问题，关闭 [#8070](https://github.com/tusen-ai/naive-ui/issues/8070)
 - 修复 `n-input-otp` 在浏览器扩展自动填充时将完整 OTP 写入单个输入框时只保留最后一个字符的问题，关闭 [#7540](https://github.com/tusen-ai/naive-ui/pull/7540)
+- 修复 `n-menu` 在缩起（collapsed）状态下选项包含 `type="group"` 分组时菜单项图标未居中的问题，关闭 [#8105](https://github.com/tusen-ai/naive-ui/issues/8105)
 
 ## 2.44.1
 
