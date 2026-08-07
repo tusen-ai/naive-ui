@@ -326,7 +326,9 @@ export default defineComponent({
           && file.status !== 'error'
           && listType !== 'image-card'
           && `${clsPrefix}-upload-file--with-url`,
-          `${clsPrefix}-upload-file--${listType}-type`
+          `${clsPrefix}-upload-file--${listType}-type`,
+          this.alwaysShowActions
+          && `${clsPrefix}-upload-file--always-show-actions`
         ]}
       >
         <div class={`${clsPrefix}-upload-file-info`}>

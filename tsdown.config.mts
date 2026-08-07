@@ -21,7 +21,11 @@ const cjsLodashPlugin = {
 }
 
 export default defineConfig({
-  entry: ['src/**/*.{ts,tsx}', '!src/**/*.spec.*'],
+  entry: [
+    'src/**/*.{ts,tsx}',
+    '!src/**/*.spec.*',
+    '!src/vitest-setup.ts'
+  ],
   root: 'src',
   outDir: buildFormat === 'esm' ? 'es' : 'lib',
   format: buildFormat,

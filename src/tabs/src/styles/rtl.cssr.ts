@@ -21,12 +21,6 @@ export default cB('tabs', [
         padding-left: 0;
       `)
     ]),
-    cB('tabs-tab', [
-      cE('close', `
-        margin-left: 0;
-        margin-right: 6px;
-      `)
-    ]),
     cM('top, bottom', [
       c('>', [
         cB('tabs-nav', [
@@ -60,16 +54,6 @@ export default cB('tabs', [
       c('&.next-transition-leave-to, &.prev-transition-enter-from', `
         transform: translateX(32px);
       `)
-    ]),
-    cB('tabs-nav', [
-      cM('card-type', [
-        cB('tabs-tab', [
-          cM('closable', `
-            padding-left: 8px;
-            padding-right: unset;
-          `)
-        ])
-      ])
     ]),
     cB('tabs-scroll-button', [
       cM('start', `
