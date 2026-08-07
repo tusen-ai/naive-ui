@@ -173,7 +173,7 @@ export function createLayoutComponent(isContent: boolean) {
               contentClass={this.contentClass}
               contentStyle={[this.contentStyle, hasSiderStyle] as any}
             >
-              {{ ...this.$slots }}
+              {this.$slots}
             </NScrollbar>
           )}
         </div>

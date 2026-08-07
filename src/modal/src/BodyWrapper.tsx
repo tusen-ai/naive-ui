@@ -358,7 +358,7 @@ export default defineComponent({
                                         titleClass={this.dialogTitleClass}
                                         aria-modal="true"
                                       >
-                                        {{ ...$slots }}
+                                        {$slots}
                                       </NDialog>
                                     ) : this.preset === 'card' ? (
                                       <NCard
@@ -377,7 +377,7 @@ export default defineComponent({
                                         aria-modal="true"
                                         role="dialog"
                                       >
-                                        {{ ...$slots }}
+                                        {$slots}
                                       </NCard>
                                     ) : (
                                       (this.childNodeRef = childNode)
