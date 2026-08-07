@@ -12,6 +12,7 @@
 
 - `n-upload` adds `always-show-actions` prop, closes [#8073](https://github.com/tusen-ai/naive-ui/issues/8073).
 - `n-image` adds `keep-drag-offset` prop, closes [#7544](https://github.com/tusen-ai/naive-ui/issues/7544).
+- `n-checkbox` adds button-group variant (`n-checkbox-button`), closes [#7326](https://github.com/tusen-ai/naive-ui/issues/7326).
 - `n-data-table` adds `getFilteredAndSortedData` and `getCurrentPageData` methods, closes [#8088](https://github.com/tusen-ai/naive-ui/issues/8088).
 - `n-tabs` adds `show-scroll-button` and `center-active-tab` props, closes [#5846](https://github.com/tusen-ai/naive-ui/issues/5846), [#2128](https://github.com/tusen-ai/naive-ui/issues/2128).
 - `n-tabs` adds `scrollToCurrentTab` method, closes [#7548](https://github.com/tusen-ai/naive-ui/issues/7548).

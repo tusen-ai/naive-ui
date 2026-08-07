@@ -12,6 +12,7 @@
 
 - `n-upload` 新增 `always-show-actions` 属性，关闭 [#8073](https://github.com/tusen-ai/naive-ui/issues/8073)
 - `n-image` 新增 `keep-drag-offset` 属性，关闭 [#7544](https://github.com/tusen-ai/naive-ui/issues/7544)
+- `n-checkbox` 新增按钮组模式（`n-checkbox-button`），关闭 [#7326](https://github.com/tusen-ai/naive-ui/issues/7326)
 - `n-data-table` 新增 `getFilteredAndSortedData` 和 `getCurrentPageData` 方法，关闭 [#8088](https://github.com/tusen-ai/naive-ui/issues/8088)
 - `n-tabs` 新增 `show-scroll-button` 和 `center-active-tab` 属性，关闭 [#5846](https://github.com/tusen-ai/naive-ui/issues/5846)、[#2128](https://github.com/tusen-ai/naive-ui/issues/2128)
 - `n-tabs` 新增 `scrollToCurrentTab` 方法，关闭 [#7548](https://github.com/tusen-ai/naive-ui/issues/7548)
