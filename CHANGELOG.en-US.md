@@ -35,6 +35,7 @@
 - Fix `n-date-picker` with `type="datetime"` emitting `update:value` twice when clearing from panel, closes [#8070](https://github.com/tusen-ai/naive-ui/issues/8070).
 - Fix `n-input-otp` only keeping the last character when browser extension autofill sets the full OTP value on a single input, closes [#7540](https://github.com/tusen-ai/naive-ui/pull/7540).
 - Fix `n-menu` item icons not centered in collapsed mode when the options contain a `type="group"` group, closes [#8105](https://github.com/tusen-ai/naive-ui/issues/8105).
+- Fix `n-data-table`'s exported CSV being broken by cells containing line breaks, commas or double quotes, closes [#8153](https://github.com/tusen-ai/naive-ui/issues/8153).
 
 ## 2.44.1
 

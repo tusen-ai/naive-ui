@@ -198,15 +198,14 @@ export function isColumnSorting(
 }
 
 function formatCsvCell(value: unknown): string {
-  if (typeof value === 'string') {
-    return value.replace(/,/g, '\\,')
-  }
-  else if (value === null || value === undefined) {
+  if (value === null || value === undefined) {
     return ''
   }
-  else {
-    return `${value}`.replace(/,/g, '\\,')
+  const cell = typeof value === 'string' ? value : `${value}`
+  if (/[",\r\n]/.test(cell)) {
+    return `"${cell.replace(/"/g, '""')}"`
   }
+  return cell
 }
 
 export function generateCsv(
