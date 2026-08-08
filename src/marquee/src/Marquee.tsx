@@ -1,3 +1,4 @@
+import type { SlotsType, VNode } from 'vue'
 import { repeat } from 'seemly'
 import { computed, defineComponent, h, nextTick, ref } from 'vue'
 import { VResizeObserver } from 'vueuc'
@@ -6,9 +7,14 @@ import { marqueeLight } from '../styles'
 import { marqueeProps } from './props'
 import style from './styles/index.cssr'
 
+export interface MarqueeSlots {
+  default?: () => VNode[]
+}
+
 export default defineComponent({
   name: 'Marquee',
   props: marqueeProps,
+  slots: Object as SlotsType<MarqueeSlots>,
   setup(props) {
     const { mergedClsPrefixRef } = useConfig(props)
     useTheme(
