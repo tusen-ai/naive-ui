@@ -32,5 +32,16 @@ export default cB('split', `
     c('&:hover', `
       background-color: var(--n-resize-trigger-color-hover);
     `)
+  ]),
+  cE('resize-trigger-wrapper', null, [
+    cM('disabled', [
+      cE('resize-trigger', `
+        pointer-events: none;
+      `, [
+        c('&:hover', `
+          background-color: var(--n-resize-trigger-color);
+        `)
+      ])
+    ])
   ])
 ])

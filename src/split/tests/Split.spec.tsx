@@ -21,7 +21,9 @@ describe('n-split', () => {
       props: { defaultSize: 0.3 }
     })
     // The style uses calc() format: flex: 0 0 calc(30% - 0.9px)
-    expect(wrapper.find('.n-split-pane-1').attributes('style')).toContain('flex: 0 0 calc(30%')
+    expect(wrapper.find('.n-split-pane-1').attributes('style')).toContain(
+      'flex: 0 0 calc(30%'
+    )
     wrapper.unmount()
   })
 
@@ -30,10 +32,14 @@ describe('n-split', () => {
       props: { size: 0.4 }
     })
     // The style uses calc() format
-    expect(wrapper.find('.n-split-pane-1').attributes('style')).toContain('flex: 0 0 calc(40%')
+    expect(wrapper.find('.n-split-pane-1').attributes('style')).toContain(
+      'flex: 0 0 calc(40%'
+    )
 
     await wrapper.setProps({ size: 0.6 })
-    expect(wrapper.find('.n-split-pane-1').attributes('style')).toContain('flex: 0 0 calc(60%')
+    expect(wrapper.find('.n-split-pane-1').attributes('style')).toContain(
+      'flex: 0 0 calc(60%'
+    )
     wrapper.unmount()
   })
 
@@ -63,7 +69,51 @@ describe('n-split', () => {
 
     await wrapper.setProps({ disabled: true })
     // When disabled, resize trigger should not exist
-    expect(wrapper.find('.n-split__resize-trigger-wrapper').exists()).toBe(false)
+    expect(wrapper.find('.n-split__resize-trigger-wrapper').exists()).toBe(
+      false
+    )
+    wrapper.unmount()
+  })
+
+  it('should work with `draggable` prop', async () => {
+    const onDragStart = vi.fn()
+    const onUpdateSize = vi.fn()
+    const wrapper = mount(NSplit, {
+      props: {
+        onDragStart,
+        onUpdateSize,
+        defaultSize: 0.5
+      },
+      slots: {
+        1: () => 'Pane 1',
+        2: () => 'Pane 2'
+      }
+    })
+
+    // default: draggable is true, wrapper exists without disabled modifier
+    expect(wrapper.find('.n-split__resize-trigger-wrapper').exists()).toBe(true)
+    expect(
+      wrapper.find('.n-split__resize-trigger-wrapper').classes()
+    ).not.toContain('n-split__resize-trigger-wrapper--disabled')
+
+    // when draggable is false, wrapper still renders (trigger visible) but is marked disabled
+    await wrapper.setProps({ draggable: false })
+    expect(wrapper.find('.n-split__resize-trigger-wrapper').exists()).toBe(true)
+    expect(
+      wrapper.find('.n-split__resize-trigger-wrapper').classes()
+    ).toContain('n-split__resize-trigger-wrapper--disabled')
+
+    // mousedown should not trigger drag callbacks nor update size
+    const trigger = wrapper.find('.n-split__resize-trigger-wrapper')
+    await trigger.trigger('mousedown')
+    expect(onDragStart).not.toHaveBeenCalled()
+    expect(onUpdateSize).not.toHaveBeenCalled()
+
+    // switching back to draggable restores normal interaction surface
+    await wrapper.setProps({ draggable: true })
+    expect(
+      wrapper.find('.n-split__resize-trigger-wrapper').classes()
+    ).not.toContain('n-split__resize-trigger-wrapper--disabled')
     wrapper.unmount()
   })
 
@@ -96,7 +146,8 @@ describe('n-split', () => {
   it('should work with `resize-trigger` slot', () => {
     const wrapper = mount(NSplit, {
       slots: {
-        'resize-trigger': () => h('div', { class: 'custom-trigger' }, 'Trigger'),
+        'resize-trigger': () =>
+          h('div', { class: 'custom-trigger' }, 'Trigger'),
         1: () => 'Pane 1',
         2: () => 'Pane 2'
       }
@@ -133,8 +184,12 @@ describe('n-split', () => {
         2: () => 'Pane 2'
       }
     })
-    expect(wrapper.find('.n-split-pane-1').attributes('style')).toContain('background-color: red')
-    expect(wrapper.find('.n-split-pane-2').attributes('style')).toContain('background-color: blue')
+    expect(wrapper.find('.n-split-pane-1').attributes('style')).toContain(
+      'background-color: red'
+    )
+    expect(wrapper.find('.n-split-pane-2').attributes('style')).toContain(
+      'background-color: blue'
+    )
     wrapper.unmount()
   })
 
@@ -171,7 +226,9 @@ describe('n-split', () => {
     })
 
     await wrapper.setProps({ defaultSize: 0.7 })
-    expect(wrapper.find('.n-split-pane-1').attributes('style')).toContain('flex: 0 0 calc(70%')
+    expect(wrapper.find('.n-split-pane-1').attributes('style')).toContain(
+      'flex: 0 0 calc(70%'
+    )
     wrapper.unmount()
   })
 
@@ -186,7 +243,9 @@ describe('n-split', () => {
       }
     })
 
-    expect(wrapper.find('.n-split-pane-1').attributes('style')).toContain('flex: 0 0 200px')
+    expect(wrapper.find('.n-split-pane-1').attributes('style')).toContain(
+      'flex: 0 0 200px'
+    )
     wrapper.unmount()
   })
 
