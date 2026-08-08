@@ -393,4 +393,31 @@ describe('n-date-picker', () => {
 
     wrapper.unmount()
   })
+
+  it('should work with `is-date-disabled` prop for `monthrange`', async () => {
+    const isDateDisabled = vi.fn(() => true)
+    const wrapper = mount(NDatePicker, {
+      attachTo: document.body,
+      props: {
+        type: 'monthrange',
+        isDateDisabled
+      }
+    })
+
+    await wrapper.find('.n-input__input').trigger('click')
+    const items = Array.from(
+      document.querySelectorAll('.n-date-panel-month-calendar__picker-col-item')
+    )
+    expect(items.length).toBeGreaterThan(0)
+    expect(isDateDisabled).toHaveBeenCalled()
+    expect(
+      items.every(item =>
+        item.classList.contains(
+          'n-date-panel-month-calendar__picker-col-item--disabled'
+        )
+      )
+    ).toBe(true)
+
+    wrapper.unmount()
+  })
 })
