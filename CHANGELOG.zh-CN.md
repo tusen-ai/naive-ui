@@ -10,6 +10,7 @@
 
 ### Feats
 
+- `n-input` 新增 `colorHover` 主题变量
 - `n-checkbox-group`、`n-radio-group` 新增 `options`、`label-field`、`value-field` 属性，关闭 [#7505](https://github.com/tusen-ai/naive-ui/issues/7505)
 - `n-upload` 新增 `always-show-actions` 属性，关闭 [#8073](https://github.com/tusen-ai/naive-ui/issues/8073)
 - `n-image` 新增 `keep-drag-offset` 属性，关闭 [#7544](https://github.com/tusen-ai/naive-ui/issues/7544)

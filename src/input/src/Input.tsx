@@ -913,6 +913,7 @@ export default defineComponent({
         common: { cubicBezierEaseInOut },
         self: {
           color,
+          colorHover,
           borderRadius,
           textColor,
           caretColor,
@@ -967,6 +968,7 @@ export default defineComponent({
         '--n-count-text-color': countTextColor,
         '--n-count-text-color-disabled': countTextColorDisabled,
         '--n-color': color,
+        '--n-color-hover': colorHover,
         '--n-font-size': fontSize,
         '--n-font-weight': fontWeight,
         '--n-border-radius': borderRadius,

@@ -10,6 +10,7 @@
 
 ### Feats
 
+- `n-input` adds the `colorHover` theme variable.
 - `n-checkbox-group` and `n-radio-group` add `options`, `label-field` and `value-field` props, closes [#7505](https://github.com/tusen-ai/naive-ui/issues/7505).
 - `n-upload` adds `always-show-actions` prop, closes [#8073](https://github.com/tusen-ai/naive-ui/issues/8073).
 - `n-image` adds `keep-drag-offset` prop, closes [#7544](https://github.com/tusen-ai/naive-ui/issues/7544).
