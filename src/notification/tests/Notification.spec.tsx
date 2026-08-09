@@ -174,6 +174,39 @@ describe('notification-provider', () => {
     ).toEqual(true)
     wrapper.unmount()
   })
+  it('should allow each notification to override `placement`', async () => {
+    const Test = defineComponent({
+      setup() {
+        const notification = useNotification()
+        notification.info({
+          title: 'top left',
+          placement: 'top-left'
+        })
+        notification.success({
+          title: 'bottom right',
+          placement: 'bottom-right'
+        })
+      },
+      render() {
+        return null
+      }
+    })
+    const wrapper = mount(NNotificationProvider, {
+      slots: {
+        default: () => <Test />
+      }
+    })
+    await nextTick()
+    const topLeftContainer = document.querySelector(
+      '.n-notification-container--top-left'
+    )
+    const bottomRightContainer = document.querySelector(
+      '.n-notification-container--bottom-right'
+    )
+    expect(topLeftContainer?.textContent).toContain('top left')
+    expect(bottomRightContainer?.textContent).toContain('bottom right')
+    wrapper.unmount()
+  })
   it('should work with `destroyAll` method', async () => {
     const Test = defineComponent({
       setup() {
