@@ -68,13 +68,13 @@ What's more, ..., no more. Just enjoy it.
 Use npm to install.
 
 ```bash
-npm i -D naive-ui
+npm install naive-ui
 ```
 
 ### Fonts
 
 ```bash
-npm i -D vfonts
+npm install vfonts
 ```
 
 ### Icons
