@@ -10,6 +10,7 @@ custom-field.vue
 multiple.vue
 checkbox.vue
 check-strategy.vue
+show-line.vue
 filterable.vue
 action.vue
 async.vue
@@ -61,6 +62,7 @@ debug.vue
 | render-switcher-icon | `() => VNodeChild` | `undefined` | Render function of option switcher icon. | 2.30.7 |
 | render-tag | `(props: { option: TreeSelectOption, handleClose: () => void }) => VNodeChild` | `undefined` | Render function for each option tag. | 2.30.7 |
 | separator | `string` | `' / '` | Option value separator. |  |
+| show-line | `boolean` | `false` | Whether to display tree connecting lines. | 2.44.0 |
 | show-path | `boolean` | `false` | Whether to also show the hierarchy of selected nodes in the label. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Component size. |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | Validation status. | 2.27.0 |

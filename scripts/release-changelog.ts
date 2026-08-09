@@ -13,7 +13,8 @@ const {
   DINGTALK_TOKEN_3,
   DINGTALK_TOKEN_4,
   DINGTALK_TOKEN_5,
-  DINGTALK_TOKEN_6
+  DINGTALK_TOKEN_6,
+  DINGTALK_TOKEN_7
 } = env
 
 const { DISCORD_TOKEN } = env
@@ -50,7 +51,8 @@ async function releaseChangelogToDingTalk(): Promise<void> {
           DINGTALK_TOKEN_3,
           DINGTALK_TOKEN_4,
           DINGTALK_TOKEN_5,
-          DINGTALK_TOKEN_6
+          DINGTALK_TOKEN_6,
+          DINGTALK_TOKEN_7
         ]) {
           if (token) {
             await request

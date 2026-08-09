@@ -42,10 +42,7 @@ export const collapseProps = {
     type: String as PropType<'left' | 'right'>,
     default: 'left'
   },
-  accordion: {
-    type: Boolean,
-    default: false
-  },
+  accordion: Boolean,
   displayDirective: {
     type: String as PropType<'if' | 'show'>,
     default: 'if'
@@ -258,7 +255,7 @@ export default defineComponent({
         ]}
         style={this.cssVars as CSSProperties}
       >
-        {this.$slots}
+        {this.$slots.default?.()}
       </div>
     )
   }

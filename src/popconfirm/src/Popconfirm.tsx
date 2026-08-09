@@ -129,9 +129,11 @@ export default defineComponent({
             const panelProps = keep(props, panelPropKeys)
             return (
               <PopconfirmPanel
-                {...panelProps}
-                onPositiveClick={this.handlePositiveClick}
-                onNegativeClick={this.handleNegativeClick}
+                {...{
+                  ...panelProps,
+                  onPositiveClick: this.handlePositiveClick,
+                  onNegativeClick: this.handleNegativeClick
+                }}
               >
                 {slots}
               </PopconfirmPanel>

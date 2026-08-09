@@ -2,17 +2,16 @@ import type { PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { InputTheme } from '../styles'
-import type { Size } from './interface'
+import type { InputSize } from './public-types'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import { createKey } from '../../_utils'
 import { inputLight } from '../styles'
-
 import style from './styles/input-group-label.cssr'
 
 export const inputGroupLabelProps = {
   ...(useTheme.props as ThemeProps<InputTheme>),
-  size: String as PropType<Size>,
+  size: String as PropType<InputSize>,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -27,10 +26,12 @@ export default defineComponent({
   name: 'InputGroupLabel',
   props: inputGroupLabelProps,
   setup(props) {
-    const { mergedBorderedRef, mergedClsPrefixRef, inlineThemeDisabled }
-      = useConfig(props)
-    const formItem = useFormItem(props)
-    const { mergedSizeRef } = formItem
+    const {
+      mergedBorderedRef,
+      mergedClsPrefixRef,
+      inlineThemeDisabled,
+      mergedComponentPropsRef
+    } = useConfig(props)
     const themeRef = useTheme(
       'Input',
       '-input-group-label',
@@ -39,6 +40,19 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+    const { mergedSizeRef } = useFormItem(props, {
+      mergedSize(NFormItem) {
+        if (props.size !== undefined)
+          return props.size
+        if (NFormItem) {
+          return NFormItem.mergedSize.value as InputSize
+        }
+        const configSize = mergedComponentPropsRef?.value?.Input?.size
+        if (configSize)
+          return configSize
+        return 'medium'
+      }
+    })
     const cssVarsRef = computed(() => {
       const { value: size } = mergedSizeRef
       const {
@@ -67,10 +81,7 @@ export default defineComponent({
     const themeClassHandle = inlineThemeDisabled
       ? useThemeClass(
           'input-group-label',
-          computed(() => {
-            const { value: size } = mergedSizeRef
-            return size[0]
-          }),
+          computed(() => mergedSizeRef.value[0]),
           cssVarsRef,
           props
         )

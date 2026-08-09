@@ -5,3 +5,4 @@ export type {
   DynamicTagsOption,
   DynamicTagsTriggerSlotProps
 } from './src/interface'
+export type * from './src/public-types'

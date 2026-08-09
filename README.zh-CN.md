@@ -30,7 +30,8 @@
 - 钉钉三群 32377370 (已满)
 - 钉钉四群 8165002788 (已满)
 - 钉钉五群 31205022250 (已满)
-- 钉钉六群 62720001971
+- 钉钉六群 62720001971 (已满)
+- 钉钉七群 172000005810
 
 - [Awesome Naive UI](https://github.com/naive-ui/awesome-naive)
 
@@ -69,13 +70,13 @@ Naive UI 全量使用 TypeScript 编写，和你的 TypeScript 项目无缝衔�
 使用 npm 安装。
 
 ```bash
-npm i -D naive-ui
+npm i naive-ui
 ```
 
 ### 字体
 
 ```bash
-npm i -D vfonts
+npm i vfonts
 ```
 
 ### 图标

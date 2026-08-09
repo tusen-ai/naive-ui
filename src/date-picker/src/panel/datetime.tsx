@@ -104,6 +104,8 @@ export default defineComponent({
               ])}
             </div>
             <PanelHeader
+              fastYearSelect={this.fastYearSelect}
+              fastMonthSelect={this.fastMonthSelect}
               monthYearSeparator={this.calendarHeaderMonthYearSeparator}
               monthBeforeYear={this.calendarMonthBeforeYear}
               value={this.calendarValue}

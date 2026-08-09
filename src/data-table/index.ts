@@ -20,9 +20,10 @@ export type {
   RenderSorterIcon as DataTableRenderSorterIcon,
   RowData as DataTableRowData,
   RowKey as DataTableRowKey,
+  DataTableScrollTo,
   TableSelectionColumn as DataTableSelectionColumn,
   DataTableSlots,
   SortOrder as DataTableSortOrder,
   SortState as DataTableSortState
 } from './src/interface'
-export * from './src/publicTypes'
+export type * from './src/public-types'

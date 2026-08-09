@@ -164,9 +164,10 @@ export default defineComponent({
       },
       onPreviewClose,
       mergedOnError: (e: Event) => {
-        if (!shouldStartLoadingRef.value)
+        if (props.intersectionObserverOptions && !shouldStartLoadingRef.value)
           return
         showErrorRef.value = true
+        loadedRef.value = true
         const { onError, imgProps: { onError: imgPropsOnError } = {} } = props
         onError?.(e)
         imgPropsOnError?.(e)
@@ -245,6 +246,7 @@ export default defineComponent({
             showToolbar={this.showToolbar}
             showToolbarTooltip={this.showToolbarTooltip}
             renderToolbar={this.renderToolbar}
+            keepDragOffset={this.keepDragOffset}
             src={this.mergedPreviewSrc}
             show={!this.previewDisabled && this.previewShow}
             onClose={this.onPreviewClose}

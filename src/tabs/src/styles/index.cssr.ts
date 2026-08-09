@@ -40,6 +40,17 @@ export default cB('tabs', `
     background-color .3s var(--n-bezier),
     border-color .3s var(--n-bezier);
 `, [
+  c('&.transition-disabled', [
+    cB('tabs-tab', `
+      transition: none !important;
+    `),
+    cB('tabs-nav-scroll-content', `
+      transition: none !important;
+    `),
+    cB('tabs-tab-pad', `
+      transition: none !important;
+    `)
+  ]),
   cM('segment-type', [
     cB('tabs-rail', [
       c('&.transition-disabled', [
@@ -108,6 +119,8 @@ export default cB('tabs', `
     cB('tabs-capsule', `
       border-radius: var(--n-tab-border-radius);
       position: absolute;
+      left: 0;
+      top: 0;
       pointer-events: none;
       background-color: var(--n-tab-color-segment);
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .08);
@@ -251,7 +264,12 @@ export default cB('tabs', `
       content: "";
       position: absolute;
       z-index: 1;
-    `)
+    `),
+    c('&.transition-disabled', [
+      c('&::before, &::after', `
+        transition: none;
+      `)
+    ])
   ]),
   cB('tabs-nav-scroll-content', `
     display: flex;
@@ -292,7 +310,7 @@ export default cB('tabs', `
       cursor: 'not-allowed'
     }),
     cE('close', `
-      margin-left: 6px;
+      margin-inline-start: 6px;
       transition:
         background-color .3s var(--n-bezier),
         color .3s var(--n-bezier);
@@ -386,6 +404,12 @@ export default cB('tabs', `
     ])
   ]),
   cB('tabs-nav', [
+    cE('prefix, suffix', `
+      border-color: var(--n-tab-border-color);
+    `),
+    cB('tabs-nav-scroll-content', `
+      border-color: var(--n-tab-border-color);
+    `),
     cM('line-type', [
       cM('top', [
         cE('prefix, suffix', `
@@ -480,7 +504,7 @@ export default cB('tabs', `
             `)
           ])
         ]),
-        cM('closable', 'padding-right: 8px;'),
+        cM('closable', 'padding-inline-end: 8px;'),
         cM('active', `
           background-color: #0000;
           font-weight: var(--n-tab-font-weight-active);
@@ -595,5 +619,21 @@ export default cB('tabs', `
         `)
       ])
     ])
+  ]),
+  cB('tabs-scroll-button', [
+    cM('start', `
+      padding-left: 10px;
+      padding-right: 6px;
+    `),
+    cM('end', `
+      padding-right: 10px;
+      padding-left: 6px;
+    `),
+    cM('up', `
+      padding-bottom: 10px;
+    `),
+    cM('down', `
+      padding-top: 10px;
+    `)
   ])
 ])

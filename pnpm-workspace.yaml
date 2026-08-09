@@ -1,0 +1,15 @@
+packages:
+  - '.'
+allowBuilds:
+  esbuild: true
+onlyBuiltDependencies:
+  - esbuild
+overrides:
+  cssstyle: 5.2.1
+  vite: ^8.0.10
+peerDependencyRules:
+  ignoreMissing:
+    - '@babel/core'
+    - postcss
+    - rollup
+    - webpack

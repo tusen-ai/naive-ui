@@ -208,6 +208,12 @@ export default c([
           cB('upload-file-info', [
             cE('thumbnail', 'opacity: .12;')
           ])
+        ]),
+        cM('always-show-actions', [
+          c('&::before', 'opacity: 1;'),
+          cB('upload-file-info', [
+            cE('thumbnail', 'opacity: .12;')
+          ])
         ])
       ]),
       cM('error-status', [
@@ -296,6 +302,9 @@ export default c([
             display: flex;
             justify-content: center;
             align-items: center;
+          `),
+          cM('always-show', `
+            opacity: 1;
           `)
         ]),
         cE('name', `

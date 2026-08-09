@@ -30,7 +30,8 @@
 - DingTalk Group 3 (Member limit reached) 32377370
 - DingTalk Group 4 (Member limit reached) 8165002788
 - DingTalk Group 5 (Member limit reached) 31205022250
-- DingTalk Group 6 62720001971
+- DingTalk Group 6 (Member limit reached) 62720001971
+- DingTalk Group 7 172000005810
 
 - [Awesome Naive UI](https://github.com/naive-ui/awesome-naive)
 
@@ -67,13 +68,13 @@ What's more, ..., no more. Just enjoy it.
 Use npm to install.
 
 ```bash
-npm i -D naive-ui
+npm i naive-ui
 ```
 
 ### Fonts
 
 ```bash
-npm i -D vfonts
+npm i vfonts
 ```
 
 ### Icons

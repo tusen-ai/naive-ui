@@ -108,6 +108,7 @@ export default defineComponent({
                 icon={this.icon}
                 showIcon={this.showIcon}
                 closable={this.closable}
+                spinProps={this.spinProps}
                 onClose={this.handleClose}
                 onMouseenter={
                   this.keepAliveOnHover ? this.handleMouseenter : undefined

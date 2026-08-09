@@ -3,6 +3,7 @@ import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { RateTheme } from '../styles'
 import type { RateOnUpdateValue, RateOnUpdateValueImpl } from './interface'
+import type { RateSize } from './public-types'
 import { useMergedState } from 'vooks'
 import { computed, defineComponent, h, ref, renderList, toRef } from 'vue'
 import { NBaseIcon } from '../../_internal'
@@ -25,10 +26,7 @@ export const rateProps = {
     default: null
   },
   readonly: Boolean,
-  size: {
-    type: [String, Number] as PropType<number | 'small' | 'medium' | 'large'>,
-    default: 'medium'
-  },
+  size: [String, Number] as PropType<RateSize>,
   clearable: Boolean,
   color: String,
   onClear: Function as PropType<() => void>,
@@ -44,7 +42,8 @@ export default defineComponent({
   name: 'Rate',
   props: rateProps,
   setup(props) {
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedComponentPropsRef }
+      = useConfig(props)
     const themeRef = useTheme(
       'Rate',
       '-rate',
@@ -56,7 +55,19 @@ export default defineComponent({
     const controlledValueRef = toRef(props, 'value')
     const uncontrolledValueRef = ref(props.defaultValue)
     const hoverIndexRef = ref<number | null>(null)
-    const formItem = useFormItem(props)
+    const formItem = useFormItem<RateSize>(props, {
+      mergedSize(NFormItem) {
+        if (props.size !== undefined)
+          return props.size
+        if (NFormItem) {
+          return NFormItem.mergedSize.value as RateSize
+        }
+        const configSize = mergedComponentPropsRef?.value?.Rate?.size
+        if (configSize !== undefined)
+          return configSize
+        return 'medium'
+      }
+    })
     const mergedValue = useMergedState(controlledValueRef, uncontrolledValueRef)
     function doUpdateValue(value: number | null): void {
       const { 'onUpdate:value': _onUpdateValue, onUpdateValue } = props
@@ -112,8 +123,10 @@ export default defineComponent({
     function handleMouseEnterSomeStar(): void {
       cleared = false
     }
+    const { mergedSizeRef: _mergedSizeRef } = formItem
+
     const mergedSizeRef = computed(() => {
-      const { size } = props
+      const size = _mergedSizeRef.value
       const { self } = themeRef.value
       if (typeof size === 'number') {
         return `${size}px`

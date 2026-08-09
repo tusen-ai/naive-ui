@@ -1,5 +1,7 @@
+import type { InputNumberSize } from './public-types'
+
 export type OnUpdateValue = (value: number | null) => void
-export type Size = 'tiny' | 'small' | 'medium' | 'large'
+export type Size = InputNumberSize
 
 export interface InputNumberInst {
   focus: () => void

@@ -4,7 +4,7 @@
 
 Naive UI is a high-quality Vue component library of unified design specifications. We prefer to provide only UI components with a unified specification and visual presentation. So we recommend the following great resources from the community that complement Naive UI.
 
-If you want to contribute excellent resources, please contact 07akioni or amadeus711 in the community of `Discord` or `DingTalk`.
+If you want to contribute excellent resources, you can create a pull request of this page in naive-ui's github repo.
 
 | Resources | Descriptions |
 | --- | --- |
@@ -23,3 +23,4 @@ If you want to contribute excellent resources, please contact 07akioni or amadeu
 | [astral-3d-editor](https://github.com/mlt131220/Astral3DEditor) | 3D scene building tool based on Vue3 + Naive UI + ThreeJS + Vite5 + Typescript, supporting CAD & BIM analysis, including weather system, particle system, plug-in center... |
 | [it-tools](https://github.com/CorentinTh/it-tools) | Developed based on Vue3 and the Naive UI component library, it brings together a variety of practical online tools |
 | [Lithe Admin](https://github.com/tenianon/lithe-admin) | A lightweight and elegant backend management template, built using Vue3 + Naive UI + Vite + TypeScript + Pinia, featuring a Tailwind CSS Color color scheme and a frosted texture design. |
+| [Vue Simple Template](https://github.com/gitboyzcf/vue3-simple-template) | A simple universal starter template based on Vue 3.5 + Vite 8 + Naive UI + TypeScript + Pinia + Vue Router + Tailwind CSS 4 + Pnpm. |

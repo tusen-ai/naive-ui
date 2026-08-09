@@ -4,8 +4,8 @@
     "target": "ES6",
     "jsx": "react",
     "rootDir": "./src",
-    "module": "CommonJS",
-    "moduleResolution": "node",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "outDir": "./lib"
   },
   "references": [{ "path": "../../src/tsconfig.cjs.json" }]

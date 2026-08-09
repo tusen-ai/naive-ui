@@ -2,13 +2,99 @@
 
 ## NEXT_VERSION
 
-`NEXT_VERSION`
+### i18n
+
+- 新增 nnNO locale
+- 更新 nbNO locale
+- 翻译日文 locale 中的 `DatePicker.weekPlaceholder`
 
 ### Feats
 
+- `n-upload` 新增 `always-show-actions` 属性，关闭 [#8073](https://github.com/tusen-ai/naive-ui/issues/8073)
+- `n-image` 新增 `keep-drag-offset` 属性，关闭 [#7544](https://github.com/tusen-ai/naive-ui/issues/7544)
+- `n-data-table` 新增 `getFilteredAndSortedData` 和 `getCurrentPageData` 方法，关闭 [#8088](https://github.com/tusen-ai/naive-ui/issues/8088)
+- `n-tabs` 新增 `show-scroll-button` 和 `center-active-tab` 属性，关闭 [#5846](https://github.com/tusen-ai/naive-ui/issues/5846)、[#2128](https://github.com/tusen-ai/naive-ui/issues/2128)
+- `n-tabs` 新增 `scrollToCurrentTab` 方法，关闭 [#7548](https://github.com/tusen-ai/naive-ui/issues/7548)
+- `n-tabs` 支持 RTL，`placement` 新增 `'start'`、`'end'`
 - `n-collapse-transition` 新增 `display-directive` 属性，关闭 [#6453](https://github.com/tusen-ai/naive-ui/issues/6453)
 
+### Fixes
+
+- 修复 `n-modal` 遮罩层位于 scrollbar 内部导致 `Blocked aria-hidden on an element because its descendant retained focus` 警告，关闭 [#7556](https://github.com/tusen-ai/naive-ui/issues/7556)
+- 修复 `n-color-picker` 传入的 style、click 事件不生效，关闭 [#7528](https://github.com/tusen-ai/naive-ui/issues/7528)
+- 修复 `n-data-table` 的 `scrollTo` 方法类型缺失，关闭 [#7554](https://github.com/tusen-ai/naive-ui/issues/7554)
+- 修复 `n-data-table` 的 empty 状态在设定高度后没有垂直居中显示，关闭 [#7546](https://github.com/tusen-ai/naive-ui/issues/7546)
+- 修复 `n-spin` 未传入 `strokeWidth` 时无法按 `size` 使用内置线宽（被 Loading 的默认值覆盖）的问题，关闭 [#8061](https://github.com/tusen-ai/naive-ui/issues/8061)
+- 修复 `n-upload` 在受控模式下 `custom-request` 中同步调用 `onError` 时多文件状态更新丢失的问题，关闭 [#7366](https://github.com/tusen-ai/naive-ui/issues/7366)
+- 修复 `n-image` 开启 `lazy` 后图片加载失败时 error slot 和 fallbackSrc 失效的问题
+- 修复 `n-modal` 拖拽位置在渲染被重置的问题
+- 修复 `n-tabs` 导航尺寸变化后标签栏过渡动画被禁用的问题，关闭 [#7406](https://github.com/tusen-ai/naive-ui/issues/7406)
+- 修复 `vitest-setup.ts` 被输出到构建产物的问题
+- 修复 `n-dynamic-tags` 在输入法合成（IME composition）期间按 Enter 确认候选词时会误提交标签的问题
+- 修复 `n-image` 图片加载失败时 `placeholder` 插槽与 `error` 插槽同时显示的问题，关闭 [#7526](https://github.com/tusen-ai/naive-ui/issues/7526)
+- 修复 `n-space` `size` 属性设置为 `0` 时不生效的问题，关闭 [#7530](https://github.com/tusen-ai/naive-ui/issues/7530)
+- 修复 `n-date-picker` 在 `type="datetime"` 时点击面板清空按钮会连续触发两次 `update:value` 的问题，关闭 [#8070](https://github.com/tusen-ai/naive-ui/issues/8070)
+- 修复 `n-input-otp` 在浏览器扩展自动填充时将完整 OTP 写入单个输入框时只保留最后一个字符的问题，关闭 [#7540](https://github.com/tusen-ai/naive-ui/pull/7540)
+- 修复 `n-menu` 在缩起（collapsed）状态下选项包含 `type="group"` 分组时菜单项图标未居中的问题，关闭 [#8105](https://github.com/tusen-ai/naive-ui/issues/8105)
+
+## 2.44.1
+
+`2026-03-08`
+
+### Feats
+
+- `n-config-provider` 在 `component-options` 中新增按组件配置 `size`（`AutoComplete`、`Cascader`、`ColorPicker`、`DatePicker`、`InputNumber`、`InputOtp`、`Mention`、`Select`、`TimePicker`、`Transfer`、`TreeSelect`）
+
+### Fixes
+
+- 修复 `n-config-provider` 部分组件的 `size` 全局配置不生效
+- 修复 `n-card` 开启 `content-scrollable` 时内部 scrollbar 触发 Non-function value encountered for default slot 的vue警告，关闭 [#7556](https://github.com/tusen-ai/naive-ui/issues/7556)
+
+## 2.44.0
+
+`2026-03-08`
+
+### Breaking Changes
+
+- `n-color-picker` 重构 DOM 结构和 trigger 相关的类名
+- `n-card` 中 `n-card__content` 类名改为 `n-card-content`
+- `n-select` 点击清空按钮时默认会删除通过 `tag` 属性创建的选项
+
+### Feats
+
+- `n-color-picker` 新增 `trigger` slot，关闭 [#7192](https://github.com/tusen-ai/naive-ui/issues/7192)
+- `n-select` 新增 `clear-created-options-on-clear` 属性，用于在开启 `tag` 且可清空时控制点击清空是否同时清空通过 tag 创建的选项
+- `n-select` `n-auto-complete` `n-mention` `n-popselect` `n-cascader` `n-pagination` 新增 `scrollbar-props` 属性
+- `n-config-provider` 新增组件级 `renderEmpty` 配置（`Cascader`、`DataTable`、`Select`、`Transfer`、`Tree`、`TreeSelect`）
+- `n-config-provider` 在 `component-options` 中新增按组件配置 `size`（`Button`、`Card`、`Checkbox`、`DataTable`、`Descriptions`、`Dropdown`、`DynamicTags`、`Form`、`Input`、`Pagination`、`Popselect`、`Radio`、`Rate`、`Result`、`Skeleton`、`Space`、`Switch`、`Table`、`Tabs`、`Tag`），关闭 [#356](https://github.com/tusen-ai/naive-ui/issues/356)
+- `n-upload` 的 `submit` 方法新增 `retry` 属性。
+- `n-breadcrumb-item` 新增 `show-separator` 属性，用于配合 `transition-group` 使用时手动控制分隔符显隐，关闭 [#3614](https://github.com/tusen-ai/naive-ui/issues/3614)
+- `n-card` 新增 `content-scrollable` 属性，关闭 [#4848](https://github.com/tusen-ai/naive-ui/issues/4848)、[#6759](https://github.com/tusen-ai/naive-ui/pull/6759)
+- `n-date-picker` 新增 `fast-year-select` 参数
+- `n-date-picker` 新增 `fast-month-select` 参数
+- `n-button` 增加 `spin-props` 属性
+- `n-cascader` 增加 `spin-props` 属性
+- `n-log` 增加 `spin-props` 属性
+- `n-message` 增加 `spin-props` 属性
+- `n-switch` 增加 `spin-props` 属性
+- `n-tree` 增加 `spin-props` 属性
+- `n-spin` 增加 `radius` 和 `scale` 属性
+- `n-tree-select` 增加 `show-line` 属性
+
+### Fixes
+
+- 修复 `katex` 类型兼容问题，升级到 `0.16.28` 并移除 `@types/katex` 依赖，关闭 [#7423](https://github.com/tusen-ai/naive-ui/issues/7423)
+- 修复 `n-select` 清除动态创建的选项时，同时启用 `tag` 和 `clearable` 属性时清除不生效的问题，关闭 [#7405](https://github.com/tusen-ai/naive-ui/issues/7405)
+- 修复 `n-modal` 监听事件未移除，关闭 [#7341](https://github.com/tusen-ai/naive-ui/issues/7341)
+- 修复 `n-marquee` 组件 Non-function value encountered for default slot 警告
+- 修复 `n-data-table` 的 empty 状态在 `display: flex` 的容器中不展示
+- 修复 `n-data-table` 的在 empty 状态下，配合 `max-height` 或者 `flex-height`，header 部分没有滚动条，关闭 [#7479](https://github.com/tusen-ai/naive-ui/pull/7479)
+- 修复 `n-input`、`n-select`、`n-date-picker`、`n-auto-complete`、`n-cascader`、`n-color-picker`、`n-input-number`、`n-input-otp`、`n-mention`、`n-time-picker`、`n-transfer`、`n-tree-select` 未读取 `n-config-provider` 的全局 `size` 配置
+- 修复 `n-data-table`、`n-tag` 的 `size` 属性默认值导致全局配置无法生效
+
 ## 2.43.2
+
+`2025-11-16`
 
 ### Fixes
 
@@ -77,6 +163,7 @@
 - `useModal` 新增 `render` 函数，关闭 [#5857](https://github.com/tusen-ai/naive-ui/issues/5857)
 - `n-card` 新增 `close-focusable` 属性
 - `n-dialog` 新增 `close-focusable` 属性
+- `n-form-item` 增加 `invalidateLabelWidth` 方法，`n-form` 增加 `invalidateLabelWidths` 方法，关闭 [#5939](https://github.com/tusen-ai/naive-ui/issues/5939)
 
 ## 2.42.0
 

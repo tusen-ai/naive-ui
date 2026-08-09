@@ -3,11 +3,10 @@
 </markdown>
 
 <script lang="ts" setup>
-import type { FormRules } from 'naive-ui'
-import type { Size } from '../../../form/src/interface'
+import type { FormRules, FormSize } from 'naive-ui'
 import { reactive, ref } from 'vue'
 
-const size = ref<Size | undefined>('medium')
+const size = ref<FormSize | undefined>('medium')
 
 const rules: FormRules = {
   inputValue: {

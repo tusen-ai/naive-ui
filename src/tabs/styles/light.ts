@@ -1,6 +1,7 @@
-import type { Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
+import { createTheme } from '../../_mixins'
 import { commonLight } from '../../_styles/common'
+import { buttonLight } from '../../button/styles'
 import sizeVariables from './_common'
 
 export function self(vars: ThemeCommonVars) {
@@ -62,11 +63,14 @@ export function self(vars: ThemeCommonVars) {
 
 export type TabsThemeVars = ReturnType<typeof self>
 
-const tabsLight: Theme<'Tabs', TabsThemeVars> = {
+const tabsLight = createTheme({
   name: 'Tabs',
   common: commonLight,
+  peers: {
+    Button: buttonLight
+  },
   self
-}
+})
 
 export default tabsLight
 export type TabsTheme = typeof tabsLight

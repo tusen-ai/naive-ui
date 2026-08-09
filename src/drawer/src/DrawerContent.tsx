@@ -117,7 +117,7 @@ export default defineComponent({
               style={bodyContentStyle}
               role="none"
             >
-              {$slots}
+              {$slots.default?.()}
             </div>
           </div>
         ) : (

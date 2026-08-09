@@ -35,10 +35,13 @@ What's more, ..., no more. Just enjoy it.
 ## Community
 
 - [Discord](https://discord.gg/Pqv7Mev5Dd)
-- DingTalk Group 1 (Member limit reached) 33482509
-- DingTalk Group 2 (Member limit reached) 35886835
-- DingTalk Group 3 (Member limit reached) 32377370
-- DingTalk Group 4 8165002788
+- 钉钉一群 33482509 (已满)
+- 钉钉二群 35886835 (已满)
+- 钉钉三群 32377370 (已满)
+- 钉钉四群 8165002788 (已满)
+- 钉钉五群 31205022250 (已满)
+- 钉钉六群 62720001971 (已满)
+- 钉钉七群 172000005810
 
 ## Contributing
 

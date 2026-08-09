@@ -1,9 +1,9 @@
 import type { CNode } from 'css-render'
-import type { Type } from '../../../button/src/interface'
+import type { ButtonType } from '../../../button/src/public-types'
 import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 import { n1, zero } from './index.cssr'
 
-function createRightBorderStyle(type: Type): CNode {
+function createRightBorderStyle(type: ButtonType): CNode {
   return cM(`${type}-type`, [
     c('& +', [
       cB('button', {}, [

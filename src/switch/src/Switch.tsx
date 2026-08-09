@@ -3,6 +3,7 @@ import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { SwitchTheme } from '../styles'
 import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
+import type { SwitchSize, SwitchSpinProps } from './public-types'
 import { depx, pxfy } from 'seemly'
 import { useMergedState } from 'vooks'
 import { computed, defineComponent, h, ref, toRef, watchEffect } from 'vue'
@@ -20,10 +21,7 @@ import style from './styles/index.cssr'
 
 export const switchProps = {
   ...(useTheme.props as ThemeProps<SwitchTheme>),
-  size: {
-    type: String as PropType<'small' | 'medium' | 'large'>,
-    default: 'medium'
-  },
+  size: String as PropType<SwitchSize>,
   value: {
     type: [String, Number, Boolean] as PropType<
       string | number | boolean | undefined
@@ -60,6 +58,7 @@ export const switchProps = {
     type: Boolean,
     default: true
   },
+  spinProps: Object as PropType<SwitchSpinProps>,
   /** @deprecated */
   onChange: [Function, Array] as PropType<MaybeArray<OnUpdateValue> | undefined>
 } as const
@@ -67,7 +66,6 @@ export const switchProps = {
 export type SwitchProps = ExtractPublicPropTypes<typeof switchProps>
 
 export interface SwitchSlots {
-  default?: () => VNode[]
   checked?: () => VNode[]
   'checked-icon'?: () => VNode[]
   icon?: () => VNode[]
@@ -107,7 +105,8 @@ export default defineComponent({
         supportCssMax = true
       }
     }
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedComponentPropsRef }
+      = useConfig(props)
     const themeRef = useTheme(
       'Switch',
       '-switch',
@@ -116,7 +115,19 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
-    const formItem = useFormItem(props)
+    const formItem = useFormItem(props, {
+      mergedSize(NFormItem) {
+        if (props.size !== undefined)
+          return props.size
+        if (NFormItem) {
+          return NFormItem.mergedSize.value
+        }
+        const configSize = mergedComponentPropsRef?.value?.Switch?.size
+        if (configSize)
+          return configSize
+        return 'medium'
+      }
+    })
     const { mergedSizeRef, mergedDisabledRef } = formItem
     const uncontrolledValueRef = ref(props.defaultValue)
     const controlledValueRef = toRef(props, 'value')
@@ -378,6 +389,7 @@ export default defineComponent({
                               key="loading"
                               clsPrefix={mergedClsPrefix}
                               strokeWidth={20}
+                              {...this.spinProps}
                             />
                           ) : this.checked && (checkedIcon || icon) ? (
                             <div

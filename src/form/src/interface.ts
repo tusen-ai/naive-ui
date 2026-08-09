@@ -4,7 +4,7 @@ import type {
   ValidateMessages,
   ValidateOption
 } from 'async-validator'
-import type { Ref, VNodeChild } from 'vue'
+import type { Ref, VNode, VNodeChild } from 'vue'
 import type { FormSetupProps } from './Form'
 
 export interface FormRules {
@@ -67,6 +67,7 @@ export type FormItemValidate = ((options: FormItemValidateOptions) => Promise<{
 export interface FormItemInst {
   validate: FormItemValidate
   restoreValidation: () => void
+  invalidateLabelWidth: () => void
   path?: string
   internalValidate: FormItemInternalValidate
 }
@@ -82,7 +83,6 @@ export interface FormInjection {
 
 export type LabelAlign = 'left' | 'center' | 'right'
 export type LabelPlacement = 'left' | 'top'
-export type Size = 'small' | 'medium' | 'large'
 
 export type ValidationTrigger = 'input' | 'change' | 'blur' | 'focus'
 
@@ -112,6 +112,13 @@ export type FormValidationError = ValidateError[]
 export interface FormInst {
   validate: FormValidate
   restoreValidation: () => void
+  invalidateLabelWidth: () => void
 }
 
 export interface FormValidateMessages extends ValidateMessages {}
+
+export interface FormItemSlots {
+  default?: () => VNode[]
+  feedback?: () => VNode[]
+  label?: () => VNode[]
+}

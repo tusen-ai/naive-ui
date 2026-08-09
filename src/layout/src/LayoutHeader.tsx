@@ -10,10 +10,7 @@ import style from './styles/layout-header.cssr'
 export const headerProps = {
   position: positionProp,
   inverted: Boolean,
-  bordered: {
-    type: Boolean,
-    default: false
-  }
+  bordered: Boolean
 } as const
 
 export type LayoutHeaderProps = ExtractPublicPropTypes<typeof headerProps>
@@ -83,7 +80,7 @@ export default defineComponent({
         ]}
         style={this.cssVars}
       >
-        {this.$slots}
+        {this.$slots.default?.()}
       </div>
     )
   }

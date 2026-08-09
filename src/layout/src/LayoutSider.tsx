@@ -339,7 +339,7 @@ export default defineComponent({
             ]}
             ref="scrollableElRef"
           >
-            {this.$slots}
+            {this.$slots.default?.()}
           </div>
         )}
         {showTrigger ? (

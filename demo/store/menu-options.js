@@ -290,7 +290,7 @@ export function createComponentMenuOptions({ lang, theme }) {
           path: '/icon'
         },
         {
-          en: 'PageHeader',
+          en: 'Page Header',
           zh: '页头',
           enSuffix: true,
           path: '/page-header'

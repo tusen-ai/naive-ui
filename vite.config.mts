@@ -3,6 +3,7 @@ import path from 'node:path'
 import process from 'node:process'
 import { babel } from '@rollup/plugin-babel'
 import { configDefaults, defineConfig } from 'vitest/config'
+import vueJsxVapor from 'vue-jsx-vapor/vite'
 import { createDemoPlugin } from './build/vite-plugin-demo'
 
 dns.setDefaultResultOrder('verbatim')
@@ -17,7 +18,12 @@ const testExclude = isBuildTimeTest
 
 export default defineConfig({
   root: __dirname,
-  plugins: createDemoPlugin(),
+  plugins: [
+    vueJsxVapor({
+      interop: true
+    }),
+    ...createDemoPlugin()
+  ],
   resolve: {
     // In production site build, we want to import naive-ui from node_modules
     alias:
@@ -45,7 +51,9 @@ export default defineConfig({
       'async-validator',
       'css-render',
       'date-fns',
+      'date-fns/locale',
       'date-fns-tz/getTimezoneOffset',
+      'fflate',
       'evtd',
       'highlight.js',
       'lodash-es',
@@ -73,11 +81,19 @@ export default defineConfig({
   },
   build: {
     outDir: 'site',
-    rollupOptions: {
+    rolldownOptions: {
       output: {
-        manualChunks: {
-          'grapheme-splitter': ['grapheme-splitter'],
-          katex: ['katex']
+        codeSplitting: {
+          groups: [
+            {
+              name: 'grapheme-splitter',
+              test: /grapheme-splitter/
+            },
+            {
+              name: 'katex',
+              test: /katex/
+            }
+          ]
         }
       },
       plugins: [
@@ -87,10 +103,13 @@ export default defineConfig({
       ]
     }
   },
-  esbuild: {
-    jsx: 'transform',
-    jsxFactory: 'h',
-    jsxFragment: 'Fragment'
+  oxc: {
+    jsx: {
+      runtime: 'classic',
+      pragma: 'h',
+      pragmaFrag: 'Fragment',
+      development: false
+    }
   },
   test: {
     globals: true,

@@ -28,10 +28,14 @@ style-inherit-debug.vue
 shadow-debug.vue
 unkeyed-debug.vue
 addable-debug.vue
+suffix-width-debug.vue
 animation-debug.vue
 animationx-debug.vue
 none-debug.vue
 modal-debug.vue
+show-scroll-button.vue
+center-active-tab.vue
+rtl-debug.vue
 ```
 
 ## API
@@ -43,8 +47,9 @@ modal-debug.vue
 | addable | `boolean \| { disabled?: boolean }` | `false` | 是否允许添加标签，只在标签的 `type` 为 `card` 时生效 |  |
 | add-tab-class | `string` | `undefined` | 添加标签标签的类名 | 2.37.0 |
 | add-tab-style | `string \| object` | `undefined` | 添加标签标签的样式 | 2.37.0 |
-| animated | `boolean` | `false` | 标签页切换是否使用动画，当 `placement` 为 `'left'` 或 `'right'` 时不生效 | 2.27.0 |
+| animated | `boolean` | `false` | 标签页切换是否使用动画，当 `placement` 为 `'left'`、`'right'`、`'start'` 或 `'end'` 时不生效 | 2.27.0 |
 | bar-width | `number` | `undefined` | 标签条的宽度 | 2.25.0 |
+| center-active-tab | `boolean` | `false` | 设置为 `true` 时，活动标签将滚动到滚动容器的中心位置 | NEXT_VERSION |
 | closable | `boolean` | `false` | 是否允许关闭标签，只在标签的 `type` 为 `card` 时生效 |  |
 | default-value | `string \| number` | `undefined` | 非受控模式下的默认值 |  |
 | justify-content | `'space-between' \| 'space-around' \| 'space-evenly' \| 'start' \| 'center' \| 'end'` | `undefined` | `flex` 布局下主轴的排列方式，只对 `'line'` 和 `'bar'` 类型生效 | `space-*` 2.29.1 |
@@ -53,10 +58,11 @@ modal-debug.vue
 | pane-style | `string \| object` | `undefined` | 面板的样式 |  |
 | pane-wrapper-class | `string` | `undefined` | 面板容器的类名 | 2.34.4 |
 | pane-wrapper-style | `string \| object` | `undefined` | 面板容器的样式 | 2.34.4 |
-| placement | `'left' \| 'right' \| 'top' \| 'bottom'` | `'top'` | 标签的位置，对于 `'segment'` 类型的 `n-tabs` 不生效 | 2.34.4 |
+| placement | `'left' \| 'right' \| 'top' \| 'bottom' \| 'start' \| 'end'` | `'top'` | 标签的位置，`'start'` / `'end'` 会随 RTL 映射到 `'left'` / `'right'`，对于 `'segment'` 类型的 `n-tabs` 不生效 | 2.34.4、`start` `end` NEXT_VERSION |
+| show-scroll-button | `boolean` | `false` | 是否显示滚动按钮 | NEXT_VERSION |
 | tab-class | `string` | `undefined` | 标签的类名 | 2.37.0 |
 | tab-style | `string \| object` | `undefined` | 标签的样式 |  |
-| tabs-padding | `number` | `0` | 全部标签最左和最右的 `padding` |  |
+| tabs-padding | `number` | `0` | 全部标签起止方向的 `padding` |  |
 | trigger | `'click' \| 'hover'` | `'click'` | 触发 tab 的方式 | 2.27.0 |
 | type | `'bar' \| 'line' \| 'card' \| 'segment'` | `'bar'` | 标签类型 |  |
 | value | `string \| number` | `undefined` | 受控模式下的值 |  |
@@ -107,6 +113,7 @@ modal-debug.vue
 
 ### Tabs Methods
 
-| 名称            | 类型         | 说明             | 版本   |
-| --------------- | ------------ | ---------------- | ------ |
-| syncBarPosition | `() => void` | 更新指示条的位置 | 2.24.0 |
+| 名称               | 类型         | 说明             | 版本         |
+| ------------------ | ------------ | ---------------- | ------------ |
+| scrollToCurrentTab | `() => void` | 滚动到当前标签   | NEXT_VERSION |
+| syncBarPosition    | `() => void` | 更新指示条的位置 | 2.24.0       |
