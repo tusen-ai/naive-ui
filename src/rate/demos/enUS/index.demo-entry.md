@@ -12,7 +12,7 @@ icon.vue
 allow-half.vue
 readonly.vue
 clearable.vue
-hover-change.vue
+hover-value.vue
 ```
 
 ## API
@@ -30,7 +30,7 @@ hover-change.vue
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Icon size. |  |
 | value | `number \| null` | `undefined` | Value of activated icons. |  |
 | on-clear | `() => void` | `undefined` | Callback on value is cleared. | 2.33.0 |
-| on-hover-change | `(value: number \| null) => void` | `undefined` | Callback on the hover index is changed. |  |
+| on-update:hover-value | `(value: number \| null) => void` | `undefined` | Callback when the hover value changes. | NEXT_VERSION |
 | on-update:value | `(value: number) => void` | `undefined` | Callback on the value (rating) is changed. |  |
 
 ### Rate Slots

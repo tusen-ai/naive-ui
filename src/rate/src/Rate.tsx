@@ -30,11 +30,16 @@ export const rateProps = {
   clearable: Boolean,
   color: String,
   onClear: Function as PropType<() => void>,
-  onHoverChange: Function as PropType<(value: number | null) => void>,
   'onUpdate:value': [Function, Array] as PropType<
     MaybeArray<RateOnUpdateValue>
   >,
-  onUpdateValue: [Function, Array] as PropType<MaybeArray<RateOnUpdateValue>>
+  onUpdateValue: [Function, Array] as PropType<MaybeArray<RateOnUpdateValue>>,
+  'onUpdate:hoverValue': [Function, Array] as PropType<
+    MaybeArray<RateOnUpdateValue>
+  >,
+  onUpdateHoverValue: [Function, Array] as PropType<
+    MaybeArray<RateOnUpdateValue>
+  >
 } as const
 
 export type RateProps = ExtractPublicPropTypes<typeof rateProps>
@@ -104,7 +109,14 @@ export default defineComponent({
       if (hoverIndexRef.value === value)
         return
       hoverIndexRef.value = value
-      props.onHoverChange?.(value)
+      const { 'onUpdate:hoverValue': _onUpdateHoverValue, onUpdateHoverValue }
+        = props
+      if (_onUpdateHoverValue) {
+        call(_onUpdateHoverValue as RateOnUpdateValueImpl, value)
+      }
+      if (onUpdateHoverValue) {
+        call(onUpdateHoverValue as RateOnUpdateValueImpl, value)
+      }
     }
     function handleMouseMove(index: number, e: MouseEvent): void {
       if (cleared)

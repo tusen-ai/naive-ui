@@ -85,25 +85,78 @@ describe('n-rate', () => {
     wrapper.unmount()
   })
 
-  it('should work with `onHoverChange` prop', async () => {
-    const onHoverChange = vi.fn()
+  it('should work with `onUpdateHoverValue` prop', async () => {
+    const onUpdateHoverValue = vi.fn()
+    const onUpdateHoverValue2 = vi.fn()
     const wrapper = mount(NRate, {
-      props: { onHoverChange }
+      props: {
+        onUpdateHoverValue,
+        'onUpdate:hoverValue': onUpdateHoverValue
+      }
     })
 
     const testNumber = 2
     const rateItems = wrapper.findAll('.n-rate__item')
 
     await rateItems[testNumber].trigger('mousemove')
-    expect(onHoverChange).toHaveBeenCalledWith(testNumber + 1)
-    expect(onHoverChange).toHaveBeenCalledTimes(1)
+    expect(onUpdateHoverValue).toHaveBeenCalledWith(testNumber + 1)
+    expect(onUpdateHoverValue).toHaveBeenCalledTimes(2)
 
     await rateItems[testNumber].trigger('mousemove')
-    expect(onHoverChange).toHaveBeenCalledTimes(1)
+    expect(onUpdateHoverValue).toHaveBeenCalledTimes(2)
+
+    await wrapper.setProps({
+      onUpdateHoverValue: [onUpdateHoverValue, onUpdateHoverValue2],
+      'onUpdate:hoverValue': [onUpdateHoverValue, onUpdateHoverValue2]
+    })
+    await wrapper.find('.n-rate').trigger('mouseleave')
+    expect(onUpdateHoverValue).toHaveBeenCalledWith(null)
+    expect(onUpdateHoverValue2).toHaveBeenCalledWith(null)
+    expect(onUpdateHoverValue).toHaveBeenCalledTimes(4)
+
+    wrapper.unmount()
+  })
+
+  it('should work with `onUpdateHoverValue` prop when `allowHalf` is true', async () => {
+    const onUpdateHoverValue = vi.fn()
+    const wrapper = mount(NRate, {
+      props: {
+        allowHalf: true,
+        onUpdateHoverValue
+      }
+    })
+
+    const rateIndex = 2
+    const offsetWidth = 20
+    const rateItems = wrapper.findAll('.n-rate__item')
+    const targetRate = rateItems[rateIndex]
+    Object.defineProperty(targetRate.element, 'offsetWidth', {
+      value: offsetWidth,
+      configurable: true
+    })
+
+    function dispatchMousemove(offsetX: number): void {
+      const event = new MouseEvent('mousemove', { bubbles: true })
+      Object.defineProperty(event, 'offsetX', {
+        get: () => offsetX
+      })
+      targetRate.element.dispatchEvent(event)
+    }
+
+    dispatchMousemove(offsetWidth / 3)
+    expect(onUpdateHoverValue).toHaveBeenCalledWith(rateIndex + 0.5)
+    expect(onUpdateHoverValue).toHaveBeenCalledTimes(1)
+
+    dispatchMousemove((offsetWidth * 2) / 3)
+    expect(onUpdateHoverValue).toHaveBeenCalledWith(rateIndex + 1)
+    expect(onUpdateHoverValue).toHaveBeenCalledTimes(2)
+
+    dispatchMousemove((offsetWidth * 2) / 3)
+    expect(onUpdateHoverValue).toHaveBeenCalledTimes(2)
 
     await wrapper.find('.n-rate').trigger('mouseleave')
-    expect(onHoverChange).toHaveBeenCalledWith(null)
-    expect(onHoverChange).toHaveBeenCalledTimes(2)
+    expect(onUpdateHoverValue).toHaveBeenCalledWith(null)
+    expect(onUpdateHoverValue).toHaveBeenCalledTimes(3)
 
     wrapper.unmount()
   })

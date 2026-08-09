@@ -12,7 +12,7 @@ icon.vue
 allow-half.vue
 readonly.vue
 clearable.vue
-hover-change.vue
+hover-value.vue
 ```
 
 ## API
@@ -30,7 +30,7 @@ hover-change.vue
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | 图标尺寸 |  |
 | value | `number \| null` | `undefined` | 已激活图标个数 |  |
 | on-clear | `() => void` | `undefined` | 清除当前值的回调 | 2.33.0 |
-| on-hover-change | `(value: number \| null) => void` | `undefined` | 悬浮图标个数改变时触发 |  |
+| on-update:hover-value | `(value: number \| null) => void` | `undefined` | 悬浮图标个数改变时触发 | NEXT_VERSION |
 | on-update:value | `(value: number) => void` | `undefined` | 激活图标个数改变时触发 |  |
 
 ### Rate Slots
