@@ -1,4 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue'
+import type { NotificationPlacement } from './NotificationProvider'
 import {
   defineComponent,
   h,
@@ -19,6 +20,7 @@ import {
 export const notificationEnvOptions = {
   ...notificationProps,
   duration: Number,
+  placement: String as PropType<NotificationPlacement>,
   onClose: Function as PropType<() => Promise<boolean> | boolean | any>,
   onLeave: Function as PropType<() => void>,
   onAfterEnter: Function as PropType<() => void>,
