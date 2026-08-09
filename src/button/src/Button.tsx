@@ -605,6 +605,8 @@ const Button = defineComponent({
           !this.text && this.dashed && `${mergedClsPrefix}-button--dashed`,
           this.color && `${mergedClsPrefix}-button--color`,
           this.secondary && `${mergedClsPrefix}-button--secondary`,
+          this.tertiary && `${mergedClsPrefix}-button--tertiary`,
+          this.quaternary && `${mergedClsPrefix}-button--quaternary`,
           this.loading && `${mergedClsPrefix}-button--loading`,
           this.ghost && `${mergedClsPrefix}-button--ghost` // required for button group border collapse
         ]}
