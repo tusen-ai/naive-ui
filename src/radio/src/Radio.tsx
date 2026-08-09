@@ -1,7 +1,8 @@
-import type { CSSProperties } from 'vue'
+import type { CSSProperties, SlotsType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { RadioTheme } from '../styles'
+import type { RadioSlots } from './interface'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
@@ -20,6 +21,7 @@ export type RadioProps = ExtractPublicPropTypes<typeof radioProps>
 export default defineComponent({
   name: 'Radio',
   props: radioProps,
+  slots: Object as SlotsType<RadioSlots>,
   setup(props) {
     const radio = setup(props)
     const themeRef = useTheme(
