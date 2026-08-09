@@ -198,15 +198,14 @@ export function isColumnSorting(
 }
 
 function formatCsvCell(value: unknown): string {
-  if (typeof value === 'string') {
-    return value.replace(/,/g, '\\,')
-  }
-  else if (value === null || value === undefined) {
+  if (value === null || value === undefined) {
     return ''
   }
-  else {
-    return `${value}`.replace(/,/g, '\\,')
+  const cell = `${value}`
+  if (/[",\r\n]/.test(cell)) {
+    return `"${cell.replace(/"/g, '""')}"`
   }
+  return cell
 }
 
 export function generateCsv(
@@ -223,7 +222,7 @@ export function generateCsv(
   )
   const header = exportableColumns
     .map((col: any) => {
-      return getCsvHeader ? getCsvHeader(col) : col.title
+      return getCsvHeader ? getCsvHeader(col) : formatCsvCell(col.title)
     })
     .join(',')
   const rows = data.map((row) => {
