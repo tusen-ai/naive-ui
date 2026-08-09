@@ -24,6 +24,7 @@
 - 修复 `n-data-table` 的 `scrollTo` 方法类型缺失，关闭 [#7554](https://github.com/tusen-ai/naive-ui/issues/7554)
 - 修复 `n-data-table` 的 empty 状态在设定高度后没有垂直居中显示，关闭 [#7546](https://github.com/tusen-ai/naive-ui/issues/7546)
 - 修复 `n-spin` 未传入 `strokeWidth` 时无法按 `size` 使用内置线宽（被 Loading 的默认值覆盖）的问题，关闭 [#8061](https://github.com/tusen-ai/naive-ui/issues/8061)
+- 修复 `n-upload` 在 `n-upload-dragger` 无文件时文件列表存在多余 8px 上边距的问题，关闭 [#7547](https://github.com/tusen-ai/naive-ui/issues/7547)
 - 修复 `n-upload` 在受控模式下 `custom-request` 中同步调用 `onError` 时多文件状态更新丢失的问题，关闭 [#7366](https://github.com/tusen-ai/naive-ui/issues/7366)
 - 修复 `n-image` 开启 `lazy` 后图片加载失败时 error slot 和 fallbackSrc 失效的问题
 - 修复 `n-modal` 拖拽位置在渲染被重置的问题

@@ -24,6 +24,7 @@
 - Fix `n-data-table`'s `scrollTo` method type missing, closes [#7554](https://github.com/tusen-ai/naive-ui/issues/7554).
 - Fix `n-data-table`'s empty state not vertically centered when height is set, closes [#7546](https://github.com/tusen-ai/naive-ui/issues/7546).
 - fix(spin): preserve size-based strokeWidth defaults in NSpin, closes [#8061](https://github.com/tusen-ai/naive-ui/issues/8061)
+- Fix the extra 8px top margin on the `n-upload` file list when `n-upload-dragger` has no files, closes [#7547](https://github.com/tusen-ai/naive-ui/issues/7547).
 - Fix `n-upload` file status loss in controlled mode when calling `onError` synchronously in `custom-request` for multiple files, closes [#7366](https://github.com/tusen-ai/naive-ui/issues/7366)
 - Fix `n-image` error slot and fallbackSrc not working when `lazy` is enabled
 - Fix where the drag position of `n-modal` was reset during rendering.
