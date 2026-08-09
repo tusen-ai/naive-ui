@@ -1,7 +1,7 @@
 /* eslint-disable unused-imports/no-unused-vars */
 import { mount } from '@vue/test-utils'
 import { sleep } from 'seemly'
-import { h } from 'vue'
+import { h, ref } from 'vue'
 import { AddIcon } from '../../_internal/icons'
 import { c } from '../../_utils/cssr'
 import { NConfigProvider } from '../../config-provider'
@@ -573,5 +573,187 @@ describe('n-tabs', () => {
     expect(endWrapper.find('.n-tabs').classes()).toContain('n-tabs--rtl')
     expect(endWrapper.find('.n-tabs').classes()).toContain('n-tabs--left')
     endWrapper.unmount()
+  })
+
+  it('should derive scroll shadows with negative RTL scrollLeft', async () => {
+    const wrapper = mount({
+      render() {
+        return (
+          <NConfigProvider rtl={[{ name: 'Tabs', style: c(null) }]}>
+            {{
+              default: () => (
+                <NTabs
+                  defaultValue="1"
+                  type="card"
+                  showScrollButton
+                  style="max-width: 200px"
+                >
+                  {{
+                    default: () =>
+                      [1, 2, 3, 4, 5, 6].map(i =>
+                        h(NTabPane, {
+                          tab: `Tab ${i}`,
+                          name: String(i)
+                        })
+                      )
+                  }}
+                </NTabs>
+              )
+            }}
+          </NConfigProvider>
+        )
+      }
+    })
+
+    const tabsVm = wrapper.findComponent(NTabs).vm as any
+    const scrollEl = document.createElement('div')
+    Object.defineProperty(scrollEl, 'offsetWidth', { value: 200 })
+    Object.defineProperty(scrollEl, 'scrollWidth', { value: 600 })
+
+    Object.defineProperty(scrollEl, 'scrollLeft', {
+      value: -200,
+      writable: true
+    })
+    tabsVm.handleScroll({ target: scrollEl })
+    await sleep(80)
+    expect(tabsVm.startReachedRef).toBe(false)
+    expect(tabsVm.endReachedRef).toBe(false)
+
+    Object.defineProperty(scrollEl, 'scrollLeft', { value: 0 })
+    tabsVm.handleScroll({ target: scrollEl })
+    await sleep(80)
+    expect(tabsVm.startReachedRef).toBe(true)
+    expect(tabsVm.endReachedRef).toBe(false)
+
+    Object.defineProperty(scrollEl, 'scrollLeft', { value: -400 })
+    tabsVm.handleScroll({ target: scrollEl })
+    await sleep(80)
+    expect(tabsVm.startReachedRef).toBe(false)
+    expect(tabsVm.endReachedRef).toBe(true)
+
+    wrapper.unmount()
+  })
+
+  it('should refresh bar position when switching RTL', async () => {
+    const rtlRef = ref<{ name: string, style: any }[] | undefined>(undefined)
+    const wrapper = mount({
+      attachTo: document.body,
+      setup() {
+        return () => (
+          <NConfigProvider rtl={rtlRef.value}>
+            {{
+              default: () => (
+                <NTabs defaultValue="b" type="line">
+                  {{
+                    default: () => [
+                      h(NTabPane, { tab: 'A', name: 'a' }),
+                      h(NTabPane, { tab: 'B', name: 'b' }),
+                      h(NTabPane, { tab: 'C', name: 'c' })
+                    ]
+                  }}
+                </NTabs>
+              )
+            }}
+          </NConfigProvider>
+        )
+      }
+    })
+
+    const tabEl = wrapper.find('[data-name="b"]').element as HTMLElement
+    const barEl = wrapper.find('.n-tabs-bar').element as HTMLElement
+    Object.defineProperty(tabEl, 'offsetWidth', { value: 60 })
+    Object.defineProperty(tabEl, 'offsetLeft', {
+      value: 80,
+      configurable: true
+    })
+    ;(wrapper.findComponent(NTabs).vm as any).syncBarPosition()
+    await sleep(0)
+    expect(barEl.style.left).toBe('80px')
+
+    // After RTL layout, active tab moves to the right
+    Object.defineProperty(tabEl, 'offsetLeft', {
+      value: 200,
+      configurable: true
+    })
+    rtlRef.value = [{ name: 'Tabs', style: c(null) }]
+    await sleep(0)
+    await sleep(0)
+    expect(barEl.style.left).toBe('200px')
+
+    wrapper.unmount()
+  })
+
+  it('should position segment capsule with offsetLeft under RTL', async () => {
+    const wrapper = mount({
+      attachTo: document.body,
+      render() {
+        return (
+          <NConfigProvider rtl={[{ name: 'Tabs', style: c(null) }]}>
+            {{
+              default: () => (
+                <NTabs defaultValue="b" type="segment">
+                  {{
+                    default: () => [
+                      h(NTabPane, { tab: 'A', name: 'a' }),
+                      h(NTabPane, { tab: 'B', name: 'b' }),
+                      h(NTabPane, { tab: 'C', name: 'c' })
+                    ]
+                  }}
+                </NTabs>
+              )
+            }}
+          </NConfigProvider>
+        )
+      }
+    })
+
+    const tabEl = wrapper.find('[data-name="b"]').element as HTMLElement
+    const capsuleEl = wrapper.find('.n-tabs-capsule').element as HTMLElement
+    Object.defineProperty(tabEl, 'offsetLeft', { value: 100 })
+    Object.defineProperty(tabEl, 'offsetTop', { value: 3 })
+    Object.defineProperty(tabEl, 'offsetWidth', { value: 100 })
+    Object.defineProperty(tabEl, 'offsetHeight', { value: 34 })
+    ;(wrapper.findComponent(NTabs).vm as any).handleSegmentResize()
+    await sleep(0)
+    expect(capsuleEl.style.transform).toBe('translate(100px, 3px)')
+    expect(capsuleEl.style.width).toBe('100px')
+
+    wrapper.unmount()
+  })
+
+  it('should position bar with offsetLeft under RTL', async () => {
+    const wrapper = mount({
+      attachTo: document.body,
+      render() {
+        return (
+          <NConfigProvider rtl={[{ name: 'Tabs', style: c(null) }]}>
+            {{
+              default: () => (
+                <NTabs defaultValue="b" type="line">
+                  {{
+                    default: () => [
+                      h(NTabPane, { tab: 'A', name: 'a' }),
+                      h(NTabPane, { tab: 'B', name: 'b' }),
+                      h(NTabPane, { tab: 'C', name: 'c' })
+                    ]
+                  }}
+                </NTabs>
+              )
+            }}
+          </NConfigProvider>
+        )
+      }
+    })
+
+    const tabEl = wrapper.find('[data-name="b"]').element as HTMLElement
+    const barEl = wrapper.find('.n-tabs-bar').element as HTMLElement
+    Object.defineProperty(tabEl, 'offsetLeft', { value: 120 })
+    Object.defineProperty(tabEl, 'offsetWidth', { value: 60 })
+    ;(wrapper.findComponent(NTabs).vm as any).syncBarPosition()
+    await sleep(0)
+    expect(barEl.style.left).toBe('120px')
+    expect(barEl.style.maxWidth).toBe('60px')
+
+    wrapper.unmount()
   })
 })

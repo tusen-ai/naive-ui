@@ -135,7 +135,7 @@ export default defineComponent({
                   onNegativeClick: this.handleNegativeClick
                 }}
               >
-                {{ ...slots }}
+                {slots}
               </PopconfirmPanel>
             )
           }

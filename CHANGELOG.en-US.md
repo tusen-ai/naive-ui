@@ -17,6 +17,7 @@
 - `n-tabs` adds `scrollToCurrentTab` method, closes [#7548](https://github.com/tusen-ai/naive-ui/issues/7548).
 - `n-tabs` supports RTL, `placement` adds `'start'` and `'end'`.
 - `n-rate` adds `on-hover-change` prop, closes [#8131](https://github.com/tusen-ai/naive-ui/issues/8131).
+- `n-collapse-transition` adds `display-directive` prop, closes [#6453](https://github.com/tusen-ai/naive-ui/issues/6453).
 
 ### Fixes
 
