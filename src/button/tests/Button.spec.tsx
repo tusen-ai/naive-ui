@@ -93,6 +93,19 @@ describe('n-button', () => {
     wrapper.unmount()
   })
 
+  it('should work with variant props', async () => {
+    const wrapper = mount(NButton)
+
+    for (const variant of ['secondary', 'tertiary', 'quaternary'] as const) {
+      await wrapper.setProps({ [variant]: true })
+      expect(wrapper.find('button').classes()).toContain(
+        `n-button--${variant}`
+      )
+    }
+
+    wrapper.unmount()
+  })
+
   it('should work with `bordered` prop', async () => {
     const wrapper = mount(NButton)
 
