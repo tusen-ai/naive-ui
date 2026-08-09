@@ -12,11 +12,11 @@ basic.vue
 
 ### CollapseTransition Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| appear | `boolean` | `false` | Whether to play animation on first mounted. |
-| display-directive | `'if' \| 'show'` | `'if'` | The directive to use for element rendering. `if` uses `v-if`, `show` uses `v-show`. |
-| show | `boolean` | `true` | Whether to show content. |
+| Name | Type | Default | Description | Version |
+| --- | --- | --- | --- | --- |
+| appear | `boolean` | `false` | Whether to play animation on first mounted. |  |
+| display-directive | `'if' \| 'show'` | `'if'` | The directive to use for element rendering. `if` uses `v-if`, `show` uses `v-show`. | NEXT_VERSION |
+| show | `boolean` | `true` | Whether to show content. |  |
 
 ### CollapseTransition Slots
 

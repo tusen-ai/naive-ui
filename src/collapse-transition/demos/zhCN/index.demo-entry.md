@@ -13,11 +13,11 @@ rtl-debug.vue
 
 ### CollapseTransition Props
 
-| 名称 | 类型 | 默认值 | 说明 |
-| --- | --- | --- | --- |
-| appear | `boolean` | `false` | 是否在首次出现时播放动画 |
-| display-directive | `'if' \| 'show'` | `'if'` | 内置元素渲染使用的指令，`if` 使用 `v-if`，`show` 使用 `v-show` |
-| show | `boolean` | `true` | 是否展示内容 |
+| 名称 | 类型 | 默认值 | 说明 | 版本 |
+| --- | --- | --- | --- | --- |
+| appear | `boolean` | `false` | 是否在首次出现时播放动画 |  |
+| display-directive | `'if' \| 'show'` | `'if'` | 内置元素渲染使用的指令，`if` 使用 `v-if`，`show` 使用 `v-show` | NEXT_VERSION |
+| show | `boolean` | `true` | 是否展示内容 |  |
 
 ### CollapseTransition Slots
 
