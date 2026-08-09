@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { h, nextTick } from 'vue'
 import { NAutoComplete } from '../../auto-complete'
+import { NAvatar } from '../../avatar'
 import { NButton } from '../../button'
 import { NCard } from '../../card'
 import { NCascader } from '../../cascader'
@@ -94,6 +95,10 @@ describe('n-config-provider componentOptions', () => {
 
   it('should work with AutoComplete global size', () => {
     testGlobalSize(NAutoComplete, 'AutoComplete', '.n-input', SML)
+  })
+
+  it('should work with Avatar global size', () => {
+    testGlobalSize(NAvatar, 'Avatar', '.n-avatar', SML)
   })
 
   it('should work with Button global size', () => {

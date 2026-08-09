@@ -9,6 +9,7 @@ import type { AnchorTheme } from '../../anchor/styles'
 import type { AutoCompleteSize } from '../../auto-complete/src/public-types'
 import type { AutoCompleteTheme } from '../../auto-complete/styles'
 import type { AvatarGroupTheme } from '../../avatar-group/styles'
+import type { AvatarSize } from '../../avatar/src/public-types'
 import type { AvatarTheme } from '../../avatar/styles'
 import type { BackTopTheme } from '../../back-top/styles'
 import type { BadgeTheme } from '../../badge/styles'
@@ -231,6 +232,9 @@ export interface GlobalThemeWithoutCommon {
 export interface GlobalComponentConfig {
   AutoComplete?: {
     size?: AutoCompleteSize
+  }
+  Avatar?: {
+    size?: AvatarSize
   }
   Cascader?: {
     size?: CascaderSize

@@ -78,7 +78,8 @@ export default defineComponent({
   props: avatarProps,
   slots: Object as SlotsType<AvatarSlots>,
   setup(props) {
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedComponentPropsRef }
+      = useConfig(props)
     const hasLoadErrorRef = ref(false)
     let memoedTextHtml: string | null = null
     const textRef = ref<HTMLElement | null>(null)
@@ -111,6 +112,9 @@ export default defineComponent({
       const { size: avatarGroupSize } = NAvatarGroup || {}
       if (avatarGroupSize)
         return avatarGroupSize
+      const configSize = mergedComponentPropsRef?.value?.Avatar?.size
+      if (configSize)
+        return configSize
       return 'medium'
     })
     const themeRef = useTheme(

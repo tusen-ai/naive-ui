@@ -45,6 +45,9 @@ interface GlobalComponentConfig {
   AutoComplete?: {
     size?: AutoCompleteSize
   }
+  Avatar?: {
+    size?: AvatarSize
+  }
   Button?: {
     size?: ButtonSize
   }
