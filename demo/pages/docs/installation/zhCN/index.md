@@ -9,7 +9,7 @@
 使用 npm 安装。
 
 ```bash
-npm install naive-ui
+npm i naive-ui
 ```
 
 ## UMD
@@ -19,7 +19,7 @@ npm install naive-ui
 ## 字体
 
 ```bash
-npm install vfonts
+npm i vfonts
 ```
 
 ## 图标
