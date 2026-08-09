@@ -9,6 +9,7 @@ import type {
   FormItemInternalValidateResult,
   FormRules,
   FormValidateCallback,
+  FormValidateFilter,
   FormValidateMessages,
   LabelAlign,
   LabelPlacement,
@@ -63,6 +64,33 @@ export const formProps = {
 export type FormSetupProps = ExtractPropTypes<typeof formProps>
 export type FormProps = ExtractPublicPropTypes<typeof formProps>
 
+const defaultShouldRuleBeApplied: ShouldRuleBeApplied = () => true
+
+function normalizeValidateFilter(filter: FormValidateFilter | undefined): {
+  paths: string[] | null
+  shouldRuleBeApplied: ShouldRuleBeApplied
+} {
+  if (filter === undefined) {
+    return {
+      paths: null,
+      shouldRuleBeApplied: defaultShouldRuleBeApplied
+    }
+  }
+  if (typeof filter === 'function') {
+    return {
+      paths: null,
+      shouldRuleBeApplied: filter
+    }
+  }
+  if (Array.isArray(filter)) {
+    return {
+      paths: filter,
+      shouldRuleBeApplied: defaultShouldRuleBeApplied
+    }
+  }
+  return filter
+}
+
 export default defineComponent({
   name: 'Form',
   props: formProps,
@@ -92,14 +120,17 @@ export default defineComponent({
     }
     async function validate(
       validateCallback?: FormValidateCallback,
-      shouldRuleBeApplied: ShouldRuleBeApplied = () => true
+      filter?: FormValidateFilter
     ): Promise<{ warnings: ValidateError[][] | undefined }> {
+      const { paths, shouldRuleBeApplied } = normalizeValidateFilter(filter)
       return await new Promise<{ warnings: ValidateError[][] | undefined }>(
         (resolve, reject) => {
           const formItemValidationPromises: Array<
             Promise<FormItemInternalValidateResult>
           > = []
           for (const key of keysOf(formItems)) {
+            if (paths !== null && !paths.includes(key))
+              continue
             const formItemInstances = formItems[key]
             for (const formItemInstance of formItemInstances) {
               if (formItemInstance.path) {

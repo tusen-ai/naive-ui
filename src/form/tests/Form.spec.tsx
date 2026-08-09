@@ -2,6 +2,7 @@ import type { FormInst } from '../index'
 /* eslint-disable unused-imports/no-unused-vars */
 import type { FormValidateCallback } from '../src/interface'
 import { mount } from '@vue/test-utils'
+import { vi } from 'vitest'
 import { defineComponent, h, ref } from 'vue'
 import { NInput } from '../../input'
 import { NForm, NFormItem } from '../index'
@@ -231,6 +232,158 @@ describe('n-form', () => {
   })
 
   describe('form validation', () => {
+    function mountPathValidationForm() {
+      return mount(
+        defineComponent({
+          setup() {
+            return {
+              formRef: ref<FormInst>(),
+              formData: ref({
+                a: '',
+                b: '',
+                user: {
+                  name: ''
+                }
+              })
+            }
+          },
+          render() {
+            return (
+              <NForm
+                ref="formRef"
+                model={this.formData}
+                rules={{
+                  a: [
+                    {
+                      key: 'include',
+                      required: true,
+                      message: 'a included'
+                    },
+                    {
+                      key: 'exclude',
+                      required: true,
+                      message: 'a excluded'
+                    }
+                  ],
+                  b: {
+                    key: 'include',
+                    required: true,
+                    message: 'b included'
+                  },
+                  user: {
+                    name: {
+                      key: 'include',
+                      required: true,
+                      message: 'name included'
+                    }
+                  }
+                }}
+              >
+                {{
+                  default: () => [
+                    <NFormItem path="a" />,
+                    <NFormItem path="b" />,
+                    <NFormItem path="user.name" />
+                  ]
+                }}
+              </NForm>
+            )
+          }
+        })
+      )
+    }
+
+    it('should validate form items by paths', async () => {
+      const wrapper = mountPathValidationForm()
+      const formRef = wrapper.vm.$refs.formRef as FormInst
+
+      await expect(formRef.validate(undefined, ['a'])).rejects.toMatchObject([
+        [
+          { field: 'a', message: 'a included' },
+          { field: 'a', message: 'a excluded' }
+        ]
+      ])
+      expect(
+        wrapper
+          .findAll('.n-form-item-feedback--error .n-form-item-feedback__line')
+          .map(feedback => feedback.text())
+      ).toEqual(['a included', 'a excluded'])
+
+      formRef.restoreValidation()
+      await expect(
+        formRef.validate(undefined, ['a', 'b'])
+      ).rejects.toMatchObject([
+        [
+          { field: 'a', message: 'a included' },
+          { field: 'a', message: 'a excluded' }
+        ],
+        [{ field: 'b', message: 'b included' }]
+      ])
+
+      formRef.restoreValidation()
+      await expect(
+        formRef.validate(undefined, ['user.name'])
+      ).rejects.toMatchObject([
+        [{ field: 'user.name', message: 'name included' }]
+      ])
+      await expect(formRef.validate(undefined, [])).resolves.toEqual({
+        warnings: undefined
+      })
+      expect(wrapper.find('.n-form-item-feedback--error').text()).toBe(
+        'name included'
+      )
+
+      wrapper.unmount()
+    })
+
+    it('should combine path and rule filters', async () => {
+      const wrapper = mountPathValidationForm()
+      const formRef = wrapper.vm.$refs.formRef as FormInst
+
+      await expect(
+        formRef.validate(undefined, rule => rule.key === 'exclude')
+      ).rejects.toMatchObject([[{ field: 'a', message: 'a excluded' }]])
+
+      formRef.restoreValidation()
+      const callback = vi.fn<FormValidateCallback>()
+      await expect(
+        formRef.validate(callback, {
+          paths: ['a', 'b'],
+          shouldRuleBeApplied: rule => rule.key === 'include'
+        })
+      ).rejects.toMatchObject([
+        [{ field: 'a', message: 'a included' }],
+        [{ field: 'b', message: 'b included' }]
+      ])
+      expect(callback.mock.calls[0]).toMatchObject([
+        [
+          [{ field: 'a', fieldValue: '', message: 'a included' }],
+          [{ field: 'b', fieldValue: '', message: 'b included' }]
+        ],
+        { warnings: undefined }
+      ])
+
+      wrapper.unmount()
+    })
+
+    it('should preserve validation feedback of unselected paths', async () => {
+      const wrapper = mountPathValidationForm()
+      const formRef = wrapper.vm.$refs.formRef as FormInst
+
+      await formRef.validate().catch(() => {})
+      wrapper.vm.formData.a = 'valid'
+      await expect(formRef.validate(undefined, ['a'])).resolves.toEqual({
+        warnings: undefined
+      })
+      expect(
+        wrapper
+          .findAll('.n-form-item-feedback--error')
+          .map(feedback => feedback.text())
+      ).toEqual(['b included', 'name included'])
+
+      wrapper.unmount()
+    })
+
     it('should form validation work with `level: \'warning\'` by async/await`', async () => {
       const wrapper = mount(
         defineComponent({
