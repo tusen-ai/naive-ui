@@ -30,6 +30,7 @@ export const rateProps = {
   clearable: Boolean,
   color: String,
   onClear: Function as PropType<() => void>,
+  onHoverChange: Function as PropType<(value: number | null) => void>,
   'onUpdate:value': [Function, Array] as PropType<
     MaybeArray<RateOnUpdateValue>
   >,
@@ -99,13 +100,19 @@ export default defineComponent({
       }
     }
     let cleared = false
+    function updateHoverIndex(value: number | null): void {
+      if (hoverIndexRef.value === value)
+        return
+      hoverIndexRef.value = value
+      props.onHoverChange?.(value)
+    }
     function handleMouseMove(index: number, e: MouseEvent): void {
       if (cleared)
         return
-      hoverIndexRef.value = getDerivedValue(index, e)
+      updateHoverIndex(getDerivedValue(index, e))
     }
     function handleMouseLeave(): void {
-      hoverIndexRef.value = null
+      updateHoverIndex(null)
     }
     function handleClick(index: number, e: MouseEvent): void {
       const { clearable } = props
@@ -113,7 +120,7 @@ export default defineComponent({
       if (clearable && derivedValue === mergedValue.value) {
         cleared = true
         props.onClear?.()
-        hoverIndexRef.value = null
+        updateHoverIndex(null)
         doUpdateValue(null)
       }
       else {

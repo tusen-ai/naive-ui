@@ -16,6 +16,7 @@
 - `n-tabs` 新增 `show-scroll-button` 和 `center-active-tab` 属性，关闭 [#5846](https://github.com/tusen-ai/naive-ui/issues/5846)、[#2128](https://github.com/tusen-ai/naive-ui/issues/2128)
 - `n-tabs` 新增 `scrollToCurrentTab` 方法，关闭 [#7548](https://github.com/tusen-ai/naive-ui/issues/7548)
 - `n-tabs` 支持 RTL，`placement` 新增 `'start'`、`'end'`
+- `n-rate` 新增 `on-hover-change` 属性，关闭 [#8131](https://github.com/tusen-ai/naive-ui/issues/8131)
 - `n-collapse-transition` 新增 `display-directive` 属性，关闭 [#6453](https://github.com/tusen-ai/naive-ui/issues/6453)
 
 ### Fixes
