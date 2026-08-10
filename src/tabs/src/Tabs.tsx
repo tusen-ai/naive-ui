@@ -930,7 +930,9 @@ export default defineComponent({
       selfElRef,
       barElRef,
       addTabInstRef,
-      xScrollInstRef,
+      // avoid unexpected type expansion when build es output
+      // $watch will introduce an onCleanUp with local node_modules path
+      xScrollInstRef: xScrollInstRef as unknown,
       scrollWrapperElRef,
       addTabFixed: addTabFixedRef,
       tabWrapperStyle: tabWrapperStyleRef,
