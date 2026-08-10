@@ -207,7 +207,8 @@ export default defineComponent({
 
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      previewInstRef,
+      // reduce dts: string ref only, type unused in render
+      previewInstRef: previewInstRef as unknown,
       mergedShow: mergedShowRef,
       src: currentUrl,
       onClose,

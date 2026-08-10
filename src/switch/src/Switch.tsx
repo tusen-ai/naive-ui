@@ -1,7 +1,7 @@
-import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { SwitchTheme } from '../styles'
+import type { SwitchTheme, SwitchThemeOverrides } from '../styles'
 import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
 import type { SwitchSize, SwitchSpinProps } from './public-types'
 import { depx, pxfy } from 'seemly'
@@ -20,7 +20,7 @@ import { switchLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const switchProps = {
-  ...(useTheme.props as ThemeProps<SwitchTheme>),
+  ...(useTheme.props as ThemeProps<SwitchTheme, SwitchThemeOverrides>),
   size: String as PropType<SwitchSize>,
   value: {
     type: [String, Number, Boolean] as PropType<
@@ -296,7 +296,9 @@ export default defineComponent({
       mergedValue: mergedValueRef,
       checked: checkedRef,
       mergedDisabled: mergedDisabledRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { changeColor } from 'seemly'
 import { commonLight } from '../../_styles/common'
@@ -49,13 +49,16 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type CheckboxThemeVars = ReturnType<typeof self>
+export interface CheckboxThemeVars extends ReturnType<typeof self> {}
 
-const checkboxLight: Theme<'Checkbox', CheckboxThemeVars> = {
+const checkboxLight: CheckboxTheme = {
   name: 'Checkbox',
   common: commonLight,
   self
 }
 
+export interface CheckboxTheme extends Theme<'Checkbox', CheckboxThemeVars> {}
+
+export interface CheckboxThemeOverrides extends ExtractThemeOverrides<CheckboxTheme> {}
+
 export default checkboxLight
-export type CheckboxTheme = typeof checkboxLight

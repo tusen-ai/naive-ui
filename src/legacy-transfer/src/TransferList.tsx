@@ -77,8 +77,9 @@ export default defineComponent({
       mergedTheme: mergedThemeRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedRenderEmpty: mergedRenderEmptyRef,
-      scrollerInstRef,
-      vlInstRef,
+      // reduce dts: string ref only, type unused in render
+      scrollerInstRef: scrollerInstRef as unknown,
+      vlInstRef: vlInstRef as unknown,
       syncVLScroller,
       scrollContainer,
       scrollContent

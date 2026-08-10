@@ -233,8 +233,10 @@ export default defineComponent({
       appear: NModal.appearRef,
       isMounted: NModal.isMountedRef,
       mergedClsPrefix: NModal.mergedClsPrefixRef,
-      bodyRef,
-      scrollbarRef,
+      // reduce dts: avoid expanding component instance types
+      bodyRef: bodyRef as unknown,
+      // reduce dts: string ref only, type unused in render
+      scrollbarRef: scrollbarRef as unknown,
       draggableClass: draggableClassRef,
       displayed: displayedRef,
       childNodeRef,

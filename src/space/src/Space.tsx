@@ -1,7 +1,7 @@
 import type { CSSProperties, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { SpaceTheme } from '../styles'
+import type { SpaceTheme, SpaceThemeOverrides } from '../styles'
 import type { SpaceSize } from './public-types'
 import { depx, getGap } from 'seemly'
 import { Comment, computed, defineComponent, h } from 'vue'
@@ -29,7 +29,7 @@ export type Justify
     | 'space-evenly'
 
 export const spaceProps = {
-  ...(useTheme.props as ThemeProps<SpaceTheme>),
+  ...(useTheme.props as ThemeProps<SpaceTheme, SpaceThemeOverrides>),
   align: String as PropType<Align>,
   justify: {
     type: String as PropType<Justify>,

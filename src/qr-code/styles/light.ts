@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { commonLight } from '../../_styles/common'
 
@@ -8,13 +8,16 @@ function self(vars: ThemeCommonVars) {
   }
 }
 
-export type QrCodeThemeVars = ReturnType<typeof self>
+export interface QrCodeThemeVars extends ReturnType<typeof self> {}
 
-const themeLight: Theme<'QrCode', QrCodeThemeVars> = {
+const themeLight: QrCodeTheme = {
   name: 'QrCode',
   common: commonLight,
   self
 }
 
+export interface QrCodeTheme extends Theme<'QrCode', QrCodeThemeVars> {}
+
+export interface QrCodeThemeOverrides extends ExtractThemeOverrides<QrCodeTheme> {}
+
 export default themeLight
-export type QrCodeTheme = typeof themeLight

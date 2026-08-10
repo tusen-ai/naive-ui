@@ -2,7 +2,7 @@ import type { ValidateError } from 'async-validator'
 import type { ExtractPropTypes, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { FormTheme } from '../styles'
+import type { FormTheme, FormThemeOverrides } from '../styles'
 import type {
   FormInst,
   FormItemInst,
@@ -24,7 +24,7 @@ import { formInjectionKey, formItemInstsInjectionKey } from './context'
 import style from './styles/form.cssr'
 
 export const formProps = {
-  ...(useTheme.props as ThemeProps<FormTheme>),
+  ...(useTheme.props as ThemeProps<FormTheme, FormThemeOverrides>),
   inline: Boolean,
   labelWidth: [Number, String] as PropType<number | string>,
   labelAlign: String as PropType<LabelAlign>,

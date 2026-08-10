@@ -1,6 +1,7 @@
+import type { CSSProperties, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { LayoutTheme } from '../styles'
+import type { LayoutTheme, LayoutThemeOverrides } from '../styles'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { layoutLight } from '../styles'
@@ -18,7 +19,7 @@ export type LayoutHeaderProps = ExtractPublicPropTypes<typeof headerProps>
 export default defineComponent({
   name: 'LayoutHeader',
   props: {
-    ...(useTheme.props as ThemeProps<LayoutTheme>),
+    ...(useTheme.props as ThemeProps<LayoutTheme, LayoutThemeOverrides>),
     ...headerProps
   },
   setup(props) {
@@ -61,7 +62,9 @@ export default defineComponent({
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

@@ -1,7 +1,7 @@
-import type { CSSProperties, PropType } from 'vue'
+import type { CSSProperties, PropType, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { ProgressTheme } from '../styles'
+import type { ProgressTheme, ProgressThemeOverrides } from '../styles'
 import type { ProgressGradient, ProgressStatus } from './public-types'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
@@ -13,7 +13,7 @@ import MultipleCircle from './MultipleCircle'
 import style from './styles/index.cssr'
 
 export const progressProps = {
-  ...(useTheme.props as ThemeProps<ProgressTheme>),
+  ...(useTheme.props as ThemeProps<ProgressTheme, ProgressThemeOverrides>),
   processing: Boolean,
   type: {
     type: String as PropType<
@@ -146,7 +146,9 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       mergedIndicatorPlacement: mergedIndicatorPlacementRef,
       gapDeg,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

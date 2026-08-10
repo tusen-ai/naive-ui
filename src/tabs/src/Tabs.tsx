@@ -3,6 +3,7 @@ import type {
   CSSProperties,
   ExtractPropTypes,
   PropType,
+  Ref,
   SlotsType,
   VNode,
   VNodeChild
@@ -10,7 +11,7 @@ import type {
 import type { VXScrollInst } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { TabsTheme } from '../styles'
+import type { TabsTheme, TabsThemeOverrides } from '../styles'
 import type {
   Addable,
   OnBeforeLeave,
@@ -67,7 +68,7 @@ type TabPaneProps = ExtractPropTypes<typeof tabPaneProps> & {
 }
 
 export const tabsProps = {
-  ...(useTheme.props as ThemeProps<TabsTheme>),
+  ...(useTheme.props as ThemeProps<TabsTheme, TabsThemeOverrides>),
   value: [String, Number] as PropType<string | number>,
   defaultValue: [String, Number] as PropType<string | number>,
   trigger: {
@@ -929,9 +930,10 @@ export default defineComponent({
       tabsElRef,
       selfElRef,
       barElRef,
-      addTabInstRef,
-      // avoid unexpected type expansion when build es output
-      // $watch will introduce an onCleanUp with local node_modules path
+      // 1. avoid unexpected type expansion when build es output
+      //    $watch will introduce an onCleanUp with local node_modules path
+      // 2. reduce dts: avoid expanding component instance types
+      addTabInstRef: addTabInstRef as unknown,
       xScrollInstRef: xScrollInstRef as unknown,
       scrollWrapperElRef,
       addTabFixed: addTabFixedRef,
@@ -940,7 +942,9 @@ export default defineComponent({
       mergedSize: mergedSizeRef,
       handleScroll,
       handleTabsResize,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       animationDirection: animationDirectionRef,
       renderNameListRef,

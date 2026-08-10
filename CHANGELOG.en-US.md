@@ -8,6 +8,10 @@
 - Update nbNO locale.
 - Translate `DatePicker.weekPlaceholder` in the Japanese locale.
 
+### Perf
+
+- Significantly reduce the size of emitted `.d.ts` files in the package.
+
 ### Feats
 
 - `n-form`'s `validate` method supports filtering form items by path, closes [#7475](https://github.com/tusen-ai/naive-ui/issues/7475).

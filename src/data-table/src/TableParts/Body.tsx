@@ -439,8 +439,9 @@ export default defineComponent({
       summaryPlacement: summaryPlacementRef,
       dataTableSlots,
       componentId,
-      scrollbarInstRef,
-      virtualListRef,
+      // reduce dts: string ref only, type unused in render
+      scrollbarInstRef: scrollbarInstRef as unknown,
+      virtualListRef: virtualListRef as unknown,
       emptyElRef,
       summary: summaryRef,
       mergedClsPrefix: mergedClsPrefixRef,

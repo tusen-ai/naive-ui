@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { h, nextTick } from 'vue'
+import { nextTick } from 'vue'
 import { NQrCode } from '../index'
 
 describe('n-qr-code', () => {

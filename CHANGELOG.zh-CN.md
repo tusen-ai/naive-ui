@@ -8,6 +8,10 @@
 - 更新 nbNO locale
 - 翻译日文 locale 中的 `DatePicker.weekPlaceholder`
 
+### Perf
+
+- 大幅减小构建产物中 `.d.ts` 的体积
+
 ### Feats
 
 - `n-form` 的 `validate` 方法支持按 path 过滤表项，关闭 [#7475](https://github.com/tusen-ai/naive-ui/issues/7475)

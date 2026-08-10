@@ -1,7 +1,10 @@
-import type { PropType } from 'vue'
+import type { CSSProperties, PropType, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { CollapseTransitionTheme } from '../styles'
+import type {
+  CollapseTransitionTheme,
+  CollapseTransitionThemeOverrides
+} from '../styles'
 import { useFalseUntilTruthy } from 'vooks'
 import {
   computed,
@@ -20,7 +23,10 @@ import { collapseTransitionLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const collapseTransitionProps = {
-  ...(useTheme.props as ThemeProps<CollapseTransitionTheme>),
+  ...(useTheme.props as ThemeProps<
+    CollapseTransitionTheme,
+    CollapseTransitionThemeOverrides
+  >),
   show: {
     type: Boolean,
     default: true
@@ -100,7 +106,9 @@ export default defineComponent({
       mergedShow: mergedShowRef,
       onceTrue: onceTrueRef,
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

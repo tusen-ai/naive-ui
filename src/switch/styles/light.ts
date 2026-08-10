@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { changeColor } from 'seemly'
 import { commonLight } from '../../_styles/common'
@@ -28,13 +28,16 @@ function self(vars: ThemeCommonVars) {
   }
 }
 
-export type SwitchThemeVars = ReturnType<typeof self>
+export interface SwitchThemeVars extends ReturnType<typeof self> {}
 
-const switchLight: Theme<'Switch', SwitchThemeVars> = {
+const switchLight: SwitchTheme = {
   name: 'Switch',
   common: commonLight,
   self
 }
 
+export interface SwitchTheme extends Theme<'Switch', SwitchThemeVars> {}
+
+export interface SwitchThemeOverrides extends ExtractThemeOverrides<SwitchTheme> {}
+
 export default switchLight
-export type SwitchTheme = typeof switchLight

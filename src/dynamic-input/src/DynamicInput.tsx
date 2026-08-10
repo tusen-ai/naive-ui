@@ -1,8 +1,8 @@
-import type { CSSProperties, PropType, VNode } from 'vue'
+import type { CSSProperties, PropType, Ref, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { ButtonProps } from '../../button'
-import type { DynamicInputTheme } from '../styles'
+import type { DynamicInputTheme, DynamicInputThemeOverrides } from '../styles'
 import type {
   DynamicInputActionSlotProps,
   DynamicInputDefaultSlotProps,
@@ -49,7 +49,10 @@ import style from './styles/index.cssr'
 const globalDataKeyMap = new WeakMap()
 
 export const dynamicInputProps = {
-  ...(useTheme.props as ThemeProps<DynamicInputTheme>),
+  ...(useTheme.props as ThemeProps<
+    DynamicInputTheme,
+    DynamicInputThemeOverrides
+  >),
   max: Number,
   min: {
     type: Number,
@@ -323,7 +326,9 @@ export default defineComponent({
       move,
       createItem,
       mergedTheme: themeRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

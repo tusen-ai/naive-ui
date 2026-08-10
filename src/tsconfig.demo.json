@@ -4,8 +4,8 @@
     "incremental": false,
     "composite": false,
     "target": "ES6",
-    "rootDirs": [".", "../generic"],
     "rootDir": "..",
+    "rootDirs": [".", "../generic"],
     "module": "es6",
     "noEmit": true
   },

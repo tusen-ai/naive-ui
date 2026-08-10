@@ -8,7 +8,7 @@ import type {
 } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { CollapseTheme } from '../styles'
+import type { CollapseTheme, CollapseThemeOverrides } from '../styles'
 import type {
   CollapseArrowSlotProps,
   CollapseItemHeaderExtraSlotProps,
@@ -28,7 +28,7 @@ import { collapseLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const collapseProps = {
-  ...(useTheme.props as ThemeProps<CollapseTheme>),
+  ...(useTheme.props as ThemeProps<CollapseTheme, CollapseThemeOverrides>),
   defaultExpandedNames: {
     type: [Array, String] as PropType<
       string | number | Array<string | number> | null
@@ -239,7 +239,9 @@ export default defineComponent({
       rtlEnabled: rtlEnabledRef,
       mergedTheme: themeRef,
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

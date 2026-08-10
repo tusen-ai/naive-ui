@@ -921,9 +921,11 @@ export default defineComponent({
       namespace: namespaceRef,
       uncontrolledValue: uncontrolledValueRef,
       pendingValue: pendingValueRef,
-      panelInstRef,
+      // reduce dts: string ref only, type unused in render
+      panelInstRef: panelInstRef as unknown,
       triggerElRef,
-      inputInstRef,
+      // reduce dts: string ref only, type unused in render
+      inputInstRef: inputInstRef as unknown,
       isMounted: useIsMounted(),
       displayTime: singleInputValueRef,
       displayStartTime: rangeStartInputValueRef,
@@ -957,10 +959,14 @@ export default defineComponent({
       handlePanelConfirm,
       mergedTheme: themeRef,
       actions: mergedActionsRef,
-      triggerCssVars: inlineThemeDisabled ? undefined : triggerCssVarsRef,
+      triggerCssVars: inlineThemeDisabled
+        ? undefined
+        : (triggerCssVarsRef as Ref<CSSProperties>),
       triggerThemeClass: triggerThemeClassHandle?.themeClass,
       triggerOnRender: triggerThemeClassHandle?.onRender,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       onNextMonth: props.onNextMonth,

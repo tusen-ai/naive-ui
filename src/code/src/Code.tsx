@@ -1,14 +1,14 @@
-import type { PropType } from 'vue'
+import type { CSSProperties, PropType, Ref } from 'vue'
 import type { Hljs, ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { CodeTheme } from '../styles'
+import type { CodeTheme, CodeThemeOverrides } from '../styles'
 import { computed, defineComponent, h, onMounted, ref, toRef, watch } from 'vue'
 import { useConfig, useHljs, useTheme, useThemeClass } from '../../_mixins'
 import { codeLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const codeProps = {
-  ...(useTheme.props as ThemeProps<CodeTheme>),
+  ...(useTheme.props as ThemeProps<CodeTheme, CodeThemeOverrides>),
   language: String,
   code: {
     type: String,
@@ -187,7 +187,9 @@ export default defineComponent({
         }
         return numbers.join('\n')
       }),
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

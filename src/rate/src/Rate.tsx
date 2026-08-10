@@ -1,7 +1,7 @@
-import type { CSSProperties, PropType } from 'vue'
+import type { CSSProperties, PropType, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { RateTheme } from '../styles'
+import type { RateTheme, RateThemeOverrides } from '../styles'
 import type { RateOnUpdateValue, RateOnUpdateValueImpl } from './interface'
 import type { RateSize } from './public-types'
 import { useMergedState } from 'vooks'
@@ -14,7 +14,7 @@ import renderStarIcon from './StarIcon'
 import style from './styles/index.cssr'
 
 export const rateProps = {
-  ...(useTheme.props as ThemeProps<RateTheme>),
+  ...(useTheme.props as ThemeProps<RateTheme, RateThemeOverrides>),
   allowHalf: Boolean,
   count: {
     type: Number,
@@ -196,7 +196,9 @@ export default defineComponent({
       handleClick,
       handleMouseLeave,
       handleMouseEnterSomeStar,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

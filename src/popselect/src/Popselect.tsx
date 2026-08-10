@@ -4,7 +4,7 @@ import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { PopoverInst, PopoverTrigger } from '../../popover'
 import type { PopoverInternalProps } from '../../popover/src/Popover'
-import type { PopselectTheme } from '../styles'
+import type { PopselectTheme, PopselectThemeOverrides } from '../styles'
 import type { PopselectInst } from './interface'
 import { defineComponent, h, provide, ref } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
@@ -16,7 +16,7 @@ import { popselectInjectionKey } from './interface'
 import NPopselectPanel, { panelPropKeys, panelProps } from './PopselectPanel'
 
 export const popselectProps = {
-  ...(useTheme.props as ThemeProps<PopselectTheme>),
+  ...(useTheme.props as ThemeProps<PopselectTheme, PopselectThemeOverrides>),
   ...omit(popoverBaseProps, ['showArrow', 'arrow']),
   placement: {
     ...popoverBaseProps.placement,
@@ -75,7 +75,8 @@ export default defineComponent({
     }
     return {
       ...exposedMethods,
-      popoverInstRef,
+      // reduce dts: string ref only, type unused in render
+      popoverInstRef: popoverInstRef as unknown,
       mergedTheme: themeRef
     }
   },

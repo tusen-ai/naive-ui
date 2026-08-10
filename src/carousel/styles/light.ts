@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import { commonLight } from '../../_styles/common'
 
 export function self() {
@@ -13,13 +13,16 @@ export function self() {
   }
 }
 
-export type CarouselThemeVars = ReturnType<typeof self>
+export interface CarouselThemeVars extends ReturnType<typeof self> {}
 
-const carouselLight: Theme<'Carousel', CarouselThemeVars> = {
+const carouselLight: CarouselTheme = {
   name: 'Carousel',
   common: commonLight,
   self
 }
 
+export interface CarouselTheme extends Theme<'Carousel', CarouselThemeVars> {}
+
+export interface CarouselThemeOverrides extends ExtractThemeOverrides<CarouselTheme> {}
+
 export default carouselLight
-export type CarouselTheme = typeof carouselLight

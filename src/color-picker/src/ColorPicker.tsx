@@ -10,7 +10,7 @@ import type {
 import type { FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { ColorPickerTheme } from '../styles'
+import type { ColorPickerTheme, ColorPickerThemeOverrides } from '../styles'
 import type {
   OnClear,
   OnConfirmImpl,
@@ -86,7 +86,10 @@ import style from './styles/index.cssr'
 import { deriveDefaultValue, getModeFromValue } from './utils'
 
 export const colorPickerProps = {
-  ...(useTheme.props as ThemeProps<ColorPickerTheme>),
+  ...(useTheme.props as ThemeProps<
+    ColorPickerTheme,
+    ColorPickerThemeOverrides
+  >),
   value: String as PropType<string | null>,
   show: {
     type: Boolean as PropType<boolean | undefined>,
@@ -752,7 +755,9 @@ export default defineComponent({
         doUpdateShow(false)
       },
       renderPanel,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

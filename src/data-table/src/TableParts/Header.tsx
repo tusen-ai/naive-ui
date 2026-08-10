@@ -184,7 +184,8 @@ export default defineComponent({
       headerCheckboxDisabled: headerCheckboxDisabledRef,
       headerHeight: headerHeightRef,
       virtualScrollHeader: virtualScrollHeaderRef,
-      virtualListRef,
+      // reduce dts: string ref only, type unused in render
+      virtualListRef: virtualListRef as unknown,
       handleCheckboxUpdateChecked,
       handleColHeaderClick,
       handleTableHeaderScroll,

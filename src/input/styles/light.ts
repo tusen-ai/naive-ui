@@ -1,3 +1,5 @@
+import type { ScrollbarTheme } from '../../_internal/scrollbar/styles'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { changeColor } from 'seemly'
 import { scrollbarLight } from '../../_internal/scrollbar/styles'
@@ -108,7 +110,7 @@ function self(vars: ThemeCommonVars) {
   }
 }
 
-const inputLight = createTheme({
+const inputLight: InputTheme = createTheme({
   name: 'Input',
   common: commonLight,
   peers: {
@@ -117,6 +119,15 @@ const inputLight = createTheme({
   self
 })
 
-export type InputThemeVars = ReturnType<typeof self>
-export type InputTheme = typeof inputLight
+export interface InputThemeVars extends ReturnType<typeof self> {}
+export interface InputTheme extends Theme<
+  'Input',
+  InputThemeVars,
+  {
+    Scrollbar: ScrollbarTheme
+  }
+> {}
+
+export interface InputThemeOverrides extends ExtractThemeOverrides<InputTheme> {}
+
 export default inputLight

@@ -153,7 +153,8 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       groupId: imageGroupHandle?.groupId,
-      previewInstRef,
+      // reduce dts: string ref only, type unused in render
+      previewInstRef: previewInstRef as unknown,
       imageRef,
       mergedPreviewSrc: mergedPreviewSrcRef,
       showError: showErrorRef,

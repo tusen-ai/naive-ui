@@ -1,11 +1,11 @@
 import type { Locale } from 'date-fns'
-import type { CSSProperties, PropType, VNode } from 'vue'
+import type { CSSProperties, PropType, Ref, VNode } from 'vue'
 import type { FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/public-types'
 import type { InputInst } from '../../input'
-import type { TimePickerTheme } from '../styles'
+import type { TimePickerTheme, TimePickerThemeOverrides } from '../styles'
 import type {
   IsHourDisabled,
   IsMinuteDisabled,
@@ -90,7 +90,7 @@ function validateUnits(value: MaybeArray<number>, max: number): boolean {
 }
 
 export const timePickerProps = {
-  ...(useTheme.props as ThemeProps<TimePickerTheme>),
+  ...(useTheme.props as ThemeProps<TimePickerTheme, TimePickerThemeOverrides>),
   to: useAdjustedTo.propTo,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
@@ -879,8 +879,9 @@ export default defineComponent({
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
       isMounted: useIsMounted(),
-      inputInstRef,
-      panelInstRef,
+      // reduce dts: string ref only, type unused in render
+      inputInstRef: inputInstRef as unknown,
+      panelInstRef: panelInstRef as unknown,
       adjustedTo: useAdjustedTo(props),
       mergedShow: mergedShowRef,
       localizedClear: localizedClearRef,
@@ -924,10 +925,14 @@ export default defineComponent({
       handleMenuKeydown,
       handleTriggerClick,
       mergedTheme: themeRef,
-      triggerCssVars: inlineThemeDisabled ? undefined : triggerCssVarsRef,
+      triggerCssVars: inlineThemeDisabled
+        ? undefined
+        : (triggerCssVarsRef as Ref<CSSProperties>),
       triggerThemeClass: triggerThemeClassHandle?.themeClass,
       triggerOnRender: triggerThemeClassHandle?.onRender,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       clearSelectedValue

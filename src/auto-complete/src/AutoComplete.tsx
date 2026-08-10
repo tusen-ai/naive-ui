@@ -4,6 +4,7 @@ import type {
   HTMLAttributes,
   InputHTMLAttributes,
   PropType,
+  Ref,
   SlotsType,
   VNode
 } from 'vue'
@@ -22,7 +23,7 @@ import type {
   SelectGroupOption,
   SelectIgnoredOption
 } from '../../select/src/interface'
-import type { AutoCompleteTheme } from '../styles'
+import type { AutoCompleteTheme, AutoCompleteThemeOverrides } from '../styles'
 import type {
   AutoCompleteDefaultSlotProps,
   AutoCompleteInst,
@@ -64,7 +65,10 @@ import style from './styles/index.cssr'
 import { mapAutoCompleteOptionsToSelectOptions } from './utils'
 
 export const autoCompleteProps = {
-  ...(useTheme.props as ThemeProps<AutoCompleteTheme>),
+  ...(useTheme.props as ThemeProps<
+    AutoCompleteTheme,
+    AutoCompleteThemeOverrides
+  >),
   to: useAdjustedTo.propTo,
   menuProps: Object as PropType<HTMLAttributes>,
   append: Boolean,
@@ -343,12 +347,14 @@ export default defineComponent({
     return {
       focus: exposedMethods.focus,
       blur: exposedMethods.blur,
-      inputInstRef,
+      // reduce dts: string ref only, type unused in render
+      inputInstRef: inputInstRef as unknown,
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
       isMounted: useIsMounted(),
       adjustedTo: useAdjustedTo(props),
-      menuInstRef,
+      // reduce dts: string ref only, type unused in render
+      menuInstRef: menuInstRef as unknown,
       triggerElRef,
       treeMate: treeMateRef,
       mergedSize: mergedSizeRef,
@@ -365,7 +371,9 @@ export default defineComponent({
       handleCompositionEnd,
       handleKeyDown,
       mergedTheme: themeRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       mergedBordered: mergedBorderedRef,

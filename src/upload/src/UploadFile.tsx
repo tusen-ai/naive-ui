@@ -240,7 +240,8 @@ export default defineComponent({
       mergedThumbnailUrl: mergedThumbnailUrlRef,
       shouldUseThumbnailUrl: NUpload.shouldUseThumbnailUrlRef,
       renderIcon: NUpload.renderIconRef,
-      imageRef,
+      // reduce dts: string ref only, type unused in render
+      imageRef: imageRef as unknown,
       handleRemoveOrCancelClick,
       handleDownloadClick,
       handleRetryClick,

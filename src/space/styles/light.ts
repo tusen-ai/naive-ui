@@ -1,16 +1,19 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import commonVars from './_common'
 
 function self() {
   return commonVars
 }
 
-export type SpaceThemeVars = ReturnType<typeof self>
+export interface SpaceThemeVars extends ReturnType<typeof self> {}
 
-const spaceLight: Theme<'Space', SpaceThemeVars> = {
+const spaceLight: SpaceTheme = {
   name: 'Space',
   self
 }
 
+export interface SpaceTheme extends Theme<'Space', SpaceThemeVars> {}
+
+export interface SpaceThemeOverrides extends ExtractThemeOverrides<SpaceTheme> {}
+
 export default spaceLight
-export type SpaceTheme = typeof spaceLight

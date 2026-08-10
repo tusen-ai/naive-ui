@@ -1,8 +1,8 @@
-import type { PropType, SlotsType } from 'vue'
+import type { CSSProperties, PropType, Ref, SlotsType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { TooltipProps } from '../../tooltip'
-import type { HeatmapTheme } from '../styles/light'
+import type { HeatmapTheme, HeatmapThemeOverrides } from '../styles/light'
 import type { DayRect } from './interface'
 import type {
   HeatmapData,
@@ -42,7 +42,7 @@ interface Col {
 }
 
 export const heatmapProps = {
-  ...(useTheme.props as ThemeProps<HeatmapTheme>),
+  ...(useTheme.props as ThemeProps<HeatmapTheme, HeatmapThemeOverrides>),
   activeColors: Array as PropType<string[]>,
   colorTheme: String as PropType<HeatmapColorTheme>,
   data: Array as PropType<HeatmapData>,
@@ -322,7 +322,9 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       rtlEnabled: rtlEnabledRef,
       locale: localeRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       heatmapMatrix: heatmapMatrixRef,

@@ -2,6 +2,7 @@ import type {
   CSSProperties,
   InputHTMLAttributes,
   PropType,
+  Ref,
   SlotsType,
   TextareaHTMLAttributes,
   VNode,
@@ -12,7 +13,7 @@ import type { ScrollbarInst } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/public-types'
-import type { InputTheme } from '../styles'
+import type { InputTheme, InputThemeOverrides } from '../styles'
 import type {
   InputWrappedRef,
   OnUpdateValue,
@@ -57,7 +58,7 @@ import { isEmptyInputValue, useCursor } from './utils'
 import WordCount from './WordCount'
 
 export const inputProps = {
-  ...(useTheme.props as ThemeProps<InputTheme>),
+  ...(useTheme.props as ThemeProps<InputTheme, InputThemeOverrides>),
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -1041,7 +1042,8 @@ export default defineComponent({
       inputEl2Ref,
       textareaElRef,
       textareaMirrorElRef,
-      textareaScrollbarInstRef,
+      // reduce dts: string ref only, type unused in render
+      textareaScrollbarInstRef: textareaScrollbarInstRef as unknown,
       // value
       rtlEnabled: rtlEnabledRef,
       uncontrolledValue: uncontrolledValueRef,
@@ -1087,7 +1089,9 @@ export default defineComponent({
         return textareaElRef.value
       },
       mergedTheme: themeRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

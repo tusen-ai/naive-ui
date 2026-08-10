@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { changeColor } from 'seemly'
 import { commonLight } from '../../_styles/common'
@@ -119,13 +119,16 @@ function self(vars: ThemeCommonVars) {
   }
 }
 
-export type TagThemeVars = ReturnType<typeof self>
+export interface TagThemeVars extends ReturnType<typeof self> {}
 
-const tagLight: Theme<'Tag', TagThemeVars> = {
+const tagLight: TagTheme = {
   name: 'Tag',
   common: commonLight,
   self
 }
 
+export interface TagTheme extends Theme<'Tag', TagThemeVars> {}
+
+export interface TagThemeOverrides extends ExtractThemeOverrides<TagTheme> {}
+
 export default tagLight
-export type TagTheme = typeof tagLight

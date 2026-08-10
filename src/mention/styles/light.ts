@@ -1,4 +1,7 @@
+import type { InternalSelectMenuTheme } from '../../_internal/select-menu/styles'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
+import type { InputTheme } from '../../input/styles'
 import { internalSelectMenuLight } from '../../_internal/select-menu/styles'
 import { createTheme } from '../../_mixins'
 import { commonLight } from '../../_styles/common'
@@ -11,7 +14,7 @@ function self(vars: ThemeCommonVars) {
   }
 }
 
-const mentionLight = createTheme({
+const mentionLight: MentionTheme = createTheme({
   name: 'Mention',
   common: commonLight,
   peers: {
@@ -21,6 +24,16 @@ const mentionLight = createTheme({
   self
 })
 
+export interface MentionTheme extends Theme<
+  'Mention',
+  MentionThemeVars,
+  {
+    InternalSelectMenu: InternalSelectMenuTheme
+    Input: InputTheme
+  }
+> {}
+
+export interface MentionThemeOverrides extends ExtractThemeOverrides<MentionTheme> {}
+
 export default mentionLight
-export type MentionTheme = typeof mentionLight
-export type MentionThemeVars = ReturnType<typeof self>
+export interface MentionThemeVars extends ReturnType<typeof self> {}

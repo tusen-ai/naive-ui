@@ -1,7 +1,10 @@
-import type { CSSProperties, PropType } from 'vue'
+import type { CSSProperties, PropType, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { LegacyTransferTheme } from '../styles'
+import type {
+  LegacyTransferTheme,
+  LegacyTransferThemeOverrides
+} from '../styles'
 import type { Filter, OnUpdateValue, Option, OptionValue } from './interface'
 import { depx } from 'seemly'
 import { useIsMounted } from 'vooks'
@@ -21,7 +24,10 @@ import NTransferList from './TransferList'
 import { useTransferData } from './use-transfer-data'
 
 export const transferProps = {
-  ...(useTheme.props as ThemeProps<LegacyTransferTheme>),
+  ...(useTheme.props as ThemeProps<
+    LegacyTransferTheme,
+    LegacyTransferThemeOverrides
+  >),
   value: Array as PropType<OptionValue[] | null>,
   defaultValue: {
     type: Array as PropType<OptionValue[] | null>,
@@ -287,7 +293,7 @@ export default defineComponent({
           '--n-icon-color': iconColor,
           '--n-icon-color-disabled': iconColorDisabled
         }
-      })
+      }) as Ref<CSSProperties>
     }
   },
   render() {

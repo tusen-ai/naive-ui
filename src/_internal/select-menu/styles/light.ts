@@ -1,4 +1,7 @@
+import type { ExtractThemeOverrides, Theme } from '../../../_mixins'
 import type { ThemeCommonVars } from '../../../_styles/common'
+import type { EmptyTheme } from '../../../empty/styles'
+import type { ScrollbarTheme } from '../../scrollbar/styles'
 import { createTheme } from '../../../_mixins'
 import { commonLight } from '../../../_styles/common'
 import { emptyLight } from '../../../empty/styles'
@@ -58,9 +61,9 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type InternalSelectMenuThemeVars = ReturnType<typeof self>
+export interface InternalSelectMenuThemeVars extends ReturnType<typeof self> {}
 
-const internalSelectMenuLight = createTheme({
+const internalSelectMenuLight: InternalSelectMenuTheme = createTheme({
   name: 'InternalSelectMenu',
   common: commonLight,
   peers: {
@@ -70,5 +73,15 @@ const internalSelectMenuLight = createTheme({
   self
 })
 
+export interface InternalSelectMenuTheme extends Theme<
+  'InternalSelectMenu',
+  InternalSelectMenuThemeVars,
+  {
+    Scrollbar: ScrollbarTheme
+    Empty: EmptyTheme
+  }
+> {}
+
+export interface InternalSelectMenuThemeOverrides extends ExtractThemeOverrides<InternalSelectMenuTheme> {}
+
 export default internalSelectMenuLight
-export type InternalSelectMenuTheme = typeof internalSelectMenuLight

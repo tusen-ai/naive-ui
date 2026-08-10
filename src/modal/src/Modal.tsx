@@ -1,9 +1,9 @@
-import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CardSlots } from '../../card'
 import type { DialogSlots } from '../../dialog'
-import type { ModalTheme } from '../styles'
+import type { ModalTheme, ModalThemeOverrides } from '../styles'
 import type { ModalDraggableOptions } from './interface'
 import { getPreciseEventTarget } from 'seemly'
 import { zindexable } from 'vdirs'
@@ -36,7 +36,7 @@ import { presetProps, presetPropsKeys } from './presetProps'
 import style from './styles/index.cssr'
 
 export const modalProps = {
-  ...(useTheme.props as ThemeProps<ModalTheme>),
+  ...(useTheme.props as ThemeProps<ModalTheme, ModalThemeOverrides>),
   show: Boolean,
   showMask: {
     type: Boolean,
@@ -307,7 +307,9 @@ export default defineComponent({
       handleNegativeClick,
       handlePositiveClick,
       handleCloseClick,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

@@ -640,7 +640,7 @@ describe('n-tabs', () => {
       attachTo: document.body,
       setup() {
         return () => (
-          <NConfigProvider rtl={rtlRef.value}>
+          <NConfigProvider rtl={rtlRef.value as any}>
             {{
               default: () => (
                 <NTabs defaultValue="b" type="line">

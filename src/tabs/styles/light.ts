@@ -1,4 +1,6 @@
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
+import type { ButtonTheme } from '../../button/styles'
 import { createTheme } from '../../_mixins'
 import { commonLight } from '../../_styles/common'
 import { buttonLight } from '../../button/styles'
@@ -61,9 +63,9 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type TabsThemeVars = ReturnType<typeof self>
+export interface TabsThemeVars extends ReturnType<typeof self> {}
 
-const tabsLight = createTheme({
+const tabsLight: TabsTheme = createTheme({
   name: 'Tabs',
   common: commonLight,
   peers: {
@@ -72,5 +74,14 @@ const tabsLight = createTheme({
   self
 })
 
+export interface TabsTheme extends Theme<
+  'Tabs',
+  TabsThemeVars,
+  {
+    Button: ButtonTheme
+  }
+> {}
+
+export interface TabsThemeOverrides extends ExtractThemeOverrides<TabsTheme> {}
+
 export default tabsLight
-export type TabsTheme = typeof tabsLight

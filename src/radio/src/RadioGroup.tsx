@@ -1,7 +1,7 @@
-import type { CSSProperties, PropType, VNode, VNodeChild } from 'vue'
+import type { CSSProperties, PropType, Ref, VNode, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { RadioTheme } from '../styles'
+import type { RadioTheme, RadioThemeOverrides } from '../styles'
 import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
 import type { RadioBaseProps } from './use-radio'
 import { useMergedState } from 'vooks'
@@ -97,7 +97,7 @@ export interface RadioGroupOption {
 }
 
 export const radioGroupProps = {
-  ...(useTheme.props as ThemeProps<RadioTheme>),
+  ...(useTheme.props as ThemeProps<RadioTheme, RadioThemeOverrides>),
   name: String,
   options: Array as PropType<RadioGroupOption[]>,
   labelField: {
@@ -248,7 +248,9 @@ export default defineComponent({
       mergedValue: mergedValueRef,
       handleFocusout,
       handleFocusin,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

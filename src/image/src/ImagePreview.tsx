@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType, VNode } from 'vue'
+import type { CSSProperties, PropType, Ref, VNode } from 'vue'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { MoveStrategy } from './interface'
 import type { ImagePreviewInst } from './public-types'
@@ -546,7 +546,9 @@ export default defineComponent({
       handleSwitchNext,
       withTooltip,
       resizeToOrignalImageSize,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       doUpdateShow,

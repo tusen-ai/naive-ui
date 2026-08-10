@@ -1,7 +1,7 @@
-import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { SplitTheme } from '../styles'
+import type { SplitTheme, SplitThemeOverrides } from '../styles'
 import type { SplitOnUpdateSize } from './types'
 import { off, on } from 'evtd'
 import { depx } from 'seemly'
@@ -14,7 +14,7 @@ import { splitLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const splitProps = {
-  ...(useTheme.props as ThemeProps<SplitTheme>),
+  ...(useTheme.props as ThemeProps<SplitTheme, SplitThemeOverrides>),
   direction: {
     type: String as PropType<'horizontal' | 'vertical'>,
     default: 'horizontal'
@@ -230,7 +230,9 @@ export default defineComponent({
     return {
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       resizeTriggerElRef,
       isDragging: isDraggingRef,
       mergedClsPrefix: mergedClsPrefixRef,

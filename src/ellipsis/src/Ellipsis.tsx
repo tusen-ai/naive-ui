@@ -3,7 +3,7 @@ import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { PopoverProps } from '../../popover/src/Popover'
 import type { TooltipInst } from '../../tooltip/src/Tooltip'
-import type { EllipsisTheme } from '../styles'
+import type { EllipsisTheme, EllipsisThemeOverrides } from '../styles'
 import {
   computed,
   defineComponent,
@@ -27,7 +27,7 @@ export function createCursorClass(clsPrefix: string, cursor: string): string {
 }
 
 export const ellipsisProps = {
-  ...(useTheme.props as ThemeProps<EllipsisTheme>),
+  ...(useTheme.props as ThemeProps<EllipsisTheme, EllipsisThemeOverrides>),
   expandTrigger: String as PropType<'click'>,
   lineClamp: [Number, String] as PropType<string | number>,
   tooltip: {
@@ -198,7 +198,8 @@ export default defineComponent({
       mergedTheme,
       triggerRef,
       triggerInnerRef,
-      tooltipRef,
+      // reduce dts: string ref only, type unused in render
+      tooltipRef: tooltipRef as unknown,
       handleClick: handleClickRef,
       renderTrigger,
       getTooltipDisabled

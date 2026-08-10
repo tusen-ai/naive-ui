@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins/use-theme'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins/use-theme'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { changeColor, composite } from 'seemly'
 import { commonLight } from '../../_styles/common'
@@ -103,13 +103,16 @@ function self(vars: ThemeCommonVars) {
   }
 }
 
-export type AlertThemeVars = ReturnType<typeof self>
+export interface AlertThemeVars extends ReturnType<typeof self> {}
 
-const alertLight: Theme<'Alert', AlertThemeVars> = {
+const alertLight: AlertTheme = {
   name: 'Alert',
   common: commonLight,
   self
 }
 
+export interface AlertTheme extends Theme<'Alert', AlertThemeVars> {}
+
+export interface AlertThemeOverrides extends ExtractThemeOverrides<AlertTheme> {}
+
 export default alertLight
-export type AlertTheme = typeof alertLight

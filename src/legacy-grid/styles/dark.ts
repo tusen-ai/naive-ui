@@ -1,10 +1,9 @@
-import type { Theme } from '../../_mixins'
+import type { RowTheme } from './light'
 import { commonDark } from '../../_styles/common'
 
-const rowDark: Theme<'Row'> = {
+const rowDark: RowTheme = {
   name: 'Row',
   common: commonDark
 }
 
 export default rowDark
-export type RowTheme = typeof rowDark
