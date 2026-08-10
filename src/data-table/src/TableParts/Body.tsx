@@ -1093,7 +1093,9 @@ export default defineComponent({
                       </tbody>
                     ) : null}
                   </table>
-                  {this.empty && this.xScrollable ? createEmptyNode() : null}
+                  {this.empty && (this.xScrollable || this.showHeader)
+                    ? createEmptyNode()
+                    : null}
                 </>
               )
             }
@@ -1172,7 +1174,7 @@ export default defineComponent({
     )
 
     if (this.empty) {
-      if (this.explicitlyScrollable || this.xScrollable) {
+      if (this.explicitlyScrollable || this.xScrollable || this.showHeader) {
         // empty node is integrated into table node
         return tableNode
       }
