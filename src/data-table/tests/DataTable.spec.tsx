@@ -1179,6 +1179,24 @@ describe('props.columns', () => {
     const wrapper = mount(() => <NDataTable columns={columns} data={[]} />)
     expect(wrapper.find('thead').exists()).toBe(true)
     expect(wrapper.find('thead [data-col-key="name"]').exists()).toBe(true)
+    expect(wrapper.find('.n-data-table-empty').exists()).toBe(true)
+    wrapper.unmount()
+  })
+
+  it('should show header with empty data when `table-layout` is `fixed`', () => {
+    const columns: DataTableColumns = [
+      {
+        title: 'Name',
+        key: 'name',
+        width: 100
+      }
+    ]
+    const wrapper = mount(() => (
+      <NDataTable columns={columns} data={[]} table-layout="fixed" />
+    ))
+    expect(wrapper.find('thead').exists()).toBe(true)
+    expect(wrapper.find('thead [data-col-key="name"]').exists()).toBe(true)
+    expect(wrapper.find('.n-data-table-empty').exists()).toBe(true)
     wrapper.unmount()
   })
 
