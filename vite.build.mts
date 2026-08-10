@@ -34,9 +34,11 @@ export default defineConfig({
         exports: 'named'
       },
       plugins: [
-        ...process.env.USE_VUE_JSX_VAPOR ? [vueJsxVapor({
-          interop: true,
-        })] : [],
+        ...process.env.USE_VUE_JSX_VAPOR
+          ? [vueJsxVapor({
+              interop: true
+            })]
+          : [],
         babel({
           extensions,
           babelHelpers: 'bundled'

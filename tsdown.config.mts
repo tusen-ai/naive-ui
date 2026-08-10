@@ -38,6 +38,12 @@ export default defineConfig({
     js: '.js',
     dts: '.d.ts'
   }),
+  deps: {
+    // Compiled JSX imports vue-jsx-vapor runtime helpers. It is a devDependency,
+    // so whitelist it for bundling into es/lib; anything else from node_modules
+    // being bundled should fail the build.
+    onlyBundle: ['vue-jsx-vapor']
+  },
   plugins: [
     cjsLodashPlugin,
     vueJsxVapor({
