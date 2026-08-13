@@ -676,22 +676,24 @@ export default defineComponent({
     }
     function handleKeydown(e: KeyboardEvent): void {
       if (e.key === 'Enter') {
-        if (mergedShowRef.value) {
-          const { enterBehavior } = treeHandleKeydown(e)
-          if (!props.multiple) {
-            switch (enterBehavior) {
-              case 'default':
-              case 'toggleSelect':
-                closeMenu()
-                focusSelection()
-                break
-              default:
-                break
+        if (!triggerInstRef.value?.isComposing) {
+          if (mergedShowRef.value) {
+            const { enterBehavior } = treeHandleKeydown(e)
+            if (!props.multiple) {
+              switch (enterBehavior) {
+                case 'default':
+                case 'toggleSelect':
+                  closeMenu()
+                  focusSelection()
+                  break
+                default:
+                  break
+              }
             }
           }
-        }
-        else {
-          openMenu()
+          else {
+            openMenu()
+          }
         }
         e.preventDefault()
       }

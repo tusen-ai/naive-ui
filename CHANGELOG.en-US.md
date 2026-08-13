@@ -45,6 +45,7 @@
 - Fix `n-input-otp` only keeping the last character when browser extension autofill sets the full OTP value on a single input, closes [#7540](https://github.com/tusen-ai/naive-ui/pull/7540).
 - Fix `n-menu` item icons not centered in collapsed mode when the options contain a `type="group"` group, closes [#8105](https://github.com/tusen-ai/naive-ui/issues/8105).
 - Fix `n-data-table` not rendering the table header when data is empty and a column has `ellipsis` set, closes [#8118](https://github.com/tusen-ai/naive-ui/issues/8118).
+- Fix `n-tree-select` selecting the keyboard-focused node when Enter is pressed during IME composition, closes [#8173](https://github.com/tusen-ai/naive-ui/issues/8173).
 
 ## 2.44.1
 
