@@ -863,9 +863,10 @@ const Scrollbar = defineComponent({
     }
     const createChildren = (): VNode => {
       this.onRender?.()
+      const { style: attrStyle, ...attrs } = this.$attrs
       return h(
         'div',
-        mergeProps(this.$attrs, {
+        mergeProps(attrs, {
           role: 'none',
           ref: 'wrapperRef',
           class: [
@@ -873,7 +874,7 @@ const Scrollbar = defineComponent({
             this.themeClass,
             rtlEnabled && `${mergedClsPrefix}-scrollbar--rtl`
           ],
-          style: this.cssVars,
+          style: [this.cssVars, attrStyle],
           onMouseenter: triggerDisplayManually
             ? undefined
             : this.handleMouseEnterWrapper,

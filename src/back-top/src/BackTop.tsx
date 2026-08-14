@@ -288,17 +288,18 @@ export default defineComponent({
                 {{
                   default: () => {
                     this.onRender?.()
+                    const { style: attrStyle, ...attrs } = this.$attrs
                     return this.mergedShow
                       ? h(
                           'div',
-                          mergeProps(this.$attrs, {
+                          mergeProps(attrs, {
                             class: [
                               `${mergedClsPrefix}-back-top`,
                               this.themeClass,
                               this.transitionDisabled
                               && `${mergedClsPrefix}-back-top--transition-disabled`
                             ],
-                            style: [this.style, this.cssVars],
+                            style: [this.style, this.cssVars, attrStyle],
                             onClick: this.handleClick
                           }),
                           resolveSlot(this.$slots.default, () => [
