@@ -45,6 +45,7 @@
 - 修复 `n-input-otp` 在浏览器扩展自动填充时将完整 OTP 写入单个输入框时只保留最后一个字符的问题，关闭 [#7540](https://github.com/tusen-ai/naive-ui/pull/7540)
 - 修复 `n-menu` 在缩起（collapsed）状态下选项包含 `type="group"` 分组时菜单项图标未居中的问题，关闭 [#8105](https://github.com/tusen-ai/naive-ui/issues/8105)
 - 修复 `n-data-table` 在数据为空且列设置了 `ellipsis` 时不渲染表头的问题，关闭 [#8118](https://github.com/tusen-ai/naive-ui/issues/8118)
+- 修复 `n-input-number` 在输入法合成（IME composition）期间按 Enter 确认候选词时会误提交数值的问题，关闭 [#8179](https://github.com/tusen-ai/naive-ui/issues/8179)
 
 ## 2.44.1
 

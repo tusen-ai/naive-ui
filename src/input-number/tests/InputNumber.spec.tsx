@@ -283,4 +283,27 @@ describe('n-input-number', () => {
     expect(wrapper.find('input').element.id).toEqual('i am an id')
     wrapper.unmount()
   })
+
+  it('should not update value when Enter is pressed during IME composition', async () => {
+    const onUpdateValue = vi.fn()
+    const wrapper = mount(NInputNumber, {
+      attachTo: document.body,
+      props: {
+        defaultValue: 2,
+        updateValueOnInput: false,
+        onUpdateValue
+      }
+    })
+    const input = wrapper.find('input')
+    input.element.value = '24'
+    await input.trigger('input')
+    expect(onUpdateValue).toHaveBeenCalledTimes(0)
+    await input.trigger('compositionstart')
+    await input.trigger('keydown', { key: 'Enter' })
+    expect(onUpdateValue).toHaveBeenCalledTimes(0)
+    await input.trigger('compositionend')
+    await input.trigger('keydown', { key: 'Enter' })
+    expect(onUpdateValue).toHaveBeenCalledWith(24)
+    wrapper.unmount()
+  })
 })
