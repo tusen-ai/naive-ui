@@ -147,6 +147,32 @@ describe('n-avatar', () => {
     wrapper.unmount()
   })
 
+  it('should show placeholder slot again when src changes', async () => {
+    const wrapper = mount(NAvatar, {
+      props: {
+        src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
+        lazy: true
+      },
+      slots: {
+        placeholder: () => 'Placeholder'
+      }
+    })
+
+    await wrapper.find('img').trigger('load')
+
+    expect(wrapper.text()).not.toContain('Placeholder')
+
+    await wrapper.setProps({
+      src: 'https://www.naiveui.com/assets/naivelogo.93278402.svg'
+    })
+
+    expect(wrapper.text()).toContain('Placeholder')
+    expect(wrapper.find('img').attributes('style')).toContain(
+      'visibility: hidden;'
+    )
+    wrapper.unmount()
+  })
+
   it('should work with `objectFit` prop', () => {
     const wrapper = mount(NAvatar, {
       props: {
