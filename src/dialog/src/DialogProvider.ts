@@ -12,25 +12,24 @@ import {
 } from './context'
 import { NDialogEnvironment } from './DialogEnvironment'
 
-export type DialogOptions = Mutable<
-  Omit<
-    Partial<ExtractPropTypes<typeof exposedDialogEnvProps>>,
-    'internalStyle'
-  > & {
+type ExposedDialogEnvPropTypes = ExtractPropTypes<typeof exposedDialogEnvProps>
+
+export interface DialogOptions extends Mutable<
+  Omit<Partial<ExposedDialogEnvPropTypes>, 'internalStyle'> & {
     class?: any
     style?: string | CSSProperties
   }
->
+> {}
 
-export type DialogReactive = {
+export interface DialogReactive extends DialogOptions {
   readonly key: string
   readonly destroy: () => void
-} & DialogOptions
+}
 
 // FIXME
 // If style is used as CSSProperties, typescript 4.4.2 will throw tons of errors
 // Fxxx
-type TypeSafeDialogReactive = DialogReactive & {
+interface TypeSafeDialogReactive extends DialogReactive {
   class?: any
   style?: any
 }
@@ -66,10 +65,16 @@ export type DialogProviderProps = ExtractPublicPropTypes<
   typeof dialogProviderProps
 >
 
+interface DialogProviderSetup extends DialogApiInjection {
+  dialogList: Ref<TypeSafeDialogReactive[]>
+  dialogInstRefs: Record<string, DialogInst | undefined>
+  handleAfterLeave: (key: string) => void
+}
+
 export const NDialogProvider = defineComponent({
   name: 'DialogProvider',
   props: dialogProviderProps,
-  setup() {
+  setup(): DialogProviderSetup {
     const dialogListRef = ref<TypeSafeDialogReactive[]>([])
     const dialogInstRefs: Record<string, DialogInst | undefined> = {}
     function create(options: DialogOptions = {}): DialogReactive {
@@ -80,7 +85,7 @@ export const NDialogProvider = defineComponent({
         destroy: () => {
           dialogInstRefs[`n-dialog-${key}`]?.hide()
         }
-      })
+      }) as DialogReactive
       dialogListRef.value.push(dialogReactive)
       return dialogReactive
     }
@@ -106,7 +111,7 @@ export const NDialogProvider = defineComponent({
       })
     }
 
-    const api = {
+    const api: DialogApiInjection = {
       create,
       destroyAll,
       info: typedApi[0],

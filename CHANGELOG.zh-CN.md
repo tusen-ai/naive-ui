@@ -8,13 +8,23 @@
 - 更新 nbNO locale
 - 翻译日文 locale 中的 `DatePicker.weekPlaceholder`
 
+### Perf
+
+- 大幅减小构建产物中 `.d.ts` 的体积
+
 ### Feats
 
+- `n-form` 的 `validate` 方法支持按 path 过滤表项，关闭 [#7475](https://github.com/tusen-ai/naive-ui/issues/7475)
+- `n-input` 新增 `colorHover` 主题变量
+- `n-checkbox-group`、`n-radio-group` 新增 `options`、`label-field`、`value-field` 属性，关闭 [#7505](https://github.com/tusen-ai/naive-ui/issues/7505)
 - `n-upload` 新增 `always-show-actions` 属性，关闭 [#8073](https://github.com/tusen-ai/naive-ui/issues/8073)
 - `n-image` 新增 `keep-drag-offset` 属性，关闭 [#7544](https://github.com/tusen-ai/naive-ui/issues/7544)
 - `n-data-table` 新增 `getFilteredAndSortedData` 和 `getCurrentPageData` 方法，关闭 [#8088](https://github.com/tusen-ai/naive-ui/issues/8088)
 - `n-tabs` 新增 `show-scroll-button` 和 `center-active-tab` 属性，关闭 [#5846](https://github.com/tusen-ai/naive-ui/issues/5846)、[#2128](https://github.com/tusen-ai/naive-ui/issues/2128)
 - `n-tabs` 新增 `scrollToCurrentTab` 方法，关闭 [#7548](https://github.com/tusen-ai/naive-ui/issues/7548)
+- `n-tabs` 支持 RTL，`placement` 新增 `'start'`、`'end'`
+- `n-rate` 新增 `on-update:hover-value` 属性，关闭 [#8131](https://github.com/tusen-ai/naive-ui/issues/8131)
+- `n-collapse-transition` 新增 `display-directive` 属性，关闭 [#6453](https://github.com/tusen-ai/naive-ui/issues/6453)
 
 ### Fixes
 
@@ -35,6 +45,7 @@
 - 修复 `n-input-otp` 在浏览器扩展自动填充时将完整 OTP 写入单个输入框时只保留最后一个字符的问题，关闭 [#7540](https://github.com/tusen-ai/naive-ui/pull/7540)
 - 修复 `n-menu` 在缩起（collapsed）状态下选项包含 `type="group"` 分组时菜单项图标未居中的问题，关闭 [#8105](https://github.com/tusen-ai/naive-ui/issues/8105)
 - 修复 `n-menu` 根节点传入的 `style` 无法覆盖主题 CSS 变量的问题，关闭 [#6481](https://github.com/tusen-ai/naive-ui/issues/6481)
+- 修复 `n-data-table` 在数据为空且列设置了 `ellipsis` 时不渲染表头的问题，关闭 [#8118](https://github.com/tusen-ai/naive-ui/issues/8118)
 
 ## 2.44.1
 

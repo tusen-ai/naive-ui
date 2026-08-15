@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { commonLight } from '../../_styles/common'
 import sizeVariables from './_common'
@@ -37,13 +37,16 @@ function self(vars: ThemeCommonVars) {
   }
 }
 
-export type TimelineThemeVars = ReturnType<typeof self>
+export interface TimelineThemeVars extends ReturnType<typeof self> {}
 
-const timelineLight: Theme<'Timeline', TimelineThemeVars> = {
+const timelineLight: TimelineTheme = {
   name: 'Timeline',
   common: commonLight,
   self
 }
 
+export interface TimelineTheme extends Theme<'Timeline', TimelineThemeVars> {}
+
+export interface TimelineThemeOverrides extends ExtractThemeOverrides<TimelineTheme> {}
+
 export default timelineLight
-export type TimelineTheme = typeof timelineLight

@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins/use-theme'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins/use-theme'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { composite } from 'seemly'
 import { commonLight } from '../../_styles/common'
@@ -43,13 +43,19 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type DescriptionsThemeVars = ReturnType<typeof self>
+export interface DescriptionsThemeVars extends ReturnType<typeof self> {}
 
-const descriptionsLight: Theme<'Descriptions', DescriptionsThemeVars> = {
+const descriptionsLight: DescriptionsTheme = {
   name: 'Descriptions',
   common: commonLight,
   self
 }
 
+export interface DescriptionsTheme extends Theme<
+  'Descriptions',
+  DescriptionsThemeVars
+> {}
+
+export interface DescriptionsThemeOverrides extends ExtractThemeOverrides<DescriptionsTheme> {}
+
 export default descriptionsLight
-export type DescriptionsTheme = typeof descriptionsLight

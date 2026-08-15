@@ -1,4 +1,4 @@
-import type { PropType, SlotsType, VNode } from 'vue'
+import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { PopoverProps } from '../../popover/src/Popover'
 import type { HeatmapDataItem } from './public-types'
 import { computed, defineComponent, h } from 'vue'
@@ -48,7 +48,7 @@ export default defineComponent({
     })
 
     return {
-      cssVars: cssVarsRef,
+      cssVars: cssVarsRef as Ref<CSSProperties>,
       tooltipProps: tooltipPropsRef,
       defaultTooltipContent: defaultTooltipContentRef
     }

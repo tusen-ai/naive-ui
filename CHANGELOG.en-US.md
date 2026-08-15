@@ -8,13 +8,23 @@
 - Update nbNO locale.
 - Translate `DatePicker.weekPlaceholder` in the Japanese locale.
 
+### Perf
+
+- Significantly reduce the size of emitted `.d.ts` files in the package.
+
 ### Feats
 
+- `n-form`'s `validate` method supports filtering form items by path, closes [#7475](https://github.com/tusen-ai/naive-ui/issues/7475).
+- `n-input` adds the `colorHover` theme variable.
+- `n-checkbox-group` and `n-radio-group` add `options`, `label-field` and `value-field` props, closes [#7505](https://github.com/tusen-ai/naive-ui/issues/7505).
 - `n-upload` adds `always-show-actions` prop, closes [#8073](https://github.com/tusen-ai/naive-ui/issues/8073).
 - `n-image` adds `keep-drag-offset` prop, closes [#7544](https://github.com/tusen-ai/naive-ui/issues/7544).
 - `n-data-table` adds `getFilteredAndSortedData` and `getCurrentPageData` methods, closes [#8088](https://github.com/tusen-ai/naive-ui/issues/8088).
 - `n-tabs` adds `show-scroll-button` and `center-active-tab` props, closes [#5846](https://github.com/tusen-ai/naive-ui/issues/5846), [#2128](https://github.com/tusen-ai/naive-ui/issues/2128).
 - `n-tabs` adds `scrollToCurrentTab` method, closes [#7548](https://github.com/tusen-ai/naive-ui/issues/7548).
+- `n-tabs` supports RTL, `placement` adds `'start'` and `'end'`.
+- `n-rate` adds `on-update:hover-value` prop, closes [#8131](https://github.com/tusen-ai/naive-ui/issues/8131).
+- `n-collapse-transition` adds `display-directive` prop, closes [#6453](https://github.com/tusen-ai/naive-ui/issues/6453).
 
 ### Fixes
 
@@ -35,6 +45,7 @@
 - Fix `n-input-otp` only keeping the last character when browser extension autofill sets the full OTP value on a single input, closes [#7540](https://github.com/tusen-ai/naive-ui/pull/7540).
 - Fix `n-menu` item icons not centered in collapsed mode when the options contain a `type="group"` group, closes [#8105](https://github.com/tusen-ai/naive-ui/issues/8105).
 - Fix `n-menu` root `style` not overriding theme CSS variables, closes [#6481](https://github.com/tusen-ai/naive-ui/issues/6481).
+- Fix `n-data-table` not rendering the table header when data is empty and a column has `ellipsis` set, closes [#8118](https://github.com/tusen-ai/naive-ui/issues/8118).
 
 ## 2.44.1
 

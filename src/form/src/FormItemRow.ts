@@ -33,7 +33,8 @@ export default defineComponent({
       }
     }
     return {
-      formItemColInstRef,
+      // reduce dts: string ref only, type unused in render
+      formItemColInstRef: formItemColInstRef as unknown,
       validate,
       restoreValidation
     }

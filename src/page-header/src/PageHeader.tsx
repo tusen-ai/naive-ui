@@ -1,7 +1,7 @@
-import type { PropType, SlotsType, VNode } from 'vue'
+import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { PageHeaderTheme } from '../styles/light'
+import type { PageHeaderTheme, PageHeaderThemeOverrides } from '../styles/light'
 import { computed, defineComponent, h } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import { ArrowBackIcon } from '../../_internal/icons'
@@ -11,7 +11,7 @@ import { pageHeaderLight } from '../styles/light'
 import style from './styles/index.cssr'
 
 export const pageHeaderProps = {
-  ...(useTheme.props as ThemeProps<PageHeaderTheme>),
+  ...(useTheme.props as ThemeProps<PageHeaderTheme, PageHeaderThemeOverrides>),
   title: String,
   subtitle: String,
   extra: String,
@@ -81,7 +81,9 @@ export default defineComponent({
     return {
       rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

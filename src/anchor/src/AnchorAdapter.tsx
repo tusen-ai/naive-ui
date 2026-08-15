@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { AnchorTheme } from '../styles'
+import type { AnchorTheme, AnchorThemeOverrides } from '../styles'
 import type { BaseAnchorInst } from './BaseAnchor'
 import { computed, defineComponent, h, ref } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
@@ -17,7 +17,7 @@ export interface AnchorInst {
 }
 
 export const anchorProps = {
-  ...(useTheme.props as ThemeProps<AnchorTheme>),
+  ...(useTheme.props as ThemeProps<AnchorTheme, AnchorThemeOverrides>),
   affix: Boolean,
   ...affixProps,
   ...baseAnchorProps
@@ -92,7 +92,7 @@ export default defineComponent({
             {...keep(props, baseAnchorPropKeys)}
             mergedClsPrefix={mergedClsPrefixRef.value}
           >
-            {{ ...slots }}
+            {slots}
           </NBaseAnchor>
         )
       }

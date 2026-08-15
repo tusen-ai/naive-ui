@@ -1,4 +1,7 @@
+import type { InternalSelectMenuTheme } from '../../_internal/select-menu/styles'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
+import type { InputTheme } from '../../input/styles'
 import { internalSelectMenuLight } from '../../_internal/select-menu/styles'
 import { createTheme } from '../../_mixins'
 import { commonLight } from '../../_styles/common'
@@ -11,7 +14,7 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-const autoCompleteLight = createTheme({
+const autoCompleteLight: AutoCompleteTheme = createTheme({
   name: 'AutoComplete',
   common: commonLight,
   peers: {
@@ -21,6 +24,16 @@ const autoCompleteLight = createTheme({
   self
 })
 
+export interface AutoCompleteTheme extends Theme<
+  'AutoComplete',
+  AutoCompleteThemeVars,
+  {
+    InternalSelectMenu: InternalSelectMenuTheme
+    Input: InputTheme
+  }
+> {}
+
+export interface AutoCompleteThemeOverrides extends ExtractThemeOverrides<AutoCompleteTheme> {}
+
 export default autoCompleteLight
-export type AutoCompleteTheme = typeof autoCompleteLight
-export type AutoCompleteThemeVars = ReturnType<typeof self>
+export interface AutoCompleteThemeVars extends ReturnType<typeof self> {}

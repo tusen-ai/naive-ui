@@ -1,11 +1,18 @@
-import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type {
+  CSSProperties,
+  PropType,
+  Ref,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
 import type { ScrollbarProps } from '../../_internal/scrollbar/src/Scrollbar'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { InputSize } from '../../input/src/public-types'
 import type { SelectProps } from '../../select'
 import type { SelectSize } from '../../select/src/public-types'
-import type { PaginationTheme } from '../styles'
+import type { PaginationTheme, PaginationThemeOverrides } from '../styles'
 import type {
   PaginationInfo,
   PaginationLabelInfo,
@@ -57,7 +64,7 @@ import style from './styles/index.cssr'
 import { createPageItemsInfo, getDefaultPageSize } from './utils'
 
 export const paginationProps = {
-  ...(useTheme.props as ThemeProps<PaginationTheme>),
+  ...(useTheme.props as ThemeProps<PaginationTheme, PaginationThemeOverrides>),
   simple: Boolean,
   page: Number,
   defaultPage: {
@@ -562,7 +569,9 @@ export default defineComponent({
       handlePageItemClick,
       handleSizePickerChange,
       handleQuickJumperChange,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

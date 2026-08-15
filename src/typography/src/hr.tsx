@@ -1,6 +1,6 @@
-import type { CSSProperties } from 'vue'
+import type { CSSProperties, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import type { TypographyTheme } from '../styles'
+import type { TypographyTheme, TypographyThemeOverrides } from '../styles'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { typographyLight } from '../styles'
@@ -9,7 +9,7 @@ import style from './styles/hr.cssr'
 export default defineComponent({
   name: 'Hr',
   props: {
-    ...(useTheme.props as ThemeProps<TypographyTheme>)
+    ...(useTheme.props as ThemeProps<TypographyTheme, TypographyThemeOverrides>)
   },
   setup(props) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
@@ -36,7 +36,9 @@ export default defineComponent({
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

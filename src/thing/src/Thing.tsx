@@ -1,14 +1,14 @@
 import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { ThingTheme } from '../styles'
+import type { ThingTheme, ThingThemeOverrides } from '../styles'
 import { computed, defineComponent, Fragment, h } from 'vue'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import { thingLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const thingProps = {
-  ...(useTheme.props as ThemeProps<ThingTheme>),
+  ...(useTheme.props as ThemeProps<ThingTheme, ThingThemeOverrides>),
   title: String,
   titleExtra: String,
   description: String,

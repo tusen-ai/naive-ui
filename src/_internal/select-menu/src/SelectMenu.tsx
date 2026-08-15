@@ -1,5 +1,5 @@
 import type { TreeNode } from 'treemate'
-import type { CSSProperties, PropType, WatchStopHandle } from 'vue'
+import type { CSSProperties, PropType, Ref, WatchStopHandle } from 'vue'
 import type { VirtualListInst } from 'vueuc'
 import type { ThemeProps } from '../../../_mixins'
 import type {
@@ -11,7 +11,10 @@ import type {
 } from '../../../select/src/interface'
 import type { ScrollbarInst } from '../../scrollbar'
 import type { ScrollbarProps } from '../../scrollbar/src/Scrollbar'
-import type { InternalSelectMenuTheme } from '../styles'
+import type {
+  InternalSelectMenuTheme,
+  InternalSelectMenuThemeOverrides
+} from '../styles'
 import type {
   InternalExposedProps,
   NodeProps,
@@ -53,7 +56,10 @@ import style from './styles/index.cssr'
 export default defineComponent({
   name: 'InternalSelectMenu',
   props: {
-    ...(useTheme.props as ThemeProps<InternalSelectMenuTheme>),
+    ...(useTheme.props as ThemeProps<
+      InternalSelectMenuTheme,
+      InternalSelectMenuThemeOverrides
+    >),
     clsPrefix: {
       type: String,
       required: true
@@ -432,8 +438,9 @@ export default defineComponent({
       mergedTheme: themeRef,
       mergedClsPrefix: mergedClsPrefixRef,
       rtlEnabled: rtlEnabledRef,
-      virtualListRef,
-      scrollbarRef,
+      // reduce dts: string ref only, type unused in render
+      virtualListRef: virtualListRef as unknown,
+      scrollbarRef: scrollbarRef as unknown,
       itemSize: itemSizeRef,
       padding: paddingRef,
       flattenedNodes: flattenedNodesRef,
@@ -455,7 +462,9 @@ export default defineComponent({
       handleMouseDown,
       handleVirtualListResize,
       handleVirtualListScroll,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       ...exposedProps

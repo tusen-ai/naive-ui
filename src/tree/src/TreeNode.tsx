@@ -369,7 +369,8 @@ const TreeNode = defineComponent({
       indent: indentRef,
       checkboxPlacement: checkboxPlacementRef,
       showLine: showLineRef,
-      contentInstRef,
+      // reduce dts: avoid expanding component instance types
+      contentInstRef: contentInstRef as unknown,
       contentElRef,
       indentNodes,
       handleCheck,

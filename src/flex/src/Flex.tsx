@@ -1,7 +1,7 @@
 import type { PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { FlexTheme } from '../styles'
+import type { FlexTheme, FlexThemeOverrides } from '../styles'
 import type { FlexAlign, FlexJustify } from './type'
 import { depx, getGap } from 'seemly'
 import { computed, defineComponent, h } from 'vue'
@@ -11,7 +11,7 @@ import { createKey, flatten, getSlot } from '../../_utils'
 import { flexLight } from '../styles'
 
 export const flexProps = {
-  ...(useTheme.props as ThemeProps<FlexTheme>),
+  ...(useTheme.props as ThemeProps<FlexTheme, FlexThemeOverrides>),
   align: String as PropType<FlexAlign>,
   justify: {
     type: String as PropType<FlexJustify>,

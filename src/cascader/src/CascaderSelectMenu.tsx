@@ -175,7 +175,8 @@ export default defineComponent({
       isMounted: isMountedRef,
       mergedTheme: mergedThemeRef,
       mergedClsPrefix: mergedClsPrefixRef,
-      menuInstRef,
+      // reduce dts: string ref only, type unused in render
+      menuInstRef: menuInstRef as unknown,
       selectTreeMate: selectTreeMateRef,
       handleResize,
       handleToggle,

@@ -1,6 +1,8 @@
 import type {
+  CSSProperties,
   ImgHTMLAttributes,
   PropType,
+  Ref,
   SlotsType,
   VNode,
   VNodeChild
@@ -8,7 +10,7 @@ import type {
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { IntersectionObserverOptions } from '../../image/src/utils'
-import type { AvatarTheme } from '../styles'
+import type { AvatarTheme, AvatarThemeOverrides } from '../styles'
 import type { ObjectFit, Size } from './interface'
 import {
   computed,
@@ -37,7 +39,7 @@ import { avatarGroupInjectionKey } from './context'
 import style from './styles/index.cssr'
 
 export const avatarProps = {
-  ...(useTheme.props as ThemeProps<AvatarTheme>),
+  ...(useTheme.props as ThemeProps<AvatarTheme, AvatarThemeOverrides>),
   size: [String, Number] as PropType<Size>,
   src: String,
   circle: {
@@ -244,7 +246,9 @@ export default defineComponent({
       mergedRoundRef,
       mergedClsPrefix: mergedClsPrefixRef,
       fitTextTransform,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       hasLoadError: hasLoadErrorRef,

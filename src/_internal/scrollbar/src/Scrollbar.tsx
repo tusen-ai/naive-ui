@@ -1,10 +1,10 @@
-import type { CSSProperties, HTMLAttributes, PropType, VNode } from 'vue'
+import type { CSSProperties, HTMLAttributes, PropType, Ref, VNode } from 'vue'
 import type { ThemeProps } from '../../../_mixins'
 import type {
   ExtractInternalPropTypes,
   ExtractPublicPropTypes
 } from '../../../_utils'
-import type { ScrollbarTheme } from '../styles'
+import type { ScrollbarTheme, ScrollbarThemeOverrides } from '../styles'
 import { off, on } from 'evtd'
 import { depx, getPadding, getPreciseEventTarget, pxfy } from 'seemly'
 import { useIsIos } from 'vooks'
@@ -85,7 +85,7 @@ export interface ScrollbarInst extends ScrollbarInstMethods {
 }
 
 const scrollbarProps = {
-  ...(useTheme.props as ThemeProps<ScrollbarTheme>),
+  ...(useTheme.props as ThemeProps<ScrollbarTheme, ScrollbarThemeOverrides>),
   duration: {
     type: Number,
     default: 0
@@ -803,7 +803,9 @@ const Scrollbar = defineComponent({
       handleYScrollMouseDown,
       handleXScrollMouseDown,
       containerWidth: containerWidthRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

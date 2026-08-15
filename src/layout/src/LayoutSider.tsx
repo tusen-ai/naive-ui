@@ -1,8 +1,8 @@
-import type { CSSProperties, PropType } from 'vue'
+import type { CSSProperties, PropType, Ref } from 'vue'
 import type { ScrollbarInst, ScrollbarProps } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { LayoutTheme } from '../styles'
+import type { LayoutTheme, LayoutThemeOverrides } from '../styles'
 import type { LayoutSiderInst } from './interface'
 import { useMergedState } from 'vooks'
 import { computed, defineComponent, h, inject, provide, ref, toRef } from 'vue'
@@ -80,7 +80,7 @@ export type LayoutSiderProps = ExtractPublicPropTypes<typeof layoutSiderProps>
 export default defineComponent({
   name: 'LayoutSider',
   props: {
-    ...(useTheme.props as ThemeProps<LayoutTheme>),
+    ...(useTheme.props as ThemeProps<LayoutTheme, LayoutThemeOverrides>),
     ...layoutSiderProps
   },
   setup(props) {
@@ -259,7 +259,8 @@ export default defineComponent({
       : undefined
     return {
       scrollableElRef,
-      scrollbarInstRef,
+      // reduce dts: string ref only, type unused in render
+      scrollbarInstRef: scrollbarInstRef as unknown,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
       styleMaxWidth: styleMaxWidthRef,
@@ -270,7 +271,7 @@ export default defineComponent({
       handleTransitionend,
       handleTriggerClick,
       inlineThemeDisabled,
-      cssVars: cssVarsRef,
+      cssVars: cssVarsRef as Ref<CSSProperties>,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       ...exposedMethods
@@ -313,7 +314,8 @@ export default defineComponent({
             // here is a hack, since in light theme the scrollbar color is dark,
             // we need to invert it in light color...
             builtinThemeOverrides={
-              this.inverted && this.cssVars.__invertScrollbar === 'true'
+              this.inverted
+              && (this.cssVars as any).__invertScrollbar === 'true'
                 ? {
                     colorHover: 'rgba(255, 255, 255, .4)',
                     color: 'rgba(255, 255, 255, .3)'
@@ -321,7 +323,7 @@ export default defineComponent({
                 : undefined
             }
           >
-            {{ ...this.$slots }}
+            {this.$slots}
           </NScrollbar>
         ) : (
           <div

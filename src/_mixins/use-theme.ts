@@ -16,16 +16,10 @@ export interface Theme<N, T = Record<string, unknown>, R = any> {
   self?: (vars: ThemeCommonVars) => T
 }
 
-export interface ThemeProps<T> {
+export interface ThemeProps<T, O = ExtractThemeOverrides<T>> {
   theme: PropType<T>
-  themeOverrides: PropType<ExtractThemeOverrides<T>>
-  builtinThemeOverrides: PropType<ExtractThemeOverrides<T>>
-}
-
-export interface ThemePropsReactive<T> {
-  theme?: T
-  themeOverrides?: ExtractThemeOverrides<T>
-  builtinThemeOverrides?: ExtractThemeOverrides<T>
+  themeOverrides: PropType<O>
+  builtinThemeOverrides: PropType<O>
 }
 
 export type ExtractThemeVars<T>
@@ -77,14 +71,14 @@ export type MergedTheme<T>
       }
     : T
 
-function useTheme<N, T, R>(
+function useTheme<T extends Theme<string, any, any>>(
   resolveId: Exclude<keyof GlobalTheme, 'common' | 'name'>,
   mountId: string,
   style: CNode | undefined,
-  defaultTheme: Theme<N, T, R>,
-  props: UseThemeProps<Theme<N, T, R>>,
+  defaultTheme: T,
+  props: UseThemeProps<T>,
   clsPrefixRef: Ref<string | undefined> | undefined
-): ComputedRef<MergedTheme<Theme<N, T, R>>> {
+): ComputedRef<MergedTheme<T>> {
   const ssrAdapter = useSsrAdapter()
   const NConfigProvider = inject(configProviderInjectionKey, null)
   if (style) {
@@ -121,12 +115,8 @@ function useTheme<N, T, R>(
     // keep props to make theme overrideable
     const {
       theme: { common: selfCommon, self, peers = {} } = {},
-      themeOverrides: selfOverrides = {} as ExtractThemeOverrides<
-        Theme<N, T, R>
-      >,
-      builtinThemeOverrides: builtinOverrides = {} as ExtractThemeOverrides<
-        Theme<N, T, R>
-      >
+      themeOverrides: selfOverrides = {} as ExtractThemeOverrides<T>,
+      builtinThemeOverrides: builtinOverrides = {} as ExtractThemeOverrides<T>
     } = props
     const { common: selfCommonOverrides, peers: peersOverrides } = selfOverrides
     const {
@@ -154,7 +144,9 @@ function useTheme<N, T, R>(
     )
     const mergedSelf = merge(
       // {}, executed every time, no need for empty obj
-      (self || globalSelf || defaultTheme.self)?.(mergedCommon) as T,
+      (self || globalSelf || defaultTheme.self)?.(
+        mergedCommon
+      ) as ExtractThemeVars<T>,
       builtinOverrides,
       globalSelfOverrides,
       selfOverrides
@@ -169,7 +161,7 @@ function useTheme<N, T, R>(
         globalPeersOverrides,
         peersOverrides
       )
-    }
+    } as MergedTheme<T>
   })
   return mergedThemeRef
 }

@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { h, provide, ref } from 'vue'
-import { NEquation } from '../index'
 import { configProviderInjectionKey } from '../../config-provider/src/context'
+import { NEquation } from '../index'
 
 describe('n-equation', () => {
   it('should work with import on demand', () => {
@@ -12,7 +12,9 @@ describe('n-equation', () => {
     const wrapper = mount(NEquation, {
       props: { value: 'E = mc^2' }
     })
-    expect(wrapper.find('.katex').exists() || wrapper.text().includes('no katex')).toBe(true)
+    expect(
+      wrapper.find('.katex').exists() || wrapper.text().includes('no katex')
+    ).toBe(true)
     wrapper.unmount()
   })
 
@@ -73,7 +75,8 @@ describe('n-equation', () => {
 
   it('should use katex from config provider', () => {
     const mockKatex = {
-      renderToString: (value: string) => `<span class="katex-config">${value}</span>`
+      renderToString: (value: string) =>
+        `<span class="katex-config">${value}</span>`
     }
 
     const wrapper = mount({

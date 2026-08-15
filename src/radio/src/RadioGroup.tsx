@@ -1,7 +1,7 @@
-import type { CSSProperties, PropType, VNode, VNodeChild } from 'vue'
+import type { CSSProperties, PropType, Ref, VNode, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { RadioTheme } from '../styles'
+import type { RadioTheme, RadioThemeOverrides } from '../styles'
 import type { OnUpdateValue, OnUpdateValueImpl } from './interface'
 import type { RadioBaseProps } from './use-radio'
 import { useMergedState } from 'vooks'
@@ -10,6 +10,7 @@ import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
 import { call, createKey, flatten, getSlot, warn } from '../../_utils'
 import { radioLight } from '../styles'
+import NRadio from './Radio'
 import style from './styles/radio-group.cssr'
 import { radioGroupInjectionKey } from './use-radio'
 
@@ -88,9 +89,25 @@ function mapSlot(
   }
 }
 
+export interface RadioGroupOption {
+  label?: string
+  value?: string | number | boolean
+  disabled?: boolean
+  [key: string]: unknown
+}
+
 export const radioGroupProps = {
-  ...(useTheme.props as ThemeProps<RadioTheme>),
+  ...(useTheme.props as ThemeProps<RadioTheme, RadioThemeOverrides>),
   name: String,
+  options: Array as PropType<RadioGroupOption[]>,
+  labelField: {
+    type: String,
+    default: 'label'
+  },
+  valueField: {
+    type: String,
+    default: 'value'
+  },
   value: [String, Number, Boolean] as PropType<
     string | number | boolean | null
   >,
@@ -231,15 +248,31 @@ export default defineComponent({
       mergedValue: mergedValueRef,
       handleFocusout,
       handleFocusin,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }
   },
   render() {
     const { mergedValue, mergedClsPrefix, handleFocusin, handleFocusout } = this
+    const { options, labelField, valueField } = this.$props
+    const slotChildren = options
+      ? options.map((option) => {
+          const value = option[valueField] as string | number | boolean
+          return (
+            <NRadio
+              key={typeof value === 'boolean' ? `__n_${value}` : value}
+              value={value}
+              disabled={option.disabled}
+              label={option[labelField] as string | undefined}
+            />
+          )
+        })
+      : flatten(getSlot(this))
     const { children, isButtonGroup } = mapSlot(
-      flatten(getSlot(this)),
+      slotChildren,
       mergedValue,
       mergedClsPrefix
     )

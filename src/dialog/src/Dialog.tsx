@@ -1,6 +1,6 @@
-import type { CSSProperties, SlotsType, VNode } from 'vue'
+import type { CSSProperties, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import type { DialogTheme } from '../styles'
+import type { DialogTheme, DialogThemeOverrides } from '../styles'
 import { getMargin } from 'seemly'
 import { computed, defineComponent, h } from 'vue'
 import { NBaseClose, NBaseIcon } from '../../_internal'
@@ -45,7 +45,7 @@ export const NDialog = defineComponent({
     'Confirm' // deprecated
   ],
   props: {
-    ...(useTheme.props as ThemeProps<DialogTheme>),
+    ...(useTheme.props as ThemeProps<DialogTheme, DialogThemeOverrides>),
     ...dialogProps
   },
   slots: Object as SlotsType<DialogSlots>,
@@ -170,7 +170,9 @@ export const NDialog = defineComponent({
       handlePositiveClick,
       handleNegativeClick,
       handleCloseClick,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

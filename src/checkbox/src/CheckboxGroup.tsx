@@ -12,6 +12,7 @@ import {
 } from 'vue'
 import { useConfig, useFormItem } from '../../_mixins'
 import { call, createInjectionKey, warnOnce } from '../../_utils'
+import NCheckbox from './Checkbox'
 
 export interface CheckboxGroupInjection {
   checkedCountRef: ComputedRef<number>
@@ -26,10 +27,26 @@ export interface CheckboxGroupInjection {
 export const checkboxGroupInjectionKey
   = createInjectionKey<CheckboxGroupInjection>('n-checkbox-group')
 
+export interface CheckboxGroupOption {
+  label?: string
+  value?: string | number
+  disabled?: boolean
+  [key: string]: unknown
+}
+
 export const checkboxGroupProps = {
   min: Number,
   max: Number,
   size: String as PropType<'small' | 'medium' | 'large'>,
+  options: Array as PropType<CheckboxGroupOption[]>,
+  labelField: {
+    type: String,
+    default: 'label'
+  },
+  valueField: {
+    type: String,
+    default: 'value'
+  },
   value: Array as PropType<Array<string | number> | null>,
   defaultValue: {
     type: Array as PropType<Array<string | number> | null>,
@@ -219,9 +236,22 @@ export default defineComponent({
     }
   },
   render() {
+    const { options, labelField, valueField } = this.$props
     return (
       <div class={`${this.mergedClsPrefix}-checkbox-group`} role="group">
-        {this.$slots.default?.()}
+        {options
+          ? options.map((option) => {
+              const value = option[valueField] as string | number
+              return (
+                <NCheckbox
+                  key={value}
+                  value={value}
+                  disabled={option.disabled}
+                  label={option[labelField] as string | undefined}
+                />
+              )
+            })
+          : this.$slots.default?.()}
       </div>
     )
   }

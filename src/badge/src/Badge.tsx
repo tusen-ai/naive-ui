@@ -1,7 +1,7 @@
-import type { CSSProperties, PropType } from 'vue'
+import type { CSSProperties, PropType, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { BadgeTheme } from '../styles'
+import type { BadgeTheme, BadgeThemeOverrides } from '../styles'
 import { computed, defineComponent, h, onMounted, ref, Transition } from 'vue'
 import { NBaseSlotMachine, NBaseWave } from '../../_internal'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
@@ -17,7 +17,7 @@ import { badgeLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const badgeProps = {
-  ...(useTheme.props as ThemeProps<BadgeTheme>),
+  ...(useTheme.props as ThemeProps<BadgeTheme, BadgeThemeOverrides>),
   value: [String, Number] as PropType<string | number>,
   max: Number,
   dot: Boolean,
@@ -133,7 +133,9 @@ export default defineComponent({
       showBadge: showBadgeRef,
       handleAfterEnter,
       handleAfterLeave,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       offsetStyle: offsetStyleRef

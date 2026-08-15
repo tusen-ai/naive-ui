@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins/use-theme'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins/use-theme'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { commonLight } from '../../_styles/common'
 
@@ -26,13 +26,16 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type CollapseThemeVars = ReturnType<typeof self>
+export interface CollapseThemeVars extends ReturnType<typeof self> {}
 
-const collapseLight: Theme<'Collapse', CollapseThemeVars> = {
+const collapseLight: CollapseTheme = {
   name: 'Collapse',
   common: commonLight,
   self
 }
 
+export interface CollapseTheme extends Theme<'Collapse', CollapseThemeVars> {}
+
+export interface CollapseThemeOverrides extends ExtractThemeOverrides<CollapseTheme> {}
+
 export default collapseLight
-export type CollapseTheme = typeof collapseLight

@@ -1,11 +1,11 @@
 import type { Key, TreeNode } from 'treemate'
-import type { PropType, Ref } from 'vue'
+import type { CSSProperties, PropType, Ref } from 'vue'
 import type { FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { InternalRenderBody } from '../../popover/src/interface'
 import type { PopoverInternalProps } from '../../popover/src/Popover'
-import type { DropdownTheme } from '../styles'
+import type { DropdownTheme, DropdownThemeOverrides } from '../styles'
 import type {
   DropdownGroupOption,
   DropdownIgnoredOption,
@@ -113,7 +113,7 @@ const popoverPropKeys = Object.keys(popoverBaseProps) as Array<
 export const dropdownProps = {
   ...popoverBaseProps,
   ...dropdownBaseProps,
-  ...(useTheme.props as ThemeProps<DropdownTheme>)
+  ...(useTheme.props as ThemeProps<DropdownTheme, DropdownThemeOverrides>)
 } as const
 
 export type DropdownProps = ExtractPublicPropTypes<typeof dropdownProps>
@@ -429,7 +429,9 @@ export default defineComponent({
         clearPendingState()
       },
       doUpdateShow,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

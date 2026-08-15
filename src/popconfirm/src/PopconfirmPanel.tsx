@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType } from 'vue'
+import type { CSSProperties, PropType, Ref } from 'vue'
 import { computed, defineComponent, h, inject, toRef } from 'vue'
 import { NBaseIcon } from '../../_internal'
 import { WarningIcon } from '../../_internal/icons'
@@ -60,7 +60,9 @@ export default defineComponent({
     return {
       ...useLocale('Popconfirm'),
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       localizedPositiveText: computed(() => {
         return props.positiveText || localeRef.value.positiveText
       }),

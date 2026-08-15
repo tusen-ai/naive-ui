@@ -1,7 +1,7 @@
-import type { CSSProperties, PropType } from 'vue'
+import type { CSSProperties, PropType, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { CheckboxTheme } from '../styles'
+import type { CheckboxTheme, CheckboxThemeOverrides } from '../styles'
 import type {
   CheckboxInst,
   OnUpdateChecked,
@@ -31,7 +31,7 @@ import renderLineMark from './LineMark'
 import style from './styles/index.cssr'
 
 export const checkboxProps = {
-  ...(useTheme.props as ThemeProps<CheckboxTheme>),
+  ...(useTheme.props as ThemeProps<CheckboxTheme, CheckboxThemeOverrides>),
   size: String as PropType<CheckboxSize>,
   checked: {
     type: [Boolean, String, Number] as PropType<
@@ -313,7 +313,9 @@ export default defineComponent({
       handleClick,
       handleKeyUp,
       handleKeyDown,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     })

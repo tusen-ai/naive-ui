@@ -2,6 +2,7 @@ import type {
   ComponentPublicInstance,
   CSSProperties,
   PropType,
+  Ref,
   SlotsType,
   VNode,
   VNodeChild
@@ -9,7 +10,7 @@ import type {
 import type { FollowerInst, FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { SliderTheme } from '../styles'
+import type { SliderTheme, SliderThemeOverrides } from '../styles'
 import type { OnUpdateValueImpl } from './interface'
 import { off, on } from 'evtd'
 import { useIsMounted, useMergedState } from 'vooks'
@@ -41,7 +42,7 @@ export interface ClosestMark {
 const eventButtonLeft = 0
 
 export const sliderProps = {
-  ...(useTheme.props as ThemeProps<SliderTheme>),
+  ...(useTheme.props as ThemeProps<SliderTheme, SliderThemeOverrides>),
   to: useAdjustedTo.propTo,
   defaultValue: {
     type: [Number, Array] as PropType<number | number[]>,
@@ -673,10 +674,14 @@ export default defineComponent({
       handleHandleMouseEnter,
       handleHandleMouseLeave,
       handleRailKeyDown,
-      indicatorCssVars: inlineThemeDisabled ? undefined : indicatorCssVarsRef,
+      indicatorCssVars: inlineThemeDisabled
+        ? undefined
+        : (indicatorCssVarsRef as Ref<CSSProperties>),
       indicatorThemeClass: indicatorThemeClassHandle?.themeClass,
       indicatorOnRender: indicatorThemeClassHandle?.onRender,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

@@ -28,4 +28,12 @@ if (isJsdom() && typeof window !== 'undefined') {
 // https://github.com/jsdom/jsdom/issues/1422
 if (isBrowser) {
   HTMLDivElement.prototype.scrollTo = () => {}
+  HTMLDivElement.prototype.scrollBy = function (options) {
+    if (typeof options === 'number')
+      return
+    if (options?.left)
+      this.scrollLeft += options.left
+    if (options?.top)
+      this.scrollTop += options.top
+  }
 }

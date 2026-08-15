@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { composite } from 'seemly'
 import { commonLight } from '../../_styles/common'
@@ -32,14 +32,18 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type AvatarThemeVars = ReturnType<typeof self>
+export interface AvatarThemeVars extends ReturnType<typeof self> {}
 
-const avatarLight: Theme<'Avatar', AvatarThemeVars> = {
+const avatarLight: AvatarTheme = {
   name: 'Avatar',
   common: commonLight,
   self
 }
 
+export interface AvatarTheme extends Theme<'Avatar', AvatarThemeVars> {}
+
+export interface AvatarThemeOverrides extends ExtractThemeOverrides<AvatarTheme> {}
+
 export default avatarLight
-export type AvatarTheme = typeof avatarLight
-export type AvatarGroupTheme = typeof avatarLight
+export type AvatarGroupTheme = AvatarTheme
+export type AvatarGroupThemeOverrides = AvatarThemeOverrides

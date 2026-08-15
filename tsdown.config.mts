@@ -21,7 +21,11 @@ const cjsLodashPlugin = {
 }
 
 export default defineConfig({
-  entry: ['src/**/*.{ts,tsx}', '!src/**/*.spec.*'],
+  entry: [
+    'src/**/*.{ts,tsx}',
+    '!src/**/*.spec.*',
+    '!src/vitest-setup.ts'
+  ],
   root: 'src',
   outDir: buildFormat === 'esm' ? 'es' : 'lib',
   format: buildFormat,
@@ -34,6 +38,12 @@ export default defineConfig({
     js: '.js',
     dts: '.d.ts'
   }),
+  deps: {
+    // Compiled JSX imports vue-jsx-vapor runtime helpers. It is a devDependency,
+    // so whitelist it for bundling into es/lib; anything else from node_modules
+    // being bundled should fail the build.
+    onlyBundle: ['vue-jsx-vapor']
+  },
   plugins: [
     cjsLodashPlugin,
     vueJsxVapor({

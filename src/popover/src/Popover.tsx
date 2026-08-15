@@ -13,7 +13,7 @@ import type {
   ExtractPublicPropTypes,
   MaybeArray
 } from '../../_utils'
-import type { PopoverTheme } from '../styles'
+import type { PopoverTheme, PopoverThemeOverrides } from '../styles'
 import type {
   InternalPopoverInst,
   InternalRenderBody,
@@ -212,7 +212,7 @@ export const popoverBaseProps = {
 }
 
 export const popoverProps = {
-  ...(useTheme.props as ThemeProps<PopoverTheme>),
+  ...(useTheme.props as ThemeProps<PopoverTheme, PopoverThemeOverrides>),
   ...popoverBaseProps,
   internalOnAfterLeave: Function as PropType<() => void>,
   internalRenderBody: Function as PropType<InternalRenderBody>
@@ -470,7 +470,8 @@ export default defineComponent({
       }
     })
     const returned = {
-      binderInstRef,
+      // reduce dts: string ref only, type unused in render
+      binderInstRef: binderInstRef as unknown,
       positionManually: positionManuallyRef,
       mergedShowConsideringDisabledProp: mergedShowConsideringDisabledPropRef,
       // if to show popover body

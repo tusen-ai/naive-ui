@@ -23,7 +23,7 @@ import {
   ref,
   watchEffect
 } from 'vue'
-import { VirtualList, VResizeObserver } from 'vueuc'
+import { VirtualList } from 'vueuc'
 import { NScrollbar } from '../../../_internal'
 import { cssrAnchorMetaName } from '../../../_mixins/common'
 import { formatLength, resolveSlot, warn } from '../../../_utils'
@@ -439,8 +439,9 @@ export default defineComponent({
       summaryPlacement: summaryPlacementRef,
       dataTableSlots,
       componentId,
-      scrollbarInstRef,
-      virtualListRef,
+      // reduce dts: string ref only, type unused in render
+      scrollbarInstRef: scrollbarInstRef as unknown,
+      virtualListRef: virtualListRef as unknown,
       emptyElRef,
       summary: summaryRef,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -1093,7 +1094,7 @@ export default defineComponent({
                       </tbody>
                     ) : null}
                   </table>
-                  {this.empty && this.xScrollable ? createEmptyNode() : null}
+                  {this.empty ? createEmptyNode() : null}
                 </>
               )
             }
@@ -1171,19 +1172,6 @@ export default defineComponent({
       </NScrollbar>
     )
 
-    if (this.empty) {
-      if (this.explicitlyScrollable || this.xScrollable) {
-        // empty node is integrated into table node
-        return tableNode
-      }
-      else {
-        return (
-          <VResizeObserver onResize={this.onResize}>
-            {{ default: createEmptyNode }}
-          </VResizeObserver>
-        )
-      }
-    }
     return tableNode
   }
 })

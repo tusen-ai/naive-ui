@@ -1,7 +1,7 @@
-import type { CSSProperties, PropType } from 'vue'
+import type { CSSProperties, PropType, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { TypographyTheme } from '../styles'
+import type { TypographyTheme, TypographyThemeOverrides } from '../styles'
 import { useCompitable } from 'vooks'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
@@ -10,7 +10,7 @@ import { typographyLight } from '../styles'
 import style from './styles/text.cssr'
 
 export const textProps = {
-  ...(useTheme.props as ThemeProps<TypographyTheme>),
+  ...(useTheme.props as ThemeProps<TypographyTheme, TypographyThemeOverrides>),
   code: Boolean,
   type: {
     type: String,
@@ -90,7 +90,9 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       compitableTag: useCompitable(props, ['as', 'tag']),
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

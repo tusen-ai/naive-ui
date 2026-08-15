@@ -1,4 +1,7 @@
+import type { ExtractThemeOverrides, Theme } from '../../_mixins/use-theme'
 import type { ThemeCommonVars } from '../../_styles/common'
+import type { ButtonTheme } from '../../button/styles'
+import type { InputTheme } from '../../input/styles'
 import { createTheme } from '../../_mixins/use-theme'
 import { commonLight } from '../../_styles/common'
 import { buttonLight } from '../../button/styles'
@@ -37,9 +40,9 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type ColorPickerThemeVars = ReturnType<typeof self>
+export interface ColorPickerThemeVars extends ReturnType<typeof self> {}
 
-const colorPickerLight = createTheme({
+const colorPickerLight: ColorPickerTheme = createTheme({
   name: 'ColorPicker',
   common: commonLight,
   peers: {
@@ -49,5 +52,15 @@ const colorPickerLight = createTheme({
   self
 })
 
+export interface ColorPickerTheme extends Theme<
+  'ColorPicker',
+  ColorPickerThemeVars,
+  {
+    Input: InputTheme
+    Button: ButtonTheme
+  }
+> {}
+
+export interface ColorPickerThemeOverrides extends ExtractThemeOverrides<ColorPickerTheme> {}
+
 export default colorPickerLight
-export type ColorPickerTheme = typeof colorPickerLight

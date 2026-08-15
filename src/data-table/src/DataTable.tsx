@@ -1,4 +1,4 @@
-import type { CSSProperties, SlotsType } from 'vue'
+import type { CSSProperties, Ref, SlotsType } from 'vue'
 import type {
   CsvOptionsType,
   DataTableInst,
@@ -466,7 +466,8 @@ export default defineComponent({
       )
     })
     return {
-      mainTableInstRef,
+      // reduce dts: string ref only, type unused in render
+      mainTableInstRef: mainTableInstRef as unknown,
       mergedClsPrefix: mergedClsPrefixRef,
       rtlEnabled: rtlEnabledRef,
       mergedTheme: themeRef,
@@ -475,7 +476,9 @@ export default defineComponent({
       mergedBottomBordered: mergedBottomBorderedRef,
       mergedPagination: mergedPaginationRef,
       mergedShowPagination: mergedShowPaginationRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       mergedEmpty: mergedEmptyRef,

@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { commonLight } from '../../_styles/common'
 
@@ -14,12 +14,14 @@ function self(vars: ThemeCommonVars) {
   }
 }
 
-export type SkeletonThemeVars = ReturnType<typeof self>
+export interface SkeletonThemeVars extends ReturnType<typeof self> {}
 
-export const skeletonLight: Theme<'Skeleton', SkeletonThemeVars> = {
+export const skeletonLight: SkeletonTheme = {
   name: 'Skeleton',
   common: commonLight,
   self
 }
 
-export type SkeletonTheme = typeof skeletonLight
+export interface SkeletonTheme extends Theme<'Skeleton', SkeletonThemeVars> {}
+
+export interface SkeletonThemeOverrides extends ExtractThemeOverrides<SkeletonTheme> {}

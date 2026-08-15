@@ -1,7 +1,7 @@
 import type { VueWrapper } from '@vue/test-utils'
 import type { DataTableInst, DataTableScrollTo } from '../index'
 import { mount } from '@vue/test-utils'
-import { nextTick, ref } from 'vue'
+import { h, nextTick, ref } from 'vue'
 import { NDataTable } from '../index'
 
 interface RowData {

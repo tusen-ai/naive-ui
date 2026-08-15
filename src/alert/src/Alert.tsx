@@ -1,7 +1,14 @@
-import type { HTMLAttributes, PropType, SlotsType, VNode } from 'vue'
+import type {
+  CSSProperties,
+  HTMLAttributes,
+  PropType,
+  Ref,
+  SlotsType,
+  VNode
+} from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { AlertTheme } from '../styles'
+import type { AlertTheme, AlertThemeOverrides } from '../styles'
 import { getMargin } from 'seemly'
 import { computed, defineComponent, h, mergeProps, ref, watchEffect } from 'vue'
 import { NBaseClose, NBaseIcon, NFadeInExpandTransition } from '../../_internal'
@@ -23,7 +30,7 @@ import { alertLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const alertProps = {
-  ...(useTheme.props as ThemeProps<AlertTheme>),
+  ...(useTheme.props as ThemeProps<AlertTheme, AlertThemeOverrides>),
   title: String,
   showIcon: {
     type: Boolean,
@@ -177,7 +184,9 @@ export default defineComponent({
       handleCloseClick,
       handleAfterLeave,
       mergedTheme: themeRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

@@ -6,10 +6,7 @@ import { transferInjectionKey } from './interface'
 export default defineComponent({
   name: 'TransferHeader',
   props: {
-    source: {
-      type: Boolean,
-      default: false
-    },
+    source: Boolean,
     onChange: {
       type: Function as PropType<(value: boolean) => void>,
       required: true

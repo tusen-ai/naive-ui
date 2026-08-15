@@ -1,3 +1,5 @@
+import type { ScrollbarTheme } from '../../_internal/scrollbar/styles'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { composite } from 'seemly'
 import { scrollbarLight } from '../../_internal/scrollbar/styles'
@@ -44,9 +46,9 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type LayoutThemeVars = ReturnType<typeof self>
+export interface LayoutThemeVars extends ReturnType<typeof self> {}
 
-const layoutLight = createTheme({
+const layoutLight: LayoutTheme = createTheme({
   name: 'Layout',
   common: commonLight,
   peers: {
@@ -55,5 +57,14 @@ const layoutLight = createTheme({
   self
 })
 
+export interface LayoutTheme extends Theme<
+  'Layout',
+  LayoutThemeVars,
+  {
+    Scrollbar: ScrollbarTheme
+  }
+> {}
+
+export interface LayoutThemeOverrides extends ExtractThemeOverrides<LayoutTheme> {}
+
 export default layoutLight
-export type LayoutTheme = typeof layoutLight

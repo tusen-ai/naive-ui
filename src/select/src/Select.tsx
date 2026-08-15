@@ -1,8 +1,10 @@
 import type { TreeNode } from 'treemate'
 import type {
+  CSSProperties,
   HTMLAttributes,
   InputHTMLAttributes,
   PropType,
+  Ref,
   SlotsType,
   VNode
 } from 'vue'
@@ -22,7 +24,7 @@ import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/public-types'
 import type { PopoverProps } from '../../popover'
-import type { SelectTheme } from '../styles'
+import type { SelectTheme, SelectThemeOverrides } from '../styles'
 import type {
   OnUpdateValue,
   OnUpdateValueImpl,
@@ -80,7 +82,7 @@ import {
 } from './utils'
 
 export const selectProps = {
-  ...(useTheme.props as ThemeProps<SelectTheme>),
+  ...(useTheme.props as ThemeProps<SelectTheme, SelectThemeOverrides>),
   to: useAdjustedTo.propTo,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
@@ -920,15 +922,17 @@ export default defineComponent({
       namespace: namespaceRef,
       treeMate: treeMateRef,
       isMounted: useIsMounted(),
-      triggerRef,
-      menuRef,
+      // reduce dts: string ref only, type unused in render
+      triggerRef: triggerRef as unknown,
+      menuRef: menuRef as unknown,
       pattern: patternRef,
       uncontrolledShow: uncontrolledShowRef,
       mergedShow: mergedShowRef,
       adjustedTo: useAdjustedTo(props),
       uncontrolledValue: uncontrolledValueRef,
       mergedValue: mergedValueRef,
-      followerRef,
+      // reduce dts: string ref only, type unused in render
+      followerRef: followerRef as unknown,
       localizedPlaceholder: localizedPlaceholderRef,
       selectedOption: selectedOptionRef,
       selectedOptions: selectedOptionsRef,
@@ -957,7 +961,9 @@ export default defineComponent({
       handleMenuKeydown: handleKeydown,
       handleMenuMousedown,
       mergedTheme: themeRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

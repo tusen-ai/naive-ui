@@ -1,7 +1,7 @@
 <markdown>
-# 只执行部分规则
+# 执行部分校验
 
-在验证的过程中，你可能并不总想验证全部的表单项，你可以使用 `form.validate` 的第二个参数控制应用的规则。
+在验证过程中，可以使用 `form.validate` 的第二个参数选择要校验的规则、字段路径，或同时选择两者。字段路径与表项的 `path` 精确匹配。
 </markdown>
 
 <script lang="ts" setup>
@@ -40,7 +40,7 @@ function validateAll() {
   })
 }
 
-function validatePartial() {
+function validatePartialRules() {
   formInstRef.value?.validate(
     (errors) => {
       if (errors) {
@@ -52,13 +52,27 @@ function validatePartial() {
     }
   )
 }
+
+function validatePartialFields() {
+  formInstRef.value?.validate(
+    (errors) => {
+      if (errors) {
+        console.error(errors)
+      }
+    },
+    ['fieldB']
+  )
+}
 </script>
 
 <template>
   <n-space vertical>
     <n-space>
-      <n-button @click="validatePartial">
-        检查第一个字段
+      <n-button @click="validatePartialRules">
+        按规则 key 检查第一个字段
+      </n-button>
+      <n-button @click="validatePartialFields">
+        按 path 检查第二个字段
       </n-button>
       <n-button @click="validateAll">
         执行全部规则

@@ -111,7 +111,7 @@ Accept all props from FormItem & [GridItem](grid#GridItem-Props)
 
 | Name | Type | Description | Version |
 | --- | --- | --- | --- |
-| validate | `(validateCallback?: (errors: Array<FormValidationError> \| undefined, extra: { warnings: Array<FormValidationError> \| undefined }) => void, shouldRuleBeApplied?: FormItemRule => boolean) => Promise<{ warnings: Array<FormValidationError> \| undefined }>` | Validate the form. The rejection value type of returned promise is `Array<FormValidationError>`. | `warnings` `2.37.1` |
+| validate | `(validateCallback?: (errors: Array<FormValidationError> \| undefined, extra: { warnings: Array<FormValidationError> \| undefined }) => void, filter?: ((rule: FormItemRule) => boolean) \| Array<string> \| { paths: Array<string>, shouldRuleBeApplied: (rule: FormItemRule) => boolean }) => Promise<{ warnings: Array<FormValidationError> \| undefined }>` | Validate the form. Pass field paths to validate matching form items, or pass an object to filter both form items and rules. Paths match form item `path` values exactly. The rejection value type of returned promise is `Array<FormValidationError>`. | `warnings` `2.37.1`, path filter `NEXT_VERSION` |
 | restoreValidation | `() => void` | Restore validate. |  |
 | invalidateLabelWidth | `() => void` | Recalculate label widths of all form items. Useful when using `label-width="auto"` and the label content changes dynamically. | NEXT_VESION |
 
