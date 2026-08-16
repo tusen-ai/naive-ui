@@ -29,7 +29,6 @@ export const scrollbarProps = {
   onScroll: Function as PropType<(e: Event) => void>,
   contentClass: String,
   contentStyle: [Object, String] as PropType<string | Record<string, any>>,
-  size: Number,
   yPlacement: {
     type: String as PropType<'left' | 'right'>,
     default: 'right'
