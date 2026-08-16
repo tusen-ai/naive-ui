@@ -237,4 +237,24 @@ describe('n-image', () => {
     expect(document.querySelector('.n-image-preview-overlay')).toEqual(null)
     wrapper.unmount()
   })
+
+  it('should show placeholder slot again after src changes', async () => {
+    const wrapper = mount(NImage, {
+      props: {
+        src: 'a.jpg'
+      },
+      slots: {
+        placeholder: () => 'Placeholder'
+      }
+    })
+
+    expect(wrapper.text()).toContain('Placeholder')
+
+    await wrapper.find('img').trigger('load')
+    expect(wrapper.text()).not.toContain('Placeholder')
+
+    await wrapper.setProps({ src: 'b.jpg' })
+    expect(wrapper.text()).toContain('Placeholder')
+    wrapper.unmount()
+  })
 })
