@@ -159,4 +159,25 @@ describe('n-avatar', () => {
     )
     wrapper.unmount()
   })
+
+  it('should show placeholder slot again after src changes', async () => {
+    const wrapper = mount(NAvatar, {
+      props: {
+        lazy: true,
+        src: 'a.jpg'
+      },
+      slots: {
+        placeholder: () => 'Placeholder'
+      }
+    })
+
+    expect(wrapper.text()).toContain('Placeholder')
+
+    await wrapper.find('img').trigger('load')
+    expect(wrapper.text()).not.toContain('Placeholder')
+
+    await wrapper.setProps({ src: 'b.jpg' })
+    expect(wrapper.text()).toContain('Placeholder')
+    wrapper.unmount()
+  })
 })
