@@ -30,7 +30,7 @@ hover-value.vue
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | 图标尺寸 |  |
 | value | `number \| null` | `undefined` | 已激活图标个数 |  |
 | on-clear | `() => void` | `undefined` | 清除当前值的回调 | 2.33.0 |
-| on-update:hover-value | `(value: number \| null) => void` | `undefined` | 悬浮图标个数改变时触发 | NEXT_VERSION |
+| on-update:hover-value | `(value: number \| null) => void` | `undefined` | 悬浮图标个数改变时触发 | 2.45.0 |
 | on-update:value | `(value: number) => void` | `undefined` | 激活图标个数改变时触发 |  |
 
 ### Rate Slots

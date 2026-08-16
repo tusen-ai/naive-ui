@@ -39,10 +39,10 @@ tooltip-debug.vue
 | --- | --- | --- | --- | --- |
 | disabled | `boolean` | `false` | 禁用状态 |  |
 | default-value | `string \| number \| boolean \| null` | `null` | 默认选中的值 |  |
-| label-field | `string` | `'label'` | `options` 中选项标签的字段名 | NEXT_VERSION |
+| label-field | `string` | `'label'` | `options` 中选项标签的字段名 | 2.45.0 |
 | name | `string` | `undefined` | 选项组内部 radio 元素的 name 属性 |  |
-| options | `Array<{ label?: string, value: string \| number \| boolean, disabled?: boolean }>` | `undefined` | 配置选项内容，设置后默认插槽不生效 | NEXT_VERSION |
+| options | `Array<{ label?: string, value: string \| number \| boolean, disabled?: boolean }>` | `undefined` | 配置选项内容，设置后默认插槽不生效 | 2.45.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 大小 |  |
 | value | `string \| number \| boolean \| null` | `null` | 选中的值 |  |
-| value-field | `string` | `'value'` | `options` 中选项值的字段名 | NEXT_VERSION |
+| value-field | `string` | `'value'` | `options` 中选项值的字段名 | 2.45.0 |
 | on-update:value | `(value: string \| number \| boolean) => void` | `undefined` | 发生变化时触发的回调方法 |  |

@@ -30,7 +30,7 @@ hover-value.vue
 | size | `'small' \| 'medium' \| 'large' \| number` | `'medium'` | Icon size. |  |
 | value | `number \| null` | `undefined` | Value of activated icons. |  |
 | on-clear | `() => void` | `undefined` | Callback on value is cleared. | 2.33.0 |
-| on-update:hover-value | `(value: number \| null) => void` | `undefined` | Callback when the hover value changes. | NEXT_VERSION |
+| on-update:hover-value | `(value: number \| null) => void` | `undefined` | Callback when the hover value changes. | 2.45.0 |
 | on-update:value | `(value: number) => void` | `undefined` | Callback on the value (rating) is changed. |  |
 
 ### Rate Slots
