@@ -28,3 +28,9 @@ export interface DatePickerConfirmSlotProps {
   disabled: boolean
   text: string
 }
+
+export interface DatePickerDateCellSlotProps {
+  year: number
+  month: number
+  date: number
+}
