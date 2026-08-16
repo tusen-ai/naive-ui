@@ -23,6 +23,7 @@ const cjsLodashPlugin = {
 export default defineConfig({
   entry: [
     'src/**/*.{ts,tsx}',
+    '!src/**/*.d.ts',
     '!src/**/*.spec.*',
     '!src/vitest-setup.ts'
   ],

@@ -22,6 +22,14 @@ function isSuspiciousImportSpecifier(specifier: string): boolean {
   )
 }
 
+function isUnwantedDeclarationFile(fileName: string): boolean {
+  return (
+    fileName === 'global.d.ts'
+    || fileName === 'shims-vue.d.ts'
+    || fileName.endsWith('.d.d.ts')
+  )
+}
+
 export async function checkArtifacts(): Promise<void> {
   const roots = ['es', 'lib'].map(dir => path.resolve(process.cwd(), dir))
   const problems: string[] = []
@@ -43,8 +51,16 @@ export async function checkArtifacts(): Promise<void> {
       if (!filePath.endsWith('.d.ts'))
         continue
       const rel = path.relative(process.cwd(), filePath)
+      if (isUnwantedDeclarationFile(path.basename(filePath))) {
+        problems.push(`unwanted declaration file: ${rel}`)
+        continue
+      }
       const content = await fs.readFile(filePath, 'utf8')
       content.split('\n').forEach((line, index) => {
+        if (/\bconst\s+process\.env\b/.test(line)) {
+          problems.push(`${rel}:${index + 1}: ${line.trim()}`)
+          return
+        }
         const match = line.match(/from\s+['"]([^'"]+)['"]/)
         if (!match)
           return
@@ -66,7 +82,7 @@ export async function checkArtifacts(): Promise<void> {
     console.error(`  - ${problem}`)
   }
   throw new Error(
-    `Found ${problems.length} suspicious artifact path(s). `
-    + 'Declaration files must not embed host filesystem or node_modules paths.'
+    `Found ${problems.length} suspicious artifact issue(s). `
+    + 'Declaration files must not embed host paths, ambient shims, or define replacements.'
   )
 }
