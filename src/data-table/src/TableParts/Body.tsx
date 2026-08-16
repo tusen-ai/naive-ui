@@ -205,7 +205,7 @@ export default defineComponent({
       xScrollableRef,
       explicitlyScrollableRef
     } = inject(dataTableInjectionKey)!
-    const NConfigProvider = inject(configProviderInjectionKey)
+    const NConfigProvider = inject(configProviderInjectionKey, null)
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const virtualListRef = ref<VirtualListInst | null>(null)
     const emptyElRef = ref<HTMLElement | null>(null)
