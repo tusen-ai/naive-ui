@@ -6,7 +6,7 @@
 
 ### Breaking Changes
 
-- Starting from this version, the package is built with vue-jsx-vapor. This is a significant change at the implementation level, but it is not expected to be breaking for end users: how you use naive-ui and how naive-ui behaves should remain the same. Being built with vue-jsx-vapor does not mean naive-ui ships as a native Vapor build; it is still VDOM-based. If you need to use naive-ui inside a pure Vapor app, you still need to enable interop.
+- Starting from this version, the package is built with vue-jsx-vapor. This is a significant change at the implementation level, but it is not expected to be breaking for end users: how you use naive-ui and how naive-ui behaves should remain the same. Being built with vue-jsx-vapor does not mean naive-ui ships as a native Vapor build; it is still VDOM-based. If you need to use naive-ui inside a pure Vapor app, you still need to enable interop. This version has been tested before release, but we cannot guarantee that no issues will arise. If you run into any related problems, please report them on GitHub and we will address them as soon as possible.
 
 ### i18n
 

@@ -6,7 +6,7 @@
 
 ### Breaking Changes
 
-- 自此版本起，包产物改为使用 vue-jsx-vapor 构建。从底层来看，这是个较大的变更，但是此变更预期不会造成破坏性影响，即用户使用 naive-ui 的方式不会有变化，naive-ui 的表现也不会有变化。使用 vue-jsx-vapor 构建不代表 naive-ui 是原生 vapor 构建产物，它依然是 vdom 结构，如果你需要在纯 vapor app 中使用 naive-ui，仍然需要将 interop 设为 true。
+- 自此版本起，包产物改为使用 vue-jsx-vapor 构建。从底层来看，这是个较大的变更，但是此变更预期不会造成破坏性影响，即用户使用 naive-ui 的方式不会有变化，naive-ui 的表现也不会有变化。使用 vue-jsx-vapor 构建不代表 naive-ui 是原生 vapor 构建产物，它依然是 vdom 结构，如果你需要在纯 vapor app 中使用 naive-ui，仍然需要将 interop 设为 true。此版本在发布前进行过测试，但是无法保证不会出任何问题，如果您遇到任何相关问题，可以在 GitHub 中进行反馈，我们会尽快进行处理。
 
 ### i18n
 
