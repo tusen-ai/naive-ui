@@ -278,7 +278,7 @@ export interface GlobalComponentConfig {
   DynamicTags?: {
     size?: DynamicTagsSize
   }
-  Empty?: Pick<EmptyProps, 'description' | 'renderIcon'>
+  Empty?: Pick<EmptyProps, 'description' | 'renderIcon' | 'size'>
   Form?: {
     size?: FormSize
   }

@@ -54,6 +54,7 @@
 - 修复 `n-image` 图片加载失败时 `placeholder` 插槽与 `error` 插槽同时显示的问题，关闭 [#7526](https://github.com/tusen-ai/naive-ui/issues/7526)
 - 修复 `n-space` `size` 属性设置为 `0` 时不生效的问题，关闭 [#7530](https://github.com/tusen-ai/naive-ui/issues/7530)
 - 修复 `n-date-picker` 在 `type="datetime"` 时点击面板清空按钮会连续触发两次 `update:value` 的问题，关闭 [#8070](https://github.com/tusen-ai/naive-ui/issues/8070)
+- 修复 `n-config-provider` 的 `component-options` 无法控制 `n-empty` 组件 `size` 的问题，关闭 [#8139](https://github.com/tusen-ai/naive-ui/issues/8139)
 - 修复 `n-input-otp` 在浏览器扩展自动填充时将完整 OTP 写入单个输入框时只保留最后一个字符的问题，关闭 [#7540](https://github.com/tusen-ai/naive-ui/pull/7540)
 - 修复 `n-menu` 在缩起（collapsed）状态下选项包含 `type="group"` 分组时菜单项图标未居中的问题，关闭 [#8105](https://github.com/tusen-ai/naive-ui/issues/8105)
 - 修复 `n-data-table` 在数据为空且列设置了 `ellipsis` 时不渲染表头的问题，关闭 [#8118](https://github.com/tusen-ai/naive-ui/issues/8118)
