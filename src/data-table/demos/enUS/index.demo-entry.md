@@ -221,11 +221,11 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | clearFilters | `() => void` | Clear all filter state. |  |
 | clearSorter | `() => void` | Clear all sort state. |  |
 | downloadCsv | `(options?: { fileName?: string, keepOriginalData?: boolean }) => void` | Download CSV. | 2.37.0 |
-| getCurrentPageData | `() => RowData[]` | Get row data of the current page after filters, sorters and pagination are applied. | NEXT_VERSION |
-| getFilteredAndSortedData | `() => RowData[]` | Get all row data after filters and sorters are applied, excluding pagination. In `remote` mode, it is based on the current `data` prop only. | NEXT_VERSION |
+| getCurrentPageData | `() => RowData[]` | Get row data of the current page after filters, sorters and pagination are applied. | 2.45.0 |
+| getFilteredAndSortedData | `() => RowData[]` | Get all row data after filters and sorters are applied, excluding pagination. In `remote` mode, it is based on the current `data` prop only. | 2.45.0 |
 | filters | `(filters: DataTableFilterState \| null) => void` | Set the active filters of the table. |  |
 | page | `(page: number) => void` | Manually set the page. |  |
-| scrollTo | `DataTableScrollTo` | Scroll content. See <n-a href="#DataTableScrollTo-Type">DataTableScrollTo Type</n-a>. | NEXT_VERSION |
+| scrollTo | `DataTableScrollTo` | Scroll content. See <n-a href="#DataTableScrollTo-Type">DataTableScrollTo Type</n-a>. | 2.45.0 |
 | sort | `(columnKey: string \| number, order: 'ascend' \| 'descend' \| false) => void` | Set the sort state of the table. |  |
 
 ### DataTable Slots

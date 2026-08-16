@@ -38,7 +38,7 @@ center-active-tab.vue
 | add-tab-style | `string \| object` | `undefined` | Style of the add tab. | 2.37.0 |
 | animated | `boolean` | `false` | Whether to activate tab switching animation. It has no effect if `placement` is `'left'`, `'right'`, `'start'` or `'end'`. | 2.27.0 |
 | bar-width | `number` | `undefined` | The width of the tab bar. | 2.25.0 |
-| center-active-tab | `boolean` | `false` | When set to true, the active tab will scroll to the center of the scroll container. | NEXT_VERSION |
+| center-active-tab | `boolean` | `false` | When set to true, the active tab will scroll to the center of the scroll container. | 2.45.0 |
 | closable | `boolean` | `false` | Whether to allow the tag to be closed. Only works when the tag's `type` is `card`. |  |
 | default-value | `string \| number` | `undefined` | Default value in uncontrolled mode. |  |
 | justify-content | `'space-between' \| 'space-around' \| 'space-evenly' \| 'start' \| 'center' \| 'end'` | `undefined` | Justify-content value of `flex` layout. Only works with `'line'` or `'bar'` typed tabs. | `space-*` 2.29.1 |
@@ -47,8 +47,8 @@ center-active-tab.vue
 | pane-style | `string \| object` | `undefined` | Style of the pane. |  |
 | pane-wrapper-class | `string` | `undefined` | Class of the pane wrapper. | 2.34.4 |
 | pane-wrapper-style | `string \| object` | `undefined` | Style of the pane wrapper. | 2.34.4 |
-| placement | `'left' \| 'right' \| 'top' \| 'bottom' \| 'start' \| 'end'` | `'top'` | Placement of tabs. `'start'` / `'end'` map to `'left'` / `'right'` according to RTL. It won't work with `n-tabs` whose `type` is `'segment'`. | 2.34.4, `start` `end` NEXT_VERSION |
-| show-scroll-button | `boolean` | `false` | Whether to display the scroll button. | NEXT_VERSION |
+| placement | `'left' \| 'right' \| 'top' \| 'bottom' \| 'start' \| 'end'` | `'top'` | Placement of tabs. `'start'` / `'end'` map to `'left'` / `'right'` according to RTL. It won't work with `n-tabs` whose `type` is `'segment'`. | 2.34.4, `start` `end` 2.45.0 |
+| show-scroll-button | `boolean` | `false` | Whether to display the scroll button. | 2.45.0 |
 | tab-class | `string` | `undefined` | Class of the tab. | 2.37.0 |
 | tab-style | `string \| object` | `undefined` | Style of the tab. |  |
 | tabs-padding | `number` | `0` | Start & end `padding` of the group of tabs. |  |
@@ -102,7 +102,7 @@ center-active-tab.vue
 
 ### Tabs Methods
 
-| Name               | Type         | Description              | Version      |
-| ------------------ | ------------ | ------------------------ | ------------ |
-| scrollToCurrentTab | `() => void` | Scroll to current tab.   | NEXT_VERSION |
-| syncBarPosition    | `() => void` | Sync tab bar's position. | 2.24.0       |
+| Name               | Type         | Description              | Version |
+| ------------------ | ------------ | ------------------------ | ------- |
+| scrollToCurrentTab | `() => void` | Scroll to current tab.   | 2.45.0  |
+| syncBarPosition    | `() => void` | Sync tab bar's position. | 2.24.0  |
