@@ -1,7 +1,7 @@
-import type { CSSProperties, PropType } from 'vue'
+import type { CSSProperties, PropType, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { RateTheme } from '../styles'
+import type { RateTheme, RateThemeOverrides } from '../styles'
 import type { RateOnUpdateValue, RateOnUpdateValueImpl } from './interface'
 import type { RateSize } from './public-types'
 import { useMergedState } from 'vooks'
@@ -14,7 +14,7 @@ import renderStarIcon from './StarIcon'
 import style from './styles/index.cssr'
 
 export const rateProps = {
-  ...(useTheme.props as ThemeProps<RateTheme>),
+  ...(useTheme.props as ThemeProps<RateTheme, RateThemeOverrides>),
   allowHalf: Boolean,
   count: {
     type: Number,
@@ -33,7 +33,13 @@ export const rateProps = {
   'onUpdate:value': [Function, Array] as PropType<
     MaybeArray<RateOnUpdateValue>
   >,
-  onUpdateValue: [Function, Array] as PropType<MaybeArray<RateOnUpdateValue>>
+  onUpdateValue: [Function, Array] as PropType<MaybeArray<RateOnUpdateValue>>,
+  'onUpdate:hoverValue': [Function, Array] as PropType<
+    MaybeArray<RateOnUpdateValue>
+  >,
+  onUpdateHoverValue: [Function, Array] as PropType<
+    MaybeArray<RateOnUpdateValue>
+  >
 } as const
 
 export type RateProps = ExtractPublicPropTypes<typeof rateProps>
@@ -99,13 +105,26 @@ export default defineComponent({
       }
     }
     let cleared = false
+    function updateHoverIndex(value: number | null): void {
+      if (hoverIndexRef.value === value)
+        return
+      hoverIndexRef.value = value
+      const { 'onUpdate:hoverValue': _onUpdateHoverValue, onUpdateHoverValue }
+        = props
+      if (_onUpdateHoverValue) {
+        call(_onUpdateHoverValue as RateOnUpdateValueImpl, value)
+      }
+      if (onUpdateHoverValue) {
+        call(onUpdateHoverValue as RateOnUpdateValueImpl, value)
+      }
+    }
     function handleMouseMove(index: number, e: MouseEvent): void {
       if (cleared)
         return
-      hoverIndexRef.value = getDerivedValue(index, e)
+      updateHoverIndex(getDerivedValue(index, e))
     }
     function handleMouseLeave(): void {
-      hoverIndexRef.value = null
+      updateHoverIndex(null)
     }
     function handleClick(index: number, e: MouseEvent): void {
       const { clearable } = props
@@ -113,7 +132,7 @@ export default defineComponent({
       if (clearable && derivedValue === mergedValue.value) {
         cleared = true
         props.onClear?.()
-        hoverIndexRef.value = null
+        updateHoverIndex(null)
         doUpdateValue(null)
       }
       else {
@@ -177,7 +196,9 @@ export default defineComponent({
       handleClick,
       handleMouseLeave,
       handleMouseEnterSomeStar,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

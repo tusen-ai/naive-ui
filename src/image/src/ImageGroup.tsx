@@ -207,7 +207,8 @@ export default defineComponent({
 
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      previewInstRef,
+      // reduce dts: string ref only, type unused in render
+      previewInstRef: previewInstRef as unknown,
       mergedShow: mergedShowRef,
       src: currentUrl,
       onClose,
@@ -232,6 +233,7 @@ export default defineComponent({
         showToolbar={this.showToolbar}
         showToolbarTooltip={this.showToolbarTooltip}
         renderToolbar={this.renderToolbar}
+        keepDragOffset={this.keepDragOffset}
         onClose={this.onClose}
       >
         {this.$slots}

@@ -3,6 +3,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // vars:
 // --n-bezier
 // --n-color
+// --n-color-hover
 // --n-font-size
 // --n-border-radius
 // --n-height
@@ -266,7 +267,7 @@ export default cB('input', `
         color: var(--n-icon-color-pressed);
       `)
     ]),
-    c('&:hover', [
+    c('&:hover', 'background-color: var(--n-color-hover);', [
       cE('state-border', 'border: var(--n-border-hover);')
     ]),
     cM('focus', 'background-color: var(--n-color-focus);', [

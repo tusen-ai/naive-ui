@@ -1,4 +1,7 @@
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
+import type { ButtonTheme } from '../../button/styles'
+import type { PopoverTheme } from '../../popover/styles'
 import { createTheme } from '../../_mixins'
 import { commonLight } from '../../_styles/common'
 import { buttonLight } from '../../button/styles'
@@ -15,9 +18,9 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type PopconfirmThemeVars = ReturnType<typeof self>
+export interface PopconfirmThemeVars extends ReturnType<typeof self> {}
 
-const popconfirmLight = createTheme({
+const popconfirmLight: PopconfirmTheme = createTheme({
   name: 'Popconfirm',
   common: commonLight,
   peers: {
@@ -27,5 +30,15 @@ const popconfirmLight = createTheme({
   self
 })
 
+export interface PopconfirmTheme extends Theme<
+  'Popconfirm',
+  PopconfirmThemeVars,
+  {
+    Button: ButtonTheme
+    Popover: PopoverTheme
+  }
+> {}
+
+export interface PopconfirmThemeOverrides extends ExtractThemeOverrides<PopconfirmTheme> {}
+
 export default popconfirmLight
-export type PopconfirmTheme = typeof popconfirmLight

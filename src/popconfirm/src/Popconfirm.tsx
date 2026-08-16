@@ -4,7 +4,7 @@ import type { ExtractPublicPropTypes } from '../../_utils'
 import type { ButtonProps } from '../../button'
 import type { PopoverTrigger } from '../../popover'
 import type { InternalPopoverInst } from '../../popover/src/interface'
-import type { PopconfirmTheme } from '../styles'
+import type { PopconfirmTheme, PopconfirmThemeOverrides } from '../styles'
 import type { PopconfirmInst } from './interface'
 import { defineComponent, h, provide, ref } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
@@ -17,7 +17,7 @@ import PopconfirmPanel, { panelPropKeys } from './PopconfirmPanel'
 import style from './styles/index.cssr'
 
 export const popconfirmProps = {
-  ...(useTheme.props as ThemeProps<PopconfirmTheme>),
+  ...(useTheme.props as ThemeProps<PopconfirmTheme, PopconfirmThemeOverrides>),
   ...popoverBaseProps,
   positiveText: String as PropType<string | null>,
   negativeText: String as PropType<string | null>,
@@ -107,7 +107,8 @@ export default defineComponent({
         popoverInstRef.value?.syncPosition()
       },
       mergedTheme: themeRef,
-      popoverInstRef,
+      // reduce dts: string ref only, type unused in render
+      popoverInstRef: popoverInstRef as unknown,
       handlePositiveClick,
       handleNegativeClick
     }
@@ -129,9 +130,11 @@ export default defineComponent({
             const panelProps = keep(props, panelPropKeys)
             return (
               <PopconfirmPanel
-                {...panelProps}
-                onPositiveClick={this.handlePositiveClick}
-                onNegativeClick={this.handleNegativeClick}
+                {...{
+                  ...panelProps,
+                  onPositiveClick: this.handlePositiveClick,
+                  onNegativeClick: this.handleNegativeClick
+                }}
               >
                 {slots}
               </PopconfirmPanel>

@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType, VNodeChild } from 'vue'
+import type { CSSProperties, PropType, Ref, VNodeChild } from 'vue'
 import { getPadding } from 'seemly'
 import { computed, defineComponent, h, inject } from 'vue'
 import { NBaseClose, NBaseIcon } from '../../_internal'
@@ -147,7 +147,9 @@ export const Notification = defineComponent({
         props.onClose()
       },
       rtlEnabled: rtlEnabledRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

@@ -176,6 +176,30 @@ describe('n-date-picker', () => {
     wrapper.unmount()
   })
 
+  it('should emit update:value once when clearing datetime picker from panel', async () => {
+    const onUpdateValue = vi.fn()
+    const wrapper = mount(NDatePicker, {
+      attachTo: document.body,
+      props: {
+        type: 'datetime',
+        clearable: true,
+        value: 1183135260000,
+        onUpdateValue
+      }
+    })
+
+    await wrapper.find('.n-input__input').trigger('click')
+    const clearButton = Array.from(
+      document.querySelectorAll('.n-date-panel-actions__suffix .n-button')
+    ).find(button => button.textContent === 'Clear') as HTMLElement
+    clearButton.click()
+
+    expect(onUpdateValue).toHaveBeenCalledTimes(1)
+    expect(onUpdateValue).toHaveBeenCalledWith(null, null)
+
+    wrapper.unmount()
+  })
+
   it('should work with `disabled` prop', async () => {
     const wrapper = mount(NDatePicker)
     expect(wrapper.find('.n-input').attributes('class')).not.toContain(

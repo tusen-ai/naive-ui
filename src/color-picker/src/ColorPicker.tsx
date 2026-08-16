@@ -10,7 +10,7 @@ import type {
 import type { FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { ColorPickerTheme } from '../styles'
+import type { ColorPickerTheme, ColorPickerThemeOverrides } from '../styles'
 import type {
   OnClear,
   OnConfirmImpl,
@@ -46,6 +46,7 @@ import {
   computed,
   defineComponent,
   h,
+  mergeProps,
   nextTick,
   provide,
   ref,
@@ -66,6 +67,8 @@ import {
 import {
   call,
   createKey,
+  keep,
+  mergeEventHandlers,
   resolveWrappedSlotWithProps,
   useAdjustedTo
 } from '../../_utils'
@@ -83,7 +86,10 @@ import style from './styles/index.cssr'
 import { deriveDefaultValue, getModeFromValue } from './utils'
 
 export const colorPickerProps = {
-  ...(useTheme.props as ThemeProps<ColorPickerTheme>),
+  ...(useTheme.props as ThemeProps<
+    ColorPickerTheme,
+    ColorPickerThemeOverrides
+  >),
   value: String as PropType<string | null>,
   show: {
     type: Boolean as PropType<boolean | undefined>,
@@ -139,13 +145,14 @@ export interface ColorPickerSlots {
   action?: () => VNode[]
   trigger?: (props: {
     value: string | null
-    onClick: () => void
+    onClick: (() => void) | undefined
     ref: (el: any) => void
   }) => VNode[]
 }
 
 export default defineComponent({
   name: 'ColorPicker',
+  inheritAttrs: false,
   props: colorPickerProps,
   slots: Object as SlotsType<ColorPickerSlots>,
   setup(props, { slots }) {
@@ -683,7 +690,7 @@ export default defineComponent({
           ) : null}
           {slots.action ? (
             <div class={`${mergedClsPrefix}-color-picker-action`}>
-              {{ default: slots.action }}
+              {slots.action?.()}
             </div>
           ) : internalActions ? (
             <div class={`${mergedClsPrefix}-color-picker-action`}>
@@ -748,7 +755,9 @@ export default defineComponent({
         doUpdateShow(false)
       },
       renderPanel,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }
@@ -762,34 +771,34 @@ export default defineComponent({
           default: () => [
             <VTarget>
               {{
-                default: () =>
-                  resolveWrappedSlotWithProps(
+                default: () => {
+                  const triggerProps = mergeProps(this.$attrs, {
+                    ref: this.setTriggerRef,
+                    value: this.mergedValue,
+                    style: this.cssVars,
+                    class: this.themeClass
+                  })
+                  const onClick = mergeEventHandlers([
+                    this.mergedDisabled ? undefined : this.handleTriggerClick,
+                    this.$attrs.onClick as ((e: MouseEvent) => void) | undefined
+                  ])
+                  triggerProps.onClick = onClick
+                  return resolveWrappedSlotWithProps(
                     this.$slots.trigger,
-                    {
-                      value: this.mergedValue,
-                      onClick: this.handleTriggerClick,
-                      ref: this.setTriggerRef
-                    },
+                    keep(triggerProps, ['value', 'onClick', 'ref']),
                     (children) => {
                       const triggerNode = children || (
                         <ColorPickerTrigger
+                          {...triggerProps}
                           clsPrefix={mergedClsPrefix}
-                          value={this.mergedValue}
                           hsla={this.hsla}
-                          style={this.cssVars as CSSProperties}
-                          ref={this.setTriggerRef}
                           disabled={this.mergedDisabled}
-                          class={this.themeClass}
-                          onClick={
-                            this.mergedDisabled
-                              ? undefined
-                              : this.handleTriggerClick
-                          }
                         />
                       )
                       return triggerNode
                     }
                   )
+                }
               }}
             </VTarget>,
             <VFollower
@@ -812,7 +821,7 @@ export default defineComponent({
                               [
                                 clickoutside,
                                 this.handleClickOutside,
-                                undefined as any as string,
+                                undefined,
                                 { capture: true }
                               ]
                             ])

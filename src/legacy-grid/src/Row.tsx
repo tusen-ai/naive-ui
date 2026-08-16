@@ -85,7 +85,7 @@ export default defineComponent({
           justifyContent: this.justifyContent
         }}
       >
-        {this.$slots}
+        {this.$slots.default?.()}
       </div>
     )
   }

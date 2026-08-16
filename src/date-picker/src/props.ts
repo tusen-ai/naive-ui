@@ -4,7 +4,7 @@ import type { ThemeProps } from '../../_mixins'
 import type { MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/public-types'
 import type { TimePickerProps } from '../../time-picker'
-import type { DatePickerTheme } from '../styles'
+import type { DatePickerTheme, DatePickerThemeOverrides } from '../styles'
 import type { DatePickerType } from './config'
 import type {
   DefaultTime,
@@ -23,7 +23,7 @@ import { useTheme } from '../../_mixins'
 import { useAdjustedTo } from '../../_utils'
 
 export const datePickerProps = {
-  ...(useTheme.props as ThemeProps<DatePickerTheme>),
+  ...(useTheme.props as ThemeProps<DatePickerTheme, DatePickerThemeOverrides>),
   to: useAdjustedTo.propTo,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,

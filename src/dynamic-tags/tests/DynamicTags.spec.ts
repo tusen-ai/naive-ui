@@ -238,4 +238,29 @@ describe('n-dynamic-tags', () => {
     expect(wrapper.find('.n-button__content').text()).toEqual('添加')
     wrapper.unmount()
   })
+
+  it('should not commit a tag when Enter is pressed during IME composition', async () => {
+    const onUpdateValue = vi.fn()
+    const wrapper = mount(NDynamicTags, {
+      props: {
+        defaultValue: ['教师'],
+        onUpdateValue
+      }
+    })
+    await wrapper.find('.n-button').trigger('click')
+    const input = wrapper.find('input')
+    await input.setValue('程序员')
+    // Pressing Enter to confirm an IME conversion fires keydown while
+    // composition is still active; it must not commit the tag.
+    await input.trigger('compositionstart')
+    await input.trigger('keydown', { key: 'Enter' })
+    expect(onUpdateValue).not.toHaveBeenCalled()
+    expect(wrapper.findAll('.n-tag').length).toBe(1)
+    // After composition ends, Enter commits the tag as usual.
+    await input.trigger('compositionend')
+    await input.trigger('keydown', { key: 'Enter' })
+    expect(onUpdateValue).toHaveBeenCalledWith(['教师', '程序员'])
+    expect(wrapper.findAll('.n-tag').length).toBe(2)
+    wrapper.unmount()
+  })
 })

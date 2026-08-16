@@ -1,9 +1,9 @@
 import type { InputInst } from 'naive-ui'
-import type { CSSProperties, PropType, SlotsType } from 'vue'
+import type { CSSProperties, PropType, Ref, SlotsType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/public-types'
-import type { InputOtpTheme } from '../styles/light'
+import type { InputOtpTheme, InputOtpThemeOverrides } from '../styles/light'
 import type {
   InputOtpAllowInput,
   InputOtpInst,
@@ -36,7 +36,7 @@ import inputOtpLight from '../styles/light'
 import style from './styles/index.cssr'
 
 export const inputOtpProps = {
-  ...(useTheme.props as ThemeProps<InputOtpTheme>),
+  ...(useTheme.props as ThemeProps<InputOtpTheme, InputOtpThemeOverrides>),
   defaultValue: { type: Array as PropType<string[]>, default: [] },
   value: Array as PropType<null | string[]>,
   length: {
@@ -306,7 +306,39 @@ export default defineComponent({
       const currentValue = justifyValue(mergedValueRef.value)
       const currentValueAtIndex = currentValue[index]
       const diff = value.replace(currentValueAtIndex, '')
-      const char = diff[diff.length - 1] || value[value.length - 1] || ''
+      const text = diff || value
+
+      // Multi-character input (e.g. browser extension autofill)
+      if (text.length > 1) {
+        let startIndex = index
+        const allowInput = props.allowInput
+        let pasteApplied = false
+        let appendedText = ''
+        for (let i = 0; i < text.length; ++i) {
+          if (allowInput && !allowInput(text[i], startIndex, currentValue)) {
+            continue
+          }
+          pasteApplied = true
+          currentValue[startIndex] = text[i]
+          appendedText += text[i]
+          startIndex++
+          if (startIndex >= currentValue.length) {
+            break
+          }
+        }
+        if (pasteApplied) {
+          focusOnChar(Math.min(startIndex, props.length - 1))
+          doUpdateValue(currentValue, {
+            diff: appendedText,
+            index: startIndex,
+            source: 'input'
+          })
+        }
+        return
+      }
+
+      // Single character — original behavior
+      const char = text[text.length - 1] || ''
       const allowInput = props.allowInput
       if (allowInput && !allowInput(char, index, currentValue)) {
         return
@@ -339,7 +371,9 @@ export default defineComponent({
       rtlEnabled: rtlEnabledRef,
       mergedStatus: mergedStatusRef,
       mergedDisabled: mergedDisabledRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       getTemplateEvents,
       onRender: themeClassHandle?.onRender,

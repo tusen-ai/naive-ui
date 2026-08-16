@@ -55,7 +55,7 @@ export const NotificationContainer = defineComponent({
             {$slots}
           </NScrollbar>
         ) : (
-          $slots
+          $slots.default?.()
         )}
       </div>
     )

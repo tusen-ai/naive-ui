@@ -1,11 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import type { VirtualListInst } from 'vueuc'
 import type { ScrollbarInst } from '../../../_internal'
-import type {
-  IsRangeDateDisabled,
-  RangePanelChildComponentRefs,
-  Shortcuts
-} from '../interface'
+import type { IsRangeDateDisabled, Shortcuts } from '../interface'
 import type { DateItem, MonthItem, QuarterItem, YearItem } from '../utils'
 import {
   addMonths,
@@ -50,11 +46,7 @@ const useDualCalendarProps = {
 function useDualCalendar(
   props: ExtractPropTypes<typeof useDualCalendarProps>,
   type:
-    | 'daterange'
-    | 'datetimerange'
-    | 'monthrange'
-    | 'quarterrange'
-    | 'yearrange'
+    'daterange' | 'datetimerange' | 'monthrange' | 'quarterrange' | 'yearrange'
 ) {
   const {
     isDateDisabledRef,
@@ -525,11 +517,9 @@ function useDualCalendar(
 
     if (source !== 'shortcutPreview' && source !== 'shortcutDone') {
       let startDefaultTime:
-        | { hours: number, minutes: number, seconds: number }
-        | undefined
+        { hours: number, minutes: number, seconds: number } | undefined
       let endDefaultTime:
-        | { hours: number, minutes: number, seconds: number }
-        | undefined
+        { hours: number, minutes: number, seconds: number } | undefined
       if (type === 'datetimerange') {
         const { defaultTime } = props
         if (typeof defaultTime === 'function') {
@@ -887,14 +877,6 @@ function useDualCalendar(
       return endYearVlRef.value?.itemsElRef || null
     }
   }
-  const childComponentRefs: RangePanelChildComponentRefs = {
-    startYearVlRef,
-    endYearVlRef,
-    startMonthScrollbarRef,
-    endMonthScrollbarRef,
-    startYearScrollbarRef,
-    endYearScrollbarRef
-  }
   return {
     startDatesElRef,
     endDatesElRef,
@@ -932,7 +914,13 @@ function useDualCalendar(
     handleRangeShortcutClick,
     ...panelCommon,
     ...validation,
-    ...childComponentRefs,
+    // reduce dts: string ref only, type unused in render
+    startYearVlRef: startYearVlRef as unknown,
+    endYearVlRef: endYearVlRef as unknown,
+    startMonthScrollbarRef: startMonthScrollbarRef as unknown,
+    endMonthScrollbarRef: endMonthScrollbarRef as unknown,
+    startYearScrollbarRef: startYearScrollbarRef as unknown,
+    endYearScrollbarRef: endYearScrollbarRef as unknown,
     // datetimerangeonly
     startDateDisplayString: startDateInput,
     endDateInput: endDateInputRef,

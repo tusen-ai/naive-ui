@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { computed, defineComponent, Fragment, h, inject, toRef } from 'vue'
 import { NBaseIcon, NIconSwitchTransition } from '../../_internal'
@@ -152,7 +152,9 @@ export default defineComponent({
       vertical: verticalRef,
       mergedStatus: mergedStatusRef,
       handleStepClick,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       contentPlacement: contentPlacementRef

@@ -8,6 +8,7 @@ Yo, yo, check it out.
 basic.vue
 size.vue
 group.vue
+options.vue
 grid.vue
 indeterminate.vue
 controlled.vue
@@ -40,9 +41,12 @@ focus.vue
 | --- | --- | --- | --- | --- |
 | disabled | `boolean` | `false` | Whether the checkbox group is disabled. |  |
 | default-value | `Array<string \| number>` | `null` | Checkbox group's default selected value. |  |
+| label-field | `string` | `'label'` | The field name of option labels in `options`. | 2.45.0 |
 | max | `number` | `undefined` | The maximum number of checkboxes that can be checked. |  |
 | min | `number` | `undefined` | The minimum number of checkboxes that can be checked. |  |
+| options | `Array<{ label?: string, value: string \| number, disabled?: boolean }>` | `undefined` | Options for the checkbox group. When set, the default slot is ignored. | 2.45.0 |
 | value | `Array<string \| number> \| null` | `undefined` | Manually set values of a checkbox group. |  |
+| value-field | `string` | `'value'` | The field name of option values in `options`. | 2.45.0 |
 | on-update:value | `(value: (string \| number)[], meta: { actionType: 'check' \| 'uncheck', value: string \| number }) => void` | `undefined` | Callback when the checkbox group's value changes. | `meta` 2.32.0 |
 
 ### Checkbox Slots

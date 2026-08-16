@@ -1,4 +1,10 @@
+import type { ScrollbarTheme } from '../../_internal/scrollbar/styles'
+import type { InternalSelectMenuTheme } from '../../_internal/select-menu/styles'
+import type { InternalSelectionTheme } from '../../_internal/selection/styles'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
+import type { CheckboxTheme } from '../../checkbox/styles'
+import type { EmptyTheme } from '../../empty/styles'
 import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import { internalSelectMenuLight } from '../../_internal/select-menu/styles'
 import { internalSelectionLight } from '../../_internal/selection/styles'
@@ -40,9 +46,9 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type CascaderThemeVars = ReturnType<typeof self>
+export interface CascaderThemeVars extends ReturnType<typeof self> {}
 
-const cascaderLight = createTheme({
+const cascaderLight: CascaderTheme = createTheme({
   name: 'Cascader',
   common: commonLight,
   peers: {
@@ -55,5 +61,18 @@ const cascaderLight = createTheme({
   self
 })
 
+export interface CascaderTheme extends Theme<
+  'Cascader',
+  CascaderThemeVars,
+  {
+    InternalSelectMenu: InternalSelectMenuTheme
+    InternalSelection: InternalSelectionTheme
+    Scrollbar: ScrollbarTheme
+    Checkbox: CheckboxTheme
+    Empty: EmptyTheme
+  }
+> {}
+
+export interface CascaderThemeOverrides extends ExtractThemeOverrides<CascaderTheme> {}
+
 export default cascaderLight
-export type CascaderTheme = typeof cascaderLight

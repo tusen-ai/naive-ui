@@ -1,7 +1,7 @@
-import type { PropType } from 'vue'
+import type { CSSProperties, PropType, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { BackTopTheme } from '../styles'
+import type { BackTopTheme, BackTopThemeOverrides } from '../styles'
 import { getScrollParent, unwrapElement } from 'seemly'
 import { useIsMounted, useMergedState } from 'vooks'
 import {
@@ -34,7 +34,7 @@ import renderBackTopIcon from './BackTopIcon'
 import style from './styles/index.cssr'
 
 export const backTopProps = {
-  ...(useTheme.props as ThemeProps<BackTopTheme>),
+  ...(useTheme.props as ThemeProps<BackTopTheme, BackTopThemeOverrides>),
   show: {
     type: Boolean as PropType<boolean | undefined>,
     default: undefined
@@ -261,7 +261,9 @@ export default defineComponent({
       handleAfterEnter,
       handleScroll,
       handleClick,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

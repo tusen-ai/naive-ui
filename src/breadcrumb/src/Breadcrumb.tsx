@@ -1,7 +1,7 @@
 import type { CSSProperties, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { BreadcrumbTheme } from '../styles'
+import type { BreadcrumbTheme, BreadcrumbThemeOverrides } from '../styles'
 import { computed, defineComponent, h, provide, toRef } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
@@ -17,7 +17,7 @@ export const breadcrumbInjectionKey
   = createInjectionKey<BreadcrumbInjection>('n-breadcrumb')
 
 export const breadcrumbProps = {
-  ...(useTheme.props as ThemeProps<BreadcrumbTheme>),
+  ...(useTheme.props as ThemeProps<BreadcrumbTheme, BreadcrumbThemeOverrides>),
   separator: {
     type: String,
     default: '/'
@@ -80,7 +80,9 @@ export default defineComponent({
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }
@@ -93,7 +95,7 @@ export default defineComponent({
         style={this.cssVars as CSSProperties}
         aria-label="Breadcrumb"
       >
-        <ul>{this.$slots}</ul>
+        <ul>{this.$slots.default?.()}</ul>
       </nav>
     )
   }

@@ -1,8 +1,8 @@
-import type { PropType, Ref } from 'vue'
+import type { CSSProperties, PropType, Ref } from 'vue'
 import type { ScrollbarInst } from '../../_internal'
 import type { Hljs, ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { LogTheme } from '../styles'
+import type { LogTheme, LogThemeOverrides } from '../styles'
 import type { LogSpinProps } from './public-types'
 import { throttle as _throttle } from 'lodash-es'
 import {
@@ -44,7 +44,7 @@ export interface LogInst {
 }
 
 export const logProps = {
-  ...(useTheme.props as ThemeProps<LogTheme>),
+  ...(useTheme.props as ThemeProps<LogTheme, LogThemeOverrides>),
   loading: Boolean,
   trim: Boolean,
   log: String,
@@ -255,7 +255,8 @@ export default defineComponent({
     return {
       ...exportedMethods,
       mergedClsPrefix: mergedClsPrefixRef,
-      scrollbarRef,
+      // reduce dts: string ref only, type unused in render
+      scrollbarRef: scrollbarRef as unknown,
       mergedTheme: themeRef,
       styleHeight: styleHeightRef,
       mergedLines: mergedLinesRef,
@@ -263,7 +264,9 @@ export default defineComponent({
       scrollToBottom,
       handleWheel,
       handleScroll,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

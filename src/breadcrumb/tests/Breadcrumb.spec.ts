@@ -9,7 +9,7 @@ describe('n-breadcrumb', () => {
   })
 
   it('should raise an error if breadcrumbItem is not inside a BreadCrumb', () => {
-    const mockErrorLogger = vi
+    using mockErrorLogger = vi
       .spyOn(console, 'error')
       .mockImplementation(() => {})
     const wrapper = mount(NBreadcrumbItem)
@@ -113,10 +113,9 @@ describe('n-breadcrumb', () => {
       const currentUrl = 'http://some-domain/path2'
       // https://github.com/jsdom/jsdom/issues/3492
       // https://jestjs.io/blog#known-issues
-      vi.spyOn(
-        useBrowserLocationModule,
-        'useBrowserLocation'
-      ).mockImplementation(() => ref({ href: currentUrl }))
+      using browserLocationSpy = vi
+        .spyOn(useBrowserLocationModule, 'useBrowserLocation')
+        .mockImplementation(() => ref({ href: currentUrl }))
 
       const wrapper = mount(NBreadcrumb, {
         slots: {
@@ -153,6 +152,7 @@ describe('n-breadcrumb', () => {
           .find(`a.n-breadcrumb-item__link[href="${currentUrl}"]`)
           .attributes('aria-current')
       ).toBe('location')
+      expect(browserLocationSpy).toHaveBeenCalled()
       wrapper.unmount()
     })
 

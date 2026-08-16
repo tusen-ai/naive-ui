@@ -1,7 +1,7 @@
-import type { CSSProperties, PropType } from 'vue'
+import type { CSSProperties, PropType, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { TableTheme } from '../styles'
+import type { TableTheme, TableThemeOverrides } from '../styles'
 import type { TableSize } from './public-types'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
@@ -11,7 +11,7 @@ import { tableLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const tableProps = {
-  ...(useTheme.props as ThemeProps<TableTheme>),
+  ...(useTheme.props as ThemeProps<TableTheme, TableThemeOverrides>),
   bordered: {
     type: Boolean,
     default: true
@@ -119,7 +119,9 @@ export default defineComponent({
     return {
       rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }
@@ -143,7 +145,7 @@ export default defineComponent({
         ]}
         style={this.cssVars as CSSProperties}
       >
-        {this.$slots}
+        {this.$slots.default?.()}
       </table>
     )
   }

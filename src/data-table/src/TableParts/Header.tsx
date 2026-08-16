@@ -65,7 +65,7 @@ const VirtualListItemWrapper = defineComponent({
           ))}
         </colgroup>
         <thead data-n-id={id} class={`${clsPrefix}-data-table-thead`}>
-          {this.$slots}
+          {this.$slots.default?.()}
         </thead>
       </table>
     )
@@ -184,7 +184,8 @@ export default defineComponent({
       headerCheckboxDisabled: headerCheckboxDisabledRef,
       headerHeight: headerHeightRef,
       virtualScrollHeader: virtualScrollHeaderRef,
-      virtualListRef,
+      // reduce dts: string ref only, type unused in render
+      virtualListRef: virtualListRef as unknown,
       handleCheckboxUpdateChecked,
       handleColHeaderClick,
       handleTableHeaderScroll,

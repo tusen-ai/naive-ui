@@ -66,7 +66,8 @@ export default defineComponent({
     return {
       show: showRef,
       triggerRef,
-      monthPanelRef,
+      // reduce dts: avoid expanding component instance types
+      monthPanelRef: monthPanelRef as unknown,
       handleSelectYear,
       handleSelectMonth,
       handleHeaderClick,
@@ -136,7 +137,7 @@ export default defineComponent({
                                   [
                                     clickoutside,
                                     handleClickOutside,
-                                    undefined as unknown as string,
+                                    undefined,
                                     { capture: true }
                                   ]
                                 ]

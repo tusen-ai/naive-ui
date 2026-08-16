@@ -1,3 +1,5 @@
+import type { ScrollbarTheme } from '../../_internal/scrollbar/styles'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import { createTheme } from '../../_mixins'
@@ -51,9 +53,9 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type NotificationThemeVars = ReturnType<typeof self>
+export interface NotificationThemeVars extends ReturnType<typeof self> {}
 
-const notificationLight = createTheme({
+const notificationLight: NotificationTheme = createTheme({
   name: 'Notification',
   common: commonLight,
   peers: {
@@ -62,5 +64,14 @@ const notificationLight = createTheme({
   self
 })
 
+export interface NotificationTheme extends Theme<
+  'Notification',
+  NotificationThemeVars,
+  {
+    Scrollbar: ScrollbarTheme
+  }
+> {}
+
+export interface NotificationThemeOverrides extends ExtractThemeOverrides<NotificationTheme> {}
+
 export default notificationLight
-export type NotificationTheme = typeof notificationLight

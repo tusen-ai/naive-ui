@@ -100,9 +100,18 @@ export type FormValidateCallback = (
     warnings: ValidateError[][] | undefined
   }
 ) => void
+
+export interface FormValidateOptions {
+  paths: string[]
+  shouldRuleBeApplied: ShouldRuleBeApplied
+}
+
+export type FormValidateFilter
+  = ShouldRuleBeApplied | string[] | FormValidateOptions
+
 export type FormValidate = (
   callback?: FormValidateCallback,
-  shouldRuleBeApplied?: ShouldRuleBeApplied
+  filter?: FormValidateFilter
 ) => Promise<{
   warnings: ValidateError[][] | undefined
 }>

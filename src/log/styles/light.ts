@@ -1,4 +1,7 @@
+import type { ScrollbarTheme } from '../../_internal/scrollbar/styles'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
+import type { CodeTheme } from '../../code/styles'
 import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import { createTheme } from '../../_mixins'
 import { commonLight } from '../../_styles/common'
@@ -15,9 +18,9 @@ function self(vars: ThemeCommonVars) {
   }
 }
 
-export type LogThemeVars = ReturnType<typeof self>
+export interface LogThemeVars extends ReturnType<typeof self> {}
 
-const logLight = createTheme({
+const logLight: LogTheme = createTheme({
   name: 'Log',
   common: commonLight,
   peers: {
@@ -27,5 +30,15 @@ const logLight = createTheme({
   self
 })
 
+export interface LogTheme extends Theme<
+  'Log',
+  LogThemeVars,
+  {
+    Scrollbar: ScrollbarTheme
+    Code: CodeTheme
+  }
+> {}
+
+export interface LogThemeOverrides extends ExtractThemeOverrides<LogTheme> {}
+
 export default logLight
-export type LogTheme = typeof logLight

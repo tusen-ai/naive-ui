@@ -20,6 +20,7 @@ export type {
   RenderSorterIcon as DataTableRenderSorterIcon,
   RowData as DataTableRowData,
   RowKey as DataTableRowKey,
+  DataTableScrollTo,
   TableSelectionColumn as DataTableSelectionColumn,
   DataTableSlots,
   SortOrder as DataTableSortOrder,

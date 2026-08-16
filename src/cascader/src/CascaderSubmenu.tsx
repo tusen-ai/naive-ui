@@ -48,8 +48,9 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: mergedThemeRef,
-      scrollbarInstRef,
-      vlInstRef,
+      // reduce dts: string ref only, type unused in render
+      scrollbarInstRef: scrollbarInstRef as unknown,
+      vlInstRef: vlInstRef as unknown,
       virtualScroll: virtualScrollRef,
       itemSize: computed(() => depx(optionHeightRef.value)),
       handleVlScroll: () => {

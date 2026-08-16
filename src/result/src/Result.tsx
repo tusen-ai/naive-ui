@@ -1,7 +1,7 @@
-import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { ResultTheme } from '../styles'
+import type { ResultTheme, ResultThemeOverrides } from '../styles'
 import type { ResultSize } from './public-types'
 import { computed, defineComponent, h } from 'vue'
 import { NBaseIcon } from '../../_internal'
@@ -32,7 +32,7 @@ const iconRenderMap = {
 }
 
 export const resultProps = {
-  ...(useTheme.props as ThemeProps<ResultTheme>),
+  ...(useTheme.props as ThemeProps<ResultTheme, ResultThemeOverrides>),
   size: String as PropType<ResultSize>,
   status: {
     type: String as PropType<
@@ -122,7 +122,9 @@ export default defineComponent({
 
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }
@@ -155,7 +157,9 @@ export default defineComponent({
           ) : null}
         </div>
         {$slots.default && (
-          <div class={`${mergedClsPrefix}-result-content`}>{$slots}</div>
+          <div class={`${mergedClsPrefix}-result-content`}>
+            {$slots.default()}
+          </div>
         )}
         {$slots.footer && (
           <div class={`${mergedClsPrefix}-result-footer`}>

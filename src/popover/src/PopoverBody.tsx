@@ -7,7 +7,7 @@ import type {
 } from 'vue'
 import type { FollowerInst, FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
-import type { PopoverTheme } from '../styles'
+import type { PopoverTheme, PopoverThemeOverrides } from '../styles'
 import type { PopoverTrigger } from './interface'
 import type { PopoverInjection } from './Popover'
 import { getPreciseEventTarget } from 'seemly'
@@ -46,7 +46,7 @@ import { popoverBodyInjectionKey } from './interface'
 import style from './styles/index.cssr'
 
 export const popoverBodyProps = {
-  ...(useTheme.props as ThemeProps<PopoverTheme>),
+  ...(useTheme.props as ThemeProps<PopoverTheme, PopoverThemeOverrides>),
   to: useAdjustedTo.propTo,
   show: Boolean,
   trigger: String as PropType<PopoverTrigger>,
@@ -158,7 +158,7 @@ export default defineComponent({
           directives.push([
             clickoutside,
             handleClickOutside,
-            undefined as unknown as string,
+            undefined,
             { capture: true }
           ])
         }
@@ -170,7 +170,7 @@ export default defineComponent({
         directives.push([
           clickoutside,
           handleClickOutside,
-          undefined as unknown as string,
+          undefined,
           { capture: true }
         ])
       }
@@ -341,7 +341,7 @@ export default defineComponent({
                     ]}
                     style={props.contentStyle}
                   >
-                    {slots}
+                    {slots.default?.()}
                   </div>
                 ) : null
               })}
@@ -369,7 +369,7 @@ export default defineComponent({
               ]}
               style={props.contentStyle}
             >
-              {slots}
+              {slots.default?.()}
             </div>
           )
           const maybeScrollableBody = props.scrollable ? (
@@ -470,7 +470,8 @@ export default defineComponent({
       namespace: namespaceRef,
       isMounted: NPopover.isMountedRef,
       zIndex: NPopover.zIndexRef,
-      followerRef,
+      // reduce dts: string ref only, type unused in render
+      followerRef: followerRef as unknown,
       adjustedTo: useAdjustedTo(props),
       followerEnabled: followerEnabledRef,
       renderContentNode

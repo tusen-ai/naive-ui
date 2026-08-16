@@ -6,7 +6,6 @@ import type {
   FirstDayOfWeek,
   IsSingleDateDisabled,
   IsSingleDateDisabledDetail,
-  PanelChildComponentRefs,
   Shortcuts
 } from '../interface'
 import type { DateItem, MonthItem, QuarterItem, YearItem } from '../utils'
@@ -294,9 +293,7 @@ function useCalendar(
     }
   }
   function clearSelectedDateTime(): void {
-    panelCommon.doUpdateValue(null, true)
     dateInputValueRef.value = ''
-    panelCommon.doClose(true)
     panelCommon.handleClearClick()
   }
   function handleNowClick(): void {
@@ -543,11 +540,6 @@ function useCalendar(
     }
   }
 
-  const childComponentRefs: PanelChildComponentRefs = {
-    monthScrollbarRef,
-    yearScrollbarRef,
-    yearVlRef
-  }
   return {
     dateArray: dateArrayRef,
     monthArray: monthArrayRef,
@@ -568,7 +560,10 @@ function useCalendar(
     handleSingleShortcutClick,
     ...validation,
     ...panelCommon,
-    ...childComponentRefs,
+    // reduce dts: string ref only, type unused in render
+    monthScrollbarRef: monthScrollbarRef as unknown,
+    yearScrollbarRef: yearScrollbarRef as unknown,
+    yearVlRef: yearVlRef as unknown,
     // datetime only
     handleDateClick,
     handleDateInputBlur,

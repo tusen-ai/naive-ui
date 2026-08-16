@@ -80,6 +80,10 @@ function onClickoutside() {
   message.info('clickoutside')
   showDropdown.value = false
 }
+
+function handleUpdateShow(show: boolean) {
+  showDropdown.value = show
+}
 </script>
 
 <template>
@@ -97,7 +101,7 @@ function onClickoutside() {
     :options="options"
     :show="showDropdown"
     :on-clickoutside="onClickoutside"
-    @update:show="(v) => (showDropdown = v)"
+    @update:show="handleUpdateShow"
     @select="handleSelect"
   />
 </template>

@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { commonLight } from '../../_styles/common'
 
@@ -10,13 +10,19 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type IconWrapperThemeVars = ReturnType<typeof self>
+export interface IconWrapperThemeVars extends ReturnType<typeof self> {}
 
-const iconWrapperLight: Theme<'IconWrapper', IconWrapperThemeVars> = {
+const iconWrapperLight: IconWrapperTheme = {
   name: 'IconWrapper',
   common: commonLight,
   self
 }
 
+export interface IconWrapperTheme extends Theme<
+  'IconWrapper',
+  IconWrapperThemeVars
+> {}
+
+export interface IconWrapperThemeOverrides extends ExtractThemeOverrides<IconWrapperTheme> {}
+
 export default iconWrapperLight
-export type IconWrapperTheme = typeof iconWrapperLight

@@ -1,7 +1,7 @@
-import type { PropType } from 'vue'
+import type { CSSProperties, PropType, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { TypographyTheme } from '../styles'
+import type { TypographyTheme, TypographyThemeOverrides } from '../styles'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { createKey } from '../../_utils'
@@ -9,7 +9,7 @@ import { typographyLight } from '../styles'
 import style from './styles/header.cssr'
 
 export const headerProps = {
-  ...(useTheme.props as ThemeProps<TypographyTheme>),
+  ...(useTheme.props as ThemeProps<TypographyTheme, TypographyThemeOverrides>),
   type: {
     type: String as PropType<
       'info' | 'success' | 'warning' | 'error' | 'default'
@@ -71,7 +71,9 @@ export default (level: '1' | '2' | '3' | '4' | '5' | '6') =>
         : undefined
       return {
         mergedClsPrefix: mergedClsPrefixRef,
-        cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+        cssVars: inlineThemeDisabled
+          ? undefined
+          : (cssVarsRef as Ref<CSSProperties>),
         themeClass: themeClassHandle?.themeClass,
         onRender: themeClassHandle?.onRender
       }

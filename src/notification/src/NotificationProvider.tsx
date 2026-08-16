@@ -1,7 +1,7 @@
 import type { CSSProperties, ExtractPropTypes, PropType, Ref } from 'vue'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, Mutable } from '../../_utils'
-import type { NotificationTheme } from '../styles'
+import type { NotificationTheme, NotificationThemeOverrides } from '../styles'
 import type { NotificationOptions } from './NotificationEnvironment'
 import { createId } from 'seemly'
 import {
@@ -22,12 +22,7 @@ import { NotificationEnvironment } from './NotificationEnvironment'
 import style from './styles/index.cssr'
 
 export type NotificationPlacement
-  = | 'top-left'
-    | 'top-right'
-    | 'bottom-left'
-    | 'bottom-right'
-    | 'top'
-    | 'bottom'
+  = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'top' | 'bottom'
 
 export interface NotificationProviderInjection {
   props: ExtractPropTypes<typeof notificationProviderProps>
@@ -73,7 +68,10 @@ interface NotificationRef {
 }
 
 export const notificationProviderProps = {
-  ...(useTheme.props as ThemeProps<NotificationTheme>),
+  ...(useTheme.props as ThemeProps<
+    NotificationTheme,
+    NotificationThemeOverrides
+  >),
   containerClass: String,
   containerStyle: [String, Object] as PropType<string | CSSProperties>,
   to: [String, Object] as PropType<string | HTMLElement>,

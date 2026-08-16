@@ -1,7 +1,7 @@
-import type { Component, PropType } from 'vue'
+import type { Component, CSSProperties, PropType, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { IconTheme } from '../styles'
+import type { IconTheme, IconThemeOverrides } from '../styles'
 import { computed, defineComponent, h, mergeProps } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { formatLength, warn } from '../../_utils'
@@ -11,7 +11,7 @@ import style from './styles/index.cssr'
 export type Depth = 1 | 2 | 3 | 4 | 5 | '1' | '2' | '3' | '4' | '5' | undefined
 
 export const iconProps = {
-  ...(useTheme.props as ThemeProps<IconTheme>),
+  ...(useTheme.props as ThemeProps<IconTheme, IconThemeOverrides>),
   depth: [String, Number] as PropType<Depth>,
   size: [Number, String] as PropType<number | string>,
   color: String,
@@ -72,7 +72,9 @@ export const NIcon = defineComponent({
           color
         }
       }),
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }
@@ -98,7 +100,7 @@ export const NIcon = defineComponent({
         ],
         style: [this.cssVars, this.mergedStyle]
       }),
-      component ? h(component) : this.$slots
+      component ? h(component) : this.$slots.default?.()
     )
   }
 })

@@ -117,7 +117,8 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       selfElRef,
       submenuInstRefs,
-      maskInstRef,
+      // reduce dts: string ref only, type unused in render
+      maskInstRef: maskInstRef as unknown,
       mergedTheme: mergedThemeRef,
       mergedRenderEmpty: computed(() => {
         return mergedComponentPropsRef?.value?.Cascader?.renderEmpty
@@ -201,7 +202,7 @@ export default defineComponent({
                 [
                   clickoutside,
                   this.handleClickOutside,
-                  undefined as unknown as string,
+                  undefined,
                   { capture: true }
                 ]
               ]

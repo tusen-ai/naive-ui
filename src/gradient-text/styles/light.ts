@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { changeColor } from 'seemly'
 import { commonLight } from '../../_styles/common'
@@ -28,13 +28,19 @@ function self(vars: ThemeCommonVars) {
   }
 }
 
-export type GradientTextThemeVars = ReturnType<typeof self>
+export interface GradientTextThemeVars extends ReturnType<typeof self> {}
 
-const gradientTextLight: Theme<'GradientText', GradientTextThemeVars> = {
+const gradientTextLight: GradientTextTheme = {
   name: 'GradientText',
   common: commonLight,
   self
 }
 
+export interface GradientTextTheme extends Theme<
+  'GradientText',
+  GradientTextThemeVars
+> {}
+
+export interface GradientTextThemeOverrides extends ExtractThemeOverrides<GradientTextTheme> {}
+
 export default gradientTextLight
-export type GradientTextTheme = typeof gradientTextLight

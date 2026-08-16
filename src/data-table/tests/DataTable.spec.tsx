@@ -259,6 +259,107 @@ describe('n-data-table', () => {
     wrapper.unmount()
   })
 
+  describe('getFilteredAndSortedData and getCurrentPageData', () => {
+    interface Row {
+      name: string
+      age: number
+      address: string
+    }
+    const columns: DataTableColumns<Row> = [
+      {
+        title: 'Name',
+        key: 'name'
+      },
+      {
+        title: 'Age',
+        key: 'age',
+        sorter: (a, b) => a.age - b.age
+      },
+      {
+        title: 'Address',
+        key: 'address',
+        filter(value: any, row) {
+          return row.address.includes(value as string)
+        }
+      }
+    ]
+    const data: Row[] = [
+      {
+        name: 'John Brown',
+        age: 32,
+        address: 'New York No. 1 Lake Park'
+      },
+      {
+        name: 'Jim Green',
+        age: 42,
+        address: 'London No. 1 Lake Park'
+      },
+      {
+        name: 'Joe Black',
+        age: 32,
+        address: 'London No. 2 Lake Park'
+      },
+      {
+        name: 'Jim Red',
+        age: 32,
+        address: 'Sidney No. 1 Lake Park'
+      }
+    ]
+    const tableRef = ref<DataTableInst | null>(null)
+    let wrapper: ReturnType<typeof mount>
+
+    beforeEach(() => {
+      wrapper = mount(
+        () => (
+          <NDataTable
+            ref={tableRef}
+            columns={columns}
+            data={data}
+            pagination={{ pageSize: 1 }}
+          />
+        ),
+        {
+          attachTo: document.body
+        }
+      )
+    })
+
+    afterEach(() => {
+      wrapper.unmount()
+    })
+
+    it('should return filtered full data and current page data separately', async () => {
+      expect(tableRef.value).not.toEqual(null)
+      tableRef.value!.filter({
+        address: 'London'
+      })
+      await nextTick()
+      expect(
+        tableRef.value!.getFilteredAndSortedData().map(row => row.name)
+      ).toEqual(['Jim Green', 'Joe Black'])
+      expect(
+        tableRef.value!.getCurrentPageData().map(row => row.name)
+      ).toEqual(['Jim Green'])
+      expect(tableRef.value!.getFilteredAndSortedData().length).toEqual(2)
+      expect(tableRef.value!.getCurrentPageData().length).toEqual(1)
+    })
+
+    it('should reflect sort order in filtered data and current page data', async () => {
+      expect(tableRef.value).not.toEqual(null)
+      tableRef.value!.filter({
+        address: 'London'
+      })
+      tableRef.value!.sort('age', 'descend')
+      await nextTick()
+      expect(
+        tableRef.value!.getFilteredAndSortedData().map(row => row.name)
+      ).toEqual(['Jim Green', 'Joe Black'])
+      expect(
+        tableRef.value!.getCurrentPageData().map(row => row.name)
+      ).toEqual(['Jim Green'])
+    })
+  })
+
   describe('should work with multiple sorter', () => {
     interface UserData {
       name: string
@@ -1062,6 +1163,178 @@ describe('props.columns', () => {
       'text-overflow: ellipsis'
     )
     wrapper.unmount()
+  })
+
+  describe('empty state', () => {
+    const columns: DataTableColumns = [
+      {
+        title: 'Name',
+        key: 'name',
+        width: 100
+      }
+    ]
+    const ellipsisColumns: DataTableColumns = [
+      {
+        title: 'Name',
+        key: 'name',
+        width: 100,
+        ellipsis: {
+          tooltip: true
+        }
+      }
+    ]
+
+    function expectHeaderAndEmpty(
+      wrapper: ReturnType<typeof mount>,
+      options: {
+        discreteHeader?: boolean
+        stickyEmpty?: boolean
+      } = {}
+    ): void {
+      const { discreteHeader = false, stickyEmpty = false } = options
+      expect(wrapper.find('thead').exists()).toBe(true)
+      expect(wrapper.find('thead [data-col-key="name"]').exists()).toBe(true)
+      expect(wrapper.find('.n-data-table-empty').exists()).toBe(true)
+      expect(wrapper.find('.n-data-table-base-table-header').exists()).toBe(
+        discreteHeader
+      )
+      const emptyStyle
+        = wrapper.find('.n-data-table-empty').attributes('style') || ''
+      if (stickyEmpty) {
+        expect(emptyStyle).toContain('position: sticky')
+      }
+      else {
+        expect(emptyStyle).not.toContain('position: sticky')
+      }
+    }
+
+    it('should show header and empty with default props', () => {
+      const wrapper = mount(() => <NDataTable columns={columns} data={[]} />)
+      // auto layout empty tables are treated as x-scrollable
+      expectHeaderAndEmpty(wrapper, { stickyEmpty: true })
+      wrapper.unmount()
+    })
+
+    it('should show header with empty data when `ellipsis` is set', () => {
+      const wrapper = mount(() => (
+        <NDataTable columns={ellipsisColumns} data={[]} />
+      ))
+      expectHeaderAndEmpty(wrapper)
+      wrapper.unmount()
+    })
+
+    it('should show header with empty data when `table-layout` is `fixed`', () => {
+      const wrapper = mount(() => (
+        <NDataTable columns={columns} data={[]} table-layout="fixed" />
+      ))
+      expectHeaderAndEmpty(wrapper)
+      wrapper.unmount()
+    })
+
+    it('should show header with empty data when `scroll-x` is set', () => {
+      const wrapper = mount(() => (
+        <NDataTable columns={columns} data={[]} scroll-x={1800} />
+      ))
+      expectHeaderAndEmpty(wrapper, { stickyEmpty: true })
+      wrapper.unmount()
+    })
+
+    it('should show discrete header with empty data when `max-height` is set', () => {
+      const wrapper = mount(() => (
+        <NDataTable columns={columns} data={[]} max-height={300} />
+      ))
+      expectHeaderAndEmpty(wrapper, { discreteHeader: true })
+      wrapper.unmount()
+    })
+
+    it('should show discrete header with empty data when `flex-height` is set', () => {
+      const wrapper = mount(() => (
+        <div style="height: 300px">
+          <NDataTable columns={columns} data={[]} flex-height />
+        </div>
+      ))
+      expectHeaderAndEmpty(wrapper, { discreteHeader: true })
+      wrapper.unmount()
+    })
+
+    it('should show header with empty data when `min-height` is set', () => {
+      const wrapper = mount(() => (
+        <NDataTable columns={columns} data={[]} min-height={300} />
+      ))
+      expectHeaderAndEmpty(wrapper, { stickyEmpty: true })
+      expect(wrapper.find('.n-data-table-empty').attributes('style')).toContain(
+        'min-height'
+      )
+      wrapper.unmount()
+    })
+
+    it('should show discrete header with empty data when `ellipsis` and `max-height` are set', () => {
+      const wrapper = mount(() => (
+        <NDataTable columns={ellipsisColumns} data={[]} max-height={300} />
+      ))
+      expectHeaderAndEmpty(wrapper, { discreteHeader: true })
+      wrapper.unmount()
+    })
+
+    it('should show header with empty data when `ellipsis` and `scroll-x` are set', () => {
+      const wrapper = mount(() => (
+        <NDataTable columns={ellipsisColumns} data={[]} scroll-x={1800} />
+      ))
+      expectHeaderAndEmpty(wrapper, { stickyEmpty: true })
+      wrapper.unmount()
+    })
+
+    it('should show discrete header with empty data when `scroll-x` and `max-height` are set', () => {
+      const wrapper = mount(() => (
+        <NDataTable
+          columns={columns}
+          data={[]}
+          scroll-x={1800}
+          max-height={300}
+        />
+      ))
+      expectHeaderAndEmpty(wrapper, {
+        discreteHeader: true,
+        stickyEmpty: true
+      })
+      wrapper.unmount()
+    })
+
+    it('should show discrete header with empty data when `ellipsis`, `scroll-x` and `max-height` are set', () => {
+      const wrapper = mount(() => (
+        <NDataTable
+          columns={ellipsisColumns}
+          data={[]}
+          scroll-x={1800}
+          max-height={300}
+        />
+      ))
+      expectHeaderAndEmpty(wrapper, {
+        discreteHeader: true,
+        stickyEmpty: true
+      })
+      wrapper.unmount()
+    })
+
+    it('should show header with empty data when `virtual-scroll` is set', () => {
+      const wrapper = mount(() => (
+        <NDataTable columns={columns} data={[]} virtual-scroll />
+      ))
+      // virtual list is disabled while empty, header stays in body
+      expectHeaderAndEmpty(wrapper)
+      wrapper.unmount()
+    })
+
+    it('should hide empty content when `loading` is set', () => {
+      const wrapper = mount(() => (
+        <NDataTable columns={columns} data={[]} loading />
+      ))
+      expectHeaderAndEmpty(wrapper, { stickyEmpty: true })
+      expect(wrapper.find('.n-data-table-empty').classes()).toContain(
+        'n-data-table-empty--hide'
+      )
+      wrapper.unmount()
+    })
   })
 
   it('should work with `children` prop', async () => {

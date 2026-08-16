@@ -3,7 +3,7 @@ import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/public-types'
 import type { InputInst } from '../../input'
-import type { InputNumberTheme } from '../styles'
+import type { InputNumberTheme, InputNumberThemeOverrides } from '../styles'
 import type { InputNumberInst, OnUpdateValue, Size } from './interface'
 import { on } from 'evtd'
 import { rgba } from 'seemly'
@@ -33,7 +33,10 @@ const HOLDING_CHANGE_THRESHOLD = 800
 const HOLDING_CHANGE_INTERVAL = 100
 
 export const inputNumberProps = {
-  ...(useTheme.props as ThemeProps<InputNumberTheme>),
+  ...(useTheme.props as ThemeProps<
+    InputNumberTheme,
+    InputNumberThemeOverrides
+  >),
   autofocus: Boolean,
   loading: {
     type: Boolean,
@@ -618,9 +621,10 @@ export default defineComponent({
     return {
       ...exposedMethods,
       rtlEnabled: rtlEnabledRef,
-      inputInstRef,
-      minusButtonInstRef,
-      addButtonInstRef,
+      // reduce dts: string ref only, type unused in render
+      inputInstRef: inputInstRef as unknown,
+      minusButtonInstRef: minusButtonInstRef as unknown,
+      addButtonInstRef: addButtonInstRef as unknown,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
       uncontrolledValue: uncontrolledValueRef,

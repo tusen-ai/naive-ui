@@ -1,4 +1,4 @@
-import type { CSSProperties, SlotsType } from 'vue'
+import type { CSSProperties, Ref, SlotsType } from 'vue'
 import type {
   CsvOptionsType,
   DataTableInst,
@@ -125,6 +125,7 @@ export default defineComponent({
       mergedCurrentPageRef,
       paginatedDataRef,
       rawPaginatedDataRef,
+      rawSortedDataRef,
       selectionColumnRef,
       hoverKeyRef,
       mergedPaginationRef,
@@ -143,6 +144,8 @@ export default defineComponent({
       page,
       sort
     } = useTableData(props, { dataRelatedColsRef })
+
+    const mergedEmptyRef = computed(() => paginatedDataRef.value.length === 0)
 
     const downloadCsv = (options?: CsvOptionsType): void => {
       const { fileName = 'data.csv', keepOriginalData = false } = options || {}
@@ -328,6 +331,12 @@ export default defineComponent({
       downloadCsv,
       scrollTo: (arg0: any, arg1?: any) => {
         mainTableInstRef.value?.scrollTo(arg0, arg1)
+      },
+      getFilteredAndSortedData: () => {
+        return rawSortedDataRef.value
+      },
+      getCurrentPageData: () => {
+        return rawPaginatedDataRef.value
       }
     }
     const cssVarsRef = computed(() => {
@@ -457,7 +466,8 @@ export default defineComponent({
       )
     })
     return {
-      mainTableInstRef,
+      // reduce dts: string ref only, type unused in render
+      mainTableInstRef: mainTableInstRef as unknown,
       mergedClsPrefix: mergedClsPrefixRef,
       rtlEnabled: rtlEnabledRef,
       mergedTheme: themeRef,
@@ -466,9 +476,12 @@ export default defineComponent({
       mergedBottomBordered: mergedBottomBorderedRef,
       mergedPagination: mergedPaginationRef,
       mergedShowPagination: mergedShowPaginationRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
+      mergedEmpty: mergedEmptyRef,
       ...exposedMethods
     }
   },
@@ -488,7 +501,8 @@ export default defineComponent({
             [`${mergedClsPrefix}-data-table--single-line`]: this.singleLine,
             [`${mergedClsPrefix}-data-table--single-column`]: this.singleColumn,
             [`${mergedClsPrefix}-data-table--loading`]: this.loading,
-            [`${mergedClsPrefix}-data-table--flex-height`]: this.flexHeight
+            [`${mergedClsPrefix}-data-table--flex-height`]: this.flexHeight,
+            [`${mergedClsPrefix}-data-table--empty`]: this.mergedEmpty
           }
         ]}
         style={this.cssVars as CSSProperties}

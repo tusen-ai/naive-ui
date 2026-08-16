@@ -1,7 +1,7 @@
-import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { SpinTheme } from '../styles'
+import type { SpinTheme, SpinThemeOverrides } from '../styles'
 import { pxfy } from 'seemly'
 import { useCompitable } from 'vooks'
 import { computed, defineComponent, h, ref, Transition, watchEffect } from 'vue'
@@ -19,7 +19,7 @@ const STROKE_WIDTH = {
 }
 
 export const spinProps = {
-  ...(useTheme.props as ThemeProps<SpinTheme>),
+  ...(useTheme.props as ThemeProps<SpinTheme, SpinThemeOverrides>),
   contentClass: String,
   contentStyle: [Object, String] as PropType<CSSProperties | string>,
   description: String,
@@ -43,7 +43,8 @@ export const spinProps = {
     default: undefined
   },
   delay: Number,
-  ...exposedLoadingProps
+  ...exposedLoadingProps,
+  strokeWidth: Number
 }
 
 export type SpinProps = ExtractPublicPropTypes<typeof spinProps>
@@ -139,7 +140,9 @@ export default defineComponent({
         const { size } = props
         return STROKE_WIDTH[typeof size === 'number' ? 'medium' : size]
       }),
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }
@@ -193,7 +196,7 @@ export default defineComponent({
           ]}
           style={this.contentStyle}
         >
-          {$slots}
+          {$slots.default?.()}
         </div>
         <Transition name="fade-in-transition">
           {{

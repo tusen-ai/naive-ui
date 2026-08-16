@@ -1,8 +1,8 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { CSSProperties, ExtractPropTypes, PropType, Ref } from 'vue'
 import type { ScrollbarInst, ScrollbarProps } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { LayoutTheme } from '../styles'
+import type { LayoutTheme, LayoutThemeOverrides } from '../styles'
 import type { LayoutInst } from './interface'
 import { computed, defineComponent, h, provide, ref } from 'vue'
 import { NScrollbar } from '../../_internal'
@@ -42,7 +42,7 @@ export function createLayoutComponent(isContent: boolean) {
   return defineComponent({
     name: isContent ? 'LayoutContent' : 'Layout',
     props: {
-      ...(useTheme.props as ThemeProps<LayoutTheme>),
+      ...(useTheme.props as ThemeProps<LayoutTheme, LayoutThemeOverrides>),
       ...layoutProps
     },
     setup(props) {
@@ -129,11 +129,14 @@ export function createLayoutComponent(isContent: boolean) {
       return {
         mergedClsPrefix: mergedClsPrefixRef,
         scrollableElRef,
-        scrollbarInstRef,
+        // reduce dts: string ref only, type unused in render
+        scrollbarInstRef: scrollbarInstRef as unknown,
         hasSiderStyle,
         mergedTheme: themeRef,
         handleNativeElScroll,
-        cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+        cssVars: inlineThemeDisabled
+          ? undefined
+          : (cssVarsRef as Ref<CSSProperties>),
         themeClass: themeClassHandle?.themeClass,
         onRender: themeClassHandle?.onRender,
         ...exposedMethods
@@ -161,7 +164,7 @@ export function createLayoutComponent(isContent: boolean) {
               style={[this.contentStyle, hasSiderStyle] as any}
               onScroll={this.handleNativeElScroll}
             >
-              {this.$slots}
+              {this.$slots.default?.()}
             </div>
           ) : (
             <NScrollbar

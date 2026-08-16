@@ -1,6 +1,10 @@
+import type {
+  UploadCustomRequestOptions,
+  UploadFileInfo
+} from '../src/public-types'
 import { mount } from '@vue/test-utils'
 import { sleep } from 'seemly'
-import { h } from 'vue'
+import { h, ref } from 'vue'
 import { NButton } from '../../button'
 import { NButtonGroup } from '../../button-group'
 import { NCard } from '../../card'
@@ -99,6 +103,28 @@ describe('n-upload', () => {
     expect(wrapper.findAll('.n-upload-file--image-card-type').length).toBe(1)
     expect(wrapper.findAll('.n-upload-trigger--image-card').length).toBe(1)
     expect(wrapper.findAll('.n-upload-dragger').length).toBe(1)
+  })
+
+  it('should work with `always-show-actions` prop', async () => {
+    const wrapper = mount(NUpload, {
+      props: {
+        alwaysShowActions: true,
+        listType: 'image-card',
+        defaultFileList: [
+          {
+            id: 'a',
+            name: 'a.png',
+            status: 'finished',
+            url: 'https://example.com/a.png'
+          }
+        ]
+      }
+    })
+    const file = wrapper.find('.n-upload-file')
+    expect(file.classes()).toContain('n-upload-file--always-show-actions')
+    expect(
+      wrapper.find('.n-upload-file-info__action--always-show').exists()
+    ).toBe(true)
   })
 
   it('should work with `create-thumbnail-url` prop', async () => {
@@ -295,6 +321,90 @@ describe('n-upload', () => {
     const triggerDisabledElement = wrapper.find('.n-upload-trigger--disabled')
 
     expect(triggerDisabledElement.exists()).toBe(true)
+  })
+  it('should work with custom-request sync onError for multiple files', async () => {
+    // Regression test for issue #7366:
+    // custom-request synchronous onError should mark ALL files as error,
+    // not just the last one.
+    const onUpdateFileList = vi.fn()
+    const wrapper = mount(NUpload, {
+      props: {
+        multiple: true,
+        customRequest: ({ onError }: UploadCustomRequestOptions) => {
+          onError()
+        },
+        'onUpdate:fileList': onUpdateFileList
+      }
+    })
+    const input = wrapper.find('input')
+    getMockFile(input.element, [
+      new File(['index'], 'file1.txt'),
+      new File(['index'], 'file2.txt'),
+      new File(['index'], 'file3.txt')
+    ])
+    await input.trigger('change')
+    await sleep(0)
+    expect(wrapper.findAll('.n-upload-file').length).toBe(3)
+    const lastCallArgs
+      = onUpdateFileList.mock.calls[onUpdateFileList.mock.calls.length - 1]
+    const files = lastCallArgs[0] as UploadFileInfo[]
+    expect(files.length).toBe(3)
+    expect(files.every(f => f.status === 'error')).toBe(true)
+  })
+  it('should work with controlled file-list custom-request sync onError for multiple files', async () => {
+    const files = ref<UploadFileInfo[]>([])
+    const wrapper = mount(NUpload, {
+      props: {
+        multiple: true,
+        fileList: files.value,
+        'onUpdate:fileList': (v: UploadFileInfo[]) => {
+          files.value = v
+          wrapper.setProps({ fileList: v })
+        },
+        customRequest: ({ onError }: UploadCustomRequestOptions) => {
+          onError()
+        }
+      }
+    })
+    const input = wrapper.find('input')
+    getMockFile(input.element, [
+      new File(['index'], 'file1.txt'),
+      new File(['index'], 'file2.txt'),
+      new File(['index'], 'file3.txt')
+    ])
+    await input.trigger('change')
+    await sleep(0)
+    expect(wrapper.findAll('.n-upload-file').length).toBe(3)
+    expect(files.value.length).toBe(3)
+    expect(files.value.every(f => f.status === 'error')).toBe(true)
+  })
+  it('should work with controlled file-list custom-request retry', async () => {
+    const initialFile: UploadFileInfo = {
+      id: 'existing-1',
+      name: 'file1.txt',
+      status: 'error',
+      percentage: 0,
+      file: new File(['index'], 'file1.txt')
+    }
+    const files = ref<UploadFileInfo[]>([initialFile])
+    const onUpdateFileList = vi.fn()
+    const wrapper = mount(NUpload, {
+      props: {
+        fileList: files.value,
+        'onUpdate:fileList': (v: UploadFileInfo[]) => {
+          onUpdateFileList(v)
+          files.value = v
+          wrapper.setProps({ fileList: v })
+        },
+        customRequest: ({ onFinish }: UploadCustomRequestOptions) => {
+          onFinish()
+        }
+      }
+    })
+    wrapper.vm.submit({ fileId: 'existing-1', retry: true })
+    await sleep(0)
+    expect(onUpdateFileList).toHaveBeenCalled()
+    expect(files.value[0]?.status).toBe('finished')
   })
 })
 

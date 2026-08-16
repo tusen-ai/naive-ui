@@ -1,8 +1,15 @@
-import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type {
+  CSSProperties,
+  PropType,
+  Ref,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { InputInst, InputProps } from '../../input'
-import type { DynamicTagsTheme } from '../styles'
+import type { DynamicTagsTheme, DynamicTagsThemeOverrides } from '../styles'
 import type {
   DynamicTagsInputSlotProps,
   DynamicTagsOption,
@@ -41,7 +48,10 @@ import { dynamicTagsLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const dynamicTagsProps = {
-  ...(useTheme.props as ThemeProps<DynamicTagsTheme>),
+  ...(useTheme.props as ThemeProps<
+    DynamicTagsTheme,
+    DynamicTagsThemeOverrides
+  >),
   ...commonProps,
   size: String as PropType<DynamicTagsSize>,
   closable: {
@@ -161,6 +171,8 @@ export default defineComponent({
       doChange(tags)
     }
     function handleInputKeyDown(e: KeyboardEvent): void {
+      if (inputInstRef.value?.isCompositing)
+        return
       switch (e.key) {
         case 'Enter':
           handleInputConfirm()
@@ -200,7 +212,8 @@ export default defineComponent({
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      inputInstRef,
+      // reduce dts: string ref only, type unused in render
+      inputInstRef: inputInstRef as unknown,
       localizedAdd: localizedAddRef,
       inputSize: inputSizeRef,
       mergedSize: mergedSizeRef,
@@ -216,7 +229,9 @@ export default defineComponent({
       handleCloseClick,
       handleInputConfirm,
       mergedTheme: themeRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

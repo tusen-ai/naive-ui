@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { commonLight } from '../../_styles/common'
 
@@ -11,13 +11,19 @@ function self(vars: ThemeCommonVars) {
   }
 }
 
-export type LoadingBarThemeVars = ReturnType<typeof self>
+export interface LoadingBarThemeVars extends ReturnType<typeof self> {}
 
-const loadingBarLight: Theme<'LoadingBar', LoadingBarThemeVars> = {
+const loadingBarLight: LoadingBarTheme = {
   name: 'LoadingBar',
   common: commonLight,
   self
 }
 
+export interface LoadingBarTheme extends Theme<
+  'LoadingBar',
+  LoadingBarThemeVars
+> {}
+
+export interface LoadingBarThemeOverrides extends ExtractThemeOverrides<LoadingBarTheme> {}
+
 export default loadingBarLight
-export type LoadingBarTheme = typeof loadingBarLight

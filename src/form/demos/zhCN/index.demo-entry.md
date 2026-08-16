@@ -104,7 +104,7 @@ feedback-style.vue
 
 | 名称 | 类型 | 说明 | 版本 |
 | --- | --- | --- | --- |
-| validate | `(validateCallback?: (errors: Array<FormValidationError> \| undefined, extra: { warnings: Array<FormValidationError> \| undefined }) => void, shouldRuleBeApplied?: FormItemRule => boolean) => Promise<{ warnings: Array<FormValidationError> \| undefined }>` | 验证表单，Promise rejection 的返回值类型是 `Array<FormValidationError>` | `warnings` `2.37.1` |
+| validate | `(validateCallback?: (errors: Array<FormValidationError> \| undefined, extra: { warnings: Array<FormValidationError> \| undefined }) => void, filter?: ((rule: FormItemRule) => boolean) \| Array<string> \| { paths: Array<string>, shouldRuleBeApplied: (rule: FormItemRule) => boolean }) => Promise<{ warnings: Array<FormValidationError> \| undefined }>` | 验证表单。传入字段路径可校验匹配的表项，传入对象可同时过滤表项和规则；路径与表项的 `path` 精确匹配。Promise rejection 的返回值类型是 `Array<FormValidationError>` | `warnings` `2.37.1`，path 过滤 `2.45.0` |
 | restoreValidation | `() => void` | 还原到未校验的状态 |  |
 | invalidateLabelWidth | `() => void` | 重新计算所有表项的标签宽度。在使用 `label-width="auto"` 且标签内容动态变化时有用 | NEXT_VESION |
 

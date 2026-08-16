@@ -177,6 +177,22 @@ describe('n-card', () => {
     wrapper.unmount()
   })
 
+  it('should work with `content-scrollable` prop', async () => {
+    const wrapper = mount(NCard, {
+      props: {
+        contentScrollable: true
+      },
+      slots: {
+        default: () => 'scrollable content'
+      }
+    })
+
+    expect(wrapper.find('.n-card--content-scrollable').exists()).toBe(true)
+    expect(wrapper.find('.n-card__content-scrollbar').exists()).toBe(true)
+    expect(wrapper.find('.n-card-content').text()).toBe('scrollable content')
+    wrapper.unmount()
+  })
+
   it('should work with `header-extra-style` prop', async () => {
     const testStyle = 'padding: 0px;'
     const wrapper = mount(NCard, {
@@ -191,6 +207,178 @@ describe('n-card', () => {
 
     expect(wrapper.find('.n-card-header__extra').attributes('style')).toContain(
       testStyle
+    )
+    wrapper.unmount()
+  })
+
+  it('should work with `header-class` prop', async () => {
+    const wrapper = mount(NCard, {
+      props: {
+        title: 'test',
+        headerClass: 'custom-header-class'
+      }
+    })
+
+    expect(wrapper.find('.n-card-header').classes()).toContain(
+      'custom-header-class'
+    )
+    wrapper.unmount()
+  })
+
+  it('should work with `content-class` prop', async () => {
+    const wrapper = mount(NCard, {
+      props: {
+        contentClass: 'custom-content-class'
+      },
+      slots: {
+        default: () => 'test'
+      }
+    })
+
+    expect(wrapper.find('.n-card-content').classes()).toContain(
+      'custom-content-class'
+    )
+    wrapper.unmount()
+  })
+
+  it('should work with `footer-class` prop', async () => {
+    const wrapper = mount(NCard, {
+      props: {
+        footerClass: 'custom-footer-class'
+      },
+      slots: {
+        footer: () => 'test'
+      }
+    })
+
+    expect(wrapper.find('.n-card__footer').classes()).toContain(
+      'custom-footer-class'
+    )
+    wrapper.unmount()
+  })
+
+  it('should work with `header-extra-class` prop', async () => {
+    const wrapper = mount(NCard, {
+      props: {
+        headerExtraClass: 'custom-extra-class'
+      },
+      slots: {
+        header: () => 'header',
+        'header-extra': () => 'extra'
+      }
+    })
+
+    expect(wrapper.find('.n-card-header__extra').classes()).toContain(
+      'custom-extra-class'
+    )
+    wrapper.unmount()
+  })
+
+  it('should work with `content` prop', async () => {
+    const wrapper = mount(NCard, {
+      props: {
+        content: 'prop content'
+      }
+    })
+
+    expect(wrapper.find('.n-card-content').text()).toBe('prop content')
+    wrapper.unmount()
+  })
+
+  it('should work with `tag` prop', async () => {
+    const wrapper = mount(NCard, {
+      props: {
+        tag: 'section'
+      }
+    })
+
+    expect(wrapper.find('section.n-card').exists()).toBe(true)
+    wrapper.unmount()
+  })
+
+  it('should work with `role` prop', async () => {
+    const wrapper = mount(NCard, {
+      props: {
+        role: 'article'
+      }
+    })
+
+    expect(wrapper.find('.n-card').attributes('role')).toBe('article')
+    wrapper.unmount()
+  })
+
+  it('should work with `clickable` prop', async () => {
+    const onClick = vi.fn()
+    const wrapper = mount(NCard, {
+      props: {
+        clickable: true,
+        onClick
+      }
+    })
+
+    await wrapper.find('.n-card').trigger('click')
+    expect(onClick).toHaveBeenCalled()
+    wrapper.unmount()
+  })
+
+  it('should work with `close-focusable` prop', async () => {
+    const wrapper = mount(NCard, {
+      props: {
+        closable: true,
+        closeFocusable: false
+      }
+    })
+
+    const closeBtn = wrapper.find('.n-card-header__close')
+    expect(closeBtn.exists()).toBe(true)
+    wrapper.unmount()
+  })
+
+  it('should work with segmented as boolean', async () => {
+    const wrapper = mount(NCard, {
+      props: {
+        segmented: true
+      }
+    })
+
+    expect(wrapper.find('.n-card').classes()).toContain(
+      'n-card--content-segmented'
+    )
+    wrapper.unmount()
+  })
+
+  it('should work with segmented footer', async () => {
+    const wrapper = mount(NCard, {
+      props: {
+        segmented: {
+          footer: true
+        }
+      },
+      slots: {
+        footer: () => 'footer'
+      }
+    })
+
+    expect(wrapper.find('.n-card').classes()).toContain(
+      'n-card--footer-segmented'
+    )
+    wrapper.unmount()
+  })
+
+  it('should work with segmented action', async () => {
+    const wrapper = mount(NCard, {
+      props: {
+        segmented: {
+          action: true
+        }
+      },
+      slots: {
+        action: () => 'action'
+      }
+    })
+
+    expect(wrapper.find('.n-card').classes()).toContain(
+      'n-card--action-segmented'
     )
     wrapper.unmount()
   })

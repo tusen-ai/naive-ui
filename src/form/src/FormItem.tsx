@@ -4,13 +4,14 @@ import type {
   ExtractPropTypes,
   LabelHTMLAttributes,
   PropType,
+  Ref,
   Slot,
   SlotsType,
   VNodeChild
 } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { FormTheme } from '../styles'
+import type { FormTheme, FormThemeOverrides } from '../styles'
 import type {
   FormItemInst,
   FormItemInternalValidate,
@@ -56,7 +57,7 @@ import style from './styles/form-item.cssr'
 import { formItemMisc, formItemRule, formItemSize } from './utils'
 
 export const formItemProps = {
-  ...(useTheme.props as ThemeProps<FormTheme>),
+  ...(useTheme.props as ThemeProps<FormTheme, FormThemeOverrides>),
   label: String,
   labelWidth: [Number, String] as PropType<string | number>,
   labelStyle: [String, Object] as PropType<CSSProperties | string>,
@@ -536,7 +537,9 @@ export default defineComponent({
       ...formItemMiscRefs,
       ...formItemSizeRefs,
       ...exposedRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }
@@ -622,7 +625,7 @@ export default defineComponent({
           ]}
           style={this.contentStyle}
         >
-          {$slots}
+          {$slots.default?.()}
         </div>
         {this.mergedShowFeedback ? (
           <div

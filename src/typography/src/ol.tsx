@@ -1,14 +1,14 @@
-import type { CSSProperties } from 'vue'
+import type { CSSProperties, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { TypographyTheme } from '../styles'
+import type { TypographyTheme, TypographyThemeOverrides } from '../styles'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { typographyLight } from '../styles'
 import style from './styles/list.cssr'
 
 export const olProps = {
-  ...(useTheme.props as ThemeProps<TypographyTheme>),
+  ...(useTheme.props as ThemeProps<TypographyTheme, TypographyThemeOverrides>),
   alignText: Boolean
 }
 
@@ -54,7 +54,9 @@ export default defineComponent({
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }
@@ -71,7 +73,7 @@ export default defineComponent({
         ]}
         style={this.cssVars as CSSProperties}
       >
-        {this.$slots}
+        {this.$slots.default?.()}
       </ol>
     )
   }

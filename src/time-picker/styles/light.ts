@@ -1,4 +1,8 @@
+import type { ScrollbarTheme } from '../../_internal/scrollbar/styles'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
+import type { ButtonTheme } from '../../button/styles'
+import type { InputTheme } from '../../input/styles'
 import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import { createTheme } from '../../_mixins'
 import { commonLight } from '../../_styles/common'
@@ -35,9 +39,9 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type TimePickerThemeVars = ReturnType<typeof self>
+export interface TimePickerThemeVars extends ReturnType<typeof self> {}
 
-const timePickerLight = createTheme({
+const timePickerLight: TimePickerTheme = createTheme({
   name: 'TimePicker',
   common: commonLight,
   peers: {
@@ -48,5 +52,16 @@ const timePickerLight = createTheme({
   self
 })
 
+export interface TimePickerTheme extends Theme<
+  'TimePicker',
+  TimePickerThemeVars,
+  {
+    Scrollbar: ScrollbarTheme
+    Button: ButtonTheme
+    Input: InputTheme
+  }
+> {}
+
+export interface TimePickerThemeOverrides extends ExtractThemeOverrides<TimePickerTheme> {}
+
 export default timePickerLight
-export type TimePickerTheme = typeof timePickerLight

@@ -1,8 +1,8 @@
-import type { CSSProperties, InputHTMLAttributes, PropType } from 'vue'
+import type { CSSProperties, InputHTMLAttributes, PropType, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { ImageGroupProps } from '../../image'
-import type { UploadTheme } from '../styles'
+import type { UploadTheme, UploadThemeOverrides } from '../styles'
 import type {
   CreateThumbnailUrl,
   CustomRequest,
@@ -298,7 +298,7 @@ function submitImpl(
 }
 
 export const uploadProps = {
-  ...(useTheme.props as ThemeProps<UploadTheme>),
+  ...(useTheme.props as ThemeProps<UploadTheme, UploadThemeOverrides>),
   name: {
     type: String,
     default: 'file'
@@ -370,6 +370,7 @@ export const uploadProps = {
     type: Boolean,
     default: true
   },
+  alwaysShowActions: Boolean,
   listType: {
     type: String as PropType<ListType>,
     default: 'text'
@@ -509,6 +510,13 @@ export default defineComponent({
         warn('upload', 'File has no corresponding id in current file list.')
       }
     }
+    let customRequestDoChangeChain = Promise.resolve()
+    const scheduleDoChange: DoChange = (file, event, options) => {
+      customRequestDoChangeChain = customRequestDoChangeChain.then(async () => {
+        await nextTick()
+        doChange(file, event, options)
+      })
+    }
     function handleFileAddition(
       fileAndEntries: FileAndEntry[] | null,
       e?: Event
@@ -607,7 +615,7 @@ export default defineComponent({
           if (props.customRequest) {
             customSubmitImpl({
               inst: {
-                doChange,
+                doChange: scheduleDoChange,
                 xhrMap,
                 onFinish: props.onFinish,
                 onError: props.onError
@@ -723,6 +731,7 @@ export default defineComponent({
       submit,
       doChange,
       showPreviewButtonRef: toRef(props, 'showPreviewButton'),
+      alwaysShowActionsRef: toRef(props, 'alwaysShowActions'),
       onPreviewRef: toRef(props, 'onPreview'),
       getFileThumbnailUrlResolver,
       listTypeRef: toRef(props, 'listType'),
@@ -763,7 +772,9 @@ export default defineComponent({
       mergedTheme: themeRef,
       dragOver: dragOverRef,
       mergedMultiple: mergedMultipleRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       handleFileInputChange,

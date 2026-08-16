@@ -1,7 +1,7 @@
-import type { PropType } from 'vue'
+import type { CSSProperties, PropType, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { InputTheme } from '../styles'
+import type { InputTheme, InputThemeOverrides } from '../styles'
 import type { InputSize } from './public-types'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
@@ -10,7 +10,7 @@ import { inputLight } from '../styles'
 import style from './styles/input-group-label.cssr'
 
 export const inputGroupLabelProps = {
-  ...(useTheme.props as ThemeProps<InputTheme>),
+  ...(useTheme.props as ThemeProps<InputTheme, InputThemeOverrides>),
   size: String as PropType<InputSize>,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
@@ -89,7 +89,9 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       mergedBordered: mergedBorderedRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

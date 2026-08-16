@@ -8,8 +8,8 @@ export { useRtl } from './use-rtl'
 export { default as useStyle } from './use-style'
 export { createTheme, default as useTheme } from './use-theme'
 export type {
+  ExtractThemeOverrides,
   MergedTheme,
   Theme,
-  ThemeProps,
-  ThemePropsReactive
+  ThemeProps
 } from './use-theme'

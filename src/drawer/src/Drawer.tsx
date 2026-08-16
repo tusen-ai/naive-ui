@@ -1,8 +1,8 @@
-import type { CSSProperties, PropType } from 'vue'
+import type { CSSProperties, PropType, Ref } from 'vue'
 import type { ScrollbarProps } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { DrawerTheme } from '../styles'
+import type { DrawerTheme, DrawerThemeOverrides } from '../styles'
 import type { Placement } from './DrawerBodyWrapper'
 import { zindexable } from 'vdirs'
 import { useIsMounted, useMergedState } from 'vooks'
@@ -32,7 +32,7 @@ import { drawerInjectionKey } from './interface'
 import style from './styles/index.cssr'
 
 export const drawerProps = {
-  ...(useTheme.props as ThemeProps<DrawerTheme>),
+  ...(useTheme.props as ThemeProps<DrawerTheme, DrawerThemeOverrides>),
   show: Boolean,
   width: [Number, String] as PropType<string | number>,
   height: [Number, String] as PropType<string | number>,
@@ -331,7 +331,9 @@ export default defineComponent({
       handleMaskClick,
       handleEsc,
       mergedTheme: themeRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       isMounted: isMountedRef

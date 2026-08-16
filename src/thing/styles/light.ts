@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { commonLight } from '../../_styles/common'
 
@@ -12,13 +12,16 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type ThingThemeVars = ReturnType<typeof self>
+export interface ThingThemeVars extends ReturnType<typeof self> {}
 
-const thingLight: Theme<'Thing', ThingThemeVars> = {
+const thingLight: ThingTheme = {
   name: 'Thing',
   common: commonLight,
   self
 }
 
+export interface ThingTheme extends Theme<'Thing', ThingThemeVars> {}
+
+export interface ThingThemeOverrides extends ExtractThemeOverrides<ThingTheme> {}
+
 export default thingLight
-export type ThingTheme = typeof thingLight

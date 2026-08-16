@@ -1,4 +1,8 @@
+import type { ScrollbarTheme } from '../../_internal/scrollbar/styles'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
+import type { CardTheme } from '../../card/styles'
+import type { DialogTheme } from '../../dialog/styles'
 import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import { createTheme } from '../../_mixins'
 import { commonLight } from '../../_styles/common'
@@ -14,9 +18,9 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type ModalThemeVars = ReturnType<typeof self>
+export interface ModalThemeVars extends ReturnType<typeof self> {}
 
-const modalLight = createTheme({
+const modalLight: ModalTheme = createTheme({
   name: 'Modal',
   common: commonLight,
   peers: {
@@ -27,5 +31,16 @@ const modalLight = createTheme({
   self
 })
 
+export interface ModalTheme extends Theme<
+  'Modal',
+  ModalThemeVars,
+  {
+    Scrollbar: ScrollbarTheme
+    Dialog: DialogTheme
+    Card: CardTheme
+  }
+> {}
+
+export interface ModalThemeOverrides extends ExtractThemeOverrides<ModalTheme> {}
+
 export default modalLight
-export type ModalTheme = typeof modalLight

@@ -2,7 +2,7 @@ import type { SlotsType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { PopoverInst, PopoverSlots } from '../../popover'
-import type { TooltipTheme } from '../styles'
+import type { TooltipTheme, TooltipThemeOverrides } from '../styles'
 // Tooltip: popover wearing waistcoat
 import { computed, defineComponent, h, ref } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
@@ -14,7 +14,7 @@ export type TooltipInst = PopoverInst
 
 export const tooltipProps = {
   ...popoverBaseProps,
-  ...(useTheme.props as ThemeProps<TooltipTheme>)
+  ...(useTheme.props as ThemeProps<TooltipTheme, TooltipThemeOverrides>)
 }
 
 export type TooltipProps = ExtractPublicPropTypes<typeof tooltipProps>
@@ -47,7 +47,8 @@ export default defineComponent({
     }
     return {
       ...tooltipExposedMethod,
-      popoverRef,
+      // reduce dts: string ref only, type unused in render
+      popoverRef: popoverRef as unknown,
       mergedTheme: themeRef,
       popoverThemeOverrides: computed(() => {
         return themeRef.value.self

@@ -1,7 +1,7 @@
 import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { TagTheme } from '../styles'
+import type { TagTheme, TagThemeOverrides } from '../styles'
 import { getMargin } from 'seemly'
 import {
   computed,
@@ -35,7 +35,7 @@ export interface TagRef extends TagPublicMethods {
 }
 
 export const tagProps = {
-  ...(useTheme.props as ThemeProps<TagTheme>),
+  ...(useTheme.props as ThemeProps<TagTheme, TagThemeOverrides>),
   ...commonProps,
   bordered: {
     type: Boolean as PropType<boolean | undefined>,
@@ -258,7 +258,9 @@ export default defineComponent({
       mergedBordered: mergedBorderedRef,
       handleClick,
       handleCloseClick,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { commonLight } from '../../_styles/common'
 
@@ -16,13 +16,19 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type StatisticThemeVars = ReturnType<typeof self>
+export interface StatisticThemeVars extends ReturnType<typeof self> {}
 
-const statisticLight: Theme<'Statistic', StatisticThemeVars> = {
+const statisticLight: StatisticTheme = {
   name: 'Statistic',
   common: commonLight,
   self
 }
 
+export interface StatisticTheme extends Theme<
+  'Statistic',
+  StatisticThemeVars
+> {}
+
+export interface StatisticThemeOverrides extends ExtractThemeOverrides<StatisticTheme> {}
+
 export default statisticLight
-export type StatisticTheme = typeof statisticLight

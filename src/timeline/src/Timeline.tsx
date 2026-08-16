@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType, Ref } from 'vue'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { TimelineTheme } from '../styles'
+import type { TimelineTheme, TimelineThemeOverrides } from '../styles'
 import { defineComponent, h, provide } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
@@ -9,7 +9,7 @@ import { timelineLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const timelineProps = {
-  ...(useTheme.props as ThemeProps<TimelineTheme>),
+  ...(useTheme.props as ThemeProps<TimelineTheme, TimelineThemeOverrides>),
   horizontal: Boolean,
   itemPlacement: {
     type: String as PropType<'left' | 'right'>,
@@ -62,7 +62,7 @@ export default defineComponent({
             && `${mergedClsPrefix}-timeline--${props.itemPlacement}-placement`
           ]}
         >
-          {slots}
+          {slots.default?.()}
         </div>
       )
     }

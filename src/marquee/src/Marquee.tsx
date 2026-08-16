@@ -1,3 +1,4 @@
+import type { CSSProperties, Ref } from 'vue'
 import { repeat } from 'seemly'
 import { computed, defineComponent, h, nextTick, ref } from 'vue'
 import { VResizeObserver } from 'vueuc'
@@ -77,7 +78,7 @@ export default defineComponent({
 
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      animationCssVars: animationCssVarsRef,
+      animationCssVars: animationCssVarsRef as Ref<CSSProperties>,
       containerElRef,
       repeatCountInOneGroup: repeatCountInOneGroupRef,
       handleContainerResize,
@@ -100,14 +101,14 @@ export default defineComponent({
             <div
               class={`${mergedClsPrefix}-marquee__item ${mergedClsPrefix}-marquee__original-item`}
             >
-              {$slots}
+              {$slots.default?.()}
             </div>
           )
         }}
       </VResizeObserver>
     )
     const mirrorNode = (
-      <div class={`${mergedClsPrefix}-marquee__item`}>{$slots}</div>
+      <div class={`${mergedClsPrefix}-marquee__item`}>{$slots.default?.()}</div>
     )
     if (this.autoFill) {
       return (

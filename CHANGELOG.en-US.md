@@ -1,5 +1,57 @@
 # CHANGELOG
 
+## 2.45.0
+
+`2026-08-16`
+
+### Breaking Changes
+
+- Starting from this version, the package is built with vue-jsx-vapor. This is a significant change at the implementation level, but it is not expected to be breaking for end users: how you use naive-ui and how naive-ui behaves should remain the same. Being built with vue-jsx-vapor does not mean naive-ui ships as a native Vapor build; it is still VDOM-based. If you need to use naive-ui inside a pure Vapor app, you still need to enable interop. This version has been tested before release, but we cannot guarantee that no issues will arise. If you run into any related problems, please report them on GitHub and we will address them as soon as possible.
+
+### i18n
+
+- Add nnNO locale.
+- Update nbNO locale.
+- Translate `DatePicker.weekPlaceholder` in the Japanese locale.
+
+### Perf
+
+- Significantly reduce the size of emitted `.d.ts` files in the package.
+
+### Feats
+
+- `n-form`'s `validate` method supports filtering form items by path, closes [#7475](https://github.com/tusen-ai/naive-ui/issues/7475).
+- `n-input` adds the `colorHover` theme variable.
+- `n-checkbox-group` and `n-radio-group` add `options`, `label-field` and `value-field` props, closes [#7505](https://github.com/tusen-ai/naive-ui/issues/7505).
+- `n-upload` adds `always-show-actions` prop, closes [#8073](https://github.com/tusen-ai/naive-ui/issues/8073).
+- `n-image` adds `keep-drag-offset` prop, closes [#7544](https://github.com/tusen-ai/naive-ui/issues/7544).
+- `n-data-table` adds `getFilteredAndSortedData` and `getCurrentPageData` methods, closes [#8088](https://github.com/tusen-ai/naive-ui/issues/8088).
+- `n-tabs` adds `show-scroll-button` and `center-active-tab` props, closes [#5846](https://github.com/tusen-ai/naive-ui/issues/5846), [#2128](https://github.com/tusen-ai/naive-ui/issues/2128).
+- `n-tabs` adds `scrollToCurrentTab` method, closes [#7548](https://github.com/tusen-ai/naive-ui/issues/7548).
+- `n-tabs` supports RTL, `placement` adds `'start'` and `'end'`.
+- `n-rate` adds `on-update:hover-value` prop, closes [#8131](https://github.com/tusen-ai/naive-ui/issues/8131).
+- `n-collapse-transition` adds `display-directive` prop, closes [#6453](https://github.com/tusen-ai/naive-ui/issues/6453).
+
+### Fixes
+
+- Fix `n-modal` mask inside scrollbar causing `Blocked aria-hidden on an element because its descendant retained focus` warning, closes [#7556](https://github.com/tusen-ai/naive-ui/issues/7556).
+- Fix `n-color-picker` passed `style` and `click` (onClick) not applied to trigger, closes [#7528](https://github.com/tusen-ai/naive-ui/issues/7528).
+- Fix `n-data-table`'s `scrollTo` method type missing, closes [#7554](https://github.com/tusen-ai/naive-ui/issues/7554).
+- Fix `n-data-table`'s empty state not vertically centered when height is set, closes [#7546](https://github.com/tusen-ai/naive-ui/issues/7546).
+- fix(spin): preserve size-based strokeWidth defaults in NSpin, closes [#8061](https://github.com/tusen-ai/naive-ui/issues/8061)
+- Fix `n-upload` file status loss in controlled mode when calling `onError` synchronously in `custom-request` for multiple files, closes [#7366](https://github.com/tusen-ai/naive-ui/issues/7366)
+- Fix `n-image` error slot and fallbackSrc not working when `lazy` is enabled
+- Fix where the drag position of `n-modal` was reset during rendering.
+- Fix `n-tabs` bar transition disabled after nav resize, closes [#7406](https://github.com/tusen-ai/naive-ui/issues/7406).
+- Fix `vitest-setup.ts` being emitted into build outputs.
+- Fix `n-dynamic-tags` committing a tag when Enter is pressed to confirm an IME composition.
+- Fix `n-image` rendering the `placeholder` slot together with the `error` slot when the image fails to load, closes [#7526](https://github.com/tusen-ai/naive-ui/issues/7526).
+- Fix `n-space` `size` prop not taking effect when set to `0`, closes [#7530](https://github.com/tusen-ai/naive-ui/issues/7530).
+- Fix `n-date-picker` with `type="datetime"` emitting `update:value` twice when clearing from panel, closes [#8070](https://github.com/tusen-ai/naive-ui/issues/8070).
+- Fix `n-input-otp` only keeping the last character when browser extension autofill sets the full OTP value on a single input, closes [#7540](https://github.com/tusen-ai/naive-ui/pull/7540).
+- Fix `n-menu` item icons not centered in collapsed mode when the options contain a `type="group"` group, closes [#8105](https://github.com/tusen-ai/naive-ui/issues/8105).
+- Fix `n-data-table` not rendering the table header when data is empty and a column has `ellipsis` set, closes [#8118](https://github.com/tusen-ai/naive-ui/issues/8118).
+
 ## 2.44.1
 
 `2026-03-08`
@@ -11,6 +63,7 @@
 ### Fixes
 
 - `n-config-provider` fixes `size` prop doesn't work for some components.
+- Fix `n-card` internal scrollbar emits Non-function value encountered for default slot warning when `content-scrollable` is enabled, closes [#7556](https://github.com/tusen-ai/naive-ui/issues/7556).
 
 ## 2.44.0
 

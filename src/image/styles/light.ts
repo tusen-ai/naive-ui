@@ -1,3 +1,5 @@
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
+import type { TooltipTheme } from '../../tooltip/styles'
 import { createTheme } from '../../_mixins'
 import { commonLight } from '../../_styles/common'
 import { tooltipLight } from '../../tooltip/styles'
@@ -10,7 +12,7 @@ function self() {
     toolbarBorderRadius: '24px'
   }
 }
-export const imageLight = createTheme({
+export const imageLight: ImageTheme = createTheme({
   name: 'Image',
   common: commonLight,
   peers: {
@@ -19,5 +21,14 @@ export const imageLight = createTheme({
   self
 })
 
-export type ImageTheme = typeof imageLight
-export type ImageThemeVars = ReturnType<typeof self>
+export interface ImageThemeVars extends ReturnType<typeof self> {}
+
+export interface ImageTheme extends Theme<
+  'Image',
+  ImageThemeVars,
+  {
+    Tooltip: TooltipTheme
+  }
+> {}
+
+export interface ImageThemeOverrides extends ExtractThemeOverrides<ImageTheme> {}

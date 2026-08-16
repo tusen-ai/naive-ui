@@ -1,6 +1,6 @@
 import type { ImgHTMLAttributes, PropType, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
-import type { ImageTheme } from '../styles'
+import type { ImageTheme, ImageThemeOverrides } from '../styles'
 import type { ImageRenderToolbar } from './public-types'
 import { useTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
@@ -13,11 +13,12 @@ export interface MoveStrategy {
 }
 
 export const imagePreviewSharedProps = {
-  ...(useTheme.props as ThemeProps<ImageTheme>),
+  ...(useTheme.props as ThemeProps<ImageTheme, ImageThemeOverrides>),
   onPreviewPrev: Function as PropType<() => void>,
   onPreviewNext: Function as PropType<() => void>,
   showToolbar: { type: Boolean, default: true },
   showToolbarTooltip: Boolean,
+  keepDragOffset: Boolean,
   renderToolbar: Function as PropType<ImageRenderToolbar>
 }
 

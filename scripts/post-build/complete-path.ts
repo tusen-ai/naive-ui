@@ -115,11 +115,16 @@ function parseSource(
 ): string | null {
   if (source.startsWith('.')) {
     const fullPath = joinPath(currentDir, source)
-    return fs.existsSync(fullPath)
-      ? path.extname(fullPath)
-        ? source
-        : joinPath(source, `index${suffix}`)
-      : source + suffix
+    if (!fs.existsSync(fullPath)) {
+      return source + suffix
+    }
+    if (!path.extname(fullPath)) {
+      return joinPath(source, `index${suffix}`)
+    }
+    if (path.extname(source) === '.js' && suffix === '.mjs') {
+      return replaceExtname(source, suffix)
+    }
+    return source
   }
   else {
     return source
@@ -130,7 +135,13 @@ function replaceExtname(filePath: string, ext: string): string {
   const oldExt = path.extname(filePath)
   if (!oldExt)
     return filePath + ext
-  return joinPath(path.dirname(filePath), path.basename(filePath, oldExt) + ext)
+  const replacedPath = joinPath(
+    path.dirname(filePath),
+    path.basename(filePath, oldExt) + ext
+  )
+  return filePath.startsWith('./') && !replacedPath.startsWith('./')
+    ? `./${replacedPath}`
+    : replacedPath
 }
 
 const normalizePath = (p: string): string => p.replace(/\\/g, '/')

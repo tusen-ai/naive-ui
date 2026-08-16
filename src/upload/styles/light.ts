@@ -1,4 +1,7 @@
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
+import type { ButtonTheme } from '../../button/styles'
+import type { ProgressTheme } from '../../progress/styles'
 import { changeColor } from 'seemly'
 import { createTheme } from '../../_mixins'
 import { commonLight } from '../../_styles/common'
@@ -41,9 +44,9 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type UploadThemeVars = ReturnType<typeof self>
+export interface UploadThemeVars extends ReturnType<typeof self> {}
 
-const uploadLight = createTheme({
+const uploadLight: UploadTheme = createTheme({
   name: 'Upload',
   common: commonLight,
   peers: {
@@ -53,5 +56,15 @@ const uploadLight = createTheme({
   self
 })
 
+export interface UploadTheme extends Theme<
+  'Upload',
+  UploadThemeVars,
+  {
+    Button: ButtonTheme
+    Progress: ProgressTheme
+  }
+> {}
+
+export interface UploadThemeOverrides extends ExtractThemeOverrides<UploadTheme> {}
+
 export default uploadLight
-export type UploadTheme = typeof uploadLight

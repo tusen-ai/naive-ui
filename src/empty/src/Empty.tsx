@@ -1,7 +1,14 @@
-import type { PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type {
+  CSSProperties,
+  PropType,
+  Ref,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { EmptyTheme } from '../styles'
+import type { EmptyTheme, EmptyThemeOverrides } from '../styles'
 import { computed, defineComponent, h } from 'vue'
 import { NBaseIcon } from '../../_internal/icon'
 import { EmptyIcon } from '../../_internal/icons'
@@ -11,7 +18,7 @@ import { emptyLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const emptyProps = {
-  ...(useTheme.props as ThemeProps<EmptyTheme>),
+  ...(useTheme.props as ThemeProps<EmptyTheme, EmptyThemeOverrides>),
   description: String,
   showDescription: {
     type: Boolean,
@@ -102,7 +109,9 @@ export default defineComponent({
       localizedDescription: computed(() => {
         return mergedDescriptionRef.value || localeRef.value.description
       }),
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }
