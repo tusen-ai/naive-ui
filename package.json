@@ -45,7 +45,7 @@
     "build:themes": "tsc -b --force themes/tusimple/tsconfig.esm.json && tsc -b --force themes/tusimple/tsconfig.cjs.json",
     "build:site": "bash ./scripts/pre-build-site/pre-build-site.sh && cross-env NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && bash ./scripts/post-build-site/post-build-site.sh",
     "clean": "rimraf site lib es dist node_modules/naive-ui themes/tusimple/es themes/tusimple/lib",
-    "release:package": "pnpm run test && pnpm run build:package && pnpm publish --no-git-checks",
+    "release:package": "pnpm run test && pnpm run build:package:vapor && pnpm publish --no-git-checks",
     "release:changelog": "tsx scripts/release-changelog.ts",
     "lint": "pnpm run lint:code && pnpm run lint:type",
     "lint:type": "pnpm run lint:src-type && pnpm run lint:demo-type",
