@@ -1,1 +1,1 @@
-export { default as NThemeEditor } from './src/ThemeEditor'
+export { default as NThemeEditor } from './src/index'
