@@ -44,7 +44,9 @@ export default c([
     transition: opacity .3s var(--n-bezier);
   `, [
     c('+', [
-      cB('upload-file-list', 'margin-top: 8px;')
+      cB('upload-file-list', 'margin-top: 8px;', [
+        cM('empty', 'margin-top: 0;')
+      ])
     ]),
     cM('disabled', `
       opacity: var(--n-item-disabled-opacity);
@@ -73,6 +75,9 @@ export default c([
     transition: opacity .3s var(--n-bezier);
   `, [
     c('a, img', 'outline: none;'),
+    cM('empty', `
+      margin-top: 0;
+    `),
     cM('disabled', `
       opacity: var(--n-item-disabled-opacity);
       cursor: not-allowed;
