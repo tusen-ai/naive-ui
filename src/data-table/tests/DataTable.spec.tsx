@@ -11,6 +11,22 @@ describe('n-data-table', () => {
   it('should work with import on demand', () => {
     mount(NDataTable)
   })
+  it('should not warn missing n-config-provider injection', () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    const wrapper = mount(NDataTable, {
+      props: {
+        columns: [{ title: 'Name', key: 'name' }],
+        data: [{ name: 'foo' }]
+      }
+    })
+    expect(
+      warnSpy.mock.calls.some(args =>
+        String(args[0]).includes('injection "n-config-provider" not found')
+      )
+    ).toBe(false)
+    wrapper.unmount()
+    warnSpy.mockRestore()
+  })
   it('show custom empty', () => {
     const columns = [
       {
