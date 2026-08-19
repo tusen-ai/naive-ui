@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-ellipsis` 未设置 `expand-trigger` 时点击报错的问题
+
 ## 2.45.1
 
 `2026-08-20`

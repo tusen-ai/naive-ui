@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-ellipsis` throwing when clicked without `expand-trigger`.
+
 ## 2.45.1
 
 `2026-08-20`

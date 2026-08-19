@@ -1628,4 +1628,42 @@ describe('props.columns', () => {
 
     wrapper.unmount()
   })
+
+  it('should not throw when selecting from selection extra menu', async () => {
+    const errors: unknown[] = []
+    const wrapper = mount(NDataTable, {
+      attachTo: document.body,
+      global: {
+        config: {
+          errorHandler: (err) => {
+            errors.push(err)
+          }
+        }
+      },
+      props: {
+        columns: [
+          {
+            type: 'selection',
+            options: ['all', 'none']
+          },
+          {
+            title: 'Name',
+            key: 'name'
+          }
+        ],
+        data: [
+          { name: 'a', key: 1 },
+          { name: 'b', key: 2 }
+        ],
+        rowKey: (row: { key: number }) => row.key
+      }
+    })
+
+    expect(wrapper.find('.n-data-table-check-extra').exists()).toBe(true)
+    wrapper.findComponent({ name: 'Dropdown' }).vm.$emit('select', 'all')
+    await nextTick()
+    expect(errors).toEqual([])
+
+    wrapper.unmount()
+  })
 })

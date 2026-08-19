@@ -104,17 +104,16 @@ export default defineComponent({
       }
       return tooltipDisabled
     }
-    const handleClickRef = computed(() => {
-      return props.expandTrigger === 'click'
-        ? () => {
-            const { value: expanded } = expandedRef
-            if (expanded) {
-              tooltipRef.value?.setShow(false)
-            }
-            expandedRef.value = !expanded
-          }
-        : undefined
-    })
+    // HACK: restore it after vue-jsx-vapor can handle it correctly
+    function handleClick(): void {
+      if (props.expandTrigger !== 'click')
+        return
+      const { value: expanded } = expandedRef
+      if (expanded) {
+        tooltipRef.value?.setShow(false)
+      }
+      expandedRef.value = !expanded
+    }
     onDeactivated(() => {
       if (props.tooltip) {
         tooltipRef.value?.setShow(false)
@@ -135,7 +134,7 @@ export default defineComponent({
           style: ellipsisStyleRef.value
         })}
         ref="triggerRef"
-        onClick={handleClickRef.value}
+        onClick={handleClick}
         onMouseenter={
           // get tooltip disabled will derive cursor style
           props.expandTrigger === 'click' ? getTooltipDisabled : undefined
@@ -200,7 +199,6 @@ export default defineComponent({
       triggerInnerRef,
       // reduce dts: string ref only, type unused in render
       tooltipRef: tooltipRef as unknown,
-      handleClick: handleClickRef,
       renderTrigger,
       getTooltipDisabled
     }
