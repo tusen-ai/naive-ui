@@ -28,45 +28,6 @@ export const NModalEnvironment = defineComponent({
       if (onAfterLeave)
         onAfterLeave()
     }
-    function handlePositiveClick(): void {
-      const { onPositiveClick } = props
-      if (onPositiveClick) {
-        void Promise.resolve(onPositiveClick()).then((result) => {
-          if (result === false)
-            return
-          hide()
-        })
-      }
-      else {
-        hide()
-      }
-    }
-    function handleNegativeClick(): void {
-      const { onNegativeClick } = props
-      if (onNegativeClick) {
-        void Promise.resolve(onNegativeClick()).then((result) => {
-          if (result === false)
-            return
-          hide()
-        })
-      }
-      else {
-        hide()
-      }
-    }
-    function handleCloseClick(): void {
-      const { onClose } = props
-      if (onClose) {
-        void Promise.resolve(onClose()).then((result) => {
-          if (result === false)
-            return
-          hide()
-        })
-      }
-      else {
-        hide()
-      }
-    }
     function handleMaskClick(e: MouseEvent): void {
       const { onMaskClick, maskClosable } = props
       if (onMaskClick) {
@@ -98,9 +59,6 @@ export const NModalEnvironment = defineComponent({
       hide,
       handleUpdateShow,
       handleAfterLeave,
-      handleCloseClick,
-      handleNegativeClick,
-      handlePositiveClick,
       handleMaskClick,
       handleEsc
     }
