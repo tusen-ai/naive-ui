@@ -2,8 +2,13 @@
 
 ## NEXT_VERSION
 
+### i18n
+
+- Add afZA, amET, beBY, bgBG, bnBD, caES, elGR, esES, euES, fiFI, filPH, glES, guIN, heIL, hiIN, hrHR, huHU, hyAM, isIS, kaGE, kkKZ, knIN, kyKG, loLA, ltLT, lvLV, mkMK, mlIN, mnMN, mrIN, msMY, myMM, neNP, paIN, ptPT, rmCH, roRO, siLK, slSI, sqAL, srRS, swKE, taIN, teIN, urPK and zuZA locales.
+
 ### Fixes
 
+- Fix `ugCN` locale not being exported.
 - Fix `n-data-table` and `n-equation` warning `injection "n-config-provider" not found` when used without `n-config-provider`.
 - Fix `useDialog` treating `onPositiveClick`, `onNegativeClick` and `onClose` as arrays, closes [#8186](https://github.com/tusen-ai/naive-ui/issues/8186).
 - Fix `useNotification` treating `onClose` as an array.

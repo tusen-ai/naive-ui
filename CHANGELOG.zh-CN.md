@@ -2,8 +2,13 @@
 
 ## NEXT_VERSION
 
+### i18n
+
+- 新增 afZA、amET、beBY、bgBG、bnBD、caES、elGR、esES、euES、fiFI、filPH、glES、guIN、heIL、hiIN、hrHR、huHU、hyAM、isIS、kaGE、kkKZ、knIN、kyKG、loLA、ltLT、lvLV、mkMK、mlIN、mnMN、mrIN、msMY、myMM、neNP、paIN、ptPT、rmCH、roRO、siLK、slSI、sqAL、srRS、swKE、taIN、teIN、urPK、zuZA locale
+
 ### Fixes
 
+- 修复 `ugCN` locale 未导出的问题
 - 修复 `n-data-table`、`n-equation` 在未包裹 `n-config-provider` 时出现 `injection "n-config-provider" not found` 警告
 - 修复 `useDialog` 的 `onPositiveClick`、`onNegativeClick`、`onClose` 被识别为数组的问题，关闭 [#8186](https://github.com/tusen-ai/naive-ui/issues/8186)
 - 修复 `useNotification` 的 `onClose` 被识别为数组的问题
