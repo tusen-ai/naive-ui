@@ -1,6 +1,8 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.45.1
+
+`2026-08-20`
 
 ### i18n
 
