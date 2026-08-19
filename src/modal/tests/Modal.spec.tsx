@@ -109,7 +109,7 @@ describe('n-modal', () => {
     wrapper.unmount()
   })
 
-  it('should call `onPositiveClick` on dialog preset', async () => {
+  it('should work with `positive-click` prop on dialog preset', async () => {
     const onPositiveClick = vi.fn()
     const wrapper = mountModal({
       modalProps: {
@@ -119,13 +119,15 @@ describe('n-modal', () => {
       }
     })
     await wrapper.find('button').trigger('click')
-    const actionButtons = document.querySelectorAll('.n-dialog__action button')
-    await (actionButtons[actionButtons.length - 1] as HTMLElement).click()
+    document
+      .querySelector('.n-dialog__action button')
+      ?.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    await nextTick()
     expect(onPositiveClick).toHaveBeenCalledTimes(1)
     wrapper.unmount()
   })
 
-  it('should call `onNegativeClick` on dialog preset', async () => {
+  it('should work with `negative-click` prop on dialog preset', async () => {
     const onNegativeClick = vi.fn()
     const wrapper = mountModal({
       modalProps: {
@@ -135,8 +137,10 @@ describe('n-modal', () => {
       }
     })
     await wrapper.find('button').trigger('click')
-    const actionButtons = document.querySelectorAll('.n-dialog__action button')
-    await (actionButtons[0] as HTMLElement).click()
+    document
+      .querySelector('.n-dialog__action button')
+      ?.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    await nextTick()
     expect(onNegativeClick).toHaveBeenCalledTimes(1)
     wrapper.unmount()
   })

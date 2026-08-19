@@ -10,7 +10,9 @@ const presetProps = {
 
 const presetPropsKeys = keysOf(presetProps)
 
-// Modal forwards its own wrapped onClose/onPositiveClick/onNegativeClick to ModalBody explicitly, so exclude them here to avoid merging them into an array.
+// Modal explicitly passes its own wrapped onClose/onPositiveClick/onNegativeClick
+// to NModalBodyWrapper, so exclude them here — otherwise Vue merges each pair into
+// an array and BodyWrapper's direct `props.onPositiveClick()` call breaks.
 const forwardedPresetPropsKeys = presetPropsKeys.filter(
   key =>
     key !== 'onClose' && key !== 'onPositiveClick' && key !== 'onNegativeClick'

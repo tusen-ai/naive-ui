@@ -5,7 +5,7 @@
 ### Fixes
 
 - Fix `n-data-table` and `n-equation` warning `injection "n-config-provider" not found` when used without `n-config-provider`.
-- Fix `n-modal`'s `positive-click`/`negative-click`/`close` events not working with `dialog` and `confirm` presets, closes [#8188](https://github.com/tusen-ai/naive-ui/issues/8188).
+- Fix `n-modal`'s `positive-click`/`negative-click`/`close` events not working with `dialog` and `confirm` presets, and `close` firing twice with `card` preset, closes [#8188](https://github.com/tusen-ai/naive-ui/issues/8188).
 
 ## 2.45.0
 
