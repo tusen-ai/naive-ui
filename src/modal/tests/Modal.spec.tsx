@@ -109,6 +109,38 @@ describe('n-modal', () => {
     wrapper.unmount()
   })
 
+  it('should call `onPositiveClick` on dialog preset', async () => {
+    const onPositiveClick = vi.fn()
+    const wrapper = mountModal({
+      modalProps: {
+        preset: 'dialog',
+        positiveText: 'confirm',
+        onPositiveClick
+      }
+    })
+    await wrapper.find('button').trigger('click')
+    const actionButtons = document.querySelectorAll('.n-dialog__action button')
+    await (actionButtons[actionButtons.length - 1] as HTMLElement).click()
+    expect(onPositiveClick).toHaveBeenCalledTimes(1)
+    wrapper.unmount()
+  })
+
+  it('should call `onNegativeClick` on dialog preset', async () => {
+    const onNegativeClick = vi.fn()
+    const wrapper = mountModal({
+      modalProps: {
+        preset: 'dialog',
+        negativeText: 'cancel',
+        onNegativeClick
+      }
+    })
+    await wrapper.find('button').trigger('click')
+    const actionButtons = document.querySelectorAll('.n-dialog__action button')
+    await (actionButtons[0] as HTMLElement).click()
+    expect(onNegativeClick).toHaveBeenCalledTimes(1)
+    wrapper.unmount()
+  })
+
   it('should work with `content-scrollable` prop on card preset', async () => {
     const wrapper = mountModal({
       modalProps: {

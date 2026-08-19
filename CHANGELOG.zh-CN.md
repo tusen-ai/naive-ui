@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复 `n-data-table`、`n-equation` 在未包裹 `n-config-provider` 时出现 `injection "n-config-provider" not found` 警告
+- 修复 `n-modal` 在 `dialog`、`confirm` 预设下 `positive-click`、`negative-click`、`close` 事件不生效的问题，关闭 [#8188](https://github.com/tusen-ai/naive-ui/issues/8188)
 
 ## 2.45.0
 
