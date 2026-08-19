@@ -488,7 +488,7 @@ export default defineComponent({
       'onUpdate:show': undefined
     }
     return (
-      <NPopover {...keep(this.$props, popoverPropKeys)} {...popoverProps}>
+      <NPopover {...keep(this.$props, popoverPropKeys, popoverProps)}>
         {{
           trigger: () => this.$slots.default?.()
         }}

@@ -3,7 +3,7 @@ import { mount } from '@vue/test-utils'
 import { vi } from 'vitest'
 import { defineComponent, h, nextTick, ref, unref } from 'vue'
 import { NButton } from '../../button'
-import { NModal } from '../index'
+import { NModal, NModalProvider, useModal } from '../index'
 
 function mountModal({
   modalProps,
@@ -123,6 +123,59 @@ describe('n-modal', () => {
     expect(document.querySelector('.n-card__content-scrollbar')).not.toEqual(
       null
     )
+    wrapper.unmount()
+  })
+
+  it('should work with dialog preset action callbacks', async () => {
+    const onPositiveClick = vi.fn()
+    const wrapper = mountModal({
+      show: true,
+      modalProps: {
+        preset: 'dialog',
+        title: 'test',
+        positiveText: 'ok',
+        onPositiveClick
+      }
+    })
+    await nextTick()
+    document.querySelector<HTMLElement>('.n-dialog .n-button')?.click()
+    await nextTick()
+    expect(onPositiveClick).toHaveBeenCalledTimes(1)
+    wrapper.unmount()
+  })
+
+  it('should work with useModal action callbacks', async () => {
+    const onPositiveClick = vi.fn()
+    const Test = defineComponent({
+      setup() {
+        const modal = useModal()
+        modal.create({
+          preset: 'dialog',
+          title: 'test',
+          positiveText: 'ok',
+          onPositiveClick
+        })
+      },
+      render() {
+        return null
+      }
+    })
+    const wrapper = mount(
+      () => <NModalProvider>{{ default: () => <Test /> }}</NModalProvider>,
+      {
+        attachTo: document.body,
+        global: {
+          stubs: {
+            teleport: false,
+            transition: false
+          }
+        }
+      }
+    )
+    await nextTick()
+    document.querySelector<HTMLElement>('.n-dialog .n-button')?.click()
+    await nextTick()
+    expect(onPositiveClick).toHaveBeenCalledTimes(1)
     wrapper.unmount()
   })
 })

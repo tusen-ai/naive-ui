@@ -5,6 +5,10 @@
 ### Fixes
 
 - Fix `n-data-table` and `n-equation` warning `injection "n-config-provider" not found` when used without `n-config-provider`.
+- Fix `useDialog` treating `onPositiveClick`, `onNegativeClick` and `onClose` as arrays, closes [#8186](https://github.com/tusen-ai/naive-ui/issues/8186).
+- Fix `useNotification` treating `onClose` as an array.
+- Fix `n-modal` / `useModal` treating dialog action callbacks as arrays.
+- Fix `n-dropdown` `on-update:show` being called twice.
 
 ## 2.45.0
 

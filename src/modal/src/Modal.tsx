@@ -25,6 +25,7 @@ import {
   call,
   eventEffectNotPerformed,
   keep,
+  omit,
   useIsComposing,
   warnOnce
 } from '../../_utils'
@@ -297,7 +298,11 @@ export default defineComponent({
       presetProps: computed(() => {
         const pickedProps = keep(props, presetPropsKeys)
         // TODO: remove as any after vue fix the issue introduced in 3.2.27
-        return pickedProps as any
+        return omit(pickedProps, [
+          'onClose',
+          'onNegativeClick',
+          'onPositiveClick'
+        ]) as any
       }),
       handleEsc,
       handleAfterLeave,

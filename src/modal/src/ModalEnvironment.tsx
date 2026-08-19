@@ -2,6 +2,7 @@ import type { PropType } from 'vue'
 // use absolute path to make sure no circular ref of style
 // this -> modal-index -> modal-style
 import { defineComponent, h, ref } from 'vue'
+import { call, omit } from '../../_utils'
 import NModal, { modalProps } from './Modal'
 
 export const NModalEnvironment = defineComponent({
@@ -85,6 +86,11 @@ export const NModalEnvironment = defineComponent({
       showRef.value = false
     }
     function handleUpdateShow(value: boolean): void {
+      const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
+      if (onUpdateShow)
+        call(onUpdateShow, value)
+      if (_onUpdateShow)
+        call(_onUpdateShow, value)
       showRef.value = value
     }
     return {
@@ -109,7 +115,13 @@ export const NModalEnvironment = defineComponent({
     } = this
     return (
       <NModal
-        {...this.$props}
+        {...omit(this.$props, [
+          'onUpdateShow',
+          'onUpdate:show',
+          'onMaskClick',
+          'onEsc',
+          'onAfterLeave'
+        ])}
         show={show}
         onUpdateShow={handleUpdateShow}
         onMaskClick={handleMaskClick}

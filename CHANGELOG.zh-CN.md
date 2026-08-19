@@ -5,6 +5,10 @@
 ### Fixes
 
 - 修复 `n-data-table`、`n-equation` 在未包裹 `n-config-provider` 时出现 `injection "n-config-provider" not found` 警告
+- 修复 `useDialog` 的 `onPositiveClick`、`onNegativeClick`、`onClose` 被识别为数组的问题，关闭 [#8186](https://github.com/tusen-ai/naive-ui/issues/8186)
+- 修复 `useNotification` 的 `onClose` 被识别为数组的问题
+- 修复 `n-modal` / `useModal` 对话框操作回调被识别为数组的问题
+- 修复 `n-dropdown` 的 `on-update:show` 被触发两次的问题
 
 ## 2.45.0
 

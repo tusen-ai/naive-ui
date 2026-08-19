@@ -74,6 +74,33 @@ describe('n-notification', () => {
     wrapper.unmount()
   })
 
+  it('should work with onClose', async () => {
+    const onClose = vi.fn()
+    const Test = defineComponent({
+      setup() {
+        const notification = useNotification()
+        notification.info({
+          title: 'info',
+          content: 'info',
+          onClose
+        })
+      },
+      render() {
+        return null
+      }
+    })
+    const wrapper = mount(() => (
+      <Provider>{{ default: () => <Test /> }}</Provider>
+    ))
+    await nextTick()
+    document
+      .querySelector<HTMLElement>('.n-notification .n-base-close')
+      ?.click()
+    await nextTick()
+    expect(onClose).toHaveBeenCalledTimes(1)
+    wrapper.unmount()
+  })
+
   it('should work with duration', async () => {
     const Test = defineComponent({
       setup() {
