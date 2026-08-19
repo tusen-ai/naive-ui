@@ -2,6 +2,8 @@ packages:
   - '.'
 allowBuilds:
   esbuild: true
+minimumReleaseAgeExclude:
+  - vueuc@0.4.66
 onlyBuiltDependencies:
   - esbuild
 overrides:

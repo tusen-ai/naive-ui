@@ -14,6 +14,7 @@
 - 修复 `useNotification` 的 `onClose` 被识别为数组的问题
 - 修复 `n-modal` / `useModal` 对话框操作回调被识别为数组的问题
 - 修复 `n-dropdown` 的 `on-update:show` 被触发两次的问题
+- 修复 `n-data-table` 在 `keep-alive` 内恢复显示时可能报错
 
 ## 2.45.0
 

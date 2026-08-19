@@ -14,6 +14,7 @@
 - Fix `useNotification` treating `onClose` as an array.
 - Fix `n-modal` / `useModal` treating dialog action callbacks as arrays.
 - Fix `n-dropdown` `on-update:show` being called twice.
+- Fix `n-data-table` may throw an error when reactivated inside `keep-alive`.
 
 ## 2.45.0
 
