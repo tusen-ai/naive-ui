@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix `n-ellipsis` throwing when clicked without `expand-trigger`.
+- Fix `n-modal` not closing when clicking the mask.
 
 ## 2.45.1
 

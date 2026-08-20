@@ -5,6 +5,11 @@ import { defineComponent, h, nextTick, ref, unref } from 'vue'
 import { NButton } from '../../button'
 import { NModal, NModalProvider, useModal } from '../index'
 
+function dispatchOutsideClick(el: Element | null): void {
+  el?.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
+  el?.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }))
+}
+
 function mountModal({
   modalProps,
   show
@@ -68,9 +73,7 @@ describe('n-modal', () => {
         return 0
       })
 
-    document
-      .querySelector('.n-modal-mask')
-      ?.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    dispatchOutsideClick(document.querySelector('.n-modal-scroll-content'))
     await nextTick()
     expect(document.querySelector('.n-modal-body-wrapper')).toEqual(null)
     wrapper.unmount()
@@ -79,9 +82,7 @@ describe('n-modal', () => {
     await wrapper.find('button').trigger('click')
     expect(document.querySelector('.n-modal-body-wrapper')).not.toEqual(null)
 
-    document
-      .querySelector('.n-modal-mask')
-      ?.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    dispatchOutsideClick(document.querySelector('.n-modal-scroll-content'))
     await nextTick()
     expect(
       document.querySelector('.n-modal-body-wrapper')?.children.length
@@ -90,6 +91,49 @@ describe('n-modal', () => {
       document.querySelector('.n-modal-body-wrapper')?.getAttribute('style')
     ).toContain('display: none')
 
+    wrapper.unmount()
+  })
+
+  it('should close when clicking the mask area', async () => {
+    const onMaskClick = vi.fn()
+    const wrapper = mountModal({
+      show: true,
+      modalProps: { onMaskClick }
+    })
+    await nextTick()
+    expect(document.querySelector('.n-modal-body-wrapper')).not.toEqual(null)
+
+    using _rafSpy = vi
+      .spyOn(window, 'requestAnimationFrame')
+      .mockImplementation((cb: FrameRequestCallback): number => {
+        cb(0)
+        return 0
+      })
+    dispatchOutsideClick(document.querySelector('.n-modal-scroll-content'))
+    await nextTick()
+    expect(onMaskClick).toHaveBeenCalledTimes(1)
+    expect(document.querySelector('.n-modal-body-wrapper')).toEqual(null)
+    wrapper.unmount()
+  })
+
+  it('should not close when clicking modal content', async () => {
+    const wrapper = mountModal({ show: true })
+    await nextTick()
+    dispatchOutsideClick(document.querySelector('.n-modal'))
+    await nextTick()
+    expect(document.querySelector('.n-modal-body-wrapper')).not.toEqual(null)
+    wrapper.unmount()
+  })
+
+  it('should not close when clicking the mask area if `mask-closable` is false', async () => {
+    const wrapper = mountModal({
+      show: true,
+      modalProps: { maskClosable: false }
+    })
+    await nextTick()
+    dispatchOutsideClick(document.querySelector('.n-modal-scroll-content'))
+    await nextTick()
+    expect(document.querySelector('.n-modal-body-wrapper')).not.toEqual(null)
     wrapper.unmount()
   })
 
