@@ -1,6 +1,6 @@
 import type { DataTableColumns } from '../index'
 import { locators, page } from 'vitest/browser'
-import { createApp, defineComponent, h, nextTick, ref } from 'vue'
+import { createApp, defineComponent, h, KeepAlive, nextTick, ref } from 'vue'
 import { NDataTable } from '../index'
 
 declare module 'vitest/browser' {
@@ -330,6 +330,95 @@ describe('n-data-table empty scroll (browser)', () => {
     }
     finally {
       table.unmount()
+    }
+  })
+
+  it('keeps header horizontal scroll after keep-alive keyed toggle back', async () => {
+    await page.viewport(800, 600)
+
+    const host = document.createElement('div')
+    host.style.width = '640px'
+    document.body.append(host)
+
+    const manyRows = rows.slice(0, 40)
+    const fewRows: RowData[] = [
+      {
+        key: 0,
+        name: 'Single Row',
+        age: 32,
+        address: 'London, Park Lane no. 0'
+      }
+    ]
+
+    const Demo = defineComponent({
+      name: 'KeepAliveScrollDemo',
+      props: {
+        name: {
+          type: String,
+          required: true
+        }
+      },
+      setup(props) {
+        return () => (
+          <NDataTable
+            columns={columns}
+            data={props.name === '1' ? manyRows : fewRows}
+            maxHeight={250}
+            scrollX={1800}
+            virtualScroll
+          />
+        )
+      }
+    })
+
+    const name = ref('1')
+    const App = defineComponent({
+      setup() {
+        return () => (
+          <div>
+            <button
+              type="button"
+              onClick={() => {
+                name.value = name.value === '1' ? '2' : '1'
+              }}
+            >
+              Toggle
+            </button>
+            <KeepAlive>
+              <Demo key={name.value} name={name.value} />
+            </KeepAlive>
+          </div>
+        )
+      }
+    })
+
+    const app = createApp(App)
+    app.mount(host)
+
+    try {
+      await nextTick()
+      await expect.element(page.getByText('Edward King 0')).toBeVisible()
+
+      const header = (await page
+        .getByClass('n-data-table-base-table-header')
+        .findElement()) as HTMLElement
+      await expectHeaderScrollable(header)
+      await scrollHeaderTo(header, storedScrollLeft)
+
+      await page.getByRole('button', { name: 'Toggle' }).click()
+      await expect.element(page.getByText('Single Row')).toBeVisible()
+
+      await page.getByRole('button', { name: 'Toggle' }).click()
+      await expect.element(page.getByText('Edward King 0')).toBeVisible()
+
+      const headerAfter = (await page
+        .getByClass('n-data-table-base-table-header')
+        .findElement()) as HTMLElement
+      await expect.poll(() => headerAfter.scrollLeft).toBe(storedScrollLeft)
+    }
+    finally {
+      app.unmount()
+      host.remove()
     }
   })
 })
