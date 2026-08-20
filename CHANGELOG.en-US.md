@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-ellipsis` throwing `handleClickRef.value is not a function` on click when `expand-trigger` is not set, closes [#8191](https://github.com/tusen-ai/naive-ui/issues/8191).
+
 ## 2.45.1
 
 `2026-08-20`

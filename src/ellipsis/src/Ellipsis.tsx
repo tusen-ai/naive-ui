@@ -135,7 +135,7 @@ export default defineComponent({
           style: ellipsisStyleRef.value
         })}
         ref="triggerRef"
-        onClick={handleClickRef.value}
+        onClick={() => handleClickRef.value?.()}
         onMouseenter={
           // get tooltip disabled will derive cursor style
           props.expandTrigger === 'click' ? getTooltipDisabled : undefined
