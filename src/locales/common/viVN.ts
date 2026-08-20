@@ -81,7 +81,9 @@ const viVN: NLocale = {
     positiveText: 'OK',
     negativeText: 'Hủy',
     now: 'Hiện tại',
-    clear: 'Xóa'
+    clear: 'Xóa',
+    am: 'SA',
+    pm: 'CH'
   },
   Pagination: {
     goto: 'Đi đến trang',

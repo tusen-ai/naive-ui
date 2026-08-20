@@ -81,7 +81,9 @@ const etEE: NLocale = {
     positiveText: 'OK',
     negativeText: 'Katkesta',
     now: 'Nüüd',
-    clear: 'Tühjenda'
+    clear: 'Tühjenda',
+    am: 'AM',
+    pm: 'PM'
   },
   Pagination: {
     goto: 'Mine',
