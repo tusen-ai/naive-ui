@@ -454,7 +454,7 @@ export interface DataTableInjection {
   doUncheck: (rowKey: RowKey | RowKey[], rowInfo: RowData) => void
   handleTableHeaderScroll: (e: Event) => void
   handleTableBodyScroll: (e: Event) => void
-  syncScrollState: (deltaX?: number, deltaY?: number) => void
+  syncScrollState: (source: 'head' | 'body' | 'layout') => void
   setHeaderScrollLeft: (scrollLeft: number) => void
   renderCell: Ref<
     | undefined

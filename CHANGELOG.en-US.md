@@ -6,6 +6,7 @@
 
 - Fix `n-ellipsis` throwing when clicked without `expand-trigger`.
 - Fix `n-modal` not closing when clicking the mask.
+- Fix `n-data-table` resetting header horizontal scroll when data becomes empty.
 
 ## 2.45.1
 

@@ -12,9 +12,16 @@ const isBuildTimeTest = process.argv.some(arg =>
   /(?:^|[\\/])(umd-test|esm-test)/.test(arg)
 )
 
+const browserSpecExclude = 'src/**/*.browser.spec.{ts,tsx}'
+
 const testExclude = isBuildTimeTest
-  ? configDefaults.exclude
-  : [...configDefaults.exclude, 'umd-test/**/*', 'esm-test/**/*']
+  ? [...configDefaults.exclude, browserSpecExclude]
+  : [
+      ...configDefaults.exclude,
+      'umd-test/**/*',
+      'esm-test/**/*',
+      browserSpecExclude
+    ]
 
 export default defineConfig({
   root: __dirname,
