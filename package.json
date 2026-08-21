@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "2.45.1",
+  "version": "2.45.2",
   "packageManager": "pnpm@11.10.0",
   "description": "A Vue 3 Component Library. Fairly Complete, Theme Customizable, Uses TypeScript, Fast",
   "author": "07akioni",
