@@ -1,31 +1,20 @@
+import type { SFCScriptBlock } from '@vue/compiler-sfc'
 import type { Token } from 'marked'
+import type {
+  DemoParts,
+  DemoPartsWithBuildOptions,
+  MergedParts,
+  ScriptLanguage,
+  VueApiStyle
+} from '../types/vue-to-demo'
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
+import { parse } from '@vue/compiler-sfc'
 import { marked } from 'marked'
 import { handleMergeCode } from '../utils/handle-merge-code'
 import { createRenderer } from './md-renderer'
-
-interface Parts {
-  template?: string
-  script?: string
-  style?: string
-  title: string
-  content: string
-  language: 'ts' | 'js'
-  api: 'composition' | 'options'
-}
-
-interface MergedParts extends Parts {
-  tsCode: string
-  jsCode: string
-}
-
-interface MergePartsOptions {
-  parts: Parts
-  isVue: boolean
-}
 
 interface ConvertVue2DemoOptions {
   content: string
@@ -45,18 +34,18 @@ const demoBlock = fs
   .readFileSync(path.resolve(__dirname, 'ComponentDemoTemplate.vue'))
   .toString()
 
-function mergeParts({ parts, isVue }: MergePartsOptions): MergedParts {
-  const mergedParts: Partial<MergedParts> = {
+function mergeParts({ parts, isVue }: DemoPartsWithBuildOptions): MergedParts {
+  const mergedParts = {
     ...parts,
     title: parts.title,
     content: parts.content,
     tsCode: '',
     jsCode: ''
   }
-  handleMergeCode({ parts, mergedParts: mergedParts as MergedParts, isVue })
-  mergedParts.tsCode = encodeURIComponent(mergedParts.tsCode!)
-  mergedParts.jsCode = encodeURIComponent(mergedParts.jsCode!)
-  return mergedParts as MergedParts
+  handleMergeCode({ parts, mergedParts, isVue })
+  mergedParts.tsCode = encodeURIComponent(mergedParts.tsCode)
+  mergedParts.jsCode = encodeURIComponent(mergedParts.jsCode)
+  return mergedParts
 }
 
 const cssRuleRegex = /([^{}]*)(\{[^}]*\})/g
@@ -151,49 +140,88 @@ function getFileName(resourcePath: string): [string, string] {
   return [fileNameWithExtension.split('.')[0], fileNameWithExtension]
 }
 
-function getPartsOfDemo(text: string): Parts {
-  // slot template
-  const firstIndex = text.indexOf('<template>')
-  let template = text.slice(firstIndex + 10)
-  const lastIndex = template.lastIndexOf('</template>')
-  template = template.slice(0, lastIndex)
-  const script = text.match(/<script[\s\S]*?>([\s\S]*?)<\/script>/)?.[1]?.trim()
-  const style = text.match(/<style>([\s\S]*?)<\/style>/)?.[1]
+function getPartsOfDemo(source: string, resourcePath: string): DemoParts {
+  const { descriptor, errors } = parse(source, {
+    filename: resourcePath
+  })
+  if (errors.length) {
+    const [error] = errors
+    if (error instanceof Error)
+      throw error
+    throw new Error(String(error))
+  }
+  if (!descriptor.template)
+    throw new Error('No <template> block found in demo component')
+
+  const template = descriptor.template.content
+  const scriptBlock = descriptor.scriptSetup ?? descriptor.script ?? null
   const markdownText
-    = text.match(/<markdown>([\s\S]*?)<\/markdown>/)?.[1]?.trim() ?? ''
-  const tokens = marked.lexer(markdownText)
+    = descriptor.customBlocks.find(block => block.type === 'markdown')
+      ?.content ?? ''
+  const { title, content } = resolveMarkdown(markdownText)
+  return {
+    template,
+    script: scriptBlock?.content?.trim(),
+    style: mergeStyles(descriptor.styles) || '',
+    title,
+    content,
+    language: resolveLanguage(scriptBlock),
+    api: resolveApiType(descriptor.scriptSetup, descriptor.script)
+  }
+}
+
+function resolveMarkdown(
+  markdownText: string
+): Pick<DemoParts, 'title' | 'content'> {
+  const trimmed = markdownText.trim()
+  if (!trimmed)
+    return { title: '', content: '' }
+  const tokens = marked.lexer(trimmed)
   const contentTokens: Token[] = []
   let title = ''
   for (const token of tokens) {
-    if (token.type === 'heading' && token.depth === 1) {
+    if (!title && token.type === 'heading' && token.depth === 1) {
       title = token.text
+      continue
     }
-    else {
-      contentTokens.push(token)
-    }
+    contentTokens.push(token)
   }
-  const scriptAttributes
-    = text.match(/<script([\s\S]*?)>[\s\S]*?<\/script>/)?.[1].trim() ?? ''
-  const languageType = scriptAttributes?.includes('lang="ts"') ? 'ts' : 'js'
-  const apiType = scriptAttributes?.includes('setup')
-    ? 'composition'
-    : 'options'
   return {
-    template,
-    script,
-    style,
     title,
     content: marked.parser(contentTokens, {
       renderer: mdRenderer
-    }),
-    language: languageType,
-    api: apiType
+    })
   }
+}
+
+function resolveLanguage(scriptBlock: SFCScriptBlock | null): ScriptLanguage {
+  return scriptBlock?.lang?.includes('ts') ? 'ts' : 'js'
+}
+
+function resolveApiType(
+  scriptSetupBlock: SFCScriptBlock | null,
+  scriptBlock: SFCScriptBlock | null
+): VueApiStyle {
+  if (scriptSetupBlock || scriptBlock?.setup)
+    return 'composition'
+  return 'options'
+}
+
+function mergeStyles(
+  styleBlocks: Array<{ content: string }>
+): string | undefined {
+  if (!styleBlocks.length)
+    return undefined
+  const css = styleBlocks
+    .map(block => block.content.trim())
+    .filter(Boolean)
+    .join('\n\n')
+  return css || undefined
 }
 
 export function convertVue2Demo(options: ConvertVue2DemoOptions): string {
   const { content, resourcePath, relativeUrl, isVue = true } = options
-  const parts = getPartsOfDemo(content)
+  const parts = getPartsOfDemo(content, resourcePath)
   const mergedParts = mergeParts({ parts, isVue })
   const [fileName] = getFileName(resourcePath)
   const vueComponent = genVueComponent(
