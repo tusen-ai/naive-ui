@@ -6,6 +6,7 @@
 
 - Fix `n-ellipsis` throwing an error on click when `expand-trigger` is not set, closes [#8191](https://github.com/tusen-ai/naive-ui/issues/8191).
 - Fix `n-select`, `n-cascader`, `n-tree-select`, `n-date-picker` and `n-time-picker` throwing an error when focus leaves their menu.
+- Fix `n-modal`'s `positive-click`/`negative-click`/`close` events not working with `dialog` and `confirm` presets, and `close` firing twice with `card` preset, closes [#8188](https://github.com/tusen-ai/naive-ui/issues/8188).
 
 ## 2.45.2
 

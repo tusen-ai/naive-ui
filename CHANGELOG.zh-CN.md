@@ -6,6 +6,7 @@
 
 - 修复 `n-ellipsis` 在未设置 `expand-trigger` 时点击报错的问题，关闭 [#8191](https://github.com/tusen-ai/naive-ui/issues/8191)
 - 修复 `n-select`、`n-cascader`、`n-tree-select`、`n-date-picker`、`n-time-picker` 在焦点离开菜单时报错的问题
+- 修复 `n-modal` 在 `dialog`、`confirm` 预设下 `positive-click`、`negative-click`、`close` 事件不生效，以及 `card` 预设下 `close` 事件被触发两次的问题，关闭 [#8188](https://github.com/tusen-ai/naive-ui/issues/8188)
 
 ## 2.45.2
 

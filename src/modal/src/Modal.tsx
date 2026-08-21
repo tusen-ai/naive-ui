@@ -33,7 +33,7 @@ import { dialogProviderInjectionKey } from '../../dialog/src/context'
 import { modalLight } from '../styles'
 import NModalBodyWrapper from './BodyWrapper'
 import { modalInjectionKey, modalProviderInjectionKey } from './interface'
-import { presetProps, presetPropsKeys } from './presetProps'
+import { forwardedPresetPropsKeys, presetProps } from './presetProps'
 import style from './styles/index.cssr'
 
 export const modalProps = {
@@ -296,7 +296,7 @@ export default defineComponent({
       isMounted: isMountedRef,
       containerRef,
       presetProps: computed(() => {
-        const pickedProps = keep(props, presetPropsKeys)
+        const pickedProps = keep(props, forwardedPresetPropsKeys)
         // TODO: remove as any after vue fix the issue introduced in 3.2.27
         return omit(pickedProps, [
           'onClose',
