@@ -16,6 +16,7 @@ import {
   createComponentMenuOptions,
   createDocumentationMenuOptions
 } from './menu-options'
+import { setThemePreference, useThemePreference } from './theme'
 
 let route = null
 let router = null
@@ -23,10 +24,6 @@ let router = null
 let localeNameRef = null
 // useMemo
 let dateLocaleRef = null
-// theme
-const osThemeRef = useOsTheme()
-let themeNameRef = null
-let rawThemeNameRef = null // could be `os-theme`
 
 export function initRouter(_router, _route) {
   route = _route
@@ -42,23 +39,22 @@ export function initRouter(_router, _route) {
   dateLocaleRef = useMemo(() => {
     return route.path.startsWith('/zh-CN') ? dateZhCN : dateEnUS
   })
-  rawThemeNameRef = useMemo(() => route.params.theme)
-  themeNameRef = useMemo({
-    get() {
-      switch (route.params.theme) {
-        case 'os-theme':
-          return osThemeRef.value
-        case 'dark':
-          return 'dark'
-        default:
-          return 'light'
-      }
-    },
-    set(theme) {
-      router.push(changeThemeInPath(route.fullPath, theme))
-    }
-  })
 }
+
+// theme
+// Theme is a user preference, so it is persisted in localStorage instead of
+// being kept in the URL. A missing preference means following the OS color
+// scheme; only an explicit light or dark choice is persisted.
+const osThemeRef = useOsTheme()
+const themePreferenceRef = useThemePreference()
+const themeNameRef = computed({
+  get() {
+    return themePreferenceRef.value ?? osThemeRef.value ?? 'light'
+  },
+  set(theme) {
+    setThemePreference(theme)
+  }
+})
 
 // display mode
 const _displayModeRef = ref(window.localStorage.getItem('mode') ?? 'debug')
@@ -94,14 +90,12 @@ const configProviderRef = computed(() => {
 // options
 const docOptionsRef = computed(() =>
   createDocumentationMenuOptions({
-    theme: rawThemeNameRef.value,
     lang: localeNameRef.value,
     mode: displayModeRef.value
   })
 )
 const componentOptionsRef = computed(() =>
   createComponentMenuOptions({
-    theme: rawThemeNameRef.value,
     lang: localeNameRef.value,
     mode: displayModeRef.value
   })
@@ -139,20 +133,12 @@ export function siteSetup() {
 }
 
 function changeLangInPath(path, lang) {
-  const langReg = /^\/(zh-CN|en-US)\//
-  return path.replace(langReg, `/${lang}/`)
-}
-
-function changeThemeInPath(path, theme) {
-  const themeReg = /(^\/[^/]+\/)([^/]+)/
-  return path.replace(themeReg, `$1${theme}`)
+  const langReg = /^\/(zh-CN|en-US)(\/|$)/
+  return path.replace(langReg, `/${lang}$2`)
 }
 
 export function push(partialPath) {
-  const { fullPath } = route
-  router.push(
-    fullPath.replace(/(^\/[^/]+\/[^/]+)((\/.*)|$)/, `$1${partialPath}`)
-  )
+  router.push(`/${localeNameRef.value}${partialPath}`)
 }
 
 export function useDisplayMode() {

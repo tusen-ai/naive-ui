@@ -68,7 +68,6 @@ export default defineComponent({
     const router = useRouter()
 
     const mobilePopoverRef = ref(null)
-    const themeAndLocaleReg = /^(\/[^/]+){2}/
 
     // i18n
     const { t } = i18n(locales)
@@ -82,6 +81,7 @@ export default defineComponent({
 
     // locale
     const localeNameRef = useLocaleName()
+    const localePathRef = computed(() => `/${localeNameRef.value}`)
 
     // menu
     const menuOptionsRef = computed(() => {
@@ -89,17 +89,17 @@ export default defineComponent({
         {
           key: 'home',
           label: t('home'),
-          path: themeAndLocaleReg.exec(route.path)[0]
+          path: localePathRef.value
         },
         {
           key: 'doc',
           label: t('doc'),
-          path: `${themeAndLocaleReg.exec(route.path)[0]}/docs/introduction`
+          path: `${localePathRef.value}/docs/introduction`
         },
         {
           key: 'component',
           label: t('component'),
-          path: `${themeAndLocaleReg.exec(route.path)[0]}/components/button`
+          path: `${localePathRef.value}/components/button`
         }
       ]
     })
@@ -129,18 +129,18 @@ export default defineComponent({
         {
           key: 'home',
           label: t('home'),
-          path: themeAndLocaleReg.exec(route.path)[0]
+          path: localePathRef.value
         },
         {
           key: 'doc',
           label: t('doc'),
           children: docOptionsRef.value,
-          path: `${themeAndLocaleReg.exec(route.path)[0]}/docs/introduction`
+          path: `${localePathRef.value}/docs/introduction`
         },
         {
           key: 'component',
           label: t('component'),
-          path: `${themeAndLocaleReg.exec(route.path)[0]}/components/button`,
+          path: `${localePathRef.value}/components/button`,
           children: componentOptionsRef.value
         },
         {
@@ -272,11 +272,11 @@ export default defineComponent({
     const isMobileRef = useIsMobile()
     const isTabletRef = useIsTablet()
     function handleLogoClick() {
-      if (/^(\/[^/]+){2}$/.test(route.path)) {
+      if (route.name === 'home') {
         message.info(t('alreadyHome'))
         return
       }
-      router.push(/^(\/[^/]+){2}/.exec(route.path)[0])
+      router.push(localePathRef.value)
     }
 
     // responsive menu
