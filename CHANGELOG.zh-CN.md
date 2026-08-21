@@ -70,6 +70,7 @@
 
 ### Fixes
 
+- 修复 `n-back-top`、`n-color-picker` 与 `n-scrollbar` 根节点传入的 `style` 无法覆盖主题 CSS 变量的问题，关闭 [#8159](https://github.com/tusen-ai/naive-ui/issues/8159)
 - 修复 `n-modal` 遮罩层位于 scrollbar 内部导致 `Blocked aria-hidden on an element because its descendant retained focus` 警告，关闭 [#7556](https://github.com/tusen-ai/naive-ui/issues/7556)
 - 修复 `n-color-picker` 传入的 style、click 事件不生效，关闭 [#7528](https://github.com/tusen-ai/naive-ui/issues/7528)
 - 修复 `n-data-table` 的 `scrollTo` 方法类型缺失，关闭 [#7554](https://github.com/tusen-ai/naive-ui/issues/7554)
