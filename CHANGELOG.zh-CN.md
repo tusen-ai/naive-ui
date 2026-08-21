@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-ellipsis` 在未设置 `expand-trigger` 时点击报错的问题，关闭 [#8191](https://github.com/tusen-ai/naive-ui/issues/8191)
+- 修复 `n-select`、`n-cascader`、`n-tree-select`、`n-date-picker`、`n-time-picker` 在焦点离开菜单时报错的问题
+
 ## 2.45.2
 
 `2026-08-21`

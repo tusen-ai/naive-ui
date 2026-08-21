@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-ellipsis` throwing an error on click when `expand-trigger` is not set, closes [#8191](https://github.com/tusen-ai/naive-ui/issues/8191).
+- Fix `n-select`, `n-cascader`, `n-tree-select`, `n-date-picker` and `n-time-picker` throwing an error when focus leaves their menu.
+
 ## 2.45.2
 
 `2026-08-21`

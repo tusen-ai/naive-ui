@@ -11,8 +11,8 @@ export default defineComponent({
       <div
         style="width: 0; height: 0"
         tabindex={0}
-        onFocus={props.onFocus}
-        onBlur={props.onBlur}
+        onFocus={e => props.onFocus?.(e)}
+        onBlur={e => props.onBlur?.(e)}
       />
     )
   }

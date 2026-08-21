@@ -102,4 +102,17 @@ describe('n-ellipsis', () => {
     )
     wrapper.unmount()
   })
+
+  it('should not throw an error on click without `expand-trigger` prop', async () => {
+    const errorHandler = vi.fn()
+    const wrapper = mount(NEllipsis, {
+      props: { tooltip: false },
+      slots: { default: () => 'test n-ellipsis' },
+      global: { config: { errorHandler } }
+    })
+
+    await wrapper.trigger('click')
+    expect(errorHandler).not.toHaveBeenCalled()
+    wrapper.unmount()
+  })
 })
