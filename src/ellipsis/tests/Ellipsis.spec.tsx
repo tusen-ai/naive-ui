@@ -42,6 +42,46 @@ describe('n-ellipsis', () => {
     wrapper.unmount()
   })
 
+  it('should not throw when clicking without expand-trigger', async () => {
+    const errors: unknown[] = []
+    const wrapper = mount(NEllipsis, {
+      global: {
+        config: {
+          errorHandler: (err) => {
+            errors.push(err)
+          }
+        }
+      },
+      slots: { default: () => 'test n-ellipsis' }
+    })
+
+    await wrapper.find('.n-ellipsis').trigger('click')
+    expect(errors).toEqual([])
+    wrapper.unmount()
+  })
+
+  it('should not throw when clicking without expand-trigger and tooltip', async () => {
+    const errors: unknown[] = []
+    const wrapper = mount(NEllipsis, {
+      global: {
+        config: {
+          errorHandler: (err) => {
+            errors.push(err)
+          }
+        }
+      },
+      props: { tooltip: false },
+      slots: { default: () => 'test n-ellipsis' }
+    })
+
+    await wrapper.trigger('click')
+    expect(errors).toEqual([])
+    expect(wrapper.find('.n-ellipsis').attributes('style')).toContain(
+      'text-overflow: ellipsis;'
+    )
+    wrapper.unmount()
+  })
+
   it('should work with `expand-trigger` prop', async () => {
     const wrapper = mount(NEllipsis, {
       props: {
@@ -60,6 +100,19 @@ describe('n-ellipsis', () => {
     expect(wrapper.find('.n-ellipsis').attributes('style')).toContain(
       'text-overflow: ellipsis;'
     )
+    wrapper.unmount()
+  })
+
+  it('should not throw an error on click without `expand-trigger` prop', async () => {
+    const errorHandler = vi.fn()
+    const wrapper = mount(NEllipsis, {
+      props: { tooltip: false },
+      slots: { default: () => 'test n-ellipsis' },
+      global: { config: { errorHandler } }
+    })
+
+    await wrapper.trigger('click')
+    expect(errorHandler).not.toHaveBeenCalled()
     wrapper.unmount()
   })
 })

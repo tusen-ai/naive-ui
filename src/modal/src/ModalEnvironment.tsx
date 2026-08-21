@@ -2,6 +2,7 @@ import type { PropType } from 'vue'
 // use absolute path to make sure no circular ref of style
 // this -> modal-index -> modal-style
 import { defineComponent, h, ref } from 'vue'
+import { call, omit } from '../../_utils'
 import NModal, { modalProps } from './Modal'
 
 export const NModalEnvironment = defineComponent({
@@ -27,45 +28,6 @@ export const NModalEnvironment = defineComponent({
       if (onAfterLeave)
         onAfterLeave()
     }
-    function handlePositiveClick(): void {
-      const { onPositiveClick } = props
-      if (onPositiveClick) {
-        void Promise.resolve(onPositiveClick()).then((result) => {
-          if (result === false)
-            return
-          hide()
-        })
-      }
-      else {
-        hide()
-      }
-    }
-    function handleNegativeClick(): void {
-      const { onNegativeClick } = props
-      if (onNegativeClick) {
-        void Promise.resolve(onNegativeClick()).then((result) => {
-          if (result === false)
-            return
-          hide()
-        })
-      }
-      else {
-        hide()
-      }
-    }
-    function handleCloseClick(): void {
-      const { onClose } = props
-      if (onClose) {
-        void Promise.resolve(onClose()).then((result) => {
-          if (result === false)
-            return
-          hide()
-        })
-      }
-      else {
-        hide()
-      }
-    }
     function handleMaskClick(e: MouseEvent): void {
       const { onMaskClick, maskClosable } = props
       if (onMaskClick) {
@@ -85,6 +47,11 @@ export const NModalEnvironment = defineComponent({
       showRef.value = false
     }
     function handleUpdateShow(value: boolean): void {
+      const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
+      if (onUpdateShow)
+        call(onUpdateShow, value)
+      if (_onUpdateShow)
+        call(_onUpdateShow, value)
       showRef.value = value
     }
     return {
@@ -92,9 +59,6 @@ export const NModalEnvironment = defineComponent({
       hide,
       handleUpdateShow,
       handleAfterLeave,
-      handleCloseClick,
-      handleNegativeClick,
-      handlePositiveClick,
       handleMaskClick,
       handleEsc
     }
@@ -109,7 +73,13 @@ export const NModalEnvironment = defineComponent({
     } = this
     return (
       <NModal
-        {...this.$props}
+        {...omit(this.$props, [
+          'onUpdateShow',
+          'onUpdate:show',
+          'onMaskClick',
+          'onEsc',
+          'onAfterLeave'
+        ])}
         show={show}
         onUpdateShow={handleUpdateShow}
         onMaskClick={handleMaskClick}

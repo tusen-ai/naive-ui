@@ -4,8 +4,37 @@
 
 ### Fixes
 
-- 修复 `n-data-table`、`n-equation` 在未包裹 `n-config-provider` 时出现 `injection "n-config-provider" not found` 警告
+- 修复 `n-ellipsis` 在未设置 `expand-trigger` 时点击报错的问题，关闭 [#8191](https://github.com/tusen-ai/naive-ui/issues/8191)
+- 修复 `n-select`、`n-cascader`、`n-tree-select`、`n-date-picker`、`n-time-picker` 在焦点离开菜单时报错的问题
 - 修复 `n-modal` 在 `dialog`、`confirm` 预设下 `positive-click`、`negative-click`、`close` 事件不生效，以及 `card` 预设下 `close` 事件被触发两次的问题，关闭 [#8188](https://github.com/tusen-ai/naive-ui/issues/8188)
+
+## 2.45.2
+
+`2026-08-21`
+
+### Fixes
+
+- 修复 `n-ellipsis` 未设置 `expand-trigger` 时点击报错的问题
+- 修复 `n-modal` 点击遮罩无法关闭的问题
+- 修复 `n-data-table` 数据变为空时表头横向滚动位置被重置的问题
+
+## 2.45.1
+
+`2026-08-20`
+
+### i18n
+
+- 新增 afZA、amET、beBY、bgBG、bnBD、caES、elGR、esES、euES、fiFI、filPH、glES、guIN、heIL、hiIN、hrHR、huHU、hyAM、isIS、kaGE、kkKZ、knIN、kyKG、loLA、ltLT、lvLV、mkMK、mlIN、mnMN、mrIN、msMY、myMM、neNP、paIN、ptPT、rmCH、roRO、siLK、slSI、sqAL、srRS、swKE、taIN、teIN、urPK、zuZA locale
+
+### Fixes
+
+- 修复 `ugCN` locale 未导出的问题
+- 修复 `n-data-table`、`n-equation` 在未包裹 `n-config-provider` 时出现 `injection "n-config-provider" not found` 警告
+- 修复 `useDialog` 的 `onPositiveClick`、`onNegativeClick`、`onClose` 被识别为数组的问题，关闭 [#8186](https://github.com/tusen-ai/naive-ui/issues/8186)
+- 修复 `useNotification` 的 `onClose` 被识别为数组的问题
+- 修复 `n-modal` / `useModal` 对话框操作回调被识别为数组的问题
+- 修复 `n-dropdown` 的 `on-update:show` 被触发两次的问题
+- 修复 `n-data-table` 在 `keep-alive` 内恢复显示时可能报错
 
 ## 2.45.0
 

@@ -8,7 +8,7 @@ import {
   ref,
   Transition
 } from 'vue'
-import { keep } from '../../_utils'
+import { keep, mergeEventHandlers } from '../../_utils'
 import { notificationProviderInjectionKey } from './context'
 import {
   Notification,
@@ -171,18 +171,23 @@ export const NotificationEnvironment = defineComponent({
           default: () => {
             return this.show ? (
               <Notification
-                {...keep(this.$props, notificationPropKeys)}
-                onClose={this.handleClose}
-                onMouseenter={
-                  this.duration && this.keepAliveOnHover
-                    ? this.handleMouseenter
-                    : undefined
-                }
-                onMouseleave={
-                  this.duration && this.keepAliveOnHover
-                    ? this.handleMouseleave
-                    : undefined
-                }
+                {...keep(this.$props, notificationPropKeys, {
+                  onClose: this.handleClose,
+                  onMouseenter:
+                    this.duration && this.keepAliveOnHover
+                      ? mergeEventHandlers([
+                          this.handleMouseenter,
+                          this.onMouseenter
+                        ])
+                      : this.onMouseenter,
+                  onMouseleave:
+                    this.duration && this.keepAliveOnHover
+                      ? mergeEventHandlers([
+                          this.handleMouseleave,
+                          this.onMouseleave
+                        ])
+                      : this.onMouseleave
+                })}
               />
             ) : null
           }

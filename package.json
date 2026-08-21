@@ -1,6 +1,6 @@
 {
   "name": "naive-ui",
-  "version": "2.45.0",
+  "version": "2.45.2",
   "packageManager": "pnpm@11.10.0",
   "description": "A Vue 3 Component Library. Fairly Complete, Theme Customizable, Uses TypeScript, Fast",
   "author": "07akioni",
@@ -60,6 +60,7 @@
     "test:update": "tsc -p tsconfig.test.json --noEmit --pretty false && vitest --run --update",
     "test:cov": "tsc -p tsconfig.test.json --noEmit --pretty false && vitest run --coverage",
     "test:watch": "vitest --watch",
+    "test:browser": "tsc -p tsconfig.test.json --noEmit --pretty false && vitest run --config vitest.browser.config.mts",
     "test:umd": "vitest run umd-test/index.spec.js",
     "test:esm": "vitest run esm-test/index.spec.js",
     "gen-version": "tsx scripts/gen-version.ts",
@@ -92,7 +93,7 @@
     "treemate": "^0.3.11",
     "vdirs": "^0.1.8",
     "vooks": "^0.2.12",
-    "vueuc": "^0.4.65"
+    "vueuc": "^0.4.66"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^5.3.0",
@@ -114,6 +115,7 @@
     "@vicons/ionicons4": "^0.13.0",
     "@vicons/ionicons5": "^0.13.0",
     "@vitejs/plugin-vue": "^6.0.6",
+    "@vitest/browser-playwright": "^4.1.11",
     "@vitest/coverage-v8": "^4.1.5",
     "@vue/compiler-sfc": "^3.5.21",
     "@vue/server-renderer": "^3.5.21",
@@ -136,6 +138,7 @@
     "lint-staged": "^16.1.6",
     "marked": "^12.0.2",
     "oxc-transform": "^0.128.0",
+    "playwright": "^1.62.1",
     "prettier": "^3.6.2",
     "rimraf": "^6.0.1",
     "superagent": "^10.2.2",
@@ -144,7 +147,7 @@
     "typescript": "^6.0.3",
     "vfonts": "^0.0.3",
     "vite": "^8.0.10",
-    "vitest": "^4.1.5",
+    "vitest": "^4.1.11",
     "vue": "^3.5.21",
     "vue-jsx-vapor": "^3.2.19",
     "vue-router": "^4.5.1",

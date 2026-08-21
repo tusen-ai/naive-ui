@@ -4,8 +4,37 @@
 
 ### Fixes
 
-- Fix `n-data-table` and `n-equation` warning `injection "n-config-provider" not found` when used without `n-config-provider`.
+- Fix `n-ellipsis` throwing an error on click when `expand-trigger` is not set, closes [#8191](https://github.com/tusen-ai/naive-ui/issues/8191).
+- Fix `n-select`, `n-cascader`, `n-tree-select`, `n-date-picker` and `n-time-picker` throwing an error when focus leaves their menu.
 - Fix `n-modal`'s `positive-click`/`negative-click`/`close` events not working with `dialog` and `confirm` presets, and `close` firing twice with `card` preset, closes [#8188](https://github.com/tusen-ai/naive-ui/issues/8188).
+
+## 2.45.2
+
+`2026-08-21`
+
+### Fixes
+
+- Fix `n-ellipsis` throwing when clicked without `expand-trigger`.
+- Fix `n-modal` not closing when clicking the mask.
+- Fix `n-data-table` resetting header horizontal scroll when data becomes empty.
+
+## 2.45.1
+
+`2026-08-20`
+
+### i18n
+
+- Add afZA, amET, beBY, bgBG, bnBD, caES, elGR, esES, euES, fiFI, filPH, glES, guIN, heIL, hiIN, hrHR, huHU, hyAM, isIS, kaGE, kkKZ, knIN, kyKG, loLA, ltLT, lvLV, mkMK, mlIN, mnMN, mrIN, msMY, myMM, neNP, paIN, ptPT, rmCH, roRO, siLK, slSI, sqAL, srRS, swKE, taIN, teIN, urPK and zuZA locales.
+
+### Fixes
+
+- Fix `ugCN` locale not being exported.
+- Fix `n-data-table` and `n-equation` warning `injection "n-config-provider" not found` when used without `n-config-provider`.
+- Fix `useDialog` treating `onPositiveClick`, `onNegativeClick` and `onClose` as arrays, closes [#8186](https://github.com/tusen-ai/naive-ui/issues/8186).
+- Fix `useNotification` treating `onClose` as an array.
+- Fix `n-modal` / `useModal` treating dialog action callbacks as arrays.
+- Fix `n-dropdown` `on-update:show` being called twice.
+- Fix `n-data-table` may throw an error when reactivated inside `keep-alive`.
 
 ## 2.45.0
 

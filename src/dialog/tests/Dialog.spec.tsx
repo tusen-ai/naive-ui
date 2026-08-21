@@ -112,9 +112,9 @@ describe('n-dialog', () => {
     const wrapper = mount(() => (
       <Provider>{{ default: () => <Test /> }}</Provider>
     ))
-    document
-      .querySelector('.n-modal-mask')
-      ?.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    const overlay = document.querySelector('.n-modal-scroll-content')
+    overlay?.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
+    overlay?.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }))
     await nextTick()
     expect(document.querySelector('.n-dialog')).not.toBeNull()
     wrapper.unmount()
@@ -139,9 +139,9 @@ describe('n-dialog', () => {
       <Provider>{{ default: () => <Test /> }}</Provider>
     ))
     await nextTick()
-    document
-      .querySelector('.n-modal-mask')
-      ?.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    const overlay = document.querySelector('.n-modal-scroll-content')
+    overlay?.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
+    overlay?.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }))
     expect(onMaskClick).toHaveBeenCalled()
     wrapper.unmount()
   })
@@ -284,5 +284,58 @@ describe('n-dialog', () => {
       'test2'
     )
     wrapper.unmount()
+  })
+
+  it('should work with action callbacks', async () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+
+    async function mountDialog(dialogProps: DialogProps) {
+      const Test = createTestComponent('warning', dialogProps)
+      const wrapper = mount(() => (
+        <Provider>{{ default: () => <Test /> }}</Provider>
+      ))
+      await nextTick()
+      return wrapper
+    }
+
+    function hasArrayPropWarning(propName: string): boolean {
+      return warnSpy.mock.calls.some(args =>
+        String(args[0]).includes(
+          `Invalid prop: type check failed for prop "${propName}". Expected Function, got Array`
+        )
+      )
+    }
+
+    const onPositiveClick = vi.fn()
+    const positiveWrapper = await mountDialog({
+      positiveText: 'ok',
+      onPositiveClick
+    })
+    expect(hasArrayPropWarning('onPositiveClick')).toBe(false)
+    document.querySelector<HTMLElement>('.n-dialog .n-button')?.click()
+    await nextTick()
+    expect(onPositiveClick).toHaveBeenCalledTimes(1)
+    positiveWrapper.unmount()
+
+    const onNegativeClick = vi.fn()
+    const negativeWrapper = await mountDialog({
+      negativeText: 'cancel',
+      onNegativeClick
+    })
+    expect(hasArrayPropWarning('onNegativeClick')).toBe(false)
+    document.querySelector<HTMLElement>('.n-dialog .n-button')?.click()
+    await nextTick()
+    expect(onNegativeClick).toHaveBeenCalledTimes(1)
+    negativeWrapper.unmount()
+
+    const onClose = vi.fn()
+    const closeWrapper = await mountDialog({ onClose })
+    expect(hasArrayPropWarning('onClose')).toBe(false)
+    document.querySelector<HTMLElement>('.n-dialog .n-base-close')?.click()
+    await nextTick()
+    expect(onClose).toHaveBeenCalledTimes(1)
+    closeWrapper.unmount()
+
+    warnSpy.mockRestore()
   })
 })

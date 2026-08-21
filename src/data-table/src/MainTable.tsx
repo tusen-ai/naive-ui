@@ -41,7 +41,7 @@ export default defineComponent({
     })
     function handleBodyResize(entry: ResizeObserverEntry): void {
       bodyWidthRef.value = entry.contentRect.width
-      syncScrollState()
+      syncScrollState('layout')
       if (!fixedStateInitializedRef.value) {
         fixedStateInitializedRef.value = true
       }

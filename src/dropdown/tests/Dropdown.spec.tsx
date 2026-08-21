@@ -300,4 +300,23 @@ describe('n-dropdown', () => {
   it('should accept empty object in type-checking phase', () => {
     ;<NDropdown options={[{}]} />
   })
+
+  it('should call onUpdateShow once', async () => {
+    const onUpdateShow = vi.fn()
+    const wrapper = mount(NDropdown, {
+      attachTo: document.body,
+      props: {
+        options,
+        trigger: 'click',
+        onUpdateShow
+      },
+      slots: {
+        default: () => 'star kirby'
+      }
+    })
+    await wrapper.find('span').trigger('click')
+    expect(onUpdateShow).toHaveBeenCalledTimes(1)
+    expect(onUpdateShow).toHaveBeenCalledWith(true)
+    wrapper.unmount()
+  })
 })
