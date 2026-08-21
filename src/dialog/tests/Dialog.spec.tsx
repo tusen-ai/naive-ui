@@ -112,9 +112,9 @@ describe('n-dialog', () => {
     const wrapper = mount(() => (
       <Provider>{{ default: () => <Test /> }}</Provider>
     ))
-    document
-      .querySelector('.n-modal-mask')
-      ?.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    const overlay = document.querySelector('.n-modal-scroll-content')
+    overlay?.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
+    overlay?.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }))
     await nextTick()
     expect(document.querySelector('.n-dialog')).not.toBeNull()
     wrapper.unmount()
@@ -139,9 +139,9 @@ describe('n-dialog', () => {
       <Provider>{{ default: () => <Test /> }}</Provider>
     ))
     await nextTick()
-    document
-      .querySelector('.n-modal-mask')
-      ?.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    const overlay = document.querySelector('.n-modal-scroll-content')
+    overlay?.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
+    overlay?.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }))
     expect(onMaskClick).toHaveBeenCalled()
     wrapper.unmount()
   })

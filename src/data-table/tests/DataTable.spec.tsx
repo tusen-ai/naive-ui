@@ -11,6 +11,22 @@ describe('n-data-table', () => {
   it('should work with import on demand', () => {
     mount(NDataTable)
   })
+  it('should not warn missing n-config-provider injection', () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    const wrapper = mount(NDataTable, {
+      props: {
+        columns: [{ title: 'Name', key: 'name' }],
+        data: [{ name: 'foo' }]
+      }
+    })
+    expect(
+      warnSpy.mock.calls.some(args =>
+        String(args[0]).includes('injection "n-config-provider" not found')
+      )
+    ).toBe(false)
+    wrapper.unmount()
+    warnSpy.mockRestore()
+  })
   it('show custom empty', () => {
     const columns = [
       {
@@ -1625,6 +1641,44 @@ describe('props.columns', () => {
 
     expect(radios[1].classes()).toContain('n-radio--checked')
     expect(radios[4].classes()).not.toContain('n-radio--checked')
+
+    wrapper.unmount()
+  })
+
+  it('should not throw when selecting from selection extra menu', async () => {
+    const errors: unknown[] = []
+    const wrapper = mount(NDataTable, {
+      attachTo: document.body,
+      global: {
+        config: {
+          errorHandler: (err) => {
+            errors.push(err)
+          }
+        }
+      },
+      props: {
+        columns: [
+          {
+            type: 'selection',
+            options: ['all', 'none']
+          },
+          {
+            title: 'Name',
+            key: 'name'
+          }
+        ],
+        data: [
+          { name: 'a', key: 1 },
+          { name: 'b', key: 2 }
+        ],
+        rowKey: (row: { key: number }) => row.key
+      }
+    })
+
+    expect(wrapper.find('.n-data-table-check-extra').exists()).toBe(true)
+    wrapper.findComponent({ name: 'Dropdown' }).vm.$emit('select', 'all')
+    await nextTick()
+    expect(errors).toEqual([])
 
     wrapper.unmount()
   })

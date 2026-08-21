@@ -222,7 +222,8 @@ export default defineComponent({
       mainTableInstRef,
       mergedCurrentPageRef,
       maxHeightRef,
-      mergedTableLayoutRef
+      mergedTableLayoutRef,
+      mergedEmptyRef
     })
     const { localeRef } = useLocale('DataTable')
 

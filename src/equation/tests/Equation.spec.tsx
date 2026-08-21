@@ -8,6 +8,20 @@ describe('n-equation', () => {
     mount(NEquation)
   })
 
+  it('should not warn missing n-config-provider injection', () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    const wrapper = mount(NEquation, {
+      props: { value: 'E = mc^2' }
+    })
+    expect(
+      warnSpy.mock.calls.some(args =>
+        String(args[0]).includes('injection "n-config-provider" not found')
+      )
+    ).toBe(false)
+    wrapper.unmount()
+    warnSpy.mockRestore()
+  })
+
   it('should work with `value` prop', async () => {
     const wrapper = mount(NEquation, {
       props: { value: 'E = mc^2' }

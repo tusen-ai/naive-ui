@@ -350,7 +350,6 @@ export default defineComponent({
                           <div
                             aria-hidden
                             class={`${mergedClsPrefix}-modal-mask`}
-                            onClick={this.handleClickoutside}
                           />
                         ) : null
                       }
@@ -377,9 +376,7 @@ export default defineComponent({
                   onBeforeLeave={this.handleBeforeLeave}
                   onAfterEnter={this.onAfterEnter}
                   onAfterLeave={this.handleAfterLeave}
-                  onClickoutside={
-                    showMask ? undefined : this.handleClickoutside
-                  }
+                  onClickoutside={this.handleClickoutside}
                 >
                   {this.$slots}
                 </NModalBodyWrapper>

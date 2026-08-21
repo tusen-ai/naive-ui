@@ -75,6 +75,7 @@ describe('n-notification', () => {
   })
 
   it('should work with onClose', async () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
     const onClose = vi.fn()
     const Test = defineComponent({
       setup() {
@@ -93,12 +94,20 @@ describe('n-notification', () => {
       <Provider>{{ default: () => <Test /> }}</Provider>
     ))
     await nextTick()
+    expect(
+      warnSpy.mock.calls.some(args =>
+        String(args[0]).includes(
+          'Invalid prop: type check failed for prop "onClose". Expected Function, got Array'
+        )
+      )
+    ).toBe(false)
     document
       .querySelector<HTMLElement>('.n-notification .n-base-close')
       ?.click()
     await nextTick()
     expect(onClose).toHaveBeenCalledTimes(1)
     wrapper.unmount()
+    warnSpy.mockRestore()
   })
 
   it('should work with duration', async () => {

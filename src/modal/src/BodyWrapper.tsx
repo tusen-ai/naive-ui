@@ -75,7 +75,10 @@ export default defineComponent({
     maskHidden: Boolean,
     ...presetProps,
     // events
-    onClickoutside: Function as PropType<(e: MouseEvent) => void>,
+    onClickoutside: {
+      type: Function as PropType<(e: MouseEvent) => void>,
+      required: true
+    },
     onBeforeLeave: {
       type: Function,
       required: true
@@ -333,15 +336,12 @@ export default defineComponent({
                               const dirs: DirectiveArguments = [
                                 [vShow, this.show]
                               ]
-                              const { onClickoutside } = this
-                              if (onClickoutside) {
-                                dirs.push([
-                                  clickoutside,
-                                  this.onClickoutside,
-                                  undefined,
-                                  { capture: true }
-                                ])
-                              }
+                              dirs.push([
+                                clickoutside,
+                                this.onClickoutside,
+                                undefined,
+                                { capture: true }
+                              ])
                               return withDirectives(
                                 (this.preset === 'confirm'
                                   || this.preset === 'dialog' ? (
