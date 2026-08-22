@@ -135,6 +135,33 @@ describe('n-cascader', () => {
     wrapper.unmount()
   })
 
+  it('should not select an option when Enter is pressed during IME composition', async () => {
+    const onUpdateValue = vi.fn()
+    const wrapper = mount(NCascader, {
+      attachTo: document.body,
+      props: { options: getOptions(), filterable: true, onUpdateValue }
+    })
+    await wrapper.find('.n-base-selection').trigger('click')
+    const input = wrapper.find('input')
+    await input.trigger('compositionstart')
+    await input.setValue('l-1-1-1')
+    await input.trigger('compositionend')
+
+    await input.trigger('compositionstart')
+    await input.trigger('keydown', { key: 'Enter' })
+    expect(onUpdateValue).not.toHaveBeenCalled()
+
+    await input.setValue('l-1-1-1')
+    await input.trigger('compositionend')
+    await input.trigger('keydown', { key: 'Enter' })
+    expect(onUpdateValue).toHaveBeenCalledWith(
+      'v-1-1-1',
+      expect.anything(),
+      expect.anything()
+    )
+    wrapper.unmount()
+  })
+
   it('should work with `default-value` prop', async () => {
     const wrapper = mount(NCascader, {
       props: { options: getOptions(), defaultValue: 'l-1-1-2' }

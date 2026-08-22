@@ -755,6 +755,8 @@ export default defineComponent({
             return
         // eslint-disable-next-line no-fallthrough
         case 'Enter':
+          if (triggerInstRef.value?.isComposing)
+            break
           if (!mergedShowRef.value) {
             openMenu()
           }
