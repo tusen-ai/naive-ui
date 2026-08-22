@@ -92,7 +92,7 @@ use-dialog-reactive-list.vue
 | titleClass | `string` | `undefined` | The class name of the content. | 2.38.2 |
 | titleStyle | `Object \| string` | `undefined` | The style of the content. | 2.38.2 |
 | transformOrigin | `'mouse' \| 'center'` | `'mouse'` | The transform origin of the dialog's display animation. | 2.34.0 |
-| type | `'error \| 'success' \| 'warning'` | `'warning'` | Dialog type. |  |
+| type | `'error \| 'success' \| 'warning' \| 'info' \| 'default'` | `'default'` | Dialog type. |  |
 | zIndex | `number` | `undefined` | Z index of the dialog. | 2.43.0 |
 | onAfterEnter | `() => void` | `undefined` | Callback on enter animation ends. | 2.33.0 |
 | onAfterLeave | `() => void` | `undefined` | Callback on leave animation ends. | 2.33.3 |
@@ -133,7 +133,7 @@ All the properties can be modified dynamically.
 | titleClass | `string` | The class name of the content. | 2.38.2 |
 | titleStyle | `Object \| string` | The style of the content. | 2.38.2 |
 | transformOrigin | `'mouse' \| 'center'` | The transform origin of the dialog's display animation. | 2.34.0 |
-| type | `'error \| 'success' \| 'warning'` | Dialog type. |  |
+| type | `'error \| 'success' \| 'warning' \| 'info' \| 'default'` | Dialog type. |  |
 | onAfterEnter | `() => void \| undefined` | Callback on enter animation ends. | 2.33.0 |
 | onAfterLeave | `() => void \| undefined` | Callback on leave animation ends. | 2.33.3 |
 | onClose | `() => boolean \| Promise<boolean> \| any` | The default behavior is closing the confirm. Return `false` or `resolve false` or `Promise rejected` will prevent the default behavior. |  |
@@ -170,7 +170,7 @@ All the properties can be modified dynamically.
 | title | `string \| (() => VNodeChild)` | `undefined` | Title, can be a render function. |  |
 | title-class | `string` | `undefined` | The class name of the content. | 2.38.2 |
 | title-style | `Object \| string` | `undefined` | The style of the content. | 2.38.2 |
-| type | `'error \| 'success' \| 'warning' \| 'info'` | `'warning'` | Dialog type. |  |
+| type | `'error \| 'success' \| 'warning' \| 'info' \| 'default'` | `'default'` | Dialog type. |  |
 | on-close | `() => void` | `undefined` | Calback on close button clicked. |  |
 | on-negative-click | `(e: MouseEvent) => void` | `undefined` | Callback on positive button clicked. |  |
 | on-positive-click | `(e: MouseEvent) => void` | `undefined` | Callback on negative button clicked. |  |

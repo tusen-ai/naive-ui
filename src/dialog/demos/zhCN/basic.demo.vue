@@ -47,6 +47,28 @@ function handleError() {
     }
   })
 }
+
+function handleInfo() {
+  dialog.info({
+    title: '信息',
+    content: '信息',
+    positiveText: '确定',
+    onPositiveClick: () => {
+      message.success('确定')
+    }
+  })
+}
+
+function handleDefault() {
+  dialog.default({
+    title: '默认',
+    content: '默认',
+    positiveText: '确定',
+    onPositiveClick: () => {
+      message.success('确定')
+    }
+  })
+}
 </script>
 
 <template>
@@ -59,6 +81,12 @@ function handleError() {
     </n-button>
     <n-button @click="handleError">
       错误
+    </n-button>
+    <n-button @click="handleInfo">
+      信息
+    </n-button>
+    <n-button @click="handleDefault">
+      默认
     </n-button>
   </n-space>
 </template>
