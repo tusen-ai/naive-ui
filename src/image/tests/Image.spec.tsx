@@ -166,6 +166,31 @@ describe('n-image', () => {
     wrapper.unmount()
   })
 
+  it('should show placeholder slot again when src changes', async () => {
+    const wrapper = mount(NImage, {
+      props: {
+        src: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
+      },
+      slots: {
+        placeholder: () => 'Placeholder'
+      }
+    })
+
+    await wrapper.find('img').trigger('load')
+
+    expect(wrapper.text()).not.toContain('Placeholder')
+
+    await wrapper.setProps({
+      src: 'https://www.naiveui.com/assets/naivelogo.93278402.svg'
+    })
+
+    expect(wrapper.text()).toContain('Placeholder')
+    expect(wrapper.find('img').attributes('style')).toContain(
+      'visibility: hidden;'
+    )
+    wrapper.unmount()
+  })
+
   it('should show fallback src when native lazy image fails to load', async () => {
     const fallbackSrc = 'https://www.naiveui.com/assets/naivelogo.93278402.svg'
     const wrapper = mount(NImage, {
