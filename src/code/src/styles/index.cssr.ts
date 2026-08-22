@@ -25,6 +25,18 @@ export default c([
     cM('show-line-numbers', `
       display: flex;
     `),
+    cM('has-focus-line', [
+      cB('code-line', [
+        c('&:not(.__has_focus__)', `
+          filter: blur(2px);
+        `)
+      ])
+    ]),
+    cM('has-highlight-line', [
+      c('.__highlight_line__', `
+        background-color: var(--n-line-highlight-bg-color); 
+      `)
+    ]),
     cE('line-numbers', `
       user-select: none;
       padding-right: 12px;
