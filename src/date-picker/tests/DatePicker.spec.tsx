@@ -2,6 +2,7 @@ import type { Value } from '../src/interface'
 import { mount } from '@vue/test-utils'
 import { format } from 'date-fns'
 import { ref } from 'vue'
+import { NBaseFocusDetector } from '../../_internal'
 import { dateEnUS } from '../../locales'
 import { NDatePicker } from '../index'
 
@@ -391,6 +392,22 @@ describe('n-date-picker', () => {
       )[0].textContent
     ).toBe('J')
 
+    wrapper.unmount()
+  })
+
+  it('should not throw when focus leaves the menu', async () => {
+    const errorHandler = vi.fn()
+    const wrapper = mount(NDatePicker, {
+      attachTo: document.body,
+      props: {
+        show: true
+      },
+      global: { config: { errorHandler } }
+    })
+    const detector = wrapper.findComponent(NBaseFocusDetector)
+    expect(detector.exists()).toBe(true)
+    await detector.trigger('blur')
+    expect(errorHandler).not.toHaveBeenCalled()
     wrapper.unmount()
   })
 })

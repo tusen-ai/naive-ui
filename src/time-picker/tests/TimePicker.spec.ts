@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { h } from 'vue'
+import { NBaseFocusDetector } from '../../_internal'
 import { NInput } from '../../input'
 import { NTimePicker } from '../index'
 
@@ -151,6 +152,20 @@ describe('n-time-picker', () => {
     })
     await wrapper.find('input').trigger('focus')
     expect(onFocus).toHaveBeenCalled()
+    wrapper.unmount()
+  })
+
+  it('should not throw when focus leaves the menu', async () => {
+    const errorHandler = vi.fn()
+    const wrapper = mount(NTimePicker, {
+      attachTo: document.body,
+      props: { show: true },
+      global: { config: { errorHandler } }
+    })
+    const detector = wrapper.findComponent(NBaseFocusDetector)
+    expect(detector.exists()).toBe(true)
+    await detector.trigger('blur')
+    expect(errorHandler).not.toHaveBeenCalled()
     wrapper.unmount()
   })
 })

@@ -2,7 +2,6 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "composite": false,
-    "jsx": "react",
     "declaration": false,
     "noEmit": true
   },
