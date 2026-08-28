@@ -1,3 +1,5 @@
+import { setThemePreference } from '../store/theme'
+
 export const enDocRoutes = [
   // basic docs
   {
@@ -1028,45 +1030,63 @@ export const zhComponentRoutes = [
   }
 ]
 
+// Theme used to be part of the URL (e.g. /en-US/os-theme/components/button).
+// Keep old links working while migrating the encoded preference to storage.
+export const legacyThemeRoute = {
+  path: '/:lang(zh-CN|en-US)/:theme(light|dark|os-theme)/:pathMatch(.*)*',
+  redirect: (to) => {
+    setThemePreference(to.params.theme)
+    const pathSegments = to.params.pathMatch
+    const path = Array.isArray(pathSegments)
+      ? pathSegments.join('/')
+      : pathSegments
+    return {
+      path: `/${to.params.lang}${path ? `/${path}` : ''}`,
+      query: to.query,
+      hash: to.hash
+    }
+  }
+}
+
 export const routes = [
+  legacyThemeRoute,
   {
     name: 'home',
-    path: '/:lang/:theme',
+    path: '/:lang(zh-CN|en-US)',
     component: () => import('../pages/home/index.vue')
   },
   {
     name: 'enDocs',
-    path: '/en-US/:theme/docs',
+    path: '/en-US/docs',
     component: () => import('../pages/Layout.vue'),
     children: enDocRoutes
   },
   {
     name: 'zhDocs',
-    path: '/zh-CN/:theme/docs',
+    path: '/zh-CN/docs',
     component: () => import('../pages/Layout.vue'),
     children: zhDocRoutes
   },
   {
     name: 'enComponents',
-    path: '/en-US/:theme/components',
+    path: '/en-US/components',
     component: () => import('../pages/Layout.vue'),
     children: enComponentRoutes
   },
   {
     name: 'zhComponents',
-    path: '/zh-CN/:theme/components',
+    path: '/zh-CN/components',
     component: () => import('../pages/Layout.vue'),
     children: zhComponentRoutes
   },
   {
     name: 'not-found',
     path: '/:pathMatch(.*)*',
-    redirect: {
+    redirect: () => ({
       name: 'home',
       params: {
-        lang: navigator.language === 'zh-CN' ? 'zh-CN' : 'en-US',
-        theme: 'os-theme'
+        lang: navigator.language === 'zh-CN' ? 'zh-CN' : 'en-US'
       }
-    }
+    })
   }
 ]
