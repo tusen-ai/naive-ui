@@ -1,7 +1,7 @@
 <markdown>
 # Affix
 
-When in affix mode, Anchor can recieve addition props as same as Affix.
+When in affix mode, Anchor can receive addition props as same as Affix.
 </markdown>
 
 <template>
