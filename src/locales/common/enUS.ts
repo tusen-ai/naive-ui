@@ -108,7 +108,11 @@ const enUS = {
     filterVarName: 'Filter Variable Name',
     import: 'Import',
     export: 'Export',
-    restore: 'Reset to Default'
+    restore: 'Reset to Default',
+    themeStore: 'Theme Store',
+    apply: 'Apply',
+    currentTheme: 'Current Theme',
+    resetTheme: 'Reset Theme'
   },
   Image: {
     tipPrevious: 'Previous picture (←)',
