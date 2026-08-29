@@ -85,6 +85,7 @@
 - Fix `n-space` `size` prop not taking effect when set to `0`, closes [#7530](https://github.com/tusen-ai/naive-ui/issues/7530).
 - Fix `n-date-picker` with `type="datetime"` emitting `update:value` twice when clearing from panel, closes [#8070](https://github.com/tusen-ai/naive-ui/issues/8070).
 - Fix `n-input-otp` only keeping the last character when browser extension autofill sets the full OTP value on a single input, closes [#7540](https://github.com/tusen-ai/naive-ui/pull/7540).
+- Fix `n-button` `colorFocus`, `textColorFocus`, and `borderFocus` theme overrides not taking effect for `secondary` buttons, closes [#8145](https://github.com/tusen-ai/naive-ui/issues/8145).
 - Fix `n-menu` item icons not centered in collapsed mode when the options contain a `type="group"` group, closes [#8105](https://github.com/tusen-ai/naive-ui/issues/8105).
 - Fix `n-data-table` not rendering the table header when data is empty and a column has `ellipsis` set, closes [#8118](https://github.com/tusen-ai/naive-ui/issues/8118).
 
