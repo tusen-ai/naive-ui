@@ -541,6 +541,8 @@ export default defineComponent({
     }
     function handleKeyDown(e: KeyboardEvent): void {
       if (e.key === 'Enter') {
+        if (inputInstRef.value?.isCompositing)
+          return
         if (e.target === inputInstRef.value?.wrapperElRef) {
           // hit input wrapper
           // which means not activated
