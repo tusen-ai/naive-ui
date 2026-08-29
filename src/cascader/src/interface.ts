@@ -81,6 +81,7 @@ export interface CascaderInjection {
   optionHeightRef: Ref<string>
   labelFieldRef: Ref<string>
   showCheckboxRef: Ref<boolean>
+  showEllipseRef: Ref<boolean>
   getColumnStyleRef: Ref<
     ((detail: { level: number }) => string | CSSProperties) | undefined
   >
