@@ -81,7 +81,9 @@ const deDE: NLocale = {
     positiveText: 'OK',
     negativeText: 'Abbrechen',
     now: 'Jetzt',
-    clear: 'Löschen'
+    clear: 'Löschen',
+    am: 'vormittags',
+    pm: 'nachmittags'
   },
   Pagination: {
     goto: 'Gehe zu',

@@ -81,7 +81,9 @@ const ugCN: NLocale = {
     positiveText: 'جەزملەش',
     negativeText: 'بىكار قىلىش',
     now: 'مۇشۇ ۋاقىت',
-    clear: 'تازلاش'
+    clear: 'تازلاش',
+    am: 'ئە',
+    pm: 'چ'
   },
   Pagination: {
     goto: 'ئاتلاش',

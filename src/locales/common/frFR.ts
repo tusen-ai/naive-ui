@@ -81,7 +81,9 @@ const frFR: NLocale = {
     positiveText: 'OK',
     negativeText: 'Annuler',
     now: 'Maintenant',
-    clear: 'Effacer'
+    clear: 'Effacer',
+    am: 'AM',
+    pm: 'PM'
   },
   Pagination: {
     goto: 'Aller à',
