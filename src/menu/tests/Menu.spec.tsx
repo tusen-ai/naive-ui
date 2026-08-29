@@ -497,4 +497,56 @@ describe('n-menu', () => {
     expect(wrapper.html()).toContain('bar')
     wrapper.unmount()
   })
+
+  it('should allow root style to override theme css vars', () => {
+    const wrapper = mount(NMenu, {
+      attrs: {
+        style: {
+          '--n-item-text-color-active': 'rgb(1, 2, 3)'
+        }
+      },
+      props: {
+        value: 'fantasy',
+        options: [
+          {
+            label: 'fantasy',
+            key: 'fantasy'
+          }
+        ]
+      }
+    })
+    const menuEl = wrapper.find('.n-menu').element as HTMLElement
+    expect(menuEl.style.getPropertyValue('--n-item-text-color-active')).toEqual(
+      'rgb(1, 2, 3)'
+    )
+    wrapper.unmount()
+  })
+
+  it('should preserve root attrs when merging theme css vars', () => {
+    const wrapper = mount(NMenu, {
+      attrs: {
+        id: 'custom-menu',
+        class: 'custom-menu-class',
+        style: {
+          width: '240px',
+          '--n-item-height': '50px'
+        }
+      },
+      props: {
+        options: [
+          {
+            label: 'fantasy',
+            key: 'fantasy'
+          }
+        ]
+      }
+    })
+    const menu = wrapper.find('.n-menu')
+    const menuEl = menu.element as HTMLElement
+    expect(menuEl.id).toEqual('custom-menu')
+    expect(menu.classes()).toContain('custom-menu-class')
+    expect(menuEl.style.width).toEqual('240px')
+    expect(menuEl.style.getPropertyValue('--n-item-height')).toEqual('50px')
+    wrapper.unmount()
+  })
 })
