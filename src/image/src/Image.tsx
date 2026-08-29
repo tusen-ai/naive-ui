@@ -121,9 +121,12 @@ export default defineComponent({
       }
     })
 
+    const loadedRef = ref(false)
+
     watchEffect(() => {
       void (props.src || props.imgProps?.src)
       showErrorRef.value = false
+      loadedRef.value = false
     })
 
     watchEffect((onInvalidate) => {
@@ -144,8 +147,6 @@ export default defineComponent({
     function onPreviewClose() {
       previewShowRef.value = false
     }
-
-    const loadedRef = ref(false)
 
     provide(imageContextKey, {
       previewedImgPropsRef: toRef(props, 'previewedImgProps')
