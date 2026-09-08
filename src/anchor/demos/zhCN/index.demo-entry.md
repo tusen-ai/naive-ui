@@ -33,7 +33,7 @@ max-height-debug.vue
 | 名称  | 类型     | 默认值      | 说明     |
 | ----- | -------- | ----------- | -------- |
 | href  | `string` | `undefined` | 锚点链接 |
-| title | `stirng` | `undefined` | 锚点标题 |
+| title | `string` | `undefined` | 锚点标题 |
 
 ### AnchorLink Slots
 

@@ -171,7 +171,7 @@ All the properties can be modified dynamically.
 | title-class | `string` | `undefined` | The class name of the content. | 2.38.2 |
 | title-style | `Object \| string` | `undefined` | The style of the content. | 2.38.2 |
 | type | `'error \| 'success' \| 'warning' \| 'info'` | `'warning'` | Dialog type. |  |
-| on-close | `() => void` | `undefined` | Calback on close button clicked. |  |
+| on-close | `() => void` | `undefined` | Callback on close button clicked. |  |
 | on-negative-click | `(e: MouseEvent) => void` | `undefined` | Callback on positive button clicked. |  |
 | on-positive-click | `(e: MouseEvent) => void` | `undefined` | Callback on negative button clicked. |  |
 

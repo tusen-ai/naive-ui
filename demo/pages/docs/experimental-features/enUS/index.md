@@ -3,7 +3,7 @@
 # Experimental Features
 
 <n-alert type="warning" title="Caveats" :bordered="false">
-  The following features are <n-text strong>unstable</n-text>. Use them if you really need and perpare to follow the API changes.
+  The following features are <n-text strong>unstable</n-text>. Use them if you really need and prepare to follow the API changes.
 </n-alert>
 
 ## Use TuSimple Theme

@@ -18,7 +18,7 @@ auto-fill.vue
 
 | Name | Type | Default | Description | Version |
 | --- | --- | --- | --- | --- |
-| auto-fill | `boolean` | `false` | Whether to fill the blank of the container using its content repeatly. | 2.40.2 |
+| auto-fill | `boolean` | `false` | Whether to fill the blank of the container using its content repeatedly. | 2.40.2 |
 | speed | `number` | `48` | The speed calculated as pixels/second. | 2.40.2 |
 
 ### Marquee Slots
