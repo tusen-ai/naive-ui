@@ -48,7 +48,7 @@ custom-field.vue
 | fallback-option | `false \| (value: string \| number) => SelectOption` | `value => ({ label: '' + value, value })` | The option to be created using the value which has no corresponding option value. If set to `false`, the fallback option won't be created and displayed. |  |
 | filterable | `boolean` | `false` | Whether options can be filtered. |  |
 | filter | `(pattern: string, option: Object) => boolean` | String search method. | Filter function. |  |
-| ignore-composition | `boolean` | `true` | Ingore IME's composition status. By default `filter` won't be triggered by input event under compositions. | 2.33.4 |
+| ignore-composition | `boolean` | `true` | Ignore IME's composition status. By default `filter` won't be triggered by input event under compositions. | 2.33.4 |
 | input-props | `InputHTMLAttributes` | `undefined` | The attributes of input element in the trigger. It only works when the select is filterable. |  |
 | keyboard | `boolean` | `true` | Whether to allow keyboard control. | 2.34.4 |
 | label-field | `string` | `'label'` | Field name of option label. | 2.29.1 |

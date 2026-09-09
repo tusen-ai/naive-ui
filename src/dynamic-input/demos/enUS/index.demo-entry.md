@@ -36,7 +36,7 @@ custom-action.vue
 | preset | `'input' \| 'pair'` | `'input'` | The preset of `n-dynamic-input`, it work when `$slots.default` is not set. |  |
 | show-sort-button | `boolean` | `false` | Whether to show sort button. | 2.25.0 |
 | value | `unknown[]` | `undefined` | Value in controlled mode. |  |
-| on-create | `(index: number) => void` | `undefined` | Add button (+) click callback. If set, the return value will be used as the initial value of the new item. `index` is the the new item's corresponding index in the value array, which starts from 1 (the second item). |  |
+| on-create | `(index: number) => void` | `undefined` | Add button (+) click callback. If set, the return value will be used as the initial value of the new item. `index` is the new item's corresponding index in the value array, which starts from 1 (the second item). |  |
 | on-remove | `(index: number) => void` | `undefined` | Remove button (-) callback. |  |
 | on-update:value | `(value: any) => void` | `undefined` | On value changed callback. |  |
 

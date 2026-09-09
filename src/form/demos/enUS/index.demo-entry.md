@@ -51,7 +51,7 @@ feedback-style.vue
 #### FormItemRule Type
 
 <n-alert title="Caveat" type="warning" style="margin-bottom: 16px;" :bordered="false">
-  The follow table doesn't demostrate all props of rules. If you want to know all the usages, please see <n-a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</n-a>.
+  The following table doesn't demonstrate all props of rules. If you want to know all the usages, please see <n-a href="https://github.com/yiminghe/async-validator" target="_blank">async-validator</n-a>.
 </n-alert>
 
 | Property | Type | Default | Description | Version |

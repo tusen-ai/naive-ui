@@ -38,7 +38,7 @@ pnpm run build:site
 
 - Add period `.` to each description in English API tables (and each log of changelogs).
 - Don't add period `。` in any description in Chinese API tables (and any log of changelogs).
-- Add space between Chinese and Latin charactors.
+- Add space between Chinese and Latin characters.
 - Don't use Chinese punctuation in English docs.
 - Don't write changelogs in a released version.
 - When rebase the branch, pay attention to whether it is placed in the released version.
@@ -63,7 +63,7 @@ English Changelog:
 Chinese Changelog:
 - 一些变更，不要加句号
 
-Space between Chinese and Latin charactors:
+Space between Chinese and Latin characters:
 星之 star 卡比 kirby
 
 Changelog position:

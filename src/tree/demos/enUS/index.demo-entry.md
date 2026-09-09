@@ -2,7 +2,7 @@
 
 To be honest, I'm not good at biology. I can figure out few kinds of trees.
 
-What's more, not only biology, I forget balanced tree everytime after I revise it shortly.
+What's more, not only biology, I forget balanced tree every time after I revise it shortly.
 
 ## Demos
 
@@ -33,7 +33,7 @@ override-click-behavior.vue
 | Name | Type | default | Description | Version |
 | --- | --- | --- | --- | --- |
 | accordion | `boolean` | `false` | Whether to use accrodion expand mode. | 2.31.0 |
-| allow-checking-not-loaded | `boolean` | `false` | Whether to allow cascade checking on not loaded nodes. If you want to use this, you should know the `check-keys` may be incomplete. Also, you should aware about the consistency bewteen naive's checking logic and your backend's checking logic, especially when there are disabled nodes. | 2.28.1 |
+| allow-checking-not-loaded | `boolean` | `false` | Whether to allow cascade checking on not loaded nodes. If you want to use this, you should know the `check-keys` may be incomplete. Also, you should be aware of the consistency between naive's checking logic and your backend's checking logic, especially when there are disabled nodes. | 2.28.1 |
 | allow-drop | `(info: { dropPosition: DropPosition, node: TreeOption, phase: 'drag' \| 'drop' }) => boolean` | A function that prohibit dropping inside leaf node. | Whether to allow dropping. |  |
 | animated | `boolean` | `true` | Whether to show expand animation. | 2.33.4 |
 | block-line | `boolean` | `false` | Nodes spread out the whole row. |  |
@@ -76,7 +76,7 @@ override-click-behavior.vue
 | scrollbar-props | `ScrollbarProps` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props). |  |
 | selectable | `boolean` | `true` | Whether the node can be selected. |  |
 | selected-keys | `Array<string \| number>` | `undefined` | If set, selected status will work in controlled manner. |  |
-| show-irrelevant-nodes | `boolean` | `true` | Whether to filter unmached nodes when tree is in filter mode. | 2.28.1 |
+| show-irrelevant-nodes | `boolean` | `true` | Whether to filter unmatched nodes when tree is in filter mode. | 2.28.1 |
 | show-line | `boolean` | `false` | Whether to display the connection line. | 2.35.0 |
 | spin-props | `{ strokeWidth?: number, stroke?: string, scale?: number, radius?: number }` | `undefined` | Loading icon properties. | 2.44.0 |
 | virtual-scroll | `boolean` | `false` | Whether to enable virtual scroll. You need to set proper style height of the tree in advance. |  |
@@ -114,7 +114,7 @@ override-click-behavior.vue
 
 ### Tree Methods
 
-| Name | Paramaters | Description | Version |
+| Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
 | scrollTo | `ScrollTo` | Scroll to some node in virtual scroll mode. | 2.32.2, `ScrollTo` 2.37.0 |
 | getCheckedData | `() => { keys: Array<string \| number>, options: Array<TreeOption \| null> }` | Get checked data. | 2.34.1 |

@@ -247,7 +247,7 @@
     - `max-width`
     - `width`
     - `min-width`
-    - `manual` trigger is removed, use `show` to controll the popover
+    - `manual` trigger is removed, use `show` to control the popover
     - `body-class`, use `class` instead
     - `body-style`, use `style` instead
 - [x] popselect

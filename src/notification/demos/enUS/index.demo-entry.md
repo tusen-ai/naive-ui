@@ -2,7 +2,7 @@
 
 If something is to be telled to somebody.
 
-Notification component is always with low piority so I can make a lot of useless animations on it.
+Notification component is always with low priority so I can make a lot of useless animations on it.
 
 <n-space vertical size="large">
 <n-alert title="Prerequisite" type="warning" :bordered="false">

@@ -1,6 +1,6 @@
 # Popconfirm
 
-A confirm, poped.
+A confirm, popped.
 
 ## Demos
 
