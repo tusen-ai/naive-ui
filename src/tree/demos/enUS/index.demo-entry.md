@@ -33,7 +33,7 @@ override-click-behavior.vue
 | Name | Type | default | Description | Version |
 | --- | --- | --- | --- | --- |
 | accordion | `boolean` | `false` | Whether to use accrodion expand mode. | 2.31.0 |
-| allow-checking-not-loaded | `boolean` | `false` | Whether to allow cascade checking on not loaded nodes. If you want to use this, you should know the `check-keys` may be incomplete. Also, you should aware about the consistency between naive's checking logic and your backend's checking logic, especially when there are disabled nodes. | 2.28.1 |
+| allow-checking-not-loaded | `boolean` | `false` | Whether to allow cascade checking on not loaded nodes. If you want to use this, you should know the `check-keys` may be incomplete. Also, you should be aware of the consistency between naive's checking logic and your backend's checking logic, especially when there are disabled nodes. | 2.28.1 |
 | allow-drop | `(info: { dropPosition: DropPosition, node: TreeOption, phase: 'drag' \| 'drop' }) => boolean` | A function that prohibit dropping inside leaf node. | Whether to allow dropping. |  |
 | animated | `boolean` | `true` | Whether to show expand animation. | 2.33.4 |
 | block-line | `boolean` | `false` | Nodes spread out the whole row. |  |
