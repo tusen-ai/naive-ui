@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-space` 子项数量变化后残留旧子项的问题
+
 ## 2.45.3
 
 ### Fixes
