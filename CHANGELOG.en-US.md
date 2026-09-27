@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-dropdown` supports RTL.
+
 ## 2.45.3
 
 ### Fixes

@@ -55,7 +55,8 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const { renderIconRef, childrenFieldRef } = inject(dropdownInjectionKey)!
+    const { renderIconRef, childrenFieldRef, rtlEnabledRef }
+      = inject(dropdownInjectionKey)!
     provide(dropdownMenuInjectionKey, {
       showIconRef: computed(() => {
         const renderIcon = renderIconRef.value
@@ -87,11 +88,12 @@ export default defineComponent({
     provide(drawerBodyInjectionKey, null)
     provide(popoverBodyInjectionKey, bodyRef)
     return {
-      bodyRef
+      bodyRef,
+      rtlEnabled: rtlEnabledRef
     }
   },
   render() {
-    const { parentKey, clsPrefix, scrollable } = this
+    const { parentKey, clsPrefix, scrollable, rtlEnabled } = this
     const menuOptionsNode = this.tmNodes.map((tmNode) => {
       const { rawNode } = tmNode
       if (rawNode.show === false)
@@ -132,6 +134,7 @@ export default defineComponent({
       <div
         class={[
           `${clsPrefix}-dropdown-menu`,
+          rtlEnabled && `${clsPrefix}-dropdown-menu--rtl`,
           scrollable && `${clsPrefix}-dropdown-menu--scrollable`
         ]}
         ref="bodyRef"

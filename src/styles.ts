@@ -36,7 +36,10 @@ export { descriptionsDark } from './descriptions/styles'
 export { dialogDark, dialogRtl as unstableDialogRtl } from './dialog/styles'
 export { dividerDark } from './divider/styles'
 export { drawerDark, drawerRtl as unstableDrawerRtl } from './drawer/styles'
-export { dropdownDark } from './dropdown/styles'
+export {
+  dropdownDark,
+  dropdownRtl as unstableDropdownRtl
+} from './dropdown/styles'
 export {
   dynamicInputDark,
   dynamicInputRtl as unstableDynamicInputRtl
