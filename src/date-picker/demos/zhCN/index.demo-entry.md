@@ -53,20 +53,20 @@ form-debug.vue
 | first-day-of-week | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6` | `undefined` | 日历上一周的开始，0 代表周一 |  |
 | formatted-value | `string \| [string, string] \| null` | `undefined` | 格式化之后的值 | 2.24.0 |
 | input-readonly | `boolean` | `false` | 设置输入框为只读（避免在移动设备上打开虚拟键盘） |  |
-| month-format | `string` | `'M'` | 设置面板中月份的显示方式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | 2.37.0 |
+| month-format | `string` | `'M'` | 设置面板中月份的显示方式，详情见 [format](https://date-fns.org/v4.4.0/docs/format) | 2.37.0 |
 | panel | `boolean` | `false` | 是否只使用面板 | 2.29.1 |
 | placement | `'top-start' \| 'top' \| 'top-end' \| 'right-start' \| 'right' \| 'right-end' \| 'bottom-start' \| 'bottom' \| 'bottom-end' \| 'left-start' \| 'left' \| 'left-end'` | `'bottom-start'` | 面板的弹出位置 | 2.25.0 |
-| quarter-format | `string` | `'Q'Q` | 设置面板中季度的显示方式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | 2.37.0 |
+| quarter-format | `string` | `'Q'Q` | 设置面板中季度的显示方式，详情见 [format](https://date-fns.org/v4.4.0/docs/format) | 2.37.0 |
 | shortcuts | `Record<string, number \| (() => number)> \| Record<string, [number, number] \| (() => [number, number])>` | `undefined` | 自定义快捷按钮 |  |
 | show | `boolean` | `undefined` | 是否展示面板 | 2.28.3 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 尺寸 |  |
 | status | `'success' \| 'warning' \| 'error'` | `undefined` | 验证状态 | 2.27.0 |
-| time-picker-format | `string \| undefined` | `undefined` | 日期面板内时间的显示方式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | 2.38.2 |
+| time-picker-format | `string \| undefined` | `undefined` | 日期面板内时间的显示方式，详情见 [format](https://date-fns.org/v4.4.0/docs/format) | 2.38.2 |
 | to | `string \| HTMLElement \| false` | `body` | 面板的容器节点，`false` 会待在原地 |  |
 | type | `'date' \| 'datetime' \| 'daterange' \| 'datetimerange' \| 'month' \| 'monthrange' \| 'year' \| 'yearrange' \| 'quarter' \| 'quarterrange' \| 'week'` | `'date'` | Date Picker 的类型 | `'quarter'` v2.22.0, `'monthrange'` 2.28.3 |
 | value | `number \| [number, number] \| null` | `undefined` | Date Picker 的值 |  |
-| value-format | `string` | 跟随 `format` 属性 | 绑定值的格式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |
-| year-format | `string` | `'y'` | 设置面板中年的显示方式，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | 2.37.0 |
+| value-format | `string` | 跟随 `format` 属性 | 绑定值的格式，详情见 [format](https://date-fns.org/v4.4.0/docs/format) |
+| year-format | `string` | `'y'` | 设置面板中年的显示方式，详情见 [format](https://date-fns.org/v4.4.0/docs/format) | 2.37.0 |
 | year-range | `[number, number]` | `[1901, 2100]` | 设置面板中的年份选择范围 | 2.40.0 |
 | on-clear | `() => void` | `undefined` | 用户 clear 时执行的回调 | 2.28.3 |
 | on-confirm | `(value: number \| [number, number] \| null, formattedValue: string \| [string, string] \| null) => void` | `undefined` | 用户 confirm 时执行的回调 | 2.28.3 |
@@ -86,7 +86,7 @@ form-debug.vue
 | default-calendar-start-time | `number` | `undefined` | 面板日历默认开始的月份时间戳 | 2.38.1 |
 | fast-year-select | `boolean` | `false` | 为 `true` 时，选择年份后，关闭年月面板 | 2.44.0 |
 | fast-month-select | `boolean` | `false` | 为 `true` 时，选择月份后，关闭年月面板 | 2.44.0 |
-| format | `string` | `'yyyy-MM-dd'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |  |
+| format | `string` | `'yyyy-MM-dd'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v4.4.0/docs/format) |  |
 | is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `undefined` | 日期禁用的校验函数 | `detail` 2.37.1 |
 | placeholder | `string` | `'选择日期'` | 没有值时的占位信息 |  |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | 受控数据更新时触发的回调函数 | 2.24.0 |
@@ -101,7 +101,7 @@ form-debug.vue
 | default-time | `string \| (timestamp: number) => string` | `undefined` | 默认时间，可以接受一个参数为时间戳的函数，返回格式化的字符串，格式为 `HH:mm:ss` | 2.22.0，从 2.43.2 支持函数 |
 | fast-year-select | `boolean` | `false` | 为 `true` 时，选择年份后，关闭年月面板 | 2.44.0 |
 | fast-month-select | `boolean` | `false` | 为 `true` 时，选择月份后，关闭年月面板 | 2.44.0 |
-| format | `string` | `'yyyy-MM-dd HH:mm:ss'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |  |
+| format | `string` | `'yyyy-MM-dd HH:mm:ss'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v4.4.0/docs/format) |  |
 | is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `undefined` | 日期禁用的校验函数 | `detail` 2.37.1 |
 | is-time-disabled | `(current: number) => { isHourDisabled: boolean, isMinuteDisabled: boolean, isSecondDisabled: boolean }` | `undefined` | 时间禁用的校验函数 |  |
 | placeholder | `string` | `'选择日期时间'` | 提示信息 |  |
@@ -120,7 +120,7 @@ form-debug.vue
 | default-calendar-end-time | `number` | `undefined` | 面板日历默认结束的月份时间戳 | 2.28.3 |
 | fast-year-select | `boolean` | `false` | 为 `true` 时，选择年份后，关闭年月面板 | 2.44.0 |
 | fast-month-select | `boolean` | `false` | 为 `true` 时，选择月份后，关闭年月面板 | 2.44.0 |
-| format | `string` | `'yyyy-MM-dd'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |  |
+| format | `string` | `'yyyy-MM-dd'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v4.4.0/docs/format) |  |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | 日期禁用的校验函数 |  |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: (hour: number) => boolean, isMinuteDisabled?: (minute: number, hour: number \| null) => boolean, isSecondDisabled?: (second: number, minute: number \| null, hour: number \| null) => boolean }` | `undefined` | 时间禁用的校验函数，校验函数中的 `null` 表示当前没有选中值 |  |
 | close-on-select | `boolean` | `false` | 用户选择时间范围后是否自动关闭面板 |  |
@@ -142,7 +142,7 @@ form-debug.vue
 | end-placeholder | `string` | `'结束日期时间'` | DateTimeRange 中 end 选框的提示信息 |  |
 | fast-year-select | `boolean` | `false` | 为 `true` 时，选择年份后，关闭年月面板 | 2.44.0 |
 | fast-month-select | `boolean` | `false` | 为 `true` 时，选择月份后，关闭年月面板 | 2.44.0 |
-| format | `string` | `'yyyy-MM-dd HH:mm:ss'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |  |
+| format | `string` | `'yyyy-MM-dd HH:mm:ss'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v4.4.0/docs/format) |  |
 | is-date-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number] \| null) => boolean` | `undefined` | 日期禁用的校验函数 |  |
 | is-time-disabled | `(current: number, phase: 'start' \| 'end', value: [number, number]) => { isHourDisabled?: (hour: number) => boolean, isMinuteDisabled?: (minute: number, hour: number \| null) => boolean, isSecondDisabled?: (second: number, minute: number \| null, hour: number \| null) => boolean }` | `undefined` | 时间禁用的校验函数，校验函数中的 `null` 表示当前没有选中值 |  |
 | separator | `string` | 内置图标 | start 选框与 end 选框之间的分隔符 |  |
@@ -157,7 +157,7 @@ form-debug.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now' \| 'confirm'> \| null` | `['clear', 'now']` | Month 类型的 Date Picker 中支持的操作 |  |
-| format | `string` | `'yyyy-MM'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |  |
+| format | `string` | `'yyyy-MM'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v4.4.0/docs/format) |  |
 | is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `undefined` | 月份禁用的校验函数 | `detail` 2.37.1 |
 | placeholder | `string` | `'选择月份'` | 没有值时的占位信息 |  |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | 受控数据更新时触发的回调函数 | 2.24.0 |
@@ -169,7 +169,7 @@ form-debug.vue
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'confirm'> \| null` | `['clear', 'confirm']` | MonthRange 类型的 Date Picker 中支持的用户操作 | 2.28.3 |
 | end-placeholder | `string` | `'结束月份'` | MonthRange 中 end 选框的提示信息 | 2.28.3 |
-| format | `string` | `'yyyy-MM-dd'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | 2.28.3 |
+| format | `string` | `'yyyy-MM-dd'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v4.4.0/docs/format) | 2.28.3 |
 | close-on-select | `boolean` | `false` | 用户选择时间范围后是否自动关闭面板 | 2.28.3 |
 | separator | `string` | 内置图标 | start 选框与 end 选框之间的分隔符 | 2.28.3 |
 | start-placeholder | `string` | `'开始月份'` | MonthRange 中 start 选框的提示信息 | 2.28.3 |
@@ -182,7 +182,7 @@ form-debug.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now'> \| null` | `['clear', 'now']` | Year 类型的 Date Picker 中支持的操作 |  |
-| format | `string` | `'yyyy'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) |  |
+| format | `string` | `'yyyy'` | 时间格式化字符串，详情见 [format](https://date-fns.org/v4.4.0/docs/format) |  |
 | is-date-disabled | `(current: number, detail: { type: 'date', year: number, month: number, date: number } \| { type: 'month', year: number, month: number } \| { type: 'year', year: number } \| { type: 'quarter',  year: number, quarter: number } \| { type: 'input' }) => boolean` | `undefined` | 年份禁用的校验函数 | `detail` 2.37.1 |
 | placeholder | `string` | `'选择年份'` | 没有值时的占位信息 |  |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | 受控数据更新时触发的回调函数 | 2.24.0 |
@@ -194,7 +194,7 @@ form-debug.vue
 | --- | --- | --- | --- | --- |
 | actions | `Array<'clear' \| 'now'> \| null` | `['clear', 'now']` | Week 类型的 Date Picker 中支持的操作 | 2.37.0 |
 | default-calendar-start-time | `number` | `undefined` | 面板日历默认开始的月份时间戳 | 2.38.1 |
-| format | `string` | 中文为 `'YYYY-w'`，随语言变化 | 时间格式化字符串，详情见 [format](https://date-fns.org/v2.23.0/docs/format) | 2.37.0 |
+| format | `string` | 中文为 `'YYYY-w'`，随语言变化 | 时间格式化字符串，详情见 [format](https://date-fns.org/v4.4.0/docs/format) | 2.37.0 |
 | placeholder | `string` | 中文为 `'选择周'`，随语言变化 | 没有值时的占位信息 | 2.37.0 |
 | on-update:formatted-value | `(value: string \| null, timestampValue: number \| null) => void` | `undefined` | 受控数据更新时触发的回调函数 | 2.37.0 |
 | on-update:value | `(value: number \| null, formattedValue: string \| null) => void` | `undefined` | 受控数据更新时触发的回调函数 | 2.37.0 |
