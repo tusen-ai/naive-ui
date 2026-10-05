@@ -4,6 +4,7 @@ import { useMessage, version } from 'naive-ui'
 import { computed, defineComponent, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import {
+  push,
   useComponentOptions,
   useConfigProviderName,
   useDisplayMode,
@@ -298,6 +299,7 @@ export default defineComponent({
       message,
       t,
       version,
+      push,
       isMobile: isMobileRef,
       isTablet: isTabletRef,
       repoUrl,
@@ -436,9 +438,14 @@ export default defineComponent({
       >
         GitHub
       </n-button>
-      <n-text class="nav-picker padded">
+      <n-button
+        size="small"
+        quaternary
+        class="nav-picker"
+        @click="push('/docs/changelog')"
+      >
         {{ version }}
-      </n-text>
+      </n-button>
       <n-button
         v-if="dev"
         size="small"
@@ -491,10 +498,6 @@ export default defineComponent({
 
 .nav-picker {
   margin-right: 4px;
-}
-
-.nav-picker.padded {
-  padding: 0 10px;
 }
 
 .nav-picker:last-child {
