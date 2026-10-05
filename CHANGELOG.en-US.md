@@ -2,6 +2,8 @@
 
 ## 2.45.3
 
+`2026-08-28`
+
 ### Fixes
 
 - Fix `n-pagination` throwing when jumping from a high page back to page 1.
