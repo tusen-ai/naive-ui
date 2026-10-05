@@ -87,6 +87,8 @@ const derived = {
 
   ...commonVariables,
 
+  colorScheme: 'light' as 'light' | 'dark',
+
   baseColor: base.neutralBase,
 
   // primary color
