@@ -676,6 +676,10 @@ export default defineComponent({
     }
     function handleKeydown(e: KeyboardEvent): void {
       if (e.key === 'Enter') {
+        if (triggerInstRef.value?.isComposing) {
+          e.preventDefault()
+          return
+        }
         if (mergedShowRef.value) {
           const { enterBehavior } = treeHandleKeydown(e)
           if (!props.multiple) {
