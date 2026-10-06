@@ -101,6 +101,7 @@ export default defineComponent({
       headerHeightRef,
       onUnstableColumnResize,
       doUpdateResizableWidth,
+      getResizableWidth,
       handleTableHeaderScroll,
       deriveNextSorter,
       doUncheckAll,
@@ -167,6 +168,7 @@ export default defineComponent({
     }
     return {
       cellElsRef,
+      getResizableWidth,
       componentId,
       mergedSortState: mergedSortStateRef,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -196,6 +198,7 @@ export default defineComponent({
   render() {
     const {
       cellElsRef,
+      getResizableWidth,
       mergedClsPrefix,
       fixedColumnLeftMap,
       fixedColumnRightMap,
@@ -312,7 +315,7 @@ export default defineComponent({
                     right: pxfy(fixedColumnRightMap[key]?.start)
                   },
               {
-                width: pxfy(column.width),
+                width: pxfy(getResizableWidth(key) ?? column.width),
                 textAlign: column.titleAlign || column.align,
                 height: headerHeightPx
               }
@@ -412,18 +415,26 @@ export default defineComponent({
 
             const cells = renderRow(row, getLeft, pxfy(headerHeight))
 
-            cells.splice(
-              leftFixedColsCount,
-              0,
-              <th
-                colspan={cols.length - leftFixedColsCount - rightFixedColsCount}
-                style={{
-                  pointerEvents: 'none',
-                  visibility: 'hidden',
-                  height: 0
-                }}
-              />
-            )
+            const middleColsCount
+              = cols.length - leftFixedColsCount - rightFixedColsCount
+            if (middleColsCount) {
+              const middleCells = cells.splice(
+                leftFixedColsCount,
+                cells.length - leftFixedColsCount - rightFixedColsCount
+              )
+              // Out-of-flow children of a table row create an anonymous cell.
+              // Keep them inside the spacer so fixed cells use the right columns.
+              cells.splice(
+                leftFixedColsCount,
+                0,
+                <th
+                  colspan={middleColsCount}
+                  style={{ padding: 0, border: 0, height: 0 }}
+                >
+                  {middleCells}
+                </th>
+              )
+            }
             return <tr style={{ position: 'relative' }}>{cells}</tr>
           }}
         >

@@ -6,7 +6,7 @@ import type {
   MainTableRef,
   RowKey
 } from './interface'
-import { createId } from 'seemly'
+import { createId, depx } from 'seemly'
 import {
   computed,
   defineComponent,
@@ -37,7 +37,7 @@ import { useGroupHeader } from './use-group-header'
 import { useResizable } from './use-resizable'
 import { useScroll } from './use-scroll'
 import { useTableData } from './use-table-data'
-import { generateCsv } from './utils'
+import { generateCsv, getNumberColWidth } from './utils'
 
 export default defineComponent({
   name: 'DataTable',
@@ -119,6 +119,22 @@ export default defineComponent({
       = useResizable()
     const { rowsRef, colsRef, dataRelatedColsRef, hasEllipsisRef }
       = useGroupHeader(props, getResizableWidth)
+    const scrollXRef = computed(() => {
+      const { scrollX } = props
+      if (!props.virtualScrollX || scrollX === undefined)
+        return scrollX
+      const width = depx(scrollX)
+      if (!Number.isFinite(width))
+        return scrollX
+      const resizeDelta = colsRef.value.reduce((delta, col) => {
+        const resizedWidth = getResizableWidth(col.key)
+        return resizedWidth === undefined
+          ? delta
+          : delta + resizedWidth - (getNumberColWidth(col.column) ?? 128)
+      }, 0)
+      // Keep virtual column widths exact when the table becomes narrower.
+      return Math.max(0, width + resizeDelta)
+    })
 
     const {
       treeMateRef,
@@ -223,7 +239,9 @@ export default defineComponent({
       mergedCurrentPageRef,
       maxHeightRef,
       mergedTableLayoutRef,
-      mergedEmptyRef
+      mergedEmptyRef,
+      getResizableWidth,
+      scrollXRef
     })
     const { localeRef } = useLocale('DataTable')
 
@@ -242,7 +260,7 @@ export default defineComponent({
       hoverKeyRef,
       mergedClsPrefixRef,
       mergedThemeRef: themeRef,
-      scrollXRef: computed(() => props.scrollX),
+      scrollXRef,
       rowsRef,
       colsRef,
       paginatedDataRef,
