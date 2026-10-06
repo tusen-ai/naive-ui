@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-data-table` 在未设置 `scroll-x`、`scroll-x` 为非数字字符串，以及列动态变化时不显示右侧固定列阴影的问题
+
 ## 2.45.3
 
 `2026-08-28`

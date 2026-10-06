@@ -143,10 +143,31 @@ export function useScroll(
       activeLeftFixedColumn = nextActiveLeftFixedColumn
     }
   }
-  function deriveActiveRightFixedColumn(): void {
+  function getScrollWidth(
+    body: HTMLElement,
+    header: HTMLElement | null
+  ): number {
+    // `props.scrollX` may be missing (basic auto layout with overflowing
+    // columns) or a non-numeric string (e.g. a percentage). In those cases
+    // `Number(props.scrollX)` is `NaN` and would disable the right fixed
+    // shadow, so fall back to the real scrollable content width.
+    let scrollWidth = body.scrollWidth
+    // When a discrete header is rendered it may still have scrollable content
+    // while the body is empty, so take its width into account as well.
+    if (header) {
+      scrollWidth = Math.max(scrollWidth, header.scrollWidth)
+    }
+    const { scrollX } = props
+    const numericScrollX
+      = typeof scrollX === 'number' ? scrollX : Number(scrollX)
+    if (Number.isFinite(numericScrollX)) {
+      scrollWidth = Math.max(scrollWidth, numericScrollX)
+    }
+    return scrollWidth
+  }
+  function deriveActiveRightFixedColumn(scrollWidth: number): void {
     // target is header element
     const { value: rightFixedColumns } = rightFixedColumnsRef
-    const scrollWidth = Number(props.scrollX)
     const { value: tableWidth } = bodyWidthRef
     if (tableWidth === null)
       return
@@ -275,9 +296,10 @@ export function useScroll(
     const { value: tableWidth } = bodyWidthRef
     if (tableWidth === null)
       return
+    const scrollWidth = getScrollWidth(body, header)
     deriveActiveLeftFixedColumn()
     deriveActiveLeftFixedChildrenColumns()
-    deriveActiveRightFixedColumn()
+    deriveActiveRightFixedColumn(scrollWidth)
     deriveActiveRightFixedChildrenColumns()
   }
   function setHeaderScrollLeft(left: number): void {
@@ -292,6 +314,15 @@ export function useScroll(
     scrollMainTableBodyToTop()
   })
   watch([() => props.virtualScroll, mergedEmptyRef], () => {
+    void nextTick(() => {
+      syncScrollState('layout')
+    })
+  })
+  // Columns may be added or removed dynamically, which changes the content
+  // width. Re-derive the fixed column state so the right fixed shadow is not
+  // left stale. `scrollX` is also watched since it participates in the
+  // derivation.
+  watch([() => props.columns, () => props.scrollX], () => {
     void nextTick(() => {
       syncScrollState('layout')
     })
