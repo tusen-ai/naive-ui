@@ -80,7 +80,8 @@ export default defineComponent({
       childrenFieldRef,
       renderOptionRef,
       nodePropsRef,
-      menuPropsRef
+      menuPropsRef,
+      rtlEnabledRef
     } = NDropdown
     const NDropdownOption = inject(dropdownOptionInjectionKey, null)
     const NDropdownMenu = inject(dropdownMenuInjectionKey)!
@@ -186,6 +187,28 @@ export default defineComponent({
       }
     }
 
+    const mergedPlacementRef = computed(() => {
+      const { placement } = props
+      if (!rtlEnabledRef?.value)
+        return placement
+      switch (placement) {
+        case 'right-start':
+          return 'left-start'
+        case 'right':
+          return 'left'
+        case 'right-end':
+          return 'left-end'
+        case 'left-start':
+          return 'right-start'
+        case 'left':
+          return 'right'
+        case 'left-end':
+          return 'right-end'
+        default:
+          return placement
+      }
+    })
+
     return {
       labelField: labelFieldRef,
       renderLabel: renderLabelRef,
@@ -200,6 +223,7 @@ export default defineComponent({
       }),
       rawNode: rawNodeRef,
       hasSubmenu: hasSubmenuRef,
+      mergedPlacement: mergedPlacementRef,
       pending: useMemo(() => {
         const { value: pendingKeyPath } = pendingKeyPathRef
         const { key } = props.tmNode
@@ -337,7 +361,7 @@ export default defineComponent({
                       <div class={`${clsPrefix}-dropdown-offset-container`}>
                         <VFollower
                           show={this.mergedShowSubmenu}
-                          placement={this.placement}
+                          placement={this.mergedPlacement}
                           to={
                             scrollable
                               ? this.popoverBody || undefined
