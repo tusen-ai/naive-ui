@@ -113,10 +113,9 @@ export interface PanelChildComponentRefs {
   yearVlRef: Ref<VirtualListInst | null>
 }
 
-export interface PanelRef
-  extends Partial<
-    UnwrapNestedRefs<PanelChildComponentRefs & RangePanelChildComponentRefs>
-  > {
+export interface PanelRef extends Partial<
+  UnwrapNestedRefs<PanelChildComponentRefs & RangePanelChildComponentRefs>
+> {
   $el: HTMLElement
 }
 
