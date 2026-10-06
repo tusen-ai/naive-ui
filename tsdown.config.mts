@@ -30,6 +30,10 @@ export default defineConfig({
   root: 'src',
   outDir: buildFormat === 'esm' ? 'es' : 'lib',
   format: buildFormat,
+  outputOptions: {
+    // Keep live bindings for circular imports in unbundled CommonJS output.
+    exports: buildFormat === 'cjs' ? 'named' : undefined
+  },
   target: false,
   platform: 'browser',
   unbundle: true,

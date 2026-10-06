@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-dropdown` submenus not rendering when using the CommonJS build, closes [#8213](https://github.com/tusen-ai/naive-ui/issues/8213).
+
 ## 2.45.3
 
 `2026-08-28`

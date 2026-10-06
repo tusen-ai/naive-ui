@@ -9,7 +9,7 @@ import { createDemoPlugin } from './build/vite-plugin-demo'
 dns.setDefaultResultOrder('verbatim')
 
 const isBuildTimeTest = process.argv.some(arg =>
-  /(?:^|[\\/])(umd-test|esm-test)/.test(arg)
+  /(?:^|[\\/])(umd-test|esm-test|cjs-test)/.test(arg)
 )
 
 const browserSpecExclude = 'src/**/*.browser.spec.{ts,tsx}'
@@ -20,6 +20,7 @@ const testExclude = isBuildTimeTest
       ...configDefaults.exclude,
       'umd-test/**/*',
       'esm-test/**/*',
+      'cjs-test/**/*',
       browserSpecExclude
     ]
 

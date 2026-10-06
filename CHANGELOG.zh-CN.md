@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复使用 CommonJS 构建时 `n-dropdown` 子菜单无法渲染的问题，关闭 [#8213](https://github.com/tusen-ai/naive-ui/issues/8213)
+
 ## 2.45.3
 
 `2026-08-28`
