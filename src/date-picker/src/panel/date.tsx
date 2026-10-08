@@ -18,6 +18,7 @@ import {
 } from '../../../_utils'
 import { NButton, NxButton } from '../../../button'
 import PanelHeader from './panelHeader'
+import { renderDateCell } from './render-date-cell'
 import { useCalendar, useCalendarProps } from './use-calendar'
 
 /**
@@ -58,6 +59,7 @@ export default defineComponent({
       type
     } = this
     onRender?.()
+
     return (
       <div
         ref="selfRef"
@@ -162,7 +164,10 @@ export default defineComponent({
                 }}
               >
                 <div class={`${mergedClsPrefix}-date-panel-date__trigger`} />
-                {dateItem.dateObject.date}
+                {renderDateCell(
+                  datePickerSlots['date-cell'],
+                  dateItem.dateObject
+                )}
                 {dateItem.isCurrentDate ? (
                   <div class={`${mergedClsPrefix}-date-panel-date__sup`} />
                 ) : null}

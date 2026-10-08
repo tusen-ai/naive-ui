@@ -26,6 +26,7 @@ shortcuts.vue
 events.vue
 format.vue
 footerslot.vue
+date-cell-slot.vue
 update-on-close.vue
 focus.vue
 status.vue
@@ -201,33 +202,34 @@ close-panel-on-select.vue
 
 ### DatePicker Slots
 
-| Name       | Parameters | Description                       | Version |
-| ---------- | ---------- | --------------------------------- | ------- |
-| date-icon  | `()`       | Date icon of the input box.       | 2.29.0  |
-| footer     | `()`       | Extra Footer.                     |         |
-| next-month | `()`       | Next icon of the date panel.      | 2.33.4  |
-| next-year  | `()`       | Fast next icon of the date panel. | 2.33.4  |
-| prev-month | `()`       | Prev icon of the date panel.      | 2.33.4  |
-| prev-year  | `()`       | Fast prev icon of the date panel. | 2.33.4  |
-| separator  | `()`       | Separator of range picker.        | 2.29.0  |
+| Name | Parameters | Description | Version |
+| --- | --- | --- | --- |
+| date-cell | `(props: { year: number, month: number, date: number })` | The content of the date cell. | NEXT_VERSION |
+| date-icon | `()` | Date icon of the input box. | 2.29.0 |
+| footer | `()` | Extra Footer. |  |
+| next-month | `()` | Next icon of the date panel. | 2.33.4 |
+| next-year | `()` | Fast next icon of the date panel. | 2.33.4 |
+| prev-month | `()` | Prev icon of the date panel. | 2.33.4 |
+| prev-year | `()` | Fast prev icon of the date panel. | 2.33.4 |
+| separator | `()` | Separator of range picker. | 2.29.0 |
 
 ### Date, Year, QuarterRange, Week Slots
 
-| 名称 | 参数 | 说明 | 版本 |
+| Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
 | clear | `(props: { onClear: () => void, text: string })` | Clear button of the panel. | 2.40.0 |
 | now | `(props: { onNow: () => void, text: string })` | Now button of the panel. | 2.40.0 |
 
 ### DateRange, DateTimeRange, MonthRange, YearRange Slots
 
-| 名称 | 参数 | 说明 | 版本 |
+| Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
 | clear | `(props: { onClear: () => void, text: string })` | Clear button of the panel. | 2.40.0 |
 | confirm | `(props: { onConfirm: () => void, disabled: boolean, text: string })` | Confirm button of the panel. | 2.40.0 |
 
 ### DateTime, Month, Quarter Slots
 
-| 名称 | 参数 | 说明 | 版本 |
+| Name | Parameters | Description | Version |
 | --- | --- | --- | --- |
 | clear | `(props: { onClear: () => void, text: string })` | Clear button of the panel. | 2.40.0 |
 | confirm | `(props: { onConfirm: () => void, disabled: boolean, text: string })` | Confirm button of the panel. | 2.40.0 |
