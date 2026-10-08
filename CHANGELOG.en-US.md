@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-data-table` column borders flashing with the text color when toggling `single-line`, closes [#8200](https://github.com/tusen-ai/naive-ui/issues/8200).
+
 ## 2.45.3
 
 `2026-08-28`

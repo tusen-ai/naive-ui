@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-data-table` 切换 `single-line` 时列分割线短暂显示文字颜色的问题，关闭 [#8200](https://github.com/tusen-ai/naive-ui/issues/8200)
+
 ## 2.45.3
 
 `2026-08-28`
