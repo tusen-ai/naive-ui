@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-tabs` scrolling to the active tab before its scroll buttons finish rendering.
+
 ## 2.45.3
 
 `2026-08-28`
