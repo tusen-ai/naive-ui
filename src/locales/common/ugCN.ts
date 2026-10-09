@@ -128,6 +128,11 @@ const ugCN: NLocale = {
     more: 'more',
     monthFormat: 'MMM',
     weekdayFormat: 'eeeeee'
+  },
+  QrCode: {
+    expired: 'QR code expired',
+    refresh: 'Refresh',
+    scanned: 'Scanned'
   }
 }
 

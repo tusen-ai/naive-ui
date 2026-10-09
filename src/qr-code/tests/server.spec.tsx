@@ -69,4 +69,17 @@ describe('server side rendering', () => {
       expect(e).not.toBeTruthy()
     }
   })
+
+  it('works with status', async () => {
+    const app = createSSRApp(() => (
+      <NQrCode value="test" status="expired" />
+    ))
+    setup(app)
+    try {
+      await renderToString(app)
+    }
+    catch (e) {
+      expect(e).not.toBeTruthy()
+    }
+  })
 })

@@ -14,6 +14,7 @@ color.vue
 error-correction.vue
 download.vue
 type.vue
+status.vue
 ```
 
 ## API
@@ -32,7 +33,14 @@ type.vue
 | padding | `number \| string` | `12` | Padding size of the QR Code. | 2.36.0 |
 | value | `string` | `''` | Text information. | 2.36.0 |
 | size | `number` | `100` | Size of the qrcode. | 2.36.0 |
+| status | `'active'` \| `'expired'` \| `'loading'` \| `'scanned'` | `'active'` | QR code status. | NEXT_VERSION |
 | type | `'canvas'` \| `'svg'` | `'canvas'` | Customize Render Type. | 2.38.2 |
+
+### QR Code Events
+
+| Name | Type | Description | Version |
+| --- | --- | --- | --- |
+| refresh | `() => void` | Callback when clicking refresh on expired status. | NEXT_VERSION |
 
 ### About QR code error correction level
 

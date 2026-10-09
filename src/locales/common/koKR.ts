@@ -131,6 +131,11 @@ const koKR: NLocale = {
     more: '많음',
     monthFormat: 'MMM',
     weekdayFormat: 'eeeeee'
+  },
+  QrCode: {
+    expired: 'QR code expired',
+    refresh: 'Refresh',
+    scanned: 'Scanned'
   }
 }
 

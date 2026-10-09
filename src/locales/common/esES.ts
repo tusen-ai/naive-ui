@@ -128,6 +128,11 @@ const esES: NLocale = {
     more: 'más',
     monthFormat: 'MMM',
     weekdayFormat: 'eeeeee'
+  },
+  QrCode: {
+    expired: 'QR code expired',
+    refresh: 'Refresh',
+    scanned: 'Scanned'
   }
 }
 

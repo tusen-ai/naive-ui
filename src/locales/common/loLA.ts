@@ -128,6 +128,11 @@ const loLA: NLocale = {
     more: 'ຫຼາຍ',
     monthFormat: 'MMM',
     weekdayFormat: 'eeeeee'
+  },
+  QrCode: {
+    expired: 'QR code expired',
+    refresh: 'Refresh',
+    scanned: 'Scanned'
   }
 }
 

@@ -128,6 +128,11 @@ const elGR: NLocale = {
     more: 'περισσότερο',
     monthFormat: 'MMM',
     weekdayFormat: 'eeeeee'
+  },
+  QrCode: {
+    expired: 'QR code expired',
+    refresh: 'Refresh',
+    scanned: 'Scanned'
   }
 }
 

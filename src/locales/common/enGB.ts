@@ -129,6 +129,11 @@ const enGB: NLocale = {
     more: 'more',
     monthFormat: 'MMM',
     weekdayFormat: 'eee'
+  },
+  QrCode: {
+    expired: 'QR code expired',
+    refresh: 'Refresh',
+    scanned: 'Scanned'
   }
 }
 
