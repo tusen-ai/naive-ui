@@ -33,14 +33,14 @@ status.vue
 | padding | `number \| string` | `12` | 二维码填充大小 | 2.36.0 |
 | value | `string` | `''` | 文本信息 | 2.36.0 |
 | size | `number` | `100` | 二维码大小 | 2.36.0 |
-| status | `'active'` \| `'expired'` \| `'loading'` \| `'scanned'` | `'active'` | 二维码状态 | 2.46.0 |
+| status | `'active'` \| `'expired'` \| `'loading'` \| `'scanned'` | `'active'` | 二维码状态 | NEXT_VERSION |
 | type | `'canvas'` \| `'svg'` | `'canvas'` | 自定义二维码渲染类型 | 2.38.2 |
 
 ### QR Code Events
 
 | 名称 | 类型 | 说明 | 版本 |
 | --- | --- | --- | --- |
-| refresh | `() => void` | 点击「点击刷新」时的回调 | 2.46.0 |
+| refresh | `() => void` | 点击「点击刷新」时的回调 | NEXT_VERSION |
 
 ### 关于二维码纠错级别
 
