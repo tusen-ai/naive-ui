@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2.45.3
+## NEXT_VERSION
 
 ### Feats
 
@@ -9,6 +9,10 @@
 ### i18n
 
 - 新增 QrCode locale
+
+## 2.45.3
+
+`2026-08-28`
 
 ### Fixes
 
