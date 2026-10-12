@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix empty `n-tab-pane` labels not displaying the `tab` prop or name, closes [#8211](https://github.com/tusen-ai/naive-ui/issues/8211).
+
 ## 2.45.3
 
 `2026-08-28`

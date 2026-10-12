@@ -33,20 +33,35 @@ describe('n-tabs', () => {
     })
   })
 
-  it('should work with empty tab-pane', () => {
-    mount(NTabs, {
-      props: {
-        defaultValue: 'a'
-      },
-      slots: {
-        default: () =>
-          h(NTabPane, {
-            tab: 'a',
-            name: 'a'
-          })
+  it.each(['bar', 'line', 'card', 'segment'] as const)(
+    'should render empty tab-pane labels with type %s',
+    (type) => {
+      const wrapper = mount(NTabs, {
+        props: { type },
+        slots: {
+          default: () => [
+            h(NTabPane, { name: 'first', tab: 'First' }),
+            h(NTabPane, { name: 'Fallback' }),
+            h(
+              NTabPane,
+              { name: 'custom', tab: 'Prop label' },
+              {
+                tab: () => h('strong', 'Slot label')
+              }
+            )
+          ]
+        }
+      })
+      try {
+        expect(
+          wrapper.findAll('.n-tabs-tab__label').map(tab => tab.text())
+        ).toEqual(['First', 'Fallback', 'Slot label'])
       }
-    })
-  })
+      finally {
+        wrapper.unmount()
+      }
+    }
+  )
 
   it('should show AddIcon with `addable` `on-add` prop', async () => {
     const onAdd = vi.fn()
