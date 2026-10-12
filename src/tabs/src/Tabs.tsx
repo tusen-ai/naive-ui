@@ -1040,7 +1040,7 @@ export default defineComponent({
                       ? {
                           default: tabPaneVNode.children.tab
                         }
-                      : undefined}
+                      : {}}
                   </Tab>
                 )
               })
@@ -1157,7 +1157,7 @@ export default defineComponent({
                                   ? {
                                       default: tabPaneVNode.children.tab
                                     }
-                                  : undefined}
+                                  : {}}
                               </Tab>
                             )
                           }
