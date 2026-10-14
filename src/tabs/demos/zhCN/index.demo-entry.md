@@ -2,8 +2,15 @@
 
 在同一块区域切换内容。
 
-<n-alert type="warning" title="注意" :bordered="false">
-  <n-text code>n-tabs</n-text> 默认情况下会从 slot 获取默认展示的 tab 值，因此会产生一个 vue slot 的 warning。如果你不想看到这个 warning，请设定一个 <n-text code>default-value</n-text>。
+<n-alert type="warning" title="注意" style="margin-bottom: 16px;" :bordered="false">
+  <n-ul align-text>
+    <li>
+      <n-text code>n-tabs</n-text> 默认情况下会从 slot 获取默认展示的 tab 值，因此会产生一个 vue slot 的 warning。如果你不想看到这个 warning，请设定一个 <n-text code>default-value</n-text>。
+    </li>
+    <li>
+      由于技术限制，<n-text code>n-tab-pane</n-text> 是无法被二次封装的。
+    </li>
+  </n-ul>
 </n-alert>
 
 ## 演示
