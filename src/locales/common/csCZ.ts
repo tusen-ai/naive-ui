@@ -81,7 +81,9 @@ const csCZ: NLocale = {
     positiveText: 'OK',
     negativeText: 'Zrušit',
     now: 'Teď',
-    clear: 'Vyčistit'
+    clear: 'Vyčistit',
+    am: 'dopoledne',
+    pm: 'odpoledne'
   },
   Pagination: {
     goto: 'Jít na',

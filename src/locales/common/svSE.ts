@@ -81,7 +81,9 @@ const svSE: NLocale = {
     positiveText: 'OK',
     negativeText: 'Avbryt',
     now: 'Nu',
-    clear: 'Rensa'
+    clear: 'Rensa',
+    am: 'förmiddag',
+    pm: 'eftermiddag'
   },
   Pagination: {
     goto: 'Gå till',

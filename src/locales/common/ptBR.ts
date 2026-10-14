@@ -81,7 +81,9 @@ const ptBR: NLocale = {
     positiveText: 'OK',
     negativeText: 'Cancelar',
     now: 'Agora',
-    clear: 'Limpar'
+    clear: 'Limpar',
+    am: 'a.m.',
+    pm: 'p.m.'
   },
   Pagination: {
     goto: 'Ir para',

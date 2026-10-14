@@ -81,7 +81,9 @@ const daDK: NLocale = {
     positiveText: 'OK',
     negativeText: 'Annuller',
     now: 'Nu',
-    clear: 'Ryd'
+    clear: 'Ryd',
+    am: 'a.m.',
+    pm: 'p.m.'
   },
   Pagination: {
     goto: 'Gå til',
