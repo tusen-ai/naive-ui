@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-data-table` not showing the right fixed column shadow when `scroll-x` is not set or is a non-numeric string, and when columns are changed dynamically.
+
 ## 2.45.3
 
 `2026-08-28`

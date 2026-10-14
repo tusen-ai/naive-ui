@@ -65,6 +65,7 @@ render-cell.vue
 export-csv.vue
 fixed-column-debug.vue
 fixed-column2-debug.vue
+fixed-column-dynamic-debug.vue
 scroll-debug.vue
 height-debug.vue
 keep-alive-debug.vue
