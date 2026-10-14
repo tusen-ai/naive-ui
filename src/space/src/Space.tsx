@@ -163,6 +163,10 @@ export default defineComponent({
                 child
               ) : (
                 <div
+                  // The key is required: without it the JSX compiler may emit a
+                  // constant key for every item, which breaks the diff when the
+                  // number of children changes.
+                  key={index}
                   role="none"
                   class={itemClass}
                   style={[

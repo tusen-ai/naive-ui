@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-space` leaving stale items when the number of its children changes.
+
 ## 2.45.3
 
 `2026-08-28`

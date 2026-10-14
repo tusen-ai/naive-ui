@@ -1,7 +1,7 @@
 import type { VueWrapper } from '@vue/test-utils'
 import type { Justify } from '../src/Space'
 import { mount } from '@vue/test-utils'
-import { createCommentVNode, Fragment, h } from 'vue'
+import { createCommentVNode, Fragment, h, nextTick, ref } from 'vue'
 import { c } from '../../_utils/cssr'
 import { NConfigProvider } from '../../config-provider'
 import { NSpace } from '../index'
@@ -268,6 +268,30 @@ describe('n-space', () => {
     const childNodes = getChildrenNode(wrapper)
     expect(childNodes.length).toEqual(0)
     expect(wrapper.html()).toMatchSnapshot()
+    wrapper.unmount()
+  })
+
+  it('should update wrapped items when children count decreases', async () => {
+    const items = ref(['a', 'b', 'c'])
+    const wrapper = mount({
+      render() {
+        return (
+          <NSpace>
+            {{
+              default: () => items.value.map(item => <span>{item}</span>)
+            }}
+          </NSpace>
+        )
+      }
+    })
+    expect(getChildrenNode(wrapper).length).toBe(3)
+    expect(wrapper.text()).toBe('abc')
+
+    items.value = ['x', 'y']
+    await nextTick()
+
+    expect(getChildrenNode(wrapper).length).toBe(2)
+    expect(wrapper.text()).toBe('xy')
     wrapper.unmount()
   })
 
