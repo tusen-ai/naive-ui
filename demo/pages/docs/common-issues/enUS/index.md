@@ -1,3 +1,5 @@
+<!--anchor:on-->
+
 # Common Issues
 
 ## 1. The difference between @update:xxx and on-update:xxx
@@ -29,3 +31,61 @@ If you have any problems, feel free to create a PR or issue on GitHub.
 ## 2. How to use in Single File Component(SFC)?
 
 please see [Usage in SFC](usage-sfc)
+
+## 3. How to customize the default theme color?
+
+`Naive UI` uses `#18a058` as the default primary color. To change it, please refer to [Customize Theme](customize-theme) and [Create Theme Compatible Components](theme).
+
+## 4. How to use useMessage / useDialog / useNotification / useModal?
+
+- Inside `setup`, `useMessage()`, `useDialog()`, `useNotification()`, `useLoadingBar()`, and `useModal()` must be used inside the corresponding `Provider` component.
+- Outside `setup`, you need to mount the value returned by `useMessage` to `window` in the top-level `setup`, and then call it. Make sure `message` has been successfully mounted before calling it.
+
+```html
+<template>
+  <n-message-provider>
+    <MyApp />
+  </n-message-provider>
+</template>
+```
+
+```html
+<script setup>
+  import { useMessage } from 'naive-ui'
+  const message = useMessage()
+</script>
+```
+
+It is generally recommended to place all `Provider` components in the root component (e.g. `App.vue`):
+
+```html
+<template>
+  <n-config-provider>
+    <n-message-provider>
+      <n-dialog-provider>
+        <n-notification-provider>
+          <n-loading-bar-provider>
+            <router-view />
+          </n-loading-bar-provider>
+        </n-notification-provider>
+      </n-dialog-provider>
+    </n-message-provider>
+  </n-config-provider>
+</template>
+```
+
+If you don't want to nest `Provider` components, you can also use `createDiscreteApi` to use these APIs without context. See [Discrete API](https://www.naiveui.com/en-US/os-theme/components/discrete) for details.
+
+## 5. `Naive UI` does not work well on mobile
+
+`Naive UI` is not designed for mobile devices. It is recommended to use a mobile-specific component library.
+
+## 6. Sketch is provided. Are there plans for Figma UI Kit, Axure, or other design tools?
+
+Currently we mainly provide `Sketch` design resources. There are no official versions for `Figma UI Kit`, `Axure`, or other design tools at this time.
+
+However, we welcome and appreciate community contributions. If you are willing to help adapt or convert to other design tools, we would be happy to collaborate with you and share your contributions with more users.
+
+## 7. Contributing
+
+Please refer to [CONTRIBUTING.md](https://github.com/tusen-ai/naive-ui/blob/main/CONTRIBUTING.md).
