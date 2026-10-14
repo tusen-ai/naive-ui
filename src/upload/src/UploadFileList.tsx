@@ -69,6 +69,8 @@ export default defineComponent({
             `${mergedClsPrefix}-upload-file-list`,
             isImageCardTypeRef.value
             && `${mergedClsPrefix}-upload-file-list--grid`,
+            !mergedFileListRef.value.length
+            && `${mergedClsPrefix}-upload-file-list--empty`,
             abstract ? themeClassRef?.value : undefined,
             fileListClassRef.value
           ]}

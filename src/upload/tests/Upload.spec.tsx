@@ -40,6 +40,18 @@ describe('n-upload', () => {
     expect(wrapper.find('.n-upload-file-list').exists()).not.toBe(true)
   })
 
+  it('should not leave margin above an empty file list', () => {
+    const wrapper = mount(NUpload, {
+      slots: {
+        default: () => h(NUploadDragger)
+      }
+    })
+
+    expect(wrapper.find('.n-upload-file-list').classes()).toContain(
+      'n-upload-file-list--empty'
+    )
+  })
+
   it('should work with `disabled` prop', async () => {
     const wrapper = mount(NUpload)
     const disabledClasses = ['n-upload-trigger--disabled']
