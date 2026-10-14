@@ -59,6 +59,7 @@ export default defineComponent({
   },
   setup(props) {
     const {
+      showEllipseRef,
       isMountedRef,
       mergedValueRef,
       mergedClsPrefixRef,
@@ -172,6 +173,7 @@ export default defineComponent({
       enter
     }
     return {
+      showEllipse: showEllipseRef,
       isMounted: isMountedRef,
       mergedTheme: mergedThemeRef,
       mergedClsPrefix: mergedClsPrefixRef,
@@ -200,6 +202,7 @@ export default defineComponent({
                     clsPrefix={mergedClsPrefix}
                     class={`${mergedClsPrefix}-cascader-menu`}
                     autoPending
+                    showEllipse={this.showEllipse}
                     themeOverrides={
                       mergedTheme.peerOverrides.InternalSelectMenu
                     }
