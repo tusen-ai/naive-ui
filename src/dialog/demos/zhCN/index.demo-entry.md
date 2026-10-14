@@ -94,7 +94,7 @@ rtl-debug.vue
 | titleClass | `string` | `undefined` | 标题的类名 | 2.38.2 |
 | titleStyle | `Object \| string` | `undefined` | 标题的样式 | 2.38.2 |
 | transformOrigin | `'mouse' \| 'center'` | `'mouse'` | 对话框动画出现的位置 | 2.34.0 |
-| type | `'error \| 'success' \| 'warning'` | `'warning'` | 对话框类型 |  |
+| type | `'error \| 'success' \| 'warning' \| 'info' \| 'default'` | `'default'` | 对话框类型 |  |
 | zIndex | `number` | `undefined` | Dialog 的 z-index | 2.43.0 |
 | onAfterEnter | `() => void` | `undefined` | 出现动画完成执行的回调 | 2.33.0 |
 | onAfterLeave | `() => void` | `undefined` | 关闭动画完成执行的回调 | 2.33.3 |
@@ -135,7 +135,7 @@ rtl-debug.vue
 | titleClass | `string` | 标题的类名 | 2.38.2 |
 | titleStyle | `Object \| string` | 标题的样式 | 2.38.2 |
 | transformOrigin | `'mouse' \| 'center'` | 对话框动画出现的位置 | 2.34.0 |
-| type | `'error \| 'success' \| 'warning'` | 对话框类型 |  |
+| type | `'error \| 'success' \| 'warning' \| 'info' \| 'default'` | 对话框类型 |  |
 | onAfterEnter | `() => void \| undefined` | 出现动画完成执行的回调 | 2.33.0 |
 | onAfterLeave | `() => void \| undefined` | 关闭动画完成执行的回调 | 2.33.3 |
 | onClose | `() => boolean \| Promise<boolean> \| any` | 默认行为是关闭确认框。返回 `false` 或者 resolve `false` 或者 `Promise` 被 `reject` 会避免默认行为 |  |
@@ -172,7 +172,7 @@ rtl-debug.vue
 | title | `string \| (() => VNodeChild)` | `undefined` | 对话框标题，可以是渲染函数 |  |
 | title-class | `string` | `undefined` | 标题的类名 | 2.38.2 |
 | title-style | `Object \| string` | `undefined` | 标题的样式 | 2.38.2 |
-| type | `'error \| 'success' \| 'warning' \| 'info'` | `'warning'` | 对话框类型 |  |
+| type | `'error \| 'success' \| 'warning' \| 'info' \| 'default'` | `'default'` | 对话框类型 |  |
 | on-close | `() => void` | `undefined` | 点击关闭时执行的回调函数 |  |
 | on-negative-click | `(e: MouseEvent) => void` | `undefined` | 执行 `negative` 时执行的回调函数 |  |
 | on-positive-click | `(e: MouseEvent) => void` | `undefined` | 执行 `positive` 时执行的回调函数 |  |

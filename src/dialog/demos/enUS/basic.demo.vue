@@ -47,6 +47,28 @@ function handleError() {
     }
   })
 }
+
+function handleInfo() {
+  dialog.info({
+    title: 'Info',
+    content: 'Info',
+    positiveText: 'OK',
+    onPositiveClick: () => {
+      message.success('OK')
+    }
+  })
+}
+
+function handleDefault() {
+  dialog.default({
+    title: 'Default',
+    content: 'Default',
+    positiveText: 'OK',
+    onPositiveClick: () => {
+      message.success('OK')
+    }
+  })
+}
 </script>
 
 <template>
@@ -59,6 +81,12 @@ function handleError() {
     </n-button>
     <n-button @click="handleError">
       Error
+    </n-button>
+    <n-button @click="handleInfo">
+      Info
+    </n-button>
+    <n-button @click="handleDefault">
+      Default
     </n-button>
   </n-space>
 </template>
