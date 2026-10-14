@@ -86,6 +86,7 @@ export default defineComponent({
             to={false}
             showIcon={false}
             disabled={this.isSelecting}
+            inputReadonly={this.inputReadonly}
             theme={mergedTheme.peers.TimePicker}
             themeOverrides={mergedTheme.peerOverrides.TimePicker}
             stateful={false}
@@ -116,6 +117,7 @@ export default defineComponent({
               : timePickerProps)}
             disabled={this.isSelecting}
             showIcon={false}
+            inputReadonly={this.inputReadonly}
             theme={mergedTheme.peers.TimePicker}
             themeOverrides={mergedTheme.peerOverrides.TimePicker}
             to={false}

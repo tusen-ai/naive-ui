@@ -74,6 +74,7 @@ export default defineComponent({
             format={this.timePickerFormat}
             {...(Array.isArray(timePickerProps) ? undefined : timePickerProps)}
             showIcon={false}
+            inputReadonly={this.inputReadonly}
             to={false}
             theme={mergedTheme.peers.TimePicker}
             themeOverrides={mergedTheme.peerOverrides.TimePicker}
