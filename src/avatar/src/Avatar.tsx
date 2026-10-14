@@ -231,14 +231,15 @@ export default defineComponent({
       }
     })
 
+    const loadedRef = ref(!props.lazy)
+
     watch(
       () => props.src || props.imgProps?.src,
       () => {
         hasLoadErrorRef.value = false
+        loadedRef.value = !props.lazy
       }
     )
-
-    const loadedRef = ref(!props.lazy)
 
     return {
       textRef,
