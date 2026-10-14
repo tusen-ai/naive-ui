@@ -123,6 +123,7 @@ export-csv.vue
 | on-update:page | `(page: number)` | `undefined` | Callback function triggered when the page changes. |  |
 | on-update:page-size | `(pageSize: number) => void` | `undefined` | Callback function triggered when the page-size changes. |  |
 | on-update:sorter | `(options: DataTableSortState \| DataTableSortState[] \| null) => void` | `undefined` | If the change column is sorted by multiple columns, will return `DataTableSortState[] \| null`, otherwise return `DataTableSortState \| null`. |  |
+| on-update:resized-column | `(width:number,column:TableColumn) => void` | `undefined` | The callback function triggered after column resizing via dragging. |  |
 
 #### DataTableColumn Properties
 
