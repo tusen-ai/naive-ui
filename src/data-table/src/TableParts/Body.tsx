@@ -196,6 +196,7 @@ export default defineComponent({
       summaryPlacementRef,
       treeMateRef,
       scrollbarPropsRef,
+      expandOnClickRef,
       setHeaderScrollLeft,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
@@ -502,6 +503,7 @@ export default defineComponent({
       rowProps: rowPropsRef,
       loadingKeySet: loadingKeySetRef,
       expandable: expandableRef,
+      expandOnClick: expandOnClickRef,
       stickyExpandedRows: stickyExpandedRowsRef,
       renderExpandIcon: renderExpandIconRef,
       scrollbarProps: scrollbarPropsRef,
@@ -627,6 +629,7 @@ export default defineComponent({
               handleCheckboxUpdateChecked,
               handleRadioUpdateChecked,
               handleUpdateExpanded,
+              expandOnClick,
               heightForRow,
               minRowHeight,
               virtualScrollX
@@ -1030,9 +1033,31 @@ export default defineComponent({
                 }
               }
 
+              const expandableTmNode
+                = !isSummary && !rowInfo.tmNode.isLeaf ? rowInfo.tmNode : null
               const row = (
                 <tr
                   {...props}
+                  onClick={(e) => {
+                    props?.onClick?.(e)
+                    if (
+                      !expandOnClick
+                      || expandableTmNode === null
+                      || e.defaultPrevented
+                    ) {
+                      return
+                    }
+                    const { target } = e
+                    if (
+                      target instanceof Element
+                      && target.closest(
+                        `.${mergedClsPrefix}-data-table-expand-trigger`
+                      )
+                    ) {
+                      return
+                    }
+                    handleUpdateExpanded(rowKey, expandableTmNode)
+                  }}
                   onMouseenter={(e) => {
                     this.hoverKey = rowKey
                     props?.onMouseenter?.(e)
