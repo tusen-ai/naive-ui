@@ -283,4 +283,30 @@ describe('n-input-number', () => {
     expect(wrapper.find('input').element.id).toEqual('i am an id')
     wrapper.unmount()
   })
+
+  it('should not commit the value when Enter is pressed during IME composition', async () => {
+    const onUpdateValue = vi.fn()
+    const wrapper = mount(NInputNumber, {
+      attachTo: document.body,
+      props: {
+        defaultValue: 1,
+        onUpdateValue
+      }
+    })
+    const input = wrapper.find('input')
+    // a work-in-progress value: tracked by the input but not yet committed
+    input.element.value = '42.'
+    await input.trigger('input')
+    expect(onUpdateValue).toHaveBeenCalledTimes(0)
+    // Enter during IME composition must not commit the tracked value
+    await input.trigger('compositionstart')
+    await input.trigger('keydown', { key: 'Enter' })
+    expect(onUpdateValue).toHaveBeenCalledTimes(0)
+    // once composition ends, Enter commits normally
+    await input.trigger('compositionend')
+    await input.trigger('keydown', { key: 'Enter' })
+    expect(onUpdateValue).toHaveBeenCalledTimes(1)
+    expect(onUpdateValue).toHaveBeenCalledWith(42)
+    wrapper.unmount()
+  })
 })
