@@ -28,6 +28,7 @@ body {
 
 .md-table-wrapper {
   margin-bottom: 16px;
+  overflow: auto;
 }
 
 .md-table-wrapper:last-child,
