@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-pagination` changing pages when tapping an ellipsis to open the quick jump dropdown on touchscreens, closes [#8202](https://github.com/tusen-ai/naive-ui/issues/8202).
+
 ## 2.45.3
 
 `2026-08-28`

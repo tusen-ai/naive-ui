@@ -220,6 +220,7 @@ export default defineComponent({
     const fastBackwardActiveRef = ref(false)
     const showFastForwardMenuRef = ref(false)
     const showFastBackwardMenuRef = ref(false)
+    let isTouchPointer = false
 
     const handleFastForwardMouseenter = (): void => {
       if (props.disabled)
@@ -405,9 +406,22 @@ export default defineComponent({
     function handleQuickJumperChange(): void {
       doQuickJump()
     }
-    function handlePageItemClick(pageItem: PageItem): void {
+    function handlePageItemPointerDown(event: PointerEvent): void {
+      isTouchPointer = event.pointerType === 'touch'
+    }
+    function handlePageItemClick(pageItem: PageItem, event: MouseEvent): void {
       if (props.disabled)
         return
+      if (
+        pageItem.type !== 'page'
+        && pageItem.options
+        && isTouchPointer
+        && event.detail !== 0
+      ) {
+        showFastBackwardMenuRef.value = pageItem.type === 'fast-backward'
+        showFastForwardMenuRef.value = pageItem.type === 'fast-forward'
+        return
+      }
       switch (pageItem.type) {
         case 'page':
           doUpdatePage(pageItem.label)
@@ -567,6 +581,7 @@ export default defineComponent({
       handleBackwardClick: backward,
       handleForwardClick: forward,
       handlePageItemClick,
+      handlePageItemPointerDown,
       handleSizePickerChange,
       handleQuickJumperChange,
       cssVars: inlineThemeDisabled
@@ -801,8 +816,9 @@ export default defineComponent({
                             type === 'page'
                             && `${mergedClsPrefix}-pagination-item--clickable`
                           ]}
-                          onClick={() => {
-                            handlePageItemClick(pageItem)
+                          onPointerdown={this.handlePageItemPointerDown}
+                          onClick={(event) => {
+                            handlePageItemClick(pageItem, event)
                           }}
                           onMouseenter={onMouseenter}
                           onMouseleave={onMouseleave}
@@ -863,6 +879,10 @@ export default defineComponent({
                           scrollable
                           scrollbarProps={this.scrollbarProps}
                           showCheckmark={false}
+                          onClickoutside={() => {
+                            this.showFastBackwardMenu = false
+                            this.showFastForwardMenu = false
+                          }}
                         >
                           {{ default: () => itemNode }}
                         </NPopselect>
