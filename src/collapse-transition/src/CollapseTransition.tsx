@@ -114,37 +114,37 @@ export default defineComponent({
     }
   },
   render() {
-    return (
-      <NFadeInExpandTransition appear={this.appear}>
-        {{
-          default: () => {
-            const { mergedShow, displayDirective, onceTrue } = this
-            const useVShow = displayDirective === 'show' && onceTrue
-            if (!useVShow && !mergedShow)
-              return
-            this.onRender?.()
-            const contentNode = h(
-              'div', // Don't use jsx since it would cause useless spread in each rendering
-              mergeProps(
-                {
-                  class: [
-                    `${this.mergedClsPrefix}-collapse-transition`,
-                    this.rtlEnabled
-                    && `${this.mergedClsPrefix}-collapse-transition--rtl`,
-                    this.themeClass
-                  ],
-                  style: this.cssVars
-                },
-                this.$attrs
-              ),
-              this.$slots
-            )
-            return useVShow
-              ? withDirectives(contentNode, [[vShow, mergedShow]])
-              : contentNode
-          }
-        }}
-      </NFadeInExpandTransition>
+    return h(
+      NFadeInExpandTransition,
+      { appear: this.appear },
+      {
+        default: () => {
+          const { mergedShow, displayDirective, onceTrue } = this
+          const useVShow = displayDirective === 'show' && onceTrue
+          if (!useVShow && !mergedShow)
+            return
+          this.onRender?.()
+          const contentNode = h(
+            'div', // Don't use jsx since it would cause useless spread in each rendering
+            mergeProps(
+              {
+                class: [
+                  `${this.mergedClsPrefix}-collapse-transition`,
+                  this.rtlEnabled
+                  && `${this.mergedClsPrefix}-collapse-transition--rtl`,
+                  this.themeClass
+                ],
+                style: this.cssVars
+              },
+              this.$attrs
+            ),
+            this.$slots
+          )
+          return useVShow
+            ? withDirectives(contentNode, [[vShow, mergedShow]])
+            : contentNode
+        }
+      }
     )
   }
 })
