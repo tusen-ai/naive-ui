@@ -18,6 +18,8 @@ const srcList = [
   'https://picsum.photos/id/10/100/100',
   'xxx.png'
 ]
+
+const fallbackSrc = 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg'
 </script>
 
 <template>
@@ -49,7 +51,7 @@ const srcList = [
         size="small"
         lazy
         :src="src"
-        fallback-src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+        :fallback-src="fallbackSrc"
         :render-placeholder="() => null"
         :intersection-observer-options="{
           root: '#image-scroll-container',
