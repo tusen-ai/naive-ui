@@ -63,13 +63,13 @@ import {
   svSE,
   thTH,
   trTR,
+  ugCN,
   ukUA,
   uzUZ,
   zhCN,
   zhTW
 } from '../index'
 import { NInput } from '../input/index'
-import ugCN from './common/ugCN'
 import { createLocale } from './utils/index'
 
 const Wrapper = defineComponent({
@@ -428,5 +428,75 @@ describe('locale', () => {
         }
       }).html()
     ).toMatchSnapshot()
+  })
+  it('added locales have complete keys and mount', async () => {
+    const localePairs = [
+      ['afZA', 'dateAfZA'],
+      ['amET', 'dateAmET'],
+      ['beBY', 'dateBeBY'],
+      ['bgBG', 'dateBgBG'],
+      ['bnBD', 'dateBnBD'],
+      ['caES', 'dateCaES'],
+      ['elGR', 'dateElGR'],
+      ['esES', 'dateEsES'],
+      ['euES', 'dateEuES'],
+      ['fiFI', 'dateFiFI'],
+      ['filPH', 'dateFilPH'],
+      ['glES', 'dateGlES'],
+      ['guIN', 'dateGuIN'],
+      ['heIL', 'dateHeIL'],
+      ['hiIN', 'dateHiIN'],
+      ['hrHR', 'dateHrHR'],
+      ['huHU', 'dateHuHU'],
+      ['hyAM', 'dateHyAM'],
+      ['isIS', 'dateIsIS'],
+      ['kaGE', 'dateKaGE'],
+      ['kkKZ', 'dateKkKZ'],
+      ['knIN', 'dateKnIN'],
+      ['kyKG', 'dateKyKG'],
+      ['loLA', 'dateLoLA'],
+      ['ltLT', 'dateLtLT'],
+      ['lvLV', 'dateLvLV'],
+      ['mkMK', 'dateMkMK'],
+      ['mlIN', 'dateMlIN'],
+      ['mnMN', 'dateMnMN'],
+      ['mrIN', 'dateMrIN'],
+      ['msMY', 'dateMsMY'],
+      ['myMM', 'dateMyMM'],
+      ['neNP', 'dateNeNP'],
+      ['paIN', 'datePaIN'],
+      ['ptPT', 'datePtPT'],
+      ['rmCH', 'dateRmCH'],
+      ['roRO', 'dateRoRO'],
+      ['siLK', 'dateSiLK'],
+      ['slSI', 'dateSlSI'],
+      ['sqAL', 'dateSqAL'],
+      ['srRS', 'dateSrRS'],
+      ['swKE', 'dateSwKE'],
+      ['taIN', 'dateTaIN'],
+      ['teIN', 'dateTeIN'],
+      ['urPK', 'dateUrPK'],
+      ['zuZA', 'dateZuZA']
+    ] as const
+    const exported = await import('../index')
+    const enUSKeys = Object.keys(enUS)
+    for (const [localeKey, dateKey] of localePairs) {
+      const locale = exported[localeKey] as NLocale
+      const dateLocale = exported[dateKey] as NDateLocale
+      expect(locale.name, localeKey).toBeTruthy()
+      expect(Object.keys(locale), localeKey).toEqual(enUSKeys)
+      expect(dateLocale.name, dateKey).toBe(locale.name)
+      expect(dateLocale.locale, dateKey).toBeTruthy()
+      const wrapper = mount(Wrapper, {
+        props: {
+          dateLocale,
+          locale
+        }
+      })
+      expect(wrapper.find('input').attributes('placeholder')).toBe(
+        locale.Input.placeholder
+      )
+      wrapper.unmount()
+    }
   })
 })

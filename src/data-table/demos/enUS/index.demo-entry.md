@@ -13,7 +13,7 @@ DataTable is used to displays rows of structured data.
       In non-async mode, page count is determined by data's count. Even if you pass a <n-text code>page-count</n-text> in, it won't change data table's displayed page count. If you want it behaves in this way, you should set <n-text code>remote</n-text> prop.
     </li>
     <li>
-      If you want to use the data returned by the server for display, paging, filtering, sorting, please refer to <n-a href="#ajax-usage">Async</n-a>.
+      If you want to use the data returned by the server for display, paging, filtering, sorting, please refer to <n-a href="#ajax-usage.vue">Async</n-a>.
     </li>
   </n-ul>
 </n-alert>
@@ -221,11 +221,11 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | clearFilters | `() => void` | Clear all filter state. |  |
 | clearSorter | `() => void` | Clear all sort state. |  |
 | downloadCsv | `(options?: { fileName?: string, keepOriginalData?: boolean }) => void` | Download CSV. | 2.37.0 |
-| getCurrentPageData | `() => RowData[]` | Get row data of the current page after filters, sorters and pagination are applied. | NEXT_VERSION |
-| getFilteredAndSortedData | `() => RowData[]` | Get all row data after filters and sorters are applied, excluding pagination. In `remote` mode, it is based on the current `data` prop only. | NEXT_VERSION |
+| getCurrentPageData | `() => RowData[]` | Get row data of the current page after filters, sorters and pagination are applied. | 2.45.0 |
+| getFilteredAndSortedData | `() => RowData[]` | Get all row data after filters and sorters are applied, excluding pagination. In `remote` mode, it is based on the current `data` prop only. | 2.45.0 |
 | filters | `(filters: DataTableFilterState \| null) => void` | Set the active filters of the table. |  |
 | page | `(page: number) => void` | Manually set the page. |  |
-| scrollTo | `DataTableScrollTo` | Scroll content. See <n-a href="#DataTableScrollTo-Type">DataTableScrollTo Type</n-a>. | NEXT_VERSION |
+| scrollTo | `DataTableScrollTo` | Scroll content. See <n-a href="#DataTableScrollTo-Type">DataTableScrollTo Type</n-a>. | 2.45.0 |
 | sort | `(columnKey: string \| number, order: 'ascend' \| 'descend' \| false) => void` | Set the sort state of the table. |  |
 
 ### DataTable Slots

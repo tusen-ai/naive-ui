@@ -1,4 +1,6 @@
+import type { ExtractThemeOverrides, Theme } from '../../../_mixins'
 import type { ThemeCommonVars } from '../../../_styles/common'
+import type { PopoverTheme } from '../../../popover/styles'
 import { changeColor } from 'seemly'
 import { createTheme } from '../../../_mixins'
 import { commonLight } from '../../../_styles/common'
@@ -105,9 +107,9 @@ function self(vars: ThemeCommonVars) {
   }
 }
 
-export type InternalSelectionThemeVars = ReturnType<typeof self>
+export interface InternalSelectionThemeVars extends ReturnType<typeof self> {}
 
-const internalSelectionLight = createTheme({
+const internalSelectionLight: InternalSelectionTheme = createTheme({
   name: 'InternalSelection',
   common: commonLight,
   peers: {
@@ -116,5 +118,14 @@ const internalSelectionLight = createTheme({
   self
 })
 
+export interface InternalSelectionTheme extends Theme<
+  'InternalSelection',
+  InternalSelectionThemeVars,
+  {
+    Popover: PopoverTheme
+  }
+> {}
+
+export interface InternalSelectionThemeOverrides extends ExtractThemeOverrides<InternalSelectionTheme> {}
+
 export default internalSelectionLight
-export type InternalSelectionTheme = typeof internalSelectionLight

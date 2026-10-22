@@ -3,6 +3,7 @@ import type {
   CSSProperties,
   ExtractPropTypes,
   PropType,
+  Ref,
   SlotsType,
   VNode,
   VNodeChild
@@ -10,7 +11,7 @@ import type {
 import type { BaseWaveRef } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { ButtonTheme } from '../styles'
+import type { ButtonTheme, ButtonThemeOverrides } from '../styles'
 import type { ButtonSize, ButtonSpinProps, ButtonType } from './public-types'
 import { changeColor } from 'seemly'
 import { useMemo } from 'vooks'
@@ -38,7 +39,7 @@ import { buttonLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const buttonProps = {
-  ...(useTheme.props as ThemeProps<ButtonTheme>),
+  ...(useTheme.props as ThemeProps<ButtonTheme, ButtonThemeOverrides>),
   color: String,
   textColor: String,
   text: Boolean,
@@ -550,7 +551,8 @@ const Button = defineComponent({
 
     return {
       selfElRef,
-      waveElRef,
+      // reduce dts: string ref only, type unused in render
+      waveElRef: waveElRef as unknown,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedFocusable: mergedFocusableRef,
       mergedSize: mergedSizeRef,
@@ -574,8 +576,10 @@ const Button = defineComponent({
           '--n-border-color-focus': hoverColor,
           '--n-border-color-disabled': color
         }
-      }),
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      }) as Ref<CSSProperties>,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }
@@ -610,7 +614,7 @@ const Button = defineComponent({
         ]}
         tabindex={this.mergedFocusable ? 0 : -1}
         type={this.attrType}
-        style={this.cssVars as CSSProperties}
+        style={this.cssVars}
         disabled={this.disabled}
         onClick={this.handleClick}
         onBlur={this.handleBlur}

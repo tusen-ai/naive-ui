@@ -1,7 +1,7 @@
-import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { DescriptionsTheme } from '../styles'
+import type { DescriptionsTheme, DescriptionsThemeOverrides } from '../styles'
 import type { DescriptionsSize } from './public-types'
 import { repeat } from 'seemly'
 import { useCompitable } from 'vooks'
@@ -19,7 +19,10 @@ import style from './styles/index.cssr'
 import { isDescriptionsItem } from './utils'
 
 export const descriptionsProps = {
-  ...(useTheme.props as ThemeProps<DescriptionsTheme>),
+  ...(useTheme.props as ThemeProps<
+    DescriptionsTheme,
+    DescriptionsThemeOverrides
+  >),
   title: String,
   column: {
     type: Number,
@@ -144,7 +147,9 @@ export default defineComponent({
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       compitableColumn: useCompitable(props, ['columns', 'column']),

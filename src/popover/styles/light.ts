@@ -1,3 +1,5 @@
+import type { ScrollbarTheme } from '../../_internal/scrollbar/styles'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import { createTheme } from '../../_mixins'
@@ -24,9 +26,9 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type PopoverThemeVars = ReturnType<typeof self>
+export interface PopoverThemeVars extends ReturnType<typeof self> {}
 
-const popoverLight = createTheme({
+const popoverLight: PopoverTheme = createTheme({
   name: 'Popover',
   common: commonLight,
   peers: {
@@ -35,5 +37,14 @@ const popoverLight = createTheme({
   self
 })
 
-export type PopoverTheme = typeof popoverLight
+export interface PopoverTheme extends Theme<
+  'Popover',
+  PopoverThemeVars,
+  {
+    Scrollbar: ScrollbarTheme
+  }
+> {}
+
+export interface PopoverThemeOverrides extends ExtractThemeOverrides<PopoverTheme> {}
+
 export default popoverLight

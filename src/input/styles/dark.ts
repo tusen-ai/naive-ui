@@ -65,6 +65,7 @@ function self(vars: ThemeCommonVars) {
     placeholderColor,
     placeholderColorDisabled,
     color: inputColor,
+    colorHover: inputColor,
     colorDisabled: inputColorDisabled,
     colorFocus: changeColor(primaryColor, { alpha: 0.1 }),
     groupLabelBorder: '1px solid #0000',

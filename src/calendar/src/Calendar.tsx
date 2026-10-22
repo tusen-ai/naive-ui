@@ -1,7 +1,7 @@
-import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { CalendarTheme } from '../styles'
+import type { CalendarTheme, CalendarThemeOverrides } from '../styles'
 import type {
   CalendarDefaultSlotProps,
   CalendarHeaderSlotProps,
@@ -30,7 +30,7 @@ import { calendarLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const calendarProps = {
-  ...(useTheme.props as ThemeProps<CalendarTheme>),
+  ...(useTheme.props as ThemeProps<CalendarTheme, CalendarThemeOverrides>),
   isDateDisabled: Function as PropType<(date: number) => boolean | undefined>,
   value: Number,
   defaultValue: {
@@ -189,7 +189,9 @@ export default defineComponent({
       handlePrevClick,
       handleNextClick,
       mergedTheme: themeRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

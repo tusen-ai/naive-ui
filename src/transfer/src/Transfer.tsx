@@ -1,7 +1,7 @@
-import type { CSSProperties, PropType, VNodeChild } from 'vue'
+import type { CSSProperties, PropType, Ref, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { TransferTheme } from '../styles'
+import type { TransferTheme, TransferThemeOverrides } from '../styles'
 import type {
   Filter,
   OnUpdateValue,
@@ -28,7 +28,7 @@ import NTransferList from './TransferList'
 import { useTransferData } from './use-transfer-data'
 
 export const transferProps = {
-  ...(useTheme.props as ThemeProps<TransferTheme>),
+  ...(useTheme.props as ThemeProps<TransferTheme, TransferThemeOverrides>),
   value: Array as PropType<OptionValue[] | null>,
   defaultValue: {
     type: Array as PropType<OptionValue[] | null>,
@@ -288,7 +288,7 @@ export default defineComponent({
           '--n-close-icon-color-pressed': closeIconColorPressed,
           '--n-divider-color': dividerColor
         }
-      })
+      }) as Ref<CSSProperties>
     }
   },
   render() {

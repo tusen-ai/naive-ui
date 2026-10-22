@@ -1,6 +1,7 @@
 import type { CascaderOption } from '../src/interface'
 import { mount } from '@vue/test-utils'
 import { nextTick } from 'vue'
+import { NBaseFocusDetector } from '../../_internal'
 import { NCascader } from '../index'
 
 function getOptions(depth = 3, iterator = 1, prefix = ''): CascaderOption[] {
@@ -260,6 +261,23 @@ describe('n-cascader', () => {
     document.body.dispatchEvent(mouseupEvent)
     await nextTick()
     expect(document.querySelector('.n-cascader-menu')).toEqual(null)
+    wrapper.unmount()
+  })
+
+  it('should not throw when focus leaves the menu', async () => {
+    const errorHandler = vi.fn()
+    const wrapper = mount(NCascader, {
+      attachTo: document.body,
+      props: {
+        show: true,
+        options: getOptions()
+      },
+      global: { config: { errorHandler } }
+    })
+    const detector = wrapper.findComponent(NBaseFocusDetector)
+    expect(detector.exists()).toBe(true)
+    await detector.trigger('blur')
+    expect(errorHandler).not.toHaveBeenCalled()
     wrapper.unmount()
   })
 })

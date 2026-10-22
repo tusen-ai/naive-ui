@@ -8,7 +8,7 @@ import type {
 } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { CarouselTheme } from '../styles'
+import type { CarouselTheme, CarouselThemeOverrides } from '../styles'
 import type { CarouselContextValue } from './CarouselContext'
 import type {
   ArrowScopedSlotProps,
@@ -71,7 +71,7 @@ type TransitionStyle = Partial<
 >
 
 export const carouselProps = {
-  ...(useTheme.props as ThemeProps<CarouselTheme>),
+  ...(useTheme.props as ThemeProps<CarouselTheme, CarouselThemeOverrides>),
   defaultIndex: {
     type: Number,
     default: 0
@@ -948,7 +948,9 @@ export default defineComponent({
       arrowSlotProps: arrowSlotPropsRef,
       dotSlotProps: dotSlotPropsRef,
       ...caroulseExposedMethod,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

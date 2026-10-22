@@ -1,7 +1,10 @@
 import type { CSSProperties, PropType, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { FloatButtonGroupTheme } from '../styles/light'
+import type {
+  FloatButtonGroupTheme,
+  FloatButtonGroupThemeOverrides
+} from '../styles/light'
 import { computed, defineComponent, h, provide, toRef } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { createInjectionKey, formatLength } from '../../_utils'
@@ -13,7 +16,10 @@ export interface ButtonGroupInjection {
 }
 
 export const floatButtonGroupProps = {
-  ...(useTheme.props as ThemeProps<FloatButtonGroupTheme>),
+  ...(useTheme.props as ThemeProps<
+    FloatButtonGroupTheme,
+    FloatButtonGroupThemeOverrides
+  >),
   left: [Number, String] as PropType<string | number>,
   right: [Number, String] as PropType<string | number>,
   top: [Number, String] as PropType<string | number>,
@@ -76,7 +82,9 @@ export default defineComponent({
       : undefined
 
     return {
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       mergedClsPrefix: mergedClsPrefixRef,
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender

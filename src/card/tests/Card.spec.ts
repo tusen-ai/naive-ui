@@ -219,7 +219,9 @@ describe('n-card', () => {
       }
     })
 
-    expect(wrapper.find('.n-card-header').classes()).toContain('custom-header-class')
+    expect(wrapper.find('.n-card-header').classes()).toContain(
+      'custom-header-class'
+    )
     wrapper.unmount()
   })
 
@@ -233,7 +235,9 @@ describe('n-card', () => {
       }
     })
 
-    expect(wrapper.find('.n-card-content').classes()).toContain('custom-content-class')
+    expect(wrapper.find('.n-card-content').classes()).toContain(
+      'custom-content-class'
+    )
     wrapper.unmount()
   })
 
@@ -247,7 +251,9 @@ describe('n-card', () => {
       }
     })
 
-    expect(wrapper.find('.n-card__footer').classes()).toContain('custom-footer-class')
+    expect(wrapper.find('.n-card__footer').classes()).toContain(
+      'custom-footer-class'
+    )
     wrapper.unmount()
   })
 
@@ -262,7 +268,9 @@ describe('n-card', () => {
       }
     })
 
-    expect(wrapper.find('.n-card-header__extra').classes()).toContain('custom-extra-class')
+    expect(wrapper.find('.n-card-header__extra').classes()).toContain(
+      'custom-extra-class'
+    )
     wrapper.unmount()
   })
 
@@ -296,20 +304,6 @@ describe('n-card', () => {
     })
 
     expect(wrapper.find('.n-card').attributes('role')).toBe('article')
-    wrapper.unmount()
-  })
-
-  it('should work with `content-scrollable` prop', async () => {
-    const wrapper = mount(NCard, {
-      props: {
-        contentScrollable: true
-      },
-      slots: {
-        default: () => 'content'
-      }
-    })
-
-    expect(wrapper.find('.n-scrollbar').exists()).toBe(true)
     wrapper.unmount()
   })
 
@@ -347,7 +341,9 @@ describe('n-card', () => {
       }
     })
 
-    expect(wrapper.find('.n-card').classes()).toContain('n-card--content-segmented')
+    expect(wrapper.find('.n-card').classes()).toContain(
+      'n-card--content-segmented'
+    )
     wrapper.unmount()
   })
 
@@ -363,7 +359,9 @@ describe('n-card', () => {
       }
     })
 
-    expect(wrapper.find('.n-card').classes()).toContain('n-card--footer-segmented')
+    expect(wrapper.find('.n-card').classes()).toContain(
+      'n-card--footer-segmented'
+    )
     wrapper.unmount()
   })
 
@@ -379,7 +377,9 @@ describe('n-card', () => {
       }
     })
 
-    expect(wrapper.find('.n-card').classes()).toContain('n-card--action-segmented')
+    expect(wrapper.find('.n-card').classes()).toContain(
+      'n-card--action-segmented'
+    )
     wrapper.unmount()
   })
 })

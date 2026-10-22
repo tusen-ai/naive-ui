@@ -1,11 +1,18 @@
-import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type {
+  CSSProperties,
+  PropType,
+  Ref,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
 import type { ScrollbarProps } from '../../_internal/scrollbar/src/Scrollbar'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { InputSize } from '../../input/src/public-types'
 import type { SelectProps } from '../../select'
 import type { SelectSize } from '../../select/src/public-types'
-import type { PaginationTheme } from '../styles'
+import type { PaginationTheme, PaginationThemeOverrides } from '../styles'
 import type {
   PaginationInfo,
   PaginationLabelInfo,
@@ -57,7 +64,7 @@ import style from './styles/index.cssr'
 import { createPageItemsInfo, getDefaultPageSize } from './utils'
 
 export const paginationProps = {
-  ...(useTheme.props as ThemeProps<PaginationTheme>),
+  ...(useTheme.props as ThemeProps<PaginationTheme, PaginationThemeOverrides>),
   simple: Boolean,
   page: Number,
   defaultPage: {
@@ -562,7 +569,9 @@ export default defineComponent({
       handlePageItemClick,
       handleSizePickerChange,
       handleQuickJumperChange,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }
@@ -635,7 +644,7 @@ export default defineComponent({
           switch (part) {
             case 'pages':
               return (
-                <Fragment>
+                <Fragment key="pages">
                   <div
                     class={[
                       `${mergedClsPrefix}-pagination-item`,
@@ -685,11 +694,13 @@ export default defineComponent({
                       {mergedPageCount}
                     </Fragment>
                   ) : (
-                    pageItems.map((pageItem, index) => {
+                    pageItems.map((pageItem) => {
                       let contentNode: VNodeChild
                       let onMouseenter: undefined | (() => void)
                       let onMouseleave: undefined | (() => void)
                       const { type } = pageItem
+                      const itemKey
+                        = type === 'page' ? `page-${pageItem.label}` : type
                       switch (type) {
                         case 'page':
                           // eslint-disable-next-line no-case-declarations
@@ -774,7 +785,7 @@ export default defineComponent({
                       }
                       const itemNode = (
                         <div
-                          key={index}
+                          key={itemKey}
                           class={[
                             `${mergedClsPrefix}-pagination-item`,
                             pageItem.active
@@ -799,82 +810,63 @@ export default defineComponent({
                           {contentNode}
                         </div>
                       )
-                      if (
-                        type === 'page'
-                        && !pageItem.mayBeFastBackward
-                        && !pageItem.mayBeFastForward
-                      ) {
+                      // Do not reuse NPopselect between a page button and the
+                      // fast-jump ellipsis. Patching a popover that still owns a
+                      // large virtualized option list into a plain page button
+                      // can throw during insertBefore.
+                      if (type === 'page' || !pageItem.options) {
                         return itemNode
                       }
-                      else {
-                        const key
-                          = pageItem.type === 'page'
-                            ? pageItem.mayBeFastBackward
-                              ? 'fast-backward'
-                              : 'fast-forward'
-                            : pageItem.type
-                        if (pageItem.type !== 'page' && !pageItem.options) {
-                          return itemNode
-                        }
-                        return (
-                          <NPopselect
-                            to={this.to}
-                            key={key}
-                            disabled={disabled}
-                            trigger="hover"
-                            virtualScroll
-                            style={{ width: '60px' }}
-                            theme={mergedTheme.peers.Popselect}
-                            themeOverrides={mergedTheme.peerOverrides.Popselect}
-                            builtinThemeOverrides={{
-                              peers: {
-                                InternalSelectMenu: {
-                                  height: 'calc(var(--n-option-height) * 4.6)'
-                                }
+                      return (
+                        <NPopselect
+                          to={this.to}
+                          key={itemKey}
+                          disabled={disabled}
+                          trigger="hover"
+                          virtualScroll
+                          style={{ width: '60px' }}
+                          theme={mergedTheme.peers.Popselect}
+                          themeOverrides={mergedTheme.peerOverrides.Popselect}
+                          builtinThemeOverrides={{
+                            peers: {
+                              InternalSelectMenu: {
+                                height: 'calc(var(--n-option-height) * 4.6)'
                               }
-                            }}
-                            nodeProps={() => ({
-                              style: {
-                                justifyContent: 'center'
-                              }
-                            })}
-                            show={
-                              type === 'page'
-                                ? false
-                                : type === 'fast-backward'
-                                  ? this.showFastBackwardMenu
-                                  : this.showFastForwardMenu
                             }
-                            onUpdateShow={(value) => {
-                              if (type === 'page')
-                                return
-                              if (value) {
-                                if (type === 'fast-backward') {
-                                  this.showFastBackwardMenu = value
-                                }
-                                else {
-                                  this.showFastForwardMenu = value
-                                }
+                          }}
+                          nodeProps={() => ({
+                            style: {
+                              justifyContent: 'center'
+                            }
+                          })}
+                          show={
+                            type === 'fast-backward'
+                              ? this.showFastBackwardMenu
+                              : this.showFastForwardMenu
+                          }
+                          onUpdateShow={(value) => {
+                            if (value) {
+                              if (type === 'fast-backward') {
+                                this.showFastBackwardMenu = value
                               }
                               else {
-                                this.showFastBackwardMenu = false
-                                this.showFastForwardMenu = false
+                                this.showFastForwardMenu = value
                               }
-                            }}
-                            options={
-                              pageItem.type !== 'page' && pageItem.options
-                                ? pageItem.options
-                                : []
                             }
-                            onUpdateValue={this.handleMenuSelect}
-                            scrollable
-                            scrollbarProps={this.scrollbarProps}
-                            showCheckmark={false}
-                          >
-                            {{ default: () => itemNode }}
-                          </NPopselect>
-                        )
-                      }
+                            else {
+                              this.showFastBackwardMenu = false
+                              this.showFastForwardMenu = false
+                            }
+                          }}
+                          options={pageItem.options}
+                          onUpdateValue={this.handleMenuSelect}
+                          scrollable
+                          scrollbarProps={this.scrollbarProps}
+                          showCheckmark={false}
+                        >
+                          {{ default: () => itemNode }}
+                        </NPopselect>
+                      )
                     })
                   )}
                   <div

@@ -14,14 +14,7 @@ function scrollTo(href: string) {
 
 <template>
   <div style="height: 200px; padding-left: 200px">
-    <n-anchor
-      ref="anchorRef"
-      affix
-      :trigger-top="24"
-      :top="88"
-      :bound="24"
-      style="z-index: 1"
-    >
+    <n-anchor ref="anchorRef" :bound="24" style="z-index: 1">
       <n-anchor-link title="演示" href="#演示">
         <n-anchor-link title="基础用法" href="#basic.vue" />
         <n-anchor-link title="忽略间隔" href="#ignore-gap.vue" />

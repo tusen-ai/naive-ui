@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../config-provider'
 import { commonLight } from '../../styles'
 
@@ -12,13 +12,19 @@ function self(vars: ThemeCommonVars) {
   }
 }
 
-export type FloatButtonGroupThemeVars = ReturnType<typeof self>
+export interface FloatButtonGroupThemeVars extends ReturnType<typeof self> {}
 
-const themeLight: Theme<'FloatButtonGroup', FloatButtonGroupThemeVars> = {
+const themeLight: FloatButtonGroupTheme = {
   name: 'FloatButtonGroup',
   common: commonLight,
   self
 }
 
+export interface FloatButtonGroupTheme extends Theme<
+  'FloatButtonGroup',
+  FloatButtonGroupThemeVars
+> {}
+
+export interface FloatButtonGroupThemeOverrides extends ExtractThemeOverrides<FloatButtonGroupTheme> {}
+
 export default themeLight
-export type FloatButtonGroupTheme = typeof themeLight

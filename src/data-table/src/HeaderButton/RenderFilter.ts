@@ -9,14 +9,8 @@ export default defineComponent({
       type: Function as PropType<RenderFilter>,
       required: true
     },
-    active: {
-      type: Boolean,
-      default: false
-    },
-    show: {
-      type: Boolean,
-      default: false
-    }
+    active: Boolean,
+    show: Boolean
   },
   render() {
     const { render, active, show } = this

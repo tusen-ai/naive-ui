@@ -1,9 +1,9 @@
 import type { InputInst } from 'naive-ui'
-import type { CSSProperties, PropType, SlotsType } from 'vue'
+import type { CSSProperties, PropType, Ref, SlotsType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/public-types'
-import type { InputOtpTheme } from '../styles/light'
+import type { InputOtpTheme, InputOtpThemeOverrides } from '../styles/light'
 import type {
   InputOtpAllowInput,
   InputOtpInst,
@@ -36,7 +36,7 @@ import inputOtpLight from '../styles/light'
 import style from './styles/index.cssr'
 
 export const inputOtpProps = {
-  ...(useTheme.props as ThemeProps<InputOtpTheme>),
+  ...(useTheme.props as ThemeProps<InputOtpTheme, InputOtpThemeOverrides>),
   defaultValue: { type: Array as PropType<string[]>, default: [] },
   value: Array as PropType<null | string[]>,
   length: {
@@ -371,7 +371,9 @@ export default defineComponent({
       rtlEnabled: rtlEnabledRef,
       mergedStatus: mergedStatusRef,
       mergedDisabled: mergedDisabledRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       getTemplateEvents,
       onRender: themeClassHandle?.onRender,

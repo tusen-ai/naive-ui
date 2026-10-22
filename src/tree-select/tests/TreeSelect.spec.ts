@@ -1,5 +1,6 @@
 import type { TreeSelectOption } from '../index'
 import { mount } from '@vue/test-utils'
+import { NBaseFocusDetector } from '../../_internal'
 import { NTreeSelect } from '../index'
 
 describe('n-tree-select', () => {
@@ -84,5 +85,27 @@ describe('n-tree-select', () => {
     expect(wrapper.find('.n-base-selection').attributes('class')).toContain(
       'n-base-selection--multiple'
     )
+  })
+
+  it('should not throw when focus leaves the menu', async () => {
+    const errorHandler = vi.fn()
+    const wrapper = mount(NTreeSelect, {
+      attachTo: document.body,
+      props: {
+        show: true,
+        options: [
+          {
+            label: '1',
+            key: '1'
+          }
+        ]
+      },
+      global: { config: { errorHandler } }
+    })
+    const detector = wrapper.findComponent(NBaseFocusDetector)
+    expect(detector.exists()).toBe(true)
+    await detector.trigger('blur')
+    expect(errorHandler).not.toHaveBeenCalled()
+    wrapper.unmount()
   })
 })

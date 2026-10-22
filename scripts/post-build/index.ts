@@ -1,4 +1,5 @@
 import { outDirs, replaceDefine, srcDir } from '../utils'
+import { checkArtifacts } from './check-artifacts'
 import { completePath } from './complete-path'
 import { genWebTypes } from './gen-web-types'
 import { terseCssr } from './terse-cssr'
@@ -22,4 +23,7 @@ import { terseCssr } from './terse-cssr'
   // web-types.json is only a very loose description for auto-complete
   // vscode is a much better choice
   genWebTypes()
+
+  // Fail the build if dts/output embeds host filesystem paths.
+  await checkArtifacts()
 })()

@@ -31,11 +31,7 @@ describe('server side rendering', () => {
 
   it('works with custom colors', async () => {
     const app = createSSRApp(() => (
-      <NQrCode
-        value="test"
-        color="#ff0000"
-        backgroundColor="#ffff00"
-      />
+      <NQrCode value="test" color="#ff0000" backgroundColor="#ffff00" />
     ))
     setup(app)
     try {

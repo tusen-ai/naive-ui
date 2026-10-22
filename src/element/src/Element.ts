@@ -1,13 +1,14 @@
+import type { CSSProperties, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { ElementTheme } from '../styles'
+import type { ElementTheme, ElementThemeOverrides } from '../styles'
 import { kebabCase } from 'lodash-es'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { elementLight } from '../styles'
 
 export const elementProps = {
-  ...(useTheme.props as ThemeProps<ElementTheme>),
+  ...(useTheme.props as ThemeProps<ElementTheme, ElementThemeOverrides>),
   tag: {
     type: String,
     default: 'div'
@@ -44,7 +45,9 @@ export default defineComponent({
       : undefined
     return {
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

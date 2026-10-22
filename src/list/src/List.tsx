@@ -1,7 +1,7 @@
 import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { ListTheme } from '../styles'
+import type { ListTheme, ListThemeOverrides } from '../styles'
 import { computed, defineComponent, h, provide, toRef } from 'vue'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
@@ -9,7 +9,7 @@ import { listLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const listProps = {
-  ...(useTheme.props as ThemeProps<ListTheme>),
+  ...(useTheme.props as ThemeProps<ListTheme, ListThemeOverrides>),
   size: {
     type: String as PropType<'small' | 'medium' | 'large'>,
     default: 'medium'
@@ -99,7 +99,9 @@ export default defineComponent({
     return {
       mergedClsPrefix: mergedClsPrefixRef,
       rtlEnabled: rtlEnabledRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

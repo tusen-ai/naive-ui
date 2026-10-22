@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { changeColor } from 'seemly'
 import { commonLight } from '../../_styles/common'
@@ -26,13 +26,16 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type AnchorThemeVars = ReturnType<typeof self>
+export interface AnchorThemeVars extends ReturnType<typeof self> {}
 
-const anchorLight: Theme<'Anchor', AnchorThemeVars> = {
+const anchorLight: AnchorTheme = {
   name: 'Anchor',
   common: commonLight,
   self
 }
 
+export interface AnchorTheme extends Theme<'Anchor', AnchorThemeVars> {}
+
+export interface AnchorThemeOverrides extends ExtractThemeOverrides<AnchorTheme> {}
+
 export default anchorLight
-export type AnchorTheme = typeof anchorLight

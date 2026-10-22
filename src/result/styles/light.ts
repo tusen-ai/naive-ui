@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { commonLight } from '../../_styles/common'
 import commonVariables from './_common'
@@ -27,13 +27,16 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type ResultThemeVars = ReturnType<typeof self>
+export interface ResultThemeVars extends ReturnType<typeof self> {}
 
-const resultLight: Theme<'Result', ResultThemeVars> = {
+const resultLight: ResultTheme = {
   name: 'Result',
   common: commonLight,
   self
 }
 
+export interface ResultTheme extends Theme<'Result', ResultThemeVars> {}
+
+export interface ResultThemeOverrides extends ExtractThemeOverrides<ResultTheme> {}
+
 export default resultLight
-export type ResultTheme = typeof resultLight

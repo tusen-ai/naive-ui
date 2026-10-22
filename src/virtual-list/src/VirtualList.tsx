@@ -101,8 +101,9 @@ export default defineComponent({
 
     return {
       scrollTo,
-      scrollbarInstRef,
-      virtualListInstRef,
+      // reduce dts: string ref only, type unused in render
+      scrollbarInstRef: scrollbarInstRef as unknown,
+      virtualListInstRef: virtualListInstRef as unknown,
       getScrollContainer,
       getScrollContent,
       handleScroll,

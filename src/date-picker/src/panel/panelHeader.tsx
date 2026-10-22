@@ -66,7 +66,8 @@ export default defineComponent({
     return {
       show: showRef,
       triggerRef,
-      monthPanelRef,
+      // reduce dts: avoid expanding component instance types
+      monthPanelRef: monthPanelRef as unknown,
       handleSelectYear,
       handleSelectMonth,
       handleHeaderClick,

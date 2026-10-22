@@ -1,7 +1,7 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { LoadingBarTheme } from '../styles'
+import type { LoadingBarTheme, LoadingBarThemeOverrides } from '../styles'
 import { useIsMounted } from 'vooks'
 import {
   defineComponent,
@@ -29,7 +29,7 @@ export type LoadingBarProviderInst = LoadingBarInst
 export type LoadingBarApiInjection = LoadingBarInst
 
 export const loadingBarProviderProps = {
-  ...(useTheme.props as ThemeProps<LoadingBarTheme>),
+  ...(useTheme.props as ThemeProps<LoadingBarTheme, LoadingBarThemeOverrides>),
   to: {
     type: [String, Object, Boolean] as PropType<string | HTMLElement | false>,
     default: undefined
@@ -97,7 +97,8 @@ export default defineComponent({
       mergedClsPrefixRef
     })
     return Object.assign(methods, {
-      loadingBarRef
+      // reduce dts: string ref only, type unused in render
+      loadingBarRef: loadingBarRef as unknown
     })
   },
   render() {

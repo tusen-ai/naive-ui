@@ -1,7 +1,7 @@
 import type { PropType } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { WatermarkTheme } from '../styles'
+import type { WatermarkTheme, WatermarkThemeOverrides } from '../styles'
 import { onFontsReady } from 'vooks'
 import { defineComponent, h, ref, watchEffect } from 'vue'
 import { useConfig, useTheme } from '../../_mixins'
@@ -25,7 +25,7 @@ function getRatio(context: any): number {
 }
 
 export const watermarkProps = {
-  ...(useTheme.props as ThemeProps<WatermarkTheme>),
+  ...(useTheme.props as ThemeProps<WatermarkTheme, WatermarkThemeOverrides>),
   debug: Boolean,
   cross: Boolean,
   fullscreen: Boolean,

@@ -1,7 +1,14 @@
-import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type {
+  CSSProperties,
+  PropType,
+  Ref,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { CardTheme } from '../styles'
+import type { CardTheme, CardThemeOverrides } from '../styles'
 import type { CardSize } from './public-types'
 import { getPadding } from 'seemly'
 import { computed, defineComponent, h } from 'vue'
@@ -59,7 +66,7 @@ export const cardBaseProps = {
 export const cardBasePropKeys = keysOf(cardBaseProps)
 
 export const cardProps = {
-  ...(useTheme.props as ThemeProps<CardTheme>),
+  ...(useTheme.props as ThemeProps<CardTheme, CardThemeOverrides>),
   ...cardBaseProps
 }
 
@@ -191,7 +198,9 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
       handleCloseClick,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

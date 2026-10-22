@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins/use-theme'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins/use-theme'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { commonLight } from '../../_styles/common'
 import commonVariables from './_common'
@@ -85,13 +85,16 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type MessageThemeVars = ReturnType<typeof self>
+export interface MessageThemeVars extends ReturnType<typeof self> {}
 
-const messageLight: Theme<'Message', MessageThemeVars> = {
+const messageLight: MessageTheme = {
   name: 'Message',
   common: commonLight,
   self
 }
 
+export interface MessageTheme extends Theme<'Message', MessageThemeVars> {}
+
+export interface MessageThemeOverrides extends ExtractThemeOverrides<MessageTheme> {}
+
 export default messageLight
-export type MessageTheme = typeof messageLight

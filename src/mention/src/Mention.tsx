@@ -1,5 +1,5 @@
 import type { TreeNode } from 'treemate'
-import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { FollowerInst, FollowerPlacement } from 'vueuc'
 import type { InternalSelectMenuRef, ScrollbarProps } from '../../_internal'
 import type { RenderLabel } from '../../_internal/select-menu/src/interface'
@@ -12,7 +12,7 @@ import type {
   SelectGroupOption,
   SelectIgnoredOption
 } from '../../select/src/interface'
-import type { MentionTheme } from '../styles'
+import type { MentionTheme, MentionThemeOverrides } from '../styles'
 import type { MentionOption } from './interface'
 import type { MentionSize } from './public-types'
 import { createTreeMate } from 'treemate'
@@ -36,7 +36,7 @@ import style from './styles/index.cssr'
 import { getRelativePosition } from './utils'
 
 export const mentionProps = {
-  ...(useTheme.props as ThemeProps<MentionTheme>),
+  ...(useTheme.props as ThemeProps<MentionTheme, MentionThemeOverrides>),
   to: useAdjustedTo.propTo,
   autosize: [Boolean, Object] as PropType<
     boolean | { maxRows?: number, minRows?: number }
@@ -434,10 +434,12 @@ export default defineComponent({
       mergedStatus: formItem.mergedStatusRef,
       mergedTheme: themeRef,
       treeMate: treeMateRef,
-      selectMenuInstRef,
-      inputInstRef,
+      // reduce dts: string ref only, type unused in render
+      selectMenuInstRef: selectMenuInstRef as unknown,
+      inputInstRef: inputInstRef as unknown,
       cursorRef,
-      followerRef,
+      // reduce dts: string ref only, type unused in render
+      followerRef: followerRef as unknown,
       wrapperElRef,
       showMenu: showMenuRef,
       adjustedTo: useAdjustedTo(props),
@@ -451,7 +453,9 @@ export default defineComponent({
       handleInputMouseDown,
       focus,
       blur,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }
@@ -535,7 +539,7 @@ export default defineComponent({
                               renderLabel={this.renderLabel}
                               scrollbarProps={this.scrollbarProps}
                             >
-                              {{ ...$slots }}
+                              {$slots}
                             </NInternalSelectMenu>
                           ) : null
                         }

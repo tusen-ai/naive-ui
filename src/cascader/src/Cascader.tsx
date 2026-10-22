@@ -3,6 +3,7 @@ import type {
   CSSProperties,
   HTMLAttributes,
   PropType,
+  Ref,
   SlotsType,
   VNode,
   VNodeChild
@@ -14,7 +15,7 @@ import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { FormValidationStatus } from '../../form/src/public-types'
 import type { PopoverProps } from '../../popover'
 import type { SelectBaseOption } from '../../select/src/interface'
-import type { CascaderTheme } from '../styles'
+import type { CascaderTheme, CascaderThemeOverrides } from '../styles'
 import type {
   CascaderInst,
   CascaderMenuInstance,
@@ -67,7 +68,7 @@ import style from './styles/index.cssr'
 import { getPathLabel, getRawNodePath } from './utils'
 
 export const cascaderProps = {
-  ...(useTheme.props as ThemeProps<CascaderTheme>),
+  ...(useTheme.props as ThemeProps<CascaderTheme, CascaderThemeOverrides>),
   allowCheckingNotLoaded: Boolean,
   to: useAdjustedTo.propTo,
   bordered: {
@@ -1056,11 +1057,12 @@ export default defineComponent({
       ...exposedMethods,
       handleTriggerResize,
       mergedStatus: mergedStatusRef,
-      selectMenuFollowerRef,
-      cascaderMenuFollowerRef,
-      triggerInstRef,
-      selectMenuInstRef,
-      cascaderMenuInstRef,
+      // reduce dts: string ref only, type unused in render
+      selectMenuFollowerRef: selectMenuFollowerRef as unknown,
+      cascaderMenuFollowerRef: cascaderMenuFollowerRef as unknown,
+      triggerInstRef: triggerInstRef as unknown,
+      selectMenuInstRef: selectMenuInstRef as unknown,
+      cascaderMenuInstRef: cascaderMenuInstRef as unknown,
       mergedBordered: mergedBorderedRef,
       mergedClsPrefix: mergedClsPrefixRef,
       namespace: namespaceRef,
@@ -1091,7 +1093,9 @@ export default defineComponent({
       focused: focusedRef,
       optionHeight: optionHeightRef,
       mergedTheme: themeRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

@@ -1,8 +1,8 @@
-import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { Size } from '../../avatar/src/interface'
-import type { AvatarGroupTheme } from '../styles'
+import type { AvatarGroupTheme, AvatarGroupThemeOverrides } from '../styles'
 import type {
   AvatarGroupAvatarSlotProps,
   AvatarGroupOption,
@@ -21,7 +21,10 @@ export interface AvatarGroupInjection {
 }
 
 export const avatarGroupProps = {
-  ...(useTheme.props as ThemeProps<AvatarGroupTheme>),
+  ...(useTheme.props as ThemeProps<
+    AvatarGroupTheme,
+    AvatarGroupThemeOverrides
+  >),
   max: Number,
   maxStyle: [Object, String] as PropType<CSSProperties | string>,
   options: {
@@ -90,7 +93,7 @@ export default defineComponent({
         return {
           '--n-gap': mergedThemeRef.value.self.gap
         }
-      })
+      }) as Ref<CSSProperties>
     }
   },
   render() {

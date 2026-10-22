@@ -1,16 +1,19 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import commonVars from './_common'
 
 function self() {
   return commonVars
 }
 
-export type FlexThemeVars = ReturnType<typeof self>
+export interface FlexThemeVars extends ReturnType<typeof self> {}
 
-const flexLight: Theme<'Flex', FlexThemeVars> = {
+const flexLight: FlexTheme = {
   name: 'Flex',
   self
 }
 
+export interface FlexTheme extends Theme<'Flex', FlexThemeVars> {}
+
+export interface FlexThemeOverrides extends ExtractThemeOverrides<FlexTheme> {}
+
 export default flexLight
-export type FlexTheme = typeof flexLight

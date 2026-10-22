@@ -41,7 +41,7 @@ export default defineComponent({
     })
     function handleBodyResize(entry: ResizeObserverEntry): void {
       bodyWidthRef.value = entry.contentRect.width
-      syncScrollState()
+      syncScrollState('layout')
       if (!fixedStateInitializedRef.value) {
         fixedStateInitializedRef.value = true
       }
@@ -90,8 +90,9 @@ export default defineComponent({
       maxHeight: maxHeightRef,
       mergedClsPrefix: mergedClsPrefixRef,
       selfElRef,
-      headerInstRef,
-      bodyInstRef,
+      // reduce dts: string ref only, type unused in render
+      headerInstRef: headerInstRef as unknown,
+      bodyInstRef: bodyInstRef as unknown,
       bodyStyle: bodyStyleRef,
       flexHeight: flexHeightRef,
       handleBodyResize,

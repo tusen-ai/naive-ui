@@ -1,4 +1,8 @@
 export { default as dynamicInputDark } from './dark'
 export { default as dynamicInputLight } from './light'
-export type { DynamicInputTheme, DynamicInputThemeVars } from './light'
+export type {
+  DynamicInputTheme,
+  DynamicInputThemeOverrides,
+  DynamicInputThemeVars
+} from './light'
 export { dynamicInputRtl } from './rtl'

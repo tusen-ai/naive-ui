@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins/use-theme'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins/use-theme'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { changeColor } from 'seemly'
 import { commonLight } from '../../_styles/common'
@@ -65,13 +65,16 @@ function self(vars: ThemeCommonVars) {
   }
 }
 
-export type RadioThemeVars = ReturnType<typeof self>
+export interface RadioThemeVars extends ReturnType<typeof self> {}
 
-const radioLight: Theme<'Radio', RadioThemeVars> = {
+const radioLight: RadioTheme = {
   name: 'Radio',
   common: commonLight,
   self
 }
 
+export interface RadioTheme extends Theme<'Radio', RadioThemeVars> {}
+
+export interface RadioThemeOverrides extends ExtractThemeOverrides<RadioTheme> {}
+
 export default radioLight
-export type RadioTheme = typeof radioLight

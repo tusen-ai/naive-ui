@@ -1,11 +1,18 @@
 import type { CheckStrategy, TreeMateOptions } from 'treemate'
-import type { CSSProperties, PropType, SlotsType, VNode, VNodeChild } from 'vue'
+import type {
+  CSSProperties,
+  PropType,
+  Ref,
+  SlotsType,
+  VNode,
+  VNodeChild
+} from 'vue'
 import type { VirtualListInst, VirtualListScrollToOptions } from 'vueuc'
 import type { ScrollbarInst } from '../../_internal'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { ScrollbarProps } from '../../scrollbar/src/Scrollbar'
-import type { TreeTheme } from '../styles'
+import type { TreeTheme, TreeThemeOverrides } from '../styles'
 import type {
   AllowDrop,
   CheckOnClick,
@@ -207,7 +214,7 @@ export const treeSharedProps = {
 } as const
 
 export const treeProps = {
-  ...(useTheme.props as ThemeProps<TreeTheme>),
+  ...(useTheme.props as ThemeProps<TreeTheme, TreeThemeOverrides>),
   accordion: Boolean,
   showIrrelevantNodes: { type: Boolean, default: true },
   data: {
@@ -1723,8 +1730,9 @@ export default defineComponent({
       fNodes: mergedFNodesRef,
       aip: aipRef,
       selfElRef,
-      virtualListInstRef,
-      scrollbarInstRef,
+      // reduce dts: string ref only, type unused in render
+      virtualListInstRef: virtualListInstRef as unknown,
+      scrollbarInstRef: scrollbarInstRef as unknown,
       handleFocusout,
       handleDragLeaveTree,
       handleScroll,
@@ -1732,7 +1740,9 @@ export default defineComponent({
       getScrollContent,
       handleAfterEnter,
       handleResize,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

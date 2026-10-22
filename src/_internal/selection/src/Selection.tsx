@@ -1,4 +1,10 @@
-import type { CSSProperties, InputHTMLAttributes, PropType, VNode } from 'vue'
+import type {
+  CSSProperties,
+  InputHTMLAttributes,
+  PropType,
+  Ref,
+  VNode
+} from 'vue'
 import type { VOverflowInst } from 'vueuc'
 import type { ThemeProps } from '../../../_mixins'
 import type { FormValidationStatus } from '../../../form/src/public-types'
@@ -9,7 +15,10 @@ import type {
   RenderLabel,
   RenderLabelImpl
 } from '../../select-menu/src/interface'
-import type { InternalSelectionTheme } from '../styles'
+import type {
+  InternalSelectionTheme,
+  InternalSelectionThemeOverrides
+} from '../styles'
 import type { RenderTag } from './interface'
 import { getPadding } from 'seemly'
 import {
@@ -51,7 +60,10 @@ export interface InternalSelectionInst {
 export default defineComponent({
   name: 'InternalSelection',
   props: {
-    ...(useTheme.props as ThemeProps<InternalSelectionTheme>),
+    ...(useTheme.props as ThemeProps<
+      InternalSelectionTheme,
+      InternalSelectionThemeOverrides
+    >),
     clsPrefix: {
       type: String,
       required: true
@@ -568,7 +580,8 @@ export default defineComponent({
       multipleElRef,
       singleElRef,
       patternInputWrapperRef,
-      overflowRef,
+      // reduce dts: string ref only, type unused in render
+      overflowRef: overflowRef as unknown,
       inputTagElRef,
       handleMouseDown,
       handleFocusin,
@@ -594,7 +607,9 @@ export default defineComponent({
       getCounter,
       getTail,
       renderLabel: props.renderLabel as RenderLabelImpl,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

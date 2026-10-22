@@ -1,7 +1,7 @@
 <markdown>
-# Tab滚动居中
+# 标签滚动居中
 
-控制活动标签是否居中显示。设置为 true 时，活动标签将滚动到滚动容器的中心位置
+设置为 `true` 时，活动标签将滚动到滚动容器的中心位置。
 </markdown>
 
 <script lang="ts" setup>

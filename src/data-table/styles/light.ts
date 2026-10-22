@@ -1,4 +1,14 @@
+import type { ScrollbarTheme } from '../../_internal/scrollbar/styles'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
+import type { ButtonTheme } from '../../button/styles'
+import type { CheckboxTheme } from '../../checkbox/styles'
+import type { DropdownTheme } from '../../dropdown/styles'
+import type { EllipsisTheme } from '../../ellipsis/styles'
+import type { EmptyTheme } from '../../empty/styles'
+import type { PaginationTheme } from '../../pagination/styles'
+import type { PopoverTheme } from '../../popover/styles'
+import type { RadioTheme } from '../../radio/styles'
 import { composite } from 'seemly'
 import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import { createTheme } from '../../_mixins'
@@ -102,9 +112,9 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type DataTableThemeVars = ReturnType<typeof self>
+export interface DataTableThemeVars extends ReturnType<typeof self> {}
 
-const dataTableLight = createTheme({
+const dataTableLight: DataTableTheme = createTheme({
   name: 'DataTable',
   common: commonLight,
   peers: {
@@ -121,5 +131,22 @@ const dataTableLight = createTheme({
   self
 })
 
+export interface DataTableTheme extends Theme<
+  'DataTable',
+  DataTableThemeVars,
+  {
+    Button: ButtonTheme
+    Checkbox: CheckboxTheme
+    Radio: RadioTheme
+    Pagination: PaginationTheme
+    Scrollbar: ScrollbarTheme
+    Empty: EmptyTheme
+    Popover: PopoverTheme
+    Ellipsis: EllipsisTheme
+    Dropdown: DropdownTheme
+  }
+> {}
+
+export interface DataTableThemeOverrides extends ExtractThemeOverrides<DataTableTheme> {}
+
 export default dataTableLight
-export type DataTableTheme = typeof dataTableLight

@@ -3,6 +3,7 @@ import type {
   CSSProperties,
   ExtractPropTypes,
   PropType,
+  Ref,
   SlotsType,
   VNode,
   VNodeChild
@@ -10,7 +11,7 @@ import type {
 import type { VXScrollInst } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { TabsTheme } from '../styles'
+import type { TabsTheme, TabsThemeOverrides } from '../styles'
 import type {
   Addable,
   OnBeforeLeave,
@@ -24,7 +25,7 @@ import type {
 import type { TabsSize } from './public-types'
 import type { tabPaneProps } from './TabPane'
 import { throttle as _throttle } from 'lodash-es'
-import { depx, getPadding } from 'seemly'
+import { getPadding } from 'seemly'
 import { onFontsReady, useCompitable, useMergedState } from 'vooks'
 import {
   cloneVNode,
@@ -45,6 +46,7 @@ import {
 } from 'vue'
 import { VResizeObserver, VXScroll } from 'vueuc'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
 import {
   call,
   createKey,
@@ -66,7 +68,7 @@ type TabPaneProps = ExtractPropTypes<typeof tabPaneProps> & {
 }
 
 export const tabsProps = {
-  ...(useTheme.props as ThemeProps<TabsTheme>),
+  ...(useTheme.props as ThemeProps<TabsTheme, TabsThemeOverrides>),
   value: [String, Number] as PropType<string | number>,
   defaultValue: [String, Number] as PropType<string | number>,
   trigger: {
@@ -88,7 +90,9 @@ export const tabsProps = {
   >,
   size: String as PropType<TabsSize>,
   placement: {
-    type: String as PropType<'top' | 'left' | 'right' | 'bottom'>,
+    type: String as PropType<
+      'top' | 'right' | 'bottom' | 'left' | 'start' | 'end'
+    >,
     default: 'top'
   },
   tabStyle: [String, Object] as PropType<string | CSSProperties>,
@@ -117,14 +121,8 @@ export const tabsProps = {
   onActiveNameChange: [Function, Array] as PropType<
     MaybeArray<(value: string & number) => void>
   >,
-  showScrollButton: {
-    type: Boolean,
-    default: false
-  },
-  centerActiveTab: {
-    type: Boolean,
-    default: false
-  }
+  showScrollButton: Boolean,
+  centerActiveTab: Boolean
 } as const
 
 export type TabsProps = ExtractPublicPropTypes<typeof tabsProps>
@@ -163,8 +161,23 @@ export default defineComponent({
       })
     }
 
-    const { mergedClsPrefixRef, inlineThemeDisabled, mergedComponentPropsRef }
-      = useConfig(props)
+    const {
+      mergedClsPrefixRef,
+      inlineThemeDisabled,
+      mergedComponentPropsRef,
+      mergedRtlRef
+    } = useConfig(props)
+    const rtlEnabledRef = useRtl('Tabs', mergedRtlRef, mergedClsPrefixRef)
+    const mergedPlacementRef = computed(() => {
+      const { placement } = props
+      if (placement === 'start') {
+        return rtlEnabledRef?.value ? 'right' : 'left'
+      }
+      if (placement === 'end') {
+        return rtlEnabledRef?.value ? 'left' : 'right'
+      }
+      return placement
+    })
     const themeRef = useTheme(
       'Tabs',
       '-tabs',
@@ -175,6 +188,7 @@ export default defineComponent({
     )
 
     const tabsElRef = ref<HTMLElement | null>(null)
+    const selfElRef = ref<HTMLElement | null>(null)
     const barElRef = ref<HTMLElement | null>(null)
     const scrollWrapperElRef = ref<HTMLElement | null>(null)
     const addTabInstRef = ref<ComponentPublicInstance | null>(null)
@@ -247,7 +261,8 @@ export default defineComponent({
       const barIsHide = barEl.style.opacity === '0'
       if (tabEl) {
         const disabledClassName = `${mergedClsPrefixRef.value}-tabs-bar--disabled`
-        const { barWidth, placement } = props
+        const { barWidth } = props
+        const placement = mergedPlacementRef.value
         if (tabEl.dataset.disabled === 'true') {
           barEl.classList.add(disabledClassName)
         }
@@ -334,63 +349,33 @@ export default defineComponent({
       isHorizontal: boolean,
       centerActiveTab: boolean
     ) {
+      // Geometry + scrollBy stays correct under RTL scrollLeft variants
+      const containerRect = scrollContainer.getBoundingClientRect()
+      const targetRect = targetElement.getBoundingClientRect()
+      const start = isHorizontal ? 'left' : 'top'
+      const end = isHorizontal ? 'right' : 'bottom'
+      let delta = 0
       if (centerActiveTab) {
-        const containerSize = isHorizontal
-          ? scrollContainer.offsetWidth
-          : scrollContainer.offsetHeight
-        const elementSize = isHorizontal
-          ? targetElement.offsetWidth
-          : targetElement.offsetHeight
-        const elementOffset = isHorizontal
-          ? targetElement.offsetLeft
-          : targetElement.offsetTop
-        const centerOffset = (containerSize - elementSize) / 2
-        const targetScroll = elementOffset - centerOffset
-
-        scrollContainer.scrollTo({
-          top: isHorizontal ? 0 : targetScroll,
-          left: isHorizontal ? targetScroll : 0,
+        delta
+          = (targetRect[start] + targetRect[end]) / 2
+            - (containerRect[start] + containerRect[end]) / 2
+      }
+      else if (targetRect[start] < containerRect[start]) {
+        delta = targetRect[start] - containerRect[start]
+      }
+      else if (targetRect[end] > containerRect[end]) {
+        delta = targetRect[end] - containerRect[end]
+      }
+      if (delta !== 0) {
+        scrollContainer.scrollBy({
+          [start]: delta,
           behavior: 'smooth'
         })
-      }
-      else {
-        const containerScroll = isHorizontal
-          ? scrollContainer.scrollLeft
-          : scrollContainer.scrollTop
-        const containerSize = isHorizontal
-          ? scrollContainer.offsetWidth
-          : scrollContainer.offsetHeight
-        const elementOffset = isHorizontal
-          ? targetElement.offsetLeft
-          : targetElement.offsetTop
-        const elementSize = isHorizontal
-          ? targetElement.offsetWidth
-          : targetElement.offsetHeight
-
-        if (containerScroll > elementOffset) {
-          scrollContainer.scrollTo({
-            top: isHorizontal ? 0 : elementOffset,
-            left: isHorizontal ? elementOffset : 0,
-            behavior: 'smooth'
-          })
-        }
-        else if (
-          elementOffset + elementSize
-          > containerScroll + containerSize
-        ) {
-          scrollContainer.scrollTo({
-            top: isHorizontal ? 0 : elementOffset + elementSize - containerSize,
-            left: isHorizontal
-              ? elementOffset + elementSize - containerSize
-              : 0,
-            behavior: 'smooth'
-          })
-        }
       }
     }
 
     function updateCurrentScrollPosition(): void {
-      const isHorizontal = ['top', 'bottom'].includes(props.placement)
+      const isHorizontal = ['top', 'bottom'].includes(mergedPlacementRef.value)
       const tabEl = getCurrentEl()
       if (!tabEl)
         return
@@ -518,17 +503,18 @@ export default defineComponent({
     }
 
     function handleButtonClick(type: string): void {
-      if (['top', 'bottom'].includes(props.placement)) {
+      if (['top', 'bottom'].includes(mergedPlacementRef.value)) {
         const { value: xScrollInst } = xScrollInstRef
         if (!xScrollInst)
           return
-        const scrollLeft = xScrollInst.$el?.scrollLeft
-        const offsetWidth = xScrollInst.$el?.offsetWidth
-        const left
-          = type === 'next' ? scrollLeft + offsetWidth : scrollLeft - offsetWidth
-        xScrollInst.scrollTo({
-          left,
-          top: 0,
+        const el = xScrollInst.$el as HTMLElement | undefined
+        if (!el)
+          return
+        const offsetWidth = el.offsetWidth
+        const rtl = !!rtlEnabledRef?.value
+        const delta = type === 'next' ? offsetWidth : -offsetWidth
+        el.scrollBy({
+          left: rtl ? -delta : delta,
           behavior: 'smooth'
         })
       }
@@ -536,10 +522,11 @@ export default defineComponent({
         const { value: yScrollInst } = yScrollElRef
         if (!yScrollInst)
           return
-        const height = yScrollInst.scrollTop
         const offsetHeight = yScrollInst.offsetHeight
         const top
-          = type === 'next' ? height + offsetHeight : height - offsetHeight
+          = type === 'next'
+            ? yScrollInst.scrollTop + offsetHeight
+            : yScrollInst.scrollTop - offsetHeight
         yScrollInst.scrollTo({
           top,
           left: 0,
@@ -580,9 +567,7 @@ export default defineComponent({
         // move segment capsule to match the position of the active tab
         segmentCapsuleElRef.value.style.width = `${activeTabEl.offsetWidth}px`
         segmentCapsuleElRef.value.style.height = `${activeTabEl.offsetHeight}px`
-        segmentCapsuleElRef.value.style.transform = `translateX(${
-          activeTabEl.offsetLeft - depx(getComputedStyle(tabsEl).paddingLeft)
-        }px)`
+        segmentCapsuleElRef.value.style.transform = `translate(${activeTabEl.offsetLeft}px, ${activeTabEl.offsetTop}px)`
         if (transitionDisabled) {
           void segmentCapsuleElRef.value.offsetWidth
         }
@@ -629,26 +614,54 @@ export default defineComponent({
         }
       }
       if (type !== 'segment') {
-        const { placement } = props
-        deriveScrollShadow(
-          (placement === 'top' || placement === 'bottom'
-            ? (xScrollInstRef.value?.$el as undefined | HTMLElement)
-            : yScrollElRef.value) || null
-        )
+        deriveScrollShadow(getScrollEl())
       }
     }
     const handleNavResize: (entry: ResizeObserverEntry) => void = throttle(
       _handleNavResize,
       64
     )
+    function updateIndicatorPositionInstantly(): void {
+      const { type } = props
+      if (type === 'line' || type === 'bar') {
+        updateBarPositionInstantly()
+      }
+      else if (type === 'segment') {
+        updateSegmentPosition({
+          transitionDisabled: true
+        })
+      }
+    }
+
     watch([() => props.justifyContent, () => props.size], () => {
       void nextTick(() => {
-        const { type } = props
-        if (type === 'line' || type === 'bar') {
+        if (props.type === 'line' || props.type === 'bar') {
           updateBarPositionInstantly()
         }
       })
     })
+
+    watch([mergedPlacementRef, () => rtlEnabledRef?.value], () => {
+      void nextTick(() => {
+        updateIndicatorPositionInstantly()
+        deriveScrollShadow(getScrollEl(), { instantly: true })
+      })
+    })
+
+    watch(
+      () => props.type,
+      () => {
+        void nextTick(() => {
+          const selfEl = selfElRef.value
+          if (!selfEl)
+            return
+          selfEl.classList.add('transition-disabled')
+          updateIndicatorPositionInstantly()
+          void selfEl.offsetWidth
+          selfEl.classList.remove('transition-disabled')
+        })
+      }
+    )
 
     const addTabFixedRef = ref(false)
     function _handleTabsResize(entry: ResizeObserverEntry): void {
@@ -658,7 +671,7 @@ export default defineComponent({
       } = entry
       const containerWidth = target.parentElement!.parentElement!.offsetWidth
       const containerHeight = target.parentElement!.parentElement!.offsetHeight
-      const { placement } = props
+      const placement = mergedPlacementRef.value
       if (!addTabFixedRef.value) {
         if (placement === 'top' || placement === 'bottom') {
           if (containerWidth < width) {
@@ -707,26 +720,49 @@ export default defineComponent({
         onAdd()
     }
 
-    const isScroll = ref(false)
-    function deriveScrollShadow(el: HTMLElement | null): void {
+    const isOverflowRef = ref(false)
+    function getScrollEl(): HTMLElement | null {
+      const placement = mergedPlacementRef.value
+      return (
+        (placement === 'top' || placement === 'bottom'
+          ? (xScrollInstRef.value?.$el as HTMLElement | undefined)
+          : yScrollElRef.value) || null
+      )
+    }
+    function deriveScrollShadow(
+      el: HTMLElement | null,
+      options: { instantly: boolean } = { instantly: false }
+    ): void {
       if (!el)
         return
+      const wrapperEl = options.instantly ? scrollWrapperElRef.value : null
+      if (wrapperEl) {
+        wrapperEl.classList.add('transition-disabled')
+      }
       // prevent scroll position from being 0
       const SCROLL_POSITION_EPSILON = 1
-      const { placement } = props
+      const placement = mergedPlacementRef.value
       if (placement === 'top' || placement === 'bottom') {
         const { scrollLeft, scrollWidth, offsetWidth } = el
-        startReachedRef.value = scrollLeft <= SCROLL_POSITION_EPSILON
+        // RTL may use negative scrollLeft
+        const scrolled = Math.abs(scrollLeft)
+        startReachedRef.value = scrolled <= SCROLL_POSITION_EPSILON
         endReachedRef.value
-          = scrollLeft + offsetWidth >= scrollWidth - SCROLL_POSITION_EPSILON
-        isScroll.value = offsetWidth < scrollWidth - SCROLL_POSITION_EPSILON
+          = scrolled + offsetWidth >= scrollWidth - SCROLL_POSITION_EPSILON
+        isOverflowRef.value
+          = offsetWidth < scrollWidth - SCROLL_POSITION_EPSILON
       }
       else {
         const { scrollTop, scrollHeight, offsetHeight } = el
         startReachedRef.value = scrollTop <= SCROLL_POSITION_EPSILON
         endReachedRef.value
           = scrollTop + offsetHeight >= scrollHeight - SCROLL_POSITION_EPSILON
-        isScroll.value = offsetHeight < scrollHeight - SCROLL_POSITION_EPSILON
+        isOverflowRef.value
+          = offsetHeight < scrollHeight - SCROLL_POSITION_EPSILON
+      }
+      if (wrapperEl) {
+        void wrapperEl.offsetWidth
+        wrapperEl.classList.remove('transition-disabled')
       }
     }
 
@@ -825,8 +861,6 @@ export default defineComponent({
           closeColorHover,
           closeColorPressed,
           closeBorderRadius,
-          iconColorDisabled,
-          navButtonHoverColor,
           [createKey('panePadding', size)]: panePadding,
           [createKey('tabPadding', sizeType)]: tabPadding,
           [createKey('tabPaddingVertical', sizeType)]: tabPaddingVertical,
@@ -872,9 +906,7 @@ export default defineComponent({
         '--n-pane-padding-top': getPadding(panePadding, 'top'),
         '--n-pane-padding-bottom': getPadding(panePadding, 'bottom'),
         '--n-font-weight-strong': fontWeightStrong,
-        '--n-tab-color-segment': tabColorSegment,
-        '--n-icon-color-disabled': iconColorDisabled,
-        '--n-nav-button-color-hover': navButtonHoverColor
+        '--n-tab-color-segment': tabColorSegment
       }
     })
 
@@ -896,9 +928,13 @@ export default defineComponent({
       segmentCapsuleElRef,
       tabsPaneWrapperRef,
       tabsElRef,
+      selfElRef,
       barElRef,
-      addTabInstRef,
-      xScrollInstRef,
+      // 1. avoid unexpected type expansion when build es output
+      //    $watch will introduce an onCleanUp with local node_modules path
+      // 2. reduce dts: avoid expanding component instance types
+      addTabInstRef: addTabInstRef as unknown,
+      xScrollInstRef: xScrollInstRef as unknown,
       scrollWrapperElRef,
       addTabFixed: addTabFixedRef,
       tabWrapperStyle: tabWrapperStyleRef,
@@ -906,7 +942,9 @@ export default defineComponent({
       mergedSize: mergedSizeRef,
       handleScroll,
       handleTabsResize,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       animationDirection: animationDirectionRef,
       renderNameListRef,
@@ -918,8 +956,11 @@ export default defineComponent({
       onRender: themeClassHandle?.onRender,
       startReachedRef,
       endReachedRef,
-      isScroll,
+      isOverflow: isOverflowRef,
       handleButtonClick,
+      mergedTheme: themeRef,
+      rtlEnabled: rtlEnabledRef,
+      mergedPlacement: mergedPlacementRef,
       ...exposedMethods
     }
   },
@@ -927,7 +968,7 @@ export default defineComponent({
     const {
       mergedClsPrefix,
       type,
-      placement,
+      mergedPlacement: placement,
       addTabFixed,
       addable,
       mergedSize,
@@ -937,9 +978,11 @@ export default defineComponent({
       paneWrapperStyle,
       startReachedRef,
       endReachedRef,
-      isScroll,
+      isOverflow,
       showScrollButton,
       handleButtonClick,
+      mergedTheme,
+      rtlEnabled,
       $slots: { default: defaultSlot, prefix: prefixSlot, suffix: suffixSlot }
     } = this
 
@@ -982,24 +1025,23 @@ export default defineComponent({
                   tabPaneVNode.props.name as string | number
                 )
                 return justifyTabDynamicProps(
-                  h(
-                    Tab,
-                    {
-                      ...tabPaneVNode.props,
-                      internalCreatedByPane: true,
-                      internalLeftPadded:
-                        index !== 0
-                        && (!mergedJustifyContent
-                          || mergedJustifyContent === 'center'
-                          || mergedJustifyContent === 'start'
-                          || mergedJustifyContent === 'end')
-                    },
-                    tabPaneVNode.children
+                  <Tab
+                    {...tabPaneVNode.props}
+                    internalCreatedByPane={true}
+                    internalLeftPadded={
+                      index !== 0
+                      && (!mergedJustifyContent
+                        || mergedJustifyContent === 'center'
+                        || mergedJustifyContent === 'start'
+                        || mergedJustifyContent === 'end')
+                    }
+                  >
+                    {tabPaneVNode.children
                       ? {
                           default: tabPaneVNode.children.tab
                         }
-                      : undefined
-                  )
+                      : undefined}
+                  </Tab>
                 )
               })
             : tabChildren.map((tabVNode: any, index: number) => {
@@ -1027,6 +1069,9 @@ export default defineComponent({
               style={{ width: `${this.tabsPadding}px` }}
             />
           )}
+          {isCard ? null : (
+            <div ref="barElRef" class={`${mergedClsPrefix}-tabs-bar`} />
+          )}
         </div>
       )
       return (
@@ -1044,22 +1089,21 @@ export default defineComponent({
             tabs
           )}
           {isCard ? <div class={`${mergedClsPrefix}-tabs-pad`} /> : null}
-          {isCard ? null : (
-            <div ref="barElRef" class={`${mergedClsPrefix}-tabs-bar`} />
-          )}
         </div>
       )
     }
     const resolvedPlacement = isSegment ? 'top' : placement
     return (
       <div
+        ref="selfElRef"
         class={[
           `${mergedClsPrefix}-tabs`,
           this.themeClass,
           `${mergedClsPrefix}-tabs--${type}-type`,
           `${mergedClsPrefix}-tabs--${mergedSize}-size`,
           mergedJustifyContent && `${mergedClsPrefix}-tabs--flex`,
-          `${mergedClsPrefix}-tabs--${resolvedPlacement}`
+          `${mergedClsPrefix}-tabs--${resolvedPlacement}`,
+          rtlEnabled && `${mergedClsPrefix}-tabs--rtl`
         ]}
         style={this.cssVars as CSSProperties}
       >
@@ -1103,18 +1147,18 @@ export default defineComponent({
                             renderNameListRef.value.push(
                               tabPaneVNode.props.name as string | number
                             )
-                            return h(
-                              Tab,
-                              {
-                                ...tabPaneVNode.props,
-                                internalCreatedByPane: true,
-                                internalLeftPadded: index !== 0
-                              },
-                              tabPaneVNode.children
-                                ? {
-                                    default: tabPaneVNode.children.tab
-                                  }
-                                : undefined
+                            return (
+                              <Tab
+                                {...tabPaneVNode.props}
+                                internalCreatedByPane={true}
+                                internalLeftPadded={index !== 0}
+                              >
+                                {tabPaneVNode.children
+                                  ? {
+                                      default: tabPaneVNode.children.tab
+                                    }
+                                  : undefined}
+                              </Tab>
                             )
                           }
                         )
@@ -1135,7 +1179,7 @@ export default defineComponent({
             </VResizeObserver>
           ) : (
             <>
-              {showScrollButton && isScroll && (
+              {showScrollButton && isOverflow && (
                 <TabsButton
                   mergedClsPrefix={mergedClsPrefix}
                   type="prev"
@@ -1144,6 +1188,9 @@ export default defineComponent({
                     || resolvedPlacement === 'right'
                   }
                   disabled={startReachedRef}
+                  rtl={!!rtlEnabled}
+                  theme={mergedTheme.peers.Button}
+                  themeOverrides={mergedTheme.peerOverrides.Button}
                   onClick={handleButtonClick}
                 />
               )}
@@ -1177,8 +1224,7 @@ export default defineComponent({
                   )
                 }}
               </VResizeObserver>
-
-              {showScrollButton && isScroll && (
+              {showScrollButton && isOverflow && (
                 <TabsButton
                   mergedClsPrefix={mergedClsPrefix}
                   type="next"
@@ -1187,6 +1233,9 @@ export default defineComponent({
                     || resolvedPlacement === 'right'
                   }
                   disabled={endReachedRef}
+                  rtl={!!rtlEnabled}
+                  theme={mergedTheme.peers.Button}
+                  themeOverrides={mergedTheme.peerOverrides.Button}
                   onClick={handleButtonClick}
                 />
               )}

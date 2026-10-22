@@ -68,7 +68,8 @@ export default defineComponent({
     }
 
     return {
-      scrollbarInstRef,
+      // reduce dts: string ref only, type unused in render
+      scrollbarInstRef: scrollbarInstRef as unknown,
       handleScroll,
       handleWheel
     }

@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { createTheme } from '../../_mixins'
 import { commonLight } from '../../_styles/common'
@@ -41,13 +41,16 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type HeatmapThemeVars = ReturnType<typeof self>
+export interface HeatmapThemeVars extends ReturnType<typeof self> {}
 
-const heatmapLight: Theme<'Heatmap', HeatmapThemeVars> = createTheme({
+const heatmapLight: HeatmapTheme = createTheme({
   name: 'Heatmap',
   common: commonLight,
   self
 })
 
+export interface HeatmapTheme extends Theme<'Heatmap', HeatmapThemeVars> {}
+
+export interface HeatmapThemeOverrides extends ExtractThemeOverrides<HeatmapTheme> {}
+
 export default heatmapLight
-export type HeatmapTheme = typeof heatmapLight

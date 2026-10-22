@@ -34,9 +34,11 @@ export default defineConfig({
         exports: 'named'
       },
       plugins: [
-        vueJsxVapor({
-          interop: true
-        }),
+        ...process.env.USE_VUE_JSX_VAPOR
+          ? [vueJsxVapor({
+              interop: true
+            })]
+          : [],
         babel({
           extensions,
           babelHelpers: 'bundled'
@@ -44,7 +46,7 @@ export default defineConfig({
       ]
     }
   },
-  oxc: {
+  oxc: process.env.USE_VUE_JSX_VAPOR ? {} : {
     jsx: {
       runtime: 'classic',
       pragma: 'h',

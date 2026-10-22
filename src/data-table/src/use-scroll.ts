@@ -6,9 +6,11 @@ import type {
   TableColumn
 } from './interface'
 import { beforeNextFrameOnce } from 'seemly'
-import { computed, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import { formatLength } from '../../_utils'
 import { getColKey, getNumberColWidth } from './utils'
+
+type ScrollSyncSource = 'head' | 'body' | 'layout'
 
 export function useScroll(
   props: DataTableSetupProps,
@@ -17,13 +19,15 @@ export function useScroll(
     mergedCurrentPageRef,
     bodyWidthRef,
     maxHeightRef,
-    mergedTableLayoutRef
+    mergedTableLayoutRef,
+    mergedEmptyRef
   }: {
     maxHeightRef: Ref<string | number | undefined>
     bodyWidthRef: Ref<null | number>
     mainTableInstRef: Ref<MainTableRef | null>
     mergedCurrentPageRef: ComputedRef<number>
     mergedTableLayoutRef: Ref<'auto' | 'fixed'>
+    mergedEmptyRef: ComputedRef<boolean>
   }
 ) {
   const explicitlyScrollableRef = computed(
@@ -209,7 +213,7 @@ export function useScroll(
   }
   function handleTableHeaderScroll(): void {
     if (scrollPartRef.value !== 'body') {
-      beforeNextFrameOnce(syncScrollState)
+      beforeNextFrameOnce(syncScrollState, 'head')
     }
     else {
       scrollPartRef.value = undefined
@@ -218,38 +222,59 @@ export function useScroll(
   function handleTableBodyScroll(e: Event): void {
     props.onScroll?.(e)
     if (scrollPartRef.value !== 'head') {
-      beforeNextFrameOnce(syncScrollState)
+      beforeNextFrameOnce(syncScrollState, 'body')
     }
     else {
       scrollPartRef.value = undefined
     }
   }
-  function syncScrollState(): void {
+  function syncScrollState(source: ScrollSyncSource): void {
     // We can't simply use props.scrollX to determine whether the table has
     // need to be sync since user may set column width for each column.
     // Just let it be, the scroll listener won't be triggered for a basic table.
     const { header, body } = getScrollElements()
     if (!body)
       return
+    if (source === 'layout') {
+      // Body may remount (e.g. virtual list is disabled when empty) or shrink.
+      // Keep the stored x-scroll instead of treating the new body's 0 as user
+      // input, which would reset the discrete header.
+      if (header) {
+        header.scrollLeft = lastScrollLeft
+      }
+      body.scrollLeft = lastScrollLeft
+    }
+    else if (header) {
+      if (source === 'head') {
+        lastScrollLeft = header.scrollLeft
+        body.scrollLeft = lastScrollLeft
+        scrollPartRef.value = 'head'
+      }
+      else if (source === 'body') {
+        lastScrollLeft = body.scrollLeft
+        header.scrollLeft = lastScrollLeft
+        scrollPartRef.value = 'body'
+      }
+      else {
+        // we need to deal with overscroll
+        const directionHead = lastScrollLeft - header.scrollLeft
+        scrollPartRef.value = directionHead !== 0 ? 'head' : 'body'
+        if (scrollPartRef.value === 'head') {
+          lastScrollLeft = header.scrollLeft
+          body.scrollLeft = lastScrollLeft
+        }
+        else {
+          lastScrollLeft = body.scrollLeft
+          header.scrollLeft = lastScrollLeft
+        }
+      }
+    }
+    else if (source !== 'head') {
+      lastScrollLeft = body.scrollLeft
+    }
     const { value: tableWidth } = bodyWidthRef
     if (tableWidth === null)
       return
-    if (header) {
-      // we need to deal with overscroll
-      const directionHead = lastScrollLeft - header.scrollLeft
-      scrollPartRef.value = directionHead !== 0 ? 'head' : 'body'
-      if (scrollPartRef.value === 'head') {
-        lastScrollLeft = header.scrollLeft
-        body.scrollLeft = lastScrollLeft
-      }
-      else {
-        lastScrollLeft = body.scrollLeft
-        header.scrollLeft = lastScrollLeft
-      }
-    }
-    else {
-      lastScrollLeft = body.scrollLeft
-    }
     deriveActiveLeftFixedColumn()
     deriveActiveLeftFixedChildrenColumns()
     deriveActiveRightFixedColumn()
@@ -260,10 +285,16 @@ export function useScroll(
     if (!header)
       return
     header.scrollLeft = left
-    syncScrollState()
+    lastScrollLeft = left
+    syncScrollState('head')
   }
   watch(mergedCurrentPageRef, () => {
     scrollMainTableBodyToTop()
+  })
+  watch([() => props.virtualScroll, mergedEmptyRef], () => {
+    void nextTick(() => {
+      syncScrollState('layout')
+    })
   })
   return {
     styleScrollXRef,

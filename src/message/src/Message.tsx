@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType, VNodeChild } from 'vue'
+import type { CSSProperties, PropType, Ref, VNodeChild } from 'vue'
 import type { MessageSpinProps } from './public-types'
 import type { MessageRenderMessage, MessageType } from './types'
 import { computed, defineComponent, h, inject } from 'vue'
@@ -127,7 +127,9 @@ export default defineComponent({
       handleClose() {
         props.onClose?.()
       },
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender,
       placement: messageProviderProps.placement

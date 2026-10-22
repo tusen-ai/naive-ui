@@ -1,4 +1,9 @@
+import type { ScrollbarTheme } from '../../_internal/scrollbar/styles'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
+import type { ButtonTheme } from '../../button/styles'
+import type { InputTheme } from '../../input/styles'
+import type { TimePickerTheme } from '../../time-picker/styles'
 import { changeColor } from 'seemly'
 import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import { createTheme } from '../../_mixins'
@@ -58,9 +63,9 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type DatePickerThemeVars = ReturnType<typeof self>
+export interface DatePickerThemeVars extends ReturnType<typeof self> {}
 
-const datePickerLight = createTheme({
+const datePickerLight: DatePickerTheme = createTheme({
   name: 'DatePicker',
   common: commonLight,
   peers: {
@@ -72,5 +77,17 @@ const datePickerLight = createTheme({
   self
 })
 
+export interface DatePickerTheme extends Theme<
+  'DatePicker',
+  DatePickerThemeVars,
+  {
+    Input: InputTheme
+    Button: ButtonTheme
+    TimePicker: TimePickerTheme
+    Scrollbar: ScrollbarTheme
+  }
+> {}
+
+export interface DatePickerThemeOverrides extends ExtractThemeOverrides<DatePickerTheme> {}
+
 export default datePickerLight
-export type DatePickerTheme = typeof datePickerLight

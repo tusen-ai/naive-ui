@@ -1,7 +1,7 @@
-import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { FloatButtonTheme } from '../styles'
+import type { FloatButtonTheme, FloatButtonThemeOverrides } from '../styles'
 import { off, on } from 'evtd'
 import { useMergedState } from 'vooks'
 import {
@@ -29,7 +29,10 @@ import { floatButtonLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const floatButtonProps = {
-  ...(useTheme.props as ThemeProps<FloatButtonTheme>),
+  ...(useTheme.props as ThemeProps<
+    FloatButtonTheme,
+    FloatButtonThemeOverrides
+  >),
   width: { type: [Number, String] as PropType<string | number>, default: 40 },
   height: { type: [Number, String] as PropType<string | number>, default: 40 },
   left: [Number, String] as PropType<string | number>,
@@ -208,7 +211,9 @@ export default defineComponent({
     return {
       inlineStyle,
       selfElRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       mergedClsPrefix: mergedClsPrefixRef,
       mergedShape: mergedShapeRef,
       mergedShowMenu: mergedShowMenuRef,

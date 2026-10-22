@@ -1,7 +1,7 @@
 import type { CSSProperties, ExtractPropTypes, PropType, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { MessageTheme } from '../styles'
+import type { MessageTheme, MessageThemeOverrides } from '../styles'
 import type { MessageOptions, MessageType } from './types'
 import { createId } from 'seemly'
 import {
@@ -54,7 +54,7 @@ interface PrivateMessageRef extends MessageReactive {
 export type MessageProviderInst = MessageApiInjection
 
 export const messageProviderProps = {
-  ...(useTheme.props as ThemeProps<MessageTheme>),
+  ...(useTheme.props as ThemeProps<MessageTheme, MessageThemeOverrides>),
   to: [String, Object] as PropType<string | HTMLElement>,
   duration: {
     type: Number,

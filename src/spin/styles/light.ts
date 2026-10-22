@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { commonLight } from '../../_styles/common'
 
@@ -26,13 +26,16 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type SpinThemeVars = ReturnType<typeof self>
+export interface SpinThemeVars extends ReturnType<typeof self> {}
 
-const spinLight: Theme<'Spin', SpinThemeVars> = {
+const spinLight: SpinTheme = {
   name: 'Spin',
   common: commonLight,
   self
 }
 
+export interface SpinTheme extends Theme<'Spin', SpinThemeVars> {}
+
+export interface SpinThemeOverrides extends ExtractThemeOverrides<SpinTheme> {}
+
 export default spinLight
-export type SpinTheme = typeof spinLight

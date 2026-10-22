@@ -169,12 +169,13 @@ export const NDialogEnvironment = defineComponent({
         {{
           default: ({ draggableClass }: { draggableClass: string }) => (
             <NDialog
-              {...keep(this.$props, dialogPropKeys)}
-              titleClass={normalizeClass([this.titleClass, draggableClass])}
-              style={this.internalStyle}
-              onClose={handleCloseClick}
-              onNegativeClick={handleNegativeClick}
-              onPositiveClick={handlePositiveClick}
+              {...keep(this.$props, dialogPropKeys, {
+                titleClass: normalizeClass([this.titleClass, draggableClass]),
+                style: this.internalStyle,
+                onClose: handleCloseClick,
+                onNegativeClick: handleNegativeClick,
+                onPositiveClick: handlePositiveClick
+              })}
             />
           )
         }}

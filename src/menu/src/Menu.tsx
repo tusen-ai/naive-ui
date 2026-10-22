@@ -1,10 +1,17 @@
 import type { Key } from 'treemate'
-import type { ExtractPropTypes, PropType, VNode, VNodeChild } from 'vue'
+import type {
+  CSSProperties,
+  ExtractPropTypes,
+  PropType,
+  Ref,
+  VNode,
+  VNodeChild
+} from 'vue'
 import type { FollowerPlacement, VOverflowInst } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type { MaybeArray } from '../../_utils'
 import type { DropdownProps } from '../../dropdown'
-import type { MenuTheme } from '../styles'
+import type { MenuTheme, MenuThemeOverrides } from '../styles'
 import type {
   MenuGroupOption,
   MenuIgnoredOption,
@@ -43,7 +50,7 @@ import { useCheckDeprecated } from './useCheckDeprecated'
 import { isIgnoredNode, itemRenderer } from './utils'
 
 export const menuProps = {
-  ...(useTheme.props as ThemeProps<MenuTheme>),
+  ...(useTheme.props as ThemeProps<MenuTheme, MenuThemeOverrides>),
   options: {
     type: Array as PropType<MenuMixedOption[]>,
     default: () => []
@@ -600,9 +607,12 @@ export default defineComponent({
       tmNodes: tmNodesRef,
       mergedTheme: themeRef,
       mergedCollapsed: mergedCollapsedRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
-      overflowRef,
+      // reduce dts: string ref only, type unused in render
+      overflowRef: overflowRef as unknown,
       counterRef,
       updateCounter: () => {},
       onResize,

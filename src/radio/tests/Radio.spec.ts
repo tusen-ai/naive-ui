@@ -215,6 +215,57 @@ describe('n-radio-group', () => {
     wrapper.unmount()
   })
 
+  it('should work with `options` prop', async () => {
+    const onUpdateValue = vi.fn()
+    const wrapper = mount(NRadioGroup, {
+      attachTo: document.body,
+      props: {
+        defaultValue: false,
+        options: [
+          { label: 'False', value: false },
+          { label: 'True', value: true },
+          { label: 'Disabled', value: 'disabled', disabled: true }
+        ],
+        onUpdateValue
+      }
+    })
+    const radios = wrapper.findAll('.n-radio')
+    expect(radios).toHaveLength(3)
+    expect(radios[0].text()).toContain('False')
+    expect(radios[0].classes()).toContain('n-radio--checked')
+    expect(radios[2].classes()).toContain('n-radio--disabled')
+
+    await radios[1].trigger('click')
+    expect(onUpdateValue).toHaveBeenCalledWith(true)
+    wrapper.unmount()
+  })
+
+  it('should support custom option fields and ignore the default slot', () => {
+    const wrapper = mount(NRadioGroup, {
+      props: {
+        value: 2,
+        options: [
+          { name: 'One', id: 1 },
+          { name: 'Two', id: 2 }
+        ],
+        labelField: 'name',
+        valueField: 'id'
+      },
+      slots: {
+        default: () => h(NRadio, { value: 3, label: 'Ignored' })
+      }
+    })
+    const radios = wrapper.findAll('.n-radio')
+    expect(radios).toHaveLength(2)
+    expect(radios.map(radio => radio.text())).toEqual(['One', 'Two'])
+    expect(
+      radios.map(radio => radio.find('input').attributes('value'))
+    ).toEqual(['1', '2'])
+    expect(radios[1].classes()).toContain('n-radio--checked')
+    expect(wrapper.text()).not.toContain('Ignored')
+    wrapper.unmount()
+  })
+
   it('should work with `on-update:value` prop', async () => {
     const onUpdate = vi.fn()
     const wrapper = mount(NRadioGroup, {

@@ -1,0 +1,17 @@
+packages:
+  - '.'
+allowBuilds:
+  esbuild: true
+minimumReleaseAgeExclude:
+  - vueuc@0.4.66
+onlyBuiltDependencies:
+  - esbuild
+overrides:
+  cssstyle: 5.2.1
+  vite: ^8.0.10
+peerDependencyRules:
+  ignoreMissing:
+    - '@babel/core'
+    - postcss
+    - rollup
+    - webpack

@@ -132,7 +132,7 @@ export default defineComponent({
             ]}
             contentStyle={bodyContentStyle}
           >
-            {{ ...$slots }}
+            {$slots}
           </NScrollbar>
         )}
         {$slots.footer ? (

@@ -1,7 +1,7 @@
-import type { PropType } from 'vue'
+import type { CSSProperties, PropType, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { SkeletonTheme } from '../styles'
+import type { SkeletonTheme, SkeletonThemeOverrides } from '../styles'
 import type { SkeletonSize } from './public-types'
 import { pxfy, repeat } from 'seemly'
 import { computed, defineComponent, Fragment, h, mergeProps } from 'vue'
@@ -11,7 +11,7 @@ import { skeletonLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const skeletonProps = {
-  ...(useTheme.props as ThemeProps<SkeletonTheme>),
+  ...(useTheme.props as ThemeProps<SkeletonTheme, SkeletonThemeOverrides>),
   text: Boolean,
   round: Boolean,
   circle: Boolean,
@@ -90,7 +90,7 @@ export default defineComponent({
           '--n-color-start': color,
           '--n-color-end': colorEnd
         }
-      })
+      }) as Ref<CSSProperties>
     }
   },
   render() {

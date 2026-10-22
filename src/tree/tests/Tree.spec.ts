@@ -1,8 +1,10 @@
 import type { DOMWrapper, VueWrapper } from '@vue/test-utils'
 import type { TreeOption } from '../index'
 import { mount } from '@vue/test-utils'
-import { nextTick } from 'vue'
+import { defineComponent, h, nextTick, provide, ref } from 'vue'
 import { NTree } from '../index'
+import { treeInjectionKey } from '../src/interface'
+import TreeNodeSwitcher from '../src/TreeNodeSwitcher'
 
 function getTreeNodes(wrapper: VueWrapper) {
   return wrapper.findAll('.n-tree-node')
@@ -650,6 +652,62 @@ describe('n-tree', () => {
     })
     expect(wrapper.find('.n-tree-node-checkbox--right').exists()).toBe(true)
 
+    wrapper.unmount()
+  })
+
+  it('should not throw when clicking switcher', async () => {
+    const errors: unknown[] = []
+    const wrapper = mount(NTree, {
+      global: {
+        config: {
+          errorHandler: (err) => {
+            errors.push(err)
+          }
+        }
+      },
+      props: {
+        data: [
+          {
+            label: 'parent',
+            key: 'parent',
+            children: [{ label: 'child', key: 'child' }]
+          }
+        ]
+      }
+    })
+    await wrapper.find('.n-tree-node-switcher').trigger('click')
+    expect(errors).toEqual([])
+    wrapper.unmount()
+  })
+
+  it('should not throw when clicking switcher without onClick', async () => {
+    const errors: unknown[] = []
+    const Host = defineComponent({
+      setup() {
+        provide(treeInjectionKey, {
+          renderSwitcherIconRef: ref(undefined),
+          spinPropsRef: ref(undefined)
+        } as any)
+        return () =>
+          h(TreeNodeSwitcher, {
+            clsPrefix: 'n',
+            indent: 24,
+            tmNode: { rawNode: {} } as any
+          })
+      }
+    })
+    const wrapper = mount(Host, {
+      global: {
+        config: {
+          errorHandler: (err) => {
+            errors.push(err)
+          }
+        }
+      }
+    })
+    expect(wrapper.find('[data-switcher]').exists()).toBe(true)
+    await wrapper.find('[data-switcher]').trigger('click')
+    expect(errors).toEqual([])
     wrapper.unmount()
   })
 })

@@ -9,6 +9,7 @@ Naive UI 是统一设计规范的高质量 Vue 组件库，我们倾向于只提
 | 资源 | 描述 |
 | --- | --- |
 | [Naive UI Admin](https://github.com/jekip/naive-ui-admin) | 免费开源的中后台模板 |
+| [XiHan.BasicApp](https://github.com/XiHanFun/XiHan.BasicApp) | 采用前后端分离架构，后端基于 XiHan.Framework、前端基于 Naive UI 的 SaaS 多租户内核，是一套完整的企业级中后台管理解决方案。开箱即用，遵循 DDD 分层与 CQRS 模式，提供 RBAC + ABAC 混合权限管理、多租户隔离、代码生成、实时通信、灰度发布等核心能力，满足企业级后台管理场景。 |
 | [Admin Work](https://github.com/qingqingxuan/admin-work) | 一款免费开源、功能强大、方便易用、漂亮的中后台管理系统模板 |
 | [Soybean Admin](https://github.com/honghuangdc/soybean-admin) | 一个基于 Vue3 + Vite + Naive UI + TypeScript 的漂亮清爽的中后台模版 |
 | [Rengar Admin](https://github.com/RengarJS/rengar-admin) | 基于 Vue 3.5 + Vite 7 + TypeScript + Naive UI + Pinia + UnoCSS 的中后台管理系统模板，简洁不过度封装，代码简单易懂 |

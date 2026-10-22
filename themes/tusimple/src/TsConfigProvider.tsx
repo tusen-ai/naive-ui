@@ -104,7 +104,7 @@ export default defineComponent({
         }
         icons={icons ? merge({}, tusimpleIcons, icons) : tusimpleIcons}
       >
-        {{ ...this.$slots }}
+        {this.$slots}
       </NConfigProvider>
     )
   }

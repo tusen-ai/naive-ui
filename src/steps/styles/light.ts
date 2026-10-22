@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { commonLight } from '../../_styles/common'
 import commonVariables from './_common'
@@ -43,13 +43,16 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type StepsThemeVars = ReturnType<typeof self>
+export interface StepsThemeVars extends ReturnType<typeof self> {}
 
-const stepsLight: Theme<'Steps', StepsThemeVars> = {
+const stepsLight: StepsTheme = {
   name: 'Steps',
   common: commonLight,
   self
 }
 
+export interface StepsTheme extends Theme<'Steps', StepsThemeVars> {}
+
+export interface StepsThemeOverrides extends ExtractThemeOverrides<StepsTheme> {}
+
 export default stepsLight
-export type StepsTheme = typeof stepsLight

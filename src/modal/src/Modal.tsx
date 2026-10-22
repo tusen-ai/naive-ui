@@ -1,9 +1,9 @@
-import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CardSlots } from '../../card'
 import type { DialogSlots } from '../../dialog'
-import type { ModalTheme } from '../styles'
+import type { ModalTheme, ModalThemeOverrides } from '../styles'
 import type { ModalDraggableOptions } from './interface'
 import { getPreciseEventTarget } from 'seemly'
 import { zindexable } from 'vdirs'
@@ -32,11 +32,11 @@ import { dialogProviderInjectionKey } from '../../dialog/src/context'
 import { modalLight } from '../styles'
 import NModalBodyWrapper from './BodyWrapper'
 import { modalInjectionKey, modalProviderInjectionKey } from './interface'
-import { presetProps, presetPropsKeys } from './presetProps'
+import { forwardedPresetPropsKeys, presetProps } from './presetProps'
 import style from './styles/index.cssr'
 
 export const modalProps = {
-  ...(useTheme.props as ThemeProps<ModalTheme>),
+  ...(useTheme.props as ThemeProps<ModalTheme, ModalThemeOverrides>),
   show: Boolean,
   showMask: {
     type: Boolean,
@@ -295,9 +295,8 @@ export default defineComponent({
       isMounted: isMountedRef,
       containerRef,
       presetProps: computed(() => {
-        const pickedProps = keep(props, presetPropsKeys)
         // TODO: remove as any after vue fix the issue introduced in 3.2.27
-        return pickedProps as any
+        return keep(props, forwardedPresetPropsKeys) as any
       }),
       handleEsc,
       handleAfterLeave,
@@ -307,7 +306,9 @@ export default defineComponent({
       handleNegativeClick,
       handlePositiveClick,
       handleCloseClick,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }
@@ -343,7 +344,6 @@ export default defineComponent({
                           <div
                             aria-hidden
                             class={`${mergedClsPrefix}-modal-mask`}
-                            onClick={this.handleClickoutside}
                           />
                         ) : null
                       }
@@ -370,11 +370,9 @@ export default defineComponent({
                   onBeforeLeave={this.handleBeforeLeave}
                   onAfterEnter={this.onAfterEnter}
                   onAfterLeave={this.handleAfterLeave}
-                  onClickoutside={
-                    showMask ? undefined : this.handleClickoutside
-                  }
+                  onClickoutside={this.handleClickoutside}
                 >
-                  {{ ...this.$slots }}
+                  {this.$slots}
                 </NModalBodyWrapper>
               </div>,
               [

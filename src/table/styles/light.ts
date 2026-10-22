@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { composite } from 'seemly'
 import { commonLight } from '../../_styles/common'
@@ -46,13 +46,16 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type TableThemeVars = ReturnType<typeof self>
+export interface TableThemeVars extends ReturnType<typeof self> {}
 
-const tableLight: Theme<'Table', TableThemeVars> = {
+const tableLight: TableTheme = {
   name: 'Table',
   common: commonLight,
   self
 }
 
+export interface TableTheme extends Theme<'Table', TableThemeVars> {}
+
+export interface TableThemeOverrides extends ExtractThemeOverrides<TableTheme> {}
+
 export default tableLight
-export type TableTheme = typeof tableLight

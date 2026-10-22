@@ -99,6 +99,9 @@ export function useMenuChild(props: UseMenuChildProps): UseMenuChild {
       NMenuOptionGroup
       && typeof NMenuOptionGroup.paddingLeftRef.value === 'number'
     ) {
+      if (mergedCollapsedRef.value) {
+        return collapsedWidth / 2 - maxIconSizeRef.value / 2
+      }
       return indent / 2 + NMenuOptionGroup.paddingLeftRef.value
     }
     if (NSubmenu && typeof NSubmenu.paddingLeftRef.value === 'number') {

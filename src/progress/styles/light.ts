@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins/use-theme'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins/use-theme'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { commonLight } from '../../_styles/common'
 
@@ -39,13 +39,16 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type ProgressThemeVars = ReturnType<typeof self>
+export interface ProgressThemeVars extends ReturnType<typeof self> {}
 
-const progressLight: Theme<'Progress', ProgressThemeVars> = {
+const progressLight: ProgressTheme = {
   name: 'Progress',
   common: commonLight,
   self
 }
 
+export interface ProgressTheme extends Theme<'Progress', ProgressThemeVars> {}
+
+export interface ProgressThemeOverrides extends ExtractThemeOverrides<ProgressTheme> {}
+
 export default progressLight
-export type ProgressTheme = typeof progressLight

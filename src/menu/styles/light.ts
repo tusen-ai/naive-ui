@@ -1,4 +1,7 @@
+import type { ExtractThemeOverrides, Theme } from '../../_mixins/use-theme'
 import type { ThemeCommonVars } from '../../_styles/common'
+import type { DropdownTheme } from '../../dropdown/styles'
+import type { TooltipTheme } from '../../tooltip/styles'
 import { changeColor } from 'seemly'
 import { createTheme } from '../../_mixins/use-theme'
 import { commonLight } from '../../_styles/common'
@@ -111,9 +114,9 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type MenuThemeVars = ReturnType<typeof self>
+export interface MenuThemeVars extends ReturnType<typeof self> {}
 
-const menuLight = createTheme({
+const menuLight: MenuTheme = createTheme({
   name: 'Menu',
   common: commonLight,
   peers: {
@@ -123,5 +126,15 @@ const menuLight = createTheme({
   self
 })
 
+export interface MenuTheme extends Theme<
+  'Menu',
+  MenuThemeVars,
+  {
+    Tooltip: TooltipTheme
+    Dropdown: DropdownTheme
+  }
+> {}
+
+export interface MenuThemeOverrides extends ExtractThemeOverrides<MenuTheme> {}
+
 export default menuLight
-export type MenuTheme = typeof menuLight

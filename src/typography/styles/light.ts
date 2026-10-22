@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { commonLight } from '../../_styles/common'
 import commonVars from './_common'
@@ -62,13 +62,19 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type TypographyThemeVars = ReturnType<typeof self>
+export interface TypographyThemeVars extends ReturnType<typeof self> {}
 
-const typographyLight: Theme<'Typography', TypographyThemeVars> = {
+const typographyLight: TypographyTheme = {
   name: 'Typography',
   common: commonLight,
   self
 }
 
+export interface TypographyTheme extends Theme<
+  'Typography',
+  TypographyThemeVars
+> {}
+
+export interface TypographyThemeOverrides extends ExtractThemeOverrides<TypographyTheme> {}
+
 export default typographyLight
-export type TypographyTheme = typeof typographyLight

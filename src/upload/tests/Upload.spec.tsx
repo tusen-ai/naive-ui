@@ -105,6 +105,28 @@ describe('n-upload', () => {
     expect(wrapper.findAll('.n-upload-dragger').length).toBe(1)
   })
 
+  it('should work with `always-show-actions` prop', async () => {
+    const wrapper = mount(NUpload, {
+      props: {
+        alwaysShowActions: true,
+        listType: 'image-card',
+        defaultFileList: [
+          {
+            id: 'a',
+            name: 'a.png',
+            status: 'finished',
+            url: 'https://example.com/a.png'
+          }
+        ]
+      }
+    })
+    const file = wrapper.find('.n-upload-file')
+    expect(file.classes()).toContain('n-upload-file--always-show-actions')
+    expect(
+      wrapper.find('.n-upload-file-info__action--always-show').exists()
+    ).toBe(true)
+  })
+
   it('should work with `create-thumbnail-url` prop', async () => {
     const createThumbnailUrl = async (): Promise<string> => '/testThumbUrl.png'
     const wrapper = mount(NUpload, {

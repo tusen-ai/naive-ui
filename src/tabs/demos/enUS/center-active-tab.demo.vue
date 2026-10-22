@@ -1,7 +1,7 @@
 <markdown>
 # Tab Scroll Centering
 
-Controls whether the active tab is centered. When set to true, the active tab will scroll to the center of the scroll container.
+When set to true, the active tab will scroll to the center of the scroll container.
 </markdown>
 
 <script lang="ts" setup>

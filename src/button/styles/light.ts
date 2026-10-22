@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { commonLight } from '../../_styles/common'
 import commonVariables from './_common'
@@ -239,13 +239,16 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type ButtonThemeVars = ReturnType<typeof self>
+export interface ButtonThemeVars extends ReturnType<typeof self> {}
 
-const buttonLight: Theme<'Button', ButtonThemeVars> = {
+const buttonLight: ButtonTheme = {
   name: 'Button',
   common: commonLight,
   self
 }
 
+export interface ButtonTheme extends Theme<'Button', ButtonThemeVars> {}
+
+export interface ButtonThemeOverrides extends ExtractThemeOverrides<ButtonTheme> {}
+
 export default buttonLight
-export type ButtonTheme = typeof buttonLight

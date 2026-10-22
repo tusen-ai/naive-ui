@@ -1,7 +1,7 @@
-import type { SlotsType, VNode } from 'vue'
+import type { CSSProperties, Ref, SlotsType, VNode } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { StatisticTheme } from '../styles'
+import type { StatisticTheme, StatisticThemeOverrides } from '../styles'
 import { computed, defineComponent, h } from 'vue'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../_mixins'
 import { resolveWrappedSlot } from '../../_utils'
@@ -9,7 +9,7 @@ import { statisticLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const statisticProps = {
-  ...(useTheme.props as ThemeProps<StatisticTheme>),
+  ...(useTheme.props as ThemeProps<StatisticTheme, StatisticThemeOverrides>),
   tabularNums: Boolean,
   label: String,
   value: [String, Number]
@@ -72,7 +72,9 @@ export default defineComponent({
     return {
       rtlEnabled: rtlEnabledRef,
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

@@ -46,10 +46,7 @@ export default defineComponent({
       type: Boolean,
       required: true
     },
-    source: {
-      type: Boolean,
-      default: false
-    }
+    source: Boolean
   },
   setup() {
     const { mergedThemeRef, mergedClsPrefixRef } = inject(transferInjectionKey)!
@@ -80,8 +77,9 @@ export default defineComponent({
       mergedTheme: mergedThemeRef,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedRenderEmpty: mergedRenderEmptyRef,
-      scrollerInstRef,
-      vlInstRef,
+      // reduce dts: string ref only, type unused in render
+      scrollerInstRef: scrollerInstRef as unknown,
+      vlInstRef: vlInstRef as unknown,
       syncVLScroller,
       scrollContainer,
       scrollContent

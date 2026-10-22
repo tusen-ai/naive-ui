@@ -1,4 +1,6 @@
+import type { ExtractThemeOverrides, Theme } from '../../_mixins/use-theme'
 import type { ThemeCommonVars } from '../../_styles/common'
+import type { PopoverTheme } from '../../popover/styles'
 import { changeColor } from 'seemly'
 import { createTheme } from '../../_mixins/use-theme'
 import { commonLight } from '../../_styles/common'
@@ -64,9 +66,9 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type DropdownThemeVars = ReturnType<typeof self>
+export interface DropdownThemeVars extends ReturnType<typeof self> {}
 
-const dropdownLight = createTheme({
+const dropdownLight: DropdownTheme = createTheme({
   name: 'Dropdown',
   common: commonLight,
   peers: {
@@ -75,5 +77,14 @@ const dropdownLight = createTheme({
   self
 })
 
-export type DropdownTheme = typeof dropdownLight
+export interface DropdownTheme extends Theme<
+  'Dropdown',
+  DropdownThemeVars,
+  {
+    Popover: PopoverTheme
+  }
+> {}
+
+export interface DropdownThemeOverrides extends ExtractThemeOverrides<DropdownTheme> {}
+
 export default dropdownLight

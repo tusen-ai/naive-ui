@@ -67,4 +67,33 @@ describe('n-transfer', () => {
     })
     expect(wrapper.find('.n-input__placeholder').text()).toBe(test)
   })
+
+  it('should not throw when clicking header buttons', async () => {
+    const errors: unknown[] = []
+    const wrapper = mount(NTransfer, {
+      global: {
+        config: {
+          errorHandler: (err) => {
+            errors.push(err)
+          }
+        }
+      },
+      props: {
+        options: [
+          { label: 'a', value: 'a' },
+          { label: 'b', value: 'b' }
+        ],
+        defaultValue: ['a']
+      }
+    })
+
+    await wrapper
+      .find('.n-transfer-list--source .n-transfer-list-header__button')
+      .trigger('click')
+    await wrapper
+      .find('.n-transfer-list--target .n-transfer-list-header__button')
+      .trigger('click')
+    expect(errors).toEqual([])
+    wrapper.unmount()
+  })
 })

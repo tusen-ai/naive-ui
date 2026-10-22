@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType, SlotsType, VNode } from 'vue'
+import type { CSSProperties, PropType, Ref, SlotsType, VNode } from 'vue'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import { computed, defineComponent, h, inject } from 'vue'
 import { useConfig, useThemeClass } from '../../_mixins'
@@ -105,7 +105,9 @@ export default defineComponent({
       : undefined
     return {
       mergedClsPrefix: NTimeline.mergedClsPrefixRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

@@ -17,7 +17,7 @@ import type { NLocale } from '../../locales'
 import type { PaginationProps } from '../../pagination'
 import type { PopoverProps } from '../../popover'
 import type { ScrollbarProps } from '../../scrollbar/src/Scrollbar'
-import type { DataTableTheme } from '../styles'
+import type { DataTableTheme, DataTableThemeOverrides } from '../styles'
 import type {
   DataTableGetCsvCell,
   DataTableGetCsvHeader,
@@ -29,7 +29,7 @@ import { useTheme } from '../../_mixins'
 import { createInjectionKey } from '../../_utils'
 
 export const dataTableProps = {
-  ...(useTheme.props as ThemeProps<DataTableTheme>),
+  ...(useTheme.props as ThemeProps<DataTableTheme, DataTableThemeOverrides>),
   onUnstableColumnResize: Function as PropType<
     (
       resizedWidth: number,
@@ -254,16 +254,13 @@ export type DataTableHeightForRow<T = RowData> = (
 ) => number
 
 export type TableColumnTitle
-  = | string
-    | ((column: TableBaseColumn) => VNodeChild)
+  = string | ((column: TableBaseColumn) => VNodeChild)
 
 export type TableExpandColumnTitle
-  = | string
-    | ((column: TableExpandColumn) => VNodeChild)
+  = string | ((column: TableExpandColumn) => VNodeChild)
 
 export type TableColumnGroupTitle
-  = | string
-    | ((column: TableColumnGroup) => VNodeChild)
+  = string | ((column: TableColumnGroup) => VNodeChild)
 
 export type TableColumnGroup<T = InternalRowData> = {
   title?: TableColumnGroupTitle
@@ -457,7 +454,7 @@ export interface DataTableInjection {
   doUncheck: (rowKey: RowKey | RowKey[], rowInfo: RowData) => void
   handleTableHeaderScroll: (e: Event) => void
   handleTableBodyScroll: (e: Event) => void
-  syncScrollState: (deltaX?: number, deltaY?: number) => void
+  syncScrollState: (source: 'head' | 'body' | 'layout') => void
   setHeaderScrollLeft: (scrollLeft: number) => void
   renderCell: Ref<
     | undefined

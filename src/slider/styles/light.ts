@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { commonLight } from '../../_styles/common'
 import sizeVariables from './_common'
@@ -49,13 +49,16 @@ function self(vars: ThemeCommonVars) {
   }
 }
 
-export type SliderThemeVars = ReturnType<typeof self>
+export interface SliderThemeVars extends ReturnType<typeof self> {}
 
-const sliderLight: Theme<'Slider', SliderThemeVars> = {
+const sliderLight: SliderTheme = {
   name: 'Slider',
   common: commonLight,
   self
 }
 
+export interface SliderTheme extends Theme<'Slider', SliderThemeVars> {}
+
+export interface SliderThemeOverrides extends ExtractThemeOverrides<SliderTheme> {}
+
 export default sliderLight
-export type SliderTheme = typeof sliderLight

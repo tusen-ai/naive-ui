@@ -250,6 +250,59 @@ describe('n-checkbox-group', () => {
     wrapper.unmount()
   })
 
+  it('should work with `options` prop', async () => {
+    const onUpdateValue = vi.fn()
+    const wrapper = mount(NCheckboxGroup, {
+      props: {
+        defaultValue: [1],
+        options: [
+          { label: 'One', value: 1 },
+          { label: 'Two', value: 2 },
+          { label: 'Disabled', value: 3, disabled: true }
+        ],
+        onUpdateValue
+      }
+    })
+    const checkboxes = wrapper.findAll('.n-checkbox')
+    expect(checkboxes).toHaveLength(3)
+    expect(checkboxes[0].text()).toContain('One')
+    expect(checkboxes[0].classes()).toContain('n-checkbox--checked')
+    expect(checkboxes[2].classes()).toContain('n-checkbox--disabled')
+
+    await checkboxes[1].trigger('click')
+    expect(onUpdateValue).toHaveBeenCalledWith([1, 2], {
+      actionType: 'check',
+      value: 2
+    })
+    wrapper.unmount()
+  })
+
+  it('should support custom option fields and ignore the default slot', () => {
+    const wrapper = mount(NCheckboxGroup, {
+      props: {
+        defaultValue: [2],
+        options: [
+          { name: 'One', id: 1 },
+          { name: 'Two', id: 2 }
+        ],
+        labelField: 'name',
+        valueField: 'id'
+      },
+      slots: {
+        default: () => <NCheckbox value={3} label="Ignored" />
+      }
+    })
+    const checkboxes = wrapper.findAll('.n-checkbox')
+    expect(checkboxes).toHaveLength(2)
+    expect(checkboxes.map(checkbox => checkbox.text())).toEqual([
+      'One',
+      'Two'
+    ])
+    expect(checkboxes[1].classes()).toContain('n-checkbox--checked')
+    expect(wrapper.text()).not.toContain('Ignored')
+    wrapper.unmount()
+  })
+
   it('should work with default slots', async () => {
     const wrapper = mount(NCheckboxGroup, {
       props: {

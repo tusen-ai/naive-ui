@@ -9,7 +9,7 @@
 Use npm to install.
 
 ```bash
-npm i -D naive-ui
+npm i naive-ui
 ```
 
 ## UMD
@@ -19,7 +19,7 @@ Please refer to [Using UMD](umd).
 ## Fonts
 
 ```bash
-npm i -D vfonts
+npm i vfonts
 ```
 
 ## Icons

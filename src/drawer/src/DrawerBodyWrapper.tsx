@@ -328,7 +328,7 @@ export default defineComponent({
                                     this.mergedTheme.peerOverrides.Scrollbar
                                   }
                                 >
-                                  {{ ...$slots }}
+                                  {$slots}
                                 </NScrollbar>
                               )
                             ]

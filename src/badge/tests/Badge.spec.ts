@@ -99,7 +99,9 @@ describe('n-badge', () => {
         offset: [10, 10]
       }
     })
-    expect(wrapper.find('.n-badge-sup').attributes('style')).toContain('transform')
+    expect(wrapper.find('.n-badge-sup').attributes('style')).toContain(
+      'transform'
+    )
     wrapper.unmount()
   })
 

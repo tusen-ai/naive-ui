@@ -11,6 +11,22 @@ describe('n-data-table', () => {
   it('should work with import on demand', () => {
     mount(NDataTable)
   })
+  it('should not warn missing n-config-provider injection', () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    const wrapper = mount(NDataTable, {
+      props: {
+        columns: [{ title: 'Name', key: 'name' }],
+        data: [{ name: 'foo' }]
+      }
+    })
+    expect(
+      warnSpy.mock.calls.some(args =>
+        String(args[0]).includes('injection "n-config-provider" not found')
+      )
+    ).toBe(false)
+    wrapper.unmount()
+    warnSpy.mockRestore()
+  })
   it('show custom empty', () => {
     const columns = [
       {
@@ -1165,6 +1181,178 @@ describe('props.columns', () => {
     wrapper.unmount()
   })
 
+  describe('empty state', () => {
+    const columns: DataTableColumns = [
+      {
+        title: 'Name',
+        key: 'name',
+        width: 100
+      }
+    ]
+    const ellipsisColumns: DataTableColumns = [
+      {
+        title: 'Name',
+        key: 'name',
+        width: 100,
+        ellipsis: {
+          tooltip: true
+        }
+      }
+    ]
+
+    function expectHeaderAndEmpty(
+      wrapper: ReturnType<typeof mount>,
+      options: {
+        discreteHeader?: boolean
+        stickyEmpty?: boolean
+      } = {}
+    ): void {
+      const { discreteHeader = false, stickyEmpty = false } = options
+      expect(wrapper.find('thead').exists()).toBe(true)
+      expect(wrapper.find('thead [data-col-key="name"]').exists()).toBe(true)
+      expect(wrapper.find('.n-data-table-empty').exists()).toBe(true)
+      expect(wrapper.find('.n-data-table-base-table-header').exists()).toBe(
+        discreteHeader
+      )
+      const emptyStyle
+        = wrapper.find('.n-data-table-empty').attributes('style') || ''
+      if (stickyEmpty) {
+        expect(emptyStyle).toContain('position: sticky')
+      }
+      else {
+        expect(emptyStyle).not.toContain('position: sticky')
+      }
+    }
+
+    it('should show header and empty with default props', () => {
+      const wrapper = mount(() => <NDataTable columns={columns} data={[]} />)
+      // auto layout empty tables are treated as x-scrollable
+      expectHeaderAndEmpty(wrapper, { stickyEmpty: true })
+      wrapper.unmount()
+    })
+
+    it('should show header with empty data when `ellipsis` is set', () => {
+      const wrapper = mount(() => (
+        <NDataTable columns={ellipsisColumns} data={[]} />
+      ))
+      expectHeaderAndEmpty(wrapper)
+      wrapper.unmount()
+    })
+
+    it('should show header with empty data when `table-layout` is `fixed`', () => {
+      const wrapper = mount(() => (
+        <NDataTable columns={columns} data={[]} table-layout="fixed" />
+      ))
+      expectHeaderAndEmpty(wrapper)
+      wrapper.unmount()
+    })
+
+    it('should show header with empty data when `scroll-x` is set', () => {
+      const wrapper = mount(() => (
+        <NDataTable columns={columns} data={[]} scroll-x={1800} />
+      ))
+      expectHeaderAndEmpty(wrapper, { stickyEmpty: true })
+      wrapper.unmount()
+    })
+
+    it('should show discrete header with empty data when `max-height` is set', () => {
+      const wrapper = mount(() => (
+        <NDataTable columns={columns} data={[]} max-height={300} />
+      ))
+      expectHeaderAndEmpty(wrapper, { discreteHeader: true })
+      wrapper.unmount()
+    })
+
+    it('should show discrete header with empty data when `flex-height` is set', () => {
+      const wrapper = mount(() => (
+        <div style="height: 300px">
+          <NDataTable columns={columns} data={[]} flex-height />
+        </div>
+      ))
+      expectHeaderAndEmpty(wrapper, { discreteHeader: true })
+      wrapper.unmount()
+    })
+
+    it('should show header with empty data when `min-height` is set', () => {
+      const wrapper = mount(() => (
+        <NDataTable columns={columns} data={[]} min-height={300} />
+      ))
+      expectHeaderAndEmpty(wrapper, { stickyEmpty: true })
+      expect(wrapper.find('.n-data-table-empty').attributes('style')).toContain(
+        'min-height'
+      )
+      wrapper.unmount()
+    })
+
+    it('should show discrete header with empty data when `ellipsis` and `max-height` are set', () => {
+      const wrapper = mount(() => (
+        <NDataTable columns={ellipsisColumns} data={[]} max-height={300} />
+      ))
+      expectHeaderAndEmpty(wrapper, { discreteHeader: true })
+      wrapper.unmount()
+    })
+
+    it('should show header with empty data when `ellipsis` and `scroll-x` are set', () => {
+      const wrapper = mount(() => (
+        <NDataTable columns={ellipsisColumns} data={[]} scroll-x={1800} />
+      ))
+      expectHeaderAndEmpty(wrapper, { stickyEmpty: true })
+      wrapper.unmount()
+    })
+
+    it('should show discrete header with empty data when `scroll-x` and `max-height` are set', () => {
+      const wrapper = mount(() => (
+        <NDataTable
+          columns={columns}
+          data={[]}
+          scroll-x={1800}
+          max-height={300}
+        />
+      ))
+      expectHeaderAndEmpty(wrapper, {
+        discreteHeader: true,
+        stickyEmpty: true
+      })
+      wrapper.unmount()
+    })
+
+    it('should show discrete header with empty data when `ellipsis`, `scroll-x` and `max-height` are set', () => {
+      const wrapper = mount(() => (
+        <NDataTable
+          columns={ellipsisColumns}
+          data={[]}
+          scroll-x={1800}
+          max-height={300}
+        />
+      ))
+      expectHeaderAndEmpty(wrapper, {
+        discreteHeader: true,
+        stickyEmpty: true
+      })
+      wrapper.unmount()
+    })
+
+    it('should show header with empty data when `virtual-scroll` is set', () => {
+      const wrapper = mount(() => (
+        <NDataTable columns={columns} data={[]} virtual-scroll />
+      ))
+      // virtual list is disabled while empty, header stays in body
+      expectHeaderAndEmpty(wrapper)
+      wrapper.unmount()
+    })
+
+    it('should hide empty content when `loading` is set', () => {
+      const wrapper = mount(() => (
+        <NDataTable columns={columns} data={[]} loading />
+      ))
+      expectHeaderAndEmpty(wrapper, { stickyEmpty: true })
+      expect(wrapper.find('.n-data-table-empty').classes()).toContain(
+        'n-data-table-empty--hide'
+      )
+      wrapper.unmount()
+    })
+  })
+
   it('should work with `children` prop', async () => {
     const columns: DataTableColumns = [
       {
@@ -1453,6 +1641,44 @@ describe('props.columns', () => {
 
     expect(radios[1].classes()).toContain('n-radio--checked')
     expect(radios[4].classes()).not.toContain('n-radio--checked')
+
+    wrapper.unmount()
+  })
+
+  it('should not throw when selecting from selection extra menu', async () => {
+    const errors: unknown[] = []
+    const wrapper = mount(NDataTable, {
+      attachTo: document.body,
+      global: {
+        config: {
+          errorHandler: (err) => {
+            errors.push(err)
+          }
+        }
+      },
+      props: {
+        columns: [
+          {
+            type: 'selection',
+            options: ['all', 'none']
+          },
+          {
+            title: 'Name',
+            key: 'name'
+          }
+        ],
+        data: [
+          { name: 'a', key: 1 },
+          { name: 'b', key: 2 }
+        ],
+        rowKey: (row: { key: number }) => row.key
+      }
+    })
+
+    expect(wrapper.find('.n-data-table-check-extra').exists()).toBe(true)
+    wrapper.findComponent({ name: 'Dropdown' }).vm.$emit('select', 'all')
+    await nextTick()
+    expect(errors).toEqual([])
 
     wrapper.unmount()
   })

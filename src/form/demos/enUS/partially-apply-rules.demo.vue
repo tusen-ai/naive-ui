@@ -1,7 +1,7 @@
 <markdown>
-# Apply partial rules
+# Apply partial validation
 
-During the validation, you may not want to validate all items. You can use the second parameter of `form.validate` to control which rules to be applied.
+During validation, use the second parameter of `form.validate` to select rules, field paths, or both. A path is matched exactly against the `path` of a form item.
 </markdown>
 
 <script lang="ts" setup>
@@ -40,7 +40,7 @@ function validateAll() {
   })
 }
 
-function validatePartial() {
+function validatePartialRules() {
   formInstRef.value?.validate(
     (errors) => {
       if (errors) {
@@ -52,13 +52,27 @@ function validatePartial() {
     }
   )
 }
+
+function validatePartialFields() {
+  formInstRef.value?.validate(
+    (errors) => {
+      if (errors) {
+        console.error(errors)
+      }
+    },
+    ['fieldB']
+  )
+}
 </script>
 
 <template>
   <n-space vertical>
     <n-space>
-      <n-button @click="validatePartial">
-        Check first field
+      <n-button @click="validatePartialRules">
+        Check first field by rule key
+      </n-button>
+      <n-button @click="validatePartialFields">
+        Check second field by path
       </n-button>
       <n-button @click="validateAll">
         Check all fields

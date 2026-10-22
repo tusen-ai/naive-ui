@@ -1,11 +1,4 @@
-import type {
-  ComputedRef,
-  CSSProperties,
-  PropType,
-  Ref,
-  VNode,
-  VNodeChild
-} from 'vue'
+import type { CSSProperties, PropType, VNode, VNodeChild } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
 import type { CheckboxTheme } from '../styles'
@@ -23,18 +16,9 @@ import {
 import { useConfig, useFormItem, useTheme, useThemeClass } from '../../_mixins'
 import { call, createKey, flatten, warn, warnOnce } from '../../_utils'
 import { checkboxLight } from '../styles'
+import NCheckbox from './Checkbox'
 import groupStyle from './styles/checkbox-group.cssr'
 import { checkboxGroupInjectionKey } from './use-checkbox'
-
-export interface CheckboxGroupInjection {
-  checkedCountRef: ComputedRef<number>
-  maxRef: Ref<number | undefined>
-  minRef: Ref<number | undefined>
-  disabledRef: Ref<boolean>
-  valueSetRef: Ref<Set<string | number>>
-  mergedSizeRef: Ref<'small' | 'medium' | 'large'>
-  toggleCheckbox: (checked: boolean, checkboxValue: string | number) => void
-}
 
 function mapSlot(
   defaultSlot: VNode[],
@@ -111,11 +95,27 @@ function mapSlot(
   }
 }
 
+export interface CheckboxGroupOption {
+  label?: string
+  value?: string | number
+  disabled?: boolean
+  [key: string]: unknown
+}
+
 export const checkboxGroupProps = {
   ...(useTheme.props as ThemeProps<CheckboxTheme>),
   min: Number,
   max: Number,
   size: String as PropType<'small' | 'medium' | 'large'>,
+  options: Array as PropType<CheckboxGroupOption[]>,
+  labelField: {
+    type: String,
+    default: 'label'
+  },
+  valueField: {
+    type: String,
+    default: 'value'
+  },
   value: Array as PropType<Array<string | number> | null>,
   defaultValue: {
     type: Array as PropType<Array<string | number> | null>,
@@ -364,8 +364,9 @@ export default defineComponent({
     }
   },
   render() {
+    const { options, labelField, valueField } = this.$props
     const { mergedClsPrefix, valueSet, cssVars, themeClass } = this
-    const defaultSlot = flatten(this.$slots.default?.() ?? [])
+    const defaultSlot = options ? [] : flatten(this.$slots.default?.() ?? [])
     const { children, isButtonGroup } = mapSlot(
       defaultSlot,
       valueSet,
@@ -382,7 +383,19 @@ export default defineComponent({
         style={cssVars as CSSProperties}
         role="group"
       >
-        {children}
+        {options
+          ? options.map((option) => {
+              const value = option[valueField] as string | number
+              return (
+                <NCheckbox
+                  key={value}
+                  value={value}
+                  disabled={option.disabled}
+                  label={option[labelField] as string | undefined}
+                />
+              )
+            })
+          : children}
       </div>
     )
   }

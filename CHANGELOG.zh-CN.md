@@ -1,6 +1,50 @@
 # CHANGELOG
 
-## NEXT_VERSION
+## 2.45.3
+
+`2026-08-28`
+
+### Fixes
+
+- 修复 `n-pagination` 页数较多时从末页跳回首页报错的问题
+- 修复 `n-select`、`n-cascader`、`n-tree-select`、`n-date-picker`、`n-time-picker` 在焦点离开菜单时报错的问题
+- 修复 `n-modal` 在 `dialog`、`confirm` 预设下 `positive-click`、`negative-click`、`close` 事件不生效，以及 `card` 预设下 `close` 事件被触发两次的问题，关闭 [#8188](https://github.com/tusen-ai/naive-ui/issues/8188)
+
+## 2.45.2
+
+`2026-08-21`
+
+### Fixes
+
+- 修复 `n-ellipsis` 未设置 `expand-trigger` 时点击报错的问题
+- 修复 `n-modal` 点击遮罩无法关闭的问题
+- 修复 `n-data-table` 数据变为空时表头横向滚动位置被重置的问题
+
+## 2.45.1
+
+`2026-08-20`
+
+### i18n
+
+- 新增 afZA、amET、beBY、bgBG、bnBD、caES、elGR、esES、euES、fiFI、filPH、glES、guIN、heIL、hiIN、hrHR、huHU、hyAM、isIS、kaGE、kkKZ、knIN、kyKG、loLA、ltLT、lvLV、mkMK、mlIN、mnMN、mrIN、msMY、myMM、neNP、paIN、ptPT、rmCH、roRO、siLK、slSI、sqAL、srRS、swKE、taIN、teIN、urPK、zuZA locale
+
+### Fixes
+
+- 修复 `ugCN` locale 未导出的问题
+- 修复 `n-data-table`、`n-equation` 在未包裹 `n-config-provider` 时出现 `injection "n-config-provider" not found` 警告
+- 修复 `useDialog` 的 `onPositiveClick`、`onNegativeClick`、`onClose` 被识别为数组的问题，关闭 [#8186](https://github.com/tusen-ai/naive-ui/issues/8186)
+- 修复 `useNotification` 的 `onClose` 被识别为数组的问题
+- 修复 `n-modal` / `useModal` 对话框操作回调被识别为数组的问题
+- 修复 `n-dropdown` 的 `on-update:show` 被触发两次的问题
+- 修复 `n-data-table` 在 `keep-alive` 内恢复显示时可能报错
+
+## 2.45.0
+
+`2026-08-16`
+
+### Breaking Changes
+
+- 自此版本起，包产物改为使用 vue-jsx-vapor 构建。从底层来看，这是个较大的变更，但是此变更预期不会造成破坏性影响，即用户使用 naive-ui 的方式不会有变化，naive-ui 的表现也不会有变化。使用 vue-jsx-vapor 构建不代表 naive-ui 是原生 vapor 构建产物，它依然是 vdom 结构，如果你需要在纯 vapor app 中使用 naive-ui，仍然需要将 interop 设为 true。此版本在发布前进行过测试，但是无法保证不会出任何问题，如果您遇到任何相关问题，可以在 GitHub 中进行反馈，我们会尽快进行处理。
 
 ### i18n
 
@@ -8,14 +52,24 @@
 - 更新 nbNO locale
 - 翻译日文 locale 中的 `DatePicker.weekPlaceholder`
 
+### Perf
+
+- 大幅减小构建产物中 `.d.ts` 的体积
+
 ### Feats
 
+- `n-form` 的 `validate` 方法支持按 path 过滤表项，关闭 [#7475](https://github.com/tusen-ai/naive-ui/issues/7475)
+- `n-input` 新增 `colorHover` 主题变量
+- `n-checkbox-group`、`n-radio-group` 新增 `options`、`label-field`、`value-field` 属性，关闭 [#7505](https://github.com/tusen-ai/naive-ui/issues/7505)
 - `n-upload` 新增 `always-show-actions` 属性，关闭 [#8073](https://github.com/tusen-ai/naive-ui/issues/8073)
 - `n-image` 新增 `keep-drag-offset` 属性，关闭 [#7544](https://github.com/tusen-ai/naive-ui/issues/7544)
 - `n-checkbox` 新增按钮组模式（`n-checkbox-button`），关闭 [#7326](https://github.com/tusen-ai/naive-ui/issues/7326)
 - `n-data-table` 新增 `getFilteredAndSortedData` 和 `getCurrentPageData` 方法，关闭 [#8088](https://github.com/tusen-ai/naive-ui/issues/8088)
-- `n-tabs` 新增 `show-scroll-button`，`center-active-tab` 属性，关闭 [#5846](https://github.com/tusen-ai/naive-ui/issues/5846)、[#2128](https://github.com/tusen-ai/naive-ui/issues/2128)
-- `n-tabs` 新增 `scrollToCurrentTab` 方法，用于滚动到当前激活的标签页, 关闭 [#7548](https://github.com/tusen-ai/naive-ui/issues/7548)
+- `n-tabs` 新增 `show-scroll-button` 和 `center-active-tab` 属性，关闭 [#5846](https://github.com/tusen-ai/naive-ui/issues/5846)、[#2128](https://github.com/tusen-ai/naive-ui/issues/2128)
+- `n-tabs` 新增 `scrollToCurrentTab` 方法，关闭 [#7548](https://github.com/tusen-ai/naive-ui/issues/7548)
+- `n-tabs` 支持 RTL，`placement` 新增 `'start'`、`'end'`
+- `n-rate` 新增 `on-update:hover-value` 属性，关闭 [#8131](https://github.com/tusen-ai/naive-ui/issues/8131)
+- `n-collapse-transition` 新增 `display-directive` 属性，关闭 [#6453](https://github.com/tusen-ai/naive-ui/issues/6453)
 
 ### Fixes
 
@@ -34,6 +88,8 @@
 - 修复 `n-space` `size` 属性设置为 `0` 时不生效的问题，关闭 [#7530](https://github.com/tusen-ai/naive-ui/issues/7530)
 - 修复 `n-date-picker` 在 `type="datetime"` 时点击面板清空按钮会连续触发两次 `update:value` 的问题，关闭 [#8070](https://github.com/tusen-ai/naive-ui/issues/8070)
 - 修复 `n-input-otp` 在浏览器扩展自动填充时将完整 OTP 写入单个输入框时只保留最后一个字符的问题，关闭 [#7540](https://github.com/tusen-ai/naive-ui/pull/7540)
+- 修复 `n-menu` 在缩起（collapsed）状态下选项包含 `type="group"` 分组时菜单项图标未居中的问题，关闭 [#8105](https://github.com/tusen-ai/naive-ui/issues/8105)
+- 修复 `n-data-table` 在数据为空且列设置了 `ellipsis` 时不渲染表头的问题，关闭 [#8118](https://github.com/tusen-ai/naive-ui/issues/8118)
 
 ## 2.44.1
 

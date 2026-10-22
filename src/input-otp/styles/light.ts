@@ -1,3 +1,5 @@
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
+import type { InputTheme } from '../../input/styles'
 import { createTheme } from '../../_mixins'
 import { commonLight } from '../../_styles/common'
 import { inputLight } from '../../input/styles'
@@ -13,7 +15,9 @@ export function self() {
   }
 }
 
-const inputOtpLight = createTheme({
+export interface InputOtpThemeVars extends ReturnType<typeof self> {}
+
+const inputOtpLight: InputOtpTheme = createTheme({
   name: 'InputOtp',
   common: commonLight,
   peers: {
@@ -22,5 +26,14 @@ const inputOtpLight = createTheme({
   self
 })
 
+export interface InputOtpTheme extends Theme<
+  'InputOtp',
+  InputOtpThemeVars,
+  {
+    Input: InputTheme
+  }
+> {}
+
+export interface InputOtpThemeOverrides extends ExtractThemeOverrides<InputOtpTheme> {}
+
 export default inputOtpLight
-export type InputOtpTheme = typeof inputOtpLight

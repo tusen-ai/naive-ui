@@ -3,7 +3,11 @@ import type { SelectGroupOption, SelectOption, SelectProps } from '../index'
 import type { SelectBaseOption } from '../src/interface'
 import { mount } from '@vue/test-utils'
 import { h, nextTick } from 'vue'
-import { NInternalSelection, NInternalSelectMenu } from '../../_internal'
+import {
+  NBaseFocusDetector,
+  NInternalSelection,
+  NInternalSelectMenu
+} from '../../_internal'
 import { NTag } from '../../tag'
 import { NSelect } from '../index'
 
@@ -405,6 +409,26 @@ describe('n-select', () => {
     expect(menuWrapper.find('.n-base-select-menu__empty').text()).toContain(
       'test-empty-slot'
     )
+    wrapper.unmount()
+  })
+
+  it('should not throw when focus leaves the menu', async () => {
+    const errorHandler = vi.fn()
+    const wrapper = mount(NSelect, {
+      props: {
+        show: true,
+        virtualScroll: false,
+        options: [{ label: 'cool', value: 'cool' }]
+      },
+      slots: {
+        action: () => 'action'
+      },
+      global: { config: { errorHandler } }
+    })
+    const detector = wrapper.findComponent(NBaseFocusDetector)
+    expect(detector.exists()).toBe(true)
+    await detector.trigger('blur')
+    expect(errorHandler).not.toHaveBeenCalled()
     wrapper.unmount()
   })
 })

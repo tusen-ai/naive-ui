@@ -1,7 +1,7 @@
-import type { CSSProperties } from 'vue'
+import type { CSSProperties, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { CheckboxTheme } from '../styles'
+import type { CheckboxTheme, CheckboxThemeOverrides } from '../styles'
 import { on } from 'evtd'
 import { computed, defineComponent, h } from 'vue'
 import { NIconSwitchTransition } from '../../_internal'
@@ -16,7 +16,7 @@ import { checkboxBaseProps, setup } from './use-checkbox'
 
 export const checkboxProps = {
   ...checkboxBaseProps,
-  ...(useTheme.props as ThemeProps<CheckboxTheme>),
+  ...(useTheme.props as ThemeProps<CheckboxTheme, CheckboxThemeOverrides>),
   // private
   privateInsideTable: Boolean
 }
@@ -109,7 +109,10 @@ export default defineComponent({
     return {
       ...checkbox,
       rtlEnabled: rtlEnabledRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      mergedTheme: themeRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

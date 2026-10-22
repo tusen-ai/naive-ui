@@ -1,4 +1,8 @@
+import type { ScrollbarTheme } from '../../_internal/scrollbar/styles'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins/use-theme'
 import type { ThemeCommonVars } from '../../_styles/common'
+import type { CheckboxTheme } from '../../checkbox/styles'
+import type { EmptyTheme } from '../../empty/styles'
 import { changeColor } from 'seemly'
 import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import { createTheme } from '../../_mixins/use-theme'
@@ -36,9 +40,9 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type TreeThemeVars = ReturnType<typeof self>
+export interface TreeThemeVars extends ReturnType<typeof self> {}
 
-const treeLight = createTheme({
+const treeLight: TreeTheme = createTheme({
   name: 'Tree',
   common: commonLight,
   peers: {
@@ -49,5 +53,16 @@ const treeLight = createTheme({
   self
 })
 
+export interface TreeTheme extends Theme<
+  'Tree',
+  TreeThemeVars,
+  {
+    Checkbox: CheckboxTheme
+    Scrollbar: ScrollbarTheme
+    Empty: EmptyTheme
+  }
+> {}
+
+export interface TreeThemeOverrides extends ExtractThemeOverrides<TreeTheme> {}
+
 export default treeLight
-export type TreeTheme = typeof treeLight

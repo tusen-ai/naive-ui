@@ -3,6 +3,7 @@ import type {
   CSSProperties,
   HTMLAttributes,
   PropType,
+  Ref,
   SlotsType,
   VNode,
   VNodeChild
@@ -22,7 +23,7 @@ import type {
   TreeOverrideNodeClickBehaviorReturn
 } from '../../tree/src/interface'
 import type { OnUpdateExpandedKeysImpl } from '../../tree/src/Tree'
-import type { TreeSelectTheme } from '../styles'
+import type { TreeSelectTheme, TreeSelectThemeOverrides } from '../styles'
 import type {
   OnUpdateIndeterminateKeysImpl,
   OnUpdateValue,
@@ -85,7 +86,7 @@ import {
 type OnLoad = (node: TreeSelectOption) => Promise<void>
 
 export const treeSelectProps = {
-  ...(useTheme.props as ThemeProps<TreeSelectTheme>),
+  ...(useTheme.props as ThemeProps<TreeSelectTheme, TreeSelectThemeOverrides>),
   bordered: {
     type: Boolean,
     default: true
@@ -856,9 +857,10 @@ export default defineComponent({
       ...exposedMethods,
       menuElRef,
       mergedStatus: mergedStatusRef,
-      triggerInstRef,
-      followerInstRef,
-      treeInstRef,
+      // reduce dts: string ref only, type unused in render
+      triggerInstRef: triggerInstRef as unknown,
+      followerInstRef: followerInstRef as unknown,
+      treeInstRef: treeInstRef as unknown,
       mergedClsPrefix: mergedClsPrefixRef,
       mergedValue: mergedValueRef,
       mergedShow: mergedShowRef,
@@ -899,7 +901,9 @@ export default defineComponent({
       handleMenuMousedown,
       mergedTheme: themeRef,
       mergedRenderEmpty: mergedRenderEmptyRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }

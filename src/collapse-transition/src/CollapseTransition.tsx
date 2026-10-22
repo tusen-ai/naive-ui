@@ -1,8 +1,20 @@
-import type { PropType } from 'vue'
+import type { CSSProperties, PropType, Ref } from 'vue'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
-import type { CollapseTransitionTheme } from '../styles'
-import { computed, defineComponent, h, mergeProps, watchEffect } from 'vue'
+import type {
+  CollapseTransitionTheme,
+  CollapseTransitionThemeOverrides
+} from '../styles'
+import { useFalseUntilTruthy } from 'vooks'
+import {
+  computed,
+  defineComponent,
+  h,
+  mergeProps,
+  vShow,
+  watchEffect,
+  withDirectives
+} from 'vue'
 import { NFadeInExpandTransition } from '../../_internal'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
 import { useRtl } from '../../_mixins/use-rtl'
@@ -11,12 +23,19 @@ import { collapseTransitionLight } from '../styles'
 import style from './styles/index.cssr'
 
 export const collapseTransitionProps = {
-  ...(useTheme.props as ThemeProps<CollapseTransitionTheme>),
+  ...(useTheme.props as ThemeProps<
+    CollapseTransitionTheme,
+    CollapseTransitionThemeOverrides
+  >),
   show: {
     type: Boolean,
     default: true
   },
   appear: Boolean,
+  displayDirective: {
+    type: String as PropType<'if' | 'show'>,
+    default: 'if'
+  },
   // The collapsed is implemented with mistake, collapsed=true would make it show
   // However there's no possibility to change so I just let it deprecated and use
   // `show` prop instead.
@@ -68,6 +87,7 @@ export default defineComponent({
       }
       return props.show
     })
+    const onceTrueRef = useFalseUntilTruthy(mergedShowRef)
 
     const cssVarsRef = computed(() => {
       const {
@@ -84,8 +104,11 @@ export default defineComponent({
     return {
       rtlEnabled: rtlEnabledRef,
       mergedShow: mergedShowRef,
+      onceTrue: onceTrueRef,
       mergedClsPrefix: mergedClsPrefixRef,
-      cssVars: inlineThemeDisabled ? undefined : cssVarsRef,
+      cssVars: inlineThemeDisabled
+        ? undefined
+        : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
       onRender: themeClassHandle?.onRender
     }
@@ -95,10 +118,12 @@ export default defineComponent({
       <NFadeInExpandTransition appear={this.appear}>
         {{
           default: () => {
-            if (!this.mergedShow)
+            const { mergedShow, displayDirective, onceTrue } = this
+            const useVShow = displayDirective === 'show' && onceTrue
+            if (!useVShow && !mergedShow)
               return
             this.onRender?.()
-            return h(
+            const contentNode = h(
               'div', // Don't use jsx since it would cause useless spread in each rendering
               mergeProps(
                 {
@@ -114,6 +139,9 @@ export default defineComponent({
               ),
               this.$slots
             )
+            return useVShow
+              ? withDirectives(contentNode, [[vShow, mergedShow]])
+              : contentNode
           }
         }}
       </NFadeInExpandTransition>

@@ -1,4 +1,8 @@
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
+import type { InputTheme } from '../../input/styles'
+import type { PopselectTheme } from '../../popselect/styles'
+import type { SelectTheme } from '../../select/styles'
 import { createTheme } from '../../_mixins'
 import { commonLight } from '../../_styles/common'
 import { inputLight } from '../../input/styles'
@@ -68,9 +72,9 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type PaginationThemeVars = ReturnType<typeof self>
+export interface PaginationThemeVars extends ReturnType<typeof self> {}
 
-const paginationLight = createTheme({
+const paginationLight: PaginationTheme = createTheme({
   name: 'Pagination',
   common: commonLight,
   peers: {
@@ -81,5 +85,16 @@ const paginationLight = createTheme({
   self
 })
 
+export interface PaginationTheme extends Theme<
+  'Pagination',
+  PaginationThemeVars,
+  {
+    Select: SelectTheme
+    Input: InputTheme
+    Popselect: PopselectTheme
+  }
+> {}
+
+export interface PaginationThemeOverrides extends ExtractThemeOverrides<PaginationTheme> {}
+
 export default paginationLight
-export type PaginationTheme = typeof paginationLight

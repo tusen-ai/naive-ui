@@ -99,9 +99,13 @@ describe('n-list', () => {
       props: { clickable: true },
       slots: {
         default: () =>
-          h(NListItem, { onClick }, {
-            default: () => 'test'
-          })
+          h(
+            NListItem,
+            { onClick },
+            {
+              default: () => 'test'
+            }
+          )
       }
     })
     expect(wrapper.find('.n-list').classes()).toContain('n-list--clickable')
@@ -122,7 +126,9 @@ describe('n-list', () => {
 
     await wrapper.setProps({ showDivider: false })
     // When showDivider is false, the class should not exist
-    expect(wrapper.find('.n-list').classes()).not.toContain('n-list--show-divider')
+    expect(wrapper.find('.n-list').classes()).not.toContain(
+      'n-list--show-divider'
+    )
     wrapper.unmount()
   })
 

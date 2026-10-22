@@ -1,7 +1,39 @@
+import type { VueWrapper } from '@vue/test-utils'
 import type { PaginationInfo, PaginationRenderLabel } from '../index'
 import { mount } from '@vue/test-utils'
-import { h } from 'vue'
+import { h, nextTick } from 'vue'
 import { NPagination } from '../index'
+
+function findPageItem(
+  wrapper: VueWrapper,
+  label: string
+): ReturnType<VueWrapper['findAll']>[number] | undefined {
+  return wrapper
+    .findAll('.n-pagination-item')
+    .find(item => item.text() === label)
+}
+
+async function collectRuntimeErrors(
+  run: (pushError: (error: unknown) => void) => Promise<void>
+): Promise<unknown[]> {
+  const errors: unknown[] = []
+  const pushError = (error: unknown): void => {
+    errors.push(error)
+  }
+  const handleRejection = (event: PromiseRejectionEvent): void => {
+    pushError(event.reason)
+  }
+  window.addEventListener('unhandledrejection', handleRejection)
+  try {
+    await run(pushError)
+    await nextTick()
+    await nextTick()
+  }
+  finally {
+    window.removeEventListener('unhandledrejection', handleRejection)
+  }
+  return errors
+}
 
 describe('n-pagination', () => {
   it('should work with import on demand', () => {
@@ -97,6 +129,37 @@ describe('n-pagination', () => {
       '23'
     )
     wrapper.unmount()
+  })
+  it('should not throw when jumping from last page to first page', async () => {
+    const errors = await collectRuntimeErrors(async (pushError) => {
+      const wrapper = mount(NPagination, {
+        attachTo: document.body,
+        props: {
+          page: 1,
+          pageCount: 200,
+          'onUpdate:page': (page: number) => {
+            void wrapper.setProps({ page })
+          }
+        },
+        global: {
+          config: {
+            errorHandler: (error) => {
+              pushError(error)
+            }
+          }
+        }
+      })
+      const lastPage = findPageItem(wrapper, '200')
+      expect(lastPage).toBeTruthy()
+      await lastPage!.trigger('click')
+      expect(wrapper.props('page')).toBe(200)
+      const firstPage = findPageItem(wrapper, '1')
+      expect(firstPage).toBeTruthy()
+      await firstPage!.trigger('click')
+      expect(wrapper.props('page')).toBe(1)
+      wrapper.unmount()
+    })
+    expect(errors).toEqual([])
   })
 })
 it('should work with label slot', async () => {

@@ -110,7 +110,9 @@ describe('n-empty', () => {
       }
     })
 
-    expect(wrapper.find('.n-empty__description').text()).toContain('Custom Description')
+    expect(wrapper.find('.n-empty__description').text()).toContain(
+      'Custom Description'
+    )
     wrapper.unmount()
   })
 

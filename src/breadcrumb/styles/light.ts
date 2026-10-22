@@ -1,4 +1,4 @@
-import type { Theme } from '../../_mixins'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { commonLight } from '../../_styles/common'
 import commonVariables from './_common'
@@ -27,13 +27,19 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type BreadcrumbThemeVars = ReturnType<typeof self>
+export interface BreadcrumbThemeVars extends ReturnType<typeof self> {}
 
-const breadcrumbLight: Theme<'Breadcrumb', BreadcrumbThemeVars> = {
+const breadcrumbLight: BreadcrumbTheme = {
   name: 'Breadcrumb',
   common: commonLight,
   self
 }
 
+export interface BreadcrumbTheme extends Theme<
+  'Breadcrumb',
+  BreadcrumbThemeVars
+> {}
+
+export interface BreadcrumbThemeOverrides extends ExtractThemeOverrides<BreadcrumbTheme> {}
+
 export default breadcrumbLight
-export type BreadcrumbTheme = typeof breadcrumbLight

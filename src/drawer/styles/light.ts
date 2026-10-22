@@ -1,3 +1,5 @@
+import type { ScrollbarTheme } from '../../_internal/scrollbar/styles'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
 import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import { createTheme } from '../../_mixins'
@@ -46,9 +48,9 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type DrawerThemeVars = ReturnType<typeof self>
+export interface DrawerThemeVars extends ReturnType<typeof self> {}
 
-const drawerLight = createTheme({
+const drawerLight: DrawerTheme = createTheme({
   name: 'Drawer',
   common: commonLight,
   peers: {
@@ -57,5 +59,14 @@ const drawerLight = createTheme({
   self
 })
 
+export interface DrawerTheme extends Theme<
+  'Drawer',
+  DrawerThemeVars,
+  {
+    Scrollbar: ScrollbarTheme
+  }
+> {}
+
+export interface DrawerThemeOverrides extends ExtractThemeOverrides<DrawerTheme> {}
+
 export default drawerLight
-export type DrawerTheme = typeof drawerLight

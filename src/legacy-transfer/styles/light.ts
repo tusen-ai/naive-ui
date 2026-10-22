@@ -1,4 +1,10 @@
+import type { ScrollbarTheme } from '../../_internal/scrollbar/styles'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
+import type { ButtonTheme } from '../../button/styles'
+import type { CheckboxTheme } from '../../checkbox/styles'
+import type { EmptyTheme } from '../../empty/styles'
+import type { InputTheme } from '../../input/styles'
 import { composite } from 'seemly'
 import { scrollbarLight } from '../../_internal/scrollbar/styles'
 import { createTheme } from '../../_mixins'
@@ -54,9 +60,9 @@ function self(vars: ThemeCommonVars) {
   }
 }
 
-export type TransferThemeVars = ReturnType<typeof self>
+export interface TransferThemeVars extends ReturnType<typeof self> {}
 
-const transferLight = createTheme({
+const transferLight: TransferTheme = createTheme({
   name: 'Transfer',
   common: commonLight,
   peers: {
@@ -69,5 +75,18 @@ const transferLight = createTheme({
   self
 })
 
+export interface TransferTheme extends Theme<
+  'Transfer',
+  TransferThemeVars,
+  {
+    Checkbox: CheckboxTheme
+    Scrollbar: ScrollbarTheme
+    Input: InputTheme
+    Empty: EmptyTheme
+    Button: ButtonTheme
+  }
+> {}
+
+export interface TransferThemeOverrides extends ExtractThemeOverrides<TransferTheme> {}
+
 export default transferLight
-export type TransferTheme = typeof transferLight

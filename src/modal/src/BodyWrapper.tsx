@@ -75,7 +75,10 @@ export default defineComponent({
     maskHidden: Boolean,
     ...presetProps,
     // events
-    onClickoutside: Function as PropType<(e: MouseEvent) => void>,
+    onClickoutside: {
+      type: Function as PropType<(e: MouseEvent) => void>,
+      required: true
+    },
     onBeforeLeave: {
       type: Function,
       required: true
@@ -233,8 +236,10 @@ export default defineComponent({
       appear: NModal.appearRef,
       isMounted: NModal.isMountedRef,
       mergedClsPrefix: NModal.mergedClsPrefixRef,
-      bodyRef,
-      scrollbarRef,
+      // reduce dts: avoid expanding component instance types
+      bodyRef: bodyRef as unknown,
+      // reduce dts: string ref only, type unused in render
+      scrollbarRef: scrollbarRef as unknown,
       draggableClass: draggableClassRef,
       displayed: displayedRef,
       childNodeRef,
@@ -331,15 +336,12 @@ export default defineComponent({
                               const dirs: DirectiveArguments = [
                                 [vShow, this.show]
                               ]
-                              const { onClickoutside } = this
-                              if (onClickoutside) {
-                                dirs.push([
-                                  clickoutside,
-                                  this.onClickoutside,
-                                  undefined,
-                                  { capture: true }
-                                ])
-                              }
+                              dirs.push([
+                                clickoutside,
+                                this.onClickoutside,
+                                undefined,
+                                { capture: true }
+                              ])
                               return withDirectives(
                                 (this.preset === 'confirm'
                                   || this.preset === 'dialog' ? (
@@ -358,7 +360,7 @@ export default defineComponent({
                                         titleClass={this.dialogTitleClass}
                                         aria-modal="true"
                                       >
-                                        {{ ...$slots }}
+                                        {$slots}
                                       </NDialog>
                                     ) : this.preset === 'card' ? (
                                       <NCard
@@ -377,7 +379,7 @@ export default defineComponent({
                                         aria-modal="true"
                                         role="dialog"
                                       >
-                                        {{ ...$slots }}
+                                        {$slots}
                                       </NCard>
                                     ) : (
                                       (this.childNodeRef = childNode)

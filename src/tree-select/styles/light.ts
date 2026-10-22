@@ -1,4 +1,8 @@
+import type { InternalSelectionTheme } from '../../_internal/selection/styles'
+import type { ExtractThemeOverrides, Theme } from '../../_mixins/use-theme'
 import type { ThemeCommonVars } from '../../_styles/common'
+import type { EmptyTheme } from '../../empty/styles'
+import type { TreeTheme } from '../../tree/styles'
 import { internalSelectionLight } from '../../_internal/selection/styles'
 import { createTheme } from '../../_mixins/use-theme'
 import { commonLight } from '../../_styles/common'
@@ -29,9 +33,9 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type TreeSelectThemeVars = ReturnType<typeof self>
+export interface TreeSelectThemeVars extends ReturnType<typeof self> {}
 
-const treeSelectLight = createTheme({
+const treeSelectLight: TreeSelectTheme = createTheme({
   name: 'TreeSelect',
   common: commonLight,
   peers: {
@@ -42,5 +46,16 @@ const treeSelectLight = createTheme({
   self
 })
 
+export interface TreeSelectTheme extends Theme<
+  'TreeSelect',
+  TreeSelectThemeVars,
+  {
+    Tree: TreeTheme
+    Empty: EmptyTheme
+    InternalSelection: InternalSelectionTheme
+  }
+> {}
+
+export interface TreeSelectThemeOverrides extends ExtractThemeOverrides<TreeSelectTheme> {}
+
 export default treeSelectLight
-export type TreeSelectTheme = typeof treeSelectLight

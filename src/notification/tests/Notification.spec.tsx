@@ -7,7 +7,7 @@ import { NNotificationProvider, useNotification } from '../index'
 
 const Provider = defineComponent({
   render() {
-    return <NNotificationProvider>{{ ...this.$slots }}</NNotificationProvider>
+    return <NNotificationProvider>{this.$slots}</NNotificationProvider>
   }
 })
 
@@ -72,6 +72,42 @@ describe('n-notification', () => {
       document.querySelector('.n-notification-main__content')?.textContent
     ).toEqual('change info')
     wrapper.unmount()
+  })
+
+  it('should work with onClose', async () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    const onClose = vi.fn()
+    const Test = defineComponent({
+      setup() {
+        const notification = useNotification()
+        notification.info({
+          title: 'info',
+          content: 'info',
+          onClose
+        })
+      },
+      render() {
+        return null
+      }
+    })
+    const wrapper = mount(() => (
+      <Provider>{{ default: () => <Test /> }}</Provider>
+    ))
+    await nextTick()
+    expect(
+      warnSpy.mock.calls.some(args =>
+        String(args[0]).includes(
+          'Invalid prop: type check failed for prop "onClose". Expected Function, got Array'
+        )
+      )
+    ).toBe(false)
+    document
+      .querySelector<HTMLElement>('.n-notification .n-base-close')
+      ?.click()
+    await nextTick()
+    expect(onClose).toHaveBeenCalledTimes(1)
+    wrapper.unmount()
+    warnSpy.mockRestore()
   })
 
   it('should work with duration', async () => {

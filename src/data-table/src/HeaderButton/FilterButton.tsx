@@ -1,4 +1,4 @@
-import type { PropType } from 'vue'
+import type { CSSProperties, PropType, Ref } from 'vue'
 import type {
   ColumnKey,
   FilterOption,
@@ -105,7 +105,7 @@ export default defineComponent({
       filterIconPopoverProps: filterIconPopoverPropsRef,
       filterMultiple: filterMultipleRef,
       mergedFilterValue: mergedFilterValueRef,
-      filterMenuCssVars: filterMenuCssVarsRef,
+      filterMenuCssVars: filterMenuCssVarsRef as Ref<CSSProperties>,
       handleFilterChange,
       handleFilterMenuConfirm,
       handleFilterMenuCancel

@@ -8,7 +8,7 @@ import type {
 } from 'vue'
 import type { MergedTheme, ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
-import type { StepsTheme } from '../styles'
+import type { StepsTheme, StepsThemeOverrides } from '../styles'
 import { defineComponent, h, provide } from 'vue'
 import { useConfig, useRtl, useTheme } from '../../_mixins'
 import { createInjectionKey, flatten, getSlot } from '../../_utils'
@@ -30,7 +30,7 @@ function stepsWithIndex(steps: VNodeChild[]): Array<VNode | null> {
 }
 
 export const stepsProps = {
-  ...(useTheme.props as ThemeProps<StepsTheme>),
+  ...(useTheme.props as ThemeProps<StepsTheme, StepsThemeOverrides>),
   current: Number,
   status: {
     type: String as PropType<'process' | 'finish' | 'error' | 'wait'>,

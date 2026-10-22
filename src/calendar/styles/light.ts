@@ -1,4 +1,6 @@
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
+import type { ButtonTheme } from '../../button/styles'
 import { composite } from 'seemly'
 import { createTheme } from '../../_mixins'
 import { commonLight } from '../../_styles/common'
@@ -46,9 +48,9 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type CalendarThemeVars = ReturnType<typeof self>
+export interface CalendarThemeVars extends ReturnType<typeof self> {}
 
-const calendarLight = createTheme({
+const calendarLight: CalendarTheme = createTheme({
   name: 'Calendar',
   common: commonLight,
   peers: {
@@ -57,5 +59,14 @@ const calendarLight = createTheme({
   self
 })
 
+export interface CalendarTheme extends Theme<
+  'Calendar',
+  CalendarThemeVars,
+  {
+    Button: ButtonTheme
+  }
+> {}
+
+export interface CalendarThemeOverrides extends ExtractThemeOverrides<CalendarTheme> {}
+
 export default calendarLight
-export type CalendarTheme = typeof calendarLight

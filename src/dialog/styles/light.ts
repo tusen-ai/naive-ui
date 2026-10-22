@@ -1,4 +1,6 @@
+import type { ExtractThemeOverrides, Theme } from '../../_mixins'
 import type { ThemeCommonVars } from '../../_styles/common'
+import type { ButtonTheme } from '../../button/styles'
 import { createTheme } from '../../_mixins'
 import { commonLight } from '../../_styles/common'
 import { buttonLight } from '../../button/styles'
@@ -49,9 +51,9 @@ export function self(vars: ThemeCommonVars) {
   }
 }
 
-export type DialogThemeVars = ReturnType<typeof self>
+export interface DialogThemeVars extends ReturnType<typeof self> {}
 
-const dialogLight = createTheme({
+const dialogLight: DialogTheme = createTheme({
   name: 'Dialog',
   common: commonLight,
   peers: {
@@ -60,5 +62,14 @@ const dialogLight = createTheme({
   self
 })
 
+export interface DialogTheme extends Theme<
+  'Dialog',
+  DialogThemeVars,
+  {
+    Button: ButtonTheme
+  }
+> {}
+
+export interface DialogThemeOverrides extends ExtractThemeOverrides<DialogTheme> {}
+
 export default dialogLight
-export type DialogTheme = typeof dialogLight
