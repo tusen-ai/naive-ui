@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-checkbox` 新增按钮组模式（`n-checkbox-button`），关闭 [#7326](https://github.com/tusen-ai/naive-ui/issues/7326)
+
 ## 2.45.3
 
 `2026-08-28`

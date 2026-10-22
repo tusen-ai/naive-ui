@@ -220,5 +220,5 @@ export default c([
     cB('checkbox', `
       --n-merged-color-table: var(--n-color-table-popover);
     `)
-  )
+  ),
 ])

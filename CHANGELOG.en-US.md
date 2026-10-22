@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-checkbox` adds button-group variant (`n-checkbox-button`), closes [#7326](https://github.com/tusen-ai/naive-ui/issues/7326).
+
 ## 2.45.3
 
 `2026-08-28`
