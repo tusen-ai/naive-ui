@@ -1,19 +1,15 @@
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
+<script setup lang="ts">
+import { computed } from 'vue'
 import { getCodeSandboxParams } from './codesandbox'
 
-export default defineComponent({
-  name: 'EditInCodeSandboxButton',
-  props: {
-    code: String,
-    size: String
-  },
-  setup(props) {
-    return {
-      parameters: computed(() => getCodeSandboxParams(props.code ?? ''))
-    }
-  }
-})
+defineOptions({ name: 'EditInCodeSandboxButton' })
+
+const props = defineProps<{
+  code?: string
+  size?: string
+}>()
+
+const parameters = computed(() => getCodeSandboxParams(props.code ?? ''))
 </script>
 
 <template>

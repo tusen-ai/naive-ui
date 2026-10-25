@@ -1,33 +1,22 @@
-<script lang="ts">
+<script setup lang="ts">
 import { useMessage } from 'naive-ui'
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  name: 'CopyCodeButton',
-  props: {
-    code: {
-      type: String,
-      required: true
-    },
-    successText: {
-      type: String,
-      required: true
-    },
-    text: Boolean,
-    size: String,
-    depth: String
-  },
-  setup(props) {
-    const message = useMessage()
-    return {
-      handleClick() {
-        navigator.clipboard.writeText(props.code).then(() => {
-          message.success(props.successText)
-        })
-      }
-    }
-  }
-})
+defineOptions({ name: 'CopyCodeButton' })
+
+const props = defineProps<{
+  code: string
+  successText: string
+  text?: boolean
+  size?: string
+  depth?: string
+}>()
+
+const message = useMessage()
+function handleClick() {
+  navigator.clipboard.writeText(props.code).then(() => {
+    message.success(props.successText)
+  })
+}
 </script>
 
 <template>

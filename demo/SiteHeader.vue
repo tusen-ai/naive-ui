@@ -1,10 +1,10 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PopoverInst } from 'naive-ui'
 import type { SiteMenuOption } from './store/menu-options'
 import type { ColorMode } from './utils/color-mode'
 import { MenuOutline } from '@vicons/ionicons5'
 import { useMessage, version } from 'naive-ui'
-import { computed, defineComponent, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import {
   useComponentOptions,
@@ -19,6 +19,8 @@ import { renderMenuLabel } from './store/menu-options'
 import { i18n, useIsMobile, useIsTablet } from './utils/composables'
 import { repoUrl } from './utils/github-url'
 import { findMenuValue } from './utils/route'
+
+defineOptions({ name: 'SiteHeader' })
 
 // match substr
 function match(pattern: string, string: string): boolean {
@@ -64,302 +66,250 @@ const locales = {
   }
 }
 
-export default defineComponent({
-  name: 'SiteHeader',
-  components: {
-    MenuOutline
-  },
-  setup() {
-    const message = useMessage()
-    const route = useRoute()
-    const router = useRouter()
+const message = useMessage()
+const route = useRoute()
+const router = useRouter()
 
-    const mobilePopoverRef = ref<PopoverInst | null>(null)
-    const localeReg = /^\/[^/]+/
-    // The locale part of the path, e.g. `/zh-CN`
-    function getLocalePath(): string {
-      return localeReg.exec(route.path)?.[0] ?? ''
+const mobilePopoverRef = ref<PopoverInst | null>(null)
+const localeReg = /^\/[^/]+/
+// The locale part of the path, e.g. `/zh-CN`
+function getLocalePath(): string {
+  return localeReg.exec(route.path)?.[0] ?? ''
+}
+
+// i18n
+const { t } = i18n(locales)
+
+// theme
+const themePreference = useThemeMode()
+const themeOptions = computed(() => [
+  { label: t('light'), value: 'light' },
+  { label: t('dark'), value: 'dark' },
+  { label: t('osTheme'), value: 'auto' }
+])
+const themePreferenceLabel = computed(
+  () =>
+    themeOptions.value.find(option => option.value === themePreference.value)
+      ?.label
+)
+
+// locale
+const locale = useLocaleName()
+
+// menu
+const menuOptions = computed(() => {
+  return [
+    {
+      key: 'home',
+      label: t('home'),
+      path: getLocalePath()
+    },
+    {
+      key: 'doc',
+      label: t('doc'),
+      path: `${getLocalePath()}/docs/introduction`
+    },
+    {
+      key: 'component',
+      label: t('component'),
+      path: `${getLocalePath()}/components/button`
     }
+  ]
+})
+const menuValue = computed(() => {
+  if (/\/docs\//.test(route.path))
+    return 'doc'
+  if (/\/components\//.test(route.path))
+    return 'component'
+  else if (route.name === 'home')
+    return 'home'
+  return null
+})
 
-    // i18n
-    const { t } = i18n(locales)
-
-    // theme
-    const themePreferenceRef = useThemeMode()
-    const themeOptionsRef = computed(() => [
-      { label: t('light'), value: 'light' },
-      { label: t('dark'), value: 'dark' },
-      { label: t('osTheme'), value: 'auto' }
-    ])
-    const themePreferenceLabelRef = computed(
-      () =>
-        themeOptionsRef.value.find(
-          option => option.value === themePreferenceRef.value
-        )?.label
-    )
-
-    // locale
-    const localeNameRef = useLocaleName()
-
-    // menu
-    const menuOptionsRef = computed(() => {
-      return [
-        {
-          key: 'home',
-          label: t('home'),
-          path: getLocalePath()
-        },
-        {
-          key: 'doc',
-          label: t('doc'),
-          path: `${getLocalePath()}/docs/introduction`
-        },
-        {
-          key: 'component',
-          label: t('component'),
-          path: `${getLocalePath()}/components/button`
-        }
-      ]
-    })
-    const menuValueRef = computed(() => {
-      if (/\/docs\//.test(route.path))
-        return 'doc'
-      if (/\/components\//.test(route.path))
-        return 'component'
-      else if (route.name === 'home')
-        return 'home'
-      return null
-    })
-
-    // mobile options
-    const docOptionsRef = useDocOptions()
-    const componentOptionsRef = useComponentOptions()
-    const mobileMenuOptionsRef = computed(() => {
-      return [
-        {
-          key: 'theme',
-          label: `${t('theme')}: ${themePreferenceLabelRef.value}`,
-          children: themeOptionsRef.value.map(option => ({
-            key: `theme:${option.value}`,
-            label: option.label
-          }))
-        },
-        {
-          key: 'locale',
-          label: localeNameRef.value === 'zh-CN' ? 'English' : '中文'
-        },
-        {
-          key: 'home',
-          label: t('home'),
-          path: getLocalePath()
-        },
-        {
-          key: 'doc',
-          label: t('doc'),
-          children: docOptionsRef.value,
-          path: `${getLocalePath()}/docs/introduction`
-        },
-        {
-          key: 'component',
-          label: t('component'),
-          path: `${getLocalePath()}/components/button`,
-          children: componentOptionsRef.value
-        },
-        {
-          key: 'github',
-          label: 'GitHub'
-        }
-      ]
-    })
-    const mobileMenuValueRef = computed(() => {
-      if (route.name === 'home')
-        return 'home'
-      return findMenuValue(mobileMenuOptionsRef.value, route.path)
-    })
-    function handleUpdateMobileMenu(
-      value: string,
-      { path }: { path?: string }
-    ) {
-      if (value.startsWith('theme:')) {
-        themePreferenceRef.value = value.slice('theme:'.length) as ColorMode
-      }
-      else if (value === 'locale') {
-        if (localeNameRef.value === 'zh-CN') {
-          localeNameRef.value = 'en-US'
-        }
-        else {
-          localeNameRef.value = 'zh-CN'
-        }
-      }
-      else if (path) {
-        router.push(path)
-      }
-      else {
-        window.open(repoUrl, '_blank')
-      }
-      mobilePopoverRef.value?.setShow(false)
+// mobile options
+const docOptionsRef = useDocOptions()
+const componentOptionsRef = useComponentOptions()
+const mobileMenuOptions = computed(() => {
+  return [
+    {
+      key: 'theme',
+      label: `${t('theme')}: ${themePreferenceLabel.value}`,
+      children: themeOptions.value.map(option => ({
+        key: `theme:${option.value}`,
+        label: option.label
+      }))
+    },
+    {
+      key: 'locale',
+      label: locale.value === 'zh-CN' ? 'English' : '中文'
+    },
+    {
+      key: 'home',
+      label: t('home'),
+      path: getLocalePath()
+    },
+    {
+      key: 'doc',
+      label: t('doc'),
+      children: docOptionsRef.value,
+      path: `${getLocalePath()}/docs/introduction`
+    },
+    {
+      key: 'component',
+      label: t('component'),
+      path: `${getLocalePath()}/components/button`,
+      children: componentOptionsRef.value
+    },
+    {
+      key: 'github',
+      label: 'GitHub'
     }
-
-    const localeLabelMap = {
-      'zh-CN': 'English',
-      'en-US': '中文'
+  ]
+})
+const mobileMenuValue = computed(() => {
+  if (route.name === 'home')
+    return 'home'
+  return findMenuValue(mobileMenuOptions.value, route.path)
+})
+function handleUpdateMobileMenu(value: string, { path }: { path?: string }) {
+  if (value.startsWith('theme:')) {
+    themePreference.value = value.slice('theme:'.length) as ColorMode
+  }
+  else if (value === 'locale') {
+    if (locale.value === 'zh-CN') {
+      locale.value = 'en-US'
     }
-    function handleLocaleUpdate() {
-      if (localeNameRef.value === 'zh-CN') {
-        localeNameRef.value = 'en-US'
-      }
-      else {
-        localeNameRef.value = 'zh-CN'
-      }
-    }
-
-    // display mode
-    const displayModeRef = useDisplayMode()
-    const displayModeLabelMap: Record<string, string> = {
-      common: 'Debug',
-      debug: 'Prod'
-    }
-    function handleDisplayModeUpdate() {
-      if (displayModeRef.value === 'common') {
-        displayModeRef.value = 'debug'
-      }
-      else {
-        displayModeRef.value = 'common'
-      }
-    }
-
-    // config provider
-    const configProviderNameRef = useConfigProviderName()
-    const cfgProviderLabelMapRef = computed<Record<string, string>>(() => ({
-      tusimple: t('defaultTheme'),
-      default: t('tusimpleTheme')
-    }))
-    function handleConfigProviderUpdate() {
-      if (configProviderNameRef.value === 'tusimple') {
-        configProviderNameRef.value = 'default'
-      }
-      else {
-        configProviderNameRef.value = 'tusimple'
-      }
-    }
-
-    // search
-    const searchableOptionsRef = useFlattenedDocOptions()
-    const searchPatternRef = ref('')
-    const searchOptionsRef = computed(() => {
-      // function getLabel(item) {
-      //   if (item.label) {
-      //     return typeof item.extra === 'function'
-      //       ? () => [item.label, ' ', item.extra()]
-      //       : item.label + (item.extra ? ' ' + item.extra : '')
-      //   }
-      //   return item.key
-      // }
-      function getSearchableContent(item: SiteMenuOption): string {
-        if (item.label) {
-          return item.label + (item.extraString ? ` ${item.extraString}` : '')
-        }
-        return String(item.key)
-      }
-      if (!searchPatternRef.value)
-        return []
-      const replaceRegex = / |-/g
-      return searchableOptionsRef.value
-        .filter((item) => {
-          const pattern = searchPatternRef.value
-            .toLowerCase()
-            .replace(replaceRegex, '')
-            .slice(0, 20)
-          const label = getSearchableContent(item)
-            .toLowerCase()
-            .replace(replaceRegex, '')
-          return match(pattern, label)
-        })
-        .map(item => ({
-          label: getSearchableContent(item),
-          value: item.path
-        }))
-    })
-    function handleSearch(value: string) {
-      router.push(value)
-    }
-
-    // common
-    const isMobileRef = useIsMobile()
-    const isTabletRef = useIsTablet()
-    function handleLogoClick() {
-      if (/^\/[^/]+$/.test(route.path)) {
-        message.info(t('alreadyHome'))
-        return
-      }
-      router.push(getLocalePath())
-    }
-
-    // responsive menu
-    const menuInstRef = ref()
-    let lastWindowInnerWidth = window.innerWidth
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > lastWindowInnerWidth) {
-        menuInstRef.value?.deriveResponsiveState()
-      }
-      lastWindowInnerWidth = window.innerWidth
-    })
-
-    return {
-      menuInstRef,
-      renderMenuLabel,
-      mobilePopoverRef,
-      tusimple: process.env.TUSIMPLE,
-      dev: __DEV__,
-      message,
-      t,
-      version,
-      isMobile: isMobileRef,
-      isTablet: isTabletRef,
-      repoUrl,
-      // theme
-      themePreference: themePreferenceRef,
-      themePreferenceLabel: themePreferenceLabelRef,
-      themeOptions: themeOptionsRef,
-      // displayMode
-      displayMode: displayModeRef,
-      displayModeLabelMap,
-      handleDisplayModeUpdate,
-      // locale
-      locale: localeNameRef,
-      localeLabelMap,
-      handleLocaleUpdate,
-      // configProvider
-      configProviderName: configProviderNameRef,
-      cfgProviderLabelMap: cfgProviderLabelMapRef,
-      handleConfigProviderUpdate,
-      // search
-      searchPattern: searchPatternRef,
-      searchOptions: searchOptionsRef,
-      handleSearch,
-      // menu
-      menuOptions: menuOptionsRef,
-      menuValue: menuValueRef,
-      // mobile & tablet menu
-      mobileMenuOptions: mobileMenuOptionsRef,
-      handleUpdateMobileMenu,
-      mobileMenuValue: mobileMenuValueRef,
-      // common
-      handleLogoClick,
-      style: computed(() => {
-        return isMobileRef.value
-          ? {
-              '--side-padding': '16px',
-              'grid-template-columns': 'auto 1fr auto'
-            }
-          : {
-              '--side-padding': '32px',
-              'grid-template-columns':
-                'calc(272px - var(--side-padding)) 1fr auto'
-            }
-      })
+    else {
+      locale.value = 'zh-CN'
     }
   }
+  else if (path) {
+    router.push(path)
+  }
+  else {
+    window.open(repoUrl, '_blank')
+  }
+  mobilePopoverRef.value?.setShow(false)
+}
+
+const localeLabelMap = {
+  'zh-CN': 'English',
+  'en-US': '中文'
+}
+function handleLocaleUpdate() {
+  if (locale.value === 'zh-CN') {
+    locale.value = 'en-US'
+  }
+  else {
+    locale.value = 'zh-CN'
+  }
+}
+
+// display mode
+const displayMode = useDisplayMode()
+const displayModeLabelMap: Record<string, string> = {
+  common: 'Debug',
+  debug: 'Prod'
+}
+function handleDisplayModeUpdate() {
+  if (displayMode.value === 'common') {
+    displayMode.value = 'debug'
+  }
+  else {
+    displayMode.value = 'common'
+  }
+}
+
+// config provider
+const configProviderName = useConfigProviderName()
+const cfgProviderLabelMap = computed<Record<string, string>>(() => ({
+  tusimple: t('defaultTheme'),
+  default: t('tusimpleTheme')
+}))
+function handleConfigProviderUpdate() {
+  if (configProviderName.value === 'tusimple') {
+    configProviderName.value = 'default'
+  }
+  else {
+    configProviderName.value = 'tusimple'
+  }
+}
+
+// search
+const searchableOptionsRef = useFlattenedDocOptions()
+const searchPattern = ref('')
+const searchOptions = computed(() => {
+  // function getLabel(item) {
+  //   if (item.label) {
+  //     return typeof item.extra === 'function'
+  //       ? () => [item.label, ' ', item.extra()]
+  //       : item.label + (item.extra ? ' ' + item.extra : '')
+  //   }
+  //   return item.key
+  // }
+  function getSearchableContent(item: SiteMenuOption): string {
+    if (item.label) {
+      return item.label + (item.extraString ? ` ${item.extraString}` : '')
+    }
+    return String(item.key)
+  }
+  if (!searchPattern.value)
+    return []
+  const replaceRegex = / |-/g
+  return searchableOptionsRef.value
+    .filter((item) => {
+      const pattern = searchPattern.value
+        .toLowerCase()
+        .replace(replaceRegex, '')
+        .slice(0, 20)
+      const label = getSearchableContent(item)
+        .toLowerCase()
+        .replace(replaceRegex, '')
+      return match(pattern, label)
+    })
+    .map(item => ({
+      label: getSearchableContent(item),
+      value: item.path
+    }))
+})
+function handleSearch(value: string) {
+  router.push(value)
+}
+
+// common
+const isMobile = useIsMobile()
+const isTablet = useIsTablet()
+function handleLogoClick() {
+  if (/^\/[^/]+$/.test(route.path)) {
+    message.info(t('alreadyHome'))
+    return
+  }
+  router.push(getLocalePath())
+}
+
+// responsive menu
+const menuInstRef = ref()
+let lastWindowInnerWidth = window.innerWidth
+window.addEventListener('resize', () => {
+  if (window.innerWidth > lastWindowInnerWidth) {
+    menuInstRef.value?.deriveResponsiveState()
+  }
+  lastWindowInnerWidth = window.innerWidth
+})
+
+const tusimple = process.env.TUSIMPLE
+const dev = __DEV__
+
+const style = computed(() => {
+  return isMobile.value
+    ? {
+        '--side-padding': '16px',
+        'grid-template-columns': 'auto 1fr auto'
+      }
+    : {
+        '--side-padding': '32px',
+        'grid-template-columns': 'calc(272px - var(--side-padding)) 1fr auto'
+      }
 })
 </script>
 
