@@ -1,11 +1,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { i18n } from '../utils/composables'
+import CopyMarkdownButton from './CopyMarkdownButton.vue'
 import EditOnGithubButton from './EditOnGithubButton.vue'
 
 export default defineComponent({
   name: 'EditOnGithubHeader',
   components: {
+    CopyMarkdownButton,
     EditOnGithubButton
   },
   props: {
@@ -53,6 +55,9 @@ export default defineComponent({
         </template>
         {{ t('editOnGithub') }}
       </n-tooltip>
+    </span>
+    <span class="edit-button">
+      <CopyMarkdownButton />
     </span>
   </n-h1>
 </template>

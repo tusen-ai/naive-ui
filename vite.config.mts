@@ -5,6 +5,7 @@ import { babel } from '@rollup/plugin-babel'
 import { configDefaults, defineConfig } from 'vitest/config'
 import vueJsxVapor from 'vue-jsx-vapor/vite'
 import { createDemoPlugin } from './build/vite-plugin-demo'
+import { llmsPlugin } from './build/vite-plugin-llms'
 
 dns.setDefaultResultOrder('verbatim')
 
@@ -29,7 +30,8 @@ export default defineConfig({
     vueJsxVapor({
       interop: true
     }),
-    ...createDemoPlugin()
+    ...createDemoPlugin(),
+    llmsPlugin()
   ],
   resolve: {
     // In production site build, we want to import naive-ui from node_modules
