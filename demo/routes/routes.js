@@ -1031,32 +1031,47 @@ export const zhComponentRoutes = [
 export const routes = [
   {
     name: 'home',
-    path: '/:lang/:theme',
+    path: '/:lang(en-US|zh-CN)',
     component: () => import('../pages/home/index.vue')
   },
   {
     name: 'enDocs',
-    path: '/en-US/:theme/docs',
+    path: '/en-US/docs',
     component: () => import('../pages/Layout.vue'),
     children: enDocRoutes
   },
   {
     name: 'zhDocs',
-    path: '/zh-CN/:theme/docs',
+    path: '/zh-CN/docs',
     component: () => import('../pages/Layout.vue'),
     children: zhDocRoutes
   },
   {
     name: 'enComponents',
-    path: '/en-US/:theme/components',
+    path: '/en-US/components',
     component: () => import('../pages/Layout.vue'),
     children: enComponentRoutes
   },
   {
     name: 'zhComponents',
-    path: '/zh-CN/:theme/components',
+    path: '/zh-CN/components',
     component: () => import('../pages/Layout.vue'),
     children: zhComponentRoutes
+  },
+  {
+    // The theme used to be part of the path (`/zh-CN/os-theme/docs/...`).
+    // Old links are everywhere, so drop that segment and keep the rest. The
+    // theme in an old link is ignored: someone else's link shouldn't change
+    // the reader's own preference.
+    name: 'legacy-theme-path',
+    path: '/:lang(en-US|zh-CN)/:theme(light|dark|os-theme)/:rest(.*)*',
+    redirect: to => ({
+      path: [`/${to.params.lang}`, ...[].concat(to.params.rest || [])].join(
+        '/'
+      ),
+      query: to.query,
+      hash: to.hash
+    })
   },
   {
     name: 'not-found',
@@ -1064,8 +1079,7 @@ export const routes = [
     redirect: {
       name: 'home',
       params: {
-        lang: navigator.language === 'zh-CN' ? 'zh-CN' : 'en-US',
-        theme: 'os-theme'
+        lang: navigator.language === 'zh-CN' ? 'zh-CN' : 'en-US'
       }
     }
   }

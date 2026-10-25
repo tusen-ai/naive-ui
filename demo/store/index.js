@@ -8,7 +8,7 @@ import {
   zhCN
 } from 'naive-ui'
 import { useMemo } from 'vooks'
-import { computed, ref } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import { TsConfigProvider } from '../../themes/tusimple/src'
 import { i18n, useIsMobile } from '../utils/composables'
 import hljs from './hljs'
@@ -24,9 +24,55 @@ let localeNameRef = null
 // useMemo
 let dateLocaleRef = null
 // theme
+// The theme is the reader's preference, not part of the page, so it lives in
+// localStorage rather than the URL. `os-theme` (the default) follows the OS.
+// index.html applies the same preference before the first paint.
+const THEME_STORAGE_KEY = 'naive-ui-theme'
 const osThemeRef = useOsTheme()
-let themeNameRef = null
-let rawThemeNameRef = null // could be `os-theme`
+function readThemePreference() {
+  try {
+    const value = window.localStorage.getItem(THEME_STORAGE_KEY)
+    return value === 'light' || value === 'dark' ? value : 'os-theme'
+  }
+  catch {
+    return 'os-theme'
+  }
+}
+const themePreferenceRef = ref(readThemePreference())
+// Keep other tabs in step when the preference changes in one of them
+window.addEventListener('storage', (e) => {
+  if (e.key === THEME_STORAGE_KEY || e.key === null) {
+    themePreferenceRef.value = readThemePreference()
+  }
+})
+function setThemePreference(theme) {
+  themePreferenceRef.value = theme
+  try {
+    if (theme === 'os-theme')
+      window.localStorage.removeItem(THEME_STORAGE_KEY)
+    else window.localStorage.setItem(THEME_STORAGE_KEY, theme)
+  }
+  catch {}
+}
+// What the reader picked: `light`, `dark` or `os-theme`
+const themePreferenceModelRef = computed({
+  get: () => themePreferenceRef.value,
+  set: setThemePreference
+})
+// The theme in effect, `light` or `dark`; setting it stores the preference
+const themeNameRef = computed({
+  get() {
+    const { value } = themePreferenceRef
+    return value === 'os-theme' ? (osThemeRef.value ?? 'light') : value
+  },
+  set: setThemePreference
+})
+// Mirror the resolved theme on <html>, as index.html does before Vue starts
+watchEffect(() => {
+  const root = document.documentElement
+  root.dataset.theme = themeNameRef.value
+  root.style.colorScheme = themeNameRef.value
+})
 
 export function initRouter(_router, _route) {
   route = _route
@@ -41,22 +87,6 @@ export function initRouter(_router, _route) {
   })
   dateLocaleRef = useMemo(() => {
     return route.path.startsWith('/zh-CN') ? dateZhCN : dateEnUS
-  })
-  rawThemeNameRef = useMemo(() => route.params.theme)
-  themeNameRef = useMemo({
-    get() {
-      switch (route.params.theme) {
-        case 'os-theme':
-          return osThemeRef.value
-        case 'dark':
-          return 'dark'
-        default:
-          return 'light'
-      }
-    },
-    set(theme) {
-      router.push(changeThemeInPath(route.fullPath, theme))
-    }
   })
 }
 
@@ -94,14 +124,12 @@ const configProviderRef = computed(() => {
 // options
 const docOptionsRef = computed(() =>
   createDocumentationMenuOptions({
-    theme: rawThemeNameRef.value,
     lang: localeNameRef.value,
     mode: displayModeRef.value
   })
 )
 const componentOptionsRef = computed(() =>
   createComponentMenuOptions({
-    theme: rawThemeNameRef.value,
     lang: localeNameRef.value,
     mode: displayModeRef.value
   })
@@ -143,16 +171,9 @@ function changeLangInPath(path, lang) {
   return path.replace(langReg, `/${lang}/`)
 }
 
-function changeThemeInPath(path, theme) {
-  const themeReg = /(^\/[^/]+\/)([^/]+)/
-  return path.replace(themeReg, `$1${theme}`)
-}
-
 export function push(partialPath) {
   const { fullPath } = route
-  router.push(
-    fullPath.replace(/(^\/[^/]+\/[^/]+)((\/.*)|$)/, `$1${partialPath}`)
-  )
+  router.push(fullPath.replace(/(^\/[^/]+)((\/.*)|$)/, `$1${partialPath}`))
 }
 
 export function useDisplayMode() {
@@ -165,6 +186,10 @@ export function useLocaleName() {
 
 export function useThemeName() {
   return themeNameRef
+}
+
+export function useThemePreference() {
+  return themePreferenceModelRef
 }
 
 export function useDocOptions() {
