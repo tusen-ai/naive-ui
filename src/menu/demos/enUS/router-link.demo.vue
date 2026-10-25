@@ -43,7 +43,7 @@ const menuOptions: MenuOption[] = [
         RouterLink,
         {
           to: {
-            path: '/zh-CN/os-theme/components/code'
+            path: '/zh-CN/components/code'
           }
         },
         { default: () => 'Go to work' }

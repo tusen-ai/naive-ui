@@ -4,12 +4,12 @@ import {
   dateZhCN,
   enUS,
   NConfigProvider,
-  useOsTheme,
   zhCN
 } from 'naive-ui'
 import { useMemo } from 'vooks'
 import { computed, ref } from 'vue'
 import { TsConfigProvider } from '../../themes/tusimple/src'
+import { useColorMode } from '../utils/color-mode'
 import { i18n, useIsMobile } from '../utils/composables'
 import hljs from './hljs'
 import {
@@ -24,9 +24,18 @@ let localeNameRef = null
 // useMemo
 let dateLocaleRef = null
 // theme
-const osThemeRef = useOsTheme()
-let themeNameRef = null
-let rawThemeNameRef = null // could be `os-theme`
+// The theme is the reader's preference, not part of the page, so it lives in
+// localStorage rather than the URL
+const { mode: themeModeRef, state: themeStateRef } = useColorMode({
+  storageKey: 'naive-ui-theme'
+})
+// The theme in effect, `light` or `dark`; setting it stores an explicit pick
+const themeNameRef = computed({
+  get: () => themeStateRef.value,
+  set: (theme) => {
+    themeModeRef.value = theme
+  }
+})
 
 export function initRouter(_router, _route) {
   route = _route
@@ -41,22 +50,6 @@ export function initRouter(_router, _route) {
   })
   dateLocaleRef = useMemo(() => {
     return route.path.startsWith('/zh-CN') ? dateZhCN : dateEnUS
-  })
-  rawThemeNameRef = useMemo(() => route.params.theme)
-  themeNameRef = useMemo({
-    get() {
-      switch (route.params.theme) {
-        case 'os-theme':
-          return osThemeRef.value
-        case 'dark':
-          return 'dark'
-        default:
-          return 'light'
-      }
-    },
-    set(theme) {
-      router.push(changeThemeInPath(route.fullPath, theme))
-    }
   })
 }
 
@@ -94,14 +87,12 @@ const configProviderRef = computed(() => {
 // options
 const docOptionsRef = computed(() =>
   createDocumentationMenuOptions({
-    theme: rawThemeNameRef.value,
     lang: localeNameRef.value,
     mode: displayModeRef.value
   })
 )
 const componentOptionsRef = computed(() =>
   createComponentMenuOptions({
-    theme: rawThemeNameRef.value,
     lang: localeNameRef.value,
     mode: displayModeRef.value
   })
@@ -143,16 +134,9 @@ function changeLangInPath(path, lang) {
   return path.replace(langReg, `/${lang}/`)
 }
 
-function changeThemeInPath(path, theme) {
-  const themeReg = /(^\/[^/]+\/)([^/]+)/
-  return path.replace(themeReg, `$1${theme}`)
-}
-
 export function push(partialPath) {
   const { fullPath } = route
-  router.push(
-    fullPath.replace(/(^\/[^/]+\/[^/]+)((\/.*)|$)/, `$1${partialPath}`)
-  )
+  router.push(fullPath.replace(/(^\/[^/]+)((\/.*)|$)/, `$1${partialPath}`))
 }
 
 export function useDisplayMode() {
@@ -165,6 +149,10 @@ export function useLocaleName() {
 
 export function useThemeName() {
   return themeNameRef
+}
+
+export function useThemeMode() {
+  return themeModeRef
 }
 
 export function useDocOptions() {

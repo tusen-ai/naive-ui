@@ -21,6 +21,20 @@
       content="width=device-width, initial-scale=1, maximum-scale=1"
     />
     <title>Naive UI</title>
+    <script>
+      // Set the color scheme before the first paint, so a reload doesn't flash
+      // white on a dark page. Same rule as useColorMode in demo/utils/color-mode.js.
+      {
+        let saved
+        try {
+          saved = localStorage.getItem('naive-ui-theme')
+        } catch {}
+        const osTheme = matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light'
+        document.documentElement.style.colorScheme = saved ?? osTheme
+      }
+    </script>
     <meta name="naive-ui-style" />
     <meta name="vueuc-style" />
     <link

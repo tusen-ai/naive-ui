@@ -10,7 +10,7 @@ import {
   useDocOptions,
   useFlattenedDocOptions,
   useLocaleName,
-  useThemeName
+  useThemeMode
 } from './store'
 import { renderMenuLabel } from './store/menu-options'
 import { i18n, useIsMobile, useIsTablet } from './utils/composables'
@@ -32,6 +32,8 @@ const locales = {
   'zh-CN': {
     dark: '深色',
     light: '浅色',
+    osTheme: '跟随系统',
+    theme: '主题',
     searchPlaceholder: '搜索',
     home: '首页',
     doc: '文档',
@@ -45,6 +47,8 @@ const locales = {
   'en-US': {
     dark: 'Dark',
     light: 'Light',
+    osTheme: 'System',
+    theme: 'Theme',
     searchPlaceholder: 'Search',
     home: 'Home',
     doc: 'Docs',
@@ -68,17 +72,24 @@ export default defineComponent({
     const router = useRouter()
 
     const mobilePopoverRef = ref(null)
-    const themeAndLocaleReg = /^(\/[^/]+){2}/
+    const localeReg = /^\/[^/]+/
 
     // i18n
     const { t } = i18n(locales)
 
     // theme
-    const themeNameRef = useThemeName()
-    const themeLabelMapRef = computed(() => ({
-      dark: t('light'),
-      light: t('dark')
-    }))
+    const themePreferenceRef = useThemeMode()
+    const themeOptionsRef = computed(() => [
+      { label: t('light'), value: 'light' },
+      { label: t('dark'), value: 'dark' },
+      { label: t('osTheme'), value: 'auto' }
+    ])
+    const themePreferenceLabelRef = computed(
+      () =>
+        themeOptionsRef.value.find(
+          option => option.value === themePreferenceRef.value
+        )?.label
+    )
 
     // locale
     const localeNameRef = useLocaleName()
@@ -89,17 +100,17 @@ export default defineComponent({
         {
           key: 'home',
           label: t('home'),
-          path: themeAndLocaleReg.exec(route.path)[0]
+          path: localeReg.exec(route.path)[0]
         },
         {
           key: 'doc',
           label: t('doc'),
-          path: `${themeAndLocaleReg.exec(route.path)[0]}/docs/introduction`
+          path: `${localeReg.exec(route.path)[0]}/docs/introduction`
         },
         {
           key: 'component',
           label: t('component'),
-          path: `${themeAndLocaleReg.exec(route.path)[0]}/components/button`
+          path: `${localeReg.exec(route.path)[0]}/components/button`
         }
       ]
     })
@@ -120,7 +131,11 @@ export default defineComponent({
       return [
         {
           key: 'theme',
-          label: themeLabelMapRef.value[themeNameRef.value]
+          label: `${t('theme')}: ${themePreferenceLabelRef.value}`,
+          children: themeOptionsRef.value.map(option => ({
+            key: `theme:${option.value}`,
+            label: option.label
+          }))
         },
         {
           key: 'locale',
@@ -129,18 +144,18 @@ export default defineComponent({
         {
           key: 'home',
           label: t('home'),
-          path: themeAndLocaleReg.exec(route.path)[0]
+          path: localeReg.exec(route.path)[0]
         },
         {
           key: 'doc',
           label: t('doc'),
           children: docOptionsRef.value,
-          path: `${themeAndLocaleReg.exec(route.path)[0]}/docs/introduction`
+          path: `${localeReg.exec(route.path)[0]}/docs/introduction`
         },
         {
           key: 'component',
           label: t('component'),
-          path: `${themeAndLocaleReg.exec(route.path)[0]}/components/button`,
+          path: `${localeReg.exec(route.path)[0]}/components/button`,
           children: componentOptionsRef.value
         },
         {
@@ -155,8 +170,8 @@ export default defineComponent({
       return findMenuValue(mobileMenuOptionsRef.value, route.path)
     })
     function handleUpdateMobileMenu(value, { path }) {
-      if (value === 'theme') {
-        handleThemeUpdate()
+      if (value.startsWith('theme:')) {
+        themePreferenceRef.value = value.slice('theme:'.length)
       }
       else if (value === 'locale') {
         if (localeNameRef.value === 'zh-CN') {
@@ -173,15 +188,6 @@ export default defineComponent({
         window.open(repoUrl, '_blank')
       }
       mobilePopoverRef.value.setShow(false)
-    }
-
-    function handleThemeUpdate() {
-      if (themeNameRef.value === 'dark') {
-        themeNameRef.value = 'light'
-      }
-      else {
-        themeNameRef.value = 'dark'
-      }
     }
 
     const localeLabelMap = {
@@ -272,11 +278,11 @@ export default defineComponent({
     const isMobileRef = useIsMobile()
     const isTabletRef = useIsTablet()
     function handleLogoClick() {
-      if (/^(\/[^/]+){2}$/.test(route.path)) {
+      if (/^\/[^/]+$/.test(route.path)) {
         message.info(t('alreadyHome'))
         return
       }
-      router.push(/^(\/[^/]+){2}/.exec(route.path)[0])
+      router.push(localeReg.exec(route.path)[0])
     }
 
     // responsive menu
@@ -302,9 +308,9 @@ export default defineComponent({
       isTablet: isTabletRef,
       repoUrl,
       // theme
-      theme: themeNameRef,
-      handleThemeUpdate,
-      themeLabelMap: themeLabelMapRef,
+      themePreference: themePreferenceRef,
+      themePreferenceLabel: themePreferenceLabelRef,
+      themeOptions: themeOptionsRef,
       // displayMode
       displayMode: displayModeRef,
       displayModeLabelMap,
@@ -418,14 +424,16 @@ export default defineComponent({
       >
         {{ localeLabelMap[locale] }}
       </n-button>
-      <n-button
-        size="small"
-        quaternary
-        class="nav-picker"
-        @click="handleThemeUpdate"
+      <n-popselect
+        v-model:value="themePreference"
+        :options="themeOptions"
+        trigger="click"
+        placement="bottom"
       >
-        {{ themeLabelMap[theme] }}
-      </n-button>
+        <n-button size="small" quaternary class="nav-picker">
+          {{ themePreferenceLabel }}
+        </n-button>
+      </n-popselect>
       <n-button
         size="small"
         tag="a"
