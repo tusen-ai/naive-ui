@@ -1,4 +1,6 @@
 import type { Plugin } from 'vite'
+import fs from 'node:fs/promises'
+import path from 'node:path'
 import process from 'node:process'
 import { renderLlmsFile, renderLlmsFiles } from './llms'
 
@@ -18,6 +20,28 @@ export function llmsPlugin(): Plugin {
     name: 'naive-llms',
     configResolved(config) {
       root = config.root
+    },
+    // The static server of `vite preview` sends these files without a charset,
+    // so a browser may misread the Chinese. Serve them as the dev server does.
+    configurePreviewServer(server) {
+      const outDir = path.resolve(root, server.config.build.outDir)
+      server.middlewares.use(async (req, res, next) => {
+        const urlPath = decodeURIComponent((req.url ?? '').split('?')[0])
+        const ext = /\.(txt|md)$/.exec(urlPath)?.[0]
+        if (!ext)
+          return next()
+        const file = path.join(outDir, path.normalize(urlPath))
+        if (!file.startsWith(outDir + path.sep))
+          return next()
+        try {
+          const content = await fs.readFile(file)
+          res.setHeader('Content-Type', contentTypes[ext])
+          res.end(content)
+        }
+        catch {
+          next()
+        }
+      })
     },
     configureServer(server) {
       server.middlewares.use(async (req, res, next) => {
@@ -39,7 +63,13 @@ export function llmsPlugin(): Plugin {
     },
     async generateBundle() {
       for (const [urlPath, source] of await renderLlmsFiles(root)) {
-        this.emitFile({ type: 'asset', fileName: urlPath.slice(1), source })
+        // naiveui.com sends static files without a charset; a byte order mark
+        // is the one sign of UTF-8 a browser reads from the file itself
+        this.emitFile({
+          type: 'asset',
+          fileName: urlPath.slice(1),
+          source: `\uFEFF${source}`
+        })
       }
     }
   }

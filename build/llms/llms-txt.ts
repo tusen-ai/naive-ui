@@ -13,7 +13,7 @@ const texts: Record<
     summary:
       'A Vue 3 component library. Fairly complete, theme customizable, uses TypeScript, fast.',
     intro: other =>
-      `Each link below is the Markdown version of a page of the docs site (${SITE_ORIGIN}). Component pages include the API and the full source of every demo. All pages in one file: ${SITE_ORIGIN}/llms-full.txt. 中文版：${other}.`,
+      `Each link below is the Markdown version of a page of the docs site (${SITE_ORIGIN}). Component pages include the API and the full source of every demo. All pages in one file: ${SITE_ORIGIN}/llms-full.txt. In Chinese: ${other}.`,
     optional: 'Optional'
   },
   'zh-CN': {
