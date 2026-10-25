@@ -58,6 +58,11 @@ export const docMenuItems = [
         en: 'Controlled & Uncontrolled',
         zh: '受控与非受控',
         path: '/controlled-uncontrolled'
+      },
+      {
+        en: 'LLMs',
+        zh: 'LLMs',
+        path: '/llms'
       }
     ]
   },

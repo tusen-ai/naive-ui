@@ -1,6 +1,6 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-import { useThemeName } from '../../store'
+import { push, useThemeName } from '../../store'
 import { i18n, useIsMobile, useIsTablet } from '../../utils/composables'
 import LandingFooter from './Footer.vue'
 import leftImage from './Left.vue'
@@ -18,6 +18,7 @@ export default defineComponent({
       isMobile: isMobileRef,
       isTablet: useIsTablet(),
       theme: useThemeName(),
+      push,
       titleStyle: computed(() => {
         if (isMobileRef.value) {
           return 'margin-top: 0; font-size: 64px !important'
@@ -32,14 +33,18 @@ export default defineComponent({
           intro1: '一个 Vue 3 组件库',
           intro2: '比较完整，主题可调，使用 TypeScript，快',
           intro3: '有点意思',
-          intro4: '换个主题'
+          intro4: '换个主题',
+          llms: '在用 AI 编程助手？把 llms.txt 交给它',
+          llmsLink: '了解 LLMs 文档'
         },
         'en-US': {
           start: 'Get Started',
           intro1: 'A Vue 3 Component Library',
           intro2: 'Fairly Complete, Theme Customizable, Uses TypeScript, Fast',
           intro3: 'Kinda Interesting',
-          intro4: 'Change Theme'
+          intro4: 'Change Theme',
+          llms: 'Coding with AI? Give your assistant llms.txt',
+          llmsLink: 'About the LLMs docs'
         }
       })
     }
@@ -122,6 +127,12 @@ export default defineComponent({
           {{ t('start') }}
         </n-button>
       </div>
+      <n-p depth="3" class="llms-hint">
+        {{ t('llms') }} ·
+        <n-a href="#" @click.prevent="push('/docs/llms')">
+          {{ t('llmsLink') }}
+        </n-a>
+      </n-p>
       <LeftImage class="left-image" />
     </div>
     <n-layout-footer>
@@ -131,6 +142,12 @@ export default defineComponent({
 </template>
 
 <style scoped>
+.llms-hint {
+  font-size: 14px;
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
 .banner {
   height: calc(100vh - 64px);
   display: flex;
