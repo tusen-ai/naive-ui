@@ -3,12 +3,12 @@ import { renderLlmsFile } from '..'
 import { renderLlmsTxt } from '../llms-txt'
 import {
   fence,
-  getDescription,
-  getPageEntries,
   renderDemo,
+  renderPage,
   renderPages,
-  resolveLinks
-} from '../pages'
+  resolveHref
+} from '../page-markdown'
+import { getPageEntries } from '../site'
 
 const root = path.resolve(__dirname, '../../..')
 
@@ -25,7 +25,7 @@ describe('renderDemo', () => {
       '  <n-button>Go</n-button>',
       '</template>'
     ].join('\n')
-    expect(renderDemo(source)).toBe(
+    expect(renderDemo(source, '/en-US/components/button')).toBe(
       '### Basic\n\nUse `type`.\n\n```vue\n<template>\n  <n-button>Go</n-button>\n</template>\n```'
     )
   })
@@ -35,26 +35,38 @@ describe('renderDemo', () => {
   })
 })
 
-describe('resolveLinks', () => {
-  it('points relative links at the Markdown version of the page', () => {
-    expect(
-      resolveLinks(
-        'See [SSR](ssr#Caveat), [Button](../components/button) and [vfonts](https://github.com/07akioni/vfonts).',
-        '/en-US/docs/nuxtjs'
-      )
-    ).toBe(
-      'See [SSR](https://www.naiveui.com/en-US/docs/ssr.md#Caveat), [Button](https://www.naiveui.com/en-US/components/button.md) and [vfonts](https://github.com/07akioni/vfonts).'
+describe('resolveHref', () => {
+  it('points a relative link at the Markdown version of the page', () => {
+    const route = '/en-US/docs/nuxtjs'
+    expect(resolveHref('ssr#Caveat', route)).toBe(
+      'https://www.naiveui.com/en-US/docs/ssr.md#Caveat'
     )
+    expect(resolveHref('../components/button', route)).toBe(
+      'https://www.naiveui.com/en-US/components/button.md'
+    )
+    expect(resolveHref('/llms.txt', route)).toBe(
+      'https://www.naiveui.com/llms.txt'
+    )
+    expect(resolveHref('https://github.com/07akioni/vfonts', route)).toBe(
+      'https://github.com/07akioni/vfonts'
+    )
+    expect(resolveHref('#usage', route)).toBe('#usage')
   })
 })
 
-describe('getDescription', () => {
-  it('takes the first paragraph after the title', () => {
-    expect(
-      getDescription(
-        '# Button\n\n> A note\n\nButton is used\nto trigger actions.\n\n## Demos'
-      )
-    ).toBe('Button is used to trigger actions.')
+describe('renderPage', () => {
+  it('takes the title and the first paragraph, and resolves links in prose and in components', async () => {
+    const [entry] = getPageEntries('en-US').filter(
+      entry => entry.slug === 'legacy-grid'
+    )
+    const page = await renderPage(root, entry)
+    expect(page.title).toBe('Legacy Grid')
+    expect(page.markdown).toContain(
+      '[Grid](https://www.naiveui.com/en-US/components/grid.md)'
+    )
+    // The demos' code keeps its components; the prose has none left
+    expect(page.markdown).not.toContain('<n-alert')
+    expect(page.markdown).not.toContain('<router-link')
   })
 })
 

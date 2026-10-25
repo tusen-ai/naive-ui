@@ -1,14 +1,39 @@
-import type { Locale } from './pages'
 import { getLlmsPath, renderLlmsFullTxt, renderLlmsTxt } from './llms-txt'
-import {
-  getPageEntries,
-  getPageRoute,
-  locales,
-  renderPage,
-  renderPages
-} from './pages'
+import { renderPage, renderPages } from './page-markdown'
+import { getPageEntries, getPageRoute, locales } from './site'
 
-/** Every LLM file of the site, keyed by its path (`/llms.txt`, `/en-US/components/button.md`, ...). */
+type Render = () => Promise<string>
+
+/** How to build each LLM file, keyed by its path. */
+function getLlmsFileRenderers(root: string): Map<string, Render> {
+  const renderers = new Map<string, Render>()
+  for (const locale of locales) {
+    renderers.set(getLlmsPath(locale, 'llms.txt'), async () =>
+      renderLlmsTxt(locale, await renderPages(root, locale)))
+    renderers.set(getLlmsPath(locale, 'llms-full.txt'), async () =>
+      renderLlmsFullTxt(await renderPages(root, locale)))
+    for (const entry of getPageEntries(locale)) {
+      renderers.set(
+        `${getPageRoute(entry)}.md`,
+        async () => (await renderPage(root, entry)).markdown
+      )
+    }
+  }
+  return renderers
+}
+
+/**
+ * One LLM file by its path (`/llms.txt`, `/en-US/components/button.md`, ...),
+ * or `undefined` when the path isn't one.
+ */
+export async function renderLlmsFile(
+  root: string,
+  urlPath: string
+): Promise<string | undefined> {
+  return getLlmsFileRenderers(root).get(urlPath)?.()
+}
+
+/** Every LLM file, keyed by its path. Each page is rendered once. */
 export async function renderLlmsFiles(
   root: string
 ): Promise<Map<string, string>> {
@@ -20,24 +45,4 @@ export async function renderLlmsFiles(
     for (const page of pages) files.set(`${page.route}.md`, page.markdown)
   }
   return files
-}
-
-/** One LLM file by its path, or `undefined` when the path isn't one. */
-export async function renderLlmsFile(
-  root: string,
-  urlPath: string
-): Promise<string | undefined> {
-  for (const locale of locales) {
-    if (urlPath === getLlmsPath(locale, 'llms.txt'))
-      return renderLlmsTxt(locale, await renderPages(root, locale))
-    if (urlPath === getLlmsPath(locale, 'llms-full.txt'))
-      return renderLlmsFullTxt(await renderPages(root, locale))
-  }
-  const match = /^\/([^/]+)\/(docs|components)\/([^/]+)\.md$/.exec(urlPath)
-  if (!match || !locales.includes(match[1] as Locale))
-    return undefined
-  const entry = getPageEntries(match[1] as Locale).find(
-    entry => getPageRoute(entry) === urlPath.slice(0, -'.md'.length)
-  )
-  return entry && (await renderPage(root, entry)).markdown
 }

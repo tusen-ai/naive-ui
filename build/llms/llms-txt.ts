@@ -1,5 +1,6 @@
-import type { Locale, Page } from './pages'
-import { SITE_ORIGIN } from './pages'
+import type { Page } from './page-markdown'
+import type { Locale } from './site'
+import { SITE_ORIGIN } from './site'
 
 // Pages listed under `## Optional`: llms.txt's section for what a reader with
 // little context to spare can skip

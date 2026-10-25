@@ -1,4 +1,4 @@
-import type { Plugin } from 'vite'
+import type { Connect, Plugin } from 'vite'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import process from 'node:process'
@@ -7,6 +7,30 @@ import { renderLlmsFile, renderLlmsFiles } from './llms'
 const contentTypes: Record<string, string> = {
   '.txt': 'text/plain; charset=utf-8',
   '.md': 'text/markdown; charset=utf-8'
+}
+
+/** Middleware that answers `.txt` and `.md` requests `load` has content for. */
+function serveTextFiles(
+  load: (urlPath: string) => Promise<string | Uint8Array | undefined>
+): Connect.NextHandleFunction {
+  return async (req, res, next) => {
+    const urlPath = decodeURIComponent(
+      new URL(req.url ?? '/', 'http://x').pathname
+    )
+    const contentType = contentTypes[path.extname(urlPath)]
+    if (!contentType)
+      return next()
+    try {
+      const content = await load(urlPath)
+      if (content === undefined)
+        return next()
+      res.setHeader('Content-Type', contentType)
+      res.end(content)
+    }
+    catch (error) {
+      next(error)
+    }
+  }
 }
 
 /**
@@ -21,45 +45,22 @@ export function llmsPlugin(): Plugin {
     configResolved(config) {
       root = config.root
     },
-    // The static server of `vite preview` sends these files without a charset,
-    // so a browser may misread the Chinese. Serve them as the dev server does.
+    configureServer(server) {
+      server.middlewares.use(
+        serveTextFiles(urlPath => renderLlmsFile(root, urlPath))
+      )
+    },
+    // The static server of `vite preview` sends these files without a charset
     configurePreviewServer(server) {
       const outDir = path.resolve(root, server.config.build.outDir)
-      server.middlewares.use(async (req, res, next) => {
-        const urlPath = decodeURIComponent((req.url ?? '').split('?')[0])
-        const ext = /\.(txt|md)$/.exec(urlPath)?.[0]
-        if (!ext)
-          return next()
-        const file = path.join(outDir, path.normalize(urlPath))
-        if (!file.startsWith(outDir + path.sep))
-          return next()
-        try {
-          const content = await fs.readFile(file)
-          res.setHeader('Content-Type', contentTypes[ext])
-          res.end(content)
-        }
-        catch {
-          next()
-        }
-      })
-    },
-    configureServer(server) {
-      server.middlewares.use(async (req, res, next) => {
-        const urlPath = decodeURIComponent((req.url ?? '').split('?')[0])
-        const ext = /\.(txt|md)$/.exec(urlPath)?.[0]
-        if (!ext)
-          return next()
-        try {
-          const content = await renderLlmsFile(root, urlPath)
-          if (content === undefined)
-            return next()
-          res.setHeader('Content-Type', contentTypes[ext])
-          res.end(content)
-        }
-        catch (error) {
-          next(error)
-        }
-      })
+      server.middlewares.use(
+        serveTextFiles(async (urlPath) => {
+          const file = path.join(outDir, path.normalize(urlPath))
+          if (!file.startsWith(outDir + path.sep))
+            return undefined
+          return fs.readFile(file).catch(() => undefined)
+        })
+      )
     },
     async generateBundle() {
       for (const [urlPath, source] of await renderLlmsFiles(root)) {

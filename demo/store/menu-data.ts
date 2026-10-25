@@ -1,7 +1,19 @@
 // Menu entries of the docs site, shared by the site menu and the llms.txt
 // build (build/llms). Plain data only, so Node can import it.
 
-export const docMenuItems = [
+export interface MenuItem {
+  en: string
+  zh: string
+  /** Route segment after `/<lang>/docs` or `/<lang>/components`, e.g. `/button` */
+  path?: string
+  type?: 'group'
+  children?: MenuItem[]
+  /** Show the English name next to the Chinese one */
+  enSuffix?: boolean
+  isNew?: boolean
+}
+
+export const docMenuItems: MenuItem[] = [
   {
     en: 'Introduction',
     zh: '介绍',
@@ -137,7 +149,7 @@ export const docMenuItems = [
   }
 ]
 
-export const componentMenuItems = [
+export const componentMenuItems: MenuItem[] = [
   {
     zh: '通用组件',
     en: 'Common Components',
