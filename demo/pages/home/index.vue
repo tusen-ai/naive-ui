@@ -34,7 +34,7 @@ export default defineComponent({
           intro2: '比较完整，主题可调，使用 TypeScript，快',
           intro3: '有点意思',
           intro4: '换个主题',
-          llms: '在用 AI 编程助手？把 llms.txt 交给它',
+          llms: '在用 Agent？把 llms.txt 交给它',
           llmsLink: '了解 LLMs 文档'
         },
         'en-US': {
@@ -43,7 +43,7 @@ export default defineComponent({
           intro2: 'Fairly Complete, Theme Customizable, Uses TypeScript, Fast',
           intro3: 'Kinda Interesting',
           intro4: 'Change Theme',
-          llms: 'Coding with AI? Give your assistant llms.txt',
+          llms: 'Using an agent? Give it llms.txt',
           llmsLink: 'About the LLMs docs'
         }
       })

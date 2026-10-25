@@ -2,7 +2,7 @@
 
 # LLMs
 
-文档也提供给大模型和 AI 编程助手使用的 Markdown 版本，遵循 [llms.txt](https://llmstxt.org) 规范。
+文档也提供给大模型和 Agent 使用的 Markdown 版本，遵循 [llms.txt](https://llmstxt.org) 规范。
 
 ## 文件
 
@@ -18,6 +18,6 @@
 
 每个页面标题旁边的按钮可以把页面复制为 Markdown、复制 Markdown 链接，或者直接打开。
 
-## 给 AI 助手用
+## 给 Agent 用
 
-把 `llms.txt` 的地址（`https://www.naiveui.com/zh-CN/llms.txt`）交给助手，让它按需读取需要的页面。`llms-full.txt` 包含所有示例的源码，体积较大，适合能索引整个文件的工具。
+把 `llms.txt` 的地址（`https://www.naiveui.com/zh-CN/llms.txt`）交给 Agent，让它按需读取需要的页面。`llms-full.txt` 包含所有示例的源码，体积较大，适合能索引整个文件的工具。

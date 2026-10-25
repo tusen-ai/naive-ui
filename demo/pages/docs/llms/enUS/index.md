@@ -2,7 +2,7 @@
 
 # LLMs
 
-The docs are also published as Markdown for LLMs and AI coding assistants, following [llms.txt](https://llmstxt.org).
+The docs are also published as Markdown for LLMs and agents, following [llms.txt](https://llmstxt.org).
 
 ## Files
 
@@ -18,6 +18,6 @@ Add `.md` to the address of any docs or component page, for example <n-a href="/
 
 The button next to each page title copies the page as Markdown, copies its Markdown link, or opens it.
 
-## With an AI assistant
+## With an agent
 
-Give the assistant the address of `llms.txt` (`https://www.naiveui.com/llms.txt`) and let it read the pages it needs. `llms-full.txt` holds the source of every demo, so it is large: use it with tools that index a whole file.
+Give the agent the address of `llms.txt` (`https://www.naiveui.com/llms.txt`) and let it read the pages it needs. `llms-full.txt` holds the source of every demo, so it is large: use it with tools that index a whole file.
