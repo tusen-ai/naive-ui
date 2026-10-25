@@ -1,3 +1,4 @@
+import type { Ref } from 'vue'
 import { useBreakpoint, useMemo } from 'vooks'
 import { inject, provide, reactive, toRef, watchEffect } from 'vue'
 
@@ -29,14 +30,14 @@ export function i18n(data: Record<string, Record<string, string>>) {
   }
   return {
     locale: toRef(localeReactive, 'locale'),
-    t(key) {
+    t(key: string) {
       const { locale } = localeReactive
       return data[locale][key]
     }
   }
 }
 
-i18n.provide = function (localeRef) {
+i18n.provide = function (localeRef: Ref<string>) {
   const localeReactive = reactive<{ locale: string }>({ locale: '' })
   watchEffect(() => {
     localeReactive.locale = localeRef.value

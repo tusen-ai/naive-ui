@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 import Changelog from '../../../../../CHANGELOG.zh-CN.md'
 
 export default {

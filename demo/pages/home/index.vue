@@ -59,7 +59,7 @@ export default defineComponent({
         light: {
           next: 'dark'
         }
-      }
+      } as const
     }
   },
   methods: {

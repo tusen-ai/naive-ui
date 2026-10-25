@@ -10,7 +10,7 @@ export default defineComponent({
   },
   setup(props) {
     return {
-      parameters: computed(() => getCodeSandboxParams(props.code))
+      parameters: computed(() => getCodeSandboxParams(props.code ?? ''))
     }
   }
 })

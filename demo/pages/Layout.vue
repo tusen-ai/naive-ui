@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { LayoutInst } from 'naive-ui'
 import { useMemo } from 'vooks'
 // Frame component for components & docs page
 import { computed, defineComponent, ref, toRef, watch } from 'vue'
@@ -15,7 +16,7 @@ export default defineComponent({
   },
   setup() {
     const route = useRoute()
-    const layoutInstRef = ref(null)
+    const layoutInstRef = ref<LayoutInst | null>(null)
     const docOptionsRef = useDocOptions()
     const componentOptionsRef = useComponentOptions()
     const optionsRef = computed(() =>
@@ -31,7 +32,7 @@ export default defineComponent({
       const langReg = /\/(zh-CN|en-US)/g
       // only lang change do not restore the scroll status
       if (value.replace(langReg, '') !== oldValue.replace(langReg, '')) {
-        layoutInstRef.value.scrollTo(0, 0)
+        layoutInstRef.value?.scrollTo(0, 0)
       }
     })
     const isMobileRef = useIsMobile()

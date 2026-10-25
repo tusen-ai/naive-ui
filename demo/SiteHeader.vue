@@ -1,4 +1,7 @@
 <script lang="ts">
+import type { PopoverInst } from 'naive-ui'
+import type { SiteMenuOption } from './store/menu-options'
+import type { ColorMode } from './utils/color-mode'
 import { MenuOutline } from '@vicons/ionicons5'
 import { useMessage, version } from 'naive-ui'
 import { computed, defineComponent, ref } from 'vue'
@@ -18,7 +21,7 @@ import { repoUrl } from './utils/github-url'
 import { findMenuValue } from './utils/route'
 
 // match substr
-function match(pattern, string) {
+function match(pattern: string, string: string): boolean {
   if (!pattern.length)
     return true
   if (!string.length)
@@ -71,8 +74,12 @@ export default defineComponent({
     const route = useRoute()
     const router = useRouter()
 
-    const mobilePopoverRef = ref(null)
+    const mobilePopoverRef = ref<PopoverInst | null>(null)
     const localeReg = /^\/[^/]+/
+    // The locale part of the path, e.g. `/zh-CN`
+    function getLocalePath(): string {
+      return localeReg.exec(route.path)?.[0] ?? ''
+    }
 
     // i18n
     const { t } = i18n(locales)
@@ -100,17 +107,17 @@ export default defineComponent({
         {
           key: 'home',
           label: t('home'),
-          path: localeReg.exec(route.path)[0]
+          path: getLocalePath()
         },
         {
           key: 'doc',
           label: t('doc'),
-          path: `${localeReg.exec(route.path)[0]}/docs/introduction`
+          path: `${getLocalePath()}/docs/introduction`
         },
         {
           key: 'component',
           label: t('component'),
-          path: `${localeReg.exec(route.path)[0]}/components/button`
+          path: `${getLocalePath()}/components/button`
         }
       ]
     })
@@ -144,18 +151,18 @@ export default defineComponent({
         {
           key: 'home',
           label: t('home'),
-          path: localeReg.exec(route.path)[0]
+          path: getLocalePath()
         },
         {
           key: 'doc',
           label: t('doc'),
           children: docOptionsRef.value,
-          path: `${localeReg.exec(route.path)[0]}/docs/introduction`
+          path: `${getLocalePath()}/docs/introduction`
         },
         {
           key: 'component',
           label: t('component'),
-          path: `${localeReg.exec(route.path)[0]}/components/button`,
+          path: `${getLocalePath()}/components/button`,
           children: componentOptionsRef.value
         },
         {
@@ -169,9 +176,12 @@ export default defineComponent({
         return 'home'
       return findMenuValue(mobileMenuOptionsRef.value, route.path)
     })
-    function handleUpdateMobileMenu(value, { path }) {
+    function handleUpdateMobileMenu(
+      value: string,
+      { path }: { path?: string }
+    ) {
       if (value.startsWith('theme:')) {
-        themePreferenceRef.value = value.slice('theme:'.length)
+        themePreferenceRef.value = value.slice('theme:'.length) as ColorMode
       }
       else if (value === 'locale') {
         if (localeNameRef.value === 'zh-CN') {
@@ -187,7 +197,7 @@ export default defineComponent({
       else {
         window.open(repoUrl, '_blank')
       }
-      mobilePopoverRef.value.setShow(false)
+      mobilePopoverRef.value?.setShow(false)
     }
 
     const localeLabelMap = {
@@ -205,7 +215,7 @@ export default defineComponent({
 
     // display mode
     const displayModeRef = useDisplayMode()
-    const displayModeLabelMap = {
+    const displayModeLabelMap: Record<string, string> = {
       common: 'Debug',
       debug: 'Prod'
     }
@@ -220,7 +230,7 @@ export default defineComponent({
 
     // config provider
     const configProviderNameRef = useConfigProviderName()
-    const cfgProviderLabelMapRef = computed(() => ({
+    const cfgProviderLabelMapRef = computed<Record<string, string>>(() => ({
       tusimple: t('defaultTheme'),
       default: t('tusimpleTheme')
     }))
@@ -245,11 +255,11 @@ export default defineComponent({
       //   }
       //   return item.key
       // }
-      function getSearchableContent(item) {
+      function getSearchableContent(item: SiteMenuOption): string {
         if (item.label) {
           return item.label + (item.extraString ? ` ${item.extraString}` : '')
         }
-        return item.key
+        return String(item.key)
       }
       if (!searchPatternRef.value)
         return []
@@ -270,7 +280,7 @@ export default defineComponent({
           value: item.path
         }))
     })
-    function handleSearch(value) {
+    function handleSearch(value: string) {
       router.push(value)
     }
 
@@ -282,7 +292,7 @@ export default defineComponent({
         message.info(t('alreadyHome'))
         return
       }
-      router.push(localeReg.exec(route.path)[0])
+      router.push(getLocalePath())
     }
 
     // responsive menu

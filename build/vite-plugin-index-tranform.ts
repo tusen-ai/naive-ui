@@ -4,9 +4,9 @@ import { env } from 'node:process'
 function transformIndexHtml(code: string): string {
   switch (env.NODE_ENV) {
     case 'production':
-      return code.replace(/__INDEX__/, 'demo/index.prod.js')
+      return code.replace(/__INDEX__/, 'demo/index.prod.ts')
     default:
-      return code.replace(/__INDEX__/, 'demo/index.dev.js')
+      return code.replace(/__INDEX__/, 'demo/index.dev.ts')
   }
 }
 

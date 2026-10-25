@@ -1,3 +1,7 @@
+import type { NDateLocale, NLocale } from 'naive-ui'
+import type { ComputedRef, WritableComputedRef } from 'vue'
+import type { RouteLocationNormalizedLoaded, Router } from 'vue-router'
+import type { Lang, SiteMenuOption } from './menu-options'
 import {
   darkTheme,
   dateEnUS,
@@ -17,12 +21,12 @@ import {
   createDocumentationMenuOptions
 } from './menu-options'
 
-let route = null
-let router = null
+// Set by initRouter before the site renders
+let route: RouteLocationNormalizedLoaded
+let router: Router
 // locale
-let localeNameRef = null
-// useMemo
-let dateLocaleRef = null
+let localeNameRef: WritableComputedRef<Lang>
+let dateLocaleRef: ComputedRef<NDateLocale>
 // theme
 // The theme is the reader's preference, not part of the page, so it lives in
 // localStorage rather than the URL
@@ -32,15 +36,18 @@ const { mode: themeModeRef, state: themeStateRef } = useColorMode({
 // The theme in effect, `light` or `dark`; setting it stores an explicit pick
 const themeNameRef = computed({
   get: () => themeStateRef.value,
-  set: (theme) => {
+  set: (theme: 'light' | 'dark') => {
     themeModeRef.value = theme
   }
 })
 
-export function initRouter(_router, _route) {
+export function initRouter(
+  _router: Router,
+  _route: RouteLocationNormalizedLoaded
+): void {
   route = _route
   router = _router
-  localeNameRef = useMemo({
+  localeNameRef = useMemo<Lang>({
     get() {
       return route.path.startsWith('/zh-CN') ? 'zh-CN' : 'en-US'
     },
@@ -48,7 +55,7 @@ export function initRouter(_router, _route) {
       router.push(changeLangInPath(route.fullPath, locale))
     }
   })
-  dateLocaleRef = useMemo(() => {
+  dateLocaleRef = useMemo<NDateLocale>(() => {
     return route.path.startsWith('/zh-CN') ? dateZhCN : dateEnUS
   })
 }
@@ -59,13 +66,13 @@ const displayModeRef = computed({
   get() {
     return _displayModeRef.value
   },
-  set(value) {
+  set(value: string) {
     _displayModeRef.value = value
     window.localStorage.setItem('mode', value)
   }
 })
 
-const localeRef = computed(() => {
+const localeRef = computed<NLocale>(() => {
   return localeNameRef.value === 'zh-CN' ? zhCN : enUS
 })
 
@@ -87,19 +94,17 @@ const configProviderRef = computed(() => {
 // options
 const docOptionsRef = computed(() =>
   createDocumentationMenuOptions({
-    lang: localeNameRef.value,
-    mode: displayModeRef.value
+    lang: localeNameRef.value
   })
 )
 const componentOptionsRef = computed(() =>
   createComponentMenuOptions({
-    lang: localeNameRef.value,
-    mode: displayModeRef.value
+    lang: localeNameRef.value
   })
 )
 const flattenedDocOptionsRef = computed(() => {
-  const flattenedItems = []
-  const traverse = (items) => {
+  const flattenedItems: SiteMenuOption[] = []
+  const traverse = (items?: SiteMenuOption[]): void => {
     if (!items)
       return
     items.forEach((item) => {
@@ -129,12 +134,12 @@ export function siteSetup() {
   }
 }
 
-function changeLangInPath(path, lang) {
+function changeLangInPath(path: string, lang: Lang): string {
   // The home page is the bare locale (`/zh-CN`), so the slash is optional
   return path.replace(/^\/(?:zh-CN|en-US)(?=\/|$)/, `/${lang}`)
 }
 
-export function push(partialPath) {
+export function push(partialPath: string): void {
   const { fullPath } = route
   router.push(fullPath.replace(/(^\/[^/]+)((\/.*)|$)/, `$1${partialPath}`))
 }

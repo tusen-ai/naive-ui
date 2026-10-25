@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { TooltipInst } from 'naive-ui'
 import { CodeOutline } from '@vicons/ionicons5'
 import { computed, defineComponent, nextTick, ref, watch } from 'vue'
 import { useDisplayMode } from '../store'
@@ -50,10 +51,10 @@ export default defineComponent({
     })
     const showCodeRef = ref(false)
     const showTsRef = ref(props.languageType === 'ts')
-    const expandCodeButtonRef = ref(null)
+    const expandCodeButtonRef = ref<TooltipInst | null>(null)
     watch(showCodeRef, () => {
       nextTick(() => {
-        expandCodeButtonRef.value.syncPosition()
+        expandCodeButtonRef.value?.syncPosition()
       })
     })
     return {
@@ -184,7 +185,7 @@ export default defineComponent({
         type="segment"
         style="padding: 12px 24px 0 24px"
         :value="showTs ? 'ts' : 'js'"
-        @update:value="($e) => (showTs = $e === 'ts')"
+        @update:value="($e: string) => (showTs = $e === 'ts')"
       >
         <n-tab name="ts">
           TypeScript

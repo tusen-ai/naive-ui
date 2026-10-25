@@ -1,9 +1,16 @@
+import type { ComputedRef, WritableComputedRef } from 'vue'
 import { useOsTheme } from 'naive-ui'
 import { computed, nextTick, ref, watchEffect } from 'vue'
 
-const MODES = ['light', 'dark', 'auto']
+export type ColorMode = 'light' | 'dark' | 'auto'
 
-function readStorage(key) {
+const MODES: ColorMode[] = ['light', 'dark', 'auto']
+
+function isColorMode(value: string | null): value is ColorMode {
+  return MODES.includes(value as ColorMode)
+}
+
+function readStorage(key: string): string | null {
   try {
     return localStorage.getItem(key)
   }
@@ -12,7 +19,7 @@ function readStorage(key) {
   }
 }
 
-function writeStorage(key, value) {
+function writeStorage(key: string, value: string | null): void {
   try {
     if (value === null)
       localStorage.removeItem(key)
@@ -23,7 +30,7 @@ function writeStorage(key, value) {
 
 // Turn transitions off while the colors change, so the page switches in one
 // step instead of every component fading on its own
-async function withoutTransitions(change) {
+async function withoutTransitions(change: () => void): Promise<void> {
   const style = document.createElement('style')
   style.textContent = '*,*::before,*::after{transition:none!important}'
   document.head.appendChild(style)
@@ -41,10 +48,13 @@ async function withoutTransitions(change) {
  * kept in step across tabs, and `color-scheme` on <html> follows `state`.
  * index.html applies the same rule before the first paint.
  */
-export function useColorMode({ storageKey }) {
-  const read = () => {
+export function useColorMode({ storageKey }: { storageKey: string }): {
+  mode: WritableComputedRef<ColorMode>
+  state: ComputedRef<'light' | 'dark'>
+} {
+  const read = (): ColorMode => {
     const value = readStorage(storageKey)
-    return MODES.includes(value) ? value : 'auto'
+    return isColorMode(value) ? value : 'auto'
   }
   const storedRef = ref(read())
   const osThemeRef = useOsTheme()
@@ -54,14 +64,14 @@ export function useColorMode({ storageKey }) {
       withoutTransitions(() => (storedRef.value = read()))
   })
 
-  const mode = computed({
+  const mode = computed<ColorMode>({
     get: () => storedRef.value,
-    set: (value) => {
+    set: (value: ColorMode) => {
       writeStorage(storageKey, value === 'auto' ? null : value)
       withoutTransitions(() => (storedRef.value = value))
     }
   })
-  const state = computed(() =>
+  const state = computed<'light' | 'dark'>(() =>
     storedRef.value === 'auto' ? (osThemeRef.value ?? 'light') : storedRef.value
   )
 

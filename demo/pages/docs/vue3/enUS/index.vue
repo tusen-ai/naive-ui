@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 import Vue3 from '../../../../../vue3.md'
 
 export default {
