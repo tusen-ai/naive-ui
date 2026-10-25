@@ -69,6 +69,10 @@ export const enDocRoutes = [
     component: () => import('../pages/docs/common-issues/enUS/index.md')
   },
   {
+    path: 'llms',
+    component: () => import('../pages/docs/llms/enUS/index.md')
+  },
+  {
     path: 'fonts',
     component: () => import('../pages/docs/fonts/enUS/index.md')
   },
@@ -160,6 +164,10 @@ export const zhDocRoutes = [
   {
     path: 'common-issues',
     component: () => import('../pages/docs/common-issues/zhCN/index.md')
+  },
+  {
+    path: 'llms',
+    component: () => import('../pages/docs/llms/zhCN/index.md')
   },
   {
     path: 'fonts',

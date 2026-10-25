@@ -26,6 +26,7 @@ export default defineComponent({
           tusimple: '图森未来',
           icons: '图标库',
           libraries: '社区精选资源',
+          llms: 'LLMs（llms.txt）',
           dingTalk: '钉钉',
           dingTalkGroupChat: '钉钉交流群',
           memberLimitReached: '（已满）',
@@ -45,6 +46,7 @@ export default defineComponent({
           tusimple: 'TuSimple',
           icons: 'Icon Library',
           libraries: 'Third-Party Libraries',
+          llms: 'LLMs (llms.txt)',
           dingTalk: 'DingTalk',
           dingTalkGroupChat: 'DingTalk Group Chat',
           memberLimitReached: '(Member limit reached)',
@@ -81,6 +83,9 @@ export default defineComponent({
         </n-button>
         <n-button text @click="push('/docs/community')">
           {{ t('libraries') }}
+        </n-button>
+        <n-button text @click="push('/docs/llms')">
+          {{ t('llms') }}
         </n-button>
       </div>
       <div class="footer-links-col">

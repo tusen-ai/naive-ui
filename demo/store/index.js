@@ -130,8 +130,8 @@ export function siteSetup() {
 }
 
 function changeLangInPath(path, lang) {
-  const langReg = /^\/(zh-CN|en-US)\//
-  return path.replace(langReg, `/${lang}/`)
+  // The home page is the bare locale (`/zh-CN`), so the slash is optional
+  return path.replace(/^\/(?:zh-CN|en-US)(?=\/|$)/, `/${lang}`)
 }
 
 export function push(partialPath) {
