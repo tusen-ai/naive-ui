@@ -22,29 +22,19 @@
     />
     <title>Naive UI</title>
     <script>
-      // Apply the reader's theme before the first paint so a reload doesn't
-      // flash light on a dark page. Mirrors demo/store/index.js.
-      ;(function () {
-        var pref
+      // Set the color scheme before the first paint, so a reload doesn't flash
+      // white on a dark page. Same rule as the theme in demo/store/index.js.
+      {
+        let saved
         try {
-          pref = localStorage.getItem('naive-ui-theme')
-        } catch (e) {}
-        var theme =
-          pref === 'light' || pref === 'dark'
-            ? pref
-            : window.matchMedia('(prefers-color-scheme: dark)').matches
-              ? 'dark'
-              : 'light'
-        var root = document.documentElement
-        root.dataset.theme = theme
-        root.style.colorScheme = theme
-      })()
-    </script>
-    <style>
-      html[data-theme='dark'] {
-        background-color: #101014;
+          saved = localStorage.getItem('naive-ui-theme')
+        } catch {}
+        const osTheme = matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light'
+        document.documentElement.style.colorScheme = saved ?? osTheme
       }
-    </style>
+    </script>
     <meta name="naive-ui-style" />
     <meta name="vueuc-style" />
     <link

@@ -67,11 +67,10 @@ const themeNameRef = computed({
   },
   set: setThemePreference
 })
-// Mirror the resolved theme on <html>, as index.html does before Vue starts
+// Keep the browser's own colors (canvas, scrollbars) in step, as index.html
+// does before Vue starts
 watchEffect(() => {
-  const root = document.documentElement
-  root.dataset.theme = themeNameRef.value
-  root.style.colorScheme = themeNameRef.value
+  document.documentElement.style.colorScheme = themeNameRef.value
 })
 
 export function initRouter(_router, _route) {
