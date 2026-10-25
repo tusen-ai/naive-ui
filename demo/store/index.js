@@ -4,12 +4,12 @@ import {
   dateZhCN,
   enUS,
   NConfigProvider,
-  useOsTheme,
   zhCN
 } from 'naive-ui'
 import { useMemo } from 'vooks'
-import { computed, ref, watchEffect } from 'vue'
+import { computed, ref } from 'vue'
 import { TsConfigProvider } from '../../themes/tusimple/src'
+import { useColorMode } from '../utils/color-mode'
 import { i18n, useIsMobile } from '../utils/composables'
 import hljs from './hljs'
 import {
@@ -25,52 +25,16 @@ let localeNameRef = null
 let dateLocaleRef = null
 // theme
 // The theme is the reader's preference, not part of the page, so it lives in
-// localStorage rather than the URL. `os-theme` (the default) follows the OS.
-// index.html applies the same preference before the first paint.
-const THEME_STORAGE_KEY = 'naive-ui-theme'
-const osThemeRef = useOsTheme()
-function readThemePreference() {
-  try {
-    const value = window.localStorage.getItem(THEME_STORAGE_KEY)
-    return value === 'light' || value === 'dark' ? value : 'os-theme'
-  }
-  catch {
-    return 'os-theme'
-  }
-}
-const themePreferenceRef = ref(readThemePreference())
-// Keep other tabs in step when the preference changes in one of them
-window.addEventListener('storage', (e) => {
-  if (e.key === THEME_STORAGE_KEY || e.key === null) {
-    themePreferenceRef.value = readThemePreference()
-  }
+// localStorage rather than the URL
+const { mode: themeModeRef, state: themeStateRef } = useColorMode({
+  storageKey: 'naive-ui-theme'
 })
-function setThemePreference(theme) {
-  themePreferenceRef.value = theme
-  try {
-    if (theme === 'os-theme')
-      window.localStorage.removeItem(THEME_STORAGE_KEY)
-    else window.localStorage.setItem(THEME_STORAGE_KEY, theme)
-  }
-  catch {}
-}
-// What the reader picked: `light`, `dark` or `os-theme`
-const themePreferenceModelRef = computed({
-  get: () => themePreferenceRef.value,
-  set: setThemePreference
-})
-// The theme in effect, `light` or `dark`; setting it stores the preference
+// The theme in effect, `light` or `dark`; setting it stores an explicit pick
 const themeNameRef = computed({
-  get() {
-    const { value } = themePreferenceRef
-    return value === 'os-theme' ? (osThemeRef.value ?? 'light') : value
-  },
-  set: setThemePreference
-})
-// Keep the browser's own colors (canvas, scrollbars) in step, as index.html
-// does before Vue starts
-watchEffect(() => {
-  document.documentElement.style.colorScheme = themeNameRef.value
+  get: () => themeStateRef.value,
+  set: (theme) => {
+    themeModeRef.value = theme
+  }
 })
 
 export function initRouter(_router, _route) {
@@ -187,8 +151,8 @@ export function useThemeName() {
   return themeNameRef
 }
 
-export function useThemePreference() {
-  return themePreferenceModelRef
+export function useThemeMode() {
+  return themeModeRef
 }
 
 export function useDocOptions() {

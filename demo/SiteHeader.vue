@@ -10,7 +10,7 @@ import {
   useDocOptions,
   useFlattenedDocOptions,
   useLocaleName,
-  useThemePreference
+  useThemeMode
 } from './store'
 import { renderMenuLabel } from './store/menu-options'
 import { i18n, useIsMobile, useIsTablet } from './utils/composables'
@@ -78,11 +78,11 @@ export default defineComponent({
     const { t } = i18n(locales)
 
     // theme
-    const themePreferenceRef = useThemePreference()
+    const themePreferenceRef = useThemeMode()
     const themeOptionsRef = computed(() => [
       { label: t('light'), value: 'light' },
       { label: t('dark'), value: 'dark' },
-      { label: t('osTheme'), value: 'os-theme' }
+      { label: t('osTheme'), value: 'auto' }
     ])
     const themePreferenceLabelRef = computed(
       () =>
