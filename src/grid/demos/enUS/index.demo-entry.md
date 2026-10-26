@@ -1,6 +1,8 @@
-# Grid
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# Grid
 
 Based on CSS Grid. Responsive. Keep away from IE.
 

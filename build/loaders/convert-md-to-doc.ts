@@ -1,12 +1,17 @@
-import type { Token, Tokens } from 'marked'
+import type { Html, Root, RootContent } from 'mdast'
 import path from 'node:path'
 import fse from 'fs-extra'
 import camelCase from 'lodash/camelCase'
-import { marked } from 'marked'
-import { createRenderer } from './md-renderer'
+import {
+  getHeadingId,
+  getPageConfig,
+  getText,
+  isHeading,
+  parseMarkdown,
+  slugHeadings
+} from '../utils/markdown'
+import { renderMarkdown } from './md-renderer'
 import projectPath from './project-path'
-
-const mdRenderer = createRenderer()
 
 interface DemoInfo {
   id: string
@@ -97,62 +102,47 @@ function genAnchorTemplate(
   `
 }
 
-function genDemosApiAnchorTemplate(
-  tokens: Token[]
-): (DemoInfo | { id: string, title: string, debug: boolean })[] {
-  const api: DemoInfo[] = [
-    {
-      id: 'API',
-      title: 'API',
-      debug: false
-    }
-  ]
-  return api.concat(
-    tokens
-      .filter(
-        (token): token is Tokens.Heading =>
-          token.type === 'heading' && token.depth === 3
-      )
-      .map(token => ({
-        id: token.text.replace(/ /g, '-'),
-        title: token.text,
-        debug: false
-      }))
-  )
+interface AnchorLink {
+  id: string
+  title: string
+  debug: boolean
 }
 
-function genDemosAnchorTemplate(
-  demoInfos: DemoInfo[],
-  hasApi: boolean,
-  tokens: Token[]
-): string {
-  const links = (
-    hasApi
-      ? demoInfos.concat(genDemosApiAnchorTemplate(tokens) as DemoInfo[])
-      : demoInfos
-  ).map(
-    ({ id, title, debug }) => `<n-anchor-link
+function getHeadingLinks(tree: Root, depth: number): AnchorLink[] {
+  return tree.children
+    .filter(node => isHeading(node, depth))
+    .map(heading => ({
+      id: getHeadingId(heading),
+      title: getText(heading),
+      debug: false
+    }))
+}
+
+function genAnchorLinks(links: AnchorLink[]): string {
+  return links
+    .map(
+      ({ id, title, debug }) => `<n-anchor-link
       v-if="(displayMode === 'debug') || ${!debug}"
       title="${title}"
       href="#${id}"
     />`
-  )
-  return genAnchorTemplate(links.join('\n'), {
-    ignoreGap: hasApi
-  })
+    )
+    .join('\n')
 }
 
-function genPageAnchorTemplate(tokens: Token[]): string {
-  const titles = tokens
-    .filter(
-      (token): token is Tokens.Heading =>
-        token.type === 'heading' && token.depth === 2
-    )
-    .map(token => token.text)
-  const links = titles.map((title) => {
-    const href = title.replace(/ /g, '-')
-    return `<n-anchor-link title="${title}" href="#${href}"/>`
-  })
+// The demos, then the API and its parts
+function genDemosAnchorTemplate(demoInfos: DemoInfo[], tree: Root): string {
+  const api = getHeadingLinks(tree, 2).find(link => link.title === 'API')
+  const links = api
+    ? [...demoInfos, api, ...getHeadingLinks(tree, 3)]
+    : demoInfos
+  return genAnchorTemplate(genAnchorLinks(links), { ignoreGap: !!api })
+}
+
+function genPageAnchorTemplate(tree: Root): string {
+  const links = getHeadingLinks(tree, 2).map(
+    ({ id, title }) => `<n-anchor-link title="${title}" href="#${id}"/>`
+  )
   return genAnchorTemplate(links.join('\n'), { ignoreGap: true })
 }
 
@@ -210,75 +200,62 @@ export default {
   return script
 }
 
+function parseComponents(literal: string): ComponentInfo[] {
+  return literal.split('\n').map((component) => {
+    const [ids, importStmt] = component.split(':')
+    if (!ids.trim())
+      throw new Error('No component id')
+    if (!importStmt.trim())
+      throw new Error('No component source url')
+    return {
+      ids: ids.split(',').map(id => id.trim()),
+      importStmt: importStmt.trim()
+    }
+  })
+}
+
+function html(value: string): Html {
+  return { type: 'html', value }
+}
+
 export async function convertMd2ComponentDocumentation(
   text: string,
   url: string,
   env: string = 'development'
 ): Promise<string> {
-  const forceShowAnchor = !!~text.search('<!--anchor:on-->')
-  const colSpan = ~text.search('<!--single-column-->') ? 1 : 2
-  const hasApi = !!~text.search('## API')
-  const tokens = marked.lexer(text)
-  // resolve external components
-  const componentsIndex = tokens.findIndex(
-    token =>
-      token.type === 'code' && (token as Tokens.Code).lang === 'component'
-  )
+  const tree = parseMarkdown(text)
+  const config = getPageConfig(tree)
+  slugHeadings(tree)
   let components: ComponentInfo[] = []
-  if (~componentsIndex) {
-    const token = tokens[componentsIndex] as Tokens.Code
-    components = token.text
-      .split('\n')
-      .map((component) => {
-        const [ids, importStmt] = component.split(':')
-        if (!ids.trim())
-          throw new Error('No component id')
-        if (!importStmt.trim())
-          throw new Error('No component source url')
-        return {
-          ids: ids.split(',').map(id => id.trim()),
-          importStmt: importStmt.trim()
-        }
-      })
-      .filter(({ ids, importStmt }) => ids && importStmt)
-    tokens.splice(componentsIndex, 1)
-  }
-  // add edit on github button on title
-  const titleIndex = tokens.findIndex(
-    token => token.type === 'heading' && token.depth === 1
-  )
-  if (titleIndex > -1) {
-    const titleText = JSON.stringify(
-      (tokens[titleIndex] as Tokens.Heading).text
-    )
-    const btnTemplate = `<edit-on-github-header relative-url="${url}" text=${titleText}><\/edit-on-github-header>`
-    tokens.splice(titleIndex, 1, {
-      type: 'html',
-      pre: false,
-      text: btnTemplate
-    } as Tokens.HTML)
-  }
-  // resolve demos, debug demos are removed from production build
-  const demosIndex = tokens.findIndex(
-    token => token.type === 'code' && (token as Tokens.Code).lang === 'demo'
-  )
   let demoInfos: DemoInfo[] = []
-  if (~demosIndex) {
-    demoInfos = await resolveDemoInfos(
-      (tokens[demosIndex] as Tokens.Code).text,
-      url,
-      env
-    )
-    tokens.splice(demosIndex, 1, {
-      type: 'html',
-      pre: false,
-      text: genDemosTemplate(demoInfos, colSpan)
-    } as any)
+  let hasTitle = false
+  const children: RootContent[] = []
+  for (const node of tree.children) {
+    // External components used in the page
+    if (node.type === 'code' && node.lang === 'component') {
+      components = parseComponents(node.value)
+    }
+    // Debug demos are removed from production build
+    else if (node.type === 'code' && node.lang === 'demo') {
+      demoInfos = await resolveDemoInfos(node.value, url, env)
+      children.push(html(genDemosTemplate(demoInfos, config.demoColumns ?? 2)))
+    }
+    // The title comes with an edit on github button
+    else if (isHeading(node, 1) && !hasTitle) {
+      hasTitle = true
+      children.push(
+        html(
+          `<edit-on-github-header relative-url="${url}" text=${JSON.stringify(
+            getText(node)
+          )} id="${getHeadingId(node)}"></edit-on-github-header>`
+        )
+      )
+    }
+    else {
+      children.push(node)
+    }
   }
-  const docMainTemplate = marked.parser(tokens, {
-    gfm: true,
-    renderer: mdRenderer
-  })
+  const docMainTemplate = renderMarkdown({ ...tree, children })
   // generate page
   const docTemplate = `
 <template>
@@ -292,12 +269,12 @@ export async function convertMd2ComponentDocumentation(
     <div style="width: 192px;" v-if="showAnchor">
       ${
         demoInfos.length
-          ? genDemosAnchorTemplate(demoInfos, hasApi, tokens)
-          : genPageAnchorTemplate(tokens)
+          ? genDemosAnchorTemplate(demoInfos, tree)
+          : genPageAnchorTemplate(tree)
       }
     </div>
   </div>
 </template>`
-  const docScript = await genScript(demoInfos, components, url, forceShowAnchor)
+  const docScript = genScript(demoInfos, components, url, !!config.anchor)
   return `${docTemplate}\n\n${docScript}`
 }

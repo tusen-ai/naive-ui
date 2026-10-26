@@ -1,6 +1,8 @@
-# 数据表格 Data Table
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# 数据表格 Data Table
 
 数据表格用来显示一些格式化信息。
 
@@ -93,7 +95,7 @@ empty-debug.vue
 | default-expanded-row-keys | `Array<string \| number>` | `[]` | 默认展开行的 key 值 |  |
 | default-expand-all | `boolean` | `false` | 是否默认展开全部可展开的行，不可在异步展开行时使用 | 2.30.4 |
 | expanded-row-keys | `Array<string \| number>` | `undefined` | 展开行的 key 值 |  |
-| filter-icon-popover-props | `PopoverProps` | `{ trigger: click, placement: bottom }` | 过滤按钮的 Popover 属性，属性参考 [Popover props](popover#Popover-Props) | 2.39.0 |
+| filter-icon-popover-props | `PopoverProps` | `{ trigger: click, placement: bottom }` | 过滤按钮的 Popover 属性，属性参考 [Popover props](popover#popover-props) | 2.39.0 |
 | flex-height | `boolean` | `false` | 是否让表格主体的高度自动适应整个表格区域的高度，打开这个选项会让 `table-layout` 始终为 `'fixed'` |  |
 | get-csv-cell | `(value: any, row: object, col: DataTableBaseColumn) => string` | `undefined` | 获取 CSV 的单元格数据 | 2.40.2 |
 | get-csv-header | `(cols: Array<DataTableColumn>) => string` | `undefined` | 获取 CSV 的 header | 2.40.2 |
@@ -105,7 +107,7 @@ empty-debug.vue
 | min-height | `number \| string` | `undefined` | 表格内容的最低高度，可以是 CSS 属性值 |  |
 | min-row-height | `number` | `28` | 在开启 `virtual-scroll` 或 `virtual-scroll-x` 的情况下，每一行的最小高度，所有的行的高度必须比这个值更大 | 2.40.0 |
 | paginate-single-page | `boolean` | `true` | 当表格数据只有一页时是否显示分页面 | 2.28.0 |
-| pagination | `false \| object` | `false` | 属性参考 [Pagination props](pagination#Pagination-Props) |  |
+| pagination | `false \| object` | `false` | 属性参考 [Pagination props](pagination#pagination-props) |  |
 | pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | 过滤操作后页面的状态，`'first'` 为回到首页，`'current'` 为停留在当前页 | 2.28.3 |
 | remote | `boolean` | `false` | 表格是否自动分页数据，在异步的状况下你可能需要把它设为 `true` |  |
 | render-cell | `(value: any, rowData: object, column: DataTableBaseColumn) => VNodeChild` | `undefined` | 自定义单元格渲染，优先级低于列的 `render` | 2.30.5 |
@@ -114,14 +116,14 @@ empty-debug.vue
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | 通过行数据创建行的 key（如果你不想给每一行加上 key） |  |
 | row-props | `(rowData: object, rowIndex : number) => HTMLAttributes` | `undefined` | 自定义行属性 |  |
 | scroll-x | `number \| string` | `undefined` | 表格内容的横向宽度，如果列被水平固定了，则需要设定它 |  |
-| scrollbar-props | `ScrollbarProps` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props)，`DataTable` 中已存在 `on-scroll` 属性，此处 `on-scroll` 属性不生效 |  |
+| scrollbar-props | `ScrollbarProps` | `undefined` | 属性参考 [Scrollbar props](scrollbar#scrollbar-props)，`DataTable` 中已存在 `on-scroll` 属性，此处 `on-scroll` 属性不生效 |  |
 | single-column | `boolean` | `false` | 是否不设定行的分割线，当参数为`true`时，则单元格没有下边线 |  |
 | single-line | `boolean` | `true` | 是否不设定列的分割线，当参数值为 `true` 时，则单元格没有右边线 |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | 表格的尺寸 |  |
 | spin-props | `{ strokeWidth?: number, stroke?: string, scale?: number, radius?: number }` | `undefined` | 表格 spin 的属性 | 2.34.0 |
 | sticky-expanded-rows | `boolean` | `false` | 展开行是否不随表格横向滚动 | 2.32.2 |
 | striped | `boolean` | `false` | 是否使用斑马线条纹 |  |
-| summary | `DataTableCreateSummary` | `undefined` | 表格总结栏的数据，类型见 <n-a href="#DataTableCreateSummary-Type">DataTableCreateSummary Type</n-a> |  |
+| summary | `DataTableCreateSummary` | `undefined` | 表格总结栏的数据，类型见 <n-a href="#datatablecreatesummary-type">DataTableCreateSummary Type</n-a> |  |
 | summary-placement | `'top' \| 'bottom'` | `'bottom'` | 总结栏的位置 | 2.33.3 |
 | table-layout | `'auto' \| 'fixed'` | `'auto'` | 表格的 `table-layout` 样式属性，在设定 `ellipsis` 或 `max-height` 的情况下固定为 `'fixed'` |  |
 | virtual-scroll | `boolean` | `false` | 是否开启虚拟滚动，应对大规模数据，开启前请设定好 `max-height`。当 `virtual-scroll` 为 `true` 时，`rowSpan` 将不生效 |  |
@@ -237,7 +239,7 @@ type DataTableCreateSummary = (pageData: RowData[]) =>
 | getFilteredAndSortedData | `() => RowData[]` | 获取 filter 和 sorter 应用后的全部行数据，不含 pagination；`remote` 模式下仅基于当前 `data` 属性 | 2.45.0 |
 | filters | `(filters: DataTableFilterState \| null) => void` | 设定表格当前的过滤器 |  |
 | page | `(page: number) => void` | 手动设置 page |  |
-| scrollTo | `DataTableScrollTo` | 滚动内容，类型见 <n-a href="#DataTableScrollTo-Type">DataTableScrollTo Type</n-a> | 2.45.0 |
+| scrollTo | `DataTableScrollTo` | 滚动内容，类型见 <n-a href="#datatablescrollto-type">DataTableScrollTo Type</n-a> | 2.45.0 |
 | sort | `(columnKey: string \| number \| null, order: 'ascend' \| 'descend' \| false) => void` | 设定表格的排序状态 |  |
 
 ### DataTable Slots

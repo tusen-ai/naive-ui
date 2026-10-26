@@ -1,8 +1,10 @@
+---
+demoColumns: 1
+---
+
 # List
 
 It is hard to make it looks elegant. However things should be done.
-
-<!--single-column-->
 
 ## Demos
 

@@ -1,12 +1,14 @@
-# Layout
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# Layout
 
 Layout is for layout.
 
 The component is a bit complicated to use. But like a manual gear car, it worths a shot.
 
-If you are use version before v2.3.0, you may want to know about <n-a href="#Changes-After-v2.3.0">Changes After v2.3.0</n-a>.
+If you are use version before v2.3.0, you may want to know about <n-a href="#changes-after-v230">Changes After v2.3.0</n-a>.
 
 ## Demos
 
@@ -36,7 +38,7 @@ scroll-to.vue
 | has-sider | `boolean` | `false` | Whether the component has sider inside. If so it must be `true`. |  |
 | native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on itself. If set to `false`, layout will use a naive-ui style scrollbar for content. |  |
 | position | `'static' \| 'absolute'` | `'static'` | `static` position will make it css position set to `static`. `absolute` position will make it css position set to `absolute` and `left`, `right`, `top`, `bottom` to `0`. `absolute` position is very useful when you want to make content scroll in a fixed container or make the whole page's layout in a fixed position. You may need to change the style of the component to make it display as you expect. |  |
-| scrollbar-props | `ScrollbarProps` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props). |  |
+| scrollbar-props | `ScrollbarProps` | `undefined` | See [Scrollbar props](scrollbar#scrollbar-props). |  |
 | sider-placement | `'left' \| 'right'` | `left` | The sidebar is displayed on the left or the right side. |  |
 | on-scroll | `(e: Event) => void` | `undefined` | Callback function when the content scroll. |  |
 
@@ -72,7 +74,7 @@ scroll-to.vue
 | inverted | `boolean` | `false` | Whether to use inverted background. |  |
 | native-scrollbar | `boolean` | `true` | Whether to use native scrollbar on itself. If set to `false`, sider will use a naive-ui style scrollbar for content. |  |
 | position | `'static' \| 'absolute'` | `'static'` | `static` position will make it css position set to `static`. `absolute` position will make it css position set to `absolute` and `left`, `top`, `bottom` to `0`. `absolute` position is very useful when you want to make content scroll in a fixed container or make the whole page's layout in a fixed position. You may need to change the style of the component to make it as you expect. |  |
-| scrollbar-props | `ScrollbarProps` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props). |  |
+| scrollbar-props | `ScrollbarProps` | `undefined` | See [Scrollbar props](scrollbar#scrollbar-props). |  |
 | show-collapsed-content | `boolean` | `true` | Whether to show content in sider after it is collapsed. |  |
 | show-trigger | `boolean \| 'bar' \| 'arrow-circle'` | `false` | Whether to show the built-in trigger button on sider. |  |
 | trigger-class | `string` | `undefined` | Trigger class. | 2.36.0 |

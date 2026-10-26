@@ -1,6 +1,8 @@
-# Log
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# Log
 
 If you have some logs to show, use log.
 

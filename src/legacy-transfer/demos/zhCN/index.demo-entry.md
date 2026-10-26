@@ -1,6 +1,8 @@
-# 旧版穿梭框 Legacy Transfer
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# 旧版穿梭框 Legacy Transfer
 
 <n-alert title="警告" type="warning" :bordered="false">
   这个穿梭框组件已经被废弃，不会迭代任何新的功能，并将在下一个大版本中彻底移除。推荐使用新的 <router-link to="transfer" custom v-slot="{ href, navigate }">

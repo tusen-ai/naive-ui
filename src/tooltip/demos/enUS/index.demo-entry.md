@@ -17,8 +17,8 @@ arrow.vue
 
 ### Tooltip Props
 
-See [Popover Props](popover#Popover-Props)
+See [Popover Props](popover#popover-props)
 
 ### Tooltip Slots
 
-See [Popover Slots](popover#Popover-Slots)
+See [Popover Slots](popover#popover-slots)

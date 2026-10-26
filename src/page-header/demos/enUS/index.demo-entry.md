@@ -1,4 +1,6 @@
-<!--single-column-->
+---
+demoColumns: 1
+---
 
 # PageHeader
 

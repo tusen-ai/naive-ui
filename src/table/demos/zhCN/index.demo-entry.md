@@ -1,6 +1,8 @@
-# 表格 Table
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# 表格 Table
 
 如果你只想画点简单的表格，用它。需要渲染数据请看[数据表格 Data Table](data-table)。
 

@@ -20,18 +20,18 @@ slot.vue
 | --- | --- | --- | --- | --- |
 | multiple | `boolean` | `false` | Whether to select multiple values. |  |
 | node-props | `(option: SelectOption \| SelectGroupOption) => object` | `undefined` | Option's DOM attrs generator. | 2.30.4 |
-| options | `Array<SelectOption \| SelectGroupOption>` | `[]` | For details of configuration options, see [Select](select#SelectOption-Properties) |  |
+| options | `Array<SelectOption \| SelectGroupOption>` | `[]` | For details of configuration options, see [Select](select#selectoption-properties) |  |
 | render-label | `(option: SelectOption \| SelectGroupOption) => VNodeChild` | `undefined` | Render function of all the options. |  |
 | scrollable | `boolean` | `false` | Whether the select menu is scrollable. |  |
-| scrollbar-props | `ScrollbarProps` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props) | 2.44.0 |
+| scrollbar-props | `ScrollbarProps` | `undefined` | See [Scrollbar props](scrollbar#scrollbar-props) | 2.44.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Size of the Popselect. |  |
 | value | `string \| number \| Array<string \| number> \| null` | `null` | Value in controlled mode. |  |
 | virtual-scroll | `boolean` | `false` | Whether to enable virtual scrolling. | 2.30.4 |
 | on-update:value | `(value: string \| number \| Array<string \| number> \| null, option: SelectBaseOption \| null \| Array<SelectBaseOption>) => void` | `undefined` | Callback of value updating. |  |
 
-For SelectOption & SelectGroupOption, see [Select](select#SelectOption-Properties)
+For SelectOption & SelectGroupOption, see [Select](select#selectoption-properties)
 
-For other props, see [Popover](popover#Popover-Props)
+For other props, see [Popover](popover#popover-props)
 
 ### Popselect Slots
 

@@ -123,11 +123,11 @@ mask-click-debug.vue
 
 ### Modal（Card 预设）Props
 
-参考 [Card props](card#Card-Props)
+参考 [Card props](card#card-props)
 
 ### Modal（Dialog 预设）Props
 
-参考 [Dialog props](dialog#Dialog-Props)
+参考 [Dialog props](dialog#dialog-props)
 
 ### Modal（无预设）Slots
 
@@ -137,13 +137,13 @@ mask-click-debug.vue
 
 ### Modal（Card 预设）Slots
 
-参考 [Card slots](card#Card-Slots)
+参考 [Card slots](card#card-slots)
 
 注意，`default` slot 参数类型为 `(props: { draggableClass: string })`
 
 ### Modal（Dialog 预设）Slots
 
-参考 [Dialog slots](dialog#Dialog-Slots)
+参考 [Dialog slots](dialog#dialog-slots)
 
 注意，`default` slot 参数类型为 `(props: { draggableClass: string })`
 

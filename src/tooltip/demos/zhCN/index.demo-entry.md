@@ -18,8 +18,8 @@ rtl-debug.vue
 
 ### Tooltip Props
 
-参考 [Popover Props](popover#Popover-Props)
+参考 [Popover Props](popover#popover-props)
 
 ### Tooltip Slots
 
-参考 [Popover Slots](popover#Popover-Slots)
+参考 [Popover Slots](popover#popover-slots)

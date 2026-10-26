@@ -18,5 +18,5 @@ chat.vue
 | 名称 | 类型 | 默认值 | 说明 | 版本 |
 | --- | --- | --- | --- | --- |
 | distance | `number` | `0` | 触发加载的距离阈值 | 2.38.2 |
-| scrollbar-props | `Object` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props) | 2.38.2 |
+| scrollbar-props | `Object` | `undefined` | 属性参考 [Scrollbar props](scrollbar#scrollbar-props) | 2.38.2 |
 | on-load | `() => Promise<void> \| void` | `undefined` | 滚动到底部时的回调函数 | 2.38.2 |

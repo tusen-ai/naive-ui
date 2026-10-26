@@ -1,9 +1,10 @@
-import type { Token, TokenizerExtension, Tokens } from 'marked'
+import type { Nodes, RootContent } from 'mdast'
 import type { Category, Locale, PageEntry } from './site'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { parse as parseSfc } from '@vue/compiler-sfc'
-import { Marked } from 'marked'
+import { visit } from 'unist-util-visit'
+import { getSource, getText, isHeading, parseMarkdown } from '../utils/markdown'
 import {
   getPageEntries,
   getPageRoute,
@@ -23,23 +24,6 @@ export interface Page extends PageEntry {
   description: string
   markdown: string
 }
-
-/**
- * A site component written inline in prose, e.g. `<n-text code>foo</n-text>`
- * or `<n-a href="...">bar</n-a>`, as one token.
- */
-const siteElement: TokenizerExtension = {
-  name: 'siteElement',
-  level: 'inline',
-  start: src => src.search(/<(?:n-|router-link)/),
-  tokenizer(src) {
-    const match = /^<(n-[\w-]+|router-link)\b[^>]*>[\s\S]*?<\/\1>/.exec(src)
-    if (match)
-      return { type: 'siteElement', raw: match[0] }
-  }
-}
-
-const marked = new Marked({ extensions: [siteElement] })
 
 /** A code block whose fence is longer than any run of backticks in the code. */
 export function fence(code: string, lang: string): string {
@@ -75,55 +59,94 @@ export function resolveHref(href: string, route: string): string {
   return url.href
 }
 
-function replaceLast(
-  text: string,
-  search: string,
-  replacement: string
-): string {
-  const index = text.lastIndexOf(search)
-  return text.slice(0, index) + replacement + text.slice(index + search.length)
+/** A part of a text, from `start` to `end`, to replace by `value`. */
+interface Replacement {
+  start: number
+  end: number
+  value: string
 }
 
-type Replacement = [from: string, to: string]
-
-/** Replaces each `from` after the previous one, in document order. */
-function replaceInOrder(text: string, replacements: Replacement[]): string {
+function applyReplacements(text: string, replacements: Replacement[]): string {
   let result = ''
-  let rest = text
-  for (const [from, to] of replacements) {
-    const index = rest.indexOf(from)
-    result += rest.slice(0, index) + to
-    rest = rest.slice(index + from.length)
+  let last = 0
+  for (const { start, end, value } of replacements) {
+    // A replacement inside a replaced part is already done
+    if (start < last)
+      continue
+    result += text.slice(last, start) + value
+    last = end
   }
-  return result + rest
+  return result + text.slice(last)
 }
 
-/** Rewrites the inline tokens of `markdown` that `rewrite` returns a new raw for. */
-function rewriteInline(
+function getOffsets(node: Nodes): [start: number, end: number] {
+  return [node.position!.start.offset!, node.position!.end.offset!]
+}
+
+/**
+ * Points the links of `markdown` at the Markdown versions of their pages.
+ * `tree` is `markdown` already parsed, `base` the offset its positions start
+ * from; without them the text is parsed here.
+ */
+function resolveLinks(
   markdown: string,
-  rewrite: (token: Token) => string | undefined
+  route: string,
+  tree: Nodes = parseMarkdown(markdown),
+  base = 0
 ): string {
   const replacements: Replacement[] = []
-  marked.walkTokens(marked.lexer(markdown), (token) => {
-    const raw = rewrite(token)
-    if (raw !== undefined && raw !== token.raw)
-      replacements.push([token.raw, raw])
+  visit(tree, 'link', (link) => {
+    const [start, end] = getOffsets(link).map(offset => offset - base)
+    const raw = markdown.slice(start, end)
+    // The destination is the last occurrence of the url in the link
+    const index = raw.lastIndexOf(link.url)
+    const href = resolveHref(link.url, route)
+    if (index === -1 || href === link.url)
+      return
+    replacements.push({
+      start: start + index,
+      end: start + index + link.url.length,
+      value: href
+    })
   })
-  return replaceInOrder(markdown, replacements)
+  return applyReplacements(markdown, replacements)
 }
 
-function resolveLinks(markdown: string, route: string): string {
-  return rewriteInline(markdown, (token) => {
-    if (token.type !== 'link')
-      return undefined
-    const { raw, href } = token as Tokens.Link
-    return replaceLast(raw, href, resolveHref(href, route))
-  })
+/** The tag of the site component an inline HTML node opens, e.g. `n-text`. */
+function getOpenedSiteElement(node: Nodes): string | undefined {
+  if (node.type !== 'html' || node.value.endsWith('/>'))
+    return undefined
+  return /^<(n-[\w-]+|router-link)\b[^>]*>$/.exec(node.value)?.[1]
 }
 
-function renderSiteElements(markdown: string): string {
-  return rewriteInline(markdown, token =>
-    token.type === 'siteElement' ? templateToMarkdown(token.raw) : undefined)
+/**
+ * Site components written inline in prose, e.g. `<n-text code>foo</n-text>`
+ * or `<n-a href="...">bar</n-a>`, turned into Markdown. In the tree each is
+ * its opening tag, its content and its closing tag, side by side.
+ */
+function renderSiteElements(block: Nodes, markdown: string): string {
+  const [base] = getOffsets(block)
+  const replacements: Replacement[] = []
+  visit(block, (node, index, parent) => {
+    const tag = getOpenedSiteElement(node)
+    if (!tag || !parent || index === undefined)
+      return
+    const close = parent.children
+      .slice(index + 1)
+      .find(
+        sibling => sibling.type === 'html' && sibling.value === `</${tag}>`
+      )
+    if (!close)
+      return
+    const start = getOffsets(node)[0] - base
+    const end = getOffsets(close)[1] - base
+    replacements.push({
+      start,
+      end,
+      value: templateToMarkdown(markdown.slice(start, end))
+    })
+  })
+  return applyReplacements(markdown, replacements)
 }
 
 /** A demo: its title, its description and its full source. */
@@ -133,13 +156,11 @@ export function renderDemo(source: string, route: string): string {
   const code = doc
     ? source.replace(`<markdown>${doc.content}</markdown>`, '')
     : source
-  const [heading, ...body] = marked
-    .lexer(doc?.content ?? '')
-    .filter(token => token.type !== 'space')
-  const title = heading?.type === 'heading' ? heading.text : ''
+  const text = doc?.content ?? ''
+  const [heading, ...body] = parseMarkdown(text).children
   return [
-    `### ${title}`,
-    ...body.map(token => renderBlock(token, route)),
+    `### ${heading?.type === 'heading' ? getText(heading) : ''}`,
+    ...body.map(node => renderBlock(node, text, route)),
     fence(code.trim(), 'vue')
   ]
     .filter(Boolean)
@@ -170,16 +191,20 @@ async function renderDemos(
 }
 
 /** A block of the page as plain Markdown, with absolute links. */
-function renderBlock(token: Token, route: string): string {
-  if (token.type === 'space')
-    return ''
-  if (token.type === 'html' && token.raw.trimStart().startsWith('<!--'))
+function renderBlock(node: RootContent, text: string, route: string): string {
+  const source = getSource(node, text)
+  if (node.type === 'html' && source.startsWith('<!--'))
     return ''
   const markdown
-    = token.type === 'html'
-      ? templateToMarkdown(token.raw)
-      : renderSiteElements(token.raw)
-  return resolveLinks(markdown, route).trim()
+    = node.type === 'html'
+      ? templateToMarkdown(source)
+      : renderSiteElements(node, source)
+  // Unchanged, the block's own tree has its links: no need to parse it again
+  return (
+    markdown === source
+      ? resolveLinks(markdown, route, node, getOffsets(node)[0])
+      : resolveLinks(markdown, route)
+  ).trim()
 }
 
 /** Renders the Markdown of a page from its sources. */
@@ -189,22 +214,27 @@ export async function renderPage(
 ): Promise<Page> {
   const route = getPageRoute(entry)
   const file = await getPageSource(root, entry)
-  const tokens = marked.lexer(await fs.readFile(file, 'utf-8'))
+  const text = await fs.readFile(file, 'utf-8')
   const blocks: string[] = []
   let title = entry.label
   let description = ''
-  for (const token of tokens) {
-    if (token.type === 'code' && token.lang === 'demo') {
-      blocks.push(await renderDemos(token.text, path.dirname(file), route))
+  for (const node of parseMarkdown(text).children) {
+    if (node.type === 'code' && node.lang === 'demo') {
+      blocks.push(await renderDemos(node.value, path.dirname(file), route))
       continue
     }
-    // The imports of components embedded in the page are for the site only
-    if (token.type === 'code' && token.lang === 'component')
+    // The page's settings and the imports of the components embedded in the
+    // page are for the site only
+    if (
+      node.type === 'yaml'
+      || (node.type === 'code' && node.lang === 'component')
+    ) {
       continue
-    const block = renderBlock(token, route)
-    if (token.type === 'heading' && token.depth === 1 && !blocks.length)
-      title = token.text
-    else if (token.type === 'paragraph' && !description)
+    }
+    const block = renderBlock(node, text, route)
+    if (isHeading(node, 1) && !blocks.length)
+      title = getText(node)
+    else if (node.type === 'paragraph' && !description)
       description = block.split(/\s+/).join(' ')
     if (block)
       blocks.push(block)

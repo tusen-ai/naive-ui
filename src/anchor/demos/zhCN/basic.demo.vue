@@ -21,6 +21,6 @@ const showBackground = ref(true)
       <n-anchor-link title="固定" href="#affix.vue" />
       <n-anchor-link title="滚动到" href="#scrollto.vue" />
     </n-anchor-link>
-    <n-anchor-link title="API" href="#API" />
+    <n-anchor-link title="API" href="#api" />
   </n-anchor>
 </template>

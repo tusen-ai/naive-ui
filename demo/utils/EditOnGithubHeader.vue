@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import { i18n } from '../utils/composables'
 import CopyMarkdownButton from './CopyMarkdownButton.vue'
 import EditOnGithubButton from './EditOnGithubButton.vue'
 
 defineOptions({ name: 'EditOnGithubHeader' })
 
-const props = defineProps<{
+defineProps<{
   relativeUrl: string
   text: string
+  /** Anchor of the title, given by the Markdown loader */
+  id: string
 }>()
 
 const { t } = i18n({
@@ -19,8 +20,6 @@ const { t } = i18n({
     editOnGithub: 'Edit on GitHub'
   }
 })
-
-const id = computed(() => props.text.replace(/ /g, '-'))
 </script>
 
 <template>

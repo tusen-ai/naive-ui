@@ -1,4 +1,6 @@
-<!--anchor:on-->
+---
+anchor: true
+---
 
 # 支持的平台
 

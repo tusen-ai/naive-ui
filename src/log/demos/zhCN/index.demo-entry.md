@@ -1,6 +1,8 @@
-# 日志 Log
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# 日志 Log
 
 如果你有一些日志要展示，可以使用 Log。
 

@@ -1,7 +1,7 @@
 <markdown>
 # 响应式列数
 
-你可以在 `n-config-provider` 定制 [breakpoints](config-provider#API)。
+你可以在 `n-config-provider` 定制 [breakpoints](config-provider#api)。
 </markdown>
 
 <template>

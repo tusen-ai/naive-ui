@@ -1,6 +1,8 @@
-# Table
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# Table
 
 If you only want to render some basic tables, use it. If you want to render structured data, see [Data Table](data-table).
 

@@ -1,6 +1,8 @@
-# 单选 Radio
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# 单选 Radio
 
 我还小的时候，很喜欢听收音机，比如 FM 106.8 或者 FM 92.1。
 

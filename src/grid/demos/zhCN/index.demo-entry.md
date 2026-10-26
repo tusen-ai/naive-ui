@@ -1,6 +1,8 @@
-# 栅格 Grid
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# 栅格 Grid
 
 基于 CSS Grid，响应式，远离 IE。
 

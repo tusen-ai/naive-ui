@@ -1,6 +1,8 @@
-# 步骤 Steps
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# 步骤 Steps
 
 1、2、3...成了！
 

@@ -31,7 +31,7 @@ keep-alive.vue
 | key-field | `string` | `'key'` | 选项 key 的字段名 | 2.36.0 |
 | padding-top | `string \| number` | `undefined` | 距离上部的距离 | 2.36.0 |
 | padding-bottom | `string \| number` | `undefined` | 距离底部的距离 | 2.36.0 |
-| scrollbar-props | `ScrollbarProps` | `undefined` | 属性参考 [Scrollbar props](scrollbar#Scrollbar-Props) | 2.36.0 |
+| scrollbar-props | `ScrollbarProps` | `undefined` | 属性参考 [Scrollbar props](scrollbar#scrollbar-props) | 2.36.0 |
 | visible-items-tag | `string` | `'div'` | 全部内容的容器标签 | 2.36.0 |
 | visible-items-props | `object` | `undefined` | 全部内容的容器属性 | 2.36.0 |
 | on-scroll | `(event: Event) => void` | `undefined` | 滚动的回调函数 | 2.36.0 |

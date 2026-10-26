@@ -1,6 +1,8 @@
-# Back Top
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# Back Top
 
 It helps you back to where you were. However, time never goes back.
 

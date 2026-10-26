@@ -1,4 +1,6 @@
-<!--anchor:on-->
+---
+anchor: true
+---
 
 # 在 SFC 中使用
 

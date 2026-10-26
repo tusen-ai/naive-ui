@@ -70,7 +70,11 @@ describe('renderPage', () => {
   })
 })
 
-describe('site pages', () => {
+// These render every page of the site (the changelog alone is 200 KB of
+// Markdown), which takes longer than a unit test's default 5 s on a busy runner
+const SITE_TIMEOUT = 30_000
+
+describe('site pages', { timeout: SITE_TIMEOUT }, () => {
   it('has a Markdown source for every menu entry of both languages', async () => {
     for (const locale of ['en-US', 'zh-CN'] as const) {
       const pages = await renderPages(root, locale)
@@ -101,7 +105,7 @@ describe('site pages', () => {
   })
 })
 
-describe('renderLlmsTxt', () => {
+describe('renderLlmsTxt', { timeout: SITE_TIMEOUT }, () => {
   it('groups pages as in the menu, with descriptions, and puts Optional last', async () => {
     const pages = await renderPages(root, 'en-US')
     const text = renderLlmsTxt('en-US', pages)

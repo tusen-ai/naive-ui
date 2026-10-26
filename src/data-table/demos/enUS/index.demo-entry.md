@@ -1,6 +1,8 @@
-# Data Table
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# Data Table
 
 DataTable is used to displays rows of structured data.
 
@@ -81,7 +83,7 @@ export-csv.vue
 | default-expanded-row-keys | `Array<string \| number>` | `[]` | The key value of the expanded tree data by default |  |
 | default-expand-all | `boolean` | `false` | Whether to expand all expandable rows. Can't be used with async expanding data. | 2.30.4 |
 | expanded-row-keys | `Array<string \| number>` | `undefined` | Expanded row keys. |  |
-| filter-icon-popover-props | `PopoverProps` | `{ trigger: click, placement: bottom }` | Filter icon's Popover attribute of the button, See [Popover props](popover#Popover-Props) | 2.39.0 |
+| filter-icon-popover-props | `PopoverProps` | `{ trigger: click, placement: bottom }` | Filter icon's Popover attribute of the button, See [Popover props](popover#popover-props) | 2.39.0 |
 | flex-height | `boolean` | `false` | Whether to make table body's height auto fit table area height. Make it enabled will make `table-layout` always set to `'fixed'`. |  |
 | get-csv-cell | `(value: any, row: object, col: DataTableBaseColumn) => string` | `undefined` | Get CSV's cell content. | 2.40.2 |
 | get-csv-header | `(cols: Array<DataTableColumn>) => string` | `undefined` | Get CSV's header content. | 2.40.2 |
@@ -93,7 +95,7 @@ export-csv.vue
 | min-height | `number \| string` | `undefined` | The min-height of the table content. Can be a CSS value. |  |
 | min-row-height | `number` | `28` | Min row height of the table when `virtual-scroll` or `virtual-scroll-x` is enabled. Each row's height must be larger than its value. | 2.40.0 |
 | paginate-single-page | `boolean` | `true` | Whether show pagination data is less than one page. | 2.28.0 |
-| pagination | `false \| object` | `false` | See [Pagination props](pagination#Pagination-Props) |  |
+| pagination | `false \| object` | `false` | See [Pagination props](pagination#pagination-props) |  |
 | pagination-behavior-on-filter | `'first' \| 'current'` | `'current'` | The behavior of pagination after filter state is changed. `'first'` means returning to first page on filter, `'current'` means keep at current page on filter. | 2.28.3 |
 | remote | `boolean` | `false` | If data-table do automatic paging. You may set it to `true` in async usage. |  |
 | render-cell | `(value: any, rowData: object, column: DataTableBaseColumn) => VNodeChild` | `undefined` | Render function of cell, it will be overwritten by columns' `render`. | 2.30.5 |
@@ -102,14 +104,14 @@ export-csv.vue
 | row-key | `(rowData: object) => (number \| string)` | `undefined` | Generate the key of the row by row data (if you don't want to set the key). |  |
 | row-props | `(rowData: object, rowIndex : number) => HTMLAttributes` | `undefined` | Customize row attributes. |  |
 | scroll-x | `number \| string` | `undefined` | If columns are horizontal fixed, scroll-x need to be set. |  |
-| scrollbar-props | `ScrollbarProps` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props), the `on-scroll` attribute already exists in the `DataTable`, the `on-scroll` attribute does not take effect here. |  |
+| scrollbar-props | `ScrollbarProps` | `undefined` | See [Scrollbar props](scrollbar#scrollbar-props), the `on-scroll` attribute already exists in the `DataTable`, the `on-scroll` attribute does not take effect here. |  |
 | single-column | `boolean` | `false` | Whether rows are not divided. If the prop is `true`, table cell has no `border-bottom`. |  |
 | single-line | `boolean` | `true` | Whether columns are not divided. If the prop is `true`, table cell has no `border-right`. |  |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | Table size. |  |
 | spin-props | `{ strokeWidth?: number, stroke?: string, scale?: number, radius?: number }` | `undefined` | Table spin's props. | 2.34.0 |
 | sticky-expanded-rows | `boolean` | `false` | Expanded row content remains sticky. | 2.32.2 |
 | striped | `boolean` | `false` | Whether to show zebra stripes on rows. |  |
-| summary | `DataTableCreateSummary` | `undefined` | Data of table summary row. For types, see <n-a href="#DataTableCreateSummary-Type">DataTableCreateSummary Type</n-a>. |  |
+| summary | `DataTableCreateSummary` | `undefined` | Data of table summary row. For types, see <n-a href="#datatablecreatesummary-type">DataTableCreateSummary Type</n-a>. |  |
 | summary-placement | `'top' \| 'bottom'` | `'bottom'` | Summary rows placement. | 2.33.3 |
 | table-layout | `'auto' \| 'fixed'` | `'auto'` | Style `table-layout` of the table. When `ellipsis` or `max-height` or `flex-height` are set, it will always be `'fixed'` regardless of what you set. |  |
 | virtual-scroll | `boolean` | `false` | Whether to use virtual scrolling to deal with large data. Make sure `max-height` is set before using it. When `virtual-scroll` is `true`, `rowSpan` will not take effect. |  |
@@ -225,7 +227,7 @@ These methods can help you control table in an uncontrolled manner. However, it'
 | getFilteredAndSortedData | `() => RowData[]` | Get all row data after filters and sorters are applied, excluding pagination. In `remote` mode, it is based on the current `data` prop only. | 2.45.0 |
 | filters | `(filters: DataTableFilterState \| null) => void` | Set the active filters of the table. |  |
 | page | `(page: number) => void` | Manually set the page. |  |
-| scrollTo | `DataTableScrollTo` | Scroll content. See <n-a href="#DataTableScrollTo-Type">DataTableScrollTo Type</n-a>. | 2.45.0 |
+| scrollTo | `DataTableScrollTo` | Scroll content. See <n-a href="#datatablescrollto-type">DataTableScrollTo Type</n-a>. | 2.45.0 |
 | sort | `(columnKey: string \| number, order: 'ascend' \| 'descend' \| false) => void` | Set the sort state of the table. |  |
 
 ### DataTable Slots

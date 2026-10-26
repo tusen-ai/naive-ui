@@ -1,6 +1,8 @@
-# Steps
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# Steps
 
 1, 2, 3... done!
 

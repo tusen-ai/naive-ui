@@ -1,11 +1,16 @@
-import type { Token } from 'marked'
 import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
-import { marked } from 'marked'
+import { parse } from '@vue/compiler-sfc'
 import { handleMergeCode } from '../utils/handle-merge-code'
-import { createRenderer } from './md-renderer'
+import {
+  getText,
+  isHeading,
+  parseMarkdown,
+  slugHeadings
+} from '../utils/markdown'
+import { renderMarkdown } from './md-renderer'
 
 interface Parts {
   template?: string
@@ -36,8 +41,6 @@ interface ConvertVue2DemoOptions {
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-
-const mdRenderer = createRenderer()
 
 const __HTTP__ = process.env.NODE_ENV !== 'production' ? 'http' : 'https'
 
@@ -151,43 +154,39 @@ function getFileName(resourcePath: string): [string, string] {
   return [fileNameWithExtension.split('.')[0], fileNameWithExtension]
 }
 
-function getPartsOfDemo(text: string): Parts {
-  // slot template
-  const firstIndex = text.indexOf('<template>')
-  let template = text.slice(firstIndex + 10)
-  const lastIndex = template.lastIndexOf('</template>')
-  template = template.slice(0, lastIndex)
-  const script = text.match(/<script[\s\S]*?>([\s\S]*?)<\/script>/)?.[1]?.trim()
-  const style = text.match(/<style>([\s\S]*?)<\/style>/)?.[1]
-  const markdownText
-    = text.match(/<markdown>([\s\S]*?)<\/markdown>/)?.[1]?.trim() ?? ''
-  const tokens = marked.lexer(markdownText)
-  const contentTokens: Token[] = []
-  let title = ''
-  for (const token of tokens) {
-    if (token.type === 'heading' && token.depth === 1) {
-      title = token.text
-    }
-    else {
-      contentTokens.push(token)
-    }
-  }
-  const scriptAttributes
-    = text.match(/<script([\s\S]*?)>[\s\S]*?<\/script>/)?.[1].trim() ?? ''
-  const languageType = scriptAttributes?.includes('lang="ts"') ? 'ts' : 'js'
-  const apiType = scriptAttributes?.includes('setup')
-    ? 'composition'
-    : 'options'
+/** The title and the rendered description of a demo's `<markdown>` block. */
+function renderDoc(markdown: string): { title: string, content: string } {
+  const tree = parseMarkdown(markdown)
+  slugHeadings(tree)
+  const heading = tree.children.find(node => isHeading(node, 1))
+  const children = tree.children.filter(node => node !== heading)
   return {
-    template,
-    script,
-    style,
-    title,
-    content: marked.parser(contentTokens, {
-      renderer: mdRenderer
-    }),
-    language: languageType,
-    api: apiType
+    title: heading ? getText(heading) : '',
+    content: renderMarkdown({ ...tree, children })
+  }
+}
+
+function getPartsOfDemo(text: string): Parts {
+  // An empty script still tells the language of the demo
+  const { descriptor } = parse(text, { ignoreEmpty: false })
+  // The first script in the file
+  const script = [descriptor.script, descriptor.scriptSetup]
+    .filter(block => !!block)
+    .sort((a, b) => a.loc.start.offset - b.loc.start.offset)[0]
+  // A style with attributes isn't the demo's own
+  const style = descriptor.styles.find(
+    block => Object.keys(block.attrs).length === 0
+  )
+  const markdown = descriptor.customBlocks.find(
+    block => block.type === 'markdown'
+  )
+  return {
+    template: descriptor.template?.content,
+    script: script?.content.trim(),
+    style: style?.content,
+    ...renderDoc(markdown?.content.trim() ?? ''),
+    language: script?.lang === 'ts' ? 'ts' : 'js',
+    api: script?.setup ? 'composition' : 'options'
   }
 }
 
