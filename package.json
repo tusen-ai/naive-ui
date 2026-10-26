@@ -69,7 +69,6 @@
     "post-build": "tsx scripts/post-build/index.ts",
     "build:site:ts": "bash ./scripts/pre-build-site/pre-build-site.sh && cross-env TUSIMPLE=true NODE_ENV=production NODE_OPTIONS=--max-old-space-size=4096 vite build && bash ./scripts/post-build-site/post-build-site.sh",
     "prepare": "husky",
-    "transpile-docs": "tsx scripts/md-to-vue.ts",
     "release:site": "cross-env TUSIMPLE=true pnpm run build:site && node build-doc/generate-deploy-sh.js && sudo bash build-doc/deploy-doc.sh"
   },
   "web-types": "./web-types.json",
