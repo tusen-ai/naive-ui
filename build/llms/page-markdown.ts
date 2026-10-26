@@ -83,10 +83,20 @@ function getOffsets(node: Nodes): [start: number, end: number] {
   return [node.position!.start.offset!, node.position!.end.offset!]
 }
 
-function resolveLinks(markdown: string, route: string): string {
+/**
+ * Points the links of `markdown` at the Markdown versions of their pages.
+ * `tree` is `markdown` already parsed, `base` the offset its positions start
+ * from; without them the text is parsed here.
+ */
+function resolveLinks(
+  markdown: string,
+  route: string,
+  tree: Nodes = parseMarkdown(markdown),
+  base = 0
+): string {
   const replacements: Replacement[] = []
-  visit(parseMarkdown(markdown), 'link', (link) => {
-    const [start, end] = getOffsets(link)
+  visit(tree, 'link', (link) => {
+    const [start, end] = getOffsets(link).map(offset => offset - base)
     const raw = markdown.slice(start, end)
     // The destination is the last occurrence of the url in the link
     const index = raw.lastIndexOf(link.url)
@@ -189,7 +199,12 @@ function renderBlock(node: RootContent, text: string, route: string): string {
     = node.type === 'html'
       ? templateToMarkdown(source)
       : renderSiteElements(node, source)
-  return resolveLinks(markdown, route).trim()
+  // Unchanged, the block's own tree has its links: no need to parse it again
+  return (
+    markdown === source
+      ? resolveLinks(markdown, route, node, getOffsets(node)[0])
+      : resolveLinks(markdown, route)
+  ).trim()
 }
 
 /** Renders the Markdown of a page from its sources. */
