@@ -1,5 +1,5 @@
 <markdown>
-# Mask visible
+# Hide mask
 
 You can also hide the modal dialog's mask layer, which allows creating a floating panel.
 
