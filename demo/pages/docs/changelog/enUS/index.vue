@@ -1,11 +1,5 @@
-<script>
+<script setup lang="ts">
 import Changelog from '../../../../../CHANGELOG.en-US.md'
-
-export default {
-  components: {
-    Changelog
-  }
-}
 </script>
 
 <template>

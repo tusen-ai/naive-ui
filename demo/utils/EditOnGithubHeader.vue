@@ -1,43 +1,26 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import { computed } from 'vue'
 import { i18n } from '../utils/composables'
 import CopyMarkdownButton from './CopyMarkdownButton.vue'
 import EditOnGithubButton from './EditOnGithubButton.vue'
 
-export default defineComponent({
-  name: 'EditOnGithubHeader',
-  components: {
-    CopyMarkdownButton,
-    EditOnGithubButton
+defineOptions({ name: 'EditOnGithubHeader' })
+
+const props = defineProps<{
+  relativeUrl: string
+  text: string
+}>()
+
+const { t } = i18n({
+  'zh-CN': {
+    editOnGithub: '在 GitHub 上编辑'
   },
-  props: {
-    relativeUrl: {
-      type: String,
-      required: true
-    },
-    text: {
-      type: String,
-      required: true
-    }
-  },
-  setup() {
-    return {
-      ...i18n({
-        'zh-CN': {
-          editOnGithub: '在 GitHub 上编辑'
-        },
-        'en-US': {
-          editOnGithub: 'Edit on GitHub'
-        }
-      })
-    }
-  },
-  computed: {
-    id() {
-      return this.text.replace(/ /g, '-')
-    }
+  'en-US': {
+    editOnGithub: 'Edit on GitHub'
   }
 })
+
+const id = computed(() => props.text.replace(/ /g, '-'))
 </script>
 
 <template>

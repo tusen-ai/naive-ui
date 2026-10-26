@@ -1,26 +1,17 @@
-<script lang="ts">
+<script setup lang="ts">
 import { useLoadingBar } from 'naive-ui'
-import { defineComponent, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import { loadingBarApiRef } from './routes/router'
 import SiteHeader from './SiteHeader.vue'
 import { useIsMobile } from './utils/composables'
 
-export default defineComponent({
-  name: 'Site',
-  components: {
-    SiteHeader
-  },
-  setup() {
-    const loadingBar = useLoadingBar()
-    const isMobileRef = useIsMobile()
-    onMounted(() => {
-      loadingBarApiRef.value = loadingBar
-      loadingBar.finish()
-    })
-    return {
-      isMobile: isMobileRef
-    }
-  }
+defineOptions({ name: 'Site' })
+
+const loadingBar = useLoadingBar()
+const isMobile = useIsMobile()
+onMounted(() => {
+  loadingBarApiRef.value = loadingBar
+  loadingBar.finish()
 })
 </script>
 

@@ -1,8 +1,14 @@
-<script lang="ts">
-import type { PropType } from 'vue'
+<script setup lang="ts">
 import { strFromU8, strToU8, zlibSync } from 'fflate'
-import { defineComponent } from 'vue'
 import { appCode, playgroundUrl } from './playground'
+
+defineOptions({ name: 'PlaygroundButton' })
+
+const props = defineProps<{
+  code: string
+  size?: any
+  depth?: string
+}>()
 
 function utoa(data: string): string {
   const buffer = strToU8(data)
@@ -19,25 +25,10 @@ function serialized(data: string): string {
   return utoa(JSON.stringify(originCode))
 }
 
-export default defineComponent({
-  name: 'PlaygroundButton',
-  props: {
-    code: {
-      type: String,
-      required: true
-    },
-    size: String as PropType<any>,
-    depth: String
-  },
-  setup(props) {
-    return {
-      handleClick() {
-        const serializedState = serialized(props.code)
-        window.open(`${playgroundUrl}/#${serializedState}`, '_blank')
-      }
-    }
-  }
-})
+function handleClick() {
+  const serializedState = serialized(props.code)
+  window.open(`${playgroundUrl}/#${serializedState}`, '_blank')
+}
 </script>
 
 <template>

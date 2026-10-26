@@ -1,4 +1,6 @@
-export const enDocRoutes = [
+import type { RouteRecordRaw } from 'vue-router'
+
+export const enDocRoutes: RouteRecordRaw[] = [
   // basic docs
   {
     path: 'introduction',
@@ -95,7 +97,7 @@ export const enDocRoutes = [
   }
 ]
 
-export const zhDocRoutes = [
+export const zhDocRoutes: RouteRecordRaw[] = [
   // basic docs
   {
     path: 'introduction',
@@ -192,7 +194,7 @@ export const zhDocRoutes = [
   }
 ]
 
-export const enComponentRoutes = [
+export const enComponentRoutes: RouteRecordRaw[] = [
   // components
   {
     path: 'layout',
@@ -614,7 +616,7 @@ export const enComponentRoutes = [
   }
 ]
 
-export const zhComponentRoutes = [
+export const zhComponentRoutes: RouteRecordRaw[] = [
   // components
   {
     path: 'layout',
@@ -1036,7 +1038,7 @@ export const zhComponentRoutes = [
   }
 ]
 
-export const routes = [
+export const routes: RouteRecordRaw[] = [
   {
     name: 'home',
     path: '/:lang(en-US|zh-CN)',
@@ -1073,13 +1075,15 @@ export const routes = [
     // the reader's own preference.
     name: 'legacy-theme-path',
     path: '/:lang(en-US|zh-CN)/:theme(light|dark|os-theme)/:rest(.*)*',
-    redirect: to => ({
-      path: [`/${to.params.lang}`, ...[].concat(to.params.rest || [])].join(
-        '/'
-      ),
-      query: to.query,
-      hash: to.hash
-    })
+    redirect: (to) => {
+      const { lang, rest = [] } = to.params
+      const segments = Array.isArray(rest) ? rest : [rest]
+      return {
+        path: [`/${lang}`, ...segments].join('/'),
+        query: to.query,
+        hash: to.hash
+      }
+    }
   },
   {
     name: 'not-found',

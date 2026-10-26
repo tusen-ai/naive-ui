@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "incremental": false,
+    "composite": false,
+    "types": ["vue/jsx", "vitest/globals", "node", "vite/client"],
+    "noEmit": true
+  },
+  "include": [
+    "demo/**/*.ts",
+    "demo/**/*.tsx",
+    "demo/**/*.vue",
+    "build/**/*.ts",
+    "src/shims-vue.d.ts",
+    "src/global.d.ts"
+  ]
+}

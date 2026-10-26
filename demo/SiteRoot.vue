@@ -1,19 +1,20 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
 import Site from './Site.vue'
 import { initRouter, siteSetup } from './store'
 
-export default defineComponent({
-  name: 'SiteProvider',
-  components: {
-    Site
-  },
-  setup() {
-    initRouter(useRouter(), useRoute())
-    return siteSetup()
-  }
-})
+defineOptions({ name: 'SiteProvider' })
+
+initRouter(useRouter(), useRoute())
+const {
+  themeEditorStyle,
+  configProvider,
+  hljs,
+  themeName,
+  theme,
+  locale,
+  dateLocale
+} = siteSetup()
 </script>
 
 <template>

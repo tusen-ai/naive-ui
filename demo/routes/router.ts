@@ -1,10 +1,24 @@
+import type { LoadingBarApi } from 'naive-ui'
+import type { App } from 'vue'
+import type { Router, RouteRecordRaw } from 'vue-router'
 import { nextTick } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { useLocaleName } from '../store'
 
-export const loadingBarApiRef = {}
+declare global {
+  interface Window {
+    /** Defined in index.html */
+    deriveTitleFromLocale: (locale?: string) => void
+  }
+}
 
-export default function createDemoRouter(app, routes) {
+/** Set by the site once its loading bar is mounted */
+export const loadingBarApiRef: { value?: LoadingBarApi } = {}
+
+export default function createDemoRouter(
+  _app: App,
+  routes: RouteRecordRaw[]
+): Router {
   const router = createRouter({
     history: createWebHistory(),
     routes

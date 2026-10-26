@@ -52,44 +52,40 @@ app.use(naive);
 app.mount("#app");
 `
 
-function getDeps(code) {
+function getDeps(code: string): Record<string, string> {
   return (code.match(/from '([^']+)'\n/g) || [])
     .map(v => v.slice(6, v.length - 2))
-    .reduce((prevV, dep) => {
+    .reduce<Record<string, string>>((prevV, dep) => {
       prevV[dep] = 'latest'
       return prevV
     }, {})
 }
 
-export function getCodeSandboxParams(code) {
+export function getCodeSandboxParams(code: string): string {
+  const packageJson = {
+    dependencies: {
+      ...getDeps(code),
+      vue: 'latest',
+      'vue-router': 'latest',
+      'naive-ui': 'latest'
+    },
+    devDependencies: {
+      '@vue/cli-plugin-babel': '~4.5.0',
+      typescript: '~4.6.3'
+    }
+  }
   return getParameters({
     files: {
+      // The define API takes package.json as an object too; its types only
+      // list strings
       'package.json': {
-        content: {
-          dependencies: {
-            ...getDeps(code),
-            vue: 'latest',
-            'vue-router': 'latest',
-            'naive-ui': 'latest'
-          },
-          devDependencies: {
-            '@vue/cli-plugin-babel': '~4.5.0',
-            typescript: '~4.6.3'
-          }
-        }
+        content: packageJson as unknown as string,
+        isBinary: false
       },
-      'index.html': {
-        content: indexHtml
-      },
-      'src/Demo.vue': {
-        content: code
-      },
-      'src/App.vue': {
-        content: appVue
-      },
-      'src/main.js': {
-        content: mainJs
-      }
+      'index.html': { content: indexHtml, isBinary: false },
+      'src/Demo.vue': { content: code, isBinary: false },
+      'src/App.vue': { content: appVue, isBinary: false },
+      'src/main.js': { content: mainJs, isBinary: false }
     }
   })
 }

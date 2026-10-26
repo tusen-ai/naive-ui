@@ -1,7 +1,8 @@
-<script lang="ts">
+<script setup lang="ts">
+import type { LayoutInst } from 'naive-ui'
 import { useMemo } from 'vooks'
 // Frame component for components & docs page
-import { computed, defineComponent, ref, toRef, watch } from 'vue'
+import { computed, ref, toRef, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useComponentOptions, useDocOptions } from '../store'
 import { renderMenuLabel } from '../store/menu-options'
@@ -9,48 +10,34 @@ import { useIsMobile, useIsTablet } from '../utils/composables'
 import { findMenuValue } from '../utils/route'
 import SiteFooter from './home/Footer.vue'
 
-export default defineComponent({
-  components: {
-    SiteFooter
-  },
-  setup() {
-    const route = useRoute()
-    const layoutInstRef = ref(null)
-    const docOptionsRef = useDocOptions()
-    const componentOptionsRef = useComponentOptions()
-    const optionsRef = computed(() =>
-      route.path.includes('/docs/')
-        ? docOptionsRef.value
-        : componentOptionsRef.value
-    )
+const route = useRoute()
+const layoutInstRef = ref<LayoutInst | null>(null)
+const docOptionsRef = useDocOptions()
+const componentOptionsRef = useComponentOptions()
+const options = computed(() =>
+  route.path.includes('/docs/')
+    ? docOptionsRef.value
+    : componentOptionsRef.value
+)
 
-    const menuValueRef = computed(() => {
-      return findMenuValue(optionsRef.value, route.path)
-    })
-    watch(toRef(route, 'path'), (value, oldValue) => {
-      const langReg = /\/(zh-CN|en-US)/g
-      // only lang change do not restore the scroll status
-      if (value.replace(langReg, '') !== oldValue.replace(langReg, '')) {
-        layoutInstRef.value.scrollTo(0, 0)
-      }
-    })
-    const isMobileRef = useIsMobile()
-    const isTabletRef = useIsTablet()
-
-    return {
-      layoutScrollbarProps: {
-        containerClass: 'document-scroll-container'
-      },
-      renderMenuLabel,
-      showSider: useMemo(() => {
-        return !isMobileRef.value && !isTabletRef.value
-      }),
-      layoutInstRef,
-      options: optionsRef,
-      menuValue: menuValueRef,
-      isMobile: isMobileRef
-    }
+const menuValue = computed(() => {
+  return findMenuValue(options.value, route.path)
+})
+watch(toRef(route, 'path'), (value, oldValue) => {
+  const langReg = /\/(zh-CN|en-US)/g
+  // only lang change do not restore the scroll status
+  if (value.replace(langReg, '') !== oldValue.replace(langReg, '')) {
+    layoutInstRef.value?.scrollTo(0, 0)
   }
+})
+const isMobile = useIsMobile()
+const isTabletRef = useIsTablet()
+
+const layoutScrollbarProps = {
+  containerClass: 'document-scroll-container'
+}
+const showSider = useMemo(() => {
+  return !isMobile.value && !isTabletRef.value
 })
 </script>
 
