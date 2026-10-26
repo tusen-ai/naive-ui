@@ -116,11 +116,11 @@ Provided since 2.38.0.
 
 ### Modal with Preset Card Props
 
-See [Card props](card#Card-Props)
+See [Card props](card#card-props)
 
 ### Modal with Preset Dialog Props
 
-See [Dialog props](dialog#Dialog-Props)
+See [Dialog props](dialog#dialog-props)
 
 ### Modal without Preset Slots
 
@@ -130,13 +130,13 @@ See [Dialog props](dialog#Dialog-Props)
 
 ### Modal with Preset Card Slots
 
-See [Card slots](card#Card-Slots)
+See [Card slots](card#card-slots)
 
 `default` slot's parameter is different, which is `(props: { draggableClass: string })`.
 
 ### Modal with Preset Dialog Slots
 
-See [Dialog slots](dialog#Dialog-Slots)
+See [Dialog slots](dialog#dialog-slots)
 
 `default` slot's parameter is different, which is `(props: { draggableClass: string })`.
 

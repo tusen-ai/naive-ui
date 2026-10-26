@@ -1,6 +1,8 @@
-# Legacy Grid
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# Legacy Grid
 
 <n-alert title="Caveat" type="warning" style="margin-bottom: 16px" :bordered="false">
   At most of time you should use <router-link to="grid" #="{ navigate, href }" custom><n-a :href="href" @click="navigate">Grid</n-a></router-link>.

@@ -40,7 +40,8 @@ export default function createDemoRouter(
       }
       if (to.hash && to.hash !== from.hash) {
         nextTick(() => {
-          const el = document.querySelector(to.hash)
+          // An id may not be a valid selector, e.g. `0-install`
+          const el = document.getElementById(to.hash.slice(1))
           if (el)
             el.scrollIntoView()
         })

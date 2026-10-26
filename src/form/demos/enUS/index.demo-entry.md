@@ -1,6 +1,8 @@
-# Form
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# Form
 
 The element to collect and validate data.
 
@@ -101,7 +103,7 @@ feedback-style.vue
 
 ### FormItemGi Props
 
-Accept all props from FormItem & [GridItem](grid#GridItem-Props)
+Accept all props from FormItem & [GridItem](grid#griditem-props)
 
 ### Form Methods
 

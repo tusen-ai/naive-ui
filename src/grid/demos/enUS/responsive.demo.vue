@@ -1,7 +1,7 @@
 <markdown>
 # Responsive columns
 
-You can customize [breakpoints](config-provider#API) in `n-config-provider`.
+You can customize [breakpoints](config-provider#api) in `n-config-provider`.
 </markdown>
 
 <template>

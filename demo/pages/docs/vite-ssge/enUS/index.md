@@ -2,7 +2,7 @@
 
 ## Caveat
 
-This document pertains to SSR (Server-Side Rendering). Please familiarize yourself with the [SSR Caveats](ssr#Caveat) before proceeding.
+This document pertains to SSR (Server-Side Rendering). Please familiarize yourself with the [SSR Caveats](ssr#caveat) before proceeding.
 
 ## Setup Guide
 

@@ -1,6 +1,8 @@
-# Anchor
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# Anchor
 
 Tell you where you are.
 
@@ -19,7 +21,7 @@ scrollto.vue
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| affix | `boolean` | `false` | If it works like an affix. If set to `true`, it will receive props from [affix](affix#Affix-Props). |
+| affix | `boolean` | `false` | If it works like an affix. If set to `true`, it will receive props from [affix](affix#affix-props). |
 | bound | `number` | `12` | The height of the border when scrolling. |
 | ignore-gap | `boolean` | `false` | If set to `true`, it will be displayed on the exact href. |
 | offset-target | `string \| HTMLElement \| Window \| Document \| (() => HTMLElement)` | `document` | The element or selector used to calc offset of link elements. If you are not scrolling the entire document but only a part of it, you may need to set this. |

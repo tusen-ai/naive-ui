@@ -1,6 +1,8 @@
-# 描述 Descriptions
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# 描述 Descriptions
 
 简单的列出信息。
 

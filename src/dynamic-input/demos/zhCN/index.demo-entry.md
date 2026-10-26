@@ -1,6 +1,8 @@
-# 动态录入 Dynamic Input
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# 动态录入 Dynamic Input
 
 这个组件的名字改过很多次。
 

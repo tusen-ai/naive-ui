@@ -1,6 +1,8 @@
-# 表单 Form
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# 表单 Form
 
 收集、验证信息。
 
@@ -94,7 +96,7 @@ feedback-style.vue
 
 ### FormItemGi Props
 
-接受 FormItem & [GridItem](grid#GridItem-Props) 所有的 Props。
+接受 FormItem & [GridItem](grid#griditem-props) 所有的 Props。
 
 ### Form Methods
 

@@ -15,13 +15,13 @@ function scrollTo(href: string) {
 <template>
   <div style="height: 200px; padding-left: 200px">
     <n-anchor ref="anchorRef" :bound="24" style="z-index: 1">
-      <n-anchor-link title="Demos" href="#Demos">
+      <n-anchor-link title="Demos" href="#demos">
         <n-anchor-link title="Basic" href="#basic.vue" />
         <n-anchor-link title="Ignore-Gap" href="#ignore-gap.vue" />
         <n-anchor-link title="Affix" href="#affix.vue" />
         <n-anchor-link title="Scroll To" href="#scrollto.vue" />
       </n-anchor-link>
-      <n-anchor-link title="API" href="#API" />
+      <n-anchor-link title="API" href="#api" />
     </n-anchor>
   </div>
   <n-space style="padding-left: 400px">

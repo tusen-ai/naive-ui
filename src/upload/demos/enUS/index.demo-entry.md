@@ -31,7 +31,7 @@ download.vue
 | action | `string` | `undefined` | The URL to submit data to. |  |
 | always-show-actions | `boolean` | `false` | Always show the action buttons (remove, download, retry, preview) on each file item. When `false`, they only appear on hover. | 2.45.0 |
 | create-thumbnail-url | `(file: File \| null, fileInfo: UploadSettledFileInfo) => (Promise<string> \| string \| undefined)` | `undefined` | Customize file thumbnails. If `undefined` is returned, the file would use default thumbnail display logic. | `fileInfo` 2.34.0 |
-| custom-request | `(options: UploadCustomRequestOptions) => void` | `undefined` | Customize upload request. For types, see <n-a href="#UploadCustomRequestOptions-Type">UploadCustomRequestOptions</n-a> |  |
+| custom-request | `(options: UploadCustomRequestOptions) => void` | `undefined` | Customize upload request. For types, see <n-a href="#uploadcustomrequestoptions-type">UploadCustomRequestOptions</n-a> |  |
 | custom-download | `(file: FileInfo) => void` | `undefined` | Customize download request | 2.41.1 |
 | data | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | The additional fileds data of HTTP request's form data. |  |
 | default-file-list | `Array<UploadFileInfo>` | `[]` | The default file list in uncontrolled manner. |  |
@@ -44,7 +44,7 @@ download.vue
 | file-list | `Array<UploadFileInfo>` | `undefined` | The file list of component. If set, the component will work in controlled manner. |  |
 | headers | `Object \| ({ file: UploadFileInfo }) => Object` | `undefined` | The additional HTTP Headers of request. |  |
 | input-props | `InputHTMLAttributes` | `undefined` | Attributes of file input. | 2.24.2 |
-| image-group-props | `ImageGroupProps` | `undefined` | Props of `n-image` inside upload. See [ImageGroup Props](image#ImageGroup-Props). | 2.24.0 |
+| image-group-props | `ImageGroupProps` | `undefined` | Props of `n-image` inside upload. See [ImageGroup Props](image#imagegroup-props). | 2.24.0 |
 | is-error-state | `(xhr: XMLHttpRequest) => boolean` | `undefined` | Check if response is error state. | 2.29.1 |
 | list-type | `string` | `'text'` | Built-in styles for file lists, `text`, `image` and `image-card`. |  |
 | max | `number` | `undefined` | Uploaded files limit. |  |

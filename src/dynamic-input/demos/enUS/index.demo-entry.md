@@ -1,6 +1,8 @@
-# Dynamic Input
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# Dynamic Input
 
 This component's name has been changed so many times.
 

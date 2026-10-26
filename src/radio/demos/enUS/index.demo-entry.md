@@ -1,6 +1,8 @@
-# Radio
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# Radio
 
 When I was young, I loved listening to the radio, such as FM 106.8 or FM 92.1.
 

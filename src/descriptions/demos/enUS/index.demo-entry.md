@@ -1,6 +1,8 @@
-# Descriptions
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# Descriptions
 
 Display items of content easily.
 

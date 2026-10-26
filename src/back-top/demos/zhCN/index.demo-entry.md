@@ -1,6 +1,8 @@
-# 回到顶部 Back Top
+---
+demoColumns: 1
+---
 
-<!--single-column-->
+# 回到顶部 Back Top
 
 它可以帮你回到你曾经到过的地方。不过时间是回不去了。
 
