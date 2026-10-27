@@ -5,7 +5,7 @@ import type { FormValidationStatus } from '../../form/src/public-types'
 import type { InputInst } from '../../input'
 import type { InputNumberTheme, InputNumberThemeOverrides } from '../styles'
 import type { InputNumberInst, OnUpdateValue, Size } from './interface'
-import { on } from 'evtd'
+import { off, on } from 'evtd'
 import { rgba } from 'seemly'
 import { useMemo, useMergedState } from 'vooks'
 import {
@@ -13,6 +13,7 @@ import {
   defineComponent,
   h,
   nextTick,
+  onBeforeUnmount,
   ref,
   toRef,
   watch,
@@ -529,6 +530,16 @@ export default defineComponent({
         once: true
       })
     }
+    // The holding timers and the `mouseup` listeners are bound to `document`,
+    // so they outlive the component unless they are released here. Without this
+    // a `n-input-number` removed while its button is being held keeps emitting
+    // `update:value` every `HOLDING_CHANGE_INTERVAL` ms.
+    onBeforeUnmount(() => {
+      clearAddHoldTimeout()
+      clearMinusHoldTimeout()
+      off('mouseup', document, clearAddHoldTimeout)
+      off('mouseup', document, clearMinusHoldTimeout)
+    })
     const handleAddClick = (): void => {
       if (addHoldStateIntervalId)
         return
