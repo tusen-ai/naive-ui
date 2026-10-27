@@ -17,6 +17,10 @@ const dialogProps = {
     type: Boolean,
     default: true
   },
+  closeAriaLabel: {
+    type: String,
+    default: 'close'
+  },
   negativeText: String,
   positiveText: String,
   positiveButtonProps: Object as PropType<ButtonProps>,

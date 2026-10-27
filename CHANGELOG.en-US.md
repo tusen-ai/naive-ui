@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- Add `close-aria-label` to `n-dialog` and `closeAriaLabel` to `useDialog` options to customize the close button's accessible name, refs [#8231](https://github.com/tusen-ai/naive-ui/issues/8231).
+
 ## 2.45.3
 
 `2026-08-28`
