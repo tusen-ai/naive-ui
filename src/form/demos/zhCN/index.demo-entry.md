@@ -62,8 +62,20 @@ feedback-style.vue
 | message | `string` | `undefined` | 校验失败时展示的信息 |  |
 | renderMessage | `() => VNodeChild` | `undefined` | 信息的渲染函数 | 2.29.1 |
 | required | `boolean` | `undefined` | 是否必填 |  |
+| schema | `StandardSchemaV1` | `undefined` | 用于校验值的 [Standard Schema](https://standardschema.dev)（如 Zod、Valibot、ArkType 创建的 schema），schema 报告的每一个问题都会作为错误展示。优先级高于 `validator` 和 `asyncValidator`，设定 `message` 会替换 schema 的问题信息 | NEXT_VERSION |
 | trigger | `string \| Array<string>` | `undefined` | 触发方式 |  |
 | validator | `(rule: FormItemRule, value: any) => boolean \| Error` | `undefined` | 校验规则 |  |
+
+使用 `schema` 可以直接复用已有的 schema。它校验的是单个表项的值，所以需要为每个 path 分别编写 schema。
+
+```ts
+import { z } from 'zod'
+
+const rules = {
+  name: { trigger: ['input', 'blur'], schema: z.string().min(2, '太短了') },
+  age: { trigger: 'blur', schema: z.number().min(18, '需要年满 18 岁') }
+}
+```
 
 ### FormItem Props
 
