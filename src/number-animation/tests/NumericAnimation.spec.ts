@@ -3,6 +3,57 @@ import { sleep } from 'seemly'
 import { NNumberAnimation } from '../index'
 
 describe('n-number-animation', () => {
+  it.each([0, 10])('should play after equal endpoints at %s', async (from) => {
+    const onFinish = vi.fn()
+    const wrapper = mount(NNumberAnimation, {
+      props: { from, to: from, active: false, duration: 20, onFinish }
+    })
+    try {
+      wrapper.vm.play()
+      await sleep(100)
+      expect(wrapper.text()).toBe(String(from))
+      expect(onFinish).not.toHaveBeenCalled()
+
+      await wrapper.setProps({ to: from + 10 })
+      wrapper.vm.play()
+      await sleep(100)
+      expect(wrapper.text()).toBe(String(from + 10))
+      expect(onFinish).toHaveBeenCalledTimes(1)
+    }
+    finally {
+      wrapper.unmount()
+    }
+  })
+
+  it('should replay after returning to equal endpoints', async () => {
+    const onFinish = vi.fn()
+    const wrapper = mount(NNumberAnimation, {
+      props: { from: 0, to: 10, active: false, duration: 20, onFinish }
+    })
+    try {
+      wrapper.vm.play()
+      wrapper.vm.play()
+      await sleep(100)
+      expect(wrapper.text()).toBe('10')
+      expect(onFinish).toHaveBeenCalledTimes(1)
+
+      await wrapper.setProps({ to: 0 })
+      wrapper.vm.play()
+      await sleep(100)
+      expect(wrapper.text()).toBe('0')
+      expect(onFinish).toHaveBeenCalledTimes(1)
+
+      await wrapper.setProps({ to: 10 })
+      wrapper.vm.play()
+      await sleep(100)
+      expect(wrapper.text()).toBe('10')
+      expect(onFinish).toHaveBeenCalledTimes(2)
+    }
+    finally {
+      wrapper.unmount()
+    }
+  })
+
   it('should work with import on demand', () => {
     mount(NNumberAnimation)
   })
