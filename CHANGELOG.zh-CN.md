@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-number-animation` 在 `from` 和 `to` 相等时播放后，`play()` 方法无法再次播放的问题，关闭 [#7304](https://github.com/tusen-ai/naive-ui/issues/7304)
+
 ## 2.45.3
 
 `2026-08-28`
