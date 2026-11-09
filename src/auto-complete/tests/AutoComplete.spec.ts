@@ -1,8 +1,36 @@
 import type { AutoCompleteProps } from '../index'
-import { mount } from '@vue/test-utils'
+import { DOMWrapper, mount } from '@vue/test-utils'
 import { NAutoComplete } from '../index'
 
 describe('n-auto-complete', () => {
+  it('does not select an option after disabling an open menu', async () => {
+    const onUpdateValue = vi.fn()
+    const menuProps = { class: 'test-menu', virtualScroll: false }
+    const wrapper = mount(NAutoComplete, {
+      attachTo: document.body,
+      props: {
+        defaultValue: 'apple',
+        menuProps,
+        onUpdateValue,
+        options: [
+          { label: 'Apple', value: 'apple' },
+          { label: 'Orange', value: 'orange' }
+        ]
+      }
+    })
+
+    await wrapper.get('input').trigger('focus')
+    const orange = Array.from(
+      document.querySelectorAll('.n-base-select-option')
+    ).find(element => element.textContent?.trim() === 'Orange')
+    expect(orange).toBeDefined()
+
+    await wrapper.setProps({ disabled: true })
+    await new DOMWrapper(orange!).trigger('click')
+    expect(onUpdateValue).not.toHaveBeenCalled()
+    wrapper.unmount()
+  })
+
   it('should work with import on demand', () => {
     mount(NAutoComplete)
   })

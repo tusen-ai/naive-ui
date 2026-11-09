@@ -537,6 +537,8 @@ export default defineComponent({
       _: unknown,
       meta: { node: TreeOption | null, action: 'check' | 'uncheck' }
     ): void {
+      if (mergedDisabledRef.value)
+        return
       const options = getOptionsByKeys(keys)
       const action = meta.action === 'check' ? 'select' : 'unselect'
       const node = meta.node as TreeSelectOption
@@ -565,7 +567,7 @@ export default defineComponent({
       }
     }
     function handleUpdateIndeterminateKeys(keys: Key[]): void {
-      if (props.checkable) {
+      if (!mergedDisabledRef.value && props.checkable) {
         doUpdateIndeterminateKeys(keys, getOptionsByKeys(keys))
       }
     }
@@ -1019,6 +1021,7 @@ export default defineComponent({
                               })}
                               <NTree
                                 ref="treeInstRef"
+                                disabled={this.mergedDisabled}
                                 blockLine
                                 allowCheckingNotLoaded={
                                   this.allowCheckingNotLoaded

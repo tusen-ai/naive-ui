@@ -393,6 +393,8 @@ export default defineComponent({
       return keys.map(keys => getNode(keys)?.rawNode || null)
     }
     function doCheck(key: Key): boolean {
+      if (mergedDisabledRef.value)
+        return false
       const { cascade, multiple, filterable } = props
       const {
         value: { check, getNode, getPath }
@@ -458,6 +460,8 @@ export default defineComponent({
       return true
     }
     function doUncheck(key: Key): void {
+      if (mergedDisabledRef.value)
+        return
       const { cascade, multiple } = props
       if (multiple) {
         const {
