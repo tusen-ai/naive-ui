@@ -1,9 +1,36 @@
 import type { TreeSelectOption } from '../index'
-import { mount } from '@vue/test-utils'
+import { DOMWrapper, mount } from '@vue/test-utils'
 import { NBaseFocusDetector } from '../../_internal'
 import { NTreeSelect } from '../index'
 
 describe('n-tree-select', () => {
+  it('does not select an option after disabling an open menu', async () => {
+    const onUpdateValue = vi.fn()
+    const wrapper = mount(NTreeSelect, {
+      attachTo: document.body,
+      props: {
+        defaultValue: 'apple',
+        virtualScroll: false,
+        onUpdateValue,
+        options: [
+          { label: 'Apple', key: 'apple' },
+          { label: 'Orange', key: 'orange' }
+        ]
+      }
+    })
+
+    await wrapper.get('.n-base-selection').trigger('click')
+    const orange = Array.from(
+      document.querySelectorAll('.n-tree-node-content')
+    ).find(element => element.textContent?.trim() === 'Orange')
+    expect(orange).toBeDefined()
+
+    await wrapper.setProps({ disabled: true })
+    await new DOMWrapper(orange!).trigger('click')
+    expect(onUpdateValue).not.toHaveBeenCalled()
+    wrapper.unmount()
+  })
+
   it('should work with import on demand', () => {
     mount(NTreeSelect)
   })
