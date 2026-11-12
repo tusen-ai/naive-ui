@@ -407,6 +407,8 @@ export default defineComponent({
         doConfirm: boolean
       }
     ): void {
+      if (mergedDisabledRef.value)
+        return
       const {
         'onUpdate:value': _onUpdateValue,
         onUpdateValue,
@@ -494,6 +496,8 @@ export default defineComponent({
       doClear()
     }
     function handlePanelClear(): void {
+      if (mergedDisabledRef.value)
+        return
       // close will be called inside panel
       inputInstRef.value?.deactivate()
       doClear()
@@ -525,6 +529,8 @@ export default defineComponent({
       value: Value | null,
       doUpdate: boolean
     ): void {
+      if (mergedDisabledRef.value)
+        return
       if (doUpdate) {
         doUpdateValue(value, { doConfirm: false })
       }
@@ -980,6 +986,7 @@ export default defineComponent({
     const commonPanelProps: UsePanelCommonProps & {
       ref: string
       style: CSSProperties
+      inert: boolean | undefined
     } = {
       onUpdateValue: this.handlePanelUpdateValue,
       onTabOut: this.handlePanelTabOut,
@@ -988,6 +995,7 @@ export default defineComponent({
       onKeydown: this.handleKeydown,
       onConfirm: this.handlePanelConfirm,
       ref: 'panelInstRef',
+      inert: this.mergedDisabled || undefined,
       value: this.pendingValue,
       active: this.mergedShow,
       actions: this.actions,

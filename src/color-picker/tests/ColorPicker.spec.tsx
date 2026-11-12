@@ -8,6 +8,62 @@ describe('n-color-picker', () => {
   it('should work with import on demand', () => {
     mount(NColorPicker)
   })
+  it.each([false, true])(
+    'disables an open panel (controlled: %s)',
+    async (controlled) => {
+      const wrapper = mount(NColorPicker, {
+        attachTo: document.body,
+        props: { show: controlled ? true : undefined }
+      })
+      try {
+        if (!controlled) {
+          await wrapper.find('.n-color-picker').trigger('click')
+        }
+        const panel = document.querySelector('.n-color-picker-panel')!
+        expect(panel.hasAttribute('inert')).toBe(false)
+
+        await wrapper.setProps({ disabled: true })
+        expect(panel.hasAttribute('inert')).toBe(true)
+
+        await wrapper.setProps({ disabled: false })
+        expect(panel.hasAttribute('inert')).toBe(false)
+      }
+      finally {
+        wrapper.unmount()
+      }
+    }
+  )
+  it('stops an active palette drag when disabled', async () => {
+    const onUpdateValue = vi.fn()
+    const onComplete = vi.fn()
+    const wrapper = mount(NColorPicker, {
+      attachTo: document.body,
+      props: { defaultShow: true, onUpdateValue, onComplete }
+    })
+    const palette = document.querySelector('.n-color-picker-pallete')!
+    vi.spyOn(palette, 'getBoundingClientRect').mockReturnValue(
+      new DOMRect(0, 0, 100, 100)
+    )
+
+    try {
+      palette.dispatchEvent(
+        new MouseEvent('mousedown', { bubbles: true, clientX: 25, clientY: 25 })
+      )
+      expect(onUpdateValue).toHaveBeenCalledTimes(1)
+      await wrapper.setProps({ disabled: true })
+
+      document.dispatchEvent(
+        new MouseEvent('mousemove', { clientX: 50, clientY: 50 })
+      )
+      document.dispatchEvent(new MouseEvent('mouseup'))
+      expect(onUpdateValue).toHaveBeenCalledTimes(1)
+      expect(onComplete).not.toHaveBeenCalled()
+    }
+    finally {
+      document.dispatchEvent(new MouseEvent('mouseup'))
+      wrapper.unmount()
+    }
+  })
   describe('props.modes', () => {
     it('multiple modes', async () => {
       const wrapper = mount(NColorPicker, {

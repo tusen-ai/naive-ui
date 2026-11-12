@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-color-picker`、`n-date-picker` 和 `n-time-picker` 打开面板后被禁用时仍可接受输入的问题
+
 ## 2.45.3
 
 `2026-08-28`

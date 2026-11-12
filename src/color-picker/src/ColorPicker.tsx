@@ -324,6 +324,8 @@ export default defineComponent({
     const displayedSvRef = ref<[number, number]>([0, 0])
 
     function handleUpdateSv(s: number, v: number): void {
+      if (mergedDisabledRef.value)
+        return
       const { value: hsvaArr } = hsvaRef
       const hue = displayedHueRef.value
       const alpha = hsvaArr ? hsvaArr[3] : 1
@@ -367,6 +369,8 @@ export default defineComponent({
     }
 
     function handleUpdateHue(hue: number): void {
+      if (mergedDisabledRef.value)
+        return
       displayedHueRef.value = hue
       const { value: hsvaArr } = hsvaRef
       if (!hsvaArr) {
@@ -412,6 +416,8 @@ export default defineComponent({
     }
 
     function handleUpdateAlpha(alpha: number): void {
+      if (mergedDisabledRef.value)
+        return
       switch (displayedModeRef.value) {
         case 'hsv':
           ;[_h, s, v] = hsvaRef.value!
@@ -460,6 +466,8 @@ export default defineComponent({
     }
 
     function handleComplete(pushStack: boolean = true): void {
+      if (mergedDisabledRef.value)
+        return
       const { value } = mergedValueRef
       // no value & only hue changes will complete with no value
       if (value) {
@@ -595,6 +603,7 @@ export default defineComponent({
             `${mergedClsPrefix}-color-picker-panel`,
             themeClassHandle?.themeClass.value
           ]}
+          inert={mergedDisabledRef.value || undefined}
           onDragstart={(e) => {
             e.preventDefault()
           }}
