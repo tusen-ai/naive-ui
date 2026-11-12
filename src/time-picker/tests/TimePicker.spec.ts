@@ -9,6 +9,25 @@ describe('n-time-picker', () => {
     mount(NTimePicker)
   })
 
+  it('ignores selection in an open panel after disabling', async () => {
+    const onUpdateValue = vi.fn()
+    const wrapper = mount(NTimePicker, {
+      attachTo: document.body,
+      props: { show: true, onUpdateValue }
+    })
+    try {
+      await wrapper.setProps({ disabled: true })
+      const option = document.querySelector<HTMLElement>(
+        '.n-time-picker-col__item:not([data-active])'
+      )!
+      option.click()
+      expect(onUpdateValue).not.toHaveBeenCalled()
+    }
+    finally {
+      wrapper.unmount()
+    }
+  })
+
   it('should work with `actions` prop', async () => {
     const wrapper = mount(NTimePicker, {
       attachTo: document.body

@@ -449,6 +449,8 @@ export default defineComponent({
         : mergedFormatRef.value(value, props.valueFormat || props.format)
     }
     function doUpdateValue(value: number | null): void {
+      if (mergedDisabledRef.value)
+        return
       const {
         onUpdateValue,
         'onUpdate:value': _onUpdateValue,
@@ -484,6 +486,8 @@ export default defineComponent({
       nTriggerFormBlur()
     }
     function doConfirm(): void {
+      if (mergedDisabledRef.value)
+        return
       const { onConfirm } = props
       if (onConfirm) {
         call(
@@ -506,6 +510,8 @@ export default defineComponent({
     }
     // clear selected time
     function clearSelectedValue(): void {
+      if (mergedDisabledRef.value)
+        return
       doUpdateValue(null)
       deriveInputValue(null)
       closePanel({
@@ -1022,6 +1028,7 @@ export default defineComponent({
                             return withDirectives(
                               <Panel
                                 ref="panelInstRef"
+                                disabled={this.mergedDisabled}
                                 actions={this.actions}
                                 class={this.themeClass}
                                 style={this.cssVars as CSSProperties}
