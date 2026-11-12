@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-mention` accepting a suggestion after becoming disabled with its menu open.
+
 ## 2.45.3
 
 `2026-08-28`
