@@ -22,6 +22,9 @@ export default cB('split', `
     overflow: hidden;
     flex: 1;
   `),
+  cE('resize-trigger-wrapper', `
+    touch-action: none;
+  `),
   cE('resize-trigger', `
     background-color: var(--n-resize-trigger-color);
     transition: background-color .3s var(--n-bezier);

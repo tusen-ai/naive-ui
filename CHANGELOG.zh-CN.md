@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- `n-split` 支持触摸拖拽调整大小，关闭 [#5889](https://github.com/tusen-ai/naive-ui/issues/5889)、[#6697](https://github.com/tusen-ai/naive-ui/issues/6697)
+
 ## 2.45.3
 
 `2026-08-28`
