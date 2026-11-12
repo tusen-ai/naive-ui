@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-mention` 打开建议菜单后被禁用时仍可选择建议的问题
+
 ## 2.45.3
 
 `2026-08-28`

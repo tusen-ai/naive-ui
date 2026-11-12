@@ -24,7 +24,8 @@ import {
   nextTick,
   ref,
   toRef,
-  Transition
+  Transition,
+  watch
 } from 'vue'
 import { VBinder, VFollower, VTarget } from 'vueuc'
 import { NInternalSelectMenu } from '../../_internal'
@@ -166,6 +167,7 @@ export default defineComponent({
         return 'medium'
       }
     })
+    const { mergedDisabledRef } = formItem
     const inputInstRef = ref<InputInst | null>(null)
     const cursorRef = ref<HTMLElement | null>(null)
     const followerRef = ref<FollowerInst | null>(null)
@@ -218,7 +220,7 @@ export default defineComponent({
       ? useThemeClass('mention', undefined, cssVarsRef, props)
       : undefined
     function doUpdateShowMenu(show: boolean): void {
-      if (props.disabled)
+      if (mergedDisabledRef.value && (show || !showMenuRef.value))
         return
       const { onUpdateShow, 'onUpdate:show': _onUpdateShow } = props
       if (onUpdateShow)
@@ -232,6 +234,11 @@ export default defineComponent({
       }
       showMenuRef.value = show
     }
+    watch(mergedDisabledRef, (disabled) => {
+      if (disabled && showMenuRef.value) {
+        doUpdateShowMenu(false)
+      }
+    })
     function doUpdateValue(value: string): void {
       const { onUpdateValue, 'onUpdate:value': _onUpdateValue } = props
       const { nTriggerFormChange, nTriggerFormInput } = formItem
@@ -382,6 +389,8 @@ export default defineComponent({
       doUpdateShowMenu(false)
     }
     function handleSelect(tmNode: TreeNode<SelectBaseOption>): void {
+      if (mergedDisabledRef.value)
+        return
       if (
         cachedPrefix === null
         || cachedPartialPatternStart === null
@@ -422,7 +431,7 @@ export default defineComponent({
       })
     }
     function handleInputMouseDown(): void {
-      if (!props.disabled) {
+      if (!mergedDisabledRef.value) {
         syncAfterCursorMove()
       }
     }
