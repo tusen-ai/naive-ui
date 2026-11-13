@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-menu` 支持 RTL，关联 [#7378](https://github.com/tusen-ai/naive-ui/issues/7378)
+
 ## 2.45.3
 
 `2026-08-28`

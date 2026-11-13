@@ -37,7 +37,11 @@ export const NMenuOptionGroup = defineComponent({
       paddingLeftRef: MenuChild.paddingLeft,
       mergedDisabledRef
     })
-    const { mergedClsPrefixRef, props: menuProps } = inject(menuInjectionKey)!
+    const {
+      mergedClsPrefixRef,
+      rtlEnabledRef,
+      props: menuProps
+    } = inject(menuInjectionKey)!
     return function () {
       const { value: mergedClsPrefix } = mergedClsPrefixRef
       const paddingLeft = MenuChild.paddingLeft.value
@@ -50,7 +54,9 @@ export const NMenuOptionGroup = defineComponent({
             class={[`${mergedClsPrefix}-menu-item-group-title`, attrs?.class]}
             style={[
               attrs?.style || '',
-              paddingLeft !== undefined ? `padding-left: ${paddingLeft}px;` : ''
+              paddingLeft !== undefined
+                ? `${rtlEnabledRef?.value ? 'padding-right' : 'padding-left'}: ${paddingLeft}px;`
+                : ''
             ]}
           >
             {render(props.title)}

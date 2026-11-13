@@ -4,6 +4,8 @@ import { HappyOutline } from '@vicons/ionicons5'
 import { mount } from '@vue/test-utils'
 import { sleep } from 'seemly'
 import { Comment, h } from 'vue'
+import { c } from '../../_utils/cssr'
+import { NConfigProvider } from '../../config-provider'
 import { NIcon } from '../../icon'
 import { NMenu } from '../index'
 
@@ -496,5 +498,61 @@ describe('n-menu', () => {
     })
     expect(wrapper.html()).toContain('bar')
     wrapper.unmount()
+  })
+
+  it('should work with RTL', () => {
+    const options: MenuOption[] = [
+      {
+        label: 'icon',
+        key: 'icon',
+        icon: () => h(NIcon, null, { default: () => h(HappyOutline) })
+      },
+      {
+        type: 'group',
+        label: 'group',
+        key: 'group',
+        children: [{ label: 'child', key: 'child' }]
+      }
+    ]
+    const render = (rtl: boolean) =>
+      mount(() => (
+        <NConfigProvider
+          rtl={rtl ? [{ name: 'Menu', style: c(null) }] : undefined}
+        >
+          {{ default: () => <NMenu options={options} /> }}
+        </NConfigProvider>
+      ))
+
+    const ltrWrapper = render(false)
+    expect(ltrWrapper.find('.n-menu').classes()).not.toContain('n-menu--rtl')
+    expect(
+      ltrWrapper.find('.n-menu-item-content').attributes('style')
+    ).toContain('padding-left: 32px')
+    expect(
+      ltrWrapper.find('.n-menu-item-content__icon').attributes('style')
+    ).toContain('margin-right: 8px')
+    expect(
+      ltrWrapper.find('.n-menu-item-group-title').attributes('style')
+    ).toContain('padding-left: 32px')
+    ltrWrapper.unmount()
+
+    const rtlWrapper = render(true)
+    expect(rtlWrapper.find('.n-menu').classes()).toContain('n-menu--rtl')
+    const contentStyle = rtlWrapper
+      .find('.n-menu-item-content')
+      .attributes('style')
+    expect(contentStyle).toContain('padding-right: 32px')
+    expect(contentStyle).not.toContain('padding-left')
+    const iconStyle = rtlWrapper
+      .find('.n-menu-item-content__icon')
+      .attributes('style')
+    expect(iconStyle).toContain('margin-left: 8px')
+    expect(iconStyle).not.toContain('margin-right')
+    const groupStyle = rtlWrapper
+      .find('.n-menu-item-group-title')
+      .attributes('style')
+    expect(groupStyle).toContain('padding-right: 32px')
+    expect(groupStyle).not.toContain('padding-left')
+    rtlWrapper.unmount()
   })
 })

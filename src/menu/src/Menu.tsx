@@ -40,6 +40,7 @@ import {
 } from 'vue'
 import { VOverflow, VResizeObserver } from 'vueuc'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
 import { call } from '../../_utils'
 import { layoutSiderInjectionKey } from '../../layout/src/interface'
 import { menuLight } from '../styles'
@@ -159,7 +160,9 @@ export default defineComponent({
     if (__DEV__) {
       useCheckDeprecated(props)
     }
-    const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { mergedClsPrefixRef, inlineThemeDisabled, mergedRtlRef }
+      = useConfig(props)
+    const rtlEnabledRef = useRtl('Menu', mergedRtlRef, mergedClsPrefixRef)
     const themeRef = useTheme(
       'Menu',
       '-menu',
@@ -260,6 +263,7 @@ export default defineComponent({
       mergedExpandedKeysRef,
       activePathRef,
       mergedClsPrefixRef,
+      rtlEnabledRef,
       isHorizontalRef: computed(() => props.mode === 'horizontal'),
       invertedRef: toRef(props, 'inverted'),
       doSelect,
@@ -610,6 +614,7 @@ export default defineComponent({
       cssVars: inlineThemeDisabled
         ? undefined
         : (cssVarsRef as Ref<CSSProperties>),
+      rtlEnabled: rtlEnabledRef,
       themeClass: themeClassHandle?.themeClass,
       // reduce dts: string ref only, type unused in render
       overflowRef: overflowRef as unknown,
@@ -642,7 +647,8 @@ export default defineComponent({
             themeClass,
             `${mergedClsPrefix}-menu--${mode}`,
             finalResponsive && `${mergedClsPrefix}-menu--responsive`,
-            this.mergedCollapsed && `${mergedClsPrefix}-menu--collapsed`
+            this.mergedCollapsed && `${mergedClsPrefix}-menu--collapsed`,
+            this.rtlEnabled && `${mergedClsPrefix}-menu--rtl`
           ],
           style: this.cssVars
         }),

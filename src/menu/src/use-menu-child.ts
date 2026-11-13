@@ -2,6 +2,7 @@ import type { Key } from 'treemate'
 import type { ComputedRef, Ref } from 'vue'
 import type { FollowerPlacement } from 'vueuc'
 import type { MergedTheme } from '../../_mixins/use-theme'
+import type { RtlItem } from '../../config-provider/src/internal-interface'
 import type { MenuTheme } from '../styles'
 import type { OnUpdateValueImpl } from './interface'
 import type { MenuSetupProps } from './Menu'
@@ -21,6 +22,7 @@ export interface MenuInjection {
   invertedRef: Ref<boolean>
   isHorizontalRef: Ref<boolean>
   mergedClsPrefixRef: Ref<string>
+  rtlEnabledRef: Ref<RtlItem | undefined> | undefined
   mergedValueRef: Ref<Key | null>
   mergedExpandedKeysRef: Ref<Key[]>
   activePathRef: Ref<Key[]>
@@ -65,9 +67,10 @@ export function useMenuChild(props: UseMenuChildProps): UseMenuChild {
     if (horizontalRef.value) {
       return menuProps.dropdownPlacement
     }
+    const rtl = !!NMenu.rtlEnabledRef?.value
     if ('tmNodes' in props)
-      return 'right-start'
-    return 'right'
+      return rtl ? 'left-start' : 'right-start'
+    return rtl ? 'left' : 'right'
   })
   const maxIconSizeRef = computed(() => {
     return Math.max(
