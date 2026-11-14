@@ -72,6 +72,7 @@ use-dialog-reactive-list.vue
 | bordered | `boolean` | `false` | Whether to show `border`. |  |
 | class | `any` | `undefined` | Class name of the dialog. | 2.33.0 |
 | closable | `boolean` | `true` | Whether to show `close` icon. |  |
+| closeAriaLabel | `string` | `'close'` | Accessible name of the default close button. | NEXT_VERSION |
 | closeFocusable | `boolean` | `false` | Whether the close button is focusable. | 2.43.0 |
 | closeOnEsc | `boolean` | `true` | Whether to close the dialog when the Esc key is pressed | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | `undefined` | Content, can be a render function. |  |
@@ -114,6 +115,7 @@ All the properties can be modified dynamically.
 | bordered | `boolean` | Whether to show `border`. |  |
 | class | `any` | Class name of the dialog. | 2.33.0 |
 | closable | `boolean` | Whether to show `close` icon. |  |
+| closeAriaLabel | `string` | Accessible name of the default close button. | NEXT_VERSION |
 | closeFocusable | `boolean` | Whether the close button is focusable. | 2.43.0 |
 | closeOnEsc | `boolean` | Whether to close dialog on Esc is pressed. | 2.26.4 |
 | content | `string \| (() => VNodeChild)` | Content, can be a render function. |  |
@@ -155,6 +157,7 @@ All the properties can be modified dynamically.
 | action-style | `Object \| string` | `undefined` | The style of the action area. | 2.38.2 |
 | bordered | `boolean` | `false` | Whether to show `border`. |  |
 | closable | `boolean` | `true` | Whether to show `close` icon. |  |
+| close-aria-label | `string` | `'close'` | Accessible name of the default close button. | NEXT_VERSION |
 | close-focusable | `boolean` | `false` | Whether the close button is focusable. | 2.43.0 |
 | content | `string \| (() => VNodeChild)` | `undefined` | Can be a render function. |  |
 | content-class | `string` | `undefined` | The class name of the content. | 2.38.2 |

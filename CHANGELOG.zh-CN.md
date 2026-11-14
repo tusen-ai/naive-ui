@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- 为 `n-dialog` 新增 `close-aria-label`，并为 `useDialog` 选项新增 `closeAriaLabel`，支持自定义关闭按钮的无障碍名称，参考 [#8231](https://github.com/tusen-ai/naive-ui/issues/8231)
+
 ## 2.45.3
 
 `2026-08-28`

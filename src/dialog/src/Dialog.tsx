@@ -285,6 +285,7 @@ export const NDialog = defineComponent({
                 <div class={classNames}>{node}</div>
               ) : (
                 <NBaseClose
+                  aria-label={this.closeAriaLabel}
                   focusable={this.closeFocusable}
                   clsPrefix={mergedClsPrefix}
                   class={classNames}

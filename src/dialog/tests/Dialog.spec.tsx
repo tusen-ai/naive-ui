@@ -1,4 +1,4 @@
-import type { DialogProps } from '../index'
+import type { DialogProps, DialogReactive } from '../index'
 import { mount } from '@vue/test-utils'
 import { defineComponent, h, nextTick } from 'vue'
 import { NDialog, NDialogProvider, useDialog } from '../index'
@@ -64,6 +64,56 @@ describe('n-dialog', () => {
       'success'
     )
     dialog.unmount()
+  })
+
+  it('supports a custom close button accessible name', async () => {
+    const dialog = mount(NDialog, {
+      props: { closeAriaLabel: '关闭对话框' }
+    })
+    try {
+      expect(dialog.get('.n-dialog__close').attributes('aria-label')).toBe(
+        '关闭对话框'
+      )
+      await dialog.setProps({ closeAriaLabel: 'Close dialog' })
+      expect(dialog.get('.n-dialog__close').attributes('aria-label')).toBe(
+        'Close dialog'
+      )
+      await dialog.setProps({ closeAriaLabel: undefined })
+      expect(dialog.get('.n-dialog__close').attributes('aria-label')).toBe(
+        'close'
+      )
+    }
+    finally {
+      dialog.unmount()
+    }
+  })
+
+  it('passes the close button accessible name through useDialog', async () => {
+    let dialog: DialogReactive | undefined
+    const Test = defineComponent({
+      setup() {
+        dialog = useDialog().info({ closeAriaLabel: '关闭对话框' })
+        return () => null
+      }
+    })
+    const wrapper = mount(
+      () => <Provider>{{ default: () => <Test /> }}</Provider>,
+      { attachTo: document.body }
+    )
+    try {
+      await nextTick()
+      expect(
+        document.querySelector('.n-dialog__close')?.getAttribute('aria-label')
+      ).toBe('关闭对话框')
+      dialog!.closeAriaLabel = 'Close dialog'
+      await nextTick()
+      expect(
+        document.querySelector('.n-dialog__close')?.getAttribute('aria-label')
+      ).toBe('Close dialog')
+    }
+    finally {
+      wrapper.unmount()
+    }
   })
 
   it('shouldn\'t useDialog display button if no text is set', () => {
