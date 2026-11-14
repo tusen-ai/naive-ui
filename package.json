@@ -73,7 +73,13 @@
   },
   "web-types": "./web-types.json",
   "peerDependencies": {
+    "katex": "*",
     "vue": "^3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "katex": {
+      "optional": true
+    }
   },
   "dependencies": {
     "@css-render/plugin-bem": "^0.15.14",
