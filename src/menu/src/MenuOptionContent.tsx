@@ -43,12 +43,15 @@ export default defineComponent({
     isEllipsisPlaceholder: Boolean
   },
   setup(props) {
-    const { props: menuProps } = inject(menuInjectionKey)!
+    const { props: menuProps, rtlEnabledRef } = inject(menuInjectionKey)!
     return {
       menuProps,
       style: computed(() => {
         const { paddingLeft } = props
-        return { paddingLeft: paddingLeft && `${paddingLeft}px` }
+        const padding = paddingLeft && `${paddingLeft}px`
+        return rtlEnabledRef?.value
+          ? { paddingRight: padding }
+          : { paddingLeft: padding }
       }),
       iconStyle: computed(() => {
         const { maxIconSize, activeIconSize, iconMarginRight } = props
@@ -56,7 +59,8 @@ export default defineComponent({
           width: `${maxIconSize}px`,
           height: `${maxIconSize}px`,
           fontSize: `${activeIconSize}px`,
-          marginRight: `${iconMarginRight}px`
+          [rtlEnabledRef?.value ? 'marginLeft' : 'marginRight']:
+            `${iconMarginRight}px`
         }
       })
     }
