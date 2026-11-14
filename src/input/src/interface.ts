@@ -2,7 +2,7 @@ import type { Ref } from 'vue'
 import { createInjectionKey } from '../../_utils'
 
 export type OnUpdateValue = (
-  value: string & [string, string],
+  value: string | [string, string],
   meta: { source: 0 | 1 | 'clear' }
 ) => void
 export type OnUpdateValueImpl = (
