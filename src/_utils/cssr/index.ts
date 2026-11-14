@@ -1,4 +1,10 @@
-import type { CNode, CProperties } from 'css-render'
+import type {
+  CLazySelector,
+  CNode,
+  CProperties,
+  createCNode,
+  CStringSelector
+} from 'css-render'
 import { plugin as BemPlugin } from '@css-render/plugin-bem'
 import { CssRender } from 'css-render'
 
@@ -6,6 +12,8 @@ const namespace = 'n'
 const prefix = `.${namespace}-`
 const elementPrefix = '__'
 const modifierPrefix = '--'
+
+type BemSelector = CStringSelector | CLazySelector<string>
 
 const cssr = CssRender()
 const plugin = BemPlugin({
@@ -15,7 +23,17 @@ const plugin = BemPlugin({
 })
 cssr.use(plugin)
 const { c, find } = cssr
-const { cB, cE, cM, cNotM } = plugin
+const {
+  cB,
+  cE,
+  cM,
+  cNotM
+}: {
+  cB: createCNode<BemSelector>
+  cE: createCNode<BemSelector>
+  cM: createCNode<BemSelector>
+  cNotM: createCNode<BemSelector>
+} = plugin
 
 function insideModal(style: CNode): CNode {
   return c(

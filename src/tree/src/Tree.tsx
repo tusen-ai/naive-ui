@@ -834,7 +834,7 @@ export default defineComponent({
       return createIndexGetter(fNodesRef.value)
     })
 
-    const mergedFNodesRef = computed(() => {
+    const mergedFNodesRef = computed<Array<TmNode | MotionData>>(() => {
       if (aipRef.value)
         return afNodesRef.value
       else return fNodesRef.value
