@@ -44,7 +44,7 @@ page-size-option.vue
 | scrollbar-props | `ScrollbarProps` | `undefined` | See [Scrollbar props](scrollbar#Scrollbar-Props) | 2.44.0 |
 | select-props | `SelectProps` | `undefined` | Page size select's props. | 2.34.3 |
 | show-quick-jumper | `boolean` | `false` | Whether to show quick jump input. |  |
-| show-quick-jump-dropdown | `boolean` | `true` | Whether to show quick jump dropdown. If you have too many pages, it could cause performance issue to create quick jump dropdown data. You can set it to `false` to enhance render performance. | 2.37.0 |
+| show-quick-jump-dropdown | `boolean` | `true` | Whether to show quick jump dropdown. When enabled, tapping an ellipsis on a touchscreen opens the dropdown without changing pages. If you have too many pages, it could cause performance issue to create quick jump dropdown data. You can set it to `false` to enhance render performance. | 2.37.0 |
 | size | `'small' \| 'medium' \| 'large'` | `'medium'` | size of page item. | 2.29.0 |
 | simple | `boolean` | `false` | Whether to use simple mode. | 2.32.2 |
 | suffix | `(info: PaginationInfo) => VNodeChild` | `undefined` | Page suffix. |  |

@@ -2,7 +2,16 @@ import type { VueWrapper } from '@vue/test-utils'
 import type { PaginationInfo, PaginationRenderLabel } from '../index'
 import { mount } from '@vue/test-utils'
 import { h, nextTick } from 'vue'
+import { NPopselect } from '../../popselect'
 import { NPagination } from '../index'
+
+async function clickWithDetail(
+  element: Element,
+  detail: number
+): Promise<void> {
+  element.dispatchEvent(new MouseEvent('click', { bubbles: true, detail }))
+  await nextTick()
+}
 
 function findPageItem(
   wrapper: VueWrapper,
@@ -39,6 +48,90 @@ describe('n-pagination', () => {
   it('should work with import on demand', () => {
     mount(NPagination)
   })
+  it.each([0, 1])(
+    'should open fast-jump menu %i on touch without changing page',
+    async (index) => {
+      const onUpdatePage = vi.fn()
+      const wrapper = mount(NPagination, {
+        attachTo: document.body,
+        props: { defaultPage: 25, pageCount: 50, onUpdatePage }
+      })
+      const menus = wrapper.findAllComponents(NPopselect)
+      const item = menus[index].get('.n-pagination-item')
+      await item.trigger('pointerdown', { pointerType: 'touch' })
+      // Older browsers dispatch a MouseEvent for the click after a touch.
+      await clickWithDetail(item.element, 1)
+      expect(onUpdatePage).not.toHaveBeenCalled()
+      expect(menus[index].props('show')).toBe(true)
+      expect(menus[1 - index].props('show')).toBe(false)
+
+      document.body.dispatchEvent(
+        new MouseEvent('mousedown', { bubbles: true })
+      )
+      document.body.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }))
+      await nextTick()
+      expect(menus[index].props('show')).toBe(false)
+
+      await item.trigger('pointerdown', { pointerType: 'mouse' })
+      await clickWithDetail(item.element, 1)
+      expect(onUpdatePage).toHaveBeenCalledWith(index === 0 ? 22 : 28)
+      wrapper.unmount()
+    }
+  )
+  it.each([0, 1])(
+    'should preserve zero-detail fast jump %i after a touch',
+    async (index) => {
+      const onUpdatePage = vi.fn()
+      const wrapper = mount(NPagination, {
+        props: { defaultPage: 25, pageCount: 50, onUpdatePage }
+      })
+      const menu = wrapper.findAllComponents(NPopselect)[index]
+      const item = menu.get('.n-pagination-item')
+      await item.trigger('pointerdown', { pointerType: 'touch' })
+      await clickWithDetail(item.element, 1)
+      expect(onUpdatePage).not.toHaveBeenCalled()
+      await clickWithDetail(item.element, 0)
+      expect(onUpdatePage).toHaveBeenCalledWith(index === 0 ? 22 : 28)
+      wrapper.unmount()
+    }
+  )
+  it.each([0, 1])(
+    'should preserve touch fast jump %i when the dropdown is disabled',
+    async (index) => {
+      const onUpdatePage = vi.fn()
+      const wrapper = mount(NPagination, {
+        props: {
+          defaultPage: 25,
+          pageCount: 50,
+          showQuickJumpDropdown: false,
+          onUpdatePage
+        }
+      })
+      const item = wrapper
+        .findAll('.n-pagination-item')
+        .filter(item => item.find('.n-base-icon').exists())[index + 1]
+      await item.trigger('pointerdown', { pointerType: 'touch' })
+      await clickWithDetail(item.element, 1)
+      expect(onUpdatePage).toHaveBeenCalledWith(index === 0 ? 22 : 28)
+      wrapper.unmount()
+    }
+  )
+  it.each([0, 1])(
+    'should ignore touch on disabled fast-jump menu %i',
+    async (index) => {
+      const onUpdatePage = vi.fn()
+      const wrapper = mount(NPagination, {
+        props: { defaultPage: 25, pageCount: 50, disabled: true, onUpdatePage }
+      })
+      const menu = wrapper.findAllComponents(NPopselect)[index]
+      const item = menu.get('.n-pagination-item')
+      await item.trigger('pointerdown', { pointerType: 'touch' })
+      await clickWithDetail(item.element, 1)
+      expect(onUpdatePage).not.toHaveBeenCalled()
+      expect(menu.props('show')).toBe(false)
+      wrapper.unmount()
+    }
+  )
   it('should work with `size` prop', async () => {
     const wrapper = mount(NPagination, {
       props: {

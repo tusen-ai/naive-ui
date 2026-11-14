@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-pagination` 在触屏上点击省略号打开快速跳转下拉菜单时同时翻页的问题，关闭 [#8202](https://github.com/tusen-ai/naive-ui/issues/8202)
+
 ## 2.45.3
 
 `2026-08-28`
