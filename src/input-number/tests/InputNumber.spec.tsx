@@ -283,4 +283,31 @@ describe('n-input-number', () => {
     expect(wrapper.find('input').element.id).toEqual('i am an id')
     wrapper.unmount()
   })
+
+  it.each(['add', 'minus'] as const)(
+    'should stop holding the `%s` button when the component is unmounted',
+    async (button) => {
+      vi.useFakeTimers()
+      const onUpdateValue = vi.fn()
+      const wrapper = mount(NInputNumber, {
+        attachTo: document.body,
+        props: {
+          defaultValue: 0,
+          onUpdateValue
+        }
+      })
+      const holdBtn = wrapper.findAll('.n-input__suffix > button')[
+        button === 'add' ? 1 : 0
+      ]
+      await holdBtn.trigger('mousedown')
+      // HOLDING_CHANGE_THRESHOLD (800ms) then repeat every 100ms
+      vi.advanceTimersByTime(800 + 100 * 3)
+      const callsDuringHold = onUpdateValue.mock.calls.length
+      expect(callsDuringHold).toBeGreaterThan(0)
+      wrapper.unmount()
+      vi.advanceTimersByTime(100 * 5)
+      expect(onUpdateValue).toHaveBeenCalledTimes(callsDuringHold)
+      vi.useRealTimers()
+    }
+  )
 })
