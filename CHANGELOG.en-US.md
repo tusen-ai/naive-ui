@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Features
+
+- `n-split` now supports resizing by touch dragging, closes [#5889](https://github.com/tusen-ai/naive-ui/issues/5889), [#6697](https://github.com/tusen-ai/naive-ui/issues/6697).
+
 ## 2.45.3
 
 `2026-08-28`

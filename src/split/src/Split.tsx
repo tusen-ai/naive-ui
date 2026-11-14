@@ -145,44 +145,70 @@ export default defineComponent({
     })
 
     let offset = 0
-    const handleMouseDown = (e: MouseEvent): void => {
-      e.preventDefault()
+    function startDrag(e: MouseEvent | TouchEvent): void {
+      const isTouch = 'touches' in e
       isDraggingRef.value = true
       if (props.onDragStart)
         props.onDragStart(e)
-      const mouseMoveEvent = 'mousemove'
-      const mouseUpEvent = 'mouseup'
-      const onMouseMove = (e: MouseEvent): void => {
+      const moveEvent = isTouch ? 'touchmove' : 'mousemove'
+      const endEvents = isTouch ? ['touchend', 'touchcancel'] : ['mouseup']
+      const onMove = (e: MouseEvent | TouchEvent): void => {
         updateSize(e)
         if (props.onDragMove)
           props.onDragMove(e)
       }
-      const onMouseUp = (): void => {
-        off(mouseMoveEvent, document, onMouseMove)
-        off(mouseUpEvent, document, onMouseUp)
+      const onEnd = (): void => {
+        off(moveEvent, document, onMove)
+        endEvents.forEach(name => off(name, document, onEnd))
         isDraggingRef.value = false
         if (props.onDragEnd)
           props.onDragEnd(e)
         document.body.style.cursor = ''
       }
       document.body.style.cursor = resizeTriggerWrapperStyle.value.cursor
-      on(mouseMoveEvent, document, onMouseMove)
-      on(mouseUpEvent, document, onMouseUp)
+      on(moveEvent, document, onMove)
+      endEvents.forEach(name => on(name, document, onEnd))
 
       const resizeTriggerEl = resizeTriggerElRef.value
       if (resizeTriggerEl) {
         const elRect = resizeTriggerEl.getBoundingClientRect()
+        const point = getPoint(e)
         if (props.direction === 'horizontal') {
-          offset = e.clientX - elRect.left
+          offset = point.clientX - elRect.left
         }
         else {
-          offset = elRect.top - e.clientY
+          offset = elRect.top - point.clientY
         }
       }
       updateSize(e)
     }
 
-    function updateSize(event: MouseEvent): void {
+    const handleMouseDown = (e: MouseEvent): void => {
+      e.preventDefault()
+      startDrag(e)
+    }
+
+    const handleTouchStart = (e: TouchEvent): void => {
+      // Prevent the browser from emulating mouse events after the touch
+      if (e.cancelable)
+        e.preventDefault()
+      // Only a single finger drives the resizing
+      if (e.touches.length !== 1)
+        return
+      startDrag(e)
+    }
+
+    function getPoint(event: MouseEvent | TouchEvent): {
+      clientX: number
+      clientY: number
+    } {
+      if ('touches' in event) {
+        return event.touches[0] || event.changedTouches[0]
+      }
+      return event
+    }
+
+    function updateSize(event: MouseEvent | TouchEvent): void {
       const containerRect
         = resizeTriggerElRef.value?.parentElement?.getBoundingClientRect()
       if (!containerRect)
@@ -198,10 +224,11 @@ export default defineComponent({
           ? containerUsableWidth
           : containerUsableHeight
 
+      const { clientX, clientY } = getPoint(event)
       const newPxSize
         = direction === 'horizontal'
-          ? event.clientX - containerRect.left - offset
-          : event.clientY - containerRect.top + offset
+          ? clientX - containerRect.left - offset
+          : clientY - containerRect.top + offset
 
       const { min, max } = props
 
@@ -239,6 +266,7 @@ export default defineComponent({
       resizeTriggerWrapperStyle,
       resizeTriggerStyle,
       handleMouseDown,
+      handleTouchStart,
       firstPaneStyle
     }
   },
@@ -265,6 +293,7 @@ export default defineComponent({
             class={`${this.mergedClsPrefix}-split__resize-trigger-wrapper`}
             style={this.resizeTriggerWrapperStyle}
             onMousedown={this.handleMouseDown}
+            onTouchstart={this.handleTouchStart}
           >
             {resolveSlot(this.$slots['resize-trigger'], () => [
               <div

@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { h } from 'vue'
+import { h, nextTick } from 'vue'
 import { NSplit } from '../index'
 
 describe('n-split', () => {
@@ -227,5 +227,110 @@ describe('n-split', () => {
     const trigger = wrapper.find('.n-split__resize-trigger-wrapper')
     expect(trigger.exists()).toBe(true)
     wrapper.unmount()
+  })
+
+  describe('touch dragging', () => {
+    function mockRects(wrapper: ReturnType<typeof mount>): void {
+      const root = wrapper.find('.n-split').element as HTMLElement
+      const trigger = wrapper.find('.n-split__resize-trigger-wrapper')
+        .element as HTMLElement
+      root.getBoundingClientRect = () =>
+        ({ left: 0, top: 0, width: 403, height: 403 }) as DOMRect
+      trigger.getBoundingClientRect = () =>
+        ({ left: 200, top: 200, width: 3, height: 3 }) as DOMRect
+    }
+
+    function dispatchTouch(
+      target: EventTarget,
+      type: string,
+      point: { clientX: number, clientY: number } | null
+    ): Event {
+      const event = new Event(type, { bubbles: true, cancelable: true })
+      const touches = point ? [point] : []
+      Object.defineProperty(event, 'touches', { value: touches })
+      Object.defineProperty(event, 'changedTouches', {
+        value: point ? touches : [{ clientX: 0, clientY: 0 }]
+      })
+      target.dispatchEvent(event)
+      return event
+    }
+
+    it('should resize with touch on horizontal direction', async () => {
+      const onUpdateSize = vi.fn()
+      const onDragStart = vi.fn()
+      const onDragMove = vi.fn()
+      const onDragEnd = vi.fn()
+      const wrapper = mount(NSplit, {
+        attachTo: document.body,
+        props: { onUpdateSize, onDragStart, onDragMove, onDragEnd }
+      })
+      mockRects(wrapper)
+      const trigger = wrapper.find('.n-split__resize-trigger-wrapper').element
+
+      const startEvent = dispatchTouch(trigger, 'touchstart', {
+        clientX: 201,
+        clientY: 10
+      })
+      expect(startEvent.defaultPrevented).toBe(true)
+      expect(onDragStart).toHaveBeenCalledTimes(1)
+      await nextTick()
+      expect(wrapper.find('.n-split__resize-trigger--hover').exists()).toBe(
+        true
+      )
+
+      dispatchTouch(document, 'touchmove', { clientX: 101, clientY: 10 })
+      expect(onDragMove).toHaveBeenCalledTimes(1)
+      // (101 - 0 - 1) / (403 - 3)
+      expect(onUpdateSize).toHaveBeenLastCalledWith(0.25)
+
+      dispatchTouch(document, 'touchend', null)
+      expect(onDragEnd).toHaveBeenCalledTimes(1)
+      await nextTick()
+      expect(wrapper.find('.n-split__resize-trigger--hover').exists()).toBe(
+        false
+      )
+
+      // listeners are removed after the drag ends
+      dispatchTouch(document, 'touchmove', { clientX: 301, clientY: 10 })
+      expect(onDragMove).toHaveBeenCalledTimes(1)
+      wrapper.unmount()
+    })
+
+    it('should resize with touch on vertical direction', async () => {
+      const onUpdateSize = vi.fn()
+      const wrapper = mount(NSplit, {
+        attachTo: document.body,
+        props: { direction: 'vertical', onUpdateSize }
+      })
+      mockRects(wrapper)
+      const trigger = wrapper.find('.n-split__resize-trigger-wrapper').element
+
+      dispatchTouch(trigger, 'touchstart', { clientX: 10, clientY: 199 })
+      dispatchTouch(document, 'touchmove', { clientX: 10, clientY: 301 })
+      // (301 - 0 + (200 - 199)) / (403 - 3)
+      expect(onUpdateSize).toHaveBeenLastCalledWith(302 / 400)
+      dispatchTouch(document, 'touchcancel', null)
+      wrapper.unmount()
+    })
+
+    it('should ignore multi-touch gestures', async () => {
+      const onDragStart = vi.fn()
+      const wrapper = mount(NSplit, {
+        attachTo: document.body,
+        props: { onDragStart }
+      })
+      mockRects(wrapper)
+      const trigger = wrapper.find('.n-split__resize-trigger-wrapper').element
+      const event = new Event('touchstart', { bubbles: true, cancelable: true })
+      Object.defineProperty(event, 'touches', {
+        value: [
+          { clientX: 1, clientY: 1 },
+          { clientX: 2, clientY: 2 }
+        ]
+      })
+      trigger.dispatchEvent(event)
+      expect(onDragStart).not.toHaveBeenCalled()
+      wrapper.unmount()
+    })
   })
 })
