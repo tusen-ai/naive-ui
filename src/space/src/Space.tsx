@@ -163,6 +163,7 @@ export default defineComponent({
                 child
               ) : (
                 <div
+                  key={index}
                   role="none"
                   class={itemClass}
                   style={[

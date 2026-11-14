@@ -1,7 +1,8 @@
 import type { VueWrapper } from '@vue/test-utils'
 import type { Justify } from '../src/Space'
 import { mount } from '@vue/test-utils'
-import { createCommentVNode, Fragment, h } from 'vue'
+import { vi } from 'vitest'
+import { createCommentVNode, Fragment, h, nextTick, ref } from 'vue'
 import { c } from '../../_utils/cssr'
 import { NConfigProvider } from '../../config-provider'
 import { NSpace } from '../index'
@@ -294,5 +295,48 @@ describe('n-space', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
     wrapper.unmount()
+  })
+
+  it('should give every child wrapper a distinct key', () => {
+    const wrapper = mount(NSpace, {
+      slots: { default: () => [<div>1</div>, <div>2</div>, <div>3</div>] }
+    })
+    const children = (wrapper.vm.$ as any).subTree.children as any[]
+    const keys = children.map(child => child.key)
+
+    expect(keys).toHaveLength(3)
+    expect(keys.every(key => key !== null && key !== undefined)).toBe(true)
+    expect(new Set(keys).size).toBe(3)
+
+    wrapper.unmount()
+  })
+
+  it('should not warn about keys when children are toggled', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    const show = ref(true)
+    const wrapper = mount({
+      render() {
+        return (
+          <NSpace size={8}>
+            {{
+              default: () => [
+                show.value ? <div>1</div> : null,
+                show.value ? <div>2</div> : null
+              ]
+            }}
+          </NSpace>
+        )
+      }
+    })
+    show.value = false
+    await nextTick()
+    show.value = true
+    await nextTick()
+
+    const keyWarnings = warn.mock.calls.filter(call => /key/i.test(call.join(' ')))
+    expect(keyWarnings).toEqual([])
+
+    wrapper.unmount()
+    warn.mockRestore()
   })
 })
