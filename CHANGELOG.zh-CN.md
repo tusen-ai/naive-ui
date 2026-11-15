@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-collapse-transition` 在父组件重新渲染后未更新预先创建的插槽内容的问题，关闭 [#8207](https://github.com/tusen-ai/naive-ui/issues/8207)
+
 ## 2.45.3
 
 `2026-08-28`

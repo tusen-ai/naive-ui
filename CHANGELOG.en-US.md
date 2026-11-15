@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-collapse-transition` not updating pre-created slot content after its parent re-renders, closes [#8207](https://github.com/tusen-ai/naive-ui/issues/8207).
+
 ## 2.45.3
 
 `2026-08-28`
