@@ -62,9 +62,9 @@ export default defineComponent({
       from: number = props.from,
       to: number = props.to
     ): void => {
-      animating = true
       displayedValueRef.value = props.from
       if (from !== to) {
+        animating = true
         tween({
           from,
           to,

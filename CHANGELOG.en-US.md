@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-number-animation`'s `play()` method not working after playing with equal `from` and `to` values, closes [#7304](https://github.com/tusen-ai/naive-ui/issues/7304).
+
 ## 2.45.3
 
 `2026-08-28`
