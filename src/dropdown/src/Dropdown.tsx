@@ -3,6 +3,7 @@ import type { CSSProperties, PropType, Ref } from 'vue'
 import type { FollowerPlacement } from 'vueuc'
 import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes, MaybeArray } from '../../_utils'
+import type { RtlItem } from '../../config-provider/src/internal-interface'
 import type { InternalRenderBody } from '../../popover/src/interface'
 import type { PopoverInternalProps } from '../../popover/src/Popover'
 import type { DropdownTheme, DropdownThemeOverrides } from '../styles'
@@ -37,6 +38,7 @@ import {
   watch
 } from 'vue'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { useRtl } from '../../_mixins/use-rtl'
 import { call, createKey, createRefSetter, keep } from '../../_utils'
 import { NPopover } from '../../popover'
 import { popoverBaseProps } from '../../popover/src/Popover'
@@ -62,6 +64,7 @@ export interface DropdownInjection {
   childrenFieldRef: Ref<string>
   doSelect: OnUpdateValueImpl
   doUpdateShow: (value: boolean) => void
+  rtlEnabledRef?: Ref<RtlItem | undefined> | undefined
 }
 
 const dropdownBaseProps = {
@@ -206,8 +209,12 @@ export default defineComponent({
       keyboardEnabledRef
     )
 
-    const { mergedClsPrefixRef, inlineThemeDisabled, mergedComponentPropsRef }
-      = useConfig(props)
+    const {
+      mergedClsPrefixRef,
+      inlineThemeDisabled,
+      mergedComponentPropsRef,
+      mergedRtlRef
+    } = useConfig(props)
     const mergedSizeRef = computed(() => {
       return (
         props.size || mergedComponentPropsRef?.value?.Dropdown?.size || 'medium'
@@ -222,6 +229,8 @@ export default defineComponent({
       props,
       mergedClsPrefixRef
     )
+
+    const rtlEnabledRef = useRtl('Dropdown', mergedRtlRef, mergedClsPrefixRef)
 
     provide(dropdownInjectionKey, {
       labelFieldRef: toRef(props, 'labelField'),
@@ -245,7 +254,8 @@ export default defineComponent({
       >,
       menuPropsRef: toRef(props, 'menuProps'),
       doSelect,
-      doUpdateShow
+      doUpdateShow,
+      rtlEnabledRef
     })
     // watch
     watch(mergedShowRef, (value) => {
@@ -325,10 +335,14 @@ export default defineComponent({
               nextNode = currentNode.getPrev()
               break
             case 'right':
-              nextNode = currentNode.getChild()
+              nextNode = rtlEnabledRef?.value
+                ? currentNode.getParent()
+                : currentNode.getChild()
               break
             case 'left':
-              nextNode = currentNode.getParent()
+              nextNode = rtlEnabledRef?.value
+                ? currentNode.getChild()
+                : currentNode.getParent()
               break
           }
           if (nextNode)
@@ -418,6 +432,7 @@ export default defineComponent({
       mergedClsPrefix: mergedClsPrefixRef,
       mergedTheme: themeRef,
       mergedSize: mergedSizeRef,
+      rtlEnabled: rtlEnabledRef,
       // data
       tmNodes: tmNodesRef,
       // show
@@ -456,6 +471,7 @@ export default defineComponent({
         class: [
           className,
           `${mergedClsPrefix}-dropdown`,
+          this.rtlEnabled && `${mergedClsPrefix}-dropdown--rtl`,
           `${mergedClsPrefix}-dropdown--${this.mergedSize}-size`,
           this.themeClass
         ],

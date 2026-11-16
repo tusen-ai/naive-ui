@@ -5,3 +5,4 @@ export type {
   DropdownThemeOverrides,
   DropdownThemeVars
 } from './light'
+export { dropdownRtl } from './rtl'
