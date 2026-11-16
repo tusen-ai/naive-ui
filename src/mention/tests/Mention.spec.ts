@@ -51,6 +51,31 @@ describe('n-mention', () => {
     wrapper.unmount()
   })
 
+  it('ignores an open suggestion after becoming disabled', async () => {
+    const onSelect = vi.fn()
+    const onUpdateValue = vi.fn()
+    const wrapper = mount(NMention, {
+      attachTo: document.body,
+      props: { options, onSelect, onUpdateValue }
+    })
+    try {
+      const input = wrapper.get('input')
+      input.element.focus()
+      await input.setValue('@')
+      await vi.advanceTimersByTimeAsync(150)
+      const option = document.querySelector<HTMLElement>('.n-base-select-option')!
+      onUpdateValue.mockClear()
+
+      await wrapper.setProps({ disabled: true })
+      option.click()
+      expect(onSelect).not.toHaveBeenCalled()
+      expect(onUpdateValue).not.toHaveBeenCalled()
+    }
+    finally {
+      wrapper.unmount()
+    }
+  })
+
   it('should work with `autosize` prop', async () => {
     const wrapper = mount(NMention, {
       attachTo: document.body,
