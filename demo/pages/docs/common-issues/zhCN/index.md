@@ -4,7 +4,7 @@
 
 ### 情况 1
 
-如果你没有在同一个组件上同时使用 `v-model:xxx` 和 `on-update:xxx`，`@update:xxx` 和 `on-update:xxx` 在模版中使用时没有任何区别。
+如果你没有在同一个组件上同时使用 `v-model:xxx` 和 `on-model:xxx`，`@update:xxx` 和 `on-update:xxx` 在模版中使用时没有任何区别。
 
 在 Naive UI 中，全部的 API 文档使用 `on-update:xxx` 格式，因为 `@` 只是 Vue 提供的一种简写。
 
