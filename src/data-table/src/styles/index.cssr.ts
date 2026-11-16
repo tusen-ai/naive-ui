@@ -380,6 +380,7 @@ export default c([
       text-align: start;
       box-sizing: border-box;
       border: none;
+      border-color: var(--n-merged-border-color);
       background-color: var(--n-merged-td-color);
       color: var(--n-td-text-color);
       border-bottom: 1px solid var(--n-merged-border-color);
