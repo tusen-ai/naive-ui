@@ -16,7 +16,7 @@ const uzUZ: NLocale = {
     placeholder: 'Tanlash',
     loading: 'Yuklanmoqda',
     loadingRequiredMessage: (label: string): string =>
-      `${label} ning barcha farzand elementlarini yuklang, keyin ularga to'liq ruxsat bering`
+      `${label} elementini belgilashdan oldin uning barcha ichki elementlarini yuklang.`
   },
   Time: {
     dateFormat: 'yyyy-MM-dd',
@@ -41,14 +41,14 @@ const uzUZ: NLocale = {
     datetimePlaceholder: 'Sana va vaqtni tanlash',
     monthPlaceholder: 'Oy tanlash',
     yearPlaceholder: 'Yil tanlash',
-    quarterPlaceholder: 'Chet tanlash',
+    quarterPlaceholder: 'Chorak tanlash',
     weekPlaceholder: 'Hafta tanlash',
-    startDatePlaceholder: 'Boshlang`ich sana',
+    startDatePlaceholder: 'Boshlangʻich sana',
     endDatePlaceholder: 'Tugash sanasi',
-    startDatetimePlaceholder: 'Boshlang`ich sana va vaqti',
+    startDatetimePlaceholder: 'Boshlangʻich sana va vaqti',
     endDatetimePlaceholder: 'Tugash sanasi va vaqti',
-    startMonthPlaceholder: 'Boshlang`ich oy',
-    endMonthPlaceholder: 'Oxirgi oy',
+    startMonthPlaceholder: 'Boshlangʻich oy',
+    endMonthPlaceholder: 'Tugash oyi',
     monthBeforeYear: true,
     firstDayOfWeek: 1 as 0 | 1 | 2 | 3 | 4 | 5 | 6, // in Uzbekistan monday
     today: 'Bugun'
@@ -61,17 +61,17 @@ const uzUZ: NLocale = {
   },
   LegacyTransfer: {
     sourceTitle: 'Manba',
-    targetTitle: 'Mansub'
+    targetTitle: 'Maqsad'
   },
   Transfer: {
     selectAll: 'Barchasini tanlash',
     unselectAll: 'Barchasini bekor qilish',
     clearAll: 'Tozalash',
     total: (num: number): string => `Jami ${num} ta`,
-    selected: (num: number): string => `Tanlandi ${num} ta`
+    selected: (num: number): string => `${num} ta tanlandi`
   },
   Empty: {
-    description: 'Ma`lumotlar yo`q'
+    description: 'Maʼlumotlar yoʻq'
   },
   Select: {
     placeholder: 'Tanlash'
@@ -84,11 +84,11 @@ const uzUZ: NLocale = {
     clear: 'Tozalash'
   },
   Pagination: {
-    goto: 'O`tish',
+    goto: 'Oʻtish',
     selectionSuffix: 'sahifa'
   },
   DynamicTags: {
-    add: 'Qo`shish'
+    add: 'Qoʻshish'
   },
   Log: {
     loading: 'Yuklanmoqda'
@@ -106,8 +106,8 @@ const uzUZ: NLocale = {
     title: 'Mavzu muharriri',
     clearAllVars: 'Barchasini tozalash',
     clearSearch: 'Qidiruvni tozalash',
-    filterCompName: 'Komponent nomi bo`yicha filtr',
-    filterVarName: 'O`zgaruvchi nomlarini filtrlash',
+    filterCompName: 'Komponent nomi boʻyicha filtrlash',
+    filterVarName: 'Oʻzgaruvchi nomlarini filtrlash',
     import: 'Import qilish',
     export: 'Eksport qilish',
     restore: 'Qayta tiklash'
@@ -115,17 +115,17 @@ const uzUZ: NLocale = {
   Image: {
     tipPrevious: 'Oldingi rasm (←)',
     tipNext: 'Keyingi rasm (→)',
-    tipCounterclockwise: 'Soat yonida',
-    tipClockwise: 'Soat bo`yicha',
-    tipZoomOut: 'Yaqinlash',
-    tipZoomIn: 'Uzoq qilish',
+    tipCounterclockwise: 'Soat miliga teskari burish',
+    tipClockwise: 'Soat mili boʻyicha burish',
+    tipZoomOut: 'Kichiklashtirish',
+    tipZoomIn: 'Kattalashtirish',
     tipDownload: 'Yuklab olish',
     tipClose: 'Yopish (Esc)',
-    tipOriginalSize: 'Asl o`lchamga qaytish'
+    tipOriginalSize: 'Asl oʻlchamga qaytish'
   },
   Heatmap: {
-    less: 'less',
-    more: 'more',
+    less: 'Kamroq',
+    more: 'Koʻproq',
     monthFormat: 'MMM',
     weekdayFormat: 'eeeeee'
   }
