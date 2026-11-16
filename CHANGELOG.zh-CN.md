@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复空 `n-tab-pane` 的标签未显示 `tab` 属性或名称的问题，关闭 [#8211](https://github.com/tusen-ai/naive-ui/issues/8211)
+
 ## 2.45.3
 
 `2026-08-28`
