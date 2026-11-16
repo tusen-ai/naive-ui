@@ -721,6 +721,11 @@ export default defineComponent({
     }
 
     const isOverflowRef = ref(false)
+    watch(
+      () => props.showScrollButton && isOverflowRef.value,
+      updateCurrentScrollPosition,
+      { flush: 'post' }
+    )
     function getScrollEl(): HTMLElement | null {
       const placement = mergedPlacementRef.value
       return (
