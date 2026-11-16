@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix open `n-color-picker`, `n-date-picker`, and `n-time-picker` panels accepting input after becoming disabled.
+
 ## 2.45.3
 
 `2026-08-28`

@@ -80,6 +80,7 @@ const timePickerPanelProps = {
   nowText: String,
   confirmText: String,
   transitionDisabled: Boolean,
+  disabled: Boolean,
   onClearClick: Function as PropType<() => void>,
   onConfirmClick: Function as PropType<() => void>,
   onFocusin: Function as PropType<(e: FocusEvent) => void>,
@@ -204,6 +205,7 @@ export default defineComponent({
     return (
       <div
         tabindex={0}
+        inert={this.disabled || undefined}
         class={`${mergedClsPrefix}-time-picker-panel`}
         onFocusin={this.onFocusin}
         onFocusout={this.onFocusout}

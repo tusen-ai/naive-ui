@@ -11,6 +11,25 @@ describe('n-date-picker', () => {
     mount(NDatePicker).unmount()
   })
 
+  it('ignores selection in an open panel after disabling', async () => {
+    const onUpdateValue = vi.fn()
+    const wrapper = mount(NDatePicker, {
+      attachTo: document.body,
+      props: { show: true, onUpdateValue }
+    })
+    try {
+      await wrapper.setProps({ disabled: true })
+      const option = document.querySelector<HTMLElement>(
+        '.n-date-panel-date:not(.n-date-panel-date--selected):not(.n-date-panel-date--excluded)'
+      )!
+      option.click()
+      expect(onUpdateValue).not.toHaveBeenCalled()
+    }
+    finally {
+      wrapper.unmount()
+    }
+  })
+
   it('date type should work with shortcuts prop', async () => {
     const test = ref<[number, number]>([0, 0])
     const wrapper = mount(NDatePicker, {
