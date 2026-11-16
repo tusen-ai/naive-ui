@@ -82,7 +82,9 @@ const nlNL: NLocale = {
     positiveText: 'OK',
     negativeText: 'Annuleer',
     now: 'Nu',
-    clear: 'Wis'
+    clear: 'Wis',
+    am: 'AM',
+    pm: 'PM'
   },
   Pagination: {
     goto: 'Ga naar',

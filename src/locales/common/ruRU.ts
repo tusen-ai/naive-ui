@@ -81,7 +81,9 @@ const ruRu: NLocale = {
     positiveText: 'OK',
     negativeText: 'Отменить',
     now: 'Сейчас',
-    clear: 'Очистить'
+    clear: 'Очистить',
+    am: 'ДП',
+    pm: 'ПП'
   },
   Pagination: {
     goto: 'Перейти',

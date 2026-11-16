@@ -81,7 +81,9 @@ const uzUZ: NLocale = {
     positiveText: 'OK',
     negativeText: 'Bekor qilish',
     now: 'Hozir',
-    clear: 'Tozalash'
+    clear: 'Tozalash',
+    am: 'a.m.',
+    pm: 'p.m.'
   },
   Pagination: {
     goto: 'O`tish',

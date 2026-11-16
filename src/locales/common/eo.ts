@@ -83,7 +83,9 @@ const eo: NLocale = {
     positiveText: 'Bone',
     negativeText: 'Nuligi',
     now: 'Nun',
-    clear: 'Malplenigi'
+    clear: 'Malplenigi',
+    am: 'antaŭtagmeze',
+    pm: 'posttagmeze'
   },
   Pagination: {
     goto: 'Iri al',

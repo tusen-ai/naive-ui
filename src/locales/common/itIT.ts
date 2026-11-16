@@ -89,7 +89,9 @@ const itIT: NLocale = {
     positiveText: 'OK',
     negativeText: 'Annulla',
     now: 'Ora',
-    clear: 'Cancella'
+    clear: 'Cancella',
+    am: 'AM',
+    pm: 'PM'
   },
   Pagination: {
     goto: 'Vai a',

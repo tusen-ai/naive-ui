@@ -81,7 +81,9 @@ const faIR: NLocale = {
     positiveText: 'تأیید',
     negativeText: 'لغو',
     now: 'همین الان',
-    clear: 'پاک کردن'
+    clear: 'پاک کردن',
+    am: 'قبل‌ازظهر',
+    pm: 'بعدازظهر'
   },
   Pagination: {
     goto: 'رفتن به صفحه',
