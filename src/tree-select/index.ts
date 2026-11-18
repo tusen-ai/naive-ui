@@ -1,3 +1,7 @@
+import type { HTMLAttributes } from 'vue'
+import type { WithNativeAttrs } from '../_utils'
+import NTreeSelectImpl from './src/TreeSelect'
+
 export type {
   TreeOverrideNodeClickBehavior as TreeSelectOverrideNodeClickBehavior,
   TreeOverrideNodeClickBehaviorReturn as TreeSelectOverrideNodeClickBehaviorReturn
@@ -12,5 +16,10 @@ export type {
   TreeSelectRenderTag
 } from './src/interface'
 export type * from './src/public-types'
-export { default as NTreeSelect, treeSelectProps } from './src/TreeSelect'
+export { treeSelectProps } from './src/TreeSelect'
 export type { TreeSelectProps, TreeSelectSlots } from './src/TreeSelect'
+
+export const NTreeSelect: WithNativeAttrs<
+  typeof NTreeSelectImpl,
+  HTMLAttributes
+> = NTreeSelectImpl

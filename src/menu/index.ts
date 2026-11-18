@@ -1,3 +1,7 @@
+import type { HTMLAttributes } from 'vue'
+import type { WithNativeAttrs } from '../_utils'
+import NMenuImpl from './src/Menu'
+
 export type {
   MenuDividerOption,
   MenuGroupOption,
@@ -5,5 +9,10 @@ export type {
   MenuNodeProps,
   MenuOption
 } from './src/interface'
-export { menuProps, default as NMenu } from './src/Menu'
+export { menuProps } from './src/Menu'
 export type { MenuProps } from './src/Menu'
+
+export const NMenu: WithNativeAttrs<
+  typeof NMenuImpl,
+  Omit<HTMLAttributes, 'role'>
+> = NMenuImpl

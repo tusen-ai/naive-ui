@@ -1,8 +1,27 @@
+import type {
+  HTMLAttributes,
+  TableHTMLAttributes,
+  TdHTMLAttributes,
+  ThHTMLAttributes
+} from 'vue'
+import type { WithNativeAttrs } from '../_utils'
+import NTableImpl from './src/Table'
+import NTbodyImpl from './src/Tbody'
+import NTdImpl from './src/Td'
+import NThImpl from './src/Th'
+import NTheadImpl from './src/Thead'
+import NTrImpl from './src/Tr'
+
 export type * from './src/public-types'
-export { default as NTable, tableProps } from './src/Table'
+export { tableProps } from './src/Table'
 export type { TableProps } from './src/Table'
-export { default as NTbody } from './src/Tbody'
-export { default as NTd } from './src/Td'
-export { default as NTh } from './src/Th'
-export { default as NThead } from './src/Thead'
-export { default as NTr } from './src/Tr'
+
+export const NTable: WithNativeAttrs<typeof NTableImpl, TableHTMLAttributes>
+  = NTableImpl
+export const NTbody: WithNativeAttrs<typeof NTbodyImpl, HTMLAttributes>
+  = NTbodyImpl
+export const NTd: WithNativeAttrs<typeof NTdImpl, TdHTMLAttributes> = NTdImpl
+export const NTh: WithNativeAttrs<typeof NThImpl, ThHTMLAttributes> = NThImpl
+export const NThead: WithNativeAttrs<typeof NTheadImpl, HTMLAttributes>
+  = NTheadImpl
+export const NTr: WithNativeAttrs<typeof NTrImpl, HTMLAttributes> = NTrImpl

@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Feats
+
+- 为组件补充透传到 DOM 元素的原生属性和事件监听器的类型，开启 `vueCompilerOptions.strictTemplates` 后不再报错
+
 ### Fixes
 
 - 修复原生事件监听器与组件内部监听器合并时报错或丢失的问题，影响 `n-ellipsis`、`n-infinite-scroll`、`n-popselect`、`n-select` 和 `n-cascader` 的 `menu-props` 以及 `scrollbar-props`

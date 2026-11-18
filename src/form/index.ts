@@ -1,22 +1,25 @@
-export { formProps, default as NForm } from './src/Form'
+import type { FormHTMLAttributes, HTMLAttributes } from 'vue'
+import type { WithNativeAttrs } from '../_utils'
+import NFormImpl from './src/Form'
+import NFormItemImpl from './src/FormItem'
+import NFormItemColImpl from './src/FormItemCol'
+import NFormItemGiImpl from './src/FormItemGridItem'
+import NFormItemRowImpl from './src/FormItemRow'
+
+export { formProps } from './src/Form'
 export type { FormProps } from './src/Form'
-export { formItemProps, default as NFormItem } from './src/FormItem'
+export { formItemProps } from './src/FormItem'
 export type { FormItemProps } from './src/FormItem'
-// deprecated
-export { default as NFormItemCol } from './src/FormItemCol'
 export type { FormItemColProps } from './src/FormItemCol'
 export {
   formItemGiProps,
-  formItemGiProps as formItemGridItemProps,
-  default as NFormItemGi,
-  default as NFormItemGridItem
+  formItemGiProps as formItemGridItemProps
 } from './src/FormItemGridItem'
 
 export type {
   FormItemGiProps,
   FormItemGiProps as FormItemGridItemProps
 } from './src/FormItemGridItem'
-export { default as NFormItemRow } from './src/FormItemRow'
 export type { FormItemRowProps } from './src/FormItemRow'
 export type {
   FormInst,
@@ -29,3 +32,22 @@ export type {
 } from './src/interface'
 
 export type * from './src/public-types'
+
+export const NForm: WithNativeAttrs<typeof NFormImpl, FormHTMLAttributes>
+  = NFormImpl
+export const NFormItem: WithNativeAttrs<typeof NFormItemImpl, HTMLAttributes>
+  = NFormItemImpl
+// deprecated
+export const NFormItemCol: WithNativeAttrs<
+  typeof NFormItemColImpl,
+  HTMLAttributes
+> = NFormItemColImpl
+export const NFormItemGi: WithNativeAttrs<
+  typeof NFormItemGiImpl,
+  HTMLAttributes
+> = NFormItemGiImpl
+export const NFormItemGridItem: typeof NFormItemGi = NFormItemGi
+export const NFormItemRow: WithNativeAttrs<
+  typeof NFormItemRowImpl,
+  HTMLAttributes
+> = NFormItemRowImpl

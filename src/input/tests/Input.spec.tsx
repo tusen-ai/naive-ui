@@ -309,7 +309,6 @@ describe('n-input', () => {
               ref={inputInstRef}
               onBlur={onBlur}
               onFocus={onFocus}
-              // @ts-expect-error onSelect is not an exposed jsx prop
               onSelect={onSelect}
             />
           )

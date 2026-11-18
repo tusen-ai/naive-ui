@@ -1,3 +1,7 @@
+import type { HTMLAttributes } from 'vue'
+import type { WithNativeAttrs } from '../_utils'
+import NSelectImpl from './src/Select'
+
 export type {
   NodeProps as SelectNodeProps,
   RenderLabelImpl as SelectRenderLabel,
@@ -11,5 +15,8 @@ export type {
   SelectOption
 } from './src/interface'
 export type * from './src/public-types'
-export { default as NSelect, selectProps } from './src/Select'
+export { selectProps } from './src/Select'
 export type { SelectProps, SelectSlots } from './src/Select'
+
+export const NSelect: WithNativeAttrs<typeof NSelectImpl, HTMLAttributes>
+  = NSelectImpl

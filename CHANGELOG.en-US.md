@@ -2,6 +2,10 @@
 
 ## NEXT_VERSION
 
+### Feats
+
+- Type the native attributes and event listeners that components forward to their element, so `vueCompilerOptions.strictTemplates` no longer rejects them.
+
 ### Fixes
 
 - Fix native event listeners throwing or being dropped when a component merges them with its own, affects `n-ellipsis`, `n-infinite-scroll`, `n-popselect`, `menu-props` of `n-select` and `n-cascader`, and `scrollbar-props`.
