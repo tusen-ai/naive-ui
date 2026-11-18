@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- Support clicking the version number in the website header to navigate to the changelog, closes [#8198](https://github.com/tusen-ai/naive-ui/issues/8198).
+
 ## 2.45.3
 
 `2026-08-28`

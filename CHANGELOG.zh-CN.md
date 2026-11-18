@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+`NEXT_VERSION`
+
+### Feats
+
+- 官网顶部版本号支持点击跳转到更新日志，关闭 [#8198](https://github.com/tusen-ai/naive-ui/issues/8198)
+
 ## 2.45.3
 
 `2026-08-28`
