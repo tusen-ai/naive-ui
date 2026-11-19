@@ -4,6 +4,7 @@ import { c, cB, cE, cM, cNotM } from '../../../_utils/cssr'
 // --n-bezier
 // --n-button-border-color
 // --n-button-border-color-active
+// --n-button-border-color-hover
 // --n-height
 // --n-opacity-disabled
 // --n-font-size
@@ -113,6 +114,7 @@ export default cB('radio-group', `
           box-shadow: var(--n-button-box-shadow-hover);
         `),
         cNotM('checked', {
+          borderColor: 'var(--n-button-border-color-hover)',
           color: 'var(--n-button-text-color-hover)'
         })
       ]),
