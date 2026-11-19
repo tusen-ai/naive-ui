@@ -11,7 +11,7 @@ import type {
   TmNode
 } from '../interface'
 import type { ColItem } from '../use-group-header'
-import { pxfy, repeat } from 'seemly'
+import { depx, pxfy, repeat } from 'seemly'
 import { useMemo } from 'vooks'
 import {
   computed,
@@ -196,6 +196,7 @@ export default defineComponent({
       summaryPlacementRef,
       treeMateRef,
       scrollbarPropsRef,
+      getResizableWidth,
       setHeaderScrollLeft,
       doUpdateExpandedRowKeys,
       handleTableBodyScroll,
@@ -206,6 +207,19 @@ export default defineComponent({
       explicitlyScrollableRef
     } = inject(dataTableInjectionKey)!
     const NConfigProvider = inject(configProviderInjectionKey, null)
+    // Resized columns can make the table wider than `scrollX`. The scrollbar
+    // measures its content element, so the content has to be at least as wide
+    // as the columns or the horizontal scrollbar never becomes available.
+    const resizedColsWidthRef = computed(() => {
+      const { value: cols } = colsRef
+      if (!cols.some(col => getResizableWidth(col.key) !== undefined)) {
+        return undefined
+      }
+      return cols.reduce((total, col) => {
+        const width = depx(col.style.width ?? 0)
+        return total + (Number.isFinite(width) ? width : 0)
+      }, 0)
+    })
     const scrollbarInstRef = ref<ScrollbarInst | null>(null)
     const virtualListRef = ref<VirtualListInst | null>(null)
     const emptyElRef = ref<HTMLElement | null>(null)
@@ -518,6 +532,7 @@ export default defineComponent({
       renderCell,
       explicitlyScrollable: explicitlyScrollableRef,
       xScrollable: xScrollableRef,
+      resizedColsWidth: resizedColsWidthRef,
       ...exposedMethods
     }
   },
@@ -535,8 +550,13 @@ export default defineComponent({
       shouldDisplayVirtualList
     } = this
 
+    const { resizedColsWidth } = this
+    const contentMinWidth = formatLength(scrollX) || '100%'
     const contentStyle: CSSProperties = {
-      minWidth: formatLength(scrollX) || '100%'
+      minWidth:
+        resizedColsWidth === undefined
+          ? contentMinWidth
+          : `max(${contentMinWidth}, ${resizedColsWidth}px)`
     }
     if (scrollX)
       contentStyle.width = '100%'
