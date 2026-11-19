@@ -201,6 +201,7 @@ export default defineComponent({
         self: {
           buttonBorderColor,
           buttonBorderColorActive,
+          buttonBorderColorHover,
           buttonBorderRadius,
           buttonBoxShadow,
           buttonBoxShadowFocus,
@@ -220,6 +221,7 @@ export default defineComponent({
         '--n-bezier': cubicBezierEaseInOut,
         '--n-button-border-color': buttonBorderColor,
         '--n-button-border-color-active': buttonBorderColorActive,
+        '--n-button-border-color-hover': buttonBorderColorHover,
         '--n-button-border-radius': buttonBorderRadius,
         '--n-button-box-shadow': buttonBoxShadow,
         '--n-button-box-shadow-focus': buttonBoxShadowFocus,

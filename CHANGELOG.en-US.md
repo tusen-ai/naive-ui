@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix the `Radio.buttonBorderColorHover` theme override having no effect on radio buttons, closes [#8257](https://github.com/tusen-ai/naive-ui/issues/8257).
+
 ## 2.45.3
 
 `2026-08-28`

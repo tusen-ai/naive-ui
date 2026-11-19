@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `Radio.buttonBorderColorHover` 主题覆盖对单选按钮不生效的问题，关闭 [#8257](https://github.com/tusen-ai/naive-ui/issues/8257)
+
 ## 2.45.3
 
 `2026-08-28`
