@@ -24,6 +24,7 @@ node-props.vue
 show-line.vue
 checkbox-placement.vue
 override-click-behavior.vue
+node-display-mode.vue
 ```
 
 ## API
