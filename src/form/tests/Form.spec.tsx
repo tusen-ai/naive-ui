@@ -1,7 +1,10 @@
-import type { FormInst } from '../index'
+import type { FormInst, FormItemRule } from '../index'
 /* eslint-disable unused-imports/no-unused-vars */
-import type { FormValidateCallback } from '../src/interface'
-import { mount } from '@vue/test-utils'
+import type {
+  FormValidateCallback,
+  StandardSchemaV1
+} from '../src/interface'
+import { flushPromises, mount } from '@vue/test-utils'
 import { vi } from 'vitest'
 import { defineComponent, h, ref } from 'vue'
 import { NInput } from '../../input'
@@ -776,6 +779,173 @@ describe('n-form', () => {
           .find('.n-form-item-feedback.n-form-item-feedback--warning')
           .exists()
       ).toBe(true)
+
+      wrapper.unmount()
+    })
+  })
+
+  describe('standard schema', () => {
+    // A minimal Standard Schema, `check` returns the messages of the issues
+    function createSchema(
+      check: (value: unknown) => string[] | Promise<string[]>
+    ): StandardSchemaV1 {
+      return {
+        '~standard': {
+          version: 1,
+          vendor: 'test',
+          validate: async (value) => {
+            const messages = await check(value)
+            return messages.length
+              ? { issues: messages.map(message => ({ message })) }
+              : { value }
+          }
+        }
+      }
+    }
+
+    function mountSchemaForm(
+      rule: FormItemRule | FormItemRule[],
+      initialValue = ''
+    ) {
+      return mount(
+        defineComponent({
+          setup() {
+            return {
+              formRef: ref<FormInst>(),
+              formData: ref({ name: initialValue })
+            }
+          },
+          render() {
+            return (
+              <NForm
+                ref="formRef"
+                model={this.formData}
+                rules={{ name: rule }}
+              >
+                {{
+                  default: () => (
+                    <NFormItem path="name">
+                      {{
+                        default: () => (
+                          <NInput
+                            value={this.formData.name}
+                            onUpdateValue={(v) => {
+                              this.formData.name = v
+                            }}
+                          />
+                        )
+                      }}
+                    </NFormItem>
+                  )
+                }}
+              </NForm>
+            )
+          }
+        })
+      )
+    }
+
+    it('should pass when the schema has no issue', async () => {
+      const check = vi.fn(() => [])
+      const wrapper = mountSchemaForm({ schema: createSchema(check) }, 'kirby')
+      const formRef = wrapper.vm.$refs.formRef as FormInst
+
+      await expect(formRef.validate()).resolves.toEqual({ warnings: undefined })
+      expect(check).toHaveBeenCalledWith('kirby')
+      expect(wrapper.find('.n-form-item-feedback--error').exists()).toBe(false)
+
+      wrapper.unmount()
+    })
+
+    it('should show every issue of the schema as an error', async () => {
+      const wrapper = mountSchemaForm({
+        schema: createSchema(() => ['too short', 'no digit'])
+      })
+      const formRef = wrapper.vm.$refs.formRef as FormInst
+
+      await expect(formRef.validate()).rejects.toMatchObject([
+        [
+          { field: 'name', message: 'too short' },
+          { field: 'name', message: 'no digit' }
+        ]
+      ])
+      expect(
+        wrapper
+          .findAll('.n-form-item-feedback--error .n-form-item-feedback__line')
+          .map(feedback => feedback.text())
+      ).toEqual(['too short', 'no digit'])
+
+      wrapper.unmount()
+    })
+
+    it('should support schemas that validate asynchronously', async () => {
+      const wrapper = mountSchemaForm({
+        schema: createSchema(
+          async value =>
+            await Promise.resolve(value === 'kirby' ? [] : ['not kirby'])
+        )
+      })
+      const formRef = wrapper.vm.$refs.formRef as FormInst
+
+      await expect(formRef.validate()).rejects.toMatchObject([
+        [{ message: 'not kirby' }]
+      ])
+      await wrapper.find('input').setValue('kirby')
+      await expect(formRef.validate()).resolves.toEqual({
+        warnings: undefined
+      })
+
+      wrapper.unmount()
+    })
+
+    it('should respect `trigger`', async () => {
+      const wrapper = mountSchemaForm({
+        trigger: 'input',
+        schema: createSchema(value => (value === 'kirby' ? [] : ['not kirby']))
+      })
+
+      await wrapper.find('input').setValue('star')
+      await flushPromises()
+      expect(wrapper.find('.n-form-item-feedback--error').text()).toBe(
+        'not kirby'
+      )
+      await wrapper.find('input').setValue('kirby')
+      await flushPromises()
+      expect(wrapper.find('.n-form-item-feedback--error').exists()).toBe(false)
+
+      wrapper.unmount()
+    })
+
+    it('should replace the issues with `message` of the rule', async () => {
+      const wrapper = mountSchemaForm({
+        message: 'custom message',
+        schema: createSchema(() => ['too short', 'no digit'])
+      })
+      const formRef = wrapper.vm.$refs.formRef as FormInst
+
+      await expect(formRef.validate()).rejects.toMatchObject([
+        [{ field: 'name', message: 'custom message' }]
+      ])
+
+      wrapper.unmount()
+    })
+
+    it('should work with `level: \'warning\'` and other rules', async () => {
+      const wrapper = mountSchemaForm([
+        { required: true, message: 'required' },
+        { level: 'warning', schema: createSchema(() => ['not recommended']) }
+      ])
+      const formRef = wrapper.vm.$refs.formRef as FormInst
+
+      await expect(formRef.validate()).rejects.toMatchObject([
+        [{ message: 'required' }]
+      ])
+      await wrapper.find('input').setValue('kirby')
+      const { warnings } = await formRef.validate()
+      expect(warnings).toMatchObject([[{ message: 'not recommended' }]])
+      expect(wrapper.find('.n-form-item-feedback--warning').text()).toBe(
+        'not recommended'
+      )
 
       wrapper.unmount()
     })

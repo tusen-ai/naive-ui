@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-form` 的规则新增 `schema`，支持传入 [Standard Schema](https://standardschema.dev)（Zod、Valibot、ArkType 等），关闭 [#7491](https://github.com/tusen-ai/naive-ui/issues/7491)
+
 ## 2.45.3
 
 `2026-08-28`

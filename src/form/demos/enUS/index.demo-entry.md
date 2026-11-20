@@ -62,8 +62,20 @@ feedback-style.vue
 | message | `string` | `undefined` | Text to show when validation fails. |  |
 | renderMessage | `() => VNodeChild` | `undefined` | Render function or message. | 2.29.1 |
 | required | `boolean` | `undefined` | Is it required. |  |
+| schema | `StandardSchemaV1` | `undefined` | A [Standard Schema](https://standardschema.dev) (such as the ones created by Zod, Valibot and ArkType) used to validate the value. Every issue reported by the schema is shown as an error. It takes precedence over `validator` and `asyncValidator`, and `message` replaces its issues. | NEXT_VERSION |
 | trigger | `string \| Array<string>` | `undefined` | Trigger type. |  |
 | validator | `(rule: FormItemRule, value: any) => boolean \| Error` | `undefined` | Validation rule. |  |
+
+Use `schema` to reuse the schemas you already have. It validates the value of a single form item, so write one schema for each path.
+
+```ts
+import { z } from 'zod'
+
+const rules = {
+  name: { trigger: ['input', 'blur'], schema: z.string().min(2, 'Too short.') },
+  age: { trigger: 'blur', schema: z.number().min(18, 'Must be an adult.') }
+}
+```
 
 #### FormValidateMessages Type
 

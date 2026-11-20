@@ -17,6 +17,7 @@ import type {
   FormItemInternalValidate,
   FormItemInternalValidateResult,
   FormItemRule,
+  FormItemRuleAsyncValidator,
   FormItemRuleValidator,
   FormItemRuleValidatorParams,
   FormItemSlots,
@@ -24,6 +25,7 @@ import type {
   LabelAlign,
   LabelPlacement,
   ShouldRuleBeApplied,
+  StandardSchemaV1,
   ValidateCallback,
   ValidationTrigger
 } from './interface'
@@ -150,6 +152,19 @@ function wrapValidator(
   }
 }
 
+// Turn a Standard Schema into an asyncValidator of async-validator, every issue
+// of the schema becomes an error message of the form item
+function schemaToAsyncValidator(
+  schema: StandardSchemaV1
+): FormItemRuleAsyncValidator {
+  return async (_rule, value) => {
+    const result = await schema['~standard'].validate(value)
+    if (result.issues) {
+      throw result.issues.map(issue => new Error(issue.message))
+    }
+  }
+}
+
 export default defineComponent({
   name: 'FormItem',
   props: formItemProps,
@@ -267,6 +282,11 @@ export default defineComponent({
               shallowClonedRule.asyncValidator,
               true
             ) as any
+          }
+          if (shallowClonedRule.schema) {
+            shallowClonedRule.asyncValidator = schemaToAsyncValidator(
+              shallowClonedRule.schema
+            )
           }
           if (shallowClonedRule.renderMessage) {
             const rendererKey = `__renderMessage__${i}`

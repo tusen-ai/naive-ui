@@ -28,11 +28,34 @@ export type FormItemRuleAsyncValidator = (
   ...args: FormItemRuleValidatorParams
 ) => Promise<void> | undefined
 
+// The Standard Schema interface (https://standardschema.dev), copied here as
+// the spec recommends so that no extra dependency is needed.
+export interface StandardSchemaV1<Input = unknown, Output = Input> {
+  readonly '~standard': {
+    readonly version: 1
+    readonly vendor: string
+    readonly validate: (
+      value: unknown
+    ) => StandardSchemaV1Result<Output> | Promise<StandardSchemaV1Result<Output>>
+    readonly types?: { readonly input: Input, readonly output: Output } | undefined
+  }
+}
+
+export type StandardSchemaV1Result<Output>
+  = | { readonly value: Output, readonly issues?: undefined }
+    | { readonly issues: ReadonlyArray<StandardSchemaV1Issue> }
+
+export interface StandardSchemaV1Issue {
+  readonly message: string
+  readonly path?: ReadonlyArray<PropertyKey | { readonly key: PropertyKey }> | undefined
+}
+
 export type FormItemRule = Omit<RuleItem, 'validator' | 'asyncValidator'> & {
   key?: string
   trigger?: ValidationTrigger | string | Array<ValidationTrigger | string>
   validator?: FormItemRuleValidator
   asyncValidator?: FormItemRuleAsyncValidator
+  schema?: StandardSchemaV1
   renderMessage?: () => VNodeChild
   level?: 'warning' | 'error'
 }

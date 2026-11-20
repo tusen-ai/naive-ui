@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- Add `schema` to the rule of `n-form`, which accepts a [Standard Schema](https://standardschema.dev) (Zod, Valibot, ArkType, etc.), closes [#7491](https://github.com/tusen-ai/naive-ui/issues/7491).
+
 ## 2.45.3
 
 `2026-08-28`
