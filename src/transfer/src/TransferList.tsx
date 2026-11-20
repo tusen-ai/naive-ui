@@ -29,9 +29,17 @@ export default defineComponent({
       type: Boolean,
       required: true
     },
+    labelField: {
+      type: String,
+      default: 'label'
+    },
+    valueField: {
+      type: String,
+      default: 'value'
+    },
     source: Boolean
   },
-  setup() {
+  setup(props) {
     const { mergedThemeRef, mergedClsPrefixRef } = inject(transferInjectionKey)!
     const { mergedComponentPropsRef } = useConfig()
     const scrollerInstRef = ref<ScrollbarInst | null>(null)
@@ -42,6 +50,15 @@ export default defineComponent({
     function syncVLScroller(): void {
       scrollerInstRef.value?.sync()
     }
+
+    const optionsRef = computed(() => {
+      return props.options.map(option => ({
+        label: option[props.labelField],
+        value: option[props.valueField],
+        disabled: option.disabled
+      }))
+    })
+
     function scrollContainer(): HTMLElement | null {
       const { value } = vlInstRef
       if (!value)
@@ -65,7 +82,8 @@ export default defineComponent({
       vlInstRef: vlInstRef as unknown,
       syncVLScroller,
       scrollContainer,
-      scrollContent
+      scrollContent,
+      optionsRef
     }
   },
   render() {
@@ -80,8 +98,14 @@ export default defineComponent({
         )
       )
     }
-    const { mergedClsPrefix, virtualScroll, source, disabled, syncVLScroller }
-      = this
+    const {
+      mergedClsPrefix,
+      virtualScroll,
+      source,
+      disabled,
+      syncVLScroller,
+      optionsRef
+    } = this
     return (
       <NScrollbar
         ref="scrollerInstRef"
@@ -97,7 +121,7 @@ export default defineComponent({
                 ref="vlInstRef"
                 style={{ height: '100%' }}
                 class={`${mergedClsPrefix}-transfer-list-content`}
-                items={this.options}
+                items={this.optionsRef}
                 itemSize={this.itemSize}
                 showScrollbar={false}
                 onResize={syncVLScroller}
@@ -122,7 +146,7 @@ export default defineComponent({
               </VirtualList>
             ) : (
               <div class={`${mergedClsPrefix}-transfer-list-content`}>
-                {options.map(option => (
+                {optionsRef.map(option => (
                   <NTransferListItem
                     source={source}
                     key={option.value}
