@@ -92,6 +92,7 @@ export const dataTableProps = {
   },
   defaultExpandAll: Boolean,
   expandedRowKeys: Array as PropType<RowKey[]>,
+  expandOnClick: Boolean,
   stickyExpandedRows: Boolean,
   virtualScroll: Boolean,
   virtualScrollX: Boolean,
@@ -401,6 +402,7 @@ export interface DataTableInjection {
   localeRef: Ref<NLocale['DataTable']>
   filterMenuCssVarsRef: Ref<CSSProperties>
   mergedExpandedRowKeysRef: Ref<RowKey[]>
+  expandOnClickRef: Ref<boolean>
   rowKeyRef: Ref<CreateRowKey | undefined>
   renderExpandRef: Ref<undefined | RenderExpand>
   summaryRef: Ref<undefined | CreateSummary>
