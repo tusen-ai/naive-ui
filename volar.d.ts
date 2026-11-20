@@ -155,6 +155,7 @@ declare module 'vue' {
     NUploadTrigger: (typeof import('naive-ui'))['NUploadTrigger']
     NVirtualList: (typeof import('naive-ui'))['NVirtualList']
     NWatermark: (typeof import('naive-ui'))['NWatermark']
+    NCheckboxButton: (typeof import('naive-ui'))['NCheckboxButton']
   }
 }
 export {}

@@ -15,6 +15,7 @@ controlled.vue
 event.vue
 customize-value.vue
 focus.vue
+button-group.vue
 ```
 
 ## API
@@ -60,6 +61,16 @@ focus.vue
 | Name    | Parameters | Description                    |
 | ------- | ---------- | ------------------------------ |
 | default | `()`       | Content of the checkbox group. |
+
+### CheckboxButton Props
+
+Same as [Checkbox Props](#Checkbox Props).
+
+### CheckboxButton Slots
+
+| Name    | Parameters | Description                     | Version      |
+| ------- | ---------- | ------------------------------- | ------------ |
+| default | `()`       | Content of the checkbox button. | NEXT_VERSION |
 
 ### Checkbox Methods
 
