@@ -28,3 +28,4 @@ basic.vue
 | --- | --- | --- | --- |
 | default | `({ year: number, month: number, date: number })` | Content to be rendered in each date. |  |
 | header | `(props: { year: number, month: number })` | Header of the calendar. `month` starts from 1. | 2.29.1 |
+| extra | `(props: { year: number, month: number, prev: () => void, next: () => void, today: () => void })` | `month` starts from 1. | NEXT_VERSION |

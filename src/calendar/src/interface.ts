@@ -18,3 +18,11 @@ export interface CalendarHeaderSlotProps {
   year: number
   month: number
 }
+
+export interface CalendarExtraSlotProps {
+  year: number
+  month: number
+  prev: () => void
+  next: () => void
+  today: () => void
+}
