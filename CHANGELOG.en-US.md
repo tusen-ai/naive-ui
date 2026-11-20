@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-data-table` not showing a horizontal scrollbar when resized columns become wider than `scroll-x`, which pushed the columns after the resized one out of reach, closes [#8226](https://github.com/tusen-ai/naive-ui/issues/8226).
+
 ## 2.45.3
 
 `2026-08-28`

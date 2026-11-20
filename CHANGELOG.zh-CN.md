@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-data-table` 调整列宽后列总宽度超过 `scroll-x` 时不出现横向滚动条，导致后面的列无法被访问的问题，关闭 [#8226](https://github.com/tusen-ai/naive-ui/issues/8226)
+
 ## 2.45.3
 
 `2026-08-28`
