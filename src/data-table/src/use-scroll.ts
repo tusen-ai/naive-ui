@@ -20,7 +20,9 @@ export function useScroll(
     bodyWidthRef,
     maxHeightRef,
     mergedTableLayoutRef,
-    mergedEmptyRef
+    mergedEmptyRef,
+    getResizableWidth,
+    scrollXRef
   }: {
     maxHeightRef: Ref<string | number | undefined>
     bodyWidthRef: Ref<null | number>
@@ -28,6 +30,8 @@ export function useScroll(
     mergedCurrentPageRef: ComputedRef<number>
     mergedTableLayoutRef: Ref<'auto' | 'fixed'>
     mergedEmptyRef: ComputedRef<boolean>
+    getResizableWidth: (key: ColumnKey) => number | undefined
+    scrollXRef: Ref<string | number | undefined>
   }
 ) {
   const explicitlyScrollableRef = computed(
@@ -53,7 +57,7 @@ export function useScroll(
   const rightActiveFixedColKeyRef = ref<ColumnKey | null>(null)
   const rightActiveFixedChildrenColKeysRef = ref<ColumnKey[]>([])
   const styleScrollXRef = computed(() => {
-    return formatLength(props.scrollX)
+    return formatLength(scrollXRef.value)
   })
   const leftFixedColumnsRef = computed(() => {
     return props.columns.filter(column => column.fixed === 'left')
@@ -76,7 +80,8 @@ export function useScroll(
           positionInfo.end = left
         }
         else {
-          left += getNumberColWidth(col) || 0
+          left
+            += getResizableWidth(getColKey(col)) ?? getNumberColWidth(col) ?? 0
           positionInfo.end = left
         }
       })
@@ -100,7 +105,8 @@ export function useScroll(
           positionInfo.end = right
         }
         else {
-          right += getNumberColWidth(col) || 0
+          right
+            += getResizableWidth(getColKey(col)) ?? getNumberColWidth(col) ?? 0
           positionInfo.end = right
         }
       }
@@ -146,7 +152,7 @@ export function useScroll(
   function deriveActiveRightFixedColumn(): void {
     // target is header element
     const { value: rightFixedColumns } = rightFixedColumnsRef
-    const scrollWidth = Number(props.scrollX)
+    const scrollWidth = Number(scrollXRef.value)
     const { value: tableWidth } = bodyWidthRef
     if (tableWidth === null)
       return
@@ -212,7 +218,11 @@ export function useScroll(
     }
   }
   function handleTableHeaderScroll(): void {
-    if (scrollPartRef.value !== 'body') {
+    const { header } = getScrollElements()
+    if (
+      scrollPartRef.value !== 'body'
+      || header?.scrollLeft !== lastScrollLeft
+    ) {
       beforeNextFrameOnce(syncScrollState, 'head')
     }
     else {
@@ -221,7 +231,9 @@ export function useScroll(
   }
   function handleTableBodyScroll(e: Event): void {
     props.onScroll?.(e)
-    if (scrollPartRef.value !== 'head') {
+    const { body } = getScrollElements()
+    // A width-only update can leave the echo guard without a scroll event.
+    if (scrollPartRef.value !== 'head' || body?.scrollLeft !== lastScrollLeft) {
       beforeNextFrameOnce(syncScrollState, 'body')
     }
     else {
@@ -288,6 +300,15 @@ export function useScroll(
     lastScrollLeft = left
     syncScrollState('head')
   }
+  watch(
+    scrollXRef,
+    () => {
+      // Resizing can clamp the scroll position before its scroll event arrives.
+      // Synchronize both panes before a subsequent scroll can race that event.
+      syncScrollState('body')
+    },
+    { flush: 'post' }
+  )
   watch(mergedCurrentPageRef, () => {
     scrollMainTableBodyToTop()
   })

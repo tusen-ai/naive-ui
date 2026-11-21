@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-data-table` 调整列宽后固定列偏移及横向虚拟滚动单元格宽度未更新的问题，关闭 [#8229](https://github.com/tusen-ai/naive-ui/issues/8229)
+
 ## 2.45.3
 
 `2026-08-28`

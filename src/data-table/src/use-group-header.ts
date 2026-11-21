@@ -63,16 +63,17 @@ function getRowsAndCols(
       }
       else {
         const key = 'key' in column ? column.key : undefined
+        const resizedWidth
+          = key !== undefined ? getResizableWidth(key) : undefined
         cols.push({
           key: getColKey(column),
-          style: createCustomWidthStyle(
-            column,
-            key !== undefined ? formatLength(getResizableWidth(key)) : undefined
-          ),
+          style: createCustomWidthStyle(column, formatLength(resizedWidth)),
           column,
           index: currentLeafIndex++,
           // The width property is only applied to horizontally virtual scroll table
-          width: column.width === undefined ? 128 : Number(column.width)
+          width:
+            resizedWidth
+            ?? (column.width === undefined ? 128 : Number(column.width))
         })
         totalRowSpan += 1
         if (!hasEllipsis) {

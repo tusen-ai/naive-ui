@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-data-table` fixed column offsets and horizontally virtualized cell widths not updating after column resizing, closes [#8229](https://github.com/tusen-ai/naive-ui/issues/8229).
+
 ## 2.45.3
 
 `2026-08-28`

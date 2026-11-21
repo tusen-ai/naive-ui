@@ -167,6 +167,7 @@ export default defineComponent({
       rawPaginatedDataRef,
       fixedColumnLeftMapRef,
       fixedColumnRightMapRef,
+      getResizableWidth,
       mergedCurrentPageRef,
       rowClassNameRef,
       leftActiveFixedColKeyRef,
@@ -436,6 +437,7 @@ export default defineComponent({
     })
     return {
       bodyWidth: bodyWidthRef,
+      getResizableWidth,
       summaryPlacement: summaryPlacementRef,
       dataTableSlots,
       componentId,
@@ -880,7 +882,9 @@ export default defineComponent({
                     style={[
                       {
                         textAlign: column.align || undefined,
-                        width: pxfy(column.width)
+                        width: pxfy(
+                          this.getResizableWidth(colKey) ?? column.width
+                        )
                       },
                       isVirtualX && {
                         height: virtualXRowHeight
@@ -1012,20 +1016,23 @@ export default defineComponent({
               })
 
               if (isVirtualX) {
-                if (leftFixedColsCount && rightFixedColsCount) {
+                const middleColsCount
+                  = cols.length - leftFixedColsCount - rightFixedColsCount
+                if (middleColsCount) {
+                  const middleCells = cells.splice(
+                    leftFixedColsCount,
+                    cells.length - leftFixedColsCount - rightFixedColsCount
+                  )
                   cells.splice(
                     leftFixedColsCount,
                     0,
                     <td
-                      colspan={
-                        cols.length - leftFixedColsCount - rightFixedColsCount
-                      }
-                      style={{
-                        pointerEvents: 'none',
-                        visibility: 'hidden',
-                        height: 0
-                      }}
-                    />
+                      class={`${mergedClsPrefix}-data-table-virtual-scroll-x-cell`}
+                      colspan={middleColsCount}
+                      style={{ padding: 0, border: 0, height: 0 }}
+                    >
+                      {middleCells}
+                    </td>
                   )
                 }
               }
