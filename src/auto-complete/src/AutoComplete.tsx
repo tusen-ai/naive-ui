@@ -274,6 +274,8 @@ export default defineComponent({
       }
     }
     function select(option: AutoCompleteOption): void {
+      if (mergedDisabledRef.value)
+        return
       if (option?.value !== undefined) {
         doSelect(option.value)
         if (props.clearAfterSelect) {

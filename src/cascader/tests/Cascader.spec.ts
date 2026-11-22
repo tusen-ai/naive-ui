@@ -1,5 +1,5 @@
 import type { CascaderOption } from '../src/interface'
-import { mount } from '@vue/test-utils'
+import { DOMWrapper, mount } from '@vue/test-utils'
 import { nextTick } from 'vue'
 import { NBaseFocusDetector } from '../../_internal'
 import { NCascader } from '../index'
@@ -36,6 +36,33 @@ function getOptions(depth = 3, iterator = 1, prefix = ''): CascaderOption[] {
 }
 
 describe('n-cascader', () => {
+  it('does not select an option after disabling an open menu', async () => {
+    const onUpdateValue = vi.fn()
+    const wrapper = mount(NCascader, {
+      attachTo: document.body,
+      props: {
+        defaultValue: 'apple',
+        virtualScroll: false,
+        onUpdateValue,
+        options: [
+          { label: 'Apple', value: 'apple' },
+          { label: 'Orange', value: 'orange' }
+        ]
+      }
+    })
+
+    await wrapper.get('.n-base-selection').trigger('click')
+    const orange = Array.from(
+      document.querySelectorAll('.n-cascader-option')
+    ).find(element => element.textContent?.trim() === 'Orange')
+    expect(orange).toBeDefined()
+
+    await wrapper.setProps({ disabled: true })
+    await new DOMWrapper(orange!).trigger('click')
+    expect(onUpdateValue).not.toHaveBeenCalled()
+    wrapper.unmount()
+  })
+
   it('should work with import on demand', () => {
     mount(NCascader)
   })

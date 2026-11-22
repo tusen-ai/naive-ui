@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Prevent `n-auto-complete`, `n-cascader`, and `n-tree-select` from changing value after they are disabled while their menus are open.
+
 ## 2.45.3
 
 `2026-08-28`

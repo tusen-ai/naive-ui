@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-auto-complete`、`n-cascader` 和 `n-tree-select` 展开后被禁用仍可更改选中值的问题
+
 ## 2.45.3
 
 `2026-08-28`
