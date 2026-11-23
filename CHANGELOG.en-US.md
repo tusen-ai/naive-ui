@@ -5,6 +5,7 @@
 ### Fixes
 
 - Fix native event listeners throwing or being dropped when a component merges them with its own, affects `n-ellipsis`, `n-infinite-scroll`, `n-popselect`, `menu-props` of `n-select` and `n-cascader`, and `scrollbar-props`.
+- Fix `n-popselect` calling `mouseenter` listeners instead of `mouseleave` listeners when the mouse leaves its menu.
 
 ## 2.45.3
 

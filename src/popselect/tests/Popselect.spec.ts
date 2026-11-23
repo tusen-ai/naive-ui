@@ -89,4 +89,23 @@ describe('n-popselect', () => {
     expect(errorHandler).not.toHaveBeenCalled()
     wrapper.unmount()
   })
+
+  it('should call native `mouseleave` listeners on the menu', async () => {
+    const onMouseenter = vi.fn()
+    const onMouseleave = vi.fn()
+    const wrapper = mount(NPopselect, {
+      attachTo: document.body,
+      props: { show: true, options: [{ label: 'label', value: 'value' }] },
+      attrs: { onMouseenter, onMouseleave },
+      slots: { default: () => h('button') }
+    })
+    await nextTick()
+
+    document
+      .querySelector('.n-base-select-menu')
+      ?.dispatchEvent(new MouseEvent('mouseleave'))
+    expect(onMouseleave).toHaveBeenCalledTimes(1)
+    expect(onMouseenter).not.toHaveBeenCalled()
+    wrapper.unmount()
+  })
 })

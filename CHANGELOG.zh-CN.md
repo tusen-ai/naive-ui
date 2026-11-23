@@ -5,6 +5,7 @@
 ### Fixes
 
 - 修复原生事件监听器与组件内部监听器合并时报错或丢失的问题，影响 `n-ellipsis`、`n-infinite-scroll`、`n-popselect`、`n-select` 和 `n-cascader` 的 `menu-props` 以及 `scrollbar-props`
+- 修复 `n-popselect` 在鼠标离开菜单时触发 `mouseenter` 监听器而不是 `mouseleave` 监听器的问题
 
 ## 2.45.3
 
