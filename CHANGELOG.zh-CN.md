@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复原生事件监听器与组件内部监听器合并时报错或丢失的问题，影响 `n-ellipsis`、`n-infinite-scroll`、`n-popselect`、`n-select` 和 `n-cascader` 的 `menu-props` 以及 `scrollbar-props`
+
 ## 2.45.3
 
 `2026-08-28`

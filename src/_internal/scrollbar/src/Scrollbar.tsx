@@ -22,7 +22,7 @@ import {
 } from 'vue'
 import { VResizeObserver } from 'vueuc'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../../_mixins'
-import { rtlInset, useReactivated, Wrapper } from '../../../_utils'
+import { call, rtlInset, useReactivated, Wrapper } from '../../../_utils'
 import { scrollbarLight } from '../styles'
 import style from './styles/index.cssr'
 
@@ -110,8 +110,10 @@ const scrollbarProps = {
   contentStyle: [String, Object] as PropType<string | CSSProperties>,
   horizontalRailStyle: [String, Object] as PropType<string | CSSProperties>,
   verticalRailStyle: [String, Object] as PropType<string | CSSProperties>,
-  onScroll: Function as PropType<(e: Event) => void>,
-  onWheel: Function as PropType<(e: WheelEvent) => void>,
+  // May be an array at runtime when merged with a native listener, typed as
+  // a function to keep the public `scrollbarProps` type
+  onScroll: [Function, Array] as PropType<(e: Event) => void>,
+  onWheel: [Function, Array] as PropType<(e: WheelEvent) => void>,
   onResize: Function as PropType<(e: ResizeObserverEntry) => void>,
   internalOnUpdateScrollLeft: Function as PropType<
     (scrollLeft: number) => void
@@ -463,7 +465,7 @@ const Scrollbar = defineComponent({
     function handleScroll(e: Event): void {
       const { onScroll } = props
       if (onScroll)
-        onScroll(e)
+        call(onScroll, e)
       syncScrollState()
     }
     function syncScrollState(): void {

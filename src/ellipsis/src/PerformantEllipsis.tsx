@@ -39,11 +39,11 @@ export const NPerformantEllipsis = defineComponent({
                   }
                 : {
                     '-webkit-line-clamp': lineClamp
-                  }
+                  },
+            onMouseenter: () => {
+              mouseEnteredRef.value = true
+            }
           })}
-          onMouseenter={() => {
-            mouseEnteredRef.value = true
-          }}
         >
           {lineClamp ? slots.default?.() : <span>{slots.default?.()}</span>}
         </span>

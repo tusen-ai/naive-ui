@@ -1,6 +1,7 @@
 import type { PropType } from 'vue'
 import type { FollowerPlacement } from 'vueuc'
 import type { MenuMaskRef } from '../../_internal/menu-mask'
+import type { MaybeArray } from '../../_utils'
 import type {
   CascaderMenuExposedMethods,
   CascaderSubmenuInstance,
@@ -20,7 +21,12 @@ import {
 import { NBaseMenuMask } from '../../_internal'
 import FocusDetector from '../../_internal/focus-detector'
 import { useConfig } from '../../_mixins'
-import { resolveSlot, resolveWrappedSlot, useOnResize } from '../../_utils'
+import {
+  call,
+  resolveSlot,
+  resolveWrappedSlot,
+  useOnResize
+} from '../../_utils'
 import { NEmpty } from '../../empty'
 import NCascaderSubmenu from './CascaderSubmenu'
 import { cascaderInjectionKey } from './interface'
@@ -40,19 +46,20 @@ export default defineComponent({
     },
     loading: Boolean,
     onFocus: {
-      type: Function as PropType<(e: FocusEvent) => void>,
+      type: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
       required: true
     },
     onBlur: {
-      type: Function as PropType<(e: FocusEvent) => void>,
+      type: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
       required: true
     },
+    // The next two may be arrays at runtime when merged with native listeners
     onKeydown: {
-      type: Function as PropType<(e: KeyboardEvent) => void>,
+      type: [Function, Array] as PropType<(e: KeyboardEvent) => void>,
       required: true
     },
     onMousedown: {
-      type: Function as PropType<(e: MouseEvent) => void>,
+      type: [Function, Array] as PropType<(e: MouseEvent) => void>,
       required: true
     },
     onTabout: {
@@ -92,7 +99,7 @@ export default defineComponent({
       if (!selfEl)
         return
       if (!selfEl.contains(e.relatedTarget as Node)) {
-        props.onFocus(e)
+        call(props.onFocus, e)
       }
     }
     function handleFocusout(e: FocusEvent): void {
@@ -100,7 +107,7 @@ export default defineComponent({
       if (!selfEl)
         return
       if (!selfEl.contains(e.relatedTarget as Node)) {
-        props.onBlur(e)
+        call(props.onBlur, e)
       }
     }
     const exposedRef: CascaderMenuExposedMethods = {

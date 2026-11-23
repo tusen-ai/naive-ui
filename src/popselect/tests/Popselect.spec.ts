@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import { h } from 'vue'
+import { h, nextTick } from 'vue'
 import { NScrollbar } from '../../_internal'
 import { NPopselect } from '../index'
 
@@ -67,6 +67,26 @@ describe('n-popselect', () => {
     await wrapper.setProps({ scrollable: true })
     expect(wrapper.findComponent(NScrollbar).exists()).not.toEqual(null)
 
+    wrapper.unmount()
+  })
+
+  it('should call a native `mousedown` listener on the menu', async () => {
+    const onMousedown = vi.fn()
+    const errorHandler = vi.fn()
+    const wrapper = mount(NPopselect, {
+      attachTo: document.body,
+      props: { show: true, options: [{ label: 'label', value: 'value' }] },
+      attrs: { onMousedown },
+      slots: { default: () => h('button') },
+      global: { config: { errorHandler } }
+    })
+    await nextTick()
+
+    document
+      .querySelector('.n-base-select-menu')
+      ?.dispatchEvent(new MouseEvent('mousedown'))
+    expect(onMousedown).toHaveBeenCalledTimes(1)
+    expect(errorHandler).not.toHaveBeenCalled()
     wrapper.unmount()
   })
 })

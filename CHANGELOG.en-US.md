@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix native event listeners throwing or being dropped when a component merges them with its own, affects `n-ellipsis`, `n-infinite-scroll`, `n-popselect`, `menu-props` of `n-select` and `n-cascader`, and `scrollbar-props`.
+
 ## 2.45.3
 
 `2026-08-28`

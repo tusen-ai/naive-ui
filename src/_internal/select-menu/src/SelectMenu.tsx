@@ -2,6 +2,7 @@ import type { TreeNode } from 'treemate'
 import type { CSSProperties, PropType, Ref, WatchStopHandle } from 'vue'
 import type { VirtualListInst } from 'vueuc'
 import type { ThemeProps } from '../../../_mixins'
+import type { MaybeArray } from '../../../_utils'
 import type {
   SelectGroupOption,
   SelectIgnoredOption,
@@ -38,7 +39,12 @@ import {
 } from 'vue'
 import { VirtualList } from 'vueuc'
 import { useConfig, useRtl, useTheme, useThemeClass } from '../../../_mixins'
-import { resolveSlot, resolveWrappedSlot, useOnResize } from '../../../_utils'
+import {
+  call,
+  resolveSlot,
+  resolveWrappedSlot,
+  useOnResize
+} from '../../../_utils'
 import { createKey } from '../../../_utils/cssr'
 import { NEmpty } from '../../../empty'
 import NFocusDetector from '../../focus-detector'
@@ -105,12 +111,18 @@ export default defineComponent({
     renderOption: Function as PropType<RenderOption>,
     nodeProps: Function as PropType<NodeProps>,
     showCheckmark: { type: Boolean, default: true },
-    onMousedown: Function as PropType<(e: MouseEvent) => void>,
-    onScroll: Function as PropType<(e: Event) => void>,
-    onFocus: Function as PropType<(e: FocusEvent) => void>,
-    onBlur: Function as PropType<(e: FocusEvent) => void>,
-    onKeyup: Function as PropType<(e: KeyboardEvent) => void>,
-    onKeydown: Function as PropType<(e: KeyboardEvent) => void>,
+    onMousedown: [Function, Array] as PropType<
+      MaybeArray<(e: MouseEvent) => void>
+    >,
+    onScroll: [Function, Array] as PropType<MaybeArray<(e: Event) => void>>,
+    onFocus: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
+    onBlur: [Function, Array] as PropType<MaybeArray<(e: FocusEvent) => void>>,
+    onKeyup: [Function, Array] as PropType<
+      MaybeArray<(e: KeyboardEvent) => void>
+    >,
+    onKeydown: [Function, Array] as PropType<
+      MaybeArray<(e: KeyboardEvent) => void>
+    >,
     onTabOut: Function as PropType<() => void>,
     onMouseenter: Function as PropType<(e: MouseEvent) => void>,
     onMouseleave: Function as PropType<(e: MouseEvent) => void>,
@@ -122,7 +134,9 @@ export default defineComponent({
     inlineThemeDisabled: Boolean,
     scrollbarProps: Object as PropType<ScrollbarProps>,
     // deprecated
-    onToggle: Function as PropType<(tmNode: TreeNode<SelectOption>) => void>
+    onToggle: [Function, Array] as PropType<
+      MaybeArray<(tmNode: TreeNode<SelectOption>) => void>
+    >
   },
   setup(props) {
     const { mergedClsPrefixRef, mergedRtlRef, mergedComponentPropsRef }
@@ -244,12 +258,12 @@ export default defineComponent({
     function doToggle(tmNode: TreeNode<SelectOption>): void {
       const { onToggle } = props
       if (onToggle)
-        onToggle(tmNode)
+        call(onToggle, tmNode)
     }
     function doScroll(e: Event): void {
       const { onScroll } = props
       if (onScroll)
-        onScroll(e)
+        call(onScroll, e)
     }
     // required, scroller sync need to be triggered manually
     function handleVirtualListScroll(e: Event): void {
@@ -285,15 +299,21 @@ export default defineComponent({
     function handleKeyUp(e: KeyboardEvent): void {
       if (happensIn(e, 'action'))
         return
-      props.onKeyup?.(e)
+      const { onKeyup } = props
+      if (onKeyup)
+        call(onKeyup, e)
     }
     function handleKeyDown(e: KeyboardEvent): void {
       if (happensIn(e, 'action'))
         return
-      props.onKeydown?.(e)
+      const { onKeydown } = props
+      if (onKeydown)
+        call(onKeydown, e)
     }
     function handleMouseDown(e: MouseEvent): void {
-      props.onMousedown?.(e)
+      const { onMousedown } = props
+      if (onMousedown)
+        call(onMousedown, e)
       if (props.focusable)
         return
       e.preventDefault()
@@ -336,13 +356,15 @@ export default defineComponent({
       }
     }
     function handleFocusin(e: FocusEvent): void {
-      if (selfRef.value?.contains(e.target as Node | null)) {
-        props.onFocus?.(e)
+      const { onFocus } = props
+      if (onFocus && selfRef.value?.contains(e.target as Node | null)) {
+        call(onFocus, e)
       }
     }
     function handleFocusout(e: FocusEvent): void {
-      if (!selfRef.value?.contains(e.relatedTarget as Node | null)) {
-        props.onBlur?.(e)
+      const { onBlur } = props
+      if (onBlur && !selfRef.value?.contains(e.relatedTarget as Node | null)) {
+        call(onBlur, e)
       }
     }
     provide(internalSelectionMenuInjectionKey, {

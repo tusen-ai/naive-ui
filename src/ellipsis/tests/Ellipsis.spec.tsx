@@ -115,4 +115,19 @@ describe('n-ellipsis', () => {
     expect(errorHandler).not.toHaveBeenCalled()
     wrapper.unmount()
   })
+
+  it('should call a native listener on the trigger', async () => {
+    const onClick = vi.fn()
+    const errorHandler = vi.fn()
+    const wrapper = mount(NEllipsis, {
+      attrs: { onClick },
+      slots: { default: () => 'test n-ellipsis' },
+      global: { config: { errorHandler } }
+    })
+
+    await wrapper.find('.n-ellipsis').trigger('click')
+    expect(onClick).toHaveBeenCalledTimes(1)
+    expect(errorHandler).not.toHaveBeenCalled()
+    wrapper.unmount()
+  })
 })
