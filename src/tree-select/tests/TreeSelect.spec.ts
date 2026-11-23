@@ -108,4 +108,31 @@ describe('n-tree-select', () => {
     expect(errorHandler).not.toHaveBeenCalled()
     wrapper.unmount()
   })
+
+  it('should not select a node on Enter during IME composition', async () => {
+    const onUpdateValue = vi.fn()
+    const wrapper = mount(NTreeSelect, {
+      attachTo: document.body,
+      props: {
+        show: true,
+        filterable: true,
+        options: [
+          { label: 'apple', key: 'apple' },
+          { label: 'banana', key: 'banana' }
+        ],
+        onUpdateValue
+      }
+    })
+    const input = wrapper.find('input')
+    await input.trigger('keydown', { key: 'ArrowDown' })
+    await input.trigger('compositionstart')
+    await input.setValue('ap')
+    await input.trigger('keydown', { key: 'Enter' })
+    expect(onUpdateValue).not.toHaveBeenCalled()
+    await input.trigger('compositionend')
+    await input.trigger('keydown', { key: 'Enter' })
+    expect(onUpdateValue).toHaveBeenCalled()
+    expect(onUpdateValue.mock.calls[0][0]).toBe('apple')
+    wrapper.unmount()
+  })
 })

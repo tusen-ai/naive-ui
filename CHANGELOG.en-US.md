@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-cascader` selecting the highlighted option when Enter is pressed to confirm an IME composition, closes [#8172](https://github.com/tusen-ai/naive-ui/issues/8172).
+- Fix `n-tree-select` selecting the focused node when Enter is pressed to confirm an IME composition, closes [#8173](https://github.com/tusen-ai/naive-ui/issues/8173).
+
 ## 2.45.3
 
 `2026-08-28`

@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- 修复 `n-cascader` 在输入法合成（IME composition）期间按 Enter 确认候选词时会选中当前高亮选项的问题，关闭 [#8172](https://github.com/tusen-ai/naive-ui/issues/8172)
+- 修复 `n-tree-select` 在输入法合成（IME composition）期间按 Enter 确认候选词时会选中当前聚焦节点的问题，关闭 [#8173](https://github.com/tusen-ai/naive-ui/issues/8173)
+
 ## 2.45.3
 
 `2026-08-28`

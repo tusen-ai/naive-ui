@@ -280,4 +280,31 @@ describe('n-cascader', () => {
     expect(errorHandler).not.toHaveBeenCalled()
     wrapper.unmount()
   })
+
+  it('should not select an option on Enter during IME composition', async () => {
+    const onUpdateValue = vi.fn()
+    const wrapper = mount(NCascader, {
+      attachTo: document.body,
+      props: {
+        show: true,
+        filterable: true,
+        options: [
+          { label: 'apple', value: 'apple' },
+          { label: 'banana', value: 'banana' }
+        ],
+        onUpdateValue
+      }
+    })
+    const input = wrapper.find('input')
+    await input.setValue('a')
+    await input.trigger('compositionstart')
+    await input.setValue('ap')
+    await input.trigger('keydown', { key: 'Enter' })
+    expect(onUpdateValue).not.toHaveBeenCalled()
+    await input.trigger('compositionend')
+    await input.trigger('keydown', { key: 'Enter' })
+    expect(onUpdateValue).toHaveBeenCalled()
+    expect(onUpdateValue.mock.calls[0][0]).toBe('apple')
+    wrapper.unmount()
+  })
 })
