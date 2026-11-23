@@ -10,6 +10,20 @@ import { ref } from 'vue'
 
 const currentIndex = ref(0)
 
+const srcList = [
+  'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
+  'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg',
+  'https://picsum.photos/id/1/100/100',
+  'https://picsum.photos/id/2/100/100',
+  'https://picsum.photos/id/3/100/100',
+  'https://picsum.photos/id/4/100/100',
+  'https://picsum.photos/id/5/100/100',
+  'https://picsum.photos/id/7/100/100',
+  'https://picsum.photos/id/8/100/100',
+  'https://picsum.photos/id/9/100/100',
+  'https://picsum.photos/id/10/100/100'
+]
+
 const showRef = ref(false)
 function onClick() {
   showRef.value = true
@@ -32,19 +46,7 @@ function handleUpdateCurrent(current: number) {
   <n-image-group
     v-model:show="showRef"
     v-model:current="currentIndex"
-    :src-list="[
-      'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
-      'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg',
-      'https://picsum.photos/id/1/100/100',
-      'https://picsum.photos/id/2/100/100',
-      'https://picsum.photos/id/3/100/100',
-      'https://picsum.photos/id/4/100/100',
-      'https://picsum.photos/id/5/100/100',
-      'https://picsum.photos/id/7/100/100',
-      'https://picsum.photos/id/8/100/100',
-      'https://picsum.photos/id/9/100/100',
-      'https://picsum.photos/id/10/100/100',
-    ]"
+    :src-list="srcList"
     @update:show="handleUpdateShow"
     @update:current="handleUpdateCurrent"
   />
