@@ -42,7 +42,7 @@ const koKR: NLocale = {
     monthPlaceholder: '월 선택',
     yearPlaceholder: '년 선택',
     quarterPlaceholder: '분기 선택',
-    weekPlaceholder: 'Select Week',
+    weekPlaceholder: '주 선택',
     startDatePlaceholder: '시작 날짜',
     endDatePlaceholder: '종료 날짜',
     startDatetimePlaceholder: '시작 날짜 및 시간',
@@ -69,8 +69,8 @@ const koKR: NLocale = {
     selectAll: '전체 선택',
     unselectAll: '전체 해제',
     clearAll: '전체 삭제',
-    total: (num: number): string => `총 ${num} 개`,
-    selected: (num: number): string => `${num} 개 선택`
+    total: (num: number): string => `총 ${num}개`,
+    selected: (num: number): string => `${num}개 선택됨`
   },
   Empty: {
     description: '데이터 없음'
