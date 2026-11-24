@@ -3,20 +3,20 @@ import type { NLocale } from './enUS'
 const trTR: NLocale = {
   name: 'tr-TR',
   global: {
-    undo: 'Vazgeç',
-    redo: 'Tekrar Dene',
-    confirm: 'Kabul Et',
+    undo: 'Geri Al',
+    redo: 'Yinele',
+    confirm: 'Onayla',
     clear: 'Temizle'
   },
   Popconfirm: {
-    positiveText: 'Kabul Et',
+    positiveText: 'Onayla',
     negativeText: 'İptal'
   },
   Cascader: {
     placeholder: 'Lütfen Seçin',
     loading: 'Yükleniyor',
     loadingRequiredMessage: (label: string): string =>
-      `Lütfen kontrol etmeden önce tüm ${label}ları yükleyin.`
+      `Lütfen işaretlemeden önce ${label} için tüm alt öğeleri yükleyin.`
   },
   Time: {
     dateFormat: 'yyyy-MM-dd',
@@ -37,24 +37,24 @@ const trTR: NLocale = {
     confirm: 'Onayla',
     selectTime: 'Saat Seçin',
     selectDate: 'Tarih Seçin',
-    datePlaceholder: 'Tarih Seç',
+    datePlaceholder: 'Tarih Seçin',
     datetimePlaceholder: 'Tarih ve Saat Seçin',
     monthPlaceholder: 'Ay Seçin',
     yearPlaceholder: 'Yıl Seçin',
-    quarterPlaceholder: 'Mevsim Seçin',
-    weekPlaceholder: 'Select Week',
+    quarterPlaceholder: 'Çeyrek Seçin',
+    weekPlaceholder: 'Hafta Seçin',
     startDatePlaceholder: 'Başlangıç Tarihi',
     endDatePlaceholder: 'Bitiş Tarihi',
-    startDatetimePlaceholder: 'Başlangıç Tarih ve Saati',
+    startDatetimePlaceholder: 'Başlangıç Tarihi ve Saati',
     endDatetimePlaceholder: 'Bitiş Tarihi ve Saati',
     startMonthPlaceholder: 'Başlangıç Ayı',
     endMonthPlaceholder: 'Bitiş Ayı',
     monthBeforeYear: true,
-    firstDayOfWeek: 6 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
+    firstDayOfWeek: 0 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
     today: 'Bugün'
   },
   DataTable: {
-    checkTableAll: 'Tüm Tabloyu Seç',
+    checkTableAll: 'Tablodaki tümünü seç',
     uncheckTableAll: 'Tablodaki tüm seçimleri kaldır',
     confirm: 'Onayla',
     clear: 'Temizle'
@@ -65,26 +65,26 @@ const trTR: NLocale = {
   },
   Transfer: {
     selectAll: 'Tümünü Seç',
-    unselectAll: 'Tüm Seçimi Kaldır',
+    unselectAll: 'Tüm Seçimleri Kaldır',
     clearAll: 'Temizle',
     total: (num: number): string => `Toplam ${num} öğe`,
-    selected: (num: number): string => `${num} öğe Seçili`
+    selected: (num: number): string => `${num} öğe seçili`
   },
   Empty: {
     description: 'Veri Yok'
   },
   Select: {
-    placeholder: 'Lütfen seçin'
+    placeholder: 'Lütfen Seçin'
   },
   TimePicker: {
-    placeholder: 'Saat Seç',
+    placeholder: 'Saat Seçin',
     positiveText: 'Tamam',
     negativeText: 'İptal',
     now: 'Şimdi',
     clear: 'Temizle'
   },
   Pagination: {
-    goto: 'git',
+    goto: 'Git',
     selectionSuffix: 'sayfa'
   },
   DynamicTags: {
@@ -108,25 +108,25 @@ const trTR: NLocale = {
     clearSearch: 'Aramayı Temizle',
     filterCompName: 'Bileşen Adını Filtrele',
     filterVarName: 'Değişken Adını Filtrele',
-    import: 'Ekle',
-    export: 'Çıkar',
-    restore: 'Varsayılana sıfırla'
+    import: 'İçe Aktar',
+    export: 'Dışa Aktar',
+    restore: 'Varsayılana Sıfırla'
   },
   Image: {
     tipPrevious: 'Önceki resim (←)',
     tipNext: 'Sonraki resim (→)',
-    tipCounterclockwise: 'saat yönünün tersine',
-    tipClockwise: 'saat yönününe',
+    tipCounterclockwise: 'Saat yönünün tersine döndür',
+    tipClockwise: 'Saat yönünde döndür',
     tipZoomOut: 'Uzaklaştır',
     tipZoomIn: 'Yakınlaştır',
-    tipDownload: 'indir',
+    tipDownload: 'İndir',
     tipClose: 'Kapat (Esc)',
     // TODO: translation
     tipOriginalSize: 'Orijinal boyuta yakınlaştır'
   },
   Heatmap: {
-    less: 'az',
-    more: 'çok',
+    less: 'Az',
+    more: 'Çok',
     monthFormat: 'MMM',
     weekdayFormat: 'eeeeee'
   }

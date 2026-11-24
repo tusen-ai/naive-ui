@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### i18n
+
+- Fix mistranslations, untranslated strings and the first day of the week (now Monday) in `trTR`.
+
 ## 2.45.3
 
 `2026-08-28`
