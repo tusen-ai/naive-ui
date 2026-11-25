@@ -115,6 +115,7 @@ The following list is sorted by 'Config' column.
 | Swahili (Kenya)              | swKE   | dateSwKE    |         |
 | Tamil (India)                | taIN   | dateTaIN    |         |
 | Telugu (India)               | teIN   | dateTeIN    |         |
+| Tajik (Tajikistan)           | tgTJ   | dateTgTJ    |         |
 | Thai (Thailand)              | thTH   | dateThTH    | 2.27.0  |
 | Turkish                      | trTR   | dateTrTR    | 2.34.0  |
 | Uyghur (China)               | ugCN   | dateUgCN    |         |

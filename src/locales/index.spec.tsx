@@ -475,6 +475,7 @@ describe('locale', () => {
       ['swKE', 'dateSwKE'],
       ['taIN', 'dateTaIN'],
       ['teIN', 'dateTeIN'],
+      ['tgTJ', 'dateTgTJ'],
       ['urPK', 'dateUrPK'],
       ['zuZA', 'dateZuZA']
     ] as const
