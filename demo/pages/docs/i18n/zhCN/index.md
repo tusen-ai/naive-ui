@@ -115,6 +115,7 @@ Naive-ui 通过使用 `n-config-provider` 调整语言，默认情况下所有�
 | 斯瓦希里语（肯尼亚）       | swKE  | dateSwKE  |        |
 | 泰米尔语（印度）           | taIN  | dateTaIN  |        |
 | 泰卢固语（印度）           | teIN  | dateTeIN  |        |
+| 塔吉克语（塔吉克斯坦）     | tgTJ  | dateTgTJ  |        |
 | 泰语（泰国）               | thTH  | dateThTH  | 2.27.0 |
 | 土耳其语                   | trTR  | dateTrTR  | 2.34.0 |
 | 维吾尔语                   | ugCN  | dateUgCN  | 2.41.0 |

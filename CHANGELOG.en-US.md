@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### i18n
+
+- Add tgTJ locale.
+
 ## 2.45.3
 
 `2026-08-28`

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### i18n
+
+- 新增 tgTJ locale
+
 ## 2.45.3
 
 `2026-08-28`
