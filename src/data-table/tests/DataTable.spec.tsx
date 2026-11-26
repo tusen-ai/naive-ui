@@ -992,6 +992,85 @@ describe('n-data-table', () => {
 })
 
 describe('props.columns', () => {
+  it.each([1, 2])(
+    'should respect disabled selection after %i column groups',
+    async (groupCount) => {
+      const onUpdateCheckedRowKeys = vi.fn()
+      const columns: DataTableColumns = [
+        ...Array.from({ length: groupCount }, (_, index) => ({
+          title: `Group ${index}`,
+          key: `group-${index}`,
+          children: [{ title: 'Name', key: `name-${index}` }]
+        })),
+        { type: 'selection', disabled: row => row.key === 2 }
+      ]
+      const wrapper = mount(NDataTable, {
+        props: {
+          columns,
+          data: [{ key: 1 }, { key: 2 }],
+          onUpdateCheckedRowKeys
+        }
+      })
+      try {
+        const checkboxes = wrapper.findAll('tbody .n-checkbox')
+        expect(checkboxes[0].classes()).not.toContain('n-checkbox--disabled')
+        expect(checkboxes[1].classes()).toContain('n-checkbox--disabled')
+
+        await wrapper.find('thead .n-checkbox').trigger('click')
+        expect(onUpdateCheckedRowKeys).toHaveBeenLastCalledWith(
+          [1],
+          [{ key: 1 }],
+          { row: undefined, action: 'checkAll' }
+        )
+        await wrapper.find('thead .n-checkbox').trigger('click')
+        expect(onUpdateCheckedRowKeys).toHaveBeenLastCalledWith([], [], {
+          row: undefined,
+          action: 'uncheckAll'
+        })
+      }
+      finally {
+        wrapper.unmount()
+      }
+    }
+  )
+
+  it('should respect single selection after a column group', async () => {
+    const onUpdateCheckedRowKeys = vi.fn()
+    const wrapper = mount(NDataTable, {
+      attachTo: document.body,
+      props: {
+        columns: [
+          {
+            title: 'Group',
+            key: 'group',
+            children: [{ title: 'Name', key: 'name' }]
+          },
+          { type: 'selection', multiple: false }
+        ],
+        data: [
+          { key: 1, name: 'Alice' },
+          { key: 2, name: 'Bob' }
+        ],
+        defaultCheckedRowKeys: [1, 2],
+        onUpdateCheckedRowKeys
+      }
+    })
+    try {
+      const radios = wrapper.findAll('tbody .n-radio')
+      expect(radios[0].classes()).toContain('n-radio--checked')
+      expect(radios[1].classes()).not.toContain('n-radio--checked')
+      await radios[1].trigger('click')
+      expect(onUpdateCheckedRowKeys).toHaveBeenLastCalledWith(
+        [2],
+        [{ key: 2, name: 'Bob' }],
+        { row: { key: 2, name: 'Bob' }, action: 'check' }
+      )
+    }
+    finally {
+      wrapper.unmount()
+    }
+  })
+
   it('has correct type', () => {
     interface Data {
       collegeID: number

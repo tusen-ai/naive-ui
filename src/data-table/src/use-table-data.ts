@@ -21,7 +21,7 @@ import { getDefaultPageSize } from '../../pagination/src/utils'
 import { useSorter } from './use-sorter'
 import { createShallowClonedObject } from './utils'
 
-// useTableData combines filter, sorter and pagination
+/** Combine filtering, sorting and pagination for table rows. */
 export function useTableData(
   props: DataTableSetupProps,
   {
@@ -33,13 +33,17 @@ export function useTableData(
   }
 ) {
   const selectionColumnRef = computed<TableSelectionColumn | null>(() => {
+    /** Find the first selection column across all column groups. */
     const getSelectionColumn = (
       cols: typeof props.columns
     ): TableSelectionColumn | null => {
       for (let i = 0; i < cols.length; ++i) {
         const col = cols[i]
         if ('children' in col) {
-          return getSelectionColumn(col.children)
+          const selectionColumn = getSelectionColumn(col.children)
+          if (selectionColumn) {
+            return selectionColumn
+          }
         }
         else if (col.type === 'selection') {
           return col

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Fixes
+
+- Fix `n-data-table` ignoring disabled rows, single selection and select-all actions when the selection column follows a column group.
+
 ## 2.45.3
 
 `2026-08-28`
