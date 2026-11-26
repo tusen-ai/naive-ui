@@ -23,4 +23,5 @@ export {
   resolveWrappedSlot,
   resolveWrappedSlotWithProps
 } from './resolve-slot'
+export type { WithNativeAttrs } from './with-native-attrs'
 export { Wrapper } from './wrapper'

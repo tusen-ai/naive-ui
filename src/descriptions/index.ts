@@ -1,4 +1,8 @@
-export { descriptionsProps, default as NDescriptions } from './src/Descriptions'
+import type { HTMLAttributes } from 'vue'
+import type { WithNativeAttrs } from '../_utils'
+import NDescriptionsImpl from './src/Descriptions'
+
+export { descriptionsProps } from './src/Descriptions'
 export type {
   DescriptionProps,
   DescriptionsProps,
@@ -13,3 +17,8 @@ export type {
   DescriptionItemSlots
 } from './src/DescriptionsItem'
 export type * from './src/public-types'
+
+export const NDescriptions: WithNativeAttrs<
+  typeof NDescriptionsImpl,
+  HTMLAttributes
+> = NDescriptionsImpl

@@ -43,4 +43,4 @@ export {
   resolveWrappedSlotWithProps,
   Wrapper
 } from './vue'
-export type { MaybeArray } from './vue'
+export type { MaybeArray, WithNativeAttrs } from './vue'

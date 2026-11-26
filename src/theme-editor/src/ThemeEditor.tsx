@@ -251,8 +251,6 @@ export default defineComponent({
                       },
                       this.$attrs.style
                     ]}
-                    // @ts-expect-error We use ts-ignore for vue-tsc, since it
-                    // seems to patch native event for vue components
                     onClick={() => {
                       this.showPanel = !this.showPanel
                     }}
@@ -403,8 +401,7 @@ export default defineComponent({
                             })
                             .map((themeKey) => {
                               const componentTheme:
-                                | Record<string, string>
-                                | undefined
+                                Record<string, string> | undefined
                                   = themeKey === 'common'
                                     ? this.themeCommonDefault
                                     : (theme as any)[themeKey]

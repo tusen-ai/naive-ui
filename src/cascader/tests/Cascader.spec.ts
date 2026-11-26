@@ -280,4 +280,30 @@ describe('n-cascader', () => {
     expect(errorHandler).not.toHaveBeenCalled()
     wrapper.unmount()
   })
+
+  it('should call native listeners in `menuProps`', async () => {
+    const onFocus = vi.fn()
+    const onBlur = vi.fn()
+    const onKeydown = vi.fn()
+    const errorHandler = vi.fn()
+    const wrapper = mount(NCascader, {
+      attachTo: document.body,
+      props: {
+        show: true,
+        options: getOptions(),
+        menuProps: { onFocus, onBlur, onKeydown }
+      },
+      global: { config: { errorHandler } }
+    })
+    const menu = document.querySelector('.n-cascader-menu')
+    menu?.dispatchEvent(new FocusEvent('focusin', { bubbles: true }))
+    menu?.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true }))
+    menu?.dispatchEvent(new FocusEvent('focusout', { bubbles: true }))
+    await nextTick()
+    expect(errorHandler).not.toHaveBeenCalled()
+    expect(onFocus).toHaveBeenCalledTimes(1)
+    expect(onKeydown).toHaveBeenCalledTimes(1)
+    expect(onBlur).toHaveBeenCalledTimes(1)
+    wrapper.unmount()
+  })
 })

@@ -1,3 +1,7 @@
+import type { HTMLAttributes } from 'vue'
+import type { WithNativeAttrs } from '../_utils'
+import NTreeImpl from './src/Tree'
+
 export type {
   TreeDragInfo,
   TreeDropInfo,
@@ -7,6 +11,9 @@ export type {
   TreeOverrideNodeClickBehaviorReturn
 } from './src/interface'
 export type * from './src/public-types'
-export { default as NTree, treeProps } from './src/Tree'
+export { treeProps } from './src/Tree'
 export type { TreeProps, TreeSlots } from './src/Tree'
 export { treeGetClickTarget } from './src/utils'
+
+export const NTree: WithNativeAttrs<typeof NTreeImpl, HTMLAttributes>
+  = NTreeImpl

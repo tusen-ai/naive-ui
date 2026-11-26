@@ -1,4 +1,7 @@
-export { default as NDataTable } from './src/DataTable'
+import type { HTMLAttributes } from 'vue'
+import type { WithNativeAttrs } from '../_utils'
+import NDataTableImpl from './src/DataTable'
+
 export { dataTableProps } from './src/interface'
 export type {
   TableBaseColumn as DataTableBaseColumn,
@@ -27,3 +30,8 @@ export type {
   SortState as DataTableSortState
 } from './src/interface'
 export type * from './src/public-types'
+
+export const NDataTable: WithNativeAttrs<
+  typeof NDataTableImpl,
+  HTMLAttributes
+> = NDataTableImpl

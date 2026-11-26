@@ -1,5 +1,8 @@
+import type { HTMLAttributes } from 'vue'
+import type { WithNativeAttrs } from '../_utils'
+import { NDialog as NDialogImpl } from './src/Dialog'
+
 export { useDialog, useDialogReactiveList } from './src/composables'
-export { NDialog } from './src/Dialog'
 export type { DialogSlots } from './src/Dialog'
 export { dialogProps } from './src/dialogProps'
 export type { DialogProps } from './src/dialogProps'
@@ -11,3 +14,6 @@ export type {
   DialogProviderProps,
   DialogReactive
 } from './src/DialogProvider'
+
+export const NDialog: WithNativeAttrs<typeof NDialogImpl, HTMLAttributes>
+  = NDialogImpl

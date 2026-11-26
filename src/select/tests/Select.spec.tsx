@@ -431,4 +431,29 @@ describe('n-select', () => {
     expect(errorHandler).not.toHaveBeenCalled()
     wrapper.unmount()
   })
+
+  it('should call native listeners in `menuProps`', async () => {
+    const onKeydown = vi.fn()
+    const onScroll = vi.fn()
+    const onFocus = vi.fn()
+    const errorHandler = vi.fn()
+    const wrapper = mount(NSelect, {
+      props: {
+        show: true,
+        virtualScroll: false,
+        options: [{ label: 'cool', value: 'cool' }],
+        menuProps: { onKeydown, onScroll, onFocus }
+      },
+      global: { config: { errorHandler } }
+    })
+    const menu = wrapper.findComponent(NInternalSelectMenu)
+    await menu.trigger('keydown')
+    await menu.trigger('focusin')
+    await menu.find('.n-scrollbar-container').trigger('scroll')
+    expect(onKeydown).toHaveBeenCalledTimes(1)
+    expect(onFocus).toHaveBeenCalledTimes(1)
+    expect(onScroll).toHaveBeenCalledTimes(1)
+    expect(errorHandler).not.toHaveBeenCalled()
+    wrapper.unmount()
+  })
 })
