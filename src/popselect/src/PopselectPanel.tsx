@@ -247,7 +247,7 @@ export default defineComponent({
         renderLabel={this.renderLabel}
         onToggle={this.handleToggle}
         onMouseenter={this.onMouseenter}
-        onMouseleave={this.onMouseenter}
+        onMouseleave={this.onMouseleave}
         onMousedown={this.handleMenuMousedown}
         showCheckmark={this.showCheckmark}
       >

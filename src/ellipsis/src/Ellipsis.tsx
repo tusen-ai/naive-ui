@@ -131,14 +131,13 @@ export default defineComponent({
               ? createCursorClass(mergedClsPrefixRef.value, 'pointer')
               : undefined
           ],
-          style: ellipsisStyleRef.value
+          style: ellipsisStyleRef.value,
+          onClick: handleClick,
+          onMouseenter:
+            // get tooltip disabled will derive cursor style
+            props.expandTrigger === 'click' ? getTooltipDisabled : undefined
         })}
         ref="triggerRef"
-        onClick={handleClick}
-        onMouseenter={
-          // get tooltip disabled will derive cursor style
-          props.expandTrigger === 'click' ? getTooltipDisabled : undefined
-        }
       >
         {props.lineClamp ? (
           slots.default?.()

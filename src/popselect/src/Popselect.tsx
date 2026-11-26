@@ -102,16 +102,13 @@ export default defineComponent({
             {...$attrs}
             class={[$attrs.class, className]}
             style={[$attrs.style, ...style]}
-            {...keep(this.$props, panelPropKeys)}
+            {...omit(keep(this.$props, panelPropKeys), [
+              'onMouseenter',
+              'onMouseleave'
+            ])}
             ref={createRefSetter(ref)}
-            onMouseenter={mergeEventHandlers([
-              onMouseenter,
-              $attrs.onMouseenter as ((e: MouseEvent) => void) | undefined
-            ])}
-            onMouseleave={mergeEventHandlers([
-              onMouseleave,
-              $attrs.onMouseleave as ((e: MouseEvent) => void) | undefined
-            ])}
+            onMouseenter={mergeEventHandlers([onMouseenter, this.onMouseenter])}
+            onMouseleave={mergeEventHandlers([onMouseleave, this.onMouseleave])}
           >
             {{
               header: () => this.$slots.header?.(),

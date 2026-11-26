@@ -82,8 +82,12 @@ function appendEvents(
       vNode.props[eventName] = handler
     }
     else {
+      // Listeners merged by `mergeProps` are an array
+      const originalHandlers: Array<
+        ((...args: unknown[]) => void) | undefined
+      > = Array.isArray(originalHandler) ? originalHandler : [originalHandler]
       vNode.props[eventName] = (...args: unknown[]) => {
-        originalHandler(...args)
+        originalHandlers.forEach(listener => listener?.(...args))
         ;(handler as any)(...args)
       }
     }
