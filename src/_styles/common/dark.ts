@@ -89,6 +89,8 @@ const derived: ThemeCommonVars = {
 
   ...commonVariables,
 
+  colorScheme: 'dark',
+
   baseColor: base.neutralBase,
 
   // primary color

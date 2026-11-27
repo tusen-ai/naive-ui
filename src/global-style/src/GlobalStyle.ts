@@ -28,7 +28,8 @@ export default defineComponent({
           fontFamily,
           bodyColor,
           cubicBezierEaseInOut,
-          lineHeight
+          lineHeight,
+          colorScheme
         } = NConfigProvider
           ? merge(
               {},
@@ -46,6 +47,7 @@ export default defineComponent({
           style.fontSize = fontSize
           style.fontFamily = fontFamily
           style.lineHeight = lineHeight
+          style.colorScheme = colorScheme
           const transition = `color .3s ${cubicBezierEaseInOut}, background-color .3s ${cubicBezierEaseInOut}`
           if (firstApply) {
             setTimeout(() => {
