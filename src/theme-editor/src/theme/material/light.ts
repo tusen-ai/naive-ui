@@ -1,0 +1,53 @@
+import type { GlobalThemeOverrides } from '../../../../config-provider'
+
+export const materialLightOverrides: GlobalThemeOverrides = {
+  common: {
+    primaryColor: '#6750A4',
+    primaryColorHover: '#7965AF',
+    primaryColorPressed: '#4F378B',
+    primaryColorSuppl: '#7965AF',
+    infoColor: '#6750A4',
+    infoColorHover: '#7965AF',
+    infoColorPressed: '#4F378B',
+    infoColorSuppl: '#7965AF',
+    successColor: '#386A20',
+    successColorHover: '#4E8536',
+    successColorPressed: '#2B5418',
+    successColorSuppl: '#4E8536',
+    warningColor: '#7D5700',
+    warningColorHover: '#996B00',
+    warningColorPressed: '#624400',
+    warningColorSuppl: '#996B00',
+    errorColor: '#B3261E',
+    errorColorHover: '#C5453D',
+    errorColorPressed: '#8C1D18',
+    errorColorSuppl: '#C5453D',
+    textColor1: '#1D1B20',
+    textColor2: '#49454F',
+    textColor3: '#79747E',
+    textColorDisabled: 'rgba(29, 27, 32, 0.38)',
+    placeholderColor: 'rgba(29, 27, 32, 0.38)',
+    borderColor: '#79747E',
+    dividerColor: '#CAC4D0',
+    borderRadius: '12px',
+    borderRadiusSmall: '8px',
+    bodyColor: '#FEF7FF',
+    cardColor: '#F3EDF7',
+    modalColor: '#ECE6F0',
+    popoverColor: '#F3EDF7',
+    tableColor: '#FEF7FF',
+    tableHeaderColor: '#F3EDF7',
+    inputColor: '#F3EDF7',
+    actionColor: '#F3EDF7',
+    hoverColor: 'rgba(103, 80, 164, 0.08)',
+    pressedColor: 'rgba(103, 80, 164, 0.12)',
+    tagColor: '#E8DEF8',
+    fontSize: '14px',
+    fontFamily: '\'Roboto\', \'Noto Sans\', system-ui, -apple-system, sans-serif',
+    boxShadow1: '0 1px 4px 0 rgba(0, 0, 0, 0.37)',
+    boxShadow2:
+      '0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.3)',
+    boxShadow3:
+      '0 11px 7px 0 rgba(0, 0, 0, 0.19), 0 13px 25px 0 rgba(0, 0, 0, 0.3)'
+  }
+}
