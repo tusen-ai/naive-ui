@@ -772,10 +772,11 @@ export default defineComponent({
             <VTarget>
               {{
                 default: () => {
-                  const triggerProps = mergeProps(this.$attrs, {
+                  const { style: attrStyle, ...attrs } = this.$attrs
+                  const triggerProps = mergeProps(attrs, {
                     ref: this.setTriggerRef,
                     value: this.mergedValue,
-                    style: this.cssVars,
+                    style: [this.cssVars, attrStyle],
                     class: this.themeClass
                   })
                   const onClick = mergeEventHandlers([

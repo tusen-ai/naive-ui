@@ -282,5 +282,20 @@ describe('n-color-picker 2', () => {
       expect(document.querySelector('.n-color-picker-panel')).not.toEqual(null)
       wrapper.unmount()
     })
+
+    it('should allow root style to override theme css vars', () => {
+      const wrapper = mount(NColorPicker, {
+        attrs: {
+          style: {
+            '--n-text-color': 'rgb(1, 2, 3)'
+          }
+        }
+      })
+      const el = wrapper.find('.n-color-picker').element as HTMLElement
+      expect(el.style.getPropertyValue('--n-text-color')).toEqual(
+        'rgb(1, 2, 3)'
+      )
+      wrapper.unmount()
+    })
   })
 })
