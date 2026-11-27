@@ -3,12 +3,16 @@ import type { ThemeProps } from '../../_mixins'
 import type { ExtractPublicPropTypes } from '../../_utils'
 import type { QrCodeTheme, QrCodeThemeOverrides } from '../styles'
 import { computed, defineComponent, h, onMounted, ref, watchEffect } from 'vue'
-import { useConfig, useTheme, useThemeClass } from '../../_mixins'
+import { NBaseIcon, NBaseLoading } from '../../_internal'
+import { RetryIcon } from '../../_internal/icons'
+import { useConfig, useLocale, useTheme, useThemeClass } from '../../_mixins'
 import { qrcodeLight } from '../styles'
 import qrcodegen from './qrcodegen'
 import style from './styles/index.cssr'
 
 type Modules = ReturnType<qrcodegen.QrCode['getModules']>
+
+export type QrCodeStatus = 'active' | 'expired' | 'loading' | 'scanned'
 
 const ERROR_CORRECTION_LEVEL: Record<string, qrcodegen.QrCode.Ecc> = {
   L: qrcodegen.QrCode.Ecc.LOW,
@@ -56,6 +60,10 @@ export const qrCodeProps = {
   type: {
     type: String,
     default: 'canvas'
+  },
+  status: {
+    type: String as PropType<QrCodeStatus>,
+    default: 'active'
   }
 } as const
 
@@ -67,8 +75,10 @@ const UPSCALE_RATIO = 2
 export default defineComponent({
   name: 'QrCode',
   props: qrCodeProps,
-  setup(props) {
+  emits: ['refresh'],
+  setup(props, { emit }) {
     const { mergedClsPrefixRef, inlineThemeDisabled } = useConfig(props)
+    const { localeRef } = useLocale('QrCode')
 
     const themeRef = useTheme(
       'QrCode',
@@ -80,8 +90,17 @@ export default defineComponent({
     )
 
     const cssVarsRef = computed(() => {
+      const {
+        borderRadius,
+        maskColor,
+        statusTextColor,
+        refreshTextColor
+      } = themeRef.value.self
       return {
-        '--n-border-radius': themeRef.value.self.borderRadius
+        '--n-border-radius': borderRadius,
+        '--n-mask-color': maskColor,
+        '--n-status-text-color': statusTextColor,
+        '--n-refresh-text-color': refreshTextColor
       }
     })
 
@@ -306,14 +325,20 @@ export default defineComponent({
       )
     )
 
+    function handleRefresh(): void {
+      emit('refresh')
+    }
+
     return {
       canvasRef,
       mergedClsPrefix: mergedClsPrefixRef,
+      locale: localeRef,
       cssVars: inlineThemeDisabled
         ? undefined
         : (cssVarsRef as Ref<CSSProperties>),
       themeClass: themeClassHandle?.themeClass,
-      svgInfo: svgInfoRef
+      svgInfo: svgInfoRef,
+      handleRefresh
     }
   },
   render() {
@@ -324,8 +349,49 @@ export default defineComponent({
       cssVars,
       themeClass,
       size,
-      type
+      type,
+      status,
+      locale,
+      handleRefresh
     } = this
+
+    const renderStatusMask = () => {
+      if (status === 'active')
+        return null
+      return (
+        <div class={`${mergedClsPrefix}-qr-code__mask`}>
+          {status === 'loading' ? (
+            <NBaseLoading
+              clsPrefix={mergedClsPrefix}
+              strokeWidth={28}
+              scale={0.65}
+            />
+          ) : null}
+          {status === 'expired' ? (
+            <div class={`${mergedClsPrefix}-qr-code__status`}>
+              <div>{locale.expired}</div>
+              <button
+                type="button"
+                class={`${mergedClsPrefix}-qr-code__refresh`}
+                onClick={handleRefresh}
+              >
+                <NBaseIcon clsPrefix={mergedClsPrefix}>
+                  {{
+                    default: () => <RetryIcon />
+                  }}
+                </NBaseIcon>
+                {locale.refresh}
+              </button>
+            </div>
+          ) : null}
+          {status === 'scanned' ? (
+            <div class={`${mergedClsPrefix}-qr-code__status`}>
+              {locale.scanned}
+            </div>
+          ) : null}
+        </div>
+      )
+    }
 
     return (
       <div
@@ -355,6 +421,7 @@ export default defineComponent({
             innerHTML={this.svgInfo.innerHtml}
           />
         )}
+        {renderStatusMask()}
       </div>
     )
   }

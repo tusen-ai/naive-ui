@@ -128,6 +128,11 @@ const teIN: NLocale = {
     more: 'ఎక్కువ',
     monthFormat: 'MMM',
     weekdayFormat: 'eeeeee'
+  },
+  QrCode: {
+    expired: 'QR code expired',
+    refresh: 'Refresh',
+    scanned: 'Scanned'
   }
 }
 

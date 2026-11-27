@@ -128,6 +128,11 @@ const paIN: NLocale = {
     more: 'ਵੱਧ',
     monthFormat: 'MMM',
     weekdayFormat: 'eeeeee'
+  },
+  QrCode: {
+    expired: 'QR code expired',
+    refresh: 'Refresh',
+    scanned: 'Scanned'
   }
 }
 

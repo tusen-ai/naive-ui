@@ -128,6 +128,11 @@ const zhTW: NLocale = {
     more: '多',
     monthFormat: 'MMM',
     weekdayFormat: 'eeeeee'
+  },
+  QrCode: {
+    expired: 'QR碼已過期',
+    refresh: '點擊刷新',
+    scanned: '已掃描'
   }
 }
 

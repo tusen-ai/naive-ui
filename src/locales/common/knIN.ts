@@ -128,6 +128,11 @@ const knIN: NLocale = {
     more: 'ಹೆಚ್ಚು',
     monthFormat: 'MMM',
     weekdayFormat: 'eeeeee'
+  },
+  QrCode: {
+    expired: 'QR code expired',
+    refresh: 'Refresh',
+    scanned: 'Scanned'
   }
 }
 

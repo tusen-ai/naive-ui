@@ -166,4 +166,36 @@ describe('n-qr-code', () => {
     expect(wrapper.find('.n-qr-code').exists()).toBe(true)
     wrapper.unmount()
   })
+
+  it('should work with `status` prop', async () => {
+    const statuses = ['active', 'expired', 'loading', 'scanned'] as const
+    for (const status of statuses) {
+      const wrapper = mount(NQrCode, {
+        props: {
+          value: 'test',
+          status
+        }
+      })
+      expect(wrapper.find('.n-qr-code').exists()).toBe(true)
+      if (status !== 'active') {
+        expect(wrapper.find('.n-qr-code__mask').exists()).toBe(true)
+      }
+      else {
+        expect(wrapper.find('.n-qr-code__mask').exists()).toBe(false)
+      }
+      wrapper.unmount()
+    }
+  })
+
+  it('should emit refresh when clicking refresh button', async () => {
+    const wrapper = mount(NQrCode, {
+      props: {
+        value: 'test',
+        status: 'expired'
+      }
+    })
+    await wrapper.find('.n-qr-code__refresh').trigger('click')
+    expect(wrapper.emitted('refresh')).toHaveLength(1)
+    wrapper.unmount()
+  })
 })

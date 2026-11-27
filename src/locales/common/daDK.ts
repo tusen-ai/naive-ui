@@ -128,6 +128,11 @@ const daDK: NLocale = {
     more: 'mere',
     monthFormat: 'MMM',
     weekdayFormat: 'eee'
+  },
+  QrCode: {
+    expired: 'QR code expired',
+    refresh: 'Refresh',
+    scanned: 'Scanned'
   }
 }
 

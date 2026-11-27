@@ -128,6 +128,11 @@ const zhCN: NLocale = {
     more: '多',
     monthFormat: 'MMM',
     weekdayFormat: 'eeeeee'
+  },
+  QrCode: {
+    expired: '二维码已过期',
+    refresh: '点击刷新',
+    scanned: '已扫描'
   }
 }
 

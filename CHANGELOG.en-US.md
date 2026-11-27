@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-qr-code` adds `status` prop with `active`, `expired`, `loading` and `scanned` states, and adds `refresh` event.
+
+### i18n
+
+- Add QrCode locale.
+
 ## 2.45.3
 
 `2026-08-28`

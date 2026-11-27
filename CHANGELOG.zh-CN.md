@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## NEXT_VERSION
+
+### Feats
+
+- `n-qr-code` 新增 `status` 属性，支持 `active`、`expired`、`loading`、`scanned` 四种状态，新增 `refresh` 事件
+
+### i18n
+
+- 新增 QrCode locale
+
 ## 2.45.3
 
 `2026-08-28`
