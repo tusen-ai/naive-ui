@@ -41,7 +41,12 @@ import {
 } from 'vue'
 import { VResizeObserver } from 'vueuc'
 import { useConfig, useTheme, useThemeClass } from '../../_mixins'
-import { flatten, keep, resolveSlotWithTypedProps } from '../../_utils'
+import {
+  clampValue,
+  flatten,
+  keep,
+  resolveSlotWithTypedProps
+} from '../../_utils'
 import { carouselLight } from '../styles'
 import NCarouselArrow from './CarouselArrow'
 import { provideCarouselContext } from './CarouselContext'
@@ -51,7 +56,6 @@ import style from './styles/index.cssr'
 import {
   addDuplicateSlides,
   calculateSize,
-  clampValue,
   getDisplayIndex,
   getDisplayTotalView,
   getNextIndex,
