@@ -344,16 +344,16 @@ const Button = defineComponent({
               })
             : self.colorSecondaryPressed,
           '--n-color-focus': isColoredType
-            ? changeColor(mergedTextColor, {
-                alpha: Number(self.colorOpacitySecondaryHover)
-              })
-            : self.colorSecondaryHover,
+            ? self[createKey('colorFocus', mergedType)]
+            : self.colorFocus,
           '--n-color-disabled': self.colorSecondary,
           '--n-ripple-color': '#0000',
           '--n-text-color': mergedTextColor,
           '--n-text-color-hover': mergedTextColor,
           '--n-text-color-pressed': mergedTextColor,
-          '--n-text-color-focus': mergedTextColor,
+          '--n-text-color-focus': color
+            ? mergedTextColor
+            : self[createKey('textColorFocus', mergedType)],
           '--n-text-color-disabled': mergedTextColor
         }
       }

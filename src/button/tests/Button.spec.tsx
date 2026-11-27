@@ -1,6 +1,7 @@
 import { CashOutline as CashIcon } from '@vicons/ionicons5'
 import { mount } from '@vue/test-utils'
 import { h } from 'vue'
+import { NConfigProvider } from '../../config-provider'
 import { NIcon } from '../../icon'
 import { NButton, NxButton } from '../index'
 
@@ -288,6 +289,28 @@ describe('n-button', () => {
     ]
     const buttonStyle = wrapper.find('button').attributes('style')
     expect(colorStyle.every(i => buttonStyle?.includes(i))).toBe(true)
+    wrapper.unmount()
+  })
+
+  it('should apply focus theme overrides to secondary buttons', () => {
+    const wrapper = mount(() => (
+      <NConfigProvider
+        themeOverrides={{
+          Button: {
+            colorFocus: '#123456',
+            textColorFocus: '#654321',
+            borderFocus: '1px solid #abcdef'
+          }
+        }}
+      >
+        <NButton secondary>test</NButton>
+      </NConfigProvider>
+    ))
+
+    const buttonStyle = wrapper.find('button').attributes('style')
+    expect(buttonStyle).toContain('--n-color-focus: #123456;')
+    expect(buttonStyle).toContain('--n-text-color-focus: #654321;')
+    expect(buttonStyle).toContain('--n-border-focus: 1px solid #abcdef;')
     wrapper.unmount()
   })
 
